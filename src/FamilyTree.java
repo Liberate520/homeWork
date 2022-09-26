@@ -21,7 +21,7 @@ public class FamilyTree {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Human h : humans) {
-                    builder.append("имя: ")
+            builder.append("имя: ")
                     .append(h.getName())
                     .append(", Фамилия: ")
                     .append(h.getLastName())
@@ -34,6 +34,35 @@ public class FamilyTree {
         return builder.toString();
     }
 
+    public String findChildren(String name,String lastName) {
+        StringBuilder builder = new StringBuilder();
+        for (Human human : humans) {
+            if (human.getLastName().equals(lastName)&&human.getName().equals(name)) {
+                return builder.append("имя: ")
+                        .append(human.getName())
+                        .append(", Фамилия: ")
+                        .append(human.getLastName())
+                        .append(", дата рождения: ")
+                        .append(human.getBirthDay().toString())
+                        .append(", пол: ")
+                        .append(human.getGender()).append(", дети: ")
+                        .append(human.getChildren())
+                        .append("\n").toString();
+
+            }
 
 
+        }
+        return "Такого человека нет в вашем списке!";
+    }
 }
+
+
+
+
+
+
+
+
+
+

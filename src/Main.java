@@ -54,6 +54,7 @@ public class Main {
         familyTree.addHuman(mothersFather);
         familyTree.addHuman(mothersMom);
         System.out.println(familyTree);
+        System.out.println(familyTree.findChildren("Гульниса","Черевиченко"));
 
 
     }
