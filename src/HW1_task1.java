@@ -15,16 +15,16 @@ public class HW1_task1 {
 
 
         if (timeInRange(LocalTime.of(5, 0), LocalTime.of(11,59))){
-            System.out.println("G morning,"+ name + '!');
+            System.out.println("G morning, "+ name + '!');
         }
         else if (timeInRange(LocalTime.of(12, 0), LocalTime.of(17,59))) {
-            System.out.println("G day,"+ name + '!');
+            System.out.println("G day, "+ name + '!');
         }
         else if (timeInRange(LocalTime.of(18, 0), LocalTime.of(22,59))) {
-            System.out.println("G evening,"+ name + '!');
+            System.out.println("G evening, "+ name + '!');
         }
         else if (timeInRange(LocalTime.of(23, 0), LocalTime.of(4,59))) {
-            System.out.println("G night,"+ name + '!');
+            System.out.println("G night, "+ name + '!');
         }
         in.close();
 

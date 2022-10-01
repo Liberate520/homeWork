@@ -7,13 +7,14 @@ public class HW1_Task3 {
         }
     }
     public static void main(String[] args) {
-        int[] arr = {3,2,2,3};
+        int[] arr = {3,1,4,3,5};
         int val = 3;
         System.out.print("Изначальный массив: ");
         printArray(arr);
         System.out.println(" ");
         int j = 0;
-        for (int i : arr) {
+
+        for (int i = 0; i < arr.length; i++) {
             if (arr[i] == val) {
                 continue;
             }
