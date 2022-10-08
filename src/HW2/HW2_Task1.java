@@ -13,7 +13,7 @@ import java.util.logging.SimpleFormatter;
 
 public class HW2_Task1 {
 
-    private static String[] dirScanner(String dirPath) {
+    public static String[] dirScanner(String dirPath) {
 
         Logger logger = Logger.getLogger(Main.class.getName());
         FileHandler handler = null;
