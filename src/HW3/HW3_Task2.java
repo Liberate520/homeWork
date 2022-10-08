@@ -21,13 +21,7 @@ public class HW3_Task2 {
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<>();
-        Random rnd = new Random();
-        int listSize = 15;
-        for (int i = 0; i < listSize; i++) {
-            list.add(rnd.nextInt(20));
-        }
-
+        var list = CollectionGenerator.integers(20);
         int max = Collections.max(list);
         int min = Collections.min(list);
         double average = arithmeticMean(list);

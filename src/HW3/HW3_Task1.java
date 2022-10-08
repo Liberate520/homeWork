@@ -12,13 +12,8 @@ public class HW3_Task1 {
             return true;
     }
     public static void main(String[] args) {
-        ArrayList <Integer> list = new ArrayList();
+        var list = CollectionGenerator.integers(20);
         ArrayList <Integer> newList = new ArrayList();
-        Random rnd = new Random();
-        int listSize = 15;
-        for (int i = 0; i < listSize; i++) {
-            list.add(rnd.nextInt(20));
-        }
 
         System.out.println("Начальный список: " +list);
 
