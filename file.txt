@@ -1,0 +1,8 @@
+.git
+.gitignore
+file.txt
+HomeWork.iml
+lesson
+lesson_1
+lesson_2
+src
