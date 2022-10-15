@@ -1,36 +1,32 @@
 package HW5;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PhoneBook {
-    private Map <String, List<Integer>> contacts;
+    private Map <String , String> contacts;
 
-    public PhoneBook(Map<String, List<Integer>> contacts) {
-        this.contacts = contacts;
+
+    public PhoneBook(){
+        contacts = new HashMap<>();
     }
 
-    public PhoneBook() {
-
+    void add(String num, String name){
+        contacts.put(name, num);
     }
 
-    public Map<String, List<Integer>> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(Map<String, List<Integer>> contacts) {
-        this.contacts = contacts;
-    }
-
-    public void printContacts(){
-        if (this.contacts == null)
-            System.out.println("Телефонная книга пуста.");
-        else {
-            for (String key: contacts.keySet()){
+    void printBook(){
+        for (String key: contacts.keySet()){
+            if (contacts == null)
+                System.out.println("Книга пуста.");
+            else
                 System.out.println(key +": "+contacts.get(key));
-            }
         }
     }
+
+
+
 
 }
