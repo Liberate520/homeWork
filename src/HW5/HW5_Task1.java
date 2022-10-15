@@ -16,5 +16,10 @@ public class HW5_Task1 {
         System.out.println();
         book.remove("7(893)123-6644");
         book.printBook();
+        System.out.println();
+        System.out.println(book.findName("7(920)852-6587"));
+        System.out.println(book.findName("7(920)852-6588"));
+        System.out.println(book.findNumber("Ivan"));
+        System.out.println(book.findNumber("Iva"));
     }
 }
