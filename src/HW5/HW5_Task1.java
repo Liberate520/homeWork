@@ -12,7 +12,9 @@ public class HW5_Task1 {
         book.add("7(785)654-8853", "Helga");
         book.add("7(920)852-6587", "Zheka");
         book.add("7(893)123-6644", "Sasha");
-
+        book.printBook();
+        System.out.println();
+        book.remove("7(893)123-6644");
         book.printBook();
     }
 }

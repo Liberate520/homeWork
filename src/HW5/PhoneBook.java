@@ -14,7 +14,12 @@ public class PhoneBook {
     }
 
     void add(String num, String name){
-        contacts.put(name, num);
+        contacts.put(num, name);
+    }
+
+    //Удаление по номеру телефона
+    void remove(String num){
+        contacts.remove(num);
     }
 
     void printBook(){
