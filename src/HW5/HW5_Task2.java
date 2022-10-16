@@ -19,7 +19,7 @@ public class HW5_Task2 {
         }
         return names;
     }
-    private static void findDuplicates(String[] namesArray){
+    private static HashMap<String, Integer> findDuplicates(String[] namesArray){
         HashMap<String, Integer> map = new HashMap<>();
         for (String name: namesArray) {
             if (map.get(name)==null)
@@ -27,13 +27,7 @@ public class HW5_Task2 {
             else
                 map.put(name, map.get(name)+1);
         }
-
-        for(Map.Entry<String, Integer> entry: map.entrySet()) {
-            int target = entry.getValue();
-            if(target > 1) {
-                System.out.println("Duplicate Element : "+entry.getKey()+" - found "+entry.getValue()+" times.");
-            }
-        }
+        return map;
     }
     public static void main(String[] args) {
         String [] employes = {"Иван Иванов", "Светлана Петрова", "Кристина Белова", "Анна Мусина", "Анна Крутова",
@@ -41,6 +35,7 @@ public class HW5_Task2 {
                               "Марина Светлова", "Мария Савина", "Мария Рыкова", "Марина Лугова", "Анна Владимирова",
                               "Иван Мечников", "Петр Петин", "Иван Ежов"};
         String [] names = splitNames(employes);
-        findDuplicates(names);
+        var namesCount = findDuplicates(names);
+        System.out.println(namesCount);
     }
 }
