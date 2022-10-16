@@ -1,11 +1,6 @@
 package HW5;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class HW5_Task2 {
 
@@ -29,6 +24,29 @@ public class HW5_Task2 {
         }
         return map;
     }
+
+
+
+        private static Map<String, Integer> sortByValue(HashMap<String, Integer> unsortedMap){
+
+
+                List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(unsortedMap.entrySet());
+                Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return o2.getValue().compareTo(o1.getValue());
+                    }///IDE сама предложина таким способом перегрузить метод
+                });
+
+                Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
+                for (Map.Entry<String, Integer> entry : list)
+                {
+                    sortedMap.put(entry.getKey(), entry.getValue());
+                }
+
+                return sortedMap;
+    }
+
     public static void main(String[] args) {
         String [] employes = {"Иван Иванов", "Светлана Петрова", "Кристина Белова", "Анна Мусина", "Анна Крутова",
                               "Иван Юрин","Петр Лыков", "Павел Чернов", "Петр Чернышов", "Мария Федорова",
@@ -37,5 +55,10 @@ public class HW5_Task2 {
         String [] names = splitNames(employes);
         var namesCount = findDuplicates(names);
         System.out.println(namesCount);
+        System.out.println();
+        System.out.println(sortByValue(namesCount));
+
+
     }
+
 }
