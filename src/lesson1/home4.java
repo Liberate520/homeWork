@@ -1,3 +1,4 @@
+package lesson1;
 
 public class home4 {
     // Вычислить n-ое треугольное число

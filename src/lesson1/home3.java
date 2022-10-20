@@ -1,3 +1,4 @@
+package lesson1;
 import java.util.Arrays;
 
 public class home3 {

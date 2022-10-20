@@ -1,3 +1,4 @@
+package lesson1;
 import java.util.Scanner;
 import java.util.Calendar;
 public class home {
@@ -24,4 +25,3 @@ public class home {
         iScanner.close();
     }
 }
- 
