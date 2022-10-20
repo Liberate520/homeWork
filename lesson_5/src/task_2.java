@@ -27,6 +27,6 @@ public class task_2 {
         for (int i = 0; i < length; i++) {
             names.add(it.next());
         }
-        System.out.println(names.toString());
+        names.printPersons();
     }
 }
