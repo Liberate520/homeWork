@@ -1,12 +1,16 @@
 package HW_6;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class NoteBook {
     private String brand;
-    private Integer ram;
+    private String ram;
     private boolean ssd;
     private String os;
     private String color;
-    private Integer diagonal;
+    private String diagonal;
 
     public NoteBook() {
     }
@@ -16,6 +20,9 @@ public class NoteBook {
         this.ssd = ssd;
         this.color = color;
     }
+
+
+
 
     public String toString(){
         if (ssd)
@@ -32,11 +39,11 @@ public class NoteBook {
         this.brand = brand;
     }
 
-    public Integer getRam() {
+    public String getRam() {
         return ram;
     }
 
-    public void setRam(Integer ram) {
+    public void setRam(String ram) {
         this.ram = ram;
     }
 
@@ -64,11 +71,11 @@ public class NoteBook {
         this.color = color;
     }
 
-    public Integer getDiagonal() {
+    public String getDiagonal() {
         return diagonal;
     }
 
-    public void setDiagonal(Integer diagonal) {
+    public void setDiagonal(String diagonal) {
         this.diagonal = diagonal;
     }
 
