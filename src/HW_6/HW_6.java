@@ -3,33 +3,36 @@ package HW_6;
 import java.util.*;
 
 public class HW_6 {
-    public static List<String> parameter(){
-        return Arrays.asList("Brand1");
-    }
 
-
-    public static List<NoteBook> filter(List<NoteBook> initialList){
-        List<NoteBook> filteredList = new ArrayList<>();
-        List<String> filter = parameter();
-
-        for (NoteBook noteBook: initialList) {
-            for (String param: filter){
-                if (noteBook.getBrand().equals(param)){
-                    filteredList.add(noteBook);
+    public static void filterList(HashMap<String, Integer> filter, List<NoteBook> initialList){
+        for (Map.Entry<String,Integer> entry: filter.entrySet()){
+            for (int i = (initialList.size()-1); i>=0; i--){
+                switch (entry.getKey()){
+                    case ("RAM"):
+                        if ((initialList.get(i).getRam() < entry.getValue())){
+                            initialList.remove(initialList.get(i));
+                        }
+                    case ("HDD"):
+                        if ((initialList.get(i).getHdd() < entry.getValue())){
+                            initialList.remove(initialList.get(i));
+                        }
+                    case ("Resolution"):
+                        if ((initialList.get(i).getRes() < entry.getValue())){
+                            initialList.remove(initialList.get(i));
+                        }
                 }
             }
         }
-        return filteredList;
     }
     public static void main(String[] args) {
-        List<NoteBook> list = new ArrayList<NoteBook>();
-        NoteBook noteBook1 = new NoteBook("Brand1", true, "SpaceGray");
-        NoteBook noteBook2 = new NoteBook("Brand2", false, "Gray");
-        NoteBook noteBook3 = new NoteBook("Brand3", true, "Pink");
-        NoteBook noteBook4 = new NoteBook("Brand4", true, "Black");
-        NoteBook noteBook5 = new NoteBook("Brand2", false, "Black");
-        NoteBook noteBook6 = new NoteBook("Brand1", true, "White");
-        NoteBook noteBook7 = new NoteBook("Brand3", true, "Green");
+        List<NoteBook> list = new ArrayList<>();
+        NoteBook noteBook1 = new NoteBook(16,1080,480);
+        NoteBook noteBook2 = new NoteBook(32,720,480);
+        NoteBook noteBook3 = new NoteBook(16,2000,480);
+        NoteBook noteBook4 = new NoteBook(8,4000,1000);
+        NoteBook noteBook5 = new NoteBook(8,1080,500);
+        NoteBook noteBook6 = new NoteBook(8,2000,240);
+        NoteBook noteBook7 = new NoteBook(16,720,1000);
         list.add(noteBook1);
         list.add(noteBook2);
         list.add(noteBook3);
@@ -37,7 +40,8 @@ public class HW_6 {
         list.add(noteBook5);
         list.add(noteBook6);
         list.add(noteBook7);
-        Map<String, Integer> filter = new HashMap<>();
+        System.out.println("Изначальный список: " + list);
+        HashMap<String, Integer> filter = new HashMap<>();
 
         Scanner in = new Scanner(System.in);
 
@@ -51,7 +55,11 @@ public class HW_6 {
             r = in.nextLine();
         }
         in.close();
-        System.out.println(filter);
+
+        filterList(filter, list);
+
+        System.out.println(list);
+
 
 
     }
