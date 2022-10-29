@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -22,15 +23,19 @@ public class Names {
     }
 
     public void printPersons() {
-        TreeMap<Integer, String> sort = new TreeMap<>();
+        TreeMap<Integer, ArrayList<String>> sort = new TreeMap<>();
+
         for (String key : map.keySet()) {
-            if (map.get(key) > 1) {
-                int counter = map.get(key);
-                sort.put(counter, key);
-                System.out.printf("%s: %d\n", key, map.get(key));
+            int counter = map.get(key);
+            if (sort.containsKey(counter)) {
+                ArrayList<String> names = sort.get(counter);
+                names.add(key);
+            } else {
+                ArrayList<String> names = new ArrayList<>();
+                names.add(key);
+                sort.put(counter, names);
             }
         }
-        //
-
+        System.out.println(sort);
     }
 }
