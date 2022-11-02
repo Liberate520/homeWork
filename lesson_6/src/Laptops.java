@@ -133,12 +133,6 @@ public class Laptops {
         this.connectivityTechnology = connectivityTechnology;
     }
 
-    public String[] filter(int num, int down, int up) {
-        TreeMap<Integer, String> map = new TreeMap<>();
-
-        return map;
-    }
-
     @Override
     public String toString() {
         return model + " " + brand + " " + id;
