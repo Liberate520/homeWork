@@ -1,8 +1,5 @@
-package OOP_HW3.Task1;
+package OOP_HW3;
 
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Task2 {
     public static void main(String[] args) {
