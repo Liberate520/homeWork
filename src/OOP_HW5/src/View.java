@@ -1,4 +1,4 @@
 public interface View {
-    void print(String s);
+    void print(String res);
     String getText();
 }

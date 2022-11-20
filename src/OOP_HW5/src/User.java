@@ -7,8 +7,6 @@ public class User {
         this.password = password;
     }
 
-
-
     public String getLogin() {
         return login;
     }
@@ -22,7 +20,6 @@ public class User {
     }
 
     @Override
-
     public String toString() {
         return "User {" +
                 "login='" + login + '\'' +
