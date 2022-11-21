@@ -3,6 +3,9 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tree Класс хранящий в себе
+ */
 public class Tree {
     private final List<Communications> links=new ArrayList<>();
 
