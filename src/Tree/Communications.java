@@ -1,14 +1,14 @@
 package Tree;
 
-public class Link {
+public class Communications {
     /**
-     * Creates a new instance of a Link instance    with the given name and value
+     * Creates a new instance of a Communications instance with the given name and value
      */
     private final Person people1;
     private final Person people2;
     private final Relations relationType;
 
-    public Link(Person person1, Person person2, Relations relation) {
+    public Communications(Person person1, Person person2, Relations relation) {
         this.people1 = person1;
         this.people2 = person2;
         this.relationType = relation;
@@ -28,8 +28,8 @@ public class Link {
 
     @Override
     public String toString() {
-        return String.format("%s is %s for %s", this.people1.getFirstName()+" "+this.people1.getSurName(),
-                this.relationType, this.people2.getFirstName()+" "+this.people2.getSurName())+" "+
-                this.getRelationPeople();
+        return String.format("%s %s is %s for %s %s", getPeople().getFirstName()+" "+getPeople().getSurName(),
+                getPeople().getPatronymic(), getRelationType(), getRelationPeople().getFirstName()
+                        + " " + getRelationPeople().getSurName(),getRelationPeople().getPatronymic());
     }
 }
