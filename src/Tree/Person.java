@@ -13,7 +13,7 @@ public class Person {
     /**
      * Конструктор - создание нового объекта
      */
-    public Person(String firstName, String surName,String patronymic, String birthDate, Gender gender) {
+    public Person(String surName, String firstName,  String patronymic, String birthDate, Gender gender) {
         this.fName = firstName;
         this.sName = surName;
         this.patronymic = patronymic;
@@ -52,7 +52,7 @@ public class Person {
      */
     @Override
     public String toString() {
-        return String.format("%s %s %s %s %s", getFirstName(), getSurName(),getPatronymic(),
+        return String.format("%s %s %s %s %s", getSurName(), getFirstName(), getPatronymic(),
                 getBirthDate(), getGender());
     }
 }
