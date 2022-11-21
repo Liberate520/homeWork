@@ -1,0 +1,3 @@
+Person: Мария Иванова 35 WOMEN
+Person: Павла Аникина 58 WOMEN
+Person: Пётр Иванов 10 MEN
