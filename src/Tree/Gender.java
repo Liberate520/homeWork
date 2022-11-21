@@ -1,6 +1,9 @@
-package org.lesson01;
+package Tree;
 
 public enum Gender {
-    Male,
+    /**
+     * The default gender of the children
+     */
+    Man,
     Female
 }
