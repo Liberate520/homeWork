@@ -8,8 +8,8 @@ public class Research {
      */
     public static void getRelation(Person person, Relations relation, Tree tree) {
         for (Communications el : tree.getLinks()) {
-            if (el.getPeople().getFirstName().equals(person.getFirstName()) &&
-                    el.getPeople().getSurName().equals(person.getSurName())
+            if (el.getPeople().getSurName().equals(person.getSurName())  &&
+                    el.getPeople().getFirstName().equals(person.getFirstName())
                     && el.getRelationType() == relation) {
                 System.out.println(el);
             }
@@ -32,8 +32,8 @@ public class Research {
     public static void getRelation(Person person, Tree tree) {
         for (Communications el :
                 tree.getLinks()) {
-            if (el.getPeople().getFirstName().equals(person.getFirstName()) &&
-                    el.getPeople().getSurName().equals(person.getSurName())) {
+            if (el.getPeople().getSurName().equals(person.getSurName())   &&
+                    el.getPeople().getFirstName().equals(person.getFirstName())) {
                 System.out.println(el);
             }
         }
