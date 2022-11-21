@@ -28,8 +28,8 @@ public class Communications {
 
     @Override
     public String toString() {
-        return String.format("%s %s is %s for %s %s", getPeople().getFirstName()+" "+getPeople().getSurName(),
-                getPeople().getPatronymic(), getRelationType(), getRelationPeople().getFirstName()
-                        + " " + getRelationPeople().getSurName(),getRelationPeople().getPatronymic());
+        return String.format("%s %s is %s for %s %s", getPeople().getSurName() +" "+ getPeople().getFirstName(),
+                getPeople().getPatronymic(), getRelationType(),getRelationPeople().getSurName()
+                        + " " +  getRelationPeople().getFirstName(), getRelationPeople().getPatronymic());
     }
 }
