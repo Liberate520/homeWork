@@ -36,7 +36,9 @@ public class FamilyTree {
         return this.tree.containsKey(type);
     }
 
+    // почему-то выводит дважды одно и то же.
     public void showMember(RelationType type){
+
         for (Parent person: this.tree.get(type)) {
             System.out.printf("%s:\n", type);
             person.getInfo();
