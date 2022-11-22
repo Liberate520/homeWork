@@ -52,7 +52,7 @@ public class Person {
      */
     @Override
     public String toString() {
-        return String.format("%s %s %s %s %s", getFirstName(), getPatronymic(), getSurName(),
+        return String.format("%s %s %s %s %s", getSurName(), getFirstName(), getPatronymic(),
                 getBirthDate(), getGender());
     }
 }
