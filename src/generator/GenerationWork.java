@@ -1,13 +1,10 @@
 package generator;
 
-import java.io.IOException;
-
-import dataBase.DataBase;
-import classes.Human;
 import classes.Parent;
+import dataBase.DataBase;
 
 public class GenerationWork {
-    private DataBase mainDb;
+    private final DataBase mainDb;
     private int generationCount = 0;
 
     public GenerationWork(DataBase db) {
@@ -19,81 +16,37 @@ public class GenerationWork {
     }
 
     /* стартовое наполнение */
-    public void generatePopulation(int startPopulation) throws IOException {
+    public void generatePopulation(int startPopulation){
         this.mainDb.fill(startPopulation);
     }
 
-    public void startGenerator(int count) throws IOException {
+    public void startGenerator(int count){
         createGeneration(count, mainDb);
     }
 
     /* генератор поколений */
-    private void createGeneration(int count, DataBase db) throws IOException {
-        Family.createFamily(db);
-        Family.snusnuForEveryOne(db);
+    private void createGeneration(int count, DataBase db){
+        Family generation = new Family();
+        generation.createFamilies(db);
+        generation.snusnuForEveryOne(db);
 
         DataBase nextGeneration = new DataBase();
-        for (Human[] human : db.getFullFamilies()) {
-            for (Human child : (((Parent) human[0]).getChildren())) {
+        for (Parent[] parents : db.getFullFamilies()) {
+            for (Parent child : parents[0].getChildren()) {
                 nextGeneration.add(child);
             }
         }
         this.mainDb.includeDB(nextGeneration);
         this.mainDb.includeFamilies(db);
         this.generationCount++;
-        System.out.println(String.format("Current generation: %d. Population: %d", generationCount, mainDb.size()));
-        System.out.println(String.format("Number of families: %d, general: %d", (db.getFullFamilies()).size(), mainDb.getFamiliesNumber()));
-        System.out.println(String.format("Children: %d\n", nextGeneration.size()));
+        System.out.printf("Current generation: %d. Population: %d%n", generationCount, mainDb.size());
+        System.out.printf("Number of families: %d, general: %d%n", (db.getFullFamilies()).size(), mainDb.getFamiliesNumber());
+        System.out.printf("Children: %d\n%n", nextGeneration.size());
 
         if (generationCount == count) {
             return;
         }
         createGeneration(count, nextGeneration);
     }
-////////////////////////////////////////////////////////////
-    private void createGenerationTwo(int count, DataBase db) throws IOException {
-        Family.createFamily(db);
-        Family.snusnuForEveryOne(db);
 
-        DataBase nextGeneration = new DataBase();
-        for (Human[] human : db.getFullFamilies()) {
-            for (Human child : (((Parent) human[0]).getChildren())) {
-                nextGeneration.add(child);
-            }
-        }
-        this.mainDb.includeDB(nextGeneration);
-        this.mainDb.includeFamilies(db);
-        this.generationCount++;
-        System.out.println(String.format("Current generation: %d. Population: %d", generationCount, mainDb.size()));
-        System.out.println(String.format("Number of families: %d, general: %d", (db.getFullFamilies()).size(), mainDb.getFamiliesNumber()));
-        System.out.println(String.format("Children: %d\n", nextGeneration.size()));
-
-        if (generationCount == count) {
-            return;
-        }
-        createGenerationThree(count, nextGeneration);
-    }
-
-    private void createGenerationThree(int count, DataBase db) throws IOException {
-        Family.createFamily(db);
-        Family.snusnuForEveryOne(db);
-
-        DataBase nextGeneration = new DataBase();
-        for (Human[] human : db.getFullFamilies()) {
-            for (Human child : (((Parent) human[0]).getChildren())) {
-                nextGeneration.add(child);
-            }
-        }
-        this.mainDb.includeDB(nextGeneration);
-        this.mainDb.includeFamilies(db);
-        this.generationCount++;
-        System.out.println(String.format("Current generation: %d. Population: %d", generationCount, mainDb.size()));
-        System.out.println(String.format("Number of families: %d, general: %d", (db.getFullFamilies()).size(), mainDb.getFamiliesNumber()));
-        System.out.println(String.format("Children: %d\n", nextGeneration.size()));
-
-        if (generationCount == count) {
-            return;
-        }
-        // createGeneration(count, nextGeneration);
-    }
 }

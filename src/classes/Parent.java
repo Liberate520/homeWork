@@ -17,7 +17,11 @@ public class Parent extends Human {
         this.parents = human.getParents();
     }
 
-    public void addChild(Human child) {
+    public Parent(){
+        this(new Human());
+    }
+
+    public void addChild(Parent child) {
         children.addMember(child);
     }
 
@@ -27,11 +31,11 @@ public class Parent extends Human {
         }
     }
 
-    public ArrayList<Human> getChildren() {
+    public ArrayList<Parent> getChildren() {
         return this.children.getTree();
     }
 
-    public void replaceChild(Human old, Human newOne) {
+    public void replaceChild(Parent old, Parent newOne) {
         this.children.replace(old, newOne);
     }
 }

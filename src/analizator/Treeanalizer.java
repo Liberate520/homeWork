@@ -1,14 +1,13 @@
 package analizator;
 
+import classes.Parent;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-import classes.Human;
-import classes.Parent;
-
 public class Treeanalizer {
     /* показывает дерево детей */
-    public static void showChildrenTree(Parent person, String spacer) {
+    public void showChildrenTree(Parent person, String spacer) {
         if (person.getChildren().isEmpty()) {
             return;
         } else {
@@ -17,14 +16,12 @@ public class Treeanalizer {
 
             System.out.printf("%sChildren:%n", spacer);
 
-            for (Human child : person.getChildren()) {
+            for (Parent child : person.getChildren()) {
                 System.out.printf("%s%s %s, %s, %s%n", spacer, child.getName(), child.getFamilyname(),
                         child.getGender(), child.getMarigeStatus());
 
-                if (child instanceof Parent) {
-                    spacer += " |";
-                    showChildrenTree((Parent) child, spacer);
-                }
+                spacer += " |";
+                showChildrenTree(child, spacer);
             }
 
         }
@@ -32,7 +29,7 @@ public class Treeanalizer {
     }
 
     /* показывает только родных детей */
-    public static void showChildren(Parent person) {
+    public void showChildren(Parent person) {
         if (person.getChildren().isEmpty()) {
             System.out.println("No children found");
         } else {
@@ -43,20 +40,20 @@ public class Treeanalizer {
         }
     }
 
-//    private static void printPeople(ArrayList<Human> people) {
-//        for (Human person : people) {
+//    private void printPeople(ArrayList<Parent> people) {
+//        for (Parent person : people) {
 //            person.getInfo();
 //        }
 //    }
 
-    private static void printPeople(Human[] people) {
-        for (Human person : people) {
+    private void printPeople(Parent[] people) {
+        for (Parent person : people) {
             person.getInfo();
         }
     }
 
     /* показывает братьев и сестёр */
-    public static void showSiblings(Human person) {
+    public void showSiblings(Parent person) {
         Parent[] parents = person.getParents();
         if (parents[0] == null) {
             System.out.println("No parents found");
@@ -64,22 +61,24 @@ public class Treeanalizer {
             System.out.println("Person:");
             person.getInfo();
             System.out.println("Siblings:");
-            for (Parent parent : parents) {
-                ArrayList<Human> children = parent.getChildren();
-                if (children.size() < 2) {
-                    System.out.println("There are no siblings in this family.");
-                } else {
-                    for (Human child : children) {
-                        if (!Objects.equals(child.getName(), person.getName())) { // проверка на схожесть имён
-                            child.getInfo();
-                        }
+            ArrayList<Parent> children = parents[0].getChildren();
+            if (children.size() < 2) {
+                System.out.println("There are no siblings in this family.");
+            } else {
+                for (Parent child : children) {
+                    if (!equals(child.getName(), person.getName())) { // проверка на схожесть имён
+                        child.getInfo();
                     }
                 }
             }
         }
     }
 
-    public static void showParents(Human person) {
+    public boolean equals(String name, String nameOther) {
+        return Objects.equals(name, nameOther);
+    }
+
+    public void showParents(Parent person) {
         Parent[] parents = person.getParents();
         if (parents[0] == null) {
             System.out.println("No parents found");
@@ -94,19 +93,17 @@ public class Treeanalizer {
     /*
     показывает всех близких родственников
      */
-    public static void showFamilyMembers(Human[] family) {
+    public void showFamilyMembers(Parent[] family) {
         System.out.println("Father and mother:");
         printPeople(family);
         System.out.println("\nChildren:");
-        if (family[0] instanceof Parent) {
-            if (!((Parent) family[0]).getChildren().isEmpty()) {
-                ((Parent) family[0]).showChildren();
-            }
+        if (!family[0].getChildren().isEmpty()) {
+            family[0].showChildren();
         } else {
             System.out.println("No children found.");
         }
         System.out.println("\nGrand parents:");
-        for (Human parent : family) {
+        for (Parent parent : family) {
             showParents(parent);
             System.out.println();
         }

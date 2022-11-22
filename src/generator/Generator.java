@@ -1,6 +1,6 @@
 package generator;
 
-import classes.Human;
+import classes.Parent;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,27 +12,30 @@ public class Generator {
      * файлы со списками имён
      */
     public static Random rand = new Random();
-    private static String maleNames = "src/generator/MaleNames.txt";
-    private static String femaleNames = "src/generator/FemaleNames.txt";
-    private static String familyNames = "src/generator/FamilyNames.txt";
+    private static final String maleNames = "src/generator/MaleNames.txt";
+    private static final String femaleNames = "src/generator/FemaleNames.txt";
+    private static final String familyNames = "src/generator/FamilyNames.txt";
 
     /**
      * сам генератор с проверками на гендер
      */
-    public static Human create(String familyName) throws IOException {
-        Human newOne = new Human();
-        if (rand.nextInt(2) == 1) {
-            newOne.setGender(1);
-            newOne.setName(createParam(maleNames));
-        } else {
-            newOne.setGender(0);
-            newOne.setName(createParam(femaleNames));
+    public static Parent create(String familyName) {
+        Parent newOne = new Parent();
+        switch (rand.nextInt(2)) {
+            case 1 -> {
+                newOne.setGender(1);
+                newOne.setName(createParam(maleNames));
+            }
+            case 0 -> {
+                newOne.setGender(0);
+                newOne.setName(createParam(femaleNames));
+            }
         }
         newOne.setFamilyname(familyName);
         return newOne;
     }
 
-    public static Human create() throws IOException {
+    public static Parent create() {
         String familyName = createParam(familyNames);
         return create(familyName);
     }
@@ -43,15 +46,19 @@ public class Generator {
      * @param file - источник
      * @return - строка из файла
      */
-    private static String createParam(String file) throws IOException {
+    private static String createParam(String file) {
         String param = "";
-        FileReader data = new FileReader(file);
-        Scanner scan = new Scanner(data);
-        for (int i = 0; i < rand.nextInt(0, 100); i++) {
-            param = scan.nextLine();
+        try {
+            FileReader data = new FileReader(file);
+            Scanner scan = new Scanner(data);
+            for (int i = 0; i < rand.nextInt(0, 100); i++) {
+                param = scan.nextLine();
+            }
+            data.close();
+            scan.close();
+        } catch (IOException e) {
+            System.out.printf("File %s not found", file);
         }
-        data.close();
-        scan.close();
         return param;
     }
 }

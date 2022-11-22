@@ -1,57 +1,50 @@
 package generator;
 
-import dataBase.DataBase;
-import classes.Human;
+import classes.Gender;
 import classes.Parent;
+import dataBase.DataBase;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import static classes.Human.marige.NO;
-import static classes.Human.marige.YES;
-import static classes.Human.state.FEMALE;
-import static classes.Human.state.MALE;
+import static classes.Gender.FEMALE;
+import static classes.Gender.MALE;
+import static classes.Marrige.NO;
+import static classes.Marrige.YES;
 
 public class Family {
     /**
      * создание семьи
      *
-     * @param human    - первый человек
-     * @param humanSec - второй человек
+     * @param person    - первый человек
+     * @param personSec - второй человек
      * @param db       - база данных
      */
-    public static void marige(Human human, Human humanSec, DataBase db) {
-        switch (human.getGender()) {
-            case MALE -> humanSec.setFamilyname(human.getFamilyname());
-            case FEMALE -> human.setFamilyname(humanSec.getFamilyname());
+    private void marige(Parent person, Parent personSec, DataBase db) {
+        switch (person.getGender()) {
+            case MALE -> personSec.setFamilyname(person.getFamilyname());
+            case FEMALE -> person.setFamilyname(personSec.getFamilyname());
         }
-        db.addFamily(human, humanSec);
-        human.setMarigeStatus(YES);
-        humanSec.setMarigeStatus(YES);
+        db.addFamily(person, personSec);
+        person.setMarigeStatus(YES);
+        personSec.setMarigeStatus(YES);
     }
 
     /* размножаем людей */
-    public static void snusnuForEveryOne(DataBase db) throws IOException {
-        for (Human[] pair : db.showFamilies()) {
-            snusnuResults(pair, db);
+    public void snusnuForEveryOne(DataBase db){
+        for (Parent[] pair : db.showFamilies()) {
+            snusnuResults(pair);
         }
     }
 
     /* результаты размножения */
-    public static void snusnuResults(Human[] pair, DataBase db) throws IOException {
+    private void snusnuResults(Parent[] pair){
         int childrenNumber = childrenGenerator();
-        int familyIndex = db.getFamilyIndex(pair);
-        Human human = pair[0];
-        Human humanSec = pair[1];
+        Parent parent1 = pair[0];
+        Parent parent2 = pair[1];
         if (childrenNumber != 0) {
-            Parent parent1 = changeType(human, db);
-            Parent parent2 = changeType(humanSec, db);
-            chengeChildType(human, parent1);
-            chengeChildType(humanSec, parent2);
             for (int i = 1; i <= childrenNumber; i++) {
                 createChild(parent1, parent2);
             }
-            db.replaceFamily(parent1, parent2, familyIndex);
         }
     }
 
@@ -71,39 +64,39 @@ public class Family {
         return childrenNumber;
     }
 
-    /**
-     * переписываем в базе объект Human на объект Parent
-     *
-     * @param old    - старый
-     * @param newOne - новый
-     */
-    private static void chengeChildType(Human old, Parent newOne) {
-        for (Parent parent : old.getParents()) {
-            if (parent == null) {
-                return;
-            } else {
-                parent.replaceChild(old, newOne);
-            }
-        }
-    }
+//    /**
+//     * переписываем в базе объект Human на объект Parent
+//     *
+//     * @param old    - старый
+//     * @param newOne - новый
+//     */
+//    private static void chengeChildType(Parent old, Parent newOne) {
+//        for (Parent parent : old.getParents()) {
+//            if (parent == null) {
+//                return;
+//            } else {
+//                parent.replaceChild(old, newOne);
+//            }
+//        }
+//    }
 
-    /**
-     * переписываем в базе объект Human на объект Parent
-     *
-     * @param person - Human объект для перезаписи
-     * @param db     - база
-     * @return - полная копия объекта Human в Person
-     */
-    private static Parent changeType(Human person, DataBase db) {
-        Parent personNew = new Parent(person);
-        db.replace(person, personNew);
-        return personNew;
-    }
+//    /**
+//     * переписываем в базе объект Human на объект Parent
+//     *
+//     * @param person - Human объект для перезаписи
+//     * @param db     - база
+//     * @return - полная копия объекта Human в Person
+//     */
+//    private static Parent changeType(Parent person, DataBase db) {
+//        Parent personNew = new Parent(person);
+//        db.replace(person, personNew);
+//        return personNew;
+//    }
 
     /* создаём и везде прописываем дитя */
-    private static void createChild(Parent parent1, Parent parent2) throws IOException {
-        new Human();
-        Human child = switch (parent1.getGender()) {
+    private void createChild(Parent parent1, Parent parent2){
+        new Parent();
+        Parent child = switch (parent1.getGender()) {
             case MALE -> Generator.create(parent1.getFamilyname());
             case FEMALE -> Generator.create(parent2.getFamilyname());
         };
@@ -114,40 +107,40 @@ public class Family {
     }
 
     /* создаём семью */
-    public static void createFamily(DataBase db) {
-        ArrayList<Human> target;
-        ArrayList<Human> males = db.getListOf(MALE);
-        ArrayList<Human> females = db.getListOf(FEMALE);
+    public void createFamilies(DataBase db) {
+        ArrayList<Parent> target;
+        ArrayList<Parent> males = db.getListOf(MALE);
+        ArrayList<Parent> females = db.getListOf(FEMALE);
         if (males.size() > females.size()) {
             target = females;
         } else {
             target = males;
         }
-        for (Human human : target) {
-            prepairCouple(human, db);
+        for (Parent parent : target) {
+            prepairCouple(parent, db);
         }
     }
 
     /* подготовка */
-    private static void prepairCouple(Human human, DataBase db) {
-        if (human.getMarigeStatus() != YES) {
-            switch (human.getGender()) {
-                case MALE -> marige(human, check(db, FEMALE), db);
-                case FEMALE -> marige(human, check(db, MALE), db);
+    private void prepairCouple(Parent person, DataBase db) {
+        if (person.getMarigeStatus() != YES) {
+            switch (person.getGender()) {
+                case MALE -> marige(person, check(db, FEMALE), db);
+                case FEMALE -> marige(person, check(db, MALE), db);
             }
         }
     }
 
     /* подбор людей */
-    private static Human check(DataBase db, Human.state state) {
+    private Parent check(DataBase db, Gender state) {
         int index = Generator.rand.nextInt(0, db.size());
-        Human human = db.get(index);
-        if (human.getGender() == state) {
-            if (human.getMarigeStatus() == NO) {
-                return human;
+        Parent person = db.get(index);
+        if (person.getGender() == state) {
+            if (person.getMarigeStatus() == NO) {
+                return person;
             }
         }
-        human = check(db, state);
-        return human;
+        person = check(db, state);
+        return person;
     }
 }

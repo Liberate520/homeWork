@@ -1,13 +1,11 @@
 package app;
 
+import analizator.Treeanalizer;
+import classes.Parent;
 import dataBase.DataBase;
 import generator.GenerationWork;
 
 import java.io.IOException;
-
-import analizator.Treeanalizer;
-import classes.Parent;
-import classes.Human;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -20,19 +18,25 @@ public class Main {
         Gena.generatePopulation(startPopulation);
         Gena.startGenerator(generationCount);
         // random person analize
+        Treeanalizer analizer = new Treeanalizer();
+
         System.out.println("\n__________________________________Find children_______________________________");
         Parent randomPerson = db.getRandomParent();
+
 //        String spacer = "";
-//        Treeanalizer.showChildrenTree(randomPerson, spacer);
-        Treeanalizer.showChildren(randomPerson);
+//        analizer.showChildrenTree(randomPerson, spacer);
+
+        analizer.showChildren(randomPerson);
+
         System.out.println("\n__________________________________Find siblings_______________________________");
-        Human randomChild = db.getRandomChild();
-        Treeanalizer.showSiblings(randomChild);
+        Parent randomChild = db.getRandomChild();
+        analizer.showSiblings(randomChild);
+
         System.out.println("\n__________________________________Find parents________________________________");
-        Treeanalizer.showParents(randomChild);
+        analizer.showParents(randomChild);
 
         System.out.println("\n__________________________________All family members__________________________");
-        Human[] randomFamily = db.getRandomFamily();
-        Treeanalizer.showFamilyMembers(randomFamily);
+        Parent[] randomFamily = db.getRandomFamily();
+        analizer.showFamilyMembers(randomFamily);
     }
 }

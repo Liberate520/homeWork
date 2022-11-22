@@ -1,30 +1,30 @@
 package tree;
 
-import classes.Human;
+import classes.Parent;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class FamilyTree {
-    private HashSet<Human> tree;
+    private HashSet<Parent> tree;
 
     public FamilyTree() {
         this.tree = new HashSet<>();
     }
 
 
-    public void replace(Human old, Human newOne){
+    public void replace(Parent old, Parent newOne){
         this.tree.remove(old);
         this.tree.add(newOne);
     }
 
 
-    public void addMember(Human member) {
+    public void addMember(Parent member) {
         tree.add(member);
     }
 
 
-    public ArrayList<Human> getTree() {
+    public ArrayList<Parent> getTree() {
         return new ArrayList<>(tree);
     }
 

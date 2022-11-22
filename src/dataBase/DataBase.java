@@ -1,49 +1,47 @@
 package dataBase;
 
-import classes.Human;
-import classes.Human.state;
+import classes.Gender;
 import classes.Parent;
 import generator.Generator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DataBase {
-    ArrayList<Human> db;
-    ArrayList<Human[]> familiesList;
+    private ArrayList<Parent> db;
+    private ArrayList<Parent[]> familiesList;
 
     public void showBase() {
-        for (Human human : db) {
-            human.getInfo();
+        for (Parent person : db) {
+            person.getInfo();
         }
     }
 
-    public Human get(int index) {
+    public Parent get(int index) {
         return db.get(index);
     }
 
     public Parent getRandomParent() {
         int index = Generator.rand.nextInt(0, db.size());
-        Human human = this.db.get(index);
-        if (human instanceof Parent) {
-            return (Parent) human;
+        Parent parent = this.db.get(index);
+        if (!parent.getChildren().isEmpty()) {
+            return parent;
         }
-        human = getRandomParent();
-        return (Parent) human;
+        parent = getRandomParent();
+        return parent;
     }
 
-    public Human getRandomChild() {
+    public Parent getRandomChild() {
         int index = Generator.rand.nextInt(0, db.size());
-        Human human = this.db.get(index);
-        if (human.getParents()[0] != null) {
-            return human;
+        Parent child = this.db.get(index);
+        if (child.getParents()[0] != null) {
+            return child;
         }
 
-        human = getRandomParent();
-        return human;
+        child = getRandomParent();
+        return child;
     }
 
-    public Human[] getRandomFamily() {
+    public Parent[] getRandomFamily() {
         int index = Generator.rand.nextInt(0, familiesList.size());
         return familiesList.get(index);
     }
@@ -55,24 +53,24 @@ public class DataBase {
     /*
     возвращает список записей имеющих определённый статус гендера
      */
-    public ArrayList<Human> getListOf(state state) {
-        ArrayList<Human> results = new ArrayList<>();
-        for (Human human : db) {
-            if (human.getGender() == state) {
-                results.add(human);
+    public ArrayList<Parent> getListOf(Gender state) {
+        ArrayList<Parent> results = new ArrayList<>();
+        for (Parent person : db) {
+            if (person.getGender() == state) {
+                results.add(person);
             }
         }
         return results;
     }
 
-    public ArrayList<Human> getDb() {
+    public ArrayList<Parent> getDb() {
         return db;
     }
 
     /*
      * заполнить базу
      */
-    public void fill(int quantity) throws IOException {
+    public void fill(int quantity){
         for (int i = 0; i < quantity; i++) {
             db.add(Generator.create());
         }
@@ -87,40 +85,40 @@ public class DataBase {
     }
 
     /*
-    добавляет другие семьи
+    добавляет семьи из другой базы
      */
     public void includeFamilies(DataBase nextGeneration) {
         this.familiesList.addAll(nextGeneration.getFullFamilies());
     }
 
-    public void add(Human person) {
+    public void add(Parent person) {
         db.add(person);
     }
 
     /* Замена человека в базе */
-    public void replace(Human old, Human newOne) {
+    public void replace(Parent old, Parent newOne) {
         db.set(db.indexOf(old), newOne);
     }
 
     /* замена семьи в базе */
     public void replaceFamily(Parent parent1, Parent parent2, int index) {
-        Human[] family = {parent1, parent2};
+        Parent[] family = {parent1, parent2};
         familiesList.set(index, family);
     }
 
     /* Индекс семьи */
-    public int getFamilyIndex(Human[] pair) {
+    public int getFamilyIndex(Parent[] pair) {
         return familiesList.indexOf(pair);
     }
 
-    public void addFamily(Human husband, Human wife) {
-        Human[] pair = new Human[2];
+    public void addFamily(Parent husband, Parent wife) {
+        Parent[] pair = new Parent[2];
         pair[0] = husband;
         pair[1] = wife;
         familiesList.add(pair);
     }
 
-    public ArrayList<Human[]> showFamilies() {
+    public ArrayList<Parent[]> showFamilies() {
         return familiesList;
     }
 
@@ -129,10 +127,10 @@ public class DataBase {
         return familiesList.size();
     }
 
-    public ArrayList<Human[]> getFullFamilies() {
-        ArrayList<Human[]> fullFamiliesList = new ArrayList<>();
-        for (Human[] family : familiesList) {
-            if (family[0] instanceof Parent) {
+    public ArrayList<Parent[]> getFullFamilies() {
+        ArrayList<Parent[]> fullFamiliesList = new ArrayList<>();
+        for (Parent[] family : familiesList) {
+            if (family[0] != null) {
                 fullFamiliesList.add(family);
             }
         }
@@ -140,7 +138,7 @@ public class DataBase {
     }
 
 
-    public DataBase(ArrayList<Human> db) {
+    public DataBase(ArrayList<Parent> db) {
         this.db = db;
         this.familiesList = new ArrayList<>(2);
     }

@@ -1,19 +1,12 @@
 package classes;
 
 public class Human {
-    public enum state {
-        MALE, FEMALE
-    }
-
-    public enum marige {
-        YES, NO
-    }
 
     protected String name;
     protected String familyname;
-    protected state gender;
-    protected marige marigeStatus;
-    protected Parent[] parents = { null, null };
+    protected Gender gender;
+    protected Marrige marigeStatus;
+    protected Parent[] parents = {null, null};
 
     public Parent[] getParents() {
         return parents;
@@ -25,18 +18,18 @@ public class Human {
 
     public void showParents() {
         if (parents[0] == null) {
-            return;
+            System.out.println("No parents found!");
         } else {
             parents[0].getInfo();
             parents[1].getInfo();
         }
     }
 
-    public marige getMarigeStatus() {
+    public Marrige getMarigeStatus() {
         return marigeStatus;
     }
 
-    public void setMarigeStatus(marige marigeStatus) {
+    public void setMarigeStatus(Marrige marigeStatus) {
         this.marigeStatus = marigeStatus;
     }
 
@@ -56,27 +49,27 @@ public class Human {
         this.familyname = familyname;
     }
 
-    public state getGender() {
+    public Gender getGender() {
         return gender;
     }
 
     public void setGender(int id) {
         if (id == 1) {
-            this.gender = state.MALE;
+            this.gender = Gender.MALE;
         } else {
-            this.gender = state.FEMALE;
+            this.gender = Gender.FEMALE;
         }
     }
 
-    public Human(String name, String familyname, state gender) {
+    public Human(String name, String familyname, Gender gender) {
         this.name = name;
         this.familyname = familyname;
         this.gender = gender;
-        this.marigeStatus = marige.NO;
+        this.marigeStatus = Marrige.NO;
     }
 
     public Human() {
-        this("", "", state.MALE);
+        this("", "", Gender.MALE);
     }
 
     public void getInfo() {
