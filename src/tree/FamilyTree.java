@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class FamilyTree {
-    private HashSet<Parent> tree;
+    private ArrayList<Parent> tree;
 
     public FamilyTree() {
-        this.tree = new HashSet<>();
+        this.tree = new ArrayList<>();
     }
 
 

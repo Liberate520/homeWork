@@ -5,6 +5,7 @@ import classes.Parent;
 import generator.Generator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class DataBase {
     private ArrayList<Parent> db;

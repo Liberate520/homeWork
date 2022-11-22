@@ -5,10 +5,8 @@ import classes.Parent;
 import dataBase.DataBase;
 import generator.GenerationWork;
 
-import java.io.IOException;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         // start parameteres
         int startPopulation = 3000;
         int generationCount = 9;
