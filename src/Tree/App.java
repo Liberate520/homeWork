@@ -1,5 +1,9 @@
 package Tree;
 
+/**
+ * Тело программы.
+ * В нем созданы несколько личностей, назначены им родственные связи и приведен вызов вункций исследования.
+ */
 public class App {
     public static void main(String[] args) {
         Tree tree = new Tree();
@@ -34,6 +38,7 @@ public class App {
         Research.getRelation(Relations.Sister, tree);
         System.out.println("-------------------\n");
         Research.getRelation(vot, Relations.Father, tree);
+
 
     }
 }

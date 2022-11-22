@@ -2,7 +2,12 @@ package Tree;
 
 public class Communications {
     /**
-     * Creates a new instance of a Communications instance with the given name and value
+     *   Класс хранящий в себе сведения о:
+     *   people1* - личность для которой устанавливается родственная связь,
+     *   people2* - личность в отношении которой указывается связь,
+     *   RelationType* - тип родственной связи,
+     *   Геттеры для всех полей,
+     *   Переопределен `toString` для отображения данных об экземпляре определенным образом.
      */
     private final Person people1;
     private final Person people2;

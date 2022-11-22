@@ -2,7 +2,7 @@ package Tree;
 
 public enum Gender {
     /**
-     * The default gender of the children
+     * Пол по умолчанию
      */
     Man,
     Female
