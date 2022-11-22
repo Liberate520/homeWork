@@ -3,9 +3,11 @@ package dataBase;
 import classes.Gender;
 import classes.Parent;
 import generator.Generator;
+import tree.RelationType;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
+import static tree.RelationType.*;
 
 public class DataBase {
     private ArrayList<Parent> db;
@@ -34,7 +36,7 @@ public class DataBase {
     public Parent getRandomChild() {
         int index = Generator.rand.nextInt(0, db.size());
         Parent child = this.db.get(index);
-        if (child.getParents()[0] != null) {
+        if (child.getMember(FATHER) != null) {
             return child;
         }
 
@@ -112,10 +114,10 @@ public class DataBase {
         return familiesList.indexOf(pair);
     }
 
-    public void addFamily(Parent husband, Parent wife) {
+    public void addFamily(Parent person, Parent personSec) {
         Parent[] pair = new Parent[2];
-        pair[0] = husband;
-        pair[1] = wife;
+        pair[0] = person;
+        pair[1] = personSec;
         familiesList.add(pair);
     }
 

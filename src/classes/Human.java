@@ -1,29 +1,14 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Human {
 
     protected String name;
     protected String familyname;
     protected Gender gender;
     protected Marrige marigeStatus;
-    protected Parent[] parents = {null, null};
 
-    public Parent[] getParents() {
-        return parents;
-    }
-
-    public void setParents(Parent[] parents) {
-        this.parents = parents;
-    }
-
-    public void showParents() {
-        if (parents[0] == null) {
-            System.out.println("No parents found!");
-        } else {
-            parents[0].getInfo();
-            parents[1].getInfo();
-        }
-    }
 
     public Marrige getMarigeStatus() {
         return marigeStatus;
