@@ -5,19 +5,30 @@ import classes.Parent;
 import java.util.ArrayList;
 
 public interface Relation {
-    FamilyTree familymembers = new FamilyTree();
+    default void addMember(RelationType type, Parent person) {
+        getTree().addMember(type, person);
+    }
 
-    void addMember(RelationType type, Parent person);
+    FamilyTree getTree();
 
-    ArrayList<Parent> getMember(RelationType type);
+    default ArrayList<Parent> getMember(RelationType type) {
+
+        return getTree().getMember(type);
+    }
 
     ArrayList<Parent> getChildren();
 
-    void showMember(RelationType type);
+    default void showMember(RelationType type) {
+        getTree().showMember(type);
+    }
 
-    boolean checkMember(RelationType type);
+    default boolean checkMember(RelationType type) {
+        return getTree().checkMember(type);
+    }
 
-    void showFamily();
+    default void showFamily() {
+        getTree().showTree();
+    }
 
     void showChildren();
 }

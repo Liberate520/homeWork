@@ -1,16 +1,16 @@
 package classes;
 
-import java.util.ArrayList;
-
 import tree.FamilyTree;
 import tree.Relation;
-import tree.RelationType;
 
-import static tree.RelationType.*;
+import java.util.ArrayList;
+
+import static tree.RelationType.DAUGHTER;
+import static tree.RelationType.SON;
 
 public class Parent extends Human implements Relation {
 
-    private FamilyTree familymembers;
+    private final FamilyTree familymembers;
 
     public Parent(Human human, FamilyTree familymembers) {
         this.name = human.name;
@@ -28,15 +28,9 @@ public class Parent extends Human implements Relation {
         this(new Human());
     }
 
-    public void addMember(RelationType type, Parent person) {
-        this.familymembers.addMember(type, person);
+    public FamilyTree getTree() {
+        return this.familymembers;
     }
-
-    @Override
-    public ArrayList<Parent> getMember(RelationType type) {
-        return this.familymembers.getMember(type);
-    }
-
 
     public void showChildren() {
         if (this.checkMember(SON)) {
@@ -49,18 +43,6 @@ public class Parent extends Human implements Relation {
         } else {
             System.out.println("No daughters found.");
         }
-    }
-
-    public void showMember(RelationType type) {
-        this.familymembers.showMember(type);
-    }
-
-    public boolean checkMember(RelationType type) {
-        return this.familymembers.checkMember(type);
-    }
-
-    public void showFamily() {
-        this.familymembers.showTree();
     }
 
     public ArrayList<Parent> getChildren() {
