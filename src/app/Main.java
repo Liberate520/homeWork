@@ -8,8 +8,8 @@ import generator.GenerationWork;
 public class Main {
     public static void main(String[] args){
         // start parameteres
-        int startPopulation = 300;
-        int generationCount = 5;
+        int startPopulation = 3000;
+        int generationCount = 10;
         //
         DataBase db = new DataBase();
         GenerationWork Gena = new GenerationWork(db);

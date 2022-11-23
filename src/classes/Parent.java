@@ -39,20 +39,26 @@ public class Parent extends Human implements Relation {
 
 
     public void showChildren() {
-        for (Parent child : this.getChildren()) {
-            child.getInfo();
+        if (this.checkMember(SON)) {
+            this.showMember(SON);
+        } else {
+            System.out.println("No sons found.");
+        }
+        if (this.checkMember(DAUGHTER)) {
+            this.showMember(DAUGHTER);
+        } else {
+            System.out.println("No daughters found.");
         }
     }
 
-    public void showMember(RelationType type){
+    public void showMember(RelationType type) {
         this.familymembers.showMember(type);
     }
 
-    public boolean checkMember(RelationType type){
+    public boolean checkMember(RelationType type) {
         return this.familymembers.checkMember(type);
     }
 
-    @Override
     public void showFamily() {
         this.familymembers.showTree();
     }

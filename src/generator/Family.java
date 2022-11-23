@@ -6,7 +6,6 @@ import dataBase.DataBase;
 import tree.RelationType;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static tree.RelationType.*;
 import static classes.Gender.*;
@@ -47,15 +46,15 @@ public class Family {
 
     /* результаты размножения */
     private void snusnuResults(Parent[] pair) {
-        int childrenNumber = childrenGenerator();
+        int childrenCount = childrenGenerator();
         Parent parent1 = pair[0];
         Parent parent2 = pair[1];
-        if (childrenNumber != 0) {
-            for (int i = 1; i <= childrenNumber; i++) {
+        if (childrenCount != 0) {
+            for (int i = 1; i <= childrenCount; i++) {
                 createChild(parent1, parent2);
             }
-            for (Parent parent : pair) {
-                ArrayList<Parent> children = parent.getChildren();
+            if (childrenCount > 1) {
+                ArrayList<Parent> children = parent1.getChildren();
                 for (Parent child : children) {
                     for (Parent member : children) {
                         if (!equals(member, child)) {
@@ -68,8 +67,8 @@ public class Family {
         }
     }
 
-    public boolean equals(Parent obj1, Parent obj2) {
-        return (Objects.equals(obj1.getName(), obj2.getName()));
+    private boolean equals(Parent obj1, Parent obj2) {
+        return obj1.hashCode() == obj2.hashCode();
     }
 
     /*
@@ -97,13 +96,11 @@ public class Family {
             // проверяем фамилию
             case MALE -> {
                 child = Generator.create(parent1.getFamilyname());
-                child.addMember(FATHER, parent1);
-                child.addMember(MOTHER, parent2);
+                addFamilyMembers(child, parent1, parent2);
             }
             case FEMALE -> {
                 child = Generator.create(parent2.getFamilyname());
-                child.addMember(MOTHER, parent1);
-                child.addMember(FATHER, parent2);
+                addFamilyMembers(child, parent2, parent1);
             }
         }
         // добавляем ребёнка родителям
@@ -116,6 +113,22 @@ public class Family {
                 parent1.addMember(DAUGHTER, child);
                 parent2.addMember(DAUGHTER, child);
             }
+        }
+    }
+
+    /*
+    добавляем членов семьи с проверкой
+     */
+    private void addFamilyMembers(Parent child, Parent parent1, Parent parent2) {
+        child.addMember(FATHER, parent1);
+        if (parent1.checkMember(FATHER)) {
+            child.addMember(GRANDFATHER, parent1.getMember(FATHER).get(0));
+            child.addMember(GRANDMOTHER, parent1.getMember(MOTHER).get(0));
+        }
+        child.addMember(MOTHER, parent2);
+        if (parent2.checkMember(FATHER)) {
+            child.addMember(GRANDFATHER, parent2.getMember(FATHER).get(0));
+            child.addMember(GRANDMOTHER, parent2.getMember(MOTHER).get(0));
         }
     }
 

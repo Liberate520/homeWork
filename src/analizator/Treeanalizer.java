@@ -2,8 +2,6 @@ package analizator;
 
 import classes.Parent;
 
-import java.util.Objects;
-
 import static tree.RelationType.*;
 
 public class Treeanalizer {
@@ -41,17 +39,6 @@ public class Treeanalizer {
         }
     }
 
-//    private void printPeople(ArrayList<Parent> people) {
-//        for (Parent person : people) {
-//            person.getInfo();
-//        }
-//    }
-
-    private void printPeople(Parent[] people) {
-        for (Parent person : people) {
-            person.getInfo();
-        }
-    }
 
     /* показывает братьев и сестёр */
     public void showSiblings(Parent person) {
@@ -62,22 +49,19 @@ public class Treeanalizer {
             if (person.checkMember(BROTHER)) {
                 person.showMember(BROTHER);
             } else {
-                System.out.println("No brothers found");
+                System.out.println("No brothers found.");
             }
 
             if (person.checkMember(SISTER)) {
                 person.showMember(SISTER);
             } else {
-                System.out.println("No sisters found");
+                System.out.println("No sisters found.");
             }
         } else {
-            System.out.println("No parents found");
+            System.out.println("No parents found.");
         }
     }
 
-    public boolean equals(String name, String nameOther) {
-        return Objects.equals(name, nameOther);
-    }
 
     public void showParents(Parent person) {
         System.out.println("Person:");
@@ -86,7 +70,7 @@ public class Treeanalizer {
             person.showMember(FATHER);
             person.showMember(MOTHER);
         } else {
-            System.out.println("No parents found");
+            System.out.println("No parents found.");
         }
     }
 
@@ -95,8 +79,11 @@ public class Treeanalizer {
      */
     public void showFamilyMembers(Parent[] family) {
         for (Parent parent : family) {
+            System.out.println("Person");
             parent.getInfo();
+            parent.showFamily();
+            System.out.println();
         }
-        family[0].showFamily();
+
     }
 }

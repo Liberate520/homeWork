@@ -13,5 +13,11 @@ public interface Relation {
 
     ArrayList<Parent> getChildren();
 
+    void showMember(RelationType type);
+
+    boolean checkMember(RelationType type);
+
     void showFamily();
+
+    void showChildren();
 }
