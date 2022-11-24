@@ -28,19 +28,19 @@ public class Person {
         this.relatives = relatives;
     }
 
-    public Person addRelative(Relative relative) {
-        this.relatives.add(relative);
+    public Person addRelative(Person person, FamilyStatus status) {
+        this.relatives.add(new Relative(person, status));
         return this;
     }
 
     public static Person parse(String string) {
         String[] person = string.split(" ");
-        return new Person(person[1], person[2], Integer.parseInt(person[3]), Sex.valueOf(person[4]));
+        return new Person(person[0], person[1], Integer.parseInt(person[2]), Sex.valueOf(person[3]));
     }
 
     @Override
     public String toString() {
-        return String.format("Person: %s %s %d %s", firstName, secondName, age, sex.name());
+        return String.format("%s %s %d %s", firstName, secondName, age, sex.name());
     }
 
     public String getFullName() {

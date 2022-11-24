@@ -27,4 +27,9 @@ public class Relative {
     public void setStatus(FamilyStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Степень родства = " + this.status.getDescription() + ", данные = " + this.person;
+    }
 }
