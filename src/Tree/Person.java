@@ -1,7 +1,15 @@
 package Tree;
+
 /**
- * Класс описывающий Человека
- * с полями fName - имя, sName - фамилия,  patronymic - отчество,  bData - дата рождения, gender - пол
+
+ * Класс описывающий поля допустимые для Человека. Строковые поля:
+ * fName - Имя
+ * sName - Фамилия
+ * patronymic - Отчество
+ * bDate - Дата рождения
+ * Имеет конструктор Person для установки значений полей в момент создания экземпляра класса;
+ * Геттеры для всех полей;
+ * Переопределен toString для отображения данных об экземпляре определенным образом.
  */
 public class Person {
     private final String fName;
@@ -13,7 +21,8 @@ public class Person {
     /**
      * Конструктор - создание нового объекта
      */
-    public Person(String surName, String firstName,  String patronymic, String birthDate, Gender gender) {
+    public Person(String surName, String firstName, String patronymic, String birthDate, Gender gender) {
+
         this.fName = firstName;
         this.sName = surName;
         this.patronymic = patronymic;
@@ -25,12 +34,22 @@ public class Person {
         return this.fName;
     }
 
+    public String setFirstName(String fName) {
+        return fName;
+    }
+
     public String getSurName() {
         return this.sName;
+    }
+    public String setSurName(String sName){
+        return sName;
     }
 
     public String getPatronymic() {
         return this.patronymic;
+    }
+    public String gsetPatronymic(String patronymic){
+        return patronymic;
     }
 
     /**
@@ -39,12 +58,18 @@ public class Person {
     public String getBirthDate() {
         return this.bDate;
     }
+    public String setBirthDate(String bDate){
+        return bDate;
+    }
 
     /**
      * @return // gender
      */
     public Gender getGender() {
         return this.gender;
+    }
+    public Gender setGender(Gender gender){
+        return gender;
     }
 
     /**
@@ -55,4 +80,5 @@ public class Person {
         return String.format("%s %s %s %s %s", getSurName(), getFirstName(), getPatronymic(),
                 getBirthDate(), getGender());
     }
+
 }
