@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Tree Класс хранящий в себе
+ * Tree Класс хранящий в себе:
+ * links - список всех родственных связей,
+ * методы добавления связей по одному и списком разом,
+ * Геттер для списка связей,
+ * Переопределен toString для отображения данных об экземпляре определенным образом.
  */
 public class Tree {
     private final List<Communications> links=new ArrayList<>();
