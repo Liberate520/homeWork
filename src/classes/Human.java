@@ -1,7 +1,5 @@
 package classes;
 
-import java.util.ArrayList;
-
 public class Human {
 
     protected String name;
@@ -59,6 +57,12 @@ public class Human {
 
     public void getInfo() {
         System.out.printf("Name: %12s, Family_name: %12s, Gender: %7s, Married: %5s\n", name, familyname, gender,
+                marigeStatus);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Name: %12s, Family_name: %12s, Gender: %7s, Married: %5s\n", name, familyname, gender,
                 marigeStatus);
     }
 }

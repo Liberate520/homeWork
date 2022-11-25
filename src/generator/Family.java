@@ -39,7 +39,7 @@ public class Family {
 
     /* размножаем людей */
     public void snusnuForEveryOne(DataBase db) {
-        for (Parent[] pair : db.showFamilies()) {
+        for (Parent[] pair : db.getFamilies()) {
             snusnuResults(pair);
         }
     }

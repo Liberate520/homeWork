@@ -61,4 +61,8 @@ public class Parent extends Human implements Relation {
 
         return children;
     }
+
+    public int getChildrenCount(){
+        return getChildren().size();
+    }
 }

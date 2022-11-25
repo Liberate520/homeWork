@@ -4,7 +4,7 @@ import classes.Parent;
 
 import static tree.RelationType.*;
 
-public class Treeanalizer {
+public class TreeAnalizer {
     /* показывает дерево детей */
     public void showChildrenTree(Parent person, String spacer) {
         if (person.getChildren().isEmpty()) {

@@ -3,13 +3,12 @@ package dataBase;
 import classes.Gender;
 import classes.Parent;
 import generator.Generator;
-import tree.RelationType;
 
 import java.util.ArrayList;
 
-import static tree.RelationType.*;
+import static tree.RelationType.FATHER;
 
-public class DataBase {
+public class DataBase{
     private ArrayList<Parent> db;
     private ArrayList<Parent[]> familiesList;
 
@@ -46,6 +45,10 @@ public class DataBase {
 
     public Parent[] getRandomFamily() {
         int index = Generator.rand.nextInt(0, familiesList.size());
+        return familiesList.get(index);
+    }
+
+    public Parent[] getFamily(int index) {
         return familiesList.get(index);
     }
 
@@ -121,7 +124,7 @@ public class DataBase {
         familiesList.add(pair);
     }
 
-    public ArrayList<Parent[]> showFamilies() {
+    public ArrayList<Parent[]> getFamilies() {
         return familiesList;
     }
 
