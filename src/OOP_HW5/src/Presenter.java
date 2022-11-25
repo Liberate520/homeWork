@@ -8,7 +8,7 @@ public class Presenter {
     }
     public void onClick(){
        model.setText(view.getText());
-       String res = model.execute();
-       view.print(res);
+       model.execute();
+
     }
 }
