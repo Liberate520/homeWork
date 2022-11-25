@@ -14,6 +14,7 @@ public class Main {
         family.addChild("дочь цезаря", "сын2 дочери цезаря", 'м');
         family.addChild("сын1 дочери цезаря", "правнук цезаря", 'м');
         family.addChild("сын1 сына цезаря", "правнука цезаря", 'м');
-        family.printFamily();
+        family.printTree();
+        family.printChildren("дочь цезаря"); //вывод детей
     }
-} 
+}     
