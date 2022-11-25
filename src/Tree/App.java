@@ -1,6 +1,11 @@
 package Tree;
 
 public class App {
+    /**
+     *
+     * App Тело программы. В нем созданы несколько личностей, назначены им родственные связи
+     * и приведен вызов вункций исследования.
+     */
     public static void main(String[] args) {
         Tree tree = new Tree();
         Person pa = new Person("Valetov", "Vasiliy","Innokentievich","11/07/1940",
@@ -25,14 +30,17 @@ public class App {
         System.out.println("-------------------\n");
         System.out.println(tree);
         System.out.println("-------------------\n");
-        Research.getRelation(pa,tree);
+        Research.getResearch(pa,tree);
         System.out.println("-------------------\n");
-        Research.getRelation(dot,tree);
+        Research.getResearch(dot,tree);
         System.out.println("-------------------\n");
-        Research.getRelation(dot,tree);
+        Research.getResearch(so,tree);
         System.out.println("-------------------\n");
-        Research.getRelation(Relations.Sister, tree);
+        Research.getResearch(Relations.Sister, tree);
         System.out.println("-------------------\n");
+        Research.getResearch(Relations.Husband, pa, tree);
+
+
 
 
     }
