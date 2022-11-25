@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FamilyAnalizer implements Iterable<Pair>{
-    ArrayList<Pair> families;
+    private ArrayList<Pair> families;
 
     public FamilyAnalizer(DataBase db) {
         ArrayList<Pair> families = new ArrayList<>();
