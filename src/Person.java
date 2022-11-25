@@ -1,39 +1,39 @@
 import java.util.*;
 
 public class Person {
-    private String myname; //имя
-    private char mygender; //пол
-    private Person myparent = null; //родитель
+    private String myName; //имя
+    private char myGender; //пол
+    private Person myParent = null; //родитель
     private ArrayList<Person> myChildren; //дети
     
     public Person(String name, char gender, Person parent) {
-        myname = name;
-        mygender = gender;
-        myparent = parent;
+        myName = name;
+        myGender = gender;
+        myParent = parent;
         myChildren = new ArrayList<Person>(); 
     }
     public String toString() {
-        return myname;
+        return myName;
     }
 
     public String getMyname() {
-        return myname;
+        return myName;
     }
     public void setMyname(String myname) {
-        this.myname = myname;
+        this.myName = myname;
     }
 
     public char getMygender() {
-        return mygender;
+        return myGender;
     }
     public void setMygender(char mygender) {
-        this.mygender = mygender;
+        this.myGender = mygender;
     }
     public Person getMyparent() {
-        return myparent;
+        return myParent;
     }
     public void setMyparent(Person myparent) {
-        this.myparent = myparent;
+        this.myParent = myparent;
     }
     public ArrayList <Person> getMyChildren() {
         return myChildren;
