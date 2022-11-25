@@ -1,13 +1,12 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Output {
-    public void ShowСhildren(Human arg, List<Human> array){
+    public void showСhildren(Human arg, List<ObjectResearcheble> array){
         int searchId = arg.getId();
         int count = 0;
         System.out.println("We are looking for children from the subject =>" + arg.getName());
         for (int i = 0; i < array.size(); i++) {
-            Human person = array.get(i);
+            ObjectResearcheble person = array.get(i);
             if (person.getFather() != null) {
                 if (person.getFather().getId() == searchId) {
                     count++;
@@ -21,6 +20,19 @@ public class Output {
         }
         if (count == 0) System.out.println("There are no children");
 
+    }
+
+    public void showAllRelationship(Human person){
+        List<DegreeOfKinship> array = person.getRelationShip();
+        int count = 0;
+        System.out.println("We are looking for RelationShip from the subject =>" + person.getName());
+        for (int i = 0; i < array.size(); i++) {
+            count++;
+            DegreeOfKinship temp  = array.get(i);
+            System.out.println(String.
+                    format("RelationShip № %d - Surname: %s, Degree of kinship: %s ",
+                            count, temp.getPerson().getName(),temp.getType()));
+        }
     }
 
 }
