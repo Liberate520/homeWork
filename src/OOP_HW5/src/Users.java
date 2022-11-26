@@ -48,12 +48,7 @@ public class Users implements Model, Iterable, Iterator<User> {
     @Override
     public void execute() {
         getDataFromText();
-        while (true){
-            Command();
-            if (data[0].equals("0"))
-                break;
-        }
-
+        Command();
     }
     @Override
     public Iterator iterator() {
