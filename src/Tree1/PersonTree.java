@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonTree {
-    private List<Person> tree = new ArrayList<>();
+    /**
+     * Класс хранящий список людей. Имеет сеттер и геттер.
+     */
+    private final List<Person> tree = new ArrayList<>();
 
     public List<Person> getTree() {
         return tree;
@@ -16,10 +19,10 @@ public class PersonTree {
 
     @Override
     public String toString() {
-        String str = new String();
+        StringBuilder str = new StringBuilder();
         for (Person el:tree){
-            str+= el.toString()+"\n";
+            str.append(el.toString()).append("\n");
         }
-        return str;
+        return str.toString();
     }
 }
