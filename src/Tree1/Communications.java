@@ -1,4 +1,4 @@
-package Tree;
+package Tree1;
 
 public class Communications {
     /**
@@ -12,12 +12,16 @@ public class Communications {
     private final Person people1;
     private final Person people2;
     private final Relations relationType;
+    protected String name;
 
     public Communications(Person person1, Person person2, Relations relation) {
         this.people1 = person1;
         this.people2 = person2;
         this.relationType = relation;
     }
+
+
+
 
     public Person getPeople(){
         return this.people1;
@@ -33,8 +37,7 @@ public class Communications {
 
     @Override
     public String toString() {
-        return String.format("%s %s is %s for %s %s", getPeople().getSurName() +" "+ getPeople().getFirstName(),
-                getPeople().getPatronymic(), getRelationType(),getRelationPeople().getSurName()
-                        + " " +  getRelationPeople().getFirstName(), getRelationPeople().getPatronymic());
+        return String.format("%s  is %s for %s ", getPeople().getName(), getRelationType(),getRelationPeople().getName()
+                        );
     }
 }
