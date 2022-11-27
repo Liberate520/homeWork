@@ -1,33 +1,33 @@
-package Tree;
+package Tree1;
 public enum Relations {
     /**
      * Relation класс ENUM, для описания вида родственных связей.
      * Так как родственная связь - понятие определенное, то формируем справочник, исключая возможность ошибки ввода
      */
-    Father,
-    Stepfather,
-    Mother,
-    Stepmother,
-    Grandma,
-    Grandpa,
-    Great_grandma,
-    Great_grandpa,
-    Son,
-    Stepson,
-    Daughter,
-    Stepdaughter,
-    Brother,
-    Sister,
-    Ankle,
-    Aunt,
-    Nephew,
-    Niece,
-    Cousin,
-    Grandson,
-    Granddaughter,
-    Husband,
-    Wife,
-    FatherInLow,
-    MatherInLow
+    FATHER,
+    STEPFATHER,
+    MOTHER,
+    STEPMOTHER,
+    GRANDMA,
+    GRANDPA,
+    GREAT_GRANDMA,
+    GREAT_GRANDPA,
+    SON,
+    STEPSON,
+    DAUGHTER,
+    STEPDAUGHTER,
+    BROTHER,
+    SISTER,
+    ANKLE,
+    AUNT,
+    NEPHEW,
+    NIECE,
+    COUSIN,
+    GRANDSON,
+    GRANDDAUGHTER,
+    HUSBAND,
+    WIFE,
+    FATHER_IN_LOW,
+    MATHER_IN_LOW
 
 }
