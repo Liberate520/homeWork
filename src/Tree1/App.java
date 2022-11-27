@@ -8,7 +8,11 @@
 package Tree1;
 
 
-public class Main {
+public class App {
+    /**
+     * Тело программы.
+     *  В нем созданы несколько личностей, назначены им родственные связи и приведен вызов функций исследования.
+     */
     public static void main(String[] args) {
         PersonTree peoples = new PersonTree();
         peoples.add(new DogLover("Valetov Vasiliy Innokentievich", 82));
