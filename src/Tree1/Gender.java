@@ -1,4 +1,4 @@
-package Tree;
+package Tree1;
 
 public enum Gender {
     /**
@@ -6,6 +6,6 @@ public enum Gender {
      * Gender класс ENUM, для описания пола. Так как пол - понятие определенное,
      * то формируем справочник, исключая возможность ошибки ввода
      */
-    Man,
-    Female
+    MAN,
+    FEMALE
 }
