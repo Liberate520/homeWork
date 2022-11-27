@@ -1,37 +1,38 @@
-import java.util.ArrayList;
-import java.util.List;
 
+enum Relation {
+    Husband, Wife, Father, Mother, Daughter, Son, Grandma, Grandpa, Brother, Sister
+}
 public class Communications {
-    private List<Person> family;
+    
+    private Human human_one;
+    private Human human_two;
+    private Relation relation;
 
-    public Communications() {
-        this(new ArrayList<>());
+    public Communications(Human human_one, Human human_two, Relation relation) {
+        this.human_one = human_one;
+        this.human_two = human_two;
+        this.relation = relation;
     }
 
-    public Communications(List<Person> family) {
-        this.family = family;
+    public Human getHumanOne(){
+        return this.human_one;
     }
 
-    public List<Person> getFamily() {
-        return family;
+    public Human getHumanTwo(){
+        return this.human_two;
     }
 
-    public void setFamily(List<Person> family) {
-        this.family = family;
-    }
-
-    public void addInFamily(Person s) {
-        getFamily().add(s);
+    public Relation getRelation(){
+        return relation;
     }
 
     @Override
     public String toString() {
-        String result = new String();
-        for (Person elem : family) {
-            result += elem +"\n";
-        }
-        return result;
+        return String.format("%s %s is %s for %s %s", 
+                this.human_one.getFirstName(), 
+                this.human_one.getLastName(),
+                this.relation,
+                this.human_two.getFirstName(), 
+                this.human_two.getLastName());
     }
-
-
 }
