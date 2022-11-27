@@ -1,7 +1,13 @@
-package Tree2;
+package Tree1;
 
 abstract public class Pet {
-    private final String  nickName;
+    /**
+     * Абстрактный класс, для определения животных имеющий общие для всех:
+     *  Поля,
+     *  Конструктор,
+     *  Геттеры;
+     */
+    private final String nickName;
     private final int age;
 
     public Pet(String nickName, int age) {
@@ -21,6 +27,6 @@ abstract public class Pet {
 
     @Override
     public String toString() {
-        return ("Nickname: "+getNickName()+"; age:"+getAge());
+        return ("Nickname: " + getNickName() + "; age:" + getAge());
     }
 }
