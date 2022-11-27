@@ -1,6 +1,10 @@
-package Tree2;
+package Tree1;
 
 public class DogLover extends Person implements CallPet {
+    /**
+     *  Класс, наследник от `Person`, описывающий людей любящих собак. Имплементируют интерфейс `CallPet`.
+     *  Переопределяет метод `CallPet` в соответствии с поведением собачника.
+     */
     public DogLover(String name, int age) {
         super(name, age);
     }
@@ -12,8 +16,7 @@ public class DogLover extends Person implements CallPet {
         }
 
         if(pet instanceof Dog){
-            System.out.printf("%s call %s with a whistle, and it wags its tail and say:\n",
-                    super.getName(), pet.getNickName());
+            System.out.printf("%s call %s with a whistle, and it wags its tail and say:\n",super.getName(),pet.getNickName());
             pet.respond();
         }
     }
