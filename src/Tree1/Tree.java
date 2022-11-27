@@ -1,4 +1,4 @@
-package Tree;
+package Tree1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,10 @@ public class Tree {
         this.links.add(new Communications(p1,p2,r1));
         this.links.add(new Communications(p2,p1,r2));
     }
+//    public void addLink(Person p1, Person p2) {
+//        this.links.add(p1);
+//        this.links.add(p2);
+//    }
 
     @Override
     public String toString() {
