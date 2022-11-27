@@ -1,29 +1,35 @@
-import people.People;
+import human.Human;
 
-public class TreeFamily extends People {
-    private People mather;
-    private People father;
-    private People baby;
-    public TreeFamily(String name, int age, People mather, People father) {
-        super(name, age);
-        this.mather = mather;
-        this.father = father;
-
+import java.util.ArrayList;
+//лист всей семьи +
+//реализация метода поиска челвоека по имени +
+//добавление нового ребенка +
+public class TreeFamily {
+    private ArrayList<Human> treeFamily = new ArrayList<>();
+    public ArrayList<Human> getTreeFamily() {
+        return treeFamily;
     }
-    public TreeFamily(String name, int age, People mather, People father, People baby) {
-        super(name, age);
-        this.mather = mather;
-        this.father = father;
-        this.baby = baby;
+    public void setTreeFamily(ArrayList<Human> treeFamily) {
+        this.treeFamily = treeFamily;
     }
-    public TreeFamily(String name, int age,  People baby) {
-        super(name, age);
-        this.baby = baby;
+    public void addTreeFamily(Human human){
+        treeFamily.add(human);
     }
-    @Override
-    public String toString() {
-
-        return super.toString() + "\n" + " Мама: " + mather +  "\n" + " Папа: " + father + "\n" + " Ребенок: " + baby;
+    public void addChildren(Human baby, Human perent1, Human perent2) {
+        //treeFamily.add(baby);
+        baby.setPerent1(perent1);
+        baby.setPerent2(perent2);
+        perent1.addChildren(baby);
+        perent2.addChildren(baby);
     }
 
+    public void searchHuman(String name) {
+        ArrayList<Human> tList = getTreeFamily();
+        for (int i = 0; i < tList.size(); i++) {
+            if (tList.get(i).getName() == name) {
+                System.out.println(tList.get(i));
+            }
+        }
+    }
 }
+
