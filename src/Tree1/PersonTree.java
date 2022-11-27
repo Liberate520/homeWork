@@ -1,10 +1,10 @@
-package Tree2;
+package Tree1;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonTree {
-    private final List<Person> tree = new ArrayList<>();
+    private List<Person> tree = new ArrayList<>();
 
     public List<Person> getTree() {
         return tree;
@@ -16,10 +16,10 @@ public class PersonTree {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
+        String str = new String();
         for (Person el:tree){
-            str.append(el.toString()).append("\n");
+            str+= el.toString()+"\n";
         }
-        return str.toString();
+        return str;
     }
 }
