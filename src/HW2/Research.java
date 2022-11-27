@@ -2,7 +2,46 @@ package HW2;
 
 import java.util.List;
 
+
+
 public class Research {
+    /**
+     * Класс имеющий методы исследования.
+     * — Вывод всех кошатников,
+     * — Вывод всех собачников,
+     * — Вывод всех кошек,
+     * — Вывод всех собак,
+     * — Обеспечить позыв всех животных каждым человеком.
+     */
+
+    public static void getResearch(Relations relation, Person person, Tree tree) {
+        for (Communications el : tree.getLinks()) {
+            if (el.getPeople().getName().equals(person.getName())  &&
+                    el.getPeople().getName().equals(person.getName())
+                    && el.getRelationType() == relation) {
+                System.out.println(el);
+            }
+        }
+    }
+
+
+    public static void getResearch(Relations relation, Tree tree) {
+        for (Communications el :
+                tree.getLinks()) {
+            if (el.getRelationType() == relation) {
+                System.out.println(el);
+            }
+        }
+    }
+
+    public static void getResearch(Person person, Tree tree) {
+        for (Communications el :
+                tree.getLinks()) {
+            if (el.getPeople().getName().equals(person.getName())) {
+                System.out.println(el);
+            }
+        }
+    }
     public static void getDogLovers(PersonTree persons) {
         List<Person> tree = persons.getTree();
         System.out.println("List of Dog Lovers:");
@@ -51,6 +90,7 @@ public class Research {
         System.out.println();
     }
 
+
     public static void getAllCall(PersonTree persons, PetTree pets) {
         List<Person> peoples = persons.getTree();
         List<Pet> animals = pets.getTree();
@@ -67,3 +107,4 @@ public class Research {
     }
 
 }
+

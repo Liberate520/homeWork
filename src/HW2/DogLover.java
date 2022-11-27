@@ -1,6 +1,10 @@
 package HW2;
 
 public class DogLover extends Person implements CallPet {
+    /**
+     *  Класс, наследник от `Person`, описывающий людей любящих собак. Имплементируют интерфейс `CallPet`.
+     *  Переопределяет метод `CallPet` в соответствии с поведением собачника.
+     */
     public DogLover(String name, int age) {
         super(name, age);
     }
