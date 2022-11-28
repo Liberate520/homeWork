@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements FamiliesI {
+public class Human extends Tree {
     // человеку нужно имя
     private String fullName;
     // гендер 0=Ж 1=М
-    int gender;
+    private int gender;
     // у человека будут связи
     private List<Link> links;
 
@@ -19,9 +19,7 @@ public class Human implements FamiliesI {
 
 
     // прикрепляем человека к дереву
-    public void addTree(Tree tree) {
-        tree.addTree(this);
-    }
+
 
     //добавляем связь через имя связи
     public void addLink(Link link) {
@@ -29,11 +27,11 @@ public class Human implements FamiliesI {
     }
 
     //добавляем связь через конструктор связей
-    public void addLink(Human second, byte tipeLink) {
+    public void addLink(Human second, int tipeLink) {
         new Link(this, second, tipeLink);
     }
 
-    public List<Link> getAllLinks() {
+    public List<Link> getLink() {
         return links;
     }
     public Link getLink(int i) {

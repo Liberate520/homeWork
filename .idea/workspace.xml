@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="Промежуточный коммит">
-      <change afterPath="$PROJECT_DIR$/src/AffinityScheme.java" afterDir="false" />
+    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/HomeWork.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
@@ -105,14 +104,7 @@
       <option name="project" value="LOCAL" />
       <updated>1669614158990</updated>
     </task>
-    <task id="LOCAL-00004" summary="Промежуточный коммит">
-      <created>1669618234160</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1669618234160</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -126,7 +118,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/NewBr" />
                       </list>
                     </value>
                   </entry>
@@ -141,7 +133,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="промежуточный коммит" />
     <MESSAGE value="Временная финализация второй работы" />
-    <MESSAGE value="Промежуточный коммит" />
-    <option name="LAST_COMMIT_MESSAGE" value="Промежуточный коммит" />
+    <option name="LAST_COMMIT_MESSAGE" value="Временная финализация второй работы" />
   </component>
 </project>
