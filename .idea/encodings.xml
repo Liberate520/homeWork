@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/AffinityScheme.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Animal.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Cat.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/FamiliesI.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Human.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Link.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Tree.java" charset="UTF-8" />
+  </component>
+</project>
