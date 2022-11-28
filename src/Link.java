@@ -1,16 +1,16 @@
 public class Link {
-    private Human first;
-    private Human second;
+    private Tree first;
+    private Tree second;
     private int tipeLink; // кем исходный объект является целевому
 
-    public Link(Human first, Human second, int tipeLink, boolean flag) {
+    public Link(Tree first, Tree second, int tipeLink, boolean flag) {
         this.first = first;
         this.second = second;
         this.setTipeLink(tipeLink);
         first.addLink(this);
     }
 
-    public Link(Human first, Human second, int tipeLink) {
+    public Link(Tree first, Tree second, int tipeLink) {
         this(first, second, tipeLink, true);
         new Link(second, first, Link.counterDetection(tipeLink,second.getGender()), true);
 
@@ -19,19 +19,19 @@ public class Link {
     private static int counterDetection(int tipeLink, int secondGender) {
 //        byte conter;
         // определяем встречную связь
-        if (tipeLink / 100 == 1) {return (100 + secondGender);}
-        if (tipeLink / 100 == 2) {return (200 + secondGender);}
-        if (tipeLink / 100 >= 3) {return ((1200 - tipeLink - (tipeLink - 500)) + secondGender);}
+        if (tipeLink / 100 == 3) {return (100 + secondGender);}
+        if (tipeLink / 100 == 4) {return (200 + secondGender);}
+        if (tipeLink / 100 >= 5) {return ((1200 - tipeLink - (tipeLink - 500)) + secondGender);}
 
         return 0;
     }
 
 
-    public Human getFirst() {
+    public Tree getFirst() {
         return first;
     }
 
-    public Human getSecond() {
+    public Tree getSecond() {
         return second;
     }
 

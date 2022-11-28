@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="Временная финализация второй работы">
-      <change afterPath="$PROJECT_DIR$/src/AffinityScheme.java" afterDir="false" />
+    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/HomeWork.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
