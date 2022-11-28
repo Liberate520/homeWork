@@ -24,8 +24,11 @@ public class Output {
 
     public void showAllRelationship(Human person){
         List<DegreeOfKinship> array = person.getRelationShip();
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_RESET = "\u001B[0m";
+
         int count = 0;
-        System.out.println("We are looking for RelationShip from the subject =>" + person.getName());
+        System.out.println(ANSI_GREEN + "We are looking for RelationShip from the subject =>" + person.getName()+ ANSI_RESET);
         for (int i = 0; i < array.size(); i++) {
             count++;
             DegreeOfKinship temp  = array.get(i);

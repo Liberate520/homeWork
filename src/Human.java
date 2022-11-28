@@ -25,11 +25,21 @@ public class Human extends ObjectResearcheble {
 
     public void addChildren(Human arg){
         children.add(arg);
+
+
     }
 
 
-    public void addRelationShip(Human person, TypeOfRelationship typeOfRelationship){
-        relationShip.add(new DegreeOfKinship(person, typeOfRelationship));
+    public void addRelationShip(Human person_first,Human person_second, TypeOfRelationship typeOfRelationship){
+        TypeOfRelationship temp = TypeOfRelationship.unknown;
+        relationShip.add(new DegreeOfKinship(person_first, typeOfRelationship));
+        switch (typeOfRelationship){
+            case Wife -> temp = TypeOfRelationship.Husband;
+            case Son -> temp =(person_second.getTypeOfGender() == TypeOfGender.Male) ?
+                    TypeOfRelationship.Father : TypeOfRelationship.Mother;
+        }
+        person_first.getRelationShip().add(new DegreeOfKinship(person_second,temp));
+
     }
 
     public List<DegreeOfKinship> getRelationShip() {

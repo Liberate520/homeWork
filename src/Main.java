@@ -35,17 +35,24 @@ public class Main {
          * Устанавливаем связи.
          */
 
-        human1.addRelationShip(human4,TypeOfRelationship.Wife);
-        human1.addRelationShip(human2,TypeOfRelationship.Son);
-        human1.addRelationShip(human3,TypeOfRelationship.Daughter);
+        human1.addRelationShip(human4,human1, TypeOfRelationship.Wife);
+        human1.addRelationShip(human2,human1, TypeOfRelationship.Son);
+        human4.addRelationShip(human2,human4, TypeOfRelationship.Son);
+//        human1.addRelationShip(human3,TypeOfRelationship.Daughter);
 
 
 
         /**
          * Исследование по заданному экземпляру класса.
          */
-        output.showСhildren(human1, familyTree1.getMainTree());
+//        output.showСhildren(human1, familyTree1.getMainTree());
         output.showAllRelationship(human1);
+        output.showAllRelationship(human4);
+        output.showAllRelationship(human2);
+
+
+
+
 
 
 
