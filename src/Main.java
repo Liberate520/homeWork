@@ -1,9 +1,10 @@
 import human.Human;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        TreeFamily treeFamily = new TreeFamily();
-
+        IThree iThree = new TreeFamily();
         Human human = new Human("Boris",84);
         Human human1 = new Human("Marina",82);
         Human human2 = new Human("Vasya",59);
@@ -13,28 +14,27 @@ public class Main {
         Human human6 = new Human("Yana",25);
         Human human7 = new Human("Den",24);
         Human human8 =new Human("Roma",50);
-        treeFamily.addTreeFamily(human);
-        treeFamily.addTreeFamily(human1);
-        treeFamily.addTreeFamily(human2);
-        treeFamily.addTreeFamily(human3);
-        treeFamily.addTreeFamily(human4);
-        treeFamily.addTreeFamily(human5);
-        treeFamily.addTreeFamily(human6);
-        treeFamily.addTreeFamily(human7);
-        treeFamily.addTreeFamily(human8);
+        iThree.addTreeFamily(human);
+        iThree.addTreeFamily(human1);
+        iThree.addTreeFamily(human2);
+        iThree.addTreeFamily(human3);
+        iThree.addTreeFamily(human4);
+        iThree.addTreeFamily(human5);
+        iThree.addTreeFamily(human6);
+        iThree.addTreeFamily(human7);
+        iThree.addTreeFamily(human8);
 
-        treeFamily.addChildren(human2,human,human1);
-        treeFamily.addChildren(human3,human,human1);
-        treeFamily.addChildren(human5,human,human1);
-        treeFamily.addChildren(human6,human5,human4);
-        treeFamily.addChildren(human4,human3,human8);
-        treeFamily.addChildren(human7,human3,human8);
+        iThree.addChildren(human2,human,human1);
+        iThree.addChildren(human3,human,human1);
+        iThree.addChildren(human5,human,human1);
+        iThree.addChildren(human6,human5,human4);
+        iThree.addChildren(human4,human3,human8);
+        iThree.addChildren(human7,human3,human8);
 
-        treeFamily.searchHuman("Masha");
-        treeFamily.searchHuman("Sofi");
-        treeFamily.searchHuman("Boris");
-        treeFamily.searchHuman("Petr");
-
+        iThree.searchHuman("Masha");
+        iThree.searchHuman("Sofi");
+        iThree.searchHuman("Boris");
+        iThree.searchHuman("Petr");
 
     }
 

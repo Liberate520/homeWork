@@ -4,7 +4,7 @@ import java.util.ArrayList;
 //лист всей семьи +
 //реализация метода поиска челвоека по имени +
 //добавление нового ребенка +
-public class TreeFamily {
+public class TreeFamily implements IThree {
     private ArrayList<Human> treeFamily = new ArrayList<>();
     public ArrayList<Human> getTreeFamily() {
         return treeFamily;
@@ -12,17 +12,18 @@ public class TreeFamily {
     public void setTreeFamily(ArrayList<Human> treeFamily) {
         this.treeFamily = treeFamily;
     }
+    @Override
     public void addTreeFamily(Human human){
         treeFamily.add(human);
     }
-    public void addChildren(Human baby, Human perent1, Human perent2) {
-        //treeFamily.add(baby);
-        baby.setPerent1(perent1);
-        baby.setPerent2(perent2);
-        perent1.addChildren(baby);
-        perent2.addChildren(baby);
+    @Override
+    public void addChildren(Human baby, Human father, Human mother) {
+        baby.setPerent1(father);
+        baby.setPerent2(mother);
+        father.addChildren(baby);
+        mother.addChildren(baby);
     }
-
+    @Override
     public void searchHuman(String name) {
         ArrayList<Human> tList = getTreeFamily();
         for (int i = 0; i < tList.size(); i++) {
@@ -31,5 +32,7 @@ public class TreeFamily {
             }
         }
     }
+
+
 }
 
