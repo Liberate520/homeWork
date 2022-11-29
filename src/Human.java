@@ -1,4 +1,4 @@
-package DZ.DZ1;
+package DZ.DZ2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Human {
         this.listCommunication = new ArrayList<>();
     }
 
-    public Human(String name, TypeGender gender) {        
+    public Human(String name, TypeGender gender) {
         this(name, gender, new ArrayList<>());
     }
 
@@ -33,25 +33,33 @@ public class Human {
     public List<FamilyCommunication> getListCommunication() {
         return listCommunication;
     }
-            
-    public void addCommunication(FamilyCommunication communication){
+
+    public void addCommunication(FamilyCommunication communication) {
         listCommunication.add(communication);
     }
 
-    public void addCommunication(Human human, TypeCommunication typeCommunication){
+    public void addCommunication(Human human, TypeCommunication typeCommunication) {
         addCommunication(new FamilyCommunication(human, typeCommunication));
+        if (typeCommunication == TypeCommunication.Son && this.getGender() == TypeGender.Male
+                || typeCommunication == TypeCommunication.Daughter && this.getGender() == TypeGender.Male) {
+            human.addCommunication(new FamilyCommunication(this, TypeCommunication.Father));
+        }
+        if (typeCommunication == TypeCommunication.Son && this.getGender() == TypeGender.Female
+                || typeCommunication == TypeCommunication.Daughter && this.getGender() == TypeGender.Female) {
+            human.addCommunication(new FamilyCommunication(this, TypeCommunication.Mother));
+        }
     }
 
-    public void showCommunication(TypeCommunication typeCommunication){
+    public void showCommunication(TypeCommunication typeCommunication) {
         for (FamilyCommunication communication : listCommunication) {
-            if(communication.getTypeCommunication() == typeCommunication){
+            if (communication.getTypeCommunication() == typeCommunication) {
                 System.out.println(communication.getHuman());
             }
         }
     }
 
     @Override
-    public String toString() {        
+    public String toString() {
         return name + " " + gender + " " + listCommunication;
-    }    
+    }
 }

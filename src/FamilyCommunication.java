@@ -1,8 +1,8 @@
-package DZ.DZ1;
+package DZ.DZ2;
 
 public class FamilyCommunication {
-    Human human;            
-    TypeCommunication typeCommunication;
+    private Human human;            
+    private TypeCommunication typeCommunication;
 
     public FamilyCommunication(Human human, TypeCommunication typeCommunication) {
         this.human = human;

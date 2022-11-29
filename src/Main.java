@@ -1,11 +1,11 @@
-package DZ.DZ1;
+package DZ.DZ2;
 
 public class Main {
     public static void main(String[] args) {
 
-        //List<FamilyTree> familyTreePetrov  = new ArrayList<>();
-        FamilyTree familyTreePetrov = new FamilyTree(); // Так более правильно?
-        //List<Human> listHuman = new ArrayList<>();
+        //interfaceFamilyTree familyTreePetrov = new FamilyTree();
+        FamilyTree familyTreePetrov = new FamilyTree();
+        
         
         Human human1 = new Human("Иван Петров", TypeGender.Male);
         Human human2 = new Human("Наталья Петрова", TypeGender.Female);
@@ -13,15 +13,15 @@ public class Main {
         
         familyTreePetrov.addHuman(human1);
         familyTreePetrov.addHuman(human2);
-        //listHuman.add(human1);
+        familyTreePetrov.addHuman(human3);        
 
         human1.addCommunication(human3, TypeCommunication.Son);
-        human2.addCommunication(human3, TypeCommunication.Son);
-        human3.addCommunication(human1, TypeCommunication.Father);
+        human2.addCommunication(human3, TypeCommunication.Son);        
 
         human1.showCommunication(TypeCommunication.Son); //Выводим сына
+        familyTreePetrov.findHuman(human1); // поиск конкретного чел
+        familyTreePetrov.findHuman("Иван"); // поиск по имени
         
         System.out.println(familyTreePetrov); // Выводим всю ветвь семьи списком
-        //System.out.println(listHuman);
     }
 }
