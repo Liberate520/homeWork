@@ -12,10 +12,10 @@ public class Main {
         age.addNumbers(16);
         age.addNumbers(45);
         age.addNumbers(22);
-        age.addNumbers(91);
         age.addNumbers(33);
-        age.addNumbers(77);
-        age.addNumbers(278);
+        age.addNumbers(47);
+        age.addNumbers(51);
+        age.addNumbers(328);
         age.addNumbers(174);
         for (Num num : age) {
             System.out.printf(" "+num + " ");
