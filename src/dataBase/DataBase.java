@@ -1,14 +1,17 @@
 package dataBase;
 
 import classes.Gender;
+import classes.Marrige;
 import classes.Parent;
 import generator.Generator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static tree.RelationType.FATHER;
 
-public class DataBase{
+public class DataBase implements Serializable, Iterable<Parent> {
     private ArrayList<Parent> db;
     private ArrayList<Parent[]> familiesList;
 
@@ -69,6 +72,16 @@ public class DataBase{
         return results;
     }
 
+    public ArrayList<Parent> getListOf(Marrige state) {
+        ArrayList<Parent> results = new ArrayList<>();
+        for (Parent person : db) {
+            if (person.getMarigeStatus() == state) {
+                results.add(person);
+            }
+        }
+        return results;
+    }
+
     public ArrayList<Parent> getDb() {
         return db;
     }
@@ -76,7 +89,7 @@ public class DataBase{
     /*
      * заполнить базу
      */
-    public void fill(int quantity){
+    public void fill(int quantity) {
         for (int i = 0; i < quantity; i++) {
             db.add(Generator.create());
         }
@@ -143,7 +156,6 @@ public class DataBase{
         return fullFamiliesList;
     }
 
-
     public DataBase(ArrayList<Parent> db) {
         this.db = db;
         this.familiesList = new ArrayList<>(2);
@@ -151,5 +163,10 @@ public class DataBase{
 
     public DataBase() {
         this(new ArrayList<>());
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new ParentIterator(this.db);
     }
 }

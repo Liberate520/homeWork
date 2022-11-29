@@ -3,12 +3,13 @@ package classes;
 import tree.FamilyTree;
 import tree.Relation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static tree.RelationType.DAUGHTER;
 import static tree.RelationType.SON;
 
-public class Parent extends Human implements Relation {
+public class Parent extends Human implements Relation, Serializable {
 
     private final FamilyTree familymembers;
 

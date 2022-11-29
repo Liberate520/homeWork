@@ -39,7 +39,6 @@ public class TreeAnalizer {
         }
     }
 
-
     /* показывает братьев и сестёр */
     public void showSiblings(Parent person) {
         System.out.println("Person:");
@@ -73,6 +72,8 @@ public class TreeAnalizer {
             System.out.println("No parents found.");
         }
     }
+
+
 
     /*
     показывает всех близких родственников
