@@ -4,15 +4,13 @@ public abstract class Human {
     private int weight;
     private String first_name;
     private String second_name;
-    private CONST.Sex sex;
-
-    protected Human(String first_name, String second_name, int age, int height, int weight, CONST.Sex sex) {
+    
+    protected Human(String first_name, String second_name, int age, int height, int weight) {
         this.first_name = first_name;
         this.second_name = second_name;
         this.age = age;
         this.height = height;
-        this.weight = weight;
-        this.sex = sex;
+        this.weight = weight;        
     }
 
     protected int getAge() {
@@ -21,14 +19,6 @@ public abstract class Human {
 
     protected void setAge(int age) {
         this.age = age;
-    }
-
-    protected CONST.Sex getSex() {
-        return sex;
-    }
-
-    protected void setSex(CONST.Sex sex) {
-        this.sex = sex;
     }
 
     protected int getHeight() {

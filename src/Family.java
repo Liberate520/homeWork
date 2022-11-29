@@ -1,54 +1,70 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Family {
-    private Man father;
-    private Woman mother;
-    private List<Human> children;
+public class Family implements IFamilyMember {
+    private Man man;
+    private List<FamilyMember> familymembers;
 
-    public Family(Man father, Woman mother, List<Human> children) {
-        this.father = father;
-        this.mother = mother;
-        this.children = children;
+    private Family(Man man, List<FamilyMember> familymembers) {
+        this.man = man;
+        this.familymembers = familymembers;
     }
 
-    public Family(Man father, Woman mother) {
-        this(father, mother, new ArrayList<Human>());
+    public Family(Man man) {
+        this(man, new ArrayList<FamilyMember>());
     }
 
-    public void addChild(Human child) {
-        children.add(child);
-    }
-
-    public List<Human> getSons() {
-        List<Human> sons = new ArrayList<Human>();
-        for (Human child : children) {
-            if (child.getSex() == CONST.Sex.MAN) {
-                sons.add((Human) child);
-            }
+    public boolean getMarried(Object e) {
+        FamilyMember fm = (FamilyMember) e;
+        if (fm.getSex() != this.man.getSex()){
+            return this.familymembers.add(fm);
         }
-        return sons;
-    }
-
-    public List<Human> getDaughters() {
-        List<Human> daughters = new ArrayList<Human>();
-        for (Human child : children) {
-            if (child.getSex() == CONST.Sex.WOMAN) {
-                daughters.add((Human) child);
-            }
+        else{
+            return false;
         }
-        return daughters;
     }
 
-    public List<Human> getChildren() {
-        return children;
+    public boolean getDivorce(Object e) {
+        FamilyMember fm = (FamilyMember) e;
+        CONST.FamilyRelationShip frs = fm.getFrs();
+        if ((this.familymembers.contains(fm))
+                && ((frs == CONST.FamilyRelationShip.HUSBEND)
+                || (frs == CONST.FamilyRelationShip.WIFE))){
+            return this.familymembers.remove(fm);    
+        }
+        else{
+            return false;
+        }
     }
 
-    public Human getFather() {
-        return father;
+    public boolean addChild(Object e) {
+        FamilyMember fm = (FamilyMember) e;
+        CONST.FamilyRelationShip frs = fm.getFrs();
+        if ((frs == CONST.FamilyRelationShip.SON) || (frs == CONST.FamilyRelationShip.DAUGHTER)) {
+            return this.familymembers.add(fm);
+        } else {
+            return false;
+        }
     }
 
-    public Human getMother() {
-        return mother;
+    public boolean removeFamilyMember(Object e) {
+        FamilyMember fm = (FamilyMember) e;
+        if (this.familymembers.contains(fm)) {
+            return this.familymembers.remove(fm);
+        }
+        else {
+            return false;
+        }
+        
+    }
+    
+    @Override
+    public String toString() {
+        String result = this.man.toString() + "\n";
+
+        for (FamilyMember item : this.familymembers) {
+            result += item.toString() + "\n";
+        }
+        return result;
     }
 }
