@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static tree.RelationType.FATHER;
+import static tree.RelationType.*;
 
 public class DataBase implements Serializable, Iterable<Parent> {
     private ArrayList<Parent> db;

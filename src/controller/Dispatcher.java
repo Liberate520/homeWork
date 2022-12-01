@@ -12,16 +12,19 @@ import java.util.Scanner;
 
 public class Dispatcher {
     public void start() {
+//        System.out.print("\033[H\033[J");
         Scanner input = new Scanner(System.in);
         DataBase db = new DataBase();
         System.out.println("Type your commands:");
         while (true) {
+//            System.out.print("\033[H\033[J");
             switch (input.nextLine()) {
                 case "stop", "exit":
                     System.out.println("Finishing tasks...");
                     System.exit(0);
                     break;
                 case "generate":
+//                    System.out.print("\033[H\033[J");
                     System.out.println("How many people you want to start with?");
                     int startPopulation = input.nextInt();
                     System.out.println("How many generations will be?");
@@ -31,6 +34,7 @@ public class Dispatcher {
                     Gena.startGenerator(generationCount);
                     break;
                 case "children analyze":
+                    System.out.print("\033[H\033[J");
                     TreeAnalizer analizer = new TreeAnalizer();
                     Parent randomPerson = db.getRandomParent();
                     System.out.println("Random parent generated.");
