@@ -1,22 +1,22 @@
 package tree;
 
-import classes.Parent;
+import classes.Person;
 
 import java.util.ArrayList;
 
 public interface Relation {
-    default void addMember(RelationType type, Parent person) {
+    default void addMember(RelationType type, Person person) {
         getTree().addMember(type, person);
     }
 
     FamilyTree getTree();
 
-    default ArrayList<Parent> getMember(RelationType type) {
+    default ArrayList<Person> getMember(RelationType type) {
 
         return getTree().getMember(type);
     }
 
-    ArrayList<Parent> getChildren();
+    ArrayList<Person> getChildren();
 
     default void showMember(RelationType type) {
         getTree().showMember(type);

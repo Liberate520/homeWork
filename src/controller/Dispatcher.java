@@ -1,10 +1,10 @@
 package controller;
 
+import IO.IO;
 import analizator.FamilyAnalizer;
 import analizator.Pair;
 import analizator.StatWorker;
 import analizator.TreeAnalizer;
-import classes.Parent;
 import dataBase.DataBase;
 import generator.GenerationWork;
 
@@ -34,38 +34,34 @@ public class Dispatcher {
                     Gena.startGenerator(generationCount);
                     break;
                 case "children analyze":
-                    System.out.print("\033[H\033[J");
-                    TreeAnalizer analizer = new TreeAnalizer();
-                    Parent randomPerson = db.getRandomParent();
+//                    System.out.print("\033[H\033[J");
+                    TreeAnalizer analizer = new TreeAnalizer(db);
                     System.out.println("Random parent generated.");
                     System.out.println("Do you want to analyze all generations? (Y/N)");
                     switch (input.next()) {
                         case "Y", "y" -> {
                             System.out.println("\n__________________________________Find children_______________________________");
                             String spacer = "";
-                            analizer.showChildrenTree(randomPerson, spacer);
+                            analizer.showChildrenTree(spacer);
                         }
-                        case "N", "n" -> analizer.showChildren(randomPerson);
+                        case "N", "n" -> analizer.showChildren();
                         default -> System.out.println("Wrong input. Return.");
                     }
                     break;
                 case "siblings analyze":
-                    analizer = new TreeAnalizer();
+                    analizer = new TreeAnalizer(db);
                     System.out.println("\n__________________________________Find siblings_______________________________");
-                    Parent randomChild = db.getRandomChild();
-                    analizer.showSiblings(randomChild);
+                    analizer.showSiblings();
                     break;
                 case "parent analyze":
-                    analizer = new TreeAnalizer();
-                    randomChild = db.getRandomChild();
+                    analizer = new TreeAnalizer(db);
                     System.out.println("\n__________________________________Find parents________________________________");
-                    analizer.showParents(randomChild);
+                    analizer.showParents();
                     break;
                 case "family analyze":
-                    analizer = new TreeAnalizer();
+                    analizer = new TreeAnalizer(db);
                     System.out.println("\n__________________________________All family members__________________________");
-                    Parent[] randomFamily = db.getRandomFamily();
-                    analizer.showFamilyMembers(randomFamily);
+                    analizer.showFamilyMembers();
                     break;
                 case "children statistics":
                     System.out.println("\n__________________________________Children statistics_________________________");
@@ -88,12 +84,13 @@ public class Dispatcher {
                 case "save statistics":
                     String path = "src/dataBase/stats.txt";
                     stats = new StatWorker();
-                    stats.getStats(db);
-                    stats.save(path);
+                    IO saver = new IO();
+                    saver.toFile(stats.toString(), path);
                     break;
                 case "load statistics":
                     path = "src/dataBase/stats.txt";
                     stats = new StatWorker();
+                    IO loader = new IO();
                     stats.load(path);
                     System.out.printf(stats.toString());
                     break;

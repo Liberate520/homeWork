@@ -1,6 +1,6 @@
 package analizator;
 
-import classes.Parent;
+import classes.Person;
 import dataBase.DataBase;
 import IO.IO;
 
@@ -17,13 +17,16 @@ public class StatWorker implements Serializable {
         this.stats = new ArrayList<>();
     }
 
+    /*
+    собирает общую статистику по базе
+     */
     public void getStats(DataBase db) {
         StringBuilder line = new StringBuilder();
         int married = 0;
         int single = 0;
         int man = 0;
         int woman = 0;
-        for (Parent person : db) {
+        for (Person person : db) {
             if (person.getMarigeStatus() == YES) {
                 married++;
             } else {
@@ -60,11 +63,17 @@ public class StatWorker implements Serializable {
         addNclear(line);
     }
 
+    /*
+    добавить в лист и стереть line
+     */
     private void addNclear(StringBuilder line) {
         this.stats.add(line.toString());
         line.delete(0, line.length());
     }
 
+    /*
+    собираем строку для сохранения
+     */
     @Override
     public String toString() {
         StringBuilder line = new StringBuilder();

@@ -1,16 +1,16 @@
 package analizator;
 
-import classes.Parent;
+import classes.Person;
 
 public class Pair{
-    private final Parent[] pair;
+    private final Person[] pair;
     private int descendants = 0;
 
     public int getDescendants() {
         return descendants;
     }
 
-    public Parent[] getPair() {
+    public Person[] getPair() {
         return pair;
     }
 
@@ -21,18 +21,18 @@ public class Pair{
                 pair[1].toString();
     }
 
-    public Pair(Parent[] pair) {
+    public Pair(Person[] pair) {
         this.pair = pair;
         descendantsCount(pair[0]);
     }
 
-    private void descendantsCount(Parent person) {
+    private void descendantsCount(Person person) {
         int count = person.getChildrenCount();
         if (count == 0) {
             return;
         }
         this.descendants += count;
-        for (Parent child : person.getChildren()) {
+        for (Person child : person.getChildren()) {
             descendantsCount(child);
         }
     }

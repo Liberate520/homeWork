@@ -1,15 +1,15 @@
 package dataBase;
 
-import classes.Parent;
+import classes.Person;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ParentIterator implements Iterator<Parent> {
+public class ParentIterator implements Iterator<Person> {
     int index;
-    ArrayList<Parent> db;
+    ArrayList<Person> db;
 
-public ParentIterator(ArrayList<Parent> db){
+public ParentIterator(ArrayList<Person> db){
     this.db = db;
     this.index = 0;
 }
@@ -19,7 +19,7 @@ public ParentIterator(ArrayList<Parent> db){
     }
 
     @Override
-    public Parent next() {
+    public Person next() {
         return this.db.get(index++);
     }
 }

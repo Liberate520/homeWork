@@ -25,7 +25,6 @@ public class IO {
             System.out.println("Loaded successfully");
             return element;
         } catch (IOException | ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return element;

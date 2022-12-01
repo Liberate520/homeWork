@@ -1,12 +1,29 @@
 package analizator;
 
-import classes.Parent;
+import classes.Person;
+import dataBase.DataBase;
+import generator.GetRandom;
 
 import static tree.RelationType.*;
 
 public class TreeAnalizer {
+    private final Person testParent;
+    private final Person testChild;
+    private final Person[] testFamily;
+
+    public TreeAnalizer(DataBase db) {
+        this.testChild = GetRandom.getRandomChild(db);
+        this.testParent = GetRandom.getRandomParent(db);
+        this.testFamily = GetRandom.getRandomFamily(db);
+    }
+
     /* показывает дерево детей */
-    public void showChildrenTree(Parent person, String spacer) {
+
+    public void showChildrenTree(String spacer) {
+        childrenTreeWorker(this.testParent, spacer);
+    }
+
+    private void childrenTreeWorker(Person person, String spacer) {
         if (person.getChildren().isEmpty()) {
             return;
         } else {
@@ -15,12 +32,12 @@ public class TreeAnalizer {
 
             System.out.printf("%sChildren:%n", spacer);
 
-            for (Parent child : person.getChildren()) {
+            for (Person child : person.getChildren()) {
                 System.out.printf("%s%s %s, %s, %s%n", spacer, child.getName(), child.getFamilyname(),
                         child.getGender(), child.getMarigeStatus());
 
                 spacer += " |";
-                showChildrenTree(child, spacer);
+                childrenTreeWorker(child, spacer);
             }
 
         }
@@ -28,31 +45,32 @@ public class TreeAnalizer {
     }
 
     /* показывает только родных детей */
-    public void showChildren(Parent person) {
-        if (person.getChildren().isEmpty()) {
+    public void showChildren() {
+
+        if (this.testParent.getChildren().isEmpty()) {
             System.out.println("No children found");
         } else {
             System.out.println("Person:");
-            person.getInfo();
+            this.testParent.getInfo();
             System.out.println("Children:");
-            person.showChildren();
+            this.testParent.showChildren();
         }
     }
 
     /* показывает братьев и сестёр */
-    public void showSiblings(Parent person) {
+    public void showSiblings() {
         System.out.println("Person:");
-        person.getInfo();
+        this.testChild.getInfo();
         System.out.println("Siblings:");
-        if (person.checkMember(FATHER)) {
-            if (person.checkMember(BROTHER)) {
-                person.showMember(BROTHER);
+        if (this.testChild.checkMember(FATHER)) {
+            if (this.testChild.checkMember(BROTHER)) {
+                this.testChild.showMember(BROTHER);
             } else {
                 System.out.println("No brothers found.");
             }
 
-            if (person.checkMember(SISTER)) {
-                person.showMember(SISTER);
+            if (this.testChild.checkMember(SISTER)) {
+                this.testChild.showMember(SISTER);
             } else {
                 System.out.println("No sisters found.");
             }
@@ -62,24 +80,23 @@ public class TreeAnalizer {
     }
 
 
-    public void showParents(Parent person) {
+    public void showParents() {
         System.out.println("Person:");
-        person.getInfo();
-        if (person.checkMember(FATHER)) {
-            person.showMember(FATHER);
-            person.showMember(MOTHER);
+        this.testChild.getInfo();
+        if (this.testChild.checkMember(FATHER)) {
+            this.testChild.showMember(FATHER);
+            this.testChild.showMember(MOTHER);
         } else {
             System.out.println("No parents found.");
         }
     }
 
 
-
     /*
     показывает всех близких родственников
      */
-    public void showFamilyMembers(Parent[] family) {
-        for (Parent parent : family) {
+    public void showFamilyMembers() {
+        for (Person parent : this.testFamily) {
             System.out.println("Person");
             parent.getInfo();
             parent.showFamily();

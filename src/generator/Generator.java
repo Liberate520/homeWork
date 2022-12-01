@@ -1,6 +1,6 @@
 package generator;
 
-import classes.Parent;
+import classes.Person;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,8 +19,8 @@ public class Generator {
     /**
      * сам генератор с проверками на гендер
      */
-    public static Parent create(String familyName) {
-        Parent newOne = new Parent();
+    public static Person create(String familyName) {
+        Person newOne = new Person();
         switch (rand.nextInt(2)) {
             case 1 -> {
                 newOne.setGender(1);
@@ -35,7 +35,7 @@ public class Generator {
         return newOne;
     }
 
-    public static Parent create() {
+    public static Person create() {
         String familyName = createParam(familyNames);
         return create(familyName);
     }

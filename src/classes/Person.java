@@ -6,14 +6,13 @@ import tree.Relation;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static tree.RelationType.DAUGHTER;
-import static tree.RelationType.SON;
+import static tree.RelationType.*;
 
-public class Parent extends Human implements Relation, Serializable {
+public class Person extends Human implements Relation, Serializable {
 
     private final FamilyTree familymembers;
 
-    public Parent(Human human, FamilyTree familymembers) {
+    public Person(Human human, FamilyTree familymembers) {
         this.name = human.name;
         this.familyname = human.familyname;
         this.gender = human.gender;
@@ -21,11 +20,11 @@ public class Parent extends Human implements Relation, Serializable {
         this.familymembers = familymembers;
     }
 
-    public Parent(Human human) {
+    public Person(Human human) {
         this(human, new FamilyTree());
     }
 
-    public Parent() {
+    public Person() {
         this(new Human());
     }
 
@@ -46,16 +45,16 @@ public class Parent extends Human implements Relation, Serializable {
         }
     }
 
-    public ArrayList<Parent> getChildren() {
-        ArrayList<Parent> children = new ArrayList<>();
+    public ArrayList<Person> getChildren() {
+        ArrayList<Person> children = new ArrayList<>();
         try {
-            ArrayList<Parent> sons = new ArrayList<>(this.getMember(SON));
+            ArrayList<Person> sons = new ArrayList<>(this.getMember(SON));
             children.addAll(sons);
         } catch (Exception ignored) {
         }
 
         try {
-            ArrayList<Parent> daughters = new ArrayList<>(this.getMember(DAUGHTER));
+            ArrayList<Person> daughters = new ArrayList<>(this.getMember(DAUGHTER));
             children.addAll(daughters);
         } catch (Exception ignored) {
         }

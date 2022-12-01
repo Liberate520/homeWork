@@ -1,7 +1,7 @@
 package generator;
 
 import classes.Gender;
-import classes.Parent;
+import classes.Person;
 import dataBase.DataBase;
 import tree.RelationType;
 
@@ -19,7 +19,7 @@ public class Family {
      * @param personSec - второй человек
      * @param db        - база данных
      */
-    private void marige(Parent person, Parent personSec, DataBase db) {
+    private void marige(Person person, Person personSec, DataBase db) {
         switch (person.getGender()) {
             case MALE -> {
                 personSec.setFamilyname(person.getFamilyname());
@@ -39,24 +39,24 @@ public class Family {
 
     /* размножаем людей */
     public void snusnuForEveryOne(DataBase db) {
-        for (Parent[] pair : db.getFamilies()) {
+        for (Person[] pair : db.getFamilies()) {
             snusnuResults(pair);
         }
     }
 
     /* результаты размножения */
-    private void snusnuResults(Parent[] pair) {
+    private void snusnuResults(Person[] pair) {
         int childrenCount = childrenGenerator();
-        Parent parent1 = pair[0];
-        Parent parent2 = pair[1];
+        Person parent1 = pair[0];
+        Person parent2 = pair[1];
         if (childrenCount != 0) {
             for (int i = 1; i <= childrenCount; i++) {
                 createChild(parent1, parent2);
             }
             if (childrenCount > 1) {
-                ArrayList<Parent> children = parent1.getChildren();
-                for (Parent child : children) {
-                    for (Parent member : children) {
+                ArrayList<Person> children = parent1.getChildren();
+                for (Person child : children) {
+                    for (Person member : children) {
                         if (!equals(member, child)) {
                             RelationType type = member.getGender() == MALE ? BROTHER : SISTER;
                             child.addMember(type, member);
@@ -67,7 +67,7 @@ public class Family {
         }
     }
 
-    private boolean equals(Parent obj1, Parent obj2) {
+    private boolean equals(Person obj1, Person obj2) {
         return obj1.hashCode() == obj2.hashCode();
     }
 
@@ -89,9 +89,9 @@ public class Family {
 
 
     /* создаём и везде прописываем дитя */
-    private void createChild(Parent parent1, Parent parent2) {
+    private void createChild(Person parent1, Person parent2) {
 
-        Parent child = new Parent();
+        Person child = new Person();
         switch (parent1.getGender()) {
             // проверяем фамилию
             case MALE -> {
@@ -119,7 +119,7 @@ public class Family {
     /*
     добавляем членов семьи с проверкой
      */
-    private void addFamilyMembers(Parent child, Parent parent1, Parent parent2) {
+    private void addFamilyMembers(Person child, Person parent1, Person parent2) {
         child.addMember(FATHER, parent1);
         if (parent1.checkMember(FATHER)) {
             child.addMember(GRANDFATHER, parent1.getMember(FATHER).get(0));
@@ -135,21 +135,21 @@ public class Family {
 
     /* создаём семью */
     public void createFamilies(DataBase db) {
-        ArrayList<Parent> target;
-        ArrayList<Parent> males = db.getListOf(MALE);
-        ArrayList<Parent> females = db.getListOf(FEMALE);
+        ArrayList<Person> target;
+        ArrayList<Person> males = db.getListOf(MALE);
+        ArrayList<Person> females = db.getListOf(FEMALE);
         if (males.size() > females.size()) {
             target = females;
         } else {
             target = males;
         }
-        for (Parent parent : target) {
+        for (Person parent : target) {
             prepairCouple(parent, db);
         }
     }
 
     /* подготовка */
-    private void prepairCouple(Parent person, DataBase db) {
+    private void prepairCouple(Person person, DataBase db) {
         if (person.getMarigeStatus() != YES) {
             switch (person.getGender()) {
                 case MALE -> marige(person, check(db, FEMALE), db);
@@ -159,9 +159,9 @@ public class Family {
     }
 
     /* подбор людей */
-    private Parent check(DataBase db, Gender state) {
+    private Person check(DataBase db, Gender state) {
         int index = Generator.rand.nextInt(0, db.size());
-        Parent person = db.get(index);
+        Person person = db.get(index);
         if (person.getGender() == state) {
             if (person.getMarigeStatus() == NO) {
                 return person;

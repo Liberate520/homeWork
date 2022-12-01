@@ -1,6 +1,6 @@
 package generator;
 
-import classes.Parent;
+import classes.Person;
 import dataBase.DataBase;
 
 public class GenerationWork {
@@ -31,8 +31,8 @@ public class GenerationWork {
         generation.snusnuForEveryOne(db);
 
         DataBase nextGeneration = new DataBase();
-        for (Parent[] parents : db.getFullFamilies()) {
-            for (Parent child : parents[0].getChildren()) {
+        for (Person[] parents : db.getFullFamilies()) {
+            for (Person child : parents[0].getChildren()) {
                 nextGeneration.add(child);
             }
         }

@@ -2,7 +2,7 @@ package dataBase;
 
 import classes.Gender;
 import classes.Marrige;
-import classes.Parent;
+import classes.Person;
 import generator.Generator;
 
 import java.io.Serializable;
@@ -11,47 +11,47 @@ import java.util.Iterator;
 
 import static tree.RelationType.*;
 
-public class DataBase implements Serializable, Iterable<Parent> {
-    private ArrayList<Parent> db;
-    private ArrayList<Parent[]> familiesList;
+public class DataBase implements Serializable, Iterable<Person> {
+    private ArrayList<Person> db;
+    private ArrayList<Person[]> familiesList;
 
     public void showBase() {
-        for (Parent person : db) {
+        for (Person person : db) {
             person.getInfo();
         }
     }
 
-    public Parent get(int index) {
+    public Person get(int index) {
         return db.get(index);
     }
 
-    public Parent getRandomParent() {
+    public Person getRandomPerson() {
         int index = Generator.rand.nextInt(0, db.size());
-        Parent parent = this.db.get(index);
+        Person parent = this.db.get(index);
         if (!parent.getChildren().isEmpty()) {
             return parent;
         }
-        parent = getRandomParent();
+        parent = getRandomPerson();
         return parent;
     }
 
-    public Parent getRandomChild() {
+    public Person getRandomChild() {
         int index = Generator.rand.nextInt(0, db.size());
-        Parent child = this.db.get(index);
+        Person child = this.db.get(index);
         if (child.getMember(FATHER) != null) {
             return child;
         }
 
-        child = getRandomParent();
+        child = getRandomPerson();
         return child;
     }
 
-    public Parent[] getRandomFamily() {
+    public Person[] getRandomFamily() {
         int index = Generator.rand.nextInt(0, familiesList.size());
         return familiesList.get(index);
     }
 
-    public Parent[] getFamily(int index) {
+    public Person[] getFamily(int index) {
         return familiesList.get(index);
     }
 
@@ -62,9 +62,9 @@ public class DataBase implements Serializable, Iterable<Parent> {
     /*
     возвращает список записей имеющих определённый статус гендера
      */
-    public ArrayList<Parent> getListOf(Gender state) {
-        ArrayList<Parent> results = new ArrayList<>();
-        for (Parent person : db) {
+    public ArrayList<Person> getListOf(Gender state) {
+        ArrayList<Person> results = new ArrayList<>();
+        for (Person person : db) {
             if (person.getGender() == state) {
                 results.add(person);
             }
@@ -72,9 +72,9 @@ public class DataBase implements Serializable, Iterable<Parent> {
         return results;
     }
 
-    public ArrayList<Parent> getListOf(Marrige state) {
-        ArrayList<Parent> results = new ArrayList<>();
-        for (Parent person : db) {
+    public ArrayList<Person> getListOf(Marrige state) {
+        ArrayList<Person> results = new ArrayList<>();
+        for (Person person : db) {
             if (person.getMarigeStatus() == state) {
                 results.add(person);
             }
@@ -82,7 +82,7 @@ public class DataBase implements Serializable, Iterable<Parent> {
         return results;
     }
 
-    public ArrayList<Parent> getDb() {
+    public ArrayList<Person> getDb() {
         return db;
     }
 
@@ -110,34 +110,34 @@ public class DataBase implements Serializable, Iterable<Parent> {
         this.familiesList.addAll(nextGeneration.getFullFamilies());
     }
 
-    public void add(Parent person) {
+    public void add(Person person) {
         db.add(person);
     }
 
     /* Замена человека в базе */
-    public void replace(Parent old, Parent newOne) {
+    public void replace(Person old, Person newOne) {
         db.set(db.indexOf(old), newOne);
     }
 
     /* замена семьи в базе */
-    public void replaceFamily(Parent parent1, Parent parent2, int index) {
-        Parent[] family = {parent1, parent2};
+    public void replaceFamily(Person parent1, Person parent2, int index) {
+        Person[] family = {parent1, parent2};
         familiesList.set(index, family);
     }
 
     /* Индекс семьи */
-    public int getFamilyIndex(Parent[] pair) {
+    public int getFamilyIndex(Person[] pair) {
         return familiesList.indexOf(pair);
     }
 
-    public void addFamily(Parent person, Parent personSec) {
-        Parent[] pair = new Parent[2];
+    public void addFamily(Person person, Person personSec) {
+        Person[] pair = new Person[2];
         pair[0] = person;
         pair[1] = personSec;
         familiesList.add(pair);
     }
 
-    public ArrayList<Parent[]> getFamilies() {
+    public ArrayList<Person[]> getFamilies() {
         return familiesList;
     }
 
@@ -146,9 +146,9 @@ public class DataBase implements Serializable, Iterable<Parent> {
         return familiesList.size();
     }
 
-    public ArrayList<Parent[]> getFullFamilies() {
-        ArrayList<Parent[]> fullFamiliesList = new ArrayList<>();
-        for (Parent[] family : familiesList) {
+    public ArrayList<Person[]> getFullFamilies() {
+        ArrayList<Person[]> fullFamiliesList = new ArrayList<>();
+        for (Person[] family : familiesList) {
             if (family[0] != null) {
                 fullFamiliesList.add(family);
             }
@@ -156,7 +156,7 @@ public class DataBase implements Serializable, Iterable<Parent> {
         return fullFamiliesList;
     }
 
-    public DataBase(ArrayList<Parent> db) {
+    public DataBase(ArrayList<Person> db) {
         this.db = db;
         this.familiesList = new ArrayList<>(2);
     }
