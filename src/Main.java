@@ -23,6 +23,10 @@ public class Main {
                 null,null);
         familyTree1.addHuman(human4);
 
+        Human human5 = new Human("Aidorova",5, TypeOfGender.Female,
+                null,null);
+        familyTree1.addHuman(human5);
+
 
 
         /**
@@ -49,11 +53,29 @@ public class Main {
         output.showAllRelationship(human1);
         output.showAllRelationship(human4);
         output.showAllRelationship(human2);
+        output.showAllRelationship(human5);
+
+        /**
+         * Тестирую сортировку по фамилии(все получилось).
+         */
+
+//        familyTree1.sort();
 
         /**
          * Тестирую итератор.
          */
         output.showAllPerson(familyTree1);
+
+        /**
+         * Тестирую компоратор на сортировку по количеству связей.
+         */
+
+        familyTree1.sortByCountDegree();
+
+        output.showAllPerson(familyTree1);
+
+
+
 
 
 

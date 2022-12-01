@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FamilyTree implements Iterable<ObjectResearcheble> {
     private List<ObjectResearcheble> mainTree;
@@ -21,6 +19,14 @@ public class FamilyTree implements Iterable<ObjectResearcheble> {
     @Override
     public Iterator<ObjectResearcheble> iterator() {
         return mainTree.iterator();
+    }
+
+    public void sort(){
+        Collections.sort(mainTree);
+    }
+
+    public void sortByCountDegree(){
+        Collections.sort(mainTree, new PersonComparatorByCountDegree());
     }
 }
 

@@ -62,6 +62,8 @@ public class Human extends ObjectResearcheble {
         return typeOfGender;
     }
 
+
+
     public void setTypeOfGender(TypeOfGender typeOfGender) {
         this.typeOfGender = typeOfGender;
     }
@@ -96,5 +98,20 @@ public class Human extends ObjectResearcheble {
         return "Human{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+
+
+//    @Override
+//    public int compareTo(Human person) {
+//        return name.compareTo(person.getName());
+//    }
+    @Override
+    public int compareTo(Human person) {
+        return name.compareTo(person.getName());
+    }
+    @Override
+    public int compareTo(ObjectResearcheble o) {
+        return name.compareTo(o.getName());
     }
 }
