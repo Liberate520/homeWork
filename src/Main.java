@@ -1,15 +1,13 @@
-import Model.Child;
-import Model.Human;
-import Model.Parent;
+import Model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        List<Human> people = new ArrayList<Human>();
+    public static void main(String[] args) throws ClassNotFoundException {
+        List<Human> people = new ArrayList<>();
 
-        Child child1 = new Child(Human.male, 4, "Bobby", "Jackson");
+        Child child1 = new Child(Human.male, 14, "Bobby", "Jackson");
         Child child2 = new Child(Human.female, 15, "Marta", "Jackson");
 
         Child child3 = new Child(Human.female, 10, "Anna", "Smith");
@@ -53,6 +51,22 @@ public class Main {
         mom.whoYourChildren();
 
         dad2.whoYourChildren();*/
+        List<Grandchild> grandchildren = new ArrayList<>();
+        Grandchild grandson = new Grandchild(Human.male, 9, "Mike", "Polson");
+        grandchildren.add(grandson);
+        Grandparent grandmother = new Grandparent(Human.female, 65, "Katerina", "Green", grandchildren);
 
+        people.add(grandson);
+        people.add(grandmother);
+
+        Child child4 = new Child(Human.male, 1, "Ted", "Jackson");
+        Parent parent1 = child1.BecomeParent(child4);
+        people.add(child4);
+        people.add(parent1);
+
+        researcher.printAll();
+
+        researcher.whoYourChildren("Ted Jackson");
+        researcher.whoYourChildren("Bobby Jackson"); // two roles for one
     }
 }

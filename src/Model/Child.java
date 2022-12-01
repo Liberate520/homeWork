@@ -1,6 +1,9 @@
 package Model;
 
-public class Child extends Human {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Child extends Human implements JuniorKinsman<Parent, Child> {
     private Parent mother;
     private Parent father;
     public Child(boolean sex, int age, String firstName, String lastName) {
@@ -33,5 +36,15 @@ public class Child extends Human {
             System.out.println("I have no " + parentString);
         else
             System.out.format("My %s is %s\n", parentString, sex == male ? father : mother);
+    }
+
+    public Parent BecomeSenior(Child child) {
+        List<Child> children = new ArrayList<>();
+        children.add(child);
+        return new Parent(this.getSex(), this.getAge(), this.getFirstName(), this.getLastName(), children);
+    }
+
+    public Parent BecomeParent(Child child) {
+        return BecomeSenior(child);
     }
 }
