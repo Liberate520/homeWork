@@ -2,7 +2,6 @@ package analizator;
 
 import classes.Person;
 import dataBase.DataBase;
-import IO.IO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,22 +10,39 @@ import static classes.Gender.*;
 import static classes.Marrige.*;
 
 public class StatWorker implements Serializable {
-    ArrayList<String> stats;
+    private ArrayList<String> stats;
+
+    private final StringBuilder line = new StringBuilder();
+    private final DataBase db;
 
     public StatWorker() {
+        this(new DataBase());
+    }
+
+
+    public StatWorker(DataBase db) {
         this.stats = new ArrayList<>();
+        this.db = db;
+    }
+
+    public ArrayList<String> getStats() {
+        return stats;
+    }
+
+    public StatWorker(ArrayList<String> stats, DataBase db) {
+        this(db);
+        this.stats = stats;
     }
 
     /*
     собирает общую статистику по базе
      */
-    public void getStats(DataBase db) {
-        StringBuilder line = new StringBuilder();
+    public void getDBStats() {
         int married = 0;
         int single = 0;
         int man = 0;
         int woman = 0;
-        for (Person person : db) {
+        for (Person person : this.db) {
             if (person.getMarigeStatus() == YES) {
                 married++;
             } else {
@@ -39,11 +55,11 @@ public class StatWorker implements Serializable {
             }
         }
         line.append("Size of DB = ");
-        line.append(db.getDb().size());
+        line.append(this.db.getDb().size());
         addNclear(line);
 
         line.append("Number of families: ");
-        line.append(db.getFullFamilies().size());
+        line.append(this.db.getFullFamilies().size());
         addNclear(line);
 
         line.append("Number of married people: ");
@@ -71,6 +87,18 @@ public class StatWorker implements Serializable {
         line.delete(0, line.length());
     }
 
+    public void addPosition(String str) {
+        this.line.append(str);
+    }
+
+    public void addPosition(int num) {
+        this.line.append(num);
+    }
+
+    public void push() {
+        addNclear(this.line);
+    }
+
     /*
     собираем строку для сохранения
      */
@@ -82,15 +110,5 @@ public class StatWorker implements Serializable {
             line.append("\n");
         }
         return line.toString();
-    }
-
-    public void save(String path) {
-        IO saver = new IO();
-        saver.toFile(this.stats, path);
-    }
-
-    public void load(String path) {
-        IO loader = new IO();
-        this.stats = (ArrayList<String>) loader.fromFile(path);
     }
 }

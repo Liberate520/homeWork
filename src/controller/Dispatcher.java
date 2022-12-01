@@ -8,6 +8,7 @@ import analizator.TreeAnalizer;
 import dataBase.DataBase;
 import generator.GenerationWork;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Dispatcher {
@@ -15,6 +16,9 @@ public class Dispatcher {
 //        System.out.print("\033[H\033[J");
         Scanner input = new Scanner(System.in);
         DataBase db = new DataBase();
+        GenerationWork Gena;
+        TreeAnalizer analizer;
+        FamilyAnalizer familyAnalizer;
         System.out.println("Type your commands:");
         while (true) {
 //            System.out.print("\033[H\033[J");
@@ -29,13 +33,14 @@ public class Dispatcher {
                     int startPopulation = input.nextInt();
                     System.out.println("How many generations will be?");
                     int generationCount = input.nextInt();
-                    GenerationWork Gena = new GenerationWork(db);
+                    Gena = new GenerationWork(db);
                     Gena.generatePopulation(startPopulation);
                     Gena.startGenerator(generationCount);
+                    System.out.println(Gena.getStats());
                     break;
                 case "children analyze":
 //                    System.out.print("\033[H\033[J");
-                    TreeAnalizer analizer = new TreeAnalizer(db);
+                    analizer = new TreeAnalizer(db);
                     System.out.println("Random parent generated.");
                     System.out.println("Do you want to analyze all generations? (Y/N)");
                     switch (input.next()) {
@@ -65,8 +70,9 @@ public class Dispatcher {
                     break;
                 case "children statistics":
                     System.out.println("\n__________________________________Children statistics_________________________");
-                    FamilyAnalizer familyAnalizer = new FamilyAnalizer(db);
+                    familyAnalizer = new FamilyAnalizer(db);
                     familyAnalizer.getChildrenStatistics();
+                    System.out.println(familyAnalizer.getStats());
                     break;
                 case "show families":
                     System.out.println("\n__________________________________All families________________________________");
@@ -77,21 +83,20 @@ public class Dispatcher {
                     }
                     break;
                 case "people statistics":
-                    StatWorker stats = new StatWorker();
-                    stats.getStats(db);
+                    StatWorker stats = new StatWorker(db);
+                    stats.getDBStats();
                     System.out.printf(stats.toString());
                     break;
                 case "save statistics":
                     String path = "src/dataBase/stats.txt";
-                    stats = new StatWorker();
+                    stats = new StatWorker(db);
                     IO saver = new IO();
                     saver.toFile(stats.toString(), path);
                     break;
                 case "load statistics":
                     path = "src/dataBase/stats.txt";
-                    stats = new StatWorker();
                     IO loader = new IO();
-                    stats.load(path);
+                    stats = new StatWorker((ArrayList<String>) loader.fromFile(path), db);
                     System.out.printf(stats.toString());
                     break;
                 default:

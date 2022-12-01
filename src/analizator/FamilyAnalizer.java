@@ -6,8 +6,14 @@ import dataBase.DataBase;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyAnalizer implements Iterable<Pair>{
-    private ArrayList<Pair> families;
+public class FamilyAnalizer implements Iterable<Pair> {
+    private final ArrayList<Pair> families;
+
+    public String getStats() {
+        return stats;
+    }
+
+    private String stats;
 
     public FamilyAnalizer(DataBase db) {
         ArrayList<Pair> families = new ArrayList<>();
@@ -21,6 +27,7 @@ public class FamilyAnalizer implements Iterable<Pair>{
     статистика по количеству детей на семью
      */
     public void getChildrenStatistics() {
+        StatWorker line = new StatWorker();
         int noChildren = 0;
         int oneChild = 0;
         int twoChildren = 0;
@@ -34,10 +41,19 @@ public class FamilyAnalizer implements Iterable<Pair>{
                 default -> noChildren++;
             }
         }
-        System.out.printf("Families with 0 children - %d\n", noChildren);
-        System.out.printf("Families with 1 children - %d\n", oneChild);
-        System.out.printf("Families with 2 children - %d\n", twoChildren);
-        System.out.printf("Families with 3 children - %d\n", threeChildren);
+        line.addPosition("Families with 0 children - ");
+        line.addPosition(noChildren);
+        line.push();
+        line.addPosition("Families with 1 children - ");
+        line.addPosition(oneChild);
+        line.push();
+        line.addPosition("Families with 2 children - ");
+        line.addPosition(twoChildren);
+        line.push();
+        line.addPosition("Families with 3 children - ");
+        line.addPosition(threeChildren);
+        line.push();
+        this.stats = line.toString();
     }
 
     public void sortByDescendants() {
