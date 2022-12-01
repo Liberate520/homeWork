@@ -91,4 +91,10 @@ public class Human extends ObjectResearcheble {
         this.Mother = nameMother;
     }
 
+    @Override
+    public String toString() {
+        return "Human{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

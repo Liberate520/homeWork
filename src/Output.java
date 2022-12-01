@@ -1,6 +1,9 @@
 import java.util.List;
 
 public class Output {
+
+    String ANSI_GREEN = "\u001B[32m";
+    String ANSI_RESET = "\u001B[0m";
     public void showСhildren(Human arg, List<ObjectResearcheble> array){
         int searchId = arg.getId();
         int count = 0;
@@ -24,8 +27,7 @@ public class Output {
 
     public void showAllRelationship(Human person){
         List<DegreeOfKinship> array = person.getRelationShip();
-        String ANSI_GREEN = "\u001B[32m";
-        String ANSI_RESET = "\u001B[0m";
+
 
         int count = 0;
         System.out.println(ANSI_GREEN + "We are looking for RelationShip from the subject =>" + person.getName()+ ANSI_RESET);
@@ -35,6 +37,13 @@ public class Output {
             System.out.println(String.
                     format("RelationShip № %d - Surname: %s, Degree of kinship: %s ",
                             count, temp.getPerson().getName(),temp.getType()));
+        }
+    }
+
+    public void showAllPerson(FamilyTree familyTree){
+        System.out.println(ANSI_GREEN + "Тестирую итератор:" + ANSI_RESET);
+        for (ObjectResearcheble person:familyTree) {
+            System.out.println(person);
         }
     }
 

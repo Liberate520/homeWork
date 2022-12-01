@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Iterable<ObjectResearcheble> {
     private List<ObjectResearcheble> mainTree;
 
     public FamilyTree() {
@@ -16,4 +17,11 @@ public class FamilyTree {
     public List<ObjectResearcheble> getMainTree() {
         return mainTree;
     }
+
+    @Override
+    public Iterator<ObjectResearcheble> iterator() {
+        return mainTree.iterator();
+    }
 }
+
+

@@ -50,6 +50,12 @@ public class Main {
         output.showAllRelationship(human4);
         output.showAllRelationship(human2);
 
+        /**
+         * Тестирую итератор.
+         */
+        output.showAllPerson(familyTree1);
+
+
 
 
 
