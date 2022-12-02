@@ -1,10 +1,7 @@
 package controller;
 
 import IO.IO;
-import analizator.FamilyAnalizer;
-import analizator.Pair;
-import analizator.StatWorker;
-import analizator.TreeAnalizer;
+import analizator.*;
 import dataBase.DataBase;
 import generator.GenerationWork;
 
@@ -36,7 +33,7 @@ public class Dispatcher {
                     Gena = new GenerationWork(db);
                     Gena.generatePopulation(startPopulation);
                     Gena.startGenerator(generationCount);
-                    System.out.println(Gena.getStats());
+                    System.out.println(Gena.sendStats());
                     break;
                 case "children analyze":
 //                    System.out.print("\033[H\033[J");
@@ -72,7 +69,7 @@ public class Dispatcher {
                     System.out.println("\n__________________________________Children statistics_________________________");
                     familyAnalizer = new FamilyAnalizer(db);
                     familyAnalizer.getChildrenStatistics();
-                    System.out.println(familyAnalizer.getStats());
+                    System.out.println(familyAnalizer.sendStats());
                     break;
                 case "show families":
                     System.out.println("\n__________________________________All families________________________________");

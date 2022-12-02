@@ -6,10 +6,13 @@ import generator.GetRandom;
 
 import static tree.RelationType.*;
 
-public class TreeAnalizer {
+public class TreeAnalizer implements Analizer {
     private final Person testParent;
     private final Person testChild;
     private final Person[] testFamily;
+
+
+    String stats;
 
     public TreeAnalizer(DataBase db) {
         this.testChild = GetRandom.getRandomChild(db);
@@ -91,7 +94,6 @@ public class TreeAnalizer {
         }
     }
 
-
     /*
     показывает всех близких родственников
      */
@@ -103,5 +105,10 @@ public class TreeAnalizer {
             System.out.println();
         }
 
+    }
+
+    @Override
+    public String getStats() {
+        return this.stats;
     }
 }

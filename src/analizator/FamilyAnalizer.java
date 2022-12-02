@@ -6,14 +6,16 @@ import dataBase.DataBase;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyAnalizer implements Iterable<Pair> {
+public class FamilyAnalizer implements Iterable<Pair>, Analizer {
     private final ArrayList<Pair> families;
+    private String stats;
 
+    @Override
     public String getStats() {
         return stats;
     }
 
-    private String stats;
+
 
     public FamilyAnalizer(DataBase db) {
         ArrayList<Pair> families = new ArrayList<>();
@@ -41,17 +43,13 @@ public class FamilyAnalizer implements Iterable<Pair> {
                 default -> noChildren++;
             }
         }
-        line.addPosition("Families with 0 children - ");
-        line.addPosition(noChildren);
+        line.addPosition("Families with 0 children - " + noChildren);
         line.push();
-        line.addPosition("Families with 1 children - ");
-        line.addPosition(oneChild);
+        line.addPosition("Families with 1 children - " + oneChild);
         line.push();
-        line.addPosition("Families with 2 children - ");
-        line.addPosition(twoChildren);
+        line.addPosition("Families with 2 children - " + twoChildren);
         line.push();
-        line.addPosition("Families with 3 children - ");
-        line.addPosition(threeChildren);
+        line.addPosition("Families with 3 children - " + threeChildren);
         line.push();
         this.stats = line.toString();
     }
@@ -64,4 +62,5 @@ public class FamilyAnalizer implements Iterable<Pair> {
     public Iterator<Pair> iterator() {
         return new FamiliesIterator(families);
     }
+
 }

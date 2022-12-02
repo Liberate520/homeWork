@@ -1,12 +1,15 @@
 package generator;
 
+import analizator.Analizer;
 import analizator.StatWorker;
 import classes.Person;
 import dataBase.DataBase;
 
-public class GenerationWork {
+public class GenerationWork implements Analizer {
     private final DataBase mainDb;
 
+
+    @Override
     public String getStats() {
         return this.stats;
     }
@@ -48,21 +51,14 @@ public class GenerationWork {
         this.mainDb.includeDB(nextGeneration);
         this.mainDb.includeFamilies(db);
         this.generationCount++;
-        line.addPosition("Current generation: ");
-        line.addPosition(generationCount);
-        line.addPosition(". Population: ");
-        line.addPosition(mainDb.size());
+        line.addPosition("Current generation: " + generationCount + ". Population: " + mainDb.size());
         line.push();
-        line.addPosition("Families with children: ");
-        line.addPosition(db.getFullFamilies().size());
-        line.addPosition(", general: ");
-        line.addPosition(mainDb.getFamiliesNumber());
+        line.addPosition("Families with children: " + db.getFullFamilies().size() + ", general: " + mainDb.getFamiliesNumber());
         line.push();
-        line.addPosition("Children: ");
-        line.addPosition(nextGeneration.size());
-        line.addPosition("\n");
+        line.addPosition("Children: " + nextGeneration.size() + "\n");
         line.push();
         this.stats = line.toString();
+
         if (generationCount == count) {
             return;
         }
