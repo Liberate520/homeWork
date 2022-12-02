@@ -1,12 +1,12 @@
-package classes;
+package service.classes;
 
-import tree.FamilyTree;
-import tree.Relation;
+import service.tree.FamilyTree;
+import service.tree.Relation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static tree.RelationType.*;
+import static service.tree.RelationType.*;
 
 public class Person extends Human implements Relation, Serializable {
 

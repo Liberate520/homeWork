@@ -1,6 +1,6 @@
-package generator;
+package service.generator;
 
-import classes.Person;
+import service.classes.Person;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,9 +12,9 @@ public class Generator {
      * файлы со списками имён
      */
     public static Random rand = new Random();
-    private static final String maleNames = "src/generator/MaleNames.txt";
-    private static final String femaleNames = "src/generator/FemaleNames.txt";
-    private static final String familyNames = "src/generator/FamilyNames.txt";
+    private static final String maleNames = "src/service/generator/MaleNames.txt";
+    private static final String femaleNames = "src/service/generator/FemaleNames.txt";
+    private static final String familyNames = "src/service/generator/FamilyNames.txt";
 
     /**
      * сам генератор с проверками на гендер

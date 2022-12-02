@@ -1,7 +1,7 @@
-package analizator;
+package service.analizator;
 
-import classes.Person;
-import dataBase.DataBase;
+import service.classes.Person;
+import service.dataBase.DataBase;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,14 +43,10 @@ public class FamilyAnalizer implements Iterable<Pair>, Analizer {
                 default -> noChildren++;
             }
         }
-        line.addPosition("Families with 0 children - " + noChildren);
-        line.push();
-        line.addPosition("Families with 1 children - " + oneChild);
-        line.push();
-        line.addPosition("Families with 2 children - " + twoChildren);
-        line.push();
-        line.addPosition("Families with 3 children - " + threeChildren);
-        line.push();
+        line.addPosition("Families with 0 children - " + noChildren + "\n");
+        line.addPosition("Families with 1 children - " + oneChild + "\n");
+        line.addPosition("Families with 2 children - " + twoChildren + "\n");
+        line.addPosition("Families with 3 children - " + threeChildren + "\n");
         this.stats = line.toString();
     }
 

@@ -1,15 +1,15 @@
-package dataBase;
+package service.dataBase;
 
-import classes.Gender;
-import classes.Marrige;
-import classes.Person;
-import generator.Generator;
+import service.classes.Gender;
+import service.classes.Marrige;
+import service.classes.Person;
+import service.generator.Generator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static tree.RelationType.*;
+import static service.tree.RelationType.*;
 
 public class DataBase implements Serializable, Iterable<Person> {
     private ArrayList<Person> db;

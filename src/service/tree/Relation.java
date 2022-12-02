@@ -1,8 +1,9 @@
-package tree;
+package service.tree;
 
-import classes.Person;
+import service.classes.Person;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface Relation {
     default void addMember(RelationType type, Person person) {
@@ -28,6 +29,10 @@ public interface Relation {
 
     default void showFamily() {
         getTree().showTree();
+    }
+
+    default HashMap<RelationType, ArrayList<Person>> getFamily() {
+        return getTree().getTree();
     }
 
     void showChildren();

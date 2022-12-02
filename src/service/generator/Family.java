@@ -1,15 +1,15 @@
-package generator;
+package service.generator;
 
-import classes.Gender;
-import classes.Person;
-import dataBase.DataBase;
-import tree.RelationType;
+import service.classes.Gender;
+import service.classes.Person;
+import service.dataBase.DataBase;
+import service.tree.RelationType;
 
 import java.util.ArrayList;
 
-import static tree.RelationType.*;
-import static classes.Gender.*;
-import static classes.Marrige.*;
+import static service.tree.RelationType.*;
+import static service.classes.Gender.*;
+import static service.classes.Marrige.*;
 
 public class Family {
     /**

@@ -1,6 +1,6 @@
-package analizator;
+package service.analizator;
 
-import classes.Person;
+import service.classes.Person;
 
 public class Pair{
     private final Person[] pair;

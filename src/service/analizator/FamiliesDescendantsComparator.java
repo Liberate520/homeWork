@@ -1,4 +1,4 @@
-package analizator;
+package service.analizator;
 
 import java.util.Comparator;
 

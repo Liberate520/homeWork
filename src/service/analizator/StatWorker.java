@@ -1,13 +1,13 @@
-package analizator;
+package service.analizator;
 
-import classes.Person;
-import dataBase.DataBase;
+import service.classes.Person;
+import service.dataBase.DataBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static classes.Gender.*;
-import static classes.Marrige.*;
+import static service.classes.Gender.*;
+import static service.classes.Marrige.*;
 
 public class StatWorker implements Serializable {
     private ArrayList<String> stats;
@@ -54,28 +54,22 @@ public class StatWorker implements Serializable {
                 woman++;
             }
         }
-        line.append("Size of DB = ");
-        line.append(this.db.getDb().size());
+        line.append("Size of DB = ").append(this.db.getDb().size()).append("\n");
         addNclear(line);
 
-        line.append("Number of families: ");
-        line.append(this.db.getFullFamilies().size());
+        line.append("Number of families: ").append(this.db.getFullFamilies().size()).append("\n");
         addNclear(line);
 
-        line.append("Number of married people: ");
-        line.append(married);
+        line.append("Number of married people: ").append(married).append("\n");
         addNclear(line);
 
-        line.append("Number of single people: ");
-        line.append(single);
+        line.append("Number of single people: ").append(single).append("\n");
         addNclear(line);
 
-        line.append("Number of man: ");
-        line.append(man);
+        line.append("Number of man: ").append(man).append("\n");
         addNclear(line);
 
-        line.append("Number of woman: ");
-        line.append(woman);
+        line.append("Number of woman: ").append(woman).append("\n");
         addNclear(line);
     }
 
@@ -89,15 +83,13 @@ public class StatWorker implements Serializable {
 
     public void addPosition(String str) {
         this.line.append(str);
+        addNclear(line);
     }
 
     public void addPosition(int num) {
         this.line.append(num);
     }
 
-    public void push() {
-        addNclear(this.line);
-    }
 
     /*
     собираем строку для сохранения
@@ -107,7 +99,7 @@ public class StatWorker implements Serializable {
         StringBuilder line = new StringBuilder();
         for (String string : stats) {
             line.append(string);
-            line.append("\n");
+//            line.append("\n");
         }
         return line.toString();
     }

@@ -1,6 +1,6 @@
-package dataBase;
+package service.dataBase;
 
-import classes.Person;
+import service.classes.Person;
 
 import java.util.ArrayList;
 import java.util.Iterator;

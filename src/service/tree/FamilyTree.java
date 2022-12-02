@@ -1,6 +1,6 @@
-package tree;
+package service.tree;
 
-import classes.Person;
+import service.classes.Person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ public class FamilyTree implements Serializable {
         this.tree.put(type, values);
     }
 
-    public boolean checkMember(RelationType type){
+    public boolean checkMember(RelationType type) {
         return this.tree.containsKey(type);
     }
 
-    public void showMember(RelationType type){
-        for (Person person: this.tree.get(type)) {
+    public void showMember(RelationType type) {
+        for (Person person : this.tree.get(type)) {
             System.out.printf("%s:\n", type);
             person.getInfo();
         }
@@ -47,6 +47,10 @@ public class FamilyTree implements Serializable {
             System.out.printf("%s:\n", item.getKey());
             item.getValue().get(0).getInfo();
         }
+    }
+
+    public HashMap<RelationType, ArrayList<Person>> getTree() {
+        return this.tree;
     }
 
     public ArrayList<Person> getMember(RelationType type) {

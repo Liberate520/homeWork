@@ -1,9 +1,9 @@
-package generator;
+package service.generator;
 
-import analizator.Analizer;
-import analizator.StatWorker;
-import classes.Person;
-import dataBase.DataBase;
+import service.analizator.Analizer;
+import service.analizator.StatWorker;
+import service.classes.Person;
+import service.dataBase.DataBase;
 
 public class GenerationWork implements Analizer {
     private final DataBase mainDb;
@@ -51,12 +51,11 @@ public class GenerationWork implements Analizer {
         this.mainDb.includeDB(nextGeneration);
         this.mainDb.includeFamilies(db);
         this.generationCount++;
-        line.addPosition("Current generation: " + generationCount + ". Population: " + mainDb.size());
-        line.push();
-        line.addPosition("Families with children: " + db.getFullFamilies().size() + ", general: " + mainDb.getFamiliesNumber());
-        line.push();
-        line.addPosition("Children: " + nextGeneration.size() + "\n");
-        line.push();
+        line.addPosition("Current generation: " + generationCount
+                + ". Population: " + mainDb.size() + "\n");
+        line.addPosition("Families with children: " + db.getFullFamilies().size()
+                + ", general: " + mainDb.getFamiliesNumber() + "\n");
+        line.addPosition("Children: " + nextGeneration.size() + "\n" + "\n");
         this.stats = line.toString();
 
         if (generationCount == count) {

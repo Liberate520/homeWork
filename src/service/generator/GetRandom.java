@@ -1,7 +1,7 @@
-package generator;
+package service.generator;
 
-import classes.Person;
-import dataBase.DataBase;
+import service.classes.Person;
+import service.dataBase.DataBase;
 
 public class GetRandom {
     public static Person getRandomParent(DataBase db) {
