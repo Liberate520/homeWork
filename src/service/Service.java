@@ -6,6 +6,7 @@ import service.analizator.FamilyAnalizer;
 import service.analizator.Pair;
 import service.analizator.StatWorker;
 import service.analizator.TreeAnalizer;
+import service.classes.Person;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
 
@@ -93,14 +94,14 @@ public class Service {
                 sentToPrint(stats.toString());
                 break;
             case "save statistics":
-                String path = "src/service.dataBase/stats.txt";
+                String path = "src/service/dataBase/stats.txt";
                 stats = new StatWorker(db);
                 IO saver = new IO();
                 stats.getDBStats();
                 saver.toFile(stats.toString(), path);
                 break;
             case "load statistics":
-                path = "src/service.dataBase/stats.txt";
+                path = "src/service/dataBase/stats.txt";
                 IO loader = new IO();
                 stats = new StatWorker((ArrayList<String>) loader.fromFile(path), db);
                 sentToPrint(stats.toString());
