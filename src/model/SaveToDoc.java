@@ -1,9 +1,11 @@
+package model;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 
-public class SaveToDoc extends SaveTo {
+public class SaveToDoc implements Saveable {
 
     private File file = new File("321.doc");
     

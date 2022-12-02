@@ -1,8 +1,10 @@
+package model;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
 
-public class SaveToTxt extends SaveTo {
+public class SaveToTxt implements Saveable {
 
     private String path = "123.txt";
     
