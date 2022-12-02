@@ -6,7 +6,6 @@ import service.analizator.FamilyAnalizer;
 import service.analizator.Pair;
 import service.analizator.StatWorker;
 import service.analizator.TreeAnalizer;
-import service.classes.Person;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
 
