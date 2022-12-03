@@ -1,5 +1,5 @@
 public interface Printable {
-    public String toPrint();
+    public String toString();
 
     Printable getMom();
 

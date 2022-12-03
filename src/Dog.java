@@ -4,7 +4,7 @@ public class Dog extends Animal {
     private Dog dad;
     private int breed;
 
-    public Dog(String name, int breed, Dog mom, Dog dad) {
+    public Dog(String name,int breed, Dog mom, Dog dad) {
         this.name = name;
         this.mom = mom;
         this.dad = dad;
@@ -47,8 +47,8 @@ public class Dog extends Animal {
         this.dad = dad;
     }
 
-//        public String toPrint(){
-//                return "name:" + name + ", breed:" +
-//                        ", mom:" + mom + ", dad:" + dad;
-//        }
+        public String toString(){
+                return "name:" + name + ", breed:" +
+                        ", mom:" + mom + ", dad:" + dad;
+        }
 }

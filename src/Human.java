@@ -1,4 +1,4 @@
-public class Human {
+public class Human implements Printable{
     private String name;
     private Human mom;
     private Human dad;
@@ -40,7 +40,7 @@ public class Human {
 
 
 
-    public String toPrint() {
+    public String toString() {
         return "name:" + name + ", mom:" + mom + ", dad:" + dad;
     }
 
