@@ -3,7 +3,7 @@
  * будет использоваться для случаев иерархии дерева (родители-потомки)
  * Например любая класификация, которая содержит подкласификацию.
  */
-public interface function_tree {
+public interface function_tree <T> {
     void printTree(); //вывод дерева
     void printChildren(String Name); //вывод всех детей родителя (вывод всех детей узла)
 }

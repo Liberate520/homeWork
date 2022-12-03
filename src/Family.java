@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class Family implements function_tree{
+public class Family implements function_tree<Person>{
     public Person nowPerson = null; //текущий человек(узел дерева)
 
     public Family(String name, char gender) {
