@@ -1,3 +1,3 @@
 public enum TypeCommunications {
-    отец, мать, ребенок, брат, сестра, муж, жена
+    father, mother, child, brother, sister, husband, wife // отец, мать, ребенок, брат, сестра, муж, жена
 }

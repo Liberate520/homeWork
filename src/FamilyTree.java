@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class FamilyTree implements MethodsWorking{
+public class FamilyTree<T> implements MethodsWorking{
 
     private static int id = 1;
-    private ArrayList<Human> treeHuman = new ArrayList<Human>();
+    private ArrayList<T> treeHuman = new ArrayList<T>();
 
     public static int getId() {
         return id;
@@ -13,29 +13,29 @@ public class FamilyTree implements MethodsWorking{
         FamilyTree.id = id;
     }
 
-    public ArrayList<Human> getTreeHuman() {
+    public ArrayList<T> getTreeHuman() {
         return treeHuman;
     }
-    public void setTreeHuman(ArrayList<Human> treeHuman) {
+    public void setTreeHuman(ArrayList<T> treeHuman) {
         this.treeHuman = treeHuman;
     }
 
-    public void setTreeHuman(Human treeHuman) {
+    public void setTreeHuman(T treeHuman) {
         this.treeHuman.add(treeHuman);
     }
 
     // вывод в виде дерева
-    public void preOrder(Human tree, String space) {
+    public void preOrder(T tree, String space) {
         if (tree != null)
-            System.out.println(space + tree.getName());
+            System.out.println(space + ((Human)tree).getName());
         else {
             System.out.println(space + "nil");
             return;
         }
 
-        for (int i = 0; i < tree.getSon().size(); i++){
-            if (tree.getSon().get(i).getH2() != null && tree.getSon().get(i).getH2().getId() > tree.getId()) {
-                preOrder(tree.getSon().get(i).getH2(), space + "  ");
+        for (int i = 0; i < ((Human)tree).getSon().size(); i++){
+            if (((Human)tree).getSon().get(i).getH2() != null && ((Human)tree).getSon().get(i).getH2().getId() > ((Human)tree).getId()) {
+                preOrder((T) ((Human)tree).getSon().get(i).getH2(), space + "  ");
             }else{return;}
         }
     }
