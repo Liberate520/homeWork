@@ -2,6 +2,9 @@ package service.analizator;
 
 import service.classes.Person;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Pair{
     private final Person[] pair;
     private int descendants = 0;
@@ -35,5 +38,20 @@ public class Pair{
         for (Person child : person.getChildren()) {
             descendantsCount(child);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pair pair1 = (Pair) o;
+        return descendants == pair1.descendants && Arrays.equals(pair, pair1.pair);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(descendants);
+        result = 31 * result + Arrays.hashCode(pair);
+        return result;
     }
 }

@@ -5,11 +5,11 @@ import service.classes.Person;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ParentIterator implements Iterator<Person> {
+public class DataBaseIterator implements Iterator<Person> {
     int index;
     ArrayList<Person> db;
 
-public ParentIterator(ArrayList<Person> db){
+public DataBaseIterator(ArrayList<Person> db){
     this.db = db;
     this.index = 0;
 }

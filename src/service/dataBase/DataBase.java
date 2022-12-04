@@ -166,7 +166,7 @@ public class DataBase implements Serializable, Iterable<Person> {
     }
 
     @Override
-    public Iterator iterator() {
-        return new ParentIterator(this.db);
+    public Iterator<Person> iterator() {
+        return new DataBaseIterator(this.db);
     }
 }

@@ -1,5 +1,7 @@
 package service.classes;
 
+import java.util.Objects;
+
 public class Human {
 
     protected String name;
@@ -64,5 +66,18 @@ public class Human {
     public String toString() {
         return String.format("Name: %12s, Family_name: %12s, Gender: %7s, Married: %5s\n", name, familyname, gender,
                 marigeStatus);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return name.equals(human.name) && familyname.equals(human.familyname) && gender == human.gender && marigeStatus == human.marigeStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, familyname, gender, marigeStatus);
     }
 }

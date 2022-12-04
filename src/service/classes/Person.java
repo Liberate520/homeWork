@@ -6,7 +6,8 @@ import service.tree.Relation;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static service.tree.RelationType.*;
+import static service.tree.RelationType.DAUGHTER;
+import static service.tree.RelationType.SON;
 
 public class Person extends Human implements Relation, Serializable {
 
