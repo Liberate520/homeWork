@@ -1,27 +1,27 @@
-package human;
+package Human;
 
 import java.util.ArrayList;
 //поиск и отображение детей
 public class Human {
     private String name;
     private int age;
-    private Human perent1;
-    private Human perent2;
+    private Human parent1;
+    private Human parent2;
     private ArrayList<Human> children = new ArrayList();
-    public void setPerent1(Human perent1) {
-        this.perent1 = perent1;
+    public void setParent1(Human parent1) {
+        this.parent1 = parent1;
     }
-    public void setPerent2(Human perent2) {
-        this.perent2 = perent2;
+    public void setParent2(Human parent2) {
+        this.parent2 = parent2;
     }
     public void setChildren(ArrayList<Human> children) {
         this.children = children;
     }
-    public Human getPerent1() {
-        return perent1;
+    public Human getParent1() {
+        return parent1;
     }
-    public Human getPerent2() {
-        return perent2;
+    public Human getParent2() {
+        return parent2;
     }
     public ArrayList<Human> getChildren() {
         return children;
@@ -62,15 +62,15 @@ public class Human {
     @Override
     public String toString() {
         String result = "Имя: " + name + " Возраст: " + age ;
-        if (perent1 != null){
-            result += " Родитель 1: " + perent1.name;
+        if (parent1 != null){
+            result += "\n" + "  Родитель 1: " + parent1.name;
         }
-        if (perent2 != null){
-            result += " Родитель 2: " + perent2.name;
+        if (parent2 != null){
+            result += "\n" +"  Родитель 2: " + parent2.name;
         }
         if (getChildren().size()>0){
             for (int i = 0; i < getChildren().size(); i++) {
-                result +=  " Ребенок " + (i+1) +": " + getChildren().get(i).name;
+                result += "\n" + "  Ребенок " + (i+1) +": " + getChildren().get(i).name;
             }
         }
         return result;
