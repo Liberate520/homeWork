@@ -1,6 +1,6 @@
-package Tree1;
+package Tree1.Pet;
 
-public class Cat extends Pet{
+public class Cat extends Pet {
     /**
      * Класс для создания экземпляров кошек. Имеет переопределенный метод описывающий реакцию отзыва в
      * соответствии с типом.
@@ -10,7 +10,7 @@ public class Cat extends Pet{
     }
 
     @Override
-    public void respond() {
+    public void Respond() {
         System.out.println("meow-meow-meow");
     }
 

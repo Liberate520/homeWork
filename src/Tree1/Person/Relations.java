@@ -1,4 +1,4 @@
-package Tree1;
+package Tree1.Person;
 public enum Relations {
     /**
      * Relation класс ENUM, для описания вида родственных связей.

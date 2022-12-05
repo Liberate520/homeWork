@@ -1,4 +1,4 @@
-package Tree1;
+package Tree1.Pet;
 
 public enum Gender {
     /**

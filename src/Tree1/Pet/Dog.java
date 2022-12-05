@@ -1,6 +1,6 @@
-package Tree1;
+package Tree1.Pet;
 
-public class Dog extends Pet{
+public class Dog extends Pet {
     /**
      * Класс для создания экземпляров собак. Имеет переопределенный метод
      * описывающий реакцию отзыва в соответствии с типом.
@@ -11,7 +11,7 @@ public class Dog extends Pet{
     }
 
     @Override
-    public void respond() {
+    public void Respond() {
         System.out.println("woof-woof-woof");
     }
 

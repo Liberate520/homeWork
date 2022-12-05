@@ -1,4 +1,4 @@
-package Tree1;
+package Tree1.Pet;
 
 abstract public class Pet {
     /**
@@ -23,7 +23,7 @@ abstract public class Pet {
         return age;
     }
 
-    abstract public void respond();
+    abstract public void Respond();
 
     @Override
     public String toString() {

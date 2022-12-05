@@ -1,4 +1,4 @@
-package Tree1;
+package Tree1.Person;
 
 public class Person extends Communications {
     /**

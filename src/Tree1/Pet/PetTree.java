@@ -1,26 +1,26 @@
-package Tree1;
+package Tree1.Pet;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetTree {
+public class PetTree<T> {
     /**
      * Класс хранящий список животных. Имеет сеттер и геттер.
      */
-    private final List<Pet> tree = new ArrayList<>();
+    private final List<T> tree = new ArrayList<>();
 
-    public List<Pet> getTree() {
+    public List<T> getTree() {
         return tree;
     }
 
-    public void add(Pet pet){
+    public void add(T pet){
         tree.add(pet);
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (Pet el:tree){
+        for (T el:tree){
             str.append(el.toString()).append("\n");
         }
         return str.toString();

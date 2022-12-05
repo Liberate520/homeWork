@@ -1,4 +1,6 @@
-package Tree1;
+package Tree1.Pet;
+
+import Tree1.Person.Person;
 
 public class DogLover extends Person implements CallPet {
     /**
@@ -17,7 +19,7 @@ public class DogLover extends Person implements CallPet {
 
         if(pet instanceof Dog){
             System.out.printf("%s call %s with a whistle, and it wags its tail and say:\n",super.getName(),pet.getNickName());
-            pet.respond();
+            pet.Respond();
         }
     }
 }

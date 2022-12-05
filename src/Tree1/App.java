@@ -8,13 +8,16 @@
 package Tree1;
 
 
+import Tree1.Person.*;
+import Tree1.Pet.*;
+
 public class App {
     /**
      * Тело программы.
      *  В нем созданы несколько личностей, назначены им родственные связи и приведен вызов функций исследования.
      */
     public static void main(String[] args) {
-        PersonTree peoples = new PersonTree();
+        PersonTree<Person> peoples = new PersonTree<>();
         peoples.add(new DogLover("Valetov Vasiliy Innokentievich", 82));
         peoples.add(new CatLover("Voynash Tamara Vasilevna", 56));
         peoples.add(new DogLover("Valetova Elena Petrovna", 79));
@@ -35,7 +38,7 @@ public class App {
 
         System.out.println("List of persons:\n" + peoples + "\n");
 
-        PetTree pets = new PetTree();
+        PetTree<Pet> pets = new PetTree<>();
         pets.add(new Cat("Nusha",9));
         pets.add(new Cat("Marik",7));
         pets.add(new Dog("Druzok",12));

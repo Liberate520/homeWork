@@ -1,4 +1,6 @@
-package Tree1;
+package Tree1.Person;
+
+import Tree1.Pet.*;
 
 import java.util.List;
 
