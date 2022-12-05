@@ -16,7 +16,7 @@ public class App {
      *  В нем созданы несколько личностей, назначены им родственные связи и приведен вызов функций исследования.
      */
     public static void main(String[] args) {
-        PersonTree peoples = new PersonTree();
+        PersonTree<Person> peoples = new PersonTree<>();
         peoples.add(new DogLover("Gikramin Artur Maratovich", 28));
         peoples.add(new CatLover("Dytlova Tatiana Alexandrovna", 19));
         peoples.add(new CatLover("Gikramina Nailiy Maratovna", 25));
@@ -36,7 +36,7 @@ public class App {
 
         System.out.println("List of persons:\n" + peoples + "\n");
 
-        PetTree pets = new PetTree();
+        PetTree<Pet> pets = new PetTree<>();
         pets.add(new Cat("Selivestor",14));
         pets.add(new Cat("Timon",2));
         pets.add(new Dog("Baron",15));
