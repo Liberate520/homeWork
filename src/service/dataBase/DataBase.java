@@ -7,13 +7,24 @@ import service.generator.Generator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import static service.tree.RelationType.*;
 
 public class DataBase implements Serializable, Iterable<Person> {
-    private ArrayList<Person> db;
-    private ArrayList<Person[]> familiesList;
+    private final ArrayList<Person> db;
+    private final ArrayList<Person[]> familiesList;
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    Date creationDate;
 
     public void showBase() {
         for (Person person : db) {
