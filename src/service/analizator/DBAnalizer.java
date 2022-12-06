@@ -22,7 +22,7 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
         line.addPosition("\n__________________________________DataBase statistics_________________________\n");
         this.getDBStats();
         this.getChildrenStatistics();
-
+        this.getFamiliesStatistics();
         this.stats = line.toString();
     }
 
@@ -47,15 +47,15 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
             }
         }
         line.addPosition("Size of DB = " + this.db.getDb().size() + "\n");
-        line.addPosition("Number of families: " + this.db.getFullFamilies().size() + "\n");
+        line.addPosition("Number of full families: " + this.db.getFullFamilies().size() + "\n");
         line.addPosition("Number of married people: " + married + "\n");
         line.addPosition("Number of single people: " + single + "\n");
         line.addPosition("Number of man: " + man + "\n");
-        line.addPosition("Number of woman: " + woman + "\n");
+        line.addPosition("Number of woman: " + woman + "\n" + "\n");
     }
 
     /*
-    статистика по количеству детей на семьях
+    статистика по количеству детей в семьях
      */
     public void getChildrenStatistics() {
         int noChildren = 0;
@@ -74,13 +74,60 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
         line.addPosition("Families with 0 children - " + noChildren + "\n");
         line.addPosition("Families with 1 children - " + oneChild + "\n");
         line.addPosition("Families with 2 children - " + twoChildren + "\n");
-        line.addPosition("Families with 3 children - " + threeChildren + "\n");
+        line.addPosition("Families with 3 children - " + threeChildren + "\n" + "\n");
+    }
+
+    /*
+    статистика по количеству потомков в семьях
+     */
+    public void getFamiliesStatistics() {
+        this.sortByDescendants();
+        int maxCount = families.get(families.size() - 1).getDescendants();
+        int level75 = (maxCount * 3) / 4;
+        int level50 = maxCount / 2;
+        int level25 = maxCount / 4;
+        int count75 = 0;
+        int count50 = 0;
+        int count25 = 0;
+        int count0 = 0;
+        int noCount = 0;
+        for (Pair pair : families) {
+            int count = pair.getDescendants();
+            if (count >= level75) {
+                count75++;
+                continue;
+            }
+            if (count >= level50) {
+                count50++;
+                continue;
+            }
+            if (count >= level25) {
+                count25++;
+                continue;
+            }
+            if (count > 0) {
+                count0++;
+                continue;
+            }
+            noCount++;
+        }
+        line.addPosition("Biggest number of descendants: " + maxCount + "\n");
+        line.addPosition("Number of families with descendants level N:\n");
+        line.addPosition("max> N >75% - " + count75 + "\n");
+        line.addPosition("75%> N >50% - " + count50 + "\n");
+        line.addPosition("50%> N >25% - " + count25 + "\n");
+        line.addPosition("25%> N >0%  - " + count0 + "\n");
+        line.addPosition("No children - " + noCount + "\n" + "\n");
     }
 
 
     @Override
     public String getStats() {
         return this.stats;
+    }
+
+    public void sortByDescendants() {
+        families.sort(new FamiliesDescendantsComparator());
     }
 
     @Override

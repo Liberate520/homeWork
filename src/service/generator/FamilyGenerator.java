@@ -6,37 +6,15 @@ import service.dataBase.DBHandler;
 
 import java.util.ArrayList;
 
-import static service.classes.Gender.*;
-import static service.classes.Marrige.*;
+import static service.classes.Gender.FEMALE;
+import static service.classes.Gender.MALE;
+import static service.classes.Marrige.NO;
+import static service.classes.Marrige.YES;
 import static service.tree.RelationType.HUSBAND;
 import static service.tree.RelationType.WIFE;
 
 public class FamilyGenerator {
-    /**
-     * создание семьи
-     *
-     * @param person    - первый человек
-     * @param personSec - второй человек
-     * @param db        - база данных
-     */
-    private void marige(Person person, Person personSec, DBHandler db) {
-        switch (person.getGender()) {
-            case MALE -> {
-                personSec.setFamilyname(person.getFamilyname());
-                person.addMember(WIFE, personSec);
-                personSec.addMember(HUSBAND, person);
-            }
-            case FEMALE -> {
-                person.setFamilyname(personSec.getFamilyname());
-                person.addMember(HUSBAND, personSec);
-                personSec.addMember(WIFE, person);
-            }
-        }
-        Person[] pair = {person, personSec};
-        db.addFamily(pair);
-        person.setMarigeStatus(YES);
-        personSec.setMarigeStatus(YES);
-    }
+
 
     /* создаём семью */
     public void createFamilies(DBHandler db) {
@@ -73,5 +51,31 @@ public class FamilyGenerator {
         }
         person = check(db, state);
         return person;
+    }
+
+    /**
+     * создание семьи
+     *
+     * @param person    - первый человек
+     * @param personSec - второй человек
+     * @param db        - база данных
+     */
+    private void marige(Person person, Person personSec, DBHandler db) {
+        switch (person.getGender()) {
+            case MALE -> {
+                personSec.setFamilyname(person.getFamilyname());
+                person.addMember(WIFE, personSec);
+                personSec.addMember(HUSBAND, person);
+            }
+            case FEMALE -> {
+                person.setFamilyname(personSec.getFamilyname());
+                person.addMember(HUSBAND, personSec);
+                personSec.addMember(WIFE, person);
+            }
+        }
+        Person[] pair = {person, personSec};
+        db.addFamily(pair);
+        person.setMarigeStatus(YES);
+        personSec.setMarigeStatus(YES);
     }
 }

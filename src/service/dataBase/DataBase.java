@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import static service.tree.RelationType.*;
+
 public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     private final ArrayList<Person> db;
     private final ArrayList<Person[]> familiesList;
@@ -103,28 +105,28 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         db.add(person);
     }
 
-    /* Замена человека в базе */
-    public void replace(Person old, Person newOne) {
-        db.set(db.indexOf(old), newOne);
-    }
-
-    /* замена семьи в базе */
-    public void replaceFamily(Person parent1, Person parent2, int index) {
-        Person[] family = {parent1, parent2};
-        familiesList.set(index, family);
-    }
+//    /* Замена человека в базе */
+//    public void replace(Person old, Person newOne) {
+//        db.set(db.indexOf(old), newOne);
+//    }
+//
+//    /* замена семьи в базе */
+//    public void replaceFamily(Person parent1, Person parent2, int index) {
+//        Person[] family = {parent1, parent2};
+//        familiesList.set(index, family);
+//    }
 
     /* Индекс семьи */
-    public int getFamilyIndex(Person[] pair) {
-        return familiesList.indexOf(pair);
-    }
-
-    public void addFamily(Person person, Person personSec) {
-        Person[] pair = new Person[2];
-        pair[0] = person;
-        pair[1] = personSec;
-        familiesList.add(pair);
-    }
+//    public int getFamilyIndex(Person[] pair) {
+//        return familiesList.indexOf(pair);
+//    }
+//
+//    public void addFamily(Person person, Person personSec) {
+//        Person[] pair = new Person[2];
+//        pair[0] = person;
+//        pair[1] = personSec;
+//        familiesList.add(pair);
+//    }
 
     public ArrayList<Person[]> getFamilies() {
         return familiesList;
@@ -138,7 +140,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     public ArrayList<Person[]> getFullFamilies() {
         ArrayList<Person[]> fullFamiliesList = new ArrayList<>();
         for (Person[] family : familiesList) {
-            if (family[0] != null) {
+            if (family[0].checkMember(SON) || family[0].checkMember(DAUGHTER)) {
                 fullFamiliesList.add(family);
             }
         }
@@ -149,7 +151,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     public void addFamily(Person[] family) {
         familiesList.add(family);
     }
-
 
     public DataBase(ArrayList<Person> db) {
         this.db = db;

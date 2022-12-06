@@ -6,9 +6,7 @@
 //import java.util.ArrayList;
 //import java.util.Iterator;
 //
-//public class FamilyAnalizer implements Iterable<Pair>, Analizer {
-//    private final ArrayList<Pair> families;
-//    private String stats;
+//public class FamilyAnalizer extends PersonAnalizer{
 //
 //    @Override
 //    public void analyze() {
@@ -22,12 +20,8 @@
 //
 //
 //
-//    public FamilyAnalizer(DBHandler db) {
-//        ArrayList<Pair> families = new ArrayList<>();
-//        for (Person[] family : db.getFamilies()) {
-//            families.add(new Pair(family));
-//        }
-//        this.families = families;
+//    public FamilyAnalizer(Person person) {
+//        super(person);
 //    }
 //
 //    /*
@@ -55,13 +49,6 @@
 //        this.stats = line.toString();
 //    }
 //
-//    public void sortByDescendants() {
-//        families.sort(new FamiliesDescendantsComparator());
-//    }
 //
-//    @Override
-//    public Iterator<Pair> iterator() {
-//        return new PairIterator(families);
-//    }
 //
 //}

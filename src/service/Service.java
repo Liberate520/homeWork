@@ -3,7 +3,7 @@ package service;
 import presenter.Presenter;
 import service.IO.IO;
 import service.analizator.DBAnalizer;
-import service.analizator.TreeAnalizer;
+import service.analizator.PersonAnalizer;
 import service.dataBase.DBHandler;
 import service.dataBase.DBToSave;
 import service.dataBase.DataBase;
@@ -40,7 +40,7 @@ public class Service {
                 sentToPrint("Date of generation: " + db.getCreationDate().toString());
                 break;
             case "person analyze":
-                TreeAnalizer analizer = new TreeAnalizer(GetRandom.getRandomPerson(db));
+                PersonAnalizer analizer = new PersonAnalizer(GetRandom.getRandomPerson(db));
                 sentToPrint("Random person generated.");
                 sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {

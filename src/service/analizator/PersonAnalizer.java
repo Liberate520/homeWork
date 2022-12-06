@@ -1,20 +1,18 @@
 package service.analizator;
 
 import service.classes.Person;
-import service.dataBase.DBHandler;
-import service.generator.GetRandom;
 import service.tree.RelationType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TreeAnalizer implements Analizer {
+public class PersonAnalizer implements Analizer {
     private final Person testPerson;
 
     String stats;
     StatWorker line = new StatWorker();
 
-    public TreeAnalizer(Person person) {
+    public PersonAnalizer(Person person) {
         this.testPerson = person;
     }
 
