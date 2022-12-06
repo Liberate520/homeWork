@@ -10,13 +10,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import static service.tree.RelationType.*;
+import static service.tree.RelationType.DAUGHTER;
+import static service.tree.RelationType.SON;
 
+/*
+Класс - база для хранения объектов Person и семейных пар
+ */
 public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     private final ArrayList<Person> db;
     private final ArrayList<Person[]> familiesList;
 
-    Date creationDate;
+    private Date creationDate;
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -31,12 +35,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return db.size();
     }
 
-
-//    public void showBase() {
-//        for (Person person : db) {
-//            person.getInfo();
-//        }
-//    }
 
     public Person get(int index) {
         return db.get(index);
@@ -104,29 +102,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     public void add(Person person) {
         db.add(person);
     }
-
-//    /* Замена человека в базе */
-//    public void replace(Person old, Person newOne) {
-//        db.set(db.indexOf(old), newOne);
-//    }
-//
-//    /* замена семьи в базе */
-//    public void replaceFamily(Person parent1, Person parent2, int index) {
-//        Person[] family = {parent1, parent2};
-//        familiesList.set(index, family);
-//    }
-
-    /* Индекс семьи */
-//    public int getFamilyIndex(Person[] pair) {
-//        return familiesList.indexOf(pair);
-//    }
-//
-//    public void addFamily(Person person, Person personSec) {
-//        Person[] pair = new Person[2];
-//        pair[0] = person;
-//        pair[1] = personSec;
-//        familiesList.add(pair);
-//    }
 
     public ArrayList<Person[]> getFamilies() {
         return familiesList;

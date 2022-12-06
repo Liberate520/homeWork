@@ -9,6 +9,9 @@ import java.util.Iterator;
 import static service.classes.Gender.MALE;
 import static service.classes.Marrige.YES;
 
+/*
+Класс для анализа различных показателей базы данных
+ */
 public class DBAnalizer implements Iterable<Pair>, Analizer {
 
     private String stats;

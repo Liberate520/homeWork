@@ -9,24 +9,19 @@ import java.util.ArrayList;
 import static service.tree.RelationType.DAUGHTER;
 import static service.tree.RelationType.SON;
 
+/*
+Рабочий класс для объектов в базе
+ */
 public class Person extends Human implements Relation, Serializable {
 
     private final FamilyTree familymembers;
 
-    public Person(Human human, FamilyTree familymembers) {
-        this.name = human.name;
-        this.familyname = human.familyname;
-        this.gender = human.gender;
-        this.marigeStatus = human.marigeStatus;
+    public Person(FamilyTree familymembers) {
         this.familymembers = familymembers;
     }
 
-    public Person(Human human) {
-        this(human, new FamilyTree());
-    }
-
     public Person() {
-        this(new Human());
+        this(new FamilyTree());
     }
 
     public FamilyTree getTree() {
@@ -63,7 +58,7 @@ public class Person extends Human implements Relation, Serializable {
         return children;
     }
 
-    public int getChildrenCount(){
+    public int getChildrenCount() {
         return getChildren().size();
     }
 }

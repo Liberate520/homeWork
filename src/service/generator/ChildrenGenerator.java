@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import static service.classes.Gender.*;
 import static service.tree.RelationType.*;
 
+/*
+Класс для генерации детей в базе
+ */
 public class ChildrenGenerator {
     public void snusnuForEveryOne(DBHandler db) {
         for (Person[] pair : db.getFamilies()) {

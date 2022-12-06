@@ -2,20 +2,27 @@ package service.analizator;
 
 import service.classes.Person;
 
-public class ExtendedAnalizer extends PersonAnalizer {
+/*
+Класс для поиска рекурсивно детей у всех потомков
+ */
+public class ExtendedPersonAnalizer extends PersonAnalizer {
+
 
     @Override
     public void analyze() {
         line.addPosition("\n__________________________________Find children_______________________________\n");
-        showChildrenTree();
+        startChildrenTree();
         this.stats = line.toString();
     }
 
-    public void showChildrenTree() {
+    public void startChildrenTree() {
         String spacer = "";
         childrenTreeWorker(super.testPerson, spacer);
     }
 
+    /*
+    рекурсивно просматриваем детей у всех потомков
+     */
     private void childrenTreeWorker(Person person, String spacer) {
         if (!person.getChildren().isEmpty()) {
             line.addPosition(spacer + "Parent: " + person.getName() + " "
@@ -32,14 +39,12 @@ public class ExtendedAnalizer extends PersonAnalizer {
         }
     }
 
-
     @Override
     public String getStats() {
         return stats;
     }
 
-
-    public ExtendedAnalizer(Person person) {
+    public ExtendedPersonAnalizer(Person person) {
         super(person);
     }
 }

@@ -3,6 +3,9 @@ package service.analizator;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/*
+Класс предоставляет StringBuilder и возвращает строки.
+ */
 public class StatWorker implements Serializable {
     private ArrayList<String> stats;
     private final StringBuilder line = new StringBuilder();

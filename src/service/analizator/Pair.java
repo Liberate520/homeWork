@@ -5,7 +5,11 @@ import service.classes.Person;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Pair{
+/*
+Класс для подсчёта отомков семьи
+ */
+public class Pair {
+
     private final Person[] pair;
     private int descendants = 0;
 

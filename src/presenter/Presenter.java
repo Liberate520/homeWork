@@ -3,6 +3,9 @@ package presenter;
 import service.Service;
 import view.View;
 
+/*
+Класс для связи Сервиса и View.
+ */
 public class Presenter {
 
     private final View view;

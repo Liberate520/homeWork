@@ -2,6 +2,9 @@ package service.analizator;
 
 import java.util.Comparator;
 
+/*
+Компаратор по количеству потомков
+ */
 public class FamiliesDescendantsComparator implements Comparator<Pair> {
 
     @Override

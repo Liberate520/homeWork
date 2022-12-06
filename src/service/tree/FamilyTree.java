@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+Класс предоставляющий объекты семейного дерева
+ */
 public class FamilyTree implements Serializable {
     private final HashMap<RelationType, ArrayList<Person>> tree;
 

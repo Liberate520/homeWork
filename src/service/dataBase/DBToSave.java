@@ -7,22 +7,26 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
+/*
+Клас для сохранения базы
+ */
 public class DBToSave {
     private final DBHandler db;
 
-    private StringBuilder dbBytes;
+    private final StringBuilder dbBytes;
 
-    public void prepair(){
-        for (Person item: this.db) {
+    public void prepare() {
+        for (Person item : this.db) {
+
             dbBytes.append(Arrays.toString(itemToBytes(item)));
         }
     }
 
-    private byte[] itemToBytes(Object obj){
-        ByteArrayOutputStream boas = new ByteArrayOutputStream();
-        try (ObjectOutputStream oos = new ObjectOutputStream(boas)) {
-            oos.writeObject(obj);
-            return boas.toByteArray();
+    private byte[] itemToBytes(Object obj) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+            oos.writeObject(obj); // Вот тут умирает((( Не может записать рекурсивные объекты.
+            return baos.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
         }

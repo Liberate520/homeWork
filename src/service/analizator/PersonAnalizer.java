@@ -6,6 +6,9 @@ import service.tree.RelationType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+Класс для анализа семьи объекта Person
+ */
 public class PersonAnalizer implements Analizer {
     protected final Person testPerson;
 
@@ -23,8 +26,7 @@ public class PersonAnalizer implements Analizer {
         this.stats = line.toString();
     }
 
-    /* показывает дерево детей */
-
+    // Скрыто на будующее
 
     /* показывает только родных детей */
 //    public void showChildren() {

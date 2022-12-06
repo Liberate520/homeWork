@@ -1,6 +1,5 @@
 package service.generator;
 
-import service.analizator.Analizer;
 import service.analizator.StatWorker;
 import service.classes.Person;
 import service.dataBase.DBHandler;
@@ -8,34 +7,17 @@ import service.dataBase.DataBase;
 
 import java.util.Date;
 
-public class GenerationWork implements Analizer {
+/*
+Класс - генератор поколений
+ */
+public class GenerationWork {
     private final DBHandler mainDb;
-
-
-    @Override
-    public void analyze() {
-
-    }
-
-    @Override
-    public String getStats() {
-        return this.stats;
-    }
-
     private String stats;
 
     StatWorker line = new StatWorker();
     private int generationCount = 0;
 
-    public GenerationWork(DBHandler db) {
-        this.mainDb = db;
-    }
-
-    public GenerationWork() {
-        this(new DataBase());
-    }
-
-    /* стартовое наполнение */
+    /* стартовое поколение */
     public void generatePopulation(int startPopulation) {
         this.mainDb.fill(startPopulation);
     }
@@ -66,7 +48,8 @@ public class GenerationWork implements Analizer {
         line.addPosition("Families with children: " + db.getFullFamilies().size()
                 + ", general: " + mainDb.getFamiliesNumber() + "\n");
         line.addPosition("Children: " + nextGeneration.getSize() + "\n");
-        line.addPosition("Time for generation = " + (System.nanoTime() - startTime) + "ms" + "\n" + "\n");
+        line.addPosition("Time for generation generation = "
+                + (System.nanoTime() - startTime) + "ms" + "\n" + "\n");
         this.stats = line.toString();
 
         if (generationCount == count) {
@@ -74,5 +57,13 @@ public class GenerationWork implements Analizer {
         }
         createGeneration(count, nextGeneration);
         this.mainDb.setCreationDate(new Date());
+    }
+
+    public String getStats() {
+        return this.stats;
+    }
+
+    public GenerationWork(DBHandler db) {
+        this.mainDb = db;
     }
 }

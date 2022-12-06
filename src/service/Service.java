@@ -4,7 +4,7 @@ import presenter.Presenter;
 import service.IO.IO;
 import service.analizator.Analizer;
 import service.analizator.DBAnalizer;
-import service.analizator.ExtendedAnalizer;
+import service.analizator.ExtendedPersonAnalizer;
 import service.analizator.PersonAnalizer;
 import service.dataBase.DBHandler;
 import service.dataBase.DBToSave;
@@ -14,6 +14,9 @@ import service.generator.GetRandom;
 
 import java.util.Scanner;
 
+/*
+Класс - обработчик команд. Задействует нужные сервисы и возвращает результат их работы.
+ */
 public class Service {
     private final Presenter presenter;
     private final DBHandler db;
@@ -47,7 +50,7 @@ public class Service {
                 sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {
                     case "Y", "y" -> {
-                        analizer = new ExtendedAnalizer(GetRandom.getRandomPerson(db));
+                        analizer = new ExtendedPersonAnalizer(GetRandom.getRandomPerson(db));
                         analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
@@ -59,30 +62,6 @@ public class Service {
                     default -> sentToPrint("Wrong input. Return.");
                 }
                 break;
-//            case "siblings analyze":
-//                analizer = new TreeAnalizer(db);
-//                sentToPrint("\n__________________________________Find siblings_______________________________");
-//                analizer.showSiblings();
-//                sentToPrint(analizer.getStats());
-//                break;
-//            case "parent analyze":
-//                analizer = new TreeAnalizer(db);
-//                sentToPrint("\n__________________________________Find parents________________________________");
-//                analizer.showParents();
-//                sentToPrint(analizer.getStats());
-//                break;
-//            case "family analyze":
-//                analizer = new TreeAnalizer(db);
-//                sentToPrint("\n__________________________________All family members__________________________");
-//                analizer.showFamilyMembers();
-//                sentToPrint(analizer.getStats());
-//                break;
-//            case "children statistics":
-//                sentToPrint("\n__________________________________DataBase statistics_________________________");
-//                FamilyAnalizer familyAnalizer = new FamilyAnalizer(db);
-//                familyAnalizer.getChildrenStatistics();
-//                sentToPrint(familyAnalizer.getStats());
-//                break;
             case "db analyze":
                 DBAnalizer DBStats = new DBAnalizer(db);
                 DBStats.analyze();
@@ -99,7 +78,18 @@ public class Service {
                 path = "src/service/dataBase/db.dat";
                 saver = new IO();
                 DBToSave converter = new DBToSave(db);
-                converter.prepair();
+                converter.prepare();
+                saver.toFile(converter.getDbBytes(), path);
+                break;
+            // для тестов записи.
+            case "test":
+                Gena = new GenerationWork(db);
+                Gena.generatePopulation(100); // изменить аргумент >200 для StackOverFlowError
+                Gena.startGenerator(5);
+                path = "src/service/dataBase/db.dat";
+                saver = new IO();
+                converter = new DBToSave(db);
+                converter.prepare();
                 saver.toFile(converter.getDbBytes(), path);
                 break;
             default:

@@ -2,7 +2,10 @@ package service.classes;
 
 import java.util.Objects;
 
-public class Human {
+/*
+Базовый класс
+ */
+public abstract class Human {
 
     protected String name;
     protected String familyname;

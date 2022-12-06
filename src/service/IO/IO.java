@@ -2,6 +2,9 @@ package service.IO;
 
 import java.io.*;
 
+/*
+Класс для записи и считывания из файла
+ */
 public class IO {
     public <E> void toFile(E element, String path) {
         try {

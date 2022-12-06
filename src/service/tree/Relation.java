@@ -5,6 +5,9 @@ import service.classes.Person;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+Интерфейс для работы с объектами семейного дерева
+ */
 public interface Relation {
     default void addMember(RelationType type, Person person) {
         getTree().addMember(type, person);
@@ -13,7 +16,6 @@ public interface Relation {
     FamilyTree getTree();
 
     default ArrayList<Person> getMember(RelationType type) {
-
         return getTree().getMember(type);
     }
 

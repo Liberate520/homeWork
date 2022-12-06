@@ -4,6 +4,9 @@ import presenter.Presenter;
 
 import java.util.Scanner;
 
+/*
+Класс для работы с консолью.
+ */
 public class Dispatcher implements View {
     private Presenter presenter;
 
