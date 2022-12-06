@@ -9,7 +9,13 @@
 //
 //        Сделать PR к проекту: https://github.com/Liberate520/homeWork
 
+import controller.TreeControl;
+import model.Human;
+import model.Tree;
+import model.TreePerson;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -17,89 +23,54 @@ public class Main {
         List<String> lis = new ArrayList<String>();
 //        lis.get(1);
 
-        // нужно создать человека
-        Human HA = new Human("name 1", 0); // жена
-        Human HB = new Human("name 2", 1); // муж
-        Human HC = new Human("name 3", 0); // дочь
-        Human HD = new Human("name 4", 1); // сын
-        Human HE = new Human("name 5", 0); // Бабушка жены
-        Human HF = new Human("name 6", 1); // дедушка жены
-        Human HG = new Human("name 5", 0); // Бабушка отца
-        Human HH = new Human("name 6", 1); // дедушка отца
-
-        // человек находится в дереве
+        // подгружаем контроллер
+        TreeControl controller = new TreeControl();
         // создаём дерево
-
-        //<editor-fold desc="Description">
-        HA.addTree();
-        HB.addTree();
-        HC.addTree();
-        HD.addTree();
-        HE.addTree();
-        HF.addTree();
-        HG.addTree();
-        HH.addTree();
-        //</editor-fold>
-
-        System.out.println(Tree.getHumanList());
-
-
+        Tree<TreePerson> tree = controller.createTree();
+        // нужно создать человека
         //region Description
-        new Link(HA, HB, 300);
-        new Link(HA, HC, 800);
-        new Link(HA, HD, 800);
-        new Link(HA, HE, 900);
-        new Link(HA, HF, 900);
-
-        HB.addLink(HC, 801);
-        HB.addLink(HD, 801);
-        HB.addLink(HG, 901);
-        HB.addLink(HH, 901);
-
-        HC.addLink(HD, 300);
-        HC.addLink(HE, 1000);
-        HC.addLink(HF, 1000);
-        HC.addLink(HG, 1000);
-        HC.addLink(HH, 1000);
-
-        HD.addLink(HE, 1001);
-        HD.addLink(HF, 1001);
-        HD.addLink(HG, 1001);
-        HD.addLink(HH, 1001);
-
-        HE.addLink(HF, 300);
-        HG.addLink(HH, 300);
+        Human IM = controller.createHuman("Мать", 0); // мать
+        Human IF = controller.createHuman("Отец", 1); // отец
+        Human B1 = controller.createHuman("Брат", 1); // Брат
+        Human S1 = controller.createHuman("Сестра", 0); // сестра
+        Human II = controller.createHuman("Я", 1); // я
+        Human GmM = controller.createHuman("Бабушка матери", 0); // Бабушка матери
+        Human GfM = controller.createHuman("Дедушка матери", 1); // дедушка матери
+        Human GmF = controller.createHuman("Бабушка отца", 0); // Бабушка отца
+        Human GfF = controller.createHuman("Дедушка отца", 1); // дедушка отца
+        Human IS1 = controller.createHuman("Сын1", 1); // сын
+        Human ID1 = controller.createHuman("Дочь1", 0); // дочь
+        Human IS1D1 = controller.createHuman("Дочь1 сына1", 0); // дочь сына
+        Human ID1D1 = controller.createHuman("Дочь1 дочери1", 0); // дочь дочери
+        Human ID1D2 = controller.createHuman("Дочь2 дочери1", 0); // дочь дочери
+        Human ID1S1 = controller.createHuman("Сын1 дочери1", 1); // сын дочери
         //endregion
 
-
-        System.out.println(Tree.getHumanList(0).getLink());
-        System.out.println(Tree.getHumanList(0).getLink(0).getFirst() + " -> " + Tree.getHumanList(0).getLink(0).getSecond());
-        System.out.println(Tree.getHumanList(1).getLink());
-        System.out.println(Tree.getHumanList(1).getLink(0).getFirst() + " -> " + Tree.getHumanList(1).getLink(0).getSecond());
-
-
-        Cat cat = new Cat("Киса", HC);
-
-/*
-        // добавление в дерево
-        tree.addTree(new Human("name 3", 0));
-        tree.addTree(new Human("name 4", 1)); // муж
-        System.out.println(tree.getHumanList());
-
-        HA.addTree(tree);
-        HB.addTree(tree);
+        // человек находится в дереве
+        //region Description
+        controller.addToTree(IM, tree); // допустим мы не знаем кого добавляем, но знаем куда.
+        controller.addToTree(IF, tree); // можно добавлять сразу создавая объект. Дерево запомнит всех
+        controller.addToTree(new TreePerson[] {B1,S1,II,GmM,GfM,GmF,GfF,IS1,ID1,IS1D1,ID1D1,ID1D2,ID1S1}, tree);
+        //endregion
 
         System.out.println(tree.getHumanList());
 
-        // добавляем связь
+        // запрос на добавление связи
+        // в перспективе гендер будет получен автоматом
+        //region Description
+        controller.createLink(new TreePerson[] {IM, GmM, GmF}, new TreePerson[] {IF, GfM, GfF}, 200); // все жёны к мужьям
+        controller.createLink(new TreePerson[] {S1, S1, ID1D1, ID1D2}, new TreePerson[] {B1, II, ID1S1, ID1S1}, 100); // все сёстры к братьям
+        controller.createLink(ID1D1, ID1D2, 100);
+        controller.createLink(new TreePerson[] {IM,IM,IM, GmM, GmF, ID1,ID1,ID1}, new TreePerson[] {II, S1, B1, IM, IF, ID1D1, ID1D2, ID1S1}, 400); // все матери к детям
+        controller.createLink(new TreePerson[] {IF, IF, IF, GfM, GfF, II, II, IS1}, new TreePerson[] {II, S1, B1, IM, IF, IS1, ID1, IS1D1}, 401); // все Отцы к детям
+        //endregion
 
-        new Link(tree.getHumanList(1), tree.getHumanList(2), 12);
+        System.out.println(ID1D1.getLink());
 
-        System.out.println(tree.getHumanList(1).getAllLinks());
-        System.out.println(tree.getHumanList(1).getLink(0).getFirst() + " -> " + tree.getHumanList(1).getLink(0).getSecond());
-        System.out.println(tree.getHumanList(2).getAllLinks());
-        System.out.println(tree.getHumanList(2).getLink(0).getFirst() + " -> " + tree.getHumanList(2).getLink(0).getSecond());
-*/
+        //запрашиваем вывод дерева к потомкам
+        controller.viewHeirs(II);
+        System.out.printf("%n ---------- %n%n");
+        controller.viewHeirs(GmM);
 
     }
 

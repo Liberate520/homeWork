@@ -1,18 +1,21 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human extends Tree {
+public class Human extends TreePerson {
     // человеку нужно имя
-    private String fullName;
+//    private String fullName;
     // гендер 0=Ж 1=М
-    private int gender;
+//    private int gender;
     // у человека будут связи
     private List<Link> links;
 
-    public Human(String fullName, int gender) {
+    public Human(String name, int gender) {
+        super(name, gender);
 
-        this.fullName = fullName; // имя есть всегда и изначально
-        this.gender = gender;
+//        this.fullName = fullName; // имя есть всегда и изначально
+//        this.gender = gender;
         links = new ArrayList<>();
 //        this.addHumanList(this);
     }
@@ -22,14 +25,15 @@ public class Human extends Tree {
 
 
     //добавляем связь через имя связи
+    @Override
     public void addLink(Link link) {
         this.links.add(link);
     }
 
     //добавляем связь через конструктор связей
-    public void addLink(Human second, int tipeLink) {
-        new Link(this, second, tipeLink);
-    }
+//    public void addLink(Human second, int tipeLink) {
+//        new Link(this, second, tipeLink);
+//    }
 
     public List<Link> getLink() {
         return links;
@@ -38,9 +42,9 @@ public class Human extends Tree {
         return links.get(i);
     }
 
-    public int getGender() {
-        return gender;
-    }
+//    public int getGender() {
+//        return gender;
+//    }
 
 
 }

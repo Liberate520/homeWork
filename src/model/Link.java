@@ -1,16 +1,18 @@
+package model;
+
 public class Link {
-    private Tree first;
-    private Tree second;
+    private TreePerson first;
+    private TreePerson second;
     private int tipeLink; // кем исходный объект является целевому
 
-    public Link(Tree first, Tree second, int tipeLink, boolean flag) {
+    public Link(TreePerson first, TreePerson second, int tipeLink, boolean flag) {
         this.first = first;
         this.second = second;
         this.setTipeLink(tipeLink);
         first.addLink(this);
     }
 
-    public Link(Tree first, Tree second, int tipeLink) {
+    public Link(TreePerson first, TreePerson second, int tipeLink) {
         this(first, second, tipeLink, true);
         new Link(second, first, Link.counterDetection(tipeLink,second.getGender()), true);
 
@@ -19,19 +21,19 @@ public class Link {
     private static int counterDetection(int tipeLink, int secondGender) {
 //        byte conter;
         // определяем встречную связь
-        if (tipeLink / 100 == 3) {return (100 + secondGender);}
-        if (tipeLink / 100 == 4) {return (200 + secondGender);}
-        if (tipeLink / 100 >= 5) {return ((1200 - tipeLink - (tipeLink - 500)) + secondGender);}
+        if (tipeLink / 100 == 1) {return (100 + secondGender);}
+        if (tipeLink / 100 == 2) {return (200 + secondGender);}
+        if (tipeLink / 100 >= 3) {return ((6 - (tipeLink/100) - ((tipeLink/100) - 3)) * 100 + secondGender);}
 
         return 0;
     }
 
 
-    public Tree getFirst() {
+    public TreePerson getFirst() {
         return first;
     }
 
-    public Tree getSecond() {
+    public TreePerson getSecond() {
         return second;
     }
 
@@ -48,21 +50,17 @@ public class Link {
 типы связей
 **0, **1 (тоесть первая цифра) гендер
 *0*, *1* (вторая цивра) возможная реализация кровного родства
-0**, 1** (и все последцющие) тип родства
+0**, 1**, 2**... (и все последцющие) тип родства =>
 
-3 = брат/сестра
-4 = муж/жена
+1 = брат/сестра
+2 = муж/жена
 
 
-5 = Животное
-6 = прадед/прабабушка
-7 = дед/бабушка
-8 = отец/мать
+3 = Животное
+4 = отец/мать
 --
-9 = сын/дочь
-10 = внук/внучка
-11 = правнук/правнучка
-12 = Хозяин
+5 = сын/дочь
+6 = Хозяин
 
-12-тарг-(тарг-5)
+6-тарг-(тарг-3)
 */
