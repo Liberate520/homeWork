@@ -3,17 +3,19 @@ package service;
 import presenter.Presenter;
 import service.IO.IO;
 import service.analizator.DBAnalizer;
-import service.analizator.FamilyAnalizer;
 import service.analizator.TreeAnalizer;
 import service.dataBase.DBHandler;
+import service.dataBase.DBToSave;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
+import service.generator.GetRandom;
 
 import java.util.Scanner;
 
 public class Service {
     private final Presenter presenter;
     private final DBHandler db;
+
 
     public Service(Presenter presenter, DataBase db) {
         this.presenter = presenter;
@@ -37,10 +39,10 @@ public class Service {
                 sentToPrint(Gena.getStats());
                 sentToPrint("Date of generation: " + db.getCreationDate().toString());
                 break;
-            case "children analyze":
-                TreeAnalizer analizer = new TreeAnalizer(db);
-                sentToPrint("Random parent generated.");
-                sentToPrint("Do you want to analyze all generations? (Y/N)");
+            case "person analyze":
+                TreeAnalizer analizer = new TreeAnalizer(GetRandom.getRandomPerson(db));
+                sentToPrint("Random person generated.");
+                sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {
                     case "Y", "y" -> {
                         sentToPrint("\n__________________________________Find children_______________________________");
@@ -49,47 +51,39 @@ public class Service {
                         this.sentToPrint(analizer.getStats());
                     }
                     case "N", "n" -> {
-                        analizer.showChildren();
+                        analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
                     default -> sentToPrint("Wrong input. Return.");
                 }
                 break;
-            case "siblings analyze":
-                analizer = new TreeAnalizer(db);
-                sentToPrint("\n__________________________________Find siblings_______________________________");
-                analizer.showSiblings();
-                sentToPrint(analizer.getStats());
-                break;
-            case "parent analyze":
-                analizer = new TreeAnalizer(db);
-                sentToPrint("\n__________________________________Find parents________________________________");
-                analizer.showParents();
-                sentToPrint(analizer.getStats());
-                break;
-            case "family analyze":
-                analizer = new TreeAnalizer(db);
-                sentToPrint("\n__________________________________All family members__________________________");
-                analizer.showFamilyMembers();
-                sentToPrint(analizer.getStats());
-                break;
-            case "children statistics":
-                sentToPrint("\n__________________________________Children statistics_________________________");
-                FamilyAnalizer familyAnalizer = new FamilyAnalizer(db);
-                familyAnalizer.getChildrenStatistics();
-                sentToPrint(familyAnalizer.getStats());
-                break;
-//            case "show families":
-//                sentToPrint("\n__________________________________All families________________________________");
-//                familyAnalizer = new FamilyAnalizer(db);
-//                familyAnalizer.sortByDescendants();
-//                for (Pair family : familyAnalizer) {
-//                    System.out.println(family.toString());
-//                }
+//            case "siblings analyze":
+//                analizer = new TreeAnalizer(db);
+//                sentToPrint("\n__________________________________Find siblings_______________________________");
+//                analizer.showSiblings();
+//                sentToPrint(analizer.getStats());
 //                break;
-            case "people statistics":
+//            case "parent analyze":
+//                analizer = new TreeAnalizer(db);
+//                sentToPrint("\n__________________________________Find parents________________________________");
+//                analizer.showParents();
+//                sentToPrint(analizer.getStats());
+//                break;
+//            case "family analyze":
+//                analizer = new TreeAnalizer(db);
+//                sentToPrint("\n__________________________________All family members__________________________");
+//                analizer.showFamilyMembers();
+//                sentToPrint(analizer.getStats());
+//                break;
+//            case "children statistics":
+//                sentToPrint("\n__________________________________DataBase statistics_________________________");
+//                FamilyAnalizer familyAnalizer = new FamilyAnalizer(db);
+//                familyAnalizer.getChildrenStatistics();
+//                sentToPrint(familyAnalizer.getStats());
+//                break;
+            case "db analyze":
                 DBAnalizer DBStats = new DBAnalizer(db);
-                DBStats.getDBStats();
+                DBStats.analyze();
                 sentToPrint(DBStats.getStats());
                 break;
             case "save statistics":
@@ -99,10 +93,12 @@ public class Service {
                 DBStats.getDBStats();
                 saver.toFile(DBStats.toString(), path);
                 break;
-            case "load statistics":
-//                path = "src/service/dataBase/stats.txt";
-//                IO loader = new IO();
-
+            case "save db":
+                path = "src/service/dataBase/db.dat";
+                saver = new IO();
+                DBToSave converter = new DBToSave(db);
+                converter.prepair();
+                saver.toFile(converter.getDbBytes(), path);
                 break;
             default:
                 break;

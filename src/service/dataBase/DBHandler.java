@@ -30,6 +30,7 @@ public interface DBHandler extends Iterable<Person> {
     void addFamily(Person[] family);
 
     void includeDB(DBHandler otherDB);
+    void includeFamilies(DBHandler otherDB);
 
     ArrayList<Person> getListOf(Gender state);
 

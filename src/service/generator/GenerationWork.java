@@ -13,6 +13,11 @@ public class GenerationWork implements Analizer {
 
 
     @Override
+    public void analyze() {
+
+    }
+
+    @Override
     public String getStats() {
         return this.stats;
     }
@@ -54,6 +59,7 @@ public class GenerationWork implements Analizer {
             }
         }
         this.mainDb.includeDB(nextGeneration);
+        this.mainDb.includeFamilies(db);
         this.generationCount++;
         line.addPosition("Current generation: " + generationCount
                 + ". Population: " + mainDb.getSize() + "\n");
@@ -68,7 +74,5 @@ public class GenerationWork implements Analizer {
         }
         createGeneration(count, nextGeneration);
         this.mainDb.setCreationDate(new Date());
-//        line.addPosition("Generation Date for this DB - " + mainDb.getCreationDate() + "\n");
-//        this.stats += line.toString();
     }
 }

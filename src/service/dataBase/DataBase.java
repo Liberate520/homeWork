@@ -95,7 +95,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     /*
     добавляет семьи из другой базы
      */
-    public void includeFamilies(DataBase nextGeneration) {
+    public void includeFamilies(DBHandler nextGeneration) {
         this.familiesList.addAll(nextGeneration.getFullFamilies());
     }
 
