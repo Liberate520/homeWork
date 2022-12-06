@@ -6,6 +6,8 @@ import service.classes.Person;
 import service.dataBase.DBHandler;
 import service.dataBase.DataBase;
 
+import java.util.Date;
+
 public class GenerationWork implements Analizer {
     private final DBHandler mainDb;
 
@@ -20,7 +22,7 @@ public class GenerationWork implements Analizer {
     StatWorker line = new StatWorker();
     private int generationCount = 0;
 
-    public GenerationWork(DataBase db) {
+    public GenerationWork(DBHandler db) {
         this.mainDb = db;
     }
 
@@ -39,9 +41,11 @@ public class GenerationWork implements Analizer {
 
     /* генератор поколений */
     private void createGeneration(int count, DBHandler db) {
-        Family generation = new Family();
-        generation.createFamilies(db);
-        generation.snusnuForEveryOne(db);
+        long startTime = System.nanoTime();
+        FamilyGenerator familyGeneration = new FamilyGenerator();
+        ChildrenGenerator childrenGeneration = new ChildrenGenerator();
+        familyGeneration.createFamilies(db);
+        childrenGeneration.snusnuForEveryOne(db);
 
         DataBase nextGeneration = new DataBase();
         for (Person[] parents : db.getFullFamilies()) {
@@ -50,18 +54,21 @@ public class GenerationWork implements Analizer {
             }
         }
         this.mainDb.includeDB(nextGeneration);
-//        this.mainDb.includeFamilies(db);
         this.generationCount++;
         line.addPosition("Current generation: " + generationCount
                 + ". Population: " + mainDb.getSize() + "\n");
         line.addPosition("Families with children: " + db.getFullFamilies().size()
                 + ", general: " + mainDb.getFamiliesNumber() + "\n");
-        line.addPosition("Children: " + nextGeneration.getSize() + "\n" + "\n");
+        line.addPosition("Children: " + nextGeneration.getSize() + "\n");
+        line.addPosition("Time for generation = " + (System.nanoTime() - startTime) + "ms" + "\n" + "\n");
         this.stats = line.toString();
 
         if (generationCount == count) {
             return;
         }
         createGeneration(count, nextGeneration);
+        this.mainDb.setCreationDate(new Date());
+//        line.addPosition("Generation Date for this DB - " + mainDb.getCreationDate() + "\n");
+//        this.stats += line.toString();
     }
 }

@@ -12,9 +12,9 @@ public class Generator {
      * файлы со списками имён
      */
     public static Random rand = new Random();
-    private static final String maleNames = "src/service/generator/MaleNames.txt";
-    private static final String femaleNames = "src/service/generator/FemaleNames.txt";
-    private static final String familyNames = "src/service/generator/FamilyNames.txt";
+    private static final String maleNames = "src/service/generator/nameLists/MaleNames.txt";
+    private static final String femaleNames = "src/service/generator/nameLists/FemaleNames.txt";
+    private static final String familyNames = "src/service/generator/nameLists/FamilyNames.txt";
 
     /**
      * сам генератор с проверками на гендер

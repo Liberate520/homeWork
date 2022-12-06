@@ -7,7 +7,7 @@ import service.classes.Person;
 import java.util.ArrayList;
 import java.util.Date;
 
-public interface DBHandler {
+public interface DBHandler extends Iterable<Person> {
     void fill(int quantity);
 
     void setCreationDate(Date creationDate);

@@ -2,19 +2,18 @@ package service;
 
 import presenter.Presenter;
 import service.IO.IO;
+import service.analizator.DBAnalizer;
 import service.analizator.FamilyAnalizer;
-import service.analizator.Pair;
-import service.analizator.StatWorker;
 import service.analizator.TreeAnalizer;
+import service.dataBase.DBHandler;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Service {
     private final Presenter presenter;
-    private final DataBase db;
+    private final DBHandler db;
 
     public Service(Presenter presenter, DataBase db) {
         this.presenter = presenter;
@@ -36,6 +35,7 @@ public class Service {
                 Gena.generatePopulation(startPopulation);
                 Gena.startGenerator(generationCount);
                 sentToPrint(Gena.getStats());
+                sentToPrint("Date of generation: " + db.getCreationDate().toString());
                 break;
             case "children analyze":
                 TreeAnalizer analizer = new TreeAnalizer(db);
@@ -79,31 +79,30 @@ public class Service {
                 familyAnalizer.getChildrenStatistics();
                 sentToPrint(familyAnalizer.getStats());
                 break;
-            case "show families":
-                sentToPrint("\n__________________________________All families________________________________");
-                familyAnalizer = new FamilyAnalizer(db);
-                familyAnalizer.sortByDescendants();
-                for (Pair family : familyAnalizer) {
-                    System.out.println(family.toString());
-                }
-                break;
+//            case "show families":
+//                sentToPrint("\n__________________________________All families________________________________");
+//                familyAnalizer = new FamilyAnalizer(db);
+//                familyAnalizer.sortByDescendants();
+//                for (Pair family : familyAnalizer) {
+//                    System.out.println(family.toString());
+//                }
+//                break;
             case "people statistics":
-                StatWorker stats = new StatWorker(db);
-                stats.getDBStats();
-                sentToPrint(stats.toString());
+                DBAnalizer DBStats = new DBAnalizer(db);
+                DBStats.getDBStats();
+                sentToPrint(DBStats.getStats());
                 break;
             case "save statistics":
                 String path = "src/service/dataBase/stats.txt";
-                stats = new StatWorker(db);
+                DBStats = new DBAnalizer(db);
                 IO saver = new IO();
-                stats.getDBStats();
-                saver.toFile(stats.toString(), path);
+                DBStats.getDBStats();
+                saver.toFile(DBStats.toString(), path);
                 break;
             case "load statistics":
-                path = "src/service/dataBase/stats.txt";
-                IO loader = new IO();
-                stats = new StatWorker((ArrayList<String>) loader.fromFile(path), db);
-                sentToPrint(stats.toString());
+//                path = "src/service/dataBase/stats.txt";
+//                IO loader = new IO();
+
                 break;
             default:
                 break;

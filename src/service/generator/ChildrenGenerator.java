@@ -1,45 +1,15 @@
 package service.generator;
 
-import service.classes.Gender;
 import service.classes.Person;
 import service.dataBase.DBHandler;
-import service.dataBase.DataBase;
 import service.tree.RelationType;
 
 import java.util.ArrayList;
 
-import static service.tree.RelationType.*;
 import static service.classes.Gender.*;
-import static service.classes.Marrige.*;
+import static service.tree.RelationType.*;
 
-public class Family {
-    /**
-     * создание семьи
-     *
-     * @param person    - первый человек
-     * @param personSec - второй человек
-     * @param db        - база данных
-     */
-    private void marige(Person person, Person personSec, DBHandler db) {
-        switch (person.getGender()) {
-            case MALE -> {
-                personSec.setFamilyname(person.getFamilyname());
-                person.addMember(WIFE, personSec);
-                personSec.addMember(HUSBAND, person);
-            }
-            case FEMALE -> {
-                person.setFamilyname(personSec.getFamilyname());
-                person.addMember(HUSBAND, personSec);
-                personSec.addMember(WIFE, person);
-            }
-        }
-        Person[] pair = {person, personSec};
-        db.addFamily(pair);
-        person.setMarigeStatus(YES);
-        personSec.setMarigeStatus(YES);
-    }
-
-    /* размножаем людей */
+public class ChildrenGenerator {
     public void snusnuForEveryOne(DBHandler db) {
         for (Person[] pair : db.getFamilies()) {
             snusnuResults(pair);
@@ -74,8 +44,8 @@ public class Family {
     }
 
     /*
-        вероятность появления детей у пары
-         */
+    вероятность появления детей у пары
+     */
     private static int childrenGenerator() {
         int chance = Generator.rand.nextInt(0, 100);
         int childrenNumber = 0;
@@ -92,7 +62,6 @@ public class Family {
 
     /* создаём и везде прописываем дитя */
     private void createChild(Person parent1, Person parent2) {
-
         Person child = new Person();
         switch (parent1.getGender()) {
             // проверяем фамилию
@@ -135,40 +104,4 @@ public class Family {
     }
 
 
-    /* создаём семью */
-    public void createFamilies(DBHandler db) {
-        ArrayList<Person> target;
-        ArrayList<Person> males = db.getListOf(MALE);
-        ArrayList<Person> females = db.getListOf(FEMALE);
-        if (males.size() > females.size()) {
-            target = females;
-        } else {
-            target = males;
-        }
-        for (Person parent : target) {
-            prepairCouple(parent, db);
-        }
-    }
-
-    /* подготовка */
-    private void prepairCouple(Person person, DBHandler db) {
-        if (person.getMarigeStatus() != YES) {
-            switch (person.getGender()) {
-                case MALE -> marige(person, check(db, FEMALE), db);
-                case FEMALE -> marige(person, check(db, MALE), db);
-            }
-        }
-    }
-
-    /* подбор людей */
-    private Person check(DBHandler db, Gender state) {
-        Person person = GetRandom.getRandomPerson(db);
-        if (person.getGender() == state) {
-            if (person.getMarigeStatus() == NO) {
-                return person;
-            }
-        }
-        person = check(db, state);
-        return person;
-    }
 }

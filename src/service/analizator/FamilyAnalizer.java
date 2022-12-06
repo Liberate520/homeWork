@@ -1,6 +1,7 @@
 package service.analizator;
 
 import service.classes.Person;
+import service.dataBase.DBHandler;
 import service.dataBase.DataBase;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class FamilyAnalizer implements Iterable<Pair>, Analizer {
 
 
 
-    public FamilyAnalizer(DataBase db) {
+    public FamilyAnalizer(DBHandler db) {
         ArrayList<Pair> families = new ArrayList<>();
         for (Person[] family : db.getFamilies()) {
             families.add(new Pair(family));

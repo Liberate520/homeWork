@@ -1,7 +1,7 @@
 package service.analizator;
 
 import service.classes.Person;
-import service.dataBase.DataBase;
+import service.dataBase.DBHandler;
 import service.generator.GetRandom;
 import service.tree.RelationType;
 
@@ -18,7 +18,7 @@ public class TreeAnalizer implements Analizer {
     String stats;
     StatWorker line = new StatWorker();
 
-    public TreeAnalizer(DataBase db) {
+    public TreeAnalizer(DBHandler db) {
         this.testChild = GetRandom.getRandomChild(db);
         this.testParent = GetRandom.getRandomParent(db);
         this.testFamily = GetRandom.getRandomFamily(db);
