@@ -2,6 +2,7 @@ package service.generator;
 
 import service.classes.Gender;
 import service.classes.Person;
+import service.dataBase.DBHandler;
 import service.dataBase.DataBase;
 import service.tree.RelationType;
 
@@ -19,7 +20,7 @@ public class Family {
      * @param personSec - второй человек
      * @param db        - база данных
      */
-    private void marige(Person person, Person personSec, DataBase db) {
+    private void marige(Person person, Person personSec, DBHandler db) {
         switch (person.getGender()) {
             case MALE -> {
                 personSec.setFamilyname(person.getFamilyname());
@@ -32,13 +33,14 @@ public class Family {
                 personSec.addMember(WIFE, person);
             }
         }
-        db.addFamily(person, personSec);
+        Person[] pair = {person, personSec};
+        db.addFamily(pair);
         person.setMarigeStatus(YES);
         personSec.setMarigeStatus(YES);
     }
 
     /* размножаем людей */
-    public void snusnuForEveryOne(DataBase db) {
+    public void snusnuForEveryOne(DBHandler db) {
         for (Person[] pair : db.getFamilies()) {
             snusnuResults(pair);
         }
@@ -134,7 +136,7 @@ public class Family {
 
 
     /* создаём семью */
-    public void createFamilies(DataBase db) {
+    public void createFamilies(DBHandler db) {
         ArrayList<Person> target;
         ArrayList<Person> males = db.getListOf(MALE);
         ArrayList<Person> females = db.getListOf(FEMALE);
@@ -149,7 +151,7 @@ public class Family {
     }
 
     /* подготовка */
-    private void prepairCouple(Person person, DataBase db) {
+    private void prepairCouple(Person person, DBHandler db) {
         if (person.getMarigeStatus() != YES) {
             switch (person.getGender()) {
                 case MALE -> marige(person, check(db, FEMALE), db);
@@ -159,9 +161,8 @@ public class Family {
     }
 
     /* подбор людей */
-    private Person check(DataBase db, Gender state) {
-        int index = Generator.rand.nextInt(0, db.size());
-        Person person = db.get(index);
+    private Person check(DBHandler db, Gender state) {
+        Person person = GetRandom.getRandomPerson(db);
         if (person.getGender() == state) {
             if (person.getMarigeStatus() == NO) {
                 return person;

@@ -3,10 +3,11 @@ package service.generator;
 import service.analizator.Analizer;
 import service.analizator.StatWorker;
 import service.classes.Person;
+import service.dataBase.DBHandler;
 import service.dataBase.DataBase;
 
 public class GenerationWork implements Analizer {
-    private final DataBase mainDb;
+    private final DBHandler mainDb;
 
 
     @Override
@@ -37,7 +38,7 @@ public class GenerationWork implements Analizer {
     }
 
     /* генератор поколений */
-    private void createGeneration(int count, DataBase db) {
+    private void createGeneration(int count, DBHandler db) {
         Family generation = new Family();
         generation.createFamilies(db);
         generation.snusnuForEveryOne(db);
@@ -49,13 +50,13 @@ public class GenerationWork implements Analizer {
             }
         }
         this.mainDb.includeDB(nextGeneration);
-        this.mainDb.includeFamilies(db);
+//        this.mainDb.includeFamilies(db);
         this.generationCount++;
         line.addPosition("Current generation: " + generationCount
-                + ". Population: " + mainDb.size() + "\n");
+                + ". Population: " + mainDb.getSize() + "\n");
         line.addPosition("Families with children: " + db.getFullFamilies().size()
                 + ", general: " + mainDb.getFamiliesNumber() + "\n");
-        line.addPosition("Children: " + nextGeneration.size() + "\n" + "\n");
+        line.addPosition("Children: " + nextGeneration.getSize() + "\n" + "\n");
         this.stats = line.toString();
 
         if (generationCount == count) {

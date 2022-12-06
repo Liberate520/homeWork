@@ -10,69 +10,45 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import static service.tree.RelationType.*;
-
-public class DataBase implements Serializable, Iterable<Person> {
+public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     private final ArrayList<Person> db;
     private final ArrayList<Person[]> familiesList;
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+    Date creationDate;
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    Date creationDate;
-
-    public void showBase() {
-        for (Person person : db) {
-            person.getInfo();
-        }
+    public Date getCreationDate() {
+        return creationDate;
     }
+
+    @Override
+    public int getSize() {
+        return db.size();
+    }
+
+
+//    public void showBase() {
+//        for (Person person : db) {
+//            person.getInfo();
+//        }
+//    }
 
     public Person get(int index) {
         return db.get(index);
     }
 
-    public Person getRandomPerson() {
-        int index = Generator.rand.nextInt(0, db.size());
-        Person parent = this.db.get(index);
-        if (!parent.getChildren().isEmpty()) {
-            return parent;
-        }
-        parent = getRandomPerson();
-        return parent;
-    }
-
-    public Person getRandomChild() {
-        int index = Generator.rand.nextInt(0, db.size());
-        Person child = this.db.get(index);
-        if (child.getMember(FATHER) != null) {
-            return child;
-        }
-
-        child = getRandomPerson();
-        return child;
-    }
-
-    public Person[] getRandomFamily() {
-        int index = Generator.rand.nextInt(0, familiesList.size());
-        return familiesList.get(index);
-    }
 
     public Person[] getFamily(int index) {
         return familiesList.get(index);
     }
 
-    public int size() {
-        return db.size();
-    }
 
     /*
-    возвращает список записей имеющих определённый статус гендера
-     */
+ возвращает список записей имеющих определённый статус гендера
+  */
     public ArrayList<Person> getListOf(Gender state) {
         ArrayList<Person> results = new ArrayList<>();
         for (Person person : db) {
@@ -94,8 +70,9 @@ public class DataBase implements Serializable, Iterable<Person> {
     }
 
     public ArrayList<Person> getDb() {
-        return db;
+        return this.db;
     }
+
 
     /*
      * заполнить базу
@@ -109,7 +86,8 @@ public class DataBase implements Serializable, Iterable<Person> {
     /*
     добавляет другую db
      */
-    public void includeDB(DataBase nextGeneration) {
+    @Override
+    public void includeDB(DBHandler nextGeneration) {
         this.db.addAll(nextGeneration.getDb());
         this.familiesList.addAll(nextGeneration.getFullFamilies());
     }
@@ -166,6 +144,12 @@ public class DataBase implements Serializable, Iterable<Person> {
         }
         return fullFamiliesList;
     }
+
+    @Override
+    public void addFamily(Person[] family) {
+        familiesList.add(family);
+    }
+
 
     public DataBase(ArrayList<Person> db) {
         this.db = db;
