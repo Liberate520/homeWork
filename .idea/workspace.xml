@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="">
+    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="Работа с генериками">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Animal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Cat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/FamiliesI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Human.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Link.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Tree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FamiliesI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Human.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Link.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/controller/TreeControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/controller/TreeControl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/TreeMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/model/TreeMethods.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/TreeControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TreeControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/TreeMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TreeMethods.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +24,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="9f94e14be6cc767e3115586b4d7bf568f3b65e81" />
@@ -129,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669614158990</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Работа с генериками">
+      <created>1670304834221</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670304834221</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,6 +163,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="промежуточный коммит" />
     <MESSAGE value="Временная финализация второй работы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Временная финализация второй работы" />
+    <MESSAGE value="Работа с генериками" />
+    <option name="LAST_COMMIT_MESSAGE" value="Работа с генериками" />
   </component>
 </project>

@@ -72,6 +72,7 @@ public class Main {
         System.out.printf("%n ---------- %n%n");
         controller.viewHeirs(GmM);
 
+        controller.runMenu();
     }
 
 

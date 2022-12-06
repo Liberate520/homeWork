@@ -1,11 +1,12 @@
 package controller;
 import model.*;
+import view.Menu;
 import view.ViewConstructor;
 
 import java.util.List;
 
 /*
-Сюда будеи обращаться по любому запросу
+РЎСЋРґР° Р±СѓРґРµРё РѕР±СЂР°С‰Р°С‚СЊСЃСЏ РїРѕ Р»СЋР±РѕРјСѓ Р·Р°РїСЂРѕСЃСѓ
  */
 
 
@@ -13,54 +14,58 @@ public class TreeControl {
     private TreeMethods treeMethods;
     private PersonMethods personMethods;
     private ViewConstructor viewConstructor;
+    private Menu menu;
 
     public TreeControl() {
         this.treeMethods = new TreeMethods();
         this.personMethods = new PersonMethods();
         this.viewConstructor = new ViewConstructor(this);
+        this.menu = new Menu(this);
     }
 
 
-    // Запрос на создание дерева
+    // Р—Р°РїСЂРѕСЃ РЅР° СЃРѕР·РґР°РЅРёРµ РґРµСЂРµРІР°
     public Tree<TreePerson> createTree() {
-        return treeMethods.newTree();
+        Tree<TreePerson> tree = treeMethods.newTree();
+        menu.setTree(tree);
+        return tree;
     }
 
-    // Запрос на сщздание человека
+    // Р—Р°РїСЂРѕСЃ РЅР° СЃС‰Р·РґР°РЅРёРµ С‡РµР»РѕРІРµРєР°
 
     public Human createHuman(String name, int gender){
         return personMethods.newHuman(name, gender);
     }
 
-    // Запрос на добавление в дерево
+    // Р—Р°РїСЂРѕСЃ РЅР° РґРѕР±Р°РІР»РµРЅРёРµ РІ РґРµСЂРµРІРѕ
 
-    public void addToTree (TreePerson obj, Tree tree){ // получаем объект (теоретически пригодный) и ссылку на дерево, отправляем на попытку добавления
+    public void addToTree (TreePerson obj, Tree tree){ // РїРѕР»СѓС‡Р°РµРј РѕР±СЉРµРєС‚ (С‚РµРѕСЂРµС‚РёС‡РµСЃРєРё РїСЂРёРіРѕРґРЅС‹Р№) Рё СЃСЃС‹Р»РєСѓ РЅР° РґРµСЂРµРІРѕ, РѕС‚РїСЂР°РІР»СЏРµРј РЅР° РїРѕРїС‹С‚РєСѓ РґРѕР±Р°РІР»РµРЅРёСЏ
         treeMethods.add(obj, tree);
-//        System.out.println("контроллер отработал");
+//        System.out.println("РєРѕРЅС‚СЂРѕР»Р»РµСЂ РѕС‚СЂР°Р±РѕС‚Р°Р»");
     }
 
-    public void addToTree (TreePerson[] obj, Tree tree){ // получаем объект (теоретически пригодный) и ссылку на дерево, отправляем на попытку добавления
+    public void addToTree (TreePerson[] obj, Tree tree){ // РїРѕР»СѓС‡Р°РµРј РѕР±СЉРµРєС‚ (С‚РµРѕСЂРµС‚РёС‡РµСЃРєРё РїСЂРёРіРѕРґРЅС‹Р№) Рё СЃСЃС‹Р»РєСѓ РЅР° РґРµСЂРµРІРѕ, РѕС‚РїСЂР°РІР»СЏРµРј РЅР° РїРѕРїС‹С‚РєСѓ РґРѕР±Р°РІР»РµРЅРёСЏ
         for (TreePerson item : obj) {
             treeMethods.add(item, tree);
         }
     }
 
     /**
-* типы связей
+* С‚РёРїС‹ СЃРІСЏР·РµР№
      * <p>
-* **0, **1 (тоесть первая цифра) гендер (источника) <br>
-* *0*, *1* (вторая цивра) возможная реализация кровного родства<br>
-* 0**, 1**, 2**... (и все последцющие) тип родства =><br>
+* **0, **1 (С‚РѕРµСЃС‚СЊ РїРµСЂРІР°СЏ С†РёС„СЂР°) РіРµРЅРґРµСЂ (РёСЃС‚РѕС‡РЅРёРєР°) <br>
+* *0*, *1* (РІС‚РѕСЂР°СЏ С†РёРІСЂР°) РІРѕР·РјРѕР¶РЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ РєСЂРѕРІРЅРѕРіРѕ СЂРѕРґСЃС‚РІР°<br>
+* 0**, 1**, 2**... (Рё РІСЃРµ РїРѕСЃР»РµРґС†СЋС‰РёРµ) С‚РёРї СЂРѕРґСЃС‚РІР° =><br>
 *<br>
-* 1 = брат/сестра<br>
-* 2 = муж/жена<br>
+* 1 = Р±СЂР°С‚/СЃРµСЃС‚СЂР°<br>
+* 2 = РјСѓР¶/Р¶РµРЅР°<br>
 *<br>
 *<br>
-* 3 = Животное<br>
-* 4 = отец/мать<br>
+* 3 = Р–РёРІРѕС‚РЅРѕРµ<br>
+* 4 = РѕС‚РµС†/РјР°С‚СЊ<br>
 * --<br>
-* 5 = сын/дочь<br>
-* 6 = Хозяин<br>
+* 5 = СЃС‹РЅ/РґРѕС‡СЊ<br>
+* 6 = РҐРѕР·СЏРёРЅ<br>
 */
     public void createLink (TreePerson first, TreePerson second, int tipeLink){
         personMethods.createLink(first, second, tipeLink);
@@ -72,27 +77,23 @@ public class TreeControl {
         }
     }
 
-    public void viewHeirs(Human startPerson){ // построение дерева доступно только людям
+    public void viewHeirs(Human startPerson){ // РїРѕСЃС‚СЂРѕРµРЅРёРµ РґРµСЂРµРІР° РґРѕСЃС‚СѓРїРЅРѕ С‚РѕР»СЊРєРѕ Р»СЋРґСЏРј
         viewConstructor.viewHeirs(startPerson);
+    }
+
+    public void viewHeirs(String name, Tree tree){ // РїРѕСЃС‚СЂРѕРµРЅРёРµ РґРµСЂРµРІР° РґРѕСЃС‚СѓРїРЅРѕ С‚РѕР»СЊРєРѕ Р»СЋРґСЏРј
+//        Human startPerson;
+        treeMethods.findOfName(name, tree);
+//        viewHeirs(startPerson);
     }
 
     public List<Link> getAllLink(Human person, Character filter){
         return personMethods.getAllLink(person, filter);
     }
-//    public void addTree(FamiliesI person);
-//
-//    public void addTree();
-//
-//    public void printTree();
-//
-//    public int getGender();
-//
-//    public void addLink(Link link);
-//
-//    public List<Link> getLink();
-//    public Link getLink(int i);
 
-//    public void addLink();
+    public void runMenu (){
+        menu.runMenu();
+    }
 
 
 }
