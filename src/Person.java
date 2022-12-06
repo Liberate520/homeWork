@@ -2,11 +2,11 @@ import java.util.*;
 
 public class Person {
     private String myName; //имя
-    private char myGender; //пол
+    private String myGender; //пол
     private Person myParent = null; //родитель
     private ArrayList<Person> myChildren; //дети
     
-    public Person(String name, char gender, Person parent) {
+    public Person(String name, String gender, Person parent) {
         myName = name;
         myGender = gender;
         myParent = parent;
@@ -23,10 +23,10 @@ public class Person {
         this.myName = myname;
     }
 
-    public char getMygender() {
+    public String getMygender() {
         return myGender;
     }
-    public void setMygender(char mygender) {
+    public void setMygender(String mygender) {
         this.myGender = mygender;
     }
     public Person getMyparent() {
@@ -39,7 +39,7 @@ public class Person {
         return myChildren;
     }
   
-    public void addChild(String childName, char gender) {
+    public void addChild(String childName, String gender) {
         Person child = new Person(childName, gender, this);
         myChildren.add(child);
     }

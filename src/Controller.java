@@ -1,45 +1,42 @@
-import java.io.IOException;
-import java.util.Scanner;
-/**
- * класс для общения с пользователем
- */
-public class Controller<T> implements View{
-    private T fam = null;
-    private Scanner in;
 
-    public Controller(T f){
-        this.fam = f;
-        this.in = new Scanner(System.in, "Cp866");
+public class Controller<T>{
+    //private final T fam = null;
+    private final View view;
 
+    public Controller(View view){
+        this.view = view;
+        view.setController(this);
+        //this.in = new Scanner(System.in, "Cp866");
     }
-    public void funct(T fam) throws IOException{
-        init();
-        int fun = this.in.nextInt();
-        switch (fun){
+    public void onClick(T fam) {
+        switch (view.printMenu("Меню: для печати нажмите - 1, для печати родителей нажмите - 2, для закрытия - 3, для добавленя потомка - 4")){
         case 1: //печать древа
             ((Family) fam).printTree();
-            this.funct(fam);
+            this.onClick(fam);
             break;
-        case 2: //печать детей родителя
-            answer("Введите имя родителя: ");
-            in.nextLine();
-            ((Family) fam).printChildren(in.nextLine());
-
-            this.funct(fam);
+        case 2: //печать детей родителяы
+            ((Family) fam).printChildren(view.scanOne("Введите имя родителя"));
+            this.onClick(fam);
             break;
         case 3:
-            in.close();
+            break;
+        case 4:
+            String p = view.scanOne("Введите имя родителя: ");
+            String c = view.scanOther("Введите имя ребенка: ");
+            String g = view.scanOther("Введите пол ребенка");
+            ((Family) fam).addChild(p, c, g);
+            this.onClick(fam);
             break;
         }
     }
-    @Override
-    public void answer(String s) {
-        System.out.print(s);
-        
-    }
-    @Override
-    public void init() {
-        System.out.print("Меню: для печати нажмите 1, для ввыода детей 2, для выхода - 3: ");
-        
+    public void newFamily(){
+        Repository r = new Repository();
+        view.printStr("Создайте фамильное древо");
+        String familyName = view.scanOther("Введите имя родителя : ");
+        String gName = view.scanOther("Введите пол родителя: ");
+        T fam = (T) new Family(familyName, gName);
+        r.addFamily((Family) fam);
+        System.out.println("Древо создано с родителем " + familyName);
+        this.onClick((T) fam);
     }
 }

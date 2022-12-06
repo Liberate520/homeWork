@@ -3,7 +3,7 @@ import java.util.Iterator;
 public class Family implements function_tree<Person>{
     public Person nowPerson = null; //текущий человек(узел дерева)
 
-    public Family(String name, char gender) {
+    public Family(String name, String gender) {
         nowPerson = new Person(name, gender, null);
     }
 
@@ -26,13 +26,13 @@ public class Family implements function_tree<Person>{
             Family.printPersonFamily(nowPerson,"потомок ", 0);
         }
     }
-    public void addChild(String parentName, String childName, char gender) {
+    public void addChild(String parentName, String childName, String gender) {
         if (nowPerson != null) {
             Family.addChildFamily(parentName, childName, nowPerson, gender);
         }
     }
  
-    private static void addChildFamily(String parentName, String childName, Person nowPerson, char gender) {
+    private static void addChildFamily(String parentName, String childName, Person nowPerson, String gender) {
         if (nowPerson.getMyname().equals(parentName)) {
             nowPerson.addChild(childName, gender);
         } else {
