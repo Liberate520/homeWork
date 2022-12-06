@@ -2,7 +2,9 @@ package service;
 
 import presenter.Presenter;
 import service.IO.IO;
+import service.analizator.Analizer;
 import service.analizator.DBAnalizer;
+import service.analizator.ExtendedAnalizer;
 import service.analizator.PersonAnalizer;
 import service.dataBase.DBHandler;
 import service.dataBase.DBToSave;
@@ -40,17 +42,17 @@ public class Service {
                 sentToPrint("Date of generation: " + db.getCreationDate().toString());
                 break;
             case "person analyze":
-                PersonAnalizer analizer = new PersonAnalizer(GetRandom.getRandomPerson(db));
+                Analizer analizer;
                 sentToPrint("Random person generated.");
                 sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {
                     case "Y", "y" -> {
-                        sentToPrint("\n__________________________________Find children_______________________________");
-                        String spacer = "";
-                        analizer.showChildrenTree(spacer);
+                        analizer = new ExtendedAnalizer(GetRandom.getRandomPerson(db));
+                        analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
                     case "N", "n" -> {
+                        analizer = new PersonAnalizer(GetRandom.getRandomPerson(db));
                         analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }

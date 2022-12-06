@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PersonAnalizer implements Analizer {
-    private final Person testPerson;
+    protected final Person testPerson;
 
-    String stats;
-    StatWorker line = new StatWorker();
+    protected String stats;
+    protected StatWorker line = new StatWorker();
 
     public PersonAnalizer(Person person) {
         this.testPerson = person;
@@ -25,26 +25,6 @@ public class PersonAnalizer implements Analizer {
 
     /* показывает дерево детей */
 
-    public void showChildrenTree(String spacer) {
-        childrenTreeWorker(this.testPerson, spacer);
-    }
-
-    private void childrenTreeWorker(Person person, String spacer) {
-        if (!person.getChildren().isEmpty()) {
-            line.addPosition(spacer + "Parent: " + person.getName() + " "
-                    + person.getFamilyname() + " " + person.getGender() + "\n");
-            line.addPosition(spacer + "Children: " + "\n");
-
-            for (Person child : person.getChildren()) {
-                line.addPosition(spacer + child.getName() + " " + child.getFamilyname() + " "
-                        + child.getGender() + " " + child.getMarigeStatus() + "\n");
-
-                spacer += " |";
-                childrenTreeWorker(child, spacer);
-            }
-            this.stats = line.toString();
-        }
-    }
 
     /* показывает только родных детей */
 //    public void showChildren() {
