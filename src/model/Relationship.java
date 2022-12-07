@@ -2,12 +2,12 @@ package model;
 
 public class Relationship {
 
-    private int relationsId;
+    private int relationId;
     private String relation;
     private int relationToHumanId;
     
     public Relationship(int relationsId, int relationToHumanId) {
-        this.relationsId = relationsId;
+        this.relationId = relationsId;
 
         if (relationsId == 1){
             this.relation = "Брак";
@@ -19,12 +19,12 @@ public class Relationship {
         this.relationToHumanId = relationToHumanId;
     }
 
-    public int getRelationsId() {
-        return relationsId;
+    public int getRelationId() {
+        return relationId;
     }
 
-    public void setRelationsId(int relationsId) {
-        this.relationsId = relationsId;
+    public void setRelationId(int relationsId) {
+        this.relationId = relationsId;
     }
 
     public String getRelation() {

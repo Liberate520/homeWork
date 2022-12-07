@@ -2,14 +2,14 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import view.Menu;
 
 public class HumanList {
-    List<Human> list;
+    private List<Human> list;
+    private Output output;
 
     public HumanList(){
         this.list = new ArrayList<Human>();
-
+        this.output = new Output();
         // тестовые ребята
         // Вася
         Human vasya = new Human();
@@ -36,11 +36,6 @@ public class HumanList {
         // Петя сын Васи
         Relationship vasyapetya = new Relationship(2,33);
         vasya.setRelationship(vasya,vasyapetya);
-
-    }
-
-    public List<Human> getHumanList() {
-        return this.list;
     }
 
     public Human get(int index){
@@ -51,61 +46,45 @@ public class HumanList {
         return this.list.size();
     }
 
-    public void addHuman(){
-        Human humanToAdd = new Human(list, Menu.getName(), Integer.parseInt(Menu.getAge()));
+    public String humanListToString(){
+        String result = "";
+        for (int i = 0; i < this.list.size(); i++){
+            result = result + list.get(i).humanToString(list.get(i)) + "\n";
+        }
+        return result;
+    }
+
+    public void addHuman(String name, int age){
+        Human humanToAdd = new Human(list, name, age);
         this.list.add(humanToAdd);
+        output.outputToConsole("добавлен: " + humanToAdd.humanToString(humanToAdd) + "\n");
     }
 
-    public void removeHuman(){
-        int idForMenu = Integer.parseInt(Menu.getId());
-            int tempId = 0;
-            int count = 0;
-            for (Human human : list){
-                if (human.getId() == idForMenu){
-                    tempId = count;
-                }
-                count++;
+    public void removeHuman(int idForMenu){
+        for (int i = 0; i < list.size(); i++){
+            if (list.get(i).getId() == idForMenu){
+                Human removedHuman = list.get(i);
+                list.remove(i);
+                output.outputToConsole("удален: " + removedHuman.humanToString(removedHuman) + "\n");
+            } 
+        }
+    }      
+
+    public void printChildrens(int idForMenu){
+        for (Human human : list){
+            if (human.getId() == idForMenu){
+                output.outputToConsole("Дети: " + human.childrensToString(human) + "\n");
             }
-            list.remove(tempId);
+        }
     }
 
-    public void printChildrens(){
-        int idForMenu = Integer.parseInt(Menu.getId());
-            for (Human human : list){
-                if (human.getId() == idForMenu){
-                    human.printChildrens(human);
-                }
+    public void addReletionToHuman(int idForMenu, int reletionId, int reletionToHumanId ){
+        for (Human human : list){
+            if (human.getId() == idForMenu){
+                Relationship relationship = new Relationship(reletionId, reletionToHumanId);
+                human.setRelationship(human,relationship);
             }
-    }
-
-    public void addReletionToHuman(){
-        int idForMenu = Integer.parseInt(Menu.getId());
-            for (Human human : list){
-                if (human.getId() == idForMenu){
-                    Relationship relationship = new Relationship(Integer.parseInt(Menu.getIdRelation()),
-                                                        Integer.parseInt(Menu.getIdTo()));
-                    human.setRelationship(human,relationship);
-                }
-            }
-    }
-
-    public void addToTxt(){
-        int idForMenu = Integer.parseInt(Menu.getId());
-            for (Human human : list){
-                if (human.getId() == idForMenu){
-                    SaveToTxt txt = new SaveToTxt();
-                    txt.saveAs(human.getHuman(human));
-                }
-            }
-    }
-
-    public void addToDoc(){
-        int idForMenu = Integer.parseInt(Menu.getId());
-            for (Human human : list){
-                if (human.getId() == idForMenu){
-                    SaveToDoc doc = new SaveToDoc();
-                    doc.saveAs(human.getHuman(human));
-                }
-            }
+        }
+        output.outputToConsole("связь добавлена" + "\n");
     }
 }
