@@ -13,7 +13,6 @@ import java.util.Date;
 public class GenerationWork {
     private final DBHandler mainDb;
     private String stats;
-
     StatWorker line = new StatWorker();
     private int generationCount = 0;
 
@@ -24,6 +23,8 @@ public class GenerationWork {
 
     public void startGenerator(int count) {
         createGeneration(count, mainDb);
+        line.addPosition("Date of generation: " + mainDb.getCreationDate().toString());
+        this.stats = line.toString();
     }
 
     /* генератор поколений */
@@ -49,8 +50,8 @@ public class GenerationWork {
                 + ", general: " + mainDb.getFamiliesNumber() + "\n");
         line.addPosition("Children: " + nextGeneration.getSize() + "\n");
         line.addPosition("Time for generation generation = "
-                + (System.nanoTime() - startTime) + "ms" + "\n" + "\n");
-        this.stats = line.toString();
+                + (System.nanoTime() - startTime) + "ns" + "\n" + "\n");
+
 
         if (generationCount == count) {
             return;

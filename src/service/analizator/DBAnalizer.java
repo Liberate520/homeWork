@@ -15,7 +15,6 @@ import static service.classes.Marrige.YES;
 public class DBAnalizer implements Iterable<Pair>, Analizer {
 
     private String stats;
-
     private final DBHandler db;
     private final ArrayList<Pair> families;
     StatWorker line = new StatWorker();

@@ -17,7 +17,6 @@ public interface DBHandler extends Iterable<Person> {
 
     Date getCreationDate();
 
-
     int getSize();
 
     Person[] getFamily(int index);
@@ -41,5 +40,4 @@ public interface DBHandler extends Iterable<Person> {
     ArrayList<Person> getListOf(Marrige state);
 
     ArrayList<Person> getDb();
-
 }

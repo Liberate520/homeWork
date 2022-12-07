@@ -50,7 +50,7 @@ public class ChildrenGenerator {
     вероятность появления детей у пары
      */
     private static int childrenGenerator() {
-        int chance = Generator.rand.nextInt(0, 100);
+        int chance = PersonGenerator.rand.nextInt(0, 100);
         int childrenNumber = 0;
         if (chance < 50 && chance > 25) {
             childrenNumber = 1;
@@ -62,18 +62,17 @@ public class ChildrenGenerator {
         return childrenNumber;
     }
 
-
     /* создаём и везде прописываем дитя */
     private void createChild(Person parent1, Person parent2) {
         Person child = new Person();
         switch (parent1.getGender()) {
             // проверяем фамилию
             case MALE -> {
-                child = Generator.create(parent1.getFamilyname());
+                child = PersonGenerator.create(parent1.getFamilyname());
                 addFamilyMembers(child, parent1, parent2);
             }
             case FEMALE -> {
-                child = Generator.create(parent2.getFamilyname());
+                child = PersonGenerator.create(parent2.getFamilyname());
                 addFamilyMembers(child, parent2, parent1);
             }
         }
@@ -105,6 +104,4 @@ public class ChildrenGenerator {
             child.addMember(GRANDMOTHER, parent2.getMember(MOTHER).get(0));
         }
     }
-
-
 }

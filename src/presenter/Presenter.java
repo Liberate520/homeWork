@@ -15,7 +15,6 @@ public class Presenter {
         this.service = service;
     }
 
-
     public Presenter(View dispatcher) {
         this.view = dispatcher;
     }

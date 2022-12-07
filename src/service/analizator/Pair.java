@@ -21,18 +21,6 @@ public class Pair {
         return pair;
     }
 
-    @Override
-    public String toString() {
-        return "Family has " + this.descendants + " descendants\n" +
-                pair[0].toString() +
-                pair[1].toString();
-    }
-
-    public Pair(Person[] pair) {
-        this.pair = pair;
-        descendantsCount(pair[0]);
-    }
-
     private void descendantsCount(Person person) {
         int count = person.getChildrenCount();
         if (count == 0) {
@@ -42,6 +30,13 @@ public class Pair {
         for (Person child : person.getChildren()) {
             descendantsCount(child);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Family has " + this.descendants + " descendants\n" +
+                pair[0].toString() +
+                pair[1].toString();
     }
 
     @Override
@@ -57,5 +52,10 @@ public class Pair {
         int result = Objects.hash(descendants);
         result = 31 * result + Arrays.hashCode(pair);
         return result;
+    }
+
+    public Pair(Person[] pair) {
+        this.pair = pair;
+        descendantsCount(pair[0]);
     }
 }

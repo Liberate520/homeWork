@@ -9,7 +9,7 @@ import service.dataBase.DBHandler;
 public class GetRandom {
 
     public static Person getRandomPerson(DBHandler db) {
-        int index = Generator.rand.nextInt(0, db.getSize());
+        int index = PersonGenerator.rand.nextInt(0, db.getSize());
         return db.get(index);
     }
 

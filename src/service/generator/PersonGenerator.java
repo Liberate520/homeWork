@@ -10,7 +10,7 @@ import java.util.Scanner;
 /*
 Класс - генератор объектов Parent
  */
-public class Generator {
+public class PersonGenerator {
     public static Random rand = new Random();
 
     /**

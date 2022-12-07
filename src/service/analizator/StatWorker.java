@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
-Класс предоставляет StringBuilder и возвращает строки.
+Класс предоставляет StringBuilder и возвращает строку.
  */
 public class StatWorker implements Serializable {
     private ArrayList<String> stats;

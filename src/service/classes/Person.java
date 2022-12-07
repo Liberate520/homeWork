@@ -16,14 +16,6 @@ public class Person extends Human implements Relation, Serializable {
 
     private final FamilyTree familymembers;
 
-    public Person(FamilyTree familymembers) {
-        this.familymembers = familymembers;
-    }
-
-    public Person() {
-        this(new FamilyTree());
-    }
-
     public FamilyTree getTree() {
         return this.familymembers;
     }
@@ -60,5 +52,13 @@ public class Person extends Human implements Relation, Serializable {
 
     public int getChildrenCount() {
         return getChildren().size();
+    }
+
+    public Person(FamilyTree familymembers) {
+        this.familymembers = familymembers;
+    }
+
+    public Person() {
+        this(new FamilyTree());
     }
 }

@@ -42,7 +42,6 @@ public class Service {
                 Gena.generatePopulation(startPopulation);
                 Gena.startGenerator(generationCount);
                 sentToPrint(Gena.getStats());
-                sentToPrint("Date of generation: " + db.getCreationDate().toString());
                 break;
             case "person analyze":
                 Analizer analizer;

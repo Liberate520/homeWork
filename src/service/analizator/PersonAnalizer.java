@@ -106,7 +106,6 @@ public class PersonAnalizer implements Analizer {
         line.addPosition("\n");
     }
 
-
     @Override
     public String getStats() {
         return this.stats;

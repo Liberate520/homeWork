@@ -3,7 +3,7 @@ package service.dataBase;
 import service.classes.Gender;
 import service.classes.Marrige;
 import service.classes.Person;
-import service.generator.Generator;
+import service.generator.PersonGenerator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import static service.tree.RelationType.SON;
 public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     private final ArrayList<Person> db;
     private final ArrayList<Person[]> familiesList;
-
     private Date creationDate;
 
     public void setCreationDate(Date creationDate) {
@@ -35,20 +34,17 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return db.size();
     }
 
-
     public Person get(int index) {
         return db.get(index);
     }
-
 
     public Person[] getFamily(int index) {
         return familiesList.get(index);
     }
 
-
     /*
- возвращает список записей имеющих определённый статус гендера
-  */
+    возвращает список записей имеющих определённый статус гендера
+     */
     public ArrayList<Person> getListOf(Gender state) {
         ArrayList<Person> results = new ArrayList<>();
         for (Person person : db) {
@@ -73,13 +69,12 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return this.db;
     }
 
-
     /*
      * заполнить базу
      */
     public void fill(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            db.add(Generator.create());
+            db.add(PersonGenerator.create());
         }
     }
 

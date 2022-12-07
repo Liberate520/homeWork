@@ -7,9 +7,9 @@ import service.classes.Person;
  */
 public class ExtendedPersonAnalizer extends PersonAnalizer {
 
-
     @Override
     public void analyze() {
+        super.analyze();
         line.addPosition("\n__________________________________Find children_______________________________\n");
         startChildrenTree();
         this.stats = line.toString();
@@ -37,11 +37,6 @@ public class ExtendedPersonAnalizer extends PersonAnalizer {
                 childrenTreeWorker(child, spacer);
             }
         }
-    }
-
-    @Override
-    public String getStats() {
-        return stats;
     }
 
     public ExtendedPersonAnalizer(Person person) {

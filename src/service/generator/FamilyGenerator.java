@@ -6,8 +6,10 @@ import service.dataBase.DBHandler;
 
 import java.util.ArrayList;
 
-import static service.classes.Gender.*;
-import static service.classes.Marrige.*;
+import static service.classes.Gender.FEMALE;
+import static service.classes.Gender.MALE;
+import static service.classes.Marrige.NO;
+import static service.classes.Marrige.YES;
 import static service.tree.RelationType.HUSBAND;
 import static service.tree.RelationType.WIFE;
 
@@ -16,8 +18,7 @@ import static service.tree.RelationType.WIFE;
  */
 public class FamilyGenerator {
 
-
-    /* создаём семью */
+    /* создаём семьи */
     public void createFamilies(DBHandler db) {
         ArrayList<Person> target;
         ArrayList<Person> males = db.getListOf(MALE);
