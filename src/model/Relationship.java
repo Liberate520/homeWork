@@ -42,7 +42,4 @@ public class Relationship {
     public void setRelationToHumanId(int relationToHumanId) {
         this.relationToHumanId = relationToHumanId;
     }
-
-    
-
 }    

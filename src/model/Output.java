@@ -1,17 +1,15 @@
 package model;
 
-import view.ConsoleView;
-
 public class Output {
 
-    public void outputToConsole(String Str){
-        ConsoleView.print(Str);
+    public String outputString(String str){
+        return str + "\n";
     }
 
-    public void consolePrintAllHumans(HumanList list){
+    public String outputListToString(HumanList list){
         String result = "";
         result = list.humanListToString();
-        ConsoleView.print(result);
+        return result;
     }
 }
 
