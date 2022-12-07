@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree familyTree1 = new FamilyTree();
+        FamilyTree<Human> familyTree1 = new FamilyTree<>();
         Output output = new Output();
 
         /**

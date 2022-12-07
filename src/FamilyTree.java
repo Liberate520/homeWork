@@ -1,30 +1,30 @@
 import java.util.*;
 
-public class FamilyTree implements Iterable<ObjectResearcheble> {
-    private List<ObjectResearcheble> mainTree;
+public class FamilyTree<T extends ObjectResearcheble> implements Iterable<T> {
+    private List<T> mainTree;
 
     public FamilyTree() {
         mainTree = new ArrayList<>();
     }
 
-    public void addHuman(Human arg){
+    public void addHuman(T arg){
         mainTree.add(arg);
     }
 
 
-    public List<ObjectResearcheble> getMainTree() {
+    public List<T> getMainTree() {
         return mainTree;
     }
 
     @Override
-    public Iterator<ObjectResearcheble> iterator() {
+    public Iterator<T> iterator() {
         return mainTree.iterator();
     }
 
-    public void sort(){
-        Collections.sort(mainTree);
-    }
-
+//    public void sort(){
+//        Collections.sort(mainTree);
+//    }
+//
     public void sortByCountDegree(){
         Collections.sort(mainTree, new PersonComparatorByCountDegree());
     }

@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Output {
+public class Output<T> {
 
     String ANSI_GREEN = "\u001B[32m";
     String ANSI_RESET = "\u001B[0m";
@@ -42,7 +42,7 @@ public class Output {
 
     public void showAllPerson(FamilyTree familyTree){
         System.out.println(ANSI_GREEN + "Тестирую итератор:" + ANSI_RESET);
-        for (ObjectResearcheble person:familyTree) {
+        for (Object person:familyTree) {
             System.out.println(person);
         }
     }
