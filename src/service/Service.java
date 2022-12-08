@@ -62,16 +62,16 @@ public class Service {
                 }
                 break;
             case "db analyze":
-                DBAnalizer DBStats = new DBAnalizer(db);
-                DBStats.analyze();
-                sentToPrint(DBStats.getStats());
+                analizer = new DBAnalizer(db);
+                analizer.analyze();
+                sentToPrint(analizer.getStats());
                 break;
             case "save statistics":
                 String path = "src/service/dataBase/stats.txt";
-                DBStats = new DBAnalizer(db);
+                analizer = new DBAnalizer(db);
                 IO saver = new IO();
-                DBStats.getDBStats();
-                saver.toFile(DBStats.toString(), path);
+                analizer.getStats();
+                saver.toFile(analizer.toString(), path);
                 break;
             case "save db":
                 path = "src/service/dataBase/db.dat";
