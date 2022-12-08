@@ -1,7 +1,8 @@
 package service.IO;
 
-import java.io.IOException;
-
+/*
+Интерфейс для чтения\записи
+ */
 public interface IO {
     <E> void toFile(E element, String path);
 

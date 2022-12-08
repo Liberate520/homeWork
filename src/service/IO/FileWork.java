@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/*
+Класс для записи в .txt файл строки
+ */
 public class FileWork implements IO {
     @Override
     public <E> void toFile(E element, String path) {

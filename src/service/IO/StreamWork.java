@@ -1,9 +1,10 @@
 package service.IO;
 
+
 import java.io.*;
 
 /*
-Класс для записи и считывания из файла
+Класс для записи и считывания объектов
  */
 public class StreamWork implements IO {
     public <E> void toFile(E element, String path) {
