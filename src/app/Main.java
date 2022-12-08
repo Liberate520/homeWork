@@ -2,6 +2,7 @@ package app;
 
 import presenter.Presenter;
 import service.Service;
+import service.classes.Person;
 import service.dataBase.DataBase;
 import view.Dispatcher;
 
