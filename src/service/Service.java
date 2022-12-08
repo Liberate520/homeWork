@@ -1,7 +1,9 @@
 package service;
 
 import presenter.Presenter;
+import service.IO.FileWork;
 import service.IO.IO;
+import service.IO.StreamWork;
 import service.analizator.Analizer;
 import service.analizator.DBAnalizer;
 import service.analizator.ExtendedPersonAnalizer;
@@ -29,6 +31,8 @@ public class Service {
 
     public void receive(String command) {
         Scanner input = new Scanner(System.in);
+        Analizer analizer;
+        IO ioWork;
         switch (command) {
             case "exit", "stop":
                 sentToPrint("Finishing tasks...");
@@ -44,7 +48,6 @@ public class Service {
                 sentToPrint(Gena.getStats());
                 break;
             case "person analyze":
-                Analizer analizer;
                 sentToPrint("Random person generated.");
                 sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {
@@ -68,17 +71,27 @@ public class Service {
                 break;
             case "save statistics":
                 String path = "src/service/dataBase/stats.txt";
+                ioWork = new FileWork();
                 analizer = new DBAnalizer(db);
-                IO saver = new IO();
+                analizer.analyze();
+                String data = analizer.getStats();
+                sentToPrint(data);
+                sentToPrint(data);
+                ioWork.toFile(data, path);
+                break;
+            case "load statistics":
+                path = "src/service/dataBase/stats.txt";
+                analizer = new DBAnalizer(db);
+                IO loader = new FileWork();
                 analizer.getStats();
-                saver.toFile(analizer.toString(), path);
+                sentToPrint(loader.fromFile(path).toString());
                 break;
             case "save db":
                 path = "src/service/dataBase/db.dat";
-                saver = new IO();
+                ioWork = new StreamWork();
                 DBToSave converter = new DBToSave(db);
                 converter.prepare();
-                saver.toFile(converter.getDbBytes(), path);
+                ioWork.toFile(converter.getDbBytes(), path);
                 break;
             // для тестов записи.
             case "test":
@@ -86,10 +99,10 @@ public class Service {
                 Gena.generatePopulation(100); // изменить аргумент >200 для StackOverFlowError
                 Gena.startGenerator(5);
                 path = "src/service/dataBase/db.dat";
-                saver = new IO();
+                ioWork = new StreamWork();
                 converter = new DBToSave(db);
                 converter.prepare();
-                saver.toFile(converter.getDbBytes(), path);
+                ioWork.toFile(converter.getDbBytes(), path);
                 break;
             default:
                 break;
