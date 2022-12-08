@@ -1,4 +1,4 @@
-package DZ.DZ2;
+
 
 public class FamilyCommunication {
     private Human human;            
