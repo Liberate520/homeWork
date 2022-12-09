@@ -10,7 +10,7 @@ public class GetRandom {
 
     public static Person getRandomPerson(DBHandler db) {
         int index = PersonGenerator.rand.nextInt(0, db.getSize());
-        return db.get(index);
+        return db.getPerson(index);
     }
 
     //Скрыто на будующее

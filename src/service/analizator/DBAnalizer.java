@@ -48,7 +48,7 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
                 woman++;
             }
         }
-        line.addPosition("Size of DB = " + this.db.getDb().size() + "\n");
+        line.addPosition("Size of DB = " + this.db.getMainDB().size() + "\n");
         line.addPosition("Number of full families: " + this.db.getFullFamilies().size() + "\n");
         line.addPosition("Number of married people: " + married + "\n");
         line.addPosition("Number of single people: " + single + "\n");
@@ -140,8 +140,9 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
 
     public DBAnalizer(DBHandler db) {
         ArrayList<Pair> families = new ArrayList<>();
-        for (Person[] family : db.getFamilies()) {
-            families.add(new Pair(family));
+        for (Integer[] family : db.getFamilies()) {
+            Person[] pair = {db.getPerson(family[0]), db.getPerson(family[1])};
+            families.add(new Pair(pair, db));
         }
         this.families = families;
         this.db = db;

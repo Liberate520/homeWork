@@ -14,7 +14,7 @@ public class GenerationWork {
     private final DBHandler mainDb;
     private String stats;
     StatWorker line = new StatWorker();
-    private int generationCount = 0;
+    private int generationCount = 1;
 
     /* стартовое поколение */
     public void generatePopulation(int startPopulation) {
@@ -22,41 +22,36 @@ public class GenerationWork {
     }
 
     public void startGenerator(int count) {
-        createGeneration(count, mainDb);
+        createGeneration(count);
         line.addPosition("Date of generation: " + mainDb.getCreationDate().toString());
         this.stats = line.toString();
     }
 
     /* генератор поколений */
-    private void createGeneration(int count, DBHandler db) {
+    private void createGeneration(int count) {
         long startTime = System.nanoTime();
-        FamilyGenerator familyGeneration = new FamilyGenerator();
-        ChildrenGenerator childrenGeneration = new ChildrenGenerator();
-        familyGeneration.createFamilies(db);
-        childrenGeneration.snusnuForEveryOne(db);
+        FamilyGenerator familyGeneration = new FamilyGenerator(mainDb, this.generationCount - 1);
+        ChildrenGenerator childrenGeneration = new ChildrenGenerator(mainDb, this.generationCount);
+        familyGeneration.createFamilies();
+        childrenGeneration.snusnuForEveryOne();
+//
+//        for (Person person : mainDb.getGeneration(this.generationCount)) {
+//            this.mainDb.addChild(person);
+//        }
 
-        DataBase nextGeneration = new DataBase();
-        for (Person[] parents : db.getFullFamilies()) {
-            for (Person child : parents[0].getChildren()) {
-                nextGeneration.add(child);
-            }
-        }
-        this.mainDb.includeDB(nextGeneration);
-        this.mainDb.includeFamilies(db);
-        this.generationCount++;
+        mainDb.familiesCacheFlush();
         line.addPosition("Current generation: " + generationCount
                 + ". Population: " + mainDb.getSize() + "\n");
-        line.addPosition("Families with children: " + db.getFullFamilies().size()
+        line.addPosition("Families with children: " + mainDb.getFullFamilies().size()
                 + ", general: " + mainDb.getFamiliesNumber() + "\n");
-        line.addPosition("Children: " + nextGeneration.getSize() + "\n");
+        line.addPosition("Children: " + mainDb.getChildrenSize(generationCount) + "\n");
         line.addPosition("Time for generation generation = "
                 + (System.nanoTime() - startTime) + "ns" + "\n" + "\n");
-
-
+        this.generationCount++;
         if (generationCount == count) {
             return;
         }
-        createGeneration(count, nextGeneration);
+        createGeneration(count);
         this.mainDb.setCreationDate(new Date());
     }
 

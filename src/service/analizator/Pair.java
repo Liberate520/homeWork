@@ -1,6 +1,7 @@
 package service.analizator;
 
 import service.classes.Person;
+import service.dataBase.DBHandler;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class Pair {
 
     private final Person[] pair;
+    private final DBHandler db;
     private int descendants = 0;
 
     public int getDescendants() {
@@ -27,8 +29,8 @@ public class Pair {
             return;
         }
         this.descendants += count;
-        for (Person child : person.getChildren()) {
-            descendantsCount(child);
+        for (Integer childIndex : person.getChildren()) {
+            descendantsCount(db.getPerson(childIndex));
         }
     }
 
@@ -54,8 +56,9 @@ public class Pair {
         return result;
     }
 
-    public Pair(Person[] pair) {
+    public Pair(Person[] pair, DBHandler db) {
         this.pair = pair;
+        this.db = db;
         descendantsCount(pair[0]);
     }
 }

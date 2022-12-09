@@ -1,6 +1,7 @@
 package service.analizator;
 
 import service.classes.Person;
+import service.dataBase.DBHandler;
 import service.tree.RelationType;
 
 import java.util.ArrayList;
@@ -12,11 +13,14 @@ import java.util.HashMap;
 public class PersonAnalizer implements Analizer {
     protected final Person testPerson;
 
+    protected DBHandler db;
+
     protected String stats;
     protected StatWorker line = new StatWorker();
 
-    public PersonAnalizer(Person person) {
+    public PersonAnalizer(Person person, DBHandler db) {
         this.testPerson = person;
+        this.db = db;
     }
 
     @Override
@@ -91,13 +95,13 @@ public class PersonAnalizer implements Analizer {
     public void showFamilyMembers() {
         line.addPosition("Person:\n");
         line.addPosition(testPerson.toString());
-        HashMap<RelationType, ArrayList<Person>> family = testPerson.getFamily();
+        HashMap<RelationType, ArrayList<Integer>> family = testPerson.getFamily();
 
         for (RelationType item : family.keySet()) {
             line.addPosition(item.toString() + "\n");
             if (testPerson.checkMember(item)) {
-                for (Person member : testPerson.getMember(item)) {
-                    line.addPosition(member.toString());
+                for (Integer memberIndex : testPerson.getMember(item)) {
+                    line.addPosition(db.getPerson(memberIndex).toString());
                 }
             } else {
                 line.addPosition("No" + item + " found." + "\n");

@@ -18,40 +18,48 @@ import static service.tree.RelationType.WIFE;
  */
 public class FamilyGenerator {
 
+    private final DBHandler db;
+    private final int generation;
+
+    public FamilyGenerator(DBHandler db, int generation) {
+        this.generation = generation;
+        this.db = db;
+    }
+
     /* создаём семьи */
-    public void createFamilies(DBHandler db) {
+    public void createFamilies() {
         ArrayList<Person> target;
-        ArrayList<Person> males = db.getListOf(MALE);
-        ArrayList<Person> females = db.getListOf(FEMALE);
+        ArrayList<Person> males = db.getListOf(MALE, generation);
+        ArrayList<Person> females = db.getListOf(FEMALE, generation);
         if (males.size() > females.size()) {
             target = females;
         } else {
             target = males;
         }
         for (Person parent : target) {
-            prepairCouple(parent, db);
+            prepairCouple(parent);
         }
     }
 
     /* подготовка */
-    private void prepairCouple(Person person, DBHandler db) {
+    private void prepairCouple(Person person) {
         if (person.getMarigeStatus() != YES) {
             switch (person.getGender()) {
-                case MALE -> marige(person, check(db, FEMALE), db);
-                case FEMALE -> marige(person, check(db, MALE), db);
+                case MALE -> marige(person, check(FEMALE), db);
+                case FEMALE -> marige(person, check(MALE), db);
             }
         }
     }
 
     /* подбор людей */
-    private Person check(DBHandler db, Gender state) {
+    private Person check(Gender state) {
         Person person = GetRandom.getRandomPerson(db);
         if (person.getGender() == state) {
             if (person.getMarigeStatus() == NO) {
                 return person;
             }
         }
-        person = check(db, state);
+        person = check(state);
         return person;
     }
 
@@ -76,7 +84,7 @@ public class FamilyGenerator {
             }
         }
         Person[] pair = {person, personSec};
-        db.addFamily(pair);
+        db.addFamilyToCache(pair);
         person.setMarigeStatus(YES);
         personSec.setMarigeStatus(YES);
     }

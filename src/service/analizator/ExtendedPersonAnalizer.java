@@ -1,6 +1,7 @@
 package service.analizator;
 
 import service.classes.Person;
+import service.dataBase.DBHandler;
 
 /*
 Класс для поиска рекурсивно детей у всех потомков
@@ -29,7 +30,8 @@ public class ExtendedPersonAnalizer extends PersonAnalizer {
                     + person.getFamilyname() + " " + person.getGender() + "\n");
             line.addPosition(spacer + "Children: " + "\n");
 
-            for (Person child : person.getChildren()) {
+            for (Integer childIndex : person.getChildren()) {
+                Person child = db.getPerson(childIndex);
                 line.addPosition(spacer + child.getName() + " " + child.getFamilyname() + " "
                         + child.getGender() + " " + child.getMarigeStatus() + "\n");
 
@@ -39,7 +41,7 @@ public class ExtendedPersonAnalizer extends PersonAnalizer {
         }
     }
 
-    public ExtendedPersonAnalizer(Person person) {
-        super(person);
+    public ExtendedPersonAnalizer(Person person, DBHandler db) {
+        super(person, db);
     }
 }

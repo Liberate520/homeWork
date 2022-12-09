@@ -17,9 +17,35 @@ import static service.tree.RelationType.SON;
 Класс - база для хранения объектов Person и семейных пар
  */
 public class DataBase implements Serializable, Iterable<Person>, DBHandler {
-    private final ArrayList<Person> db;
-    private final ArrayList<Person[]> familiesList;
     private Date creationDate;
+    private ArrayList<Person> mainDB;
+    private ArrayList<Integer[]> familiesList;
+    private ArrayList<Integer[]> cachedFamilies;
+
+    public void setMainDB(ArrayList<Person> mainDB) {
+        this.mainDB = mainDB;
+    }
+
+    @Override
+    public void cloneDB(DBHandler otherDB) {
+        this.mainDB =  otherDB.getMainDB();
+        this.familiesList = otherDB.getFamilies();
+    }
+
+    public ArrayList<Integer[]> getCachedFamilies() {
+        return cachedFamilies;
+    }
+
+    @Override
+    public void familiesCacheFlush() {
+        this.familiesList.addAll(cachedFamilies);
+        cachedFamilies.clear();
+    }
+
+    public void setCachedFamilies(ArrayList<Integer[]> cachedFamilies) {
+        this.cachedFamilies = cachedFamilies;
+    }
+
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -31,24 +57,62 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
 
     @Override
     public int getSize() {
-        return db.size();
+        return mainDB.size();
     }
 
-    public Person get(int index) {
-        return db.get(index);
+
+    @Override
+    public int getChildrenSize(int number) {
+        int count = 0;
+        for (Person person : this.mainDB) {
+            if (person.getGeneration() == number) {
+            count++;
+            }
+        }
+        return count;
     }
 
-    public Person[] getFamily(int index) {
+    @Override
+    public ArrayList<Person> getGeneration(int number) {
+        ArrayList<Person> generation = new ArrayList<>();
+        for (Person person : mainDB) {
+            if (person.getGeneration() == number) {
+                generation.add(person);
+            }
+        }
+        return generation;
+    }
+
+
+
+    public Person getPerson(int index) {
+        return mainDB.get(index);
+    }
+
+    @Override
+    public ArrayList<Person> getPersons(ArrayList<Integer> indexes) {
+        ArrayList<Person> persons = new ArrayList<>();
+        for (Integer index : indexes) {
+            persons.add(getPerson(index));
+        }
+        return persons;
+    }
+
+    public int getPersonIndex(Person person) {
+        return this.mainDB.indexOf(person);
+    }
+
+    public Integer[] getFamily(int index) {
         return familiesList.get(index);
     }
 
     /*
     возвращает список записей имеющих определённый статус гендера
      */
-    public ArrayList<Person> getListOf(Gender state) {
+    public ArrayList<Person> getListOf(Gender state, int generation) {
         ArrayList<Person> results = new ArrayList<>();
-        for (Person person : db) {
-            if (person.getGender() == state) {
+        for (Person person : mainDB) {
+            if (person.getGender() == state && person.getGeneration() == generation) {
                 results.add(person);
             }
         }
@@ -57,7 +121,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
 
     public ArrayList<Person> getListOf(Marrige state) {
         ArrayList<Person> results = new ArrayList<>();
-        for (Person person : db) {
+        for (Person person : mainDB) {
             if (person.getMarigeStatus() == state) {
                 results.add(person);
             }
@@ -65,8 +129,8 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return results;
     }
 
-    public ArrayList<Person> getDb() {
-        return this.db;
+    public ArrayList<Person> getMainDB() {
+        return this.mainDB;
     }
 
     /*
@@ -74,7 +138,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
      */
     public void fill(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            db.add(PersonGenerator.create());
+            this.addPerson(PersonGenerator.create());
         }
     }
 
@@ -83,8 +147,10 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
      */
     @Override
     public void includeDB(DBHandler nextGeneration) {
-        this.db.addAll(nextGeneration.getDb());
-        this.familiesList.addAll(nextGeneration.getFullFamilies());
+        for (Person person : nextGeneration) {
+            this.addPerson(person);
+        }
+        includeFamilies(nextGeneration);
     }
 
     /*
@@ -94,11 +160,12 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         this.familiesList.addAll(nextGeneration.getFullFamilies());
     }
 
-    public void add(Person person) {
-        db.add(person);
+    public void addPerson(Person person) {
+        this.mainDB.add(person);
+        person.setDbIndex(mainDB.indexOf(person));
     }
 
-    public ArrayList<Person[]> getFamilies() {
+    public ArrayList<Integer[]> getFamilies() {
         return familiesList;
     }
 
@@ -107,10 +174,10 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return familiesList.size();
     }
 
-    public ArrayList<Person[]> getFullFamilies() {
-        ArrayList<Person[]> fullFamiliesList = new ArrayList<>();
-        for (Person[] family : familiesList) {
-            if (family[0].checkMember(SON) || family[0].checkMember(DAUGHTER)) {
+    public ArrayList<Integer[]> getFullFamilies() {
+        ArrayList<Integer[]> fullFamiliesList = new ArrayList<>();
+        for (Integer[] family : familiesList) {
+            if (mainDB.get(family[0]).checkMember(SON) || mainDB.get(family[0]).checkMember(DAUGHTER)) {
                 fullFamiliesList.add(family);
             }
         }
@@ -118,13 +185,20 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     }
 
     @Override
-    public void addFamily(Person[] family) {
+    public void addFamily(Integer[] family) {
         familiesList.add(family);
     }
 
-    public DataBase(ArrayList<Person> db) {
-        this.db = db;
+    @Override
+    public void addFamilyToCache(Person[] family) {
+        Integer[] pair = {family[0].getDbIndex(), family[1].getDbIndex()};
+        this.cachedFamilies.add(pair);
+    }
+
+    public DataBase(ArrayList<Person> mainDB) {
+        this.mainDB = mainDB;
         this.familiesList = new ArrayList<>(2);
+        this.cachedFamilies = new ArrayList<>();
     }
 
     public DataBase() {
@@ -133,6 +207,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
 
     @Override
     public Iterator<Person> iterator() {
-        return new DataBaseIterator(this.db);
+        return new DataBaseIterator(this.mainDB);
     }
 }

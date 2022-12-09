@@ -15,6 +15,16 @@ import static service.tree.RelationType.SON;
 public class Person extends Human implements Relation, Serializable {
 
     private final FamilyTree familymembers;
+    private int generation = 0;
+
+    public int getGeneration() {
+        return generation;
+    }
+
+    public void setGeneration(int generation) {
+        this.generation = generation;
+    }
+
 
     public FamilyTree getTree() {
         return this.familymembers;
@@ -33,20 +43,17 @@ public class Person extends Human implements Relation, Serializable {
         }
     }
 
-    public ArrayList<Person> getChildren() {
-        ArrayList<Person> children = new ArrayList<>();
+    public ArrayList<Integer> getChildren() {
+        ArrayList<Integer> children = new ArrayList<>();
         try {
-            ArrayList<Person> sons = new ArrayList<>(this.getMember(SON));
-            children.addAll(sons);
+            children.addAll(new ArrayList<>(this.getMember(SON)));
         } catch (Exception ignored) {
         }
 
         try {
-            ArrayList<Person> daughters = new ArrayList<>(this.getMember(DAUGHTER));
-            children.addAll(daughters);
+            children.addAll(new ArrayList<>(this.getMember(DAUGHTER)));
         } catch (Exception ignored) {
         }
-
         return children;
     }
 

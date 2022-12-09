@@ -17,27 +17,45 @@ public interface DBHandler extends Iterable<Person> {
 
     Date getCreationDate();
 
+    void setMainDB(ArrayList<Person> mainDB);
+
+    void cloneDB(DBHandler db);
+
     int getSize();
 
-    Person[] getFamily(int index);
+    int getChildrenSize(int number);
 
-    Person get(int index);
+    ArrayList<Person> getGeneration(int number);
 
-    ArrayList<Person[]> getFullFamilies();
+    Integer[] getFamily(int index);
 
-    ArrayList<Person[]> getFamilies();
+    Person getPerson(int index);
+
+    void addPerson(Person person);
+
+    ArrayList<Person> getPersons(ArrayList<Integer> indexes);
+
+    ArrayList<Integer[]> getFullFamilies();
+
+    ArrayList<Integer[]> getFamilies();
 
     int getFamiliesNumber();
 
-    void addFamily(Person[] family);
+    void addFamily(Integer[] family);
+
+    void addFamilyToCache(Person[] family);
+
+    ArrayList<Integer[]> getCachedFamilies();
+
+    void familiesCacheFlush();
 
     void includeDB(DBHandler otherDB);
 
     void includeFamilies(DBHandler otherDB);
 
-    ArrayList<Person> getListOf(Gender state);
+    ArrayList<Person> getListOf(Gender state, int generation);
 
     ArrayList<Person> getListOf(Marrige state);
 
-    ArrayList<Person> getDb();
+    ArrayList<Person> getMainDB();
 }

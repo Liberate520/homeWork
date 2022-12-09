@@ -13,6 +13,15 @@ public abstract class Human {
     protected String familyname;
     protected Gender gender;
     protected Marrige marigeStatus;
+    protected int dbIndex;
+
+    public int getDbIndex() {
+        return dbIndex;
+    }
+
+    public void setDbIndex(int dbIndex) {
+        this.dbIndex = dbIndex;
+    }
 
     public Marrige getMarigeStatus() {
         return marigeStatus;

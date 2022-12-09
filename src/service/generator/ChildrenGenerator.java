@@ -13,28 +13,36 @@ import static service.tree.RelationType.*;
 Класс для генерации детей в базе
  */
 public class ChildrenGenerator {
-    public void snusnuForEveryOne(DBHandler db) {
-        for (Person[] pair : db.getFamilies()) {
+    private final DBHandler db;
+    private final int generation;
+
+    public ChildrenGenerator(DBHandler db, int generation) {
+        this.generation = generation;
+        this.db = db;
+    }
+
+    public void snusnuForEveryOne() {
+        for (Integer[] pair : db.getCachedFamilies()) {
             snusnuResults(pair);
         }
     }
 
     /* результаты размножения */
-    private void snusnuResults(Person[] pair) {
+    private void snusnuResults(Integer[] pair) {
         int childrenCount = childrenGenerator();
-        Person parent1 = pair[0];
-        Person parent2 = pair[1];
+        Person parent1 = db.getPerson(pair[0]);
+        Person parent2 = db.getPerson(pair[1]);
         if (childrenCount != 0) {
             for (int i = 1; i <= childrenCount; i++) {
                 createChild(parent1, parent2);
             }
             if (childrenCount > 1) {
-                ArrayList<Person> children = parent1.getChildren();
-                for (Person child : children) {
-                    for (Person member : children) {
-                        if (!equals(member, child)) {
+                ArrayList<Integer> children = parent1.getChildren();
+                for (Integer childIndex : children) {
+                    for (Person member : db.getPersons(children)) {
+                        if (!equals(member, db.getPerson(childIndex))) {
                             RelationType type = member.getGender() == MALE ? BROTHER : SISTER;
-                            child.addMember(type, member);
+                            db.getPerson(childIndex).addMember(type, member);
                         }
                     }
                 }
@@ -69,10 +77,14 @@ public class ChildrenGenerator {
             // проверяем фамилию
             case MALE -> {
                 child = PersonGenerator.create(parent1.getFamilyname());
+                child.setGeneration(this.generation);
+                db.addPerson(child);
                 addFamilyMembers(child, parent1, parent2);
             }
             case FEMALE -> {
                 child = PersonGenerator.create(parent2.getFamilyname());
+                child.setGeneration(this.generation);
+                db.addPerson(child);
                 addFamilyMembers(child, parent2, parent1);
             }
         }
@@ -95,13 +107,13 @@ public class ChildrenGenerator {
     private void addFamilyMembers(Person child, Person parent1, Person parent2) {
         child.addMember(FATHER, parent1);
         if (parent1.checkMember(FATHER)) {
-            child.addMember(GRANDFATHER, parent1.getMember(FATHER).get(0));
-            child.addMember(GRANDMOTHER, parent1.getMember(MOTHER).get(0));
+            child.addMember(GRANDFATHER, db.getPerson(parent1.getMember(FATHER).get(0)));
+            child.addMember(GRANDMOTHER, db.getPerson(parent1.getMember(MOTHER).get(0)));
         }
         child.addMember(MOTHER, parent2);
         if (parent2.checkMember(FATHER)) {
-            child.addMember(GRANDFATHER, parent2.getMember(FATHER).get(0));
-            child.addMember(GRANDMOTHER, parent2.getMember(MOTHER).get(0));
+            child.addMember(GRANDFATHER, db.getPerson(parent2.getMember(FATHER).get(0)));
+            child.addMember(GRANDMOTHER, db.getPerson(parent2.getMember(MOTHER).get(0)));
         }
     }
 }

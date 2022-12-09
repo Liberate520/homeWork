@@ -11,25 +11,25 @@ import java.util.Map;
 Класс предоставляющий объекты семейного дерева
  */
 public class FamilyTree implements Serializable {
-    private final HashMap<RelationType, ArrayList<Person>> tree;
+    private final HashMap<RelationType, ArrayList<Integer>> tree;
 
     public FamilyTree() {
         this.tree = new HashMap<>();
     }
 
 
-    public void addMember(RelationType type, Person member) {
+    public void addMember(RelationType type, Integer memberIndex) {
         if (this.tree.containsKey(type)) {
-            this.addToValues(type, member);
+            this.addToValues(type, memberIndex);
         } else {
-            ArrayList<Person> values = new ArrayList<>();
-            values.add(member);
+            ArrayList<Integer> values = new ArrayList<>();
+            values.add(memberIndex);
             this.tree.put(type, values);
         }
     }
 
-    private void addToValues(RelationType type, Person member) {
-        ArrayList<Person> values = getMember(type);
+    private void addToValues(RelationType type, Integer member) {
+        ArrayList<Integer> values = getMember(type);
         values.add(member);
         this.tree.put(type, values);
     }
@@ -39,24 +39,24 @@ public class FamilyTree implements Serializable {
     }
 
     public void showMember(RelationType type) {
-        for (Person person : this.tree.get(type)) {
+        for (Integer personIndex : this.tree.get(type)) {
             System.out.printf("%s:\n", type);
-            person.getInfo();
+            System.out.println(personIndex.toString());
         }
     }
 
     public void showTree() {
-        for (Map.Entry<RelationType, ArrayList<Person>> item : this.tree.entrySet()) {
+        for (Map.Entry<RelationType, ArrayList<Integer>> item : this.tree.entrySet()) {
             System.out.printf("%s:\n", item.getKey());
-            item.getValue().get(0).getInfo();
+            System.out.println(item.getValue().get(0).toString());;
         }
     }
 
-    public HashMap<RelationType, ArrayList<Person>> getTree() {
+    public HashMap<RelationType, ArrayList<Integer>> getTree() {
         return this.tree;
     }
 
-    public ArrayList<Person> getMember(RelationType type) {
+    public ArrayList<Integer> getMember(RelationType type) {
         return this.tree.get(type);
     }
 }

@@ -10,16 +10,16 @@ import java.util.HashMap;
  */
 public interface Relation {
     default void addMember(RelationType type, Person person) {
-        getTree().addMember(type, person);
+        getTree().addMember(type, person.getDbIndex());
     }
 
     FamilyTree getTree();
 
-    default ArrayList<Person> getMember(RelationType type) {
+    default ArrayList<Integer> getMember(RelationType type) {
         return getTree().getMember(type);
     }
 
-    ArrayList<Person> getChildren();
+    ArrayList<Integer> getChildren();
 
     default void showMember(RelationType type) {
         getTree().showMember(type);
@@ -33,7 +33,7 @@ public interface Relation {
         getTree().showTree();
     }
 
-    default HashMap<RelationType, ArrayList<Person>> getFamily() {
+    default HashMap<RelationType, ArrayList<Integer>> getFamily() {
         return getTree().getTree();
     }
 

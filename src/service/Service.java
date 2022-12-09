@@ -9,7 +9,7 @@ import service.analizator.DBAnalizer;
 import service.analizator.ExtendedPersonAnalizer;
 import service.analizator.PersonAnalizer;
 import service.dataBase.DBHandler;
-import service.dataBase.DBToSave;
+import service.dataBase.DBConverter;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
 import service.generator.GetRandom;
@@ -52,12 +52,12 @@ public class Service {
                 sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {
                     case "Y", "y" -> {
-                        analizer = new ExtendedPersonAnalizer(GetRandom.getRandomPerson(db));
+                        analizer = new ExtendedPersonAnalizer(GetRandom.getRandomPerson(db), db);
                         analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
                     case "N", "n" -> {
-                        analizer = new PersonAnalizer(GetRandom.getRandomPerson(db));
+                        analizer = new PersonAnalizer(GetRandom.getRandomPerson(db), db);
                         analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
@@ -86,22 +86,46 @@ public class Service {
                 analizer.getStats();
                 sentToPrint(loader.fromFile(path).toString());
                 break;
+//            case "save db":
+//                path = "src/service/dataBase/db.dat";
+//                ioWork = new StreamWork();
+//                DBConverter converter = new DBConverter(db);
+//                converter.prepareToSave();
+//                ioWork.toFile(converter.getDbBytes(), path);
+//                break;
             case "save db":
                 path = "src/service/dataBase/db.dat";
                 ioWork = new StreamWork();
-                DBToSave converter = new DBToSave(db);
-                converter.prepare();
-                ioWork.toFile(converter.getDbBytes(), path);
+                DBConverter converter = new DBConverter(db);
+//                converter.prepareToSave();
+                ioWork.toFile(db, path);
+                break;
+//            case "load db":
+//                path = "src/service/dataBase/db.dat";
+//                ioWork = new StreamWork();
+//                ioWork.fromFile(path);
+//                converter = new DBConverter(db);
+//                converter.prepareToLoad(ioWork.fromFile(path));
+//                db.setMainDB(converter.getPersons());
+//                break;
+            case "load db":
+                path = "src/service/dataBase/db.dat";
+                ioWork = new StreamWork();
+                db.cloneDB((DBHandler) ioWork.fromFile(path));
+
+//                converter = new DBConverter(db);
+//                converter.prepareToLoad(ioWork.fromFile(path));
+//                db.setMainDB(converter.getPersons());
                 break;
             // для тестов записи.
             case "test":
                 Gena = new GenerationWork(db);
-                Gena.generatePopulation(100); // изменить аргумент >200 для StackOverFlowError
+                Gena.generatePopulation(3000); // изменить аргумент >200 для StackOverFlowError
                 Gena.startGenerator(5);
                 path = "src/service/dataBase/db.dat";
                 ioWork = new StreamWork();
-                converter = new DBToSave(db);
-                converter.prepare();
+                converter = new DBConverter(db);
+                converter.prepareToSave();
                 ioWork.toFile(converter.getDbBytes(), path);
                 break;
             default:
