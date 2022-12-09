@@ -2,6 +2,8 @@ package service.classes;
 
 import java.util.Objects;
 
+import static service.classes.Marrige.NO;
+
 /*
 Базовый класс
  */
@@ -11,7 +13,6 @@ public abstract class Human {
     protected String familyname;
     protected Gender gender;
     protected Marrige marigeStatus;
-
 
     public Marrige getMarigeStatus() {
         return marigeStatus;
@@ -53,7 +54,7 @@ public abstract class Human {
         this.name = name;
         this.familyname = familyname;
         this.gender = gender;
-        this.marigeStatus = Marrige.NO;
+        this.marigeStatus = NO;
     }
 
     public Human() {
