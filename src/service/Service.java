@@ -9,7 +9,6 @@ import service.analizator.DBAnalizer;
 import service.analizator.ExtendedPersonAnalizer;
 import service.analizator.PersonAnalizer;
 import service.dataBase.DBHandler;
-import service.dataBase.DBConverter;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
 import service.generator.GetRandom;
