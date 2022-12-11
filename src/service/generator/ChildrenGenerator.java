@@ -6,7 +6,7 @@ import service.tree.RelationType;
 
 import java.util.ArrayList;
 
-import static service.classes.Gender.*;
+import static service.classes.Gender.MALE;
 import static service.tree.RelationType.*;
 
 /*
@@ -22,17 +22,16 @@ public class ChildrenGenerator {
     }
 
     public void snusnuForEveryOne() {
-        for (Integer[] pair : db.getCachedFamilies()) {
+        for (Person[] pair : db.getCachedFamilies()) {
             snusnuResults(pair);
         }
     }
 
     /* результаты размножения */
-    private void snusnuResults(Integer[] pair) {
+    private void snusnuResults(Person[] pair) {
         int childrenCount = childrenGenerator();
-        Person parent1 = db.getPerson(pair[0]);
-        Person parent2 = db.getPerson(pair[1]);
-//        System.out.println(parent1.getGeneration() + " " + parent2.getGeneration());
+        Person parent1 = pair[0];
+        Person parent2 = pair[1];
         if (childrenCount != 0) {
             for (int i = 1; i <= childrenCount; i++) {
                 createChild(parent1, parent2);
@@ -90,7 +89,6 @@ public class ChildrenGenerator {
             }
         }
         // добавляем ребёнка родителям
-//        System.out.println(child.getGeneration() + " " + parent1.getGeneration() + " " + parent2.getGeneration());
         switch (child.getGender()) {
             case MALE -> {
                 parent1.addMember(SON, child);

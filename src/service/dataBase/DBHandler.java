@@ -27,7 +27,7 @@ public interface DBHandler extends Iterable<Person> {
 
     ArrayList<Person> getGeneration(int number);
 
-    Integer[] getFamily(int index);
+    Person[] getFamily(int index);
 
     Person getPerson(int index);
 
@@ -35,17 +35,17 @@ public interface DBHandler extends Iterable<Person> {
 
     ArrayList<Person> getPersons(ArrayList<Integer> indexes);
 
-    ArrayList<Integer[]> getFullFamilies();
+    ArrayList<Person[]> getFullFamilies();
 
-    ArrayList<Integer[]> getFamilies();
+    ArrayList<Person[]> getFamilies();
 
     int getFamiliesNumber();
 
-    void addFamily(Integer[] family);
+    void addFamily(Person[] family);
 
     void addFamilyToCache(Person[] family);
 
-    ArrayList<Integer[]> getCachedFamilies();
+    ArrayList<Person[]> getCachedFamilies();
 
     void familiesCacheFlush();
 

@@ -19,8 +19,8 @@ import static service.tree.RelationType.SON;
 public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     private Date creationDate;
     private ArrayList<Person> mainDB;
-    private ArrayList<Integer[]> familiesList;
-    private ArrayList<Integer[]> cachedFamilies;
+    private ArrayList<Person[]> familiesList;
+    private ArrayList<Person[]> cachedFamilies;
 
     public void setMainDB(ArrayList<Person> mainDB) {
         this.mainDB = mainDB;
@@ -32,21 +32,17 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         this.familiesList = otherDB.getFamilies();
     }
 
-    public ArrayList<Integer[]> getCachedFamilies() {
+    public ArrayList<Person[]> getCachedFamilies() {
         return cachedFamilies;
     }
 
     @Override
     public void familiesCacheFlush() {
-//        this.familiesList.addAll(cachedFamilies);
-        for (Integer[] cachedFamily : cachedFamilies) {
-            System.out.println(getPerson(cachedFamily[0]).getGeneration() + " " + getPerson(cachedFamily[1]).getGeneration());
-            this.familiesList.add(cachedFamily);
-        }
+        this.familiesList.addAll(cachedFamilies);
         cachedFamilies.clear();
     }
 
-    public void setCachedFamilies(ArrayList<Integer[]> cachedFamilies) {
+    public void setCachedFamilies(ArrayList<Person[]> cachedFamilies) {
         this.cachedFamilies = cachedFamilies;
     }
 
@@ -104,7 +100,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return this.mainDB.indexOf(person);
     }
 
-    public Integer[] getFamily(int index) {
+    public Person[] getFamily(int index) {
         return familiesList.get(index);
     }
 
@@ -167,7 +163,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         person.setDbIndex(mainDB.indexOf(person));
     }
 
-    public ArrayList<Integer[]> getFamilies() {
+    public ArrayList<Person[]> getFamilies() {
         return familiesList;
     }
 
@@ -176,10 +172,10 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return familiesList.size();
     }
 
-    public ArrayList<Integer[]> getFullFamilies() {
-        ArrayList<Integer[]> fullFamiliesList = new ArrayList<>();
-        for (Integer[] family : familiesList) {
-            if (mainDB.get(family[0]).checkMember(SON) || mainDB.get(family[0]).checkMember(DAUGHTER)) {
+    public ArrayList<Person[]> getFullFamilies() {
+        ArrayList<Person[]> fullFamiliesList = new ArrayList<>();
+        for (Person[] family : familiesList) {
+            if (family[0].checkMember(SON) || family[0].checkMember(DAUGHTER)) {
                 fullFamiliesList.add(family);
             }
         }
@@ -187,14 +183,13 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     }
 
     @Override
-    public void addFamily(Integer[] family) {
+    public void addFamily(Person[] family) {
         familiesList.add(family);
     }
 
     @Override
     public void addFamilyToCache(Person[] family) {
-        Integer[] pair = {family[0].getDbIndex(), family[1].getDbIndex()};
-        this.cachedFamilies.add(pair);
+        this.cachedFamilies.add(family);
     }
 
     public DataBase(ArrayList<Person> mainDB) {

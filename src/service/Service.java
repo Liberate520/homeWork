@@ -86,47 +86,22 @@ public class Service {
                 analizer.getStats();
                 sentToPrint(loader.fromFile(path).toString());
                 break;
-//            case "save db":
-//                path = "src/service/dataBase/db.dat";
-//                ioWork = new StreamWork();
-//                DBConverter converter = new DBConverter(db);
-//                converter.prepareToSave();
-//                ioWork.toFile(converter.getDbBytes(), path);
-//                break;
             case "save db":
                 path = "src/service/dataBase/db.dat";
                 ioWork = new StreamWork();
-                DBConverter converter = new DBConverter(db);
-//                converter.prepareToSave();
                 ioWork.toFile(db, path);
                 break;
-//            case "load db":
-//                path = "src/service/dataBase/db.dat";
-//                ioWork = new StreamWork();
-//                ioWork.fromFile(path);
-//                converter = new DBConverter(db);
-//                converter.prepareToLoad(ioWork.fromFile(path));
-//                db.setMainDB(converter.getPersons());
-//                break;
             case "load db":
                 path = "src/service/dataBase/db.dat";
                 ioWork = new StreamWork();
                 db.cloneDB((DBHandler) ioWork.fromFile(path));
-
-//                converter = new DBConverter(db);
-//                converter.prepareToLoad(ioWork.fromFile(path));
-//                db.setMainDB(converter.getPersons());
                 break;
-            // для тестов записи.
+            // для тестов.
             case "test":
                 Gena = new GenerationWork(db);
-                Gena.generatePopulation(3000); // изменить аргумент >200 для StackOverFlowError
-                Gena.startGenerator(5);
-                path = "src/service/dataBase/db.dat";
-                ioWork = new StreamWork();
-                converter = new DBConverter(db);
-                converter.prepareToSave();
-                ioWork.toFile(converter.getDbBytes(), path);
+                Gena.generatePopulation(5000);
+                Gena.startGenerator(15);
+                sentToPrint("TesDB generated 5000/15.");
                 break;
             default:
                 break;

@@ -1,5 +1,6 @@
 package service.classes;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import static service.classes.Marrige.NO;
@@ -7,7 +8,7 @@ import static service.classes.Marrige.NO;
 /*
 Базовый класс
  */
-public abstract class Human {
+public abstract class Human  implements Serializable {
 
     protected String name;
     protected String familyname;

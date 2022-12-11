@@ -140,8 +140,8 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
 
     public DBAnalizer(DBHandler db) {
         ArrayList<Pair> families = new ArrayList<>();
-        for (Integer[] family : db.getFamilies()) {
-            Person[] pair = {db.getPerson(family[0]), db.getPerson(family[1])};
+        for (Person[] family : db.getFamilies()) {
+            Person[] pair = {family[0], family[1]};
             families.add(new Pair(pair, db));
         }
         this.families = families;
