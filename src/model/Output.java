@@ -8,9 +8,9 @@ public class Output implements Outputable {
     }
 
     @Override
-    public String outputListToString(HumanList list){
+    public String outputListToString(ItemList list){
         String result = "";
-        result = list.humanListToString();
+        result = list.itemListToString();
         return result;
     }
 }

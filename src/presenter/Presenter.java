@@ -1,13 +1,13 @@
 package presenter;
 
-import model.HumanList;
+import model.ItemList;
 import model.Output;
 import model.SaveTo;
 import view.ConsoleView;
 
 public class Presenter {
 
-    private HumanList list = new HumanList();
+    private ItemList list = new ItemList();
     private SaveTo s = new SaveTo();
     private Output output = new Output();
     private ConsoleView console = new ConsoleView();
@@ -21,7 +21,7 @@ public class Presenter {
     }
 
     public void removeHuman(int id){
-        console.print(output.outputString(list.removeHuman(id)));       
+        console.print(output.outputString(list.removeItem(id)));       
     }
 
     public void printChildrens(int id){
@@ -29,7 +29,7 @@ public class Presenter {
     }
 
     public void addReletionToHuman(int id, int relationId, int reletionToHumanId){
-        console.print(output.outputString(list.addReletionToHuman(id, relationId, reletionToHumanId)));        
+        console.print(output.outputString(list.addReletionToItem(id, relationId, reletionToHumanId)));        
     }
 
     public void addToTxt(int id){
