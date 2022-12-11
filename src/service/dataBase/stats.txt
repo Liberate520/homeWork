@@ -1,0 +1,22 @@
+
+__________________________________DataBase statistics_________________________
+Size of DB = 2806
+Number of full families: 1290
+Number of married people: 2632
+Number of single people: 174
+Number of man: 1403
+Number of woman: 1403
+
+Families with 0 children - 134
+Families with 1 children - 444
+Families with 2 children - 491
+Families with 3 children - 355
+
+Biggest number of descendants: 72
+Number of families with descendants level N:
+max> N >75% - 16
+75%> N >50% - 71
+50%> N >25% - 330
+25%> N >0%  - 873
+No children - 134
+
