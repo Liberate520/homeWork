@@ -1,7 +1,7 @@
 package service.dataBase;
 
 import service.classes.Gender;
-import service.classes.Marrige;
+import service.classes.Marriage;
 import service.classes.Person;
 import service.generator.PersonGenerator;
 
@@ -20,7 +20,8 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
     private Date creationDate;
     private ArrayList<Person> mainDB;
     private ArrayList<Person[]> familiesList;
-    private ArrayList<Person[]> cachedFamilies;
+    private final ArrayList<Person[]> cachedFamilies;
+    private static DataBase currentDB;
 
     public void setMainDB(ArrayList<Person> mainDB) {
         this.mainDB = mainDB;
@@ -28,7 +29,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
 
     @Override
     public void cloneDB(DBHandler otherDB) {
-        this.mainDB =  otherDB.getMainDB();
+        this.mainDB = otherDB.getMainDB();
         this.familiesList = otherDB.getFamilies();
     }
 
@@ -41,11 +42,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         this.familiesList.addAll(cachedFamilies);
         cachedFamilies.clear();
     }
-
-    public void setCachedFamilies(ArrayList<Person[]> cachedFamilies) {
-        this.cachedFamilies = cachedFamilies;
-    }
-
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -66,7 +62,7 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         int count = 0;
         for (Person person : this.mainDB) {
             if (person.getGeneration() == number) {
-            count++;
+                count++;
             }
         }
         return count;
@@ -96,10 +92,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return persons;
     }
 
-    public int getPersonIndex(Person person) {
-        return this.mainDB.indexOf(person);
-    }
-
     public Person[] getFamily(int index) {
         return familiesList.get(index);
     }
@@ -117,10 +109,10 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         return results;
     }
 
-    public ArrayList<Person> getListOf(Marrige state) {
+    public ArrayList<Person> getListOf(Marriage state) {
         ArrayList<Person> results = new ArrayList<>();
         for (Person person : mainDB) {
-            if (person.getMarigeStatus() == state) {
+            if (person.getMarriageStatus() == state) {
                 results.add(person);
             }
         }
@@ -192,14 +184,24 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         this.cachedFamilies.add(family);
     }
 
-    public DataBase(ArrayList<Person> mainDB) {
+    private DataBase(ArrayList<Person> mainDB) {
         this.mainDB = mainDB;
         this.familiesList = new ArrayList<>(2);
         this.cachedFamilies = new ArrayList<>();
     }
 
-    public DataBase() {
+    private DataBase() {
         this(new ArrayList<>());
+    }
+
+    /*
+    SingleTone
+     */
+    public static DataBase getDB() {
+        if (currentDB == null) {
+            currentDB = new DataBase();
+        }
+        return currentDB;
     }
 
     @Override

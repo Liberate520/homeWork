@@ -1,5 +1,5 @@
 package service.classes;
 
-public enum Marrige {
+public enum Marriage {
     YES, NO
 }

@@ -27,13 +27,13 @@ public class ExtendedPersonAnalizer extends PersonAnalizer {
     private void childrenTreeWorker(Person person, String spacer) {
         if (person.getChildren().size() != 0) {
             line.addPosition(spacer + "Parent: " + person.getName() + " "
-                    + person.getFamilyname() + " " + person.getGender() + "\n");
+                    + person.getFamilyName() + " " + person.getGender() + "\n");
             line.addPosition(spacer + "Children: " + "\n");
 
             for (Integer childIndex : person.getChildren()) {
                 Person child = db.getPerson(childIndex);
-                line.addPosition(spacer + child.getName() + " " + child.getFamilyname() + " "
-                        + child.getGender() + " " + child.getMarigeStatus() + "\n");
+                line.addPosition(spacer + child.getName() + " " + child.getFamilyName() + " "
+                        + child.getGender() + " " + child.getMarriageStatus() + "\n");
 
                 spacer += " |";
                 childrenTreeWorker(child, spacer);

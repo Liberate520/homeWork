@@ -14,7 +14,7 @@ import static service.tree.RelationType.SON;
  */
 public class Person extends Human implements Relation, Serializable {
 
-    private final FamilyTree familymembers;
+    private final FamilyTree familyMembers;
     private int generation = 0;
 
     public int getGeneration() {
@@ -27,7 +27,7 @@ public class Person extends Human implements Relation, Serializable {
 
 
     public FamilyTree getTree() {
-        return this.familymembers;
+        return this.familyMembers;
     }
 
     public void showChildren() {
@@ -64,8 +64,8 @@ public class Person extends Human implements Relation, Serializable {
         return getChildren().size();
     }
 
-    public Person(FamilyTree familymembers) {
-        this.familymembers = familymembers;
+    public Person(FamilyTree familyMembers) {
+        this.familyMembers = familyMembers;
     }
 
     public Person() {

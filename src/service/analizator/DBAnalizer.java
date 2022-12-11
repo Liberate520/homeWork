@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static service.classes.Gender.MALE;
-import static service.classes.Marrige.YES;
+import static service.classes.Marriage.YES;
 
 /*
 Класс для анализа различных показателей базы данных
@@ -37,7 +37,7 @@ public class DBAnalizer implements Iterable<Pair>, Analizer {
         int man = 0;
         int woman = 0;
         for (Person person : this.db) {
-            if (person.getMarigeStatus() == YES) {
+            if (person.getMarriageStatus() == YES) {
                 married++;
             } else {
                 single++;

@@ -8,6 +8,7 @@ import service.analizator.Analizer;
 import service.analizator.DBAnalizer;
 import service.analizator.ExtendedPersonAnalizer;
 import service.analizator.PersonAnalizer;
+import service.analizator.factory.AnalizerFactory;
 import service.dataBase.DBHandler;
 import service.dataBase.DataBase;
 import service.generator.GenerationWork;
@@ -51,12 +52,12 @@ public class Service {
                 sentToPrint("Do you want to analyze children tree? (Y/N)");
                 switch (input.next()) {
                     case "Y", "y" -> {
-                        analizer = new ExtendedPersonAnalizer(GetRandom.getRandomPerson(db), db);
+                        analizer = AnalizerFactory.giveAnalizer("ExPerson");
                         analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
                     case "N", "n" -> {
-                        analizer = new PersonAnalizer(GetRandom.getRandomPerson(db), db);
+                        analizer = AnalizerFactory.giveAnalizer("Person");
                         analizer.analyze();
                         this.sentToPrint(analizer.getStats());
                     }
@@ -64,7 +65,7 @@ public class Service {
                 }
                 break;
             case "db analyze":
-                analizer = new DBAnalizer(db);
+                analizer = AnalizerFactory.giveAnalizer("DB");
                 analizer.analyze();
                 sentToPrint(analizer.getStats());
                 break;
@@ -76,24 +77,40 @@ public class Service {
                 String data = analizer.getStats();
                 sentToPrint(data);
                 sentToPrint(data);
-                ioWork.toFile(data, path);
+                try {
+                    ioWork.toFile(data, path);
+                } catch (Exception e) {
+                    sentToPrint(e.getMessage());
+                }
                 break;
             case "load statistics":
                 path = "src/service/dataBase/stats.txt";
                 analizer = new DBAnalizer(db);
                 IO loader = new FileWork();
                 analizer.getStats();
-                sentToPrint(loader.fromFile(path).toString());
+                try {
+                    sentToPrint(loader.fromFile(path).toString());
+                } catch (Exception e) {
+                    sentToPrint(e.getMessage());
+                }
                 break;
             case "save db":
                 path = "src/service/dataBase/db.dat";
                 ioWork = new StreamWork();
-                ioWork.toFile(db, path);
+                try {
+                    ioWork.toFile(db, path);
+                } catch (Exception e) {
+                    sentToPrint(e.getMessage());
+                }
                 break;
             case "load db":
                 path = "src/service/dataBase/db.dat";
                 ioWork = new StreamWork();
-                db.cloneDB((DBHandler) ioWork.fromFile(path));
+                try {
+                    db.cloneDB((DBHandler) ioWork.fromFile(path));
+                } catch(Exception e) {
+                    sentToPrint(e.getMessage());
+                }
                 break;
             // для тестов.
             case "test":
@@ -103,6 +120,7 @@ public class Service {
                 sentToPrint("TesDB generated 5000/15.");
                 break;
             default:
+                sentToPrint("Wrong command!");
                 break;
         }
     }

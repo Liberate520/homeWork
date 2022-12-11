@@ -8,7 +8,7 @@ import view.Dispatcher;
 
 public class Main {
     public static void main(String[] args) {
-        DataBase db = new DataBase();
+        DataBase db = DataBase.getDB();
         Dispatcher dp = new Dispatcher();
         Presenter presenter = new Presenter(dp);
         dp.setPresenter(presenter);

@@ -1,7 +1,5 @@
 package service.tree;
 
-import service.classes.Person;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +46,7 @@ public class FamilyTree implements Serializable {
     public void showTree() {
         for (Map.Entry<RelationType, ArrayList<Integer>> item : this.tree.entrySet()) {
             System.out.printf("%s:\n", item.getKey());
-            System.out.println(item.getValue().get(0).toString());;
+            System.out.println(item.getValue().get(0).toString());
         }
     }
 

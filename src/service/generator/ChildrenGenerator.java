@@ -76,13 +76,13 @@ public class ChildrenGenerator {
         switch (parent1.getGender()) {
             // проверяем фамилию
             case MALE -> {
-                child = PersonGenerator.create(parent1.getFamilyname());
+                child = PersonGenerator.create(parent1.getFamilyName());
                 child.setGeneration(this.generation);
                 db.addPerson(child);
                 addFamilyMembers(child, parent1, parent2);
             }
             case FEMALE -> {
-                child = PersonGenerator.create(parent2.getFamilyname());
+                child = PersonGenerator.create(parent2.getFamilyName());
                 child.setGeneration(this.generation);
                 db.addPerson(child);
                 addFamilyMembers(child, parent2, parent1);

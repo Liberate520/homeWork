@@ -1,7 +1,7 @@
 package service.dataBase;
 
 import service.classes.Gender;
-import service.classes.Marrige;
+import service.classes.Marriage;
 import service.classes.Person;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public interface DBHandler extends Iterable<Person> {
 
     ArrayList<Person> getListOf(Gender state, int generation);
 
-    ArrayList<Person> getListOf(Marrige state);
+    ArrayList<Person> getListOf(Marriage state);
 
     ArrayList<Person> getMainDB();
 }

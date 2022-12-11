@@ -7,7 +7,7 @@ import java.util.ArrayList;
 Класс предоставляет StringBuilder и возвращает строку.
  */
 public class StatWorker implements Serializable {
-    private ArrayList<String> stats;
+    private final ArrayList<String> stats;
     private final StringBuilder line = new StringBuilder();
 
 
@@ -32,11 +32,6 @@ public class StatWorker implements Serializable {
         this.line.append(str);
         addNclear(line);
     }
-
-    public void addPosition(int num) {
-        this.line.append(num);
-    }
-
 
     /*
     собираем строку для сохранения

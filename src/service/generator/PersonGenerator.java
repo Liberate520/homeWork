@@ -35,7 +35,7 @@ public class PersonGenerator {
                 newOne.setName(createParam(femaleNames));
             }
         }
-        newOne.setFamilyname(familyName);
+        newOne.setFamilyName(familyName);
         return newOne;
     }
 

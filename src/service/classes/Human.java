@@ -3,7 +3,7 @@ package service.classes;
 import java.io.Serializable;
 import java.util.Objects;
 
-import static service.classes.Marrige.NO;
+import static service.classes.Marriage.NO;
 
 /*
 Базовый класс
@@ -11,9 +11,9 @@ import static service.classes.Marrige.NO;
 public abstract class Human  implements Serializable {
 
     protected String name;
-    protected String familyname;
+    protected String familyName;
     protected Gender gender;
-    protected Marrige marigeStatus;
+    protected Marriage marriageStatus;
     protected int dbIndex;
 
     public int getDbIndex() {
@@ -24,12 +24,12 @@ public abstract class Human  implements Serializable {
         this.dbIndex = dbIndex;
     }
 
-    public Marrige getMarigeStatus() {
-        return marigeStatus;
+    public Marriage getMarriageStatus() {
+        return marriageStatus;
     }
 
-    public void setMarigeStatus(Marrige marigeStatus) {
-        this.marigeStatus = marigeStatus;
+    public void setMarriageStatus(Marriage marriageStatus) {
+        this.marriageStatus = marriageStatus;
     }
 
     public String getName() {
@@ -40,12 +40,12 @@ public abstract class Human  implements Serializable {
         this.name = name;
     }
 
-    public String getFamilyname() {
-        return familyname;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public void setFamilyname(String familyname) {
-        this.familyname = familyname;
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
     public Gender getGender() {
@@ -60,26 +60,22 @@ public abstract class Human  implements Serializable {
         }
     }
 
-    public Human(String name, String familyname, Gender gender) {
+    public Human(String name, String familyName, Gender gender) {
         this.name = name;
-        this.familyname = familyname;
+        this.familyName = familyName;
         this.gender = gender;
-        this.marigeStatus = NO;
+        this.marriageStatus = NO;
     }
 
     public Human() {
         this("", "", Gender.MALE);
     }
 
-    public void getInfo() {
-        System.out.printf("Name: %12s, Family_name: %12s, Gender: %7s, Married: %5s\n", name, familyname, gender,
-                marigeStatus);
-    }
 
     @Override
     public String toString() {
-        return String.format("Name: %12s, Family_name: %12s, Gender: %7s, Married: %5s\n", name, familyname, gender,
-                marigeStatus);
+        return String.format("Name: %12s, Family_name: %12s, Gender: %7s, Married: %5s\n", name, familyName, gender,
+                marriageStatus);
     }
 
     @Override
@@ -87,11 +83,11 @@ public abstract class Human  implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return name.equals(human.name) && familyname.equals(human.familyname) && gender == human.gender && marigeStatus == human.marigeStatus;
+        return name.equals(human.name) && familyName.equals(human.familyName) && gender == human.gender && marriageStatus == human.marriageStatus;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, familyname, gender, marigeStatus);
+        return Objects.hash(name, familyName, gender, marriageStatus);
     }
 }
