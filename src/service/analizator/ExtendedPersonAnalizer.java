@@ -25,7 +25,7 @@ public class ExtendedPersonAnalizer extends PersonAnalizer {
     рекурсивно просматриваем детей у всех потомков
      */
     private void childrenTreeWorker(Person person, String spacer) {
-        if (!person.getChildren().isEmpty()) {
+        if (person.getChildren().size() != 0) {
             line.addPosition(spacer + "Parent: " + person.getName() + " "
                     + person.getFamilyname() + " " + person.getGender() + "\n");
             line.addPosition(spacer + "Children: " + "\n");

@@ -38,7 +38,11 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
 
     @Override
     public void familiesCacheFlush() {
-        this.familiesList.addAll(cachedFamilies);
+//        this.familiesList.addAll(cachedFamilies);
+        for (Integer[] cachedFamily : cachedFamilies) {
+            System.out.println(getPerson(cachedFamily[0]).getGeneration() + " " + getPerson(cachedFamily[1]).getGeneration());
+            this.familiesList.add(cachedFamily);
+        }
         cachedFamilies.clear();
     }
 
@@ -82,8 +86,6 @@ public class DataBase implements Serializable, Iterable<Person>, DBHandler {
         }
         return generation;
     }
-
-
 
     public Person getPerson(int index) {
         return mainDB.get(index);

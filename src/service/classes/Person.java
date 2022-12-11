@@ -47,13 +47,16 @@ public class Person extends Human implements Relation, Serializable {
         ArrayList<Integer> children = new ArrayList<>();
         try {
             children.addAll(new ArrayList<>(this.getMember(SON)));
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.getStackTrace();
         }
 
         try {
             children.addAll(new ArrayList<>(this.getMember(DAUGHTER)));
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.getStackTrace();
         }
+//        System.out.println(children.size());
         return children;
     }
 

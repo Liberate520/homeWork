@@ -43,11 +43,9 @@ public class FamilyGenerator {
 
     /* подготовка */
     private void prepairCouple(Person person) {
-        if (person.getMarigeStatus() != YES) {
-            switch (person.getGender()) {
-                case MALE -> marige(person, check(FEMALE), db);
-                case FEMALE -> marige(person, check(MALE), db);
-            }
+        switch (person.getGender()) {
+            case MALE -> marige(person, check(FEMALE), db);
+            case FEMALE -> marige(person, check(MALE), db);
         }
     }
 
@@ -55,7 +53,7 @@ public class FamilyGenerator {
     private Person check(Gender state) {
         Person person = GetRandom.getRandomPerson(db);
         if (person.getGender() == state) {
-            if (person.getMarigeStatus() == NO) {
+            if (person.getGeneration() == this.generation) {
                 return person;
             }
         }
@@ -84,8 +82,8 @@ public class FamilyGenerator {
             }
         }
         Person[] pair = {person, personSec};
-        db.addFamilyToCache(pair);
         person.setMarigeStatus(YES);
         personSec.setMarigeStatus(YES);
+        db.addFamilyToCache(pair);
     }
 }

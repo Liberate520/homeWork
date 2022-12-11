@@ -1,9 +1,7 @@
 package service.generator;
 
 import service.analizator.StatWorker;
-import service.classes.Person;
 import service.dataBase.DBHandler;
-import service.dataBase.DataBase;
 
 import java.util.Date;
 
@@ -14,7 +12,7 @@ public class GenerationWork {
     private final DBHandler mainDb;
     private String stats;
     StatWorker line = new StatWorker();
-    private int generationCount = 1;
+    private int generationCount = 0;
 
     /* стартовое поколение */
     public void generatePopulation(int startPopulation) {
@@ -30,15 +28,10 @@ public class GenerationWork {
     /* генератор поколений */
     private void createGeneration(int count) {
         long startTime = System.nanoTime();
-        FamilyGenerator familyGeneration = new FamilyGenerator(mainDb, this.generationCount - 1);
-        ChildrenGenerator childrenGeneration = new ChildrenGenerator(mainDb, this.generationCount);
+        FamilyGenerator familyGeneration = new FamilyGenerator(mainDb, this.generationCount);
+        ChildrenGenerator childrenGeneration = new ChildrenGenerator(mainDb, this.generationCount + 1);
         familyGeneration.createFamilies();
         childrenGeneration.snusnuForEveryOne();
-//
-//        for (Person person : mainDb.getGeneration(this.generationCount)) {
-//            this.mainDb.addChild(person);
-//        }
-
         mainDb.familiesCacheFlush();
         line.addPosition("Current generation: " + generationCount
                 + ". Population: " + mainDb.getSize() + "\n");

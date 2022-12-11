@@ -32,6 +32,7 @@ public class ChildrenGenerator {
         int childrenCount = childrenGenerator();
         Person parent1 = db.getPerson(pair[0]);
         Person parent2 = db.getPerson(pair[1]);
+//        System.out.println(parent1.getGeneration() + " " + parent2.getGeneration());
         if (childrenCount != 0) {
             for (int i = 1; i <= childrenCount; i++) {
                 createChild(parent1, parent2);
@@ -89,6 +90,7 @@ public class ChildrenGenerator {
             }
         }
         // добавляем ребёнка родителям
+//        System.out.println(child.getGeneration() + " " + parent1.getGeneration() + " " + parent2.getGeneration());
         switch (child.getGender()) {
             case MALE -> {
                 parent1.addMember(SON, child);
