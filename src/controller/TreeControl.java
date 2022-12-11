@@ -81,10 +81,13 @@ public class TreeControl {
         viewConstructor.viewHeirs(startPerson);
     }
 
-    public void viewHeirs(String name, Tree tree){ // построение дерева доступно только людям
-//        Human startPerson;
-        treeMethods.findOfName(name, tree);
-//        viewHeirs(startPerson);
+    public void viewHeirs(String name, Tree tree) throws Exception { // построение дерева доступно только людям
+        Human humanLink = treeMethods.findOfName(name, tree); // ищем ссылку на человека в дереве
+        if (humanLink != null){
+            viewHeirs(humanLink); // если имя было найдено, передаём в конструктор отображения
+        }
+        else throw new Exception("Имя не найдено в базе");
+
     }
 
     public List<Link> getAllLink(Human person, Character filter){

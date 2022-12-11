@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="Работа с генериками">
+    <list default="true" id="91874eab-8cb3-4c96-bf0b-ba81c91d015d" name="Changes" comment="Попытка создать меню">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/controller/TreeControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/controller/TreeControl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/TreeMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/model/TreeMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/controller/TreeControl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/Animal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/Cat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/Human.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/Link.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/PersonMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/Tree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/TreeMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/model/TreePerson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/view/ViewConstructor.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/TreeControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TreeControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/TreeMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TreeMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -39,8 +48,9 @@
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/controller/TreeControl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/untitled.iml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -55,10 +65,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/GBWorks/java/OOP/HWork3_2/src/model",
-    "project.structure.last.edited": "Libraries",
+    "last_opened_file_path": "C:/GBWorks/java/exeptions",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -71,21 +82,10 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="untitled" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="untitled" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="untitled" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670304834221</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Попытка создать меню">
+      <created>1670310917582</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670310917582</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +171,7 @@
     <MESSAGE value="промежуточный коммит" />
     <MESSAGE value="Временная финализация второй работы" />
     <MESSAGE value="Работа с генериками" />
-    <option name="LAST_COMMIT_MESSAGE" value="Работа с генериками" />
+    <MESSAGE value="Попытка создать меню" />
+    <option name="LAST_COMMIT_MESSAGE" value="Попытка создать меню" />
   </component>
 </project>

@@ -8,25 +8,22 @@ public class TreeMethods {
     }
 
 
-    public Tree<TreePerson> newTree(){
+    public Tree<TreePerson> newTree() {
         Tree<TreePerson> newTree = new Tree<>();
 //        treeList.add(newTree);
         return newTree;
     }
 
-    public void add(TreePerson obj, Tree tree){
+    public void add(TreePerson obj, Tree tree) {
         tree.add(obj);
     }
 
-    public void findOfName (String name, Tree tree){
-        Human humanLink;
-        int index = 0;
-        for (Object person : tree.getHumanList()) { // Почему не даёт сразу Human?
-            String p = person.toString();
-            System.out.println(p);
-            System.out.println(name);
-            System.out.println(p == name); // не проходит сравнение с переданой строкой.
+    public Human findOfName(String name, Tree<TreePerson> tree) {
+        for (Human person : tree.getHumanList()) {
+            if (person.toString().equals(name)) {
+                return person;
+            }
         }
-//        return humanLink;
+        return null;
     }
 }

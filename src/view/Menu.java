@@ -6,17 +6,19 @@ import model.Tree;
 
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements UIInterface {
 
     private TreeControl controller;
     private Tree tree;
+
+    private Scanner in;
 
     public Menu(TreeControl controller) {
         this.controller = controller;
     }
 
     public void runMenu() {
-        Scanner in = new Scanner(System.in);
+        in = new Scanner(System.in);
         Boolean begin = true;
 
         String name;
@@ -37,13 +39,7 @@ public class Menu {
 
             switch (com) {
                 case "1":
-                    System.out.printf("Введите имя: ");
-                    name = in.next();
-                    System.out.printf("Введите цифру гендера (0 = жен, 1 = муж): ");
-                    gender = in.nextInt();
-
-                    controller.addToTree(controller.createHuman(name, gender), tree);
-                    System.out.println("Член семьи создан и сохранён в дереве");
+                    addToTree();
                     break;
 
                 case "2":
@@ -53,8 +49,12 @@ public class Menu {
                 case "3":
                     System.out.printf("Введите имя: ");
                     name = in.next();
-                    controller.viewHeirs(name, tree);
-//                    Human nameLink = controller.//запрашиваем поиск ссылки по имени
+                    try {
+                        controller.viewHeirs(name, tree);
+                    }catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
+
 
                     break;
 
@@ -68,5 +68,18 @@ public class Menu {
 
     public void setTree(Tree tree) {
         this.tree = tree;
+    }
+
+    // на данном примере мы обязуем любой UI меню иметь метод addToTree
+    @Override
+    public void addToTree() {
+
+        System.out.printf("Введите имя: ");
+        String name = in.next();
+        System.out.printf("Введите цифру гендера (0 = жен, 1 = муж): ");
+        int gender = in.nextInt();
+        controller.addToTree(controller.createHuman(name, gender), tree);
+        System.out.println("Член семьи создан и сохранён в дереве");
+
     }
 }
