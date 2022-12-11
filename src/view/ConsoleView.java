@@ -1,7 +1,9 @@
 package view;
 
-public class ConsoleView {
-    public static void print(String str){
+public class ConsoleView implements ConsoleViewable{
+
+    @Override
+    public void print(String str){
         System.out.print(str);
     }
 }
