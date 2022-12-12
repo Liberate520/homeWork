@@ -8,17 +8,19 @@ public class Main {
 
         GeoTree gt = new GeoTree();
 
-        gt.append(nataly, Human.link.parent, Human.link.child, misha);
-        gt.append(nataly, Human.link.sister, Human.link.brother, denis);
-        gt.append(nataly, Human.link.sister, Human.link.brother, alex);
-        gt.append(nataly, Human.link.sister, Human.link.sister, lena);
+        gt.append(nataly, Link.parent, Link.child, misha);
+        gt.append(nataly, Link.sister, Link.brother, denis);
+        gt.append(nataly, Link.sister, Link.brother, alex);
+        gt.append(nataly, Link.sister, Link.sister, lena);
+
+        Search search = new Search();
 
         System.out.println();
         System.out.println("Все сестры и братья Натальи:");
-        System.out.println(new Search(gt).spend(nataly, Human.link.sister));
+        System.out.println(search.spend(nataly, Link.sister));
         System.out.println();
         System.out.println("Все дети Натальи");
-        System.out.println(new Search(gt).spend(nataly, Human.link.parent));
+        System.out.println(search.spend(nataly, Link.parent));
 
     }
 }

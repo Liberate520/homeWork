@@ -1,9 +1,9 @@
 public class Node {
     Person p1;
     Person p2;
-    Human.link re;
+    Link re;
 
-    public Node(Person p1, Human.link re, Person p2) {
+    public Node(Person p1, Link re, Person p2) {
         this.re = re;
         this.p1 = p1;
         this.p2 = p2;
