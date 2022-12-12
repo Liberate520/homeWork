@@ -2,8 +2,6 @@ package view;
 
 import presenter.Presenter;
 
-
-@SuppressWarnings("unused")
 public class ToPresenter {
 
     private final Presenter presenter = new Presenter();
@@ -15,40 +13,40 @@ public class ToPresenter {
         switch (userSelect) {
             case "1" ->
                 // посмотреть всех в консоли
-                    presenter.consolePrintAllPerson();
+                    presenter.PrintAllPerson();
             case "2" -> {
                 // Добавить человека
-                String name = input.inputKey(TextsMenu.inviteName);
-                int age = Integer.parseInt(input.inputKey(TextsMenu.inviteAge));
+                String name = input.inputKey(TextsMenu.Name);
+                int age = Integer.parseInt(input.inputKey(TextsMenu.Age));
                 presenter.addPerson(name, age);
             }
             case "3" -> {
                 // удалить человека по id
-                int id = Integer.parseInt(input.inputKey(TextsMenu.inviteId));
+                int id = Integer.parseInt(input.inputKey(TextsMenu.Id));
                 presenter.removePerson(id);
             }
             case "4" -> {
                 // показать детей по id
-                int id = Integer.parseInt(input.inputKey(TextsMenu.inviteId));
+                int id = Integer.parseInt(input.inputKey(TextsMenu.Id));
                 presenter.printChildren(id);
             }
             case "5" -> {
                 // Добавить человеку связь
-                int id = Integer.parseInt(input.inputKey(TextsMenu.inviteId));
-                int relationId = Integer.parseInt(input.inputKey(TextsMenu.inviteRelationId));
-                int relationToHumanId = Integer.parseInt(input.inputKey(TextsMenu.inviteIdTo));
-                presenter.addRelationToPerson(id, relationId, relationToHumanId);
+                int id = Integer.parseInt(input.inputKey(TextsMenu.Id));
+                int relationId = Integer.parseInt(input.inputKey(TextsMenu.RelationId));
+                int relationToPersonId = Integer.parseInt(input.inputKey(TextsMenu.IdTo));
+                presenter.addRelationToPerson(id, relationId, relationToPersonId);
             }
             case "6" -> {
                 // Записать человека в файл txt
-                int id = Integer.parseInt(input.inputKey(TextsMenu.inviteId));
+                int id = Integer.parseInt(input.inputKey(TextsMenu.Id));
                 presenter.addToTxt(id);
             }
             case "7" -> {
-                // Записать человека в csv
-                int id = Integer.parseInt(input.inputKey(TextsMenu.inviteId));
+                // Записать человека в док
+                int id = Integer.parseInt(input.inputKey(TextsMenu.Id));
                 presenter.addToCsv(id);
             }
         }
-    }
+    }    
 }

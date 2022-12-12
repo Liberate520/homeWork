@@ -1,10 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PersonList {
-    private final List<Person> list;
+    private final java.util.List<Itemable> list;
 
     public PersonList(){
         this.list = new ArrayList<>();
@@ -15,7 +14,7 @@ public class PersonList {
         vassal.setName("Василий");
         vassal.setAge(82);
         list.add(vassal);
-        System.out.println(vassal.getRelationships());
+        System.out.println(vassal.getRelations());
 
         // Елена
         Person lena = new Person();
@@ -38,20 +37,16 @@ public class PersonList {
         toma.setAge(56);
         list.add(toma);
 
-        Person person = new Person();
-        person.getAge();
-        list.add(person);
-
         // Андрей сын Васи
         Relation relation = new Relation(2,100);
-        vassal.setRelationship(vassal,relation);
+        vassal.setRelationship(relation);
 
         // Андрей сын Елены
         Relation relation1 = new Relation(2,101);
-        lena.setRelationship(lena,relation1);
+        lena.setRelationship(relation1);
     }
 
-    public Person get(int index){
+    public Itemable get(int index){
         return this.list.get(index);
     }
 
@@ -59,50 +54,45 @@ public class PersonList {
         return this.list.size();
     }
 
-    @SuppressWarnings("unused")
-    public String personListToString(){
+    public String itemListToString(){
         StringBuilder result = new StringBuilder();
-        for (Person person : this.list) {
-            result.append(person.personToString(person)).append("\n");
+        for (Itemable item : this.list) {
+            result.append(item.itemToString()).append("\n");
         }
         return result.toString();
     }
 
-    @SuppressWarnings("unused")
-    public String addPereson(String name, int age){
-        Person personToAdd = new Person(list, name, age);
-        this.list.add(personToAdd);
-        return "добавлен: " + personToAdd.personToString(personToAdd);
+    public String addPerson(String name, int age){
+        Itemable itemToAdd = new Person(list, name, age);
+        this.list.add(itemToAdd);
+        return "добавлен: " + itemToAdd.itemToString();
     }
 
-    @SuppressWarnings("unused")
-    public String removePerson(int idForMenu){
+    public String removeItem(int idForMenu){
         for (int i = 0; i < list.size(); i++){
             if (list.get(i).getId() == idForMenu){
-                Person removedPerson = list.get(i);
+                Itemable removedItem = list.get(i);
                 list.remove(i);
-                return "удален: " + removedPerson.personToString(removedPerson);
+                return "удален: " + removedItem.itemToString();
             } 
         }
         return "Совпадений нет";
     }      
 
-    @SuppressWarnings("unused")
     public String printChildren(int idForMenu){
-        for (Person person : list){
-            if (person.getId() == idForMenu){
-                return "Дети: " + person.childrensToString(person);
+        for (Itemable item : list){
+            if (item.getId() == idForMenu){
+                return "Дети: " + item.childrensToString();
             }
         }
         return "Совпадений нет";
     }
 
-    @SuppressWarnings("unused")
-    public String addReletionToPerson(int idForMenu, int relationId, int relationToPersonId ){
-        for (Person human : list){
-            if (human.getId() == idForMenu){
-                Relation relationship = new Relation(relationId, relationToPersonId);
-                human.setRelationship(human,relationship);
+    public String addRelationToItem(int idForMenu, int reletionId, int reletionToitemId ){
+        for (Itemable item : list){
+            if (item.getId() == idForMenu){
+                Relation relationship = new Relation(reletionId, reletionToitemId);
+                item.setRelationship(relationship);
                 return "связь добавлена";
             }
         }

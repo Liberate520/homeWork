@@ -4,16 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-@SuppressWarnings("ALL")
 public class SaveToTxt implements ISaveable {
 
     private String path = "Person.txt";
     
     @Override
-    public void saveAs(String person){
+    public void saveAs(String human){
         try {
             FileWriter writer = new FileWriter(path, false);
-            writer.write(person);
+            writer.write(human);
             writer.close();
         } catch (IOException e) {
             // TODO Автоматически сгенерированный блок захвата

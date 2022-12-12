@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-@SuppressWarnings("ALL")
 public class SaveToCSV implements ISaveable {
 
     private File file = new File("Person.csv");

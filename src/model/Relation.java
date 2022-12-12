@@ -1,23 +1,22 @@
 package model;
 
-@SuppressWarnings("ALL")
 public class Relation {
 
     private int relationId;
     private String relation;
-    private int relationPerson;
+    private int relationToHumanId;
     
-    public Relation(int relationsId, int relationPersonId) {
+    public Relation(int relationsId, int relationToHumanId) {
         this.relationId = relationsId;
 
         if (relationsId == 1){
-            this.relation = "Супруг";
+            this.relation = "Брак";
         }
         else if (relationsId == 2){
             this.relation = "Ребенок";
         }
         
-        this.relationPerson = relationPersonId;
+        this.relationToHumanId = relationToHumanId;
     }
 
     public int getRelationId() {
@@ -36,11 +35,11 @@ public class Relation {
         this.relation = relation;
     }
 
-    public int getRelationPerson() {
-        return relationPerson;
+    public int getRelationToHumanId() {
+        return relationToHumanId;
     }
 
-    public void setRelationPerson(int relationPerson) {
-        this.relationPerson = relationPerson;
+    public void setRelationToHumanId(int relationToHumanId) {
+        this.relationToHumanId = relationToHumanId;
     }
 }    

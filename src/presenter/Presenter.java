@@ -3,39 +3,40 @@ package presenter;
 import model.Output;
 import model.PersonList;
 import model.SaveTo;
-import view.ConsoleView;
+import view.PrintView;
 
 public class Presenter {
 
     private final PersonList list = new PersonList();
-    private final SaveTo s = new SaveTo();
+    private final SaveTo save = new SaveTo();
     private final Output output = new Output();
+    private final PrintView console = new PrintView();
 
-    public void consolePrintAllPerson(){
-        ConsoleView.print(output.outputListToString(list));
+    public void PrintAllPerson(){
+        console.print(output.outputListToString(list));
     }
 
     public void addPerson(String name, Integer age){
-        ConsoleView.print(output.outputString(list.addPereson(name, age)));
+        console.print(output.outputString(list.addPerson(name, age)));
     }
 
     public void removePerson(int id){
-        ConsoleView.print(output.outputString(list.removePerson(id)));
+        console.print(output.outputString(list.removeItem(id)));       
     }
 
     public void printChildren(int id){
-        ConsoleView.print(output.outputString(list.printChildren(id)));
+        console.print(output.outputString(list.printChildren(id)));
     }
 
     public void addRelationToPerson(int id, int relationId, int relationToPersonId){
-        ConsoleView.print(output.outputString(list.addReletionToPerson(id, relationId, relationToPersonId)));
+        console.print(output.outputString(list.addRelationToItem(id, relationId, relationToPersonId)));
     }
 
     public void addToTxt(int id){
-        ConsoleView.print(output.outputString(s.addToTxt(list,id)));    
+        console.print(output.outputString(save.addToTxt(list,id)));
     }
 
     public void addToCsv(int id){
-        ConsoleView.print(output.outputString(s.addToCSV(list,id)));
+        console.print(output.outputString(save.addToDoc(list,id)));
     }
 }

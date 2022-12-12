@@ -1,15 +1,17 @@
 package view;
 import java.util.Scanner;
 
-
 public class UserInputFromConsole {
 
     Scanner input = new Scanner(System.in);
+   
+    public String inputKey(String input){
 
-    public String inputKey(String invite){
         String key;
-        System.out.print(invite);
-        key = input.nextLine();
+
+        System.out.print(input);
+        key = this.input.nextLine();
+
         return key;
     }
 }
