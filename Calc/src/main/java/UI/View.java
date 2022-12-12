@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class View {
     Scanner in = new Scanner(System.in);
-
+    Scanner sc = new Scanner(System.in);
     public double getValue(String title) {
         System.out.printf("%s", title);
         return in.nextDouble();
@@ -12,11 +12,11 @@ public class View {
 
     public String getAction(String title){
         System.out.printf("%s", title);
-        return in.nextLine();
+        return sc.nextLine();
     }
 
 
-    public void print(int data, String title) {
-        System.out.printf("%s %d\n", title, data);
+    public void print(double data, String title) {
+        System.out.printf("%s %f", title, data);
     }
 }

@@ -7,7 +7,7 @@ public class ConsoleVeiw {
         return in.next();
     };
 
-    public String TName() {
+    public String tName() {
         System.out.printf("Name: ");
         return in.nextLine();
     }

@@ -45,8 +45,8 @@ public class Main {
         });
 
         System.out.println("----------");
-        ArrayList<Printable> children = ourTree.addChildren(h5, h6);
-        ArrayList<Printable> children1 = ourTree.addChildren(h8, h9);
+        ArrayList<Printable> children = ourTree.findChildren(h5, h6);
+        ArrayList<Printable> children1 = ourTree.findChildren(h8, h9);
         children.forEach(p->{
             System.out.println(p);
         });

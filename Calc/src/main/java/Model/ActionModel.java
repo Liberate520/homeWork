@@ -1,12 +1,15 @@
 package Model;
 
+import UI.View;
+
+
 public class ActionModel extends CalcModel{
     public ActionModel() {
 
     }
     // do_it
     @Override
-    public double resultSum() {
+    public  double resultSum() {
         return x + y;
     }
 
@@ -39,6 +42,7 @@ public class ActionModel extends CalcModel{
     public void setAction(String value) {
         super.action = value;
     }
+
 
 
 

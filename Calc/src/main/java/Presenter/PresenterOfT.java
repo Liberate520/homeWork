@@ -2,7 +2,9 @@ package Presenter;
 
 import Model.Model;
 
-import javax.swing.text.View;
+import Model.CalcModel;
+
+import UI.View;
 
 public class PresenterOfT<T extends CalcModel> {
     View view;

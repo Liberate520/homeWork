@@ -1,6 +1,7 @@
 package Presenter;
+import Model.Model;
+import UI.View;
 
-import javax.swing.text.View;
 
 public class Presenter {
     View view;
@@ -18,26 +19,32 @@ public class Presenter {
         model.setX(a);
         model.setY(b);
         model.setAction(action);
-        if (action == "+"){
+        if (action.equals("+")){
             double result = model.resultSum();
             view.print(result, "Sum: ");
         }
 
-        if(action == "-") {
+        if(action.equals("-")) {
             double result = model.resultSub();
             view.print(result, "Sub: ");
         }
 
-        if(action == "*"){
+        if(action.equals("*")){
             double result = model.resultMult();
             view.print(result, "Mult: ");
         }
 
-        if(action == "/"){
+        if(action.equals("/"))
+
+        {
             double result = model.resultDiv();
             view.print(result, "Div: ");
         }
+
+
+
     }
+
 
 
 }

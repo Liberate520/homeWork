@@ -1,6 +1,7 @@
 package Model;
 
 public interface Model {
+
     double resultSum();
     double resultSub();
     double resultMult();
