@@ -13,11 +13,11 @@ public class SaveTo {
         return "Совпадений нет";
     }
 
-    public String addToDoc(PersonList list, int idForMenu){
+    public String addToCsv(PersonList list, int idForMenu){
         for (int i = 0; i < list.size(); i++){
             if (list.get(i).getId() == idForMenu){
-                SaveToCSV doc = new SaveToCSV();
-                doc.saveAs(list.get(i).itemToString());
+                SaveToCSV csv = new SaveToCSV();
+                csv.saveAs(list.get(i).itemToString());
                 return "записан в Doc: " + list.get(i).itemToString() + "\n";
             }
         }

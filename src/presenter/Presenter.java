@@ -37,6 +37,6 @@ public class Presenter {
     }
 
     public void addToCsv(int id){
-        console.print(output.outputString(save.addToDoc(list,id)));
+        console.print(output.outputString(save.addToCsv(list,id)));
     }
 }
