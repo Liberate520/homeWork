@@ -51,13 +51,13 @@ public class ConsoleTerminal extends Console<Controller> implements View, Output
     @Override
     public void printTree(Person person) {
         if (person.getMyChildren() == null) {
-            printStr(person.getMyname());
+            printStr(person.getMyName());
         } else {
-            if (person.getMyparent() == null){
-                printStr(person.getMyname());
+            if (person.getMyParent() == null){
+                printStr(person.getMyName());
             }
             else {
-                printStr("родитель: " + person.getMyparent() + " - потомок: " + person.getMyname());
+                printStr("родитель: " + person.getMyParent() + " - потомок: " + person.getMyName());
             }
             for (Person p : person.getMyChildren()) {
                 printTree(p);
@@ -67,10 +67,10 @@ public class ConsoleTerminal extends Console<Controller> implements View, Output
     }
     @Override
     public void printChildren(String Name, Person person) {
-        if (person.getMyname().equals(Name)) {
+        if (person.getMyName().equals(Name)) {
             printStr("родитель - " + person.toString());
             for (Person p : person.getMyChildren()) {
-                printStr("ребенок - " + p.getMyname());
+                printStr("ребенок - " + p.getMyName());
             }
         } else {
             for (Person p : person.getMyChildren()) {

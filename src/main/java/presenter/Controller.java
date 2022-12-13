@@ -1,6 +1,5 @@
 package presenter;
 import model.*;
-import view.*;
 import org.json.JSONException;
 import view.ConsoleTerminal;
 

@@ -14,17 +14,17 @@ public class Person implements Iterable<Person>{
         return myName;
     }
 
-    public String getMyname() {
+    public String getMyName() {
         return myName;
     }
-    public void setMyname(String myname) {
-        this.myName = myname;
+    public void setMyName(String myName) {
+        this.myName = myName;
     }
-    public Person getMyparent() {
+    public Person getMyParent() {
         return myParent;
     }
-    public void setMyparent(Person myparent) {
-        this.myParent = myparent;
+    public void setMyParent(Person myParent) {
+        this.myParent = myParent;
     }
     public ArrayList <Person> getMyChildren() {
         return myChildren;

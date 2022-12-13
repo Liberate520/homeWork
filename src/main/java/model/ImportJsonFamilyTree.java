@@ -22,17 +22,17 @@ public class ImportJsonFamilyTree implements ImportJson<Person>{
 
     @Override
     public void writeTextJson(Person fam, JSONArray ar) throws JSONException {
-        if (fam.getMyparent() == null) {
+        if (fam.getMyParent() == null) {
             JSONObject obgJson = new JSONObject();
             obgJson.put("parent-name", "вершина древа");
-            obgJson.put("children - name", fam.getMyname());
+            obgJson.put("children - name", fam.getMyName());
             ar.add(obgJson);
         }
         if (fam.getMyChildren() != null) {
             for (Person p : fam.getMyChildren()) {
                 JSONObject obgJson = new JSONObject();
-                obgJson.put("parent-name", p.getMyparent().getMyname());
-                obgJson.put("children - name", p.getMyname());
+                obgJson.put("parent-name", p.getMyParent().getMyName());
+                obgJson.put("children - name", p.getMyName());
                 ar.add(obgJson);
                 writeTextJson(p, ar);
             }
