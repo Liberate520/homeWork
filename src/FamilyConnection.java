@@ -1,14 +1,14 @@
 public class FamilyConnection {
-    private Person person;
+    private TreeElement treeElement;
     private FamilyConnectionType connectionType;
 
-    FamilyConnection(Person person, FamilyConnectionType connectionType) {
-        this.person = person;
+    FamilyConnection(TreeElement treeElement, FamilyConnectionType connectionType) {
+        this.treeElement = treeElement;
         this.connectionType = connectionType;
     }
 
-    public Person getPerson() {
-        return person;
+    public TreeElement getPerson() {
+        return treeElement;
     }
 
     public FamilyConnectionType getConnectionType() {
@@ -17,7 +17,7 @@ public class FamilyConnection {
 
     @Override
     public String toString() {
-        return "person name = " + person.getName() +
+        return "person name = " + treeElement.getName() +
                 " - connectionType = " + connectionType;
     }
 }

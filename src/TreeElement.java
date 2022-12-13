@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
-    private PersonGender gender;
+public class TreeElement {
+    private Gender gender;
     private String name;
     private List<FamilyConnection> connectionList;
 
-    Person(String name, PersonGender gender, List<FamilyConnection> connectionList) {
+    TreeElement(String name, Gender gender, List<FamilyConnection> connectionList) {
         this.name = name;
         this.gender = gender;
         this.connectionList = connectionList;
     }
-    Person(String name, PersonGender gender) {
+    TreeElement(String name, Gender gender) {
         this(name, gender, new ArrayList<>());
     }
 
@@ -23,7 +23,7 @@ public class Person {
         this.name = name;
     }
 
-    public PersonGender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
@@ -31,21 +31,21 @@ public class Person {
         return connectionList;
     }
 
-    public void addConnection(Person person, FamilyConnectionType connectionType) {
+    public void addConnection(TreeElement treeElement, FamilyConnectionType connectionType) {
         if ((connectionType == FamilyConnectionType.son || connectionType == FamilyConnectionType.daughter)
-                &&  this.gender == PersonGender.male) {
-            person.connectionList.add(new FamilyConnection(this, FamilyConnectionType.father));
+                &&  this.gender == Gender.male) {
+            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.father));
         } else if ((connectionType == FamilyConnectionType.son || connectionType == FamilyConnectionType.daughter)
-                && this.gender == PersonGender.female) {
-            person.connectionList.add(new FamilyConnection(this, FamilyConnectionType.mother));
+                && this.gender == Gender.female) {
+            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.mother));
         } else if ((connectionType == FamilyConnectionType.father || connectionType == FamilyConnectionType.mother)
-                && this.gender == PersonGender.male) {
-            person.connectionList.add(new FamilyConnection(this, FamilyConnectionType.son));
+                && this.gender == Gender.male) {
+            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.son));
         } else if ((connectionType == FamilyConnectionType.father || connectionType == FamilyConnectionType.mother)
-                && this.gender == PersonGender.female) {
-            person.connectionList.add(new FamilyConnection(this, FamilyConnectionType.daughter));
+                && this.gender == Gender.female) {
+            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.daughter));
         }
-        connectionList.add(new FamilyConnection(person, connectionType));
+        connectionList.add(new FamilyConnection(treeElement, connectionType));
     }
 
     public void showConnection(FamilyConnectionType connectionType){

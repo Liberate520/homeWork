@@ -1,23 +1,23 @@
 public class Main {
     public static void main(String[] args) {
-        GenealogicalTree genealogicalTree = new GenealogicalTree();
+        GenealogicalTree ivanovTree = new Tree();
 
-        Person person1 = new Person("Александр Иванов", PersonGender.male);
-        Person person2 = new Person("Пётр Иванов", PersonGender.male);
-        Person person3 = new Person("Иван Иванов", PersonGender.male);
-        Person person4 = new Person("Анастасия Иванова", PersonGender.female);
+        TreeElement treeElement1 = new TreeElement("Александр Иванов", Gender.male);
+        TreeElement treeElement2 = new TreeElement("Пётр Иванов", Gender.male);
+        TreeElement treeElement3 = new TreeElement("Иван Иванов", Gender.male);
+        TreeElement treeElement4 = new TreeElement("Анастасия Иванова", Gender.female);
 
-        genealogicalTree.addPerson(person1);
-        genealogicalTree.addPerson(person2);
-        genealogicalTree.addPerson(person3);
-        genealogicalTree.addPerson(person4);
+        ivanovTree.addElement(treeElement1);
+        ivanovTree.addElement(treeElement2);
+        ivanovTree.addElement(treeElement3);
+        ivanovTree.addElement(treeElement4);
 
-        person4.addConnection(person1, FamilyConnectionType.son);
-        person4.addConnection(person2, FamilyConnectionType.son);
-        person3.addConnection(person1, FamilyConnectionType.son);
-        person3.addConnection(person2, FamilyConnectionType.son);
+        treeElement4.addConnection(treeElement1, FamilyConnectionType.son);
+        treeElement4.addConnection(treeElement2, FamilyConnectionType.son);
+        treeElement3.addConnection(treeElement1, FamilyConnectionType.son);
+        treeElement3.addConnection(treeElement2, FamilyConnectionType.son);
 
-        person1.showConnection(FamilyConnectionType.father);
-        System.out.println(genealogicalTree);
+        treeElement1.showConnection(FamilyConnectionType.father);
+        System.out.println(ivanovTree);
     }
 }
