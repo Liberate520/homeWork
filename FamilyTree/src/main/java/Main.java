@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         var nataly = new Person("Наталья");
@@ -13,14 +15,14 @@ public class Main {
         gt.append(nataly, Link.sister, Link.brother, alex);
         gt.append(nataly, Link.sister, Link.sister, lena);
 
-        Search search = new Search();
+        ArrayList<Node> search = new ArrayList<>();
 
         System.out.println();
         System.out.println("Все сестры и братья Натальи:");
-        System.out.println(search.spend(nataly, Link.sister));
+        System.out.println(Search.spend(nataly, Link.sister));
         System.out.println();
         System.out.println("Все дети Натальи");
-        System.out.println(search.spend(nataly, Link.parent));
+        System.out.println(Search.spend(nataly, Link.parent));
 
     }
 }

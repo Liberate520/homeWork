@@ -1,4 +1,4 @@
-interface Human {
+public interface Human {
 
 //    enum link {
 //        parent, child, brother, sister, husband,
