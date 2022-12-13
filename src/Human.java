@@ -1,3 +1,4 @@
+
 public class Human {
     private String name;
     private String surname;
@@ -9,8 +10,5 @@ public class Human {
         this.surname = surname;
         this.birth = birth;
         this.death = death;
-    }
-
-    
-    
+    }    
 }
