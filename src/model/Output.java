@@ -1,5 +1,6 @@
 package model;
 
+
 public class Output implements IOutputable {
 
     @Override

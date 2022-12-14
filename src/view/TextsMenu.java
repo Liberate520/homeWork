@@ -1,5 +1,6 @@
 package view;
 
+
 public class TextsMenu {
     protected static String Menu = """
              1 - посмотреть всех\s
