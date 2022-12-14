@@ -1,7 +1,10 @@
 package View;
-import Presenter.Presenter;
-public interface View {
-        void start();
-        void setPresenter(Presenter presenter);
-    }
 
+import Presenter.Presenter;
+
+public interface View {
+    String scanString(String str);
+    int scanInt(String str);
+    void setPresenter(Presenter presenter);
+    void start();
+}

@@ -1,35 +1,42 @@
 package View;
 
 import Presenter.Presenter;
+import Repository.RepositoryTree;
 
 import java.util.Scanner;
 
-public class ConsoleUI implements View {
+public class ConsoleUI implements View{
+    private Scanner scanner;
     private Presenter presenter;
-    private Scanner sc;
-
+    private RepositoryTree repository;
     public ConsoleUI() {
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
-
     @Override
-    public void start() {
-        System.out.println("Выберите нужное действие:" + "\n" +
-                "1. Просмотр всех людей " + "\n" +
-                "2. Просмотр одного человека дерева " + "\n" +
-                "3. Добавление человека " + "\n" +
-                "4. Создание связи" + "\n" +
-                "Для выхода укажите 0");
-        int num = sc.nextInt();
-        while (!(num == 0)) {
-            presenter.onClick(num);
-        }
-
-    }
-
-    @Override
-    public void setPresenter(Presenter presenter) {
+    public void setPresenter(Presenter presenter){
         this.presenter = presenter;
     }
-
+    @Override
+    public String scanString(String str){
+        System.out.println(str);
+        return scanner.nextLine();
+    }
+    @Override
+    public int scanInt(String str){
+        System.out.println(str);
+        return scanner.nextInt();
+    }
+    @Override
+    public void start() {
+        View view = new ConsoleUI();
+        repository = new RepositoryTree();
+        presenter = new Presenter(view, repository);
+        int menu = scanInt("Выберите нужное действие:" + "\n" +
+                "1. Просмотр всех людей " + "\n" +
+                "2. Создание человека" + "\n" +
+                "3. Просмотр определенного человека " + "\n" +
+                "4. Создание связи" + "\n" +
+                "Для выхода укажите 0");
+        presenter.onClick(menu);
+    }
 }

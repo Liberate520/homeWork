@@ -34,7 +34,7 @@ public class Human {
 
         return name;
     }
-    public void setAge(String name) {
+    public void setAge(int age) {
         this.age = age;
     }
     public int getAge() {
