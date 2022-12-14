@@ -1,0 +1,15 @@
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.csproj.AssemblyReference.cache
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.GeneratedMSBuildEditorConfig.editorconfig
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.AssemblyInfoInputs.cache
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.AssemblyInfo.cs
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.csproj.CoreCompileInputs.cache
+D:\u2\ucheba\homeWork\homeCSharp\bin\Debug\net6.0\homeCSharp.exe
+D:\u2\ucheba\homeWork\homeCSharp\bin\Debug\net6.0\homeCSharp.deps.json
+D:\u2\ucheba\homeWork\homeCSharp\bin\Debug\net6.0\homeCSharp.runtimeconfig.json
+D:\u2\ucheba\homeWork\homeCSharp\bin\Debug\net6.0\homeCSharp.dll
+D:\u2\ucheba\homeWork\homeCSharp\bin\Debug\net6.0\homeCSharp.pdb
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.dll
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\refint\homeCSharp.dll
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.pdb
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\homeCSharp.genruntimeconfig.cache
+D:\u2\ucheba\homeWork\homeCSharp\obj\Debug\net6.0\ref\homeCSharp.dll
