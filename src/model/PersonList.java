@@ -3,7 +3,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class PersonList {
+public class PersonList extends Person {
     private final java.util.List<Itemable> list;
 
     public PersonList(){
@@ -23,6 +23,7 @@ public class PersonList {
         lena.setName("Елена");
         lena.setAge(79);
         list.add(lena);
+        System.out.println(lena.getRelations());
 
         // Андрей
         Person andrei = new Person();
@@ -30,6 +31,7 @@ public class PersonList {
         andrei.setName("Андрей");
         andrei.setAge(50);
         list.add(andrei);
+        System.out.println(andrei.getRelations());
 
         //Томара
         Person toma = new Person();
@@ -37,6 +39,7 @@ public class PersonList {
         toma.setName("Томара");
         toma.setAge(56);
         list.add(toma);
+        System.out.println(toma.getRelations());
 
         // Андрей сын Васи
         Relation relation = new Relation(2,100);
@@ -89,10 +92,10 @@ public class PersonList {
         return "Совпадений нет";
     }
 
-    public String addRelationToItem(int idForMenu, int reletionId, int reletionToitemId ){
+    public String addRelationToItem(int idForMenu, int relationId, int relationTotemId ){
         for (Itemable item : list){
             if (item.getId() == idForMenu){
-                Relation relationship = new Relation(reletionId, reletionToitemId);
+                Relation relationship = new Relation(relationId, relationTotemId);
                 item.setRelationship(relationship);
                 return "связь добавлена";
             }

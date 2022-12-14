@@ -1,8 +1,9 @@
 package view;
 
 
+
 public class TextsMenu {
-    protected static String Menu = """
+        protected static String Menu = """
              1 - посмотреть всех\s
              2 - добавить человека \s
              3 - удалить человека по id\s
@@ -13,6 +14,7 @@ public class TextsMenu {
              q - выход
              \
             """;
+
     protected static String Name = "Введите имя ";
     protected static String Age = "Введите возраст ";
     protected static String Id = "Введите id ";
