@@ -22,7 +22,33 @@ public class main {
     public static void main(String[] args) {
 
         Human human1 = new Human("Vasiliy", "M");
-        System.out.println(human1);
+        Human human2 = new Human("Maria", "W");
+//        System.out.println(human1);
+//        System.out.println(human2);
+        FamilyTree familyTree = new FamilyTree();
+        familyTree.addNewMember(human1);
+        familyTree.addNewMember(human2);
+//        System.out.println(familyTree);
+        Human human3 = new Human("Petr", "M", human1, human2);
+        Human human4 = new Human("Tatyana", "W", human1, human2);
+        Human human5 = new Human("Elena", "W", human1, human2);
+        Human human6 = new Human("Mikhail", "M", human3, human4);
+        Human human7 = new Human("Ivan", "M", human3, human4);
+
+        familyTree.addNewMember(human3);
+        familyTree.addNewMember(human4);
+        familyTree.addNewMember(human5);
+        familyTree.addNewMember(human6);
+        familyTree.addNewMember(human7);
+
+        System.out.println(familyTree);
+
+        Human human = familyTree.getByName("petr");
+        System.out.printf("Нашёл\n%s", human);
+
+        System.out.println(human1.getAllChildren());
+        System.out.printf("Сёстры %s - %s\n", human4.getName(), human4.getAllSisters());
+        System.out.println(human7.getAllSisters());
 
     }
 }
