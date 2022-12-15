@@ -44,10 +44,17 @@ public class PersonList extends Person {
         Relation relation = new Relation(2,102);
         vassal.setRelationship(relation);
 
+        Relation relation3 = new Relation(1,101);
+        vassal.setRelationship(relation3);
+
         // Артур сын Светланы
         Relation relation1 = new Relation(2,102);
         lena.setRelationship(relation1);
+
+        Relation relation2 = new Relation(1,100);
+        lena.setRelationship(relation2);
     }
+
 
     public Itemable get(int index){
         return this.list.get(index);

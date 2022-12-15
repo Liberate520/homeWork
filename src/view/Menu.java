@@ -2,14 +2,17 @@ package view;
 
 public class Menu {
 
-    private static final UserInputFromConsole scan = new UserInputFromConsole();
-    private static String Select = "EMPTY";
+    //    private UserInputFromConsole scan = new UserInputFromConsole();
+//    private static String Select = "EMPTY";
     private static final ToPresenter toPresenter = new ToPresenter();
 
-    public static void Start(){
+    public static void Start() {
+        UserInputFromConsole scan = new UserInputFromConsole();
+        String Select = "EMPTY";
+//        ToPresenter toPresenter = new ToPresenter();
 
-        while (!Select.equals("q")){
-            Select = "EMPTY";
+        while (!Select.equals("q")) {
+//            Select = "EMPTY";
             Select = scan.inputKey(TextsMenu.Menu);
             toPresenter.doSomething(Select);
         }

@@ -7,12 +7,14 @@ public class UserInputFromConsole {
    
     public String inputKey(String input){
 
-        String key;
+//        String key;
 
         System.out.print(input);
-        key = this.input.nextLine();
+//        String key = this.input.nextLine();
+//
+//        return key;
+         return this.input.nextLine();
 
-        return key;
     }
 }
 
