@@ -1,10 +1,10 @@
-
 public class Human {
     private String name;
     private String surname;
     private int birth;
     private int death;
     private String gender;
+
 
     public Human(String name, String surname, int birth, int death, String gender) {
         this.name = name;
@@ -64,4 +64,5 @@ public class Human {
                 + gender
                 + "]";
     }
+
 }

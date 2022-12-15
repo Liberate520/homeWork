@@ -1,21 +1,28 @@
-import java.util.List;
-
 public class Communication {
-    private Human human;
+    private Human human1;
+    private Human human2;
     private TypeCommunication typeCommunication;
 
-    public Communication(Human human, TypeCommunication typeCommunication, Trees humanlist,
-            List<Communication> communa_list) {
-        this.human = human;
+    public Communication(Human human1, Human human2, TypeCommunication typeCommunication) {
+        this.human1 = human1;
+        this.human2 = human2;
         this.typeCommunication = typeCommunication;
     }
 
-    public Human getHuman() {
-        return human;
+    public Human getHuman1() {
+        return human1;
     }
 
-    public void setHuman(Human human) {
-        this.human = human;
+    public void setHuman1(Human human) {
+        this.human1 = human;
+    }
+
+    public void setHuman2(Human human2) {
+        this.human2 = human2;
+    }
+
+    public Human getHuman2() {
+        return human2;
     }
 
     public TypeCommunication getTypeCommunication() {
@@ -28,7 +35,9 @@ public class Communication {
 
     @Override
     public String toString() {
-        return "Communication [human=" + human + ", typeCommunication=" + typeCommunication + "]";
+        return "Communication [name=>" + human1.getName() + ", surname=>" + human1.getSurname() + 
+                            "name=>" + human2.getName() + ", surname=>" + human2.getSurname() 
+                            + ", typeCommunication=" + getTypeCommunication()
+                + "]";
     }
-
 }
