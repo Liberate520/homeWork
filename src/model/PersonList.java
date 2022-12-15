@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class PersonList extends Person {
     private final java.util.List<Itemable> list;
-
     public PersonList(){
         this.list = new ArrayList<>();
         // тестовые персоны

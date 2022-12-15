@@ -6,7 +6,6 @@ import model.SaveTo;
 import view.PrintView;
 
 public class Presenter {
-
     private final PersonList list = new PersonList();
     private final SaveTo save = new SaveTo();
     private final Output output = new Output();

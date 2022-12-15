@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Person implements Itemable {
-    
+
     private int id;
     private String name;
     private int age;

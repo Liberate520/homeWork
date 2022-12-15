@@ -3,7 +3,6 @@ package view;
 import presenter.Presenter;
 
 public class ToPresenter {
-
     private final Presenter presenter = new Presenter();
 
     public void doSomething(String userSelect){

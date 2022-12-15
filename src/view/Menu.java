@@ -1,7 +1,6 @@
 package view;
 
 public class Menu {
-
     private static final UserInputFromConsole scan = new UserInputFromConsole();
     private static String Select = "EMPTY";
     private static final ToPresenter toPresenter = new ToPresenter();

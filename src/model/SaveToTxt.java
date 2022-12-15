@@ -2,10 +2,7 @@ package model;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
-
 public class SaveToTxt implements ISaveable {
-
     private String path = "Person.txt";
     
     @Override
@@ -19,7 +16,6 @@ public class SaveToTxt implements ISaveable {
             e.printStackTrace();
         }
     }
-
     public String getPath() {
         return path;
     }

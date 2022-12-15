@@ -6,7 +6,6 @@ public class Output implements IOutputable {
     public String outputString(String str){
         return str + "\n";
     }
-
     @Override
     public String outputListToString(PersonList list){
         String result;

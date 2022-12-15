@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class SaveToCSV implements ISaveable {
-
     private File file = new File("Person.csv");
-    
     @Override
     public void saveAs(String human){
         try {
