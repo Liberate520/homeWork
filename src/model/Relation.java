@@ -1,5 +1,6 @@
 package model;
 
+
 public class Relation {
     private int relationId;
     private String relation;
