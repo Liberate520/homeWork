@@ -16,16 +16,16 @@ package homeWork.src;
 //Обязательно пробуем свои силы, в дальнейшем будем этот проект развивать
 
 
-import java.util.List;
 
 public class main {
     public static void main(String[] args) {
 
+        FamilyTree familyTree = new FamilyTree();
+//        Сначала необходимо создать самых старших членов семьи, у которых родители неизвестны
         Human human1 = new Human("Vasiliy", "M");
         Human human2 = new Human("Maria", "W");
 //        System.out.println(human1);
 //        System.out.println(human2);
-        FamilyTree familyTree = new FamilyTree();
         familyTree.addNewMember(human1);
         familyTree.addNewMember(human2);
 //        System.out.println(familyTree);
