@@ -7,8 +7,8 @@ public class Main {
         trees_human.add_human(human);
         trees_human.add_human(human1);
         System.out.println(trees_human);
-        Communication firs = new Communication(human, human1,TypeCommunication.brother);
-        System.out.println(firs);
+        Communication communa = new Communication(human, human1,TypeCommunication.brother);
+        System.out.println(communa);
     }
 
 }
