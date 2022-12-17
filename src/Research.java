@@ -1,35 +1,46 @@
 import Model.Child;
-import Model.Human;
+import Model.Identity;
+import Model.Role;
 import Model.Parent;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class Research {
-    private final List<Human> people;
+    private final List<Role> roles;
 
-    public Research(List<Human> people) {
-        this.people = people;
+    public HashSet<Identity> getIdentities() {
+        HashSet<Identity> identities = new HashSet<>();
+        for (Role role: roles) {
+            identities.add(role.identity);
+        }
+        return identities;
     }
-    protected Human findPerson(String firstName, String lastName, String className) throws ClassNotFoundException {
+
+    public Research(List<Role> roles) {
+        this.roles = roles;
+    }
+    protected Role findPerson(String firstName, String lastName, String className) throws ClassNotFoundException {
         Class myClass = Class.forName(className);
-        for (Human person : people) {
+        for (Role person : roles) {
             if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName) && myClass.isInstance(person)) {
                 return person;
             }
         }
         return null;
     }
-    protected Human findPerson(String name, String className) throws ClassNotFoundException {
+    protected Role findPerson(String name, String className) throws ClassNotFoundException {
         String[] result = name.split(" ");
         return findPerson(result[0], result[1], className);
     }
 
-    public Human findPerson(String name) throws ClassNotFoundException {
-        return findPerson(name, "Model.Human");
+    public Role findPerson(String name) throws ClassNotFoundException {
+        return findPerson(name, "Model.Role");
     }
 
     public void whoYourChildren(String name) throws ClassNotFoundException {
-        Human person = findPerson(name, "Model.Parent");
+        Role person = findPerson(name, "Model.Parent");
         if (person != null)
             ((Parent)person).whoYourChildren();
         else
@@ -42,10 +53,16 @@ public class Research {
         ((Child) findPerson(name, "Model.Child")).whoYourFather();
     }
 
-    public void printAll() {
-        for (Human man: people) {
+    public void printAllRoles() {
+        for (Role man: roles) {
             String role = man.getClass().toString().substring(12) + " role";
             System.out.println(man + " - " + role);
+        }
+    }
+    public void printAllPeople() {
+        List<Identity> identities = getIdentities().stream().sorted(Comparator.comparing(Identity::toString)).toList();
+        for (Identity identity : identities) {
+            System.out.println(identity.toString());
         }
     }
 }

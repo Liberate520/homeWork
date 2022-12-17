@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Parent extends Human implements SeniorKinsman<Child> {
+public class Parent<T extends Identity> extends Role<T> implements SeniorKinsman<Child> {
     private List<Child> children;
     public List<Child> getChildren() {
         return children;
@@ -42,14 +42,21 @@ public class Parent extends Human implements SeniorKinsman<Child> {
         super(sex, age, firstName, lastName);
         createRelationship(children);
     }
+    public Parent(T identity, List<Child> children) {
+        super(identity);
+        createRelationship(children);
+    }
     public Parent() {
         super();
+    }
+    public Parent(T identity) {
+        super(identity);
     }
     public void whoYourChildren() {
         if (children == null) System.out.println("I have no children");
         else {
             for (Child child : children) {
-                System.out.println((child.getSex() == Human.male ? "boy: " : "girl: ") + child);
+                System.out.println((child.getSex() == Role.male ? "boy: " : "girl: ") + child);
             }
         }
     }

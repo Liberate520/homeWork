@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grandparent extends Human implements SeniorKinsman<Grandchild> {
+public class Grandparent extends Role implements SeniorKinsman<Grandchild> {
     List<Grandchild> grandchildren;
 
     public Grandparent(boolean sex, int age, String firstName, String lastName, List<Grandchild> grandchildren) {
