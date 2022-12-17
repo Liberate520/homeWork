@@ -1,4 +1,4 @@
-package FamilyTree;
+package src;
 
 import java.util.Scanner;
 
