@@ -2,36 +2,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trees {
-    private List<Human> humanlist;
+    private List<Communication> communlist;
 
-    public Trees(List<Human> humanlist) {
-        this.humanlist = humanlist;
+    public Trees(List<Communication> communlist) {
+        this.communlist = communlist;
     }
 
     public Trees() {
         this(new ArrayList<>());
     }
 
-    public List<Human> getHumanlist() {
-        return humanlist;
+    public List<Communication> getCommunlist() {
+        return communlist;
     }
 
-    public void setHumanlist(List<Human> humanlist) {
-        this.humanlist = humanlist;
+    public void setCommunlist(List<Communication> communlist) {
+        this.communlist = communlist;
     }
 
-    public void add_human(Human human) {
-        humanlist.add(human);
+    public void add_communication(Communication communication) {
+        communlist.add(communication);
     }
 
-    public List<Human> getHumansbyYear(int birth, int death) {
-        List<Human> people_year = new ArrayList<>();
-        for (Human human : humanlist) {
-            if (human.getBirth() <= birth && human.getDeath() >= death) {
-                people_year.add(human);
-            }
-        }
-        return people_year;
-
-    }
+ 
 }

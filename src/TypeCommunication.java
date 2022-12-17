@@ -1,3 +1,3 @@
 public enum TypeCommunication {
-    mother, father, brother, sister, child
+    Mother, Father, Brother, Sister, Child
 }
