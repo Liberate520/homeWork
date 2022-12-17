@@ -48,12 +48,45 @@ public class Tree_1rstgen {
     public void setChild_id(String child_id) {
         this.child_id = child_id;
     }
+
     public String getgender() {
         return gender;
     }
+    public void setgender(String gender) {
+        this.gender = gender;
+    }
+
     public String getBirthDate() {
         return birth_date;
     }
+    public void setBirthDate(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getDethDate() {
+        return deth_date;
+    }
+    public void setDethDate(String deth_date) {
+        this.deth_date = deth_date;
+    }
+
+    public String getFirstName() {
+        return firstname;
+    }
+    public void setFirstName(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastName() {
+        return lastname;
+    }
+    public void setLastName(String lastname) {
+        this.lastname = lastname;
+    }
+
+
+
+
 
     public void age(Tree_1rstgen person){
         java.util.Date dateNow = new java.util.Date();

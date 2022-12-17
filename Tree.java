@@ -1,12 +1,10 @@
-package Семинар1;
+package Семинар1.homeWork;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sound.sampled.SourceDataLine;
-
-import Семинар1.homeWork.Tree_2ndgen;
 
 public class Tree {
     public static void main(String[] args) throws IOException{
