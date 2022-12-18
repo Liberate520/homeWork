@@ -18,7 +18,7 @@ public class SaveTo {
             if (list.get(i).getId() == idForMenu){
                 SaveToCSV csv = new SaveToCSV();
                 csv.saveAs(list.get(i).itemToString());
-                return "записан в Doc: " + list.get(i).itemToString() + "\n";
+                return "записан в Csv: " + list.get(i).itemToString() + "\n";
             }
         }
         return "Совпадений нет";
