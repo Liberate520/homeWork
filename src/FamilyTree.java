@@ -23,11 +23,11 @@ public class FamilyTree {
   }
 
   public void addHuman(String fullName, String gender) {
-    this.humans.add(new Human(fullName, gender));
+    addHuman(new Human(fullName, gender));
   }
 
   public void addHuman(String fullName, String gender, Human mother, Human father) {
-    this.humans.add(new Human(fullName, gender, mother, father));
+    addHuman(new Human(fullName, gender, mother, father));
   }
 
   public void addHuman() {
