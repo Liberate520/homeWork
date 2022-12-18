@@ -32,7 +32,7 @@ public class Program {
         break;
 
       case "3":
-        familyTree.addHuman();
+        familyTree.createHuman();
         familyTree.showHumans();
         break;
 

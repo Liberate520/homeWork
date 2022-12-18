@@ -30,7 +30,7 @@ public class FamilyTree {
     addHuman(new Human(fullName, gender, mother, father));
   }
 
-  public void addHuman() {
+  public void createHuman() {
     Scanner str = new Scanner(System.in);
     System.out.print("\nВведите имя и фамилию: ");
     String fullName = str.next() + " " + str.next();
@@ -48,7 +48,7 @@ public class FamilyTree {
     Map<Integer, Human> availableFathers = chooseParent("мужской");
     Human parentFather = availableFathers.get(str.nextInt());
 
-    this.humans.add(new Human(fullName, gender, parentMother, parentFather));
+    addHuman(new Human(fullName, gender, parentMother, parentFather));
   }
 
   public Human searchByName(String fullName) {
