@@ -1,17 +1,22 @@
 package homeWork.src;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
-    List<Human> members;
+    private List<Human> members;
+
+    private Writable writable;
 
     /**
      * конструктор класса FamilyTree. просто создаёт список
      */
     public FamilyTree() {
         this.members = new ArrayList<>();
+//        FileHandler по умолчанию
+        this.writable = new FileHandler();
     }
 
 
@@ -72,5 +77,41 @@ public class FamilyTree {
         return null;
     }
 
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
+    }
+
+
+    public void saveFamilyTree() {
+//  если writable уже определён и он типа FileHandler, то вызываем writable.save c аргументом текущего FamilyTree
+        if (writable != null) {
+            if (writable instanceof FileHandler) {
+                writable.save(this);
+//            FileHandler fileHandler = (FileHandler) writable;     // не надо, т.к. writable уже FileHandler
+            }   // если будет другой обработчик, то вызываться будет уже он со своей реализацией метода save
+        } else {
+            System.out.println("Файл не записан! Обработчик не определён или не верен его тип.");
+        }
+    }
+
+
+    public FamilyTree readFamilyTree() {
+//  если writable уже определён и он типа FileHandler (т.е. читаем FamilyTree из файла), то вызываем writable.read
+        if (writable != null) {
+            if (writable instanceof FileHandler) {
+//                если FamilyTree ещё не существует, то создаём новое и возвращаем
+                if ((((FileHandler) writable).read()) == null){
+                    return new FamilyTree();
+                } else {
+                    return ((FileHandler) writable).read();
+                }
+            }
+        } else {
+            System.out.println("Файл не загружен!");
+            return null;
+        }
+        return null;
+    }
 
 }
