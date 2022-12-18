@@ -61,7 +61,7 @@ public class FamilyTree {
     return null;
   }
 
-  public Human searchByName() {
+  public Human askName() {
     Scanner str = new Scanner(System.in); // Если закрыть str в конце метода, то появляется ошибка в работе программы.
     System.out.println("\nВведите имя и фамилию: ");
     String fullName = str.next() + " " + str.next(); // Можно ли ссчитать два слова без двойного использования метода

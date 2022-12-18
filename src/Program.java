@@ -27,7 +27,7 @@ public class Program {
         break;
 
       case "2":
-        Human person = familyTree.searchByName();
+        Human person = familyTree.askName();
         familyTree.moreInfo(person);
         break;
 
