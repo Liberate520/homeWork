@@ -88,7 +88,8 @@ public class Person implements Itemable {
                 "Возраст человека: " + this.age + "\n" + "Связи человека: " + "\n");
         if (this.relations != null){
             for (Relation r : this.relations){
-                    res.append("с человеком ").append(r.getRelationToHumanId()).append(" существует связь - ").append(r.getRelation()).append("\n");
+                    res.append("с человеком ").append(r.getRelationToHumanId()).append(" существует связь - ")
+                            .append(r.getRelation()).append("\n");
                 }
         }            
         return res.toString();

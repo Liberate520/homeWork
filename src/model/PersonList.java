@@ -41,12 +41,14 @@ public class PersonList extends Person {
         System.out.println(toma.getRelations());
 
         // Андрей сын Васи
-        Relation relation = new Relation(2,100);
+        Relation relation = new Relation(2,102);
         vassal.setRelationship(relation);
+        Relation relation1 = new Relation(1,101);
+        vassal.setRelationship(relation1);
 
         // Андрей сын Елены
-        Relation relation1 = new Relation(2,101);
-        lena.setRelationship(relation1);
+        Relation relation2 = new Relation(2,103);
+        lena.setRelationship(relation2);
     }
 
     public Itemable get(int index){
