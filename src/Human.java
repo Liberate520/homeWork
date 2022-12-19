@@ -26,12 +26,9 @@ public class Human implements Serializable {
     // конструктор только с детьми (верхний уровень дерева). т.е. бабушки и дедушки, у которых родители неизвестны
     public Human(String name, String gender) {
         this(name, gender, null, null);     // изменено на вызов другого конструктора
-//        this.name = name;
-//        this.gender = gender;
-//        this.children = new ArrayList<>();
     }
 
-    public Human(){
+    public Human() {
         this(null, null, null, null);
     }
 
@@ -83,35 +80,27 @@ public class Human implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder kids = new StringBuilder();
-        kids.append("Имя ").append(name).append("\n");     // сразу заполняем StringBuilder kids
-        kids.append("Пол ").append(gender).append("\n");
-//        String humName = "Name " + name + "\n";
-//        String humGender = "Gender " + gender + "\n";
-//        String humFather = "";
-//        String humMother = "";
+        StringBuilder sbHum = new StringBuilder();
+        sbHum.append("Имя ").append(name).append("\n");     // сразу заполняем StringBuilder sbHum
+        sbHum.append("Пол ").append(gender).append("\n");
         if (!(father == null)) {
-            kids.append("Отец ").append(father.getName()).append("\n");
-//            humFather = "Father " + father.getName() + "\n";
+            sbHum.append("Отец ").append(father.getName()).append("\n");
         }
         if (!(mother == null)) {
-            kids.append("Мать ").append(mother.getName()).append("\n");
-//            humMother = "Mother " + mother.getName() + "\n";
+            sbHum.append("Мать ").append(mother.getName()).append("\n");
         }
         if (children.size() > 0) {      // изменено. теперь без this
-//            System.out.printf("Всего детей у %s - %s\n", name, this.children.size());
             for (Human child : this.children) {
                 if (child.getGender().equals("М")) {
-                    kids.append("Сын ").append(child.getName());
-                    kids.append("\n");
+                    sbHum.append("Сын ").append(child.getName());
+                    sbHum.append("\n");
                 } else if (child.getGender().equals("Ж")) {
-                    kids.append("Дочь ").append(child.getName());
-                    kids.append("\n");
+                    sbHum.append("Дочь ").append(child.getName());
+                    sbHum.append("\n");
                 }
             }
         }
-//        return humName + humGender + humFather + humMother + kids.toString();
-        return kids.toString();
+        return sbHum.toString();
     }
 
     /**
@@ -133,25 +122,25 @@ public class Human implements Serializable {
     }
 
     /**
-     * получить всех сестёр
+     * получить всех сестёр (братьев)
      *
      * @return String
      */
-    public String getAllSisters() {
-        StringBuilder sisters = new StringBuilder();
-        if (this.father.children.size() > 0) {
-            for (Human child : this.father.children) {
+    public String getAllSistersOrBrothers(String gender) {
+        StringBuilder sistOrBroth = new StringBuilder();
+        if (!(this.father == null)) {
+            if (this.father.children.size() > 0) {
+                for (Human child : this.father.children) {
 //                System.out.println(child==this);
-                if ((child.getGender().equals("Ж")) & (child != this)) {
-                    sisters.append(child.getName()).append(" ");
+                    if ((child.getGender().equals(gender)) & (child != this)) {
+                        sistOrBroth.append(child.getName()).append(" ");
+                    }
                 }
             }
-        }
-        if (sisters.length() == 0) {
-            sisters.append("У ").append(this.getName()).append(" нет сестёр.");
-        }
-        return sisters.toString();
+            if (sistOrBroth.length() == 0) {
+                sistOrBroth.append("У ").append(this.getName()).append(gender.equals("Ж") ? " нет сестёр" : " нет братьев");
+            }
+        } else sistOrBroth.append("У ").append(this.getName()).append(" неизвестны родители.");
+        return sistOrBroth.toString();
     }
-
-
 }

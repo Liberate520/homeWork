@@ -23,8 +23,6 @@ package homeWork.src;
 // с помощью которого и будет происходить запись. Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
 
 
-import com.sun.tools.javac.Main;
-
 import java.util.Scanner;
 
 public class main {
@@ -44,7 +42,7 @@ public class main {
         System.out.print("Введите имя матери (может быть пустым): ");
         str = iScanner.nextLine();
         human.setMother(familyTree.getByName(str));
-        System.out.println(human);
+//        System.out.println(human);
         return human;
     }
 
@@ -52,68 +50,37 @@ public class main {
     public static void main(String[] args) {
 
         FamilyTree familyTree = new FamilyTree();
-//        Сначала необходимо создать самых старших членов семьи, у которых родители неизвестны
-//        Human human1 = new Human("Василий", "М");
-        Human human2 = new Human("Мария", "Ж");
-//        System.out.println(human1);
-//        System.out.println(human2);
-//        familyTree.addNewMember(human1);
-//        familyTree.addNewMember(human2);
-//        System.out.println(familyTree);
-//        Human human3 = new Human("Пётр", "М", human1, human2);
-//        Human human4 = new Human("Татьяна", "Ж", human1, human2);
-//        Human human5 = new Human("Елена", "Ж", human1, human2);
-//        Human human6 = new Human("Михаил", "М", human3, human4);
-//        Human human7 = new Human("Иван", "М", human3, human4);
-
-//        familyTree.addNewMember(human3);
-//        familyTree.addNewMember(human4);
-//        familyTree.addNewMember(human5);
-//        familyTree.addNewMember(human6);
-//        familyTree.addNewMember(human7);
-
-//        System.out.println(familyTree);
-
-//        Human human = familyTree.getByName("Пётр");
-//        System.out.printf("Нашёл\n%s", human);
-
-//        System.out.println(human1.getAllChildren());
-//        System.out.printf("Сёстры %s - %s\n", human4.getName(), human4.getAllSisters());
-//        System.out.println(human7.getAllSisters());
-
-//        System.out.println("-------------------");
-
         FileHandler fileHandler = new FileHandler();
 //      устанавливаем файловый обработчик для familyTree типа FileHandler
         familyTree.setWritable(fileHandler);
-
-//        familyTree.saveFamilyTree();
-
-//        familyTree = familyTree.readFamilyTree();
-//        System.out.println("-------------------");
-//        System.out.println(familyTree);
-
+//      читаем FamilyTree из файла. В случае неудачи работаем с новым пустым FamilyTree
         familyTree = familyTree.readFamilyTree();
 
         Scanner iScanner = new Scanner(System.in);
         boolean repeat = true;
         while (repeat) {
-            System.out.print("Введите действие:\nEnter - завершение программы и сохранение FamilyTree,\n1 - показать всех членов дерева," +
-                    "\n2 - добавить нового члена семьи\n3 - найти члена семьи по имени\n4 - показать всех детей члена семьи" +
-                    "\n5 - показать всех сестёр члена семьи\n6 - показать всех братьев члена семьи\n--> ");
+            System.out.print("""
+                    Введите действие:
+                    Enter - завершение программы и сохранение FamilyTree,
+                    1 - показать всех членов дерева,
+                    2 - добавить нового члена семьи,
+                    3 - найти члена семьи по имени,
+                    4 - показать всех детей члена семьи,
+                    5 - показать всех сестёр члена семьи,
+                    6 - показать всех братьев члена семьи.
+                    -->\s""");
             String str = iScanner.nextLine();
             switch (str) {
                 case "":
-                    repeat = false;
+//                  сохраняем FamilyTree в файл и выходи из цикла while
                     familyTree.saveFamilyTree();
+                    repeat = false;
                     break;
                 case "1":
                     System.out.println(familyTree);
                     break;
                 case "2":
-//                    familyTree.addNewMember(human2);
-
-                    familyTree.addNewMember(getHuman(familyTree));
+                    familyTree.addNewMember(main.getHuman(familyTree));
                     break;
                 case "3":
                     System.out.print("Введите имя: ");
@@ -122,10 +89,22 @@ public class main {
                     System.out.printf("Нашёл\n%s\n", findedHuman);
                     break;
                 case "4":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    findedHuman = familyTree.getByName(str);
+                    System.out.println(findedHuman.getAllChildren());
                     break;
                 case "5":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    findedHuman = familyTree.getByName(str);
+                    System.out.printf("Сёстры %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("Ж"));
                     break;
                 case "6":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    findedHuman = familyTree.getByName(str);
+                    System.out.printf("Братья %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("М"));
                     break;
                 default:
                     System.out.println("Я вас не понял, повторите ввод.");
@@ -133,7 +112,5 @@ public class main {
             }
         }
         iScanner.close();
-
-
     }
 }

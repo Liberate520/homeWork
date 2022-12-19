@@ -17,7 +17,7 @@ public class FileHandler implements Writable, Serializable {
 
     private String filename;
 
-//    в клиентском коде можно определять другой файл
+    //    в будущем в клиентском коде можно определять другой файл
     public void setFilename(String filename) {
         this.filename = filename;
     }
@@ -27,6 +27,11 @@ public class FileHandler implements Writable, Serializable {
         this.filename = "familytree.dat";
     }
 
+    /**
+     * запись в файл
+     *
+     * @param serializable сериализуемый объект
+     */
     @Override
     public void save(Serializable serializable) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -38,6 +43,11 @@ public class FileHandler implements Writable, Serializable {
         }
     }
 
+    /**
+     * чтение из файла
+     *
+     * @return FamilyTree
+     */
     @Override
     public FamilyTree read() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {

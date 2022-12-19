@@ -11,7 +11,7 @@ public class FamilyTree implements Serializable {
     private Writable writable;
 
     /**
-     * конструктор класса FamilyTree. просто создаёт список
+     * конструктор класса FamilyTree. создаёт список и определят тип writable по умолчанию
      */
     public FamilyTree() {
         this.members = new ArrayList<>();
@@ -23,7 +23,7 @@ public class FamilyTree implements Serializable {
     /**
      * печать всех членов семьи дерева
      *
-     * @return
+     * @return String
      */
     @Override
     public String toString() {
@@ -60,6 +60,7 @@ public class FamilyTree implements Serializable {
                 }
             }
         }
+        System.out.printf("Добавлен новый член семьи %s\n", member.getName());
     }
 
     /**
@@ -70,7 +71,8 @@ public class FamilyTree implements Serializable {
      */
     public Human getByName(String name) {
         for (Human human : this.members) {
-            if (human.getName().toLowerCase().equals(name.toLowerCase())) {
+//            при поиске не учитывать регистр
+            if (human.getName().equalsIgnoreCase(name)) {
                 return human;
             }
         }
@@ -101,7 +103,8 @@ public class FamilyTree implements Serializable {
         if (writable != null) {
             if (writable instanceof FileHandler) {
 //                если FamilyTree ещё не существует, то создаём новое и возвращаем
-                if ((((FileHandler) writable).read()) == null){
+                if ((((FileHandler) writable).read()) == null) {
+                    System.out.println("FamilyTree в файле нет! Создаём новое FamilyTree.");
                     return new FamilyTree();
                 } else {
                     return ((FileHandler) writable).read();
