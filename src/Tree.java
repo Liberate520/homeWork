@@ -25,6 +25,16 @@ public class Tree implements GenealogicalTree {
     }
 
     @Override
+    public TreeElement findElement(String name) {
+        for (TreeElement treeElement : treeElementList) {
+            if (treeElement.getName().equals(name)) {
+                return treeElement;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "personList = " + treeElementList;
     }
