@@ -1,3 +1,5 @@
+package model;
+
 public class FamilyConnection {
     private TreeElement treeElement;
     private FamilyConnectionType connectionType;

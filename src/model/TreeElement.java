@@ -1,17 +1,21 @@
+package model;
+
+import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TreeElement {
     private Gender gender;
     private String name;
     private List<FamilyConnection> connectionList;
 
-    TreeElement(String name, Gender gender, List<FamilyConnection> connectionList) {
+    public TreeElement(String name, Gender gender, List<FamilyConnection> connectionList) {
         this.name = name;
         this.gender = gender;
         this.connectionList = connectionList;
     }
-    TreeElement(String name, Gender gender) {
+    public TreeElement(String name, Gender gender) {
         this(name, gender, new ArrayList<>());
     }
 
@@ -52,6 +56,23 @@ public class TreeElement {
         for (var connection : connectionList) {
             if (connection.getConnectionType() == connectionType) System.out.println(connection.getPerson());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o instanceof TreeElement treeElement) {
+            return getName().equals(treeElement.getName());
+        }
+        if (o instanceof String str) {
+            return getName().equals(str);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gender, name, connectionList);
     }
 
     @Override

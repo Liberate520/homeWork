@@ -1,33 +1,35 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree implements GenealogicalTree {
-    private List<TreeElement> treeElementList;
+public class Tree<T> implements GenealogicalTree<T> {
+    private List<T> treeElementList;
 
-    Tree(List<TreeElement> treeElementList) {
+    public Tree(List<T> treeElementList) {
         this.treeElementList = treeElementList;
     }
 
-    Tree() {
+    public Tree() {
         this(new ArrayList<>());
     }
 
-    public List<TreeElement> getPersonList() {
+    public List<T> getPersonList() {
         return treeElementList;
     }
 
-    public void setPersonList(List<TreeElement> treeElementList) {
+    public void setPersonList(List<T> treeElementList) {
         this.treeElementList = treeElementList;
     }
 
-    public void addElement(TreeElement treeElement) {
+    public void addElement(T treeElement) {
         treeElementList.add(treeElement);
     }
 
     @Override
-    public TreeElement findElement(String name) {
-        for (TreeElement treeElement : treeElementList) {
-            if (treeElement.getName().equals(name)) {
+    public T findElement(String name) {
+        for (T treeElement : treeElementList) {
+            if (treeElement.equals(name)) {
                 return treeElement;
             }
         }
