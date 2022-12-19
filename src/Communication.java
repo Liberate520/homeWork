@@ -28,4 +28,10 @@ public class Communication {
         return typeCommunicationHuman2;
     }
 
+    @Override
+    public String toString() {
+        return human1.getName() + " " + human1.getSurname() + " " + typeCommunicationHuman1
+                + " " + human2.getName() + " " + human2.getSurname() + " " + typeCommunicationHuman2 + '\n';
+    }
+
 }

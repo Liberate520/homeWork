@@ -24,5 +24,9 @@ public class Trees {
         communlist.add(communication);
     }
 
- 
+    @Override
+    public String toString() {
+        return "Фамильное древо " +'\n' + communlist;
+    }
+
 }

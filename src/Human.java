@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Human {
     private String name;
@@ -15,6 +13,7 @@ public class Human {
         this.death = death;
         this.gender = gender;
     }
+
 
     public String getName() {
         return name;
