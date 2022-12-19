@@ -1,4 +1,10 @@
-class Person implements Human {
+class Person<T> implements Human<T> {
+
+    private T id;
+
+    public T getId(){
+        return id;
+    }
 
     private String name;
 
@@ -6,8 +12,9 @@ class Person implements Human {
         return name;
     }
 
-    public Person(String name) {
+    public Person(String name, T id) {
         this.name = name;
+        this.id = id;
     }
 
     @Override

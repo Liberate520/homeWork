@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        var nataly = new Person("Наталья");
-        var misha = new Person("Михаил");
-        var denis = new Person("Дэнис");
-        var lena = new Person("Елена");
-        var alex = new Person("Алексей");
+        var nataly = new Person("Наталья", 1);
+        var misha = new Person("Михаил", 2);
+        var denis = new Person("Дэнис", 3);
+        var lena = new Person("Елена", 4);
+        var alex = new Person("Алексей", 5);
 
         GeoTree gt = new GeoTree();
 
@@ -15,14 +15,16 @@ public class Main {
         gt.append(nataly, Link.sister, Link.brother, alex);
         gt.append(nataly, Link.sister, Link.sister, lena);
 
-        ArrayList<Node> search = new ArrayList<>();
+        ArrayList<Person> list = new ArrayList<>();
 
-        System.out.println();
-        System.out.println("Все сестры и братья Натальи:");
-        System.out.println(Search.spend(nataly, Link.sister));
-        System.out.println();
-        System.out.println("Все дети Натальи");
-        System.out.println(Search.spend(nataly, Link.parent));
+        list.add(nataly);
+        list.add(misha);
+        list.add(denis);
+        list.add(lena);
+        list.add(alex);
+
+        App s = new App();
+        s.start(list);
 
     }
 }
