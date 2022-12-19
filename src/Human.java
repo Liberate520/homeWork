@@ -27,8 +27,10 @@ public class Human {
     this(fullName, gender);
     this.mother = mother;
     this.father = father;
-    father.children.add(this);
-    mother.children.add(this);
+    if (father != null)
+      father.children.add(this);
+    if (mother != null)
+      mother.children.add(this);
   }
 
   public String getFullName() {
