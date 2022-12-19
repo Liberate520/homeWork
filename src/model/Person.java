@@ -8,15 +8,25 @@ import java.util.Random;
 public class Person implements Itemable {
 
     private int id;
+    private String surname;
     private String name;
     private int age;
+
+
     private List<Relation> relations;
 
-    public Person(List<Itemable> list, String name, int age) {
+    public Person(List<Itemable> list,String surname, String name, int age) {
         this.id = setId(list);
+        this.surname = surname;
         this.name = name;
         this.age = age;
+
     }
+//    public Person(String name, String surname, int age){
+//        this.name = name;
+//        this.age = age;
+//        this.surname = surname;
+//    }
 
     public Person() {
     }
@@ -42,7 +52,15 @@ public class Person implements Itemable {
     public void setId(int id) {
         this.id = id;
     }
+    @Override
+    public String getSurname() {
+        return surname;
+    }
 
+    @Override
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
     @Override
     public String getName() {
         return name;
@@ -84,8 +102,8 @@ public class Person implements Itemable {
     @Override
     public String itemToString(){
         StringBuilder res;
-        res = new StringBuilder("id человека: " + this.id + "\n" + "имя человека: " + this.name + "\n" +
-                "Возраст человека: " + this.age + "\n" + "Связи человека: " + "\n");
+        res = new StringBuilder("id: " + this.id + "\n" + "Фамилия: " + this.surname + "\n" + "Имя: " + this.name + "\n" +
+                  "Возраст: " + this.age + "\n" + "Связи: " + "\n");
         if (this.relations != null){
             for (Relation r : this.relations){
                     res.append("с человеком ").append(r.getRelationToHumanId()).append(" существует связь - ")

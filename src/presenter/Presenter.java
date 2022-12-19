@@ -16,8 +16,8 @@ public class Presenter {
         console.print(output.outputListToString(list));
     }
 
-    public void addPerson(String name, Integer age){
-        console.print(output.outputString(list.addPerson(name, age)));
+    public void addPerson(String surname, String name, Integer age){
+        console.print(output.outputString(list.addPerson(surname, name, age)));
     }
 
     public void removePerson(int id){

@@ -12,7 +12,7 @@ public class TextsMenu {
              q - выход
              \
             """;
-
+    protected static String Surname = "Введите фамилию ";
     protected static String Name = "Введите имя ";
     protected static String Age = "Введите возраст ";
     protected static String Id = "Введите id ";

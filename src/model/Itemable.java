@@ -7,6 +7,8 @@ public interface Itemable {
     int getId();
     String getName();
     void setName(String name);
+    String getSurname();
+    void setSurname(String surname);
     int getAge();
     void setAge(int age);
     List<Relation> getRelations();

@@ -8,47 +8,57 @@ public class PersonList extends Person {
     public PersonList(){
         this.list = new ArrayList<>();
         // тестовые персоны
-        // Василий
-        Person vassal = new Person();
-        vassal.setId(100);
-        vassal.setName("Василий");
-        vassal.setAge(82);
-        list.add(vassal);
-        System.out.println(vassal.getRelations());
 
-        // Елена
-        Person lena = new Person();
-        lena.setId(101);
-        lena.setName("Елена");
-        lena.setAge(79);
-        list.add(lena);
-        System.out.println(lena.getRelations());
+//        Person Pa = new Person("Сергей", "Сопов", 45);
+//        Pa.setId(50);
+//        list.add(Pa);
+//        System.out.println(Pa.getRelations());
+        Person serg = new Person();
+        serg.setId(1);
+        serg.setSurname("Сопов");
+        serg.setName("Сергей");
+        serg.setAge(40);
+        list.add(serg);
+        System.out.println(serg.getRelations());
 
-        // Андрей
-        Person andrei = new Person();
-        andrei.setId(102);
-        andrei.setName("Андрей");
-        andrei.setAge(50);
-        list.add(andrei);
-        System.out.println(andrei.getRelations());
 
-        //Томара
-        Person toma = new Person();
-        toma.setId(103);
-        toma.setName("Томара");
-        toma.setAge(56);
-        list.add(toma);
-        System.out.println(toma.getRelations());
+        Person leka = new Person();
+        leka.setId(2);
+        leka.setSurname("Бейзель");
+        leka.setName("Ольга");
+        leka.setAge(38);
+        list.add(leka);
+        System.out.println(leka.getRelations());
 
-        // Андрей сын Васи
-        Relation relation = new Relation(2,102);
-        vassal.setRelationship(relation);
-        Relation relation1 = new Relation(1,101);
-        vassal.setRelationship(relation1);
 
-        // Андрей сын Елены
-        Relation relation2 = new Relation(2,103);
-        lena.setRelationship(relation2);
+        Person evgen = new Person();
+        evgen.setId(3);
+        evgen.setSurname("Гайдамака");
+        evgen.setName("Евгений");
+        evgen.setAge(19);
+        list.add(evgen);
+        System.out.println(evgen.getRelations());
+
+
+        Person julia = new Person();
+        julia.setId(4);
+        julia.setSurname("Сопова");
+        julia.setName("Юлия");
+        julia.setAge(33);
+        list.add(julia);
+        System.out.println(julia.getRelations());
+
+
+        Relation relation = new Relation(1,2);
+        serg.setRelationship(relation);
+        Relation relation1 = new Relation(2,3);
+        serg.setRelationship(relation1);
+
+
+        Relation relation2 = new Relation(1,1);
+        leka.setRelationship(relation2);
+        Relation relation3 = new Relation(2,3);
+        leka.setRelationship(relation3);
     }
 
     public Itemable get(int index){
@@ -67,8 +77,8 @@ public class PersonList extends Person {
         return result.toString();
     }
 
-    public String addPerson(String name, int age){
-        Itemable itemToAdd = new Person(list, name, age);
+    public String addPerson(String surname, String name, int age){
+        Itemable itemToAdd = new Person(list, surname, name, age);
         this.list.add(itemToAdd);
         return "добавлен: " + itemToAdd.itemToString();
     }
