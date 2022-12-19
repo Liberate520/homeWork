@@ -9,6 +9,8 @@ public interface Itemable {
     void setName(String name);
     String getSurname();
     void setSurname(String surname);
+    String getPatronymic();
+    void setPatronymic(String patronymic);
     int getAge();
     void setAge(int age);
     List<Relation> getRelations();

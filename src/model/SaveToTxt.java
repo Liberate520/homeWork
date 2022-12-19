@@ -9,7 +9,7 @@ public class SaveToTxt implements ISaveable {
     @Override
     public void saveAs(String human){
         try {
-            FileWriter writer = new FileWriter(path, false);
+            FileWriter writer = new FileWriter(path, true);
             writer.write(human);
             writer.close();
         } catch (IOException e) {

@@ -9,7 +9,7 @@ public class PersonList extends Person {
         this.list = new ArrayList<>();
         // тестовые персоны
 
-//        Person Pa = new Person("Сергей", "Сопов", 45);
+//        Person Pa = new Person("Сергей", "Сопов", 40);
 //        Pa.setId(50);
 //        list.add(Pa);
 //        System.out.println(Pa.getRelations());
@@ -17,6 +17,7 @@ public class PersonList extends Person {
         serg.setId(1);
         serg.setSurname("Сопов");
         serg.setName("Сергей");
+        serg.setPatronymic("Николаевич");
         serg.setAge(40);
         list.add(serg);
         System.out.println(serg.getRelations());
@@ -26,6 +27,7 @@ public class PersonList extends Person {
         leka.setId(2);
         leka.setSurname("Бейзель");
         leka.setName("Ольга");
+        leka.setPatronymic("Владимировна");
         leka.setAge(38);
         list.add(leka);
         System.out.println(leka.getRelations());
@@ -35,6 +37,7 @@ public class PersonList extends Person {
         evgen.setId(3);
         evgen.setSurname("Гайдамака");
         evgen.setName("Евгений");
+        evgen.setPatronymic("Романович");
         evgen.setAge(19);
         list.add(evgen);
         System.out.println(evgen.getRelations());
@@ -44,6 +47,7 @@ public class PersonList extends Person {
         julia.setId(4);
         julia.setSurname("Сопова");
         julia.setName("Юлия");
+        julia.setPatronymic("Николаевна");
         julia.setAge(33);
         list.add(julia);
         System.out.println(julia.getRelations());
@@ -53,12 +57,17 @@ public class PersonList extends Person {
         serg.setRelationship(relation);
         Relation relation1 = new Relation(2,3);
         serg.setRelationship(relation1);
-
+        Relation relation4 = new Relation(3,4);
+        serg.setRelationship(relation4);
 
         Relation relation2 = new Relation(1,1);
         leka.setRelationship(relation2);
         Relation relation3 = new Relation(2,3);
         leka.setRelationship(relation3);
+
+        Relation relation5 = new Relation(3,1);
+        julia.setRelationship(relation5);
+
     }
 
     public Itemable get(int index){
@@ -77,8 +86,8 @@ public class PersonList extends Person {
         return result.toString();
     }
 
-    public String addPerson(String surname, String name, int age){
-        Itemable itemToAdd = new Person(list, surname, name, age);
+    public String addPerson(String surname, String name, String patronymic, int age){
+        Itemable itemToAdd = new Person(list, surname, name, patronymic, age);
         this.list.add(itemToAdd);
         return "добавлен: " + itemToAdd.itemToString();
     }

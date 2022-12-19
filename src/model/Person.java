@@ -10,15 +10,17 @@ public class Person implements Itemable {
     private int id;
     private String surname;
     private String name;
+    private String patronymic;
     private int age;
 
 
     private List<Relation> relations;
 
-    public Person(List<Itemable> list,String surname, String name, int age) {
+    public Person(List<Itemable> list,String surname, String name, String patronymic, int age) {
         this.id = setId(list);
         this.surname = surname;
         this.name = name;
+        this.patronymic = patronymic;
         this.age = age;
 
     }
@@ -70,6 +72,13 @@ public class Person implements Itemable {
     public void setName(String name) {
         this.name = name;
     }
+    @Override
+    public String getPatronymic() {return patronymic; }
+
+    @Override
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
 
     @Override
     public int getAge() {
@@ -102,8 +111,8 @@ public class Person implements Itemable {
     @Override
     public String itemToString(){
         StringBuilder res;
-        res = new StringBuilder("id: " + this.id + "\n" + "Фамилия: " + this.surname + "\n" + "Имя: " + this.name + "\n" +
-                  "Возраст: " + this.age + "\n" + "Связи: " + "\n");
+        res = new StringBuilder("id: " + this.id + "\n" + "Фамилия: " + this.surname + "\n" + "Имя: " + this.name + "\n"
+                + "Отчество: " + this.patronymic + "\n" + "Возраст: " + this.age + "\n" + "Связи: " + "\n");
         if (this.relations != null){
             for (Relation r : this.relations){
                     res.append("с человеком ").append(r.getRelationToHumanId()).append(" существует связь - ")

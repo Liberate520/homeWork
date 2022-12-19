@@ -18,8 +18,9 @@ public class ToPresenter {
                 // Добавить человека
                 String surname = input.inputKey(TextsMenu.Surname);
                 String name = input.inputKey(TextsMenu.Name);
+                String patronymic = input.inputKey(TextsMenu.Patronymic);
                 int age = Integer.parseInt(input.inputKey(TextsMenu.Age));
-                presenter.addPerson(surname, name, age);
+                presenter.addPerson(surname, name, patronymic, age);
             }
             case "3" -> {
                 // удалить человека по id

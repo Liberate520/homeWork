@@ -15,7 +15,9 @@ public class Relation {
         else if (relationsId == 2){
             this.relation = "Ребенок";
         }
-        
+        else if (relationsId == 3){
+            this.relation = "Брат/Сестра";
+        }
         this.relationToHumanId = relationToHumanId;
     }
 

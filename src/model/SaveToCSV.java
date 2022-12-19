@@ -10,7 +10,7 @@ public class SaveToCSV implements ISaveable {
     @Override
     public void saveAs(String human){
         try {
-            FileWriter writer = new FileWriter(file, false);
+            FileWriter writer = new FileWriter(file, true);
             writer.write(human);
             writer.close();
         } catch (IOException e) {
