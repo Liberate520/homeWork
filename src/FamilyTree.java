@@ -1,10 +1,13 @@
-package ForkDZ.OOP_homeWork_1.src;
+package DZ1;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
-    private List<Human> humans;
+public class FamilyTree implements Serializable {
+
+    private List<Human> humans = new ArrayList<>();
 
     public FamilyTree(List<Human> humans) {
         this.humans = humans;
@@ -14,8 +17,13 @@ public class FamilyTree {
         this(new ArrayList<>());
     }
 
-    public void add(Human human) {
+    public void add(Human human) throws IOException {
         humans.add(human);
+
+    }
+
+    public void clearTree() {
+        humans.clear();
     }
 
     public List<Human> getAllHumans() {
@@ -42,6 +50,18 @@ public class FamilyTree {
         }
         return "Имя: " + personName + ", Отец: " + person.getFather() + ", Мать: " + person.getMother() + ", Дети: "
                 + person.getChildren() + ", Братья и сестры: " + person.getBrothersOrSisters();
+    }
+
+    public List<Human> getHumans() {
+        return humans;
+    }
+
+    public void setHumans(List<Human> humans) {
+        this.humans = humans;
+    }
+
+    public void addList(List<Human> read) {
+        humans.addAll(read);
     }
 
 }

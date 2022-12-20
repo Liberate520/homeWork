@@ -8,42 +8,48 @@
 // Если делаете PR, то в качестве ответа укажите ссылку на конкретный PR
 // Инструкция на то как сделать PR https://youtu.be/veMDnBt30pk
 
-package ForkDZ.OOP_homeWork_1.src;
+// В проекте с гениалогическим древом подумайте и используйте интерфейсы.
+// Дополнить проект методами записи в файл и чтения из файла. Для этого создать отдельный класс и реализовать в нем нужные методы. Для данного класса сделайте интерфейс, 
+// который и используйте в своей программе. Например в классе дерева в качестве аргумента метода save передавайте не конкретный класс, а объект интерфейса, 
+// с помощью которого и будет происходить запись. Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
 
+package DZ1;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
-public class program {
-    public static void main(String[] args) {
+public class program implements Serializable {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         int flagOutofMainLoop = 0;
 
         FamilyTree familyTree = new FamilyTree();
-        familyTree.add(new Human("Иван", "м"));
-        familyTree.add(new Human("Мария", "ж"));
-        // Тут изначально просится сделать автоматическое добавление братьев и сестер,
-        // если совпадает хотя бы один из родителей, но пока не реализовал, потому пока
-        // добавляем при создании руками
-        // Наверное, нужно вынести отдельный метод, который будет пробегать по всем
-        // членам семейного дерева и выявлять братьев и сестер
-        familyTree
-                .add(new Human("Василий", "м", familyTree.getHumanByName("Иван"), familyTree.getHumanByName("Мария")));
-        // System.out.println(familyTree.getHumanByName("Василий"));
-        familyTree
-                .add(new Human("Дарья", "м", familyTree.getHumanByName("Иван"), familyTree.getHumanByName("Мария"),
-                        familyTree.getHumanByName("Василий")));
-        familyTree.add(new Human("Галина", "м"));
-        familyTree
-                .add(new Human("Сергей", "м", familyTree.getHumanByName("Василий"),
-                        familyTree.getHumanByName("Галина")));
 
-        // не знаю, в чем проблема, но в моем случае работает только с такой кодировкой
-        // - Cp866
+        Human human1 = new Human("Иван", "м");
+        familyTree.add(human1);
+        Human human2 = new Human("Мария", "ж");
+        familyTree.add(human2);
+        Human human3 = new Human("Василий", "м", familyTree.getHumanByName("Иван"),
+                familyTree.getHumanByName("Мария"));
+        familyTree.add(human3);
+        Human human4 = new Human("Дарья", "м", familyTree.getHumanByName("Иван"),
+                familyTree.getHumanByName("Мария"));
+        familyTree.add(human4);
+        Human human5 = new Human("Галина", "м");
+        familyTree.add(human5);
+        Human human6 = new Human("Сергей", "м", familyTree.getHumanByName("Василий"),
+                familyTree.getHumanByName("Галина"));
+        familyTree.add(human6);
+
+        FileHandler fileHandler = new FileHandler();
+
         Scanner scanner = new Scanner(System.in, "Cp866");
 
         while (flagOutofMainLoop == 0) {
 
             System.out.println(
-                    "\n1 - Вывести всех людей из дерева\n2 - Поиск по имени\n3 - Выход\nВведите цифру, соответствующую необходимому критерию:");
+                    "\n1 - Вывести всех людей из дерева\n2 - Поиск по имени\n3 - Очистить дерево \n4 - Выгрузить в файл \n5 - Загрузить из файла  \n6 - Выход\nВведите цифру, соответствующую необходимому критерию:");
 
             int userChoiceStartMenu = scanner.nextInt();
 
@@ -59,6 +65,22 @@ public class program {
                     System.out.println(familyTree.gethumanByNameAndRelatives(userInputName));
                     break;
                 case 3:
+                    familyTree.clearTree();
+                    break;
+                case 4:
+                    Human humantemp = new Human();
+                    humantemp.setWritable(fileHandler);
+                    humantemp.save(familyTree.getHumans());
+
+                    break;
+                case 5:
+                    Human newHuman1 = new Human();
+                    newHuman1.setWritable(fileHandler);
+
+                    familyTree.addList(newHuman1.read());
+
+                    break;
+                case 6:
                     flagOutofMainLoop = 1;
                     break;
                 default:
