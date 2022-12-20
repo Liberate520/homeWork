@@ -44,9 +44,9 @@ public class FamilyTree {
             if (human.getName() == name)
                 humansList.add(human);
         }
-        if (humansList == null)
-            return null;
-        else
+        if (humansList != null)
             return humansList;
+        else
+            return null;
     }
 }
