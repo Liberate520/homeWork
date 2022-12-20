@@ -1,9 +1,10 @@
 package src;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
   private String fullName;
   private String gender;
   private Human mother;

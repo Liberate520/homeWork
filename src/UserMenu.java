@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class UserMenu {
   private Scanner input = new Scanner(System.in);
   private boolean menuOn = true;
+  private FileWorker fw = new FileWorker();
 
   public boolean getMenuStatus() {
     return menuOn;
@@ -23,7 +24,7 @@ public class UserMenu {
 
   public void launchMenu(FamilyTree familyTree) {
     System.out.print(
-        "\nМеню:\n1 - Показать всех людей\n2 - Найти человека по имени и фамилии\n3 - Добавить нового человека\n4 - Выход\nВыбрано: ");
+        "\nМеню:\n1 - Показать всех людей\n2 - Найти человека по имени и фамилии\n3 - Добавить нового человека\n4 - Сохранить текущее дерево в файл\n5 - Загрузить дерево из файла\n6 - Выход\nВыбрано: ");
     switch (input.next()) {
       case "1":
         System.out.println("\nЛюди из семейного дерева:");
@@ -44,7 +45,20 @@ public class UserMenu {
         break;
 
       case "4":
+        fw.save(familyTree); // Serializable
+        break;
+
+      case "5":
+        System.out.println("Вы точно хотите перезаписать текущее дерево? (y/n)");
+        if (checkAnswer(input.next())) {
+          familyTree.clearTree();
+          familyTree = fw.load();
+        }
+        break;
+
+      case "6":
         this.menuOn = false;
+        input.close();
         return;
 
       default:
@@ -79,11 +93,11 @@ public class UserMenu {
 
   public void moreInfo(Human person) {
     System.out.println("Получить дополнительную информацию о найденном человеке? (y/n): ");
-    if (input.next().toLowerCase().equals("y"))
+    if (checkAnswer(input.next()))
       System.out.println(person.getInfo());
   }
 
-  public void closeInput() {
-    input.close();
+  private boolean checkAnswer(String answer) {
+    return answer.toLowerCase().equals("y") ? true : false;
   }
 }

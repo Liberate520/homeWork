@@ -16,9 +16,6 @@ public class Program {
         System.out.println("Ошибка потока");
       }
     }
-
-    menu.closeInput();
-
   }
 
 }

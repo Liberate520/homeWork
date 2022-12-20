@@ -1,11 +1,12 @@
 package src;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
   private List<Human> humans;
 
@@ -74,6 +75,10 @@ public class FamilyTree {
             person.getValue()));
 
     return availableParents;
+  }
+
+  public void clearTree() {
+    this.humans.clear();
   }
 
 }
