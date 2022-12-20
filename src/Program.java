@@ -8,7 +8,7 @@ public class Program {
     menu.firstFill(familyTree);
 
     while (menu.getMenuStatus()) {
-      menu.launchMenu(familyTree);
+      menu.launchMenu(familyTree); // После загрузки дерева из файла - подставляет пустой аргумент
 
       try {
         Thread.sleep(1000);

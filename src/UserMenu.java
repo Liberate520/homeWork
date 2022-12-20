@@ -45,14 +45,21 @@ public class UserMenu {
         break;
 
       case "4":
-        fw.save(familyTree); // Serializable
+        fw.save(familyTree); // Объект интерфейса Serializable
         break;
 
       case "5":
         System.out.println("Вы точно хотите перезаписать текущее дерево? (y/n)");
         if (checkAnswer(input.next())) {
           familyTree.clearTree();
-          familyTree = fw.load();
+          familyTree = fw.load(); // Как выйти из порочного круга?
+          familyTree.showHumans(); // Отобразит загруженное дерево. Но только 1 раз.
+          /*
+           * Полагаю, после выполнения загрузки - перезаписывается только
+           * локальная переменная familiTree внутри функции.
+           * В файле 'Program.java' 11 строка: меню снова запускается с внешней переменной
+           * а данная внешняя переменная пустая. Из-за чего вывод пустой.
+           */
         }
         break;
 
