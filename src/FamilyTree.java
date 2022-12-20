@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 public class FamilyTree {
     private List<Human> humans;
 
@@ -31,7 +29,6 @@ public class FamilyTree {
         }
     }
 
-    // TODO !!!
     public Human findByName(String name) {
         for (Human human : humans) {
             if (human.getName() == name)
