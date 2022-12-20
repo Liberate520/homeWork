@@ -1,5 +1,5 @@
 
-public class Main {
+public class Main  {
     public static void main(String[] args) {
         Trees trees = new Trees();
         Human human1 = new Human("Egor", "Petrov", 1, 60, "male");
