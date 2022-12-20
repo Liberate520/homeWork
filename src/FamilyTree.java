@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//package FamilyTree;
-
 public class FamilyTree {
     private List<Human> humans;
 
@@ -29,5 +27,26 @@ public class FamilyTree {
         for (int i = 0; i < humans.size(); i++) {
             this.humans.add(humans.get(i));
         }
+    }
+
+    // TODO !!!
+    public Human findByName(String name) {
+        for (Human human : humans) {
+            if (human.getName() == name)
+                return human;
+        }
+        return null;
+    }
+
+    public List<Human> findAllByName(String name) {
+        List<Human> humansList = new ArrayList();
+        for (Human human : humans) {
+            if (human.getName() == name)
+                humansList.add(human);
+        }
+        if (humansList == null)
+            return null;
+        else
+            return humansList;
     }
 }
