@@ -62,7 +62,7 @@ public class program implements Serializable {
                     scanner.nextLine();
                     System.out.println("Введите имя: ");
                     String userInputName = scanner.nextLine();
-                    System.out.println(familyTree.gethumanByNameAndRelatives(userInputName));
+                    System.out.println(familyTree.getHumanByNameAndRelatives(userInputName));
                     break;
                 case 3:
                     familyTree.clearTree();

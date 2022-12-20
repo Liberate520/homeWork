@@ -39,7 +39,7 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    public String gethumanByNameAndRelatives(String name) {
+    public String getHumanByNameAndRelatives(String name) {
         String personName = null;
         Human person = null;
         for (Human human : humans) {
