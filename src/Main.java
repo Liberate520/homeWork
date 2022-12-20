@@ -18,6 +18,7 @@ public class Main {
         tree.addHuman(human);
         tree.addHuman(human2);
         tree.addHuman(human3);
+        tree.addHuman(new Human("Анастасия", father));
         System.out.println();
 
         System.out.println("Вывод humanов через FamilyTree:");
@@ -26,6 +27,10 @@ public class Main {
 
         System.out.println("Вывод humanов через FamilyTree с одним именем:");
         System.out.println(tree.findAllByName("Вася"));
+        System.out.println();
+
+        System.out.println("Вывод humanов через FamilyTree с помощью метода showAllToConsole");
+        tree.showAllInConsole();
         System.out.println();
     }
 }

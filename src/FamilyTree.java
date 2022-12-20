@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 public class FamilyTree {
     private List<Human> humans;
 
@@ -48,5 +50,11 @@ public class FamilyTree {
             return humansList;
         else
             return null;
+    }
+
+    public void showAllInConsole() {
+        for (Human human : humans) {
+            System.out.println(human.toString());
+        }
     }
 }
