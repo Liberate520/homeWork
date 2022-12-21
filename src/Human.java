@@ -1,10 +1,14 @@
+import java.io.Serializable;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private String surname;
     private int birth;
     private int death;
     private String gender;
+    private Human mother;
+    private Human father;
+    private Human child;
 
     public Human(String name, String surname, int birth, int death, String gender) {
         this.name = name;
@@ -14,6 +18,35 @@ public class Human {
         this.gender = gender;
     }
 
+    public Human(Human child, Human father, Human mother) {
+        this.child = child;
+        this.father = father;
+        this.mother = mother;
+    }
+
+    public void setChild(Human child) {
+        this.child = child;
+    }
+
+    public Human getChild() {
+        return child;
+    }
+
+    public Human getMother() {
+        return mother;
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+    }
+
+    public Human getFather() {
+        return father;
+    }
 
     public String getName() {
         return name;
@@ -59,11 +92,22 @@ public class Human {
         return gender;
     }
 
+    public void getByname(Human human, String name) {
+        if (human.getName() == name) {
+            System.out.println(human);
+        }
+    }
+
+    public void getByWholive(Human human, int year) {
+        if (human.getBirth() < year && human.getDeath() > year) {
+            System.out.println(human);
+        }
+    }
+
     @Override
     public String toString() {
-        return "Human [name=" + name + ", surname=" + surname + ", birth=" + birth + ", death=" + death + ", gender="
-                + gender
-                + "]";
+        return "Child [name=" + child.name + ", surname=" + child.surname + ", mother=" + mother.name + " "
+                + mother.surname + ", father=" + father.name + " " + father.surname + "]";
     }
 
 }
