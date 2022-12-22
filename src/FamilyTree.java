@@ -1,10 +1,14 @@
 package homeWork.src;
 
+import homeWork.src.comparators.ComparatorByAge;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {      // сериализируемый, итерируемый
 
     private List<Human> members;
 
@@ -19,10 +23,26 @@ public class FamilyTree implements Serializable {
         this.writable = new FileHandler();
     }
 
-
     /**
      * печать всех членов семьи дерева
      *
+     * @return String
+     */
+//    @Override
+//    public String toString() {
+//        StringBuilder familyMembers = new StringBuilder();
+//        System.out.printf("Всего людей в дереве - %d\n", members.size());
+//        int count = 0;
+//        for (Human member : this.members) {
+//            count++;
+//            familyMembers.append("Член семьи ").append(count).append(" - ").append(member.getName()).append("\n");
+//        }
+//        return familyMembers.toString();
+//    }
+
+
+    /**
+     * печать всех членов семьи дерева. реализация через Iterable.
      * @return String
      */
     @Override
@@ -30,9 +50,8 @@ public class FamilyTree implements Serializable {
         StringBuilder familyMembers = new StringBuilder();
         System.out.printf("Всего людей в дереве - %d\n", members.size());
         int count = 0;
-        for (Human member : this.members) {
-            count++;
-            familyMembers.append("Член семьи ").append(count).append(" - ").append(member.getName()).append("\n");
+        for (Human member: this) {
+            familyMembers.append("Член семьи ").append(++count).append(" - ").append(member.getName()).append(", ").append("возраст ").append(member.getAge()) .append("\n");
         }
         return familyMembers.toString();
     }
@@ -87,14 +106,14 @@ public class FamilyTree implements Serializable {
 
     public void saveFamilyTree() {
 //  если writable уже определён и он типа FileHandler, то вызываем writable.save c аргументом текущего FamilyTree
-        if (writable != null) {
-            if (writable instanceof FileHandler) {
+//        if (writable != null) {
+//            if (writable instanceof FileHandler) {
                 writable.save(this);
 //            FileHandler fileHandler = (FileHandler) writable;     // не надо, т.к. writable уже FileHandler
-            }   // если будет другой обработчик, то вызываться будет уже он со своей реализацией метода save
-        } else {
-            System.out.println("Файл не записан! Обработчик не определён или не верен его тип.");
-        }
+//            }   // если будет другой обработчик, то вызываться будет уже он со своей реализацией метода save
+//        } else {
+//            System.out.println("Файл не записан! Обработчик не определён или не верен его тип.");
+//        }
     }
 
 
@@ -103,11 +122,12 @@ public class FamilyTree implements Serializable {
         if (writable != null) {
             if (writable instanceof FileHandler) {
 //                если FamilyTree ещё не существует, то создаём новое и возвращаем
-                if ((((FileHandler) writable).read()) == null) {
+                if (writable.read() == null) {
+//                if ((((FileHandler) writable).read()) == null) {
                     System.out.println("FamilyTree в файле нет! Создаём новое FamilyTree.");
                     return new FamilyTree();
                 } else {
-                    return ((FileHandler) writable).read();
+                    return (FamilyTree) writable.read();
                 }
             }
         } else {
@@ -116,5 +136,28 @@ public class FamilyTree implements Serializable {
         }
         return null;
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(members);
+    }
+
+
+    public List<Human> getMembers() {
+        return members;
+    }
+
+    /**
+     * сортировка по имени
+     */
+    public void sortByName(){
+        Collections.sort(this.getMembers());
+    }
+
+
+    public void sortByAge(){
+        Collections.sort(this.getMembers(), new ComparatorByAge());
+    }
+
 
 }

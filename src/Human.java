@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {     // сериализируемый, сравниваемый
     private String name;    // имя
     private String gender;  // пол
+    private Integer age;    // возраст
     private Human father;   // отец
     private Human mother;   // мать
     private List<Human> children;   // список детей. ребёнок класса Human
 
     // конструктор с родителями и детьми
-    public Human(String name, String gender, Human father, Human mother) {
+    public Human(String name, String gender, Integer age, Human father, Human mother) {
         this.name = name;       // имя Human
         this.gender = gender;   // пол Human
+        this.age = age;         // возраст Human
         this.father = father;   // отец Human
         this.mother = mother;   // мать Human
         this.children = new ArrayList<>();  // список детей Human
@@ -24,12 +26,12 @@ public class Human implements Serializable {
     }
 
     // конструктор только с детьми (верхний уровень дерева). т.е. бабушки и дедушки, у которых родители неизвестны
-    public Human(String name, String gender) {
-        this(name, gender, null, null);     // изменено на вызов другого конструктора
+    public Human(String name, String gender, int age) {
+        this(name, gender, age, null, null);     // изменено на вызов другого конструктора
     }
 
     public Human() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
 
@@ -47,6 +49,14 @@ public class Human implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Human getFather() {
@@ -83,6 +93,7 @@ public class Human implements Serializable {
         StringBuilder sbHum = new StringBuilder();
         sbHum.append("Имя ").append(name).append("\n");     // сразу заполняем StringBuilder sbHum
         sbHum.append("Пол ").append(gender).append("\n");
+        sbHum.append("Возраст ").append(age).append("\n");
         if (!(father == null)) {
             sbHum.append("Отец ").append(father.getName()).append("\n");
         }
@@ -142,5 +153,17 @@ public class Human implements Serializable {
             }
         } else sistOrBroth.append("У ").append(this.getName()).append(" неизвестны родители.");
         return sistOrBroth.toString();
+    }
+
+
+    /**
+     * Сравнение Human. Переопределение compareTo (сравнение по имени)
+     *
+     * @param o the object to be compared.
+     * @return результат сравнения int
+     */
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }

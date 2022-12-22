@@ -21,6 +21,9 @@ package homeWork.src;
 // Для данного класса сделайте интерфейс, который и используйте в своей программе.
 // Например, в классе дерева в качестве аргумента метода save передавайте не конкретный класс, а объект интерфейса,
 // с помощью которого и будет происходить запись. Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
+// ДЗ 3
+// В проекте с деревом реализовать интерфейс Iterable для дерева.
+// Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения
 
 
 import java.util.Scanner;
@@ -36,6 +39,16 @@ public class main {
         System.out.print("Введите пол: ");
         str = iScanner.nextLine();
         human.setGender(str);
+        System.out.print("Введите возраст: ");
+        try {
+            str = iScanner.nextLine();
+            human.setAge(Integer.parseInt(str));
+        } catch (Exception exception) {
+            System.out.println("Не корректный ввод! Записываю возраст 0.");
+            human.setAge(0);
+        }
+//        str = iScanner.nextLine();
+//        human.setAge(Integer.parseInt(str));
         System.out.print("Введите имя отца (может быть пустым): ");
         str = iScanner.nextLine();
         human.setFather(familyTree.getByName(str));
@@ -62,12 +75,14 @@ public class main {
             System.out.print("""
                     Введите действие:
                     Enter - завершение программы и сохранение FamilyTree,
-                    1 - показать всех членов дерева,
+                    1 - показать всех членов дерева (без сортировки),
                     2 - добавить нового члена семьи,
                     3 - найти члена семьи по имени,
                     4 - показать всех детей члена семьи,
                     5 - показать всех сестёр члена семьи,
-                    6 - показать всех братьев члена семьи.
+                    6 - показать всех братьев члена семьи,
+                    7 - показать всех членов дерева (сортировка по имени),
+                    8 - показать всех членов дерева (сортировка по возрасту).
                     -->\s""");
             String str = iScanner.nextLine();
             switch (str) {
@@ -106,6 +121,15 @@ public class main {
                     findedHuman = familyTree.getByName(str);
                     System.out.printf("Братья %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("М"));
                     break;
+                case "7":
+                    familyTree.sortByName();
+                    System.out.println(familyTree);
+                    break;
+                case "8":
+                    familyTree.sortByAge();
+                    System.out.println(familyTree);
+                    break;
+
                 default:
                     System.out.println("Я вас не понял, повторите ввод.");
                     break;
