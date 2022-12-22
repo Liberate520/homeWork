@@ -13,7 +13,7 @@ public class Program {
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
-        System.out.println("Ошибка потока");
+        e.getLocalizedMessage();
       }
     }
   }

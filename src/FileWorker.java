@@ -16,7 +16,7 @@ public class FileWorker {
       objectOutputStream.close();
       System.out.println("Дерево сохранено в файл!");
     } catch (IOException ioErr) {
-      System.out.println("Ошибка записи в файл: " + ioErr);
+      ioErr.getLocalizedMessage();
     }
 
   }
@@ -30,10 +30,10 @@ public class FileWorker {
       System.out.println("Дерево загружено из файла!");
       return treeRestored;
     } catch (IOException ioErr) {
-      System.out.println("Ошибка чтения файла: " + ioErr);
+      ioErr.getLocalizedMessage();
       return null;
     } catch (ClassNotFoundException classErr) {
-      System.out.println("Ошибка чтения файла (не найден класс): " + classErr);
+      classErr.getLocalizedMessage();
       return null;
     }
   }
