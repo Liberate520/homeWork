@@ -43,8 +43,12 @@ public class Human implements Serializable {
   }
 
   public String getInfo() {
-    String info = String.format("Имя: %s, пол: %s.\n%s родители:\nОтец %s\nМать %s", fullName,
-        gender, appeal, father != null ? father : "не найден", mother != null ? mother : "не найдена");
+    String info = String.format("Имя: %s, пол: %s.\n" +
+        "%s родители:\n" +
+        "Отец %s\nМать %s",
+        fullName, gender, appeal,
+        father != null ? father : "не найден",
+        mother != null ? mother : "не найдена");
 
     if (children.isEmpty())
       return info + "\n" + fullName + " не имеет детей";
