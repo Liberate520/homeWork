@@ -3,10 +3,11 @@ package src;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
   private List<Human> humans;
 
@@ -81,4 +82,8 @@ public class FamilyTree implements Serializable {
     this.humans.clear();
   }
 
+  @Override
+  public Iterator<Human> iterator() {
+    return new FamilyTreeIterator(humans);
+  }
 }
