@@ -12,8 +12,17 @@ import java.util.List;
 
 import javax.sound.sampled.SourceDataLine;
 
-public class Tree implements Saveandreadable{
-    Human human;
+public class Tree  implements Saveandreadable{
+    
+    ArrayList<Human> family;
+    
+    public Tree(ArrayList<Human> list){
+        this.family = list;
+    }
+    public Tree(){
+        this(null);
+    }
+
 // На случай, если нужен результат
 public Human find_father(List<Human> family, Human person){
     Human res = null;
@@ -144,7 +153,7 @@ public static void print_sister_and_brother(List<Human> family, Human person){
 }
 
 @Override
-public void print_info(List<Human> family) throws IOException{
+public void print_info(ArrayList<Human> family) throws IOException{
     FileWriter file = new FileWriter("family.txt", true);
     for(Human relative : family){
         file.write("\n" +  relative);
@@ -158,7 +167,7 @@ private static String[] txt_parse(String txtstring){
     return str;
 }
 
-public void age(Human person){
+public static void age(Human person){
     java.util.Date dateNow = new java.util.Date();
     DateFormat formater = new SimpleDateFormat("y");
     Integer year = Integer.parseInt(formater.format(dateNow));
@@ -169,7 +178,7 @@ public void age(Human person){
 }
 
 @Override
-public void read_info(List<Human> family, String file_name) {
+public void read_info(ArrayList<Human> family, String file_name) throws IOException{
     File file = new File(file_name);
         FileReader fr = new FileReader(file);
         BufferedReader breader = new BufferedReader(fr);
@@ -230,7 +239,11 @@ public void read_info(List<Human> family, String file_name) {
     }
     
 }
-
+@Override
+public String toString() {
+    // TODO Auto-generated method stub
+    return super.toString();
+}
 
 
 

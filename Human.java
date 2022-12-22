@@ -50,7 +50,7 @@ public class Human  {
     // Нужно прописать способ, чтобы null проставлялся как  - и изучить формат даты, в том числе, как их в f-строку записывать
     @Override
     public String toString() {
-        return super.toString();
+        return String.format("Имя: %s\nФамилия: %s\nДата рождения: %s\nДата смерти: %s\nПол: %s\n", firstname, lastname, birth_date, deth_date, gender);
     }
 
     public String getPerson_id() {
