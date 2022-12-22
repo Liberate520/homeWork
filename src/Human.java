@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
   private String fullName;
   private String gender;
   private Human mother;
@@ -66,6 +66,11 @@ public class Human implements Serializable {
   @Override
   public String toString() {
     return String.format("Имя: %s, пол: %s", fullName, gender);
+  }
+
+  @Override
+  public int compareTo(Human o) {
+    return fullName.compareTo(o.fullName);
   }
 
 }
