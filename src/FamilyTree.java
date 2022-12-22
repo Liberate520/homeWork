@@ -12,21 +12,16 @@ public class FamilyTree {
         return this.humans;
     }
 
-    public void setHumans(List<Human> humans) {
-        if (this.humans.size() == 0)
-            this.humans = humans;
-        else
-            addAll(humans);
-    }
-
-    public void addHuman(Human human) {
-        this.humans.add(human);
-    }
-
-    public void addAll(List<Human> humans) {
-        for (int i = 0; i < humans.size(); i++) {
-            this.humans.add(humans.get(i));
+    public void addHuman(Human human, Human father, Human mother) {
+        if (father != null) {
+            human.setFather(father);
+            father.getChildren().add(human);
         }
+        if (mother != null) {
+            human.setMother(mother);
+            mother.getChildren().add(human);
+        }
+        humans.add(human);
     }
 
     public Human findByName(String name) {
