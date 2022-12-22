@@ -13,6 +13,10 @@
 // который и используйте в своей программе. Например в классе дерева в качестве аргумента метода save передавайте не конкретный класс, а объект интерфейса, 
 // с помощью которого и будет происходить запись. Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
 
+// В проекте с деревом реализовать интерфейс Iterable для дерева.
+// Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения
+// Сделать итератор и компараторы
+
 package DZ1;
 
 import java.io.IOException;
@@ -33,10 +37,10 @@ public class program implements Serializable {
         Human human3 = new Human("Василий", "м", familyTree.getHumanByName("Иван"),
                 familyTree.getHumanByName("Мария"));
         familyTree.add(human3);
-        Human human4 = new Human("Дарья", "м", familyTree.getHumanByName("Иван"),
+        Human human4 = new Human("Дарья", "ж", familyTree.getHumanByName("Иван"),
                 familyTree.getHumanByName("Мария"));
         familyTree.add(human4);
-        Human human5 = new Human("Галина", "м");
+        Human human5 = new Human("Галина", "ж");
         familyTree.add(human5);
         Human human6 = new Human("Сергей", "м", familyTree.getHumanByName("Василий"),
                 familyTree.getHumanByName("Галина"));
@@ -49,7 +53,7 @@ public class program implements Serializable {
         while (flagOutofMainLoop == 0) {
 
             System.out.println(
-                    "\n1 - Вывести всех людей из дерева\n2 - Поиск по имени\n3 - Очистить дерево \n4 - Выгрузить в файл \n5 - Загрузить из файла  \n6 - Выход\nВведите цифру, соответствующую необходимому критерию:");
+                    "\n1 - Вывести всех людей из дерева\n2 - Поиск по имени\n3 - Очистить дерево \n4 - Выгрузить в файл \n5 - Загрузить из файла\n6 - Сортировка дерева  \n7 - Выход\nВведите цифру, соответствующую необходимому критерию:");
 
             int userChoiceStartMenu = scanner.nextInt();
 
@@ -71,16 +75,29 @@ public class program implements Serializable {
                     Human humantemp = new Human();
                     humantemp.setWritable(fileHandler);
                     humantemp.save(familyTree.getHumans());
-
                     break;
                 case 5:
                     Human newHuman1 = new Human();
                     newHuman1.setWritable(fileHandler);
-
                     familyTree.addList(newHuman1.read());
-
                     break;
                 case 6:
+
+                    System.out.println(
+                            "\n1 - Сортировка по имени\n2 - сортировка по полу\nУкажите параметр сортировки: ");
+                    int userChoiceSortMenu = scanner.nextInt();
+                    switch (userChoiceSortMenu) {
+                        case 1:
+                            familyTree.sortByName();
+                            System.out.println("Отсортировано по имени");
+                            break;
+                        case 2:
+                            familyTree.sortByGender();
+                            System.out.println("Отсортировано по полу");
+                            break;
+                    }
+                    break;
+                case 7:
                     flagOutofMainLoop = 1;
                     break;
                 default:
@@ -88,6 +105,6 @@ public class program implements Serializable {
                     break;
             }
         }
-
+        scanner.close();
     }
 }

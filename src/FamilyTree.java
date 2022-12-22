@@ -1,11 +1,12 @@
 package DZ1;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
     private List<Human> humans = new ArrayList<>();
 
@@ -17,13 +18,21 @@ public class FamilyTree implements Serializable {
         this(new ArrayList<>());
     }
 
-    public void add(Human human) throws IOException {
+    public void add(Human human) {
         humans.add(human);
 
     }
 
     public void clearTree() {
         humans.clear();
+    }
+
+    public void sortByName() {
+        Collections.sort(humans);
+    }
+
+    public void sortByGender() {
+        Collections.sort(humans, new HumanComparatorByGender());
     }
 
     public List<Human> getAllHumans() {
@@ -62,6 +71,12 @@ public class FamilyTree implements Serializable {
 
     public void addList(List<Human> read) {
         humans.addAll(read);
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+
+        return new FamilyTreeIterator(humans);
     }
 
 }

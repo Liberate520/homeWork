@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private String gender;
     private Human father;
@@ -133,5 +133,11 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        // TODO Auto-generated method stub
+        return name.compareTo(o.getName());
     }
 }
