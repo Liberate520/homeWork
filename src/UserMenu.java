@@ -22,9 +22,15 @@ public class UserMenu {
     familyTree.addHuman(petrIvanov);
   }
 
-  public void launchMenu(FamilyTree familyTree) {
-    System.out.print(
-        "\nМеню:\n1 - Показать всех людей\n2 - Найти человека по имени и фамилии\n3 - Добавить нового человека\n4 - Сохранить текущее дерево в файл\n5 - Загрузить дерево из файла\n6 - Выход\nВыбрано: ");
+  public FamilyTree launchMenu(FamilyTree familyTree) {
+    System.out.print("\nМеню:\n" +
+        "1 - Показать всех людей\n" +
+        "2 - Найти человека по имени и фамилии\n" +
+        "3 - Добавить нового человека\n" +
+        "4 - Сохранить текущее дерево в файл\n" +
+        "5 - Загрузить дерево из файла\n" +
+        "6 - Выход\n" +
+        "Выбрано: ");
     switch (input.next()) {
       case "1":
         System.out.println("\nЛюди из семейного дерева:");
@@ -45,33 +51,28 @@ public class UserMenu {
         break;
 
       case "4":
-        fw.save(familyTree); // Объект интерфейса Serializable
+        fw.save(familyTree);
         break;
 
       case "5":
         System.out.println("Вы точно хотите перезаписать текущее дерево? (y/n)");
         if (checkAnswer(input.next())) {
           familyTree.clearTree();
-          familyTree = fw.load(); // Как выйти из порочного круга?
-          familyTree.showHumans(); // Отобразит загруженное дерево. Но только 1 раз.
-          /*
-           * Полагаю, после выполнения загрузки - перезаписывается только
-           * локальная переменная familiTree внутри функции.
-           * В файле 'Program.java' 11 строка: меню снова запускается с внешней переменной
-           * а данная внешняя переменная пустая. Из-за чего вывод пустой.
-           */
+          familyTree = fw.load();
+          familyTree.showHumans();
         }
         break;
 
       case "6":
         this.menuOn = false;
         input.close();
-        return;
+        break;
 
       default:
         System.out.println("Выбран недействительный пункт меню");
         break;
     }
+    return familyTree;
   }
 
   public void createHuman(FamilyTree familyTree) {
