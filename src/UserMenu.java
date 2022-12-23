@@ -1,5 +1,6 @@
 package src;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -35,6 +36,7 @@ public class UserMenu {
       case "1":
         System.out.println("\nЛюди из семейного дерева:");
         familyTree.showHumans();
+        sortHumanList(familyTree);
         break;
 
       case "2":
@@ -59,7 +61,6 @@ public class UserMenu {
         if (checkAnswer(input.next())) {
           familyTree.clearTree();
           familyTree = fw.load();
-          familyTree.showHumans();
         }
         break;
 
@@ -105,7 +106,16 @@ public class UserMenu {
       System.out.println(person.getInfo());
   }
 
+  public FamilyTree sortHumanList(FamilyTree familyTree) {
+    System.out.println("Отсортировать по имени? (y/n)");
+    checkAnswer(input.next());
+    Collections.sort(familyTree.getHumanList());
+    familyTree.showHumans();
+    return familyTree;
+  }
+
   private boolean checkAnswer(String answer) {
     return answer.toLowerCase().equals("y") ? true : false;
   }
+
 }

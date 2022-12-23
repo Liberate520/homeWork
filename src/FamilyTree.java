@@ -46,7 +46,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
       System.out.println(person);
   }
 
-  public Map<Integer, Human> getHumans(String gender) {
+  public List<Human> getHumanList() {
+    return humans;
+  }
+
+  public Map<Integer, Human> getHumanMap(String gender) {
     Map<Integer, Human> foundPeople = new HashMap<>();
 
     int count = 0;
@@ -64,11 +68,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
   }
 
   public Map<Integer, Human> getHumans() {
-    return getHumans(null);
+    return getHumanMap(null);
   }
 
   public Map<Integer, Human> chooseParent(String gender) {
-    Map<Integer, Human> availableParents = getHumans(gender);
+    Map<Integer, Human> availableParents = getHumanMap(gender);
     System.out.println("Выберите родителя: ");
     availableParents.entrySet()
         .stream()
@@ -86,4 +90,5 @@ public class FamilyTree implements Serializable, Iterable<Human> {
   public Iterator<Human> iterator() {
     return new FamilyTreeIterator(humans);
   }
+
 }
