@@ -1,9 +1,10 @@
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         FamilyTree familyTree = new FamilyTree();
 
+        // Family tree created manually
         Human human1 = new Human("Vitaliy", "male");
         Human human2 = new Human("Natalia", "female");
         Human human3 = new Human("Lidia", "female", human1, human2);
@@ -25,5 +26,25 @@ public class Main {
 
         System.out.println("Find by name: ");
         System.out.println(familyTree.getHumanByName("Lidia"));
+
+        // Save and restore family tree by stream writer
+        Writable StreamHandler = new StreamHandler("FamilyTree.ser");
+        familyTree.setWriter(StreamHandler);
+        familyTree.save();
+
+        familyTree.load();
+        System.out.println("");
+        System.out.println("Family tree from stream: ");
+        System.out.println(familyTree);
+
+        // Save and restore family tree by file writer
+        Writable FileHandler = new FileHandler("FamilyTree.txt");
+        familyTree.setWriter(FileHandler);
+        familyTree.save();
+
+        familyTree.load();
+        System.out.println("");
+        System.out.println("Family tree from file: ");
+        System.out.println(familyTree);
     }
 }

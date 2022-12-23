@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private String gender;
     private Human father;
@@ -14,10 +15,8 @@ public class Human {
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
-        if (father != null)
-            father.children.add(this);
-        if (mother != null)
-            mother.children.add(this);
+        addChild(father);
+        addChild(mother);
     }
 
     public Human(String name, String gender) {
@@ -44,9 +43,14 @@ public class Human {
         return children;
     }
 
+    public void addChild(Human parent) {
+        if (parent != null)
+            parent.children.add(this);
+    }
+
     @Override
     public String toString() {
-        String s = "Name: " + name + ", gender: " + gender;
+        String s = "name: " + name + "; gender: " + gender;
 
         if (father != null)
             s += "; father: " + father.name;
