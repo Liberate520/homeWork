@@ -1,9 +1,7 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.Serializable;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         Human father = new Human("Станислав", 1960, "male");
         Human mother = new Human("Василиса", 1985, "female");
         Human humanM1 = new Human("Вася", 1995, "male");
