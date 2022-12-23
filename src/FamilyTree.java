@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,6 +6,8 @@ public class FamilyTree {
     private String name;
     private Integer volume;
     private List<Human> treeElements = new ArrayList<>();
+
+    private Writable writable;
 
     public FamilyTree(String name) {
         this.name = name;
@@ -40,7 +43,7 @@ public class FamilyTree {
                 for (Human child : person.getChildren()) {
                     humansForPrint.append(child.getFullName()).append(", ");
                 }
-                humansForPrint.deleteCharAt(humansForPrint.length() - 1);
+                humansForPrint.deleteCharAt(humansForPrint.length() - 2);
             } else humansForPrint.append(", дети: Не указано");
         }
         return "Семейное дерево " + name +
@@ -48,11 +51,35 @@ public class FamilyTree {
                 humansForPrint;
     }
 
+    public List<Human> getTreeElements() {
+        return treeElements;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public void findByName(String name){
         for (Human human : this.treeElements) {
             if (human.getFullName().equalsIgnoreCase(name)) {
                 System.out.println(human);
             }
+        }
+    }
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
+    }
+
+    public void save() throws IOException {
+        if (writable != null) {
+            writable.writeToFile(this);
+        }
+    }
+
+    public void read() throws IOException {
+        if (writable != null) {
+            writable.readFromFile(this);
         }
     }
 

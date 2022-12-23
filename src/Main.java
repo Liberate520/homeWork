@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Human Sergey = new Human("Sergey", Human.Gender.Male, 65);
         Human Marina = new Human("Marina", Human.Gender.Female, 63);
@@ -33,5 +34,12 @@ public class Main {
 
         System.out.println();
         System.out.println(testTree);
+
+        FileWorker worker = new FileWorker();
+        testTree.setWritable(worker);
+
+        testTree.save();
+        testTree.read();
+        testTree.save();
     }
 }

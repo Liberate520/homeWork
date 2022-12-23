@@ -14,6 +14,10 @@ public class Human {
         this.age = age;
         this.father = father;
         this.mother = mother;
+        this.addChild();
+    }
+
+    public void addChild(){
         if (father != null) {this.father.children.add(this);}
         if (mother != null) {this.mother.children.add(this);}
     }
@@ -45,9 +49,7 @@ public class Human {
         }
     }
 
-    public Human getFather() {
-        return father;
-    }
+    public Human getFather() { return father;}
 
     public Human getMother() {
         return mother;
