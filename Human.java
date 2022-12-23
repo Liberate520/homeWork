@@ -6,12 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 // Сделать наследованием от первого класса
-public class Human  {
+public class Human  implements Serializable, Comparable<Human>{
     private String firstname;
     private String lastname;
     private String birth_date;
@@ -105,6 +107,13 @@ public class Human  {
     public void setMother_id(String mother_id) {
         this.mother_id = mother_id;
     }
+    @Override
+    public int compareTo(Human o) {
+        // TODO Auto-generated method stub
+        return lastname.compareTo(o.lastname);
+    }
+    
+    
     
     
     
