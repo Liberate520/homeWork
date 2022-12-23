@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.Year;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private int date;
     private String sex;

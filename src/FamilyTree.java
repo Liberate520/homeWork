@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable, IAddable {
     private List<Human> humans;
 
     public FamilyTree() {
@@ -12,6 +13,7 @@ public class FamilyTree {
         return this.humans;
     }
 
+    @Override
     public void addHuman(Human human, Human father, Human mother) {
         if (father != null) {
             human.setFather(father);
