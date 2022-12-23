@@ -6,7 +6,7 @@ import model.Link;
 
 import java.util.List;
 
-public class ViewConstructor {
+public class ViewConstructor implements Shows {
     TreeControl controller;
 
     public ViewConstructor(TreeControl controller) {
@@ -16,7 +16,7 @@ public class ViewConstructor {
 
     public void viewHeirs(Human startPerson){
         System.out.println(startPerson); // выводим первого
-        String indent = "";
+        String indent = "|";
         viewHeirs(startPerson, indent);// отправляем просчитываться всех потомков
     }
 
@@ -26,7 +26,7 @@ public class ViewConstructor {
         //перебираем потомков
         for (Link child : childrens) {
             System.out.printf("%s %s %n", indent, child.getSecond());
-            viewHeirs((Human) child.getSecond(), indent + "   ");
+            viewHeirs((Human) child.getSecond(), indent + " |");
         }
     }
 }

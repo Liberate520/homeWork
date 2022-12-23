@@ -1,7 +1,6 @@
 package controller;
 import model.*;
-import view.Menu;
-import view.ViewConstructor;
+import view.*;
 
 import java.util.List;
 
@@ -13,7 +12,8 @@ import java.util.List;
 public class TreeControl {
     private TreeMethods treeMethods;
     private PersonMethods personMethods;
-    private ViewConstructor viewConstructor;
+//    private ViewConstructor viewConstructor;
+    private Shows viewConstructor;
     private Menu menu;
 
     public TreeControl() {
@@ -98,5 +98,7 @@ public class TreeControl {
         menu.runMenu();
     }
 
-
+    public void setViewConstructor(Shows viewConstructor) {
+        this.viewConstructor = viewConstructor;
+    }
 }
