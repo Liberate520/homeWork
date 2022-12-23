@@ -39,27 +39,18 @@ public class Main {
         System.out.println();
 
         InputOutputBin inputOutputBin = new InputOutputBin();
-        try {
-            System.out.println("INPUT/OUTPUT HUMAN:");
-            inputOutputBin = new InputOutputBin();
-            inputOutputBin.saveAs(humanF, "human.bin");
-            System.out.println(inputOutputBin.readFrom("human.bin"));
-            System.out.println();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
 
-        try {
-            System.out.println("INPUT/OUTPUT HUMAN TREE:");
-            inputOutputBin.saveAs(tree, "humansList.bin");
-            Serializable restore = inputOutputBin.readFrom("humansList.bin");
-            FamilyTree restoFamilyTree = (FamilyTree) restore;
-            System.out.println(restoFamilyTree.getHumans());
-            System.out.println();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
+        System.out.println("INPUT/OUTPUT HUMAN:");
+        inputOutputBin = new InputOutputBin();
+        inputOutputBin.saveAs(humanF, "human.bin");
+        System.out.println(inputOutputBin.readFrom("human.bin"));
+        System.out.println();
+
+        System.out.println("INPUT/OUTPUT HUMAN TREE:");
+        inputOutputBin.saveAs(tree, "humansList.bin");
+        Serializable restore = inputOutputBin.readFrom("humansList.bin");
+        FamilyTree restoFamilyTree = (FamilyTree) restore;
+        System.out.println(restoFamilyTree.getHumans());
+        System.out.println();
     }
 }
