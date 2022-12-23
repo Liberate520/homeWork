@@ -1,10 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.Socket;
-import java.util.List;
-
-import javax.sound.midi.Soundbank;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -44,17 +40,28 @@ public class Main {
         tree.showAllInConsole();
         System.out.println();
 
-        System.out.println("INPUT/OUTPUT HUMAN:");
         InputOutputBin inputOutputBin = new InputOutputBin();
-        inputOutputBin.saveAs(humanF, "human.bin");
-        System.out.println(inputOutputBin.readFrom("human.bin"));
-        System.out.println();
+        try {
+            System.out.println("INPUT/OUTPUT HUMAN:");
+            inputOutputBin = new InputOutputBin();
+            inputOutputBin.saveAs(humanF, "human.bin");
+            System.out.println(inputOutputBin.readFrom("human.bin"));
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
 
-        System.out.println("INPUT/OUTPUT HUMAN TREE:");
-        inputOutputBin.saveAs(tree, "humansList.bin");
-        Serializable restore = inputOutputBin.readFrom("humansList.bin");
-        FamilyTree restoFamilyTree = (FamilyTree) restore;
-        System.out.println(restoFamilyTree.getHumans());
-        System.out.println();
+        try {
+            System.out.println("INPUT/OUTPUT HUMAN TREE:");
+            inputOutputBin.saveAs(tree, "humansList.bin");
+            Serializable restore = inputOutputBin.readFrom("humansList.bin");
+            FamilyTree restoFamilyTree = (FamilyTree) restore;
+            System.out.println(restoFamilyTree.getHumans());
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 }
