@@ -11,7 +11,7 @@ public class FileWorker {
 
   public void save(Serializable serializable) {
     try {
-      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/familyTree.out"));
+      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("familyTree.out"));
       objectOutputStream.writeObject(serializable);
       objectOutputStream.close();
       System.out.println("Дерево сохранено в файл!");
@@ -36,6 +36,6 @@ public class FileWorker {
   }
 
   public FamilyTree load() {
-    return load("src/familyTree.out");
+    return load("familyTree.out");
   }
 }
