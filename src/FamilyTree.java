@@ -11,6 +11,7 @@ public class FamilyTree implements Serializable, IFamilyTree, Iterable<Human> {
         this.humans = new ArrayList();
     }
 
+    @Override
     public List<Human> getHumans() {
         return this.humans;
     }
