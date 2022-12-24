@@ -29,11 +29,8 @@ public class FileWorker {
       objectInputStream.close();
       System.out.println("Дерево загружено из файла!");
       return treeRestored;
-    } catch (IOException ioErr) {
-      ioErr.getLocalizedMessage();
-      return null;
-    } catch (ClassNotFoundException classErr) {
-      classErr.getLocalizedMessage();
+    } catch (Exception e) {
+      e.printStackTrace();
       return null;
     }
   }
