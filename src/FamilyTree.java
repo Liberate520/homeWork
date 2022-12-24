@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, IAddable, Iterable<Human> {
+public class FamilyTree implements Serializable, IFamilyTree, Iterable<Human> {
     private List<Human> humans;
 
     public FamilyTree() {
@@ -61,6 +61,6 @@ public class FamilyTree implements Serializable, IAddable, Iterable<Human> {
 
     @Override
     public Iterator<Human> iterator() {
-        return new FamilyTreeIterator((this.humans));
+        return new FamilyTreeIterator(this.humans);
     }
 }
