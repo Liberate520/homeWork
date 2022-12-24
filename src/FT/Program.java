@@ -1,56 +1,100 @@
 package FT;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
+import java.io.*;
+public class Program{
 
-public class Program {
     public static void main(String[] args) {
-        List<Human> family = new ArrayList<>();
-        family.add(new Human("Alexandr", "Kukin")); //0
-        family.add(new Human("Nikita", "Kukin"));  //1
-        family.add(new Human("Eva", "Kukina"));  //2
-        family.add(new Human("Ksenia", "Kukina")); //3
-        family.add(new Human("Evgenia", "Melnichuk")); //4
-        family.add(new Human("Oleg", "Melnichuk"));  //5
-        family.add(new Human("Anzhela", "Kukina"));  //6
-        family.add(new Human("Andrey", "Kukin")); //7
 
-        printFamily(family);
+        Tree familyTree = new Tree();
+        FileHandler fileHandler = new FileHandler();
+        familyTree.setWritable(fileHandler);
+        familyTree = familyTree.readFamilyTree();
 
-        Tree tree = new Tree();
-        tree.addLink(family.get(0), family.get(1), Relation.FATHER, Relation.SON);
-        tree.addLink(family.get(0), family.get(2), Relation.FATHER, Relation.DAUGHTER);
-        tree.addLink(family.get(3), family.get(1), Relation.MOTHER, Relation.SON);
-        tree.addLink(family.get(3), family.get(2), Relation.MOTHER, Relation.DAUGHTER);
-        tree.addLink(family.get(3), family.get(0), Relation.WIFE, Relation.HUSBANT);
-        tree.addLink(family.get(1), family.get(2), Relation.BROTHER, Relation.SYSTER);
-        tree.addLink(family.get(4), family.get(5), Relation.WIFE, Relation.HUSBANT);
-        tree.addLink(family.get(6), family.get(7), Relation.WIFE, Relation.HUSBANT);
-        tree.addLink(family.get(7), family.get(0), Relation.FATHER, Relation.SON);
-        tree.addLink(family.get(6), family.get(0), Relation.MOTHER, Relation.SON);
-        tree.addLink(family.get(4), family.get(3), Relation.MOTHER, Relation.DAUGHTER);
-        tree.addLink(family.get(5), family.get(3), Relation.FATHER, Relation.DAUGHTER);
+        Scanner iScanner = new Scanner(System.in);
+        boolean repeat = true;
+        while (repeat) {
+            System.out.print("""
+                    Введите действие:
+                    Enter - завершение программы и сохранение FamilyTree,
+                    1 - показать всех членов дерева,
+                    2 - добавить нового члена семьи,
+                    3 - найти члена семьи по имени,
+                    4 - показать всех детей члена семьи,
+                    5 - показать всех сестёр члена семьи,
+                    6 - показать всех братьев члена семьи,
+                    -->\s""");
+            String str = iScanner.nextLine();
+            switch (str) {
+                case "":
+                    familyTree.saveFamilyTree();
+                    repeat = false;
+                    break;
+                case "1":
+                    System.out.println(familyTree);
+                    break;
+                case "2":
+                    familyTree.addNewMember(Program.getHuman(familyTree));
+                    break;
+                case "3":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    Human findedHuman = familyTree.getByName(str);
+                    System.out.printf("Нашёл\n%s\n", findedHuman);
+                    break;
+                case "4":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    findedHuman = familyTree.getByName(str);
+                    System.out.println(findedHuman.getAllChildren());
+                    break;
+                case "5":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    findedHuman = familyTree.getByName(str);
+                    System.out.printf("Сёстры %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("Ж"));
+                    break;
+                case "6":
+                    System.out.print("Введите имя: ");
+                    str = iScanner.nextLine();
+                    findedHuman = familyTree.getByName(str);
+                    System.out.printf("Братья %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("М"));
+                    break;
 
-        tree.addLink(family.get(7), family.get(1), Relation.GRANDFATHER, Relation.GRANDSON);
-        tree.addLink(family.get(7), family.get(2), Relation.GRANDFATHER, Relation.GRANGDAUGHTER);
-        tree.addLink(family.get(6), family.get(2), Relation.GRANDMOTHER, Relation.GRANGDAUGHTER);
-        tree.addLink(family.get(6), family.get(1), Relation.GRANDMOTHER, Relation.GRANDSON);
-
-        tree.addLink(family.get(5), family.get(1), Relation.GRANDFATHER, Relation.GRANDSON);
-        tree.addLink(family.get(5), family.get(2), Relation.GRANDFATHER, Relation.GRANGDAUGHTER);
-        tree.addLink(family.get(4), family.get(2), Relation.GRANDMOTHER, Relation.GRANGDAUGHTER);
-        tree.addLink(family.get(4), family.get(1), Relation.GRANDMOTHER, Relation.GRANDSON);
-
-
-
-        UI.call(tree);
-
-    }
-
-    private static void printFamily(List<Human> family) {
-        System.out.println("\n\nСписок членов семьи:");
-        for (Human item : family) {
-            System.out.println(item.getName() + " " + item.getSurname());
+                default:
+                    System.out.println("Я вас не понял, повторите ввод.");
+                    break;
+            }
         }
+        iScanner.close();
     }
+
+    public static Human getHuman(Tree familyTree) {
+        Human human = new Human();
+        try (Scanner iScanner = new Scanner(System.in)) {
+            System.out.print("Введите имя: ");
+            String str = iScanner.nextLine();
+            human.setName(str);
+            System.out.print("Введите пол: M or W");
+            str = iScanner.nextLine();
+            human.setGender(str);
+            System.out.print("Введите возраст: ");
+            try {
+                str = iScanner.nextLine();
+                human.setAge(Integer.parseInt(str));
+            } catch (Exception exception) {
+                System.out.println("Не корректный ввод! Записываю возраст 0.");
+                human.setAge(0);
+            }
+
+            System.out.print("Введите имя отца (может быть пустым): ");
+            str = iScanner.nextLine();
+            human.setFather(familyTree.getByName(str));
+            System.out.print("Введите имя матери (может быть пустым): ");
+            str = iScanner.nextLine();
+            human.setMother(familyTree.getByName(str));
+        }
+        return human;
+    }
+
 }
