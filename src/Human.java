@@ -42,6 +42,10 @@ public class Human implements Serializable, Comparable<Human> {
     return gender;
   }
 
+  public int countChildren() {
+    return children.size();
+  }
+
   public String getInfo() {
     String info = String.format("Имя: %s, пол: %s.\n" +
         "%s родители:\n" +

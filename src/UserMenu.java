@@ -36,7 +36,7 @@ public class UserMenu<T extends Human> {
       case "1":
         System.out.println("\nЛюди из семейного дерева:");
         familyTree.showHumans();
-        sortHumanList(familyTree);
+        sortByName(familyTree);
         break;
 
       case "2":
@@ -106,11 +106,17 @@ public class UserMenu<T extends Human> {
       System.out.println(person.getInfo());
   }
 
-  public FamilyTree<T> sortHumanList(FamilyTree<T> familyTree) {
+  public FamilyTree<T> sortByName(FamilyTree<T> familyTree) {
     System.out.println("Отсортировать по имени? (y/n)");
     checkAnswer(input.next());
     Collections.sort(familyTree.getHumanList());
     familyTree.showHumans();
+    return familyTree;
+  }
+
+  public FamilyTree<T> sortByNumberOfChildren(FamilyTree<T> familyTree) {
+    System.out.println("Отсортировать по количеству детей? (y/n)");
+    Collections.sort(familyTree.getHumanList(), new HumanComparatorChildCount());
     return familyTree;
   }
 
