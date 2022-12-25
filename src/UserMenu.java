@@ -4,16 +4,16 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Scanner;
 
-public class UserMenu {
+public class UserMenu<T extends Human> {
   private Scanner input = new Scanner(System.in);
   private boolean menuOn = true;
-  private FileWorker fw = new FileWorker();
+  private FileWorker<T> fw = new FileWorker<T>();
 
   public boolean getMenuStatus() {
     return menuOn;
   }
 
-  public void firstFill(FamilyTree familyTree) {
+  public void fillHumans(FamilyTree<Human> familyTree) {
     Human ivanIvanov = new Human("Иван Иванов", "Мужской");
     Human mariaIvanova = new Human("Мария Иванова", "Женский");
     Human petrIvanov = new Human("Петр Иванов", "Мужской", mariaIvanova, ivanIvanov);
@@ -23,7 +23,7 @@ public class UserMenu {
     familyTree.addHuman(petrIvanov);
   }
 
-  public FamilyTree launchMenu(FamilyTree familyTree) {
+  public FamilyTree<T> launchMenu(FamilyTree<T> familyTree) {
     System.out.print("\nМеню:\n" +
         "1 - Показать всех людей\n" +
         "2 - Найти человека по имени и фамилии\n" +
@@ -76,7 +76,7 @@ public class UserMenu {
     return familyTree;
   }
 
-  public void createHuman(FamilyTree familyTree) {
+  public void createHuman(FamilyTree<T> familyTree) {
     String fullName = askFullName();
     System.out.print("Выберите пол (введите букву: М - мужской, Ж - женский): ");
     String gender = input.next().toLowerCase();
@@ -86,13 +86,13 @@ public class UserMenu {
       gender = "Мужской";
     System.out.println("Введено: Имя " + fullName + " пол " + gender);
 
-    Map<Integer, Human> availableMothers = familyTree.chooseParent("женский");
+    Map<Integer, T> availableMothers = familyTree.chooseParent("женский");
     Human parentMother = availableMothers.get(input.nextInt());
 
-    Map<Integer, Human> availableFathers = familyTree.chooseParent("мужской");
+    Map<Integer, T> availableFathers = familyTree.chooseParent("мужской");
     Human parentFather = availableFathers.get(input.nextInt());
 
-    familyTree.addHuman(new Human(fullName, gender, parentMother, parentFather));
+    familyTree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
   }
 
   public String askFullName() {
@@ -106,7 +106,7 @@ public class UserMenu {
       System.out.println(person.getInfo());
   }
 
-  public FamilyTree sortHumanList(FamilyTree familyTree) {
+  public FamilyTree<T> sortHumanList(FamilyTree<T> familyTree) {
     System.out.println("Отсортировать по имени? (y/n)");
     checkAnswer(input.next());
     Collections.sort(familyTree.getHumanList());
