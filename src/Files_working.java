@@ -21,8 +21,7 @@ public class Files_working implements Serializable, File_interface {
             oos.writeObject(fos);
             oos.close();
             System.out.println("Human List serialized");
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

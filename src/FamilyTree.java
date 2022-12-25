@@ -4,23 +4,18 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class FamilyTree implements Serializable, Iterable <Human>{
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
 
+    private List<T> famTree;
 
-    private List<Human> famTree;
-
-    public FamilyTree(List<Human> Tree) {
-        this.famTree = Tree;
-    }
 
     public FamilyTree() {
         this.famTree = (new ArrayList<>());
 
     }
 
-
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
 
         this.famTree.add(human);
         if (human.getFather() != null) {
@@ -41,11 +36,14 @@ public class FamilyTree implements Serializable, Iterable <Human>{
 
     }
 
+    public void addCat(T kot) {
+        this.famTree.add((T) kot);
+    }
 
-    @Override
+
     public String toString() {
         String res = "";
-        for (Human hum : famTree) {
+        for (T hum : famTree) {
             res += hum + "\n";
         }
         return res;
@@ -54,14 +52,14 @@ public class FamilyTree implements Serializable, Iterable <Human>{
     public void printAllTree() {
         System.out.println("Список всех членов дерева");
         String res = "";
-        for (Human hum : famTree) {
+        for (T hum : famTree) {
             res += hum + "\n";
         }
         System.out.println(res);
     }
 
-    public Human findByName(String name) {
-        for (Human hum : famTree) {
+    public T findByName(String name) {
+        for (T hum : famTree) {
             if ((hum.getName().equals(name))) {
                 return hum;
             }
@@ -69,44 +67,47 @@ public class FamilyTree implements Serializable, Iterable <Human>{
         return null;
     }
 
-    public String findChild(Human hum) {
+    public String findChild(T hum) {
         return hum.getChildren();
     }
 
     ;
 
-    public String findParents(Human hum) {
+    public String findParents(T hum) {
         return hum.printParents();
     }
 
 
-    public List<Human> getFamTree() {
+    public List<T> getFamTree() {
         return famTree;
     }
 
     public List<Human> read() throws IOException, ClassNotFoundException {
         File_interface work = new Files_working();
-        famTree = new ArrayList<>(work.read_files());
-        return famTree;
+        famTree = (List<T>) new ArrayList<>(work.read_files());
+        return (List<Human>) famTree;
 
     }
 
     public void write() throws IOException {
         File_interface work = new Files_working();
-        work.write_files(this.famTree);
+        work.write_files((List<Human>) this.famTree);
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(famTree);
+    public Iterator<T> iterator() {
+        return new HumanIterator<T>(famTree);
     }
-    public void sortingByAge(){
 
-         Collections.sort(famTree, new HumanComparatorToAge());
-}
-    public void sortingByName(){
+    public void sortingByAge() {
 
-         Collections.sort(famTree);
+        Collections.sort(famTree, new HumanComparatorToAge());
+    }
+
+    public void sortingByName() {
+        // пришлось добавить компаратор, не хотел котов и людей сортировать
+
+        Collections.sort(famTree, new HumanComparatorName());
     }
 }
 

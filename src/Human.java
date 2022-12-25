@@ -1,10 +1,11 @@
 import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable,Comparable<Human> {
+public class Human implements Serializable, Comparable<Human> {
 
     private String name;
     private String gender;
@@ -13,7 +14,8 @@ public class Human implements Serializable,Comparable<Human> {
     private Human mother;
     private List<Human> children = new ArrayList<>();
 
-    public Human(String name, String gender,Integer age,Human father, Human mother) {
+
+    public Human(String name, String gender, Integer age, Human father, Human mother) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -27,7 +29,7 @@ public class Human implements Serializable,Comparable<Human> {
         return age;
     }
 
-    public Human(){
+    public Human() {
         this.name = null;
         this.gender = null;
         this.age = null;
@@ -36,7 +38,8 @@ public class Human implements Serializable,Comparable<Human> {
 
 
     }
-    public Human(String name, String gender,Integer age) {
+
+    public Human(String name, String gender, Integer age) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -44,7 +47,6 @@ public class Human implements Serializable,Comparable<Human> {
         this.mother = null;
 
     }
-
 
 
     public String getName() {
@@ -111,7 +113,8 @@ public class Human implements Serializable,Comparable<Human> {
 
 
     @Override
-    public int compareTo(Human o) {return name.compareTo(o.getName());
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }
 
