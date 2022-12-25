@@ -49,10 +49,12 @@ public class FileHandler implements Writable, Serializable {
      * @return FamilyTree
      */
     @Override
-    public FamilyTree read() {
+    public Object read() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
 //            System.out.printf("Файл %s прочитан\n", filename);
-            return (FamilyTree) ois.readObject();
+//            FamilyTree familyTree = (FamilyTree)ois.readObject();
+//            System.out.println(familyTree);
+            return ois.readObject();
         } catch (Exception ex) {
             System.out.println("Что-то пошло не так");
             System.out.println(ex.getMessage());

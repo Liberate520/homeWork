@@ -26,115 +26,23 @@ package homeWork.src;
 // Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения
 
 
+import homeWork.src.presenter.Presenter;
+import homeWork.src.ui.ConsoleUI;
+
 import java.util.Scanner;
 
 public class main {
 
-    public static Human getHuman(FamilyTree familyTree) {
-        Human human = new Human();
-        Scanner iScanner = new Scanner(System.in);
-        System.out.print("Введите имя: ");
-        String str = iScanner.nextLine();
-        human.setName(str);
-        System.out.print("Введите пол: ");
-        str = iScanner.nextLine();
-        human.setGender(str);
-        System.out.print("Введите возраст: ");
-        try {
-            str = iScanner.nextLine();
-            human.setAge(Integer.parseInt(str));
-        } catch (Exception exception) {
-            System.out.println("Не корректный ввод! Записываю возраст 0.");
-            human.setAge(0);
-        }
-//        str = iScanner.nextLine();
-//        human.setAge(Integer.parseInt(str));
-        System.out.print("Введите имя отца (может быть пустым): ");
-        str = iScanner.nextLine();
-        human.setFather(familyTree.getByName(str));
-        System.out.print("Введите имя матери (может быть пустым): ");
-        str = iScanner.nextLine();
-        human.setMother(familyTree.getByName(str));
-//        System.out.println(human);
-        return human;
-    }
-
 
     public static void main(String[] args) {
-
-        FamilyTree familyTree = new FamilyTree();
+//  Тип Human передаётся в generic, в new FamilyTree необходим "алмазик" <>
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         FileHandler fileHandler = new FileHandler();
-//      устанавливаем файловый обработчик для familyTree типа FileHandler
-        familyTree.setWritable(fileHandler);
-//      читаем FamilyTree из файла. В случае неудачи работаем с новым пустым FamilyTree
-        familyTree = familyTree.readFamilyTree();
+        Presenter presenter = new Presenter(familyTree);
+//        создаём consoleUI и передаём ему дерево, обработчик, презентер
+        ConsoleUI consoleUI = new ConsoleUI(familyTree, fileHandler, presenter);
+//        запускаем
+        consoleUI.start();
 
-        Scanner iScanner = new Scanner(System.in);
-        boolean repeat = true;
-        while (repeat) {
-            System.out.print("""
-                    Введите действие:
-                    Enter - завершение программы и сохранение FamilyTree,
-                    1 - показать всех членов дерева (без сортировки),
-                    2 - добавить нового члена семьи,
-                    3 - найти члена семьи по имени,
-                    4 - показать всех детей члена семьи,
-                    5 - показать всех сестёр члена семьи,
-                    6 - показать всех братьев члена семьи,
-                    7 - показать всех членов дерева (сортировка по имени),
-                    8 - показать всех членов дерева (сортировка по возрасту).
-                    -->\s""");
-            String str = iScanner.nextLine();
-            switch (str) {
-                case "":
-//                  сохраняем FamilyTree в файл и выходи из цикла while
-                    familyTree.saveFamilyTree();
-                    repeat = false;
-                    break;
-                case "1":
-                    System.out.println(familyTree);
-                    break;
-                case "2":
-                    familyTree.addNewMember(main.getHuman(familyTree));
-                    break;
-                case "3":
-                    System.out.print("Введите имя: ");
-                    str = iScanner.nextLine();
-                    Human findedHuman = familyTree.getByName(str);
-                    System.out.printf("Нашёл\n%s\n", findedHuman);
-                    break;
-                case "4":
-                    System.out.print("Введите имя: ");
-                    str = iScanner.nextLine();
-                    findedHuman = familyTree.getByName(str);
-                    System.out.println(findedHuman.getAllChildren());
-                    break;
-                case "5":
-                    System.out.print("Введите имя: ");
-                    str = iScanner.nextLine();
-                    findedHuman = familyTree.getByName(str);
-                    System.out.printf("Сёстры %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("Ж"));
-                    break;
-                case "6":
-                    System.out.print("Введите имя: ");
-                    str = iScanner.nextLine();
-                    findedHuman = familyTree.getByName(str);
-                    System.out.printf("Братья %s - %s\n", findedHuman.getName(), findedHuman.getAllSistersOrBrothers("М"));
-                    break;
-                case "7":
-                    familyTree.sortByName();
-                    System.out.println(familyTree);
-                    break;
-                case "8":
-                    familyTree.sortByAge();
-                    System.out.println(familyTree);
-                    break;
-
-                default:
-                    System.out.println("Я вас не понял, повторите ввод.");
-                    break;
-            }
-        }
-        iScanner.close();
     }
 }
