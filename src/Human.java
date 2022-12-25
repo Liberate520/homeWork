@@ -10,7 +10,6 @@ public class Human implements Serializable, Comparable<Human> {
   private Human mother;
   private Human father;
   private List<Human> children;
-
   private String appeal;
 
   public Human(String fullName, String gender) {
