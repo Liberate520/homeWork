@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Human a = new Human("Беляева", "Мария", "Александровна", Gender.WOMAN);
@@ -12,19 +14,20 @@ public class Main {
         humanList.addHuman(b);
         humanList.addHuman(c);
 
-        //System.out.println(c.toString());
-
         String uuid = c.getUuid();
         System.out.println(uuid);
-        
+
         Human human = humanList.getHumanByUuid(uuid);
-        
 
         System.out.println(human.toString());
+        
+        List<Human> humans = humanList.serchHumanByFio("Беляев");
 
-        //System.out.println(c.getUuid());
-        //System.out.println(a.toString());
-        //System.out.println();
-        //System.out.println(b.toString());
+        if (humans.size() > 0) {
+            System.out.println("\nРезультат поиска:");
+            for (Human h : humans) {
+                System.out.println(h.getFIOtoString());
+            }
+        }
     }
 }
