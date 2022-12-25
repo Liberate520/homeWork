@@ -6,10 +6,25 @@ public class Main {
         c.setParentFather(b);
         c.setParentMother(a);
 
-        System.out.println(c.toString());
-        System.out.println();
-        System.out.println(a.toString());
-        System.out.println();
-        System.out.println(b.toString());
+        FamilyTree humanList = new FamilyTree();
+
+        humanList.addHuman(a);
+        humanList.addHuman(b);
+        humanList.addHuman(c);
+
+        //System.out.println(c.toString());
+
+        String uuid = c.getUuid();
+        System.out.println(uuid);
+        
+        Human human = humanList.getHumanByUuid(uuid);
+        
+
+        System.out.println(human.toString());
+
+        //System.out.println(c.getUuid());
+        //System.out.println(a.toString());
+        //System.out.println();
+        //System.out.println(b.toString());
     }
 }

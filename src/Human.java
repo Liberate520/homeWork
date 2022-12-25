@@ -3,18 +3,18 @@ import java.util.List;
 import java.util.UUID;
 
 public class Human {
-    private String uid;
+    private String uuid;
     private String name;
     private String lastName;
     private String secondName;
     private Gender gender; 
     private Human parentFather;
     private Human parentMother;
-    private int generation;
+    private int generation = 0;
     private List<Human> children;
 
     public Human(String lastName, String name, String secondName, Gender gender) {
-        this.uid = UUID.randomUUID().toString();
+        this.uuid = UUID.randomUUID().toString();
         this.secondName = secondName;
         this.name = name;
         this.lastName = lastName;
@@ -68,7 +68,10 @@ public class Human {
             this.parentFather.setChildren(childParentFather);
         }
         
-        this.parentFather = parentFather; 
+        this.parentFather = parentFather;
+        if (this.generation == 0) {
+            this.generation = parentFather.getGeneration() + 1;
+        }
         
         List<Human> childNewFather = new ArrayList<>();
 
@@ -91,6 +94,9 @@ public class Human {
         }
         
         this.parentMother = parentMother;
+        if (this.generation == 0) {
+            this.generation = parentFather.getGeneration() + 1;
+        }
 
         List<Human> childNewMother = new ArrayList<>();
 
@@ -115,8 +121,8 @@ public class Human {
     }
 
 
-    public String getUid() {
-        return uid;
+    public String getUuid() {
+        return uuid;
     }
 
 
