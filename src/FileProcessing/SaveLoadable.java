@@ -1,6 +1,9 @@
-package src;
+package src.FileProcessing;
 
 import java.io.Serializable;
+
+import src.Entities.FamilyTree;
+import src.Entities.Human;
 
 public interface SaveLoadable {
   void save(Serializable serializable);

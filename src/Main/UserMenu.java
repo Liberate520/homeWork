@@ -1,8 +1,13 @@
-package src;
+package src.Main;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Scanner;
+
+import src.HumanComparatorChildCount;
+import src.Entities.FamilyTree;
+import src.Entities.Human;
+import src.FileProcessing.FileWorker;
 
 public class UserMenu<T extends Human> {
   private Scanner input = new Scanner(System.in);
@@ -11,16 +16,6 @@ public class UserMenu<T extends Human> {
 
   public boolean getMenuStatus() {
     return menuOn;
-  }
-
-  public void fillHumans(FamilyTree<Human> familyTree) {
-    Human ivanIvanov = new Human("Иван Иванов", "Мужской");
-    Human mariaIvanova = new Human("Мария Иванова", "Женский");
-    Human petrIvanov = new Human("Петр Иванов", "Мужской", mariaIvanova, ivanIvanov);
-
-    familyTree.addHuman(ivanIvanov);
-    familyTree.addHuman(mariaIvanova);
-    familyTree.addHuman(petrIvanov);
   }
 
   public FamilyTree<T> launchMenu(FamilyTree<T> familyTree) {

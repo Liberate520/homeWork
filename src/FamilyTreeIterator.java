@@ -3,6 +3,8 @@ package src;
 import java.util.Iterator;
 import java.util.List;
 
+import src.Entities.Human;
+
 public class FamilyTreeIterator<T extends Human> implements Iterator<T> {
   private int index;
   private List<T> humans;

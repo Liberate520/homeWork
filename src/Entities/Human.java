@@ -1,4 +1,4 @@
-package src;
+package src.Entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class Human implements Serializable, Comparable<Human> {
     return gender;
   }
 
-  public int countChildren() {
+  public int getNumberOfChildren() {
     return children.size();
   }
 
