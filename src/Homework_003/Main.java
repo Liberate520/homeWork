@@ -6,9 +6,9 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
         FamilyTree familyTree = new FamilyTree();
-        Human human0= new Human("Иван", "м");
-        Human human1= new Human("Мария", "ж");
-        Human human2= new Human("Петр", "м");
+        Human human0= new Human("Иван", "м", "10.01.1965");
+        Human human1= new Human("Мария", "ж", "16.02.1965");
+        Human human2= new Human("Петр", "м", "16.02.1940");
         Human human3= new Human("Николай", "м", "12.01.1990");
         Human human4= new Human("Ирина", "ж", "15.02.1992");
         human0.setParent(human2);
@@ -32,7 +32,12 @@ public class Main {
         
         System.out.println("Сортировка по name:");
         System.out.println(familyTree.getAll());
-        
+
+        newFamilyTreeService.sortByDate(); 
+
+        System.out.println("Сортировка по date:");
+        System.out.println(familyTree.getAll());
+                
         Research research1 = new Research(familyTree, human4);
 
         System.out.println("Братья " + human4.getName()+ " :" + research1.getBrothers()+ "\n" );

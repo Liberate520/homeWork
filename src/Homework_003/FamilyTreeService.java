@@ -19,5 +19,9 @@ public class FamilyTreeService {
     public void sortById(){
         Collections.sort(familyTree.getAll(), new HumanComparatorById());
     }
+
+    public void sortByDate(){
+        Collections.sort(familyTree.getAll(), new HumanComparatorByDate());
+    }
     
 }
