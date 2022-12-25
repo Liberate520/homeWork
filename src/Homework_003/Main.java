@@ -25,7 +25,7 @@ public class Main {
 
         FamilyTreeService newFamilyTreeService = new FamilyTreeService(familyTree);
         newFamilyTreeService.sortById(); 
-        System.out.println("Сортировка по ID:");
+        System.out.println("Сортировка  по  ID:");
         System.out.println(familyTree.getAll());
         
         newFamilyTreeService.sortByName(); 
