@@ -1,8 +1,7 @@
 package Homework_001;
 
-
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         
         FamilyTree familyTree = new FamilyTree();
         Human human0= new Human("Иван", "м");
@@ -22,10 +21,15 @@ public class Main {
 
         Research research1 = new Research(familyTree, human4);
         
+        System.out.println("Записанные в файл:");
         System.out.println("Братья " + human4.getName()+ " :" + research1.getBrothers());
         System.out.println("\n");
         System.out.println(familyTree.getAll());
 
+        
+        
+        
+       
 
     }
 }

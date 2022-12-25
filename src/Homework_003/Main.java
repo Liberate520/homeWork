@@ -1,4 +1,4 @@
-package Homework_002;
+package Homework_003;
 
 import java.io.*;
 
@@ -21,30 +21,38 @@ public class Main {
         familyTree.add(human3);
         familyTree.add(human4);  
 
-        Research research1 = new Research(familyTree, human4);
-        
-        
-        System.out.println("Братья " + human4.getName()+ " :" + research1.getBrothers());
-       
-        System.out.println("Записанные в файл:");
         System.out.println(familyTree.getAll());
 
+        FamilyTreeService newFamilyTreeService = new FamilyTreeService(familyTree);
+        newFamilyTreeService.sortById(); 
+        System.out.println("Сортировка по ID:");
+        System.out.println(familyTree.getAll());
         
+        newFamilyTreeService.sortByName(); 
+        
+        System.out.println("Сортировка по name:");
+        System.out.println(familyTree.getAll());
+        
+        Research research1 = new Research(familyTree, human4);
+
+        System.out.println("Братья " + human4.getName()+ " :" + research1.getBrothers()+ "\n" );
+        
+        System.out.println("Записанные в файл:");
+        System.out.println(familyTree.getAll());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-            new FileOutputStream("Homework_002\\familyTree.out"));
+            new FileOutputStream("Homework_003\\familyTree.out"));
         objectOutputStream.writeObject(familyTree);
         objectOutputStream.close();
            
+
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("Homework_002\\familyTree.out"));
+                new FileInputStream("Homework_003\\familyTree.out"));
         FamilyTree familyTreeRestored = (FamilyTree) objectInputStream.readObject();
         objectInputStream.close();
 
-        
+    
         System.out.println("\nВосстановленные:");
         System.out.println(familyTreeRestored.getAll());
-
-
 
     }
 }
