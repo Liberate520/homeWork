@@ -1,8 +1,10 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
     private List<Human> humanList;
     private Writable writer;
@@ -60,5 +62,18 @@ public class FamilyTree implements Serializable {
             if (loadTree != null)
                 this.setHumanList(loadTree.getHumanList());
         }
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void sortByName(){
+        Collections.sort(getHumanList());
+    }
+
+    public void sortByChildrenCountDesc(){
+        Collections.sort(getHumanList(), new HumanComparatorByChildrenCount());
     }
 }
