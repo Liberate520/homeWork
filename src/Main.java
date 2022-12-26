@@ -46,6 +46,10 @@ public class Main {
         humanList.addHuman(b);
         humanList.addHuman(c);
         humanList.addHuman(d);
+        humanList.addHuman(e);
+        humanList.addHuman(f);
+        humanList.addHuman(g);
+        humanList.addHuman(h);
 
         String uuid = c.getUuid();
         System.out.println(uuid);
@@ -54,7 +58,7 @@ public class Main {
 
         System.out.println(human.toString());
         
-        List<Human> humans = humanList.serchHumanByFio("Беляев");
+        List<Human> humans = humanList.serchHumanByFio("Беляева");
 
         if (humans.size() > 0) {
             System.out.println("\nРезультат поиска:");
