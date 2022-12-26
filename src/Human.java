@@ -7,7 +7,8 @@ public class Human {
     private String name;
     private String lastName;
     private String secondName;
-    private Gender gender; 
+    private Gender gender;
+    private Human spouse;
     private Human parentFather;
     private Human parentMother;
     private int generation = 0;
@@ -27,7 +28,6 @@ public class Human {
         this.parentMother = parentMother;
     }
 
-
     @Override
     public String toString() {
         
@@ -45,21 +45,17 @@ public class Human {
             + (text.length() > 0 ? "\nдети:\n" + text : "");
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
-
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
-
 
     public void setParentFather(Human parentFather) {
         if (this.parentFather != null) {
@@ -85,7 +81,6 @@ public class Human {
         parentFather.setChildren(childNewFather);
     }
 
-
     public void setParentMother(Human parentMother) {
         if (this.parentMother != null) {
             List<Human> childParentMother = new ArrayList<>(this.parentMother.getChildren());
@@ -110,64 +105,96 @@ public class Human {
         parentMother.setChildren(childNewMother);
     }
 
-
     public void setGeneration(int generation) {
         this.generation = generation;
     }
-
 
     public void setChildren(List<Human> children) {
         this.children = children;
     }
 
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setSpouse(Human spouse) {
+        if (this.spouse == null || !this.spouse.equals(spouse)) {
+            this.spouse = spouse;
+        }
+        
+        if (spouse.getSpouse() == null || !spouse.getSpouse().equals(this)) {
+            spouse.setSpouse(this);
+        }
+    }
 
     public String getUuid() {
         return uuid;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public String getLastName() {
         return lastName;
     }
 
-
     public String getSecondName() {
         return secondName;
     }
-
     
     public String getFIOtoString() {
         return this.lastName + " " + this.name + " " + this.secondName;
     }
 
-
     public Gender getGender() {
         return gender;
     }
-
 
     public Human getParentFather() {
         return parentFather;
     }
 
-
     public Human getParentMother() {
         return parentMother;
     }
-
 
     public int getGeneration() {
         return generation;
     }
 
-   
-
     public List<Human> getChildren() {
         return children;
     }
+
+    public Human getSpouse() {
+        return spouse;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Human other = (Human) obj;
+        if (uuid == null) {
+            if (other.uuid != null)
+                return false;
+        } else if (!uuid.equals(other.uuid))
+            return false;
+        return true;
+    }
+
+
 }
