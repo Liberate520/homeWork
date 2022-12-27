@@ -35,9 +35,9 @@ public class main {
 
 
     public static void main(String[] args) {
-//  Тип Human передаётся в generic, в new FamilyTree необходим "алмазик" <>
-        FamilyTree<Human> familyTree = new FamilyTree<>();
         FileHandler fileHandler = new FileHandler();
+//  Тип Human передаётся в generic, в new FamilyTree необходим "алмазик" <>
+        FamilyTree<Human> familyTree = new FamilyTree<>(fileHandler);
         Presenter presenter = new Presenter(familyTree);
 //        создаём consoleUI и передаём ему дерево, обработчик, презентер
         ConsoleUI consoleUI = new ConsoleUI(familyTree, fileHandler, presenter);

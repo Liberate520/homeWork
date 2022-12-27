@@ -166,4 +166,13 @@ public class Human implements Serializable, Comparable<Human> {     // сери�
     public int compareTo(Human o) {
         return name.compareTo(o.getName());
     }
+
+    /**
+     * Добавление ребёнка
+     * @param child Human
+     */
+    public void addChild(Human child){
+        this.getChildren().add(child);
+    }
+
 }

@@ -1,6 +1,6 @@
 package homeWork.src;
 
-import homeWork.src.comparators.ComparatorByAge;
+import homeWork.src.comparators.Comparator;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,10 +17,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> { 
     /**
      * конструктор класса FamilyTree. создаёт список и определят тип writable по умолчанию
      */
-    public FamilyTree() {
+    public FamilyTree(Writable writable) {
         this.members = new ArrayList<>();
 //        FileHandler по умолчанию
-        this.writable = new FileHandler();
+        this.writable = writable;
     }
 
     /**
@@ -66,10 +66,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> { 
 //        System.out.println(this.members.size());
         this.members.add(member);   //добавляем member в список
         if (!(member.getFather() == null)) {
-            member.getFather().getChildren().add(member);   //если есть отец, записываем member в список его детей
+            member.getFather().addChild(member);   //если есть отец, записываем member в список его детей
         }
         if (!(member.getMother() == null)) {
-            member.getMother().getChildren().add(member);   //если есть мать, записываем member в список её детей
+            member.getMother().addChild(member);   //если есть мать, записываем member в список её детей
         }
         if (member.getChildren().size() > 0) {                //если есть дети, то записываем member в его father (mother)
 // child должен быть типа T (параметризированный, иначе не имеет смысла), а member.getChildren() возвращает тип Human.
@@ -129,7 +129,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> { 
                 if (writable.read() == null) {
 //                if ((((FileHandler) writable).read()) == null) {
                     System.out.println("FamilyTree в файле нет! Создаём новое FamilyTree.");
-                    return new FamilyTree();
+                    return new FamilyTree(writable);
                 } else {
                     System.out.println("FamilyTree загружено из файла.");
                     //                    System.out.println(familyTree);
@@ -166,16 +166,18 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> { 
 //    }
 
     /**
-     * сортировка FamileTree по параметру
+     * сортировка FamilyTree по параметру
      *
      * @param sortParameter String
      */
     public void sortFamilyTree(String sortParameter) {
-        if (sortParameter.equals("name")) {
-            Collections.sort(this.getMembers());
-        } else if (sortParameter.equals("age")) {
-            Collections.sort(this.getMembers(), new ComparatorByAge());
-        }
+//        if (sortParameter.equals("name")) {
+//            Collections.sort(this.getMembers());
+//        } else if (sortParameter.equals("age")) {
+//            Collections.sort(this.getMembers(), new ComparatorByAge(sortParameter));
+//        }
+        Collections.sort(this.getMembers(), new Comparator(sortParameter));
+
     }
 
 
