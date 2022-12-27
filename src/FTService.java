@@ -25,10 +25,4 @@ public class FTService<T extends Human> {
     Collections.sort(humanList, new HumanComparatorChildCount());
     return humanList;
   }
-
-  public void showAfterSort(List<T> peopleList) {
-    for (T person : peopleList)
-      System.out.println(String.format("Имя: %s, пол: %s", person.getFullName(), person.getGender()));
-  }
-
 }
