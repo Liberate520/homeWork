@@ -29,7 +29,7 @@ public class FileWorker implements Writable{
     }
 
     @Override
-    public void readFromFile(FamilyTree inputTree) {
+    public FamilyTree readFromFile(FamilyTree inputTree) {
         String pathname = "read.txt";
 
         try {
@@ -49,5 +49,6 @@ public class FileWorker implements Writable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return inputTree;
     }
 }

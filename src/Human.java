@@ -63,6 +63,10 @@ public class Human {
         return this.children;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     public List<Human> getSistersBrothers(){
         List<Human> byMother = this.getMother() != null ? this.getMother().getChildren() : null;
         List<Human> byFather = this.getFather() != null ? this.getFather().getChildren() : null;
@@ -92,6 +96,11 @@ public class Human {
         return  fullName + ", " + genString + ", " + age + " " + agePostfix(age);
 
     }
+
+//    @Override
+//    public int compareTo(Human o) {
+//        return fullName.compareTo(o.getFullName());
+//    }
 
     enum Gender {
         Male,

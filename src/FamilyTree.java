@@ -1,8 +1,9 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Iterable<Human>{
     private String name;
     private Integer volume;
     private List<Human> treeElements = new ArrayList<>();
@@ -26,6 +27,8 @@ public class FamilyTree {
         this.treeElements.add(human);
         this.volume++;
     }
+
+
 
     @Override
     public String toString() {
@@ -77,10 +80,11 @@ public class FamilyTree {
         }
     }
 
-    public void read() throws IOException {
+    public FamilyTree read() throws IOException {
         if (writable != null) {
             writable.readFromFile(this);
         }
+        return this;
     }
 
     public static String countPostfix(int num)
@@ -94,4 +98,10 @@ public class FamilyTree {
 
         return result;
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(treeElements);
+    }
+
 }

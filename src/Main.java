@@ -25,21 +25,44 @@ public class Main {
 
         System.out.print("Результаты поиска человека по имени: ");
         testTree.findByName("Ivan");
+        System.out.println("---");
 
         System.out.print("Результаты поиска братьев и сестер человека: ");
         System.out.println(Andrey.getSistersBrothers());
+        System.out.println("---");
 
         System.out.print("Результаты поиска всех детей человека: ");
         System.out.println(Andrey.getChildren());
+        System.out.println("---");
 
+        System.out.print("Результаты вывода всего дерева: ");
         System.out.println();
         System.out.println(testTree);
+        System.out.println("---");
 
+        System.out.print("Результаты работы с чтением и записью: \n");
         FileWorker worker = new FileWorker();
         testTree.setWritable(worker);
 
         testTree.save();
-        testTree.read();
+        System.out.printf("\n%s\n",testTree.read());
         testTree.save();
+        System.out.println("---");
+
+        System.out.print("Результаты вывода элементов дерева через итератор: \n");
+        for (Human hum : testTree) {
+            System.out.println(hum);
+        }
+        System.out.println("---");
+
+        System.out.print("Результаты сортировки по имени: \n");
+        Service.sortByName(testTree);
+        System.out.println(testTree);
+        System.out.println("---");
+
+        System.out.print("Результаты сортировки по возрасту: \n");
+        Service.sortByAge(testTree);
+        System.out.println(testTree);
+        System.out.println("---");
     }
 }
