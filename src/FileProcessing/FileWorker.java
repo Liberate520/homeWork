@@ -15,7 +15,7 @@ public class FileWorker<T extends Human> implements SaveLoadable {
   @Override
   public void save(Serializable serializable) {
     try {
-      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("familyTree.out"));
+      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Data/familyTree.out"));
       objectOutputStream.writeObject(serializable);
       objectOutputStream.close();
       System.out.println("Дерево сохранено в файл!");
@@ -42,6 +42,6 @@ public class FileWorker<T extends Human> implements SaveLoadable {
 
   @Override
   public FamilyTree<T> load() {
-    return load("familyTree.out");
+    return load("Data/familyTree.out");
   }
 }
