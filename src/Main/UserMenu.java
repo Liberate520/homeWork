@@ -75,4 +75,22 @@ public class UserMenu<T extends Human> {
         break;
     }
   }
+
+  public void askReplaceTree() {
+    System.out.println("Вы точно хотите перезаписать текущее дерево? (y/n)");
+  }
+
+  public void textActionWithFile(String action) {
+    if (action == "save")
+      System.out.println("Дерево сохранено в файл!");
+    else if (action == "load")
+      System.out.println("Дерево загружено из файла!");
+  }
+
+  public void textFailureFileAction(String action) {
+    if (action == "save")
+      System.out.println("Не удалось сохранить дерево в файл!");
+    else if (action == "load")
+      System.out.println("Не удалось загрузить дерево из файла");
+  }
 }
