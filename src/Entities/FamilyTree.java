@@ -26,7 +26,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
   public Map.Entry<Integer, T> searchByName(String fullName) {
     for (Map.Entry<Integer, T> person : humans.entrySet()) {
-      if (person.getValue().getFullName().toLowerCase().equals(fullName.toLowerCase())) {
+      if (person.getValue()
+          .getFullName()
+          .toLowerCase()
+          .equals(fullName.toLowerCase())) {
         return person;
       }
     }
@@ -44,7 +47,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
       return getAllHumans();
     } else {
       for (Map.Entry<Integer, T> person : humans.entrySet()) {
-        if (person.getValue().getGender().toLowerCase().equals(gender.toLowerCase()))
+        if (person.getValue()
+            .getGender()
+            .toLowerCase()
+            .equals(gender.toLowerCase()))
           foundPeople.putIfAbsent(person.getKey(), person.getValue());
       }
     }
