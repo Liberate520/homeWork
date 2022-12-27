@@ -1,15 +1,15 @@
 package src;
 
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 import src.Entities.Human;
 
 public class FamilyTreeIterator<T extends Human> implements Iterator<T> {
   private int index;
-  private List<T> humans;
+  private Map<Integer, T> humans;
 
-  public FamilyTreeIterator(List<T> humans) {
+  public FamilyTreeIterator(Map<Integer, T> humans) {
     this.humans = humans;
   }
 

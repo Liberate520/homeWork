@@ -1,36 +1,34 @@
 package src.Entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import src.FamilyTreeIterator;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
-  private List<T> humans; // Наименование human осавлено
-  // т.к. T extends Human (T все равно будет каким-либо человеком в данном
-  // конкретном случае)
+  private int id = 0; // Человек получает id именно в дереве. Сам по себе id не имеет
+  private Map<Integer, T> humans;
 
-  public FamilyTree(List<T> humans) {
+  public FamilyTree(Map<Integer, T> humans) {
     this.humans = humans;
   }
 
   public FamilyTree() {
-    this(new ArrayList<>());
+    this(new HashMap<Integer, T>());
   }
 
   public void addHuman(T human) {
-    this.humans.add(human);
+    this.humans.putIfAbsent(id++, human);
   }
 
-  public Human searchByName(String fullName) {
-    for (T human : humans) {
-      if (human.getFullName().toLowerCase().equals(fullName.toLowerCase())) {
-        System.out.println(human);
+  public T searchByName(String fullName) {
+    for (Map.Entry<Integer, T> person : humans.entrySet()) {
+      if (person.getValue().getFullName().toLowerCase().equals(fullName.toLowerCase())) {
+        T human = person.getValue();
+        System.out.println("id: " + person.getKey() + " имя: " + human);
         return human;
       }
     }
@@ -38,38 +36,31 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
   }
 
   public void showHumans() {
-    for (T human : humans)
-      System.out.println(human);
+    for (Map.Entry<Integer, T> person : humans.entrySet())
+      System.out.println("id: " + person.getKey() + ", " + person.getValue());
   }
 
-  public List<T> getHumanList() {
+  public Map<Integer, T> getAllHumans() {
     return humans;
   }
 
-  public Map<Integer, T> getHumanMap(String gender) {
+  public Map<Integer, T> getHumansByGender(String gender) {
     Map<Integer, T> foundPeople = new HashMap<>();
 
-    int count = 0;
     if (gender == null) {
-      for (T person : humans)
-        foundPeople.put(++count, person);
+      return getAllHumans();
     } else {
-      for (T person : humans) {
-        if (person.getGender().toLowerCase().equals(gender.toLowerCase()))
-          foundPeople.put(++count, person);
+      for (Map.Entry<Integer, T> person : humans.entrySet()) {
+        if (person.getValue().getGender().toLowerCase().equals(gender.toLowerCase()))
+          foundPeople.putIfAbsent(person.getKey(), person.getValue());
       }
     }
 
     return foundPeople;
   }
 
-  public Map<Integer, T> getHumans() {
-    return getHumanMap(null);
-  }
-
   public Map<Integer, T> chooseParent(String gender) {
-    Map<Integer, T> availableParents = getHumanMap(gender);
-    System.out.println("Выберите родителя: ");
+    Map<Integer, T> availableParents = getHumansByGender(gender);
     availableParents.entrySet()
         .stream()
         .forEach(person -> System.out.println(person.getKey() + " - " +

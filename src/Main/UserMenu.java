@@ -1,6 +1,8 @@
 package src.Main;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -31,11 +33,11 @@ public class UserMenu<T extends Human> {
       case "1":
         System.out.println("\nЛюди из семейного дерева:");
         familyTree.showHumans();
-        sortByName(familyTree);
+        askToSort(familyTree);
         break;
 
       case "2":
-        Human person = familyTree.searchByName(askFullName());
+        T person = familyTree.searchByName(askFullName());
         if (person != null)
           moreInfo(person);
         else
@@ -81,9 +83,11 @@ public class UserMenu<T extends Human> {
       gender = "Мужской";
     System.out.println("Введено: Имя " + fullName + " пол " + gender);
 
+    System.out.println("Выберите мать: ");
     Map<Integer, T> availableMothers = familyTree.chooseParent("женский");
     Human parentMother = availableMothers.get(input.nextInt());
 
+    System.out.println("Выберите отца: ");
     Map<Integer, T> availableFathers = familyTree.chooseParent("мужской");
     Human parentFather = availableFathers.get(input.nextInt());
 
@@ -101,18 +105,45 @@ public class UserMenu<T extends Human> {
       System.out.println(person.getInfo());
   }
 
-  public FamilyTree<T> sortByName(FamilyTree<T> familyTree) {
-    System.out.println("Отсортировать по имени? (y/n)");
-    checkAnswer(input.next());
-    Collections.sort(familyTree.getHumanList());
-    familyTree.showHumans();
-    return familyTree;
+  public void askToSort(FamilyTree<T> familyTree) {
+    System.out.println("Применить сортировку:\n" +
+        "1 - Сортировка по имени\n" +
+        "2 - Сортировка по количеству детей\n" +
+        "3 - Не применять сортировку");
+    switch (input.next()) {
+      case "1":
+        sortByName(familyTree);
+        break;
+
+      case "2":
+        sortByNumberOfChildren(familyTree);
+        break;
+
+      case "3":
+        break;
+
+      default:
+        System.out.println("Некорректный ввод");
+        break;
+    }
   }
 
-  public FamilyTree<T> sortByNumberOfChildren(FamilyTree<T> familyTree) {
-    System.out.println("Отсортировать по количеству детей? (y/n)");
-    Collections.sort(familyTree.getHumanList(), new HumanComparatorChildCount());
-    return familyTree;
+  public void sortByName(FamilyTree<T> familyTree) {
+    List<T> peopleList = new ArrayList<T>(familyTree.getAllHumans().values());
+    Collections.sort(peopleList);
+    System.out.println("Отсортированный список:");
+    showAfterSort(peopleList);
+  }
+
+  public void sortByNumberOfChildren(FamilyTree<T> familyTree) {
+    List<T> peopleList = new ArrayList<T>(familyTree.getAllHumans().values());
+    Collections.sort(peopleList, new HumanComparatorChildCount());
+    showAfterSort(peopleList);
+  }
+
+  public void showAfterSort(List<T> peopleList) {
+    for (T person : peopleList)
+      System.out.println(String.format("Имя: %s, пол: %s", person.getFullName(), person.getGender()));
   }
 
   private boolean checkAnswer(String answer) {
