@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Trees implements Serializable {
+public class Trees implements Serializable, Iterable<Human> {
     private List<Human> humanlist;
 
     public Trees(List<Human> humanlist) {
@@ -29,6 +30,12 @@ public class Trees implements Serializable {
     public String toString() {
         return "Trees [humanlist=" + humanlist + "]";
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new IterableHuman(humanlist);
+    }
+
 
 
 }

@@ -4,10 +4,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.List;
 
-public class FileHandler implements Saveable, Serializable, Readable {
+public class FileHandler implements Saveable, Readable {
     @Override
     public void save(List<Human> humalis) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(

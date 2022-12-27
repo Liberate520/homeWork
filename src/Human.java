@@ -106,8 +106,21 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return "Child [name=" + child.name + ", surname=" + child.surname + ", mother=" + mother.name + " "
-                + mother.surname + ", father=" + father.name + " " + father.surname + "]";
+        return "Human [name=" + name + ", surname=" + surname + ", gender=" + gender + "]";
     }
+
+    
+    
+    // @Override
+    // public String toString() {
+    //     return "Human [mother=" + mother + ", father=" + father + ", child=" + child + "]";
+    // }
+
+    // @Override
+    // public String toString() {
+    //     return "Child " + child.name + ", surname=" + child.surname + ", mother=" + mother.name + " "
+    //             + mother.surname + ", father=" + father.name + " " + father.surname + "]";
+    // }
+    
 
 }
