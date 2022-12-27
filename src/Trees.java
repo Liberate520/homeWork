@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Trees implements Serializable, Iterable<Human> {
-    private List<Human> humanlist;
+public class Trees<T extends Human> implements Iterable<T> {
+    private List<T> humanlist;
 
-    public Trees(List<Human> humanlist) {
+    public Trees(List<T> humanlist) {
         this.humanlist = humanlist;
     }
 
@@ -15,15 +15,15 @@ public class Trees implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public List<Human> getHumanlist() {
+    public List<T> getHumanlist() {
         return humanlist;
     }
 
-    public void sethumanlist(List<Human> humanlist) {
+    public void sethumanlist(List<T> humanlist) {
         this.humanlist = humanlist;
     }
 
-    public void add_human(Human human) {
+    public void add_human(T human) {
         humanlist.add(human);
     }
 
@@ -33,8 +33,8 @@ public class Trees implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new IterableHuman(humanlist);
+    public Iterator<T> iterator() {
+        return new IterableHuman<T>(humanlist);
     }
 
     public void SortByName() {
@@ -42,7 +42,7 @@ public class Trees implements Serializable, Iterable<Human> {
     }
 
     public void SortByBirth() {
-        Collections.sort(humanlist,new HumanComparatorByBirth());
+        Collections.sort(humanlist, new HumanComparatorByBirth<T>());
     }
 
 }
