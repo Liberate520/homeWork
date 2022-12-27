@@ -19,7 +19,6 @@ public class Human implements Serializable, Comparable<Human> {
     private Writable writable;
 
     public Human() {
-
     }
 
     public Human(String name, String gender) {

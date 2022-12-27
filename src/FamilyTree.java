@@ -6,11 +6,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
-    private List<Human> humans = new ArrayList<>();
+    private List<T> humans = new ArrayList<>();
 
-    public FamilyTree(List<Human> humans) {
+    public FamilyTree(List<T> humans) {
         this.humans = humans;
     }
 
@@ -18,7 +18,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public void add(Human human) {
+    public void add(T human) {
         humans.add(human);
 
     }
@@ -35,12 +35,12 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         Collections.sort(humans, new HumanComparatorByGender());
     }
 
-    public List<Human> getAllHumans() {
+    public List<T> getAllHumans() {
         return humans;
     }
 
     public Human getHumanByName(String name) {
-        for (Human human : humans) {
+        for (T human : humans) {
             if (human.getName().equals(name)) {
                 return human;
             }
@@ -51,7 +51,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String getHumanByNameAndRelatives(String name) {
         String personName = null;
         Human person = null;
-        for (Human human : humans) {
+        for (T human : humans) {
             if (human.getName().equals(name)) {
                 personName = human.getName();
                 person = human;
@@ -61,20 +61,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
                 + person.getChildren() + ", Братья и сестры: " + person.getBrothersOrSisters();
     }
 
-    public List<Human> getHumans() {
+    public List<T> getHumans() {
         return humans;
     }
 
-    public void setHumans(List<Human> humans) {
+    public void setHumans(List<T> humans) {
         this.humans = humans;
     }
 
-    public void addList(List<Human> read) {
+    public void addList(List<T> read) {
         humans.addAll(read);
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
 
         return new FamilyTreeIterator(humans);
     }
