@@ -76,7 +76,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     @Override
     public Iterator<T> iterator() {
 
-        return new FamilyTreeIterator(humans);
+        return new FamilyTreeIterator<>(humans);
     }
 
 }

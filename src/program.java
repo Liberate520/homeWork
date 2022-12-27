@@ -24,96 +24,31 @@ package DZ1;
 
 import java.io.IOException;
 import java.io.Serializable;
-// import java.util.*;
 
 public class program implements Serializable {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        // int flagOutofMainLoop = 0;
-        View view = new FamilyTreeUI();
-        FamilyTree<Human> familyTree = new FamilyTree<>();
-        Presenter presenter = new Presenter(view, familyTree);
+                View view = new FamilyTreeUI();
+                FamilyTree<Human> familyTree = new FamilyTree<>();
+                Presenter presenter = new Presenter(view, familyTree);
 
-        Human human1 = new Human("Иван", "м");
-        familyTree.add(human1);
-        Human human2 = new Human("Мария", "ж");
-        familyTree.add(human2);
-        Human human3 = new Human("Василий", "м", familyTree.getHumanByName("Иван"),
-                familyTree.getHumanByName("Мария"));
-        familyTree.add(human3);
-        Human human4 = new Human("Дарья", "ж", familyTree.getHumanByName("Иван"),
-                familyTree.getHumanByName("Мария"));
-        familyTree.add(human4);
-        Human human5 = new Human("Галина", "ж");
-        familyTree.add(human5);
-        Human human6 = new Human("Сергей", "м", familyTree.getHumanByName("Василий"),
-                familyTree.getHumanByName("Галина"));
-        familyTree.add(human6);
+                Human human1 = new Human("Иван", "м");
+                familyTree.add(human1);
+                Human human2 = new Human("Мария", "ж");
+                familyTree.add(human2);
+                Human human3 = new Human("Василий", "м", familyTree.getHumanByName("Иван"),
+                                familyTree.getHumanByName("Мария"));
+                familyTree.add(human3);
+                Human human4 = new Human("Дарья", "ж", familyTree.getHumanByName("Иван"),
+                                familyTree.getHumanByName("Мария"));
+                familyTree.add(human4);
+                Human human5 = new Human("Галина", "ж");
+                familyTree.add(human5);
+                Human human6 = new Human("Сергей", "м", familyTree.getHumanByName("Василий"),
+                                familyTree.getHumanByName("Галина"));
+                familyTree.add(human6);
 
-        view.start();
+                view.start();
 
-        // FileHandler fileHandler = new FileHandler();
-
-        // Scanner scanner = new Scanner(System.in, "Cp866");
-
-        // while (flagOutofMainLoop == 0) {
-
-        // System.out.println(
-        // "\n1 - Вывести всех людей из дерева\n2 - Поиск по имени\n3 - Очистить дерево
-        // \n4 - Выгрузить в файл \n5 - Загрузить из файла\n6 - Сортировка дерева \n7 -
-        // Выход\nВведите цифру, соответствующую необходимому критерию:");
-
-        // int userChoiceStartMenu = scanner.nextInt();
-
-        // switch (userChoiceStartMenu) {
-        // case 1:
-        // scanner.nextLine();
-        // System.out.println(familyTree.getAllHumans());
-        // break;
-        // case 2:
-        // scanner.nextLine();
-        // System.out.println("Введите имя: ");
-        // String userInputName = scanner.nextLine();
-        // System.out.println(familyTree.getHumanByNameAndRelatives(userInputName));
-        // break;
-        // case 3:
-        // familyTree.clearTree();
-        // break;
-        // case 4:
-        // Human humantemp = new Human();
-        // humantemp.setWritable(fileHandler);
-        // humantemp.save(familyTree.getHumans());
-        // break;
-        // case 5:
-        // Human newHuman1 = new Human();
-        // newHuman1.setWritable(fileHandler);
-        // familyTree.addList(newHuman1.read());
-        // break;
-        // case 6:
-
-        // System.out.println(
-        // "\n1 - Сортировка по имени\n2 - сортировка по полу\nУкажите параметр
-        // сортировки: ");
-        // int userChoiceSortMenu = scanner.nextInt();
-        // switch (userChoiceSortMenu) {
-        // case 1:
-        // familyTree.sortByName();
-        // System.out.println("Отсортировано по имени");
-        // break;
-        // case 2:
-        // familyTree.sortByGender();
-        // System.out.println("Отсортировано по полу");
-        // break;
-        // }
-        // break;
-        // case 7:
-        // flagOutofMainLoop = 1;
-        // break;
-        // default:
-        // System.out.println("Некорректный ввод ");
-        // break;
-        // }
-        // }
-        // scanner.close();
-    }
+        }
 }

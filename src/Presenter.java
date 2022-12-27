@@ -2,18 +2,18 @@ package DZ1;
 
 import java.util.List;
 
-public class Presenter {
+public class Presenter<T extends Human> {
     private View view;
-    private FamilyTree familyTree;
+    private FamilyTree<T> familyTree;
 
-    public Presenter(View view, FamilyTree familyTree) {
+    public Presenter(View view, FamilyTree<T> familyTree) {
         this.view = view;
         this.familyTree = familyTree;
         view.setPresenter(this);
     }
 
-    public List<Human> getAllHumans() {
-        List answer = familyTree.getAllHumans();
+    public List<T> getAllHumans() {
+        List<T> answer = familyTree.getAllHumans();
         return answer;
     }
 
@@ -26,12 +26,12 @@ public class Presenter {
         familyTree.clearTree();
     }
 
-    public List<Human> getHumans() {
-        List answer = familyTree.getHumans();
+    public List<T> getHumans() {
+        List<T> answer = familyTree.getHumans();
         return answer;
     }
 
-    public void addList(List<Human> read) {
+    public void addList(List<T> read) {
         familyTree.addList(read);
     }
 
