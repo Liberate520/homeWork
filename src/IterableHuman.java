@@ -19,4 +19,8 @@ public class IterableHuman implements Iterator<Human> {
         return humanlist.get(index++);
     }
 
+    // public void SortByName(){
+    //     humanlist.getHumanlist().sort();
+    // }
+
 }

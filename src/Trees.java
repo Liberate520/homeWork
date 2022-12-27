@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class Trees implements Serializable, Iterable<Human> {
         return new IterableHuman(humanlist);
     }
 
+    public void SortByName() {
+        Collections.sort(humanlist);
+    }
 
+    public void SortByBirth() {
+        Collections.sort(humanlist,new HumanComparatorByBirth());
+    }
 
 }

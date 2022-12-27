@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private String surname;
     private int birth;
@@ -104,23 +104,14 @@ public class Human implements Serializable {
         }
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Human [name=" + name + ", surname=" + surname + ", gender=" + gender + "]";
-    // }
-
-    
-    
-    // // @Override
-    // // public String toString() {
-    // //     return "Human [mother=" + mother + ", father=" + father + ", child=" + child + "]";
-    // // }
+    @Override
+    public int compareTo(Human h) {
+        return name.compareTo(h.name);
+    }
 
     @Override
     public String toString() {
-        return "Child " + child.name + ", surname=" + child.surname + ", mother=" + mother.name + " "
-                + mother.surname + ", father=" + father.name + " " + father.surname + "]";
+        return "Human [name=" + name + ", surname=" + surname + ", birth=" + birth + "]";
     }
-    
 
 }
