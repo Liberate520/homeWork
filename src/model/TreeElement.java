@@ -9,6 +9,7 @@ public class TreeElement {
     private Gender gender;
     private String name;
     private List<FamilyConnection> connectionList;
+    private ElementAddConnection addConnection;
 
     public TreeElement(String name, Gender gender, List<FamilyConnection> connectionList) {
         this.name = name;
@@ -36,20 +37,8 @@ public class TreeElement {
     }
 
     public void addConnection(TreeElement treeElement, FamilyConnectionType connectionType) {
-        if ((connectionType == FamilyConnectionType.son || connectionType == FamilyConnectionType.daughter)
-                &&  this.gender == Gender.male) {
-            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.father));
-        } else if ((connectionType == FamilyConnectionType.son || connectionType == FamilyConnectionType.daughter)
-                && this.gender == Gender.female) {
-            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.mother));
-        } else if ((connectionType == FamilyConnectionType.father || connectionType == FamilyConnectionType.mother)
-                && this.gender == Gender.male) {
-            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.son));
-        } else if ((connectionType == FamilyConnectionType.father || connectionType == FamilyConnectionType.mother)
-                && this.gender == Gender.female) {
-            treeElement.connectionList.add(new FamilyConnection(this, FamilyConnectionType.daughter));
-        }
-        connectionList.add(new FamilyConnection(treeElement, connectionType));
+        addConnection = new AddConnection();
+        addConnection.addConnection(this, treeElement, connectionType);
     }
 
     public void showConnection(FamilyConnectionType connectionType){
