@@ -27,18 +27,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
   public Map.Entry<Integer, T> searchByName(String fullName) {
     for (Map.Entry<Integer, T> person : humans.entrySet()) {
       if (person.getValue().getFullName().toLowerCase().equals(fullName.toLowerCase())) {
-        // T human = person.getValue();
-        // System.out.println("id: " + person.getKey() + " имя: " + human);
-        // return human;
         return person;
       }
     }
     return null;
-  }
-
-  public void showHumans() {
-    for (Map.Entry<Integer, T> person : humans.entrySet())
-      System.out.println("id: " + person.getKey() + ", " + person.getValue());
   }
 
   public Map<Integer, T> getAllHumans() {

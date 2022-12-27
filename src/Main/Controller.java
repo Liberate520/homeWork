@@ -10,11 +10,11 @@ import src.FileProcessing.FileWorker;
 public class Controller<T extends Human> {
 
   private FamilyTree<T> tree;
-  private FTService fts;
+  private FTService<T> fts;
 
   private boolean controllerOn = true;
   private UserInput ui = new UserInput();
-  private UserMenu um = new UserMenu();
+  private UserMenu<T> um = new UserMenu<T>();
   private FileWorker<T> fw = new FileWorker<T>();
 
   public Controller(FamilyTree<T> familyTree) {
@@ -31,7 +31,7 @@ public class Controller<T extends Human> {
     switch (ui.getString()) {
       case "1":
         um.textBeforeShowHumans();
-        tree.showHumans();
+        um.showHumans(tree.getAllHumans());
         selectSortingMethod();
         break;
 
@@ -47,7 +47,7 @@ public class Controller<T extends Human> {
 
       case "3":
         createHuman(tree);
-        tree.showHumans();
+        um.showHumans(tree.getAllHumans());
         break;
 
       case "4":
@@ -62,7 +62,7 @@ public class Controller<T extends Human> {
         }
         break;
 
-      case "6":
+      case "q":
         this.controllerOn = false;
         ui.closeInput();
         break;
@@ -71,7 +71,6 @@ public class Controller<T extends Human> {
         System.out.println("Выбран недействительный пункт меню");
         break;
     }
-    // return tree;
   }
 
   public void createHuman(FamilyTree<T> familyTree) {
@@ -95,7 +94,7 @@ public class Controller<T extends Human> {
     familyTree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
   }
 
-  public void selectSortingMethod() {
+  private void selectSortingMethod() {
     um.textAskToSort();
     switch (ui.getString()) {
       case "1":
@@ -106,7 +105,7 @@ public class Controller<T extends Human> {
         um.showHumanList(fts.sortByNumberOfChildren());
         break;
 
-      case "3":
+      case "q":
         break;
 
       default:
@@ -115,7 +114,7 @@ public class Controller<T extends Human> {
     }
   }
 
-  public boolean checkAnswer(String answer) {
+  private boolean checkAnswer(String answer) {
     return answer.toLowerCase().equals("y") ? true : false;
   }
 }

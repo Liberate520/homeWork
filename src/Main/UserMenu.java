@@ -14,7 +14,7 @@ public class UserMenu<T extends Human> {
         "3 - Добавить нового человека\n" +
         "4 - Сохранить текущее дерево в файл\n" +
         "5 - Загрузить дерево из файла\n" +
-        "6 - Выход\n" +
+        "q - Выход\n" +
         "Выбрано: ");
   }
 
@@ -26,11 +26,16 @@ public class UserMenu<T extends Human> {
     System.out.println("Применить сортировку:\n" +
         "1 - Сортировка по имени\n" +
         "2 - Сортировка по количеству детей\n" +
-        "3 - Не применять сортировку");
+        "q - Не применять сортировку");
   }
 
   public void textIncorrectInput() {
     System.out.println("Некорректный ввод");
+  }
+
+  public void showHumans(Map<Integer, T> humans) {
+    for (Map.Entry<Integer, T> person : humans.entrySet())
+      System.out.println("id: " + person.getKey() + ", " + person.getValue());
   }
 
   public void showHumanList(List<T> peopleList) {
