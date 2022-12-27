@@ -13,35 +13,23 @@ import src.Entities.Human;
 public class FileWorker<T extends Human> implements SaveLoadable {
 
   @Override
-  public void save(Serializable serializable) {
-    try {
-      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Data/familyTree.out"));
-      objectOutputStream.writeObject(serializable);
-      objectOutputStream.close();
-      System.out.println("Дерево сохранено в файл!");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
+  public void save(Serializable serializable) throws IOException {
+    ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Data/familyTree.out"));
+    objectOutputStream.writeObject(serializable);
+    objectOutputStream.close();
   }
 
   @Override
-  public FamilyTree<T> load(String path) {
-    try {
-      ObjectInputStream objectInputStream = new ObjectInputStream(
-          new FileInputStream(path));
-      FamilyTree<T> treeRestored = (FamilyTree<T>) objectInputStream.readObject();
-      objectInputStream.close();
-      System.out.println("Дерево загружено из файла!");
-      return treeRestored;
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
+  public FamilyTree<T> load(String path) throws Exception {
+    ObjectInputStream objectInputStream = new ObjectInputStream(
+        new FileInputStream(path));
+    FamilyTree<T> treeRestored = (FamilyTree<T>) objectInputStream.readObject();
+    objectInputStream.close();
+    return treeRestored;
   }
 
   @Override
-  public FamilyTree<T> load() {
+  public FamilyTree<T> load() throws Exception {
     return load("Data/familyTree.out");
   }
 }

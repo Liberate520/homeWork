@@ -1,5 +1,6 @@
 package src.Main;
 
+import java.io.IOException;
 import java.util.Map;
 
 import src.FTService;
@@ -51,14 +52,27 @@ public class Controller<T extends Human> {
         break;
 
       case "4":
-        fw.save(tree);
+        try {
+          fw.save(tree);
+          um.textActionWithFile("save");
+        } catch (IOException e) {
+          e.printStackTrace();
+          um.textFailureFileAction("save");
+        }
         break;
 
       case "5":
-        System.out.println("Вы точно хотите перезаписать текущее дерево? (y/n)");
+        um.askReplaceTree();
         if (checkAnswer(ui.getString())) {
-          tree.clearTree();
-          tree = fw.load();
+          // FamilyTree<T> backupTree = tree.getAllHumans().?
+          tree.clearTree(); // Copy of tree before clearing to backup, if gets error
+          try {
+            tree = fw.load();
+            um.textActionWithFile("load");
+          } catch (Exception e) {
+            e.printStackTrace();
+            um.textFailureFileAction("load");
+          }
         }
         break;
 
@@ -68,7 +82,7 @@ public class Controller<T extends Human> {
         break;
 
       default:
-        System.out.println("Выбран недействительный пункт меню");
+        um.textIncorrectInput();
         break;
     }
   }
