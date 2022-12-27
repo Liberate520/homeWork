@@ -12,7 +12,7 @@ public class Presenter {
         Float b = view.getValue("Введите второе число: ");
         model.setX(a);
         model.setY(b);
-        Float result = model.result();
+        Float result = (Float) model.result();
         view.print(result, "Результат: ");
     }
 }

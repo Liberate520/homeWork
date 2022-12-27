@@ -1,3 +1,3 @@
-public abstract class ModelCalc implements Model {
-    Float x, y;
+public abstract class ModelCalc<T extends Number> implements Model<T> {
+    T x, y;
 }

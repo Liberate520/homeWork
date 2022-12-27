@@ -5,7 +5,13 @@ public class ModelDiv extends ModelCalc {
     }
     @Override
     public Float result() {
-        return x / y;
+        int result = -1;
+        try {
+            result = x / y;
+        } catch(ArithmeticException e){
+            System.out.println("на ноль делить нельзя");
+        }
+        return result;
     }
 
     @Override

@@ -5,8 +5,8 @@ public class Main {
         Presenter mult = new Presenter(new ModelMult(), new View());
         Presenter div = new Presenter(new ModelDiv(), new View());
 
-        Operation c = new Operation(sum, sub, mult, div);
+        View c = new View(sum, sub, mult, div);
 
-        c.start(sum, sub, mult, div);
+        c.ViewStart(sum, sub, mult, div);
     }
 }

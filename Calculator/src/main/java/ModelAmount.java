@@ -9,6 +9,16 @@ public class ModelAmount extends ModelCalc {
     }
 
     @Override
+    public void setX(Number value) {
+
+    }
+
+    @Override
+    public void setY(Number value) {
+
+    }
+
+    @Override
     public void setX(Float value) {
         super.x = value;
     }
