@@ -7,5 +7,4 @@ public class TComparatorByDate<T extends LiveBeing> implements Comparator<T> {
     public int compare(T o1, T o2) {
         return Integer.compare(o1.getDate(), o2.getDate());
     }
-
 }

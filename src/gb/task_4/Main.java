@@ -1,5 +1,7 @@
 package gb.task_4;
 
+import java.io.Serializable;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -39,6 +41,41 @@ public class Main {
 
         System.out.println("Вывод humanов через FamilyTree с помощью метода showAllToConsole");
         humanTree.showAllInConsole();
+        System.out.println();
+
+        InputOutputBin inputOutputBin = new InputOutputBin();
+
+        System.out.println("INPUT/OUTPUT HUMAN:");
+        inputOutputBin = new InputOutputBin();
+        inputOutputBin.saveAs(humanF, "human.bin");
+        System.out.println(inputOutputBin.readFrom("human.bin"));
+        System.out.println();
+
+        System.out.println("INPUT/OUTPUT HUMAN TREE:");
+        inputOutputBin.saveAs(humanTree, "humansList.bin");
+        Serializable restore = inputOutputBin.readFrom("humansList.bin");
+        FamilyTree restoreFamilyTree = (FamilyTree) restore;
+        System.out.println(restoreFamilyTree.getLiveBeings());
+        System.out.println();
+
+        System.out.println("Вывод списка Humanов циклом forech:");
+        for (Human human : humanTree) {
+            System.out.println(human);
+        }
+        System.out.println();
+
+        System.out.println("Вывод отсортированных по имени Humanов:");
+        humanTree.sortByName();
+        for (Human human : humanTree) {
+            System.out.println(human);
+        }
+        System.out.println();
+
+        System.out.println("Вывод отсортированных по дате рождения Humanов:");
+        humanTree.sortByDate();
+        for (Human human : humanTree) {
+            System.out.println(human);
+        }
         System.out.println();
 
     }

@@ -1,4 +1,4 @@
-package code;
+package gb.task_4;
 
 import java.io.*;
 

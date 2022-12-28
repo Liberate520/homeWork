@@ -13,11 +13,11 @@ public class FamilyTreeIterator<T extends LiveBeing> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return index < liveBeingsList.size();
+        return index < this.liveBeingsList.size();
     }
 
     @Override
     public T next() {
-        return liveBeingsList.get(index++);
+        return this.liveBeingsList.get(index++);
     }
 }
