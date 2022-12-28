@@ -23,7 +23,7 @@ public class FileWorker<T extends Human> implements SaveLoadable {
   public FamilyTree<T> load(String path) throws Exception {
     ObjectInputStream objectInputStream = new ObjectInputStream(
         new FileInputStream(path));
-    FamilyTree<T> treeRestored = (FamilyTree<T>) objectInputStream.readObject();
+    FamilyTree<T> treeRestored = (FamilyTree<T>) objectInputStream.readObject(); // To check
     objectInputStream.close();
     return treeRestored;
   }
