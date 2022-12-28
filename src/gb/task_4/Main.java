@@ -59,24 +59,23 @@ public class Main {
         System.out.println();
 
         System.out.println("Вывод списка Humanов циклом forech:");
-        for (Human human : humanTree) {
+        for (Object human : humanTree) {
             System.out.println(human);
         }
         System.out.println();
 
         System.out.println("Вывод отсортированных по имени Humanов:");
         humanTree.sortByName();
-        for (Human human : humanTree) {
+        for (Object human : humanTree) {
             System.out.println(human);
         }
         System.out.println();
 
         System.out.println("Вывод отсортированных по дате рождения Humanов:");
         humanTree.sortByDate();
-        for (Human human : humanTree) {
+        for (Object human : humanTree) {
             System.out.println(human);
         }
         System.out.println();
-
     }
 }

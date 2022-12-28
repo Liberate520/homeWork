@@ -44,7 +44,7 @@ public class Human extends LiveBeing {
 
     @Override
     public String toString() {
-        return String.format("%s", super.toString());
+        return String.format("Вид: Человек разымный\n%s", super.toString());
     }
 
     @Override
