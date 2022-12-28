@@ -1,23 +1,98 @@
 package gb.task_4;
 
 import java.io.Serializable;
+import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public abstract class LiveBeing<T> implements Serializable, Comparable<T> {
+public abstract class LiveBeing<T extends LiveBeing> implements Serializable, Comparable<T> {
+    private String name;
+    private int date;
+    private String sex;
+    private Human father;
+    private Human mother;
+    private List<Human> children;
 
-    public abstract String getName();
+    public LiveBeing(String name, int date, String sex) {
+        this.name = name;
+        this.date = date;
+        this.sex = sex;
+        this.father = null;
+        this.mother = null;
+        this.children = new ArrayList<>();
+    }
 
-    public abstract int getDate();
+    public LiveBeing(String name) {
+        this.name = name;
+        this.date = generateNowDate();
+        this.sex = getRandomSex();
+        this.father = null;
+        this.mother = null;
+        this.children = new ArrayList<>();
+    }
 
-    public abstract void setName(String name);
+    public String getName() {
+        return this.name;
+    }
 
-    public abstract List<T> getChildren();
+    public int getDate() {
+        return this.date;
+    }
 
-    protected abstract int generateNowDate();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    protected abstract String getRandomSex();
+    public void setFather(Human father) {
+        this.father = father;
+    }
 
-    public abstract void setFather(T father);
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
 
-    public abstract void setMother(T mother);
+    public List<Human> getChildren() {
+        return this.children;
+    }
+
+    @Override
+    public String toString() {
+        if (this.father == null && this.mother == null && this.children == null)
+            return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: NaN\n",
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother);
+        else if (this.father == null && this.mother == null)
+            return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother, this.children);
+        else if (this.father == null)
+            return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother.getName(), this.children);
+        else if (this.mother == null)
+            return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father.getName(), this.mother, this.children);
+        else
+            return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father.getName(),
+                    this.mother.getName(),
+                    this.children.toString().replaceAll("\\[\\]", ""));
+    }
+
+    private int generateNowDate() {
+        int date = Year.now().getValue();
+        return date;
+    }
+
+    private String getRandomSex() {
+        Random random = new Random();
+        int rnd = random.nextInt(0, 2);
+        if (rnd == 0)
+            return "female";
+        else
+            return "male";
+    }
+
+    @Override
+    public int compareTo(T o) {
+        return name.compareTo(((T) o).getName());
+    }
 }

@@ -6,79 +6,52 @@ import java.util.List;
 import java.util.Random;
 
 public class Human extends LiveBeing {
-    private String name;
-    private int date;
-    private String sex;
-    private Human father;
-    private Human mother;
-    private List<Human> children;
 
     public Human(String name, int date, String sex) {
-        this.name = name;
-        this.date = date;
-        this.sex = sex;
-        this.father = null;
-        this.mother = null;
-        this.children = new ArrayList<>();
+        super(name, date, sex);
     }
 
     public Human(String name) {
-        this.name = name;
-        this.date = generateNowDate();
-        this.sex = getRandomSex();
-        this.father = null;
-        this.mother = null;
-        this.children = new ArrayList<>();
+        super(name);
+    }
+
+    @Override
+    public List getChildren() {
+        return super.getChildren();
     }
 
     @Override
     public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public int getDate() {
-        return this.generateNowDate();
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public List<Human> getChildren() {
-        return this.children;
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    protected int generateNowDate() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    protected String getRandomSex() {
-        // TODO Auto-generated method stub
-        return null;
+        return super.getName();
     }
 
     @Override
     public void setFather(Human father) {
-        this.father = father;
-
+        super.setFather(father);
     }
 
     @Override
     public void setMother(Human mother) {
-        this.mother = mother;
-
+        super.setMother(mother);
     }
 
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public int getDate() {
+        return super.getDate();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s", super.toString());
+    }
+
+    @Override
+    public int compareTo(LiveBeing o) {
+        return super.compareTo(o);
+    }
 }
