@@ -1,6 +1,7 @@
 package src.Main;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import src.FTService;
@@ -64,14 +65,16 @@ public class Controller<T extends Human> {
       case "5":
         um.askReplaceTree();
         if (checkAnswer(ui.getString())) {
-          // FamilyTree<T> backupTree = tree.getAllHumans().?
-          tree.clearTree(); // Copy of tree before clearing to backup, if gets error
+          Map<Integer, T> backupTree = new HashMap<Integer, T>();
+          backupTree.putAll(tree.getAllHumans());
+          tree.clearTree();
           try {
             tree = fw.load();
             um.textActionWithFile("load");
           } catch (Exception e) {
             e.printStackTrace();
             um.textFailureFileAction("load");
+            tree.getAllHumans().putAll(backupTree);
           }
         }
         break;
@@ -106,6 +109,9 @@ public class Controller<T extends Human> {
     Human parentFather = availableFathers.get(ui.getInt());
 
     familyTree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
+    // ^ Type safety: Unchecked cast from Human to TJava(16777761)
+    // Как можно исправить замечания, не заглушая принудительно?
+
   }
 
   private void selectSortingMethod() {
