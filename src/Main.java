@@ -1,23 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        GenealogicalTree ivanovTree = new Tree();
+        List<Integer> intArray = new ArrayList<>();
+        LastDigitSort lastDigitSort = new LastDigitSort();
+        Random r = new Random();
+        for (int i = 0; i < 10; i++) {
+            intArray.add(r.nextInt(1000 - 10) + 10);
+        }
+        System.out.println(intArray);
+        lastDigitSort.sort(intArray);
+        System.out.println(intArray);
+        System.out.println();
 
-        TreeElement treeElement1 = new TreeElement("Александр Иванов", Gender.male);
-        TreeElement treeElement2 = new TreeElement("Пётр Иванов", Gender.male);
-        TreeElement treeElement3 = new TreeElement("Иван Иванов", Gender.male);
-        TreeElement treeElement4 = new TreeElement("Анастасия Иванова", Gender.female);
 
-        ivanovTree.addElement(treeElement1);
-        ivanovTree.addElement(treeElement2);
-        ivanovTree.addElement(treeElement3);
-        ivanovTree.addElement(treeElement4);
+        NewCollection newCollection = new NewCollection();
+        newCollection.add("a");
+        newCollection.add("b");
+        newCollection.add("c");
+        newCollection.add("d");
 
-        treeElement4.addConnection(treeElement1, FamilyConnectionType.son);
-        treeElement4.addConnection(treeElement2, FamilyConnectionType.son);
-        treeElement3.addConnection(treeElement1, FamilyConnectionType.son);
-        treeElement3.addConnection(treeElement2, FamilyConnectionType.son);
+        System.out.println(newCollection.get());
 
-        treeElement1.showConnection(FamilyConnectionType.father);
-        System.out.println(ivanovTree);
+        for (Object item: newCollection) {
+            System.out.println(item);
+        }
     }
 }
