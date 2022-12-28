@@ -10,9 +10,9 @@ public abstract class LiveBeing<T extends LiveBeing> implements Serializable, Co
     private String name;
     private int date;
     private String sex;
-    private Human father;
-    private Human mother;
-    private List<Human> children;
+    private T father;
+    private T mother;
+    private List<T> children;
 
     public LiveBeing(String name, int date, String sex) {
         this.name = name;
@@ -44,32 +44,35 @@ public abstract class LiveBeing<T extends LiveBeing> implements Serializable, Co
         this.name = name;
     }
 
-    public void setFather(Human father) {
+    public void setFather(T father) {
         this.father = father;
     }
 
-    public void setMother(Human mother) {
+    public void setMother(T mother) {
         this.mother = mother;
     }
 
-    public List<Human> getChildren() {
+    public List<T> getChildren() {
         return this.children;
     }
 
     @Override
     public String toString() {
         if (this.father == null && this.mother == null && this.children == null)
-            return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: NaN\n",
+            return String.format(
+                    "Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: NaN\n",
                     this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother);
         else if (this.father == null && this.mother == null)
             return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
                     this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother, this.children);
         else if (this.father == null)
             return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
-                    this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother.getName(), this.children);
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father, this.mother.getName(),
+                    this.children);
         else if (this.mother == null)
             return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
-                    this.getClass().getName(), this.name, this.date, this.sex, this.father.getName(), this.mother, this.children);
+                    this.getClass().getName(), this.name, this.date, this.sex, this.father.getName(), this.mother,
+                    this.children);
         else
             return String.format("Object type: %s\nname: %s, date: %s, sex: %s\nFather: %s\nMother: %s\nChildren: %s\n",
                     this.getClass().getName(), this.name, this.date, this.sex, this.father.getName(),

@@ -1,9 +1,6 @@
 package gb.task_4;
 
-import java.time.Year;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Human extends LiveBeing {
 
@@ -16,7 +13,7 @@ public class Human extends LiveBeing {
     }
 
     @Override
-    public List getChildren() {
+    public List<Human> getChildren() {
         return super.getChildren();
     }
 
@@ -26,13 +23,13 @@ public class Human extends LiveBeing {
     }
 
     @Override
-    public void setFather(Human father) {
-        super.setFather(father);
+    public void setFather(LiveBeing father) {
+        super.setFather((Human) father);
     }
 
     @Override
-    public void setMother(Human mother) {
-        super.setMother(mother);
+    public void setMother(LiveBeing mother) {
+        super.setMother((Human) mother);
     }
 
     @Override
@@ -52,6 +49,6 @@ public class Human extends LiveBeing {
 
     @Override
     public int compareTo(LiveBeing o) {
-        return super.compareTo(o);
+        return super.compareTo((Human) o);
     }
 }
