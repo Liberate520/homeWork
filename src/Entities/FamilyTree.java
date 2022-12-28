@@ -9,7 +9,7 @@ import src.FTIterator;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
-  private int id = 0; // Человек получает id именно в дереве. Сам по себе id не имеет
+  private int id = 0; // Человек получает id именно в дереве. Сама сущность id не имеет
   private Map<Integer, T> humans;
 
   public FamilyTree(Map<Integer, T> humans) {
@@ -41,7 +41,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
   }
 
   public Map<Integer, T> getHumansByGender(String gender) {
-    Map<Integer, T> foundPeople = new HashMap<>();
+    Map<Integer, T> humansWithGender = new HashMap<>();
 
     if (gender == null) {
       return getAllHumans();
@@ -51,11 +51,11 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
             .getGender()
             .toLowerCase()
             .equals(gender.toLowerCase()))
-          foundPeople.putIfAbsent(person.getKey(), person.getValue());
+          humansWithGender.putIfAbsent(person.getKey(), person.getValue());
       }
     }
 
-    return foundPeople;
+    return humansWithGender;
   }
 
   public Map<Integer, T> chooseParent(String gender) {
