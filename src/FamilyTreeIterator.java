@@ -2,7 +2,7 @@
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTreeIterator<T extends LiveBeing> implements Iterator<T> {
+public class FamilyTreeIterator<T extends LiveBeing<T>> implements Iterator<T> {
     private int index;
     private List<T> liveBeingsList;
 

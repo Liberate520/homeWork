@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends LiveBeing> implements Serializable, IFamilyTree, Iterable<T> {
+public class FamilyTree<T extends LiveBeing<T>> implements Serializable, IFamilyTree<T>, Iterable<T> {
     private List<T> liveBeings;
 
     public FamilyTree() {
-        this.liveBeings = new ArrayList();
+        this.liveBeings = new ArrayList<>();
     }
 
     @Override
@@ -18,16 +18,16 @@ public class FamilyTree<T extends LiveBeing> implements Serializable, IFamilyTre
     }
 
     @Override
-    public void addLiveBeing(LiveBeing liveBeing, LiveBeing father, LiveBeing mother) {
+    public void addLiveBeing(T liveBeing, T father, T mother) {
         if (father != null) {
-            liveBeing.setFather((T) father);
-            father.getChildren().add((T) liveBeing);
+            liveBeing.setFather(father);
+            father.getChildren().add(liveBeing);
         }
         if (mother != null) {
-            liveBeing.setMother((T) mother);
-            mother.getChildren().add((T) liveBeing);
+            liveBeing.setMother(mother);
+            mother.getChildren().add(liveBeing);
         }
-        liveBeings.add((T) liveBeing);
+        liveBeings.add(liveBeing);
     }
 
     public T findByName(String name) {
@@ -39,7 +39,7 @@ public class FamilyTree<T extends LiveBeing> implements Serializable, IFamilyTre
     }
 
     public List<T> findAllByName(String name) {
-        List<T> liveBeings = new ArrayList();
+        List<T> liveBeings = new ArrayList<>();
         for (T liveBeing : this.liveBeings) {
             if (liveBeing.getName() == name)
                 liveBeings.add(liveBeing);
@@ -58,11 +58,11 @@ public class FamilyTree<T extends LiveBeing> implements Serializable, IFamilyTre
     }
 
     public void sortByDate() {
-        Collections.sort(this.liveBeings, new TComparatorByDate());
+        Collections.sort(liveBeings, new TComparatorByDate<T>());
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new FamilyTreeIterator(this.liveBeings);
+        return new FamilyTreeIterator<T>(liveBeings);
     }
 }

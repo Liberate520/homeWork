@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class LiveBeing<T extends LiveBeing> implements Serializable, Comparable<T> {
+public abstract class LiveBeing<T extends LiveBeing<T>> implements Serializable, Comparable<T> {
     private String name;
     private int date;
     private String sex;

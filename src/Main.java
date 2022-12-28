@@ -3,12 +3,12 @@ import java.io.Serializable;
 public class Main {
     public static void main(String[] args) {
 
-        Human father = new Human("Станислав", 1960, "male");
-        Human mother = new Human("Василиса", 1985, "female");
-        Human humanM1 = new Human("Вася", 1995, "male");
-        Human humanF = new Human("Екатерина", 2000, "female");
-        Human humanM2 = new Human("Вася", 1998, "male");
-        Human human2 = new Human("Анна");
+        Human father = new Human<>("Станислав", 1960, "male");
+        Human mother = new Human<>("Василиса", 1985, "female");
+        Human humanM1 = new Human<>("Вася", 1995, "male");
+        Human humanF = new Human<>("Екатерина", 2000, "female");
+        Human humanM2 = new Human<>("Вася", 1998, "male");
+        Human human2 = new Human<>("Анна");
 
         System.out.println("Попытка запустить:");
         System.out.println("Вывод humanов напрамую:");
@@ -19,13 +19,13 @@ public class Main {
         System.out.println(humanF);
         System.out.println(human2);
 
-        FamilyTree humanTree = new FamilyTree();
-        humanTree.addLiveBeing(new Human("Владимир", 1980, "male"), father, null);
+        FamilyTree humanTree = new FamilyTree<>();
+        humanTree.addLiveBeing(new Human<>("Владимир", 1980, "male"), father, null);
         humanTree.addLiveBeing(father, null, null);
         humanTree.addLiveBeing(humanM1, father, mother);
         humanTree.addLiveBeing(humanM2, father, mother);
         humanTree.addLiveBeing(human2, humanM1, humanF);
-        humanTree.addLiveBeing(new Human("Анастасия"), null, human2);
+        humanTree.addLiveBeing(new Human<>("Анастасия"), null, human2);
         System.out.println();
 
         System.out.println("Вывод humanов через FamilyTree:");
