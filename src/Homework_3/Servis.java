@@ -12,20 +12,23 @@ public class Servis {
     public Servis(List<Designer_Human> humans) {
         this.humans = humans;
     }
+
     private List<Designer_Human> humanList;
 
-    public Servis(Femily_Tree humans){
+    public Servis(Femily_Tree humans) {
         humanList = new ArrayList<>();
     }
+
     private static int id;
 
-public Servis(Designer_Human serviss){
-    this.serviss = serviss;
+    public Servis(Designer_Human serviss) {
+        this.serviss = serviss;
 
-}
-public void AddHHUMAN(String name, String sex, int date){
-    Designer_Human humanList = new Designer_Human(id++, name, sex, date);
-    serviss.addHumanH(humanList); //Ругается на то что this.serviss == null
+    }
+
+    public void AddHHUMAN(String name, String sex, int date) {
+        Designer_Human humanList = new Designer_Human(id++, name, sex, date);
+        serviss.addHumanH(humanList); //Ругается на то что this.serviss == null
 
     }
 
@@ -39,6 +42,7 @@ public void AddHHUMAN(String name, String sex, int date){
 //    public Iterator<Designer_Human> iterator() {
 //        return null;
 //    }
+
     /**
      * Метод сортировки
      *
