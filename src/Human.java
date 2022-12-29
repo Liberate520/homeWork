@@ -1,7 +1,7 @@
 
 import java.util.List;
 
-public class Human<T extends LiveBeing<T>> extends LiveBeing<T> {
+public class Human/* <T extends LiveBeing<T>> */ extends LiveBeing<Human> {
 
     public Human(String name, int date, String sex) {
         super(name, date, sex);
@@ -12,7 +12,7 @@ public class Human<T extends LiveBeing<T>> extends LiveBeing<T> {
     }
 
     @Override
-    public List<T> getChildren() {
+    public List<Human> getChildren() {
         return super.getChildren();
     }
 
@@ -22,12 +22,12 @@ public class Human<T extends LiveBeing<T>> extends LiveBeing<T> {
     }
 
     @Override
-    public void setFather(T father) {
+    public void setFather(Human father) {
         super.setFather(father);
     }
 
     @Override
-    public void setMother(T mother) {
+    public void setMother(Human mother) {
         super.setMother(mother);
     }
 
@@ -47,7 +47,7 @@ public class Human<T extends LiveBeing<T>> extends LiveBeing<T> {
     }
 
     @Override
-    public int compareTo(T o) {
+    public int compareTo(Human o) {
         return super.compareTo(o);
     }
 }
