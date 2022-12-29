@@ -52,7 +52,7 @@ public class Main {
         System.out.println("INPUT/OUTPUT HUMAN TREE:");
         inputOutputBin.saveAs(humanTree, "humansList.bin");
         Serializable restore = inputOutputBin.readFrom("humansList.bin");
-        FamilyTree restoreFamilyTree = (FamilyTree) restore;
+        FamilyTree<Human> restoreFamilyTree = (FamilyTree) restore;
         System.out.println(restoreFamilyTree.getLiveBeings());
         System.out.println();
 

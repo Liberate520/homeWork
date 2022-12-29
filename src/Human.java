@@ -1,7 +1,6 @@
-
 import java.util.List;
 
-public class Human/* <T extends LiveBeing<T>> */ extends LiveBeing<Human> {
+public class Human extends LiveBeing<Human> {
 
     public Human(String name, int date, String sex) {
         super(name, date, sex);
