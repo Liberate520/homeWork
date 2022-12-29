@@ -28,6 +28,17 @@ public class Main {
         humanTree.addLiveBeing(new Human("Анастасия"), null, human2);
         System.out.println();
 
+        Alifant alifantFather = new Alifant("Зигмунд", 1975, "male");
+        Alifant alifantMother = new Alifant("Аделина", 1970, "female");
+        Alifant alifantSon = new Alifant("Хоботок", 1998, "male");
+        Alifant alifantDaughter = new Alifant("Мамба", 1991, "female");
+
+        FamilyTree<Alifant> alifantTree = new FamilyTree<>();
+        alifantTree.addLiveBeing(alifantFather, null, null);
+        alifantTree.addLiveBeing(alifantMother, null, null);
+        alifantTree.addLiveBeing(alifantSon, alifantFather, alifantMother);
+        alifantTree.addLiveBeing(alifantDaughter, alifantFather, alifantMother);
+
         System.out.println("Вывод humanов через FamilyTree:");
         System.out.println("Поиск humanа по имени:");
         System.out.println(humanTree.findByName("Анна"));
@@ -52,8 +63,8 @@ public class Main {
         System.out.println("INPUT/OUTPUT HUMAN TREE:");
         inputOutputBin.saveAs(humanTree, "humansList.bin");
         Serializable restore = inputOutputBin.readFrom("humansList.bin");
-        FamilyTree<Human> restoreFamilyTree = (FamilyTree) restore;
-        System.out.println(restoreFamilyTree.getLiveBeings());
+        FamilyTree<Human> restoreHumanFamilyTree = (FamilyTree) restore;
+        System.out.println(restoreHumanFamilyTree.getLiveBeings());
         System.out.println();
 
         System.out.println("Вывод списка Humanов циклом forech:");
@@ -69,11 +80,25 @@ public class Main {
         }
         System.out.println();
 
-        System.out.println("Вывод отсортированных по дате рождения Humanов:");
-        humanTree.sortByDate();
-        for (Human human : humanTree) {
-            System.out.println(human);
+        System.out.println("Вывод Alifantов через FamilyTree с помощью метода showAllToConsole:");
+        alifantTree.showAllInConsole();
+
+        System.out.println("Вывод отсортированных по дате рождения Alifantов:");
+        alifantTree.sortByDate();
+        for (Alifant alifant : alifantTree) {
+            System.out.println(alifant);
         }
+        System.out.println();
+
+        System.out.println("Вывод отсортированных по имени Alifantов:");
+        alifantTree.sortByName();
+        for (Alifant alifant : alifantTree) {
+            System.out.println(alifant);
+        }
+        System.out.println();
+
+        System.out.println("Поиск Alifantов по имени:");
+        System.out.println(alifantTree.findByName("Хоботок"));
         System.out.println();
     }
 }
