@@ -51,6 +51,11 @@ public class Servis {
     public void sort() {
         Collections.sort(humans.getHumans());//не понимаю почему не работает
     }
+    public void sortNAME() {
+        Collections.sort(humans.getName());//не понимаю почему не работает
+    }
+
+
 
 
 }
