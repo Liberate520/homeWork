@@ -1,3 +1,0 @@
-Ilya,35,Male,Sergey,null
-Irina,5,Female,null,Marina
-Lyuba,5,Female,Ivan,Olga

@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Iterable<Human>{
+public class FamilyTree<T extends Creature> implements Iterable<T>{
     private String name;
     private Integer volume;
-    private List<Human> treeElements = new ArrayList<>();
+    private List<T> treeElements = new ArrayList<>();
 
     private Writable writable;
 
@@ -15,16 +15,16 @@ public class FamilyTree implements Iterable<Human>{
         this.volume = 0;
     }
 
-    public FamilyTree(String name, List<Human> humans) {
+    public FamilyTree(String name, List<T> creature) {
         this(name);
-        this.volume = humans.size();
-        for (Human human : humans) {
-            this.treeElements.add(human);
+        this.volume = creature.size();
+        for (T creatures : creature) {
+            this.treeElements.add(creatures);
         }
     }
 
-    public void addHuman(Human human){
-        this.treeElements.add(human);
+    public void addElement(T creature){
+        this.treeElements.add(creature);
         this.volume++;
     }
 
@@ -33,17 +33,18 @@ public class FamilyTree implements Iterable<Human>{
     @Override
     public String toString() {
         StringBuilder humansForPrint = new StringBuilder();
-        for (Human person : treeElements) {
-            humansForPrint.append("\n").append(person);
-            if (person.getMother() != null) {
-                humansForPrint.append(", мать: ").append(person.getMother().getFullName());
+        for (T creature : treeElements) {
+            humansForPrint.append("\n").append(creature);
+            if (creature.getMother() != null) {
+                humansForPrint.append(", мать: ").append(creature.getMother().getFullName());
             } else humansForPrint.append(", мать: ").append("Не указано");
-            if (person.getFather() != null) {
-                humansForPrint.append(", отец: ").append(person.getFather().getFullName());
+            if (creature.getFather() != null) {
+                humansForPrint.append(", отец: ").append(creature.getFather().getFullName());
             } else humansForPrint.append(", отец: ").append("Не указано");
-            if (person.getChildren().size() !=0){
+            if (creature.getChildren().size() !=0){
+                List<T> childs = creature.getChildren();
                 humansForPrint.append(", дети: ");
-                for (Human child : person.getChildren()) {
+                for (Creature child : childs) {
                     humansForPrint.append(child.getFullName()).append(", ");
                 }
                 humansForPrint.deleteCharAt(humansForPrint.length() - 2);
@@ -54,7 +55,7 @@ public class FamilyTree implements Iterable<Human>{
                 humansForPrint;
     }
 
-    public List<Human> getTreeElements() {
+    public List<T> getTreeElements() {
         return treeElements;
     }
 
@@ -63,9 +64,9 @@ public class FamilyTree implements Iterable<Human>{
     }
 
     public void findByName(String name){
-        for (Human human : this.treeElements) {
-            if (human.getFullName().equalsIgnoreCase(name)) {
-                System.out.println(human);
+        for (T creature : this.treeElements) {
+            if (creature.getFullName().equalsIgnoreCase(name)) {
+                System.out.println(creature);
             }
         }
     }
@@ -90,17 +91,17 @@ public class FamilyTree implements Iterable<Human>{
     public static String countPostfix(int num)
     {
         String result = null;
-        if(num == 11) result = "человек";
-        else if(("" + num).endsWith("1")) result = "человека";
-        else if(num > 11 && num < 15) result = "человек";
-        else if(num % 10 > 1 && num % 10 < 5) result = "человек";
-        else result = "человек";
+        if(num == 11) result = "элементов";
+        else if(("" + num).endsWith("1")) result = "элемента";
+        else if(num > 11 && num < 15) result = "элементов";
+        else if(num % 10 > 1 && num % 10 < 5) result = "элементов";
+        else result = "элементов";
 
         return result;
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return new FamilyTreeIterator(treeElements);
     }
 

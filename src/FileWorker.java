@@ -4,8 +4,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
-public class FileWorker implements Writable{
+public class FileWorker<T extends Creature> implements Writable{
     @Override
     public void writeToFile(FamilyTree inputTree) throws IOException {
         String pathname = inputTree.getName().toLowerCase() + ".txt";
@@ -29,7 +30,7 @@ public class FileWorker implements Writable{
     }
 
     @Override
-    public FamilyTree readFromFile(FamilyTree inputTree) {
+    public FamilyTree<T> readFromFile(FamilyTree inputTree) {
         String pathname = "read.txt";
 
         try {
@@ -38,10 +39,17 @@ public class FileWorker implements Writable{
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
-                Human human = new Human(line.split(",")[0], (Human.Gender.valueOf(line.split(",")[2])),
-                        Integer.parseInt(line.split(",")[1]));
-                inputTree.addHuman(human);
-                line = reader.readLine();
+                if (inputTree.getTreeElements().get(0) instanceof Cat) {
+                    Cat element = new Cat(line.split(",")[0], (Cat.Gender.valueOf(line.split(",")[2])),
+                            Integer.parseInt(line.split(",")[1]));
+                    inputTree.addElement(element);
+                    line = reader.readLine();
+                } else {
+                    Human element = new Human(line.split(",")[0], (Human.Gender.valueOf(line.split(",")[2])),
+                            Integer.parseInt(line.split(",")[1]));
+                    inputTree.addElement(element);
+                    line = reader.readLine();
+                }
             }
             System.out.println("\nЧтение из файла прошло успешно");
         } catch (FileNotFoundException e) {

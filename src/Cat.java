@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human extends Creature<Human> {
+public class Cat extends Creature<Cat> {
     private String fullName;
     private Gender gender;
     private int age;
-    private Human mother, father;
-    private List<Human> children = new ArrayList<>();
+    private Cat mother, father;
+    private List<Cat> children = new ArrayList<>();
 
-    public Human(String fullName, Gender gender, int age, Human father, Human mother) {
+    public Cat(String fullName, Gender gender, int age, Cat father, Cat mother) {
         this.fullName = fullName;
         this.gender = gender;
         this.age = age;
@@ -22,16 +22,16 @@ public class Human extends Creature<Human> {
         if (mother != null) {this.mother.children.add(this);}
     }
 
-    public Human(String fullName, Gender gender, int age) {
+    public Cat(String fullName, Gender gender, int age) {
         this(fullName, gender, age, null, null);
     }
 
-    public Human(String fullName, Gender gender, int age, Human human) {
+    public Cat(String fullName, Gender gender, int age, Cat cat) {
             this(fullName, gender, age,
-                    human.gender == Gender.Male ? human : null, human.gender == Gender.Female ? human : null);
+                    cat.gender == Gender.Male ? cat : null, cat.gender == Gender.Female ? cat : null);
     }
 
-    public void setFather(Human father) {
+    public void setFather(Cat father) {
         if (this.father == null) {
             this.father = father;
             this.father.children.add(this);
@@ -40,7 +40,7 @@ public class Human extends Creature<Human> {
         }
     }
 
-    public void setMother(Human mother) {
+    public void setMother(Cat mother) {
         if (this.mother == null) {
             this.mother = mother;
             this.mother.children.add(this);
@@ -48,11 +48,11 @@ public class Human extends Creature<Human> {
             System.out.printf("У %s уже указана мать - %s", this.fullName, this.mother.fullName);
         }
     }
-
-    public Human getFather() { return father;}
+    @Override
+    public Cat getFather() { return father;}
 
     @Override
-    public Human getMother() {
+    public Cat getMother() {
         return mother;
     }
 
@@ -62,7 +62,7 @@ public class Human extends Creature<Human> {
     }
 
     @Override
-    public List<Human> getChildren() {
+    public List<Cat> getChildren() {
         return this.children;
     }
 
@@ -71,13 +71,13 @@ public class Human extends Creature<Human> {
         return age;
     }
 
-    public List<Human> getSistersBrothers(){
-        List<Human> byMother = this.getMother() != null ? this.getMother().getChildren() : null;
-        List<Human> byFather = this.getFather() != null ? this.getFather().getChildren() : null;
-        List<Human> all = new ArrayList<>();
+    public List<Cat> getSistersBrothers(){
+        List<Cat> byMother = this.getMother() != null ? this.getMother().getChildren() : null;
+        List<Cat> byFather = this.getFather() != null ? this.getFather().getChildren() : null;
+        List<Cat> all = new ArrayList<>();
 
         if (byFather != null) {
-            for (Human human : byFather) {
+            for (Cat human : byFather) {
                 if (!human.getFullName().equals(this.fullName)) {
                     all.add(human);
                 }
@@ -85,7 +85,7 @@ public class Human extends Creature<Human> {
         }
 
         if (byMother != null) {
-            for (Human human : byMother) {
+            for (Cat human : byMother) {
                 if (!human.getFullName().equals(this.fullName)) {
                     all.add(human);
                 }
