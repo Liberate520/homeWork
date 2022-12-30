@@ -1,27 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Human {
+
+enum Gender{
+    MAN,
+    WOMAN
+}
+public class Human implements Serializable{
     private String name;
-    private String gender;
-    private int age;
-    Human father;
-    Human mother;
-    List<Human> children;
+    private Gender gend;
+    private int yearBirth;
+    private Human father;
+    private Human mother;
+    private List<Human> children;
 
-    public Human(String name, String gender, int age, Human father, Human mother) {
+    public Human(String name, Gender gend, int yearBirth, Human father, Human mother) {
         this.name = name;
-        this.gender = gender;
-        this.age = age;
+        this.gend = gend;
+        this.yearBirth = yearBirth;
         children = new ArrayList<>();
         this.father = father;
-        if(father != null) {
-            father.children.add(this);
-        }
         this.mother = mother;
-        if(mother != null) {
-            mother.children.add(this);
-        }
     }
 
 
@@ -33,20 +33,21 @@ public class Human {
         this.name = name;
     }
 
-    public String getGender() {
-        return gender;
+
+    public Gender getGend() {
+        return gend;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGend(Gender gend) {
+        this.gend = gend;
     }
 
-    public int getAge() {
-        return age;
+    public int getYearBirth() {
+        return yearBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setYearBirth(int yearBirth) {
+        this.yearBirth = yearBirth;
     }
 
     public Human getFather() {
@@ -75,7 +76,14 @@ public class Human {
 
     @Override
     public String toString() {
-        String res = "\n" + name + " " + gender  + " " + age + " y.o.";
+        String gender = "";
+        if(gend == Gender.MAN) {
+            gender = "male";
+        }
+        else {
+            gender = "female";
+        }
+        String res = "\n" + name + ", " + gender  + ", " + yearBirth + "";
         if(father != null) {
             res = res + ", father: " + father.getName();
         }
