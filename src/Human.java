@@ -2,12 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human extends Creature<Human> {
-    private String fullName;
-    private Gender gender;
-    private int age;
-    private Human mother, father;
-    private List<Human> children = new ArrayList<>();
-
     public Human(String fullName, Gender gender, int age, Human father, Human mother) {
         this.fullName = fullName;
         this.gender = gender;
@@ -28,7 +22,7 @@ public class Human extends Creature<Human> {
 
     public Human(String fullName, Gender gender, int age, Human human) {
             this(fullName, gender, age,
-                    human.gender == Gender.Male ? human : null, human.gender == Gender.Female ? human : null);
+                    gender == Gender.Male ? human : null, gender == Gender.Female ? human : null);
     }
 
     public void setFather(Human father) {
@@ -99,16 +93,6 @@ public class Human extends Creature<Human> {
         String genString = gender == Gender.Male ? "муж." : "жен.";
         return  fullName + ", " + genString + ", " + age + " " + agePostfix(age);
 
-    }
-
-//    @Override
-//    public int compareTo(Human o) {
-//        return fullName.compareTo(o.getFullName());
-//    }
-
-    enum Gender {
-        Male,
-        Female
     }
 
     private String agePostfix(int age) {

@@ -12,17 +12,17 @@ public class Main {
 //        ______________________________________________________________________
 //        люди
 
-        Human Sergey = new Human("Sergey", Human.Gender.Male, 65);
-        Human Marina = new Human("Marina", Human.Gender.Female, 63);
+        Human Sergey = new Human("Sergey", Gender.Male, 65);
+        Human Marina = new Human("Marina", Gender.Female, 63);
 
-        Human Ivan = new Human("Ivan", Human.Gender.Male, 45, Sergey);
-        Human Olga = new Human("Olga", Human.Gender.Female, 41, Marina);
-        Human Andrey = new Human("Andrey", Human.Gender.Male, 43, Sergey);
+        Human Ivan = new Human("Ivan", Gender.Male, 45, Sergey);
+        Human Olga = new Human("Olga", Gender.Female, 41, Marina);
+        Human Andrey = new Human("Andrey", Gender.Male, 43, Sergey);
 
-        Human Semen = new Human("Semen", Human.Gender.Male, 20, Ivan, Olga);
-        Human Pavel = new Human("Pavel", Human.Gender.Male, 1, Andrey, Olga);
+        Human Semen = new Human("Semen", Gender.Male, 20, Ivan, Olga);
+        Human Pavel = new Human("Pavel", Gender.Male, 1, Andrey, Olga);
 
-        Human Evgeniy = new Human("Evgeniy", Human.Gender.Male, 11, Sergey, Marina);
+        Human Evgeniy = new Human("Evgeniy", Gender.Male, 11, Sergey, Marina);
 
         List<Human> humans = Arrays.asList(Sergey, Marina, Ivan, Olga, Andrey, Semen, Pavel);
 
@@ -74,17 +74,17 @@ public class Main {
 //        ______________________________________________________________________
 //        коты
 
-        Cat Vasiliy = new Cat("Vasiliy", Cat.Gender.Male, 65);
-        Cat Murka = new Cat("Murka", Cat.Gender.Female, 63);
+        Cat Vasiliy = new Cat("Vasiliy", Gender.Male, 65);
+        Cat Murka = new Cat("Murka", Gender.Female, 63);
 
-        Cat Rizhik = new Cat("Rizhik", Cat.Gender.Male, 45, Vasiliy);
-        Cat Elli = new Cat("Elli", Cat.Gender.Female, 41, Murka);
-        Cat Dimok = new Cat("Dimok", Cat.Gender.Male, 43, Vasiliy);
+        Cat Rizhik = new Cat("Rizhik", Gender.Male, 45, Vasiliy);
+        Cat Elli = new Cat("Elli", Gender.Female, 41, Murka);
+        Cat Dimok = new Cat("Dimok", Gender.Male, 43, Vasiliy);
 
-        Cat Murzik = new Cat("Murzik", Cat.Gender.Male, 20, Rizhik, Elli);
-        Cat Mur = new Cat("Mur", Cat.Gender.Male, 1, Dimok, Elli);
+        Cat Murzik = new Cat("Murzik", Gender.Male, 20, Rizhik, Elli);
+        Cat Mur = new Cat("Mur", Gender.Male, 1, Dimok, Elli);
 
-        Cat Murz = new Cat("Murz", Cat.Gender.Male, 11, Vasiliy, Murka);
+        Cat Murz = new Cat("Murz", Gender.Male, 11, Vasiliy, Murka);
 
         List<Cat> cats = Arrays.asList(Vasiliy, Murka, Rizhik, Elli, Dimok, Murzik, Mur);
 

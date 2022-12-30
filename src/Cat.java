@@ -2,12 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cat extends Creature<Cat> {
-    private String fullName;
-    private Gender gender;
-    private int age;
-    private Cat mother, father;
-    private List<Cat> children = new ArrayList<>();
-
     public Cat(String fullName, Gender gender, int age, Cat father, Cat mother) {
         this.fullName = fullName;
         this.gender = gender;
@@ -28,7 +22,7 @@ public class Cat extends Creature<Cat> {
 
     public Cat(String fullName, Gender gender, int age, Cat cat) {
             this(fullName, gender, age,
-                    cat.gender == Gender.Male ? cat : null, cat.gender == Gender.Female ? cat : null);
+                    gender == Gender.Male ? cat : null, gender == Gender.Female ? cat : null);
     }
 
     public void setFather(Cat father) {
@@ -106,10 +100,10 @@ public class Cat extends Creature<Cat> {
 //        return fullName.compareTo(o.getFullName());
 //    }
 
-    enum Gender {
-        Male,
-        Female
-    }
+//    enum Gender {
+//        Male,
+//        Female
+//    }
 
     private String agePostfix(int age) {
         int ageLastNumber = age % 10;

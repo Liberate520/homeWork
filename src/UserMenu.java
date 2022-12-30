@@ -31,7 +31,7 @@ public class UserMenu {
                     String gender = in.nextLine();
                     System.out.print("Введите возраст: ");
                     Integer age = Integer.parseInt(in.nextLine());
-                    Human.Gender hgen = gender == "M" ? Human.Gender.Male : Human.Gender.Female;
+                    Gender hgen = gender == "M" ? Gender.Male : Gender.Female;
                     Human newHuman = new Human(name, hgen, age);
                     break;
                 case "3":
@@ -41,7 +41,7 @@ public class UserMenu {
                     gender = in.nextLine();
                     System.out.print("Введите возраст: ");
                     age = Integer.parseInt(in.nextLine());
-                    Cat.Gender cgen = gender == "M" ? Cat.Gender.Male : Cat.Gender.Female;
+                    Gender cgen = gender == "M" ? Gender.Male : Gender.Female;
                     Cat newCat = new Cat(name, cgen, age);
                     break;
                 case "4":

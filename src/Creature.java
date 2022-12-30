@@ -3,17 +3,17 @@ import java.util.List;
 
 public abstract class Creature<T extends Creature> {
 
-    private String fullName;
-    private Cat.Gender gender;
-    private int age;
-    private T mother, father;
-    private List<T> children = new ArrayList<>();
+    protected String fullName;
+    protected Gender gender;
+    protected int age;
+    protected T mother, father;
+    protected List<T> children = new ArrayList<>();
 
     public String getFullName() {
         return fullName;
     }
 
-    public Cat.Gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 

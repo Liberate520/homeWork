@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
-import java.util.Collections;
 
 public class FileWorker<T extends Creature> implements Writable{
     @Override
@@ -40,12 +39,12 @@ public class FileWorker<T extends Creature> implements Writable{
             String line = reader.readLine();
             while (line != null) {
                 if (inputTree.getTreeElements().get(0) instanceof Cat) {
-                    Cat element = new Cat(line.split(",")[0], (Cat.Gender.valueOf(line.split(",")[2])),
+                    Cat element = new Cat(line.split(",")[0], (Gender.valueOf(line.split(",")[2])),
                             Integer.parseInt(line.split(",")[1]));
                     inputTree.addElement(element);
                     line = reader.readLine();
                 } else {
-                    Human element = new Human(line.split(",")[0], (Human.Gender.valueOf(line.split(",")[2])),
+                    Human element = new Human(line.split(",")[0], (Gender.valueOf(line.split(",")[2])),
                             Integer.parseInt(line.split(",")[1]));
                     inputTree.addElement(element);
                     line = reader.readLine();
