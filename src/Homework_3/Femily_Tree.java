@@ -5,20 +5,28 @@ import java.util.*;
 
 public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//добавил итеребал к
     // констркутору человека
-    private final List<Designer_Human> humans;
+    private List<Designer_Human> humans;
 
-    public Femily_Tree() {
-        humans = new ArrayList();
-    }
+//    public Femily_Tree() {
+//        humans = new ArrayList();
+//    }
 
 
 //    public List<Designer_Human> getHumans() {
 //        return this.humans;
 //    }
-    public List<Designer_Human> gethumans(){
-        return humans;
+//    public List<Designer_Human> getHumans(){
+//        return humans;
+//    }
+
+
+    public Femily_Tree() {
+        this.humans = humans;
     }
 
+    public List<Designer_Human> getHumans() {
+        return humans;
+    }
 
     /**
      * Метод добавления родителей

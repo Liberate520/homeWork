@@ -76,6 +76,8 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
         this.name = name;
         this.sex = sex;
         this.date = date;
+        this.humans = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
     /**

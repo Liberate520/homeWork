@@ -15,8 +15,11 @@ public class Servis {
 
     private List<Designer_Human> humanList;
 
-    public Servis(Femily_Tree humans) {
-        humanList = new ArrayList<>();
+//    public Servis(Femily_Tree humans) {
+//        humanList = new ArrayList<>();
+//    }
+public Servis(Femily_Tree humanList) {
+        this.humanList = new ArrayList<>();
     }
 
     private static int id;
