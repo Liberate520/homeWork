@@ -61,13 +61,15 @@ public class Main {
         }
         System.out.println("---");
 
+        Service service = new Service();
+
         System.out.print("Результаты сортировки по имени: \n");
-        Service.sortByName(humanTree);
+        service.sortByName(humanTree);
         System.out.println(humanTree);
         System.out.println("---");
 
         System.out.print("Результаты сортировки по возрасту: \n");
-        Service.sortByAge(humanTree);
+        service.sortByAge(humanTree);
         System.out.println(humanTree);
         System.out.println("---");
 
@@ -124,12 +126,12 @@ public class Main {
         System.out.println("---");
 
         System.out.print("Результаты сортировки по имени: \n");
-        Service.sortByName(catsTree);
+        service.sortByName(catsTree);
         System.out.println(catsTree);
         System.out.println("---");
 
         System.out.print("Результаты сортировки по возрасту: \n");
-        Service.sortByAge(catsTree);
+        service.sortByAge(catsTree);
         System.out.println(catsTree);
         System.out.println("---");
     }
