@@ -16,7 +16,7 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
             Charset charset = Charset.forName("UTF-8");
             Scanner iScanner = new Scanner(System.in, charset);
             System.out.println(
-                    "Ввыберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - ");
+                    "Ввыберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n0 - Для выхода.");
             try {
                 value = iScanner.nextInt();
             } catch (Exception e) {
@@ -56,11 +56,11 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
                 // errorMessage(e);
                 // }
                 // break;
-                // case 1:
-
-                // break;
+                case 0:
+                    System.exit(0);
+                    break;
                 default:
-
+                    System.out.println("Ошибка ввода. Повторите еще раз.");
                     break;
             }
         }
