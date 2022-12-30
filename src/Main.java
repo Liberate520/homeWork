@@ -99,5 +99,8 @@ public class Main {
         System.out.println("Поиск Alifantов по имени:");
         System.out.println(alifantTree.findByName("Хоботок"));
         System.out.println();
+
+        FamilyTreeView<Human> view = new FamilyTreeView<>(humanTree);
+        view.view();
     }
 }
