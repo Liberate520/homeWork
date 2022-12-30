@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
-    private List<Person> children = new ArrayList<>();
-    private List<Person> personList;
+public class FamilyTree<T extends Person> implements Serializable, Iterable<Person> {
+    private List<T> children = new ArrayList<>();
+    private List<T> personList;
 
     private Writable writable;
 
-    public FamilyTree(List<Person> personList) {
+    public FamilyTree(List<T> personList) {
         this.personList = personList;
     }
 
@@ -19,15 +19,15 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         this.writable = new FileHandler();
     }
 
-    public void setPersonList(List<Person> personList) {
+    public void setPersonList(List<T> personList) {
         this.personList = personList;
     }
 
-    public List<Person> getPersonList() {
+    public List<T> getPersonList() {
         return personList;
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(T person) {
         personList.add(person);
     }
 
@@ -85,10 +85,12 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
+
     @Override
     public Iterator<Person> iterator() {
-        return new PersonIterator(personList);
-    }
+    return new PersonIterator<T>(personList);
+}
+
 
     public void sortByName(){
         Collections.sort(getPersonList());
@@ -97,6 +99,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
     public void sortByAge(){
         Collections.sort(getPersonList(), new PersonComparatorByAge());
     }
+
 
 
 }
