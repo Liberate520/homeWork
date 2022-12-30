@@ -16,7 +16,7 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
             Charset charset = Charset.forName("UTF-8"); // TODO
             Scanner iScanner = new Scanner(System.in, charset); // TODO
             System.out.println(
-                    "Ввыберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n0 - Для выхода.");
+                    "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n0 - Для выхода.");
             try {
                 value = iScanner.nextInt();
             } catch (Exception e) {
