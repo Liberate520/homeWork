@@ -10,7 +10,6 @@ public class Main {
         Human humanM2 = new Human("Вася", 1998, "male");
         Human human2 = new Human("Анна");
 
-        System.out.println("Попытка запустить:");
         System.out.println("Вывод humanов напрамую:");
         System.out.println(father);
         System.out.println(mother);

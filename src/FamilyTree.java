@@ -18,6 +18,11 @@ public class FamilyTree<T extends LiveBeing<T>> implements Serializable, IFamily
     }
 
     @Override
+    public void setLiveBeings(List<T> liveBeings) {
+        this.liveBeings = liveBeings;
+    }
+
+    @Override
     public void addLiveBeing(T liveBeing, T father, T mother) {
         if (father != null) {
             liveBeing.setFather(father);

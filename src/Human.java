@@ -42,7 +42,7 @@ public class Human extends LiveBeing<Human> {
 
     @Override
     public String toString() {
-        return String.format("Вид: Человек разымный\n%s", super.toString());
+        return String.format("Вид: Человек разумный\n%s", super.toString());
     }
 
     @Override
