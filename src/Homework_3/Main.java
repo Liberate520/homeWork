@@ -13,7 +13,7 @@ public class Main {
         humans.addparents(new Designer_Human("Alex", "man", 1999), null, null);
 
         humans.printDrevo(humans.getTree());
-        humans.ShowALL(); //вывод всех людей
+        humans.ShowALL(humans.getTree()); //вывод всех людей
         humans.showName("Alex"); //вывод по имени
 
         humans.addHuman(new Designer_Human("Molly", "girl", 1999));

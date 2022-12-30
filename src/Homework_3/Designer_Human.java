@@ -19,6 +19,8 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
 
     private List<Designer_Human> children;
 
+    private List<Designer_Human> serviss;
+
     public List<Designer_Human> getHumans() {
         return humans;
     }
@@ -49,6 +51,8 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
+        this.humans = new ArrayList<>();
+
 
     }
 
@@ -72,6 +76,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
      * @param date
      */
     public Designer_Human(int id, String name, String sex, int date) {
+        super();
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -171,10 +176,10 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
     }
     /**
      * метод добавления очередной
-     * @param Humman
+//     * @param Human
      */
-    public void addHumanH (Designer_Human Humman) {
-        humans.add(Humman);
+    public void addHumanH (Designer_Human Human) {
+        humans.add(Human);
     }
 
     @Override

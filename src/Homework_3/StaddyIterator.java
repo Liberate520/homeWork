@@ -6,7 +6,7 @@ import java.util.*;
 class StaddyIterator implements Iterator<Designer_Human> {
 
     private int index; //счетчик
-    private List<Designer_Human> humans;
+    private final List<Designer_Human> humans;
 
     public StaddyIterator(List<Designer_Human> humans) {
         this.humans = humans;

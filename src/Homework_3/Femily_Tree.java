@@ -21,7 +21,8 @@ public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//до
 
 
     public Femily_Tree() {
-        this.humans = humans;
+        super();
+        this.humans = new ArrayList<Designer_Human>();
     }
 
     public List<Designer_Human> getHumans() {
@@ -63,11 +64,12 @@ public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//до
     /**
      * метод вывода всех людей из дерева
      */
-    public void ShowALL() {
+    public void ShowALL(List<Designer_Human> humans) {
         for (Designer_Human human : this.humans) {
             System.out.println(human.toString());
         }
     }
+
 
     /**
      * Поиск по имени
@@ -94,12 +96,12 @@ public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//до
     }
 
     /**
-     * метод добавления очередной
-     * @param Humman
-     */
-    public void addHumanH(Designer_Human Humman) {
-        humans.add(Humman);
-    }
+//     * метод добавления очередной
+//     * @param Humman
+//     */
+//    public void addHumanH(Designer_Human Humman) {
+//        humans.add(Humman);
+//    }
 
     public void searchHuman(List<Designer_Human> humans) {
         Scanner iScanner = new Scanner(System.in);

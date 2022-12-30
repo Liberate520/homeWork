@@ -19,15 +19,17 @@ public class Servis {
 //        humanList = new ArrayList<>();
 //    }
 public Servis(Femily_Tree humanList) {
+    super();
         this.humanList = new ArrayList<>();
+        this.serviss = new Designer_Human();
     }
 
     private static int id;
 
-    public Servis(Designer_Human serviss) {
-        this.serviss = serviss;
-
-    }
+//    public Servis(Designer_Human serviss) {
+//        this.serviss = serviss;
+//
+//    }
 
     public void AddHHUMAN(String name, String sex, int date) {
         Designer_Human humanList = new Designer_Human(id++, name, sex, date);
@@ -52,13 +54,10 @@ public Servis(Femily_Tree humanList) {
      * @param
      */
     public void sort() {
-        Collections.sort(humans.getHumans());//не понимаю почему не работает
+        Collections.sort(serviss);//не понимаю почему не работает
     }
     public void sortNAME() {
-        Collections.sort(humans.getName());//не понимаю почему не работает
+        Collections.sort(humans);//не понимаю почему не работает
     }
-
-
-
 
 }
