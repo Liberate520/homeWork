@@ -7,7 +7,7 @@ import java.util.List;
 /**
 Описываем сущность вида human
  */
-public class Designer_Human implements Serializable, Comparable<Designer_Human>{
+public class Designer_Human implements Serializable, Comparable<Designer_Human> {
     public Femily_Tree Designer_Human;
     //создаем поля в классе
     private String name, sex;
@@ -25,7 +25,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
         return humans;
     }
 
-    private List<Designer_Human> humans;
+    private static List<Designer_Human> humans;
 
     public Designer_Human(List<Designer_Human> humans){
         this.humans =humans;
@@ -178,7 +178,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human>{
      * метод добавления очередной
 //     * @param Human
      */
-    public void addHumanH (Designer_Human Human) {
+    public static void addHumanH(Designer_Human Human) {
         humans.add(Human);
     }
 

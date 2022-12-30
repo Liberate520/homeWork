@@ -5,13 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Servis {
+    private Servis(){
+        this.humans = new ArrayList<>();
+    }
 
-    private Designer_Human serviss;
+
+//    private Designer_Human serviss;
     private List<Designer_Human> humans;
 
-    public Servis(List<Designer_Human> humans) {
-        this.humans = humans;
-    }
+//    public Servis(List<Designer_Human> humans) {
+//        this.humans = humans;
+//    }
 
     private List<Designer_Human> humanList;
 
@@ -21,7 +25,7 @@ public class Servis {
 public Servis(Femily_Tree humanList) {
     super();
         this.humanList = new ArrayList<>();
-        this.serviss = new Designer_Human();
+//        this.serviss = new Designer_Human();
     }
 
     private static int id;
@@ -33,7 +37,7 @@ public Servis(Femily_Tree humanList) {
 
     public void AddHHUMAN(String name, String sex, int date) {
         Designer_Human humanList = new Designer_Human(id++, name, sex, date);
-        serviss.addHumanH(humanList); //Ругается на то что this.serviss == null
+        Designer_Human.addHumanH(humanList); //Ругается на то что this.serviss == null
 
     }
 
@@ -54,7 +58,7 @@ public Servis(Femily_Tree humanList) {
      * @param
      */
     public void sort() {
-        Collections.sort(serviss);//не понимаю почему не работает
+        Collections.sort(humanList);//не понимаю почему не работает
     }
     public void sortNAME() {
         Collections.sort(humans);//не понимаю почему не работает
