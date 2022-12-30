@@ -1,16 +1,16 @@
-public class ModelMult<T extends Number> extends ModelCalc<T> {
+public class ModelMult extends ModelCalc {
     @Override
-    public T result() {
+    public double result() {
         return x * y;
     }
 
     @Override
-    public void setX(T value) {
+    public void setX(double value) {
         super.x = value;
     }
 
     @Override
-    public void setY(T value) {
+    public void setY(double value) {
         super.y = value;
 
     }

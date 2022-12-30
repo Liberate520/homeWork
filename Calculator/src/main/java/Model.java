@@ -1,6 +1,6 @@
-public abstract interface Model<T extends Number> {
-    T result();
+public abstract interface Model {
+    double result();
 
-    void setX(T value);
-    void setY(T value);
+    void setX(double value);
+    void setY(double value);
 }

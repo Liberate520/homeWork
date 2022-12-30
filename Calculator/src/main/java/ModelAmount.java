@@ -4,27 +4,27 @@ public class ModelAmount extends ModelCalc {
 
     }
     @Override
-    public Float result() {
+    public double result() {
         return x + y;
     }
 
+//    @Override
+//    public void setX(double value) {
+//
+//    }
+//
+//    @Override
+//    public void setY(double value) {
+//
+//    }
+
     @Override
-    public void setX(Number value) {
-
-    }
-
-    @Override
-    public void setY(Number value) {
-
-    }
-
-    @Override
-    public void setX(Float value) {
+    public void setX(double value) {
         super.x = value;
     }
 
     @Override
-    public void setY(Float value) {
+    public void setY(double value) {
         super.y = value;
 
     }

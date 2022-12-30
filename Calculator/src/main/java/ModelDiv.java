@@ -4,8 +4,8 @@ public class ModelDiv extends ModelCalc {
 
     }
     @Override
-    public Float result() {
-        int result = -1;
+    public double result() {
+        double result = -1;
         try {
             result = x / y;
         } catch(ArithmeticException e){
@@ -15,12 +15,12 @@ public class ModelDiv extends ModelCalc {
     }
 
     @Override
-    public void setX(Float value) {
+    public void setX(double value) {
         super.x = value;
     }
 
     @Override
-    public void setY(Float value) {
+    public void setY(double value) {
         super.y = value;
 
     }

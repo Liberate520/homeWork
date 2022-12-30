@@ -10,12 +10,12 @@ public class View {
 
     }
 
-    public Float getValue(String title) {
+    public double getValue(String title) {
         System.out.printf("%s", title);
-        return in.nextFloat();
+        return in.nextDouble();
     }
 
-    public void print(Float data, String title) {
+    public void print(double data, String title) {
         System.out.printf("%s %.3f\n", title, data);
     }
     public void ViewStart (Presenter sum, Presenter sub, Presenter mult, Presenter div) {

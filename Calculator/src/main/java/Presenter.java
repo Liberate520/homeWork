@@ -8,11 +8,10 @@ public class Presenter {
     }
 
     public void startAction() {
-        Float a = view.getValue("Введите первое число: ");
-        Float b = view.getValue("Введите второе число: ");
+        double a = view.getValue("Введите первое число: ");
+        double b = view.getValue("Введите второе число: ");
         model.setX(a);
         model.setY(b);
-        Float result = (Float) model.result();
-        view.print(result, "Результат: ");
+        view.print((float) model.result(), "Результат: ");
     }
 }
