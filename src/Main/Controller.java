@@ -7,7 +7,6 @@ import java.util.Map;
 import src.FTService;
 import src.Entities.FamilyTree;
 import src.Entities.Human;
-import src.FileProcessing.FileWorker;
 
 public class Controller<T extends Human> {
 
@@ -17,7 +16,6 @@ public class Controller<T extends Human> {
   private boolean controllerOn = true;
   private UserInput ui = new UserInput();
   private UserMenu<T> um = new UserMenu<T>();
-  private FileWorker<T> fw = new FileWorker<T>();
 
   public Controller(FamilyTree<T> familyTree) {
     this.tree = familyTree;
@@ -54,7 +52,7 @@ public class Controller<T extends Human> {
 
       case "4":
         try {
-          fw.save(tree);
+          fts.save(tree);
           um.textActionWithFile("save");
         } catch (IOException e) {
           e.printStackTrace();
@@ -69,7 +67,7 @@ public class Controller<T extends Human> {
           backupTree.putAll(tree.getAllHumans());
           tree.clearTree();
           try {
-            tree = fw.load();
+            tree = fts.load();
             um.textActionWithFile("load");
           } catch (Exception e) {
             e.printStackTrace();
