@@ -47,7 +47,8 @@ public class Main {
         System.out.println(humanTree.findAllByName("Вася"));
         System.out.println();
 
-        System.out.println("Вывод humanов через FamilyTree с помощью метода showAllToConsole");
+        System.out.println("Вывод humanов через FamilyTree с помощью метода
+        showAllToConsole");
         humanTree.showAllInConsole();
         System.out.println();
 
@@ -68,31 +69,32 @@ public class Main {
 
         System.out.println("Вывод списка Humanов циклом forech:");
         for (Human human : humanTree) {
-            System.out.println(human);
+        System.out.println(human);
         }
         System.out.println();
 
         System.out.println("Вывод отсортированных по имени Humanов:");
         humanTree.sortByName();
         for (Human human : humanTree) {
-            System.out.println(human);
+        System.out.println(human);
         }
         System.out.println();
 
-        System.out.println("Вывод Alifantов через FamilyTree с помощью метода showAllToConsole:");
+        System.out.println("Вывод Alifantов через FamilyTree с помощью метода
+        showAllToConsole:");
         alifantTree.showAllInConsole();
 
         System.out.println("Вывод отсортированных по дате рождения Alifantов:");
         alifantTree.sortByDate();
         for (Alifant alifant : alifantTree) {
-            System.out.println(alifant);
+        System.out.println(alifant);
         }
         System.out.println();
 
         System.out.println("Вывод отсортированных по имени Alifantов:");
         alifantTree.sortByName();
         for (Alifant alifant : alifantTree) {
-            System.out.println(alifant);
+        System.out.println(alifant);
         }
         System.out.println();
 
