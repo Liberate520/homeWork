@@ -36,16 +36,16 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
                     familyTree.showAllInConsole();
                     break;
                 // ! TODO
-                case 4:
-                    try {
-                        System.out.println("Введите имя для поиска:");
-                        iScanner.nextLine();
-                        line = iScanner.nextLine();
-                        System.out.println(familyTree.findByName(line));
-                    } catch (Exception e) {
-                        errorMessage(e);
-                    }
-                    break;
+                // case 4:
+                // try {
+                // System.out.println("Введите имя для поиска:");
+                // iScanner.nextLine();
+                // line = iScanner.nextLine();
+                // System.out.println(familyTree.findByName(line));
+                // } catch (Exception e) {
+                // errorMessage(e);
+                // }
+                // break;
                 // case 3:
                 // try {
                 // System.out.println("Введите имя для поиска:");
