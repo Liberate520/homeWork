@@ -13,8 +13,8 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         while (true) {
             int value = 0;
             String line = null;
-            Charset charset = Charset.forName("UTF-8");
-            Scanner iScanner = new Scanner(System.in, charset);
+            Charset charset = Charset.forName("UTF-8"); // TODO
+            Scanner iScanner = new Scanner(System.in, charset); // TODO
             System.out.println(
                     "Ввыберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n0 - Для выхода.");
             try {
@@ -36,17 +36,16 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
                     familyTree.showAllInConsole();
                     break;
                 // ! TODO
-                // case 2:
-                // try {
-                // System.out.println("Введите имя для поиска:");
-                // iScanner.nextLine();
-                // line = iScanner.nextLine();
-                // System.out.println(familyTree.findAllByName(line));
-                // System.out.println("Прочитал");
-                // } catch (Exception e) {
-                // errorMessage(e);
-                // }
-                // break;
+                case 4:
+                    try {
+                        System.out.println("Введите имя для поиска:");
+                        iScanner.nextLine();
+                        line = iScanner.nextLine();
+                        System.out.println(familyTree.findByName(line));
+                    } catch (Exception e) {
+                        errorMessage(e);
+                    }
+                    break;
                 // case 3:
                 // try {
                 // System.out.println("Введите имя для поиска:");
