@@ -4,22 +4,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import src.FTService;
 import src.Entities.FamilyTree;
 import src.Entities.Human;
+import src.Service.FTService;
 
 public class Controller<T extends Human> {
 
-  private FamilyTree<T> tree;
-  private FTService<T> fts;
-
   private boolean controllerOn = true;
+  private FTService<T> fts;
   private UserInput ui = new UserInput();
   private UserMenu<T> um = new UserMenu<T>();
 
   public Controller(FamilyTree<T> familyTree) {
-    this.tree = familyTree;
-    this.fts = new FTService<T>(tree);
+    this.fts = new FTService<T>(familyTree);
   }
 
   public boolean getControllerStatus() {
@@ -31,14 +28,14 @@ public class Controller<T extends Human> {
     switch (ui.getString()) {
       case "1":
         um.textBeforeShowHumans();
-        um.showHumans(tree.getAllHumans());
+        um.showHumans(fts.getAllHumans());
         selectSortingMethod();
         break;
 
       case "2":
         um.askFullName();
         String fullName = ui.getString() + " " + ui.getString();
-        Map.Entry<Integer, T> personWithId = tree.searchByName(fullName);
+        Map.Entry<Integer, T> personWithId = fts.searchByName(fullName);
         if (personWithId.getValue() != null)
           um.showInfo(personWithId.getValue().getInfo());
         else
@@ -46,13 +43,13 @@ public class Controller<T extends Human> {
         break;
 
       case "3":
-        createHuman(tree);
-        um.showHumans(tree.getAllHumans());
+        createHuman();
+        um.showHumans(fts.getAllHumans());
         break;
 
       case "4":
         try {
-          fts.save(tree);
+          fts.save();
           um.textActionWithFile("save");
         } catch (IOException e) {
           e.printStackTrace();
@@ -63,16 +60,15 @@ public class Controller<T extends Human> {
       case "5":
         um.askReplaceTree();
         if (checkAnswer(ui.getString())) {
-          Map<Integer, T> backupTree = new HashMap<Integer, T>();
-          backupTree.putAll(tree.getAllHumans());
-          tree.clearTree();
+          fts.createBackup();
+          fts.clearTree();
           try {
-            tree = fts.load();
+            fts.load();
             um.textActionWithFile("load");
           } catch (Exception e) {
             e.printStackTrace();
             um.textFailureFileAction("load");
-            tree.getAllHumans().putAll(backupTree);
+            fts.restoreFromBackup();
           }
         }
         break;
@@ -88,7 +84,7 @@ public class Controller<T extends Human> {
     }
   }
 
-  public void createHuman(FamilyTree<T> familyTree) {
+  public void createHuman() {
     um.dialogCreateHuman("askName");
     String fullName = ui.getString() + " " + ui.getString();
     um.dialogCreateHuman("askGender");
@@ -99,17 +95,14 @@ public class Controller<T extends Human> {
       gender = "Мужской";
 
     um.dialogCreateHuman("askParent");
-    Map<Integer, T> availableMothers = familyTree.chooseParent("женский");
-    Human parentMother = availableMothers.get(ui.getInt());
+    Map<Integer, T> availableMothers = fts.chooseParent("женский");
+    T parentMother = availableMothers.get(ui.getInt());
 
     um.dialogCreateHuman("askParent");
-    Map<Integer, T> availableFathers = familyTree.chooseParent("мужской");
-    Human parentFather = availableFathers.get(ui.getInt());
+    Map<Integer, T> availableFathers = fts.chooseParent("мужской");
+    T parentFather = availableFathers.get(ui.getInt());
 
-    familyTree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
-    // ^ Type safety: Unchecked cast from Human to TJava(16777761)
-    // Как можно исправить замечания, не заглушая принудительно?
-
+    fts.createHuman(fullName, gender, parentMother, parentFather);
   }
 
   private void selectSortingMethod() {
