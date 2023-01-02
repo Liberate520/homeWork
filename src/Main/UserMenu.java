@@ -48,6 +48,14 @@ public class UserMenu<T extends Human> {
     System.out.println("\nВведите имя и фамилию:");
   }
 
+  public void askGender() {
+    System.out.println("\nВыберите пол (введите букву: М - мужской, Ж - женский): ");
+  }
+
+  public void askParent() {
+    System.out.println("Выберите родителя: ");
+  }
+
   public void foundByName(Map.Entry<Integer, T> human) {
     System.out.println("id: " + human.getKey() + " имя: " + human.getValue());
   }
@@ -60,37 +68,21 @@ public class UserMenu<T extends Human> {
     System.out.println(info);
   }
 
-  public void dialogCreateHuman(String stage) {
-    switch (stage) {
-      case "askName":
-        askFullName();
-        break;
-
-      case "askGender":
-        System.out.print("Выберите пол (введите букву: М - мужской, Ж - женский): ");
-        break;
-
-      case "askParent":
-        System.out.println("Выберите родителя: ");
-        break;
-    }
-  }
-
   public void askReplaceTree() {
     System.out.println("Вы точно хотите перезаписать текущее дерево? (y/n)");
   }
 
-  public void textActionWithFile(String action) {
-    if (action == "save")
+  public void textSaveAction(boolean success) {
+    if (success)
       System.out.println("Дерево сохранено в файл!");
-    else if (action == "load")
-      System.out.println("Дерево загружено из файла!");
+    else
+      System.out.println("Не удалось сохранить дерево в файл!");
   }
 
-  public void textFailureFileAction(String action) {
-    if (action == "save")
-      System.out.println("Не удалось сохранить дерево в файл!");
-    else if (action == "load")
+  public void textLoadAction(boolean success) {
+    if (success)
+      System.out.println("Дерево загружено из файла!");
+    else
       System.out.println("Не удалось загрузить дерево из файла");
   }
 }

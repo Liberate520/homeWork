@@ -1,7 +1,6 @@
 package src.Main;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import src.Entities.FamilyTree;
@@ -12,11 +11,11 @@ public class Controller<T extends Human> {
 
   private boolean controllerOn = true;
   private FTService<T> fts;
-  private UserInput ui = new UserInput();
-  private UserMenu<T> um = new UserMenu<T>();
+  private UserCommunication<T> uc;
 
   public Controller(FamilyTree<T> familyTree) {
     this.fts = new FTService<T>(familyTree);
+    this.uc = new UserCommunication<T>();
   }
 
   public boolean getControllerStatus() {
@@ -24,50 +23,55 @@ public class Controller<T extends Human> {
   }
 
   public void startControl() {
-    um.showMenu();
-    switch (ui.getString()) {
+    uc.showMenu();
+    switch (uc.getString()) {
       case "1":
-        um.textBeforeShowHumans();
-        um.showHumans(fts.getAllHumans());
-        selectSortingMethod();
+        uc.showHumansFromTree(fts.getAllHumans());
+        selectSortMethod();
         break;
 
       case "2":
-        um.askFullName();
-        String fullName = ui.getString() + " " + ui.getString();
-        Map.Entry<Integer, T> personWithId = fts.searchByName(fullName);
-        if (personWithId.getValue() != null)
-          um.showInfo(personWithId.getValue().getInfo());
-        else
-          um.humanNotFound();
+        Map.Entry<Integer, T> personWithId = fts.searchByName(uc.askFullName());
+        uc.showMoreHumansInfo(personWithId);
         break;
 
       case "3":
-        createHuman();
-        um.showHumans(fts.getAllHumans());
+        uc.showHumansFromTree(fts.getAllHumans());
+
+        String fullName = uc.askFullName();
+        String gender = uc.askGender();
+
+        Map<Integer, T> availableParents = fts.chooseParent("женский");
+        int numberOfParent = uc.chooseParent(availableParents);
+        T mother = availableParents.get(numberOfParent);
+
+        availableParents = fts.chooseParent("мужской");
+        numberOfParent = uc.chooseParent(availableParents);
+        T father = availableParents.get(numberOfParent);
+
+        fts.createHuman(fullName, gender, mother, father);
         break;
 
       case "4":
         try {
           fts.save();
-          um.textActionWithFile("save");
+          uc.saveAction(true);
         } catch (IOException e) {
           e.printStackTrace();
-          um.textFailureFileAction("save");
+          uc.loadAction(false);
         }
         break;
 
       case "5":
-        um.askReplaceTree();
-        if (checkAnswer(ui.getString())) {
+        if (checkAnswer(uc.replaceTree())) {
           fts.createBackup();
           fts.clearTree();
           try {
             fts.load();
-            um.textActionWithFile("load");
+            uc.loadAction(true);
           } catch (Exception e) {
             e.printStackTrace();
-            um.textFailureFileAction("load");
+            uc.loadAction(false);
             fts.restoreFromBackup();
           }
         }
@@ -75,52 +79,42 @@ public class Controller<T extends Human> {
 
       case "q":
         this.controllerOn = false;
-        ui.closeInput();
+        uc.closeInput();
         break;
 
       default:
-        um.textIncorrectInput();
+        uc.incorrectInput();
         break;
     }
   }
 
-  public void createHuman() {
-    um.dialogCreateHuman("askName");
-    String fullName = ui.getString() + " " + ui.getString();
-    um.dialogCreateHuman("askGender");
-    String gender = ui.getString().toLowerCase();
-    if (gender.equals("ж"))
-      gender = "Женский";
-    else
-      gender = "Мужской";
+  // public void createHuman() {
 
-    um.dialogCreateHuman("askParent");
-    Map<Integer, T> availableMothers = fts.chooseParent("женский");
-    T parentMother = availableMothers.get(ui.getInt());
+  // Map<Integer, T> availableMothers = fts.chooseParent("женский");
+  // T parentMother = availableMothers.get(ui.getInt());
 
-    um.dialogCreateHuman("askParent");
-    Map<Integer, T> availableFathers = fts.chooseParent("мужской");
-    T parentFather = availableFathers.get(ui.getInt());
+  // um.dialogCreateHuman("askParent");
+  // Map<Integer, T> availableFathers = fts.chooseParent("мужской");
+  // T parentFather = availableFathers.get(ui.getInt());
 
-    fts.createHuman(fullName, gender, parentMother, parentFather);
-  }
+  // fts.createHuman(fullName, gender, parentMother, parentFather);
+  // }
 
-  private void selectSortingMethod() {
-    um.textAskToSort();
-    switch (ui.getString()) {
+  private void selectSortMethod() {
+    switch (uc.askToSort()) {
       case "1":
-        um.showHumanList(fts.sortByName());
+        uc.showSortedHumanList(fts.sortByName());
         break;
 
       case "2":
-        um.showHumanList(fts.sortByNumberOfChildren());
+        uc.showSortedHumanList(fts.sortByNumberOfChildren());
         break;
 
       case "q":
         break;
 
       default:
-        um.textIncorrectInput();
+        uc.printIncorrectInput();
         break;
     }
   }

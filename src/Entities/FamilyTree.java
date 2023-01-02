@@ -60,10 +60,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
   public Map<Integer, T> chooseParent(String gender) {
     Map<Integer, T> availableParents = getHumansByGender(gender);
-    availableParents.entrySet()
-        .stream()
-        .forEach(person -> System.out.println(person.getKey() + " - " +
-            person.getValue()));
+    // availableParents.entrySet()
+    // .stream()
+    // .forEach(person -> System.out.println(person.getKey() + " - " +
+    // person.getValue()));
 
     return availableParents;
   }
