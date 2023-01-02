@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import src.Service.FTIterator;
+import src.Service.Tree.FTIterator;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 

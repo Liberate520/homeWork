@@ -1,4 +1,4 @@
-package src.Service;
+package src.Service.Tree;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;

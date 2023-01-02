@@ -2,7 +2,7 @@ package src.Main;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
-import src.Service.FTFirstFill;
+import src.Service.Tree.FTFirstFill;
 
 public class Program {
   public static void main(String[] args) {

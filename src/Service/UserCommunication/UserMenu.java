@@ -1,4 +1,4 @@
-package src.Main;
+package src.Service.UserCommunication;
 
 import java.util.List;
 import java.util.Map;

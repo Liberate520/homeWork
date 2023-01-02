@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import src.Entities.Human;
+import src.Service.UserCommunication.UserInput;
+import src.Service.UserCommunication.UserMenu;
 
 public class UserCommunication<T extends Human> {
   private UserInput ui = new UserInput();

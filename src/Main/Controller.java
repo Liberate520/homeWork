@@ -5,7 +5,6 @@ import java.util.Map;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
-import src.Service.FTService;
 
 public class Controller<T extends Human> {
 
@@ -18,10 +17,19 @@ public class Controller<T extends Human> {
     this.uc = new UserCommunication<T>();
   }
 
+  /**
+   * Проверка статуса контроллера, для выбора дальнейшего действия: продолжения
+   * или завершения работы
+   * 
+   * @return boolean статус контроллера о продолжении работы
+   */
   public boolean getControllerStatus() {
     return controllerOn;
   }
 
+  /**
+   * Запуск работы контроллера
+   */
   public void startControl() {
     uc.showMenu();
     switch (uc.getString()) {
@@ -88,18 +96,9 @@ public class Controller<T extends Human> {
     }
   }
 
-  // public void createHuman() {
-
-  // Map<Integer, T> availableMothers = fts.chooseParent("женский");
-  // T parentMother = availableMothers.get(ui.getInt());
-
-  // um.dialogCreateHuman("askParent");
-  // Map<Integer, T> availableFathers = fts.chooseParent("мужской");
-  // T parentFather = availableFathers.get(ui.getInt());
-
-  // fts.createHuman(fullName, gender, parentMother, parentFather);
-  // }
-
+  /**
+   * Выбор метода сортировки списка людей
+   */
   private void selectSortMethod() {
     switch (uc.askToSort()) {
       case "1":
@@ -119,6 +118,12 @@ public class Controller<T extends Human> {
     }
   }
 
+  /**
+   * Проверка ответа пользователя
+   * 
+   * @param answer
+   * @return boolean утвердительный ли ответ пользователя
+   */
   private boolean checkAnswer(String answer) {
     return answer.toLowerCase().equals("y") ? true : false;
   }

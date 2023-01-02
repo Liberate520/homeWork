@@ -1,4 +1,4 @@
-package src.Service;
+package src.Main;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,6 +13,8 @@ import java.util.Map;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
+import src.Service.Tree.HumanComparatorChildCount;
+import src.Service.Tree.SaveLoadable;
 
 public class FTService<T extends Human> implements SaveLoadable {
   private FamilyTree<T> tree;
