@@ -24,20 +24,24 @@ public class FTService<T extends Human> implements SaveLoadable {
     this.tree = familyTree;
   }
 
-  public Map<Integer, T> getAllHumans() {
-    return tree.getAllHumans();
-  }
-
   public Map<Integer, T> chooseParent(String gender) {
     return tree.getParents(gender);
+  }
+
+  public void clearTree() {
+    tree.clearTree();
+  }
+
+  public void createBackup() {
+    backupTree.putAll(getAllHumans());
   }
 
   public void createHuman(String fullName, String gender, T parentMother, T parentFather) {
     tree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
   }
 
-  public void clearTree() {
-    tree.clearTree();
+  public Map<Integer, T> getAllHumans() {
+    return tree.getAllHumans();
   }
 
   public Map.Entry<Integer, T> searchByName(String fullName) {
@@ -54,10 +58,6 @@ public class FTService<T extends Human> implements SaveLoadable {
     List<T> humanList = new ArrayList<T>(tree.getAllHumans().values());
     Collections.sort(humanList, new HumanComparatorChildCount());
     return humanList;
-  }
-
-  public void createBackup() {
-    backupTree.putAll(getAllHumans());
   }
 
   public void restoreFromBackup() {
