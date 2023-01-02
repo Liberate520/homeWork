@@ -31,8 +31,7 @@ public class Controller<T extends Human> {
    * Запуск работы контроллера
    */
   public void startControl() {
-    uc.showMenu();
-    switch (uc.getString()) {
+    switch (uc.launchMenu()) {
       case "1":
         uc.showHumansFromTree(fts.getAllHumans());
         selectSortMethod();

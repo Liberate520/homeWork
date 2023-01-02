@@ -1,5 +1,6 @@
 package src.Service.UserCommunication;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,14 +9,21 @@ import src.Entities.Human;
 public class UserMenu<T extends Human> {
 
   public void showMenu() {
-    System.out.print("\nМеню:\n" +
-        "1 - Показать всех людей\n" +
-        "2 - Найти человека по имени и фамилии\n" +
-        "3 - Добавить нового человека\n" +
-        "4 - Сохранить текущее дерево в файл\n" +
-        "5 - Загрузить дерево из файла\n" +
-        "q - Выход\n" +
-        "Выбрано: ");
+    Map<String, String> menu = new LinkedHashMap<>() {
+      {
+        put("1", "Показать всех людей");
+        put("2", "Найти человека по имени и фамилии");
+        put("3", "Добавить нового человека");
+        put("4", "Сохранить текущее дерево в файл");
+        put("5", "Загрузить дерево из файла");
+        put("q", "Выход");
+      }
+    };
+
+    for (Map.Entry<String, String> menuPoint : menu.entrySet()) {
+      System.out.println(String.format("%s - %s", menuPoint.getKey(), menuPoint.getValue()));
+    }
+    System.out.print("Выбрано: ");
   }
 
   public void textBeforeShowHumans() {
