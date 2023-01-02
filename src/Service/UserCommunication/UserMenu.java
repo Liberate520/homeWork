@@ -8,7 +8,7 @@ import src.Entities.Human;
 
 public class UserMenu<T extends Human> {
 
-  public void showMenu() {
+  public void mainMenu() {
     Map<String, String> menu = new LinkedHashMap<>() {
       {
         put("1", "Показать всех людей");
@@ -20,6 +20,23 @@ public class UserMenu<T extends Human> {
       }
     };
 
+    showMenu(menu);
+  }
+
+  public void sortMenu() {
+    Map<String, String> menu = new LinkedHashMap<>() {
+      {
+        put("1", "Сортировка по имени");
+        put("2", "Сортировка по количеству детей");
+        put("q", "Не применять сортировку");
+      }
+    };
+
+    showMenu(menu);
+  }
+
+  private void showMenu(Map<String, String> menu) {
+    System.out.println("");
     for (Map.Entry<String, String> menuPoint : menu.entrySet()) {
       System.out.println(String.format("%s - %s", menuPoint.getKey(), menuPoint.getValue()));
     }
@@ -28,13 +45,6 @@ public class UserMenu<T extends Human> {
 
   public void textBeforeShowHumans() {
     System.out.println("\nЛюди из семейного дерева:");
-  }
-
-  public void textAskToSort() {
-    System.out.println("Применить сортировку:\n" +
-        "1 - Сортировка по имени\n" +
-        "2 - Сортировка по количеству детей\n" +
-        "q - Не применять сортировку");
   }
 
   public void textIncorrectInput() {

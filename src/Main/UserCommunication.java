@@ -12,7 +12,7 @@ public class UserCommunication<T extends Human> {
   private UserMenu<T> um = new UserMenu<T>();
 
   public String launchMenu() {
-    um.showMenu();
+    um.mainMenu();
     return ui.getString();
   }
 
@@ -26,7 +26,7 @@ public class UserCommunication<T extends Human> {
   }
 
   public String askToSort() {
-    um.textAskToSort();
+    um.sortMenu();
     return ui.getString();
   }
 
