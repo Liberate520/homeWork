@@ -33,6 +33,21 @@ public class Human implements Serializable, Comparable<Human> {
       mother.children.add(this);
   }
 
+  /**
+   * @return строку со списком детей или с сообщением об их отсутствии
+   *         у объекта Human
+   */
+  public String getChildren() {
+    if (children.isEmpty())
+      return fullName + " не имеет детей";
+
+    return this.children.toString();
+  }
+
+  public int getChildrensNumber() {
+    return children.size();
+  }
+
   public String getFullName() {
     return fullName;
   }
@@ -41,10 +56,11 @@ public class Human implements Serializable, Comparable<Human> {
     return gender;
   }
 
-  public int getNumberOfChildren() {
-    return children.size();
-  }
-
+  /**
+   * Собирает и возвращает строку с полной информацией об объекте Human
+   * 
+   * @return String
+   */
   public String getInfo() {
     String info = String.format("Имя: %s, пол: %s.\n" +
         "%s родители:\n" +
@@ -59,21 +75,14 @@ public class Human implements Serializable, Comparable<Human> {
     return String.format(info + "\n%s дети: %s", appeal, children);
   }
 
-  public String getChildren() {
-    if (children.isEmpty())
-      return fullName + " не имеет детей";
-
-    return this.children.toString();
+  @Override
+  public int compareTo(Human o) {
+    return fullName.compareTo(o.fullName);
   }
 
   @Override
   public String toString() {
     return String.format("Имя: %s, пол: %s", fullName, gender);
-  }
-
-  @Override
-  public int compareTo(Human o) {
-    return fullName.compareTo(o.fullName);
   }
 
 }

@@ -24,16 +24,11 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     this.humans.putIfAbsent(id++, human);
   }
 
-  public Map.Entry<Integer, T> searchByName(String fullName) {
-    for (Map.Entry<Integer, T> person : humans.entrySet()) {
-      if (person.getValue()
-          .getFullName()
-          .toLowerCase()
-          .equals(fullName.toLowerCase())) {
-        return person;
-      }
-    }
-    return null;
+  /**
+   * Очищает дерево
+   */
+  public void clearTree() {
+    this.humans.clear();
   }
 
   public Map<Integer, T> getAllHumans() {
@@ -58,18 +53,33 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     return humansWithGender;
   }
 
-  public Map<Integer, T> chooseParent(String gender) {
+  /**
+   * @param gender
+   * @return map список возможных родителей по определенному полу
+   */
+  public Map<Integer, T> getParents(String gender) {
     Map<Integer, T> availableParents = getHumansByGender(gender);
-    // availableParents.entrySet()
-    // .stream()
-    // .forEach(person -> System.out.println(person.getKey() + " - " +
-    // person.getValue()));
 
     return availableParents;
   }
 
-  public void clearTree() {
-    this.humans.clear();
+  /**
+   * Производит поиск в дереве человека по полному имени
+   * 
+   * @param fullName
+   * @return найденный человек (экземпляр класса Human) или null, если результата
+   *         нет
+   */
+  public Map.Entry<Integer, T> searchByName(String fullName) {
+    for (Map.Entry<Integer, T> person : humans.entrySet()) {
+      if (person.getValue()
+          .getFullName()
+          .toLowerCase()
+          .equals(fullName.toLowerCase())) {
+        return person;
+      }
+    }
+    return null;
   }
 
   @Override
