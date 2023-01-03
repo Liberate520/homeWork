@@ -1,10 +1,14 @@
 package FT;
 
+import FT.comparators.ComparatorByAge;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable{      
+public class Tree implements Serializable, Iterable<Human> {      // сериализируемый, итерируемый
 
     private List<Human> members;
 
@@ -15,17 +19,16 @@ public class Tree implements Serializable{
         this.writable = new FileHandler();
     }
 
-   @Override
-   public String toString() {
-       StringBuilder familyMembers = new StringBuilder();
-       System.out.printf("Всего людей в дереве - %d\n", members.size());
-       int count = 0;
-       for (Human member : this.members) {
-           count++;
-           familyMembers.append("Член семьи ").append(count).append(" - ").append(member.getName()).append("\n");
-       }
-       return familyMembers.toString();
-   }
+    @Override
+    public String toString() {
+        StringBuilder familyMembers = new StringBuilder();
+        System.out.printf("Всего людей в дереве - %d\n", members.size());
+        int count = 0;
+        for (Human member: this) {
+            familyMembers.append("Член семьи ").append(++count).append(" - ").append(member.getName()).append(", ").append("возраст ").append(member.getAge()) .append("\n");
+        }
+        return familyMembers.toString();
+    }
 
     public void addNewMember(Human member) {
         this.members.add(member); 
@@ -33,9 +36,9 @@ public class Tree implements Serializable{
             member.getFather().getChildren().add(member); 
         }
         if (!(member.getMother() == null)) {
-            member.getMother().getChildren().add(member); 
+            member.getMother().getChildren().add(member);  
         }
-        if (member.getChildren().size() > 0) {  
+        if (member.getChildren().size() > 0) {               
             for (Human child : member.getChildren()) {
                 if (member.getGender().equals("M")) {
                     child.setFather(member);
@@ -63,17 +66,15 @@ public class Tree implements Serializable{
 
 
     public void saveFamilyTree() {
-                
-        writable.save(this);
-
+                writable.save(this);
     }
 
 
     public Tree readFamilyTree() {
-
         if (writable != null) {
             if (writable instanceof FileHandler) {
                 if (writable.read() == null) {
+                    System.out.println("Tree в файле нет! Создаём новое Tree.");
                     return new Tree();
                 } else {
                     return (Tree) writable.read();
@@ -86,5 +87,24 @@ public class Tree implements Serializable{
         return null;
     }
 
-}
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(members);
+    }
 
+
+    public List<Human> getMembers() {
+        return members;
+    }
+
+    public void sortByName(){
+        Collections.sort(this.getMembers());
+    }
+
+
+    public void sortByAge(){
+        Collections.sort(this.getMembers(), new ComparatorByAge());
+    }
+
+
+}

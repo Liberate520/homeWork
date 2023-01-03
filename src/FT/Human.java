@@ -1,34 +1,34 @@
 package FT;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {     
+public class Human implements Serializable, Comparable<Human> {   
     private String name;    
     private String gender;  
     private Integer age;    
     private Human father;   
     private Human mother;   
-    private List<Human> children;  
+    private List<Human> children;   
 
     public Human(String name, String gender, Integer age, Human father, Human mother) {
-        this.name = name;       
-        this.gender = gender;   
-        this.age = age;         
+        this.name = name;      
+        this.gender = gender;
+        this.age = age;        
         this.father = father;   
-        this.mother = mother;   
+        this.mother = mother;  
         this.children = new ArrayList<>();  
     }
 
     public Human(String name, String gender, int age) {
-        this(name, gender, age, null, null);     
+        this(name, gender, age, null, null);  
     }
 
     public Human() {
         this(null, null, null, null, null);
     }
+
 
     public String getName() {
         return name;
@@ -90,7 +90,7 @@ public class Human implements Serializable {
         if (!(mother == null)) {
             sbHum.append("Мать ").append(mother.getName()).append("\n");
         }
-        if (children.size() > 0) {     
+        if (children.size() > 0) {      // изменено. теперь без this
             for (Human child : this.children) {
                 if (child.getGender().equals("М")) {
                     sbHum.append("Сын ").append(child.getName());
@@ -132,5 +132,10 @@ public class Human implements Serializable {
             }
         } else sistOrBroth.append("У ").append(this.getName()).append(" неизвестны родители.");
         return sistOrBroth.toString();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }
