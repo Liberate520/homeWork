@@ -26,11 +26,11 @@ public class FamilyTree<T extends LiveBeing<T>> implements Serializable, IFamily
     public void addLiveBeing(T liveBeing, T father, T mother) {
         if (father != null) {
             liveBeing.setFather(father);
-            father.getChildren().add(liveBeing);
+            father.addChild(liveBeing);
         }
         if (mother != null) {
             liveBeing.setMother(mother);
-            mother.getChildren().add(liveBeing);
+            mother.addChild(liveBeing);
         }
         liveBeings.add(liveBeing);
     }

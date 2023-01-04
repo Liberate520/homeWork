@@ -53,6 +53,10 @@ public abstract class LiveBeing<T extends LiveBeing<T>> implements Serializable,
         return this.children;
     }
 
+    public void addChild(T child) {
+        this.getChildren().add(child);
+    }
+
     @Override
     public String toString() {
         if (this.father == null && this.mother == null && this.children == null)
