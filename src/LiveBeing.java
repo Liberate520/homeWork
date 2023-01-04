@@ -13,15 +13,6 @@ public abstract class LiveBeing<T extends LiveBeing<T>> implements Serializable,
     private T mother;
     private List<T> children;
 
-    public LiveBeing(String name, int date, String sex) {
-        this.name = name;
-        this.date = date;
-        this.sex = sex;
-        this.father = null;
-        this.mother = null;
-        this.children = new ArrayList<>();
-    }
-
     public LiveBeing(String name) {
         this.name = name;
         this.date = generateNowDate();
@@ -29,6 +20,13 @@ public abstract class LiveBeing<T extends LiveBeing<T>> implements Serializable,
         this.father = null;
         this.mother = null;
         this.children = new ArrayList<>();
+    }
+
+    public LiveBeing(String name, int date, String sex) {
+        this(name);
+        this.name = name;
+        this.date = date;
+        this.sex = sex;
     }
 
     public String getName() {
