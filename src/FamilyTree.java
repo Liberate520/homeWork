@@ -4,44 +4,39 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends Mammal> implements Serializable, Iterable<T> {
 
-    private List<Human> humanList;
+    private List<T> memberList;
     private Writable writer;
 
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
+    public FamilyTree(List<T> memberList) {this.memberList = memberList;}
+
+    public FamilyTree() {this(new ArrayList<T>());}
+
+    public List<T> getMemberList() {
+        return memberList;
     }
 
-    public FamilyTree() {
-        this(new ArrayList<>());
-    }
-
-    public List<Human> getHumanList() {
-        return humanList;
-    }
-
-    public void setHumanList(List<Human> humanList) {
-        this.humanList = humanList;
+    public void setMemberList(List<T> memberList) {
+        this.memberList = memberList;
     }
 
     @Override
     public String toString() {
         String s = "";
-        for (Human human: humanList) {
-            s += human + "\n";
+        for (T member: memberList) {
+            s += member + "\n";
         }
         return s;
     }
 
-    public void addHuman(Human human){
-        humanList.add(human);
+    public void addMember(T member) {memberList.add(member);
     }
 
-    public Human getHumanByName(String name){
-        for (Human human: humanList){
-            if (human.getName().equals(name)){
-                return human;
+    public T getMemberByName(String name){
+        for (T member: memberList){
+            if (member.getName().equals(name)){
+                return member;
             }
         }
         return null;
@@ -60,20 +55,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         if (writer != null) {
             FamilyTree loadTree = writer.load();
             if (loadTree != null)
-                this.setHumanList(loadTree.getHumanList());
+                this.setMemberList(loadTree.getMemberList());
         }
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<T> iterator() {
+        return new FamilyIterator(memberList);
     }
 
     public void sortByName(){
-        Collections.sort(getHumanList());
+        Collections.sort(getMemberList());
     }
 
     public void sortByChildrenCountDesc(){
-        Collections.sort(getHumanList(), new HumanComparatorByChildrenCount());
+        Collections.sort(getMemberList(), new ComparatorByChildrenCount());
     }
 }

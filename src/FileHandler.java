@@ -68,7 +68,8 @@ public class FileHandler implements Writable, Serializable {
         while (str.indexOf("\n", itemIndex) > 0) {
             String line = str.substring(itemIndex, str.indexOf("\n", itemIndex)) + ';';
 
-            txt = txt + "name: " + findMatch(line, "name") + ";";
+            txt = txt + "type: " + findMatch(line, "type") + ";";
+            txt = txt + " name: " + findMatch(line, "name") + ";";
             txt = txt + " gender: " + findMatch(line, "gender") + ";";
             if (line.contains("father"))
                 txt = txt + " father: " + findMatch(line, "father") + ";";
@@ -84,18 +85,23 @@ public class FileHandler implements Writable, Serializable {
 
     public FamilyTree fromText(String str) {
         int itemIndex = 0;
-        String name = "", gender = "", fathername = "", mothername = "";
+        String type = "", name = "", gender = "", fathername = "", mothername = "";
         FamilyTree loadTree = new FamilyTree();
+        Mammal member;
 
         while (str.indexOf("\n", itemIndex) > 0) {
             String line = str.substring(itemIndex, str.indexOf("\n", itemIndex)) + ';';
 
+            type = findMatch(line, "type");
             name = findMatch(line, "name");
             gender = findMatch(line, "gender");
             fathername = findMatch(line, "father");
             mothername = findMatch(line, "mother");
-            Human human = new Human(name, gender, loadTree.getHumanByName(fathername), loadTree.getHumanByName(mothername));
-            loadTree.addHuman(human);
+            if (type.equals("human"))
+                member = new Human(name, gender, loadTree.getMemberByName(fathername), loadTree.getMemberByName(mothername));
+            else
+                member = new Cat(name, gender, loadTree.getMemberByName(fathername), loadTree.getMemberByName(mothername));
+            loadTree.addMember(member);
 
             itemIndex = str.indexOf("\n", itemIndex) + 1;
         }

@@ -1,7 +1,0 @@
-name: Vitaliy; gender: male;
-name: Natalia; gender: female;
-name: Lidia; gender: female; father: Vitaliy; mother: Natalia;
-name: Ilya; gender: male;
-name: Roman; gender: male; father: Ilya; mother: Lidia;
-name: Victor; gender: male; father: Ilya; mother: Lidia;
-name: Ivan; gender: male; father: Ilya; mother: Lidia;
