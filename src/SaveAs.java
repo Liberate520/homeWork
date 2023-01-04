@@ -28,6 +28,6 @@ public class SaveAs implements Serializable {
         Tree treeRestored = (Tree) objectInputStream.readObject();
         objectInputStream.close();
 
-        System.out.println("After Restored From Byte: " + "\n" + treeRestored.getTree());
+        System.out.println("После восстановления: " + "\n" + treeRestored.getTree());
     }
 }
