@@ -37,7 +37,7 @@ public class FamilyTree<T extends LiveBeing<T>> implements Serializable, IFamily
 
     public T findByName(String name) {
         for (T liveBeing : liveBeings) {
-            if (liveBeing.getName() == name)
+            if (liveBeing.getName().equals(name))
                 return liveBeing;
         }
         return null;
@@ -46,7 +46,7 @@ public class FamilyTree<T extends LiveBeing<T>> implements Serializable, IFamily
     public List<T> findAllByName(String name) {
         List<T> liveBeings = new ArrayList<>();
         for (T liveBeing : this.liveBeings) {
-            if (liveBeing.getName() == name)
+            if (liveBeing.getName().equals(name))
                 liveBeings.add(liveBeing);
         }
         return liveBeings;
