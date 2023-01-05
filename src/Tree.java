@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Trees<T extends Human> implements Iterable<T> {
+public class Tree<T extends Human> implements Iterable<T> {
     private List<T> humanlist;
 
-    public Trees(List<T> humanlist) {
+    public Tree(List<T> humanlist) {
         this.humanlist = humanlist;
     }
 
-    public Trees() {
+    public Tree() {
         this(new ArrayList<>());
     }
 
@@ -34,14 +34,14 @@ public class Trees<T extends Human> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new IterableHuman<T>(humanlist);
+        return new HumanIterator<T>(humanlist);
     }
 
-    public void SortByName() {
+    public void sortByName() {
         Collections.sort(humanlist);
     }
 
-    public void SortByBirth() {
+    public void sortByBirth() {
         Collections.sort(humanlist, new HumanComparatorByBirth<T>());
     }
 

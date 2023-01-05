@@ -2,32 +2,36 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class Main implements Serializable {
-    public static void main(String[] args) throws IOException {
-        Trees<Human> familyTrees = new Trees<Human>();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Tree<Human> familyTree = new Tree<Human>();
         Human human1 = new Human("Igor", "Petrov", 1, 60, "male");
         Human human2 = new Human("Olga", "Petrova", 2, 59, "female");
         Human human3 = new Human("Geo", "Petrov", 20, 90, "male");
         Human human4 = new Human("Petr", "Petrov", 25, 2900, "male");
 
-        familyTrees.add_human(human1);
-        familyTrees.add_human(human2);
-        familyTrees.add_human(human3);
-        familyTrees.add_human(human4);
+        familyTree.add_human(human1);
+        familyTree.add_human(human2);
+        familyTree.add_human(human3);
+        familyTree.add_human(human4);
 
-        System.out.println(familyTrees);
+        System.out.println(familyTree);
         FileHandler fileHandler = new FileHandler();
-        fileHandler.save(familyTrees.getHumanlist());
-        fileHandler.read(familyTrees.getHumanlist());
-        System.out.println(familyTrees);
+        fileHandler.save(familyTree.getHumanlist());
+        Tree<Human> tree = new Tree<Human>();
+        tree = fileHandler.read();
+        System.out.println(tree);
+        
+        
+        
         System.out.println();
 
-        familyTrees.SortByName();
-        for (Human human : familyTrees) {
+        tree.sortByName();
+        for (Human human : tree) {
             System.out.println(human);
         }
         System.out.println();
-        familyTrees.SortByBirth();
-        for (Human human : familyTrees) {
+        tree.sortByBirth();
+        for (Human human : tree) {
             System.out.println(human);
         }
     }

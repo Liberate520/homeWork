@@ -1,11 +1,11 @@
 import java.util.Iterator;
 import java.util.List;
 
-public class IterableHuman<T> implements Iterator<T> {
+public class HumanIterator<T> implements Iterator<T> {
     private int index;
     private List<T> humanlist;
 
-    public IterableHuman(List<T> humanlist) {
+    public HumanIterator(List<T> humanlist) {
         this.humanlist = humanlist;
     }
 

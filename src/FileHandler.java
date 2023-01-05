@@ -10,26 +10,26 @@ public class FileHandler implements Saveable, Readable {
     @Override
     public void save(List<Human> humalis) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(".//homeWorkOOP.//src.//familytrees.out"));
-        objectOutputStream.writeObject(humalis);
+                new FileOutputStream(".//homeWorkOOP.//src.//familytree.out"));
+        for (Human human : humalis) {
+            objectOutputStream.writeObject(human);
+        }
         objectOutputStream.close();
     }
 
-    /**
-     * @param humalis
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
     @Override
-    public void read() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Tree<Human> read() throws FileNotFoundException, IOException, ClassNotFoundException {
+        Tree<Human> tree = new Tree<>();
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(".//homeWorkOOP.//src.//familytrees.out"));
-        List<Human>  humalis = (List<Human>) objectInputStream.readObject();
+                new FileInputStream(".//homeWorkOOP.//src.//familytree.out"));
+        
+        //Каким то образом нужно определить количество хьюманов в файле чтобы можно было добаить циклом в дерево
+        tree.add_human((Human) objectInputStream.readObject());
+        tree.add_human((Human) objectInputStream.readObject());
+        tree.add_human((Human) objectInputStream.readObject());
+
         objectInputStream.close();
-
+        return tree;
     }
 
-    public void read(List<Human> humanlist) {
-    }
 }
