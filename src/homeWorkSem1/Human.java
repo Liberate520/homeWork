@@ -1,31 +1,28 @@
-package hwSeminar1;
+package homeWorkSem1;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human {
+public class Human implements Comparable<Human> {
     
     private String name;
     private int age;
-    private boolean gender;
-    private Human father;
+    public Human father;
     private Human mother;
-    private List<Human> children = new ArrayList<>();
+    public List<Human> children = new ArrayList<>();
+    private Gender gender;
+    private int id;
     
     /**Создание нового объекта */
-    public Human(String name, int age, boolean gender, Human father, Human mother) {
+    public Human(String name, int age, Gender gender, Human father, Human mother, int id) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.father = father;
         this.mother = mother;
-        if (father != null) {
-            father.children.add(this);   
-        }
-        if (mother != null)  {
-            mother.children.add(this);
-        }    
+        this.id = ++id;
+          
     }
 
     /**Получение инф-ии о братьях/сестрах */
@@ -61,8 +58,7 @@ public class Human {
     /**Переопределение метода toString */
     @Override
     public String toString() {
-        String temp = gender ? "male" : "female";
-        return "Name: " + name + ", Age: " + age + ", Gender: " + temp + "\n";
+        return "id: " + id + ", Name: " + name + ", Age: " + age + ", Gender: " + gender;
     }
 
     /**Узнать имя */
@@ -75,8 +71,13 @@ public class Human {
         return age;
     }
 
+    /** Узнать ID */
+    public int getId() {
+        return id;
+    }
+
     /**Узнать пол */
-    public boolean isGender() {
+    public Gender isGender() {
         return gender;
     }
 
@@ -106,7 +107,7 @@ public class Human {
     }
 
     /**Задать пол */
-    public void setGender(boolean gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -123,5 +124,11 @@ public class Human {
     /**Задать список детей для human */
     public void setChildren(List<Human> children) {
         this.children = children;
+    }
+
+    /**сортировка по имени */
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }

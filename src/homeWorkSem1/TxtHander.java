@@ -15,8 +15,7 @@ public class TxtHander implements Writeble {
             fw.write(serializable.toString());
         }catch (IOException e) {
             System.out.println(e.getMessage());
-        }
-        
+        }    
     }
 
     /**метод read из файла с получением строки данных*/
@@ -30,7 +29,6 @@ public class TxtHander implements Writeble {
         }
         reader.close();
         return treeArray;
-
     }
 
     /**метод read из файла с получением списка FamilyTree(human)*/
@@ -46,11 +44,10 @@ public class TxtHander implements Writeble {
         reader.close();
         result = treeArray.replace(":", "").replace("[", "")
         .replace("]", "").replace(",", "").split(" ");
-        boolean gender;
+
         FamilyTree tree = new FamilyTree();
-        for (int index = 1; index < result.length-2;) {
-        //не придумала как обработать male/female из файла, чтобы вставить boolean в new Human();   
-            Human human = new Human(result[index], Integer.parseInt(result[index+2]), true, null, null);
+        for (int index = 1; index < result.length-2;) {   
+            Human human = new Human(result[index], Integer.parseInt(result[index+2]), Gender.valueOf(null, line), null, null, Integer.parseInt(result[index+5]));
             tree.add(human);
             index +=6;    
         }
