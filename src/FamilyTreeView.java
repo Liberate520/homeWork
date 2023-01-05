@@ -13,8 +13,7 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         while (true) {
             int value = 0;
             String line = null;
-            // Charset charset = Charset.forName("UTF-8"); // TODO
-            Scanner iScanner = new Scanner(System.in, "Cp866"); // TODO
+            Scanner iScanner = new Scanner(System.in, "Cp866");
             System.out.println(
                     "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - Найти объект по имени и показать первое найденное\n5 - Найти объекты по имени и показать все найденные\n0 - Для выхода.");
             try {
