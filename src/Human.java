@@ -1,7 +1,9 @@
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
 
     private String name;
     private String surname;
@@ -9,11 +11,11 @@ public class Human implements Serializable {
     private int yearDead;
     private Human father;
     private Human mother;
-    private List<Human> children;
+    private ArrayList<Human> children;
     private String sex;
 
     public Human(String name, String surname, int yearBorn, int yearDead, Human father, Human mother,
-            List<Human> children, String sex) {
+            ArrayList<Human> children, String sex) {
         this.name = name;
         this.surname = surname;
         this.yearBorn = yearBorn;
@@ -36,6 +38,24 @@ public class Human implements Serializable {
 
     public Human getMother() {
         return mother;
+    }
+
+    public void addChild(Human ch) {
+        children.add(ch);
+
+    }
+
+    public List<Human> getChild() {
+        return children;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return Integer.compare(this.yearBorn, o.yearBorn);
     }
 
 }

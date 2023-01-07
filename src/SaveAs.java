@@ -3,9 +3,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
-public class SaveAs implements Serializable {
+public class SaveAs {
     private Tree tree;
 
     public SaveAs(Tree tree) {
@@ -21,7 +20,7 @@ public class SaveAs implements Serializable {
 
     }
 
-    public void read() throws ClassNotFoundException, IOException {
+    public Object read() throws ClassNotFoundException, IOException {
         // Востановление из файла с помощью класса ObjectInputStream
 
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("tree.out"));
@@ -29,5 +28,6 @@ public class SaveAs implements Serializable {
         objectInputStream.close();
 
         System.out.println("После восстановления: " + "\n" + treeRestored.getTree());
+        return treeRestored;
     }
 }

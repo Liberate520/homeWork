@@ -1,9 +1,11 @@
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree implements Iterable, Serializable {
     private List<Human> tree;
 
     public Tree(List<Human> humans) {
@@ -34,6 +36,19 @@ public class Tree implements Serializable {
             }
         }
         return chil;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new TreeIterator(tree);
+    }
+
+    public void sortBySurname() {
+        Collections.sort(tree, new TreeComparator());
+    }
+
+    public void sortByDate() {
+        Collections.sort(tree);
     }
 
 }
