@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import homeWorkSem1.Service.Gender;
+
 
 public class Program {
     public static void main(String[] args) {

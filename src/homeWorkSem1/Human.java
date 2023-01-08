@@ -3,6 +3,8 @@ package homeWorkSem1;
 import java.util.ArrayList;
 import java.util.List;
 
+import homeWorkSem1.Service.Gender;
+
 
 public class Human implements Comparable<Human> {
     
@@ -21,7 +23,7 @@ public class Human implements Comparable<Human> {
         this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.id = ++id;
+        this.id = id;
           
     }
 
@@ -46,12 +48,29 @@ public class Human implements Comparable<Human> {
 
     /**Получение инф-ии о братьях/сестрах */
     public List<Human> getGrands() {
-       List<Human> grands = new ArrayList<>();
-       grands.add(father.father);
-       grands.add(father.mother);
-       grands.add(mother.mother);
-       grands.add(mother.father);
-       return grands;
+        List<Human> grands = new ArrayList<>();
+        try {
+            grands.add(father.father);
+            grands.add(father.mother);
+            grands.add(mother.mother);
+            grands.add(mother.father);
+            if (father.father == null) {
+                System.out.println("дедушки по папиной линии нет");
+            }
+            else if (father.mother == null) {
+                System.out.println("бабушки по папиной линии нет");
+            }
+            else if (mother.father == null) {
+                System.out.println("дедушки по маминой линии нет");
+            }
+            else if (mother.mother == null) {
+                System.out.println("бабушки по маминой линии нет");
+            }
+        }
+        catch (Exception e) {
+        System.out.println("ошибка");
+        }
+        return grands;
     }
 
     

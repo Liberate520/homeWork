@@ -1,4 +1,4 @@
-package homeWorkSem1;
+package homeWorkSem1.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,7 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class SerializeHandler implements Serializable, Writeble {
+import homeWorkSem1.FamilyTree;
+import homeWorkSem1.Human;
+
+public class SerializeHandler<T extends FamilyTree<Human> > implements Serializable, Writeble<T> {
 
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -25,29 +28,26 @@ public class SerializeHandler implements Serializable, Writeble {
 
     //* Востановление из файла с помощью класса ObjectInputStream implements Writeble*/
     @Override
-    public FamilyTree read() throws IOException, ClassNotFoundException {
+    public T read() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("person.out"));
-        Human humanRestored = (Human) objectInputStream.readObject();
-        FamilyTree tree = new FamilyTree();
-        tree.add(humanRestored);
+        T humanRestored = (T) objectInputStream.readObject();//что-то не так
         objectInputStream.close();
-        return tree;
+        return humanRestored;
     }
 
 
     /**Сериализация с помощью класса ByteArrayOutputStreamv*/
-    public void saveSerializeByte(Human human) throws IOException {
-        
+    public void saveSerializeByte(T t) throws IOException {
         ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream2.writeObject(human);
+        objectOutputStream2.writeObject(t);
         objectOutputStream2.flush();
     }
 
 
     /**Восстановление с помощью класса ByteArrayInputStream */
-    public Human readSerializeByte() throws IOException, ClassNotFoundException {
+    public T readSerializeByte() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream2 = new ObjectInputStream(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
-        Human humanRestoredFromByte = (Human) objectInputStream2.readObject();
+        T humanRestoredFromByte = (T) objectInputStream2.readObject();//что-то не так
         objectInputStream2.close();
         return humanRestoredFromByte;
     }

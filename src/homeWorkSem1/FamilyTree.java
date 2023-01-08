@@ -1,25 +1,23 @@
 package homeWorkSem1;
-import homeWorkSem1.Service.FamilyTreeIterator;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+import homeWorkSem1.Service.FamilyTreeIterator;
+import homeWorkSem1.Service.Writeble;
+
+
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     
-    private List<Human> humans;
+    private List<T> humans;
     private Human father;
     private Human mother;
-    private static int id;
-    //private List<Human> children = new ArrayList<>();
-
-    private Writeble fileHandler; //работа с файлами
  
     
     /**Инициализация humans */
-    public FamilyTree(List<Human> humans) {
+    public FamilyTree(List<T> humans) {
         this.humans = humans;
     }
 
@@ -29,7 +27,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     /**Добавление нового Human */
-    public void add(Human human) {
+    public void add(T human) {
         humans.add(human);
         if (father != null) {
             father.children.add(human);  
@@ -39,27 +37,16 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         } 
     }
 
-    /**Создать Human с id и добавить в список humans */
-    public void createHuman(String name, int age, Gender gender, Human father, Human mother) {
-        Human human = new Human(name, age, gender, father, mother, id++);
-        humans.add(human);
-        if (father != null) {
-            father.children.add(human);  
-        }
-        if (mother != null)  {
-            mother.children.add(human);
-        } 
-    }
 
     //*возвращает список humans */
-    public List<Human> getHumans() {
+    public List<T> getHumans() {
         return humans;
     }
 
     /**Поиск по имени */
-    public List<Human> getHumanbyName(String findByName) {
-        List<Human> list = new ArrayList<>();
-        for (Human human : humans ) {
+    public List<T> getHumanbyName(String findByName) {
+        List<T> list = new ArrayList<>();
+        for (T human : humans ) {
             if (findByName.equals(human.getName())) {
                 list.add(human);
             }
@@ -73,14 +60,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return "\n" + humans + " ";
     }
 
-    /** сохранение */
-    public void save(Serializable serializable) throws IOException {
-        fileHandler.save(serializable);
-    }
-
+    
     //* создаем объект кдасса итератор */
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIterator(humans);
+    public Iterator<T> iterator() {
+        return new FamilyTreeIterator<>(humans);
     }
 }

@@ -1,9 +1,11 @@
-package homeWorkSem1;
+package homeWorkSem1.Service;
 import java.io.IOException;
 import java.io.Serializable;
 
-public interface Writeble {
+
+
+public interface Writeble<T> {
     void save(Serializable serializable) throws IOException;
-    FamilyTree read() throws IOException, ClassNotFoundException;
+    T read() throws IOException, ClassNotFoundException;
 
 }

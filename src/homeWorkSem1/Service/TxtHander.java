@@ -1,4 +1,4 @@
-package homeWorkSem1;
+package homeWorkSem1.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.io.Serializable;
 
 
-public class TxtHander implements Writeble {
+import homeWorkSem1.FamilyTree;
+import homeWorkSem1.Human;
+
+
+public class TxtHander implements Writeble<FamilyTree<Human>> {
 
     @Override
     public void save(Serializable serializable) {
@@ -32,7 +36,7 @@ public class TxtHander implements Writeble {
     }
 
     /**метод read из файла с получением списка FamilyTree(human)*/
-    public FamilyTree read() throws IOException {
+    public FamilyTree<Human> read() throws IOException {
         String treeArray = "";
         String [] result;
         BufferedReader reader = new BufferedReader(new FileReader("FamilyTree.txt"));
@@ -45,7 +49,7 @@ public class TxtHander implements Writeble {
         result = treeArray.replace(":", "").replace("[", "")
         .replace("]", "").replace(",", "").split(" ");
 
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
         for (int index = 1; index < result.length-2;) {   
             Human human = new Human(result[index], Integer.parseInt(result[index+2]), Gender.valueOf(null, line), null, null, Integer.parseInt(result[index+5]));
             tree.add(human);
