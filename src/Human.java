@@ -59,33 +59,20 @@ public class Human {
 
     public void setParentFather(Human parentFather) {
         if (this.parentFather != null) {
-            List<Human> childParentFather = new ArrayList<>(this.parentFather.getChildren());
-            childParentFather.remove(this);
-            this.parentFather.setChildren(childParentFather);
+            removeChild(this.parentFather, this);
         }
         
         this.parentFather = parentFather;
         if (this.generation == 0) {
             this.generation = parentFather.getGeneration() + 1;
         }
-        
-        List<Human> childNewFather = new ArrayList<>();
 
-        if (parentFather.getChildren() != null) {
-            for (Human human : parentFather.getChildren()) {
-                childNewFather.add(human);
-            }
-        }
-
-        childNewFather.add(this);
-        parentFather.setChildren(childNewFather);
+        addChild(parentFather, this);
     }
 
     public void setParentMother(Human parentMother) {
         if (this.parentMother != null) {
-            List<Human> childParentMother = new ArrayList<>(this.parentMother.getChildren());
-            childParentMother.remove(this);
-            this.parentMother.setChildren(childParentMother);
+            removeChild(this.parentMother, this);
         }
         
         this.parentMother = parentMother;
@@ -93,16 +80,26 @@ public class Human {
             this.generation = parentFather.getGeneration() + 1;
         }
 
-        List<Human> childNewMother = new ArrayList<>();
+        addChild(parentMother, this);
+    }
 
-        if (parentMother.getChildren() != null) {
-            for (Human human : parentMother.getChildren()) {
-                childNewMother.add(human);
+    public void removeChild(Human human, Human child) {
+        List<Human> childParentMother = new ArrayList<>(human.getChildren());
+        childParentMother.remove(child);
+        human.setChildren(childParentMother);
+    }
+
+    public void addChild(Human human, Human child) {
+        List<Human> childNewFather = new ArrayList<>();
+
+        if (human.getChildren() != null) {
+            for (Human chil : human.getChildren()) {
+                childNewFather.add(chil);
             }
         }
 
-        childNewMother.add(this);
-        parentMother.setChildren(childNewMother);
+        childNewFather.add(child);
+        human.setChildren(childNewFather);
     }
 
     public void setGeneration(int generation) {
