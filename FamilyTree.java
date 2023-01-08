@@ -1,10 +1,12 @@
-package Seminars_OOP.HW_2;
+package Seminars_OOP.HW_3;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable, Iterable<Human>{
     public List<Human> humanList;
     private Writable writable;
 
@@ -44,18 +46,40 @@ public class FamilyTree implements Serializable{
 
     public FamilyTree readFamilyTree() {
         if (writable != null) {
-            if (writable instanceof FileHandler) {
+            // if (writable instanceof FileHandler) {
                 if (writable.read() == null) {
                     return new FamilyTree();
-                } else {
+                } else 
+                {
                     return (FamilyTree) writable.read();
                 }
-            }
-        } else {
-            System.out.println("Ошибка загрузки файла");
-            return null;
+            // }
+        // } else {
+        //     System.out.println("Ошибка загрузки файла");
+        //     return null;
         }
         return null;
     }
 
+    public Human getHumanByName_1(String name) {
+        for (Human human : humanList) {
+            if (human.getName().equals(name)) {
+                return human;
+            }
+        }
+        return null;
+    }
+
+    public void sortByName() {
+        Collections.sort(humanList);
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(humanList);
+    }
+
+    
 }
+
+

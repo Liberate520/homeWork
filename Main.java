@@ -1,4 +1,4 @@
-package Seminars_OOP.HW_2;
+package Seminars_OOP.HW_3;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,8 +16,20 @@ public class Main {
         familyTree.addHuman(new Human("Вероника", 2013, "f"));
         familyTree.addHuman(new Human("Даниил", 2012, "m", null, null));
 
-        System.out.println(familyTree.getHumanByName("Станислав"));
-        System.out.println(familyTree.getAllHuman());
+        // System.out.println(familyTree.getHumanByName("Станислав"));
+        // System.out.println(familyTree.getAllHuman());
+
+        for(Human human: familyTree){
+            System.out.println(human);
+        }
+        
+        System.out.println();
+        
+        familyTree.sortByName();
+        
+        for(Human human: familyTree){
+            System.out.println(human);
+        }
     }
 
 }

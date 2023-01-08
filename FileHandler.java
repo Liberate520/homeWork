@@ -1,4 +1,4 @@
-package Seminars_OOP.HW_2;
+package Seminars_OOP.HW_3;
 
 import java.io.*;
 
@@ -11,7 +11,7 @@ public class FileHandler implements Writable, Serializable {
     }
 
     public FileHandler() {
-        this.filename = "Tree";
+        this.filename = "Tree.dat";
     }
 
     @Override

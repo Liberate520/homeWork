@@ -1,16 +1,16 @@
-package Seminars_OOP.HW_2;
+package Seminars_OOP.HW_3;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private int yearOfBirth;
     private String gender;
     private Human father;
     private Human mother;
-    private List<Human> children;
+    private List<Human> childrenList;
 
     public Human(String name, int yearOfBirth, String gender, Human father, Human mother) {
         this.name = name;
@@ -18,9 +18,7 @@ public class Human implements Serializable{
         this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.children = new ArrayList<>();
-        // father.getChildren().add(this);
-        // mother.getChildren().add(this);
+        this.childrenList = new ArrayList<>();
     }
 
     public Human(String name, int yearOfBirth, String gender) {
@@ -68,16 +66,30 @@ public class Human implements Serializable{
     }
 
     public List<Human> getChildren() {
-        return children;
+        return childrenList;
     }
 
-    public void setChildren(List<Human> children) {
-        this.children = children;
+    public void setChildren(List<Human> childrenList) {
+        this.childrenList = childrenList;
+    }
+
+    public void addChild(Human human) {
+        if (father != null) {
+            father.childrenList.add(this);
+        }
+        if (mother != null) {
+            mother.childrenList.add(this);
+        }
     }
 
     @Override
     public String toString() {
         return name + ": " + yearOfBirth + ", (" + gender + ")";
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 
 }
