@@ -5,6 +5,7 @@ import java.util.Set;
 import java.io.Serializable;
 
 public class Family implements Serializable {
+
     private List<People> members;
 
     private WritableFile writable;
@@ -13,6 +14,7 @@ public class Family implements Serializable {
         this.members = members;
     }
 
+    // Лишняя проверка
     public void save() {
         if (writable instanceof FileHandler) {
             FileHandler fileHandler1 = (FileHandler) writable;
@@ -26,6 +28,7 @@ public class Family implements Serializable {
         this.writable = writable;
     }
 
+    // Лишняя проверка
     public Family readFile() {
         if (writable != null) {
             if (writable instanceof FileHandler) {
@@ -40,6 +43,8 @@ public class Family implements Serializable {
     }
 
     public void add(People member) {
+        // Придумать как составить метод addChild из этой кнострукции
+        // "и добавить в классе People метод addChild"
         if (member != null) {
             members.add(member);
             if (member.getFather() != null) {
@@ -51,6 +56,7 @@ public class Family implements Serializable {
         }
     }
 
+    // Что то с циклом не так и поменять на .contains >> .equals?
     public People search(String sPeopleName) {
         People finderPeople  = null;
         for (People people : members) {

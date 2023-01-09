@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.List;
 
-public class Main implements Serializable {
+public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Family family = new Family();
 

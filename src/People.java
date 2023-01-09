@@ -67,6 +67,20 @@ public class People implements Serializable {
         this.children = children;
     }
 
+    /*
+    public void addChild(){
+        if (member != null) {
+            members.add(member);
+            if (member.getFather() != null) {
+                member.getFather().getChildren().add(member);
+            }
+            if (member.getMother() != null) {
+                member.getMother().getChildren().add(member);
+            }
+        }
+    }
+    */
+
     @Override
     public String toString() {
         String res = "\n" + name + ", " + sex + ", " + age + "";
