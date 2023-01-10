@@ -14,7 +14,7 @@ class StaddyIterator implements Iterator<Designer_Human> {
 
     @Override
     public boolean hasNext() {
-        return index < humans.size(); //достич конца коллекции
+        return index < humans.size(); //достичь конца коллекции
     }
 
     @Override

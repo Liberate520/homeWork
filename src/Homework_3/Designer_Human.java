@@ -84,7 +84,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
     /**
-     * констркутор с добавлением id
+     * конструктор с добавлением id
      * @param id
      * @param name
      * @param sex

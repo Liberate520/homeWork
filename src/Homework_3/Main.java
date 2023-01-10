@@ -53,7 +53,7 @@ public class Main {
         }
 
 //        /**
-//         * Позволяет перебрать объекты колекции
+//         * Позволяет перебрать объекты коллекции
 //         */
 //        Iterator<Designer_Human> iterator = humans.iterator();
 //        while (iterator.hasNext()) {
@@ -71,7 +71,7 @@ public class Main {
 
             }
         };
-        System.out.println(serializator.serializaSave(human1)); //Проверка если true - значит записть прошла
+        System.out.println(serializator.serializaSave(human1)); //Проверка если true - значит запись прошла
 
 //
 //        try {
