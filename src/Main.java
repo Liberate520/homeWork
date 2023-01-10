@@ -33,11 +33,28 @@ public class Main implements Serializable{
         family.save();
         Family read = family.read();
         System.out.println(read);
+        System.out.println();
 
-        Human found = family.search("Ivan");
-        List<String> broAndSis = family.getBroAndSis("Vasia");
-        List<String> broAndSis2 = family.getBroAndSis("Julia");
-        List<String> broAndSis3 = family.getBroAndSis("Ivan");
+        //Human found = family.search("Ivan");
+        StringBuilder broAndSis = family.getBroAndSis("Vasia");
+        System.out.println(broAndSis);
+        StringBuilder broAndSis2 = family.getBroAndSis("Julia");
+        System.out.println(broAndSis2);
+        StringBuilder broAndSis3 = family.getBroAndSis("Ivan");
+        System.out.println(broAndSis3);
+        System.out.println();
+
+        Service service = new Service(read);
+        //сортировка по алфавиту
+        service.sortByName();
+        System.out.println(read);
+        System.out.println();
+
+        //сортировка по году рождения
+        service.sortByYearBirth();
+        System.out.println(read);
+
+
 
 
 
