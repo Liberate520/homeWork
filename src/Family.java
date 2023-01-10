@@ -1,10 +1,7 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.io.Serializable;
 
-public class Family  implements Serializable{
+public class Family  implements Serializable, Iterable<Human>{
     private List<Human> members;
 
     private Writable writable;
@@ -15,6 +12,10 @@ public class Family  implements Serializable{
 
     public Family(){
         this(new ArrayList<>());
+    }
+
+    public List<Human> getMembers() {
+        return members;
     }
 
     public void add(Human member) {
@@ -39,26 +40,50 @@ public class Family  implements Serializable{
         return find;
     }
 
-    public List<String> getBroAndSis(String sName) {
-        List<String> allNames = new ArrayList<>();
+    public List<Human> getParents(Human child) {
+        List<Human> parents = new ArrayList<>();
+        if(child.getFather() != null) {
+            parents.add(child.getFather());
+        }
+        if(child.getMother() != null) {
+            parents.add(child.getMother());
+        }
+        return parents;
+    }
+
+    public List<Human> getChildrens(List<Human> parents) {
+        List<Human> children = new ArrayList<>();
+        for (Human parent: parents) {
+            if(parent.getChildren() != null){
+                children.addAll(parent.getChildren());
+            }
+        }
+        Set<Human> uniq_children = new HashSet<>(children);
+        children = new ArrayList<>(uniq_children);
+        return children;
+    }
+
+    public List<Human> check(String sName) {
         Human find = search(sName);
-        if(find.getFather() != null && find.getFather().getChildren() != null) {
-            for (Human child: find.getFather().getChildren()) {
-                allNames.add(child.getName());
+        List<Human> parents = getParents(find);
+        if(parents.isEmpty()) return parents;
+        else{
+            List<Human> children = getChildrens(parents);
+            children.remove(find);
+            return children;
+        }
+    }
+
+    public StringBuilder getBroAndSis(String sName) {
+        List<Human> res = check(sName);
+        StringBuilder result = new StringBuilder(sName  + ": ");
+        if(res.isEmpty()) result.append("no sister brother");
+        else {
+            for (Human human: res) {
+                result.append(human.getName() + " ");
             }
         }
-        if(find.getMother() != null && find.getMother().getChildren() != null) {
-            for (Human child: find.getMother().getChildren()) {
-                allNames.add(child.getName());
-            }
-        }
-        Set<String> uniq_name = new HashSet<>(allNames); //удалние повторяющихся имен (дети матери и дети отца)
-        List<String> res = new ArrayList<>(uniq_name);
-        res.remove(sName);
-        if(res.isEmpty()) {
-            res.add("нет братьев или сестер");
-        }
-        return res;
+        return result;
     }
 
 
@@ -90,4 +115,8 @@ public class Family  implements Serializable{
         return null;
     }
 
+    @Override
+    public Iterator<Human> iterator() {
+        return null;
+    }
 }
