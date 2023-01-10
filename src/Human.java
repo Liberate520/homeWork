@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Human {
+public class Human implements Serializable{
     private String uuid;
     private String name;
     private String lastName;
@@ -42,7 +43,7 @@ public class Human {
             + "пол: " + (gender == Gender.MAN ? "мужской" : "женский") + "\n"
             + "отец: " + (this.parentFather != null ? this.parentFather.getFIOtoString() : "отсутствует") + "\n"
             + "мать: " + (this.parentMother != null ? this.parentMother.getFIOtoString() : "отсутствует")
-            + (text.length() > 0 ? "\nдети:\n" + text : "");
+            + (text.length() > 0 ? "\nдети:\n" + text : "\nдети: нет\n");
     }
 
     public void setName(String name) {

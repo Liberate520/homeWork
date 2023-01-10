@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class FamilyTree {
     private Map<String, Human> humanMap;
+    private Writable  writable;
 
     public FamilyTree(Map<String, Human> humanMap) {
         this.humanMap = humanMap;
@@ -52,5 +53,30 @@ public class FamilyTree {
 
     public void setHumanList(Map<String, Human> humanMap) {
         this.humanMap = humanMap;
+    }
+
+    public void save() {
+        if (writable != null && this.humanMap != null){
+            List<Object> objList = new ArrayList<>();
+            this.humanMap.forEach((id, x) -> objList.add(x));
+            writable.save(objList);
+        }
+    }
+
+    public void read() {
+        if (writable != null) {
+            List<Object> objList = writable.read();
+            for (Object obj : objList) {
+                humanMap.put(((Human) obj).getUuid(),(Human) obj);
+            }
+        }
+    }
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
+    }
+
+    public Map<String, Human> getHumanMap() {
+        return humanMap;
     }
 }
