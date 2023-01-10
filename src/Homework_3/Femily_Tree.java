@@ -36,7 +36,7 @@ public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//до
      * @param father
      * @param mother
      */
-    public void addparents(Designer_Human human, Designer_Human father, Designer_Human mother) {
+    public void addParents(Designer_Human human, Designer_Human father, Designer_Human mother) {
         if (father != null) {
             human.setFather(father);
 
@@ -122,10 +122,13 @@ public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//до
 
     @Override
     public Iterator<Designer_Human> iterator() {
-        return new StaddyIterator(humans); //Реализуем функионал
+        return new StaddyIterator(humans); //Реализуем функционал
     }
 
 
-
 }
+
+
+
+
 

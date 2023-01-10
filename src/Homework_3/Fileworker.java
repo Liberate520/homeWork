@@ -3,11 +3,7 @@ package Homework_3;
 import java.io.InvalidObjectException;
 
 public class Fileworker implements interfaseSave {
-//    @Override
-//    public void serializaSave() {
 
-//
-//    }
 
     @Override
     public boolean serializaSave(Designer_Human Human) { //для записи

@@ -1,6 +1,7 @@
 package Homework_3;
 
 import java.io.InvalidObjectException;
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) throws InvalidObjectException {
@@ -8,9 +9,9 @@ public class Main {
 
         Designer_Human human = new Designer_Human();
         Femily_Tree humans = new Femily_Tree();
-        human.AddHuman("Alex", "man", 1993);
-        human.AddChildren();
-        humans.addparents(new Designer_Human("Alex", "man", 1999), null, null);
+        human.addHuman("Alex", "man", 1993);
+        human.addChildren();
+        humans.addParents(new Designer_Human("Alex", "man", 1999), null, null);
 
         humans.printDrevo(humans.getTree());
         humans.ShowALL(humans.getTree()); //вывод всех людей
@@ -25,23 +26,28 @@ public class Main {
 //        humans.searchHuman(humans.getTree()); //вызов поиска
 
 
-//        Попытка добавления
-//        List<interfaseSave> saves = new ArrayList<>();
-//        saves.add((interfaseSave) human1);
-//        serializa(saves);
-
 //Решение 3 домашнего задание
-        Servis servis = new Servis(humans);
-        servis.AddHHUMAN("Vivi", "man", 1990);
-        servis.AddHHUMAN("Mia", "girl", 1988);
-        servis.AddHHUMAN("Franck", "man", 1991);
-        servis.AddHHUMAN("Luda", "girl", 1994);
+        Service service = new Service(humans);
+        service.AddHHUMAN("Vivi", "man", 1990);
+        service.AddHHUMAN("Mia", "girl", 1988);
+        service.AddHHUMAN("Franck", "man", 1991);
+        service.AddHHUMAN("Luda", "girl", 1994);
 
         for (Designer_Human HHE : humans) {
             System.out.println(HHE);
         }
         System.out.println();
-        servis.sort();
+
+        service.sort(); //Сортировка
+
+        service.sortByName(); //вариант сортировки по имени
+
+        service.sortByDateOfBirth(); //Вариант сортировки по дате рождения
+
+        Collections.sort(humans.getHumans());
+
+//        service.sortNAME(); //&#x421;&#x43E;&#x440;&#x442;&#x438;&#x440;&#x43E;&#x432;&#x43A;&#x430; &#x43F;&#x43E; &#x438;&#x43C;&#x435;&#x43D;&#x438;
+
         for (Designer_Human HHE : humans) {
             System.out.println(HHE);
         }

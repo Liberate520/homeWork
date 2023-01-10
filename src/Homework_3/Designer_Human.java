@@ -13,17 +13,32 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private String name, sex;
     private int date,id;
 
+    public String getName(){
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
     private Designer_Human father; // Объектная переменная
 
     private Designer_Human mother; // Объектная переменная
 
     private List<Designer_Human> children;
 
-    private List<Designer_Human> serviss;
+//    private List<Designer_Human> serviss;
 
-    public List<Designer_Human> getHumans() {
-        return humans;
-    }
+//    public List<Designer_Human> getHumans() {
+//        return humans;
+//    }
 
     private static List<Designer_Human> humans;
 
@@ -85,36 +100,6 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this.children = new ArrayList<>();
     }
 
-    /**
-   Создаем геторы и сетеры
-    */
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-//    public void setSex(String sex) {
-//        this.sex = sex;
-//    }
-
-    public int getDate() {
-        return date;
-    }
-
-//    public void setDate(int date) {
-//        this.date = date;
-//    }
-//
-//    public Designer_Human getFather() {
-//        return father;
-//    }
 
     public void setFather(Designer_Human father) {
         this.father = father;
@@ -140,7 +125,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * Вариант добавления детей
      * @return Возвращает список с параметрами toString
      */
-    public String AddChildren() { // добавляем детей другим методом
+    public String addChildren() { // добавляем детей другим методом
         StringBuilder Child = new StringBuilder();
         if (this.children != null) {
             Child.append(getName());
@@ -159,7 +144,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * @param sex
      * @param date
      */
-    public void AddHuman(String name, String sex, int date){
+    public void addHuman(String name, String sex, int date){
         Designer_Human HH = new Designer_Human(name,sex,date);
         this.humans.add(HH);
     }
