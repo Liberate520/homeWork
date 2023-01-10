@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.io.Serializable;
 
-public class Family implements Serializable {
+public class Family implements Serializable, Iterable<People> /*FamilyIterator<people> */{
 
     private List<People> members;
 
@@ -43,8 +45,6 @@ public class Family implements Serializable {
     }
 
     public void add(People member) {
-        // Придумать как составить метод addChild из этой кнострукции
-        // "и добавить в классе People метод addChild"
         if (member != null) {
             members.add(member);
             if (member.getFather() != null) {
@@ -56,7 +56,7 @@ public class Family implements Serializable {
         }
     }
 
-    // Что то с циклом не так и поменять на .contains >> .equals?
+    // поменять на .contains >> .equals?
     public People search(String sPeopleName) {
         People finderPeople  = null;
         for (People people : members) {
@@ -66,6 +66,7 @@ public class Family implements Serializable {
         }
         return finderPeople ;
     }
+    
 
     public List<String> getFamMembers(String sPeopleName) {
         List<String> allNames = new ArrayList<>();
@@ -93,6 +94,21 @@ public class Family implements Serializable {
     public String toString() {
         return "Family: " +
                 members;
+    }
+
+    public void sortByName() {
+        Collections.sort(members);
+    }
+
+    public void sortByDate() {
+        Collections.sort(members, new ComparatorByDate());
+    }
+
+    @Override
+    public  Iterator<People> iterator() {
+        // 
+        return new FamilyIterator(members);
+        // return null;
     }
 
 }

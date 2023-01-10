@@ -1,19 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+// import java.time.Year;
+// import java.util.Random;
 
-public class People implements Serializable {
+public class People implements Serializable, Comparable<People> {
     private String name;
     private String sex;
-    private int age;
+    private int birthDate;
     private People father;
     private People mother;
     private List<People> children;
 
-    public People(String name, String sex, int age, People father, People mother) {
+    public People(String name, String sex, int birthDate, People father, People mother) {
         this.name = name;
         this.sex = sex;
-        this.age = age;
+        this.birthDate = birthDate;
         children = new ArrayList<>();
         this.father = father;
         this.mother = mother;
@@ -35,12 +37,12 @@ public class People implements Serializable {
         this.sex = sex;
     }
 
-    public int getAge() {
-        return age;
+    public int getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(int birthDate) {
+        this.birthDate = birthDate;
     }
 
     public People getFather() {
@@ -67,23 +69,27 @@ public class People implements Serializable {
         this.children = children;
     }
 
-    /*
-    public void addChild(){
-        if (member != null) {
-            members.add(member);
-            if (member.getFather() != null) {
-                member.getFather().getChildren().add(member);
-            }
-            if (member.getMother() != null) {
-                member.getMother().getChildren().add(member);
-            }
-        }
+    public void addChild(People child) {
+        this.getChildren().add(child);
     }
-    */
+
+    // private int generateNowDate() {
+    //     int birthDate = Year.now().getValue();
+    //     return birthDate;
+    // }
+
+    // private String getRandomSex() {
+    //     Random random = new Random();
+    //     int rnd = random.nextInt(0, 2);
+    //     if (rnd == 0)
+    //         return "female";
+    //     else
+    //         return "male";
+    // }
 
     @Override
     public String toString() {
-        String res = "\n" + name + ", " + sex + ", " + age + "";
+        String res = "\n" + name + ", " + sex + ", " + birthDate + "";
         if (father != null) {
             res = res + ", father: " + father.getName();
         }
@@ -91,5 +97,11 @@ public class People implements Serializable {
             res = res + ", mother: " + mother.getName();
         }
         return res;
+    }
+
+    @Override
+    public int compareTo(People o) {
+        // 
+        return name.compareTo(((People) o).getName());
     }
 }
