@@ -1,6 +1,5 @@
-package Homework_3;
+package Homework_4;
 
-import java.io.Serializable;
 import java.util.*;
 
 class StaddyIterator implements Iterator<Designer_Human> {

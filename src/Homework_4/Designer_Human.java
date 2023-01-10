@@ -1,4 +1,4 @@
-package Homework_3;
+package Homework_4;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,11 +34,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
     private List<Designer_Human> children;
 
-//    private List<Designer_Human> serviss;
 
-//    public List<Designer_Human> getHumans() {
-//        return humans;
-//    }
 
     private static List<Designer_Human> humans;
 
@@ -105,9 +101,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this.father = father;
     }
 
-//    public Designer_Human getMother() {
-//        return mother;
-//    }
+    public Designer_Human getMother() {
+        return mother;
+    }
 
     public void setMother(Designer_Human mother) {
         this.mother = mother;
@@ -117,9 +113,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return children;
     }
 
-//    public void setChildren(List<Designer_Human> children) {
-//        this.children = children;
-//    }
+    public void setChildren(List<Designer_Human> children) {
+        this.children = children;
+    }
 
     /**
      * Вариант добавления детей
@@ -168,7 +164,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
     @Override
-    public int compareTo(Homework_3.Designer_Human o) {
+    public int compareTo(Homework_4.Designer_Human o) {
         return name.compareTo(o.getName());
     }
 }
