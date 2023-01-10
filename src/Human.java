@@ -7,15 +7,15 @@ enum Gender{
     MAN,
     WOMAN
 }
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
     private String name;
     private Gender gend;
-    private int yearBirth;
+    private Integer yearBirth;
     private Human father;
     private Human mother;
     private List<Human> children;
 
-    public Human(String name, Gender gend, int yearBirth, Human father, Human mother) {
+    public Human(String name, Gender gend, Integer yearBirth, Human father, Human mother) {
         this.name = name;
         this.gend = gend;
         this.yearBirth = yearBirth;
@@ -92,4 +92,11 @@ public class Human implements Serializable{
         }
         return res;
     }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
+    }
+
+
 }
