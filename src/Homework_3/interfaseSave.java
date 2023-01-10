@@ -3,7 +3,6 @@ package Homework_3;
 import java.io.InvalidObjectException;
 
 public interface interfaseSave {
-//    void serializaSave();
 
     boolean serializaSave(Designer_Human Human);
 

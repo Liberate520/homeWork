@@ -7,18 +7,6 @@ public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//до
     // конструктору человека
     private List<Designer_Human> humans;
 
-//    public Femily_Tree() {
-//        humans = new ArrayList();
-//    }
-
-
-//    public List<Designer_Human> getHumans() {
-//        return this.humans;
-//    }
-//    public List<Designer_Human> getHumans(){
-//        return humans;
-//    }
-
 
     public Femily_Tree() {
         super();

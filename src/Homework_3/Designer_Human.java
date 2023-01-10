@@ -78,6 +78,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * @param date
      */
     public Designer_Human(String name, String sex, int date) {
+        this();
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -91,7 +92,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * @param date
      */
     public Designer_Human(int id, String name, String sex, int date) {
-        super();
+        this();
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -105,9 +106,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this.father = father;
     }
 
-//    public Designer_Human getMother() {
-//        return mother;
-//    }
+    public Designer_Human getMother() {
+        return mother;
+    }
 
     public void setMother(Designer_Human mother) {
         this.mother = mother;
@@ -117,9 +118,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return children;
     }
 
-//    public void setChildren(List<Designer_Human> children) {
-//        this.children = children;
-//    }
+    public void setChildren(List<Designer_Human> children) {
+        this.children = children;
+    }
 
     /**
      * Вариант добавления детей

@@ -2,6 +2,7 @@ package Homework_3;
 
 import java.io.InvalidObjectException;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) throws InvalidObjectException {
@@ -23,7 +24,7 @@ public class Main {
         human1.setName("sss");
 
 
-//        humans.searchHuman(humans.getTree()); //вызов поиска
+        humans.searchHuman(humans.getTree()); //вызов поиска
 
 
 //Решение 3 домашнего задание
@@ -52,14 +53,14 @@ public class Main {
             System.out.println(HHE);
         }
 
-//        /**
-//         * Позволяет перебрать объекты коллекции
-//         */
-//        Iterator<Designer_Human> iterator = humans.iterator();
-//        while (iterator.hasNext()) {
-//            Designer_Human HHE = iterator.next();
-//            System.out.println(HHE);
-//        }
+        /**
+         * Позволяет перебрать объекты коллекции
+         */
+        Iterator<Designer_Human> iterator = humans.iterator();
+        while (iterator.hasNext()) {
+            Designer_Human HHE = iterator.next();
+            System.out.println(HHE);
+        }
 
 
 /**
