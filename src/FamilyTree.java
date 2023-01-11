@@ -1,16 +1,14 @@
-package Seminars_OOP.HW_3;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human>{
-    public List<Human> humanList;
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
+    public List<T> humanList;
     private Writable writable;
 
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<T> humanList) {
         this.humanList = humanList;
     }
 
@@ -18,21 +16,11 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         this(new ArrayList<>());
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
         humanList.add(human);
     }
 
-    public List<Human> getHumanByName(String name) {
-        List<Human> res = new ArrayList<>();
-        for (Human Human : humanList) {
-            if (Human.getName().equals(name)) {
-                res.add(Human);
-            }
-        }
-        return res;
-    }
-
-    public List<Human> getAllHuman() {
+    public List<T> getAllHuman() {
         return humanList;
     }
 
@@ -53,16 +41,12 @@ public class FamilyTree implements Serializable, Iterable<Human>{
                 {
                     return (FamilyTree) writable.read();
                 }
-            // }
-        // } else {
-        //     System.out.println("Ошибка загрузки файла");
-        //     return null;
         }
         return null;
     }
 
-    public Human getHumanByName_1(String name) {
-        for (Human human : humanList) {
+    public Human getHumanByName(String name) {
+        for (T human : humanList) {
             if (human.getName().equals(name)) {
                 return human;
             }
@@ -75,13 +59,13 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
 
     public void sortByAge(){
-        Collections.sort(getAllHuman(), new CorparatorByAge());
+        Collections.sort(getAllHuman(), new ComparatorByAge());
 
     }
 
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return new FamilyTreeIterator(humanList);
     }
 

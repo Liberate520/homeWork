@@ -1,12 +1,10 @@
-package Seminars_OOP.HW_3;
-
 import java.util.List;
 
 public class Main {
     @SuppressWarnings("UnresolvedClassReferenceRepair")
     public static void main(String[] args) {
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         FileHandler fileHandler = new FileHandler();
         familyTree.setWritable(fileHandler);
         familyTree = familyTree.readFamilyTree();
@@ -19,7 +17,8 @@ public class Main {
         familyTree.addHuman(new Human("Вероника", 2013, "f"));
         familyTree.addHuman(new Human("Даниил", 2012, "m", null, null));
 
-        System.out.println(familyTree.getHumanByName_1("Вероника"));
+        System.out.println(familyTree.getHumanByName("Вероника"));
+
         System.out.println(familyTree.getAllHuman());
 
         for(Human human: familyTree){
@@ -41,8 +40,5 @@ public class Main {
         for (Human human: familyTree){
             System.out.println(human);
         }
-
-
     }
-
 }

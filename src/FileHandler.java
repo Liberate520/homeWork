@@ -1,5 +1,3 @@
-package Seminars_OOP.HW_3;
-
 import java.io.*;
 
 public class FileHandler implements Writable, Serializable {
