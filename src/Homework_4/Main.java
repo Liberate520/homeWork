@@ -8,8 +8,6 @@ public class Main {
     public static void main(String[] args) throws InvalidObjectException {
 
 
-
-
         Designer_Human human = new Designer_Human();
         Femily_Tree humans = new Femily_Tree();
         human.addHuman("Alex", "man", 1993);
@@ -26,7 +24,7 @@ public class Main {
         human1.setName("sss");
 
         Cache<Designer_Human> cache = new Cache<>(10); //параметризуем список людей и устанавливаем размер кэша
-        for (Designer_Human H1: humans){
+        for (Designer_Human H1 : humans) {
             cache.addEl(H1);
         }
         cache.getAllEL().forEach(System.out::println); //выводим кэш на экран
@@ -62,8 +60,8 @@ public class Main {
         System.out.println();
         service.sort();
         for (Designer_Human HHE : humans) {
-        System.out.println(HHE);
-    }
+            System.out.println(HHE);
+        }
 
         /**
          * Позволяет перебрать объекты коллекции
@@ -99,7 +97,6 @@ public class Main {
         fileworker.serializaSave(human1); //записываем
         fileworker.DesSerializa(human1);// читаем
     }
-
 
 
 }
