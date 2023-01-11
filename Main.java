@@ -20,7 +20,7 @@ public class Main {
         Human person_3 = new Human("Petr", "Petrov", "12.11.1961", null, "m", "1PP_61", null, null);
         Human person_4 = new Human("Marina", "Petrova", "22.10.1965", null, "w", "1MP_65", null, null);
         
-        Tree family = new Tree();
+        Tree<Human> family = new Tree();
         TreeService family_service = new TreeService(family);
         person_3.setMother_id(person_2.getPerson_id());
         person_3.setFather_id(person_1.getPerson_id());

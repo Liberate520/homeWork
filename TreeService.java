@@ -4,8 +4,8 @@ import java.util.Collections;
 
 public class TreeService {
 
-    private Tree tree;
-    public TreeService(Tree tree) {
+    private Tree<Human> tree;
+    public TreeService(Tree<Human> tree) {
         this.tree = tree;
 
     }

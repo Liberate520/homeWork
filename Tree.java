@@ -12,10 +12,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.sound.sampled.SourceDataLine;
-
-public class Tree implements Iterable<Human>  {
+// Делаем класс Tree (где собираются объекты других классов) параметизированным (общим), чтобы можно было добавлять любой объект
+public class Tree<T> implements Iterable<T>  {
     
-    private ArrayList<Human> family;
+    private ArrayList<T> family;
     
     public Tree(){
         family = new ArrayList<>();
@@ -23,15 +23,15 @@ public class Tree implements Iterable<Human>  {
     
 
 // На случай, если нужен результат
-public Human find_father(List<Human> family, Human person){
-    Human res = null;
+public T find_father(List<T> family, T person){
+    T res = null;
     String father_id = person.getFather_id();
     if(father_id == null){
         System.out.println("Отца нет");
         
     }
     else{
-        for(Human relative : family){
+        for(T relative : family){
             if(father_id.equals(relative.getPerson_id())){
                 res = relative;
             }
@@ -42,15 +42,15 @@ public Human find_father(List<Human> family, Human person){
 
 }
 
-public Human find_mother(List<Human> family, Human person){
-    Human res = null;
+public T find_mother(List<T> family, T person){
+    T res = null;
     String mother_id = person.getMother_id();
     if(mother_id == null){
         System.out.println("Матери нет");
         
     }
     else{
-        for(Human relative : family){
+        for(T relative : family){
             if(mother_id.equals(relative.getPerson_id())){
                 res = relative;
             }
@@ -61,15 +61,15 @@ public Human find_mother(List<Human> family, Human person){
 
 }
 
-public ArrayList<Human> find_sister_and_brother(List<Human> family, Human person){
-    ArrayList<Human> res = new ArrayList<>();
+public ArrayList<T> find_sister_and_brother(List<T> family, T person){
+    ArrayList<T> res = new ArrayList<>();
     String mother_id = person.getMother_id();
     String father_id = person.getFather_id();
     if(mother_id == null && father_id == null){
         System.out.println("Установить не возможно");
     }
     else{
-        for(Human relative : family){
+        for(T relative : family){
             if((mother_id.equals(relative.getMother_id()) || father_id.equals(relative.getFather_id())) && !person.getPerson_id().equals(relative.getPerson_id())){
                 res.add(relative);
             }
@@ -86,15 +86,15 @@ public ArrayList<Human> find_sister_and_brother(List<Human> family, Human person
 
 }
 // На случай, если нужен только вывод
-public void print_father(List<Human> family, Human person){
-    Human res = null;
+public void print_father(List<T> family, T person){
+    T res = null;
     String father_id = person.getFather_id();
     if(father_id == null){
         System.out.println("Отца нет");
         
     }
     else{
-        for(Human relative : family){
+        for(T relative : family){
             if(father_id.equals(relative.getPerson_id())){
                 res = relative;
             }
@@ -105,15 +105,15 @@ public void print_father(List<Human> family, Human person){
     
 }
 
-public void print_mother(List<Human> family, Human person){
-    Human res = null;
+public void print_mother(List<T> family, T person){
+    T res = null;
     String mother_id = person.getMother_id();
     if(mother_id == null){
         System.out.println("Матери нет");
         
     }
     else{
-        for(Human relative : family){
+        for(T relative : family){
             if(mother_id.equals(relative.getPerson_id())){
                 res = relative;
             }
@@ -125,15 +125,15 @@ public void print_mother(List<Human> family, Human person){
 }
 
 
-public void print_sister_and_brother( Human person){
-    ArrayList<Human> res = new ArrayList<>();
+public void print_sister_and_brother( T person){
+    ArrayList<T> res = new ArrayList<>();
     String mother_id = person.getMother_id();
     String father_id = person.getFather_id();
     if(mother_id == null && father_id == null){
         System.out.println("Установить не возможно");
     }
     else{
-        for(Human relative : family){
+        for(T relative : family){
             if((mother_id.equals(relative.getMother_id()) || father_id.equals(relative.getFather_id())) && !person.getPerson_id().equals(relative.getPerson_id())){
                 res.add(relative);
             }
@@ -154,7 +154,7 @@ public void print_sister_and_brother( Human person){
 
 
 
-public void age(Human person){
+public void age(T person){
     java.util.Date dateNow = new java.util.Date();
     DateFormat formater = new SimpleDateFormat("y");
     Integer year = Integer.parseInt(formater.format(dateNow));
@@ -170,14 +170,14 @@ public String toString() {
     return super.toString();
 }
 @Override
-public Iterator<Human> iterator() {
+public Iterator<T> iterator() {
     // TODO Auto-generated method stub
     return new TreeIterator(family);
 }
-public void addHuman(Human human) {
+public void addHuman(T human) {
     family.add(human);
 }
-public List<Human> getHumanList() {
+public List<T> getHumanList() {
     return family;
 }
 

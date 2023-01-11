@@ -3,10 +3,10 @@ package Семинар1.homeWork;
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterator implements Iterator<Human>{
-    List<Human> HumanList;
+public class TreeIterator<T> implements Iterator<T>{
+    List<T> HumanList;
     private int index;
-    public TreeIterator(List<Human> HumanList){
+    public TreeIterator(List<T> HumanList){
         this.HumanList = HumanList;
     }
     @Override
@@ -16,7 +16,7 @@ public class TreeIterator implements Iterator<Human>{
     }
 
     @Override
-    public Human next() {
+    public T next() {
         
         return HumanList.get(index++);
     }
