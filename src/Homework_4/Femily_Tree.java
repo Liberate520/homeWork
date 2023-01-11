@@ -3,7 +3,7 @@ package Homework_4;
 import java.io.Serializable;
 import java.util.*;
 
-public class Femily_Tree implements Serializable,Iterable<Designer_Human>{//добавил Iterable к
+public class Femily_Tree <T> implements Serializable,Iterable<Designer_Human>{//добавил Iterable к
     // конструктору человека
     private List<Designer_Human> humans;
 

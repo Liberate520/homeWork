@@ -52,6 +52,11 @@ public class Main {
         for (Designer_Human HHE : humans) {
             System.out.println(HHE);
         }
+        System.out.println();
+        servis.sort();
+        for (Designer_Human HHE : humans) {
+        System.out.println(HHE);
+    }
 
         /**
          * Позволяет перебрать объекты коллекции
