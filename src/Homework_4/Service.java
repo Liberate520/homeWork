@@ -28,7 +28,13 @@ public Service(Femily_Tree humanList) {
 
     private static int id;
 
-    public void AddHHUMAN(String name, String sex, int date) {
+    /**
+     * Перенес в femely_Tree
+     * @param name
+     * @param sex
+     * @param date
+     */
+    public void addHumansId(String name, String sex, int date) {
         Designer_Human humanList = new Designer_Human(id++, name, sex, date);
         Designer_Human.addHumanH(humanList);
 

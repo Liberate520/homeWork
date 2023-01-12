@@ -13,14 +13,14 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private String name;
     private String sex;
     private int date;
-    private int id;
 
     public String getName(){
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
+
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public String getSex() {
         return sex;
@@ -65,18 +65,16 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
-        this.humans = new ArrayList<>();
+        humans = new ArrayList<>();
 
 
     }
 
     /**
      * Создаем конструктор на случей отсутствия родителей.
-     * @param name
-     * @param sex
-     * @param date
      */
     public Designer_Human(String name, String sex, int date) {
+        this();
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -91,11 +89,10 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      */
     public Designer_Human(int id, String name, String sex, int date) {
         super();
-        this.id = id;
         this.name = name;
         this.sex = sex;
         this.date = date;
-        this.humans = new ArrayList<>();
+        humans = new ArrayList<>();
         this.children = new ArrayList<>();
     }
 

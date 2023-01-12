@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 
 public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к
     // конструктору человека
+    private static int id;
+
     private final List<Designer_Human> humans; //константа
 //    public Femily_Tree() {
 //        humans = new ArrayList();
@@ -94,6 +96,18 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
      */
     public void addHumansimple(Designer_Human human) {
         this.humans.add(human);
+    }
+
+    /**
+     * Добавление людей с id
+     * @param name
+     * @param sex
+     * @param date
+     */
+    public void addingPeopleWithAnId(String name, String sex, int date) {
+        Designer_Human human = new Designer_Human(id++, name, sex, date);
+        Designer_Human.addHumanH(human);
+
     }
 
 

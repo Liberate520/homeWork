@@ -9,7 +9,7 @@ public class CommunicationWithUsers {
 
     Designer_Human designer_human = new Designer_Human();//Экземпляр класса
     Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
-
+    Service service = new Service(femily_tree);
     public void selectTheProgramVersion() {
         System.out.println("""
                 Выберете версию программы
@@ -38,10 +38,13 @@ public class CommunicationWithUsers {
                 Выберете действие
 
                 1.Добавить пользователя
-                2.Добавить детей
-                3.Добавить родителей
-                4.Показать все древо
-                5.Поиск по имени""");
+                2.Добавить пользователя с Id
+                3.Добавить детей
+                4.Добавить родителей
+                5.Показать все древо
+                6.Поиск по имени
+                7.Сортировка
+                """);
         int choice = iScanner.nextInt();
         switch (choice) {
             case 1: //вариант добавления
@@ -53,12 +56,19 @@ public class CommunicationWithUsers {
                 femily_tree.addHumansimple(new Designer_Human(choiceName,choiceGender,choiceDate));
                 break;
             case 2:
+                String choiceNameId = iScanner.nextLine();
+                String choiceGenderId = iScanner.nextLine();
+                int choiceDateId = iScanner.nextInt();
+                femily_tree.addingPeopleWithAnId(choiceNameId,choiceGenderId,choiceDateId);
+                break;
+
+            case 3:
                 System.out.println("К кому будем добавлять детей ?");
                 femily_tree.printDrevo(femily_tree.getTree());
                 designer_human.addChildren();
 
 
-            case 3:
+            case 4:
                 System.out.println("К кому будем добавлять родителей ?");
                 femily_tree.printDrevo(femily_tree.getTree());
                 /*
@@ -75,20 +85,44 @@ public class CommunicationWithUsers {
 
                  */
 
-            case 4:
+            case 5:
                 System.out.println("Показать все древо");
                 femily_tree.ShowALL(femily_tree.getTree());
                 break;
 
 
-            case 5:
+            case 6:
                 System.out.println("Введите имя");
                 String choiceNameCase5 = iScanner.nextLine();
                 femily_tree.showName(choiceNameCase5);
                 break;
+            case 7:
+                sortingTheSheet();
+                break;
 
 
         }
+    }
+
+    /**
+     * меню сортировки
+     */
+    public void sortingTheSheet(){
+        System.out.println("""
+              Выберите варианты сортировки
+              1.По имени
+              2.По дате рождения
+              """);
+        int choiceSort =iScanner.nextInt();
+        switch (choiceSort){
+            case 1:
+                service.sortByName();
+                break;
+            case 2:
+                service.sortByDateOfBirth();
+        }
+
+
     }
 
     /**
@@ -100,10 +134,12 @@ public class CommunicationWithUsers {
                 Выберете действие
                                 
                 1.Добавить пользователя
-                2.Добавить детей
-                3.Добавить родителей
-                4.Показать все древо
-                5.Поиск по имени
+                2.Добавить пользователя с Id
+                3.Добавить детей
+                4.Добавить родителей
+                5.Показать все древо
+                6.Поиск по имени
+                7.Сортировка
                 """);
         int choice = iScanner.nextInt();
         switch (choice) {
@@ -121,6 +157,10 @@ public class CommunicationWithUsers {
             case 5://поиск по имени
                 femily_tree.searchHuman((ArrayList<Designer_Human>) femily_tree.getTree());
 
+            case 6:
+            case 7:
+                sortingTheSheet();
+                break;
 
         }
     }
