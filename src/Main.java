@@ -74,6 +74,13 @@ public class Main {
         humanList.read();
 
         Map<String, Human> humans = humanList.getHumanMap();
-        humans.forEach((id, x) -> System.out.println(x.toString()));
+        humans.forEach((id, x) -> System.out.println(x.getFIOtoString()));
+        System.out.println();
+        HumanListService humanListService = new HumanListService(humanList);
+
+        humanListService.sortByLastName();
+
+        Map<String, Human> humans1 = humanList.getHumanMap();
+        humans1.forEach((id, x) -> System.out.println(x.getFIOtoString()));   
     }
 }

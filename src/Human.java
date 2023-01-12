@@ -14,6 +14,7 @@ public class Human implements Serializable{
     private Human parentMother;
     private int generation = 0;
     private List<Human> children;
+    protected Object fieldName;
 
     public Human(String lastName, String name, String secondName, Gender gender) {
         this.uuid = UUID.randomUUID().toString();
@@ -193,6 +194,4 @@ public class Human implements Serializable{
             return false;
         return true;
     }
-
-
 }
