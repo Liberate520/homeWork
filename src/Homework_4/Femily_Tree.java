@@ -33,11 +33,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     }
 
     /**
-     * Метод добавления родителей
-     *
-     * @param human
-     * @param father
-     * @param mother
+     * Метод добавления родителе
      */
     public void addParents(Designer_Human human, Designer_Human father, Designer_Human mother) {
         if (father != null) {
