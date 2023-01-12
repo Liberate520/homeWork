@@ -1,8 +1,6 @@
 package Homework_4;
 
 import java.io.InvalidObjectException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 public class Main {
@@ -12,12 +10,10 @@ public class Main {
          */
         Femily_Tree humans = new Femily_Tree();
         Designer_Human human = new Designer_Human();
-//        Service service = new Service(humans);
-
         /*
         параметризуем список
         */
-        Cache<Designer_Human> cache = new Cache<>(10); //параметризуем список людей и устанавливаем размер кэша
+        CacheLimitations<Designer_Human> cache = new CacheLimitations<>(10); //параметризуем список людей и устанавливаем размер кэша
         for (Designer_Human H1 : humans) {
             cache.addEl(H1);
         }
@@ -59,7 +55,7 @@ public class Main {
 //        }
 
 
-        Fileworker fileworker = new Fileworker();
+        WorkingFile fileworker = new WorkingFile();
         fileworker.serializaSave(human); //записываем
         fileworker.DesSerializa(human);// читаем
     }

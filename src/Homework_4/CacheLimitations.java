@@ -3,12 +3,12 @@ package Homework_4;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cache<T> { //Класс для кеширования списков
+public class CacheLimitations<T> { //Класс для кеширования списков
 
     ArrayList<T> el;
     int size;
 
-    public Cache(int size) {
+    public CacheLimitations(int size) {
         this.size = size;
         el = new ArrayList<>(); //создаем экземпляр
 

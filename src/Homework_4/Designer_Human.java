@@ -18,6 +18,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return name;
     }
 
+
 //    public void setName(String name) {
 //        this.name = name;
 //    }
@@ -41,22 +42,15 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private static List<Designer_Human> humans;
 
     public Designer_Human(List<Designer_Human> humans){
-        this.humans =humans;
+        Homework_4.Designer_Human.humans =humans;
     }
     public Designer_Human(){
         this(new ArrayList<>());
     }
 
 
-    /**
+    /*
      * Создаем максимально описанный конструктор
-     *
-     * @param name
-     * @param sex
-     * @param date
-     * @param father
-     * @param mother
-//     * @param humans
      */
     public Designer_Human(String name, String sex, int date, String father, Designer_Human mother) {
         this.name = name;
@@ -70,7 +64,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
     }
 
-    /**
+    /*
      * Создаем конструктор на случей отсутствия родителей.
      */
     public Designer_Human(String name, String sex, int date) {
@@ -80,15 +74,11 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this.date = date;
     }
 
-    /**
+    /*
      * конструктор с добавлением id
-     * @param id
-     * @param name
-     * @param sex
-     * @param date
      */
     public Designer_Human(int id, String name, String sex, int date) {
-        super();
+        this();
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -101,9 +91,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this.father = father;
     }
 
-    public Designer_Human getMother() {
-        return mother;
-    }
+//    public Designer_Human getMother() {
+//        return mother;
+//    }
 
     public void setMother(Designer_Human mother) {
         this.mother = mother;
@@ -113,15 +103,14 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return children;
     }
 
-    public void setChildren(List<Designer_Human> children) {
-        this.children = children;
-    }
+//    public void setChildren(List<Designer_Human> children) {
+//        this.children = children;
+//    }
 
     /**
      * Вариант добавления детей
-     * @return Возвращает список с параметрами toString
      */
-    public String addChildren() { // добавляем детей другим методом
+    public void addChildren() { // добавляем детей другим методом
         StringBuilder Child = new StringBuilder();
         if (this.children != null) {
             Child.append(getName());
@@ -131,19 +120,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         } else {
             Child.append("null");
         }
-        return Child.toString();
     }
-
-//    /**
-//     * Вариант добавления людей
-//     * @param name
-//     * @param sex
-//     * @param date
-//     */
-//    public void addHuman(String name, String sex, int date){
-//        Designer_Human HH = new Designer_Human(name,sex,date);
-//        this.humans.add(HH);
-//    }
 
     /**
      * Переопределение toString
@@ -176,7 +153,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      */
     public void addHuman(String name, String sex, int date){
         Designer_Human HH = new Designer_Human(name,sex,date);
-        this.humans.add(HH);
+        humans.add(HH);
     }
 }
 

@@ -7,21 +7,21 @@ import java.util.List;
 
 public class Service {
 
-    private Service(){
-        this.humans = new ArrayList<>();
-    }
+//    private Service() {
+//        this.humans = new ArrayList<>();
+//    }
 
     public List<Designer_Human> humans;
 
-    public Service(List<Designer_Human> humans) {
-        this.humans = humans;
-    }
+//    public Service(List<Designer_Human> humans) {
+//        this.humans = humans;
+//    }
 
     private List<Designer_Human> humanList;
 
 
-public Service(Femily_Tree humanList) {
-    super();
+    public Service(Femily_Tree humanList) {
+        super();
         this.humanList = new ArrayList<>();
         this.humans = new ArrayList<>();
     }
@@ -30,9 +30,6 @@ public Service(Femily_Tree humanList) {
 
     /**
      * Перенес в femely_Tree
-     * @param name
-     * @param sex
-     * @param date
      */
     public void addHumansId(String name, String sex, int date) {
         Designer_Human humanList = new Designer_Human(id++, name, sex, date);
@@ -42,28 +39,24 @@ public Service(Femily_Tree humanList) {
 
     /**
      * Метод сортировки
-     *
-     * @param
+
      */
     public void sort() {
-        Collections.sort(humanList);}
+        Collections.sort(humanList);
+    }
 
     /**
      * Сортировка по имени
-     * @return
      */
-    public List<Designer_Human> sortByName() {
+    public void sortByName() {
         this.humans.sort(Comparator.comparing(Designer_Human::getName));
-        return humans;
     }
 
     /**
      * Сортировка по дате
-     * @return
      */
-    public List<Designer_Human> sortByDateOfBirth() {
+    public void sortByDateOfBirth() {
         this.humans.sort(Comparator.comparing(Designer_Human::getDate));
-        return humans;
     }
 }
 

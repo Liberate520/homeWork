@@ -165,7 +165,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
                     System.out.println(human);
 
                     Integer newDate = scanner.nextInt();
-                    if (newDate != null && newDate.equals(end))
+                    if (newDate != null && newDate.equals(end)) //Пытался сделать по разному только так сработало
                     {
                         System.out.println(human);
                         continue;
