@@ -42,12 +42,6 @@ public Service(Femily_Tree humanList) {
     public void sort() {
         Collections.sort(humanList);}
 
-//    public void sortNAME() {
-//        Designer_Human hhh = new Designer_Human();
-//        Collections.sort(humans.getName);//не понимаю почему не работает getter
-//        Collections.sort(Designer_Human::getName);
-//    }
-
     /**
      * Сортировка по имени
      * @return

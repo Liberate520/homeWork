@@ -1,48 +1,40 @@
 package Homework_4;
 
 import java.io.InvalidObjectException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) throws InvalidObjectException {
-
-
-        Designer_Human human = new Designer_Human();
+        /*
+        Вызываем экземпляры класса
+         */
         Femily_Tree humans = new Femily_Tree();
-        human.addHuman("Alex", "man", 1993);
-        human.addChildren();
-        humans.addParents(new Designer_Human("Alex", "man", 1999), null, null);
+        Designer_Human human = new Designer_Human();
+        Service service = new Service(humans);
 
-        humans.printDrevo(humans.getTree());
-        humans.ShowALL(humans.getTree()); //вывод всех людей
-        humans.showName("Alex"); //вывод по имени
-
-        humans.addHuman(new Designer_Human("Molly", "girl", 1999));
-
-        Designer_Human human1 = new Designer_Human();
-        human1.setName("sss");
-
+            /*
+            параметризуем список
+             */
         Cache<Designer_Human> cache = new Cache<>(10); //параметризуем список людей и устанавливаем размер кэша
         for (Designer_Human H1 : humans) {
             cache.addEl(H1);
         }
         cache.getAllEL().forEach(System.out::println); //выводим кэш на экран
 
-        humans.searchHuman(humans.getTree()); //вызов поиска
+        CommunicationWithUsers jj = new CommunicationWithUsers(); //Вызываем сканер
+        jj.selectTheProgramVersion();
 
 
 //Решение 3 домашнего задание
-        Service service = new Service(humans);
+
         service.AddHHUMAN("Vivi", "man", 1990);
         service.AddHHUMAN("Mia", "girl", 1988);
         service.AddHHUMAN("Franck", "man", 1991);
         service.AddHHUMAN("Luda", "girl", 1994);
 
-        for (Designer_Human HHE : humans) {
-            System.out.println(HHE);
-        }
-        System.out.println();
+        printFamilyTree(humans);
 
         service.sort(); //Сортировка
 
@@ -54,10 +46,7 @@ public class Main {
 
 //        service.sortNAME(); //&#x421;&#x43E;&#x440;&#x442;&#x438;&#x440;&#x43E;&#x432;&#x43A;&#x430; &#x43F;&#x43E; &#x438;&#x43C;&#x435;&#x43D;&#x438;
 
-        for (Designer_Human HHE : humans) {
-            System.out.println(HHE);
-        }
-        System.out.println();
+        printFamilyTree(humans);
         service.sort();
         for (Designer_Human HHE : humans) {
             System.out.println(HHE);
@@ -82,7 +71,7 @@ public class Main {
 
             }
         };
-        System.out.println(serializator.serializaSave(human1)); //Проверка если true - значит запись прошла
+        System.out.println(serializator.serializaSave(human)); //Проверка если true - значит запись прошла
 
 //
 //        try {
@@ -94,8 +83,15 @@ public class Main {
 
 
         Fileworker fileworker = new Fileworker();
-        fileworker.serializaSave(human1); //записываем
-        fileworker.DesSerializa(human1);// читаем
+        fileworker.serializaSave(human); //записываем
+        fileworker.DesSerializa(human);// читаем
+    }
+
+    private static void printFamilyTree(Femily_Tree humans) {
+        for (Designer_Human HHE : humans) {
+            System.out.println(HHE);
+        }
+        System.out.println();
     }
 
 

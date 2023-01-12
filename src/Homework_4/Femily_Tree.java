@@ -2,11 +2,12 @@ package Homework_4;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Consumer;
 
-public class Femily_Tree  implements Serializable,Iterable<Designer_Human>{//добавил Iterable к
+
+public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к
     // конструктору человека
-    private List<Designer_Human> humans;
-
+    private final List<Designer_Human> humans; //константа
 //    public Femily_Tree() {
 //        humans = new ArrayList();
 //    }
@@ -38,7 +39,7 @@ public class Femily_Tree  implements Serializable,Iterable<Designer_Human>{//д�
      */
     public void addParents(Designer_Human human, Designer_Human father, Designer_Human mother) {
         if (father != null) {
-            human.setFather(father);
+            human.setFather(String.valueOf(father));
 
         }
         if (mother != null) {
@@ -91,19 +92,20 @@ public class Femily_Tree  implements Serializable,Iterable<Designer_Human>{//д�
      *
      * @param human
      */
-    public void addHuman(Designer_Human human) {
+    public void addHumansimple(Designer_Human human) {
         this.humans.add(human);
     }
 
+
     /**
-//     * метод добавления очередной
-//     * @param Humman
-//     */
+     * //     * метод добавления очередной
+     * //     * @param Humman
+     * //
+     */
 //    public void addHumanH(Designer_Human Humman) {
 //        humans.add(Humman);
 //    }
-
-    public void searchHuman(List<Designer_Human> humans) {
+    public void searchHuman(ArrayList<Designer_Human> humans) {
         Scanner iScanner = new Scanner(System.in);
         System.out.println("Введите имя человека для поиска: ");
         String human = iScanner.nextLine();
@@ -119,16 +121,60 @@ public class Femily_Tree  implements Serializable,Iterable<Designer_Human>{//д�
     }
 
 
-
     @Override
     public Iterator<Designer_Human> iterator() {
-        return new StaddyIterator(humans); //Реализуем функционал
+        return new StaddyIterator(humans);
+    }
+
+    @Override
+    public void forEach(Consumer<? super Designer_Human> action) {
+        Iterable.super.forEach(action);
+    }
+
+    @Override
+    public Spliterator<Designer_Human> spliterator() {
+        return Iterable.super.spliterator();
     }
 
 
-}
+    public void addHumanNewHomework4(Designer_Human human) {
+        Scanner scanner = new Scanner(System.in);
+        String end = "Готово";
+        for (; ; ) {
+            String newFio = scanner.nextLine();
+            if (newFio.equals(end)) ;
+            {
+                System.out.println(human);
+                String newSex = scanner.nextLine();
+                if (newSex.equals(end)) ;
+                {
+                    System.out.println(human);
+
+                    Integer newDate = scanner.nextInt();
+                    if (newDate != null && newDate.equals(end))
+                    {
+                        System.out.println(human);
+                        continue;
+
+                    }
+//                    human.Designer_Human.addHumansimple();
+                    human.addHuman(newFio,newSex,newDate);
+                }
+                this.humans.add(human);
+            }
+        }
+    }
+    public void printFamilyTree(Femily_Tree humans) {
+        for (Designer_Human HHE : humans) {
+            System.out.println(HHE);
+        }
+        System.out.println();
+    }
 
 
+
+
+    }
 
 
 

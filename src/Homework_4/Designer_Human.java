@@ -10,8 +10,10 @@ import java.util.List;
 public class Designer_Human implements Serializable, Comparable<Designer_Human> {
     public Femily_Tree Designer_Human;
     //создаем поля в классе
-    private String name, sex;
-    private int date,id;
+    private String name;
+    private String sex;
+    private int date;
+    private int id;
 
     public String getName(){
         return name;
@@ -28,7 +30,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return date;
     }
 
-    private Designer_Human father; // Объектная переменная
+    private String father; // Объектная переменная
 
     private Designer_Human mother; // Объектная переменная
 
@@ -45,6 +47,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         this(new ArrayList<>());
     }
 
+
     /**
      * Создаем максимально описанный конструктор
      *
@@ -55,7 +58,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * @param mother
 //     * @param humans
      */
-    public Designer_Human(String name, String sex, int date, Designer_Human father, Designer_Human mother) {
+    public Designer_Human(String name, String sex, int date, String father, Designer_Human mother) {
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -97,7 +100,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
 
-    public void setFather(Designer_Human father) {
+    public void setFather(String father) {
         this.father = father;
     }
 
@@ -134,16 +137,16 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return Child.toString();
     }
 
-    /**
-     * Вариант добавления людей
-     * @param name
-     * @param sex
-     * @param date
-     */
-    public void addHuman(String name, String sex, int date){
-        Designer_Human HH = new Designer_Human(name,sex,date);
-        this.humans.add(HH);
-    }
+//    /**
+//     * Вариант добавления людей
+//     * @param name
+//     * @param sex
+//     * @param date
+//     */
+//    public void addHuman(String name, String sex, int date){
+//        Designer_Human HH = new Designer_Human(name,sex,date);
+//        this.humans.add(HH);
+//    }
 
     /**
      * Переопределение toString
@@ -166,6 +169,17 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     @Override
     public int compareTo(Homework_4.Designer_Human o) {
         return name.compareTo(o.getName());
+    }
+
+    /**
+     * Вариант добавления людей
+     * @param name
+     * @param sex
+     * @param date
+     */
+    public void addHuman(String name, String sex, int date){
+        Designer_Human HH = new Designer_Human(name,sex,date);
+        this.humans.add(HH);
     }
 }
 
