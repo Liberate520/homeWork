@@ -1,9 +1,9 @@
 import java.io.*;
-import java.util.List;
+import java.util.*;
 
 public class Main implements Serializable{
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Family family = new Family();
+        Family<Human> family = new Family<>();
 
         Human granA = new Human("Ekaterina", Gender.WOMAN, 1942, null, null);
         Human dadA = new Human("Ivan", Gender.MAN, 1969, null,granA);
@@ -28,8 +28,9 @@ public class Main implements Serializable{
         family.add(granson3);
         family.add(granson1);
 
-        FileHandler fileHandler = new FileHandler();
-        family.setFileHandler(fileHandler);
+        Service service = new Service(family);
+
+        family.setFileHandler(service);
         family.save();
         Family read = family.read();
         System.out.println(read);
@@ -44,15 +45,14 @@ public class Main implements Serializable{
         System.out.println(broAndSis3);
         System.out.println();
 
-        Service service = new Service(read);
         //сортировка по алфавиту
         service.sortByName();
-        System.out.println(read);
+        System.out.println(family);
         System.out.println();
 
         //сортировка по году рождения
         service.sortByYearBirth();
-        System.out.println(read);
+        System.out.println(family);
 
 
 
