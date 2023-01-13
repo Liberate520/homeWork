@@ -1,12 +1,12 @@
 import java.util.*;
 import java.io.Serializable;
 
-public class Family  implements Serializable, Iterable<Human>{
-    private List<Human> members;
+public class Family <T extends Human> implements Serializable, Iterable<T>{
+    private List<T> members;
 
     private Writable writable;
 
-    public Family(List<Human> members) {
+    public Family(List<T> members) {
         this.members = members;
     }
 
@@ -14,11 +14,11 @@ public class Family  implements Serializable, Iterable<Human>{
         this(new ArrayList<>());
     }
 
-    public List<Human> getMembers() {
+    public List<T> getMembers() {
         return members;
     }
 
-    public void add(Human member) {
+    public void add(T member) {
         if(member != null) {
             members.add(member);
             if(member.getFather() != null) {
@@ -30,9 +30,9 @@ public class Family  implements Serializable, Iterable<Human>{
         }
     }
 
-    public Human search(String sName) {
-        Human find = null;
-        for (Human human: members) {
+    public T search(String sName) {
+        T find = null;
+        for (T human: members) {
             if (human.getName().contains(sName)) {
                 find = human;
             }
@@ -40,46 +40,46 @@ public class Family  implements Serializable, Iterable<Human>{
         return find;
     }
 
-    public List<Human> getParents(Human child) {
-        List<Human> parents = new ArrayList<>();
+    public List<T> getParents(T child) {
+        List<T> parents = new ArrayList<>();
         if(child.getFather() != null) {
-            parents.add(child.getFather());
+            parents.add((T) child.getFather());
         }
         if(child.getMother() != null) {
-            parents.add(child.getMother());
+            parents.add((T) child.getMother());
         }
         return parents;
     }
 
-    public List<Human> getChildrens(List<Human> parents) {
-        List<Human> children = new ArrayList<>();
-        for (Human parent: parents) {
+    public List<T> getChildrens(List<T> parents) {
+        List<T> children = new ArrayList<>();
+        for (T parent: parents) {
             if(parent.getChildren() != null){
-                children.addAll(parent.getChildren());
+                children.addAll((Collection<? extends T>) parent.getChildren());
             }
         }
-        Set<Human> uniq_children = new HashSet<>(children);
+        Set<T> uniq_children = new HashSet<>(children);
         children = new ArrayList<>(uniq_children);
         return children;
     }
 
-    public List<Human> check(String sName) {
-        Human find = search(sName);
-        List<Human> parents = getParents(find);
+    public List<T> check(String sName) {
+        T find = search(sName);
+        List<T> parents = getParents(find);
         if(parents.isEmpty()) return parents;
         else{
-            List<Human> children = getChildrens(parents);
+            List<T> children = getChildrens(parents);
             children.remove(find);
             return children;
         }
     }
 
     public StringBuilder getBroAndSis(String sName) {
-        List<Human> res = check(sName);
+        List<T> res = check(sName);
         StringBuilder result = new StringBuilder(sName  + ": ");
         if(res.isEmpty()) result.append("no sister brother");
         else {
-            for (Human human: res) {
+            for (T human: res) {
                 result.append(human.getName() + " ");
             }
         }
@@ -94,8 +94,8 @@ public class Family  implements Serializable, Iterable<Human>{
     }
 
     public void save() {
-        if(writable instanceof FileHandler) {
-            FileHandler fileHandler1 = (FileHandler) writable;
+        if(writable instanceof Service) {
+            Service fileHandler1 = (Service) writable;
         }
         if(writable != null) {
             writable.save(this);
@@ -108,7 +108,7 @@ public class Family  implements Serializable, Iterable<Human>{
 
     public Family read() {
         if (writable != null) {
-            if (writable instanceof FileHandler) {
+            if (writable instanceof Service) {
                 return (Family) writable.read();
             }
         }
@@ -116,7 +116,8 @@ public class Family  implements Serializable, Iterable<Human>{
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return null;
+    public Iterator<T> iterator() {
+        // сортировка изначально работала почему-то даже с return null
+        return new FamilyIterator(members);
     }
 }
