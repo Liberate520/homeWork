@@ -10,6 +10,10 @@ public class CommunicationWithUsers {
     Designer_Human designer_human = new Designer_Human();//Экземпляр класса
     Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
     Service service = new Service(femily_tree);
+
+    /**
+     * Вызов класса общения с пользователем.
+     */
     public void selectTheProgramVersion() {
         System.out.println("""
                 Выберете версию программы
@@ -87,7 +91,8 @@ public class CommunicationWithUsers {
 
             case 5:
                 System.out.println("Показать все древо");
-                femily_tree.ShowALL(femily_tree.getTree());
+                femily_tree.ShowALL(femily_tree.getTree()); //Вариант 1
+                femily_tree.printTheTreeForEach(); //Вариант 2
                 break;
 
 
@@ -117,9 +122,12 @@ public class CommunicationWithUsers {
         switch (choiceSort){
             case 1:
                 service.sortByName();
+                service.sortLamdaByName();//сортировка с лямда выражением
+                service.sortByStreamByName();
                 break;
             case 2:
                 service.sortByDateOfBirth();
+                service.sortByStreamByDate();
         }
 
 
@@ -152,6 +160,7 @@ public class CommunicationWithUsers {
                 System.out.println("Показать все древо");
                 femily_tree.ShowALL(femily_tree.getTree()); //Вариант 1
                 femily_tree.printFamilyTree(femily_tree); //Вариант 2
+                femily_tree.printTheTreeForEach(); //Вариант 3
                 break;
 
             case 5://поиск по имени

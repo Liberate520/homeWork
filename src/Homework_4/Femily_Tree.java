@@ -69,6 +69,17 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         }
     }
 
+    /**
+     * метод с лямда выражением forEach
+     * короткая запись для перебора коллекции. через forEach можно добавлять значение всему списку
+     */
+    public void printTheTreeForEach() {
+        humans.forEach(Designer_Human -> System.out.println(Designer_Human));
+        humans.forEach(System.out::println); //указатель на метод выше
+
+
+    }
+
 
     /**
      * Поиск по имени
@@ -96,9 +107,6 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
     /**
      * Добавление людей с id
-     * @param name
-     * @param sex
-     * @param date
      */
     public void addingPeopleWithAnId(String name, String sex, int date) {
         Designer_Human human = new Designer_Human(id++, name, sex, date);
@@ -168,12 +176,13 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
                     }
 //                    human.Designer_Human.addHumansimple();
-                    human.addHuman(newFio,newSex,newDate);
+                    human.addHuman(newFio, newSex, newDate);
                 }
                 this.humans.add(human);
             }
         }
     }
+
     public void printFamilyTree(Femily_Tree humans) {
         for (Designer_Human HHE : humans) {
             System.out.println(HHE);
@@ -182,9 +191,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     }
 
 
-
-
-    }
+}
 
 
 
