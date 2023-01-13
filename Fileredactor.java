@@ -87,7 +87,7 @@ public class Fileredactor implements Saveandreadable{
     }
 
     @Override
-    public void print_info(Tree family) throws IOException{
+    public void print_info(Tree<Human> family) throws IOException{
     FileWriter file = new FileWriter("family.txt", true);
     for(Human relative : family){
         file.write("\n" +  relative);

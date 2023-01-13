@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.sound.sampled.SourceDataLine;
 // Делаем класс Tree (где собираются объекты других классов) параметизированным (общим), чтобы можно было добавлять любой объект
-public class Tree<T> implements Iterable<T>  {
+public class Tree<T extends Human> implements Iterable<T>  {
     
     private ArrayList<T> family;
     

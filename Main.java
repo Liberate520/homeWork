@@ -19,9 +19,14 @@ public class Main {
         Human person_2 = new Human("Maria", "Petrova", "15.09.1980", null, "w", "1MP_80", null, null);
         Human person_3 = new Human("Petr", "Petrov", "12.11.1961", null, "m", "1PP_61", null, null);
         Human person_4 = new Human("Marina", "Petrova", "22.10.1965", null, "w", "1MP_65", null, null);
+        Personimport c_import = new Personimport();
         
+
+
         Tree<Human> family = new Tree();
         TreeService family_service = new TreeService(family);
+        
+        
         person_3.setMother_id(person_2.getPerson_id());
         person_3.setFather_id(person_1.getPerson_id());
         person_4.setMother_id(person_2.getPerson_id());
@@ -31,8 +36,8 @@ public class Main {
         family.addHuman(person_2);
         family.addHuman(person_3);
         family.addHuman(person_4);
-    
-        
+        // family.addHuman(person_5);
+        c_import.c_import(family);
         family.print_sister_and_brother(person_3);
         Fileredactor read_redactor = new Fileredactor("input_family.txt");
         

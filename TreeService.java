@@ -4,8 +4,8 @@ import java.util.Collections;
 
 public class TreeService {
 
-    private Tree<Human> tree;
-    public TreeService(Tree<Human> tree) {
+    private Tree tree;
+    public TreeService(Tree tree) {
         this.tree = tree;
 
     }
@@ -16,27 +16,38 @@ public class TreeService {
                          String inp_gender, 
                          String inp_person_id, 
                          String inp_father_id, 
-                         String inp_mother_id) {
-        tree.addHuman(new Human(inp_firstname, 
+                         String inp_mother_id) { 
+        Human person = new Human(inp_firstname, 
         inp_lastname, 
         inp_birth_date, 
         inp_deth_date, 
         inp_gender, 
         inp_person_id, 
         inp_father_id, 
-        inp_mother_id) );
+        inp_mother_id);
+        if(person != null){
+        tree.addHuman(person);
     }
+   
+}
     public void addHuman(Human person) {
-        tree.addHuman(new Human(person.getFirstName(), 
+        Human person_1 = new Human(person.getFirstName(), 
         person.getLastName(), 
         person.getBirthDate(), 
         person.getDethDate(), 
         person.getgender(), 
         person.getPerson_id(), 
         person.getFather_id(), 
-        person.getMother_id()) );
+        person.getMother_id());
+        
+        if (person_1 != null)
+    {
+        tree.addHuman(person_1);
     }
     
+    
+    }
+
 
     public void sortByLastname(){
         Collections.sort(tree.getHumanList());

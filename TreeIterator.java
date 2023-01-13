@@ -3,7 +3,7 @@ package Семинар1.homeWork;
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterator<T> implements Iterator<T>{
+public class TreeIterator<T extends Human> implements Iterator<T>{
     List<T> HumanList;
     private int index;
     public TreeIterator(List<T> HumanList){
