@@ -49,7 +49,7 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println("Сортировка по фамилии");
+        System.out.println("Сортировка по имени");
 
         treeGenetic.sortBySurname();
         for (var human : treeGenetic) {

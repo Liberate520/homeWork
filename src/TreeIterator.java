@@ -1,12 +1,12 @@
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterator implements Iterator<Human> {
+public class TreeIterator<E> implements Iterator<E> {
 
-    private List<Human> tree;
+    private List<E> tree;
     private int index;
 
-    public TreeIterator(List<Human> tree) {
+    public TreeIterator(List<E> tree) {
         this.tree = tree;
     }
 
@@ -16,7 +16,7 @@ public class TreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return tree.get(index++);
     }
 }

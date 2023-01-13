@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Iterable, Serializable {
-    private List<Human> tree;
+public class Tree<E extends Members> implements Iterable, Serializable {
 
-    public Tree(List<Human> humans) {
+    private List<E> tree;
+
+    public Tree(List<E> humans) {
         this.tree = humans;
     }
 
@@ -16,21 +17,21 @@ public class Tree implements Iterable, Serializable {
         this(new ArrayList<>());
     }
 
-    public List<Human> getTree() {
+    public List<E> getTree() {
         return tree;
     }
 
-    public void setTree(List<Human> humans) {
+    public void setTree(List<E> humans) {
         this.tree = humans;
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         tree.add(human);
     }
 
-    public List<Human> getChildrens(Human human) {
-        List<Human> chil = new ArrayList<>();
-        for (Human item : tree) {
+    public List<E> getChildrens(E human) {
+        List<E> chil = new ArrayList<>();
+        for (E item : tree) {
             if (item.getFather() == human || item.getMother() == human) {
                 chil.add(item);
             }
