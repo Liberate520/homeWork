@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Family family = new Family();
+        Family<People> family = new Family<>();
 
         People grandmaF = new People("Ekaterina", "female", 78, null, null);
         People grandpaF = new People("Mikhail", "male", 61, null, null);
@@ -34,34 +34,38 @@ public class Main {
 
         FileHandler fileHandler = new FileHandler();
         family.setFileHandler(fileHandler);
-        family.save();
+        // family.saveFamily();
         // Family readFile = family.readFile();
         // System.out.println(readFile);
 
-        People foundPeople = family.search("Julia");
+        // People foundPeople = family.search("Julia");
 
         // System.out.println(family.search("Julia"));
-        List<String> broAndSis = family.getFamMembers("Evgenia");
+        // List<String> broAndSis = family.getFamMembers("Evgenia");
 
-        // System.out.println("--------------------------------------------");
-        // System.out.println("Вывод с использованием цикла foreach");
-        // for (People people: family) {
-        //     System.out.println(people);
-        // }
-        // System.out.println("--------------------------------------------");
 
-        System.out.println("-----------------------------------------------");
-        System.out.println("Вывод отсортированных людей по имени:");
-        family.sortByName();
-        for (People people : family) {
+        System.out.println("--------------------------------------------");
+        System.out.println("Вывод с использованием цикла foreach");
+        for (People people: family) {
             System.out.println(people);
         }
-        System.out.println("-----------------------------------------------");
+        System.out.println("--------------------------------------------");
+
+        // System.out.println("-----------------------------------------------");
+        // System.out.println("Вывод отсортированных людей по имени:");
+        // family.sortByName();
+        // for (People people : family) {
+        //     System.out.println(people);0
+        // }
+        // System.out.println("-----------------------------------------------");
         // System.out.println();
         // System.out.println("Вывод отсортированных людей по дате рождения:");
         // family.sortByDate();
         // for (People people : family) {
         //     System.out.println(people);
         // }
+
+        ViewFamilyTree<People> viewTree = new ViewFamilyTree<>(family);
+        viewTree.viewTree();
     }
 }

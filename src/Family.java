@@ -6,36 +6,36 @@ import java.util.List;
 import java.util.Set;
 import java.io.Serializable;
 
-public class Family implements Serializable, Iterable<People> /*FamilyIterator<people> */{
+public class Family<T extends People> implements Serializable, Iterable<T>{
 
-    private List<People> members;
+    private List<T> members;
 
     private WritableFile writable;
 
-    public Family(List<People> members) {
+    public Family(List<T> members) {
         this.members = members;
     }
 
-    // Лишняя проверка
-    public void save() {
-        if (writable instanceof FileHandler) {
-            FileHandler fileHandler1 = (FileHandler) writable;
-        }
-        if (writable != null) {
-            writable.save(this);
-        }
+    public void setWritable(WritableFile writable) {
+        this.writable = writable;
+    }
+
+    public void saveFamily() {
+        writable.save(this);
     }
 
     public void setFileHandler(WritableFile writable) {
         this.writable = writable;
     }
 
-    // Лишняя проверка
     public Family readFile() {
         if (writable != null) {
-            if (writable instanceof FileHandler) {
-                return (Family) writable.readFile();
+            // Проверка класса
+            // if (writable instanceof FileHandler) {}
+            if(writable.readFile() == null) {
+                return new Family<T>();
             }
+            else return (Family) writable.readFile();
         }
         return null;
     }
@@ -44,7 +44,7 @@ public class Family implements Serializable, Iterable<People> /*FamilyIterator<p
         this(new ArrayList<>());
     }
 
-    public void add(People member) {
+    public void add(T member) {
         if (member != null) {
             members.add(member);
             if (member.getFather() != null) {
@@ -59,12 +59,12 @@ public class Family implements Serializable, Iterable<People> /*FamilyIterator<p
     // поменять на .contains >> .equals?
     public People search(String sPeopleName) {
         People finderPeople  = null;
-        for (People people : members) {
-            if (people.getName().contains(sPeopleName)) {
-                finderPeople  = people;
+        for (T people : members) {
+            if (people.getName().equals(sPeopleName)) {
+                finderPeople = people;
             }
         }
-        return finderPeople ;
+        return finderPeople;
     }
     
 
@@ -90,10 +90,10 @@ public class Family implements Serializable, Iterable<People> /*FamilyIterator<p
         return res;
     }
 
-    @Override
-    public String toString() {
-        return "Family: " +
-                members;
+    public void showTree(){
+        for (T member: members) {
+            System.out.println(member.toString());
+        }
     }
 
     public void sortByName() {
@@ -105,7 +105,13 @@ public class Family implements Serializable, Iterable<People> /*FamilyIterator<p
     }
 
     @Override
-    public  Iterator<People> iterator() {
+    public String toString() {
+        return "Family: " +
+                members;
+    }
+
+    @Override
+    public  Iterator<T> iterator() {
         // 
         return new FamilyIterator(members);
         // return null;

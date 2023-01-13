@@ -17,8 +17,8 @@ public class People implements Serializable, Comparable<People> {
         this.sex = sex;
         this.birthDate = birthDate;
         children = new ArrayList<>();
-        this.father = father;
-        this.mother = mother;
+        this.father = (People) father;
+        this.mother = (People) mother;
     }
 
     public String getName() {
@@ -72,6 +72,15 @@ public class People implements Serializable, Comparable<People> {
     public void addChild(People child) {
         this.getChildren().add(child);
     }
+
+    // public static void addChild(Human human) {
+    //     if (human.father != null) {
+    //         human.father.childrenList.add(human);
+    //     }
+    //     if (human.mother != null) {
+    //         human.mother.childrenList.add(human);
+    //     }
+    // }
 
     // private int generateNowDate() {
     //     int birthDate = Year.now().getValue();
