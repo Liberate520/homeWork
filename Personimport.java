@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personimport {
+public class Personimport<T extends Human> {
     public Human console_import() throws IOException{
             List<String> data = new ArrayList<>();
             Scanner scan = new Scanner(System.in);
