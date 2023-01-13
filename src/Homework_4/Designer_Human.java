@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-Описываем сущность вида human
+ * Описываем сущность вида human
  */
 public class Designer_Human implements Serializable, Comparable<Designer_Human> {
     public Femily_Tree Designer_Human;
@@ -14,7 +14,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private String sex;
     private int date;
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -38,13 +38,13 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private List<Designer_Human> children;
 
 
-
     private static List<Designer_Human> humans;
 
-    public Designer_Human(List<Designer_Human> humans){
-        Homework_4.Designer_Human.humans =humans;
+    public Designer_Human(List<Designer_Human> humans) {
+        Homework_4.Designer_Human.humans = humans;
     }
-    public Designer_Human(){
+
+    public Designer_Human() {
         this(new ArrayList<>());
     }
 
@@ -132,11 +132,11 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return "Имя: " + getName() + " Возраст: " + getDate() + " Пол : " + getSex() + " Мать : " + mother + " " +
                 " Отец : " + father;
     }
+
     /**
      * метод добавления очередной
-//     * @param Human
      */
-    public static void addHumanH(Designer_Human Human) {
+    public static void addHumanSimpleMetod(Designer_Human Human) {
         humans.add(Human);
     }
 
@@ -147,12 +147,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
     /**
      * Вариант добавления людей
-     * @param name
-     * @param sex
-     * @param date
      */
-    public void addHuman(String name, String sex, int date){
-        Designer_Human HH = new Designer_Human(name,sex,date);
+    public void addHuman(String name, String sex, int date) {
+        Designer_Human HH = new Designer_Human(name, sex, date);
         humans.add(HH);
     }
 }

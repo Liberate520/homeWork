@@ -5,36 +5,36 @@ import java.util.List;
 
 public class CacheLimitations<T> { //Класс для кеширования списков
 
-    ArrayList<T> el;
+    ArrayList<T> element;
     int size;
 
     public CacheLimitations(int size) {
         this.size = size;
-        el = new ArrayList<>(); //создаем экземпляр
+        element = new ArrayList<>(); //создаем экземпляр
 
     }
 
-    public void addEl(T El) { //метод добавления элемента
-        int curSize = el.size(); //текущий размер
+    public void addEl(T Element) { //метод добавления элемента
+        int curSize = element.size(); //текущий размер
         if (curSize >= size) {
             for (int i = 0; i < curSize - size + 1; i++) {
-                el.remove(0);//при переполнение кэша удаляем более старые записи
+                element.remove(0);//при переполнение кэша удаляем более старые записи
             }
-            el.add(El); //добавляем в конец
+            element.add(Element); //добавляем в конец
         }
 
 
     }
 
     public T getEl(int i) { //получаем элемент списка под номером
-        if (i >= el.size()) {
+        if (i >= element.size()) {
             return null;
         }
-        return el.get(i); //вернем нужный элемент.
+        return element.get(i); //вернем нужный элемент.
     }
 
     public List<T> getAllEL() { ////получаем все элементы списка
-        return el;
+        return element;
 
     }
 }

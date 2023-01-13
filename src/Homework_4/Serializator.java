@@ -61,8 +61,6 @@ public class Serializator implements interfaseSave {
                 return human;
             }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

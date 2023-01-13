@@ -19,32 +19,34 @@ public class Service {
 //        this.humans = humans;
 //    }
 
-//    private List<Designer_Human> humanList;
+    private List<Designer_Human> humanList;
 
 
-//    public Service(Femily_Tree humanList) {
-//        super();
+    public Service(Femily_Tree humans) {
+        super();
 //        this.humanList = new ArrayList<>();
-//        this.humans = new ArrayList<>();
-//    }
+        this.humans = new ArrayList<>();
+    }
 
     private static int id;
 
     /**
      * Перенес в femely_Tree
      */
+    @Deprecated //метод устарел
     public void addHumansId(String name, String sex, int date) {
         Designer_Human humanList = new Designer_Human(id++, name, sex, date);
-        Designer_Human.addHumanH(humanList);
+        Designer_Human.addHumanSimpleMetod(humanList);
 
     }
 
     /**
      * Метод сортировки
      */
-//    public void sort() {
-//        Collections.sort(humanList);
-//    }
+    @Deprecated
+    public void sortBase() {
+        Collections.sort(humans);
+    }
 
     /**
      * Сортировка по имени
