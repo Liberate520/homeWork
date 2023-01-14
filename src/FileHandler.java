@@ -24,7 +24,7 @@ public class FileHandler implements Writable, Serializable {
     public void save(Serializable serializable) {
 
         FamilyTree saveTree = (FamilyTree)serializable;
-        String content = toText(saveTree.toString());
+        String content = toText(saveTree);
 
         try (FileWriter fw = new FileWriter(filename, false)) {
             fw.write(content);
@@ -61,22 +61,29 @@ public class FileHandler implements Writable, Serializable {
         return findStr;
     }
 
-    public String toText(String str) {
+    public String toText(FamilyTree familyTree) {
+        String str = familyTree.toString();
         int itemIndex = 0;
         String txt = "";
 
         while (str.indexOf("\n", itemIndex) > 0) {
+
             String line = str.substring(itemIndex, str.indexOf("\n", itemIndex)) + ';';
 
-            txt = txt + "type: " + findMatch(line, "type") + ";";
-            txt = txt + " name: " + findMatch(line, "name") + ";";
-            txt = txt + " gender: " + findMatch(line, "gender") + ";";
-            if (line.contains("father"))
-                txt = txt + " father: " + findMatch(line, "father") + ";";
-            if (line.contains("mother"))
-                txt = txt + " mother: " + findMatch(line, "mother") + ";";
-            txt = txt + "\n";
-
+            if (itemIndex == 0) {
+                txt = txt + line;
+            }
+            else {
+                txt = txt + "id: " + findMatch(line, "id") + ";";
+                txt = txt + " type: " + findMatch(line, "type") + ";";
+                txt = txt + " name: " + findMatch(line, "name") + ";";
+                txt = txt + " gender: " + findMatch(line, "gender") + ";";
+                if (line.contains("father"))
+                    txt = txt + " father: " + findMatch(line, "father") + ";";
+                if (line.contains("mother"))
+                    txt = txt + " mother: " + findMatch(line, "mother") + ";";
+                txt = txt + "\n";
+            }
             itemIndex = str.indexOf("\n", itemIndex) + 1;
         }
         return txt;
@@ -85,23 +92,30 @@ public class FileHandler implements Writable, Serializable {
 
     public FamilyTree fromText(String str) {
         int itemIndex = 0;
-        String type = "", name = "", gender = "", fathername = "", mothername = "";
+        String id = "", type = "", name = "", gender = "", fathername = "", mothername = "";
         FamilyTree loadTree = new FamilyTree();
         Mammal member;
 
         while (str.indexOf("\n", itemIndex) > 0) {
+
             String line = str.substring(itemIndex, str.indexOf("\n", itemIndex)) + ';';
 
-            type = findMatch(line, "type");
-            name = findMatch(line, "name");
-            gender = findMatch(line, "gender");
-            fathername = findMatch(line, "father");
-            mothername = findMatch(line, "mother");
-            if (type.equals("human"))
-                member = new Human(name, gender, loadTree.getMemberByName(fathername), loadTree.getMemberByName(mothername));
-            else
-                member = new Cat(name, gender, loadTree.getMemberByName(fathername), loadTree.getMemberByName(mothername));
-            loadTree.addMember(member);
+            if (itemIndex == 0) {
+                loadTree.setName(line);
+            }
+            else {
+                id = findMatch(line, "id");
+                type = findMatch(line, "type");
+                name = findMatch(line, "name");
+                gender = findMatch(line, "gender");
+                fathername = findMatch(line, "father");
+                mothername = findMatch(line, "mother");
+                if (type.equals("human"))
+                    member = new Human(Integer.parseInt(id), name, gender, loadTree.getMemberByName(fathername), loadTree.getMemberByName(mothername));
+                else
+                    member = new Cat(Integer.parseInt(id), name, gender, loadTree.getMemberByName(fathername), loadTree.getMemberByName(mothername));
+                loadTree.addMember(member);
+            }
 
             itemIndex = str.indexOf("\n", itemIndex) + 1;
         }

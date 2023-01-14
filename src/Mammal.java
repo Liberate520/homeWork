@@ -2,15 +2,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mammal implements Serializable, Comparable<Mammal>  {
+public abstract class Mammal implements Serializable, Comparable<Mammal>  {
     protected String type = "mammal";
+    private int id;
     private String name;
     private String gender;
     private Mammal father;
     private Mammal mother;
     private List<Mammal> children;
 
-    public Mammal(String name, String gender, Mammal father, Mammal mother) {
+    public Mammal(int id, String name, String gender, Mammal father, Mammal mother) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.father = father;
@@ -20,8 +22,8 @@ public class Mammal implements Serializable, Comparable<Mammal>  {
         addChild(mother);
     }
 
-    public Mammal(String name, String gender) {
-        this(name, gender, null, null);
+    public Mammal(int id, String name, String gender) {
+        this(id, name, gender, null, null);
     }
 
     public String getName() {
@@ -44,6 +46,10 @@ public class Mammal implements Serializable, Comparable<Mammal>  {
         return type;
     }
 
+    public int getId() {
+        return id;
+    }
+
     protected void setType(String type) {
         this.type = type;
     }
@@ -59,7 +65,7 @@ public class Mammal implements Serializable, Comparable<Mammal>  {
 
     @Override
     public String toString() {
-        String s = "type: " + type + "; name: " + name + "; gender: " + gender;
+        String s = "id: " + String.format("%d", id) + "; type: " + type + "; name: " + name + "; gender: " + gender;
 
         if (father != null)
             s += "; father: " + father.name;
@@ -114,6 +120,6 @@ public class Mammal implements Serializable, Comparable<Mammal>  {
 
     @Override
     public int compareTo(Mammal o) {
-        return name.compareTo(o.name);
+        return Integer.valueOf(id).compareTo(Integer.valueOf(o.id));
     }
 }

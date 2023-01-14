@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Presenter {
     private View view;
     private Service service;
@@ -8,13 +10,51 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void onGetMember(String city){
-        Mammal answer = service.getMember(city);
-        view.print(answer.toString());
+    public void onGetMember(String name){
+        Mammal answer = service.getMember(name);
+        if (answer != null)
+            view.print(answer.toString());
+        else
+            view.print("Member with name " + name + " not found");
     }
 
     public void onGetTree(){
         FamilyTree answer = service.getTree();
-        view.print(answer.toString());
+        if (answer != null)
+            view.print(answer.toString());
+        else
+            view.print("Family tree not found");
+    }
+
+    public void onGetTree(String index){
+
+        FamilyTree answer = service.getTree(index);
+        if (answer != null)
+            view.print(answer.toString());
+        else
+            view.print("Incorrect input");
+    }
+
+    public void onGetTreeNames(){
+        List<String> answerList = service.getTreeNames();
+        if (answerList != null)
+            for (int i = 0; i < answerList.size(); i++) {
+                view.print("\t" + String.format("%d", i + 1) + " - " +answerList.get(i));
+            }
+    }
+
+    public void onSortTree(int sortType){
+        service.sortTree(sortType);
+        onGetTree();
+    }
+
+    public void onSaveTree(int fileType){
+        String answer = service.saveTree(fileType);
+        view.print(answer);
+    }
+
+    public void onLoadTree(int fileType){
+        String answer = service.loadTree(fileType);
+        view.print(answer);
     }
 }

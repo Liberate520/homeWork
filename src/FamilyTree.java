@@ -1,17 +1,31 @@
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FamilyTree<T extends Mammal> implements Serializable, Iterable<T> {
 
+    private String name;
     private List<T> memberList;
-    private Writable writer;
 
-    public FamilyTree(List<T> memberList) {this.memberList = memberList;}
+    public FamilyTree(String name, List<T> memberList) {
+        this.name = name;
+        this.memberList = memberList;
+    }
 
-    public FamilyTree() {this(new ArrayList<T>());}
+    public FamilyTree(String name) {
+        this(name, new ArrayList<T>());
+    }
+
+    public FamilyTree() {
+        this("", new ArrayList<T>());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<T> getMemberList() {
         return memberList;
@@ -23,7 +37,7 @@ public class FamilyTree<T extends Mammal> implements Serializable, Iterable<T> {
 
     @Override
     public String toString() {
-        String s = "";
+        String s = name + "\n";
         for (T member: memberList) {
             s += member + "\n";
         }
@@ -35,28 +49,12 @@ public class FamilyTree<T extends Mammal> implements Serializable, Iterable<T> {
 
     public T getMemberByName(String name){
         for (T member: memberList){
-            if (member.getName().equals(name)){
+            String lowerName = member.getName().toLowerCase();
+            if (lowerName.equals(name.toLowerCase())){
                 return member;
             }
         }
         return null;
-    }
-
-    public void setWriter(Writable writer) {
-        this.writer = writer;
-    }
-
-    public void save() {
-        if (writer != null)
-            writer.save(this);
-    }
-
-    public void load() {
-        if (writer != null) {
-            FamilyTree loadTree = writer.load();
-            if (loadTree != null)
-                this.setMemberList(loadTree.getMemberList());
-        }
     }
 
     @Override
@@ -64,11 +62,15 @@ public class FamilyTree<T extends Mammal> implements Serializable, Iterable<T> {
         return new FamilyIterator(memberList);
     }
 
-    public void sortByName(){
+    public void sortById(){
         Collections.sort(getMemberList());
     }
 
-    public void sortByChildrenCountDesc(){
+    public void sortByName(){
+        Collections.sort(getMemberList(), new ComparatorByName());
+    }
+
+    public void sortByChildrenCountDesc() {
         Collections.sort(getMemberList(), new ComparatorByChildrenCount());
     }
 }

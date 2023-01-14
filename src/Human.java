@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Human extends Mammal {
 
-    public Human(String name, String gender, Mammal father, Mammal mother) {
-        super(name, gender, father, mother);
+    public Human(int id, String name, String gender, Mammal father, Mammal mother) {
+        super(id, name, gender, father, mother);
         setType("human");
     }
 
-    public Human(String name, String gender) {
-        super(name, gender);
+    public Human(int id, String name, String gender) {
+        super(id, name, gender);
         setType("human");
     }
 

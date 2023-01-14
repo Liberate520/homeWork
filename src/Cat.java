@@ -1,12 +1,12 @@
 public class Cat extends Mammal {
 
-    public Cat(String name, String gender, Mammal father, Mammal mother) {
-        super(name, gender, father, mother);
+    public Cat(int id, String name, String gender, Mammal father, Mammal mother) {
+        super(id, name, gender, father, mother);
         setType("cat");
     }
 
-    public Cat(String name, String gender) {
-        super(name, gender);
+    public Cat(int id, String name, String gender) {
+        super(id, name, gender);
         setType("cat");
     }
 }
