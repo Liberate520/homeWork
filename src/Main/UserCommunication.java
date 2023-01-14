@@ -12,13 +12,8 @@ public class UserCommunication<T extends Human> {
   private UserInput ui = new UserInput();
   private UserMenu<T> um = new UserMenu<T>();
 
-  public String launchMenu() {
-    um.mainMenu();
-    return ui.getString();
-  }
-
-  public String newLaunchMenu(List<Executable> commands) {
-    um.newMainMenu(commands);
+  public String launchMenu(List<Executable> commands) {
+    um.mainMenu(commands);
     return ui.getString();
   }
 

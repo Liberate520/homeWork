@@ -40,7 +40,7 @@ public class Controller<T extends Human> {
    * Запуск работы контроллера
    */
   public void startControl() {
-    String userInput = uc.newLaunchMenu(commandList);
+    String userInput = uc.launchMenu(commandList);
 
     if (userInput.equals("q")) {
       this.controllerOn = false;
@@ -55,38 +55,6 @@ public class Controller<T extends Human> {
         uc.printIncorrectInput();
       }
     }
-
-    // switch (uc.launchMenu()) {
-    // case "1":
-    // cShowHumans.execute();
-    // break;
-
-    // case "2":
-    // cSearch.execute();
-    // break;
-
-    // case "3":
-    // cAdd.execute();
-    // break;
-
-    // case "4":
-    // cSave.execute();
-    // break;
-
-    // case "5":
-    // if (checkAnswer(uc.replaceTree()))
-    // cLoad.execute();
-    // break;
-
-    // case "q":
-    // this.controllerOn = false;
-    // uc.closeInput();
-    // break;
-
-    // default:
-    // uc.incorrectInput();
-    // break;
-    // }
   }
 
   /**
