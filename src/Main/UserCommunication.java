@@ -63,7 +63,7 @@ public class UserCommunication<T extends Human> {
   }
 
   public void showMoreHumansInfo(Map.Entry<Integer, T> personWithId) {
-    if (personWithId.getValue() != null)
+    if (personWithId != null)
       um.showInfo(personWithId.getValue().getInfo());
     else
       um.humanNotFound();
