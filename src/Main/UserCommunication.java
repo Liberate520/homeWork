@@ -30,11 +30,6 @@ public class UserCommunication<T extends Human> {
     um.showHumans(humans);
   }
 
-  public String askToSort() {
-    um.sortMenu();
-    return ui.getString();
-  }
-
   public void showSortedHumanList(List<T> humanList) {
     um.showHumanList(humanList);
   }

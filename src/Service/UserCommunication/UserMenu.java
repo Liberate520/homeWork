@@ -10,29 +10,10 @@ import src.Service.Commands.Executable;
 public class UserMenu<T extends Human> {
 
   public void mainMenu(List<Executable> commands) {
+    System.out.println("");
     for (int i = 0; i < commands.size(); i++)
       System.out.println(i + " - " + commands.get(i).description());
     System.out.println("q - Выход");
-  }
-
-  public void sortMenu() {
-    Map<String, String> menu = new LinkedHashMap<>() {
-      {
-        put("1", "Сортировка по имени");
-        put("2", "Сортировка по количеству детей");
-        put("q", "Не применять сортировку");
-      }
-    };
-
-    showMenu(menu);
-  }
-
-  private void showMenu(Map<String, String> menu) {
-    System.out.println("");
-    for (Map.Entry<String, String> menuPoint : menu.entrySet()) {
-      System.out.println(String.format("%s - %s", menuPoint.getKey(), menuPoint.getValue()));
-    }
-    System.out.print("Выбрано: ");
   }
 
   public void textBeforeShowHumans() {

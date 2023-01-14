@@ -24,6 +24,8 @@ public class Controller<T extends Human> {
     commandList.add(new CommandAdd<>(fts, uc));
     commandList.add(new CommandSave<>(fts, uc));
     commandList.add(new CommandLoad<>(fts, uc));
+    commandList.add(new CommandSortName<>(fts, uc));
+    commandList.add(new CommandSortByChildren<>(fts, uc));
   }
 
   /**
@@ -55,37 +57,5 @@ public class Controller<T extends Human> {
         uc.printIncorrectInput();
       }
     }
-  }
-
-  /**
-   * Выбор метода сортировки списка людей
-   */
-  private void selectSortMethod() {
-    switch (uc.askToSort()) {
-      case "1":
-        uc.showSortedHumanList(fts.sortByName());
-        break;
-
-      case "2":
-        uc.showSortedHumanList(fts.sortByNumberOfChildren());
-        break;
-
-      case "q":
-        break;
-
-      default:
-        uc.printIncorrectInput();
-        break;
-    }
-  }
-
-  /**
-   * Проверка ответа пользователя
-   * 
-   * @param answer
-   * @return boolean утвердительный ли ответ пользователя
-   */
-  private boolean checkAnswer(String answer) {
-    return answer.toLowerCase().equals("y") ? true : false;
   }
 }
