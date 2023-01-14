@@ -1,20 +1,29 @@
 package src.Main;
 
-import java.io.IOException;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
+import src.Service.Commands.*;
 
 public class Controller<T extends Human> {
 
   private boolean controllerOn = true;
   private FTService<T> fts;
   private UserCommunication<T> uc;
+  private List<Executable> commandList;
 
   public Controller(FamilyTree<T> familyTree) {
     this.fts = new FTService<T>(familyTree);
     this.uc = new UserCommunication<T>();
+    commandList = new ArrayList<>();
+
+    commandList.add(new CommandShowHumans<>(fts, uc));
+    commandList.add(new CommandSearch<>(fts, uc));
+    commandList.add(new CommandAdd<>(fts, uc));
+    commandList.add(new CommandSave<>(fts, uc));
+    commandList.add(new CommandLoad<>(fts, uc));
   }
 
   /**
@@ -31,68 +40,53 @@ public class Controller<T extends Human> {
    * Запуск работы контроллера
    */
   public void startControl() {
-    switch (uc.launchMenu()) {
-      case "1":
-        uc.showHumansFromTree(fts.getAllHumans());
-        selectSortMethod();
-        break;
+    String userInput = uc.newLaunchMenu(commandList);
 
-      case "2":
-        Map.Entry<Integer, T> personWithId = fts.searchByName(uc.askFullName());
-        uc.showMoreHumansInfo(personWithId);
-        break;
-
-      case "3":
-        uc.showHumansFromTree(fts.getAllHumans());
-
-        String fullName = uc.askFullName();
-        String gender = uc.askGender();
-
-        Map<Integer, T> availableParents = fts.chooseParent("женский");
-        int numberOfParent = uc.chooseParent(availableParents);
-        T mother = availableParents.get(numberOfParent);
-
-        availableParents = fts.chooseParent("мужской");
-        numberOfParent = uc.chooseParent(availableParents);
-        T father = availableParents.get(numberOfParent);
-
-        fts.createHuman(fullName, gender, mother, father);
-        break;
-
-      case "4":
-        try {
-          fts.save();
-          uc.saveAction(true);
-        } catch (IOException e) {
-          e.printStackTrace();
-          uc.loadAction(false);
-        }
-        break;
-
-      case "5":
-        if (checkAnswer(uc.replaceTree())) {
-          fts.createBackup();
-          fts.clearTree();
-          try {
-            fts.load();
-            uc.loadAction(true);
-          } catch (Exception e) {
-            e.printStackTrace();
-            uc.loadAction(false);
-            fts.restoreFromBackup();
-          }
-        }
-        break;
-
-      case "q":
-        this.controllerOn = false;
-        uc.closeInput();
-        break;
-
-      default:
-        uc.incorrectInput();
-        break;
+    if (userInput.equals("q")) {
+      this.controllerOn = false;
+      uc.closeInput();
+    } else {
+      try {
+        int choosenMenuPoint = Integer.parseInt(userInput);
+        commandList.get(choosenMenuPoint).execute();
+      } catch (NumberFormatException e) {
+        uc.printIncorrectInput();
+      } catch (IndexOutOfBoundsException e) {
+        uc.printIncorrectInput();
+      }
     }
+
+    // switch (uc.launchMenu()) {
+    // case "1":
+    // cShowHumans.execute();
+    // break;
+
+    // case "2":
+    // cSearch.execute();
+    // break;
+
+    // case "3":
+    // cAdd.execute();
+    // break;
+
+    // case "4":
+    // cSave.execute();
+    // break;
+
+    // case "5":
+    // if (checkAnswer(uc.replaceTree()))
+    // cLoad.execute();
+    // break;
+
+    // case "q":
+    // this.controllerOn = false;
+    // uc.closeInput();
+    // break;
+
+    // default:
+    // uc.incorrectInput();
+    // break;
+    // }
   }
 
   /**

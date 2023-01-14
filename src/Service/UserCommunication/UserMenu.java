@@ -5,8 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import src.Entities.Human;
+import src.Service.Commands.Executable;
 
 public class UserMenu<T extends Human> {
+
+  public void newMainMenu(List<Executable> commands) {
+    for (int i = 0; i < commands.size(); i++)
+      System.out.println(i + " - " + commands.get(i).description());
+    System.out.println("q - Выход");
+  }
 
   public void mainMenu() {
     Map<String, String> menu = new LinkedHashMap<>() {

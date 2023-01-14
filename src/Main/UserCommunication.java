@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import src.Entities.Human;
+import src.Service.Commands.Executable;
 import src.Service.UserCommunication.UserInput;
 import src.Service.UserCommunication.UserMenu;
 
@@ -16,8 +17,17 @@ public class UserCommunication<T extends Human> {
     return ui.getString();
   }
 
+  public String newLaunchMenu(List<Executable> commands) {
+    um.newMainMenu(commands);
+    return ui.getString();
+  }
+
   public String getString() {
     return ui.getString();
+  }
+
+  public int getInt() {
+    return ui.getInt();
   }
 
   public void showHumansFromTree(Map<Integer, T> humans) {
