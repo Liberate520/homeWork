@@ -4,13 +4,9 @@ import src.Entities.Human;
 import src.Main.FTService;
 import src.Main.UserCommunication;
 
-public class CommandShowHumans<T extends Human> implements Executable {
-  private FTService<T> fts;
-  private UserCommunication<T> uc;
-
+public class CommandShowHumans<T extends Human> extends Command<T> {
   public CommandShowHumans(FTService<T> fts, UserCommunication<T> uc) {
-    this.fts = fts;
-    this.uc = uc;
+    super(fts, uc);
   }
 
   @Override
@@ -21,7 +17,6 @@ public class CommandShowHumans<T extends Human> implements Executable {
   @Override
   public void execute() {
     uc.showHumansFromTree(fts.getAllHumans());
-    // selectSortMethod();
   }
 
 }

@@ -4,14 +4,9 @@ import src.Entities.Human;
 import src.Main.FTService;
 import src.Main.UserCommunication;
 
-public class CommandSortByChildren<T extends Human> implements Executable {
-
-  private FTService<T> fts;
-  private UserCommunication<T> uc;
-
+public class CommandSortByChildren<T extends Human> extends Command<T> {
   public CommandSortByChildren(FTService<T> fts, UserCommunication<T> uc) {
-    this.fts = fts;
-    this.uc = uc;
+    super(fts, uc);
   }
 
   @Override

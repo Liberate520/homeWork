@@ -6,13 +6,9 @@ import src.Entities.Human;
 import src.Main.FTService;
 import src.Main.UserCommunication;
 
-public class CommandSearch<T extends Human> implements Executable {
-  private FTService<T> fts;
-  private UserCommunication<T> uc;
-
+public class CommandSearch<T extends Human> extends Command<T> {
   public CommandSearch(FTService<T> fts, UserCommunication<T> uc) {
-    this.fts = fts;
-    this.uc = uc;
+    super(fts, uc);
   }
 
   @Override
