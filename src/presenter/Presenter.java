@@ -33,15 +33,21 @@ public class Presenter<T extends Human> {
     }
 
     public String getAllChildren(String str) {
-        return familyTree.getByName(str).getAllChildren();
-    }
+        if (familyTree.getByName(str)!=null) {
+            return familyTree.getByName(str).getAllChildren();
+        } else return String.format("%s нет в FamilyTree!", str);
+}
 
     public String getAllSisters(String str) {
-        return String.format("Сёстры %s - %s\n", familyTree.getByName(str).getName(), familyTree.getByName(str).getAllSistersOrBrothers("Ж"));
+        if (familyTree.getByName(str)!=null){
+            return String.format("Сёстры %s - %s\n", familyTree.getByName(str).getName(), familyTree.getByName(str).getAllSistersOrBrothers("Ж"));
+        } else return String.format("%s нет в FamilyTree!", str);
     }
 
     public String getAllBrothers(String str) {
-        return String.format("Братья %s - %s\n", familyTree.getByName(str).getName(), familyTree.getByName(str).getAllSistersOrBrothers("М"));
+        if (familyTree.getByName(str)!=null){
+            return String.format("Братья %s - %s\n", familyTree.getByName(str).getName(), familyTree.getByName(str).getAllSistersOrBrothers("М"));
+        } else return String.format("%s нет в FamilyTree!", str);
     }
 
     public FamilyTree sortFamilyTree(String sortParameter) {

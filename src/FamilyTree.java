@@ -153,17 +153,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> { 
         return members;
     }
 
-//    /**
-//     * сортировка по имени
-//     */
-//    public void sortByName(){
-//        Collections.sort(this.getMembers());
-//    }
-//
-//
-//    public void sortByAge(){
-//        Collections.sort(this.getMembers(), new ComparatorByAge());
-//    }
 
     /**
      * сортировка FamilyTree по параметру
@@ -171,11 +160,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> { 
      * @param sortParameter String
      */
     public void sortFamilyTree(String sortParameter) {
-//        if (sortParameter.equals("name")) {
-//            Collections.sort(this.getMembers());
-//        } else if (sortParameter.equals("age")) {
-//            Collections.sort(this.getMembers(), new ComparatorByAge(sortParameter));
-//        }
         Collections.sort(this.getMembers(), new Comparator(sortParameter));
 
     }
