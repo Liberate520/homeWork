@@ -4,21 +4,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class HumanListService {
-    FamilyTree familyTree;
+public class HumanListService<T extends Human> {
+    FamilyTree<T> familyTree;
 
-    public HumanListService(FamilyTree familyTree) {
+    public HumanListService(FamilyTree<T> familyTree) {
         this.familyTree = familyTree;
     }
 
     public void sortByLastName() {       
-        List<Map.Entry<String, Human>> list =
-                new LinkedList<Map.Entry<String, Human>>(familyTree.getHumanMap().entrySet());
+        List<Map.Entry<String, T>> list =
+                new LinkedList<Map.Entry<String, T>>(familyTree.getHumanMap().entrySet());
 
-        Collections.sort(list, new HunamComparatorByLastName());
+        Collections.sort(list, new HunamComparatorByLastName<T>());
 
-        Map<String, Human> result = new LinkedHashMap<String, Human>();
-        for (Map.Entry<String, Human> entry : list) {
+        Map<String, T> result = new LinkedHashMap<String, T>();
+        for (Map.Entry<String, T> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
 
@@ -26,13 +26,13 @@ public class HumanListService {
     }
 
     public void sortByName() {       
-        List<Map.Entry<String, Human>> list =
-                new LinkedList<Map.Entry<String, Human>>(familyTree.getHumanMap().entrySet());
+        List<Map.Entry<String, T>> list =
+                new LinkedList<Map.Entry<String, T>>(familyTree.getHumanMap().entrySet());
 
-        Collections.sort(list, new HunamComparatorByName());
+        Collections.sort(list, new HunamComparatorByName<T>());
 
-        Map<String, Human> result = new LinkedHashMap<String, Human>();
-        for (Map.Entry<String, Human> entry : list) {
+        Map<String, T> result = new LinkedHashMap<String, T>();
+        for (Map.Entry<String, T> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
 
@@ -40,13 +40,13 @@ public class HumanListService {
     }
 
     public void sortBySecondName() {       
-        List<Map.Entry<String, Human>> list =
-                new LinkedList<Map.Entry<String, Human>>(familyTree.getHumanMap().entrySet());
+        List<Map.Entry<String, T>> list =
+                new LinkedList<Map.Entry<String, T>>(familyTree.getHumanMap().entrySet());
 
-        Collections.sort(list, new HunamComparatorBySecondName());
+        Collections.sort(list, new HunamComparatorBySecondName<T>());
 
-        Map<String, Human> result = new LinkedHashMap<String, Human>();
-        for (Map.Entry<String, Human> entry : list) {
+        Map<String, T> result = new LinkedHashMap<String, T>();
+        for (Map.Entry<String, T> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
 

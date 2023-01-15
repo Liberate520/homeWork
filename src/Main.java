@@ -32,7 +32,7 @@ public class Main {
         // h.setParentFather(g);
         // h.setParentMother(c);
 
-        FamilyTree humanList = new FamilyTree();
+        FamilyTree<Human> humanList = new FamilyTree<>();
 
         // humanList.addHuman(a);
         // humanList.addHuman(b);
@@ -66,7 +66,7 @@ public class Main {
         //     }
         // }
 
-        FileHandler fileHandler = new FileHandler();
+        FileHandler<Human> fileHandler = new FileHandler<>();
         humanList.setWritable(fileHandler);
 
         // humanList.save();
@@ -76,9 +76,10 @@ public class Main {
         Map<String, Human> humans = humanList.getHumanMap();
         humans.forEach((id, x) -> System.out.println(x.getFIOtoString()));
         System.out.println();
-        HumanListService humanListService = new HumanListService(humanList);
 
-        humanListService.sortByLastName();
+        HumanListService<Human> humanListService = new HumanListService<>(humanList);
+
+        humanListService.sortByName();
 
         Map<String, Human> humans1 = humanList.getHumanMap();
         humans1.forEach((id, x) -> System.out.println(x.getFIOtoString()));   

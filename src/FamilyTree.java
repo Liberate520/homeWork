@@ -3,11 +3,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FamilyTree {
-    private Map<String, Human> humanMap;
-    private Writable  writable;
+public class FamilyTree<T extends Human> {
+    private Map<String, T> humanMap;
+    private Writable<T>  writable;
 
-    public FamilyTree(Map<String, Human> humanMap) {
+    public FamilyTree(Map<String, T> humanMap) {
         this.humanMap = humanMap;
     }
 
@@ -15,16 +15,16 @@ public class FamilyTree {
         this(new HashMap<>());
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
         humanMap.put(human.getUuid(), human);
     }
 
-    public Human getHumanByUuid(String uuid) {
+    public T getHumanByUuid(String uuid) {
         return humanMap.get(uuid);
     }
 
-    public List<Human> serchHumanByFio(String fio) {
-        List<Human> res = new ArrayList<>();
+    public List<T> serchHumanByFio(String fio) {
+        List<T> res = new ArrayList<>();
 
         String[] fioList = fio.split(" ");
 
@@ -47,36 +47,40 @@ public class FamilyTree {
         return res;
     }
 
-    public Human removeHumanByUuid(String uuid) {
+    public T removeHumanByUuid(String uuid) {
         return humanMap.remove(uuid);
     }
 
-    public void setHumanList(Map<String, Human> humanMap) {
+    public void setHumanList(Map<String, T> humanMap) {
         this.humanMap = humanMap;
+    }
+
+    public List<T> getHumanList() {
+        List<T> objList = new ArrayList<>();
+            this.humanMap.forEach((id, x) -> objList.add(x));
+        return objList;
     }
 
     public void save() {
         if (writable != null && this.humanMap != null){
-            List<Object> objList = new ArrayList<>();
-            this.humanMap.forEach((id, x) -> objList.add(x));
-            writable.save(objList);
+            writable.save(this.getHumanList());
         }
     }
 
     public void read() {
         if (writable != null) {
-            List<Object> objList = writable.read();
-            for (Object obj : objList) {
-                humanMap.put(((Human) obj).getUuid(),(Human) obj);
+            List<T> objList = writable.read();
+            for (T obj : objList) {
+                humanMap.put(((T) obj).getUuid(),(T) obj);
             }
         }
     }
 
-    public void setWritable(Writable writable) {
+    public void setWritable(Writable<T> writable) {
         this.writable = writable;
     }
 
-    public Map<String, Human> getHumanMap() {
+    public Map<String, T> getHumanMap() {
         return humanMap;
     }
 }
