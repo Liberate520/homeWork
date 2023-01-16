@@ -21,8 +21,6 @@ public class Main implements Serializable {
         tree = fileHandler.read();
         System.out.println(tree);
         
-        
-        
         System.out.println();
 
         tree.sortByName();

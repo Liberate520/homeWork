@@ -22,14 +22,27 @@ public class FileHandler implements Saveable, Readable {
         Tree<Human> tree = new Tree<>();
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(".//homeWorkOOP.//src.//familytree.out"));
-        
-        //Каким то образом нужно определить количество хьюманов в файле чтобы можно было добаить циклом в дерево
-        tree.add_human((Human) objectInputStream.readObject());
-        tree.add_human((Human) objectInputStream.readObject());
-        tree.add_human((Human) objectInputStream.readObject());
 
-        objectInputStream.close();
+        while (true) {
+            try {
+                tree.add_human((Human) objectInputStream.readObject());
+            } catch (Exception e) {
+                break;
+            }
+        }
         return tree;
+        // Tree<Human> tree = new Tree<>();
+        // ObjectInputStream objectInputStream = new ObjectInputStream(
+        // new FileInputStream(".//homeWorkOOP.//src.//familytree.out"));
+
+        // // Каким то образом нужно определить количество хьюманов в файле чтобы можно
+        // // было добаить циклом в дерево
+        // tree.add_human((Human) objectInputStream.readObject());
+        // tree.add_human((Human) objectInputStream.readObject());
+        // tree.add_human((Human) objectInputStream.readObject());
+
+        // objectInputStream.close();
+        // return tree;
     }
 
 }
