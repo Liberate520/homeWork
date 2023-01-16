@@ -1,4 +1,4 @@
-package DZ1;
+package DZ1.app;
 
 import java.util.List;
 
@@ -10,6 +10,9 @@ public class Presenter<T extends Human> {
         this.view = view;
         this.familyTree = familyTree;
         view.setPresenter(this);
+    }
+
+    public Presenter() {
     }
 
     public List<T> getAllHumans() {

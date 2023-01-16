@@ -1,4 +1,4 @@
-package DZ1;
+package DZ1.app;
 
 import java.io.Serializable;
 import java.util.ArrayList;
