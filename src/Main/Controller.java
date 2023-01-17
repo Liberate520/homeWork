@@ -51,9 +51,7 @@ public class Controller<T extends Human> {
       try {
         int choosenMenuPoint = Integer.parseInt(userInput);
         commandList.get(choosenMenuPoint).execute();
-      } catch (NumberFormatException e) {
-        uc.printIncorrectInput();
-      } catch (IndexOutOfBoundsException e) {
+      } catch (NumberFormatException | IndexOutOfBoundsException e) {
         uc.printIncorrectInput();
       }
     }
