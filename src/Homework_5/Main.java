@@ -8,13 +8,15 @@ public class Main {
         /*
         Вызываем экземпляры класса
          */
-        Femily_Tree humans = new Femily_Tree();
-        Designer_Human human = new Designer_Human();
+
+        Femily_Tree femily_tree = new Femily_Tree();
+
+        Designer_Human designer_human = new Designer_Human();
         /*
         параметризуем список
         */
         CacheLimitations<Designer_Human> cache = new CacheLimitations<>(10); //параметризуем список людей и устанавливаем размер кэша
-        for (Designer_Human H1 : humans) {
+        for (Designer_Human H1 : femily_tree) {
             cache.addEl(H1);
         }
         cache.getAllEL().forEach(System.out::println); //выводим кэш на экран
@@ -29,7 +31,7 @@ public class Main {
          * Позволяет перебрать объекты коллекции
          */
 
-        Iterator<Designer_Human> iterator = humans.iterator();
+        Iterator<Designer_Human> iterator = femily_tree.iterator();
         while (iterator.hasNext()) {
             Designer_Human HHE = iterator.next();
             System.out.println(HHE);
@@ -44,7 +46,7 @@ public class Main {
 
             }
         };
-        System.out.println(serializator.serializaSave(human)); //Проверка если true - значит запись прошла
+        System.out.println(serializator.serializaSave(designer_human)); //Проверка если true - значит запись прошла
 
 //
 //        try {
@@ -56,8 +58,8 @@ public class Main {
 
 
         WorkingFile fileworker = new WorkingFile();
-        fileworker.serializaSave(human); //записываем
-        fileworker.DesSerializa(human);// читаем
+        fileworker.serializaSave(designer_human); //записываем
+        fileworker.DesSerializa(designer_human);// читаем
     }
 
 }

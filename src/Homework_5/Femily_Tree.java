@@ -1,36 +1,36 @@
 package Homework_5;
 
+import metods.PrintMetods;
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 
 
-public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к
-    // конструктору человека
+public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к конструктору человека
+        /*
+        *ОПИСАНИЕ КЛАССА
+        *В этом классе реализованны методы добавления и поиска + итераторы
+         */
     private static int id;
 
-    private final List<Designer_Human> humans; //константа
-//    public Femily_Tree() {
-//        humans = new ArrayList();
-//    }
+    Designer_Human designer_human;
+    PrintMetods printMetods;
+
+    public final List<Designer_Human> humans; //константа
 
 
-//    public List<Designer_Human> getHumans() {
-//        return this.humans;
-//    }
-//    public List<Designer_Human> getHumans(){
-//        return humans;
-//    }
 
-
+    /**
+     * Обязательный конструктор
+     */
     public Femily_Tree() {
         super();
         this.humans = new ArrayList<Designer_Human>();
     }
-
-//    public List<Designer_Human> getHumans() {
-//        return humans;
-//    }
+        /*
+        *ДОБАВЛЕНИЕ РОДИТЕЛЕЙ
+         */
 
     /**
      * Метод добавления родителе
@@ -45,38 +45,9 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
     }
 
-    /**
-     * Метод вывода всех людей из списка
+    /*
+    *ПОИСКОВИКИ
      */
-    public void printDrevo(List<Designer_Human> humans) {
-        System.out.println(humans);
-    }
-
-
-    public List<Designer_Human> getTree() {
-        return this.humans;
-    }
-
-    /**
-     * метод вывода всех людей из дерева
-     */
-    public void ShowALL(List<Designer_Human> humans) {
-        for (Designer_Human human : this.humans) {
-            System.out.println(human.toString());
-        }
-    }
-
-    /**
-     * метод с лямда выражением forEach
-     * короткая запись для перебора коллекции. через forEach можно добавлять значение всему списку
-     */
-    public void printTheTreeForEach() {
-        humans.forEach(Designer_Human -> System.out.println(Designer_Human));
-        humans.forEach(System.out::println); //указатель на метод выше
-
-
-    }
-
     /**
      * Поиск по имени
      *
@@ -93,38 +64,9 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     }
 
     /**
-     * Еще вариант метода добавления людей
+     * Поиск человека
+     * @param humans
      */
-    public void addHumansimple(Designer_Human human) {
-        this.humans.add(human);
-    }
-
-    /**
-     * Добавление людей с id
-     */
-    public void addingPeopleWithAnId(String name, String sex, int date) {
-        Designer_Human human = new Designer_Human(id++, name, sex, date);
-        Designer_Human.addHumanSimpleMetod(human);
-    }
-
-    public void addingPeopleWithAnIdScanner() {
-        Scanner iScanner = new Scanner(System.in);
-        String name = iScanner.nextLine();
-        String sex = iScanner.nextLine();
-        int date = iScanner.nextInt();
-        Designer_Human human = new Designer_Human(id++, name, sex, date);
-        Designer_Human.addHumanSimpleMetod(human);
-    }
-
-
-    /**
-     * //     * метод добавления очередной
-     */
-    @Deprecated
-    public void addHumanH(Designer_Human Humman) {
-        humans.add(Humman);
-    }
-
     public void searchHuman(ArrayList<Designer_Human> humans) {
         Scanner iScanner = new Scanner(System.in);
         System.out.println("Введите имя человека для поиска: ");
@@ -139,24 +81,47 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         }
     }
 
+    /*
+    *ДОБАВЛЕНИЕ ЛЮДЕЙ
+     */
 
-    @Override
-    public Iterator<Designer_Human> iterator() {
-        return new StaddyIterator(humans);
+    /**
+     * Вариант добавление людей
+     */
+    public void addHumanSimple(Designer_Human human) {
+        this.humans.add(human);
     }
 
-    @Override
-    public void forEach(Consumer<? super Designer_Human> action) {
-        Iterable.super.forEach(action);
+    /**
+     * Вариант добавление людей с id
+     */
+    public void addingPeopleWithAnId(String name, String sex, int date) {
+        Designer_Human human = new Designer_Human(id++, name, sex, date);
+        addHumanSimpleMetod(human);
+    }
+/**
+ *Вариант добавления людей с id + сканер
+ */public void addingPeopleWithAnIdScanner() {
+        Scanner iScanner = new Scanner(System.in);
+        String name = iScanner.nextLine();
+        String sex = iScanner.nextLine();
+        int date = iScanner.nextInt();
+        Designer_Human human = new Designer_Human(id++, name, sex, date);
+        addHumanSimpleMetod(human);
     }
 
-    @Override
-    public Spliterator<Designer_Human> spliterator() {
-        return Iterable.super.spliterator();
+    /**
+     * Вариант добавления людей
+     */
+    @Deprecated
+    public void addHumanH(Designer_Human Humman) {
+        humans.add(Humman);
     }
 
     /**
      * Финишное добавление
+     * Вариант добавления людей + сканер
+     *
      * @param human
      */
     public void addHumanNewHomework4(Designer_Human human) {
@@ -181,27 +146,113 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
                     }
 //                    human.Designer_Human.addHumansimple();
-                    human.addHuman(newFio, newSex, newDate);
+                    addHuman(newFio, newSex, newDate);
                 }
                 this.humans.add(human);
             }
         }
     }
 
+
     /**
-     * Печать древа
+     * Вариант добавления людей + конструктор
      */
-    public void printFamilyTree(Femily_Tree humans) {
-        for (Designer_Human HHE : humans) {
-            System.out.println(HHE);
-        }
-        System.out.println();
+    public void addHuman(String name, String sex, int date) {
+        Designer_Human HH = new Designer_Human(name, sex, date);
+        humans.add(HH);
+    }
+
+    /**
+     * метод добавления очередной
+     */
+    public void addHumanSimpleMetod(Designer_Human Human) {
+        humans.add(Human);
+
     }
 
 
+    /*
+    ДОБАВЛЕНИЕ ДЕТЕЙ
+     */
 
+    /**
+     * Вариант добавления детей
+     */
+    public void addChildren() { // добавляем детей другим методом
+        StringBuilder Child = new StringBuilder();
+        if (designer_human.getChildren() != null) {
+            Child.append(designer_human.getName());
+            for (Designer_Human c : designer_human.getChildren()) {
+                Child.append(c.getName());
+            }
+        } else {
+            Child.append("null");
+        }
+    }
+
+    /**
+     * Вариант добавления детей + сканер
+     */
+    public void addChildrenScanner() { // добавляем детей другим методом
+        System.out.println("Кто твои родители ?");
+        printMetods.printDrevo(humans);
+
+        StringBuilder Child = new StringBuilder();
+        if (designer_human.getChildren() != null) {
+
+            Child.append(designer_human.getName());
+            for (Designer_Human c : designer_human.getChildren()) {
+                Child.append(c.getName());
+            }
+        } else {
+            Child.append("null");
+        }
+    }
+
+    /**
+     * метод добавления детей + сканет + финиш
+     */
+    public static void selectChildrenScanner() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Пожалуйста, введите имя:");
+        String personName = scanner.nextLine();
+
+        Designer_Human human = new Designer_Human(personName);
+
+        System.out.println("Пожалуйста, введите имя отца (или нажмите enter, если оно недоступно) ");
+        String fatherName = scanner.nextLine();
+        if (!fatherName.isEmpty()) {
+            human.setFather(String.valueOf(new Designer_Human(fatherName)));
+        }
+
+        System.out.println("Пожалуйста, введите имя матери (или нажмите enter, если оно недоступно). ");
+        String motherName = scanner.nextLine();
+        if (!motherName.isEmpty()) {
+            human.setMother(new Designer_Human(motherName));
+        }
+
+        System.out.println("Выбранный человек : " + human);
+    }
+
+
+    /*
+     *ИТЕРАТОРЫ
+     */
+    @Override
+    public Iterator<Designer_Human> iterator() {
+        return new StaddyIterator(humans);
+    }
+
+    @Override
+    public void forEach(Consumer<? super Designer_Human> action) {
+        Iterable.super.forEach(action);
+    }
+
+    @Override
+    public Spliterator<Designer_Human> spliterator() {
+        return Iterable.super.spliterator();
+    }
 
 }
-
 
 

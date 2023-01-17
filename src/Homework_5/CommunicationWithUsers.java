@@ -1,5 +1,6 @@
 package Homework_5;
 
+import metods.PrintMetods;
 import metods.SortClass;
 
 import java.util.ArrayList;
@@ -8,11 +9,13 @@ import java.util.Scanner;
 public class CommunicationWithUsers {
     //
     Scanner iScanner = new Scanner(System.in);
-     Designer_Human designer_human = new Designer_Human();//Экземпляр класса
-    Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
+//    Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
+    Femily_Tree femily_tree;
 //    Service service = new Service(femily_tree);
+PrintMetods printMetods;
 
     SortClass sortClass;
+    Designer_Human designer_human;
 
 
     /**
@@ -64,7 +67,7 @@ public class CommunicationWithUsers {
                     int choiceDate = iScanner.nextInt();
 //                Designer_Human.addHuman(choiceName, choiceGender, choiceDate);
                     //IDEA на этом этапе предлагает статику а в самом методе предлагает убрать статику.
-                    femily_tree.addHumansimple(new Designer_Human(choiceName, choiceGender, choiceDate));
+                    femily_tree.addHumanSimple(new Designer_Human(choiceName, choiceGender, choiceDate));
                     break;
                 case 2:
                     String choiceNameId = iScanner.nextLine();
@@ -75,13 +78,13 @@ public class CommunicationWithUsers {
 
                 case 3:
                     System.out.println("Кто твои родители?");
-                    femily_tree.printDrevo(femily_tree.getTree());
-                    designer_human.addChildren(); //старый вариант добавления
-                    Designer_Human.selectChildrenScanner(); // Новый вариант добавления детей
+                    printMetods.printDrevo(designer_human.getHumans());
+                    femily_tree.addChildren(); //старый вариант добавления
+                    Femily_Tree.selectChildrenScanner(); // Новый вариант добавления детей
 
                 case 4:
                     System.out.println("К кому будем добавлять родителей ?");
-                    femily_tree.printDrevo(femily_tree.getTree());
+                    printMetods.printDrevo(designer_human.getHumans());
                 /*
                 тут нужно получить список людей
                 Разбить их на числа с помощью hushMap
@@ -98,8 +101,8 @@ public class CommunicationWithUsers {
 
                 case 5:
                     System.out.println("Показать все древо");
-                    femily_tree.ShowALL(femily_tree.getTree()); //Вариант 1
-                    femily_tree.printTheTreeForEach(); //Вариант 2
+                    printMetods.ShowALL(designer_human.getHumans()); //Вариант 1
+                    printMetods.printTheTreeForEach(); //Вариант 2
                     break;
                 case 6:
                     System.out.println("Введите имя");
@@ -107,7 +110,7 @@ public class CommunicationWithUsers {
                     femily_tree.showName(choiceNameCase5);
                     break;
                 case 7:
-                    sortingTheSheet();
+                    sortClass.sortingTheSheet();
                     break;
 
 
@@ -122,33 +125,6 @@ public class CommunicationWithUsers {
     /**
      * меню сортировки
      */
-    public void sortingTheSheet() {
-        System.out.println("""
-                Выберите варианты сортировки
-                1.По имени
-                2.По дате рождения
-                """);
-        int choiceSort = iScanner.nextInt();
-        try {
-            switch (choiceSort) {
-                case 1 -> {
-                    sortClass.sortByName();
-                    sortClass.sortLamdaByName();//сортировка с лямда выражением
-                    sortClass.sortByStreamByName();
-                }
-                case 2 -> {
-                    sortClass.sortByDateOfBirth();
-                    sortClass.sortByStreamByDate();
-                }
-            }
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Промазал давай по новой ");
-            selectTheProgramVersion();
-
-        }
-
-    }
 
     /**
      * @parm В этой версии происходит только вызовы методов(Все действия в самих методах)
@@ -180,26 +156,26 @@ public class CommunicationWithUsers {
                     femily_tree.addingPeopleWithAnIdScanner();
                 }
                 case 3 -> {
-                    Designer_Human.selectChildrenScanner();
+                    Femily_Tree.selectChildrenScanner();
 
                 }
 
                 case 4 -> {
                     System.out.println("Показать все древо");
-                    femily_tree.ShowALL(femily_tree.getTree()); //Вариант 1
-                    femily_tree.printFamilyTree(femily_tree); //Вариант 2
-                    femily_tree.printTheTreeForEach(); //Вариант 3
+                    printMetods.ShowALL(designer_human.getHumans()); //Вариант 1
+                    printMetods.printFamilyTree(femily_tree); //Вариант 2
+                    printMetods.printTheTreeForEach(); //Вариант 3
                 }
 
 
                 case 5 -> {//поиск по имени
-                    femily_tree.searchHuman((ArrayList<Designer_Human>) femily_tree.getTree());
+                    femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
                 }
                 case 6 -> {
 
                 }
                 case 7 -> {
-                    sortingTheSheet();
+                    sortClass.sortingTheSheet();
                 }
 
             }

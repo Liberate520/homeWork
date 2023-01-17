@@ -1,6 +1,6 @@
 package Homework_5;
 
-import metods.Designer_Human;
+
 import metods.PrintMetods;
 import metods.SortClass;
 
@@ -36,7 +36,7 @@ PrintMetods printMetods;
                 case 2 -> {}
                 case 3 -> {}
                 case 4 -> showAllTree();
-                case 5 -> femily_tree.searchHuman((ArrayList<Designer_Human>) femily_tree.getTree());
+                case 5 -> femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
                 case 6 -> {}
                 case 7 -> sortClass.sortingTheSheet();
             }
@@ -57,7 +57,7 @@ PrintMetods printMetods;
     private void showAllTree(){
         System.out.println("Показать все древо");
         System.out.println("Вариант № 1 ");
-        printMetods.showALL(femily_tree.getTree()); //Вариант 1
+        printMetods.ShowALL(designer_human.getHumans()); //Вариант 1
         System.out.println("Вариант № 2 ");
         printMetods.printFamilyTree(femily_tree); //Вариант 2
         System.out.println("Вариант № 2 ");

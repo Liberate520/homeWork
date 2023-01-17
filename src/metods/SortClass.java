@@ -3,10 +3,7 @@ package metods;
 import Homework_5.Designer_Human;
 import Homework_5.Femily_Tree;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class SortClass {
@@ -16,6 +13,36 @@ public class SortClass {
      */
     Femily_Tree femily_tree;
     public List<Designer_Human> designer_human;
+    Scanner iScanner = new Scanner(System.in);
+
+
+    public void sortingTheSheet() {
+        System.out.println("""
+                Выберите варианты сортировки
+                1.По имени
+                2.По дате рождения
+                """);
+        int choiceSort = iScanner.nextInt();
+        try {
+            switch (choiceSort) {
+                case 1 -> {
+                    sortByName();
+                    sortLamdaByName();//сортировка с лямда выражением
+                    sortByStreamByName();
+                }
+                case 2 -> {
+                    sortByDateOfBirth();
+                    sortByStreamByDate();
+                }
+            }
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Промазал давай по новой ");
+
+        }
+
+    }
+
 
     /**
      * Метод сортировки
