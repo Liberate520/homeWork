@@ -1,6 +1,8 @@
+import java.io.IOException;
+
 public interface Option {
     String dicription();
 
-    void excute();
+    void execute() throws IOException;
 
 }

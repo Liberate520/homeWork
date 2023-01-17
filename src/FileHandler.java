@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class FileHandler implements Saveable, Readable {
+public class FileHandler implements ComandSave, Readable {
     @Override
     public void save(List<Human> humalis) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
@@ -34,4 +34,6 @@ public class FileHandler implements Saveable, Readable {
         return tree;
     }
 
+    
+    
 }

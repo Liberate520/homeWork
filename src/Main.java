@@ -36,8 +36,8 @@ public class Main implements Serializable {
             System.out.println(human);
         }
 
-        List<Option> comandlist = new ArrayList<>();
-        comandlist.add
+        List<Option> comandlist = new command();
+        comandlist.add()
     }
 
 }

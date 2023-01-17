@@ -3,8 +3,19 @@ import java.util.List;
 
 public class View {
     List<Option> comandlist = new ArrayList<>();
-    FileHandler fileHandler = new FileHandler();
-    comandlist.add(fileHandler.save());
 
+    public List<Option> getComandlist() {
+        return comandlist;
+    }
 
+    public void setComandlist(List<Option> comandlist) {
+        this.comandlist = comandlist;
+    }
+
+    public View(List<Option> comandlist) {
+        this.comandlist = comandlist;
+    }
+    
+    comandlist.add(new ComandSave());
+    
 }
