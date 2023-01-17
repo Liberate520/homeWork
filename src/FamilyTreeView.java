@@ -44,6 +44,10 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         return line;
     }
 
+    public void exit() {
+        System.out.println(" Выходим...");
+    }
+
     // public void menu() {
     // while (true) {
     // int value = 0;

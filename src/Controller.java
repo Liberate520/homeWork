@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Controller<T extends LiveBeing<T>> {
     FamilyTree<T> familyTree;
     FamilyTreeView<T> familyTreeView;
@@ -8,29 +10,33 @@ public class Controller<T extends LiveBeing<T>> {
     }
 
     void start() {
+        List<T> list = null;
         while (true) {
             String line = null;
             familyTreeView.menu();
             int value = familyTreeView.getValue();
             switch (value) {
                 case 1:
-                    familyTreeView.showAllInConsole(familyTree.getLiveBeings());
+                    list = familyTree.getLiveBeings();
+                    familyTreeView.showAllInConsole(list);
                     break;
                 case 2:
-                    familyTreeView.showAllInConsole(familyTree.sortByName());
+                    list = familyTree.sortByName();
+                    familyTreeView.showAllInConsole(list);
                     break;
                 case 3:
-                    familyTree.sortByDate();
-                    familyTree.showAllInConsole();
+                    list = familyTree.sortByDate();
+                    familyTreeView.showAllInConsole(list);
                     break;
                 case 4:
-                    line = familyTreeView.getName();
                     System.out.println(familyTree.findByName(line));
                     break;
                 case 5:
-
+                    line = familyTreeView.getName();
+                    System.out.println(familyTree.findAllByName(line));
                     break;
                 case 0:
+                    familyTreeView.exit();
                     System.exit(0);
                     break;
                 default:
