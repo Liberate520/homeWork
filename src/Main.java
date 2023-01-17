@@ -99,7 +99,7 @@ public class Main {
         System.out.println(alifantTree.findByName("Хоботок"));
         System.out.println();
 
-        FamilyTreeView<Human> view = new FamilyTreeView<>(humanTree);
-        view.view();
+        Controller<Human> controller = new Controller<>(restoreHumanFamilyTree);
+        controller.start();
     }
 }

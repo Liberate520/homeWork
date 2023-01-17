@@ -8,6 +8,7 @@ public class Controller<T extends LiveBeing<T>> {
     }
 
     void start() {
+        String line = null;
         familyTreeView.menu();
         int value = familyTreeView.getValue();
         switch (value) {
@@ -23,7 +24,8 @@ public class Controller<T extends LiveBeing<T>> {
                 familyTree.showAllInConsole();
                 break;
             case 4:
-
+                familyTreeView.getName();
+                System.out.println(familyTree.findByName(line));
                 break;
             case 5:
 
