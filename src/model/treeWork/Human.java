@@ -1,18 +1,20 @@
-import org.jetbrains.annotations.NotNull;
+package model.treeWork;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable, Comparable<Human> {
-
+public class Human extends ElementTree<Human> implements Serializable, Comparable<Human> {
     private String name;
     private String gender;
     private Integer age;
+
+    // вернул суда так как дерево работает с любым объектом с любыми полями, иначе у меня терялись связи
     private Human father;
     private Human mother;
-    private List<Human> children = new ArrayList<>();
+
+  private List<Human> children = new ArrayList<>();
 
 
     public Human(String name, String gender, Integer age, Human father, Human mother) {
@@ -22,8 +24,11 @@ public class Human implements Serializable, Comparable<Human> {
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
+        father.children.add(this);
+        mother.children.add(this);
+        }
 
-    }
+
 
     public Integer getAge() {
         return age;
@@ -35,8 +40,6 @@ public class Human implements Serializable, Comparable<Human> {
         this.age = null;
         this.father = null;
         this.mother = null;
-
-
     }
 
     public Human(String name, String gender, Integer age) {
@@ -47,6 +50,8 @@ public class Human implements Serializable, Comparable<Human> {
         this.mother = null;
 
     }
+
+
 
 
     public String getName() {
@@ -81,6 +86,12 @@ public class Human implements Serializable, Comparable<Human> {
         this.mother = mother;
     }
 
+    public void setChildList(List<Human> children) {
+        this.children = children;}
+
+    public List<Human> getChildList() {
+        return children;
+    }
 
     public String getChildren() {
         String res = "";
@@ -107,16 +118,48 @@ public class Human implements Serializable, Comparable<Human> {
         }
     }
 
-    public List<Human> getChildList() {
-        return children;
-    }
-
 
     @Override
     public int compareTo(Human o) {
         return name.compareTo(o.getName());
     }
+
+  //  @Override
+   // public void addElement(model.treeWork.Human element) {
+
+//        this.children.add(element);
+
+  //       if (element.getFather() != null) {
+  //         element.getFather().getChildList().add(element);
+   //      }
+    //     if (element.getMother() != null) {
+         //    element.getMother().getChildList().add(element);
+     //    }
+     //    if (element.getChildList().size() > 0) {
+       //      for (model.treeWork.Human child : element.getChildList()) {
+      //           if (element.getGender().equals("Male")) {
+        //             child.setFather(element);
+       //          } else if (element.getGender().equals("FeMale")) {
+       //              child.setMother(element);
+       //         }
+      //       }
+//    }
+
+
+
+  //  }
+
+
+
+//
+
 }
+
+
+
+
+
+
 
 
 
