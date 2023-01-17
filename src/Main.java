@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -19,8 +21,9 @@ public class Main implements Serializable {
         fileHandler.save(familyTree.getHumanlist());
         Tree<Human> tree = new Tree<Human>();
         tree = fileHandler.read();
+        System.out.println();
         System.out.println(tree);
-        
+
         System.out.println();
 
         tree.sortByName();
@@ -32,6 +35,9 @@ public class Main implements Serializable {
         for (Human human : tree) {
             System.out.println(human);
         }
+
+        List<Option> comandlist = new ArrayList<>();
+        comandlist.add
     }
 
 }
