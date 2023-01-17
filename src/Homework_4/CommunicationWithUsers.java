@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CommunicationWithUsers {
     //
     Scanner iScanner = new Scanner(System.in);
-    Designer_Human designer_human = new Designer_Human();//Экземпляр класса
+     Designer_Human designer_human = new Designer_Human();//Экземпляр класса
     Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
     Service service = new Service(femily_tree);
 
@@ -34,8 +34,9 @@ public class CommunicationWithUsers {
         }
     }
 
+
     /**
-     * @parm Более топорная версия(Тут все действия находятся в swith)
+     * @parm Более топорная версия(Тут все действия находятся в switch)
      */
     public void showAllOld() {
         System.out.println("""
@@ -71,22 +72,8 @@ public class CommunicationWithUsers {
                 case 3:
                     System.out.println("Кто твои родители?");
                     femily_tree.printDrevo(femily_tree.getTree());
-                    designer_human.addChildren();
-                     /*
-                тут нужно получить список людей
-                Разбить их на числа с помощью hushMap
-                и сделать выбор по некой id а пока это значение null
-                 */
-                /*
-                Нужно полностью переделать метод.
-                На вход получал не объект класса а строку для записи.
-
-                реализовать похожим методом как с родителями.
-                String choiceFather = iScanner.nextLine();
-                String choiceMother = iScanner.nextLine();
-                femily_tree.addParents(null,choiceFather,choiceMother);
-                 */
-
+                    designer_human.addChildren(); //старый вариант добавления
+                    Designer_Human.selectChildrenScanner(); // Новый вариант добавления детей
 
                 case 4:
                     System.out.println("К кому будем добавлять родителей ?");
@@ -110,8 +97,6 @@ public class CommunicationWithUsers {
                     femily_tree.ShowALL(femily_tree.getTree()); //Вариант 1
                     femily_tree.printTheTreeForEach(); //Вариант 2
                     break;
-
-
                 case 6:
                     System.out.println("Введите имя");
                     String choiceNameCase5 = iScanner.nextLine();
@@ -142,14 +127,15 @@ public class CommunicationWithUsers {
         int choiceSort = iScanner.nextInt();
         try {
             switch (choiceSort) {
-                case 1:
+                case 1 -> {
                     service.sortByName();
                     service.sortLamdaByName();//сортировка с лямда выражением
                     service.sortByStreamByName();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     service.sortByDateOfBirth();
                     service.sortByStreamByDate();
+                }
             }
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
@@ -177,28 +163,40 @@ public class CommunicationWithUsers {
                 6.Поиск по имени
                 7.Сортировка
                 """);
+        /*
+
+         */
         int choice = iScanner.nextInt();
         try {
             switch (choice) {
-                case 1://На мой взгляд улучшенный вариант добавления(все действия прописаны в функции)
+                case 1 -> {
                     femily_tree.addHumanNewHomework4(designer_human);
-                    break;
-                case 2:
-                case 3:
-                case 4:
+                }
+                case 2 -> {
+                    femily_tree.addingPeopleWithAnIdScanner();
+                }
+                case 3 -> {
+                    Designer_Human.selectChildrenScanner();
+
+                }
+
+                case 4 -> {
                     System.out.println("Показать все древо");
                     femily_tree.ShowALL(femily_tree.getTree()); //Вариант 1
                     femily_tree.printFamilyTree(femily_tree); //Вариант 2
                     femily_tree.printTheTreeForEach(); //Вариант 3
-                    break;
+                }
 
-                case 5://поиск по имени
+
+                case 5 -> {//поиск по имени
                     femily_tree.searchHuman((ArrayList<Designer_Human>) femily_tree.getTree());
+                }
+                case 6 -> {
 
-                case 6:
-                case 7:
+                }
+                case 7 -> {
                     sortingTheSheet();
-                    break;
+                }
 
             }
         } catch (IllegalArgumentException ex) {

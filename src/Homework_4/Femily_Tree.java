@@ -105,7 +105,15 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     public void addingPeopleWithAnId(String name, String sex, int date) {
         Designer_Human human = new Designer_Human(id++, name, sex, date);
         Designer_Human.addHumanSimpleMetod(human);
+    }
 
+    public void addingPeopleWithAnIdScanner() {
+        Scanner iScanner = new Scanner(System.in);
+        String name = iScanner.nextLine();
+        String sex = iScanner.nextLine();
+        int date = iScanner.nextInt();
+        Designer_Human human = new Designer_Human(id++, name, sex, date);
+        Designer_Human.addHumanSimpleMetod(human);
     }
 
 
@@ -147,7 +155,10 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         return Iterable.super.spliterator();
     }
 
-
+    /**
+     * Финишное добавление
+     * @param human
+     */
     public void addHumanNewHomework4(Designer_Human human) {
         Scanner scanner = new Scanner(System.in);
         String end = "Готово";
@@ -186,6 +197,8 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         }
         System.out.println();
     }
+
+
 
 
 }

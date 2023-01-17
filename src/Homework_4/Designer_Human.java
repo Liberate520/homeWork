@@ -3,12 +3,17 @@ package Homework_4;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Описываем сущность вида human
  */
 public class Designer_Human implements Serializable, Comparable<Designer_Human> {
     public Femily_Tree Designer_Human;
+
+    Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
+    Scanner iScanner = new Scanner(System.in);
+
     //создаем поля в классе
     private String name;
     private String sex;
@@ -44,9 +49,11 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         Homework_4.Designer_Human.humans = humans;
     }
 
-    public Designer_Human() {
+    public Designer_Human(String personName) {
         this(new ArrayList<>());
     }
+
+    public Designer_Human(){}
 
 
     /*
@@ -68,7 +75,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * Создаем конструктор на случей отсутствия родителей.
      */
     public Designer_Human(String name, String sex, int date) {
-        this();
+
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -78,7 +85,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * конструктор с добавлением id
      */
     public Designer_Human(int id, String name, String sex, int date) {
-        this();
+
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -121,6 +128,50 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
             Child.append("null");
         }
     }
+    /**
+     * Вариант добавления детей
+     */
+    public void addChildrenScanner() { // добавляем детей другим методом
+        System.out.println("Кто твои родители ?");
+        femily_tree.printDrevo(humans);
+
+        StringBuilder Child = new StringBuilder();
+        if (this.children != null) {
+
+            Child.append(getName());
+            for (Designer_Human c : getChildren()) {
+                Child.append(c.getName());
+            }
+        } else {
+            Child.append("null");
+        }
+    }
+
+    /**
+     * метод добавления детей
+     */
+    public static void selectChildrenScanner() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Пожалуйста, введите имя:");
+        String personName = scanner.nextLine();
+
+        Designer_Human human = new Designer_Human(personName);
+
+        System.out.println("Пожалуйста, введите имя отца (или нажмите enter, если оно недоступно) ");
+        String fatherName = scanner.nextLine();
+        if(!fatherName.isEmpty()) {
+            human.setFather(String.valueOf(new Designer_Human(fatherName)));
+        }
+
+        System.out.println("Пожалуйста, введите имя матери (или нажмите enter, если оно недоступно). ");
+        String motherName = scanner.nextLine();
+        if(!motherName.isEmpty()) {
+            human.setMother(new Designer_Human(motherName));
+        }
+
+        System.out.println("Выбранный человек : " + human);
+    }
+
 
     /**
      * Переопределение toString
