@@ -58,8 +58,9 @@ public class FamilyTree<T extends LiveBeing<T>> implements Serializable, IFamily
         }
     }
 
-    public void sortByName() {
+    public List<T> sortByName() {
         Collections.sort(liveBeings);
+        return liveBeings;
     }
 
     public void sortByDate() {

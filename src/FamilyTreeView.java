@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class FamilyTreeView<T extends LiveBeing<T>> {
@@ -13,28 +14,32 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
                 "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - Найти объект по имени и показать первое найденное\n5 - Найти объекты по имени и показать все найденные\n0 - Для выхода.");
     }
 
+    public void showAllInConsole(List<T> liveBeings) {
+        for (T liveBeing : liveBeings) {
+            System.out.println(liveBeing.toString());
+        }
+    }
+
     public int getValue() {
         int value = 0;
-        try (Scanner iScanner = new Scanner(System.in, "Cp866")) {
-            try {
-                value = iScanner.nextInt();
-            } catch (Exception e) {
-                errorMessage(e);
-            }
+        Scanner iScanner = new Scanner(System.in, "Cp866");
+        try {
+            value = iScanner.nextInt();
+        } catch (Exception e) {
+            errorMessage(e);
         }
         return value;
     }
 
     public String getName() {
         String line = null;
-        try (Scanner iScanner = new Scanner(System.in, "Cp866")) {
-            try {
-                System.out.println("Введите имя для поиска:");
-                iScanner.nextLine();
-                line = iScanner.nextLine();
-            } catch (Exception e) {
-                errorMessage(e);
-            }
+        Scanner iScanner = new Scanner(System.in, "Cp866");
+        try {
+            System.out.println("Введите имя для поиска:");
+            // iScanner.nextLine();
+            line = iScanner.nextLine();
+        } catch (Exception e) {
+            errorMessage(e);
         }
         return line;
     }
