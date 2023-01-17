@@ -1,4 +1,6 @@
-package Homework_4;
+package Homework_5;
+
+import metods.SortClass;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,7 +10,9 @@ public class CommunicationWithUsers {
     Scanner iScanner = new Scanner(System.in);
      Designer_Human designer_human = new Designer_Human();//Экземпляр класса
     Femily_Tree femily_tree = new Femily_Tree();//Экземпляр класса
-    Service service = new Service(femily_tree);
+//    Service service = new Service(femily_tree);
+
+    SortClass sortClass;
 
 
     /**
@@ -128,13 +132,13 @@ public class CommunicationWithUsers {
         try {
             switch (choiceSort) {
                 case 1 -> {
-                    service.sortByName();
-                    service.sortLamdaByName();//сортировка с лямда выражением
-                    service.sortByStreamByName();
+                    sortClass.sortByName();
+                    sortClass.sortLamdaByName();//сортировка с лямда выражением
+                    sortClass.sortByStreamByName();
                 }
                 case 2 -> {
-                    service.sortByDateOfBirth();
-                    service.sortByStreamByDate();
+                    sortClass.sortByDateOfBirth();
+                    sortClass.sortByStreamByDate();
                 }
             }
         } catch (IllegalArgumentException ex) {

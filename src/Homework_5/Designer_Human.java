@@ -1,4 +1,4 @@
-package Homework_4;
+package Homework_5;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private static List<Designer_Human> humans;
 
     public Designer_Human(List<Designer_Human> humans) {
-        Homework_4.Designer_Human.humans = humans;
+        Homework_5.Designer_Human.humans = humans;
     }
 
     public Designer_Human(String personName) {
@@ -192,7 +192,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
     @Override
-    public int compareTo(Homework_4.Designer_Human o) {
+    public int compareTo(Homework_5.Designer_Human o) {
         return name.compareTo(o.getName());
     }
 
