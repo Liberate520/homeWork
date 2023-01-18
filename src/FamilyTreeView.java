@@ -62,7 +62,7 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
     }
 
     public void exit() {
-        System.out.println(" Выходим...");
+        System.out.println("Выходим...");
     }
 
     // public void menu() {
