@@ -1,3 +1,9 @@
+package familytree;
+
+import comparator.ComparatorByChildrenCount;
+import comparator.ComparatorByName;
+import entity.Mammal;
+
 import java.io.Serializable;
 import java.util.*;
 

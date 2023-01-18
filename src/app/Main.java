@@ -1,3 +1,11 @@
+package app;
+
+import entity.*;
+import familytree.*;
+import presenter.*;
+import service.*;
+import view.*;
+
 public class Main {
 
     public static void main(String[] args)  {
@@ -42,11 +50,11 @@ public class Main {
         catFamilyTree.addMember(cat7);
         catFamilyTree.addMember(cat8);
 
-        View view = new ConsoleUI();
+        View consoleUI = new ConsoleUI();
         Service service = new FamilyTreeService(humanFamilyTree);
         service.addFamilyTree(catFamilyTree);
-        Presenter presenter = new Presenter(view, service);
-        view.start();
+        Presenter presenter = new Presenter(consoleUI, service);
+        consoleUI.start();
 
     }
 }

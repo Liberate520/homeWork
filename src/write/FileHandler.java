@@ -1,3 +1,8 @@
+package write;
+
+import entity.*;
+import familytree.*;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -34,7 +39,7 @@ public class FileHandler implements Writable, Serializable {
     }
 
     @Override
-    public FamilyTree  load() {
+    public FamilyTree load() {
         String result = "";
 
         File file = new File(filename);

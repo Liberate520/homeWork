@@ -1,3 +1,9 @@
+package service;
+
+import entity.*;
+import familytree.*;
+import write.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +23,6 @@ public class FamilyTreeService implements Service {
     @Override
     public void addFamilyTree(FamilyTree familyTree) {
         this.FamilyTrees.add(familyTree);
-        this.familyTreeIndex = this.FamilyTrees.size() - 1;
     }
 
     @Override
@@ -31,16 +36,9 @@ public class FamilyTreeService implements Service {
     }
 
     @Override
-    public FamilyTree getTree(String index) {
-
-        for (int i = 0; i < FamilyTrees.size(); i++) {
-            if (index.equals(Integer.toString(i + 1))) {
-                familyTreeIndex = i;
-                return getTree();
-            }
-        }
-        return null;
-
+    public FamilyTree getTree(int index) {
+        familyTreeIndex = index;
+        return getTree();
     }
 
     @Override

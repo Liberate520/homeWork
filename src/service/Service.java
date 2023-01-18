@@ -1,3 +1,8 @@
+package service;
+
+import entity.Mammal;
+import familytree.FamilyTree;
+
 import java.util.List;
 
 public interface Service {
@@ -5,7 +10,7 @@ public interface Service {
 
     Mammal getMember(String name);
     FamilyTree getTree();
-    FamilyTree getTree(String index);
+    FamilyTree getTree(int index);
     List<String> getTreeNames();
     void sortTree(int sortType);
     String saveTree(int fileType);

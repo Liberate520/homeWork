@@ -1,3 +1,7 @@
+package write;
+
+import familytree.FamilyTree;
+
 import java.io.*;
 
 public class StreamHandler implements Writable, Serializable {

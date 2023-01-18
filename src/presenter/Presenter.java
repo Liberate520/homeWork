@@ -1,3 +1,10 @@
+package presenter;
+
+import entity.Mammal;
+import familytree.FamilyTree;
+import service.Service;
+import view.*;
+
 import java.util.List;
 
 public class Presenter {
@@ -20,27 +27,17 @@ public class Presenter {
 
     public void onGetTree(){
         FamilyTree answer = service.getTree();
-        if (answer != null)
-            view.print(answer.toString());
-        else
-            view.print("Family tree not found");
+        view.print(answer.toString());
     }
 
-    public void onGetTree(String index){
-
+    public void onGetTree(int index){
         FamilyTree answer = service.getTree(index);
-        if (answer != null)
-            view.print(answer.toString());
-        else
-            view.print("Incorrect input");
+        view.print(answer.toString());
     }
 
-    public void onGetTreeNames(){
-        List<String> answerList = service.getTreeNames();
-        if (answerList != null)
-            for (int i = 0; i < answerList.size(); i++) {
-                view.print("\t" + String.format("%d", i + 1) + " - " +answerList.get(i));
-            }
+    public List<String>  onGetTreeNames(){
+        return service.getTreeNames();
+
     }
 
     public void onSortTree(int sortType){

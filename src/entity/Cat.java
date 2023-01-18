@@ -1,3 +1,5 @@
+package entity;
+
 public class Cat extends Mammal {
 
     public Cat(int id, String name, String gender, Mammal father, Mammal mother) {

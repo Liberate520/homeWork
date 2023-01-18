@@ -1,3 +1,7 @@
+package comparator;
+
+import entity.*;
+
 import java.util.Comparator;
 
 public class ComparatorByChildrenCount<T extends Mammal> implements Comparator<T> {
