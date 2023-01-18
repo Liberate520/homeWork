@@ -2,20 +2,20 @@ import java.io.*;
 
 public class FileHandler implements Writable, Serializable {
 
-    private String file;
+    private String filePath;
 
-    public void setFilename(String file) {
-        this.file = file;
+    public void setFileName(String file) {
+        this.filePath = file;
     }
 
     public FileHandler() {
-        this.file = "tree.dat";
+        this.filePath = "tree.dat";
     }
 
 
     @Override
     public void save(Serializable serializable) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(serializable);
             System.out.println("Saved successfully");
         } catch (Exception ex) {
@@ -30,7 +30,7 @@ public class FileHandler implements Writable, Serializable {
         FamilyTree result = null;
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(
-                    new FileInputStream(file));
+                    new FileInputStream(filePath));
             System.out.println("Loaded successfully");
             result = (FamilyTree)objectInputStream.readObject();
             objectInputStream.close();

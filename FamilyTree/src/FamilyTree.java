@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<T extends Person> implements Serializable, Iterable<Person> {
-    private List<T> children = new ArrayList<>();
+//    private List<T> children = new ArrayList<>();
     private List<T> personList;
 
     private Writable writable;
@@ -29,6 +29,7 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<Pers
 
     public void addPerson(T person) {
         personList.add(person);
+
     }
 
 
@@ -63,9 +64,7 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<Pers
     }
 
 
-    public void saveFamilyTree() {
-        writable.save(this);
-    }
+
 
 
     public void setWriter(Writable writer) {
@@ -77,12 +76,14 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<Pers
             writable.save(this);
     }
 
-    public void load() {
+    public FamilyTree load() {
         if (writable != null) {
             FamilyTree loadTree = writable.read();
             if (loadTree != null)
                 this.setPersonList(loadTree.getPersonList());
+            return (FamilyTree) writable.read();
         }
+        return null;
     }
 
 

@@ -1,7 +1,7 @@
-import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         FamilyTree myFamilyTree = new FamilyTree();
         Person person1 = new Person("Anna", 30, "female");
         Person person2 = new Person("Sergey", 31, "male");
@@ -17,58 +17,31 @@ public class Main {
         myFamilyTree.addPerson(person5);
 
 
-//        System.out.println(myFamilyTree.getPersonByName("Anna"));
-//        System.out.println(person1.toString());
-//        System.out.println(person2.toString());
-//        System.out.println(person3.toString());
-//        System.out.println(person4.toString());
-//        System.out.println(person5.toString());
+        myFamilyTree.load();
 
-//        System.out.println(myFamilyTree.getAllPersons());
-
-
-
-        Writable FileHandler = new FileHandler();
-        myFamilyTree.setWritable(FileHandler);
+        FileHandler fileHandler = new FileHandler();
+        myFamilyTree.setWritable(fileHandler);
         myFamilyTree.save();
 
-        myFamilyTree.load();
-        System.out.println(myFamilyTree.getAllPersons());
+
+        Presenter presenter = new Presenter(myFamilyTree);
+        UI ui = new UI(myFamilyTree, fileHandler, presenter);
+        ui.start();
+
+
+
 
 
 //        System.out.println();
 //        System.out.println("Iterable persons from family tree: ");
-//        for (Person person: myFamilyTree)
-//            System.out.println(person);
-//        System.out.println();
-
-//        System.out.println("Sort by name: ");
-//        myFamilyTree.sortByName();
-//        for (Person person: myFamilyTree)
+//        for (Object person: myFamilyTree)
 //            System.out.println(person);
 //        System.out.println();
 //
-        //Все работало в таком виде до того, как я параметризовала FamilyTree.
-        // После этого сломалось, требует Object вместо Person. Подскажите, почему?
-        //И в SortByAge я не могу использовать Object, потому что там нет метода getAge.
-        //Как это исправить, подскажите?
-
-        System.out.println();
-        System.out.println("Iterable persons from family tree: ");
-        for (Object person: myFamilyTree)
-            System.out.println(person);
-        System.out.println();
-
-        System.out.println("Sort by name: ");
-        myFamilyTree.sortByName();
-        for (Object person: myFamilyTree)
-            System.out.println(person);
-        System.out.println();
-
-//        System.out.println("Sort by age: ");
-//        myFamilyTree.sortByAge();
-//        for (Person person: myFamilyTree)
-//            System.out.printf("%s%s %d\n", person, "; age:", person.getAge());
+//        System.out.println("Sort by name: ");
+//        myFamilyTree.sortByName();
+//        for (Object person: myFamilyTree)
+//            System.out.println(person);
 //        System.out.println();
 
 
