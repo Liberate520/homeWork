@@ -36,12 +36,29 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         Scanner iScanner = new Scanner(System.in, "Cp866");
         try {
             System.out.println("Введите имя для поиска:");
-            // iScanner.nextLine();
             line = iScanner.nextLine();
         } catch (Exception e) {
             errorMessage(e);
         }
         return line;
+    }
+
+    public void showSaveTreeTitle() {
+        System.out.println("SAVE LIVEBEING TREE:");
+    }
+
+    public void showLoadTreeTitle() {
+        System.out.println("LOAD LIVEBEING TREE:");
+    }
+
+    public void EptyLineBefore() {
+        System.out.println();
+        System.out.println("--------------------");
+    }
+
+    public void EptyLineAfter() {
+        System.out.println("--------------------");
+        System.out.println();
     }
 
     public void exit() {
