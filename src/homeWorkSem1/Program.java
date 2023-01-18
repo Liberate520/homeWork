@@ -18,7 +18,7 @@ public class Program {
         // Human human7 = new Human("Yaroslav", 7, Gender.Male, human6, human5);
         // Human human8 = new Human("Sviatoslav", 3, Gender.Male, human6, human5);
 
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
         // tree.add(human1);
         // tree.add(human2);
         // tree.add(human3);

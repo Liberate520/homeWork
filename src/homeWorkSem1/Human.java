@@ -10,9 +10,9 @@ public class Human implements Comparable<Human> {
     
     private String name;
     private int age;
-    public Human father;
+    private Human father;
     private Human mother;
-    public List<Human> children = new ArrayList<>();
+    private List<Human> children = new ArrayList<>();
     private Gender gender;
     private int id;
     
@@ -25,6 +25,17 @@ public class Human implements Comparable<Human> {
         this.mother = mother;
         this.id = id;
           
+    }
+
+    /**добавление в список детей */
+    public void addChild(Human human) {
+        if (human.father != null) {
+            father.children.add(human);  
+        }
+        if (human.mother != null)  {
+            mother.children.add(human);
+        } 
+
     }
 
     /**Получение инф-ии о братьях/сестрах */
