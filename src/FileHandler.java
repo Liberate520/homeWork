@@ -6,16 +6,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class FileHandler implements  Readable {
-    // @Override
-    // public void save(List<Human> humalis) throws IOException {
-    //     ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-    //             new FileOutputStream(".//homeWorkOOP.//src.//familytree.out"));
-    //     for (Human human : humalis) {
-    //         objectOutputStream.writeObject(human);
-    //     }
-    //     objectOutputStream.close();
-    // }
+public class FileHandler implements Readable, Saveable {
+    @Override
+    public void save(List<Human> humalis) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream(".//homeWorkOOP.//src.//familytree.out"));
+        for (Human human : humalis) {
+            objectOutputStream.writeObject(human);
+        }
+        objectOutputStream.close();
+    }
 
     @Override
     public Tree<Human> read() throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -34,6 +34,4 @@ public class FileHandler implements  Readable {
         return tree;
     }
 
-    
-    
 }
