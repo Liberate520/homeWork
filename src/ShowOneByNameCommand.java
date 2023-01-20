@@ -1,4 +1,4 @@
-public class ShowOneByName<T extends LiveBeing<T>> implements ICommand {
+public class ShowOneByNameCommand<T extends LiveBeing<T>> implements ICommand {
     private FamilyTreeView<T> familyTreeView;
 
     @Override
@@ -8,6 +8,6 @@ public class ShowOneByName<T extends LiveBeing<T>> implements ICommand {
 
     @Override
     public String discription() {
-        return "Сортировать по имени и показать";
+        return "4 - Найти объект по имени и показать первый найденный";
     }
 }

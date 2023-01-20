@@ -8,6 +8,9 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
     public FamilyTreeView(Controller<T> controller) {
         this.controller = controller;
         commandList.add(new ShowAllCommand<>());
+        commandList.add(new ShowAllSortByNameCommand<>());
+        commandList.add(new ShowAllSortByDateCommand<>());
+        commandList.add(new ShowOneByNameCommand<>());
     }
 
     public int getValue() {
