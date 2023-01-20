@@ -11,6 +11,7 @@ public class Controller<T extends LiveBeing<T>> {
     }
 
     void start() {
+        T liveBeing = null;
         List<T> list = null;
         while (true) {
             String line = null;
@@ -38,15 +39,18 @@ public class Controller<T extends LiveBeing<T>> {
                 case 4:
                     familyTreeView.EptyLineBefore();
                     line = familyTreeView.getName();
-                    System.out.println(familyTree.findByName(line));
+                    liveBeing = familyTree.findByName(line);
+                    familyTreeView.showLiveBeing(liveBeing);
                     familyTreeView.EptyLineAfter();
                     break;
                 case 5:
                     familyTreeView.EptyLineBefore();
                     line = familyTreeView.getName();
-                    System.out.println(familyTree.findAllByName(line));
+                    list = familyTree.findAllByName(line);
+                    familyTreeView.showAllInConsole(list);
                     familyTreeView.EptyLineAfter();
                     break;
+                // TODO
                 case 6:
                     familyTreeView.EptyLineBefore();
                     familyTreeView.showSaveTreeTitle();
@@ -63,6 +67,7 @@ public class Controller<T extends LiveBeing<T>> {
                     System.out.println(restoreHumanFamilyTree.getLiveBeings());
                     familyTreeView.EptyLineAfter();
                     break;
+                // END TODO
                 case 8:
 
                     break;
