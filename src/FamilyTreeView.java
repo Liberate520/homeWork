@@ -9,6 +9,7 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
     public FamilyTreeView(Controller<T> controller) {
         this.controller = controller;
         commandList = new ArrayList<>();
+        commandList.add(new ShowExitCommand<>());
         commandList.add(new ShowAllCommand<>());
         commandList.add(new ShowAllSortByNameCommand<>());
         commandList.add(new ShowAllSortByDateCommand<>());
@@ -41,8 +42,9 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
 
     public void menu() {
         emptyLineBefore();
-        System.out.println(
-                "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - Найти объект по имени и показать первое найденное\n5 - Найти объекты по имени и показать все найденные\n0 - Для выхода.");
+        for (int i = 0; i < commandList.size(); ++i) {
+            System.out.printf("%d --> %s\n", i, commandList.get(i).discription());
+        }
         emptyLineAfter();
     }
 

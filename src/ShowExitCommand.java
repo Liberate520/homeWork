@@ -8,7 +8,7 @@ public class ShowExitCommand<T extends LiveBeing<T>> implements ICommand {
 
     @Override
     public String discription() {
-        return "Выходим...";
+        return "Выход.";
     }
 
 }
