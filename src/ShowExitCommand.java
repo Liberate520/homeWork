@@ -3,7 +3,7 @@ public class ShowExitCommand<T extends LiveBeing<T>> implements ICommand {
 
     @Override
     public void execute() {
-        familyTreeView.exit();
+        familyTreeView.quite();
     }
 
     @Override

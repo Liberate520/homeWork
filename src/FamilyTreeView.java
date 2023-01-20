@@ -100,6 +100,7 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
     }
 
     public void showLoadTree(List<T> liveBeings) {
+        emptyLineBefore();
         System.out.println("LOAD LIVEBEING TREE:");
         showAllInConsole(liveBeings);
     }

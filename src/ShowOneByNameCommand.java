@@ -8,6 +8,6 @@ public class ShowOneByNameCommand<T extends LiveBeing<T>> implements ICommand {
 
     @Override
     public String discription() {
-        return "4 - Найти объект по имени и показать первый найденный";
+        return "Найти объект по имени и показать первый найденный";
     }
 }

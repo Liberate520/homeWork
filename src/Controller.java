@@ -17,10 +17,7 @@ public class Controller<T extends LiveBeing<T>> {
     }
 
     void start() {
-        T liveBeing = null;
-        List<T> list = null;
         while (true) {
-            String line = null;
             familyTreeView.menu();
             int value = familyTreeView.getValue();
             switch (value) {
@@ -40,19 +37,13 @@ public class Controller<T extends LiveBeing<T>> {
                     showAllByName();
                     break;
                 case 6:
-                    familyTreeView.showSaveTree(list);
-                    inputOutput.saveToBin(familyTree, filePath);
+                    saveToBin();
                     break;
                 case 7:
-                    list = inputOutput.loadFromBin(filePath);
-                    familyTreeView.showLoadTree(list);
+                    loadFromBin();
                     break;
-                // case 8:
-
-                // break;
                 case 0:
-                    familyTreeView.exit();
-                    System.exit(0);
+                    exit();
                     break;
                 default:
 

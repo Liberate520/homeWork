@@ -3,7 +3,7 @@ public class ShowAllSortByNameCommand<T extends LiveBeing<T>> implements IComman
 
     @Override
     public void execute() {
-        familyTreeView.showAllByName();
+        familyTreeView.showAllSortByName();
     }
 
     @Override
