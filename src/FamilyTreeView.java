@@ -2,11 +2,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FamilyTreeView<T extends LiveBeing<T>> {
-    // FamilyTree<T> familyTree;
-    T liveBeing;
 
-    public FamilyTreeView(FamilyTree<T> familyTree) {
-        // this.familyTree = familyTree;
+    public FamilyTreeView() {
+
     }
 
     public void menu() {

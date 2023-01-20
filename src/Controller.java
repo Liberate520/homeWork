@@ -7,7 +7,7 @@ public class Controller<T extends LiveBeing<T>> {
 
     public Controller(FamilyTree<T> familyTree) {
         this.familyTree = familyTree;
-        this.familyTreeView = new FamilyTreeView<>(familyTree);
+        this.familyTreeView = new FamilyTreeView<>();
     }
 
     void start() {
