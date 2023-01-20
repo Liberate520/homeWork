@@ -28,22 +28,16 @@ public class Controller<T extends LiveBeing<T>> {
                     showAllLiveBeings();
                     break;
                 case 2:
-                    list = familyTree.sortByName();
-                    familyTreeView.showAllInConsole(list);
+                    showAllSortByName();
                     break;
                 case 3:
-                    list = familyTree.sortByDate();
-                    familyTreeView.showAllInConsole(list);
+                    showAllSortByDate();
                     break;
                 case 4:
-                    line = familyTreeView.getName();
-                    liveBeing = familyTree.findByName(line);
-                    familyTreeView.showLiveBeing(liveBeing);
+                    showOneByName();
                     break;
                 case 5:
-                    line = familyTreeView.getName();
-                    list = familyTree.findAllByName(line);
-                    familyTreeView.showAllInConsole(list);
+                    showAllByName();
                     break;
                 case 6:
                     familyTreeView.showSaveTree(list);

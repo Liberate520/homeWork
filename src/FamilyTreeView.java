@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,10 +8,12 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
 
     public FamilyTreeView(Controller<T> controller) {
         this.controller = controller;
+        commandList = new ArrayList<>();
         commandList.add(new ShowAllCommand<>());
         commandList.add(new ShowAllSortByNameCommand<>());
         commandList.add(new ShowAllSortByDateCommand<>());
         commandList.add(new ShowOneByNameCommand<>());
+        commandList.add(new ShowAllByName<>());
     }
 
     public int getValue() {
