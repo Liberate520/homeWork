@@ -1,4 +1,4 @@
-public class Nodes {
+public class Nodes implements Comparable<Nodes>{
 
     Persons p1;
     Persons p2;
@@ -13,6 +13,11 @@ public class Nodes {
     @Override
     public String toString() {
         return String.format("<%s %s %s>", p1, relation, p2);
+    }
+
+    @Override
+    public int compareTo(Nodes o) {
+        return p1.getName().compareTo(o.p1.getName());
     }
 
 }

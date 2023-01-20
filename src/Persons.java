@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Persons implements Humans {
 
     private String name;
@@ -23,5 +25,15 @@ public class Persons implements Humans {
     public String toString() {
         return "Name: " + name + ", Age: " + age;
     }
+
+    /* @Override
+    public int compareTo(Nodes o) {
+        return name.compareTo(o.p1.name);
+    } */
+
+   /*  @Override
+    public int compareTo(ArrayList<Nodes> o) {
+        return name.compareTo(o.);
+    } */
 
 }
