@@ -1,4 +1,4 @@
-package DZ1.app;
+package DZ1.UI;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import DZ1.command.Command_ClearTree;
-import DZ1.command.Command_Exit;
-import DZ1.command.Command_LoadTree;
-import DZ1.command.Command_SaveTree;
-import DZ1.command.Command_SearchByName;
-import DZ1.command.Command_ShowAllTree;
-import DZ1.command.Command_TreeSort;
-import DZ1.command.Option;
+import DZ1.FileOperations.FileHandler;
+import DZ1.app.Presenter;
+import DZ1.mainMenuCommands.Command_ClearTree;
+import DZ1.mainMenuCommands.Command_Exit;
+import DZ1.mainMenuCommands.Command_LoadTree;
+import DZ1.mainMenuCommands.Command_SaveTree;
+import DZ1.mainMenuCommands.Command_SearchByName;
+import DZ1.mainMenuCommands.Command_ShowAllTree;
+import DZ1.mainMenuCommands.Command_TreeSort;
+import DZ1.mainMenuCommands.Option;
 
 public class FamilyTreeUI implements View, Serializable {
 
@@ -44,14 +46,7 @@ public class FamilyTreeUI implements View, Serializable {
         commandList.add(new Command_TreeSort(this));
         commandList.add(new Command_Exit(this));
 
-        // int flagOutofMainLoop = 0;
-
         while (flagOutofMainLoop == 0) {
-
-            // System.out.println(
-            // "\n1 - Вывести всех людей из дерева\n2 - Поиск по имени\n3 - Очистить дерево
-            // \n4 - Выгрузить в файл \n5 - Загрузить из файла\n6 - Сортировка дерева \n7 -
-            // Выход\nВведите цифру, соответствующую необходимому критерию:");
 
             for (int i = 0; i < commandList.size(); i++) {
                 System.out.println(i + ": " + commandList.get(i).discription());
@@ -72,7 +67,7 @@ public class FamilyTreeUI implements View, Serializable {
     }
 
     public void showAllTree() {
-        System.out.println(presenter.getAllHumans());
+        System.out.println(presenter.getHumans());
     }
 
     public void exit() {
@@ -80,17 +75,19 @@ public class FamilyTreeUI implements View, Serializable {
     }
 
     public void loadTree() throws FileNotFoundException, ClassNotFoundException, IOException {
-        Human newHuman1 = new Human();
-        newHuman1.setWritable(fileHandler);
-        presenter.addList(newHuman1.read());
-
+        presenter.loadTree();
     }
 
     public void saveTree() throws IOException {
-        Human humantemp = new Human();
-        humantemp.setWritable(fileHandler);
-        humantemp.save(presenter.getHumans());
+
+        presenter.saveTree();
     }
+
+    // public void saveTree() throws IOException {
+    // Human humantemp = new Human();
+    // humantemp.setWritable(fileHandler);
+    // humantemp.save(presenter.getHumans());
+    // }
 
     public void searchByName() {
         scanner.nextLine();

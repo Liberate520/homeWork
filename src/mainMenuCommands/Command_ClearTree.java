@@ -1,10 +1,10 @@
-package DZ1.command;
+package DZ1.mainMenuCommands;
 
-import DZ1.app.FamilyTreeUI;
+import DZ1.UI.FamilyTreeUI;
 
 public class Command_ClearTree implements Option {
 
-    FamilyTreeUI familyTreeUI = new FamilyTreeUI();
+    FamilyTreeUI familyTreeUI;
 
     public Command_ClearTree(FamilyTreeUI familyTreeUI) {
         this.familyTreeUI = familyTreeUI;

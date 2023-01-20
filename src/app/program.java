@@ -20,33 +20,47 @@
 // Продолжаем грейдить наш проект с гениологическим древом. Изменить древо, сделать класс параметизированным. 
 // Продумать класс общения с пользователем, сделать набор команд, для операций над деревом
 
+// Продолжаем работать с проектом дерева. Попытаться структурировать список команд. Если не создан отдельный класс 
+// под общение с пользователем, то создать. Все процессы связанные с выводом на консоль или чтением с консоли необходимо делать 
+// только в одном специализированном классе (например View). Сам этот класс может общаться со многими классами позволяющих ему реализовать эти две задачи.
+// Можно также разбить команды на отдельные классы, связанные интерфейсом (смотри пример в конце семинара). Если все и так уже реализовано в таком виде, то просто сдаем работу)
+
+// Рефакторинг и\или оптимизация проекта предыдущего дз с учетом теоретических основ SOLID’а
+
 package DZ1.app;
 
 import java.io.IOException;
 import java.io.Serializable;
+
+import DZ1.Model.FamilyTree;
+import DZ1.Model.FamilyTreeOperator;
+import DZ1.Model.Human;
+import DZ1.UI.FamilyTreeUI;
+import DZ1.UI.View;
 
 public class program implements Serializable {
         public static void main(String[] args) throws IOException, ClassNotFoundException {
 
                 View view = new FamilyTreeUI();
                 FamilyTree<Human> familyTree = new FamilyTree<>();
-                Presenter presenter = new Presenter(view, familyTree);
+                FamilyTreeOperator familyTreeOperator = new FamilyTreeOperator(familyTree);
+                Presenter presenter = new Presenter(view, familyTree, familyTreeOperator);
 
                 Human human1 = new Human("Иван", "м");
-                familyTree.add(human1);
+                familyTreeOperator.add(human1);
                 Human human2 = new Human("Мария", "ж");
-                familyTree.add(human2);
+                familyTreeOperator.add(human2);
                 Human human3 = new Human("Василий", "м", familyTree.getHumanByName("Иван"),
                                 familyTree.getHumanByName("Мария"));
-                familyTree.add(human3);
+                familyTreeOperator.add(human3);
                 Human human4 = new Human("Дарья", "ж", familyTree.getHumanByName("Иван"),
                                 familyTree.getHumanByName("Мария"));
-                familyTree.add(human4);
+                familyTreeOperator.add(human4);
                 Human human5 = new Human("Галина", "ж");
-                familyTree.add(human5);
+                familyTreeOperator.add(human5);
                 Human human6 = new Human("Сергей", "м", familyTree.getHumanByName("Василий"),
                                 familyTree.getHumanByName("Галина"));
-                familyTree.add(human6);
+                familyTreeOperator.add(human6);
 
                 view.start();
 

@@ -1,4 +1,4 @@
-package DZ1.app;
+package DZ1.FileOperations;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import DZ1.Model.Human;
 
 public class FileHandler implements Writable, Serializable {
 

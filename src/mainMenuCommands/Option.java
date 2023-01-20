@@ -1,4 +1,4 @@
-package DZ1.command;
+package DZ1.mainMenuCommands;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

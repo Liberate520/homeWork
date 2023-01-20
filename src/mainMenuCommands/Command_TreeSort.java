@@ -1,10 +1,10 @@
-package DZ1.command;
+package DZ1.mainMenuCommands;
 
-import DZ1.app.FamilyTreeUI;
+import DZ1.UI.FamilyTreeUI;
 
 public class Command_TreeSort implements Option {
 
-    FamilyTreeUI familyTreeUI = new FamilyTreeUI();
+    FamilyTreeUI familyTreeUI;
 
     public Command_TreeSort(FamilyTreeUI familyTreeUI) {
         this.familyTreeUI = familyTreeUI;

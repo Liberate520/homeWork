@@ -1,12 +1,12 @@
-package DZ1.command;
+package DZ1.mainMenuCommands;
 
 import java.io.IOException;
 
-import DZ1.app.FamilyTreeUI;
+import DZ1.UI.FamilyTreeUI;
 
 public class Command_SaveTree implements Option {
 
-    FamilyTreeUI familyTreeUI = new FamilyTreeUI();
+    FamilyTreeUI familyTreeUI;
 
     public Command_SaveTree(FamilyTreeUI familyTreeUI) {
         this.familyTreeUI = familyTreeUI;

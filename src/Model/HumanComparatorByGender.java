@@ -1,4 +1,4 @@
-package DZ1.app;
+package DZ1.Model;
 
 import java.util.Comparator;
 
