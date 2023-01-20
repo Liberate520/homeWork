@@ -12,16 +12,6 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
                 "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - Найти объект по имени и показать первое найденное\n5 - Найти объекты по имени и показать все найденные\n0 - Для выхода.");
     }
 
-    public void showAllInConsole(List<T> liveBeings) {
-        for (T liveBeing : liveBeings) {
-            System.out.println(liveBeing.toString());
-        }
-    }
-
-    public void showLiveBeing(T liveBeing) {
-        System.out.println(liveBeing);
-    }
-
     public int getValue() {
         int value = 0;
         Scanner iScanner = new Scanner(System.in, "Cp866");
@@ -45,6 +35,20 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         return line;
     }
 
+    public void showAllInConsole(List<T> liveBeings) {
+        emptyLineBefore();
+        for (T liveBeing : liveBeings) {
+            System.out.println(liveBeing.toString());
+        }
+        emptyLineAfter();
+    }
+
+    public void showLiveBeing(T liveBeing) {
+        emptyLineBefore();
+        System.out.println(liveBeing);
+        emptyLineAfter();
+    }
+
     public void showSaveTreeTitle() {
         System.out.println("SAVE LIVEBEING TREE:");
     }
@@ -53,12 +57,12 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         System.out.println("LOAD LIVEBEING TREE:");
     }
 
-    public void EptyLineBefore() {
+    public void emptyLineBefore() {
         System.out.println();
         System.out.println("--------------------");
     }
 
-    public void EptyLineAfter() {
+    public void emptyLineAfter() {
         System.out.println("--------------------");
         System.out.println();
     }
