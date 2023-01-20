@@ -102,7 +102,7 @@ public class Main {
         // System.out.println(alifantTree.findByName("Хоботок"));
         // System.out.println();
 
-        Controller<Human> controller = new Controller<>(humanTree);
+        Controller<Human> controller = new Controller<>(humanTree, "liveBeings.bin");
         controller.start();
     }
 }

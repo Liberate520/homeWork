@@ -1,12 +1,13 @@
-import java.io.Serializable;
 import java.util.List;
 
 public class Controller<T extends LiveBeing<T>> {
+    String filePath;
     FamilyTree<T> familyTree;
     FamilyTreeView<T> familyTreeView;
     InputOutputList<T> inputOutput;
 
-    public Controller(FamilyTree<T> familyTree) {
+    public Controller(FamilyTree<T> familyTree, String filePath) {
+        this.filePath = filePath;
         this.familyTree = familyTree;
         this.familyTreeView = new FamilyTreeView<>();
         this.inputOutput = new InputOutputList<>();
@@ -52,24 +53,22 @@ public class Controller<T extends LiveBeing<T>> {
                     familyTreeView.showAllInConsole(list);
                     familyTreeView.EptyLineAfter();
                     break;
-                // TODO
                 case 6:
                     familyTreeView.EptyLineBefore();
                     familyTreeView.showSaveTreeTitle();
-                    inputOutput.saveToBin(familyTree, "liveBeings.bin");
+                    inputOutput.saveToBin(familyTree, filePath);
                     familyTreeView.EptyLineAfter();
                     break;
                 case 7:
                     familyTreeView.EptyLineBefore();
                     familyTreeView.showLoadTreeTitle();
-                    list = inputOutput.loadFromBin("liveBeings.bin");
+                    list = inputOutput.loadFromBin(filePath);
                     familyTreeView.showAllInConsole(list);
                     familyTreeView.EptyLineAfter();
                     break;
-                // END TODO
-                case 8:
+                // case 8:
 
-                    break;
+                // break;
                 case 0:
                     familyTreeView.exit();
                     System.exit(0);
