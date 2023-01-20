@@ -2,14 +2,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FamilyTreeView<T extends LiveBeing<T>> {
+    Controller<T> controller;
+    List<ICommand> commandList;
 
-    public FamilyTreeView() {
-
-    }
-
-    public void menu() {
-        System.out.println(
-                "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - Найти объект по имени и показать первое найденное\n5 - Найти объекты по имени и показать все найденные\n0 - Для выхода.");
+    public FamilyTreeView(Controller<T> controller) {
+        this.controller = controller;
+        commandList.add(new ShowAllCommand<>());
     }
 
     public int getValue() {
@@ -35,6 +33,45 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         return line;
     }
 
+    public void menu() {
+        emptyLineBefore();
+        System.out.println(
+                "Выберите нужное действие с генеалогическим деревом. Для выбора введите соответсвующую цифру:\n1 - Показать все объекты дерева\n2 - Сортировать по имени и показать\n3 - Сортировать по дате и показать\n4 - Найти объект по имени и показать первое найденное\n5 - Найти объекты по имени и показать все найденные\n0 - Для выхода.");
+        emptyLineAfter();
+    }
+
+    public void showAll() {
+        controller.showAllLiveBeings();
+    }
+
+    public void showAllSortByName() {
+        controller.showAllSortByName();
+    }
+
+    public void showAllSortByDate() {
+        controller.showAllSortByDate();
+    }
+
+    public void showOneByName() {
+        controller.showOneByName();
+    }
+
+    public void showAllByName() {
+        controller.showAllByName();
+    }
+
+    public void saveToBin() {
+        controller.saveToBin();
+    }
+
+    public void loadFromBin() {
+        controller.loadFromBin();
+    }
+
+    public void quite() {
+        controller.exit();
+    }
+
     public void showAllInConsole(List<T> liveBeings) {
         emptyLineBefore();
         for (T liveBeing : liveBeings) {
@@ -49,12 +86,16 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         emptyLineAfter();
     }
 
-    public void showSaveTreeTitle() {
+    public void showSaveTree(List<T> liveBeings) {
+        System.out.println("\n");
+        emptyLineBefore();
         System.out.println("SAVE LIVEBEING TREE:");
+        emptyLineAfter();
     }
 
-    public void showLoadTreeTitle() {
+    public void showLoadTree(List<T> liveBeings) {
         System.out.println("LOAD LIVEBEING TREE:");
+        showAllInConsole(liveBeings);
     }
 
     public void emptyLineBefore() {
