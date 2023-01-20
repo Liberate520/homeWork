@@ -4,10 +4,12 @@ import java.util.List;
 public class Controller<T extends LiveBeing<T>> {
     FamilyTree<T> familyTree;
     FamilyTreeView<T> familyTreeView;
+    InputOutputList<T> inputOutput;
 
     public Controller(FamilyTree<T> familyTree) {
         this.familyTree = familyTree;
         this.familyTreeView = new FamilyTreeView<>();
+        this.inputOutput = new InputOutputList<>();
     }
 
     void start() {
@@ -54,17 +56,14 @@ public class Controller<T extends LiveBeing<T>> {
                 case 6:
                     familyTreeView.EptyLineBefore();
                     familyTreeView.showSaveTreeTitle();
-                    InputOutputBin saveInBin = new InputOutputBin();
-                    saveInBin.saveAs(familyTree, "liveBeingsList.bin");
+                    inputOutput.saveToBin(familyTree, "liveBeings.bin");
                     familyTreeView.EptyLineAfter();
                     break;
                 case 7:
                     familyTreeView.EptyLineBefore();
                     familyTreeView.showLoadTreeTitle();
-                    InputOutputBin loadFromBin = new InputOutputBin();
-                    Serializable restore = loadFromBin.readFrom("liveBeingsList.bin");
-                    FamilyTree<T> restoreHumanFamilyTree = (FamilyTree) restore;
-                    System.out.println(restoreHumanFamilyTree.getLiveBeings());
+                    list = inputOutput.loadFromBin("liveBeings.bin");
+                    familyTreeView.showAllInConsole(list);
                     familyTreeView.EptyLineAfter();
                     break;
                 // END TODO
