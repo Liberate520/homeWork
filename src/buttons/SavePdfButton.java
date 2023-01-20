@@ -18,6 +18,7 @@ public class SavePdfButton extends MenuButton implements userButtons {
 
     public void execute() {
         if (getSubMenuButtons().size() == 0){
+            //дописать метод, который нужно вызывать (выбор того, что нужно распечатать)
             System.out.println("Сохранено в PDF");
         } else {
             for (int i = 0; i < getSubMenuButtons().size(); i++) {
