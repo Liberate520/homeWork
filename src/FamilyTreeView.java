@@ -15,6 +15,8 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         commandList.add(new ShowAllSortByDateCommand<>());
         commandList.add(new ShowOneByNameCommand<>());
         commandList.add(new ShowAllByName<>());
+        commandList.add(new SaveToBin<>());
+        commandList.add(new LoadFromBin<>());
     }
 
     public int getValue() {
