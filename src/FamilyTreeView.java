@@ -8,15 +8,19 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
 
     public FamilyTreeView(Controller<T> controller) {
         this.controller = controller;
-        commandList = new ArrayList<>();
-        commandList.add(new ShowExitCommand<>());
-        commandList.add(new ShowAllCommand<>());
-        commandList.add(new ShowAllSortByNameCommand<>());
-        commandList.add(new ShowAllSortByDateCommand<>());
-        commandList.add(new ShowOneByNameCommand<>());
-        commandList.add(new ShowAllByName<>());
-        commandList.add(new SaveToBin<>());
-        commandList.add(new LoadFromBin<>());
+        this.commandList = new ArrayList<>();
+        this.commandList.add(new ShowExitCommand<>(this));
+        this.commandList.add(new ShowAllCommand<>(this));
+        this.commandList.add(new ShowAllSortByNameCommand<>(this));
+        this.commandList.add(new ShowAllSortByDateCommand<>(this));
+        this.commandList.add(new ShowOneByNameCommand<>(this));
+        this.commandList.add(new ShowAllByName<>(this));
+        this.commandList.add(new SaveToBin<>(this));
+        this.commandList.add(new LoadFromBin<>(this));
+    }
+
+    public List<ICommand> getCommandList() {
+        return commandList;
     }
 
     public int getValue() {

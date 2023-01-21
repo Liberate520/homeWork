@@ -1,9 +1,13 @@
 public class ShowAllByName<T extends LiveBeing<T>> implements ICommand {
     private FamilyTreeView<T> familyTreeView;
 
+    public ShowAllByName(FamilyTreeView<T> familyTreeView) {
+        this.familyTreeView = familyTreeView;
+    }
+
     @Override
     public void execute() {
-        familyTreeView.showAllByName();
+        this.familyTreeView.showAllByName();
     }
 
     @Override

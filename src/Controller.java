@@ -12,43 +12,15 @@ public class Controller<T extends LiveBeing<T>> {
     public Controller(FamilyTree<T> familyTree, String filePath) {
         this.filePath = filePath;
         this.familyTree = familyTree;
-        this.familyTreeView = new FamilyTreeView<>(this);
-        this.inputOutput = new InputOutputList<>();
+        familyTreeView = new FamilyTreeView<>(this);
+        inputOutput = new InputOutputList<>();
     }
 
     void start() {
         while (true) {
             familyTreeView.menu();
             int value = familyTreeView.getValue();
-            switch (value) {
-                case 1:
-                    showAllLiveBeings();
-                    break;
-                case 2:
-                    showAllSortByName();
-                    break;
-                case 3:
-                    showAllSortByDate();
-                    break;
-                case 4:
-                    showOneByName();
-                    break;
-                case 5:
-                    showAllByName();
-                    break;
-                case 6:
-                    saveToBin();
-                    break;
-                case 7:
-                    loadFromBin();
-                    break;
-                case 0:
-                    exit();
-                    break;
-                default:
-
-                    break;
-            }
+            familyTreeView.getCommandList().get(value).execute();
         }
     }
 
