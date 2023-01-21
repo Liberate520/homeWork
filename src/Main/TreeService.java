@@ -5,21 +5,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
-import src.Service.Tree.TreeFilter;
-import src.Service.Tree.HumanComparatorChildCount;
 import src.Service.Tree.SaveLoadable;
-import src.Service.Tree.TreeBackup;
-import src.Service.Tree.TreeCreateHuman;
-import src.Service.Tree.TreeSearch;
-import src.Service.Tree.TreeSort;
+import src.Service.TreeActions.TreeBackup;
+import src.Service.TreeActions.TreeCreateHuman;
+import src.Service.TreeActions.TreeFilter;
+import src.Service.TreeActions.TreeSearch;
+import src.Service.TreeActions.TreeSort;
 
 public class TreeService<T extends Human> implements SaveLoadable {
   private FamilyTree<T> tree;
