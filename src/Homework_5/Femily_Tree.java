@@ -155,7 +155,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
      *
      * @param human
      */
-    public void addHumanNewHomework4(Designer_Human human) {
+    public void addHumanNewHomework5(Designer_Human human) {
         Scanner scanner = new Scanner(in);
         String end = "Готово";
         for (; ; ) {
@@ -282,6 +282,21 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     @Override
     public Spliterator<Designer_Human> spliterator() {
         return Iterable.super.spliterator();
+    }
+
+    /**
+     * Позволяет перебрать объекты коллекции
+     */
+    public void enumerationСollection(Femily_Tree femily_tree) {
+        /*
+         * Позволяет перебрать объекты коллекции
+         */
+
+        Iterator<Designer_Human> iterator = femily_tree.iterator();
+        while (iterator.hasNext()) {
+            Designer_Human HHE = iterator.next();
+            System.out.println(HHE);
+        }
     }
 
 }

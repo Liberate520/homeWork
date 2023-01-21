@@ -3,12 +3,15 @@ package Homework_5;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CacheLimitations<T> { //Класс для кеширования списков
-
+public class CacheLimitations<T> {
+    /*
+     *ОПИСАНИЕ КЛАССА
+     *Класс для кеширования списков
+     */
     ArrayList<T> element;
     int size;
 
-    public CacheLimitations(int size) {
+    public CacheLimitations() {
         this.size = size;
         element = new ArrayList<>(); //создаем экземпляр
 
@@ -18,7 +21,7 @@ public class CacheLimitations<T> { //Класс для кеширования с
         int curSize = element.size(); //текущий размер
         if (curSize >= size) {
             for (int i = 0; i < curSize - size + 1; i++) {
-                element.remove(0);//при переполнение кэша удаляем более старые записи
+                element.remove(0);//при переполнении кэша удаляем более старые записи
             }
             element.add(Element); //добавляем в конец
         }
@@ -35,6 +38,22 @@ public class CacheLimitations<T> { //Класс для кеширования с
 
     public List<T> getAllEL() { ////получаем все элементы списка
         return element;
+
+    }
+
+    /**
+     *
+     * метод вызова кеша
+     */
+    public void cacheMetod(Femily_Tree femily_tree) {
+    /*
+    параметризуем список
+    */
+        CacheLimitations<Designer_Human> cache = new CacheLimitations<>(); //параметризуем список людей и устанавливаем размер кэша
+        for (Designer_Human H1 : femily_tree) {
+            cache.addEl(H1);
+        }
+        cache.getAllEL().forEach(System.out::println); //выводим кэш на экран
 
     }
 }

@@ -32,7 +32,7 @@ PrintMetods printMetods;
         int choice = iScanner.nextInt();
         try {
             switch (choice) {
-                case 1 -> femily_tree.addHumanNewHomework4(designer_human);
+                case 1 -> femily_tree.addHumanNewHomework5(designer_human);
                 case 2 -> femily_tree.addingPeopleWithAnIdScanner();
                 case 3 -> showAllСhildren();
                 case 4 -> showAllTree();

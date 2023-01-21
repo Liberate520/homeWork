@@ -83,5 +83,11 @@ public class Serializator implements interfaseSave {
 //        Serializator serializator = new Serializator();
 //        System.out.println(serializator.serializa()); //Проверка если true - значит записть прошла
 //
+
+    public void serializatorMetod(Designer_Human designer_human) throws InvalidObjectException {
+        WorkingFile fileworker = new WorkingFile();
+        fileworker.serializaSave(designer_human); //записываем
+        fileworker.DesSerializa(designer_human);// читаем
+    }
 }
 

@@ -128,11 +128,6 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return name.compareTo(o.getName());
     }
 
-
-    /*
-    BNTHFNJHS
-     */
-
 }
 
 
