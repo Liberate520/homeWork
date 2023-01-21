@@ -3,13 +3,15 @@ package src.Service.Tree;
 import java.util.HashMap;
 import java.util.Map;
 
+import src.Entities.FamilyTree;
 import src.Entities.Human;
 
-public class FilterTree<T extends Human> {
+public class TreeFilter<T extends Human> {
   private Map<Integer, T> humans;
+  private FamilyTree<T> tree;
 
-  public FilterTree(Map<Integer, T> humans) {
-    this.humans = humans;
+  public TreeFilter(FamilyTree<T> tree) {
+    this.tree = tree;
   }
 
   /**
@@ -17,7 +19,9 @@ public class FilterTree<T extends Human> {
    * @param gender
    * @return map список людей по определенному полу
    */
-  public Map<Integer, T> getHumansByGender(String gender) {
+  public Map<Integer, T> byGender(String gender) {
+    humans = tree.getHumans();
+
     Map<Integer, T> humansByGender = new HashMap<>();
 
     if (gender == null) {
