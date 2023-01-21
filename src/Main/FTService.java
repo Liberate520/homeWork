@@ -25,7 +25,7 @@ public class FTService<T extends Human> implements SaveLoadable {
   }
 
   public Map<Integer, T> chooseParent(String gender) {
-    return tree.getParents(gender);
+    return tree.getHumansByGender(gender);
   }
 
   public void clearTree() {

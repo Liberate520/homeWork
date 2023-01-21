@@ -35,6 +35,11 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     return humans;
   }
 
+  /**
+   * 
+   * @param gender
+   * @return map список людей по определенному полу
+   */
   public Map<Integer, T> getHumansByGender(String gender) {
     Map<Integer, T> humansWithGender = new HashMap<>();
 
@@ -51,16 +56,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     }
 
     return humansWithGender;
-  }
-
-  /**
-   * @param gender
-   * @return map список возможных родителей по определенному полу
-   */
-  public Map<Integer, T> getParents(String gender) {
-    Map<Integer, T> availableParents = getHumansByGender(gender);
-
-    return availableParents;
   }
 
   /**
