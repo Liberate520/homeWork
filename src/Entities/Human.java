@@ -33,6 +33,14 @@ public class Human implements Serializable, Comparable<Human> {
       mother.children.add(this);
   }
 
+  public String getFullName() {
+    return fullName;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
   /**
    * @return строку со списком детей или с сообщением об их отсутствии
    *         у объекта Human
@@ -46,14 +54,6 @@ public class Human implements Serializable, Comparable<Human> {
 
   public int getChildrensNumber() {
     return children.size();
-  }
-
-  public String getFullName() {
-    return fullName;
-  }
-
-  public String getGender() {
-    return gender;
   }
 
   /**
