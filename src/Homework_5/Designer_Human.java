@@ -57,6 +57,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * Создаем максимально описанный конструктор
      */
     public Designer_Human(String name, String sex, int date, String father, Designer_Human mother) {
+        this();
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -72,7 +73,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * Создаем конструктор на случей отсутствия родителей.
      */
     public Designer_Human(String name, String sex, int date) {
-
+        this();
         this.name = name;
         this.sex = sex;
         this.date = date;
@@ -82,12 +83,19 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
      * конструктор с добавлением id
      */
     public Designer_Human(int id, String name, String sex, int date) {
-
+        this();
         this.name = name;
         this.sex = sex;
         this.date = date;
         humans = new ArrayList<>();
         this.children = new ArrayList<>();
+    }
+
+    /**
+     * Пустой конструктор
+     */
+    public Designer_Human(){
+
     }
 
 

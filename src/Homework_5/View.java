@@ -33,7 +33,7 @@ PrintMetods printMetods;
         try {
             switch (choice) {
                 case 1 -> femily_tree.addHumanNewHomework4(designer_human);
-                case 2 -> {}
+                case 2 -> femily_tree.addingPeopleWithAnIdScanner();
                 case 3 -> {}
                 case 4 -> showAllTree();
                 case 5 -> femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
@@ -62,6 +62,12 @@ PrintMetods printMetods;
         printMetods.printFamilyTree(femily_tree); //Вариант 2
         System.out.println("Вариант № 2 ");
         printMetods.printTheTreeForEach(); //Вариант 3
+    }
+    private void showAllСhildren(){
+        femily_tree.addChildren();
+        femily_tree.addChildrenScanner();
+
+
     }
 
 }

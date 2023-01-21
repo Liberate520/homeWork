@@ -14,6 +14,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
          */
     private static int id;
 
+
     Designer_Human designer_human;
     PrintMetods printMetods;
 
@@ -45,6 +46,28 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
     }
 
+
+    /**
+     * метод добавления родителей
+     * @param human
+     */
+    public void addParentsScanner(Designer_Human human) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите имя отца");
+        String fatherName = scanner.nextLine();
+        System.out.println("Введите имя матери ");
+        String motherName = scanner.nextLine();
+
+        if(fatherName != null && !fatherName.equals("")) {
+            human.setFather(String.valueOf(new Designer_Human(fatherName)));
+        }
+        if(motherName != null && !motherName.equals("")) {
+            human.setMother(new Designer_Human(motherName));
+        }
+    }
+
+
     /*
     *ПОИСКОВИКИ
      */
@@ -62,6 +85,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         }
         return humans;
     }
+
 
     /**
      * Поиск человека
@@ -163,7 +187,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     }
 
     /**
-     * метод добавления очередной
+     * Вариант добавления людей
      */
     public void addHumanSimpleMetod(Designer_Human Human) {
         humans.add(Human);
