@@ -13,6 +13,13 @@ public class TreeSearch<T extends Human> {
     this.tree = tree;
   }
 
+  /**
+   * Производит поиск в дереве человека по полному имени
+   * 
+   * @param fullName
+   * @return найденный человек (экземпляр класса Human) или null, если результата
+   *         нет
+   */
   public Map.Entry<Integer, T> byName(String fullName) {
     humans = tree.getHumans();
 

@@ -35,25 +35,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     return humans;
   }
 
-  /**
-   * Производит поиск в дереве человека по полному имени
-   * 
-   * @param fullName
-   * @return найденный человек (экземпляр класса Human) или null, если результата
-   *         нет
-   */
-  public Map.Entry<Integer, T> searchByName(String fullName) {
-    for (Map.Entry<Integer, T> person : humans.entrySet()) {
-      if (person.getValue()
-          .getFullName()
-          .toLowerCase()
-          .equals(fullName.toLowerCase())) {
-        return person;
-      }
-    }
-    return null;
-  }
-
   @Override
   public Iterator<T> iterator() {
     return new FTIterator<T>(humans);
