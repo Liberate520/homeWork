@@ -13,7 +13,7 @@ public class CommandAdd<T extends Human> extends Command<T> {
 
   @Override
   public void execute() {
-    uc.showHumansFromTree(fts.getAllHumans());
+    uc.showHumansFromTree(fts.getHumans());
 
     String fullName = uc.askFullName();
     String gender = uc.askGender();

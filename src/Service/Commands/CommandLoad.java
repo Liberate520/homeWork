@@ -23,7 +23,7 @@ public class CommandLoad<T extends Human> implements Executable {
     } catch (Exception e) {
       e.printStackTrace();
       uc.loadAction(false);
-      fts.restoreFromBackup();
+      fts.restoreBackup();
     }
   }
 
