@@ -18,8 +18,8 @@ public class Controller<T extends LiveBeing<T>> {
 
     void start() {
         while (true) {
-            familyTreeView.menu();
-            int value = familyTreeView.getValue();
+            this.menu();
+            int value = this.getValueFromView();
             familyTreeView.getCommandList().get(value).execute();
         }
     }
@@ -72,6 +72,14 @@ public class Controller<T extends LiveBeing<T>> {
     public void exit() {
         familyTreeView.exit();
         System.exit(0);
+    }
+
+    public int getValueFromView() {
+        return familyTreeView.getValue();
+    }
+
+    public void menu() {
+        familyTreeView.menu();
     }
 
 }
