@@ -31,31 +31,8 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     this.humans.clear();
   }
 
-  public Map<Integer, T> getAllHumans() {
+  public Map<Integer, T> getHumans() {
     return humans;
-  }
-
-  /**
-   * 
-   * @param gender
-   * @return map список людей по определенному полу
-   */
-  public Map<Integer, T> getHumansByGender(String gender) {
-    Map<Integer, T> humansWithGender = new HashMap<>();
-
-    if (gender == null) {
-      return getAllHumans();
-    } else {
-      for (Map.Entry<Integer, T> person : humans.entrySet()) {
-        if (person.getValue()
-            .getGender()
-            .toLowerCase()
-            .equals(gender.toLowerCase()))
-          humansWithGender.putIfAbsent(person.getKey(), person.getValue());
-      }
-    }
-
-    return humansWithGender;
   }
 
   /**
