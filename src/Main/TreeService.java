@@ -18,13 +18,13 @@ import src.Service.Tree.HumanComparatorChildCount;
 import src.Service.Tree.SaveLoadable;
 import src.Service.Tree.TreeSearch;
 
-public class FTService<T extends Human> implements SaveLoadable {
+public class TreeService<T extends Human> implements SaveLoadable {
   private FamilyTree<T> tree;
   Map<Integer, T> backupTree = new HashMap<Integer, T>();
   TreeFilter<T> filter;
   TreeSearch<T> search;
 
-  public FTService(FamilyTree<T> familyTree) {
+  public TreeService(FamilyTree<T> familyTree) {
     this.tree = familyTree;
     this.filter = new TreeFilter<>(familyTree);
     this.search = new TreeSearch<>(familyTree);

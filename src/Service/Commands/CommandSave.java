@@ -3,11 +3,11 @@ package src.Service.Commands;
 import java.io.IOException;
 
 import src.Entities.Human;
-import src.Main.FTService;
+import src.Main.TreeService;
 import src.Main.UserCommunication;
 
 public class CommandSave<T extends Human> extends Command<T> {
-  public CommandSave(FTService<T> fts, UserCommunication<T> uc) {
+  public CommandSave(TreeService<T> fts, UserCommunication<T> uc) {
     super(fts, uc);
   }
 

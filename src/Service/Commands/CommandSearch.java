@@ -3,11 +3,11 @@ package src.Service.Commands;
 import java.util.Map;
 
 import src.Entities.Human;
-import src.Main.FTService;
+import src.Main.TreeService;
 import src.Main.UserCommunication;
 
 public class CommandSearch<T extends Human> extends Command<T> {
-  public CommandSearch(FTService<T> fts, UserCommunication<T> uc) {
+  public CommandSearch(TreeService<T> fts, UserCommunication<T> uc) {
     super(fts, uc);
   }
 
