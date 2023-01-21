@@ -16,6 +16,7 @@ import src.Entities.Human;
 import src.Service.Tree.TreeFilter;
 import src.Service.Tree.HumanComparatorChildCount;
 import src.Service.Tree.SaveLoadable;
+import src.Service.Tree.TreeBackup;
 import src.Service.Tree.TreeSearch;
 
 public class TreeService<T extends Human> implements SaveLoadable {
@@ -23,11 +24,13 @@ public class TreeService<T extends Human> implements SaveLoadable {
   Map<Integer, T> backupTree = new HashMap<Integer, T>();
   TreeFilter<T> filter;
   TreeSearch<T> search;
+  TreeBackup<T> backup;
 
   public TreeService(FamilyTree<T> familyTree) {
     this.tree = familyTree;
     this.filter = new TreeFilter<>(familyTree);
     this.search = new TreeSearch<>(familyTree);
+    this.backup = new TreeBackup<>(familyTree);
   }
 
   public Map<Integer, T> chooseParent(String gender) {
@@ -39,15 +42,19 @@ public class TreeService<T extends Human> implements SaveLoadable {
   }
 
   public void createBackup() {
-    backupTree.putAll(getAllHumans());
+    backup.create();
+  }
+
+  public void restoreBackup() {
+    backup.restore();
+  }
+
+  public Map<Integer, T> getHumans() {
+    return tree.getHumans();
   }
 
   public void createHuman(String fullName, String gender, T parentMother, T parentFather) {
     tree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
-  }
-
-  public Map<Integer, T> getAllHumans() {
-    return tree.getHumans();
   }
 
   public Map.Entry<Integer, T> searchByName(String fullName) {
@@ -64,10 +71,6 @@ public class TreeService<T extends Human> implements SaveLoadable {
     List<T> humanList = new ArrayList<T>(tree.getHumans().values());
     Collections.sort(humanList, new HumanComparatorChildCount());
     return humanList;
-  }
-
-  public void restoreFromBackup() {
-    getAllHumans().putAll(backupTree);
   }
 
   @Override
