@@ -5,11 +5,12 @@ import homeWork.src.finalProjectDiary.model.Day;
 import homeWork.src.finalProjectDiary.model.Diary;
 import homeWork.src.finalProjectDiary.model.Record;
 import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 
 public class Presenter {
     private Diary diary;
-    private ConsoleUI consoleUI;
+    private View consoleUI;
 
     private Service service;
 
@@ -18,11 +19,11 @@ public class Presenter {
         this.service.setPresenter(this);
     }
 
-    public ConsoleUI getConsoleUI() {
+    public View getConsoleUI() {
         return consoleUI;
     }
 
-    public void setConsoleUI(ConsoleUI consoleUI) {
+    public void setConsoleUI(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 
@@ -92,6 +93,9 @@ public class Presenter {
         return diary;
     }
 
+    /*
+    сообщение пользователю
+     */
     public void showMessage(String message){
         consoleUI.showMessage(message);
     }

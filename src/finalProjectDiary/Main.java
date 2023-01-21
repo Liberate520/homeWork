@@ -8,19 +8,16 @@ import homeWork.src.finalProjectDiary.file.FileHandler;
 import homeWork.src.finalProjectDiary.file.Service;
 import homeWork.src.finalProjectDiary.presenter.Presenter;
 import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class Main {
     public static void main(String[] args) {
         String filename = "calendar.dat";
         FileHandler fileHandler = new FileHandler(filename);
-        Service service = new Service(fileHandler, filename);   // ???
-//        Diary diary = service.readDiary();
-//        Diary diary = new Diary(fileHandler);
-//        Presenter presenter = new Presenter(diary, service);
+        Service service = new Service(fileHandler, filename);
         Presenter presenter = new Presenter(service);
-//        создаём consoleUI и передаём ему diary, презентер
-//        ConsoleUI consoleUI = new ConsoleUI(diary, presenter);
-        ConsoleUI consoleUI = new ConsoleUI(presenter);
+//        создаём consoleUI и передаём ему презентер
+        View consoleUI = new ConsoleUI(presenter);
 //        запускаем
         consoleUI.start();
 

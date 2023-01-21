@@ -1,12 +1,12 @@
 package homeWork.src.finalProjectDiary.commands;
 
-import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class GetCalendar implements Commands{
 
-    ConsoleUI consoleUI;
+    View consoleUI;
 
-    public GetCalendar(ConsoleUI consoleUI) {
+    public GetCalendar(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 

@@ -1,12 +1,12 @@
 package homeWork.src.finalProjectDiary.commands;
 
-import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class DelRecord implements Commands{
 
-    ConsoleUI consoleUI;
+    View consoleUI;
 
-    public DelRecord(ConsoleUI consoleUI) {
+    public DelRecord(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 

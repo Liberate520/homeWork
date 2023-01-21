@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleUI {
+public class ConsoleUI implements View {
 
-    private Diary diary;
-    private Presenter presenter;
+    private final Diary diary;
+    private final Presenter presenter;
     List<Commands> commandsList;
 
     Scanner iScanner;
@@ -37,7 +37,6 @@ public class ConsoleUI {
     }
 
     public void start() {
-//        Scanner iScanner = new Scanner(System.in);
 //        заполняем список команд UI
         commandsList.add(new SaveAndFinish(this));
         commandsList.add(new GetCalendar(this));
@@ -98,7 +97,6 @@ public class ConsoleUI {
     public Record getRecord(boolean full) {
         String event;
         int hour = 0;
-//        Scanner iScanner = new Scanner(System.in);
         if (full) {
             while (true) {
                 System.out.print("Введите время события -> ");
@@ -124,7 +122,6 @@ public class ConsoleUI {
     получить номер дня
      */
     public int getDay() {
-//        Scanner iScanner = new Scanner(System.in);
         int day;
         while (true) {
             System.out.print("Введите день месяца -> ");

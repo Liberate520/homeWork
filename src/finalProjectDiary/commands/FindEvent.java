@@ -1,12 +1,12 @@
 package homeWork.src.finalProjectDiary.commands;
 
-import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class FindEvent implements Commands{
 
-    ConsoleUI consoleUI;
+    View consoleUI;
 
-    public FindEvent(ConsoleUI consoleUI) {
+    public FindEvent(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 

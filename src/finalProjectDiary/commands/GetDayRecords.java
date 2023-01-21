@@ -1,12 +1,12 @@
 package homeWork.src.finalProjectDiary.commands;
 
-import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class GetDayRecords implements Commands{
 
-    ConsoleUI consoleUI;
+    View consoleUI;
 
-    public GetDayRecords(ConsoleUI consoleUI) {
+    public GetDayRecords(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 

@@ -1,12 +1,12 @@
 package homeWork.src.finalProjectDiary.commands;
 
-import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class SaveAndFinish implements Commands{
 
-    ConsoleUI consoleUI;
+    View consoleUI;
 
-    public SaveAndFinish(ConsoleUI consoleUI) {
+    public SaveAndFinish(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 

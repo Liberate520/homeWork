@@ -1,12 +1,12 @@
 package homeWork.src.finalProjectDiary.commands;
 
-import homeWork.src.finalProjectDiary.ui.ConsoleUI;
+import homeWork.src.finalProjectDiary.ui.View;
 
 public class AddRecord implements Commands{
 
-    ConsoleUI consoleUI;
+    View consoleUI;
 
-    public AddRecord(ConsoleUI consoleUI) {
+    public AddRecord(View consoleUI) {
         this.consoleUI = consoleUI;
     }
 
