@@ -13,22 +13,25 @@ import java.util.Map;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
-import src.Service.Tree.FilterTree;
+import src.Service.Tree.TreeFilter;
 import src.Service.Tree.HumanComparatorChildCount;
 import src.Service.Tree.SaveLoadable;
+import src.Service.Tree.TreeSearch;
 
 public class FTService<T extends Human> implements SaveLoadable {
   private FamilyTree<T> tree;
   Map<Integer, T> backupTree = new HashMap<Integer, T>();
-  FilterTree<T> filter;
+  TreeFilter<T> filter;
+  TreeSearch<T> search;
 
   public FTService(FamilyTree<T> familyTree) {
     this.tree = familyTree;
+    this.filter = new TreeFilter<>(familyTree);
+    this.search = new TreeSearch<>(familyTree);
   }
 
   public Map<Integer, T> chooseParent(String gender) {
-    filter = new FilterTree<>(tree.getHumans());
-    return filter.getHumansByGender(gender);
+    return filter.byGender(gender);
   }
 
   public void clearTree() {
@@ -48,7 +51,7 @@ public class FTService<T extends Human> implements SaveLoadable {
   }
 
   public Map.Entry<Integer, T> searchByName(String fullName) {
-    return tree.searchByName(fullName);
+    return search.byName(fullName);
   }
 
   public List<T> sortByName() {
