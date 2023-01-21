@@ -6,14 +6,14 @@ package homeWork.src.finalProjectDiary;
 
 import homeWork.src.finalProjectDiary.file.FileHandler;
 import homeWork.src.finalProjectDiary.file.Service;
-import homeWork.src.finalProjectDiary.model.Diary;
 import homeWork.src.finalProjectDiary.presenter.Presenter;
 import homeWork.src.finalProjectDiary.ui.ConsoleUI;
 
 public class Main {
     public static void main(String[] args) {
-        FileHandler fileHandler = new FileHandler();
-        Service service = new Service(fileHandler);
+        String filename = "calendar.dat";
+        FileHandler fileHandler = new FileHandler(filename);
+        Service service = new Service(fileHandler, filename);   // ???
 //        Diary diary = service.readDiary();
 //        Diary diary = new Diary(fileHandler);
 //        Presenter presenter = new Presenter(diary, service);

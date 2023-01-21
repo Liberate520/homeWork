@@ -18,11 +18,14 @@ public class ConsoleUI {
     private Presenter presenter;
     List<Commands> commandsList;
 
+    Scanner iScanner;
+
     public ConsoleUI(Presenter presenter) {
         this.presenter = presenter;
+        presenter.setConsoleUI(this);
         diary = this.presenter.readDiary();
         commandsList = new ArrayList<>();
-        presenter.setConsoleUI(this);
+        iScanner = new Scanner(System.in);
     }
 
     public Diary getDiary() {
@@ -34,7 +37,7 @@ public class ConsoleUI {
     }
 
     public void start() {
-        Scanner iScanner = new Scanner(System.in);
+//        Scanner iScanner = new Scanner(System.in);
 //        заполняем список команд UI
         commandsList.add(new SaveAndFinish(this));
         commandsList.add(new GetCalendar(this));
@@ -95,7 +98,7 @@ public class ConsoleUI {
     public Record getRecord(boolean full) {
         String event;
         int hour = 0;
-        Scanner iScanner = new Scanner(System.in);
+//        Scanner iScanner = new Scanner(System.in);
         if (full) {
             while (true) {
                 System.out.print("Введите время события -> ");
@@ -121,7 +124,7 @@ public class ConsoleUI {
     получить номер дня
      */
     public int getDay() {
-        Scanner iScanner = new Scanner(System.in);
+//        Scanner iScanner = new Scanner(System.in);
         int day;
         while (true) {
             System.out.print("Введите день месяца -> ");
@@ -138,5 +141,12 @@ public class ConsoleUI {
             }
         }
         return day;
+    }
+
+    /*
+    вывод сообщения пользователю
+     */
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 }

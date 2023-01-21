@@ -15,6 +15,7 @@ public class Presenter {
 
     public Presenter(Service service) {
         this.service = service;
+        this.service.setPresenter(this);
     }
 
     public ConsoleUI getConsoleUI() {
@@ -90,4 +91,9 @@ public class Presenter {
         diary = service.readDiary();
         return diary;
     }
+
+    public void showMessage(String message){
+        consoleUI.showMessage(message);
+    }
+
 }
