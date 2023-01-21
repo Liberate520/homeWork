@@ -6,12 +6,14 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static java.lang.System.in;
+
 
 public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к конструктору человека
-        /*
-        *ОПИСАНИЕ КЛАССА
-        *В этом классе реализованны методы добавления и поиска + итераторы
-         */
+    /*
+     *ОПИСАНИЕ КЛАССА
+     *В этом классе реализованны методы добавления и поиска + итераторы
+     */
     private static int id;
 
 
@@ -21,7 +23,6 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     public final List<Designer_Human> humans; //константа
 
 
-
     /**
      * Обязательный конструктор
      */
@@ -29,9 +30,9 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         super();
         this.humans = new ArrayList<Designer_Human>();
     }
-        /*
-        *ДОБАВЛЕНИЕ РОДИТЕЛЕЙ
-         */
+    /*
+     *ДОБАВЛЕНИЕ РОДИТЕЛЕЙ
+     */
 
     /**
      * Метод добавления родителе
@@ -49,35 +50,38 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
     /**
      * метод добавления родителей
+     *
      * @param human
      */
     public void addParentsScanner(Designer_Human human) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(in);
 
         System.out.println("Введите имя отца");
         String fatherName = scanner.nextLine();
         System.out.println("Введите имя матери ");
         String motherName = scanner.nextLine();
 
-        if(fatherName != null && !fatherName.equals("")) {
+        if (fatherName != null && !fatherName.equals("")) {
             human.setFather(String.valueOf(new Designer_Human(fatherName)));
         }
-        if(motherName != null && !motherName.equals("")) {
+        if (motherName != null && !motherName.equals("")) {
             human.setMother(new Designer_Human(motherName));
         }
     }
 
 
     /*
-    *ПОИСКОВИКИ
+     *ПОИСКОВИКИ
      */
+
     /**
      * Поиск по имени
      *
-     * @param name
      * @return Возвращает поле humans
      */
-    public List<Designer_Human> showName(String name) {
+    public List<Designer_Human> showName() {
+        Scanner iScanner = new Scanner(in);
+        String name = iScanner.nextLine();
         for (Designer_Human human : humans) {
             if (Objects.equals(human.getName(), name)) {
                 humans.add((Designer_Human) this.humans);
@@ -89,10 +93,11 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
 
     /**
      * Поиск человека
+     *
      * @param humans
      */
     public void searchHuman(ArrayList<Designer_Human> humans) {
-        Scanner iScanner = new Scanner(System.in);
+        Scanner iScanner = new Scanner(in);
         System.out.println("Введите имя человека для поиска: ");
         String human = iScanner.nextLine();
         for (Designer_Human с : humans) {
@@ -106,7 +111,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     }
 
     /*
-    *ДОБАВЛЕНИЕ ЛЮДЕЙ
+     *ДОБАВЛЕНИЕ ЛЮДЕЙ
      */
 
     /**
@@ -123,10 +128,12 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
         Designer_Human human = new Designer_Human(id++, name, sex, date);
         addHumanSimpleMetod(human);
     }
-/**
- *Вариант добавления людей с id + сканер
- */public void addingPeopleWithAnIdScanner() {
-        Scanner iScanner = new Scanner(System.in);
+
+    /**
+     * Вариант добавления людей с id + сканер
+     */
+    public void addingPeopleWithAnIdScanner() {
+        Scanner iScanner = new Scanner(in);
         String name = iScanner.nextLine();
         String sex = iScanner.nextLine();
         int date = iScanner.nextInt();
@@ -149,7 +156,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
      * @param human
      */
     public void addHumanNewHomework4(Designer_Human human) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(in);
         String end = "Готово";
         for (; ; ) {
             String newFio = scanner.nextLine();
@@ -236,8 +243,8 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     /**
      * метод добавления детей + сканет + финиш
      */
-    public static void selectChildrenScanner() {
-        Scanner scanner = new Scanner(System.in);
+    public void selectChildrenScanner() {
+        Scanner scanner = new Scanner(in);
         System.out.println("Пожалуйста, введите имя:");
         String personName = scanner.nextLine();
 

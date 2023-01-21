@@ -12,21 +12,16 @@ public class Main {
         Femily_Tree femily_tree = new Femily_Tree();
 
         Designer_Human designer_human = new Designer_Human();
-        /*
-        параметризуем список
-        */
-        CacheLimitations<Designer_Human> cache = new CacheLimitations<>(10); //параметризуем список людей и устанавливаем размер кэша
-        for (Designer_Human H1 : femily_tree) {
-            cache.addEl(H1);
-        }
-        cache.getAllEL().forEach(System.out::println); //выводим кэш на экран
 
-        /*
-        класс общения с пользователем
-         */
-        CommunicationWithUsers jj = new CommunicationWithUsers();
-        jj.selectTheProgramVersion();
+        View view = new View();
+        view.showAll();
 
+        cacheMetod(femily_tree);
+        enumerationСollection(femily_tree);
+        serializatorMetod(designer_human);
+    }
+
+    private static void enumerationСollection(Femily_Tree femily_tree) {
         /*
          * Позволяет перебрать объекты коллекции
          */
@@ -36,30 +31,24 @@ public class Main {
             Designer_Human HHE = iterator.next();
             System.out.println(HHE);
         }
+    }
 
-         /*
-         Вариант вызова как в лекции
-         */
-        Serializator serializator = new Serializator() {
-            //@Override
-            public void serializaSave() {
-
-            }
-        };
-        System.out.println(serializator.serializaSave(designer_human)); //Проверка если true - значит запись прошла
-
-//
-//        try {
-//            Designer_Human human11 = serializator.DesSerializa();
-//            System.out.println(human11.getName());
-//        } catch (InvalidObjectException e) {
-//            throw new RuntimeException(e);
-//        }
-
-
+    private static void serializatorMetod(Designer_Human designer_human) throws InvalidObjectException {
         WorkingFile fileworker = new WorkingFile();
         fileworker.serializaSave(designer_human); //записываем
         fileworker.DesSerializa(designer_human);// читаем
+    }
+
+    private static void cacheMetod(Femily_Tree femily_tree) {
+    /*
+    параметризуем список
+    */
+        CacheLimitations<Designer_Human> cache = new CacheLimitations<>(10); //параметризуем список людей и устанавливаем размер кэша
+        for (Designer_Human H1 : femily_tree) {
+            cache.addEl(H1);
+        }
+        cache.getAllEL().forEach(System.out::println); //выводим кэш на экран
+
     }
 
 }

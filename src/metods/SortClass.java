@@ -8,11 +8,12 @@ import java.util.stream.Stream;
 
 public class SortClass {
     /*
-    *ОПИСАНИЕ КЛАССА
-    * В этом классе реализованны методы сортировки
+     *ОПИСАНИЕ КЛАССА
+     * В этом классе реализованны методы сортировки
      */
     Femily_Tree femily_tree;
     public List<Designer_Human> designer_human;
+    PrintMetods printMetods;
     Scanner iScanner = new Scanner(System.in);
 
 
@@ -86,7 +87,7 @@ public class SortClass {
     public void sortByStreamByName() {
         Stream<Designer_Human> stream = designer_human.stream();
         stream.filter(humans -> Boolean.parseBoolean(humans.getName()));
-        femily_tree.printTheTreeForEach();
+        printMetods.printTheTreeForEach();
 
     }
 

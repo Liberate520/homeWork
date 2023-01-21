@@ -34,10 +34,10 @@ PrintMetods printMetods;
             switch (choice) {
                 case 1 -> femily_tree.addHumanNewHomework4(designer_human);
                 case 2 -> femily_tree.addingPeopleWithAnIdScanner();
-                case 3 -> {}
+                case 3 -> showAllСhildren();
                 case 4 -> showAllTree();
                 case 5 -> femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
-                case 6 -> {}
+                case 6 -> showAllSorting();
                 case 7 -> sortClass.sortingTheSheet();
             }
         } catch (IllegalArgumentException ex) {
@@ -63,11 +63,23 @@ PrintMetods printMetods;
         System.out.println("Вариант № 2 ");
         printMetods.printTheTreeForEach(); //Вариант 3
     }
+    /**
+     * варианты добавления детей
+     */
     private void showAllСhildren(){
         femily_tree.addChildren();
         femily_tree.addChildrenScanner();
+        femily_tree.selectChildrenScanner();
 
 
+    }
+
+    /**
+     * варианты поисковиков
+     */
+    public void showAllSorting(){
+        femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
+        femily_tree.showName();
     }
 
 }

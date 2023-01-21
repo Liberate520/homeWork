@@ -29,8 +29,6 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
 
-
-
     private String father; // Объектная переменная
 
     private Designer_Human mother; // Объектная переменная
@@ -94,7 +92,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     /**
      * Пустой конструктор
      */
-    public Designer_Human(){
+    public Designer_Human() {
 
     }
 
@@ -104,7 +102,6 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
 
-
     public void setMother(Designer_Human mother) {
         this.mother = mother;
     }
@@ -112,9 +109,6 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     public List<Designer_Human> getChildren() {
         return children;
     }
-
-
-
 
 
     /**
@@ -127,8 +121,6 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         return "Имя: " + getName() + " Возраст: " + getDate() + " Пол : " + getSex() + " Мать : " + mother + " " +
                 " Отец : " + father;
     }
-
-
 
 
     @Override
