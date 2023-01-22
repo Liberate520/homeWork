@@ -40,11 +40,57 @@ public class Human  implements Serializable, Comparable<Human>{
         this(inp_firstname, inp_lastname, inp_birth_date, null, inp_gender, inp_person_id, null, null);
 
     }
+
+
+
     // Нужно прописать способ, чтобы null проставлялся как  - и изучить формат даты, в том числе, как их в f-строку записывать
     @Override
     public String toString() {
-        return String.format("Имя: %s\nФамилия: %s\nДата рождения: %s\nДата смерти: %s\nПол: %s\n", firstname, lastname, birth_date, deth_date, gender);
+        String result = "";
+        if(firstname == null){
+            result = result + "Имя: " + "-" + "\n";
+        }
+        else{
+            result = result + "Имя: " + firstname + "\n";
+        }
+        
+        if(lastname == null){
+            result = result + "Фамилия: " + "-" + "\n";
+        }
+        else{
+            result = result + "Фамилия: " + lastname + "\n";
+        }
+
+        if(birth_date == null){
+            result = result + "Дата рождения: " + "-" + "\n";
+        }
+        else{
+            result = result + "Дата рождения: " + birth_date + "\n";
+        }
+
+        if(deth_date == null){
+            result = result + "Дата смерти: " + "-" + "\n";
+        }
+        else{
+            result = result + "Дата смерти: " + deth_date + "\n";
+        }
+        
+       
+        if(gender == null){
+            result = result + "Пол: " + "-" + "\n";
+        }
+        else{
+            result = result + "Пол: " + gender + "\n";
+        }
+     
+
+        return result;
     }
+
+
+
+
+
 
     public String getPerson_id() {
         return person_id;

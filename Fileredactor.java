@@ -27,6 +27,10 @@ public class Fileredactor implements Saveandreadable{
             List<String> data = new ArrayList<>();
             while(line != null){
                 while(!line.equals("Следующий человек")){
+                    if (txt_parse(line).length == 1){
+                        data.add("-");
+                    }
+                    else{
                     switch(txt_parse(line)[0]){
                         case "Имя":
                             String firstname = txt_parse(line)[1];
@@ -61,19 +65,13 @@ public class Fileredactor implements Saveandreadable{
                             data.add(mother_id );
                             break;
                     }
-                
+                    }
                 line = breader.readLine();
             
         }
-            Human new_person = new Human(data.get(0), 
-                                         data.get(1), 
-                                         data.get(2), 
-                                         data.get(3), 
-                                         data.get(4), 
-                                         data.get(5), 
-                                         data.get(6), 
-                                         data.get(7));
-            family.addHuman(new_person);
+        Presenter presenter = new Presenter();    
+        Human new_person = presenter.CreateHuman(data);                            
+        family.addHuman(new_person);
     
         line = breader.readLine();
        
