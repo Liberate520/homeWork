@@ -1,8 +1,8 @@
 package View;
 
-import View.Buttons.*;
 import Controller.Presenter;
-import View.Menues.*;
+import View.Buttons.*;
+import View.Menues.ConsoleMenu;
 
 import java.util.ArrayList;
 import java.util.List;

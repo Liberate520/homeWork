@@ -1,5 +1,6 @@
 package View.Buttons;
-import View.*;
+
+import View.View;
 
 public class CreateCatButton extends MenuButton{
     String buttonName = "Создать кота";

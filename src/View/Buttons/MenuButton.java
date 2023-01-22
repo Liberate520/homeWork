@@ -1,6 +1,7 @@
 package View.Buttons;
+
 import View.Clickable;
-import View.*;
+import View.View;
 
 public abstract class MenuButton implements Clickable {
     String buttonName;

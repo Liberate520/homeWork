@@ -1,8 +1,8 @@
 package App;
 
-import Controller.*;
-import Model.*;
-import View.*;
+import Controller.Presenter;
+import Model.Service;
+import View.View;
 
 public class Main {
     public static void main(String[] args) {
