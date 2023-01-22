@@ -4,13 +4,9 @@ import src.Entities.Human;
 import src.Main.TreeService;
 import src.Main.UserCommunication;
 
-public class CommandLoad<T extends Human> implements Executable {
-  private TreeService<T> fts;
-  private UserCommunication<T> uc;
-
+public class CommandLoad<T extends Human> extends Command<T> {
   public CommandLoad(TreeService<T> fts, UserCommunication<T> uc) {
-    this.fts = fts;
-    this.uc = uc;
+    super(fts, uc);
   }
 
   @Override
