@@ -10,13 +10,13 @@ public class CommandShowHumans<T extends Human> extends Command<T> {
   }
 
   @Override
-  public String description() {
-    return "Показать всех людей";
+  public void execute() {
+    uc.showHumansFromTree(fts.getHumans());
   }
 
   @Override
-  public void execute() {
-    uc.showHumansFromTree(fts.getHumans());
+  public String description() {
+    return "Показать всех людей";
   }
 
 }
