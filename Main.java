@@ -49,6 +49,8 @@ public class Main {
         family.age(person_4);
 
 
+        Human father = family.find_father( person_4);
+        System.out.println("Отец:\n" + father);
         ArrayList<Object> family_list = new ArrayList<>();
         for(Human person : family){
             family_list.add(person);

@@ -13,7 +13,7 @@ public class Human  implements Serializable, Comparable<Human>{
     private String person_id;
     private String father_id;
     private String mother_id;
-    List<Human> family;
+    private List<Human> family;
 
     
     
@@ -53,7 +53,7 @@ public class Human  implements Serializable, Comparable<Human>{
         else{
             result = result + "Имя: " + firstname + "\n";
         }
-        
+
         if(lastname == null){
             result = result + "Фамилия: " + "-" + "\n";
         }

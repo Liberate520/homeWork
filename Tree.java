@@ -16,7 +16,7 @@ public class Tree<T extends Human> implements Iterable<T>  {
     
 
 // На случай, если нужен результат
-public T find_father(List<T> family, T person){
+public T find_father( T person){
     T res = null;
     String father_id = person.getFather_id();
     if(father_id == null){
@@ -35,7 +35,7 @@ public T find_father(List<T> family, T person){
 
 }
 
-public T find_mother(List<T> family, T person){
+public T find_mother(T person){
     T res = null;
     String mother_id = person.getMother_id();
     if(mother_id == null){
@@ -54,7 +54,7 @@ public T find_mother(List<T> family, T person){
 
 }
 
-public ArrayList<T> find_sister_and_brother(List<T> family, T person){
+public ArrayList<T> find_sister_and_brother(T person){
     ArrayList<T> res = new ArrayList<>();
     String mother_id = person.getMother_id();
     String father_id = person.getFather_id();
@@ -79,7 +79,7 @@ public ArrayList<T> find_sister_and_brother(List<T> family, T person){
 
 }
 // На случай, если нужен только вывод
-public void print_father(List<T> family, T person){
+public void print_father( T person){
     T res = null;
     String father_id = person.getFather_id();
     if(father_id == null){
@@ -87,18 +87,14 @@ public void print_father(List<T> family, T person){
         
     }
     else{
-        for(T relative : family){
-            if(father_id.equals(relative.getPerson_id())){
-                res = relative;
-            }
-        }
-        System.out.println(res);
+        res = find_father(person);
+        System.out.println("Отец:\n" + res);
         
     }
     
 }
 
-public void print_mother(List<T> family, T person){
+public void print_mother( T person){
     T res = null;
     String mother_id = person.getMother_id();
     if(mother_id == null){
@@ -106,12 +102,8 @@ public void print_mother(List<T> family, T person){
         
     }
     else{
-        for(T relative : family){
-            if(mother_id.equals(relative.getPerson_id())){
-                res = relative;
-            }
-        }
-        System.out.println(res);
+        res = find_mother(person);
+        System.out.println("Мать:\n" + res);
     }
     
 
@@ -126,15 +118,11 @@ public void print_sister_and_brother( T person){
         System.out.println("Установить не возможно");
     }
     else{
-        for(T relative : family){
-            if((mother_id.equals(relative.getMother_id()) || father_id.equals(relative.getFather_id())) && !person.getPerson_id().equals(relative.getPerson_id())){
-                res.add(relative);
-            }
-        }
+        res = find_sister_and_brother(person);
     }
     try{
         res.get(0);
-        System.out.println(res);
+        System.out.println("Братья и сестры:\n" + res);
         
     }
     catch (IndexOutOfBoundsException e) {
