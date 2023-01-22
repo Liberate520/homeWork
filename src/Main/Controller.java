@@ -44,7 +44,7 @@ public class Controller<T extends Human> {
   public void startControl() {
     String userInput = uc.launchMenu(commandList);
 
-    if (userInput.equals("q")) {
+    if (userInput.equals("q") || userInput.equals("й")) {
       this.controllerOn = false;
       uc.closeInput();
     } else {
