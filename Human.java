@@ -1,15 +1,6 @@
 package Семинар1.homeWork;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 // Сделать наследованием от первого класса
@@ -109,7 +100,7 @@ public class Human  implements Serializable, Comparable<Human>{
     }
     @Override
     public int compareTo(Human o) {
-        // TODO Auto-generated method stub
+        
         return lastname.compareTo(o.lastname);
     }
     

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personimport<T extends Human> {
-    public Human console_import() throws IOException{
+public class View<T extends Human> {
+    public List<String> console_import() throws IOException{
             List<String> data = new ArrayList<>();
             Scanner scan = new Scanner(System.in);
             System.out.println("Ввыедите данные: ");
@@ -32,26 +32,9 @@ public class Personimport<T extends Human> {
             data.add(father_id);
             System.out.print ("Мать: ");
             String mother_id = scan.nextLine();
-            data.add(mother_id );
-            if (firstname.equals("")){
-                System.out.println("Введено слишком мало данных");
-            return null;  }
-
-             
-              
-            
-            else{
-            Human new_person = new Human(data.get(0), 
-                                         data.get(1), 
-                                         data.get(2), 
-                                         data.get(3), 
-                                         data.get(4), 
-                                         data.get(5), 
-                                         data.get(6), 
-                                         data.get(7));
-            return new_person;
-            }
-        
+            data.add(mother_id);
+            return data;
+           
        
         }
      
@@ -60,10 +43,21 @@ public class Personimport<T extends Human> {
             System.out.println("Хотите ли Вы занести данные через Консоль?");
             String answer = scan.nextLine().toLowerCase();
             while (answer.equals("yes")){
-                Human person = console_import();
+                List<String> data = new ArrayList<>();
+                data = console_import();
+                Presenter presenter = new Presenter();
+                Human person = presenter.CreateHuman(data);
                 family.addHuman(person);
                 System.out.println("Хотите продолжить?");
                 answer = scan.nextLine().toLowerCase();
+            }
+
+        }
+
+        public void console_print(Tree<Human> family){
+            System.out.println("Наша семья:");
+            for (Human member : family){
+                System.out.println(member);
             }
 
         }

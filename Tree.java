@@ -1,17 +1,10 @@
 package Семинар1.homeWork;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.sound.sampled.SourceDataLine;
 // Делаем класс Tree (где собираются объекты других классов) параметизированным (общим), чтобы можно было добавлять любой объект
 public class Tree<T extends Human> implements Iterable<T>  {
     
@@ -166,12 +159,14 @@ public void age(T person){
 
 @Override
 public String toString() {
-    // TODO Auto-generated method stub
+    
     return super.toString();
 }
+
+
 @Override
 public Iterator<T> iterator() {
-    // TODO Auto-generated method stub
+    
     return new TreeIterator(family);
 }
 public void addHuman(T human) {

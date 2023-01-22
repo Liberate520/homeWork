@@ -19,7 +19,7 @@ public class Main {
         Human person_2 = new Human("Maria", "Petrova", "15.09.1980", null, "w", "1MP_80", null, null);
         Human person_3 = new Human("Petr", "Petrov", "12.11.1961", null, "m", "1PP_61", null, null);
         Human person_4 = new Human("Marina", "Petrova", "22.10.1965", null, "w", "1MP_65", null, null);
-        Personimport c_import = new Personimport();
+        View c_import = new View();
         
 
 
@@ -45,39 +45,18 @@ public class Main {
         Fileredactor print_redactor = new Fileredactor();
 
         print_redactor.print_info(family);
-        System.out.println(family);    
+        c_import.console_print(family);   
         family.age(person_4);
-        //Сериализация в файл с помощью класса ObjectOutputStream
-        ObjectOutputStream oOS = new ObjectOutputStream(new FileOutputStream("family.out"));
-        oOS.writeObject(person_1); // Сериализация конкретного человека
-        // o_O_S.writeObject(family); // Сериализация семьи (списка людей)
-        oOS.close();
-        // Восстановление из файла
-        ObjectInputStream oIS = new ObjectInputStream(new FileInputStream("family.out"));
-        Human person_1_restored = (Human) oIS.readObject();
-        oIS.close();
-        System.out.println(person_1_restored);
-        
-        //Сериализация с помощью класса ByteArrayOutputStream
 
-        ByteArrayOutputStream bAOS = new ByteArrayOutputStream();
-        ObjectOutputStream oOS2 = new ObjectOutputStream(bAOS);
-        oOS2.writeObject(person_2);
-        oOS2.flush();
-        
-        ObjectInputStream oIS2 = new ObjectInputStream(new ByteArrayInputStream(bAOS.toByteArray()));
-        Human person_2RestoredFromByte = (Human) oIS2.readObject();
-        oIS2.close();
 
-        System.out.println(person_2RestoredFromByte);
-
-        family_service.sortByLastname();
-        System.out.println("отсортированная семья");
+        ArrayList<Object> family_list = new ArrayList<>();
         for(Human person : family){
-            System.out.println(person);
+            family_list.add(person);
         }
-
- 
+        Serialise s = new Serialise();
+        s.SerialiseList("family.out", family_list);
+        
+        
  
  
     }
