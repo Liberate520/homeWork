@@ -1,6 +1,10 @@
 package src.Service.TreeActions;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import src.Entities.FamilyTree;
 import src.Entities.Human;
@@ -14,20 +18,23 @@ public class TreeSaveLoad<T extends Human> extends TreeAction<T> implements Save
 
   @Override
   public void save() throws IOException {
-    // TODO Auto-generated method stub
-
+    ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Data/familyTree.out"));
+    objectOutputStream.writeObject(tree);
+    objectOutputStream.close();
   }
 
   @Override
-  public void load(String path) throws Exception {
-    // TODO Auto-generated method stub
-
+  public FamilyTree<T> load(String path) throws Exception {
+    ObjectInputStream objectInputStream = new ObjectInputStream(
+        new FileInputStream(path));
+    tree = (FamilyTree<T>) objectInputStream.readObject();
+    objectInputStream.close();
+    return tree;
   }
 
   @Override
-  public void load() throws Exception {
-    // TODO Auto-generated method stub
-
+  public FamilyTree<T> load() throws Exception {
+    return load("Data/familyTree.out");
   }
 
 }

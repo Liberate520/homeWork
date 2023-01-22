@@ -14,13 +14,14 @@ import src.Entities.Human;
 import src.Service.Tree.SaveLoadable;
 import src.Service.TreeActions.*;
 
-public class TreeService<T extends Human> implements SaveLoadable {
+public class TreeService<T extends Human> {
   private FamilyTree<T> tree;
   Map<Integer, T> backupTree = new HashMap<Integer, T>();
   private TreeFilter<T> filter;
   private TreeSearch<T> search;
   private TreeBackup<T> backup;
   private TreeSort<T> sort;
+  private TreeSaveLoad<T> file;
 
   public TreeService(FamilyTree<T> familyTree) {
     this.tree = familyTree;
@@ -28,6 +29,7 @@ public class TreeService<T extends Human> implements SaveLoadable {
     this.search = new TreeSearch<>(familyTree);
     this.backup = new TreeBackup<>(familyTree);
     this.sort = new TreeSort<>(familyTree);
+    this.file = new TreeSaveLoad<>(familyTree);
   }
 
   public Map<Integer, T> chooseParent(String gender) {
@@ -78,23 +80,27 @@ public class TreeService<T extends Human> implements SaveLoadable {
     return sort.byNumberOfChildren();
   }
 
-  @Override
-  public void save() throws IOException {
-    ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Data/familyTree.out"));
-    objectOutputStream.writeObject(tree);
-    objectOutputStream.close();
+  public boolean save() {
+    try {
+      file.save();
+      return true;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
   }
 
-  @Override
-  public void load(String path) throws Exception {
-    ObjectInputStream objectInputStream = new ObjectInputStream(
-        new FileInputStream(path));
-    tree = (FamilyTree<T>) objectInputStream.readObject();
-    objectInputStream.close();
+  public boolean load(String path) {
+    try {
+      this.tree = file.load(path);
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
   }
 
-  @Override
-  public void load() throws Exception {
-    load("Data/familyTree.out");
+  public boolean load() {
+    return load("Data/familyTree.out");
   }
 }

@@ -1,7 +1,5 @@
 package src.Service.Commands;
 
-import java.io.IOException;
-
 import src.Entities.Human;
 import src.Main.TreeService;
 import src.Main.UserCommunication;
@@ -13,13 +11,7 @@ public class CommandSave<T extends Human> extends Command<T> {
 
   @Override
   public void execute() {
-    try {
-      fts.save();
-      uc.saveAction(true);
-    } catch (IOException e) {
-      e.printStackTrace();
-      uc.loadAction(false);
-    }
+    uc.saveAction(fts.save());
   }
 
   @Override

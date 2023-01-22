@@ -17,14 +17,10 @@ public class CommandLoad<T extends Human> implements Executable {
   public void execute() {
     fts.createBackup();
     fts.clearTree();
-    try {
-      fts.load();
-      uc.loadAction(true);
-    } catch (Exception e) {
-      e.printStackTrace();
-      uc.loadAction(false);
+    boolean success = fts.load();
+    uc.loadAction(success);
+    if (!success)
       fts.restoreBackup();
-    }
   }
 
   @Override
