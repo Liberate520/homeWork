@@ -1,6 +1,5 @@
 package View.Buttons;
-
-import View.View;
+import View.*;
 
 public class CreateHumanButton extends MenuButton{
     String buttonName = "Создать человека";

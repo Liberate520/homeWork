@@ -1,8 +1,7 @@
 package Controller;
-
-import Model.Service;
 import Model.tree.Gender;
-import View.View;
+import View.*;
+import Model.*;
 
 public class Presenter {
     View view;
