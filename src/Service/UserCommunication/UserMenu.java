@@ -12,7 +12,7 @@ public class UserMenu<T extends Human> {
     System.out.println("");
     for (int i = 0; i < commands.size(); i++)
       System.out.println(i + " - " + commands.get(i).description());
-    System.out.println("q - Выход");
+    System.out.println("q/й - Выход");
   }
 
   public void textBeforeShowHumans() {
