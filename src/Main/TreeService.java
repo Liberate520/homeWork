@@ -12,11 +12,7 @@ import java.util.Map;
 import src.Entities.FamilyTree;
 import src.Entities.Human;
 import src.Service.Tree.SaveLoadable;
-import src.Service.TreeActions.TreeBackup;
-import src.Service.TreeActions.TreeCreateHuman;
-import src.Service.TreeActions.TreeFilter;
-import src.Service.TreeActions.TreeSearch;
-import src.Service.TreeActions.TreeSort;
+import src.Service.TreeActions.*;
 
 public class TreeService<T extends Human> implements SaveLoadable {
   private FamilyTree<T> tree;
