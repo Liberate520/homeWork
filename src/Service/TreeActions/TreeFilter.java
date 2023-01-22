@@ -8,7 +8,6 @@ import src.Entities.Human;
 
 public class TreeFilter<T extends Human> extends TreeAction<T> {
   private Map<Integer, T> humans;
-  private FamilyTree<T> tree;
 
   public TreeFilter(FamilyTree<T> tree) {
     super(tree);

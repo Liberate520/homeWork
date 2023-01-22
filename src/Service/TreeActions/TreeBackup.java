@@ -7,7 +7,6 @@ import src.Entities.FamilyTree;
 import src.Entities.Human;
 
 public class TreeBackup<T extends Human> extends TreeAction<T> {
-  private FamilyTree<T> tree;
   private Map<Integer, T> backup = new HashMap<Integer, T>();
 
   public TreeBackup(FamilyTree<T> tree) {
