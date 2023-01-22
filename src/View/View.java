@@ -32,6 +32,7 @@ public class View {
         MenuButton saveXLS = new SaveXlsButton(this);
         MenuButton savePDF = new SavePdfButton(this);
         MenuButton upButton = new UpButton(this);
+        MenuButton printContainer = new PrintContainer(this);
 
         createMenu.getListCommand().add(upButton);
         createMenu.getListCommand().add(createCat);
@@ -44,6 +45,7 @@ public class View {
         mainMenu.getListCommand().add(exitButton);
         mainMenu.getListCommand().add(createMenu);
         mainMenu.getListCommand().add(saveMenu);
+        mainMenu.getListCommand().add(printContainer);
 
         this.menu = mainMenu;
     }
@@ -107,7 +109,7 @@ public class View {
         presenter.ExitButtonOnClick();
     }
 
-    public void CreateButtonOnClick() {
-        presenter.ExitButtonOnClick();
+    public void CallPrintContainer() {
+        presenter.PrintContainerButtonClick();
     }
 }

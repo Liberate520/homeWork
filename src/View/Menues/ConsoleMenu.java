@@ -22,7 +22,6 @@ public class ConsoleMenu implements Clickable{
     }
 
     public void choose(int command) {
-        System.out.println("Действие на выбор пункта - " + command);
         this.list.get(command).onClick();
     }
 
@@ -39,6 +38,6 @@ public class ConsoleMenu implements Clickable{
 
     @Override
     public String toString() {
-        return "Меню " + menuName;
+        return menuName;
     }
 }

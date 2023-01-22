@@ -65,4 +65,8 @@ public class Presenter {
 
         service.CreateHumanButtonOnClick(name, humanGender, humanAge);
     }
+
+    public void PrintContainerButtonClick() {
+        service.PrintContainerButtonOnClick();
+    }
 }

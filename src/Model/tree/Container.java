@@ -18,4 +18,12 @@ public class Container<T extends Containerable> {
 
         return "В контейнере сейчас следующие элементы:\n" + elementsForPrint;
     }
+
+    public List<Containerable> getContainer() {
+        return container;
+    }
+
+    public void setContainer(List<Containerable> container) {
+        this.container = container;
+    }
 }
