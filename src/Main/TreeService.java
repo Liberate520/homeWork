@@ -51,17 +51,21 @@ public class TreeService<T extends Human> {
     tree.addHuman((T) new Human(fullName, gender, parentMother, parentFather));
   }
 
-  // public void testCreateHuman() {
-  // TreeCreateHuman tch = new TreeCreateHuman<>(tree);
-
-  // tch.setName(null);
-  // tch.setGender(null);
-  // tch.setParent(chooseParent("женский"));
-
-  // tch.setParent(chooseParent("мужской"));
-
-  // tch.createHuman();
-  // }
+  /*
+   * public void createHuman(String fullname, String gender, T mother, T father) {
+   * TreeCreateHuman<T> newHuman = new TreeCreateHuman<>(tree);
+   * 
+   * newHuman.setName(fullname);
+   * newHuman.setGender(gender);
+   * newHuman.setParent(mother);
+   * newHuman.setParent(father);
+   * 
+   * // newHuman.setParent(chooseParent("женский"));
+   * // newHuman.setParent(chooseParent("мужской"));
+   * 
+   * newHuman.createHuman();
+   * }
+   */
 
   public Map.Entry<Integer, T> searchByName(String fullName) {
     return search.byName(fullName);

@@ -7,7 +7,6 @@ import src.Entities.FamilyTree;
 import src.Entities.Human;
 
 public class TreeCreateHuman<T extends Human> extends TreeAction<T> {
-  private FamilyTree<T> tree;
   private String fullName;
   private String gender;
   private List<T> parents = new ArrayList<>(2);
@@ -29,7 +28,20 @@ public class TreeCreateHuman<T extends Human> extends TreeAction<T> {
   }
 
   public void createHuman() {
+    if (checkNotEmpty()) {
+      this.tree.addHuman((T) new Human(fullName, gender, parents.get(0), parents.get(1)));
+      this.fullName = this.gender = null;
+      this.parents.clear();
+    }
+  }
 
-    tree.addHuman((T) new Human(fullName, gender, parents.get(0), parents.get(1)));
+  private boolean checkNotEmpty() {
+
+    if (this.fullName != null &&
+        (this.gender.equals("Женский") || this.gender.equals("Мужской")) &&
+        this.parents.size() == 2)
+      return true;
+    else
+      return false;
   }
 }
