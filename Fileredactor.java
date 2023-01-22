@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fileredactor implements Saveandreadable{
+public class Fileredactor implements SaveAndReadable{
 
     private String filename;
     public Fileredactor(String fname){
