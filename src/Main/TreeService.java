@@ -17,10 +17,10 @@ import src.Service.TreeActions.*;
 public class TreeService<T extends Human> implements SaveLoadable {
   private FamilyTree<T> tree;
   Map<Integer, T> backupTree = new HashMap<Integer, T>();
-  TreeFilter<T> filter;
-  TreeSearch<T> search;
-  TreeBackup<T> backup;
-  TreeSort<T> sort;
+  private TreeFilter<T> filter;
+  private TreeSearch<T> search;
+  private TreeBackup<T> backup;
+  private TreeSort<T> sort;
 
   public TreeService(FamilyTree<T> familyTree) {
     this.tree = familyTree;
