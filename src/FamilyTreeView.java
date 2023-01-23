@@ -28,10 +28,12 @@ public class FamilyTreeView<T extends LiveBeing<T>> {
         Scanner iScanner = new Scanner(System.in, "Cp866");
         try {
             value = iScanner.nextInt();
+            if (value > 0 && value < commandList.size())
+                return value;
         } catch (Exception e) {
             errorMessage(e);
         }
-        return value;
+        return 0;
     }
 
     public String getName() {
