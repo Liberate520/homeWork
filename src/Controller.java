@@ -81,5 +81,4 @@ public class Controller<T extends LiveBeing<T>> {
     public void menu() {
         familyTreeView.menu();
     }
-
 }
