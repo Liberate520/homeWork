@@ -2,7 +2,7 @@ import java.util.List;
 
 public class Controller<T extends LiveBeing<T>> {
     private String line;
-    T liveBeing;
+    private T liveBeing;
     private List<T> list;
     private String filePath;
     private FamilyTree<T> familyTree;
