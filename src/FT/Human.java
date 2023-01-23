@@ -89,7 +89,7 @@ public class Human implements Serializable, Comparable<Human> {
         if (!(mother == null)) {
             sbHum.append("Мать ").append(mother.getName()).append("\n");
         }
-        if (children.size() > 0) {      // изменено. теперь без this
+        if (children.size() > 0) {     
             for (Human child : this.children) {
                 if (child.getGender().equals("М")) {
                     sbHum.append("Сын ").append(child.getName());

@@ -1,6 +1,6 @@
 package FT;
 
-import FT.comparators.Comparator;
+import FT.comparators.HumanComparator;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class Tree<T extends Human> implements Serializable, Iterable<T> {
 
     public void sortFamilyTree(String sortParameter) {
 
-        Collections.sort(this.getMembers(), new Comparator(sortParameter));
+        Collections.sort(this.getMembers(), new HumanComparator(sortParameter));
 
     }
 }

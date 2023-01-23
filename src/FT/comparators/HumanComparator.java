@@ -2,10 +2,10 @@ package FT.comparators;
 
 import FT.Human;
 
-public class Comparator implements java.util.Comparator<Human> {
+public class HumanComparator implements java.util.Comparator<Human> {
 
     private String sortParameter;
-    public Comparator(String sortParameter) {
+    public HumanComparator(String sortParameter) {
         this.sortParameter = sortParameter;
     }
 
