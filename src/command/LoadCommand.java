@@ -6,14 +6,17 @@ public class LoadCommand extends Command{
 
     private int fileType;
 
-    public LoadCommand(ConsoleUI view, String title, String code, int level, int fileType) {
-        super(view, title, code, level);
+    public LoadCommand(Command parent, ConsoleUI view, String title, String code, int fileType) {
+        super(parent, view, title, code);
         this.fileType = fileType;
     }
 
     @Override
-    public void execute() {
-        super.execute();
-        view.getPresenter().onLoadTree(fileType);
+    public Boolean execute(String execCode) {
+        if (execCode.equals(code)) {
+            view.getPresenter().onLoadTree(fileType);
+            return true;
+        }
+        return false;
     }
 }

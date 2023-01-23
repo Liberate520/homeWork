@@ -9,8 +9,11 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute() {
-        super.execute();
-        view.setContinueRun(false);
+    public Boolean execute(String execCode) {
+        if (execCode.equals(code)) {
+            view.setContinueRun(false);
+            return true;
+        }
+        return false;
     }
 }

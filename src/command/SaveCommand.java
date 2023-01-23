@@ -6,14 +6,17 @@ public class SaveCommand extends Command{
 
     private int fileType;
 
-    public SaveCommand(ConsoleUI view, String title, String code, int level, int fileType) {
-        super(view, title, code, level);
+    public SaveCommand(Command parent, ConsoleUI view, String title, String code, int fileType) {
+        super(parent, view, title, code);
         this.fileType = fileType;
     }
 
     @Override
-    public void execute() {
-        super.execute();
-        view.getPresenter().onSaveTree(fileType);
+    public Boolean execute(String execCode) {
+        if (execCode.equals(code)) {
+            view.getPresenter().onSaveTree(fileType);
+            return true;
+        }
+        return false;
     }
 }

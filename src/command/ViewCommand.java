@@ -6,14 +6,17 @@ public class ViewCommand extends Command{
 
     private int sortType;
 
-    public ViewCommand(ConsoleUI view, String title, String code, int level, int sortType) {
-        super(view, title, code, level);
+    public ViewCommand(Command parent, ConsoleUI view, String title, String code, int sortType) {
+        super(parent, view, title, code);
         this.sortType = sortType;
     }
 
     @Override
-    public void execute() {
-        super.execute();
-        view.getPresenter().onSortTree(sortType);
+    public Boolean execute(String execCode) {
+        if (execCode.equals(code)) {
+            view.getPresenter().onSortTree(sortType);
+            return true;
+        }
+        return false;
     }
 }

@@ -9,12 +9,13 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
-       view.print("Input member name: ");
-       String name = view.getScanner().nextLine();
-       view.getPresenter().onGetMember(name);
-       view.print("");
+    public Boolean execute(String execCode) {
+       if (execCode.equals(code)) {
+           String name = view.getAnswer("Input member name: ");
+           view.getPresenter().onGetMember(name);
+           view.print("");
+           return true;
+       }
+       return false;
     }
 }

@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileHandler implements Writable, Serializable {
+public class FileHandler implements Writable {
 
     private String filename;
 
@@ -76,7 +76,7 @@ public class FileHandler implements Writable, Serializable {
             String line = str.substring(itemIndex, str.indexOf("\n", itemIndex)) + ';';
 
             if (itemIndex == 0) {
-                txt = txt + line;
+                txt = txt + line + "\n";
             }
             else {
                 txt = txt + "id: " + findMatch(line, "id") + ";";

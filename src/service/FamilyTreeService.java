@@ -9,30 +9,30 @@ import java.util.List;
 
 public class FamilyTreeService implements Service {
 
-    private List<FamilyTree> FamilyTrees = new ArrayList<>();
+    private List<FamilyTree> familyTrees = new ArrayList<>();
     private int familyTreeIndex = 0;
 
     public FamilyTreeService(List<FamilyTree> FamilyTrees) {
-        this.FamilyTrees = FamilyTrees;
+        this.familyTrees = FamilyTrees;
     }
 
     public FamilyTreeService(FamilyTree familyTree) {
-        this.FamilyTrees.add(familyTree);
+        this.familyTrees.add(familyTree);
     }
 
     @Override
     public void addFamilyTree(FamilyTree familyTree) {
-        this.FamilyTrees.add(familyTree);
+        this.familyTrees.add(familyTree);
     }
 
     @Override
     public Mammal getMember(String name) {
-        return FamilyTrees.get(familyTreeIndex).getMemberByName(name);
+        return familyTrees.get(familyTreeIndex).getMemberByName(name);
     }
 
     @Override
     public FamilyTree getTree() {
-        return FamilyTrees.get(familyTreeIndex);
+        return familyTrees.get(familyTreeIndex);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class FamilyTreeService implements Service {
     public List<String> getTreeNames() {
         List<String> Trees = new ArrayList<>();
 
-        for (int i = 0; i < FamilyTrees.size(); i++) {
-            Trees.add(FamilyTrees.get(i).getName());
+        for (int i = 0; i < familyTrees.size(); i++) {
+            Trees.add(familyTrees.get(i).getName());
         }
         return Trees;
     }
@@ -54,18 +54,18 @@ public class FamilyTreeService implements Service {
     @Override
     public void sortTree(int sortType) {
         if (sortType == 0)
-            FamilyTrees.get(familyTreeIndex).sortById();
+            familyTrees.get(familyTreeIndex).sortById();
         else if (sortType == 1)
-            FamilyTrees.get(familyTreeIndex).sortByName();
+            familyTrees.get(familyTreeIndex).sortByName();
         else if (sortType == 2)
-            FamilyTrees.get(familyTreeIndex).sortByChildrenCountDesc();
+            familyTrees.get(familyTreeIndex).sortByChildrenCountDesc();
 
     }
 
     @Override
     public String saveTree(int fileType) {
 
-        FamilyTree familyTree = FamilyTrees.get(familyTreeIndex);
+        FamilyTree familyTree = familyTrees.get(familyTreeIndex);
 
         if (familyTree.getMemberList().size() > 0) {
 
@@ -93,7 +93,7 @@ public class FamilyTreeService implements Service {
     @Override
     public String loadTree(int fileType) {
 
-        FamilyTree familyTree = FamilyTrees.get(familyTreeIndex);
+        FamilyTree familyTree = familyTrees.get(familyTreeIndex);
 
         String fileName = "";
         if (familyTree.getMemberList().get(0) instanceof Human) fileName = "HumanFamilyTree";

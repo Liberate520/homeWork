@@ -42,37 +42,41 @@ public class ConsoleUI implements View {
     }
 
     private void createMenu() {
-        commandList.add(new Command(this, "-----------------------------------------"));
-        commandList.add(new Command(this, "Choose family tree"));
+
+        ViewCurrentCommand viewCurrentCommand = new ViewCurrentCommand(this, "Choose family tree");
+        commandList.add(viewCurrentCommand);
 
         List<String>  treeNames = presenter.onGetTreeNames();
         for (int i = 0; i < treeNames.size(); i++)
-            commandList.add(new ChooseCommand(this, treeNames.get(i), String.format("%d", i + 1) , 1,  i));
+            new ChooseCommand(viewCurrentCommand, this, treeNames.get(i), String.format("%d", i + 1), i);
 
-        commandList.add(new Command(this, "View family tree"));
-        commandList.add(new ViewCommand(this, "sort by id", "20", 1, 0));
-        commandList.add(new ViewCommand(this, "sort by member name", "21", 1, 1));
-        commandList.add(new ViewCommand(this, "sort by children count desc", "22", 1, 2));
+        Command viewCommand = new Command(this, "View family tree");
+        commandList.add(viewCommand);
+        new ViewCommand(viewCommand,this, "sort by id", "20", 0);
+        new ViewCommand(viewCommand, this, "sort by member name", "21", 1);
+        new ViewCommand(viewCommand, this, "sort by children count desc", "22", 2);
 
         commandList.add(new FindCommand(this, "Find in family tree", "30"));
 
-        commandList.add(new Command(this, "Save family tree"));
-        commandList.add(new SaveCommand(this, "to text file", "40", 1, 0));
-        commandList.add(new SaveCommand(this, "to binary file", "41", 1, 1));
+        Command saveCommand = new Command(this, "Save family tree");
+        commandList.add(saveCommand);
+        new SaveCommand(saveCommand, this, "to text file", "40", 0);
+        new SaveCommand(saveCommand, this, "to binary file", "41", 1);
 
-        commandList.add(new Command(this, "Load family tree"));
-        commandList.add(new LoadCommand(this, "from text file", "50", 1, 0));
-        commandList.add(new LoadCommand(this, "from binary file", "51", 1, 1));
+        Command loadCommand = new Command(this, "Load family tree");
+        commandList.add(loadCommand);
+        new LoadCommand(loadCommand, this, "from text file", "50", 0);
+        new LoadCommand(loadCommand,this, "from binary file", "51", 1);
 
         commandList.add(new ExitCommand(this, "Exit", "0"));
-
-        commandList.add(new Command(this, "-----------------------------------------"));
-        commandList.add(new Command(this, "Input your choice: "));
     }
 
     private void menu() {
+        print("-----------------------------------------");
         for (int i = 0; i < commandList.size(); i++)
             print(commandList.get(i).description());
+        print("-----------------------------------------");
+        print("Input your choice: ");
     }
 
     private void scan() {
@@ -83,11 +87,9 @@ public class ConsoleUI implements View {
 
             boolean findCommand = false;
             for (int i = 0; i < commandList.size(); i++) {
-
-                Command command = commandList.get(i);
-                if (menuChoice.equals(command.getCode())) {
-                    command.execute();
+                if (commandList.get(i).execute(menuChoice)) {
                     findCommand = true;
+                    break;
                 }
             }
             if (!findCommand) print("Incorrect input");
@@ -99,4 +101,8 @@ public class ConsoleUI implements View {
         System.out.println(text);
     }
 
+    public String getAnswer(String text) {
+        print(text);
+        return scanner.nextLine();
+    }
 }

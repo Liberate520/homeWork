@@ -35,9 +35,12 @@ public class Presenter {
         view.print(answer.toString());
     }
 
-    public List<String>  onGetTreeNames(){
-        return service.getTreeNames();
+    public String onGetTreeName(){
+        return service.getTree().getName();
+    }
 
+    public List<String> onGetTreeNames(){
+        return service.getTreeNames();
     }
 
     public void onSortTree(int sortType){
@@ -46,6 +49,7 @@ public class Presenter {
     }
 
     public void onSaveTree(int fileType){
+        service.sortTree(0);
         String answer = service.saveTree(fileType);
         view.print(answer);
     }
