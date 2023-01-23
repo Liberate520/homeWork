@@ -1,10 +1,12 @@
 package Homework_5;
 
 
+import Inerfase.Print;
 import metods.PrintMetods;
 import metods.SortClass;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -62,6 +64,7 @@ PrintMetods printMetods;
         printMetods.printFamilyTree(femily_tree); //Вариант 2
         System.out.println("Вариант № 2 ");
         printMetods.printTheTreeForEach(); //Вариант 3
+//        printMetods.printDrevo((List<Designer_Human>) designer_human);
     }
     /**
      * варианты добавления детей
@@ -82,5 +85,9 @@ PrintMetods printMetods;
         femily_tree.showName();
     }
 
+//    @Override
+//    public void printDrevo(List<Designer_Human> humans) {
+//        System.out.println(humans);
+//    }
 }
 
