@@ -1,3 +1,8 @@
+package relationFamilyTree;
+
+import enums.Gender;
+import models.Human;
+
 public class Relationships {
     static String getRelationships(Human a, Human b) {
         if (

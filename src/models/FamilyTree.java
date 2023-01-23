@@ -1,7 +1,11 @@
+package Models;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import Writables.Writable;
 
 public class FamilyTree<T extends Human> {
     private Map<String, T> humanMap;
@@ -71,7 +75,7 @@ public class FamilyTree<T extends Human> {
         if (writable != null) {
             List<T> objList = writable.read();
             for (T obj : objList) {
-                humanMap.put(((T) obj).getUuid(),(T) obj);
+                humanMap.put((obj).getUuid(), obj);
             }
         }
     }

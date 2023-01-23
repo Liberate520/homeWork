@@ -1,3 +1,4 @@
+package writables;
 import java.util.List;
 
 public interface Writable<T> {

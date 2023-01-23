@@ -1,8 +1,13 @@
+package serviceCompares;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import models.FamilyTree;
+import models.Human;
 
 public class HumanListService<T extends Human> {
     FamilyTree<T> familyTree;
