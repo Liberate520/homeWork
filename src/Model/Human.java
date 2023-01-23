@@ -1,5 +1,8 @@
+package Seminars_OOP.HW_5.src.Model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Human implements Serializable, Comparable<Human> {
@@ -90,4 +93,12 @@ public class Human implements Serializable, Comparable<Human> {
         return name.compareTo(o.getName());
     }
 
+    public static class ComparatorByAge implements Comparator<Human> {
+
+        @Override
+        public int compare(Human o1, Human o2) {
+            return Integer.compare(o1.getYearOfBirth(), o2.getYearOfBirth());
+        }
+
+    }
 }

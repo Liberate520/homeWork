@@ -1,8 +1,7 @@
-import java.util.List;
-
-public class Main {
+package Seminars_OOP.HW_5.src.Model;
+public class Program {
     @SuppressWarnings("UnresolvedClassReferenceRepair")
-    public static void main(String[] args) {
+    public void Program(String[] args) {
 
         FamilyTree<Human> familyTree = new FamilyTree<>();
         FileHandler fileHandler = new FileHandler();
@@ -17,28 +16,30 @@ public class Main {
         familyTree.addHuman(new Human("Вероника", 2013, "f"));
         familyTree.addHuman(new Human("Даниил", 2012, "m", null, null));
 
-        System.out.println(familyTree.getHumanByName("Вероника"));
-
-        System.out.println(familyTree.getAllHuman());
-
-        for(Human human: familyTree){
-            System.out.println(human);
-        }
-
-        System.out.println();
+//        System.out.println(familyTree.getHumanByName("Вероника"));
+//
+//        System.out.println(familyTree.getAllHuman());
+//
+//        for(Human human: familyTree){
+//            System.out.println(human);
+//        }
+//
+//        System.out.println();
+//
+//        familyTree.sortByName();
         
-        familyTree.sortByName();
-        
-        for(Human human: familyTree){
-            System.out.println(human);
-        }
+        //for(Human human: familyTree){
+        //    System.out.println(human);
+        //}
 
-        System.out.println();
+        //System.out.println();
         
-        familyTree.sortByAge();
+        //familyTree.sortByAge();
         
-        for (Human human: familyTree){
-            System.out.println(human);
-        }
+//        for (Human human: familyTree){
+//            System.out.println(human);
+//        }
+
+
     }
 }
