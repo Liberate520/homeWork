@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Service;
-import Model.tree.Gender;
+import Model.tree.*;
 import View.View;
 
 public class Presenter {
@@ -41,7 +41,35 @@ public class Presenter {
         service.PrintContainerButtonOnClick();
     }
 
-    public void CreateTreeButtonOnClick(String name) {
-        service.CreateTreeButtonOnClick(name);
+    public void CreateHumanTreeButtonOnClick(String name) {
+        service.CreateHumanTreeButtonOnClick(name);
+    }
+
+    public void CreateCatTreeButtonOnClick(String name) {
+        service.CreateCatTreeButtonOnClick(name);
+    }
+
+    public void AddHumanButtonOnClick(FamilyTree<Human> tree, Human human) {
+        service.AddHumanButtonOnClick(tree, human);
+    }
+
+    public void AddCatButtonOnClick(FamilyTree<Cat> tree, Cat cat) {
+        service.AddCatButtonOnClick(tree, cat);
+    }
+
+    public Container<Human> GetHumanContainer() {
+        return service.GetHumanContainer();
+    }
+
+    public Container<Cat> GetCatContainer() {
+        return service.GetCatContainer();
+    }
+
+    public Container<FamilyTree<Cat>> GetCatTreeContainer() {
+        return service.GetCatTreeContainer();
+    }
+
+    public Container<FamilyTree<Human>> GetHumanTreeContainer() {
+        return service.GetHumanTreeContainer();
     }
 }

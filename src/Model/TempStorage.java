@@ -2,18 +2,17 @@ package Model;
 
 import Model.tree.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TempStorage {
-    Container<Cat> catContainer;
-    Container<Human> humanContainer;
-    Container<FamilyTree> treeContainer;
+    private Container<Cat> catContainer;
+    private Container<Human> humanContainer;
+    private Container<FamilyTree<Cat>> catTreeContainer;
+    private Container<FamilyTree<Human>> humanTreeContainer;
 
     public TempStorage() {
         this.catContainer = new Container<>();
         this.humanContainer = new Container<>();
-        this.treeContainer = new Container<>();
+        this.catTreeContainer = new Container<>();
+        this.humanTreeContainer = new Container<>();
     }
 
     public Container<Cat> getCatContainer() {
@@ -24,8 +23,8 @@ public class TempStorage {
         return humanContainer;
     }
 
-    public Container<FamilyTree> getTreeContainer() {
-        return treeContainer;
+    public Container<FamilyTree<Cat>> getCatTreeContainer() {
+        return catTreeContainer;
     }
 
     @Override
@@ -34,5 +33,9 @@ public class TempStorage {
         storage.append(getCatContainer()).append(getHumanContainer()).append(getHumanContainer());
 
         return "\nВо временном хранилище:\n" + storage;
+    }
+
+    public Container<FamilyTree<Human>> getHumanTreeContainer() {
+        return humanTreeContainer;
     }
 }

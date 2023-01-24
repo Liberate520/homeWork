@@ -21,7 +21,7 @@ public class ConsoleMenu implements Clickable{
         return list;
     }
 
-    public void choose(int command) {
+    public void Choose(int command) {
         this.list.get(command).onClick();
     }
 

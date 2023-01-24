@@ -2,17 +2,17 @@ package View.Buttons;
 
 import View.View;
 
-public class CreateTreeButton extends MenuButton{
-    String buttonName = "Создать древо";
+public class CreateHumanTreeButton extends MenuButton{
+    String buttonName = "Создать древо людей";
     View view;
 
-    public CreateTreeButton(View view) {
+    public CreateHumanTreeButton(View view) {
         this.view = view;
     }
 
     @Override
     public void onClick() {
-        view.CallCreateTreeButton();
+        view.CallCreateHumanTreeButton();
     }
 
     @Override

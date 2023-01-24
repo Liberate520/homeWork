@@ -24,7 +24,7 @@ public class Container<T extends Containerable> {
         return container;
     }
 
-    public void setContainer(List<Containerable> container) {
-        this.container = container;
+    public Containerable choose(int command){
+        return this.getContainer().get(command);
     }
 }

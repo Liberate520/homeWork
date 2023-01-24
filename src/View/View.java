@@ -1,7 +1,7 @@
 package View;
 
 import Controller.Presenter;
-import Model.tree.Gender;
+import Model.tree.*;
 import View.Buttons.*;
 import View.Menues.ConsoleMenu;
 
@@ -26,6 +26,7 @@ public class View {
         ConsoleMenu mainMenu = new ConsoleMenu("Главное меню", this);
         ConsoleMenu createMenu = new ConsoleMenu("Создать", this);
         ConsoleMenu saveMenu = new ConsoleMenu("Сохранить", this);
+        ConsoleMenu addMenu = new ConsoleMenu("Добавить в древо", this);
 
         MenuButton createHuman = new CreateHumanButton(this);
         MenuButton createCat = new CreateCatButton(this);
@@ -34,12 +35,17 @@ public class View {
         MenuButton savePDF = new SavePdfButton(this);
         MenuButton upButton = new UpButton(this);
         MenuButton printContainer = new PrintContainer(this);
-        MenuButton createTree = new CreateTreeButton(this);
+        MenuButton createCatTree = new CreateCatTreeButton(this);
+        MenuButton createHumanTree = new CreateCatTreeButton(this);
+        MenuButton addCat = new AddCatButton(this);
+
+        addMenu.getListCommand().add(upButton);
+        addMenu.getListCommand().add(addCat);
 
         createMenu.getListCommand().add(upButton);
         createMenu.getListCommand().add(createCat);
         createMenu.getListCommand().add(createHuman);
-        createMenu.getListCommand().add(createTree);
+        createMenu.getListCommand().add(createCatTree);
 
         saveMenu.getListCommand().add(upButton);
         saveMenu.getListCommand().add(saveXLS);
@@ -48,6 +54,7 @@ public class View {
         mainMenu.getListCommand().add(exitButton);
         mainMenu.getListCommand().add(createMenu);
         mainMenu.getListCommand().add(saveMenu);
+        mainMenu.getListCommand().add(addMenu);
         mainMenu.getListCommand().add(printContainer);
 
         this.menu = mainMenu;
@@ -65,7 +72,7 @@ public class View {
     public void GetUserPointOfMenu() {
         int command;
         command = Integer.parseInt(GetInfoFromUser("Введите номер пункта меню"));
-        this.menu.choose(command);
+        this.menu.Choose(command);
     }
 
     public String GetInfoFromUser(String question) {
@@ -170,10 +177,6 @@ public class View {
         presenter.CreateCatButtonOnClick(GetName(), GetGender(), GetAge());
     }
 
-    public void CallCreateTreeButton() {
-        presenter.CreateTreeButtonOnClick(GetName());
-    }
-
     public void CallExitButton() {
         sendUserMessage("Спасибо, что воспользовались нашим сервисом. Ждем Вас снова.");
         presenter.ExitButtonOnClick();
@@ -183,5 +186,48 @@ public class View {
         presenter.PrintContainerButtonClick();
     }
 
+    public void CallAddCatButton() {
+        Cat cat;
+        FamilyTree tree;
+        Container<Cat> catContainer = presenter.GetCatContainer();
+        Container<FamilyTree<Cat>> treeCatContainer = presenter.GetCatTreeContainer();
+        for (int i = 0; i < catContainer.getContainer().size(); i++) {
+            System.out.println("" + i + " - " + catContainer.getContainer().get(i));
+        }
+        cat = (Cat)catContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер кота")));
 
+        for (int i = 0; i < treeCatContainer.getContainer().size(); i++) {
+            tree = (FamilyTree) treeCatContainer.getContainer().get(i);
+            System.out.println("" + i + " - " + ((FamilyTree) treeCatContainer.getContainer().get(i)).getName());
+        }
+        tree = (FamilyTree) treeCatContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
+        presenter.AddCatButtonOnClick(tree, cat);
+    }
+
+    public void CallAddHumanButton() {
+        Human human;
+        FamilyTree<Human> tree;
+
+        Container<Human> humanContainer = presenter.GetHumanContainer();
+        Container<FamilyTree<Human>> treeHumanContainer = presenter.GetHumanTreeContainer();
+        for (int i = 0; i < humanContainer.getContainer().size(); i++) {
+            System.out.println("" + i + " - " + humanContainer.getContainer().get(i));
+        }
+        human = (Human) humanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер человека")));
+
+        for (int i = 0; i < treeHumanContainer.getContainer().size(); i++) {
+            tree = (FamilyTree) treeHumanContainer.getContainer().get(i);
+            System.out.println("" + i + " - " + ((FamilyTree) treeHumanContainer.getContainer().get(i)).getName());
+        }
+        tree = (FamilyTree) treeHumanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
+        presenter.AddHumanButtonOnClick(tree, human);
+    }
+
+    public void CallCreateHumanTreeButton() {
+        presenter.CreateHumanTreeButtonOnClick(GetName());
+    }
+
+    public void CallCreateCatTreeButton() {
+        presenter.CreateCatTreeButtonOnClick(GetName());
+    }
 }
