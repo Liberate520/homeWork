@@ -19,7 +19,7 @@ import DZ1.mainMenuCommands.Option;
 
 public class FamilyTreeUI implements View, Serializable {
 
-    Presenter presenter = new Presenter<>();
+    Presenter presenter;
     private Scanner scanner;
     int flagOutofMainLoop = 0;
 
