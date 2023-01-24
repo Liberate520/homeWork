@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import DZ1.FileOperations.FileHandler;
 import DZ1.app.Presenter;
 import DZ1.mainMenuCommands.Command_ClearTree;
 import DZ1.mainMenuCommands.Command_Exit;
@@ -22,7 +21,6 @@ public class FamilyTreeUI implements View, Serializable {
 
     Presenter presenter = new Presenter<>();
     private Scanner scanner;
-    FileHandler fileHandler = new FileHandler();
     int flagOutofMainLoop = 0;
 
     public FamilyTreeUI() {
@@ -82,12 +80,6 @@ public class FamilyTreeUI implements View, Serializable {
 
         presenter.saveTree();
     }
-
-    // public void saveTree() throws IOException {
-    // Human humantemp = new Human();
-    // humantemp.setWritable(fileHandler);
-    // humantemp.save(presenter.getHumans());
-    // }
 
     public void searchByName() {
         scanner.nextLine();
