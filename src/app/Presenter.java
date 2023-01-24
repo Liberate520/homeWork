@@ -14,7 +14,7 @@ public class Presenter<T extends Human> {
     private View view;
     private FamilyTree<T> familyTree;
     private FamilyTreeOperator familyTreeOperator;
-    FileHandler fileHandler = new FileHandler();
+    private FileHandler fileHandler = new FileHandler();
 
     public Presenter() {
     }

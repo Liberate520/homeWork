@@ -56,7 +56,7 @@ public class FamilyTreeUI implements View, Serializable {
 
             int userChoiceStartMenu = scanner.nextInt();
 
-            if (userChoiceStartMenu <= commandList.size() && userChoiceStartMenu >= 0) {
+            if (userChoiceStartMenu < commandList.size() && userChoiceStartMenu >= 0) {
                 commandList.get(userChoiceStartMenu).execute();
             } else {
                 System.out.println("Неправильный ввод, попробуй еще раз внимательно ");

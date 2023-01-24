@@ -8,13 +8,13 @@ import java.util.List;
 
 import DZ1.FileOperations.FileHandler;
 import DZ1.FileOperations.Writable;
-import DZ1.app.Presenter;
+// import DZ1.app.Presenter;
 
 public class FamilyTreeOperator<T extends Human> implements Serializable {
-    Writable writable;
-    FamilyTree familyTree;
-    FileHandler fileHandler;
-    Presenter presenter;
+    private Writable writable;
+    private FamilyTree familyTree;
+    // FileHandler fileHandler;
+    // private Presenter presenter;
 
     public FamilyTreeOperator(FamilyTree familyTree) {
         this.familyTree = familyTree;
