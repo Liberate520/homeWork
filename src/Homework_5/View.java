@@ -1,7 +1,9 @@
 package Homework_5;
 
 
-import Inerfase.Print;
+import static javax.swing.JOptionPane.showMessageDialog;
+
+
 import metods.PrintMetods;
 import metods.SortClass;
 
@@ -16,13 +18,26 @@ public class View {
     Designer_Human designer_human;
     Femily_Tree femily_tree;
     SortClass sortClass;
-PrintMetods printMetods;
+    PrintMetods printMetods;
 
     public void showAll() {
+        //Отображение сообщения в диалоговом окне
+        showMessageDialog(null, """ 
+                Добро пожаловать в программу генеалогическова древа
+                              Выберете действие
+                                
+                                1.Добавить пользователя
+                                2.Добавить пользователя с Id
+                                3.Добавить детей
+                                4.Добавить родителей
+                                5.Показать все древо
+                                6.Поиск по имени
+                                7.Сортировка
+                """);
         System.out.println("""
                 Добро пожаловать в программу генеалогическова древа
                 Выберете действие
-                                
+
                 1.Добавить пользователя
                 2.Добавить пользователя с Id
                 3.Добавить детей
@@ -44,7 +59,8 @@ PrintMetods printMetods;
             }
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Промазал давай по новой ");
+            showMessageDialog(null, "Промазал давай по новой ");
+//            System.out.println("Промазал давай по новой ");
 
         }
     }
@@ -56,7 +72,7 @@ PrintMetods printMetods;
     /**
      * Варианты вариантов вывода древа
      */
-    private void showAllTree(){
+    private void showAllTree() {
         System.out.println("Показать все древо");
         System.out.println("Вариант № 1 ");
         printMetods.ShowALL(designer_human.getHumans()); //Вариант 1
@@ -64,12 +80,13 @@ PrintMetods printMetods;
         printMetods.printFamilyTree(femily_tree); //Вариант 2
         System.out.println("Вариант № 2 ");
         printMetods.printTheTreeForEach(); //Вариант 3
-//        printMetods.printDrevo((List<Designer_Human>) designer_human);
+        printMetods.printDrevo((List<Designer_Human>) designer_human);
     }
+
     /**
      * варианты добавления детей
      */
-    private void showAllСhildren(){
+    private void showAllСhildren() {
         femily_tree.addChildren();
         femily_tree.addChildrenScanner();
         femily_tree.selectChildrenScanner();
@@ -80,7 +97,7 @@ PrintMetods printMetods;
     /**
      * варианты поисковиков
      */
-    public void showAllSorting(){
+    public void showAllSorting() {
         femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
         femily_tree.showName();
     }

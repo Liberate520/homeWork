@@ -10,7 +10,6 @@ public class Main {
         /*
         Вызываем экземпляры класса
          */
-
         Designer_Human designer_human = new Designer_Human();  //Вызов  экземпляр класса
 
         Femily_Tree femily_tree = new Femily_Tree();//Вызов  экземпляр класса
