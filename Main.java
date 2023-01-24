@@ -16,8 +16,8 @@ public class Main {
         Calendar calendar = new Calendar();
         FileHandler fileHandler = new FileHandler();
         BackupAndRead files = new BackupAndRead(fileHandler);
-        Presenter presenter = new Presenter(files);
-        Console console = new Console(presenter, calendar);
+        Presenter presenter = new Presenter(files,calendar);
+        Console console = new Console(presenter);
         console.start();
 
     }

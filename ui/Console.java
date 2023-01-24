@@ -11,21 +11,26 @@ import java.util.Scanner;
 
 public class Console {
 
-    private Calendar calendarList;
+    // private Calendar calendarList;
     private Presenter presenter;
     List<Commands> commandsList;
     private Scanner scanner;
 
-    public Console(Presenter presenter, Calendar calendarList) {
+    public Console(Presenter presenter) {
         this.presenter = presenter;
-        this.calendarList = calendarList;
+        // this.calendarList = calendarList;
         commandsList = new ArrayList<>();
         presenter.setConsole(this);
     }
 
+    // public Calendar getCalendar() {
+    //     return calendarList;
+    // }
+    
     public Calendar getCalendar() {
-        return calendarList;
+        return presenter.getCalendar();
     }
+
 
     public Presenter getPresenter() {
         return presenter;
@@ -66,9 +71,9 @@ public class Console {
     }
 
     public void printDataDay(LocalDate data) {
-        if (calendarList.getBaseCalendar().size() > 0) {
+        if (getCalendar().getBaseCalendar().size() > 0) {
             System.out.printf("Все записи %s на дату:\n", data);
-            System.out.println(calendarList.getDayRecords(data));
+            System.out.println(getCalendar().getDayRecords(data));
         } else {
             System.out.printf("На   %s записи отсутствуют.\n", data);
         }
@@ -92,5 +97,6 @@ public class Console {
         LocalDate inData = LocalDate.of(yearInput, monthInput, dayInput);
         return inData;
     }
+
 
 }

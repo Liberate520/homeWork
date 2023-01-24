@@ -13,9 +13,15 @@ public class Presenter {
     private BackupAndRead backupAndRead;
     private CalendarEntry calendarEntry;
 
-    public Presenter(BackupAndRead backupAndRead) {
+    public Presenter(BackupAndRead backupAndRead,Calendar calendarList) {
 
         this.backupAndRead = backupAndRead;
+        this.calendarList = calendarList;
+    }
+
+    
+    public Calendar getCalendar() {
+        return calendarList;
     }
 
     public Console getConsole() {
@@ -47,7 +53,7 @@ public class Presenter {
 
     public void addRecord() {
 
-        console.getCalendar().addRecord(new CalendarEntry(console.getData(), console.getRecord()));
+        calendarList.addRecord(new CalendarEntry(console.getData(), console.getRecord()));
 
     }
 
