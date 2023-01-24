@@ -7,9 +7,7 @@ public abstract class MenuButton implements Clickable {
     String buttonName;
     View view;
 
-    public void onClick(){
-        view.CallCommandButton();
-    }
+    public abstract void onClick();
 
     @Override
     public String toString() {

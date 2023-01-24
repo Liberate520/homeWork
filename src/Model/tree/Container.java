@@ -6,17 +6,18 @@ public class Container<T extends Containerable> {
     List<Containerable> container;
 
     public Container() {
-        this.container = new ArrayList<Containerable>();
+        this.container = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         StringBuilder elementsForPrint = new StringBuilder();
         for (Containerable element : container) {
-            elementsForPrint.append("\n").append(element.getVisibleName()).append(" - ").append(element.getVisibleType());
+            elementsForPrint.append(element.getVisibleName())
+                    .append(" - ").append(element.getVisibleType()).append("\n");
         }
 
-        return "В контейнере сейчас следующие элементы:\n" + elementsForPrint;
+        return String.valueOf(elementsForPrint);
     }
 
     public List<Containerable> getContainer() {

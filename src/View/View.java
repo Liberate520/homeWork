@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Presenter;
+import Model.tree.Gender;
 import View.Buttons.*;
 import View.Menues.ConsoleMenu;
 
@@ -33,10 +34,12 @@ public class View {
         MenuButton savePDF = new SavePdfButton(this);
         MenuButton upButton = new UpButton(this);
         MenuButton printContainer = new PrintContainer(this);
+        MenuButton createTree = new CreateTreeButton(this);
 
         createMenu.getListCommand().add(upButton);
         createMenu.getListCommand().add(createCat);
         createMenu.getListCommand().add(createHuman);
+        createMenu.getListCommand().add(createTree);
 
         saveMenu.getListCommand().add(upButton);
         saveMenu.getListCommand().add(saveXLS);
@@ -86,30 +89,99 @@ public class View {
         return lastMenu;
     }
 
-    public void UserMessage(String message){
-        System.out.println(message);
-    }
-
     public void CallCommandButton() {
         presenter.CreateButtonOnClick(GetInfoFromUser("Введите имя"));
     }
 
-    public void CallCreateCatButton() {
-        presenter.CreateCatButtonOnClick(GetInfoFromUser("Введите имя"),
-                GetInfoFromUser("Введите пол (М / Ж)"), GetInfoFromUser("Введите возраст"));
+    public void sendUserMessage(String message){
+        System.out.println(message);
+    }
+
+    public String GetName(){
+        String name = null;
+        String userAnswer;
+        Boolean flag = true;
+
+        while (flag){
+            userAnswer = GetInfoFromUser("Введите имя");
+            if (!userAnswer.isEmpty()){
+                name = userAnswer;
+                flag = false;
+            } else {
+                sendUserMessage("Поле не может быть пустым");
+            }
+        }
+
+        return name;
+    }
+
+    public Gender GetGender(){
+        Gender gender = null;
+        String userAnswer;
+        Boolean flag = true;
+
+        while (flag){
+            userAnswer = GetInfoFromUser("Введите пол (М / Ж)");
+            if (!userAnswer.isEmpty()){
+                if (userAnswer.equalsIgnoreCase("м")){
+                    gender = Gender.Male;
+                    flag = false;
+                } else if (userAnswer.equalsIgnoreCase("ж")) {
+                    gender = Gender.Female;
+                    flag = false;
+                } else {
+                    sendUserMessage("Некорректный ввод. Необходимо ввести М или Ж");
+                }
+            } else {
+                sendUserMessage("Поле не может быть пустым");
+            }
+        }
+
+        return gender;
+    }
+
+    public Integer GetAge(){
+        Integer age = null;
+        String userAnswer;
+        Boolean flag = true;
+
+        while(flag){
+            userAnswer = GetInfoFromUser("Введите возраст");
+            if (!userAnswer.isEmpty()){
+                try {
+                    age = Integer.parseInt(userAnswer);
+                    flag = false;
+                } catch (Exception e){
+                    sendUserMessage("Некорректный ввод. Возраст может быть только целым положительным числом");
+                }
+            } else {
+                sendUserMessage("Поле не может быть пустым");
+            }
+        }
+
+        return age;
     }
 
     public void CallCreateHumanButton() {
-        presenter.CreateHumanButtonOnClick(GetInfoFromUser("Введите имя"),
-                GetInfoFromUser("Введите пол (М / Ж)"), GetInfoFromUser("Введите возраст"));
+        presenter.CreateHumanButtonOnClick(GetName(), GetGender(), GetAge());
+    }
+
+    public void CallCreateCatButton() {
+        presenter.CreateCatButtonOnClick(GetName(), GetGender(), GetAge());
+    }
+
+    public void CallCreateTreeButton() {
+        presenter.CreateTreeButtonOnClick(GetName());
     }
 
     public void CallExitButton() {
-        UserMessage("Спасибо, что воспользовались нашим сервисом. Ждем Вас снова.");
+        sendUserMessage("Спасибо, что воспользовались нашим сервисом. Ждем Вас снова.");
         presenter.ExitButtonOnClick();
     }
 
     public void CallPrintContainer() {
         presenter.PrintContainerButtonClick();
     }
+
+
 }

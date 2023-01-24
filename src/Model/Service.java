@@ -1,16 +1,15 @@
 package Model;
 
-import Model.tree.Cat;
-import Model.tree.Container;
-import Model.tree.Gender;
-import Model.tree.Human;
+import Model.tree.*;
 
 public class Service {
 
     Container menuContainer;
+    TempStorage tempStorage;
+
 
     public Service() {
-        this.menuContainer = new Container<>();
+        this.tempStorage = new TempStorage();
     }
 
     public void CreateButtonOnClick(String name) {
@@ -29,17 +28,24 @@ public class Service {
         Cat cat = new Cat(name, gender, age);
         System.out.println();
         System.out.println(cat);
-        this.menuContainer.getContainer().add(cat);
+        this.tempStorage.getCatContainer().getContainer().add(cat);
     }
 
     public void CreateHumanButtonOnClick(String name, Gender humanGender, Integer humanAge) {
         Human human = new Human(name, humanGender, humanAge);
         System.out.println();
         System.out.println(human);
-        this.menuContainer.getContainer().add(human);
+        this.tempStorage.getHumanContainer().getContainer().add(human);
     }
 
     public void PrintContainerButtonOnClick() {
-        System.out.println(this.menuContainer);
+        System.out.println(tempStorage);
+    }
+
+    public void CreateTreeButtonOnClick(String name) {
+        FamilyTree familyTree = new FamilyTree(name);
+        System.out.println();
+        System.out.println(familyTree);
+        this.tempStorage.getTreeContainer().getContainer().add(familyTree);
     }
 }
