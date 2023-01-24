@@ -24,6 +24,9 @@ public class Human implements Serializable, Comparable<Human> {
         this.mother = mother;
     }
 
+    public Human (){
+        
+    }
     public void setChild(Human child) {
         this.child = child;
     }

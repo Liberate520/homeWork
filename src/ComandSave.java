@@ -1,8 +1,11 @@
 import java.io.IOException;
 
 public class ComandSave implements Option {
-
+    Presenter presenter;
     
+    public ComandSave() {
+    }
+
     @Override
     public String dicription() {
         String save = "Сохранить ваше дерево";
@@ -11,9 +14,7 @@ public class ComandSave implements Option {
 
     @Override
     public void execute() throws IOException {
-        Tree<Human> tree = new Tree<>();
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree.getHumanlist());  
+        presenter.comandSave();
     }
-    
+
 }

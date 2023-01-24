@@ -14,8 +14,8 @@ public class Main implements Serializable {
         familyTree.add_human(human2);
         familyTree.add_human(human3);
         familyTree.add_human(human4);
-
-        System.out.println(familyTree);
+        
+        // System.out.println(familyTree);
         // FileHandler fileHandler = new FileHandler();
         // fileHandler.save(familyTree.getHumanlist());
         // Tree<Human> tree = new Tree<Human>();
@@ -34,9 +34,9 @@ public class Main implements Serializable {
         // for (Human human : tree) {
         //     System.out.println(human);
         // }
-        UserUI userUI = new UserUI();
-        userUI.start();
-
+        View view = new View();
+        view.start();
+        
     }
 
 }
