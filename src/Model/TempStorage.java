@@ -30,7 +30,8 @@ public class TempStorage {
     @Override
     public String toString() {
         StringBuilder storage = new StringBuilder();
-        storage.append(getCatContainer()).append(getHumanContainer()).append(getHumanContainer());
+        storage.append(getCatContainer()).append(getHumanContainer()).
+                append(getHumanTreeContainer()).append(getCatTreeContainer());
 
         return storage.toString();
     }

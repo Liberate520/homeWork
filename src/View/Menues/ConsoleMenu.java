@@ -3,6 +3,7 @@ package View.Menues;
 import View.Clickable;
 import View.View;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ConsoleMenu implements Clickable{
         return list;
     }
 
-    public void Choose(int command) {
+    public void Choose(int command) throws IOException {
         this.list.get(command).onClick();
     }
 
@@ -30,7 +31,7 @@ public class ConsoleMenu implements Clickable{
     }
 
     @Override
-    public void onClick() {
+    public void onClick() throws IOException {
         view.setLastMenu(view.getMenu());
         view.setMenu(this);
         view.CallMenu();

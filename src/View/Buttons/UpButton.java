@@ -2,6 +2,8 @@ package View.Buttons;
 
 import View.View;
 
+import java.io.IOException;
+
 public class UpButton extends MenuButton {
 
     public UpButton(View view) {
@@ -10,7 +12,7 @@ public class UpButton extends MenuButton {
     }
 
     @Override
-    public void onClick() {
+    public void onClick() throws IOException {
         view.setMenu(view.getLastMenu());
         view.CallMenu();
     }

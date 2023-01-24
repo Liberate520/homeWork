@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class FileWorker<T extends Creature> implements Writable{
     @Override
-    public void writeToFile(FamilyTree inputTree) throws IOException {
+    public void writeTreeToFile(FamilyTree inputTree) throws IOException {
         String pathname = inputTree.getName().toLowerCase() + ".txt";
         try {
             File tree = new File(pathname);
@@ -23,7 +23,7 @@ public class FileWorker<T extends Creature> implements Writable{
             Path path = Paths.get(pathname);
             String str = LocalDateTime.now() + "\n" + inputTree + "\n\n";
             Files.write(path, str.getBytes(), StandardOpenOption.APPEND);
-            System.out.println("\nЗапись прошла успешно.");
+            System.out.println("\nДрево '" + inputTree.getName() + "' успешно сохранено.");
         } catch (IOException e) {
             System.out.println("Что-то пошло не так. Запись не произведена.");
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class FileWorker<T extends Creature> implements Writable{
     }
 
     @Override
-    public FamilyTree<T> readFromFile(FamilyTree inputTree) {
+    public FamilyTree<T> readTreeFromFile(FamilyTree inputTree) {
         String pathname = "read.txt";
 
         try {
@@ -59,5 +59,27 @@ public class FileWorker<T extends Creature> implements Writable{
             e.printStackTrace();
         }
         return inputTree;
+    }
+
+    @Override
+    public void writeCreatureToFile(Creature creature) throws IOException {
+        String pathname = creature.getFullName().toLowerCase() + ".txt";
+        try {
+            File tree = new File(pathname);
+            tree.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Что-то пошло не так. Не удалось обратиться к файлу.");
+            e.printStackTrace();
+        }
+
+        try {
+            Path path = Paths.get(pathname);
+            String str = LocalDateTime.now() + "\n" + creature + "\n\n";
+            Files.write(path, str.getBytes(), StandardOpenOption.APPEND);
+            System.out.println("\n" + creature.getFullName() + " успешно сохранен.");
+        } catch (IOException e) {
+            System.out.println("Что-то пошло не так. Запись не произведена.");
+            e.printStackTrace();
+        }
     }
 }

@@ -3,6 +3,9 @@ package Model.tree;
 import java.io.IOException;
 
 public interface Writable {
-    void writeToFile(FamilyTree tree) throws IOException;
-    FamilyTree readFromFile(FamilyTree tree);
+    void writeTreeToFile(FamilyTree tree) throws IOException;
+    FamilyTree readTreeFromFile(FamilyTree tree);
+
+    void writeCreatureToFile(Creature tree) throws IOException;
+//    FamilyTree readCreatureFromFile(Creature tree);
 }

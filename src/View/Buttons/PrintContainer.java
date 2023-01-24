@@ -3,7 +3,7 @@ package View.Buttons;
 import View.View;
 
 public class PrintContainer extends MenuButton{
-    String buttonName = "Показать несохраненные данные";
+    String buttonName = "Показать данные, доступные для работы";
     View view;
 
     public PrintContainer(View view) {

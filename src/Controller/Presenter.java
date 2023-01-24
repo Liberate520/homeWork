@@ -5,6 +5,8 @@ import Model.TempStorage;
 import Model.tree.*;
 import View.View;
 
+import java.io.IOException;
+
 public class Presenter {
     View view;
     Service service;
@@ -21,8 +23,8 @@ public class Presenter {
         service.CreateButtonOnClick(name);
     }
 
-    public void SaveButtonOnClick(String name){
-        service.CreateButtonOnClick(name);
+    public void SaveButtonOnClick() throws IOException {
+        service.SaveButtonOnClick();
     }
 
     public void ExitButtonOnClick(){

@@ -5,6 +5,7 @@ import Model.tree.*;
 import View.Buttons.*;
 import View.Menues.ConsoleMenu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,14 +26,13 @@ public class View {
     public void init(){
         ConsoleMenu mainMenu = new ConsoleMenu("Главное меню", this);
         ConsoleMenu createMenu = new ConsoleMenu("Создать", this);
-        ConsoleMenu saveMenu = new ConsoleMenu("Сохранить", this);
+//        ConsoleMenu saveMenu = new ConsoleMenu("Сохранить", this);
         ConsoleMenu addMenu = new ConsoleMenu("Добавить в древо", this);
 
         MenuButton createHuman = new CreateHumanButton(this);
         MenuButton createCat = new CreateCatButton(this);
         MenuButton exitButton = new ExitButton(this);
-        MenuButton saveXLS = new SaveXlsButton(this);
-        MenuButton savePDF = new SavePdfButton(this);
+        MenuButton saveButton = new SaveButton(this);
         MenuButton upButton = new UpButton(this);
         MenuButton printContainer = new PrintContainer(this);
         MenuButton createCatTree = new CreateCatTreeButton(this);
@@ -51,20 +51,17 @@ public class View {
         createMenu.getListCommand().add(createCatTree);
         createMenu.getListCommand().add(createHumanTree);
 
-        saveMenu.getListCommand().add(upButton);
-        saveMenu.getListCommand().add(saveXLS);
-        saveMenu.getListCommand().add(savePDF);
-
         mainMenu.getListCommand().add(exitButton);
         mainMenu.getListCommand().add(createMenu);
         mainMenu.getListCommand().add(addMenu);
-        mainMenu.getListCommand().add(saveMenu);
+//        mainMenu.getListCommand().add(saveMenu);
         mainMenu.getListCommand().add(printContainer);
+        mainMenu.getListCommand().add(saveButton);
 
         this.menu = mainMenu;
     }
 
-    public void CallMenu(){
+    public void CallMenu() throws IOException {
         System.out.println("\n----- " + this.menu.getMenuName() + " -----");
         for (int i = 0; i < this.menu.getListCommand().size(); i++) {
             System.out.println("" + i + " - " + menu.getListCommand().get(i));
@@ -73,7 +70,7 @@ public class View {
         GetUserPointOfMenu();
     }
 
-    public void GetUserPointOfMenu() {
+    public void GetUserPointOfMenu() throws IOException {
         int command;
         command = Integer.parseInt(GetInfoFromUser("Введите номер пункта меню"));
         this.menu.Choose(command);
@@ -253,5 +250,9 @@ public class View {
 
     public void CallCreateCatTreeButton() {
         presenter.CreateCatTreeButtonOnClick(GetName());
+    }
+
+    public void CallSaveButton() throws IOException {
+        presenter.SaveButtonOnClick();
     }
 }

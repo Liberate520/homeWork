@@ -1,5 +1,7 @@
 package View;
 
+import java.io.IOException;
+
 public interface Clickable {
-    void onClick();
+    void onClick() throws IOException;
 }

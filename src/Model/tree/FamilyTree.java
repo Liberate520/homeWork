@@ -79,13 +79,13 @@ public class FamilyTree<T extends Creature> implements Iterable<T>, Containerabl
 
     public void save() throws IOException {
         if (writable != null) {
-            writable.writeToFile(this);
+            writable.writeTreeToFile(this);
         }
     }
 
     public FamilyTree read() throws IOException {
         if (writable != null) {
-            writable.readFromFile(this);
+            writable.readTreeFromFile(this);
         }
         return this;
     }

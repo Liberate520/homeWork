@@ -2,6 +2,8 @@ package Model;
 
 import Model.tree.*;
 
+import java.io.IOException;
+
 public class Service {
 
     private TempStorage tempStorage;
@@ -19,8 +21,24 @@ public class Service {
         System.out.println("Выполнена команда создать " + name);
     }
 
-    public void SaveButtonOnClick(String name) {
-        System.out.println("Выполнена команда сохранить " + name);
+    public void SaveButtonOnClick() throws IOException {
+        FileWorker fileWorker = new FileWorker();
+
+        for (Containerable human : tempStorage.getHumanContainer().getContainer()) {
+            fileWorker.writeCreatureToFile((Human) human);
+        }
+
+        for (Containerable cat : tempStorage.getCatContainer().getContainer()) {
+            fileWorker.writeCreatureToFile((Cat) cat);
+        }
+
+        for (Containerable tree : tempStorage.getHumanTreeContainer().getContainer()) {
+            fileWorker.writeTreeToFile((FamilyTree<Human>) tree);
+        }
+
+        for (Containerable tree : tempStorage.getCatTreeContainer().getContainer()) {
+            fileWorker.writeTreeToFile((FamilyTree<Cat>) tree);
+        }
     }
 
     public void ExitButtonOnClick(){
