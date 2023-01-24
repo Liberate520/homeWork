@@ -1,11 +1,12 @@
 import java.util.List;
 import java.util.Map;
 
-import Enums.Gender;
-import Models.FamilyTree;
-import Models.Human;
-import ServiceCompares.HumanListService;
-import Writables.FileHandler;
+import enums.Gender;
+import models.*;
+import presenters.Presenter;
+import serviceCompares.HumanListService;
+import views.ConsoleInterface;
+import writables.FileHandler;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class Main {
         // h.setParentFather(g);
         // h.setParentMother(c);
 
-        FamilyTree<Human> humanList = new FamilyTree<>();
+        // FamilyTree<Human> humanList = new FamilyTree<>();
 
         // humanList.addHuman(a);
         // humanList.addHuman(b);
@@ -72,22 +73,26 @@ public class Main {
         //     }
         // }
 
-        FileHandler<Human> fileHandler = new FileHandler<>();
-        humanList.setWritable(fileHandler);
+        // FileHandler<Human> fileHandler = new FileHandler<>();
+        // humanList.setWritable(fileHandler);
 
         // humanList.save();
         
-        humanList.read();
+        // humanList.read();
 
-        Map<String, Human> humans = humanList.getHumanMap();
-        humans.forEach((id, x) -> System.out.println(x.getFIOtoString()));
-        System.out.println();
+        // Map<String, Human> humans = humanList.getHumanMap();
+        // humans.forEach((id, x) -> System.out.println(x.getFIOtoString()));
+        // System.out.println();
 
-        HumanListService<Human> humanListService = new HumanListService<>(humanList);
+        // HumanListService<Human> humanListService = new HumanListService<>(humanList);
 
-        humanListService.sortByName();
+        // humanListService.sortByName();
 
-        Map<String, Human> humans1 = humanList.getHumanMap();
-        humans1.forEach((id, x) -> System.out.println(x.getFIOtoString()));   
+        // Map<String, Human> humans1 = humanList.getHumanMap();
+        // humans1.forEach((id, x) -> System.out.println(x.getFIOtoString()));   
+
+
+        Presenter presenter = new Presenter();
+        presenter.start();
     }
 }

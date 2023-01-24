@@ -1,11 +1,11 @@
-package Models;
+package models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Writables.Writable;
+import writables.Writable;
 
 public class FamilyTree<T extends Human> {
     private Map<String, T> humanMap;

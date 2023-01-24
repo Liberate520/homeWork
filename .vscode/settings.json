@@ -1,4 +1,4 @@
 {
-    "java.dependency.syncWithFolderExplorer": true,
+    "java.dependency.syncWithFolderExplorer": false,
     "java.dependency.packagePresentation": "flat"
 }

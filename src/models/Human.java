@@ -40,15 +40,25 @@ public class Human implements Serializable{
         String text = "";
         if (this.children  != null) {
             for (Human hum : this.children) {
-                text = text + hum.getFIOtoString() + "\n";
+                text = text + "\n" + hum.getUuid() + " -> " + hum.getFIOtoString();
             }
         }
 
-        return this.getFIOtoString() + "\n"
+        return this.getUuid() + " -> " + this.getFIOtoString() + "\n"
             + "пол: " + (gender == Gender.MAN ? "мужской" : "женский") + "\n"
-            + "отец: " + (this.parentFather != null ? this.parentFather.getFIOtoString() : "отсутствует") + "\n"
-            + "мать: " + (this.parentMother != null ? this.parentMother.getFIOtoString() : "отсутствует")
-            + (text.length() > 0 ? "\nдети:\n" + text : "\nдети: нет\n");
+            + "отец: "
+            + (
+                this.parentFather != null ? 
+                "\n" + this.parentFather.getUuid() + " -> " + this.parentFather.getFIOtoString() : 
+                "отсутствует"
+            ) + "\n"
+            + "мать: "
+            + (
+                this.parentMother != null ? 
+                "\n" + this.parentMother.getUuid() + " -> " + this.parentMother.getFIOtoString() :
+                 "отсутствует"
+            ) + "\n"
+            +  (text.length() > 0 ? "дети: " + text : "дети: нет");
     }
 
     public void setName(String name) {
