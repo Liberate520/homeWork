@@ -203,17 +203,23 @@ public class View {
         FamilyTree tree;
         Container<Cat> catContainer = presenter.GetCatContainer();
         Container<FamilyTree<Cat>> treeCatContainer = presenter.GetCatTreeContainer();
-        for (int i = 0; i < catContainer.getContainer().size(); i++) {
-            System.out.println("" + i + " - " + catContainer.getContainer().get(i));
-        }
-        cat = (Cat)catContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер кота")));
+        if (catContainer.getContainer().size() == 0){
+            sendUserMessage("\nНет ни одного кота вне древа");
+        } else if (treeCatContainer.getContainer().size() == 0) {
+            sendUserMessage("\nНет ни одного древа для добавления котов");
+        } else {
+            for (int i = 0; i < catContainer.getContainer().size(); i++) {
+                System.out.println("" + i + " - " + catContainer.getContainer().get(i));
+            }
+            cat = (Cat)catContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер кота")));
 
-        for (int i = 0; i < treeCatContainer.getContainer().size(); i++) {
-            tree = (FamilyTree) treeCatContainer.getContainer().get(i);
-            System.out.println("" + i + " - " + ((FamilyTree) treeCatContainer.getContainer().get(i)).getName());
+            for (int i = 0; i < treeCatContainer.getContainer().size(); i++) {
+                tree = (FamilyTree) treeCatContainer.getContainer().get(i);
+                System.out.println("" + i + " - " + ((FamilyTree) treeCatContainer.getContainer().get(i)).getName());
+            }
+            tree = (FamilyTree) treeCatContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
+            presenter.AddCatButtonOnClick(tree, cat);
         }
-        tree = (FamilyTree) treeCatContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
-        presenter.AddCatButtonOnClick(tree, cat);
     }
 
     public void CallAddHumanButton() {
@@ -222,17 +228,24 @@ public class View {
 
         Container<Human> humanContainer = presenter.GetHumanContainer();
         Container<FamilyTree<Human>> treeHumanContainer = presenter.GetHumanTreeContainer();
-        for (int i = 0; i < humanContainer.getContainer().size(); i++) {
-            System.out.println("" + i + " - " + humanContainer.getContainer().get(i));
-        }
-        human = (Human) humanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер человека")));
 
-        for (int i = 0; i < treeHumanContainer.getContainer().size(); i++) {
-            tree = (FamilyTree) treeHumanContainer.getContainer().get(i);
-            System.out.println("" + i + " - " + ((FamilyTree) treeHumanContainer.getContainer().get(i)).getName());
+        if (humanContainer.getContainer().size() == 0){
+            sendUserMessage("\nНет ни одного человека вне древа");
+        } else if (treeHumanContainer.getContainer().size() == 0) {
+            sendUserMessage("\nНет ни одного древа для добавления людей");
+        } else {
+            for (int i = 0; i < humanContainer.getContainer().size(); i++) {
+                System.out.println("" + i + " - " + humanContainer.getContainer().get(i));
+            }
+            human = (Human) humanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер человека")));
+
+            for (int i = 0; i < treeHumanContainer.getContainer().size(); i++) {
+                tree = (FamilyTree) treeHumanContainer.getContainer().get(i);
+                System.out.println("" + i + " - " + ((FamilyTree) treeHumanContainer.getContainer().get(i)).getName());
+            }
+            tree = (FamilyTree) treeHumanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
+            presenter.AddHumanButtonOnClick(tree, human);
         }
-        tree = (FamilyTree) treeHumanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
-        presenter.AddHumanButtonOnClick(tree, human);
     }
 
     public void CallCreateHumanTreeButton() {
