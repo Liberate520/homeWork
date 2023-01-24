@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Service;
+import Model.TempStorage;
 import Model.tree.*;
 import View.View;
 
@@ -37,8 +38,8 @@ public class Presenter {
         service.CreateCatButtonOnClick(name, gender, age);
     }
 
-    public void PrintContainerButtonClick() {
-        service.PrintContainerButtonOnClick();
+    public TempStorage PrintContainerButtonClick() {
+        return service.PrintContainerButtonOnClick();
     }
 
     public void CreateHumanTreeButtonOnClick(String name) {

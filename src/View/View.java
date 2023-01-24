@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Presenter;
+import Model.TempStorage;
 import Model.tree.*;
 import View.Buttons.*;
 import View.Menues.ConsoleMenu;
@@ -36,16 +37,20 @@ public class View {
         MenuButton upButton = new UpButton(this);
         MenuButton printContainer = new PrintContainer(this);
         MenuButton createCatTree = new CreateCatTreeButton(this);
-        MenuButton createHumanTree = new CreateCatTreeButton(this);
+        MenuButton createHumanTree = new CreateHumanTreeButton(this);
         MenuButton addCat = new AddCatButton(this);
+        MenuButton addHuman = new AddHumanButton(this);
 
         addMenu.getListCommand().add(upButton);
         addMenu.getListCommand().add(addCat);
+        addMenu.getListCommand().add(addHuman);
+
 
         createMenu.getListCommand().add(upButton);
         createMenu.getListCommand().add(createCat);
         createMenu.getListCommand().add(createHuman);
         createMenu.getListCommand().add(createCatTree);
+        createMenu.getListCommand().add(createHumanTree);
 
         saveMenu.getListCommand().add(upButton);
         saveMenu.getListCommand().add(saveXLS);
@@ -53,8 +58,8 @@ public class View {
 
         mainMenu.getListCommand().add(exitButton);
         mainMenu.getListCommand().add(createMenu);
-        mainMenu.getListCommand().add(saveMenu);
         mainMenu.getListCommand().add(addMenu);
+        mainMenu.getListCommand().add(saveMenu);
         mainMenu.getListCommand().add(printContainer);
 
         this.menu = mainMenu;
@@ -183,7 +188,14 @@ public class View {
     }
 
     public void CallPrintContainer() {
-        presenter.PrintContainerButtonClick();
+        String containerString = presenter.PrintContainerButtonClick().toString();
+        if (containerString.isEmpty()){
+            sendUserMessage("\nВ хранилище пока пусто.");
+        } else {
+            sendUserMessage("\nВ хранилище сейчас:");
+            System.out.println(containerString);
+        }
+
     }
 
     public void CallAddCatButton() {

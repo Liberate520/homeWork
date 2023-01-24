@@ -32,10 +32,11 @@ public class TempStorage {
         StringBuilder storage = new StringBuilder();
         storage.append(getCatContainer()).append(getHumanContainer()).append(getHumanContainer());
 
-        return "\nВо временном хранилище:\n" + storage;
+        return storage.toString();
     }
 
-    public Container<FamilyTree<Human>> getHumanTreeContainer() {
+    public Container<FamilyTree<Human>>
+    getHumanTreeContainer() {
         return humanTreeContainer;
     }
 }

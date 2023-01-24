@@ -4,11 +4,15 @@ import Model.tree.*;
 
 public class Service {
 
-    TempStorage tempStorage;
+    private TempStorage tempStorage;
 
 
     public Service() {
         this.tempStorage = new TempStorage();
+    }
+
+    public TempStorage getTempStorage() {
+        return tempStorage;
     }
 
     public void CreateButtonOnClick(String name) {
@@ -37,8 +41,8 @@ public class Service {
         this.tempStorage.getHumanContainer().getContainer().add(human);
     }
 
-    public void PrintContainerButtonOnClick() {
-        System.out.println(tempStorage);
+    public TempStorage PrintContainerButtonOnClick() {
+        return getTempStorage();
     }
 
     public void CreateHumanTreeButtonOnClick(String name) {
