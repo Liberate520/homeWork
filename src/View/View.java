@@ -1,7 +1,6 @@
 package View;
 
 import Controller.Presenter;
-import Model.TempStorage;
 import Model.tree.*;
 import View.Buttons.*;
 import View.Menues.ConsoleMenu;
@@ -112,7 +111,7 @@ public class View {
     public String GetName(){
         String name = null;
         String userAnswer;
-        Boolean flag = true;
+        boolean flag = true;
 
         while (flag){
             userAnswer = GetInfoFromUser("Введите имя");
@@ -130,7 +129,7 @@ public class View {
     public Gender GetGender(){
         Gender gender = null;
         String userAnswer;
-        Boolean flag = true;
+        boolean flag = true;
 
         while (flag){
             userAnswer = GetInfoFromUser("Введите пол (М / Ж)");
@@ -155,7 +154,7 @@ public class View {
     public Integer GetAge(){
         Integer age = null;
         String userAnswer;
-        Boolean flag = true;
+        boolean flag = true;
 
         while(flag){
             userAnswer = GetInfoFromUser("Введите возраст");
@@ -200,7 +199,7 @@ public class View {
 
     public void CallAddCatButton() {
         Cat cat;
-        FamilyTree tree;
+        FamilyTree<Cat> tree;
         Container<Cat> catContainer = presenter.GetCatContainer();
         Container<FamilyTree<Cat>> treeCatContainer = presenter.GetCatTreeContainer();
         if (catContainer.getContainer().size() == 0){
@@ -214,10 +213,10 @@ public class View {
             cat = (Cat)catContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер кота")));
 
             for (int i = 0; i < treeCatContainer.getContainer().size(); i++) {
-                tree = (FamilyTree) treeCatContainer.getContainer().get(i);
-                System.out.println("" + i + " - " + ((FamilyTree) treeCatContainer.getContainer().get(i)).getName());
+                tree = (FamilyTree<Cat>) treeCatContainer.getContainer().get(i);
+                System.out.println("" + i + " - " + ((FamilyTree<Cat>) treeCatContainer.getContainer().get(i)).getName());
             }
-            tree = (FamilyTree) treeCatContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
+            tree = (FamilyTree<Cat>) treeCatContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
             presenter.AddCatButtonOnClick(tree, cat);
         }
     }
@@ -240,10 +239,10 @@ public class View {
             human = (Human) humanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер человека")));
 
             for (int i = 0; i < treeHumanContainer.getContainer().size(); i++) {
-                tree = (FamilyTree) treeHumanContainer.getContainer().get(i);
-                System.out.println("" + i + " - " + ((FamilyTree) treeHumanContainer.getContainer().get(i)).getName());
+                tree = (FamilyTree<Human>) treeHumanContainer.getContainer().get(i);
+                System.out.println("" + i + " - " + ((FamilyTree<Human>) treeHumanContainer.getContainer().get(i)).getName());
             }
-            tree = (FamilyTree) treeHumanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
+            tree = (FamilyTree<Human>) treeHumanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
             presenter.AddHumanButtonOnClick(tree, human);
         }
     }
