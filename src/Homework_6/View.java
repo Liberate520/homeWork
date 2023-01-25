@@ -4,7 +4,7 @@ package Homework_6;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
-import Print.InterfacePrint;
+import Print.IPrint;
 import Print.PrintTree;
 import metods.PrintMetods;
 import metods.SearchEngines;
@@ -95,7 +95,7 @@ public class View extends SearchEngines {
         printMetods.printTheTreeForEach(); //Вариант 3
         printMetods.printDrevo(designer_human);
 
-        InterfacePrint print = new PrintTree();
+        IPrint print = new PrintTree();
         print.printTree();
     }
 

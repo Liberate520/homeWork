@@ -1,7 +1,7 @@
 package Homework_6;
 
 
-import Print.InterfacePrintList;
+import Print.IPrintList;
 import Print.PrintList;
 import metods.PrintMetods;
 
@@ -190,7 +190,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human>  {//�
      * Вариант добавления детей + сканер
      */
     public void addChildrenScanner() { // добавляем детей другим методом
-        InterfacePrintList printList = new PrintList();
+        IPrintList printList = new PrintList();
         System.out.println("Кто твои родители ?");
         printList.printList(humans);
 

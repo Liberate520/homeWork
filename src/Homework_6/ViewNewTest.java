@@ -22,19 +22,19 @@ public class ViewNewTest {
         //тоесть я вызываю экземпляр класса первоначального листа
         Designer_Human designer_human = new Designer_Human();
         //Вызываю экземпляр класса через интерфейс и в случае необходимости от задачи меняю new класс
-        InterfacePrintList print = new PrintList();
+        IPrintList print = new PrintList();
         print.printList((List<Designer_Human>) designer_human);
 
         //то-бишь для каждого экземпляра класса будет свой printList
-        InterfacePrintList print2 = new PrintListAll();
+        IPrintList print2 = new PrintListAll();
         print2.printList((List<Designer_Human>) designer_human);
 
         //то-бишь для каждого экземпляра класса будет свой printList
-        InterfacePrintList print3 = new PrintListInFor();
+        IPrintList print3 = new PrintListInFor();
         print3.printList((List<Designer_Human>) designer_human);
 
         //то-бишь для каждого экземпляра класса будет свой printList
-        InterfacePrint print4 = new PrintTree();
+        IPrint print4 = new PrintTree();
         print4.printTree();
 
         //Если все верно то мне кажется это путаница образуется и нагромождение.

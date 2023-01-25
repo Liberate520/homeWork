@@ -1,5 +1,5 @@
 package Print;
 
-public interface InterfacePrint {
+public interface IPrint {
     void printTree();
 }
