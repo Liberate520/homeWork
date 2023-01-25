@@ -1,10 +1,11 @@
-package Seminars_OOP.HW_5.src.Presenter;
+package Seminars_OOP.HW_6.src.Presenter;
 
-import Seminars_OOP.HW_5.src.Model.FamilyTree;
-import Seminars_OOP.HW_5.src.Model.Human;
-import Seminars_OOP.HW_5.src.View.View;
+import Seminars_OOP.HW_6.src.Model.FamilyTree;
+import Seminars_OOP.HW_6.src.Model.Human;
+import Seminars_OOP.HW_6.src.View.View;
 
-public class Presenter {
+
+public class Presenter<T extends Human>{
     View view;
     FamilyTree familyTree;
 
@@ -13,10 +14,17 @@ public class Presenter {
         this.familyTree = familyTree;
 
     }
+    public String getAllHuman(){
 
-    public void getHumanByName(String name) {
-        FamilyTree.getHumanByName(name);
+        return familyTree.getAllHuman().toString();
+
     }
+
+    public void getHumanByName(String nameOfHuman) {
+
+        familyTree.getHumanByName(nameOfHuman);
+    }
+
 }
 
 

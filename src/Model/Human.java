@@ -1,4 +1,4 @@
-package Seminars_OOP.HW_5.src.Model;
+package Seminars_OOP.HW_6.src.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -95,8 +95,8 @@ public class Human implements Serializable, Comparable<Human> {
 
     public static class ComparatorByAge implements Comparator<Human> {
 
-        @Override
-        public int compare(Human o1, Human o2) {
+    @Override
+    public int compare(Human o1, Human o2) {
             return Integer.compare(o1.getYearOfBirth(), o2.getYearOfBirth());
         }
 

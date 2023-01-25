@@ -1,12 +1,10 @@
-package Seminars_OOP.HW_5.src.Model;
+package Seminars_OOP.HW_6.src.Model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
+
     public List<Human> humanList;
     private Writable writable;
 
@@ -14,8 +12,9 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
         this.humanList = humanList;
     }
 
+
     public FamilyTree() {
-        this(new ArrayList<>());
+        this(new ArrayList<Human>());
     }
 
     public void addHuman(Human human) {
@@ -23,8 +22,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
     }
 
     public List<Human> getAllHuman() {
+
         return humanList;
     }
+
 
     public void setWritable(Writable writable) {
         this.writable = writable;
@@ -47,19 +48,22 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
         return null;
     }
 
-    public Human getHumanByName(String name) {
+
+    public Human getHumanByName(String nameOfHuman) {
 
         for (Human human : humanList) {
-            if (human.getName().equals(name)) {
+            if (human.getName().equals(nameOfHuman)) {
                 return human;
             }
         }
         return null;
     }
 
+
     public void sortByName() {
         Collections.sort(humanList);
     }
+
 
     public void sortByAge(){
         Collections.sort(getAllHuman(),

@@ -1,4 +1,4 @@
-//package Seminars_OOP.HW_5.src.View;
+package Seminars_OOP.HW_6.src.View;//package Seminars_OOP.HW_6.src.View;
 
 //public class CommandReadFamilyTree implements Options {
 //    View view;

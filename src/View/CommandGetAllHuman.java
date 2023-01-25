@@ -1,8 +1,4 @@
-package Seminars_OOP.HW_5.src.View;
-
-import Seminars_OOP.HW_5.src.Model.Human;
-
-import java.util.List;
+package Seminars_OOP.HW_6.src.View;
 
 public class CommandGetAllHuman implements Options {
 

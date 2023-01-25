@@ -1,4 +1,4 @@
-package Seminars_OOP.HW_5.src.Model;
+package Seminars_OOP.HW_6.src.Model;
 
 import java.util.Iterator;
 import java.util.List;
