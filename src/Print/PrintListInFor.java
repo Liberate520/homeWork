@@ -1,6 +1,6 @@
 package Print;
 
-import Homework_5.Designer_Human;
+import Homework_6.Designer_Human;
 
 import java.util.List;
 

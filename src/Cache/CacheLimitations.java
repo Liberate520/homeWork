@@ -1,7 +1,7 @@
 package Cache;
 
-import Homework_5.Designer_Human;
-import Homework_5.Femily_Tree;
+import Homework_6.Designer_Human;
+import Homework_6.Femily_Tree;
 
 import java.util.ArrayList;
 import java.util.List;

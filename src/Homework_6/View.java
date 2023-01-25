@@ -1,4 +1,4 @@
-package Homework_5;
+package Homework_6;
 
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -12,7 +12,6 @@ import metods.SortClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class View extends SearchEngines {

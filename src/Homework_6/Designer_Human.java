@@ -1,9 +1,8 @@
-package Homework_5;
+package Homework_6;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Описываем сущность вида human
@@ -43,7 +42,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
     public Designer_Human(List<Designer_Human> humans) {
-        Homework_5.Designer_Human.humans = humans;
+        Homework_6.Designer_Human.humans = humans;
     }
 
     public Designer_Human(String personName) {
@@ -124,7 +123,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
 
     @Override
-    public int compareTo(Homework_5.Designer_Human o) {
+    public int compareTo(Homework_6.Designer_Human o) {
         return name.compareTo(o.getName());
     }
 

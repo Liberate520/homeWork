@@ -1,9 +1,8 @@
-package Homework_5;
+package Homework_6;
 
 import Print.*;
 
 import java.io.InvalidObjectException;
-import java.util.Iterator;
 import java.util.List;
 
 public class ViewNewTest {

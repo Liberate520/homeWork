@@ -1,10 +1,8 @@
-package Homework_5;
+package Homework_6;
 
 
-import Print.InterfacePrint;
 import Print.InterfacePrintList;
 import Print.PrintList;
-import Print.PrintTree;
 import metods.PrintMetods;
 
 import Iterator.StaddyIterator;
