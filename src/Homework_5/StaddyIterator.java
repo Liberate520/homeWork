@@ -2,7 +2,7 @@ package Homework_5;
 
 import java.util.*;
 
-class StaddyIterator implements Iterator<Designer_Human> {
+public class StaddyIterator implements Iterator<Designer_Human> {
 
     private int index; //счетчик
     private final List<Designer_Human> humans;

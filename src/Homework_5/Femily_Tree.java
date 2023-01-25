@@ -1,6 +1,6 @@
 package Homework_5;
 
-import Inerfase.Print;
+
 import metods.PrintMetods;
 
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 import static java.lang.System.in;
 
 
-public class Femily_Tree implements Serializable, Iterable<Designer_Human> , Print {//добавил Iterable к конструктору
+public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к конструктору
     // человека
     /*
      *ОПИСАНИЕ КЛАССА
@@ -228,7 +228,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> , Pri
      */
     public void addChildrenScanner() { // добавляем детей другим методом
         System.out.println("Кто твои родители ?");
-        printDrevo(humans);
+        printMetods.printDrevo(humans);
 
         StringBuilder Child = new StringBuilder();
         if (designer_human.getChildren() != null) {
@@ -301,10 +301,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> , Pri
         }
     }
 
-    @Override
-    public void printDrevo(List<Designer_Human> humans) {
-        System.out.println(humans);
-    }
+
 }
 
 
