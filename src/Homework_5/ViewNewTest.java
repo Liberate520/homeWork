@@ -38,8 +38,7 @@ public class ViewNewTest {
         InterfacePrint print4 = new PrintTree();
         print4.printTree();
 
-
-
+        //Если все верно то мне кажется это путаница образуется и нагромождение.
 
     }
 }
