@@ -37,7 +37,7 @@ public class FamilyTree<T extends Human> {
             int count = 0;
             for (String f : fioHuman) {
                 for (String n : fioList) {
-                    if (f.toUpperCase().equals(n.toUpperCase())) {
+                    if (f.toUpperCase().contains(n.toUpperCase())) {
                         count++;
                     }
                 }

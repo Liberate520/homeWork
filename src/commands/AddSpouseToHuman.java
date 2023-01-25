@@ -2,21 +2,21 @@ package commands;
 
 import views.ConsoleInterface;
 
-public class CreateNewTree implements Option {
-    
+public class AddSpouseToHuman implements Option {
+
     ConsoleInterface consoleInterface;
-    
-    public CreateNewTree(ConsoleInterface consoleInterface) {
+
+    public AddSpouseToHuman(ConsoleInterface consoleInterface) {
         this.consoleInterface = consoleInterface;
     }
-
+    
     @Override
     public void execute() {
-        this.consoleInterface.createNewTree();
+        consoleInterface.addSpouseToHuman();
     }
 
     @Override
     public String description() {
-        return "Создать демо дерево";
+        return "Добавить супруга/супругу человеку";
     }
 }

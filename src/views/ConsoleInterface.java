@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.*;
-import commands.Option;
-import presenters.Command;
-import presenters.Presenter;
+import presenters.*;
 
 public class ConsoleInterface implements Command {
     private Presenter presenter;
-    List<Option> commandList;
+    private List<Option> commandList;
+    private Scanner scanner = new Scanner(System.in,"cp866");
 
     public ConsoleInterface(Presenter presenter) {
         this.presenter = presenter;
@@ -20,33 +19,36 @@ public class ConsoleInterface implements Command {
         this.commandList.add(new CreateNewTree(this));
         this.commandList.add(new CreateTreeFromFile(this));
         this.commandList.add(new AddHuman(this));
+        this.commandList.add(new AddMotherToHuman(this));
+        this.commandList.add(new AddFatherToHuman(this));
+        this.commandList.add(new AddSpouseToHuman(this));
         this.commandList.add(new DeleteHuman(this));
         this.commandList.add(new OutoutHumanByUuid(this));
+        this.commandList.add(new DeleteChildToHuman(this));
         this.commandList.add(new FindByFIO(this));
         this.commandList.add(new OutputEntireTree(this));
+        this.commandList.add(new EstablishKinshipRelationship(this));
         this.commandList.add(new WriteTreeToFile(this));
     }
 
     public void menu() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            //while (true) {
-                System.out.println("Выберите действие:");
-                for (int i = 0; i < this.commandList.size(); i++) {
-                    System.out.println(i + " - " + this.commandList.get(i).description());
-                }
-                System.out.print("--> ");
-                String str = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(str);
-                    if ((choice >= 0) & (choice < this.commandList.size())) {
-                        this.commandList.get(Integer.parseInt(str)).execute();
-                    } else {
-                        System.out.println("Нет команды. Еще раз");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Не число. Еще раз.");
-                }
-           // }
+        System.out.println("Выберите действие:");
+        for (int i = 0; i < this.commandList.size(); i++) {
+            System.out.println(i + " - " + this.commandList.get(i).description());
+        }
+        System.out.print("--> ");
+        String str;
+
+        str = this.scanner.nextLine();
+        try {
+            int choice = Integer.parseInt(str);
+            if ((choice >= 0) & (choice < this.commandList.size())) {
+                this.commandList.get(Integer.parseInt(str)).execute();
+            } else {
+                System.out.println("Нет команды. Еще раз");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Не число. Еще раз.");
         }
     }
 
@@ -95,11 +97,27 @@ public class ConsoleInterface implements Command {
         this.presenter.writeTreeToFile();
     }
 
-    public <T> void choosingHummanByUuid(T human){
-        
+    @Override
+    public void addMotherToHuman() {
+        this.presenter.addMotherToHuman();
     }
 
-    public void outPrint(String text){
+    @Override
+    public void addFatherToHuman() {
+        this.presenter.addFatherToHuman();
+    }
+
+    @Override
+    public void addSpouseToHuman() {
+        this.presenter.addSpouseToHuman();
+    }
+
+    @Override
+    public void establishKinshipRelationship() {
+        this.presenter.establishKinshipRelationship();
+    }
+
+    public void outResult(String text){
         System.out.println(
             ConsoleColors.GREEN
             + "=========== Результат ==========="
@@ -117,15 +135,21 @@ public class ConsoleInterface implements Command {
         );
     }
 
-    public void inputUuiddByHuman() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            //while (true) {
-                System.out.println("Введите uuid:");
-                System.out.print("--> ");
-                String str = scanner.nextLine();
-                this.presenter.getHumanByUuid(str);
-                
-            //}
+    public void outStr(String text){
+        System.out.print(text);
+    }
+
+    public String inputText() {
+        Boolean loop = true;
+        String str = "";
+        while (loop) {
+            str = this.scanner.nextLine();
+            if (str.length() > 0) {
+                loop = false;
+            } else {
+                System.out.println("Пустое значение. Еще раз.");
+            }
         }
+        return str;
     }
 }

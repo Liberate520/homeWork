@@ -2,21 +2,20 @@ package commands;
 
 import views.ConsoleInterface;
 
-public class CreateNewTree implements Option {
-    
+public class DeleteChildToHuman implements Option {
     ConsoleInterface consoleInterface;
     
-    public CreateNewTree(ConsoleInterface consoleInterface) {
+    public DeleteChildToHuman(ConsoleInterface consoleInterface) {
         this.consoleInterface = consoleInterface;
     }
 
     @Override
     public void execute() {
-        this.consoleInterface.createNewTree();
+        this.consoleInterface.deleteChildToHuman();
     }
 
     @Override
     public String description() {
-        return "Создать демо дерево";
+        return "Удалить ребенка человека";
     }
 }

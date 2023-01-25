@@ -4,7 +4,7 @@ import enums.Gender;
 import models.Human;
 
 public class Relationships {
-    static String getRelationships(Human a, Human b) {
+    public static String getRelationships(Human a, Human b) {
         if (
             (a.getSpouse() != null && a.getSpouse().equals(b))
             || (b.getSpouse() != null && b.getSpouse().equals(a))

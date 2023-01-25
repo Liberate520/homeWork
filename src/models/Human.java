@@ -99,7 +99,7 @@ public class Human implements Serializable{
         addChild(parentMother, this);
     }
 
-    public void removeChild(Human human, Human child) {
+    public static void removeChild(Human human, Human child) {
         List<Human> childParentMother = new ArrayList<>(human.getChildren());
         childParentMother.remove(child);
         human.setChildren(childParentMother);
