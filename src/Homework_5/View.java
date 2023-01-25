@@ -5,13 +5,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 
 import metods.PrintMetods;
+import metods.SearchEngines;
 import metods.SortClass;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class View {
+public class View extends SearchEngines {
 
     Scanner iScanner = new Scanner(System.in);
 
@@ -53,7 +54,7 @@ public class View {
                 case 2 -> femily_tree.addingPeopleWithAnIdScanner();
                 case 3 -> showAllСhildren();
                 case 4 -> showAllTree();
-                case 5 -> femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
+                case 5 -> searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
                 case 6 -> showAllSorting();
                 case 7 -> sortClass.sortingTheSheet();
             }
@@ -98,13 +99,9 @@ public class View {
      * варианты поисковиков
      */
     public void showAllSorting() {
-        femily_tree.searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
-        femily_tree.showName();
+        searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
+        showName();
     }
 
-//    @Override
-//    public void printDrevo(List<Designer_Human> humans) {
-//        System.out.println(humans);
-//    }
 }
 

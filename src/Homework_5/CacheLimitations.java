@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CacheLimitations<T> {
-    /*
+    /**
      *ОПИСАНИЕ КЛАССА
      *Класс для кеширования списков
      */
