@@ -1,4 +1,7 @@
-package Homework_5;
+package Serializator;
+
+import Homework_5.Designer_Human;
+import Serializator.Serializator;
 
 import java.io.InvalidObjectException;
 

@@ -1,4 +1,6 @@
-package Homework_5;
+package Iterator;
+
+import Homework_5.Designer_Human;
 
 import java.util.*;
 

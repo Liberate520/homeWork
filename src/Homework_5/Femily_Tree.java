@@ -14,7 +14,7 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
     // человека
     /*
      *ОПИСАНИЕ КЛАССА
-     *В этом классе реализованны методы добавления и поиска + итераторы
+     *В этом классе реализованны методы добавления + итераторы
      */
     private static int id;
 

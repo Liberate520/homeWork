@@ -2,7 +2,7 @@ package Print;
 
 import Homework_5.Designer_Human;
 import Homework_5.Femily_Tree;
-import Homework_5.StaddyIterator;
+import Iterator.StaddyIterator;
 
 import java.util.Iterator;
 import java.util.function.Consumer;
