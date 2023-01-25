@@ -4,11 +4,14 @@ package Homework_5;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
+import Print.InterfacePrint;
+import Print.PrintTree;
 import metods.PrintMetods;
 import metods.SearchEngines;
 import metods.SortClass;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +23,7 @@ public class View extends SearchEngines {
     Femily_Tree femily_tree;
     SortClass sortClass;
     PrintMetods printMetods;
+
 
     public void showAll() {
         //Отображение сообщения в диалоговом окне
@@ -73,15 +77,27 @@ public class View extends SearchEngines {
     /**
      * Варианты вариантов вывода древа
      */
+//    private void showAllTree() {
+//        System.out.println("Показать все древо");
+//        System.out.println("Вариант № 1 ");
+//        printMetods.ShowALL(designer_human.getHumans()); //Вариант 1
+//        System.out.println("Вариант № 2 ");
+//        printMetods.printFamilyTree(femily_tree); //Вариант 2
+//        System.out.println("Вариант № 2 ");
+//        printMetods.printTheTreeForEach(); //Вариант 3
+//        printMetods.printDrevo((List<Designer_Human>) designer_human);
+//    }
     private void showAllTree() {
-        System.out.println("Показать все древо");
-        System.out.println("Вариант № 1 ");
+
         printMetods.ShowALL(designer_human.getHumans()); //Вариант 1
         System.out.println("Вариант № 2 ");
-        printMetods.printFamilyTree(femily_tree); //Вариант 2
+        printMetods.printFamilyTree(Collections.singletonList(femily_tree)); //Вариант 2
         System.out.println("Вариант № 2 ");
         printMetods.printTheTreeForEach(); //Вариант 3
-        printMetods.printDrevo((List<Designer_Human>) designer_human);
+        printMetods.printDrevo(designer_human);
+
+        InterfacePrint print = new PrintTree();
+        print.printTree();
     }
 
     /**

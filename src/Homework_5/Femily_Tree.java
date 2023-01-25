@@ -1,7 +1,13 @@
 package Homework_5;
 
 
+import Print.InterfacePrint;
+import Print.InterfacePrintList;
+import Print.PrintList;
+import Print.PrintTree;
 import metods.PrintMetods;
+
+import Iterator.StaddyIterator;
 
 import java.io.Serializable;
 import java.util.*;
@@ -10,7 +16,7 @@ import java.util.function.Consumer;
 import static java.lang.System.in;
 
 
-public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//добавил Iterable к конструктору
+public class Femily_Tree implements Serializable, Iterable<Designer_Human>  {//добавил Iterable к конструктору
     // человека
     /*
      *ОПИСАНИЕ КЛАССА
@@ -186,8 +192,9 @@ public class Femily_Tree implements Serializable, Iterable<Designer_Human> {//д
      * Вариант добавления детей + сканер
      */
     public void addChildrenScanner() { // добавляем детей другим методом
+        InterfacePrintList printList = new PrintList();
         System.out.println("Кто твои родители ?");
-        printMetods.printDrevo(humans);
+        printList.printList(humans);
 
         StringBuilder Child = new StringBuilder();
         if (designer_human.getChildren() != null) {

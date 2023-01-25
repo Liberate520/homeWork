@@ -7,15 +7,13 @@ import Iterator.StaddyIterator;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public class Print_Tree implements InterfacePrint,Iterable<Designer_Human>{
+public class PrintTree implements InterfacePrint,Iterable<Designer_Human>{
     Femily_Tree femily_tree;
 
     @Override
     public void printTree() {
         forEach(Designer_Human -> System.out.println());
         forEach(System.out::println);
-
-
     }
 
     @Override
