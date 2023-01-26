@@ -9,25 +9,25 @@ import java.time.LocalDateTime;
 
 public class FileWorker<T extends Creature> implements Writable{
     @Override
-    public void writeTreeToFile(FamilyTree inputTree) throws IOException {
+    public boolean writeTreeToFile(FamilyTree inputTree) throws IOException {
+        boolean userMessage;
         String pathname = inputTree.getName().toLowerCase() + ".txt";
         try {
             File tree = new File(pathname);
             tree.createNewFile();
         } catch (IOException e) {
-            System.out.println("Что-то пошло не так. Не удалось обратиться к файлу.");
-            e.printStackTrace();
+            e.getLocalizedMessage();
         }
 
         try {
             Path path = Paths.get(pathname);
             String str = LocalDateTime.now() + "\n" + inputTree + "\n\n";
             Files.write(path, str.getBytes(), StandardOpenOption.APPEND);
-            System.out.println("\nДрево '" + inputTree.getName() + "' успешно сохранено.");
+            userMessage = true;
         } catch (IOException e) {
-            System.out.println("Что-то пошло не так. Запись не произведена.");
-            e.printStackTrace();
+            userMessage = false;
         }
+        return userMessage;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FileWorker<T extends Creature> implements Writable{
                     line = reader.readLine();
                 }
             }
-            System.out.println("\nЧтение из файла прошло успешно");
+//            System.out.println("\nЧтение из файла прошло успешно");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -62,24 +62,24 @@ public class FileWorker<T extends Creature> implements Writable{
     }
 
     @Override
-    public void writeCreatureToFile(Creature creature) throws IOException {
+    public boolean writeCreatureToFile(Creature creature) throws IOException {
+        boolean userMessage;
         String pathname = creature.getFullName().toLowerCase() + ".txt";
         try {
             File tree = new File(pathname);
             tree.createNewFile();
         } catch (IOException e) {
-            System.out.println("Что-то пошло не так. Не удалось обратиться к файлу.");
-            e.printStackTrace();
+            e.getLocalizedMessage();
         }
 
         try {
             Path path = Paths.get(pathname);
             String str = LocalDateTime.now() + "\n" + creature + "\n\n";
             Files.write(path, str.getBytes(), StandardOpenOption.APPEND);
-            System.out.println("\n" + creature.getFullName() + " успешно сохранен.");
+            userMessage = true;
         } catch (IOException e) {
-            System.out.println("Что-то пошло не так. Запись не произведена.");
-            e.printStackTrace();
+            userMessage = false;
         }
+        return userMessage;
     }
 }

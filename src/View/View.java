@@ -284,7 +284,7 @@ public class View {
 
     public void callSaveButton() throws IOException {
         if (checkContainerSize()){
-            presenter.saveButtonOnClick();
+            sendUserMessage("\n" + presenter.saveButtonOnClick());
         } else {
             sendUserMessage("\nВ хранилище пока пусто. Нет данных для сахранения.");
         }

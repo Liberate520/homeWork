@@ -19,8 +19,8 @@ public class Presenter {
         this.service = service;
     }
 
-    public void saveButtonOnClick() throws IOException {
-        service.saveButtonOnClick();
+    public String saveButtonOnClick() throws IOException {
+        return service.saveButtonOnClick();
     }
 
     public void exitButtonOnClick(){

@@ -18,24 +18,31 @@ public class Service {
         return tempStorage;
     }
 
-    public void saveButtonOnClick() throws IOException {
+    public String saveButtonOnClick() throws IOException {
             FileWorker fileWorker = new FileWorker();
+            StringBuilder userMessage = new StringBuilder();
 
             for (Containerable human : tempStorage.getHumanContainer().getContainer()) {
                 fileWorker.writeCreatureToFile((Human) human);
+                userMessage.append(((Human) human).getFullName()).append(" успешно сохранен\n");
             }
 
             for (Containerable cat : tempStorage.getCatContainer().getContainer()) {
                 fileWorker.writeCreatureToFile((Cat) cat);
+                userMessage.append(((Cat) cat).getFullName()).append(" успешно сохранен\n");
             }
 
             for (Containerable tree : tempStorage.getHumanTreeContainer().getContainer()) {
                 fileWorker.writeTreeToFile((FamilyTree<Human>) tree);
+                userMessage.append(((FamilyTree<Human>) tree).getName()).append(" успешно сохранено\n");
             }
 
             for (Containerable tree : tempStorage.getCatTreeContainer().getContainer()) {
                 fileWorker.writeTreeToFile((FamilyTree<Cat>) tree);
+                userMessage.append(((FamilyTree<Cat>) tree).getName()).append(" успешно сохранено\n");
             }
+
+        return userMessage.toString();
     }
 
     public void exitButtonOnClick(){
