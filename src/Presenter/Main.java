@@ -1,10 +1,11 @@
-package Seminars_OOP.HW_6.src.Presenter;
+package Seminars_OOP.HW_7.src.Presenter;
+
+import Seminars_OOP.HW_7.src.Model.FamilyTree;
+import Seminars_OOP.HW_7.src.Model.FileHandler;
+import Seminars_OOP.HW_7.src.Model.Human;
+import Seminars_OOP.HW_7.src.View.View;
 
 import java.io.Serializable;
-import Seminars_OOP.HW_6.src.Model.FamilyTree;
-import Seminars_OOP.HW_6.src.Model.FileHandler;
-import Seminars_OOP.HW_6.src.Model.Human;
-import Seminars_OOP.HW_6.src.View.View;
 
 public class Main implements Serializable{
     public static void main(String[] args){

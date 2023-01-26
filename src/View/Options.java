@@ -1,4 +1,4 @@
-package Seminars_OOP.HW_6.src.View;
+package Seminars_OOP.HW_7.src.View;
 
 public interface Options {
     void execute();

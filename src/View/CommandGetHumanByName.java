@@ -1,9 +1,4 @@
-package Seminars_OOP.HW_6.src.View;
-
-import Seminars_OOP.HW_6.src.View.Options;
-import Seminars_OOP.HW_6.src.View.View;
-
-import java.util.Scanner;
+package Seminars_OOP.HW_7.src.View;
 
 public class CommandGetHumanByName implements Options {
     View view;
@@ -15,15 +10,20 @@ public class CommandGetHumanByName implements Options {
     @Override
     public void execute() {
 
-        view.GetHumanByName();
+        view.getHumanByName();
     }
 
 //    }
     @Override
     public String description() {
 
-        return "Найдем человека по имени";
+        return "Найдем человека по имени.";
     }
+
+//    @Override
+//    public String toString() {
+//        return get
+//    }
 }
 
 

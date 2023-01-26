@@ -1,8 +1,6 @@
-package Seminars_OOP.HW_6.src.View;
+package Seminars_OOP.HW_7.src.View;
 
-//import Seminars_OOP.HW_6.src.Model.Program;
-import Seminars_OOP.HW_6.src.Model.Human;
-import Seminars_OOP.HW_6.src.Presenter.Presenter;
+import Seminars_OOP.HW_7.src.Presenter.Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +15,10 @@ public class View {
 
         List<Options> commandList = new ArrayList<>();
 
-        commandList.add(new CommandGetHumanByName(this));
         commandList.add(new CommandGetAllHuman(this));
-//        commandList.add(new CommandReadFamilyTree());
-//        commandList.add(new CommandSortByName());
-//        commandList.add(new CommandSortByAge());
+        commandList.add(new CommandSortByName(this));
+        commandList.add(new CommandSortByAge(this));
+        commandList.add(new CommandGetHumanByName(this));
 
         for (int i = 0; i < commandList.size(); i++) {
             System.out.println(i + ": " + commandList.get(i).description());
@@ -31,23 +28,23 @@ public class View {
         int menuItem = scanner.nextInt();
         commandList.get(menuItem).execute();
     }
-    public void readFamilyTree(){
-    }
 
     public void sortByName() {
+        presenter.sortByName();
     }
 
     public void sortByAge() {
+        presenter.sortByAge();
     }
 
-    public void GetHumanByName() {
+    public void getHumanByName() {
         System.out.println("Введите имя: ");
         Scanner sc = new Scanner(System.in);
         String nameOfHuman = sc.nextLine();
         presenter.getHumanByName(nameOfHuman);
     }
 
-    public void GetAllHuman() {
+    public void getAllHuman() {
         presenter.getAllHuman();
     }
 

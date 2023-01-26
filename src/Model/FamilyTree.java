@@ -1,4 +1,4 @@
-package Seminars_OOP.HW_6.src.Model;
+package Seminars_OOP.HW_7.src.Model;
 
 import java.io.*;
 import java.util.*;
@@ -21,6 +21,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
         humanList.add(human);
     }
 
+
     public List<Human> getAllHuman() {
 
         return humanList;
@@ -37,7 +38,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
 
     public FamilyTree readFamilyTree() {
         if (writable != null) {
-            // if (writable instanceof FileHandler) {
                 if (writable.read() == null) {
                     return new FamilyTree();
                 } else 
@@ -66,8 +66,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
 
 
     public void sortByAge(){
-        Collections.sort(getAllHuman(),
-                new ComparatorByAge());
+        getAllHuman().sort(new ComparatorByAge());
     }
 
 

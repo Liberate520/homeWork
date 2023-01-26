@@ -1,8 +1,8 @@
-package Seminars_OOP.HW_6.src.Presenter;
+package Seminars_OOP.HW_7.src.Presenter;
 
-import Seminars_OOP.HW_6.src.Model.FamilyTree;
-import Seminars_OOP.HW_6.src.Model.Human;
-import Seminars_OOP.HW_6.src.View.View;
+import Seminars_OOP.HW_7.src.Model.FamilyTree;
+import Seminars_OOP.HW_7.src.Model.Human;
+import Seminars_OOP.HW_7.src.View.View;
 
 
 public class Presenter<T extends Human>{
@@ -20,11 +20,18 @@ public class Presenter<T extends Human>{
 
     }
 
-    public void getHumanByName(String nameOfHuman) {
+    public String getHumanByName(String nameOfHuman) {
 
-        familyTree.getHumanByName(nameOfHuman);
+        return familyTree.getHumanByName(nameOfHuman).toString();
     }
 
+    public void sortByAge(){
+        familyTree.sortByAge();
+    }
+
+    public void sortByName(){
+        familyTree.sortByName();
+    }
 }
 
 
