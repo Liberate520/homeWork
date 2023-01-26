@@ -19,59 +19,55 @@ public class Service {
     }
 
     public void saveButtonOnClick() throws IOException {
-        FileWorker fileWorker = new FileWorker();
+            FileWorker fileWorker = new FileWorker();
 
-        for (Containerable human : tempStorage.getHumanContainer().getContainer()) {
-            fileWorker.writeCreatureToFile((Human) human);
-        }
+            for (Containerable human : tempStorage.getHumanContainer().getContainer()) {
+                fileWorker.writeCreatureToFile((Human) human);
+            }
 
-        for (Containerable cat : tempStorage.getCatContainer().getContainer()) {
-            fileWorker.writeCreatureToFile((Cat) cat);
-        }
+            for (Containerable cat : tempStorage.getCatContainer().getContainer()) {
+                fileWorker.writeCreatureToFile((Cat) cat);
+            }
 
-        for (Containerable tree : tempStorage.getHumanTreeContainer().getContainer()) {
-            fileWorker.writeTreeToFile((FamilyTree<Human>) tree);
-        }
+            for (Containerable tree : tempStorage.getHumanTreeContainer().getContainer()) {
+                fileWorker.writeTreeToFile((FamilyTree<Human>) tree);
+            }
 
-        for (Containerable tree : tempStorage.getCatTreeContainer().getContainer()) {
-            fileWorker.writeTreeToFile((FamilyTree<Cat>) tree);
-        }
+            for (Containerable tree : tempStorage.getCatTreeContainer().getContainer()) {
+                fileWorker.writeTreeToFile((FamilyTree<Cat>) tree);
+            }
     }
 
     public void exitButtonOnClick(){
         System.exit(0);
     }
 
-    public void createCatButtonOnClick(String name, Gender gender, Integer age){
+    public String createCatButtonOnClick(String name, Gender gender, Integer age){
         Cat cat = new Cat(name, gender, age);
-        System.out.println();
-        System.out.println(cat);
         this.tempStorage.getCatContainer().getContainer().add(cat);
+        return cat.getFullName();
     }
 
-    public void createHumanButtonOnClick(String name, Gender humanGender, Integer humanAge) {
+    public String createHumanButtonOnClick(String name, Gender humanGender, Integer humanAge) {
         Human human = new Human(name, humanGender, humanAge);
-        System.out.println();
-        System.out.println(human);
         this.tempStorage.getHumanContainer().getContainer().add(human);
+        return human.getFullName();
     }
 
     public TempStorage printContainerButtonOnClick() {
         return getTempStorage();
     }
 
-    public void createHumanTreeButtonOnClick(String name) {
+    public String createHumanTreeButtonOnClick(String name) {
         FamilyTree<Human> familyTree = new FamilyTree<>(name);
-        System.out.println();
-        System.out.println(familyTree);
         this.tempStorage.getHumanTreeContainer().getContainer().add(familyTree);
+        return familyTree.getName();
     }
 
-    public void createCatTreeButtonOnClick(String name) {
+    public String createCatTreeButtonOnClick(String name) {
         FamilyTree<Cat> familyTree = new FamilyTree<>(name);
-        System.out.println();
-        System.out.println(familyTree);
         this.tempStorage.getCatTreeContainer().getContainer().add(familyTree);
+        return familyTree.getName();
     }
 
     public void addHumanButtonOnClick(FamilyTree<Human> tree, Human human) {

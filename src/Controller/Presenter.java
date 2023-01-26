@@ -28,24 +28,24 @@ public class Presenter {
     }
 
 
-    public void createHumanButtonOnClick(String name, Gender gender, Integer age) {
-        service.createHumanButtonOnClick(name, gender, age);
+    public String createHumanButtonOnClick(String name, Gender gender, Integer age) {
+        return service.createHumanButtonOnClick(name, gender, age);
     }
 
-    public void createCatButtonOnClick(String name, Gender gender, Integer age){
-        service.createCatButtonOnClick(name, gender, age);
+    public String createCatButtonOnClick(String name, Gender gender, Integer age){
+        return service.createCatButtonOnClick(name, gender, age);
     }
 
     public TempStorage printContainerButtonClick() {
         return service.printContainerButtonOnClick();
     }
 
-    public void createHumanTreeButtonOnClick(String name) {
-        service.createHumanTreeButtonOnClick(name);
+    public String createHumanTreeButtonOnClick(String name) {
+        return service.createHumanTreeButtonOnClick(name);
     }
 
-    public void createCatTreeButtonOnClick(String name) {
-        service.createCatTreeButtonOnClick(name);
+    public String createCatTreeButtonOnClick(String name) {
+        return service.createCatTreeButtonOnClick(name);
     }
 
     public void addHumanButtonOnClick(FamilyTree<Human> tree, Human human) {

@@ -70,9 +70,34 @@ public class View {
         getUserPointOfMenu();
     }
 
+    public int checkUserChoise(){
+        int command = 0;
+        String userAnswer = null;
+        boolean flag = true;
+
+        while (flag) {
+            userAnswer = getInfoFromUser("Введите номер пункта меню");
+            if (!userAnswer.isEmpty()) {
+                try {
+                    command = Integer.parseInt(userAnswer);
+                    if (!(command < 0) && command < this.menu.getListCommand().size()) {
+                        flag = false;
+                    } else {
+                        sendUserMessage("Такого пункта нет в меню");
+                    }
+                } catch (Exception e) {
+                    sendUserMessage("Некорректный ввод. Номер пункта должен быть числом");
+                }
+            } else {
+                sendUserMessage("Поле не может быть пустым");
+            }
+        }
+
+        return command;
+    }
+
     public void getUserPointOfMenu() throws IOException {
-        int command;
-        command = Integer.parseInt(getInfoFromUser("Введите номер пункта меню"));
+        int command = checkUserChoise();
         this.menu.choose(command);
     }
 
@@ -167,11 +192,11 @@ public class View {
     }
 
     public void callCreateHumanButton() {
-        presenter.createHumanButtonOnClick(getName(), getGender(), getAge());
+        sendUserMessage("\nЧеловек '" + presenter.createHumanButtonOnClick(getName(), getGender(), getAge()) + "' создан");
     }
 
     public void callCreateCatButton() {
-        presenter.createCatButtonOnClick(getName(), getGender(), getAge());
+        sendUserMessage("\nКот '" + presenter.createCatButtonOnClick(getName(), getGender(), getAge()) + "' создан");
     }
 
     public void callExitButton() {
@@ -179,15 +204,24 @@ public class View {
         presenter.exitButtonOnClick();
     }
 
-    public void callPrintContainer() {
+    public boolean checkContainerSize(){
+        boolean check;
         String containerString = presenter.printContainerButtonClick().toString();
-        if (containerString.isEmpty()){
-            sendUserMessage("\nВ хранилище пока пусто.");
+        if (containerString.isEmpty()) {
+            check = false;
         } else {
-            sendUserMessage("\nВ хранилище сейчас:");
-            System.out.println(containerString);
+            check = true;
         }
+        return check;
+    }
 
+    public void callPrintContainer() {
+        if (checkContainerSize()){
+            sendUserMessage("\nВ хранилище сейчас:");
+            System.out.println(presenter.printContainerButtonClick().toString());
+        } else {
+            sendUserMessage("\nВ хранилище пока пусто.");
+        }
     }
 
     public void callAddCatButton() {
@@ -241,14 +275,18 @@ public class View {
     }
 
     public void callCreateHumanTreeButton() {
-        presenter.createHumanTreeButtonOnClick(getName());
+        sendUserMessage("\nДрево людей '" + presenter.createHumanTreeButtonOnClick(getName()) + "' создано");
     }
 
     public void callCreateCatTreeButton() {
-        presenter.createCatTreeButtonOnClick(getName());
+        sendUserMessage("\nДрево котов '" + presenter.createCatTreeButtonOnClick(getName()) + "' создано");
     }
 
     public void callSaveButton() throws IOException {
-        presenter.saveButtonOnClick();
+        if (checkContainerSize()){
+            presenter.saveButtonOnClick();
+        } else {
+            sendUserMessage("\nВ хранилище пока пусто. Нет данных для сахранения.");
+        }
     }
 }
