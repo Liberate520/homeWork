@@ -6,7 +6,7 @@ import java.io.InvalidObjectException;
 import java.util.List;
 
 public class ViewNewTest {
-    public static void main(String[] args) throws InvalidObjectException {
+    public static void main(String[] args)  {
         //> 2. Принцип открытости закрытости ()
     /*
     Допустим я хочу вызвать метод печати древа с принципами открытости/закрытости
@@ -22,6 +22,7 @@ public class ViewNewTest {
         //тоесть я вызываю экземпляр класса первоначального листа
         Designer_Human designer_human = new Designer_Human();
         //Вызываю экземпляр класса через интерфейс и в случае необходимости от задачи меняю new класс
+        //Это и есть принцип инверсии зависимости.
         IPrintList print = new PrintList();
         print.printList((List<Designer_Human>) designer_human);
 
@@ -38,6 +39,7 @@ public class ViewNewTest {
         print4.printTree();
 
         //Если все верно то мне кажется это путаница образуется и нагромождение.
+
 
     }
 }
