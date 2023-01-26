@@ -4,6 +4,7 @@ import entity.Mammal;
 import familytree.FamilyTree;
 import service.Service;
 import view.*;
+import write.Writable;
 
 import java.util.List;
 
@@ -46,6 +47,15 @@ public class Presenter {
     public void onSortTree(int sortType){
         service.sortTree(sortType);
         onGetTree();
+    }
+
+    public List<String> onGetWriterDescriptions() {
+        return  service.getWriterDescriptions();
+    }
+
+    public int onGetFileType(int writerIndex)
+    {
+        return service.getFileType(writerIndex);
     }
 
     public void onSaveTree(int fileType){

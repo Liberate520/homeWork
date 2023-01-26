@@ -58,15 +58,27 @@ public class ConsoleUI implements View {
 
         commandList.add(new FindCommand(this, "Find in family tree", "30"));
 
+        List<String> writerDescriptions = presenter.onGetWriterDescriptions();
+
         Command saveCommand = new Command(this, "Save family tree");
         commandList.add(saveCommand);
-        new SaveCommand(saveCommand, this, "to text file", "40", 0);
-        new SaveCommand(saveCommand, this, "to binary file", "41", 1);
+
+        for (int i = 0; i < writerDescriptions.size(); i++)
+        {
+            String descr = writerDescriptions.get(i);
+            int fileType = presenter.onGetFileType(i);
+            new SaveCommand(saveCommand, this, "to " + descr, String.format("%d", 40 + fileType), fileType);
+        }
 
         Command loadCommand = new Command(this, "Load family tree");
         commandList.add(loadCommand);
-        new LoadCommand(loadCommand, this, "from text file", "50", 0);
-        new LoadCommand(loadCommand,this, "from binary file", "51", 1);
+
+        for (int i = 0; i < writerDescriptions.size(); i++)
+        {
+            String descr = writerDescriptions.get(i);
+            int fileType = presenter.onGetFileType(i);
+            new LoadCommand(loadCommand, this, "from " + descr, String.format("%d", 50 + fileType) , fileType);
+        }
 
         commandList.add(new ExitCommand(this, "Exit", "0"));
     }

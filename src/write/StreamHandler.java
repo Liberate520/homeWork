@@ -6,25 +6,33 @@ import java.io.*;
 
 public class StreamHandler implements Writable, Serializable {
 
-    private String filename;
+    private String fileName = "";
+    private String fileExtension = ".ser";
+    private int fileType = 1;
+    private String fileTypeDescription = "binary file";
 
-    public StreamHandler(String filename) {
-        this.filename = filename;
+
+    @Override
+    public void defineFileName(String fileName) {
+        this.fileName = fileName + fileExtension;
     }
 
-    public String getFilename() {
-        return filename;
+    @Override
+    public String fileName() {
+        return fileName;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
+    @Override
+    public int fileType() { return fileType;}
+
+    @Override
+    public String fileTypeDescription() { return fileTypeDescription; }
 
     @Override
     public void save(Serializable serializable) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                    new FileOutputStream(filename));
+                    new FileOutputStream(fileName));
             objectOutputStream.writeObject(serializable);
             objectOutputStream.close();
         }
@@ -41,7 +49,7 @@ public class StreamHandler implements Writable, Serializable {
         FamilyTree result = null;
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(
-                    new FileInputStream(filename));
+                    new FileInputStream(fileName));
             result = (FamilyTree)objectInputStream.readObject();
             objectInputStream.close();
         }

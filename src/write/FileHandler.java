@@ -11,19 +11,26 @@ import java.util.regex.Pattern;
 
 public class FileHandler implements Writable {
 
-    private String filename;
+    private String fileName = "";
+    private String fileExtension = ".txt";
+    private int fileType = 0;
+    private String fileTypeDescription = "text file";
 
-    public FileHandler(String filename) {
-        this.filename = filename;
+    @Override
+    public void defineFileName(String fileName) {
+        this.fileName = fileName + fileExtension;
     }
 
-    public String getFilename() {
-        return filename;
+    @Override
+    public String fileName() {
+        return fileName;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
+    @Override
+    public int fileType() { return fileType;}
+
+    @Override
+    public String fileTypeDescription() { return fileTypeDescription; }
 
     @Override
     public void save(Serializable serializable) {
@@ -31,7 +38,7 @@ public class FileHandler implements Writable {
         FamilyTree saveTree = (FamilyTree)serializable;
         String content = toText(saveTree);
 
-        try (FileWriter fw = new FileWriter(filename, false)) {
+        try (FileWriter fw = new FileWriter(fileName, false)) {
             fw.write(content);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -42,7 +49,7 @@ public class FileHandler implements Writable {
     public FamilyTree load() {
         String result = "";
 
-        File file = new File(filename);
+        File file = new File(fileName);
         try (Scanner sc = new Scanner(file, StandardCharsets.UTF_8)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
