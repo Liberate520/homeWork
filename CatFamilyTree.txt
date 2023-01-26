@@ -1,0 +1,9 @@
+Family tree of Leopold british cat;
+id: 1; type: cat; name: Leopold; gender: male;
+id: 2; type: cat; name: Murka; gender: female;
+id: 3; type: cat; name: Mashka; gender: female; father: Leopold; mother: Murka;
+id: 4; type: cat; name: Murzik; gender: male;
+id: 5; type: cat; name: Vaska; gender: male; father: Murzik; mother: Mashka;
+id: 6; type: cat; name: Barsik; gender: male; father: Murzik; mother: Mashka;
+id: 7; type: cat; name: Luska; gender: female; father: Murzik; mother: Mashka;
+id: 8; type: cat; name: Belka; gender: female; father: Murzik; mother: Mashka;

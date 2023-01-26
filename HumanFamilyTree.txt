@@ -1,0 +1,8 @@
+Family tree of Lidia Andriyanova;
+id: 1; type: human; name: Vitaliy; gender: male;
+id: 2; type: human; name: Natalia; gender: female;
+id: 3; type: human; name: Lidia; gender: female; father: Vitaliy; mother: Natalia;
+id: 4; type: human; name: Ilya; gender: male;
+id: 5; type: human; name: Roman; gender: male; father: Ilya; mother: Lidia;
+id: 6; type: human; name: Victor; gender: male; father: Ilya; mother: Lidia;
+id: 7; type: human; name: Ivan; gender: male; father: Ilya; mother: Lidia;
