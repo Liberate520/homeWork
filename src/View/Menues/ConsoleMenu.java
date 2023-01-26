@@ -22,7 +22,7 @@ public class ConsoleMenu implements Clickable{
         return list;
     }
 
-    public void Choose(int command) throws IOException {
+    public void choose(int command) throws IOException {
         this.list.get(command).onClick();
     }
 
@@ -34,7 +34,7 @@ public class ConsoleMenu implements Clickable{
     public void onClick() throws IOException {
         view.setLastMenu(view.getMenu());
         view.setMenu(this);
-        view.CallMenu();
+        view.callMenu();
     }
 
     @Override

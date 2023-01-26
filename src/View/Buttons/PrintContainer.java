@@ -11,7 +11,7 @@ public class PrintContainer extends MenuButton{
     }
 
     public void onClick(){
-        view.CallPrintContainer();
+        view.callPrintContainer();
     }
 
     @Override

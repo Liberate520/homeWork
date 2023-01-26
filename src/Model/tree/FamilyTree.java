@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static Model.Service.countPostfix;
+
 public class FamilyTree<T extends Creature> implements Iterable<T>, Containerable{
     private String name;
     private Integer volume;
@@ -88,18 +90,6 @@ public class FamilyTree<T extends Creature> implements Iterable<T>, Containerabl
             writable.readTreeFromFile(this);
         }
         return this;
-    }
-
-    public static String countPostfix(int num)
-    {
-        String result = null;
-        if(num == 11) result = "элементов";
-        else if(("" + num).endsWith("1")) result = "элемента";
-        else if(num > 11 && num < 15) result = "элементов";
-        else if(num % 10 > 1 && num % 10 < 5) result = "элементов";
-        else result = "элементов";
-
-        return result;
     }
 
     @Override

@@ -11,6 +11,6 @@ public class ExitButton extends MenuButton {
 
     @Override
     public void onClick() {
-        view.CallExitButton();
+        view.callExitButton();
     }
 }

@@ -12,7 +12,7 @@ public class CreateHumanTreeButton extends MenuButton{
 
     @Override
     public void onClick() {
-        view.CallCreateHumanTreeButton();
+        view.callCreateHumanTreeButton();
     }
 
     @Override

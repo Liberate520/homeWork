@@ -3,6 +3,8 @@ package Model.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Model.Service.agePostfix;
+
 public class Cat extends Creature<Cat> implements Containerable {
     public Cat(String fullName, Gender gender, int age, Cat father, Cat mother) {
         this.fullName = fullName;
@@ -95,23 +97,6 @@ public class Cat extends Creature<Cat> implements Containerable {
         String genString = gender == Gender.Male ? "муж." : "жен.";
         return  fullName + ", " + genString + ", " + age + " " + agePostfix(age);
 
-    }
-
-    private String agePostfix(int age) {
-        int ageLastNumber = age % 10;
-        boolean isExclusion = (age % 100 >= 11) && (age % 100 <= 14);
-        String old = "";
-
-        if (ageLastNumber == 1)
-            old = "год";
-        else if(ageLastNumber == 0 || ageLastNumber >= 5 && ageLastNumber <= 9)
-            old = "лет";
-        else if(ageLastNumber >= 2 && ageLastNumber <= 4)
-            old = "года";
-        if (isExclusion)
-            old = "лет";
-
-        return old;
     }
 
     @Override

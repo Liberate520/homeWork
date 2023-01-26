@@ -36,8 +36,7 @@ public class TempStorage {
         return storage.toString();
     }
 
-    public Container<FamilyTree<Human>>
-    getHumanTreeContainer() {
+    public Container<FamilyTree<Human>> getHumanTreeContainer() {
         return humanTreeContainer;
     }
 }

@@ -15,7 +15,7 @@ public class Main {
         view.init();
 
         while (true){
-            view.CallMenu();
+            view.callMenu();
         }
     }
 }

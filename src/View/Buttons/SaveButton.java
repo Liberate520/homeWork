@@ -13,7 +13,7 @@ public class SaveButton extends MenuButton{
     }
 
     public void onClick() throws IOException {
-        view.CallSaveButton();
+        view.callSaveButton();
     }
 
     @Override

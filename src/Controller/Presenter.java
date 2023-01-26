@@ -19,60 +19,56 @@ public class Presenter {
         this.service = service;
     }
 
-    public void CreateButtonOnClick(String name){
-        service.CreateButtonOnClick(name);
+    public void saveButtonOnClick() throws IOException {
+        service.saveButtonOnClick();
     }
 
-    public void SaveButtonOnClick() throws IOException {
-        service.SaveButtonOnClick();
-    }
-
-    public void ExitButtonOnClick(){
-        service.ExitButtonOnClick();
+    public void exitButtonOnClick(){
+        service.exitButtonOnClick();
     }
 
 
-    public void CreateHumanButtonOnClick(String name, Gender gender, Integer age) {
-        service.CreateHumanButtonOnClick(name, gender, age);
+    public void createHumanButtonOnClick(String name, Gender gender, Integer age) {
+        service.createHumanButtonOnClick(name, gender, age);
     }
 
-    public void CreateCatButtonOnClick(String name, Gender gender, Integer age){
-        service.CreateCatButtonOnClick(name, gender, age);
+    public void createCatButtonOnClick(String name, Gender gender, Integer age){
+        service.createCatButtonOnClick(name, gender, age);
     }
 
-    public TempStorage PrintContainerButtonClick() {
-        return service.PrintContainerButtonOnClick();
+    public TempStorage printContainerButtonClick() {
+        return service.printContainerButtonOnClick();
     }
 
-    public void CreateHumanTreeButtonOnClick(String name) {
-        service.CreateHumanTreeButtonOnClick(name);
+    public void createHumanTreeButtonOnClick(String name) {
+        service.createHumanTreeButtonOnClick(name);
     }
 
-    public void CreateCatTreeButtonOnClick(String name) {
-        service.CreateCatTreeButtonOnClick(name);
+    public void createCatTreeButtonOnClick(String name) {
+        service.createCatTreeButtonOnClick(name);
     }
 
-    public void AddHumanButtonOnClick(FamilyTree<Human> tree, Human human) {
-        service.AddHumanButtonOnClick(tree, human);
+    public void addHumanButtonOnClick(FamilyTree<Human> tree, Human human) {
+        service.addHumanButtonOnClick(tree, human);
     }
 
-    public void AddCatButtonOnClick(FamilyTree<Cat> tree, Cat cat) {
-        service.AddCatButtonOnClick(tree, cat);
+    public void addCatButtonOnClick(FamilyTree<Cat> tree, Cat cat) {
+        service.addCatButtonOnClick(tree, cat);
     }
 
-    public Container<Human> GetHumanContainer() {
-        return service.GetHumanContainer();
+    public Container<Human> getHumanContainer() {
+        return service.getHumanContainer();
     }
 
-    public Container<Cat> GetCatContainer() {
-        return service.GetCatContainer();
+    public Container<Cat> getCatContainer() {
+        return service.getCatContainer();
     }
 
-    public Container<FamilyTree<Cat>> GetCatTreeContainer() {
-        return service.GetCatTreeContainer();
+    public Container<FamilyTree<Cat>> getCatTreeContainer() {
+        return service.getCatTreeContainer();
     }
 
-    public Container<FamilyTree<Human>> GetHumanTreeContainer() {
-        return service.GetHumanTreeContainer();
+    public Container<FamilyTree<Human>> getHumanTreeContainer() {
+        return service.getHumanTreeContainer();
     }
 }

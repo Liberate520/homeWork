@@ -11,7 +11,7 @@ public class CreateHumanButton extends MenuButton{
     }
 
     public void onClick(){
-        view.CallCreateHumanButton();
+        view.callCreateHumanButton();
     }
 
     @Override

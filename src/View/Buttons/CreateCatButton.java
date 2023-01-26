@@ -11,7 +11,7 @@ public class CreateCatButton extends MenuButton{
     }
 
     public void onClick(){
-        view.CallCreateCatButton();
+        view.callCreateCatButton();
     }
 
     @Override

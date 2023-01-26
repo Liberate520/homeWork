@@ -12,7 +12,7 @@ public class CreateCatTreeButton extends MenuButton{
 
     @Override
     public void onClick() {
-        view.CallCreateCatTreeButton();
+        view.callCreateCatTreeButton();
     }
 
     @Override

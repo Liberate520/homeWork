@@ -61,22 +61,22 @@ public class View {
         this.menu = mainMenu;
     }
 
-    public void CallMenu() throws IOException {
+    public void callMenu() throws IOException {
         System.out.println("\n----- " + this.menu.getMenuName() + " -----");
         for (int i = 0; i < this.menu.getListCommand().size(); i++) {
             System.out.println("" + i + " - " + menu.getListCommand().get(i));
         }
         System.out.println("----------------\n");
-        GetUserPointOfMenu();
+        getUserPointOfMenu();
     }
 
-    public void GetUserPointOfMenu() throws IOException {
+    public void getUserPointOfMenu() throws IOException {
         int command;
-        command = Integer.parseInt(GetInfoFromUser("Введите номер пункта меню"));
-        this.menu.Choose(command);
+        command = Integer.parseInt(getInfoFromUser("Введите номер пункта меню"));
+        this.menu.choose(command);
     }
 
-    public String GetInfoFromUser(String question) {
+    public String getInfoFromUser(String question) {
         System.out.print(question + ": ");
         return scanner.nextLine();
     }
@@ -97,21 +97,17 @@ public class View {
         return lastMenu;
     }
 
-    public void CallCommandButton() {
-        presenter.CreateButtonOnClick(GetInfoFromUser("Введите имя"));
-    }
-
     public void sendUserMessage(String message){
         System.out.println(message);
     }
 
-    public String GetName(){
+    public String getName(){
         String name = null;
         String userAnswer;
         boolean flag = true;
 
         while (flag){
-            userAnswer = GetInfoFromUser("Введите имя");
+            userAnswer = getInfoFromUser("Введите имя");
             if (!userAnswer.isEmpty()){
                 name = userAnswer;
                 flag = false;
@@ -123,13 +119,13 @@ public class View {
         return name;
     }
 
-    public Gender GetGender(){
+    public Gender getGender(){
         Gender gender = null;
         String userAnswer;
         boolean flag = true;
 
         while (flag){
-            userAnswer = GetInfoFromUser("Введите пол (М / Ж)");
+            userAnswer = getInfoFromUser("Введите пол (М / Ж)");
             if (!userAnswer.isEmpty()){
                 if (userAnswer.equalsIgnoreCase("м")){
                     gender = Gender.Male;
@@ -148,13 +144,13 @@ public class View {
         return gender;
     }
 
-    public Integer GetAge(){
+    public Integer getAge(){
         Integer age = null;
         String userAnswer;
         boolean flag = true;
 
         while(flag){
-            userAnswer = GetInfoFromUser("Введите возраст");
+            userAnswer = getInfoFromUser("Введите возраст");
             if (!userAnswer.isEmpty()){
                 try {
                     age = Integer.parseInt(userAnswer);
@@ -170,21 +166,21 @@ public class View {
         return age;
     }
 
-    public void CallCreateHumanButton() {
-        presenter.CreateHumanButtonOnClick(GetName(), GetGender(), GetAge());
+    public void callCreateHumanButton() {
+        presenter.createHumanButtonOnClick(getName(), getGender(), getAge());
     }
 
-    public void CallCreateCatButton() {
-        presenter.CreateCatButtonOnClick(GetName(), GetGender(), GetAge());
+    public void callCreateCatButton() {
+        presenter.createCatButtonOnClick(getName(), getGender(), getAge());
     }
 
-    public void CallExitButton() {
+    public void callExitButton() {
         sendUserMessage("Спасибо, что воспользовались нашим сервисом. Ждем Вас снова.");
-        presenter.ExitButtonOnClick();
+        presenter.exitButtonOnClick();
     }
 
-    public void CallPrintContainer() {
-        String containerString = presenter.PrintContainerButtonClick().toString();
+    public void callPrintContainer() {
+        String containerString = presenter.printContainerButtonClick().toString();
         if (containerString.isEmpty()){
             sendUserMessage("\nВ хранилище пока пусто.");
         } else {
@@ -194,11 +190,11 @@ public class View {
 
     }
 
-    public void CallAddCatButton() {
+    public void callAddCatButton() {
         Cat cat;
         FamilyTree<Cat> tree;
-        Container<Cat> catContainer = presenter.GetCatContainer();
-        Container<FamilyTree<Cat>> treeCatContainer = presenter.GetCatTreeContainer();
+        Container<Cat> catContainer = presenter.getCatContainer();
+        Container<FamilyTree<Cat>> treeCatContainer = presenter.getCatTreeContainer();
         if (catContainer.getContainer().size() == 0){
             sendUserMessage("\nНет ни одного кота вне древа");
         } else if (treeCatContainer.getContainer().size() == 0) {
@@ -207,23 +203,23 @@ public class View {
             for (int i = 0; i < catContainer.getContainer().size(); i++) {
                 System.out.println("" + i + " - " + catContainer.getContainer().get(i));
             }
-            cat = (Cat)catContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер кота")));
+            cat = (Cat)catContainer.choose(Integer.parseInt(getInfoFromUser("Введите номер кота")));
 
             for (int i = 0; i < treeCatContainer.getContainer().size(); i++) {
                 tree = (FamilyTree<Cat>) treeCatContainer.getContainer().get(i);
                 System.out.println("" + i + " - " + ((FamilyTree<Cat>) treeCatContainer.getContainer().get(i)).getName());
             }
-            tree = (FamilyTree<Cat>) treeCatContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
-            presenter.AddCatButtonOnClick(tree, cat);
+            tree = (FamilyTree<Cat>) treeCatContainer.choose(Integer.parseInt(getInfoFromUser("Введите номер дерева")));
+            presenter.addCatButtonOnClick(tree, cat);
         }
     }
 
-    public void CallAddHumanButton() {
+    public void callAddHumanButton() {
         Human human;
         FamilyTree<Human> tree;
 
-        Container<Human> humanContainer = presenter.GetHumanContainer();
-        Container<FamilyTree<Human>> treeHumanContainer = presenter.GetHumanTreeContainer();
+        Container<Human> humanContainer = presenter.getHumanContainer();
+        Container<FamilyTree<Human>> treeHumanContainer = presenter.getHumanTreeContainer();
 
         if (humanContainer.getContainer().size() == 0){
             sendUserMessage("\nНет ни одного человека вне древа");
@@ -233,26 +229,26 @@ public class View {
             for (int i = 0; i < humanContainer.getContainer().size(); i++) {
                 System.out.println("" + i + " - " + humanContainer.getContainer().get(i));
             }
-            human = (Human) humanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер человека")));
+            human = (Human) humanContainer.choose(Integer.parseInt(getInfoFromUser("Введите номер человека")));
 
             for (int i = 0; i < treeHumanContainer.getContainer().size(); i++) {
                 tree = (FamilyTree<Human>) treeHumanContainer.getContainer().get(i);
                 System.out.println("" + i + " - " + ((FamilyTree<Human>) treeHumanContainer.getContainer().get(i)).getName());
             }
-            tree = (FamilyTree<Human>) treeHumanContainer.choose(Integer.parseInt(GetInfoFromUser("Введите номер дерева")));
-            presenter.AddHumanButtonOnClick(tree, human);
+            tree = (FamilyTree<Human>) treeHumanContainer.choose(Integer.parseInt(getInfoFromUser("Введите номер дерева")));
+            presenter.addHumanButtonOnClick(tree, human);
         }
     }
 
-    public void CallCreateHumanTreeButton() {
-        presenter.CreateHumanTreeButtonOnClick(GetName());
+    public void callCreateHumanTreeButton() {
+        presenter.createHumanTreeButtonOnClick(getName());
     }
 
-    public void CallCreateCatTreeButton() {
-        presenter.CreateCatTreeButtonOnClick(GetName());
+    public void callCreateCatTreeButton() {
+        presenter.createCatTreeButtonOnClick(getName());
     }
 
-    public void CallSaveButton() throws IOException {
-        presenter.SaveButtonOnClick();
+    public void callSaveButton() throws IOException {
+        presenter.saveButtonOnClick();
     }
 }

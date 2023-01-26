@@ -14,6 +14,6 @@ public class UpButton extends MenuButton {
     @Override
     public void onClick() throws IOException {
         view.setMenu(view.getLastMenu());
-        view.CallMenu();
+        view.callMenu();
     }
 }

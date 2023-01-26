@@ -3,6 +3,7 @@ package Model;
 import Model.tree.*;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class Service {
 
@@ -17,11 +18,7 @@ public class Service {
         return tempStorage;
     }
 
-    public void CreateButtonOnClick(String name) {
-        System.out.println("Выполнена команда создать " + name);
-    }
-
-    public void SaveButtonOnClick() throws IOException {
+    public void saveButtonOnClick() throws IOException {
         FileWorker fileWorker = new FileWorker();
 
         for (Containerable human : tempStorage.getHumanContainer().getContainer()) {
@@ -41,65 +38,102 @@ public class Service {
         }
     }
 
-    public void ExitButtonOnClick(){
+    public void exitButtonOnClick(){
         System.exit(0);
     }
 
-    public void CreateCatButtonOnClick(String name, Gender gender, Integer age){
+    public void createCatButtonOnClick(String name, Gender gender, Integer age){
         Cat cat = new Cat(name, gender, age);
         System.out.println();
         System.out.println(cat);
         this.tempStorage.getCatContainer().getContainer().add(cat);
     }
 
-    public void CreateHumanButtonOnClick(String name, Gender humanGender, Integer humanAge) {
+    public void createHumanButtonOnClick(String name, Gender humanGender, Integer humanAge) {
         Human human = new Human(name, humanGender, humanAge);
         System.out.println();
         System.out.println(human);
         this.tempStorage.getHumanContainer().getContainer().add(human);
     }
 
-    public TempStorage PrintContainerButtonOnClick() {
+    public TempStorage printContainerButtonOnClick() {
         return getTempStorage();
     }
 
-    public void CreateHumanTreeButtonOnClick(String name) {
+    public void createHumanTreeButtonOnClick(String name) {
         FamilyTree<Human> familyTree = new FamilyTree<>(name);
         System.out.println();
         System.out.println(familyTree);
         this.tempStorage.getHumanTreeContainer().getContainer().add(familyTree);
     }
 
-    public void CreateCatTreeButtonOnClick(String name) {
+    public void createCatTreeButtonOnClick(String name) {
         FamilyTree<Cat> familyTree = new FamilyTree<>(name);
         System.out.println();
         System.out.println(familyTree);
         this.tempStorage.getCatTreeContainer().getContainer().add(familyTree);
     }
 
-    public void AddHumanButtonOnClick(FamilyTree<Human> tree, Human human) {
+    public void addHumanButtonOnClick(FamilyTree<Human> tree, Human human) {
         tempStorage.getHumanContainer().getContainer().remove(human);
         tree.addElement(human);
     }
 
-    public void AddCatButtonOnClick(FamilyTree tree, Cat cat) {
+    public void addCatButtonOnClick(FamilyTree tree, Cat cat) {
         tempStorage.getCatContainer().getContainer().remove(cat);
         tree.addElement(cat);
     }
 
-    public Container<Human> GetHumanContainer() {
+    public Container<Human> getHumanContainer() {
         return tempStorage.getHumanContainer();
     }
 
-    public Container GetCatContainer() {
+    public Container getCatContainer() {
         return tempStorage.getCatContainer();
     }
 
-    public Container<FamilyTree<Human>> GetHumanTreeContainer() {
+    public Container<FamilyTree<Human>> getHumanTreeContainer() {
         return tempStorage.getHumanTreeContainer();
     }
 
-    public Container<FamilyTree<Cat>> GetCatTreeContainer() {
+    public Container<FamilyTree<Cat>> getCatTreeContainer() {
         return tempStorage.getCatTreeContainer();
+    }
+
+    public void sortByName(FamilyTree tree){
+        Collections.sort(tree.getTreeElements(), new HumanComparatorByName());
+    }
+
+    public void sortByAge(FamilyTree tree){
+        Collections.sort(tree.getTreeElements(), new HumanComparatorByAge());
+    }
+
+    public static String agePostfix(int age){
+        int ageLastNumber = age % 10;
+        boolean isExclusion = (age % 100 >= 11) && (age % 100 <= 14);
+        String postfix = "";
+
+        if (ageLastNumber == 1)
+            postfix = "год";
+        else if(ageLastNumber == 0 || ageLastNumber >= 5 && ageLastNumber <= 9)
+            postfix = "лет";
+        else if(ageLastNumber >= 2 && ageLastNumber <= 4)
+            postfix = "года";
+        if (isExclusion)
+            postfix = "лет";
+
+        return postfix;
+    }
+
+    public static String countPostfix(int num)
+    {
+        String postfix;
+        if(num == 11) postfix = "элементов";
+        else if(("" + num).endsWith("1")) postfix = "элемента";
+        else if(num > 11 && num < 15) postfix = "элементов";
+        else if(num % 10 > 1 && num % 10 < 5) postfix = "элементов";
+        else postfix = "элементов";
+
+        return postfix;
     }
 }
