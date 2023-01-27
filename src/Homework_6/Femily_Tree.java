@@ -3,7 +3,7 @@ package Homework_6;
 
 import Print.IPrintList;
 import Print.PrintList;
-import OldClasSS.PrintMetods;
+import OldClass.PrintMetods;
 
 import Iterator.StaddyIterator;
 
