@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 
 public class PrintTree implements IPrint,Iterable<Designer_Human>{
     Femily_Tree femily_tree;
+    Designer_Human designer_human;
 
     @Override
     public void printTree() {
@@ -18,7 +19,7 @@ public class PrintTree implements IPrint,Iterable<Designer_Human>{
 
     @Override
     public Iterator<Designer_Human> iterator() {
-        return new StaddyIterator(femily_tree.humans);
+        return new StaddyIterator(designer_human.getHumans());
     }
 
     @Override
