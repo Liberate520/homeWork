@@ -1,3 +1,4 @@
 .idea
-echo "/Users/imacson/Desktop/education GB/Java oop/HHHH/homeWork-1/src/OldClass" >> .gitignore
+src/OldClass
+src/OldClasssS
 
