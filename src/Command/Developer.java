@@ -25,7 +25,7 @@ public class Developer {
         AddHumanCommand.execute();
     }
 
-    public void addParentsCommandRecord() {
+    public void AddParentsCommandRecord() {
         AddParentsCommand.execute();
     }
 

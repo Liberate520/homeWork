@@ -15,6 +15,12 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private String sex;
     private int date;
 
+    public List<Designer_Human> getDesigner_human() {
+        return designer_human;
+    }
+
+    private List<Designer_Human> designer_human; //константа
+
     public String getName() {
         return name;
     }
@@ -28,7 +34,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
 
-    private String father; // Объектная переменная
+    private Designer_Human father; // Объектная переменная
 
     private Designer_Human mother; // Объектная переменная
 
@@ -53,7 +59,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     /*
      * Создаем максимально описанный конструктор
      */
-    public Designer_Human(String name, String sex, int date, String father, Designer_Human mother) {
+    public Designer_Human(String name, String sex, int date, Designer_Human father, Designer_Human mother) {
         this();
         this.name = name;
         this.sex = sex;
@@ -95,8 +101,15 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
     }
 
+    public Designer_Human getFather() {
+        return father;
+    }
 
-    public void setFather(String father) {
+    public Designer_Human getMother() {
+        return mother;
+    }
+
+    public void setFather(Designer_Human father) {
         this.father = father;
     }
 

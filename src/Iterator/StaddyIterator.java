@@ -23,5 +23,9 @@ public class StaddyIterator implements Iterator<Designer_Human> {
         return humans.get(index++); //0 1 2 3 ...
     }
 
+    //xnj nj
+
+
+
 }
 

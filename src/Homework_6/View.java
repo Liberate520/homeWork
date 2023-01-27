@@ -4,14 +4,12 @@ package Homework_6;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
-import Command.AddCildrenCommand;
-import Command.AddHumanCommand;
-import Command.Developer;
+import Command.*;
 import Print.IPrint;
 import Print.PrintTree;
-import metods.PrintMetods;
-import metods.SearchEngines;
-import metods.SortClass;
+import OldClass.PrintMetods;
+import OldClass.SearchEngines;
+import OldClass.SortClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,7 +55,7 @@ public class View extends SearchEngines {
         try {
             switch (choice) {
                 case 1 -> femily_tree.addHumanNewHomework5(designer_human);
-                case 2 -> femily_tree.addingPeopleWithAnIdScanner();
+//                case 2 -> femily_tree.addingPeopleWithAnIdScanner();
                 case 3 -> showAllСhildren();
                 case 4 -> showAllTree();
                 case 5 -> searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
@@ -122,7 +120,26 @@ public class View extends SearchEngines {
     }
 
 
-    //Новый метод вызова
 
+
+    public void Viewv(){
+        //Новый метод вызова
+        Developer developer =new Developer(
+                new AddHumanCommand(),
+                new AddCildrenCommand(),
+                new addParentsCommand(),
+                new SearchCommand(),
+                new ShowTreeAllCommand(),
+                new SortingCommand()
+
+        );
+
+        developer.AddHumanCommandRecord();
+        developer.AddСhildrenCommandRecord();
+        developer.AddParentsCommandRecord();
+        developer.SearchCommandRecord();
+        developer.ShowTreeAllCommandRecord();
+        developer.SortingCommand();
+    }
 }
 

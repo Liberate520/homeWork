@@ -1,7 +1,8 @@
-package metods;
+package OldClass;
 
 import Homework_6.Designer_Human;
 import Homework_6.Femily_Tree;
+import OldClass.PrintMetods;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -57,7 +58,7 @@ public class SortClass {
      * Сортировка по имени
      */
     public void sortByName() {
-        this.designer_human.sort(Comparator.comparing(Designer_Human::getName));
+        designer_human.sort(Comparator.comparing(Designer_Human::getName));
     }
 
     /**

@@ -1,6 +1,7 @@
 package Homework_6;
 
 import Cache.CacheLimitations;
+import Command.Developer;
 import Serializator.Serializator;
 
 import java.io.InvalidObjectException;
@@ -20,7 +21,7 @@ public class Main {
         serializator.serializatorMetod(designer_human); //вызываем серализотор
 
         View view = new View(); //Вызов  экземпляр класса
-        view.showAll(); // вызов окна работы с пользователем
+        view.Viewv(); // вызов окна работы с пользователем
 
         CacheLimitations cacheLimitations = new CacheLimitations(); //Вызов  экземпляр класса
         cacheLimitations.cacheMetod(femily_tree);//вызываем метод кэширования
