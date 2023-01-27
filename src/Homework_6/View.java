@@ -4,6 +4,9 @@ package Homework_6;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
+import Command.AddCildrenCommand;
+import Command.AddHumanCommand;
+import Command.Developer;
 import Print.IPrint;
 import Print.PrintTree;
 import metods.PrintMetods;
@@ -117,6 +120,9 @@ public class View extends SearchEngines {
         searchHuman((ArrayList<Designer_Human>) designer_human.getHumans());
         showName();
     }
+
+
+    //Новый метод вызова
 
 }
 

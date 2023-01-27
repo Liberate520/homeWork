@@ -1,4 +1,8 @@
 package Command;
 
-public class addParentsCommand {
+public class addParentsCommand implements ICommand{
+    @Override
+    public void execute() {
+
+    }
 }

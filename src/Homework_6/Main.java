@@ -25,6 +25,8 @@ public class Main {
         CacheLimitations cacheLimitations = new CacheLimitations(); //Вызов  экземпляр класса
         cacheLimitations.cacheMetod(femily_tree);//вызываем метод кэширования
 
+
+
     }
 
 

@@ -1,4 +1,8 @@
 package Command;
 
-public class SortingCommand {
+public class SortingCommand implements ICommand {
+    @Override
+    public void execute() {
+
+    }
 }
