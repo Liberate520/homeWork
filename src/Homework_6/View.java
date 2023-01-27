@@ -7,9 +7,9 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import Command.*;
 import Print.IPrint;
 import Print.PrintTree;
-import OldClass.PrintMetods;
-import OldClass.SearchEngines;
-import OldClass.SortClass;
+import OldClasSS.PrintMetods;
+import OldClasSS.SearchEngines;
+import OldClasSS.SortClass;
 
 import java.util.ArrayList;
 import java.util.Collections;

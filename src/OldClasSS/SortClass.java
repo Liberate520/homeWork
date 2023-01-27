@@ -1,8 +1,7 @@
-package OldClass;
+package OldClasSS;
 
 import Homework_6.Designer_Human;
 import Homework_6.Femily_Tree;
-import OldClass.PrintMetods;
 
 import java.util.*;
 import java.util.stream.Stream;

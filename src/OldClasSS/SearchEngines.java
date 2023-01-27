@@ -1,4 +1,4 @@
-package OldClass;
+package OldClasSS;
 
 import Homework_6.Designer_Human;
 import Homework_6.Femily_Tree;
