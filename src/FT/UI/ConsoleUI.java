@@ -70,15 +70,15 @@ public class ConsoleUI<T extends Human> {
     public void start() {
         Scanner iScanner = new Scanner(System.in);
         T human;
-        commandsList.add(new Command_0(this));
-        commandsList.add(new Command_1(this));
-        commandsList.add(new Command_2(this));
-        commandsList.add(new Command_3(this));
-        commandsList.add(new Command_4(this));
-        commandsList.add(new Command_5(this));
-        commandsList.add(new Command_6(this));
-        commandsList.add(new Command_7(this));
-        commandsList.add(new Command_8(this));
+        commandsList.add(new SaveFinish(this));
+        commandsList.add(new ShowHumans(this));
+        commandsList.add(new AddNewHuman(this));
+        commandsList.add(new FindByName(this));
+        commandsList.add(new ShowAllChildren(this));
+        commandsList.add(new ShowAllSisters(this));
+        commandsList.add(new ShowAllBrothers(this));
+        commandsList.add(new FindByNameSort(this));
+        commandsList.add(new FindByAgeSort(this));
 
         while (true) {
             System.out.println("Выберите действие:");

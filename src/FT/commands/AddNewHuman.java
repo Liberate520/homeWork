@@ -3,10 +3,10 @@ package FT.commands;
 import FT.Human;
 import FT.UI.ConsoleUI;
 
-public class Command_2 implements Commands {
+public class AddNewHuman implements Commands {
     ConsoleUI consoleUI;
 
-    public Command_2(ConsoleUI consoleUI) {
+    public AddNewHuman(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 

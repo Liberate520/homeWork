@@ -6,10 +6,10 @@ import FT.UI.ConsoleUI;
 показать всех детей члена семьи
  */
 
-public class Command_4 implements Commands {
+public class ShowAllChildren implements Commands {
     ConsoleUI consoleUI;
 
-    public Command_4(ConsoleUI consoleUI) {
+    public ShowAllChildren(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 

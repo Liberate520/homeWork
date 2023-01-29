@@ -1,10 +1,10 @@
 package FT.commands;
 
 import FT.UI.ConsoleUI;
-public class Command_0 implements Commands{
+public class SaveFinish implements Commands{
     ConsoleUI consoleUI;
 
-    public Command_0(ConsoleUI consoleUI) {
+    public SaveFinish(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 

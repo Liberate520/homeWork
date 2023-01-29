@@ -3,10 +3,10 @@ package FT.commands;
 import FT.Human;
 import FT.UI.ConsoleUI;
 
-public class Command_3 implements Commands {
+public class FindByName implements Commands {
     ConsoleUI consoleUI;
 
-    public Command_3(ConsoleUI consoleUI) {
+    public FindByName(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 

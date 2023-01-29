@@ -2,10 +2,10 @@ package FT.commands;
 
 import FT.UI.ConsoleUI;
 
-public class Command_7 implements Commands {
+public class FindByNameSort implements Commands {
     ConsoleUI consoleUI;
 
-    public Command_7(ConsoleUI consoleUI) {
+    public FindByNameSort(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 
