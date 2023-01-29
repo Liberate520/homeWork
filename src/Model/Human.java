@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,6 @@ public class Human implements Serializable, Comparable<Human> {
     private List<Human> brothersOrSisters = new ArrayList<>();
 
     private List<Human> children = new ArrayList<>();
-
-    private recording recording;
 
     public Human() {
     }
@@ -89,14 +86,6 @@ public class Human implements Serializable, Comparable<Human> {
         this.children = children;
     }
 
-    public recording getWritable() {
-        return recording;
-    }
-
-    public void setWritable(recording recording) {
-        this.recording = recording;
-    }
-
     public void addBrotherOrSister(Human newborn, Human mother, Human father) {
         if (father.children.size() > 1) {
             for (Human human : father.children) {
@@ -115,17 +104,6 @@ public class Human implements Serializable, Comparable<Human> {
 
     }
 
-    public void save(List<Human> list) throws IOException {
-
-        if (recording != null) {
-            recording.save(list);
-        }
-    }
-
-    public List<Human> read() throws FileNotFoundException, ClassNotFoundException, IOException {
-        return (List<Human>) recording.read();
-
-    }
 
     @Override
     public String toString() {
@@ -134,7 +112,6 @@ public class Human implements Serializable, Comparable<Human> {
 
     @Override
     public int compareTo(Human o) {
-        // TODO Auto-generated method stub
         return name.compareTo(o.getName());
     }
 }

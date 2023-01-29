@@ -1,6 +1,7 @@
+package Model;
 import java.util.Comparator;
 
-public class Gender implements Comparator<Human> {
+public class HimanGender implements Comparator<Human> {
 
     @Override
     public int compare(Human o1, Human o2) {

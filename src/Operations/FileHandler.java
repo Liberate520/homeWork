@@ -1,3 +1,5 @@
+package Operations;
+
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import Model.Human;
 
 public class FileHandler implements recording, Serializable {
 
