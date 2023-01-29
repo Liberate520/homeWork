@@ -3,24 +3,20 @@ package homeWorkSem1;
 import java.io.IOException;
 import java.util.List;
 
-import homeWorkSem1.Option.Add;
-import homeWorkSem1.Option.GetTree;
 import homeWorkSem1.Option.Option;
 import homeWorkSem1.Presenter.Presenter;
 import homeWorkSem1.Service.Gender;
-import homeWorkSem1.Service.Service;
-import homeWorkSem1.View.View;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        // для демонстрации создаем FamilyTree
-        int index = 1;
+        //для демонстрации создаем FamilyTree
+        int index=1;
         FamilyTree<Human> tree = new FamilyTree<>();
         Human human1 = new Human("Irina", 68, Gender.Female, null, null, index++);
         Human human2 = new Human("Leonid", 69, Gender.Male, null, null, index++);
         Human human3 = new Human("Liudmila", 62, Gender.Female, null, null, index++);
-        Human human4 = new Human("Alexander", 65, Gender.Male, null, null, index++);
+        Human human4 = new Human("Alexander", 65, Gender.Male,null, null, index++);
         Human human5 = new Human("Kate", 36, Gender.Female, human2, human1, index++);
         Human human6 = new Human("Pavel", 37, Gender.Male, human4, human3, index++);
         Human human7 = new Human("Yaroslav", 7, Gender.Male, human6, human5, index++);
@@ -34,15 +30,12 @@ public class Main {
         tree.add(human7);
         tree.add(human8);
 
-        View view = new View();
         Presenter pr = new Presenter();
-
+        
         List<Option> listOp = pr.presentMenu();// показываем пользователю меню
 
         while (true) {
-            pr.buttonClick(listOp);
-            int choice = view.getValue("Choose № of menu item");// получаем выбор пользователя
-            listOp.get(choice - 1).execute(tree);// передаем выбор пользователя, FamilyTree и запускаем нужную программу
-        }
+            pr.buttonClick(listOp, tree);
+        }    
     }
 }

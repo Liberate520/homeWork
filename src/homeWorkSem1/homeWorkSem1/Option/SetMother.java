@@ -2,22 +2,18 @@ package homeWorkSem1.Option;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Scanner;
 
 import homeWorkSem1.FamilyTree;
 import homeWorkSem1.Human;
+import homeWorkSem1.Presenter.Presenter;
 
 public class SetMother<T extends Human> implements Serializable, Option {
 
-    Scanner iScanner = new Scanner(System.in);
-
     @Override
-    public void execute(FamilyTree<Human> tree) {
-        System.out.println("Enter Name of human: ");
-        String getName = iScanner.nextLine();
+    public void execute(FamilyTree<Human> tree, Presenter presenter) {
+        String getName = presenter.getInfoFromUser("Enter Name of human: ");
         List<Human> res = tree.getHumanbyName(getName);
-        System.out.println("Enter Mothers's name: ");
-        String nameMother = iScanner.nextLine();
+        String nameMother = presenter.getInfoFromUser("Enter Mothers's name: ");
         List<Human> res2 = tree.getHumanbyName(nameMother);
         for (Human human : res) {
             for (Human hum : res2) {
@@ -27,8 +23,8 @@ public class SetMother<T extends Human> implements Serializable, Option {
         }
         for (Human element : res) {
             for (Human el : res2) {
-                System.out.printf("%s добавились дети: \n%s", res2, el.getChildren());
-                System.out.printf("\n%s добавилась мать: \n%s", res, element.getMother());
+                presenter.answerToUser("добавились дети: " + el.getChildren());
+                presenter.answerToUser("добавилась мать: " + element.getMother());
             }
         }
     }
@@ -37,5 +33,4 @@ public class SetMother<T extends Human> implements Serializable, Option {
     public String description() {
         return String.format("Set Mother of Human");
     }
-
 }
