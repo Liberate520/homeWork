@@ -17,12 +17,8 @@ public class Main {
         Femily_Tree femily_tree = new Femily_Tree();//Вызов  экземпляр класса
         femily_tree.enumerationСollection(femily_tree); //метод перебора коллекции
 
-
         Serializator serializator = new Serializator();//Вызов  экземпляр класса
         serializator.serializatorMetod(designer_human); //вызываем серализотор
-
-//        View view = new View(); //Вызов  экземпляр класса
-//        view.Viewv(); // вызов окна работы с пользователем
 
         ViewNew viewNew = new ViewNew();
         viewNew.ViewvNEW();

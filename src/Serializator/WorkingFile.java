@@ -15,10 +15,10 @@ public class WorkingFile implements interfaseSave {
     }
 
     @Override
-    public Designer_Human DesSerializa(Designer_Human human1) throws InvalidObjectException { //для чтения
+    public Designer_Human DesSerializa(Designer_Human humans) throws InvalidObjectException { //для чтения
         Serializator serializator = new Serializator();
         try {
-            Designer_Human human11 = serializator.DesSerializa(human1);
+            Designer_Human human11 = serializator.DesSerializa(humans);
             System.out.println(human11.getName());
         } catch (InvalidObjectException e) {
             throw new RuntimeException(e);
