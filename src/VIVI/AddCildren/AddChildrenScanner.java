@@ -33,7 +33,7 @@ public class AddChildrenScanner implements IAddCildren{
         if (!motherName.isEmpty()) {
             human.setMother(new Designer_Human(motherName));
         }
-        showMessageDialog(null,"\"Выбранный человек : "+human);
+        showMessageDialog(null,"\"Выбранный человек : " + human);
 //        System.out.println("Выбранный человек : " + human);
     }
 }
