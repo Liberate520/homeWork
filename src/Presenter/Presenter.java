@@ -1,15 +1,24 @@
+package Presenter;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
+
+import Model.FileHandler;
+import Model.Human;
+import Model.Tree;
 
 public class Presenter {
     private Tree<Human> tree;
     private FileHandler fileHandler;
     private Presenter presenter;
-    private Scanner scanner;
+    private Human human;
 
     public Presenter(Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public Presenter getPresenter() {
+        return presenter;
     }
 
     public void comandSortByName() {
@@ -33,8 +42,7 @@ public class Presenter {
     }
 
     public void comandAddNewHuman() {
-        Human human1 = new Human();
-        tree.add_human(human1);
+        tree.add_human(human);
     }
 
     public void comandPrintConsoleTree() {
@@ -42,13 +50,7 @@ public class Presenter {
     }
 
     public void comandSearchByName() {
-        System.out.println("Введите имя и я найду человека: ");
-        String search = scanner.nextLine();
-        for (Human human : tree) {
-            if (human.getName().equals(search)) {
-                System.out.println(human);
-            }
-        }
+        tree.searchByName();
     }
 
 }

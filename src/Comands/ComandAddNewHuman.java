@@ -1,7 +1,11 @@
+package Comands;
+
 import java.io.IOException;
 
+import Presenter.Presenter;
+
 public class ComandAddNewHuman implements Option {
-    Presenter presenter;
+    private Presenter presenter;
 
     @Override
     public String dicription() {

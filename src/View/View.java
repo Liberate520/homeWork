@@ -1,6 +1,18 @@
+package View;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Comands.ComandAddNewHuman;
+import Comands.ComandExit;
+import Comands.ComandPrintConsoleTree;
+import Comands.ComandRead;
+import Comands.ComandSave;
+import Comands.ComandSearchByName;
+import Comands.ComandSortByBirth;
+import Comands.ComandSortByName;
+import Comands.Option;
 
 public class View {
     public void start() {
@@ -28,8 +40,8 @@ public class View {
                 }
                 System.out.println("Вы промахнулись , попробуйте ещё");
             }
-
         }
+        scanner.close();
     }
 
 }

@@ -1,6 +1,9 @@
+package Model;
+
 import java.io.IOException;
 import java.io.Serializable;
 
+import View.View;
 
 public class Main implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -14,7 +17,7 @@ public class Main implements Serializable {
         familyTree.add_human(human2);
         familyTree.add_human(human3);
         familyTree.add_human(human4);
-        
+
         // System.out.println(familyTree);
         // FileHandler fileHandler = new FileHandler();
         // fileHandler.save(familyTree.getHumanlist());
@@ -27,16 +30,16 @@ public class Main implements Serializable {
 
         // tree.sortByName();
         // for (Human human : tree) {
-        //     System.out.println(human);
+        // System.out.println(human);
         // }
         // System.out.println();
         // tree.sortByBirth();
         // for (Human human : tree) {
-        //     System.out.println(human);
+        // System.out.println(human);
         // }
         View view = new View();
         view.start();
-        
+
     }
 
 }

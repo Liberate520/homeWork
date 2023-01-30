@@ -1,3 +1,4 @@
+package Model;
 import java.io.Serializable;
 
 public class Human implements Serializable, Comparable<Human> {
