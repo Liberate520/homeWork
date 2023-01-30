@@ -1,6 +1,6 @@
 package VIVI.Command;
 
-public class Developer {
+public class Presenter {
     ICommand AddСhildrenCommand;
     ICommand AddHumanCommand;
     ICommand AddParentsCommand;
@@ -8,7 +8,7 @@ public class Developer {
     ICommand ShowTreeAllCommand;
     ICommand SortingCommand;
 
-    public Developer(ICommand addCildrenCommand, ICommand addHumanCommand, ICommand addParentsCommand, ICommand searchCommand, ICommand showTreeAllCommand, ICommand sortingCommand) {
+    public Presenter(ICommand addCildrenCommand, ICommand addHumanCommand, ICommand addParentsCommand, ICommand searchCommand, ICommand showTreeAllCommand, ICommand sortingCommand) {
         this.AddСhildrenCommand = addCildrenCommand;
         this.AddHumanCommand = addHumanCommand;
         this.AddParentsCommand = addParentsCommand;

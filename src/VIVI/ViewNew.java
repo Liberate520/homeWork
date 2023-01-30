@@ -5,13 +5,12 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import VIVI.Command.*;
 
-import javax.swing.*;
 import java.util.Objects;
 
 public class ViewNew {
     public void ViewvNEW() {
         //Новый метод вызова
-        Developer developer = new Developer(
+        Presenter presenter = new Presenter(
                 new AddHumanCommand(),
                 new AddCildrenCommand(),
                 new addParentsCommand(),
@@ -20,6 +19,7 @@ public class ViewNew {
                 new SortingCommand()
 
         );
+
         showMessageDialog(null, """ 
                 Добро пожаловать в программу генеалогическова древа
                               Выберете действие
@@ -33,17 +33,17 @@ public class ViewNew {
                 """);
         String txt = showInputDialog("Напишите действие");
         if (Objects.equals(txt, "Добавить пользователя")) {
-            developer.AddHumanCommandRecord();
+            presenter.AddHumanCommandRecord();
         } else if (Objects.equals(txt, "Добавить детей")) {
-            developer.AddСhildrenCommandRecord();
+            presenter.AddСhildrenCommandRecord();
         } else if (Objects.equals(txt, "Добавить родителей")) {
-            developer.AddParentsCommandRecord();
+            presenter.AddParentsCommandRecord();
         }else if (Objects.equals(txt, "Показать все древо")) {
-            developer.ShowTreeAllCommandRecord();
+            presenter.ShowTreeAllCommandRecord();
         }else if (Objects.equals(txt, "Поиск по имени")) {
-            developer.SearchCommandRecord();
+            presenter.SearchCommandRecord();
         }else if (Objects.equals(txt, "Сортировка")) {
-            developer.SortingCommand();
+            presenter.SortingCommand();
         }
     }
 
