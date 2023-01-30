@@ -14,7 +14,10 @@ public class MyView implements View {
         while (true) {
             int command = scanner.nextInt();
             if (command == 0) startPrint();
-            else if (command == 1) newTree();
+            else if (command == 1) {
+                newTree();
+                startPrint();
+            }
 //            else if (command == 2) {
 //                addElement();
 //            }

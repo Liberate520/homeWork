@@ -9,6 +9,6 @@ public class Main {
         Presenter presenter = new Presenter(repository, myView);
 
         myView.start();
-
+   
     }
 }
