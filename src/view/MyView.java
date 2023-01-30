@@ -1,18 +1,14 @@
 package view;
-import controller.MyController;
-import model.FamilyConnectionType;
-import model.GenealogicalTree;
-import model.Tree;
-import model.TreeElement;
+import presenter.Presenter;
 
 import java.util.Scanner;
 
-public class MyView {
-    private GenealogicalTree<TreeElement> tree;
-    private MyController myController = new MyController(tree);
+public class MyView implements View {
+    private Presenter presenter;
+    private Scanner scanner;
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         newTree();
         startPrint();
         while (true) {
@@ -27,12 +23,16 @@ public class MyView {
 //            }
             else if (command == 4) {
                 System.out.print("Введите имя: ");
-                printElement(scanner.nextLine());
+                presenter.printElement(scanner.nextLine());
                 System.out.println();
             }
-            else if (command == 5) printTree();
+            else if (command == 5) presenter.printTree();
             else if (command == 9) break;
         }
+    }
+
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     private void startPrint(){
@@ -47,18 +47,18 @@ public class MyView {
     }
 
     private void newTree(){
-        myController.newTree();
+        presenter.newTree();
     }
-    private void addElement(TreeElement treeElement){
-        myController.addElement(treeElement);
-    }
-    private void addConnection(String name1, String name2, FamilyConnectionType type) {
-        myController.addConnection(name1, name2, type);
-    }
-    private void printElement(String name) {
-        myController.printElement(name);
-    }
-    private void printTree(){
-        myController.printTree();
-    }
+//    private void addElement(TreeElement treeElement){
+//        presenter.addElement(treeElement);
+//    }
+//    private void addConnection(String name1, String name2, FamilyConnectionType type) {
+//        presenter.addConnection(name1, name2, type);
+//    }
+//    private void printElement(String name) {
+//        presenter.printElement(name);
+//    }
+//    private void printTree(){
+//        presenter.printTree();
+//    }
 }

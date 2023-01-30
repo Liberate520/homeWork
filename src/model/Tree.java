@@ -35,6 +35,7 @@ public class Tree<T> implements GenealogicalTree<T> {
         }
         return null;
     }
+
     @Override
     public String toString() {
         return "personList = " + treeElementList;
