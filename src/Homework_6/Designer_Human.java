@@ -15,9 +15,12 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     private String sex;
     private int date;
 
-//    public List<Designer_Human> getDesigner_human() {
-//        return designer_human;
-//    }
+
+
+
+    public List<Designer_Human> getDesigner_human() {
+        return designer_human;
+    }
 
     private List<Designer_Human> designer_human; //константа
 
