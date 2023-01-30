@@ -21,61 +21,25 @@ public class Presenter implements Command {
         this.consoleInterface = new ConsoleInterface(this);
         this.familyTree.setWritable(new FileHandler<Human>());
     }
-    // Human a = new Human("Беляева", "Мария", "Александровна", Gender.WOMAN);
+    
     @Override
     public void createNewTree() {
-        Human a = new Human("Беляева", "Мария", "Александровна", Gender.WOMAN);
-        Human b = new Human("Беляев", "Владимир", "Кириллович", Gender.MAN);
-        Human c = new Human("Беляев", "Юрий", "Владмирович", Gender.MAN);
-        Human d = new Human("Беляева", "Марина", "Владмировна", Gender.WOMAN);
-
-        a.setSpouse(b);
-
-        c.setParentFather(b);
-        c.setParentMother(a);
-
-        d.setParentFather(b);
-        d.setParentMother(a);
-
-        Human e = new Human("Зайцева", "Галина", "Васильевна", Gender.WOMAN);
-        Human f = new Human("Зйцев", "Николай", "Иванович", Gender.MAN);
-        Human g = new Human("Зайцева", "Ирина", "Николаевна", Gender.WOMAN);
-
-        e.setSpouse(f);
-
-        g.setParentFather(f);
-        g.setParentMother(e);
-
-        c.setSpouse(g);
-
-        Human h = new Human("Беляева", "Вероника", "Юрьевна", Gender.WOMAN);
-
-        h.setParentFather(g);
-        h.setParentMother(c);
-
-        this.familyTree.addHuman(a);
-        this.familyTree.addHuman(b);
-        this.familyTree.addHuman(c);
-        this.familyTree.addHuman(d);
-        this.familyTree.addHuman(e);
-        this.familyTree.addHuman(f);
-        this.familyTree.addHuman(g);
-        this.familyTree.addHuman(h);
-
+        
+        this.familyTree.getDemoMap();
+        consoleInterface.outResult("Демо дерево создано");
         this.consoleInterface.menu();
     }
 
     @Override
     public void createTreeFromFile() {
         this.familyTree.read();
-        consoleInterface.outResult("Дерево создано");
+        consoleInterface.outResult("Дерево из файла загружено");
         this.consoleInterface.menu();
     }
 
     @Override
     public void addHuman() {
         this.consoleInterface.outStr("Введите Фамилию:\n--> ");
-        //String lastName, String name, String secondName, Gender gender
         String lastName = this.consoleInterface.inputText();
         this.consoleInterface.outStr("Введите Имя:\n--> ");
         String name = this.consoleInterface.inputText();

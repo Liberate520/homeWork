@@ -87,4 +87,8 @@ public class FamilyTree<T extends Human> {
     public Map<String, T> getHumanMap() {
         return humanMap;
     }
+
+    public void getDemoMap() {
+        new FamilyTreeDemoGenerator<T>(this.humanMap);
+    }
 }
