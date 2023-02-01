@@ -1,7 +1,6 @@
-package Print;
+package VIVI.Print;
 
 import Homework_6.Designer_Human;
-import Homework_6.Femily_Tree;
 import Iterator.StaddyIterator;
 
 import java.util.Iterator;

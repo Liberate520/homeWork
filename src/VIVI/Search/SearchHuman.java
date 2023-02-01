@@ -11,7 +11,10 @@ public class SearchHuman implements ISearch{
     @Override
     public void search(List<Designer_Human> humans) {
         Scanner iScanner = new Scanner(in);
+
         System.out.println("Введите имя человека для поиска: ");
+
+
         String human = iScanner.nextLine();
         for (Designer_Human с : humans) {
             if (human.equals(с.getName())) {

@@ -10,10 +10,10 @@ public class AddChildrenJOptionPane implements IAddCildren {
     public void addCildren() {
         showMessageDialog(null, "Следуйте дальнейшим инструкциям");
 
-        String personName = showInputDialog("Пожалуйста, введите имя:");
+        String humann = showInputDialog("Пожалуйста, введите имя:");
 
 
-        Designer_Human human = new Designer_Human(personName);
+        Designer_Human human = new Designer_Human(humann);
         String fatherName = showInputDialog(null, "Пожалуйста, введите имя отца (или нажмите enter, если оно " +
                 "недоступно)");
 

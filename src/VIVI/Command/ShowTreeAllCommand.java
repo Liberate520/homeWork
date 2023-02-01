@@ -1,17 +1,21 @@
 package VIVI.Command;
 
 import Homework_6.Designer_Human;
-import Print.IPrintList;
-import Print.PrintListInFor;
+import VIVI.Print.IPrint;
+import VIVI.Print.PrintTree;
 
-import java.util.List;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ShowTreeAllCommand implements  ICommand{
     @Override
     public void execute() {
         Designer_Human designer_human = new Designer_Human();
-        IPrintList print3 = new PrintListInFor();
-        print3.printList((List<Designer_Human>) designer_human);
+
+        IPrint print = new PrintTree();
+        print.printTree(); //Метод по умолчанию выводит на экран список designer_human
+
+        showMessageDialog(null,"Все древо " + print);
+
     }
-    //Перегрузил одни методом
+
 }

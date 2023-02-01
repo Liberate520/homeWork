@@ -13,7 +13,7 @@ public class ViewNew {
         Presenter presenter = new Presenter(
                 new AddHumanCommand(),
                 new AddCildrenCommand(),
-                new addParentsCommand(),
+                new AddParentsCommand(),
                 new SearchCommand(),
                 new ShowTreeAllCommand(),
                 new SortingCommand()

@@ -4,7 +4,7 @@ import Homework_6.Designer_Human;
 
 import java.io.*;
 
-public class Serializator implements interfaseSave {
+public class Serializator implements InterfaseSave {
     /**
      * Метод сохранения serializa
      *

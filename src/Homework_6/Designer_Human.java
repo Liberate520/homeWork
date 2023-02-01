@@ -18,9 +18,9 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
 
 
-    public List<Designer_Human> getDesigner_human() {
-        return designer_human;
-    }
+//    public List<Designer_Human> getDesigner_human() {
+//        return designer_human;
+//    }
 
     private List<Designer_Human> designer_human; //константа
 
@@ -54,7 +54,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
         Homework_6.Designer_Human.humans = humans;
     }
 
-    public Designer_Human(String personName) {
+    public Designer_Human(String human) {
         this(new ArrayList<>());
     }
 

@@ -1,4 +1,4 @@
-package Print;
+package VIVI.Print;
 
 import Homework_6.Designer_Human;
 

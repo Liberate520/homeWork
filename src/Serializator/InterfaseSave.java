@@ -4,7 +4,7 @@ import Homework_6.Designer_Human;
 
 import java.io.InvalidObjectException;
 
-public interface interfaseSave {
+public interface InterfaseSave {
 //
 
     boolean serializaSave(Designer_Human Human);

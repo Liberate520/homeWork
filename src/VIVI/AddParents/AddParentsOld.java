@@ -2,15 +2,31 @@ package VIVI.AddParents;
 
 import Homework_6.Designer_Human;
 
-public class AddParentsOld implements IAddParents{
+import static javax.swing.JOptionPane.showInputDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+
+public class AddParentsOld implements IAddParents {
     @Override
     public void addParents() {
-        Designer_Human designer_Human = new Designer_Human();
-        if (designer_Human.getFather()!= null) {
-            designer_Human.setFather(designer_Human.getFather());
+        showMessageDialog(null, "Следуйте дальнейшим инструкциям");
+        String human = showInputDialog("Пожалуйста, введите имя:");
+
+        Designer_Human designer_Human = new Designer_Human(human);
+        String fatherName = showInputDialog(null, "Пожалуйста, введите имя отца(Родителя) (или нажмите enter, если " +
+                "оно " +
+                "недоступно)");
+
+
+        if (!fatherName.isEmpty()) {
+            designer_Human.setFather((new Designer_Human(fatherName)));
         }
-        if (designer_Human.getMother() != null) {
-            designer_Human.setMother(designer_Human.getMother());
+        String motherName = showInputDialog("Пожалуйста, введите имя матери(Родителя) (или нажмите enter, если оно недоступно).");
+
+        if (!motherName.isEmpty()) {
+            designer_Human.setMother(new Designer_Human(motherName));
         }
+        showMessageDialog(null, "\"Выбранный человек : " + human + "\nДобавлены родители" +
+                "Мать : " + motherName +
+                "Отец: " + fatherName);
     }
 }

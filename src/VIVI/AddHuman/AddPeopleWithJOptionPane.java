@@ -33,7 +33,7 @@ public class AddPeopleWithJOptionPane implements IAddHumanSimple {
 
                     }
                     Designer_Human designer_human1 = new Designer_Human(personName, personSEX, personDate);
-                    designer_human.getDesigner_human().add(designer_human1);
+                    designer_human.getHumans().add(designer_human1);
                     showMessageDialog(null, "Новый человек добавлен в список: " + designer_human1);
 //
 //

@@ -21,7 +21,7 @@ public class AddPeopleOld implements IAddHuman {
         int personDate = Integer.parseInt(showInputDialog("Пожалуйста, год рождения:"));
 
         human = new Designer_Human(id++, personName, personSEX, personDate);
-        designer_human.getDesigner_human().add(human);
+        designer_human.getHumans().add(human);
         showMessageDialog(null,"Новый человек добавлен в список: "+human);
     }
 }
