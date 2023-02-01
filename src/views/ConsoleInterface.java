@@ -7,7 +7,7 @@ import java.util.Scanner;
 import commands.*;
 import presenters.*;
 
-public class ConsoleInterface implements Command {
+public class ConsoleInterface {
     private Presenter presenter;
     private List<Option> commandList;
     private Scanner scanner = new Scanner(System.in,"cp866");
@@ -23,7 +23,7 @@ public class ConsoleInterface implements Command {
         this.commandList.add(new AddFatherToHuman(this));
         this.commandList.add(new AddSpouseToHuman(this));
         this.commandList.add(new DeleteHuman(this));
-        this.commandList.add(new OutoutHumanByUuid(this));
+        this.commandList.add(new OutputHumanByUuid(this));
         this.commandList.add(new DeleteChildToHuman(this));
         this.commandList.add(new FindByFIO(this));
         this.commandList.add(new OutputEntireTree(this));
@@ -32,11 +32,11 @@ public class ConsoleInterface implements Command {
     }
 
     public void menu() {
-        System.out.println("Выберите действие:");
+        this.outStr("Выберите действие:\n");
         for (int i = 0; i < this.commandList.size(); i++) {
-            System.out.println(i + " - " + this.commandList.get(i).description());
+            this.outStr(i + " - " + this.commandList.get(i).description() + "\n");
         }
-        System.out.print("--> ");
+        this.outStr("--> ");
         String str;
 
         str = this.scanner.nextLine();
@@ -45,76 +45,152 @@ public class ConsoleInterface implements Command {
             if ((choice >= 0) & (choice < this.commandList.size())) {
                 this.commandList.get(Integer.parseInt(str)).execute();
             } else {
-                System.out.println("Нет команды. Еще раз");
+                this.outStr("Нет команды. Еще раз\n");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Не число. Еще раз.");
+            this.outStr("Не число. Еще раз.\n");
         }
     }
 
-    @Override
     public void createNewTree() {
-        this.presenter.createNewTree();
+        this.outResult(this.presenter.createNewTree());
+        this.menu();
     }
 
-    @Override
     public void createTreeFromFile() {
-        this.presenter.createTreeFromFile();
+        this.outResult(this.presenter.createTreeFromFile());
+        this.menu();
     }
 
-    @Override
     public void addHuman() {
-        this.presenter.addHuman();
+        outStr("Введите Фамилию:\n--> ");
+        String lastName = inputText();
+        outStr("Введите Имя:\n--> ");
+        String name = inputText();
+        outStr("Введите Отчество:\n--> ");
+        String secondName = inputText();
+        outStr("Введите Пол\n0 - женский\n1 - мужской:\n--> ");
+        int gender = 0;
+        Boolean loop = true;
+        while (loop) {
+            try {
+                gender = Integer.parseInt(inputText());
+                if ((gender == 0 || gender == 1)) {
+                    loop = false;
+                } else {
+                    this.outStr("0 или 1. Еще раз.:\n--> ");
+                }
+            } catch (NumberFormatException e) {
+                this.outStr("Не число. Еще раз.");
+            }
+        }
+
+        String outUuid = this.presenter.addHuman(lastName, name, secondName, gender);
+        if (outUuid.length() > 0) {
+            this.outResult(outUuid + " -> " + this.presenter.outputHumanByUuid(outUuid) + " создан");
+
+            this.outStr("Uuid супруга/супруги или 0 - если нет:\n--> ");
+            String uuid = inputText();
+
+            if (!uuid.equals("0")) {
+                this.outResult(this.presenter.addSpouseToHuman(outUuid, uuid));
+            }
+            
+            this.outStr("Uuid отца или 0 - если нет:\n--> ");
+            uuid = this.inputText();
+
+            if (!uuid.equals("0")) {
+                this.outResult(this.presenter.addFatherToHuman(uuid, outUuid));
+            }
+
+            outStr("Uuid матери или 0 - если нет:\n--> ");
+            uuid = this.inputText();
+
+            if (!uuid.equals("0")) {
+                this.presenter.addMotherToHuman(outUuid, uuid);
+            }
+
+            this.outResult(this.presenter.outputHumanByUuid(outUuid));
+        } else {
+            this.outStr("Ошибка создания!");
+        }
+        this.menu();
     }
 
-    @Override
     public void deleteHuman() {
-        this.presenter.deleteHuman();
+        outStr("Введите uuid:\n--> ");
+        String uuid = this.inputText();
+        this.outResult(this.presenter.deleteHuman(uuid));
+        this.menu();
     }
 
-    @Override
-    public void outoutHumanByUuid() {
-        this.presenter.outoutHumanByUuid();
+    public void outputHumanByUuid() {
+        outStr("Введите uuid:\n--> ");
+        String uuid = inputText();
+        this.outResult(this.presenter.outputHumanByUuid(uuid));
+        this.menu();
     }
 
-    @Override
     public void deleteChildToHuman() {
-        this.presenter.deleteChildToHuman();
+        outStr("Введите uuid родителя:\n--> ");
+        String uuidHuman = inputText();
+        outStr("Введите uuid ребенка:\n--> ");
+        String uuidChild = inputText();
+        this.outResult(this.presenter.deleteChildToHuman(uuidHuman, uuidChild));
+        this.menu();
     }
 
-    @Override
     public void findByFIO() {
-        this.presenter.findByFIO();
+        outStr("Введите ФИО:\n--> ");
+        String fio = inputText();
+        this.outResult(this.presenter.findByFIO(fio));
+        this.menu();
     }
 
-    @Override
     public void outputEntireTree() {
-        this.presenter.outputEntireTree();
+        this.outResult(this.presenter.outputEntireTree());
+        this.menu();
     }
 
-    @Override
     public void writeTreeToFile() {
-        this.presenter.writeTreeToFile();
+        this.outResult(this.presenter.writeTreeToFile());
+        this.menu();
     }
 
-    @Override
     public void addMotherToHuman() {
-        this.presenter.addMotherToHuman();
+        this.outStr("Введите uuid матери:\n--> ");
+        String uuidHuman = inputText();
+        this.outStr("Введите uuid ребенка:\n--> ");
+        String uuidChild = inputText();
+        this.outResult(this.presenter.addMotherToHuman(uuidHuman, uuidChild));
+        this.menu();
     }
 
-    @Override
     public void addFatherToHuman() {
-        this.presenter.addFatherToHuman();
+        this.outStr("Введите uuid отца:\n--> ");
+        String uuidHuman = inputText();
+        this.outStr("Введите uuid ребенка:\n--> ");
+        String uuidChild = inputText();
+        this.outResult(this.presenter.addFatherToHuman(uuidHuman, uuidChild));
+        this.menu();
     }
 
-    @Override
     public void addSpouseToHuman() {
-        this.presenter.addSpouseToHuman();
+        this.outStr("Введите uuid:\n--> ");
+        String uuidFirst = inputText();
+        this.outStr("Введите uuid супруга/супруги:\n--> ");
+        String uuidSecond = inputText();
+        this.outResult(this.presenter.addSpouseToHuman(uuidFirst, uuidSecond));
+        this.menu();
     }
 
-    @Override
     public void establishKinshipRelationship() {
-        this.presenter.establishKinshipRelationship();
+        this.outStr("Введите uuid:\n--> ");
+        String uuidFirst = inputText();
+        this.outStr("Введите uuid второго человека:\n--> ");
+        String uuidSecond = inputText();
+        this.outResult(this.presenter.establishKinshipRelationship(uuidFirst, uuidSecond));
+        this.menu();
     }
 
     public void outResult(String text){

@@ -36,7 +36,6 @@ public class Human implements Serializable{
 
     @Override
     public String toString() {
-        
         String text = "";
         if (this.children  != null) {
             for (Human hum : this.children) {
@@ -46,6 +45,13 @@ public class Human implements Serializable{
 
         return this.getUuid() + " -> " + this.getFIOtoString() + "\n"
             + "пол: " + (gender == Gender.MAN ? "мужской" : "женский") + "\n"
+            + (
+                this.getSpouse() != null ?
+                (
+                    (this.getSpouse().getGender() == Gender.MAN ? "муж: " : "жена: ")
+                    + "\n" + this.getSpouse().getUuid() + " -> " + this.getSpouse().getFIOtoString() + "\n"
+                ) : ""
+            )
             + "отец: "
             + (
                 this.parentFather != null ? 

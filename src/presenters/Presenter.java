@@ -6,6 +6,7 @@ import java.util.Map;
 import enums.Gender;
 import models.*;
 import relationFamilyTree.Relationships;
+import views.Command;
 import views.ConsoleInterface;
 import writables.FileHandler;
 
@@ -13,8 +14,7 @@ public class Presenter implements Command {
 
     private FamilyTree<Human> familyTree;
     private ConsoleInterface consoleInterface;
-    private String text;   
-    
+    private String text;
 
     public Presenter() {
         this.familyTree = new FamilyTree<>();
@@ -23,22 +23,19 @@ public class Presenter implements Command {
     }
     
     @Override
-    public void createNewTree() {
-        
+    public String createNewTree() {
         this.familyTree.getDemoMap();
-        consoleInterface.outResult("Демо дерево создано");
-        this.consoleInterface.menu();
+        return "Демо дерево создано";
     }
 
     @Override
-    public void createTreeFromFile() {
+    public String createTreeFromFile() {
         this.familyTree.read();
-        consoleInterface.outResult("Дерево из файла загружено");
-        this.consoleInterface.menu();
+        return "Дерево из файла загружено";
     }
 
     @Override
-    public void addHuman() {
+    public String addHuman(String uuidLastName, String uuidName, String uuidSecondName, int genderInt) {
         this.consoleInterface.outStr("Введите Фамилию:\n--> ");
         String lastName = this.consoleInterface.inputText();
         this.consoleInterface.outStr("Введите Имя:\n--> ");
@@ -48,255 +45,148 @@ public class Presenter implements Command {
         this.consoleInterface.outStr("Введите Пол\n0 - женский\n1 - мужской:\n--> ");
         Gender gender = Gender.MAN;
         Boolean loop = true;
-        while (loop) {
-            try {
-                int choice = Integer.parseInt(this.consoleInterface.inputText());
-                if ((choice == 0)) {
-                    gender = Gender.WOMAN;
-                    loop = false;
-                } else if (((choice == 1))) {
-                    gender = Gender.MAN;
-                    loop = false;
-                } else {
-                    this.consoleInterface.outStr("0 или 1. Еще раз.:\n--> ");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Не число. Еще раз.");
-            }
+
+        if (genderInt == 0) {
+            gender = Gender.WOMAN;
+        } else if (genderInt == 1) {
+            gender = Gender.MAN;
         }
 
         Human human = new Human(lastName, name, secondName, gender);
-        this.consoleInterface.outResult(human.getUuid() + " -> " + human.getFIOtoString() + " создан");
-
-        this.consoleInterface.outStr("Uuid супруга/супруги или 0 - если нет:\n--> ");
-        this.text = this.consoleInterface.inputText();
-
-        if (!this.text.equals("0")) {
-            human.setSpouse(this.familyTree.getHumanByUuid(this.text));  
-        }
-        
-        this.consoleInterface.outStr("Uuid отца или 0 - если нет:\n--> ");
-        this.text = this.consoleInterface.inputText();
-
-        if (!this.text.equals("0")) {
-            human.setParentFather(this.familyTree.getHumanByUuid(this.text));
-        }
-
-        this.consoleInterface.outStr("Uuid матери или 0 - если нет:\n--> ");
-        this.text = this.consoleInterface.inputText();
-
-        if (!this.text.equals("0")) {
-            human.setParentMother(this.familyTree.getHumanByUuid(this.text));
-        }
-
-        this.consoleInterface.outResult(human.toString());
+        return human.getUuid();
     }
 
     @Override
-    public void deleteHuman() {
-        this.consoleInterface.outStr("Введите uuid:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        Human human = this.familyTree.removeHumanByUuid(this.text);
-        consoleInterface.outResult(human.getUuid() + " -> " + human.getFIOtoString() + " удален!");
-        this.consoleInterface.menu();
+    public String deleteHuman(String uuidHuman) {
+        Human human = this.familyTree.removeHumanByUuid(uuidHuman);
+        return humanToString(human) + " удален!";
     }
 
     @Override
-    public void outoutHumanByUuid() {
-        this.consoleInterface.outStr("Введите uuid:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        
-        Human human = this.familyTree.getHumanByUuid(this.text);
+    public String outputHumanByUuid(String uuidHuman) {
+        Human human = this.familyTree.getHumanByUuid(uuidHuman);
         if (human != null) {
-            this.consoleInterface.outResult(human.toString());
-        } else {
-            this.consoleInterface.outResult("По этому uuid ничего не найдено");
+            return human.toString();
         }
-        this.consoleInterface.menu();
-        
+
+        return "По этому uuid ничего не найдено";
     }
 
     @Override
-    public void deleteChildToHuman() {
-        this.consoleInterface.outStr("Введите uuid родителя:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        
-        Human human = this.familyTree.getHumanByUuid(this.text);
+    public String deleteChildToHuman(String uuidHuman, String uuidChild) {
+        Human human = this.familyTree.getHumanByUuid(uuidHuman);
         if (human != null) {
-            this.consoleInterface.outResult(human.getUuid() + " -> " + human.getFIOtoString());
-            this.consoleInterface.outStr("Введите uuid ребенка:\n--> ");
-            this.text = this.consoleInterface.inputText();
-            Human human2 = this.familyTree.getHumanByUuid(this.text);
+            Human human2 = this.familyTree.getHumanByUuid(uuidChild);
             if (human2 != null) {
                 Human.removeChild(human, human2);
-                this.consoleInterface.outResult(
-                    "Ребенок: " + human.getUuid() + " -> " + human.getFIOtoString() + " удален\n"
-                    + "у родителя : " + human2.getUuid() + " -> " + human2.getFIOtoString()
+                return (
+                    "Ребенок: " + humanToString(human) + " удален\n"
+                    + "у родителя : " + humanToString(human2)
                 );
-            } else {
-                this.consoleInterface.outResult("По этому uuid ничего не найдено");
             }
-        } else {
-            this.consoleInterface.outResult("По этому uuid ничего не найдено");
         }
 
-        this.consoleInterface.menu();
+        return "По этому uuid ничего не найдено";
     }
 
     @Override
-    public void findByFIO() {
-        this.consoleInterface.outStr("Введите ФИО:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        List<Human> humans = this.familyTree.serchHumanByFio(this.text);
-        
+    public String findByFIO(String fio) {
+        List<Human> humans = this.familyTree.serchHumanByFio(fio);
         this.text = "";
-
         if (humans.size() > 0) {
             for (Human hum : humans) {
-                this.text = (this.text.length() > 0 ? this.text + "\n" : "")
-                    + hum.getUuid() + " -> " + hum.getFIOtoString();
+                this.text = (this.text.length() > 0 ? this.text + "\n" : "") + humanToString(hum);
             }
         }
 
-        this.consoleInterface.outResult(this.text);
-        this.consoleInterface.menu();
+        return this.text;
     }
 
     @Override
-    public void outputEntireTree() {
-        this.printHumans();
-        this.consoleInterface.menu();
+    public String outputEntireTree() {
+        Map<String, Human> humans = this.familyTree.getHumanMap();
+        this.text = "";
+        humans.forEach((id, x) -> {
+            this.text = (text.length() > 0 ? this.text + "\n" : "") + id + " -> " + x.getFIOtoString();
+        });
+  
+        return this.text;
     }
 
     @Override
-    public void writeTreeToFile() {
+    public String writeTreeToFile() {
         this.familyTree.save();
-        consoleInterface.outResult("Дерево записано в файл");
-        this.consoleInterface.menu();
+        return "Дерево записано в файл";
     }
 
     @Override
-    public void addMotherToHuman() {
-        this.consoleInterface.outStr("Введите uuid:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        
-        Human human = this.familyTree.getHumanByUuid(this.text);
+    public String addMotherToHuman(String uuidHuman, String uuidMother) {
+        Human human = this.familyTree.getHumanByUuid(uuidHuman);
         if (human != null) {
-            this.consoleInterface.outResult(human.toString());
-            this.consoleInterface.outStr("Uuid матери:\n--> ");
-            this.text = this.consoleInterface.inputText();
-            Human human2 = this.familyTree.getHumanByUuid(this.text);
+            Human human2 = this.familyTree.getHumanByUuid(uuidMother);
             if (human2 != null) {
                 human.setParentMother(human2);
-                this.consoleInterface.outResult(
-                    "Мать" + human2.getUuid()
-                    + " -> " + human2.getFIOtoString()
-                    + " назначена"
-                );
-            } else {
-                this.consoleInterface.outResult("По этому uuid ничего не найдено");
+                return "Мать" + humanToString(human2) + " назначена";
             }
-        } else {
-            this.consoleInterface.outResult("По этому uuid ничего не найдено");
         }
 
-        this.consoleInterface.menu();
+        return "По этому uuid ничего не найдено";
     }
 
     @Override
-    public void addFatherToHuman() {
-        this.consoleInterface.outStr("Введите uuid:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        
-        Human human = this.familyTree.getHumanByUuid(this.text);
+    public String addFatherToHuman(String uuidHuman, String uuidFather) {
+        Human human = this.familyTree.getHumanByUuid(uuidHuman);
         if (human != null) {
-            this.consoleInterface.outResult(human.getUuid() + " -> " + human.getFIOtoString());
-            this.consoleInterface.outStr("Uuid отца:\n--> ");
-            this.text = this.consoleInterface.inputText();
-            Human human2 = this.familyTree.getHumanByUuid(this.text);
+            Human human2 = this.familyTree.getHumanByUuid(uuidFather);
             if (human2 != null) {
                 human.setParentFather(human2);
-                this.consoleInterface.outResult(
-                    "Отец" + human2.getUuid()
-                    + " -> " + human2.getFIOtoString()
-                    + " назначен"
-                );
-            } else {
-                this.consoleInterface.outResult("По этому uuid ничего не найдено");
+                return "Отец" + humanToString(human2) + " назначен";
             }
-        } else {
-            this.consoleInterface.outResult("По этому uuid ничего не найдено");
         }
-
-        this.consoleInterface.menu();
+        
+        return "По этому uuid ничего не найдено";
     }
 
     @Override
-    public void addSpouseToHuman() {
-        this.consoleInterface.outStr("Введите uuid:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        
-        Human human = this.familyTree.getHumanByUuid(this.text);
+    public String addSpouseToHuman(String uuidFirst, String uuidSecond) {
+        Human human = this.familyTree.getHumanByUuid(uuidFirst);
         if (human != null) {
-            this.consoleInterface.outResult(human.getUuid() + " -> " + human.getFIOtoString());
-            this.consoleInterface.outStr("Uuid супруга/супруги:\n--> ");
-            this.text = this.consoleInterface.inputText();
-            Human human2 = this.familyTree.getHumanByUuid(this.text);
+            Human human2 = this.familyTree.getHumanByUuid(uuidSecond);
             if (human2 != null) {
                 human.setSpouse(human2);
-                this.consoleInterface.outResult(
-                    human.getUuid() + " -> " + human.getFIOtoString() + "\n"
-                    + human2.getUuid() + " -> " + human2.getFIOtoString() + "\n" 
+                return (
+                    humanToString(human) + "\n"
+                    + humanToString(human2) + "\n" 
                     + "муж и жена"
                 );
-            } else {
-                this.consoleInterface.outResult("По этому uuid ничего не найдено");
             }
-        } else {
-            this.consoleInterface.outResult("По этому uuid ничего не найдено");
         }
 
-        this.consoleInterface.menu();
+        return "По этому uuid ничего не найдено";
     }
 
     @Override
-    public void establishKinshipRelationship() {
-        this.consoleInterface.outStr("Введите uuid:\n--> ");
-        this.text = this.consoleInterface.inputText();
-        
-        Human human = this.familyTree.getHumanByUuid(this.text);
+    public String establishKinshipRelationship(String uuidFirst, String uuidSecond) {
+        Human human = this.familyTree.getHumanByUuid(uuidFirst);
         if (human != null) {
-            this.consoleInterface.outResult(human.getUuid() + " -> " + human.getFIOtoString());
-            this.consoleInterface.outStr("Введите uuid второго человека:\n--> ");
-            this.text = this.consoleInterface.inputText();
-            Human human2 = this.familyTree.getHumanByUuid(this.text);
+            Human human2 = this.familyTree.getHumanByUuid(uuidSecond);
             if (human2 != null) {
-                this.consoleInterface.outResult(
-                    "Объект: " + human.getUuid() + " -> " + human.getFIOtoString() + "\n"
+                return (
+                    "Объект: " + humanToString(human) + "\n"
                     + Relationships.getRelationships(human, human2) + "\n"
-                    + "Объекту: " + human2.getUuid() + " -> " + human2.getFIOtoString()
+                    + "Объекту: " + humanToString(human2)
                 );
-            } else {
-                this.consoleInterface.outResult("По этому uuid ничего не найдено");
             }
-        } else {
-            this.consoleInterface.outResult("По этому uuid ничего не найдено");
         }
-
-        this.consoleInterface.menu();
+        
+        return "По этому uuid ничего не найдено";
     }
 
     public void start() {
         this.consoleInterface.menu();
     }
 
-    public void printHumans() {
-        this.text = ""; 
-        Map<String, Human> humans = this.familyTree.getHumanMap();
-        humans.forEach((id, x) -> {
-            this.text = (this.text.length() > 0 ? this.text + "\n" : "") + id + " -> " + x.getFIOtoString();
-        });
-  
-        this.consoleInterface.outResult(this.text);
+    public String humanToString(Human human) {
+        return human.getUuid() + " -> " + human.getFIOtoString();
     }
 }
