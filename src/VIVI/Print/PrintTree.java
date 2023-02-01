@@ -18,7 +18,7 @@ public class PrintTree implements IPrint,Iterable<Designer_Human>{
 
     @Override
     public Iterator<Designer_Human> iterator() {
-        return new StaddyIterator(designer_human.getHumans());
+        return new StaddyIterator(designer_human.getDesigner_human());
     }
 
     @Override

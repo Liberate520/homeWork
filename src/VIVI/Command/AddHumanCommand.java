@@ -9,7 +9,6 @@ public class AddHumanCommand implements ICommand {
 
     @Override
     public void execute() {
-//        Designer_Human designer_human = new Designer_Human();
         IAddHumanSimple iAddHuman = new AddPeopleWithJOptionPane();
         iAddHuman.addHumanSimple();
 

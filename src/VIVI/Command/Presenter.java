@@ -1,29 +1,33 @@
 package VIVI.Command;
 
 public class Presenter {
-    ICommand AddСhildrenCommand;
+
+
     ICommand AddHumanCommand;
+    ICommand AddСhildrenCommand;
     ICommand AddParentsCommand;
     ICommand SearchCommand;
     ICommand ShowTreeAllCommand;
     ICommand SortingCommand;
 
-    public Presenter(ICommand addCildrenCommand, ICommand addHumanCommand, ICommand addParentsCommand, ICommand searchCommand, ICommand showTreeAllCommand, ICommand sortingCommand) {
-        this.AddСhildrenCommand = addCildrenCommand;
+    public Presenter(ICommand addHumanCommand,ICommand addCildrenCommand , ICommand addParentsCommand,
+                     ICommand searchCommand, ICommand showTreeAllCommand, ICommand sortingCommand) {
         this.AddHumanCommand = addHumanCommand;
+        this.AddСhildrenCommand = addCildrenCommand;
         this.AddParentsCommand = addParentsCommand;
         this.SearchCommand = searchCommand;
         this.ShowTreeAllCommand = showTreeAllCommand;
         this.SortingCommand = sortingCommand;
     }
 
+    public void AddHumanCommandRecord() {
+        AddHumanCommand.execute();
+    }
+
     public void AddСhildrenCommandRecord() {
         AddСhildrenCommand.execute();
     }
 
-    public void AddHumanCommandRecord() {
-        AddHumanCommand.execute();
-    }
 
     public void AddParentsCommandRecord() {
         AddParentsCommand.execute();

@@ -2,6 +2,7 @@ package VIVI.AddHuman;
 
 import Homework_6.Designer_Human;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -17,7 +18,7 @@ public class AddPeopleWithJOptionPane implements IAddHumanSimple {
     @Override
     public void addHumanSimple() {//Без параметров (тем самым можно избежать создание экземпляра класса)
         String end = "Готово";
-
+        outer:
         for (; ; ) {
             String personName = showInputDialog("Пожалуйста, введите имя:");
             if (personName.equals(end)) ;
@@ -37,6 +38,15 @@ public class AddPeopleWithJOptionPane implements IAddHumanSimple {
                     showMessageDialog(null, "Новый человек добавлен в список: " + designer_human1);
 //
 //
+                }
+            }
+            String txt2 = showInputDialog(null, "Повторить Выбор ?\nДа? Нет?");
+            if (Objects.equals(txt2, "Да")) {
+                continue outer;
+            } else {
+                Objects.equals(txt2, "Нет");
+                {
+                    break outer; //я не знаю почему светит серым, но все работает
                 }
             }
         }

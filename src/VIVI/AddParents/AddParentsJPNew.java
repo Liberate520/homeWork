@@ -1,25 +1,18 @@
-package VIVI.AddCildren;
+package VIVI.AddParents;
 
 import Homework_6.Designer_Human;
-import VIVI.Print.IPrint;
-import VIVI.Print.PrintListAll;
-import VIVI.Print.PrintTree;
-
 
 import java.util.Objects;
 
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-
-public class AddChildrenJOptionPane implements IAddCildren {
-
-
+public class AddParentsJPNew implements IAddParents {
     @Override
-    public void addCildren() {
+    public void addParents() {
         outer:
         for (; ; ) {
-            String humann = showInputDialog("Пожалуйста введите имя человека \nк которому будем добавлять детей :");
+            String humann = showInputDialog("Пожалуйста введите имя человека \nк которому будем добавлять родителей :");
             Designer_Human human = new Designer_Human(humann);
 
             String fatherName = showInputDialog(null, "Пожалуйста, введите имя отца (или нажмите enter, если оно " + "недоступно)");
@@ -49,7 +42,4 @@ public class AddChildrenJOptionPane implements IAddCildren {
         }
     }
 }
-
-
-
 
