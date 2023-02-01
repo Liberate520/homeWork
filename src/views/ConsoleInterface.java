@@ -63,13 +63,13 @@ public class ConsoleInterface {
     }
 
     public void addHuman() {
-        outStr("Введите Фамилию:\n--> ");
+        this.outStr("Введите Фамилию:\n--> ");
         String lastName = inputText();
-        outStr("Введите Имя:\n--> ");
+        this.outStr("Введите Имя:\n--> ");
         String name = inputText();
-        outStr("Введите Отчество:\n--> ");
+        this.outStr("Введите Отчество:\n--> ");
         String secondName = inputText();
-        outStr("Введите Пол\n0 - женский\n1 - мужской:\n--> ");
+        this.outStr("Введите Пол\n0 - женский\n1 - мужской:\n--> ");
         int gender = 0;
         Boolean loop = true;
         while (loop) {
@@ -103,7 +103,7 @@ public class ConsoleInterface {
                 this.outResult(this.presenter.addFatherToHuman(uuid, outUuid));
             }
 
-            outStr("Uuid матери или 0 - если нет:\n--> ");
+            this.outStr("Uuid матери или 0 - если нет:\n--> ");
             uuid = this.inputText();
 
             if (!uuid.equals("0")) {
@@ -118,30 +118,30 @@ public class ConsoleInterface {
     }
 
     public void deleteHuman() {
-        outStr("Введите uuid:\n--> ");
+        this.outStr("Введите uuid:\n--> ");
         String uuid = this.inputText();
         this.outResult(this.presenter.deleteHuman(uuid));
         this.menu();
     }
 
     public void outputHumanByUuid() {
-        outStr("Введите uuid:\n--> ");
+        this.outStr("Введите uuid:\n--> ");
         String uuid = inputText();
         this.outResult(this.presenter.outputHumanByUuid(uuid));
         this.menu();
     }
 
     public void deleteChildToHuman() {
-        outStr("Введите uuid родителя:\n--> ");
+        this.outStr("Введите uuid родителя:\n--> ");
         String uuidHuman = inputText();
-        outStr("Введите uuid ребенка:\n--> ");
+        this.outStr("Введите uuid ребенка:\n--> ");
         String uuidChild = inputText();
         this.outResult(this.presenter.deleteChildToHuman(uuidHuman, uuidChild));
         this.menu();
     }
 
     public void findByFIO() {
-        outStr("Введите ФИО:\n--> ");
+        this.outStr("Введите ФИО:\n--> ");
         String fio = inputText();
         this.outResult(this.presenter.findByFIO(fio));
         this.menu();
