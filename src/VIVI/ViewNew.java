@@ -5,6 +5,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import VIVI.Command.*;
 
+import javax.swing.*;
 import java.util.Objects;
 
 public class ViewNew {
@@ -20,32 +21,47 @@ public class ViewNew {
 
         );
 
-        showMessageDialog(null, """ 
-                Добро пожаловать в программу генеалогическова древа
-                              Выберете действие
-                                
-                                1.Добавить пользователя
-                                2.Добавить детей
-                                3.Добавить родителей
-                                4.Показать все древо
-                                5.Поиск по имени
-                                6.Сортировка
-                """);
-        String txt = showInputDialog("Напишите действие");
-        if (Objects.equals(txt, "Добавить пользователя")) {
-            presenter.AddHumanCommandRecord();
-        } else if (Objects.equals(txt, "Добавить детей")) {
-            presenter.AddСhildrenCommandRecord();
-        } else if (Objects.equals(txt, "Добавить родителей")) {
-            presenter.AddParentsCommandRecord();
-        }else if (Objects.equals(txt, "Показать все древо")) {
-            presenter.ShowTreeAllCommandRecord();
-        }else if (Objects.equals(txt, "Поиск по имени")) {
-            presenter.SearchCommandRecord();
-        }else if (Objects.equals(txt, "Сортировка")) {
-            presenter.SortingCommand();
+        outer:
+        for (; ; ) {
+            String txt = showInputDialog("""
+                    Добро пожаловать в программу генеалогическова древа\n" +
+                    "Выберете действие\n\n\n" 
+                    "Добавить пользователя" 
+                    "Добавить детей" 
+                    "Добавить родителей" 
+                    "Показать все древо" 
+                    "Поиск по имени" 
+                    "Сортировка""");
+            if (Objects.equals(txt, "Добавить пользователя")) {
+                presenter.AddHumanCommandRecord();
+            } else if (Objects.equals(txt, "Добавить детей")) {
+                presenter.AddСhildrenCommandRecord();
+            } else if (Objects.equals(txt, "Добавить родителей")) {
+                presenter.AddParentsCommandRecord();
+            } else if (Objects.equals(txt, "Показать все древо")) {
+                presenter.ShowTreeAllCommandRecord();
+            } else if (Objects.equals(txt, "Поиск по имени")) {
+                presenter.SearchCommandRecord();
+            } else if (Objects.equals(txt, "Сортировка")) {
+                presenter.SortingCommand();
+            } else {
+                String txt2 = showInputDialog(null, "Повторить Выбор ?\nДа? Нет?");
+                if (Objects.equals(txt2, "Да")) {
+                    continue outer;
+                } else {
+                    Objects.equals(txt2, "Нет");{
+                        break outer; //я не знаю почему светит серым, но все работает
+                    }
+                }
+
+
+            }
+
+
         }
     }
-
-
 }
+/*
+выбор между исключением ошибки и циклом я выбрал цикл )))
+Можно было использовать и while, но пришлось бы много прописывать break
+ */

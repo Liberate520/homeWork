@@ -3,26 +3,34 @@ package VIVI.Search;
 import Homework_6.Designer_Human;
 
 import java.util.List;
-import java.util.Scanner;
 
-import static java.lang.System.in;
+import static javax.swing.JOptionPane.showInputDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
-public class SearchHuman implements ISearch{
+public class SearchHuman implements ISearch {
     @Override
     public void search(List<Designer_Human> humans) {
-        Scanner iScanner = new Scanner(in);
 
-        System.out.println("Введите имя человека для поиска: ");
+        String personName = showInputDialog("Пожалуйста, введите имя:\nИли напишите 'exit для выхода");
+        outer:
+        for (; ; ) {
+            for (Designer_Human сС : humans) {
+                if (personName.equals(сС.getName())) {
+                    showMessageDialog(null, "вывод: " + сС);
 
+                } else {
+                    showMessageDialog(null, "Нет людей с таким именем.");
+                    continue outer;
 
-        String human = iScanner.nextLine();
-        for (Designer_Human с : humans) {
-            if (human.equals(с.getName())) {
-                System.out.println(с);
-            } else {
-                System.out.println("Нет людей с таким именем.");
+                } if (personName.equals("exit")) {
+                    break outer;
+                }
             }
-            break;
         }
     }
 }
+
+/*
+Переделал класс, добавил вариант зацикливания через for на случай не правильного ввода, + добавил возможность через
+коноль выйти из цикла.
+ */
