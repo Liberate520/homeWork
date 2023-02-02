@@ -1,9 +1,6 @@
 package VIVI.AddCildren;
 
 import Homework_6.Designer_Human;
-import VIVI.Print.IPrint;
-import VIVI.Print.PrintListAll;
-import VIVI.Print.PrintTree;
 
 
 import java.util.Objects;
