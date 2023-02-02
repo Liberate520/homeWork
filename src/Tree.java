@@ -1,24 +1,16 @@
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree<E extends Members> implements Iterable, Serializable {
+public class Tree<E extends Members> implements Serializable, Iterable {
 
     private List<E> tree;
+    public Object iterator;
 
-    public Tree(List<E> humans) {
-        this.tree = humans;
-    }
-
-    public Tree() {
-        this(new ArrayList<>());
-    }
-
-    public List<E> getTree() {
-        return tree;
+    public Tree(List<E> tree) {
+        this.tree = tree;
     }
 
     public void setTree(List<E> humans) {
@@ -29,19 +21,14 @@ public class Tree<E extends Members> implements Iterable, Serializable {
         tree.add(human);
     }
 
-    public List<E> getChildrens(E human) {
-        List<E> chil = new ArrayList<>();
-        for (E item : tree) {
-            if (item.getFather() == human || item.getMother() == human) {
-                chil.add(item);
-            }
-        }
-        return chil;
+    public E getMember(int i) {
+        return tree.get(i);
     }
 
     @Override
     public Iterator iterator() {
         return new TreeIterator(tree);
+
     }
 
     public void sortBySurname() {
@@ -50,6 +37,24 @@ public class Tree<E extends Members> implements Iterable, Serializable {
 
     public void sortByDate() {
         Collections.sort(tree);
+    }
+
+    public int findHumanIndx(String surname, String name) {
+
+        for (E item : tree) {
+            if (item.getName().equals(name) & item.getSurname().equals(surname)) {
+                return tree.indexOf(item);
+            }
+        }
+        return -1;
+    }
+
+    public int sizeTree() {
+        return tree.size();
+    }
+
+    public void get(int i) {
+        tree.get(0).toString();
     }
 
 }
