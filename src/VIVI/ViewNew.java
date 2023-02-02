@@ -4,11 +4,14 @@ import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
+import Converted.IConverted;
+import Converted.PersonConverted;
 import VIVI.Command.*;
 
 import java.util.Objects;
 
 public class ViewNew {
+    IConverted iConverted = new PersonConverted();
 
     public void ViewvNEW() {
         //Новый метод вызова
@@ -36,6 +39,7 @@ public class ViewNew {
                     \t\t\t\t\t\t\t\t\tПоиск по имени
                     \t\t\t\t\t\t\t\t\tСортировка""");
             switch (txt.toLowerCase()) {
+                //iConverted.personСonvertedUpper_Lower(txt) -> не смог применить поскольку пришлось бы ломать метод
                 case "добавить человека" -> presenter.AddHumanCommandRecord();
                 case "добавить детей" -> presenter.AddСhildrenCommandRecord();
                 case "добавить родителей" -> presenter.AddParentsCommandRecord();

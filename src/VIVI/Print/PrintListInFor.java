@@ -10,18 +10,9 @@ public class PrintListInFor implements IPrintList {
     @Override
     public void printList(List<Designer_Human> humans) {
         for (Designer_Human HHE : humans) {
-            showMessageDialog(null,HHE);
-            
-        }
-        
-    }
-    
-    public void printLidst() {
-        List<Designer_Human> humans = (List<Designer_Human>) new Designer_Human();
-        for (Designer_Human HHE : humans) {
-            showMessageDialog(null,HHE);
+            showMessageDialog(null, HHE);
 
         }
 
     }
-    }
+}

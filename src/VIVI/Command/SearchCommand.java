@@ -12,7 +12,7 @@ public class SearchCommand implements ICommand{
         Designer_Human designer_human = new Designer_Human();
 
         ISearch search = new SearchHuman();
-        search.search((List<Designer_Human>) designer_human);
+        search.search(designer_human.getHumans());
     }
     //Тут добавил один класс для наглядности, остальные на отдельные кнопки.
 }

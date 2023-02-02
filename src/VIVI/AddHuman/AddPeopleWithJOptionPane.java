@@ -1,11 +1,11 @@
 package VIVI.AddHuman;
 
+import Converted.IConverted;
+import Converted.PersonConverted;
 import Homework_6.Designer_Human;
 
 import java.util.Objects;
-import java.util.Scanner;
 
-import static java.lang.System.in;
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -14,6 +14,7 @@ public class AddPeopleWithJOptionPane implements IAddHumanSimple {
     Designer_Human designer_human;
     //Переделал метод убрал все лишнее поменял логику использовал конструктор людей, код читабельнее и меньше
 //Поработал с инкапсуляцией
+    IConverted iConverted = new PersonConverted();//Объект класса интерфейса (Каждое слово с заглавной буквы)
 
     @Override
     public void addHumanSimple() {//Без параметров (тем самым можно избежать создание экземпляра класса)
@@ -21,9 +22,11 @@ public class AddPeopleWithJOptionPane implements IAddHumanSimple {
         outer:
         for (; ; ) {
             String personName = showInputDialog("Пожалуйста, введите имя:");
+            iConverted.personСonvertedUpper_Lower(personName);
             if (personName.equals(end)) ;
             {
                 String personSEX = showInputDialog("Пожалуйста, введите пол:");
+                iConverted.personСonvertedUpper_Lower(personSEX);
                 if (personSEX.equals(end)) ;
                 {
                     Integer personDate = Integer.parseInt(showInputDialog("Пожалуйста, год рождения:"));
@@ -41,10 +44,10 @@ public class AddPeopleWithJOptionPane implements IAddHumanSimple {
                 }
             }
             String txt2 = showInputDialog(null, "Повторить Выбор ?\nДа? Нет?");
-            if (Objects.equals(txt2, "Да")) {
+            if (Objects.equals(txt2.toLowerCase(), "да")) {
                 continue outer;
             } else {
-                Objects.equals(txt2, "Нет");
+                Objects.equals(txt2.toLowerCase(), "нет");
                 {
                     break outer; //я не знаю почему светит серым, но все работает
                 }

@@ -1,7 +1,8 @@
 package VIVI.AddCildren;
 
+import Converted.IConverted;
+import Converted.PersonConverted;
 import Homework_6.Designer_Human;
-
 
 import java.util.Objects;
 
@@ -11,32 +12,37 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddChildrenJOptionPane implements IAddCildren {
 
+    IConverted iConverted = new PersonConverted();//Объект класса интерфейса (Каждое слово с заглавной буквы)
+
 
     @Override
     public void addCildren() {
         outer:
         for (; ; ) {
-            String humann = showInputDialog("Пожалуйста введите имя человека \nк которому будем добавлять детей :");
-            Designer_Human human = new Designer_Human(humann);
+
+            String person = showInputDialog("Пожалуйста введите имя человека \nк которому будем добавлять детей :");
+            iConverted.personСonvertedUpper_Lower(person);
+
+            Designer_Human human = new Designer_Human(person);
 
             String fatherName = showInputDialog(null, "Пожалуйста, введите имя отца (или нажмите enter, если оно " + "недоступно)");
-
+            iConverted.personСonvertedUpper_Lower(fatherName);
             if (!fatherName.isEmpty()) {
                 human.setFather((new Designer_Human(fatherName)));
             }
 
             String motherName = showInputDialog("Пожалуйста, введите имя матери (или нажмите enter, если оно недоступно).");
-
+            iConverted.personСonvertedUpper_Lower(motherName);
             if (!motherName.isEmpty()) {
                 human.setMother(new Designer_Human(motherName));
             }
             showMessageDialog(null, "\"Выбранный человек : " + human + "\nДобавлены родители" + "Мать : " + motherName + "Отец: " + fatherName);
 
             String txt2 = showInputDialog(null, "Повторить Выбор ?\nДа? Нет?");
-            if (Objects.equals(txt2, "Да")) {
+            if (Objects.equals(txt2.toLowerCase(), "да")) {
                 continue outer;
             } else {
-                Objects.equals(txt2, "Нет");
+                Objects.equals(txt2.toLowerCase(), "нет");
                 {
                     break outer; //я не знаю почему светит серым, но все работает
                 }
@@ -45,8 +51,6 @@ public class AddChildrenJOptionPane implements IAddCildren {
 
         }
     }
+
+
 }
-
-
-
-
