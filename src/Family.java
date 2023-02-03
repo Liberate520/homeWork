@@ -4,8 +4,6 @@ import java.io.Serializable;
 public class Family <T extends Human> implements Serializable, Iterable<T>{
     private List<T> members;
 
-    private Writable writable;
-
     public Family(List<T> members) {
         this.members = members;
     }
@@ -86,38 +84,14 @@ public class Family <T extends Human> implements Serializable, Iterable<T>{
         return result;
     }
 
-
     @Override
     public String toString() {
         return "Family: " +
                 members;
     }
 
-    public void save() {
-        if(writable instanceof Service) {
-            Service fileHandler1 = (Service) writable;
-        }
-        if(writable != null) {
-            writable.save(this);
-        }
-    }
-
-    public void setFileHandler(Writable writable) {
-        this.writable = writable;
-    }
-
-    public Family read() {
-        if (writable != null) {
-            if (writable instanceof Service) {
-                return (Family) writable.read();
-            }
-        }
-        return null;
-    }
-
     @Override
     public Iterator<T> iterator() {
-        // сортировка изначально работала почему-то даже с return null
         return new FamilyIterator(members);
     }
 }
