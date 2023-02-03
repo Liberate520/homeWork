@@ -2,7 +2,7 @@ package VIVI.AddHuman;
 
 import Converted.IConverted;
 import Converted.PersonConverted;
-import Homework_6.Designer_Human;
+import Homework_7.Designer_Human;
 
 import java.util.Objects;
 

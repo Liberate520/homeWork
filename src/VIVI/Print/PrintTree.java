@@ -1,6 +1,6 @@
 package VIVI.Print;
 
-import Homework_6.Designer_Human;
+import Homework_7.Designer_Human;
 import Iterator.StaddyIterator;
 
 import java.util.Iterator;

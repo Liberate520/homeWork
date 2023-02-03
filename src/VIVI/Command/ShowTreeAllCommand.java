@@ -1,12 +1,10 @@
 package VIVI.Command;
 
-import Homework_6.Designer_Human;
+import Homework_7.Designer_Human;
 
 import VIVI.Print.IPrintList;
 import VIVI.Print.PrintListInFor;
 
-
-import java.util.List;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 

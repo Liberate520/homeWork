@@ -1,7 +1,4 @@
-package Homework_6;
-
-import VIVI.Sort.ISort;
-import VIVI.Sort.SortLamdaByName;
+package Homework_7;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,7 +51,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
     }
 
     public Designer_Human(List<Designer_Human> humans) {
-        Homework_6.Designer_Human.humans = humans;
+        Homework_7.Designer_Human.humans = humans;
     }
 
 
@@ -147,7 +144,7 @@ public class Designer_Human implements Serializable, Comparable<Designer_Human> 
 
 
     @Override
-    public int compareTo(Homework_6.Designer_Human o) {
+    public int compareTo(Homework_7.Designer_Human o) {
         return name.compareTo(o.getName());
     }
 

@@ -1,10 +1,8 @@
 package VIVI.Command;
 
-import Homework_6.Designer_Human;
+import Homework_7.Designer_Human;
 import VIVI.Search.ISearch;
 import VIVI.Search.SearchHuman;
-
-import java.util.List;
 
 public class SearchCommand implements ICommand{
     @Override
