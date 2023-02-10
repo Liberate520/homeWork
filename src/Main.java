@@ -32,8 +32,8 @@ public class Main {
         family.add(daughter_b);
         family.add(grandaughter_a);
 
-        FileHandler fileHandler = new FileHandler();
-        family.setFileHandler(fileHandler);
+        // FileHandler fileHandler = new FileHandler();
+        // family.setFileHandler(fileHandler);
         // family.saveFamily();
         // Family readFile = family.readFile();
         // System.out.println(readFile);
@@ -44,12 +44,12 @@ public class Main {
         // List<String> broAndSis = family.getFamMembers("Evgenia");
 
 
-        System.out.println("--------------------------------------------");
-        System.out.println("Вывод с использованием цикла foreach");
-        for (People people: family) {
-            System.out.println(people);
-        }
-        System.out.println("--------------------------------------------");
+        // System.out.println("--------------------------------------------");
+        // System.out.println("Вывод с использованием цикла foreach");
+        // for (People people: family) {
+        //     System.out.println(people);
+        // }
+        // System.out.println("--------------------------------------------");
 
         // System.out.println("-----------------------------------------------");
         // System.out.println("Вывод отсортированных людей по имени:");
@@ -64,8 +64,8 @@ public class Main {
         // for (People people : family) {
         //     System.out.println(people);
         // }
-
+        
         ViewFamilyTree<People> viewTree = new ViewFamilyTree<>(family);
-        viewTree.viewTree();
+        viewTree.startView();
     }
 }

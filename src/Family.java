@@ -90,7 +90,7 @@ public class Family<T extends People> implements Serializable, Iterable<T>{
         return res;
     }
 
-    public void showTree(){
+    public void showAll(){
         for (T member: members) {
             System.out.println(member.toString());
         }
