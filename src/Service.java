@@ -1,49 +1,60 @@
 import java.io.*;
 import java.util.Collections;
-import java.util.Scanner;
+import java.util.List;
 
 public class Service implements Writable, Serializable {
     private Family family;
+    InAndOut iao = new InAndOut();
+    OperationsWithFamily owf;
 
-    public Service(Family family) {
+    public Service(Family family, OperationsWithFamily owf) {
         this.family = family;
+        this.owf = owf;
     }
 
     public void addPerson(Human human){
         family.add(human);
+    }
 
+    public Family show(){
+        save(family);
+        Family saved = read();
+        return saved;
     }
-    public void searchMember(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter name: ");
-        String name = scan.nextLine();
-        Human serch = family.search(name);
-        System.out.println(serch);
+
+    public Human searchMember(){
+        iao.print("Enter name: ");
+        String name = iao.input();
+        return owf.search(name);
     }
-    public void createPerson(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Name: ");
-        String name = scan.nextLine();
-        System.out.println("Gender (w - woman/ m - man): ");
-        String genderStr = scan.nextLine();
+
+    public Gender detectGender(String answer){
         Gender gender;
-        if(genderStr.contains("w")){
+        if(answer.contains("w")){
             gender = Gender.WOMAN;
         } else {
             gender = Gender.MAN;
         }
-        System.out.println("Year birth: ");
-        int yearBirth = Integer.parseInt(scan.nextLine());
-        System.out.println("Fathers name: ");
-        String fatherStr = scan.nextLine();
-        Human father = family.search(fatherStr);// если нет имени то вернуть пусто или создать Human father
-        System.out.println(father);
-        System.out.println("Mothers name: ");
-        String motherStr = scan.nextLine();
-        Human mother = family.search(motherStr);
+        return gender;
+    }
+    public void createPerson(){
+        iao.print("Name: ");
+        String name = iao.input();
+        iao.print("Gender (w - woman/ m - man): ");
+        Gender gender = detectGender(iao.input());
+        iao.print("Year birth: ");
+        int yearBirth = Integer.parseInt(iao.input());
+        iao.print("Fathers name: ");
+        Human father = owf.search(iao.input());
+        iao.print("Mothers name: ");
+        Human mother = owf.search(iao.input());
         addPerson(new Human(name, gender, yearBirth, father, mother));
     }
-
+    public List<Human> findParents(){
+        Human child = searchMember();
+        List<Human> res = owf.getParents(child);
+        return res;
+    }
 
     public void sortByName() {
         Collections.sort(family.getMembers());
@@ -53,26 +64,23 @@ public class Service implements Writable, Serializable {
         Collections.sort(family.getMembers(), new HumanComparatorYearBirth());
     }
 
-
     @Override
     public void save(Serializable serializable) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("family.dat"))) {
             oos.writeObject(serializable);
-             System.out.println("Saved");
+            iao.print("Saved");
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            iao.print(ex.getMessage());
         }
     }
-
 
     @Override
     public Family read() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("family.dat"))) {
             return (Family) ois.readObject();
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            iao.print(ex.getMessage());
         }
         return null;
     }
-
 }
