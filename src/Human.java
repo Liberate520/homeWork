@@ -13,9 +13,8 @@ public class Human {
     
 
 
-@Override
-    public String toString(Human human) {        
-        return "Имя: "+human.name+"; " +"Пол: "+human.gender+"; "+"Отец: "+this.father+"; " +"Мать: "+human.mother+"; " +"Дети: "+ human.children;
+public String toString(Human human2) {        
+        return "Имя: "+name+"; " +"Пол: "+gender+"; "+"Отец: "+human2.father+"; " +"Мать: "+human2.mother+"; " +"Дети: "+ children;
     }
 
 }
