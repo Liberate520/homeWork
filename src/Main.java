@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package src;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +13,7 @@ public class Main {
         t1.addToFamily(a1);
         t1.addToFamily(a3);
         t1.addToFamily(r);
-//        System.out.println(a1.getAge());
+//        System.out.println("Годков: " + a3.getAge());
 //        System.out.println(a3.getAge());
 //        System.out.println(r.getAge());
 //        System.out.println(t1);

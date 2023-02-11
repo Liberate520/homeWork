@@ -1,23 +1,26 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class FamilyTree {
-    private List<Human> family = new ArrayList<>();
+
 
     public FamilyTree(List<Human> family) {
         this.family = family;
+    }
+    public FamilyTree() {
+        this(null);
     }
 
     public List<Human> getFamily() {
         return family;
     }
 
+    private List<Human> family = new ArrayList<>();
 
-    // Есть ли надобность в таком сеттере?
-    public void setFamily(List<Human> family) {
-        this.family = family;
-    }
+
 
     @Override
     public String toString() {
@@ -32,11 +35,13 @@ public class FamilyTree {
     }
 
     public void addToFamily(Human human){
+        if(this.family == null) {
+            this.family = new ArrayList<>();
+        }
         this.family.add(human);
     }
 
-    public FamilyTree() {
-    }
+
 
     private List<Human> findFamilyList(String lastName){
         List<Human> result = new ArrayList<>();
