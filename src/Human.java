@@ -23,8 +23,8 @@ public class Human {
         children.add(0, human);
     }
 
-    public String toString(Human human) {
-        return String.format("Имя: %s", name);
+    public String getInfo() {
+        return String.format("Имя: %s; Пол: %s; Отец: %s; Мать: %s.", name, gender, father, mother);
     }
 
 }
