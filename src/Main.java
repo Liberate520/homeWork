@@ -21,7 +21,7 @@ public class Main {
         // for(int i=0;i<familyTree1.size();i++){
         //     System.out.println(familyTree1.get(i));
         // } 
-        System.out.println(human1.toString());
-        System.out.println(human7.toString());
+        System.out.println(human1.getInfo());
+        System.out.println(human7.getInfo());
     }
 }
