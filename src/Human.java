@@ -8,12 +8,17 @@ public class Human {
     private List<Human> children;
 
 
+    public Human(String name,Gender gender){
+        this.name=name;
+        this.gender=gender;
+    }
+
+
     public Human(String name,Gender gender,Human father,Human mother){
         this.name=name;
         this.gender=gender;
         this.father=father;
         this.mother=mother;
-
     }
 
     public void AddChild(Human human) {
