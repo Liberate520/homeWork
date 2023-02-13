@@ -8,6 +8,7 @@ public class Person {
     private List<Person> spouse;
     private List<Person> children;
 
+
     public Person(String name, String years_government, Person father, Person mother) {
         this.name = name;
         this.years_government = years_government;

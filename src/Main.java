@@ -92,7 +92,7 @@ public class Main {
         romanov23.addChild(romanov24);
         romanov24.addSpou(romanov41);
 
-        listChildren(romanov1, "");
+        listChildren(romanov3, "");
     }
 
     private static void listChildren(Person person, String prefix) {
