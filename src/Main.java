@@ -1,5 +1,12 @@
 package src;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -21,6 +28,11 @@ public class Main {
 //        System.out.println();
 //        System.out.println(t1.getChildrenList(a1));
         t1.getStatistics(a1);
+
+        System.out.println(t1.findHumans("Female", "", "", "Евдокимова", "01.01.1937", "", "", "", ""));
+
+//        String t = "";
+//        System.out.println(t.isEmpty());
 
 
 

@@ -1,6 +1,8 @@
 package src;
 
+import javax.swing.event.HyperlinkEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -111,6 +113,158 @@ public class FamilyTree {
         } else {
             result = createChildrenList(result);
         }
+        return result;
+    }
+
+
+
+    public List<Human> findHumans(
+            String gender,
+            String firstName,
+            String patronymic,
+            String lastName,
+            String dateOfBornFrom,
+            String dateOfBornTo,
+            String dateOfDeathFrom,
+            String dateOfDeathTo,
+            String placeOfBirth
+    ){
+        List<Human> result = new ArrayList<>();
+        List<Human> resultTemp = new ArrayList<>();
+
+//        HashMap<String, Integer> startDateFrom = new HashMap<>();
+//        HashMap<String, Integer> startDateTo = new HashMap<>();
+//        HashMap<String, Integer> endDateFrom = new HashMap<>();
+//        HashMap<String, Integer> endDateTo = new HashMap<>();
+//
+//        Validation isValDay = new Validation();
+//
+//
+        Dates day = new Dates();
+//        if(isValDay.isDateValid(dateOfBornFrom, false)) {
+//            startDateFrom = day.parseDate(dateOfBornFrom);
+//        } else {
+//            dateOfBornFrom = "";
+//        }
+//
+//        if(isValDay.isDateValid(dateOfBornTo, false)) {
+//            startDateTo = day.parseDate(dateOfBornTo);
+//        } else {
+//            dateOfBornTo = "";
+//        }
+//
+//        if(isValDay.isDateValid(dateOfDeathFrom, false)) {
+//            endDateFrom = day.parseDate(dateOfDeathFrom);
+//        } else {
+//            dateOfDeathFrom = "";
+//        }
+//
+//        if(isValDay.isDateValid(dateOfDeathTo, false)) {
+//            endDateTo = day.parseDate(dateOfDeathTo);
+//        } else {
+//            dateOfDeathTo = "";
+//        }
+
+
+        if(gender.isEmpty()){
+            result.addAll(family);
+        } else {
+            for (Human h :
+                    family) {
+                if(Objects.equals(h.getGender(), gender)){
+                    result.add(h);
+                }
+            }
+        }
+
+        if(!firstName.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(Objects.equals(h.getFirstName(), firstName)){
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!patronymic.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(Objects.equals(h.getPatronymic(), patronymic)){
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!lastName.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(Objects.equals(h.getLastName(), lastName)){
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!placeOfBirth.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(Objects.equals(h.getPlaceOfBirth(), placeOfBirth)){
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!dateOfBornFrom.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(day.datesCompare(dateOfBornFrom, h.getDateOfBorn())) {
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!dateOfBornTo.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(day.datesCompare(h.getDateOfBorn(), dateOfBornTo)) {
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!dateOfDeathFrom.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(day.datesCompare(dateOfDeathFrom, h.getDateOfDeath())) {
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
+        if(!dateOfDeathTo.isEmpty() && !result.isEmpty()){
+            for (Human h :
+                    result) {
+                if(day.datesCompare(h.getDateOfDeath(), dateOfDeathTo)) {
+                    resultTemp.add(h);
+                }
+            }
+            result.retainAll(resultTemp);
+            resultTemp.clear();
+        }
+
         return result;
     }
 }

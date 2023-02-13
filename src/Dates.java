@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Dates {
     String date;
@@ -49,6 +50,26 @@ public class Dates {
         } catch (ParseException ex) {
             ex.printStackTrace();
             return result;
+        }
+    }
+
+
+    public boolean datesCompare(String date1, String date2) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        if (Objects.equals(date1, "")){
+            date1 = "01.01.0001";
+        }
+        if (Objects.equals(date2, "")){
+            date2 = getTodayDate();
+        }
+        try {
+            Date dayOne = dateFormat.parse(date1);
+            Date dayTwo = dateFormat.parse(date2);
+            return dayOne.compareTo(dayTwo) <= 0;
+
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 }
