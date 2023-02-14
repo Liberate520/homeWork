@@ -1,8 +1,9 @@
 package src;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     private Human father;
     private Human mother;
     private List<Human> children = new ArrayList<>();

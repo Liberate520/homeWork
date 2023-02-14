@@ -1,14 +1,14 @@
 package src;
 
 import javax.swing.event.HyperlinkEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
-
+    private Writable fileHandlerWritable;
+    private Readable fileHandlerReadable;
     public FamilyTree(List<Human> family) {
         this.family = family;
     }
@@ -24,6 +24,27 @@ public class FamilyTree {
 
 
 
+
+    public void save() throws IOException {
+        if(fileHandlerWritable == null) {
+            fileHandlerWritable = new FileRW();
+        }
+        fileHandlerWritable.saveFile(family, "treeOut");
+    }
+
+    public void load() throws IOException, ClassNotFoundException {
+        if(fileHandlerReadable == null) {
+            fileHandlerReadable = new FileRW();
+        }
+        Object familyCheck = fileHandlerReadable.loadFile("treeOut");
+        if(familyCheck instanceof List res) {
+            family = new ArrayList<>();
+            //Ненадежно, как-то... но работает
+            family.addAll(res);
+        }
+
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -37,10 +58,17 @@ public class FamilyTree {
     }
 
     public void addToFamily(Human human){
-        if(this.family == null) {
-            this.family = new ArrayList<>();
+        if(family == null) {
+            family = new ArrayList<>();
         }
-        this.family.add(human);
+        if(!family.contains(human)){
+            family.add(human);
+        }
+        for (Human h :
+                human.getChildren()) {
+            addToFamily(h);
+        }
+
     }
 
 
@@ -132,38 +160,8 @@ public class FamilyTree {
         List<Human> result = new ArrayList<>();
         List<Human> resultTemp = new ArrayList<>();
 
-//        HashMap<String, Integer> startDateFrom = new HashMap<>();
-//        HashMap<String, Integer> startDateTo = new HashMap<>();
-//        HashMap<String, Integer> endDateFrom = new HashMap<>();
-//        HashMap<String, Integer> endDateTo = new HashMap<>();
-//
-//        Validation isValDay = new Validation();
-//
-//
         Dates day = new Dates();
-//        if(isValDay.isDateValid(dateOfBornFrom, false)) {
-//            startDateFrom = day.parseDate(dateOfBornFrom);
-//        } else {
-//            dateOfBornFrom = "";
-//        }
-//
-//        if(isValDay.isDateValid(dateOfBornTo, false)) {
-//            startDateTo = day.parseDate(dateOfBornTo);
-//        } else {
-//            dateOfBornTo = "";
-//        }
-//
-//        if(isValDay.isDateValid(dateOfDeathFrom, false)) {
-//            endDateFrom = day.parseDate(dateOfDeathFrom);
-//        } else {
-//            dateOfDeathFrom = "";
-//        }
-//
-//        if(isValDay.isDateValid(dateOfDeathTo, false)) {
-//            endDateTo = day.parseDate(dateOfDeathTo);
-//        } else {
-//            dateOfDeathTo = "";
-//        }
+
 
 
         if(gender.isEmpty()){
@@ -266,5 +264,17 @@ public class FamilyTree {
         }
 
         return result;
+    }
+
+    public void setFamily(List<Human> family) {
+        this.family = family;
+    }
+
+    public void setFileHandlerWritable(Writable fileHandlerWritable) {
+        this.fileHandlerWritable = fileHandlerWritable;
+    }
+
+    public void setFileHandlerReadable(Readable fileHandlerReadable) {
+        this.fileHandlerReadable = fileHandlerReadable;
     }
 }

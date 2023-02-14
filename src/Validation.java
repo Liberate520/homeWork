@@ -24,7 +24,6 @@ public class Validation {
             LocalDate.parse(date, formatter);
         } catch (DateTimeParseException ex) {
             isTrueDate = false;
-//            ex.printStackTrace();
         }
         return isTrueDate;
     }

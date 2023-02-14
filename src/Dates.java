@@ -56,10 +56,14 @@ public class Dates {
 
     public boolean datesCompare(String date1, String date2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        if (Objects.equals(date1, "")){
+        Validation val = new Validation();
+//        if(val.isDateValid())
+//        проверить валидность даты
+
+        if (date1.isEmpty() || !val.isDateValid(date1, false)){
             date1 = "01.01.0001";
         }
-        if (Objects.equals(date2, "")){
+        if (date2.isEmpty() || !val.isDateValid(date2, false)){
             date2 = getTodayDate();
         }
         try {
