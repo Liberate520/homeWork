@@ -19,9 +19,15 @@ public class Main {
 //        t1.addToFamily(r);
 //        t1.save();
         t1.load();
-        System.out.println(t1);
+//        System.out.println(t1);
+        System.out.println(t1.findHumans("Male", "", "", "", "", "", "", "", ""));
         t1.getStatistics(t1.findHumans("Male", "", "", "", "", "", "", "", "").get(0));
-//        FamilyTree t2 = new FamilyTree();
+        TreeFilter tf = new TreeFilter();
+        System.out.println(tf.filter(t1.getFamily(), "Male", Human::getGender, FilterType.STRING));
+
+
+
+        //        FamilyTree t2 = new FamilyTree();
 //        t2.load();
 ////        t1.load();
 //        System.out.println(t2);

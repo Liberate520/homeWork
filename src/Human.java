@@ -160,15 +160,15 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return "src.Human{" +
-                ", gender='" + gender + '\'' +
-                ", dateOfBorn='" + dateOfBorn + '\'' +
-                ", dateOfDeath='" + dateOfDeath + '\'' +
-                ", placeOfBirth='" + placeOfBirth + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return "\nsrc.Human{" +
+                ", gender='" + gender + '\'' + "\n" +
+                ", dateOfBorn='" + dateOfBorn + '\'' + "\n" +
+                ", dateOfDeath='" + dateOfDeath + '\'' + "\n" +
+                ", placeOfBirth='" + placeOfBirth + '\'' + "\n" +
+                ", firstName='" + firstName + '\'' + "\n" +
+                ", patronymic='" + patronymic + '\'' + "\n" +
+                ", lastName='" + lastName + '\'' + "\n" +
+                '}' + "\n";
     }
 //    }
 }

@@ -1,14 +1,16 @@
 package src;
 
-import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
 
 public class FamilyTree implements Serializable {
 
     private Writable fileHandlerWritable;
     private Readable fileHandlerReadable;
+
+    private List<Human> family = new ArrayList<>();
     public FamilyTree(List<Human> family) {
         this.family = family;
     }
@@ -20,7 +22,7 @@ public class FamilyTree implements Serializable {
         return family;
     }
 
-    private List<Human> family = new ArrayList<>();
+
 
 
 
@@ -114,6 +116,7 @@ public class FamilyTree implements Serializable {
             System.out.println(result);
         }
     }
+    // описание не совсем соответствует названию, получаем список детей их детей и так по низходящей
     public List<Human> getChildrenList(Human human){
         List<Human> hlist = new ArrayList<>();
         hlist.add(human);
@@ -158,111 +161,48 @@ public class FamilyTree implements Serializable {
             String placeOfBirth
     ){
         List<Human> result = new ArrayList<>();
-        List<Human> resultTemp = new ArrayList<>();
+        TreeFilter tr = new TreeFilter();
 
-        Dates day = new Dates();
+        List<Function<Human, String>> filters = Arrays.asList(
+                Human::getGender,
+                Human::getFirstName,
+                Human::getPatronymic,
+                Human::getLastName,
+                Human::getPlaceOfBirth,
+                Human::getDateOfBorn,
+                Human::getDateOfDeath,
+                Human::getDateOfBorn,
+                Human::getDateOfDeath
+        );
+        List<String> values = Arrays.asList(
+                gender,
+                firstName,
+                patronymic,
+                lastName,
+                placeOfBirth,
+                dateOfBornFrom,
+                dateOfDeathFrom,
+                dateOfBornTo,
+                dateOfDeathTo
+        );
+        List<FilterType> types = Arrays.asList(
+                FilterType.STRING,
+                FilterType.STRING,
+                FilterType.STRING,
+                FilterType.STRING,
+                FilterType.STRING,
+                FilterType.DATE_FROM,
+                FilterType.DATE_FROM,
+                FilterType.DATE_TO,
+                FilterType.DATE_TO
+        );
 
-
-
-        if(gender.isEmpty()){
-            result.addAll(family);
-        } else {
-            for (Human h :
-                    family) {
-                if(Objects.equals(h.getGender(), gender)){
-                    result.add(h);
-                }
+        for (int i = 0; i < filters.size(); i++) {
+            if(i == 0) {
+                result.addAll(family);
             }
+            result.retainAll(tr.filter(result, values.get(i), filters.get(i), types.get(i)));
         }
-
-        if(!firstName.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(Objects.equals(h.getFirstName(), firstName)){
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!patronymic.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(Objects.equals(h.getPatronymic(), patronymic)){
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!lastName.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(Objects.equals(h.getLastName(), lastName)){
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!placeOfBirth.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(Objects.equals(h.getPlaceOfBirth(), placeOfBirth)){
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!dateOfBornFrom.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(day.datesCompare(dateOfBornFrom, h.getDateOfBorn())) {
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!dateOfBornTo.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(day.datesCompare(h.getDateOfBorn(), dateOfBornTo)) {
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!dateOfDeathFrom.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(day.datesCompare(dateOfDeathFrom, h.getDateOfDeath())) {
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
-        if(!dateOfDeathTo.isEmpty() && !result.isEmpty()){
-            for (Human h :
-                    result) {
-                if(day.datesCompare(h.getDateOfDeath(), dateOfDeathTo)) {
-                    resultTemp.add(h);
-                }
-            }
-            result.retainAll(resultTemp);
-            resultTemp.clear();
-        }
-
         return result;
     }
 
