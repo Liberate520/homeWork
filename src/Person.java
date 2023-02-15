@@ -1,4 +1,5 @@
-public class Person {
+import java.io.*;
+public class Person implements Serializable {
 
     private String name;
     private String sex;
@@ -50,10 +51,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\n' +
-                ", sex='" + sex + '\n' +
-                ", dateOfBirth=" + dateOfBirth +'\n'+
-                ", dateOfDeath=" + dateOfDeath +"'}\n";
+        return "\nPerson " +
+                "name='" + name + "',\n" +
+                "sex='" + sex + "',\n" +
+                "dateOfBirth=" + dateOfBirth +"',\n"+
+                "dateOfDeath=" + dateOfDeath +"'\n";
     }
 }
