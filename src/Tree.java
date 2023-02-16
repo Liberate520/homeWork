@@ -31,12 +31,12 @@ public class Tree {
         this.arlist_humans.add(human);
         Integer stop = 0;
         for (int i = arlist_humans.size() - 2; i >= 0; i--) {
-            if (arlist_humans.get(i).toString().split(",")[0].split(" = ")[1].equals(human.getFather())) {
+            if (arlist_humans.get(i).toString().split(",")[0].split(" = ")[1].equals(human.getNameFather())) {
                 arlist_humans.get(i).addChild(human);
                 setGeneration(getGen(i) + 1);
                 stop += 1;
             }
-            if (arlist_humans.get(i).toString().split(",")[0].split(" = ")[1].equals(human.getMother())) {
+            if (arlist_humans.get(i).toString().split(",")[0].split(" = ")[1].equals(human.getNameMother())) {
                 arlist_humans.get(i).addChild(human);
                 setGeneration(getGen(i) + 1);
                 stop += 1;
@@ -59,10 +59,49 @@ public class Tree {
         return result;
     }
 
-    public String getInfoHumanChildren(String name_human) {
+    public String getInfoHuman(String name_human) {
         for (int i = 0; i < arlist_humans.size(); i++) {
             if (arlist_humans.get(i).getName().equalsIgnoreCase(name_human)) {
-                return arlist_humans.get(i).getChildren().toString();
+                return Integer.toString(getGen(i)) + "поколение - " + arlist_humans.get(i).toString();
+            }
+        }
+        return "Unkown name";
+    }
+
+    public String getInfoChildren(String name_human) {
+        String result = "";
+        for (int i = 0; i < arlist_humans.size(); i++) {
+            if (arlist_humans.get(i).getName().equalsIgnoreCase(name_human)) {
+                for (int j = 0; j < arlist_humans.get(i).getChildren().size(); j++) {
+                    result += arlist_humans.get(i).getChildren().get(j) + "\n";
+                }
+                return result;
+            }
+        }
+        return "Unkown name";
+    }
+
+    public String getInfoMother(String name_human) {
+        for (int i = 0; i < arlist_humans.size(); i++) {
+            if (arlist_humans.get(i).getName().equalsIgnoreCase(name_human)) {
+                for (int j = i; j >= 0; j--) {
+                    if (arlist_humans.get(j).getName().equalsIgnoreCase(arlist_humans.get(i).getNameMother())) {
+                        return arlist_humans.get(j).toString();
+                    }
+                }
+            }
+        }
+        return "Unkown name";
+    }
+
+    public String getInfoFather(String name_human) {
+        for (int i = 0; i < arlist_humans.size(); i++) {
+            if (arlist_humans.get(i).getName().equalsIgnoreCase(name_human)) {
+                for (int j = i; j >= 0; j--) {
+                    if (arlist_humans.get(j).getName().equalsIgnoreCase(arlist_humans.get(i).getNameFather())) {
+                        return arlist_humans.get(j).toString();
+                    }
+                }
             }
         }
         return "Unkown name";

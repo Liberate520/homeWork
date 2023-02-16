@@ -31,10 +31,10 @@ public class Human {
         return name;
     }
 
-    public String getFather() {
+    public String getNameFather() {
         return name_father;
     }
-    public String getMother() {
+    public String getNameMother() {
         return name_mother;
     }
     public List<Human> getChildren() {
