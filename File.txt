@@ -1,0 +1,19 @@
+starVer888Tree Демидовичи
+HumanVer888,Демидович Павел Анатольевич,male,1988-08-23,null
+HumanVer888,Демидович Агата Павловна,female,2013-09-16,null
+HumanVer888,Демидович Анатолий Афанасьевич,male,1955-09-28,null
+HumanVer888,Демидович Галина Ивановна,female,1950-09-24,null
+HumanVer888,Мордвинцева Александра Павловна,female,1925-05-01,1959-03-03
+HumanVer888,Гулак Иван Васильевич,male,null,null
+HumanVer888,Демидович Анастасия Герасимовна,female,null,null
+HumanVer888,Демидович Афанасий Гаврилович,male,null,null
+HumanVer888,Балашенко Феодосия Ивановна,null,null,null
+CommunicationsVer888,id:4,id:3,id:2 ,null
+CommunicationsVer888,null,id:1,null,null
+CommunicationsVer888,id:7,id:8,id:1 ,null
+CommunicationsVer888,id:5,id:6,id:1 ,null
+CommunicationsVer888,id:9,null,id:4 ,null
+CommunicationsVer888,null,null,id:4 ,null
+CommunicationsVer888,null,null,id:3 ,null
+CommunicationsVer888,null,null,id:3 ,null
+CommunicationsVer888,null,null,id:5 ,null
