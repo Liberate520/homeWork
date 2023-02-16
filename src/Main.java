@@ -7,6 +7,7 @@ public class Main {
         List<Human> person = new ArrayList<>();
         person.add(new Human("Павел", Sex.Male));
         person.add(new Human("Александр", Sex.Male));
+        person.add(new Human("Олеся", Sex.Female));
         person.add(new Human("Лейла", Sex.Female));
 
         for (var p :
