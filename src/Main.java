@@ -1,14 +1,21 @@
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        Human human1 = new Human("Иван", "Иванов");
-        Human human2 = new Human("Елизавета", "Попова");
-        Human human3 = new Human("Петр", "Иванов");
-        human1.addChild(human3);
-        human2.addChild(human3);
-        human3.addParents(human1, human2);
-        System.out.println(human3);
-        System.out.print("Родители:\n" + human3.getFather() + "\n" + human3.getMother());
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
+        FamilyTree family = new FamilyTree();
+
+        family.add(new Human("Иван", "Иванов"));
+        family.add(new Human("Елизавета", "Попова"));
+        family.add(new Human("Петр", "Иванов", family.getByName("Иван"), family.getByName("Елизавета")));
+        
+        System.out.print(family.getInfo());
+
+        FamilyTree family1 = new FamilyTree();
+        FileHandler file = new FileHandler();
+        file.fileWrite(family);
+        file.fileRead(family1);
+
+        System.out.println(family1.getInfo());
         
     }
 }

@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String firstname;
     private String lastname;
     private Calendar birthdate;
@@ -10,6 +11,11 @@ public class Human {
     private Human father;
     private Human mother;
     private List<Human> children;
+
+    public Human(String firstname, String lastname, Human father, Human mother){
+        this(firstname, lastname);
+        addParents(father, mother);
+    }
 
     public Human(String firstname, String lastname){
         this.firstname = firstname;
@@ -51,6 +57,8 @@ public class Human {
     public void addParents(Human father, Human mother){
         this.father = father;
         this.mother = mother;
+        father.addChild(this);
+        mother.addChild(this);
     }
 
     public Human getFather() {
