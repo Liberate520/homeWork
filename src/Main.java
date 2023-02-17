@@ -1,5 +1,7 @@
 package src;
 
+import src.comparator.SortBy;
+
 import java.io.IOException;
 
 
@@ -25,6 +27,28 @@ public class Main {
         TreeFilter tf = new TreeFilter();
         System.out.println(tf.filter(t1.getFamily(), "Male", Human::getGender, FilterType.STRING));
 
+        for (Human h :
+                t1) {
+            System.out.println(h);
+        }
+
+        t1.sortByAge();
+        System.out.println("----------------------------------------");
+
+        for (Human h :
+                t1) {
+            System.out.println(h);
+        }
+
+        System.out.println("----------------------------------------");
+
+        t1.sort(SortBy.DATE_OF_BIRTH);
+
+        for (Human h :
+                t1) {
+            System.out.println(h);
+        }
+
 
 
         //        FamilyTree t2 = new FamilyTree();
@@ -39,7 +63,7 @@ public class Main {
 //        System.out.println(t1);
 //        System.out.println(t1.findFamily("Ждо"));
 //        System.out.println();
-//        System.out.println(t1.getChildrenList(a1));
+//        System.out.println(t1.getClildrenAndGrandsonsList(a1));
 //        t1.getStatistics(a1);
 //        t1.addToFamily(r1);
 //        Dates d = new Dates();
@@ -56,11 +80,6 @@ public class Main {
 //        } else {
 //            System.out.println("Не OK");
 //        }
-
-
-
-
     }
-
 
 }

@@ -1,11 +1,17 @@
 package src;
 
+import org.jetbrains.annotations.NotNull;
+import src.comparator.HumanComparator;
+import src.comparator.HumanComparatorByAge;
+import src.comparator.HumanComparatorByLastName;
+import src.comparator.SortBy;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
     private Writable fileHandlerWritable;
     private Readable fileHandlerReadable;
@@ -103,7 +109,7 @@ public class FamilyTree implements Serializable {
     public void getStatistics(Human human){
         if(family.contains(human)) {
             StringBuilder result = new StringBuilder();
-            List<Human> children = getChildrenList(human);
+            List<Human> children = getClildrenAndGrandsonsList(human);
             result.append("---------------------------\n");
             result.append("ФИО: ").append(human.getLastName()).append(" ").append(human.getFirstName()).append(" ").append(human.getPatronymic());
             result.append("\n");
@@ -112,19 +118,19 @@ public class FamilyTree implements Serializable {
                 result.append("Умер ").append(human.getDateOfDeath()).append(" г\n");
                 result.append("Прожил ").append(human.getAge()).append(" полных лет\n");
             }
-            result.append("Имеет ").append(human.getChildren().size()).append(" детей и ").append(children.size() - human.getChildren().size()).append(" внуков");
+            result.append("Имеет ").append(human.getChildren().size()).append(" детей и ").append(children.size() - human.getChildren().size()).append(" внуков с правнуками");
             System.out.println(result);
         }
     }
-    // описание не совсем соответствует названию, получаем список детей их детей и так по низходящей
-    public List<Human> getChildrenList(Human human){
+    // описание ранее не соответствововало названию, получаем список детей их детей и так по низходящей
+    public List<Human> getClildrenAndGrandsonsList(Human human){
         List<Human> hlist = new ArrayList<>();
         hlist.add(human);
-        List<Human> result = createChildrenList(hlist);
+        List<Human> result = createClildrenAndGrandsonsList(hlist);
         result.remove(0);
         return result;
     }
-    private List<Human> createChildrenList(List<Human> lst) {
+    private List<Human> createClildrenAndGrandsonsList(List<Human> lst) {
         List<Human> result = new ArrayList<>(lst);
         int st = lst.size();
         for (Human h :
@@ -137,12 +143,11 @@ public class FamilyTree implements Serializable {
                         }
                     }
                 }
-
         }
         if(result.size()==lst.size()){
             return result;
         } else {
-            result = createChildrenList(result);
+            result = createClildrenAndGrandsonsList(result);
         }
         return result;
     }
@@ -216,5 +221,23 @@ public class FamilyTree implements Serializable {
 
     public void setFileHandlerReadable(Readable fileHandlerReadable) {
         this.fileHandlerReadable = fileHandlerReadable;
+    }
+
+    public void sortByAge(){
+        Collections.sort(family, new HumanComparatorByAge());
+    }
+
+    public void sortByLastName(){
+        Collections.sort(family, new HumanComparatorByLastName());
+    }
+
+    public void sort(SortBy sortBy){
+        Collections.sort(family, new HumanComparator(sortBy));
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(family);
     }
 }

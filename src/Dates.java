@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Dates {
-    String date;
+    private String date;
 
 
 
