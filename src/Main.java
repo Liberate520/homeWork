@@ -5,9 +5,7 @@ public class Main {
 
         List<Person> listOfPersons = new LinkedList<>();
         List<FamilyCell> listAllFamilies = new LinkedList<>();
-        Map<String, FamilyCell> familyEnvironment = new HashMap<>();
-        // String nameForSearch = "";
-
+        FamilyTree familyTree = new FamilyTree(listOfPersons,listAllFamilies);
 
         String str = "";
         Scanner scanner = new Scanner(System.in, "UTF-8");
@@ -23,18 +21,16 @@ public class Main {
             System.out.println("7 - сохранить список");
             System.out.println("0 - завершить работу");
 
-
-//            if (scanner.hasNext()){
                 str = scanner.next();
-//            }
-//            scanner.close();
+
 
             switch (str){
                 case ("1"):{
                     listOfPersons = fillAllPersons ();
                     listAllFamilies = fillAllFamilies (listOfPersons);
-                    // создаем словарь соответствия семьи к человеку. Имя человека  - его семья
-                    familyEnvironment = fillEnvironment(listOfPersons, listAllFamilies);
+                    // создаем объект дерево содержащий соответствия - имя человека - его ближаейшее окружение
+                    familyTree = new FamilyTree(listOfPersons, listAllFamilies);
+
 
                     System.out.println("база тестовых данных загружена \n");
                     break;
@@ -45,8 +41,8 @@ public class Main {
                     listOfPersons = (List<Person>) repo1.read("person.out");
                     Repo repo2 = new Repo();
                     listAllFamilies = (List<FamilyCell>) repo2.read("familycells.out");
+                    familyTree = new FamilyTree(listOfPersons, listAllFamilies);
 
-                    familyEnvironment = fillEnvironment(listOfPersons, listAllFamilies);
                     System.out.println("база данных загружена \n");
                     break;
                     }
@@ -67,7 +63,7 @@ public class Main {
                 }
                 case ("6"): {
                     // запрос имени для поиска в базе
-                    SearchPerson(familyEnvironment);
+                    searchPerson(familyTree);
                     break;
                 }
                 case ("7"):{
@@ -115,26 +111,17 @@ public class Main {
         return listAllFamilies;
     }
 
-    public static void SearchPerson(Map<String, FamilyCell> familyTree){
+    public static void searchPerson(FamilyTree familyTree){
         String nameForSearch="";
         System.out.println("введите имя человека для поиска \n");
         Scanner scanner1 = new Scanner(System.in, "UTF-8");
-//        if (scanner1.hasNext()){
             nameForSearch = scanner1.next();
-//        }
-//        scanner1.close();
-       if (familyTree.get(nameForSearch)==null){
+
+       if (familyTree.getNameForSearch(nameForSearch)==null){
            System.out.println("человек с таким именем не найден");
        }
        else{
-           System.out.println(familyTree.get(nameForSearch));
+           System.out.println(familyTree.getNameForSearch(nameForSearch));
        }
-    }
-    public static Map<String, FamilyCell> fillEnvironment(List<Person> listOfPersons, List<FamilyCell> listAllFamilies){
-        Map<String, FamilyCell> familyEnvironment = new HashMap<>();
-        for (int i=0; i<listOfPersons.size(); i++){
-            familyEnvironment.put(listOfPersons.get(i).getName(), listAllFamilies.get(i));
-        }
-        return familyEnvironment;
     }
 }

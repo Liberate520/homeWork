@@ -7,14 +7,16 @@ public class FamilyCell implements Serializable {
     private Person father;
     private Person mother;
     private Person currentPerson;
-    private List<Person> Children = new LinkedList<>();
+    private List<Person> children = new LinkedList<>();
 
-    public FamilyCell(Person father, Person mother, Person currentPerson, List<Person> children) {
+    public FamilyCell(Person father, Person mother, Person currentPerson, List<Person> children1) {
         this.father = father;
         this.mother = mother;
         this.currentPerson = currentPerson;
-        Children = children;
+        this.children = children1;
     }
+    public FamilyCell() {this( null, null, null, null);}
+
 
     public Person getFather() {
         return father;
@@ -41,11 +43,11 @@ public class FamilyCell implements Serializable {
     }
 
     public List<Person> getChildren() {
-        return Children;
+        return children;
     }
 
-    public void setChildren(List<Person> children) {
-        Children = children;
+    public void setChildren(List<Person> children1) {
+        children = children1;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class FamilyCell implements Serializable {
                 "father=" + father +
                 "mother=" + mother +
                 ", \n" + currentPerson +
-                "Children=" + Children;
+                "Children=" + children;
 
     }
 }
