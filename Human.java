@@ -1,9 +1,9 @@
-
+package homeWork;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
     private String surname;
     private String name;
     private String patronymic;
@@ -115,6 +115,8 @@ private String getChildrenInfo(){
 return res.toString();
 }
 
+
+
 @Override
 public boolean equals(Object obj){
     if (this == obj){
@@ -126,4 +128,14 @@ public boolean equals(Object obj){
    Human human = (Human) obj;
    return human.getName().equals(getName());
 }
+
+@Override
+public int compareTo(Human o) {
+    return name.compareTo(o.getName());
+}
+
+
+
+
+
 }
