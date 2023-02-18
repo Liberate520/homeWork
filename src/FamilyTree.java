@@ -1,10 +1,10 @@
-import java.io.Serializable;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable{
     private List<Human> humans;
+    private Writable fileHandler;
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -55,19 +55,19 @@ public class FamilyTree implements Serializable{
             if (human.getName().equals(name)){
                 return human;
             }
-
         }
         return null;
     }
 
-    private void writeObject(ObjectOutputStream stream) throws IOException {
-        stream.defaultWriteObject();
-        System.out.println("Our writeObject");
+    public void save() throws FileNotFoundException{
+        fileHandler.save("FamTree.out");
     }
 
-    
-    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        stream.defaultReadObject();
-        System.out.println("Our readObject");
+    public void read() throws FileNotFoundException{
+        fileHandler.save("FamTree.out");
+    }
+
+    public void setFileHandler(Writable fileHandler){
+        this.fileHandler=fileHandler;
     }
 }
