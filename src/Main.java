@@ -24,6 +24,8 @@ public class Main {
         familyTree1.addHuman(human8);
         System.out.println(familyTree1.getAllHumanToString());
         System.out.println(familyTree1.getChildrenToString(human1));
-        System.out.println(familyTree1.getByName("Анна").getInfo());
+        System.out.println(familyTree1.getByName("Пётр").getInfo());
+
+
     }
 }
