@@ -1,7 +1,9 @@
+import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
     private List<Human> humans;
 
     public FamilyTree() {
@@ -25,8 +27,6 @@ public class FamilyTree {
         }
         return res;
     }
-
-
 
     public String getAllHumanToString() {        
         String res = "Генеологическое дерево: ";
@@ -58,5 +58,16 @@ public class FamilyTree {
 
         }
         return null;
+    }
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        System.out.println("Our writeObject");
+    }
+
+    
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        System.out.println("Our readObject");
     }
 }
