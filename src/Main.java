@@ -1,7 +1,9 @@
 import java.util.List;
+import java.io.Serializable;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree familyTree1 = new FamilyTree();
         
@@ -25,6 +27,14 @@ public class Main {
         System.out.println(familyTree1.getAllHumanToString());
         System.out.println(familyTree1.getChildrenToString(human1));
         System.out.println(familyTree1.getByName("Пётр").getInfo());
+
+
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("FamTree.out"));
+        out.writeObject(familyTree1);
+        out.close();
+
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream("FamTree.out"));
+        familyTree1 = (FamilyTree) in.readObject();
 
 
     }
