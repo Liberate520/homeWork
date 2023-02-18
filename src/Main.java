@@ -14,18 +14,16 @@ public class Main {
         Human human7 = new Human("Николай", Gender.male,human6,human3);
         Human human8 = new Human("Софья", Gender.female);
 
-        familyTree1.setHumans(human1);
-        familyTree1.setHumans(human2);
-        familyTree1.setHumans(human3);
-        familyTree1.setHumans(human4);
-        familyTree1.setHumans(human5);
-        familyTree1.setHumans(human6);
-        familyTree1.setHumans(human7);
-        familyTree1.setHumans(human8);
-                
+        familyTree1.addHuman(human1);
+        familyTree1.addHuman(human2);
+        familyTree1.addHuman(human3);
+        familyTree1.addHuman(human4);
+        familyTree1.addHuman(human5);
+        familyTree1.addHuman(human6);
+        familyTree1.addHuman(human7);
+        familyTree1.addHuman(human8);
         System.out.println(familyTree1.getAllHumanToString());
         System.out.println(familyTree1.getChildrenToString(human1));
-
-
+        System.out.println(familyTree1.getByName("Анна").getInfo());
     }
 }
