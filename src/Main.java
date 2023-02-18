@@ -28,13 +28,12 @@ public class Main {
         System.out.println(familyTree1.getChildrenToString(human1));
         System.out.println(familyTree1.getByName("Пётр").getInfo());
 
+       
+        familyTree1.setFileHandler(new FileHandler());
+        familyTree1.read();
+        familyTree1.save();
 
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("FamTree.out"));
-        out.writeObject(familyTree1);
-        out.close();
 
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream("FamTree.out"));
-        familyTree1 = (FamilyTree) in.readObject();
 
 
     }
