@@ -40,7 +40,23 @@ public class FamilyTree {
         return res;
     }
 
-    public void setHumans(Human human) {
+    public void addHuman(Human human) {
         humans.add(human);
+        if (human.getFather()!=null){
+            human.getFather().addChild(human);
+        }
+        if (human.getMother()!=null){
+            human.getMother().addChild(human);
+        }
+    }
+
+    public Human getByName (String name) {
+        for (Human human:humans){
+            if (human.getName().equals(name)){
+                return human;
+            }
+
+        }
+        return null;
     }
 }
