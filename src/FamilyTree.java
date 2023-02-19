@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class FamilyTree {
+public class FamilyTree implements Iterable<Human> {
     private ArrayList<Human> familyTree;
 
     public FamilyTree(){ 
@@ -34,5 +35,18 @@ public class FamilyTree {
 
     public ArrayList<Human> getFamilyTree(){
         return familyTree;
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyTree);
+    }
+
+    public void sortByName(){
+        familyTree.sort(new HumanComparatorByName());
+    }
+
+    public void sortByDate(){
+        familyTree.sort(new HumanComparatorByDate());
     }
 }

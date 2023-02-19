@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Human implements Serializable {
@@ -12,14 +13,15 @@ public class Human implements Serializable {
     private Human mother;
     private List<Human> children;
 
-    public Human(String firstname, String lastname, Human father, Human mother){
-        this(firstname, lastname);
+    public Human(String firstname, String lastname, Human father, Human mother, int year, int month, int day){
+        this(firstname, lastname, year, month, day);
         addParents(father, mother);
     }
 
-    public Human(String firstname, String lastname){
+    public Human(String firstname, String lastname, int year, int month, int day){
         this.firstname = firstname;
         this.lastname = lastname;
+        this.birthdate = new GregorianCalendar(year, month, day);
     }
 
     public String getFirstname() {
@@ -39,6 +41,7 @@ public class Human implements Serializable {
     }
 
     public Calendar getBirthdate() {
+        //String str = birthdate.get(Calendar.YEAR) + "-" + birthdate.get(Calendar.MONTH) + "-" + birthdate.get(Calendar.DAY_OF_MONTH);
         return birthdate;
     }
     
@@ -81,6 +84,6 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return firstname + ", " + lastname;
+        return firstname + ", " + lastname + ", " + birthdate.get(Calendar.YEAR) + "-" + (birthdate.get(Calendar.MONTH) + 1) + "-" + birthdate.get(Calendar.DAY_OF_MONTH);
     }
 }
