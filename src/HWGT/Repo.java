@@ -1,6 +1,6 @@
+package HWGT;
+
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Repo implements FileData{
 
@@ -13,9 +13,9 @@ public class Repo implements FileData{
 
     @Override
     public Object read(String filename) throws IOException, ClassNotFoundException {
-        List<Object> result = new LinkedList<>();
+        Object result = new Object();
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename));
-        result = (List<Object>) objectInputStream.readObject();
+        result = objectInputStream.readObject();
         objectInputStream.close();
         return result;
     }
