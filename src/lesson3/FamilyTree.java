@@ -1,8 +1,11 @@
+import Comparators.ComparatorByName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public FamilyTree() { this(new ArrayList<>()); }
@@ -44,5 +47,14 @@ public class FamilyTree implements Serializable {
             res.append("\n");
         }
         return res.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
+    }
+
+    public FamilyTree sortByName() {
+        return this.humanList.sort(new ComparatorByName);
     }
 }
