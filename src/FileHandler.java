@@ -24,7 +24,7 @@ public class FileHandler implements Writable {
     public Object read() {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("FamTree.out"));
-        Person renatRestored = (Person) objectInputStream.readObject();
+        // Person renatRestored = (Person) objectInputStream.readObject();
         objectInputStream.close();
 
         return null;
