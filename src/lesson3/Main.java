@@ -3,10 +3,9 @@ package lesson3;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException {
         FamilyTree tree = new FamilyTree();
         ReadWritable fileHandler = new FileHandler("familydata");
         //tree = (FamilyTree) fileHandler.read();
