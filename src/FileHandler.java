@@ -1,28 +1,20 @@
 import java.io.*;
 
-public class FileHandler implements Writable, Serializable {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see Writable#save(java.io.Serializable)
-     */
+public class FileHandler implements Writable {
+    
     @Override
     public void save(Serializable serializable) throws FileNotFoundException {
-        try (FileOutputStream outputStream = new FileOutputStream("FamTree.out")) {
+        try (FileOutputStream outputStream = new FileOutputStream("FamTree.data")) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(serializable);
 
             try {
-                objectOutputStream.writeObject(objectOutputStream);
+                objectOutputStream.writeObject(serializable);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            objectOutputStream.close();
-            objectOutputStream.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+            objectOutputStream.close();            
+        } catch (IOException e) {            
             e.printStackTrace();
         }
         System.out.println("Сохранили");
@@ -37,8 +29,6 @@ public class FileHandler implements Writable, Serializable {
 
         return null;
     }
-
     public void test() {
     }
-
 }
