@@ -1,4 +1,4 @@
-package HW01.auxilary;
+package HW01.auxiliary;
 
 import HW01.Person;
 
