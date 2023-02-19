@@ -1,7 +1,10 @@
-import Comparators.ComparatorByName;
+package lesson3;
 
+import Comparators.ComparatorByName;
+import Comparators.ComparatorByBirthDate;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,7 +57,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return humanList.iterator();
     }
 
-    public FamilyTree sortByName() {
-        return this.humanList.sort(new ComparatorByName);
+    public void sortByName() {
+        Collections.sort(humanList, new ComparatorByName());
+    }
+
+    public void sortByBirthDate() {
+        Collections.sort(humanList, new ComparatorByBirthDate());
     }
 }

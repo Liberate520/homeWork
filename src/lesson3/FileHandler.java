@@ -1,3 +1,5 @@
+package lesson3;
+
 import java.io.*;
 
 public class FileHandler implements ReadWritable{

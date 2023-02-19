@@ -1,4 +1,7 @@
+package lesson3;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,17 +10,19 @@ public class Human implements Serializable {
     private String name;
     private Gender gender;
     private Date birthDate;
+
     private Date deathDate;
     private Human father;
     private Human mother;
     private List<Human> children;
-    public Human(String name, Gender gender) {
-        this(name, gender, null, null);
+    public Human(String name, Gender gender, Date birthDate) {
+        this(name, gender, birthDate, null, null);
     }
 
-    public Human(String name, Gender gender, Human father, Human mother) {
+    public Human(String name, Gender gender, Date birthDate, Human father, Human mother) {
         this.name = name;
         this.gender = gender;
+        this.birthDate = birthDate;
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
@@ -33,14 +38,21 @@ public class Human implements Serializable {
 
     public String getName() { return name; }
 
+    public Date getBirthDate() { return birthDate; }
+
     public Human getFather(){ return father; }
 
     public Human getMother(){ return mother; }
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
+        SimpleDateFormat ft =
+                new SimpleDateFormat ("yyyy");
         sb.append("name: ");
         sb.append(name);
+        sb.append(", ");
+        sb.append("born: ");
+        sb.append(ft.format(birthDate));
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");
