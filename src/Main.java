@@ -32,9 +32,6 @@ public class Main {
         familyTree1.setFileHandler(new FileHandler());
         familyTree1.read();
         familyTree1.save();
-
-
-
-
+        familyTree1.read();
     }
 }
