@@ -1,22 +1,54 @@
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+import java.io.Serializable;
 
-class FamilyTree {
-    private Map<Person, List<Person>> tree;
+
+public class FamilyTree implements Serializable {
+    private List<Person> personList;
 
     public FamilyTree() {
-        this.tree = new HashMap<>();
+        this(new ArrayList<>());
     }
 
-    public void addPerson(Person person) {
-        tree.put(person, person.getChildren());
+    public FamilyTree(List<Person> personList) {
+        this.personList = personList;
     }
 
-    public void printChildren(Person person) {
-        System.out.println("Дети " + person.getFirstName() + " " + person.getSurName() + " " + person.getLastName() + ":");
-        for (Person child : tree.get(person)) {
-            System.out.println(child.getFirstName());
+    public boolean add(Person person) {
+        if (person == null) {
+            return false;
         }
+        if (!personList.contains(person)) {
+            personList.add(person);
+            if (person.getFather() != null) {
+                person.getFather().addChild(person);
+            }
+            if (person.getMother() != null) {
+                person.getMother().addChild(person);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public Person getByName(String name) {
+        for (Person person : personList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    public String getInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append(personList.size());
+        res.append(" objects in the tree: \n");
+        for (Person person : personList){
+            res.append(person.getInfo());
+            res.append("\n");
+        }
+        return res.toString();
     }
 }
+
+

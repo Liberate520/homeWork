@@ -1,50 +1,116 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-class Person {
-    private String firstName;
-    private String surName;
-    private String lastName;
-    private String dateOfBirth;
-    private String dateOfDeath;
+public class Person implements Serializable {
+    private String name;
+    private Date dateOfBirth;
+    private Date dateOfDeath;
     private List<Person> children;
+    private Gender gender;
+    private Person father;
+    private Person mother;
 
-    public Person(String firstName, String surName, String lastName, String dateOfBirth, String dateOfDeath) {
-        this.firstName = firstName;
-        this.surName = surName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
+    public Person(String name, Gender gender) {
+        this(name, gender, null, null);
+    }
+
+    public Person(String name, Gender gender, Person father, Person mother) {
+        this.name = name;
+        this.gender = gender;
+        this.father = father;
+        this.mother = mother;
         this.children = new ArrayList<>();
     }
 
-    public void addChild(Person child) {
-        children.add(child);
+    public boolean addChild(Person child) {
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
-    public List<Person> getChildren() {
-        return children;
+    public List<Person> getChildren() { return children; }
+
+    public String getName() { return name; }
+
+    public Date getDateOfBirth() { return dateOfBirth; }
+
+    public Date getDateOfDeath() { return dateOfDeath; }
+
+    public Person getFather() { return father; }
+
+    public Person getMother() { return mother; }
+
+    public Gender getGender() { return gender; }
+
+    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+
+    public void setDateOfDeath(Date dateOfDeath) { this.dateOfDeath = dateOfDeath; }
+
+    public void setFather(Person father) { this.father = father; }
+
+    public void setMother(Person mother) { this.mother = mother; }
+
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: ");
+        sb.append(name);
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
     }
 
-    public String getFirstName() {
-        return firstName;
+    private String getMotherInfo() {
+        String res = "мать: ";
+        if (mother != null) {
+            res += mother.getName();
+        } else {
+            res += "неизвестна";
+        }
+        return res;
     }
 
-    public String getSurName() {
-        return surName;
+    private String getFatherInfo() {
+        String res = "отец: ";
+        if (father != null) {
+            res += father.getName();
+        } else {
+            res += "неизвестен";
+        }
+        return res;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-    /*
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    private String getChildrenInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("дети: ");
+        if (children.size() != 0) {
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++) {
+                res.append(", ");
+                res.append(children.get(i).getName());
+            }
+        } else {
+            res.append("отсутствуют");
+        }
+        return res.toString();
     }
 
-    public String getDateOfDeath() {
-        return dateOfDeath;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Person)) {
+            return false;
+        }
+        Person person = (Person) obj;
+        return person.getName().equals(getName());
     }
-
-    */
 }

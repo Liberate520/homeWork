@@ -1,17 +1,15 @@
+import java.io.IOException;
+
 class Main {
-    public static void main(String[] args) {
-        Person person1 = new Person("Михаил", "Федорович", "Романов", "1613", "1645");
-        Person person2 = new Person("Евдокия", "Лукьяновна","Стрешнева", "нет данных", "нет данных");
-        Person person3 = new Person("Алексей", "Михайлович","Романов", "1645", "1676");
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        FamilyTree tree = new FamilyTree();
+        ReadWritable fileHandler = new FileHandler("data.out");
+        tree = (FamilyTree) fileHandler.read();
 
-        person1.addChild(person3);
-        person2.addChild(person3);
-
-        FamilyTree familyTree = new FamilyTree();
-        familyTree.addPerson(person1);
-        familyTree.addPerson(person2);
-
-        familyTree.printChildren(person1);
-        familyTree.printChildren(person2);
+        tree.add(new Person("Михаил Федорович", Gender.MALE));
+        tree.add(new Person("Евдокия Лукьяновна Стрешнева", Gender.FEMALE));
+        tree.add(new Person("Алексей Михайлович", Gender.MALE, tree.getByName("Михаил Федорович"), tree.getByName("Евдокия Лукьяновна Стрешнева")));
+        fileHandler.write(tree);
+        System.out.println(tree. getInfo());
     }
 }
