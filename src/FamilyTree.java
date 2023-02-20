@@ -62,7 +62,7 @@ public class FamilyTree {
                 save.voice(humanList);
 
             }else if (choice1 == 4) {
-                Serializable restore = new Restore();
+                Serializable restore = new Load();
                 restore.voice(humanList);
             }else if (choice1 == 5) {
                 return null;
