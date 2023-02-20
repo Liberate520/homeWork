@@ -16,9 +16,7 @@ public class App
 
         treeFamDem.sortTree(ComparatorFunction.dateOfBirth);// сортировка по имени или id или dateOfBirth c помощью enum
                                                                                    // после сортировки связи не путаются
-        for (Human human:treeFamDem) {
-
-        }
+        
         // функция printNamesHuman в Human, реализована с помощью for-ich с деревом..
 
 
