@@ -21,14 +21,21 @@ public class FileHandler implements Writable {
     }
 
     @Override
-    public Object read() {
+    public Object read() throws FileNotFoundException, IOException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("FamTree.out"));
-        // Person renatRestored = (Person) objectInputStream.readObject();
+                new FileInputStream("FamTree.data"));
+                try {
+                    Writable renatRestored = (Writable) objectInputStream.readObject();
+                } catch (ClassNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
         objectInputStream.close();
 
         return null;
     }
+
+    
     public void test() {
     }
 }
