@@ -1,6 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable, Iterable<Person>{
     private ArrayList<Person> tree;
 
 //===================================================================
@@ -48,6 +51,7 @@ public class FamilyTree {
         }
     }
 
+
     public void showChildren(Person person){
         if (person != null){
             for (Person child : person.getChildren()) {
@@ -70,5 +74,18 @@ public class FamilyTree {
                 showParents(parent);            
             }
         }
+    }
+    
+    public void sortByName(){
+        Collections.sort(tree);
+    }
+
+    public void sortByAge(){
+        Collections.sort(tree, new PersonComparatorByAge());
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return tree.iterator();
     }
 }
