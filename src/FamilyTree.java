@@ -1,8 +1,11 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable, Iterable<Human>{
     private List<Human> humans;
     private Writable fileHandler;
 
@@ -70,4 +73,22 @@ public class FamilyTree implements Serializable{
     public void setFileHandler(Writable fileHandler){
         this.fileHandler=fileHandler;
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        
+        return new HumanIterator(humans);
+    }  
+    
+   
+    public void sortByName(){
+        Collections.sort(humans, new HumanComparatorByName());
+    }
+
+    public void sortByYearBirth(){
+        Collections.sort(humans, new HumanComparatorByYearBirth());
+    }
+    
+
+
 }
