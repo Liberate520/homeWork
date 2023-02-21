@@ -4,15 +4,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        List<Human> person = new ArrayList<>();
-        person.add(new Human("Павел", Sex.Male));
-        person.add(new Human("Александр", Sex.Male));
-        person.add(new Human("Лейла", Sex.Female));
+        FamilyTree tree = new FamilyTree();
+        tree.add(new Human("Павел", Sex.Male));
+        tree.add(new Human("Александр", Sex.Male));
+        tree.add(new Human("Олеся", Sex.Female));
+        tree.add(new Human("Лейла", Sex.Female));
+        tree.add(new Human("Вечислав", Sex.Male, tree.getByFirstname("Павел"), tree.getByFirstname("Лейла")));
 
-        for (var p :
-                person) {
-            System.out.println(p.toString());
-        }
-
+        System.out.println(tree.getInfo());
     }
 }
