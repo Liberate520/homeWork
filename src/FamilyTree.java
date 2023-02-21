@@ -1,8 +1,10 @@
-import java.io.IOException;
+import com.sun.source.tree.BreakTree;
+
+import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class FamilyTree {
+public class FamilyTree implements Iterable<Person>, Serializable, Writable {
     private List<Person> humanList;
     public FamilyTree() {
         this(new ArrayList<>());
@@ -28,46 +30,57 @@ public class FamilyTree {
         }
         return false;
     }
-    public Person getByName(String name) {
+    public Person getByName(int id) {
         for (Person Person: humanList) {
-            if (Person.getName().equals(name)){
+            if (Objects.equals(Person.getId(), id)){
                 return Person;
             }
         }
         return null;
     }
-
-    public Person getInfo() throws IOException, ClassNotFoundException {
-        while (true) {
-            Scanner iScanner = new Scanner(System.in);
-            System.out.println("Поиск(1), Весь список(2), Сохранить(3), Востановить(4), Выход(5): ");
-            int choice1 = iScanner.nextInt();
-            if (choice1 == 1) {
-                Scanner Scanner = new Scanner(System.in);
-                System.out.println("Поиск по династии: ");
-                String search = Scanner.nextLine();
-                Predicate<Person> laptopOs = n -> n.getName().equals(search);
-                humanList.stream()
-                        .filter(laptopOs)
-                        .forEach(System.out::println);
-            }else if (choice1 == 2) {
-                System.out.println();
-                System.out.println("Генеалогическое древо Романовых: ");
-
-                for (Person p : humanList) {
-                    System.out.println(p);
-                }
-            }else if (choice1 == 3) {
-                Serializable save = new Save();
-                save.voice(humanList);
-
-            }else if (choice1 == 4) {
-                Serializable restore = new Load();
-                restore.voice(humanList);
-            }else if (choice1 == 5) {
-                return null;
+    public void Search(String search) {
+        Predicate<Person> dynasty = n -> n.getName().equals(search);
+        humanList.stream()
+                .filter(dynasty)
+                .forEach(System.out::println);
+    }
+    public void List() {
+        System.out.println();
+        System.out.println("Генеалогическое древо Романовых: ");
+        for (Person p : humanList) {
+            System.out.println(p);
         }
+    }
+    public void sort() {
+        Collections.sort(humanList);
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(humanList);
+    }
+
+
+    @Override
+    public void save() throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream("person.out"));
+        objectOutputStream.writeObject(this);
+
+        objectOutputStream.close();
+    }
+
+    @Override
+    public Override read() throws IOException, ClassNotFoundException {
+        // Востановление из файла с помощью класса ObjectInputStream
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream("person.out"));
+        Object tree = objectInputStream.readObject();
+        objectInputStream.close();
+        for (Person p: (FamilyTree)tree){
+            System.out.println(p);
         }
+        return null;
     }
 
 }
