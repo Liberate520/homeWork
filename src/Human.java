@@ -3,10 +3,10 @@ package src;
 import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable {
+public class Human extends It implements Serializable {
     private Human father;
     private Human mother;
-    private List<Human> children = new ArrayList<>();
+    private List<Human> children;
 
     private String gender;
     private String dateOfBorn;

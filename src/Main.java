@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree t1 = new FamilyTree();
+        FamilyTree<Human> t1 = new FamilyTree<>();
 //        Human a1 = new Human("Male", "25.04.1914", "31.12.2000", "СПБ", "Сергей", "Петрович", "Евдокимов");
 //        Human a3 = new Human("Female", "28.03.1918", "", "СПБ", "Авдотья", "Павловна", "Евдокимова");
 //        Human r = new Human(a1, a3, "Female", "07.12.1937", "01.01.2011", "СПБ", "Светлана","Петровна", "Евдокимова");
@@ -24,7 +24,7 @@ public class Main {
 //        System.out.println(t1);
         System.out.println(t1.findHumans("Male", "", "", "", "", "", "", "", ""));
         t1.getStatistics(t1.findHumans("Male", "", "", "", "", "", "", "", "").get(0));
-        TreeFilter tf = new TreeFilter();
+        TreeFilter<Human> tf = new TreeFilter<>();
         System.out.println(tf.filter(t1.getFamily(), "Male", Human::getGender, FilterType.STRING));
 
         for (Human h :

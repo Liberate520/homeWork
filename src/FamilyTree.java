@@ -11,43 +11,40 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
 
     private Writable fileHandlerWritable;
     private Readable fileHandlerReadable;
 
-    private List<Human> family = new ArrayList<>();
-    public FamilyTree(List<Human> family) {
+    private List<T> family = new ArrayList<>();
+
+    public FamilyTree(List<T> family) {
         this.family = family;
     }
+
     public FamilyTree() {
         this(null);
     }
 
-    public List<Human> getFamily() {
+    public List<T> getFamily() {
         return family;
     }
 
 
-
-
-
-
     public void save() throws IOException {
-        if(fileHandlerWritable == null) {
+        if (fileHandlerWritable == null) {
             fileHandlerWritable = new FileRW();
         }
         fileHandlerWritable.saveFile(family, "treeOut");
     }
 
     public void load() throws IOException, ClassNotFoundException {
-        if(fileHandlerReadable == null) {
+        if (fileHandlerReadable == null) {
             fileHandlerReadable = new FileRW();
         }
         Object familyCheck = fileHandlerReadable.loadFile("treeOut");
-        if(familyCheck instanceof List res) {
+        if (familyCheck instanceof List res) {
             family = new ArrayList<>();
-            //Ненадежно, как-то... но работает
             family.addAll(res);
         }
 
@@ -57,22 +54,22 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("------------------------\n");
-        for (Human h:
-             family) {
+        for (T h :
+                family) {
             result.append(h.getLastName()).append(" ").append(h.getFirstName()).append(" ").append(h.getPatronymic()).append("\n");
         }
 
         return result.toString();
     }
 
-    public void addToFamily(Human human){
-        if(family == null) {
+    public void addToFamily(T human) {
+        if (family == null) {
             family = new ArrayList<>();
         }
-        if(!family.contains(human)){
+        if (!family.contains(human)) {
             family.add(human);
         }
-        for (Human h :
+        for (T h :
                 human.getChildren()) {
             addToFamily(h);
         }
@@ -80,23 +77,22 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
 
-
-    private List<Human> findFamilyList(String lastName){
-        List<Human> result = new ArrayList<>();
-        for (Human human:
-             family) {
-            if(Objects.equals(human.getLastName(), lastName)){
+    private List<T> findFamilyList(String lastName) {
+        List<T> result = new ArrayList<>();
+        for (T human :
+                family) {
+            if (Objects.equals(human.getLastName(), lastName)) {
                 result.add(human);
             }
         }
         return result;
     }
 
-    public String findFamily(String name){
+    public String findFamily(String name) {
         StringBuilder result = new StringBuilder();
-        List<Human> lst = findFamilyList(name);
-        if(!lst.isEmpty()){
-            for (Human h:
+        List<T> lst = findFamilyList(name);
+        if (!lst.isEmpty()) {
+            for (T h :
                     lst) {
                 result.append(h.getLastName()).append(" ").append(h.getFirstName()).append(" ").append(h.getPatronymic()).append("\n");
             }
@@ -106,10 +102,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return result.toString();
     }
 
-    public void getStatistics(Human human){
-        if(family.contains(human)) {
+    public void getStatistics(T human) {
+        if (family.contains(human)) {
             StringBuilder result = new StringBuilder();
-            List<Human> children = getClildrenAndGrandsonsList(human);
+            List<T> children = getClildrenAndGrandsonsList(human);
             result.append("---------------------------\n");
             result.append("ФИО: ").append(human.getLastName()).append(" ").append(human.getFirstName()).append(" ").append(human.getPatronymic());
             result.append("\n");
@@ -122,29 +118,31 @@ public class FamilyTree implements Serializable, Iterable<Human> {
             System.out.println(result);
         }
     }
-    // описание ранее не соответствововало названию, получаем список детей их детей и так по низходящей
-    public List<Human> getClildrenAndGrandsonsList(Human human){
-        List<Human> hlist = new ArrayList<>();
+
+
+    public List<T> getClildrenAndGrandsonsList(T human) {
+        List<T> hlist = new ArrayList<>();
         hlist.add(human);
-        List<Human> result = createClildrenAndGrandsonsList(hlist);
+        List<T> result = createClildrenAndGrandsonsList(hlist);
         result.remove(0);
         return result;
     }
-    private List<Human> createClildrenAndGrandsonsList(List<Human> lst) {
-        List<Human> result = new ArrayList<>(lst);
+
+    private List<T> createClildrenAndGrandsonsList(List<T> lst) {
+        List<T> result = new ArrayList<>(lst);
         int st = lst.size();
-        for (Human h :
+        for (T h :
                 lst) {
-                if(!h.getChildren().isEmpty()){
-                    for (Human hh :
-                            h.getChildren()) {
-                        if(!result.contains(hh)){
-                            result.add(hh);
-                        }
+            if (!h.getChildren().isEmpty()) {
+                for (T hh :
+                        h.getChildren()) {
+                    if (!result.contains(hh)) {
+                        result.add(hh);
                     }
                 }
+            }
         }
-        if(result.size()==lst.size()){
+        if (result.size() == lst.size()) {
             return result;
         } else {
             result = createClildrenAndGrandsonsList(result);
@@ -153,8 +151,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
 
-
-    public List<Human> findHumans(
+    public List<T> findHumans(
             String gender,
             String firstName,
             String patronymic,
@@ -164,20 +161,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
             String dateOfDeathFrom,
             String dateOfDeathTo,
             String placeOfBirth
-    ){
-        List<Human> result = new ArrayList<>();
-        TreeFilter tr = new TreeFilter();
+    ) {
+        List<T> result = new ArrayList<>();
+        TreeFilter<T> tr = new TreeFilter<>();
 
-        List<Function<Human, String>> filters = Arrays.asList(
-                Human::getGender,
-                Human::getFirstName,
-                Human::getPatronymic,
-                Human::getLastName,
-                Human::getPlaceOfBirth,
-                Human::getDateOfBorn,
-                Human::getDateOfDeath,
-                Human::getDateOfBorn,
-                Human::getDateOfDeath
+        List<Function<T, String>> filters = Arrays.asList(
+                T::getGender,
+                T::getFirstName,
+                T::getPatronymic,
+                T::getLastName,
+                T::getPlaceOfBirth,
+                T::getDateOfBorn,
+                T::getDateOfDeath,
+                T::getDateOfBorn,
+                T::getDateOfDeath
         );
         List<String> values = Arrays.asList(
                 gender,
@@ -203,7 +200,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         );
 
         for (int i = 0; i < filters.size(); i++) {
-            if(i == 0) {
+            if (i == 0) {
                 result.addAll(family);
             }
             result.retainAll(tr.filter(result, values.get(i), filters.get(i), types.get(i)));
@@ -211,7 +208,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return result;
     }
 
-    public void setFamily(List<Human> family) {
+    public void setFamily(List<T> family) {
         this.family = family;
     }
 
@@ -223,21 +220,21 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this.fileHandlerReadable = fileHandlerReadable;
     }
 
-    public void sortByAge(){
-        Collections.sort(family, new HumanComparatorByAge());
+    public void sortByAge() {
+        Collections.sort(family, new HumanComparatorByAge<T>());
     }
 
-    public void sortByLastName(){
-        Collections.sort(family, new HumanComparatorByLastName());
+    public void sortByLastName() {
+        Collections.sort(family, new HumanComparatorByLastName<T>());
     }
 
-    public void sort(SortBy sortBy){
-        Collections.sort(family, new HumanComparator(sortBy));
+    public void sort(SortBy sortBy) {
+        Collections.sort(family, new HumanComparator<T>(sortBy));
     }
 
     @NotNull
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIterator(family);
+    public Iterator<T> iterator() {
+        return new FamilyTreeIterator<T>(family);
     }
 }

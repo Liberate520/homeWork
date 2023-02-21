@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class TreeFilter {
+public class TreeFilter<T extends It> {
 
-    public List<Human> filter(List<Human> filteringLst, String filterStr, Function<Human, String> property, FilterType filterType) {
-        List<Human> result = new ArrayList<>();
+    public List<T> filter(List<T> filteringLst, String filterStr, Function<T, String> property, FilterType filterType) {
+        List<T> result = new ArrayList<>();
         if (!filteringLst.isEmpty()) {
             if (filterStr.isEmpty()) {
                 result.addAll(filteringLst);
             } else {
                 Dates day = new Dates();
-                for (Human h : filteringLst) {
+                for (T h : filteringLst) {
                     switch (filterType) {
                         case STRING -> {
                             if (Objects.equals(property.apply(h), filterStr)) {
