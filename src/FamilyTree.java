@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class FamilyTree implements Iterable<Person>, Serializable, Writable {
+public class FamilyTree implements Iterable<Person>, Serializable{
     private List<Person> humanList;
     public FamilyTree() {
         this(new ArrayList<>());
@@ -58,29 +58,6 @@ public class FamilyTree implements Iterable<Person>, Serializable, Writable {
     @Override
     public Iterator<Person> iterator() {
         return new PersonIterator(humanList);
-    }
-
-
-    @Override
-    public void save() throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("person.out"));
-        objectOutputStream.writeObject(this);
-
-        objectOutputStream.close();
-    }
-
-    @Override
-    public Override read() throws IOException, ClassNotFoundException {
-        // Востановление из файла с помощью класса ObjectInputStream
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("person.out"));
-        Object tree = objectInputStream.readObject();
-        objectInputStream.close();
-        for (Person p: (FamilyTree)tree){
-            System.out.println(p);
-        }
-        return null;
     }
 
 }

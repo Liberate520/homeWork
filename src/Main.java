@@ -6,7 +6,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree tree = new FamilyTree();
         tree.add(new Person(1, "Михаил", "Федорович", Gender.MALE, "1613-1645", null, null, "Евдокия Лукьяновна Стрешнева"));
@@ -50,7 +50,7 @@ public class Main {
         tree.add(new Person(39, "Мария", "Федоровна Датская", Gender.FEMALE, null, null, null, "Александр III Александрович"));
         tree.add(new Person(40, "Николай II", "Александрович", Gender.MALE, "1894-1917", tree.getByName(38), tree.getByName(39), "Александра Федоровна Гессенская"));
         tree.add(new Person(41, "Александра", "Федоровна Гессенская", Gender.FEMALE, null, null, null, "Николай II Александрович"));
-
+        Handler handler = new Handler();
         while (true) {
             Scanner iScanner = new Scanner(System.in);
             System.out.println("Поиск(1), Весь список(2), Сортировка по имени(3) Сохранить(4), Востановить(5), Выход(6): ");
@@ -67,9 +67,9 @@ public class Main {
                 tree.sort();
                 tree.List();
             }else if (choice == 4) {
-                tree.save();
+                handler.save(tree);
             }else if (choice == 5) {
-                tree.read();
+                handler.read();
             }else if (choice == 6) {
                 return;
             }
