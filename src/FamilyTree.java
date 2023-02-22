@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.Serializable;
 
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable {
     private List<Person> personList;
 
     public FamilyTree() {
@@ -39,6 +39,8 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
+
+
     public String getInfo(){
         StringBuilder res = new StringBuilder();
         res.append(personList.size());
@@ -48,6 +50,19 @@ public class FamilyTree implements Serializable {
             res.append("\n");
         }
         return res.toString();
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(personList);
+    }
+
+    public void sortByName() {
+        Collections.sort(personList, new PersonComparatorByName());
+    }
+
+    public void sortByBirthDate() {
+        Collections.sort(personList, new PersonComparatorByBirth());
     }
 }
 

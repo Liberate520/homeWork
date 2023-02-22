@@ -5,20 +5,21 @@ import java.util.List;
 
 public class Person implements Serializable {
     private String name;
-    private Date dateOfBirth;
-    private Date dateOfDeath;
+    private Integer dateOfBirth;
+    private Integer dateOfDeath;
     private List<Person> children;
     private Gender gender;
     private Person father;
     private Person mother;
 
-    public Person(String name, Gender gender) {
-        this(name, gender, null, null);
+    public Person(String name, Gender gender, Integer dateOfBirth) {
+        this(name, gender, dateOfBirth, null, null);
     }
 
-    public Person(String name, Gender gender, Person father, Person mother) {
+    public Person(String name, Gender gender, Integer dateOfBirth, Person father, Person mother) {
         this.name = name;
         this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
@@ -36,9 +37,9 @@ public class Person implements Serializable {
 
     public String getName() { return name; }
 
-    public Date getDateOfBirth() { return dateOfBirth; }
+    public Integer getDateOfBirth() { return dateOfBirth; }
 
-    public Date getDateOfDeath() { return dateOfDeath; }
+    public Integer getDateOfDeath() { return dateOfDeath; }
 
     public Person getFather() { return father; }
 
@@ -46,9 +47,9 @@ public class Person implements Serializable {
 
     public Gender getGender() { return gender; }
 
-    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public void setDateOfBirth(Integer dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 
-    public void setDateOfDeath(Date dateOfDeath) { this.dateOfDeath = dateOfDeath; }
+    public void setDateOfDeath(Integer dateOfDeath) { this.dateOfDeath = dateOfDeath; }
 
     public void setFather(Person father) { this.father = father; }
 
