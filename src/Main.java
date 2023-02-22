@@ -50,7 +50,7 @@ public class Main{
         tree.add(new Person(39, "Мария", "Федоровна Датская", Gender.FEMALE, null, null, null, "Александр III Александрович"));
         tree.add(new Person(40, "Николай II", "Александрович", Gender.MALE, "1894-1917", tree.getByName(38), tree.getByName(39), "Александра Федоровна Гессенская"));
         tree.add(new Person(41, "Александра", "Федоровна Гессенская", Gender.FEMALE, null, null, null, "Николай II Александрович"));
-        Handler handler = new Handler();
+        Writable handler = new Handler();
         while (true) {
             Scanner iScanner = new Scanner(System.in);
             System.out.println("Поиск(1), Весь список(2), Сортировка по имени(3) Сохранить(4), Востановить(5), Выход(6): ");
