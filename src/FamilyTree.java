@@ -69,9 +69,9 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         if (!family.contains(human)) {
             family.add(human);
         }
-        for (T h :
+        for (It it :
                 human.getChildren()) {
-            addToFamily(h);
+            addToFamily((T)it);
         }
 
     }
@@ -134,10 +134,10 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         for (T h :
                 lst) {
             if (!h.getChildren().isEmpty()) {
-                for (T hh :
+                for (It it :
                         h.getChildren()) {
-                    if (!result.contains(hh)) {
-                        result.add(hh);
+                    if (!result.contains(it)) {
+                        result.add((T) it);
                     }
                 }
             }

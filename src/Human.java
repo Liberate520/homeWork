@@ -110,8 +110,8 @@ public class Human extends It implements Serializable {
         this.mother = mother;
     }
 
-    public List<Human> getChildren() {
-        return children;
+    public List<It> getChildren() {
+        return new ArrayList<>(children);
     }
 
     public void setChildren(List<Human> children) {
