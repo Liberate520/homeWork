@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Person
@@ -11,7 +11,7 @@ public class Person
     private Integer YearOfDeath;
     private Person father;
     private Person mother;
-    private List<Person> spouse = new LinkedList<Person>();
+    private List<Person> spouse = new ArrayList<Person>();
 
     public Person(String name,
                   String middleName,
@@ -26,6 +26,23 @@ public class Person
         this.gender = gender;
         this.YearOfBirth = yearOfBirth;
         this.YearOfDeath = yearOfDeath;
+    }
+
+    public String spouseToString(List<Person> spouse)
+    {
+        String result = "";
+        if (spouse.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            for (int i = 0; i < spouse.size(); i++)
+            {
+                result += spouse.get(i).Name + " " + spouse.get(i).MiddleName + ";";
+            }
+        }
+        return result;
     }
 
     public void setName(String name) {
@@ -92,7 +109,7 @@ public class Person
                 ", YearOfDeath=" + YearOfDeath +
                 ", father=" + father +
                 ", mother=" + mother +
-                ", spouse=" + spouse +
+                ", spouse=" + spouseToString(spouse) +
                 '}';
     }
 
@@ -123,8 +140,10 @@ public class Person
         return mother;
     }
 
-    public void addSpouse(Person spouse) {
-        this.spouse.add(spouse);
+    public void addSpouse(Person person)
+    {
+        this.spouse.add(person);
+        person.spouse.add(this);
     }
 
     public List<Person> getSpouse() {

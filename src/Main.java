@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -8,7 +7,7 @@ public class Main {
     public static void main(String[] args)
     {
         FamilyTree familytree = new FamilyTree();
-        familytree = InitData();
+        familytree = initData();
 
         Scanner scan = new Scanner(System.in);
         String nameToSearch;
@@ -56,7 +55,7 @@ public class Main {
         scan.close();
     }
 
-    public static FamilyTree InitData()
+    public static FamilyTree initData()
     {
         /*person 01*/
         Person person01 = new Tsar(
@@ -92,7 +91,7 @@ public class Main {
                 1625,
                 1669);
         person03.addSpouse(person02);
-        person02.addSpouse(person03);
+        //person02.addSpouse(person03);
 
         /*person 04*/
         Person person04 = new Person(
@@ -103,7 +102,7 @@ public class Main {
                 1651,
                 1694);
         person04.addSpouse(person02);
-        person02.addSpouse(person04);
+        //person02.addSpouse(person04);
 
         /*person 05*/
         Person person05 = new Tsar(
@@ -170,7 +169,7 @@ public class Main {
                 1725,
                 10727);
         person09.addSpouse(person08);
-        person08.addSpouse(person09);
+        //person08.addSpouse(person09);
 
 
         FamilyTree familytree = new FamilyTree();

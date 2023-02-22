@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class FamilyTree
 {
-    private List<Person> familyTree = new LinkedList<Person>();
+    private List<Person> familyTree = new ArrayList<>();
 
     public FamilyTree()
     {
@@ -24,7 +23,8 @@ public class FamilyTree
     {
         for (int i=0;i< familyTree.size();i++)
         {
-            familyTree.get(i).printAll();
+            //familyTree.get(i).printAll();
+            System.out.println(familyTree.get(i));
         }
     }
 
@@ -52,7 +52,7 @@ public class FamilyTree
 
     public List<Person> searchChildrenByPerson(Person person)
     {
-        List<Person> childrenList = new LinkedList<Person>();
+        List<Person> childrenList = new ArrayList<Person>();
 
         for (int i=0;i< familyTree.size();i++)
         {
@@ -70,7 +70,7 @@ public class FamilyTree
     {
         Person person = searchPersonByNameAndMiddleName(name);
 
-        List<Person> childrenList = new LinkedList<Person>();
+        List<Person> childrenList = new ArrayList<Person>();
         childrenList = searchChildrenByPerson(person);
         if (childrenList.isEmpty())
         {
