@@ -23,8 +23,8 @@ public class FamilyTree
     {
         for (int i=0;i< familyTree.size();i++)
         {
-            //familyTree.get(i).printAll();
-            System.out.println(familyTree.get(i));
+            familyTree.get(i).printAll();
+            //System.out.println(familyTree.get(i));
         }
     }
 

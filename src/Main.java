@@ -6,8 +6,8 @@ public class Main {
 
     public static void main(String[] args)
     {
-        FamilyTree familytree = new FamilyTree();
-        familytree = initData();
+        FamilyTree familyTree = new FamilyTree();
+        familyTree = initData();
 
         Scanner scan = new Scanner(System.in);
         String nameToSearch;
@@ -34,12 +34,12 @@ public class Main {
                 {
                     System.out.printf("\nВведите имя, например: Михаил Федорович\n> ");
                     nameToSearch = scan.nextLine();
-                    familytree.searchChildrenByFathersName(nameToSearch);
+                    familyTree.searchChildrenByFathersName(nameToSearch);
                     break;
                 }
                 case 2:
                 {
-                    familytree.printAll();
+                    familyTree.printAll();
                     break;
                 }
                 default:
@@ -91,7 +91,6 @@ public class Main {
                 1625,
                 1669);
         person03.addSpouse(person02);
-        //person02.addSpouse(person03);
 
         /*person 04*/
         Person person04 = new Person(
@@ -102,7 +101,6 @@ public class Main {
                 1651,
                 1694);
         person04.addSpouse(person02);
-        //person02.addSpouse(person04);
 
         /*person 05*/
         Person person05 = new Tsar(
@@ -169,21 +167,19 @@ public class Main {
                 1725,
                 10727);
         person09.addSpouse(person08);
-        //person08.addSpouse(person09);
 
+        FamilyTree familyTree = new FamilyTree();
+        familyTree.add(person01);
+        familyTree.add(person02);
+        familyTree.add(person03);
+        familyTree.add(person04);
+        familyTree.add(person05);
+        familyTree.add(person06);
+        familyTree.add(person07);
+        familyTree.add(person08);
+        familyTree.add(person09);
 
-        FamilyTree familytree = new FamilyTree();
-        familytree.add(person01);
-        familytree.add(person02);
-        familytree.add(person03);
-        familytree.add(person04);
-        familytree.add(person05);
-        familytree.add(person06);
-        familytree.add(person07);
-        familytree.add(person08);
-        familytree.add(person09);
-
-        return familytree;
+        return familyTree;
     }
 
 
