@@ -1,7 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable, Iterable{
     private ArrayList<Person> people;
 
     public FamilyTree() {
@@ -90,6 +91,10 @@ public class FamilyTree implements Serializable{
         return null;
     }
 
+    @Override
+    public Iterator iterator() {
+        return new FamilyTreeIterator(people);
+    }
 }
 
 

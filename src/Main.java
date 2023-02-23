@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -32,11 +33,14 @@ public class Main {
         family.addChildToMother("Мария Ильинична Миллославская", new Person("Симеон Алексеевич", 1665, 1669, Sex.Male, 2));
         family.addChildToMother("Мария Ильинична Миллославская", new Person("Иоанн V ", 1666, 1696, Sex.Male, 2, "1682-1696"));
 
-        family.getList();
-
        SavingFT.saveToFile(family);
 
        SavingFT.restoreFromFile();
+
+       for (Object human: family){
+           System.out.print("Iteration obj ---- ");
+           System.out.println(human);
+       }
 
 
     }
