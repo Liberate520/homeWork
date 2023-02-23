@@ -1,68 +1,49 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.io.Serializable;
 
-public class FamilyTree {
-    private ArrayList<Human> tree;
+public class FamilyTree implements Serializable {
+    private List<Human> listHuman;
 
-    public FamilyTree(){
+    public FamilyTree() { 
         this(new ArrayList<>());
     }
 
-    public FamilyTree(ArrayList<Human> tree){
-        this.tree = tree;
+    public FamilyTree(List<Human> listHuman) {
+        this.listHuman = listHuman;
     }
 
-    public void printTree() {
-        for (Human person : tree) {
-            System.out.println(person);
+    public boolean add(Human human) {
+        if (human == null) {
+            return false;
         }
+        if (!listHuman.contains(human)) {
+            listHuman.add(human);
+            if (human.getFather() != null) {
+                human.getFather().addChild(human); 
+            }
+            if (human.getMother() != null) {
+                human.getMother().addChild(human);
+            }
+            return true;
+        }
+        return false;
     }
 
-    public Human getPersonByID(int id){
-        for (Human person : tree) {
-            if (id == person.getId()) return person;
+    public Human getByName(String name) {
+        for (Human human : listHuman) {
+            if (human.getName() == name) {
+                return human;
+            }
         }
-        System.out.println("There are no people with id - " + id);
         return null;
     }
 
-    public void addPerson(Human person){
-        if (person != null){
-            tree.add(person);
+    public String getInfoTree() {
+        StringBuilder sb = new StringBuilder();
+        for (Human human : listHuman) {
+            sb.append(human.getInfo());
         }
+        return sb.toString();
     }
 
-    public void addPerson(Human person, Human ... parents){
-        if (person != null){
-            tree.add(person);
-            for (Human parent : parents) {
-                person.addParent(parent);
-                parent.addChild(person);
-                if (parent.getSex() == Gender.MALE) person.setLastName(parent.getLastName());
-            }
-        }
-    }
-
-    public void showChildren(Human person){
-        if (person != null){
-            for (Human child : person.getChildren()) {
-                System.out.println(child);            
-            }
-        }
-    }
-    public void showParents(Human person){
-        if (person != null){
-            for (Human parent : person.getParents()) {
-                System.out.println(parent);            
-            }
-        }
-    }
-    public void showGrandParents(Human person){
-        if (person != null){
-            for (Human parent : person.getParents()) {
-                if (parent.getSex() == Gender.MALE) System.out.println("Paternal grandparents:");
-                else System.out.println("Maternal grandparents:");
-                showParents(parent);            
-            }
-        }
-    }
 }
