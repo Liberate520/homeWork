@@ -1,11 +1,13 @@
+package MyProject;
+
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<T extends Person> implements Iterator<T> {
     private int index;
-    private List<Person>humanList;
+    private List<T>humanList;
 
-    public PersonIterator(List<Person> humanList) {
+    public PersonIterator(List<T> humanList) {
         this.humanList = humanList;
     }
 
@@ -15,7 +17,7 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
-        return humanList.get(index++);
+    public T next() {
+        return (T) humanList.get(index++);
     }
 }

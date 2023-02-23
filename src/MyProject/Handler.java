@@ -1,6 +1,8 @@
+package MyProject;
+
 import java.io.*;
 
-public class Handler implements Serializable, Writable {
+public class Handler implements Writable {
     @Override
     public void save(Serializable serializable) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
@@ -16,7 +18,7 @@ public class Handler implements Serializable, Writable {
                 new FileInputStream("person.out"));
         Object tree = objectInputStream.readObject();
         objectInputStream.close();
-        for (Person p: (FamilyTree)tree){
+        for (Object p: (FamilyTree)tree){
             System.out.println(p);
         }
         return tree;

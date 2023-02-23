@@ -1,10 +1,14 @@
+package MyProject;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Person implements Serializable, Comparable<Person> {
     private int id;
     private String name;
     private String middle_name;
+    private int year;
     private Gender gender;
     private String years_government;
     private Person father;
@@ -14,11 +18,12 @@ public class Person implements Serializable, Comparable<Person> {
     private List<Person> children;
 
 
-    public Person(int id, String name, String middle_name, Gender gender, String years_government, Person father, Person mother, String spouse) {
+    public Person(int id, String name, String middle_name, int year, Gender gender, String years_government, Person father, Person mother, String spouse) {
 
         this.id = id;
         this.name = name;
         this.middle_name = middle_name;
+        this.year = year;
         this.gender = gender;
         this.years_government = years_government;
         this.father = father;
@@ -38,6 +43,9 @@ public class Person implements Serializable, Comparable<Person> {
         return middle_name;
     }
 
+    public int getYear() {
+        return year;
+    }
 
     public Person getFather() {
         return father;
@@ -116,6 +124,8 @@ public class Person implements Serializable, Comparable<Person> {
         sb.append(name);
         sb.append(" ");
         sb.append(middle_name);
+        sb.append(", ");
+        sb.append("Год рождения: " +year);
         sb.append(", ");
         sb.append(getYearsInfo());
         sb.append(", ");
