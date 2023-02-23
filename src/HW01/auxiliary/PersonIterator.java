@@ -1,14 +1,14 @@
 package HW01.auxiliary;
 
-import HW01.Person;
+import HW01.model.Basic;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<T extends Basic> implements Iterator<T> {
     private int index;
-    private List<Person> persons;
-    public PersonIterator(List<Person> persons) {
+    private List<T> persons;
+    public PersonIterator(List<T> persons) {
         this.persons = persons;
     }
     @Override
@@ -16,7 +16,7 @@ public class PersonIterator implements Iterator<Person> {
         return persons.size()>index;
     }
     @Override
-    public Person next() {
+    public T next() {
         return persons.get(index++);
     }
 }

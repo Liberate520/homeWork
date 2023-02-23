@@ -1,13 +1,12 @@
 package HW01.auxiliary;
 
-import HW01.Person;
-
+import HW01.model.Basic;
 import java.util.Comparator;
 
-public class PersonComparatorByBirth implements Comparator<Person> {
+public class PersonComparatorByBirth<T extends Basic> implements Comparator<T> {
 
     @Override
-    public int compare(Person o1, Person o2) {
+    public int compare(T o1, T o2) {
         return o1.getDateOfBirth().compareTo(o2.getDateOfBirth());
     }
 }

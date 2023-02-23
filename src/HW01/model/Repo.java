@@ -1,8 +1,10 @@
-package HW01;
+package HW01.model;
+
+import HW01.model.FileData;
 
 import java.io.*;
 
-public class Repo implements FileData{
+public class Repo implements FileData {
 
     @Override
     public void save(Serializable serializable, String filename) throws IOException {

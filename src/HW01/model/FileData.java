@@ -1,4 +1,4 @@
-package HW01;
+package HW01.model;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
