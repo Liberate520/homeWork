@@ -24,8 +24,8 @@ public class FileHandler {
                 }
             }
             file[i] = Integer.toString(gen) + separator + human.getName() + separator + human.getSex() + separator 
-                    + human.getFatherName(human.getFather()) + separator + human.getMotherName(human.getMother()) + separator
-                    + human.getChildrenName(human.getChildren());
+                    + Integer.toString(human.getYearOfBirth()) + separator + human.getFatherName(human.getFather()) + separator 
+                    + human.getMotherName(human.getMother()) + separator + human.getChildrenName(human.getChildren());
         }
         format_write.write(file_name, file, separator);
     }
@@ -43,10 +43,10 @@ public class FileHandler {
             Human hum_mother = null;
             Human hum_father = null;
             for (int j = 0; j < humans_list.size(); j++) {
-                if (humans_list.get(j).getName().equalsIgnoreCase(human[3])) hum_father = humans_list.get(j);
-                else if (humans_list.get(j).getName().equalsIgnoreCase(human[4])) hum_mother = humans_list.get(j);
+                if (humans_list.get(j).getName().equalsIgnoreCase(human[4])) hum_father = humans_list.get(j);
+                else if (humans_list.get(j).getName().equalsIgnoreCase(human[5])) hum_mother = humans_list.get(j);
             }
-            humans_list.add(new Human(human[1], human[2], hum_father, hum_mother));
+            humans_list.add(new Human(human[1], human[2], Integer.parseInt(human[3]), hum_father, hum_mother));
             if (hum_father != null) hum_father.addChild(humans_list.get(humans_list.size() - 1));
             if (hum_mother != null) hum_mother.addChild(humans_list.get(humans_list.size() - 1));
             gen = Integer.parseInt(human[0]);

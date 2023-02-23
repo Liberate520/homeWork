@@ -6,20 +6,22 @@ import java.util.List;
 public class Human {
     private String name;
     private String sex;
+    private Integer year_of_birth;
     private Human father;
     private Human mother;
     private List<Human> children;
     
-    public Human(String name, String sex, Human father, Human mother) {
+    public Human(String name, String sex, Integer year_of_birth, Human father, Human mother) {
         this.name = name;
         this.sex = sex;
+        this.year_of_birth = year_of_birth;
         this.father = father;
         this.mother = mother;
         this.children = new ArrayList<>();
     }
     
-    public Human(String name, String sex){
-        this(name, sex, null, null);
+    public Human(String name, String sex, Integer year_of_birth){
+        this(name, sex, year_of_birth, null, null);
     }
 
     public String getName() {
@@ -28,6 +30,10 @@ public class Human {
 
     public String getSex() {
         return sex;
+    }
+    
+    public Integer getYearOfBirth() {
+        return year_of_birth;
     }
 
     public Human getFather() {
@@ -83,6 +89,7 @@ public class Human {
     public String toString() {
         return "Имя = " + name + 
                ", Пол = " + sex + 
+               ", Год рождения = " + year_of_birth + 
                ", Отец = " + getFatherName(father) + 
                ", Мать = " + getMotherName(mother) + 
                ", Дети = " + getChildrenName(children);

@@ -5,10 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Txt implements Writeable, Readable {
+public class FileFormatTxt implements Writeable, Readable {
     @Override
     public ArrayList<String[]> read(String file_name) throws IOException {
-        file_name = "../src/" + file_name + ".txt";
+        file_name = "src/" + file_name + ".txt";
         FileReader reader = new FileReader(file_name);
         String readfile = "";
         int symbol;
@@ -20,7 +20,9 @@ public class Txt implements Writeable, Readable {
         readfile = readfile.replace("Поколение ", "");
         readfile = readfile.replace(": ", separator);
         readfile = readfile.replace(" (", separator);
-        readfile = readfile.replace("), Отец - ", separator);
+        readfile = readfile.replace(") ", separator);
+        readfile = readfile.replace(" года рождения", "");
+        readfile = readfile.replace(", Отец - ", separator);
         readfile = readfile.replace(", Мать - ", separator);
         readfile = readfile.replace(", Дети - ", separator);
         String [] file = readfile.split("\n");
@@ -33,8 +35,8 @@ public class Txt implements Writeable, Readable {
 
     @Override
     public void write(String file_name, String [] file, String separator) throws IOException {
-        if (file_name == null) file_name = "../src/FamilyTree.txt";
-        else file_name = "../src/" + file_name + ".txt";
+        if (file_name == null) file_name = "src/FamilyTree.txt";
+        else file_name = "src/" + file_name + ".txt";
         FileWriter writer = new FileWriter(file_name);
         writer.write("Генеалогическое древо.\n");
         for (int i = 0; i < file.length; i++) {
@@ -42,9 +44,10 @@ public class Txt implements Writeable, Readable {
             writer.write("Поколение " + line[0] + 
                         ": " + line[1] + 
                         " (" + line[2] + 
-                        "), Отец - " + line[3] + 
-                        ", Мать - " + line[4] + 
-                        ", Дети - " + line[5] + 
+                        ") " + line[3] + " года рождения" +
+                        ", Отец - " + line[4] + 
+                        ", Мать - " + line[5] + 
+                        ", Дети - " + line[6] + 
                         "\n");
         }
         writer.close();

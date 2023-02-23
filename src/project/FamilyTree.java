@@ -2,20 +2,14 @@ package project;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import fileProcessing.FileHandler;
 import fileProcessing.Readable;
 import fileProcessing.Writeable;
 
-// В проекте с гениалогическим древом подумайте и используйте интерфейсы.
-// Дополнить проект методами записи в файл и чтения из файла. 
-// Для этого создать отдельный класс и реализовать в нем нужные методы. 
-// Для данного класса сделайте интерфейс, который и используйте в своей программе. 
-// Например в классе дерева в качестве аргумента метода save передавайте не конкретный класс, 
-// а объект интерфейса, с помощью которого и будет происходить запись. 
-// Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
-
-public class FamilyTree {
+public class FamilyTree implements Iterable<Human> {
     private Integer generation;
     private HashMap<Integer, String> humans_index_by_generation;
     private ArrayList<Human> humans_list;
@@ -47,6 +41,7 @@ public class FamilyTree {
     public ArrayList<Human> getHumansList() {
         return humans_list;
     }
+
     private Integer getGen(Integer index) {
         for (int i = humans_index_by_generation.size(); i > 0; i--) {
             if (humans_index_by_generation.get(i).contains(Integer.toString(index))) return i;
@@ -125,5 +120,18 @@ public class FamilyTree {
     public FamilyTree open(String file_name, Readable format_read) throws IOException {
         FileHandler file_handler = new FileHandler();
         return file_handler.read(format_read, file_name);
+    }
+
+    public void sortByName() {
+        Collections.sort(humans_list, new HumanComparatorByName());
+    }
+
+    public void sortByYear() {
+        Collections.sort(humans_list, new HumanComparatorByYear());
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humans_list);
     }
 }
