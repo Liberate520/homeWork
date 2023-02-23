@@ -7,7 +7,7 @@ public class Main {
         FamilyTree family = new FamilyTree();
 
         family.addPerson(new Person("Михаил Федорович", 1596, 1645, Sex.Male, 1, "1613-1645"));
-        family.addWifeToHusband("Михаил Федорович", new Person("Евдокия Лукьяновна Стрешнева", null,null, Sex.Female, 1));
+        family.addWifeToHusband("Михаил Федорович", new Person("Евдокия Лукьяновна Стрешнева", 1608, 1645, Sex.Female, 1));
         family.addChildToMother("Евдокия Лукьяновна Стрешнева", new Person("Алексей Михайлович", 1629, 1676, Sex.Male, 2, "1645-1676"));
         family.addWifeToHusband("Алексей Михайлович", new Person("Наталья Кирилловна Нарышкина", 1651, 1694, Sex.Female, 2));
         family.addChildToMother("Наталья Кирилловна Нарышкина", new Person("Петр I", 1672, 1725, Sex.Male,3,"1682-1725"));
@@ -37,10 +37,16 @@ public class Main {
 
        SavingFT.restoreFromFile();
 
+       family.sortByName();
        for (Object human: family){
            System.out.print("Iteration obj ---- ");
            System.out.println(human);
        }
+
+       family.sortByBirthday();
+       family.getList();
+
+       family.sortByYearOfReigh(); // Prints a list of reigning personages
 
 
     }

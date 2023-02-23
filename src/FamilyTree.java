@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class FamilyTree implements Serializable, Iterable{
     private ArrayList<Person> people;
@@ -94,6 +96,27 @@ public class FamilyTree implements Serializable, Iterable{
     @Override
     public Iterator iterator() {
         return new FamilyTreeIterator(people);
+    }
+
+    public void sortByName() {
+        Collections.sort(people, new PersonComparatorByName());
+    }
+
+    public void sortByBirthday() {
+        Collections.sort(people, new PersonCompareByBirthday());
+    }
+
+    public void sortByYearOfReigh(){
+        List<Person> family = new ArrayList<Person>();
+        for (Person human: people) {
+            if (human.getAdditionalField() != null){
+                family.add(human);
+            }
+        }
+        Collections.sort(family, new PersonCompareByYearOfReign());
+        for (Person human: family){
+            System.out.printf("%s he reigned %s\n",human.getName(), human.getAdditionalField());
+        }
     }
 }
 
