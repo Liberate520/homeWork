@@ -20,6 +20,7 @@ public class Main {
         System.out.println(tree.getInfoTree());
         System.out.println("+++++++++");
         
+        
         System.out.println(tree.getByName("Иван 1"));
         System.out.println("+++++++++");
 
