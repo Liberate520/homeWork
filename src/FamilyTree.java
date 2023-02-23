@@ -26,7 +26,7 @@ public class FamilyTree implements Serializable{
      */
     public boolean addPerson(Person person) {
         for (Person item : people) {
-            if (person.getName().contains(item.getName())) {
+            if (person.getName().equals(item.getName())) {
                 return false;
             }
         }
@@ -36,14 +36,14 @@ public class FamilyTree implements Serializable{
 
     public  boolean addWifeToHusband(String husbandName, Person person){
         for (Person item : people) {
-            if (person.getName().contains(item.getName())) {
+            if (person.getName().equals(item.getName())) {
                 return false;
             }
         }
         person.addSposeName(husbandName);
         people.add(person);
         for (Person men : people){
-            if (husbandName.contains(men.getName())){
+            if (husbandName.equals(men.getName())){
                 men.addSposeName(person.getName());
             }
         }
@@ -59,13 +59,13 @@ public class FamilyTree implements Serializable{
 
     public boolean addChildToMother(String motherName, Person person) {
         for (Person mother : people) {
-            if (mother.getName().contains(motherName)) {
+            if (mother.getName().equals(motherName)) {
                 if (!mother.getChildrenName().contains(person.getName())) {
                     people.add(person);
                     mother.setChildrenName(person.getName());
-                    for (Person futher : people){
-                        if (futher.getSpouseName().contains(motherName)){
-                            futher.setChildrenName(person.getName());
+                    for (Person father : people){
+                        if (father.getSpouseName().contains(motherName)){
+                            father.setChildrenName(person.getName());
                             return true;
                         }
                     }
