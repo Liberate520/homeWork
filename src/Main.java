@@ -20,10 +20,11 @@ public class Main {
         System.out.println(tree.getInfoTree());
         System.out.println("+++++++++");
         
-        
+
         System.out.println(tree.getByName("Иван 1"));
         System.out.println("+++++++++");
 
+        
         FileHandler data = new FileHandler();
         data.saveFile("C:\\temp\\oop\\homeWork\\src\\test.txt", tree);
         System.out.print("Загрузка: ");
