@@ -1,10 +1,11 @@
+package familyApi;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, User {
     private String firstname;
     private String lastname;
     private Calendar birthdate;
@@ -15,7 +16,15 @@ public class Human implements Serializable {
 
     public Human(String firstname, String lastname, Human father, Human mother, int year, int month, int day){
         this(firstname, lastname, year, month, day);
-        addParents(father, mother);
+        if(father != null){
+            this.father = father;
+            father.addChild(this);
+        }
+        if(mother != null){
+            this.mother = mother;
+            mother.addChild(this);
+        }
+        
     }
 
     public Human(String firstname, String lastname, int year, int month, int day){

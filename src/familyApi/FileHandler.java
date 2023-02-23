@@ -1,3 +1,4 @@
+package familyApi;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,27 +7,32 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler implements Serializable {
+public class FileHandler<T extends User> implements Serializable {
     private String fileName;
 
-    public FileHandler(){
-        this.fileName = "person.out";
+    public FileHandler(String fileName){
+        this.fileName = fileName;
     }
 
-    public void fileWrite (FamilyTree family) throws IOException, ClassNotFoundException {
+    public FileHandler(){
+        this("person.out");
+    }
+
+    public void fileWrite (FamilyTree<T> family) throws IOException, ClassNotFoundException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
-        for (Human human: family.getFamilyTree()){
+        for (T human: family.getFamilyTree()){
             objectOutputStream.writeObject(human);
         }
         objectOutputStream.close();
     }
     
-    public void fileRead(FamilyTree family) throws IOException, ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+    public void fileRead(FamilyTree<T> family) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
         
         while (true){
             try {
-                family.add((Human) objectInputStream.readObject());
+                family.add((T) objectInputStream.readObject());
             } catch (EOFException e) {
                 break;
             }
