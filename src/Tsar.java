@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class Tsar extends Person
 {
     private Integer yearOfReignStart;

@@ -1,13 +1,15 @@
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Main {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Serializable serializable = null;
         FamilyTree familyTree = new FamilyTree();
-        familyTree = initData();
+        //familyTree = initData();
 
         Scanner scan = new Scanner(System.in);
         String nameToSearch;
@@ -20,6 +22,8 @@ public class Main {
             System.out.printf("\t0 выход из программы;\n");
             System.out.printf("\t1 печать информации о детях представителя династии.\n");
             System.out.printf("\t2 печать информации о всех представителях династии Романовых;\n");
+            System.out.printf("\t3 Сохранить информацию с помощью serialize;\n");
+            System.out.printf("\t4 Восстановить информацию с помощью serialize;\n");
 
             System.out.printf("> ");
             menu = Integer.parseInt(scan.nextLine());
@@ -40,6 +44,23 @@ public class Main {
                 case 2:
                 {
                     familyTree.printAll();
+                    break;
+                }
+                case 3:
+                {
+                    FileHandler fileHandler = new FileHandler();
+                    familyTree.setWritable(fileHandler);
+                    familyTree.save(serializable,(Object) familyTree);
+                    break;
+                }
+                case 4:
+                {
+                    FileHandler fileHandler = new FileHandler();
+                    familyTree.setWritable(fileHandler);
+                    Object object = null;
+                    object = familyTree.read();
+                    familyTree = (FamilyTree)object;
+                    //familyTree.printAll();
                     break;
                 }
                 default:

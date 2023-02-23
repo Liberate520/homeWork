@@ -1,9 +1,12 @@
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree
+public class FamilyTree implements Writable, Serializable
 {
     private List<Person> familyTree = new ArrayList<>();
+    private Writable writable;
 
     public FamilyTree()
     {
@@ -93,4 +96,37 @@ public class FamilyTree
             }
         }
     };
+
+    public void save(Serializable serializable, Object object) throws IOException {
+        if (writable instanceof FileHandler)
+        {
+            FileHandler fileHandler1 = (FileHandler) writable;
+            fileHandler1.test();
+        }
+
+        if (writable != null)
+        {
+            writable.save(serializable, object);
+        }
+    }
+    @Override
+    public Object read() throws IOException, ClassNotFoundException {
+        Object object = null;
+        if (writable instanceof FileHandler)
+        {
+            FileHandler fileHandler1 = (FileHandler) writable;
+            fileHandler1.test();
+        }
+
+        if (writable != null)
+        {
+            object = writable.read();
+        }
+        return object;
+    }
+    public void setWritable(Writable writable)
+    {
+        this.writable = writable;
+    }
+
 }
