@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Person {
     private String name;
@@ -28,5 +29,13 @@ public class Person {
         if(DateOfBirth!=null) rez=rez+" Дата рождения - " + DateOfBirth.toString() ;
         if(DateOfDeath!=null) rez=rez+" Дата смерти - " + DateOfDeath.toString() ;
         return rez;
+    }
+    //печать списка персон
+    public static void printListPerson(List<Person> listPerson){
+        Integer count=0;
+        while (count<listPerson.size()){
+            System.out.println(++count+". "+listPerson.get(count-1));
+                // count++;
+        }
     }
 }
