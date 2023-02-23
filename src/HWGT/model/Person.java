@@ -1,11 +1,10 @@
-package HWGT;
+package HWGT.model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person extends Basic implements Serializable {
 
     private String name;
     private String sex;
@@ -56,7 +55,7 @@ public class Person implements Serializable {
         return dateOfBirth;
     }
 
-    public Integer getDataOfDeath() {
+    public Integer getDateOfDeath() {
         return dateOfDeath;
     }
 
@@ -97,7 +96,7 @@ public class Person implements Serializable {
         return children;
     }
 
-    public void setChildren(String child) {
+    public void addChild(String child) {
         children.add(child);
     }
 
@@ -105,7 +104,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "\nHWGT.Person " +
+        return "\nHWGT.model.Person " +
                 "name='" + name + "',\n" +
                 "sex='" + sex + "',\n" +
                 "dateOfBirth='" + dateOfBirth +"',\n"+

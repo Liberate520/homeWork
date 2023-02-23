@@ -1,4 +1,4 @@
-package HWGT;
+package HWGT.model;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
