@@ -10,15 +10,17 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.LongStream;
 
 public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
 
     private Writable fileHandlerWritable;
     private Readable fileHandlerReadable;
 
-    private List<T> family = new ArrayList<>();
+    private List<T> family;
 
     public FamilyTree(List<T> family) {
+
         this.family = family;
     }
 
@@ -43,12 +45,9 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
             fileHandlerReadable = new FileRW();
         }
         Object familyCheck = fileHandlerReadable.loadFile("treeOut");
-        if (familyCheck instanceof List res) {
-            family = new ArrayList<>();
-            family.addAll(res);
+        List<T> familyList = (List<T>) familyCheck;
+        family = new ArrayList<>(familyList);
         }
-
-    }
 
     @Override
     public String toString() {
@@ -94,7 +93,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         if (!lst.isEmpty()) {
             for (T h :
                     lst) {
-                result.append(h.getLastName()).append(" ").append(h.getFirstName()).append(" ").append(h.getPatronymic()).append("\n");
+                result.append("ID: ").append(h.getId()).append(" ").append(h.getLastName()).append(" ").append(h.getFirstName()).append(" ").append(h.getPatronymic()).append("\n");
             }
         } else {
             result.append("Нет результатов удовлетворящих критериям поиска");
@@ -231,6 +230,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     public void sort(SortBy sortBy) {
         Collections.sort(family, new HumanComparator<T>(sortBy));
     }
+
 
     @NotNull
     @Override

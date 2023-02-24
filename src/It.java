@@ -14,6 +14,8 @@ public class It {
     private String gender;
     private List<It> children;
 
+    private int id;
+
 
     public boolean isAlive() {
         return dateOfDeath.isEmpty();
@@ -60,6 +62,8 @@ public class It {
     public String getDateOfDeath() {
         return dateOfDeath;
     }
+    public int getId() { return id; }
+    public void createUnit(){}
 
 
 }

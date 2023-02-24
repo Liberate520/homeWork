@@ -16,9 +16,12 @@ public class Human extends It implements Serializable {
     private String firstName;
     private String patronymic;
     private String lastName;
+    protected static int nextId = 1;
+    private int id;
 
 
     public Human(Human father, Human mother, List<Human> children, String gender, String dateOfBorn, String dateOfDeath, String placeOfBirth, String firstName, String patronymic, String lastName) {
+        this.id = nextId++;
         Validation valid = new Validation();
         this.father = father;
         this.mother = mother;
@@ -94,6 +97,10 @@ public class Human extends It implements Serializable {
         this.father = father;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -158,17 +165,45 @@ public class Human extends It implements Serializable {
         }
     }
 
+    public void createUnit(){
+        Validation validation = new Validation();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Укажите пол Male/Female: ");
+        String gender = scanner.next();
+        if(validation.isValidGender(gender)){
+            this.gender = gender;
+        }
+        System.out.print("Укажите дату рождения в формате dd.mm.YYYY: ");
+        String dateOfBorn = scanner.next();
+        if(validation.isDateValid(dateOfBorn, false)){
+            this.dateOfBorn = dateOfBorn;
+        }
+        System.out.print("Укажите дату смерти в формате dd.mm.YYYY: / или не заполнять");
+        String dateOfDeath = scanner.next();
+        if(validation.isDateValid(dateOfDeath, false)){
+            this.dateOfDeath = dateOfDeath;
+        }
+        System.out.print("Укажите место рождения: ");
+        this.placeOfBirth = scanner.next();
+        System.out.print("Укажите имя: ");
+        this.firstName = scanner.next();
+        System.out.print("Укажите отчество: ");
+        this.patronymic = scanner.next();
+        System.out.print("Укажите фамилию: ");
+        this.lastName = scanner.next();
+    }
+
+
     @Override
     public String toString() {
-        return "\nsrc.Human{" +
-                ", gender='" + gender + '\'' + "\n" +
-                ", dateOfBorn='" + dateOfBorn + '\'' + "\n" +
-                ", dateOfDeath='" + dateOfDeath + '\'' + "\n" +
-                ", placeOfBirth='" + placeOfBirth + '\'' + "\n" +
-                ", firstName='" + firstName + '\'' + "\n" +
-                ", patronymic='" + patronymic + '\'' + "\n" +
-                ", lastName='" + lastName + '\'' + "\n" +
-                '}' + "\n";
+        return "ID: " + id +
+                ", Пол='" + gender + '\'' +
+                ", ДР='" + dateOfBorn + '\'' +
+                ", ДС='" + dateOfDeath + '\'' +
+                ", Место рождения='" + placeOfBirth + '\'' +
+                ", Имя='" + firstName + '\'' +
+                ", Отчество='" + patronymic + '\'' +
+                ", Фамилия='" + lastName + '\'';
     }
 //    }
 }

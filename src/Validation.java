@@ -7,7 +7,9 @@ import java.util.Objects;
 
 public class Validation {
 
-    public Validation(){}
+    public Validation() {
+    }
+
     public boolean isValidGender(String gender) {
         return (Objects.equals(gender, "Female") || Objects.equals(gender, "Male") || Objects.equals(gender, "None"));
     }
@@ -26,5 +28,15 @@ public class Validation {
             isTrueDate = false;
         }
         return isTrueDate;
+    }
+
+    public boolean isNextInt(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } catch (Exception e) {
+//            e.printStackTrace();
+            return false;
+        }
     }
 }
