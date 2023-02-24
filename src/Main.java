@@ -26,7 +26,7 @@ public class Main {
 //        t1.addToFamily(a5);
 //        System.out.println(t1);
 //        t1.save();
-
+//
         t1.load();
 //        for (Human h :
 //                t1) {
@@ -36,7 +36,7 @@ public class Main {
 //        System.out.println(t1);
 //        System.out.println(t1.findHumans("Male", "", "", "", "", "", "", "", ""));
 
-            Human nh = new Human();
+        Human nh = new Human();
         View view = new Console();
         new Presenter(view, t1);
         System.out.println("-----------------");

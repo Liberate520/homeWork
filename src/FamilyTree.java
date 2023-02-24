@@ -46,7 +46,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         }
         Object familyCheck = fileHandlerReadable.loadFile("treeOut");
         List<T> familyList = (List<T>) familyCheck;
-        System.out.println(familyCheck);
+//        System.out.println(familyCheck);
         family = familyList;
     }
 
@@ -232,6 +232,32 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         Collections.sort(family, new HumanComparator<T>(sortBy));
     }
 
+    public int size() {
+        return family.size();
+    }
+
+    public int maxId() {
+        int maxId = 0;
+        for (T u:
+             family) {
+            if(u.getId()>maxId){
+                maxId = u.getId();
+            }
+        }
+        return maxId;
+    }
+
+    public boolean delUnit(int id){
+        boolean flag = false;
+        for (int i = 0; i < family.size(); i++) {
+            if (family.get(i).getId()==id) {
+                family.remove(i);
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
 
     @NotNull
     @Override

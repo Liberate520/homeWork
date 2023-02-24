@@ -3,6 +3,7 @@ package src.ui;
 import src.Validation;
 import src.presenter.Presenter;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Console implements View {
@@ -22,13 +23,17 @@ public class Console implements View {
         scanner = new Scanner(System.in);
         menu = new Menu(this);
         work = true;
-        while (work){
+        while (work) {
             showMenu();
             // подумай тут ещё разок
             System.out.print("Укажите номер команды из меню: ");
             String command = scanner.next();
             if (valid.isNextInt(command)) {
-                menu.execute(Integer.parseInt(command));
+                try {
+                    menu.execute(Integer.parseInt(command));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 System.out.println("Некорретно выбран элемент меню");
             }
@@ -39,9 +44,10 @@ public class Console implements View {
         System.out.println(menu.printMenu());
     }
 
-    public void finish(){
+    public void finish() {
         work = false;
     }
+
     @Override
     public void print(String text) {
 
@@ -49,5 +55,24 @@ public class Console implements View {
 
     public void addHuman() {
         presenter.addHuman();
+    }
+
+    public void showHumans() {
+        presenter.showHumans();
+    }
+
+    public void saveTree() {
+        try {
+            presenter.saveTree();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Не удалось сохранить файл");
+        }
+
+    }
+
+    public void delHuman() {
+        presenter.delHuman();
     }
 }

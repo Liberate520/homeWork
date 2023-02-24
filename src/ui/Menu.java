@@ -1,9 +1,8 @@
 package src.ui;
 
-import src.ui.commands.AddHuman;
-import src.ui.commands.CloseMenu;
-import src.ui.commands.Options;
+import src.ui.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +13,15 @@ public class Menu {
         this.console = console;
         commands = new ArrayList<>();
         //добавим команды
-        commands.add(new CloseMenu(console));
+        commands.add(new ShowHumans(console));
         commands.add(new AddHuman(console));
+        commands.add(new SaveTree(console));
+        commands.add(new CloseMenu(console));
+        commands.add(new DelHuman(console));
 
     }
 
-    public void execute(int num) {
+    public void execute(int num) throws IOException {
         if(commands.size() >= num) {
             Options options = commands.get(num - 1);
             options.execute();

@@ -16,12 +16,11 @@ public class Human extends It implements Serializable {
     private String firstName;
     private String patronymic;
     private String lastName;
-    protected static int nextId = 1;
     private final int id;
 
 
     public Human(Human father, Human mother, List<Human> children, String gender, String dateOfBorn, String dateOfDeath, String placeOfBirth, String firstName, String patronymic, String lastName) {
-        this.id = nextId++;
+        id = Stat.getId();
         Validation valid = new Validation();
         this.father = father;
         this.mother = mother;
@@ -31,9 +30,11 @@ public class Human extends It implements Serializable {
         }
         if (valid.isDateValid(dateOfBorn, false)) {
             this.dateOfBorn = dateOfBorn;
+        } else {
+            this.dateOfBorn = "01.01.0000";
         }
         if (valid.isDateValid(dateOfDeath, true)) {
-            this.dateOfDeath = dateOfDeath;
+            this.dateOfDeath = Objects.requireNonNullElse(dateOfDeath, "");
         }
         this.placeOfBirth = placeOfBirth;
         this.firstName = firstName;
@@ -51,6 +52,11 @@ public class Human extends It implements Serializable {
 
     public Human(String gender, String dateOfBorn, String dateOfDeath, String placeOfBirth, String firstName, String patronymic, String lastName) {
         this(null, null, null, gender, dateOfBorn, dateOfDeath, placeOfBirth, firstName, patronymic, lastName);
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     public boolean isAlive() {
@@ -97,9 +103,6 @@ public class Human extends It implements Serializable {
         this.father = father;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getGender() {
         return gender;
@@ -165,22 +168,22 @@ public class Human extends It implements Serializable {
         }
     }
 
-    public void createUnit(){
+    public void createUnit() {
         Validation validation = new Validation();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Укажите пол Male/Female: ");
         String gender = scanner.next();
-        if(validation.isValidGender(gender)){
+        if (validation.isValidGender(gender)) {
             this.gender = gender;
         }
         System.out.print("Укажите дату рождения в формате dd.mm.YYYY: ");
         String dateOfBorn = scanner.next();
-        if(validation.isDateValid(dateOfBorn, false)){
+        if (validation.isDateValid(dateOfBorn, false)) {
             this.dateOfBorn = dateOfBorn;
         }
-        System.out.print("Укажите дату смерти в формате dd.mm.YYYY: / или не заполнять");
+        System.out.print("Укажите дату смерти в формате dd.mm.YYYY(или укажите 0): ");
         String dateOfDeath = scanner.next();
-        if(validation.isDateValid(dateOfDeath, false)){
+        if (validation.isDateValid(dateOfDeath, false)) {
             this.dateOfDeath = dateOfDeath;
         }
         System.out.print("Укажите место рождения: ");
