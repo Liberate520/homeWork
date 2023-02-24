@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 
 public class Human {
+
     static Integer counter;
     static {
         counter = 1;
@@ -31,9 +32,6 @@ public class Human {
 
     }
 
-
-
-
     public Human(String name, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, String id, Tree tree) {
         this.name = name;
         this.gender = gender;
@@ -43,7 +41,7 @@ public class Human {
             while (true) {
                 boolean flag = false;
                 for (int i = 0; i < tree.getExistingIds().size(); i++) {
-                    if (Integer.parseInt(new ArrayList<>(Arrays.asList(tree.getExistingIds().get(i).split(":"))).get(1)) == counter) {
+                    if (Integer.parseInt(new ArrayList<>(Arrays.asList(((String)(tree.getExistingIds().get(i))).split(":")) ).get(1)) == counter) {
                         flag = true;
                     }
                 }
@@ -56,19 +54,15 @@ public class Human {
                 }
             }
         } else {
+
             this.id = id;
         }
     }
 
-
     public Human(String name, Tree tree){
         this(name, null, LocalDate.now(), null, "", tree);
     }
-
     //---------------------------------------------------------
-
-
-
 
     public String getId() {
         return id;
@@ -139,69 +133,9 @@ public class Human {
         this.brothersAndSisters.add(children);
     }
     //----------------------------------------------------------------------------------
-    public static void printNamesHuman(Tree tree) {  // Печать имен Human
-        int i = 1;
-        for (Human human : tree) {
-            System.out.printf("%d - %s%n", i, human.getName());
-            i++;
-        }
-    }
-    public static void printHuman(Tree tree, int indexH) {  // Печать Human
-        System.out.printf("%s, %s, %s, %s%n", tree.getBigFamily().get(indexH).getName(), tree.getBigFamily().get(indexH).getGender(),
-                tree.getBigFamily().get(indexH).getDateOfBirth(), tree.getBigFamily().get(indexH).getDateOfDeath());
-        System.out.println();
-    }
-
     public static LocalDate creatingADate(String sDate){  // создание даты из строки
         ArrayList<String> dateL = new ArrayList<>(Arrays.asList(sDate.split(" ")));
         return LocalDate.of(Integer.parseInt(dateL.get(2)),
                 Integer.parseInt(dateL.get(1)), Integer.parseInt(dateL.get(0)));
     }
-
-    public static void superPrintHumanHC(Tree tree, int indexH) {  // Печать Human центральной фигуры
-        System.out.print(String.format("Ф.И.О.: %s, Пол: %s, Дата рождения: %s",
-                tree.getBigFamily().get(indexH).getName(),
-                tree.getBigFamily().get(indexH).getGender(),
-                tree.getBigFamily().get(indexH).getDateOfBirth()));
-        System.out.print(", ");
-        if (tree.getBigFamily().get(indexH).getDateOfDeath() == null) {
-            System.out.print("");
-        } else {
-            System.out.print(String.format("Дата смерти: %s, ", tree.getBigFamily().get(indexH).getDateOfDeath()));
-        }
-
-        System.out.println(tree.getBigFamily().get(indexH).id);
-
-
-
-        if(tree.getBigFamily().get(indexH).mother == null){
-            System.out.println("Мама: не определенна");
-        }else {
-            System.out.println(String.format("Мама: %s", tree.getBigFamily().get(indexH).mother.getName()));
-        }
-        if(tree.getBigFamily().get(indexH).father == null){
-            System.out.println("Папа: не определен");
-        }else {
-            System.out.println(String.format("Папа: %s", tree.getBigFamily().get(indexH).father.getName()));
-        }
-        if (tree.getBigFamily().get(indexH).children.size() > 0){
-            for (int i = 0; i < tree.getBigFamily().get(indexH).children.size(); i++) {
-                System.out.println(String.format("Сын/Дочь: %s", tree.getBigFamily().get(indexH).children.get(i).getName()));
-            }
-        }else if(tree.getBigFamily().get(indexH).children.size() == 0){
-            System.out.println("Дети: не определенны");
-        }
-        if (tree.getBigFamily().get(indexH).brothersAndSisters.size() > 0){
-            for (int i = 0; i < tree.getBigFamily().get(indexH).brothersAndSisters.size(); i++) {
-                System.out.println(String.format("Брат/Сестра: %s", tree.getBigFamily().get(indexH).brothersAndSisters.get(i).getName()));
-            }
-
-            System.out.println("\n\n");
-        } else if (tree.getBigFamily().get(indexH).brothersAndSisters.size() == 0){
-            System.out.println("Братья/Сестры: не определенны");
-            System.out.println();
-        }
-    }
-
-
 }

@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class TreeHandlerTxt extends FileManipulator {
+
     @Override
     public void write(Tree tree) throws IOException {
         System.out.println("запись...");
@@ -21,11 +22,11 @@ public class TreeHandlerTxt extends FileManipulator {
         FileWriter fW = new FileWriter(file, false);
         fW.write(String.format("starVer888Tree %s\n", tree.getNameFamily()));
         for (int i = 0; i < tree.getBigFamily().size(); i++) {
-            Human hm = tree.getBigFamily().get(i);
+            Human hm =  (Human) tree.getBigFamily().get(i);
             fW.append(String.format("HumanVer888,%s,%s,%s,%s,%s\n", hm.getName(), hm.getGender(), hm.getDateOfBirth(), hm.getDateOfDeath(), hm.getId()));
         }
         for (int i = 0; i < tree.getBigFamily().size(); i++) {
-            Human hm = tree.getBigFamily().get(i);
+            Human hm =  (Human) tree.getBigFamily().get(i);
             if (hm.getMother() == null) {
                 fW.append(String.format("CommunicationsVer888,%s", hm.getMother()));
             } else {
@@ -66,7 +67,7 @@ public class TreeHandlerTxt extends FileManipulator {
     @Override
     public Tree read(String nameFile) throws FileNotFoundException {
         System.out.println("чтение..");
-        Tree tree = new Tree();
+        Tree <Human> tree = new Tree<>();
         File file = new File(nameFile);
         Scanner scanner = new Scanner(file);
         int counter = 0;
@@ -88,16 +89,16 @@ public class TreeHandlerTxt extends FileManipulator {
                 if (!listStr.get(1).equals("null")){
                     String IdMami = listStr.get(1);
                     for (int i = 0; i < tree.getBigFamily().size(); i++) {
-                        if (tree.getBigFamily().get(i).getId().equals(IdMami)){
-                            tree.getBigFamily().get(counter).setMother(tree.getBigFamily().get(i));
+                        if (((Human)(tree.getBigFamily().get(i))).getId().equals(IdMami)){
+                            ((Human)(tree.getBigFamily().get(counter))).setMother((Human)tree.getBigFamily().get(i));
                         }
                     }
                 }
                 if (!listStr.get(2).equals("null")){
                     String IdPapi = listStr.get(2);
                     for (int i = 0; i < tree.getBigFamily().size(); i++) {
-                        if (tree.getBigFamily().get(i).getId().equals(IdPapi)){
-                            tree.getBigFamily().get(counter).setFather(tree.getBigFamily().get(i));
+                        if (((Human)tree.getBigFamily().get(i)).getId().equals(IdPapi)){
+                            ((Human)tree.getBigFamily().get(counter)).setFather((Human) tree.getBigFamily().get(i));
                         }
                     }
                 }
@@ -105,8 +106,8 @@ public class TreeHandlerTxt extends FileManipulator {
                     ArrayList<String> listChId = new ArrayList<>(Arrays.asList(listStr.get(3).split(" ")));
                     for (String IdCh : listChId) {
                         for (int j = 0; j < tree.getBigFamily().size(); j++) {
-                            if (tree.getBigFamily().get(j).getId().equals(IdCh)) {
-                                tree.getBigFamily().get(counter).setChildren(tree.getBigFamily().get(j));
+                            if (((Human)tree.getBigFamily().get(j)).getId().equals(IdCh)) {
+                                ((Human)tree.getBigFamily().get(counter)).setChildren((Human)tree.getBigFamily().get(j));
                             }
                         }
                     }
@@ -115,8 +116,8 @@ public class TreeHandlerTxt extends FileManipulator {
                     ArrayList<String> listBroSis = new ArrayList<>(Arrays.asList(listStr.get(4).split(" ")));
                     for (String IdBrSt : listBroSis) {
                         for (int j = 0; j < tree.getBigFamily().size(); j++) {
-                            if (tree.getBigFamily().get(j).getId().equals(IdBrSt)) {
-                                tree.getBigFamily().get(counter).setBrothersAndSisters(tree.getBigFamily().get(j));
+                            if (((Human)tree.getBigFamily().get(j)).getId().equals(IdBrSt)) {
+                                ((Human)tree.getBigFamily().get(counter)).setBrothersAndSisters((Human) tree.getBigFamily().get(j));
                             }
                         }
                     }

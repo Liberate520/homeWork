@@ -5,12 +5,12 @@ import org.example.Human;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<T extends Human> implements Iterator<T> {
     private int index;
-    private final ArrayList<Human> bigFamily;
+    private final ArrayList<T> bigFamily;
 
 
-    public HumanIterator(ArrayList<Human> bigFamily) {
+    public HumanIterator(ArrayList<T> bigFamily) {
         this.bigFamily = bigFamily;
     }
 
@@ -20,7 +20,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return bigFamily.get(index++);
     }
 }
