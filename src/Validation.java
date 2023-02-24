@@ -15,6 +15,9 @@ public class Validation {
     }
 
     public boolean isDateValid(String date, boolean ifEmpty) {
+        if (date == null) {
+            date = "";
+        }
         if (ifEmpty) {
             if (date.isEmpty()) {
                 return true;

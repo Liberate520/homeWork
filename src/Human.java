@@ -17,7 +17,7 @@ public class Human extends It implements Serializable {
     private String patronymic;
     private String lastName;
     protected static int nextId = 1;
-    private int id;
+    private final int id;
 
 
     public Human(Human father, Human mother, List<Human> children, String gender, String dateOfBorn, String dateOfDeath, String placeOfBirth, String firstName, String patronymic, String lastName) {

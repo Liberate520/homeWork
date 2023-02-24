@@ -46,8 +46,9 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         }
         Object familyCheck = fileHandlerReadable.loadFile("treeOut");
         List<T> familyList = (List<T>) familyCheck;
-        family = new ArrayList<>(familyList);
-        }
+        System.out.println(familyCheck);
+        family = familyList;
+    }
 
     @Override
     public String toString() {
@@ -70,7 +71,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         }
         for (It it :
                 human.getChildren()) {
-            addToFamily((T)it);
+            addToFamily((T) it);
         }
 
     }
