@@ -9,6 +9,7 @@ public class Human {
     private Human mother;
     private List<Human> children;
 
+    
     public Human() {
         ArrayList<Human> list = new ArrayList<Human>();
         this.children = list;
