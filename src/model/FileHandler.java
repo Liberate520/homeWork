@@ -1,4 +1,4 @@
-package lesson3;
+package model;
 
 import java.io.*;
 

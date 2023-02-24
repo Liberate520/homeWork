@@ -1,4 +1,4 @@
-package lesson3;
+package model;
 
 import Comparators.ComparatorByName;
 import Comparators.ComparatorByBirthDate;
@@ -8,14 +8,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
+    private List<T> humanList;
 
     public FamilyTree() { this(new ArrayList<>()); }
 
-    public FamilyTree(List<Human> humanList) { this.humanList = humanList; }
+    public FamilyTree(List<T> humanList) { this.humanList = humanList; }
 
-    public boolean add(Human human){
+    public boolean add(T human){
         if (human == null){
             return false;
         }
@@ -32,8 +32,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    public Human getByName(String name){
-        for (Human human : humanList){
+    public T getByName(String name){
+        for (T human : humanList){
             if (human.getName().equals(name)){
                 return human;
             }
@@ -45,7 +45,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         StringBuilder res = new StringBuilder();
         res.append(humanList.size());
         res.append(" objects in the tree: \n");
-        for (Human human : humanList){
+        for (T human : humanList){
             res.append(human.getInfo());
             res.append("\n");
         }
@@ -53,15 +53,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return humanList.iterator();
     }
 
     public void sortByName() {
-        Collections.sort(humanList, new ComparatorByName());
+        Collections.sort(humanList, new ComparatorByName<T>());
     }
 
     public void sortByBirthDate() {
-        Collections.sort(humanList, new ComparatorByBirthDate());
+        Collections.sort(humanList, new ComparatorByBirthDate<T>());
     }
 }

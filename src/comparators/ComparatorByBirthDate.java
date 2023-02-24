@@ -1,11 +1,11 @@
 package Comparators;
-import lesson3.Human;
+import model.Human;
 import java.util.Comparator;
 
-public class ComparatorByBirthDate implements Comparator<Human> {
+public class ComparatorByBirthDate<T extends Human> implements Comparator<T> {
 
     @Override
-    public int compare(Human h1, Human h2) {
+    public int compare(T h1, T h2) {
         return h1.getBirthDate().compareTo(h2.getBirthDate());
     }
 }
