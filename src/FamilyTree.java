@@ -1,13 +1,13 @@
 import java.util.*;
 import java.io.Serializable;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> listHuman;
 
-    public FamilyTree() { 
+    public FamilyTree() {
         this(new ArrayList<>());
     }
-    
+
     public FamilyTree(List<Human> listHuman) {
         this.listHuman = listHuman;
     }
@@ -19,7 +19,8 @@ public class FamilyTree implements Serializable {
         if (!listHuman.contains(human)) {
             listHuman.add(human);
             if (human.getFather() != null) {
-                human.getFather().addChild(human); // если в переданом хумане есть отец/мать, то добавляется ребенок к этим родителям
+                human.getFather().addChild(human); // если в переданом хумане есть отец/мать, то добавляется ребенок к
+                                                   // этим родителям
             }
             if (human.getMother() != null) {
                 human.getMother().addChild(human);
@@ -46,5 +47,12 @@ public class FamilyTree implements Serializable {
         return sb.toString();
     }
 
-}
+    // создаем Итератор, но нужен отдельный класс, в котором интерфейс Итератор, в нем - что перебрать, добавляем методы hasNext+next
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(listHuman);
+    }
 
+    
+
+}

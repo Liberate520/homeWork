@@ -24,11 +24,19 @@ public class Main {
         System.out.println(tree.getByName("Иван 1"));
         System.out.println("+++++++++");
 
-        
+
         FileHandler data = new FileHandler();
         data.saveFile("C:\\temp\\oop\\homeWork\\src\\test.txt", tree);
         System.out.print("Загрузка: ");
         System.out.println(data.readFile("C:\\temp\\oop\\homeWork\\src\\test.txt"));
 
+        System.out.println("+++++++++");
+        // foreach
+        for (Human human: tree) {
+            System.out.println(human.getInfo());
+        }
+
+
+        
     }    
 }
