@@ -1,9 +1,9 @@
 public class Menu {
-    public static void greetings() {
+    public void greetings() {
         System.out.println("Добро пожаловать в генеалогическое древо.\n");
     }
 
-    public static void mainMenu() {
+    public void mainMenu() {
         System.out.print("1. Показать древо\n" +
                         "2. Добавить человека\n" + 
                         "3. Поиск человека по имени\n" + 
@@ -14,7 +14,7 @@ public class Menu {
                         "Выберите действие : ");
     }
 
-    public static void secondMenu() {
+    public void secondMenu() {
         System.out.print("\n1. Показать детей\n" +
                         "2. Показать мать\n" +
                         "3. Показать отца\n" +
@@ -22,14 +22,14 @@ public class Menu {
                         "Выберите действие : ");
     }
 
-    public static void fileHandler() {
+    public void fileHandler() {
         System.out.print("1. Txt\n" +
                         "2. Csv (в разработке)\n" +
                         "3. Json (в разработке)\n" +
                         "Выберите формат файла: ");
     }
     
-    public static void sortMenu() {
+    public void sortMenu() {
         System.out.print("\n1. Имя\n" +
                         "2. Год рождения\n" +
                         "Выберите по какому критерию сортировать: ");

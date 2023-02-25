@@ -2,9 +2,9 @@ package project;
 
 import java.util.Comparator;
 
-public class HumanComparatorByName implements Comparator<Human>{
+public class HumanComparatorByName<T extends User> implements Comparator<T>{
     @Override
-    public int compare(Human hum1, Human hum2) {
+    public int compare(T hum1, T hum2) {
         return hum1.getName().compareTo(hum2.getName());
     }
 }

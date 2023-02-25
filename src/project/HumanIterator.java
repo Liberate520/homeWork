@@ -3,11 +3,11 @@ package project;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HumanIterator implements Iterator<Human>{
+public class HumanIterator<T extends User> implements Iterator<T>{
     private Integer index;
-    private ArrayList<Human> human_list;
+    private ArrayList<T> human_list;
 
-    public HumanIterator(ArrayList<Human> human_list) {
+    public HumanIterator(ArrayList<T> human_list) {
         this.human_list = human_list;
         this.index = 0;
     }
@@ -18,7 +18,7 @@ public class HumanIterator implements Iterator<Human>{
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return human_list.get(index++);
     }
 }

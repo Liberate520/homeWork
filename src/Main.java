@@ -6,13 +6,14 @@ import project.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FamilyTree tree = new FamilyTree();
+        Menu menu = new Menu();
+        FamilyTree<Human> tree = new FamilyTree<>();
         Scanner iScanner = new Scanner(System.in, "Cp866");
-        Menu.greetings();
+        menu.greetings();
         Boolean flag = true;
 
         while (flag) {
-            Menu.mainMenu();
+            menu.mainMenu();
             String choice = iScanner.next();
 
             if (choice.equals("1")) System.out.println("\n" + tree.getTree());
@@ -29,7 +30,7 @@ public class Main {
                 System.out.print("\nВведите имя : ");
                 String name = iScanner.next();
                 System.out.println(tree.getInfoHuman(name));
-                Menu.secondMenu();
+                menu.secondMenu();
                 choice = iScanner.next();
                 if (choice.equals("1")) System.out.println("\nДети: " + tree.getInfoChildren(name));
                 else if (choice.equals("2")) System.out.println("\nМать: " + tree.getInfoMother(name) + "\n");
@@ -38,7 +39,7 @@ public class Main {
             else if (choice.equals("4")) {
                 System.out.print("\nВведите имя файла: ");
                 String file_name = iScanner.next();
-                Menu.fileHandler();
+                menu.fileHandler();
                 choice = iScanner.next();
                 if (choice.equals("1")) {
                     tree = tree.open(file_name, new FileFormatTxt());
@@ -48,7 +49,7 @@ public class Main {
             else if (choice.equals("5")) {
                 System.out.print("\nВведите имя файла: ");
                 String file_name = iScanner.next();
-                Menu.fileHandler();
+                menu.fileHandler();
                 choice = iScanner.next();
                 if (choice.equals("1")) {
                     tree.save(file_name, new FileFormatTxt());
@@ -56,7 +57,7 @@ public class Main {
                 } else System.out.println("Нельзя сохранить");
             }
             else if (choice.equals("6")) {
-                Menu.sortMenu();
+                menu.sortMenu();
                 choice = iScanner.next();
                 if (choice.equals("1")) {
                     tree.sortByName();
@@ -77,8 +78,8 @@ public class Main {
         }
         iScanner.close();
     }
-
-    public static void add_new_human(FamilyTree tree, String name, String sex, Integer year_of_birth, String name_father, String name_mother) {
+    
+    public static void add_new_human(FamilyTree<Human> tree, String name, String sex, Integer year_of_birth, String name_father, String name_mother) {
         if (name_father.equalsIgnoreCase("нет") && name_mother.equalsIgnoreCase("нет")) {
             tree.add(new Human(name, sex, year_of_birth));
         } else if (name_father.equalsIgnoreCase("нет")) {

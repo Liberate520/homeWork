@@ -9,12 +9,12 @@ import fileProcessing.FileHandler;
 import fileProcessing.Readable;
 import fileProcessing.Writeable;
 
-public class FamilyTree implements Iterable<Human> {
+public class FamilyTree<T extends User> implements Iterable<T> {
     private Integer generation;
     private HashMap<Integer, String> humans_index_by_generation;
-    private ArrayList<Human> humans_list;
+    private ArrayList<T> humans_list;
 
-    public FamilyTree(Integer generation, HashMap<Integer, String> humans_index_by_generation, ArrayList<Human> humans_list) {
+    public FamilyTree(Integer generation, HashMap<Integer, String> humans_index_by_generation, ArrayList<T> humans_list) {
         this.generation = generation;
         this.humans_index_by_generation = humans_index_by_generation;
         this.humans_list = humans_list;
@@ -38,7 +38,7 @@ public class FamilyTree implements Iterable<Human> {
         return humans_index_by_generation;
     }
     
-    public ArrayList<Human> getHumansList() {
+    public ArrayList<T> getHumansList() {
         return humans_list;
     }
 
@@ -49,14 +49,14 @@ public class FamilyTree implements Iterable<Human> {
         return index;
     }
 
-    public Human getHuman(String human_name) {
+    public T getHuman(String human_name) {
         for (int i = 0; i < humans_list.size(); i++) {
             if (humans_list.get(i).getName().equalsIgnoreCase(human_name)) return humans_list.get(i);
         }
         return null;
     }
 
-    public void add(Human human) {
+    public void add(T human) {
         this.humans_list.add(human);
         if (human.getFather() != null | human.getMother() != null) {
             Integer stop = 0;
@@ -113,25 +113,25 @@ public class FamilyTree implements Iterable<Human> {
     }
 
     public void save(String file_name, Writeable format_write) throws IOException {
-        FileHandler file_handler = new FileHandler();
+        FileHandler<T> file_handler = new FileHandler<>();
         file_handler.write(format_write, file_name, getHumansIndexByGeneration(), getHumansList());
     }
 
-    public FamilyTree open(String file_name, Readable format_read) throws IOException {
-        FileHandler file_handler = new FileHandler();
+    public FamilyTree<T> open(String file_name, Readable format_read) throws IOException {
+        FileHandler<T> file_handler = new FileHandler<>();
         return file_handler.read(format_read, file_name);
     }
 
     public void sortByName() {
-        Collections.sort(humans_list, new HumanComparatorByName());
+        Collections.sort(humans_list, new HumanComparatorByName<T>());
     }
 
     public void sortByYear() {
-        Collections.sort(humans_list, new HumanComparatorByYear());
+        Collections.sort(humans_list, new HumanComparatorByYear<T>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humans_list);
+    public Iterator<T> iterator() {
+        return new HumanIterator<T>(humans_list);
     }
 }
