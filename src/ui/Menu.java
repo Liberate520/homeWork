@@ -14,6 +14,7 @@ public class Menu {
         commands = new ArrayList<>();
         //добавим команды
         commands.add(new ShowHumans(console));
+        commands.add(new FindHumans(console));
         commands.add(new AddHuman(console));
         commands.add(new SaveTree(console));
         commands.add(new CloseMenu(console));

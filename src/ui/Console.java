@@ -75,4 +75,8 @@ public class Console implements View {
     public void delHuman() {
         presenter.delHuman();
     }
+
+    public void findHumans() {
+        presenter.findHumans();
+    }
 }

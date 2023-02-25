@@ -2,13 +2,14 @@ package src.presenter;
 
 import src.*;
 import src.comparator.SortBy;
+import src.ui.ConsoleForms;
 import src.ui.View;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Presenter {
-    //каким образом закинем модель в презентер?
     private View view;
     private FamilyTree<Human> familyTree;
     public Presenter(View view, FamilyTree familyTree){
@@ -40,7 +41,13 @@ public class Presenter {
 
     }
     public void findHumans(){
-        System.out.println("Заглушка");
+        ConsoleForms form = new ConsoleForms();
+        List<Human> findRes = familyTree.unPackArgsFindHumans(form.findForm());
+        System.out.println("Результаты поиска:");
+        for (Human h :
+                findRes) {
+            System.out.println(h);
+        }
     }
     public void showTree(){
         System.out.println("Заглушка");

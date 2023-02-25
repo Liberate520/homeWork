@@ -151,6 +151,13 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     }
 
 
+    public List<T> unPackArgsFindHumans(String[] args) {
+        if (args.length != 9) {
+            throw new IllegalArgumentException("Expected an array of length 9");
+        }
+        return findHumans(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+    }
+
     public List<T> findHumans(
             String gender,
             String firstName,
@@ -238,19 +245,19 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
 
     public int maxId() {
         int maxId = 0;
-        for (T u:
-             family) {
-            if(u.getId()>maxId){
+        for (T u :
+                family) {
+            if (u.getId() > maxId) {
                 maxId = u.getId();
             }
         }
         return maxId;
     }
 
-    public boolean delUnit(int id){
+    public boolean delUnit(int id) {
         boolean flag = false;
         for (int i = 0; i < family.size(); i++) {
-            if (family.get(i).getId()==id) {
+            if (family.get(i).getId() == id) {
                 family.remove(i);
                 flag = true;
                 break;
