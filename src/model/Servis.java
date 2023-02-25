@@ -1,22 +1,27 @@
+package model;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-
-public class Servis implements Writable{
+public class Servis implements Savable {
     private String filename;
+    private static int incrementalID = 1;
 
-
-    public Servis(String filename){
+    public Servis(String filename) {
         this.filename = filename;
     }
 
     public void setFilename(String filename) {
         this.filename = filename;
     }
-    
+
+    public static int assignID() {
+        return incrementalID++;
+    }
+
     @Override
     public void save(Serializable serializable) {
         try {
@@ -25,20 +30,19 @@ public class Servis implements Writable{
             oos.writeObject(serializable);
             oos.close();
         } catch (Exception e) {
-           System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
-        
     }
 
     @Override
-    public FamilyTree read() {
-        FamilyTree tree;
+    public Object read() {
+        Object result = new Object();
         try {
             FileInputStream fis = new FileInputStream(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            tree = (FamilyTree) ois.readObject();
+            result = ois.readObject();
             ois.close();
-            return tree;
+            return result;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
