@@ -1,4 +1,4 @@
-package MyProject;
+package myProject;
 
 import java.io.IOException;
 import java.io.Serializable;

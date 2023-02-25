@@ -1,4 +1,4 @@
-package MyProject;
+package myProject;
 
 public enum Gender {
     MALE, FEMALE;

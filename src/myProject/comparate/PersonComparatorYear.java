@@ -1,6 +1,6 @@
-package MyProject.comparate;
+package myProject.comparate;
 
-import MyProject.Person;
+import myProject.Person;
 
 import java.util.Comparator;
 
