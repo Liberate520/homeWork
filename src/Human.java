@@ -3,7 +3,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 // класс ("чертеж" Хумана) - описание того, какими свойствами и поведением (переменные и функции=методы) будет обладать объект
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     // объявление полей (переменные)
     private String name;
     private String gender;
@@ -114,6 +114,11 @@ public class Human implements Serializable {
         return res;
     }
 
+    // для сортировки по количеству детей
+    public Integer getChildrenSize() {
+        return children.size();
+    }
+
     private String getChildrenInfo() {
         StringBuilder res = new StringBuilder();
         res.append("Дети (");
@@ -132,5 +137,9 @@ public class Human implements Serializable {
         return res.toString();
     }
 
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name); // сравниваем по именам
+    }
 
 }

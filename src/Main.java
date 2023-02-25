@@ -2,6 +2,9 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws SecurityException, IOException {
+        
+        
+        System.out.println("Задание 1");
         // объект — это экземпляр (конкретный Хуман) с собственным состоянием свойств из класса (переменные и методы) - атрибутами
         // создаем новый экземпляр Хумана
         FamilyTree tree = new FamilyTree();
@@ -20,22 +23,33 @@ public class Main {
         System.out.println(tree.getInfoTree());
         System.out.println("+++++++++");
         
-
         System.out.println(tree.getByName("Иван 1"));
         System.out.println("+++++++++");
 
-
+        System.out.println("Задание 2");
         FileHandler data = new FileHandler();
         data.saveFile("C:\\temp\\oop\\homeWork\\src\\test.txt", tree);
         System.out.print("Загрузка: ");
         System.out.println(data.readFile("C:\\temp\\oop\\homeWork\\src\\test.txt"));
 
         System.out.println("+++++++++");
+        System.out.println("Задание 3");
         // foreach
         for (Human human: tree) {
             System.out.println(human.getInfo());
         }
 
+        System.out.println("Сортируем по именам:");
+        tree.sortByName();
+        for (Human human: tree) {
+            System.out.println(human.getInfo());
+        }
+
+        System.out.println("Сортируем по числу детей:");
+        tree.sortBySizeChildren();
+        for (Human human: tree) {
+            System.out.println(human.getInfo());
+        }
 
         
     }    
