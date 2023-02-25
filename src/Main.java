@@ -1,3 +1,6 @@
+// Продолжаем грейдить наш проект с гениологическим древом. Изменить древо, сделать класс параметизированным. 
+// Продумать класс общения с пользователем, сделать набор команд, для операций над деревом
+
 import java.util.List;
 import java.io.Serializable;
 import java.io.*;
@@ -5,7 +8,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree familyTree1 = new FamilyTree();
+        FamilyTree<Human> familyTree1 = new FamilyTree<>();
         
         Human human1 = new Human("Иван", Gender.male, 1950);
         Human human2 = new Human("Мария", Gender.female, 1949);
