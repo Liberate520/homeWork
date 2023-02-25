@@ -64,6 +64,7 @@ public class It {
     }
     public int getId() { return id; }
     public void createUnit(){}
+    public String getShortName(){return firstName;}
 
 
 }

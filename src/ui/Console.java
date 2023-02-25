@@ -83,4 +83,8 @@ public class Console implements View {
     public void infoHuman() {
         presenter.infoHuman();
     }
+
+    public void showTree() {
+        presenter.showTree();
+    }
 }

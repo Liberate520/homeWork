@@ -50,7 +50,13 @@ public class Presenter {
         }
     }
     public void showTree(){
-        System.out.println("Заглушка");
+        Validation validation = new Validation();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Укажите \"родительский\" ID от которого будет стоиться деверо: ");
+        String sc = scanner.next();
+        if(validation.isNextInt(sc)){
+            familyTree.displayTree(familyTree.getUnitById(Integer.parseInt(sc)));
+        }
     }
     public void infoHuman(){
         Validation validation = new Validation();

@@ -195,6 +195,13 @@ public class Human extends It implements Serializable {
         System.out.print("Укажите фамилию: ");
         this.lastName = scanner.next();
     }
+    @Override
+    public String getShortName(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(lastName).append(" ").append(firstName.charAt(0)).append(".");
+        stringBuilder.append(patronymic.charAt(0)).append(".");
+        return stringBuilder.toString();
+    }
 
 
     @Override

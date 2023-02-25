@@ -276,6 +276,36 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return null;
     }
 
+    /*
+    Начало, отображения древа
+     */
+    public void displayTree(T root) {
+        if(root!=null){
+            displayTreeHelper(root, 0);
+        } else {
+            System.out.println("ID отсутствует");
+        }
+
+    }
+
+    private void displayTreeHelper(T person, int level) {
+
+        StringBuilder indent = new StringBuilder();
+        for (int i = 0; i < level; i++) {
+            indent.append("└───   ");
+        }
+        System.out.println(indent + person.getShortName() + " (" + person.getDateOfBorn() + " - " + person.getDateOfDeath() + ")");
+
+        List<T> children = (List<T>) person.getChildren();
+        for (T child : children) {
+            displayTreeHelper(child, level + 1);
+        }
+    }
+
+    /*
+    Конец
+     */
+
     @NotNull
     @Override
     public Iterator<T> iterator() {

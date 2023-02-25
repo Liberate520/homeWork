@@ -13,6 +13,7 @@ public class Menu {
         this.console = console;
         commands = new ArrayList<>();
         //добавим команды
+        commands.add(new ShowTree(console));
         commands.add(new ShowHumans(console));
         commands.add(new FindHumans(console));
         commands.add(new InfoHuman(console));

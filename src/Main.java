@@ -17,16 +17,17 @@ public class Main {
 //        Human a3 = new Human("Female", "28.03.1918", "", "СПБ", "Авдотья", "Павловна", "Евдокимова");
 //        Human r = new Human(a1, a3, "Female", "07.12.1937", "01.01.2011", "СПБ", "Светлана","Петровна", "Евдокимова");
 //        Human r1= new Human("Male", "22.06.1990", "", "СПБ", "И", "Ю", "Я");
-////        System.out.println(a5.getId());
+//
 //        a1.addChild(r);
 //        r.addChild(r1);
 //        t1.addToFamily(a1);
 //        t1.addToFamily(a3);
 //        t1.addToFamily(r);
 //        t1.addToFamily(a5);
-//        System.out.println(t1);
+//        a1.addChild(a5);
 //        t1.save();
-//
+
+
         t1.load();
 //        for (Human h :
 //                t1) {
