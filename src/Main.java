@@ -1,3 +1,9 @@
+/**
+* Продолжаем работать с проектом с семейным деревом.
+* Реализовать интерфейс Iterable для дерева.
+* Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения
+*/
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,9 +27,12 @@ public class Main {
             System.out.println("Введите номер меню:");
             System.out.printf("\t0 выход из программы;\n");
             System.out.printf("\t1 печать информации о детях представителя династии.\n");
-            System.out.printf("\t2 печать информации о всех представителях династии Романовых;\n");
-            System.out.printf("\t3 Сохранить информацию с помощью serialize;\n");
-            System.out.printf("\t4 Восстановить информацию с помощью serialize;\n");
+            System.out.printf("\t2 печать информации о всех представителях династии ;\n");
+            System.out.printf("\t3 печать информации о всех представителях династии с помощью Iterable;\n");
+            System.out.printf("\t4 отсортировать династию по именам;\n");
+            System.out.printf("\t5 отсортировать династию по году пождения;\n");
+            System.out.printf("\t6 Сохранить информацию с помощью serialize;\n");
+            System.out.printf("\t7 Восстановить информацию с помощью serialize;\n");
 
             System.out.printf("> ");
             menu = Integer.parseInt(scan.nextLine());
@@ -48,12 +57,35 @@ public class Main {
                 }
                 case 3:
                 {
+
+                    // Print using Iterator
+                    for (Person person: familyTree)
+                    {
+                        System.out.println(person);
+                        //person.printAll();
+                    }
+                    System.out.println();
+
+                    break;
+                }
+                case 4:
+                {
+                    familyTree.sortByName();
+                    break;
+                }
+                case 5:
+                {
+                    familyTree.sortByDateOfBirth();
+                    break;
+                }
+                case 6:
+                {
                     FileHandler fileHandler = new FileHandler();
                     familyTree.setWritable(fileHandler);
                     familyTree.save(serializable,(Object) familyTree);
                     break;
                 }
-                case 4:
+                case 7:
                 {
                     FileHandler fileHandler = new FileHandler();
                     familyTree.setWritable(fileHandler);

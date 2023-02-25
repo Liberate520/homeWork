@@ -1,9 +1,10 @@
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Writable, Serializable
+public class FamilyTree implements Writable, Serializable, Iterable<Person>
 {
     private List<Person> familyTree = new ArrayList<>();
     private Writable writable;
@@ -129,4 +130,17 @@ public class FamilyTree implements Writable, Serializable
         this.writable = writable;
     }
 
+    public void sortByName()
+    {
+        familyTree.sort(new PersonComparatorByName());
+    }
+    public void sortByDateOfBirth()
+    {
+        familyTree.sort(new PersonComparatorByDateOfBirth());
+    }
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(familyTree);
+    }
 }
+
