@@ -114,7 +114,13 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
                 result.append("Умер ").append(human.getDateOfDeath()).append(" г\n");
                 result.append("Прожил ").append(human.getAge()).append(" полных лет\n");
             }
-            result.append("Имеет ").append(human.getChildren().size()).append(" детей и ").append(children.size() - human.getChildren().size()).append(" внуков с правнуками");
+            if(!human.getChildren().isEmpty()){
+                result.append("Имеет ").append(human.getChildren().size()).append(" детей и ").append(children.size() - human.getChildren().size()).append(" внуков с правнуками\n");
+                result.append("Дети:\n");
+                for(It h: human.getChildren()) {
+                    result.append("└───   ").append(h.getShortName()).append(" - ID: ").append(h.getId()).append("\n");
+                }
+            }
             System.out.println(result);
         }
     }
