@@ -1,11 +1,12 @@
-package HW01;
+package HW01.model;
+
+import HW01.model.Basic;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person extends Basic implements Serializable {
 
     private String name;
     private String sex;
@@ -44,6 +45,7 @@ public class Person implements Serializable {
         this("Unkown","Unkown", 0, 0 );
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -51,12 +53,12 @@ public class Person implements Serializable {
     public String getSex() {
         return sex;
     }
-
+    @Override
     public Integer getDateOfBirth() {
         return dateOfBirth;
     }
-
-    public Integer getDataOfDeath() {
+    @Override
+    public Integer getDateOfDeath() {
         return dateOfDeath;
     }
 
@@ -96,8 +98,8 @@ public class Person implements Serializable {
     public List<String> getChildren() {
         return children;
     }
-
-    public void setChildren(String child) {
+    @Override
+    public void addChild(String child) {
         children.add(child);
     }
 
@@ -105,7 +107,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "\nHW01.Person " +
+        return "\nPerson " +
                 "name='" + name + "',\n" +
                 "sex='" + sex + "',\n" +
                 "dateOfBirth='" + dateOfBirth +"',\n"+
