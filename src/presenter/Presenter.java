@@ -52,8 +52,14 @@ public class Presenter {
     public void showTree(){
         System.out.println("Заглушка");
     }
-    public void showHuman(){
-        System.out.println("Заглушка");
+    public void infoHuman(){
+        Validation validation = new Validation();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Укажите ID информацию по которому хотите получить: ");
+        String sc = scanner.next();
+        if(validation.isNextInt(sc)){
+            familyTree.getStatistics(familyTree.getUnitById(Integer.parseInt(sc)));
+        }
     }
 
 

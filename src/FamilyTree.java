@@ -266,6 +266,16 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return flag;
     }
 
+    public T getUnitById(int id){
+        for (T h :
+                family) {
+            if(h.getId()==id) {
+                return h;
+            }
+        }
+        return null;
+    }
+
     @NotNull
     @Override
     public Iterator<T> iterator() {
