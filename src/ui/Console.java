@@ -19,29 +19,30 @@ public class Console implements View {
 
     @Override
     public void start() {
-        Validation valid = new Validation();
         scanner = new Scanner(System.in);
         menu = new Menu(this);
         work = true;
         while (work) {
             showMenu();
-            // подумай тут ещё разок
-            System.out.print("Укажите номер команды из меню: ");
-            String command = scanner.next();
-            if (valid.isNextInt(command)) {
-                try {
-                    menu.execute(Integer.parseInt(command));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                System.out.println("Некорретно выбран элемент меню");
-            }
+            useCommand(scanner.next());
         }
     }
 
     private void showMenu() {
         System.out.println(menu.printMenu());
+        System.out.print("Укажите номер команды из меню: ");
+    }
+    private void useCommand(String command){
+        Validation valid = new Validation();
+        if (valid.isNextInt(command)) {
+            try {
+                menu.execute(Integer.parseInt(command));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Некорретно выбран элемент меню");
+        }
     }
 
     public void finish() {

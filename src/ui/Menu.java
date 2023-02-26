@@ -12,7 +12,6 @@ public class Menu {
     public Menu(Console console) {
         this.console = console;
         commands = new ArrayList<>();
-        //добавим команды
         commands.add(new ShowTree(console));
         commands.add(new ShowHumans(console));
         commands.add(new FindHumans(console));
