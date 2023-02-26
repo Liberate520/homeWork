@@ -54,9 +54,9 @@ public class Human implements Serializable {
         sb.append("born: ");
         sb.append(ft.format(birthDate));
         sb.append(", ");
-        sb.append(getMotherInfo());
-        sb.append(", ");
         sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getMotherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
         return sb.toString();

@@ -2,8 +2,8 @@ package ui.commands;
 
 import ui.Console;
 
-public class AddHuman extends Command {
-    public AddHuman(Console console) {
+public class AddEntry extends Command {
+    public AddEntry(Console console) {
         super(console);
     }
 
