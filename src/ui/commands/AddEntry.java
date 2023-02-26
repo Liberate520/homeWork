@@ -2,18 +2,18 @@ package ui.commands;
 
 import ui.Console;
 
-public class AddNote extends Command {
-    public AddNote(Console console) {
+public class AddHuman extends Command {
+    public AddHuman(Console console) {
         super(console);
     }
 
     @Override
     public String description() {
-        return "Add new entry";
+        return "Add new family member";
     }
 
     @Override
     public void execute() {
-        getConsole().addNote();
+        super.getConsole().addEntry();
     }
 }
