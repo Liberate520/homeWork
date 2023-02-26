@@ -1,11 +1,17 @@
 package Java_OOP.homeWork;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private String name;
     private List<Human> family;
+    String path = "C:\\Users\\anohi\\OneDrive\\Documents\\Java_project\\Java_OOP\\homeWork\\";
+    String fileName = "family.out";
+    
 
     public List<Human> getFamily() {
         return family;
@@ -30,4 +36,12 @@ public class FamilyTree {
         }
         return h;
     }
+
+	public void save(Writable fh) throws FileNotFoundException, IOException{
+        fh.write(path, fileName, this);
+	}
+
+    public FamilyTree load(Writable fh) throws FileNotFoundException, IOException, ClassNotFoundException{
+        return fh.load(path, fileName);
+	}
 }
