@@ -55,7 +55,7 @@ public class Console implements View{
         System.out.println("Enter mother name: ");
         String motherName = scanner.nextLine();
         if(presenter.addEntry(name, gender, birthYear, fatherName, motherName)){
-            System.out.println("Child successfully added to the tree.");
+            System.out.println("Person successfully added to the tree.");
         }
     }
     public void showEntry(){
@@ -101,5 +101,14 @@ public class Console implements View{
             }
         }
         return birthYear;
+    }
+
+    public void save() {
+        presenter.save();
+        print("Saved.");
+    }
+    public void load() {
+        presenter.load();
+        showAllEntries();
     }
 }

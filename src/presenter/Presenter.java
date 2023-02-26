@@ -30,4 +30,12 @@ public class Presenter {
     public boolean deleteEntry(String name) {
         return service.deleteEntry(name);
     }
+
+    public void save() {
+        service.save();
+    }
+
+    public void load() {
+        service.load();
+    }
 }
