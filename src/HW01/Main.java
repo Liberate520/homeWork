@@ -1,12 +1,16 @@
 package HW01;
 
-import java.io.IOException;
+import HW01.presenter.Presenter;
+import HW01.ui.Console;
+import HW01.ui.View;
 
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Presenter presenter = new Presenter();
-        presenter.Interface();
+        View view = new Console();
+        new Presenter(view);
+        view.start();
     }
 }

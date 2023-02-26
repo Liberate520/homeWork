@@ -1,4 +1,4 @@
-package HW01.auxiliary;
+package HW01.model.auxiliary;
 
 import HW01.model.Basic;
 

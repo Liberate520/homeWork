@@ -1,9 +1,8 @@
 package HW01.model;
 
-import HW01.auxiliary.PersonComparatorByBirth;
-import HW01.auxiliary.PersonComparatorByName;
-import HW01.auxiliary.PersonIterator;
-import HW01.model.Basic;
+import HW01.model.auxiliary.PersonComparatorByBirth;
+import HW01.model.auxiliary.PersonComparatorByName;
+import HW01.model.auxiliary.PersonIterator;
 
 import java.io.Serializable;
 import java.util.*;
