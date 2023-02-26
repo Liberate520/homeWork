@@ -14,7 +14,7 @@ public class ShowAllEntries  extends Command {
 
     @Override
     public void execute() {
-        super.getConsole().ShowAllEntries();
+        super.getConsole().showAllEntries();
     }
 }
 

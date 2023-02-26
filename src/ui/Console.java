@@ -62,8 +62,14 @@ public class Console implements View{
         print("Enter name: ");
         presenter.showEntry(scanner.nextLine());
     }
-    public void ShowAllEntries() {
-        presenter.ShowAllEntries();
+    public void showAllEntries() {
+        presenter.showAllEntries();
+    }
+    public void deleteEntry() {
+        print("Enter name for deletion: ");
+        if (presenter.deleteEntry(scanner.nextLine())) {
+            print("Successfully deleted");
+        }
     }
     @Override
     public void setPresenter(Presenter presenter){

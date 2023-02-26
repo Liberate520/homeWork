@@ -3,8 +3,6 @@ package presenter;
 import model.Service;
 import ui.View;
 
-import java.text.ParseException;
-
 
 public class Presenter {
 
@@ -25,7 +23,11 @@ public class Presenter {
         view.print(service.showEntry(name));
     }
 
-    public void ShowAllEntries() {
+    public void showAllEntries() {
         view.print(service.showAll());
+    }
+
+    public boolean deleteEntry(String name) {
+        return service.deleteEntry(name);
     }
 }

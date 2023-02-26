@@ -13,7 +13,7 @@ public class FamilyTreeService implements Service {
 
     public FamilyTreeService() {
         this.fileHandler = new FileHandler("familydata");
-        load();
+        familyTree = new FamilyTree<>();
     }
 
     public String showAll(){
@@ -48,6 +48,11 @@ public class FamilyTreeService implements Service {
         Human mother = familyTree.getByName(motherName);
         Human child = new Human(name, enumGender, birthDate, father, mother);
         return familyTree.add(child);
+    }
+
+    @Override
+    public boolean deleteEntry(String name) {
+        return familyTree.delete(familyTree.getByName(name));
     }
 
 }

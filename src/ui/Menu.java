@@ -14,6 +14,7 @@ public class Menu {
         commands.add(new AddEntry(console));
         commands.add(new ShowEntry(console));
         commands.add(new ShowAllEntries(console));
+        commands.add(new DeleteEntry(console));
         commands.add(new Exit(console));
     }
     void execute(int num){

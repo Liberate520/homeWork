@@ -8,4 +8,6 @@ public interface Service {
     public String showEntry(String name);
     public boolean addEntry(String name, String gender, String birthYear,
                          String fatherName, String motherName);
+
+    boolean deleteEntry(String name);
 }

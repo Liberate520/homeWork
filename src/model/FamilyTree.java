@@ -31,6 +31,26 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
         }
         return false;
     }
+    public boolean delete(T human){
+        if (human == null){
+            return false;
+        }
+        if (humanList.contains(human)){
+            humanList.remove(human);
+            if (human.getFather() != null){
+                human.getFather().removeChild(human);
+            }
+            if (human.getMother() != null){
+                human.getMother().removeChild(human);
+            }
+            for ( Human child : human.getChildren()){
+                child.removeMother();
+                child.removeFather();
+            }
+            return true;
+        }
+        return true;
+    }
 
     public T getByName(String name){
         for (T human : humanList){

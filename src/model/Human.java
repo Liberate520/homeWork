@@ -108,4 +108,20 @@ public class Human implements Serializable {
         Human human = (Human) obj;
         return human.getName().equals(getName());
     }
+
+    public  void removeChild(Human human) {
+        children.remove(human);
+    }
+
+    public List<Human> getChildren() {
+        return this.children;
+    }
+
+    public void removeMother() {
+        mother = null;
+    }
+
+    public void removeFather() {
+        father = null;
+    }
 }
