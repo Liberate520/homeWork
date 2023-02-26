@@ -1,8 +1,8 @@
 package HWGT.model;
 
-import HWGT.comparators.PersonComparatorByBirth;
-import HWGT.comparators.PersonComparatorByName;
-import HWGT.comparators.PersonIterator;
+import HWGT.model.comparators.PersonComparatorByBirth;
+import HWGT.model.comparators.PersonComparatorByName;
+import HWGT.model.comparators.PersonIterator;
 
 import java.io.Serializable;
 import java.util.*;

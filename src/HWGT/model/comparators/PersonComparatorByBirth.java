@@ -1,4 +1,4 @@
-package HWGT.comparators;
+package HWGT.model.comparators;
 
 import HWGT.model.Basic;
 

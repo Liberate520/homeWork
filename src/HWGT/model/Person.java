@@ -36,7 +36,7 @@ public class Person extends Basic implements Serializable {
         this.dateOfDeath = dateOfDeath;
         this.mother = mother;
         this.father = father;
-//        children = children1;
+        this.children = children;
     }
 
     public Person (){
