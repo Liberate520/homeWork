@@ -1,4 +1,6 @@
-package src.FamilyTree;
+package src.Comparators;
+
+import src.FamilyTree.FTObjects;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,6 @@
-package src.FamilyTree;
+package src.SaveRestore;
+
+import src.FamilyTree.FamilyTree;
 
 import java.io.*;
 

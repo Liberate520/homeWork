@@ -48,4 +48,12 @@ public class FTObjects implements Serializable {
     public void setAdditionalField(String additionalField) {
         this.additionalField = additionalField;
     }
+
+    @Override
+    public String toString() {
+        return "Person: " + name + ",\t years of life: " + birthDay + " -  ?" +
+                ",\t sposes: " + spouseName +
+                ",\t children: " + childrenName+
+                ",\t years of government: " + additionalField;
+    }
 }

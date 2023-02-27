@@ -1,17 +1,15 @@
 package src.FamilyTree;
 
+import src.Comparators.FamilyTreeIterator;
 import src.Comparators.PersonComparatorByName;
 import src.Comparators.PersonCompareByBirthday;
 import src.Comparators.PersonCompareByYearOfReign;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
-    private List<T> people;
+    private ArrayList<T> people;
 
     public FamilyTree() {
         this(new ArrayList<T>());
@@ -34,8 +32,8 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
      * The method of adding persons who appeared from outside (for example, the wife)
      */
     public boolean addPerson(T person) {
-        for (T item : people) {
-            if (person.getName().equals(item.getName())) {
+        for (T human : people) {
+            if (person.getName().equals(human.getName())) {
                 return false;
             }
         }
