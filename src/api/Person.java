@@ -1,3 +1,5 @@
+package api;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +103,7 @@ public class Person implements Serializable
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "api.Person{" +
                 "Name='" + Name + '\'' +
                 ", MiddleName='" + MiddleName + '\'' +
                 ", Surname='" + Surname + '\'' +
@@ -114,15 +116,27 @@ public class Person implements Serializable
                 '}';
     }
 
-    public void printAll() {
-        System.out.println("Персона:");
-        this.printInfo();
-        System.out.println();
-    }
-    public void printInfo()
+    public String printAll()
     {
-        System.out.println("\t" + Name + " " + MiddleName + " " + Surname);
-        System.out.println("\t" + "Годы жизни    \t" + YearOfBirth + " - " + YearOfDeath);
+//        System.out.println("Персона:");
+//        this.printInfo();
+//        System.out.println();
+        String result = "";
+        result += "Персона:";
+        result += this.printInfo();
+        result += "\n";
+
+        return result;
+    }
+    public String printInfo()
+    {
+//        System.out.println("\t" + Name + " " + MiddleName + " " + Surname);
+//        System.out.println("\t" + "Годы жизни    \t" + YearOfBirth + " - " + YearOfDeath);
+
+        String result = "";
+        result += "\t" + Name + " " + MiddleName + " " + Surname;
+        result += "\t" + "Годы жизни    \t" + YearOfBirth + " - " + YearOfDeath;
+        return result;
     }
 
     public void setFather(Person father) {

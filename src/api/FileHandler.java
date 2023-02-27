@@ -1,24 +1,26 @@
+package api;
+
 import java.io.Serializable;
 import java.io.*;
 //import
 
 public class FileHandler implements Writable, Serializable
 {
-    public void save(Serializable serializable, Object object) throws IOException {
+    public String save(Object object) throws IOException {
 
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("FamilyTree.out"));
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("api.FamilyTree.out"));
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
 
-        System.out.println("Сохранили");
+        return "Сохранили!\r";
     }
 
     public Object read() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("FamilyTree.out"));
+                new FileInputStream("api.FamilyTree.out"));
         Object fTree = (Object) objectInputStream.readObject();
         objectInputStream.close();
-        System.out.println("Восстановление прошло успешно");
+        //System.out.println("Восстановление прошло успешно");
         return fTree;
     }
 
