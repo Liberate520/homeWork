@@ -1,47 +1,54 @@
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Human {
+public class Human implements Serializable{
     private String name;
+    private String surname;
+    private Sex sex;
     private String startDate;
     private String endDate;
     private Human father;
     private Human mother;
-    private List<Human> children;
+    private ArrayList<Human> children;
 
-    
-    public Human() {
-        ArrayList<Human> list = new ArrayList<Human>();
-        this.children = list;
-    }
-
-    public Human(String name, String startDate, String endDate) {
-        this();
+    public Human(String name, String surname, Sex sex, String startDate, String endDate, Human father, Human mother,
+            ArrayList<Human> children) {
         this.name = name;
+        this.surname = surname;
+        this.sex = sex;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public Human(String name, String startDate, String endDate, Human father, Human mother) {
-        this(name, startDate, endDate);
         this.father = father;
         this.mother = mother;
-    }
-
-    public Human(String name, String startDate, String endDate, Human father, Human mother,
-            List<Human> children) {
-        this(name, startDate, endDate, father, mother);
         this.children = children;
     }
 
-    public void addChildren(Human child) {
-        children.add(child);
+    public Human(String name, String surname, Sex sex, String startDate, String endDate, Human father, Human mother) {
+        this(name, surname, sex, startDate, endDate, father, mother, new ArrayList<Human>());
+    }
+
+    public Human(String name, String surname, Sex sex, String startDate, String endDate) {
+        this(name, surname, sex, startDate, endDate, null, null);
+    }
+
+    public Human(String name, String surname, Sex sex, String startDate) {
+        this(name, surname, sex, startDate, null);
     }
 
     @Override
     public String toString() {
-        return "Human name = " + name + ", startDate = " + startDate + " , endDate = " + endDate;
+        return "Human name: " + name + " " + surname + ", Date = " + startDate + " - " + endDate + " ," + " father: "
+                + getNameFather() + " mother: " + getNameMother() + "\n";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        var t = (Human) obj;
+        return this.getSurname() == t.getSurname() && this.getName() == t.getName()
+                && this.getStartDate() == t.getStartDate() && this.getEndDate() == t.getEndDate();
+    }
+
+    
 
     public String getName() {
         return name;
@@ -49,6 +56,18 @@ public class Human {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
     public String getStartDate() {
@@ -83,12 +102,36 @@ public class Human {
         this.mother = mother;
     }
 
-    public List<Human> getChildren() {
+    public ArrayList<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Human> children) {
+    public void setChildren(ArrayList<Human> children) {
         this.children = children;
+    }
+
+    public void addChild(Human child) {
+        children.add(child);
+        if (this.sex == Sex.Male){
+            child.setFather(this);
+        } else {
+            child.setMother(this);
+        }
+        
+    }
+
+    private String getNameFather() {
+        if (father != null) {
+            return father.getName();
+        }
+        return "null";
+    }
+
+    private String getNameMother() {
+        if (mother != null) {
+            return mother.getName();
+        }
+        return "null";
     }
 
 }
