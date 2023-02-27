@@ -1,9 +1,15 @@
+package src;
+
+import src.FamilyTree.FamilyTree;
+import src.FamilyTree.Person;
+import src.FamilyTree.SavingFT;
+
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         System.out.println("\nThe Romanov family tree\n");
-        FamilyTree family = new FamilyTree();
+        FamilyTree<Person> family = new FamilyTree<>();
 
 //        family.addPerson(new Person("Михаил Федорович", 1596, 1645, Sex.Male, 1, "1613-1645"));
 //        family.addWifeToHusband("Михаил Федорович", new Person("Евдокия Лукьяновна Стрешнева", 1608, 1645, Sex.Female, 1));
@@ -30,11 +36,28 @@ public class Main {
 //        family.addChildToMother("Мария Ильинична Миллославская", new Person("Анна Алексеевна", 1655, 1659, Sex.Female, 2));
 //        family.addChildToMother("Мария Ильинична Миллославская", new Person("Феодосия Алексеевна", 1662, 1713, Sex.Female, 2));
 //        family.addChildToMother("Мария Ильинична Миллославская", new Person("Симеон Алексеевич", 1665, 1669, Sex.Male, 2));
-//        family.addChildToMother("Мария Ильинична Миллославская", new Person("Иоанн V ", 1666, 1696, Sex.Male, 2, "1682-1696"));
-//
+//        family.addChildToMother("Мария Ильинична Миллославская", new Person("Иоанн V", 1666, 1696, Sex.Male, 2, "1682-1696"));
+//        family.addChildToMother("Мария Ильинична Миллославская", new Person("Федор Алексеевич", 1629, 1676, Sex.Male, 2, "1654-1676"));
+//        family.addWifeToHusband("Федор Алексеевич", new Person("Марфа Матвеевна Апраксина", 1664, 1715, Sex.Female, 3));
+//        family.addChildToMother("Марфа Матвеевна Апраксина", new Person("Илья Федорович", 1681, 1681, Sex.Male, 4));
+//        family.addWifeToHusband("Петр I", new Person("Евдокия Федоровна Лопухина", 1669, 1731, Sex.Female, 3));
+//        family.addWifeToHusband("Петр I", new Person("Екатерина Алексеевна Скавронская", 1684, 1727, Sex.Female, 3, "1725-1727"));
+//        family.addChildToMother("Евдокия Федоровна Лопухина", new Person("Алексей Петрович",1690, 1718, Sex.Male, 4));
+//        family.addChildToMother("Евдокия Федоровна Лопухина", new Person("Александр Петрович",1691, 1692, Sex.Male, 4));
+//        family.addChildToMother("Екатерина Алексеевна Скавронская", new Person("Павел Петрович", 1704, 1707, Sex.Male, 4));
+//        family.addChildToMother("Екатерина Алексеевна Скавронская", new Person("Анна Петровна", 1708, 1728, Sex.Female, 4));
+//        family.addChildToMother("Екатерина Алексеевна Скавронская", new Person("Елизавета Петровна", 1709, 1761, Sex.Female, 4, "1741-1761"));
+//        family.addChildToMother("Екатерина Алексеевна Скавронская", new Person("Наталья Петровна", 1718, 1725, Sex.Female, 4));
+//        family.addWifeToHusband("Иоанн V", new Person("Прасковья Федоровна Салтыкова", 1664, 1723, Sex.Female, 3));
+//        family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Мария Иоанновна", 1689, 1692, Sex.Female, 4));
+//        family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Феодосия Иоанновна", 1690, 1691, Sex.Female, 4));
+//        family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Екатерина Иоанновна", 1691, 1733, Sex.Female, 4));
+//        family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Анна Иоанновна", 1693, 1740, Sex.Female, 4, "1730-1740"));
+//        family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Прасковья Иоанновна", 1694, 1730, Sex.Female, 4));
+
 //       SavingFT.saveToFile(family);
 
-       SavingFT.restoreFromFile();
+       family = SavingFT.restoreFromFile();
 
        family.sortByName();
        for (Object human: family){
@@ -45,7 +68,7 @@ public class Main {
        family.sortByBirthday();
        family.getList();
 
+        System.out.println("\n\t--+--\n");
        family.sortByYearOfReigh(); // Prints a list of reigning personages
-
     }
 }

@@ -1,7 +1,9 @@
+package src.FamilyTree;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Person implements Serializable{
+public class Person extends FTObjects implements Serializable{
     private String name;
     private Integer birthDay;
     private Integer deathDay;
@@ -14,13 +16,7 @@ public class Person implements Serializable{
 
     public Person(String name, Integer birthDay, Integer deathDay,
                   Sex sex, Integer generation, String additionalField ) {
-        this.name = name;
-        this.birthDay = birthDay;
-        this.deathDay = deathDay;
-        this.sex = sex;
-        this.generation = generation;
-        spouseName = new ArrayList<String>();
-        childrenName = new ArrayList<String>();
+        this(name, birthDay, deathDay, sex, generation);
         this.additionalField = additionalField;
     }
 

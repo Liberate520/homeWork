@@ -1,11 +1,13 @@
+package src.FamilyTree;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyTreeIterator implements Iterator<Person> {
-    private ArrayList<Person> people;
+public class FamilyTreeIterator<T extends FTObjects> implements Iterator<T> {
+    private ArrayList<T> people;
     private int index;
 
-    public FamilyTreeIterator(ArrayList<Person> people) {
+    public FamilyTreeIterator(ArrayList<T> people) {
         this.people = people;
     }
 
@@ -15,13 +17,12 @@ public class FamilyTreeIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public T next() {
         return people.get(index++);
     }
 
     @Override
     public void remove() {
-
     }
 
 }

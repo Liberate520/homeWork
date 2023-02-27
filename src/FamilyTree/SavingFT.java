@@ -1,3 +1,5 @@
+package src.FamilyTree;
+
 import java.io.*;
 
 public class SavingFT implements Serializable{
