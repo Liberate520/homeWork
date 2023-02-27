@@ -11,6 +11,7 @@ public class Console implements View {
     private Presenter presenter;
     private Menu menu;
     private boolean work;
+    Validation validation = new Validation();
 
     @Override
     public void setPresenter(Presenter presenter) {
@@ -33,8 +34,8 @@ public class Console implements View {
         System.out.print("Укажите номер команды из меню: ");
     }
     private void useCommand(String command){
-        Validation valid = new Validation();
-        if (valid.isNextInt(command)) {
+
+        if (validation.isNextInt(command)) {
             try {
                 menu.execute(Integer.parseInt(command));
             } catch (IOException e) {
@@ -59,33 +60,61 @@ public class Console implements View {
     }
 
     public void showHumans() {
-        presenter.showHumans();
+        System.out.println(presenter.showHumans());
     }
 
     public void saveTree() {
-        try {
-            presenter.saveTree();
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            System.out.println("Не удалось сохранить файл");
+        if (presenter.saveTree()) {
+            System.out.println("Файл сохранен!\n");
+        } else {
+            System.out.println("Что-то пошло не так!!! Файл не сохранен...\n");
         }
-
     }
 
     public void delHuman() {
-        presenter.delHuman();
+        System.out.print("Укажите ID который хотите удалить: ");
+        String id = scanner.next();
+        if (validation.isNextInt(id)) {
+            int delId = Integer.parseInt(id);
+            if (presenter.delHuman(delId)) {
+                System.out.printf("\nЗапись с ID: %s удалена!\n", id);
+            }
+        } else {
+            System.out.printf("Запись с ID: %s не была удалена", id);
+        }
     }
 
     public void findHumans() {
-        presenter.findHumans();
+        ConsoleForms form = new ConsoleForms();
+        String result = presenter.findHumans(form);
+        System.out.println("Результаты поиска:");
+        if(result.isEmpty()) {
+            System.out.println("Нет результатов удовлетворящих критериям поиска!");
+        } else {
+            System.out.println(result);
+        }
     }
 
     public void infoHuman() {
-        presenter.infoHuman();
+        System.out.print("Укажите ID информацию по которому хотите получить: ");
+        String sc = scanner.next();
+        if(validation.isNextInt(sc)){
+            System.out.println(presenter.infoHuman(Integer.parseInt(sc)));;
+        } else {
+            System.out.println("Некорректно указан ID");
+        }
+
+
+
     }
 
     public void showTree() {
-        presenter.showTree();
+        System.out.print("Укажите \"родительский\" ID от которого будет стоиться деверо: ");
+        String sc = scanner.next();
+        if(validation.isNextInt(sc)) {
+            System.out.println(presenter.showTree(Integer.parseInt(sc)));
+        } else {
+            System.out.println("Некорректно указан ID");
+        }
     }
 }

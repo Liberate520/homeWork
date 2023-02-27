@@ -102,7 +102,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return result.toString();
     }
 
-    public void getStatistics(T human) {
+    public String getStatistics(T human) {
         if (family.contains(human)) {
             StringBuilder result = new StringBuilder();
             List<T> children = getClildrenAndGrandsonsList(human);
@@ -121,8 +121,9 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
                     result.append("└───   ").append(h.getShortName()).append(" - ID: ").append(h.getId()).append("\n");
                 }
             }
-            System.out.println(result);
+            return result.toString();
         }
+        return "Что-то пошло не так!";
     }
 
 
@@ -285,32 +286,64 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     /*
     Начало, отображения древа
      */
-    public void displayTree(T root) {
-        if(root!=null){
-            displayTreeHelper(root, 0);
-        } else {
-            System.out.println("ID отсутствует");
-        }
+//    public void displayTree(T root) {
+//        if(root!=null){
+//            displayTreeHelper(root, 0);
+//        } else {
+//            System.out.println("ID отсутствует");
+//        }
+//
+//    }
+//
+//    private void displayTreeHelper(T person, int level) {
+//
+//        StringBuilder indent = new StringBuilder();
+//        for (int i = 0; i < level; i++) {
+//            indent.append("└───   ");
+//        }
+//        System.out.println(indent + person.getShortName() + " (" + person.getDateOfBorn() + " - " + person.getDateOfDeath() + ")");
+//
+//        List<T> children = (List<T>) person.getChildren();
+//        for (T child : children) {
+//            displayTreeHelper(child, level + 1);
+//        }
+//    }
 
+    public String displayTree(T root) {
+        StringBuilder sb = new StringBuilder();
+        if (root != null) {
+            displayTreeHelper(root, 0, sb);
+        } else {
+            sb.append("ID отсутствует");
+        }
+        return sb.toString();
     }
 
-    private void displayTreeHelper(T person, int level) {
-
+    private void displayTreeHelper(T person, int level, StringBuilder sb) {
         StringBuilder indent = new StringBuilder();
         for (int i = 0; i < level; i++) {
             indent.append("└───   ");
         }
-        System.out.println(indent + person.getShortName() + " (" + person.getDateOfBorn() + " - " + person.getDateOfDeath() + ")");
+        sb.append(indent).append(person.getShortName()).append(" (").append(person.getDateOfBorn()).append(" - ").append(person.getDateOfDeath()).append(")\n");
 
         List<T> children = (List<T>) person.getChildren();
         for (T child : children) {
-            displayTreeHelper(child, level + 1);
+            displayTreeHelper(child, level + 1, sb);
         }
     }
 
     /*
     Конец
      */
+
+    public String getString(List<T> tlst){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (It it :
+                tlst) {
+            stringBuilder.append(it).append("\n");
+        }
+        return stringBuilder.toString();
+    }
 
     @NotNull
     @Override
