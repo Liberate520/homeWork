@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree<Human> t1 = new FamilyTree<>();
+//        FamilyTree<Human> t1 = new FamilyTree<>();
 //        Human a5 = new Human("Male", "25.04.1920", "", "Москва", "Иван", "Федорович", "Спиридонов");
 //        Human a1 = new Human("Male", "25.04.1914", "31.12.2000", "СПБ", "Сергей", "Петрович", "Евдокимов");
 //        Human a3 = new Human("Female", "28.03.1918", "", "СПБ", "Авдотья", "Павловна", "Евдокимова");
@@ -25,10 +25,10 @@ public class Main {
 //        t1.addToFamily(r);
 //        t1.addToFamily(a5);
 //        a1.addChild(a5);
-//        t1.save();
+//        t1.save("1");
 
 
-        t1.load();
+//        t1.load();
 //        for (Human h :
 //                t1) {
 //            System.out.println(h);
@@ -37,9 +37,9 @@ public class Main {
 //        System.out.println(t1);
 //        System.out.println(t1.findHumans("Male", "", "", "", "", "", "", "", ""));
 
-        Human nh = new Human();
+//        Human nh = new Human();
         View view = new Console();
-        new Presenter(view, t1);
+        new Presenter(view);
         System.out.println("-----------------");
         view.start();
 

@@ -33,18 +33,18 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     }
 
 
-    public void save() throws IOException {
+    public void save(String path) throws IOException {
         if (fileHandlerWritable == null) {
             fileHandlerWritable = new FileRW();
         }
-        fileHandlerWritable.saveFile(family, "treeOut");
+        fileHandlerWritable.saveFile(family, path);
     }
 
-    public void load() throws IOException, ClassNotFoundException {
+    public void load(String path) throws IOException, ClassNotFoundException {
         if (fileHandlerReadable == null) {
             fileHandlerReadable = new FileRW();
         }
-        Object familyCheck = fileHandlerReadable.loadFile("treeOut");
+        Object familyCheck = fileHandlerReadable.loadFile(path);
         List<T> familyList = (List<T>) familyCheck;
 //        System.out.println(familyCheck);
         family = familyList;
@@ -251,6 +251,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     }
 
     public int maxId() {
+        if (family==null) {return 0;}
         int maxId = 0;
         for (T u :
                 family) {
@@ -286,28 +287,6 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     /*
     Начало, отображения древа
      */
-//    public void displayTree(T root) {
-//        if(root!=null){
-//            displayTreeHelper(root, 0);
-//        } else {
-//            System.out.println("ID отсутствует");
-//        }
-//
-//    }
-//
-//    private void displayTreeHelper(T person, int level) {
-//
-//        StringBuilder indent = new StringBuilder();
-//        for (int i = 0; i < level; i++) {
-//            indent.append("└───   ");
-//        }
-//        System.out.println(indent + person.getShortName() + " (" + person.getDateOfBorn() + " - " + person.getDateOfDeath() + ")");
-//
-//        List<T> children = (List<T>) person.getChildren();
-//        for (T child : children) {
-//            displayTreeHelper(child, level + 1);
-//        }
-//    }
 
     public String displayTree(T root) {
         StringBuilder sb = new StringBuilder();

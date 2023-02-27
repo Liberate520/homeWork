@@ -10,49 +10,64 @@ import java.io.IOException;
 
 public class Presenter {
     private View view;
-    private FamilyTree<Human> familyTree;
 
-    public Presenter(View view, FamilyTree familyTree) {
+    private Services services;
+
+    public Presenter(View view) {
+        services = new Services();
         this.view = view;
-        this.familyTree = familyTree;
         view.setPresenter(this);
     }
 
     public void addHuman() {
-        new Stat(familyTree.maxId());
-        Human h = new Human();
-        h.createUnit();
-        familyTree.addToFamily(h);
+        services.creteHuman();
     }
 
     public boolean delHuman(int delId) {
-        return familyTree.delUnit(delId);
+        return services.getFamilyTree().delUnit(delId);
     }
 
     public String findHumans(ConsoleForms form) {
-        return familyTree.getString(familyTree.unPackArgsFindHumans(form.findForm()));
+        return services.getFamilyTree().getString(services.getFamilyTree().unPackArgsFindHumans(form.findForm()));
     }
 
     public String showTree(int num) {
-        return familyTree.displayTree(familyTree.getUnitById(num));
+        return services.getFamilyTree().displayTree(services.getFamilyTree().getUnitById(num));
     }
 
     public String infoHuman(int num) {
-        return familyTree.getStatistics(familyTree.getUnitById(num));
+        return services.getFamilyTree().getStatistics(services.getFamilyTree().getUnitById(num));
     }
 
     public String showHumans() {
-        familyTree.sort(SortBy.DATE_OF_BIRTH);
-        return familyTree.getString(familyTree.getFamily());
+        services.getFamilyTree().sort(SortBy.DATE_OF_BIRTH);
+        return services.getFamilyTree().getString(services.getFamilyTree().getFamily());
     }
 
-    public boolean saveTree() {
+    public boolean saveTree(String path) {
         boolean flag = true;
         try {
-            familyTree.save();
+            services.getFamilyTree().save(path);
         } catch (IOException e) {
             flag = false;
         }
+        return flag;
+    }
+
+    public boolean loadTree(String path) {
+        boolean flag = true;
+        try {
+            services.getFamilyTree().load(path);
+        } catch (ClassNotFoundException | IOException e) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    public boolean addChild(int idChild, int idParent) {
+        boolean flag = true;
+        services.getFamilyTree().getUnitById(idParent).addChild(services.getFamilyTree().getUnitById(idChild));
+
         return flag;
     }
 }

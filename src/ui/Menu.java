@@ -12,11 +12,13 @@ public class Menu {
     public Menu(Console console) {
         this.console = console;
         commands = new ArrayList<>();
+        commands.add(new LoadTree(console));
         commands.add(new ShowTree(console));
         commands.add(new ShowHumans(console));
         commands.add(new FindHumans(console));
         commands.add(new InfoHuman(console));
         commands.add(new AddHuman(console));
+        commands.add(new AddСhild(console));
         commands.add(new SaveTree(console));
         commands.add(new CloseMenu(console));
         commands.add(new DelHuman(console));
