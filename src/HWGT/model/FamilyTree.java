@@ -10,7 +10,6 @@ import java.util.*;
 public class FamilyTree<T extends Basic> implements Iterable, Serializable {
 
     private List<T> listOfPersons = new ArrayList<T>();
-    private T person;
 
     public FamilyTree(T person){
         if (person!=null){
