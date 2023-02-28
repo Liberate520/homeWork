@@ -63,7 +63,7 @@ public class It {
         return dateOfDeath;
     }
     public int getId() { return id; }
-    public void createUnit(){}
+    public It createUnit(){ return null; }
     public String getShortName(){return firstName;}
 
 

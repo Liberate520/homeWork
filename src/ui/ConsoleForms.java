@@ -1,43 +1,64 @@
 package src.ui;
 
-import src.Validation;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ConsoleForms {
+    private Scanner scanner;
+    private HashMap<String, String> result;
 
-    public String[] findForm() {
-        Scanner scanner = new Scanner(System.in);
+    public HashMap<String, String> findForm() {
+        scanner = new Scanner(System.in);
         System.out.println("Будут запрошены критерии поиска, если критерий не нужен, укажите * ");
-        System.out.print("Укажите пол: ");
-        String gender = scanner.next();
-        System.out.print("Укажите имя: ");
-        String firstName = scanner.next();
-        System.out.print("Укажите отчество: ");
-        String patronymic = scanner.next();
-        System.out.print("Укажите фамилию: ");
-        String lastName = scanner.next();
+        result = intermediateForm();
         System.out.print("Укажите от какой даты нужно искать дату рождения: ");
-        String dateOfBornFrom = scanner.next();
+        result.put("dateOfBornFrom", scanner.next());
         System.out.print("Укажите до какой даты нужно искать дату рождения: ");
-        String dateOfBornTo = scanner.next();
+        result.put("dateOfBornTo", scanner.next());
         System.out.print("Укажите от какой даты нужно искать дату смерти: ");
-        String dateOfDeathFrom = scanner.next();
+        result.put("dateOfDeathFrom", scanner.next());
         System.out.print("Укажите до какой даты нужно искать дату смерти: ");
-        String dateOfDeathTo = scanner.next();
+        result.put("dateOfDeathTo", scanner.next());
         System.out.print("Укажите место рождения: ");
-        String placeOfBirth = scanner.next();
-        String[] result = {gender, firstName, patronymic, lastName, dateOfBornFrom, dateOfBornTo,
-                dateOfDeathFrom, dateOfDeathTo, placeOfBirth};
+        result.put("placeOfBirth", scanner.next());
+
         return starFix(result);
     }
 
-    private String[] starFix(String[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i].equals("*")) {
-                arr[i] = "";
+    private HashMap<String, String> starFix(HashMap<String, String> hashMap) {
+        for (String str :
+                hashMap.keySet()) {
+            if (hashMap.get(str).equals("*")) {
+                hashMap.replace(str, "");
             }
         }
-        return arr;
+        return hashMap;
+    }
+
+    public HashMap<String, String> humanForm() {
+        result = intermediateForm();
+        scanner = new Scanner(System.in);
+        System.out.print("Укажите дату рождения в формате dd.mm.YYYY: ");
+        result.put("dateOfBorn", scanner.next());
+        System.out.print("Укажите дату смерти в формате dd.mm.YYYY(или укажите 0): ");
+        result.put("dateOfDeath", scanner.next());
+        System.out.print("Укажите место рождения: ");
+        result.put("placeOfBirth", scanner.next());
+        return result;
+    }
+
+    private HashMap<String, String> intermediateForm() {
+        scanner = new Scanner(System.in);
+        result = new HashMap<>();
+        System.out.print("Укажите пол Male/Female: ");
+        result.put("gender", scanner.next());
+        System.out.print("Укажите имя: ");
+        result.put("firstName", scanner.next());
+        System.out.print("Укажите отчество: ");
+        result.put("patronymic", scanner.next());
+        System.out.print("Укажите фамилию: ");
+        result.put("lastName", scanner.next());
+        return result;
     }
 }

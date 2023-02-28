@@ -27,7 +27,6 @@ public class Main {
 //        a1.addChild(a5);
 //        t1.save("1");
 
-
 //        t1.load();
 //        for (Human h :
 //                t1) {
@@ -37,12 +36,13 @@ public class Main {
 //        System.out.println(t1);
 //        System.out.println(t1.findHumans("Male", "", "", "", "", "", "", "", ""));
 
-//        Human nh = new Human();
         View view = new Console();
         new Presenter(view);
         System.out.println("-----------------");
         view.start();
 
+//        HumanFactory hhh = new HumanFactory();
+//        System.out.println(hhh.creteHuman());
 
         //        t1.getStatistics(t1.findHumans("Male", "", "", "", "", "", "", "", "").get(0));
 //        TreeFilter<Human> tf = new TreeFilter<>();

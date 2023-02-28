@@ -129,7 +129,7 @@ public class Console implements View {
     public void addChild() {
         System.out.print("Укажите ID ребенка: ");
         String idChild = scanner.next();
-        System.out.printf("\nУкажите ID родителя, к которому необходимо прикрепить ребенка с ID %s", idChild);
+        System.out.printf("Укажите ID родителя, к которому необходимо прикрепить ребенка с ID %s: ", idChild);
         String idParent = scanner.next();
         if (validation.isNextInt(idChild) && validation.isNextInt(idParent)) {
             if (presenter.addChild(Integer.parseInt(idChild), Integer.parseInt(idParent))) {

@@ -57,8 +57,6 @@ public class Dates {
     public boolean datesCompare(String date1, String date2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Validation val = new Validation();
-//        if(val.isDateValid())
-//        проверить валидность даты
 
         if (date1.isEmpty() || !val.isDateValid(date1, false)){
             date1 = "01.01.0001";

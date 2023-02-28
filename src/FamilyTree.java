@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.LongStream;
 
 public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
 
@@ -114,10 +113,10 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
                 result.append("Умер ").append(human.getDateOfDeath()).append(" г\n");
                 result.append("Прожил ").append(human.getAge()).append(" полных лет\n");
             }
-            if(!human.getChildren().isEmpty()){
+            if (!human.getChildren().isEmpty()) {
                 result.append("Имеет ").append(human.getChildren().size()).append(" детей и ").append(children.size() - human.getChildren().size()).append(" внуков с правнуками\n");
                 result.append("Дети:\n");
-                for(It h: human.getChildren()) {
+                for (It h : human.getChildren()) {
                     result.append("└───   ").append(h.getShortName()).append(" - ID: ").append(h.getId()).append("\n");
                 }
             }
@@ -158,11 +157,17 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     }
 
 
-    public List<T> unPackArgsFindHumans(String[] args) {
-        if (args.length != 9) {
-            throw new IllegalArgumentException("Expected an array of length 9");
-        }
-        return findHumans(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+    public List<T> unPackArgsFindHumans(HashMap<String, String> hashMap) {
+        return findHumans(
+                hashMap.get("gender"),
+                hashMap.get("firstName"),
+                hashMap.get("patronymic"),
+                hashMap.get("lastName"),
+                hashMap.get("dateOfBornFrom"),
+                hashMap.get("dateOfBornTo"),
+                hashMap.get("dateOfDeathFrom"),
+                hashMap.get("dateOfDeathTo"),
+                hashMap.get("placeOfBirth"));
     }
 
     public List<T> findHumans(
@@ -251,7 +256,9 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     }
 
     public int maxId() {
-        if (family==null) {return 0;}
+        if (family == null) {
+            return 0;
+        }
         int maxId = 0;
         for (T u :
                 family) {
@@ -274,10 +281,10 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return flag;
     }
 
-    public T getUnitById(int id){
+    public T getUnitById(int id) {
         for (T h :
                 family) {
-            if(h.getId()==id) {
+            if (h.getId() == id) {
                 return h;
             }
         }
@@ -315,7 +322,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
     Конец
      */
 
-    public String getString(List<T> tlst){
+    public String getString(List<T> tlst) {
         StringBuilder stringBuilder = new StringBuilder();
         for (It it :
                 tlst) {

@@ -1,7 +1,6 @@
 package src.presenter;
 
 import src.*;
-import src.comparator.SortBy;
 import src.ui.ConsoleForms;
 import src.ui.View;
 
@@ -24,30 +23,29 @@ public class Presenter {
     }
 
     public boolean delHuman(int delId) {
-        return services.getFamilyTree().delUnit(delId);
+        return services.delUnit(delId);
     }
 
     public String findHumans(ConsoleForms form) {
-        return services.getFamilyTree().getString(services.getFamilyTree().unPackArgsFindHumans(form.findForm()));
+        return services.findHumans(form);
     }
 
     public String showTree(int num) {
-        return services.getFamilyTree().displayTree(services.getFamilyTree().getUnitById(num));
+        return services.showTree(num);
     }
 
     public String infoHuman(int num) {
-        return services.getFamilyTree().getStatistics(services.getFamilyTree().getUnitById(num));
+        return services.infoHuman(num);
     }
 
     public String showHumans() {
-        services.getFamilyTree().sort(SortBy.DATE_OF_BIRTH);
-        return services.getFamilyTree().getString(services.getFamilyTree().getFamily());
+        return services.showHumans();
     }
 
     public boolean saveTree(String path) {
         boolean flag = true;
         try {
-            services.getFamilyTree().save(path);
+            services.save(path);
         } catch (IOException e) {
             flag = false;
         }
@@ -57,7 +55,7 @@ public class Presenter {
     public boolean loadTree(String path) {
         boolean flag = true;
         try {
-            services.getFamilyTree().load(path);
+            services.load(path);
         } catch (ClassNotFoundException | IOException e) {
             flag = false;
         }
@@ -65,9 +63,10 @@ public class Presenter {
     }
 
     public boolean addChild(int idChild, int idParent) {
-        boolean flag = true;
-        services.getFamilyTree().getUnitById(idParent).addChild(services.getFamilyTree().getUnitById(idChild));
-
-        return flag;
+//        boolean flag = true;
+        return services.addChild(idChild, idParent);
+//        services.getFamilyTree().getUnitById(idParent).addChild(services.getFamilyTree().getUnitById(idChild));
+//        services.getFamilyTree().getUnitById(idParent).addChild(services.getFamilyTree().getUnitById(idChild));
+//        return flag;
     }
 }

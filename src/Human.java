@@ -28,13 +28,16 @@ public class Human extends It implements Serializable {
         if (valid.isValidGender(gender)) {
             this.gender = gender;
         }
+        this.dateOfBorn = "";
+        this.dateOfDeath = "";
         if (valid.isDateValid(dateOfBorn, false)) {
             this.dateOfBorn = dateOfBorn;
         } else {
             this.dateOfBorn = "01.01.0000";
         }
         if (valid.isDateValid(dateOfDeath, true)) {
-            this.dateOfDeath = Objects.requireNonNullElse(dateOfDeath, "");
+//            this.dateOfDeath = Objects.requireNonNullElse(dateOfDeath, "");
+            this.dateOfDeath = dateOfDeath;
         }
         this.placeOfBirth = placeOfBirth;
         this.firstName = firstName;
@@ -168,32 +171,9 @@ public class Human extends It implements Serializable {
         }
     }
 
-    public void createUnit() {
-        Validation validation = new Validation();
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Укажите пол Male/Female: ");
-        String gender = scanner.next();
-        if (validation.isValidGender(gender)) {
-            this.gender = gender;
-        }
-        System.out.print("Укажите дату рождения в формате dd.mm.YYYY: ");
-        String dateOfBorn = scanner.next();
-        if (validation.isDateValid(dateOfBorn, false)) {
-            this.dateOfBorn = dateOfBorn;
-        }
-        System.out.print("Укажите дату смерти в формате dd.mm.YYYY(или укажите 0): ");
-        String dateOfDeath = scanner.next();
-        if (validation.isDateValid(dateOfDeath, false)) {
-            this.dateOfDeath = dateOfDeath;
-        }
-        System.out.print("Укажите место рождения: ");
-        this.placeOfBirth = scanner.next();
-        System.out.print("Укажите имя: ");
-        this.firstName = scanner.next();
-        System.out.print("Укажите отчество: ");
-        this.patronymic = scanner.next();
-        System.out.print("Укажите фамилию: ");
-        this.lastName = scanner.next();
+    public Human createUnit() {
+        HumanFactory human = new HumanFactory();
+        return human.creteHuman();
     }
     @Override
     public String getShortName(){
@@ -215,6 +195,5 @@ public class Human extends It implements Serializable {
                 ", Отчество='" + patronymic + '\'' +
                 ", Фамилия='" + lastName + '\'';
     }
-//    }
 }
 
