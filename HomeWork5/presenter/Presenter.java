@@ -7,7 +7,7 @@ import HomeWork5.ui.View;
 public class Presenter 
 {
     private View view;
-    FamilyFree<Human> familyConnect;
+    private FamilyFree<Human> familyConnect;
 
     public Presenter(View view, FamilyFree<Human> familyConnect) 
     {
@@ -16,18 +16,10 @@ public class Presenter
         view.setPresenter(this);
     }
 
-    public void AddHumanNew()
-    {
-        System.out.print("Введите имя-> ");
-        String name = view.scan();
-        System.out.print("Введите пол(муж./жен.)-> ");
-        String sex = view.scan();
-        System.out.print("Введите возраст-> ");
-        int age = Integer.parseInt(view.scan());
-        System.out.println();
+    public void addHumanNew(String name, String sex, int age)
+    {        
         familyConnect.addFamilyFree(new Human(name, sex, age));
         view.print("Новый член семьи добавлен !");
-        view.print(familyConnect.getFamilyFree().get(familyConnect.getFamilyFree().size() - 1));
     }
 
     public void familyPrint() 
@@ -35,11 +27,8 @@ public class Presenter
         view.print(familyConnect);       
     }
 
-    public void humanSearch() 
+    public void humanSearch(String name) 
     {
-        System.out.print("Введите имя человека для поиска-> ");
-        String name =  view.scan();
-        System.out.println(name);
         Human chelovek = familyConnect.getByName(name);
         if (chelovek == null) view.print("Такого человека нет в семье !");
         else view.print(chelovek);

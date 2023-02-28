@@ -1,12 +1,12 @@
 package HomeWork5.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import HomeWork5.model.comporator.NimaleIterator; 
 
-public class FamilyFree<T extends Nimale> implements Iterable<T> 
+public class FamilyFree<T extends Nimale> implements Iterable<T>, Serializable 
 {
     private List<T> familyFree;
     
@@ -66,4 +66,8 @@ public class FamilyFree<T extends Nimale> implements Iterable<T>
         //return familyFree.iterator();            // простой способ достать итератор
     }
 
+    public void saveObj(IO save)
+    {
+        save.save("FreeFamily.data", this);
+    }
 }

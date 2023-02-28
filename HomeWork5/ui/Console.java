@@ -49,13 +49,13 @@ public class Console implements View
 
     public void addHumanNew()
     {
-        presenter.AddHumanNew();
-    }
-
-    public void end()
-    {
-        go = false;
-        System.out.println("Спасибо что пользуетесь нашим сервисом :D");
+        System.out.print("Введите имя-> ");
+        String name = scan();
+        System.out.print("Введите пол(муж./жен.)-> ");
+        String sex = scan();
+        System.out.print("Введите возраст-> ");
+        int age = Integer.parseInt(scan());
+        presenter.addHumanNew(name, sex, age);
     }
 
     public void familyPrint()
@@ -65,7 +65,15 @@ public class Console implements View
 
     public void humanSearch()
     {
-        presenter.humanSearch();
+        System.out.print("Введите имя человека для поиска-> ");
+        String name =  scan();
+        presenter.humanSearch(name);
+    }
+
+    public void end()
+    {
+        go = false;
+        System.out.println("Спасибо что пользуетесь нашим сервисом :D");
     }
 
     @Override

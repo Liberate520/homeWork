@@ -11,4 +11,9 @@ public class Human extends Nimale
     {
         super(name, sex, age, mather, father);
     }
+
+    public void saveObj(IO save)
+    {
+        save.save("FreeFamily.data", this);
+    }
 }
