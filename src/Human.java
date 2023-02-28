@@ -10,7 +10,6 @@ public class Human extends Individual implements Serializable, Comparable<Human>
     private Human mother;
     private List<Human> children;
 
-    
     public Human(String name, Gender gender, Integer yearofbirth, Human father, Human mother) {
         this.name = name;
         this.gender = gender;
@@ -24,8 +23,15 @@ public class Human extends Individual implements Serializable, Comparable<Human>
         this(name, gender, yearofbirth, null, null);
     }
 
-    public void addChild(Human human) {
-        children.add(human);
+    public Human(String name2, String gender2, Integer yearofbirth2, String father2, String mother2) {
+    }
+
+    public boolean addChild(Human human) {
+        if (!children.contains(human)) {
+            children.add(human);
+            return true;
+        }
+        return false;
     }
 
     public String getName() {
