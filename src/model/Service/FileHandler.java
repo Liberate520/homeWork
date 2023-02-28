@@ -1,10 +1,15 @@
+package model.Service;
+
 import java.io.Serializable;
+
+import model.Animal;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class FileHandler implements Writable, Serializable {
+public class FileHandler<T extends Animal> implements Writable<T>, Serializable {
     private String fileName;
     private static final long serialVersionUID = 1;
 
@@ -37,12 +42,12 @@ public class FileHandler implements Writable, Serializable {
      * // Востановление из файла с помощью класса ObjectInputStream
      */
     @Override
-    public GenealogicalTree read() {
+    public Serializable read() {
         System.out.println("Восстановление после сериализации...");
         try {
             FileInputStream inStream = new FileInputStream(fileName);
             ObjectInputStream objectInputStream = new ObjectInputStream(inStream);
-            GenealogicalTree tempTree = (GenealogicalTree) objectInputStream.readObject();
+            Serializable tempTree = (Serializable) objectInputStream.readObject();
             inStream.close();
             objectInputStream.close();
             System.out.println("Успешно!");
@@ -53,4 +58,3 @@ public class FileHandler implements Writable, Serializable {
         return null;
     }
 }
-

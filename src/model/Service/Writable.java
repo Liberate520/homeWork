@@ -1,6 +1,8 @@
+package model.Service;
+
 import java.io.Serializable;
 
-public interface Writable {
+public interface Writable<T> {
     void save(Serializable serializable);
-    GenealogicalTree read();
+    Object read();
 }
