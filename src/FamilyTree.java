@@ -1,49 +1,62 @@
+import com.sun.source.tree.BreakTree;
+
+import java.io.*;
 import java.util.*;
-import java.io.Serializable;
+import java.util.function.Predicate;
 
-public class FamilyTree implements Serializable {
-    private List<Human> listHuman;
-
-    public FamilyTree() { 
+public class FamilyTree implements Iterable<Person>, Serializable{
+    private List<Person> humanList;
+    public FamilyTree() {
         this(new ArrayList<>());
     }
-
-    public FamilyTree(List<Human> listHuman) {
-        this.listHuman = listHuman;
+    public FamilyTree(List<Person> humanList) {
+        this.humanList = humanList;
     }
 
-    public boolean add(Human human) {
-        if (human == null) {
+    public boolean add(Person Person) {
+        if (Person == null) {
+
             return false;
         }
-        if (!listHuman.contains(human)) {
-            listHuman.add(human);
-            if (human.getFather() != null) {
-                human.getFather().addChild(human); 
+        if (!humanList.contains(Person)){
+            humanList.add(Person);
+            if (Person.getFather() != null){
+                Person.getFather().addChild(Person);
             }
-            if (human.getMother() != null) {
-                human.getMother().addChild(human);
+            if (Person.getMother() != null){
+                Person.getMother().addChild(Person);
             }
             return true;
         }
         return false;
     }
-
-    public Human getByName(String name) {
-        for (Human human : listHuman) {
-            if (human.getName() == name) {
-                return human;
+    public Person getByName(int id) {
+        for (Person Person: humanList) {
+            if (Objects.equals(Person.getId(), id)){
+                return Person;
             }
         }
         return null;
     }
-
-    public String getInfoTree() {
-        StringBuilder sb = new StringBuilder();
-        for (Human human : listHuman) {
-            sb.append(human.getInfo());
+    public void Search(String search) { Predicate<Person> dynasty = n -> n.getName().equals(search);
+        humanList.stream()
+                .filter(dynasty)
+                .forEach(System.out::println);
+    }
+    public void List() {
+        System.out.println();
+        System.out.println("Генеалогическое древо Романовых: ");
+        for (Person p : humanList) {
+            System.out.println(p);
         }
-        return sb.toString();
+    }
+    public void sort() {
+        Collections.sort(humanList);
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(humanList);
     }
 
 }
