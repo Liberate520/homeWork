@@ -26,25 +26,25 @@ public class Service {
         this.presenter = presenter;
     }
 
-    public StringBuilder getFamilyTree() {
+    public String getFamilyTree() {
         StringBuilder str = new StringBuilder();
         for(Human human: familyTree){
             str.append(human + "\n");
         }
-        return str;
+        return str.toString();
     }
 
-    public StringBuilder sortFamilyTreeByName(){
+    public String sortFamilyTreeByName(){
         familyTree.sortByName();
         return getFamilyTree();
     }
 
-    public StringBuilder sortFamilyTreeByBirthdate(){
+    public String sortFamilyTreeByBirthdate(){
         familyTree.sortByDate();
         return getFamilyTree();
     }
 
-    public void addHuman(){
+    public String addHuman() {
         familyTree.add(new Human(presenter.getStringInfo("Имя"), 
                                  presenter.getStringInfo("Фамилия"), 
                                  familyTree.getByName(presenter.getStringInfo("Имя отца")), 
@@ -52,14 +52,16 @@ public class Service {
                                  presenter.getIntInfo("Год"), 
                                  presenter.getIntInfo("Месяц") - 1, 
                                  presenter.getIntInfo("День")));
+        return "Все отлично";
     }
 
-    public StringBuilder exit() {
+    public String exit() {
         StringBuilder str = new StringBuilder();
         try {
             fileHandler.fileWrite(familyTree);
             str.append("Сохранение прошло успешно");
-            return str;
+            presenter.finish();
+            return str.toString();
         } catch (IOException e) {
             return null;
         } catch (ClassNotFoundException e) {
@@ -67,11 +69,11 @@ public class Service {
         }
     }
 
-    public Human getByName(String name){
+    public String getByName() {
+        String name = presenter.getStringInfo("Введите имя:");
         for(Human human: familyTree){
-            System.out.println(human);
             if(human.getFirstname().equals(name)){
-                return human;
+                return human.toString();
             }
         }
         return null;

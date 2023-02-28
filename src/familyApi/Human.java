@@ -93,6 +93,13 @@ public class Human implements Serializable, User {
 
     @Override
     public String toString() {
-        return firstname + ", " + lastname + ", " + birthdate.get(Calendar.YEAR) + "-" + (birthdate.get(Calendar.MONTH) + 1) + "-" + birthdate.get(Calendar.DAY_OF_MONTH);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: " + firstname + "\n");
+        sb.append("Фамилия: " + lastname + "\n");
+        sb.append("Дата рождения: " + birthdate.get(Calendar.YEAR) + "-" + (birthdate.get(Calendar.MONTH) + 1) + "-" + birthdate.get(Calendar.DAY_OF_MONTH) + "\n");
+        if (father != null) sb.append("Отец: " + father.getFirstname() + "\n");
+        if (mother != null) sb.append("Мать: " + mother.getFirstname() + "\n");
+
+        return sb.toString();
     }
 }

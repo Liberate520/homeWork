@@ -6,39 +6,36 @@ import ui.ConsoleUi;
 public class Presenter {
     private ConsoleUi viev;
     private Service service;
-    private boolean indicator;
 
     public Presenter(ConsoleUi viev, Service service){
         this.viev = viev;
         this.service = service;
-        this.indicator = true;
         this.service.setPresenter(this);
+        this.viev.setPresenter(this);
     }
 
-    public void start(){
-        while (indicator) {
-            int choice = viev.menu();
-            switch (choice) {
-                case 1:
-                    viev.print(service.getFamilyTree());
-                    break;
-                case 2:
-                    viev.print(service.sortFamilyTreeByName());
-                    break;
-                case 3:
-                    viev.print(service.sortFamilyTreeByBirthdate());
-                    break;
-                case 4:
-                    service.addHuman();
-                    break;
-                case 0:
-                    viev.print(service.exit());
-                    indicator = false;
-                    break;
-                default:
-                    break;
-            }
-        }
+    public String outputTree(){
+        return service.getFamilyTree();
+    }
+
+    public String sortByName() {
+        return service.sortFamilyTreeByName();
+    }
+
+    public String sortByBirthdate() {
+        return service.sortFamilyTreeByBirthdate();
+    }
+
+    public String addNewPerson(){
+        return service.addHuman();
+    }
+
+    public String findPerson() {
+        return service.getByName();
+    }
+
+    public String exit() {
+        return service.exit();
     }
 
     public String getStringInfo(String string) {
@@ -47,5 +44,9 @@ public class Presenter {
 
     public int getIntInfo(String string) {
         return viev.receiveInt(string);
+    }
+
+    public void finish() {
+        viev.finish();
     }
 }

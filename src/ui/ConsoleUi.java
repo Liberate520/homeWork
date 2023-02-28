@@ -2,34 +2,65 @@ package ui;
 
 import java.util.Scanner;
 
-public class ConsoleUi {
-    Scanner scanner;
+import presenter.Presenter;
+
+public class ConsoleUi implements View {
+    private Scanner scanner;
+    private Presenter presenter;
+    private Menu menu;
+    private boolean indicator;
 
     public ConsoleUi(){
-        this.scanner = new Scanner(System.in);
+        String encoding = System.getProperty("console.encoding", "cp866");
+        this.scanner = new Scanner(System.in, encoding);
+        this.indicator = true;
     }
 
-    public int menu(){
-        System.out.println("Меню =====\n" +
-                            "1 - Ввывести на экран всё дерево\n" +
-                            "2 - Отсортировать по имени и вывести\n" +
-                            "3 - Отсортировать по возрасту и вывести\n" +
-                            "4 - Добавить нового человека\n" +
-                            "0 - Выход");
-        return scanner.nextInt();
+    private void menu(){
+        System.out.println("Меню =====\n" + menu.printMenu());
+        
     }
 
-    public void print(StringBuilder info) {
-        System.out.println(info);
-    }
-
-    public String receiveString(String string) {
+    public String receiveString(String string)  {
         System.out.println(string);
-        return scanner.next();
+        String str = scanner.next();
+        return str;
     }
 
     public int receiveInt(String string) {
         System.out.println(string);
         return scanner.nextInt();
+    }
+
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void start() {
+        menu = new Menu(this, presenter);
+        hello();
+        while (indicator) {
+            menu();
+            int command = scanner.nextInt();
+            print(menu.execute(command));
+        }
+    }
+
+    private void hello() {
+        System.out.printf("=========================\n" + 
+                           "Приветствуем вас в родовом дереве!\n" +
+                           "ВНИМАНИЕ: программа работает в тестовом режиме!\n" +
+                           "=========================\n");
+    }
+
+    @Override
+    public void print(String text) {
+        System.out.println(text);
+    }
+
+    public void finish() {
+        indicator = false;
     }
 }
