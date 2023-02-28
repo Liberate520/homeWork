@@ -1,3 +1,3 @@
-public interface View {
-    
+public interface View {    
+    void commands();      
 }
