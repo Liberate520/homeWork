@@ -1,6 +1,6 @@
-package org.example.Iterator;
+package org.example.model.Iterator;
 
-import org.example.Human;
+import org.example.model.Human;
 
 import java.util.ArrayList;
 import java.util.Iterator;

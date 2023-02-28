@@ -1,8 +1,8 @@
-package org.example.file;
+package org.example.model.file;
 
-import org.example.Gender;
-import org.example.Human;
-import org.example.Tree;
+import org.example.model.Gender;
+import org.example.model.Human;
+import org.example.model.Tree;
 
 
 import java.io.File;

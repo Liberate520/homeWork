@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,7 +54,6 @@ public class Human {
                 }
             }
         } else {
-
             this.id = id;
         }
     }
@@ -133,9 +132,4 @@ public class Human {
         this.brothersAndSisters.add(children);
     }
     //----------------------------------------------------------------------------------
-    public static LocalDate creatingADate(String sDate){  // создание даты из строки
-        ArrayList<String> dateL = new ArrayList<>(Arrays.asList(sDate.split(" ")));
-        return LocalDate.of(Integer.parseInt(dateL.get(2)),
-                Integer.parseInt(dateL.get(1)), Integer.parseInt(dateL.get(0)));
-    }
 }

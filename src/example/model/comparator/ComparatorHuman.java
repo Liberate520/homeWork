@@ -1,6 +1,6 @@
-package org.example.comparator;
+package org.example.model.comparator;
 
-import org.example.Human;
+import org.example.model.Human;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 public class ComparatorHuman {
 
-    public static void sortTree(ArrayList<Human> bigFamily, ComparatorFunction function){
+    public void sortTree(ArrayList<Human> bigFamily, ComparatorFunction function){
         if (function.equals(ComparatorFunction.name)){
             bigFamily.sort(new Comparator<Human>() {
                 @Override
