@@ -1,5 +1,6 @@
 package HW01.ui;
 
+
 public class Validator {
     private String inputText;
 //    private Menu menu;
@@ -9,11 +10,13 @@ public class Validator {
     public Validator() {this ("");}
 
     public Integer checkInput (String inputText, Integer rowsValue){
-        Integer point;
-        try {
+        int point;
+        boolean isNum = inputText.matches("[0-9]*");
+
+        if (isNum){
             point = Integer.parseInt(inputText);
-        }catch (Exception e)
-        {
+        }
+        else {
             point = 0;
         }
         if (point < 0 || point >= rowsValue) {
