@@ -1,9 +1,9 @@
 import java.util.Comparator;
 
-public class PersonComparatorByBirth implements Comparator<Person> {
+public class PersonComparatorByBirth<T extends Person> implements Comparator<T> {
 
     @Override
-    public int compare(Person o1, Person o2) {
+    public int compare(T o1, T o2) {
         return o1.getDateOfBirth().compareTo(o2.getDateOfBirth());
     }
 }

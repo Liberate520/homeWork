@@ -2,38 +2,38 @@ import java.util.*;
 import java.io.Serializable;
 
 
-public class FamilyTree implements Serializable, Iterable {
-    private List<Person> personList;
+public class FamilyTree <T extends Person> implements Serializable, Iterable <T> {
+    private List<T> personList;
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Person> personList) {
+    public FamilyTree(List<T> personList) {
         this.personList = personList;
     }
 
-    public boolean add(Person person) {
-        if (person == null) {
+    public boolean add(T T) {
+        if (T == null) {
             return false;
         }
-        if (!personList.contains(person)) {
-            personList.add(person);
-            if (person.getFather() != null) {
-                person.getFather().addChild(person);
+        if (!personList.contains(T)) {
+            personList.add(T);
+            if (T.getFather() != null) {
+                T.getFather().addChild(T);
             }
-            if (person.getMother() != null) {
-                person.getMother().addChild(person);
+            if (T.getMother() != null) {
+                T.getMother().addChild(T);
             }
             return true;
         }
         return false;
     }
 
-    public Person getByName(String name) {
-        for (Person person : personList) {
-            if (person.getName().equals(name)) {
-                return person;
+    public T getByName(String name) {
+        for (T T : personList) {
+            if (T.getName().equals(name)) {
+                return T;
             }
         }
         return null;
@@ -53,7 +53,7 @@ public class FamilyTree implements Serializable, Iterable {
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<T> iterator() {
         return new PersonIterator(personList);
     }
 
