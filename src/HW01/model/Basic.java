@@ -27,4 +27,7 @@ public class Basic {
     public Integer getDateOfDeath() {
         return null;
     }
+    public String getSex() {
+        return null;
+    }
 }

@@ -38,7 +38,7 @@ public class Person extends Basic implements Serializable {
         this.dateOfDeath = dateOfDeath;
         this.mother = mother;
         this.father = father;
-//        children = children1;
+        this.children = children;
     }
 
     public Person (){
@@ -49,7 +49,7 @@ public class Person extends Basic implements Serializable {
     public String getName() {
         return name;
     }
-
+    @Override
     public String getSex() {
         return sex;
     }
@@ -102,8 +102,6 @@ public class Person extends Basic implements Serializable {
     public void addChild(String child) {
         children.add(child);
     }
-
-
 
     @Override
     public String toString() {
