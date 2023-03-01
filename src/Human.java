@@ -152,23 +152,18 @@ public class Human extends It implements Serializable {
             this.children = new ArrayList<>();
         }
         this.children.add(human);
+        if(Objects.equals(this.getGender(), "Male")){
+            human.setFather(this);
+        }
+        if(Objects.equals(this.getGender(), "Female")){
+            human.setMother(this);
+        }
     }
 
 
     public int getAge() {
         Dates dates = new Dates();
-        HashMap<String, Integer> firstDate = dates.parseDate(dateOfBorn);
-        HashMap<String, Integer> secondDate;
-        if (isAlive()) {
-            secondDate = dates.parseDate(dates.getTodayDate());
-        } else {
-            secondDate = dates.parseDate(dateOfDeath);
-        }
-        if (secondDate.get("month") - firstDate.get("month") < 0) {
-            return secondDate.get("year") - firstDate.get("year") - 1;
-        } else {
-            return secondDate.get("year") - firstDate.get("year");
-        }
+        return dates.getAge(getDateOfBorn(), getDateOfDeath());
     }
 
     public Human createUnit() {

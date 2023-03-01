@@ -13,6 +13,8 @@ public class It {
     private String placeOfBirth;
     private String gender;
     private List<It> children;
+    private It father;
+    private It mother;
 
     private int id;
 
@@ -66,5 +68,11 @@ public class It {
     public It createUnit(){ return null; }
     public String getShortName(){return firstName;}
 
+    public It getFather() {
+        return father;
+    }
 
+    public It getMother() {
+        return mother;
+    }
 }

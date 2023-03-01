@@ -74,4 +74,19 @@ public class Dates {
             return false;
         }
     }
+
+    public int getAge(String dateOfBorn, String dateOfDeath) {
+        HashMap<String, Integer> firstDate = parseDate(dateOfBorn);
+        HashMap<String, Integer> secondDate;
+        if(dateOfDeath.isEmpty()) {
+            secondDate = parseDate(getTodayDate());
+        } else {
+            secondDate = parseDate(dateOfDeath);
+        }
+        if (secondDate.get("month") - firstDate.get("month") < 0) {
+            return secondDate.get("year") - firstDate.get("year") - 1;
+        } else {
+            return secondDate.get("year") - firstDate.get("year");
+        }
+    }
 }

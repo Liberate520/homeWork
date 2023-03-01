@@ -87,42 +87,14 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return result;
     }
 
-    public String findFamily(String name) {
-        StringBuilder result = new StringBuilder();
-        List<T> lst = findFamilyList(name);
-        if (!lst.isEmpty()) {
-            for (T h :
-                    lst) {
-                result.append("ID: ").append(h.getId()).append(" ").append(h.getLastName()).append(" ").append(h.getFirstName()).append(" ").append(h.getPatronymic()).append("\n");
-            }
-        } else {
-            result.append("Нет результатов удовлетворящих критериям поиска");
-        }
-        return result.toString();
-    }
-
     public String getStatistics(T human) {
         if (family.contains(human)) {
-            StringBuilder result = new StringBuilder();
-            List<T> children = getClildrenAndGrandsonsList(human);
-            result.append("---------------------------\n");
-            result.append("ФИО: ").append(human.getLastName()).append(" ").append(human.getFirstName()).append(" ").append(human.getPatronymic());
-            result.append("\n");
-            result.append("Родился ").append(human.getDateOfBorn()).append(" г. в ").append(human.getPlaceOfBirth()).append("\n");
-            if (!human.isAlive()) {
-                result.append("Умер ").append(human.getDateOfDeath()).append(" г\n");
-                result.append("Прожил ").append(human.getAge()).append(" полных лет\n");
-            }
-            if (!human.getChildren().isEmpty()) {
-                result.append("Имеет ").append(human.getChildren().size()).append(" детей и ").append(children.size() - human.getChildren().size()).append(" внуков с правнуками\n");
-                result.append("Дети:\n");
-                for (It h : human.getChildren()) {
-                    result.append("└───   ").append(h.getShortName()).append(" - ID: ").append(h.getId()).append("\n");
-                }
-            }
-            return result.toString();
+            Statistics statistics = new Statistics();
+            return statistics.getStatistics((It) human, (List<It>) getClildrenAndGrandsonsList(human));
         }
-        return "Что-то пошло не так!";
+        else {
+            return "Что-то пошло не так!";
+        }
     }
 
 
