@@ -9,7 +9,6 @@ import src.comparator.SortBy;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import java.util.function.Function;
 
 public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
 
@@ -45,7 +44,6 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         }
         Object familyCheck = fileHandlerReadable.loadFile(path);
         List<T> familyList = (List<T>) familyCheck;
-//        System.out.println(familyCheck);
         family = familyList;
     }
 
@@ -128,75 +126,9 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return result;
     }
 
-
-    public List<T> unPackArgsFindHumans(HashMap<String, String> hashMap) {
-        return findHumans(
-                hashMap.get("gender"),
-                hashMap.get("firstName"),
-                hashMap.get("patronymic"),
-                hashMap.get("lastName"),
-                hashMap.get("dateOfBornFrom"),
-                hashMap.get("dateOfBornTo"),
-                hashMap.get("dateOfDeathFrom"),
-                hashMap.get("dateOfDeathTo"),
-                hashMap.get("placeOfBirth"));
-    }
-
-    public List<T> findHumans(
-            String gender,
-            String firstName,
-            String patronymic,
-            String lastName,
-            String dateOfBornFrom,
-            String dateOfBornTo,
-            String dateOfDeathFrom,
-            String dateOfDeathTo,
-            String placeOfBirth
-    ) {
-        List<T> result = new ArrayList<>();
-        TreeFilter<T> tr = new TreeFilter<>();
-
-        List<Function<T, String>> filters = Arrays.asList(
-                T::getGender,
-                T::getFirstName,
-                T::getPatronymic,
-                T::getLastName,
-                T::getPlaceOfBirth,
-                T::getDateOfBorn,
-                T::getDateOfDeath,
-                T::getDateOfBorn,
-                T::getDateOfDeath
-        );
-        List<String> values = Arrays.asList(
-                gender,
-                firstName,
-                patronymic,
-                lastName,
-                placeOfBirth,
-                dateOfBornFrom,
-                dateOfDeathFrom,
-                dateOfBornTo,
-                dateOfDeathTo
-        );
-        List<FilterType> types = Arrays.asList(
-                FilterType.STRING,
-                FilterType.STRING,
-                FilterType.STRING,
-                FilterType.STRING,
-                FilterType.STRING,
-                FilterType.DATE_FROM,
-                FilterType.DATE_FROM,
-                FilterType.DATE_TO,
-                FilterType.DATE_TO
-        );
-
-        for (int i = 0; i < filters.size(); i++) {
-            if (i == 0) {
-                result.addAll(family);
-            }
-            result.retainAll(tr.filter(result, values.get(i), filters.get(i), types.get(i)));
-        }
-        return result;
+    public List<T> findHumans(HashMap<String, String> hashMap){
+        FindHumans<T> fHumans = new FindHumans<>();
+        return fHumans.findHumans(family, hashMap);
     }
 
     public void setFamily(List<T> family) {
@@ -263,36 +195,10 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return null;
     }
 
-    /*
-    Начало, отображения древа
-     */
-
     public String displayTree(T root) {
-        StringBuilder sb = new StringBuilder();
-        if (root != null) {
-            displayTreeHelper(root, 0, sb);
-        } else {
-            sb.append("ID отсутствует");
-        }
-        return sb.toString();
+        ShowTree<T> showTree = new ShowTree<>();
+        return showTree.displayTree(root);
     }
-
-    private void displayTreeHelper(T person, int level, StringBuilder sb) {
-        StringBuilder indent = new StringBuilder();
-        for (int i = 0; i < level; i++) {
-            indent.append("└───   ");
-        }
-        sb.append(indent).append(person.getShortName()).append(" (").append(person.getDateOfBorn()).append(" - ").append(person.getDateOfDeath()).append(")\n");
-
-        List<T> children = (List<T>) person.getChildren();
-        for (T child : children) {
-            displayTreeHelper(child, level + 1, sb);
-        }
-    }
-
-    /*
-    Конец
-     */
 
     public String getString(List<T> tlst) {
         StringBuilder stringBuilder = new StringBuilder();

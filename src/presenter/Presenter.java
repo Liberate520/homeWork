@@ -63,10 +63,6 @@ public class Presenter {
     }
 
     public boolean addChild(int idChild, int idParent) {
-//        boolean flag = true;
         return services.addChild(idChild, idParent);
-//        services.getFamilyTree().getUnitById(idParent).addChild(services.getFamilyTree().getUnitById(idChild));
-//        services.getFamilyTree().getUnitById(idParent).addChild(services.getFamilyTree().getUnitById(idChild));
-//        return flag;
     }
 }

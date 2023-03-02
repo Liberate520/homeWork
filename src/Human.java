@@ -7,10 +7,8 @@ public class Human extends It implements Serializable {
     private Human father;
     private Human mother;
     private List<Human> children;
-
     private String gender;
     private String dateOfBorn;
-
     private String dateOfDeath;
     private String placeOfBirth;
     private String firstName;

@@ -15,9 +15,6 @@ public class Validation {
     }
 
     public boolean isDateValid(String date, boolean ifEmpty) {
-//        if (date == null) {
-//            date = "";
-//        }
         if (ifEmpty) {
             if (date.isEmpty()) {
                 return true;
@@ -38,7 +35,6 @@ public class Validation {
             Integer.parseInt(text);
             return true;
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
     }

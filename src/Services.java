@@ -41,7 +41,6 @@ public class Services {
     }
 
     public boolean isFamilyTreeNotNull() {
-        //что-то тут не красиво описано, но не пойму, что исключение неверное отработано
         boolean flag = true;
         try {
             familyTree.size();
@@ -74,7 +73,7 @@ public class Services {
 
     public String findHumans(ConsoleForms form) {
         if (isFamilyTreeNotNull()) {
-            return familyTree.getString(familyTree.unPackArgsFindHumans(form.findForm()));
+            return familyTree.getString(familyTree.findHumans(form.findForm()));
         } else {
             return NOTHING;
         }
