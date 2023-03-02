@@ -1,4 +1,4 @@
-package model;
+package Model.GenealogicalTree;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.Service.FileHandler;
-import model.Service.GenTreeIterator;
-import model.Service.Writable;
+import Model.FileHandler;
+import Model.Writable;
 
 public class GenealogicalTree<T extends Animal> implements Serializable, Iterable<T> {
     private List<T> allListTree;

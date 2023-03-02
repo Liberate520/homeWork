@@ -1,8 +1,6 @@
-package model.Service;
+package Model.GenealogicalTree;
 
 import java.util.Comparator;
-
-import model.Animal;
 
 public class IndividualComporatorByAge<T extends Animal> implements Comparator<T> {
     @Override

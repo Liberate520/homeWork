@@ -1,7 +1,7 @@
-package view;
+package View;
 
-import model.Animal;
-import presenter.Presenter;
+import Model.GenealogicalTree.Animal;
+import Presenter.Presenter;
 
 public interface View<T extends Animal> {
     void setPresenter(Presenter<T> presenter);

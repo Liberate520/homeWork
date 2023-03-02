@@ -1,9 +1,9 @@
-package presenter;
+package Presenter;
 
-import model.Animal;
-import model.Service.FileHandler;
-import model.Service.GenTreeService;
-import view.View;
+import Model.FileHandler;
+import Model.GenTreeService;
+import Model.GenealogicalTree.Animal;
+import View.View;
 
 public class Presenter<T extends Animal> {
     private View<T> view;

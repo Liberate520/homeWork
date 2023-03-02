@@ -1,4 +1,4 @@
-package model;
+package Model.GenealogicalTree;
 
 public class Human extends Animal {
 

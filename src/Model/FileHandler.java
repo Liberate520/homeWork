@@ -1,8 +1,8 @@
-package model.Service;
+package Model;
 
 import java.io.Serializable;
 
-import model.Animal;
+import Model.GenealogicalTree.Animal;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

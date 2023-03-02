@@ -1,4 +1,4 @@
-package model;
+package Model.GenealogicalTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;

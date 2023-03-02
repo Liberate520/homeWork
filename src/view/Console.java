@@ -1,18 +1,14 @@
-package view;
+package View;
 
 import java.util.Scanner;
 
-import model.Animal;
-import presenter.Presenter;
+import Model.GenealogicalTree.Animal;
+import Presenter.Presenter;
 
 public class Console<T extends Animal> implements View<T> {
 
     private Presenter<T> presenter;
     private Scanner scanner;
-    
-    // public Console(Scanner scanner) {
-    //     scanner = new Scanner(System.in);
-    // }
 
     public Console(Scanner scanner) {
         this.scanner = scanner;

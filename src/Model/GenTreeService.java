@@ -1,11 +1,12 @@
-package model.Service;
+package Model;
 
 import java.io.Serializable;
 import java.util.Collections;
 
-import model.GenealogicalTree;
-import model.Human;
-import model.Sex;
+import Model.GenealogicalTree.GenealogicalTree;
+import Model.GenealogicalTree.Human;
+import Model.GenealogicalTree.IndividualComporatorByAge;
+import Model.GenealogicalTree.Sex;
 
 public class GenTreeService implements Serializable {
     private GenealogicalTree<Human> genealogicalTree;
