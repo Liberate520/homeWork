@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Nimale implements Serializable
+public abstract class Animale implements Serializable,Comparable<Animale>
 {
     private String name;
     private String sex;
     private int age;
-    private Nimale mather;
-    private Nimale father;
-    private List<Nimale> children;
-    public Nimale(String name, String sex, int age, Nimale mather, Nimale father) 
+    private Animale mather;
+    private Animale father;
+    private List<Animale> children;
+    public Animale(String name, String sex, int age, Animale mather, Animale father) 
     {
               
         this.name = name;
@@ -23,12 +23,12 @@ public abstract class Nimale implements Serializable
         children = new ArrayList<>();         
     }
 
-    public Nimale(String name, String sex, int age) 
+    public Animale(String name, String sex, int age) 
     {
         this(name, sex, age, null,null); // поправил конструктор!
     }
 
-    public void addChild(Nimale child)
+    public void addChild(Animale child)
     {
         if (!children.contains(child))
         {
@@ -82,12 +82,12 @@ public abstract class Nimale implements Serializable
         return name;
     }
 
-    public Nimale getFather() 
+    public Animale getFather() 
     {
         return father;
     }
 
-    public Nimale getMather() 
+    public Animale getMather() 
     {
         return mather;
     }
@@ -102,4 +102,9 @@ public abstract class Nimale implements Serializable
         this.age = age;
     }
 
+     @Override
+    public int compareTo(Animale o) 
+    {
+        return name.compareToIgnoreCase(o.name);
+    }
 }

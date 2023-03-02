@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import HomeWork5.model.comporator.NimaleIterator; 
+import HomeWork5.model.comporator.AnimaleIterator; 
 
-public class FamilyFree<T extends Nimale> implements Iterable<T>, Serializable 
+public class FamilyFree<T extends Animale> implements Iterable<T>, Serializable 
 {
     private List<T> familyFree;
     
@@ -62,7 +62,7 @@ public class FamilyFree<T extends Nimale> implements Iterable<T>, Serializable
     @Override
     public Iterator<T> iterator() 
     {
-        return new NimaleIterator<T>(familyFree);
+        return new AnimaleIterator<T>(familyFree);
         //return familyFree.iterator();            // простой способ достать итератор
     }
 
@@ -70,4 +70,6 @@ public class FamilyFree<T extends Nimale> implements Iterable<T>, Serializable
     {
         save.save("FreeFamily.data", this);
     }
+
+    
 }

@@ -1,13 +1,13 @@
 package HomeWork5.model;
 
-public class Human extends Nimale
+public class Human extends Animale
 {
     public Human(String name, String sex, int age) 
     {
         super(name, sex, age);     
     }
 
-    public Human(String name, String sex, int age, Nimale mather, Nimale father) 
+    public Human(String name, String sex, int age, Animale mather, Animale father) 
     {
         super(name, sex, age, mather, father);
     }
@@ -16,4 +16,5 @@ public class Human extends Nimale
     {
         save.save("FreeFamily.data", this);
     }
+
 }

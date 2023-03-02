@@ -17,7 +17,7 @@ public class IO implements LoadFrom, SaveAs
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))) 
         {
             personRestored = (Serializable) objectInputStream.readObject();
-            System.out.println("Загрузка данных: успех !");
+            System.out.println("Загрузка данных: успех !\nВаше семейное древо загружено !");
         } 
         catch (Exception e) 
         {

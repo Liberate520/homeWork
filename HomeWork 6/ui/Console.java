@@ -2,8 +2,6 @@ package HomeWork5.ui;
 
 import HomeWork5.presenter.Presenter;
 import java.util.Scanner;
-import HomeWork5.model.FamilyFree;
-import HomeWork5.model.Human;
 
 public class Console implements View
 {
@@ -35,11 +33,9 @@ public class Console implements View
         }
     }
 
-
     private void header() 
     {
-        System.out.println("\n" + 
-        " В данной программе доступны поиск, \n добавление и вывод семейного древа");
+        System.out.println("\nПрограмма для работы с семейным древом");
     }
 
     private void menuUi()
@@ -70,10 +66,28 @@ public class Console implements View
         presenter.humanSearch(name);
     }
 
+    public void saveFamily()
+    {
+        presenter.saveFamily();
+    }
+
+    public void loadFamily()
+    {
+        presenter.loadFamily();
+    }
+
+    public void sortFamily()
+    {
+        System.out.print("\n1. Сортировка по имени\n2. Сортировка по возрасту\n" +
+        "Ваш выбор -> ");
+        int choice = Integer.parseInt(scan());
+        presenter.sortFamily(choice);
+    }
+
     public void end()
     {
         go = false;
-        System.out.println("Спасибо что пользуетесь нашим сервисом :D");
+        System.out.println("Спасибо, что пользуетесь нашим сервисом :D");
     }
 
     @Override
@@ -98,17 +112,5 @@ public class Console implements View
     public void print(String text)
     {
         System.out.println(text);
-    }
-
-    @Override
-    public void print(Human chelovek)
-    {
-        System.out.println(chelovek);
-    }
-
-    @Override
-    public void print(FamilyFree<Human> FamilyFree) 
-    {
-        System.out.println(FamilyFree);
     }
 }

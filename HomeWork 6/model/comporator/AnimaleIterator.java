@@ -3,14 +3,14 @@ package HomeWork5.model.comporator;
 import java.util.Iterator;
 import java.util.List;
 
-import HomeWork5.model.Nimale;
+import HomeWork5.model.Animale;
 
-public class NimaleIterator<T extends Nimale> implements Iterator<T>
+public class AnimaleIterator<T extends Animale> implements Iterator<T>
 {
     private int index;
     private List<T> humans;
 
-    public NimaleIterator(List<T> humans)
+    public AnimaleIterator(List<T> humans)
     {
         this.humans = humans;
     }

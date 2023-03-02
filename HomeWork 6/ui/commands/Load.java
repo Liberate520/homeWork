@@ -2,9 +2,9 @@ package HomeWork5.ui.commands;
 
 import HomeWork5.ui.Console;
 
-public class HumanSearch extends Command 
+public class Load extends Command
 {
-    public HumanSearch(Console console) 
+    public Load(Console console) 
     {
         super(console);
     }
@@ -12,12 +12,13 @@ public class HumanSearch extends Command
     @Override
     public String description() 
     {
-        return "Поиск человека по именни. ";
+        return "Загрузить семью. ";
     }
 
     @Override
     public void execute() 
     {
-        getConsole().humanSearch();
+        getConsole().loadFamily();   
     }
+    
 }

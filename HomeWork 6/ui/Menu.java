@@ -6,7 +6,10 @@ import HomeWork5.ui.commands.AddHuman;
 import HomeWork5.ui.commands.Exit;
 import HomeWork5.ui.commands.FamilyPrint;
 import HomeWork5.ui.commands.HumanSearch;
+import HomeWork5.ui.commands.Load;
 import HomeWork5.ui.commands.Option;
+import HomeWork5.ui.commands.SaveFamily;
+import HomeWork5.ui.commands.Sotr;
 
 public class Menu 
 {
@@ -20,6 +23,9 @@ public class Menu
         commands.add(new AddHuman(console));
         commands.add(new FamilyPrint(console));
         commands.add(new HumanSearch(console));
+        commands.add(new Sotr(console));
+        commands.add(new SaveFamily(console));
+        commands.add(new Load(console));
         commands.add(new Exit(console));
     }
 
@@ -32,7 +38,7 @@ public class Menu
     public String printMenu()
     {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n\t- =  Меню  = -\n");
+        stringBuilder.append("\n\t- =  Меню  = -\n\n");
         for (int i = 0; i < commands.size(); i++) 
         {
             stringBuilder.append(i+1);
@@ -42,10 +48,10 @@ public class Menu
         }
         return stringBuilder.toString();
     }
-
-    void print() // ПОТОМ УДАЛИТЬ !!
+    
+    public Console getConsole() 
     {
-        System.out.println(console);
+        return console;
     }
 }
 
