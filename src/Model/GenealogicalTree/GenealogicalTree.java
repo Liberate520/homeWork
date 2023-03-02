@@ -8,6 +8,7 @@ import java.util.List;
 
 import Model.FileHandler;
 import Model.Writable;
+import Model.GenealogicalTree.Comporator.GenTreeIterator;
 
 public class GenealogicalTree<T extends Animal> implements Serializable, Iterable<T> {
     private List<T> allListTree;

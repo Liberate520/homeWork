@@ -1,7 +1,9 @@
-package Model.GenealogicalTree;
+package Model.GenealogicalTree.Comporator;
 
 import java.util.Iterator;
 import java.util.List;
+
+import Model.GenealogicalTree.Animal;
 
 public class GenTreeIterator<T extends Animal> implements Iterator<T> {
     private List<T> allListTree;

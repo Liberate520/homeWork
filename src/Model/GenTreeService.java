@@ -5,8 +5,8 @@ import java.util.Collections;
 
 import Model.GenealogicalTree.GenealogicalTree;
 import Model.GenealogicalTree.Human;
-import Model.GenealogicalTree.IndividualComporatorByAge;
 import Model.GenealogicalTree.Sex;
+import Model.GenealogicalTree.Comporator.IndividualComporatorByAge;
 
 public class GenTreeService implements Serializable {
     private GenealogicalTree<Human> genealogicalTree;
