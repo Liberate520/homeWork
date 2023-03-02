@@ -6,6 +6,7 @@ import java.io.*;
 
 public class SavingFT implements Serializable{
     private FamilyTree people;
+    private static final long serialVersionUID = 2023;
 
     public SavingFT(FamilyTree people){
         this.people = people;
@@ -28,7 +29,6 @@ public class SavingFT implements Serializable{
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInStream);
         SavingFT people = (SavingFT) objectInputStream.readObject();
         FamilyTree family = people.getPeople();
-        family.getList();
         System.out.println("\nThe Family Tree has been restored\n");
         return family;
     }

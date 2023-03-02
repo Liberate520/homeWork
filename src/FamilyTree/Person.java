@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Person extends FTObjects implements Serializable{
+
     private String name;
     private Integer birthDay;
     private Integer deathDay;
@@ -22,6 +23,7 @@ public class Person extends FTObjects implements Serializable{
 
     public Person(String name, Integer birthDay, Integer deathDay,
                   Sex sex, Integer generation) {
+        super();
         this.name = name;
         this.birthDay = birthDay;
         this.deathDay = deathDay;
@@ -119,8 +121,7 @@ public class Person extends FTObjects implements Serializable{
     public String toString() {
         return "Person: " + name + ",\t years of life: " + birthDay + " - " + deathDay +
                 ",\t sposes: " + spouseName +
-                ",\t children: " + childrenName+
-                ",\t generation: " + generation +
-                ",\t years of government: " + additionalField;
+                ",\n\t children: " + childrenName+
+                ",\n\t\t years of government: " + additionalField;
     }
 }

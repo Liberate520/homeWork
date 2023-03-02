@@ -6,13 +6,17 @@ import java.util.ArrayList;
 public class FTObjects implements Serializable {
     private String name;
     private Integer birthDay;
+    private Integer DeathDay;
     private ArrayList<String> spouseName;
     private ArrayList<String> childrenName;
     private String additionalField;
 
+
     public FTObjects() {
+
         this.name = name;
         this.birthDay = birthDay;
+        this.DeathDay = DeathDay;
         this.childrenName = childrenName;
         this.additionalField = additionalField;
     }
@@ -20,13 +24,20 @@ public class FTObjects implements Serializable {
     public String getName() {
         return name;
     }
+    public ArrayList getFamilyTree(ArrayList people) {
+        return people;
+    }
 
     public Integer getBirthDay() {
         return birthDay;
     }
+    public Integer getDeathDay() { return DeathDay;}
 
     public ArrayList<String> getSpouseName() {
         return spouseName;
+    }
+    public ArrayList<String> getChildrenName(){
+         return childrenName;
     }
 
     public void addSposeName(String spose) {

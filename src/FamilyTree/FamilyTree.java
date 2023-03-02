@@ -28,6 +28,10 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         return null;
     }
 
+    public ArrayList<T> getFamilyTree(ArrayList<T> people){
+        return people;
+    }
+
     /**
      * The method of adding persons who appeared from outside (for example, the wife)
      */
@@ -97,11 +101,25 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         Collections.sort(people, new PersonComparatorByName<T>());
     }
 
-    public void sortByBirthday() {
+    public String sortByBirthday() {
         Collections.sort(people, new PersonCompareByBirthday<T>());
+        StringBuilder str1 = new StringBuilder("\n\t\tPersons of the family tree\n");
+        for (T human: people){
+            str1.append("\nPerson ").append(human.getName()).append(" lived in ").append(human.getBirthDay()).append(" - ").append(human.getDeathDay());
+            if (!(human.getSpouseName().isEmpty())){
+                str1.append("\t, spouse - ").append(human.getSpouseName().toString().replace("[", "").replace("]", ""));
+            }
+            if(!(human.getChildrenName().isEmpty())) {
+                str1.append("\n\tChildren: ").append(human.getChildrenName().toString().replace("[", "").replace("]", ""));
+            }
+            if(human.getAdditionalField() != null) {
+                str1.append("\n\t\treigned in ").append(human.getAdditionalField()).append(" years;");
+            }
+        }
+        return str1.toString();
     }
 
-    public void sortByYearOfReigh(){
+    public String sortByYearOfReigh(){
         List<T> family = new ArrayList<>();
         for (T human: people) {
             if (human.getAdditionalField() != null){
@@ -109,9 +127,14 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
             }
         }
         Collections.sort(family, new PersonCompareByYearOfReign<T>());
+        StringBuilder str2 = new StringBuilder("\n\tThe years of the reign of the reigning personages\n");
         for (T human: family){
-            System.out.printf("%s reigned in %s years\n",human.getName(), human.getAdditionalField());
+            str2.append("\nPerson ").append(human.getName());
+            str2.append(" reigned in ");
+            str2.append(human.getAdditionalField()).append(" years;");
+
         }
+        return str2.toString();
     }
 }
 
