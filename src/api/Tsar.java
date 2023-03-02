@@ -42,17 +42,11 @@ public class Tsar extends Person
 
     public String printAll()
     {
-//        System.out.println("Правящий монарх:");
-//        super.printInfo();
-//        System.out.println("\t" + "Годы правления\t" + yearOfReignStart + " - " + yearOfReignStop);
-//        System.out.println("\t" + "Порядок правления\t" + leaderNumber);
-//        System.out.println();
-
         String result = "";
-        result += "Правящий монарх:";
+        result += "Правящий монарх:\n";
         result += super.printInfo();
-        result += "\t" + "Годы правления\t" + yearOfReignStart + " - " + yearOfReignStop;
-        result += "\t" + "Порядок правления\t" + leaderNumber;
+        result += "\t" + "Годы правления\t\t" + yearOfReignStart + " - " + yearOfReignStop + "\n";
+        result += "\t" + "Порядок правления\t" + leaderNumber + "\n";
         result += "\n";
         return result;
     }

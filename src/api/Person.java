@@ -14,7 +14,8 @@ public class Person implements Serializable
     private Integer YearOfDeath;
     private Person father;
     private Person mother;
-    private List<Person> spouse = new ArrayList<Person>();
+    private List<Person> spouse = new ArrayList<>();
+    private List<Person> children = new ArrayList<>();
 
     public Person(String name,
                   String middleName,
@@ -43,6 +44,23 @@ public class Person implements Serializable
             for (int i = 0; i < spouse.size(); i++)
             {
                 result += spouse.get(i).Name + " " + spouse.get(i).MiddleName + ";";
+            }
+        }
+        return result;
+    }
+
+    public String childrenToString(List<Person> child)
+    {
+        String result = "";
+        if (child.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            for (int i = 0; i < child.size(); i++)
+            {
+                result += child.get(i).Name + " " + child.get(i).MiddleName + ";";
             }
         }
         return result;
@@ -113,16 +131,14 @@ public class Person implements Serializable
                 ", father=" + father +
                 ", mother=" + mother +
                 ", spouse=" + spouseToString(spouse) +
+                ", children=" + childrenToString(children) +
                 '}';
     }
 
     public String printAll()
     {
-//        System.out.println("Персона:");
-//        this.printInfo();
-//        System.out.println();
         String result = "";
-        result += "Персона:";
+        result += "Персона:\n";
         result += this.printInfo();
         result += "\n";
 
@@ -130,17 +146,16 @@ public class Person implements Serializable
     }
     public String printInfo()
     {
-//        System.out.println("\t" + Name + " " + MiddleName + " " + Surname);
-//        System.out.println("\t" + "Годы жизни    \t" + YearOfBirth + " - " + YearOfDeath);
-
         String result = "";
-        result += "\t" + Name + " " + MiddleName + " " + Surname;
-        result += "\t" + "Годы жизни    \t" + YearOfBirth + " - " + YearOfDeath;
+        result += "\t" + Name + " " + MiddleName + " " + Surname + "\n";
+        result += "\t" + "Годы жизни    \t\t" + YearOfBirth + " - " + YearOfDeath + "\n";
         return result;
     }
 
     public void setFather(Person father) {
         this.father = father;
+        //father.addChild(this);
+        father.children.add(this);
     }
 
     public Person getFather() {
@@ -160,9 +175,20 @@ public class Person implements Serializable
         this.spouse.add(person);
         person.spouse.add(this);
     }
-
-    public List<Person> getSpouse() {
+    public List<Person> getSpouse()
+    {
         return this.spouse;
+    }
+
+    public void addChild(Person child)
+    {
+        this.children.add(child);
+        child.setFather(this);
+    }
+
+    public List<Person> getChildren()
+    {
+        return children;
     }
 }
 

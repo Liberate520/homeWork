@@ -12,7 +12,7 @@ public class FileHandler implements Writable, Serializable
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
 
-        return "Сохранили!\r";
+        return "Дерево сохранено!\r";
     }
 
     public Object read() throws IOException, ClassNotFoundException {
