@@ -1,15 +1,12 @@
-package model;
+package model.entity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class Person extends BasicEntity {
     private String lastName;
     private LocalDate dateOfDeath;
     private Sex sex;
-    private ArrayList<Person> children;
-    private ArrayList<Person> parents;
 
     // ==================================================================================
     // Constructors
@@ -44,17 +41,6 @@ public class Person extends BasicEntity {
         this.lastName = lastName;
     }
 
-    private void setPaternalLastName() {
-        if (lastName == null) {
-            for (Person parent : parents) {
-                if (parent.getSex() == Sex.MALE) {
-                    lastName = parent.getLastName();
-                    break;
-                }
-            }
-        }
-    }
-
     public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
@@ -67,44 +53,8 @@ public class Person extends BasicEntity {
         return sex;
     }
 
-    public ArrayList<Person> getChildren() {
-        return children;
-    }
-
-    public ArrayList<Person> getParents() {
-        return parents;
-    }
-
-    public ArrayList<Person> getSiblings() {
-        ArrayList<Person> siblilings = new ArrayList<>();
-        for (Person parent : parents) {
-            for (Person child : parent.getChildren()) {
-                if (getId() != child.getId())
-                    siblilings.add(child);
-            }
-        }
-        return siblilings;
-    }
+   
     // ==================================================================================
-
-    private void addChild(Person person) {
-        if (children == null)
-            children = new ArrayList<>();
-        if (!children.contains(person))
-            children.add(person);
-    }
-
-    public void addParents(Person... people) {
-        if (parents == null)
-            parents = new ArrayList<>();
-        for (Person person : people) {
-            if (!parents.contains(person)) {
-                parents.add(person);
-                person.addChild(this);
-            }
-        }
-        setPaternalLastName();
-    }
 
     public boolean isAlive() {
         if (dateOfDeath == null)
@@ -129,20 +79,10 @@ public class Person extends BasicEntity {
         else
             strb.append("F    ");
         // добавляет дату рождения и смерти
-        if (super.getDateOfBirth() != null) {
-            strb.append(super.getDateOfBirth().format(dateFormat));
+        if (getDateOfBirth() != null) {
+            strb.append(getDateOfBirth().format(dateFormat));
             if (dateOfDeath != null)
                 strb.append(" - " + dateOfDeath.format(dateFormat));
-        }
-        // добавляет id и имя детей
-        if (children != null && !children.isEmpty()) {
-            strb.append("    children: ");
-            for (int i = 0; i < children.size(); i++) {
-                strb.append(children.get(i).getId() + ". ")
-                        .append(children.get(i).getName());
-                if (i != children.size() - 1)
-                    strb.append(", ");
-            }
         }
         return strb.toString();
     }

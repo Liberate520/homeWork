@@ -1,51 +1,48 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Servis implements Savable {
-    private String filename;
-    private static int incrementalID = 1;
+import model.entity.Person;
+import model.entity.Sex;
+import model.tree.Demo;
+import model.tree.FamilyTree;
+import presenter.Presenter;
 
-    public Servis(String filename) {
-        this.filename = filename;
-    }
+public class Servis implements Model {
+    private Presenter presenter;
+    private FamilyTree<Person> familyTree;
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
-    public static int assignID() {
-        return incrementalID++;
+    @Override
+    public void demoTree() {
+        familyTree = Demo.demoTree();
     }
 
     @Override
-    public void save(Serializable serializable) {
-        try {
-            FileOutputStream fos = new FileOutputStream(filename);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(serializable);
-            oos.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
-    public Object read() {
-        Object result = new Object();
-        try {
-            FileInputStream fis = new FileInputStream(filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            result = ois.readObject();
-            ois.close();
-            return result;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public void addTreeEntity(String name, String lastname, String sexStr, LocalDate dateOfBirth) {
+        Sex sex;
+        if (sexStr.equalsIgnoreCase("m") || sexStr.equalsIgnoreCase("male")) {
+            sex = Sex.MALE;
+        } else {
+            sex = Sex.FEMALE;
         }
-        return null;
+        familyTree.addEntity(new Person(lastname, lastname, sex, dateOfBirth));
+        ;
     }
+
+    @Override
+    public String showEntityInfo(int num) {
+        return familyTree.getEntityByID(num).fullInfo();
+
+    }
+
+    @Override
+    public String printTree() {
+        return familyTree.printTree();
+    }
+
 }

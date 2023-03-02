@@ -1,6 +1,9 @@
-package model;
+package model.tree;
 
 import java.time.LocalDate;
+
+import model.entity.Person;
+import model.entity.Sex;
 // Используется для теста программы. Если лишнее удалю в следующих версиях
 public class Demo {
     // метод заполняет дерево в соответствии с tree.jpg. 

@@ -1,8 +1,8 @@
-package model.comparators;
+package model.entity.comparators;
 
 import java.util.Comparator;
 
-import model.BasicEntity;
+import model.entity.BasicEntity;
 
 public class EntityComparatorByAge<T extends BasicEntity> implements Comparator<T> {
 
