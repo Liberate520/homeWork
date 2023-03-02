@@ -1,4 +1,4 @@
-package fileProcessing;
+package model.fileProcessing;
 
 import java.io.IOException;
 import java.util.ArrayList;

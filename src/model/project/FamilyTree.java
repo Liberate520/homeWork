@@ -1,15 +1,15 @@
-package project;
+package model.project;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import fileProcessing.FileHandler;
-import fileProcessing.Readable;
-import fileProcessing.Writeable;
 
-public class FamilyTree<T extends User> implements Iterable<T> {
+import model.fileProcessing.FileHandler;
+
+public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
     private Integer generation;
     private HashMap<Integer, String> humans_index_by_generation;
     private ArrayList<T> humans_list;
@@ -112,26 +112,26 @@ public class FamilyTree<T extends User> implements Iterable<T> {
         return getInfoHuman(getHuman(name_human).getFather().getName());
     }
 
-    public void save(String file_name, Writeable format_write) throws IOException {
+    public void save(FamilyTree<T> familytree) {
         FileHandler<T> file_handler = new FileHandler<>();
-        file_handler.write(format_write, file_name, getHumansIndexByGeneration(), getHumansList());
+        file_handler.saveTree(familytree);
     }
 
-    public FamilyTree<T> open(String file_name, Readable format_read) throws IOException {
+    public FamilyTree<T> open() throws ClassNotFoundException, IOException {
         FileHandler<T> file_handler = new FileHandler<>();
-        return file_handler.read(format_read, file_name);
+        return file_handler.loadTree();
     }
 
     public void sortByName() {
-        Collections.sort(humans_list, new HumanComparatorByName<T>());
+        Collections.sort(humans_list, new ComparatorByName<T>());
     }
 
     public void sortByYear() {
-        Collections.sort(humans_list, new HumanComparatorByYear<T>());
+        Collections.sort(humans_list, new ComparatorByYear<T>());
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new HumanIterator<T>(humans_list);
+        return new TreeIterator<T>(humans_list);
     }
 }

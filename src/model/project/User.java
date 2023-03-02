@@ -1,9 +1,10 @@
-package project;
+package model.project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
     private String name;
     private String sex;
     private Integer year_of_birth;
