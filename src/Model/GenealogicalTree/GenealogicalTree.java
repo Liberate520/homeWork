@@ -59,9 +59,10 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
         }
         return null;
     }
+    
     public String searchForName (String searchName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Результат поиска: \n");
+        sb.append("\nРезультат поиска: \n");
         T res = null;
         for (T individual : allListTree) {
             if (individual.getName().equals(searchName)) {
@@ -72,9 +73,10 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
             sb.append(res.toString());
             sb.append("\n");
             sb.append(res.childrenInfo());
+            sb.append("\n");
         } else {
             sb.append(searchName);
-            sb.append(" не найден");
+            sb.append(" не найден\n");
         }
         return sb.toString();
     }

@@ -2,15 +2,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import model.GenealogicalTree;
-import model.Human;
-import model.Pet;
-import model.Sex;
-import model.Service.FileHandler;
-import model.Service.GenTreeService;
-import presenter.Presenter;
-import view.Console;
-import view.View;
+import Model.FileHandler;
+import Model.GenTreeService;
+import Model.GenealogicalTree.GenealogicalTree;
+import Model.GenealogicalTree.Human;
+import Model.GenealogicalTree.Pet;
+import Model.GenealogicalTree.Sex;
+import Presenter.Presenter;
+import View.Console;
+import View.View;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -40,9 +40,12 @@ public class Main {
         System.out.println("-------");
         
         Scanner iScanner = new Scanner(System.in, "Cp866");
-        View<Human> view = new Console<>(iScanner);
-        Presenter<Human> presenter = new Presenter<>(view, genTreeService, fileHandler);
+        View view = new Console<>(iScanner);
+        new Presenter<Human>(view, genTreeService, fileHandler);
 
+        // View view = new Console();
+        // new Presenter(view);
+        // view.start();
         view.start();
     }
 }
