@@ -22,12 +22,25 @@ public class Presenter<T extends Animal> {
         view.print(genTreeService.toString());
     }
 
-    // public void addHuman() {
-    //     genTreeService.addIndividual(nameAddHuman(), sexAddHuman(), birthYearAddHuman());
-    // }
+    public void addHuman() {
+        genTreeService.addHuman(nameAddHuman(), sexAddHuman(), birthYearAddHuman());
+    }
 
     public String nameAddHuman() {
         return view.searchSetName();
+    }
+    
+    public int birthYearAddHuman() {
+        return view.birthAddHuman();
+    }
+    public Sex sexAddHuman() {
+        int flag = view.addSetSex();
+        if (flag == 1) {
+            return Sex.Man;
+        } else if (flag == 2) {
+            return Sex.Woman;
+        }
+        return null;
     }
 
     public void searchHuman() {

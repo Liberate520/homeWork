@@ -15,18 +15,17 @@ public class Animal implements Serializable, Comparable<Animal> {
     private List<Animal> children;
 
     public Animal(int id, String name, Sex sex, int birthYear) {
-        this(id, name, sex, birthYear, null, null, null);
+        this(id, name, sex, birthYear, null, null);
     }
 
     public Animal(int id, String name, Sex sex, int birthYear, 
-    Animal father, Animal mother, Animal partner) {
+    Animal father, Animal mother) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.birthYear = birthYear;
         this.father = father;
         this.mother = mother;
-        this.partner = partner;
         this.children = new ArrayList<>();
     }
 
@@ -38,6 +37,9 @@ public class Animal implements Serializable, Comparable<Animal> {
     public List<Animal> addChild (Animal somebody) {
         if (!this.children.contains(somebody)){
             this.children.add(somebody);
+        }
+        if (this.getPartner() != null) {
+            this.getPartner().children.add(somebody);
         }
         return children;
     }

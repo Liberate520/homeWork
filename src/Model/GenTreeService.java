@@ -16,12 +16,19 @@ public class GenTreeService implements Serializable {
         this.genealogicalTree = genealogicalTree;
         idIndividual = 0;
     }
-
-    public void addIndividual(String name, Sex sex, int birthYear){
+    
+    public void addHuman(String name, Sex sex, int birthYear){
         Human individual = new Human(idIndividual++, name, sex, birthYear);
         genealogicalTree.addIndividual(individual);
     }
 
+    public void addHuman(String name, Sex sex, int birthYear,
+        Human father, Human mother){
+        Human individual = new Human(idIndividual++, name, sex, birthYear, 
+            father, mother);
+        genealogicalTree.addIndividual(individual);
+    } 
+    
     public void sortByName() { 
         Collections.sort(genealogicalTree.getAllListTree());
     }
@@ -47,5 +54,9 @@ public class GenTreeService implements Serializable {
 
     public Human searchGetHuman (String nameSearch) {
         return genealogicalTree.searchGetHuman(nameSearch);
+    }
+
+    public void getMarried(Human o1, Human o2) {
+        genealogicalTree.getMarried(o1, o2);
     }
 }

@@ -46,6 +46,11 @@ public class Console<T extends Animal> implements View<T> {
         return text.matches("[0-9]+");
     }
 
+    private boolean checkInputNum(int num){
+        String text = Integer.toString(num);
+        return checkInputNum(text);
+    }
+
     private void hello() {
         System.out.println(menu.printMenu());
         System.out.println("Выберите пункт меню");
@@ -59,12 +64,12 @@ public class Console<T extends Animal> implements View<T> {
         boolean isTrue = true;
         String res = "";
         while (isTrue){
-            System.out.print("Введите имя для поиска: ");
+            System.out.print("Введите имя: ");
             res = scanner.next();
             if (isCyrillic(res)) {
                 isTrue = false;
             } else {
-                System.out.println("\nОшибка при вводе");
+                System.out.println("\nОшибка при вводе, используйте кириллицу");
             }
         }
         return res;
@@ -81,9 +86,9 @@ public class Console<T extends Animal> implements View<T> {
         return result;
     }
 
-    private boolean checkInputName(String text){
-        return text.matches("[а-яёА-ЯЁ]+");
-    }
+    // private boolean checkInputName(String text){
+    //     return text.matches("[а-яёА-ЯЁ]+");
+    // }
     
     public void printTree() {
         presenter.printTree();
@@ -109,12 +114,41 @@ public class Console<T extends Animal> implements View<T> {
         presenter.deserialization();
     }
 
-    // public void addHuman() {
-    //     presenter.addHuman();
-    // }
+    public void addHuman() {
+        presenter.addHuman();
+    }
 
-    // public void addNote(){
-    //     System.out.println("Введите текст");
-    //     presenter.addNote(scanner.nextLine());
-    // }
+    @Override
+    public int addSetSex() {
+        work = true;
+        int res = 1;
+        while (work){
+            System.out.print("Введите 1 - муж.пол или 2 - жен.пол: ");
+            res = scanner.nextInt();
+            if (checkInputNum(res)){
+                if (res == 1 || res == 2) {
+                    return res;
+                }
+            } else {
+                System.out.println("Что-то пошло не так");
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public int birthAddHuman() {
+        work = true;
+        int res = 0;
+        while (work) {
+            System.out.print("Введите год рождения: ");
+            res = scanner.nextInt();
+            if (checkInputNum(res)){
+                return res;
+            } else {
+                System.out.println("Что-то пошло не так");
+            }
+        }
+        return res;
+    }
 }

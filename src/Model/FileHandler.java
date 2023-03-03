@@ -28,7 +28,7 @@ public class FileHandler<T extends Animal> implements Writable<T>, Serializable 
     public void save(Serializable serializable) {
         System.out.println("Сохраняем...");
         try {
-            FileOutputStream outStream = new FileOutputStream("GenealogicalTree.out", true);
+            FileOutputStream outStream = new FileOutputStream(fileName, true);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outStream);
             objectOutputStream.writeObject(serializable);
             outStream.close();
@@ -50,7 +50,7 @@ public class FileHandler<T extends Animal> implements Writable<T>, Serializable 
             Serializable tempTree = (Serializable) objectInputStream.readObject();
             inStream.close();
             objectInputStream.close();
-            System.out.println("Успешно!");
+            System.out.println("Успешно!\n");
             return tempTree;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

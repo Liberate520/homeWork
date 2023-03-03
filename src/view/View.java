@@ -8,4 +8,6 @@ public interface View<T extends Animal> {
     void start();
     void print(String text);
     String searchSetName();
+    int addSetSex();
+    int birthAddHuman();
 }

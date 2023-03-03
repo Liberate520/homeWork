@@ -3,6 +3,7 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
+import View.Commands.AddHuman;
 import View.Commands.Deserialization;
 import View.Commands.Exit;
 import View.Commands.Option;
@@ -20,6 +21,7 @@ public class Menu {
         this.console = console;
         commands = new ArrayList<>();
         commands.add(new PrintTree(console));
+        commands.add(new AddHuman(console));
         commands.add(new SearchHuman(console));
         commands.add(new SortByAge(console));
         commands.add(new SortByName(console));

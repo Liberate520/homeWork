@@ -19,18 +19,7 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
         this.writable = writable;
     }
 
-    /**
-     * Метод добавления человека в генеалогическое древо
-     * @param somebody человек, которого нужно добавить.
-     */
     public void addIndividual(T somebody) {
-        allListTree.add(somebody);
-    }
-
-    public boolean addT(T somebody){
-        if (somebody == null){
-            return false;
-        }
         if (!allListTree.contains(somebody)){
             allListTree.add(somebody);
             if (somebody.getFather() != null){
@@ -39,10 +28,36 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
             if (somebody.getMother() != null){
                 somebody.getMother().addChild(somebody);
             }
-            return true;
+            if (somebody.getPartner() != null){
+                somebody.getPartner().setPartner(somebody);;
+            }
         }
-        return false;
     }
+
+    /**
+     * Метод добавления человека в генеалогическое древо
+     * @param somebody человек, которого нужно добавить.
+     */
+    // public void addIndividual(T somebody) {
+    //     allListTree.add(somebody);
+    // }
+
+    // public boolean addT(T somebody){
+    //     if (somebody == null){
+    //         return false;
+    //     }
+    //     if (!allListTree.contains(somebody)){
+    //         allListTree.add(somebody);
+    //         if (somebody.getFather() != null){
+    //             somebody.getFather().addChild(somebody);
+    //         }
+    //         if (somebody.getMother() != null){
+    //             somebody.getMother().addChild(somebody);
+    //         }
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public void addIndividual(String string, Sex man, int i) {
     }
@@ -71,6 +86,25 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
         }
         if (res != null) {
             sb.append(res.toString());
+            sb.append("\n");
+            sb.append("Мать: ");
+            if (res.getMother() != null) {
+                sb.append(res.getMother().getName());
+            } else {
+                sb.append("не указана");
+            }
+            sb.append(", отец: ");
+            if (res.getFather() != null) {
+                sb.append(res.getFather().getName());
+            } else {
+                sb.append("не указан");
+            }
+            sb.append(", партнер: ");
+            if (res.getPartner() != null) {
+                sb.append(res.getPartner().getName());
+            } else {
+                sb.append("не указан");
+            }
             sb.append("\n");
             sb.append(res.childrenInfo());
             sb.append("\n");
@@ -121,4 +155,10 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
     public Iterator<T> iterator() {
         return new GenTreeIterator<T>(allListTree);
     }
+
+    public void getMarried(T o1, T o2) {
+        o1.setPartner(o2);
+        o2.setPartner(o1);
+    }
+
 }
