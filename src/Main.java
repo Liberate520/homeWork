@@ -1,5 +1,6 @@
 package src;
 
+import src.FamilyTree.FTService;
 import src.FamilyTree.FamilyTree;
 import src.FamilyTree.Person;
 import src.FamilyTree.Sex;
@@ -76,7 +77,8 @@ public class Main {
 //        System.out.println(family.sortByYearOfReigh());
 
         View view = new Console();
-        new Presenter(view);
+        FTService ftService = new FTService();
+        new Presenter(view,ftService);
         view.start();
 
 

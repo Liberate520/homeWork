@@ -1,7 +1,6 @@
 package src.UI.commands;
 
 import src.UI.Console;
-import src.UI.Option;
 
 
 public abstract class Command implements Option {

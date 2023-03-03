@@ -1,18 +1,36 @@
 package src.Presenter;
 
-import src.FamilyTree.FamilyTree;
-import src.FamilyTree.Person;
+import src.FamilyTree.FTService;
 import src.UI.View;
+
 
 public class Presenter {
     private View view;
-    private FamilyTree<Person> family;
+    private FTService ftService;
 
-    public Presenter(View view) {
+
+    public Presenter(View view, FTService ftService) {
         this.view = view;
-    }
+        this.ftService = ftService;
+        view.setPresenter(this);
 
     }
+
+    public void PrintingListOfPersons(){
+        view.print(ftService.PrintingListOfPersons());
+    }
+
+    public void YearsOfTheReignOfPersons(){
+        view.print(ftService.YearsOfTheReignOfPersons());
+    }
+    public void load() {
+        ftService.load();
+    }
+
+    public void save() {
+        ftService.save();
+    }
+}
 
 
 

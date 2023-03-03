@@ -2,20 +2,18 @@ package src.UI.commands;
 
 import src.UI.Console;
 
-public class Quit extends Command {
-
-
-    public Quit(Console console) {
+public class Load extends Command {
+    public Load(Console console) {
         super(console);
     }
 
     @Override
     public String description() {
-        return "Quit the program";
+        return "Load FamilyTree object from the file";
     }
 
     @Override
     public void execute() {
-        getConsole().finish();
+        super.getConsole().load();
     }
 }

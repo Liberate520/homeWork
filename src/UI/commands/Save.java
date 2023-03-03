@@ -2,20 +2,16 @@ package src.UI.commands;
 
 import src.UI.Console;
 
-public class Quit extends Command {
-
-
-    public Quit(Console console) {
+public class Save extends Command {
+    public Save(Console console) {
         super(console);
     }
-
     @Override
     public String description() {
-        return "Quit the program";
+        return "Save to file";
     }
-
     @Override
     public void execute() {
-        getConsole().finish();
+        super.getConsole().save();
     }
 }

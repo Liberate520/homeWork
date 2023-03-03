@@ -1,18 +1,17 @@
 package src.UI;
 
-import src.FamilyTree.FamilyTree;
+import src.FamilyTree.FTService;
 import src.Presenter.Presenter;
 
 import java.util.Scanner;
 
 public class Console implements View{
+
     private Scanner scanner;
     private Presenter presenter;
-    private FamilyTree family;
+    private FTService ftService;
     private Menu menu;
     private boolean work;
-    private static Integer actionNumber;
-
 
     @Override
     public void start() {
@@ -39,13 +38,32 @@ public class Console implements View{
     private boolean checkInput(String text){
         return text.matches("[0-9]+");
     }
-    @Override
-    public void print(String text){
-        System.out.println(text);
+
+    public void finish() {
+        work = false;
+    }
+
+    public void PrintingListOfPersons(){
+        presenter.PrintingListOfPersons();
+    }
+
+    public void YearsOfTheReignOfPersons(){
+        presenter.YearsOfTheReignOfPersons();
     }
 
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
+    }
+    @Override
+    public void print(String text){
+        System.out.println(text);
+    }
+
+    public void load() {
+        presenter.load();
+    }
+    public void save() {
+        presenter.save();
     }
 }

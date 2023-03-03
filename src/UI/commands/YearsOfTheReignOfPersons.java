@@ -23,8 +23,6 @@ public class YearsOfTheReignOfPersons extends Command {
 
     @Override
     public void execute() {
-//        FamilyTree<Person> family = SavingFT.restoreFromFile();
-//        System.out.println(family.sortByYearOfReigh());
-        System.out.println("method 2");
+        super.getConsole().YearsOfTheReignOfPersons();
     }
 }

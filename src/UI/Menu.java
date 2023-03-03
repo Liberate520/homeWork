@@ -1,5 +1,6 @@
 package src.UI;
 
+import src.UI.commands.Option;
 import src.UI.commands.PrintingListOfPersons;
 import src.UI.commands.Quit;
 import src.UI.commands.YearsOfTheReignOfPersons;
