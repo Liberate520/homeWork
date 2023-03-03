@@ -1,76 +1,61 @@
 package HWGT.presenter;
 
-import HWGT.model.FamilyTree;
 import HWGT.model.Service;
 import HWGT.ui.View;
-import HWGT.model.DataService;
-import HWGT.model.PrintService;
 
 import java.io.IOException;
 
 public class Presenter {
-      private View view;
-      private FamilyTree familyTree = new FamilyTree();
+    private View view;
 
-    private Service service = new Service(familyTree);
-    private PrintService printService = new PrintService(familyTree);
-    private DataService dataService = new DataService(familyTree);
+    private Service service = new Service();
     public Presenter(View view) {
         this.view = view;
         view.setPresenter(this);
     }
 
     public void testTree() {
-        service.fillTestTree(familyTree);
-        System.out.println("тестовое дерево создано");
+        service.fillTestTree();
+//        System.out.println("тестовое дерево создано");
     }
 
-    public void loadData() throws IOException, ClassNotFoundException {
+    public String loadData() throws IOException, ClassNotFoundException {return service.loadData();}
 
-        familyTree = dataService.LoadData();
-        System.out.println("загрузка работает");
+    public String saveData() throws IOException {return service.saveData();}
+
+    public String addPerson(String personName, String personSex, Integer birthData, Integer deathData) {
+        return service.addPerson(personName, personSex, birthData, deathData);
+
+//        System.out.println("добавление человека работает");
     }
 
-    public void saveData() throws IOException {
-        dataService.saveData();
-        System.out.println("сохранение работает");
+    public String updatePerson(String personName, Integer birthDate, Integer deathDate) {
+        return service.updatePerson(personName, birthDate, deathDate);
+//        System.out.println("изменение данных работает");
     }
 
-    public void addPerson() {
-        service.addPerson(familyTree);
-        System.out.println("добавление человека работает");
+    public String personEnvironment(String personName, String fatherName, String motherName, String childName, String childSex) {
+        return service.personEnvironment(personName, fatherName, motherName, childName, childSex);
     }
 
-    public void updatePerson() {
-        service.updatePerson(familyTree);
-        System.out.println("изменение данных работает");
-    }
-
-    public void personEnvironment() {
-        service.personEnvironment(familyTree);
-        System.out.println("изменение данных об окружении работает");
-    }
-
-    public void searchPerson(String nextLine) {
-        service.searchPerson(familyTree, nextLine);
-
-        System.out.println("поиск человека работает");
-    }
+    public String searchPerson(String nextLine) {return service.searchPerson(nextLine);}
 
 
     public void sortByName() {
-        service.sortByName(familyTree);
-        printService.printTree(familyTree);
-        System.out.println("сортировка по имени работает");
+        service.sortByName();
+
     }
 
     public void sortByBirthDate() {
-        service.sortByBirthDate(familyTree);
-        printService.printTree(familyTree);
-        System.out.println("сортировка по году рождения работает");
+        service.sortByBirthDate();
+
     }
 
-    public void printTree(){
-        printService.printTree(familyTree);
+    public String printTree(){
+        return service.printTree();
+    }
+
+    public boolean checkName(String personName){
+        return service.checkName(personName);
     }
 }

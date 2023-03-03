@@ -36,25 +36,29 @@ public class Person extends Basic implements Serializable {
         this.dateOfDeath = dateOfDeath;
         this.mother = mother;
         this.father = father;
-        this.children = children;
+
+        for (int j=0; j < children.size();j++){
+            addChild(children.get(j));
+        }
     }
 
     public Person (){
         this("Unkown","Unkown", 0, 0 );
     }
 
+    @Override
     public String getName() {
         return name;
     }
-
+    @Override
     public String getSex() {
         return sex;
     }
-
+    @Override
     public Integer getDateOfBirth() {
         return dateOfBirth;
     }
-
+    @Override
     public Integer getDateOfDeath() {
         return dateOfDeath;
     }
@@ -95,16 +99,14 @@ public class Person extends Basic implements Serializable {
     public List<String> getChildren() {
         return children;
     }
-
+    @Override
     public void addChild(String child) {
         children.add(child);
     }
 
-
-
     @Override
     public String toString() {
-        return "\nHWGT.model.Person " +
+        return "\nPerson " +
                 "name='" + name + "',\n" +
                 "sex='" + sex + "',\n" +
                 "dateOfBirth='" + dateOfBirth +"',\n"+
