@@ -1,9 +1,6 @@
 package src.UI;
 
-import src.UI.commands.Option;
-import src.UI.commands.PrintingListOfPersons;
-import src.UI.commands.Quit;
-import src.UI.commands.YearsOfTheReignOfPersons;
+import src.UI.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,8 @@ public class Menu {
         commands.add(new Quit(console));
         commands.add(new PrintingListOfPersons(console));
         commands.add(new YearsOfTheReignOfPersons(console));
+        commands.add(new Load(console));
+        commands.add(new Save(console));
 
         }
 

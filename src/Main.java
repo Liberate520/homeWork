@@ -5,13 +5,10 @@ import src.FamilyTree.FamilyTree;
 import src.FamilyTree.Person;
 import src.FamilyTree.Sex;
 import src.Presenter.Presenter;
-import src.SaveRestore.SavingFT;
 import src.UI.Console;
 import src.UI.View;
 
 import java.io.IOException;
-
-
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -63,9 +60,7 @@ public class Main {
         family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Анна Иоанновна", 1693, 1740, Sex.Female, 4, "1730-1740"));
         family.addChildToMother("Прасковья Федоровна Салтыкова", new Person("Прасковья Иоанновна", 1694, 1730, Sex.Female, 4));
 
-       SavingFT.saveToFile(family);
 
-       family = SavingFT.restoreFromFile();
 
 //       family.sortByName();
 //       for (Object human: family){

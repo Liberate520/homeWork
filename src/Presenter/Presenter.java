@@ -31,14 +31,3 @@ public class Presenter {
         ftService.save();
     }
 }
-
-
-
-
-
-/*   Принимаем от UIfromConsole данные String и Integer для добавления персон в FamilyTree,
-    а также номера команд меню, для возвращения в консоль результатов этих команд;
-*/
-
-
-
