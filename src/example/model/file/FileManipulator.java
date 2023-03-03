@@ -17,6 +17,5 @@ public abstract class FileManipulator implements FileOperable {
             ArrayList<String> list = new ArrayList<>(Arrays.asList(date.split("-")));
             return LocalDate.of(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)), Integer.parseInt(list.get(2)));
         }
-
     }
 }

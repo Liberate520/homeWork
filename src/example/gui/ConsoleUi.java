@@ -1,51 +1,62 @@
 package org.example.gui;
 
+
+import org.example.gui.load_menu.menu.LoadMenu;
+import org.example.gui.main_menu.menu.MainMenu;
 import org.example.presenter.Presenter;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
-public class ConsoleUi implements View{
-    private String navigationMenu; // показывает в каком меню находится пользователь
-    private final Scanner scanner;
-    private Menu menu;
+public class ConsoleUI implements View{
 
-    public ConsoleUi() {
-        this.navigationMenu = "0";
-        this.scanner = new Scanner(System.in);
+    private ArrayList<Map<String,String>> printList;
+    private Presenter presenter;
+    private final Scanner scanner = new Scanner(System.in);
+    private LoadMenu menu;
+
+    public ArrayList<Map<String, String>> getPrintList() {
+        return printList;
     }
 
-    public void setNavigationMenu(String navigationMenu) {
-        this.navigationMenu = navigationMenu;
+    public void setPrintList(ArrayList<Map<String, String>> printList) {
+        this.printList = printList;
     }
 
-    private void print(String text) {
-        System.out.println(text);
+    public LoadMenu getMenu() {
+        return menu;
     }
+
+    public Presenter getPresenter() {
+        return presenter;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    @Override
+    public void start() throws IOException {
+        print(menu.toString());
+        String input = scanner.nextLine();
+        menu.getButtons().get(Integer.parseInt(input) - 1).action();
+
+        }
 
 
     @Override
-    public void start(){
-        boolean flag = false;
-            while (!flag) {
-                try {
-                    if (navigationMenu.equals("0")) {
-                        print(menu.getMainMenu());
-                    }
-                    String input = scanner.nextLine();
-                    menu.mainMenu(input, navigationMenu);
-                    if (input.equals("5") && navigationMenu.equals("0")) {
-                        flag = true;
-                    }
-                }catch (Exception exception){
-                    print("error..");
-                    navigationMenu = "0";
-        }
-        }
-        }
-
+    public void print(String string) {
+        System.out.println(string);
+    }
 
     @Override
     public void setPresenter(Presenter presenter) {
-        this.menu = new Menu(presenter);
-        menu.setConsoleUi(this);
+        this.presenter = presenter;
+        this.printList = presenter.getPrintList();
+        this.menu = new LoadMenu(this);
     }
+
+
 }
