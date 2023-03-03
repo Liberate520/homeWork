@@ -34,6 +34,10 @@ public class Presenter {
         return service.getByName();
     }
 
+    public String livingHuman() {
+        return service.livingHuman();
+    }
+
     public String exit() {
         return service.exit();
     }

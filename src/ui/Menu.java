@@ -7,6 +7,7 @@ import presenter.Presenter;
 import ui.commands.AddNewPerson;
 import ui.commands.Exit;
 import ui.commands.FindPerson;
+import ui.commands.LivingPerson;
 import ui.commands.Option;
 import ui.commands.OutputTree;
 import ui.commands.SortByBirthdate;
@@ -18,6 +19,7 @@ public class Menu {
     public Menu(ConsoleUi consoleUi, Presenter presenter) {
         commands = new ArrayList<>();
         commands.add(new OutputTree(presenter));
+        commands.add(new LivingPerson(presenter));
         commands.add(new SortByName(presenter));
         commands.add(new SortByBirthdate(presenter));
         commands.add(new FindPerson(presenter));

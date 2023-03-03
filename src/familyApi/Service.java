@@ -78,4 +78,14 @@ public class Service {
         }
         return null;
     }
+
+    public String livingHuman() {
+        StringBuilder str = new StringBuilder();
+        for(Human human: familyTree){
+            if(human.getDeathdate() == null){
+                str.append(human.toString() + "\n");
+            }
+        }
+        return str.toString();
+    }
 }
