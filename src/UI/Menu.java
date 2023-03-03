@@ -1,6 +1,8 @@
-package src.Presenter;
+package src.UI;
 
-import src.UI.View;
+import src.UI.commands.PrintingListOfPersons;
+import src.UI.commands.Quit;
+import src.UI.commands.YearsOfTheReignOfPersons;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +10,20 @@ import java.util.List;
 
 public class Menu {
     private List<Option> commands;
-    private View view;
+    private Console console;
 
-    public Menu(View view) {
-        this.view = view;
+    public Menu(Console console) {
+        this.console = console;
         commands = new ArrayList();
-        System.out.println("Menu");
-//        commands.add(new PrintingListOfPersons());
-        commands.add(new YearsOfTheReignOfPersons());
-        commands.add(new Quit());
+        System.out.println("\n\t---Menu---\n");
+        commands.add(new Quit(console));
+        commands.add(new PrintingListOfPersons(console));
+        commands.add(new YearsOfTheReignOfPersons(console));
+
         }
 
         void execute(int num){
-            Option option = commands.get(num-1);
+            Option option = commands.get(num);
             option.execute();
         }
 

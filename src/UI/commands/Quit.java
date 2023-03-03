@@ -1,10 +1,12 @@
-package src.Presenter;
+package src.UI.commands;
 
-public class Quit extends Command{
+import src.UI.Console;
+
+public class Quit extends Command {
 
 
-    public Quit(Presenter presenter) {
-        super(presenter);
+    public Quit(Console console) {
+        super(console);
     }
 
     @Override

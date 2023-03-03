@@ -1,4 +1,4 @@
-package src.Presenter;
+package src.UI;
 
 public interface Option {
     String description();

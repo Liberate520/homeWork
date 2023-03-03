@@ -1,16 +1,17 @@
-package src.Presenter;
+package src.UI.commands;
 
 
 import src.FamilyTree.Person;
+import src.UI.Console;
 
 import java.util.ArrayList;
 
-public class YearsOfTheReignOfPersons extends Command{
+public class YearsOfTheReignOfPersons extends Command {
 
     private ArrayList<Person> family;
 
-    public YearsOfTheReignOfPersons(Presenter presenter, ArrayList<Person> family) {
-        super(presenter);
+    public YearsOfTheReignOfPersons(Console console) {
+        super(console);
         this.family = family;
     }
 
