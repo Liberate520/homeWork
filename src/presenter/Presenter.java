@@ -24,6 +24,7 @@ public class Presenter<T extends Animal> {
 
     public void addHuman() {
         genTreeService.addHuman(nameAddHuman(), sexAddHuman(), birthYearAddHuman());
+        view.print(genTreeService.toString());
     }
 
     public String nameAddHuman() {

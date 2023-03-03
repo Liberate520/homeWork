@@ -23,18 +23,19 @@ public class Console<T extends Animal> implements View<T> {
 
     @Override
     public void start() {
-        scanner = new Scanner(System.in, "Cp866");
+        Scanner iScanner = new Scanner(System.in, "Cp866");
         menu = new Menu(this);
         work = true;
         while (work){
-            hello();
-            String command = scanner.nextLine();
+            printMenu();
+            String command = iScanner.nextLine();
             if (checkInputNum(command)){
                 menu.execute(Integer.parseInt(command));
             } else {
                 System.out.println("что-то пошло не так");
             }
         }
+        iScanner.close();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class Console<T extends Animal> implements View<T> {
         return checkInputNum(text);
     }
 
-    private void hello() {
+    private void printMenu() {
         System.out.println(menu.printMenu());
         System.out.println("Выберите пункт меню");
     }
