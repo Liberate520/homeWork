@@ -164,10 +164,10 @@ public class Human extends It implements Serializable {
         return dates.getAge(getDateOfBorn(), getDateOfDeath());
     }
 
-    public Human createUnit() {
-        HumanFactory human = new HumanFactory();
-        return human.creteHuman();
-    }
+//    public Human createUnit() {
+//        HumanFactory human = new HumanFactory();
+//        return human.creteHuman();
+//    }
     @Override
     public String getShortName(){
         StringBuilder stringBuilder = new StringBuilder();

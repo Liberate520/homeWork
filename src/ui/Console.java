@@ -10,7 +10,8 @@ public class Console implements View {
     private Presenter presenter;
     private Menu menu;
     private boolean work;
-    Validation validation = new Validation();
+    private Validation validation = new Validation();
+    private ConsoleForms form;
 
     @Override
     public void setPresenter(Presenter presenter) {
@@ -56,7 +57,8 @@ public class Console implements View {
     }
 
     public void addHuman() {
-        presenter.addHuman();
+        form = new ConsoleForms();
+        presenter.addHuman(form.humanForm());
     }
 
     public void showHumans() {
@@ -95,8 +97,8 @@ public class Console implements View {
     }
 
     public void findHumans() {
-        ConsoleForms form = new ConsoleForms();
-        String result = presenter.findHumans(form);
+        form = new ConsoleForms();
+        String result = presenter.findHumans(form.findForm());
         System.out.println("Результаты поиска:");
         if (result.isEmpty()) {
             System.out.println("Нет результатов удовлетворящих критериям поиска!");

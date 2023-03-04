@@ -1,19 +1,18 @@
 package src;
 
 import src.comparator.SortBy;
-import src.ui.ConsoleForms;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashMap;
 
-public class Services {
+public class Service implements Serializable {
     private FamilyTree<Human> familyTree;
+    private Writable fileHandlerWritable;
+    private Readable fileHandlerReadable;
 
 
-    public Services(FamilyTree<Human> familyTree) {
-        this.familyTree = familyTree;
-    }
-
-    public Services() {
+    public Service() {
         familyTree = new FamilyTree<>();
     }
 
@@ -24,35 +23,38 @@ public class Services {
     }
 
     public void load(String path) throws IOException, ClassNotFoundException {
-        familyTree.load(path);
+        if (fileHandlerReadable == null) {
+            fileHandlerReadable = new FileRW();
+        }
+        Object data = fileHandlerReadable.loadFile(path);
+        familyTree = (FamilyTree<Human>) data;
+        new Stat(familyTree.maxId());
     }
 
     public void save(String path) throws IOException {
-        familyTree.save(path);
+        if (fileHandlerWritable == null) {
+            fileHandlerWritable = new FileRW();
+        }
+        fileHandlerWritable.saveFile(familyTree, path);
     }
 
-    public void creteHuman() {
-        HumanFactory humanFactory = new HumanFactory();
-        new Stat(familyTree.maxId());
-        if (familyTree == null) {
-            familyTree = new FamilyTree<>();
-        }
-        familyTree.addToFamily(humanFactory.creteHuman());
+    public void creteHuman(HashMap<String, String> personData) {
+        familyTree.addToFamily(new Human(personData.get("gender"),
+                personData.get("dateOfBorn"),
+                personData.get("dateOfDeath"),
+                personData.get("placeOfBirth"),
+                personData.get("firstName"),
+                personData.get("patronymic"),
+                personData.get("lastName")
+        ));
     }
 
     public boolean isFamilyTreeNotNull() {
-        boolean flag = true;
-        try {
-            familyTree.size();
-        } catch (Exception e) {
-            flag = false;
-            familyTree = new FamilyTree<>();
-        }
-        return flag;
+        return familyTree != null;
     }
 
     public String showTree(int num) {
-        if (isFamilyTreeNotNull()) {
+        if (familyTree != null) {
             return familyTree.displayTree(familyTree.getUnitById(num));
         } else {
             return NOTHING;
@@ -71,9 +73,9 @@ public class Services {
         return familyTree.delUnit(delId);
     }
 
-    public String findHumans(ConsoleForms form) {
+    public String findHumans(HashMap<String, String> form) {
         if (isFamilyTreeNotNull()) {
-            return familyTree.getString(familyTree.findHumans(form.findForm()));
+            return familyTree.getString(familyTree.findHumans(form));
         } else {
             return NOTHING;
         }
@@ -93,7 +95,7 @@ public class Services {
             if (familyTree.getUnitById(idParent) == null || familyTree.getUnitById(idChild) == null) {
                 return false;
             } else {
-                if(dates.datesCompare(familyTree.getUnitById(idParent).getDateOfBorn(), familyTree.getUnitById(idChild).getDateOfBorn())) {
+                if (dates.datesCompare(familyTree.getUnitById(idParent).getDateOfBorn(), familyTree.getUnitById(idChild).getDateOfBorn())) {
                     familyTree.getUnitById(idParent).addChild(familyTree.getUnitById(idChild));
                     return true;
                 } else {

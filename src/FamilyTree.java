@@ -6,20 +6,20 @@ import src.comparator.HumanComparatorByAge;
 import src.comparator.HumanComparatorByLastName;
 import src.comparator.SortBy;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
 
-    private Writable fileHandlerWritable;
-    private Readable fileHandlerReadable;
 
     private List<T> family;
 
     public FamilyTree(List<T> family) {
-
-        this.family = family;
+        if (family == null) {
+            this.family = new ArrayList<>();
+        } else {
+            this.family = family;
+        }
     }
 
     public FamilyTree() {
@@ -30,22 +30,6 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return family;
     }
 
-
-    public void save(String path) throws IOException {
-        if (fileHandlerWritable == null) {
-            fileHandlerWritable = new FileRW();
-        }
-        fileHandlerWritable.saveFile(family, path);
-    }
-
-    public void load(String path) throws IOException, ClassNotFoundException {
-        if (fileHandlerReadable == null) {
-            fileHandlerReadable = new FileRW();
-        }
-        Object familyCheck = fileHandlerReadable.loadFile(path);
-        List<T> familyList = (List<T>) familyCheck;
-        family = familyList;
-    }
 
     @Override
     public String toString() {
@@ -89,8 +73,7 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         if (family.contains(human)) {
             Statistics statistics = new Statistics();
             return statistics.getStatistics((It) human, (List<It>) getClildrenAndGrandsonsList(human));
-        }
-        else {
+        } else {
             return "Что-то пошло не так!";
         }
     }
@@ -126,21 +109,13 @@ public class FamilyTree<T extends It> implements Serializable, Iterable<T> {
         return result;
     }
 
-    public List<T> findHumans(HashMap<String, String> hashMap){
+    public List<T> findHumans(HashMap<String, String> hashMap) {
         FindHumans<T> fHumans = new FindHumans<>();
         return fHumans.findHumans(family, hashMap);
     }
 
     public void setFamily(List<T> family) {
         this.family = family;
-    }
-
-    public void setFileHandlerWritable(Writable fileHandlerWritable) {
-        this.fileHandlerWritable = fileHandlerWritable;
-    }
-
-    public void setFileHandlerReadable(Readable fileHandlerReadable) {
-        this.fileHandlerReadable = fileHandlerReadable;
     }
 
     public void sortByAge() {

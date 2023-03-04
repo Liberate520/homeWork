@@ -1,9 +1,9 @@
 package src;
 
+import java.io.Serializable;
 
-public class Stat {
+public class Stat implements Serializable {
     private static int idCounter = 0;
-    private FamilyTree<It> familyTree;
 
     public Stat(int startId) {
         idCounter = startId;

@@ -1,51 +1,51 @@
 package src.presenter;
 
 import src.*;
-import src.ui.ConsoleForms;
 import src.ui.View;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
 public class Presenter {
     private View view;
 
-    private Services services;
+    private Service service;
 
     public Presenter(View view) {
-        services = new Services();
+        this.service = new Service();
         this.view = view;
         view.setPresenter(this);
     }
 
-    public void addHuman() {
-        services.creteHuman();
+    public void addHuman(HashMap<String, String> data) {
+        service.creteHuman(data);
     }
 
     public boolean delHuman(int delId) {
-        return services.delUnit(delId);
+        return service.delUnit(delId);
     }
 
-    public String findHumans(ConsoleForms form) {
-        return services.findHumans(form);
+    public String findHumans(HashMap<String, String> form) {
+        return service.findHumans(form);
     }
 
     public String showTree(int num) {
-        return services.showTree(num);
+        return service.showTree(num);
     }
 
     public String infoHuman(int num) {
-        return services.infoHuman(num);
+        return service.infoHuman(num);
     }
 
     public String showHumans() {
-        return services.showHumans();
+        return service.showHumans();
     }
 
     public boolean saveTree(String path) {
         boolean flag = true;
         try {
-            services.save(path);
+            service.save(path);
         } catch (IOException e) {
             flag = false;
         }
@@ -55,7 +55,7 @@ public class Presenter {
     public boolean loadTree(String path) {
         boolean flag = true;
         try {
-            services.load(path);
+            service.load(path);
         } catch (ClassNotFoundException | IOException e) {
             flag = false;
         }
@@ -63,6 +63,6 @@ public class Presenter {
     }
 
     public boolean addChild(int idChild, int idParent) {
-        return services.addChild(idChild, idParent);
+        return service.addChild(idChild, idParent);
     }
 }
