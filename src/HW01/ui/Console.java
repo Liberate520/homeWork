@@ -27,10 +27,6 @@ public class Console implements View {
     private void printMenu() {
         System.out.println(menu.printMenu());
     }
-//    @Override
-//    public void print(String text){
-//        System.out.println(text);
-//    }
 
     public void finish(){
         workFlag = false;

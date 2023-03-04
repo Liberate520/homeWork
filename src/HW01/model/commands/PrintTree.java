@@ -1,4 +1,4 @@
-spackage HW01.model.commands;
+package HW01.model.commands;
 
 import HW01.model.FamilyTree;
 

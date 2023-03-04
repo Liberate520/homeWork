@@ -1,7 +1,5 @@
 package HW01.model;
 
-import HW01.model.Basic;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
