@@ -17,8 +17,6 @@ public class Menu {
         commands.add(new Sorting(console));
         commands.add(new Save(console));
         commands.add(new Read(console));
-        commands.add(new AddRecord(console));
-        commands.add(new DelRecord(console));
         commands.add(new Exit(console));
     }
     void execute(int num) throws IOException, ClassNotFoundException {
