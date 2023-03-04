@@ -2,8 +2,8 @@ package presenter;
 
 import model.FamilyTree;
 import model.Handler;
-import model.Writable;
-import ui.View;
+import model.interfaces.Writable;
+import ui.interfaces.View;
 
 import java.io.IOException;
 

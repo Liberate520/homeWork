@@ -1,5 +1,7 @@
 package model;
 
+import model.interfaces.Writable;
+
 import java.io.*;
 
 public class Handler implements Writable {

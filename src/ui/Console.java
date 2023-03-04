@@ -1,11 +1,12 @@
 package ui;
 
 import presenter.Presenter;
+import ui.interfaces.View;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Console implements View{
+public class Console implements View {
     private Scanner scanner;
     private Presenter presenter;
     private Menu menu;
