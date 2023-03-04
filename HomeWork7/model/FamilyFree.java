@@ -1,10 +1,10 @@
-package HomeWork5.model;
+package HomeWork7.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import HomeWork5.model.comporator.AnimaleIterator; 
+import HomeWork7.model.comporator.AnimaleIterator; 
 
 public class FamilyFree<T extends Animale> implements Iterable<T>, Serializable 
 {

@@ -1,9 +1,9 @@
-package HomeWork5.model.comporator;
+package HomeWork7.model.comporator;
 
 import java.util.Iterator;
 import java.util.List;
 
-import HomeWork5.model.Animale;
+import HomeWork7.model.Animale;
 
 public class AnimaleIterator<T extends Animale> implements Iterator<T>
 {

@@ -1,4 +1,4 @@
-package HomeWork5.model;
+package HomeWork7.model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

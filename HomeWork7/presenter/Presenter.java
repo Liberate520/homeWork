@@ -1,10 +1,10 @@
-package HomeWork5.presenter;
+package HomeWork7.presenter;
 
-import HomeWork5.model.FamilyFree;
-import HomeWork5.model.Human;
-import HomeWork5.model.IO;
-import HomeWork5.model.comporator.HumanComporatorByAge;
-import HomeWork5.ui.View;
+import HomeWork7.model.FamilyFree;
+import HomeWork7.model.Human;
+import HomeWork7.model.IO;
+import HomeWork7.model.comporator.HumanComporatorByAge;
+import HomeWork7.ui.View;
 
 public class Presenter 
 {
@@ -57,10 +57,16 @@ public class Presenter
         serializ.load("FreeFamily.data");
     }
 
-        public void sortFamily(int choice)
-        {
-            if (choice == 1) { familyConnect.getFamilyFree().sort(null); }
-            else             { familyConnect.getFamilyFree().sort(sortAge); }
-            view.print("Сортировка завершена !");
-        }
+    public void sortFamilyName()
+    {
+        familyConnect.getFamilyFree().sort(null);
+        view.print("Сортировка завершена !");
+    }
+
+    public void sortFamilyAge()
+    {
+        familyConnect.getFamilyFree().sort(sortAge);
+        view.print("Сортировка завершена !");
+    }
+
 }

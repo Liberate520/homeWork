@@ -1,14 +1,14 @@
-package HomeWork5;
+package HomeWork7;
 
 import java.io.IOException;
 
-import HomeWork5.model.FamilyFree;
-import HomeWork5.model.Human;
-import HomeWork5.model.IO;
-import HomeWork5.model.comporator.HumanComporatorByAge;
-import HomeWork5.presenter.Presenter;
-import HomeWork5.ui.Console;
-import HomeWork5.ui.View;
+import HomeWork7.model.FamilyFree;
+import HomeWork7.model.Human;
+import HomeWork7.model.IO;
+import HomeWork7.model.comporator.HumanComporatorByAge;
+import HomeWork7.presenter.Presenter;
+import HomeWork7.ui.Console;
+import HomeWork7.ui.View;
 
 public class Main
 {

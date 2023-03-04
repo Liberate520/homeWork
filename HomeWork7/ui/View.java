@@ -1,6 +1,6 @@
-package HomeWork5.ui;
+package HomeWork7.ui;
 
-import HomeWork5.presenter.Presenter;
+import HomeWork7.presenter.Presenter;
 
 public interface View 
 {

@@ -1,6 +1,6 @@
-package HomeWork5.ui;
+package HomeWork7.ui;
 
-import HomeWork5.presenter.Presenter;
+import HomeWork7.presenter.Presenter;
 import java.util.Scanner;
 
 public class Console implements View
@@ -76,12 +76,14 @@ public class Console implements View
         presenter.loadFamily();
     }
 
-    public void sortFamily()
+    public void sortFamilyName()
     {
-        System.out.print("\n1. Сортировка по имени\n2. Сортировка по возрасту\n" +
-        "Ваш выбор -> ");
-        int choice = Integer.parseInt(scan());
-        presenter.sortFamily(choice);
+        presenter.sortFamilyName();
+    }
+
+    public void sortFamilyAge()
+    {
+        presenter.sortFamilyAge();
     }
 
     public void end()

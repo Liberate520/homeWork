@@ -1,8 +1,8 @@
-package HomeWork5.model.comporator;
+package HomeWork7.model.comporator;
 
 import java.util.Comparator;
 
-import HomeWork5.model.Human;
+import HomeWork7.model.Human;
 
 public class HumanComporatorByAge implements Comparator<Human>
 {

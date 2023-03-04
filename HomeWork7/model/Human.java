@@ -1,4 +1,4 @@
-package HomeWork5.model;
+package HomeWork7.model;
 
 public class Human extends Animale
 {

@@ -1,6 +1,6 @@
-package HomeWork5.ui.commands;
+package HomeWork7.ui.commands;
 
-import HomeWork5.ui.Console;
+import HomeWork7.ui.Console;
 
 public class Exit extends Command 
 {

@@ -1,15 +1,16 @@
-package HomeWork5.ui;
+package HomeWork7.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import HomeWork5.ui.commands.AddHuman;
-import HomeWork5.ui.commands.Exit;
-import HomeWork5.ui.commands.FamilyPrint;
-import HomeWork5.ui.commands.HumanSearch;
-import HomeWork5.ui.commands.Load;
-import HomeWork5.ui.commands.Option;
-import HomeWork5.ui.commands.SaveFamily;
-import HomeWork5.ui.commands.Sotr;
+import HomeWork7.ui.commands.AddHuman;
+import HomeWork7.ui.commands.Exit;
+import HomeWork7.ui.commands.FamilyPrint;
+import HomeWork7.ui.commands.HumanSearch;
+import HomeWork7.ui.commands.Load;
+import HomeWork7.ui.commands.Option;
+import HomeWork7.ui.commands.SaveFamily;
+import HomeWork7.ui.commands.SortName;
+import HomeWork7.ui.commands.SortAge;
 
 public class Menu 
 {
@@ -23,7 +24,8 @@ public class Menu
         commands.add(new AddHuman(console));
         commands.add(new FamilyPrint(console));
         commands.add(new HumanSearch(console));
-        commands.add(new Sotr(console));
+        commands.add(new SortName(console));
+        commands.add(new SortAge(console));
         commands.add(new SaveFamily(console));
         commands.add(new Load(console));
         commands.add(new Exit(console));
