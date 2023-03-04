@@ -5,34 +5,34 @@ public class Human implements Serializable{
     private String name;
     private String surname;
     private Sex sex;
-    private String startDate;
-    private String endDate;
+    private int startDate;
+    private int endDate;
     private Human father;
     private Human mother;
     private ArrayList<Human> children;
 
-    public Human(String name, String surname, Sex sex, String startDate, String endDate, Human father, Human mother,
+    public Human(String name, String surname, Sex sex, int startDate2, int endDate2, Human father, Human mother,
             ArrayList<Human> children) {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = startDate2;
+        this.endDate = endDate2;
         this.father = father;
         this.mother = mother;
         this.children = children;
     }
 
-    public Human(String name, String surname, Sex sex, String startDate, String endDate, Human father, Human mother) {
+    public Human(String name, String surname, Sex sex, int startDate, int endDate, Human father, Human mother) {
         this(name, surname, sex, startDate, endDate, father, mother, new ArrayList<Human>());
     }
 
-    public Human(String name, String surname, Sex sex, String startDate, String endDate) {
+    public Human(String name, String surname, Sex sex, int startDate, int endDate) {
         this(name, surname, sex, startDate, endDate, null, null);
     }
 
-    public Human(String name, String surname, Sex sex, String startDate) {
-        this(name, surname, sex, startDate, null);
+    public Human(String name, String surname, Sex sex, int startDate) {
+        this(name, surname, sex, startDate, (Integer) null);
     }
 
     @Override
@@ -70,19 +70,19 @@ public class Human implements Serializable{
         this.sex = sex;
     }
 
-    public String getStartDate() {
+    public int getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(int startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public int getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(int endDate) {
         this.endDate = endDate;
     }
 
@@ -124,14 +124,14 @@ public class Human implements Serializable{
         if (father != null) {
             return father.getName();
         }
-        return "null";
+        return null;
     }
 
     private String getNameMother() {
         if (mother != null) {
             return mother.getName();
         }
-        return "null";
+        return null;
     }
 
 }

@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler implements Processed, Serializable{
+public class FileHandler implements Savable{
 
     @Override
     public void save(Serializable serializable) throws FileNotFoundException, IOException {
