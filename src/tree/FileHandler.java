@@ -1,6 +1,8 @@
+package tree;
+
 import java.io.*;
 
-public class FileHandler implements ReadWritable{
+public class FileHandler implements ReadWritable {
     private String path;
 
     public FileHandler(String path) {

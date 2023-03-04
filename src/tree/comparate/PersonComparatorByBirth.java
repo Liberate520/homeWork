@@ -1,3 +1,7 @@
+package tree.comparate;
+
+import tree.Person;
+
 import java.util.Comparator;
 
 public class PersonComparatorByBirth<T extends Person> implements Comparator<T> {

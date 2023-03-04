@@ -1,7 +1,9 @@
+package tree;
+
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator <T extends  Person> implements Iterator<T> {
+public class PersonIterator <T extends Person> implements Iterator<T> {
     private int index;
     private List<T> persons;
     public PersonIterator(List<T> persons) {

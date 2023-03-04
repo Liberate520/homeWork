@@ -1,5 +1,11 @@
+package tree;
+
+import tree.comparate.PersonComparatorByBirth;
+import tree.comparate.PersonComparatorByName;
+
 import java.util.*;
 import java.io.Serializable;
+import java.util.function.Predicate;
 
 
 public class FamilyTree <T extends Person> implements Serializable, Iterable <T> {
@@ -64,6 +70,24 @@ public class FamilyTree <T extends Person> implements Serializable, Iterable <T>
     public void sortByBirthDate() {
         Collections.sort(personList, new PersonComparatorByBirth());
     }
+
+    public void List() {
+        System.out.println();
+        System.out.println("Генеалогическое древо Романовых: ");
+
+        for (T p : personList) {
+            System.out.println(p);
+        }
+    }
+
+    public void search(String search) {
+        Predicate<T> dynasty = n -> n.getName().equals(search);
+        personList.stream()
+                .filter(dynasty)
+                .forEach(System.out::println);
+    }
+
+
 }
 
 
