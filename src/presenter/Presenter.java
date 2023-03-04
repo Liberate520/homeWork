@@ -1,13 +1,13 @@
 package presenter;
 
-import myProject.FamilyTree;
-import myProject.Handler;
-import myProject.Writable;
+import model.FamilyTree;
+import model.Handler;
+import model.Writable;
 import ui.View;
 
 import java.io.IOException;
 
-import static myProject.Dynasty.dynasty;
+import static model.Dynasty.dynasty;
 
 
 public class Presenter {

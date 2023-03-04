@@ -1,6 +1,6 @@
-package myProject.comparate;
+package model.comparate;
 
-import myProject.Person;
+import model.Person;
 
 import java.util.Comparator;
 
