@@ -14,7 +14,7 @@ public class Console implements View {
     public Console() 
     {
         scanner = new Scanner(System.in);
-        FamilyTree <Human> familyTree1 = new FamilyTree<>();
+        FamilyTree <Human> familyTree1 = new FamilyTree<>();        
 
     }   
 
@@ -69,12 +69,13 @@ public class Console implements View {
 
         System.out.println("Введите Имя отца");
         String father2 = scanner.nextLine();
+
         Human father = familyTree1.search(father2);// если нет имени то вернуть пусто или создать Human father
         System.out.println(father);
         System.out.println("Mothers name: ");
         String mother2 = scanner.nextLine();
         Human mother = familyTree1.search(mother2);
-        human = new Human(name2, gender2, yearbirth2, father2, mother2);
+        Human human = new Human(name2, gender2, yearbirth2, father2, mother2);
         presenter.addHuman(human);
     }
 
