@@ -28,7 +28,6 @@ public class Main {
         view.start();
 
 
-
         
         // View view = new Console(familyTree1);
         // view.commands();
@@ -41,9 +40,9 @@ public class Main {
         // familyTree1.save();
         // familyTree1.read();
 
-        // for (Human human: familyTree1){
-        // System.out.println(human.getInfo());
-        // }
+        for (Human human: familyTree1){
+        System.out.println(human.getInfo());
+        }
 
         // System.out.println("Сортировка по имени: ");
 
