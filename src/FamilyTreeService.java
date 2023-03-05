@@ -7,7 +7,32 @@
 //     public FamilyTreeService(FamilyTree familyTree){
 //         this.familyTree= familyTree;
 //     }
-    
+
+
+
+// }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //     // public void addHuman(String name, String gender, Integer yearofbirth, String father, String mother) {
 //     //     familyTree.addHuman(new Human(name, gender, yearofbirth, father, mother));        
 //     // }
