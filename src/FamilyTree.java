@@ -72,8 +72,8 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
         fileHandler.save("FamTree.out");
     }
 
-    public void read() throws FileNotFoundException {
-        fileHandler.save("FamTree.out");
+    public void read() throws IOException {
+        fileHandler.read();
     }
 
     public void setFileHandler(Writable fileHandler) {
