@@ -22,17 +22,24 @@ public class Main {
         familyTree1.addHuman(new Human("Николай", Gender.male, 1999, familyTree1.getByName("Александр"),
                 familyTree1.getByName("Анна")));
         familyTree1.addHuman(new Human("Софья", Gender.female, 2005));
+
+        View view = new Console();
+        new Presenter(view);
+        view.start();
+
+
+
         
-        View view = new Console(familyTree1);
+        // View view = new Console(familyTree1);
+        // view.commands();
 
-        view.commands();
+        // System.out.println(familyTree1.getChildrenToString(human1));
+        // System.out.println(familyTree1.getByName("Пётр").getInfo());
+        
 
-        // // System.out.println(familyTree1.getChildrenToString(human1));
-        // // System.out.println(familyTree1.getByName("Пётр").getInfo());
         // familyTree1.setFileHandler(new FileHandler());
-        // // familyTree1.read();
-        // // familyTree1.save();
-        // // familyTree1.read();
+        // familyTree1.save();
+        // familyTree1.read();
 
         // for (Human human: familyTree1){
         // System.out.println(human.getInfo());
@@ -51,5 +58,7 @@ public class Main {
         // for (Human human: familyTree1){
         // System.out.println(human.getInfo());
         // }
+
+
     }
 }
