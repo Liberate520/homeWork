@@ -1,0 +1,17 @@
+digraph GoT {
+rankdir=LR;
+size="8,5"
+node [shape = rectangle] [color = black];
+"Galina Sidorova" -> "Robert Borisov" [label="mother"];
+"Galina Sidorova" -> "Stanislav Borisov" [label="mother"];
+"Galina Sidorova" -> "Renat Borisov" [label="mother"];
+"Yula Petrova" -> "Yakov Borisov" [label="mother"];
+"Yula Petrova" -> "Mariya Borisova" [label="mother"];
+"Yula Petrova" -> "Anatoliy Borisov" [label="mother"];
+"Robert Borisov" -> "Gennadiy" [label="father"];
+"Olga Borisova" -> "Svetlana Borisova" [label="mother"];
+"Stanislav Borisov" -> "Svetlana Borisova" [label="father"];
+"Stepan Borisov" -> "Robert Borisov" [label="father"];
+"Stepan Borisov" -> "Stanislav Borisov" [label="father"];
+"Stepan Borisov" -> "Renat Borisov" [label="father"];
+}
