@@ -10,11 +10,12 @@ public class Console implements View {
     private boolean work;   
 
     
-    // public Console(FamilyTree familyTree1)
-    public Console() 
+    public Console(FamilyTree<Human> familyTree1)
+    // public Console() 
     {
         scanner = new Scanner(System.in);
-        FamilyTree <Human> familyTree1 = new FamilyTree<>();        
+        this.familyTree1 = familyTree1;
+        // FamilyTree <Human> familyTree1 = new FamilyTree<>();        
 
     }   
 
@@ -57,7 +58,7 @@ public class Console implements View {
         work = false;
     }
 
-    public void addHuman(){
+    public void add(){
         System.out.println("Введите Имя");
         String name2 = scanner.nextLine();
 
@@ -67,16 +68,21 @@ public class Console implements View {
         System.out.println("Введите год рождения");
         Integer yearbirth2 = scanner.nextInt();
 
-        System.out.println("Введите Имя отца");
-        String father2 = scanner.nextLine();
-
-        Human father = familyTree1.search(father2);// если нет имени то вернуть пусто или создать Human father
-        System.out.println(father);
-        System.out.println("Mothers name: ");
+        System.out.println("Введите Имя матери: ");
         String mother2 = scanner.nextLine();
-        Human mother = familyTree1.search(mother2);
+        // Human mother = familyTree1.search(mother2);
+
+
+        System.out.println("Введите Имя отца");
+        String father2 = scanner.nextLine();   
+
+        // Human father = familyTree1.search(father2);// если нет имени то вернуть пусто или создать Human father
+        // System.out.println(father);
+
+    
         Human human = new Human(name2, gender2, yearbirth2, father2, mother2);
-        presenter.addHuman(human);
+        System.out.println(human.getInfo());        
+        presenter.add(human);
     }
 
 
