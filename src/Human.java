@@ -9,6 +9,7 @@ public class Human extends Individual implements Serializable, Comparable<Human>
     private Human father;
     private Human mother;
     private List<Human> children;
+    private Presenter presenter;
 
     public Human(String name, Gender gender, Integer yearofbirth, Human father, Human mother) {
         this.name = name;
@@ -32,6 +33,10 @@ public class Human extends Individual implements Serializable, Comparable<Human>
             return true;
         }
         return false;
+    }
+    
+    public void setPresenter(Presenter presenter){
+        this.presenter = presenter;
     }
 
     public String getName() {
