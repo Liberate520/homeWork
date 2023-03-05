@@ -1,18 +1,20 @@
 public class Presenter {
 
     private View view;
+    private Console console;
     private Human human;
-    FamilyTree familyTree1;
+    FamilyTree <Human> familyTree1;
 
     public Presenter(View view) {
         this.view = view;
-        view.setPresenter(this);
+        this.familyTree1=familyTree1;       
+        view.setPresenter(this);        
+
     }
 
-    public void addHuman(Human human) {
+    public void add(Human human) {
         this.human=human;
-        this.familyTree1 = familyTree1;
-        boolean addHuman = familyTree1.addHuman(human);
+        familyTree1.addHuman(human);
         System.out.println("презентер работает");
     }
 }
