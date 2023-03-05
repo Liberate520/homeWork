@@ -12,6 +12,6 @@ public class AddHuman extends Command{
 
     @Override
     public void execute() {
-        getConsole().addHuman();
+        getConsole().add();
     }
 }
