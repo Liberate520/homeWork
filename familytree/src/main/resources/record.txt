@@ -1,0 +1,13 @@
+Galina Sidorova, FEMALE
+Yula Petrova, FEMALE
+Gennadiy, MALE
+Yakov Borisov, MALE
+Margarita Titova, FEMALE
+Mariya Borisova, FEMALE
+Renat Borisov, MALE
+Robert Borisov, MALE
+Olga Borisova, FEMALE
+Svetlana Borisova, FEMALE
+Stannislav Borisov, MALE
+Stepan Borisov, MALE
+Anatoliy Borisov, MALE
