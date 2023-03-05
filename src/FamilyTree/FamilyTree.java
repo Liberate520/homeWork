@@ -28,7 +28,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         return null;
     }
 
-    public ArrayList<T> getFamilyTree(ArrayList<T> people){
+    public ArrayList<T> getFamilyTree(){
         return people;
     }
 
@@ -48,6 +48,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
     public  boolean addWifeToHusband(String husbandName, T person){
         for (T item : people) {
             if (person.getName().equals(item.getName())) {
+                System.out.println("The record already exists");
                 return false;
             }
         }
@@ -56,9 +57,10 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         for (T men : people){
             if (husbandName.equals(men.getName())){
                 men.addSposeName(person.getName());
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void getList() {
@@ -68,7 +70,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
     }
 
 
-    public void addChildToMother(String motherName, T person) {
+    public boolean addChildToMother(String motherName, T person) {
         T mother = getByName(motherName);
         mother.setChildrenName(person.getName());
         people.add(person);
@@ -78,18 +80,22 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
                             father.setChildrenName(person.getName());
                             System.out.printf("%s is added to the father\n",person.getName());
                         }
+                        return true;
                     }
+                    return false;
     }
 
-    public T findSpouse(String name) {
+    public String findSpouse(String name) {
         T human = getByName(name);
+        StringBuilder str3 = new StringBuilder("\n\tList of spouses of the Person ").append(name).append("\n");
+        int j = 0;
         for (T spouse : people) {
             if (human.getSpouseName().contains(spouse.getName())) {
-                System.out.println(spouse.getName());
-                return spouse;
+                str3.append("\nPerson ").append(spouse.getName()).append(" lived in ").append(spouse.getBirthDay()).append(" - ").append(spouse.getDeathDay());
             }
         }
-        return null;
+        if (j == 0) {str3.append("\n\tSpouses have not been found\n");}
+        return str3.toString();
     }
 
     @Override
@@ -99,6 +105,27 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
 
     public void sortByName() {
         Collections.sort(people, new PersonComparatorByName<T>());
+    }
+
+    public String getPersonByName(String name) {
+        StringBuilder str0 = new StringBuilder("\n\tList of persons with a \"").append(name).append("\" in the name:\n");
+        int j = 0;
+        for (T human : people) {
+            if (human.getName().contains(name)) {
+                str0.append("\nPerson ").append(human.getName()).append(" lived in ").append(human.getBirthDay()).append(" - ").append(human.getDeathDay());
+                if (!(human.getSpouseName().isEmpty())){
+                    str0.append("\t, spouse - ").append(human.getSpouseName().toString().replace("[", "").replace("]", ""));
+                }
+                if(!(human.getChildrenName().isEmpty())) {
+                    str0.append("\n\tChildren: ").append(human.getChildrenName().toString().replace("[", "").replace("]", ""));
+                }
+                if(human.getAdditionalField() != null) {
+                    str0.append("\n\t\treigned in ").append(human.getAdditionalField()).append(" years;");
+                }
+            }
+        }
+        if (j == 0) {str0.append("\n\tNo persons with the name \"").append(name).append("\" found");}
+        return str0.toString();
     }
 
     public String sortByBirthday() {
@@ -116,12 +143,14 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
                 str1.append("\n\t\treigned in ").append(human.getAdditionalField()).append(" years;");
             }
         }
+        str1.append("\n\n\tEnd of the list");
         return str1.toString();
     }
 
     public String sortByYearOfReigh(){
         List<T> family = new ArrayList<>();
         for (T human: people) {
+
             if (human.getAdditionalField() != null){
                 family.add(human);
             }

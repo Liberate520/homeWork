@@ -23,6 +23,6 @@ public class YearsOfTheReignOfPersons extends Command {
 
     @Override
     public void execute() {
-        super.getConsole().YearsOfTheReignOfPersons();
+        super.getConsole().yearsOfTheReignOfPersons();
     }
 }

@@ -16,6 +16,6 @@ public class PrintingListOfPersons extends Command {
 
     @Override
     public void execute() {
-        super.getConsole().PrintingListOfPersons();
+        super.getConsole().printingListOfPersons();
     }
 }

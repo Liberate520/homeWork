@@ -6,6 +6,7 @@ public class FTService {
 
     public FTService() {
         family = new FamilyTree<>();
+        family.getFamilyTree();
         this.fileHandler = new FileHandler();
         }
 
@@ -19,12 +20,20 @@ public class FTService {
     }
 
 
-    public String PrintingListOfPersons(){
+    public String printingListOfPersons(){
         return family.sortByBirthday();
     }
 
-    public String YearsOfTheReignOfPersons() {
+    public String yearsOfTheReignOfPersons() {
         return family.sortByYearOfReigh();
+    }
+
+    public String findSpouse(String name) {
+        return family.findSpouse(name);
+    }
+
+    public String getPersonByName(String name){
+        return family.getPersonByName(name);
     }
 
 }

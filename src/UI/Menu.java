@@ -16,7 +16,9 @@ public class Menu {
         System.out.println("\n\t---Menu---\n");
         commands.add(new Quit(console));
         commands.add(new PrintingListOfPersons(console));
+        commands.add(new GetPersonByName(console));
         commands.add(new YearsOfTheReignOfPersons(console));
+        commands.add(new FindSpouse(console));
         commands.add(new Load(console));
         commands.add(new Save(console));
 
@@ -28,7 +30,8 @@ public class Menu {
         }
 
         public String printMenu(){
-            StringBuilder strMenu = new StringBuilder();
+            StringBuilder strMenu = new StringBuilder("\n\t--- COMMAND  MENU ---\nEnter the command number ( 0 - ");
+            strMenu.append(commands.size()-1).append(" ):\n\n");
             for (int i = 0; i < commands.size(); i++) {
                 strMenu.append(i);
                 strMenu.append(": ");

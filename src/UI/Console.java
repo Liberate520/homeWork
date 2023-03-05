@@ -1,22 +1,22 @@
 package src.UI;
 
-import src.FamilyTree.FTService;
 import src.Presenter.Presenter;
 
 import java.util.Scanner;
 
 public class Console implements View{
 
-    private Scanner scanner;
+    private Scanner scanner= new Scanner(System.in);
     private Presenter presenter;
-    private FTService ftService;
     private Menu menu;
     private boolean work;
+
+    public Console() {
+    }
 
     @Override
     public void start() {
         System.out.println("\nStart");
-        Scanner scanner = new Scanner(System.in);
         menu = new Menu(this);
         work = true;
         while(work){
@@ -28,10 +28,11 @@ public class Console implements View{
                 System.out.println("что-то пошло не так");
             }
         }
-
-
+        scanner.close();
     }
+
     public void comandList(){
+        System.out.println();
         System.out.println(menu.printMenu());
     }
 
@@ -43,12 +44,22 @@ public class Console implements View{
         work = false;
     }
 
-    public void PrintingListOfPersons(){
-        presenter.PrintingListOfPersons();
+    public void printingListOfPersons(){
+        presenter.printingListOfPersons();
     }
 
-    public void YearsOfTheReignOfPersons(){
-        presenter.YearsOfTheReignOfPersons();
+    public void yearsOfTheReignOfPersons(){
+        presenter.yearsOfTheReignOfPersons();
+    }
+
+    public void getPersonByName(){
+        print("Enter the Person's name: \n");
+        presenter.getPersonByName(scanner.nextLine());
+    }
+
+    public void findSpouse(){
+        print("Enter the Person's name: \n");
+        presenter.findSpouse(scanner.nextLine());
     }
 
     @Override
@@ -66,4 +77,5 @@ public class Console implements View{
     public void save() {
         presenter.save();
     }
+
 }

@@ -68,13 +68,14 @@ public class Main {
 //           System.out.println(human);
 //       }
 
-//        System.out.println(family.sortByBirthday());
-//        System.out.println(family.sortByYearOfReigh());
+        System.out.println(family.sortByBirthday());
+        System.out.println(family.sortByYearOfReigh());
 
         View view = new Console();
         FTService ftService = new FTService();
         new Presenter(view,ftService);
         view.start();
+
 
 
     }
