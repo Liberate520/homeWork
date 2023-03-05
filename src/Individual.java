@@ -37,7 +37,7 @@ public class Individual {
 
     
     public String getInfo() {
-        return String.format("Имя: %s; Пол: %s; Год рождения: %d; Отец: %s; Мать: %s.", name, gender, yearofbirth, getFatherInfo(), getMotherInfo());
+        return String.format("Имя: %s; Пол: %s; Год рождения: %d; Отец: %s; Мать: %s.", name, gender, yearofbirth, getFather(), getMother());
     }   
 
     
