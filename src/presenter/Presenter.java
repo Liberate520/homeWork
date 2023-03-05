@@ -67,9 +67,9 @@ public class Presenter
         return result;
     }
 
-    public String saveTree() throws IOException {
+    public String saveTreeToFile() throws IOException {
         String result = "";
-        result = dbProceed.saveTree();
+        result = dbProceed.saveTreeToFile();
         return result;
     }
 
@@ -82,10 +82,5 @@ public class Presenter
         String result = "";
         result = dbProceed.sortTreeByDate();
         return result;
-    }
-
-    public void onClick(String stringMenuNumber) throws IOException, ClassNotFoundException {
-        String answer = dbProceed.get(stringMenuNumber);
-        view.print(answer);
     }
 }

@@ -4,6 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Purpose of the class:
+        work with MODEL = DB for FamilyTree:
+            get data from external file via INTERFACE
+            save DATA
+            print DATA to string
+            add DATA
+            search DATA
+            sort DATA
+
+ */
+
 public class DbProceed implements Db
 {
     private static final String EMPTY_ERROR = "Ошибка ввода!\r";
@@ -11,16 +23,18 @@ public class DbProceed implements Db
 
     private FamilyTree<Person> familyTree;
 
-    private api.FileHandler fileHandler;
+    //private api.FileHandler fileHandler;
+
+    private Connection connection;
 
     public DbProceed() throws IOException, ClassNotFoundException
     {
-        fileHandler = new api.FileHandler();
         familyTree = new FamilyTree<>();
-        familyTree = (api.FamilyTree)fileHandler.read();
+        Connection connection = new api.FileHandler();
+        familyTree = (api.FamilyTree)connection.read();
 
         //initData(familyTree);
-        //fileHandler.save(familyTree);
+        //connection.save(familyTree);
 
     }
 
@@ -111,8 +125,9 @@ public class DbProceed implements Db
         return result;
     }
 
-    public String saveTree() throws IOException {
-        String result = fileHandler.save(familyTree);
+    public String saveTreeToFile() throws IOException {
+        //String result = fileHandler.save(familyTree);
+        String result = connection.save(familyTree);
         return result;
     }
 
@@ -126,104 +141,6 @@ public class DbProceed implements Db
         String result = "Дерево отсортировано по датам рождения";
         familyTree.sortByDateOfBirth();
         return result;
-    }
-
-    public String get(String stringToParse) throws IOException, ClassNotFoundException
-    {
-
-        String answer = "";
-        if (stringToParse.equals(""))
-        {
-            return EMPTY_ERROR;
-        }
-
-        try
-        {
-            String[] args = stringToParse.split(" ");
-
-            menu = Integer.parseInt(args[0]);
-            switch(menu) {
-                case 1:
-                {
-                    if (args.length == 1)
-                    {
-                        answer = "\nВведите имя, например: Михаил Федорович\n> ";
-                    }
-                    else
-                    {
-                        //answer = familyTree.searchChildrenByFathersName(args[1] + " " + args[2]);
-                    }
-                    break;
-                }
-                case 2:
-                {
-                    answer = familyTree.printAll();
-                    break;
-                }
-                case 3:
-                {
-                    // Print using Iterator
-                    for (api.Person person: familyTree)
-                    {
-                        answer += person.toString();
-                    }
-                    answer += "\n";
-                    break;
-                }
-                case 4:
-                {
-                    familyTree.sortByName();
-                    fileHandler.save(familyTree);
-
-                    answer = "Отсортировано по имени!\n";
-                    break;
-                }
-                case 5:
-                {
-                    familyTree.sortByDateOfBirth();
-                    fileHandler.save(familyTree);
-
-                    answer = "Отсортировано по дате рождения!\n";
-                    break;
-                }
-                case 6:
-                {
-                    //fileHandler = new api.FileHandler();
-                    answer = fileHandler.save(familyTree);
-
-                    break;
-                }
-                case 7:
-                {
-                    initData(familyTree);
-                    fileHandler.save(familyTree);
-                    familyTree = (api.FamilyTree)fileHandler.read();
-
-                    answer = "Восстановление!\n";
-
-                    break;
-                }
-                default:
-                {
-                    answer = "Ошибка ввода!\n";
-                }
-            }
-
-            //String info = connection.getInfo(city);
-            //Weather weather = formatter.parse(info);
-            //String answer = weather.toString();
-
-            return answer;
-        }
-        catch (NullPointerException e)
-        {
-            return "Ошибка ввода!\r";
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return e.getMessage();
-        }
     }
 
     public /*static*/ void initData(FamilyTree familyTree)
@@ -336,7 +253,7 @@ public class DbProceed implements Db
                 1727,
                 6,
                 1725,
-                10727);
+                1727);
         person09.addSpouse(person08);
 
         familyTree.add(person01);

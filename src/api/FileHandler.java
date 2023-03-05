@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.io.*;
 //import
 
-public class FileHandler implements Writable, Serializable
-{
+public class FileHandler implements Writable, Serializable, Connection {
     public String save(Object object) throws IOException {
 
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("api.FamilyTree.out"));

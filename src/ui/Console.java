@@ -76,7 +76,7 @@ public class Console implements View
 
     public void consoleSaveTree() throws IOException {
         String answer = "";
-        answer = presenter.saveTree();
+        answer = presenter.saveTreeToFile();
         print(answer);
     }
 
@@ -191,21 +191,6 @@ public class Console implements View
                  mother
                 );
         print(answer);
-    }
-
-    private String scan() {
-        System.out.println("Введите номер меню:");
-        System.out.printf("\t0 выход из программы;\n");
-        System.out.printf("\t1 печать информации о детях представителя династии;\n");
-        System.out.printf("\t2 печать информации о всех представителях династии;\n");
-        System.out.printf("\t3 печать информации о всех представителях династии с помощью Iterable;\n");
-        System.out.printf("\t4 отсортировать династию по именам;\n");
-        System.out.printf("\t5 отсортировать династию по году рождения;\n");
-        System.out.printf("\t6 Сохранить информацию с помощью serialize;\n");
-        System.out.printf("\t7 Восстановить информацию с помощью serialize.\n");
-        System.out.printf("> ");
-
-        return scanner.nextLine();
     }
 
     public void print(String text) {

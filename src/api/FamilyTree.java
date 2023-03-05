@@ -11,7 +11,7 @@ import java.util.List;
 public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
 {
     private List<T> familyTree;// = new ArrayList<>();
-    private Writable writable;
+    //private Writable writable;
 
     public FamilyTree()
     {
