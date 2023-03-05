@@ -23,7 +23,7 @@ public class Main {
                 familyTree1.getByName("Анна")));
         familyTree1.addHuman(new Human("Софья", Gender.female, 2005));
 
-        View view = new Console();
+        View view = new Console(familyTree1);
         new Presenter(view);
         view.start();
 
@@ -40,9 +40,7 @@ public class Main {
         // familyTree1.save();
         // familyTree1.read();
 
-        for (Human human: familyTree1){
-        System.out.println(human.getInfo());
-        }
+        // 
 
         // System.out.println("Сортировка по имени: ");
 
@@ -57,7 +55,5 @@ public class Main {
         // for (Human human: familyTree1){
         // System.out.println(human.getInfo());
         // }
-
-
     }
 }
