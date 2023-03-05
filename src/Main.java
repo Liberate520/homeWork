@@ -1,9 +1,18 @@
 import java.io.IOException;
+import javax.swing.text.View;
+
+import presenter.Presenter;
+import ui.Console;
+import ui.*;
 
 public class Main {
     public static void main(String[] args) throws SecurityException, IOException {
         
-        
+        View view = new Console();
+        new Presenter(view);
+        view.start();
+
+        /* 
         System.out.println("Задание 1");
         // объект — это экземпляр (конкретный Хуман) с собственным состоянием свойств из класса (переменные и методы) - атрибутами
         // создаем новый экземпляр Хумана
@@ -51,6 +60,6 @@ public class Main {
             System.out.println(human.getInfo());
         }
 
-        
+        */
     }    
 }
