@@ -3,7 +3,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 // класс ("чертеж" Хумана) - описание того, какими свойствами и поведением (переменные и функции=методы) будет обладать объект
-public class Human implements Serializable, Comparable<Human> {
+public class Human extends UserParametrized implements Serializable, Comparable<Human> {
     // объявление полей (переменные)
     private String name;
     private String gender;
@@ -16,6 +16,7 @@ public class Human implements Serializable, Comparable<Human> {
     public Human(String name, String gender) {
         this(name, gender, null, null);
     }
+
     // метод конструктор
     public Human(String name, String gender, Human father, Human mother) {
         this.name = name;
@@ -25,8 +26,11 @@ public class Human implements Serializable, Comparable<Human> {
         children = new ArrayList<>();
     }
 
+
+
+
     public void addChild(Human child) {
-        children.add(child);
+        this.children.add(child);
     }
 
     // метод выдачи имени

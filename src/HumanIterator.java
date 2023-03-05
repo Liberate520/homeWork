@@ -2,12 +2,12 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<T extends UserParametrized> implements Iterator<T> {
 
     private int index;
-    private List<Human> listHuman;
+    private List<T> listHuman;
 
-    public HumanIterator(List<Human> listHuman) {
+    public HumanIterator(List<T> listHuman) {
         this.listHuman = listHuman;
     }
 
@@ -18,7 +18,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return listHuman.get(index++);
     }
     

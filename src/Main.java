@@ -7,15 +7,15 @@ public class Main {
         System.out.println("Задание 1");
         // объект — это экземпляр (конкретный Хуман) с собственным состоянием свойств из класса (переменные и методы) - атрибутами
         // создаем новый экземпляр Хумана
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         tree.add(new Human("Иван 1", "мужчина", null, null));
         tree.add(new Human("Мария 1", "женщина", null, null));
-        tree.add(new Human("Иван 2", "мужчина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
-        tree.add(new Human("Юлия 1", "женщина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
-        tree.add(new Human("Егор 1", "мужчина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
-        tree.add(new Human("Елизавета 1", "женщина", null, null));
-        tree.add(new Human("Иван 3", "мужчина", tree.getByName("Иван 2"), tree.getByName("Елизавета 1")));
+        // tree.add(new Human("Иван 2", "мужчина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
+        // tree.add(new Human("Юлия 1", "женщина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
+        // tree.add(new Human("Егор 1", "мужчина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
+        // tree.add(new Human("Елизавета 1", "женщина", null, null));
+        // tree.add(new Human("Иван 3", "мужчина", tree.getByName("Иван 2"), tree.getByName("Елизавета 1")));
 
         System.out.println(tree);
         System.out.println("+++++++++");

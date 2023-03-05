@@ -1,21 +1,20 @@
 import java.util.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
 
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> listHuman;
+public class FamilyTree<T extends UserParametrized> implements Serializable, Iterable<T> {   //<T> == <UserParametrized> == Human
+    private List<T> listHuman;
+    // T t;
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> listHuman) {
+    public FamilyTree(List<T> listHuman) {
         this.listHuman = listHuman;
     }
 
-    public boolean add(Human human) {
+    public boolean add(T human) {
         if (human == null) {
             return false;
         }
@@ -33,9 +32,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    public Human getByName(String name) {
-        for (Human human : listHuman) {
-            if (human.getName() == name) {
+    public T getByName(String name) {
+        for (T human : listHuman) {
+            if (human.getName().equals(name)) {
                 return human;
             }
         }
@@ -44,7 +43,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public String getInfoTree() {
         StringBuilder sb = new StringBuilder();
-        for (Human human : listHuman) {
+        for (T human : listHuman) {
             sb.append(human.getInfo());
         }
         return sb.toString();
@@ -52,18 +51,18 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     // создаем Итератор, но нужен отдельный класс, в котором интерфейс Итератор, в нем - что перебрать, добавляем методы hasNext+next
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(listHuman);  // или return listHuman.iterator();  - стандартный для Листа итератор
+    public Iterator<T> iterator() {
+        return new HumanIterator<T>(listHuman);  // или return listHuman.iterator();  - стандартный для Листа итератор
     }
 
     public void sortByName() {
         // Collection.sort(listHuman, new HumanComparatorByName());  // не работает Коллекция??
-        listHuman.sort(new HumanComparatorByName());
+        listHuman.sort(new HumanComparatorByName<T>());
     }
 
     public void sortBySizeChildren() {
         // Collection.sort(listHuman, new HumanComparatorBySizeChildren()); // не работает Коллекция??
-        listHuman.sort(new HumanComparatorBySizeChildren());
+        listHuman.sort(new HumanComparatorBySizeChildren<T>());
 
     }
 }
