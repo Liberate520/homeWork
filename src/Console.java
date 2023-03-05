@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Console implements View {
     private Scanner scanner;
     private Presenter presenter;
-    private FamilyTree familyTree1;
+    private FamilyTree <Human> familyTree1;
     private Human human;
     private Menu menu;
     private boolean work;   
@@ -14,11 +14,9 @@ public class Console implements View {
     public Console() 
     {
         scanner = new Scanner(System.in);
-        this.familyTree1=familyTree1;
+        FamilyTree <Human> familyTree1 = new FamilyTree<>();
+
     }   
-
-
-
 
     @Override
     public void setPresenter(Presenter presenter) {
@@ -42,8 +40,7 @@ public class Console implements View {
         }
     }
 
-    
-    private boolean checkInput(String text){
+        private boolean checkInput(String text){
         return text.matches("[0-9]+");
     }
 
@@ -63,17 +60,34 @@ public class Console implements View {
     public void addHuman(){
         System.out.println("Введите Имя");
         String name2 = scanner.nextLine();
+
         System.out.println("Введите пол (male или female): ");
         String gender2 = scanner.nextLine();
+
         System.out.println("Введите год рождения");
         Integer yearbirth2 = scanner.nextInt();
+
         System.out.println("Введите Имя отца");
         String father2 = scanner.nextLine();
-        System.out.println("Введите Имя матери");
+        Human father = familyTree1.search(father2);// если нет имени то вернуть пусто или создать Human father
+        System.out.println(father);
+        System.out.println("Mothers name: ");
         String mother2 = scanner.nextLine();
+        Human mother = familyTree1.search(mother2);
         human = new Human(name2, gender2, yearbirth2, father2, mother2);
         presenter.addHuman(human);
     }
+
+
+
+
+
+
+
+
+
+
+
 
     // public void addHuman(){
     //     System.out.println("Введите Имя");
