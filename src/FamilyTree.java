@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<T extends Individual> implements Serializable, Iterable<T> {
+    private Presenter presenter;
     private List<T> humans;
     private Writable fileHandler;
 
@@ -14,6 +15,11 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
 
     private FamilyTree(List<T> humans) {
         this.humans = humans;
+    }
+
+    
+    public void setPresenter(Presenter presenter){
+        this.presenter = presenter;
     }
 
     public String getChildrenToString(T human) {
@@ -72,9 +78,14 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
     
     public T search(String sName) {
         T find = null;
-        for (T human: humans) {
-            if (human.getName().contains(sName)) {
-                find = human;
+        if(sName.isEmpty() || sName.equalsIgnoreCase("no")){
+            find = null;
+        }
+        else{
+            for (T human: humans) {
+                if (human.getName().contains(sName)) {
+                    find = human;
+                }
             }
         }
         return find;
