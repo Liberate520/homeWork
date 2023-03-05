@@ -7,7 +7,7 @@ public class AddHuman extends Command{
 
     @Override
     public String description() {
-        return "Добавить новую запись";
+        return "Добавить человека";
     }
 
     @Override
