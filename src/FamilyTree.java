@@ -43,6 +43,7 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
     }
 
     public boolean addHuman(T human) {
+
         if (human == null) {
             return false;
         }
@@ -66,6 +67,17 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
             }
         }
         return null;
+    }
+
+    
+    public T search(String sName) {
+        T find = null;
+        for (T human: humans) {
+            if (human.getName().contains(sName)) {
+                find = human;
+            }
+        }
+        return find;
     }
 
     public void save() throws FileNotFoundException {
