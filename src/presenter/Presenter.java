@@ -21,10 +21,6 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void addRecord(String nextLine) {
-        System.out.println("В разработке");
-    }
-
     public void wholeList() {
         familyTree.List();
         System.out.println();
@@ -40,12 +36,8 @@ public class Presenter {
     }
     public void save() throws IOException {
         handler.save(familyTree);
-        System.out.println("Список успешно сохранен!");
-        System.out.println();
     }
     public void read() throws IOException, ClassNotFoundException {
-        System.out.println("Список из файла");
-        System.out.println();
         handler.read();
         System.out.println();
     }

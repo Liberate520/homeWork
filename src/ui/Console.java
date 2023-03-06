@@ -44,12 +44,10 @@ public class Console implements View {
     public void finish() {
         work = false;
     }
-    public void addRecord() {
-        System.out.println("Добавление новой записи в древо: ");
-        presenter.addRecord(scanner.nextLine());
-    }
+
 
     public void wholeList() {
+        System.out.println("Генеалогическое древо Романовых: ");
         presenter.wholeList();
     }
     public void search() {
@@ -61,8 +59,12 @@ public class Console implements View {
     }
     public void save() throws IOException {
         presenter.save();
+        System.out.println("Список успешно сохранен!");
+        System.out.println();
     }
     public void read() throws IOException, ClassNotFoundException {
+        System.out.println("Список из файла");
         presenter.read();
+        System.out.println();
     }
 }

@@ -52,9 +52,6 @@ public class FamilyTree<T extends Person> implements Iterable<T>, Serializable {
                 .forEach(System.out::println);
     }
     public void List() {
-        System.out.println();
-        System.out.println("Генеалогическое древо Романовых: ");
-
         for (T p : humanList) {
             System.out.println(p);
         }
