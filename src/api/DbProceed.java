@@ -27,6 +27,10 @@ public class DbProceed implements Db
 
     private Connection connection;
 
+    private final Integer AddPersonFieldsNumber = 13;
+    private static Integer s_addFieldCounter = 0;
+    static List s_fieldsList = new ArrayList<>();
+
     public DbProceed() throws IOException, ClassNotFoundException
     {
         familyTree = new FamilyTree<>();
@@ -43,6 +47,85 @@ public class DbProceed implements Db
 
         String result = "";
         result = familyTree.printAll();
+        return result;
+    }
+
+    public String addPersonByFields(List fieldsList)
+    {
+        String result = "";
+
+        result = addPerson(
+                (Boolean)(fieldsList.get(0)),
+                (String)fieldsList.get(1),
+                (String)fieldsList.get(2),
+                (String)fieldsList.get(3),
+                (Gender)fieldsList.get(4),
+                Integer.parseInt((String)fieldsList.get(5)),
+                Integer.parseInt((String)fieldsList.get(6)),
+                Integer.parseInt((String)fieldsList.get(7)),
+                Integer.parseInt((String)fieldsList.get(8)),
+                Integer.parseInt((String)fieldsList.get(9)),
+                (String)fieldsList.get(10),
+                (String)fieldsList.get(11),
+                (String)fieldsList.get(12));
+
+        return result;
+    }
+
+    public AddFieldResult addFieldsOfPerson(Object field)
+    {
+        AddFieldResult result = AddFieldResult.Error;
+
+        /*
+        * TBD: Add TRIES and range checks for each field processing
+        * */
+
+        if (s_addFieldCounter == 0) // Start of command
+        {
+            s_fieldsList.clear();
+            boolean res = false;
+            if (field.equals("1"))
+            {
+                res = true;
+            }
+            s_fieldsList.add(res);
+
+            s_addFieldCounter++;
+
+            result = AddFieldResult.Ok;
+        }
+        else if (s_addFieldCounter<(AddPersonFieldsNumber-1))
+        {
+            //s_fieldsList.add(field);
+
+            if (s_addFieldCounter == 4) //Gender
+            {
+                Gender res = Gender.Male;
+                if (!field.equals("М"))
+                {
+                    res = Gender.Female;
+                }
+                s_fieldsList.add(res);
+            }
+            else
+            {
+                s_fieldsList.add(field);
+            }
+
+            s_addFieldCounter++;
+
+            result = AddFieldResult.Ok;
+        }
+        else if (s_addFieldCounter==(AddPersonFieldsNumber-1))
+        {
+            s_fieldsList.add(field);
+            addPersonByFields(s_fieldsList);
+
+            s_addFieldCounter = 0;
+
+            result = AddFieldResult.Finish;
+        }
+
         return result;
     }
 

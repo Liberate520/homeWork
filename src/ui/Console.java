@@ -1,9 +1,13 @@
 package ui;
 
+import api.AddFieldResult;
 import api.Gender;
 import presenter.Presenter;
+import ui.commands.Option;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static api.Gender.Female;
@@ -102,7 +106,47 @@ public class Console implements View
         print(answer);
     }
 
-    public void consoleAddPerson()
+    public void consoleAddPerson()//consoleAddPersonByName()
+    {
+        List<String> infoString = new ArrayList<>();
+        infoString.add("Введите 0/1 - являлся ли человек правящим монархом: \n> ");
+        infoString.add("Введите Имя: \n> ");
+        infoString.add("Введите Отчество: \n> ");
+        infoString.add("Введите Фамилию: \n> ");
+        infoString.add("Введите пол (М/Ж): \n> ");
+        infoString.add("Введите год рождения: \n> ");
+        infoString.add("Введите год смерти: \n> ");
+        infoString.add("Введите порядок правления: \n> ");
+        infoString.add("Введите год начала правления: \n> ");
+        infoString.add("Введите год окончания правления: \n> ");
+        infoString.add("Введите имя супруга/супруги: \n> ");
+        infoString.add("Введите имя отца: \n> ");
+        infoString.add("Введите имя матери: \n> ");
+
+        api.AddFieldResult result = api.AddFieldResult.Ok;
+        int i = 0;
+        int repeatCounter = 0;
+        String line = "";
+        while ((result != api.AddFieldResult.Finish) & (repeatCounter<3))
+        {
+            System.out.printf(infoString.get(i));
+            line = scanner.nextLine();
+
+            result = (api.AddFieldResult)presenter.addFieldsOfPerson((Object) line);
+
+            if (result == api.AddFieldResult.Error)
+            {
+                repeatCounter++;
+            }
+            else if (result == AddFieldResult.Ok)
+            {
+                repeatCounter = 0;
+                i++;
+            }
+        }
+    }
+
+    public void consoleAddPerson1()
     {
         System.out.printf("Введите 0/1 - являлся ли человек правящим монархом: \n> ");
         Integer indicator = Integer.parseInt(scanner.nextLine());

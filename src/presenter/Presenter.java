@@ -1,5 +1,6 @@
 package presenter;
 
+import api.AddFieldResult;
 import api.DbProceed;
 import api.Gender;
 import ui.View;
@@ -17,11 +18,18 @@ public class Presenter
         view.setPresenter(this);
     }
 
+    static Integer addFieldCounter = 0;
+
     public String printTree()
     {
         String result = "";
         result = dbProceed.printTree();
         return result;
+    }
+
+    public AddFieldResult addFieldsOfPerson(Object field)
+    {
+        return dbProceed.addFieldsOfPerson(field);
     }
 
     public String addPerson(

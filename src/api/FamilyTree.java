@@ -10,8 +10,7 @@ import java.util.List;
 
 public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
 {
-    private List<T> familyTree;// = new ArrayList<>();
-    //private Writable writable;
+    private List<T> familyTree;
 
     public FamilyTree()
     {
