@@ -1,34 +1,49 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable, Comparable<Human>{
+    private String lastname;
     private String firstname;
-    private Human mother;
+    private String patronymic;
+    private GenderType sex;
     private Human father;
-    private Sex sex;
+    private Human mother;
     private List<Human> children;
 
-
-    public Human(String firstname, Sex sex) {
-        this(firstname, sex, null, null);
+    public Human (String name, String surname, String patronymic, GenderType sex){
+        this(name, surname, patronymic, sex, null, null);
     }
 
-    public Human(String firstname, Sex sex, Human father, Human mother) {
+    public Human(String firstname, String lastname, String patronymic, GenderType sex, Human father, Human mother )
+    {
+        this.lastname = lastname;
         this.firstname = firstname;
+        this.patronymic = patronymic;
         this.sex = sex;
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
     }
 
-    public void addChild(Human child) {
-        if (!children.contains(child)) {
+    public boolean addChild(Human child){
+        if(!children.contains(child)){
             children.add(child);
+            return true;
         }
+        return false;
     }
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public GenderType getSex() {
+        return sex;
     }
 
     public Human getFather() {
@@ -38,61 +53,60 @@ public class Human {
     public Human getMother() {
         return mother;
     }
-
-    public Sex getSex() {
-        return sex;
-    }
-
     public List<Human> getChildren() {
         return children;
     }
+    public void setFather(Human father){this.father = father;}
+    public void setMother(Human mother){this.mother = mother;}
 
-    public void setFather(Human father) {
-        this.father = father;
+
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: ");
+        sb.append(firstname);
+        sb.append(", ");
+        sb.append("фамилия: ");
+        sb.append(lastname);
+        sb.append(", ");
+        sb.append("отчество: ");
+        sb.append(patronymic);
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public String getFamilyInfo() {
-        StringBuilder res;
-        res = new StringBuilder();
-        res.append("Имя: ").append(firstname).append(". ")
-                .append(getMotherInfo()).append(". ")
-                .append(getFatherInfo()).append(". ")
-                .append(getChildrenInfo()).append(". ");
-        return res.toString();
-    }
-
-    private String getMotherInfo() {
-        String info = "Мать: ";
-        if (mother != null) {
-            info += mother.getFirstname();
+    private String getMotherInfo(){
+        String res = "мать: ";
+        if (mother != null){
+            res += mother.getFirstname();
         } else {
-            info += "неизвестна";
+            res += "неизвестна";
         }
-        return info;
+        return res;
     }
 
-    private String getFatherInfo() {
-        String info = "Отец: ";
-        if (father != null) {
-            info += father.getFirstname();
+    private String getFatherInfo(){
+        String res = "отец: ";
+        if (father != null){
+            res +=father.getFirstname();
         } else {
-            info += "неизвестен";
+            res += "неизвестен";
         }
-        return info;
+        return res;
     }
 
-    private String getChildrenInfo() {
-        StringBuilder res;
-        res = new StringBuilder();
-        res.append("Дети: ");
-        if (children.size() != 0) {
+    private String getChildrenInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append("дети: ");
+        if (children.size() != 0){
             res.append(children.get(0).getFirstname());
-            for (Human child : children) {
-                res.append(", ").append(child.getFirstname());
+            for (int i = 1; i < children.size(); i++){
+                res.append(", ");
+                res.append(children.get(i).getFirstname());
             }
         } else {
             res.append("отсутствуют");
@@ -100,14 +114,27 @@ public class Human {
         return res.toString();
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj) {
+
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
             return true;
         }
-        if (!(obj instanceof Human)) {
+        if (!(obj instanceof Human)){
             return false;
         }
         Human human = (Human) obj;
         return human.getFirstname().equals(getFirstname());
     }
+
+    @Override
+    public int compareTo(Human o) {
+        return firstname.compareTo(o.getFirstname());
+    }
+
+
+
+
+
 }
