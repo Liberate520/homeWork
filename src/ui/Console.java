@@ -1,6 +1,5 @@
 package ui;
 
-import java.io.IOException;
 import java.util.Scanner;
 import presenter.Presenter;
 import ui.allMenuList.FileHandlerMenu;
@@ -20,18 +19,13 @@ public class Console implements View{
     }
 
     @Override
-    public void print(String text) {
-        System.out.println(text);
-    }
-
-    @Override
     public void start() {
         iScanner = new Scanner(System.in, "Cp866");
         menu = new Menu(this);
         greeting();
         work = true;
         while(work) {
-            Menu();
+            menu();
             String command = iScanner.next();
             if (checkInput(command)) { menu.execute(Integer.parseInt(command)); }
         }
@@ -50,7 +44,7 @@ public class Console implements View{
         return false;
     }
 
-    public void greeting() {
+    private void greeting() {
         System.out.println("    *****                                                     *****\n" +
                            "  ****|****                                                 ****|****\n" +
                            " ***\\*|*/***   Добро пожаловать в генеалогическое древо!   ***\\*|*/***\n" +
@@ -59,7 +53,8 @@ public class Console implements View{
                            "     _|_                                                       _|_\n");
     }
 
-    private void Menu() {
+    private void menu() {
+        System.out.println();
         System.out.println("==========  Меню  ==========");
         System.out.print(menu.printMenu());
         System.out.println("============================");
@@ -73,7 +68,7 @@ public class Console implements View{
         returnMainMenu();
     }
 
-    public void loadTree() throws ClassNotFoundException, IOException { 
+    public void loadTree() { 
         System.out.println(presenter.loadTree()); 
         returnMainMenu();
     }
@@ -83,16 +78,44 @@ public class Console implements View{
 
     // begin MainMenu
     public void addTreeElement() {
-        StringBuilder stbuild = new StringBuilder();
         System.out.print("\nЗаполните поля:\n");
-        System.out.print("\tИмя - "); stbuild.append(iScanner.next());
-        System.out.print("\tПол - "); stbuild.append(iScanner.next());
-        System.out.print("\tГод рождения - "); stbuild.append(iScanner.next());
-        System.out.print("\tИмя отца (если не известно 'нет') - "); stbuild.append(iScanner.next());
-        System.out.print("\tИмя матери (если не известно 'нет') - "); stbuild.append(iScanner.next());
-        System.out.println(presenter.addTreeElement(stbuild));
+
+        System.out.print("\tИмя - "); String name = iScanner.next();
+        while (!validLetter(name)) { 
+            System.out.print("Некорректное имя. Попробуйте ещё раз.\n\tИмя - "); name = iScanner.next(); 
+        }
+
+        System.out.print("\tПол - "); String sex = iScanner.next();
+        while (!validLetter(sex)) { 
+            System.out.print("Некорректный тип пола. Попробуйте ещё раз.\n\tПол - "); sex = iScanner.next(); 
+        }
+
+        System.out.print("\tГод рождения - "); 
+        while (!iScanner.hasNextInt()) {
+            System.out.print("Нужно указать год рождения. Попробуйте ещё раз.\n\tГод рождения - "); 
+        }
+        Integer yearOfBithd = iScanner.nextInt();
+
+        System.out.print("\tИмя отца (если не известно 'нет') - "); String father = iScanner.next();
+        while (!validLetter(father)) { 
+            System.out.print("Некорректное имя. Попробуйте ещё раз.\n\tИмя отца (если не известно 'нет') - "); father = iScanner.next(); 
+        }
+
+        System.out.print("\tИмя матери (если не известно 'нет') - "); String mother = iScanner.next();
+        while (!validLetter(mother)) { 
+            System.out.print("Некорректное имя. Попробуйте ещё раз.\n\tИмя матери (если не известно 'нет') - "); mother = iScanner.next(); 
+        }
+        System.out.println(presenter.addTreeElement(name, sex, yearOfBithd, father, mother));
     }
 
+    private boolean validLetter(String text) {
+        text.strip();
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isLetter(text.charAt(i))) return false;
+        }
+        return true;
+    }
+    
     public void showTree() { System.out.print(presenter.showTree()); }
 
     public void saveTree() { System.out.print(presenter.saveTree()); }

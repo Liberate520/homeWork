@@ -1,7 +1,5 @@
 package presenter;
 
-import java.io.IOException;
-
 import model.project.FamilyTree;
 import model.project.Human;
 import ui.View;
@@ -9,45 +7,52 @@ import ui.View;
 public class Presenter {
     private View view;
     private FamilyTree<Human> familyTree;
+    private String nameToSearch;
 
     public Presenter(View view) {
         this.view = view;
         view.setPresenter(this);
-        familyTree = new FamilyTree<>();
+        this.familyTree = new FamilyTree<>();
     }
 
-    public String createNewTree() { return "Дерево создано."; }
+    public String createNewTree() {
+        familyTree = new FamilyTree<>();
+        return "Дерево создано."; 
+    }
 
-    public String loadTree() throws ClassNotFoundException, IOException {
-        familyTree = familyTree.open();
-        if (familyTree == null) return "Ошибка";
+    public String loadTree() {
+        this.familyTree = (FamilyTree<Human>) familyTree.loadTree();
+        if (familyTree == null) return "Ошибка загрузки.";
         else return "Дерево загружено.";
     }
 
-    public String addTreeElement(StringBuilder next) {
-
+    public String addTreeElement(String name, String sex, Integer yearOfbihtd, String father, String mother) {    
+        familyTree.add(new Human(name, sex, yearOfbihtd, familyTree.getHuman(father), familyTree.getHuman(mother)));
         return "Успешно добавлен в древо.";
     }
 
     public String showTree() { return familyTree.getTree(); }
 
-    public String findTreeElement(String nextLine) { return familyTree.getInfoHuman(nextLine); }
+    public String findTreeElement(String nextLine) { 
+        this.nameToSearch = nextLine;
+        return familyTree.getInfoHuman(nameToSearch); 
+    }
 
     public String saveTree() {
-        familyTree.save(familyTree);
+        familyTree.saveTree(familyTree);
         return "Дерево успешно сохранено.";
     }
 
     public String showMother() {
-        return familyTree.getInfoMother(null);
+        return familyTree.getInfoMother(nameToSearch);
     }
 
     public String showChildrens() {
-        return familyTree.getInfoChildren(null);
+        return familyTree.getInfoChildren(nameToSearch);
     }
 
     public String showFather() {
-        return familyTree.getInfoFather(null);
+        return familyTree.getInfoFather(nameToSearch);
     }
 
     public String sortByName() {
@@ -61,9 +66,7 @@ public class Presenter {
     }
 
     public String formatToTxt(String file_name) {
-        familyTree.save(file_name);
+        familyTree.saveTo(familyTree, file_name);
         return "Сохранено.";
     }
-
-    
 }

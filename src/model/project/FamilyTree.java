@@ -1,29 +1,30 @@
 package model.project;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import model.fileProcessing.FileHandler;
 
 public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
     private Integer generation;
     private HashMap<Integer, String> humans_index_by_generation;
     private ArrayList<T> humans_list;
+    private FileHandler<T> fileHandler;
 
     public FamilyTree(Integer generation, HashMap<Integer, String> humans_index_by_generation, ArrayList<T> humans_list) {
         this.generation = generation;
         this.humans_index_by_generation = humans_index_by_generation;
         this.humans_list = humans_list;
+        this.fileHandler = new FileHandler<>();
     }
 
     public FamilyTree() {
         this.generation = 1;
         this.humans_index_by_generation = new HashMap<>();
         this.humans_list = new ArrayList<>();
+        this.fileHandler = new FileHandler<>();
     }
 
     public Integer getGeneration() {
@@ -112,14 +113,16 @@ public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
         return getInfoHuman(getHuman(name_human).getFather().getName());
     }
 
-    public void save(FamilyTree<T> familytree) {
-        FileHandler<T> file_handler = new FileHandler<>();
-        file_handler.saveTree(familytree);
+    public void saveTree(FamilyTree<T> familyTree) {
+        fileHandler.saveTree(familyTree);
     }
 
-    public FamilyTree<T> open() throws ClassNotFoundException, IOException {
-        FileHandler<T> file_handler = new FileHandler<>();
-        return file_handler.loadTree();
+    public FamilyTree<T> loadTree() {
+        return fileHandler.loadTree();
+    }
+
+    public void saveTo(FamilyTree<T> familyTree, String fileName) {
+        fileHandler.write(familyTree, fileName);
     }
 
     public void sortByName() {

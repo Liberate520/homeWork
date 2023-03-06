@@ -11,7 +11,7 @@ public class Human extends User{
     private Human mother;
     private List<Human> children;
     
-    public Human(String name, String sex, Integer year_of_birth, User father, User mother) {
+    public Human(String name, String sex, Integer year_of_birth, Human father, Human mother) {
         super(name, sex, year_of_birth, father, mother);
     }
     

@@ -1,7 +1,5 @@
 package ui.commands.commandsStartMenu;
 
-import java.io.IOException;
-
 import ui.Console;
 import ui.commands.Option;
 
@@ -16,7 +14,7 @@ public class LoadTree extends Option{
     }
 
     @Override
-    public void execute() throws ClassNotFoundException, IOException {
+    public void execute() {
         getConsole().loadTree();
     }
 }
