@@ -11,8 +11,14 @@ public class Presenter {
 
     }
 
-    public boolean add(String name, String gender, Integer birthYear, String fatherName, String motherName) {       
-        return familyTree1.addHuman(human);
+    public boolean add(String name, String gender, Integer birthYear, String fatherName, String motherName) { 
+        Gender enumGender;
+        if(gender.equalsIgnoreCase("m")){
+            enumGender = Gender.male;
+        } else {
+            enumGender = Gender.female;
+        }           
+        return familyTree1.addHuman(new Human(name, enumGender, birthYear, familyTree1.getByName(fatherName), familyTree1.getByName(motherName)));
     }
 }
 
