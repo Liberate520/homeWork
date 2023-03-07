@@ -58,31 +58,46 @@ public class Console implements View {
         work = false;
     }
 
+
+    public Gender detectGender(String answer){
+        Gender gender;
+        if(answer.contains("w")){
+            gender = Gender.female;
+        } else {
+            gender = Gender.male;
+        }
+        return gender;
+    }
+
+
+
     public void add(){
         System.out.println("Введите Имя");
         String name2 = scanner.nextLine();
 
         System.out.println("Введите пол (male или female): ");
-        String gender2 = scanner.nextLine();
+        Gender gender2 = detectGender(scanner.nextLine());
+
 
         System.out.println("Введите год рождения");
         Integer yearbirth2 = scanner.nextInt();
 
         System.out.println("Введите Имя матери: ");
         String mother2 = scanner.nextLine();
+
         // Human mother = familyTree1.search(mother2);
 
 
-        System.out.println("Введите Имя отца");
+        System.out.println("Введите Имя отца: ");
         String father2 = scanner.nextLine();   
 
         // Human father = familyTree1.search(father2);// если нет имени то вернуть пусто или создать Human father
         // System.out.println(father);
 
-    
-        Human human = new Human(name2, gender2, yearbirth2, father2, mother2);
-        System.out.println(human.getInfo());        
-        presenter.add(human);
+                          
+        presenter.add(new Human(name2, gender2, yearbirth2, father2, mother2)); 
+        System.out.println(human.getInfo());
+       
     }
 
 
