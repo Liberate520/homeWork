@@ -76,7 +76,8 @@ public class Console implements View {
         String name2 = scanner.nextLine();
 
         System.out.println("Введите пол (male или female): ");
-        Gender gender2 = detectGender(scanner.nextLine());
+        // Gender gender2 = detectGender(scanner.nextLine());
+        // String gender2 = scanner.nextLine();
 
 
         System.out.println("Введите год рождения");
