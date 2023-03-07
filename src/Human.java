@@ -10,6 +10,7 @@ public class Human extends Individual implements Serializable, Comparable<Human>
     private Human mother;
     private List<Human> children;
     private Presenter presenter;
+    private Console console;
 
     public Human(String name, Gender gender, Integer yearofbirth, Human father, Human mother) {
         this.name = name;
