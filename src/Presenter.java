@@ -6,16 +6,15 @@ public class Presenter {
     FamilyTree <Human> familyTree1;
 
     public Presenter(View view) {
-        this.view = view;
-        this.familyTree1=familyTree1;       
-        view.setPresenter(this);        
+        this.view = view; 
+        view.setPresenter(this);
 
     }
 
     public void add(Human human) {
-        this.human=human;
+        // this.human=human;
         familyTree1.addHuman(human);
-        System.out.println("презентер работает");
+        System.out.println(human);
     }
 }
 
