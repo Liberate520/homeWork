@@ -6,8 +6,10 @@ import java.io.Serializable;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-       
+    public static void main(String[] args) throws IOException, ClassNotFoundException {            
+
+        View view = new Console();
+        new Presenter(view);
         FamilyTree<Human> familyTree1 = new FamilyTree<>();
         
         familyTree1.addHuman(new Human("Иван", Gender.male, 1950));
@@ -22,9 +24,6 @@ public class Main {
         familyTree1.addHuman(new Human("Николай", Gender.male, 1999, familyTree1.getByName("Александр"),
                 familyTree1.getByName("Анна")));
         familyTree1.addHuman(new Human("Софья", Gender.female, 2005));
-
-        View view = new Console(familyTree1);
-        new Presenter(view);
         view.start();
 
 
