@@ -98,7 +98,7 @@ public class Console implements View {
         System.out.println("Enter name of a child: ");
         String name = scanner.nextLine();
 
-System.out.println("Enter gender: ");
+System.out.println("Enter gender (male, female): ");
         String gender = scanner.nextLine();
 
         System.out.println("Enter birthYear: ");
