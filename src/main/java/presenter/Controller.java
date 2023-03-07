@@ -1,57 +1,41 @@
 package presenter;
-import model.*;
+
+import model.ImportJsonPerson;
+import model.Person;
 import org.json.JSONException;
+import org.json.simple.parser.ParseException;
 import view.ConsoleTerminal;
 
+import java.io.IOException;
+
 /**
- * класс презентер, для взаимодействия view и model(family)
+ * класс презентер, для взаимодействия view и model(person)
  */
 public class Controller{
-    private Family fam = null;
     private ConsoleTerminal view;
 
     public Controller(ConsoleTerminal view){
         this.view = view;
         view.setController(this);
-        this.fam = newFamily();
     }
-    public Family getFam(){
-        return fam;
-    }
-    public void onClick() throws JSONException {
+    public void onClick() throws JSONException, IOException, ParseException {
         while (true) {
-            switch (view.printMenu("Меню: для печати нажмите - 1, для печати родителей нажмите - 2, для закрытия - 3, для добавленя потомка - 4, для сохранения дерева в формате json - 5")) {
-                case 1: //печать древа
-                    view.printTree(fam.nowPerson);
-                    break;
-                case 2: //печать детей родителяы
-                    view.printChildren(view.scanOne("Введите имя родителя"),fam.nowPerson);
-                    break;
-                case 3:
-                    return;
-                case 4:
-                    String p = view.scanOne("Введите имя родителя: ");
-                    String c = view.scanOther("Введите имя ребенка: ");
-                    fam.addChild(p, c);
-                    break;
-                case 5:
-                    ImportJsonFamilyTree im = new ImportJsonFamilyTree(fam);
-                    im.writeTextJson(fam.nowPerson, im.getAr() );
-                    im.writeFileJson("test.json", im.getAr());
-                    view.printStr("Файл создан");
-                    break;
-                default:
-                    view.printStr("Такой команды нет");
-                    break;
+            String s = view.scanString("Введите данные через пробел : Фамилия_Имя_Отчество_Дата рождения(формат dd.mm.yyyy)_Номер телефона(одни цифры)_Пол(f или m)");
+            Person per = null;
+            try {
+                per = new Person(s);
+            } catch (Exception e) {
+                view.printStr(e.getMessage());
+            }
+            //im.writeTextJson(per, im.getAr());
+            try {
+                ImportJsonPerson im = new ImportJsonPerson(per);
+                im.writeFileJson(per.getFirstname() + ".json", im.writeTextJson(per));
+                view.printStr("Файл создан");
+                return;
+            } catch (Exception e) {
+                view.printStr("Произошла ошибка при создании файла");
             }
         }
-    }
-    public Family newFamily(){
-        view.printStr("Приветствует мастер генеологического дерева");
-        view.printStr("Создайте фамильное древо");
-        String familyName = view.scanOther("Введите имя родителя : ");
-        Family fam = new Family(familyName);
-        view.printStr("Древо создано с родителем " + familyName);
-        return fam;
     }
 }

@@ -1,9 +1,10 @@
 package view;
 
 import org.json.JSONException;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public interface ViewLight {
-    void start() throws JSONException; //старт программы
-    int printMenu(String text); //вывод меню и считывание выбора из меню
-    String scanOne(String s); //считывание с теринала одной строки
+    void start() throws JSONException, IOException, ParseException; //старт программы
 }

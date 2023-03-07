@@ -1,6 +1,6 @@
 package view;
 
 public interface View extends ViewLight {
-    String scanOther(String s); //считывание нескольких строк
+    String scanString(String s); //считывание строки
     void printStr(String s); //вывод текста
 }
