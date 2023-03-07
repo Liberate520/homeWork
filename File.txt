@@ -1,21 +1,2 @@
-starVer888Tree Демидовичи
-HumanVer888,Демидович Павел Анатольевич,male,1988-08-23,null,id:1
-HumanVer888,Демидович Агата Павловна,female,2013-09-16,null,id:2
-HumanVer888,Демидович Анатолий Афанасьевич,male,1955-09-28,null,id:3
-HumanVer888,Демидович Галина Ивановна,female,1950-09-24,null,id:4
-HumanVer888,Мордвинцева Александра Павловна,female,1925-05-01,1959-03-03,id:5
-HumanVer888,Гулак Иван Васильевич,male,2023-02-20,null,id:6
-HumanVer888,Демидович Анастасия Герасимовна,female,2023-02-20,null,id:7
-HumanVer888,Демидович Афанасий Гаврилович,male,2023-02-20,null,id:8
-HumanVer888,Балашенко Феодосия Ивановна,null,2023-02-20,null,id:9
-HumanVer888,Демидович Наталья Александровна,female,1986-05-07,null,id:10
-CommunicationsVer888,id:4,id:3,id:2 ,null
-CommunicationsVer888,null,id:1,null,null
-CommunicationsVer888,id:7,id:8,id:1 ,null
-CommunicationsVer888,id:5,id:6,id:1 ,null
-CommunicationsVer888,id:9,null,id:4 ,null
-CommunicationsVer888,null,null,id:4 ,null
-CommunicationsVer888,null,null,id:3 ,null
-CommunicationsVer888,null,null,id:3 ,null
-CommunicationsVer888,null,null,id:5 ,null
-CommunicationsVer888,null,null,id:2 ,null
+Лица
+Вася Пупкин,Дядя Федор,Сосед Ежик,Какой то человек,новый человек,wws,efef,22
