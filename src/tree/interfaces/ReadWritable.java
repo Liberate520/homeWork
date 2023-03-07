@@ -1,4 +1,4 @@
-package tree;
+package tree.interfaces;
 
 import java.io.IOException;
 import java.io.Serializable;

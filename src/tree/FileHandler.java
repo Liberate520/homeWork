@@ -1,5 +1,7 @@
 package tree;
 
+import tree.interfaces.ReadWritable;
+
 import java.io.*;
 
 public class FileHandler implements ReadWritable {

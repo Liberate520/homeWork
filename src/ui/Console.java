@@ -1,11 +1,12 @@
 package ui;
 
 import presenter.Presenter;
+import ui.interfaces.View;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Console implements View{
+public class Console implements View {
     private Scanner scanner;
     private Presenter presenter;
     private Menu menu;
@@ -43,14 +44,12 @@ public class Console implements View{
     public void finish() {
         work = false;
     }
-    public void addRecord() {
-        System.out.println("Добавление новой записи в древо: ");
-        presenter.addRecord(scanner.nextLine());
-    }
 
     public void wholeList() {
+        System.out.println("Генеалогическое древо Романовых: ");
         presenter.wholeList();
     }
+
     public void search() {
         System.out.println("Поиск по династии: ");
         presenter.search(scanner.nextLine());
@@ -58,10 +57,16 @@ public class Console implements View{
     public void sorting() {
         presenter.sorting();
     }
+
     public void save() throws IOException {
         presenter.write();
+        System.out.println("Список успешно сохранен!");
+        System.out.println();
     }
+
     public void read() throws IOException, ClassNotFoundException {
+        System.out.println("Список из файла");
         presenter.read();
+        System.out.println();
     }
 }

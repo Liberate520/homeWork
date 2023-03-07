@@ -2,8 +2,9 @@ package presenter;
 
 import tree.FamilyTree;
 import tree.FileHandler;
-import tree.ReadWritable;
-import ui.View;
+import tree.Person;
+import tree.interfaces.ReadWritable;
+import ui.interfaces.View;
 
 import java.io.IOException;
 
@@ -20,10 +21,6 @@ public class Presenter {
         this.view = view;
         dynasty(familyTree);
         view.setPresenter(this);
-    }
-
-    public void addRecord(String nextLine) {
-        System.out.println("В разработке");
     }
 
     public void wholeList() {
@@ -47,7 +44,7 @@ public class Presenter {
     public void read() throws IOException, ClassNotFoundException {
         System.out.println("Список из файла");
         System.out.println();
-        fileHandler.read();
+        familyTree = (FamilyTree<Person>) fileHandler.read();
         System.out.println();
     }
 }

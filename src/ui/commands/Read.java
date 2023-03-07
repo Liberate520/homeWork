@@ -15,8 +15,7 @@ public class Read extends Command{
     }
 
     @Override
-    public void execute() throws IOException, ClassNotFoundException {{
+    public void execute() throws IOException, ClassNotFoundException {
         getConsole().read();
-    }
     }
 }

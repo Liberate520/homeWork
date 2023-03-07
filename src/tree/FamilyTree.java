@@ -45,8 +45,6 @@ public class FamilyTree <T extends Person> implements Serializable, Iterable <T>
         return null;
     }
 
-
-
     public String getInfo(){
         StringBuilder res = new StringBuilder();
         res.append(personList.size());
@@ -72,9 +70,6 @@ public class FamilyTree <T extends Person> implements Serializable, Iterable <T>
     }
 
     public void List() {
-        System.out.println();
-        System.out.println("Генеалогическое древо Романовых: ");
-
         for (T p : personList) {
             System.out.println(p);
         }
