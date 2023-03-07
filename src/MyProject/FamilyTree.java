@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class FamilyTree<T extends Person> implements Iterable<T>, Serializable{
+
+public class FamilyTree<T extends Person> implements Iterable<T>, Serializable {
     private List<T> humanList;
     public FamilyTree() {
         this(new ArrayList<>());
@@ -53,6 +54,7 @@ public class FamilyTree<T extends Person> implements Iterable<T>, Serializable{
     public void List() {
         System.out.println();
         System.out.println("Генеалогическое древо Романовых: ");
+
         for (T p : humanList) {
             System.out.println(p);
         }
@@ -66,7 +68,7 @@ public class FamilyTree<T extends Person> implements Iterable<T>, Serializable{
 
     @Override
     public Iterator<T> iterator() {
-        return new PersonIterator(humanList);
+        return new PersonIterator<>(humanList);
     }
 
 }
