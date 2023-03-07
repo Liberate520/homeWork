@@ -3,7 +3,7 @@ public class Presenter {
     private View view;
     private Console console;
     private Human human;
-    FamilyTree <Human> familyTree1;
+    private FamilyTree <Human> familyTree1;
 
     public Presenter(View view) {
         this.view = view; 
@@ -11,10 +11,8 @@ public class Presenter {
 
     }
 
-    public void add(Human human) {
-        // this.human=human;
-        familyTree1.addHuman(human);
-        System.out.println(human);
+    public boolean add(String name, String gender, Integer birthYear, String fatherName, String motherName) {       
+        return familyTree1.addHuman(human);
     }
 }
 
