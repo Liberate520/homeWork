@@ -15,16 +15,16 @@ class Service:  # типа интерфейс
 
 class SystemModelCommunication(Service):
     def __init__(self):
-        self.tree = Tree()
+        self.__tree = Tree()
 
     def getAListPrintHuman(self):
-        return PrintHuman(self.tree).getAListPrintHuman()
+        return PrintHuman(self.__tree).getAListPrintHuman()
 
     def communicator(self, command, text, index):
         if command == "load":
-            self.tree = TreeHandlerTXT().read("file.txt")
+            self.__tree = TreeHandlerTXT().read("file.txt")
         elif command == "addH":
-            AddHuman().addHuman(text, self.tree)
-            TreeHandlerTXT().write(self.tree)
+            AddHuman().addHuman(text, self.__tree)
+            TreeHandlerTXT().write(self.__tree)
         elif command == "editName":
-            EditingName().editingName(text, index, self.tree)
+            EditingName().editingName(text, index, self.__tree)
