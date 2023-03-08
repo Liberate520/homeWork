@@ -1,3 +1,4 @@
+package model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class Person implements Serializable{
         // sdf.parse(DateOfBirth.toString());
         if(DateOfBirth!=null) rez=rez+" Дата рождения - " + DateOfBirth.toString() ;
         if(DateOfDeath!=null) rez=rez+" Дата смерти - " + DateOfDeath.toString() ;
+        if(mother!=null) rez=rez+" Мать - " + mother.getName() ;
+        if(father!=null) rez=rez+" Отец - " + father.getName() ;
         return rez;
     }
     //печать списка персон
@@ -55,5 +58,27 @@ public class Person implements Serializable{
     }
     public String getName() {
         return name;
+    }
+    //
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public void setDateOfBirth(Date dateOfBirth) {
+        DateOfBirth = dateOfBirth;
+    }
+    public void setDateOfDeath(Date dateOfDeath) {
+        DateOfDeath = dateOfDeath;
+    }
+    public void setMother(Person mother) {
+        this.mother = mother;
+    }
+    public void setFather(Person father) {
+        this.father = father;
+    }
+    public void setChildren(ArrayList<Person> children) {
+        this.children = children;
     }
 }

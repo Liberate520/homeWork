@@ -1,10 +1,11 @@
+package Interface;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.Serializable;
 
-import Interface.SaveLoad;
+// import interface.SaveLoad;
 
 public class FileSaveLoad implements SaveLoad {
     private static String path;

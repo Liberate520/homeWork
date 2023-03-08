@@ -4,24 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Interface.FileSaveLoad;
+import Interface.Service;
+import Interface.ServiceTree;
+import Presenter.Presenter;
+import model.FamilyTree;
+import model.Person;
+import ui.ConsoleUI;
+import ui.View;
+
 
 public class Main {
-    private static List<Person> listPerson = new ArrayList<>();
-    private static List<Ancestry> listAncestry = new ArrayList<>();
-    private static FamilyTree familyTree = new FamilyTree();
-    private static FileSaveLoad db = new FileSaveLoad("tree");
+    // private static List<Person> listPerson = new ArrayList<>();
+    // private static List<Ancestry> listAncestry = new ArrayList<>();
+    // private static FamilyTree familyTree = new FamilyTree();
+    // private static FileSaveLoad db = new FileSaveLoad("tree");
     public static void main (String[] args) throws ParseException{
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Object temp=db.LoadAs();
-        if (temp!=null) {
-            familyTree=(FamilyTree)(temp);
-        }else{
-            familyTree.add(new Person("BaidenFather", "male",sdf.parse("1917-09-20"),sdf.parse("2017-09-20"), null, null));
-            familyTree.add(new Person("BaidenMather", "female",sdf.parse("1919-07-20"),sdf.parse("2015-09-20"),null, null));
-            familyTree.add(new Person("Baiden", "male",sdf.parse("1947-09-20"),familyTree.getByName("BaidenMather"),familyTree.getByName("BaidenFather")));
-        }
-        familyTree.printListPerson();
-        db.SaveAs(familyTree);
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // Object temp=db.LoadAs();
+        // if (temp!=null) {
+        //     familyTree=(FamilyTree)(temp);
+        // }else{
+        //     familyTree.add(new Person("BaidenFather", "male",sdf.parse("1917-09-20"),sdf.parse("2017-09-20"), null, null));
+        //     familyTree.add(new Person("BaidenMather", "female",sdf.parse("1919-07-20"),sdf.parse("2015-09-20"),null, null));
+        //     familyTree.add(new Person("Baiden", "male",sdf.parse("1947-09-20"),familyTree.getByName("BaidenMather"),familyTree.getByName("BaidenFather")));
+        // }
+        // familyTree.printListPerson();
+        // db.SaveAs(familyTree);
+
+//
+        View view = new ConsoleUI();
+        Service service = new ServiceTree();
+        Presenter presenter = new Presenter(view, service);
+
+        view.start(presenter);
+
         // listPerson.add(new Person("Baiden", "male",sdf.parse("1947-09-20")));
         // listPerson.add(new Person("BaidenFather", "male",sdf.parse("1917-09-20"),sdf.parse("2017-09-20")));
         // listPerson.add(new Person("BaidenMather", "female",sdf.parse("1919-07-20"),sdf.parse("2015-09-20")));
