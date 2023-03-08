@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable {
     private String name;
 
     private Integer yearOfBirth;
+
+    public Integer getYearOfBirth() {
+        return yearOfBirth;
+    }
+
     private String gender;
     private Human father;
     private Human mother;
@@ -29,7 +34,6 @@ public class Human implements Serializable{
         mother.addChild(this);
     }
 
-
     public String getName() {
         return name;
     }
@@ -41,22 +45,21 @@ public class Human implements Serializable{
             return this.children = new ArrayList<>();
     }
 
-    public void addChild(Human child){
-        if (this.children == null){
+    public void addChild(Human child) {
+        if (this.children == null) {
             this.children = new ArrayList<>();
             this.children.add(child);
-        }
-        else
+        } else
             this.children.add(child);
     }
 
     @Override
     public String toString() {
-        if ((father == null) || (mother == null))
-            return name + " (" + yearOfBirth + ")";
-        else 
-            return name + " (" + yearOfBirth + ")\n\tОтец: " + father.getName() + "\n\tМать: " + mother.getName();
+        // if ((father == null) || (mother == null))
+        return name + " (" + yearOfBirth + ")";
+        // else
+        // return name + " (" + yearOfBirth + ")\n\tОтец: " + father.getName() +
+        // "\n\tМать: " + mother.getName();
     }
-    
-    
+
 }
