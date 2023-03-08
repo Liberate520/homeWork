@@ -13,15 +13,16 @@ public class Menu {
     public Menu(Console console) {
         this.console = console;
         commands = new ArrayList();
-        System.out.println("\n\t---Menu---\n");
         commands.add(new Quit(console));
         commands.add(new PrintingListOfPersons(console));
-        commands.add(new GetPersonByName(console));
         commands.add(new YearsOfTheReignOfPersons(console));
         commands.add(new FindSpouse(console));
+        commands.add(new GetPersonByName(console));
+        commands.add(new AddPerson(console));
+        commands.add(new AddWifeToHusband(console));
+        commands.add(new AddChildToMother(console));
         commands.add(new Load(console));
         commands.add(new Save(console));
-
         }
 
         void execute(int num){

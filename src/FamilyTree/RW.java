@@ -3,6 +3,6 @@ package src.FamilyTree;
 import java.io.Serializable;
 
 public interface RW {
-    void write(Serializable obj);
+    boolean write(Serializable obj);
     Object read();
 }

@@ -11,7 +11,6 @@ public class FTObjects implements Serializable {
     private ArrayList<String> childrenName;
     private String additionalField;
 
-
     public FTObjects() {
 
         this.name = name;
@@ -40,16 +39,17 @@ public class FTObjects implements Serializable {
          return childrenName;
     }
 
-    public void addSposeName(String spose) {
-        if (!spouseName.contains(spose)) {
-            spouseName.add(spose);
-            System.out.printf("The spose: %s added to person: %s\n", spose, name);
+    public boolean addSpouseName(String spouse) {
+        if (!spouseName.contains(spouse)) {
+            spouseName.add(spouse);
+            return true;
         }
-        else System.out.printf("There is already such a record: %s\n", name);
+        return false;
     }
 
-    public void setChildrenName(String childrenName) {
+    public boolean setChildrenName(String childrenName) {
         this.childrenName.add(childrenName);
+        return true;
     }
 
     public String getAdditionalField() {
@@ -67,4 +67,5 @@ public class FTObjects implements Serializable {
                 ",\t children: " + childrenName+
                 ",\t years of government: " + additionalField;
     }
+
 }

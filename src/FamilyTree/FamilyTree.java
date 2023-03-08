@@ -10,6 +10,7 @@ import java.util.*;
 
 public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
     private ArrayList<T> people;
+    private Sex sex;
 
     public FamilyTree() {
         this(new ArrayList<T>());
@@ -32,58 +33,52 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         return people;
     }
 
-    /**
-     * The method of adding persons who appeared from outside (for example, the wife)
-     */
-    public boolean addPerson(T person) {
-        for (T human : people) {
-            if (person.getName().equals(human.getName())) {
-                return false;
-            }
-        }
-        people.add(person);
-        return true;
-    }
-
-    public  boolean addWifeToHusband(String husbandName, T person){
-        for (T item : people) {
-            if (person.getName().equals(item.getName())) {
-                System.out.println("The record already exists");
-                return false;
-            }
-        }
-        person.addSposeName(husbandName);
-        people.add(person);
-        for (T men : people){
-            if (husbandName.equals(men.getName())){
-                men.addSposeName(person.getName());
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void getList() {
         for (T item : people) {
             System.out.println(item);
         }
     }
 
-
-    public boolean addChildToMother(String motherName, T person) {
-        T mother = getByName(motherName);
-        mother.setChildrenName(person.getName());
-        people.add(person);
-        System.out.printf("%s is added to the mother\n",person.getName());
-                    for (T father : people){
-                        if (father.getSpouseName().contains(motherName)){
-                            father.setChildrenName(person.getName());
-                            System.out.printf("%s is added to the father\n",person.getName());
-                        }
-                        return true;
-                    }
-                    return false;
+    public boolean addPersonToTree(String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField) {
+        T person = (T) new Person(name, birthDay, deathDay, sex, additionalField);
+        for (T item : people) {
+            if (person.getName().equals(item.getName())) {
+                return false;
+            }
+        }
+        return people.add((T) person);
     }
+    // actual
+    public  boolean addWifeToHusband(String husbandName, String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField){
+        T person = (T) new Person( name, birthDay, deathDay, sex, additionalField);
+        for (T item : people) {
+            if (name.equals(item.getName())) {
+                return false;
+            }
+        }
+        people.add(person);
+        person.addSpouseName(husbandName);
+        T husband = getByName(husbandName);
+        return(husband.addSpouseName(person.getName()));
+    }
+
+    public boolean addChildToMother(String motherName, String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField) {
+        T mother = getByName(motherName);
+        T person = (T) new Person( name, birthDay, deathDay, sex, additionalField);
+        for (T item : people) {
+            if (name.equals(item.getName())) {
+                return false;
+            }
+        }
+        people.add(person);
+        mother.setChildrenName(name);
+        T husbandName = getByName(mother.getSpouseName().get(0));
+        if (husbandName.setChildrenName(name)) {
+            return true;
+        }
+        return false;
+    }
+
 
     public String findSpouse(String name) {
         T human = getByName(name);
@@ -91,6 +86,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         int j = 0;
         for (T spouse : people) {
             if (human.getSpouseName().contains(spouse.getName())) {
+                j++;
                 str3.append("\nPerson ").append(spouse.getName()).append(" lived in ").append(spouse.getBirthDay()).append(" - ").append(spouse.getDeathDay());
             }
         }
@@ -100,7 +96,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
 
     @Override
     public Iterator<T> iterator() {
-        return new FamilyTreeIterator<T>((ArrayList<T>) people);
+        return new FamilyTreeIterator( people);
     }
 
     public void sortByName() {
@@ -165,6 +161,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         }
         return str2.toString();
     }
+
 }
 
 

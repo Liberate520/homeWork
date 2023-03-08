@@ -2,18 +2,19 @@ package src.UI.commands;
 
 import src.UI.Console;
 
-public class GetPersonByName extends Command{
-    public GetPersonByName(Console console) {
+public class AddChildToMother extends Command{
+    public AddChildToMother(Console console) {
         super(console);
     }
 
     @Override
     public String description() {
-        return "Find a person by name";
+        return "Add a son to the Mother Person";
     }
 
     @Override
     public void execute() {
-        getConsole().getPersonByName();
+        getConsole().addChildToMother();
     }
+
 }

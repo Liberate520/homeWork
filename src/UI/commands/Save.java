@@ -12,6 +12,6 @@ public class Save extends Command {
     }
     @Override
     public void execute() {
-        super.getConsole().save();
+        getConsole().save();
     }
 }

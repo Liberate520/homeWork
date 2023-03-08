@@ -10,14 +10,14 @@ public class FileHandler implements RW{
     }
 
     @Override
-    public void write(Serializable obj) {
+    public boolean write(Serializable obj) {
         try {
             ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream(path));
             objectOutput.writeObject(obj);
             objectOutput.close();
-            System.out.println("\nThe Family Tree is saved to sFT.ser\n");
+            return true;
         } catch (Exception e) {
-            System.out.println("Could not save to file.");
+            return false;
         }
     }
 

@@ -15,6 +15,6 @@ public class FindSpouse extends Command{
 
     @Override
     public void execute() {
-        super.getConsole().findSpouse();
+        getConsole().findSpouse();
     }
 }

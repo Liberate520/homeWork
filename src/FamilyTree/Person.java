@@ -15,20 +15,18 @@ public class Person extends FTObjects implements Serializable{
     private String additionalField;
 
 
-    public Person(String name, Integer birthDay, Integer deathDay,
-                  Sex sex, Integer generation, String additionalField ) {
-        this(name, birthDay, deathDay, sex, generation);
+    public Person(String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField) {
+        this(name, birthDay, deathDay, sex);
         this.additionalField = additionalField;
     }
 
     public Person(String name, Integer birthDay, Integer deathDay,
-                  Sex sex, Integer generation) {
+                  Sex sex) {
         super();
         this.name = name;
         this.birthDay = birthDay;
         this.deathDay = deathDay;
         this.sex = sex;
-        this.generation = generation;
         spouseName = new ArrayList<String>();
         childrenName = new ArrayList<String>();
     }
@@ -47,13 +45,19 @@ public class Person extends FTObjects implements Serializable{
             System.out.println(childrenName);
         }
     }
-    public void addSposeName(String spose) {
-        if (!spouseName.contains(spose)) {
-            spouseName.add(spose);
-            System.out.printf("The spose: %s added to person: %s\n", spose, name);
+    public boolean addSpouseName(String spouse) {
+        if (spouseName == null){
+            return spouseName.add(spouse);
         }
-        else System.out.printf("There is already such a record: %s\n", name);
+        else{
+            if (!spouseName.contains(spouse)) {
+                System.out.printf("The spouse: %s added to person: %s\n", spouse, name);
+                return spouseName.add(spouse);
+            }
+            else System.out.printf("There is already such a record: %s\n", name);
+            return false;
         }
+    }
 
 
 
@@ -105,8 +109,9 @@ public class Person extends FTObjects implements Serializable{
         return childrenName;
     }
 
-    public void setChildrenName(String childrenName) {
+    public boolean setChildrenName(String childrenName) {
         this.childrenName.add(childrenName);
+        return false;
     }
 
     public String getAdditionalField() {
@@ -120,8 +125,10 @@ public class Person extends FTObjects implements Serializable{
     @Override
     public String toString() {
         return "Person: " + name + ",\t years of life: " + birthDay + " - " + deathDay +
-                ",\t sposes: " + spouseName +
+                ",\t spouses: " + spouseName +
                 ",\n\t children: " + childrenName+
+                ",\n\t  sex: " + sex +
+                ",\n\t  generation: " + generation +
                 ",\n\t\t years of government: " + additionalField;
     }
 }

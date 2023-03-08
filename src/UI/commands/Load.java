@@ -14,6 +14,6 @@ public class Load extends Command {
 
     @Override
     public void execute() {
-        super.getConsole().load();
+        getConsole().load();
     }
 }
