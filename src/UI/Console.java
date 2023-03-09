@@ -2,10 +2,7 @@ package src.UI;
 
 import src.FamilyTree.Sex;
 import src.Presenter.Presenter;
-
 import java.util.Scanner;
-
-
 
 public class Console implements View{
 
@@ -65,6 +62,16 @@ public class Console implements View{
     public void findSpouse(){
         print("Enter the Person's name: \n");
         presenter.findSpouse(scanner.nextLine());
+    }
+
+    public void findParents(){
+        print("Enter the Person's name: \n");
+        presenter.findParents(scanner.nextLine());
+    }
+
+    public void remotePerson(){
+        print("Enter the Person's name: \n");
+        presenter.remotePerson(scanner.nextLine());
     }
 
     @Override
@@ -164,6 +171,4 @@ public class Console implements View{
         }
         return addField;
     }
-
-
 }

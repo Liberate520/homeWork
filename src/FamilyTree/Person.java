@@ -31,35 +31,27 @@ public class Person extends FTObjects implements Serializable{
         childrenName = new ArrayList<String>();
     }
 
-    public void addChild(String child){
+    public boolean addChild(String child){
         if(!childrenName.contains(child)){
-            childrenName.add(child);
-            System.out.printf("The child: %s added to person: %s\n",child, name);
+            return childrenName.add(child);
         }
-        else System.out.printf("There is already such a record: %s\n",child);
-    }
-    public void childrenlist(){
-        if(childrenName.isEmpty()) System.out.println("There are no children");
         else {
-            System.out.printf("Children of the person %s :\n",name);
-            System.out.println(childrenName);
-        }
+            return false;}
     }
+
     public boolean addSpouseName(String spouse) {
         if (spouseName == null){
             return spouseName.add(spouse);
         }
         else{
             if (!spouseName.contains(spouse)) {
-                System.out.printf("The spouse: %s added to person: %s\n", spouse, name);
                 return spouseName.add(spouse);
             }
-            else System.out.printf("There is already such a record: %s\n", name);
-            return false;
+            else {
+                return false;
+            }
         }
     }
-
-
 
     public String getName() {
         return name;
@@ -93,14 +85,6 @@ public class Person extends FTObjects implements Serializable{
         this.sex = sex;
     }
 
-    public Integer getGeneration() {
-        return generation;
-    }
-
-    public void setGeneration(Integer generation) {
-        this.generation = generation;
-    }
-
     public ArrayList<String> getSpouseName() {
         return spouseName;
     }
@@ -128,7 +112,6 @@ public class Person extends FTObjects implements Serializable{
                 ",\t spouses: " + spouseName +
                 ",\n\t children: " + childrenName+
                 ",\n\t  sex: " + sex +
-                ",\n\t  generation: " + generation +
                 ",\n\t\t years of government: " + additionalField;
     }
 }

@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class FTObjects implements Serializable {
+
     private String name;
     private Integer birthDay;
     private Integer DeathDay;
     private ArrayList<String> spouseName;
+    private Sex sex;
     private ArrayList<String> childrenName;
     private String additionalField;
 
@@ -16,6 +18,7 @@ public class FTObjects implements Serializable {
         this.name = name;
         this.birthDay = birthDay;
         this.DeathDay = DeathDay;
+        this.sex = sex;
         this.childrenName = childrenName;
         this.additionalField = additionalField;
     }
@@ -31,6 +34,9 @@ public class FTObjects implements Serializable {
         return birthDay;
     }
     public Integer getDeathDay() { return DeathDay;}
+    public Sex getSex(){
+        return sex;
+    }
 
     public ArrayList<String> getSpouseName() {
         return spouseName;
@@ -67,5 +73,4 @@ public class FTObjects implements Serializable {
                 ",\t children: " + childrenName+
                 ",\t years of government: " + additionalField;
     }
-
 }

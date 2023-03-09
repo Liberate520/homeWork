@@ -2,19 +2,17 @@ package src.UI.commands;
 
 import src.UI.Console;
 
-public class FindParents extends Command{
-
-    public FindParents(Console console) {
+public class RemotePerson extends Command{
+    public RemotePerson(Console console){
         super(console);
     }
-
     @Override
     public String description() {
-        return "List of Parents";
+        return "Removing a Person from the Family Tree";
     }
 
     @Override
     public void execute() {
-        getConsole().findParents();
+        getConsole().remotePerson();
     }
 }

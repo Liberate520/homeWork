@@ -17,7 +17,7 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void printingListOfPersons(){
+    public void printingListOfPersons() {
         view.print(ftService.printingListOfPersons());
     }
 
@@ -25,15 +25,21 @@ public class Presenter {
         view.print(ftService.yearsOfTheReignOfPersons());
     }
 
-    public void findSpouse(String name){
+    public void findSpouse(String name) {
         view.print(ftService.findSpouse(name));
     }
 
-    public void getPersonByName(String name){
-        view.print(ftService.getPersonByName(name));
+    public void findParents(String name) {
+        view.print(ftService.findParents(name));
     }
 
+    public void remotePerson(String name){
+        view.print(ftService.remotePerson(name));
+    }
 
+    public void getPersonByName(String name) {
+        view.print(ftService.getPersonByName(name));
+    }
 
     public void load() {
         ftService.load();
@@ -44,7 +50,7 @@ public class Presenter {
     }
 
     public boolean addPersonToTree(String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField) {
-        return ftService.addPersonToTree( name, birthDay, deathDay, sex, additionalField);
+        return ftService.addPersonToTree(name, birthDay, deathDay, sex, additionalField);
     }
 
     public boolean addWifeToHusband(String husbandName, String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField) {

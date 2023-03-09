@@ -1,2 +1,7 @@
-package src.SaveRestore;public class Write {
+package src.SaveRestore;
+
+import java.io.Serializable;
+
+public interface Write {
+    boolean write(Serializable obj);
 }

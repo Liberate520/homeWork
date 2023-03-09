@@ -1,2 +1,6 @@
-package src.SaveRestore;public interface Read {
+package src.SaveRestore;
+
+public interface Read{
+
+    Object read();
 }

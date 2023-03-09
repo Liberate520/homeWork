@@ -48,7 +48,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         }
         return people.add((T) person);
     }
-    // actual
+
     public  boolean addWifeToHusband(String husbandName, String name, Integer birthDay, Integer deathDay, Sex sex, String additionalField){
         T person = (T) new Person( name, birthDay, deathDay, sex, additionalField);
         for (T item : people) {
@@ -79,19 +79,81 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         return false;
     }
 
-
-    public String findSpouse(String name) {
+    public ArrayList<T> listSpouse(String name){
+        List<T> spouses = new ArrayList<>();
         T human = getByName(name);
-        StringBuilder str3 = new StringBuilder("\n\tList of spouses of the Person ").append(name).append("\n");
-        int j = 0;
         for (T spouse : people) {
             if (human.getSpouseName().contains(spouse.getName())) {
-                j++;
-                str3.append("\nPerson ").append(spouse.getName()).append(" lived in ").append(spouse.getBirthDay()).append(" - ").append(spouse.getDeathDay());
+                spouses.add(spouse);
             }
         }
-        if (j == 0) {str3.append("\n\tSpouses have not been found\n");}
+        return (ArrayList<T>) spouses;
+    }
+
+    public String findSpouse(String name) {
+        StringBuilder str3 = new StringBuilder("\n\tList of spouses of the Person ").append(name).append("\n");
+        if (listSpouse(name) != null) {
+            for (T spouse : listSpouse(name)) {
+                str3.append("\nPerson ").append(spouse.getName()).append(" lived in ").append(spouse.getBirthDay()).append(" - ").append(spouse.getDeathDay());
+            }
+        } else {
+            str3.append("\n\tSpouses have not been found\n");
+        }
         return str3.toString();
+    }
+
+
+    public ArrayList<T> listParents(String name) {
+        List<T> parents = new ArrayList<>();
+        for (T human : people) {
+            if (human.getChildrenName().contains(name)) {
+                if (human.getSex().equals(sex.Male)) {
+                    T father = human;
+                    parents.add(father);
+                }
+                else {
+                    T mother = human;
+                    parents.add(mother);
+                }
+            }
+        }
+        return (ArrayList<T>) parents;
+    }
+
+    public String findParents(String name) {
+        StringBuilder str4 = new StringBuilder("\n\tList of Parents of the Person ").append(name).append("\n");
+        if (listParents(name) != null) {
+            if (listParents(name).size() >= 1 ) {
+                T father = listParents(name).get(0);
+                System.out.println(father);
+                str4.append("\nFather ").append(father.getName()).append(" lived in ").append(father.getBirthDay()).append(" - ").append(father.getDeathDay());
+                if (listParents(name).size() == 2) {
+                    T mother = listParents(name).get(1);
+                    str4.append("\nMother ").append(mother.getName()).append(" lived in ").append(mother.getBirthDay()).append(" - ").append(mother.getDeathDay());
+                }
+            }
+        }
+        return str4.toString();
+    }
+
+    public String remotePerson(String name){
+        StringBuilder str5 = new StringBuilder("\n\tRemoving a person from the family tree ").append(name).append("\n");
+        T humen = getByName(name);
+        if(listParents(name) != null){
+            for (int i = 0; i < listParents(name).size(); i++){
+                listParents(name).get(i).getChildrenName().remove(name);
+            }
+        }
+        str5.append("\n\tRemoving a person from parents list ");
+        if ( listSpouse(name) != null){
+            for (int j = 0; j < listSpouse(name).size(); j++){
+                listSpouse(name).get(j).getSpouseName().remove(name);
+            }
+        }
+        str5.append("\n\tRemoving a person from spouses list ");
+        people.remove(humen);
+        str5.append("\n\tRemoving a person from Family Tree ");
+        return str5.toString();
     }
 
     @Override
@@ -109,6 +171,7 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         for (T human : people) {
             if (human.getName().contains(name)) {
                 str0.append("\nPerson ").append(human.getName()).append(" lived in ").append(human.getBirthDay()).append(" - ").append(human.getDeathDay());
+                j++;
                 if (!(human.getSpouseName().isEmpty())){
                     str0.append("\t, spouse - ").append(human.getSpouseName().toString().replace("[", "").replace("]", ""));
                 }
@@ -161,7 +224,4 @@ public class FamilyTree<T extends FTObjects> implements Serializable, Iterable{
         }
         return str2.toString();
     }
-
 }
-
-

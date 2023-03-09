@@ -16,11 +16,13 @@ public class Menu {
         commands.add(new Quit(console));
         commands.add(new PrintingListOfPersons(console));
         commands.add(new YearsOfTheReignOfPersons(console));
+        commands.add(new FindParents(console));
         commands.add(new FindSpouse(console));
         commands.add(new GetPersonByName(console));
         commands.add(new AddPerson(console));
         commands.add(new AddWifeToHusband(console));
         commands.add(new AddChildToMother(console));
+        commands.add(new RemotePerson(console));
         commands.add(new Load(console));
         commands.add(new Save(console));
         }
@@ -42,4 +44,3 @@ public class Menu {
             return strMenu.toString();
         }
     }
-
