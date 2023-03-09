@@ -25,32 +25,35 @@ public class FileHandler<T extends Animal> implements Writable<T>, Serializable 
      * Сериализация в файл с помощью класса ObjectOutputStream
      */
     @Override
-    public void save(Serializable serializable) {
-        System.out.println("Сохраняем...");
+    public String save(Serializable serializable) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Сохраняем...\n");
         try {
             FileOutputStream outStream = new FileOutputStream(fileName, true);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outStream);
             objectOutputStream.writeObject(serializable);
             outStream.close();
             objectOutputStream.close();
-            System.out.printf("Cохранено в файл %s\n", fileName);
+            sb.append("Cохранено в файл %s");
+            sb.append(fileName);
+            sb.append("\n");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            sb.append("Ошибка\n");
         }
+        return sb.toString();
     }
     /**
      * // Востановление из файла с помощью класса ObjectInputStream
      */
     @Override
     public Serializable read() {
-        System.out.println("Восстановление после сериализации...");
         try {
             FileInputStream inStream = new FileInputStream(fileName);
             ObjectInputStream objectInputStream = new ObjectInputStream(inStream);
             Serializable tempTree = (Serializable) objectInputStream.readObject();
             inStream.close();
             objectInputStream.close();
-            System.out.println("Успешно!\n");
             return tempTree;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

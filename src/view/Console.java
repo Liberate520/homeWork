@@ -2,10 +2,9 @@ package View;
 
 import java.util.Scanner;
 
-import Model.GenealogicalTree.Animal;
 import Presenter.Presenter;
 
-public class Console<T extends Animal> implements View<T> {
+public class Console implements View {
 
     private Scanner scanner;
     private Presenter presenter;
@@ -17,7 +16,7 @@ public class Console<T extends Animal> implements View<T> {
     }
 
     @Override
-    public void setPresenter(Presenter<T> presenter) {
+    public void setPresenter(Presenter presenter) {
         this.presenter = presenter;    
     }
 

@@ -6,7 +6,6 @@ import Model.FileHandler;
 import Model.GenTreeService;
 import Model.GenealogicalTree.GenealogicalTree;
 import Model.GenealogicalTree.Human;
-import Model.GenealogicalTree.Pet;
 import Model.GenealogicalTree.Sex;
 import Presenter.Presenter;
 import View.Console;
@@ -16,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         FileHandler<Human> fileHandler = new FileHandler<>();
         GenealogicalTree<Human> bigFamily = new GenealogicalTree<>(fileHandler);
-        GenTreeService genTreeService = new GenTreeService(bigFamily);
+        GenTreeService genTreeService = new GenTreeService(bigFamily, fileHandler);
         genTreeService.addHuman("Федор", Sex.Man, 1947);
         genTreeService.addHuman("Анна", Sex.Woman, 1949);
         genTreeService.getMarried(genTreeService.searchGetHuman("Федор"),
@@ -42,8 +41,8 @@ public class Main {
             genTreeService.searchGetHuman("Юрий"));
         
         Scanner iScanner = new Scanner(System.in, "Cp866");
-        View view = new Console<>(iScanner);
-        new Presenter<Human>(view, genTreeService, fileHandler);
+        View view = new Console(iScanner);
+        new Presenter(view, genTreeService);
         view.start();
         iScanner.close();
     }

@@ -34,31 +34,6 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
         }
     }
 
-    /**
-     * Метод добавления человека в генеалогическое древо
-     * @param somebody человек, которого нужно добавить.
-     */
-    // public void addIndividual(T somebody) {
-    //     allListTree.add(somebody);
-    // }
-
-    // public boolean addT(T somebody){
-    //     if (somebody == null){
-    //         return false;
-    //     }
-    //     if (!allListTree.contains(somebody)){
-    //         allListTree.add(somebody);
-    //         if (somebody.getFather() != null){
-    //             somebody.getFather().addChild(somebody);
-    //         }
-    //         if (somebody.getMother() != null){
-    //             somebody.getMother().addChild(somebody);
-    //         }
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
     public void addIndividual(String string, Sex man, int i) {
     }
     

@@ -1,20 +1,17 @@
 package Presenter;
 
-import Model.FileHandler;
 import Model.GenTreeService;
-import Model.GenealogicalTree.Animal;
 import Model.GenealogicalTree.Sex;
 import View.View;
 
-public class Presenter<T extends Animal> {
-    private View<T> view;
+public class Presenter {
+    private View view;
     private GenTreeService genTreeService;
-    private FileHandler<T> fileHandler;
+    
 
-    public Presenter(View<T> view, GenTreeService genTreeService, FileHandler<T> fileHandler) {
+    public Presenter(View view, GenTreeService genTreeService) {
         this.view = view;
         this.genTreeService = genTreeService;
-        this.fileHandler = fileHandler;
         view.setPresenter(this);
     }
 
@@ -62,11 +59,11 @@ public class Presenter<T extends Animal> {
     }
 
     public void serialization() {
-        fileHandler.save(genTreeService);
+        view.print(genTreeService.serialization());
     }
 
     public void deserialization() {
-        fileHandler.read();
+        view.print(genTreeService.read());
     }
     
 }

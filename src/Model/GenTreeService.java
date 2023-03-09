@@ -11,9 +11,11 @@ import Model.GenealogicalTree.Comporator.IndividualComporatorByAge;
 public class GenTreeService implements Serializable {
     private GenealogicalTree<Human> genealogicalTree;
     private static int idIndividual;
+    private FileHandler<Human> fileHandler;
 
-    public GenTreeService(GenealogicalTree<Human> genealogicalTree) {
+    public GenTreeService(GenealogicalTree<Human> genealogicalTree, FileHandler<Human> fileHandler) {
         this.genealogicalTree = genealogicalTree;
+        this.fileHandler = fileHandler;
         idIndividual = 0;
     }
     
@@ -58,5 +60,17 @@ public class GenTreeService implements Serializable {
 
     public void getMarried(Human o1, Human o2) {
         genealogicalTree.getMarried(o1, o2);
+    }
+
+    public String serialization() {
+        return fileHandler.save(genealogicalTree);
+    }
+
+    public String read() {
+        genealogicalTree = (GenealogicalTree<Human>) fileHandler.read();
+        if (genealogicalTree == null) {
+            return "Ошибка";
+        } 
+        return "Успех";
     }
 }
