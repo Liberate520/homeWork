@@ -1,0 +1,3 @@
+interface IFamilyTreeLoader {
+    FamilyTree load();
+}

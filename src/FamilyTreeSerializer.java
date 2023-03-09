@@ -3,14 +3,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-interface IFamilyTreeSaver {
-    boolean save(FamilyTree familyTree);
-}
-
-interface IFamilyTreeLoader {
-    FamilyTree load();
-}
-
 class FamilyTreeSerializer implements IFamilyTreeSaver, IFamilyTreeLoader {
 
     public boolean save(FamilyTree familyTree) {
