@@ -2,7 +2,9 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Добавлен класс для сериализации генеалогического древа FamilyTreeSerializer и интерфейсы для работы с ним.
+ * Для класса FamilyTree реализован интерфейс Iterable.
+ * В качестве итератора используется новый класс IterSort, который также реализует интерфейс Comparator для осуществления сортировки.
+ * Вариант сортировки выбирается при помощи метода FamilyTree.setSortMode, который в качестве параметра принимает значение перечисления FamilyTree.SortMode.
  */
 public class Main {
     public static Scanner sc;
@@ -10,7 +12,12 @@ public class Main {
     public static void main(String[] args) {
         try {
             sc = new Scanner(System.in);
-            FamilyTree familyTree = createFamilyTree();
+            var serializer = new FamilyTreeSerializer();
+            FamilyTree familyTree = serializer.load();
+            if (familyTree == null) {
+                familyTree = createFamilyTree();
+                familyTree.save(serializer);
+            }
             System.out.printf("Генеалогическое древо состоит из %d человек\n" +
                     "  Введите ID человека (цифра от 1 до %d) для просмотра информации о нем\n" +
                     "  Введите 0 для просмотра информации обо всех\n" +
@@ -19,6 +26,7 @@ public class Main {
                 String input = sc.nextLine();
                 int num = Integer.parseInt(input) - 1;
                 if (num < 0) {
+                    familyTree.setSortMode(FamilyTree.SortMode.name);
                     System.out.println(familyTree);
                 } else if (num >= familyTree.total()) {
                     System.out.println("Неверный ID");
@@ -37,11 +45,7 @@ public class Main {
     }
 
     private static FamilyTree createFamilyTree() throws Exception {
-        var serializer = new FamilyTreeSerializer();
-        FamilyTree familyTree = serializer.load();
-        if (familyTree != null)
-            return familyTree;
-        familyTree = new FamilyTree();
+        var familyTree = new FamilyTree();
         int[] ids = new int[2];
         ids[0] = familyTree.addChild("Николай Лысенко", "мужской", date(5, 2, 40)).id();
         ids[1] = familyTree.addSpouse("Светлана Петрова", date(20, 10, 45), ids[0]).id();
@@ -50,7 +54,6 @@ public class Main {
         ids[0] = familyTree.addChild("Иван Лысенко", "мужской", date(14, 8, 95), ids).id();
         ids[1] = familyTree.addSpouse("Анна Владимирова", date(26, 6, 99), ids[0]).id();
         ids[0] = familyTree.addChild("Ольга Лысенко", "женский", date(30, 9, 120), ids).id();
-        familyTree.save(serializer);
         return familyTree;
     }
 

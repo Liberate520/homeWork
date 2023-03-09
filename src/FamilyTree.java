@@ -1,15 +1,19 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * FamilyTree
  */
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
     private ArrayList<FamilyTreeMemeber> memebers;
+    private SortMode sortMode;
 
     FamilyTree() {
         this.memebers = new ArrayList<FamilyTreeMemeber>();
+        sortMode = SortMode.noSort;
     }
 
     public int total() {
@@ -24,9 +28,9 @@ public class FamilyTree implements Serializable {
         return memebers.get(memeberId);
     }
 
-    public FamilyTreeMemeber[] getAllFamilyMemebers() {
-        return memebers.toArray(new FamilyTreeMemeber[0]);
-    }
+    // public FamilyTreeMemeber[] getAllFamilyMemebers() {
+    // return memebers.toArray(new FamilyTreeMemeber[0]);
+    // }
 
     public FamilyTreeMemeber addChild(String name, String sex, Date birthDay, int[] parentIds) {
         FamilyTreeMemeber[] parents = parentIds != null
@@ -55,12 +59,56 @@ public class FamilyTree implements Serializable {
     @Override
     public String toString() {
         var str = new StringBuilder();
-        for (FamilyTreeMemeber memeber : memebers)
+        for (FamilyTreeMemeber memeber : this)
             str.append("\n" + memeber.toString());
         return str.toString();
     }
 
     public boolean save(IFamilyTreeSaver saver) {
         return saver.save(this);
+    }
+
+    public void setSortMode(SortMode sortMode) {
+        this.sortMode = sortMode;
+    }
+    
+    public Iterator<FamilyTreeMemeber> iterator() {
+        return new IterSort();
+    }
+
+    private class IterSort implements Iterator<FamilyTreeMemeber>, Comparator<FamilyTreeMemeber> {
+        private Iterator<FamilyTreeMemeber> iter;
+
+        IterSort() {
+            if (sortMode == SortMode.noSort) {
+                iter = memebers.stream().iterator();
+            } else {
+                iter = memebers.stream().sorted(this).iterator();
+            }
+        }
+
+        public boolean hasNext() {
+            return iter.hasNext();
+        }
+
+        public FamilyTreeMemeber next() {
+            return iter.next();
+        }
+
+        public int compare(FamilyTreeMemeber o1, FamilyTreeMemeber o2) {
+            switch (sortMode) {
+                case name:
+                    return  o1.name().compareTo(o2.name());
+                case birthDay:
+                    return  o1.birthDay().compareTo(o2.birthDay());
+                case noSort:
+                    break;
+            }
+            return 0;
+        }
+    }
+
+    public enum SortMode {
+        name, birthDay, noSort
     }
 }
