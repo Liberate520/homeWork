@@ -6,20 +6,14 @@ import model.entity.Person;
 import model.entity.Sex;
 import model.tree.Demo;
 import model.tree.FamilyTree;
-import presenter.Presenter;
 
-public class Servis implements Model {
-    private Presenter presenter;
+public class Service implements Model {
+
     private FamilyTree<Person> familyTree;
 
     @Override
     public void demoTree() {
         familyTree = Demo.demoTree();
-    }
-
-    @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -43,6 +37,11 @@ public class Servis implements Model {
     @Override
     public String printTree() {
         return familyTree.printTree();
+    }
+
+    @Override
+    public void newTree() {
+        familyTree = new FamilyTree<>();
     }
 
 }

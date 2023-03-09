@@ -39,6 +39,8 @@ public class ConsoleOne implements View {
         System.out.println("Load demo tree? y/n");
         if (yesNoCheck(scanner.nextLine())) {
             presenter.demo();
+        } else {
+            presenter.newTree();
         }
     }
 

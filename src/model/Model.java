@@ -2,10 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-import presenter.Presenter;
-
 public interface Model {
-    public void setPresenter(Presenter presenter);
 
     public void demoTree();
 
@@ -14,5 +11,7 @@ public interface Model {
     public String showEntityInfo(int num);
 
     public String printTree();
+
+    public void newTree();
 
 }

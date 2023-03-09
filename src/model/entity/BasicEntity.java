@@ -33,7 +33,7 @@ public class BasicEntity implements Serializable {
     }
 
     private int setId() {
-        return EntityServis.assignID();
+        return EntityService.assignID();
     }
 
     public String getName() {

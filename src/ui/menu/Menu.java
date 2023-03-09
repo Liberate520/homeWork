@@ -11,10 +11,8 @@ import ui.menu.commands.ShowEntityInfo;
 
 public class Menu {
     private List<Option> commands;
-    private ConsoleOne console;
 
     public Menu(ConsoleOne console) {
-        this.console = console;
         commands = new ArrayList<>();
         commands.add(new PrintTree(console));
         commands.add(new AddTreeEntity(console));

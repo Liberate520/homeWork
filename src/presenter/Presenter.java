@@ -13,7 +13,6 @@ public class Presenter {
         this.view = view;
         this.model = model;
         view.setPresenter(this);
-        model.setPresenter(this);
     }
 
     public void addTreeEntity(String name, String lastname, String sex, LocalDate dateOfBirth) {
@@ -31,5 +30,9 @@ public class Presenter {
 
     public void demo() {
         model.demoTree();
+    }
+
+    public void newTree() {
+        model.newTree();
     }
 }

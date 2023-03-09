@@ -50,11 +50,11 @@ public class FamilyTree<T extends BasicEntity> implements Serializable, Iterable
     }
 
     public void sortByName() {
-        Collections.sort(tree, new EntityComparatorByName<>());
+        Collections.sort(tree, new EntityComparatorByName<T>());
     }
 
     public void sortByAge() {
-        Collections.sort(tree, new EntityComparatorByAge<>());
+        Collections.sort(tree, new EntityComparatorByAge<T>());
     }
 
     @Override

@@ -7,7 +7,7 @@ import ui.View;
 public class Main {
     public static void main(String[] args) {
         View view = new ConsoleOne();
-        Model model = new Servis();
+        Model model = new Service();
         new Presenter(view, model);
         view.start();
     }
