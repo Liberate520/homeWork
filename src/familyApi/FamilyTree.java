@@ -20,6 +20,11 @@ public class FamilyTree<T extends User> implements Iterable<T> {
         return false;
     }
 
+    // public boolean addNew(String firstname, String lastname, Human father, Human mother, GregorianCalendar birthdate) {
+    //     familyTree.add((T) new Human(firstname, lastname, father, mother, birthdate));
+    //     return true;
+    // }
+
     public T getByName(String name){
         for(T human: familyTree){
             if(human.getFirstname().equals(name)){

@@ -1,6 +1,7 @@
 package familyApi;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import presenter.Presenter;
 
@@ -14,11 +15,11 @@ public class Service {
         this.fileHandler = new FileHandler<>();
         
         try {
-            fileHandler.fileRead(familyTree);
+            fileHandler.load(familyTree);
         } catch (IOException e) {
             
         } catch (ClassNotFoundException e) {
-
+            
         }
     }
 
@@ -45,20 +46,43 @@ public class Service {
     }
 
     public String addHuman() {
-        familyTree.add(new Human(presenter.getStringInfo("Имя"), 
-                                 presenter.getStringInfo("Фамилия"), 
-                                 familyTree.getByName(presenter.getStringInfo("Имя отца")), 
-                                 familyTree.getByName(presenter.getStringInfo("Имя матери")), 
-                                 presenter.getIntInfo("Год"), 
-                                 presenter.getIntInfo("Месяц") - 1, 
-                                 presenter.getIntInfo("День")));
+        boolean val = true;
+        String firstname = presenter.getStringInfo("Имя");
+        String lastname = presenter.getStringInfo("Фамилия");
+        Integer year = presenter.getIntInfo("Год");
+        Integer monat = presenter.getIntInfo("Месяц") - 1;
+        Integer day = presenter.getIntInfo("День");
+        Human father = familyTree.getByName(presenter.getStringInfo("Имя отца"));
+        Human mother = familyTree.getByName(presenter.getStringInfo("Имя матери"));
+
+        for(Human human: familyTree) {
+            if(human.getFirstname().equals(firstname) &&
+                human.getLastname().equals(lastname) &&
+                human.getBirthdate().get(Calendar.YEAR) == year &&
+                human.getBirthdate().get(Calendar.MONTH) == monat &&
+                human.getBirthdate().get(Calendar.DAY_OF_MONTH) == day &&
+                human.getFather().getFirstname().equals(father.getFirstname()) &&
+                human.getMother().getFirstname().equals(mother.getFirstname()))
+
+                switch (presenter.getStringInfo(human.toString() + "\n" + "Похоже такой человек уже есть в дереве\n" + "Всё равно добавить? (да/нет)")) {
+                    case "да":
+                        val = true;
+                        familyTree.add(new Human(firstname, lastname, father, mother, year, monat, day));
+                        break;
+                    case "нет":
+                        val = false;
+                        break;
+                }
+        }
+        
+        if (val) familyTree.add(new Human(firstname, lastname, father, mother, year, monat, day));
         return "Все отлично";
     }
 
     public String exit() {
         StringBuilder str = new StringBuilder();
         try {
-            fileHandler.fileWrite(familyTree);
+            fileHandler.save(familyTree);
             str.append("Сохранение прошло успешно");
             presenter.finish();
             return str.toString();

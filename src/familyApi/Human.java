@@ -8,14 +8,14 @@ import java.util.List;
 public class Human implements Serializable, User {
     private String firstname;
     private String lastname;
-    private Calendar birthdate;
-    private Calendar deathdate;
+    private GregorianCalendar birthdate;
+    private GregorianCalendar deathdate;
     private Human father;
     private Human mother;
     private List<Human> children;
 
-    public Human(String firstname, String lastname, Human father, Human mother, int year, int month, int day){
-        this(firstname, lastname, year, month, day);
+    public Human(String firstname, String lastname, Human father, Human mother, int year, int monat, int day){
+        this(firstname, lastname, year, monat, day);
         if(father != null){
             this.father = father;
             father.addChild(this);
@@ -27,10 +27,10 @@ public class Human implements Serializable, User {
         
     }
 
-    public Human(String firstname, String lastname, int year, int month, int day){
+    public Human(String firstname, String lastname, int year, int monat, int day){
         this.firstname = firstname;
         this.lastname = lastname;
-        this.birthdate = new GregorianCalendar(year, month, day);
+        this.birthdate = new GregorianCalendar(year, monat, day);
     }
 
     public String getFirstname() {
@@ -49,20 +49,20 @@ public class Human implements Serializable, User {
         this.lastname = lastname;
     }
 
-    public Calendar getBirthdate() {
+    public GregorianCalendar getBirthdate() {
         //String str = birthdate.get(Calendar.YEAR) + "-" + birthdate.get(Calendar.MONTH) + "-" + birthdate.get(Calendar.DAY_OF_MONTH);
         return birthdate;
     }
     
-    public void setBirthdate(Calendar birthdate) {
+    public void setBirthdate(GregorianCalendar birthdate) {
         this.birthdate = birthdate;
     }
 
-    public Calendar getDeathdate() {
+    public GregorianCalendar getDeathdate() {
         return deathdate;
     }
 
-    public void setDeathdate(Calendar deathdate) {
+    public void setDeathdate(GregorianCalendar deathdate) {
         this.deathdate = deathdate;
     }
 

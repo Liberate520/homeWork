@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler<T extends User> implements Serializable {
+public class FileHandler<T extends User> implements Writable<T>, Serializable {
     private String fileName;
 
     public FileHandler(String fileName){
@@ -17,8 +17,9 @@ public class FileHandler<T extends User> implements Serializable {
     public FileHandler(){
         this("person.out");
     }
-
-    public void fileWrite (FamilyTree<T> family) throws IOException, ClassNotFoundException {
+    
+    @Override
+    public void save (FamilyTree<T> family)  throws IOException, ClassNotFoundException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
         for (T human: family.getFamilyTree()){
             objectOutputStream.writeObject(human);
@@ -26,8 +27,9 @@ public class FileHandler<T extends User> implements Serializable {
         objectOutputStream.close();
     }
     
+    @Override
     @SuppressWarnings("unchecked")
-    public void fileRead(FamilyTree<T> family) throws IOException, ClassNotFoundException {
+    public void load(FamilyTree<T> family) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
         
         while (true){
