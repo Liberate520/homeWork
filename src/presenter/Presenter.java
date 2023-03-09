@@ -38,12 +38,8 @@ public class Presenter {
     }
     public void write() throws IOException {
         fileHandler.write(familyTree);
-        System.out.println("Список успешно сохранен!");
-        System.out.println();
     }
     public void read() throws IOException, ClassNotFoundException {
-        System.out.println("Список из файла");
-        System.out.println();
         familyTree = (FamilyTree<Person>) fileHandler.read();
         System.out.println();
     }
