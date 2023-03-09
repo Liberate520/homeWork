@@ -1,7 +1,6 @@
-package MyProject;
+package model;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class PersonIterator<T extends Person> implements Iterator<T> {
     private int index;

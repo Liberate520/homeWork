@@ -1,7 +1,7 @@
-package MyProject;
+package model;
 
-import MyProject.comparate.PersonComparatorName;
-import MyProject.comparate.PersonComparatorYear;
+import model.comparate.PersonComparatorName;
+import model.comparate.PersonComparatorYear;
 
 import java.io.Serializable;
 import java.util.ArrayList;

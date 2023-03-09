@@ -1,6 +1,7 @@
 package ui.commands;
 
 import ui.Console;
+import ui.commands.interfaces.Option;
 
 abstract class Command implements Option {
     private Console console;

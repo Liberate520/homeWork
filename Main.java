@@ -1,6 +1,6 @@
 import presenter.Presenter;
 import ui.Console;
-import ui.View;
+import ui.interfaces.View;
 
 import java.io.IOException;
 

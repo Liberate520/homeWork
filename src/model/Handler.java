@@ -1,4 +1,6 @@
-package MyProject;
+package model;
+
+import model.interfaces.Writable;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package ui.commands;
+package ui.commands.interfaces;
 
 import java.io.IOException;
 
