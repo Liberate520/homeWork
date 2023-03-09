@@ -1,72 +1,71 @@
 package presenter;
 
-import model.project.FamilyTree;
-import model.project.Human;
+import model.ModelService;
 import ui.View;
 
 public class Presenter {
     private View view;
-    private FamilyTree<Human> familyTree;
+    private ModelService<?> model;
     private String nameToSearch;
 
-    public Presenter(View view) {
+    public Presenter(View view, ModelService<?> model) {
         this.view = view;
+        this.model = model;
         view.setPresenter(this);
-        this.familyTree = new FamilyTree<>();
     }
 
     public String createNewTree() {
-        familyTree = new FamilyTree<>();
+        model.createNewTree();
         return "Дерево создано."; 
     }
 
     public String loadTree() {
-        this.familyTree = (FamilyTree<Human>) familyTree.loadTree();
-        if (familyTree == null) return "Ошибка загрузки.";
-        else return "Дерево загружено.";
+        model.loadTree();
+        return "Дерево загружено.";
     }
 
-    public String addTreeElement(String name, String sex, Integer yearOfbihtd, String father, String mother) {    
-        familyTree.add(new Human(name, sex, yearOfbihtd, familyTree.getHuman(father), familyTree.getHuman(mother)));
+    public String addTreeElement(String name, String sex, String yearOfbirth, String father, String mother) { 
+        Integer yearOfbirthday = Integer.parseInt(yearOfbirth);
+        model.addTreeElement(name, sex, yearOfbirthday, father, mother);
         return "Успешно добавлен в древо.";
     }
 
-    public String showTree() { return familyTree.getTree(); }
+    public String showTree() { return model.showTree(); }
 
     public String findTreeElement(String nextLine) { 
         this.nameToSearch = nextLine;
-        return familyTree.getInfoHuman(nameToSearch); 
+        return model.findTreeElement(nameToSearch); 
     }
 
     public String saveTree() {
-        familyTree.saveTree(familyTree);
+        model.saveTree();
         return "Дерево успешно сохранено.";
     }
 
     public String showMother() {
-        return familyTree.getInfoMother(nameToSearch);
+        return model.showMother(nameToSearch);
     }
 
     public String showChildrens() {
-        return familyTree.getInfoChildren(nameToSearch);
+        return model.showChildrens(nameToSearch);
     }
 
     public String showFather() {
-        return familyTree.getInfoFather(nameToSearch);
+        return model.showFather(nameToSearch);
     }
 
     public String sortByName() {
-        familyTree.sortByName();
+        model.sortByName();
         return "Отсортированно по имени.";
     }
 
     public String sortByYearOfBirth() {
-        familyTree.sortByYear();
+        model.sortByYearOfBirth();
         return "Отсортированно по году рождения.";
     }
 
     public String formatToTxt(String file_name) {
-        familyTree.saveTo(familyTree, file_name);
+        model.saveTo(file_name);
         return "Сохранено.";
     }
 }

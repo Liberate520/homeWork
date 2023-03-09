@@ -15,27 +15,21 @@ public class FileHandler<T extends User> implements Serializable{
     private Writeable format_write;
 
     public void saveTree(FamilyTree<T> familyTree) {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("../model/fileProcessing/FamilyTree.ser");
+        try (FileOutputStream fileOut = new FileOutputStream("src/model/fileProcessing/FamilyTree.ser")) {
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(familyTree);
-            out.close();
-            fileOut.close();
-        } catch (IOException e) { System.out.println("Ошибка"); }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public FamilyTree<T> loadTree() {
         FamilyTree<T> familytree = new FamilyTree<>();
-        try {
-            FileInputStream fileIn = new FileInputStream("../model/fileProcessing/FamilyTree.ser");
+        try (FileInputStream fileIn = new FileInputStream("src/model/fileProcessing/FamilyTree.ser")) {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             familytree = (FamilyTree<T>) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException e) {
-            System.out.println("Ошибка");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Ошибка"); 
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
         }
         return familytree;
     }

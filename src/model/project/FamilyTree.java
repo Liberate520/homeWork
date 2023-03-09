@@ -5,26 +5,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import model.fileProcessing.FileHandler;
 
 public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
     private Integer generation;
     private HashMap<Integer, String> humans_index_by_generation;
     private ArrayList<T> humans_list;
-    private FileHandler<T> fileHandler;
 
     public FamilyTree(Integer generation, HashMap<Integer, String> humans_index_by_generation, ArrayList<T> humans_list) {
         this.generation = generation;
         this.humans_index_by_generation = humans_index_by_generation;
         this.humans_list = humans_list;
-        this.fileHandler = new FileHandler<>();
     }
 
     public FamilyTree() {
         this.generation = 1;
         this.humans_index_by_generation = new HashMap<>();
         this.humans_list = new ArrayList<>();
-        this.fileHandler = new FileHandler<>();
     }
 
     public Integer getGeneration() {
@@ -59,7 +55,7 @@ public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
 
     public void add(T human) {
         this.humans_list.add(human);
-        if (human.getFather() != null | human.getMother() != null) {
+        if (human.getFather() != null || human.getMother() != null) {
             Integer stop = 0;
             for (int i = humans_list.size() - 2; i >= 0; i--) {
                 if (humans_list.get(i).equals(human.getFather())) {
@@ -94,7 +90,7 @@ public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
                 return Integer.toString(getGen(i)) + " поколение - " + humans_list.get(i).toString();
             }
         }
-        return "Неизвестное имя";
+        return "В семейном дереве такого нету";
     }
 
     public String getInfoChildren(String name_human) {
@@ -111,18 +107,6 @@ public class FamilyTree<T extends User> implements Iterable<T>, Serializable {
 
     public String getInfoFather(String name_human) {
         return getInfoHuman(getHuman(name_human).getFather().getName());
-    }
-
-    public void saveTree(FamilyTree<T> familyTree) {
-        fileHandler.saveTree(familyTree);
-    }
-
-    public FamilyTree<T> loadTree() {
-        return fileHandler.loadTree();
-    }
-
-    public void saveTo(FamilyTree<T> familyTree, String fileName) {
-        fileHandler.write(familyTree, fileName);
     }
 
     public void sortByName() {

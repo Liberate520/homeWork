@@ -26,7 +26,7 @@ public class Console implements View{
         work = true;
         while(work) {
             menu();
-            String command = iScanner.next();
+            String command = iScanner.nextLine();
             if (checkInput(command)) { menu.execute(Integer.parseInt(command)); }
         }
     }
@@ -80,50 +80,54 @@ public class Console implements View{
     public void addTreeElement() {
         System.out.print("\nЗаполните поля:\n");
 
-        System.out.print("\tИмя - "); String name = iScanner.next();
+        System.out.print("\tИмя - "); String name = iScanner.nextLine();
         while (!validLetter(name)) { 
-            System.out.print("Некорректное имя. Попробуйте ещё раз.\n\tИмя - "); name = iScanner.next(); 
+            System.out.print("! Некорректное имя. Попробуйте ещё раз.\n\tИмя - "); name = iScanner.nextLine(); 
         }
-
-        System.out.print("\tПол - "); String sex = iScanner.next();
+        System.out.print("\tПол - "); String sex = iScanner.nextLine();
         while (!validLetter(sex)) { 
-            System.out.print("Некорректный тип пола. Попробуйте ещё раз.\n\tПол - "); sex = iScanner.next(); 
+            System.out.print("! Некорректный тип пола. Попробуйте ещё раз.\n\tПол - "); sex = iScanner.nextLine(); 
         }
-
-        System.out.print("\tГод рождения - "); 
-        while (!iScanner.hasNextInt()) {
-            System.out.print("Нужно указать год рождения. Попробуйте ещё раз.\n\tГод рождения - "); 
+        System.out.print("\tГод рождения - "); String yearOfBirth = iScanner.nextLine();
+        while (!validDigit(yearOfBirth)) {
+            System.out.print("! Нужно указать год рождения. Попробуйте ещё раз.\n\tГод рождения - "); yearOfBirth = iScanner.nextLine();
         }
-        Integer yearOfBithd = iScanner.nextInt();
-
-        System.out.print("\tИмя отца (если не известно 'нет') - "); String father = iScanner.next();
+        System.out.print("* Введите \"нет\" если имя неизвестно.\n\tИмя отца - "); String father = iScanner.nextLine();
         while (!validLetter(father)) { 
-            System.out.print("Некорректное имя. Попробуйте ещё раз.\n\tИмя отца (если не известно 'нет') - "); father = iScanner.next(); 
+            System.out.print("! Некорректное имя. Попробуйте ещё раз.\n* Введите \"нет\" если имя неизвестно.\n\tИмя отца - "); father = iScanner.nextLine(); 
         }
-
-        System.out.print("\tИмя матери (если не известно 'нет') - "); String mother = iScanner.next();
+        System.out.print("* Введите \"нет\" если имя неизвестно.\n\tИмя матери - "); String mother = iScanner.nextLine();
         while (!validLetter(mother)) { 
-            System.out.print("Некорректное имя. Попробуйте ещё раз.\n\tИмя матери (если не известно 'нет') - "); mother = iScanner.next(); 
+            System.out.print("! Некорректное имя. Попробуйте ещё раз.\n* Введите \"нет\" если имя неизвестно.\n\tИмя матери - "); mother = iScanner.nextLine(); 
         }
-        System.out.println(presenter.addTreeElement(name, sex, yearOfBithd, father, mother));
+        System.out.println(presenter.addTreeElement(name, sex, yearOfBirth, father, mother));
     }
 
     private boolean validLetter(String text) {
-        text.strip();
+        text = text.replace(" ", "");
+        if (text == "") return false;
         for (int i = 0; i < text.length(); i++) {
             if (!Character.isLetter(text.charAt(i))) return false;
         }
         return true;
     }
-    
-    public void showTree() { System.out.print(presenter.showTree()); }
 
-    public void saveTree() { System.out.print(presenter.saveTree()); }
+    private boolean validDigit(String text) {
+        if (text == "") return false;
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isDigit(text.charAt(i))) return false;
+        }
+        return true;
+    }
+    
+    public void showTree() { System.out.print("\n" + presenter.showTree()); }
+
+    public void saveTree() { System.out.print("\n" + presenter.saveTree() + "\n"); }
 
     public void findTreeElement() {
         System.out.print("\nДля поиска введите имя:\n");
         System.out.print("\tИмя - ");
-        System.out.println(presenter.findTreeElement(iScanner.next()));
+        System.out.println(presenter.findTreeElement(iScanner.nextLine()));
         menu.setMenu(new SecondaryMenu(this));
     }
 
@@ -134,7 +138,10 @@ public class Console implements View{
     // end MainMenu
 
     // begin SecondaryMenu
-    public void showChildrens() { System.out.println("Дети:\n" + presenter.showChildrens()); }
+    public void showChildrens() { 
+        System.out.println("\nДети:\n" + presenter.showChildrens()); 
+        returnMainMenu();
+    }
     
     public void showFather() { System.out.println("Отец: " + presenter.showFather()); }
     
@@ -157,7 +164,7 @@ public class Console implements View{
 
     // begin FileHandlerMenu
     public void formatToTxt() {
-        System.out.print("\nВведите имя файла - "); String file_name = iScanner.next();
+        System.out.print("\nВведите имя файла - "); String file_name = iScanner.nextLine();
         System.out.println(presenter.formatToTxt(file_name + ".txt"));
         returnMainMenu();
     }
