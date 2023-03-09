@@ -5,15 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class FileHandler {
-    private FamilyTree tree;
-
-    public FamilyTree getTree() {
-        return tree;
-    }
-
-    public FileHandler(FamilyTree tree) {
-        this.tree = tree;
-    }
 
     public void write (FamilyTree tree) throws IOException {
 

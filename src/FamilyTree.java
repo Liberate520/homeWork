@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public class FamilyTree implements Serializable, Iterable<Human>{
-    public static final char[] humamList = null;
+
     private List<Human> humanList;
     public FamilyTree() {this(new ArrayList<>());}
 
