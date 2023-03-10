@@ -23,6 +23,22 @@ public class Individual {
     }
 
     
+      
+    private String getChildrenInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append("children: ");
+        if (children.size() != 0){
+            res.append(children.get(0).getName());
+            for(int i = 1; i < children.size(); i++){
+                res.append(", ");
+                res.append(children.get(i).getName());
+            }
+        } else {
+            res.append("no");
+        }
+        return res.toString();
+    }
+
     public Individual getFather() {
         return father;
     }
@@ -31,15 +47,17 @@ public class Individual {
         return mother;
     }
 
-    
-    public void addChild(Individual individ) {
-    }
-
-    
     public String getInfo() {
         return String.format("Имя: %s; Пол: %s; Год рождения: %d; Отец: %s; Мать: %s.", name, gender, yearofbirth, getFather(), getMother());
     }   
 
+    public boolean addChild(Individual child){
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
+    }
     
 
 }
