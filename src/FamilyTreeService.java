@@ -45,7 +45,7 @@ import java.text.SimpleDateFormat;
         Human father = familyTree.getByName((fatherName));
         Human mother = familyTree.getByName(motherName);
         Human child = new Human(name, enumGender, birthDate, father, mother);
-        return familyTree.add(child);
+        return familyTree.addHuman(child);
     }
         // public boolean deleteEntry(String name) {
         //     return familyTree.delete(familyTree.getByName(name));
