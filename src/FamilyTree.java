@@ -1,11 +1,12 @@
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<T extends Individual> implements Serializable, Iterable<T> {
-    private Presenter presenter;
     private List<T> humans;
     private Writable fileHandler;
 
@@ -17,10 +18,15 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
         this.humans = humans;
     }
 
-    
-    public void setPresenter(Presenter presenter){
-        this.presenter = presenter;
+    public List<T> getHumans() {
+        return humans;
     }
+   
+
+    
+    // public void setPresenter(Presenter presenter){
+    //     this.presenter = presenter;
+    // }
 
     public String getChildrenToString(T human) {
         String res = "Дети от родителя " + human.getInfo() + ": ";
@@ -91,17 +97,14 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
         return find;
     }
 
-    public void save() throws FileNotFoundException {
-        fileHandler.save("FamTree.out");
-    }
 
-    public void read() throws IOException {
-        fileHandler.read();
-    }
+    // public void read() throws IOException {
+    //     fileHandler.read();
+    // }
 
-    public void setFileHandler(Writable fileHandler) {
-        this.fileHandler = fileHandler;
-    }
+    // public void setFileHandler(Writable fileHandler) {
+    //     this.fileHandler = fileHandler;
+    // }
 
     @Override
     public Iterator<T> iterator() {
