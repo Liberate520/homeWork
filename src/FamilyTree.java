@@ -8,7 +8,6 @@ import java.util.List;
 
 public class FamilyTree<T extends Individual> implements Serializable, Iterable<T> {
     private List<T> humans;
-    private Writable fileHandler;
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -23,36 +22,43 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
     }
    
 
-    
-    // public void setPresenter(Presenter presenter){
-    //     this.presenter = presenter;
+    // public String getChildrenToString(T human) {
+    //     String res = "Дети от родителя " + human.getInfo() + ": ";
+    //     List<T> children = new ArrayList<>();
+    //     for (int i = 0; i < humans.size(); i++) {
+    //         if (humans.get(i).getFather() == human) {
+    //             children.add(humans.get(i));
+    //         }
+    //     }
+    //     for (int i = 0; i < children.size(); i++) {
+    //         res = res + "\n" + (i + 1) + "). " + children.get(i).getInfo();
+    //     }
+    //     return res;
     // }
 
-    public String getChildrenToString(T human) {
-        String res = "Дети от родителя " + human.getInfo() + ": ";
-        List<T> children = new ArrayList<>();
-        for (int i = 0; i < humans.size(); i++) {
-            if (humans.get(i).getFather() == human) {
-                children.add(humans.get(i));
-            }
+
+    public String getInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append(humans.size());
+        res.append(" objects in the tree: \n");
+        for (T human : humans){
+            res.append(human.getInfo());
+            res.append("\n");
         }
-        for (int i = 0; i < children.size(); i++) {
-            res = res + "\n" + (i + 1) + "). " + children.get(i).getInfo();
-        }
-        return res;
+        return res.toString();
     }
 
-    public String getAllHumanToString() {
-        String res = "Генеологическое дерево: ";
-        List<T> list1 = new ArrayList<>();
-        for (int i = 0; i < humans.size(); i++) {
-            list1.add(humans.get(i));
-        }
-        for (int i = 0; i < humans.size(); i++) {
-            res = res + "\n" + (i + 1) + "). " + humans.get(i).getInfo();
-        }
-        return res;
-    }
+    // public String getAllHumanToString() {
+    //     String res = "Генеологическое дерево: ";
+    //     List<T> list1 = new ArrayList<>();
+    //     for (int i = 0; i < humans.size(); i++) {
+    //         list1.add(humans.get(i));
+    //     }
+    //     for (int i = 0; i < humans.size(); i++) {
+    //         res = res + "\n" + (i + 1) + "). " + humans.get(i).getInfo();
+    //     }
+    //     return res;
+    // }
 
     public boolean addHuman(T human) {
 
