@@ -1,24 +1,37 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Presenter {
 
     private View view;
-    private Console console;
-    private Human human;
-    private FamilyTree <Human> familyTree1;
+    private FamilyTreeService familyTreeService;
 
-    public Presenter(View view) {
-        this.view = view; 
+    public Presenter(View view, FamilyTreeService service) {
+        this.view = view;
+        this.familyTreeService = service;
         view.setPresenter(this);
-
+    }
+    public boolean addEntry( String name, String gender, Integer birthYear,
+                          String fatherName, String motherName) {
+        return familyTreeService.addEntry(name, gender, birthYear, fatherName, motherName);
     }
 
-    public boolean add(String name, String gender, Integer birthYear, String fatherName, String motherName) { 
-        Gender enumGender;
-        if(gender.equalsIgnoreCase("m")){
-            enumGender = Gender.male;
-        } else {
-            enumGender = Gender.female;
-        }           
-        return familyTree1.addHuman(new Human(name, enumGender, birthYear, familyTree1.getByName(fatherName), familyTree1.getByName(motherName)));
+    public void showEntry(String name) {
+        view.print(familyTreeService.showEntry(name));
+    }
+
+    public void showAllEntries() {
+        view.print(familyTreeService.showAll());
+    }
+
+    
+
+    public void save() throws FileNotFoundException {
+        familyTreeService.save();
+    }
+
+    public void load() throws FileNotFoundException, IOException {
+        familyTreeService.load();
     }
 }
 
