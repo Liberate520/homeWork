@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
     
@@ -17,7 +16,7 @@ import java.text.SimpleDateFormat;
         }
     
         public String showAll(){
-            return familyTree.getAllHumanToString();
+            return familyTree.getInfo();
         }
     
         public void save() throws FileNotFoundException{
@@ -28,7 +27,7 @@ import java.text.SimpleDateFormat;
             return familyTree.getByName(name).getInfo();
         }
     
-       public boolean addEntry(String name, String gender, String birthYear,
+       public boolean addEntry(String name, String gender, Integer birthYear,
                          String fatherName, String motherName) {
         Gender enumGender;
         if(gender.equalsIgnoreCase("m")){
@@ -36,23 +35,18 @@ import java.text.SimpleDateFormat;
         } else {
             enumGender = Gender.female;
         }
-        Date birthDate = new Date(0);
-        try {
-            birthDate = new SimpleDateFormat("yyyy").parse(birthYear);
-        } catch (ParseException e) {
-            System.out.println("wrong birth year  passed to familyTreeService");
-        }
+        // java.util.Date birthDate = new Date(0);
+        // try {
+        //     birthDate = new SimpleDateFormat("yyyy").parse(birthYear);
+        // } catch (ParseException e) {
+        //     System.out.println("wrong birth year  passed to familyTreeService");
+        // }
         Human father = familyTree.getByName((fatherName));
         Human mother = familyTree.getByName(motherName);
-        Human child = new Human(name, enumGender, birthDate, father, mother);
+        Human child = new Human(name, enumGender, birthYear, father, mother);
         return familyTree.addHuman(child);
+    }            
     }
-        // public boolean deleteEntry(String name) {
-        //     return familyTree.delete(familyTree.getByName(name));
-        // }
-    
-    }
-}
 
 
 
