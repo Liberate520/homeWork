@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Console implements View{
@@ -46,16 +45,23 @@ public class Console implements View{
         work = false;
     }
     public void addEntry(){
-        System.out.println("Enter name of a child: ");
+        System.out.println("Введите имя человека: ");
         String name = scanner.nextLine();
+
+        System.out.println("пол: ");
         String gender = enterGender();
+
+        System.out.println("Введите год рождения: ");
         Integer birthYear = scanner.nextInt();
-        System.out.println("Enter father name: ");
+
+        System.out.println("Введите имя отца: ");
         String fatherName = scanner.nextLine();
-        System.out.println("Enter mother name: ");
+
+        System.out.println("Введите имя матери: ");
         String motherName = scanner.nextLine();
+
         if(presenter.addEntry(name, gender, birthYear, fatherName, motherName)){
-            System.out.println("Person successfully added to the tree.");
+            System.out.println("Человек добавлен");
         }
     }
     public void showEntry(){
@@ -86,6 +92,24 @@ public class Console implements View{
         }
         return gender;
     }
+
+    // private String enterBirthYear() {
+    //     String birthYear = "";
+    //     Date birthDate = new Date(0);
+    //     boolean birtYearIsValid = false;
+    //     while (!birtYearIsValid) {
+    //         System.out.println("Enter birth year: ");
+    //         try {
+    //             birthYear = scanner.nextLine();
+    //             birthDate = new SimpleDateFormat("yyyy").parse(birthYear);
+    //             birtYearIsValid = true;
+    //         } catch (ParseException e) {
+    //             System.out.println("Wrong birth year.");
+    //         }
+    //     }
+    //     return birthYear;
+    // }
+
 
     public void save() throws FileNotFoundException {
         presenter.save();
