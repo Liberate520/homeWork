@@ -1,3 +1,4 @@
+
 public class Exit extends Command {
 
     public Exit(Console console) {
@@ -6,7 +7,7 @@ public class Exit extends Command {
 
     @Override
     public String description() {
-        return "Закончить работу";
+        return "Finish work";
     }
 
     @Override
@@ -14,3 +15,33 @@ public class Exit extends Command {
         getConsole().finish();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// public class Exit extends Command {
+
+//     public Exit(Console console) {
+//         super(console);
+//     }
+
+//     @Override
+//     public String description() {
+//         return "Закончить работу";
+//     }
+
+//     @Override
+//     public void execute() {
+//         getConsole().finish();
+//     }
+// }
