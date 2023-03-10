@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public interface Writable {
-    void save(Serializable serializable) throws FileNotFoundException;
+    void write(Serializable serializable) throws FileNotFoundException;
     Object read() throws FileNotFoundException, IOException;
     
 }
