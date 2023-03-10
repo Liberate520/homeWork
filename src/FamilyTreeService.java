@@ -1,17 +1,58 @@
-// import java.util.ArrayList;
-// import java.util.List;
-
-// public class FamilyTreeService {
-//     private FamilyTree <Human> familyTree;
-
-//     public FamilyTreeService(FamilyTree familyTree){
-//         this.familyTree= familyTree;
-//     }
-
-
-
-// }
-  
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+    
+    public class FamilyTreeService {
+        private final Writable fileHandler;
+        private FamilyTree<Human> familyTree;
+        public void load() throws FileNotFoundException, IOException{
+            familyTree = (FamilyTree<Human>) fileHandler.read();
+        }
+    
+        public FamilyTreeService() {
+            this.fileHandler = new FileHandler("familydata");
+            familyTree = new FamilyTree<>();
+        }
+    
+        public String showAll(){
+            return familyTree.getAllHumanToString();
+        }
+    
+        public void save() throws FileNotFoundException{
+            fileHandler.write(familyTree);
+        }
+    
+                public String showEntry(String name) {
+            return familyTree.getByName(name).getInfo();
+        }
+    
+       public boolean addEntry(String name, String gender, String birthYear,
+                         String fatherName, String motherName) {
+        Gender enumGender;
+        if(gender.equalsIgnoreCase("m")){
+            enumGender = Gender.male;
+        } else {
+            enumGender = Gender.female;
+        }
+        Date birthDate = new Date(0);
+        try {
+            birthDate = new SimpleDateFormat("yyyy").parse(birthYear);
+        } catch (ParseException e) {
+            System.out.println("wrong birth year  passed to familyTreeService");
+        }
+        Human father = familyTree.getByName((fatherName));
+        Human mother = familyTree.getByName(motherName);
+        Human child = new Human(name, enumGender, birthDate, father, mother);
+        return familyTree.add(child);
+    }
+        // public boolean deleteEntry(String name) {
+        //     return familyTree.delete(familyTree.getByName(name));
+        // }
+    
+    }
+}
 
 
 
