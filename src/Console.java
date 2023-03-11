@@ -52,11 +52,11 @@ public class Console implements View{
         String gender = enterGender();
 
         System.out.println("Введите год рождения: ");
-        Integer birthYear = scanner.nextInt();
+        Integer birthYear = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Введите имя отца: ");
         String fatherName = scanner.nextLine();
-
+       
         System.out.println("Введите имя матери: ");
         String motherName = scanner.nextLine();
 
