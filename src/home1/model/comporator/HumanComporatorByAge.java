@@ -1,7 +1,8 @@
-package home1.comporator;
+package home1.model.comporator;
 
 import java.util.Comparator;
-import home1.Human;
+
+import home1.model.Human;
 
 public class HumanComporatorByAge implements Comparator<Human> {
 
@@ -10,6 +11,5 @@ public class HumanComporatorByAge implements Comparator<Human> {
 
         return Integer.compare(o1.getAge(), o2.getAge());
     }
-    
-    
+
 }

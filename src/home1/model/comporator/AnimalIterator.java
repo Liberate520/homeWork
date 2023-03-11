@@ -1,9 +1,9 @@
-package home1.comporator;
+package home1.model.comporator;
 
 import java.util.Iterator;
 import java.util.List;
 
-import home1.Animal;
+import home1.model.Animal;
 
 public class AnimalIterator<T extends Animal> implements Iterator<T> {
     private int index;

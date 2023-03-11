@@ -1,11 +1,11 @@
-package home1;
+package home1.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import home1.comporator.AnimalIterator;
+import home1.model.comporator.AnimalIterator;
 
 public class FamilyTree<T extends Animal> implements Iterable<T>, Serializable {
     private List<T> familyTree;
@@ -17,8 +17,8 @@ public class FamilyTree<T extends Animal> implements Iterable<T>, Serializable {
     public void addFamilyTree(T human) {
         if (!familyTree.contains(human)) {
             familyTree.add(human);
-            if (human.getMather() != null) {
-                human.getMather().addChild(human);
+            if (human.getMother() != null) {
+                human.getMother().addChild(human);
             }
             if (human.getFather() != null) {
                 human.getFather().addChild(human);
@@ -44,14 +44,14 @@ public class FamilyTree<T extends Animal> implements Iterable<T>, Serializable {
         return null;
     }
 
-    public List<T> getfamilyTree() {
+    public List<T> getFamilyTree() {
         return familyTree;
     }
 
     @Override
     public Iterator<T> iterator() {
         return new AnimalIterator<T>(familyTree);
-        // return familyFree.iterator(); // простой способ достать итератор
+        // return familyTree.iterator(); // простой способ достать итератор
     }
 
 }

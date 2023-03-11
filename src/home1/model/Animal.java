@@ -1,4 +1,4 @@
-package home1;
+package home1.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,28 +63,23 @@ public abstract class Animal {
         return res;
     }
 
-    public String getName() 
-    {
+    public String getName() {
         return name;
     }
 
-    public Animal getFather() 
-    {
+    public Animal getFather() {
         return father;
     }
 
-    public Animal getMather() 
-    {
+    public Animal getMother() {
         return mother;
     }
 
-    public int getAge() 
-    {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(int age) 
-    {
+    public void setAge(int age) {
         this.age = age;
     }
 }
