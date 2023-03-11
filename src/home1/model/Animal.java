@@ -1,9 +1,10 @@
 package home1.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Animal {
+public abstract class Animal implements Serializable, Comparable<Animal> {
     private String name;
     private String sex;
     private int age;
@@ -81,5 +82,10 @@ public abstract class Animal {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public int compareTo(Animal o) {
+        return name.compareToIgnoreCase(o.name);
     }
 }

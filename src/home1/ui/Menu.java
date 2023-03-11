@@ -7,7 +7,10 @@ import home1.ui.commands.AddHuman;
 import home1.ui.commands.Exit;
 import home1.ui.commands.FamilyPrint;
 import home1.ui.commands.HumanSearch;
+import home1.ui.commands.Load;
 import home1.ui.commands.Option;
+import home1.ui.commands.SaveFamily;
+import home1.ui.commands.Sort;
 
 public class Menu {
     private List<Option> commands;
@@ -19,6 +22,9 @@ public class Menu {
         commands.add(new AddHuman(console));
         commands.add(new FamilyPrint(console));
         commands.add(new HumanSearch(console));
+        commands.add(new Sort(console));
+        commands.add(new SaveFamily(console));
+        commands.add(new Load(console));
         commands.add(new Exit(console));
     }
 
@@ -29,7 +35,7 @@ public class Menu {
 
     public String printMenu() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n\t- =  Меню  = -\n");
+        stringBuilder.append("\n\t- =  Меню  = -\n\n");
         for (int i = 0; i < commands.size(); i++) {
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
@@ -37,6 +43,10 @@ public class Menu {
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public Console getConsole() {
+        return console;
     }
 
 }

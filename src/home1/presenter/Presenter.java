@@ -2,43 +2,60 @@ package home1.presenter;
 
 import home1.model.FamilyTree;
 import home1.model.Human;
+import home1.model.IO;
+import home1.model.comporator.HumanComporatorByAge;
 import home1.ui.View;
 
 public class Presenter {
     private View view;
-    FamilyTree<Human> familyConnect;
+    private IO serialize;
+    private FamilyTree<Human> familyConnect;
+    private HumanComporatorByAge sortAge;
 
-    public Presenter(View view, FamilyTree<Human> familyConnect) {
+    public Presenter(View view, FamilyTree<Human> familyConnect, IO serialize, HumanComporatorByAge sortAge) {
         this.familyConnect = familyConnect;
         this.view = view;
+        this.serialize = serialize;
+        this.sortAge = sortAge;
         view.setPresenter(this);
     }
 
-    public void addHumanNew() {
-        System.out.print("Введите имя-> ");
-        String name = view.scan();
-        System.out.print("Введите пол(муж./жен.)-> ");
-        String sex = view.scan();
-        System.out.print("Введите возраст-> ");
-        int age = Integer.parseInt(view.scan());
-        System.out.println();
+    public void addHumanNew(String name, String sex, int age) {
         familyConnect.addFamilyTree(new Human(name, sex, age));
         view.print("Новый член семьи добавлен !");
-        view.print(familyConnect.getFamilyTree().get(familyConnect.getFamilyTree().size() - 1));
     }
 
     public void familyPrint() {
-        view.print(familyConnect);
+        String family = familyConnect.toString();
+        view.print(family);
     }
 
-    public void humanSearch() {
-        System.out.print("Введите имя человека для поиска-> ");
-        String name = view.scan();
-        System.out.println(name);
+    public void humanSearch(String name) {
         Human human = familyConnect.getByName(name);
         if (human == null)
             view.print("Такого человека нет в семье !");
-        else
-            view.print(human);
+
+        else {
+            String foundHuman = human.toString();
+            view.print(foundHuman);
+        }
+    }
+
+    public void saveFamily() {
+        familyConnect.saveObj(serialize);
+        view.print("Семейное древо сохранено !");
+    }
+
+    public void loadFamily() {
+        serialize.load("FreeFamily.data");
+    }
+
+    public void sortFamily(int choice) {
+        if (choice == 1) {
+            familyConnect.getFamilyTree().sort(null);
+        } else {
+            familyConnect.getFamilyTree().sort(sortAge);
+        }
+        view.print("Сортировка завершена !");
     }
 }
