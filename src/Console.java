@@ -70,12 +70,7 @@ public class Console implements View{
     }
     public void showAllEntries() {
         presenter.showAllEntries();
-    // }
-    // public void deleteEntry() {
-    //     print("Enter name for deletion: ");
-    //     if (presenter.deleteEntry(scanner.nextLine())) {
-    //         print("Successfully deleted");
-    //     }
+    
     }
     @Override
     public void setPresenter(Presenter presenter){
@@ -92,24 +87,6 @@ public class Console implements View{
         }
         return gender;
     }
-
-    // private String enterBirthYear() {
-    //     String birthYear = "";
-    //     Date birthDate = new Date(0);
-    //     boolean birtYearIsValid = false;
-    //     while (!birtYearIsValid) {
-    //         System.out.println("Enter birth year: ");
-    //         try {
-    //             birthYear = scanner.nextLine();
-    //             birthDate = new SimpleDateFormat("yyyy").parse(birthYear);
-    //             birtYearIsValid = true;
-    //         } catch (ParseException e) {
-    //             System.out.println("Wrong birth year.");
-    //         }
-    //     }
-    //     return birthYear;
-    // }
-
 
     public void save() throws FileNotFoundException {
         presenter.save();
