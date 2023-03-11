@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
     
     public class FamilyTreeService {
         private final Writable fileHandler;
@@ -35,12 +33,7 @@ import java.text.SimpleDateFormat;
         } else {
             enumGender = Gender.female;
         }
-        // java.util.Date birthDate = new Date(0);
-        // try {
-        //     birthDate = new SimpleDateFormat("yyyy").parse(birthYear);
-        // } catch (ParseException e) {
-        //     System.out.println("wrong birth year  passed to familyTreeService");
-        // }
+        
         Human father = familyTree.getByName((fatherName));
         Human mother = familyTree.getByName(motherName);
         Human child = new Human(name, enumGender, birthYear, father, mother);
