@@ -21,22 +21,6 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
         return humans;
     }
    
-
-    // public String getChildrenToString(T human) {
-    //     String res = "Дети от родителя " + human.getInfo() + ": ";
-    //     List<T> children = new ArrayList<>();
-    //     for (int i = 0; i < humans.size(); i++) {
-    //         if (humans.get(i).getFather() == human) {
-    //             children.add(humans.get(i));
-    //         }
-    //     }
-    //     for (int i = 0; i < children.size(); i++) {
-    //         res = res + "\n" + (i + 1) + "). " + children.get(i).getInfo();
-    //     }
-    //     return res;
-    // }
-
-
     public String getInfo(){
         StringBuilder res = new StringBuilder();
         res.append(humans.size());
@@ -102,15 +86,6 @@ public class FamilyTree<T extends Individual> implements Serializable, Iterable<
         }
         return find;
     }
-
-
-    // public void read() throws IOException {
-    //     fileHandler.read();
-    // }
-
-    // public void setFileHandler(Writable fileHandler) {
-    //     this.fileHandler = fileHandler;
-    // }
 
     @Override
     public Iterator<T> iterator() {
