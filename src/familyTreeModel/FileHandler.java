@@ -1,3 +1,4 @@
+package familyTreeModel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +12,7 @@ public class FileHandler implements Savable{
 
     @Override
     public void save(Serializable serializable) throws FileNotFoundException, IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("FamilyTree.out"));
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("FamilyTree.out"));//OOP/Homework/homeWork/src/familyTreeModel/
         objectOutputStream.writeObject(serializable);
         objectOutputStream.close();
     }
@@ -23,15 +24,6 @@ public class FileHandler implements Savable{
         objectInputStream.close();
         return FamilyTree;
     }
-
-    // @Override
-    // public void write() { // Написать функцию записи в файла, например, csv
-
-    // }
-
-    // @Override 
-    // public Object read() { // Написать функцию чтения из файла, например, csv
-    //     return null;
-    // }
-
+        
 }
+

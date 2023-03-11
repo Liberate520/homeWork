@@ -1,3 +1,4 @@
+package familyTreeModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -27,12 +28,16 @@ public class Human implements Serializable{
         this(name, surname, sex, startDate, endDate, father, mother, new ArrayList<Human>());
     }
 
+    public Human(String name, String surname, Sex sex, int startDate, int endDate, Human mother) {
+        this(name, surname, sex, startDate, endDate, null, mother);
+    }
+
     public Human(String name, String surname, Sex sex, int startDate, int endDate) {
-        this(name, surname, sex, startDate, endDate, null, null);
+        this(name, surname, sex, startDate, endDate, null);
     }
 
     public Human(String name, String surname, Sex sex, int startDate) {
-        this(name, surname, sex, startDate, (Integer) null);
+        this(name, surname, sex, startDate, 0);//(Integer) null
     }
 
     @Override

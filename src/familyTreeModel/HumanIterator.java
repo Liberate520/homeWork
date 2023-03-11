@@ -1,12 +1,13 @@
+package familyTreeModel;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-class HumanIterator implements Iterator<Human>{
+class HumanIterator<T extends Human> implements Iterator<T>{
 
     private int index;
-    private ArrayList<Human> familyTree;
+    private ArrayList<T> familyTree;
 
-    public HumanIterator(ArrayList<Human> familyTree) {
+    public HumanIterator(ArrayList<T> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -17,7 +18,7 @@ class HumanIterator implements Iterator<Human>{
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return familyTree.get(index++);
     }
 
