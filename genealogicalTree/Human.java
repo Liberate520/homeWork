@@ -1,19 +1,21 @@
+package genealogicalTree;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  * Human
  */
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private String gender;
     private Calendar birthDate;
     private Calendar deadDate;
     private Human father;
     private Human mother;
-    private List<Human> children;
+    private ArrayList<Human> children;
 
     public Human(String name, String gender, int day, int month, int year){
         this.name = name;
@@ -32,13 +34,13 @@ public class Human implements Serializable {
     public String getGender() {
         return gender;
     }
-
+    
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public Calendar getDeadDate() {
-        return deadDate;
+    public Integer getDeadDate() {
+        return deadDate.get(Calendar.YEAR);
     }
 
     public void setDeadDate(int day, int month, int year) {
@@ -60,8 +62,8 @@ public class Human implements Serializable {
         this.mother = mother;
     }
 
-    public Calendar getBirthDate() {
-        return birthDate;
+    public Integer getBirthDate() {
+        return birthDate.get(Calendar.YEAR);
     }
 
     public void setBirthDate(Calendar birthDate) {
@@ -74,6 +76,7 @@ public class Human implements Serializable {
     }
 
     public void addChild(Human human){
+        this.children = new ArrayList<>();
         children.add(human);
     }
 
@@ -102,19 +105,25 @@ public class Human implements Serializable {
         System.out.println("Имя: " + name);
         System.out.println("Пол: " + gender);
         System.out.println("Дата рождения: " + birthDate.get(Calendar.DAY_OF_MONTH) + "." + birthDate.get(Calendar.MONTH) + "." + birthDate.get(Calendar.YEAR));
-        if (!deadDate.equals(null)){
-            System.out.println("Дата смерти: " + deadDate.get(Calendar.DAY_OF_MONTH) + "." + deadDate.get(Calendar.MONTH) + "." + deadDate.get(Calendar.YEAR));
+        if (deadDate != null){
+            System.out.println("Дата смерти: " + deadDate.get(Calendar.DAY_OF_MONTH) + "." + deadDate.get(Calendar.MONTH + 1) + "." + deadDate.get(Calendar.YEAR));
         }
-        if (!father.equals(null)){
+        if (father != null){
             System.out.println("Отец: " + father.getName());
             System.out.println("Мать: " + mother.getName());
         }
-        if (!children.isEmpty()){
+        if (children != null){
             System.out.print("Дети:");
             for (Human child : children) {
                 System.out.print(" " + child.getName());
             }
             System.out.println();
         }
+        System.out.println("_______________________");
+    }
+    
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }
