@@ -1,6 +1,6 @@
 package presenter;
 
-import ui.View;
+import ui.*;
 
 public class Presenter {
 

@@ -1,3 +1,4 @@
+package model;
 import java.util.*;
 
 public class UserParametrized {
@@ -8,10 +9,27 @@ public class UserParametrized {
     private List<UserParametrized> children;
 
 
-
-    public void addChild(UserParametrized child) {
-        this.children.add(child);
+    public boolean addChild(UserParametrized child) {
+        if (!children.contains(child)) {
+            children.add(child);
+            System.out.println("Не добавляет детей!!!???");
+            return true;
+        }
+        return false;
     }
+
+    // public void addChild(UserParametrized child) {
+    // children.add(child);
+    // }
+
+    // public void addChild(UserParametrized child) {
+    // if (this.children == null) {
+    // System.out.println("Не создал детей!!!!!!");;
+    // }
+    // else {
+    // this.children.add(child);
+    // }
+    // }
 
     public UserParametrized getFather() {
         return father;
@@ -29,7 +47,6 @@ public class UserParametrized {
         return children.size();
     }
 
-
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Имя: ");
@@ -42,13 +59,12 @@ public class UserParametrized {
         sb.append(getChildrenInfo());
         return sb.toString();
     }
-    
+
     private String getFatherInfo() {
         String res = "Отец: ";
         if (father != null) {
             res += father.getName();
-        }
-        else {
+        } else {
             res += "нет";
         }
         return res;
@@ -58,8 +74,7 @@ public class UserParametrized {
         String res = "Мать: ";
         if (mother != null) {
             res += mother.getName();
-        }
-        else {
+        } else {
             res += "нет";
         }
         return res;
@@ -75,16 +90,23 @@ public class UserParametrized {
                 res.append(children.get(i).getName());
                 res.append(", ");
             }
-        }
-        else {
+        } else {
             res.append("нет");
         }
         res.append("\n");
         return res.toString();
     }
 
-    public void addChild(Human child) {
-        children.add(child);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof UserParametrized)) {
+            return false;
+        }
+        UserParametrized human = (UserParametrized) obj;
+        return human.getName().equals(getName());
     }
 
 }

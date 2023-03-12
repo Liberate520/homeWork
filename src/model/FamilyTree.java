@@ -1,3 +1,4 @@
+package model;
 import java.util.*;
 import java.io.Serializable;
 
@@ -21,8 +22,7 @@ public class FamilyTree<T extends UserParametrized> implements Serializable, Ite
         if (!listHuman.contains(human)) {
             listHuman.add(human);
             if (human.getFather() != null) {
-                human.getFather().addChild(human); // если в переданом хумане есть отец/мать, то добавляется ребенок к
-                                                   // этим родителям
+                human.getFather().addChild(human); // если в переданом хумане есть отец/мать, то добавляется ребенок к этим родителям
             }
             if (human.getMother() != null) {
                 human.getMother().addChild(human);
@@ -52,16 +52,14 @@ public class FamilyTree<T extends UserParametrized> implements Serializable, Ite
     // создаем Итератор, но нужен отдельный класс, в котором интерфейс Итератор, в нем - что перебрать, добавляем методы hasNext+next
     @Override
     public Iterator<T> iterator() {
-        return new HumanIterator<T>(listHuman);  // или return listHuman.iterator();  - стандартный для Листа итератор
+        return new HumanIterator<T>(listHuman); 
     }
 
     public void sortByName() {
-        // Collection.sort(listHuman, new HumanComparatorByName());  // не работает Коллекция??
         listHuman.sort(new HumanComparatorByName<T>());
     }
 
     public void sortBySizeChildren() {
-        // Collection.sort(listHuman, new HumanComparatorBySizeChildren()); // не работает Коллекция??
         listHuman.sort(new HumanComparatorBySizeChildren<T>());
 
     }

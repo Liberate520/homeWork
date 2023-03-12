@@ -45,7 +45,9 @@ public class Menu {
         }
         return stringBuilder.toString();
     }
-
-   
+    
+    public Console getConsole() {
+        return console;
+    }
 
 }

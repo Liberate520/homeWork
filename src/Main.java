@@ -1,6 +1,9 @@
 import java.io.IOException;
 import javax.swing.text.View;
 
+import model.FamilyTree;
+import model.FileHandler;
+import model.Human;
 import presenter.Presenter;
 import ui.Console;
 import ui.*;
@@ -8,11 +11,9 @@ import ui.*;
 public class Main {
     public static void main(String[] args) throws SecurityException, IOException {
         
-        View view = new Console();
-        new Presenter(view);
-        view.start();
 
-        /* 
+  
+        
         System.out.println("Задание 1");
         // объект — это экземпляр (конкретный Хуман) с собственным состоянием свойств из класса (переменные и методы) - атрибутами
         // создаем новый экземпляр Хумана
@@ -23,7 +24,7 @@ public class Main {
         // tree.add(new Human("Иван 2", "мужчина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
         // tree.add(new Human("Юлия 1", "женщина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
         // tree.add(new Human("Егор 1", "мужчина", tree.getByName("Иван 1"), tree.getByName("Мария 1")));
-        // tree.add(new Human("Елизавета 1", "женщина", null, null));
+        tree.add(new Human("Елизавета 1", "женщина", null, null));
         // tree.add(new Human("Иван 3", "мужчина", tree.getByName("Иван 2"), tree.getByName("Елизавета 1")));
 
         System.out.println(tree);
@@ -60,6 +61,14 @@ public class Main {
             System.out.println(human.getInfo());
         }
 
-        */
+        
+        System.out.println("Задание 5");
+        View view = new Console();
+        new Presenter(view);
+        view.start();
+        System.out.println("+++++++++");
+
+
+
     }    
 }

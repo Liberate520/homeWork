@@ -1,3 +1,4 @@
+package model;
 import java.util.Comparator;
 
 public class HumanComparatorBySizeChildren<T extends UserParametrized> implements Comparator<T> {

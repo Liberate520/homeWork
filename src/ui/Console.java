@@ -38,6 +38,7 @@ public class Console implements View {
 
 
     private void hello() {
+        System.out.println("Меню\n");
         System.out.println(menu.printMenu());
     }
 

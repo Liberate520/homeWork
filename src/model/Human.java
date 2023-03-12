@@ -1,3 +1,4 @@
+package model;
 import java.util.*;
 import java.util.Date;
 import java.io.Serializable;
@@ -14,9 +15,11 @@ public class Human extends UserParametrized implements Serializable, Comparable<
     private List<Human> children;
 
     public Human(String name, String gender) {
+        // this(name, gender, null, null);
         this(name, gender, null, null);
     }
 
+    
     // метод конструктор
     public Human(String name, String gender, Human father, Human mother) {
         this.name = name;
@@ -28,10 +31,18 @@ public class Human extends UserParametrized implements Serializable, Comparable<
 
 
 
-
-    public void addChild(Human child) {
-        this.children.add(child);
+    public boolean addChild(Human child) {
+        if (!children.contains(child)) {
+            children.add(child);
+            System.out.println("Не добавляет детей");
+            return true;
+        }
+        return false;
     }
+
+    // public void addChild(Human child) {
+    //     this.children.add(child);
+    // }
 
     // метод выдачи имени
     public String getName() {
@@ -118,6 +129,19 @@ public class Human extends UserParametrized implements Serializable, Comparable<
         return res;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getName().equals(getName());
+    }
+
     // для сортировки по количеству детей
     public Integer getChildrenSize() {
         return children.size();
@@ -145,5 +169,7 @@ public class Human extends UserParametrized implements Serializable, Comparable<
     public int compareTo(Human o) {
         return name.compareTo(o.name); // сравниваем по именам
     }
+
+
 
 }
