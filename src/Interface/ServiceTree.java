@@ -14,11 +14,11 @@ import model.Person;
 
 public class ServiceTree  implements Service {
     private Integer menu;
-    private FamilyTree familyTree;
+    private FamilyTree<Person> familyTree;
     private static FileSaveLoad db; 
 
 
-    public ServiceTree(Integer menu, FamilyTree familyTree) {
+    public ServiceTree(Integer menu, FamilyTree<Person> familyTree) {
         this.menu = menu;
         this.familyTree = familyTree;
         this.db = new FileSaveLoad("tree");

@@ -6,7 +6,7 @@ import java.util.Iterator;
 import Comparator.CompareByDateOfBirth;
 import Comparator.CompareByName;
 
-public class FamilyTree<T extends Person> implements Serializable , Iterable<Person> {
+public class FamilyTree<T extends Person> implements Serializable , Iterable<T> {
     private ArrayList <T> Ancestry;
 
     public FamilyTree() {
@@ -35,6 +35,7 @@ public class FamilyTree<T extends Person> implements Serializable , Iterable<Per
     public String showAllPerson(){
         StringBuilder sb = new StringBuilder();
         Integer count=0;
+        sb.append("Список :\n");
         Iterator<T> human = Ancestry.iterator();
         while  (human.hasNext()){
             sb.append(++count+". "+human.next()+'\n');
@@ -66,8 +67,8 @@ public class FamilyTree<T extends Person> implements Serializable , Iterable<Per
         Ancestry.sort(new CompareByDateOfBirth());
     }
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator<T>(Ancestry<T>);
+    public Iterator<T> iterator() {
+        return Ancestry.iterator();
     }
     
 }
