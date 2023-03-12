@@ -3,26 +3,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyTree implements Serializable , Iterator<Person> {
-    private ArrayList <Person> Ancestry;
-    private int index;
+import Comparator.CompareByDateOfBirth;
+import Comparator.CompareByName;
+
+public class FamilyTree<T extends Person> implements Serializable , Iterable<Person> {
+    private ArrayList <T> Ancestry;
 
     public FamilyTree() {
-        this.Ancestry= new ArrayList<Person>();
+        this.Ancestry= new ArrayList<T>();
     }
-    public void add(Person curPer){
+    public void add(T curPer){
         this.Ancestry.add(curPer);
     }
-    public Person getByName(String name){
-        for (Person human : Ancestry){
+    public T getByName(String name){
+        for (T human : Ancestry){
             if (human.getName().equals(name)){
                 return human;
             }
         }
         return null;
     }    
-    public Person getByIndex(Integer index){
-        for (Person human : Ancestry){
+    public T getByIndex(Integer index){
+        for (T human : Ancestry){
             if (index--==0){
                 return human;
             }
@@ -30,33 +32,42 @@ public class FamilyTree implements Serializable , Iterator<Person> {
         return null;
     }
     //печать списка персон
-    public String ShowAllPerson(){
+    public String showAllPerson(){
         StringBuilder sb = new StringBuilder();
         Integer count=0;
-        // for (Person human : Ancestry){
-        //     sb.append(++count+". "+human+'\n');
-        // }
-        Iterator<Person> human = Ancestry.iterator();
+        Iterator<T> human = Ancestry.iterator();
         while  (human.hasNext()){
             sb.append(++count+". "+human.next()+'\n');
         }
-
         return sb.toString();
+
+    }
+    public String showPerson(Integer cur){
+        return Ancestry.get(cur).toString()+'\n';
+
+    }
+    public String сhildrentoSring(Integer cur){
+        return Ancestry.get(cur).сhildrentoSring() + '\n';
 
     }
     public void setFather(int cur, Person fat){
         Ancestry.get(cur).setFather(fat);
     }
-    @Override
-    public boolean hasNext() {
-        // TODO Auto-generated method stub
-        return Ancestry.size()<index;
+    public void setMother(int cur, Person mot){
+        Ancestry.get(cur).setMother(mot);
+    }
+    public void addChild(int cur, Person chil){
+        Ancestry.get(cur).addChild(chil);
+    }
+    public void CompareByName() {
+        Ancestry.sort(new CompareByName());
+    }
+    public void CompareByDateOfBirth() {
+        Ancestry.sort(new CompareByDateOfBirth());
     }
     @Override
-    public Person next() {
-        // TODO Auto-generated method stub
-        return Ancestry.get(++index);
+    public Iterator<Person> iterator() {
+        return new PersonIterator<T>(Ancestry<T>);
     }
-
-
+    
 }

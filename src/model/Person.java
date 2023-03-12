@@ -1,9 +1,7 @@
 package model;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-// import java.util.List;
 
 public class Person implements Serializable{
     private String name;
@@ -12,7 +10,6 @@ public class Person implements Serializable{
     private Date DateOfDeath;
     private Person mother;
     private Person father;
-    // private Person curPerson;
     private ArrayList<Person> children;
 
 
@@ -23,6 +20,7 @@ public class Person implements Serializable{
         this.DateOfDeath = DateOfDeath;
         this.mother = mother;
         this.father = father;
+        this.children = new ArrayList<>();
     }
     public Person (String name, String sex, Date DateOfBirth,Person mother, Person father){
         this(name, sex, DateOfBirth, null,mother, father);
@@ -44,14 +42,6 @@ public class Person implements Serializable{
         if(father!=null) rez=rez+" Отец - " + father.getName() ;
         return rez;
     }
-    //печать списка персон
-    public static void printListPerson(ArrayList<Person> listPerson){
-        Integer count=0;
-        while (count<listPerson.size()){
-            System.out.println(++count+". "+listPerson.get(count-1));
-                // count++;
-        }
-    }
 
     public String getSex() {
         return sex;
@@ -72,13 +62,52 @@ public class Person implements Serializable{
     public void setDateOfDeath(Date dateOfDeath) {
         DateOfDeath = dateOfDeath;
     }
-    public void setMother(Person mother) {
-        this.mother = mother;
-    }
+ 
     public void setFather(Person father) {
         this.father = father;
     }
+    public void setMother(Person mother) {
+        this.mother = mother;
+    }
+
+    public void addChild(Person chil) {
+        System.out.println(chil);
+        this.children.add(chil) ;
+    }
+    
     public void setChildren(ArrayList<Person> children) {
         this.children = children;
+    }
+
+    public String сhildrentoSring() {
+        Integer count=0;
+        String str="Нет такого персонажа";
+        // if (this.curPerson != null){
+        //     str="У персонажа "+this.curPerson.toString()+" нет детей";
+        // }
+        if (this.children != null){
+            // str="У персонажа\n"+this.toString()+"\nесть дети:";
+            str="";
+            while (count<this.children.size()){
+                str=str+"\n"+(++count).toString()+". "+this.children.get(count-1);
+           }
+        }
+        return str;
+    }
+
+    public Date getDateOfBirth() {
+        return DateOfBirth;
+    }
+    public Date getDateOfDeath() {
+        return DateOfDeath;
+    }
+    public Person getMother() {
+        return mother;
+    }
+    public Person getFather() {
+        return father;
+    }
+    public ArrayList<Person> getChildren() {
+        return children;
     }
 }

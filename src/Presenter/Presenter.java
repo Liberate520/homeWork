@@ -22,10 +22,30 @@ public class Presenter {
     public void load(){
         service.load();
     }
-    public String ShowAllPerson(){
-        return service.ShowAllPerson();
+    public String showAllPerson(){
+        return service.showAllPerson();
     }
+    public void sortByName(){
+        System.out.println("prez name");
+        service.sortByName();
+    }
+    public void sortByDateOfBirth(){
+        service.sortByDateOfBirth();
+    }
+    public String showPerson(Integer cur){
+        return service.showPerson(cur);
+    }
+    public String сhildrentoSring(Integer cur){
+        return service.сhildrentoSring(cur);
+    }
+
     public void addFater(Integer cur, Integer fat){
         service.addFater(cur, fat);
+    }    
+    public void addMother(Integer cur, Integer fat){
+        service.addMother(cur, fat);
+    }
+    public void addChild(Integer cur, Integer fat){
+        service.addChild(cur, fat);
     }
 }

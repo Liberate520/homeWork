@@ -1,25 +1,31 @@
 package menu;
 
+import java.util.Scanner;
+
 import ui.View;
 
 public class StartMenu  extends Command{
-
+    private Scanner scanner;
+    
     public StartMenu(View view) {
         super(view);
-        //TODO Auto-generated constructor stub
+        scanner = new Scanner(System.in);
     }
 
     @Override
     public String description() {
-        // TODO Auto-generated method stub
-        return "Список Всех людей ";
+        return "Начальное меню ";
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        this.getView().ShowAllPerson();;
-        
+    public int execute() {
+        Integer chois;
+
+            this.getView().print("\nВыберете пункт меню:\n");
+            this.getView().print("\n1. Редактирование персонажа\n2. Информация о всех персонажах\n3. Запись в файл\n4. Чтение из файла(если файла нет грузятся тестовые данные)\n0. Выход");
+            chois=scanner.nextInt();
+            System.out.println("cur ---- " +chois);
+        return chois;
     }
     
 }

@@ -2,23 +2,28 @@ package ui;
 
 import java.util.Scanner;
 
-// import java.util.scanerner;
-
 import Presenter.Presenter;
-import model.FamilyTree;
+import menu.AddAncestry;
+import menu.Command;
+import menu.LoadMenu;
+import menu.SaveMenu;
+import menu.ShowAllMenu;
+import menu.StartMenu;
 
 public class ConsoleUI implements View {
     private Presenter presenter;
-    private Scanner scanner;
+    // private Scanner scanner;
+    private Command command;
 
     public ConsoleUI() {
-        scanner = new Scanner(System.in);
+        // scanner = new Scanner(System.in);
+        command = new StartMenu(this);
         
     }
 
     @Override
     public void print(String text) {
-        // TODO Auto-generated method stub
+        System.out.println(text);
         
     }
 
@@ -29,64 +34,91 @@ public class ConsoleUI implements View {
 
     @Override
     public void start(Presenter presenter) {
+        Integer work= 10;
         setPresenter(presenter);
-        presenter.load();
-        ShowAllPerson();
-        addAncestry();
-        ShowAllPerson();
-        // presenter.save();
-        
-    }
-    public void load() {
-        load();
-        // ShowAllPerson();
-    }
-    public void ShowAllPerson(){
-        System.out.print(presenter.ShowAllPerson());
-    }
-    public  void addAncestry(){
-            Integer chois;
-            Integer chois1;
-            Integer chois2;
-            // Person addPerson;
-            // scan=erner scanner = new scanerner(System.in);
-            
-            System.out.println("\nВыберете персону для добавления родословной или 0 для выхода:\n");
-            ShowAllPerson();
-            chois=scanner.nextInt()-1;
-            if (chois<0) return;
-            System.out.println("cur ---- " +chois);
-                // cur=listPerson.get(chois);
-                // System.out.println(cur);
-            
-            while (true){
-                System.out.println("------------");
-                System.out.println("\nВыберете желаемое действие:\n1. Добавление отца\n2. Добавление матери\n3. Добавление детей\n0. Выход ");
-                chois1=scanner.nextInt();
-                if (chois1==0) return;
-                System.out.print("\nВыберете персону для ");
-                switch (chois1) {
-                    case (1): {
-                        System.out.println("добавления в поле отец");
-                        ShowAllPerson();
-                        chois2=scanner.nextInt()-1;
-                        if (chois2<0) return;
-                        System.out.println("cur " +chois+" fat "+chois2);
-                        presenter.addFater(chois, chois2);
-                        break;
-                    }
-                    case (2): {
-                        System.out.println("добавления в поле мать");
-                        break;
-                    }
-                    case (3): {
-                        System.out.println("добавления в поле дети");
-                        break;
-                    }
+        while (work>0) {
+            switch (work) {
+                case (1): {
+                    command = new AddAncestry(this);
+                    break;
                 }
-                ShowAllPerson();
-                chois=scanner.nextInt()-1;
-                if (chois<0) return;
+                case (10): {
+                    command = new  StartMenu(this);
+                    break;
+                }
+                case (2): {
+                    command = new ShowAllMenu(this);
+                    break;
+                }
+                case (21): {
+                    presenter.sortByName();
+                    print(presenter.showAllPerson());
+                    break;
+                }
+                case (22): {
+                    presenter.sortByDateOfBirth();
+                    print(presenter.showAllPerson());
+                    break;
+                }
+                case (23):
+                case (20): {
+                    command = new  StartMenu(this);
+                    break;
+                }
+                case (3): {
+                    command = new SaveMenu(this);
+                    break;
+                }
+                case (31): {
+                    presenter.save();
+                    command = new  StartMenu(this);
+                    break;
+                }
+                case (30): 
+                case (32): {
+                    command = new  StartMenu(this);
+                    break;
+                }
+                case (4): {
+                    command = new LoadMenu(this);
+                    break;
+                }
+                case (41): {
+                    presenter.load();
+                    command = new  StartMenu(this);
+                    break;
+                }
+                case (40):
+                case (42): {
+                    command = new  StartMenu(this);
+                    break;
+                }
+            }
+            work=command.execute();
         }
     }
+
+    public void load() {
+        load();
+        print(presenter.showAllPerson());
+    }
+    public String showPerson(Integer chois){
+        return presenter.showPerson(chois);
+    }
+    public void showAllPerson(){
+        print(presenter.showAllPerson());
+    }
+    public  void addFater(Integer chois,Integer chois2){
+        presenter.addFater(chois, chois2);
+    }
+    public  void addMother(Integer chois,Integer chois2){
+        presenter.addMother(chois, chois2);
+    }
+    public  void addChild(Integer chois,Integer chois2){
+        presenter.addChild(chois, chois2);
+    }
+    public String сhildrentoSring(Integer cur){
+        return presenter.сhildrentoSring(cur);
+    }
+
 }
