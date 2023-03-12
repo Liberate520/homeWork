@@ -10,7 +10,8 @@ import home1.ui.commands.HumanSearch;
 import home1.ui.commands.Load;
 import home1.ui.commands.Option;
 import home1.ui.commands.SaveFamily;
-import home1.ui.commands.Sort;
+import home1.ui.commands.SortAge;
+import home1.ui.commands.SortName;
 
 public class Menu {
     private List<Option> commands;
@@ -22,7 +23,8 @@ public class Menu {
         commands.add(new AddHuman(console));
         commands.add(new FamilyPrint(console));
         commands.add(new HumanSearch(console));
-        commands.add(new Sort(console));
+        commands.add(new SortName(console));
+        commands.add(new SortAge(console));
         commands.add(new SaveFamily(console));
         commands.add(new Load(console));
         commands.add(new Exit(console));

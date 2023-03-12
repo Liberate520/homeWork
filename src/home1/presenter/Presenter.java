@@ -47,15 +47,16 @@ public class Presenter {
     }
 
     public void loadFamily() {
-        serialize.load("FreeFamily.data");
+        serialize.load("TreeFamily.data");
     }
 
-    public void sortFamily(int choice) {
-        if (choice == 1) {
-            familyConnect.getFamilyTree().sort(null);
-        } else {
-            familyConnect.getFamilyTree().sort(sortAge);
-        }
+    public void sortFamilyName() {
+        familyConnect.getFamilyTree().sort(null);
+        view.print("Сортировка завершена !");
+    }
+
+    public void sortFamilyAge() {
+        familyConnect.getFamilyTree().sort(sortAge);
         view.print("Сортировка завершена !");
     }
 }

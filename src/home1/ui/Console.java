@@ -64,11 +64,12 @@ public class Console implements View {
         presenter.loadFamily();
     }
 
-    public void sortFamily() {
-        System.out.print("\n1. Сортировка по имени\n2. Сортировка по возрасту\n" +
-                "Ваш выбор -> ");
-        int choice = Integer.parseInt(scan());
-        presenter.sortFamily(choice);
+    public void sortFamilyName() {
+        presenter.sortFamilyName();
+    }
+
+    public void sortFamilyAge() {
+        presenter.sortFamilyAge();
     }
 
     public void end() {
