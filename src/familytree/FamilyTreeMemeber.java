@@ -1,10 +1,11 @@
+package familytree;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-class FamilyTreeMemeber implements Serializable {
+public class FamilyTreeMemeber implements Serializable {
     private int id;
     private String name;
     private String sex;

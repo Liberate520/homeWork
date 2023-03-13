@@ -1,9 +1,11 @@
+package familytree.serializer;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import familytree.FamilyTree;
 
-class FamilyTreeSerializer implements IFamilyTreeSaver, IFamilyTreeLoader {
+public class FamilyTreeSerializer implements IFamilyTreeSaver, IFamilyTreeLoader {
 
     public boolean save(FamilyTree familyTree) {
         try (var outStream = new ObjectOutputStream(new FileOutputStream("family_tree.dat"))) {

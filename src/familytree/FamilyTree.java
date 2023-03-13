@@ -1,8 +1,10 @@
+package familytree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
+import familytree.serializer.*;
 
 /**
  * FamilyTree
@@ -11,7 +13,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
     private ArrayList<FamilyTreeMemeber> memebers;
     private SortMode sortMode;
 
-    FamilyTree() {
+    public FamilyTree() {
         this.memebers = new ArrayList<FamilyTreeMemeber>();
         sortMode = SortMode.noSort;
     }
