@@ -52,7 +52,7 @@ class Get extends Command {
 
     private String success(String id, String name) {
         if(id != null)
-            return familyTree.getMemeberById(Integer.parseInt(id)).toString();
+            return familyTree.getMemeberById(Integer.parseInt(id) - 1).toString();
         if(name != null)
             return familyTree.toString();
         return familyTree.toString();

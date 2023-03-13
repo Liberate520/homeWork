@@ -28,7 +28,9 @@ public abstract class Command implements ICommand {
         if (command.length() == 0)
             return null;
         searchParams();
-        return processCommand();
+        String result = processCommand();
+        params.clear();
+        return result;
     }
 
     private void searchCommand() {

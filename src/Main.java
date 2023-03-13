@@ -1,7 +1,8 @@
 import java.util.Date;
-import java.util.Scanner;
+
+import cmdui.FamilyTreeCmd;
+import cmdui.commands.CommandFactory;
 import familytree.FamilyTree;
-import familytree.FamilyTreeMemeber;
 import familytree.serializer.FamilyTreeSerializer;
 
 /**
@@ -10,40 +11,19 @@ import familytree.serializer.FamilyTreeSerializer;
  * Вариант сортировки выбирается при помощи метода FamilyTree.setSortMode, который в качестве параметра принимает значение перечисления FamilyTree.SortMode.
  */
 public class Main {
-    //public static Scanner sc;
-
     public static void main(String[] args) {
         try {
-            //sc = new Scanner(System.in);
             var serializer = new FamilyTreeSerializer();
             FamilyTree familyTree = serializer.load();
             if (familyTree == null) {
                 familyTree = createFamilyTree();
                 familyTree.save(serializer);
             }
-            System.out.printf("Генеалогическое древо состоит из %d человек\n" +
-                    "  Введите ID человека (цифра от 1 до %d) для просмотра информации о нем\n" +
-                    "  Введите 0 для просмотра информации обо всех\n" +
-                    "  Enter - выход\n", familyTree.total(), familyTree.total());
-            // while (true) {
-            //     String input = sc.nextLine();
-            //     int num = Integer.parseInt(input) - 1;
-            //     if (num < 0) {
-            //         familyTree.setSortMode(FamilyTree.SortMode.name);
-            //         System.out.println(familyTree);
-            //     } else if (num >= familyTree.total()) {
-            //         System.out.println("Неверный ID");
-            //     } else {
-            //         FamilyTreeMemeber memeber = familyTree.getMemeberById(num);
-            //         System.out.println(memeber);
-            //     }
-            // }
+            System.out.printf("Генеалогическое древо состоит из %d человек\n", familyTree.total());
+            new FamilyTreeCmd(new CommandFactory(familyTree));
         } catch (NumberFormatException e) {
         } catch (Exception e) {
             System.out.printf("Ошибка: %s", e.getMessage());
-        } finally {
-            // if (sc != null)
-            //     sc.close();
         }
     }
 
