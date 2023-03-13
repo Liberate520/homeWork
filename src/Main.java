@@ -3,18 +3,19 @@ import java.util.Date;
 import cmdui.FamilyTreeCmd;
 import cmdui.commands.CommandFactory;
 import familytree.FamilyTree;
+import familytree.FamilyTreeMemeber;
+import familytree.FamilyTreeMemeberFactory;
 import familytree.serializer.FamilyTreeSerializer;
 
 /**
- * Для класса FamilyTree реализован интерфейс Iterable.
- * В качестве итератора используется новый класс IterSort, который также реализует интерфейс Comparator для осуществления сортировки.
- * Вариант сортировки выбирается при помощи метода FamilyTree.setSortMode, который в качестве параметра принимает значение перечисления FamilyTree.SortMode.
+ * Класс FamilyTree сделан параметризированным.
+ * Создан класс FamilyTreeCmd для общения с пользователем, и добавлены команды для работы с деревом.
  */
 public class Main {
     public static void main(String[] args) {
         try {
             var serializer = new FamilyTreeSerializer();
-            FamilyTree familyTree = serializer.load();
+            FamilyTree<FamilyTreeMemeber> familyTree = serializer.load();
             if (familyTree == null) {
                 familyTree = createFamilyTree();
                 familyTree.save(serializer);
@@ -27,8 +28,8 @@ public class Main {
         }
     }
 
-    private static FamilyTree createFamilyTree() throws Exception {
-        var familyTree = new FamilyTree();
+    private static FamilyTree<FamilyTreeMemeber> createFamilyTree() throws Exception {
+        var familyTree = new FamilyTree<FamilyTreeMemeber>(new FamilyTreeMemeberFactory());
         int[] ids = new int[2];
         ids[0] = familyTree.addChild("Николай Лысенко", "мужской", date(5, 2, 40)).id();
         ids[1] = familyTree.addSpouse("Светлана Петрова", date(20, 10, 45), ids[0]).id();

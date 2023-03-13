@@ -9,24 +9,26 @@ import familytree.serializer.*;
 /**
  * FamilyTree
  */
-public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
-    private ArrayList<FamilyTreeMemeber> memebers;
+public class FamilyTree<T extends FamilyTreeMemeber> implements Serializable, Iterable<T> {
+    private ArrayList<T> memebers;
     private SortMode sortMode;
+    private IMemeberFactory<T> memeberFactory;
 
-    public FamilyTree() {
-        this.memebers = new ArrayList<FamilyTreeMemeber>();
+    public FamilyTree(IMemeberFactory<T> memeberFactory) {
+        this.memebers = new ArrayList<T>();
         sortMode = SortMode.noSort;
+        this.memeberFactory = memeberFactory;
     }
 
     public int total() {
         return memebers.size();
     }
 
-    public FamilyTreeMemeber getFirstMemeber() {
+    public T getFirstMemeber() {
         return memebers.get(0);
     }
 
-    public FamilyTreeMemeber getMemeberById(int memeberId) {
+    public T getMemeberById(int memeberId) {
         return memebers.get(memeberId);
     }
 
@@ -34,25 +36,28 @@ public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
     // return memebers.toArray(new FamilyTreeMemeber[0]);
     // }
 
-    public FamilyTreeMemeber addChild(String name, String sex, Date birthDay, int[] parentIds) {
-        FamilyTreeMemeber[] parents = parentIds != null
-                ? new FamilyTreeMemeber[] { memebers.get(parentIds[0]), memebers.get(parentIds[1]) }
-                : null;
-        var child = new FamilyTreeMemeber(memebers.size(), name, sex, birthDay, parents);
+    public T addChild(String name, String sex, Date birthDay, int[] parentIds) {
+        ArrayList<T> parents =null;
+        if(parentIds != null) {
+            parents = new ArrayList<T>();
+            parents.add(memebers.get(parentIds[0]));
+            parents.add(memebers.get(parentIds[1]));
+        }
+        T child = memeberFactory.getTreeMemeber(memebers.size(), name, sex, birthDay, parents);
         memebers.add(child);
         return child;
     }
 
-    public FamilyTreeMemeber addChild(String name, String sex, Date birthDay) {
+    public T addChild(String name, String sex, Date birthDay) {
         return addChild(name, sex, birthDay, null);
     }
 
-    public FamilyTreeMemeber addSpouse(String name, Date birthDay, int memberId) throws Exception {
+    public T addSpouse(String name, Date birthDay, int memberId) throws Exception {
         if (memberId >= memebers.size())
             throw new Exception("Invalid memberId");
         FamilyTreeMemeber member = memebers.get(memberId);
         String sex = member.sex() == "мужской" ? "женский" : "мужской";
-        var spouse = new FamilyTreeMemeber(memebers.size(), name, sex, birthDay, null);
+        T spouse = memeberFactory.getTreeMemeber(memebers.size(), name, sex, birthDay, null);
         member.spouse(spouse);
         memebers.add(spouse);
         return spouse;
@@ -61,7 +66,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
     @Override
     public String toString() {
         var str = new StringBuilder();
-        for (FamilyTreeMemeber memeber : this)
+        for (T memeber : this)
             str.append("\n" + memeber.toString());
         return str.toString();
     }
@@ -74,12 +79,12 @@ public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
         this.sortMode = sortMode;
     }
     
-    public Iterator<FamilyTreeMemeber> iterator() {
+    public Iterator<T> iterator() {
         return new IterSort();
     }
 
-    private class IterSort implements Iterator<FamilyTreeMemeber>, Comparator<FamilyTreeMemeber> {
-        private Iterator<FamilyTreeMemeber> iter;
+    private class IterSort implements Iterator<T>, Comparator<T> {
+        private Iterator<T> iter;
 
         IterSort() {
             if (sortMode == SortMode.noSort) {
@@ -93,11 +98,11 @@ public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
             return iter.hasNext();
         }
 
-        public FamilyTreeMemeber next() {
+        public T next() {
             return iter.next();
         }
 
-        public int compare(FamilyTreeMemeber o1, FamilyTreeMemeber o2) {
+        public int compare(T o1, T o2) {
             switch (sortMode) {
                 case name:
                     return  o1.name().compareTo(o2.name());
@@ -108,9 +113,5 @@ public class FamilyTree implements Serializable, Iterable<FamilyTreeMemeber> {
             }
             return 0;
         }
-    }
-
-    public enum SortMode {
-        name, birthDay, noSort
     }
 }

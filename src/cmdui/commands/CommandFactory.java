@@ -1,11 +1,12 @@
 package cmdui.commands;
 
 import familytree.FamilyTree;
+import familytree.FamilyTreeMemeber;
 
 public class CommandFactory implements ICommandFactory {
-    private FamilyTree familyTree;
+    private FamilyTree<FamilyTreeMemeber> familyTree;
 
-    public CommandFactory(FamilyTree familyTree) {
+    public CommandFactory(FamilyTree<FamilyTreeMemeber> familyTree) {
         this.familyTree = familyTree;
     }
 

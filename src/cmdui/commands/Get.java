@@ -2,10 +2,11 @@ package cmdui.commands;
 
 import java.util.ArrayList;
 import familytree.FamilyTree;
-import familytree.FamilyTree.SortMode;
+import familytree.FamilyTreeMemeber;
+import familytree.SortMode;
 
 class Get extends Command {
-    Get(FamilyTree familyTree) {
+    Get(FamilyTree<FamilyTreeMemeber> familyTree) {
         super(familyTree);
     }
 

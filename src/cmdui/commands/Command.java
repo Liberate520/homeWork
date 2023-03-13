@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import familytree.FamilyTree;
+import familytree.FamilyTreeMemeber;
 
 public abstract class Command implements ICommand {
     private static Pattern commandPattern = Pattern.compile(
@@ -13,12 +14,12 @@ public abstract class Command implements ICommand {
     private static Pattern paramPattern = Pattern.compile(
             "(/[a-zA-Z]+)\\s([^/]+)");
 
-    protected FamilyTree familyTree;
+    protected FamilyTree<FamilyTreeMemeber> familyTree;
     protected String input;
     protected String command;
     protected HashMap<String, ArrayList<String>> params = new HashMap<String, ArrayList<String>>();
 
-    Command(FamilyTree familyTree) {
+    Command(FamilyTree<FamilyTreeMemeber> familyTree) {
         this.familyTree = familyTree;
     }
 

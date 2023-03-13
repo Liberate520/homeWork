@@ -4,10 +4,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import familytree.FamilyTree;
+import familytree.FamilyTreeMemeber;
 
 public class FamilyTreeSerializer implements IFamilyTreeSaver, IFamilyTreeLoader {
 
-    public boolean save(FamilyTree familyTree) {
+    public boolean save(Object familyTree) {
         try (var outStream = new ObjectOutputStream(new FileOutputStream("family_tree.dat"))) {
             outStream.writeObject(familyTree);
         } catch (Exception e) {
@@ -16,9 +17,9 @@ public class FamilyTreeSerializer implements IFamilyTreeSaver, IFamilyTreeLoader
         return true;
     }
 
-    public FamilyTree load() {
+    public FamilyTree<FamilyTreeMemeber> load() {
         try (var inpStream = new ObjectInputStream(new FileInputStream("family_tree.dat"))) {
-            return (FamilyTree) inpStream.readObject();
+            return (FamilyTree<FamilyTreeMemeber>) inpStream.readObject();
         } catch (Exception e) {
             return null;
         }
