@@ -112,15 +112,12 @@ public class GenealogicalTree<T extends Animal> implements Serializable, Iterabl
         if (writable != null) {
             if (writable instanceof FileHandler) {
                 if (writable.read() == null) {
-                    System.out.println("FamilyTree в файле нет! Создаём новое FamilyTree.");
                     return new GenealogicalTree<T>(writable);
                 } else {
-                    System.out.println("FamilyTree загружено из файла.");
                     return (GenealogicalTree<T>) writable.read();
                 }
             }
         } else {
-            System.out.println("Файл не загружен!");
             return null;
         }
         return null;
