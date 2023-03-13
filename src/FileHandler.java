@@ -1,25 +1,32 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
-public class FileHandler {
+public class FileHandler implements Writable {
+    private final String path;
 
-    public void write (FamilyTree tree) throws IOException {
-
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("tree.out"));
-        objectOutputStream.writeObject(tree);
-        objectOutputStream.close();
-
+    public FileHandler(String path) {
+        this.path = path;
     }
 
-    public Object read() throws ClassNotFoundException, IOException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("tree.out"));
-        FamilyTree treeRestored = (FamilyTree) objectInputStream.readObject();
-        objectInputStream.close();
+    public void write(Serializable obj) {
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
+            objectOutputStream.writeObject(obj);
+            objectOutputStream.close();
+        } catch (Exception e) {
+            System.out.println("Ошибка!");
+        }
+    }
 
-        System.out.println("После восстановления: " + "\n" + treeRestored.getInfo());
-        return treeRestored;
+    public Object read() {
+        do {
+            try {
+                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path));
+                Object obj = objectInputStream.readObject();
+                objectInputStream.close();
+                return obj;
+            } catch (Exception e) {
+                System.out.println("Ошибка!");
+            }
+        } while (true);
     }
 }

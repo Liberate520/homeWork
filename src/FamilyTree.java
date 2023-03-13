@@ -1,27 +1,31 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree implements Serializable, Iterable<Human>{
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
-    private List<Human> humanList;
-    public FamilyTree() {this(new ArrayList<>());}
+    private List<T> humanList;
 
-    public FamilyTree(List<Human> humanList) {this.humanList = humanList;}
+    public FamilyTree() {
+        this(new ArrayList<>());
+    }
 
-    public boolean add(Human humanlist){
-        if (humanlist == null){
+    public FamilyTree(List<T> humanList) {
+        this.humanList = humanList;
+    }
+
+    public boolean add(T humanlist) {
+        if (humanlist == null) {
             return false;
         }
-        if(!humanList.contains(humanlist)){
+        if (!humanList.contains(humanlist)) {
             humanList.add(humanlist);
-            if(humanlist.getFather() != null){
+            if (humanlist.getFather() != null) {
                 humanlist.getFather().addChild(humanlist);
             }
-            if(humanlist.getMother() != null){
+            if (humanlist.getMother() != null) {
                 humanlist.getMother().addChild(humanlist);
             }
             return true;
@@ -29,9 +33,9 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         return false;
     }
 
-    public Human getByName(String name){
-        for (Human human: humanList){
-            if (human.getFirstname().equals(name)){
+    public Human getByName(String lastname, String firstname) {
+        for (T human : humanList) {
+            if (human.getFirstname().equals(firstname) && human.getLastname().equals(lastname)) {
                 return human;
             }
         }
@@ -39,27 +43,24 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
 
     public String getInfo() {
-        System.out.println("В дереве " + humanList.size() + " объекта/ов: ");
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < humanList.size(); i++){
-            sb.append("\n");
-            sb.append(humanList.get(i).getInfo());
+        StringBuilder res = new StringBuilder();
+        res.append("Записей в дереве: ");
+        res.append(humanList.size());
+        res.append("\n");
+        for (T human : humanList) {
+            res.append(human.getInfo());
+            res.append("\n");
         }
-        return sb.toString();
-    }
-
-    public List<Human> getHumanList() {
-        return humanList;
-    }
-
-    public void sortFamilyTree() {
-        Collections.sort(this.getHumanList());
-
+        return res.toString();
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIterator(humanList);
+    public Iterator<T> iterator() {
+        return humanList.iterator();
+    }
+
+    public void sortByName() {
+        humanList.sort(new ComparatorByName<T>());
     }
 }
 

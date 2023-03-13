@@ -2,7 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>{
+public class Human implements Serializable, Comparable<Human> {
+
     private String lastname;
     private String firstname;
     private String patronymic;
@@ -11,12 +12,11 @@ public class Human implements Serializable, Comparable<Human>{
     private Human mother;
     private List<Human> children;
 
-    public Human (String name, String surname, String patronymic, GenderType sex){
-        this(name, surname, patronymic, sex, null, null);
+    public Human(String lastname, String firstname, String patronymic, GenderType sex) {
+        this(lastname, firstname, patronymic, sex, null, null);
     }
 
-    public Human(String firstname, String lastname, String patronymic, GenderType sex, Human father, Human mother )
-    {
+    public Human(String lastname, String firstname, String patronymic, GenderType sex, Human father, Human mother) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.patronymic = patronymic;
@@ -26,8 +26,8 @@ public class Human implements Serializable, Comparable<Human>{
         children = new ArrayList<>();
     }
 
-    public boolean addChild(Human child){
-        if(!children.contains(child)){
+    public boolean addChild(Human child) {
+        if (!children.contains(child)) {
             children.add(child);
             return true;
         }
@@ -42,6 +42,8 @@ public class Human implements Serializable, Comparable<Human>{
         return lastname;
     }
 
+    public String getPatronymic() { return patronymic; }
+
     public GenderType getSex() {
         return sex;
     }
@@ -53,58 +55,67 @@ public class Human implements Serializable, Comparable<Human>{
     public Human getMother() {
         return mother;
     }
+
     public List<Human> getChildren() {
         return children;
     }
-    public void setFather(Human father){this.father = father;}
-    public void setMother(Human mother){this.mother = mother;}
 
+    public void setFather(Human father) {
+        this.father = father;
+    }
 
-    public String getInfo(){
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
+    public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("имя: ");
-        sb.append(firstname);
-        sb.append(", ");
-        sb.append("фамилия: ");
+        sb.append("\n ФИО: ");
         sb.append(lastname);
-        sb.append(", ");
-        sb.append("отчество: ");
+        sb.append(" ");
+        sb.append(firstname);
+        sb.append(" ");
         sb.append(patronymic);
-        sb.append(", ");
         sb.append(getMotherInfo());
-        sb.append(", ");
         sb.append(getFatherInfo());
-        sb.append(", ");
         sb.append(getChildrenInfo());
         return sb.toString();
     }
 
-    private String getMotherInfo(){
-        String res = "мать: ";
-        if (mother != null){
+    private String getMotherInfo() {
+        String res = "\nМать: ";
+        if (mother != null) {
+            res += mother.getLastname();
+            res += ' ';
             res += mother.getFirstname();
+            res += ' ';
+            res += mother.getPatronymic();
         } else {
             res += "неизвестна";
         }
         return res;
     }
 
-    private String getFatherInfo(){
-        String res = "отец: ";
-        if (father != null){
-            res +=father.getFirstname();
+    private String getFatherInfo() {
+        String res = "\nОтец: ";
+        if (father != null) {
+            res += father.getLastname();
+            res += ' ';
+            res += father.getFirstname();
+            res += ' ';
+            res += father.getPatronymic();
         } else {
             res += "неизвестен";
         }
         return res;
     }
 
-    private String getChildrenInfo(){
+    private String getChildrenInfo() {
         StringBuilder res = new StringBuilder();
-        res.append("дети: ");
-        if (children.size() != 0){
+        res.append("\nДети: ");
+        if (children.size() != 0) {
             res.append(children.get(0).getFirstname());
-            for (int i = 1; i < children.size(); i++){
+            for (int i = 1; i < children.size(); i++) {
                 res.append(", ");
                 res.append(children.get(i).getFirstname());
             }
@@ -114,27 +125,20 @@ public class Human implements Serializable, Comparable<Human>{
         return res.toString();
     }
 
-
-
     @Override
-    public boolean equals(Object obj){
-        if (this == obj){
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Human)){
+        if (!(obj instanceof Human)) {
             return false;
         }
         Human human = (Human) obj;
-        return human.getFirstname().equals(getFirstname());
+        return human.getFirstname().equals(getFirstname()) && human.getLastname().equals(getLastname());
     }
 
     @Override
     public int compareTo(Human o) {
-        return firstname.compareTo(o.getFirstname());
+        return lastname.compareTo(o.getLastname());
     }
-
-
-
-
-
 }
