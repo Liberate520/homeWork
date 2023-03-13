@@ -1,9 +1,12 @@
 // Продолжаем грейдить наш проект с гениологическим древом. Изменить древо, сделать класс параметизированным. 
 // Продумать класс общения с пользователем, сделать набор команд, для операций над деревом
 
-import java.util.List;
-import java.io.Serializable;
-import java.io.*;
+
+import model.FamilyTreeService;
+import presenter1.Presenter;
+import ui.Console;
+import ui.View;
+import java.io.*;   
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {            
