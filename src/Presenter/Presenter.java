@@ -26,7 +26,6 @@ public class Presenter {
         return service.showAllPerson();
     }
     public void sortByName(){
-        System.out.println("prez name");
         service.sortByName();
     }
     public void sortByDateOfBirth(){
@@ -42,10 +41,10 @@ public class Presenter {
     public void addFater(Integer cur, Integer fat){
         service.addFater(cur, fat);
     }    
-    public void addMother(Integer cur, Integer fat){
-        service.addMother(cur, fat);
+    public void addMother(Integer cur, Integer mot){
+        service.addMother(cur, mot);
     }
-    public void addChild(Integer cur, Integer fat){
-        service.addChild(cur, fat);
+    public void addChild(Integer cur, Integer chil, Integer delChil){
+        service.addChild(cur, chil, delChil);
     }
 }

@@ -54,11 +54,20 @@ public class FamilyTree<T extends Person> implements Serializable , Iterable<T> 
     public void setFather(int cur, Person fat){
         Ancestry.get(cur).setFather(fat);
     }
+    // public Person getFather(int cur){
+    //     return Ancestry.get(cur).getFather();
+    // }
     public void setMother(int cur, Person mot){
         Ancestry.get(cur).setMother(mot);
     }
+    // public Person getMother(int cur){
+    //     return Ancestry.get(cur).getMother();
+    // }
     public void addChild(int cur, Person chil){
         Ancestry.get(cur).addChild(chil);
+    }    
+    public void delChild(int cur, int chil){
+        Ancestry.get(cur).delChild(chil);
     }
     public void CompareByName() {
         Ancestry.sort(new CompareByName());

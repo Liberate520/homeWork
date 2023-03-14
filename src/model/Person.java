@@ -20,7 +20,7 @@ public class Person implements Serializable{
         this.DateOfDeath = DateOfDeath;
         this.mother = mother;
         this.father = father;
-        this.children = new ArrayList<>();
+        this.children = new ArrayList<Person>();
     }
     public Person (String name, String sex, Date DateOfBirth,Person mother, Person father){
         this(name, sex, DateOfBirth, null,mother, father);
@@ -71,10 +71,35 @@ public class Person implements Serializable{
     }
 
     public void addChild(Person chil) {
-        System.out.println(chil);
         this.children.add(chil) ;
     }
-    
+    public void delChild(Integer chil) {
+        if (this.children.size()>chil){
+            if (this.sex=="male") this.children.get(chil).setFather(null);
+            if (this.sex=="female") this.children.get(chil).setMother(null);
+            System.out.println(chil+"========");
+            this.children.remove(this.children.get(chil));
+            System.out.println(chil+"========");
+        }
+        
+    }
+    // public Boolean verificationChild(Person chil) {
+    //     for (Person person : this.children) {
+    //         if (person.equals(chil)){
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    public Person SearchChild(Integer chil) {
+        for (Person person : this.children) {
+            if (person.equals(chil)){
+                return person;
+            }
+        }
+        return null;
+    }
+
     public void setChildren(ArrayList<Person> children) {
         this.children = children;
     }
@@ -82,11 +107,7 @@ public class Person implements Serializable{
     public String сhildrentoSring() {
         Integer count=0;
         String str="Нет такого персонажа";
-        // if (this.curPerson != null){
-        //     str="У персонажа "+this.curPerson.toString()+" нет детей";
-        // }
         if (this.children != null){
-            // str="У персонажа\n"+this.toString()+"\nесть дети:";
             str="";
             while (count<this.children.size()){
                 str=str+"\n"+(++count).toString()+". "+this.children.get(count-1);
@@ -110,4 +131,46 @@ public class Person implements Serializable{
     public ArrayList<Person> getChildren() {
         return children;
     }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((sex == null) ? 0 : sex.hashCode());
+        result = prime * result + ((DateOfBirth == null) ? 0 : DateOfBirth.hashCode());
+        result = prime * result + ((DateOfDeath == null) ? 0 : DateOfDeath.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Person other = (Person) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (sex == null) {
+            if (other.sex != null)
+                return false;
+        } else if (!sex.equals(other.sex))
+            return false;
+        if (DateOfBirth == null) {
+            if (other.DateOfBirth != null)
+                return false;
+        } else if (!DateOfBirth.equals(other.DateOfBirth))
+            return false;
+        if (DateOfDeath == null) {
+            if (other.DateOfDeath != null)
+                return false;
+        } else if (!DateOfDeath.equals(other.DateOfDeath))
+            return false;
+        return true;
+    }
+    
 }

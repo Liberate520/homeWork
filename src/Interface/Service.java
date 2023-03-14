@@ -13,6 +13,6 @@ public interface Service {
     String сhildrentoSring (Integer cur);
     abstract void addFater(Integer cur, Integer fat);
     abstract void addMother(Integer cur, Integer mot);
-    abstract void addChild(Integer cur, Integer chil);
+    abstract void addChild(Integer cur, Integer chil, Integer delChil);
     
 }

@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.Serializable;
 
-// import interface.SaveLoad;
+
 
 public class FileSaveLoad implements SaveLoad {
     private static String path;

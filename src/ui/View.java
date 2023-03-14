@@ -9,7 +9,7 @@ public interface View {
     public void showAllPerson();
     public String showPerson(Integer chois);
     public String сhildrentoSring(Integer cur);
-    public void addFater(Integer chois,Integer chois2);
-    public void addMother(Integer chois,Integer chois2);
-    public void addChild(Integer chois,Integer chois2);
+    public void addFater(Integer cur,Integer fat);
+    public void addMother(Integer cur,Integer mot);
+    public void addChild(Integer cur,Integer chil,Integer delChil);
 }
