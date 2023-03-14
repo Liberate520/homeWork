@@ -17,7 +17,7 @@ public class Main {
         Human gaian = new Human("Гаян", "Male", 1, 5, 2020);
         aivaz.addParents(shamil, olga);
         gaian.addParents(aivaz, anzhela);
-        GenealogicalTree gareevTree = new GenealogicalTree();
+        GenealogicalTree<Human> gareevTree = new GenealogicalTree<Human>();
         gareevTree.addMember(shamil);
         gareevTree.addMember(olga); 
         gareevTree.addMember(aivaz);

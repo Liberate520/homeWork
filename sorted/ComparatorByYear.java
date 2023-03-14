@@ -1,12 +1,11 @@
 package sorted;
 
-import java.util.Calendar;
 import java.util.Comparator;
 import genealogicalTree.*;
 
-public class ComparatorByYear implements Comparator<Human> {
+public class ComparatorByYear<T extends Human> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o2.getBirthDate(), o1.getBirthDate());
     }
 }

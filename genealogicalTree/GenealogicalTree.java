@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class GenealogicalTree  implements Serializable, Iterable<Human> {
-    private ArrayList<Human> familyList;
+public class GenealogicalTree<T extends Human>  implements Serializable, Iterable<T> {
+    private ArrayList<T> familyList;
     private Writable fileHandler;
 
     public GenealogicalTree(){
@@ -26,19 +26,19 @@ public class GenealogicalTree  implements Serializable, Iterable<Human> {
     //     FileHandler.read("myTree.txt");
     // }
 
-    public void addMember(Human member){
+    public void addMember(T member){
         familyList.add(member);
         if (member.getFather() != null){
-            Human p1 = member.getFather();
+            T p1 = (T) member.getFather();
             p1.addChild(member);
-            p1 = member.getMother();
+            p1 = (T) member.getMother();
             p1.addChild(member);
         }
     }
 
-    public Human searchName (String name){
-        Human findingHuman = new Human(null, null, 0, 0, 0);
-        for (Human human : familyList) {
+    public T searchName (String name){
+        T findingHuman = (T) new Human(null, null, 0, 0, 0);
+        for (T human : familyList) {
             if (human.getName().equals(name)){
                 findingHuman = human;
             }
@@ -47,7 +47,7 @@ public class GenealogicalTree  implements Serializable, Iterable<Human> {
     }
 
     public void printTree(){
-        for (Human member : familyList) {
+        for (T member : familyList) {
             System.out.println(member.getName() + " " + member.getBirthDate());
         }
         System.out.println();
@@ -62,7 +62,7 @@ public class GenealogicalTree  implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return new HumanIteratir(familyList);
     }
 }

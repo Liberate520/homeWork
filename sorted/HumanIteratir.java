@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import genealogicalTree.*;
 
-public class HumanIteratir implements Iterator<Human> {
+public class HumanIteratir<T> implements Iterator<T> {
         
     private int index;
-    private ArrayList<Human> familyList;
+    private ArrayList<T> familyList;
 
-    public HumanIteratir(ArrayList<Human> familyList){
+    public HumanIteratir(ArrayList<T> familyList){
         this.familyList = familyList;
     }
 
@@ -19,7 +19,7 @@ public class HumanIteratir implements Iterator<Human> {
     }
     
     @Override
-    public Human next() {
+    public T next() {
         return familyList.get(index++);
     }
 }
