@@ -14,17 +14,17 @@ import java.util.Scanner;
 public class test {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         FamilyTree<Human> familyTree = new FamilyTree<Human>();//Создание семьи
-        Human mihailHuman = new Human("Михаил", "qwer", Sex.Male , 1613, 1645);
+        Human mihailHuman = new Human("Михаил", "Иванов", Sex.Male , 1613, 1645);
         familyTree.add(mihailHuman);//Создали и добавили отца
-        Human katyaHuman = new Human("Екатерина", "qwer", Sex.Female , 1650, 1680);
+        Human katyaHuman = new Human("Екатерина", "Петрова", Sex.Female , 1650, 1680);
         familyTree.add(katyaHuman);//Мать
-        Human alexHuman = new Human("Алексей", "qwer", Sex.Male , 1645, 1676);
+        Human alexHuman = new Human("Алексей", "Иванов", Sex.Male , 1645, 1676);
         familyTree.add(alexHuman, katyaHuman, mihailHuman);//Сын
-        Human mashaHuman = new Human("Маша", "qwer", Sex.Male , 1645, 1676);
+        Human mashaHuman = new Human("Маша", "Иванова", Sex.Male , 1645, 1676);
         familyTree.add(mashaHuman, katyaHuman, mihailHuman);//Дочь
-        Human fyodorHuman = new Human("Фёдор", "qwer", Sex.Male , 1676, 1682);
+        Human fyodorHuman = new Human("Фёдор", "Иванов", Sex.Male , 1676, 1682);
         familyTree.add(fyodorHuman, katyaHuman, mihailHuman);//Малдшый сын
-        Human ivan5Human = new Human("Иван", "qwer", Sex.Male , 1682, 1696);
+        Human ivan5Human = new Human("Иван", "Иванов", Sex.Male , 1682, 1696);
         familyTree.add(ivan5Human,mashaHuman);//Внук
 
 

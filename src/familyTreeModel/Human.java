@@ -42,8 +42,8 @@ public class Human implements Serializable{
 
     @Override
     public String toString() {
-        return "Human name: " + name + " " + surname + ", Date = " + startDate + " - " + endDate + " ," + " father: "
-                + getNameFather() + " mother: " + getNameMother() + "\n";
+        return "\nHuman name: " + name + " " + surname + ", Date = " + startDate + " - " + endDate + " ," + " father: "
+                + getNameFather() + " mother: " + getNameMother();
     }
 
     @Override

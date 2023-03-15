@@ -19,7 +19,7 @@ public class FileHandler implements Savable{
 
     @Override
     public FamilyTree download() throws FileNotFoundException, IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("FamilyTree.out"));
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("FamilyTree.out"));//C:/Users/User/Desktop/Java/OOP/Homework/FamilyTree.out
         FamilyTree FamilyTree = (FamilyTree) objectInputStream.readObject();
         objectInputStream.close();
         return FamilyTree;

@@ -3,104 +3,121 @@ package ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+
 
 import presenter.Presenter;
 
-public class ConsoleUI implements View{
+public class ConsoleUI implements View {
 
     private Presenter presenter;
     private Scanner scanner;
+    private Menu menu;
     private HashMap<String, String> data;
-    
 
     public ConsoleUI() {
-        scanner = new Scanner(System.in, "CP866");
-        data = new HashMap<String, String>();
+        this.scanner = new Scanner(System.in, "CP866");
+        this.menu = new Menu(this);
+        this.data = new HashMap<String, String>();
     }
 
     @Override
-    public void setPresenter(Presenter presenter){
+    public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public void start() throws FileNotFoundException, ClassNotFoundException, IOException {
-        while (0<1) {
-            presenter.onClick(menu());
+        while (true) {
+            menu();
+            presenter.onClick(data);
         }
     }
 
     @Override
-    public HashMap<String, String> menu() {
+    public void menu() {
         data.put("selector", "");
-        while(data.get("selector") != "0"){
-            System.out.println("~~~~~~~~~~" + 
-            "\n1. Показать семейное древо."+
-            "\n2. Найти человека по имени."+
-            "\n3. Добавить человека."+
-            "\n0. Выйти.");
+        while (true) {
+            System.out.println(printMenu());
             data.put("selector", scan());
-            if (data.get("selector").equals("1")){
-                data.put("selector", "full");
-                return data;
-            }
-            else if(data.get("selector").equals("2")){
-                data.put("selector", "search");
-                System.out.println("Введит имя: ");
-                data.put("name", scanner.next());
-                System.out.println("Введит фамилию: ");
-                data.put("surname", scanner.next());
-                return data;
-            }
-            else if(data.get("selector").equals("3")){
-                data.put("selector", "add");
-                return сompleteDatEntry(data);
-            }
-            else if(data.get("selector").equals("0")){
-                System.exit(0);
-            }
-            else{
+            if (checkInput(data.get("selector"))) {
+                menu.execute(Integer.parseInt(data.get("selector")));
+                return;
+            } else {
                 System.out.println("Не верное значение.");
             }
         }
-        return data;
     }
 
     private String scan() {
         System.out.println("Введит значение: ");
-        return scanner.nextLine();
+        return scanner.next();
     }
 
-    private HashMap<String, String> сompleteDatEntry(HashMap<String, String> user){
-        System.out.println("Введит имя: ");
-        user.put("name", scanner.next());
-        System.out.println("Введит фамилию: ");
-        user.put("surname", scanner.next());
-        System.out.println("Введит пол (Male, Female): ");
-        user.put("sex", scanner.next());
-        System.out.println("Введит год рождения: ");
-        user.put("startDate", scanner.next());
-        System.out.println("Введит год ухода: ");
-        user.put("endDate", scanner.next());
-        System.out.println("Введит имя матери: ");
-        user.put("nameMother", scanner.next());
-        System.out.println("Введит фамилию матери: ");
-        user.put("surnameMother", scanner.next());
-        System.out.println("Введит имя отца: ");
-        user.put("nameFather", scanner.next());
-        System.out.println("Введит фамилию отца: ");
-        user.put("surnameFather", scanner.next());
+    private boolean checkInput(String text) {
+        return text.matches("[1-"+ menu.size() +"]+");
+    }
 
-        return user;
+    public String printMenu(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("~~~~~~~~~~~\n");
+        for (int i = 0; i < menu.size(); i++) {
+            stringBuilder.append(i+1);
+            stringBuilder.append(". ");
+            stringBuilder.append(menu.getCommands().get(i).description());
+            stringBuilder.append("\n");            
+        }
+        return stringBuilder.toString();
     }
 
     @Override
-    public void print(String data) {
-        System.out.println(data);
+    public void сompleteDatEntry() {
+        data.put("name", getName("пользователя"));
+        data.put("surname", getSurname("пользователя"));
+        data.put("sex", getSex());
+        data.put("startDate", getStartDate());
+        data.put("endDate", getEndDate());
+        data.put("nameMother", getName("матери"));
+        data.put("surnameMother", getSurname("матери"));
+        data.put("nameFather", getName("отца"));
+        data.put("surnameFather", getSurname("отца"));
     }
 
+    @Override
+    public void print(String text) {
+        System.out.println(text);
+    }
 
-    
+    @Override
+    public HashMap<String, String> getData() {
+        return data;
+    }
+
+    @Override
+    public String getName(String status) {
+        System.out.printf("Введит имя %s: \n", status);
+        return scanner.next();
+    }
+
+    @Override
+    public String getSurname(String status) {
+        System.out.printf("Введит фамилию %s: \n", status);
+        return scanner.next();
+    }
+
+    public String getStartDate() {
+        System.out.println("Введит год рождения: ");
+        return scanner.next();
+    }
+
+    public String getEndDate() {
+        System.out.println("Введит год ухода: ");
+        return scanner.next();
+    }
+
+    public String getSex() {
+        System.out.println("Введит пол (Male, Female): ");
+        return scanner.next();
+    }
+
 }

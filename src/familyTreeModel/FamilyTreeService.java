@@ -22,6 +22,14 @@ public class FamilyTreeService implements Service {
             } else {
                 return "Не найден.";
             }
+        } else if (request.get("selector").equals("children")) {
+            Human human = familyTree.get(request.get("name"), request.get("surname"));
+            if (human != null) {
+                return "Дети пользователя " + human.getName() + " " + human.getSurname() + ": "
+                        + human.getChildren().toString();
+            } else {
+                return "Не найден.";
+            }
         } else if (request.get("selector").equals("add")) {
             Sex sex = Sex.Male;
             if (request.get("sex").equals(Sex.Female.toString())) {

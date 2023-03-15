@@ -74,19 +74,4 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     public String toString() {
         return familyTree.toString();
     }
-
-    // public void fill() {// метод для тестов
-    //     Human mihailHuman = new Human("Михаил", "qwer", Sex.Male, 1613, 1645);
-    //     familyTree.add((T) mihailHuman);// Создали и добавили отца
-    //     Human katyaHuman = new Human("Екатерина", "qwer", Sex.Female, 1650, 1680);
-    //     familyTree.add((T) katyaHuman);// Мать
-    //     // Human alexHuman = new Human("Алексей", "qwer", Sex.Male , 1645, 1676);
-    //     // familyTree.add((T) alexHuman, (T) katyaHuman, (T)mihailHuman);//Сын
-    //     // Human mashaHuman = new Human("Маша", "qwer", Sex.Male , 1645, 1676);
-    //     // familyTree.add((T)mashaHuman, (T)katyaHuman, (T)mihailHuman);//Дочь
-    //     // Human fyodorHuman = new Human("Фёдор", "qwer", Sex.Male , 1676, 1682);
-    //     // familyTree.add((T)fyodorHuman, (T)katyaHuman, (T)mihailHuman);//Малдшый сын
-    //     // Human ivan5Human = new Human("Иван", "qwer", Sex.Male , 1682, 1696);
-    //     // familyTree.add((T)ivan5Human, (T)mashaHuman);//Внук
-    // }
 }
