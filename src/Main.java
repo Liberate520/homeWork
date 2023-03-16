@@ -8,8 +8,7 @@ import familytree.FamilyTreeMemeberFactory;
 import familytree.serializer.FamilyTreeSerializer;
 
 /**
- * Класс FamilyTree сделан параметризированным.
- * Создан класс FamilyTreeCmd для общения с пользователем, и добавлены команды для работы с деревом.
+ * 
  */
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +20,7 @@ public class Main {
                 familyTree.save(serializer);
             }
             System.out.printf("Генеалогическое древо состоит из %d человек\n", familyTree.total());
-            new FamilyTreeCmd(new CommandFactory(familyTree));
+            new FamilyTreeCmd(new CommandFactory());
         } catch (NumberFormatException e) {
         } catch (Exception e) {
             System.out.printf("Ошибка: %s", e.getMessage());

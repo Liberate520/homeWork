@@ -1,7 +1,9 @@
 package cmdui.commands;
 
 public interface ICommand {
-    String processCommand(String input);
+    boolean processCommand(String input);
+
+    String error();
 
     String syntax();
 

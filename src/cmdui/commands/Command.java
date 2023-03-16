@@ -5,33 +5,35 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import familytree.FamilyTree;
-import familytree.FamilyTreeMemeber;
-
 public abstract class Command implements ICommand {
     private static Pattern commandPattern = Pattern.compile(
             "^([a-zA-Z]+)(?:\\s|$)");
     private static Pattern paramPattern = Pattern.compile(
             "(/[a-zA-Z]+)\\s([^/]+)");
 
-    protected FamilyTree<FamilyTreeMemeber> familyTree;
+    private String error;
+    protected IOnCommand onCommand;
     protected String input;
     protected String command;
     protected HashMap<String, ArrayList<String>> params = new HashMap<String, ArrayList<String>>();
 
-    Command(FamilyTree<FamilyTreeMemeber> familyTree) {
-        this.familyTree = familyTree;
+    Command(IOnCommand onCommand) {
+        this.onCommand = onCommand;
     }
 
-    public String processCommand(String input) {
+    public boolean processCommand(String input) {
         this.input = input;
         searchCommand();
-        if (command.length() == 0)
-            return null;
+        if (!command.equalsIgnoreCase(this.toString()))
+            return false;
         searchParams();
-        String result = processCommand();
+        try {
+            error = processCommand();
+        } catch (Exception e) {
+            error = syntaxError();
+        }
         params.clear();
-        return result;
+        return true;
     }
 
     private void searchCommand() {
@@ -51,6 +53,10 @@ public abstract class Command implements ICommand {
         }
     }
 
+    public String error() {
+        return error;
+    }
+
     protected String syntaxError() {
         return String.format("Неверный синтаксис для команды %s:\n%s", this, syntax());
     }
@@ -59,5 +65,5 @@ public abstract class Command implements ICommand {
 
     public abstract String description();
 
-    protected abstract String processCommand();
+    protected abstract String processCommand() throws Exception;
 }

@@ -1,5 +1,7 @@
 package cmdui.commands;
 
 public interface ICommandFactory {
-    ICommand commGet();
+    ICommand commGet(IOnCommand onCommand);
+
+    ICommand commAdd(IOnCommand onCommand);
 }
