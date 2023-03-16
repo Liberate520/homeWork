@@ -1,10 +1,9 @@
 package ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-
 
 import presenter.Presenter;
 
@@ -13,7 +12,7 @@ public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
     private Menu menu;
-    private HashMap<String, String> data;
+    private Map<String, String> data;
 
     public ConsoleUI() {
         this.scanner = new Scanner(System.in, "CP866");
@@ -22,50 +21,31 @@ public class ConsoleUI implements View {
     }
 
     @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public void start() throws FileNotFoundException, ClassNotFoundException, IOException {
-        while (true) {
-            menu();
-            presenter.onClick(data);
-        }
-    }
-
-    @Override
-    public void menu() {
-        data.put("selector", "");
+    public void start() throws NumberFormatException, ClassNotFoundException, IOException {
+        String selector;
         while (true) {
             System.out.println(printMenu());
-            data.put("selector", scan());
-            if (checkInput(data.get("selector"))) {
-                menu.execute(Integer.parseInt(data.get("selector")));
-                return;
+            selector = scan();
+            if (checkInput(selector)) {
+                menu.execute(Integer.parseInt(selector));
             } else {
                 System.out.println("Не верное значение.");
             }
         }
     }
 
-    private String scan() {
-        System.out.println("Введит значение: ");
-        return scanner.next();
-    }
-
     private boolean checkInput(String text) {
-        return text.matches("[1-"+ menu.size() +"]+");
+        return text.matches("[1-" + menu.size() + "]+");
     }
 
-    public String printMenu(){
+    public String printMenu() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("~~~~~~~~~~~\n");
         for (int i = 0; i < menu.size(); i++) {
-            stringBuilder.append(i+1);
+            stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(menu.getCommands().get(i).description());
-            stringBuilder.append("\n");            
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
@@ -85,12 +65,12 @@ public class ConsoleUI implements View {
 
     @Override
     public void print(String text) {
-        System.out.println(text);
+        System.out.println("~~~~~~~~~~~\n" + text);
     }
 
-    @Override
-    public HashMap<String, String> getData() {
-        return data;
+    private String scan() {
+        System.out.println("Введит значение: ");
+        return scanner.next();
     }
 
     @Override
@@ -118,6 +98,20 @@ public class ConsoleUI implements View {
     public String getSex() {
         System.out.println("Введит пол (Male, Female): ");
         return scanner.next();
+    }
+
+    public Presenter getPresenter() {
+        return presenter;
+    }
+
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public Map<String, String> getData() {
+        return data;
     }
 
 }

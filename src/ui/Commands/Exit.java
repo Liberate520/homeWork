@@ -18,5 +18,5 @@ public class Exit extends Command {
         getView().print("Завершение...");
         System.exit(0);
     }
-    
+
 }

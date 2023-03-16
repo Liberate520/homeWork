@@ -2,47 +2,56 @@ package familyTreeModel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
-public class FamilyTreeService implements Service {
+public class FamilyTreeService<T extends Human> implements Service<T> {
+    Handler handler;
+    FamilyTree familyTree;
+
+    public FamilyTreeService(Handler handler) throws FileNotFoundException, ClassNotFoundException, IOException {
+        this.handler = handler;
+        this.familyTree = (FamilyTree) handler.download();
+    }
 
     @Override
-    public String get(HashMap<String, String> request)
-            throws FileNotFoundException, ClassNotFoundException, IOException {
-        FileHandler FileHandler = new FileHandler();
-        FamilyTree<Human> familyTree = new FamilyTree<Human>();
-        familyTree = FileHandler.download();
+    public String ShowList() {
+        return familyTree.toString();
+    }
 
-        if (request.get("selector").equals("full")) {
-            return familyTree.toString();
-        } else if (request.get("selector").equals("search")) {
-            Human human = familyTree.get(request.get("name"), request.get("surname"));
-            if (human != null) {
-                return human.toString();
-            } else {
-                return "Не найден.";
-            }
-        } else if (request.get("selector").equals("children")) {
-            Human human = familyTree.get(request.get("name"), request.get("surname"));
-            if (human != null) {
-                return "Дети пользователя " + human.getName() + " " + human.getSurname() + ": "
-                        + human.getChildren().toString();
-            } else {
-                return "Не найден.";
-            }
-        } else if (request.get("selector").equals("add")) {
-            Sex sex = Sex.Male;
-            if (request.get("sex").equals(Sex.Female.toString())) {
-                sex = Sex.Female;
-            }
-            Human human = new Human(request.get("name"), request.get("surname"), sex,
-                    Integer.parseInt(request.get("startDate")), Integer.parseInt(request.get("endDate")),
-                    familyTree.get(request.get("nameMother")));
-            familyTree.add(human);
-            FileHandler.save(familyTree);
-            return "Успешно добавлен: " + human.toString();
+    @Override
+    public String Search(Map<String, String> data) {
+        return convertPersonStringSearch((T) familyTree.get(data.get("name"), data.get("surname")));
+    }
+
+    private String convertPersonStringSearch(T person) {
+        if (person != null) {
+            return person.toString();
         } else {
-            return "Не верный параметр";
+            return "Пользователь не найден.";
         }
+    }
+
+    @Override
+    public String getChildren(Map<String, String> data) {
+        return convertPersonStringChildren((T) familyTree.get(data.get("name"), data.get("surname")));
+    }
+
+    private String convertPersonStringChildren(T person) {
+        if (person != null) {
+            return "Дети пользователя " + person.getName() + " " + person.getSurname() + ": "
+                    + person.getChildren().toString();
+        } else {
+            return "Пользователь не найден.";
+        }
+    }
+
+    @Override
+    public String Add(Map<String, String> data) throws FileNotFoundException, IOException, ClassNotFoundException {
+        Sex sex = data.get("sex").equals(Sex.Female.toString()) ? Sex.Female : Sex.Male;
+        Human human = new Human(data.get("name"), data.get("surname"), sex, Integer.parseInt(data.get("startDate")),
+                Integer.parseInt(data.get("endDate")), familyTree.get(data.get("nameMother")));
+        familyTree.add(human);
+        handler.save(familyTree);
+        return "Успешно добавлен: " + human.toString();
     }
 }

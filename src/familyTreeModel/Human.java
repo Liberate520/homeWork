@@ -1,8 +1,9 @@
 package familyTreeModel;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Human implements Serializable{
+public class Human implements Serializable {
     private String name;
     private String surname;
     private Sex sex;
@@ -37,7 +38,7 @@ public class Human implements Serializable{
     }
 
     public Human(String name, String surname, Sex sex, int startDate) {
-        this(name, surname, sex, startDate, 0);//(Integer) null
+        this(name, surname, sex, startDate, 0);// (Integer) null
     }
 
     @Override
@@ -52,8 +53,6 @@ public class Human implements Serializable{
         return this.getSurname() == t.getSurname() && this.getName() == t.getName()
                 && this.getStartDate() == t.getStartDate() && this.getEndDate() == t.getEndDate();
     }
-
-    
 
     public String getName() {
         return name;
@@ -117,12 +116,12 @@ public class Human implements Serializable{
 
     public void addChild(Human child) {
         children.add(child);
-        if (this.sex == Sex.Male){
+        if (this.sex == Sex.Male) {
             child.setFather(this);
         } else {
             child.setMother(this);
         }
-        
+
     }
 
     private String getNameFather() {

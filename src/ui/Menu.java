@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import ui.Commands.*;
@@ -13,13 +14,13 @@ public class Menu {
         this.commands = new ArrayList<>();
         commands.add(new ShowList(view));
         commands.add(new Search(view));
-        commands.add(new Children(view));
+        commands.add(new ShowChildren(view));
         commands.add(new Add(view));
         commands.add(new Exit(view));
     }
 
-    void execute(int num){
-        Option option = commands.get(num-1);
+    void execute(int num) throws ClassNotFoundException, IOException {
+        Option option = commands.get(num - 1);
         option.execute();
     }
 
@@ -27,7 +28,7 @@ public class Menu {
         return commands;
     }
 
-    public int size(){
+    public int size() {
         return commands.size();
     }
 }

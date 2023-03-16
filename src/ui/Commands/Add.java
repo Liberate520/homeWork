@@ -1,8 +1,10 @@
 package ui.Commands;
 
+import java.io.IOException;
+
 import ui.View;
 
-public class Add extends Command{
+public class Add extends Command {
 
     public Add(View view) {
         super(view);
@@ -14,9 +16,9 @@ public class Add extends Command{
     }
 
     @Override
-    public void execute() {
-        getView().getData().put("selector", "add");
+    public void execute() throws ClassNotFoundException, IOException {
         getView().сompleteDatEntry();
+        getView().getPresenter().Add(getView().getData());
     }
-    
+
 }

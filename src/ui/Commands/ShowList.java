@@ -1,8 +1,10 @@
 package ui.Commands;
 
+import java.io.IOException;
+
 import ui.View;
 
-public class ShowList extends Command{
+public class ShowList extends Command {
 
     public ShowList(View view) {
         super(view);
@@ -14,9 +16,7 @@ public class ShowList extends Command{
     }
 
     @Override
-    public void execute() {
-        getView().getData().put("selector", "full");
+    public void execute() throws ClassNotFoundException, IOException {
+        getView().getPresenter().ShowList();
     }
-
-    
 }

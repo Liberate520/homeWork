@@ -35,13 +35,8 @@ public class DesktopUI implements View {
     }
 
     @Override
-    public void start() throws FileNotFoundException, ClassNotFoundException, IOException {
-        menu();
-    }
-
-    @Override
-    public void menu() {
-    data.put("selector", "");
+    public void start() {
+        data.put("selector", "");
 
         for (int i = 0; i < menu.size(); i++) {
             Option cmd = menu.getCommands().get(i);
@@ -50,23 +45,22 @@ public class DesktopUI implements View {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    cmd.execute();
                     try {
-                        presenter.onClick(data);
-                        //frame.revalidate();
+                        cmd.execute();
                     } catch (ClassNotFoundException | IOException e1) {
+                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
                 }
             });
             window.add(button);
-        }       
+        }
     }
 
     @Override
     public void print(String text) {
         System.out.print(text);
-        JList<String> b = new JList< >(text.split("\n"));
+        JList<String> b = new JList<>(text.split("\n"));
         window.add(b);
         ((JFrame) window).getContentPane().setVisible(false);
         ((JFrame) window).getContentPane().setVisible(true);
@@ -93,5 +87,11 @@ public class DesktopUI implements View {
     public void сompleteDatEntry() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'сompleteDatEntry'");
+    }
+
+    @Override
+    public Presenter getPresenter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPresenter'");
     }
 }

@@ -1,8 +1,8 @@
 package ui.Commands;
 
-import ui.*;
+import ui.View;
 
-public abstract class Command implements Option{
+public abstract class Command implements Option {
     private View view;
 
     public Command(View view) {

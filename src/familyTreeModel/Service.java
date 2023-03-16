@@ -1,9 +1,14 @@
 package familyTreeModel;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
-public interface Service {
-    String get(HashMap<String, String> selector) throws FileNotFoundException, ClassNotFoundException, IOException;
+public interface Service<T> {
+    String Add(Map<String, String> data) throws ClassNotFoundException, IOException;
+
+    String ShowList();
+
+    String Search(Map<String, String> data);
+
+    String getChildren(Map<String, String> data);
 }

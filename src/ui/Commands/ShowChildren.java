@@ -2,9 +2,9 @@ package ui.Commands;
 
 import ui.View;
 
-public class Children extends Command{
+public class ShowChildren extends Command {
 
-    public Children(View view) {
+    public ShowChildren(View view) {
         super(view);
     }
 
@@ -15,9 +15,9 @@ public class Children extends Command{
 
     @Override
     public void execute() {
-        getView().getData().put("selector", "children");
         getView().getData().put("name", getView().getName("пользователя"));
         getView().getData().put("surname", getView().getSurname("пользователя"));
+        getView().getPresenter().getChildren(getView().getData());
     }
-    
+
 }

@@ -47,7 +47,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
                 } else {
                     return familyTree.get(i);
                 }
-
             }
         }
         return null;
@@ -55,11 +54,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
     public T get(String name) {
         return this.get(name, null);
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return new HumanIterator<T>(familyTree);// return familyTree.iterator();
     }
 
     public void sortByAge() {
@@ -73,5 +67,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     @Override
     public String toString() {
         return familyTree.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new HumanIterator<T>(familyTree);// return familyTree.iterator();
     }
 }
