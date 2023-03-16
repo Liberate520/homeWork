@@ -9,7 +9,13 @@ import familytree.serializer.FamilyTreeSerializer;
 import presenter.PresenterFactory;
 
 /**
- * 
+ * Реализован MVP паттерн:
+ *  Модель реализована в пакете familytree.
+ *  Представление реализовано в пакете cmdui.
+ *  Presenter реализован в пакете presenter.
+ * Для работы с деревом добавлены команды:
+ *  GET - для получения информации о членах дерева (класс CmdGet).
+ *  ADD - для добавления нового человека (класс CmdAdd).
  */
 public class Main {
     public static void main(String[] args) {
