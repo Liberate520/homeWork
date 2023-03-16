@@ -8,16 +8,16 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public boolean addEntry(String lastname, String firstname, String patronymic, String gender, String fatherName, String motherName) {
-        return service.addEntry(lastname, firstname, patronymic, gender, fatherName, motherName);
+    public boolean addNewHuman(String lastname, String firstname, String patronymic, String gender, String fatherName, String motherName) {
+        return service.addNewHuman(lastname, firstname, patronymic, gender, fatherName, motherName);
     }
 
-    public void showEntry(String lastname, String firstname) {
-        view.print(service.showEntry(lastname, firstname));
+    public void findHuman(String lastname, String firstname) {
+        view.print(service.findHuman(lastname, firstname));
     }
 
-    public void showAllEntries() {
-        view.print(service.showAll());
+    public void printTree() {
+        view.print(service.printTree());
     }
 
     public void save() {

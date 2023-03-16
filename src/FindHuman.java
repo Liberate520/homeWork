@@ -10,6 +10,6 @@ public class FindHuman extends Command {
 
     @Override
     public void execute() {
-        super.getConsole().showEntry();
+        super.getConsole().findHuman();
     }
 }

@@ -11,7 +11,7 @@ public class TreeService implements Service {
         familyTree = new FamilyTree<>();
     }
 
-    public String showAll() {
+    public String printTree() {
         return familyTree.getInfo();
     }
 
@@ -20,12 +20,12 @@ public class TreeService implements Service {
     }
 
     @Override
-    public String showEntry(String lastname, String firstname) {
+    public String findHuman(String lastname, String firstname) {
         return familyTree.getByName(lastname, firstname).getInfo();
     }
 
     @Override
-    public boolean addEntry(String lastname, String firstname, String patronymic, String gender, String fatherName, String motherName) {
+    public boolean addNewHuman(String lastname, String firstname, String patronymic, String gender, String fatherName, String motherName) {
         GenderType enumGender;
         if (gender.equalsIgnoreCase("м")) {
             enumGender = GenderType.Male;

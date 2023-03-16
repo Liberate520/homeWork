@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable, Comparable<Human> {
-
     private String lastname;
     private String firstname;
     private String patronymic;
@@ -46,28 +45,12 @@ public class Human implements Serializable, Comparable<Human> {
         return patronymic;
     }
 
-    public GenderType getSex() {
-        return sex;
-    }
-
     public Human getFather() {
         return father;
     }
 
     public Human getMother() {
         return mother;
-    }
-
-    public List<Human> getChildren() {
-        return children;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
     }
 
     public String getInfo() {

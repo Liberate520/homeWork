@@ -19,7 +19,7 @@ public class Console implements View {
             if (checkInput(command)) {
                 menu.execute(Integer.parseInt(command));
             } else {
-                System.out.println("Не верный номер команды.");
+                System.out.println("Ошибка ввода\n");
             }
         }
     }
@@ -46,7 +46,7 @@ public class Console implements View {
         work = false;
     }
 
-    public void addEntry() {
+    public void addNewHuman() {
         System.out.print("Фамилия -> ");
         String lastname = scanner.nextLine();
         System.out.print("Имя -> ");
@@ -58,23 +58,23 @@ public class Console implements View {
         String fatherName = scanner.nextLine();
         System.out.print("Имя матери -> ");
         String motherName = scanner.nextLine();
-        if (presenter.addEntry(lastname, firstname, patronymic, gender, fatherName, motherName)) {
-            System.out.println("Добавлено в дерево.");
+        if (presenter.addNewHuman(lastname, firstname, patronymic, gender, fatherName, motherName)) {
+            System.out.println("Запись добавлена в дерево\n");
         }
     }
 
-    public void showEntry() {
+    public void findHuman() {
         System.out.print("Фамилия -> ");
         String lastname = scanner.nextLine();
         System.out.print("Имя -> ");
         String firstname = scanner.nextLine();
-        presenter.showEntry(lastname, firstname);
+        presenter.findHuman(lastname, firstname);
         System.out.println();
         System.out.println();
     }
 
-    public void showAllEntries() {
-        presenter.showAllEntries();
+    public void printTree() {
+        presenter.printTree();
         System.out.println();
     }
 
@@ -97,11 +97,11 @@ public class Console implements View {
 
     public void save() {
         presenter.save();
-        print("Сохранено.");
+        print("Сохранено\n");
     }
 
     public void load() {
         presenter.load();
-        showAllEntries();
+        printTree();
     }
 }

@@ -10,6 +10,6 @@ public class AddNewHuman extends Command {
 
     @Override
     public void execute() {
-        super.getConsole().addEntry();
+        super.getConsole().addNewHuman();
     }
 }

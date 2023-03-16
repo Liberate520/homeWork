@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
-
     private List<T> humanList;
 
     public FamilyTree() {

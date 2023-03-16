@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-
     private List<Option> commands;
     private Console console;
 
