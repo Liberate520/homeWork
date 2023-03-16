@@ -6,6 +6,7 @@ import familytree.FamilyTree;
 import familytree.FamilyTreeMemeber;
 import familytree.FamilyTreeMemeberFactory;
 import familytree.serializer.FamilyTreeSerializer;
+import presenter.PresenterFactory;
 
 /**
  * 
@@ -20,7 +21,7 @@ public class Main {
                 familyTree.save(serializer);
             }
             System.out.printf("Генеалогическое древо состоит из %d человек\n", familyTree.total());
-            new FamilyTreeCmd(new CommandFactory());
+            new FamilyTreeCmd(new CommandFactory(), new PresenterFactory(familyTree));
         } catch (NumberFormatException e) {
         } catch (Exception e) {
             System.out.printf("Ошибка: %s", e.getMessage());

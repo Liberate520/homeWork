@@ -8,7 +8,6 @@ import cmdui.commands.ICmdGet;
 import cmdui.commands.ICommand;
 import cmdui.commands.ICommandFactory;
 import cmdui.commands.IOnCommand;
-import presenter.Presenter;
 import presenter.PresenterFactory;
 
 public class FamilyTreeCmd implements IView, IOnCommand {
@@ -26,6 +25,7 @@ public class FamilyTreeCmd implements IView, IOnCommand {
             setCommands();
             for (int i = 0; i < commands.length; i++)
                 System.out.printf("%s:\n    %s\n", commands[i].description(), commands[i].syntax());
+            presenterFactory.createPresenter(this);
             Run();
         } finally {
             if (_sc != null)
