@@ -1,8 +1,7 @@
 import java.io.Serializable;
 
 public class Main implements Serializable {
-    public static void main(String[] args)  {
-
+    public static void main(String[] args) {
         var tree = new FamilyTree();
         final Writable fileHandler = new FileHandler("FamilyTree.out");
         tree = (FamilyTree) fileHandler.read();
@@ -25,13 +24,10 @@ public class Main implements Serializable {
 //                tree.getByName("Иванов", "Иван"), tree.getByName("Иванова", "Мария")));
 
         System.out.println(tree.getInfo());
-        System.out.println("--- Отсортировано по фамилии ---");
-        tree.sortByName();
-        System.out.println(tree.getInfo());
+//        System.out.println("--- Отсортировано по фамилии ---");
+//        tree.sortByName();
+//        System.out.println(tree.getInfo());
 
         fileHandler.write(tree);
     }
 }
-
-
-

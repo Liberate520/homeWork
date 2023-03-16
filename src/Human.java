@@ -42,7 +42,9 @@ public class Human implements Serializable, Comparable<Human> {
         return lastname;
     }
 
-    public String getPatronymic() { return patronymic; }
+    public String getPatronymic() {
+        return patronymic;
+    }
 
     public GenderType getSex() {
         return sex;
@@ -130,10 +132,9 @@ public class Human implements Serializable, Comparable<Human> {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Human)) {
+        if (!(obj instanceof Human human)) {
             return false;
         }
-        Human human = (Human) obj;
         return human.getFirstname().equals(getFirstname()) && human.getLastname().equals(getLastname());
     }
 
