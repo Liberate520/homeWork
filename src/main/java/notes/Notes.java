@@ -6,6 +6,9 @@ import java.util.Arrays;
 public class Notes extends Note {
     ArrayList<Note> notes = new ArrayList<Note>();
 
+    public Notes(){
+        this.notes = new ArrayList<Note>();
+    }
 
     public Notes(ArrayList<Note> notes) {
 

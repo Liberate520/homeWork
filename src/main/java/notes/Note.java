@@ -7,8 +7,6 @@ public class Note {
     private String date;
 
     public Note() {
-        this.date = "";
-        this.note = "";
         }
 
     public Note(String note) {
