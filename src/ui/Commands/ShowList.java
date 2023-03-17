@@ -17,6 +17,6 @@ public class ShowList extends Command {
 
     @Override
     public void execute() throws ClassNotFoundException, IOException {
-        getView().getPresenter().ShowList();
+        getView().getPresenter().showList();
     }
 }

@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
-public class FamilyTreeService<T extends Human> implements Service<T> {
+public class FamilyTreeService implements Service {
     Handler handler;
     FamilyTree familyTree;
 
@@ -14,16 +14,16 @@ public class FamilyTreeService<T extends Human> implements Service<T> {
     }
 
     @Override
-    public String ShowList() {
+    public String showList() {
         return familyTree.toString();
     }
 
     @Override
     public String Search(Map<String, String> data) {
-        return convertPersonStringSearch((T) familyTree.get(data.get("name"), data.get("surname")));
+        return convertPersonStringSearch((Human) familyTree.get(data.get("name"), data.get("surname")));
     }
 
-    private String convertPersonStringSearch(T person) {
+    private String convertPersonStringSearch(Human person) {
         if (person != null) {
             return person.toString();
         } else {
@@ -33,10 +33,10 @@ public class FamilyTreeService<T extends Human> implements Service<T> {
 
     @Override
     public String getChildren(Map<String, String> data) {
-        return convertPersonStringChildren((T) familyTree.get(data.get("name"), data.get("surname")));
+        return convertPersonStringChildren((Human) familyTree.get(data.get("name"), data.get("surname")));
     }
 
-    private String convertPersonStringChildren(T person) {
+    private String convertPersonStringChildren(Human person) {
         if (person != null) {
             return "Дети пользователя " + person.getName() + " " + person.getSurname() + ": "
                     + person.getChildren().toString();

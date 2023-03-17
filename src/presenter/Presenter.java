@@ -17,8 +17,8 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void ShowList() throws ClassNotFoundException, IOException {
-        String answer = service.ShowList();
+    public void showList() throws ClassNotFoundException, IOException {
+        String answer = service.showList();
         view.print(answer);
     }
 

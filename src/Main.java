@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         View view = new ConsoleUI();
         Handler handler = new FileHandler();
-        Service service = new FamilyTreeService<Human>(handler);
+        Service service = new FamilyTreeService(handler);
         Presenter presenter = new Presenter(view, service);
 
         view.start();
