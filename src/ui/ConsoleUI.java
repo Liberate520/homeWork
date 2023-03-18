@@ -12,7 +12,7 @@ public class ConsoleUI implements View {
     }
 
     @Override
-    public int userChoice() {
+    public int choiceMenu() {
         System.out.println("\n======= Главное меню =========");
         System.out.println("\t1. Показать все заметки");
         System.out.println("\t2. Добавить заметку");

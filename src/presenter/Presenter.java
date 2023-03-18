@@ -21,7 +21,7 @@ public class Presenter {
     public void onClick() {
         while (true) {
 
-            int userChoice = view.userChoice();
+            int userChoice = view.choiceMenu();
 
             switch (userChoice) {
                 case 0 -> {

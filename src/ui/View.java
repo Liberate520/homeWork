@@ -3,7 +3,7 @@ package ui;
 import java.util.ArrayList;
 
 public interface View {
-    int userChoice();
+    int choiceMenu();
 
     void printAll(String text);
 
