@@ -15,7 +15,9 @@ public class Main {
 
         Note note1 = new Note(LocalDate.now(),"семинар JAVA вторник", "важно");
         Note note2 = new Note(LocalDate.now(),"лекция фин. математика", "несрочно");
+
         Notebook notebook = new Notebook();
+
         notebook.add(note1);
         notebook.add(note2);
 

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Notebook {
     private final ArrayList<Note> notes = new ArrayList<>();
 
+    public int getSize(){
+        return this.notes.size();
+    }
 
    public void add(Note note){
         notes.add(note);

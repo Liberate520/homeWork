@@ -4,7 +4,7 @@ package ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConsoleUI implements View{
+public class ConsoleUI implements View {
     private final Scanner sc;
 
     public ConsoleUI() {
@@ -12,19 +12,28 @@ public class ConsoleUI implements View{
     }
 
     @Override
-    public void showMenu() {
+    public int userChoice() {
         System.out.println("\n======= Главное меню =========");
         System.out.println("\t1. Показать все заметки");
         System.out.println("\t2. Добавить заметку");
         System.out.println("\t3. Удалить заметку");
         System.out.println("\t0. Выход");
-        System.out.print("Введите пункт меню: ");
-
+        while (true) {
+            System.out.print("Введите пункт меню: ");
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                if (choice >= 0 && choice <= 3) {
+                    return choice;
+                } else {
+                    System.out.println("\nВведите число от 0 до 3!\n");
+                }
+            } else {
+                System.out.println("\nВведите число от 0 до 3!\n");
+                sc.next();
+            }
+        }
     }
 
-    public int userChoice(){
-        return sc.nextInt();
-    }
 
     @Override
     public void printAll(String text) {
@@ -45,23 +54,33 @@ public class ConsoleUI implements View{
         return note;
     }
 
-    public void addedNote(){
+    public void addedNote() {
         System.out.println("\nЗаметка добавлена\n");
     }
 
-    public void removeNote(){
+    public void removedNote() {
         System.out.println("\nЗаметка удалена\n");
     }
 
-    public void choiceRemove(){
-        System.out.print("\nВведите номер заметки: ");
+    public int choiceRemove(int size) {
+        while (true) {
+            System.out.print("\nВведите номер заметки: ");
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                if (choice >= 1 && choice <= size) {
+                    return choice;
+                } else {
+                    System.out.printf("\nВведите число от 1 до %d!\n", size);
+                }
+            } else {
+                System.out.printf("\nВведите число от 1 до %d!\n", size);
+                sc.next();
+            }
+        }
     }
 
-    public int userChoiceRemove(){
-        return sc.nextInt();
-    }
 
-    public void emptyNotebook(){
+    public void emptyNotebook() {
         System.out.println("\nВ записной книжке нет записей!\n");
     }
 

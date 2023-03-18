@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Note {
 
-    private LocalDate date;
+    private final LocalDate date;
     private final String note;
     private final String description;
 
@@ -21,6 +21,6 @@ public class Note {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String formattedDate = this.date.format(formatter);
-        return String.format("%s %s (%s)", formattedDate, note, description);
+        return String.format("%s %s; %s", formattedDate, note, description);
     }
 }

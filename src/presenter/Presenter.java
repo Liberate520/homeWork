@@ -20,7 +20,6 @@ public class Presenter {
 
     public void onClick() {
         while (true) {
-            view.showMenu();
 
             int userChoice = view.userChoice();
 
@@ -41,10 +40,9 @@ public class Presenter {
                 case 3 -> {
                     if (notebook.isEmpty()) view.emptyNotebook();
                     else {
-                        view.choiceRemove();
-                        int numberNote = view.userChoiceRemove();
+                        int numberNote = view.choiceRemove(notebook.getSize());
                         notebook.remove(numberNote);
-                        view.removeNote();
+                        view.removedNote();
                     }
                 }
             }
