@@ -111,4 +111,16 @@ public class Console implements View
     {
         System.out.println(FamilyFree);
     }
+
+
+    public void loadFamily() {
+    }
+
+
+    public void saveFamily() {
+    }
+
+
+    public void sortFamily() {
+    }
 }

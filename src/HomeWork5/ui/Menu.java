@@ -3,11 +3,11 @@ package HomeWork5.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import HomeWork5.commands.AddHuman;
-import HomeWork5.commands.Exit;
-import HomeWork5.commands.FamilyPrint;
-import HomeWork5.commands.HumanSearch;
-import HomeWork5.commands.Option;
+import HomeWork5.ui.commands.AddHuman;
+import HomeWork5.ui.commands.Exit;
+import HomeWork5.ui.commands.FamilyPrint;
+import HomeWork5.ui.commands.HumanSearch;
+import HomeWork5.ui.commands.Option;
 
 public class Menu 
 {

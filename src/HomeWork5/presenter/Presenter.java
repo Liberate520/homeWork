@@ -2,6 +2,8 @@ package HomeWork5.presenter;
 
 import HomeWork5.model.FamilyFree;
 import HomeWork5.model.Human;
+import HomeWork5.model.IO;
+import HomeWork5.model.comporator.HumanComporatorByAge;
 import HomeWork5.ui.View;
 
 public class Presenter 
@@ -14,6 +16,9 @@ public class Presenter
         this.familyConnect = familyConnect;
         this.view = view;
         view.setPresenter(this);
+    }
+
+    public Presenter(View view2, FamilyFree<Human> familyFree, IO serializ, HumanComporatorByAge sortAge) {
     }
 
     public void addHumanNew(String name, String sex, int age)
@@ -32,5 +37,14 @@ public class Presenter
         Human chelovek = familyConnect.getByName(name);
         if (chelovek == null) view.print("Такого человека нет в семье !");
         else view.print(chelovek);
+    }
+
+    public void sortFamily(int choice) {
+    }
+
+    public void loadFamily() {
+    }
+
+    public void saveFamily() {
     }
 }

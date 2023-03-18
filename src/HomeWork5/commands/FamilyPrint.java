@@ -1,6 +1,7 @@
 package HomeWork5.commands;
 
 import HomeWork5.ui.Console;
+import HomeWork5.ui.commands.Command;
 
 public class FamilyPrint extends Command 
 {
