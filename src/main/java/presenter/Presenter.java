@@ -37,6 +37,12 @@ public class Presenter {
                 start();
                 break;
             case 4:
+                int index = Integer.parseInt(view.scan("Введите номер заметки для редактирования"));
+                String newNote = view.scan("Введите новый текст заметки");
+                service.setNote(newNote, index);
+                start();
+                break;
+            case 5:
                 service.save();
                 break;
         }

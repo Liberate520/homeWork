@@ -18,4 +18,12 @@ public class Note {
     public String toString() {
         return String.format("%10s | %-40s", date, note);
     }
+
+    protected String getNote() {
+        return note;
+    }
+
+    protected void setNote(String newNote) {
+        note = newNote;
+    }
 }

@@ -19,6 +19,24 @@ public class Notes extends Note implements Service {
     public void addNote(Note note) {
         notes.add(note);
     }
+
+    @Override
+    public String getNote(int index) {
+        return notes.get(index).getNote();
+    }
+
+    @Override
+    public void setNote(String newNote, int index) {
+        try {
+            if (newNote != null) {
+                Note note = notes.get(index - 1);
+                note.setNote(newNote);
+            } else System.out.println("Передана пустая строка");
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Задан неверный номер заметки");
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

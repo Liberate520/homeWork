@@ -21,7 +21,7 @@ public class ConsoleUI implements View {
 
     public int selection() {
         int choice = Integer.parseInt(scan("Выберите: 1 - просмотр, 2 - добавить новую запись," +
-                " 3 - удалить заметку, 4 -выход"));
+                " 3 - удалить заметку, 4 - редактировать запись, 5 - выход"));
         return choice;
     }
 

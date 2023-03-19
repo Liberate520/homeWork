@@ -4,11 +4,13 @@ import notes.data.Note;
 import notes.data.Notes;
 
 public interface Service {
-    public Notes getNotes();
+    Notes getNotes();
 
 
-    public void save();
+    void save();
 
-    public void delete(int index);
-    public void addNote(Note note);
+    void delete(int index);
+    void addNote(Note note);
+    String getNote(int index);
+    void setNote(String newNote, int index);
 }
