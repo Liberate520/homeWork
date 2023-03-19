@@ -4,7 +4,7 @@ import presenter.Presenter;
 
 import java.util.Scanner;
 
-public class ConsoleUI implements View{
+public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
 
@@ -19,18 +19,16 @@ public class ConsoleUI implements View{
     }
 
 
-    public void start() {
-       int choice = Integer.parseInt(scan("Выберите: 1 - просмотр, 2 - добавить новую запись,3 -выход"));
-       presenter.getChois(choice);
-
+    public int selection() {
+        int choice = Integer.parseInt(scan("Выберите: 1 - просмотр, 2 - добавить новую запись," +
+                " 3 - удалить заметку, 4 -выход"));
+        return choice;
     }
+
     @Override
-    public String scan(String message){
+    public String scan(String message) {
         System.out.println(message);
         return scanner.nextLine();
     }
 
-    public void print(String text) {
-        System.out.println(text);
-    }
 }
