@@ -44,7 +44,7 @@ public class CmdAdd extends Command implements ICmdAdd {
         birthDay = new SimpleDateFormat("dd.MM.yyyy").parse(b.get(0));
         parents[0] = Integer.parseInt(f.get(0));
         parents[1] = Integer.parseInt(m.get(0));
-        onCommand.OnCmdAdd(this);
+        onCommand.onCmdAdd(this);
         return null;
     }
 

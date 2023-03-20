@@ -8,7 +8,6 @@ import cmdui.commands.ICmdGet;
 import cmdui.commands.ICommand;
 import cmdui.commands.ICommandFactory;
 import cmdui.commands.IOnCommand;
-import presenter.PresenterFactory;
 
 public class FamilyTreeCmd implements IView, IOnCommand {
     private ICommandFactory commFactory;
@@ -18,20 +17,8 @@ public class FamilyTreeCmd implements IView, IOnCommand {
     private Consumer<ICmdAdd> cmdAddHandler;
     private String printOut;
 
-    public FamilyTreeCmd(ICommandFactory commFactory, PresenterFactory presenterFactory) throws IOException {
-        try {
+    public FamilyTreeCmd(ICommandFactory commFactory) throws IOException {
             this.commFactory = commFactory;
-            _sc = new Scanner(System.in, System.console().charset());
-            setCommands();
-            for (int i = 0; i < commands.length; i++)
-                System.out.printf("%s:\n    %s\n", commands[i].description(), commands[i].syntax());
-            presenterFactory.createPresenter(this);
-            Run();
-        } finally {
-            if (_sc != null)
-                _sc.close();
-
-        }
     }
 
     public void setCmdGetHandler(Consumer<ICmdGet> handler) {
@@ -47,13 +34,13 @@ public class FamilyTreeCmd implements IView, IOnCommand {
     }
     
     @Override
-    public void OnCmdGet(ICmdGet cmdGet) {
+    public void onCmdGet(ICmdGet cmdGet) {
         if(cmdGetHandler != null)
             cmdGetHandler.accept(cmdGet);
     }
 
     @Override
-    public void OnCmdAdd(ICmdAdd cmdAdd) {
+    public void onCmdAdd(ICmdAdd cmdAdd) {
         if(cmdAddHandler != null)
             cmdAddHandler.accept(cmdAdd);
     }
@@ -62,7 +49,36 @@ public class FamilyTreeCmd implements IView, IOnCommand {
         commands = new ICommand[] { commFactory.commGet(this), commFactory.commAdd(this)};
     }
 
-    private void Run() throws IOException {
+    public void run() throws IOException {
+        try {
+            _sc = new Scanner(System.in, System.console().charset());
+            setCommands();
+            for (int i = 0; i < commands.length; i++)
+                System.out.printf("%s:\n    %s\n", commands[i].description(), commands[i].syntax());
+            while (true) {
+                String input = _sc.nextLine();
+                if (input.length() == 0)
+                    break;
+                String out = "Неизвестная команда";
+                for (ICommand command : commands) {
+                    if (!command.processCommand(input))
+                        continue;
+                    if(command.error() != null)
+                        out = command.error();
+                    else
+                        out = printOut;
+                    break;
+                }
+                if (out == "")
+                    break;
+                System.out.println(out);
+            }
+        } finally {
+            if (_sc != null)
+                _sc.close();
+
+        }
+
         while (true) {
             String input = _sc.nextLine();
             if (input.length() == 0)

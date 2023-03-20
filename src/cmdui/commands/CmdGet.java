@@ -46,7 +46,7 @@ class CmdGet extends Command implements ICmdGet {
             id = Integer.parseInt(pid.get(0));
         else if(pname != null)
             name = pname.get(0);
-        onCommand.OnCmdGet(this);
+        onCommand.onCmdGet(this);
         return null;
     }
 

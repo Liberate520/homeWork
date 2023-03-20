@@ -1,11 +1,10 @@
 import java.util.Date;
-
 import cmdui.FamilyTreeCmd;
 import cmdui.commands.CommandFactory;
 import familytree.FamilyTree;
 import familytree.FamilyTreeMemeber;
 import familytree.serializer.FamilyTreeSerializer;
-import presenter.PresenterFactory;
+import presenter.Presenter;
 
 /**
  * 
@@ -20,7 +19,9 @@ public class Main {
                 familyTree.save(serializer);
             }
             System.out.printf("Генеалогическое древо состоит из %d человек\n", familyTree.total());
-            new FamilyTreeCmd(new CommandFactory(), new PresenterFactory(familyTree));
+            var view = new FamilyTreeCmd(new CommandFactory());
+            var presenter = new Presenter(view, familyTree);
+            view.run();
         } catch (NumberFormatException e) {
         } catch (Exception e) {
             System.out.printf("Ошибка: %s", e.getMessage());
