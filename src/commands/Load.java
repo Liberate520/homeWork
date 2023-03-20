@@ -1,3 +1,7 @@
+package commands;
+
+import UI.Console;
+
 public class Load extends Command {
     public Load(Console console) {
         super(console);

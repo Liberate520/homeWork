@@ -1,3 +1,8 @@
+package presenter;
+
+import UI.View;
+import main.Service;
+
 public class Presenter {
     private View view;
     private Service service;

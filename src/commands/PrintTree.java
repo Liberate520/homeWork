@@ -1,3 +1,7 @@
+package commands;
+
+import UI.Console;
+
 public class PrintTree extends Command {
     public PrintTree(Console console) {
         super(console);

@@ -1,4 +1,7 @@
+package comparators;
+
 import java.util.Comparator;
+import main.Human;
 
 public class ComparatorByName<T extends Human> implements Comparator<T> {
     @Override

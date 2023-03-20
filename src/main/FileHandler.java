@@ -1,3 +1,5 @@
+package main;
+
 import java.io.*;
 
 public class FileHandler implements Writable {

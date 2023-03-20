@@ -1,3 +1,7 @@
+package commands;
+
+import UI.Console;
+
 public class Save extends Command {
     public Save(Console console) {
         super(console);

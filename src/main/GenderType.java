@@ -1,3 +1,5 @@
+package main;
+
 import java.io.Serializable;
 
 public enum GenderType implements Serializable {

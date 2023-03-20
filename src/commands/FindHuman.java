@@ -1,3 +1,7 @@
+package commands;
+
+import UI.Console;
+
 public class FindHuman extends Command {
     public FindHuman(Console console) {
         super(console);

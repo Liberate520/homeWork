@@ -1,3 +1,5 @@
+package main;
+
 public interface Service {
 
     public String printTree();
