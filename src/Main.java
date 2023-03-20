@@ -36,6 +36,8 @@ public class Main {
 
     private static FamilyTree<FamilyTreeMemeber> createFamilyTree() throws Exception {
         var familyTree = new FamilyTree<FamilyTreeMemeber>(new FamilyTreeMemeberFactory());
+        var m = familyTree.addMember(new FamilyTreeMemeber("Николай Лысенко", "мужской", date(5, 2, 40), null));
+        familyTree.addMember(m.addSpouse("Светлана Петрова", date(20, 10, 45)), null));
         int[] ids = new int[2];
         ids[0] = familyTree.addChild("Николай Лысенко", "мужской", date(5, 2, 40)).id();
         ids[1] = familyTree.addSpouse("Светлана Петрова", date(20, 10, 45), ids[0]).id();

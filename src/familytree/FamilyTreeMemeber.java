@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class FamilyTreeMemeber implements Serializable {
-    private int id;
+    protected int id;
     private String name;
     private String sex;
     private Date birthDay;
@@ -15,8 +15,7 @@ public class FamilyTreeMemeber implements Serializable {
     private FamilyTreeMemeber spouse;
     private ArrayList<FamilyTreeMemeber> children;
 
-    FamilyTreeMemeber(int id, String name, String sex, Date birthDay, ArrayList<FamilyTreeMemeber> parents) {
-        this.id = id;
+    public FamilyTreeMemeber(String name, String sex, Date birthDay, ArrayList<FamilyTreeMemeber> parents) {
         this.name = name;
         this.sex = sex;
         this.birthDay = birthDay;
@@ -89,6 +88,12 @@ public class FamilyTreeMemeber implements Serializable {
 
     public void spouse(FamilyTreeMemeber spouse) {
         this.spouse = spouse;
+    }
+
+    public FamilyTreeMemeber addSpouse(String name, Date birthDay) {
+        String sex = this.sex == "мужской" ? "женский" : "мужской";
+        this.spouse = new FamilyTreeMemeber(name, sex, birthDay, null);
+        return this.spouse;
     }
 
     public FamilyTreeMemeber[] children() {

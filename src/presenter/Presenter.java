@@ -25,25 +25,9 @@ public class Presenter {
     
     private void cmdGetHandler(ICmdGet cmdGet) {
         SortMode sortMode = cmdGet.getSortMode();
-        switch (sortMode) {
-            case name:
-                familyTree.setSortMode(SortMode.name);
-                break;
-            case birthDay:
-                familyTree.setSortMode(SortMode.birthDay);
-                break;
-            case noSort:
-                familyTree.setSortMode(SortMode.noSort);
-                break;
-        }
         int id = cmdGet.getId() - 1;
         String name = cmdGet.getName();
-        if(id >= 0)
-            view.setPrintOut(familyTree.getMemeberById(id).toString());
-        else if(name != null)
-            view.setPrintOut(familyTree.toString());
-        else
-            view.setPrintOut(familyTree.toString());
+        view.setPrintOut(familyTree.getStringMembers(sortMode, id, name));
     }
 
     private void cmdAddHandler(ICmdAdd cmdAdd) {
