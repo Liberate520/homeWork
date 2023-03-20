@@ -1,3 +1,5 @@
+package main;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,8 @@ public class Human implements Serializable, Comparable<Human> {
         this(lastname, firstname, patronymic, sex, null, null);
     }
 
-    public Human(String lastname, String firstname, String patronymic, GenderType sex, Human father, Human mother) {
+    public Human(String lastname, String firstname, String patronymic,
+                 GenderType sex, Human father, Human mother) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.patronymic = patronymic;
@@ -32,6 +35,7 @@ public class Human implements Serializable, Comparable<Human> {
         }
         return false;
     }
+
 
     public String getFirstname() {
         return firstname;

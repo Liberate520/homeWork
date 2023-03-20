@@ -1,3 +1,8 @@
+package presenter;
+
+import UI.View;
+import main.Service;
+
 public class Presenter {
     private View view;
     private Service service;
@@ -8,7 +13,8 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public boolean addNewHuman(String lastname, String firstname, String patronymic, String gender, String fatherName, String motherName) {
+    public boolean addNewHuman(String lastname, String firstname, String patronymic,
+                               String gender, String fatherName, String motherName) {
         return service.addNewHuman(lastname, firstname, patronymic, gender, fatherName, motherName);
     }
 

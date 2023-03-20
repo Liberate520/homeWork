@@ -1,3 +1,7 @@
+package commands;
+
+import UI.Console;
+
 public abstract class Command implements Option {
     private Console console;
 

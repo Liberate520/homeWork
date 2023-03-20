@@ -1,7 +1,10 @@
+package main;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import comparators.ComparatorByName;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     private List<T> humanList;

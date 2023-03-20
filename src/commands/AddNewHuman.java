@@ -1,3 +1,7 @@
+package commands;
+
+import UI.Console;
+
 public class AddNewHuman extends Command {
     public AddNewHuman(Console console) {
         super(console);

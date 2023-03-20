@@ -1,3 +1,5 @@
+package main;
+
 public class TreeService implements Service {
     private final Writable fileHandler;
     private FamilyTree<Human> familyTree;
@@ -7,7 +9,7 @@ public class TreeService implements Service {
     }
 
     public TreeService() {
-        this.fileHandler = new FileHandler("FamilyTree.out");
+        this.fileHandler = new FileHandler("main.FamilyTree.out");
         familyTree = new FamilyTree<>();
     }
 
@@ -25,7 +27,8 @@ public class TreeService implements Service {
     }
 
     @Override
-    public boolean addNewHuman(String lastname, String firstname, String patronymic, String gender, String fatherName, String motherName) {
+    public boolean addNewHuman(String lastname, String firstname, String patronymic,
+                               String gender, String fatherName, String motherName) {
         GenderType enumGender;
         if (gender.equalsIgnoreCase("м")) {
             enumGender = GenderType.Male;
