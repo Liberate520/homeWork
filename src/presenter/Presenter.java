@@ -8,6 +8,8 @@ import familytree.FamilyTree;
 import familytree.FamilyTreeMemeber;
 import familytree.SortMode;
 
+// Все методы в этом классе private, т.к. это обработчики событий, которые генерирует View.
+// Они передаются в представление в виде функциональных интерфейсов и никогда не вызываются напрямую.
 public class Presenter {
     private IView view;
     private FamilyTree<FamilyTreeMemeber> familyTree;
