@@ -11,8 +11,8 @@ public interface Service {
     void sortByDateOfBirth();
     String showPerson(Integer cur);
     String сhildrentoSring (Integer cur);
-    abstract void addFater(Integer cur, Integer fat);
-    abstract void addMother(Integer cur, Integer mot);
-    abstract void addChild(Integer cur, Integer chil, Integer delChil);
+    // void addFater(Integer cur, Integer fat);
+    // void addMother(Integer cur, Integer mot);
+    void addChild(Integer cur, Integer chil, Integer delChil);
     
 }

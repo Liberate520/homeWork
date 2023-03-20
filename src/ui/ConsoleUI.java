@@ -108,14 +108,14 @@ public class ConsoleUI implements View {
     public void showAllPerson(){
         print(presenter.showAllPerson());
     }
-    public  void addFater(Integer cur,Integer fat){
-        presenter.addFater(cur, fat);
-    }
-    public  void addMother(Integer cur,Integer mot){
-        presenter.addMother(cur, mot);
-    }
+    // public  void addFater(Integer cur,Integer fat){
+    //     presenter.addFater(cur, fat);
+    // }
+    // public  void addMother(Integer cur,Integer mot){
+    //     presenter.addMother(cur, mot);
+    // }
     public  void addChild(Integer cur,Integer chil,Integer delChil){
-        System.out.println("----------------");
+        // System.out.println("----------------");
         presenter.addChild(cur, chil, delChil);
     }
     public String сhildrentoSring(Integer cur){

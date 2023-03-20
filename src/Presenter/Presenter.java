@@ -38,12 +38,12 @@ public class Presenter {
         return service.сhildrentoSring(cur);
     }
 
-    public void addFater(Integer cur, Integer fat){
-        service.addFater(cur, fat);
-    }    
-    public void addMother(Integer cur, Integer mot){
-        service.addMother(cur, mot);
-    }
+    // public void addFater(Integer cur, Integer fat){
+    //     service.addFater(cur, fat);
+    // }    
+    // public void addMother(Integer cur, Integer mot){
+    //     service.addMother(cur, mot);
+    // }
     public void addChild(Integer cur, Integer chil, Integer delChil){
         service.addChild(cur, chil, delChil);
     }

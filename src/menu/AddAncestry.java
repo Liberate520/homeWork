@@ -24,6 +24,7 @@ public class AddAncestry extends Command{
         Integer chois;
         Integer chois1 = 1;
         Integer chois2;
+        this.getView().print("\nВыберете родителя или 0 для выхода:\n");
         chois=choisPerson();
         if (chois<0) return 10;
         while (chois1>0) {
@@ -40,6 +41,7 @@ public class AddAncestry extends Command{
                     break;
                 }
                 case (2): {
+                    this.getView().print("\nВыберете ребенка или 0 для выхода:\n");
                     chois2=choisPerson();
                     if (chois<0) return 10;
                     this.getView().addChild(chois, chois2,null);
@@ -58,12 +60,11 @@ public class AddAncestry extends Command{
         }
 
     private int choisPerson(){
-        this.getView().print("\nВыберете персону или 0 для выхода:\n");
         this.getView().showAllPerson();
         return scanner.nextInt()-1;
     }
     private int choisChildren(Integer cur){
-        this.getView().print("\nВыберете персону или 0 для выхода:\n");
+        this.getView().print("\nВыберете ребёнка или 0 для выхода:\n");
         this.getView().print(this.getView().сhildrentoSring(cur));
         return scanner.nextInt()-1;
     }

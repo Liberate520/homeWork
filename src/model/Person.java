@@ -76,7 +76,9 @@ public class Person implements Serializable{
     }
 
     public void addChild(Person chil) {
-        this.children.add(chil) ;
+        if (!this.children.contains(chil)){
+            this.children.add(chil);
+        }
     }
     public void delChild(Integer chil) {
         if (this.children.size()>chil){
@@ -96,14 +98,14 @@ public class Person implements Serializable{
     //     }
     //     return false;
     // }
-    public Person SearchChild(Integer chil) {
-        for (Person person : this.children) {
-            if (person.equals(chil)){
-                return person;
-            }
-        }
-        return null;
-    }
+    // public Person SearchChild(Integer chil) {
+    //     for (Person person : this.children) {
+    //         if (person.equals(chil)){
+    //             return person;
+    //         }
+    //     }
+    //     return null;
+    // }
 
     // public void setChildren(ArrayList<Person> children) {
     //     this.children = children;
@@ -112,7 +114,7 @@ public class Person implements Serializable{
     public String сhildrentoSring() {
         Integer count=0;
         String str="Детей нет";
-        if (this.children != null){
+        if (!this.children.isEmpty()){
             str="";
             while (count<this.children.size()){
                 str=str+"\n"+(++count).toString()+". "+this.children.get(count-1);

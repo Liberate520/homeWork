@@ -71,31 +71,34 @@ public class ServiceTree<T extends Person>  implements Service {
         return familyTree.сhildrentoSring(cur);
     }
 
-    @Override
-    public void addFater(Integer curPer, Integer fatPer) {
-        if (fatPer!=null){
-            familyTree.setFather(curPer, familyTree.getByIndex(fatPer));
-        }else {
-            familyTree.setFather(curPer, null);
-        }
-    }
+    // @Override
+    // public void addFater(Integer curPer, Integer fatPer) {
+    //     if (fatPer!=null){
+    //         familyTree.setFather(curPer, familyTree.getByIndex(fatPer));
+    //     }else {
+    //         familyTree.setFather(curPer, null);
+    //     }
+    // }
     
-    @Override
-    public void addMother(Integer curPer, Integer motPer) {
-        if (motPer!=null){
-            familyTree.setMother(curPer, familyTree.getByIndex(motPer));
-        }else {
-            familyTree.setMother(curPer, null);
-        }
-    }
+    // @Override
+    // public void addMother(Integer curPer, Integer motPer) {
+    //     if (motPer!=null){
+    //         familyTree.setMother(curPer, familyTree.getByIndex(motPer));
+    //     }else {
+    //         familyTree.setMother(curPer, null);
+    //     }
+    // }
     @Override
     public void addChild(Integer curPer, Integer chil, Integer delChil) {
             if (chil!=null){
+                System.out.println("Добавление детей"+" пресонажа" +curPer+" "+familyTree.getByIndex(curPer).getSex());
                 familyTree.addChild(curPer, familyTree.getByIndex(chil));
-                if (familyTree.getByIndex(curPer).getSex()=="male"){
+                if (familyTree.getByIndex(curPer).getSex().equals("male")){
+                    System.out.println("Добавление отца");
                     familyTree.setFather(chil, familyTree.getByIndex(curPer));
                 }
-                if (familyTree.getByIndex(curPer).getSex()=="female"){
+                if (familyTree.getByIndex(curPer).getSex().equals("female")){
+                    System.out.println("Добавление матери");
                     familyTree.setMother(chil, familyTree.getByIndex(curPer));
                 }
             }else {
