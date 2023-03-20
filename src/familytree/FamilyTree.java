@@ -2,10 +2,7 @@ package familytree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -18,13 +15,11 @@ public class FamilyTree<T extends FamilyTreeMemeber> implements Serializable, It
     private ArrayList<T> memebers;
     private SortMode sortMode;
     private Predicate<T> filter;
-    private IMemeberFactory<T> memeberFactory;
 
-    public FamilyTree(IMemeberFactory<T> memeberFactory) {
+    public FamilyTree() {
         this.memebers = new ArrayList<T>();
         sortMode = SortMode.noSort;
         filter = null;
-        this.memeberFactory = memeberFactory;
     }
 
     public int total() {
@@ -62,43 +57,12 @@ public class FamilyTree<T extends FamilyTreeMemeber> implements Serializable, It
         this.filter = filter;
         return result;
     }
-    
-    // public FamilyTreeMemeber[] getAllFamilyMemebers() {
-    // return memebers.toArray(new FamilyTreeMemeber[0]);
-    // }
-
-    public T addChild(String name, String sex, Date birthDay, int[] parentIds) {
-        ArrayList<T> parents =null;
-        if(parentIds != null) {
-            parents = new ArrayList<T>();
-            parents.add(memebers.get(parentIds[0]));
-            parents.add(memebers.get(parentIds[1]));
-        }
-        T child = memeberFactory.getTreeMemeber(memebers.size(), name, sex, birthDay, parents);
-        memebers.add(child);
-        return child;
-    }
 
     public T addMember(T member) {
         member.id = memebers.size();
         memebers.add(member);
         return member;
     }
-
-    public T addChild(String name, String sex, Date birthDay) {
-        return addChild(name, sex, birthDay, null);
-    }
-
-    // public T addSpouse(String name, Date birthDay, int memberId) throws Exception {
-    //     if (memberId >= memebers.size())
-    //         throw new Exception("Invalid memberId");
-    //     FamilyTreeMemeber member = memebers.get(memberId);
-    //     String sex = member.sex() == "мужской" ? "женский" : "мужской";
-    //     T spouse = memeberFactory.getTreeMemeber(memebers.size(), name, sex, birthDay, null);
-    //     member.spouse(spouse);
-    //     memebers.add(spouse);
-    //     return spouse;
-    // }
 
     @Override
     public String toString() {

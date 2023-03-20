@@ -34,7 +34,7 @@ public class Presenter {
         String name = cmdAdd.getName();
         String sex = cmdAdd.getSex();
         Date birthDay = cmdAdd.getBirthDay();
-        var parents = new int[] {cmdAdd.getParents()[0] - 1, cmdAdd.getParents()[1] - 1};
-        familyTree.addChild(name, sex, birthDay, parents);
+        var parents = new FamilyTreeMemeber[] {familyTree.getMemeberById(cmdAdd.getParents()[0] - 1), familyTree.getMemeberById(cmdAdd.getParents()[1] - 1)};
+        familyTree.addMember(new FamilyTreeMemeber(name, sex, birthDay, parents));
     }
 }

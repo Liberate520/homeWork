@@ -15,12 +15,12 @@ public class FamilyTreeMemeber implements Serializable {
     private FamilyTreeMemeber spouse;
     private ArrayList<FamilyTreeMemeber> children;
 
-    public FamilyTreeMemeber(String name, String sex, Date birthDay, ArrayList<FamilyTreeMemeber> parents) {
+    public FamilyTreeMemeber(String name, String sex, Date birthDay, FamilyTreeMemeber[] parents) {
         this.name = name;
         this.sex = sex;
         this.birthDay = birthDay;
         this.deathDay = null;
-        this.parents = parents != null ?  parents.toArray(new FamilyTreeMemeber[0]) : null;
+        this.parents = parents;// != null ?  parents.toArray(new FamilyTreeMemeber[0]) : null;
         this.children = new ArrayList<FamilyTreeMemeber>();
         if (this.parents != null) {
             this.parents[0].children.add(this);

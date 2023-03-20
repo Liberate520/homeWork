@@ -4,18 +4,11 @@ import cmdui.FamilyTreeCmd;
 import cmdui.commands.CommandFactory;
 import familytree.FamilyTree;
 import familytree.FamilyTreeMemeber;
-import familytree.FamilyTreeMemeberFactory;
 import familytree.serializer.FamilyTreeSerializer;
 import presenter.PresenterFactory;
 
 /**
- * Реализован MVP паттерн:
- *  Модель реализована в пакете familytree.
- *  Представление реализовано в пакете cmdui.
- *  Presenter реализован в пакете presenter.
- * Для работы с деревом добавлены команды:
- *  GET - для получения информации о членах дерева (класс CmdGet).
- *  ADD - для добавления нового человека (класс CmdAdd).
+ * 
  */
 public class Main {
     public static void main(String[] args) {
@@ -35,17 +28,15 @@ public class Main {
     }
 
     private static FamilyTree<FamilyTreeMemeber> createFamilyTree() throws Exception {
-        var familyTree = new FamilyTree<FamilyTreeMemeber>(new FamilyTreeMemeberFactory());
-        var m = familyTree.addMember(new FamilyTreeMemeber("Николай Лысенко", "мужской", date(5, 2, 40), null));
-        familyTree.addMember(m.addSpouse("Светлана Петрова", date(20, 10, 45)), null));
-        int[] ids = new int[2];
-        ids[0] = familyTree.addChild("Николай Лысенко", "мужской", date(5, 2, 40)).id();
-        ids[1] = familyTree.addSpouse("Светлана Петрова", date(20, 10, 45), ids[0]).id();
-        ids[0] = familyTree.addChild("Роман Лысенко", "мужской", date(4, 7, 65), ids).id();
-        ids[1] = familyTree.addSpouse("Мария Федорова", date(6, 3, 72), ids[0]).id();
-        ids[0] = familyTree.addChild("Иван Лысенко", "мужской", date(14, 8, 95), ids).id();
-        ids[1] = familyTree.addSpouse("Анна Владимирова", date(26, 6, 99), ids[0]).id();
-        ids[0] = familyTree.addChild("Ольга Лысенко", "женский", date(30, 9, 120), ids).id();
+        var familyTree = new FamilyTree<FamilyTreeMemeber>();
+        FamilyTreeMemeber[] ms = new FamilyTreeMemeber[2];
+        ms[0] = familyTree.addMember(new FamilyTreeMemeber("Николай Лысенко", "мужской", date(5, 2, 40), null));
+        ms[1] = familyTree.addMember(ms[0].addSpouse("Светлана Петрова", date(20, 10, 45)));
+        ms[0] = familyTree.addMember(new FamilyTreeMemeber("Роман Лысенко", "мужской", date(4, 7, 65), ms));
+        ms[1] = familyTree.addMember(ms[0].addSpouse("Мария Федорова", date(6, 3, 72)));
+        ms[0] = familyTree.addMember(new FamilyTreeMemeber("Иван Лысенко", "мужской", date(14, 8, 95), ms));
+        ms[1] = familyTree.addMember(ms[0].addSpouse("Анна Владимирова", date(26, 6, 99)));
+        ms[0] = familyTree.addMember(new FamilyTreeMemeber("Ольга Лысенко", "женский", date(30, 9, 120), ms));
         return familyTree;
     }
 
