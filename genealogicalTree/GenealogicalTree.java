@@ -1,5 +1,4 @@
 package genealogicalTree;
-import package1.*;
 import sorted.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,14 +16,6 @@ public class GenealogicalTree<T extends Human>  implements Serializable, Iterabl
     public void setFileHandler(Writable fileHandler) {
         this.fileHandler = fileHandler;
     }
-
-    public void save(){
-        fileHandler.write(); 
-    }
-
-    // public void read(){
-    //     FileHandler.read("myTree.txt");
-    // }
 
     public void addMember(T member){
         familyList.add(member);

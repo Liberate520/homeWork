@@ -1,4 +1,4 @@
-package package1;
+package genealogicalTree;
 
 public interface Writable {
     void write();
