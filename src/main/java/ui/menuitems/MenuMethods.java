@@ -2,15 +2,16 @@ package ui.menuitems;
 
 import ui.ConsoleUI;
 import ui.MenuItem;
+import ui.View;
 
 public abstract class  MenuMethods implements MenuItem {
-    private ConsoleUI consoleUI;
+    private View view;
 
-    public MenuMethods(ConsoleUI consoleUI) {
-        this.consoleUI = consoleUI;
+    public MenuMethods(View view) {
+        this.view = view;
     }
 
-    public ConsoleUI getConsoleUI() {
-        return consoleUI;
+    public View getUI() {
+        return view;
     }
 }

@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Menu {
     private List<MenuItem> items;
-    private ConsoleUI consoleUI;
+    private View view;
 
-    public Menu(ConsoleUI consoleUI) {
-        this.consoleUI = consoleUI;
+    public Menu(View view) {
+        this.view = view;
         items = new ArrayList<>();
     }
 
@@ -17,7 +17,7 @@ public class Menu {
         sb.append("\n");
 
         for (int i = 0; i < items.size(); i++) {
-            sb.append(i);
+            sb.append(i+1);
             sb.append("| ");
             sb.append(items.get(i).description());
             sb.append("\n");
@@ -29,7 +29,7 @@ public class Menu {
     }
 
     void run(int index){
-        MenuItem menuItem = items.get(index);
+        MenuItem menuItem = items.get(index-1);
         menuItem.run();
     }
 

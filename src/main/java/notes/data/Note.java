@@ -26,4 +26,8 @@ public class Note {
     protected void setNote(String newNote) {
         note = newNote;
     }
+
+    protected String getDate() {
+        return date;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Notes implements Service {
 
-    ArrayList<Note> notes;
+    private ArrayList<Note> notes;
 
 
     public Notes() {
@@ -35,6 +35,11 @@ public class Notes implements Service {
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Задан неверный номер заметки");
         }
+    }
+
+    @Override
+    public String[][] toArray() {
+        return new String[0][];
     }
 
     @Override

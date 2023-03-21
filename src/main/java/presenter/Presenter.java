@@ -11,6 +11,9 @@ public class Presenter {
     private View view;
     private Service service;
 
+    public Service getService() {
+        return service;
+    }
 
     public Presenter(View view, Service service) {
         this.view = view;
@@ -55,5 +58,14 @@ public class Presenter {
 
     public Notes getNotes() {
         return service.getNotes();
+    }
+
+
+    public void addNote(Note note) {
+        service.addNote(note);
+    }
+
+    public void removeNote(int index) {
+        service.delete(index);
     }
 }

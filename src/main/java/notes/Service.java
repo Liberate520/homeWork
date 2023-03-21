@@ -13,4 +13,5 @@ public interface Service {
     void addNote(Note note);
     String getNote(int index);
     void setNote(String newNote, int index);
+    String[][] toArray();
 }
