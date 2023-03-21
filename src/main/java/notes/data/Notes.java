@@ -6,7 +6,7 @@ import notes.Service;
 
 import java.util.ArrayList;
 
-public class Notes extends Note implements Service {
+public class Notes implements Service {
 
     ArrayList<Note> notes;
 
