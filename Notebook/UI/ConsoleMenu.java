@@ -6,20 +6,29 @@ import Notebook.Core.MVP.Views.ViewMenu;
 
 public class ConsoleMenu implements ViewMenu {
     Scanner iScanner;
+    private final String textFotal = "Invalid input!";
 
     public ConsoleMenu() {
         iScanner = new Scanner(System.in);
     }
 
     @Override
-    public int getNum()  {
-        String num = iScanner.next();
-        if (isDigit(num)) {
-            if (Integer.parseInt(num) > 0)
-                return Integer.parseInt(num);
+    public int getNum() {
+        int num = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            String input = iScanner.next();
+            if (isDigit(input)) {
+                num = Integer.parseInt(input);
+                if (num > 0) {
+                    validInput = true;
+                }
+            }
+            if (!validInput) {
+                System.out.println(textFotal);
+            }
         }
-        
-        return 10;
+        return num;
     }
 
     @Override
@@ -37,4 +46,8 @@ public class ConsoleMenu implements ViewMenu {
         }
     }
 
+    // public static void main(String[] args) {
+    //     ConsoleMenu ww = new ConsoleMenu();
+    //     ww.setNum(ww.getNum());
+    // }
 }

@@ -1,6 +1,6 @@
 package Notebook.Core.Models;
 
-public abstract class Recording implements Comparable<Recording> {
+public class Recording implements Comparable<Recording> {
     private String title;
     private String  recording;
 
@@ -11,7 +11,6 @@ public abstract class Recording implements Comparable<Recording> {
 
     @Override
     public int compareTo(Recording o) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -19,5 +18,21 @@ public abstract class Recording implements Comparable<Recording> {
     public boolean equals(Object obj) {
         Recording t = (Recording)obj;
         return this.title == t.title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getRecording() {
+        return recording;
+    }
+
+    public void setRecording(String recording) {
+        this.recording = recording;
     }
 }

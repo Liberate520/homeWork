@@ -1,4 +1,4 @@
-package Notebook.Core.Models;
+package Notebook.UI;
 
 public class Menu {
     private String[] menu;
