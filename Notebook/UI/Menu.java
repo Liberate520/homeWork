@@ -17,7 +17,7 @@ public class Menu {
         menu[index++] = "Exit.";
     }
 
-    void printMenu() {
+    public void printMenu() {
         System.out.println("\t\tMenu:");
         for (int i = 0; i < menu.length; i++) {
             System.out.println("\t" + (i + 1) + ". " + menu[i]);

@@ -1,5 +1,5 @@
 package Notebook.Client;
-import Notebook.UI.App;
+import Notebook.UI.Commands.App;
 
 public class Program {
    public static void main(String[] args) {

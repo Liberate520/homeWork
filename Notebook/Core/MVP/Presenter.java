@@ -1,8 +1,5 @@
 package Notebook.Core.MVP;
-
-import java.io.IOException;
-import java.util.jar.JarException;
-
+import Notebook.Core.MVP.Models.Model;
 import Notebook.Core.MVP.Views.ViewRecord;
 import Notebook.Core.Models.Recording;
 
@@ -10,6 +7,7 @@ public class Presenter {
 
     private Model model;
     private ViewRecord view;
+    
 
     public Presenter(ViewRecord view, String path) {
         this.view = view;
@@ -25,12 +23,7 @@ public class Presenter {
     }
 
     public void loadFromFile() {
-        try {
-            model.load();
-        } catch (JarException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }    
+        model.load();
     }
 
     public void remove(int index){
@@ -44,7 +37,7 @@ public class Presenter {
     public void save (){
         try {
             model.save();
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
