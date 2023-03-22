@@ -35,4 +35,13 @@ public class Recording implements Comparable<Recording> {
     public void setRecording(String recording) {
         this.recording = recording;
     }
+
+    public void printRecord(){
+        System.out.println("\t" +  getTitle() + ":\n" + "" + getRecording() + "\n");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

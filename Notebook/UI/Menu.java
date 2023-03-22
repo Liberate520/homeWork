@@ -31,8 +31,4 @@ public class Menu {
     public void setIndex(int index) {
         this.index = index;
     }
-public static void main(String[] args) {
-    Menu tt = new Menu();
-    tt.printMenu();
-}
 }
