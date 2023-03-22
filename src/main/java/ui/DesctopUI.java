@@ -16,19 +16,19 @@ public class DesctopUI implements View{
     private JTable table;
 
     public DesctopUI() {
-        frame = new JFrame();
-        frame.setTitle("Notes");
-        String[] columnNames = new String[]{"date","note"};
-        if (presenter != null) {
-            table = new JTable(presenter.getService().getNotes().toArray(), columnNames);
-            table.setBounds(10, 10, 400, 400);
-            frame.add(new JScrollPane(table));
-            frame.setSize(400, 400);
-            frame.setVisible(true);
-        }
-        else {
-            table = new JTable();
-        }
+//        frame = new JFrame();
+//        frame.setTitle("Notes");
+//        String[] columnNames = new String[]{"date","note"};
+//        if (presenter != null) {
+//            table = new JTable(presenter.getService().getNotes().toArray(), columnNames);
+//            table.setBounds(10, 10, 400, 400);
+//            frame.add(new JScrollPane(table));
+//            frame.setSize(400, 400);
+//            frame.setVisible(true);
+//        }
+//        else {
+//            table = new JTable();
+//        }
 
     }
 
@@ -73,6 +73,21 @@ public class DesctopUI implements View{
 
     @Override
     public void removeNote() {
+
+    }
+
+    @Override
+    public void editNote() {
+
+    }
+
+    @Override
+    public void print(String message) {
+
+    }
+
+    @Override
+    public void exit() {
 
     }
 

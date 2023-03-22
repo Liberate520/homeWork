@@ -15,7 +15,6 @@ public class Menu {
     public String printMenu(){
         StringBuilder sb= new StringBuilder();
         sb.append("\n");
-
         for (int i = 0; i < items.size(); i++) {
             sb.append(i+1);
             sb.append("| ");
@@ -32,7 +31,4 @@ public class Menu {
         MenuItem menuItem = items.get(index-1);
         menuItem.run();
     }
-
-
-
 }
