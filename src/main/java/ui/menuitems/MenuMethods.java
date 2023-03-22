@@ -1,6 +1,5 @@
 package ui.menuitems;
 
-import ui.ConsoleUI;
 import ui.MenuItem;
 import ui.View;
 

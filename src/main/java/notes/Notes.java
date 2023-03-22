@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Notes {
     private ArrayList<Note> notes;
+
     public Notes() {
-        this.notes = new ArrayList<Note>();
+        this.notes = new ArrayList<>();
     }
 
-//    @Override
     public void addNote(Note note) {
         notes.add(note);
     }
@@ -19,13 +19,11 @@ public class Notes {
         return notes.get(index).getNote();
     }
 
-//    @Override
     public void setNote(String newNote, int index) {
         Note note = notes.get(index - 1);
         note.setNote(newNote);
     }
-
-//    @Override
+ //В разработке
     public String[][] toArray() {
         return new String[0][];
     }
@@ -39,7 +37,7 @@ public class Notes {
         return sb.toString();
     }
 
-//    @Override
+
     public Notes loadNotes() {
         ActionsFile actionsFile = new ActionsFile();
         String data = actionsFile.getData();
@@ -47,24 +45,19 @@ public class Notes {
         return formatter.parseIn(data);
     }
 
-//    @Override
-    public Notes getNotes() {
-        return this;
-    }
 
-//    @Override
     public String getDate(int index) {
         return notes.get(index).getDate();
     }
 
-//    @Override
+
     public void save() {
         ActionsFile actionsFile = new ActionsFile();
         Formatter formatter = new Formatter();
         actionsFile.save(formatter.parseOut(this));
     }
 
-//    @Override
+
     public void delete(int index) {
         notes.remove(index - 1);
 

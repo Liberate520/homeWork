@@ -8,9 +8,7 @@ public class Presenter {
     private View view;
     private Notes notes;
 
-//    public Service getService() {
-//        return service;
-//    }
+
 
     public Presenter(View view, Notes notes) {
         this.view = view;
@@ -31,6 +29,7 @@ public class Presenter {
     }
 
     public void replaceNote(int index, String newNote) {
+        //Не уверен что такая реализация правильная. Скорее всего исключения надо выбрасывать отдельно...
         try {
             notes.setNote(newNote, index);
         } catch (IndexOutOfBoundsException ex){

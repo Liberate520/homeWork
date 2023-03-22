@@ -10,6 +10,8 @@ public class DesctopUI implements View{
     private JFrame frame;
     private JTable table;
 
+//В разработке
+
     public DesctopUI() {
 //        frame = new JFrame();
 //        frame.setTitle("Notes");
