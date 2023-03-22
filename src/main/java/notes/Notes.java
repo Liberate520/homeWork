@@ -1,18 +1,16 @@
-package notes.data;
+package notes;
 
-import notes.ActionsFile;
-import notes.Formatter;
-import notes.Service;
+import notes.data.Note;
 
 import java.util.ArrayList;
 
-public class Notes implements Service{
+public class Notes {
     private ArrayList<Note> notes;
     public Notes() {
         this.notes = new ArrayList<Note>();
     }
 
-    @Override
+//    @Override
     public void addNote(Note note) {
         notes.add(note);
     }
@@ -21,13 +19,13 @@ public class Notes implements Service{
         return notes.get(index).getNote();
     }
 
-    @Override
+//    @Override
     public void setNote(String newNote, int index) {
         Note note = notes.get(index - 1);
         note.setNote(newNote);
     }
 
-    @Override
+//    @Override
     public String[][] toArray() {
         return new String[0][];
     }
@@ -41,7 +39,7 @@ public class Notes implements Service{
         return sb.toString();
     }
 
-    @Override
+//    @Override
     public Notes loadNotes() {
         ActionsFile actionsFile = new ActionsFile();
         String data = actionsFile.getData();
@@ -49,24 +47,24 @@ public class Notes implements Service{
         return formatter.parseIn(data);
     }
 
-    @Override
+//    @Override
     public Notes getNotes() {
         return this;
     }
 
-    @Override
+//    @Override
     public String getDate(int index) {
         return notes.get(index).getDate();
     }
 
-    @Override
+//    @Override
     public void save() {
         ActionsFile actionsFile = new ActionsFile();
         Formatter formatter = new Formatter();
         actionsFile.save(formatter.parseOut(this));
     }
 
-    @Override
+//    @Override
     public void delete(int index) {
         notes.remove(index - 1);
 

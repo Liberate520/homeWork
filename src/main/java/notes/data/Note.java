@@ -16,15 +16,15 @@ public class Note {
         return String.format("%10s | %s", date, note);
     }
 
-    protected String getNote() {
+    public String getNote() {
         return note;
     }
 
-    protected void setNote(String newNote) {
+    public void setNote(String newNote) {
         note = newNote;
     }
 
-    protected String getDate() {
+    public String getDate() {
         return date;
     }
 }

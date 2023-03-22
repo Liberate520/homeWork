@@ -1,13 +1,8 @@
 package ui;
 
-import notes.Service;
-import notes.data.Notes;
 import presenter.Presenter;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DesctopUI implements View{
     private Presenter presenter;

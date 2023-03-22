@@ -1,6 +1,5 @@
 package ui;
 
-import notes.data.Notes;
 import presenter.Presenter;
 
 public interface View {

@@ -1,5 +1,4 @@
-import notes.Service;
-import notes.data.Notes;
+import notes.Notes;
 import presenter.Presenter;
 import ui.ConsoleUI;
 import ui.View;
@@ -7,8 +6,8 @@ import ui.View;
 public class Main {
     public static void main(String[] args) {
         View view = new ConsoleUI();
-        Service service = new Notes();
-        Presenter presenter = new Presenter(view, service);
+        Notes notes = new Notes();
+        Presenter presenter = new Presenter(view, notes);
         view.selection();
     }
 }

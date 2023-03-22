@@ -1,7 +1,7 @@
 package ui;
 
 import notes.data.Note;
-import notes.data.Notes;
+import notes.Notes;
 import presenter.Presenter;
 import ui.menuitems.*;
 import java.util.Scanner;
