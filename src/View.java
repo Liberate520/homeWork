@@ -12,11 +12,7 @@ public class View {
         this.presenter = presenter;
     }
 
-    // public void output(String outputString) {
-    //     print(outputString);
-    // }
-
-    public void dialog(String question) {
+    public void dialog(String question){
         print(question);
         String inputString = scan();
         presenter.input(inputString);

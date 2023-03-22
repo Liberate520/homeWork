@@ -9,12 +9,12 @@ public class Presenter {
         model.setPresenter(this);
     }
 
-    public void input(String inputString) {
+    public void input(String inputString){
         String request = model.putUserInput(inputString);
         view.dialog(request);
     }
 
-    public void message(String request) {
+    public void message(String request){
         view.dialog(request);
     }
 }
