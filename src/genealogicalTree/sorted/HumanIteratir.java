@@ -1,4 +1,4 @@
-package sorted;
+package genealogicalTree.sorted;
 
 import java.util.ArrayList;
 import java.util.Iterator;

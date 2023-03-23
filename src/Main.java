@@ -36,7 +36,7 @@ public class Main {
         // objectOutputStream.writeObject(gareevTree);
         // objectOutputStream.close();
 
-        // //Восстановление из файла
+        //Восстановление из файла
         // ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("tree.out"));
         // GenealogicalTree myTree = (GenealogicalTree) objectInputStream.readObject();
         // objectInputStream.close();
@@ -56,7 +56,7 @@ public class Main {
         
         
         View view = new Console();
-        Model model = new Model(new GenealogicalTree<>());
+        Model model = new Model(new GenealogicalTree());
         new Presenter(view, model);
         view.start();
         

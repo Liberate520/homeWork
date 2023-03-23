@@ -11,7 +11,7 @@ public class Console implements View {
     private Menu menu;
     private boolean work;
     private ArrayList<String> member;
-    private String name;
+    private String name, fileName;
 
     public void hello() {
         System.out.println(menu.printMune());
@@ -64,6 +64,14 @@ public class Console implements View {
         member.add(scanner.nextLine());
         System.out.println();
         presenter.addParents(member);
+    }
+
+    public void save() {
+        presenter.save();
+    }
+
+    public void open() {
+        presenter.open();
     }
 
     @Override

@@ -5,21 +5,25 @@ import java.util.List;
 import ui.commands.AddMember;
 import ui.commands.AddParents;
 import ui.commands.Exit;
+import ui.commands.Open;
 import ui.commands.Option;
 import ui.commands.PrintMember;
 import ui.commands.PrintTree;
+import ui.commands.Save;
 
 public class Menu {
     private List<Option> commands;
-    private ui.Console console;
+    private Console console;
 
-    public Menu(ui.Console console){
+    public Menu(Console console){
         this.console = console;
         commands = new ArrayList<>();
         commands.add(new AddMember(console));
         commands.add(new AddParents(console));
         commands.add(new PrintMember(console));
         commands.add(new PrintTree(console));
+        commands.add(new Save(console));
+        commands.add(new Open(console));
         commands.add(new Exit(console));
     }
 

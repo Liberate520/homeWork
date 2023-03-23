@@ -7,6 +7,8 @@ public class Model {
 
     GenealogicalTree genealogicalTree;
     Human human, humanM, humanF;
+    Writable tree;
+    Readable openFile;
 
     public Model(GenealogicalTree genealogicalTree){
         this.genealogicalTree = genealogicalTree;
@@ -31,5 +33,17 @@ public class Model {
         humanM = genealogicalTree.searchName(member.get(2));
         human.setFather(humanF);
         human.setMother(humanM);
+    }
+
+    public void save() {
+        tree = new FileHandler(genealogicalTree);
+        genealogicalTree.setFileHandler(tree);
+        tree.write();
+    }
+
+    public void open() {
+        genealogicalTree = new GenealogicalTree();
+        openFile = new FileHandler();
+        genealogicalTree = openFile.read();
     }
 }

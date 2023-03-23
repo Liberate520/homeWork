@@ -32,5 +32,13 @@ public class Presenter {
     public void addParents(ArrayList<String> member) {
         model.addParents(member);
     }
+
+    public void save() {
+        model.save();
+    }
+
+    public void open() {
+        model.open();
+    }
     
 }

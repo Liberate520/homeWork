@@ -6,7 +6,7 @@ import javax.swing.text.View;
 
 public class Exit extends Command {
     
-    public Exit(ui.Console console) {
+    public Exit(Console console) {
         super(console);
     }
 
