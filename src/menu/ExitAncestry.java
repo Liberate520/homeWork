@@ -2,20 +2,20 @@ package menu;
 
 import ui.View;
 
-public class LoadMenu  extends Command{
+public class ExitAncestry extends Command{
     
-    public LoadMenu(View view) {
+    public ExitAncestry(View view) {
         super(view);
     }
 
     @Override
     public String description() {
-        return "Чтение из файла";
+        return "Выход в главное меню";
     }
 
     @Override
     public void execute() {
-        this.getView().load();
+        this.getView().ExitAncestry();
     }
     
 }

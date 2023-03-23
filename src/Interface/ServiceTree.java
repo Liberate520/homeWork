@@ -43,7 +43,6 @@ public class ServiceTree<T extends Person>  implements Service {
                 familyTree.add((T)(new Person("BaidenGrandFazer", "male",sdf.parse("1894-09-20"),sdf.parse("1998-09-20"), null, null)));
                 familyTree.add((T)(new Person("BaidenGrandMother", "female",sdf.parse("1896-09-20"),sdf.parse("1998-09-20"), null, null)));
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -71,23 +70,6 @@ public class ServiceTree<T extends Person>  implements Service {
         return familyTree.сhildrentoSring(cur);
     }
 
-    // @Override
-    // public void addFater(Integer curPer, Integer fatPer) {
-    //     if (fatPer!=null){
-    //         familyTree.setFather(curPer, familyTree.getByIndex(fatPer));
-    //     }else {
-    //         familyTree.setFather(curPer, null);
-    //     }
-    // }
-    
-    // @Override
-    // public void addMother(Integer curPer, Integer motPer) {
-    //     if (motPer!=null){
-    //         familyTree.setMother(curPer, familyTree.getByIndex(motPer));
-    //     }else {
-    //         familyTree.setMother(curPer, null);
-    //     }
-    // }
     @Override
     public void addChild(Integer curPer, Integer chil, Integer delChil) {
             if (chil!=null){
@@ -102,7 +84,10 @@ public class ServiceTree<T extends Person>  implements Service {
                     familyTree.setMother(chil, familyTree.getByIndex(curPer));
                 }
             }else {
-                familyTree.delChild(curPer, delChil);
+                if (delChil!=null){
+                    familyTree.delChild(curPer, delChil);
+                }
+                
             } 
         }
 }

@@ -62,10 +62,10 @@ public class Person implements Serializable{
         this.sex = sex;
     }
     public void setDateOfBirth(Date dateOfBirth) {
-        dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
     public void setDateOfDeath(Date dateOfDeath) {
-        dateOfDeath = dateOfDeath;
+        this.dateOfDeath = dateOfDeath;
     }
  
     public void setFather(Person father) {
@@ -80,36 +80,19 @@ public class Person implements Serializable{
             this.children.add(chil);
         }
     }
+
     public void delChild(Integer chil) {
         if (this.children.size()>chil){
-            if (this.sex=="male") this.children.get(chil).setFather(null);
-            if (this.sex=="female") this.children.get(chil).setMother(null);
-            System.out.println(chil+"========");
+            if (this.sex.equals("male")){
+                this.children.get(chil).setFather(null);
+            } 
+            if (this.sex.equals("female"))  {
+                this.children.get(chil).setMother(null);
+            }
             this.children.remove(this.children.get(chil));
-            System.out.println(chil+"========");
         }
         
     }
-    // public Boolean verificationChild(Person chil) {
-    //     for (Person person : this.children) {
-    //         if (person.equals(chil)){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-    // public Person SearchChild(Integer chil) {
-    //     for (Person person : this.children) {
-    //         if (person.equals(chil)){
-    //             return person;
-    //         }
-    //     }
-    //     return null;
-    // }
-
-    // public void setChildren(ArrayList<Person> children) {
-    //     this.children = children;
-    // }
 
     public String сhildrentoSring() {
         Integer count=0;
@@ -135,9 +118,7 @@ public class Person implements Serializable{
     public Person getFather() {
         return father;
     }
-    // public ArrayList<Person> getChildren() {
-    //     return children;
-    // }
+
     @Override
     public int hashCode() {
         final int prime = 31;

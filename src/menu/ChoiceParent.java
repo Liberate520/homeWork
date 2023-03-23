@@ -2,19 +2,20 @@ package menu;
 
 import ui.View;
 
-public class SaveMenu  extends Command{
+public class ChoiceParent  extends Command{
     
-    public SaveMenu(View view) {
+    public ChoiceParent(View view) {
         super(view);
     }
 
     @Override
     public String description() {
-        return "Запись в файл";
+        return "Выбор Родителя ";
     }
 
     @Override
     public void execute() {
-        this.getView().save();
+        getView().choisParent();
     }
+
 }

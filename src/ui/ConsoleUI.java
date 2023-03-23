@@ -1,24 +1,21 @@
 package ui;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Presenter.Presenter;
-import menu.AddAncestry;
-import menu.Command;
-import menu.LoadMenu;
-import menu.SaveMenu;
-import menu.ShowAllMenu;
-import menu.StartMenu;
+
 
 public class ConsoleUI implements View {
     private Presenter presenter;
-    // private Scanner scanner;
-    private Command command;
+    private Scanner scanner;
+    private Menu menu;
+    private boolean work;
+    private Integer parent = 0;
+    private Integer child = 0;
 
-    public ConsoleUI() {
-        // scanner = new Scanner(System.in);
-        command = new StartMenu(this);
-        
+    public ConsoleUI() {  
     }
 
     @Override
@@ -34,92 +31,125 @@ public class ConsoleUI implements View {
 
     @Override
     public void start(Presenter presenter) {
-        Integer work= 10;
+        String temp;
+        Integer chois;
+        scanner = new Scanner(System.in);
         setPresenter(presenter);
-        while (work>0) {
-            switch (work) {
-                case (1): {
-                    command = new AddAncestry(this);
-                    break;
-                }
-                case (10): {
-                    command = new  StartMenu(this);
-                    break;
-                }
-                case (2): {
-                    command = new ShowAllMenu(this);
-                    break;
-                }
-                case (21): {
-                    presenter.sortByName();
-                    print(presenter.showAllPerson());
-                    break;
-                }
-                case (22): {
-                    presenter.sortByDateOfBirth();
-                    print(presenter.showAllPerson());
-                    break;
-                }
-                case (23):
-                case (20): {
-                    command = new  StartMenu(this);
-                    break;
-                }
-                case (3): {
-                    command = new SaveMenu(this);
-                    break;
-                }
-                case (31): {
-                    presenter.save();
-                    command = new  StartMenu(this);
-                    break;
-                }
-                case (30): 
-                case (32): {
-                    command = new  StartMenu(this);
-                    break;
-                }
-                case (4): {
-                    command = new LoadMenu(this);
-                    break;
-                }
-                case (41): {
-                    presenter.load();
-                    command = new  StartMenu(this);
-                    break;
-                }
-                case (40):
-                case (42): {
-                    command = new  StartMenu(this);
-                    break;
-                }
+        menu = new MenuStart(this);
+        work = true;
+        while (work){
+            print(menu.printMenu());
+            if (checkInput(temp=scanner.next(), menu.getCommands().size()+1)){
+                chois=Integer.parseInt(temp);
+                if (chois==0) chois=menu.getCommands().size();
+                menu.execute(chois);
+            } else {
+                print("Wrong command number.");
             }
-            work=command.execute();
         }
     }
 
     public void load() {
-        load();
+        presenter.load();
         print(presenter.showAllPerson());
     }
-    public String showPerson(Integer chois){
-        return presenter.showPerson(chois);
-    }
-    public void showAllPerson(){
+    public void save() {
+        presenter.save();
         print(presenter.showAllPerson());
+        print("Данные сохранены");
     }
-    // public  void addFater(Integer cur,Integer fat){
-    //     presenter.addFater(cur, fat);
+    
+    // public String showPerson(Integer chois){
+    //     return presenter.showPerson(chois);
     // }
-    // public  void addMother(Integer cur,Integer mot){
-    //     presenter.addMother(cur, mot);
+    // public void showAllPerson(){
+    //     print(presenter.showAllPerson());
     // }
-    public  void addChild(Integer cur,Integer chil,Integer delChil){
-        // System.out.println("----------------");
-        presenter.addChild(cur, chil, delChil);
+    public  void addChild(){
+        String temp = presenter.showAllPerson();
+        print("\nВыберете ребенка для добавления или 0 для выхода:\n");
+        print(temp);
+        String[] words=temp.split("\n");
+        if (checkInput(temp=scanner.next(), words.length-1)){
+            child=Integer.parseInt(temp)-1;
+        } else {
+            print("Wrong command number.");
+        }
+        presenter.addChild(parent, child, null);
+    }    
+    public  void delChild(){
+        String temp = presenter.сhildrentoSring(parent);
+        print("\nВыберете ребенка для удаления или 0 для выхода:\n");
+        print(temp);
+        String[] words=temp.split("\n");
+        if (checkInput(temp=scanner.next(), words.length-1)){
+            child=Integer.parseInt(temp)-1;
+        } else {
+            print("Wrong command number.");
+        }
+        presenter.addChild(parent, null, child);
     }
-    public String сhildrentoSring(Integer cur){
-        return presenter.сhildrentoSring(cur);
+    public void сhildrentoSring(){
+        print("Персонаж:\n");
+        print(presenter.showPerson(parent));
+        print("Список детей:\n");
+        print(presenter.сhildrentoSring(parent));
+    }
+    private Boolean checkInput(String text, Integer com){
+        if (text.matches("[0-9]+") && com>=Integer.parseInt(text) && Integer.parseInt(text)>=0) {
+            return true; 
+        } else {
+            return false;
+        }
+    }
+    public void choisParent(){
+        String temp = presenter.showAllPerson();
+        print("\nВыберете родителя или 0 для выхода:\n");
+        print(temp);
+        String[] words=temp.split("\n");
+        if (checkInput(temp=scanner.next(), words.length-1)){
+            parent=Integer.parseInt(temp)-1;
+        } else {
+            print("Wrong command number.");
+        }
     }
 
+    public void SortPerson(){
+        Integer chois=5;
+        String temp;
+        while (chois!=3 || chois!=0) {
+            switch (chois) {
+                case (1): {
+                    presenter.sortByName();
+                    break;
+                }
+                case (2): {
+                    presenter.sortByDateOfBirth();
+                    break;
+                }
+                case (3):
+                case (0): {
+                    return ;
+                    // break;
+                }
+            } 
+            print(presenter.showAllPerson());
+            print("\nВыберете пункт меню:\n");
+            print("\n1. Сортировка по имени\n2. Сортировка по году рождения\n3. Выход"); 
+            if (checkInput(temp=scanner.next(), 3)){
+                chois=Integer.parseInt(temp);
+            }  
+        }
+    }
+
+    public void ChangMenuAncestry(){
+        menu = new MenuAddAncestry(this); 
+    }
+    public void Exit(){
+        print("\nДо встречи!\n");
+        work=false;
+    }
+    public void ExitAncestry(){
+        menu = new MenuStart(this);
+    }
 }

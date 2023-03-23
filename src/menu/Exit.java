@@ -2,19 +2,21 @@ package menu;
 
 import ui.View;
 
-public class SaveMenu  extends Command{
+public class Exit extends Command{
     
-    public SaveMenu(View view) {
+    public Exit(View view) {
         super(view);
-    }
+     }
 
     @Override
     public String description() {
-        return "Запись в файл";
+
+        return "Выход";
     }
 
     @Override
     public void execute() {
-        this.getView().save();
+        this.getView().Exit();
     }
+    
 }
