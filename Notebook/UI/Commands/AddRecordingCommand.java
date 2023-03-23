@@ -13,5 +13,10 @@ public class AddRecordingCommand implements Command {
     public void execute() {
         presenter.append();
     }
+
+    @Override
+    public void printCommand() {
+        System.out.println("Add new recording.");        
+    }
 }
 

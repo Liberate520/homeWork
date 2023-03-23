@@ -12,4 +12,9 @@ public class ShowAllCommand implements Command {
     public void execute() {
         presenter.show();
     }
+
+    @Override
+    public void printCommand() {
+        System.err.println("View all entries.");
+    }
 }

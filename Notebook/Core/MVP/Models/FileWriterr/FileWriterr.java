@@ -1,9 +1,9 @@
-package Notebook.Core.MVP.Models;
+package Notebook.Core.MVP.Models.FileWriterr;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Iterator;
 
-import Notebook.Core.Models.Recording;
+import Notebook.Core.Essence.Recording;
 public class FileWriterr {
     public static void writeToFile(String path, Iterable<Recording> iterable) throws Exception {
         String pathProject = System.getProperty("user.dir");
@@ -15,8 +15,8 @@ public class FileWriterr {
             fileWriter.write("[");
             while (iterator.hasNext()) {
                 Recording recording = iterator.next();
-                String a = "{\"" + recording.getTitle() + "\":\"" + recording.getRecording() + "\"}";
-                fileWriter.write(a);
+                String formattedRecording = JsonFormatter.toJson(recording);
+                fileWriter.write(formattedRecording);
                 if (iterator.hasNext()) {
                     fileWriter.write(",\n");
                 }

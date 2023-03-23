@@ -1,5 +1,4 @@
-package Notebook.Core.Models;
-
+package Notebook.Core.Essence;
 public class Recording implements Comparable<Recording> {
     private String title;
     private String  recording;

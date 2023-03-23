@@ -5,4 +5,9 @@ public class ExitCommand implements Command {
     public void execute() {
         // Do nothing
     }
+
+    @Override
+    public void printCommand() {
+        System.out.println("Exit.");
+    }
 }

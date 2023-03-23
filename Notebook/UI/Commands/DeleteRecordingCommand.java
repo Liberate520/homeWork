@@ -15,5 +15,10 @@ public class DeleteRecordingCommand implements Command {
     public void execute() {
         presenter.remove(viewMenu.getIndex() - 1);
     }
+
+    @Override
+    public void printCommand() {
+        System.out.println("Delete the recording.");
+    }
 }
 

@@ -13,4 +13,9 @@ public class SaveChangesCommand implements Command {
     public void execute() {
         presenter.save();
     }
+
+    @Override
+    public void printCommand() {
+        System.out.println("Save changes.");
+    }
 }

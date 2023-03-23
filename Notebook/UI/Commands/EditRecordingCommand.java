@@ -15,4 +15,9 @@ public class EditRecordingCommand implements Command {
     public void execute() {
         presenter.set(viewMenu.getIndex() - 1);
     }
+
+    @Override
+    public void printCommand() {
+        System.out.println("Edit the recording.");
+    }
 }

@@ -1,10 +1,10 @@
 package Notebook.Core.Infrastructure;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import Notebook.Core.Models.Recording;
+import Notebook.Core.Essence.Recording;
 
 public class Notebook implements Iterable <Recording> {
 
@@ -72,5 +72,9 @@ public class Notebook implements Iterable <Recording> {
     public int getSize() {
         return size;
     }
-
+    
+    public void addAll(Collection<Recording> elements) {
+        records.addAll(elements);
+        size += elements.size();
+    }
 }

@@ -1,21 +1,16 @@
 package Notebook.UI;
-
 import java.util.Scanner;
-
 import Notebook.Core.MVP.Views.ViewMenu;
 
-
 public class ConsoleMenu implements ViewMenu {
-
-    Scanner iScanner;
+    private Scanner iScanner;
     private final String textFotal = "Invalid input!";
-
     public ConsoleMenu() {
         iScanner = new Scanner(System.in);
     }
 
     @Override
-    public int getNum() {
+    public int getPunktMenu() {
         int num = 0;
         boolean validInput = false;
         while (!validInput) {
@@ -34,7 +29,7 @@ public class ConsoleMenu implements ViewMenu {
     }
 
     @Override
-    public void setNum(int num) {
+    public void setPunktMenu(int num) {
         System.out.printf("Selected menu item: %d\n", num);
 
     }
