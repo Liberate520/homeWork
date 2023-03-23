@@ -13,19 +13,17 @@ public class Main {
         // удаления заметок. В случае, если заметок нет, будет вывод  в консоль:
         // "В записной книжке нет записей!"
 
-        Note note1 = new Note(LocalDate.now(),"семинар JAVA вторник", "важно");
-        Note note2 = new Note(LocalDate.now(),"лекция фин. математика", "несрочно");
+        Note note1 = new Note(LocalDate.now(),"первая заметка", "важно");
+        Note note2 = new Note(LocalDate.now(),"вторая заметка", "несрочно");
+
 
         Notebook notebook = new Notebook();
-
         notebook.add(note1);
         notebook.add(note2);
 
         View view = new ConsoleUI();
-        Presenter presenter = new Presenter(notebook, view);
-
-        presenter.onClick();
-
+        new Presenter(view, notebook);
+        view.onClick();
 
     }
 }

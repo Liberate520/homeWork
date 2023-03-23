@@ -10,42 +10,40 @@ import java.util.ArrayList;
 
 public class Presenter {
     private final Notebook notebook;
-    private final View view;
 
 
-    public Presenter(Notebook notebook, View view) {
+    public Presenter(View view, Notebook notebook) {
         this.notebook = notebook;
-        this.view = view;
+        view.setPresenter(this);
+
     }
 
-    public void onClick() {
-        while (true) {
 
-            int userChoice = view.choiceMenu();
-
-            switch (userChoice) {
-                case 0 -> {
-                    return;
-                }
-                case 1 -> {
-                    if (!notebook.isEmpty()) view.printAll(notebook.toString());
-                    else view.emptyNotebook();
-                }
-                case 2 -> {
-                    ArrayList<String> userInput = view.addNote();
-                    Note userNote = new Note(LocalDate.now(), userInput.get(0), userInput.get(1));
-                    notebook.add(userNote);
-                    view.addedNote();
-                }
-                case 3 -> {
-                    if (notebook.isEmpty()) view.emptyNotebook();
-                    else {
-                        int numberNote = view.choiceRemove(notebook.getSize());
-                        notebook.remove(numberNote);
-                        view.removedNote();
-                    }
-                }
-            }
-        }
+    public boolean isFull() {
+        return !notebook.isEmpty();
     }
+
+    public void addNote(ArrayList<String> userInput) {
+        Note userNote = new Note(LocalDate.now(), userInput.get(0), userInput.get(1));
+        notebook.add(userNote);
+    }
+
+    public void changeNote(ArrayList<String> userInput, int index){
+        Note newNote = new Note(LocalDate.now(), userInput.get(0), userInput.get(1));
+        notebook.change(index, newNote);
+    }
+
+
+    public void removeNote(int number) {
+        notebook.remove(number - 1);
+    }
+
+    public String printAll() {
+        return notebook.toString();
+    }
+
+    public int getSizeNotebook() {
+        return notebook.getSize();
+    }
+
 }

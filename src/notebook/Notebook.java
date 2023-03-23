@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Notebook {
     private final ArrayList<Note> notes = new ArrayList<>();
 
+
+
     public int getSize(){
         return this.notes.size();
     }
@@ -13,8 +15,12 @@ public class Notebook {
         notes.add(note);
    }
 
-   public void remove(int number){
-        notes.remove(number - 1);
+   public void remove(int index){
+        notes.remove(index);
+   }
+
+   public void change(int index, Note note){
+        notes.set(index, note);
    }
 
     @Override

@@ -9,6 +9,7 @@ public class Note {
     private final String note;
     private final String description;
 
+
     public Note(LocalDate date, String note, String description) {
         this.date = date;
         this.note = note;
