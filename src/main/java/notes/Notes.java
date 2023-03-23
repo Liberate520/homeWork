@@ -25,7 +25,13 @@ public class Notes {
     }
  //В разработке
     public String[][] toArray() {
-        return new String[0][];
+        int size = notes.size();
+        String[][] arrayNote = new String[size][2];//TODO узнать как определять количество полей класса
+        for (int i = 0; i < size; i++) {
+            arrayNote[i][0] = notes.get(i).getDate();
+            arrayNote[i][1] = notes.get(i).getNote();
+        }
+        return arrayNote;
     }
 
     @Override
