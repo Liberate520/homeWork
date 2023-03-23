@@ -1,5 +1,6 @@
 package UI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import commands.*;
@@ -19,7 +20,7 @@ public class Menu {
         commands.add(new Exit(console));
     }
 
-    void execute(int num) {
+    void execute(int num) throws IOException, ClassNotFoundException {
         Option option = commands.get(num - 1);
         option.execute();
     }

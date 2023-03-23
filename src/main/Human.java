@@ -8,20 +8,22 @@ public class Human implements Serializable, Comparable<Human> {
     private String lastname;
     private String firstname;
     private String patronymic;
+    private Integer year;
     private GenderType sex;
     private Human father;
     private Human mother;
     private List<Human> children;
 
     public Human(String lastname, String firstname, String patronymic, GenderType sex) {
-        this(lastname, firstname, patronymic, sex, null, null);
+        this(lastname, firstname, patronymic, 0, sex, null, null);
     }
 
     public Human(String lastname, String firstname, String patronymic,
-                 GenderType sex, Human father, Human mother) {
+                 Integer year, GenderType sex, Human father, Human mother) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.patronymic = patronymic;
+        this.year = year;
         this.sex = sex;
         this.father = father;
         this.mother = mother;
@@ -49,6 +51,8 @@ public class Human implements Serializable, Comparable<Human> {
         return patronymic;
     }
 
+    public Integer getYear() { return year; }
+
     public Human getFather() {
         return father;
     }
@@ -65,6 +69,8 @@ public class Human implements Serializable, Comparable<Human> {
         sb.append(firstname);
         sb.append(" ");
         sb.append(patronymic);
+        sb.append("\nг.р.: ");
+        sb.append(getYear());
         sb.append(getMotherInfo());
         sb.append(getFatherInfo());
         sb.append(getChildrenInfo());

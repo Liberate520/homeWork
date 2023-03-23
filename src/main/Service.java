@@ -10,6 +10,6 @@ public interface Service {
 
     public String findHuman(String lastname, String firstname);
 
-    public boolean addNewHuman(String lastname, String firstname, String gender,
+    public boolean addNewHuman(String lastname, String firstname, String gender, Integer year,
                                String patronymic, String fatherName, String motherName);
 }

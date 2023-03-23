@@ -56,12 +56,14 @@ public class Console implements View {
         String firstname = scanner.nextLine();
         System.out.print("Отчество -> ");
         String patronymic = scanner.nextLine();
+        System.out.print("Год рождения -> ");
+        Integer year = Integer.valueOf(scanner.nextLine());
         String gender = enterGender();
         System.out.print("Имя отца -> ");
         String fatherName = scanner.nextLine();
         System.out.print("Имя матери -> ");
         String motherName = scanner.nextLine();
-        if (presenter.addNewHuman(lastname, firstname, patronymic, gender, fatherName, motherName)) {
+        if (presenter.addNewHuman(lastname, firstname, patronymic, year, gender, fatherName, motherName)) {
             System.out.println("Запись добавлена в дерево\n");
         }
     }

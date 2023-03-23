@@ -14,8 +14,8 @@ public class Presenter {
     }
 
     public boolean addNewHuman(String lastname, String firstname, String patronymic,
-                               String gender, String fatherName, String motherName) {
-        return service.addNewHuman(lastname, firstname, patronymic, gender, fatherName, motherName);
+                               Integer year, String gender, String fatherName, String motherName) {
+        return service.addNewHuman(lastname, firstname, patronymic, year, gender, fatherName, motherName);
     }
 
     public void findHuman(String lastname, String firstname) {
