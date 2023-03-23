@@ -8,4 +8,8 @@ public class CommandFactory implements ICommandFactory {
     public ICommand commAdd(IOnCommand onCommand) {
         return new CmdAdd(onCommand);
     }
+
+    public ICommand commUpdate(IOnCommand onCommand) {
+        return new CmdUpdate(onCommand);
+    }
 }

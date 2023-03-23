@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import familytree.serializer.*;
-
 /**
  * FamilyTree
  */
@@ -34,30 +32,6 @@ public class FamilyTree<T extends FamilyTreeMemeber> implements Serializable, It
         return memebers.get(memeberId);
     }
 
-    public String getStringMembers(SortMode sortMode, int id, String name) {
-        SortMode smode = this.sortMode;
-        Predicate<T> filter = this.filter;
-        switch (sortMode) {
-            case name:
-                setSortMode(SortMode.name);
-                break;
-            case birthDay:
-                setSortMode(SortMode.birthDay);
-                break;
-            case noSort:
-                setSortMode(SortMode.noSort);
-                break;
-        }
-        if(id >= 0)
-            setFilter(x -> x.id() == id);
-        else if(name != null)
-            setFilter(x -> x.name() == name);
-        String result = this.toString();
-        this.sortMode = smode;
-        this.filter = filter;
-        return result;
-    }
-
     public T addMember(T member) {
         member.id = memebers.size();
         memebers.add(member);
@@ -70,10 +44,6 @@ public class FamilyTree<T extends FamilyTreeMemeber> implements Serializable, It
         for (T memeber : this)
             str.append("\n" + memeber.toString());
         return str.toString();
-    }
-
-    public boolean save(IFamilyTreeSaver saver) {
-        return saver.save(this);
     }
 
     public void setSortMode(SortMode sortMode) {

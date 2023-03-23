@@ -12,7 +12,6 @@ public class FamilyTreeMemeber implements Serializable {
     private Date birthDay;
     private Date deathDay;
     private FamilyTreeMemeber[] parents;
-    private FamilyTreeMemeber spouse;
     private ArrayList<FamilyTreeMemeber> children;
 
     public FamilyTreeMemeber(String name, String sex, Date birthDay, FamilyTreeMemeber[] parents) {
@@ -62,6 +61,10 @@ public class FamilyTreeMemeber implements Serializable {
         return name;
     }
 
+    public void name(String name) {
+        this.name = name;
+    }
+
     public String sex() {
         return sex;
     }
@@ -80,20 +83,6 @@ public class FamilyTreeMemeber implements Serializable {
 
     public FamilyTreeMemeber[] parents() {
         return parents != null ? Arrays.copyOf(parents, parents.length) : null;
-    }
-
-    public FamilyTreeMemeber spouse() {
-        return spouse;
-    }
-
-    public void spouse(FamilyTreeMemeber spouse) {
-        this.spouse = spouse;
-    }
-
-    public FamilyTreeMemeber addSpouse(String name, Date birthDay) {
-        String sex = this.sex == "мужской" ? "женский" : "мужской";
-        this.spouse = new FamilyTreeMemeber(name, sex, birthDay, null);
-        return this.spouse;
     }
 
     public FamilyTreeMemeber[] children() {

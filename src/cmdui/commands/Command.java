@@ -46,7 +46,7 @@ public abstract class Command implements ICommand {
         Matcher match = paramPattern.matcher(input);
         while (match.find()) {
             String param = match.group(1);
-            String value = match.group(2);
+            String value = match.group(2).trim();
             if (!params.containsKey(param))
                 params.put(param, new ArrayList<String>());
             params.get(param).add(value);

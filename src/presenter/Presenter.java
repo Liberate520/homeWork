@@ -1,42 +1,38 @@
 package presenter;
 
-import java.util.Date;
 import cmdui.IView;
 import cmdui.commands.ICmdAdd;
 import cmdui.commands.ICmdGet;
-import familytree.FamilyTree;
-import familytree.FamilyTreeMemeber;
-import familytree.SortMode;
+import cmdui.commands.ICmdUpdate;
+import familytree.service.IFamilyTreeService;
 
 // Все методы в этом классе private, т.к. это обработчики событий, которые генерирует View.
 // Они передаются в представление в виде функциональных интерфейсов и никогда не вызываются напрямую.
 public class Presenter {
     private IView view;
-    private FamilyTree<FamilyTreeMemeber> familyTree;
+    private IFamilyTreeService service;
 
-    public Presenter(IView view, FamilyTree<FamilyTreeMemeber> familyTree) {
+    public Presenter(IView view, IFamilyTreeService service) {
         this.view = view;
-        this.familyTree = familyTree;
+        this.service = service;
         setCmdHandlers();
     }
 
     private void setCmdHandlers() {
         view.setCmdGetHandler(this::cmdGetHandler);
         view.setCmdAddHandler(this::cmdAddHandler);
+        view.setCmdUpdateHandler(this::cmdUpdateHandler);
     }
     
     private void cmdGetHandler(ICmdGet cmdGet) {
-        SortMode sortMode = cmdGet.getSortMode();
-        int id = cmdGet.getId() - 1;
-        String name = cmdGet.getName();
-        view.setPrintOut(familyTree.getStringMembers(sortMode, id, name));
+        view.setPrintOut(service.getMembers(cmdGet.getSortMode(), cmdGet.getId(), cmdGet.getName()));
     }
 
     private void cmdAddHandler(ICmdAdd cmdAdd) {
-        String name = cmdAdd.getName();
-        String sex = cmdAdd.getSex();
-        Date birthDay = cmdAdd.getBirthDay();
-        var parents = new FamilyTreeMemeber[] {familyTree.getMemeberById(cmdAdd.getParents()[0] - 1), familyTree.getMemeberById(cmdAdd.getParents()[1] - 1)};
-        familyTree.addMember(new FamilyTreeMemeber(name, sex, birthDay, parents));
+        view.setPrintOut(service.addMember(cmdAdd.getName(), cmdAdd.getSex(), cmdAdd.getBirthDay(), cmdAdd.getParents()));
+    }
+
+    private void cmdUpdateHandler(ICmdUpdate cmdUpdate) {
+        view.setPrintOut(service.updateMember(cmdUpdate.getId(), cmdUpdate.getName(), cmdUpdate.getDeathDay()));
     }
 }

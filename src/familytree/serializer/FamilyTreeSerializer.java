@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import familytree.FamilyTree;
 import familytree.FamilyTreeMemeber;
 
-public class FamilyTreeSerializer implements IFamilyTreeSaver, IFamilyTreeLoader {
+public class FamilyTreeSerializer implements IFamilyTreeSerializer {
 
     public boolean save(Object familyTree) {
         try (var outStream = new ObjectOutputStream(new FileOutputStream("family_tree.dat"))) {

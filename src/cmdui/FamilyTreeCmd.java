@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 import cmdui.commands.ICmdAdd;
 import cmdui.commands.ICmdGet;
+import cmdui.commands.ICmdUpdate;
 import cmdui.commands.ICommand;
 import cmdui.commands.ICommandFactory;
 import cmdui.commands.IOnCommand;
@@ -15,10 +16,11 @@ public class FamilyTreeCmd implements IView, IOnCommand {
     private ICommand[] commands;
     private Consumer<ICmdGet> cmdGetHandler;
     private Consumer<ICmdAdd> cmdAddHandler;
+    private Consumer<ICmdUpdate> cmdUpdateHandler;
     private String printOut;
 
     public FamilyTreeCmd(ICommandFactory commFactory) throws IOException {
-            this.commFactory = commFactory;
+        this.commFactory = commFactory;
     }
 
     public void setCmdGetHandler(Consumer<ICmdGet> handler) {
@@ -29,24 +31,38 @@ public class FamilyTreeCmd implements IView, IOnCommand {
         cmdAddHandler = handler;
     }
 
+    public void setCmdUpdateHandler(Consumer<ICmdUpdate> handler) {
+        cmdUpdateHandler = handler;
+    }
+
     public void setPrintOut(String out) {
         printOut = out;
     }
-    
+
     @Override
     public void onCmdGet(ICmdGet cmdGet) {
-        if(cmdGetHandler != null)
+        if (cmdGetHandler != null)
             cmdGetHandler.accept(cmdGet);
     }
 
     @Override
     public void onCmdAdd(ICmdAdd cmdAdd) {
-        if(cmdAddHandler != null)
+        if (cmdAddHandler != null)
             cmdAddHandler.accept(cmdAdd);
     }
-    
+
+    @Override
+    public void onCmdUpdate(ICmdUpdate cmdUpdate) {
+        if (cmdUpdateHandler != null)
+            cmdUpdateHandler.accept(cmdUpdate);
+    }
+
     private void setCommands() {
-        commands = new ICommand[] { commFactory.commGet(this), commFactory.commAdd(this)};
+        commands = new ICommand[] {
+                commFactory.commGet(this),
+                commFactory.commAdd(this),
+                commFactory.commUpdate(this)
+        };
     }
 
     public void run() throws IOException {
@@ -63,7 +79,7 @@ public class FamilyTreeCmd implements IView, IOnCommand {
                 for (ICommand command : commands) {
                     if (!command.processCommand(input))
                         continue;
-                    if(command.error() != null)
+                    if (command.error() != null)
                         out = command.error();
                     else
                         out = printOut;
@@ -87,7 +103,7 @@ public class FamilyTreeCmd implements IView, IOnCommand {
             for (ICommand command : commands) {
                 if (!command.processCommand(input))
                     continue;
-                if(command.error() != null)
+                if (command.error() != null)
                     out = command.error();
                 else
                     out = printOut;

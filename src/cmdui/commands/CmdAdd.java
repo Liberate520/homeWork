@@ -12,12 +12,12 @@ public class CmdAdd extends Command implements ICmdAdd {
 
     CmdAdd(IOnCommand onCommand) {
         super(onCommand);
-        parents = new int[2];
+        parents = null;
     }
 
     @Override
     public String syntax() {
-        return "ADD {/n <имя> /s <пол> /b <дата рождения> /f <id отца> /m <id матери>}";
+        return "ADD {/n <имя> /s <пол> /b <дата рождения>} [/f <id отца> /m <id матери>]";
     }
 
     @Override
@@ -37,13 +37,18 @@ public class CmdAdd extends Command implements ICmdAdd {
         ArrayList<String> b = params.get("/b");
         ArrayList<String> f = params.get("/f");
         ArrayList<String> m = params.get("/m");
-        if (n == null || s == null || b == null || f == null || m == null)
+        if (n == null || s == null || b == null)
             return syntaxError();
+        if ((f != null || m != null)) {
+            if((f == null || m == null))
+                return syntaxError();
+            parents = new int[2];
+            parents[0] = Integer.parseInt(f.get(0));
+            parents[1] = Integer.parseInt(m.get(0));
+        }
         name = n.get(0);
         sex = s.get(0);
         birthDay = new SimpleDateFormat("dd.MM.yyyy").parse(b.get(0));
-        parents[0] = Integer.parseInt(f.get(0));
-        parents[1] = Integer.parseInt(m.get(0));
         onCommand.onCmdAdd(this);
         return null;
     }
