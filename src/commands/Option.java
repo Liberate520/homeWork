@@ -1,7 +1,9 @@
 package commands;
 
+import java.io.IOException;
+
 public interface Option {
     String description();
 
-    void execute();
+    void execute() throws IOException, ClassNotFoundException;
 }

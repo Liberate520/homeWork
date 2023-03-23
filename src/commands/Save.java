@@ -2,6 +2,8 @@ package commands;
 
 import UI.Console;
 
+import java.io.IOException;
+
 public class Save extends Command {
     public Save(Console console) {
         super(console);
@@ -13,7 +15,7 @@ public class Save extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IOException, ClassNotFoundException {
         super.getConsole().save();
     }
 }

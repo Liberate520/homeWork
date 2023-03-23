@@ -1,5 +1,6 @@
 package UI;
 
+import java.io.IOException;
 import java.util.Scanner;
 import presenter.Presenter;
 
@@ -11,7 +12,7 @@ public class Console implements View {
     private boolean work;
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         scanner = new Scanner(System.in);
         menu = new Menu(this);
         work = true;
@@ -97,12 +98,12 @@ public class Console implements View {
         return gender;
     }
 
-    public void save() {
+    public void save() throws IOException {
         presenter.save();
         print("Сохранено\n");
     }
 
-    public void load() {
+    public void load() throws IOException, ClassNotFoundException {
         presenter.load();
         printTree();
     }
