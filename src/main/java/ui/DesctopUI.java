@@ -2,6 +2,7 @@ package ui;
 
 import presenter.Presenter;
 import ui.desktop.ButtonPanel;
+import ui.desktop.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class DesctopUI implements View{
     public DesctopUI() {
         panel = new JPanel();
         panel.setName("Заметки");
+
 //        String[] columnNames = new String[]{"date","note"};
 //        if (presenter != null) {
 //            table = new JTable(presenter.getNotes().toArray(), columnNames);
@@ -62,35 +64,37 @@ public class DesctopUI implements View{
 
     @Override
     public void selection() {
-        frame = new JFrame("Заметки");
-        frame.setSize(600,600);
-        String[] columnNames = new String[]{"Дата","Заметка"};
-        table = new JTable(presenter.getNotes().toArray(), columnNames);
-//        table.setBounds(10, 10, 390, 100);
-//        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.getColumnModel().getColumn(0).setPreferredWidth(100);
-        table.getColumnModel().getColumn(1).setPreferredWidth(600);
-        panel.add(new JScrollPane(table), BorderLayout.NORTH);
-//        JButton b1 = new JButton("Редактировать заметку");
-//        b1.setVerticalTextPosition(AbstractButton.CENTER);
-//        b1.setHorizontalTextPosition(AbstractButton.CENTER);
-//        b1.setSize(100,300);
-//        b1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                editNote();
-//            }
-//        });
-//        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        ButtonPanel buttonPanel = new ButtonPanel(this);
-
-        JPanel buttonP = buttonPanel.getButtonPanel();
-//        buttonPanel.add(b1,BorderLayout.SOUTH);
-        panel.add(buttonP);
-        panel.setVisible(true);
-//        frame.setSize(500, 400);
-        frame.add(panel);
-        frame.setVisible(true);
+        MainWindow mainWindow = new MainWindow(this, presenter);
+        this.table = mainWindow.getTable();
+//        frame = new JFrame("Заметки");
+//        frame.setSize(600,600);
+//        String[] columnNames = new String[]{"Дата","Заметка"};
+//        table = new JTable(presenter.getNotes().toArray(), columnNames);
+////        table.setBounds(10, 10, 390, 100);
+////        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//        table.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        table.getColumnModel().getColumn(1).setPreferredWidth(600);
+//        panel.add(new JScrollPane(table), BorderLayout.NORTH);
+////        JButton b1 = new JButton("Редактировать заметку");
+////        b1.setVerticalTextPosition(AbstractButton.CENTER);
+////        b1.setHorizontalTextPosition(AbstractButton.CENTER);
+////        b1.setSize(100,300);
+////        b1.addActionListener(new ActionListener() {
+////            @Override
+////            public void actionPerformed(ActionEvent e) {
+////                editNote();
+////            }
+////        });
+////        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+//        ButtonPanel buttonPanel = new ButtonPanel(this);
+//
+//        JPanel buttonP = buttonPanel.getButtonPanel();
+////        buttonPanel.add(b1,BorderLayout.SOUTH);
+//        panel.add(buttonP);
+//        panel.setVisible(true);
+////        frame.setSize(500, 400);
+//        frame.add(panel);
+//        frame.setVisible(true);
 
 
     }
@@ -124,12 +128,14 @@ public class DesctopUI implements View{
             String value = table.getModel().getValueAt(row, column).toString();
             System.out.println(value);
             JFrame editFrame = new JFrame("Edit Note");
+            editFrame.setSize(300,200);
             //todo some logic
             JPanel editPanel = new JPanel();
             JLabel editLabel = new JLabel("Введите измененный текст");
             editLabel.setVisible(true);
             editPanel.add(editLabel);
             editPanel.setVisible(true);
+            editFrame.add(editPanel);
             editFrame.setVisible(true);
 //            editFrame.setVisible(false);
         }
