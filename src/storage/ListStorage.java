@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 import java.util.ArrayList;
 
 public class ListStorage implements Storage {
