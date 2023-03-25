@@ -1,9 +1,9 @@
-package Notebook.UI.Commands;
+package notebook.core.mvp.views.UI.commands;
 
 public class ExitCommand implements Command {
     @Override
     public void execute() {
-        // Do nothing
+        System.exit(0);
     }
 
     @Override

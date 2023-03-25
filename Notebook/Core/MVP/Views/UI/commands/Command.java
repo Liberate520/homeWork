@@ -1,4 +1,4 @@
-package Notebook.UI.Commands;
+package notebook.core.mvp.views.UI.commands;
 
 public interface Command {
     void execute();

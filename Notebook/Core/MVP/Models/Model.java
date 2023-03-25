@@ -1,13 +1,11 @@
-package Notebook.Core.MVP.Models;
+package notebook.core.mvp.models;
 
+import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
 
-import Notebook.Core.Essence.Recording;
-import Notebook.Core.Infrastructure.Notebook;
-import Notebook.Core.MVP.Models.FileReaderr.FileReaderr;
-import Notebook.Core.MVP.Models.FileReaderr.RecordingConverter;
-import Notebook.Core.MVP.Models.FileWriterr.FileWriterr;
+import notebook.core.essence.Recording;
+import notebook.core.infrastructure.Notebook;
+import notebook.core.mvp.models.file.TextFileHandler;
 
 public class Model implements Iterable<Recording> {
 
@@ -33,9 +31,11 @@ public class Model implements Iterable<Recording> {
     }
 
     public void load() {
-        List<String> lines = FileReaderr.read(path);
-        List<Recording> recordings = RecordingConverter.convert(lines);
-        NB.addAll(recordings);
+        try {
+           NB.addAll(new TextFileHandler().read(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    
         size = NB.size();
     }
 
@@ -76,7 +76,10 @@ public class Model implements Iterable<Recording> {
         NB.set(index, rec);
     }
 
-    public void save() throws Exception {
-        FileWriterr.writeToFile(path, NB);
+    public void save() throws Exception {  
+        try {
+            new TextFileHandler().write(path, NB);
+        } catch (Exception e) {          
+        }
     }
 }

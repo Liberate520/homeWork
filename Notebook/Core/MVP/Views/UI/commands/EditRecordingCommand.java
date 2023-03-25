@@ -1,7 +1,7 @@
-package Notebook.UI.Commands;
+package notebook.core.mvp.views.UI.commands;
 
-import Notebook.Core.MVP.Presenter;
-import Notebook.Core.MVP.Views.ViewMenu;
+import notebook.core.mvp.Presenter;
+import notebook.core.mvp.views.ViewMenu;
 
 public class EditRecordingCommand implements Command {
     private Presenter presenter;

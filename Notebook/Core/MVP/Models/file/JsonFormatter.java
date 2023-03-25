@@ -1,6 +1,6 @@
-package Notebook.Core.MVP.Models.FileWriterr;
+package notebook.core.mvp.models.file;
 
-import Notebook.Core.Essence.Recording;
+import notebook.core.essence.Recording;
 
 public class JsonFormatter {
     public static String toJson(Recording recording) {

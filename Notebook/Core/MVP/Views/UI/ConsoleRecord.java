@@ -1,6 +1,7 @@
-package Notebook.UI;
+package notebook.core.mvp.views.UI;
 import java.util.Scanner;
-import Notebook.Core.MVP.Views.ViewRecord;
+
+import notebook.core.mvp.views.ViewRecord;
 
 public class ConsoleRecord implements ViewRecord {
     private Scanner iScanner;

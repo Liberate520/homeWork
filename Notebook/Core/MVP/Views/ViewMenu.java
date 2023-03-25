@@ -1,4 +1,4 @@
-package Notebook.Core.MVP.Views;
+package notebook.core.mvp.views;
 
 public interface ViewMenu {
     int getPunktMenu();

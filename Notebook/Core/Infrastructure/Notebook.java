@@ -1,12 +1,13 @@
-package Notebook.Core.Infrastructure;
+package notebook.core.infrastructure;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import Notebook.Core.Essence.Recording;
+import notebook.core.essence.Recording;
 
-public class Notebook implements Iterable <Recording> {
+public class Notebook implements Iterable<Recording> {
 
     List<Recording> records;
     private int size;
@@ -57,8 +58,11 @@ public class Notebook implements Iterable <Recording> {
     }
 
     public void remove(int index) {
+        if (index < 0 || index >= records.size()) {
+            System.out.println("Invalid index: " + (index + 1));
+            return;
+        }
         records.remove(index);
-        size--;
     }
 
     public void set(int index, Recording obj) {
@@ -72,7 +76,7 @@ public class Notebook implements Iterable <Recording> {
     public int getSize() {
         return size;
     }
-    
+
     public void addAll(Collection<Recording> elements) {
         records.addAll(elements);
         size += elements.size();

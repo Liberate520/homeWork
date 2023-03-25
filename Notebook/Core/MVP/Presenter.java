@@ -1,7 +1,7 @@
-package Notebook.Core.MVP;
-import Notebook.Core.Essence.Recording;
-import Notebook.Core.MVP.Models.Model;
-import Notebook.Core.MVP.Views.ViewRecord;
+package notebook.core.mvp;
+import notebook.core.essence.Recording;
+import notebook.core.mvp.models.Model;
+import notebook.core.mvp.views.ViewRecord;
 
 public class Presenter {
 

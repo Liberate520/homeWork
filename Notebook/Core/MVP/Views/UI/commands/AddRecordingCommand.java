@@ -1,6 +1,6 @@
-package Notebook.UI.Commands;
+package notebook.core.mvp.views.UI.commands;
 
-import Notebook.Core.MVP.Presenter;
+import notebook.core.mvp.Presenter;
 
 
 public class AddRecordingCommand implements Command {

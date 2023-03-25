@@ -1,12 +1,33 @@
-package Notebook.UI;
-import java.util.Scanner;
-import Notebook.Core.MVP.Views.ViewMenu;
+package notebook.core.mvp.views.UI;
 
-public class ConsoleMenu implements ViewMenu {
+import java.util.Scanner;
+import notebook.core.mvp.Presenter;
+import notebook.core.mvp.views.ViewMenu;
+import notebook.core.mvp.views.UI.commands.AddRecordingCommand;
+import notebook.core.mvp.views.UI.commands.Command;
+import notebook.core.mvp.views.UI.commands.DeleteRecordingCommand;
+import notebook.core.mvp.views.UI.commands.EditRecordingCommand;
+import notebook.core.mvp.views.UI.commands.ExitCommand;
+import notebook.core.mvp.views.UI.commands.SaveChangesCommand;
+import notebook.core.mvp.views.UI.commands.ShowAllCommand;
+
+public class Menu implements ViewMenu {
     private Scanner iScanner;
     private final String textFotal = "Invalid input!";
-    public ConsoleMenu() {
+    private Presenter presenter;
+    Command[] options;
+
+    public Menu(Presenter presenter) {
         iScanner = new Scanner(System.in);
+        this.presenter = presenter;
+        options = new Command[] {
+                new AddRecordingCommand(presenter),
+                new ShowAllCommand(presenter),
+                new EditRecordingCommand(presenter, this),
+                new DeleteRecordingCommand(presenter, this),
+                new SaveChangesCommand(presenter),
+                new ExitCommand()
+        };
     }
 
     @Override
@@ -43,6 +64,15 @@ public class ConsoleMenu implements ViewMenu {
         }
     }
 
+    public void printMenu() {
+        System.out.println("\t-------Menu-------");
+        int i = 1;
+        for (Command command : options) {
+            System.out.printf("\t%d. ", i++);
+            command.printCommand();
+        }
+    }
+
     public int getIndex() {
         int num = 0;
         boolean validInput = false;
@@ -61,5 +91,4 @@ public class ConsoleMenu implements ViewMenu {
         }       
         return num;
     }
-
 }
