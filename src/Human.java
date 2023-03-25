@@ -1,14 +1,19 @@
-public class Human {
-    String fio;
-    int yearBirth;
-    Gender gender;
-    Human father;
-    Human mother;
-    Human children;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Human(int yearBirth, String fio, Human father, Human mother) {
+public class Human {
+    private String fio;
+    private int yearBirth;
+    private int yearDeath;
+    private Gender gender;
+    private Human father;
+    private Human mother;
+    private List<Human> children=new ArrayList<>();
+
+    public Human(int yearBirth,int yearDeath, String fio,Gender gender, Human father, Human mother) {
         this.fio = fio;
         this.yearBirth = yearBirth;
+        this.yearDeath = yearDeath;
         this.father = father;
         this.mother = mother;
     }
@@ -46,12 +51,22 @@ public class Human {
     }
 
 
-    public Human getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
     public void setChildren(Human children) {
-        this.children = children;
+        this.children.add(children);
+    }
+    public void setChildren(List<Human> children) {
+        this.children.addAll(children);
+    }
+    public int getYearDeath() {
+        return yearDeath;
+    }
+
+    public void setYearDeath(int yearDeath) {
+        this.yearDeath = yearDeath;
     }
 
     public Gender getGender() {
@@ -60,5 +75,10 @@ public class Human {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return fio;
     }
 }
