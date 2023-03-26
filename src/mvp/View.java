@@ -1,20 +1,16 @@
 package mvp;
 
-public interface View {
+import ui.ConsoleView;
+import ui.UserInteraction;
 
-    void start();
+public class View {
+    private UserInteraction userInteraction = new ConsoleView();
 
-    void showMainMenu();
+    void setPresenter(Presenter presenter) {
+        userInteraction.setPresenter(presenter);
+    }
 
-    void showNoteInputWelcome();
-
-    String mainMenuItem();
-
-    String note();
-
-    String scan();
-
-    void print(String outputString);
-
-    void setPresenter(Presenter presenter);
+    public void start() {
+        userInteraction.start();
+    }
 }

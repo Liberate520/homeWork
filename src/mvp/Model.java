@@ -1,12 +1,12 @@
 package mvp;
 
+import storage.FileStorage;
 import storage.Storage;
 
 public class Model {
-    private Storage storage;
+    private Storage storage = new FileStorage();
 
-    public Model(Storage storage) {
-        this.storage = storage;
+    public Model() {
     }
 
     public String readData() {

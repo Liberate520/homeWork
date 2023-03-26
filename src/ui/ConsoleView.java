@@ -3,17 +3,18 @@ package ui;
 import java.util.Scanner;
 
 import mvp.Presenter;
-import mvp.View;
 
-public class ConsoleView implements View {
+public class ConsoleView implements UserInteraction {
     private Presenter presenter;
     private Scanner scanner;
-    private static final String WAITING_COMMAND = "Введите номер команды:\n\t1. Показать записи\n\t2. Ввести новую запись\n\t3. Выход";
-    private static final String WAITING_NOTE = "Введите запись:";
-    private boolean keepRunning;
+    private Menu mainMenu;
+    private ChoiceChecker choiceChecker;
+    public boolean keepRunning;
 
     public ConsoleView() {
         scanner = new Scanner(System.in);
+        mainMenu = new Menu(this);
+        choiceChecker = new ChoiceChecker(mainMenu);
         keepRunning = true;
     }
 
@@ -23,14 +24,10 @@ public class ConsoleView implements View {
 
     public void start() {
         while (keepRunning) {
-            String mainMenuItem = this.mainMenuItem();
-            if (mainMenuItem.equals("1")) {
-                this.print(presenter.allNotes());
-            } else if (mainMenuItem.equals("2")) {
-                presenter.writeNote(this.note());
-            } else if (mainMenuItem.equals("3")) {
-                keepRunning = false;
-                print("Работа завершена");
+            showMenu();
+            String userChoice = scan();
+            if (choiceChecker.isChoiceCorrect(userChoice)) {
+                mainMenu.runMenuCommand(Integer.parseInt(userChoice));
             }
         }
     }
@@ -39,29 +36,21 @@ public class ConsoleView implements View {
         return scanner.nextLine();
     }
 
-    public void print(String outputString) {
-        System.out.println(outputString);
+    public void showMenu() {
+        System.out.println(mainMenu.consoleView());
     }
 
-    @Override
-    public void showMainMenu() {
-        print(WAITING_COMMAND);
+    public void showAllNotes() {
+        System.out.println(presenter.allNotes());
     }
 
-    @Override
-    public void showNoteInputWelcome() {
-        print(WAITING_NOTE);
+    public void inputNote() {
+        System.out.println("Выедите новую запись");
+        presenter.writeNote(scan());
     }
 
-    @Override
-    public String mainMenuItem() {
-        showMainMenu();
-        return scan();
-    }
-
-    @Override
-    public String note() {
-        showNoteInputWelcome();
-        return scan();
+    public void exit() {
+        System.out.println("Работа завершена");
+        keepRunning = false;
     }
 }
