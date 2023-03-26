@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 
 public class GeoTree {
@@ -12,12 +13,13 @@ public class GeoTree {
         personList.add(person);
     }
 
-    public void searchPerson(Person person) {
+    public Map <Person, Map<Person, Relation>> searchPerson(Person person) {
+        Map <Person, Map<Person, Relation>> searchResult = new HashMap();
         for (Person item : personList) {
             if (item.equals(person)) {
-                System.out.print(item + " ");
-                System.out.println(item.getRelation());
+                searchResult.put(item, item.getRelation());
             }
         }
+        return searchResult;
     }
 }

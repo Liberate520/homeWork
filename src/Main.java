@@ -27,9 +27,9 @@ public class Main {
         System.out.println(igor.getAge());
         System.out.println(vasya.getAge());
         System.out.println(masha.getAge());
-        geo.searchPerson(igor);
-        geo.searchPerson(irina);
-        geo.searchPerson(vasya);
-        geo.searchPerson(masha);
+        System.out.println(geo.searchPerson(igor));
+        System.out.println(geo.searchPerson(irina));
+        System.out.println(geo.searchPerson(vasya));
+        System.out.println(geo.searchPerson(masha));
     }
 }
