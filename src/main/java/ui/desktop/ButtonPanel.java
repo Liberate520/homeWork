@@ -1,6 +1,5 @@
 package ui.desktop;
 
-import ui.DesctopUI;
 import ui.View;
 
 import javax.swing.*;

@@ -1,24 +1,26 @@
 package ui;
 
 import presenter.Presenter;
-import ui.desktop.ButtonPanel;
+import ui.desktop.EditNote;
 import ui.desktop.MainWindow;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class DesctopUI implements View{
+public class DesktopUI implements View{
     private Presenter presenter;
 
     private JPanel panel;
+
+    public JTable getTable() {
+        return table;
+    }
+
     private JTable table;
     private JFrame frame;
 
 //В разработке
 
-    public DesctopUI() {
+    public DesktopUI() {
         panel = new JPanel();
         panel.setName("Заметки");
 
@@ -127,19 +129,11 @@ public class DesctopUI implements View{
         if (row > -1) {
             String value = table.getModel().getValueAt(row, column).toString();
             System.out.println(value);
-            JFrame editFrame = new JFrame("Edit Note");
-            editFrame.setSize(300,200);
-            //todo some logic
-            JPanel editPanel = new JPanel();
-            JLabel editLabel = new JLabel("Введите измененный текст");
-            editLabel.setVisible(true);
-            editPanel.add(editLabel);
-            editPanel.setVisible(true);
-            editFrame.add(editPanel);
-            editFrame.setVisible(true);
-//            editFrame.setVisible(false);
-        }
-    }
+            EditNote editNote = new EditNote(this, table);
+
+//
+
+    }}
 
     @Override
     public void print(String message) {

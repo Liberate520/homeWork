@@ -36,18 +36,10 @@ public class Notes {
         return arrayNote;
     }
 
-    public Vector<String[]> toVector(){
-        Vector<String[]> listNotes = new Vector<>();
-        int size = notes.size();
-        for (Note note:
-             notes) {
-            String[] noteArray = new String[2];
-            noteArray[0] = note.getDate();
-            noteArray[1] = note.getNote();
-            listNotes.add(noteArray);
-        }
-        return listNotes;
+    public ArrayList<Note> getNotes() {
+        return notes;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

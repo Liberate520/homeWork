@@ -22,9 +22,11 @@ public class MainWindow {
         this.presenter = presenter;
         this.view = view;
         this.frame = new JFrame("Заметки");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(600,600);
         String[] columnNames = new String[]{"Дата","Заметка"};
-        this.table = new JTable(presenter.getNotes().toArray(), columnNames);
+//        this.table = new JTable(presenter.getNotes().toArray(), columnNames);
+        this.table = new JTable(new MainTableModel(presenter.getNotes().getNotes()));
 //        table.setBounds(10, 10, 390, 100);
 //        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
