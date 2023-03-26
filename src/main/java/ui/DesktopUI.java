@@ -1,6 +1,8 @@
 package ui;
 
+import notes.data.Note;
 import presenter.Presenter;
+import ui.desktop.AddNote;
 import ui.desktop.EditNote;
 import ui.desktop.MainTableModel;
 import ui.desktop.MainWindow;
@@ -13,13 +15,18 @@ public class DesktopUI implements View {
     private Presenter presenter;
 
     private JPanel panel;
+    private String note;
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public JTable getTable() {
         return table;
     }
 
     private JTable table;
-    private JFrame frame;
+//    private JFrame frame;
 
 //В разработке
 
@@ -54,11 +61,18 @@ public class DesktopUI implements View {
     @Override
     public void addNote() {
         System.out.println("Нажата кнопка добавить заметку");
+        AddNote addNote = new AddNote(this );
+        presenter.addNote(new Note(note));
+        presenter.saveNotes();
+        table.repaint();
     }
 
     @Override
     public void removeNote() {
         System.out.println("Нажата кнопка удалить заметку");
+        int row = table.getSelectedRow();
+        presenter.removeNote(row+1);
+        presenter.saveNotes();
     }
 
     @Override

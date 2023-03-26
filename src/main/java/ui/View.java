@@ -2,7 +2,7 @@ package ui;
 
 import presenter.Presenter;
 
-public interface View {
+public interface View extends DesktopView{
     void setPresenter(Presenter presenter);
     void selection();
     String scan(String message);
@@ -15,4 +15,5 @@ public interface View {
 
     void replaceNote(int index, String value);
     void saveNote();
+
 }

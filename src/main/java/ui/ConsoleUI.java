@@ -6,7 +6,7 @@ import presenter.Presenter;
 import ui.menuitems.*;
 import java.util.Scanner;
 
-public class ConsoleUI implements View {
+public class ConsoleUI implements View, DesktopView {
     private Presenter presenter;
     private Scanner scanner;
     private boolean flag;
@@ -90,6 +90,11 @@ public class ConsoleUI implements View {
     @Override
     public void saveNote() {
         presenter.saveNotes();
+    }
+
+    @Override
+    public void setNote(String note) {
+
     }
 
     @Override
