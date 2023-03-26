@@ -1,15 +1,15 @@
 package ui.commands;
 
-import ui.ConsoleView;
+import ui.Menu;
 
 public class InputNote extends MenuCommand {
 
-    public InputNote(ConsoleView view) {
-        super(view, "Ввести новую запись");
+    public InputNote(Menu menu) {
+        super(menu, "Ввести новую запись");
     }
 
     @Override
     public void run() {
-        view.inputNote();
+        super.getView().inputNote();
     }
 }

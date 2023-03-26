@@ -1,16 +1,26 @@
 package ui.commands;
 
 import ui.ConsoleView;
+import ui.Menu;
 
 public abstract class MenuCommand {
-    ConsoleView view;
-    public String description;
+    // private ConsoleView view;
+    private String description;
+    private Menu menu;
 
-    MenuCommand(ConsoleView view, String description) {
-        this.view = view;
+    MenuCommand(Menu menu, String description) {
+        this.menu = menu;
         this.description = description;
     }
 
     public void run() {
     };
+
+    protected ConsoleView getView() {
+        return menu.getView();
+    }
+
+    public String description() {
+        return description;
+    }
 }

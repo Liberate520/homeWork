@@ -4,7 +4,7 @@ public class ChoiceChecker {
     int menuSize;
 
     ChoiceChecker(Menu menu) {
-        menuSize = menu.itemsCount;
+        menuSize = menu.getMenuCount();
     }
 
     public boolean isChoiceCorrect(String userChoice) {

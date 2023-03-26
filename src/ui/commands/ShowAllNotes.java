@@ -1,16 +1,16 @@
 package ui.commands;
 
-import ui.ConsoleView;
+import ui.Menu;
 
 public class ShowAllNotes extends MenuCommand {
 
-    public ShowAllNotes(ConsoleView view) {
+    public ShowAllNotes(Menu menu) {
 
-        super(view, "Показать все записи");
+        super(menu, "Показать все записи");
     }
 
     @Override
     public void run() {
-        view.showAllNotes();
+        super.getView().showAllNotes();
     }
 }

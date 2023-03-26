@@ -13,7 +13,7 @@ public class ConsoleView implements UserInteraction {
 
     public ConsoleView() {
         scanner = new Scanner(System.in);
-        mainMenu = new Menu(this);
+        mainMenu = new MainMenu(this);
         choiceChecker = new ChoiceChecker(mainMenu);
         keepRunning = true;
     }

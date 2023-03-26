@@ -2,27 +2,22 @@ package ui;
 
 import java.util.ArrayList;
 
-import ui.commands.Exit;
-import ui.commands.InputNote;
 import ui.commands.MenuCommand;
-import ui.commands.ShowAllNotes;
 
-public class Menu {
-    String menuWelcome;
-    int itemsCount;
+public abstract class Menu {
+    private ConsoleView view;
+    private String menuWelcome;
+    private int itemsCount;
     private ArrayList<MenuCommand> items;
 
     public Menu(ConsoleView view) {
         items = new ArrayList<>();
-        this.menuWelcome = "Введите номер команды:";
-        this.addCommand(new ShowAllNotes(view));
-        this.addCommand(new InputNote(view));
-        this.addCommand(new Exit(view));
-        itemsCount = items.size();
+        this.view = view;
     }
 
     public void addCommand(MenuCommand menuCommand) {
         items.add(menuCommand);
+        itemsCount = items.size();
     }
 
     public String consoleView() {
@@ -34,10 +29,22 @@ public class Menu {
             consoleView.append("\t");
             consoleView.append(itemNumber++);
             consoleView.append(". ");
-            consoleView.append(item.description);
+            consoleView.append(item.description());
             consoleView.append("\n");
         }
         return consoleView.toString();
+    }
+
+    protected void setWelcome(String welcome) {
+        this.menuWelcome = welcome;
+    }
+
+    public int getMenuCount() {
+        return itemsCount;
+    }
+
+    public ConsoleView getView() {
+        return view;
     }
 
     public void runMenuCommand(int menuItemNumber) {

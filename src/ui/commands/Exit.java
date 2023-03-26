@@ -1,14 +1,14 @@
 package ui.commands;
 
-import ui.ConsoleView;
+import ui.Menu;
 
 public class Exit extends MenuCommand {
 
-    public Exit(ConsoleView view) {
-        super(view, "Выход");
+    public Exit(Menu menu) {
+        super(menu, "Выход");
     }
 
     public void run() {
-        super.view.exit();
+        super.getView().exit();
     }
 }
