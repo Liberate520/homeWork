@@ -12,4 +12,7 @@ public interface View {
     void editNote();
     void print(String message);
     void exit();
+
+    void replaceNote(int index, String value);
+    void saveNote();
 }

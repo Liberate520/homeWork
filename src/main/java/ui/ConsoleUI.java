@@ -73,13 +73,23 @@ public class ConsoleUI implements View {
     public void editNote() {
         int index = Integer.parseInt(scan("Введите номер заметки для редактирования"));
         String newNote = scan("Введите текст заметки: ");
-        presenter.replaceNote(index, newNote);
+        replaceNote(index, newNote);
     }
 
     @Override
     public void exit() {
         presenter.saveNotes();
         flag = false;
+    }
+
+    @Override
+    public void replaceNote(int index, String value) {
+        presenter.replaceNote(index, value);
+    }
+
+    @Override
+    public void saveNote() {
+        presenter.saveNotes();
     }
 
     @Override

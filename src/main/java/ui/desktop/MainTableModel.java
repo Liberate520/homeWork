@@ -30,9 +30,11 @@ public class MainTableModel extends AbstractTableModel {
         switch (columnIndex){
             case 0:
                 value = note.getDate();
+                fireTableCellUpdated(rowIndex, columnIndex);
                 break;
             case 1:
                 value = note.getNote();
+                fireTableCellUpdated(rowIndex, columnIndex);
                 break;
         }
         return value;
@@ -51,5 +53,16 @@ public class MainTableModel extends AbstractTableModel {
         }
         return name;    }
 
-
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        Note note = listNotes.get(rowIndex);
+        switch (columnIndex){
+            case 0:
+                break;
+            case 1:
+                note.setNote((String)aValue);
+                fireTableCellUpdated(rowIndex, columnIndex);
+                break;
+        }
+    }
 }

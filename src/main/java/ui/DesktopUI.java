@@ -2,11 +2,14 @@ package ui;
 
 import presenter.Presenter;
 import ui.desktop.EditNote;
+import ui.desktop.MainTableModel;
 import ui.desktop.MainWindow;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
-public class DesktopUI implements View{
+public class DesktopUI implements View {
     private Presenter presenter;
 
     private JPanel panel;
@@ -21,42 +24,9 @@ public class DesktopUI implements View{
 //В разработке
 
     public DesktopUI() {
-        panel = new JPanel();
+        this.panel = new JPanel();
         panel.setName("Заметки");
-
-//        String[] columnNames = new String[]{"date","note"};
-//        if (presenter != null) {
-//            table = new JTable(presenter.getNotes().toArray(), columnNames);
-//            table.setBounds(10, 10, 400, 400);
-//            frame.add(new JScrollPane(table));
-//            frame.setSize(600, 400);
-//            frame.setVisible(true);
-//            System.out.println("Здесь что то происходит");
-//        }
-//        else {
-//            table = new JTable();
-////            table = new JTable(presenter.getNotes().toArray(), columnNames);
-//            table.setBounds(10, 10, 400, 400);
-//            frame.add(new JScrollPane(table));
-//            frame.setSize(600, 400);
-//            frame.setVisible(true);
-//            System.out.println("Здесь что то происходит");
-//        }
-
     }
-
-    //    super(new GridLayout(1,0));
-//        String[] columnNames = new String[]{"date","note"};
-//        Notes notes = presenter.getService().getNotes();
-//        String[][] data = notes.toArray();
-//        JTable table = new JTable(data, columnNames);
-//        JScrollPane scrollPane = new JScrollPane(table);
-//        add(scrollPane);
-//        setPreferredSize(new Dimension(500,500));
-//        setLayout(new FlowLayout());
-//        setVisible(true);
-//        setBackground(Color.WHITE);
-
 
     @Override
     public void setPresenter(Presenter presenter) {
@@ -68,36 +38,6 @@ public class DesktopUI implements View{
     public void selection() {
         MainWindow mainWindow = new MainWindow(this, presenter);
         this.table = mainWindow.getTable();
-//        frame = new JFrame("Заметки");
-//        frame.setSize(600,600);
-//        String[] columnNames = new String[]{"Дата","Заметка"};
-//        table = new JTable(presenter.getNotes().toArray(), columnNames);
-////        table.setBounds(10, 10, 390, 100);
-////        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-//        table.getColumnModel().getColumn(0).setPreferredWidth(100);
-//        table.getColumnModel().getColumn(1).setPreferredWidth(600);
-//        panel.add(new JScrollPane(table), BorderLayout.NORTH);
-////        JButton b1 = new JButton("Редактировать заметку");
-////        b1.setVerticalTextPosition(AbstractButton.CENTER);
-////        b1.setHorizontalTextPosition(AbstractButton.CENTER);
-////        b1.setSize(100,300);
-////        b1.addActionListener(new ActionListener() {
-////            @Override
-////            public void actionPerformed(ActionEvent e) {
-////                editNote();
-////            }
-////        });
-////        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//        ButtonPanel buttonPanel = new ButtonPanel(this);
-//
-//        JPanel buttonP = buttonPanel.getButtonPanel();
-////        buttonPanel.add(b1,BorderLayout.SOUTH);
-//        panel.add(buttonP);
-//        panel.setVisible(true);
-////        frame.setSize(500, 400);
-//        frame.add(panel);
-//        frame.setVisible(true);
-
 
     }
 
@@ -130,10 +70,18 @@ public class DesktopUI implements View{
             String value = table.getModel().getValueAt(row, column).toString();
             System.out.println(value);
             EditNote editNote = new EditNote(this, table);
-
-//
-
-    }}
+            String newNote = table.getModel().getValueAt(row, column).toString();
+            presenter.saveNotes();
+        }
+    }
+    @Override
+    public void  replaceNote(int index, String value){
+        presenter.replaceNote(index, value);
+    }
+    @Override
+    public void saveNote(){
+        presenter.saveNotes();
+    }
 
     @Override
     public void print(String message) {
