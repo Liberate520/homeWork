@@ -1,6 +1,7 @@
 package homeWork.src;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class human 
 {
@@ -11,11 +12,11 @@ public class human
     private String firstName;
     private String lastName;
     private int dataBirth;
-    private ArrayList<human> children;
+    private Set<StringBuilder> children;
 
 
     public human(int id, String firstName, String lastName, Gender gender,
-    int dataBirth, human Father,human Mather, ArrayList<human> children)
+    int dataBirth, human Father, human Mather, Set<StringBuilder> children)
     {
         this.id = id;
         this.lastName = lastName;
@@ -27,6 +28,7 @@ public class human
         this.children = children;
     }    
     
+
     public human(int id, String lastName, String firstName,Gender gender,
     int dataBirth, human Father, human Mather)
     {
@@ -125,10 +127,11 @@ public class human
         return dataBirth;
     }
     
-    public void setChildren(ArrayList<human> children) {
+    public void setChildren(Set<StringBuilder> children) {
         this.children = children;
     }
-    public ArrayList<human> getChildren() {
+    public Set<StringBuilder> getChildren()
+    {
         return children;
     }
     
@@ -137,6 +140,16 @@ public class human
     {
         return String.format("\n%d Фамилия : %s; Имя : %s; пол : %s; дата рождения : %d\n отец : %s\n мать : %s\n дети : %s \n",
         id, firstName, lastName, gender, dataBirth, Father, Mather, children);
+    }
+
+    public boolean isEmpty() 
+    {
+        return false;
+    }
+
+    public boolean contains(human Human) 
+    {
+        return false;
     }
 
 

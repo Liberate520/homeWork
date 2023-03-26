@@ -1,7 +1,11 @@
 package homeWork;
 import homeWork.src.Gender;
 import homeWork.src.human;
+
+import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -10,7 +14,8 @@ public class classMain
     public static void main(String[] args) 
     {   
         ArrayList<human> people = new ArrayList<>();
-        ArrayList<human> children = new ArrayList<>();
+        Set<StringBuilder> children = new HashSet();
+        Set<StringBuilder> aaa = new HashSet<>();
 
         human Human1= new human();
         Human1.setId(1);
@@ -109,7 +114,7 @@ public class classMain
         // System.out.println(Human8 + "\n");
             
 
-        
+
         human Human9 = new human();
         Human9.setId(9);
         Human9.setFirstName("Иванов");
@@ -184,9 +189,29 @@ public class classMain
         Human14.setChildren(children);
         people.add(Human14);
         // System.out.println(Human14 + "\n");
-        
-
-        System.out.println("Список всех людей:\n" + people);
-    
-    }
+        StringBuilder sb = new StringBuilder();
+        for(human Human : people)
+        {
+                
+            if(Human.getFather()!= null)
+            {
+                sb.append("[").append(Human.getFather().getId()).append(" ").append(Human.getFather().getFirstName()).append(" ").append(Human.getFather().getLastName()).append(" ").append(Human.getFather().getDataBirth()).append("] ");
+                children.add(sb);
+                     if(!Human.getFather().getChildren().contains(sb))
+                         {
+                             Human.getFather().setChildren(children);
+                         }
+            }
+            else if((Human.getMather()!= null))
+            {     
+                 sb.append("[").append(Human.getMather().getId()).append(" ").append(Human.getMather().getFirstName()).append(" ").append(Human.getMather().getLastName()).append(" ").append(Human.getMather().getDataBirth()).append("] ");
+                 children.add(sb);
+                    if(!Human.getMather().getChildren().contains(sb))
+                        {
+                            Human.getMather().setChildren(children);  
+                        }         
+            } 
+        }           
+        System.out.println("Список всех людей:\n" + people);    
+    }   
 }
