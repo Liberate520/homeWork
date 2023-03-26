@@ -1,8 +1,9 @@
-package ui;
+package ui.menu;
 
-import ui.commands.Exit;
-import ui.commands.InputNote;
-import ui.commands.ShowAllNotes;
+import ui.ConsoleView;
+import ui.menu.commands.Exit;
+import ui.menu.commands.InputNote;
+import ui.menu.commands.ShowAllNotes;
 
 public class MainMenu extends Menu {
 

@@ -1,7 +1,7 @@
-package ui.commands;
+package ui.menu.commands;
 
 import ui.ConsoleView;
-import ui.Menu;
+import ui.menu.Menu;
 
 public abstract class MenuCommand {
     // private ConsoleView view;

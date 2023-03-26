@@ -1,5 +1,7 @@
 package ui;
 
+import ui.menu.Menu;
+
 public class ChoiceChecker {
     int menuSize;
 

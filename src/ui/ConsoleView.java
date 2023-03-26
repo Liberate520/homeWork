@@ -3,6 +3,8 @@ package ui;
 import java.util.Scanner;
 
 import mvp.Presenter;
+import ui.menu.MainMenu;
+import ui.menu.Menu;
 
 public class ConsoleView implements UserInteraction {
     private Presenter presenter;

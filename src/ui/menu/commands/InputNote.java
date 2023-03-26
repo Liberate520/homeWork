@@ -1,6 +1,6 @@
-package ui.commands;
+package ui.menu.commands;
 
-import ui.Menu;
+import ui.menu.Menu;
 
 public class InputNote extends MenuCommand {
 

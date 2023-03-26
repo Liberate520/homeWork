@@ -1,8 +1,9 @@
-package ui;
+package ui.menu;
 
 import java.util.ArrayList;
 
-import ui.commands.MenuCommand;
+import ui.ConsoleView;
+import ui.menu.commands.MenuCommand;
 
 public abstract class Menu {
     private ConsoleView view;
