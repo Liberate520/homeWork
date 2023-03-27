@@ -24,6 +24,11 @@ public class Human {
         this.childList = childList;
     }
 
+    public Human(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -39,6 +44,41 @@ public class Human {
     public List<Human> getChildList() {
         return childList;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setDateBirth(Date dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+        father.addChild(this);
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
+        mother.addChild(this);
+    }
+
+    public void addChild(String name, String surname) {
+        Human child = new Human(name, surname);
+        child.setFather(this);
+        this.childList.add(child);
+    }
+
+    public void addChild(Human child) {
+        child.setFather(this);
+        this.childList.add(child);
+    }
+
+
 
 
 
