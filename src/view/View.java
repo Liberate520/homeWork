@@ -1,2 +1,8 @@
-package view;public class View {
+package view;
+
+import presenter.Presenter;
+public interface View {
+    void setPresenter(Presenter presenter);
+    void start();
+    void printText(String text);
 }
