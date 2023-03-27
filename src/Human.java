@@ -37,7 +37,7 @@ public class Human {
         return this.surname;
     }
 
-    public Date getDateBirth() {
+    public LocalDate getDateBirth() {
         return this.dateBirth;
     }
 
@@ -53,7 +53,7 @@ public class Human {
         this.surname = surname;
     }
 
-    public void setDateBirth(Date dateBirth) {
+    public void setDateBirth(LocalDate dateBirth) {
         this.dateBirth = dateBirth;
     }
 
