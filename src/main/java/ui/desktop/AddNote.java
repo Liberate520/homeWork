@@ -18,7 +18,7 @@ public class AddNote {
         editFrame.setLocationRelativeTo(null);
         JPanel editPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
-        JLabel editLabel = new JLabel("Введите новую заметку текст");
+        JLabel editLabel = new JLabel("Введите новую заметку");
         JTextArea textField = new JTextArea(5, 6);
         textField.setEditable(true);
         textField.setLocation(10, 20);
@@ -30,7 +30,7 @@ public class AddNote {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newText = textField.getText();
+                String newText = textField.getText().replace("\n"," ");
                 if (newText != null) {
                     view.setNote(newText);
                     editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));

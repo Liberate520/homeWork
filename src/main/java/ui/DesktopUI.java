@@ -10,22 +10,19 @@ import ui.desktop.MainWindow;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class DesktopUI implements View {
     private Presenter presenter;
 
-
+    private JFrame frame;
     private JTable table;
-
-    public DesktopUI() {
-//        JPanel panel = new JPanel();
-//        panel.setName("Заметки");
-    }
 
 @Override
     public void setNote(String note) {
         presenter.addNote(new Note(note));
-        presenter.saveNotes();
+//        presenter.saveNotes();
         showNotes();
     }
     @Override
@@ -37,12 +34,15 @@ public class DesktopUI implements View {
     @Override
     public void selection() {
         MainWindow mainWindow = new MainWindow(this, presenter);
+        this.frame = mainWindow.getframe();
         this.table = mainWindow.getTable();
     }
 
     @Override
     public void exit() {
-
+        saveNote();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.dispatchEvent(new WindowEvent(frame,WindowEvent.WINDOW_CLOSING));
     }
 
 
@@ -68,7 +68,6 @@ public class DesktopUI implements View {
         System.out.println("Нажата кнопка удалить заметку");
         int row = table.getSelectedRow();
         presenter.removeNote(row+1);
-        presenter.saveNotes();
         print("Заметка удалена");
         showNotes();
     }
@@ -79,11 +78,7 @@ public class DesktopUI implements View {
         int column = 1;
         int row = table.getSelectedRow();
         if (row > -1) {
-            String value = table.getModel().getValueAt(row, column).toString();
-            System.out.println(value);
             EditNote editNote = new EditNote(this, table);
-            String newNote = table.getModel().getValueAt(row, column).toString();
-            presenter.saveNotes();
         }
     }
     @Override

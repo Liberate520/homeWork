@@ -24,7 +24,7 @@ public class ButtonPanel {
         JButton b1 = new JButton("Редактировать заметку");
         JButton b2 = new JButton("Удалить заметку");
         JButton b3 = new JButton("Добавить заметку");
-//        JButton b4 = new JButton("Выход");
+        JButton b4 = new JButton("Сохранить и выйти");
 //        b1.setVerticalTextPosition(AbstractButton.CENTER);
 //        b1.setHorizontalTextPosition(AbstractButton.CENTER);
 //        b1.setSize(100,20);
@@ -47,16 +47,16 @@ public class ButtonPanel {
                 view.addNote();
             }
         });
-//        b4.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                view.exit();
-//            }
-//        });
+        b4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.exit();
+            }
+        });
         this.buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(b1,BorderLayout.SOUTH);
         buttonPanel.add(b2);
         buttonPanel.add(b3);
-//        buttonPanel.add(b4);
+        buttonPanel.add(b4);
     }
 }

@@ -22,7 +22,7 @@ public class MainWindow {
         this.presenter = presenter;
         this.view = view;
         this.frame = new JFrame("Заметки");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
         String[] columnNames = new String[]{"Дата", "Заметка"};
@@ -37,5 +37,9 @@ public class MainWindow {
         panel.setVisible(true);
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    public JFrame getframe() {
+        return frame;
     }
 }
