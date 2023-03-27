@@ -45,6 +45,7 @@ public class EditNote {
                         view.replaceNote(row+1, newText);
                         view.saveNote();
                         editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));
+                        view.print("Заметка изменена");
                     }
                 }
             });

@@ -6,7 +6,7 @@ import presenter.Presenter;
 import ui.menuitems.*;
 import java.util.Scanner;
 
-public class ConsoleUI implements View, DesktopView {
+public class ConsoleUI implements ConsoleView {
     private Presenter presenter;
     private Scanner scanner;
     private boolean flag;
@@ -36,7 +36,7 @@ public class ConsoleUI implements View, DesktopView {
         }
     }
 
-    @Override
+
     public String scan(String message) {
         System.out.println(message);
         return scanner.nextLine();
@@ -59,13 +59,12 @@ public class ConsoleUI implements View, DesktopView {
 
     @Override
     public void addNote() {
-        Note note = new Note(scan("Введите текст заметки: "));
-        presenter.addNote(note);
+        String note = scan("Введите текст заметки: ");
+        setNote(note);
     }
     @Override
     public void removeNote() {
         int index = Integer.parseInt(scan("Введите номер заметки для удаления"));
-
         presenter.removeNote(index);
     }
 
@@ -74,6 +73,11 @@ public class ConsoleUI implements View, DesktopView {
         int index = Integer.parseInt(scan("Введите номер заметки для редактирования"));
         String newNote = scan("Введите текст заметки: ");
         replaceNote(index, newNote);
+    }
+
+    @Override
+    public void setNote(String note) {
+        presenter.addNote(new Note(note));
     }
 
     @Override
@@ -92,10 +96,7 @@ public class ConsoleUI implements View, DesktopView {
         presenter.saveNotes();
     }
 
-    @Override
-    public void setNote(String note) {
 
-    }
 
     @Override
     public void print(String message) {

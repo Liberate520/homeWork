@@ -14,27 +14,20 @@ import javax.swing.table.DefaultTableModel;
 public class DesktopUI implements View {
     private Presenter presenter;
 
-    private JPanel panel;
-    private String note;
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public JTable getTable() {
-        return table;
-    }
 
     private JTable table;
-//    private JFrame frame;
-
-//В разработке
 
     public DesktopUI() {
-        this.panel = new JPanel();
-        panel.setName("Заметки");
+//        JPanel panel = new JPanel();
+//        panel.setName("Заметки");
     }
 
+@Override
+    public void setNote(String note) {
+        presenter.addNote(new Note(note));
+        presenter.saveNotes();
+        showNotes();
+    }
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
@@ -45,26 +38,29 @@ public class DesktopUI implements View {
     public void selection() {
         MainWindow mainWindow = new MainWindow(this, presenter);
         this.table = mainWindow.getTable();
-
     }
 
     @Override
-    public String scan(String message) {
-        return null;
+    public void exit() {
+
     }
+
+
+    @Override
+    public void print(String message) {
+        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), message);
+    }
+
 
     @Override
     public void showNotes() {
-
+        ((MainTableModel) table.getModel()).refresh();
     }
 
     @Override
     public void addNote() {
         System.out.println("Нажата кнопка добавить заметку");
         AddNote addNote = new AddNote(this );
-        presenter.addNote(new Note(note));
-        presenter.saveNotes();
-        table.repaint();
     }
 
     @Override
@@ -73,6 +69,8 @@ public class DesktopUI implements View {
         int row = table.getSelectedRow();
         presenter.removeNote(row+1);
         presenter.saveNotes();
+        print("Заметка удалена");
+        showNotes();
     }
 
     @Override
@@ -96,16 +94,5 @@ public class DesktopUI implements View {
     public void saveNote(){
         presenter.saveNotes();
     }
-
-    @Override
-    public void print(String message) {
-
-    }
-
-    @Override
-    public void exit() {
-        System.out.println("Нажата кнопка выход");
-    }
-
 
 }

@@ -9,6 +9,10 @@ import java.util.List;
 public class MainTableModel extends AbstractTableModel {
     private List<Note> listNotes;
 
+    public void refresh(){
+        fireTableDataChanged();
+    }
+
     @Override
     public int getRowCount() {
         return listNotes.size();

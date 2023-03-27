@@ -34,6 +34,7 @@ public class AddNote {
                 if (newText != null) {
                     view.setNote(newText);
                     editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));
+                    view.print("Заметка добавлена");
                 }
             }
         });
