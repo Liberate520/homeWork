@@ -1,11 +1,9 @@
 package notes;
 
-import presenter.Presenter;
-
 import java.io.*;
 
-public class ActionsFile {
-    private static String FILE_PATH = "src/main/java/notes/data/data.json";
+public class FileIO implements DataIO {
+    private static final String FILE_PATH = "src/main/java/notes/data/data.json";
 
     public String getData() {
         StringBuilder sb = null;
@@ -34,7 +32,4 @@ public class ActionsFile {
             e.printStackTrace();
         }
     }
-
-
-
 }

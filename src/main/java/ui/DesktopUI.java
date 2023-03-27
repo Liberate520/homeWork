@@ -8,9 +8,6 @@ import ui.desktop.MainTableModel;
 import ui.desktop.MainWindow;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.WindowEvent;
 
 public class DesktopUI implements View {
@@ -22,13 +19,11 @@ public class DesktopUI implements View {
 @Override
     public void setNote(String note) {
         presenter.addNote(new Note(note));
-//        presenter.saveNotes();
         showNotes();
     }
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
-        System.out.println("Презентер установлен");
     }
 
     @Override

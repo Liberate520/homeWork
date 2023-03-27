@@ -3,8 +3,6 @@ package notes;
 import notes.data.Note;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 public class Notes {
     private ArrayList<Note> notes;
@@ -25,16 +23,6 @@ public class Notes {
         Note note = notes.get(index - 1);
         note.setNote(newNote);
     }
- //В разработке
-    public String[][] toArray() {
-        int size = notes.size();
-        String[][] arrayNote = new String[size][2];//TODO узнать как определять количество полей класса
-        for (int i = 0; i < size; i++) {
-            arrayNote[i][0] = notes.get(i).getDate();
-            arrayNote[i][1] = notes.get(i).getNote();
-        }
-        return arrayNote;
-    }
 
     public ArrayList<Note> getNotes() {
         return notes;
@@ -43,16 +31,15 @@ public class Notes {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < notes.size(); i++) {
-            sb.append(String.format("%s,\n", notes.get(i)));
+        for (Note note : notes) {
+            sb.append(String.format("%s,\n", note));
         }
         return sb.toString();
     }
 
 
-    public Notes loadNotes() {
-        ActionsFile actionsFile = new ActionsFile();
-        String data = actionsFile.getData();
+    public Notes loadNotes(DataIO dataIO) {
+        String data = dataIO.getData();
         Formatter formatter = new Formatter();
         return formatter.parseIn(data);
     }
@@ -63,10 +50,10 @@ public class Notes {
     }
 
 
-    public void save() {
-        ActionsFile actionsFile = new ActionsFile();
+    public void save(DataIO dataIO) {
+
         Formatter formatter = new Formatter();
-        actionsFile.save(formatter.parseOut(this));
+        dataIO.save(formatter.parseOut(this));
     }
 
 

@@ -6,7 +6,7 @@ import presenter.Presenter;
 import ui.menuitems.*;
 import java.util.Scanner;
 
-public class ConsoleUI implements ConsoleView {
+public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
     private boolean flag;

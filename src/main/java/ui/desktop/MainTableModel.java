@@ -1,6 +1,5 @@
 package ui.desktop;
 
-import notes.Notes;
 import notes.data.Note;
 
 import javax.swing.table.AbstractTableModel;
@@ -31,42 +30,38 @@ public class MainTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Note note = listNotes.get(rowIndex);
         Object value = null;
-        switch (columnIndex){
-            case 0:
+        switch (columnIndex) {
+            case 0 -> {
                 value = note.getDate();
                 fireTableCellUpdated(rowIndex, columnIndex);
-                break;
-            case 1:
+            }
+            case 1 -> {
                 value = note.getNote();
                 fireTableCellUpdated(rowIndex, columnIndex);
-                break;
+            }
         }
         return value;
     }
 
     @Override
     public String getColumnName(int column) {
-        String name = "??";
-        switch (column) {
-            case 0:
-                name = "Дата";
-                break;
-            case 1:
-                name = "Заметка";
-                break;
-        }
-        return name;    }
+        return switch (column) {
+            case 0 -> "Дата";
+            case 1 -> "Заметка";
+            default -> "??";
+        };    }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Note note = listNotes.get(rowIndex);
-        switch (columnIndex){
-            case 0:
-                break;
-            case 1:
-                note.setNote((String)aValue);
+        switch (columnIndex) {
+            case 0 -> fireTableCellUpdated(rowIndex, columnIndex);
+            case 1 -> {
+                note.setNote((String) aValue);
                 fireTableCellUpdated(rowIndex, columnIndex);
-                break;
+            }
         }
     }
+
+
 }

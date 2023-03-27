@@ -1,5 +1,6 @@
 package presenter;
 
+import notes.DataIO;
 import notes.data.Note;
 import notes.Notes;
 import ui.View;
@@ -8,11 +9,14 @@ public class Presenter {
     private View view;
     private Notes notes;
 
+    private DataIO dataIO;
 
 
-    public Presenter(View view, Notes notes) {
+
+    public Presenter(View view, Notes notes, DataIO dataIO) {
         this.view = view;
-        this.notes = notes.loadNotes();
+        this.dataIO = dataIO;
+        this.notes = notes.loadNotes(dataIO);
         view.setPresenter(this);
     }
 
@@ -29,16 +33,14 @@ public class Presenter {
     }
 
     public void replaceNote(int index, String newNote) {
-        //Не уверен что такая реализация правильная. Скорее всего исключения надо выбрасывать отдельно...
-        try {
-            notes.setNote(newNote, index);
-        } catch (IndexOutOfBoundsException ex){
+        if (index<0 || index > notes.size()-1) {
             view.print("Указан неверный номер заметки");
-            view.print(ex.getMessage());
         }
+        else
+            notes.setNote(newNote, index);
     }
 
     public void saveNotes() {
-        notes.save();
+        notes.save(dataIO);
     }
 }
