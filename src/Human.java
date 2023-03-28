@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -6,7 +8,8 @@ public class Human {
 
     private String name;
     private String surname;
-    private LocalDate dateBirth;
+
+    private String dateBirth;
 
     Gender gender;
     Human father;
@@ -14,10 +17,10 @@ public class Human {
 
     List<Human> childList;
 
-    public Human(String name, String surname, Gender gender) {
+    public Human(String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
-//        this.dateBirth = dateBirth;
+        this.dateBirth = dateBirth;
         this.gender = gender;
         //this.father = father;
         //this.mother = mother;
@@ -36,7 +39,7 @@ public class Human {
         return this.surname;
     }
 
-    public LocalDate getDateBirth() {
+    public String getDateBirth() {
         return this.dateBirth;
     }
 
@@ -52,9 +55,18 @@ public class Human {
         this.surname = surname;
     }
 
-    public void setDateBirth(LocalDate dateBirth) {
-        String data;
+    public void setDateBirth(String dateBirth) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+//        LocalDate date = LocalDate.parse(dateBirth, formatter);
         this.dateBirth = dateBirth;
+    }
+
+    public int getAge(String dateBirth) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+        LocalDate currentDate = LocalDate.now();
+        LocalDate date = LocalDate.parse(dateBirth, formatter);
+        return Period.between(date, currentDate).getYears();
+
     }
 
     public void setFather(Human father) {
@@ -81,7 +93,8 @@ public class Human {
     @Override
     public String toString() {
         return "Имя: " + this.name + " " + "Фамилия: " +
-                this.surname + " " + "Пол: " + gender.name() + " " + "Отец " + father;
+                this.surname + " " + "Пол: " + gender.name() + " " +
+                "Возраст: " + getAge(dateBirth) + "Отец " + father;
     }
 
 

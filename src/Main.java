@@ -3,18 +3,18 @@ public class Main {
 
         FamilyTree family1 = new FamilyTree();
 
-        Human human1 = new Human("Иван", "Иванов", Gender.Male);
-        Human human2 = new Human("Мария", "Иванова", Gender.Female);
-        Human human3 = new Human("Ольга", "Иванова", Gender.Female);
-
+        Human human1 = new Human("Иван", "Иванов", Gender.Male, "12.12.1978");
+        Human human2 = new Human("Мария", "Иванова", Gender.Female, "12.11.1981");
+        Human human3 = new Human("Ольга", "Иванова", Gender.Female, "11.11.2001");
         family1.addHuman(human1);
         family1.addHuman(human2);
         family1.addHuman(human3);
+
         FamilyTree family2 = new FamilyTree();
-        Human human4 = new Human("Петр", "Иванов", Gender.Male);
-        Human human5 = new Human("Ирина", "Иванова", Gender.Female);
-        Human human6 = new Human("Семен", "Иванов", Gender.Male);
-        Human human7 = new Human("Архип", "Иванов", Gender.Male);
+        Human human4 = new Human("Петр", "Иванов", Gender.Male, "00.00.0000");
+        Human human5 = new Human("Ирина", "Иванова", Gender.Female, "00.00.0000");
+        Human human6 = new Human("Семен", "Иванов", Gender.Male, "00.00.0000");
+        Human human7 = new Human("Архип", "Иванов", Gender.Male, "00.00.0000");
         family2.addHuman(human4);
         family2.addHuman(human5);
         family2.addHuman(human6);
