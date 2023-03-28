@@ -93,10 +93,13 @@ public class Human {
         return grandChildrens;
     }
     
-    public void addChild(Human mother, Human father, Human child)
+    public static void addChild(Human mother, Human father, Human child)
     {
+        if(child.father==null&&child.mother ==null)
+        {
         mother.childs.add(child);
         father.childs.add(child);
+        }
     }
     public void addSpouse(Human human)
     {

@@ -22,5 +22,7 @@ public class program {
         System.out.println(kot.parents());
         System.out.println(kostya.parents());
         System.out.println(FamilyTree.AllRelations(stepan));
+        Human.addChild(luka, kostya, marina);
+        System.out.println(luka.parents()); 
     }
 }
