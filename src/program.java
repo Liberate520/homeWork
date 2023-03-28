@@ -16,15 +16,19 @@ public class program {
         Human fedya = new Human("Fedr", "brety", Gender.Male, 199);
         Human petr = new Human("Petr", "ma", Gender.Female, 199, fedya, ivan);
         Human luka = new Human("Luki", "popade", Gender.Male, 201, fedya, ivan);
+        FamilyTree lokkiTree = new FamilyTree(lokki);
 
-        System.out.println(kostya.childs());
-        System.out.println(FamilyTree.humans);
-        System.out.println(kot.parents());
-        System.out.println(kostya.parents());
-        System.out.println(FamilyTree.allRelations(stepan));
-        Human.addChild(kostya, marina, kostya);
-        System.out.println(kostya.childs()); 
-        kostya.addSpouse(marina);
-        System.out.println(FamilyTree.allRelations(kostya));
+        System.out.println(lokkiTree.relations);
+        System.out.println(lokkiTree.getName("kostya"));
+
+        // System.out.println(kostya.childs());
+        // System.out.println(FamilyTree.humans);
+        // System.out.println(kot.parents());
+        // System.out.println(kostya.parents());
+        // System.out.println(stepan.allRelations());
+        // kostya.addChild(marina, kostya); 
+        // System.out.println(kostya.childs()); 
+        // kostya.addSpouse(marina);
+        // System.out.println(kostya.allRelations());
     }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -12,13 +13,14 @@ public class Human {
     public Human mother, father;
     private List <Human> childs = new ArrayList<>();
     private List <Human> spouse = new ArrayList<>();
+    //private FamilyTree tree = 
     public Human(String name, String surname, Gender gender, Integer birthYear, Human mother, Human father)
     {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
         this.birthYear = birthYear;
-        addChild(mother, father, this);
+        mother.addChild(father, this);;
         this.father = father;
         this.mother = mother;
         this.humanId = humansCount;
@@ -34,14 +36,14 @@ public class Human {
         humanId = ++humansCount;
         FamilyTree.humans.add(this);
     }
-    public static List<Human> getByName(String name)
+    public static List<Human> getByName(String name) //здесь логично сделать метод на уровне класса, поэтому статику оставил
     {
         Predicate<Human> byName = human -> human.name.equals(name);
         List<Human> Humans = FamilyTree.humans.stream().filter(byName)
                 .collect(Collectors.toList());
         return Humans;
     }
-    public static List<Human> getBySurname(String surname)
+    public static List<Human> getBySurname(String surname) //здесь логично сделать метод на уровне класса, поэтому статику оставил
     {
         Predicate<Human> bySurname = human -> human.surname.equals(surname);
         List<Human> Humans = FamilyTree.humans.stream().filter(bySurname)
@@ -97,15 +99,15 @@ public class Human {
         return grandChildrens;
     }
     
-    public static void addChild(Human mother, Human father, Human child)
+    public void addChild(Human motherOrFather, Human child)
     {
-        if(child.father == null && child.mother == null && mother!=child && father != child)
+        if(child.father == null && child.mother == null && motherOrFather!=child && this != child)
         {
-            mother.childs.add(child);
-            father.childs.add(child);
+            motherOrFather.childs.add(child);
+            this.childs.add(child);
         }
     }
-    public void addSpouse(Human human)
+    public void addSpouse(Human human) 
     {
         if (spouse.isEmpty()) 
         {
@@ -118,6 +120,20 @@ public class Human {
             AddSpouse(human);
             human.AddSpouse(this);
         }
+    }
+    public  HashMap<String, List<Human>> allRelations()
+    {
+        HashMap<String, List<Human>> allRelations = new HashMap<>();
+        allRelations.put("бабушки", this.grandMothers());
+        allRelations.put("дедушки", this.grandFathers());
+        allRelations.put("родители", this.parents());
+        allRelations.put("братья и сестры", this.brotherAndSisters());
+        allRelations.put("дети", this.childs());
+        allRelations.put("внуки", this.grandChildrens());
+        allRelations.put("супруг", this.spouse());
+
+        return allRelations;
+
     }
 
     @Override

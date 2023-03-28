@@ -1,21 +1,45 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class FamilyTree {
     public static List<Human> humans = new ArrayList<>();
-    public static HashMap<String, List<Human>> allRelations(Human human)
+    public HashMap<String, List<Human>> relations;
+    public FamilyTree(Human human)
     {
-        HashMap<String, List<Human>> allRelations = new HashMap<>();
-        allRelations.put("бабушки", human.grandMothers());
-        allRelations.put("дедушки", human.grandFathers());
-        allRelations.put("родители", human.parents());
-        allRelations.put("братья и сестры", human.brotherAndSisters());
-        allRelations.put("дети", human.childs());
-        allRelations.put("внуки", human.grandChildrens());
-        allRelations.put("супруг", human.spouse());
-
-        return allRelations;
-
+        relations = human.allRelations();
     }
+
+    public List<Human> getName(String name)
+    {
+        return getInfo(byName(name));
+    }
+
+    public List<Human> getSurname(String surname)
+    {
+        return getInfo(bySurname(surname));
+    }
+    private List<Human> getInfo(Predicate<Human> byParam)
+    {
+        List<Human> human = new ArrayList<>();
+        relations.forEach((key, value) -> {
+            human.addAll(value.stream().filter(byParam)
+            .collect(Collectors.toList()));
+          });
+        return human;
+    }
+    //насколько правильно выносить это в отдельный метод?
+    private Predicate<Human> bySurname(String surname)
+    {
+        Predicate<Human> bySurname = human -> human.surname.equals(surname); 
+        return bySurname;
+    }
+    private Predicate<Human> byName(String name)
+    {
+        Predicate<Human> bySurname = human -> human.name.equals(name);
+        return bySurname;
+    }
+
 }
