@@ -18,11 +18,13 @@ public class program {
         Human luka = new Human("Luki", "popade", Gender.Male, 201, fedya, ivan);
 
         System.out.println(kostya.childs());
-        //System.out.println(FamilyTree.humans);
+        System.out.println(FamilyTree.humans);
         System.out.println(kot.parents());
         System.out.println(kostya.parents());
-        System.out.println(FamilyTree.AllRelations(stepan));
-        Human.addChild(luka, kostya, marina);
-        System.out.println(luka.parents()); 
+        System.out.println(FamilyTree.allRelations(stepan));
+        Human.addChild(kostya, marina, kostya);
+        System.out.println(kostya.childs()); 
+        kostya.addSpouse(marina);
+        System.out.println(FamilyTree.allRelations(kostya));
     }
 }

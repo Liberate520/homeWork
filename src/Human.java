@@ -18,10 +18,10 @@ public class Human {
         this.surname = surname;
         this.gender = gender;
         this.birthYear = birthYear;
+        addChild(mother, father, this);
         this.father = father;
         this.mother = mother;
         this.humanId = humansCount;
-        addChild(mother, father, this);
         FamilyTree.humans.add(this);
     }
 
@@ -70,8 +70,12 @@ public class Human {
     public List<Human> brotherAndSisters()
     {
         List<Human> brohersAndSisters = new ArrayList<>();
-        brohersAndSisters = this.father.childs();
-        brohersAndSisters.remove(this);
+        try {
+            brohersAndSisters = this.father.childs();
+            brohersAndSisters.remove(this);
+        } catch (Exception e) {
+            return brohersAndSisters;
+        }
         return brohersAndSisters;
     }
 
@@ -95,10 +99,10 @@ public class Human {
     
     public static void addChild(Human mother, Human father, Human child)
     {
-        if(child.father==null&&child.mother ==null)
+        if(child.father == null && child.mother == null && mother!=child && father != child)
         {
-        mother.childs.add(child);
-        father.childs.add(child);
+            mother.childs.add(child);
+            father.childs.add(child);
         }
     }
     public void addSpouse(Human human)
@@ -115,18 +119,25 @@ public class Human {
             human.AddSpouse(this);
         }
     }
+
     @Override
     public String toString() {
         return name +" "+ surname +" "+ Integer.toString(birthYear) +" "+  gender;
     }
+
     private List<Human> grand(Gender gender)
     {
         List<Human> grands = new ArrayList<>();
-        grands = this.father.parents();
-        grands.addAll(this.mother.parents());
-        grands.removeIf(grand -> grand.gender.equals(gender));
+        try {
+            grands = this.father.parents();
+            grands.addAll(this.mother.parents());
+            grands.removeIf(grand -> grand.gender.equals(gender));
+        } catch (Exception e) {
+            return grands;
+        }
         return grands;
     }
+
     private void AddSpouse(Human human)
     {
         spouse.add(human);
