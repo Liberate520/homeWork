@@ -14,14 +14,13 @@ public class Human {
 
     List<Human> childList;
 
-    public Human(String name, String surname, LocalDate dateBirth, Gender gender,
-                 Human father, Human mother) {
+    public Human(String name, String surname, Gender gender) {
         this.name = name;
         this.surname = surname;
-        this.dateBirth = dateBirth;
+//        this.dateBirth = dateBirth;
         this.gender = gender;
-        this.father = father;
-        this.mother = mother;
+        //this.father = father;
+        //this.mother = mother;
     }
 
     public Human(String name, String surname) {
@@ -54,6 +53,7 @@ public class Human {
     }
 
     public void setDateBirth(LocalDate dateBirth) {
+        String data;
         this.dateBirth = dateBirth;
     }
 
@@ -62,10 +62,10 @@ public class Human {
         father.addChild(this);
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-        mother.addChild(this);
-    }
+//    public void setMother(Human mother) {
+//        this.mother = mother;
+//        mother.addChild(this);
+//    }
 
     public void addChild(String name, String surname) {
         Human child = new Human(name, surname);
@@ -80,7 +80,8 @@ public class Human {
 
     @Override
     public String toString() {
-        return String.format("", this.name, this.surname, this.dateBirth, this.gender, this.childList);
+        return "Имя: " + this.name + " " + "Фамилия: " +
+                this.surname + " " + "Пол: " + gender.name() + " " + "Отец " + father;
     }
 
 
