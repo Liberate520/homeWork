@@ -1,14 +1,13 @@
 
 import java.util.ArrayList;
 
-public class classMain
+public class СlassMain
 {
     public static void main(String[] args) 
     {   
         ArrayList<Human> people = new ArrayList<>();
         ArrayList<Human> childrens = new ArrayList<>();
-        
-
+    
         Human human1= new Human();
         human1.setId(1);
         human1.setFirstName("Иванов");
@@ -205,4 +204,4 @@ public class classMain
         // System.out.println(childrens);
         System.out.println("Список всех людей:\n" + people);    
     }   
-}
+    }   
