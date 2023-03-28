@@ -94,7 +94,7 @@ public class Human {
     public String toString() {
         return "Имя: " + this.name + " " + "Фамилия: " +
                 this.surname + " " + "Пол: " + gender.name() + " " +
-                "Возраст: " + getAge(dateBirth) + "Отец " + father;
+                "Возраст: " + getAge(dateBirth) + " " + "Отец " + father;
     }
 
 
