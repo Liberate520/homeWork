@@ -6,8 +6,9 @@ public class СlassMain
     public static void main(String[] args) 
     {   
         ArrayList<Human> people = new ArrayList<>();
-        ArrayList<Human> childrens = new ArrayList<>();
-    
+        ArrayList<Human> children = new ArrayList<>();
+        
+
         Human human1= new Human();
         human1.setId(1);
         human1.setFirstName("Иванов");
@@ -15,8 +16,8 @@ public class СlassMain
         human1.setGender(Gender.Male);
         human1.setDataBirth(1925);
         human1.setFather(null);
-        human1.setMather(null);
-        human1.setChildrens(childrens);
+        human1.setMother(null);
+        human1.setChildren(children);
         people.add(human1);
         // System.out.println(Human1 + "\n");
 
@@ -27,8 +28,8 @@ public class СlassMain
         human2.setGender(Gender.Male);
         human2.setDataBirth(1921);
         human2.setFather(null);
-        human2.setMather(null);
-        human2.setChildrens(childrens);
+        human2.setMother(null);
+        human2.setChildren(children);
         people.add(human2);
         // System.out.println(Human2 + "\n");
 
@@ -39,8 +40,8 @@ public class СlassMain
         human3.setGender(Gender.Female);
         human3.setDataBirth(1927);
         human3.setFather(null);
-        human3.setMather(null);
-        human3.setChildrens(childrens);
+        human3.setMother(null);
+        human3.setChildren(children);
         people.add(human3);
         // System.out.println(Human3 + "\n");
 
@@ -51,8 +52,8 @@ public class СlassMain
         human4.setGender(Gender.Female);
         human4.setDataBirth(1928);
         human4.setFather(null);
-        human4.setMather(null);
-        human4.setChildrens(childrens);
+        human4.setMother(null);
+        human4.setChildren(children);
         people.add(human4);
         // System.out.println(Human4 + "\n");
 
@@ -63,8 +64,8 @@ public class СlassMain
         human5.setGender(Gender.Male);
         human5.setDataBirth(1923);
         human5.setFather(null);
-        human5.setMather(null);
-        human5.setChildrens(childrens);
+        human5.setMother(null);
+        human5.setChildren(children);
         people.add(human5);
         // System.out.println(Human5 + "\n");
 
@@ -75,8 +76,8 @@ public class СlassMain
         human6.setGender(Gender.Female);
         human6.setDataBirth(1925);
         human6.setFather(null);
-        human6.setMather(null);
-        human6.setChildrens(childrens);
+        human6.setMother(null);
+        human6.setChildren(children);
         people.add(human6);
         // System.out.println(Human6 + "\n");
 
@@ -87,8 +88,8 @@ public class СlassMain
         human7.setGender(Gender.Male);
         human7.setDataBirth(1923);
         human7.setFather(null);
-        human7.setMather(null);
-        human7.setChildrens(childrens);
+        human7.setMother(null);
+        human7.setChildren(children);
         people.add(human7);
         // System.out.println(Human7 + "\n");
 
@@ -99,8 +100,8 @@ public class СlassMain
         human8.setGender(Gender.Female);
         human8.setDataBirth(1928);
         human8.setFather(null);
-        human8.setMather(null);
-        human8.setChildrens(childrens);
+        human8.setMother(null);
+        human8.setChildren(children);
         people.add(human8);
         // System.out.println(Human8 + "\n");
             
@@ -113,8 +114,8 @@ public class СlassMain
         human9.setGender(Gender.Male);
         human9.setDataBirth(1950);
         human9.setFather(human1);
-        human9.setMather(human3);
-        human9.setChildrens(childrens);
+        human9.setMother(human3);
+        human9.setChildren(children);
         people.add(human9);
         // System.out.println(Human9 + "\n");
 
@@ -125,8 +126,8 @@ public class СlassMain
         human10.setGender(Gender.Male);
         human10.setDataBirth(1948);
         human10.setFather(human2);
-        human10.setMather(human4);
-        human10.setChildrens(childrens);
+        human10.setMother(human4);
+        human10.setChildren(children);
         people.add(human10);
         // System.out.println(human10 + "\n");
 
@@ -137,8 +138,8 @@ public class СlassMain
         human11.setGender(Gender.Female);
         human11.setDataBirth(1953);
         human11.setFather(human5);
-        human11.setMather(human6);
-        human11.setChildrens(childrens);
+        human11.setMother(human6);
+        human11.setChildren(children);
         people.add(human11);
         // System.out.println(human11 + "\n");
 
@@ -149,8 +150,8 @@ public class СlassMain
         human12.setGender(Gender.Female);
         human12.setDataBirth(1950);
         human12.setFather(human7);
-        human12.setMather(human8);
-        human12.setChildrens(childrens);
+        human12.setMother(human8);
+        human12.setChildren(children);
         people.add(human12);
         // System.out.println(human12 + "\n");
 
@@ -164,8 +165,8 @@ public class СlassMain
         human13.setGender(Gender.Male);
         human13.setDataBirth(1980);
         human13.setFather(human9);
-        human13.setMather(human11);
-        human13.setChildrens(childrens);
+        human13.setMother(human11);
+        human13.setChildren(children);
         people.add(human13);
         // System.out.println(human13 + "\n"); 
 
@@ -176,8 +177,8 @@ public class СlassMain
         human14.setGender(Gender.Male);
         human14.setDataBirth(1983);
         human14.setFather(human10);
-        human14.setMather(human12);
-        human14.setChildrens(childrens);
+        human14.setMother(human12);
+        human14.setChildren(children);
         people.add(human14);
         // System.out.println(human14 + "\n");
         
@@ -185,23 +186,23 @@ public class СlassMain
         {    
             if(human.getFather()!= null)
             {
-                if(!childrens.contains(human))
+                if(!children.contains(human))
                 {
-                    childrens.add(human);
-                    human.getFather().setChildrens(childrens);
+                    children.add(human);
+                    human.getFather().setChildren(children);
                 }
             }
     
-             else if((human.getMather()!= null))
+             else if((human.getMother()!= null))
              {     
-                if(!childrens.contains(human))
+                if(!children.contains(human))
                 {
-                    childrens.add(human);
-                    human.getMather().setChildrens(childrens);  
+                    children.add(human);
+                    human.getMother().setChildren(children);  
                 }         
             } 
        }
-        // System.out.println(childrens);
+        // System.out.println(children);
         System.out.println("Список всех людей:\n" + people);    
     }   
-    }   
+}

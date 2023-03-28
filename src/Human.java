@@ -4,17 +4,17 @@ public class Human
 {
     private int id;
     private Human father;
-    private Human mather;
+    private Human mother;
     Gender gender;
     private String firstName;
     private String lastName;
     private int dataBirth;
-    private ArrayList<Human> childrens;
+    private ArrayList<Human> children;
     
 
 
     public Human(int id, String firstName, String lastName, Gender gender,
-    int dataBirth, Human father, Human mather, ArrayList<Human> childrens)
+    int dataBirth, Human father, Human mother, ArrayList<Human> children)
     {
         this.id = id;
         this.lastName = lastName;
@@ -22,15 +22,15 @@ public class Human
         this.gender = gender;
         this.dataBirth = dataBirth;
         this.father = father;
-        this.mather = mather;
-        this.childrens = childrens;
+        this.mother = mother;
+        this.children = children;
     }    
     
 
     public Human(int id, String lastName, String firstName,Gender gender,
-    int dataBirth, Human father, Human mather)
+    int dataBirth, Human father, Human mother)
     {
-        this(id, lastName, firstName, gender, dataBirth, father, mather,null);
+        this(id, lastName, firstName, gender, dataBirth, father, mother,null);
         
     }
 
@@ -88,13 +88,13 @@ public class Human
     {
         return father;
     }
-    public void setMather(Human mather) 
+    public void setMother(Human mother) 
     {
-        this.mather = mather;
+        this.mother = mother;
     }
-    public Human getMather() 
+    public Human getMother() 
     {
-        return mather;
+        return mother;
     }
 
     public void setGender(Gender gender) {
@@ -125,21 +125,21 @@ public class Human
         return dataBirth;
     }
     
-    public void setChildrens(ArrayList<Human> childrens2) {
-        this.childrens = childrens;
+    public void setChildren(ArrayList<Human> children2) {
+        this.children = children;
     }
-    public ArrayList<Human> getChildrens()
+    public ArrayList<Human> getchildren()
     {
-        return childrens;
+        return children;
     }
 
-    public void addChildrens(Human human)
+    public void addChildren(Human human)
     {
-        if(this.childrens == null)
+        if(this.children == null)
         {
-            this.childrens = new ArrayList<>();    
+            this.children = new ArrayList<>();    
         }
-        this.childrens.add(human);
+        this.children.add(human);
     }
 
     
@@ -148,7 +148,7 @@ public class Human
     public String toString() 
     {
         return String.format("\n%d Фамилия : %s; Имя : %s; пол : %s; дата рождения : %d\n отец : %s\n мать : %s\n дети : %s \n",
-        id, firstName, lastName, gender, dataBirth, father, mather, childrens);
+        id, firstName, lastName, gender, dataBirth, father, mother, children);
     }
 
     public boolean isEmpty() 
