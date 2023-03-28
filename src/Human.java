@@ -1,84 +1,46 @@
 import java.util.ArrayList;
 import java.util.List;
+public class Human implements Humanable{
 
-public class Human {
     private String fio;
     private int yearBirth;
     private int yearDeath;
     private Gender gender;
-    private Human father;
-    private Human mother;
-    private List<Human> children=new ArrayList<>();
-
-    public Human(int yearBirth,int yearDeath, String fio,Gender gender, Human father, Human mother) {
-        this.fio = fio;
-        this.yearBirth = yearBirth;
-        this.yearDeath = yearDeath;
-        this.father = father;
-        this.mother = mother;
-    }
 
     public String getFio() {
-        return fio;
+        return this.fio;
     }
 
     public void setFio(String fio) {
-        this.fio = fio;
+    this.fio=fio;
     }
+
 
     public int getYearBirth() {
-        return yearBirth;
+        return this.yearBirth;
     }
+
 
     public void setYearBirth(int yearBirth) {
-        this.yearBirth = yearBirth;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
+    this.yearBirth=yearBirth;
     }
 
 
-    public List<Human> getChildren() {
-        return children;
-    }
-
-    public void setChildren(Human children) {
-        this.children.add(children);
-    }
-    public void setChildren(List<Human> children) {
-        this.children.addAll(children);
-    }
     public int getYearDeath() {
-        return yearDeath;
+        return this.yearDeath;
     }
+
 
     public void setYearDeath(int yearDeath) {
-        this.yearDeath = yearDeath;
+    this.yearDeath=yearDeath;
     }
 
     public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
+        return this.gender;
     }
 
     @Override
-    public String toString() {
-        return fio;
+    public void setGender(Gender gender) {
+    this.gender = gender;
     }
 }

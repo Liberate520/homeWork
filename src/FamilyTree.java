@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    private List<Human> familyTree = new ArrayList<Human>();
+    private List<Member> familyTree = new ArrayList<Member>();
 
-    public FamilyTree(List<Human> familyTree) {
+    public FamilyTree(List<Member> familyTree) {
         this.familyTree = familyTree;
     }
     public  FamilyTree()
@@ -12,27 +12,26 @@ public class FamilyTree {
         this(new ArrayList<>());
     }
 
-    public List<Human> getFamilyTree() {
+    public List<Member> getFamilyTree() {
         return familyTree;
     }
 
-    public void setFamily(List<Human> familyTree) {
+    public void setFamily(List<Member> familyTree) {
         this.familyTree = familyTree;
     }
-    public void addMember(Human newHuman) {
+    public void addMember(Member newHuman) {
         this.familyTree.add(newHuman);
     }
-    public void addMember(List<Human> newHuman) {
+
+    public void addAllMember(List<Member> newHuman) {
         this.familyTree.addAll(newHuman);
     }
+
     @Override
     public String toString() {
         return familyTree.toString();
     }
-
-    public void getChildren(List<Human> familyTree) {
-        this.familyTree = familyTree;
-    }
+    
 }
 
 
