@@ -27,8 +27,6 @@ public class Main {
                         human.getChildren());
             }
         }
-
         System.out.println(familyTree.getHumanByName("Иванов Иван Иванович"));
-
     }
 }
