@@ -11,12 +11,14 @@ public class Main {
         family1.addHuman(human1);
         family1.addHuman(human2);
         family1.addHuman(human3);
+//        human1.addChild(human3);
+        System.out.println(human1);
 
         FamilyTree family2 = new FamilyTree();
-        Human human4 = new Human("Петр", "Иванов", Gender.Male, "00.00.0000");
-        Human human5 = new Human("Ирина", "Иванова", Gender.Female, "00.00.0000");
-        Human human6 = new Human("Семен", "Иванов", Gender.Male, "00.00.0000");
-        Human human7 = new Human("Архип", "Иванов", Gender.Male, "00.00.0000");
+        Human human4 = new Human("Петр", "Иванов", Gender.Male, "11.11.1911");
+        Human human5 = new Human("Ирина", "Иванова", Gender.Female, "11.11.1911");
+        Human human6 = new Human("Семен", "Иванов", Gender.Male, "11.11.1911");
+        Human human7 = new Human("Архип", "Иванов", Gender.Male, "11.11.1911");
         family2.addHuman(human4);
         family2.addHuman(human5);
         family2.addHuman(human6);

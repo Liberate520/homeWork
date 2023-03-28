@@ -56,8 +56,6 @@ public class Human {
     }
 
     public void setDateBirth(String dateBirth) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
-//        LocalDate date = LocalDate.parse(dateBirth, formatter);
         this.dateBirth = dateBirth;
     }
 
@@ -86,7 +84,7 @@ public class Human {
     }
 
     public void addChild(Human child) {
-        child.setFather(this);
+        //child.setFather(this);
         this.childList.add(child);
     }
 
