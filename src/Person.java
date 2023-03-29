@@ -2,13 +2,13 @@ import java.util.Objects;
 
 public class Person {
     private String fullName;
-    private String birthDate;
+    private Integer birthYear;
     // (TODO) Заменить на Date
     // private Date deathDate;
 
-    public Person(String fullName, String birthDate) {
+    public Person(Integer id, String fullName, Integer birthYear) {
         this.fullName = fullName;
-        this.birthDate = birthDate;
+        this.birthYear = birthYear;
     }
 
     public Person() {
@@ -22,12 +22,12 @@ public class Person {
         this.fullName = fullName;
     }
 
-    public String getBirthDate() {
-        return this.birthDate;
+    public Integer getBirthYear() {
+        return this.birthYear;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthYear(Integer birthDate) {
+        this.birthYear = birthDate;
     }
 
     @Override
@@ -38,17 +38,17 @@ public class Person {
             return false;
         }
         Person person = (Person) o;
-        return Objects.equals(fullName, person.fullName) && Objects.equals(birthDate, person.birthDate);
+        return Objects.equals(fullName, person.fullName) && Objects.equals(birthYear, person.birthYear);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fullName, birthDate);
+        return Objects.hash(fullName, birthYear);
     }
 
     @Override
     public String toString() {
-        return (fullName == null ? "<Неизвестно>" : fullName) + " (" + (birthDate == null ? "<Неизвестно>" : birthDate)
+        return (fullName == null ? "<Неизвестно>" : fullName) + " (" + (birthYear == null ? "<Неизвестно>" : birthYear)
                 + ")";
     }
 
