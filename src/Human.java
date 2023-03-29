@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class Human 
 {
@@ -8,19 +10,21 @@ public class Human
     Gender gender;
     private String firstName;
     private String lastName;
-    private int dataBirth;
+    private LocalDate dataBirth;
+    private LocalDate dataDeath;
     private ArrayList<Human> children;
     
 
 
-    public Human(int id, String firstName, String lastName, Gender gender,
-    int dataBirth, Human father, Human mother, ArrayList<Human> children)
+    public Human(int id, String lastName, String firstName, Gender gender,
+    LocalDate dataBirth, LocalDate dataDeath, Human father, Human mother, ArrayList<Human> children)
     {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
         this.dataBirth = dataBirth;
+        this.dataDeath = dataDeath;
         this.father = father;
         this.mother = mother;
         this.children = children;
@@ -28,48 +32,51 @@ public class Human
     
 
     public Human(int id, String lastName, String firstName,Gender gender,
-    int dataBirth, Human father, Human mother)
+    LocalDate dataBirth, LocalDate dataDeath, Human father, Human mother)
     {
-        this(id, lastName, firstName, gender, dataBirth, father, mother,null);
+        this(id, lastName, firstName, gender, dataBirth, dataDeath, father, mother,null);
         
     }
 
     public Human(int id, String lastName, String firstName,Gender gender,
-    int dataBirth, Human father)
+    LocalDate dataBirth, LocalDate dataDeath, Human father)
     {
-        this(id, lastName, firstName, gender, dataBirth, father, null, null);     
+        this(id, lastName, firstName, gender, dataBirth, dataDeath, father, null, null);     
     }
 
-    public Human(int id, String lastName, String firstName,Gender gender, int dataBirth)
+    public Human(int id, String lastName, String firstName,Gender gender, LocalDate dataBirth, LocalDate dataDeath)
     {
-        this(id, lastName, firstName, gender, dataBirth, null, null, null);
+        this(id, lastName, firstName, gender, dataBirth, null, null, null,null);
     }
     
+    public Human(int id, String lastName, String firstName, Gender gender, LocalDate dataBirth)
+    {
+        this(id, lastName, firstName, gender, dataBirth, null, null, null, null);
+        
+    }
+
     public Human(int id, String lastName, String firstName, Gender gender)
     {
-        this(id, lastName, firstName, gender, 0, null, null, null);
+        this(id, lastName, firstName, gender, null, null, null, null, null);
         
     }
-
     public Human(int id, String lastName, String firstName)
     {
-        this(id, lastName, firstName, null,0, null, null, null);
-        
-    }
-    public Human(int id, String lastName)
-    {
-        this(id, lastName, null, null, 0, null, null,null);  
+        this(id, lastName, firstName, null, null, null, null, null,null);  
     }
 
+    public Human(int id, String lastName)
+    {
+        this(id, lastName, null, null, null, null, null,null, null);  
+    }
     public Human(int id)
     {
-        this(id, null, null, null, 0, null, null,null);  
+        this(id, null, null, null, null, null, null,null, null);  
     }
 
     public Human()
     {
-        this(0, null, null, null,
-         0, null, null, null);
+        this(0, null, null, null, null, null, null, null, null);
     }
 
     public void setId(int id) {
@@ -118,17 +125,23 @@ public class Human
         return lastName;
     }
 
-    public void setDataBirth(int dataBirth) {
+    public void setDataBirth(LocalDate dataBirth) {
         this.dataBirth = dataBirth;
     }
-    public int getDataBirth() {
+    public LocalDate getDataBirth() {
         return dataBirth;
     }
+    public void setDataDeath(LocalDate dataDeath) {
+        this.dataDeath = dataDeath;
+    }
+    public LocalDate getDataDeath() {
+        return dataDeath;
+    }
     
-    public void setChildren(ArrayList<Human> children2) {
+    public void setChildren(ArrayList<Human> children) {
         this.children = children;
     }
-    public ArrayList<Human> getchildren()
+    public ArrayList<Human> getChildren()
     {
         return children;
     }
@@ -142,24 +155,71 @@ public class Human
         this.children.add(human);
     }
 
-    
+    public int getAge() {
+        LocalDate currenDate = LocalDate.now();
+        if (getDataDeath() == null)
+            return Period.between(dataBirth, currenDate).getYears();
+        else
+            return Period.between(dataBirth, dataDeath).getYears();
+    }
     
     @Override
-    public String toString() 
-    {
-        return String.format("\n%d Фамилия : %s; Имя : %s; пол : %s; дата рождения : %d\n отец : %s\n мать : %s\n дети : %s \n",
-        id, firstName, lastName, gender, dataBirth, father, mother, children);
-    }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n").append(id).append(" фамилия: ").append(lastName).append(", имя: ").append(firstName).append("\n");
+        sb.append(" дата рождения: ").append(dataBirth);
+        if (dataDeath == null)
+        {sb.append(" возраст: ").append(getAge()).append("\n");}
+        else
+        {sb.append(", дата смерти: ").append(dataDeath).append("\n");}
+        if(gender == Gender.Male)
+        {sb.append(" пол мужской: ").append(gender).append("\n");}
+        else
+        {sb.append(" женский пол:").append(gender).append("\n");}
+        if(father == null)
+        {sb.append(" отец не определён ").append("\n");}
+        else
+        {sb.append(" отец id: ").append(father.getId()).append(" фамилия: ").append(father.getLastName()).append(", имя:  ").append(father.getFirstName()).append(", год рождения: ").append(father.getDataBirth()).append("\n");}
+        if(mother == null)
+        {sb.append(" мать не определёна ").append("\n");}
+        else
+        {sb.append(" мать id: ").append(mother.getId()).append(" фамилия: ").append(mother.getLastName()).append(", имя:  ").append(mother.getFirstName()).append(", год рождения: ").append(mother.getDataBirth()).append("\n");}
+        if (children == null)
+        {sb.append(" детей нет").append("\n");}
+        else
+        {
+            sb.append(" дети: ").append("\n");
+            for (int i =0; i < children.size(); i++)
+            {
+                if(children.get(i).getGender() == Gender.Male)
+                {sb.append(" сын : ");}
+                else{sb.append(" дочь: ");}
+                sb.append(" id: ").append(children.get(i).getId());
+                sb.append(" фамилия: ").append(children.get(i).getLastName());
+                sb.append(" имя: ").append(children.get(i).getFirstName());
+                sb.append(" дата рождения: ").append(children.get(i).getDataBirth()).append("\n");
+            }
+        }
+        return sb.toString();
 
-    public boolean isEmpty() 
-    {
-        return false;
     }
+    
+    // @Override
+    // public String toString() 
+    // {
+    //     if (father == null){
+    //         father = new Human();
+    //         father.setFirstName("default");
+    //     }
+    //     if (mother == null){
+    //         mother = new Human();
+    //         mother.setFirstName("default");
+    //     }
+    //     return String.format("\n%d Фамилия : %s; Имя : %s; пол : %s; дата рождения : %d\n отец : %s\n мать : %s\n дети : %s \n",
+    //     id, firstName, lastName, gender, dataBirth, father.getFirstName(), mother.getFirstName(), children);
+    // }
 
-    public boolean contains(Human human) 
-    {
-        return false;
-    }
+    
 
 
 }
