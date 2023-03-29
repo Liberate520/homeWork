@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Human implements Humanable{
+public class Human implements Humanable,Serializable{
 
     private String fio;
     private int yearBirth;

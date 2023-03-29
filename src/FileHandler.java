@@ -1,2 +1,2 @@
-public class FileHandler implements Writeable{
+public class FileHandler {
 }

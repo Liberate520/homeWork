@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface Humanable {
+public interface Humanable{
     String getFio() ;
 
     void setFio(String fio);
