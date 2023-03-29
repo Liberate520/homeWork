@@ -1,18 +1,31 @@
 import java.util.Objects;
 
 public class Person {
+    private Integer id;
     private String fullName;
     private Integer birthYear;
+    
     // (TODO) Заменить на Date
     // private Date deathDate;
 
     public Person(Integer id, String fullName, Integer birthYear) {
+        this.id = id;
         this.fullName = fullName;
         this.birthYear = birthYear;
     }
 
     public Person() {
     }
+
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
 
     public String getFullName() {
         return this.fullName;
@@ -30,6 +43,8 @@ public class Person {
         this.birthYear = birthDate;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -38,8 +53,9 @@ public class Person {
             return false;
         }
         Person person = (Person) o;
-        return Objects.equals(fullName, person.fullName) && Objects.equals(birthYear, person.birthYear);
+        return this.id == person.id;
     }
+
 
     @Override
     public int hashCode() {

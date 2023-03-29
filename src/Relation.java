@@ -50,8 +50,7 @@ public class Relation extends Person {
             return false;
         }
         Relation relation = (Relation) o;
-        return Objects.equals(marriageId, relation.marriageId) && Objects.equals(parentsIdList, relation.parentsIdList)
-                && Objects.equals(kidsIdList, relation.kidsIdList);
+        return relation.getId() == this.getId();
     }
 
     @Override
