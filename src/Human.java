@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Human {
+public class Human implements Serializable {
     public String name, surname;
     private static Integer humansCount = 0;
     public Integer humanId; 

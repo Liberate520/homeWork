@@ -1,11 +1,13 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FamilyTree {
-    public static List<Human> humans = new ArrayList<>();
+public class FamilyTree implements Serializable
+ {
+    public static transient List<Human> humans = new ArrayList<>();
     public HashMap<String, List<Human>> relations;
     public FamilyTree(Human human)
     {
@@ -40,6 +42,10 @@ public class FamilyTree {
     {
         Predicate<Human> bySurname = human -> human.name.equals(name);
         return bySurname;
+    }
+
+    public void save(FileWorker fileWorker, String filename) {
+        fileWorker.save(this, filename);
     }
 
 }
