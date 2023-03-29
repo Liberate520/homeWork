@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
@@ -15,15 +15,13 @@ public class Human {
     Human father;
     Human mother;
 
-    List<Human> childList;
+    List<Human> childList = new ArrayList<>();
 
     public Human(String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
         this.dateBirth = dateBirth;
         this.gender = gender;
-        //this.father = father;
-        //this.mother = mother;
     }
 
     public Human(String name, String surname) {
@@ -44,19 +42,17 @@ public class Human {
     }
 
     public List<Human> getChildList() {
+        System.out.println(getName() + " " + getSurname() + " дети: ");
         return childList;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
+    public String getChild() {
+        System.out.println("*".repeat(30));
+        StringBuilder child = new StringBuilder(getName() + " " + getSurname() + " дети: \n");
+        for (Human human: this.childList) {
+            child.append(human + "\n");
+        }
+        return child.toString();
     }
 
     public int getAge(String dateBirth) {
@@ -67,33 +63,59 @@ public class Human {
 
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public void setFather(Human father) {
         this.father = father;
-        father.addChild(this);
     }
 
-//    public void setMother(Human mother) {
-//        this.mother = mother;
-//        mother.addChild(this);
-//    }
-
-    public void addChild(String name, String surname) {
-        Human child = new Human(name, surname);
-        child.setFather(this);
-        this.childList.add(child);
+        public void setMother(Human mother) {
+        this.mother = mother;
     }
 
-    public void addChild(Human child) {
-        //child.setFather(this);
-        this.childList.add(child);
+    public void setDateBirth(String dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public void setChildList(List<Human> childList) {
+        this.childList = childList;
     }
 
     @Override
     public String toString() {
-        return "Имя: " + this.name + " " + "Фамилия: " +
-                this.surname + " " + "Пол: " + gender.name() + " " +
-                "Возраст: " + getAge(dateBirth) + " " + "Отец " + father;
+        return this.name +  " " + this.surname + " " +
+                "Пол: " + gender.name() + " " +
+                "Возраст: " + getAge(dateBirth) + " лет " + "\n" + "Отец: " + father;
     }
+    //    public void setFather(Human father) {
+//        this.father = father;
+//        father.addChild(this);
+
+//    }
+//    public void setMother(Human mother) {
+//        this.mother = mother;
+//        mother.addChild(this);
+
+//    }
+//    public void addChild(String name, String surname) {
+//        Human child = new Human(name, surname);
+//        child.setFather(this);
+//        this.childList.add(child);
+//    }
+//
+//    public void addChild(Human child) {
+//        //child.setFather(this);
+//        this.childList.add(child);
+
+//    }
+
+
 
 
 
