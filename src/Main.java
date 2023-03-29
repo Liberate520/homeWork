@@ -6,41 +6,49 @@ public class Main {
 
     public static void main(String[] args) {
         
-        List<Persona> family = new ArrayList<>();
+        FamilyTree familyTree = new FamilyTree();
+        List<Person> family = new ArrayList<>();
 
-        Persona persona1 = new Persona("Сергей", "Манеров", "18.04.1996");
+        Person person1 = new Person("Сергей", "Манеров", "18.04.1996");
         
-        Persona persona2 = new Persona("Оксана", "Вилкова", "12.10.1976");
+        Person person2 = new Person("Оксана", "Вилкова", "12.10.1976");
 
-        Persona persona3 = new Persona("Денис", "Манеров", "11.10.1968");
+        Person person3 = new Person("Денис", "Манеров", "11.10.1968");
 
-        Persona persona4 = new Persona("Вероника", "Вилкова", "04.03.2006");
+        Person person4 = new Person("Вероника", "Вилкова", "04.03.2006");
 
 
-        family.add(persona1);
-        family.add(persona2);
-        family.add(persona3);
-        family.add(persona4);
+        family.add(person1);
+        family.add(person2);
+        family.add(person3);
+        family.add(person4);
 
-        persona2.addChildren(persona1);
-        persona3.addChildren(persona1);
-        persona2.addChildren(persona4);
+        person2.addChild(person1);
+        person3.addChild(person1);
+        person2.addChild(person4);
 
-        persona1.addMother(persona2);
-        persona1.addFather(persona3);
+        person1.setMother(person2);
+        person1.setFather(person3);
 
-        persona4.addMother(persona2);
+        person4.setMother(person2);
 
-        persona1.getFirstName();
-        persona1.getSecondName();
-        persona1.getDateOfBirth();
-        persona1.getMother();
-        persona1.getFather();
-        persona1.getChildren();
+        // person1.getFirstName();
+        // person1.getSecondName();
+        // person1.getDateOfBirth();
+        // person1.getMother();
+        // person1.getFather();
+        // person1.getChildren();
 
-        System.out.println(persona1);
+        familyTree.addPerson(person1);
+        familyTree.addPerson(person2);
+        familyTree.addPerson(person3);
+        familyTree.addPerson(person4);
+
+        System.out.println(person1);
         // System.out.println(persona2);
-        System.out.println(family);
+        // System.out.println(family);
+        // System.out.println(familyTree);
+
 
     }
 

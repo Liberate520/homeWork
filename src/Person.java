@@ -2,23 +2,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Persona {
+public class Person {
     
     private String firstname;
     private String secondname;
     private String dateofbirth;
-    private List<Persona> childrens = new ArrayList<>();
-    private Persona father;
-    private Persona mother;
+    private String dateofdeath;
+    private List<Person> childrens = new ArrayList<>();
+    private Person father;
+    private Person mother;
     
-    public Persona(String firstname, String secondname, String dateofbirth){
+    public Person(String firstname, String secondname, String dateofbirth){
         this.firstname = firstname;
         this.secondname = secondname;
         this.dateofbirth = dateofbirth;
-
-        this.childrens = childrens;
-        this.father = father;
-        this.mother = mother;
     }
   
     
@@ -47,24 +44,28 @@ public class Persona {
         System.out.println(childrens);
     }
 
-    public Persona addMother(Persona persona) {
-        return this.mother = persona;
+    public String setDateOfDeath(String dateofdeath){
+        return this.dateofdeath = dateofdeath;
     }
 
-    public Persona addFather(Persona persona) {
-        return this.father = persona;
+    public Person setMother(Person person) {
+        return this.mother = person;
     }
 
-    public void addChildren(Persona persona){
-        childrens.add(persona);
+    public Person setFather(Person person) {
+        return this.father = person;
+    }
+
+    public void addChild(Person person){
+        childrens.add(person);
     }
 
 
     @Override
     public String toString() {
         return "Имя, Фамилия: " + firstname + " " + secondname; 
-        // + "; Дата рождения: " + dateofbirth; 
-        // +  ", Мать: " + mother + ", Отец: " + father;
+        // + "; Дата рождения: " + dateofbirth//; 
+        // +  ", Мать: " + mother + ", Отец: " + father//;
         // + " Дети:" + childrens;
     }
 
