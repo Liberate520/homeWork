@@ -75,7 +75,6 @@ public class FileCSV {
     public Boolean saveFile(String file_name) {
         String bd_file = new File(file_name).getAbsolutePath();
         System.out.println("Сохраняем изменения в файл");
-        System.out.println("Формируем список с объектами класса Person");
 
         String text = convertMapToTxt();
 
@@ -84,6 +83,7 @@ public class FileCSV {
             writer.write(text);
             writer.flush();
             writer.close();
+            System.out.println("file saved!");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -150,13 +150,7 @@ public class FileCSV {
                 temp_map.put("child"+i,Integer.toString(child.getPerson_id()));
             }
             
-            
             this.bd_tree.put(items.getKey(), temp_map);
-            
-    
-            System.out.println(temp_map.toString());
- 
-            // private ArrayList<Person> person_childs = new ArrayList<>();
         }
     }
 

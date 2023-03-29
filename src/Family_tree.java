@@ -13,15 +13,16 @@ public class Family_tree {
         System.out.printf("Генеалогическое древо загружено!\nСостоит из %d человек",family_tree.persons_list.size());
 
         StringBuilder help = new StringBuilder();
-        help.append("\nОсновные комманды консоли:\n");
-        help.append("show - показывает всех участников дерева");
-        help.append("id: 1679946500 - показывает подробную информацию о человеке");
-        help.append("new.Name - Добавить нового человека(создает и присваевает id)");
-        help.append("add.1679946500.sex.male - Добавить пол id:1679946500 ");
-        help.append("add.1679946500.mother.1679946400 - Добавить id:1679946500 - мать id:1679946400");
-        help.append("add.1679946500.father.1679946400 - Добавить id:1679946500 - отца id:1679946400");
+        help.append("\n\nОсновные комманды консоли:\n");
+        help.append("show - показывает всех участников дерева\n");
+        help.append("id: 1679946500 - показывает подробную информацию о человеке\n");
+        help.append("new.Name - Добавить нового человека(создает и присваевает id)\n");
+        help.append("add.1679946500.sex.male - Добавить пол id:1679946500\n");
+        help.append("add.1679946500.mother.1679946400 - Добавить id:1679946500 - мать id:1679946400\n");
+        help.append("add.1679946500.father.1679946400 - Добавить id:1679946500 - отца id:1679946400\n");
 
         String command;
+        System.out.println(help.toString());
         while (true) {
             command = fromUsersConsole("\n: ");
             if (command.equals("break"))
