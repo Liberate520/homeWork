@@ -10,7 +10,6 @@ public class Presenter {
     @FXML
     private Text output;
     private long num1 = 0;
-    private long num2 = 0;
     private boolean start = true;
     private String operator = "";
     private Model model = new Model();
