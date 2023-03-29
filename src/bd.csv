@@ -1,0 +1,8 @@
+person_id,person_name,person_birthday,person_death,person_sex,mother_id,father_id,child1,child2,child3
+1679925600,Petrova Alyona Ivanovna,18.01.1958,,female,,,1679945630,1679945780,1679945990
+1679925750,Petrov Stepan Maksimovich,25.06.1946,30.12.2008,male,,,1679945630,1679945780,1679945990
+1679945630,Petrov Matvej Stepanovich,05.03.1980,,male,1679925600,1679925750,,,
+1679945780,Petrov Sergej Stepanovich,15.09.1978,,male,1679925600,1679925750,,,
+1679945990,Knyazeva Darya Stepanovna,04.11.1976,,female,1679925600,1679925750,1679946700,,
+1679946500,Knyazev Daniil Mihajlovich,12.12.1970,,male,,,1679946700,,
+1679946700,Knyazev Vadim Danilovich,09.05.1998,,male,1679945990,1679946500,,,
