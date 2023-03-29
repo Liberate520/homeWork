@@ -1,21 +1,22 @@
-package MyNote;
+package MyNote.Model;
 
-import java.util.ArrayList;
-
+import MyNote.Notebook;
+import MyNote.Record;
 
 public class Model {
-    private ArrayList<Record> records;
+    private Notebook records;
     private String note;
-    private FileHandlers fileHandler;
+    private FileHandlerClass fileHandler;
 
     public Model(String note) {
         this.note = note;
-        records = new ArrayList<Record>();
+        records = new Notebook();
+        this.fileHandler = new FileHandlerClass(note);
         load();
     }
-    
+
     public void addRecord(String text) {
-        records.add(new Record(text));
+        records.addRecord(new Record(text));
         save();
     }
 
@@ -27,24 +28,22 @@ public class Model {
         records = fileHandler.load();
     }
 
+    public boolean removeRecord(int index) {
 
-    
-    public Record removeRecord(int index) {
-        
-        return records.remove(index);
-       
-        
+        return records.removeRecord(index);
+
     }
-
 
     public String getNote() {
         return note;
     }
-    public ArrayList<Record> getRecords() {
+
+    public Notebook getRecords() {
         return records;
     }
+
     public void setNote(String note) {
         this.note = note;
     }
-    
+
 }

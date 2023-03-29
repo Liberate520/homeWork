@@ -15,5 +15,23 @@ public class Notebook {
     public void setNotes(List<Record> notes) {
         this.notes = notes;
     }
+    public void addRecord(Record record) {
+        notes.add(record);
+    }
+    public boolean removeRecord(int index) {
+        if (index < 0 || index >= notes.size()) {
+            return false;
+        }
+        notes.remove(index);
+        return true;
+    }
+    public List<Record> getAllRecords() {
+        return notes;
+    }
+
+    public boolean isEmpty() {
+        return notes.isEmpty();
+    }
 
 }
+

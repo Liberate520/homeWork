@@ -1,13 +1,14 @@
 package MyNote.UI;
 
-import java.util.List;
 
-import MyNote.Record;
+import MyNote.Notebook;
 
 public interface View {
     public String getText();
-    public void setText(String volue);
+    public void printText(String value);
     public int getIndex();
-    public void printNoteBook(List<Record> list);
+    public void printNoteBook(Notebook list);
     public void showRecordAdded();
+    public void showNoRecords();
+    public void noRecods();
 }

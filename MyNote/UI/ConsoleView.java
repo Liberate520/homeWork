@@ -1,18 +1,17 @@
 package MyNote.UI;
 
-import java.util.List;
 import java.util.Scanner;
 
+import MyNote.Notebook;
 import MyNote.Record;
 
-public class ConsoleView implements View{
-    
-    Scanner in;
+public class ConsoleView implements View {
+
+    private Scanner in;
+
     public ConsoleView() {
         in = new Scanner(System.in);
     }
-
-  
 
     @Override
     public String getText() {
@@ -21,20 +20,15 @@ public class ConsoleView implements View{
     }
 
     @Override
-    public void setText(String volue) {
-        System.out.printf("текст: %s\n", volue);
+    public void printText(String value) {
+        System.out.printf("текст: %s\n", value);
 
     }
-
-  
-
 
     @Override
     public void showRecordAdded() {
-            System.out.println("Запись добавлена");
+        System.out.println("Запись добавлена");
     }
-
-
 
     @Override
     public int getIndex() {
@@ -43,23 +37,20 @@ public class ConsoleView implements View{
         return index;
     }
 
-
-
     @Override
-    public void printNoteBook(List<Record> records) {
-        for (Record record : records) {
+    public void printNoteBook(Notebook records) {
+        for (Record record : records.getNotes()) {
             System.out.println(record);
         }
     }
 
+    public void showNoRecords() {
+        System.out.println("запись удалена" + "\n");
+    }
 
+    @Override
+    public void noRecods() {
+        System.out.println("Записей нет");
+    }
 
-   
-
-
-
-  
-
-    
-  
 }

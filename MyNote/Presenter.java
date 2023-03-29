@@ -1,8 +1,5 @@
 package MyNote;
-
-import java.util.List;
-
-
+import MyNote.Model.Model;
 import MyNote.UI.View;
 
 
@@ -16,13 +13,15 @@ public class Presenter {
         this.view = view;
     }
 
+ 
+
     public void addRecord(String volue){
         model.addRecord(volue);
         view.showRecordAdded();
        
     }
 
-    public List<Record> getAll(){
+    public Notebook getAll(){
         return model.getRecords();
     }
     

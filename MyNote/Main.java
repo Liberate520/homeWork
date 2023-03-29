@@ -1,15 +1,17 @@
 package MyNote;
 
+import javax.swing.text.View;
+
+import MyNote.Model.Model;
 import MyNote.UI.ConsoleView;
-import MyNote.UI.Menu;
+
 
 public class Main {
     public static void main(String[] args) {
-            String note = "notes.txt";
-            Model model = new Model(note);
-            ConsoleView consoleView = new ConsoleView();
-            Presenter presenter = new Presenter(model, consoleView);
-            Menu console = new Menu(presenter,consoleView);
-            console.start();
-    }
+        Model model = new Model("notes.txt");
+        ConsoleView consoleView = new ConsoleView();
+        Presenter presenter = new Presenter(model, consoleView);
+        Menu menu = new Menu(presenter,consoleView);
+        menu.run();
+}
 }
