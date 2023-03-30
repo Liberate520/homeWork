@@ -1,6 +1,8 @@
 package oop_1;
 
-public class Connection {
+import java.io.Serializable;
+
+public class Connection implements Serializable {
     private Person p1;
     private Status st;
     private Person p2;
@@ -35,9 +37,10 @@ public class Connection {
         this.p2 = p2;
     }
 
-
-    public void printInfo() {
-        System.out.printf("%s, является %s %s", p1.printInfoPerson(), st, p2.getFull_name());
+    @Override
+    public String toString() {
+        return p1.printInfoPerson() + " is the " + st + " " + p2.getFull_name();
     }
+
 
 }

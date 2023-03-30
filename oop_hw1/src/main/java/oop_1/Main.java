@@ -1,151 +1,109 @@
 /*
-Реализовать, с учетом ооп подхода, приложение.
+ДЗ_1. Реализовать, с учетом ооп подхода, приложение.
 Для проведения исследований с генеалогическим древом.
 Идея: описать некоторое количество компонент, например:
 модель человека и дерева
 Под “проведением исследования” можно понимать например
 получение всех детей выбранного человека.
+ДЗ_2, В проекте с гениалогическим древом подумайте и используйте интерфейсы.
+Дополнить проект методами записи в файл и чтения из файла. Для этого создать
+отдельный класс и реализовать в нем нужные методы. Для данного класса сделайте
+интерфейс, который и используйте в своей программе. НАПРИМЕР в классе дерева
+в качестве аргумента метода save передавайте не конкретный класс, а объект
+интерфейса, с помощью которого и будет происходить запись.
 */
-package oop_1;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+package oop_1;
 
 public class Main {
     public static void main(String[] args) {
-        boolean flag = false;
-        ArrayList<Connection> connect = new ArrayList<>();
-        ArrayList<Person> person = new ArrayList<>();
+
+        // десериализация файлов
+        SaveLoad data = new SaveLoad();
+        System.out.println(data.load("connect.data"));
+        System.out.println(data.load("person.data"));
+
+        Person p = new Person();
+        GeoTree gt = new GeoTree();
 
         Person iIvanova = new Person("Ирина Иванова", "1945", "Ж");
-        person.add(iIvanova);
+        p.addPerson(iIvanova);
         Person iIvanov = new Person("Иван Иванов", "1940", "M");
-        person.add(iIvanov);
+        p.addPerson(iIvanov);
         Person aPetrova = new Person("Анфиса Петрова", "1944", "Ж");
-        person.add(aPetrova);
-        Person sPetrov = new Person("Сергей Пертров", "1943", "M");
-        person.add(sPetrov);
+        p.addPerson(aPetrova);
+        Person sPetrov = new Person("Сергей Петров", "1943", "M");
+        p.addPerson(sPetrov);
         Person oPetrova = new Person("Оксана Петрова", "1973", "Ж");
-        person.add(oPetrova);
+        p.addPerson(oPetrova);
         Person nPetrov = new Person("Николай Петров", "1972", "M");
-        person.add(nPetrov);
+        p.addPerson(nPetrov);
         Person yPetrova = new Person("Юлия Петрова", "1983", "Ж");
-        person.add(yPetrova);
+        p.addPerson(yPetrova);
         Person vPupkin = new Person("Вася Пупкин", "1977", "M");
-        person.add(vPupkin);
+        p.addPerson(vPupkin);
         Person iPupkina = new Person("Ирина Пупкина", "2003", "Ж");
-        person.add(iPupkina);
+        p.addPerson(iPupkina);
         Person niPetrov = new Person("Никита Петров", "1998", "M");
-        person.add(niPetrov);
+        p.addPerson(niPetrov);
         Person lPetrova = new Person("Людмила Петрова", "2002", "Ж");
-        person.add(lPetrova);
+        p.addPerson(lPetrova);
         Person gPetrov = new Person("Георгий Петров", "2008", "M");
-        person.add(gPetrov);
+        p.addPerson(gPetrov);
 
-        connect.add(new Connection(iIvanova, Status.женой, iIvanov));
-        connect.add(new Connection(iIvanova, Status.родителем, oPetrova));
-        connect.add(new Connection(iIvanova, Status.бабушкой, niPetrov));
-        connect.add(new Connection(iIvanova, Status.бабушкой, lPetrova));
-        connect.add(new Connection(iIvanova, Status.бабушкой, gPetrov));
-        connect.add(new Connection(iIvanov, Status.мужем, iIvanova));
-        connect.add(new Connection(iIvanov, Status.родителем, oPetrova));
-        connect.add(new Connection(iIvanov, Status.дедушкой, niPetrov));
-        connect.add(new Connection(iIvanov, Status.дедушкой, lPetrova));
-        connect.add(new Connection(iIvanov, Status.дедушкой, gPetrov));
-        connect.add(new Connection(aPetrova, Status.женой, sPetrov));
-        connect.add(new Connection(aPetrova, Status.родителем, nPetrov));
-        connect.add(new Connection(aPetrova, Status.родителем, yPetrova));
-        connect.add(new Connection(aPetrova, Status.бабушкой, iPupkina));
-        connect.add(new Connection(aPetrova, Status.бабушкой, niPetrov));
-        connect.add(new Connection(aPetrova, Status.бабушкой, lPetrova));
-        connect.add(new Connection(aPetrova, Status.бабушкой, gPetrov));
-        connect.add(new Connection(sPetrov, Status.мужем, aPetrova));
-        connect.add(new Connection(sPetrov, Status.родителем, nPetrov));
-        connect.add(new Connection(sPetrov, Status.родителем, yPetrova));
-        connect.add(new Connection(sPetrov, Status.дедушкой, iPupkina));
-        connect.add(new Connection(sPetrov, Status.дедушкой, niPetrov));
-        connect.add(new Connection(sPetrov, Status.дедушкой, lPetrova));
-        connect.add(new Connection(sPetrov, Status.дедушкой, gPetrov));
-        connect.add(new Connection(oPetrova, Status.ребенком, iIvanova));
-        connect.add(new Connection(oPetrova, Status.ребенком, iIvanov));
-        connect.add(new Connection(oPetrova, Status.женой, nPetrov));
-        connect.add(new Connection(oPetrova, Status.родителем, niPetrov));
-        connect.add(new Connection(oPetrova, Status.родителем, lPetrova));
-        connect.add(new Connection(oPetrova, Status.родителем, gPetrov));
-        connect.add(new Connection(nPetrov, Status.ребенком, aPetrova));
-        connect.add(new Connection(nPetrov, Status.ребенком, sPetrov));
-        connect.add(new Connection(nPetrov, Status.мужем, oPetrova));
-        connect.add(new Connection(nPetrov, Status.братом, yPetrova));
-        connect.add(new Connection(nPetrov, Status.родителем, niPetrov));
-        connect.add(new Connection(nPetrov, Status.родителем, lPetrova));
-        connect.add(new Connection(nPetrov, Status.родителем, gPetrov));
-        connect.add(new Connection(yPetrova, Status.ребенком, aPetrova));
-        connect.add(new Connection(yPetrova, Status.ребенком, sPetrov));
-        connect.add(new Connection(yPetrova, Status.женой, vPupkin));
-        connect.add(new Connection(yPetrova, Status.сестрой, nPetrov));
-        connect.add(new Connection(yPetrova, Status.родителем, iPupkina));
-        connect.add(new Connection(vPupkin, Status.мужем, yPetrova));
-        connect.add(new Connection(vPupkin, Status.родителем, iPupkina));
-        connect.add(new Connection(iPupkina, Status.ребенком, yPetrova));
-        connect.add(new Connection(iPupkina, Status.ребенком, vPupkin));
-        connect.add(new Connection(iPupkina, Status.внуком, aPetrova));
-        connect.add(new Connection(iPupkina, Status.внуком, sPetrov));
-        connect.add(new Connection(niPetrov, Status.ребенком, oPetrova));
-        connect.add(new Connection(niPetrov, Status.ребенком, nPetrov));
-        connect.add(new Connection(niPetrov, Status.братом, lPetrova));
-        connect.add(new Connection(niPetrov, Status.братом, gPetrov));
-        connect.add(new Connection(niPetrov, Status.внуком, iIvanova));
-        connect.add(new Connection(niPetrov, Status.внуком, iIvanov));
-        connect.add(new Connection(niPetrov, Status.внуком, aPetrova));
-        connect.add(new Connection(niPetrov, Status.внуком, sPetrov));
-        connect.add(new Connection(lPetrova, Status.ребенком, oPetrova));
-        connect.add(new Connection(lPetrova, Status.ребенком, nPetrov));
-        connect.add(new Connection(lPetrova, Status.сестрой, niPetrov));
-        connect.add(new Connection(lPetrova, Status.сестрой, gPetrov));
-        connect.add(new Connection(lPetrova, Status.внуком, iIvanova));
-        connect.add(new Connection(lPetrova, Status.внуком, iIvanov));
-        connect.add(new Connection(lPetrova, Status.внуком, aPetrova));
-        connect.add(new Connection(lPetrova, Status.внуком, sPetrov));
-        connect.add(new Connection(gPetrov, Status.ребенком, oPetrova));
-        connect.add(new Connection(gPetrov, Status.ребенком, nPetrov));
-        connect.add(new Connection(gPetrov, Status.братом, lPetrova));
-        connect.add(new Connection(gPetrov, Status.братом, niPetrov));
-        connect.add(new Connection(gPetrov, Status.внуком, iIvanova));
-        connect.add(new Connection(gPetrov, Status.внуком, iIvanov));
-        connect.add(new Connection(gPetrov, Status.внуком, aPetrova));
-        connect.add(new Connection(gPetrov, Status.внуком, sPetrov));
+        gt.addParentChildren(iIvanova, oPetrova);
+        gt.addParentChildren(iIvanov, oPetrova);
+        gt.addParentChildren(aPetrova, nPetrov);
+        gt.addParentChildren(aPetrova, yPetrova);
+        gt.addParentChildren(sPetrov, nPetrov);
+        gt.addParentChildren(sPetrov, yPetrova);
+        gt.addParentChildren(oPetrova, niPetrov);
+        gt.addParentChildren(oPetrova, lPetrova);
+        gt.addParentChildren(oPetrova, gPetrov);
+        gt.addParentChildren(nPetrov, niPetrov);
+        gt.addParentChildren(nPetrov, lPetrova);
+        gt.addParentChildren(nPetrov, gPetrov);
+        gt.addParentChildren(vPupkin, iPupkina);
+        gt.addParentChildren(yPetrova, iPupkina);
+
+        gt.addGrandparentGrandchildren(iIvanova, niPetrov);
+        gt.addGrandparentGrandchildren(iIvanova, lPetrova);
+        gt.addGrandparentGrandchildren(iIvanova, gPetrov);
+        gt.addGrandparentGrandchildren(iIvanov, niPetrov);
+        gt.addGrandparentGrandchildren(iIvanov, lPetrova);
+        gt.addGrandparentGrandchildren(iIvanov, gPetrov);
+        gt.addGrandparentGrandchildren(aPetrova, iPupkina);
+        gt.addGrandparentGrandchildren(aPetrova, niPetrov);
+        gt.addGrandparentGrandchildren(aPetrova, lPetrova);
+        gt.addGrandparentGrandchildren(aPetrova, gPetrov);
+        gt.addGrandparentGrandchildren(sPetrov, iPupkina);
+        gt.addGrandparentGrandchildren(sPetrov, niPetrov);
+        gt.addGrandparentGrandchildren(sPetrov, lPetrova);
+        gt.addGrandparentGrandchildren(sPetrov, gPetrov);
+
+        gt.addHusbandWife(iIvanov, iIvanova);
+        gt.addHusbandWife(sPetrov, aPetrova);
+        gt.addHusbandWife(nPetrov, oPetrova);
+        gt.addHusbandWife(vPupkin, yPetrova);
+
+        gt.addBrotherSister(nPetrov, yPetrova);
+        gt.addBrotherSister(niPetrov, lPetrova);
+        gt.addBrotherBrother(niPetrov, gPetrov);
+        gt.addBrotherSister(gPetrov, lPetrova);
 
         System.out.println("Список имен, внесенных в семейное дерево: ");
-        for (Person p : person) {
-            System.out.println(p.getFull_name());
+        for (Person p1 : p.getPerson()) {
+            System.out.println(p1);
         }
-        String userInput = userInputStr("Для получения полной информации о человеке " +
+
+        // вызов функции пользовательского ввода имени
+        String userInput = p.userInputStr("Для получения полной информации о человеке " +
                 "и его \nродственных связях введите имя и фамилию через пробел: ");
-        for (Connection t : connect) {
-            if (t.getP1().getFull_name().equalsIgnoreCase(userInput)) {
-                t.printInfo();
-                System.out.println();
-                flag = true;
-            }
-        }
-        if (!flag) {
-            System.out.println("Человек не ннайден!");
-        }
-    }
+        // вызов функции поиска по деоеву
+        gt.searchForConnections(userInput);
 
-    public static String userInputStr(String msg) {
-        Scanner sc = new Scanner(System.in);
-        String inputStr;
-        while (true) {
-            System.out.println(msg);
-            try {
-                inputStr = sc.nextLine();
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Неверный ввод!");
-            }
-        }
-        return inputStr;
+        // сериализация файлов
+        data.save("connect.data", gt.getConnect());
+        data.save("person.data",p.getPerson());
     }
-
 }
