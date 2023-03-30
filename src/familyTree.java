@@ -1,25 +1,21 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree {
     private List<Human> familyTree;
 
-    public FamilyTree(ArrayList<Human> familyTree) {
-        this.familyTree = familyTree;
+    public FamilyTree() {
+        this.familyTree = new ArrayList<Human>();
     }
 
-    public Human getHumanByName(String name) {
-        if (this.familyTree.isEmpty()) {
-            return null;
-        } else {
-            for (Human human : this.familyTree) {
-                if (human.getFullName().equals(name)) {
-                    return human;
-                }
-            }
+    public void addHuman(Human human) {
+        this.familyTree.add(human);
+        if (human.getMother() != null) {
+            human.getMother().addChild(human);
         }
-        return null;
+        if (human.getFather() != null) {
+            human.getFather().addChild(human);
+        }
     }
 
     @Override
@@ -31,34 +27,13 @@ public class FamilyTree {
         return stb.toString();
     }
 
-    public void checkAndAddChildren() {
-        if (!this.familyTree.isEmpty()) {
-            for (Human humanTemp : familyTree) {
-                if (humanTemp.getMother() != null) {
-                    Human mother = getHumanByName(humanTemp.getMother().getFullName());
-                    mother.getChildren().add(humanTemp);
-                }
-                if (humanTemp.getFather() != null) {
-                    Human father = getHumanByName(humanTemp.getFather().getFullName());
-                    father.getChildren().add(humanTemp);
-                }
+    public void printChildren() {
+        for (Human humanTemp : familyTree) {
+            if (humanTemp.getChildren().isEmpty()) {
+                System.out.printf("%s (%d) не имеет детей!\n ", humanTemp.getFullName(), humanTemp.getBirthYear());
+            } else {
+                System.out.printf("%s (%d) имеет следующих детей:\n %s\n", humanTemp.getFullName(), humanTemp.getBirthYear(), humanTemp.getChildren());
             }
         }
-    }
-
-    Iterator<Human> iterator = new Iterator<>() {
-        @Override
-        public boolean hasNext() {
-            return false;
-        }
-
-        @Override
-        public Human next() {
-            return null;
-        }
-    };
-
-    public Iterator<Human> iterator() {
-        return familyTree.listIterator();
     }
 }

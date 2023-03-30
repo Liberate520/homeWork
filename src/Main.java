@@ -14,20 +14,12 @@ public class Main {
         Human h_7 = new Human("Петров Алексей Андреевич", Gender.male, h_5, h_3, 2015);
         ArrayList<Human> humans = new ArrayList<>(Arrays.asList(h_1, h_2, h_3, h_4, h_5, h_6, h_7));
 
-        FamilyTree familyTree = new FamilyTree(humans);
-        familyTree.checkAndAddChildren();
-        System.out.println(familyTree);
-
-        Iterator<Human> iterator = familyTree.iterator();
-        while (iterator.hasNext()) {
-            Human human = iterator.next();
-            if (human.getChildren().isEmpty()) {
-                System.out.printf("%s (%d) не имеет детей!\n ", human.getFullName(), human.getBirthYear());
-            } else {
-                System.out.printf("%s (%d) имеет детей:\n %s\n ", human.getFullName(), human.getBirthYear(),
-                    human.getChildren());
-            }
+        FamilyTree familyTree = new FamilyTree();
+        for (Human human : humans) {
+            familyTree.addHuman(human);
         }
-        System.out.println(familyTree.getHumanByName("Иванов Иван Иванович"));
+
+        System.out.println(familyTree);
+        familyTree.printChildren();
     }
 }
