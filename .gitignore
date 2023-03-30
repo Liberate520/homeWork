@@ -24,7 +24,7 @@
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 .gitignore
-Learn_OOP_HomeWork.iml
+# Learn_OOP_HomeWork.iml
 
 # Gradle
 .idea/**/gradle.xml
