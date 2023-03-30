@@ -3,7 +3,7 @@ import java.util.Objects;
 public class Person {
     private Integer id;
     private String fullName;
-    private Integer birthYear; // (TODO) Заменить на Date
+    private Integer birthYear;
     
     public Person(Integer id, String fullName, Integer birthYear) {
         this.id = id;

@@ -7,7 +7,6 @@ public class Relation extends Person {
     private ArrayList<Person> kidsList = new ArrayList<>();
 
     public Relation(Integer id, String fullName, Integer birthYear, ArrayList<Person> marriageList,
-            ArrayList<Person> parents,
             ArrayList<Person> kids) {
         super(id, fullName, birthYear);
         this.marriageList = marriageList;
@@ -42,16 +41,6 @@ public class Relation extends Person {
             marriageList.add(newMarriage);
         return;
     }
-
-    // public void setParentsIdList(ArrayList<Person> parentsIdList) {
-    // this.parentsList = parentsIdList;
-    // }
-
-    // public void addParentIdToList(Person newParent) {
-    // if (!parentsList.contains(newParent))
-    // parentsList.add(newParent);
-    // return;
-    // }
 
     public ArrayList<Person> getKidsList() {
         return kidsList;
@@ -117,9 +106,20 @@ public class Relation extends Person {
 
     @Override
     public String toString() {
-        return "\n" + super.toString()
+        return super.toString()
                 + "\nВ браке с: " + listMarriage(marriageList)
                 + "\nДети: " + listKids(kidsList);
+    }
+
+    public ArrayList<Person> getMarriageList() {
+        return this.marriageList;
+    }
+
+    public void setMarriageList(ArrayList<Person> marriageList) {
+        this.marriageList = marriageList;
+    }
+    public void setKidsList(ArrayList<Person> kidsList) {
+        this.kidsList = kidsList;
     }
 
 }

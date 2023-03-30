@@ -1,21 +1,80 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 
-// Реализовать, с учетом ооп подхода, приложение.
-// Для проведения исследований с генеалогическим древом.
+// Реализовать, с учетом ооп подхода, приложение для проведения исследований с генеалогическим древом.
 // Идея: описать некоторое количество компонент, например: модель человека и дерева
 // Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
 
 public class Main {
     public static void main(String[] args) {
-
+        // Личные данные (В данном примере - Имя, Год рождения.)
         ArrayList<Person> romanovsMembers = romanovPersons();
-        // romanovRelations(romanovsMembers);
+        // Добавление родственных связей (В данном примере - супруги и дети)
         ArrayList<Relation> romRelations = romanovRelations(romanovsMembers);
-        
+
+        // Вывод полного списка:
+        printAllData(romRelations);
+
+        String exampleName = "Пётр I Алексеевич";
         // Найти родителей по полному имени:
-        System.out.println(findParents(romRelations, "Пётр I Алексеевич"));
+        System.out.println("\nПоиск родителей по полному имени (Пример)." +
+                "\nПоиск по имени: \"Пётр I Алексеевич\"");
+        printResults(findParents(romRelations, exampleName));
+
+        // Найти всех братьев и сестер:
+        System.out.println("\nПоиск всех братьев и сестер по полному имени (Пример)." +
+                "\nПоиск по имени: \"Пётр I Алексеевич\"");
+        printResults(findSiblings(romRelations, exampleName));
+
+    }
+
+    public static void printAllData(ArrayList<Relation> inputRelations) {
+        for (Relation relation : inputRelations) {
+            System.out.println(relation + "\n");
+        }
+    }
+
+    public static void printResults(ArrayList<String> results) {
+        if (results.isEmpty()) {
+            System.out.println("Совпадений не найдено.");
+            return;
+        }
+        String suffix = "";
+        for (int i = 0; i < results.size(); i++) {
+            System.out.print(suffix);
+            suffix = ", ";
+            System.out.print(results.get(i));
+        }
+        System.out.println();
+    }
+
+    public static ArrayList<String> findSiblings(ArrayList<Relation> inputRelations, String personName) {
+        ArrayList<String> siblingsList = new ArrayList<>();
+        for (Relation relation : inputRelations) {
+            for (Person kid : relation.getKidsList()) {
+                if (kid.getFullName().equals(personName)) {
+                    for (Person siblingPerson : relation.getKidsList()) {
+                        if (!(siblingsList.contains(siblingPerson.getFullName())
+                                || siblingPerson.getFullName().equals(personName))) {
+                            siblingsList.add(siblingPerson.getFullName());
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return siblingsList;
+    }
+
+    public static ArrayList<String> findParents(ArrayList<Relation> inputRelations, String kidName) {
+        ArrayList<String> parentsList = new ArrayList<>();
+        for (Relation relation : inputRelations) {
+            for (Person kid : relation.getKidsList()) {
+                if (kid.getFullName().equals(kidName)) {
+                    parentsList.add(relation.getFullName());
+                }
+            }
+        }
+        return parentsList;
     }
 
     public static ArrayList<Person> romanovPersons() {
@@ -70,15 +129,4 @@ public class Main {
         return romRelation;
     }
 
-    public static ArrayList<String> findParents(ArrayList<Relation> inputRelations, String kidName){
-        ArrayList<String> parentsList = new ArrayList<>();
-        for (Relation relation : inputRelations) {
-            for (Person kid : relation.getKidsList()) {
-                if (kid.getFullName().equals(kidName)) {
-                    parentsList.add(relation.getFullName());
-                }
-            }
-        }
-        return parentsList;
-    }
 }
