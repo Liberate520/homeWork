@@ -7,8 +7,6 @@ import java.lang.StringBuilder;
 
 public class Tree {
     private List<Person> family;
-    private Person father;//почему подчеркнуто, якобы не используются?
-    private Person mother;//если закоментить, то вылезает ошибка и не работает перегрузка метода addPerson без параметров
     private Person addedPerson;
 
 
@@ -21,7 +19,7 @@ public class Tree {
     }
 
     public void addPerson (Person father, Person mother){////////////////метода добавления нового человека в дерево///
-        Scanner scan = new Scanner(System.in, "Cp866");  
+        Scanner scan = new Scanner(System.in, "Cp866");//если закрывать сканер, то закрывается поток, и при повторном вызове метода он снова не открывается. как быть?  
         System.out.println("***************************************************************");
         System.out.println("Добавляем нового человека в дерево");
         Gender gender = null;
@@ -74,7 +72,7 @@ public class Tree {
             scan.nextLine();
             addedPerson = new Person(name, secondName, surname, father, mother, gender, yob, yod);
         }
-        // scan.close();//если закрывать сканер, то закрывается поток, и при повторном вызове метода он снова не открывается. как быть?!!!
+        // scan.close();
         family.add(addedPerson);
         if(father != null && mother != null){//если родители есть, добавляем им информацию о ребенке
             father.addChildren(addedPerson);

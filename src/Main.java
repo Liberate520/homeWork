@@ -60,7 +60,7 @@ public class Main {
             System.out.print("Доступные команды: \n 1 Добавить человека \n 2 Найти человека \n 3 Вывести список всех людей \n q (выход) \n Введите команду: ");
             cmd = scan.nextLine();
         }
-        
+        scan.close();
         // family1.addPerson();
         // family1.addPerson();
         // family1.addPerson(family1.getFamily().get(0), family1.getFamily().get(1));//добав человека с родителями  1 и 2 из списка
