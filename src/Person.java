@@ -3,11 +3,8 @@ import java.util.Objects;
 public class Person {
     private Integer id;
     private String fullName;
-    private Integer birthYear;
+    private Integer birthYear; // (TODO) Заменить на Date
     
-    // (TODO) Заменить на Date
-    // private Date deathDate;
-
     public Person(Integer id, String fullName, Integer birthYear) {
         this.id = id;
         this.fullName = fullName;
@@ -43,7 +40,7 @@ public class Person {
         this.birthYear = birthDate;
     }
 
-
+    
 
     @Override
     public boolean equals(Object o) {

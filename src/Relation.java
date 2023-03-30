@@ -2,25 +2,68 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Relation extends Person {
-    private Integer marriageId;
-    private ArrayList<Integer> parentsIdList = new ArrayList<>();
-    private ArrayList<Integer> kidsIdList = new ArrayList<>();
+    private ArrayList<Person> marriageList = new ArrayList<>();
+    // private ArrayList<Person> parentsList = new ArrayList<>();
+    private ArrayList<Person> kidsList = new ArrayList<>();
 
-    public Relation(Integer id, String fullName, Integer birthYear, Integer marriageId, ArrayList<Integer> parents,
-            ArrayList<Integer> kids) {
+    public Relation(Integer id, String fullName, Integer birthYear, ArrayList<Person> marriageList,
+            ArrayList<Person> parents,
+            ArrayList<Person> kids) {
         super(id, fullName, birthYear);
-        this.marriageId = marriageId;
-        this.parentsIdList = parents;
-        this.kidsIdList = kids;
+        this.marriageList = marriageList;
+        // this.parentsList = parents;
+        this.kidsList = kids;
     }
 
-    public String listKids(ArrayList<Integer> kidsIdList) {
+    public Relation(Integer id, String fullName, Integer birthYear) {
+        super(id, fullName, birthYear);
+    }
+
+    public Relation(Person person) {
+        super(person.getId(), person.getFullName(), person.getBirthYear());
+    }
+
+    public void setKidsIdList(ArrayList<Person> kidsIdList) {
+        this.kidsList = kidsIdList;
+    }
+
+    public void addKid(Person newKid) {
+        if (!kidsList.contains(newKid))
+            kidsList.add(newKid);
+        return;
+    }
+
+    public void setMarriageIdList(ArrayList<Person> marriageIdList) {
+        this.marriageList = marriageIdList;
+    }
+
+    public void addMarriage(Person newMarriage) {
+        if (!marriageList.contains(newMarriage))
+            marriageList.add(newMarriage);
+        return;
+    }
+
+    // public void setParentsIdList(ArrayList<Person> parentsIdList) {
+    // this.parentsList = parentsIdList;
+    // }
+
+    // public void addParentIdToList(Person newParent) {
+    // if (!parentsList.contains(newParent))
+    // parentsList.add(newParent);
+    // return;
+    // }
+
+    public ArrayList<Person> getKidsList() {
+        return kidsList;
+    }
+
+    public String listKids(ArrayList<Person> kidsIdList) {
         if (kidsIdList.isEmpty()) {
             return "<нет>";
         }
         StringBuilder kidsList = new StringBuilder();
         String suffix = "";
-        for (Integer kidId : kidsIdList) {
+        for (Person kidId : kidsIdList) {
             kidsList.append(suffix);
             suffix = ", ";
             kidsList.append(kidId.toString());
@@ -28,18 +71,32 @@ public class Relation extends Person {
         return kidsList.toString();
     }
 
-    public String listParents(ArrayList<Integer> parentsIdList) {
+    public String listParents(ArrayList<Person> parentsIdList) {
         if (parentsIdList.isEmpty()) {
             return "<нет>";
         }
         StringBuilder parentsList = new StringBuilder();
         String suffix = "";
-        for (Integer parentId : parentsIdList) {
+        for (Person parentId : parentsIdList) {
             parentsList.append(suffix);
             suffix = ", ";
             parentsList.append(parentId.toString());
         }
         return parentsList.toString();
+    }
+
+    public String listMarriage(ArrayList<Person> marriageList) {
+        if (marriageList.isEmpty()) {
+            return "<нет>";
+        }
+        StringBuilder marriageStringBuilder = new StringBuilder();
+        String suffix = "";
+        for (Person marriage : marriageList) {
+            marriageStringBuilder.append(suffix);
+            suffix = ", ";
+            marriageStringBuilder.append(marriage.toString());
+        }
+        return marriageStringBuilder.toString();
     }
 
     @Override
@@ -55,13 +112,14 @@ public class Relation extends Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(marriageId, parentsIdList, kidsIdList);
+        return Objects.hash(marriageList, kidsList);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nРодители: " + listParents(parentsIdList) + "\nДети: " + listKids(kidsIdList);
-        // + "\nВ браке с: " + (marriageId == null ? "<Нет>" : marriageId)
+        return "\n" + super.toString()
+                + "\nВ браке с: " + listMarriage(marriageList)
+                + "\nДети: " + listKids(kidsList);
     }
 
 }
