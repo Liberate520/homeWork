@@ -1,9 +1,10 @@
 package tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> peopleList;
 
     public FamilyTree() {
@@ -60,6 +61,7 @@ public class FamilyTree {
 
     /**
      * функция getRelatives ищет родственные связи для
+     * указанного персонажа
      * 
      * @param Human - получает объект персонажа
      * @return - возвращает список связей

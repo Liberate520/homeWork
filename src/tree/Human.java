@@ -1,18 +1,19 @@
 package tree;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String firstName;
     private String lastName;
     private Gender gender;
-    private Date dateBirth;
+    private LocalDate dateBirth;
     private List<Human> parents;
     private List<Human> children;
 
-    public Human(String firstName, String lastName, Gender gender, Date dateBirth) {
+    public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
