@@ -6,17 +6,18 @@ import java.util.List;
 public class Human {
     private String name;
     private int date;
-    Gender gender;
+    private Gender gender;
     private Human father;
     private Human mother;
     private List<Human> children = new ArrayList<>();
 
-    public Human(String name, Gender gender, int date, Human father, Human mother) {
+    public Human(String name, Gender gender, int date, Human father, Human mother, List<Human> children) {
         this.name = name;
         this.gender = gender;
         this.date = date;
         this.father = father;
         this.mother = mother;
+        this.children=children;
     }
 
     public String getName() {
@@ -68,16 +69,41 @@ public class Human {
         this.children = children;
     }
 
-    // public void addChildren(Human human) {
-    //     if (this.children == null) {
-    //         this.children = new ArrayList<>();
-    //     }
-    //     this.children.add(human);
-    // }
+    public void addChildren(Human human) {
+        if (this.children == null) {
+            this.children = new ArrayList<>();
+        }
+        this.children.add(human);
+    }
 
     @Override
     public String toString() {
-        return String.format("\nИмя : %s; пол : %s; дата смерти : %d отец : %s мать : %s дети : %s \n",
-                name, gender, date, father, mother, children);
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n").append("Имя: ").append(name).append(", ");
+        if(gender == Gender.Male)
+        {sb.append("пол: мужской").append(", ");}
+        else
+        {sb.append("пол: женский").append(", ");}
+        sb.append("дата смерти: ").append(date).append(", ");
+        if(father == null)
+        {sb.append("отец неизвестен").append(", ");}
+        else
+        {sb.append("отец: ").append(father.getName()).append(", ");}
+        if(mother == null)
+        {sb.append("");}
+        else
+        {sb.append("мать: ").append(mother.getName()).append(", ");}      
+        if (children == null)
+        {sb.append("");}
+        else
+        {
+            sb.append("дети: ");
+            for (int i =0; i < children.size(); i++)
+            {
+                sb.append(children.get(i).getName()).append(", ");
+            }
+        }
+        sb.append("\n");
+        return sb.toString();
     }
 }

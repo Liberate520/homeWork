@@ -1,5 +1,5 @@
 
 
 public enum Gender {
-    Муж, Жен
+    Male, Female
 }
