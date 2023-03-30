@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> people;
 
     public FamilyTree(List<Human> people) {
@@ -35,4 +36,4 @@ public class FamilyTree {
         str.append(this.people);
         return str.toString();
     }
-}
+}    

@@ -44,5 +44,9 @@ public class Main {
             System.out.println(humanf);
         }
         scan.close();
+
+        Outinput saveload = new Slfamailytree();
+        saveload.save(famailytree);
+        saveload.load(famailytree);
     }
 }
