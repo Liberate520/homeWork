@@ -2,15 +2,15 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class human {
+public class Human {
     private String fullName;
-    private gender gender;
-    private human father;
-    private human mother;
+    private Gender gender;
+    private Human father;
+    private Human mother;
     private int birthYear;
-    private List<human> children;
+    private List<Human> children;
 
-    public human(String fullName, gender gender, human father, human mother, int birthYear, ArrayList<human> children) {
+    public Human(String fullName, Gender gender, Human father, Human mother, int birthYear, ArrayList<Human> children) {
         this.fullName = fullName;
         this.gender = gender;
         this.father = father;
@@ -19,7 +19,7 @@ public class human {
         this.children = children;
     }
 
-    public human(String fullName, gender gender, human father, human mother, int birthYear) {
+    public Human(String fullName, Gender gender, Human father, Human mother, int birthYear) {
         this.fullName = fullName;
         this.gender = gender;
         this.father = father;
@@ -28,7 +28,7 @@ public class human {
         this.children = new ArrayList<>();
     }
 
-    public human(String fullName, gender gender, int birthYear, ArrayList<human> children) {
+    public Human(String fullName, Gender gender, int birthYear, ArrayList<Human> children) {
         this.fullName = fullName;
         this.gender = gender;
         this.father = null;
@@ -37,7 +37,7 @@ public class human {
         this.children = children;
     }
 
-    public human(String fullName, gender gender, int birthYear) {
+    public Human(String fullName, Gender gender, int birthYear) {
         this.fullName = fullName;
         this.gender = gender;
         this.father = null;
@@ -55,15 +55,15 @@ public class human {
         return fullName;
     }
 
-    public gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public human getFather() {
+    public Human getFather() {
         return father;
     }
 
-    public human getMother() {
+    public Human getMother() {
         return mother;
     }
 
@@ -71,11 +71,11 @@ public class human {
         return birthYear;
     }
 
-    public List<human> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
-    public void setFather(human father) {
+    public void setFather(Human father) {
         if (this.gender.equals(gender.male)) {
             this.father = father;
         } else {
@@ -83,7 +83,7 @@ public class human {
         }
     }
 
-    public void setMother(human mother) {
+    public void setMother(Human mother) {
         if (this.gender.equals(gender.female)) {
             this.father = mother;
         } else {
@@ -91,7 +91,7 @@ public class human {
         }
     }
 
-    public void setChildren(List<human> children) {
+    public void setChildren(List<Human> children) {
         this.children = children;
     }
 
