@@ -7,13 +7,26 @@ public class FamilyTree {
     public FamilyTree(List<Human> people) {
         this.people = people;
     }
-    
+
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public void addpeople(Human h) {
+    public void addpeople(Human h, Human mh, Human fh) {
+        if (mh != null)
+            mh.addchildren(h);
+        if (fh != null)
+            fh.addchildren(h);
         people.add(h);
+    }
+
+    public Human findHuman(String str, Human nl) {
+        for (Human item : people) {
+            if (str.toLowerCase().equals(item.getName().toLowerCase())) {
+                return item;
+            }
+        }
+        return nl;
     }
 
     @Override
