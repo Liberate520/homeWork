@@ -1,27 +1,19 @@
 package data;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+public class Note {
 
-import data.field.Field;
+    private String value;
 
-public abstract class Note {
-    private UUID id;
-    private String description;
-    private LocalDate creatingTime;
-    private List<Field> fields;
-
-    Note(String description) {
-        this.id = UUID.randomUUID();
-        this.description = description;
-        fields = new ArrayList<>();
-        creatingTime = LocalDate.now();
+    public Note(String description) {
+        this.value = description;
+    }
+    public String getDescription(){
+        return this.value;
     }
 
-    public void addField(Field field) {
-        fields.add(field);
-    }
+    @Override
+    public String toString() {
 
+        return this.value;
+    }
 }

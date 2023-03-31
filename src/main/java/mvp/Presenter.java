@@ -11,10 +11,25 @@ public class Presenter {
     }
 
     public String allNotes() {
-        return model.readData();
+        return model.blockNote();
+    }
+    public void writeAllNotes(){
+        model.writeData();
+    }
+    public void writeNote(String note) {
+        model.addNote(note);
+    }
+    public void removeNote(int noteID) {
+        model.removeNote(noteID);
+
+    }
+    public void replaceNote(int noteID, String newNote) {
+        model.replaceNote(noteID,newNote);
+
     }
 
-    public void writeNote(String note) {
-        model.writeData(note);
-    }
+
+//    public void addNote(String note){
+////        model.
+//    }
 }

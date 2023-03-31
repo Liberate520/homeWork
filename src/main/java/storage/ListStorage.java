@@ -1,7 +1,8 @@
 package storage;
-import java.util.ArrayList;
 
 import data.Note;
+
+import java.util.ArrayList;
 
 public class ListStorage implements Storage {
     private ArrayList<String> notes;
@@ -29,6 +30,11 @@ public class ListStorage implements Storage {
     public Note readNote() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'readNote'");
+    }
+
+    @Override
+    public void writeNote(String noteJson) {
+
     }
 
 }

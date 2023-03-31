@@ -8,4 +8,6 @@ public interface Storage {
     String read();
 
     Note readNote();
+
+    void writeNote(String noteJson);
 }

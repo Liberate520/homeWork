@@ -1,10 +1,10 @@
 package ui;
 
-import java.util.Scanner;
-
 import mvp.Presenter;
 import ui.menu.MainMenu;
 import ui.menu.Menu;
+
+import java.util.Scanner;
 
 public class ConsoleView implements UserInteraction {
     private Presenter presenter;
@@ -45,10 +45,30 @@ public class ConsoleView implements UserInteraction {
     public void showAllNotes() {
         System.out.println(presenter.allNotes());
     }
-
+    public void saveAllNotes() {
+        presenter.writeAllNotes();
+    }
     public void inputNote() {
-        System.out.println("Введите новую запись");
+        System.out.println("Введите новую запись:");
         presenter.writeNote(scan());
+    }
+    public void removeNote() {
+        System.out.println("Введите номер записи для удаления:");
+        String noteID = scan();
+        if(choiceChecker.isChoiceCorrect(noteID)){
+            presenter.removeNote(Integer.parseInt(noteID));
+        }
+
+    }
+    public void replaceNote() {
+        System.out.println("Введите номер записи для изменения:");
+        String noteID = scan();
+        if(choiceChecker.isChoiceCorrect(noteID)){
+            System.out.println("Введите новое содержание записи:");
+            String newNote = scan();
+            presenter.replaceNote(Integer.parseInt(noteID),newNote);
+        }
+
     }
 
     public void exit() {
