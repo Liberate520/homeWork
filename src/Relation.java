@@ -3,14 +3,12 @@ import java.util.Objects;
 
 public class Relation extends Person {
     private ArrayList<Person> marriageList = new ArrayList<>();
-    // private ArrayList<Person> parentsList = new ArrayList<>();
     private ArrayList<Person> kidsList = new ArrayList<>();
 
     public Relation(Integer id, String fullName, Integer birthYear, ArrayList<Person> marriageList,
             ArrayList<Person> kids) {
         super(id, fullName, birthYear);
         this.marriageList = marriageList;
-        // this.parentsList = parents;
         this.kidsList = kids;
     }
 

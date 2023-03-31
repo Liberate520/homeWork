@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 // Реализовать, с учетом ооп подхода, приложение для проведения исследований с генеалогическим древом.
 // Идея: описать некоторое количество компонент, например: модель человека и дерева
@@ -18,12 +19,12 @@ public class Main {
         // Найти родителей по полному имени:
         System.out.println("\nПоиск родителей по полному имени (Пример)." +
                 "\nПоиск по имени: \"Пётр I Алексеевич\"");
-        printResults(findParents(romRelations, exampleName));
+        printResultPersons(findParents(romRelations, exampleName));
 
         // Найти всех братьев и сестер:
         System.out.println("\nПоиск всех братьев и сестер по полному имени (Пример)." +
                 "\nПоиск по имени: \"Пётр I Алексеевич\"");
-        printResults(findSiblings(romRelations, exampleName));
+        printResultPersons(findSiblings(romRelations, exampleName));
 
     }
 
@@ -33,44 +34,42 @@ public class Main {
         }
     }
 
-    public static void printResults(ArrayList<String> results) {
-        if (results.isEmpty()) {
+    public static void printResultPersons(HashSet<Person> searchResults) {
+        if (searchResults.isEmpty()) {
             System.out.println("Совпадений не найдено.");
             return;
         }
         String suffix = "";
-        for (int i = 0; i < results.size(); i++) {
+        for (Person foundPerson: searchResults) {
             System.out.print(suffix);
             suffix = ", ";
-            System.out.print(results.get(i));
+            System.out.print(foundPerson);
         }
         System.out.println();
     }
 
-    public static ArrayList<String> findSiblings(ArrayList<Relation> inputRelations, String personName) {
-        ArrayList<String> siblingsList = new ArrayList<>();
+    public static HashSet<Person> findSiblings(ArrayList<Relation> inputRelations, String personName)  {
+        HashSet<Person> siblingOutputList = new HashSet<>();
         for (Relation relation : inputRelations) {
             for (Person kid : relation.getKidsList()) {
-                if (kid.getFullName().equals(personName)) {
-                    for (Person siblingPerson : relation.getKidsList()) {
-                        if (!(siblingsList.contains(siblingPerson.getFullName())
-                                || siblingPerson.getFullName().equals(personName))) {
-                            siblingsList.add(siblingPerson.getFullName());
-                        }
+                if (kid.getFullName().equals(personName)) { 
+                    for (Person posSiblingPerson : relation.getKidsList()) {
+                        if (!posSiblingPerson.getFullName().equals(personName)) 
+                            siblingOutputList.add(posSiblingPerson);
                     }
                     break;
                 }
             }
         }
-        return siblingsList;
+        return siblingOutputList;
     }
 
-    public static ArrayList<String> findParents(ArrayList<Relation> inputRelations, String kidName) {
-        ArrayList<String> parentsList = new ArrayList<>();
+    public static HashSet<Person> findParents(ArrayList<Relation> inputRelations, String kidName) {
+        HashSet<Person> parentsList = new HashSet<>();
         for (Relation relation : inputRelations) {
             for (Person kid : relation.getKidsList()) {
                 if (kid.getFullName().equals(kidName)) {
-                    parentsList.add(relation.getFullName());
+                    parentsList.add(kid);
                 }
             }
         }
@@ -97,6 +96,7 @@ public class Main {
         ArrayList<Relation> romRelation = new ArrayList<>();
         for (Person person : romPerson)
             romRelation.add(new Relation(person));
+        
         romRelation.get(0).addMarriage(romPerson.get(1));
         romRelation.get(0).addKid(romPerson.get(3));
 
