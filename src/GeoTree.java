@@ -36,11 +36,11 @@ public class GeoTree implements Serializable {
     public void appendGrand(Person person, Relation relation) {
         Person temp_1, temp_2 = null;
         for (Node item : tree) {
-            if (item.p2 == person && (item.re == Relation.Father || item.re == Relation.Mother)) {
-                temp_1 = item.p1;
+            if (item.getP2() == person && (item.getRe() == Relation.Father || item.getRe() == Relation.Mother)) {
+                temp_1 = item.getP1();
                 for (Node item2 : tree) {
-                    if (item2.p2 == temp_1 && item2.re == relation) {
-                        temp_2 = item.p1;
+                    if (item2.getP2() == temp_1 && item2.getRe() == relation) {
+                        temp_2 = item.getP1();
                         tree.add(new Node(temp_2, relation, person));
                     }
                 }
@@ -57,7 +57,7 @@ public class GeoTree implements Serializable {
         saveGeo.write(this);
     }
 
-    public GeoTree restore(read restoreGeo) throws IOException, ClassNotFoundException {
-        return restoreGeo.read(this);
+    public void restore(read restoreGeo) throws IOException, ClassNotFoundException {
+        restoreGeo.read();
     }
 }

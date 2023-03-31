@@ -33,6 +33,6 @@ public class Main {
         System.out.println(new Research(gt).searchAge());
         GeoTreeIO io = new GeoTreeIO();
         gt.save(io);
-        System.out.println(gt.restore(io));
+        gt.restore(io);
     }
 }
