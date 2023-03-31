@@ -55,7 +55,7 @@ public class ConsoleView implements UserInteraction {
     public void removeNote() {
         System.out.println("Введите номер записи для удаления:");
         String noteID = scan();
-        if(choiceChecker.isChoiceCorrect(noteID)){
+        if(choiceChecker.isNumber(noteID)){
             presenter.removeNote(Integer.parseInt(noteID));
         }
 
@@ -63,7 +63,7 @@ public class ConsoleView implements UserInteraction {
     public void replaceNote() {
         System.out.println("Введите номер записи для изменения:");
         String noteID = scan();
-        if(choiceChecker.isChoiceCorrect(noteID)){
+        if(choiceChecker.isNumber(noteID)){
             System.out.println("Введите новое содержание записи:");
             String newNote = scan();
             presenter.replaceNote(Integer.parseInt(noteID),newNote);
