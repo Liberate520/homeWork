@@ -1,9 +1,10 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> familyTree = new ArrayList<>();
 
     public void addFamily(Human human) {
