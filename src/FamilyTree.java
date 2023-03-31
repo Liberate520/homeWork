@@ -18,6 +18,7 @@ public class FamilyTree {
         for (Person person : this.people) {
             if (person == spouse1 || person == spouse2) {
                 person.addChildren(child);
+                if (child.getFather() != null || child.getMother() != null) {child.addParent(person);}
             }
         }
     }

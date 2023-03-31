@@ -131,9 +131,9 @@ public class Main {
         people.addChildrens(alexeyI, natalyaNaryshkina, feodoraAlexeevna);
 
         people.manageParents();
-//        people.printFamilyTree();
+        people.printFamilyTree();
 
-        System.out.println(alexeyI.getSpouse());
+//        System.out.println(alexeyI.getSpouse());
 //        System.out.println(alexeyAlexeevich.getFather());
     }
 }

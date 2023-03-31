@@ -8,8 +8,8 @@ public class Person {
     private ArrayList<Person> spouse;
     private int birthDate;
     private int dateOfDeath;
-    private String father;
-    private String mother;
+    private Person father;
+    private Person mother;
     private ArrayList<Person> childrens;
 
     public Person(String name, String sex, int birthDate, int dateOfDeath) {
@@ -55,8 +55,8 @@ public class Person {
     public void addParent(Person parent) {
         if(parent.sex != null) {
             if(parent.sex == "мужской") {
-                this.father = parent.name;
-            } else {this.mother = parent.name;}
+                this.father = parent;
+            } else {this.mother = parent;}
         }
     }
 
@@ -79,10 +79,10 @@ public class Person {
     public String getName() {
         return this.name;
     }
-    public String getFather() {
+    public Person getFather() {
         return this.father;
     }
-    public String getMother() {
+    public Person getMother() {
         return this.mother;
     }
     public int getBirthDate() {
@@ -112,8 +112,8 @@ public class Person {
         }
         if (this.birthDate != -1) {value.append("\nDate of birth: ").append(this.birthDate);}
         if (this.dateOfDeath != -1) {value.append("\nDate of death: ").append(this.dateOfDeath);}
-        if (this.father != null) {value.append("\nFather: ").append(this.father);}
-        if (this.mother != null) {value.append("\nMother: ").append(this.mother);}
+        if (this.father != null) {value.append("\nFather: ").append(this.father.getName());}
+        if (this.mother != null) {value.append("\nMother: ").append(this.mother.getName());}
         if (this.childrens != null) {
             int tmp = 1;
             for (Person person : this.childrens) {
