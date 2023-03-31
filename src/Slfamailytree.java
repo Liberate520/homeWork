@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Slfamailytree implements Outinput {
+public class Slfamailytree implements OutInput {
 
     @Override
     public void save(FamilyTree ft) throws FileNotFoundException, IOException {
@@ -15,11 +15,12 @@ public class Slfamailytree implements Outinput {
     }
 
     @Override
-    public void load(FamilyTree ft) throws ClassNotFoundException, IOException {
+    public Object load() throws ClassNotFoundException, IOException {
         ObjectInputStream ltree = new ObjectInputStream(new FileInputStream("data.dat"));
-        ft = (FamilyTree) ltree.readObject();
-        System.out.println(ft.toString());
+        Object ft = new Object();
+        ft = ltree.readObject();
         ltree.close();
+        return ft;
     }
-    
+   
 }

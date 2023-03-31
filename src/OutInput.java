@@ -1,8 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public interface Outinput {
+public interface OutInput {
     void save(FamilyTree ft) throws FileNotFoundException, IOException;
-    void load(FamilyTree ft) throws ClassNotFoundException, IOException;
+    Object load() throws ClassNotFoundException, IOException;
 }
 

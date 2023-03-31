@@ -45,8 +45,9 @@ public class Main {
         }
         scan.close();
 
-        Outinput saveload = new Slfamailytree();
+        OutInput saveload = new Slfamailytree();
         saveload.save(famailytree);
-        saveload.load(famailytree);
+        famailytree = (FamilyTree) saveload.load();
+        System.out.println(famailytree);
     }
 }
