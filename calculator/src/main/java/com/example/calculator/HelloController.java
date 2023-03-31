@@ -11,8 +11,9 @@ import javafx.scene.control.Button;
 public class HelloController {
     @FXML
     private Text output;
-    private long num1 = 0;
-    private long num2 = 0;
+    private float num1 = 0;
+
+
     private boolean start = true;
 
     private String operator = "";
@@ -24,8 +25,9 @@ public class HelloController {
     }
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected void onCClick() {
+        output.setText("0");
+        operator = "";
     }
 
     @FXML
@@ -52,7 +54,7 @@ public class HelloController {
         }
         else {
             if(operator.isEmpty()) return;
-            output.setText(String.valueOf(model.calculator(num1,Long.parseLong(output.getText()), operator)));
+             output.setText(String.valueOf(model.calculator(num1,Long.parseLong(output.getText()), operator)));
             operator = "";
             start = true;
         }
