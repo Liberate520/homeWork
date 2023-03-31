@@ -2,12 +2,13 @@ package mvp;
 
 import data.BlockNote;
 import data.formatter.Formatter;
+import data.formatter.JsonFormatter;
 import storage.FileStorage;
 import storage.Storage;
 
 public class Model {
     private Storage storage = new FileStorage();
-    private Formatter formatter = new Formatter();
+    private Formatter formatter = new JsonFormatter();
     private BlockNote blockNote;
     public Model() {
         String fileData = storage.read();
@@ -16,28 +17,11 @@ public class Model {
         }else {
             blockNote = formatter.blockNote(storage.read());
         }
-
     }
-
-//    public String readData() {
-//        return storage.read();
-//    }
-
-//    public Note readNote() {
-//        return storage.readNote();
-//    }
 
     public void writeData() {
-        storage.save(formatter.jsonBlockNote (blockNote));
+        storage.save(formatter.stringBlockNote (blockNote));
     }
-//    public void writeNote(Note note) {
-//        String jsonNote = new Formatter().json(note);
-//        storage.writeNote(jsonNote);
-//    }
-//    public void writeBlockNote(BlockNote blockNote) {
-//        String jsonNote = new Formatter().jsonBlockNote(blockNote);
-//        storage.writeNote(jsonNote);
-//    }
     public void addNote(String note){
         blockNote.addNote(note);
     }
