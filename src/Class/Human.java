@@ -1,16 +1,18 @@
+package Class;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
-    String name;
-    String patronymic;
-    String surname;
-    int dateBirth;
-    int dateDeath;
+public class Human implements Serializable{
+    private String name;
+    private String patronymic;
+    private String surname;
+    private int dateBirth;
+    private int dateDeath;
 
-    Human father;
-    Human mother;
-    List<Human> children = new ArrayList<>();
+    private Human father;
+    private Human mother;
+    private List<Human> children = new ArrayList<>();
 
     public Human() {
     }
@@ -59,7 +61,7 @@ public class Human {
         return sb.toString();
     }
 
-    public String GetDescendants() {
+    public String getDescendants() {
         StringBuilder sb = new StringBuilder();
         sb.append(toString() + "\nDescendants:\n");
         if (children.size() > 0) {
@@ -71,7 +73,7 @@ public class Human {
         return sb.toString();
     }
 
-    public String GetParents() {
+    public String getParents() {
         StringBuilder sb = new StringBuilder();
         sb.append(toString() + "\nParents:");
         sb.append("\nFather:");
@@ -86,5 +88,9 @@ public class Human {
         else
             sb.append("\nUnknown!\n");
         return sb.toString();
+    }
+
+    public void addChild(Human child){
+        children.add(child);
     }
 }
