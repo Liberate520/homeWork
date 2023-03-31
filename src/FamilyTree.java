@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    private List<Person> familytree;
+    private static List<Person> familyTree;
 
     public FamilyTree(List<Person> person){
-        this.familytree = person;
+        this.familyTree = person;
     }
 
     public FamilyTree(){
@@ -13,11 +13,19 @@ public class FamilyTree {
     }
 
     public void addPerson(Person person){
-        familytree.add(person);
+        familyTree.add(person);
+    }
+
+    public static void getFamilyTree(){
+        System.out.println(familyTree);
     }
 
     @Override
     public String toString() {
-        return familytree.toString();
+        return familyTree.toString();
+    }
+
+    public static FamilyTree FamilyTree() {
+        return null;
     }
 }
