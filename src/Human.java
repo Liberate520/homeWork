@@ -7,7 +7,7 @@ public class Human {
     String dateBirth;
     //DateTime dateDeath;
     String dateDeath;
-    private Sex sex;
+    private Gender gender;
     private int idMother;
     private int idFather;
 
@@ -17,38 +17,38 @@ public class Human {
      * @param lastName  < Фамилия
      * @param dateBirth < День рождения
      * @param dateDeath < День смерти
-     * @param sex       < Пол (мужской / женский)
+     * @param gender    < Пол (мужской / женский)
      * @param idMother  < id матери
      * @param idFather  < id отца
      ******************************************************************************************************************/
-    public Human(String firstName, String lastName, String dateBirth, String dateDeath, Sex sex, int idMother, int idFather) {
+    public Human(String firstName, String lastName, String dateBirth, String dateDeath, Gender gender, int idMother, int idFather) {
         this.id = count++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateBirth = dateBirth;
         this.dateDeath = dateDeath;
-        this.sex = sex;
+        this.gender = gender;
         this.idMother = idMother;
         this.idFather = idFather;
     }
 
-    public Human(String firstName, String lastName, String dateBirth, Sex sex, int idMother, int idFather) {
+    public Human(String firstName, String lastName, String dateBirth, Gender gender, int idMother, int idFather) {
         this.id = count++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateBirth = dateBirth;
         this.dateDeath = null;
-        this.sex = sex;
+        this.gender = gender;
         this.idMother = idMother;
         this.idFather = idFather;
     }
-    public Human(String firstName, String lastName, String dateBirth, Sex sex) {
+    public Human(String firstName, String lastName, String dateBirth, Gender gender) {
         this.id = count++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateBirth = dateBirth;
         this.dateDeath = null;
-        this.sex = sex;
+        this.gender = gender;
         this.idMother = 0;
         this.idFather = 0;
     }
@@ -73,8 +73,8 @@ public class Human {
         return dateDeath;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
     public int getIdMother() {
