@@ -1,4 +1,6 @@
+package Person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 /**
  * Person
  */
-public class Person {
+public class Person implements Serializable{
     private int id;
     private String name;
     private Gender gender;
@@ -98,7 +100,8 @@ public class Person {
         return childrens;
     }
 
-    public void addChildrens(Person person) {
+    public void addChild
+    (Person person) {
         if (this.childrens == null)
             this.childrens = new ArrayList<>();
         this.childrens.add(person);
