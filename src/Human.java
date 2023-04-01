@@ -56,6 +56,10 @@ public class Human {
         return this.dateBirth;
     }
 
+    public String getDateDeath() {
+        return dateDeath;
+    }
+
     public List<Human> getChildList() {
         System.out.println(getName() + " " + getSurname() + " дети: ");
         return childList;
@@ -78,12 +82,41 @@ public class Human {
 
     }
 
+    public int numChildren() {
+        return getChildList().size();
+    }
+
+    public String getMaidenName() {
+        return this.maidenName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Human getMother() {
+        return mother;
+    }
+
+    public Human getFather() {
+        return father;
+    }
+
+
     public void setName(String name) {
-        this.name = name;
+        if (name.isEmpty()) {
+            System.out.println("Поле не должно быть пустым");
+        } else {
+            this.name = name;
+        }
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        if (surname.isEmpty()) {
+            System.out.println("Поле не должно быть пустым");
+        } else {
+            this.surname = surname;
+        }
     }
 
     public void setFather(Human father) {
@@ -95,7 +128,17 @@ public class Human {
     }
 
     public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
+        if (dateBirth.isEmpty()) {
+            System.out.println("Поле не должно быть пустым");
+        } else {
+            this.dateBirth = dateBirth;
+        }
+    } public void setDateDeath(String dateDeath) {
+        if (dateDeath.isEmpty()) {
+            System.out.println("Поле не должно быть пустым");
+        } else {
+            this.dateDeath = dateDeath;
+        }
     }
 
     public void setChildList(List<Human> childList) {
@@ -110,8 +153,8 @@ public class Human {
     @Override
     public String toString() {
         return this.name +  " " + this.surname + " " +
-                "Пол: " + gender.name() + " " +
-                "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + father;
+                "Пол: " + getGender() + " " +
+                "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + getFather();
     }
 
 
