@@ -1,9 +1,19 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class FileHandlerRead implements SaveAs
 {
+    public static void Reader() throws IOException, ClassNotFoundException
+    {
+        FileInputStream fis = new FileInputStream("text.bin");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        FamilyTree familyTree1 = (FamilyTree) ois.readObject();
+        ois.close();
+        System.out.println("вывод 1: " + familyTree1);
+    }    
 
     public static void ReadTxt() throws IOException, ClassNotFoundException
     {
@@ -52,7 +62,7 @@ public class FileHandlerRead implements SaveAs
         {
             tablo11.tabloRead11();
             int number = ScanNumber.ScanOperationNumber();
-            while(number < 1 || number > 4)
+            while(number < 1 || number > 5)
             {
                 System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
                 tablo11.tabloRead11();
@@ -65,7 +75,7 @@ public class FileHandlerRead implements SaveAs
         {
             tablo2.tabloRead2();
             int number = ScanNumber.ScanOperationNumber();
-            while(number < 1 || number > 4)
+            while(number < 1 || number > 5)
             {
                 System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
                 tablo11.tabloRead11();
@@ -88,26 +98,31 @@ public class FileHandlerRead implements SaveAs
                     switch (number2)
                     {
                         case 1:
-                            ReadTxt();
-                            System.out.println(" file.txt формата был успешно считан: \n");
-                            // tablo11.tabloRead11();
+                            Reader();
+                            System.out.println("Загрузка данных в программу из бинарного файла успешно завершена!\n");
                             FileHandlerSave fhs1 = new FileHandlerSave();
                             return fhs1.SaveFormat(familyTree);
                         case 2:
-                            ReadDoc();
-                            System.out.println(" file.doc формата был успешно считан: \n");
+                            ReadTxt();
+                            System.out.println(" file.txt формата был успешно считан: \n");
                             // tablo11.tabloRead11();
                             FileHandlerSave fhs2 = new FileHandlerSave();
                             return fhs2.SaveFormat(familyTree);
-
                         case 3:
-                            ReadMD();
-                            System.out.println(" file.md формата был успешно считан: \n");
+                            ReadDoc();
+                            System.out.println(" file.doc формата был успешно считан: \n");
                             // tablo11.tabloRead11();
                             FileHandlerSave fhs3 = new FileHandlerSave();
                             return fhs3.SaveFormat(familyTree);
 
                         case 4:
+                            ReadMD();
+                            System.out.println(" file.md формата был успешно считан: \n");
+                            // tablo11.tabloRead11();
+                            FileHandlerSave fhs4 = new FileHandlerSave();
+                            return fhs4.SaveFormat(familyTree);
+
+                        case 5:
                             System.out.println("Вы вышли из программы.");
                             break;
           
@@ -116,14 +131,18 @@ public class FileHandlerRead implements SaveAs
                 
                 
                 case 2:
-                FileHandlerSave fhs4 = new FileHandlerSave();
-                // return SaveFormat(familyTree);
-                return fhs4.SaveFormat(familyTree);
+                FileHandlerSave fhs5 = new FileHandlerSave();
+                return fhs5.SaveFormat(familyTree);
 
-                case 3:
+                case 3: 
+                System.out.println("Вы вышли из программы!");
                 break;
 
                 case 4: 
+                System.out.println("Выввели число вне заданного диапазона! ");
+                return SaveFormat(familyTree);
+
+                case 5: 
                 System.out.println("Выввели число вне заданного диапазона! ");
                 return SaveFormat(familyTree);
             }    

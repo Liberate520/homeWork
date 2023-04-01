@@ -1,9 +1,19 @@
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class FileHandlerSave implements SaveAs
 {
+
+        public static void Writer(FamilyTree familyTree) throws IOException, ClassNotFoundException
+        {
+            FileOutputStream fos = new FileOutputStream("text.bin");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(familyTree);
+            fos.close();
+        }
     
         public static void SaveTxt(FamilyTree familyTree) throws IOException, ClassNotFoundException
         {
@@ -44,7 +54,7 @@ public class FileHandlerSave implements SaveAs
         {
             tablo1.tabloSave();
             int number = ScanNumber.ScanOperationNumber();
-            while(number < 1 || number > 5)
+            while(number < 1 || number > 6)
               {
                 System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
                 tablo1.tabloSave();
@@ -59,42 +69,39 @@ public class FileHandlerSave implements SaveAs
             int number = Start1(familyTree);
         switch (number)
           {
-          case 1:
-          SaveTxt(familyTree);
-          System.out.println("Поздравляю!\n" + "Файл формата .txt был успешно создан!\n");
-        //   Start1(familyTree);
-          SaveFormat(familyTree);
 
-          return 1;
+          case 1:
+          Writer(familyTree);
+          System.out.println("Поздравляю!\n" + "Бинарный файл txt.bin был успешно создан!\n");
+          SaveFormat(familyTree);
 
           case 2:
-          SaveDoc(familyTree);
-          System.out.println("Поздравляю!\n" + "Файл формата .doc был успешно создан!\n");
-        //   Start1(familyTree);
+          SaveTxt(familyTree);
+          System.out.println("Поздравляю!\n" + "Файл формата .txt был успешно создан!\n");
           SaveFormat(familyTree);
-         
-          return 1;
 
           case 3:
-          SaveMD(familyTree);
-          System.out.println("Поздравляю!\n" + "Файл формата .md был успешно создан!\n");
-        //   Start1(familyTree);
+          SaveDoc(familyTree);
+          System.out.println("Поздравляю!\n" + "Файл формата .doc был успешно создан!\n");
           SaveFormat(familyTree);
-          
-          return 1;
 
           case 4:
-          FileHandlerRead fhr = new FileHandlerRead();
-          return fhr.SaveFormat(familyTree); // !!!!!!!!!!!!!!!!!!
+          SaveMD(familyTree);
+          System.out.println("Поздравляю!\n" + "Файл формата .md был успешно создан!\n");
+          SaveFormat(familyTree);
 
           case 5:
+          FileHandlerRead fhr = new FileHandlerRead();
+          return fhr.SaveFormat(familyTree); 
+
+          case 6:
           System.out.println("Вы вышли из программы.");
           break;
           
           default:
            break;
           }  
-         return 1;
+         return 0;
         }
     }
 
