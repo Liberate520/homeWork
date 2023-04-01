@@ -62,7 +62,7 @@ public class FileHandlerSave implements SaveAs
           case 1:
           SaveTxt(familyTree);
           System.out.println("Поздравляю!\n" + "Файл формата .txt был успешно создан!\n");
-          Start1(familyTree);
+        //   Start1(familyTree);
           SaveFormat(familyTree);
 
           return 1;
@@ -70,7 +70,7 @@ public class FileHandlerSave implements SaveAs
           case 2:
           SaveDoc(familyTree);
           System.out.println("Поздравляю!\n" + "Файл формата .doc был успешно создан!\n");
-          Start1(familyTree);
+        //   Start1(familyTree);
           SaveFormat(familyTree);
          
           return 1;
@@ -78,7 +78,7 @@ public class FileHandlerSave implements SaveAs
           case 3:
           SaveMD(familyTree);
           System.out.println("Поздравляю!\n" + "Файл формата .md был успешно создан!\n");
-          Start1(familyTree);
+        //   Start1(familyTree);
           SaveFormat(familyTree);
           
           return 1;

@@ -52,7 +52,7 @@ public class FileHandlerRead implements SaveAs
         {
             tablo11.tabloRead11();
             int number = ScanNumber.ScanOperationNumber();
-            while(number < 1 || number > 3)
+            while(number < 1 || number > 4)
             {
                 System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
                 tablo11.tabloRead11();
@@ -116,10 +116,16 @@ public class FileHandlerRead implements SaveAs
                 
                 
                 case 2:
-                return SaveFormat(familyTree);
+                FileHandlerSave fhs4 = new FileHandlerSave();
+                // return SaveFormat(familyTree);
+                return fhs4.SaveFormat(familyTree);
 
                 case 3:
                 break;
+
+                case 4: 
+                System.out.println("Выввели число вне заданного диапазона! ");
+                return SaveFormat(familyTree);
             }    
             return 1;   
     }    
