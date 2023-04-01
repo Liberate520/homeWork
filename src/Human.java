@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Writable {
 
     private String name;
     private String surname;

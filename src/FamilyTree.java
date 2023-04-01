@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FamilyTree {
+public class FamilyTree implements Writable {
     private List<Human> humanList;
 
     public FamilyTree() {
