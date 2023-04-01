@@ -10,7 +10,7 @@ public class Main {
         Human James_Sirius = new Human("James Sirius", "Potter", 1, 9, 2003, "Male");
         Human Lily_Luna = new Human("Lily Luna", "Potter", 1, 9, 2007, "Female");
 
-        
+    
         FamilyTree potterTree = new FamilyTree();
 
         potterTree.put(James, Lily, Harry);
