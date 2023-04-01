@@ -19,6 +19,5 @@ public class Main {
         potterTree.put(Harry, Ginevra, Lily_Luna);
 
         System.out.println(potterTree);
-
     }
 }
