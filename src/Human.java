@@ -70,7 +70,7 @@ public class Human {
         return child.toString();
     }
 
-    public int getAge(String dateBirth) {
+    public int getAge() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
         LocalDate currentDate = LocalDate.now();
         LocalDate date = LocalDate.parse(dateBirth, formatter);
@@ -90,7 +90,7 @@ public class Human {
         this.father = father;
     }
 
-        public void setMother(Human mother) {
+    public void setMother(Human mother) {
         this.mother = mother;
     }
 
@@ -102,33 +102,18 @@ public class Human {
         this.childList = childList;
     }
 
+    public void addChild(Human child) {
+        childList = new ArrayList<>();
+        this.childList.add(child);
+    }
+
     @Override
     public String toString() {
         return this.name +  " " + this.surname + " " +
                 "Пол: " + gender.name() + " " +
-                "Возраст: " + getAge(dateBirth) + " лет " + "\n" + "Отец: " + father;
+                "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + father;
     }
-    //    public void setFather(Human father) {
-//        this.father = father;
-//        father.addChild(this);
 
-//    }
-//    public void setMother(Human mother) {
-//        this.mother = mother;
-//        mother.addChild(this);
-
-//    }
-//    public void addChild(String name, String surname) {
-//        Human child = new Human(name, surname);
-//        child.setFather(this);
-//        this.childList.add(child);
-//    }
-//
-//    public void addChild(Human child) {
-//        //child.setFather(this);
-//        this.childList.add(child);
-
-//    }
 
 
 
