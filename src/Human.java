@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human 
+public class Human implements Serializable
 {
     private int id;
     private Human father;
@@ -203,23 +204,4 @@ public class Human
         return sb.toString();
 
     }
-    
-    // @Override
-    // public String toString() 
-    // {
-    //     if (father == null){
-    //         father = new Human();
-    //         father.setFirstName("default");
-    //     }
-    //     if (mother == null){
-    //         mother = new Human();
-    //         mother.setFirstName("default");
-    //     }
-    //     return String.format("\n%d Фамилия : %s; Имя : %s; пол : %s; дата рождения : %d\n отец : %s\n мать : %s\n дети : %s \n",
-    //     id, firstName, lastName, gender, dataBirth, father.getFirstName(), mother.getFirstName(), children);
-    // }
-
-    
-
-
 }

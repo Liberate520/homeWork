@@ -1,17 +1,23 @@
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
+
+import writeReadData.ObjectWriter;
+import writeReadData.outputRead;
 
 
 
-public class Main {
-    public static void main(String[] args) 
+
+public class Main 
+{
+    public static void main(String[] args) throws IOException, ClassNotFoundException 
     {   
         FamilyTree familyTree = new FamilyTree();
         
         Human human1= new Human(1, "Иванов","Владмир", Gender.Male, LocalDate.of(1925, 10, 04), LocalDate.of(1987, 04, 01), null, null, null);
        
         familyTree.addPerson(human1);
+        
         // System.out.println(Human1 + "\n");
 
         Human human2= new Human(2, "Петров","Николай", Gender.Male, LocalDate.of(1928, 5, 10), LocalDate.of(1980, 03, 17), null, null,null);
@@ -68,10 +74,24 @@ public class Main {
         Human human14 = new Human(14,"Петров","Кирилл",Gender.Male,LocalDate.of(1983, 11, 20),null, human10,human12,null);
         familyTree.addPerson(human14);
         // System.out.println(human14 + "\n");
+
+        //  System.out.println(familyTree); // печать дерева!!!
+
         
-        System.out.println(familyTree);
-        familyTree.findHuman();
+        // familyTree.findHuman();  // поиск людей!
         
+    
+            // ObjectWrite.Writer(familyTree);
+            // ObjectRead.Reader();
+            // WriteText.SaveTxt(familyTree);
+            // ReadText.ReadTxt();
+            // WriteDoc.SaveDoc(familyTree);
+            // ReadDoc.Doc();
+            // WriteMD.SaveMD(familyTree);
+            // ReadMD.ReadMD();
+        
+            FileHandlerSave fhs = new FileHandlerSave();
+            fhs.SaveFormat(familyTree);
     }
 }
 

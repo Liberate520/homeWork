@@ -1,8 +1,10 @@
+// import writeReadData.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FamilyTree 
-{
+public class FamilyTree implements Serializable
+{  
     private ArrayList<Human> famyliTree = new ArrayList<>();
 
     public void addPerson(Human human) {
