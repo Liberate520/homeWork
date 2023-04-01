@@ -1,3 +1,5 @@
+import javax.imageio.IIOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -155,6 +157,29 @@ public class Human implements Writable {
         return this.name +  " " + this.surname + " " +
                 "Пол: " + getGender() + " " +
                 "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + getFather();
+    }
+
+    @Override
+    public void save(Writable serializable) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream("out.txt");
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(serializable);
+        }
+        catch (IIOException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
+
+    @Override
+    public Writable load() throws ClassNotFoundException, InvalidObjectException {
+        try (FileInputStream fis = new FileInputStream("out.txt");
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            Writable object = (Human) ois.readObject();
+            return object;
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+        throw new InvalidObjectException("Object fail");
     }
 
 
