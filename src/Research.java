@@ -1,9 +1,12 @@
+import geotree.GeoTree;
+import person.Person;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Research {
     private ArrayList<String> result = new ArrayList<>();
-    private ArrayList<Node> tree;
+    private ArrayList<Person> tree;
     private ArrayList<String> resultAge = new ArrayList<>();
 
     public Research(GeoTree geoTree) {
@@ -11,10 +14,18 @@ public class Research {
     }
 
     // метод поиска связи
-    public ArrayList<String> spend(Person p, Relation re) {
-        for (Node t : tree) {
-            if (t.getP1().getFullName() == p.getFullName() && t.getRe() == re) {
-                result.add(t.getP2().getFullName());
+    public ArrayList<String> spend(Person person, String re) {
+        for (Person p : tree) {
+            if (p == person && re.equals("mother")) {
+                result.add(p.getMother().getInfo());
+            } else {
+                if (p == person && re.equals("father")) {
+                    result.add(p.getFather().getInfo());
+                } else {
+                    if (p == person && re.equals("child")) {
+                        result.add(p.getChildrenInfo());
+                    }
+                }
             }
         }
         return result;
@@ -27,10 +38,9 @@ public class Research {
         int age = in.nextInt();
         System.out.println("Люди, младше: " + age + ":");
 
-        for (Node t : tree) {
-
-            if (t.getP1().getAge() <= age && !resultAge.contains(t.getP1().getFullName())) {
-                resultAge.add(t.getP1().getFullName());
+        for (Person p : tree) {
+            if (p.getAge() <= age && !resultAge.contains(p.getInfo())) {
+                resultAge.add(p.getInfo());
             }
         }
         return resultAge;

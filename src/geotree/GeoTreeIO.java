@@ -1,3 +1,7 @@
+package geotree;
+
+import geotree.GeoTree;
+
 import java.io.*;
 
 public class GeoTreeIO implements write, read, Serializable{
