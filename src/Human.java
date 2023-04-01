@@ -11,17 +11,32 @@ public class Human {
 
     private String dateBirth;
 
-    Gender gender;
-    Human father;
-    Human mother;
+    private String dateDeath;
 
-    List<Human> childList = new ArrayList<>();
+    private String maidenName;
+
+    private Gender gender;
+    private Human father;
+    private Human mother;
+
+    private List<Human> childList;
 
     public Human(String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
         this.dateBirth = dateBirth;
         this.gender = gender;
+
+        this.father = null;
+        this.mother = null;
+        this.maidenName = "";
+        this.childList = new ArrayList<>();
+    }
+
+    public Human() {
+        this.name = "unknown";
+        this.surname = "unknown";
+        this.dateBirth = "unknown";
     }
 
     public Human(String name, String surname) {
