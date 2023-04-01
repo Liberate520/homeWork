@@ -1,39 +1,38 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Person {
     private static int generatorID = 1;
-    private final int id;
-
+    private int id;
     public String firstName;
     public String lastName;
     public String birthDate;
     public String deathDate;
     public Gender gender;
-    public int idMather;
-    public int idFather;
+    public Person mother;
+    public Person father;
+    public List<Person> descendants;
+
 
     /**
-     * @param id id
      * @param firstName   Имя
      * @param lastName    Фамилия
      * @param birthDate   Дата рождения
      * @param deathDate   Дата смерти
      * @param gender      Пол
-     * @param idMather    id Матери
-     * @param idFather    id Отца
      */
 
-    public Person(String firstName, String lastName, String birthDate, String deathDate, Gender gender, int idMather, int idFather){
+    public Person(String firstName, String lastName, String birthDate, String deathDate, Gender gender, Person mother, Person father){
         this.id = generatorID++;
-//        this.id = new GeneratorID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-        this.idMather = idMather;
-        this.idFather = idFather;
+        this.mother = mother;
+        this.father = father;
+        descendants = new ArrayList<>();
     }
 
     public Person(String firstName, String lastName, String birthDate, String deathDate, Gender gender) {
@@ -43,6 +42,17 @@ public class Person {
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.gender = gender;
+        this.mother = null;
+        this.father = null;
+        descendants = new ArrayList<>();
+    }
+
+    public boolean addDescendants(Person descendant){
+        if (!descendants.contains(descendant)){
+            descendants.add(descendant);
+            return true;
+        }
+        return false;
     }
 
     public int getId() {
@@ -57,24 +67,92 @@ public class Person {
         return lastName;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public Person getMother() {
+        return mother;
     }
 
-    public String getDeathDate() {
-        return deathDate;
+    public Person getFather() {
+        return father;
     }
 
-    public Gender getGender() {
-        return gender;
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("First name: ");
+        sb.append(firstName);
+        sb.append(", ");
+        sb.append("last name: ");
+        sb.append(lastName);
+        sb.append("\n");
+        sb.append("birth date: ");
+        sb.append(birthDate);
+        sb.append(", ");
+        sb.append("death date: ");
+        sb.append(deathDate);
+        sb.append("\n");
+        sb.append(getFatherInfo());
+        sb.append("\n");
+        sb.append(getMotherInfo());
+        sb.append("\n");
+        sb.append(getDescendantInfo());
+        sb.append(".");
+        sb.append("\n");
+        sb.append("\n");
+        return sb.toString();
     }
 
-    public int getIdMather() {
-        return idMather;
+    public String getMotherInfo(){
+        String mom = "Mother: ";
+        if (mother != null){
+            mom += mother.getFirstName();
+            mom += " ";
+            mom += mother.getLastName();
+        }else {
+            mom += "uncnown!";
+        }
+        return mom;
     }
 
-    public int getIdFather() {
-        return idFather;
+    public String getFatherInfo(){
+        String dad = "Father: ";
+        if (mother != null){
+            dad += father.getFirstName();
+            dad += " ";
+            dad += father.getLastName();
+        }else {
+            dad += "uncnown!";
+        }
+        return dad;
+    }
+
+    public String getDescendantInfo(){
+        StringBuilder chld = new StringBuilder();
+        chld.append("Descendants: ");
+        if (descendants.size() != 0){
+            chld.append(descendants.get(0).getFirstName());
+            chld.append(" ");
+            chld.append(descendants.get(0).getLastName());
+            for (int i = 1; i < descendants.size(); i++) {
+                chld.append(", ");
+                chld.append(descendants.get(i).getFirstName());
+                chld.append(" ");
+                chld.append(descendants.get(i).getLastName());
+            }
+        }else {
+            chld.append("no descendants!");
+        }
+        return chld.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Person)){
+            return false;
+        }
+        Person person = (Person) obj;
+        return Objects.equals(person.getId(), getId());
     }
 
     @Override
@@ -83,7 +161,7 @@ public class Person {
             return "Firstname: " + firstName +
                     "\nLastname: " + lastName +
                     "\nbirth date -'" + birthDate + '\'' +
-                    "\ndeath date -'" + deathDate + '\'' + //"\n"; //+
+                    "\ndeath date -'" + deathDate + '\'' +
                     "\nID - " + id;
 
     }

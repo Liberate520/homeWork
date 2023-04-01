@@ -2,18 +2,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    List<Person> targariens;
+    public List<Person> targariens;
 
     public FamilyTree(List<Person> targariens) {
         this.targariens = targariens;
     }
 
     public FamilyTree() {
-        this.targariens = new ArrayList<>();
+        this(new ArrayList<>());
     }
-
-    public void addPerson(Person person) {
-        this.targariens.add(person);
+//    Не удалось сделать метод VOID.
+    public boolean addPerson(Person person){
+        if (person == null){
+            return false;
+        }
+        if (!targariens.contains(person)){
+            targariens.add(person);
+            if (person.getFather() != null){
+                person.getFather().addDescendants(person);
+            }
+            if (person.getMother() != null) {
+                person.getMother().addDescendants(person);
+            }
+            return true;
+        }
+        return false;
     }
 
     public List<Person> searchPerson(String firstName){
@@ -26,51 +39,22 @@ public class FamilyTree {
         return searched;
     }
 
-    public void personParents(Person person) {
-        Person mather = null;
-        Person father = null;
-        for (Person item : targariens) {
-            if (item.getId() == person.getIdMather()) {
-                mather = person;
-            }
-            if (item.getId() == person.getIdFather()) {
-                father = person;
+    public List<String> searchPersonDescendance(String firstName){
+        List<String> searched = new ArrayList<>();
+        for (Person item: targariens) {
+            if (item.getFirstName().equals(firstName)){
+                searched.add(item.getDescendantInfo());
             }
         }
-        System.out.println("Person - " + person + "\n" + "mather - " + mather +
-                "\n" + "Father - " + father);
+        return searched;
     }
 
-//    public static void descendantsSearch(List<Person> list, String input){
-//
-//        List<Person> descebdants = new ArrayList<>();
-//        for (Person name:list){
-//            if (name.equals(input)){
-//                System.out.println(descebdants);
-//            }
-//        }
-    public void descendantSearch(Person person){
-        List<Person> descendantsNew = new ArrayList<>();
-        for (Person item:targariens) {
-            if (item.getIdFather() == person.getId() || item.getIdMather() == person.getId()) {
-                descendantsNew.add(person);
-            }
-            if (descendantsNew.size() > 0) {
-                System.out.printf("Ascentor - " + person + "\n");
-                for (Person i : descendantsNew) {
-                    System.out.println(i);
-                }
-
-//            }else System.out.printf("Ascentor - " + person + " have no descendants" + "\n");
-            }
+    public String getTreeInfo(){
+        StringBuilder tree = new StringBuilder();
+        for (Person ppl:targariens) {
+            tree.append(ppl.getInfo());
+            tree.append("\n");
         }
-    }
-
-    @Override
-    public String toString() {
-        for (Person person : targariens) {
-            System.out.println(person);
-        }
-        return "\n";
+        return tree.toString();
     }
 }
