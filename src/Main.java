@@ -13,7 +13,10 @@ public class Main {
         Fred.addChild(Nastya);
         Vanya.addChild(Lora);
         Vanya.addChild(Masha);
-        FamilyTree myFamilyTree = new FamilyTree(Tom);
-        System.out.println(myFamilyTree.toString());
+        FamilyTree myFamilyTree1 = new FamilyTree(Tom);
+        FamilyTree myFamilyTree2 = new FamilyTree(Vanya);
+        //myFamilyTree.save(Writable );
+        System.out.println(myFamilyTree1.toString());
+        System.out.println(myFamilyTree2.toString());
     }
 }
