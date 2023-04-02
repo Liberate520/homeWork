@@ -7,7 +7,7 @@ public class Human {
 
     private String name;
     private String surname;
-    private enum Gender {man, woman;}
+    private Gender gender;
     private Date birthday;
     private Date dateOfDeath;
     private Human father;
@@ -27,7 +27,7 @@ public class Human {
     public Human(String name, String surname, Gender gender, Date birthday, Human father, Human mother, Date dateOfDeath) {
         this.name = name;
         this.surname = surname;
-        this.Gender = gender;
+        this.gender = gender;
         this.birthday = birthday;
         this.dateOfDeath = dateOfDeath;
         this.father = father;
@@ -46,7 +46,7 @@ public class Human {
 
     public void setName(String name) {this.name = name;}
     public void setSurname(String surname) {this.surname = surname;}
-    public void setGender(gender gender) {this.gender = gender;}
+    public void setGender(Gender gender) {this.gender = gender;}
     public void setBirthday(Date birthday) {this.birthday = birthday;}
     public void setDateOfDeath(Date dateOfDeath) {this.dateOfDeath = dateOfDeath;}
     public void setFather(Human father) {this.father = father;}
@@ -111,5 +111,5 @@ public class Human {
         // Compare the data members and return accordingly
         return
     }
-    Human h = new Human("Andrey", "Petrov", Gender.man,  );
+    Human h = new Human("Andrey", "Petrov", Gender.gender.WOMAN, 1864-2-2);
 }
