@@ -3,6 +3,7 @@ package tree;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Human implements Serializable {
@@ -12,6 +13,7 @@ public class Human implements Serializable {
     private LocalDate dateBirth;
     private List<Human> parents;
     private List<Human> children;
+    int index;
 
     public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth) {
         this.firstName = firstName;
@@ -44,7 +46,7 @@ public class Human implements Serializable {
 
     public void addChild(Human child) {
         this.children.add(child);
-        this.addParent(this);
+        child.addParent(this);
     }
 
     @Override
