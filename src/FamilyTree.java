@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private Person mainPerson;
     private List<Person> persons;
 
@@ -85,7 +86,7 @@ public class FamilyTree {
         return result.toString();
     }
 
-    /*public void save(Writable writable){
+    public void save(Writable writable){
         writable.save(this);
-    }*/
+    }
 }

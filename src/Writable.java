@@ -1,2 +1,8 @@
-package PACKAGE_NAME;public interface Writable {
+import java.io.Serializable;
+
+public interface Writable {
+
+    void save(Object object);
+
+    Object read();
 }

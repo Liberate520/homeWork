@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -5,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Person {
+public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private boolean isMan;

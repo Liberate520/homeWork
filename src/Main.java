@@ -15,8 +15,13 @@ public class Main {
         Vanya.addChild(Masha);
         FamilyTree myFamilyTree1 = new FamilyTree(Tom);
         FamilyTree myFamilyTree2 = new FamilyTree(Vanya);
-        //myFamilyTree.save(Writable );
+
         System.out.println(myFamilyTree1.toString());
+        System.out.println(myFamilyTree2.toString());
+
+        FileHandler fileHandler = new FileHandler();
+        myFamilyTree1.save(fileHandler);
+        myFamilyTree2 = (FamilyTree) fileHandler.read();
         System.out.println(myFamilyTree2.toString());
     }
 }
