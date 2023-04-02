@@ -2,87 +2,153 @@ package oop_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
+// класс содержащий всю информацию о людях
 public class Person implements Serializable {
 
-    private String full_name;
-    private String year_of_birth;
-    private String sex;
-    private ArrayList<Person> person = new ArrayList<>(); // коллекция людей
+    private String fullName;
+    private int dateBirth;
+    private Gender sex;
+    private Person mother;
+    private Person father;
+    private List<Person> childrenList;
 
-    public Person(String full_name, String year_of_birth, String sex) {
-        this.full_name = full_name;
-        this.year_of_birth = year_of_birth;
+    // конструктор с 5 параметрами
+    public Person(String fullName, int dateBirth, Gender sex, Person mother, Person father) {
+        this.fullName = fullName;
+        this.dateBirth = dateBirth;
         this.sex = sex;
+        this.mother = mother;
+        this.father = father;
+        childrenList = new ArrayList<>();
     }
+    // конструктор с 3 параметрами
+    public Person(String fullName, int dateBirth, Gender sex) {
 
+        this(fullName, dateBirth, sex, null, null);
+    }
+    // пустой конструктор
     public Person() {
 
     }
+    // геттеры и сеттеры
+    public Gender getSex() {return sex;}
 
-    public ArrayList<Person> getPerson() {
-        return person;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setPerson(ArrayList<Person> person) {
-        this.person = person;
+    public int getDateBirth() {
+        return dateBirth;
     }
 
-    public String getSex() {
-        return sex;
+    public Person getMother() {
+        return mother;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public Person getFather() {
+        return father;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public List<Person> getChildren() {
+        return childrenList;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-
-    public String getYear_of_birth() {
-        return year_of_birth;
+    public void setDateBirth(int dateBirth) {
+        this.dateBirth = dateBirth;
     }
 
-    public void setYear_of_birth(String year_of_birth) {
-        this.year_of_birth = year_of_birth;
+    public void setSex(Gender sex) {this.sex = sex;}
+
+    public void setMother(Person mother) {
+        this.mother = mother;
     }
 
+    public void setFather(Person father) {this.father = father;}
 
-    public String printInfoPerson() {
-        System.out.printf("%s, %s г.р, пол: %s ", full_name, year_of_birth, sex);
-        return "";
+    public void setChildren(List<Person> childrenList) {
+        this.childrenList = childrenList;
     }
 
+    // метод поиска матери
+    public String getMotherInfo() {
+        String res = "мать: ";
+        if (mother != null) {
+            res += mother.getFullName();
+        } else {
+            res += " - ";
+        }
+        return res;
+    }
+    // метод поиска отца
+    public String getFatherInfo() {
+        String res = "отец: ";
+        if (father != null) {
+            res += father.getFullName();
+        } else {
+            res += " - ";
+        }
+        return res;
+    }
+    // метод сравнения объектов класса Person
+    public boolean equals(Object obg) {
+        if (this == obg) {
+            return true;
+        }
+        if (!(obg instanceof Person person)) {
+            return false;
+        }
+        return person.getFullName().equals(getFullName());
+    }
+    // метод вывода информации об объекте person по умолчанию
     @Override
     public String toString() {
-        return full_name + " " + year_of_birth + " " + sex;
+        return "Full name: " + getFullName() + ", пол: " + sex + ", Year of birth: "
+                + getDateBirth() + ", Mother: " + getMotherInfo() + ", Father: "
+                + getFatherInfo() + ", Children: " + getChildrenInfo() + "\n";
     }
-    // метод парсинга полного имени
-    public String userInputStr(String msg) {
-        Scanner sc = new Scanner(System.in);
-        String inputStr;
-        while (true) {
-            System.out.println(msg);
-            try {
-                inputStr = sc.nextLine();
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Неверный ввод!");
+    // основной метод вывода информации об объекте класса Person
+    public String getInfoPerson() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: ");
+        sb.append(getFullName());
+        sb.append(", ");
+        sb.append("пол: ");
+        sb.append(getSex());
+        sb.append(", ");
+        sb.append(getDateBirth());
+        sb.append(" г.р. ,");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
+    }
+    // метод поиска детей у объектов класса Person
+    public String getChildrenInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("дети: ");
+        if (childrenList.size() != 0) {
+            res.append(childrenList.get(0).getFullName());
+            for (int i = 1; i < childrenList.size(); i++) {
+                res.append(", ");
+                res.append(childrenList.get(i).getFullName());
             }
+        } else {
+            res.append(" - ");
         }
-        return inputStr;
+        return res.toString();
     }
-
-    public void addPerson(Person human) {
-        person.add(human);
+    // метод добавления детей
+    public void addChild(Person child) {
+        if (!childrenList.contains(child)) {
+            childrenList.add(child);
+        }
     }
-
-
 }

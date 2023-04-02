@@ -1,60 +1,82 @@
 package oop_1;
 
+import oop_1.comparator.PersonComparatorByDate;
+import oop_1.comparator.PersonComparatorByName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
-public class GeoTree implements Serializable {
-    private ArrayList<Connection> connect = new ArrayList<>(); // коллекция родственных связей
-
-    public ArrayList<Connection> getConnect() {
-        return connect;
+import java.util.Iterator;
+import java.util.List;
+// класс устанавливает связи между людьми в дереве
+public class GeoTree implements Serializable, Iterable<Person> {
+    private Writable writable;
+    private List<Person> personList;
+    // конструктор дерева без параметров
+    public GeoTree() {
+        this(new ArrayList<>());
     }
-
-    public void setConnect(ArrayList<Connection> connect) {
-        this.connect = connect;
+    // конструктор дерева с параметрами
+    public GeoTree(List<Person> personList) {
+        this.personList = personList;
     }
+    // геттеры и сеттеры
+    public Writable getWritable() {return writable;}
 
-    public void addParentChildren(Person parent, Person children) {
-        connect.add(new Connection(parent, Status.parrent, children));
-        connect.add(new Connection(children, Status.children, parent));
-    }
+    public void setWritable(Writable writable) {this.writable = writable;}
 
-    public void addGrandparentGrandchildren(Person grandparent, Person grandchildren) {
-        connect.add(new Connection(grandparent, Status.grandparent, grandchildren));
-        connect.add(new Connection(grandchildren, Status.grandchildren, grandparent));
-    }
+    public List<Person> getHumanList() {return personList;}
 
-    public void addHusbandWife(Person husband, Person wife) {
-        connect.add(new Connection(husband, Status.husband, wife));
-        connect.add(new Connection(wife, Status.wife, husband));
-    }
+    public void setHumanList(List<Person> personList) {this.personList = personList;}
 
-    public void addBrotherSister(Person brother, Person sister) {
-        connect.add(new Connection(brother, Status.brother, sister));
-        connect.add(new Connection(sister, Status.sister, brother));
+    // метод добавления человека в дерево
+    public void addPerson(Person person) {
+        if (person == null) return;
+        if (!personList.contains(person)) {
+            personList.add(person);
+            if (person.getMother() != null) person.getMother().addChild(person);
+            if (person.getFather() != null) person.getFather().addChild(person);
+        }
     }
-
-    public void addBrotherBrother(Person brother1, Person brother2) {
-        connect.add(new Connection(brother1, Status.brother, brother2));
-        connect.add(new Connection(brother2, Status.brother, brother1));
-    }
-
-    public void addBSisterSister(Person sister1, Person sister2) {
-        connect.add(new Connection(sister1, Status.sister, sister2));
-        connect.add(new Connection(sister2, Status.sister, sister1));
-    }
-    // метод поиска связей по полному имени
-    public void searchForConnections(String userInput) {
-        boolean flag = false;
-        for (Connection t : connect) {
-            if (t.getP1().getFull_name().equalsIgnoreCase(userInput)) {
-                System.out.println(t);
-                flag = true;
+    // метод поиска имени в дереве
+    public Person getByName(String name) {
+        for (Person person : personList) {
+            if (person.getFullName().equals(name)) {
+                return person;
             }
         }
-        if (!flag) {
-            System.out.println("Человек не найден!");
-        }
+        return null;
     }
-
+    // метод получения информации о дереве
+    public String getInfoTree() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("в дереве ");
+        sb.append(personList.size());
+        sb.append(" объектов \n");
+        for (Person person : personList) {
+            sb.append(person.getInfoPerson());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    // переопределенный метод to string для вывода объекта дерево по умолчанию
+    @Override
+    public String toString() {
+        String list = "";
+        for (Person person : personList)
+            list += person.toString();
+        return list;
+    }
+    // создаем метод итератора для дерева
+    @Override
+    public Iterator<Person> iterator() {
+        return personList.iterator();
+    }
+    // метод сортировки по имени с использованием компаратора
+    public void sortByNamePerson() {
+        personList.sort(new PersonComparatorByName());
+    }
+    // метод сортировки по возрасту с использованием компаратора
+    public void sortByAgePerson() {
+        personList.sort(new PersonComparatorByDate());
+    }
 }
