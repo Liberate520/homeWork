@@ -14,7 +14,7 @@ public class FilehandlerOS extends Filehahdler{
         // familyTree= new FamilyTree();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(group);
-            System.out.printf("File " + filename + " has been written");
+            System.out.printf("File " + filename + " has been written.\n");
             oos.flush();
             oos.close();
         } catch (Exception ex) {
