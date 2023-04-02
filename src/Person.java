@@ -27,8 +27,8 @@ public class Person {
         children = new ArrayList<>();    
     }
 
-    public Person (String name, String secondName,String surname,Person father,Person mother, Gender gender,int yearOfBirth) {
-        this(name, secondName, surname, father, mother, gender, yearOfBirth, 0);
+    public Person (String name, String secondName,String surname, Gender gender,int yearOfBirth, int yearOfDeath) {
+        this(name, secondName, surname, null, null, gender, yearOfBirth, yearOfDeath);
     }
     
     public String getName() {
