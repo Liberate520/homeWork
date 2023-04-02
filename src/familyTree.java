@@ -27,6 +27,7 @@ public class FamilyTree {
         return stb.toString();
     }
 
+    
     public void printChildren() {
         for (Human humanTemp : familyTree) {
             if (humanTemp.getChildren().isEmpty()) {
