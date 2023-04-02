@@ -65,5 +65,4 @@ public class Human {
             System.out.printf("Ошибка!!! Родители не могут быть моложе %s лет \n", ageParentMin);
         }
     }
-    
 }

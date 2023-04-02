@@ -19,7 +19,6 @@ public class Main {
             familyTree.addHuman(human);
         }
 
-        
         System.out.println(familyTree);
         familyTree.printChildren();
     }
