@@ -3,15 +3,16 @@ import geotree.GeoTreeIO;
 import person.Gender;
 import person.Person;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException{
-        Person irina = new Person("Ирина", new GregorianCalendar(1985, 01, 13), Gender.Female);
-        Person igor = new Person("Игорь", new GregorianCalendar(1984, 10, 25),Gender.Male);
-        Person vasya = new Person("Вася", new GregorianCalendar(2001, 03, 17),Gender.Male, irina, igor);
-        Person masha = new Person("Маша", new GregorianCalendar(1997, 05, 20),Gender.Female, irina, igor);
+        Person irina = new Person("Ирина", new GregorianCalendar(1985, Calendar.JANUARY, 13), Gender.Female);
+        Person igor = new Person("Игорь", new GregorianCalendar(1984, Calendar.OCTOBER, 25),Gender.Male);
+        Person vasya = new Person("Вася", new GregorianCalendar(2001, Calendar.MARCH, 17),Gender.Male, irina, igor);
+        Person masha = new Person("Маша", new GregorianCalendar(1997, Calendar.MAY, 20),Gender.Female, irina, igor);
         GeoTree gt = new GeoTree();
         gt.appendPerson(irina);
         gt.appendPerson(masha);
@@ -45,7 +46,7 @@ public class Main {
         }
 
         System.out.println();
-        //System.out.println(new Research(gt).searchAge());
+        System.out.println(new Research(gt).searchAge());
         GeoTreeIO io = new GeoTreeIO();
         gt.save(io);
         gt.restore(io);

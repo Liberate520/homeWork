@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class GeoTree implements Serializable, Iterable<Person> {
 
-    private ArrayList<Person> tree = new ArrayList<>();
+    private final ArrayList<Person> tree = new ArrayList<>();
 
     public ArrayList<Person> getTree() {
         return tree;
@@ -32,11 +32,11 @@ public class GeoTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void save(write saveGeo) throws IOException{
+    public void save(Writable saveGeo) throws IOException{
         saveGeo.write(this);
     }
 
-    public void restore(read restoreGeo) throws IOException, ClassNotFoundException {
+    public void restore(Readable restoreGeo) throws IOException, ClassNotFoundException {
         restoreGeo.read();
     }
 

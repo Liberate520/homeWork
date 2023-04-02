@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Person implements Serializable, Comparable<Person> {
     private String fullName;
-    private Calendar dateOfBirth;
+    private final Calendar dateOfBirth;
     private Calendar dateOfDeath;
     private Gender gender;
     private Person mother;
@@ -22,22 +22,22 @@ public class Person implements Serializable, Comparable<Person> {
         this.children = children;
     }
     public Person(String fullName, Calendar dateOfBirth, Calendar dateOfDeath, Gender gender, Person mother, Person father) {
-        this(fullName, dateOfBirth, dateOfDeath, gender, mother, father, new HashSet<Person>());
+        this(fullName, dateOfBirth, dateOfDeath, gender, mother, father, new HashSet<>());
     }
     public Person(String fullName, Calendar dateOfBirth, Calendar dateOfDeath, Gender gender, HashSet<Person> children) {
         this(fullName, dateOfBirth, dateOfDeath, gender, null, null, children);
     }
     public Person(String fullName, Calendar dateOfBirth, Calendar dateOfDeath, Gender gender) {
-        this(fullName, dateOfBirth, dateOfDeath, gender, null, null, new HashSet<Person>());
+        this(fullName, dateOfBirth, dateOfDeath, gender, null, null, new HashSet<>());
     }
     public Person(String fullName, Calendar dateOfBirth, Gender gender, Person mother, Person father) {
-        this(fullName, dateOfBirth, null, gender, mother, father, new HashSet<Person>());
+        this(fullName, dateOfBirth, null, gender, mother, father, new HashSet<>());
     }
     public Person(String fullName, Calendar dateOfBirth, Gender gender, HashSet<Person> children) {
         this(fullName, dateOfBirth, null, gender, children);
     }
     public Person(String fullName, Calendar dateOfBirth, Gender gender) {
-        this(fullName, dateOfBirth, null, gender, null, null, new HashSet<Person>());
+        this(fullName, dateOfBirth, null, gender, null, null, new HashSet<>());
     }
     public boolean addChild(Person child) {
         if (child!=null){
@@ -79,7 +79,7 @@ public class Person implements Serializable, Comparable<Person> {
     public Person getFather() {
         return father;
     }
-    public String getInfo() {
+    public StringBuilder getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Full Name: ");
         sb.append(fullName);
@@ -89,9 +89,9 @@ public class Person implements Serializable, Comparable<Person> {
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
-        return sb.toString();
+        return sb;
     }
-    public String getMotherInfo() {
+    public StringBuilder getMotherInfo() {
         StringBuilder res = new StringBuilder();
         res.append("Mother: ");
         if (mother!=null){
@@ -99,9 +99,9 @@ public class Person implements Serializable, Comparable<Person> {
         } else {
             res.append("unknown");
         }
-        return res.toString();
+        return res;
     }
-    public String getFatherInfo() {
+    public StringBuilder getFatherInfo() {
         StringBuilder res = new StringBuilder();
         res.append("Father: ");
         if (father!=null){
@@ -109,9 +109,9 @@ public class Person implements Serializable, Comparable<Person> {
         } else {
             res.append("unknown");
         }
-        return res.toString();
+        return res;
     }
-    public String getChildrenInfo() {
+    public StringBuilder getChildrenInfo() {
         StringBuilder res = new StringBuilder();
         res.append("Children: ");
         if (!children.isEmpty()){
@@ -121,7 +121,7 @@ public class Person implements Serializable, Comparable<Person> {
         } else {
             res.append("unknown");
         }
-        return res.toString();
+        return res;
     }
 
     public HashSet<Person> getChildren() {

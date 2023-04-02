@@ -1,10 +1,8 @@
 package geotree;
 
-import geotree.GeoTree;
-
 import java.io.*;
 
-public class GeoTreeIO implements write, read, Serializable{
+public class GeoTreeIO implements Writable, Readable, Serializable{
     public void write(GeoTree geo) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("geo.txt"));
@@ -16,7 +14,7 @@ public class GeoTreeIO implements write, read, Serializable{
     public void read() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("geo.txt"));
-        System.out.println((GeoTree) objectInputStream.readObject());
+        System.out.println(objectInputStream.readObject());
         objectInputStream.close();
     }
 
