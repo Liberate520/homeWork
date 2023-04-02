@@ -1,11 +1,28 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class FamilyTree {
 
-    public Human createHuman(String sex, Human father, Human mother, String name) {
-        Human child = new Human(sex, name, father.lastName, mother, father, new ArrayList<>());
-        father.addChild(child);
-        mother.addChild(child);
-        return child;
+
+public class FamilyTree implements Serializable {
+    List<Human> familyTree;
+
+    public FamilyTree(List<Human> familyTree) {
+        this.familyTree = familyTree;
+    }
+    public FamilyTree() {
+        this(new ArrayList<>());
+    }
+
+    public void addPerson (Human human) {
+        this.familyTree.add(human);
+    }
+
+    public void save(Serializable obj, String filePath) throws IOException {
+        FileHandler.save(obj, filePath);
+    }
+
+    public Serializable load(String filePath) throws IOException, ClassNotFoundException {
+        return FileHandler.load(filePath);
     }
 }
