@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.lang.StringBuilder;
@@ -26,19 +25,16 @@ public class Tree {
         String name = "";
         String secondName = "";
         String surname = "";
-        List <Gender> genders = Arrays.asList(Gender.values());//выбор пола
-        System.out.print("1 - ");
-        System.out.println(genders.get(0));
-        System.out.print("2 - ");
-        System.out.println(genders.get(1));
+        System.out.println("1 - М");
+        System.out.println("2 - Ж");
         System.out.print("Выберете пол:");
         String selGend = scan.nextLine();
         switch(selGend){
             case "1":
-                gender = genders.get(0);
+                gender = Gender.m;
                 break;
             case "2":
-                gender = genders.get(1);
+                gender = Gender.f;
                 break;    
         }
         System.out.print("Введите год рожедения: ");//ввод года рождения
@@ -47,7 +43,7 @@ public class Tree {
         System.out.print("Введите имя: ");//ввод имени
         name = scan.nextLine();    
         if(father != null && mother != null){//если родители известны - формируем отчество и фамилию
-            if(gender.getGendName().equals("М")){//если мужской пол
+            if(gender.equals(Gender.m)){//если мужской пол
                 surname = father.getSurname();
                 secondName = father.getName() + "ович";//потом переделать
             }
@@ -75,8 +71,8 @@ public class Tree {
         // scan.close();
         family.add(addedPerson);
         if(father != null && mother != null){//если родители есть, добавляем им информацию о ребенке
-            father.addChildren(addedPerson);
-            mother.addChildren(addedPerson);
+            father.addChild(addedPerson);
+            mother.addChild(addedPerson);
         }      
     }
 

@@ -14,6 +14,7 @@ public class Person {
     private int yearOfBirth;
     private int yearOfDeath;
     
+    
     public Person (String name, String secondName,String surname,Person father,Person mother, Gender gender,int yearOfBirth,int yearOfDeath) {
         this.name = name;
         this.secondName = secondName;
@@ -23,18 +24,13 @@ public class Person {
         this.gender = gender;
         this.yearOfBirth = yearOfBirth;
         this.yearOfDeath = yearOfDeath;
-        
+        children = new ArrayList<>();    
     }
+
     public Person (String name, String secondName,String surname,Person father,Person mother, Gender gender,int yearOfBirth) {
-        this.name = name;
-        this.secondName = secondName;
-        this.surname = surname;
-        this.father = father;
-        this.mother = mother;
-        this.gender = gender;
-        this.yearOfBirth = yearOfBirth;
-        yearOfDeath = 0;
+        this(name, secondName, surname, father, mother, gender, yearOfBirth, 0);
     }
+    
     public String getName() {
         return name;
     }
@@ -62,9 +58,8 @@ public class Person {
     public int getYearOfDeath() {
         return yearOfDeath;
     }
-    public void addChildren(Person child) {//добавление ребенка к родителю
-        if(children == null)//если списка детей не существует, создаем его.
-            children = new ArrayList<>();//нет смысла инициализировать данный список при создании человека, тк это будет лишнее использ-е памяти.
+    public void addChild(Person child) {//добавление ребенка к родителю
+            //нет смысла инициализировать данный список при создании человека, тк это будет лишнее использ-е памяти.
         children.add(child);
     }
     public void showChildren() { //вывод списка детей   
