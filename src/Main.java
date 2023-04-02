@@ -65,10 +65,14 @@ public class Main implements Serializable {
                 default:
                     break;
             }
+            familyTolstoy.sortByName();
+            System.out.println(familyTolstoy);
+
         }
 
     }
 }
+
 /*         Person member1 = new Person (1685, 1728, "ИванПетровичТолстой", Gender.Male,null, null);
         Person  member2 = new Person (1693, 1748, "ПрасковьяМихайловнаРтищева",
          Gender.Female, null, null);

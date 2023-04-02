@@ -5,7 +5,6 @@ import java.util.List;
 
 public class FamilyTree implements Serializable, Iterable<Human>{
     private List<Human> familyTree = new ArrayList<Human>();
-
     public FamilyTree(List<Human> familyTree) {
         this.familyTree = familyTree;
     }
@@ -53,6 +52,10 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     public Iterator<Human> iterator() {
         return new HumanIterator(familyTree);
     }
+    public void sortByName(){
+        familyTree.sort(new HumanComporatorByName());
+    }
+
 }
 
 

@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private int yearBirth;
     private int yearDeath;
@@ -125,5 +125,10 @@ public class Human implements Serializable {
     }
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }
