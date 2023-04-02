@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human humanKrivenkoP = new Human("Кривенко","Павел");
         Human humanKrivenkoS = new Human("Кривенко","Светлана");
         Human humanKrivenkoAy = new Human("Кривенко","Андрей",humanKrivenkoS,humanKrivenkoP);
@@ -11,24 +11,36 @@ public class Main {
         FamilyTree familyKrivenko = new FamilyTree();
         FamilyTree familyKrivenko2 = new FamilyTree();
 
-        humanKrivenkoP.addChildren(humanKrivenkoAy);
-        humanKrivenkoP.addChildren(humanKrivenkoAt);
-        humanKrivenkoS.addChildren(humanKrivenkoAy);
-        humanKrivenkoS.addChildren(humanKrivenkoAt);
 
-        familyKrivenko.AddFamilyTree(humanKrivenkoP);
-        familyKrivenko.AddFamilyTree(humanKrivenkoS);
-        familyKrivenko.AddFamilyTree(humanKrivenkoAy);
-        familyKrivenko.AddFamilyTree(humanKrivenkoAt);
+        familyKrivenko.addFamilyTree(humanKrivenkoP);
+        familyKrivenko.addFamilyTree(humanKrivenkoS);
+        familyKrivenko.addFamilyTree(humanKrivenkoAy);
+        familyKrivenko.addFamilyTree(humanKrivenkoAt);
 
-        familyKrivenko2.AddFamilyTree(humanKrivenkoAy);
-        familyKrivenko2.AddFamilyTree(humanKrivenkoO);
+        familyKrivenko2.addFamilyTree(humanKrivenkoAy);
+        familyKrivenko2.addFamilyTree(humanKrivenkoO);
+
+        String fileAddress = "fileTree.out";
+        saveToFile(familyKrivenko,fileAddress);
+
+        FamilyTree familyKrivenkoFile = new FamilyTree();
+        readFile(familyKrivenkoFile,fileAddress);
 
 
         List<Human> children = humanKrivenkoAy.getMother().getChildren();
         children.remove(humanKrivenkoAy);
         System.out.println(children);
 
+
+
     }
+    public static void saveToFile(FileProcessing file, String address) throws IOException{
+        file.save(address);
+    }
+
+    public static void readFile(FileProcessing file, String address) throws IOException, ClassNotFoundException{
+        file.read(address);
+    }
+
 
 }
