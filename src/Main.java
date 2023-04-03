@@ -1,7 +1,3 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,29 +22,20 @@ public class Main {
         List<Human> human = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12));
 
         for (Human value : human) {
-            family.addFamily(value);
+            family.addPeople(value);
         }
 
         System.out.println(family);
-        //family.findHuman();
+        FindHuman findHuman = new FindHuman();
+        findHuman.findHuman(family);
         FileHandlerSaver save = new FileHandlerSaver();
-        save.saveData(family, "file.txt");
+        save.saveData(family);
         FileHandlerLoad load = new FileHandlerLoad();
-        load.loadData("file.txt");
+        load.loadData("familyTree.ser");
 
-        // // Сериализация в файл с помощью класса ObjectOutputStream
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("familyTree.ser"));
-        objectOutputStream.writeObject(family);
-        objectOutputStream.close();
-        System.out.println("Сериализация");
 
-        // Востановление из файла с помощью класса ObjectInputStream
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("familyTree.ser"));
-        FamilyTree restoreFamilyTrees = (FamilyTree) objectInputStream.readObject();
-        objectInputStream.close();
-        System.out.println("Восстановление данных\n" + restoreFamilyTrees);
+
+
 
         
 

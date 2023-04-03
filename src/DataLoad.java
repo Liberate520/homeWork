@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public interface DataLoad {
-    String loadData(String fileName) throws Exception;
+    Object loadData(String fileName) throws IOException, ClassNotFoundException;
 }
