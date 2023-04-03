@@ -19,6 +19,8 @@ public class Human implements Serializable {
     private Human mother;
     private List<Human> childList;
 
+    private final String nameRegex = "^[\\p{L} .'-]+$";
+
     public Human(String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
@@ -65,14 +67,14 @@ public class Human implements Serializable {
         return childList;
     }
 
-    public String getChild() {
-        System.out.println("*".repeat(30));
-        StringBuilder child = new StringBuilder(getName() + " " + getSurname() + " дети: \n");
-        for (Human human: this.childList) {
-            child.append(human + "\n");
-        }
-        return child.toString();
-    }
+//    public String getChild() {
+//        System.out.println("*".repeat(30));
+//        StringBuilder child = new StringBuilder(getName() + " " + getSurname() + " дети: \n");
+//        for (Human human: this.childList) {
+//            child.append(human + "\n");
+//        }
+//        return child.toString();
+//    }
 
     public int getAge() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
@@ -100,6 +102,26 @@ public class Human implements Serializable {
 
     public Human getFather() {
         return father;
+    }
+
+    public String getFatherInfo() {
+        String res = "Отец: ";
+        if (father != null) {
+            res += father.getName();
+        } else {
+            res += "неизвестен";
+        }
+        return res;
+    }
+
+    public String getMotherInfo() {
+        String res = "Мать: ";
+        if (mother != null) {
+            res += mother.getName();
+        } else {
+            res += "неизвестна";
+        }
+        return res;
     }
 
 
@@ -141,6 +163,21 @@ public class Human implements Serializable {
         }
     }
 
+    public void setMaidenName(String maidenName) {
+        if (maidenName.trim().matches(nameRegex)) {
+            if (this.gender == Gender.Male) {
+                this.maidenName = maidenName.trim();
+            } else {
+                throw new IllegalArgumentException("Девичья фамилия для женщин");
+            }
+        } else if (maidenName.isEmpty()) {
+            this.maidenName = "";
+        } else {
+            throw new IllegalArgumentException("Неверно задана фамилия");
+        }
+
+    }
+
     public void setChildList(List<Human> childList) {
         this.childList = childList;
     }
@@ -148,13 +185,38 @@ public class Human implements Serializable {
     public void addChild(Human child) {
         childList = new ArrayList<>();
         this.childList.add(child);
+     }
+
+    public String getInfo() {
+        System.out.println("*".repeat(30));
+        StringBuilder human = new StringBuilder();
+        human.append(name).append(" ")
+                .append(surname).append(", ")
+                .append(getFather()).append(", ")
+                .append(getMother()).append(", ")
+                .append(getChildList());
+
+        return human.toString();
+    }
+
+    public String getChild() {
+        System.out.println("*".repeat(30));
+        StringBuilder child = new StringBuilder("дети: \n");
+        if (childList.size() != 0) {
+            child.append(childList.get(0).getName());
+            for (Human human: this.childList) {
+                child.append(human + "\n"); }
+        } else {
+            child.append("без детей");
+        }
+        return child.toString();
     }
 
     @Override
     public String toString() {
         return this.name +  " " + this.surname + " " +
                 "Пол: " + getGender() + " " +
-                "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + getFather();
+                "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + getFather() + "Мать: " + getMother();
     }
 //
 //    @Override
