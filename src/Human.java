@@ -1,43 +1,125 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
+    private Gender gender;
     private Human mother;
     private Human father;
     private List<Human> children;
 
-    public Human(String name, Human mother, Human father){
+    public Human(String name, Gender gender, Human mother, Human father){
         this.name = name;
+        this.gender = gender;
         this.mother = mother;
         this.father = father;
         this.children = new ArrayList<>();
 
   }
-  public Human(String name){
+  public Human(String name, Gender gender){
         this.name = name;
+        this.gender = gender;
         this.children = new ArrayList<>();
   }
+  public void save() throws IOException, ClassNotFoundException{
+      ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+              new FileOutputStream("human.out")
+      );
 
+      objectOutputStream.writeObject(this);
+  }
+  public Human read() throws IOException, ClassNotFoundException{
+      ObjectInputStream objectInputStream = new ObjectInputStream(
+              new FileInputStream("human.out")
+      );
+      Human humanRestored = (Human) objectInputStream.readObject();
+
+      objectInputStream.close();
+      return humanRestored;
+  }
+  public String getAllInfo(){
+        StringBuilder info = new StringBuilder();
+        info.append(this.name + " ");
+        info.append(this.gender + " ");
+        info.append(this.getMotherInfo() + " ");
+        info.append(this.getFatherInfo() + " ");
+        info.append(this.getChildrenInfo());
+
+        return info.toString();
+    }
+    public String getMotherInfo(){
+        String mom = "Mother: ";
+        if (this.mother != null) {
+            mom += mother.getName();
+        } else {
+            mom += "None";
+        }
+        return  mom;
+    }
+    public String getFatherInfo(){
+        String pap = "Father: ";
+        if (this.father != null) {
+            pap += father.getName();
+        } else {
+            pap += "None";
+        }
+        return pap;
+    }
     @Override
     public String toString() {
-        return "name: " + this.name;
+        StringBuilder res = new StringBuilder();
+        res.append(this.name + ",");
+        res.append(this.gender + ",");
+        if (this.mother != null) {
+            res.append(this.mother.getName() + ",");
+        } else {
+            res.append(null + ",");
+        }
+        if (this.father != null) {
+            res.append(this.father.getName() + "");
+        } else {
+            res.append(null + "");
+        }
+    return res.toString();
     }
-    public void addChild(Human child){
-        this.children.add(child);
+    public boolean addChild(Human child){
+       if (!children.contains(child)) {
+           children.add(child);
+           return true;
+       }
+       return  false;
     }
-    public String printChildren(){
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return  true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return  human.getName().equals(getName());
+    }
+
+    public String getChildrenInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append("Children: ");
         if (this.children.isEmpty()) {
-            return "None";
+            res.append("None");
+            return res.toString();
         }
         else {
-            String allChildren = "";
+
             for (Human child: this.children
                  ) {
-                allChildren += child.toString();
+                res.append(child.getName());
+                res.append(", ");
 
             }
-            return  allChildren;
+            return  res.toString();
         }
     }
 
@@ -55,5 +137,13 @@ public class Human {
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
     }
 }

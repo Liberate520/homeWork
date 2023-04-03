@@ -1,2 +1,7 @@
-package PACKAGE_NAME;public interface Writeable {
+import java.io.IOException;
+
+public interface Writeable {
+    void saveHuman(Human human, String path);
+    void load(FamilyTree familyTree, String path) throws Exception;
+
 }
