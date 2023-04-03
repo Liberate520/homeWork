@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FamilyTree implements Writable {
+public class FamilyTree implements Serializable {
     private List<Human> humanList;
 
     public FamilyTree() {
@@ -47,7 +47,7 @@ public class FamilyTree implements Writable {
     }
 
     @Override
-    public void save(Writable serializable) throws IOException {
+    public void save(FamilyTree serializable) throws IOException {
         try (FileOutputStream fos = new FileOutputStream("out.txt");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(serializable);
@@ -58,10 +58,10 @@ public class FamilyTree implements Writable {
     }
 
     @Override
-    public Writable load() throws ClassNotFoundException, InvalidObjectException {
+    public FamilyTree load() throws ClassNotFoundException, InvalidObjectException {
         try (FileInputStream fis = new FileInputStream("out.txt");
              ObjectInputStream ois = new ObjectInputStream(fis)) {
-            Writable object = (FamilyTree) ois.readObject();
+            FamilyTree object = (FamilyTree) ois.readObject();
             return object;
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
