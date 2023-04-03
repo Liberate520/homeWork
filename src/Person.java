@@ -1,9 +1,10 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 import java.lang.StringBuilder;
 
-public class Person {
+public class Person implements Serializable{
     private String name;
     private String secondName;
     private String surname;

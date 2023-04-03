@@ -1,12 +1,20 @@
 
 import java.util.List;
 import java.util.Scanner;
-
+import java.io.File;
+import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args) {
-        Tree family1 = new Tree();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        File dir = new File("tree.save");
+        FileHandler fh = new FileHandler();
+        Tree family1;
+        if(dir.exists()){
+            family1 = (Tree) fh.loadData();
+        }else{
+            family1 = new Tree();
+        }
         Scanner scan = new Scanner(System.in, "Cp866");
         System.out.print("Доступные команды: \n 1 Добавить человека \n 2 Найти человека \n 3 Вывести список всех людей \n q (выход) \n Введите команду: ");
         String cmd = scan.nextLine();
@@ -106,6 +114,7 @@ public class Main {
             cmd = scan.nextLine();
         }
         scan.close();
+        fh.saveData(family1);
 
         // family1.addPerson();
         // family1.addPerson();

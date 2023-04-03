@@ -1,10 +1,10 @@
 
 import java.util.ArrayList;
 import java.util.List;
-// import java.util.Scanner;
+import java.io.Serializable;
 import java.lang.StringBuilder;
 
-public class Tree {
+public class Tree implements Serializable{
     private List<Person> family;
     // private Person addedPerson;
 
