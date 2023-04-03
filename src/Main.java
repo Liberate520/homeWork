@@ -1,7 +1,9 @@
 //public Person(String firstName, String lastName, String birthDate,
 // String deathDate, Gender gender, int idMather, int idFather)
 
+import java.io.InvalidObjectException;
 import java.util.*;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -28,7 +30,9 @@ public class Main {
 
         System.out.println("\n1 - Output all members of the genus." +
                 "\n2 - Find targarien descendance." +
-                "\n3 - Find the great Targarien.");
+                "\n3 - Find the great Targarien." +
+                "\n4 - Download data into file.");
+//                "\n5 - Upload data from file.");
 
         Scanner in = new Scanner(System.in);
         int option = in.nextInt();
@@ -51,8 +55,16 @@ public class Main {
                     String name = srch.nextLine().toUpperCase();
                     System.out.println(targariens.searchPerson(name));
                     break;
-                default:
-                    throw new Exception();
+                case 4:
+                    DataRepository dataRepositoryDown = new DataRepository();
+                    dataRepositoryDown.dataOutput(targariens, personA);
+                    break;
+//                case 5:
+//                    DataRepository dataRepositoryUp = new DataRepository();
+//                    FamilyTree familyTree = dataRepositoryUp.deserialization();
+//                    System.out.println(familyTree.getTreeInfo());
+//                default:
+//                    throw new Exception();
             }
         }catch (Exception e){
             System.out.println("Wrong choice, mortal!");

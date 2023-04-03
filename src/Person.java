@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Person {
+public class Person extends DataRepository implements Serialisable {
     private static int generatorID = 1;
     private int id;
     public String firstName;

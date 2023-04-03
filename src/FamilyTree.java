@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree extends DataRepository implements Serialisable{
     public List<Person> targariens;
 
     public FamilyTree(List<Person> targariens) {
