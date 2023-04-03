@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private int date;
     private Gender gender;
@@ -106,5 +106,9 @@ public class Human implements Serializable {
         }
         sb.append("\n");
         return sb.toString();
+    }
+    @Override
+    public int compareTo(Human human) {
+        return getName().compareTo(human.getName());
     }
 }

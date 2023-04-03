@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyTree = new ArrayList<>();
 
     public void addPeople(Human human) {
@@ -20,26 +21,19 @@ public class FamilyTree implements Serializable {
     }
 
 
-//    public void findHuman() {
-//        System.out.printf("Введите имя для поиска: ");
-//        Scanner scn = new Scanner(System.in, "cp866");
-//        String findName = scn.nextLine();
-//        scn.close();
-//
-//        boolean find = false;
-//        for (int i = 0; i < familyTree.size(); i++) {
-//            if (familyTree.get(i).getName().contains(findName)) {
-//                System.out.println(familyTree.get(i));
-//                find = true;
-//            }
-//        }
-//        if (!find)
-//            System.out.println("Такой человек не найден.");
-//    }
-
     @Override
     public String toString() {
         return familyTree.toString();
+    }
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(familyTree);
+    }
+    public void sortByDate() {
+        familyTree.sort(new DateComparator());
+    }
+    public void sortByName() {
+        familyTree.sort(new NameComparator());
     }
 
 

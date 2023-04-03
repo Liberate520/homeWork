@@ -33,6 +33,17 @@ public class Main {
         FileHandlerLoad load = new FileHandlerLoad();
         load.loadData("familyTree.ser");
 
+        System.out.println("Список, отсортированный по дате смерти:");
+        family.sortByDate();
+        for (Human member: family.getFamilyTree()) {
+            System.out.println(member);
+        }
+        System.out.println("Список, отсортированный по имени:");
+        family.sortByName();
+        for (Human member: family.getFamilyTree()) {
+            System.out.println(member);
+        }
+
 
 
 
