@@ -2,12 +2,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
 
 public class Human implements Serializable {
     public String name, surname;
-    private static Integer humansCount = 0;
+    private static Integer sHumansCount = 0;
     public Integer humanId; 
     private Gender gender;
     private Integer birthYear;
@@ -24,7 +23,7 @@ public class Human implements Serializable {
         mother.addChild(father, this);;
         this.father = father;
         this.mother = mother;
-        this.humanId = humansCount;
+        this.humanId = sHumansCount;
         FamilyTree.humans.add(this);
     }
 
@@ -34,30 +33,29 @@ public class Human implements Serializable {
         this.surname = surname;
         this.gender = gender;
         this.birthYear = birthYear;
-        humanId = ++humansCount;
+        humanId = ++sHumansCount;
         FamilyTree.humans.add(this);
     }
-    public static List<Human> getByName(String name) //здесь логично сделать метод на уровне класса, поэтому статику оставил
-    {
-        Predicate<Human> byName = human -> human.name.equals(name);
-        List<Human> Humans = FamilyTree.humans.stream().filter(byName)
-                .collect(Collectors.toList());
-        return Humans;
-    }
-    public static List<Human> getBySurname(String surname) //здесь логично сделать метод на уровне класса, поэтому статику оставил
-    {
-        Predicate<Human> bySurname = human -> human.surname.equals(surname);
-        List<Human> Humans = FamilyTree.humans.stream().filter(bySurname)
-                .collect(Collectors.toList());
-        return Humans;
-    }
+    // public static List<Human> sGetByName(String name) //здесь логично сделать метод на уровне класса, поэтому статику оставил
+    // {
+    //     Predicate<Human> byName = human -> human.name.equals(name);
+    //     List<Human> Humans = FamilyTree.humans.stream().filter(byName)
+    //             .collect(Collectors.toList());
+    //     return Humans;
+    // }
+    // public static List<Human> sGetBySurname(String surname) //здесь логично сделать метод на уровне класса, поэтому статику оставил
+    // {
+    //     Predicate<Human> bySurname = human -> human.surname.equals(surname);
+    //     List<Human> Humans = FamilyTree.humans.stream().filter(bySurname)
+    //             .collect(Collectors.toList());
+    //     return Humans;
+    //}
     public List<Human> parents()
     {
         List<Human> parents = new ArrayList<>();
-        if(mother!= null && father != null)
-        {
-        parents.add(father);
-        parents.add(mother);
+        if (mother!= null && father != null) {
+            parents.add(father);
+            parents.add(mother);
         }
         return parents;
     }
@@ -102,24 +100,22 @@ public class Human implements Serializable {
     
     public void addChild(Human motherOrFather, Human child)
     {
-        if(child.father == null && child.mother == null && motherOrFather!=child && this != child)
-        {
+        if (child.father == null && child.mother == null && motherOrFather!=child && this != child) {
             motherOrFather.childs.add(child);
             this.childs.add(child);
         }
     }
     public void addSpouse(Human human) 
     {
-        if (spouse.isEmpty()) 
-        {
-            AddSpouse(human);
-            human.AddSpouse(this);
+        if (spouse.isEmpty()) {
+            setSpouse(human);
+            human.setSpouse(this);
         }
         else
         {
             spouse.clear();
-            AddSpouse(human);
-            human.AddSpouse(this);
+            setSpouse(human);
+            human.setSpouse(this);
         }
     }
     public  HashMap<String, List<Human>> allRelations()
@@ -155,7 +151,7 @@ public class Human implements Serializable {
         return grands;
     }
 
-    private void AddSpouse(Human human)
+    private void setSpouse(Human human)
     {
         spouse.add(human);
     }

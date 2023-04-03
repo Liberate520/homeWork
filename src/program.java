@@ -20,9 +20,10 @@ public class program {
 
         FamilyTree lokkiTree = new FamilyTree(lokki);
         FamilyTree kostyaTree = new FamilyTree(kostya);
+        System.out.println(kostyaTree.getName("kot"));
 
-        //System.out.println(lokkiTree.relations);
-        //System.out.println(lokkiTree.getName("kostya"));
+        // System.out.println(lokkiTree.relations);
+        // System.out.println(lokkiTree.getName("kostya"));
         FileHandler jsonHandler = new FileHandler();
         lokkiTree.save(jsonHandler, "homeWork/Log.json");
         kostyaTree.save(jsonHandler, "homeWork/Log.json");
@@ -33,8 +34,8 @@ public class program {
         // System.out.println(kot.parents());
         // System.out.println(kostya.parents());
         // System.out.println(stepan.allRelations());
-        // kostya.addChild(marina, kostya); 
-        // System.out.println(kostya.childs()); 
+        // kostya.addChild(marina, kostya);
+        // System.out.println(kostya.childs());
         // kostya.addSpouse(marina);
         // System.out.println(kostya.allRelations());
     }
