@@ -1,3 +1,7 @@
+package Family;
+
+import Family.Human.Human;
+
 import java.io.Serializable;
 import java.util.Scanner;
 import java.io.*;
@@ -66,7 +70,9 @@ public class Main implements Serializable {
                     break;
             }
             familyTolstoy.sortByName();
-            System.out.println(familyTolstoy);
+            System.out.println("по имени:"+familyTolstoy);
+            familyTolstoy.sortByChild();
+            System.out.println("по количеству детей:"+familyTolstoy);
 
         }
 

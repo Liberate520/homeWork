@@ -1,3 +1,10 @@
+package Family;
+
+import Family.Comporators.HumanComporatorByChild;
+import Family.Comporators.HumanComporatorByName;
+import Family.Human.Human;
+import Family.Human.HumanIterator;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,7 +62,9 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     public void sortByName(){
         familyTree.sort(new HumanComporatorByName());
     }
-
+    public void sortByChild(){
+        familyTree.sort(new HumanComporatorByChild());
+    }
 }
 
 

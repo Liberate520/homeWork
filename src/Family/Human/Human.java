@@ -1,3 +1,7 @@
+package Family.Human;
+
+import Family.Gender;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,9 @@ public class Human implements Serializable, Comparable<Human> {
     public Human getMother() {
         return mother;
     }
-
+    public List<Human> getChildrenList() {
+        return children;
+    }
     public String getChildrenInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Дети: ");
@@ -78,7 +84,6 @@ public class Human implements Serializable, Comparable<Human> {
     public int getYearBirth() {
         return this.yearBirth;
     }
-
 
     public void setYearBirth(int yearBirth) {
         this.yearBirth=yearBirth;
