@@ -4,6 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
+import tree.familyTree.FamilyTree;
+import tree.handlers.Input;
+import tree.handlers.Output;
+import tree.human.Gender;
+import tree.human.Human;
 
 /**
  * Урок 1. Принципы ООП: Инкапсуляция, наследование, полиморфизм
@@ -25,11 +32,17 @@ import java.util.List;
  * а объект интерфейса, с помощью которого и будет происходить запись.
  * Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
  * https://habr.com/ru/post/431524/
+ * 
+ * ### Урок 3. Некоторые стандартные интерфейсы Java и примеры их использования
+ * Продолжаем работать с проектом с семейным деревом.
+ * Реализовать интерфейс Iterable для дерева.
+ * Создать методы сортировки списка людей перед выводом,
+ * например по имени или по дате рождения (не менее 2)
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
         FamilyTree tree = new FamilyTree();
-        // вот здесь вопрос с New Date
+
         Human dad = new Human("Петр", "Осетров", Gender.Male, LocalDate.of(1986, 7, 21));
         Human mom = new Human("Лариса", "Осетрова", Gender.Female, LocalDate.of(1988, 2, 1));
         Human son = new Human("Дмитрий", "Осетров", Gender.Male, LocalDate.of(2000, 5, 4));
@@ -45,34 +58,34 @@ public class Main {
         tree.addHuman(son);
         tree.addHuman(dah);
 
-        List<Human> children = tree.getChildren(mom);
+        Set<Human> children = tree.getChildren(mom);
         // System.out.println("мать: " + mom);
         // for (Human child : children) {
-        // System.out.println("\tдети: " + child.toString());
+        // System.out.println("\tдети: " + child.getInfo());
         // }
 
-        List<Human> childList = tree.getChildren(dad);
+        Set<Human> childList = tree.getChildren(dad);
 
         // for (Human child : childList) {
-        // System.out.println(child.toString());
+        // System.out.println(child.getInfo());
         // }
 
-        List<Human> descendants = tree.getDescendants(dad);
+        Set<Human> descendants = tree.getDescendants(dad);
 
         // for (Human descendant : descendants) {
-        // System.out.println(descendant.toString());
+        // System.out.println(descendant.getInfo());
         // }
 
-        List<Human> relatives = tree.getRelatives(son);
+        Set<Human> relatives = tree.getRelatives(son);
 
-        // for (Human relative : relatives) {
-        // System.out.println(relative.toString());
-        // }
+        for (Human relative : relatives) {
+            System.out.println(relative.getInfo());
+        }
 
-        List<Human> searchResult = tree.searchByName("Петр");
+        Set<Human> searchResult = tree.searchByName("Петр");
 
         // for (Human human : searchResult) {
-        // System.out.println(human.toString());
+        // System.out.println(human.getInfo());
         // }
 
         Output output = new Output();
