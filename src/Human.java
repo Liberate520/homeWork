@@ -21,6 +21,18 @@ public class Human implements Serializable {
 
     private final String nameRegex = "^[\\p{L} .'-]+$";
 
+    public Human(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
+        this.name = name;
+        this.surname = surname;
+        this.dateBirth = dateBirth;
+        this.gender = gender;
+
+        this.father = father;
+        this.mother = mother;
+        this.maidenName = "";
+        this.childList = new ArrayList<>();
+    }
+
     public Human(String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
@@ -47,11 +59,11 @@ public class Human implements Serializable {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
 
     public String getDateBirth() {
@@ -182,42 +194,67 @@ public class Human implements Serializable {
         this.childList = childList;
     }
 
+//    public void addChild(Human child) {
+//        childList = new ArrayList<>();
+//        this.childList.add(child);
+//     }
+
     public void addChild(Human child) {
-        childList = new ArrayList<>();
-        this.childList.add(child);
-     }
-
-    public String getInfo() {
-        System.out.println("*".repeat(30));
-        StringBuilder human = new StringBuilder();
-        human.append(name).append(" ")
-                .append(surname).append(", ")
-                .append(getFather()).append(", ")
-                .append(getMother()).append(", ")
-                .append(getChildList());
-
-        return human.toString();
+        if (!childList.contains(child)) {
+            childList.add(child);
+        } else  {
+            System.out.println("Ребенок уже есть в списке");
+        }
     }
 
-    public String getChild() {
-        System.out.println("*".repeat(30));
-        StringBuilder child = new StringBuilder("дети: \n");
-        if (childList.size() != 0) {
-            child.append(childList.get(0).getName());
-            for (Human human: this.childList) {
-                child.append(human + "\n"); }
+    public String getInfo() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(name).append(" ")
+                .append(surname).append(", ")
+                .append(getAge()).append(" лет. ")
+                .append(getFatherInfo()).append(", ")
+                .append(getMotherInfo()).append(", ")
+                .append(getChildrenInfo());
+        return builder.toString();
+    }
+
+
+
+    public String getChildrenInfo() {
+        StringBuilder childs = new StringBuilder();
+        childs.append("\nдети: ");
+        if (childList.size() != 0){
+            childs.append(childList.get(0).getName());
+            for (int i = 1; i < childList.size(); i++) {
+                childs.append(", ");
+                childs.append(childList.get(i).getName());
+            }
         } else {
-            child.append("без детей");
+            childs.append("без детей");
         }
-        return child.toString();
+        return childs.toString();
     }
 
     @Override
     public String toString() {
         return this.name +  " " + this.surname + " " +
                 "Пол: " + getGender() + " " +
-                "Возраст: " + getAge() + " лет " + "\n" + "Отец: " + getFather() + "Мать: " + getMother();
+                "Возраст: " + getAge() + " лет " + "\n";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getName().equals(getName());
+    }
+
+
 //
 //    @Override
 //    public void save(Writable serializable) throws IOException {

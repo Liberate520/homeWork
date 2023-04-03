@@ -55,7 +55,6 @@ public class FamilyTree implements Serializable {
     }
 
     public String getInfo() {
-        System.out.println("*".repeat(30));
         StringBuilder tree = new StringBuilder();
         tree.append("В семье ").append(humanList.size())
                 .append(" человека").append(" \n");
