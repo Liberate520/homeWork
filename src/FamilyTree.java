@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     List<Human> familyTree;
 
     public FamilyTree(List<Human> familyTree) {
@@ -46,5 +47,4 @@ public class FamilyTree {
             for (Human item : childrens) System.out.print(item);
         } else System.out.printf("\nИсследуемый объект:\n%s\nДетей нет", human);
     }
-
 }

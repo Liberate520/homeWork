@@ -8,9 +8,17 @@ public class Main {
         test.add(humanOne);
         test.add(humanTwo);
         test.add(humanThree);
-        System.out.println(test);
-        test.parentsHuman(humanTwo);
-        test.childrensHuman(humanTwo);
+//        System.out.println(test);
+//        test.parentsHuman(humanTwo);
+//        test.childrensHuman(humanTwo);
+
+        FamilyTree testTwo;
+        String nameFile = "FamilyTree.bin";
+        SaveAndRead.saveFile(test, nameFile);
+        testTwo = SaveAndRead.loadFile(nameFile);
+        System.out.println(testTwo);
+//        testTwo.parentsHuman(humanTwo);
+//        testTwo.childrensHuman(humanTwo);
 
     }
 }
