@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -9,9 +10,16 @@ import java.util.Scanner;
 /**
  * FileCSV
  */
-public class FileCSV {
+public class FileCSV implements Files {
+    private String file_name;
 
-    private Map<Integer, LinkedHashMap<String, String>> bd_tree = new LinkedHashMap<>();
+    FileCSV(String file_name) {
+        this.file_name = file_name;
+    }
+
+    FileCSV() {
+        this("bd.csv");
+    }
 
     private Boolean fileExist(String file_name) {
         File file = new File(file_name);
@@ -35,19 +43,20 @@ public class FileCSV {
         return temp_map;
     }
 
-    public Map<Integer, LinkedHashMap<String, String>> readFile(String file_name) {
+    @Override
+    public Map<Integer, Person> readFile() {
+        Map<Integer, Person> p_list = new HashMap<>();
+
         String bd_file = new File(file_name).getAbsolutePath();
         if (fileExist(bd_file) == false) {
-            return this.bd_tree;
+            return p_list;
         }
-        int i = 0;
-        String line;
-        String[] values;
+
         try {
             FileReader fr = new FileReader(bd_file);
             Scanner fscan = new Scanner(fr);
             // Читаем название cтолбцов из csv файла
-            line = fscan.nextLine().trim().replaceAll("\n", "");
+            String line = fscan.nextLine().trim().replaceAll("\n", "");
             String[] fields = convertLineToArray(line);
 
             // Производим чтение данных и заполняем массив нашей базы, данными типа HashMap
@@ -56,102 +65,62 @@ public class FileCSV {
                 // Создаем массив HashMap со значениями из датасета
                 // где ключи - имена столбцов
                 LinkedHashMap<String, String> temp_map = new LinkedHashMap<>();
-                values = convertLineToArray(line);
+                String[] values = convertLineToArray(line);
                 temp_map = arraysToMap(fields, values);
-                // Наполняем базу данных
-                i = Integer.parseInt(temp_map.get("person_id"));
-                this.bd_tree.put(i, temp_map);
+
+                int i = Integer.parseInt(temp_map.get("person_id"));
+                Person pers = new Person(temp_map);
+                p_list.put(i, pers);
             }
-            // System.out.println(bd_laptop);
             fr.close();
             fscan.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return this.bd_tree;
 
+        return p_list;
     }
 
-    public Boolean saveFile(String file_name) {
+    @Override
+    public Boolean saveFile(String file_name, Tree family) {
         String bd_file = new File(file_name).getAbsolutePath();
         System.out.println("Сохраняем изменения в файл");
 
-        String text = convertMapToTxt();
-
+        String text = convertPersonslistToCSV(family);
         try {
             FileWriter writer = new FileWriter(bd_file, false);
             writer.write(text);
             writer.flush();
             writer.close();
-            System.out.println("file saved!");
+            System.out.println("file "+ file_name + " saved!");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
-
     }
 
-    private String convertMapToTxt() {
-        StringBuilder csv_text = new StringBuilder();
-        StringBuilder csv_fields = new StringBuilder();
+    private String convertPersonslistToCSV(Tree family) {
         LinkedHashSet<String> csv_fields_set = new LinkedHashSet<>();
+        StringBuilder csv_fields = new StringBuilder();
+        StringBuilder csv_text = new StringBuilder();
 
-        for (Map.Entry<Integer, LinkedHashMap<String, String>> bd_item : this.bd_tree.entrySet()) {
-
-            for (Map.Entry<String, String> pers_inf : bd_item.getValue().entrySet()) {
-                csv_fields_set.add(pers_inf.getKey());
-                csv_text.append(pers_inf.getValue() + ",");
+        for (Person pers : family) {
+            String[] temp = pers.getFullInfoInText().split(",");
+            for (String inf : temp) {
+                String[] inf_arr = inf.split(":", 2);
+                csv_fields_set.add(inf_arr[0]);
+                csv_text.append(inf_arr[1] + ",");
             }
-            csv_text.replace(csv_text.length() - 1, csv_text.length(), "");
-            csv_text.append("\n");
+            csv_text.replace(csv_text.length() - 1, csv_text.length(), "\n");
         }
 
-        for (String fields : csv_fields_set) {
-            csv_fields.append(fields + ",");
+        for (String str : csv_fields_set) {
+            csv_fields.append(str + ",");
         }
-        csv_fields.replace(csv_fields.length() - 1, csv_fields.length(), "");
+        csv_fields.replace(csv_fields.length() - 1, csv_fields.length(), "\n");
 
-        return csv_fields.append("\n" + csv_text).toString();
-    }
-
-    public void convertPersonslistToMap(Map<Integer,Person> persons_list){
-        this.bd_tree.clear();
-        for (Map.Entry<Integer,Person> items : persons_list.entrySet()) {
-            LinkedHashMap<String, String> temp_map = new LinkedHashMap<>();
-            temp_map.put("person_id", Integer.toString(items.getValue().getPerson_id()));
-            temp_map.put("person_name", items.getValue().getPerson_name());
-
-            temp_map.put("person_sex", items.getValue().getPerson_sex());
-
-            String dob = "";
-            if (items.getValue().getPerson_birthday()!=null)
-                dob =  items.getValue().getPersonBirthdayString();
-            temp_map.put("person_birthday",dob);
-            
-            String dod = "";
-            if (items.getValue().getPerson_death()!=null)
-                dod = items.getValue().getPersonDeathString();
-            temp_map.put("person_death", dod);
-            
-            String m_id = "";
-            if (items.getValue().getMother()!=null)
-                m_id = Integer.toString( items.getValue().getMother().getPerson_id());
-            temp_map.put("mother_id", m_id);
-
-            String d_id = "";
-            if (items.getValue().getFather()!=null)
-                d_id = Integer.toString( items.getValue().getFather().getPerson_id());
-            temp_map.put("father_id", d_id);
-
-            int i = 0;
-            for (Person child : items.getValue().getPerson_childs()) {
-                i++;
-                temp_map.put("child"+i,Integer.toString(child.getPerson_id()));
-            }
-            
-            this.bd_tree.put(items.getKey(), temp_map);
-        }
+        return csv_fields.append(csv_text).toString();
     }
 
 }

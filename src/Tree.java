@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -8,67 +10,67 @@ import java.util.Map;
  * Создаем список объектов типа Person
  * Все изменения так же будут записываться в файл
  */
-public class Tree {
-    public Map<Integer, Person> persons_list;
+public class Tree implements Iterable<Person> {
+    private Map<Integer, Person> persons_list;
+    LinkedList<Person> pers_list;
 
-    Tree(Map<Integer, LinkedHashMap<String, String>> bd_tree) {
-
-        persons_list = new HashMap<Integer, Person>();
-
-        for (Map.Entry<Integer, LinkedHashMap<String, String>> bd_item : bd_tree.entrySet()) {
-            Person pers = new Person(bd_item.getKey(), bd_item.getValue());
-            persons_list.put(bd_item.getKey(), pers);
-        }
-
-        makeRelatives(bd_tree);
+    Tree(FileCSV bd_file){
+        persons_list = bd_file.readFile();
+        makeRelativesFromCSV();
+        fillThePersonsList();
     }
 
-    // Tree() {
-    //     Map<Integer, LinkedHashMap<String, String>> bd_tree = new HashMap<>();
-    //     this(bd_tree);
-    // }
-
-    public void makeRelatives(Map<Integer, LinkedHashMap<String, String>> bd_tree){
-        int id, mother_id, father_id;
-        for (Map.Entry<Integer, LinkedHashMap<String, String>> bd_item : bd_tree.entrySet()) {
-            id = bd_item.getKey();
+    Tree() {
+        persons_list = new HashMap<>();
+    }
+    // Метод создания родственных связей из айди родителей
+    private void makeRelativesFromCSV(){
+        int mother_id, father_id;
+        for (Map.Entry<Integer, Person> item : persons_list.entrySet()) {
+            Person pers = item.getValue();
             
-            if (bd_item.getValue().get("mother_id")!=""){
+            if (pers.getPerson_info().get("mother_id")!="") {
                 mother_id = Integer.parseInt(
-                    bd_item.getValue()
-                    .get("mother_id")
+                    pers.getPerson_info().get("mother_id")
                     );
-                
-                Person mother = persons_list.get(mother_id);
-                this.persons_list.get(id).setMother(mother);
-                
-                Person child = persons_list.get(id);
-                this.persons_list.get(mother_id).setPerson_childs(child);
+                    
+                Person mother = this.persons_list.get(mother_id);
+                pers.setMother(mother);
+                this.persons_list.get(mother_id).setPerson_childs(pers);
             }
 
-            if (bd_item.getValue().get("father_id")!=""){
+            if (pers.getPerson_info().get("father_id")!="") {
                 father_id = Integer.parseInt(
-                    bd_item.getValue()
-                    .get("father_id")
+                    pers.getPerson_info().get("father_id")
                     );
-                Person father = persons_list.get(father_id);
-                this.persons_list.get(id).setFather(father);
-
-                Person child = persons_list.get(id);
-                this.persons_list.get(father_id).setPerson_childs(child);
+                    
+                Person father = this.persons_list.get(father_id);
+                pers.setFather(father);
+                this.persons_list.get(father_id).setPerson_childs(pers);
             }
-
-
         }
     }
-
-    public void show() {
-        for (Map.Entry<Integer, Person> pers : this.persons_list.entrySet()) {
-            System.out.printf("id: %d \t name: %s\n", pers.getValue().getPerson_id(), pers.getValue().getPerson_name());
-        }
-    }
-
     
+    private void fillThePersonsList(){
+        this.pers_list = new LinkedList<>();
+        for (Person pers : this)
+            this.pers_list.add(pers);
+    }
+
+    public void sortPersonsByBirthday() {
+        Collections.sort(this.pers_list);
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+        for (Person pers : this.pers_list) {
+            res.append("id: "+ pers.getPerson_id() + ":\t");
+            res.append(pers.getPerson_name() + "\t\t");
+            res.append("Birhday:"+pers.getPersonBirthdayString() + "\n");
+        }
+        return res.toString();
+    }
 
     public int addPersons(String name){
         Person new_peson = new Person(name);
@@ -80,17 +82,43 @@ public class Tree {
         return persons_list.get(id);
     }
 
-    public Boolean addPersonsParents(int id, String key) {
-        System.out.println("добавляем айди Матери или Отца");
-        System.out.println("или детей");
-        System.out.println("также можно добавить любые другие параметры, для доп информации");
-        return true;
-    }
 
     public ArrayList<Person> searchByName(String name) {
         ArrayList<Person> res_array = new ArrayList<>();
         System.out.println("Ищем людей в базе по имени");
         return res_array;
     }
+
+    public int size(){
+        return this.persons_list.size();
+    }
+
+    public Person get(int id){
+        return this.persons_list.get(id);
+    }
+
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new TreeIterator();
+    }
+
+    class TreeIterator implements Iterator<Person>{
+        Iterator<Integer> iterator = persons_list.keySet().iterator();
+        int size = persons_list.size();
+
+        @Override
+        public boolean hasNext() {
+            return size>0;
+        }
+
+        @Override
+        public Person next() {
+            size--;
+            return persons_list.get(iterator.next());
+        }
+
+    }
+
 
 }

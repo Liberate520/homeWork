@@ -1,25 +1,24 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-public class Family_tree {
+public class Main {
     private static Scanner iscan = new Scanner(System.in);
     static String file_name = "bd.csv";
     public static void main(String[] args) {
-        FileCSV bd_file = new FileCSV();
-        Map<Integer, LinkedHashMap<String, String>> bd_tree = bd_file.readFile(file_name);
-        Tree family_tree = new Tree(bd_tree);
+        FileCSV bd_file = new FileCSV(file_name);
+        Tree family_tree = new Tree( bd_file );
 
-        System.out.printf("Генеалогическое древо загружено!\nСостоит из %d человек",family_tree.persons_list.size());
+        System.out.printf("Генеалогическое древо загружено!\nСостоит из %d человек",family_tree.size());
 
         StringBuilder help = new StringBuilder();
         help.append("\n\nОсновные комманды консоли:\n");
         help.append("show - показывает всех участников дерева\n");
+        help.append("older - показывает всех участников дерева с сортировкой по дате рождения\n");
         help.append("id: 1679946500 - показывает подробную информацию о человеке\n");
         help.append("new.Name - Добавить нового человека(создает и присваевает id)\n");
         help.append("add.1679946500.sex.male - Добавить пол id:1679946500\n");
         help.append("add.1679946500.mother.1679946400 - Добавить id:1679946500 - мать id:1679946400\n");
-        help.append("add.1679946500.father.1679946400 - Добавить id:1679946500 - отца id:1679946400\n");
+        help.append("add.1679946500.father.1679946400 - Добавить отца, дети добавляются автоматически к родителям\n");
+        help.append("save - сохраняет данные в файл\n");
 
         String command;
         System.out.println(help.toString());
@@ -29,18 +28,16 @@ public class Family_tree {
                 break;
 
             if (command.equals("show"))
-                family_tree.show();
+                System.out.println(family_tree);
 
             if (command.contains("id:")){
                 String id_s = command.replaceAll("id:","").trim();
                 int id = Integer.parseInt(id_s);
-                System.out.println( family_tree.persons_list.get(id) );
+                System.out.println( family_tree.get(id) );
             }
 
             if (command.equals("save")){
-                bd_file.convertPersonslistToMap(family_tree.persons_list);
-
-                bd_file.saveFile(file_name);
+                bd_file.saveFile(file_name, family_tree);
             }
 
             if (command.contains("add.")){
@@ -50,8 +47,8 @@ public class Family_tree {
                 String key = edit_arr[2];
                 try {
                     int id_key = Integer.parseInt(edit_arr[3]);
-                    Person pers = family_tree.persons_list.get(id_key);
-                    Person led_pers = family_tree.persons_list.get(id);
+                    Person pers = family_tree.get(id_key);
+                    Person led_pers = family_tree.get(id);
 
                     if (key.equals("father")){
                         led_pers.setFather(pers);
@@ -61,13 +58,13 @@ public class Family_tree {
                         led_pers.setMother(pers);
                         pers.setPerson_childs(led_pers);
                         }
-                    // if (key.equals("child"))
-                    //     family_tree.persons_list.get(id).setPerson_childs(pers);  
+                    System.out.println( family_tree.get(id) ); 
                 } catch (Exception e) {
-                    if (key.equals("sex"))
-                        family_tree.persons_list.get(id).setPerson_sex(edit_arr[3]);
+                    if (key.equals("sex")){
+                        family_tree.get(id).setPerson_sex(edit_arr[3]);
+                        System.out.println( family_tree.get(id) );
+                    }
                 }
-                
             }
             
             if (command.contains("new.")){
@@ -75,15 +72,16 @@ public class Family_tree {
                 String name = edit_arr[1];
                 family_tree.addPersons(name);
             } 
-                // new.person.Petrov Sergey
-                // add.1679945990.father.1679925750
-                // searchById
-                // addPersonsParents
 
+            if (command.contains("older")){
+                family_tree.sortPersonsByBirthday();
+                System.out.println(family_tree);
+            }
                 
         }
      
     }
+
 
     public static String fromUsersConsole(String msg) {
         System.out.print(msg);
