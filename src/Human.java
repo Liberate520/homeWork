@@ -1,5 +1,5 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -7,24 +7,33 @@ public class Human {
 
     private String name;
     private String surname;
-    private Gender gender;
-    private Date birthday;
-    private Date dateOfDeath;
+    public Gender gender;
+    private LocalDate birthday;
+    private LocalDate dateOfDeath;
     private Human father;
     private Human mother;
+    private int humaID;
     private List<Human> children;
-    private static int humanID = 1111;
+    private static int humanIDiterator = 1111;
 
-    public Human(String name, String surname, Gender gender, Date birthday){
+    public Human(String name, String surname, LocalDate birthday, LocalDate dateOfDeath) {
+        this(name, surname, null, birthday, null, null, dateOfDeath);
+    }
+
+    public Human(String name, String surname, LocalDate birthday) {
+        this(name, surname, null, birthday, null, null, null);
+    }
+
+    public Human(String name, String surname, Gender gender, LocalDate birthday){
         this(name, surname, gender, birthday, null, null ,null);
     }
-    public Human(String name, String surname, Gender gender, Date birthday, Date dateOfDeath){
+    public Human(String name, String surname, Gender gender, LocalDate birthday, LocalDate dateOfDeath){
         this(name, surname, gender, birthday, null, null ,dateOfDeath);
     }
-    public Human(String name, String surname, Gender gender, Date birthday, Human father, Human mother){
+    public Human(String name, String surname, Gender gender, LocalDate birthday, Human father, Human mother){
         this(name, surname, gender, birthday, father,mother,  null);
     }
-    public Human(String name, String surname, Gender gender, Date birthday, Human father, Human mother, Date dateOfDeath) {
+    public Human(String name, String surname, Gender gender, LocalDate birthday, Human father, Human mother, LocalDate dateOfDeath) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -33,31 +42,32 @@ public class Human {
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
-        ++humanID;
+        this.humaID = humanIDiterator;
+        humanIDiterator += 1;
     }
 
     public String getName() {return name;}
     public String getSurname() {return surname;}
     public Gender getGender() {return gender;}
-    public Date getBirthday() {return birthday;}
-    public Date getDateOfDeath() {return dateOfDeath;}
+    public LocalDate getBirthday() {return birthday;}
+    public LocalDate getDateOfDeath() {return dateOfDeath;}
     public List<Human> getChildren() {return children;}
-    public static int getHumanID() {return humanID;}
+    public int getHumanID() {return humanIDiterator;}
 
     public void setName(String name) {this.name = name;}
     public void setSurname(String surname) {this.surname = surname;}
     public void setGender(Gender gender) {this.gender = gender;}
-    public void setBirthday(Date birthday) {this.birthday = birthday;}
-    public void setDateOfDeath(Date dateOfDeath) {this.dateOfDeath = dateOfDeath;}
+    public void setBirthday(LocalDate birthday) {this.birthday = birthday;}
+    public void setDateOfDeath(LocalDate dateOfDeath) {this.dateOfDeath = dateOfDeath;}
     public void setFather(Human father) {this.father = father;}
     public void setMother(Human mother) {this.mother = mother;}
     public void setChildren(List<Human> children) {this.children = children;}
 
     public String getInfoHuman(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Имя: " + getName() + "," + "Фамилия: " + getSurname() + "Дата рождения: " + getBirthday());
+        sb.append("Имя: " + getName() + ", " + " Фамилия: " + getSurname() +  ", " + "  Дата рождения: " + getBirthday() + ", " + "  Номер в базе данных: " + humaID + ", ");
         if (!(getDateOfDeath() == null)){
-            sb.append("Дата смерти:" + getDateOfDeath());
+            sb.append("  Дата смерти: " + getDateOfDeath());
         }
         return sb.toString();
     }
@@ -109,7 +119,7 @@ public class Human {
         Human human = (Human) o;
 
         // Compare the data members and return accordingly
-        return
+        return human.getName().equals(getName());
     }
-    Human h = new Human("Andrey", "Petrov", Gender.gender.WOMAN, 1864-2-2);
+
 }
