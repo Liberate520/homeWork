@@ -1,5 +1,13 @@
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
+
+
+// Урок1
 // Реализовать, с учетом ооп подхода, приложение.
 // Для проведения исследований с генеалогическим древом.
 // Идея: описать некоторое количество компонент, например:
@@ -7,13 +15,25 @@
 // Под “проведением исследования” можно понимать например
 // получение всех детей выбранного человека.
 
+
+// Урок 2. Принципы ООП Абстракция и интерфейсы. Пример проектирования
+
+// В проекте с гениалогическим древом подумайте и используйте интерфейсы.
+// Дополнить проект методами записи в файл и чтения из файла. Для этого создать
+//  отдельный класс и реализовать в нем нужные методы. Для данного класса сделайте
+//   интерфейс, который и используйте в своей программе. Например в классе дерева
+//   в качестве аргумента метода save передавайте не конкретный класс, а объект интерфейса,
+//   с помощью которого и будет происходить запись. Пример работы с интерфейсом Serialazable
+//    можно найти в материалах к уроку
+
+
 public class Main {
-    public static void main(String[] args) {
+
+
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree tree = new FamilyTree();
-
-
-
 
         tree.addNewHuman(new Human("Ирина", "Малинина", "21.08.1987"), null);
         tree.addNewHuman(new Human("Владимир", "Малинин", "10.02.1985"), null);
@@ -27,14 +47,28 @@ public class Main {
         tree.addNewHuman(new Human("Алексей", "Титов", "27.09.2019", tree.getByName("Олег"), tree.getByName(null)),
                 null);
 
+        System.out.println();
+        // System.out.println(tree.getInfo());
 
 
 
-         System.out.println(tree.getInfo());
+
+        MethodClass treeForWrite = new MethodClass(tree.getInfo(), null);
+        // System.out.println("Before write: \n" + treeForWrite);
+
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("FamilyTreeFile.out"));
+        out.writeObject(treeForWrite);
+        out.close();
+
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream("FamilyTreeFile.out"));
+        treeForWrite = (MethodClass) in.readObject();
+
+        System.out.println("After read: \n" + treeForWrite);
+
+
 
 
 
 
     }
-
 }
