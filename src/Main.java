@@ -36,5 +36,6 @@ public class Main {
         treeRestored = (FamilyTree) copy.loadData(tree, "copy9.txt");
         System.out.println(treeRestored);
 
+
     }
 }

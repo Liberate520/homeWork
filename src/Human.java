@@ -123,4 +123,5 @@ public class Human implements Serializable {
     public void setStatus(String Status) {
         this.status = status;
     }
+
 }

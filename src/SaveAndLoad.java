@@ -17,5 +17,4 @@ public class SaveAndLoad{
         ois.close();
         return obj;
     }
-
 }
