@@ -1,5 +1,10 @@
 package Seminar6.src.notebooks;
 
+import java.util.List;
+
 public interface Notes {
-    String getNotes(String str);
+
+    List <String> getRandomNotes();
+    void addNotes(String str);
 }
+

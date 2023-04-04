@@ -1,76 +1,95 @@
 package Seminar6.src.ui;
 
 import Seminar6.src.presenter.Presenter;
+import Seminar6.src.ui.commands.Commands;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUi implements View {
-    int size;
-    List<String> list;
-    Presenter presenter;
-    Scanner scanner;
+    private boolean signal;
+    private Presenter presenter;
+    private final Scanner scanner;
+
     public ConsoleUi() {
         scanner = new Scanner(System.in);
-        list = new ArrayList<>();
-        this.size = 0;
     }
 
-    @Override
-    public void addNote(String str) {
-        list.add(str);
-    }
+    public void launch() {
+        signal = true;
+        while (signal){
+            Menu menu = new Menu();
+            menu.menuCommand(this);
+            menu.print();
+            int num = CheckingInput.checkNumberOutOfRange(menu.getList().size());
+            int number = CheckingInput.checkNumberSizeZero(num,sizeNotes());
+            Commands vs = menu.fulFill(number-1);
+            vs.execute();
 
-    @Override
-    public String printNote() {
-
-        System.out.printf("запись номер %s\n",++size);
-        scanner.nextLine();
-        String str = scanner.nextLine();
-        return str;
-
-
-    }
-
-
-
-    @Override
-    public void allList() {
-        System.out.println("Все ваши записи:");
-        for (String l :
-                list) {
-            System.out.println(l);
         }
 
+    }
+    public  void addingNote(){
+        System.out.println("Введите запись ");
+        String str = scanner.nextLine();
+        presenter.addNote(str);
+        System.out.printf("Добавлена запись номер %s\n",
+                presenter.printAllNotes().size());
 
     }
-    public void launch(){
-        menu();
+    public void printAllNotes(){
+        System.out.printf("У вас %s записей:\n",
+                presenter.printAllNotes().size());
+        System.out.println("--------------------------------");
+        for (int i = 0;i < presenter.printAllNotes().size();i++){
+            System.out.printf("%s) %s\n",i+1,presenter.printAllNotes().get(i));
+        }
+    }
 
+    public void delete(){
+        printAllNotes();
+        System.out.println("введите номер записи для удаления ");
+        int number = check();
+        presenter.deleteNote(number-1);
+        System.out.printf("Запись номер %s удалена\n",number);
+    }
+
+    public  void changeNote(){
+        printAllNotes();
+        System.out.println("введите номер записи, " +
+                "которую хотите отредактировать ");
+        int number = check();
+        String st = presenter.getNotes().getRandomNotes().get(number-1);
+        System.out.printf("Сейчас здесь такая запись: %s\n",st);
+        System.out.println("внесите изменения :");
+        String string = scanner.nextLine();
+        presenter.changeNote(number,string);
+        System.out.printf("Запись номер %s изменена \n",number);
+
+    }
+
+    /*
+    получение размера списка записей
+     */
+    public  int sizeNotes(){
+        return  presenter.getNotes().getRandomNotes().size();
+    }
+
+    /*
+    использование  принципа DRY
+     */
+    public int check(){
+        int num = CheckingInput.checkNumberOutOfRange(sizeNotes());
+        return CheckingInput.checkNumberSizeZero(num,sizeNotes());
+    }
+
+    public void finish(){
+        signal = false;
+        System.out.println("Работа программы закончена");
     }
 
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
-    }
-
-    public void menu(){
-        System.out.println("выберите :");
-        System.out.println("1) добавить запись ");
-        System.out.println("2) вывести все записи  ");
-
-        int num = scanner.nextInt();
-
-        switch (num){
-            case (1)-> presenter.button(printNote());
-
-            case (2)-> allList();
-
-            default -> System.out.println("другие параметры не предусмотрены");
-
-        }
-
     }
 
 }
