@@ -105,7 +105,6 @@ public class Human {
 
     @Override
     public boolean equals(Object o) {
-
         // If the object is compared with itself then return true
         if (o == this) {
             return true;
@@ -117,9 +116,15 @@ public class Human {
         }
         // typecast o to Complex so that we can compare data members
         Human human = (Human) o;
-
         // Compare the data members and return accordingly
         return human.getName().equals(getName());
+    }
+
+    public void addChild(Human child){
+        if (!children.contains(child)){
+            children.add(child);
+        }
+        else System.out.println("Этот человек уже содержится в списке детей ");;
     }
 
 }
