@@ -68,7 +68,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void save(List<Human> humanList) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream("out.txt");
+        try (FileOutputStream fos = new FileOutputStream("src/out.txt");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(humanList);
         }
@@ -78,7 +78,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
         public List<Human> load() throws ClassNotFoundException, InvalidObjectException {
-        try (FileInputStream fis = new FileInputStream("out.txt");
+        try (FileInputStream fis = new FileInputStream("src/out.txt");
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             List<Human> object = (List<Human>) ois.readObject();
             return object;

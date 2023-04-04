@@ -23,11 +23,12 @@ public class Human implements Serializable {
 
     private final String nameRegex = "^[\\p{L} .'-]+$";
 
-    public Human(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
+    public Human(int id, String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
         this.name = name;
         this.surname = surname;
         this.dateBirth = dateBirth;
         this.gender = gender;
+        //this.id = id;
 
         this.father = father;
         this.mother = mother;
@@ -35,11 +36,12 @@ public class Human implements Serializable {
         this.childList = new ArrayList<>();
     }
 
-    public Human(String name, String surname, Gender gender, String dateBirth) {
+    public Human(int id, String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
         this.dateBirth = dateBirth;
         this.gender = gender;
+        this.id = id;
 
         this.father = null;
         this.mother = null;
@@ -48,6 +50,7 @@ public class Human implements Serializable {
     }
 
     public Human() {
+        this.id = 0;
         this.name = "unknown";
         this.surname = "unknown";
         this.dateBirth = "unknown";
@@ -99,7 +102,7 @@ public class Human implements Serializable {
     }
 
     public int getNumChildren() {
-        return getChildList().size();
+        return childList.size();
     }
 
     public String getMaidenName() {
@@ -263,38 +266,6 @@ public class Human implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-
-//
-//    @Override
-//    public void save(Writable serializable) throws IOException {
-//        try (FileOutputStream fos = new FileOutputStream("out.txt");
-//             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-//            oos.writeObject(serializable);
-//        }
-//        catch (IIOException ex) {
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-//
-//    @Override
-//    public Writable load() throws ClassNotFoundException, InvalidObjectException {
-//        try (FileInputStream fis = new FileInputStream("out.txt");
-//             ObjectInputStream ois = new ObjectInputStream(fis)) {
-//            Writable object = (Human) ois.readObject();
-//            return object;
-//        } catch (IOException ex) {
-//            ex.printStackTrace(System.out);
-//        }
-//        throw new InvalidObjectException("Object fail");
-//    }
-
-
-
-
-
-
-
 
 
 
