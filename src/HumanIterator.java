@@ -3,7 +3,7 @@ import java.util.List;
 
 public class HumanIterator implements Iterator<Human> {
 
-    private int id;
+    private int index;
     private List<Human> humanList;
 
     public HumanIterator(List<Human> humanList) {
@@ -12,11 +12,11 @@ public class HumanIterator implements Iterator<Human> {
 
     @Override
     public boolean hasNext() {
-        return id < humanList.size();
+        return index < humanList.size();
     }
 
     @Override
     public Human next() {
-        return humanList.get(id++);
+        return humanList.get(index++);
     }
 }

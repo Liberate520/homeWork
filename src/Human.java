@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Human implements Serializable {
 
+    private  int id;
+
     private String name;
     private String surname;
     private String dateBirth;
