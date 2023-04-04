@@ -1,19 +1,16 @@
-package FileWork;
-
+package fileWork;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import group.Groupable;
 
-import Group.Group;
-import Person.Person;
+public class FilehandlerOS implements Writeable {
 
-public class FilehandlerOS extends Filehahdler{
- 
-    public static void SaveToFile(Group group, String filename) {
-        // familyTree= new FamilyTree();
+    @Override
+    public void SaveToFile(Groupable groupList, String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(group);
+            oos.writeObject(groupList);
             System.out.printf("File " + filename + " has been written.\n");
             oos.flush();
             oos.close();
@@ -23,33 +20,17 @@ public class FilehandlerOS extends Filehahdler{
         }
     }
 
-    public static Group LoadFromFile(String filename) {
-        Group group = new Group() {
-
-            @Override
-            public void addPerson(Person person) {
-                throw new UnsupportedOperationException("Unimplemented method 'addPerson'");
-            }
-
-            @Override
-            public Person getPersonByName(String name) {
-                throw new UnsupportedOperationException("Unimplemented method 'getPersonByName'");
-            }
-
-            @Override
-            public void findPerson() {
-                throw new UnsupportedOperationException("Unimplemented method 'findPerson'");
-            }
-        };
+    public Groupable LoadFromFile(String filename) {
+        Groupable groupList=null;
         try (
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            group=((Group) ois.readObject());
+            groupList = ((Groupable) ois.readObject());
+            System.out.printf("File " + filename + " has been loaded.\n");
         } catch (Exception ex) {
 
             System.out.println(ex.getMessage());
         }
-        return group;
+        return groupList;
     }
-
 
 }

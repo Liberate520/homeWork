@@ -1,15 +1,25 @@
-package Group;
+package group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import group.comparators.PersonComparatorByAge;
+import group.comparators.PersonComparatorByGender;
+import group.comparators.PersonComparatorById;
+import group.comparators.PersonComparatorByName;
+import person.Person;
 
-import Person.Person;
+public class FamilyTree implements Groupable, Serializable {
 
-public class FamilyTree extends Group implements Serializable{
+    private List<Person> famyliTree;
 
-    private List<Person> famyliTree = new ArrayList<Person>();
+    public FamilyTree() {
+        famyliTree = new ArrayList<>();
+    }
+
+    int id = 0;
 
     public void addPerson(Person person) {
         famyliTree.add(person);
@@ -51,6 +61,32 @@ public class FamilyTree extends Group implements Serializable{
         if (!find)
             System.out.println("Такой человек не найден.");
         iScanner.close();
-        
+    }
+
+    public List<Person> getPersonList() {
+        return famyliTree;
+    }
+
+    public void sortByName() {
+        famyliTree.sort(new PersonComparatorByName());
+        ;
+    }
+
+    public void sortByAge() {
+        famyliTree.sort(new PersonComparatorByAge());
+    }
+
+    public void sortByGenderd() {
+        famyliTree.sort(new PersonComparatorByGender());
+        ;
+    }
+
+    public void sortById() {
+        famyliTree.sort(new PersonComparatorById());
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(famyliTree);
     }
 }

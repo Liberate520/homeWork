@@ -1,4 +1,4 @@
-package Person;
+package person;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -64,6 +64,14 @@ public class Person implements Serializable{
         return sb.toString();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+    
     public String getName() {
         return name;
     }

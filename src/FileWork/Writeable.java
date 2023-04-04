@@ -1,28 +1,8 @@
-package FileWork;
-import java.io.FileNotFoundException;
-import Group.Group;
-import Person.Person;
+package fileWork;
+import group.Groupable;
 
-public interface Writeable{
-    public static void SaveToFile(Group group, String filename) throws FileNotFoundException{};   
-    public static Group LoadFromFile(String filename){
-        Group group=new Group() {
+public interface Writeable {
+    void SaveToFile(Groupable groupList, String filename);
+    Groupable LoadFromFile(String filename);
+    }   
 
-            @Override
-            public void addPerson(Person person) {
-            }
-
-            @Override
-            public Person getPersonByName(String name) {
-                throw new UnsupportedOperationException("Unimplemented method 'getPersonByName'");
-            }
-
-            @Override
-            public void findPerson() {
-            }
-            
-        };
-        return group;
-    }; 
-      
-}

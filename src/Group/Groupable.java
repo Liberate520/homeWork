@@ -1,19 +1,20 @@
-package Group;
+package group;
+import java.util.List;
 
-import Person.Person;
+import person.Person;
 
 /**
  * GroupInterface
  */
-public interface Groupable {
-    public void addPerson(Person person);
+public interface Groupable extends Iterable{
 
-    public Person getPersonByName(String name);
-
-    public void findPerson();
-
-    // public Person getPerson(); 
-
-    // public int getSize();
+    void addPerson(Person person);
+    List<Person> getPersonList();
+    Person getPersonByName(String name);
+    void findPerson();
+    void sortByName(); 
+    void sortByAge();
+    void sortById();
+    void sortByGenderd();
     }
     
