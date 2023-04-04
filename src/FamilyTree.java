@@ -1,10 +1,13 @@
 import javax.imageio.IIOException;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public FamilyTree() {
@@ -64,16 +67,38 @@ public class FamilyTree implements Serializable {
         return tree.toString();
     }
 
-
-    public void save(FamilyTree tree) throws IOException {
+    public void save(List<Human> humanList) throws IOException {
         try (FileOutputStream fos = new FileOutputStream("out.txt");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(tree);
+            oos.writeObject(humanList);
         }
         catch (IIOException ex) {
             ex.printStackTrace(System.out);
         }
     }
+
+        public List<Human> load() throws ClassNotFoundException, InvalidObjectException {
+        try (FileInputStream fis = new FileInputStream("out.txt");
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            List<Human> object = (List<Human>) ois.readObject();
+            return object;
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+        throw new InvalidObjectException("Object fail");
+    }
+
+
+
+//    public void save(FamilyTree tree) throws IOException {
+//        try (FileOutputStream fos = new FileOutputStream("out.txt");
+//             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+//            oos.writeObject(tree);
+//        }
+//        catch (IIOException ex) {
+//            ex.printStackTrace(System.out);
+//        }
+//    }
 //
 //    @Override
 //    public FamilyTree load() throws ClassNotFoundException, InvalidObjectException {
@@ -87,7 +112,68 @@ public class FamilyTree implements Serializable {
 //        throw new InvalidObjectException("Object fail");
 //    }
 
+    public boolean saveTree(FamilyTree tree) {
+        boolean flag = false;
+        File file = new File("tree.txt");
+        ObjectOutputStream oos = null;
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            if (fos != null) {
+                try {
+                    oos = new ObjectOutputStream(fos);
+                    flag = true;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return flag;
+    }
 
+    public FamilyTree loadTree() throws InvalidObjectException {
+        File file = new File("tree.txt");
+        ObjectInputStream ois = null;
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            if (fis != null) {
+                try {
+                    ois = new ObjectInputStream(fis);
+                    FamilyTree tree = (FamilyTree) ois.readObject();
+                    return tree;
+                } catch (IOException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        throw new InvalidObjectException("Object fail");
+    }
+
+
+    @Override
+    public Iterator<Human> iterator() {
+        return null;
+    }
 
 
 }
