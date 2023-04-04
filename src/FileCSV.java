@@ -44,44 +44,6 @@ public class FileCSV implements Files {
     }
 
     @Override
-    public Map<Integer, Person> readFile() {
-        Map<Integer, Person> p_list = new HashMap<>();
-
-        String bd_file = new File(file_name).getAbsolutePath();
-        if (fileExist(bd_file) == false) {
-            return p_list;
-        }
-
-        try {
-            FileReader fr = new FileReader(bd_file);
-            Scanner fscan = new Scanner(fr);
-            // Читаем название cтолбцов из csv файла
-            String line = fscan.nextLine().trim().replaceAll("\n", "");
-            String[] fields = convertLineToArray(line);
-
-            // Производим чтение данных и заполняем массив нашей базы, данными типа HashMap
-            while (fscan.hasNextLine()) {
-                line = fscan.nextLine().trim().replaceAll("\n", "");
-                // Создаем массив HashMap со значениями из датасета
-                // где ключи - имена столбцов
-                LinkedHashMap<String, String> temp_map = new LinkedHashMap<>();
-                String[] values = convertLineToArray(line);
-                temp_map = arraysToMap(fields, values);
-
-                int i = Integer.parseInt(temp_map.get("person_id"));
-                Person pers = new Person(temp_map);
-                p_list.put(i, pers);
-            }
-            fr.close();
-            fscan.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return p_list;
-    }
-
-    @Override
     public Boolean saveFile(String file_name, Tree family) {
         String bd_file = new File(file_name).getAbsolutePath();
         System.out.println("Сохраняем изменения в файл");
@@ -121,6 +83,79 @@ public class FileCSV implements Files {
         csv_fields.replace(csv_fields.length() - 1, csv_fields.length(), "\n");
 
         return csv_fields.append(csv_text).toString();
+    }
+
+
+    @Override
+    public Tree readFile() {
+        Map<Integer, Person> p_list = new HashMap<>();
+
+        String bd_file = new File(file_name).getAbsolutePath();
+        if (fileExist(bd_file) == false) {
+            return (Tree) p_list;
+        }
+
+        try {
+            FileReader fr = new FileReader(bd_file);
+            Scanner fscan = new Scanner(fr);
+            // Читаем название cтолбцов из csv файла
+            String line = fscan.nextLine().trim().replaceAll("\n", "");
+            String[] fields = convertLineToArray(line);
+
+            // Производим чтение данных и заполняем массив нашей базы, данными типа HashMap
+            while (fscan.hasNextLine()) {
+                line = fscan.nextLine().trim().replaceAll("\n", "");
+                // Создаем массив HashMap со значениями из датасета
+                // где ключи - имена столбцов
+                LinkedHashMap<String, String> temp_map = new LinkedHashMap<>();
+                String[] values = convertLineToArray(line);
+                temp_map = arraysToMap(fields, values);
+
+                int i = Integer.parseInt(temp_map.get("person_id"));
+                Person pers = new Person(temp_map);
+                p_list.put(i, pers);
+            }
+            fr.close();
+            fscan.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return makeRelativesFromCSV(p_list);
+    }
+    
+    // Метод создания родственных связей из айди родителей
+    private Tree makeRelativesFromCSV(Map<Integer, Person> persons_list){
+        int mother_id, father_id;
+        // for (Person pers : family) {
+        for (Map.Entry<Integer, Person> item : persons_list.entrySet()) {
+            Person pers = item.getValue();
+            
+            if (pers.getPerson_info().get("mother_id")!="") {
+                mother_id = Integer.parseInt(
+                    pers.getPerson_info().get("mother_id")
+                    );
+                    
+                Person mother = persons_list.get(mother_id);
+                pers.setMother(mother);
+                persons_list.get(mother_id).setPerson_childs(pers);
+            }
+
+            if (pers.getPerson_info().get("father_id")!="") {
+                father_id = Integer.parseInt(
+                    pers.getPerson_info().get("father_id")
+                    );
+                    
+                Person father = persons_list.get(father_id);
+                pers.setFather(father);
+                persons_list.get(father_id).setPerson_childs(pers);
+            }
+        }
+        Tree family = new Tree();
+        for (Map.Entry<Integer, Person> itm : persons_list.entrySet()) {
+            System.out.println("ID:" + itm.getKey());
+            family.addPersonToTree(itm.getKey(), itm.getValue());    
+        }
+        return family;
     }
 
 }

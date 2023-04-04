@@ -1,18 +1,21 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static Scanner iscan = new Scanner(System.in);
     static String file_name = "bd.csv";
     public static void main(String[] args) {
+
         FileCSV bd_file = new FileCSV(file_name);
-        Tree family_tree = new Tree( bd_file );
+        Tree family_tree = bd_file.readFile();
+
 
         System.out.printf("Генеалогическое древо загружено!\nСостоит из %d человек",family_tree.size());
 
         StringBuilder help = new StringBuilder();
         help.append("\n\nОсновные комманды консоли:\n");
         help.append("show - показывает всех участников дерева\n");
-        help.append("older - показывает всех участников дерева с сортировкой по дате рождения\n");
+        help.append("sort by name - показывает всех участников дерева с сортировкой по имени\n");
         help.append("id: 1679946500 - показывает подробную информацию о человеке\n");
         help.append("new.Name - Добавить нового человека(создает и присваевает id)\n");
         help.append("add.1679946500.sex.male - Добавить пол id:1679946500\n");
@@ -73,18 +76,28 @@ public class Main {
                 family_tree.addPersons(name);
             } 
 
-            if (command.contains("older")){
-                family_tree.sortPersonsByBirthday();
-                System.out.println(family_tree);
+            if (command.contains("sort by name")){
+                List<Person> persons_list = family_tree.getThePersonsList();
+                // sortPersonsById(persons_list);
+                sortPersonsByName(persons_list);
+                System.out.println(persons_list.toString());
             }
                 
         }
      
     }
 
-
     public static String fromUsersConsole(String msg) {
         System.out.print(msg);
         return iscan.nextLine();
+    }
+
+
+    public static void sortPersonsById(List<Person> pers_list) {
+        pers_list.sort(new ComparatorById());
+    }
+
+    public static void sortPersonsByName(List<Person> pers_list) {
+        pers_list.sort(new ComparatorByName());
     }
 }

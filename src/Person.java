@@ -10,7 +10,7 @@ import java.util.Map;
  * Содержит индитификаторы детей, если такие имееются.
  */
 
-public class Person implements Comparable<Person> {
+public class Person  {
     private Map<String, String> person_info;
     private String person_name, person_sex;
     private Date person_birthday, person_death;
@@ -167,15 +167,5 @@ public class Person implements Comparable<Person> {
         return docDate;
     }
 
-    @Override
-    public int compareTo(Person o) {
-        Date first = this.getPerson_birthday();
-        Date second = o.getPerson_birthday();
-        if (first==null)
-            first = new Date(0L);
-        if (second==null)
-            second = new Date(0L);
-        return first.compareTo(second);
-    }
 
 }
