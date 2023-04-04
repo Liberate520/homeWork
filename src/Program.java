@@ -17,8 +17,6 @@ public class Program implements Serializable{
         Human human5 = new Human("Станислав", "Петров", Gender.Male, LocalDate.of(1985, 9, 11));
         Human human6 = new Human("Юлия", "Скворцова", Gender.Female,LocalDate.of(1912, 4, 19), LocalDate.of(1968, 01, 19));
 
-
-
         human2.addMother(human6);
         human2.addChild(human4);
 
@@ -28,8 +26,6 @@ public class Program implements Serializable{
         myTree.addHumanToTree(human4);
         myTree.addHumanToTree(human5);
         myTree.addHumanToTree(human6);
-
-
 
         //System.out.println(myTree.getInfo());
         System.out.println(human2.getFatherInfo());
@@ -43,6 +39,5 @@ public class Program implements Serializable{
         //Загрузка, каст и чтение из файла
         Human test = (Human)handler.read();
         System.out.println("\nДанные загружены из файла: " + test.getInfoHuman());
-
     }
 }

@@ -141,5 +141,4 @@ public class Human implements Serializable {
             this.mother = mother;
         }
     }
-
 }

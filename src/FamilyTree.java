@@ -22,9 +22,6 @@ public class FamilyTree implements Serializable{
         }
     }
 
-
-
-
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве содержится ");

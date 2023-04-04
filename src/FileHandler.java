@@ -13,7 +13,6 @@ public class FileHandler implements Writable, Serializable{
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
-
     }
 
     @Override
