@@ -1,10 +1,13 @@
+import java.io.*;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.time.format.DateTimeFormatter;
 
-public class Program {
 
-    public static void main(String[] args) {
+public class Program implements Serializable{
+
+    public Program() throws IOException, ClassNotFoundException {
+    }
+
+    public static void main(String[] args)  throws IOException, ClassNotFoundException {
         FamilyTree myTree =new FamilyTree();
 
         Human human1 = new Human ("Андрей", "Шевцов", Gender.Male,LocalDate.of(1915, 1, 14), LocalDate.of(1959, 01, 13));
@@ -17,7 +20,6 @@ public class Program {
 
 
         human2.addMother(human6);
-        human2.addChild(human4);
         human2.addChild(human4);
 
         myTree.addHumanToTree(human1);
@@ -33,6 +35,14 @@ public class Program {
         System.out.println(human2.getFatherInfo());
         System.out.println(human2.getMotherInfo());
         System.out.println(human2.getChildrenInfo());
-    }
 
+        //Сохраняем во внешний файл
+        FileHandler handler = new FileHandler();
+        handler.save(human2);
+
+        //Загрузка, каст и чтение из файла
+        Human test = (Human)handler.read();
+        System.out.println("\nДанные загружены из файла: " + test.getInfoHuman());
+
+    }
 }
