@@ -33,7 +33,7 @@ public class Main {
                 tree) {
             System.out.println(human);
         }
-        System.out.println("По количеству детей");
+        System.out.println("По количеству детей: ");
         service.sortByNumChild();
         for (Human human :
                 tree) {
