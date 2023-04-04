@@ -172,7 +172,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     @Override
     public Iterator<Human> iterator() {
-        return null;
+        return new HumanIterator(humanList);
     }
 
 
