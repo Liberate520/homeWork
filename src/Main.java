@@ -30,4 +30,6 @@ public class Main {
             familyTree.findHuman();
         }
     }
+
+    
 }

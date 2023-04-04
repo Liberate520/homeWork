@@ -33,4 +33,6 @@ public class FamilyTree {
         }
         if (!find) System.out.println("Такой человек не найден.");
     }
+
+    
 }
