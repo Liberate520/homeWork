@@ -1,8 +1,14 @@
+
+import familyTree.FamilyTree;
+import fileWorker.fileHandlers.FileHandler;
+import human.Gender;
+import human.Human;
+
 public class program {
     public static void main(String[] args) {
-        Human kostya = new Human("kostya", "la", Gender.Male, 199);
-        Human marina = new Human("marina", "ma", Gender.Female, 199);
-        Human kot = new Human("kot", "lakr", Gender.Male, 201, kostya, marina);
+        Human kostya = new Human("Kostya", "la", Gender.Male, 199);
+        Human marina = new Human("Marina", "ma", Gender.Female, 199);
+        Human kot = new Human("Kot", "lakr", Gender.Male, 201, kostya, marina);
         Human slava = new Human("Slava", "lcsd", Gender.Male, 199, kostya, marina);
         Human sasha = new Human("Sasha", "fdf", Gender.Female, 199);
         Human alex = new Human("Alexandr", "popo", Gender.Male, 201);
@@ -22,21 +28,31 @@ public class program {
         FamilyTree kostyaTree = new FamilyTree(kostya);
         System.out.println(kostyaTree.getName("kot"));
 
-        // System.out.println(lokkiTree.relations);
-        // System.out.println(lokkiTree.getName("kostya"));
         FileHandler jsonHandler = new FileHandler();
-        lokkiTree.save(jsonHandler, "homeWork/Log.json");
-        kostyaTree.save(jsonHandler, "homeWork/Log.json");
-        jsonHandler.readFromfile("homeWork/Log.json");
+        
+        System.out.println(kostyaTree.getFamilyTreeList());
+        Service sortHelper = new Service(kostyaTree);
 
-        // System.out.println(kostya.childs());
-        // System.out.println(FamilyTree.humans);
-        // System.out.println(kot.parents());
-        // System.out.println(kostya.parents());
-        // System.out.println(stepan.allRelations());
-        // kostya.addChild(marina, kostya);
-        // System.out.println(kostya.childs());
-        // kostya.addSpouse(marina);
-        // System.out.println(kostya.allRelations());
+        sortHelper.sortById();
+        for (Human human : kostyaTree) {
+            System.out.println(human.getId());
+        }
+        System.out.println();
+        sortHelper.sortByName();
+        for (Human human : kostyaTree) {
+            System.out.println(human);
+        }
+        System.out.println();
+        sortHelper.sortBySurName();
+        for (Human human : kostyaTree) {
+            System.out.println(human);
+        }
+
+        sortHelper.save(jsonHandler, "homeWork/Log.json");
+        sortHelper.readFromfile("homeWork/Log.json");
+
+        System.out.println(kostya.compareTo(kostya));
+        System.out.println(kostya.compareTo(marina));
+        System.out.println(kostya.compareTo(sortHelper));
     }
 }

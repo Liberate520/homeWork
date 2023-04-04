@@ -1,3 +1,4 @@
+package fileWorker;
 
 public interface FileWorker {
     void save(Object object, String filename);
