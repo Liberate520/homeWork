@@ -1,24 +1,23 @@
+import famyilyTree.FamilyTree;
+import human.Gender;
+import human.Human;
+
 public class Main {
     public static void main(String[] args) {
-        Human human1 = new Human("Никита", "Вавилов", "1974-11-21", Gender.Male);
-        Human human2 = new Human("Ольга", "Павлова", "1975-06-15", Gender.Female);
-        Human human3 = new Human("Федор", "Никитин", "2000-03-08", Gender.Male);
-        Human human4 = new Human("Нина", "Антонова", "2003-01-27", Gender.Female);
-        Human human5 = new Human("Виктор", "Маркин", "2023-08-18", Gender.Female);
-        Human human6 = new Human("Спиридон", "Кутузов", "1975-08-15", Gender.Male);
+        FamilyTree tree = new FamilyTree();
 
-        FamilyTree familyTree = new FamilyTree();
+        tree.add(new Human("Никита", Gender.Male));
+        tree.add(new Human("Ольга", Gender.Female));
+        tree.add(new Human("Станислав", Gender.Male, tree.getByName("Никита"), tree.getByName("Ольга")));
+        tree.add(new Human("Нина", Gender.Female, tree.getByName("Никита"), tree.getByName("Ольга")));
+        tree.add(new Human("Павел", Gender.Male));
+        tree.add(new Human("Виктор", Gender.Male));
+        tree.add(new Human("Елена", Gender.Female));
+        tree.add(new Human("Валенитин", Gender.Male));
+        tree.add(new Human("Алена", Gender.Female));
+        tree.add(new Human("Валерий", Gender.Male, tree.getByName("Виктор"), tree.getByName("Елена")));
 
-        familyTree.add(human1);
-        familyTree.add(human2);
-        familyTree.add(human3);
-        familyTree.add(human4);
-        familyTree.add(human5);
-        familyTree.add(human6);
-
-        // System.out.println(humanThree.getChildrens());w
-        // System.out.println(familyTree);
-        System.out.println(familyTree.search("Кутузов"));
+        System.out.println(tree.getInfo());
     }
 }
 
