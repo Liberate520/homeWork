@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import tree.Tree;
 
-public interface OutInput {
-    void save(Tree famailytree) throws FileNotFoundException, IOException;
+public interface OutInput<E> {
+    void save(Tree<E> famailytree) throws FileNotFoundException, IOException;
 
     Object load() throws ClassNotFoundException, IOException;
 }

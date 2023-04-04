@@ -3,10 +3,10 @@ import java.util.Comparator;
 
 import human.Human;
 
-public class HumanComparebyChild implements Comparator<Human> {
+public class HumanComparebyChild<E extends Human> implements Comparator<E> {
 
     @Override
-    public int compare(Human h0, Human h1) {
+    public int compare(E h0, E h1) {
         return Integer.compare(h1.getChildren().size(), h0.getChildren().size());
     }
 }

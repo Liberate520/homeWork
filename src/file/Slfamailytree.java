@@ -8,10 +8,10 @@ import java.io.ObjectOutputStream;
 
 import tree.Tree;
 
-public class Slfamailytree implements OutInput {
+public class Slfamailytree<E> implements OutInput<E> {
 
     @Override
-    public void save(Tree ft) throws FileNotFoundException, IOException {
+    public void save(Tree<E> ft) throws FileNotFoundException, IOException {
         ObjectOutputStream savetree = new ObjectOutputStream(new FileOutputStream("data.dat"));
         savetree.writeObject(ft);
         savetree.close();

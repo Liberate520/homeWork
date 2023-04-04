@@ -30,7 +30,7 @@ public class Main {
         human2.setMother(human5);
         human3.setFather(human4);
 
-        Tree famailytree = new FamilyTree();
+        Tree<Human> famailytree = new FamilyTree<>();
 
         famailytree.addpeople(human1, human2, human3);
         famailytree.addpeople(human2, human5, null);
@@ -44,7 +44,7 @@ public class Main {
             System.out.println(human);
         }
 
-        Sorts sorts = new Sorts(famailytree);
+        Sorts<Human> sorts = new Sorts<>(famailytree);
         sorts.SortbyName();
         System.out.println();
         for(Human human: famailytree){
@@ -80,9 +80,9 @@ public class Main {
         }
         scan.close();
 
-        OutInput saveload = new Slfamailytree();
+        OutInput<Human> saveload = new Slfamailytree<>();
         saveload.save(famailytree);
-        famailytree = (Tree) saveload.load();
+        famailytree = (Tree<Human>) saveload.load();
         System.out.println(famailytree);  
     }
 }

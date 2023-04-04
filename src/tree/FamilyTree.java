@@ -6,11 +6,11 @@ import java.util.List;
 
 import human.Human;
 
-public class FamilyTree implements Serializable, Tree {
+public class FamilyTree<E extends Human> implements Serializable, Tree<E> {
     private int id;
-    private List<Human> people;
+    private List<E> people;
 
-    public FamilyTree(List<Human> people) {
+    public FamilyTree(List<E> people) {
         this.people = people;
     }
 
@@ -18,11 +18,11 @@ public class FamilyTree implements Serializable, Tree {
         this(new ArrayList<>());
     }
 
-    public List<Human> getPeople() {
+    public List<E> getPeople() {
         return people;
     }
 
-    public void addpeople(Human h, Human mh, Human fh) {
+    public void addpeople(E h, E mh, E fh) {
         if (mh != null)
             mh.addchildren(h);
         if (fh != null)
@@ -31,8 +31,8 @@ public class FamilyTree implements Serializable, Tree {
         people.add(h);
     }
 
-    public Human findHuman(String str, Human nl) {
-        for (Human item : people) {
+    public E findHuman(String str, E nl) {
+        for (E item : people) {
             if (str.toLowerCase().equals(item.getName().toLowerCase())) {
                 return item;
             }
@@ -48,7 +48,7 @@ public class FamilyTree implements Serializable, Tree {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(this.people);
+    public Iterator<E> iterator() {
+        return new HumanIterator<E>(this.people);
     }
 }

@@ -1,12 +1,10 @@
 package tree;
 import java.util.List;
 
-import human.Human;
+public interface Tree<E> extends Iterable<E> {
+    void addpeople(E h, E mh, E fh);
 
-public interface Tree extends Iterable<Human> {
-    void addpeople(Human h, Human mh, Human fh);
+    E findHuman(String str, E nl);
 
-    Human findHuman(String str, Human nl);
-
-    List<Human> getPeople();
+    List<E> getPeople();
 }
