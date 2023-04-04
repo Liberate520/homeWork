@@ -8,7 +8,7 @@ public class Human implements Serializable
     private int id;
     private Human father;
     private Human mother;
-    Gender gender;
+    private Gender gender;
     private String firstName;
     private String lastName;
     private LocalDate dataBirth;

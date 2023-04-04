@@ -15,46 +15,58 @@ public class FileHandlerRead implements SaveAs
         System.out.println("вывод 1: " + familyTree1);
     }    
 
-    public static void ReadTxt() throws IOException, ClassNotFoundException
+    public static String ReadTxt() throws IOException, ClassNotFoundException
     {
         
         FileReader fr = new FileReader("file.txt");
         BufferedReader buff = new BufferedReader(fr);
         String str;
         System.out.println("\nВывод из файла формата .txt\n ");
+        StringBuilder sb = new StringBuilder();
             while((str = buff.readLine()) != null)
             {
+                sb.append(str);
                 System.out.println(str);
             }
         buff.close();
+        System.out.println("Данные восстановлены! ");
+        return sb.toString();
     }
 
-    public static void ReadMD() throws IOException, ClassNotFoundException
+    public static String ReadMD() throws IOException, ClassNotFoundException
     {
         
         FileReader fr = new FileReader("file.md");
         BufferedReader buff = new BufferedReader(fr);
         String str;
         System.out.println("\nВывод из файла формата .md\n ");
+        StringBuilder sb = new StringBuilder();
             while((str = buff.readLine()) != null)
             {
+                sb.append(str);
                 System.out.println(str);
             }
         buff.close();
+        System.out.println("Данные восстановлены! ");
+        return sb.toString();
     }
 
-    public static void ReadDoc() throws IOException, ClassNotFoundException
+    public static String ReadDoc() throws IOException, ClassNotFoundException
     {
     
         FileReader fr = new FileReader("file.doc");
         BufferedReader buff = new BufferedReader(fr);
         String str;
         System.out.println("\nВывод из файла формата .doc\n ");
+        StringBuilder sb = new StringBuilder();
             while((str = buff.readLine()) != null)
             {
+                sb.append(str);
                 System.out.println(str);
             }
         buff.close();
+        System.out.println("Данные восстановлены! ");
+        return sb.toString();
     }
 
 

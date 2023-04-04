@@ -1,9 +1,10 @@
 // import writeReadData.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
-public class FamilyTree implements Serializable
+public class FamilyTree implements Serializable, Iterable<Human>
 {  
     private ArrayList<Human> famyliTree = new ArrayList<>();
 
@@ -41,5 +42,16 @@ public class FamilyTree implements Serializable
             }    
         }
         if (!find) System.out.println("Такой человек не найден.");
+    } 
+
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(famyliTree);
+    }
+    public void sortByAge() {
+        famyliTree.sort(new AgeComparator());
+    }
+    public void sortByLastName() {
+        famyliTree.sort(new NameComparator());
     }
 }
