@@ -1,7 +1,8 @@
+import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree tree = new FamilyTree();
 
         tree.addKin(new Human("мать матери ego", "Галина", "Бородихина", LocalDate.of(1932, 1, 23)));
@@ -14,6 +15,7 @@ public class Main {
         tree.addKin(new Human("дочь сына матери матери ego", "Лариса", "Мягкова", LocalDate.of(1983, 8, 7), null, tree.getHuman("Юрий", "Мягков")));
         tree.addKin(new Human("дочь дочери матери матери ego", "Юлия", "Констман", LocalDate.of(1988, 4, 12), tree.getHuman("Марина", "Мягкова"), null));
         tree.addKin(new Human("сын ego", "Матвей", "Мягков", LocalDate.of(2021, 10, 5), null, tree.getHuman("Денис", "Мягков")));
+        tree.addKin(new Human("дочь матери отца матери ego", "Любовь", "Мягкова", LocalDate.of(1947, 07, 01)));
 
         tree.getHuman("сын ego").setMother(new Human("мать сына ego", " Светлана", "Шемякина", LocalDate.of(1988, 04, 02)));
 
@@ -24,8 +26,15 @@ public class Main {
         //System.out.println(tree.getHuman("сын ego"));
         //System.out.println(tree.getAllChildren("Галина", "Бородихина"));
         //System.out.println("=======");
-        System.out.println(tree.getHuman("Галина", "Бородихина").getChildren());
+        //System.out.println(tree.getHuman("Галина", "Бородихина").getChildren());
 
+        System.out.println(tree);
+        System.out.println("===");
+        SaveAndLoad copy = new SaveAndLoad();
+        copy.saveData(tree, "copy9.txt");
+        FamilyTree treeRestored = new FamilyTree();
+        treeRestored = (FamilyTree) copy.loadData(tree, "copy9.txt");
+        System.out.println(treeRestored);
 
     }
 }

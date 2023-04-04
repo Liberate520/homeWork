@@ -1,9 +1,8 @@
+import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     HashSet<Human> familyTree;
 
     public FamilyTree(HashSet<Human> familyTree) {
@@ -16,18 +15,17 @@ public class FamilyTree {
 
     public void addKin(Human h) {
         familyTree.add(h);
-       /* if (this.familyTree.contains(h.getMother())) {
+        if (this.familyTree.contains(h.getMother())) {
             h.getMother().children.add(h);
         }
         if (this.familyTree.contains(h.getFather())) {
             h.getFather().children.add(h);
-        }*/
+        }
     }
 
     public void removeKin(Human h) {
         familyTree.remove(h);
     }
-
 
     public Human getHuman(String name, String surname) {
         for (Human h : this.familyTree) {
@@ -43,7 +41,7 @@ public class FamilyTree {
         return null;
     }
 
-    public HashSet<Human> getAllChildren(String name, String surname) {
+    /*public HashSet<Human> getAllChildren(String name, String surname) {
         Human parent = getHuman(name, surname);
         HashSet<Human> children = new HashSet<>();
         for (Human h : this.familyTree) {
@@ -52,7 +50,7 @@ public class FamilyTree {
             }
         }
         return children;
-    }
+    }*/
 
     public Human getOldest() {
         LocalDate dateDown = LocalDate.MAX;
