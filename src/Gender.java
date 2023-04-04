@@ -1,5 +1,3 @@
-public class Gender {
-    public enum gender{
-        MAN, WOMAN
-    }
+public enum Gender {
+    Male, Female
 }

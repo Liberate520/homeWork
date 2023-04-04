@@ -51,6 +51,8 @@ public class Human {
     public Gender getGender() {return gender;}
     public LocalDate getBirthday() {return birthday;}
     public LocalDate getDateOfDeath() {return dateOfDeath;}
+    public Human getFather() {return father;}
+    public Human getMother() {return mother;}
     public List<Human> getChildren() {return children;}
     public int getHumanID() {return humanIDiterator;}
 
@@ -61,11 +63,10 @@ public class Human {
     public void setDateOfDeath(LocalDate dateOfDeath) {this.dateOfDeath = dateOfDeath;}
     public void setFather(Human father) {this.father = father;}
     public void setMother(Human mother) {this.mother = mother;}
-    public void setChildren(List<Human> children) {this.children = children;}
 
     public String getInfoHuman(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Имя: " + getName() + ", " + " Фамилия: " + getSurname() +  ", " + "  Дата рождения: " + getBirthday() + ", " + "  Номер в базе данных: " + humaID + ", ");
+        sb.append("\n" + "Имя: " + getName() + ", " + " Фамилия: " + getSurname() +  ", " + "  Дата рождения: " + getBirthday() + ", " + "  Номер в базе данных: " + humaID + ", ");
         if (!(getDateOfDeath() == null)){
             sb.append("  Дата смерти: " + getDateOfDeath());
         }
@@ -75,7 +76,7 @@ public class Human {
     public String getMotherInfo(){
         String moth = "Мать: ";
         if (mother != null){
-            moth = mother.getName();
+            moth += mother.getInfoHuman();
         } else {
             moth += "неизвестна";
         }
@@ -84,7 +85,7 @@ public class Human {
     public String getFatherInfo(){
         String fath = "Отец: ";
         if (father != null){
-            fath = father.getName();
+            fath += father.getInfoHuman();
         } else {
             fath += "неизвестен";
         }
@@ -95,7 +96,8 @@ public class Human {
         StringBuilder res = new StringBuilder();
         res.append("Дети: ");
         if (children.size() != 0){
-            for (int i = 0; i < children.size(); i++) {
+            res.append(children.get(0).getInfoHuman());
+            for (int i = 1; i < children.size(); i++) {
                 res.append(children.get(i).getInfoHuman());
             }
         }
@@ -125,6 +127,18 @@ public class Human {
             children.add(child);
         }
         else System.out.println("Этот человек уже содержится в списке детей ");;
+    }
+
+    public void addFather(Human father){
+        if(this.father == null){
+            this.father = father;
+        }
+        else System.out.println("Отец уже указан");
+    }
+    public void addMother(Human mother){
+        if(this.mother == null){
+            this.mother = mother;
+        }
     }
 
 }
