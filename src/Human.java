@@ -98,7 +98,7 @@ public class Human implements Serializable {
 
     }
 
-    public int numChildren() {
+    public int getNumChildren() {
         return getChildList().size();
     }
 
@@ -254,6 +254,14 @@ public class Human implements Serializable {
         }
         Human human = (Human) obj;
         return human.getName().equals(getName());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
