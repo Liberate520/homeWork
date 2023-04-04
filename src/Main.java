@@ -20,33 +20,36 @@ public class Main {
         service.addHuman("Архип", "Иванов", Gender.Male, "31.03.2019",
                 tree.getByName("Петр"), tree.getByName("Ирина"));
 
-        System.out.println("По имени");
+        System.out.println("По имени: ");
         service.sortByName();
         for (Human human :
                 tree) {
             System.out.println(human);
         }
 
-        System.out.println("По дате рождения");
+        System.out.println("По дате рождения: ");
         service.sortByBirthday();
         for (Human human :
                 tree) {
             System.out.println(human);
         }
-        System.out.println("По индексу");
+        System.out.println("По количеству детей");
+        service.sortByNumChild();
+        for (Human human :
+                tree) {
+            System.out.println(human);
+        }
+        System.out.println();
+        /*
+ TODO
+        System.out.println("По индексу: ");
         service.sortById();
         for (Human human :
                 tree) {
             System.out.println(human);
         }
+*/
 
-//        System.out.println("По количеству детей");
-//        service.sortByNumChild();
-//        for (Human human :
-//                tree) {
-//            System.out.println(human);
-//        }
-        System.out.println();
 
 
 //        family1.add(new Human(1,"Иван", "Иванов", Gender.Male, "12.12.1978"));
@@ -63,22 +66,16 @@ public class Main {
 //                family2.getByName("Петр"), family2.getByName("Ирина")));
 
 
-//        System.out.println(human1.getChild());
-
-//        System.out.println(family1.getInfo());
-//        System.out.println(family2.getInfo());
-
-        System.out.println("the tree is recorded \n" + tree.getInfo());
+       // System.out.println("the tree is recorded \n" + tree.getInfo());
+        System.out.println(tree.getInfo());
 
         FileHandler handler = new FileHandler();
+
        // ((Writable) family1).save(handler);
 //        handler.save(family1);
        // handler.save((Writable) family1);
 //        family1.save(family1.getHumanList());
 //        List<Human> list1 = new ArrayList<>();
-
-
-
 
 
        // FamilyTree family3 = (FamilyTree) handler.load();

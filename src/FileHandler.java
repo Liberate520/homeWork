@@ -15,7 +15,7 @@ public class FileHandler implements Writable {
 
     @Override
     public Writable load() throws ClassNotFoundException, InvalidObjectException {
-        try (FileInputStream fis = new FileInputStream("src/out.txt");
+        try (FileInputStream fis = new FileInputStream("src/out.txt ");
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             Writable object = (Writable) ois.readObject();
             return object;

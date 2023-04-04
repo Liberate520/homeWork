@@ -80,7 +80,6 @@ public class Human implements Serializable {
     }
 
     public List<Human> getChildList() {
-        System.out.println(getName() + " " + getSurname() + " дети: ");
         return childList;
     }
 
