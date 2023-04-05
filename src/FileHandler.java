@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 public class FileHandler implements Writeable{
     public FamilyTree load(FamilyTree familyTree, String path) throws Exception {
@@ -14,11 +15,11 @@ public class FileHandler implements Writeable{
         while ((str = br.readLine()) != null) {
             String[] array = str.split(",");
             if (array[1].equals("Male")) {
-                Human human = new Human(array[0], Gender.Male);
+                Human human = new Human(array[0], Gender.Male, new Date());
                 familyTree.addMembers(human);
 
             } else {
-                Human human = new Human(array[0], Gender.Female);
+                Human human = new Human(array[0], Gender.Female, new Date());
                 familyTree.addMembers(human);
             }
         }

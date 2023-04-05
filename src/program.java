@@ -2,13 +2,15 @@ import human.Gender;
 import human.Human;
 import tree.FamilyTree;
 
+import java.util.Date;
+
 public class program {
     public static void main(String[] args) throws Exception {
         //Создание экземпляров класса
-        Human member1 = new Human("Ivanov Ivan", Gender.Male);
-        Human member2 = new Human("Ivanova Maria", Gender.Female);
-        Human member3 = new Human("Ivanov Sergey", Gender.Male, member2, member1);
-        Human member4 = new Human("Ivanova Olga", Gender.Female, member2, member1);
+        Human member1 = new Human("Ivanov Ivan", Gender.Male, new Date(64, 2, 23));
+        Human member2 = new Human("Ivanova Maria", Gender.Female, new Date(70, 1, 5));
+        Human member3 = new Human("Ivanov Sergey", Gender.Male, new Date(90, 8, 28), member2, member1);
+        Human member4 = new Human("Ivanova Olga", Gender.Female, new Date(89, 11, 24), member2, member1);
 
         FamilyTree familyTree1 = new FamilyTree();
         //Добавление детей
@@ -38,6 +40,15 @@ public class program {
         ) {
             System.out.println(member.getAllInfo());
         }
+
+        System.out.println("Sort by date birth");
+        service.sortByDateBirth();
+
+        for (Human member: familyTree1
+        ) {
+            System.out.println(member.getAllInfo());
+        }
+
 
 
 //        FileHandler fh = new FileHandler();

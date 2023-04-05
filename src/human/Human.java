@@ -1,28 +1,31 @@
 package human;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human  implements Serializable, Comparable<Human> {
     private String name;
     private Gender gender;
-    //private Data dateBirth;
+    private Date dateBirth;
     private Human mother;
     private Human father;
     private List<Human> children;
 
-    public Human(String name, Gender gender, Human mother, Human father){
+    public Human(String name, Gender gender, Date dateBirth, Human mother, Human father){
         this.name = name;
         this.gender = gender;
+        this.dateBirth = dateBirth;
         this.mother = mother;
         this.father = father;
         this.children = new ArrayList<>();
 
   }
-  public Human(String name, Gender gender){
+  public Human(String name, Gender gender, Date dateBirth){
         this.name = name;
         this.gender = gender;
+        this.dateBirth = dateBirth;
         this.children = new ArrayList<>();
 
   }
@@ -53,6 +56,8 @@ public class Human implements Serializable, Comparable<Human> {
         StringBuilder info = new StringBuilder();
         info.append(this.name + " ");
         info.append(this.gender + " ");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        info.append(simpleDateFormat.format(this.dateBirth) + " ");
         info.append(this.getMotherInfo() + " ");
         info.append(this.getFatherInfo() + " ");
         info.append(this.getChildrenInfo());
@@ -136,6 +141,14 @@ public class Human implements Serializable, Comparable<Human> {
 
     public String getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Date getDateBirth() {
+        return dateBirth;
     }
 
     public Human getFather() {
