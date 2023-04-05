@@ -3,8 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Person extends DataRepository implements Serializable, Repository {
-    private static int generatorID = 1;
+public class Person extends DataRepository implements Serializable, Repository, Comparable<Person> {
     private int id;
     public String firstName;
     public String lastName;
@@ -24,8 +23,8 @@ public class Person extends DataRepository implements Serializable, Repository {
      * @param gender      Пол
      */
 
-    public Person(String firstName, String lastName, String birthDate, String deathDate, Gender gender, Person mother, Person father){
-        this.id = generatorID++;
+    public Person(String firstName, String lastName, String birthDate, String deathDate,
+                  Gender gender, Person mother, Person father){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -37,7 +36,6 @@ public class Person extends DataRepository implements Serializable, Repository {
     }
 
     public Person(String firstName, String lastName, String birthDate, String deathDate, Gender gender) {
-        this.id = generatorID++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -45,6 +43,19 @@ public class Person extends DataRepository implements Serializable, Repository {
         this.gender = gender;
         this.mother = null;
         this.father = null;
+        descendants = new ArrayList<>();
+    }
+
+    public Person(int id, String firstName, String lastName, String birthDate, String deathDate,
+                  Gender gender, Person mother, Person father) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
+        this.mother = mother;
+        this.father = father;
         descendants = new ArrayList<>();
     }
 
@@ -76,6 +87,10 @@ public class Person extends DataRepository implements Serializable, Repository {
         return father;
     }
 
+    public Gender getGender(){
+        return gender;
+    }
+
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("First name: ");
@@ -95,6 +110,8 @@ public class Person extends DataRepository implements Serializable, Repository {
         sb.append(getMotherInfo());
         sb.append("\n");
         sb.append(getDescendantInfo());
+        sb.append("\n");
+        sb.append(getId());
         sb.append(".");
         sb.append("\n");
         sb.append("\n");
@@ -165,5 +182,10 @@ public class Person extends DataRepository implements Serializable, Repository {
                     "\ndeath date -'" + deathDate + '\'' +
                     "\nID - " + id;
 
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return firstName.compareTo(o.firstName);
     }
 }

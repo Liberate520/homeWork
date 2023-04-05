@@ -8,32 +8,51 @@ public class Main {
     public static void main(String[] args) {
 
         FamilyTree targariens = new FamilyTree();
+        Service service = new Service(targariens);
 
-        Person personA = new Person("JEHAELIS", "Targarien", "17.05.134", "24.12.200", Gender.male);
-        Person personB = new Person("ALISANNA", "Targarien", "03.11.145", "20.08.233", Gender.female);
-        Person personC = new Person("BELION", "Targarien", "24.01.158", "19.06.240", Gender.male, personB, personA);
-        Person personD = new Person("ALISSA", "Targarien", "13.09.161", "18.04.248", Gender.female, personB, personA);
-        Person personE = new Person("VIZERIS I", "Targarien", "22.12.179", "01.03.274", Gender.male, personD, personC);
-        Person personF = new Person("DAEMON", "Targarien", "18.04.166", "12.08.283", Gender.male, personD, personC);
-        Person personG = new Person("ALISERNTA", "Hightower", "12.03.179", "31.01.275", Gender.female);
-        Person personH = new Person("REINIRA", "Targarien", "14.05.201", "08.09.294", Gender.female, personG, personE);
-        Person personI = new Person("HELEINA", "Targarien", "07.11.203", "08.05.299", Gender.female, personG, personE);
+//        service.addTargarien();
 
-        targariens.addPerson(personA);
-        targariens.addPerson(personB);
-        targariens.addPerson(personC);
-        targariens.addPerson(personD);
-        targariens.addPerson(personE);
-        targariens.addPerson(personF);
-        targariens.addPerson(personG);
-        targariens.addPerson(personH);
-        targariens.addPerson(personI);
+        Person personA = new Person("JEHAELIS", "Targarien",
+                "17.05.134", "24.12.200", Gender.male);
+        Person personB = new Person("ALISANNA", "Targarien",
+                "03.11.145", "20.08.233", Gender.female);
+        Person personC = new Person("BELION", "Targarien",
+                "24.01.158", "19.06.240", Gender.male, personB, personA);
+        Person personD = new Person("ALISSA", "Targarien",
+                "13.09.161", "18.04.248", Gender.female, personB, personA);
+        Person personE = new Person("VIZERIS I", "Targarien",
+                "22.12.179", "01.03.274", Gender.male, personD, personC);
+        Person personF = new Person("DAEMON", "Targarien",
+                "18.04.166", "12.08.283", Gender.male, personD, personC);
+        Person personG = new Person("ALISERNTA", "Hightower",
+                "12.03.179", "31.01.275", Gender.female);
+        Person personH = new Person("REINIRA", "Targarien",
+                "14.05.201", "08.09.294", Gender.female, personG, personE);
+        Person personI = new Person("HELEINA", "Targarien",
+                "07.11.203", "08.05.299", Gender.female, personG, personE);
+
+
+//        почему первый человек создается дважды???
+
+        service.addTargarien(personA);
+        service.addTargarien(personB);
+        service.addTargarien(personC);
+        service.addTargarien(personD);
+        service.addTargarien(personE);
+        service.addTargarien(personF);
+        service.addTargarien(personG);
+        service.addTargarien(personH);
+        service.addTargarien(personI);
 
         System.out.println("\n1 - Output all members of the genus." +
                 "\n2 - Find targarien descendance." +
                 "\n3 - Find the great Targarien." +
                 "\n4 - Download data into file." +
-                "\n5 - Upload data from file.");
+                "\n5 - Upload data from file." +
+                "\n6 - Sort Targariens by name." +
+                "\n7 - Sort Targariens by ID from last to first." +
+                "\n8 - Sort Targariens by ID from first to last." +
+                "\n9 - Sort Targariens by gender.");
 
         Scanner in = new Scanner(System.in);
         int option = in.nextInt();
@@ -64,6 +83,26 @@ public class Main {
                     DataRepository dataRepositoryUp = new DataRepository();
                     FamilyTree familyTree = dataRepositoryUp.deserialization();
                     System.out.println(familyTree.getTreeInfo());
+                    break;
+                case 6:
+                    System.out.println("Targariens sorted by name: ");
+                    service.sortByName();
+                    System.out.println(targariens.getTreeInfo());
+                    break;
+                case 7:
+                    System.out.println("Targariens sorted by ID from last to first: ");
+                    service.sortById();
+                    System.out.println(targariens.getTreeInfo());
+                    break;
+                case 8:
+                    System.out.println("Targariens sorted by ID from first to last: ");
+                    service.sortByIdReverse();
+                    System.out.println(targariens.getTreeInfo());
+                    break;
+                case 9:
+                    System.out.println("Targariens sorted by gender: ");
+                    service.sortByGender();
+                    System.out.println(targariens.getTreeInfo());
                     break;
             }
         }catch (Exception e){

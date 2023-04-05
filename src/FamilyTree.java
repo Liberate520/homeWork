@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree extends DataRepository implements Serializable, Repository {
+public class FamilyTree extends DataRepository implements Serializable, Repository, Iterable<Person> {
     public List<Person> targariens;
 
     public FamilyTree(List<Person> targariens) {
@@ -57,5 +58,13 @@ public class FamilyTree extends DataRepository implements Serializable, Reposito
             tree.append("\n");
         }
         return tree.toString();
+    }
+
+    public List<Person> getFamilyTree(){
+        return targariens;
+    }
+    @Override
+    public Iterator<Person> iterator() {
+        return new TreeIterator(targariens);
     }
 }

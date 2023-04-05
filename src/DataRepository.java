@@ -4,7 +4,8 @@ public class DataRepository implements Serializable, Repository {
 
     public void dataOutput(FamilyTree familyTree, Person person) {
 
-        File file = new File("D:\\GB\\JavaOOPFamilyTree\\homeWork_From_Salnikov_Vladislav\\src\\Data\\Family.txt");
+        File file = new File("D:\\GB\\JavaOOPFamilyTree\\" +
+                "homeWork_From_Salnikov_Vladislav\\src\\Data\\Family.txt");
 
         ObjectOutputStream oos = null;
 
@@ -28,7 +29,8 @@ public class DataRepository implements Serializable, Repository {
     }
 
     public FamilyTree deserialization(){
-        File file = new File("D:\\GB\\JavaOOPFamilyTree\\homeWork_From_Salnikov_Vladislav\\src\\Family.txt");
+        File file = new File("D:\\GB\\JavaOOPFamilyTree\\" +
+                "homeWork_From_Salnikov_Vladislav\\src\\Family.txt");
         ObjectInputStream ois = null;
         try {
             FileInputStream fis = new FileInputStream(file);
