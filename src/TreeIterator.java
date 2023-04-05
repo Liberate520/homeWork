@@ -1,12 +1,12 @@
 import java.util.Iterator;
 import java.util.Map;
 
-class TreeIterator implements Iterator<Person> {
-    Map<Integer, Person> persons_list;
+class TreeIterator<E extends Person> implements Iterator<E> {
+    Map<Integer, E> persons_list;
     Iterator<Integer> iterator;
     int size;
 
-    public TreeIterator(Map<Integer, Person> persons_list){
+    public TreeIterator(Map<Integer, E> persons_list){
         this.persons_list = persons_list;
         this.iterator = persons_list.keySet().iterator();
         this.size = persons_list.size();
@@ -18,7 +18,7 @@ class TreeIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public E next() {
         size--;
         return persons_list.get(iterator.next());
     }

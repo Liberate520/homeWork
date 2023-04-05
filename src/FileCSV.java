@@ -21,6 +21,10 @@ public class FileCSV implements Files {
         this("bd.csv");
     }
 
+    public String getFile_name() {
+        return this.file_name;
+    }
+
     private Boolean fileExist(String file_name) {
         File file = new File(file_name);
         return file.exists();
@@ -44,8 +48,8 @@ public class FileCSV implements Files {
     }
 
     @Override
-    public Boolean saveFile(String file_name, Tree family) {
-        String bd_file = new File(file_name).getAbsolutePath();
+    public Boolean saveFile(Tree<Person> family) {
+        String bd_file = new File(this.file_name).getAbsolutePath();
         System.out.println("Сохраняем изменения в файл");
 
         String text = convertPersonslistToCSV(family);
@@ -54,7 +58,6 @@ public class FileCSV implements Files {
             writer.write(text);
             writer.flush();
             writer.close();
-            System.out.println("file "+ file_name + " saved!");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -62,7 +65,7 @@ public class FileCSV implements Files {
         }
     }
 
-    private String convertPersonslistToCSV(Tree family) {
+    private String convertPersonslistToCSV(Tree<Person> family) {
         LinkedHashSet<String> csv_fields_set = new LinkedHashSet<>();
         StringBuilder csv_fields = new StringBuilder();
         StringBuilder csv_text = new StringBuilder();
@@ -87,12 +90,12 @@ public class FileCSV implements Files {
 
 
     @Override
-    public Tree readFile() {
+    public Tree<Person> readFile() {
         Map<Integer, Person> p_list = new HashMap<>();
 
         String bd_file = new File(file_name).getAbsolutePath();
         if (fileExist(bd_file) == false) {
-            return (Tree) p_list;
+            return new Tree<Person>();
         }
 
         try {
@@ -124,7 +127,7 @@ public class FileCSV implements Files {
     }
     
     // Метод создания родственных связей из айди родителей
-    private Tree makeRelativesFromCSV(Map<Integer, Person> persons_list){
+    private Tree<Person> makeRelativesFromCSV(Map<Integer, Person> persons_list){
         int mother_id, father_id;
         // for (Person pers : family) {
         for (Map.Entry<Integer, Person> item : persons_list.entrySet()) {
@@ -150,10 +153,10 @@ public class FileCSV implements Files {
                 persons_list.get(father_id).setPerson_childs(pers);
             }
         }
-        Tree family = new Tree();
+        Tree<Person> family = new Tree<>();
         for (Map.Entry<Integer, Person> itm : persons_list.entrySet()) {
             System.out.println("ID:" + itm.getKey());
-            family.addPersonToTree(itm.getKey(), itm.getValue());    
+            family.add(itm.getKey(), itm.getValue());    
         }
         return family;
     }

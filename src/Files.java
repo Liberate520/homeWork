@@ -1,5 +1,5 @@
 public interface Files {
-    Tree readFile();
+    Tree<Person> readFile();
 
-    Boolean saveFile(String f, Tree p);
+    Boolean saveFile(Tree<Person> p);
 }
