@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private Set<Human> family;
 
     public FamilyTree(HashSet<Human> family) {
@@ -35,6 +36,6 @@ public class FamilyTree {
         for (Human human: family){
             sb.append(human.toString()).append("\n");
         }
-        return "В родословной: " + family.size() + " человек, а именно: " + "\n" + sb.toString();
+        return "В родословной: " + family.size() + " человека, а именно: " + "\n" + sb.toString();
     }
 }

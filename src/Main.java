@@ -1,7 +1,9 @@
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        DataLoad data = new DataLoad();
         FamilyTree tree = new FamilyTree();
         tree.addHuman(new Human("Andrey", "Ivanov", Sex.Male,
                 LocalDate.of(1913, 12, 1),  LocalDate.of(1964, 12, 1)));
@@ -13,7 +15,8 @@ public class Main {
         tree.addHuman(new Human("Ksenia", "Ivanova", Sex.Female,
                 LocalDate.of(1949, 3, 23), LocalDate.of(2000, 7, 6),
                 tree.getByName("Maria", "Ivanova"), tree.getByName("Andrey", "Ivanov")));
-
-        System.out.println(tree);
+        data.save(tree,"fileTree.out");
+        data.read("fileTree.out");
+       // System.out.println(tree);
     }
 }

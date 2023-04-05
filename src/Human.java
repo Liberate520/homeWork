@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Human {
+public class Human implements Serializable {
     private String firstName;
     private String lastName;
     private Sex sex;
@@ -125,6 +126,14 @@ public class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(firstName, human.firstName) && Objects.equals(lastName, human.lastName) && sex == human.sex && Objects.equals(birthDate, human.birthDate) && Objects.equals(deathDate, human.deathDate) && Objects.equals(mother, human.mother) && Objects.equals(father, human.father) && Objects.equals(children, human.children);
+        return Objects.equals(firstName, human.firstName) && Objects.equals(lastName, human.lastName) &&
+                sex == human.sex && Objects.equals(birthDate, human.birthDate) &&
+                Objects.equals(deathDate, human.deathDate) && Objects.equals(mother, human.mother) &&
+                Objects.equals(father, human.father) && Objects.equals(children, human.children);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, sex);
     }
 }
