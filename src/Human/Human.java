@@ -1,9 +1,12 @@
+package Human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Human implements Serializable {
+    int id;
     private String status;
     private String name;
     private String surname;
@@ -14,7 +17,8 @@ public class Human implements Serializable {
     public HashSet<Human> children;
 
 
-    public Human(String status, String name, String surname, LocalDate birthDate, Human mother, Human father) {
+    public Human(int id, String status, String name, String surname, LocalDate birthDate, Human mother, Human father) {
+        this.id = id;
         this.status = status;
         this.name = name;
         this.surname = surname;
@@ -24,8 +28,12 @@ public class Human implements Serializable {
         children = new HashSet<>();
     }
 
+    public Human(int id, String status, String name, String surname, LocalDate birthDate) {
+        this(id, status, name, surname, birthDate, null, null);
+    }
+
     public Human(String status, String name, String surname, LocalDate birthDate) {
-        this(status, name, surname, birthDate, null, null);
+        this(-1, status, name, surname, birthDate, null, null);
     }
 
     public void addChild(Human h) {
@@ -52,6 +60,14 @@ public class Human implements Serializable {
         if (this.getMother() != null)
             return String.format("%s %s", this.getMother().surname, this.getMother().name);
         return "неизвестна";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFatherName() {
@@ -123,4 +139,5 @@ public class Human implements Serializable {
     public void setStatus(String Status) {
         this.status = status;
     }
+
 }

@@ -1,16 +1,24 @@
+package FamilyTree;
+
+import Human.Human;
+
 import java.io.*;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.*;
 
-public class FamilyTree implements Serializable {
-    HashSet<Human> familyTree;
+public class FamilyTree implements Iterable<Human>, Serializable {
+    private List<Human> familyTree;
 
-    public FamilyTree(HashSet<Human> familyTree) {
+    public List<Human> getFamilyTree() {
+        return familyTree;
+    }
+
+    public FamilyTree(ArrayList<Human> familyTree) {
         this.familyTree = familyTree;
     }
 
     public FamilyTree() {
-        this(new HashSet<>());
+        this(new ArrayList<Human>());
     }
 
     public void addKin(Human h) {
@@ -41,10 +49,10 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    /*public HashSet<Human> getAllChildren(String name, String surname) {
-        Human parent = getHuman(name, surname);
-        HashSet<Human> children = new HashSet<>();
-        for (Human h : this.familyTree) {
+    /*public HashSet<Human.Human> getAllChildren(String name, String surname) {
+        Human.Human parent = getHuman(name, surname);
+        HashSet<Human.Human> children = new HashSet<>();
+        for (Human.Human h : this.familyTree) {
             if ((h.getMother() == parent) || (h.getFather() == parent)) {
                 children.add(h);
             }
@@ -84,4 +92,10 @@ public class FamilyTree implements Serializable {
         }
         return res;
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyTree);
+    }
+
 }
