@@ -1,10 +1,12 @@
+package FamilyTree;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 import java.lang.StringBuilder;
+// import java.lang.Comparable;
 
-public class Person implements Serializable{
+public class Person implements Serializable{//Comparable<Person>
     private String name;
     private String secondName;
     private String surname;
@@ -90,4 +92,9 @@ public class Person implements Serializable{
         }
         return sb.toString();
     }
+
+    // @Override
+    // public int compareTo(Person o) {//сравнение людей по фамилии
+    //     return surname.compareTo(o.getSurname());
+    // }
 }

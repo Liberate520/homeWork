@@ -1,10 +1,12 @@
+package FamilyTree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.io.Serializable;
 import java.lang.StringBuilder;
 
-public class Tree implements Serializable, Saveble{
+public class Tree implements Serializable, Saveble, Iterable<Person>{
     private List<Person> family;
     // private Person addedPerson;
 
@@ -56,9 +58,17 @@ public class Tree implements Serializable, Saveble{
         return foundPersons;
     }
 
+    public List<Person> getPersonList(){
+        return family;
+    }
 
     @Override
     public String toString(){
         return showFamily(family);
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(family);
     }
 }
