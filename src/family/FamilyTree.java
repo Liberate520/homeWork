@@ -1,9 +1,9 @@
-package Family;
+package family;
 
-import Family.Comporators.HumanComporatorByChild;
-import Family.Comporators.HumanComporatorByName;
-import Family.Human.Human;
-import Family.Human.HumanIterator;
+import family.comporators.HumanComporatorByChild;
+import family.comporators.HumanComporatorByName;
+import family.human.Human;
+import family.human.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;

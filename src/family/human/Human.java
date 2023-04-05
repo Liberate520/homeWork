@@ -1,6 +1,4 @@
-package Family.Human;
-
-import Family.Gender;
+package family.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package Family.Comporators;
+package family.comporators;
 
-import Family.Human.Human;
+import family.human.Human;
 
 import java.util.Comparator;
 

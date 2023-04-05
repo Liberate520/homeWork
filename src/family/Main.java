@@ -1,6 +1,6 @@
-package Family;
+package family;
 
-import Family.Human.Human;
+import family.human.Human;
 
 import java.io.Serializable;
 import java.util.Scanner;
