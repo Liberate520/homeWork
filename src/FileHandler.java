@@ -7,8 +7,16 @@ import java.io.Serializable;
 
 public class FileHandler {
     
-    public void saveData(Serializable o) throws IOException, ClassNotFoundException {
-        // FileOutputStream fos = new FileOutputStream("D:\\tree\\tree.save");
+    
+    public void saveData(Saveble s, String path) throws IOException, ClassNotFoundException {//saveData
+        FileOutputStream fos = new FileOutputStream(path);//"tree.save"
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(s);
+        System.out.println("Файл успешно записан");
+        oos.close();
+    }
+    
+    public void saveTree(Serializable o) throws IOException, ClassNotFoundException {//saveData
         FileOutputStream fos = new FileOutputStream("tree.save");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(o);
@@ -17,8 +25,6 @@ public class FileHandler {
     }
 
     public Object loadData() throws IOException, ClassNotFoundException{
-        System.out.println("Поцедура загрузки из файла запущена");
-        // FileInputStream fis = new FileInputStream("D:\\tree\\tree.save");
         FileInputStream fis = new FileInputStream("tree.save");
         ObjectInputStream ois = new ObjectInputStream(fis);
         Object o = ois.readObject();
@@ -26,4 +32,14 @@ public class FileHandler {
         ois.close();
         return o;
     }
+
+    public Tree loadTree(String path) throws IOException, ClassNotFoundException{
+        FileInputStream fis = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Tree t = (Tree) ois.readObject();
+        System.out.println("Поцедура загрузки завершена успешно");
+        ois.close();
+        return t;
+    }
+
 }

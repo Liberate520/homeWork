@@ -7,11 +7,12 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        File dir = new File("tree.save");
+        String path = "tree.save";
+        File dir = new File(path);
         FileHandler fh = new FileHandler();
         Tree family1;
         if(dir.exists()){
-            family1 = (Tree) fh.loadData();
+            family1 = fh.loadTree(path);//"tree.save"
         }else{
             family1 = new Tree();
         }
@@ -114,7 +115,7 @@ public class Main {
             cmd = scan.nextLine();
         }
         scan.close();
-        fh.saveData(family1);
+        fh.saveData(family1,"tree.save");
 
         // family1.addPerson();
         // family1.addPerson();
