@@ -1,14 +1,7 @@
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Main {
 
-    static FamilyTree familyTree = new FamilyTree();
     
     static Person person1 = new Person("Сергей", "Манеров", "18.04.1996");
             
@@ -20,55 +13,95 @@ public class Main {
 
 
         
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
-        
+    public static void main(String[] args) throws ClassNotFoundException, IOException  {
 
+        FamilyTree familytree = new FamilyTree();
+        PersonSort familyIterator = new PersonSort(familytree.getPersonList());
+
+        // Добавление детей людям
         person2.addChild(person1);
         person3.addChild(person1);
         person2.addChild(person4);
 
+        // Задаем жив человек или нет
         person1.setAlive(true);
         person2.setAlive(true);
         person3.setAlive(true);
         person4.setAlive(true);
 
-
-        
+        // Задаем родителей человека
         person1.setMother(person2);
         person1.setFather(person3);
-
         person4.setMother(person2);
 
-        // person1.getFirstName();
-        // person1.getSecondName();
-        // person1.getDateOfBirth();
+        // Получение информации по человеку по отдельным позициям
+        person1.getFirstName();
+        person1.getSecondName();
+        person1.getDateOfBirth();
+        person1.getAlive();
+        person1.getDateOfDeath();
+        person1.getMother();
+        person1.getFather();
+        person1.getChildrens();
+
+
+        // Добавление человека в семейное дерево
+        familytree.add(person1);
+        familytree.add(person2);
+        familytree.add(person3);
+        familytree.add(person4);
+
+        // Вывод полной информации по людям 
+        System.out.println(person1);
+        System.out.println();
+        System.out.println(person2);
+        System.out.println();
+        System.out.println(person3);
+        System.out.println();
+        System.out.println(person4);
+        System.out.println();
+
+        // Вывод малой информации по людям
+        System.out.println(person1.getInfo());
+        System.out.println();
+        System.out.println(person2.getInfo());
+        System.out.println();
+
+        // Вывод семейного древа
+        System.out.print(familytree.getInfo());
+
+
+        // Сортировки:
+        // По количеству детей
+        familyIterator.sortByChild();
+        for(Person person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
         
-        // person1.getMother();
-        // person1.getFather();
-        // person1.getChildren();
+        // По Имени
+        familyIterator.sortByName();
+        for(Person person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
 
+        // По Фамилии
+        familyIterator.sortBySecondName();
+        for(Person person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
 
-
-        familyTree.addPerson(person1);
-        familyTree.addPerson(person2);
-        familyTree.addPerson(person3);
-        familyTree.addPerson(person4);
-
-        // System.out.println(person1);
-        // System.out.println(person2);
-        // System.out.println(person3);
-        // System.out.println(person4);
-
-
-        // System.out.println(family);
-        // System.out.println(familyTree);
-        
-        Interface.Interface();
-        FamilyTree.getFamilyTree();
-        SaveLoad.Load(familyTree);
+        // По нахождению в живых
+        familyIterator.sortByAlive();
+        for(Person person: familytree){
+            System.out.println(person);
+        }
+    
+        // Сохранение в файл
+        SaveLoad.write(familytree, "FamilyTree.txt");
         
     }
-
-    
 
 }

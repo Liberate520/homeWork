@@ -1,38 +1,48 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
-import java.util.Scanner;
 
-public class SaveLoad {
+public class SaveLoad  {
 
-    public static void Load(FamilyTree familyTree) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-            new FileInputStream("FamilyTree.out"));
-        Person person1 = (Person) objectInputStream.readObject();
-        Person person2 = (Person) objectInputStream.readObject();
-        Person person3 = (Person) objectInputStream.readObject();
-        Person person4 = (Person) objectInputStream.readObject();
-        objectInputStream.close();
-        System.out.println(person1);
-        System.out.println(person2);
-        System.out.println(person3);
-        System.out.println(person4);
-    }
+    public static void write(FamilyTree familytree, String fileName) {
 
-    public static void Write(FamilyTree familyTree) throws IOException, ClassNotFoundException {
+        StringBuilder sb = new StringBuilder();
+        for (Person person: familytree){
+            sb.append(person);
+            sb.append("\n"); 
+        }
 
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-            new FileOutputStream("FamilyTree.out"));
-        objectOutputStream.writeObject(Main.person1);
-        objectOutputStream.writeObject(Main.person2);
-        objectOutputStream.writeObject(Main.person3);
-        objectOutputStream.writeObject(Main.person4);
+        File file = new File(fileName);
+        try{
+            FileWriter fr = new FileWriter(file,false);
+            fr.write(sb.toString());
+            // fr.write("\n");
+    
+            fr.close();
+        }
+        catch(IOException e) {
+            System.out.println("ERROR");
+        }
+
+    }   
+
+    // Нерабочие методы !!!
+    
+    public static  void save(FamilyTree familytree, String fileName) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+        objectOutputStream.writeObject(familytree);
         objectOutputStream.close();
     }
+    
+    public static FamilyTree load(String fileName) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+        FamilyTree RestoredFamily = (FamilyTree) objectInputStream.readObject();
+        objectInputStream.close();
+        return RestoredFamily;
+    }
+    
 }
