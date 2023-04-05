@@ -8,6 +8,7 @@ public class Main {
 
         FileCSV bd_file = new FileCSV(file_name);
         Tree family_tree = bd_file.readFile();
+        Service service = new Service(family_tree);
 
 
         System.out.printf("Генеалогическое древо загружено!\nСостоит из %d человек",family_tree.size());
@@ -21,7 +22,8 @@ public class Main {
         help.append("add.1679946500.sex.male - Добавить пол id:1679946500\n");
         help.append("add.1679946500.mother.1679946400 - Добавить id:1679946500 - мать id:1679946400\n");
         help.append("add.1679946500.father.1679946400 - Добавить отца, дети добавляются автоматически к родителям\n");
-        help.append("save - сохраняет данные в файл\n");
+        help.append("name:`имя` - Осуществляет поиск по имени, выводит все похожие\n");
+        help.append("save: - сохраняет данные в файл\n");
 
         String command;
         System.out.println(help.toString());
@@ -30,17 +32,27 @@ public class Main {
             if (command.equals("break"))
                 break;
 
-            if (command.equals("show"))
+            if (command.equals("show")){
                 System.out.println(family_tree);
+                continue;
+            }
 
             if (command.contains("id:")){
                 String id_s = command.replaceAll("id:","").trim();
                 int id = Integer.parseInt(id_s);
-                System.out.println( family_tree.get(id) );
+                System.out.println( family_tree.get(id).toStringFull() );
             }
 
-            if (command.equals("save")){
+            if (command.equals("save:")){
                 bd_file.saveFile(file_name, family_tree);
+            }
+
+            if (command.contains("name:")){
+                String name = command.replace("name:", "");
+                List<Person> answer = family_tree.searchByName(name);
+                for (Person person : answer) {
+                    System.out.println(person);
+                }
             }
 
             if (command.contains("add.")){
@@ -61,11 +73,11 @@ public class Main {
                         led_pers.setMother(pers);
                         pers.setPerson_childs(led_pers);
                         }
-                    System.out.println( family_tree.get(id) ); 
+                    System.out.println( family_tree.get(id).toStringFull()); 
                 } catch (Exception e) {
                     if (key.equals("sex")){
                         family_tree.get(id).setPerson_sex(edit_arr[3]);
-                        System.out.println( family_tree.get(id) );
+                        System.out.println( family_tree.get(id).toStringFull());
                     }
                 }
             }
@@ -73,7 +85,8 @@ public class Main {
             if (command.contains("new.")){
                 String[] edit_arr = command.split("\\.");
                 String name = edit_arr[1];
-                family_tree.addPersons(name);
+                int id = service.addPerson(name);
+                System.out.println( family_tree.get(id).toStringFull());
             } 
 
             if (command.contains("sort by name")){

@@ -38,10 +38,8 @@ public class Tree implements Iterable<Person> {
         return res.toString();
     }
 
-    public int addPersons(String name) {
-        Person new_peson = new Person(name);
-        this.persons_list.put(new_peson.getPerson_id(), new_peson);
-        return new_peson.getPerson_id();
+    public void addPerson(Person pers) {
+        this.persons_list.put(pers.getPerson_id(), pers);
     }
 
     public void addPersonToTree(int id, Person pers) {
@@ -54,7 +52,10 @@ public class Tree implements Iterable<Person> {
 
     public ArrayList<Person> searchByName(String name) {
         ArrayList<Person> res_array = new ArrayList<>();
-        System.out.println("Ищем людей в базе по имени");
+        for(Person pers:this){
+            if (pers.getPerson_name().toLowerCase().contains(name.toLowerCase()))
+                res_array.add(pers);
+        }
         return res_array;
     }
 

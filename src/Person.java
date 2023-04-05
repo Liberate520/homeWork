@@ -30,17 +30,13 @@ public class Person  {
         this.person_death = strToDate(info.get("person_death"));
     }
 
-    Person(String name) {
+    Person(int id, String name) {
         this.person_name = name;
-        this.person_id = (int) System.currentTimeMillis();
-    }
-
-    Person() {
-        this("");
+        this.person_id = id;
     }
 
     public int getPerson_id() {
-        return person_id;
+        return this.person_id;
     }
 
     public String getPerson_name() {
@@ -135,8 +131,7 @@ public class Person  {
         this.person_childs.add(childs);
     }
 
-    @Override
-    public String toString() {
+    public String toStringFull() {
         String res = String.format("\nName:\t\t%s\t[%s, id: %d]\n", this.getPerson_name(), this.person_sex,
                 this.person_id);
 
@@ -154,6 +149,16 @@ public class Person  {
         }
         return res;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        res.append("id: " + this.getPerson_id() + ":\t");
+        res.append(this.getPerson_name() + "\t\t");
+        res.append("Birhday:" + this.getPersonBirthdayString() + "\n");
+        return res.toString();
+    }
+
 
     private Date strToDate(String date) {
         Date docDate;
