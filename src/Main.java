@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+
+
 public class Main {
 
     
@@ -100,7 +102,8 @@ public class Main {
         }
     
         // Сохранение в файл
-        SaveLoad.write(familytree, "FamilyTree.txt");
+        
+        SaveLoad.save(familytree,"FamilyTree.txt");
         
     }
 
