@@ -1,7 +1,6 @@
-//public Person(String firstName, String lastName, String birthDate,
+// public Person(String firstName, String lastName, String birthDate,
 // String deathDate, Gender gender, int idMather, int idFather)
 
-import java.io.InvalidObjectException;
 import java.util.*;
 
 
@@ -17,7 +16,8 @@ public class Main {
         Person personE = new Person("VIZERIS I", "Targarien", "22.12.179", "01.03.274", Gender.male, personD, personC);
         Person personF = new Person("DAEMON", "Targarien", "18.04.166", "12.08.283", Gender.male, personD, personC);
         Person personG = new Person("ALISERNTA", "Hightower", "12.03.179", "31.01.275", Gender.female);
-        Person personH = new Person("HELEINA", "Targarien", "07.11.203", "08.05.299", Gender.female, personG, personE);
+        Person personH = new Person("REINIRA", "Targarien", "14.05.201", "08.09.294", Gender.female, personG, personE);
+        Person personI = new Person("HELEINA", "Targarien", "07.11.203", "08.05.299", Gender.female, personG, personE);
 
         targariens.addPerson(personA);
         targariens.addPerson(personB);
@@ -27,12 +27,13 @@ public class Main {
         targariens.addPerson(personF);
         targariens.addPerson(personG);
         targariens.addPerson(personH);
+        targariens.addPerson(personI);
 
         System.out.println("\n1 - Output all members of the genus." +
                 "\n2 - Find targarien descendance." +
                 "\n3 - Find the great Targarien." +
-                "\n4 - Download data into file.");
-//                "\n5 - Upload data from file.");
+                "\n4 - Download data into file." +
+                "\n5 - Upload data from file.");
 
         Scanner in = new Scanner(System.in);
         int option = in.nextInt();
@@ -59,12 +60,11 @@ public class Main {
                     DataRepository dataRepositoryDown = new DataRepository();
                     dataRepositoryDown.dataOutput(targariens, personA);
                     break;
-//                case 5:
-//                    DataRepository dataRepositoryUp = new DataRepository();
-//                    FamilyTree familyTree = dataRepositoryUp.deserialization();
-//                    System.out.println(familyTree.getTreeInfo());
-//                default:
-//                    throw new Exception();
+                case 5:
+                    DataRepository dataRepositoryUp = new DataRepository();
+                    FamilyTree familyTree = dataRepositoryUp.deserialization();
+                    System.out.println(familyTree.getTreeInfo());
+                    break;
             }
         }catch (Exception e){
             System.out.println("Wrong choice, mortal!");

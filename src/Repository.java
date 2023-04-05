@@ -7,10 +7,6 @@
 //а объект интерфейса, с помощью которого и будет происходить запись.
 //Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
 
-import java.io.InvalidObjectException;
-
-public interface Serialisable {
-    boolean dataOutput(FamilyTree familyTree, Person person);
-//    public FamilyTree deserialiozation();
-
+public interface Repository {
+    void dataOutput(FamilyTree familyTree, Person person);
 }
