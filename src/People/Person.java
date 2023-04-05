@@ -1,9 +1,15 @@
+package People;
+
+import Data.DataRepository;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Person extends DataRepository implements Serializable, Repository, Comparable<Person> {
+    static int generatorId = 1;
     private int id;
     public String firstName;
     public String lastName;
@@ -25,6 +31,7 @@ public class Person extends DataRepository implements Serializable, Repository, 
 
     public Person(String firstName, String lastName, String birthDate, String deathDate,
                   Gender gender, Person mother, Person father){
+        this.id = generatorId++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -36,6 +43,7 @@ public class Person extends DataRepository implements Serializable, Repository, 
     }
 
     public Person(String firstName, String lastName, String birthDate, String deathDate, Gender gender) {
+        this.id = generatorId++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -56,6 +64,19 @@ public class Person extends DataRepository implements Serializable, Repository, 
         this.deathDate = deathDate;
         this.mother = mother;
         this.father = father;
+        descendants = new ArrayList<>();
+    }
+
+    public Person(int id, String firstName, String lastName, String birthDate, String deathDate,
+                  Gender gender) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
+        this.mother = null;
+        this.father = null;
         descendants = new ArrayList<>();
     }
 
@@ -140,6 +161,10 @@ public class Person extends DataRepository implements Serializable, Repository, 
             dad += "uncnown!";
         }
         return dad;
+    }
+
+    public List<Person> getDescendants() {
+        return descendants;
     }
 
     public String getDescendantInfo(){

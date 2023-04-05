@@ -1,4 +1,4 @@
-
+package People;
 //В проекте с гениалогическим древом подумайте и используйте интерфейсы.
 //Дополнить проект методами записи в файл и чтения из файла.
 //Для этого создать отдельный класс и реализовать в нем нужные методы.
@@ -7,6 +7,10 @@
 //а объект интерфейса, с помощью которого и будет происходить запись.
 //Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
 
+import People.Person;
+import Tree.FamilyTree;
+
 public interface Repository {
-    void dataOutput(FamilyTree familyTree, Person person);
+    void dataOutput(FamilyTree familyTree, String str);
+    FamilyTree deserialization(String str);
 }

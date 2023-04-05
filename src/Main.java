@@ -1,5 +1,10 @@
-// public Person(String firstName, String lastName, String birthDate,
-// String deathDate, Gender gender, int idMather, int idFather)
+// public People.Person(String firstName, String lastName, String birthDate,
+// String deathDate, People.Gender gender, int idMather, int idFather)
+
+import Data.DataRepository;
+import People.Gender;
+import People.Person;
+import Tree.FamilyTree;
 
 import java.util.*;
 
@@ -8,9 +13,9 @@ public class Main {
     public static void main(String[] args) {
 
         FamilyTree targariens = new FamilyTree();
-        Service service = new Service(targariens);
+        FamilyTree targariensThrone = new FamilyTree();
+        Service service = new Service(targariensThrone);
 
-//        service.addTargarien();
 
         Person personA = new Person("JEHAELIS", "Targarien",
                 "17.05.134", "24.12.200", Gender.male);
@@ -32,7 +37,15 @@ public class Main {
                 "07.11.203", "08.05.299", Gender.female, personG, personE);
 
 
-//        почему первый человек создается дважды???
+        targariens.addPerson(personA);
+        targariens.addPerson(personB);
+        targariens.addPerson(personC);
+        targariens.addPerson(personD);
+        targariens.addPerson(personE);
+        targariens.addPerson(personF);
+        targariens.addPerson(personG);
+        targariens.addPerson(personH);
+        targariens.addPerson(personI);
 
         service.addTargarien(personA);
         service.addTargarien(personB);
@@ -77,32 +90,32 @@ public class Main {
                     break;
                 case 4:
                     DataRepository dataRepositoryDown = new DataRepository();
-                    dataRepositoryDown.dataOutput(targariens, personA);
+                    dataRepositoryDown.dataOutput(targariens, "Targariens.txt");
                     break;
                 case 5:
                     DataRepository dataRepositoryUp = new DataRepository();
-                    FamilyTree familyTree = dataRepositoryUp.deserialization();
+                    FamilyTree familyTree = dataRepositoryUp.deserialization("Targariens.txt");
                     System.out.println(familyTree.getTreeInfo());
                     break;
                 case 6:
                     System.out.println("Targariens sorted by name: ");
                     service.sortByName();
-                    System.out.println(targariens.getTreeInfo());
+                    System.out.println(targariensThrone.getTreeInfo());
                     break;
                 case 7:
                     System.out.println("Targariens sorted by ID from last to first: ");
                     service.sortById();
-                    System.out.println(targariens.getTreeInfo());
+                    System.out.println(targariensThrone.getTreeInfo());
                     break;
                 case 8:
                     System.out.println("Targariens sorted by ID from first to last: ");
                     service.sortByIdReverse();
-                    System.out.println(targariens.getTreeInfo());
+                    System.out.println(targariensThrone.getTreeInfo());
                     break;
                 case 9:
                     System.out.println("Targariens sorted by gender: ");
                     service.sortByGender();
-                    System.out.println(targariens.getTreeInfo());
+                    System.out.println(targariensThrone.getTreeInfo());
                     break;
             }
         }catch (Exception e){

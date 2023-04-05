@@ -1,11 +1,16 @@
+package Data;
+
+import People.Person;
+import People.Repository;
+import Tree.FamilyTree;
+
 import java.io.*;
 
-public class DataRepository implements Serializable, Repository {
+public class DataRepository implements Repository {
 
-    public void dataOutput(FamilyTree familyTree, Person person) {
+    public void dataOutput(FamilyTree familyTree, String str) {
 
-        File file = new File("D:\\GB\\JavaOOPFamilyTree\\" +
-                "homeWork_From_Salnikov_Vladislav\\src\\Data\\Family.txt");
+        File file = new File(str);
 
         ObjectOutputStream oos = null;
 
@@ -28,10 +33,9 @@ public class DataRepository implements Serializable, Repository {
         }
     }
 
-    public FamilyTree deserialization(){
-        File file = new File("D:\\GB\\JavaOOPFamilyTree\\" +
-                "homeWork_From_Salnikov_Vladislav\\src\\Family.txt");
-        ObjectInputStream ois = null;
+    public FamilyTree deserialization(String str){
+        File file = new File(str);
+        ObjectInputStream ois;
         try {
             FileInputStream fis = new FileInputStream(file);
             if(fis!= null){
