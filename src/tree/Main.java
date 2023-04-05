@@ -3,12 +3,10 @@ package tree;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 import tree.familyTree.FamilyTree;
-import tree.handlers.Input;
-import tree.handlers.Output;
+import tree.Service;
 import tree.human.Gender;
 import tree.human.Human;
 
@@ -53,10 +51,10 @@ public class Main {
         mom.addChild(son);
         mom.addChild(dah);
 
-        tree.addHuman(dad);
-        tree.addHuman(mom);
-        tree.addHuman(son);
-        tree.addHuman(dah);
+        // tree.addHuman(dad);
+        // tree.addHuman(mom);
+        // tree.addHuman(son);
+        // tree.addHuman(dah);
 
         Set<Human> children = tree.getChildren(mom);
         // System.out.println("мать: " + mom);
@@ -76,23 +74,51 @@ public class Main {
         // System.out.println(descendant.getInfo());
         // }
 
-        Set<Human> relatives = tree.getRelatives(son);
+        // Set<Human> relatives = tree.getRelatives(son);
 
-        for (Human relative : relatives) {
-            System.out.println(relative.getInfo());
-        }
-
-        Set<Human> searchResult = tree.searchByName("Петр");
-
-        // for (Human human : searchResult) {
-        // System.out.println(human.getInfo());
+        // for (Human relative : relatives) {
+        // System.out.println(relative.getInfo());
         // }
 
-        Output output = new Output();
-        output.printOut(tree);
+        // Set<Human> searchResult = tree.searchByNames("Петр", "Осетров");
 
-        Input input = new Input();
-        input.printIn();
+        // for (Human human : searchResult) {
+        // System.out.println(human);
+        // }
+
+        // -----ВОПРОС!!!!!---------
+        // запутался с сервисом, который подключается к хэндлеру,
+        // который имплементируется с сериализацией
+        // -----при раскомментрировании строк ниже и запуске ошибка
+        // Service service = new Service();
+        // service.printOut();
+        // service.printIn();
+        // --------------------что от меня требуется, куда копать?
+
+        // пробовал итератор
+        Service service = new Service(tree);
+        service.addHuman(dad);
+        service.addHuman(mom);
+        service.addHuman(son);
+        service.addHuman(dah);
+
+        for (Human human : tree) {
+            System.out.println(human.getInfo());
+        }
+        System.out.println();
+
+        System.out.println("сортировка по именам в алфавитном порядке");
+        service.sortByFirstName();
+        for (Human human : tree) {
+            System.out.println(human.getInfo());
+        }
+        System.out.println();
+
+        System.out.println("сортировка по датам в обратном порядке");
+        service.SortByDateBirth();
+        for (Human human : tree) {
+            System.out.println(human.getInfo());
+        }
 
     }
 }

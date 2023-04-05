@@ -3,11 +3,12 @@ package tree.familyTree;
 import tree.human.Human;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> peopleList;
 
     public FamilyTree() {
@@ -38,7 +39,7 @@ public class FamilyTree implements Serializable {
      * @return - возвращает список потомков
      */
     public Set<Human> getDescendants(Human Human) {
-        Set<Human> descendants = new TreeSet<>();
+        Set<Human> descendants = new HashSet<>();
         for (Human child : Human.getChildren()) {
             descendants.add(child);
             descendants.addAll(getDescendants(child));
@@ -54,7 +55,7 @@ public class FamilyTree implements Serializable {
      * @return - возвращает список предков
      */
     public Set<Human> getAncestors(Human Human) {
-        Set<Human> ancestors = new TreeSet<>();
+        Set<Human> ancestors = new HashSet<>();
         for (Human parent : Human.getParents()) {
             ancestors.add(parent);
             ancestors.addAll(getAncestors(parent));
@@ -70,17 +71,24 @@ public class FamilyTree implements Serializable {
      * @return - возвращает список связей
      */
     public Set<Human> getRelatives(Human Human) {
-        Set<Human> relatives = new TreeSet<>();
+        Set<Human> relatives = new HashSet<>();
         relatives.addAll(getAncestors(Human));
         relatives.addAll(getDescendants(Human));
         return relatives;
     }
 
-    public Set<Human> searchByName(String name) {
-        Set<Human> result = new TreeSet<>();
-        for (Human Human : peopleList) {
-            result.add(Human);
+    public Set<Human> searchByNames(String firstName, String lastName) {
+        Set<Human> result = new HashSet<>();
+        for (Human human : peopleList) {
+            if (human.getFirstName() == firstName && human.getLastName() == lastName) {
+                result.add(human);
+            }
         }
         return result;
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return peopleList.iterator();
     }
 }
