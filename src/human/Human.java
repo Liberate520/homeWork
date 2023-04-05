@@ -1,10 +1,13 @@
+package human;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private Gender gender;
+    //private Data dateBirth;
     private Human mother;
     private Human father;
     private List<Human> children;
@@ -21,8 +24,16 @@ public class Human implements Serializable {
         this.name = name;
         this.gender = gender;
         this.children = new ArrayList<>();
+
   }
-  public void save() throws IOException, ClassNotFoundException{
+
+//    public human.Human(String name, human.Gender gender, Data dateBirth) {
+//        this.name = name;
+//        this.gender = gender;
+//        this.dateBirth = dateBirth;
+//    }
+
+    public void save() throws IOException, ClassNotFoundException{
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(
               new FileOutputStream("human.out")
       );
@@ -145,5 +156,10 @@ public class Human implements Serializable {
 
     public void setFather(Human father) {
         this.father = father;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }

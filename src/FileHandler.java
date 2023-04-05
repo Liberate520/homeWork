@@ -1,7 +1,14 @@
-import java.io.*;
+import human.Gender;
+import human.Human;
+import tree.FamilyTree;
 
-public class FileHandler implements Writeable, Serializable {
-    public void load(FamilyTree familyTree, String path) throws Exception {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileHandler implements Writeable{
+    public FamilyTree load(FamilyTree familyTree, String path) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader(path));
         String str;
         while ((str = br.readLine()) != null) {
@@ -34,10 +41,10 @@ public class FileHandler implements Writeable, Serializable {
             }
         }
         for (Human child: familyTree.getMembers()
-             ) {
+        ) {
             if (child.getMother() != null ) {
                 for (Human parent: familyTree.getMembers()
-                     ) {
+                ) {
                     if (child.getMother().getName().equals(parent.getName()) ){
                         parent.addChild(child);
                     }
@@ -54,7 +61,7 @@ public class FileHandler implements Writeable, Serializable {
 
 
         }
-
+        return familyTree;
     }
     public void saveHuman(Human human, String path) {
         try(FileWriter fw = new FileWriter(path, true)) {
@@ -66,8 +73,4 @@ public class FileHandler implements Writeable, Serializable {
         }
 
     }
-
-
-
-
 }

@@ -1,4 +1,6 @@
-import java.io.IOException;
+import human.Gender;
+import human.Human;
+import tree.FamilyTree;
 
 public class program {
     public static void main(String[] args) throws Exception {
@@ -21,14 +23,33 @@ public class program {
         familyTree1.addMembers(member4);
         //familyTree1.printMembers(); //печать всех членов семьи
 
-        FileHandler fh = new FileHandler();
-        FamilyTree familyTree2 = new FamilyTree();
+        //Перебор всех членов семьи с помощью итератора
+        for (Human member: familyTree1
+             ) {
+            System.out.println(member.getAllInfo());
+        }
+//Сортировка членов семьи
+        Service service = new Service(familyTree1);
+        service.sortByName();
 
-        fh.load(familyTree2, "fileInfo.txt"); // Загрузка дерева из файла, даже если в файле есть повторения, они не учитываются при формировании членов семьи
-        familyTree2.printMembers();
-        Human member5 = new Human("Ivanov Dmitry", Gender.Male, null, member3);
-        // Сохранение в файле
-        fh.saveHuman(member5, "fileInfo.txt");
+        System.out.println("Sort by name"); // Сортировка членов семьи по имени
+
+        for (Human member: familyTree1
+        ) {
+            System.out.println(member.getAllInfo());
+        }
+
+
+//        FileHandler fh = new FileHandler();
+//        FamilyTree familyTree2 = new FamilyTree();
+//
+//        familyTree2 = fh.load(familyTree2, "fileInfo.txt"); // Загрузка дерева из файла, даже если в файле есть повторения, они не учитываются при формировании членов семьи
+//        familyTree2.printMembers();
+//        Human member5 = new Human("Ivanov Dmitry", Gender.Male, null, member3);
+//        // Сохранение в файле
+//        fh.saveHuman(member5, "fileInfo.txt");
 
     }
+
+
 }
