@@ -1,4 +1,4 @@
-package programm;
+package program;
 
 import java.io.IOException;
 import classes.*;
