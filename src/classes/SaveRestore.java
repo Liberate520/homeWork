@@ -1,10 +1,10 @@
-package Class;
+package classes;
 import java.io.*;
-import Interface.SaveLoad;
+import Interface.saveLoad;
 
-public class SaveRestore implements SaveLoad {
+public class SaveRestore implements saveLoad {
     @Override
-    public void Save (Tree treeToSave, String path) {
+    public void save (Tree treeToSave, String path) {
 
         ObjectOutputStream objectOutputStream;
         try {
@@ -19,7 +19,7 @@ public class SaveRestore implements SaveLoad {
     }
 
     @Override
-    public Tree Load(String path) {
+    public Tree load(String path) {
         Tree treeRestored = new Tree();
         ObjectInputStream objectInputStream;
         try {

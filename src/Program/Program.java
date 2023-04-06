@@ -1,9 +1,7 @@
-package Program;
+package program;
 
 import java.io.IOException;
-
-import Class.*;
-
+import classes.*;
 
 
 public class Program {
@@ -69,8 +67,8 @@ public class Program {
         // System.out.println(mikhailFedorovich.getDescendants());
         // System.out.println(vasiliyMikhailovich.getParents());
 
-        tree.Save(tree, "Seminar_1/homeWork/src/Storage/Test.out");
-        Tree loaded = tree.Load("Seminar_1/homeWork/src/Storage/Test.out");
+        tree.save(tree, "Seminar_1/homeWork/src/Storage/Test.out");
+        Tree loaded = tree.load("Seminar_1/homeWork/src/Storage/Test.out");
 
         for (Human person : loaded.getTree()) {
                 System.out.println(person.toString());

@@ -1,12 +1,10 @@
-package Class;
-
+package classes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Interface.SaveLoad;
 
-public class Tree implements SaveLoad {
+public class Tree {
     private List<Human> persons = new ArrayList<>();
 
     public List<Human> getTree(){
@@ -17,17 +15,17 @@ public class Tree implements SaveLoad {
         persons.add(person);
     }
 
-    @Override
-    public void Save(Tree treeToSave, String path) {
+    //@Override
+    public void save(Tree treeToSave, String path) {
         SaveRestore saving = new SaveRestore();
-        saving.Save(treeToSave, path);
+        saving.save(treeToSave, path);
         //throw new UnsupportedOperationException("Unimplemented method 'Save'");
     }
 
-    @Override
-    public Tree Load(String path) {
+    //@Override
+    public Tree load(String path) {
         SaveRestore loading = new SaveRestore();
-        return loading.Load(path);
+        return loading.load(path);
         //throw new UnsupportedOperationException("Unimplemented method 'Load'");
     }
 
