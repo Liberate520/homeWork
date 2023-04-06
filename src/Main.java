@@ -24,12 +24,33 @@ public class Main {
         familyTree.addPerson(person6);
         System.out.println(familyTree.familyTree);
 
-        familyTree.save(familyTree, "src/familyTree.json");
+        for (Human human:familyTree) {
+            System.out.println(human);
+        }
+
+        System.out.println();
+        System.out.println();
+        familyTree.sortByName();
+
+        for (Human human:familyTree) {
+            System.out.println(human);
+        }
+
+        System.out.println();
+        System.out.println();
+        familyTree.sortBySex();
+
+        for (Human human:familyTree) {
+            System.out.println(human);
+        }
+
+        familyTree.save("src/familyTree.json");
 
         // загружаем дерево из файла
         FamilyTree loadedTree = new FamilyTree();
         loadedTree.load("src/familyTree.json");
         System.out.println(loadedTree);
+
     }
 
 }

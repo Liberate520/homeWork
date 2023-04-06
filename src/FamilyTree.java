@@ -1,10 +1,12 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 
-
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     List<Human> familyTree;
 
     public FamilyTree(List<Human> familyTree) {
@@ -18,11 +20,26 @@ public class FamilyTree implements Serializable {
         this.familyTree.add(human);
     }
 
-    public void save(Serializable obj, String filePath) throws IOException {
-        FileHandler.save(obj, filePath);
+    public void save (String filepath) throws IOException {
+        FileHandler fh = new FileHandler();
+        fh.save((Serializable) familyTree, filepath);
     }
 
-    public Serializable load(String filePath) throws IOException, ClassNotFoundException {
-        return FileHandler.load(filePath);
+    public void load (String filepath) throws IOException, ClassNotFoundException {
+        FileHandler fh = new FileHandler();
+        fh.load(filepath);
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyTree);
+    }
+
+    public void sortByName () {
+        Collections.sort(familyTree);
+    }
+    public void sortBySex () {
+        familyTree.sort(new HumanComparatorBySex());
+    }
+
 }

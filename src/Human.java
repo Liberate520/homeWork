@@ -4,12 +4,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.SplittableRandom;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
     private String sex;
     private String firsName;
     private String lastName;
     private String dateOfBirth;
     private String dateOfDeath;
+
+    public String getSex() {
+        return sex;
+    }
+
     private Human mother;
     private Human father;
     private List<Human> children;
@@ -62,5 +67,10 @@ public class Human implements Serializable{
     @Override
     public String toString() {
         return firsName +" " + lastName + ". Дети: " + this.getChildrenNames();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return firsName.compareTo(o.firsName);
     }
 }
