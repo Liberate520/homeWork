@@ -1,4 +1,5 @@
 package tree;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,13 +32,14 @@ public class FamilyTree<E extends Human> implements Serializable, Tree<E> {
         people.add(h);
     }
 
-    public E findHuman(String str, E nl) {
+    public E findHuman(String str) {
         for (E item : people) {
             if (str.toLowerCase().equals(item.getName().toLowerCase())) {
                 return item;
             }
         }
-        return nl;
+        E human0 = null;
+        return human0;
     }
 
     @Override
