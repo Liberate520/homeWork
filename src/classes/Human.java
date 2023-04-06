@@ -93,4 +93,13 @@ public class Human implements Serializable{
     public void addChild(Human child){
         children.add(child);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getBirthDate(){
+        return dateBirth;
+    }
+
 }

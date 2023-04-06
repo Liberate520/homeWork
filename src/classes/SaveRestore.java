@@ -1,10 +1,12 @@
 package classes;
 import java.io.*;
-import Interface.saveLoad;
 
-public class SaveRestore implements saveLoad {
+import interfaces.SaveLoad;
+import interfaces.iTree;
+
+public class SaveRestore implements SaveLoad {
     @Override
-    public void save (Tree treeToSave, String path) {
+    public void save (iTree treeToSave, String path) {
 
         ObjectOutputStream objectOutputStream;
         try {
@@ -19,13 +21,13 @@ public class SaveRestore implements saveLoad {
     }
 
     @Override
-    public Tree load(String path) {
-        Tree treeRestored = new Tree();
+    public iTree load(String path) {
+        iTree treeRestored = new Tree();
         ObjectInputStream objectInputStream;
         try {
             objectInputStream = new ObjectInputStream(
                     new FileInputStream(path));
-            treeRestored = (Tree) objectInputStream.readObject();
+            treeRestored = (iTree) objectInputStream.readObject();
             objectInputStream.close();
         } catch (IOException e) {
             e.printStackTrace();

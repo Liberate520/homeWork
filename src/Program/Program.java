@@ -2,12 +2,15 @@ package program;
 
 import java.io.IOException;
 import classes.*;
+import sorting.Sorting;
 
 
 public class Program {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Tree tree = new Tree();
+        Sorting sort = new Sorting(tree);
+
         // 1st gen
         Human mikhailFedorovich = new Human("Михаил",
                 "Фёдорович", "Романов", 1596, 1645, (Human) null, (Human) null);
@@ -67,11 +70,28 @@ public class Program {
         // System.out.println(mikhailFedorovich.getDescendants());
         // System.out.println(vasiliyMikhailovich.getParents());
 
-        tree.save(tree, "Seminar_1/homeWork/src/Storage/Test.out");
-        Tree loaded = tree.load("Seminar_1/homeWork/src/Storage/Test.out");
 
-        for (Human person : loaded.getTree()) {
+        // Saving
+        // tree.save(tree, "src/storage/Test.out");
+        // Tree loaded = tree.load("src/storage/Test.out");
+
+        for (Human person : tree) {
                 System.out.println(person.toString());
         }
+        System.out.println();
+
+        sort.sortByBirthDate();
+
+        for (Human person : tree) {
+                System.out.println(person.toString());
+        }
+        System.out.println();
+
+        sort.sortByName();
+
+        for (Human person : tree) {
+                System.out.println(person.toString());
+        }
+        System.out.println();
     }
 }
