@@ -7,7 +7,7 @@ import Person.Person;
 
 public class FilehandlerTXT {
 
-    public static void SaveToFile(List<Person> listPerson, String filename) {
+    public static void saveToFile(List<Person> listPerson, String filename) {
         try (FileWriter writer = new FileWriter(filename, false)) {
             writer.write(listPerson.toString());
             System.out.printf("File " + filename + " has been written");
