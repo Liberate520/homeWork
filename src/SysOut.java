@@ -5,10 +5,21 @@ import java.util.Scanner;
 
 public class SysOut {
 
-    public static void SysOut(){
-        Scanner scn = new Scanner(System.in,"ibm866");
+    public static void getAllPersonFromList(FamilyTree familytree) {
+        for (int i = 0; i < familytree.getPersonList().size(); i++) {
+            System.out.println((i+1) + ". " + familytree.getPersonList().get(i).getFullName());
+        }
+    }
 
-        System.out.println("Здравствуйте! Выберите интересующий вас пункт ");
+    /**
+     * Вызов пользовательского интерфейса
+     * @param familytree Список семейного древа
+     */
+    public static void SysOut(FamilyTree familytree){
+
+        Scanner scn = new Scanner(System.in,"ibm866");
+        System.out.println();
+        System.out.println("Выберите интересующий вас пункт ");
         System.out.println("1. Показать семейное древо ");
         System.out.println("2. Показать дату рождения человека ");
         System.out.println("3. Показать Родителей человека ");
@@ -17,10 +28,11 @@ public class SysOut {
         System.out.println("6. показать дату смерти человека ");
         System.out.println("7. Добавить нового человека семьи ");
         System.out.println("8. Сохранить семейное древо ");
+        System.out.println("9. Выход из программы ");
 
         int answer = scn.nextInt();
         
-        while(answer < 1 || answer > 8){
+        while(answer < 1 || answer > 9){
             System.out.println("Выберете интересующий вас пункт: ");
             System.out.println("1. Показать семейное древо ");
             System.out.println("2. Показать дату рождения человека ");
@@ -30,157 +42,100 @@ public class SysOut {
             System.out.println("6. показать дату смерти человека ");
             System.out.println("7. Добавить нового человека семьи ");
             System.out.println("8. Сохранить семейное древо ");
+            System.out.println("9. Выход из программы ");
 
             answer = scn.nextInt();
         }
         if (answer == 1){
-            // Здесь должен быть вывод дерева!!! 
+            System.out.print(familytree.getInfo()); 
         }
         if (answer == 2){
             System.out.println("Выберете человека для просмотра даты рождения: ");
-            System.out.println("1. " + Main.person1);
-            System.out.println("2. " + Main.person2);
-            System.out.println("3. " + Main.person3);
-            System.out.println("4. " + Main.person4);
+            getAllPersonFromList(familytree);
+            System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
             answer = scn.nextInt();
 
-            while(answer < 1 || answer > 4){
-
+            while(answer < 1 || answer > familytree.getPersonList().size() + 1){
                 System.out.println("Выберете человека для просмотра даты рождения: ");
-                System.out.println("1. " + Main.person1);
-                System.out.println("2. " + Main.person2);
-                System.out.println("3. " + Main.person3);
-                System.out.println("4. " + Main.person4);
+                getAllPersonFromList(familytree);
+                System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
                 answer = scn.nextInt();
             }
-            if(answer == 1){        
-                Main.person1.getDateOfBirth();
+            if(answer < familytree.getPersonList().size() + 1){
+                System.out.print(familytree.getPersonList().get(answer - 1).getDateOfBirth());
             }
-            if(answer == 2){        
-                Main.person2.getDateOfBirth();
-            }
-            if(answer == 3){        
-                Main.person3.getDateOfBirth();
-            }
-            if(answer == 4){        
-                Main.person4.getDateOfBirth();
-            }           
-
+            answer = 0;
         }
         if (answer == 3){
             System.out.println("Выберете человека для просмотра его родителей: ");
-            System.out.println("1. " + Main.person1);
-            System.out.println("2. " + Main.person2);
-            System.out.println("3. " + Main.person3);
-            System.out.println("4. " + Main.person4);
+            getAllPersonFromList(familytree);
+            System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
             answer = scn.nextInt();
 
-            while(answer < 1 || answer > 4){
-
+            while(answer < 1 || answer > familytree.getPersonList().size() + 1){
                 System.out.println("Выберете человека для просмотра его родителей: ");
-                System.out.println("1. " + Main.person1);
-                System.out.println("2. " + Main.person2);
-                System.out.println("3. " + Main.person3);
-                System.out.println("4. " + Main.person4);
+                getAllPersonFromList(familytree);
+                System.out.println((familytree.getPersonList().size() +1) + ". Возвратится в меню ");
                 answer = scn.nextInt();
             }
-            if(answer == 1){        
-                System.out.println("Отец: "); Main.person1.getFather(); 
-                System.out.println("Мать: "); Main.person1.getMother();
+            if(answer < familytree.getPersonList().size() + 1){
+                System.out.print(familytree.getPersonList().get(answer - 1).getMotherInfo());
+                System.out.print(familytree.getPersonList().get(answer - 1).getFatherInfo());
             }
-            if(answer == 2){        
-                System.out.println("Отец: "); Main.person2.getFather(); 
-                System.out.println("Мать: "); Main.person2.getMother();
-            }
-            if(answer == 3){        
-                System.out.println("Отец: "); Main.person3.getFather(); 
-                System.out.println("Мать: "); Main.person3.getMother();
-            }
-            if(answer == 4){        
-                System.out.println("Отец: "); Main.person4.getFather(); 
-                System.out.println("Мать: "); Main.person4.getMother();
-            }           
-
-
+            answer = 0;
         }
         if (answer == 4){
 
             System.out.println("Выберете человека для просмотра его детей: ");
-            System.out.println("1. " + Main.person1);
-            System.out.println("2. " + Main.person2);
-            System.out.println("3. " + Main.person3);
-            System.out.println("4. " + Main.person4);
+            getAllPersonFromList(familytree);
+            System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
             answer = scn.nextInt();
-    
-            if(answer == 1){        
-                System.out.println("Дети: "); Main.person1.getChildrens();
+            while(answer < 1 || answer > familytree.getPersonList().size() + 1){
+                System.out.println("Выберете человека для просмотра его детей: ");
+                getAllPersonFromList(familytree);
+                System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
+                answer = scn.nextInt();
             }
-            if(answer == 2){        
-                System.out.println("Дети: "); Main.person2.getChildrens();
+            if(answer < familytree.getPersonList().size() + 1){
+                System.out.print(familytree.getPersonList().get(answer - 1).getChildrenInfo());
             }
-            if(answer == 3){        
-                System.out.println("Дети: "); Main.person3.getChildrens();
-            }
-            if(answer == 4){        
-                System.out.println("Дети: "); Main.person4.getChildrens();
-            }           
-
+            answer = 0;
         }
         if (answer == 5){
             System.out.println("Выберете человека для просмотра жив или нет: ");
-            System.out.println("1. " + Main.person1);
-            System.out.println("2. " + Main.person2);
-            System.out.println("3. " + Main.person3);
-            System.out.println("4. " + Main.person4);
+            getAllPersonFromList(familytree);
+            System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
             answer = scn.nextInt();
-    
-            if(answer == 1){        
-                Main.person1.getAlive();
+            while(answer < 1 || answer > familytree.getPersonList().size() + 1){
+                System.out.println("Выберете человека для просмотра жив или нет: ");
+                getAllPersonFromList(familytree);
+                System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
+                answer = scn.nextInt();
             }
-            if(answer == 2){        
-                Main.person2.getAlive();
+            if(answer < familytree.getPersonList().size() + 1){
+                System.out.print(familytree.getPersonList().get(answer - 1).getAlive());
             }
-            if(answer == 3){        
-                Main.person3.getAlive();;
-            }
-            if(answer == 4){        
-                Main.person4.getAlive();;
-            }           
-            
+            answer = 0;
         }
         if (answer == 6){
             System.out.println("Выберете человека для просмотра даты смерти: ");
-            System.out.println("1. " + Main.person1);
-            System.out.println("2. " + Main.person2);
-            System.out.println("3. " + Main.person3);
-            System.out.println("4. " + Main.person4);
+            getAllPersonFromList(familytree);
+            System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
             answer = scn.nextInt();
 
-            while(answer < 1 || answer > 4){
-
+            while(answer < 1 || answer > familytree.getPersonList().size() + 1){
                 System.out.println("Выберете человека для просмотра даты смерти: ");
-                System.out.println("1. " + Main.person1);
-                System.out.println("2. " + Main.person2);
-                System.out.println("3. " + Main.person3);
-                System.out.println("4. " + Main.person4);
+                getAllPersonFromList(familytree);
+                System.out.println((familytree.getPersonList().size() + 1) + ". Возвратится в меню ");
                 answer = scn.nextInt();
             }
-            if(answer == 1){        
-                Main.person1.getDateOfDeath();
+            if(answer < familytree.getPersonList().size() + 1){
+                System.out.print(familytree.getPersonList().get(answer - 1).getDateOfDeath());
             }
-            if(answer == 2){        
-                Main.person2.getDateOfDeath();
-            }
-            if(answer == 3){        
-                Main.person3.getDateOfDeath();
-            }
-            if(answer == 4){        
-                Main.person4.getDateOfDeath();
-            }   
-            
+            answer = 0;
         }
         if (answer == 7){
-            Person new_person = new Person(null, null, null);
+            Person new_person = new Person(null, null);
             System.out.println("Введите имя: ");
             new_person.setFirstName(scn.next());
             System.out.println("Введите фамилию: ");
@@ -202,17 +157,21 @@ public class SysOut {
             }
             if(answer == 2){
                 new_person.setAlive(false);
+                System.out.println("Введите дату смерти: ");
+                new_person.setDateOfDeath(scn.next());
             }
-            // Здесь должно быть занесение нового человека в дерево!!! 
+            familytree.add(new_person);
+            System.out.println(new_person.getFullName() + " добавлен(а) в семейное древо ");
+            answer = 0;
         }
         if (answer == 8){
-            // Здесь должно быть занесение дерева в файл!!! 
+            SaveLoad.save(familytree,"FamilyTree.txt");
+            answer = 0;
         }
 
+        if (answer != 9){
+            SysOut(familytree);
+        }
     scn.close();
     }
-    
-    
-    
-    
 }

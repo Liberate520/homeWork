@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 
 
 
@@ -36,6 +37,13 @@ public class Main {
         person1.setFather(person3);
         person4.setMother(person2);
 
+       // Добавление человека в семейное дерево
+        familytree.add(person1);
+        familytree.add(person2);
+        familytree.add(person3);
+        familytree.add(person4);
+
+
         // Получение информации по человеку по отдельным позициям
         person1.getFirstName();
         person1.getSecondName();
@@ -46,65 +54,59 @@ public class Main {
         person1.getFather();
         person1.getChildrens();
 
+        // // Вывод полной информации по людям 
+        // System.out.println(person1);
+        // System.out.println();
+        // System.out.println(person2);
+        // System.out.println();
+        // System.out.println(person3);
+        // System.out.println();
+        // System.out.println(person4);
+        // System.out.println();
 
-        // Добавление человека в семейное дерево
-        familytree.add(person1);
-        familytree.add(person2);
-        familytree.add(person3);
-        familytree.add(person4);
+        // // Вывод малой информации по людям
+        // System.out.println(person1.getInfo());
+        // System.out.println();
+        // System.out.println(person2.getInfo());
+        // System.out.println();
 
-        // Вывод полной информации по людям 
-        System.out.println(person1);
-        System.out.println();
-        System.out.println(person2);
-        System.out.println();
-        System.out.println(person3);
-        System.out.println();
-        System.out.println(person4);
-        System.out.println();
-
-        // Вывод малой информации по людям
-        System.out.println(person1.getInfo());
-        System.out.println();
-        System.out.println(person2.getInfo());
-        System.out.println();
-
-        // Вывод семейного древа
-        System.out.print(familytree.getInfo());
+        // // Вывод семейного древа
+        // System.out.print(familytree.getInfo());
 
 
-        // Сортировки:
-        // По количеству детей
-        familyIterator.sortByChild();
-        for(Person person: familytree){
-            System.out.println(person);
-        }
-        System.out.println();
+        // // Сортировки:
+        // // По количеству детей
+        // familyIterator.sortByChild();
+        // for(Person person: familytree){
+        //     System.out.println(person);
+        // }
+        // System.out.println();
         
-        // По Имени
-        familyIterator.sortByName();
-        for(Person person: familytree){
-            System.out.println(person);
-        }
-        System.out.println();
+        // // По Имени
+        // familyIterator.sortByName();
+        // for(Person person: familytree){
+        //     System.out.println(person);
+        // }
+        // System.out.println();
 
-        // По Фамилии
-        familyIterator.sortBySecondName();
-        for(Person person: familytree){
-            System.out.println(person);
-        }
-        System.out.println();
+        // // По Фамилии
+        // familyIterator.sortBySecondName();
+        // for(Person person: familytree){
+        //     System.out.println(person);
+        // }
+        // System.out.println();
 
-        // По нахождению в живых
-        familyIterator.sortByAlive();
-        for(Person person: familytree){
-            System.out.println(person);
-        }
+        // // По нахождению в живых
+        // familyIterator.sortByAlive();
+        // for(Person person: familytree){
+        //     System.out.println(person);
+        // }
     
-        // Сохранение в файл
-        
-        SaveLoad.save(familytree,"FamilyTree.txt");
-        
+        // // Сохранение в файл
+        // SaveLoad.save(familytree,"FamilyTree.txt");
+
+        SysOut.SysOut(familytree);
+
     }
 
 }

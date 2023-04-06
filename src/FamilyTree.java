@@ -20,7 +20,7 @@ public class FamilyTree implements Iterable<Person>,  Serializable{
      * Создание списка семейного древа 
      */
     public FamilyTree(){
-        familytree = new ArrayList<>();
+        this.familytree = new ArrayList<>();
     }
 
     /**
@@ -102,9 +102,10 @@ public class FamilyTree implements Iterable<Person>,  Serializable{
         return sb.toString();
     }
 
-
     @Override
     public Iterator<Person> iterator(){
         return new PersonSort(familytree);
     }
+
+   
 }
