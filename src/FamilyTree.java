@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    List<Human> familyTree;
+    private final List<Human> familyTree;
 
     public FamilyTree(List<Human> familyTree) {
         this.familyTree = familyTree;

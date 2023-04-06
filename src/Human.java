@@ -1,15 +1,15 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Human implements Serializable {
-    private static int count = 1;
-    private int id;
-    private String firstName;
-    private String lastname;
-
-    String dateOfBirth;
-    String dateOfDeath;
-    int idMather;
-    int idFather;
+    private int count = 1;
+    private final int id;
+    private final String firstName;
+    private final String lastname;
+    private final LocalDate dateOfBirth;
+    private final LocalDate dateOfDeath;
+    private int idMather;
+    private int idFather;
 
     /**
      * @param firstName   Имя
@@ -18,7 +18,7 @@ public class Human implements Serializable {
      * @param idMather    ссылка на объект Human(sex female)
      * @param idFather    ссылка на объект Human(sex male)
      */
-    public Human(String firstName, String lastname, String dateOfBirth, int idMather, int idFather) {
+    public Human(String firstName, String lastname, LocalDate dateOfBirth, int idMather, int idFather) {
         this.id = count++;
         this.firstName = firstName;
         this.lastname = lastname;
@@ -28,7 +28,7 @@ public class Human implements Serializable {
         this.idFather = idFather;
     }
 
-    public Human(String firstName, String lastname, String dateOfBirth) {
+    public Human(String firstName, String lastname, LocalDate dateOfBirth) {
         this.id = count++;
         this.firstName = firstName;
         this.lastname = lastname;
@@ -44,11 +44,11 @@ public class Human implements Serializable {
         return lastname;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public String getDateOfDeath() {
+    public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
 

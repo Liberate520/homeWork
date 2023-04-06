@@ -1,8 +1,10 @@
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
-        Human humanOne = new Human("Иван", "Иванов", "21.11.1994");
-        Human humanTwo = new Human("Анастасия", "Иванова", "15.06.1995");
-        Human humanThree = new Human("Алия", "Иванова", "08.03.2018", humanTwo.getId(), humanOne.getId());
+        Human humanOne = new Human("Иван", "Иванов", LocalDate.of(1994, 11, 21));
+        Human humanTwo = new Human("Анастасия", "Иванова", LocalDate.of(1995, 6, 15));
+        Human humanThree = new Human("Алия", "Иванова", LocalDate.of(2018, 3, 8), humanTwo.getId(), humanOne.getId());
 
         FamilyTree test = new FamilyTree();
         test.add(humanOne);
@@ -13,12 +15,11 @@ public class Main {
 //        test.childrensHuman(humanTwo);
 
         FamilyTree testTwo;
-        String nameFile = "FamilyTree.bin";
-        SaveAndRead.saveFile(test, nameFile);
-        testTwo = SaveAndRead.loadFile(nameFile);
-        System.out.println(testTwo);
-//        testTwo.parentsHuman(humanTwo);
-//        testTwo.childrensHuman(humanTwo);
+        SaveAndRead data = new SaveAndRead();
 
+        String nameFile = "FamilyTree.bin";
+        data.saveFile(test, nameFile);
+        testTwo = data.loadFile(nameFile);
+        System.out.println(testTwo);
     }
 }
