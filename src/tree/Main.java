@@ -39,7 +39,7 @@ import tree.human.Human;
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         Human dad = new Human("Петр", "Осетров", Gender.Male, LocalDate.of(1986, 7, 21));
         Human mom = new Human("Лариса", "Осетрова", Gender.Female, LocalDate.of(1988, 2, 1));

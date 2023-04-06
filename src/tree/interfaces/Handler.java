@@ -1,6 +1,7 @@
 package tree.interfaces;
 
 public interface Handler {
+
     /*
      * считываем
      */

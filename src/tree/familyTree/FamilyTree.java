@@ -8,26 +8,26 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> peopleList;
+public class FamilyTree<E> implements Serializable, Iterable<E> {
+    private List<E> peopleList;
 
     public FamilyTree() {
         this.peopleList = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         this.peopleList.add(human);
     }
 
-    public List<Human> getPeopleList() {
+    public List<E> getPeopleList() {
         return peopleList;
     }
 
-    public Set<Human> getChildren(Human human) {
+    public Set<E> getChildren(E human) {
         return human.getChildren();
     }
 
-    public Set<Human> getParents(Human human) {
+    public Set<E> getParents(E human) {
         return human.getParents();
     }
 
@@ -38,9 +38,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param Human - получает объект персонажа
      * @return - возвращает список потомков
      */
-    public Set<Human> getDescendants(Human Human) {
-        Set<Human> descendants = new HashSet<>();
-        for (Human child : Human.getChildren()) {
+    public Set<E> getDescendants(E human) {
+        Set<E> descendants = new HashSet<>();
+        for (E child : human.getChildren()) {
             descendants.add(child);
             descendants.addAll(getDescendants(child));
         }
@@ -54,9 +54,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param Human - получает объект персонажа
      * @return - возвращает список предков
      */
-    public Set<Human> getAncestors(Human Human) {
-        Set<Human> ancestors = new HashSet<>();
-        for (Human parent : Human.getParents()) {
+    public Set<E> getAncestors(E human) {
+        Set<E> ancestors = new HashSet<>();
+        for (E parent : human.getParents()) {
             ancestors.add(parent);
             ancestors.addAll(getAncestors(parent));
         }
@@ -70,16 +70,16 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param Human - получает объект персонажа
      * @return - возвращает список связей
      */
-    public Set<Human> getRelatives(Human Human) {
-        Set<Human> relatives = new HashSet<>();
-        relatives.addAll(getAncestors(Human));
-        relatives.addAll(getDescendants(Human));
+    public Set<E> getRelatives(E human) {
+        Set<E> relatives = new HashSet<>();
+        relatives.addAll(getAncestors(human));
+        relatives.addAll(getDescendants(human));
         return relatives;
     }
 
-    public Set<Human> searchByNames(String firstName, String lastName) {
-        Set<Human> result = new HashSet<>();
-        for (Human human : peopleList) {
+    public Set<E> searchByNames(String firstName, String lastName) {
+        Set<E> result = new HashSet<>();
+        for (E human : peopleList) {
             if (human.getFirstName() == firstName && human.getLastName() == lastName) {
                 result.add(human);
             }
@@ -88,7 +88,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return peopleList.iterator();
     }
 }
