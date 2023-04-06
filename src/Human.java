@@ -1,8 +1,10 @@
 import java.io.LineNumberInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Human implements Serializable  {
 
@@ -12,7 +14,7 @@ public class Human implements Serializable  {
     private String name;
     private Gender gender;
     private String birthdate;
-    private List<Human> сhildrenList;
+    private Set<Human> сhildrenList;
 
 
     public Human(Human father, Human mother, String family, String name, Gender gender, String birthdate) {
@@ -22,7 +24,8 @@ public class Human implements Serializable  {
         this.name = name;
         this.gender = gender;
         this.birthdate = birthdate;
-        this.сhildrenList =new ArrayList<>();
+        this.сhildrenList = new HashSet<Human>();
+    
     }
 
     public Human(String family, String name,Gender gender,String birthdate) {
@@ -69,15 +72,16 @@ public class Human implements Serializable  {
 //        this.сhildrenList = new ArrayList<>();
 //    }
 
+    public Set<Human> getСhildrenList() {
+        return сhildrenList;
+    }
 
     public void addChildrenList(Human human) {
 
         this.сhildrenList.add(human);
     }
 
-    public List<Human> getСhildrenList() {
-        return сhildrenList;
-    }
+
 
 
 
@@ -92,13 +96,21 @@ public class Human implements Serializable  {
         return getInfo();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Human human = (Human) o;
-        return Objects.equals(family, human.family) && Objects.equals(name, human.name) && Objects.equals(birthdate, human.birthdate);
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        Human human = (Human) object;
+        return family.equals(human.family) && name.equals(human.name) && gender == human.gender && birthdate.equals(human.birthdate);
     }
+
+    //    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Human human = (Human) o;
+//        return Objects.equals(family, human.family) && Objects.equals(name, human.name) && Objects.equals(birthdate, human.birthdate);
+//    }
 
     @Override
     public int hashCode() {
