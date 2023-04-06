@@ -123,18 +123,18 @@ public class Human implements Serializable {
         return human.getName().equals(getName());
     }
 
-    public void addChild(Human child){
+    public boolean addChild(Human child){
         if (!children.contains(child)){
             children.add(child);
         }
-        else System.out.println("Этот человек уже содержится в списке детей ");;
+        return false;
     }
 
-    public void addFather(Human father){
+    public boolean  addFather(Human father){
         if(this.father == null){
             this.father = father;
         }
-        else System.out.println("Отец уже указан");
+        return false;
     }
     public void addMother(Human mother){
         if(this.mother == null){

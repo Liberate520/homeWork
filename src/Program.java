@@ -4,9 +4,6 @@ import java.time.LocalDate;
 
 public class Program implements Serializable{
 
-    public Program() throws IOException, ClassNotFoundException {
-    }
-
     public static void main(String[] args)  throws IOException, ClassNotFoundException {
         FamilyTree myTree =new FamilyTree();
 

@@ -2,8 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable{
-    List<Human> humanList;
+public class FamilyTree implements Serializable, IterAble{
+    private List<Human> humanList;
     public FamilyTree(){this(new ArrayList<>());}
     public FamilyTree(List<Human> humanList) {this.humanList = humanList;}
 
@@ -50,6 +50,18 @@ public class FamilyTree implements Serializable{
             }
             else System.out.println("С таким ID человек не найден");
         }
+        return null;
+    }
+
+    @Override
+    public List<Human> surNameSort(List<Human> surNameSort) {
+        List<Human> sorted = new ArrayList<>();
+        sorted = surNameSort.sort();
+        return null;
+    }
+
+    @Override
+    public List<Human> nameSort(List<Human> surNameSort) {
         return null;
     }
 }

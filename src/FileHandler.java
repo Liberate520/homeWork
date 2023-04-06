@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class FileHandler implements Writable, Serializable{
+public class FileHandler implements Writable {
 
     @Override
     public void save(Object object) throws IOException {
