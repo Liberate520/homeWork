@@ -1,4 +1,4 @@
-package program;
+package programm;
 
 import java.io.IOException;
 import classes.*;
@@ -72,8 +72,8 @@ public class Program {
 
 
         // Saving
-        // tree.save(tree, "src/storage/Test.out");
-        // Tree loaded = tree.load("src/storage/Test.out");
+        // tree.save(tree, "src/Storage/Test.out");
+        // Tree loaded = tree.load("src/Storage/Test.out");
 
         for (Human person : tree) {
                 System.out.println(person.toString());
