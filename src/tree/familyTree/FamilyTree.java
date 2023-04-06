@@ -1,6 +1,8 @@
 package tree.familyTree;
 
-import tree.human.Human;
+import tree.essences.Human;
+import tree.interfaces.AlliService;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class FamilyTree<E> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends AlliService<E>> implements Serializable, Iterable<E> {
     private List<E> peopleList;
 
     public FamilyTree() {
@@ -80,7 +82,7 @@ public class FamilyTree<E> implements Serializable, Iterable<E> {
     public Set<E> searchByNames(String firstName, String lastName) {
         Set<E> result = new HashSet<>();
         for (E human : peopleList) {
-            if (human.getFirstName() == firstName && human.getLastName() == lastName) {
+            if (human.getFirstName().equals(firstName) && human.getLastName().equals(lastName)) {
                 result.add(human);
             }
         }

@@ -1,20 +1,21 @@
-package tree.human;
+package tree.essences;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
+import tree.interfaces.AlliService;
 import tree.interfaces.Saveable;
 
-public class Human implements Saveable, Comparator<Human> {
+public class Human implements Saveable, Comparator<Human>, AlliService<Human> {
     private String firstName;
     private String lastName;
     private Gender gender;
     private LocalDate dateBirth;
     private LocalDate dateDeath;
-    private Set<Human> parents;
-    private Set<Human> children;
+    protected Set<Human> parents;
+    protected Set<Human> children;
     int index;
 
     public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth, LocalDate dateDeath) {
@@ -42,10 +43,12 @@ public class Human implements Saveable, Comparator<Human> {
         return dateDeath.toString();
     }
 
+    @Override
     public String getFirstName() {
         return firstName;
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
@@ -54,10 +57,12 @@ public class Human implements Saveable, Comparator<Human> {
         return firstName + " " + lastName;
     }
 
+    @Override
     public Set<Human> getParents() {
         return parents;
     }
 
+    @Override
     public Set<Human> getChildren() {
         return children;
         // StringBuilder sb = new StringBuilder();

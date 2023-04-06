@@ -6,9 +6,8 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import tree.familyTree.FamilyTree;
-import tree.Service;
-import tree.human.Gender;
-import tree.human.Human;
+import tree.essences.Gender;
+import tree.essences.Human;
 
 /**
  * Урок 1. Принципы ООП: Инкапсуляция, наследование, полиморфизм
