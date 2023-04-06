@@ -1,18 +1,25 @@
+package tree;//package treePackage;
 
+
+import human.HumanInterface;
+import human.Human;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree {
 
-    private List<Human> humanList = new ArrayList<>();
+public class FamilyTree implements Serializable {
 
-    public FamilyTree() {
-        this(new ArrayList<>());
-    }
+    public List<Human> humanList = new ArrayList<>();
 
-    public FamilyTree(List<Human> familyList) {
-        this.humanList = familyList;
-    }
+
+    // public FamilyTree(List<Human> humanList) {
+    //     this.humanList =humanList;
+    // }
+
+
 
     // метод проверки наличия человека в листе и при его отсутствии добавление
     // человека
@@ -69,6 +76,19 @@ public class FamilyTree {
         return infoRes.toString();
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

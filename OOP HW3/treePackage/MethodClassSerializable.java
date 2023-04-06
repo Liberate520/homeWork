@@ -1,11 +1,12 @@
+package treePackage;
 import java.io.*;
 
-public class MethodClass implements Serializable {
-    private String string;
+public class MethodClassSerializable implements Serializable {
+    private String name;
     private String description;
 
-    public MethodClass(String string, String description) {
-        this.string = string;
+    public MethodClassSerializable(String name, String description) {
+        this.name = name;
         this.description = description;
     }
 
@@ -20,10 +21,9 @@ public class MethodClass implements Serializable {
         System.out.println("Our readObject");
     }
 
-    //
     @Override
     public String toString() {
-        return "FamilyTree = " +'{' + string + '\'' +  ", description='" + description + '\'' +'}';
+        return "FamilyTree = " +'{' + name + '\'' +  ", description='" + description + '\'' +'}';
     }
 
   

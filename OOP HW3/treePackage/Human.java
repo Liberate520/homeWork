@@ -1,10 +1,9 @@
-
-
+package treePackage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Comparable<Human> {
 
     private Human mother;
     private Human father;
@@ -40,9 +39,6 @@ public class Human {
         return false;
     }
 
-
-
-
     public String getName() {
         return name;
     }
@@ -60,21 +56,16 @@ public class Human {
 
     }
 
-
-
-
     public String getMotherInfo() {
         String result = "Мать: ";
         if (mother != null) {
             result += mother.getName();
 
-        }
-        else {
+        } else {
             result += "неизвестна";
         }
         return result;
     }
-
 
     public String getFatherInfo() {
         String result = "Отец: ";
@@ -89,12 +80,11 @@ public class Human {
 
     public String getChildrenInfo() {
 
-
         StringBuilder infoRes = new StringBuilder();
 
-         infoRes.append("ДЕТИ: ");
+        infoRes.append("ДЕТИ: ");
 
-        if(children.size()!=0){
+        if (children.size() != 0) {
 
             infoRes.append(children.get(0).getName());
 
@@ -103,15 +93,12 @@ public class Human {
                 infoRes.append(children.get(i).getName());
 
             }
-        }
-        else{
+        } else {
             infoRes.append("детей нет");
         }
         return infoRes.toString();
 
     }
-
-
 
     public String getInfo() {
         StringBuilder infoHumun = new StringBuilder();
@@ -132,28 +119,42 @@ public class Human {
 
         infoHumun.append("; \n");
 
-
         return infoHumun.toString();
 
     }
 
+    @Override
+    public boolean equals(Object obj) {
 
-
-
-
-
-@Override
-    public boolean equals(Object obj){
-
-        if(this == obj){
-            return  true;
+        if (this == obj) {
+            return true;
         }
-        if(!(obj instanceof  Human)){
-            return  false;
+        if (!(obj instanceof Human)) {
+            return false;
         }
         Human human = (Human) obj;
-        return  human.getName().equals((getName()));
-}
+        return human.getName().equals((getName()));
+    }
 
+    @Override
+    public String toString() {
+        return "Human { " + "name = " + name +  "\t" +
+                "family = " + family + '}';
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
+    }
+
+    public static Object getHumanList() {
+        return null;
+    }
+
+    public void sort(HumanComparatorByName humanComparatorByName) {
+    }
+
+    public void addHumanForSort(Human human) {
+    }
 
 }
