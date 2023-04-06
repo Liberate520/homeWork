@@ -1,4 +1,5 @@
-public class Human {
+import java.io.Serializable;
+public class Human implements Serializable{
     private String name;
     private String surname;
     private String birthday;
@@ -46,7 +47,6 @@ public class Human {
         if (getName() != null ? !getName().equals(human.getName()) : human.getName() != null) return false;
         return getSurname() != null ? getSurname().equals(human.getSurname()) : human.getSurname() == null;
     }
-
 }
 
 

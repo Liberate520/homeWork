@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private  List<Human> tree;
 
     public FamilyTree() {
@@ -11,7 +12,6 @@ public class FamilyTree {
     public void add(Human human) {
         this.tree.add(human);
     }
-
     @Override
     public String toString() {
         for (Human item : tree) {
@@ -44,6 +44,5 @@ public class FamilyTree {
         } else {
             System.out.println(res + " Детей нет");
         }
-
     }
 }
