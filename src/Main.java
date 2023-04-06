@@ -1,13 +1,16 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 import file.OutInput;
 import file.Slfamailytree;
 import human.Human;
+import presenter.Presenter;
+import service.Service;
+import service.TreeService;
 import tree.FamilyTree;
-import tree.Sorts;
 import tree.Tree;
+import ui.ConsoleUi;
+import ui.View;
 
 /**
  * Main
@@ -15,7 +18,6 @@ import tree.Tree;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-        Scanner scan = new Scanner(System.in);
         Human human1 = new Human("Екатерина", "ж", 1974);
         Human human2 = new Human("Галина", "ж", 1941);
         Human human3 = new Human("Владимир", "м", 1935);
@@ -38,51 +40,14 @@ public class Main {
         famailytree.addpeople(human3, null, human4);
         famailytree.addpeople(human4, null, null);
         famailytree.addpeople(human5, null, null);
-        System.out.println(famailytree);
-
-        for(Human human: famailytree){
-            System.out.println(human);
-        }
-
-        Sorts<Human> sorts = new Sorts<>(famailytree);
-        sorts.SortbyName();
-        System.out.println();
-        for(Human human: famailytree){
-            System.out.println(human);
-        }
-
-        sorts.SortbyId();
-        System.out.println();
-        for(Human human: famailytree){
-            System.out.println(human);
-        }
-
-        sorts.SortbyChild();
-        System.out.println();
-        for(Human human: famailytree){
-            System.out.println(human);
-        }
-
-        sorts.SortbyBirthyear();
-        System.out.println();
-        for(Human human: famailytree){
-            System.out.println(human);
-        }
-        System.out.println("Введите имя человека, которого нужно найти: ");
-        String name1 = scan.nextLine();
-        Human humanf = new Human("1", "ж", 1900);
-        humanf = famailytree.findHuman(name1, humanf);
-
-        if (humanf.getName().equals("1")) {
-            System.out.printf("Человека с именем %s в этом фамильном дереве нет.\n", name1);
-        } else {
-            System.out.println(humanf);
-        }
-        scan.close();
 
         OutInput<Human> saveload = new Slfamailytree<>();
         saveload.save(famailytree);
-        famailytree = (Tree<Human>) saveload.load();
-        System.out.println(famailytree);  
+        View<Human> view = new ConsoleUi<>();
+        Service<Human> service = new TreeService<>();
+        Presenter<Human> presenter = new Presenter<>(view, service);
+        int num = 0;
+        while (num != 6)
+            num = view.start();
     }
 }
