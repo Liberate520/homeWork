@@ -7,19 +7,33 @@ public class Main {
         Human humanThree = new Human("Алия", "Иванова", LocalDate.of(2018, 3, 8), humanTwo.getId(), humanOne.getId());
 
         FamilyTree test = new FamilyTree();
-        test.add(humanOne);
-        test.add(humanTwo);
-        test.add(humanThree);
+//        test.add(humanOne);
+//        test.add(humanTwo);
+//        test.add(humanThree);
 //        System.out.println(test);
 //        test.parentsHuman(humanTwo);
 //        test.childrensHuman(humanTwo);
 
-        FamilyTree testTwo;
-        SaveAndRead data = new SaveAndRead();
+//        Сохранение и чтение данных
+//        FamilyTree testTwo;
+//        SaveAndRead data = new SaveAndRead();
+//        String nameFile = "FamilyTree.bin";
+//        data.saveFile(test, nameFile);
+//        testTwo = data.loadFile(nameFile);
+////        System.out.println(testTwo);
 
-        String nameFile = "FamilyTree.bin";
-        data.saveFile(test, nameFile);
-        testTwo = data.loadFile(nameFile);
-        System.out.println(testTwo);
+        Service service = new Service(test);
+        service.addHuman("Иван", "Пирожков", LocalDate.of(1994, 11, 21));
+        service.addHuman("Анастасия", "Жалнина", LocalDate.of(1995, 6, 15));
+        service.addHuman("Маша", "Яковлева", LocalDate.of(1994, 6,16));
+        service.addHuman("Алия", "Александрова", LocalDate.of(2018, 3, 8));
+
+
+        service.sortByLastName();
+        System.out.println("Отсортированный список по фамилии: ");
+        for (Human item : test) {
+            System.out.println(item);
+        }
     }
+
 }

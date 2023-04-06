@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private int count = 1;
     private final int id;
     private final String firstName;
@@ -70,5 +70,9 @@ public class Human implements Serializable {
             return "%s %s дата рождения - %s' Дата смерти - %s'".formatted(firstName, lastname, dateOfBirth, dateOfDeath);
         }
         return "%s %s дата рождения - %s".formatted(firstName, lastname, dateOfBirth);
+    }
+    @Override
+    public int compareTo(Human o) {
+        return firstName.compareTo(o.firstName);
     }
 }
