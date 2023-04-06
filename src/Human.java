@@ -1,11 +1,12 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private Human mother;
     private Human father;
-    List<Human> children;
+    private List<Human> children;
 
     public Human(String name, Human mothher, Human father) {
         this.name = name;
@@ -14,31 +15,14 @@ public class Human {
         this.children = new ArrayList<>();
     }
 
-    public Human(String name) {
-        this.name = name;
-        this.children = new ArrayList<>();
-    }
+    public Human(String name) {this(name, null, null); }
 
-    @Override
-    public String toString() {
-        return "name: " + this.name;
-    }
-
-    public void addChild(Human child) {
-        this.children.add(child);
-    }
-
-    public String printChildren() {
-        if(this.children.isEmpty()) {
-            return "None";
+    public boolean addChild(Human child) {
+        if (!children.contains(child)) {
+            children.add(child);
+            return true;
         }
-        else {
-            String allChildren = "";
-            for (Human child: this.children) {
-                allChildren += child.toString();
-            }
-            return allChildren;
-        }
+        return false;
     }
 
     public String getName() {
@@ -55,5 +39,68 @@ public class Human {
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    public String printHuman(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: ");
+        sb.append(name);
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
+    }
+
+    public String getMotherInfo() {
+        String res = "мать: ";
+        if(mother != null) {
+            res += mother.getName();
+        }
+        else {
+            res += "неизвестна";
+        }
+        return res;
+    }
+
+    public String getFatherInfo() {
+        String res = "отец: ";
+        if (father != null) {
+            res += father.getName();
+        }
+        else {
+            res += "неизвестен";
+        }
+        return res;
+    }
+
+    public String getChildrenInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("дети: ");
+        if (children.size() != 0) {
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++) {
+                res.append(", ");
+                res.append(children.get(i).getName());
+            }
+            } else {
+                res.append("детей нет");
+            }
+            return res.toString();
+        }
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getName().equals(getName());
     }
 }

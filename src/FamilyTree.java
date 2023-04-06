@@ -1,26 +1,60 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> humanList;
-
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
-    }
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public void addHumanList(Human humanList) {
-        this.humanList.add(humanList);
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
     }
+    // public void addHumanList(Human humanList) {
+    //     this.humanList.add(humanList);
+    // }
 
-    public void printHumanList() {
-        System.out.println("Members of Family");
-        for (Human humanList: this.humanList) {
-            System.out.println(humanList.toString());
+    public boolean add(Human human) {
+        if (human == null) {
+            return false;
         }
+        if (!humanList.contains(human)) {
+            humanList.add(human);
+            if (human.getFather() != null) {
+                human.getFather().addChild(human);
+            }
+            if(human.getMother() != null) {
+                human.getMother().addChild(human);
+            }
+            return true;
+        }
+        return false;
     }
 
+    public Human getByName(String name) {
+        for(Human human: humanList) {
+            if (human.getName().equals(name)) {
+                return human;
+            }
+        }
+        return null;
+    }
+
+    public String printTree() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("В фамильном дереве ");
+        sb.append(humanList.size());
+        sb.append(" людей: \n");
+        for (Human human: humanList) {
+            sb.append(human.printHuman());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    // public String getInfo() {
+    //     return String.format("Семья: ", printTree());
+    // }
 }

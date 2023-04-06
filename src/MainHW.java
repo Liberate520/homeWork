@@ -1,23 +1,17 @@
+import java.io.IOException;
+
 public class MainHW {
-    public static void main(String[] args) {
-       Human member1 = new Human("Пирожков Артур"); 
-       Human member2 = new Human("Пирожкова Анна"); 
-       Human member3 = new Human("Пирожков Владимир", member2, member1); 
-       Human member4 = new Human("Пирожкова Мария", member2, member1);
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        DataSave data = new DataSave();
+        FamilyTree familyTree1 = new FamilyTree();
 
-       FamilyTree familyTree1 = new FamilyTree();
-       member1.addChild(member3);
-       member2.addChild(member3);
-       member1.addChild(member4);
-       member2.addChild(member4);
+        familyTree1.add(new Human("Анна")); 
+        familyTree1.add(new Human("Петр")); 
+        familyTree1.add(new Human("Миша", familyTree1.getByName("Петр"), familyTree1.getByName("Анна"))); 
+        familyTree1.add(new Human("Оля", familyTree1.getByName("Петр"), familyTree1.getByName("Анна")));
 
-       System.out.println("Children of " + member1.toString() + " : " + member1.printChildren());
-       System.out.println("Children of " + member3.toString() + " : " + member3.printChildren());
-
-       familyTree1.addHumanList(member1);
-       familyTree1.addHumanList(member2);
-       familyTree1.addHumanList(member3);
-       familyTree1.addHumanList(member4);
-       familyTree1.printHumanList();
-    }
+        System.out.println(familyTree1);
+        data.save(familyTree1,"fileTree.txt");
+        data.read("fileTree.txt");
+        }
 }
