@@ -1,10 +1,12 @@
+package familyTree;
+
+import human.Human;
+
 import javax.imageio.IIOException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 
 public class FamilyTree<T> implements Serializable, Entity<T> {
@@ -67,26 +69,26 @@ public class FamilyTree<T> implements Serializable, Entity<T> {
         return tree.toString();
     }
 
-    public void save(List<Human> humanList) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream("src/out.txt");
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(humanList);
-        }
-        catch (IIOException ex) {
-            ex.printStackTrace(System.out);
-        }
-    }
-
-        public List<Human> load() throws ClassNotFoundException, InvalidObjectException {
-        try (FileInputStream fis = new FileInputStream("src/out.txt");
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-            List<Human> object = (List<Human>) ois.readObject();
-            return object;
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-        }
-        throw new InvalidObjectException("Object fail");
-    }
+//    public void save(List<Human> humanList) throws IOException {
+//        try (FileOutputStream fos = new FileOutputStream("src/out.txt");
+//             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+//            oos.writeObject(humanList);
+//        }
+//        catch (IIOException ex) {
+//            ex.printStackTrace(System.out);
+//        }
+//    }
+//
+//        public List<Human> load() throws ClassNotFoundException, InvalidObjectException {
+//        try (FileInputStream fis = new FileInputStream("src/out.txt");
+//             ObjectInputStream ois = new ObjectInputStream(fis)) {
+//            List<Human> object = (List<Human>) ois.readObject();
+//            return object;
+//        } catch (IOException ex) {
+//            ex.printStackTrace(System.out);
+//        }
+//        throw new InvalidObjectException("Object fail");
+//    }
 
     @Override
     public Iterator<Human> iterator() {

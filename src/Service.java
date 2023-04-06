@@ -1,8 +1,11 @@
+import java.io.InvalidObjectException;
+
 public class Service {
 
     private int id;
 
     private FamilyTree tree;
+    private FileHandler handler;
 
     public Service(FamilyTree tree) {
         this.tree = tree;
@@ -13,6 +16,10 @@ public class Service {
     public void addHuman(String name, String surname, Gender gender, String dateBirth) {
         tree.add(new Human(id++, name, surname, gender, dateBirth));
     }
+
+    public void save(FamilyTree tree) {save(this.tree);}
+
+    public void load() throws InvalidObjectException, ClassNotFoundException {tree.load();}
 
 
 

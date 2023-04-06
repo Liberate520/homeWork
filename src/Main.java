@@ -69,7 +69,7 @@ public class Main {
        // System.out.println("the tree is recorded \n" + tree.getInfo());
         System.out.println(tree.getInfo());
 
-        FileHandler handler = new FileHandler();
+        FileHandler handler = new FamilyTree();
 
        // ((Writable) family1).save(handler);
 //        handler.save(family1);

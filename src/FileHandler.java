@@ -2,6 +2,8 @@ import javax.imageio.IIOException;
 import java.io.*;
 
 public class FileHandler implements Writable {
+
+
     @Override
     public void save(Writable serializable) throws IOException {
         try (FileOutputStream fos = new FileOutputStream("src/out.txt");
