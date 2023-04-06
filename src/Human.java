@@ -2,7 +2,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Human implements Serializable, Comparable<Human> {
-    private int count = 1;
     private final int id;
     private final String firstName;
     private final String lastname;
@@ -18,8 +17,8 @@ public class Human implements Serializable, Comparable<Human> {
      * @param idMather    ссылка на объект Human(sex female)
      * @param idFather    ссылка на объект Human(sex male)
      */
-    public Human(String firstName, String lastname, LocalDate dateOfBirth, int idMather, int idFather) {
-        this.id = count++;
+    public Human(int id, String firstName, String lastname, LocalDate dateOfBirth, int idMather, int idFather) {
+        this.id = id;
         this.firstName = firstName;
         this.lastname = lastname;
         this.dateOfBirth = dateOfBirth;
@@ -28,8 +27,8 @@ public class Human implements Serializable, Comparable<Human> {
         this.idFather = idFather;
     }
 
-    public Human(String firstName, String lastname, LocalDate dateOfBirth) {
-        this.id = count++;
+    public Human(int id, String firstName, String lastname, LocalDate dateOfBirth) {
+        this.id = id;
         this.firstName = firstName;
         this.lastname = lastname;
         this.dateOfBirth = dateOfBirth;
@@ -67,9 +66,9 @@ public class Human implements Serializable, Comparable<Human> {
     @Override
     public String toString() {
         if (dateOfDeath != null) {
-            return "%s %s дата рождения - %s' Дата смерти - %s'".formatted(firstName, lastname, dateOfBirth, dateOfDeath);
+            return "id %d, %s %s дата рождения - %s' Дата смерти - %s'".formatted(id, firstName, lastname, dateOfBirth, dateOfDeath);
         }
-        return "%s %s дата рождения - %s".formatted(firstName, lastname, dateOfBirth);
+        return "id %d, %s %s дата рождения - %s".formatted(id, firstName, lastname, dateOfBirth);
     }
     @Override
     public int compareTo(Human o) {

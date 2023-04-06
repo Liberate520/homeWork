@@ -15,12 +15,12 @@ public class Service {
 
     public void addHuman(String firstName, String lastname, LocalDate dateOfBirth, Human mather, Human father) {
         id++;
-        familyGroup.add(new Human(firstName, lastname, dateOfBirth, father.getIdMather(), mather.getIdFather()));
+        familyGroup.add(new Human(id, firstName, lastname, dateOfBirth, father.getIdMather(), mather.getIdFather()));
     }
 
     public void addHuman(String firstName, String lastname, LocalDate dateOfBirth) {
         id++;
-        familyGroup.add(new Human(firstName, lastname, dateOfBirth));
+        familyGroup.add(new Human(id, firstName, lastname, dateOfBirth));
     }
 
     public void sortByID() {

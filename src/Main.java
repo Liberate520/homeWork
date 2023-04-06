@@ -2,9 +2,9 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Human humanOne = new Human("Иван", "Иванов", LocalDate.of(1994, 11, 21));
-        Human humanTwo = new Human("Анастасия", "Иванова", LocalDate.of(1995, 6, 15));
-        Human humanThree = new Human("Алия", "Иванова", LocalDate.of(2018, 3, 8), humanTwo.getId(), humanOne.getId());
+//        Human humanOne = new Human("Иван", "Иванов", LocalDate.of(1994, 11, 21));
+//        Human humanTwo = new Human("Анастасия", "Иванова", LocalDate.of(1995, 6, 15));
+//        Human humanThree = new Human("Алия", "Иванова", LocalDate.of(2018, 3, 8), humanTwo.getId(), humanOne.getId());
 
         FamilyTree test = new FamilyTree();
 //        test.add(humanOne);
@@ -34,6 +34,11 @@ public class Main {
         for (Human item : test) {
             System.out.println(item);
         }
+        System.out.println();
+        service.sortByID();
+        System.out.println("Отсортированный список по ID: ");
+        for (Human item : test) {
+            System.out.println(item);
+        }
     }
-
 }
