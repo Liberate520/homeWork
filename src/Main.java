@@ -50,7 +50,7 @@ public class Main {
                 String filenameOS = "FamilyTree.dat";
                 Writeable fileOS = new FilehandlerOS();
 
-                fileOS.saveToFile(familyTree, filenameOS);
+                // fileOS.saveToFile(familyTree, filenameOS);
                 familyTree= fileOS.LoadFromFile(filenameOS);
 
                 for (Person person : familyTree.getPersonList()) {
