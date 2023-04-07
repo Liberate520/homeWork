@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human implements Serializable
+public class Human implements Serializable, Node
 {
     private int id;
     private Human father;
@@ -162,6 +162,12 @@ public class Human implements Serializable
             return Period.between(dataBirth, currenDate).getYears();
         else
             return Period.between(dataBirth, dataDeath).getYears();
+    }
+
+    @Override
+    public String getName() {
+        
+        return getFirstName();
     }
     
     @Override

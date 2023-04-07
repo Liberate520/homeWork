@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-
-
-
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Main 
 {
@@ -90,21 +87,39 @@ public class Main
             // FileHandlerSave fhs = new FileHandlerSave();
             // fhs.SaveFormat(familyTree);
 
-        List<Human> human = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12, human13, human14));
+    //     List<Human> human = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12, human13, human14));
 
-        for (Human value : human) 
+    //     for (Human value : human) 
+    //     {
+    //         familyTree.addPerson(value); // добавляем людей в цикле
+    //     }
+    //     System.out.println("Печать дерева после цикла: \n" + familyTree); // печать дерева после добавления людей через цикл!
+
+    //     familyTree.sortByAge();
+    //     System.out.println("Список, отсортированный по возрасту: " + familyTree);
+        
+    //     familyTree.sortByLastName();
+    //     System.out.println("Список, отсортированный по имени: " + familyTree);
+        Others others1 = new Others(1, "иван", "инженер");
+        Others others2 = new Others(2, "петр", "программист");
+        Knode <Others> knode = new Knode<>();
+        knode.addAll(others1);
+        knode.addAll(others2);
+        for(Others others : knode)
         {
-            familyTree.addPerson(value); // добавляем людей в цикле
+            System.out.println(others);
         }
-        System.out.println("Печать дерева после цикла: \n" + familyTree); // печать дерева после добавления людей через цикл!
 
-        familyTree.sortByAge();
-        System.out.println("Список, отсортированный по возрасту: " + familyTree);
-        
-        familyTree.sortByLastName();
-        System.out.println("Список, отсортированный по имени: " + familyTree);
-        
-    }
+        Knode <Human> knode1 = new Knode<>();
+        List<Human> human = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12, human13, human14));
+        for (Human value : human)
+             {
+                 knode1.addAll(value); // добавляем людей в цикле
+             }
+             System.out.println("Печать дерева после цикла: \n" + knode1);
+     }
+
+
 }
 
 
