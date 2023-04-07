@@ -3,5 +3,5 @@ package geotree;
 import java.io.IOException;
 
 public interface Readable {
-    void read() throws IOException, ClassNotFoundException;
+    GeoTree read() throws IOException, ClassNotFoundException;
 }

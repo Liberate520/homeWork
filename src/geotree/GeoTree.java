@@ -5,33 +5,36 @@ import person.PersonComparatorByAge;
 import person.PersonComparatorByName;
 import person.PersonIterator;
 
+import java.awt.event.PaintEvent;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
-public class GeoTree implements Serializable, Iterable<Person> {
+public class GeoTree<T> implements Serializable, Iterable<T> {
 
-    private final ArrayList<Person> tree = new ArrayList<>();
+    private final ArrayList<T> tree = new ArrayList<>();
 
-    public ArrayList<Person> getTree() {
+    public ArrayList getTree() {
+
         return tree;
     }
 
-    public void appendPerson(Person person) {
-            tree.add(person);
+    public void appendPerson(T person) {
+
+        tree.add(person);
     }
     public void autoAppendChildren(){
-        for (Person p:tree) {
-            if (p.getMother()!=null){
-                p.getMother().addChild(p);
+        for (T p:tree) {
+            if (((Person) p).getFather()!=null){
+                ((Person) p).getMother().addChild((Person) p);
             }
-            if (p.getFather()!=null){
-                p.getFather().addChild(p);
+            if (((Person) p).getFather()!=null){
+                ((Person) p).getFather().addChild((Person) p);
             }
         }
     }
-
     public void save(Writable saveGeo) throws IOException{
         saveGeo.write(this);
     }
@@ -41,14 +44,14 @@ public class GeoTree implements Serializable, Iterable<Person> {
     }
 
     @Override
-    public Iterator<Person> iterator(){
+    public Iterator<T> iterator(){
         return new PersonIterator(tree);
     }
     public void sortByAge() {
-        tree.sort(new PersonComparatorByAge());
+        tree.sort((Comparator<? super T>) new PersonComparatorByAge());
     }
     public void sortByName() {
-        tree.sort(new PersonComparatorByName());
+        tree.sort((Comparator<? super T>) new PersonComparatorByName());
     }
 
 }

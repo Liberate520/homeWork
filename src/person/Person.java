@@ -41,8 +41,8 @@ public class Person implements Serializable, Comparable<Person> {
     }
     public boolean addChild(Person child) {
         if (child!=null){
-        children.add(child);
-        return true;
+            children.add(child);
+            return true;
         }
         return false;
     }
@@ -75,6 +75,7 @@ public class Person implements Serializable, Comparable<Person> {
     public Person getMother() {
         return mother;
     }
+
 
     public Person getFather() {
         return father;

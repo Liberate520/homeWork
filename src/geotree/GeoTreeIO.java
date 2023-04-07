@@ -11,11 +11,16 @@ public class GeoTreeIO implements Writable, Readable, Serializable{
         objectOutputStream.close();
     }
 
-    public void read() throws IOException, ClassNotFoundException {
+    public GeoTree read() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("geo.txt"));
-        System.out.println(objectInputStream.readObject());
-        objectInputStream.close();
+        Object result = objectInputStream.readObject();
+        if (result instanceof GeoTree){
+            GeoTree result2 = (GeoTree) result;
+            System.out.println(result2);
+            return result2;
+        }
+        return null;
     }
 
 }

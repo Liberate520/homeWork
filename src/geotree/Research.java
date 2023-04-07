@@ -1,4 +1,5 @@
-import geotree.GeoTree;
+package geotree;
+
 import person.Person;
 
 import java.util.ArrayList;
@@ -30,6 +31,16 @@ public class Research {
         }
         return result;
     }
+
+    public String findPersonByName(String person) {
+        for (Person p : tree) {
+            if (p.getFullName().equals(person)) {
+                return p.getInfo().toString();
+            }
+        }
+        return null;
+    }
+
 
     // метод поиска по возрасту
     public ArrayList<StringBuilder> searchAge() {
