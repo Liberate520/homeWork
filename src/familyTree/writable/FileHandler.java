@@ -1,4 +1,4 @@
-package FamilyTree.Writable;
+package familyTree.writable;
 
 import java.io.*;
 

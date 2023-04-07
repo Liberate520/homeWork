@@ -1,19 +1,22 @@
-package FamilyTree.FamilyTree;
+package familyTree.familyTree;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 
-import FamilyTree.Human.Gender;
-import FamilyTree.Human.Human;
-import FamilyTree.Writable.FileHandler;
-import FamilyTree.Writable.Writable;
+import familyTree.human.Gender;
+import familyTree.human.Human;
+import familyTree.service.HumanIterator;
+import familyTree.writable.FileHandler;
+import familyTree.writable.Writable;
 
 
-public class FamilyTree implements Serializable {
-    String name;
-    List<Human> familyList = new ArrayList<>();
+public class FamilyTree implements Serializable, Iterable<Human> {
+    private String name;
+    private List<Human> familyList = new ArrayList<>();
 
     public FamilyTree(String name) throws IOException {
         this.name = name;
@@ -38,7 +41,7 @@ public class FamilyTree implements Serializable {
         if (human.getFather() != null && human.getMother() != null) {
             addChild(human.getFather(), human.getMother(), human);
         }
-        System.out.println(human.getName()+" добавлен\n");
+        System.out.println(human.getName() + " добавлен\n");
     }
 
     public void addChild(Human human, Human partner, Human child) {
@@ -63,7 +66,7 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    public void humanDie(Human human, String date) {
+    public void humanDie(Human human, Calendar date) {
         System.out.println(human.getName() + " - покинул этот мир\n");
         human.setDateOfDeath(date);
 
@@ -78,5 +81,12 @@ public class FamilyTree implements Serializable {
         Writable writable = new FileHandler();
         FamilyTree tree = (FamilyTree) writable.load(pathName);
         return tree;
+    }
+
+    public List<Human> getFamilyList() {
+        return familyList;
+    }
+    public Iterator<Human> iterator() {
+        return new HumanIterator(getFamilyList());
     }
 }

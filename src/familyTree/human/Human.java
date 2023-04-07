@@ -1,23 +1,24 @@
-package FamilyTree.Human;
+package familyTree.human;
 
-import FamilyTree.Writable.FileHandler;
+import familyTree.writable.FileHandler;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Human implements Serializable {
 
     private String name;
-    private String birthday;
-    private String dateOfDeath;
+    private Calendar birthday;
+    private Calendar dateOfDeath;
     private Gender gender;
     private Human father;
     private Human mother;
     private List<Human> childList = new ArrayList<>();
 
-    public Human(String name, Gender gender, String birthday, Human father, Human mother) {
+    public Human(String name, Gender gender, Calendar birthday, Human father, Human mother) {
         this.name = name;
         this.gender = gender;
         this.birthday = birthday;
@@ -25,7 +26,7 @@ public class Human implements Serializable {
         this.mother = mother;
     }
 
-    public Human(String name, Gender gender, String birthday) {
+    public Human(String name, Gender gender, Calendar birthday) {
         this(name, gender, birthday, null, null);
 
     }
@@ -34,7 +35,7 @@ public class Human implements Serializable {
         return name;
     }
 
-    public String getBirthday() {
+    public Calendar getBirthday() {
         return birthday;
     }
 
@@ -62,11 +63,11 @@ public class Human implements Serializable {
         this.mother = mother;
     }
 
-    public String getDateOfDeath() {
+    public Calendar getDateOfDeath() {
         return dateOfDeath;
     }
 
-    public void setDateOfDeath(String dateOfDeath) {
+    public void setDateOfDeath(Calendar dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
     }
 
@@ -88,10 +89,13 @@ public class Human implements Serializable {
 
     public String info() {
         if (dateOfDeath == null) {
-            return name + " " + gender +" "+ birthday;
+            return name + " " + gender +" "+ datePrint(birthday);
         } else {
-            return name + " " + gender +" "+ birthday + "-" + dateOfDeath;
+            return name + " " + gender +" "+ datePrint(birthday) + "-" + datePrint(dateOfDeath);
         }
+    }
+    public String datePrint(Calendar calendar){
+        return birthday.get(Calendar.DAY_OF_MONTH)+"."+birthday.get(Calendar.MONTH)+"."+birthday.get(Calendar.YEAR);
     }
     public void save(String pathName) throws IOException {
         FileHandler fileHandler = new FileHandler();
