@@ -1,6 +1,4 @@
-import tree.comparators.HumanComaratorByFamily;
-import tree.comparators.HumanComparatorByName;
-import human.HumanInterface;
+package treePackage;
 
 public class Service {
 

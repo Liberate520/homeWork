@@ -1,7 +1,7 @@
-package tree.comparators;
+
+package treePackage;
 
 import java.util.Comparator;
-import human.Human;
 
 
 

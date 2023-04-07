@@ -1,6 +1,4 @@
-package human;//package treePackage;
-
-import tree.comparators.HumanComparatorByName;
+package treePackage;
 
 import java.util.ArrayList;
 import java.util.List;

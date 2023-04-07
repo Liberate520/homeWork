@@ -1,25 +1,21 @@
-package tree;//package treePackage;
+package treePackage;
 
 
-import human.HumanInterface;
-import human.Human;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements HumanInterface {
 
     public List<Human> humanList = new ArrayList<>();
 
-
+   
     // public FamilyTree(List<Human> humanList) {
     //     this.humanList =humanList;
     // }
 
-
+    
 
     // метод проверки наличия человека в листе и при его отсутствии добавление
     // человека
@@ -76,19 +72,37 @@ public class FamilyTree implements Serializable {
         return infoRes.toString();
 
     }
+    
+   
+    
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    
+
+       
+    public List<Human> getHumanList() {
+        return humanList;
+    }
+
+    
+    @Override
+    public void addHumanForSort(Human human) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addHumanForSort'");
+    }
+
+    
+
+
+    
 
 
 
-
-
-
-
-
-
-
-
-
-
+    
 
 
 }
