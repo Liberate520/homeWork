@@ -1,6 +1,7 @@
 import geotree.GeoTree;
 import geotree.GeoTreeIO;
 import geotree.Research;
+import geotree.Service;
 import person.Gender;
 import person.Person;
 
@@ -14,7 +15,7 @@ import ui.View;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         View view = new DesktopUI();
         GeoTree gt = new GeoTree();
         Person irina = new Person("Ирина", new GregorianCalendar(1985, Calendar.JANUARY, 13), Gender.Female);
@@ -26,6 +27,8 @@ public class Main {
         gt.appendPerson(igor);
         gt.appendPerson(vasya);
         gt.autoAppendChildren();
+        Service serv = new Service(new GeoTreeIO(), gt);
+        serv.restoreTree();
         Research research = new Research(gt);
         Presenter presenter = new Presenter(view, research);
         view.start();
