@@ -1,34 +1,30 @@
 package handler;
 
-import familyTree.FamilyTree;
-
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 
-public class FileHandler implements Writable {
+public class FileHandler<E> implements Writable<E> {
 
     @Override
-    public void save(Object object, String fileName) {
+    public void save(E e, String fileName) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            objectOutputStream.writeObject(object);
-            objectOutputStream.close();
-            return;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            objectOutputStream.writeObject(e);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
     @Override
-    public Object read(String fileName) {
+    public E read(String fileName) {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(fileName))) {
-            FamilyTree result = (FamilyTree) objectInputStream.readObject();
+            E result = (E) objectInputStream.readObject();
             objectInputStream.close();
             return result;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
         return null;
     }

@@ -1,15 +1,13 @@
 package trees;
 
-import familyTree.FamilyTree;
-
 import java.util.Iterator;
 import java.util.List;
 
-public class FTreeIterator implements Iterator<FamilyTree> {
+public class FTreeIterator<E> implements Iterator<E> {
     private int index;
-    private List<FamilyTree> fTrees;
+    private List<E> fTrees;
 
-    public FTreeIterator(List<FamilyTree> fTrees) {
+    public FTreeIterator(List<E> fTrees) {
         this.fTrees = fTrees;
     }
 
@@ -19,7 +17,7 @@ public class FTreeIterator implements Iterator<FamilyTree> {
     }
 
     @Override
-    public FamilyTree next() {
+    public E next() {
         return this.fTrees.get(index++);
     }
 }

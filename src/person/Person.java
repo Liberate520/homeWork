@@ -1,12 +1,7 @@
 package person;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class Person implements Serializable, Comparable<Person> {
     private String firstName;
@@ -83,7 +78,7 @@ public class Person implements Serializable, Comparable<Person> {
     public Person getMarried() {
         if (this.married.containsValue(true)) {
             for (Map.Entry<Person, Boolean> entry : this.married.entrySet())
-                if (entry.getValue() == true) return entry.getKey();
+                if (entry.getValue()) return entry.getKey();
         }
         return null;
     }
@@ -139,21 +134,28 @@ public class Person implements Serializable, Comparable<Person> {
     }
 
     public boolean hasMarried(Person married) {
-        boolean result = false;
-        if (this.married.containsKey(married)) result = true;
-        return result;
+        return this.married.containsKey(married);
     }
 
     public boolean hasChild(Person child) {
-        boolean result = false;
-        if (this.children.indexOf(child) != -1) result = true;
-        return result;
+        return this.children.contains(child);
     }
 
     private boolean hasParent(Person parent) {
-        boolean result = false;
-        if (this.parents.indexOf(parent) != -1) result = true;
-        return result;
+        return this.parents.contains(parent);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return isMan == person.isMan && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(bornDate, person.bornDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, isMan, bornDate);
     }
 
     public String toString() {
@@ -168,11 +170,11 @@ public class Person implements Serializable, Comparable<Person> {
         int result = this.getFirstName().compareTo(p.getFirstName());
         if (result == 0) result = this.getLastName().compareTo(p.getLastName());
         if (result == 0) {
-            if (this.bornDate.after(p.bornDate)) {
+            /*if (this.bornDate.after(p.bornDate)) {
                 result = 1;
             } else if (this.bornDate.before(p.bornDate)) {
                 result = -1;
-            }
+            }*/
             result = this.getBornDate().compareTo(p.getBornDate());
         }
         return result;

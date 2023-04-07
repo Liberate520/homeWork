@@ -8,29 +8,29 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class TreeOfTrees implements Serializable, TOTrees {
-    private List<FamilyTree> fTrees;
+public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<E> {
+    private List<E> fTrees;
 
     public TreeOfTrees() {
         this.fTrees = new ArrayList<>();
     }
 
-    public void addFamilyTree(FamilyTree fTree) {
+    public void addFamilyTree(E fTree) {
         this.fTrees.add(fTree);
     }
 
     @Override
-    public List<FamilyTree> getFamilyTreeList() {
+    public List<E> getFamilyTreeList() {
         return this.fTrees;
     }
 
     @Override
-    public Iterator<FamilyTree> iterator() {
+    public Iterator<E> iterator() {
         return new FTreeIterator(fTrees);
     }
 
-    public FamilyTree findFamilyTree(String name){
-        for (FamilyTree familyTree : this.fTrees) {
+    public E findFamilyTree(String name){
+        for (E familyTree : this.fTrees) {
             if (familyTree.getName().equals(name)) {
                 return familyTree;
             }
@@ -39,16 +39,13 @@ public class TreeOfTrees implements Serializable, TOTrees {
     }
 
     public void printAllInfo() {
-        for (FamilyTree fTree : this.fTrees) {
+        for (E fTree : this.fTrees) {
             System.out.println("Members of family " + fTree.getName() + " :");
-            //System.out.println(fTree.getPersons());
-            for (person.Person person : fTree) {
-                System.out.println(person);
-            }
+            fTree.printInfo();
         }
     }
 
-    public void save(Writable writable, String fileName) {
+    public void save(Writable<TreeOfTrees<E>> writable, String fileName) {
         writable.save(this, fileName);
     }
 }

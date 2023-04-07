@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, FTree {
+public class FamilyTree<E extends Person> implements Serializable, FTree<E> {
     private String name;
-    private List<Person> persons;
+    private List<E> persons;
 
     public FamilyTree(String name) {
         this.setName(name);
         this.persons = new ArrayList<>();
     }
 
-    public FamilyTree(Person person) {
+    public FamilyTree(E person) {
         this(person.getLastName());
         this.addPerson(person, true);
     }
@@ -29,7 +29,7 @@ public class FamilyTree implements Serializable, FTree {
         return this.name;
     }
 
-    public List<Person> getPersonsList() {
+    public List<E> getPersonsList() {
         return this.persons;
     }
 
@@ -49,11 +49,11 @@ public class FamilyTree implements Serializable, FTree {
         return result.toString();
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(E person) {
         addPerson(person, false);
     }
 
-    public void addPerson(Person person, boolean isAddAllChildren) {
+    public void addPerson(E person, boolean isAddAllChildren) {
         if (!this.hasPerson(person)) {
             this.persons.add(person);
             if (isAddAllChildren) {
@@ -62,11 +62,11 @@ public class FamilyTree implements Serializable, FTree {
         }
     }
 
-    private void addChildren(Person person) {
+    private void addChildren(E person) {
         if (this.hasPerson(person)) {
             if (person.countChildren() != 0) {
                 for (int i = 0; i < person.countChildren(); i++) {
-                    this.addPerson(person.getChildren().get(i), true);
+                    this.addPerson((E) person.getChildren().get(i), true);
                 }
             }
         } else {
@@ -74,14 +74,14 @@ public class FamilyTree implements Serializable, FTree {
         }
     }
 
-    private boolean hasPerson(Person person) {
+    private boolean hasPerson(E person) {
         boolean result = false;
         if (this.persons.indexOf(person) != -1) result = true;
         return result;
     }
 
-    public Person findPerson(String firstName){
-        for (Person person : this.persons){
+    public E findPerson(String firstName){
+        for (E person : this.persons){
             if (person.getFirstName().equals(firstName)){
                 return person;
             }
@@ -90,26 +90,32 @@ public class FamilyTree implements Serializable, FTree {
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<E> iterator() {
         return new PersonIterator(persons);
+    }
+
+    public void printInfo() {
+        for (E person : this.persons) {
+            System.out.println(person);
+        }
     }
 
     public String toString(String firstName) {
         return toString(this.findPerson(firstName));
     }
 
-    public String toString(Person person) {
+    public String toString(E person) {
         StringBuilder result = new StringBuilder();
         result.append(String.format("Members of family %s", this.name));
         return toString(result, person, 1);
     }
 
-    private String toString(StringBuilder result, Person person, int iter) {
+    private String toString(StringBuilder result, E person, int iter) {
         result.append(String.format("%s%s|", person.toString(), getSpace(person.toString())));
         if (person.countChildren() > 0) {
             for (int i = 0; i < person.countChildren(); i++) {
                 if (i > 0) result.append(String.format("%s", getSpaces(iter)));
-                toString(result, person.getChildren().get(i), iter + 1);
+                toString(result, (E) person.getChildren().get(i), iter + 1);
             }
         } else {
             result.append("\n");

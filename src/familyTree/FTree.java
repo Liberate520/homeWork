@@ -4,8 +4,8 @@ import person.Person;
 
 import java.util.List;
 
-public interface FTree extends Iterable<Person> {
-    void addPerson(Person person);
+public interface FTree<E extends Person> extends Iterable<E> {
+    void addPerson(E person);
 
-    List<Person> getPersonsList();
+    List<E> getPersonsList();
 }

@@ -1,8 +1,8 @@
 package handler;
 
-public interface Writable {
+public interface Writable<E> {
 
-    void save(Object object, String fileName);
+    void save(E e, String fileName);
 
-    Object read(String fileName);
+    E read(String fileName);
 }
