@@ -1,4 +1,6 @@
-package geotree;
+package io;
+
+import geotree.GeoTree;
 
 import java.io.IOException;
 
