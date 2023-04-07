@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human extends Animal implements Serializable {
+public class Human<E extends Animal> implements Serializable {
 
     private  int id;
 
@@ -20,7 +20,7 @@ public class Human extends Animal implements Serializable {
     private Gender gender;
     private Human father;
     private Human mother;
-    private List<Human> childList;
+    private List<E> childList;
 
     private final String nameRegex = "^[\\p{L} .'-]+$";
 
@@ -34,7 +34,7 @@ public class Human extends Animal implements Serializable {
         this.father = father;
         this.mother = mother;
         this.maidenName = "";
-        this.childList = new ArrayList<>();
+        this.childList = new ArrayList<E>();
     }
 
     public Human(int id, String name, String surname, Gender gender, String dateBirth) {
@@ -47,7 +47,7 @@ public class Human extends Animal implements Serializable {
         this.father = null;
         this.mother = null;
         this.maidenName = "";
-        this.childList = new ArrayList<>();
+        this.childList = new ArrayList<E>();
     }
 
     public Human() {
@@ -80,7 +80,7 @@ public class Human extends Animal implements Serializable {
         return dateDeath;
     }
 
-    public List<Human> getChildList() {
+    public List<E> getChildList() {
         return childList;
     }
 
@@ -195,7 +195,7 @@ public class Human extends Animal implements Serializable {
 
     }
 
-    public void setChildList(List<Human> childList) {
+    public void setChildList(List<E> childList) {
         this.childList = childList;
     }
 
@@ -204,7 +204,7 @@ public class Human extends Animal implements Serializable {
 //        this.childList.add(child);
 //     }
 
-    public void addChild(Human child) {
+    public void addChild(E child) {
         if (!childList.contains(child)) {
             childList.add(child);
         } else  {

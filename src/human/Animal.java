@@ -2,24 +2,22 @@ package human;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 
-public abstract class Animal implements Serializable {
+public interface Animal<E> extends Iterable<E>{
 
-    public String name;
+    void addHuman(E human);
 
-    public Animal() {
-    }
+    List<E> getHumanList();
 
-    public Animal(String name) {
-        this.name = name;
-    }
+    String getName();
 
-    public String getName() {
-        return name;
-    }
+    String getSurname();
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+    E getFather();
+    void addChild(E child);
+    Human getMother();
+    char[] getInfo();
+
+
 }

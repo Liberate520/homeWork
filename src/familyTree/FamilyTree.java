@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree<T extends Human> implements Serializable {
-    private List<T> humanList;
+public class FamilyTree<E extends Animal<E>> implements Serializable, Iterable<E> {
+    private List<E> humanList;
 
     private String name;
 
@@ -19,12 +19,12 @@ public class FamilyTree<T extends Human> implements Serializable {
         this.humanList = new ArrayList<>();
     }
 
-    public List<T> getHumanList() {
+    public List<E> getHumanList() {
         return humanList;
     }
 
-    public T getByName(String name) {
-        for (T human :
+    public E getByName(String name) {
+        for (E human :
                 humanList) {
             if (human.getName().equals(name))
                 return human;
@@ -32,8 +32,8 @@ public class FamilyTree<T extends Human> implements Serializable {
         return null;
     }
 
-    public T getBySurname(String surname) {
-        for (T human :
+    public E getBySurname(String surname) {
+        for (E human :
                 humanList) {
             if (human.getSurname().equals(surname))
                 return human;
@@ -41,11 +41,11 @@ public class FamilyTree<T extends Human> implements Serializable {
         return null;
     }
 
-//    public void addHuman(Human human) {
-//        humanList.add(human);
-//    }
+    public void addHuman(E human) {
+        humanList.add(human);
+    }
 
-    public boolean add(T human) {
+    public boolean add(E human) {
         if (human == null) {
             return false;
         }
@@ -66,13 +66,13 @@ public class FamilyTree<T extends Human> implements Serializable {
         StringBuilder tree = new StringBuilder();
         tree.append("В дереве ").append(humanList.size())
                 .append(" человек(а)").append(" \n");
-        for (T human: this.humanList) {
+        for (E human: this.humanList) {
             tree.append(human.getInfo() + "\n");
         }
         return tree.toString();
     }
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator<>(humanList);
     }
 

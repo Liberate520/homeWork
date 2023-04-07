@@ -1,4 +1,5 @@
 import familyTree.FamilyTree;
+import human.Animal;
 import human.Gender;
 import human.Human;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         FamilyTree<Human> tree = new FamilyTree<Human>();
         Service service = new Service(tree);
@@ -49,20 +50,22 @@ public class Main {
                 tree) {
             System.out.println(human);
         }
-*/
 
+*/
+        System.out.println(tree.getInfo());
+
+        service.setHandler(new FileHandler());
+        // организация записи через сервис
+        service.save("src/out.dat");
+        // организация чтения через сервис
+        service.load("src/out.dat");
+
+        System.out.println(tree.getInfo());
 
 
 //
-        System.out.println(tree.getInfo());
 
-//        FileHandler handler = new FamilyTree();
 
-       // ((Writable) family1).save(handler);
-//        handler.save(family1);
-       // handler.save((Writable) family1);
-//        family1.save(family1.getHumanList());
-//        List<Human> list1 = new ArrayList<>();
 
 
        // FamilyTree family3 = (FamilyTree) handler.load();
