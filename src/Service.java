@@ -1,3 +1,11 @@
+import familyTree.FamilyTree;
+import familyTree.comparators.HumanComparatorByBirthday;
+import familyTree.comparators.HumanComparatorById;
+import familyTree.comparators.HumanComparatorByName;
+import familyTree.comparators.HumanCompareByNumberChild;
+import human.Gender;
+import human.Human;
+
 import java.io.InvalidObjectException;
 
 public class Service {
@@ -19,7 +27,7 @@ public class Service {
 
     public void save(FamilyTree tree) {save(this.tree);}
 
-    public void load() throws InvalidObjectException, ClassNotFoundException {tree.load();}
+   // public void load() throws InvalidObjectException, ClassNotFoundException {tree.load();}
 
 
 

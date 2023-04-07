@@ -1,5 +1,6 @@
 package familyTree;
 
+import human.Animal;
 import human.Human;
 
 import javax.imageio.IIOException;
@@ -9,19 +10,21 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree<T> implements Serializable, Entity<T> {
-    private List<Human> humanList;
+public class FamilyTree<T extends Human> implements Serializable {
+    private List<T> humanList;
+
+    private String name;
 
     public FamilyTree() {
         this.humanList = new ArrayList<>();
     }
 
-    public List<Human> getHumanList() {
+    public List<T> getHumanList() {
         return humanList;
     }
 
-    public Human getByName(String name) {
-        for (Human human :
+    public T getByName(String name) {
+        for (T human :
                 humanList) {
             if (human.getName().equals(name))
                 return human;
@@ -29,8 +32,8 @@ public class FamilyTree<T> implements Serializable, Entity<T> {
         return null;
     }
 
-    public Human getBySurname(String surname) {
-        for (Human human :
+    public T getBySurname(String surname) {
+        for (T human :
                 humanList) {
             if (human.getSurname().equals(surname))
                 return human;
@@ -42,7 +45,7 @@ public class FamilyTree<T> implements Serializable, Entity<T> {
 //        humanList.add(human);
 //    }
 
-    public boolean add(Human human) {
+    public boolean add(T human) {
         if (human == null) {
             return false;
         }
@@ -63,10 +66,14 @@ public class FamilyTree<T> implements Serializable, Entity<T> {
         StringBuilder tree = new StringBuilder();
         tree.append("В дереве ").append(humanList.size())
                 .append(" человек(а)").append(" \n");
-        for (Human human: this.humanList) {
+        for (T human: this.humanList) {
             tree.append(human.getInfo() + "\n");
         }
         return tree.toString();
+    }
+    @Override
+    public Iterator<T> iterator() {
+        return new HumanIterator<>(humanList);
     }
 
 //    public void save(List<Human> humanList) throws IOException {
@@ -90,69 +97,8 @@ public class FamilyTree<T> implements Serializable, Entity<T> {
 //        throw new InvalidObjectException("Object fail");
 //    }
 
-    @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
-    }
 
 
-//
-//    public boolean saveTree(FamilyTree tree) {
-//        boolean flag = false;
-//        File file = new File("tree.txt");
-//        ObjectOutputStream oos = null;
-//        FileOutputStream fos = null;
-//        try {
-//            fos = new FileOutputStream(file);
-//            if (fos != null) {
-//                try {
-//                    oos = new ObjectOutputStream(fos);
-//                    flag = true;
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if (oos != null) {
-//                try {
-//                    oos.close();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//        return flag;
-//    }
-//
-//    public FamilyTree loadTree() throws InvalidObjectException {
-//        File file = new File("tree.txt");
-//        ObjectInputStream ois = null;
-//        try {
-//            FileInputStream fis = new FileInputStream(file);
-//            if (fis != null) {
-//                try {
-//                    ois = new ObjectInputStream(fis);
-//                    FamilyTree tree = (FamilyTree) ois.readObject();
-//                    return tree;
-//                } catch (IOException | ClassNotFoundException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            try {
-//                if (ois != null) {
-//                    ois.close();
-//                }
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        throw new InvalidObjectException("Object fail");
-//    }
 
 
 

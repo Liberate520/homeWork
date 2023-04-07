@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human extends Animal implements Serializable {
 
     private  int id;
 
