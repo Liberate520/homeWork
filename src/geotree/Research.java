@@ -56,4 +56,24 @@ public class Research {
         }
         return resultAge;
     }
+
+    public String AddHuman(Person person){
+        tree.add(person);
+        return person.toString();
+    }
+    public String GetHuman(String person){
+        for (Person p : tree) {
+            if (p.getFullName().equals(person)) {
+                return p.toString();
+            }
+        }
+        return null;
+    }
+    public String GetAll(){
+        StringBuilder sb = new StringBuilder();
+        for (Person p : tree) {
+            sb.append(p.toString() + "\n");
+        }
+        return sb.toString();
+    }
 }

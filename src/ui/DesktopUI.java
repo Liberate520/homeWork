@@ -1,5 +1,6 @@
 package ui;
 
+import person.Person;
 import presenter.Presenter;
 
 import javax.swing.*;
@@ -9,10 +10,13 @@ import java.awt.event.ActionListener;
 
 public class DesktopUI extends JFrame implements View {
 
-    private Label lSearchHuman;
+    private Label lSearch;
     private JTextArea answer, zero;
-    private TextField name;
+    private TextField quiry;
     private Button findInfo;
+    private Button addHuman;
+    private Button getHuman;
+    private Button getAll;
     private Presenter presenter;
 
     @Override
@@ -23,23 +27,48 @@ public class DesktopUI extends JFrame implements View {
     @Override
     public void start() {
         setSize(400, 600);
-        lSearchHuman = new Label("поиск человека: ");
+        lSearch = new Label("поиск: ");
         answer = new JTextArea();
         zero = new JTextArea();
-        findInfo = new Button("Найти");
-        name = new TextField();
+        findInfo = new Button("Найти информацию о человеке по имени");
+        addHuman = new Button("Добавить человека");
+        getHuman = new Button("Получить человека");
+        getAll = new Button("Получить всех");
+        quiry = new TextField();
 
-        setLayout(new GridLayout(3, 2));
-        add(lSearchHuman);
-        add(name);
+        setLayout(new GridLayout(4, 5));
+        add(lSearch);
+        add(quiry);
         add(answer);
         add(zero);
         add(findInfo);
+        add(addHuman);
+        add(getHuman);
+        add(getAll);
 
         findInfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                presenter.onClick(name.getText());
+                presenter.onClickFind(quiry.getText());
+            }
+        });
+
+        addHuman.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenter.onClickAddHuman(quiry.getText());
+            }
+        });
+        getHuman.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenter.onClickGetHuman(quiry.getText());
+            }
+        });
+        getAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenter.onClickGetAll();
             }
         });
 
