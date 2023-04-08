@@ -1,3 +1,9 @@
+import human.*;
+import family.*;
+import services.FileHandler;
+import services.Service;
+import services.Writable;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -83,16 +89,29 @@ public class Program {
         System.out.println("--------------------------------");
         family.printChildren(family.getByName("Фёдор Иванович Иванов"));
 
-        /*
-        * По второму уроку
-        * вроде как получилось и сохранить и прочитать
-        * только не могу понять почему ругается на кодировку файла с сохранением, как не менял он красный.
-        */
+        // урок 2
+        System.out.println("----------------L2----------------");
         Writable writable = new FileHandler();
         family.save(writable);
-
         FamilyTree familySave = (FamilyTree) writable.read();
         familySave.printChildren(family.getByName("Иван Петрович Иванов"));
-        
+
+        // урок 3
+        System.out.println("----------------L3----------------");
+        for (Human human : familySave) {
+            System.out.println(human);
+        }
+        System.out.println("\nСортировка по имени:");
+        Service service = new Service((FamilyTree) writable.read());
+        service.sortHuman(new CompHumanByName());
+        for (Human human : service.getFamily()) {
+            System.out.println(human);
+        }
+        System.out.println("\nСортировка по дате рождения в обратном порядке:");
+        service.sortHuman(new CompHumanByDBR());
+        for (Human human : service.getFamily()) {
+            System.out.println(human);
+        }
+
     }
 }

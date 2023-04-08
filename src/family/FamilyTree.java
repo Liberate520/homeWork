@@ -1,12 +1,18 @@
+package family;
+
+import human.Human;
+import services.Writable;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
- * FamilyTree работает со списком людей, пока непонятно как)))
+ * Класс дерева
  */
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private final List<Human> people;
 
     public FamilyTree(List<Human> lstHumans) {
@@ -20,6 +26,10 @@ public class FamilyTree implements Serializable {
 
     public FamilyTree() {
         this.people = new ArrayList<>();
+    }
+
+    public List<Human> getPeople() {
+        return people;
     }
 
     /**
@@ -68,4 +78,8 @@ public class FamilyTree implements Serializable {
         writable.save(this);
     }
 
+    @Override
+    public Iterator<Human> iterator() {
+        return new IteratorHunan(people);
+    }
 }
