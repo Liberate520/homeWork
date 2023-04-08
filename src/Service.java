@@ -1,14 +1,14 @@
 import HumanComparators.HumanComparatorById;
 import HumanComparators.HumanComporatorByName;
 import HumanComparators.HumanComporatorBySurname;
-import familyTree.FamilyTree;
+import familyTree.Tree;
 import fileWorker.FileWorker;
 
 public class Service {
 
-    private FamilyTree tree;
+    private Tree tree;
     private FileWorker fileWorker;
-    public Service(FamilyTree tree) {
+    public Service(Tree tree) {
         this.tree = tree;
     }
 
@@ -23,15 +23,15 @@ public class Service {
     
 
     public void sortById() {
-        tree.getFamilyTreeList().sort(new HumanComparatorById());
+        tree.getTreeList().sort(new HumanComparatorById());
     }
 
     public void sortByName() {
-        tree.getFamilyTreeList().sort(new HumanComporatorByName());
+        tree.getTreeList().sort(new HumanComporatorByName());
     }
 
     public void sortBySurName() {
-        tree.getFamilyTreeList().sort(new HumanComporatorBySurname());
+        tree.getTreeList().sort(new HumanComporatorBySurname());
     }
     
 

@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import familyTree.FamilyTree;
+import familyTree.Tree;
 import fileWorker.FileWorker;
 
 public class FileHandler implements FileWorker {
@@ -21,8 +21,8 @@ public class FileHandler implements FileWorker {
     public void readFromfile(String filename) {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filename))) 
         {
-            FamilyTree tree = (FamilyTree) inputStream.readObject();
-            System.out.println(tree.getFamilyTreeList());
+            Tree tree = (Tree) inputStream.readObject();
+            System.out.println(tree.getTreeList());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
