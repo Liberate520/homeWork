@@ -1,7 +1,10 @@
+package homeWork.geotree;
+
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-import homeWork.geotree.GeoTree;
+import homeWork.person.Gender;
 import homeWork.person.Person;
 
 public class Research {
@@ -31,6 +34,16 @@ public class Research {
         return result;
     }
 
+    public String findPersonByName(String person) {
+        for (Person p : tree) {
+            if (p.getFullName().equals(person)) {
+                return p.getInfo().toString();
+            }
+        }
+        return "No such person!";
+    }
+
+
     // метод поиска по возрасту
     public ArrayList<StringBuilder> searchAge() {
         System.out.print("Введите ограничение по возрасту: ");
@@ -44,5 +57,34 @@ public class Research {
             }
         }
         return resultAge;
+    }
+
+    public String AddHuman(String dataForPerson){
+        Person person;
+        try{
+            person =  new Person(dataForPerson.split(",")[0],
+                    new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
+                            Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
+                            Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Male);
+        }catch (Exception e){
+            return "Can't create human!";
+        }
+        tree.add(person);
+        return person.toString();
+    }
+    public String GetHuman(String person){
+        for (Person p : tree) {
+            if (p.getFullName().equals(person)) {
+                return p.toString();
+            }
+        }
+        return "No such person!";
+    }
+    public String GetAll(){
+        StringBuilder sb = new StringBuilder();
+        for (Person p : tree) {
+            sb.append(p.toString() + "\n");
+        }
+        return sb.toString();
     }
 }

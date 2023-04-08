@@ -2,12 +2,11 @@ package homeWork.person;
 
 import java.util.Iterator;
 import java.util.List;
-
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<T> implements Iterator<T> {
     private int index;
-    private final List<Person> tree;
+    private final List<T> tree;
 
-    public PersonIterator(List<Person> tree){
+    public PersonIterator(List<T> tree){
         this.tree = tree;
     }
     @Override
@@ -16,7 +15,7 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public T next() {
         return tree.get(index++);
     }
 }

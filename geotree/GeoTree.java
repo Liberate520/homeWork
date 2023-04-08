@@ -1,30 +1,30 @@
 package homeWork.geotree;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import homeWork.person.Person;
 import homeWork.person.PersonComparatorByAge;
 import homeWork.person.PersonComparatorByName;
 import homeWork.person.PersonIterator;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
+public class GeoTree<T extends Person> implements Serializable, Iterable<T> {
 
-public class GeoTree implements Serializable, Iterable<Person> {
+    private final ArrayList<T> tree = new ArrayList<>();
 
-    private final ArrayList<Person> tree = new ArrayList<>();
+    public ArrayList getTree() {
 
-    public ArrayList<Person> getTree() {
         return tree;
     }
 
-    public void appendPerson(Person person) {
-            tree.add(person);
+    public void appendPerson(T person) {
+
+        tree.add(person);
     }
     public void autoAppendChildren(){
-        for (Person p:tree) {
-            if (p.getMother()!=null){
+        for (T p:tree) {
+            if (p.getFather()!=null){
                 p.getMother().addChild(p);
             }
             if (p.getFather()!=null){
@@ -33,16 +33,9 @@ public class GeoTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void save(Writable saveGeo) throws IOException{
-        saveGeo.write(this);
-    }
-
-    public void restore(Readable restoreGeo) throws IOException, ClassNotFoundException {
-        restoreGeo.read();
-    }
 
     @Override
-    public Iterator<Person> iterator(){
+    public Iterator<T> iterator(){
         return new PersonIterator(tree);
     }
     public void sortByAge() {
