@@ -2,7 +2,7 @@ package famyilyTree;
 
 import java.io.*;
 
-public class Serial {
+public class Serial implements MakeFiles {
     public void saveToFile (FamilyTree tree, String filename) {
         try {
             FileOutputStream fileOut = new FileOutputStream(filename);
