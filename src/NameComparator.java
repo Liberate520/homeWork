@@ -1,9 +1,15 @@
 import java.util.Comparator;
-public class NameComparator implements Comparator<Human> {
+public class NameComparator<T extends Node> implements Comparator<T> {
         @Override
-        public int compare(Human member1, Human member2) 
+        public int compare(T member1, T member2) 
         {
-            return member1.getLastName().compareTo(member2.getLastName());
+            
+            if (member1 instanceof Human && member2 instanceof Human)
+            {
+                return member1.getLastName().compareTo(member2.getLastName());
+            }
+            
+        return 1;
         }
 
     }

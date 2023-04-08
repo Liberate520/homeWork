@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class FamilyTree implements Serializable, Iterable<Human>
+public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
 {  
-    private ArrayList<Human> famyliTree = new ArrayList<>();
+    private T t;
+    private Human human;
+    private ArrayList<T> famyliTree = new ArrayList<>();
 
-    public void addPerson(Human human) {
-        famyliTree.add(human);
-        if (human.getMother() != null)
-            human.getMother().addChildren(human);
+    public void addPerson(T t) {
+        famyliTree.add(t);
 
-        if (human.getFather() != null)
-            human.getFather().addChildren(human);
+        if (t instanceof Human && t.getMother() != null)
+            ((Human) t.getMother()).addChildren(t);
+
+        if (t instanceof Human && t.getFather() != null)
+            ((Human) t.getFather()).addChildren(t);
     }
 
     @Override
@@ -45,14 +48,13 @@ public class FamilyTree implements Serializable, Iterable<Human>
     } 
 
     @Override
-    public Iterator<Human> iterator(){
+    public Iterator<T> iterator(){
         return new HumanIterator(famyliTree);
     }
-    public void sortByAge() {
-        famyliTree.sort(new AgeComparator());
+    public void sortById() {
+        famyliTree.sort(new IdComparator());
     }
     public void sortByLastName() {
         famyliTree.sort(new NameComparator());
     }
-
 }
