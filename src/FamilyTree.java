@@ -1,12 +1,15 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> familyTree = new ArrayList<>();
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
+    private ArrayList<T> familyTree = new ArrayList<>();
 
-    public void addPeople(Human human) {
+    public ArrayList<T> getFamilyTree() {
+        return familyTree;
+    }
+
+    public void addHuman(T human) {
         familyTree.add(human);
         if (human.getMother() != null) {
             human.getMother().addChildren(human);
@@ -16,8 +19,17 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    public List<Human> getFamilyTree() {
-        return familyTree;
+
+
+    public T find(String name) {
+        for (T human : familyTree) {
+            if (human.getName().equals(name)) {
+                System.out.println(human);
+                return human;
+            }
+
+        }
+        return null;
     }
 
 
@@ -26,7 +38,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return familyTree.toString();
     }
     @Override
-    public Iterator<Human> iterator(){
+    public Iterator<T> iterator(){
         return new HumanIterator(familyTree);
     }
     public void sortByDate() {

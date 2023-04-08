@@ -22,12 +22,13 @@ public class Main {
         List<Human> human = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12));
 
         for (Human value : human) {
-            family.addPeople(value);
+            family.addHuman(value);
         }
 
         System.out.println(family);
-        FindHuman findHuman = new FindHuman();
-        findHuman.findHuman(family);
+        FindScanner name = new FindScanner();
+        family.find(name.findScanner(null));
+        
         FileHandlerSaver save = new FileHandlerSaver();
         save.saveData(family);
         FileHandlerLoad load = new FileHandlerLoad();
@@ -35,20 +36,13 @@ public class Main {
 
         System.out.println("Список, отсортированный по дате смерти:");
         family.sortByDate();
-        for (Human member: family.getFamilyTree()) {
+        for (Object member: family.getFamilyTree()) {
             System.out.println(member);
         }
         System.out.println("Список, отсортированный по имени:");
         family.sortByName();
-        for (Human member: family.getFamilyTree()) {
+        for (Object member: family.getFamilyTree()) {
             System.out.println(member);
         }
-
-
-
-
-
-        
-
     }
 }
