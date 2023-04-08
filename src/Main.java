@@ -1,31 +1,34 @@
+import TreeFamily.TreeFamily;
+import human.Human;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+
 
 public class Main {
     public static void main(String[] args) throws IOException,ClassNotFoundException {
-        Human pa = new Human("Bazarov", "Alex", Gender.Mail,"08.07.1949");
-        Human ma = new Human("Budina", "Anna", Gender.Fimale,"15.09.1948");
-        Human sister1 = new Human("Bazarova","Helga", Gender.Fimale,"10.03.1978");
-        Human sister2 = new Human("Bazarova","Tasy", Gender.Fimale,"28.06.1980");
-
-        sister1.mother = ma;
-        sister1.father = pa;
+        Human pa = new Human("Bazarov", "Alex", Human.Gender.Mail, LocalDate.parse("1949-01-07"));
+        Human ma = new Human("Budina", "Anna", Human.Gender.Fimale,LocalDate.parse("1948-09-07"));
+        Human sister1 = new Human(pa, ma, "Bazarova","Helga", Human.Gender.Fimale, LocalDate.parse("1978-03-10"));
+        Human sister2 = new Human(pa, ma,"Bazarova","Tasy", Human.Gender.Fimale,LocalDate.parse("1980-06-07"));
+//        System.out.println (pa.getMother());
 //        System.out.println (sister1.getMother());
 //        System.out.println (sister1.getFather());
         TreeFamily tree = new TreeFamily();
-        tree.addHuman(pa);
-        tree.addHuman(ma);
-        tree.addHuman(sister1);
-        tree.addHuman(sister2);
+
+        tree.add(pa);
+        tree.add(ma);
+        tree.add(sister1);
+        tree.add(sister2);
+        tree.add(sister2);
         pa.addChildrenList(sister1);
         pa.addChildrenList(sister2);
 
 //        System.out.println("Дети "+pa.getName()+" "+ pa.getFamily() +":\n  "+pa.getСhildrenList());
 //        System.out.println("Дети "+ma.getName()+" "+ ma.getFamily() +":\n  "+ma.getСhildrenList());
-
-        System.out.println();
-      //  System.out.println(tree);
+//
+//        System.out.println();
+//        System.out.println(tree.getInfo());
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(tree);
         TreeFamily treeOut = (TreeFamily) fileHandler.read();
@@ -35,12 +38,29 @@ public class Main {
 //        objectOutputStream.close();
 
 //        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.out"));
-//        Human sisterout1 = (Human) objectInputStream.readObject();
-//        TreeFamily treeOut = (TreeFamily) objectInputStream.readObject();
+//        human.Human sisterout1 = (human.Human) objectInputStream.readObject();
+//        TreeFamily.TreeFamily treeOut = (TreeFamily.TreeFamily) objectInputStream.readObject();
 //        objectInputStream.close();
 
+        //System.out.println();
+        //System.out.println(treeOut);
+
         System.out.println();
-        System.out.println(treeOut);
+
+        Service tr = new Service(tree);
+        tr.sortByFamily();
+        for (Human human: tree){
+            System.out.println(human);
+        }
+        System.out.println();
+
+
+        tr.sortByName();
+        for (Human human: tree){
+            System.out.println(human);
+        }
+
+
 
     
 

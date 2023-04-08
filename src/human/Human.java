@@ -1,23 +1,23 @@
-import java.io.LineNumberInputStream;
+package human;
+
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class Human implements Serializable  {
+public class Human implements Serializable, Comparable<Human>  {
 
-    public Human mother;
-    public Human father;
+    private Human mother;
+    private Human father;
     private String family;
     private String name;
     private Gender gender;
-    private String birthdate;
+    private LocalDate birthdate;
     private Set<Human> сhildrenList;
 
 
-    public Human(Human father, Human mother, String family, String name, Gender gender, String birthdate) {
+    public Human(Human father, Human mother, String family, String name, Gender gender, LocalDate birthdate) {
         this.mother = mother;
         this.father = father;
         this.family = family;
@@ -28,8 +28,13 @@ public class Human implements Serializable  {
     
     }
 
-    public Human(String family, String name,Gender gender,String birthdate) {
+    public Human(String family, String name, Gender gender, LocalDate birthdate) {
         this (null,null , family, name, gender, birthdate);
+
+    }
+    public Human(String family, String name) {
+        this (null,null , family, name, null, null);
+
     }
 
     public Human getMother() {
@@ -52,69 +57,68 @@ public class Human implements Serializable  {
         return name;
     }
 
- //  public void setName(String name) {
-//        this.name = name;
-//    }
-
     public Gender getGender() {
         return gender;
     }
 
-    public String getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-//    public void setBirthdate(String birthdate) {
-//        this.birthdate = birthdate;
-//    }
-
-//    public void newChildrenList() {
-//        this.сhildrenList = new ArrayList<>();
-//    }
 
     public Set<Human> getСhildrenList() {
         return сhildrenList;
     }
 
-    public void addChildrenList(Human human) {
+    public boolean child (Human human){
+        if (!сhildrenList.contains(human)){
+            return true;
+        }
+        else{
+            return false;
+        }
 
-        this.сhildrenList.add(human);
     }
 
+    public void addChildrenList(Human human) {
+        if (!(human.equals(null)) ){
+            this.сhildrenList.add(human);
+        }
+    }
 
-
-
-
-    private String getInfo(){
+    public String getInfo(){
         return String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
     }
-
-
-
     @Override
     public String toString() {
         return getInfo();
     }
 
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Human)) {
+            return false;
+        }
+
         Human human = (Human) object;
         return family.equals(human.family) && name.equals(human.name) && gender == human.gender && birthdate.equals(human.birthdate);
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Human human = (Human) o;
-//        return Objects.equals(family, human.family) && Objects.equals(name, human.name) && Objects.equals(birthdate, human.birthdate);
-//    }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(mother, father, family, name, gender, birthdate, сhildrenList);
+        return Objects.hash(family, name, gender, birthdate);
     }
 
+    @Override
+    public int compareTo(Human human) {
+        return getFamily().compareTo(human.getFamily()) ;
+    }
+
+    public enum Gender {
+        Mail, Fimale
+    }
 }
