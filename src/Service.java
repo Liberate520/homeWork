@@ -14,6 +14,9 @@ public class Service {
     private FamilyTree tree;
     private FileHandler handler;
 
+    public Service(FamilyTree tree) {
+        this.tree = tree;
+    }
     public FamilyTree getTree() {
         return tree;
     }
@@ -26,16 +29,13 @@ public class Service {
     public void setHandler(FileHandler handler) {
         this.handler = handler;
     }
-    public Service(FamilyTree tree) {
-        this.tree = tree;
-    }
     public void addHuman(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
-        //tree.add((Animal) new Human(id++, name, surname, gender, dateBirth, father, mother));
+
         tree.add(new Human(id++, name, surname, gender, dateBirth, father, mother));
     }
 
     public void addHuman(String name, String surname, Gender gender, String dateBirth) {
-        //tree.add((Animal) new Human(id++, name, surname, gender, dateBirth));
+
         tree.add(new Human(id++, name, surname, gender, dateBirth));
     }
     public void printTree(){
