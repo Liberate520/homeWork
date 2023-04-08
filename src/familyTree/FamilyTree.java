@@ -1,26 +1,62 @@
 package familyTree;
 
-import human.Animal;
+import familyTree.comparators.Group;
 import human.Human;
 
-import javax.imageio.IIOException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree<E extends Animal<E>> implements Serializable, Iterable<E> {
-    private List<E> humanList;
+//public class FamilyTree<E extends Human> implements Group<E>, Serializable, Iterable<E>  {
+public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, Iterable<E>  {
 
-    private String name;
+    // public String name;
+    private E root;
+    private List<E> humanList;
+    private List<E> petList;
+
+    private List<E> childList;
 
     public FamilyTree() {
         this.humanList = new ArrayList<>();
+        this.petList = new ArrayList<>();
+    }
+    public FamilyTree(E root) {
+        this.root = root;
+    }
+    public E getRoot() {
+        return root;
     }
 
+    @Override
+    public List<E> getPetList() {
+        return petList;
+    }
+
+    @Override
+    public String getName() {
+        if (root != null) {
+            return root.getName();
+        }
+        return null;
+    }
+    @Override
+    public String getSurname() {
+        if (root != null) {
+            return root.getSurname();
+        }
+        return null;
+    }
+
+    @Override
     public List<E> getHumanList() {
         return humanList;
+    }
+
+    public void setRoot(E root) {
+        this.root = root;
     }
 
     public E getByName(String name) {
@@ -43,6 +79,9 @@ public class FamilyTree<E extends Animal<E>> implements Serializable, Iterable<E
 
     public void addHuman(E human) {
         humanList.add(human);
+    }
+    public void addPet(E pet) {
+        petList.add(pet);
     }
 
     public boolean add(E human) {
@@ -67,39 +106,29 @@ public class FamilyTree<E extends Animal<E>> implements Serializable, Iterable<E
         tree.append("В дереве ").append(humanList.size())
                 .append(" человек(а)").append(" \n");
         for (E human: this.humanList) {
-            tree.append(human.getInfo() + "\n");
+            tree.append(human.getInfo()).append("\n");
         }
         return tree.toString();
+    }
+
+    public E getFather() {
+        return root.getFather();
+    }
+
+    @Override
+    public E getMother() {
+        return root.getMother();
+    }
+
+    @Override
+    public void addChild(E child) {
+         childList.add(child);
+
     }
     @Override
     public Iterator<E> iterator() {
         return new HumanIterator<>(humanList);
     }
-
-//    public void save(List<Human> humanList) throws IOException {
-//        try (FileOutputStream fos = new FileOutputStream("src/out.txt");
-//             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-//            oos.writeObject(humanList);
-//        }
-//        catch (IIOException ex) {
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-//
-//        public List<Human> load() throws ClassNotFoundException, InvalidObjectException {
-//        try (FileInputStream fis = new FileInputStream("src/out.txt");
-//             ObjectInputStream ois = new ObjectInputStream(fis)) {
-//            List<Human> object = (List<Human>) ois.readObject();
-//            return object;
-//        } catch (IOException ex) {
-//            ex.printStackTrace(System.out);
-//        }
-//        throw new InvalidObjectException("Object fail");
-//    }
-
-
-
-
 
 
 }

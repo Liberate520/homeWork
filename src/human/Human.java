@@ -1,26 +1,29 @@
 package human;
 
+import familyTree.HumanIterator;
+import familyTree.comparators.Group;
+import familyTree.comparators.PetCompareByName;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Human<E extends Animal> implements Serializable {
+public class Human implements Serializable, Group<Human> {
 
     private  int id;
-
     private String name;
     private String surname;
     private String dateBirth;
     private String dateDeath;
     private String maidenName;
-
     private Gender gender;
     private Human father;
     private Human mother;
-    private List<E> childList;
+    private List<Human> childList;
 
     private final String nameRegex = "^[\\p{L} .'-]+$";
 
@@ -34,9 +37,8 @@ public class Human<E extends Animal> implements Serializable {
         this.father = father;
         this.mother = mother;
         this.maidenName = "";
-        this.childList = new ArrayList<E>();
+        this.childList = new ArrayList<>();
     }
-
     public Human(int id, String name, String surname, Gender gender, String dateBirth) {
         this.name = name;
         this.surname = surname;
@@ -47,21 +49,41 @@ public class Human<E extends Animal> implements Serializable {
         this.father = null;
         this.mother = null;
         this.maidenName = "";
-        this.childList = new ArrayList<E>();
+        this.childList = new ArrayList<>();
     }
-
     public Human() {
         this.id = 0;
         this.name = "unknown";
         this.surname = "unknown";
         this.dateBirth = "unknown";
     }
-
     public Human(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
         this.father = null;
         this.mother = null;
+    }
+
+    @Override
+    public void addHuman(Human human) {
+
+
+    }
+
+    @Override
+    public void addPet(Human pets) {
+
+
+    }
+
+    @Override
+    public List<Human> getHumanList() {
+        return null;
+    }
+
+    @Override
+    public List<Human> getPetList() {
+        return null;
     }
 
     public String getName() {
@@ -80,18 +102,9 @@ public class Human<E extends Animal> implements Serializable {
         return dateDeath;
     }
 
-    public List<E> getChildList() {
+    public List<Human> getChildList() {
         return childList;
     }
-
-//    public String getChild() {
-//        System.out.println("*".repeat(30));
-//        StringBuilder child = new StringBuilder(getName() + " " + getSurname() + " дети: \n");
-//        for (Human human: this.childList) {
-//            child.append(human + "\n");
-//        }
-//        return child.toString();
-//    }
 
     public int getAge() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
@@ -99,6 +112,13 @@ public class Human<E extends Animal> implements Serializable {
         LocalDate date = LocalDate.parse(dateBirth, formatter);
         return Period.between(date, currentDate).getYears();
 
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getNumChildren() {
@@ -130,7 +150,6 @@ public class Human<E extends Animal> implements Serializable {
         }
         return res;
     }
-
     public String getMotherInfo() {
         String res = "Мать: ";
         if (mother != null) {
@@ -140,8 +159,6 @@ public class Human<E extends Animal> implements Serializable {
         }
         return res;
     }
-
-
     public void setName(String name) {
         if (name.isEmpty()) {
             System.out.println("Поле не должно быть пустым");
@@ -157,7 +174,6 @@ public class Human<E extends Animal> implements Serializable {
             this.surname = surname;
         }
     }
-
     public void setFather(Human father) {
         this.father = father;
     }
@@ -179,7 +195,6 @@ public class Human<E extends Animal> implements Serializable {
             this.dateDeath = dateDeath;
         }
     }
-
     public void setMaidenName(String maidenName) {
         if (maidenName.trim().matches(nameRegex)) {
             if (this.gender == Gender.Male) {
@@ -194,23 +209,28 @@ public class Human<E extends Animal> implements Serializable {
         }
 
     }
-
-    public void setChildList(List<E> childList) {
+    public void setChildList(List<Human> childList) {
         this.childList = childList;
     }
 
-//    public void addChild(Human child) {
-//        childList = new ArrayList<>();
-//        this.childList.add(child);
-//     }
-
-    public void addChild(E child) {
+    public void addChild(Human child) {
         if (!childList.contains(child)) {
             childList.add(child);
         } else  {
             System.out.println("Ребенок уже есть в списке");
         }
     }
+
+//    public void addChild(Human child) {
+//        if (child != null && !childList.contains(child)) {
+//            childList.add(child);
+//            if (this.gender == Gender.Male) {
+//                child.setFather(this);
+//            } else if (this.gender == Gender.Female) {
+//                child.setMother(this);
+//            }
+//        }
+//    }
 
     public String getInfo() {
         StringBuilder builder = new StringBuilder();
@@ -222,8 +242,6 @@ public class Human<E extends Animal> implements Serializable {
                 .append(getChildrenInfo());
         return builder.toString();
     }
-
-
 
     public String getChildrenInfo() {
         StringBuilder childs = new StringBuilder();
@@ -246,7 +264,6 @@ public class Human<E extends Animal> implements Serializable {
                 "Пол: " + getGender() + " " +
                 "Возраст: " + getAge() + " лет " + "\n";
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -259,15 +276,8 @@ public class Human<E extends Animal> implements Serializable {
         return human.getName().equals(getName());
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator<>(getHumanList());
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-
-
 }

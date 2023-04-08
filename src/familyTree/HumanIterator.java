@@ -1,6 +1,6 @@
 package familyTree;
 
-import human.Animal;
+
 import human.Human;
 
 import java.util.Iterator;

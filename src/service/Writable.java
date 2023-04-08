@@ -1,6 +1,6 @@
+package service;
+
 import java.io.IOException;
-import java.io.InvalidObjectException;
-import java.io.Serializable;
 
 public interface Writable {
 

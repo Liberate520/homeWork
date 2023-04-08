@@ -1,12 +1,7 @@
 import familyTree.FamilyTree;
-import human.Animal;
 import human.Gender;
 import human.Human;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
+import service.FileHandler;
 
 public class Main {
     public static void main(String[] args) {
@@ -50,9 +45,10 @@ public class Main {
                 tree) {
             System.out.println(human);
         }
-
 */
-        System.out.println(tree.getInfo());
+        service.printHumanList();
+
+        System.out.println("дерево перед записью\n" + tree.getInfo());
 
         service.setHandler(new FileHandler());
         // организация записи через сервис
@@ -60,7 +56,7 @@ public class Main {
         // организация чтения через сервис
         service.load("src/out.dat");
 
-        System.out.println(tree.getInfo());
+        System.out.println("дерево прочитано из файла\n" + tree.getInfo());
 
 
 //

@@ -3,12 +3,11 @@ import familyTree.comparators.HumanComparatorByBirthday;
 import familyTree.comparators.HumanComparatorById;
 import familyTree.comparators.HumanComparatorByName;
 import familyTree.comparators.HumanCompareByNumberChild;
-import human.Animal;
 import human.Gender;
 import human.Human;
+import service.FileHandler;
 
 import java.io.IOException;
-import java.io.InvalidObjectException;
 
 public class Service {
 
@@ -32,15 +31,17 @@ public class Service {
         this.tree = tree;
     }
     public void addHuman(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
-        tree.add((Animal) new Human(id++, name, surname, gender, dateBirth, father, mother));
+        //tree.add((Animal) new Human(id++, name, surname, gender, dateBirth, father, mother));
+        tree.add(new Human(id++, name, surname, gender, dateBirth, father, mother));
     }
 
     public void addHuman(String name, String surname, Gender gender, String dateBirth) {
-        tree.add((Animal) new Human(id++, name, surname, gender, dateBirth));
+        //tree.add((Animal) new Human(id++, name, surname, gender, dateBirth));
+        tree.add(new Human(id++, name, surname, gender, dateBirth));
     }
 
     public void printHumanList(){
-        System.out.println(tree.getHumanList());
+        System.out.println(tree.getHumanList().toString());
     }
 
     public void save(String fileName){
