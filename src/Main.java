@@ -70,64 +70,35 @@ public class Main
         //  System.out.println(familyTree); // печать дерева без цикла!!!
 
         
-        // familyTree.findHuman();  // поиск людей!
+        // familyTree.findHuman();  // метод поиска людей в дереве!!!!
         
-    
-            // ObjectWrite.Writer(familyTree);
-            // ObjectRead.Reader();
-            // WriteText.SaveTxt(familyTree);
-            // ReadText.ReadTxt();
-            // WriteDoc.SaveDoc(familyTree);
-            // ReadDoc.Doc();
-            // WriteMD.SaveMD(familyTree);
-            // ReadMD.ReadMD();
-        
-            // FileHandlerSave fhs = new FileHandlerSave();
-            // fhs.SaveFormat(familyTree);
+             // FileHandlerSave fhs = new FileHandlerSave(); // запуск сохранения и чтения файлов!!!
+             // fhs.SaveFormat(familyTree); // запуск и сохранения и чтения файлов!!!
 
         List<Human> human = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12, human13, human14));
 
         for (Human value : human) 
         {
-            familyTree.addPerson(value); // добавляем людей в цикле
+            familyTree.addPerson(value); // добавляем людей (Human) в цикле
         }
-        // System.out.println("Печать дерева после цикла: \n" + familyTree); // печать дерева после добавления людей через цикл!
+         System.out.println("Печать дерева после цикла: \n" + familyTree); // печать дерева после добавления людей (human) через цикл!
+
 
         Others others1 = new Others(1, "иван", "инженер");
         Others others2 = new Others(2, "петр", "программист");
-        // Knode <Others> knode = new Knode<>();
-
+        
         List<Others> otherList = new ArrayList<>(Arrays.asList(others1, others2));
 
-        for (Others value : otherList) 
+        for (Others value : otherList)  
         {
-            familyTree.addPerson(value);
+            familyTree.addPerson(value); // добавление Others
         }
-        System.out.println(familyTree);
+        System.out.println(familyTree); // печать дерева с Others
 
-        // for(FamilyTree value : familyTree)
-        // {
-        //     System.out.println(value);
-        // }
-
-        familyTree.sortById();
-        System.out.println("Список, отсортированный по Id: " + familyTree);
-        familyTree.sortByLastName();
-        System.out.println("Список, отсортированный по имени: " + familyTree);
-
-        // familyTree.findHuman();  // поиск людей!
-
-        ObjectWrite.Writer(familyTree);
-            ObjectRead.Reader();
-            WriteText.SaveTxt(familyTree);
-            ReadText.ReadTxt();
-            WriteDoc.SaveDoc(familyTree);
-            ReadDoc.Doc();
-            WriteMD.SaveMD(familyTree);
-            ReadMD.ReadMD();
-        
-            FileHandlerSave fhs = new FileHandlerSave();
-            fhs.SaveFormat(familyTree);
+        // familyTree.sortById();  //сортировка по Id
+        // System.out.println("Список, отсортированный по Id: " + familyTree);
+        // familyTree.sortByLastName(); // сортировка по Фамилии
+        // System.out.println("Список, отсортированный по фамилии: " + familyTree);
 
      }
 }
