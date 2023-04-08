@@ -18,5 +18,10 @@ public class Main {
     tree.addHuman(human4);
 
     tree.printFamily();
+
+    tree.printChildrens(human1);
+    tree.printParents(human4);
+
+    tree.saveFile(tree.textForFile(),"family_tree.txt");
     }
 }

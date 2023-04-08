@@ -23,6 +23,22 @@ public class Human {
         return name;
     }
 
+    public List<Human> getChild() {
+        return this.childList;
+    }
+
+    public List<Human> getParent() {
+        return this.parentList;
+    }
+
+    public String genderToString() {
+        if (this.gender == gender.Male) {
+            return "М";
+        } else {
+            return "Ж";
+        }
+    }
+
     public void addFather(Human father) {
         this.father = father;
         father.addChild(this);
@@ -55,7 +71,7 @@ public class Human {
 
     @Override
     public String toString() {
-        return name + ", пол: " + gender + ", год рождения: " + birthAge;
+        return name + ", пол: " + this.genderToString() + ", год рождения: " + birthAge;
     }
 
 }
