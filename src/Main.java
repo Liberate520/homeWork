@@ -1,22 +1,36 @@
 public class Main {
     public static void main(String[] args) {
-        Human James = new Parent("James", "Potter", 27, 3, 1960, "Male");
-        Human Lily = new Parent("Lily", "Potter", 30, 1, 1960, "Female");
+        Human James = new Human("James", "Potter", 27, 3, 1960, "Male");
+        Human Lily = new Human("Lily", "Potter", 30, 1, 1960, "Female");
 
-        Human Harry = new Parent("Harry", "Potter", 31, 7, 1980, "Male");
-        Human Ginevra = new Parent("Ginevra", "Potter", 11, 8, 1981, "Female");
+        Human Harry = new Human("Harry", "Potter", 31, 7, 1980, "Male", James, Lily);
+        Human Ginevra = new Human("Ginevra", "Potter", 11, 8, 1981, "Female");
 
-        Human Albus_Severus = new Human("Albus Severus", "Potter", 1, 9, 2005, "Male");
-        Human James_Sirius = new Human("James Sirius", "Potter", 1, 9, 2003, "Male");
-        Human Lily_Luna = new Human("Lily Luna", "Potter", 1, 9, 2007, "Female");
+        Human Albus_Severus = new Human("Albus Severus", "Potter", 1, 9, 2005, "Male", Harry, Ginevra);
+        Human James_Sirius = new Human("James Sirius", "Potter", 1, 9, 2003, "Male", Harry, Ginevra);
+        Human Lily_Luna = new Human("Lily Luna", "Potter", 1, 9, 2007, "Female", Harry, Ginevra);
+        
+        James.addChildren(Harry);
+        Lily.addChildren(Harry);
 
+        Harry.addChildren(Albus_Severus);
+        Harry.addChildren(James_Sirius);
+        Harry.addChildren(Lily_Luna);
+
+        Ginevra.addChildren(Albus_Severus);
+        Ginevra.addChildren(James_Sirius);
+        Ginevra.addChildren(Lily_Luna);
     
         FamilyTree potterTree = new FamilyTree();
 
-        potterTree.put(James, Lily, Harry);
-        potterTree.put(Harry, Ginevra, Albus_Severus);
-        potterTree.put(Harry, Ginevra, James_Sirius);
-        potterTree.put(Harry, Ginevra, Lily_Luna);
+        potterTree.add(James);
+        potterTree.add(Lily);
+        potterTree.add(Harry);
+        potterTree.add(Ginevra);
+        potterTree.add(Albus_Severus);
+        potterTree.add(James_Sirius);
+        potterTree.add(Lily_Luna);
+
 
         System.out.println(potterTree);
     }
