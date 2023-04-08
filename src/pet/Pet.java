@@ -16,51 +16,34 @@ public class Pet implements Serializable {
 
     private  int id;
     private String name;
-
     private String dateBirth;
     private String dateDeath;
-
     private Gender gender;
     private Pet father;
     private Pet mother;
-
-    private Human owner;
     private List<Pet> childList;
+    private Human owner;
 
-    public Pet(int id, String name, String surname, Gender gender, String dateBirth, Pet father, Pet mother) {
+    public Pet(int id, String name, Gender gender, String dateBirth, Pet father, Pet mother) {
         this.name = name;
-        this.dateBirth = dateBirth;
         this.gender = gender;
-
+        this.dateBirth = dateBirth;
         this.father = father;
         this.mother = mother;
         this.childList = new ArrayList<>();
     }
 
-//    @Override
-//    public void addHuman(Pet human) {
-//
-//    }
-//
-//    @Override
-//    public void addPet(Pet pets) {
-//
-//    }
-//
-//    @Override
-//    public List<Pet> getPetList() {
-//        return null;
-//    }
-//
-//    @Override
-//    public String getInfo() {
-//        return null;
-//    }
-    public String getName() {
-        return name;
+    public Pet() {
+        this.id = 0;
+        this.name = "unknown";
+        this.owner = owner;
+        this.dateBirth = "unknown";
     }
 
 
+    public String getName() {
+        return name;
+    }
     public String getDateBirth() {
         return this.dateBirth;
     }
@@ -92,14 +75,40 @@ public class Pet implements Serializable {
         return mother;
     }
 
-//    @Override
-//    public void addChild(Pet human) {
-//
-//    }
+
 
     public Pet getFather() {
         return father;
     }
 
+    public void setName(String name) {
+        if (name.isEmpty()) {
+            System.out.println("Поле не должно быть пустым");
+        } else {
+            this.name = name;
+        }
+    }
+
+    public Human getOwner() {
+        return owner;
+    }
+
+    @Override
+    public String toString() {
+        return this.name +  " " + "Пол: " + getGender() + " " +
+                "Возраст: " + getAge() + " лет " + "хозяин" + getOwner() +"\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Pet pet = (Pet) obj;
+        return pet.getName().equals(getName());
+    }
 
 }

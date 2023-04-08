@@ -34,38 +34,23 @@ public class Main {
         service.sortByNumChild();
         for (Human human :
                 tree) {
+            System.out.print(human.getNumChildren() + " ");
             System.out.println(human);
         }
         System.out.println();
-        /*
- TODO
-        System.out.println("По индексу: ");
-        service.sortById();
-        for (Human human :
-                tree) {
-            System.out.println(human);
-        }
-*/
-        service.printHumanList();
 
-        System.out.println("дерево перед записью\n" + tree.getInfo());
+
+        System.out.println("дерево перед записью\n");
+        service.printTree();
 
         service.setHandler(new FileHandler());
         // организация записи через сервис
         service.save("src/out.dat");
+        System.out.println("дерево прочитано из файла\n");
         // организация чтения через сервис
         service.load("src/out.dat");
+        service.printTree();
 
-        System.out.println("дерево прочитано из файла\n" + tree.getInfo());
-
-
-//
-
-
-
-
-       // FamilyTree family3 = (FamilyTree) handler.load();
-        //System.out.println("the tree is loaded " + family3.getInfo());
 
 
 

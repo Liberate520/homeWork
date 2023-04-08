@@ -10,7 +10,6 @@ import service.FileHandler;
 import java.io.IOException;
 
 public class Service {
-
     private int id;
     private FamilyTree tree;
     private FileHandler handler;
@@ -39,9 +38,11 @@ public class Service {
         //tree.add((Animal) new Human(id++, name, surname, gender, dateBirth));
         tree.add(new Human(id++, name, surname, gender, dateBirth));
     }
-
-    public void printHumanList(){
-        System.out.println(tree.getHumanList().toString());
+    public void printTree(){
+        System.out.println(tree.getInfo());
+    }
+    public void printPetList(){
+        System.out.println(tree.getPetList().toString());
     }
 
     public void save(String fileName){

@@ -49,7 +49,6 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
         }
         return null;
     }
-
     @Override
     public List<E> getHumanList() {
         return humanList;
@@ -67,7 +66,6 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
         }
         return null;
     }
-
     public E getBySurname(String surname) {
         for (E human :
                 humanList) {
@@ -104,7 +102,7 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
     public String getInfo() {
         StringBuilder tree = new StringBuilder();
         tree.append("В дереве ").append(humanList.size())
-                .append(" человек(а)").append(" \n");
+                .append(" объектов").append(" \n");
         for (E human: this.humanList) {
             tree.append(human.getInfo()).append("\n");
         }

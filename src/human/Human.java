@@ -33,7 +33,6 @@ public class Human implements Serializable, Group<Human> {
         this.dateBirth = dateBirth;
         this.gender = gender;
         //this.id = id;
-
         this.father = father;
         this.mother = mother;
         this.maidenName = "";
@@ -242,7 +241,6 @@ public class Human implements Serializable, Group<Human> {
                 .append(getChildrenInfo());
         return builder.toString();
     }
-
     public String getChildrenInfo() {
         StringBuilder childs = new StringBuilder();
         childs.append("\nдети: ");
@@ -257,7 +255,6 @@ public class Human implements Serializable, Group<Human> {
         }
         return childs.toString();
     }
-
     @Override
     public String toString() {
         return this.name +  " " + this.surname + " " +
