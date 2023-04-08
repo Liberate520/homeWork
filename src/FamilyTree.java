@@ -1,6 +1,6 @@
 import java.util.HashSet;
 
-public class FamilyTree {
+public class FamilyTree implements WriterReader {
     private HashSet<Human> tree;
     
 
@@ -11,6 +11,8 @@ public class FamilyTree {
     void add(Human h) {
         this.tree.add(h);
     }
+
+    
 
     @Override
     public String toString() {

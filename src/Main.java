@@ -33,5 +33,6 @@ public class Main {
 
 
         System.out.println(potterTree);
+        potterTree.saveFile(potterTree.toString(), "src/PotterTree.txt");
     }
 }
