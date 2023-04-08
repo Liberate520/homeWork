@@ -1,8 +1,11 @@
 package program;
 
 import java.io.IOException;
-import classes.*;
-import sorting.Sorting;
+
+
+import sorting.classes.Sorting;
+import tree.classes.Human;
+import tree.classes.Tree;
 
 
 public class Program {
@@ -71,9 +74,9 @@ public class Program {
         // System.out.println(vasiliyMikhailovich.getParents());
 
 
-        // Saving
+        // //Saving
         // tree.save(tree, "src/Storage/Test.out");
-        // Tree loaded = tree.load("src/Storage/Test.out");
+        // Tree loaded = (Tree) tree.load("src/Storage/Test.out");
 
         for (Human person : tree) {
                 System.out.println(person.toString());

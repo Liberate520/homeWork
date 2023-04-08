@@ -1,12 +1,13 @@
-package classes;
+package tree.classes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import interfaces.SaveLoad;
-import interfaces.iTree;
-import sorting.TreeIterator;
+import filesystem.classes.SaveRestore;
+import filesystem.interfaces.SaveLoad;
+import sorting.classes.TreeIterator;
+import tree.interfaces.iTree;
 
 
 public class Tree implements SaveLoad, Iterable<Human>, iTree {

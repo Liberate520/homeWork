@@ -1,11 +1,11 @@
-package sorting;
+package sorting.classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import classes.Human;
-import interfaces.iTree;
+import tree.classes.Human;
+import tree.interfaces.iTree;
 
 public class Sorting {
     private List<Human> persons = new ArrayList<>();

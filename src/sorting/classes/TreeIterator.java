@@ -1,9 +1,9 @@
-package sorting;
+package sorting.classes;
 
 import java.util.Iterator;
 import java.util.List;
 
-import classes.Human;
+import tree.classes.Human;
 
 public class TreeIterator implements Iterator<Human> {
 

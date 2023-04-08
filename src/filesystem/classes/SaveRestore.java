@@ -1,8 +1,9 @@
-package classes;
+package filesystem.classes;
 import java.io.*;
 
-import interfaces.SaveLoad;
-import interfaces.iTree;
+import filesystem.interfaces.SaveLoad;
+import tree.classes.Tree;
+import tree.interfaces.iTree;
 
 public class SaveRestore implements SaveLoad {
     @Override
