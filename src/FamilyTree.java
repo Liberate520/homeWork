@@ -39,7 +39,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     }
     @Override
     public Iterator<T> iterator(){
-        return new HumanIterator(familyTree);
+        return new HumanIterator<T>(familyTree);
     }
     public void sortByDate() {
         familyTree.sort(new DateComparator());

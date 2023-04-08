@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class FileHandlerSaver implements DataSave {
-    private void saveSer(FamilyTree familyTree) throws IOException, ClassNotFoundException {
+    private void saveSer(FamilyTree<Human> familyTree) throws IOException, ClassNotFoundException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("familyTree.ser"));
         objectOutputStream.writeObject(familyTree);
@@ -10,7 +10,7 @@ public class FileHandlerSaver implements DataSave {
 
 
     @Override
-            public void saveData(FamilyTree familyTree) throws IOException, ClassNotFoundException{
+            public void saveData(FamilyTree<Human> familyTree) throws IOException, ClassNotFoundException{
             saveSer(familyTree);
             System.out.println("Файл сериализации создан");
 

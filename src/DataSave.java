@@ -1,5 +1,5 @@
 import java.io.IOException;
 
 public interface DataSave {
-    void saveData(FamilyTree familyTree) throws IOException, ClassNotFoundException;
+    void saveData(FamilyTree<Human> familyTree) throws IOException, ClassNotFoundException;
 }
