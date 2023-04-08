@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,9 +6,10 @@ import java.util.List;
 /**
  * Базовый класс человека
  */
-public class Human {
+public class Human implements Serializable {
     private Gender gender;
     private String name;
+    private String secondName;
     private String surname;
     private LocalDate dateBirth;
     private LocalDate dateDeath;
@@ -15,20 +17,27 @@ public class Human {
     private Human mother;
     private List<Human> children;
 
-    public Human(Gender gender, String name, String surname, LocalDate dateBirth, LocalDate dateDeath) {
+    public Human(Gender gender, String name, String secondName, String surname, LocalDate dateBirth, LocalDate dateDeath, Human father, Human mother) {
         this.gender = gender;
         this.name = name;
+        this.secondName = secondName;
         this.surname = surname;
         this.dateBirth = dateBirth;
         this.dateDeath = dateDeath;
+        this.father = father;
+        this.mother = mother;
     }
 
-    public Human(Gender gender, String name, String surname, LocalDate dateBirth) {
-        this(gender, name, surname, dateBirth, null);
+    public Human(Gender gender, String name, String secondName, String surname, LocalDate dateBirth, LocalDate dateDeath) {
+        this(gender, name, secondName, surname, dateBirth, dateDeath, null, null);
+    }
+
+    public Human(Gender gender, String name, String secondName, String surname, LocalDate dateBirth) {
+        this(gender, name, secondName, surname, dateBirth, null, null, null);
     }
 
     public Human() {
-        this(Gender.indefinite, "", "", null, null);
+        this(Gender.indefinite, "", "", "", null, null, null, null);
     }
 
 
@@ -39,6 +48,10 @@ public class Human {
 
     public String getName() {
         return name;
+    }
+
+    public String getSecondName() {
+        return secondName;
     }
 
     public String getSurname() {
@@ -72,6 +85,10 @@ public class Human {
     // setter
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public void setSurname(String surname) {
@@ -118,6 +135,6 @@ public class Human {
 
     @Override
     public String toString() {
-        return String.format("%s %s (%s%s)", this.name, this.surname, this.dateBirth, this.dateDeath == null ? "" : " - " + this.dateDeath);
+        return String.format("%s %s (%s%s)", this.name, this.surname, this.dateBirth, this.dateDeath == null ? "" : String.format(" - %s", this.dateDeath));
     }
 }
