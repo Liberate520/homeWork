@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human>{
-    private List<Human> familyTree = new ArrayList<Human>();
-    public FamilyTree(List<Human> familyTree) {
+public class FamilyTree<E extends Human> implements Serializable, Iterable<E>{
+    private List<E> familyTree;
+    public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
     }
     public  FamilyTree()
@@ -20,11 +20,11 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         this(new ArrayList<>());
     }
 
-    public List<Human> getFamilyTree() {
+    public List<E> getFamilyTree() {
         return familyTree;
     }
 
-    public boolean addMember(Human newHuman) {
+    public boolean addMember(E newHuman) {
         if (newHuman==null){
             return false;
         }
@@ -40,9 +40,9 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         return true;
     }
 
-    public Human getByName(String fio)
+    public E getByName(String fio)
     {
-    for (Human human : familyTree) {
+    for (E human : familyTree) {
         if (human.getName().equals(fio))
         {
             return human;
@@ -55,11 +55,18 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         StringBuilder sb =new StringBuilder();
         sb.append(" Семья состоит из:");
         sb.append("\n");
-        for (Human human:familyTree) {
+        for (E human:familyTree) {
             sb.append(human.getInfo());
             sb.append("\n");
         }
         return sb.toString();
+    }
+    public E find(String name)
+    {
+        for (E human: familyTree) {
+            if(human.getName().equals(name))
+            {return human; }
+        } return null;
     }
     @Override
     public String toString() {
@@ -67,8 +74,8 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(familyTree);
+    public Iterator<E> iterator() {
+        return new HumanIterator<E>(familyTree);
     }
     public void sortByName(){
         familyTree.sort(new HumanComporatorByName());

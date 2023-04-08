@@ -8,17 +8,18 @@ import java.io.*;
 public class Main implements Serializable {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree familyTolstoy = new FamilyTree();
+        FamilyTree<Human> familyTolstoy = new FamilyTree<>();
         Scanner scn = new Scanner(System.in);
+        Writable writable = new FileHandler();
         int key = 0;
         String nameFather;
         String nameMather;
         String nameTemp;
         int i = 0;
 
-        while (key != 4) {
+        while (key != 5) {
             System.out.println(
-                    " Введите:\n 0 - Вывести список членов семьи\n 1 - Добавить члена семьи\n 2 - Загрузить семью из файла\n 3 - Вывести детей члена семьи \n 4 - Выйти");
+                    " Введите:\n 0 - Вывести список членов семьи\n 1 - Добавить члена семьи\n 2 - Загрузить семью из файла\n 3 - Вывести детей члена семьи\n 4 - Найти члена семьи по имени \n 5 - Выйти");
             key = scn.nextInt();
             switch (key) {
                 case 0:
@@ -39,7 +40,7 @@ public class Main implements Serializable {
 
                 case 2:
 
-                    familyTolstoy= FileHandler.LoadfromFile("person.out");
+                    familyTolstoy= (FamilyTree) writable.load("family.txt");
                     System.out.println(familyTolstoy);
                     break;
 
@@ -59,7 +60,11 @@ public class Main implements Serializable {
                     }
                     break;
                 case 4:
-                    FileHandler.SaveInFile(familyTolstoy,"person.out");
+                    System.out.println("Введите искомое имя");
+                    familyTolstoy.find(scn.next());
+                    break;
+                case 5:
+                    writable.save(familyTolstoy,"family.txt");
                     scn.close();
                     break;
                 default:
