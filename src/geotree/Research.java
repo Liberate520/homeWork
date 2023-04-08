@@ -38,7 +38,7 @@ public class Research {
                 return p.getInfo().toString();
             }
         }
-        return null;
+        return "No such person!";
     }
 
 
@@ -67,7 +67,7 @@ public class Research {
                 return p.toString();
             }
         }
-        return null;
+        return "No such person!";
     }
     public String GetAll(){
         StringBuilder sb = new StringBuilder();
