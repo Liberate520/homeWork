@@ -1,8 +1,10 @@
 package geotree;
 
+import person.Gender;
 import person.Person;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Research {
@@ -57,7 +59,16 @@ public class Research {
         return resultAge;
     }
 
-    public String AddHuman(Person person){
+    public String AddHuman(String dataForPerson){
+        Person person;
+        try{
+            person =  new Person(dataForPerson.split(",")[0],
+                    new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
+                            Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
+                            Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Male);
+        }catch (Exception e){
+            return "Can't create human!";
+        }
         tree.add(person);
         return person.toString();
     }
