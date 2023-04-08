@@ -1,3 +1,5 @@
+package tree;
+
 import java.util.Scanner;
 
 public class FindScanner {

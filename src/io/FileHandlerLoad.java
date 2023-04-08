@@ -1,4 +1,9 @@
+package io;
+
 import java.io.*;
+
+import human.Human;
+import tree.FamilyTree;
 
 public class FileHandlerLoad implements DataLoad {
 

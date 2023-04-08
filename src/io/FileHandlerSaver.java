@@ -1,4 +1,9 @@
+package io;
+
 import java.io.*;
+
+import human.Human;
+import tree.FamilyTree;
 
 public class FileHandlerSaver implements DataSave {
     private void saveSer(FamilyTree<Human> familyTree) throws IOException, ClassNotFoundException {

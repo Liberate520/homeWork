@@ -1,10 +1,17 @@
+import human.Gender;
+import human.Human;
+import io.FileHandlerLoad;
+import io.FileHandlerSaver;
+import tree.FamilyTree;
+import tree.FindScanner;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception, ClassNotFoundException {
-        FamilyTree<Human> family = new FamilyTree<Human>();
+        FamilyTree<Human> family = new FamilyTree<>();
         Human human0 = new Human("Ярослав Всеволодович", null, 0, null, null, null);
         Human human1 = new Human("Александр Невский", Gender.Male, 1263, human0, null, null);
         Human human2 = new Human("Дмитрий", Gender.Male, 1294, human1, null, null);
