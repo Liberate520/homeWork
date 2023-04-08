@@ -22,11 +22,7 @@ public class Main implements Serializable {
             key = scn.nextInt();
             switch (key) {
                 case 0:
-                    System.out.println("Семья состоит из:");
-                    for (Human human : familyTolstoy) {
-
-                        System.out.println(human.getInfo());
-                    }
+                    System.out.println(familyTolstoy.getInfo());
                     break;
                 case 1:
 
@@ -69,6 +65,7 @@ public class Main implements Serializable {
                 default:
                     break;
             }
+
             familyTolstoy.sortByName();
             System.out.println("по имени:"+familyTolstoy);
             familyTolstoy.sortByChild();

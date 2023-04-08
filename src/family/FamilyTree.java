@@ -50,6 +50,17 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
     return null;
     }
+    public String getInfo()
+    {
+        StringBuilder sb =new StringBuilder();
+        sb.append(" Семья состоит из:");
+        sb.append("\n");
+        for (Human human:familyTree) {
+            sb.append(human.getInfo());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
     @Override
     public String toString() {
         return familyTree.toString();
