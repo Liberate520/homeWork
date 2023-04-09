@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private  List<Human> tree;
 
     public FamilyTree() {
@@ -44,5 +45,10 @@ public class FamilyTree implements Serializable {
         } else {
             System.out.println(res + " Детей нет");
         }
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(tree);
     }
 }

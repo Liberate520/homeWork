@@ -26,5 +26,9 @@ public class Main {
         Writeable wr = new Data();
         wr.save(tree);
         wr.read();
+
+        for (Human human: tree) {
+            System.out.println(human);
+        }
     }
 }
