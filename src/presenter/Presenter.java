@@ -13,20 +13,24 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void onClickFind(String person){
+    public void find(String person){
         String answer = research.findPersonByName(person);
         view.print(answer);
     }
-    public void onClickAddHuman(String dataForPerson){
-        String answer = research.AddHuman(dataForPerson);
+    public void addHuman(String dataForPerson){
+        String answer = research.addHuman(dataForPerson);
         view.print(answer);
     }
-    public void onClickGetHuman(String person){
-        String answer = research.GetHuman(person);
+    public void getHuman(String person){
+        String answer = research.getHuman(person);
         view.print(answer);
     }
-    public void onClickGetAll(){
-        String answer = research.GetAll();
+    public void getByAge(String age){
+        String answer = research.searchAge(age);
+        view.print(answer);
+    }
+    public void getAll(){
+        String answer = research.getAll();
         view.print(answer);
     }
 }

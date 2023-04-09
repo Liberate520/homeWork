@@ -117,7 +117,7 @@ public class Person implements Serializable, Comparable<Person> {
         res.append("Children: ");
         if (!children.isEmpty()){
             for (Person child:children) {
-                res.append(child.getFullName());
+                res.append(child.getFullName() + " ");
             }
         } else {
             res.append("unknown");

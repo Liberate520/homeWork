@@ -4,7 +4,7 @@ import geotree.GeoTree;
 
 import java.io.*;
 
-public class GeoTreeIO implements Writable, Readable, Serializable{
+public class GeoTreeIO implements Writable, Readable{
     public void write(GeoTree geo) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("geo.geotree"));

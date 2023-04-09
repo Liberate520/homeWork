@@ -5,12 +5,11 @@ import person.Person;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class Research {
-    private final ArrayList<StringBuilder> result = new ArrayList<>();
+
     private final ArrayList<Person> tree;
-    private final ArrayList<StringBuilder> resultAge = new ArrayList<>();
+
 
     public Research(GeoTree geoTree) {
         tree = geoTree.getTree();
@@ -18,6 +17,7 @@ public class Research {
 
     // метод поиска связи
     public ArrayList<StringBuilder> spend(Person person, String re) {
+        ArrayList<StringBuilder> result = new ArrayList<>();
         for (Person p : tree) {
             if (p == person && re.equals("mother")) {
                 result.add(p.getMother().getInfo());
@@ -45,21 +45,20 @@ public class Research {
 
 
     // метод поиска по возрасту
-    public ArrayList<StringBuilder> searchAge() {
-        System.out.print("Введите ограничение по возрасту: ");
-        Scanner in = new Scanner(System.in);
-        int age = in.nextInt();
-        System.out.println("Люди, младше: " + age + ":");
-
-        for (Person p : tree) {
-            if (p.getAge() <= age && !resultAge.contains(p.getInfo())) {
-                resultAge.add(p.getInfo());
+    public String searchAge(String age) {
+        ArrayList<String> resultAge = new ArrayList<>();
+        if (age.chars().allMatch(Character::isDigit)) {
+            for (Person p : tree) {
+                if (p.getAge() <= Integer.parseInt(age) && !resultAge.contains(p.getInfo())) {
+                    resultAge.add(p.toString());
+                }
             }
+            return resultAge.toString();
         }
-        return resultAge;
+        return "No such people!";
     }
 
-    public String AddHuman(String dataForPerson){
+    public String addHuman(String dataForPerson){
         Person person;
         try{
             person =  new Person(dataForPerson.split(",")[0],
@@ -72,7 +71,7 @@ public class Research {
         tree.add(person);
         return person.toString();
     }
-    public String GetHuman(String person){
+    public String getHuman(String person){
         for (Person p : tree) {
             if (p.getFullName().equals(person)) {
                 return p.toString();
@@ -80,7 +79,7 @@ public class Research {
         }
         return "No such person!";
     }
-    public String GetAll(){
+    public String getAll(){
         StringBuilder sb = new StringBuilder();
         for (Person p : tree) {
             sb.append(p.toString() + "\n");

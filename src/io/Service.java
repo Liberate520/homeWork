@@ -15,12 +15,12 @@ public class Service {
         this.gtio.write(gt);
     }
 
-    public GeoTree restoreTree() throws IOException, ClassNotFoundException {
+    public void restoreTree() throws IOException, ClassNotFoundException {
         try {
-            return this.gtio.read();
+            this.gtio.read();
         } catch (IOException e) {
             saveTree();
-            return this.gtio.read();
+            this.gtio.read();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
