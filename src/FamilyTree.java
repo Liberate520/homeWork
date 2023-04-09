@@ -54,7 +54,12 @@ public class FamilyTree implements Serializable {
         return sb.toString();
     }
 
-    // public String getInfo() {
-    //     return String.format("Семья: ", printTree());
-    // }
+    public String getInfo() {
+        return String.format("Семья: ", printTree());
+    }
+
+    @Override
+    public String toString() {
+        return printTree();
+    }
 }

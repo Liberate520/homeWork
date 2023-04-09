@@ -3,11 +3,12 @@ import java.io.*;
 
 public class DataSave implements FileProcess{
     @Override
-    public void read(String fileAddress) throws IOException, ClassNotFoundException {
+    public FamilyTree read(String fileAddress) throws IOException, ClassNotFoundException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileAddress));
         FamilyTree familyTree1 =  (FamilyTree)in.readObject();
-        System.out.println(familyTree1);
+        //System.out.println(familyTree1);
         in.close();
+        return familyTree1;
     }
 
     @Override

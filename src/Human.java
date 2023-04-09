@@ -54,6 +54,10 @@ public class Human implements Serializable {
         return sb.toString();
     }
 
+    public String getInfo() {
+        return String.format("Семья: ", printHuman());
+    }
+
     public String getMotherInfo() {
         String res = "мать: ";
         if(mother != null) {
