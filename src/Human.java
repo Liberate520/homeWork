@@ -1,10 +1,9 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-
 public class Human implements Serializable {
     private String firstName;
     private String lastName;
@@ -13,7 +12,7 @@ public class Human implements Serializable {
     private LocalDate deathDate;
     private Human mother;
     private Human father;
-    private Set<Human> children;
+    private List<Human> children;
 
     public Human(String firstName, String lastName, Sex sex, LocalDate birthDate, LocalDate deathDate, Human mother,
                  Human father) {
@@ -24,7 +23,7 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
         this.mother = mother;
         this.father = father;
-        children = new HashSet<>();
+        children = new ArrayList<>();
     }
 
     public Human(String firstName, String lastName, Sex sex, LocalDate birthDate, LocalDate deathDate) {
@@ -59,9 +58,10 @@ public class Human implements Serializable {
         return father;
     }
 
-    public Set<Human> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
+
     public void setMother(Human mother) {
         this.mother = mother;
     }
@@ -70,45 +70,47 @@ public class Human implements Serializable {
         this.father = father;
     }
 
-    public void setChildren(Set<Human> children) {
+    public void setChildren(List<Human> children) {
         this.children = children;
     }
 
-    public String getAge(){
+    public String getAge() {
         return "продолжительность жизни: " + Period.between(birthDate, deathDate).getYears() + " years";
     }
 
-    public void addChild(Human human){
-        children.add(human);
+    public void addChild(Human human) {
+        if (!children.contains(human)) {
+            children.add(human);
+        }
     }
 
-    public String getMotherInfo(){
+    public String getMotherInfo() {
         String str = "мать: ";
-        if (mother != null){
+        if (mother != null) {
             str += mother.getFirstName() + " " + mother.getLastName();
-        }else {
+        } else {
             str += "unknown";
         }
         return str;
     }
 
-    public String getFatherInfo(){
+    public String getFatherInfo() {
         String str = "отец: ";
-        if (father != null){
+        if (father != null) {
             str += father.getFirstName() + " " + father.getLastName();
-        }else {
+        } else {
             str += "unknown";
         }
         return str;
     }
 
-    public String getChildrenInfo(){
+    public String getChildrenInfo() {
         String str = "дети: ";
-        if (children.size() != 0){
-            for (Human child: children) {
+        if (children.size() != 0) {
+            for (Human child : children) {
                 str += child.getFirstName() + " " + child.getLastName() + ", ";
             }
-        }else {
+        } else {
             str += "unknown";
         }
         return str.replaceAll(", $", "");
