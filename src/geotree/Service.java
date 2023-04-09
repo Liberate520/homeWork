@@ -1,21 +1,23 @@
 package geotree;
 
+import geotree.GeoTree;
+import io.GeoTreeIO;
 import person.Gender;
 import person.Person;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Research {
-
-    private final ArrayList<Person> tree;
-
-
-    public Research(GeoTree geoTree) {
-        tree = geoTree.getTree();
+public class Service {
+    private GeoTreeIO gtio;
+    private GeoTree gt;
+    private ArrayList<Person> tree;
+     public Service(GeoTreeIO gtio, GeoTree gt){
+        this.gtio = gtio;
+        this.gt = gt;
+        this.tree = gt.getTree();
     }
-
-    // метод поиска связи
     public ArrayList<StringBuilder> spend(Person person, String re) {
         ArrayList<StringBuilder> result = new ArrayList<>();
         for (Person p : tree) {
@@ -63,15 +65,15 @@ public class Research {
         try{
             if (dataForPerson.split(",")[2].equals("Male")){
                 person =  new Person(dataForPerson.split(",")[0],
-                        new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
+                        new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2]),
                                 Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
-                                Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Male);
+                                Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0])), Gender.Male);
             } else {
                 if (dataForPerson.split(",")[2].equals("Female")) {
                     person = new Person(dataForPerson.split(",")[0],
-                            new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
+                            new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[2].split("\\.")[0]),
                                     Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
-                                    Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Female);
+                                    Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0])), Gender.Female);
                 } else {
                     return "Can't create human!";
                 }
@@ -96,5 +98,19 @@ public class Research {
             sb.append(p.toString() + "\n");
         }
         return sb.toString();
+    }
+    public void saveTree() throws IOException {
+        this.gtio.write(gt);
+    }
+
+    public void restoreTree() throws IOException, ClassNotFoundException {
+        try {
+            this.gtio.read();
+        } catch (IOException e) {
+            saveTree();
+            this.gtio.read();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
