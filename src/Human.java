@@ -8,7 +8,7 @@ public class Human implements Serializable {
     private Human father;
     private List<Human> children;
 
-    public Human(String name, Human mothher, Human father) {
+    public Human(String name, Human mother, Human father) {
         this.name = name;
         this.mother = mother;
         this.father = father;
@@ -29,13 +29,14 @@ public class Human implements Serializable {
         return name;
     }
 
+    public Human getMother() {
+        return mother;
+    }
+    
     public Human getFather() {
         return father;
     }
 
-    public Human getMother() {
-        return mother;
-    }
 
     public List<Human> getChildren() {
         return children;

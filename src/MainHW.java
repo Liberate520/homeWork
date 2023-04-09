@@ -7,8 +7,8 @@ public class MainHW {
 
         familyTree1.add(new Human("Анна")); 
         familyTree1.add(new Human("Петр")); 
-        familyTree1.add(new Human("Миша", familyTree1.getByName("Петр"), familyTree1.getByName("Анна"))); 
-        familyTree1.add(new Human("Оля", familyTree1.getByName("Петр"), familyTree1.getByName("Анна")));
+        familyTree1.add(new Human("Миша", familyTree1.getByName("Анна"), familyTree1.getByName("Петр"))); 
+        familyTree1.add(new Human("Оля", familyTree1.getByName("Анна"), familyTree1.getByName("Петр")));
 
         System.out.println(familyTree1);
         data.save(familyTree1,"fileTree.txt");
