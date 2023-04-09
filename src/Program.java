@@ -1,5 +1,7 @@
 import human.*;
 import family.*;
+import human.comparators.CompHumanByDBR;
+import human.comparators.CompHumanByName;
 import services.FileHandler;
 import services.Service;
 import services.Writable;
@@ -112,6 +114,5 @@ public class Program {
         for (Human human : service.getFamily()) {
             System.out.println(human);
         }
-
     }
 }
