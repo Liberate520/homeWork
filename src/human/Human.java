@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Human implements Serializable, Group<Human> {
+public class Human implements Serializable {
 
     private  int id;
     private String name;
