@@ -1,9 +1,9 @@
 package tree;
 
-import tree.essences.Human;
+import tree.familyTree.FamilyTree;
+import tree.essences.*;
 import tree.essences.comparators.HumanComparatorByDateBirth;
 import tree.essences.comparators.HumanComparatorByFirstName;
-import tree.familyTree.FamilyTree;
 import tree.interfaces.Handler;
 
 public class Service {
