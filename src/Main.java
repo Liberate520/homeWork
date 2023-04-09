@@ -2,6 +2,7 @@
 // String deathDate, People.Gender gender, int idMather, int idFather)
 
 import Data.DataRepository;
+import Dragons.Dragon;
 import People.Gender;
 import People.Person;
 import Tree.FamilyTree;
@@ -12,10 +13,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree targariens = new FamilyTree();
+        FamilyTree<Person> targariens = new FamilyTree();
         FamilyTree targariensThrone = new FamilyTree();
         Service service = new Service(targariensThrone);
-
+        FamilyTree<Dragon> targarienDragons = new FamilyTree<>();
 
         Person personA = new Person("JEHAELIS", "Targarien",
                 "17.05.134", "24.12.200", Gender.male);
@@ -36,6 +37,12 @@ public class Main {
         Person personI = new Person("HELEINA", "Targarien",
                 "07.11.203", "08.05.299", Gender.female, personG, personE);
 
+        Dragon dragonA = new Dragon("TERRAX", "DRAGON",
+                "19.08.142", "11.11.244", Gender.male);
+        Dragon dragonB = new Dragon("BALERION", "DRAGON",
+                "01.02.153", "12.08.301", Gender.male);
+        Dragon dragonC = new Dragon("MARAXES", "Dragon",
+                "24.03.161", "18.12.401", Gender.male);
 
         targariens.addPerson(personA);
         targariens.addPerson(personB);
@@ -57,6 +64,10 @@ public class Main {
         service.addTargarien(personH);
         service.addTargarien(personI);
 
+        targarienDragons.addPerson(dragonA);
+        targarienDragons.addPerson(dragonB);
+        targarienDragons.addPerson(dragonC);
+
         System.out.println("\n1 - Output all members of the genus." +
                 "\n2 - Find targarien descendance." +
                 "\n3 - Find the great Targarien." +
@@ -65,7 +76,9 @@ public class Main {
                 "\n6 - Sort Targariens by name." +
                 "\n7 - Sort Targariens by ID from last to first." +
                 "\n8 - Sort Targariens by ID from first to last." +
-                "\n9 - Sort Targariens by gender.");
+                "\n9 - Sort Targariens by gender." +
+                "\n10 - Output all Targarien Dragons." +
+                "\n11 - Find targarien dragon.");
 
         Scanner in = new Scanner(System.in);
         int option = in.nextInt();
@@ -116,6 +129,16 @@ public class Main {
                     System.out.println("Targariens sorted by gender: ");
                     service.sortByGender();
                     System.out.println(targariensThrone.getTreeInfo());
+                    break;
+                case 10:
+                    System.out.println("Behold Targarien Dragons: ");
+                    System.out.println(targarienDragons.getTreeInfo());
+                    break;
+                case 11:
+                    System.out.println("Enter the name of Targarien dragon: ");
+                    Scanner srchDrag = new Scanner(System.in);
+                    String nameDrag = srchDrag.nextLine().toUpperCase();
+                    System.out.println(targarienDragons.searchPerson(nameDrag));
                     break;
             }
         }catch (Exception e){

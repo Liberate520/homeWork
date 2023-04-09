@@ -3,16 +3,18 @@ package Tree;
 import Data.DataRepository;
 import People.Person;
 import People.Repository;
+import People.TreeElements;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree extends DataRepository implements Serializable, Repository, Iterable<Person> {
-    public List<Person> targariens;
+public class FamilyTree<E extends Person> extends DataRepository implements
+        Serializable, Repository, Iterable<Person>, TreeElements {
+    public List<E> targariens;
 
-    public FamilyTree(List<Person> targariens) {
+    public FamilyTree(List<E> targariens) {
         this.targariens = targariens;
     }
 
@@ -20,7 +22,7 @@ public class FamilyTree extends DataRepository implements Serializable, Reposito
         this(new ArrayList<>());
     }
 //    Не удалось сделать метод VOID.
-    public boolean addPerson(Person person){
+    public boolean addPerson(E person){
         if (person == null){
             return false;
         }
@@ -37,9 +39,9 @@ public class FamilyTree extends DataRepository implements Serializable, Reposito
         return false;
     }
 
-    public List<Person> searchPerson(String firstName){
-        List<Person> searched = new ArrayList<>();
-        for (Person item:targariens) {
+    public List<E> searchPerson(String firstName){
+        List<E> searched = new ArrayList<>();
+        for (E item:targariens) {
             if (item.getFirstName().equals(firstName)){
                 searched.add(item);
             }
@@ -49,7 +51,7 @@ public class FamilyTree extends DataRepository implements Serializable, Reposito
 
     public List<String> searchPersonDescendance(String firstName){
         List<String> searched = new ArrayList<>();
-        for (Person item: targariens) {
+        for (E item: targariens) {
             if (item.getFirstName().equals(firstName)){
                 searched.add(item.getDescendantInfo());
             }
@@ -59,14 +61,14 @@ public class FamilyTree extends DataRepository implements Serializable, Reposito
 
     public String getTreeInfo(){
         StringBuilder tree = new StringBuilder();
-        for (Person ppl:targariens) {
+        for (E ppl:targariens) {
             tree.append(ppl.getInfo());
             tree.append("\n");
         }
         return tree.toString();
     }
 
-    public List<Person> getFamilyTree(){
+    public List<E> getFamilyTree(){
         return targariens;
     }
     @Override

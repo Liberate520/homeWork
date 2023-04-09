@@ -1,15 +1,16 @@
 package Tree;
 
 import People.Person;
+import People.TreeElements;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterator implements Iterator<Person> {
+public class TreeIterator<E> implements Iterator<E> {
     private int index;
-    private List<Person> targariens;
+    private List<E> targariens;
 
-    public TreeIterator(List<Person> targariens){
+    public TreeIterator(List<E> targariens){
         this.targariens = targariens;
     }
 
@@ -19,7 +20,7 @@ public class TreeIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public E next() {
         return targariens.get(index++);
     }
 }
