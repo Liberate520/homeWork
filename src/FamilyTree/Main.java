@@ -5,16 +5,28 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import FamilyTree.comparators.*;
+// import java.io.Serializable;
+
 
 
 public class Main {
+
+    public static void save (SaveLoad sl, Tree t, String path) throws ClassNotFoundException, IOException{
+        sl.save(t, path);
+    }
+
+    public static Tree load (SaveLoad sl, String path) throws ClassNotFoundException, IOException{
+        Tree t = (Tree) sl.load(path);
+        return t;
+    }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String path = "tree.save";
         File dir = new File(path);
         FileHandler fh = new FileHandler();
         Tree tree;
         if(dir.exists()){
-            tree = fh.loadTree(path);//"tree.save"
+            tree = load(fh, path);//"tree.save"
         }else{
             tree = new Tree();
         }
@@ -126,7 +138,7 @@ public class Main {
             cmd = scan.nextLine();
         }
         scan.close();
-        fh.saveData(tree,"tree.save");
+        save(fh, tree, path);
 
         // tree.addPerson();
         // tree.addPerson();

@@ -6,7 +6,7 @@ import java.util.List;
 import java.io.Serializable;
 import java.lang.StringBuilder;
 
-public class Tree implements Serializable, Saveble, Iterable<Person>{
+public class Tree implements Serializable, Iterable<Person>{
     private List<Person> family;
     // private Person addedPerson;
 
