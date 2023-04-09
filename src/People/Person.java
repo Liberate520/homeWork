@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Person extends DataRepository implements Serializable, Repository, Comparable<Person> {
+public class Person extends DataRepository implements
+        Serializable, Repository, Comparable<Person>, TreeElements{
     static int generatorId = 1;
     private int id;
     public String firstName;
@@ -212,5 +213,10 @@ public class Person extends DataRepository implements Serializable, Repository, 
     @Override
     public int compareTo(Person o) {
         return firstName.compareTo(o.firstName);
+    }
+
+    @Override
+    public String getTreeInfo() {
+        return null;
     }
 }

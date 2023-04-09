@@ -1,6 +1,5 @@
 package Data;
 
-import People.Person;
 import People.Repository;
 import Tree.FamilyTree;
 

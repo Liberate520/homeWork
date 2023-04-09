@@ -7,7 +7,6 @@ package People;
 //а объект интерфейса, с помощью которого и будет происходить запись.
 //Пример работы с интерфейсом Serialazable можно найти в материалах к уроку
 
-import People.Person;
 import Tree.FamilyTree;
 
 public interface Repository {

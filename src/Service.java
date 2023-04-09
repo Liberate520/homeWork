@@ -3,12 +3,8 @@ import People.Comparators.PersonComparatorById;
 import People.Comparators.PersonComparatorByIdReverse;
 import People.Comparators.PersonComparatorByName;
 import People.Person;
+import People.TreeElements;
 import Tree.FamilyTree;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class Service {
     private int id;
