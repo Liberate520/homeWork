@@ -82,6 +82,7 @@ public class DesktopUI extends JFrame implements View {
         });
 
         setVisible(true);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     @Override

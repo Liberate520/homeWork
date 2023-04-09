@@ -1,7 +1,6 @@
 import geotree.GeoTree;
 import io.GeoTreeIO;
-import geotree.Research;
-import io.Service;
+import geotree.Service;
 import person.Gender;
 import person.Person;
 
@@ -29,8 +28,7 @@ public class Main {
         gt.appendPerson(vasya);
         gt.autoAppendChildren();
         serv.restoreTree();
-        Research research = new Research(gt);
-        Presenter presenter = new Presenter(view, research);
+        Presenter presenter = new Presenter(view, serv);
         view.start();
     }
 }
