@@ -1,12 +1,13 @@
+package model;
 import java.util.Iterator;
 import java.util.Map;
 
 class TreeIterator<E extends Person> implements Iterator<E> {
-    Map<Integer, E> persons_list;
-    Iterator<Integer> iterator;
-    int size;
+    private Map<Integer, E> persons_list;
+    private Iterator<Integer> iterator;
+    private int size;
 
-    public TreeIterator(Map<Integer, E> persons_list){
+    public TreeIterator(Map<Integer, E> persons_list) {
         this.persons_list = persons_list;
         this.iterator = persons_list.keySet().iterator();
         this.size = persons_list.size();

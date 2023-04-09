@@ -1,3 +1,5 @@
+package model;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +12,7 @@ import java.util.Map;
  * Содержит индитификаторы детей, если такие имееются.
  */
 
-public class Person  {
+public class Person {
     private Map<String, String> person_info;
     private String person_name, person_sex;
     private Date person_birthday, person_death;
@@ -159,7 +161,6 @@ public class Person  {
         return res.toString();
     }
 
-
     private Date strToDate(String date) {
         Date docDate;
         SimpleDateFormat format = new SimpleDateFormat();
@@ -171,6 +172,5 @@ public class Person  {
         }
         return docDate;
     }
-
 
 }

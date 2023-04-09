@@ -1,3 +1,5 @@
+package model;
+
 public interface Files {
     Tree<Person> readFile();
 

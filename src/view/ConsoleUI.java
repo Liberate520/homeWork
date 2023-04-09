@@ -1,31 +1,58 @@
+package view;
 import java.util.Scanner;
 
-public class ConsoleUI implements UI{
+import presenter.Presenter;
+
+public class ConsoleUI implements UI {
     private Scanner scan;
     private String cursor = "$: ";
     private Presenter presenter;
 
-    public ConsoleUI(){
+    public ConsoleUI() {
         this.scan = new Scanner(System.in);
-    }
-    @Override
-    public void start() {
-       print(helper());
-       while (true) {
-            String command = commandFromConsole();
-            if (command.equals("break")) 
-                break;
-            this.presenter.onClick(command); 
-       }
-       
     }
 
     @Override
-    public void print(String msg){
+    public void start() {
+        print(helper());
+        while (true) {
+            String command = commandFromConsole();
+
+            if (command.equals("break"))
+                break;
+
+            if (command.equals("show:"))
+                this.presenter.commandShow();
+                
+            if (command.contains("id:") && !command.contains("sort by"))
+                this.presenter.commandFullPersonInfo(command);
+            
+            if (command.equals("save:")) 
+                this.presenter.commandFileSave();
+
+            if (command.contains("new:"))
+                this.presenter.commandAddNewPerson(command);
+
+            if (command.contains("name:"))
+                this.presenter.commandSearchPersonByName(command);
+            
+            if (command.equals("sort by name:"))
+                this.presenter.commandShowPersonsSortByName(command);
+            
+            if (command.equals("sort by id:"))
+                this.presenter.commandShowPersonsSortById(command);
+            
+            if (command.contains("add."))
+                this.presenter.commandEditPerson(command);
+        }
+    }
+
+    @Override
+    public void print(String msg) {
         System.out.println(msg);
     }
 
-    private String helper(){
+    private String helper() {
         StringBuilder help = new StringBuilder();
         help.append("\n\nОсновные комманды консоли:\n");
         help.append("show: - показывает всех участников дерева\n");
@@ -41,11 +68,12 @@ public class ConsoleUI implements UI{
         return help.toString();
     }
 
-    private String commandFromConsole(){
+    private String commandFromConsole() {
         System.out.print("\n" + this.cursor);
         String command = scan.nextLine();
         return command;
     }
+
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;

@@ -1,3 +1,4 @@
+package model;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,11 +14,11 @@ import java.util.Scanner;
 public class FileCSV implements Files {
     private String file_name;
 
-    FileCSV(String file_name) {
+    public FileCSV(String file_name) {
         this.file_name = file_name;
     }
 
-    FileCSV() {
+    public FileCSV() {
         this("bd.csv");
     }
 
@@ -50,7 +51,6 @@ public class FileCSV implements Files {
     @Override
     public Boolean saveFile(Tree<Person> family) {
         String bd_file = new File(this.file_name).getAbsolutePath();
-        System.out.println("Сохраняем изменения в файл");
 
         String text = convertPersonslistToCSV(family);
         try {
@@ -88,7 +88,6 @@ public class FileCSV implements Files {
         return csv_fields.append(csv_text).toString();
     }
 
-
     @Override
     public Tree<Person> readFile() {
         Map<Integer, Person> p_list = new HashMap<>();
@@ -125,29 +124,27 @@ public class FileCSV implements Files {
         }
         return makeRelativesFromCSV(p_list);
     }
-    
+
     // Метод создания родственных связей из айди родителей
-    private Tree<Person> makeRelativesFromCSV(Map<Integer, Person> persons_list){
+    private Tree<Person> makeRelativesFromCSV(Map<Integer, Person> persons_list) {
         int mother_id, father_id;
         // for (Person pers : family) {
         for (Map.Entry<Integer, Person> item : persons_list.entrySet()) {
             Person pers = item.getValue();
-            
-            if (pers.getPerson_info().get("mother_id")!="") {
+
+            if (pers.getPerson_info().get("mother_id") != "") {
                 mother_id = Integer.parseInt(
-                    pers.getPerson_info().get("mother_id")
-                    );
-                    
+                        pers.getPerson_info().get("mother_id"));
+
                 Person mother = persons_list.get(mother_id);
                 pers.setMother(mother);
                 persons_list.get(mother_id).setPerson_childs(pers);
             }
 
-            if (pers.getPerson_info().get("father_id")!="") {
+            if (pers.getPerson_info().get("father_id") != "") {
                 father_id = Integer.parseInt(
-                    pers.getPerson_info().get("father_id")
-                    );
-                    
+                        pers.getPerson_info().get("father_id"));
+
                 Person father = persons_list.get(father_id);
                 pers.setFather(father);
                 persons_list.get(father_id).setPerson_childs(pers);
@@ -156,7 +153,7 @@ public class FileCSV implements Files {
         Tree<Person> family = new Tree<>();
         for (Map.Entry<Integer, Person> itm : persons_list.entrySet()) {
             System.out.println("ID:" + itm.getKey());
-            family.add(itm.getKey(), itm.getValue());    
+            family.add(itm.getKey(), itm.getValue());
         }
         return family;
     }

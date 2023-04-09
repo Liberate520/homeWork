@@ -1,23 +1,25 @@
+package model;
+
 import java.util.List;
 
 public class Service {
     private Tree<Person> family_tree;
     private FileCSV bd_file;
-    
-    public Service(Tree<Person> family_tree){
+
+    public Service(Tree<Person> family_tree) {
         this.family_tree = family_tree;
     }
 
-    public Service(Tree<Person> family_tree, FileCSV bd_file){
-        this.family_tree = family_tree;
-        this.bd_file = bd_file;
-
+    public Service(String file_name){
+        this.bd_file = new FileCSV(file_name);
+        this.family_tree = bd_file.readFile();
     }
 
-    public int addPerson(String name){
+
+    public int addPerson(String name) {
         int id = (int) System.currentTimeMillis();
         Person pers = new Person(id, name);
-        this.family_tree.add(pers.getPerson_id(),pers);
+        this.family_tree.add(pers.getPerson_id(), pers);
         return id;
     }
 
@@ -29,10 +31,10 @@ public class Service {
         return this.family_tree;
     }
 
-    public String showTheFamily(){
+    public String showTheFamily() {
         return this.family_tree.toString();
     }
-    
+
     public static void sortPersonsById(List<Person> pers_list) {
         pers_list.sort(new ComparatorById());
     }
