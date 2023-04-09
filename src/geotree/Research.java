@@ -61,10 +61,21 @@ public class Research {
     public String addHuman(String dataForPerson){
         Person person;
         try{
-            person =  new Person(dataForPerson.split(",")[0],
-                    new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
-                            Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
-                            Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Male);
+            if (dataForPerson.split(",")[2].equals("Male")){
+                person =  new Person(dataForPerson.split(",")[0],
+                        new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
+                                Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
+                                Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Male);
+            } else {
+                if (dataForPerson.split(",")[2].equals("Female")) {
+                    person = new Person(dataForPerson.split(",")[0],
+                            new GregorianCalendar(Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[0]),
+                                    Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[1]),
+                                    Integer.parseInt(dataForPerson.split(",")[1].split("\\.")[2])), Gender.Female);
+                } else {
+                    return "Can't create human!";
+                }
+            }
         }catch (Exception e){
             return "Can't create human!";
         }
