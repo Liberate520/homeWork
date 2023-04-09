@@ -31,13 +31,13 @@ public class Main {
 
         service.sortByLastName();
         System.out.println("Отсортированный список по фамилии: ");
-        for (Human item : test) {
+        for (Object item : test) {
             System.out.println(item);
         }
         System.out.println();
         service.sortByID();
         System.out.println("Отсортированный список по ID: ");
-        for (Human item : test) {
+        for (Object item : test) {
             System.out.println(item);
         }
     }

@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private final List<Human> familyTree;
+public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
+    private final List<E> familyTree;
 
-    public FamilyTree(List<Human> familyTree) {
+    public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -14,7 +14,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this.familyTree = new ArrayList<>();
     }
 
-    public void add(Human human) {
+    public void add(E human) {
         this.familyTree.add(human);
     }
 
@@ -26,7 +26,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return " ";
     }
 
-    public void parentsHuman(Human human) {
+    public void parentsHuman(E human) {
         Human mather = null;
         Human father = null;
         for (Human item : familyTree) {
@@ -37,21 +37,21 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void childrensHuman(Human human) {
-        List<Human> childrens = new ArrayList<>();
-        for (Human item : familyTree) {
+        List<E> childrens = new ArrayList<>();
+        for (E item : familyTree) {
             if (item.getIdFather() == human.getId() || item.getIdMather() == human.getId()) {
                 childrens.add(item);
             }
         }
         if (childrens.size() > 0) {
             System.out.printf("\nИсследуемый объект:\n%s\nДети объекта:\n", human);
-            for (Human item : childrens) System.out.print(item);
+            for (E item : childrens) System.out.print(item);
         } else System.out.printf("\nИсследуемый объект:\n%s\nДетей нет", human);
     }
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
 
-        return new HumanIterator(familyTree);
+        return new HumanIterator<E>(familyTree);
     }
 
     public void sortByID() {
