@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Comparator;
 
 public class IdComparator<T extends Node> implements Comparator<T>
@@ -14,4 +16,3 @@ public class IdComparator<T extends Node> implements Comparator<T>
         }
 
     }
-

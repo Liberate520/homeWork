@@ -1,4 +1,5 @@
-// import writeReadData.*;
+package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,10 +9,10 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
 {  
     private T t;
     private Human human;
-    private ArrayList<T> famyliTree = new ArrayList<>();
+    private ArrayList<T> familyTree = new ArrayList<>();
 
     public void addPerson(T t) {
-        famyliTree.add(t);
+        familyTree.add(t);
 
         if (t instanceof Human && t.getMother() != null)
             ((Human) t.getMother()).addChildren(t);
@@ -20,9 +21,14 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
             ((Human) t.getFather()).addChildren(t);
     }
 
+    public FamilyTree getFamilyTree(FamilyTree familyTree) // НОВЫЙ МЕТОД!!!!
+    {
+        return familyTree;
+    }
+
     @Override
     public String toString() {
-        return famyliTree.toString();
+        return familyTree.toString();
     }
 
     public void findHuman()
@@ -36,11 +42,11 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
         String findFirstName = sc2.nextLine();
 
         boolean find=false;
-        for (int i = 0; i < famyliTree.size(); i++) 
+        for (int i = 0; i < familyTree.size(); i++) 
         {
-            if (famyliTree.get(i).getLastName().contains(findLastName) && famyliTree.get(i).getFirstName().contains(findFirstName)) 
+            if (familyTree.get(i).getLastName().contains(findLastName) && familyTree.get(i).getFirstName().contains(findFirstName)) 
             {
-                System.out.println(famyliTree.get(i));
+                System.out.println(familyTree.get(i));
                 find=true;
             }    
         }
@@ -49,12 +55,12 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
 
     @Override
     public Iterator<T> iterator(){
-        return new HumanIterator(famyliTree);
+        return new HumanIterator(familyTree);
     }
     public void sortById() {
-        famyliTree.sort(new IdComparator());
+        familyTree.sort(new IdComparator());
     }
     public void sortByLastName() {
-        famyliTree.sort(new NameComparator());
+        familyTree.sort(new NameComparator());
     }
 }

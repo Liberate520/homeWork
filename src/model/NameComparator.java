@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Comparator;
 public class NameComparator<T extends Node> implements Comparator<T> {
         @Override
@@ -13,4 +15,3 @@ public class NameComparator<T extends Node> implements Comparator<T> {
         }
 
     }
-

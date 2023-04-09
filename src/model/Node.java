@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDate;
 
 public interface Node<T>
@@ -11,7 +13,4 @@ public interface Node<T>
    T getFather();
    T getMother();
    T getChildren();
-
-
-
 }

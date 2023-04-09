@@ -1,3 +1,5 @@
+package model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -104,4 +106,5 @@ public class Others<T extends Node> implements Serializable, Node
         throw new UnsupportedOperationException("Unimplemented method 'getChildren'");
     }
 }
+
 
