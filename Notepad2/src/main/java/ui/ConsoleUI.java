@@ -8,6 +8,7 @@ public class ConsoleUI implements View {
     private Presenter presenter; //связь с презентером
     private Scanner scanner;
     private boolean flag;
+    private boolean flag2;
 
     /**
      * Конструктор запускает сканер
@@ -29,12 +30,18 @@ public class ConsoleUI implements View {
      * Здесь начинается программа
      */
     @Override
-    public boolean start(){
+    public void start(){
         this.flag = true;
-        presenter.getMenu();
-        String commandNumber = scan("Введите команду: "); // сканируем информацию от пользователя
-        presenter.getAnswer(commandNumber); //пересылаем комманду в презентер
-        return flag;
+
+        while (flag) {
+            presenter.getMenu();
+            this.flag2 = true;
+
+            while (flag2){
+                String commandNumber = scan("Введите команду: "); // сканируем информацию от пользователя
+                presenter.getAnswer(commandNumber); //пересылаем комманду в презентер
+            }
+        }
     }
 
     private String scan(String text) {
@@ -52,12 +59,16 @@ public class ConsoleUI implements View {
         System.out.println(text);
     }
 
-    @Override
-    public void newNote() {
-        String note = scan("Введите текст заметки: ");
-        presenter.createNote(note);
-    }
+    //    @Override
+//    public void newNote() {
+//        String note = scan("Введите текст заметки: ");
+//        presenter.createNote(note);
+//    }
     public void changeFlag(){
         this.flag = presenter.getFlag();
+    }
+    @Override
+    public void changeFlag2(){
+        this.flag2 = presenter.getFlag();
     }
 }

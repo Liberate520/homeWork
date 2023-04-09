@@ -2,6 +2,7 @@ package model.commands;
 
 public interface CommandsInterface {
     String getName();
-    String result();
+    String getKey();
+    String result(String text);
 
 }

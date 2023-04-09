@@ -18,4 +18,9 @@ public class Note {
     public Date getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        return "дата записи: " + date + "| запись: " + text;
+    }
 }

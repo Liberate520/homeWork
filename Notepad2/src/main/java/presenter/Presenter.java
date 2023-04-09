@@ -3,7 +3,6 @@ package presenter;
 import model.ModelInterface;
 import ui.View;
 
-import java.util.List;
 
 public class Presenter {
     private View view; //связываем через интерфейсы
@@ -27,12 +26,15 @@ public class Presenter {
      */
     public void getAnswer(String commandNumber) {
         String result = modelInterface.commandResult(commandNumber); // отправляет комманду в модель
-        if (result.equals("Заметка создана")) {
-            view.newNote();
-        }
+
         if (result.equals("Выход")) {
+            view.changeFlag2();
             view.changeFlag();
         }
+        if (result.contains("Выход в главное меню")) {
+            view.changeFlag2();
+        }
+
         view.print(result); //печатает результат работы модели по отправленной комманде
     }
 
@@ -43,11 +45,6 @@ public class Presenter {
         String menu = modelInterface.createMenu(); //запрашивает меню у модуля
         view.print(menu); //отправляет полученое от модуля строку во view на печать
     }
-
-    public void createNote(String newNote){
-        modelInterface.createNewNote(newNote);
-    }
-
 
     public boolean getFlag() {
         return modelInterface.exit();
