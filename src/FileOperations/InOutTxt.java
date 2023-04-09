@@ -12,12 +12,12 @@ public class InOutTxt implements InOut {
         oos.close();
     }
 
-    public Serializable loadData(Serializable obj, String fileName) throws IOException, ClassNotFoundException {
+    public Serializable loadData(String fileName) throws IOException, ClassNotFoundException {
         fileName = fileName + ".txt";
         FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
 
-        obj = (Serializable) ois.readObject();
+        Serializable obj = (Serializable) ois.readObject();
         ois.close();
         return obj;
     }

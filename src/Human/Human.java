@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Human implements Serializable {
-    int id;
+public class Human extends Subject<Human> implements Serializable  {
+    private int id;
     private String status;
     private String name;
     private String surname;
@@ -14,7 +14,7 @@ public class Human implements Serializable {
     private LocalDate deathDate;
     private Human mother;
     private Human father;
-    public HashSet<Human> children;
+    //public HashSet<Human> children;
 
 
     public Human(int id, String status, String name, String surname, LocalDate birthDate, Human mother, Human father) {
@@ -76,6 +76,7 @@ public class Human implements Serializable {
         return "неизвестен";
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -84,6 +85,7 @@ public class Human implements Serializable {
         this.name = name;
     }
 
+    @Override
     public String getSurname() {
         return surname;
     }
@@ -92,6 +94,7 @@ public class Human implements Serializable {
         this.surname = surname;
     }
 
+    @Override
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -108,6 +111,7 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
     }
 
+    @Override
     public Human getMother() {
         return mother;
     }
@@ -116,6 +120,7 @@ public class Human implements Serializable {
         this.mother = mother;
     }
 
+    @Override
     public Human getFather() {
         return father;
     }
@@ -132,6 +137,7 @@ public class Human implements Serializable {
         this.children = children;
     }
 
+    @Override
     public String getStatus() {
         return status;
     }

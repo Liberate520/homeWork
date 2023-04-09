@@ -1,27 +1,26 @@
 package FamilyTree;
 
-import Human.Human;
-
+import Human.Subject;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class FamilyTree implements Iterable<Human>, Serializable {
-    private List<Human> familyTree;
+public class FamilyTree <E extends Subject<E>> implements Iterable<E>, Serializable {
+    private List<E> familyTree;
 
-    public List<Human> getFamilyTree() {
+    public List<E> getFamilyTree() {
         return familyTree;
     }
 
-    public FamilyTree(ArrayList<Human> familyTree) {
+    public FamilyTree(ArrayList<E> familyTree) {
         this.familyTree = familyTree;
     }
 
     public FamilyTree() {
-        this(new ArrayList<Human>());
+        this(new ArrayList<>());
     }
 
-    public void addKin(Human h) {
+    public void addKin(E h) {
         familyTree.add(h);
         if (this.familyTree.contains(h.getMother())) {
             h.getMother().children.add(h);
@@ -31,19 +30,19 @@ public class FamilyTree implements Iterable<Human>, Serializable {
         }
     }
 
-    public void removeKin(Human h) {
+    public void removeKin(E h) {
         familyTree.remove(h);
     }
 
-    public Human getHuman(String name, String surname) {
-        for (Human h : this.familyTree) {
+    public E getHuman(String name, String surname) {
+        for (E h : this.familyTree) {
             if (name.equals(h.getName()) && surname.equals(h.getSurname())) return h;
         }
         return null;
     }
 
-    public Human getHuman(String status) {
-        for (Human h : this.familyTree) {
+    public E getHuman(String status) {
+        for (E h : this.familyTree) {
             if (status.equals(h.getStatus())) return h;
         }
         return null;
@@ -60,24 +59,24 @@ public class FamilyTree implements Iterable<Human>, Serializable {
         return children;
     }*/
 
-    public Human getOldest() {
+    public E getOldest() {
         LocalDate dateDown = LocalDate.MAX;
-        Human human = null;
-        for (Human h : this.familyTree) {
-            if (h.birthDate.isBefore(dateDown)) {
-                dateDown = h.birthDate;
+        E human = null;
+        for (E h : this.familyTree) {
+            if (h.getBirthDate().isBefore(dateDown)) {
+                dateDown = h.getBirthDate();
                 human = h;
             }
         }
         return human;
     }
 
-    public Human getYoungest() {
+    public E getYoungest() {
         LocalDate dateUp = LocalDate.MIN;
-        Human human = null;
-        for (Human h : this.familyTree) {
-            if (h.birthDate.isAfter(dateUp)) {
-                dateUp = h.birthDate;
+        E human = null;
+        for (E h : this.familyTree) {
+            if (h.getBirthDate().isAfter(dateUp)) {
+                dateUp = h.getBirthDate();
                 human = h;
             }
         }
@@ -87,15 +86,15 @@ public class FamilyTree implements Iterable<Human>, Serializable {
     @Override
     public String toString() {
         String res = "";
-        for (Human h : familyTree) {
+        for (E h : familyTree) {
             res += h.toString();
         }
         return res;
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(familyTree);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(familyTree);
     }
 
 }

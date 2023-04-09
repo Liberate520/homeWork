@@ -3,11 +3,12 @@ import FileOperations.InOutTxt;
 
 import java.io.*;
 import java.time.LocalDate;
+
 import Human.Human;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<Human>();
         Service service = new Service(tree);
 
         service.addHuman("мать матери ego", "Галина", "Бородихина", LocalDate.of(1932, 1,
@@ -48,13 +49,16 @@ public class Main {
         //System.out.println(tree.getAllChildren("Галина", "Бородихина"));
         //System.out.println("=======");
         //System.out.println(tree.getHuman("Галина", "Бородихина").getChildren());
+        //System.out.println(tree.getHuman("Денис", "Мягков").getChildren());
 
-        /*System.out.println(tree);
+
+
+       /* System.out.println(tree);
         System.out.println("===");
         InOutTxt copy = new InOutTxt();
-        copy.saveData(tree, "copy11");
-        FamilyTree treeRestored = new FamilyTree();
-        treeRestored = (FamilyTree) copy.loadData(tree, "copy11");
+        copy.saveData(tree, "copy15");
+        FamilyTree <Human> treeRestored = new FamilyTree();
+        treeRestored = (FamilyTree) copy.loadData("copy15");
         System.out.println(treeRestored);*/
 
 /*        Iterator<Human.Human> iterator = tree.iterator();
@@ -63,7 +67,7 @@ public class Main {
             System.out.println(human);
         }*/
 
-        System.out.println(tree);
+       /* System.out.println(tree);
         System.out.println("=====");
         service.sortByName();
         System.out.println(tree);
@@ -71,8 +75,8 @@ public class Main {
         service.sortByBirthDate();
         System.out.println(tree);
         service.sortByID();
-        for (Human human: tree) {
+        for (Human human : tree) {
             System.out.printf("%d %s\n", human.getId(), human.getName());
-        }
+        }*/
     }
 }
