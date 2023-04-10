@@ -6,11 +6,11 @@ import java.io.ObjectOutputStream;
 
 public class LoadFile implements WriterReader {
     @Override
-    public void read(String fileAddress) throws IOException, ClassNotFoundException {
+    public FamilyTree read(String fileAddress) throws IOException, ClassNotFoundException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileAddress));
         FamilyTree tree =  (FamilyTree)in.readObject();
-        System.out.println(tree);
         in.close();
+        return tree;
     }
 
     @Override

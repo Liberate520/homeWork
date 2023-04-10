@@ -1,16 +1,45 @@
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class FamilyTree implements Serializable {
-    private HashSet<Human> tree;
+    private ArrayList<Human> tree;
     
-
-    FamilyTree() {
-        this.tree = new HashSet<Human>();
+    public FamilyTree() {
+        this.tree = new ArrayList<Human>();
     }
 
-    void add(Human h) {
+    public FamilyTree(ArrayList<Human> tree) {
+        this.tree = tree;
+    }
+
+    public void add(Human h) {
         this.tree.add(h);
+    }
+
+    public ArrayList<Human> getTree() {
+        return this.tree;
+    }
+
+    public FamilyTree sortByName() {
+        ArrayList<Human> res = new ArrayList<Human>();
+        res.addAll(this.tree);
+        res.sort(new CompareByName());
+        
+        return new FamilyTree(res);
+    }
+
+    public FamilyTree sortByBirthDate() {
+        ArrayList<Human> res = new ArrayList<Human>();
+        res.addAll(this.tree);
+        res.sort(new CompareByBirthDate());
+        
+        return new FamilyTree(res);
+    }
+
+    public void printTree() {
+        for (Human p : this.tree) {
+            System.out.println(p);
+        }
     }
 
 

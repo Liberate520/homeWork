@@ -1,39 +1,38 @@
 import java.util.HashSet;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Human implements Serializable {
     private String firstName, lastName, sex;
     private Human parent1, parent2;
     private HashSet<Human> childrens;
-    private int day, month, year;
+    private LocalDate birthDate;
 
-    Human(String firstName, String lastName, int day, int month, int year, String sex,
+    public Human(String firstName, String lastName, LocalDate birthDate, String sex,
                 Human parent1, Human parent2, HashSet<Human> childrens) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.birthDate = birthDate;
         this.sex = sex;
         this.parent1 = parent1;
         this.parent2 = parent2;
         this.childrens = new HashSet<Human>();
     }
 
-    Human(String firstName, String lastName, int day, int month, int year, String sex, Human parent1, Human parent2) {
-        this(firstName, lastName, day, month, year, sex, parent1, parent2, new HashSet<Human>());
+    public Human(String firstName, String lastName, LocalDate birthDate, String sex, Human parent1, Human parent2) {
+        this(firstName, lastName, birthDate, sex, parent1, parent2, new HashSet<Human>());
     }
 
-    Human(String firstName, String secondName, int day, int month, int year, String sex) {
-        this(firstName, secondName, day, month, year, sex, null, null, new HashSet<Human>());
+    public Human(String firstName, String secondName, LocalDate birthDate, String sex) {
+        this(firstName, secondName, birthDate, sex, null, null, new HashSet<Human>());
     }
 
-    Human(String firstName, String secondName, int day, int month, int year, String sex, Human parent) {
-        this(firstName, firstName, day, month, year, sex, parent, parent, new HashSet<Human>());
+    public Human(String firstName, String secondName, LocalDate birthDate, String sex, Human parent) {
+        this(firstName, firstName, birthDate, sex, parent, parent, new HashSet<Human>());
     }
 
-    Human(String firstName, String secondName, int day, int month, int year, String sex, HashSet<Human> childrens) {
-        this(firstName, firstName, day, month, year, sex, null, null, childrens);
+    public Human(String firstName, String secondName, LocalDate birthDate, String sex, HashSet<Human> childrens) {
+        this(firstName, firstName, birthDate, sex, null, null, childrens);
     }
 
     
@@ -56,16 +55,8 @@ public class Human implements Serializable {
         return lastName;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getYear() {
-        return year;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     public String getSex() {
@@ -102,13 +93,14 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return (this.firstName + " " + this.lastName);
+        return (this.firstName + " " + this.lastName + " (" + this.birthDate.getDayOfMonth() + 
+                    "." + this.birthDate.getMonthValue() + "." + this.birthDate.getYear() + ")");
     }
 
     @Override
     public int hashCode() {
         int result = (firstName != null ? firstName.hashCode() : 0) * (lastName != null ? lastName.hashCode() : 0) *
-                    (day) * (month) * (year) * (sex != null ? sex.hashCode() : 0);
+                    (birthDate != null ? birthDate.hashCode() : 0) * (sex != null ? sex.hashCode() : 0);
 
         return result + 99999999;
     }
@@ -121,9 +113,7 @@ public class Human implements Serializable {
         Human that = (Human) obj;
         if (firstName != that.firstName ||
             lastName != that.lastName ||
-            day != that.day ||
-            month != that.month ||
-            year != that.year ||
+            birthDate != that.birthDate ||
             sex != that.sex) return false;
 
         return true;
