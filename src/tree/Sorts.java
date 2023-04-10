@@ -12,19 +12,19 @@ public class Sorts<E extends Human> {
         this.tree = tr;
     }
 
-    public void SortbyName() {
+    public void sortbyName() {
         tree.getPeople().sort(new HumanComparebyName<E>());
     }
 
-    public void SortbyId() {
+    public void sortbyId() {
         tree.getPeople().sort(new HumanComparebyId<E>());
     }
 
-    public void SortbyChild() {
+    public void sortbyChild() {
         tree.getPeople().sort(new HumanComparebyChild<E>());
     }
 
-    public void SortbyBirthyear() {
+    public void sortbyBirthyear() {
         tree.getPeople().sort(new HumanComparebyBirthyear<E>());
     }
 }

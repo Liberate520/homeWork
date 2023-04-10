@@ -24,10 +24,14 @@ public class FamilyTree<E extends Human> implements Serializable, Tree<E> {
     }
 
     public void addpeople(E h, E mh, E fh) {
-        if (mh != null)
+        if (mh != null){
             mh.addchildren(h);
-        if (fh != null)
+            h.setMother(mh);
+        }
+        if (fh != null){
             fh.addchildren(h);
+            h.setFather(fh);
+        }
         h.setId(id++);
         people.add(h);
     }

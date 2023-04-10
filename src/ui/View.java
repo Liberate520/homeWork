@@ -7,7 +7,7 @@ import presenter.Presenter;
 import tree.Tree;
 
 public interface View<E> {
-    int start() throws ClassNotFoundException, IOException;
+    void start() throws ClassNotFoundException, IOException;
 
     void print(Tree<E> answer);
 

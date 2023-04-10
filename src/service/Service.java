@@ -5,5 +5,10 @@ import java.io.IOException;
 import tree.Tree;
 
 public interface Service<E> {
-    Tree<E> get(int n, String st) throws ClassNotFoundException, IOException;
+    E find (String st) throws ClassNotFoundException, IOException;
+    Tree<E> sortname();
+    Tree<E> sortbirthyear();
+    Tree<E> sortchild();
+    Tree<E> sortid();
+    Tree<E> addhuman(E human, E motherh, E fatherh);
 }

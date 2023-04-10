@@ -3,7 +3,6 @@ package presenter;
 import java.io.IOException;
 
 import service.Service;
-import tree.Tree;
 import ui.View;
 
 public class Presenter<E> {
@@ -16,8 +15,28 @@ public class Presenter<E> {
         view.setPresenter(this);
     }
 
-    public Tree<E> task(int num, String st) throws ClassNotFoundException, IOException {
-        Tree<E> answer = service.get(num, st);
-        return answer;
+    public E taskfind(String st) throws ClassNotFoundException, IOException {
+        E humanf = service.find(st);
+        return humanf;
+    }
+
+    public void sbyname() {
+        view.print(service.sortname());
+    }
+
+    public void sbyyear() {
+        view.print(service.sortbirthyear());
+    }
+
+    public void sbychild() {
+        view.print(service.sortchild());
+    }
+
+    public void sbyid() {
+        view.print(service.sortid());
+    }
+
+    public void addh(E human, E motherh, E fatherh) {
+        view.print(service.addhuman(human, motherh, fatherh));
     }
 }

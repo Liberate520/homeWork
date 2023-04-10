@@ -25,13 +25,6 @@ public class Main {
         Human human5 = new Human("Евфалия", "ж", 1907);
         Human human6 = new Human("Дарья", "ж", 1976);
 
-        human1.setMother(human2);
-        human1.setFather(human3);
-        human6.setFather(human3);
-        human6.setMother(human2);
-        human2.setMother(human5);
-        human3.setFather(human4);
-
         Tree<Human> famailytree = new FamilyTree<>();
 
         famailytree.addpeople(human1, human2, human3);
@@ -41,13 +34,11 @@ public class Main {
         famailytree.addpeople(human4, null, null);
         famailytree.addpeople(human5, null, null);
 
-        OutInput<Human> saveload = new Slfamailytree<>();
+        OutInput saveload = new Slfamailytree();
         saveload.save(famailytree);
         View<Human> view = new ConsoleUi<>();
         Service<Human> service = new TreeService<>();
         Presenter<Human> presenter = new Presenter<>(view, service);
-        int num = 0;
-        while (num != 6)
-            num = view.start();
+        view.start();
     }
 }
