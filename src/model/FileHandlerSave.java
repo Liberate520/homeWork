@@ -54,7 +54,7 @@ public class  FileHandlerSave<T> implements SaveAs<T>
         @Override
         public int SaveFormat(T t) throws ClassNotFoundException, IOException 
         {
-            int number = Console.Start1(t);
+            int number = Console.Start1();
             
             switch (number)
                 {

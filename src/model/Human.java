@@ -166,11 +166,6 @@ public class Human<T extends Node> implements Serializable, Node
             return Period.between(dataBirth, dataDeath).getYears();
     }
 
-    // @Override
-    // public String getName() {
-        
-    //     return getFirstName();
-    //}
     
     @Override
     public String toString() {
@@ -214,12 +209,12 @@ public class Human<T extends Node> implements Serializable, Node
     }
 
 
-    public Node get(int i) {
-        return null;
-    }
+    // public Node get(int i) {
+    //     return null;
+    // }
 
 
-    public static int size() {
-        return 0;
-    }
+    // public static int size() {
+    //     return 0;
+    // }
 }

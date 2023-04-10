@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +34,7 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
     }
 
 
-    public static <T extends FamilyTree> void findHuman(FamilyTree familyTree)
+    public static <T extends Human> void findHuman(FamilyTree familyTree)
     {
         System.out.println("Введите фамилию для поиска:");
         Scanner sc1 = new Scanner(System.in, "cp866");
@@ -44,11 +45,11 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
         String findFirstName = sc2.nextLine();
 
         boolean find=false;
-        for (int i = 0; i < FamilyTree.size(); i++) 
+        for (int i = 0; i < ((Collection<FamilyTree>) familyTree).size(); i++) 
         {
-            if (familyTree.get(i).getLastName().contains(findLastName) && (familyTree.get(i).getFirstName().contains(findFirstName))); 
+            if (((Node) ((List<T>) familyTree).get(i)).getLastName().contains(findLastName) && (((Node) ((List<T>) familyTree).get(i)).getFirstName().contains(findFirstName))); 
             {
-                System.out.println(familyTree.get(i));
+                System.out.println(((List<T>) familyTree).get(i));
                 find=true;
             }    
         
@@ -59,13 +60,6 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
         }
     } 
 
-    public Node get(int i) {
-        return null;
-    }
-
-    public static int size() {
-        return 0;
-    }
 
     @Override
     public Iterator<T> iterator(){

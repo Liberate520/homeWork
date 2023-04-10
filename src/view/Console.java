@@ -11,7 +11,7 @@ public class Console<T> implements View<T>
  {
     static Scanner scanner;
     private Presenter presenter;
-    public static boolean work = true;
+    private static boolean work = true;
 
     public Console()
     {
@@ -44,7 +44,7 @@ public class Console<T> implements View<T>
     }
 
     
-        public static void tabloFirst()
+        private void tabloFirst()
         {
             System.out.println("""
                                 Выберите формат сохранения фамильного дерева:
@@ -63,7 +63,7 @@ public class Console<T> implements View<T>
                                 """);
         }
     
-        public static void tabloSave()
+        private static void tabloSave()
         {
             System.out.println("""
                                 Выберите формат сохранения фамильного дерева:
@@ -83,7 +83,7 @@ public class Console<T> implements View<T>
                                 """);
         }
 
-        public static void tabloRead2()
+        private static void tabloRead2()
     {
         System.out.println("""
                             Выберите формат чтения файла:
@@ -101,7 +101,7 @@ public class Console<T> implements View<T>
                             """);
     }    
 
-    public static void tabloRead11()
+    private static void tabloRead11()
     {
         System.out.println("""
                             Хотите прочесть содержание записанного Вами файла?
@@ -115,9 +115,9 @@ public class Console<T> implements View<T>
                             """);
     }    
 
-    public static <T> int Start1(T t)
+    public static int Start1()
         {
-            Console.tabloSave();
+            tabloSave();
             int number = readNumberConsole();
             while(number < 1 || number > 6)
               {
@@ -128,9 +128,9 @@ public class Console<T> implements View<T>
         return number;
         }
 
-        public static <T> int Start2(T t)
+        public static int Start2()
         {
-            Console.tabloRead11();
+            tabloRead11();
             int number = readNumberConsole();
             while(number < 1 || number > 3)
             {
@@ -141,14 +141,14 @@ public class Console<T> implements View<T>
           return number;
         }
         
-        public static <T> int Start3(T t)
+        public static int Start3()
         {
-            Console.tabloRead2();
+            tabloRead2();
             int number = readNumberConsole();
             while(number < 1 || number > 5)
             {
                 System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
-                Console.tabloRead2();
+                tabloRead2();
                 number = readNumberConsole();
             }
           return number;

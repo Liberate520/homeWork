@@ -78,12 +78,12 @@ public class FileHandlerRead<T> implements SaveAs<T>
     public int SaveFormat(T t) throws ClassNotFoundException, IOException 
     {
         
-        int number = Console.Start2(t);
+        int number = Console.Start2();
 
             switch (number)
             {
                 case 1:
-                  int number2 = Console.Start3(t);
+                  int number2 = Console.Start3();
                     switch (number2)
                     {
                         case 1:
