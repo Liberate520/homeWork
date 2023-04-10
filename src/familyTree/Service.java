@@ -1,10 +1,11 @@
-import familyTree.FamilyTree;
+package familyTree;
+
 import familyTree.comparators.HumanComparatorByBirthday;
-import familyTree.comparators.HumanComparatorById;
+import familyTree.comparators.IdComparator;
 import familyTree.comparators.HumanComparatorByName;
 import familyTree.comparators.HumanCompareByNumberChild;
-import human.Gender;
-import human.Human;
+import member.Gender;
+import member.Human;
 import service.FileHandler;
 
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class Service {
     }
 
     public void sortById () {
-        tree.getHumanList().sort(new HumanComparatorById());
+        tree.getHumanList().sort(new IdComparator());
     }
 
     public void sortByBirthday () {

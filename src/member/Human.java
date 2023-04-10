@@ -1,15 +1,12 @@
-package human;
+package member;
 
-import familyTree.HumanIterator;
-import familyTree.comparators.Group;
-import familyTree.comparators.PetCompareByName;
+import member.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Human implements Serializable {
@@ -63,27 +60,26 @@ public class Human implements Serializable {
         this.mother = null;
     }
 
-    @Override
-    public void addHuman(Human human) {
+//    @Override
+//    public void addHuman(Human human) {
+//
+//
+//    }
 
-
-    }
-
-    @Override
-    public void addPet(Human pets) {
-
-
-    }
-
-    @Override
-    public List<Human> getHumanList() {
-        return null;
-    }
-
-    @Override
-    public List<Human> getPetList() {
-        return null;
-    }
+//    @Override
+//    public void addPet(Human pets) {
+//
+//    }
+//
+//    @Override
+//    public List<Human> getHumanList() {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Human> getPetList() {
+//        return null;
+//    }
 
     public String getName() {
         return name;
@@ -273,8 +269,8 @@ public class Human implements Serializable {
         return human.getName().equals(getName());
     }
 
-    @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator<>(getHumanList());
-    }
+//    @Override
+//    public Iterator<Human> iterator() {
+//        return new HumanIterator<>(getHumanList());
+//    }
 }

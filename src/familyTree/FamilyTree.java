@@ -10,7 +10,8 @@ import java.util.List;
 
 
 //public class FamilyTree<E extends Human> implements Group<E>, Serializable, Iterable<E>  {
-public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, Iterable<E>  {
+//public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, Iterable<E>  {
+public class FamilyTree<E> implements Group<E>, Iterable<E>, Serializable  {
 
     // public String name;
     private E root;
@@ -29,31 +30,28 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
     public E getRoot() {
         return root;
     }
-
     @Override
     public List<E> getPetList() {
         return petList;
     }
-
     @Override
     public String getName() {
         if (root != null) {
-            return root.getName();
+            return root.getClass().getName();
         }
         return null;
     }
     @Override
     public String getSurname() {
         if (root != null) {
-            return root.getSurname();
+            return root.getSurname;
         }
         return null;
     }
-    @Override
+
     public List<E> getHumanList() {
         return humanList;
     }
-
     public void setRoot(E root) {
         this.root = root;
     }
@@ -61,7 +59,7 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
     public E getByName(String name) {
         for (E human :
                 humanList) {
-            if (human.getName().equals(name))
+            if (human.getClass().getName().equals(name))
                 return human;
         }
         return null;
@@ -69,12 +67,11 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
     public E getBySurname(String surname) {
         for (E human :
                 humanList) {
-            if (human.getSurname().equals(surname))
+            if (human.getClass().getSurname().equals(surname))
                 return human;
         }
         return null;
     }
-
     public void addHuman(E human) {
         humanList.add(human);
     }
@@ -127,6 +124,5 @@ public class FamilyTree<E extends Group<E>> implements Group<E>, Serializable, I
     public Iterator<E> iterator() {
         return new HumanIterator<>(humanList);
     }
-
 
 }

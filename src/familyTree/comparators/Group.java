@@ -2,13 +2,11 @@ package familyTree.comparators;
 
 import java.util.List;
 
-public interface Group<E> extends Iterable<E> {
+public interface Group<T> extends Iterable<T> {
 
-    void addHuman(E human);
-    void addPet(E pets);
+    void addHuman(T human);
 
-    List<E> getHumanList();
-    List<E> getPetList();
+    List<T> getHumanList();
 
    // List<E> getChildList();
 
@@ -17,8 +15,8 @@ public interface Group<E> extends Iterable<E> {
 
     String getSurname();
     String getInfo();
-    E getFather();
-     E getMother();
+   // E getFather();
+   //  E getMother();
 
     void addChild(E human);
 }

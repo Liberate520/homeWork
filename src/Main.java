@@ -1,6 +1,7 @@
 import familyTree.FamilyTree;
-import human.Gender;
-import human.Human;
+import familyTree.Service;
+import member.Gender;
+import member.Human;
 import service.FileHandler;
 
 public class Main {
