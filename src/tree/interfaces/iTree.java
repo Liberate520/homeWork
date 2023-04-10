@@ -2,12 +2,12 @@ package tree.interfaces;
 
 import java.util.List;
 
-import tree.classes.Human;
+//import tree.classes.Human;
 
-public interface iTree {
+public interface iTree<E> {
 
-    List<Human> getTree();
+    List<E> getTree();
 
-    void addPerson(Human person);
+    void addPerson(E person);
 
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import tree.interfaces.iTree;
 
-public interface SaveLoad extends Serializable {
-    void save (iTree treeToSave, String path);
-    iTree load (String path);
+public interface SaveLoad<E> extends Serializable {
+    void save (iTree<E> treeToSave, String path);
+    iTree<E> load (String path);
 }

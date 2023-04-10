@@ -5,9 +5,9 @@ import filesystem.interfaces.SaveLoad;
 import tree.classes.Tree;
 import tree.interfaces.iTree;
 
-public class SaveRestore implements SaveLoad {
+public class SaveRestore<E> implements SaveLoad<E> {
     @Override
-    public void save (iTree treeToSave, String path) {
+    public void save (iTree<E> treeToSave, String path) {
 
         ObjectOutputStream objectOutputStream;
         try {
@@ -22,13 +22,13 @@ public class SaveRestore implements SaveLoad {
     }
 
     @Override
-    public iTree load(String path) {
-        iTree treeRestored = new Tree();
+    public iTree<E> load(String path) {
+        iTree<E> treeRestored = new Tree<E>();
         ObjectInputStream objectInputStream;
         try {
             objectInputStream = new ObjectInputStream(
                     new FileInputStream(path));
-            treeRestored = (iTree) objectInputStream.readObject();
+            treeRestored = (iTree<E>) objectInputStream.readObject();
             objectInputStream.close();
         } catch (IOException e) {
             e.printStackTrace();

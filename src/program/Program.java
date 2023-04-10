@@ -11,8 +11,8 @@ import tree.classes.Tree;
 public class Program {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Tree tree = new Tree();
-        Sorting sort = new Sorting(tree);
+        Tree<Human> tree = new Tree<Human>();
+        Sorting<Human> sort = new Sorting<Human>(tree);
 
         // 1st gen
         Human mikhailFedorovich = new Human("Михаил",

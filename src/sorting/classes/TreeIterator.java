@@ -3,14 +3,14 @@ package sorting.classes;
 import java.util.Iterator;
 import java.util.List;
 
-import tree.classes.Human;
+//import tree.classes.Human;
 
-public class TreeIterator implements Iterator<Human> {
+public class TreeIterator<E> implements Iterator<E> {
 
     private int index = 0;
-    private List<Human> humanList;
+    private List<E> humanList;
 
-    public TreeIterator (List<Human> listOfHumans){
+    public TreeIterator (List<E> listOfHumans){
         this.humanList = listOfHumans;
     }
 
@@ -21,7 +21,7 @@ public class TreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return humanList.get(index++);
     }
     

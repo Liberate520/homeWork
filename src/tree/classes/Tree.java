@@ -10,37 +10,33 @@ import sorting.classes.TreeIterator;
 import tree.interfaces.iTree;
 
 
-public class Tree implements SaveLoad, Iterable<Human>, iTree {
-    private List<Human> persons = new ArrayList<>();
+public class Tree<E> implements SaveLoad<E>, Iterable<E>, iTree<E> {
+    private List<E> persons = new ArrayList<>();
 
     @Override
-    public List<Human> getTree(){
+    public List<E> getTree(){
         return persons;
     }
 
     @Override
-    public void addPerson(Human person) {
+    public void addPerson(E person) {
         persons.add(person);
     }
 
-    //@Override
     @Override
-    public void save(iTree treeToSave, String path) {
-        SaveRestore saving = new SaveRestore();
+    public void save(iTree<E> treeToSave, String path) {
+        SaveRestore<E> saving = new SaveRestore<E>();
         saving.save(treeToSave, path);
-        //throw new UnsupportedOperationException("Unimplemented method 'Save'");
     }
 
-    //@Override
     @Override
-    public iTree load(String path) {
-        SaveRestore loading = new SaveRestore();
+    public iTree<E> load(String path) {
+        SaveRestore<E> loading = new SaveRestore<E>();
         return loading.load(path);
-        //throw new UnsupportedOperationException("Unimplemented method 'Load'");
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new TreeIterator(persons);
+    public Iterator<E> iterator() {
+        return new TreeIterator<E>(persons);
     }
 }

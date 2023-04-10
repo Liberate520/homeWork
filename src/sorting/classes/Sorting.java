@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import tree.classes.Human;
+// import tree.classes.Human;
+// import tree.classes.Tree;
 import tree.interfaces.iTree;
 
-public class Sorting {
-    private List<Human> persons = new ArrayList<>();
-    private iTree tree;
+public class Sorting<E> {
+    private List<E> persons = new ArrayList<>();
+    private iTree<E> tree;
 
-    public Sorting(iTree tree)
+    public Sorting(iTree<E> tree)
     {
         this.tree = tree;
     }
