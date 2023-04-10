@@ -1,14 +1,17 @@
+package human1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable {
+    private int id;
     private String name;
     private Human mother;
     private Human father;
     private List<Human> children;
 
-    public Human(String name, Human mother, Human father) {
+    public Human(int id, String name, Human mother, Human father) {
+        this.id = id;
         this.name = name;
         this.mother = mother;
         this.father = father;
@@ -17,12 +20,19 @@ public class Human implements Serializable {
 
     public Human(String name) {this(name, null, null); }
 
+    public Human(String name2, Object object, Object object2) {
+    }
+
     public boolean addChild(Human child) {
         if (!children.contains(child)) {
             children.add(child);
             return true;
         }
         return false;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -44,7 +54,9 @@ public class Human implements Serializable {
 
     public String printHuman(){
         StringBuilder sb = new StringBuilder();
-        sb.append("имя: ");
+        sb.append("№ ");
+        sb.append(id);
+        sb.append(" имя: ");
         sb.append(name);
         sb.append(", ");
         sb.append(getMotherInfo());

@@ -1,8 +1,15 @@
+package tree1;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
-public class FamilyTree implements Serializable {
+import human1.Human;
+import human1.HumanComparatorById;
+import human1.HumanComparatorByName;
+
+import java.io.Serializable;
+import java.util.Iterator;
+
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public FamilyTree() {
@@ -61,5 +68,18 @@ public class FamilyTree implements Serializable {
     @Override
     public String toString() {
         return printTree();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new TreeIterator(humanList);
+    }
+
+    public void sortById() {
+        humanList.sort(new HumanComparatorById());
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
     }
 }
