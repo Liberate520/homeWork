@@ -3,33 +3,47 @@ import famyilyTree.Serial;
 import human.Gender;
 import human.Human;
 
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
         String filename = "data.txt";
-        FamilyTree tree = new FamilyTree();
         Serial serial = new Serial();
+        FamilyTree someFamily = new FamilyTree();
+        Service service = new Service(someFamily);
 
-        tree.add(new Human("Никита", Gender.Male));
-        tree.add(new Human("Ольга", Gender.Female));
-        tree.add(new Human("Станислав", Gender.Male, tree.getByName("Никита"), tree.getByName("Ольга")));
-        tree.add(new Human("Нина", Gender.Female, tree.getByName("Никита"), tree.getByName("Ольга")));
-        tree.add(new Human("Павел", Gender.Male));
-        tree.add(new Human("Виктор", Gender.Male));
-        tree.add(new Human("Елена", Gender.Female));
-        tree.add(new Human("Валенитин", Gender.Male));
-        tree.add(new Human("Алена", Gender.Female));
-        tree.add(new Human("Валерий", Gender.Male, tree.getByName("Виктор"), tree.getByName("Елена")));
+        service.addHuman("Никита", "Свиридов", Gender.Male,
+                LocalDate.of(1968, 1, 15));
 
-        System.out.println(tree.getInfo());
+        service.addHuman("Ирина", "Андреева", Gender.Female,
+                LocalDate.of(1970, 8, 13));
 
-        // Сериализация
-        serial.saveToFile(tree, filename);
+        service.addHuman("Павел", "Свиридов", Gender.Male,
+                LocalDate.of(19, 3, 8),
+                service.getFamilyGroup().getById(1), service.getFamilyGroup().getById(2));
 
-        // Десериализация
-        FamilyTree tree2 = serial.loadFromFile(filename);
+        service.addHuman("Светлана", "Свиридова", Gender.Female,
+                LocalDate.of(2023, 8, 18),
+                 service.getFamilyGroup().getById(1),service.getFamilyGroup().getById(2));
 
-        System.out.println(tree2.getInfo());
-        System.out.println(tree.equals(tree2));
+
+        System.out.println(someFamily.getInfo());
+
+//        //---- Сериализация
+//        serial.saveToFile(someFamily, filename);
+//
+//        //---- Десериализация
+//        FamilyTree tree2 = serial.loadFromFile(filename);
+//
+//        System.out.println(tree2.getInfo());
+//
+//        System.out.println(someFamily.equals(tree2));
+
+        service.sortByLastName();
+        System.out.println(someFamily.getInfo());
+
+        service.sortByID();
+        System.out.println(someFamily.getInfo());
     }
 }
 
