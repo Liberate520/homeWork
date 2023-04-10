@@ -38,12 +38,12 @@ public class Main {
 //        objectOutputStream.close();
 
 //        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.out"));
-//        human.Human sisterout1 = (human.Human) objectInputStream.readObject();
-//        TreeFamily.TreeFamily treeOut = (TreeFamily.TreeFamily) objectInputStream.readObject();
+//        Human sisterout1 = (human.Human) objectInputStream.readObject();
+//        TreeFamily treeOut1 = (TreeFamily) objectInputStream.readObject();
 //        objectInputStream.close();
 
-        //System.out.println();
-        //System.out.println(treeOut);
+        System.out.println();
+        System.out.println(treeOut);
 
         System.out.println();
 
@@ -56,13 +56,8 @@ public class Main {
 
 
         tr.sortByName();
-        for (Human human: tree){
+        for (Human human: tree) {
             System.out.println(human);
         }
-
-
-
-    
-
     }
 }

@@ -2,8 +2,6 @@ package TreeFamily;
 
 import human.Human;
 import human.HumanIterator;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -100,10 +98,7 @@ public class TreeFamily implements Iterable<Human>, Serializable{
                 '}';
     }
 
-    public void save(Writable writable) throws IOException {
-        writable.save(this);
 
-    }
 
     @Override
     public Iterator<Human> iterator() {
