@@ -2,13 +2,16 @@ package Homeworks.OOPHW.OOP_homeWork_L5.src.View;
 
 import java.util.Scanner;
 
+import Homeworks.OOPHW.OOP_homeWork_L5.src.Model.Note;
 import Homeworks.OOPHW.OOP_homeWork_L5.src.Presenter.Presenter;
 
 public class ConsoleView implements View {
 
-    public static void start() {
+    @Override
+    public void start() {
         Scanner scan = new Scanner (System.in, "Cp866");
-        Presenter presenter = new Presenter("Homeworks/OOPHW/OOP_homeWork_L5/src/Notepad.txt");
+        View view = new ConsoleView();
+        Presenter presenter = new Presenter(view, "Homeworks/OOPHW/OOP_homeWork_L5/src/Notepad.txt");
         // Homeworks\OOPHW\OOP_homeWork_L5\src\Notepad.txt
         System.out.println("Начало работы с блокнотом.");
         int point = 0;
@@ -38,4 +41,9 @@ public class ConsoleView implements View {
         scan.close();
     }
     
+    @Override
+    public void printAddNote(String noteTitle, String noteText) {
+        Note nnote = new Note(noteTitle, noteText);
+        System.out.println("Добавлена новая заметка\n" + nnote.toString());
+    }
 }

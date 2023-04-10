@@ -20,11 +20,12 @@ public class Model {
         try {
             File file = new File(this.curPath);
             FileReader fr = new FileReader(file);
-            final BufferedReader br = new BufferedReader(fr);
+            BufferedReader br = new BufferedReader(fr);
+            curNotepad = new Notepad();
             String nTitle = br.readLine();
             while (nTitle != null) {
                 String nText = br.readLine();
-                this.curNotepad.add(new Note(nTitle, nText));
+                curNotepad.add(new Note(nTitle, nText));
                 nTitle = br.readLine();
             }
             br.close();
@@ -44,16 +45,11 @@ public class Model {
             fw.append(noteTitle);
             fw.append('\n');
             fw.append(noteText);
+            fw.flush();
             fw.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    
-    public String printAddNote(String noteTitle, String noteText) {
-        Note nnote = new Note(noteTitle, noteText);
-        return "Добавлена новая заметка\n" + nnote.toString();
-    }
-    
 }
