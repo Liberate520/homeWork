@@ -1,8 +1,6 @@
 package view;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import presenter.Presenter;
