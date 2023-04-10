@@ -1,4 +1,7 @@
+package Tree.Comporators;
 import java.util.Comparator;
+
+import Person.Person;
 
 public class ComparBySecondName implements Comparator<Person>{
 

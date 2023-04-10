@@ -1,18 +1,23 @@
+package Tree;
 
-import java.io.Serializable;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Iterable<Person>,  Serializable{
+import Person.*;
 
-    private List<Person> familytree;
+public class FamilyTree<E extends Person> implements Tree<E>{
+
+    private List<E> familytree;
     
 
     /**
      * @param familytree Список семейного древа
      */
-    public FamilyTree(List<Person> familytree){
+    public FamilyTree(List<E> familytree){
         this.familytree = familytree;
     }
 
@@ -27,7 +32,7 @@ public class FamilyTree implements Iterable<Person>,  Serializable{
      * @param person Человек
      * Добавление человека в семейное древо
      */
-    public void addPerson(Person person){
+    public void addPerson(E person){
         familytree.add(person);
     }
 
@@ -35,7 +40,7 @@ public class FamilyTree implements Iterable<Person>,  Serializable{
      * @param person Человек
      * @return Добавление человека в семейное древо с проверкой и объединением Отца, Матери и Детей
      */
-    public boolean add(Person person){
+    public boolean add(E person){
         if (person == null){
             return false;
         }
@@ -73,7 +78,7 @@ public class FamilyTree implements Iterable<Person>,  Serializable{
     /**
      * @return Получение списка семейного древа
      */
-    public List<Person> getPersonList(){
+    public List<E> getPersonList(){
         return familytree;
     }
 
@@ -95,17 +100,38 @@ public class FamilyTree implements Iterable<Person>,  Serializable{
                 
             }
         }
-        for (Person person: familytree){
+        for (E person: familytree){
             sb.append(person.getInfo());
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    @Override
-    public Iterator<Person> iterator(){
-        return new PersonSort(familytree);
+    /**
+     * @param familytree Список семейного древа
+     * @param fileName Имя файла
+     *  Сохранение семейного древа в файл
+     */
+    public void save(Tree<Person> familytree, String fileName) {
+        StringBuilder sb = new StringBuilder();
+        for (Person person: familytree){
+            sb.append(person);
+            sb.append("\n"); 
+        }
+
+        File file = new File(fileName);
+        try{
+            FileWriter fr = new FileWriter(file,false);
+            fr.write(sb.toString());    
+            fr.close();
+        }
+        catch(IOException e) {
+            System.out.println("ERROR");
+        }
     }
 
-   
+    @Override
+    public Iterator<E> iterator(){
+        return new PersonIterator<E>(familytree);
+    }
 }

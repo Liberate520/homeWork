@@ -1,3 +1,5 @@
+package SaveAndLoad;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,35 +8,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class SaveLoad  {
+import Person.Person;
+import Tree.FamilyTree;
 
+public class SaveSerialization{
 
-    /**
-     * @param familytree Список семейного древа
-     * @param fileName Имя файла
-     *  Сохранение семейного древа в файл
-     */
-    public static  void save(FamilyTree familytree, String fileName) {
-
-        StringBuilder sb = new StringBuilder();
-        for (Person person: familytree){
-            sb.append(person);
-            sb.append("\n"); 
-        }
-
-        File file = new File(fileName);
-        try{
-            FileWriter fr = new FileWriter(file,false);
-            fr.write(sb.toString());
-            // fr.write("\n");
-    
-            fr.close();
-        }
-        catch(IOException e) {
-            System.out.println("ERROR");
-        }
-
-    }   
 
     // Нерабочие методы !!!
     

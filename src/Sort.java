@@ -1,14 +1,21 @@
-import java.util.Iterator;
 import java.util.List;
 
-public class PersonSort implements Iterator<Person>{
-    private int index;
+import Person.Person;
+import Tree.Comporators.ComparByAlive;
+import Tree.Comporators.ComparByChild;
+import Tree.Comporators.ComparByName;
+import Tree.Comporators.ComparBySecondName;
+
+public class Sort{
     private List<Person> familytree;
+
+    public Sort(List<Person> personList) {
+    }
 
     /**
      * @param familytree Список семейного древа
      */
-    public PersonSort(List<Person> familytree){
+    public void PersonSort(List<Person> familytree){
         this.familytree = familytree;
     }
 
@@ -40,13 +47,4 @@ public class PersonSort implements Iterator<Person>{
         familytree.sort(new ComparByAlive());
     }    
 
-    @Override
-    public boolean hasNext() {
-        return index < familytree.size();
-    }
-
-    @Override
-    public Person next() {
-        return familytree.get(index++);
-    }
 }

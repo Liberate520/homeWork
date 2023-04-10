@@ -1,9 +1,10 @@
-import java.io.Serializable;
+package Person;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person implements Comparable<Person>, Serializable{
+public class Person implements Comparable<Person>{
     
     private String firstname;
     private String secondname;

@@ -1,5 +1,9 @@
 import java.io.IOException;
-import java.util.List;
+
+import Consol.SysOut;
+import Person.Person;
+import Tree.FamilyTree;
+import Tree.Tree;
 
 
 
@@ -18,8 +22,8 @@ public class Main {
         
     public static void main(String[] args) throws ClassNotFoundException, IOException  {
 
-        FamilyTree familytree = new FamilyTree();
-        PersonSort familyIterator = new PersonSort(familytree.getPersonList());
+        Tree <Person> familytree = new FamilyTree<>();
+        Sort familyIterator = new Sort(familytree.getPersonList());
 
         // Добавление детей людям
         person2.addChild(person1);
@@ -106,7 +110,5 @@ public class Main {
         // SaveLoad.save(familytree,"FamilyTree.txt");
 
         SysOut.SysOut(familytree);
-
     }
-
 }
