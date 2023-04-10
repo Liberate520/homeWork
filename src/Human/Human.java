@@ -1,16 +1,20 @@
+package Human;
+
 import java.io.Serializable;
+import java.time.LocalDate;
+
 public class Human implements Serializable{
     private String name;
     private String surname;
-    private String birthday;
+    private LocalDate birthday;
     private Human mother;
     private Human father;
-    public Human(String name, String surname, String birthday) {
+    public Human(String name, String surname, LocalDate birthday) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
     }
-    public Human(String name, String surname, String birthday, Human mother,Human father) {
+    public Human(String name, String surname, LocalDate birthday, Human mother,Human father) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
@@ -23,7 +27,7 @@ public class Human implements Serializable{
     public String getSurname() {
         return surname;
     }
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
     public Human getMother() {
@@ -47,6 +51,8 @@ public class Human implements Serializable{
         if (getName() != null ? !getName().equals(human.getName()) : human.getName() != null) return false;
         return getSurname() != null ? getSurname().equals(human.getSurname()) : human.getSurname() == null;
     }
+
+
 }
 
 

@@ -1,3 +1,8 @@
+package tree;
+
+import Human.Human;
+import tree.HumanIterator;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,5 +55,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public Iterator<Human> iterator() {
         return new HumanIterator(tree);
+    }
+
+    public List<Human> getTree() {
+        return tree;
     }
 }
