@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human James = new Human("James", "Potter", 27, 3, 1960, "Male");
         Human Lily = new Human("Lily", "Potter", 30, 1, 1960, "Female");
 
@@ -33,6 +35,9 @@ public class Main {
 
 
         System.out.println(potterTree);
-        potterTree.saveFile(potterTree.toString(), "src/PotterTree.txt");
+
+        LoadFile load = new LoadFile();
+        load.save(potterTree, "treeOut.out");
+        load.read("treeOut.out");
     }
 }

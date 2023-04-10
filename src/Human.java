@@ -1,6 +1,7 @@
 import java.util.HashSet;
+import java.io.Serializable;
 
-public class Human {
+public class Human implements Serializable {
     private String firstName, lastName, sex;
     private Human parent1, parent2;
     private HashSet<Human> childrens;

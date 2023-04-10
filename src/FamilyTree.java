@@ -1,6 +1,7 @@
 import java.util.HashSet;
+import java.io.Serializable;
 
-public class FamilyTree implements WriterReader {
+public class FamilyTree implements Serializable {
     private HashSet<Human> tree;
     
 
@@ -12,7 +13,7 @@ public class FamilyTree implements WriterReader {
         this.tree.add(h);
     }
 
-    
+
 
     @Override
     public String toString() {
