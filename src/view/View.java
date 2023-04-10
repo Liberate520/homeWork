@@ -4,10 +4,10 @@ import java.io.IOException;
 import model.FamilyTree;
 import presenter.Presenter;
 
-public interface View 
+public interface View<T> 
 {
-    FamilyTree StartProgram(FamilyTree familyTree) throws ClassNotFoundException, IOException;
-    void print(FamilyTree familyTree);
+    T StartProgram(T t) throws ClassNotFoundException, IOException;
+    void print(T t);
     void setPresenter(Presenter presenter);
     
 }

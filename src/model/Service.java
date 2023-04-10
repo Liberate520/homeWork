@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Service<T extends Human>
+public class Service<T extends Node>
 {
-    public <T extends Human> FamilyTree Service()
+    public <T extends Node> FamilyTree Service()
     {
         FamilyTree familyTree = new FamilyTree();
         
@@ -75,18 +75,37 @@ public class Service<T extends Human>
             familyTree.addPerson(value); // добавляем людей (Human) в цикле
         }
         //  System.out.println("Печать дерева после цикла: \n" + familyTree); // печать дерева после добавления людей (human) через цикл!
-         return familyTree;
+        //  return familyTree;
+
+        return familyTree;
+    }
+
+    public <T extends Node> FamilyTree Service1()
+    {
+        FamilyTree familyTree = new FamilyTree();
+        Others others1 = new Others(1, "иван", "инженер");
+        Others others2 = new Others(2, "петр", "программист");
+        
+        List<Others> otherList = new ArrayList<>(Arrays.asList(others1, others2));
+
+         for (Others value : otherList)  
+         {
+             familyTree.addPerson(value); // добавление Others
+         }
+        // System.out.println(familyTree); // печать дерева с Others
+        return familyTree;
     }
  
-     public void SortId(FamilyTree familyTree)
+     public<T> void SortId(T t)
      {
-        familyTree.sortById();  //сортировка по Id
-        System.out.println("Список, отсортированный по Id: " + familyTree);
+        ((FamilyTree) t).sortById();  //сортировка по Id
+        System.out.println("Список, отсортированный по Id: " + t);
      }
      
-     public void sortByLastName(FamilyTree familyTree)
+     public <T> void  sortByLastName(T t)
      {
-        familyTree.sortByLastName(); // сортировка по Фамилии
-        System.out.println("Список, отсортированный по фамилии: " + familyTree);
+        ((FamilyTree) t).sortByLastName(); // сортировка по Фамилии
+        System.out.println("Список, отсортированный по фамилии: " + t);
      }
+    
 }

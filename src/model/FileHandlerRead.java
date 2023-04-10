@@ -7,19 +7,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import view.Console;
 
-public class FileHandlerRead implements SaveAs
+public class FileHandlerRead<T> implements SaveAs<T>
 {
     
-    public static void Reader() throws IOException, ClassNotFoundException
+    public static <T> void Reader() throws IOException, ClassNotFoundException
     {
         FileInputStream fis = new FileInputStream("text.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);
-        FamilyTree familyTree1 = (FamilyTree) ois.readObject();
+        T t1 = (T) ois.readObject();
         ois.close();
-        System.out.println("вывод 1: " + familyTree1);
+        System.out.println("вывод 1: " + t1);
     }    
 
-    public static String ReadTxt() throws IOException, ClassNotFoundException
+    public static <T> String ReadTxt() throws IOException, ClassNotFoundException
     {
         
         FileReader fr = new FileReader("file.txt");
@@ -37,7 +37,7 @@ public class FileHandlerRead implements SaveAs
         return sb.toString();
     }
 
-    public static String ReadMD() throws IOException, ClassNotFoundException
+    public static<T> String ReadMD() throws IOException, ClassNotFoundException
     {
         
         FileReader fr = new FileReader("file.md");
@@ -55,7 +55,7 @@ public class FileHandlerRead implements SaveAs
         return sb.toString();
     }
 
-    public static String ReadDoc() throws IOException, ClassNotFoundException
+    public static <T> String ReadDoc() throws IOException, ClassNotFoundException
     {
     
         FileReader fr = new FileReader("file.doc");
@@ -75,38 +75,38 @@ public class FileHandlerRead implements SaveAs
 
 
     @Override
-    public int SaveFormat(FamilyTree familyTree) throws ClassNotFoundException, IOException 
+    public int SaveFormat(T t) throws ClassNotFoundException, IOException 
     {
         
-        int number = Console.Start2(familyTree);
+        int number = Console.Start2(t);
 
             switch (number)
             {
                 case 1:
-                  int number2 = Console.Start3(familyTree);
+                  int number2 = Console.Start3(t);
                     switch (number2)
                     {
                         case 1:
                             Reader();
                             System.out.println("Загрузка данных в программу из бинарного файла успешно завершена!\n");
                             FileHandlerSave fhs1 = new FileHandlerSave();
-                            return fhs1.SaveFormat(familyTree);
+                            return fhs1.SaveFormat(t);
                         case 2:
                             ReadTxt();
                             System.out.println(" file.txt формата был успешно считан: \n");
                             FileHandlerSave fhs2 = new FileHandlerSave();
-                            return fhs2.SaveFormat(familyTree);
+                            return fhs2.SaveFormat(t);
                         case 3:
                             ReadDoc();
                             System.out.println(" file.doc формата был успешно считан: \n");
                             FileHandlerSave fhs3 = new FileHandlerSave();
-                            return fhs3.SaveFormat(familyTree);
+                            return fhs3.SaveFormat(t);
 
                         case 4:
                             ReadMD();
                             System.out.println(" file.md формата был успешно считан: \n");
                             FileHandlerSave fhs4 = new FileHandlerSave();
-                            return fhs4.SaveFormat(familyTree);
+                            return fhs4.SaveFormat(t);
 
                         case 5:
                             System.out.println("Вы вышли из программы.");
@@ -119,20 +119,13 @@ public class FileHandlerRead implements SaveAs
                 
                 case 2:
                     FileHandlerSave fhs5 = new FileHandlerSave();
-                    return fhs5.SaveFormat(familyTree);
+                    return fhs5.SaveFormat(t);
 
                 case 3: 
                     System.out.println("Вы вышли из программы!");
                     Console.exit();
                     break;
 
-                // case 4: 
-                //     System.out.println("Выввели число вне заданного диапазона! ");
-                //     return SaveFormat(familyTree);
-
-                // case 5: 
-                //     System.out.println("Выввели число вне заданного диапазона! ");
-                //     return SaveFormat(familyTree);
                 default : break;    
             } 
            

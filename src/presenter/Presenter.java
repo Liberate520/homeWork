@@ -1,12 +1,16 @@
 package presenter;
 import view.View;
+
+import java.util.Scanner;
+
 import model.FamilyTree;
+import model.Node;
 import model.Service;
 import presenter.Presenter;
 import view.Console;
 
 
-public class Presenter 
+public class Presenter<T> 
 {
     private View view;
     private Service service;
@@ -18,32 +22,31 @@ public class Presenter
         view.setPresenter(this);
     }
 
-    public FamilyTree getFamilyTree(FamilyTree familyTree)
+    public T getFamilyTree(T t)
     {
-        return familyTree;
+        return t;
     }
 
-    public FamilyTree Show(FamilyTree familyTree)
+    public T Show(T t)
     {
-     view.print(familyTree); // работает выводит дерево  
-     return familyTree; 
+     view.print(t); // работает выводит дерево  
+     return t; 
     }
 
-    public void findHuman(FamilyTree familyTree)
-    {
-        familyTree.findHuman();
-        
-    } 
+    public <T extends FamilyTree> void startFindHuman(T t)
+     {
+         FamilyTree.findHuman(t);
+    }
     
-    public void SortId(FamilyTree familyTree)
+    public void SortId(T t)
     {
-        familyTree.sortById();
-        System.out.println("Список, отсортированный по Id: " + familyTree);
+        ((FamilyTree) t).sortById();
+        System.out.println("Список, отсортированный по Id: " + t);
     }
 
-    public void sortLastName(FamilyTree familyTree)
+    public void sortLastName(T t)
     {
-        familyTree.sortByLastName();
-        System.out.println("Список, отсортированный по фамилии: " + familyTree);
+        ((FamilyTree) t).sortByLastName();
+        System.out.println("Список, отсортированный по фамилии: " + t);
     }
 }

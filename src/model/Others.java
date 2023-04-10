@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-public class Others<T extends Node> implements Serializable, Node
+public class Others<T extends Node> implements Serializable, Node<T>
 
 {
     private int id;
@@ -92,18 +92,21 @@ public class Others<T extends Node> implements Serializable, Node
     }
 
     @Override
-    public Object getFather() {
+    public T getFather() {
         throw new UnsupportedOperationException("Unimplemented method 'getFather'");
     }
 
     @Override
-    public Object getMother() {
+    public T getMother() {
         throw new UnsupportedOperationException("Unimplemented method 'getMother'");
     }
 
     @Override
-    public Object getChildren() {
+    public T getChildren() {
         throw new UnsupportedOperationException("Unimplemented method 'getChildren'");
+    }
+
+    public void addPerson(Others value) {
     }
 }
 

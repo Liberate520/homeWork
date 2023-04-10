@@ -6,7 +6,8 @@ import model.FamilyTree;
 import presenter.Presenter;
 import model.FileHandlerSave;
 import model.FileHandlerRead;
-public class Console implements View
+
+public class Console<T> implements View<T>
  {
     static Scanner scanner;
     private Presenter presenter;
@@ -17,17 +18,11 @@ public class Console implements View
         scanner = new Scanner(System.in, "Cp866");
     }
 
-    // private String readTextConsole() 
-    // {
-    //     System.out.println("Введите запись: ");
-    //     String text = scanner.nextLine(); 
-    //     return text;
-    // }
-    
     private static int readNumberConsole()
     {
-        Scanner sc = new Scanner(System. in, "Cp866");
         System.out.println(" Введите номер операции: ");
+        Scanner sc = new Scanner(System. in, "Cp866");
+        // System.out.println(" Введите номер операции: ");
             if(sc.hasNextInt())
                 {
                     int number  = sc.nextInt();
@@ -120,7 +115,7 @@ public class Console implements View
                             """);
     }    
 
-    public static int Start1(FamilyTree familyTree)
+    public static <T> int Start1(T t)
         {
             Console.tabloSave();
             int number = readNumberConsole();
@@ -133,7 +128,7 @@ public class Console implements View
         return number;
         }
 
-        public static int Start2(FamilyTree familyTree)
+        public static <T> int Start2(T t)
         {
             Console.tabloRead11();
             int number = readNumberConsole();
@@ -146,7 +141,7 @@ public class Console implements View
           return number;
         }
         
-        public static int Start3(FamilyTree familyTree)
+        public static <T> int Start3(T t)
         {
             Console.tabloRead2();
             int number = readNumberConsole();
@@ -161,7 +156,7 @@ public class Console implements View
 
     
     @Override
-    public FamilyTree StartProgram(FamilyTree familyTree) throws ClassNotFoundException, IOException 
+    public T StartProgram(T t) throws ClassNotFoundException, IOException 
     {
         while (work) 
             {
@@ -179,20 +174,20 @@ public class Console implements View
             switch (choice) 
             {
                 case 1:
-                    presenter.Show(familyTree);
+                    presenter.Show(t);
                     break;
                 case 2:
                     FileHandlerSave fhs = new FileHandlerSave(); // запуск сохранения и чтения файлов!!!
-                    fhs.SaveFormat(familyTree);
+                    fhs.SaveFormat(t);
                     break;
                 case 3:
-                    presenter.findHuman(familyTree);
+                    presenter.startFindHuman((FamilyTree) t);
                     break;
                 case 4:
-                    presenter.SortId(familyTree);
+                    presenter.SortId(t);
                     break;
                 case 5:
-                    presenter.sortLastName(familyTree);
+                    presenter.sortLastName(t);
                     break;
                 case 6:
                     exit();
@@ -205,8 +200,8 @@ public class Console implements View
     }
 
     @Override
-    public void print(FamilyTree familyTree) {
-        System.out.println("По Вашему запросу выводим на экран фамильное дерево:\n" + familyTree);
+    public void print(T t) {
+        System.out.println("По Вашему запросу выводим на экран фамильное дерево:\n" + t);
     }
 
     @Override

@@ -212,4 +212,14 @@ public class Human<T extends Node> implements Serializable, Node
         return sb.toString();
 
     }
+
+
+    public Node get(int i) {
+        return null;
+    }
+
+
+    public static int size() {
+        return 0;
+    }
 }

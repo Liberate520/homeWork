@@ -2,8 +2,8 @@ package model;
 
 import java.io.IOException;
 
-public interface SaveAs 
+public interface SaveAs<T> 
 {
-   int SaveFormat(FamilyTree familyTree) throws ClassNotFoundException, IOException;   
+    int SaveFormat(T t) throws ClassNotFoundException, IOException;   
 }
 
