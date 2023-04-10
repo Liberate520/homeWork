@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Family {
-    private List<Human> members;
+public class FamilyTree<E extends Human> implements Serializable, Family<E> {
+    private List<E> members;
 
     public FamilyTree(){
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> members) {
+    public FamilyTree(List<E> members) {
         this.members = members;
     }
-    public boolean  addMembers(Human member){
+    public boolean  addMembers(E member){
         if (member == null) {
             return  false;
         }
@@ -52,11 +52,11 @@ public class FamilyTree implements Serializable, Family {
         }
     }
     @Override
-    public Iterator<Human> iterator(){
-        return new FamilyTreeIterator(members);
+    public Iterator<E> iterator(){
+        return new FamilyTreeIterator((List<E>) members);
     }
 
-    public List<Human> getMembers() {
-        return members;
+    public List<E> getMembers() {
+        return (List<E>) members;
     }
 }

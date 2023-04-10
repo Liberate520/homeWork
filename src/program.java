@@ -1,3 +1,7 @@
+import Presenter.Presenter;
+import UI.ConsoleUI;
+import UI.View;
+import familyApi.FamilyService;
 import human.Gender;
 import human.Human;
 import tree.FamilyTree;
@@ -12,7 +16,7 @@ public class program {
         Human member3 = new Human("Ivanov Sergey", Gender.Male, new Date(90, 8, 28), member2, member1);
         Human member4 = new Human("Ivanova Olga", Gender.Female, new Date(89, 11, 24), member2, member1);
 
-        FamilyTree familyTree1 = new FamilyTree();
+        FamilyTree<Human> familyTree1 = new FamilyTree<>();
         //Добавление детей
 //        member1.addChild(member3);
 //        member2.addChild(member3);
@@ -24,34 +28,40 @@ public class program {
         familyTree1.addMembers(member3);
         familyTree1.addMembers(member4);
         //familyTree1.printMembers(); //печать всех членов семьи
+        // Работа с меню
+        View view = new ConsoleUI();
+        FamilyService service = new FamilyService(familyTree1);
+        Presenter presenter = new Presenter(view, service);
 
-        //Перебор всех членов семьи с помощью итератора
-        for (Human member: familyTree1
-             ) {
-            System.out.println(member.getAllInfo());
-        }
-//Сортировка членов семьи
-        Service service = new Service(familyTree1);
-        service.sortByName();
+        view.start();
 
-        System.out.println("Sort by name"); // Сортировка членов семьи по имени
+//        //Перебор всех членов семьи с помощью итератора
+//        for (Human member: familyTree1
+//             ) {
+//            System.out.println(member.getAllInfo());
+//        }
+////Сортировка членов семьи
+//        Service service = new Service(familyTree1);
+//        service.sortByName();
+//
+//        System.out.println("Sort by name"); // Сортировка членов семьи по имени
+//
+//        for (Human member: familyTree1
+//        ) {
+//            System.out.println(member.getAllInfo());
+//        }
+//
+//        System.out.println("Sort by date birth");
+//        service.sortByDateBirth();
+//
+//        for (Human member: familyTree1
+//        ) {
+//            System.out.println(member.getAllInfo());
+//        }
 
-        for (Human member: familyTree1
-        ) {
-            System.out.println(member.getAllInfo());
-        }
-
-        System.out.println("Sort by date birth");
-        service.sortByDateBirth();
-
-        for (Human member: familyTree1
-        ) {
-            System.out.println(member.getAllInfo());
-        }
 
 
-
-//        FileHandler fh = new FileHandler();
+//        save.FileHandler fh = new save.FileHandler();
 //        FamilyTree familyTree2 = new FamilyTree();
 //
 //        familyTree2 = fh.load(familyTree2, "fileInfo.txt"); // Загрузка дерева из файла, даже если в файле есть повторения, они не учитываются при формировании членов семьи
