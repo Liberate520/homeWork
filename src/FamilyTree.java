@@ -1,11 +1,13 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, IterAble{
+    public class FamilyTree implements Serializable, Iterable<Human>{
     private List<Human> humanList;
     public FamilyTree(){this(new ArrayList<>());}
     public FamilyTree(List<Human> humanList) {this.humanList = humanList;}
+        private FamilyTree famTree;
 
     public void addHumanToTree (Human human) {
         if (human == null) {
@@ -53,15 +55,11 @@ public class FamilyTree implements Serializable, IterAble{
         return null;
     }
 
-    @Override
-    public List<Human> surNameSort(List<Human> surNameSort) {
-        List<Human> sorted = new ArrayList<>();
-        sorted = surNameSort.sort();
-        return null;
+    public List<Human> getHumanList() {
+        return humanList;
     }
-
-    @Override
-    public List<Human> nameSort(List<Human> surNameSort) {
-        return null;
-    }
+        @Override
+        public Iterator<Human> iterator() {
+            return new HumanIterator(humanList);
+        }
 }

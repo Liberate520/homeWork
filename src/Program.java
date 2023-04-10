@@ -2,7 +2,7 @@ import java.io.*;
 import java.time.LocalDate;
 
 
-public class Program implements Serializable{
+    public class Program implements Serializable{
 
     public static void main(String[] args)  throws IOException, ClassNotFoundException {
         FamilyTree myTree =new FamilyTree();
@@ -29,12 +29,25 @@ public class Program implements Serializable{
         System.out.println(human2.getMotherInfo());
         System.out.println(human2.getChildrenInfo());
 
-        //Сохраняем во внешний файл
-        FileHandler handler = new FileHandler();
-        handler.save(human2);
+//        //Сохраняем во внешний файл
+//        FileHandler handler = new FileHandler();
+//        handler.save(human2);
+//
+//        //Загрузка, каст и чтение из файла
+//        Human test = (Human)handler.read();
+//        System.out.println("\nДанные загружены из файла: " + test.getInfoHuman());
 
-        //Загрузка, каст и чтение из файла
-        Human test = (Human)handler.read();
-        System.out.println("\nДанные загружены из файла: " + test.getInfoHuman());
+        myTree.getHumanList().sort(new ComparatorByBirthday());
+        System.out.println("\nСортировка по дате рождения ");
+        for (Human human:
+                myTree) {
+            System.out.println(human.getInfoHuman());
+        }
+        myTree.getHumanList().sort(new ComparatorByName());
+        System.out.println("\nСортировка по имени");
+        for (Human human:
+                myTree) {
+            System.out.println(human.getInfoHuman());
+        }
     }
 }
