@@ -19,10 +19,15 @@ public class Presenter {
         this.console.print(this.service.showTheFamily());
     }
 
-    public void commandFullPersonInfo(String command) {
-        String id_s = command.replaceAll("id:", "").trim();
-        int id = Integer.parseInt(id_s);
-        String answer = service.getFamily_tree().get(id).toStringFull();
+    public void commandFullPersonInfo(String whom) {
+        int id;
+        String answer = "";
+        try {
+            id = Integer.parseInt(whom.strip());
+            answer = service.getFamily_tree().get(id).toStringFull();
+        } catch (Exception e) {
+            answer = "Incorrect person id:" + whom;
+        }
         this.console.print(answer);
     }
 
@@ -33,16 +38,13 @@ public class Presenter {
         this.console.print(answer);
     }
 
-    public void commandAddNewPerson(String command){
-        String[] edit_arr = command.split("\\:");
-        String name = edit_arr[1];
+    public void commandAddNewPerson(String name){
         int id = service.addPerson(name);
         String answer = service.getFamily_tree().get(id).toStringFull();
         this.console.print(answer);
     }
 
-    public void commandSearchPersonByName(String command){
-        String name = command.replace("name:", "").strip();
+    public void commandSearchPersonByName(String name){
         String answer = "";
         for (Person person : service.getFamily_tree().searchByName(name)) {
             answer += person.toString();
@@ -50,7 +52,7 @@ public class Presenter {
         this.console.print(answer);
     }
 
-    public void commandShowPersonsSortByName(String command){
+    public void commandShowPersonsSortByName(){
         List<Person> persons_list = service.getFamily_tree().getThePersonsList();
         Service.sortPersonsByName(persons_list);
         String answer = "";
@@ -60,7 +62,7 @@ public class Presenter {
         this.console.print(answer);
     }
 
-    public void commandShowPersonsSortById(String command){
+    public void commandShowPersonsSortById(){
         List<Person> persons_list = service.getFamily_tree().getThePersonsList();
         Service.sortPersonsById(persons_list);
         String answer = "";
@@ -70,25 +72,33 @@ public class Presenter {
         this.console.print(answer);
     }
 
-    public void commandEditPerson(String command){
-        String[] edit_arr = command.split("\\.");
-
-        int id = Integer.parseInt(edit_arr[1]);
-        String key = edit_arr[2];
-        int id_parent = 0;
+    public void commandEditPerson(String whom, String field, String what){
+        int id,id_parent;
         try {
-            id_parent = Integer.parseInt(edit_arr[3]);
+            id = Integer.parseInt(whom.strip());
         } catch (Exception e) {
+            return;
         }
 
-        if (key.equals("sex"))
-            service.getFamily_tree().get(id).setPerson_sex(edit_arr[3]);
+        if (field.equals("sex")){
+            service.getFamily_tree().get(id).setPerson_sex(what);
+            String answer = service.getFamily_tree().get(id).toStringFull();
+            this.console.print(answer);
+            return;
+        }
 
-        if (key.equals("father"))
-            service.getFamily_tree().addFather(id, id_parent);
+        try {
+            id_parent = Integer.parseInt(what.strip());
+        } catch (Exception e) {
+            this.console.print("Incorrect parent id:" + what);
+            return;
+        }
 
-        if (key.equals("mother"))
+        if (field.equals("mother"))
             service.getFamily_tree().addMother(id, id_parent);
+
+        if (field.equals("father"))
+            service.getFamily_tree().addFather(id, id_parent);
 
         String answer = service.getFamily_tree().get(id).toStringFull();
         this.console.print(answer);

@@ -22,34 +22,40 @@ public class ConsoleUI implements UI {
         while (true) {
             String command = commandFromConsole();
 
-            commandParse(command);
+             LinkedHashMap<String, String> map = commandParse(command);
 
-            if (command.equals("break"))
+            if (map.containsKey("break"))
                 break;
 
-            if (command.equals("show:"))
+            if (map.containsKey("show"))
                 this.presenter.commandShow();
 
-            if (command.contains("id:") && !command.contains("sort by"))
-                this.presenter.commandFullPersonInfo(command);
+            if (map.containsKey("sort by name"))
+                this.presenter.commandShowPersonsSortByName();
 
-            if (command.equals("save:"))
+            if (map.containsKey("sort by id"))
+                this.presenter.commandShowPersonsSortById();
+
+            if (map.containsKey("id"))
+                this.presenter.commandFullPersonInfo(map.get("id"));
+
+            if (map.containsKey("save"))
                 this.presenter.commandFileSave();
 
-            if (command.contains("new:"))
-                this.presenter.commandAddNewPerson(command);
+            if (map.containsKey("new"))
+                this.presenter.commandAddNewPerson(map.get("new"));
 
-            if (command.contains("name:"))
-                this.presenter.commandSearchPersonByName(command);
+            if (map.containsKey("name"))
+                this.presenter.commandSearchPersonByName(map.get("name"));
 
-            if (command.equals("sort by name:"))
-                this.presenter.commandShowPersonsSortByName(command);
+            if (map.containsKey("add"))
+                if (map.containsKey("sex"))
+                    this.presenter.commandEditPerson(map.get("add"), "sex", map.get("sex"));
+                if (map.containsKey("mother"))
+                    this.presenter.commandEditPerson(map.get("add"), "mother", map.get("mother"));
+                if (map.containsKey("father"))
+                    this.presenter.commandEditPerson(map.get("add"), "father", map.get("father"));
 
-            if (command.equals("sort by id:"))
-                this.presenter.commandShowPersonsSortById(command);
-
-            if (command.contains("add."))
-                this.presenter.commandEditPerson(command);
         }
     }
 
@@ -85,35 +91,29 @@ public class ConsoleUI implements UI {
         this.presenter = presenter;
     }
 
-    private Map<String, Integer> commandParse(String command) {
-        Map<String, Integer> map = new LinkedHashMap<>();
+    private LinkedHashMap<String, String> commandParse(String command) {
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
         String[] command_array = command.split(":");
-        System.out.println( Arrays.toString(command_array) );
+//        System.out.println(Arrays.toString(command_array));
         if (command_array.length > 2 | command_array.length == 0) {
             return map;
         }
-        
-        if (command_array.length == 1){
+
+        if (command_array.length == 1) {
             map.put(command_array[0], null);
             return map;
+        }
+        String[] command_info = command_array[1].split("\\.");
+        if (command_info.length == 0) {
+            map.put(command_array[0], null);
+        } else if(command_info.length == 1){
+            map.put(command_array[0], command_info[0]);
+        } else if (command_info.length == 3){
+            map.put(command_array[0], command_info[0]);
+            map.put(command_info[1], command_info[2]);
         }
 
-        String[] command_info = command_array[1].split(".");
-        if (command_info.length == 0){
-            map.put(command_array[0], null);
-            return map;
-        } 
-        else if (command_info.length > 0){
-            int id;
-            try {
-                id = Integer.parseInt(command_info[0]);
-            } catch (Exception e) {
-                return map;
-            }
-            map.put(command_array[0], id);
-        }
         return map;
-
     }
 
 }
