@@ -1,9 +1,14 @@
 import human.Gender;
 import human.Human;
+import io.DataLoad;
+import io.DataSave;
 import io.FileHandlerLoad;
 import io.FileHandlerSaver;
+import presenter.Presenter;
+import service.Service;
 import tree.FamilyTree;
-import tree.FindScanner;
+import ui.ConsoleUI;
+import ui.View;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,24 +37,15 @@ public class Main {
             family.addHuman(value);
         }
 
-        System.out.println(family);
-        FindScanner name = new FindScanner();
-        family.find(name.findScanner(null));
-        
-        FileHandlerSaver save = new FileHandlerSaver();
-        save.saveData(family);
-        FileHandlerLoad load = new FileHandlerLoad();
-        load.loadData("familyTree.ser");
 
-        System.out.println("Список, отсортированный по дате смерти:");
-        family.sortByDate();
-        for (Object member: family.getFamilyTree()) {
-            System.out.println(member);
-        }
-        System.out.println("Список, отсортированный по имени:");
-        family.sortByName();
-        for (Object member: family.getFamilyTree()) {
-            System.out.println(member);
-        }
+
+
+
+        View view = new ConsoleUI();
+        Service service = new Service();
+        Presenter presenter = new Presenter(view, service);
+        view.start(family);
+
+
     }
 }

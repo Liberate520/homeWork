@@ -1,15 +1,19 @@
 package tree;
 
+
 import human.Comparators.DateComparator;
 import human.Comparators.HumanIterator;
 import human.Comparators.NameComparator;
 import human.Human;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
+    private T t;
+    private Human human;
     private ArrayList<T> familyTree = new ArrayList<>();
 
     public ArrayList<T> getFamilyTree() {
@@ -26,15 +30,12 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
         }
     }
 
-
-
     public T find(String name) {
         for (T human : familyTree) {
-            if (human.getName().equals(name)) {
+            if (human.getName().equalsIgnoreCase(name)) {
                 System.out.println(human);
                 return human;
             }
-
         }
         return null;
     }
@@ -42,7 +43,9 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
     @Override
     public String toString() {
-        return familyTree.toString();
+        StringBuilder str = new StringBuilder();
+        str.append(this.familyTree);
+        return str.toString();
     }
     @Override
     public Iterator<T> iterator(){
