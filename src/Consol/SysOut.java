@@ -1,7 +1,6 @@
 package Consol;
 import java.util.Scanner;
 
-import SaveAndLoad.*;
 import Person.*;
 import Tree.*;
 
