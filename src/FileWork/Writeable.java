@@ -2,7 +2,7 @@ package FileWork;
 
 import Group.Groupable;
 
-public interface Writeable {
-    void saveToFile(Groupable groupList, String filename);
-    Groupable LoadFromFile(String filename);
-    }   
+public interface Writeable<T> {
+    void saveToFile(Groupable<T> groupList, String filename);
+    Groupable<T> LoadFromFile(String filename);
+    }     

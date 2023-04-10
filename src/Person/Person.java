@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Person
  */
-public class Person implements Serializable{
+public class Person implements Serializable, NodeTree<Person> {
     private int id;
     private String name;
     private Gender gender;
@@ -44,6 +44,7 @@ public class Person implements Serializable{
             sb = sb.append(", возраст: ").append(getAge());
         else
             sb = sb.append(", дата смерти: ").append(deathDate);
+            sb=sb.append(", пол: ").append(getGender());
         if (mother == null)
             sb = sb.append(", мать не определена");
         else
@@ -60,7 +61,6 @@ public class Person implements Serializable{
                 sb = sb.append(" ").append(childrens.get(i).getName());
             }
         }
-
         return sb.toString();
     }
 
@@ -68,16 +68,32 @@ public class Person implements Serializable{
         return id;
     }
 
+    public void setId(int id){
+        this.id=id;
+    }
+
     public Gender getGender() {
         return gender;
     }
-    
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public LocalDate getDeathDate() {
@@ -100,16 +116,27 @@ public class Person implements Serializable{
         return father;
     }
 
+    public void setFather(Person father) {
+        this.father = father;
+    }
+
     public Person getMother() {
         return mother;
+    }
+
+    public void setMother(Person mother) {
+        this.mother = mother;
     }
 
     public List<Person> getChildrens() {
         return childrens;
     }
 
-    public void addChild
-    (Person person) {
+    public void setChildrens(List<Person> childrens) {
+        this.childrens = childrens;
+    }
+
+    public void addChild(Person person) {
         if (this.childrens == null)
             this.childrens = new ArrayList<>();
         this.childrens.add(person);

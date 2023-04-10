@@ -1,12 +1,12 @@
 package Group.Comparators;
 
 import java.util.Comparator;
-import Person.Person;
+import Person.NodeTree;
 
-public class PersonComparatorById implements Comparator<Person>{
+public class PersonComparatorById<T extends NodeTree<T>> implements Comparator<T>{
 
     @Override
-    public int compare(Person p1, Person p2) {
+    public int compare(T p1, T p2) {
         return Integer.compare(p1.getId(), p2.getId());
     }
 }

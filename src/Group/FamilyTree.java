@@ -8,38 +8,39 @@ import java.util.Scanner;
 import Group.Comparators.PersonComparatorByAge;
 import Group.Comparators.PersonComparatorByGender;
 import Group.Comparators.PersonComparatorById;
+import Group.Comparators.PersonComparatorByChildren;
 import Group.Comparators.PersonComparatorByName;
-import Person.Person;
+import Person.NodeTree;
 
-public class FamilyTree implements Groupable, Serializable {
+public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializable {
 
-    private List<Person> familyTree;
+    private List<T> famyliTree;
 
     public FamilyTree() {
-        familyTree = new ArrayList<>();
+        famyliTree = new ArrayList<>();
     }
 
     int id = 0;
 
-    public void addPerson(Person person) {
-        familyTree.add(person);
-        if (person.getMother() != null)
-            person.getMother().addChild(person);
+    public void addPerson(T t) {
+        famyliTree.add(t);
+        if (t.getMother() != null)
+            t.getMother().addChild(t);
 
-        if (person.getFather() != null)
-            person.getFather().addChild(person);
+        if (t.getFather() != null)
+            t.getFather().addChild(t);
     }
 
     @Override
     public String toString() {
-        return familyTree.toString();
+        return famyliTree.toString();
     }
 
-    public Person getPersonByName(String name) {
-        Person findPerson = null;
-        for (int i = 0; i < familyTree.size(); i++) {
-            if (familyTree.get(i).getName().equals(name)) {
-                findPerson = familyTree.get(i);
+    public T getPersonByName(String name) {
+        T findPerson = null;
+        for (int i = 0; i < famyliTree.size(); i++) {
+            if (famyliTree.get(i).getName().equals(name)) {
+                findPerson = famyliTree.get(i);
             }
         }
         if (findPerson == null)
@@ -47,46 +48,48 @@ public class FamilyTree implements Groupable, Serializable {
         return findPerson;
     }
 
-    public void findPerson() {
-        System.out.println("Введите имя или фамилию для поиска:");
-        Scanner iScanner = new Scanner(System.in, "cp866");
-        String findName = iScanner.nextLine();
+    public void findPerson(String findName) {
         boolean find = false;
-        for (int i = 0; i < familyTree.size(); i++) {
-            if (familyTree.get(i).getName().contains(findName)) {
-                System.out.println(familyTree.get(i));
+        for (int i = 0; i < famyliTree.size(); i++) {
+            if (famyliTree.get(i).getName().contains(findName)) {
+                System.out.println(famyliTree.get(i));
                 find = true;
             }
         }
         if (!find)
             System.out.println("Такой человек не найден.");
-        iScanner.close();
     }
 
-    public List<Person> getPersonList() {
-        return familyTree;
+    public List<T> getPersonList() {
+        return famyliTree;
     }
 
     public void sortByName() {
-        familyTree.sort(new PersonComparatorByName());
+        famyliTree.sort(new PersonComparatorByName<T>());
         ;
     }
 
     public void sortByAge() {
-        familyTree.sort(new PersonComparatorByAge());
+        famyliTree.sort(new PersonComparatorByAge<T>());
     }
 
     public void sortByGenderd() {
-        familyTree.sort(new PersonComparatorByGender());
+        famyliTree.sort(new PersonComparatorByGender<T>());
         ;
     }
 
+    public void sortByChildren() {
+        famyliTree.sort(new PersonComparatorByChildren<T>());
+
+    }
+
     public void sortById() {
-        familyTree.sort(new PersonComparatorById());
+        famyliTree.sort(new PersonComparatorById<T>());
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator(familyTree);
+    public Iterator<T> iterator() {
+        return new PersonIterator<T>(famyliTree);
     }
+
 }
