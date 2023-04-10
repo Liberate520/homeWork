@@ -1,20 +1,21 @@
 package group;
 import java.util.List;
 
-import person.Person;
 
 /**
  * GroupInterface
  */
-public interface Groupable extends Iterable{
+public interface Groupable<T> extends Iterable<T>{
 
-    void addPerson(Person person);
-    List<Person> getPersonList();
-    Person getPersonByName(String name);
-    void findPerson();
+    void addPerson(T t);
+    List<T> getPersonList();
+    T getPersonByName(String name);
+    void findPerson(String name);
     void sortByName(); 
     void sortByAge();
     void sortById();
     void sortByGenderd();
+    void sortByChildren();
+
     }
     

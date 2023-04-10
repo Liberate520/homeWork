@@ -1,14 +1,16 @@
 package fileWork;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import group.Groupable;
+import person.NodeTree;
 
-public class FilehandlerOS implements Writeable {
+public class FilehandlerOS<T extends NodeTree<T>> implements Writeable<T> {
 
     @Override
-    public void SaveToFile(Groupable groupList, String filename) {
+    public void SaveToFile(Groupable<T> groupList, String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(groupList);
             System.out.printf("File " + filename + " has been written.\n");
@@ -20,11 +22,11 @@ public class FilehandlerOS implements Writeable {
         }
     }
 
-    public Groupable LoadFromFile(String filename) {
-        Groupable groupList=null;
+    public Groupable<T> LoadFromFile(String filename) {
+        Groupable<T> groupList = null;
         try (
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            groupList = ((Groupable) ois.readObject());
+            groupList = ((Groupable<T>) ois.readObject());
             System.out.printf("File " + filename + " has been loaded.\n");
         } catch (Exception ex) {
 

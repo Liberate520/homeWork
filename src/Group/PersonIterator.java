@@ -1,14 +1,13 @@
 package group;
 import java.util.Iterator;
 import java.util.List;
-import person.Person;
 
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<T> implements Iterator<T> {
     
-    private List<Person> group;
+    private List<T> group;
     private int index = 0;
     
-    public PersonIterator(List<Person> group) {
+    public PersonIterator(List<T> group) {
         this.group=group;
     }
 
@@ -18,7 +17,7 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public T next() {
         return group.get(index++);
     }
 }

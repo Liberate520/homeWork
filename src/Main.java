@@ -1,4 +1,6 @@
 
+import java.time.LocalDate;
+
 import fileWork.FilehandlerOS;
 import fileWork.FilehandlerTXT;
 import fileWork.Writeable;
@@ -10,7 +12,7 @@ import person.Person;
 
 public class Main {
         public static void main(String[] args) {
-                Groupable familyTree= new FamilyTree();
+                Groupable<Person> familyTree= new FamilyTree<>();
 
                 // familyTree.addPerson(new Person(1, "Авилова Клавдия", LocalDate.of(1922, 10, 14),
                 //                 LocalDate.of(2009, 05, 10),
@@ -42,16 +44,21 @@ public class Main {
                 //                 11), null, Gender.male, familyTree.getPersonByName("Мишина Олеся"),
                 //                 familyTree.getPersonByName("Вяткин Алексей"),
                 //                 null));
-                // familyTree.addPerson(new Person(158, "Вяткин Кирилл", LocalDate.of(2013, 7,
+                // familyTree.addPerson(new Person(8, "Вяткин Кирилл", LocalDate.of(2013, 7,
                 //                 28),
                 //                 null, Gender.male, familyTree.getPersonByName("Мишина Олеся"),
                 //                 familyTree.getPersonByName("Вяткин Алексей"),
                 //                 null));
 
                 String filenameOS = "FamilyTree.dat";
-                Writeable fileOS = new FilehandlerOS();
+                // String filenameTXT = "FamilyTree.txt";
+                 
+                Writeable<Person> fileOS = new FilehandlerOS<>();
+                // Writeable<Person> fileTXT = new FilehandlerTXT<>();
+
 
                 // fileOS.SaveToFile(familyTree, filenameOS);
+                // fileTXT.SaveToFile(familyTree, filenameTXT);
                 familyTree= fileOS.LoadFromFile(filenameOS);
 
                 for (Person person : familyTree.getPersonList()) {
@@ -73,10 +80,20 @@ public class Main {
                 }
 
                 System.out.println("\n");
+                System.out.println("Сортировка по детям:");
+                familyTree.sortByChildren();
+                for (Person person : familyTree.getPersonList()) {
+                        System.out.print(person);
+                }
+              
+
+                System.out.println("\n");
                 System.out.println("Сортировка по полу:");
                 familyTree.sortByGenderd();
                 for (Person person : familyTree.getPersonList()) {
                         System.out.print(person);
                 }
+
+                
         }
 }
