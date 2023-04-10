@@ -152,7 +152,6 @@ public class FileCSV implements Files {
         }
         Tree<Person> family = new Tree<>();
         for (Map.Entry<Integer, Person> itm : persons_list.entrySet()) {
-            System.out.println("ID:" + itm.getKey());
             family.add(itm.getKey(), itm.getValue());
         }
         return family;
