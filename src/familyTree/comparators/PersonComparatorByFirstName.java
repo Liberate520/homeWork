@@ -1,10 +1,10 @@
 package familyTree.comparators;
 
-import person.Person;
+import member.Member;
 
 import java.util.Comparator;
 
-public class PersonComparatorByFirstName<E extends Person> implements Comparator<E> {
+public class PersonComparatorByFirstName<E extends Member> implements Comparator<E> {
     @Override
     public int compare(E p1, E p2) {
         int result = p1.getFirstName().compareTo(p2.getFirstName());

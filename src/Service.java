@@ -152,7 +152,7 @@ public class Service {
         List<Person> persons = familyTree.getPersonsList();
         persons.sort(new PersonComparatorByFirstName<>());
         for (person.Person person : persons) {
-            person.getChildren().sort(new PersonComparatorByFirstName<>());
+            ((List<Person>)((ThreadLocal<Object>) person.getChildren())).sort(new PersonComparatorByFirstName<>());
             person.getParents().sort(new PersonComparatorByFirstName<>());
         }
     }
@@ -171,7 +171,7 @@ public class Service {
         List<Person> persons = familyTree.getPersonsList();
         persons.sort(new PersonComparatorByLastName<>());
         for (person.Person person : persons) {
-            person.getChildren().sort(new PersonComparatorByLastName<>());
+            ((List<Person>)((ThreadLocal<Object>) person.getChildren())).sort(new PersonComparatorByLastName<>());
             person.getParents().sort(new PersonComparatorByLastName<>());
         }
     }
@@ -190,7 +190,7 @@ public class Service {
         List<Person> persons = familyTree.getPersonsList();
         persons.sort(new PersonComparatorByGender<>());
         for (person.Person person : persons) {
-            person.getChildren().sort(new PersonComparatorByGender<>());
+            ((List<Person>)((ThreadLocal<Object>) person.getChildren())).sort(new PersonComparatorByGender<>());
             person.getParents().sort(new PersonComparatorByGender<>());
         }
     }
@@ -209,7 +209,7 @@ public class Service {
         List<Person> persons = familyTree.getPersonsList();
         persons.sort(new PersonComparatorByBornDate<>());
         for (person.Person person : persons) {
-            person.getChildren().sort(new PersonComparatorByBornDate<>());
+            ((List<Person>)((ThreadLocal<Object>) person.getChildren())).sort(new PersonComparatorByBornDate<>());
             person.getParents().sort(new PersonComparatorByBornDate<>());
         }
     }

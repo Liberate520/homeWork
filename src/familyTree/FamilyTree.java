@@ -1,13 +1,14 @@
 package familyTree;
 
-import person.Person;
+import member.Member;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
-public class FamilyTree<E extends Person> implements Serializable, FTree<E> {
+public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     private String name;
     private List<E> persons;
 
@@ -65,8 +66,8 @@ public class FamilyTree<E extends Person> implements Serializable, FTree<E> {
     private void addChildren(E person) {
         if (this.hasPerson(person)) {
             if (person.countChildren() != 0) {
-                for (int i = 0; i < person.countChildren(); i++) {
-                    this.addPerson((E) person.getChildren().get(i), true);
+                for (E pers : (List<E>) person.getChildren()) {
+                    this.addPerson(pers, true);
                 }
             }
         } else {
@@ -113,9 +114,10 @@ public class FamilyTree<E extends Person> implements Serializable, FTree<E> {
     private String toString(StringBuilder result, E person, int iter) {
         result.append(String.format("%s%s|", person.toString(), getSpace(person.toString())));
         if (person.countChildren() > 0) {
-            for (int i = 0; i < person.countChildren(); i++) {
-                if (i > 0) result.append(String.format("%s", getSpaces(iter)));
-                toString(result, (E) person.getChildren().get(i), iter + 1);
+            ListIterator<E> children = ((List<E>) person.getChildren()).listIterator();
+            while (children.hasNext()){
+                if (children.nextIndex() > 0) result.append(String.format("%s", getSpaces(iter)));
+                toString(result, children.next(), iter + 1);
             }
         } else {
             result.append("\n");

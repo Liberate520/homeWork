@@ -1,9 +1,11 @@
 package person;
 
+import member.Member;
+
 import java.io.Serializable;
 import java.util.*;
 
-public class Person implements Serializable, Comparable<Person> {
+public class Person implements Serializable, Comparable<Person>, Member {
     private String firstName;
     private String lastName;
     private boolean isMan;
@@ -67,8 +69,8 @@ public class Person implements Serializable, Comparable<Person> {
         return this.isMan;
     }
 
-    public List<Person> getChildren() {
-        return this.children;
+    public ThreadLocal<Object> getChildren() {
+        return (ThreadLocal<Object>) this.children;
     }
 
     public List<Person> getParents() {
