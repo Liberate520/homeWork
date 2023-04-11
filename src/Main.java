@@ -36,15 +36,14 @@ public class Main {
         System.out.println(tree);
         tree.searchForSurnameAndName("Иванова", "Аня");// вывод данного человека и его детей
 
-        Writeable wr = new Data();
-        wr.save(tree);
-        wr.read();
+        Service srv = new Service(tree);
+        srv.save(tree);
+        srv.read();
 
         for (Object human: tree) {
             System.out.println(human);
         }
 
-        Service srv = new Service(tree);
         srv.sortByName();
 
         System.out.println("\nСортировка по имени:\n");
