@@ -1,23 +1,20 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    List<Human> familyTree;
+public class FamilyTree <E> implements Serializable, Iterable<Human> {
+    List<E> familyTree;
 
-    public FamilyTree(List<Human> familyTree) {
+    public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
     }
     public FamilyTree() {
-        this(new ArrayList<>());
+        this(new ArrayList<E>());
     }
 
-    public void addPerson (Human human) {
-        this.familyTree.add(human);
+    public void addElement (E element) {
+        this.familyTree.add(element);
     }
 
     public void save (String filepath) throws IOException {
@@ -32,14 +29,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     @Override
     public Iterator<Human> iterator() {
-        return new HumanIterator(familyTree);
+        return new HumanIterator((List<Human>) familyTree);
     }
 
     public void sortByName () {
-        Collections.sort(familyTree);
+        Collections.sort((List<Human>) familyTree);
     }
     public void sortBySex () {
-        familyTree.sort(new HumanComparatorBySex());
+        familyTree.sort((Comparator<? super E>) new HumanComparatorBySex());
     }
 
 }

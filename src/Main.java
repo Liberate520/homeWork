@@ -16,15 +16,15 @@ public class Main {
         System.out.println(person4);
         System.out.println(person5);
         System.out.println(person6);
-        familyTree.addPerson(person1);
-        familyTree.addPerson(person2);
-        familyTree.addPerson(person3);
-        familyTree.addPerson(person4);
-        familyTree.addPerson(person5);
-        familyTree.addPerson(person6);
+        familyTree.addElement(person1);
+        familyTree.addElement(person2);
+        familyTree.addElement(person3);
+        familyTree.addElement(person4);
+        familyTree.addElement(person5);
+        familyTree.addElement(person6);
         System.out.println(familyTree.familyTree);
 
-        for (Human human:familyTree) {
+        for (Object human:familyTree) {
             System.out.println(human);
         }
 
@@ -32,7 +32,7 @@ public class Main {
         System.out.println();
         familyTree.sortByName();
 
-        for (Human human:familyTree) {
+        for (Object human:familyTree) {
             System.out.println(human);
         }
 
@@ -40,7 +40,7 @@ public class Main {
         System.out.println();
         familyTree.sortBySex();
 
-        for (Human human:familyTree) {
+        for (Object human:familyTree) {
             System.out.println(human);
         }
 
