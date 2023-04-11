@@ -1,25 +1,20 @@
 package tree;
-
-import Human.Human;
-
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<E> implements Iterator<E> {
     private int index;
-    private List<Human> lst;
-
-    public HumanIterator(List<Human> humanList) {
+    private final List<E> lst;
+    public HumanIterator(List<E> humanList) {
         this.lst = humanList;
     }
-
     @Override
     public boolean hasNext() {
         return index < lst.size();
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return lst.get(index++);
     }
 }

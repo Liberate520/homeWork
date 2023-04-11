@@ -23,7 +23,7 @@ public class Main {
         Human human4 = new Human("Аня", "Иванова",
                 LocalDate.of(1987,6,10), human1, human2);//10.06.1987
 
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<Human>();
         tree.add(human1);
         tree.add(human2);
         tree.add(human3);
@@ -34,13 +34,13 @@ public class Main {
         tree.add(human8);
 
         System.out.println(tree);
-        tree.searchForSurnameandName("Иванова", "Аня");// вывод данного человека и его детей
+        tree.searchForSurnameAndName("Иванова", "Аня");// вывод данного человека и его детей
 
         Writeable wr = new Data();
         wr.save(tree);
         wr.read();
 
-        for (Human human: tree) {
+        for (Object human: tree) {
             System.out.println(human);
         }
 
@@ -49,14 +49,14 @@ public class Main {
 
         System.out.println("\nСортировка по имени:\n");
 
-        for (Human human: tree) {
+        for (Object human: tree) {
             System.out.println(human);
         }
 
         System.out.println("\nСортировка по дате рождения:\n");
         srv.sortByDateOfBirht();
 
-        for (Human human: tree) {
+        for (Object human: tree) {
             System.out.println(human);
         }
     }

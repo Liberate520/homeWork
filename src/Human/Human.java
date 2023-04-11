@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Human implements Serializable{
-    private String name;
-    private String surname;
-    private LocalDate birthday;
+    private final String name;
+    private final String surname;
+    private final LocalDate birthday;
     private Human mother;
     private Human father;
     public Human(String name, String surname, LocalDate birthday) {
@@ -51,8 +51,6 @@ public class Human implements Serializable{
         if (getName() != null ? !getName().equals(human.getName()) : human.getName() != null) return false;
         return getSurname() != null ? getSurname().equals(human.getSurname()) : human.getSurname() == null;
     }
-
-
 }
 
 

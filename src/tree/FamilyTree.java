@@ -1,26 +1,24 @@
 package tree;
 
 import Human.Human;
-import tree.HumanIterator;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private  List<Human> tree;
+public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
+    private final List<E> tree;
 
     public FamilyTree() {
         this.tree = new ArrayList<>();
     }
 
-    public void add(Human human) {
-        this.tree.add(human);
+    public void add(E o) {
+        this.tree.add(o);
     }
     @Override
     public String toString() {
-        for (Human item : tree) {
+        for (E item : tree) {
             if (item.getFather() != null & item.getMother() != null) {
                 System.out.println(item + " Мама:" + item.getMother() + " Папа: " + item.getFather());
             }
@@ -28,15 +26,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return " ";
     }
 
-    public void searchForSurnameandName(String surname, String name) {
-        List<Human> temp = new ArrayList<>();
+    public void searchForSurnameAndName(String surname, String name) {
+        List<E> temp = new ArrayList<>();
         Object res = null;
-        for (Human item : tree) {
+        for (E item : tree) {
             if (item.getName().equals(name) && item.getSurname().equals(surname)) {
                 res = item;
             }
         }
-        for (Human item : tree) {
+        for (E item : tree) {
             if (item.getFather() != null | item.getMother() != null) {
                 if (item.getFather().getSurname().equals(surname) && item.getFather().getName().equals(name) ||
                         item.getMother().getSurname().equals(surname) && item.getMother().getName().equals(name)) {
@@ -53,11 +51,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(tree);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(tree);
     }
 
-    public List<Human> getTree() {
+    public List<E> getTree() {
         return tree;
     }
 }

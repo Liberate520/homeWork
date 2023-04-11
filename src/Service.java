@@ -1,10 +1,11 @@
+import Human.Human;
 import tree.FamilyTree;
 import tree.comparators.HumanComparatorByDateOfBirth;
 import tree.comparators.HumanComparatorByName;
 
 public class Service {
-    private FamilyTree tree;
-    public Service(FamilyTree tree) {
+    private final FamilyTree<Human> tree;
+    public Service(FamilyTree<Human> tree) {
         this.tree = tree;
     }
     public void sortByName(){

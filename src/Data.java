@@ -9,7 +9,7 @@ public class Data implements Writeable{
     @Override
     public void read() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("data.txt"));
-        Object ob = (Object) objectInputStream.readObject();
+        Object ob = objectInputStream.readObject();
         objectInputStream.close();
         System.out.println(ob);
     }
