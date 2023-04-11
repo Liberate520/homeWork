@@ -1,10 +1,11 @@
 package tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Comparable<Human> {
+public class Human implements Serializable {
     private int id;
     private String name;
     private Gender gender;
@@ -92,20 +93,14 @@ public class Human implements Comparable<Human> {
     @Override
     public String toString() {
         return "\nHuman{" +
-                "id=" + id +
-                "name ='" + name + '\'' +
+                "id = " + id +
+                ", name ='" + name + '\'' +
                 ", gender = " + gender +
                 ", birthDate = " + birthDate +
                 ", deathDate = " + deathDate +
                 ", children = " + children +
                 '}';
     }
-
-    @Override
-    public int compareTo(Human o) {
-        return 0;
-    }
-
 
     public enum Gender {
         male, female
