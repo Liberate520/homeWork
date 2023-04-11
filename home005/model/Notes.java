@@ -3,28 +3,22 @@ package model;
 import java.util.ArrayList;
 
 public class Notes {
-    // ArrayList<Note> notes;
-    ArrayList<String> notes;
+    private ArrayList<Note> notes;
 
     public Notes() {
         this.notes = new ArrayList<>();
     }
 
-    // public void addNote(Note note) {
-    //     notes.add(note);
-    // }
-    public void addNote(String note) {
+    public void addNote(Note note) {
         notes.add(note);
     }
 
-    // public void showNotes() {
-    //     for (Note note : notes) {
-    //         System.out.println(note);
-    //     }
-    // }
-    public void showNotes() {
-        for (String note : notes) {
-            System.out.println(note);
+    public String showNotes() {
+        StringBuilder allNotes = new StringBuilder();
+        for (Note note : notes) {
+            allNotes.append(note.toString());
+            allNotes.append("\n");
         }
+        return allNotes.toString();
     }
 }

@@ -1,36 +1,38 @@
 package view;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-import presenter.Presenter;
+import view.Commands.*;
 
-public class Menu implements View{
+public class Menu{
 
-    private Presenter presenter;
-    private Scanner scanner;
+    private List<Command> commands;
 
-    public Menu() {
-        scanner = new Scanner(System.in);
+    public Menu(Console console) {
+        commands = new ArrayList<>();
+        commands.add(new Add(console));
+        commands.add(new Show(console));
+        commands.add(new Exit(console));
     }
 
-    @Override
-    public void setPresenter(Presenter presenter){
-        this.presenter = presenter;
+    public String printMenu(){
+        StringBuilder menu = new StringBuilder();
+        for (int i = 0; i < commands.size(); i++) {
+            menu.append(i+1);
+            menu.append(". ");
+            menu.append(commands.get(i).act());
+            menu.append("\n");
+        }
+        // for (Command action : commands) {
+        //     menu.append(action.act());
+        //     menu.append("\n");
+        // }
+        return menu.toString();
     }
 
-    @Override
-    public void start() {
-        int choise = getChoise();
-        presenter.action(choise);
-    }
-
-    private int getChoise() {
-        System.out.println("Choose action:\n1. Add note\n2. Show all notes\n3. Exit");
-        return scanner.nextInt();
-    }
-
-    public String newNote() {
-        System.out.println("Enter note: ");
-        return scanner.next();
+    void execute(int num){
+        Command action = commands.get(num);
+        action.execute();
     }
 }
