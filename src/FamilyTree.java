@@ -27,16 +27,16 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     }
 
     public void parentsHuman(E human) {
-        Human mather = null;
-        Human father = null;
-        for (Human item : familyTree) {
+        E mather = null;
+        E father = null;
+        for (E item : familyTree) {
             if (item.getId() == human.getIdMather()) mather = item;
             if (item.getId() == human.getIdFather()) father = item;
         }
         System.out.printf("Исследуемый объект:\n%s\nМать - %s\nОтец - %s", human, mather, father);
     }
 
-    public void childrensHuman(Human human) {
+    public void childrensHuman(E human) {
         List<E> childrens = new ArrayList<>();
         for (E item : familyTree) {
             if (item.getIdFather() == human.getId() || item.getIdMather() == human.getId()) {
