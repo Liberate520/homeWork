@@ -1,4 +1,4 @@
-package treePackage;
+//package treePackage;
 
 
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree implements HumanInterface {
+public class FamilyTree <E extends Human> implements HumanInterface<E> {
 
     public List<Human> humanList = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class FamilyTree implements HumanInterface {
         }
         if (!humanList.contains(human)) {
 
-            humanList.add(human);
+            humanList.add((E) human);
             if (human.getFather() != null) {
 
                 human.getFather().addChildren(human);
@@ -44,8 +44,8 @@ public class FamilyTree implements HumanInterface {
 
     public Human getByName(String name) {
         for (Human human : humanList) {
-            if (human.getName().equals(name)) {
-                return human;
+            if (((Human) human).getName().equals(name)) {
+                return (Human) human;
             }
         }
         return null;
@@ -53,8 +53,8 @@ public class FamilyTree implements HumanInterface {
 
     public Human getByFamily(String fam) {
         for (Human human : humanList) {
-            if (human.getFamily().equals(fam)) {
-                return human;
+            if (((Human) human).getFamily().equals(fam)) {
+                return (Human) human;
             }
         }
         return null;
@@ -66,7 +66,7 @@ public class FamilyTree implements HumanInterface {
         infoRes.append(humanList.size() + " ");
         infoRes.append("объекта(ов)\n");
         for (Human human : humanList) {
-            infoRes.append(human.getInfo());
+            infoRes.append(((Human) human).getInfo());
         }
 
         return infoRes.toString();
@@ -77,15 +77,15 @@ public class FamilyTree implements HumanInterface {
     
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 
     
 
        
-    public List<Human> getHumanList() {
-        return humanList;
+    public List<E> getHumanList() {
+        return (List<E>) humanList;
     }
 
     

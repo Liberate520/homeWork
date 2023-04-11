@@ -1,9 +1,9 @@
-package treePackage;
+//package treePackage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Comparable<Human> {
+public class Human<E> implements Comparable<E> {
 
     private Human mother;
     private Human father;
@@ -11,7 +11,7 @@ public class Human implements Comparable<Human> {
     private String name;
     private String family;
     private String dateBirth;
-    private List<Human> children;
+    private List<E> children;
 
     // родители или муж/жена
     public Human(String name, String family, String dateBirth) {
@@ -31,7 +31,7 @@ public class Human implements Comparable<Human> {
 
     // добавление ребенка с проверкой
 
-    public boolean addChildren(Human chld) {
+    public boolean addChildren(E chld) {
         if (!children.contains(chld)) {
             children.add(chld);
             return true;
@@ -86,11 +86,11 @@ public class Human implements Comparable<Human> {
 
         if (children.size() != 0) {
 
-            infoRes.append(children.get(0).getName());
+            infoRes.append(children.get(0).getClass());
 
             for (int i = 1; i < children.size(); i++) {
                 infoRes.append(", ");
-                infoRes.append(children.get(i).getName());
+                infoRes.append(children.get(i).getClass());
 
             }
         } else {
@@ -143,8 +143,8 @@ public class Human implements Comparable<Human> {
     }
 
     @Override
-    public int compareTo(Human o) {
-        return name.compareTo(o.getName());
+    public int compareTo(E o) {
+        return name.compareTo(String.valueOf(o.getClass()));
     }
 
     public static Object getHumanList() {
@@ -154,7 +154,7 @@ public class Human implements Comparable<Human> {
     public void sort(HumanComparatorByName humanComparatorByName) {
     }
 
-    public void addHumanForSort(Human human) {
-    }
+
+
 
 }

@@ -1,11 +1,11 @@
-package treePackage;
+//package treePackage;
 
 import java.util.Iterator;
 import java.util.List;
 
 
 
-public class HumanIterator extends FamilyTree implements Iterator<Human>{
+public class HumanIterator<E, T> extends FamilyTree <Human> implements Iterator<E>{
 
     private int index;
     
@@ -22,9 +22,9 @@ public class HumanIterator extends FamilyTree implements Iterator<Human>{
     }
 
     @Override
-    public Human next() {
+    public E next() {
         
-        return humanList.get(index++);
+        return (E) humanList.get(index++);
     }
     
 }

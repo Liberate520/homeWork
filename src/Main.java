@@ -1,4 +1,4 @@
-package treePackage;
+//package treePackage;
 
 import java.io.IOException;
 
@@ -26,6 +26,14 @@ import java.io.IOException;
 // Реализовать интерфейс Iterable для дерева.
 // Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения (не менее 2)
 
+// Урок 4. ООП: Обобщения. ч1
+
+// Продолжаем грейдить наш проект с гениологическим древом. Изменить древо,
+//  сделать класс параметизированным. Продумать класс общения с пользователем,
+//  сделать набор команд, для операций над деревом
+
+
+
 public class Main {
 
         /**
@@ -35,7 +43,8 @@ public class Main {
          */
         public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-                FamilyTree tree = new FamilyTree();
+                FamilyTree <Human> tree = new FamilyTree<>();
+
 
                 tree.addNewHuman(new Human("Ирина", "Малинина", "21.08.1987"), null);
                 tree.addNewHuman(new Human("Владимир", "Малинин", "10.02.1985"), null);
@@ -56,7 +65,7 @@ public class Main {
                                 null);
 
                 System.out.println();
-                // System.out.println(tree.getInfo());
+                 System.out.println(tree.getInfo());
 
                 // MethodClassSerializable treeForWrite = new
                 // MethodClassSerializable(tree.getInfo(), null);
@@ -76,9 +85,9 @@ public class Main {
                 // Создаем экземпляр класса Service и помещаем в него экземпляр tree
                 Service service = new Service(tree);
 
-
+               
                 System.out.println("\n"+"-----------до сортировки-----------"+"\n");
-
+                
                 
                 
                 // Выводим экземпляры tree перед сортировкой
@@ -86,9 +95,9 @@ public class Main {
                         System.out.println(st);
                 }
 
-
+                
                 System.out.println("\n"+"------после сортировки по имени--------"+"\n");
-
+                
 
                 // Производим сортировку по имени
                 service.sortByName();
@@ -101,9 +110,9 @@ public class Main {
                 // Производим сортировку по фамилии
                 service.sortByFamily();
 
-
+                
                 System.out.println("\n"+"------после сортировки по фамилии--------"+"\n");
-
+                
 
                 // Выводим экземпляры tree после сортировки
                 for (Human st : tree) {

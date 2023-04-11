@@ -1,8 +1,8 @@
-package treePackage;
+//package treePackage;
 
 public class Service {
 
-    private HumanInterface humanForSort;
+    public HumanInterface humanForSort;
 
     public Service(HumanInterface humanForSort) {
         this.humanForSort = humanForSort;
