@@ -4,10 +4,7 @@ package familyTree;
 import familyTree.comparators.Group;
 import member.Human;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class MemberIterator<T> implements Iterator<T> {
 
@@ -29,9 +26,14 @@ public class MemberIterator<T> implements Iterator<T> {
         if (hasNext()) {
             T current = members.poll();
             if (current instanceof Group) {
-                Group<T>
+                Group<T> group = (Group<T>) current;
+                for (T member : group.getMembers()) {
+                    members.offer(member);
+                }
             }
+            return current;
         }
+        throw new NoSuchElementException();
     }
 
     //    @Override

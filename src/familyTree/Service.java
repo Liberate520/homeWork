@@ -1,9 +1,9 @@
 package familyTree;
 
-import familyTree.comparators.HumanComparatorByBirthday;
+import familyTree.comparators.MemberComparatorByBirthday;
 import familyTree.comparators.IdComparator;
-import familyTree.comparators.HumanComparatorByName;
-import familyTree.comparators.HumanCompareByNumberChild;
+import familyTree.comparators.MemberComparatorByName;
+import familyTree.comparators.ByNumberChildComparator;
 import member.Gender;
 import member.Human;
 import service.FileHandler;
@@ -42,9 +42,7 @@ public class Service {
     public void printTree(){
         System.out.println(tree.getInfo());
     }
-    public void printPetList(){
-        System.out.println(tree.getPetList().toString());
-    }
+
 
     public void save(String fileName){
         if (handler != null && tree != null) {
@@ -69,19 +67,19 @@ public class Service {
     }
 
     public void sortByName () {
-        tree.getHumanList().sort(new HumanComparatorByName());
+        tree.getMembers().sort(new MemberComparatorByName());
     }
 
-    public void sortById () {
-        tree.getHumanList().sort(new IdComparator());
-    }
+//    public void sortById () {
+//        tree.getMemberById(id).sort(new IdComparator());
+//    }
 
     public void sortByBirthday () {
-        tree.getHumanList().sort(new HumanComparatorByBirthday());
+        tree.getMembers().sort(new MemberComparatorByBirthday());
     }
 
     public void sortByNumChild () {
-        tree.getHumanList().sort(new HumanCompareByNumberChild());
+        tree.getMembers().sort(new ByNumberChildComparator());
     }
 
 }

@@ -1,10 +1,10 @@
 package familyTree.comparators;
 
-import human.Human;
+import member.Human;
 
 import java.util.Comparator;
 
-public class HumanCompareByNumberChild implements Comparator<Human> {
+public class ByNumberChildComparator implements Comparator<Human> {
     @Override
     public int compare(Human o1, Human o2) {
         return Integer.compare(o1.getNumChildren(), o2.getNumChildren());
