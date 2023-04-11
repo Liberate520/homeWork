@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class Human {
+    // я не разобралась как создавать связь
     Human father;
     Human mother;
     List<Human> children;
