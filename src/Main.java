@@ -1,13 +1,13 @@
+import java.io.IOException;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree testFamily = new FamilyTree();
 /**
  *  1. Дерево должно строиться относительно какой-либо персоны, таким образом для всех остальных объектов можно
  *  будет указывать степень родства.
  *  2. ВСЕ экземпляры Human должны иметь уникальные ID для возможности привязки мамы, папы, супруга
- *
  *  на будущее:
  *  - ничто не мешает одного и того же Human добавить в разные "семьи" (экземпляры FamilyTree). Например, у человека
  *  новая семья. Тогда можно будет строить целые сети семей.
@@ -55,8 +55,13 @@ public class Main {
         testFamily.add(human12_4_12_42_1);
         testFamily.add(human12_4_12_42_2);
 
-        System.out.println(human12_3.inFamily(testFamily));
-        System.out.println(human12_32.inFamily(testFamily));
+        System.out.println(testFamily.showTree(2)); // относительно какого Human строить дерево
+
+        testFamily.saveTree("test1.fml");
+        FamilyTree testFamilyRestore = FamilyTree.loadTree("test1.fml");
+
+        System.out.println("\n\nЗагруженное из файла дерево: ");
+        System.out.println(testFamilyRestore.showTree(2));
 
     }
 }
