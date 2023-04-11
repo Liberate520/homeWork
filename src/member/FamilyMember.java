@@ -1,7 +1,4 @@
-package familyTree;
-
-import member.Gender;
-import member.Human;
+package member;
 
 import java.util.List;
 

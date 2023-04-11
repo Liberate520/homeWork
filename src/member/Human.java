@@ -1,6 +1,5 @@
 package member;
 
-import familyTree.FamilyMember;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -58,7 +57,6 @@ public class Human implements FamilyMember, Serializable {
         this.dateBirth = "unknown";
     }
 
-
     @Override
     public int getId() {
         return id;
@@ -94,10 +92,8 @@ public class Human implements FamilyMember, Serializable {
 
     @Override
     public void setGender(Gender gender) {
-
+        this.gender = gender;
     }
-
-
 //
 //    @Override
 //    public FamilyMember getParent() {
@@ -116,7 +112,7 @@ public class Human implements FamilyMember, Serializable {
 
     @Override
     public List<Human> getSiblings() {
-        return null;
+        return siblings;
     }
     @Override
     public List<Human> getGrandparents() {
@@ -153,8 +149,6 @@ public class Human implements FamilyMember, Serializable {
         return grandchildrens;
     }
 
-
-
     public String getDateDeath() {
         return dateDeath;
     }
@@ -168,7 +162,6 @@ public class Human implements FamilyMember, Serializable {
         LocalDate currentDate = LocalDate.now();
         LocalDate date = LocalDate.parse(dateBirth, formatter);
         return Period.between(date, currentDate).getYears();
-
     }
 
     public void setId(int id) {
@@ -178,8 +171,6 @@ public class Human implements FamilyMember, Serializable {
     public int getNumChildren() {
         return childList.size();
     }
-
-
 
     public Human getMother() {
         return mother;
@@ -214,7 +205,6 @@ public class Human implements FamilyMember, Serializable {
             this.name = name;
         }
     }
-
     public void setSurname(String surname) {
         if (surname.isEmpty()) {
             System.out.println("Поле не должно быть пустым");
@@ -229,14 +219,14 @@ public class Human implements FamilyMember, Serializable {
     public void setMother(Human mother) {
         this.mother = mother;
     }
-
     public void setDateBirth(String dateBirth) {
         if (dateBirth.isEmpty()) {
             System.out.println("Поле не должно быть пустым");
         } else {
             this.dateBirth = dateBirth;
         }
-    } public void setDateDeath(String dateDeath) {
+    }
+    public void setDateDeath(String dateDeath) {
         if (dateDeath.isEmpty()) {
             System.out.println("Поле не должно быть пустым");
         } else {
@@ -246,7 +236,6 @@ public class Human implements FamilyMember, Serializable {
 //    public String getMaidenName() {
 //        return this.maidenName;
 //    }
-//
 //    public void setMaidenName(String maidenName) {
 //        if (maidenName.trim().matches(nameRegex)) {
 //            if (this.gender == Gender.Male) {
@@ -306,8 +295,6 @@ public class Human implements FamilyMember, Serializable {
     public void addGrandchild(Human grandchild) {
         grandchildrens.add(grandchild);
     }
-
-
 
 
     public String getInfo() {

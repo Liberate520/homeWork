@@ -22,10 +22,16 @@ public class ConsoleUI implements View{
     }
 
     @Override
+    public void print(String text) {
+        System.out.println(text);
+    }
+
+    @Override
     public void start() {
         while (work) {
             menu.print();
-            int choice = Integer.parseInt(scan()); // добавить проверки, чтобы не упало приложение?!
+            int choice = Integer.parseInt(scan());
+            // добавить проверки, чтобы не упало приложение?!
             menu.execute(choice);
         }
 
@@ -36,6 +42,7 @@ public class ConsoleUI implements View{
 
     }
     public void getAllMembers() {
+        System.out.println(presenter.);
 
     }
 
@@ -48,10 +55,14 @@ public class ConsoleUI implements View{
         String dateBirth = scanner.nextLine();
     }
 
-    public void removeMember(){}
+    public void removeMember(){
+
+    }
 
 
-    public void searchMember(){}
+    public void searchMember(){
+
+    }
 
 
     public void finish() {work = false;}

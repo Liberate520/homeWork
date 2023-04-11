@@ -1,6 +1,7 @@
 package familyTree;
 
 import familyTree.comparators.Group;
+import member.FamilyMember;
 import member.Human;
 
 import java.io.*;
@@ -18,6 +19,9 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
     }
     public FamilyTree(T root) {
         this.root = root;
+    }
+    public T getRoot() {
+        return root;
     }
 
 //    @Override
@@ -82,10 +86,6 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         return true;
     }
 
-    public T getRoot() {
-        return root;
-    }
-
     @Override
     public boolean remove(T member) {
         if (!members.containsKey(member.getId())) {
@@ -114,18 +114,13 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         return new ArrayList<>(members.values());
     }
 
-
-//    public void setRoot(T root) {
-//        this.root = root;
-//    }
-
     @Override
     public void setRoot(T root) {
         if (root == null) {
-            throw new IllegalArgumentException("Head cannot be null");
+            throw new IllegalArgumentException("Root cannot be null");
         }
         if (this.root != null) {
-            throw new IllegalStateException("Head is already set");
+            throw new IllegalStateException("Root is already set");
         }
         this.root = root;
         add(root);
@@ -134,7 +129,6 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
     public T getMemberById(int id) {
         return members.get(id);
     }
-
 
     public List<T> searchByName(String name, String surname) {
         List<T> result = new ArrayList<>();
@@ -157,27 +151,9 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
     }
 
 
-
-//    public E getByName(String name) {
-//        for (E human :
-//                humanList) {
-//            if (human.getClass().getName().equals(name))
-//                return human;
-//        }
-//        return null;
-//    }
-//    public E getBySurname(String surname) {
-//        for (E human :
-//                humanList) {
-//            if (human.getClass().getSurname().equals(surname))
-//                return human;
-//        }
-//        return null;
-//    }
 //    public void addHuman(T member) {
 //        members.put(member);
 //    }
-
 
 //    public boolean add(E human) {
 //        if (human == null) {
@@ -198,8 +174,8 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
 
     public Map<String, Object> getFamilyTreeInfo() {
         Map<String, Object> familyTreeInfo = new HashMap<>();
-        familyTreeInfo.put("head", root);
-        familyTreeInfo.put("members", members);
+        familyTreeInfo.put("Глава рода", root);
+        familyTreeInfo.put("представители", members);
         return familyTreeInfo;
     }
 
