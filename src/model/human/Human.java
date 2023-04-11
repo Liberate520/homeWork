@@ -1,26 +1,31 @@
-package treePackage;
+package model.human;
 
+import model.familyTree.HumanComparatorByName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Comparable<Human> {
+public class Human<E> implements Comparable<E>, Serializable {
 
-    private Human mother;
-    private Human father;
+    private Human<E> mother;
+    private Human<E> father;
 
     private String name;
     private String family;
     private String dateBirth;
-    private List<Human> children;
+    private List<E> children;
 
     // родители или муж/жена
     public Human(String name, String family, String dateBirth) {
         this(name, family, dateBirth, null, null);
     }
 
+
+
     // ребенок
 
-    public Human(String name, String family, String dateBirth, Human father, Human mother) {
+    public Human(String name, String family, String dateBirth, Human<E> father, Human<E> mother) {
         this.name = name;
         this.family = family;
         this.dateBirth = dateBirth;
@@ -28,10 +33,11 @@ public class Human implements Comparable<Human> {
         this.mother = mother;
         children = new ArrayList<>();
     }
+    public Human(){}
 
     // добавление ребенка с проверкой
 
-    public boolean addChildren(Human chld) {
+    public boolean addChildren(E chld) {
         if (!children.contains(chld)) {
             children.add(chld);
             return true;
@@ -47,11 +53,11 @@ public class Human implements Comparable<Human> {
         return family;
     }
 
-    public Human getFather() {
+    public Human<E> getFather() {
         return father;
     }
 
-    public Human getMother() {
+    public Human<E> getMother() {
         return mother;
 
     }
@@ -86,11 +92,11 @@ public class Human implements Comparable<Human> {
 
         if (children.size() != 0) {
 
-            infoRes.append(children.get(0).getName());
+            infoRes.append(((Human<E>) children.get(0)).getName());
 
             for (int i = 1; i < children.size(); i++) {
                 infoRes.append(", ");
-                infoRes.append(children.get(i).getName());
+                infoRes.append(((Human<E>) children.get(i)).getName());
 
             }
         } else {
@@ -132,8 +138,8 @@ public class Human implements Comparable<Human> {
         if (!(obj instanceof Human)) {
             return false;
         }
-        Human human = (Human) obj;
-        return human.getName().equals((getName()));
+        E human = (E) obj;
+        return ((Human<E>) human).getName().equals((getName()));
     }
 
     @Override
@@ -143,8 +149,8 @@ public class Human implements Comparable<Human> {
     }
 
     @Override
-    public int compareTo(Human o) {
-        return name.compareTo(o.getName());
+    public int compareTo(E o) {
+        return name.compareTo(((Human<E>) o).getName());
     }
 
     public static Object getHumanList() {
@@ -154,7 +160,8 @@ public class Human implements Comparable<Human> {
     public void sort(HumanComparatorByName humanComparatorByName) {
     }
 
-    public void addHumanForSort(Human human) {
+    public void addHumanForSort(E human) {
     }
+
 
 }

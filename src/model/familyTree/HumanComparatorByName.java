@@ -1,5 +1,7 @@
 
-package treePackage;
+package model.familyTree;
+
+import model.human.Human;
 
 import java.util.Comparator;
 

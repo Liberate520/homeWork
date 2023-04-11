@@ -1,4 +1,6 @@
-package treePackage;
+package model.human;
+
+import model.human.Human;
 
 import java.util.List;
 
