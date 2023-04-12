@@ -16,11 +16,11 @@ public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<
     }
 
     public void addFamilyTree(E fTree) {
-        this.fTrees.add(fTree);
+        this.getFamilyTrees().add(fTree);
     }
 
     @Override
-    public List<E> getFamilyTreeList() {
+    public List<E> getFamilyTrees() {
         return this.fTrees;
     }
 
@@ -30,7 +30,7 @@ public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<
     }
 
     public E findFamilyTree(String name){
-        for (E familyTree : this.fTrees) {
+        for (E familyTree : getFamilyTrees()) {
             if (familyTree.getName().equals(name)) {
                 return familyTree;
             }
@@ -38,10 +38,18 @@ public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<
         return null;
     }
 
-    public void printAllInfo() {
-        for (E fTree : this.fTrees) {
-            System.out.println("Members of family " + fTree.getName() + " :");
-            fTree.printInfo();
+    public String printAllInfo() {
+        StringBuilder result = new StringBuilder();
+        for (E fTree : getFamilyTrees()) {
+            result.append("Members of family " + fTree.getName() + " :");
+            result.append(fTree.printAllInfo());
+        }
+        return result.toString();
+    }
+
+    public void printTrees() {
+        for (E fTree : getFamilyTrees()) {
+            fTree.printTree();
         }
     }
 

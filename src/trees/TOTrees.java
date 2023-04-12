@@ -11,9 +11,11 @@ public interface TOTrees<E extends FamilyTree> extends Iterable<E> {
 
     E findFamilyTree(String name);
 
-    void printAllInfo();
+    String printAllInfo();
 
     void save(Writable<TreeOfTrees<E>> writable, String fileName);
 
-    List<E> getFamilyTreeList();
+    List<E> getFamilyTrees();
+
+    void printTrees();
 }

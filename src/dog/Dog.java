@@ -1,4 +1,4 @@
-package person;
+package dog;
 
 import member.Member;
 
@@ -6,29 +6,27 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Person implements Serializable, Comparable<Person>, Member {
+public class Dog implements Serializable, Comparable<Dog>, Member {
     private List<String> name;
     private String kind;
     private boolean isMale;
     private Calendar bornDate;
-    private Map<Person, Boolean> married;
-    private List<Person> children;
-    private List<Person> parents;
+    private List<Dog> children;
+    private List<Dog> parents;
 
-    public Person(String name, String kind, boolean isMale, Calendar bornDate) {
-        this(name, kind, isMale, bornDate, new HashMap<>(), new ArrayList<>(), new ArrayList<>());
+    public Dog(String name, String kind, boolean isMale, Calendar bornDate) {
+        this(name, kind, isMale, bornDate, new ArrayList<>(), new ArrayList<>());
     }
 
-    public Person(String name, Person person) {
-        this(name, person.kind, person.isMale, person.bornDate, person.married, person.children, person.parents);
+    public Dog(String name, Dog dog) {
+        this(name, dog.kind, dog.isMale, dog.bornDate, dog.children, dog.parents);
         this.updateLinks();
     }
 
-    private Person(String name, String kind, boolean isMale, Calendar bornDate, Map<Person, Boolean> married, List<Person> children, List<Person> parents) {
+    private Dog(String name, String kind, boolean isMale, Calendar bornDate, List<Dog> children, List<Dog> parents) {
         this.setName(name);
         this.kind = kind;
         this.isMale = isMale;
-        this.married = married;
         this.bornDate = bornDate;
         this.children = children;
         this.parents = parents;
@@ -46,53 +44,44 @@ public class Person implements Serializable, Comparable<Person>, Member {
         return this.name;
     }
 
+    @Override
     public String getNameString() {
         return this.getName().stream().map(Object::toString).collect(Collectors.joining(" "));
     }
 
+    @Override
     public Calendar getBornDate() {
         return this.bornDate;
     }
 
+    @Override
     public Boolean getGender() {
         return this.isMale;
     }
 
+    @Override
     public ThreadLocal<Object> getChildren() {
         return (ThreadLocal<Object>) this.children;
     }
 
+    @Override
     public ThreadLocal<Object> getParents() {
         return (ThreadLocal<Object>) this.parents;
     }
 
+    @Override
     public String getKind() {
         return this.kind;
     }
 
-    public Person getMarried() {
-        if (this.married.containsValue(true)) {
-            for (Map.Entry<Person, Boolean> entry : this.married.entrySet())
-                if (entry.getValue()) return entry.getKey();
-        }
-        return null;
-    }
-
-    public void addMarried(Person married, boolean isMarried) {
-        if (!this.hasMarried(married)) {
-            this.married.put(married, isMarried);
-            married.addMarried(this, isMarried);
-        }
-    }
-
-    public void addChild(Person child) {
+    public void addChild(Dog child) {
         if (!this.hasChild(child)) {
             this.children.add(child);
             child.addParent(this);
         }
     }
 
-    public void addParent(Person parent) {
+    public void addParent(Dog parent) {
         if (!this.hasParent(parent)) {
             this.parents.add(parent);
             parent.addChild(this);
@@ -106,20 +95,21 @@ public class Person implements Serializable, Comparable<Person>, Member {
 
     private void updateChildren() {
         if (this.countChildren() > 0) {
-            for (Person person : this.children) {
-                person.addParent(this);
+            for (Dog dog : this.children) {
+                dog.addParent(this);
             }
         }
     }
 
     private void updateParents() {
         if (this.countParents() > 0) {
-            for (Person person : this.parents) {
-                person.addChild(this);
+            for (Dog dog : this.parents) {
+                dog.addChild(this);
             }
         }
     }
 
+    @Override
     public int countChildren() {
         return this.children.size();
     }
@@ -128,15 +118,11 @@ public class Person implements Serializable, Comparable<Person>, Member {
         return this.parents.size();
     }
 
-    public boolean hasMarried(Person married) {
-        return this.married.containsKey(married);
-    }
-
-    public boolean hasChild(Person child) {
+    public boolean hasChild(Dog child) {
         return this.children.contains(child);
     }
 
-    private boolean hasParent(Person parent) {
+    private boolean hasParent(Dog parent) {
         return this.parents.contains(parent);
     }
 
@@ -144,8 +130,8 @@ public class Person implements Serializable, Comparable<Person>, Member {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return isMale == person.isMale && Objects.equals(name, person.name) && Objects.equals(kind, person.kind) && Objects.equals(bornDate, person.bornDate);
+        Dog dog = (Dog) o;
+        return isMale == dog.isMale && Objects.equals(name, dog.name) && Objects.equals(kind, dog.kind) && Objects.equals(bornDate, dog.bornDate);
     }
 
     @Override
@@ -153,7 +139,8 @@ public class Person implements Serializable, Comparable<Person>, Member {
         return Objects.hash(name, kind, isMale, bornDate);
     }
 
-    public int compareTo(Person p) {
+    @Override
+    public int compareTo(Dog p) {
         int result = this.getName().get(0).compareTo(p.getName().get(0));
         if (result == 0) result = this.getName().get(1).compareTo(p.getName().get(1));
         if (result == 0) {
