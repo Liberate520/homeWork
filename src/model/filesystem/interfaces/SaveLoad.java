@@ -1,8 +1,8 @@
-package filesystem.interfaces;
+package model.filesystem.interfaces;
 
 import java.io.Serializable;
 
-import tree.interfaces.iTree;
+import model.tree.interfaces.iTree;
 
 public interface SaveLoad<E> extends Serializable {
     void save (iTree<E> treeToSave, String path);

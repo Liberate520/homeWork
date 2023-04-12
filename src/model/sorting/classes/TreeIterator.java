@@ -1,4 +1,4 @@
-package sorting.classes;
+package model.sorting.classes;
 
 import java.util.Iterator;
 import java.util.List;

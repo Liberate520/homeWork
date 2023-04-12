@@ -1,12 +1,10 @@
-package sorting.classes;
+package model.sorting.classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// import tree.classes.Human;
-// import tree.classes.Tree;
-import tree.interfaces.iTree;
+import model.tree.interfaces.iTree;
 
 public class Sorting<E> {
     private List<E> persons = new ArrayList<>();

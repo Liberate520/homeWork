@@ -1,8 +1,9 @@
-package tree.classes;
+package model.tree.classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Human implements Serializable{
     private String name;
@@ -14,6 +15,7 @@ public class Human implements Serializable{
     private Human father;
     private Human mother;
     private List<Human> children = new ArrayList<>();
+    private Scanner scanner;
 
     public Human() {
     }
@@ -40,12 +42,50 @@ public class Human implements Serializable{
         this.mother = mother;
     }
 
+    public void setHuman(){
+        scanner = new Scanner(System.in);
+
+        System.out.println("Input name: ");
+        name = scanner.nextLine();
+
+        System.out.println("Input patronymic: ");
+        patronymic = scanner.nextLine();
+
+        System.out.println("Input surname: ");
+        surname = scanner.nextLine();
+
+        boolean loop = false;
+        while(!loop){
+            System.out.println("Input date of birth: ");
+            String dateBirthString = scanner.nextLine();
+            try{
+                dateBirth = Integer.parseInt(dateBirthString);
+                loop = true;
+            }
+            catch(NumberFormatException e) {
+                System.out.println("Ошибка ввода Catch!");
+            }
+        }
+        
+        loop = false;
+        while(!loop){
+            System.out.println("Input date of death: ");
+            String dateDeathString = scanner.nextLine();
+            try{
+                dateDeath = Integer.parseInt(dateDeathString);
+                loop = true;
+            }
+            catch(NumberFormatException e) {
+                System.out.println("Ошибка ввода Catch!");               
+            }
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Name:");
         if (name != null)
-            sb.append(" " + name);
+            sb.append(name);
         if (patronymic != null)
             sb.append(" " + patronymic);
         if (surname != null)
@@ -101,6 +141,22 @@ public class Human implements Serializable{
 
     public int getBirthDate(){
         return dateBirth;
+    }
+
+    public Human getFather(){
+        return father;
+    }
+
+    public Human getMother(){
+        return mother;
+    }
+
+    public void setFather(Human f){
+        father = f;
+    }
+
+    public void setMother(Human m){
+        mother = m;
     }
 
 }

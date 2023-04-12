@@ -1,9 +1,9 @@
-package filesystem.classes;
+package model.filesystem.classes;
 import java.io.*;
 
-import filesystem.interfaces.SaveLoad;
-import tree.classes.Tree;
-import tree.interfaces.iTree;
+import model.filesystem.interfaces.SaveLoad;
+import model.tree.classes.Tree;
+import model.tree.interfaces.iTree;
 
 public class SaveRestore<E> implements SaveLoad<E> {
     @Override
@@ -18,7 +18,6 @@ public class SaveRestore<E> implements SaveLoad<E> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //throw new UnsupportedOperationException("Unimplemented method 'Save'");
     }
 
     @Override
@@ -35,7 +34,6 @@ public class SaveRestore<E> implements SaveLoad<E> {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //throw new UnsupportedOperationException("Unimplemented method 'Load'");
         return treeRestored;
     }
 

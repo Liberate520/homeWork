@@ -1,8 +1,8 @@
-package sorting.classes;
+package model.sorting.classes;
 
 import java.util.Comparator;
 
-import tree.classes.Human;
+import model.tree.classes.Human;
 
 public class HumanComparatorByName<E> implements Comparator<E> {
 
