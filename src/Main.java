@@ -3,10 +3,9 @@ import presenter.Presenter;
 import view.ConsoleUI;
 
 public class Main {
-    static String file_name = "bd.csv";
-
-    public static void main(String[] args) {
-        Service service = new Service(file_name,"csv");
+    public static void main(String[] args) throws ClassNotFoundException {
+        // Service service = new Service("bd.csv","csv");
+        Service service = new Service("bd.bin", "binary");
         ConsoleUI console = new ConsoleUI();
         new Presenter(service, console);
 

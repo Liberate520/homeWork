@@ -1,10 +1,14 @@
 package model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import model.iteratotor.TreeIterator;
+import model.person.Person;
 
 /**
  * Загружаем из файла информацию о людях их связях из файла csv базы
@@ -13,7 +17,7 @@ import java.util.Map;
  * 
  * @param <E>
  */
-public class Tree<E extends Person> implements Iterable<E> {
+public class Tree<E extends Person> implements Iterable<E>, Serializable {
     private Map<Integer, E> persons_list;
 
     public Tree() {
@@ -37,7 +41,9 @@ public class Tree<E extends Person> implements Iterable<E> {
     }
 
     public void add(int id, E pers) {
-        this.persons_list.put(id, pers);
+        if (!persons_list.containsKey(id))
+            if (!persons_list.containsValue(pers))
+                this.persons_list.put(id, pers);
     }
 
     public ArrayList<E> searchByName(String name) {

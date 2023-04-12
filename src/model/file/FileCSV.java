@@ -1,12 +1,13 @@
-package model;
+package model.file;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Scanner;
+
+import model.Tree;
+import model.person.Person;
 
 /**
  * FileCSV
@@ -20,6 +21,10 @@ public class FileCSV implements Files {
 
     public FileCSV() {
         this("bd.csv");
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 
     public String getFile_name() {
@@ -37,15 +42,15 @@ public class FileCSV implements Files {
     }
 
     private LinkedHashMap<String, String> arraysToMap(String[] fields, String[] values) {
-        LinkedHashMap<String, String> temp_map = new LinkedHashMap<>();
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
         for (int i = 0; i < fields.length; i++) {
             if (values.length > i) {
-                temp_map.put(fields[i], values[i]);
+                map.put(fields[i], values[i]);
             } else {
-                temp_map.put(fields[i], "");
+                map.put(fields[i], "");
             }
         }
-        return temp_map;
+        return map;
     }
 
     @Override
@@ -93,28 +98,27 @@ public class FileCSV implements Files {
         Tree<Person> family = new Tree<Person>();
 
         String bd_file = new File(file_name).getAbsolutePath();
-        if (fileExist(bd_file) == false) {
+        if (!fileExist(bd_file)) {
             return new Tree<Person>();
         }
 
         try {
             FileReader fr = new FileReader(bd_file);
             Scanner fscan = new Scanner(fr);
-            // Читаем название cтолбцов из csv файла
+
             String line = fscan.nextLine().trim().replaceAll("\n", "");
             String[] fields = convertLineToArray(line);
 
-            // Производим чтение данных и заполняем массив нашей базы, данными типа HashMap
             while (fscan.hasNextLine()) {
                 line = fscan.nextLine().trim().replaceAll("\n", "");
-                // Создаем массив HashMap со значениями из датасета
-                // где ключи - имена столбцов
-                LinkedHashMap<String, String> temp_map = new LinkedHashMap<>();
-                String[] values = convertLineToArray(line);
-                temp_map = arraysToMap(fields, values);
 
-                int i = Integer.parseInt(temp_map.get("person_id"));
-                Person pers = new Person(temp_map);
+                LinkedHashMap<String, String> map = new LinkedHashMap<>();
+                String[] values = convertLineToArray(line);
+                map = arraysToMap(fields, values);
+
+                int i = Integer.parseInt(map.get("person_id"));
+
+                Person pers = new Person(map);
                 family.add(i, pers);
             }
             fr.close();
@@ -147,10 +151,6 @@ public class FileCSV implements Files {
                 pers.setFather(father);
                 family.get(father_id).setPerson_childs(pers);
             }
-        }
-        Tree<Person> family = new Tree<>();
-        for (Map.Entry<Integer, Person> itm : persons_list.entrySet()) {
-            family.add(itm.getKey(), itm.getValue());
         }
         return family;
     }

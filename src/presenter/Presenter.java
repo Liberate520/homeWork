@@ -1,8 +1,10 @@
 package presenter;
 
 import java.util.List;
-import model.Person;
 import model.Service;
+import model.file.FileBinary;
+import model.file.FileCSV;
+import model.person.Person;
 import view.ConsoleUI;
 
 public class Presenter {
@@ -31,9 +33,26 @@ public class Presenter {
         this.console.print(answer);
     }
 
-    public void commandFileSave() {
-        String file_name = service.getBd_file().getFile_name();
-        Boolean saved = service.getBd_file().saveFile(service.getFamily_tree());
+    public void commandFileSaveAsCSV() {
+        FileCSV fcsv = service.getBd_csv();
+        if (fcsv==null){
+            fcsv = new FileCSV();
+            service.setBd_csv(fcsv);
+        }
+        String file_name = fcsv.getFile_name();
+        Boolean saved = fcsv.saveFile(service.getFamily_tree());
+        String answer = saved ? file_name + " File saved!" : "File " + file_name + " not saved!";
+        this.console.print(answer);
+    }
+
+    public void commandFileSaveAsBinary() {
+        FileBinary fbin = service.getBd_binary();
+        if (fbin==null){
+            fbin = new FileBinary();
+            service.setBd_binary(fbin);
+        }
+        String file_name = fbin.getFile_name();
+        Boolean saved = fbin.saveFile(service.getFamily_tree());
         String answer = saved ? file_name + " File saved!" : "File " + file_name + " not saved!";
         this.console.print(answer);
     }

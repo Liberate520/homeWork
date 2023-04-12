@@ -1,5 +1,7 @@
-package model;
+package model.comparator;
 import java.util.Comparator;
+
+import model.person.Person;
 
 public class ComparatorById implements Comparator<Person> {
 

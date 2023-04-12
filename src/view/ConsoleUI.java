@@ -37,8 +37,11 @@ public class ConsoleUI implements UI {
             if (map.containsKey("id"))
                 this.presenter.commandFullPersonInfo(map.get("id"));
 
-            if (map.containsKey("save"))
-                this.presenter.commandFileSave();
+            if (map.containsKey("save as csv"))
+                this.presenter.commandFileSaveAsCSV();
+
+            if (map.containsKey("save as binary"))
+                this.presenter.commandFileSaveAsBinary();
 
             if (map.containsKey("new"))
                 this.presenter.commandAddNewPerson(map.get("new"));
@@ -74,7 +77,8 @@ public class ConsoleUI implements UI {
         help.append("add:1679946500.mother.1679946400 - Добавить id:1679946500 - мать id:1679946400\n");
         help.append("add:1679946500.father.1679946400 - Добавить отца, дети добавляются автоматически к родителям\n");
         help.append("name:`имя` - Осуществляет поиск по имени, выводит все похожие\n");
-        help.append("save: - сохраняет данные в файл\n");
+        help.append("save as csv: - сохраняет данные в csv файл\n");
+        help.append("save as binary: - сохраняет данные в бинарный файл\n");
         return help.toString();
     }
 
