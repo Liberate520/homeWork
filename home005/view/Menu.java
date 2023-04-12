@@ -13,6 +13,8 @@ public class Menu{
         commands = new ArrayList<>();
         commands.add(new Add(console));
         commands.add(new Show(console));
+        commands.add(new Edit(console));
+        commands.add(new Delete(console));
         commands.add(new Exit(console));
     }
 

@@ -21,4 +21,12 @@ public class Notes {
         }
         return allNotes.toString();
     }
+
+    public void delete(int index){
+        notes.remove(index);
+    }
+
+   public void edit(int index, Note note){
+        notes.set(index, note);
+    }
 }

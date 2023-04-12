@@ -21,4 +21,15 @@ public class Presenter {
     public String printAll() {
         return notebook.showNotes();
     }
+
+    public void editNote(int index, String nn){
+        Note newNote = new Note();
+        newNote.setNote(nn);
+        notebook.edit(index, newNote);
+    }
+
+
+    public void deleteNote(int index) {
+        notebook.delete(index - 1);
+    }
 }

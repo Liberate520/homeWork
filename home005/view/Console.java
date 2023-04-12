@@ -46,4 +46,18 @@ public class Console implements View{
         System.out.println("\nok exit");
         on = false;
     }
+
+    public void editNote() {
+        System.out.print("\nEnter note's number: ");
+        int index = scanner.nextInt();
+        System.out.print("Enter note: ");
+        String newNote = scanner.next();
+        presenter.editNote(index - 1, newNote);
+    }
+
+    public void deleteNote() {
+        System.out.print("\nEnter note's number: ");
+        int index = scanner.nextInt();
+        presenter.deleteNote(index);
+    }
 }
