@@ -1,8 +1,8 @@
+package model;
+
 import java.util.ArrayList;
 import java.io.*;
-import java.util.Date;
 import java.util.List;
-import java.util.SplittableRandom;
 
 public class Human implements Serializable, Comparable<Human>{
     private String sex;
@@ -10,6 +10,10 @@ public class Human implements Serializable, Comparable<Human>{
     private String lastName;
     private String dateOfBirth;
     private String dateOfDeath;
+
+    public String getFirsName() {
+        return firsName;
+    }
 
     public String getSex() {
         return sex;

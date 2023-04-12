@@ -1,9 +1,10 @@
+package model;
+
 import java.io.*;
 import java.util.*;
-import java.util.function.Consumer;
 
 
-public class FamilyTree <E> implements Serializable, Iterable<Human> {
+public class FamilyTree <E extends Human> implements Serializable, Iterable<Human> {
     List<E> familyTree;
 
     public FamilyTree(List<E> familyTree) {
@@ -22,9 +23,17 @@ public class FamilyTree <E> implements Serializable, Iterable<Human> {
         fh.save((Serializable) familyTree, filepath);
     }
 
-    public void load (String filepath) throws IOException, ClassNotFoundException {
+    @Override
+    public String toString() {
+        return "FamilyTree{" +
+                "familyTree=" + familyTree +
+                '}';
+    }
+
+    public Serializable load (String filepath) throws IOException, ClassNotFoundException {
         FileHandler fh = new FileHandler();
-        fh.load(filepath);
+        return fh.load(filepath);
+
     }
 
     @Override
@@ -33,10 +42,10 @@ public class FamilyTree <E> implements Serializable, Iterable<Human> {
     }
 
     public void sortByName () {
-        Collections.sort((List<Human>) familyTree);
+        Collections.sort(familyTree);
     }
     public void sortBySex () {
-        familyTree.sort((Comparator<? super E>) new HumanComparatorBySex());
+        familyTree.sort(new HumanComparatorBySex());
     }
 
 }

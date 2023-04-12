@@ -1,3 +1,5 @@
+package model;
+
 import java.io.*;
 
 public interface Writable {
