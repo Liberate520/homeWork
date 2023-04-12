@@ -1,11 +1,12 @@
 package view;
+
 import java.io.IOException;
 import java.util.Scanner;
-import model.Service;
 import model.FamilyTree;
 import presenter.Presenter;
-import model.FileHandlerSave;
-import model.FileHandlerRead;
+import view.Starts.Start0;
+import view.Starts.interfaceStart;
+import model.fileWork.FileHandlerSave;
 
 public class Console<T> implements View<T>
  {
@@ -13,163 +14,26 @@ public class Console<T> implements View<T>
     private Presenter presenter;
     private static boolean work = true;
 
-    public Console()
-    {
-        scanner = new Scanner(System.in, "Cp866");
-    }
-
-    private static int readNumberConsole()
-    {
-        System.out.println(" Введите номер операции: ");
-        Scanner sc = new Scanner(System. in, "Cp866");
-        // System.out.println(" Введите номер операции: ");
-            if(sc.hasNextInt())
-                {
-                    int number  = sc.nextInt();
-                    return number; 
-                }  
-            else
-                {
-                    System.out.println("Вы ввели не число! Введите число! ");
-                    return readNumberConsole();
-                }
-                      
-    }
- 
-    public static void exit()
-    {
-        System.out.println("Работа завершена, Вы вышли из программы! ");
-        scanner.close();
-        work = false;
-    }
-
-    
-        private void tabloFirst()
+        public Console()
         {
-            System.out.println("""
-                                Выберите формат сохранения фамильного дерева:
-    
-                                1 - Вывести на экран фамильное дерево:
-    
-                                2 - работа с файломи
-
-                                3 - найти человека
-
-                                4 - отсортировать дерево по id
-
-                                5 - отсортировать дерево по имени и фамилии
-    
-                                6 - Выход из программы
-                                """);
-        }
-    
-        private static void tabloSave()
-        {
-            System.out.println("""
-                                Выберите формат сохранения фамильного дерева:
-    
-                                1 - зделать сериализацию данных (записать файл с бинарными данными)
-    
-                                2 - сохранение в формате: file.txt
-    
-                                3 - сохранение данных в формате: file.doc
-    
-                                4 - сохранение данных в формате: file.md
-    
-                                5 - перейти на чтение сохраненных файлов
-    
-                                6 - Выход из программы
-    
-                                """);
+            scanner = new Scanner(System.in, "Cp866");
         }
 
-        private static void tabloRead2()
-    {
-        System.out.println("""
-                            Выберите формат чтения файла:
-
-                            1 - загрузить данные из файла в программу (загрузка  вывод данных из бинарного файла)
-
-                            2 - чтение данных из формата: file.txt
-
-                            3 - чтение данных из формата: формате: file.doc
-
-                            4 - чтение данных из формата: формате: file.md
-
-                            5 - Выйти из программы
-
-                            """);
-    }    
-
-    private static void tabloRead11()
-    {
-        System.out.println("""
-                            Хотите прочесть содержание записанного Вами файла?
-
-                            1 - Да, хочу прочесть
-
-                            2 - Нет, нехочу этого делать сейчас, хочу продолжить работу с сохранением данных в файл
-
-                            3 - Выход
-
-                            """);
-    }    
-
-    public static int Start1()
+        public static void exit()
         {
-            tabloSave();
-            int number = readNumberConsole();
-            while(number < 1 || number > 6)
-              {
-                System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
-                Console.tabloSave();
-                number = readNumberConsole();
-              }  
-        return number;
+            System.out.println("Работа завершена, Вы вышли из программы! ");
+            scanner.close();
+            work = false;
         }
 
-        public static int Start2()
-        {
-            tabloRead11();
-            int number = readNumberConsole();
-            while(number < 1 || number > 3)
-            {
-                System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
-                Console.tabloRead11();
-                number = readNumberConsole();
-            }
-          return number;
-        }
-        
-        public static int Start3()
-        {
-            tabloRead2();
-            int number = readNumberConsole();
-            while(number < 1 || number > 5)
-            {
-                System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
-                tabloRead2();
-                number = readNumberConsole();
-            }
-          return number;
-        }
 
-    
     @Override
     public T StartProgram(T t) throws ClassNotFoundException, IOException 
     {
         while (work) 
             {
-            tabloFirst();
-
-            int choice = readNumberConsole();
-
-                while(choice < 1 || choice > 6)
-              {
-                System.out.println("Вы ввели не верный номер операции!\n Введите его снова!");
-                tabloFirst();
-                choice = readNumberConsole();
-              }  
+                interfaceStart interfaceStart = new Start0();
+                int choice = interfaceStart.start();
 
             switch (choice) 
             {
@@ -199,16 +63,16 @@ public class Console<T> implements View<T>
        return null;
     }
 
+
     @Override
-    public void print(T t) {
+    public void print(T t) 
+    {
         System.out.println("По Вашему запросу выводим на экран фамильное дерево:\n" + t);
     }
 
     @Override
-    public void setPresenter(Presenter presenter) {
+    public void setPresenter(Presenter presenter) 
+    {
         this.presenter = presenter;
-    }
-
-    
-    
+    }   
 }

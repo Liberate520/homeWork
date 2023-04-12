@@ -34,7 +34,7 @@ public class FamilyTree<T extends Node> implements Serializable, Iterable<T>
     }
 
 
-    public static <T extends Human> void findHuman(FamilyTree familyTree)
+    public <T extends Human> void findHuman()
     {
         System.out.println("Введите фамилию для поиска:");
         Scanner sc1 = new Scanner(System.in, "cp866");

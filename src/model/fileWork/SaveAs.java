@@ -1,4 +1,4 @@
-package model;
+package model.fileWork;
 
 import java.io.IOException;
 
