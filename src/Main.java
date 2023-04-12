@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         String filename = "data.txt";
         Serial serial = new Serial();
-        FamilyTree someFamily = new FamilyTree();
+        FamilyTree<Human> someFamily = new FamilyTree<>();
         Service service = new Service(someFamily);
 
         service.addHuman("Никита", "Свиридов", Gender.Male,

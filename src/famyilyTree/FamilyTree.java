@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    List<Human> humanList;
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
+    List<T> humanList;
 
-    public FamilyTree(List<Human> familyTree) {
+    public FamilyTree(List<T> familyTree) {
         this.humanList = familyTree;
     }
     public FamilyTree() {
         this.humanList = new ArrayList<>();
     }
 
-    public List<Human> getFamilyTree() {
+    public List<T> getFamilyTree() {
         return humanList;
     }
 
     // Добавить новый объект Human в лист дерева
-    public void add(Human human) {
+    public void add(T human) {
         if (!humanList.contains(human)) {
             this.humanList.add(human);
             if (human.getFather() != null) human.getFather().addChild(human);
@@ -33,15 +33,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    public Human getById(int id) {
-        for (Human human: humanList) {
+    public T getById(int id) {
+        for (T human: humanList) {
             if (human.getId() == id)
                 return human;
         }
         return null;
     }
     @Override
-    public Iterator<Human> iterator() { return new HumanIterator(humanList); }
+    public Iterator<T> iterator() { return new HumanIterator<T>(humanList); }
 
     public void sortByID() {
         humanList.sort(new HumanComparatorByID());
@@ -56,7 +56,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sb.append("В дереве ");
         sb.append(humanList.size());
         sb.append(" объектов \n");
-        for (Human human: humanList) {
+        for (T human: humanList) {
             sb.append(human.getInfo());
             sb.append("\n");
         }

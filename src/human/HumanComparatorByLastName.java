@@ -2,8 +2,8 @@ package human;
 
 import java.util.Comparator;
 
-public class HumanComparatorByLastName implements Comparator<Human> {
-    public int compare(Human h1, Human h2) {
+public class HumanComparatorByLastName<T extends Human> implements Comparator<T> {
+    public int compare(T h1, T h2) {
         return h1.getLastName().compareTo(h2.getLastName());
     }
 }
