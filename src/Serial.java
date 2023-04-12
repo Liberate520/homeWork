@@ -1,4 +1,4 @@
-package famyilyTree;
+import famyilyTree.FamilyTree;
 
 import java.io.*;
 

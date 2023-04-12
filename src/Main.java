@@ -1,5 +1,4 @@
 import famyilyTree.FamilyTree;
-import famyilyTree.Serial;
 import human.Gender;
 import human.Human;
 
@@ -7,8 +6,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        String filename = "data.txt";
-        Serial serial = new Serial();
+//        String filename = "data.txt";
+//        Serial serial = new Serial();
         FamilyTree<Human> someFamily = new FamilyTree<>();
         Service service = new Service(someFamily);
 

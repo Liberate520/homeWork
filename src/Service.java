@@ -7,6 +7,8 @@ import human.HumanComparatorByLastName;
 import java.time.LocalDate;
 
 public class Service {
+    String filename = "data.txt";
+    Serial serial = new Serial();
     private int id;
     private FamilyTree tree;
 
@@ -36,6 +38,9 @@ public class Service {
         tree.getFamilyTree().sort(new HumanComparatorByID());
     }
 
-//    public void addHuman(String андрей, String пивоваров, Gender male, LocalDate of) {
-//    }
+    //        //---- Сериализация
+    // ???    serial.saveToFile(someFamily, filename);
+//
+//        //---- Десериализация
+//        FamilyTree tree2 = serial.loadFromFile(filename);
 }

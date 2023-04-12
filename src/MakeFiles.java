@@ -1,4 +1,4 @@
-package famyilyTree;
+import famyilyTree.FamilyTree;
 
 public interface MakeFiles {
     void saveToFile (FamilyTree tree, String filename);
