@@ -10,9 +10,10 @@ public class Service {
         this.family_tree = family_tree;
     }
 
-    public Service(String file_name){
-        this.bd_file = new FileCSV(file_name);
-        this.family_tree = bd_file.readFile();
+    public Service(String file_name, String type){
+        if (type.equals("csv"))
+            this.bd_file = new FileCSV(file_name);
+            this.family_tree = bd_file.readFile();
     }
 
 

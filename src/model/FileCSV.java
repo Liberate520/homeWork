@@ -90,7 +90,7 @@ public class FileCSV implements Files {
 
     @Override
     public Tree<Person> readFile() {
-        Map<Integer, Person> p_list = new HashMap<>();
+        Tree<Person> family = new Tree<Person>();
 
         String bd_file = new File(file_name).getAbsolutePath();
         if (fileExist(bd_file) == false) {
@@ -115,39 +115,37 @@ public class FileCSV implements Files {
 
                 int i = Integer.parseInt(temp_map.get("person_id"));
                 Person pers = new Person(temp_map);
-                p_list.put(i, pers);
+                family.add(i, pers);
             }
             fr.close();
             fscan.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return makeRelativesFromCSV(p_list);
+        return makeRelativesFromCSV(family);
     }
 
     // Метод создания родственных связей из айди родителей
-    private Tree<Person> makeRelativesFromCSV(Map<Integer, Person> persons_list) {
+    private Tree<Person> makeRelativesFromCSV(Tree<Person> family) {
         int mother_id, father_id;
-        // for (Person pers : family) {
-        for (Map.Entry<Integer, Person> item : persons_list.entrySet()) {
-            Person pers = item.getValue();
-
+        for (Person pers : family) {
+            
             if (pers.getPerson_info().get("mother_id") != "") {
                 mother_id = Integer.parseInt(
                         pers.getPerson_info().get("mother_id"));
 
-                Person mother = persons_list.get(mother_id);
+                Person mother = family.get(mother_id);
                 pers.setMother(mother);
-                persons_list.get(mother_id).setPerson_childs(pers);
+                family.get(mother_id).setPerson_childs(pers);
             }
 
             if (pers.getPerson_info().get("father_id") != "") {
                 father_id = Integer.parseInt(
                         pers.getPerson_info().get("father_id"));
 
-                Person father = persons_list.get(father_id);
+                Person father = family.get(father_id);
                 pers.setFather(father);
-                persons_list.get(father_id).setPerson_childs(pers);
+                family.get(father_id).setPerson_childs(pers);
             }
         }
         Tree<Person> family = new Tree<>();

@@ -27,9 +27,10 @@ public class Person {
         this.person_info = info;
         this.person_id = Integer.parseInt(info.get("person_id"));
         this.person_name = info.get("person_name");
-        this.person_sex = this.person_info.get("person_sex");
+        this.person_sex = info.get("person_sex");
         this.person_birthday = strToDate(info.get("person_birthday"));
         this.person_death = strToDate(info.get("person_death"));
+
     }
 
     Person(int id, String name) {
