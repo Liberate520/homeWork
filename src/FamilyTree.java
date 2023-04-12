@@ -1,10 +1,10 @@
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> family;
+public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
+    private List<E> family;
 
-    public FamilyTree(ArrayList<Human> family) {
+    public FamilyTree(ArrayList<E> family) {
         this.family = family;
     }
 
@@ -12,10 +12,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public List getHumanList() {
+    public List<E> getHumanList() {
         return family;
     }
-    public void addHuman(Human human){
+    public void addHuman(E human){
         if(!family.contains(human)){
             family.add(human);
         }
@@ -27,8 +27,18 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    public Human getByName(String firstName, String lastName){
-        for (Human human: family) {
+    public void removeHuman(E human) {
+        if (human.getMother() != null){
+            human.getMother().getChildren().remove(human);
+        }
+        if (human.getFather() != null) {
+            human.getFather().getChildren().remove(human);
+        }
+        family.remove(human);
+    }
+
+    public E getByName(String firstName, String lastName){
+        for (E human: family) {
             if (human.getFirstName().equals(firstName) && human.getLastName().equals(lastName)){
                 return human;
             }
@@ -38,14 +48,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Human human: family){
+        for (E human: family){
             sb.append(human.toString()).append("\n");
         }
         return "В родословной: " + family.size() + " человека, а именно: " + "\n" + sb.toString();
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(family);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(family);
     }
 }

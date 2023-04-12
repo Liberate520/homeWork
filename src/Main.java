@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         DataLoad data = new DataLoad();
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
         tree.addHuman(new Human("Andrey", "Ivanov", Sex.Male,
                 LocalDate.of(1913, 12, 1),  LocalDate.of(1964, 12, 1)));
         tree.addHuman(new Human("Maria", "Ivanova", Sex.Female,
@@ -16,7 +16,7 @@ public class Main {
                 LocalDate.of(1944, 3, 23), LocalDate.of(1996, 6, 2),
                 tree.getByName("Maria", "Ivanova"), tree.getByName("Andrey", "Ivanov")));
         data.save(tree, "fileTree.out");
-        FamilyTree dublicate = new FamilyTree();
+        FamilyTree<Human> dublicate;
         dublicate = data.read("fileTree.out");
         for (Human human:
                 dublicate) {
