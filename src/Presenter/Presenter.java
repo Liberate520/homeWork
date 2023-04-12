@@ -4,7 +4,6 @@ import Homeworks.OOPHW.OOP_homeWork_L5.src.Model.Model;
 import Homeworks.OOPHW.OOP_homeWork_L5.src.View.View;
 
 public class Presenter {
-
     private View view;
     private Model model;
     
@@ -25,5 +24,4 @@ public class Presenter {
         model.addToNotepad(nTitle, nText);
         view.printAddNote(nTitle, nText);
     }
-
 }

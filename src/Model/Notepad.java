@@ -4,23 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Notepad {
-
     private List<Note> notepad;
 
     public Notepad() {
         notepad = new ArrayList<>();
     }
 
-
     public List<Note> getNotepad() {
         return notepad;
     }
 
-
     public void add(Note sNote) {
         notepad.add(sNote);
     }
-
 
     @Override
     public String toString() {
@@ -30,5 +26,4 @@ public class Notepad {
         }
         return stringOutput;
     }
-    
 }

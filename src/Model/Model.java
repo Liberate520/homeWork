@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Model {
-
     private Notepad curNotepad;
     private String curPath;
 
@@ -14,7 +13,6 @@ public class Model {
         curNotepad = new Notepad();
         this.curPath = path;
     }
-
 
     public String readFromNotepad() {
         try {
@@ -36,7 +34,6 @@ public class Model {
         }
     }
 
-
     public void addToNotepad(String noteTitle, String noteText) {
         try {
             File file = new File(this.curPath);
@@ -51,5 +48,4 @@ public class Model {
             System.out.println(e.getMessage());
         }
     }
-
 }
