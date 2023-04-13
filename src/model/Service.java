@@ -61,7 +61,7 @@ private ReadMd readMd;
     public Service(FamilyTree familyTree, AddHuman addHuman, 
         SaveBinFormat saveBinFormat, SaveTextFormat saveTextFormat,
         SaveDocFormat saveDocFormat,
-        SortId sortId, SortByLastName sortByLastName, FindHuman findHuman)
+        SortId sortId, SortByLastName sortByLastName, FindHuman findHuman, AddPerson addPerson)
     {
          this.familyTree = familyTree;
         // this.person = person;
@@ -72,7 +72,7 @@ private ReadMd readMd;
         // this.interfaceSave = interfaceSave;
         // this.interfaceRead = interfaceRead;
         this.findHuman = findHuman;
-        // this.addPerson = addPerson;
+        this.addPerson = addPerson;
          this.addHuman = addHuman;
         // this.addOthers = addOthers;
         // this.nameComparator = nameComparator;
@@ -163,7 +163,7 @@ private ReadMd readMd;
         
         public void SortId() // сортировка по id
         {
-            sortId.SortId(person);
+            sortId.SortId(familyTree);
         }
 
         public void SortByLastName() // сортировка по имени

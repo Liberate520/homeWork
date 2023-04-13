@@ -6,6 +6,8 @@ import model.Comparator.SortId;
 import model.FamilyTree.FamilyTree;
 import model.FamilyTree.FindHuman;
 import model.FamilyTree.AddIntoTree.AddHuman;
+import model.FamilyTree.AddIntoTree.AddPerson;
+import model.Iterator.HumanIterator;
 import model.Persons.Human;
 import model.Persons.Others;
 import model.Persons.Person;
@@ -31,10 +33,11 @@ public class Main
         SortId sortId = new SortId();
         SortByLastName sortByLastName = new SortByLastName();
         FindHuman findHuman = new FindHuman();
+        AddPerson addPerson = new AddPerson();
 
         Service service = new Service(familyTree, addHuman,
                                         saveBinFormat, saveTextFormat, saveDocFormat, 
-                                        sortId, sortByLastName, findHuman);
+                                        sortId, sortByLastName, findHuman, addPerson);
 
         Presenter presenter = new Presenter(view, service);
         view.StartProgram();    
