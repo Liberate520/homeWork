@@ -1,34 +1,33 @@
 package Presenter;
 
 import UI.View;
-import familyApi.FamilyService;
+import familyApi.Service;
 
 
 public class Presenter {
     private View view;
-    private FamilyService service;
+    private Service service;
 
-    public Presenter(View view, FamilyService service) {
+    public Presenter(View view, Service service) {
         this.view = view;
         this.service = service;
         view.setPresenter(this);
     }
-    public void choseNumber(int number){
-        String res;
-        switch (number){
-            case 1:
-                res = service.getInfo();
-                view.print(res);
 
-            case 2:
-                String name = view.getName();
-                res = service.getInfoByName(name);
-                view.print(res);
+    public void findByName(String name) {
+        String info = service.findByName(name);
+        view.print(info);
+    }
 
-            case 3:
-                break;
-
+    public void showAll() {
+        String info = service.showAll();
+        view.print(info);
+    }
+    public void addMember(String name, String gender, String dateBirth, String nameMother, String nameFather){
+        try {
+            service.addMember(name, gender, dateBirth, nameMother, nameFather);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
     }
 }

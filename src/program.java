@@ -1,7 +1,7 @@
 import Presenter.Presenter;
 import UI.ConsoleUI;
 import UI.View;
-import familyApi.FamilyService;
+import familyApi.Service;
 import human.Gender;
 import human.Human;
 import tree.FamilyTree;
@@ -27,11 +27,13 @@ public class program {
         familyTree1.addMembers(member2);
         familyTree1.addMembers(member3);
         familyTree1.addMembers(member4);
+
         //familyTree1.printMembers(); //печать всех членов семьи
         // Работа с меню
         View view = new ConsoleUI();
-        FamilyService service = new FamilyService(familyTree1);
+        Service service = new Service(familyTree1);
         Presenter presenter = new Presenter(view, service);
+        //service.addMember("Ivanov Oleg", "Male", "24/04/2010", "Ivanov Sergey", "Ivanova Olga");
 
         view.start();
 
@@ -41,7 +43,7 @@ public class program {
 //            System.out.println(member.getAllInfo());
 //        }
 ////Сортировка членов семьи
-//        Service service = new Service(familyTree1);
+//        familyApi.FamilyService.Service service = new familyApi.FamilyService.Service(familyTree1);
 //        service.sortByName();
 //
 //        System.out.println("Sort by name"); // Сортировка членов семьи по имени

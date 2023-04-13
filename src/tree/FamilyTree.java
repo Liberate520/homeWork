@@ -43,14 +43,22 @@ public class FamilyTree<E extends Human> implements Serializable, Family<E> {
         }
         return null;
     }
-    public void printMembers(){
-        System.out.println("Members of Family");
-        for (Human member: this.members
-             ) {
-            System.out.println(member.getAllInfo());
 
+    public void addMother(Human member, String nameMother){
+        Human mother = getByName(nameMother);
+        if(mother != null) {
+            member.setMother(mother);
         }
     }
+
+    public void addFather(Human member, String nameFather){
+        Human father = getByName(nameFather);
+        if (father != null) {
+            member.setFather(father);
+        }
+    }
+
+
     @Override
     public Iterator<E> iterator(){
         return new FamilyTreeIterator((List<E>) members);
