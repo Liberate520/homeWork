@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.Serializable;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Group {
     private ArrayList<Human> tree;
     
     public FamilyTree() {
@@ -12,28 +13,17 @@ public class FamilyTree implements Serializable {
         this.tree = tree;
     }
 
-    public void add(Human h) {
-        this.tree.add(h);
-    }
 
     public ArrayList<Human> getTree() {
         return this.tree;
     }
 
-    public FamilyTree sortByName() {
-        ArrayList<Human> res = new ArrayList<Human>();
-        res.addAll(this.tree);
-        res.sort(new CompareByName());
-        
-        return new FamilyTree(res);
+    public void sortByName() {
+        this.tree.sort(new CompareByName());
     }
 
-    public FamilyTree sortByBirthDate() {
-        ArrayList<Human> res = new ArrayList<Human>();
-        res.addAll(this.tree);
-        res.sort(new CompareByBirthDate());
-        
-        return new FamilyTree(res);
+    public void sortByBirthDate() {
+        this.tree.sort(new CompareByBirthDate());
     }
 
     public void printTree() {
@@ -41,7 +31,6 @@ public class FamilyTree implements Serializable {
             System.out.println(p);
         }
     }
-
 
 
     @Override
@@ -56,5 +45,31 @@ public class FamilyTree implements Serializable {
             }
         } 
         return result.toString(); 
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return this.tree.iterator();
+    }
+
+    @Override
+    public void addHuman(Human h) {
+        this.tree.add(h);
+    }
+
+
+    @Override
+    public ArrayList<Human> getHumansList() {
+        return this.tree;
+    }
+
+    @Override
+    public Human getHumanByName(String name) {
+        for (Human human : tree) {
+            if (human.getFirstName() == name) {
+                return human;
+            }
+        }
+        return null;
     }
 }

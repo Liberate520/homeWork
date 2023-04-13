@@ -26,13 +26,13 @@ public class Main {
     
         FamilyTree potterTree = new FamilyTree();
 
-        potterTree.add(James);
-        potterTree.add(Lily);
-        potterTree.add(Harry);
-        potterTree.add(Ginevra);
-        potterTree.add(Albus_Severus);
-        potterTree.add(James_Sirius);
-        potterTree.add(Lily_Luna);
+        potterTree.addHuman(James);
+        potterTree.addHuman(Lily);
+        potterTree.addHuman(Harry);
+        potterTree.addHuman(Ginevra);
+        potterTree.addHuman(Albus_Severus);
+        potterTree.addHuman(James_Sirius);
+        potterTree.addHuman(Lily_Luna);
 
 
         // System.out.println(potterTree);
@@ -45,12 +45,15 @@ public class Main {
         potterTree.printTree();
 
         System.out.println("-----\nсортирорвка по имени:\n");
-        FamilyTree sortTree = potterTree.sortByName();
-        sortTree.printTree();
+        potterTree.sortByName();
+        potterTree.printTree();
 
         System.out.println("-----\nсортирорвка по дате:\n");
-        sortTree = sortTree.sortByBirthDate();
-        sortTree.printTree();
+        potterTree.sortByBirthDate();
+        potterTree.printTree();
+
+        System.out.println();
+        System.out.println();
 
     }
 }

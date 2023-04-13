@@ -1,20 +1,22 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HumanIterator implements Iterable<Human> {
-    private ArrayList<Human> tree;
+public class HumanIterator implements Iterator<Human> {
+    private int index;
+    private ArrayList<Human> familyTree;
 
-    public HumanIterator(ArrayList<Human> tree) {
-        this.tree = tree;
-    }
-
-    public HumanIterator(FamilyTree tree) {
-        this(tree.getTree());
+    public HumanIterator(ArrayList<Human> familyTree) {
+        this.familyTree = familyTree;
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return this.tree.iterator();
+    public boolean hasNext() {
+        return index < familyTree.size();
+    }
+
+    @Override
+    public Human next() {
+        return familyTree.get(index++);
     }
     
 }
