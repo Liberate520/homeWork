@@ -1,3 +1,5 @@
+package human;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,15 +27,15 @@ public class Human implements Serializable {
         this.partnerID = partnerID;
     }
 
-    public Human(){
-        this(-1, "<empty>", "", new Date(), null, null, null, null);
+    public Human() {
+        this(-1, "<empty>", "", null, null, null, null, null);
     }
 
     @Override
     public String toString() {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         StringBuilder result = new StringBuilder(" [" + humanID + "] " + humanName + " " + humanSurname);
-        result.append("\n\tдата рождения: ").append(df.format(dateOfBirth));
+        if (dateOfBirth != null) result.append("\n\tдата рождения: ").append(df.format(dateOfBirth));
         if (dateOfDeath != null) result.append("\n\tдата смерти: ").append(df.format(dateOfDeath));
 
         return result.toString();

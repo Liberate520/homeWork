@@ -1,90 +1,82 @@
+import family.FamilyTree;
+import human.Human;
+
 import java.io.IOException;
 import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree testFamily = new FamilyTree();
-/**
- *  1. Дерево должно строиться относительно какой-либо персоны, таким образом для всех остальных объектов можно
- *  будет указывать степень родства.
- *  2. ВСЕ экземпляры Human должны иметь уникальные ID для возможности привязки мамы, папы, супруга
- *  на будущее:
- *  - ничто не мешает одного и того же Human добавить в разные "семьи" (экземпляры FamilyTree). Например, у человека
- *  новая семья. Тогда можно будет строить целые сети семей.
- */
-        // create Humans for Tree
-        Human human1 = new Human(0, "Алексей", "Яковлев",
+        Service service = new Service(testFamily);
+
+        service.addPerson("Алексей", "Яковлев",
                 new Date(54, 1, 1),
                 new Date(114, 5, 1), null, null, 1);
-        Human human2 = new Human(1, "Алевтина", "Яковлева",
+        service.addPerson("Алевтина", "Яковлева",
                 new Date(64, 2, 2), null, null, null, 0);
-
-        Human human12_1 = new Human(2, "Борис", "Яковлев",
+        service.addPerson("Борис", "Яковлев",
                 new Date(91, 1, 1), null, 1, 0, 6);
-        Human human12_2 = new Human(3, "Бьянка", "Юргент",
+        service.addPerson("Бьянка", "Юргент",
                 new Date(92, 2, 2), null, 1, 0, 7);
-        Human human12_3 = new Human(4, "Богдан", "Яковлев",
+        service.addPerson("Богдан", "Яковлев",
                 new Date(93, 3, 3), null, 1, 0, 8);
-        Human human12_4 = new Human(5, "Белла", "Юшкова",
+        service.addPerson("Белла", "Юшкова",
                 new Date(94, 4, 4), null, 1, 0, 9);
-
-        Human human12_12 = new Human(6, "Белка", "Яковлева",
+        service.addPerson("Белка", "Яковлева",
                 new Date(91, 5, 5), null, null, null, 2);
-        Human human12_22 = new Human(7, "Билл", "Юргент",
+        service.addPerson("Билл", "Юргент",
                 new Date(92, 6, 5), null, null, null, 3);
-        Human human12_32 = new Human(8, "Бибигуль", "Яковлева",
+        service.addPerson("Бибигуль", "Яковлева",
                 new Date(93, 7, 5), null, null, null, 4);
-        Human human12_42 = new Human(9, "Булат", "Юшков",
+        service.addPerson("Булат", "Юшков",
                 new Date(94, 8, 5), null, null, null, 5);
+        service.addPerson("Валера", "Яковлев",
+                new Date(111, 1, 1), null, 6, 2, null);
+        service.addPerson("Виолетта", "Яковлева",
+                new Date(112, 2, 1), null, 6, 2, null);
+        service.addPerson("Вилор", "Юргент",
+                new Date(113, 3, 2), null, 3, 7, null);
+        service.addPerson("Валя", "Юргент",
+                new Date(114, 4, 3), null, 3, 7, null);
+        service.addPerson("Веня", "Яковлев",
+                new Date(115, 5, 4), null, 8, 4, null);
+        service.addPerson("Вера", "Яковлева",
+                new Date(116, 6, 5), null, 8, 4, null);
+        service.addPerson("Вано", "Юшков",
+                new Date(117, 7, 6), null, 5, 9, null);
+        service.addPerson("Вета", "Юшкова",
+                new Date(118, 8, 7), null, 5, 9, null);
 
-        Human human12_1_12_12_1 = new Human(10, "Валера", "Яковлев",
-                new Date(11, 1, 1), null, 6, 2, null);
-        Human human12_1_12_12_2 = new Human(11, "Виолетта", "Яковлева",
-                new Date(12, 2, 1), null, 6, 2, null);
-        Human human12_2_12_22_1 = new Human(12, "Вилор", "Юргент",
-                new Date(13, 3, 2), null, 3, 7, null);
-        Human human12_2_12_22_2 = new Human(13, "Валя", "Юргент",
-                new Date(14, 4, 3), null, 3, 7, null);
-        Human human12_3_12_32_1 = new Human(14, "Веня", "Яковлев",
-                new Date(15, 5, 4), null, 8, 4, null);
-        Human human12_3_12_32_2 = new Human(15, "Вера", "Яковлева",
-                new Date(16, 6, 5), null, 8, 4, null);
-        Human human12_4_12_42_1 = new Human(16, "Вано", "Юшков",
-                new Date(17, 7, 6), null, 5, 9, null);
-        Human human12_4_12_42_2 = new Human(17, "Вета", "Юшкова",
-                new Date(18, 8, 7), null, 5, 9, null);
-
-        // add Humans to FamilyTree
-        testFamily.add(human1);
-        testFamily.add(human2);
-        testFamily.add(human12_1);
-        testFamily.add(human12_2);
-        testFamily.add(human12_3);
-        testFamily.add(human12_4);
-        testFamily.add(human12_12);
-        testFamily.add(human12_22);
-        testFamily.add(human12_32);
-        testFamily.add(human12_42);
-        testFamily.add(human12_1_12_12_1);
-        testFamily.add(human12_1_12_12_2);
-        testFamily.add(human12_2_12_22_1);
-        testFamily.add(human12_2_12_22_2);
-        testFamily.add(human12_3_12_32_1);
-        testFamily.add(human12_3_12_32_2);
-        testFamily.add(human12_4_12_42_1);
-        testFamily.add(human12_4_12_42_2);
-
-        System.out.println(testFamily.showTree(2)); // относительно какого Human строить дерево
+        System.out.println(testFamily.showTree(2)); // относительно какого id Human строить дерево
 
         SaveRestoreSerializable serializableTree = new SaveRestoreSerializable(testFamily);
-        serializableTree.save("test1.fml");
+        serializableTree.save("test2.fml");
 
         FamilyTree loadedTree = new FamilyTree();
-        serializableTree.load("test1.fml");
+        serializableTree.load("test2.fml");
         loadedTree = serializableTree.getTree();
 
         System.out.println("\n\nЗагруженное из файла дерево: ");
         System.out.println(loadedTree.showTree(4));
 
+        System.out.println("\nFor each:");
+        for (Human oneHuman : testFamily) {
+            System.out.println(oneHuman);
+        }
+
+        System.out.println("\nid DESC:");
+        for (Human oneHuman : service.getSortedListByIdDESC()) {
+            System.out.println(oneHuman);
+        }
+
+        System.out.println("\nName ASC:");
+        for (Human oneHuman : service.getSortedListByNameASC()) {
+            System.out.println(oneHuman);
+        }
+
+        System.out.println("\nName DESC:");
+        for (Human oneHuman : service.getSortedListByNameDESC()) {
+            System.out.println(oneHuman);
+        }
     }
 }
