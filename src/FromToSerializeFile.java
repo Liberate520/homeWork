@@ -1,16 +1,14 @@
 import java.io.*;
 
 
-public class FromToSerializeFile {
+public class FromToSerializeFile implements FromTo {
     private String fileName;
-    private GenealogicalTree family;
 
-    public FromToSerializeFile(String fileName, GenealogicalTree family) {
+    public FromToSerializeFile(String fileName) {
         this.fileName = fileName;
-        this.family = family;
     }
 
-    public void saveTo() {
+    public void saveTo(GenealogicalTree family) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
             oos.writeObject(family);
