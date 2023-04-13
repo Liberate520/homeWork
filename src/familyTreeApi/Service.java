@@ -54,13 +54,19 @@ public class Service {
 
     public boolean addMember(String name, String kind, boolean isMale, Calendar bornDate) {
         if (typeMember.equals("person")) {
-            currentEditingFTree.addMember(new Person(name, kind, isMale, bornDate));
+            addPerson(name, kind, isMale, bornDate);
         } else if (typeMember.equals("dog")) {
             currentEditingFTree.addMember(member);
         } else {
             return false;
         }
         return true;
+    }
+
+    private Member addPerson(String name, String kind, boolean isMale, Calendar bornDate) {
+        Member member = new Person(name, kind, isMale, bornDate);
+        currentEditingFTree.addMember(member);
+        return member;
     }
 
     public void addMember(String firstName, String firstNameSample) {
