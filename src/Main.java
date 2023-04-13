@@ -63,5 +63,17 @@ public class Main {
         System.out.println();
 
         System.out.println(pushkin.findHuman("Пушкин Александр Сергеевич").getSpouse().getName());
+        System.out.println();
+
+        FromTo savedFamily = new FromToSerializeFile("pushkin.out");
+        savedFamily.saveTo(pushkin);
+
+        System.out.println("Загружено из файла:");
+        System.out.println();
+        GenealogicalTree loadedPushkin = savedFamily.readFrom("pushkin.out");
+        for (String human:
+                loadedPushkin.getFamily()) {
+            System.out.println(human);
+        }
     }
 }

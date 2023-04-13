@@ -8,6 +8,7 @@ public class FromToSerializeFile implements FromTo {
         this.fileName = fileName;
     }
 
+    @Override
     public void saveTo(GenealogicalTree family) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
