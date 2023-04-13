@@ -1,6 +1,7 @@
-package family;
-
-import family.human.Human;
+import service.Writable;
+import service.human.Human;
+import service.FamilyTree;
+import service.FileHandler;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class Main implements Serializable {
                     System.out.println(familyTolstoy.getInfo());
                     break;
                 case 1:
-                    enterPersonData();
+                    //enterPersonData();
                     System.out.println("Введите имя:");
                     nameTemp=scn.next();
                     System.out.println("Введите имя отца:");

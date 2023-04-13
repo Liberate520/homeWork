@@ -1,4 +1,4 @@
-package family.human;
+package service.human;
 
 import java.io.Serializable;
 

@@ -1,8 +1,8 @@
-package family;
+package service;
 
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable {
 
    public  boolean save(Serializable serializable, String fileName) {
        try {       ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
