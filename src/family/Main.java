@@ -26,7 +26,7 @@ public class Main implements Serializable {
                     System.out.println(familyTolstoy.getInfo());
                     break;
                 case 1:
-
+                    enterPersonData();
                     System.out.println("Введите имя:");
                     nameTemp=scn.next();
                     System.out.println("Введите имя отца:");
@@ -77,8 +77,8 @@ public class Main implements Serializable {
             System.out.println("по количеству детей:"+familyTolstoy);
 
         }
-
     }
+
 }
 
 /*         Person member1 = new Person (1685, 1728, "ИванПетровичТолстой", Gender.Male,null, null);
