@@ -2,19 +2,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.Serializable;
 
-public class FamilyTree implements Serializable, Group {
-    private ArrayList<Human> tree;
+public class FamilyTree<E extends Human> implements Serializable, Group<E> {
+    private ArrayList<E> tree;
     
     public FamilyTree() {
-        this.tree = new ArrayList<Human>();
+        this.tree = new ArrayList<E>();
     }
 
-    public FamilyTree(ArrayList<Human> tree) {
+    public FamilyTree(ArrayList<E> tree) {
         this.tree = tree;
     }
 
 
-    public ArrayList<Human> getTree() {
+    public ArrayList<E> getTree() {
         return this.tree;
     }
 
@@ -27,7 +27,7 @@ public class FamilyTree implements Serializable, Group {
     }
 
     public void printTree() {
-        for (Human p : this.tree) {
+        for (E p : this.tree) {
             System.out.println(p);
         }
     }
@@ -36,11 +36,11 @@ public class FamilyTree implements Serializable, Group {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Human human : tree) {
-            if (human.getChildrens().size() != 0) {
-                result.append(human + "\n");
-                if (human.getChildrens() != null) {
-                    result.append("\t" + human.stringChildren() + "\n");
+        for (E e : tree) {
+            if (e.getChildrens().size() != 0) {
+                result.append(e + "\n");
+                if (e.getChildrens() != null) {
+                    result.append("\t" + e.stringChildren() + "\n");
                 }
             }
         } 
@@ -48,24 +48,24 @@ public class FamilyTree implements Serializable, Group {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return this.tree.iterator();
     }
 
     @Override
-    public void addHuman(Human h) {
+    public void add(E h) {
         this.tree.add(h);
     }
 
 
     @Override
-    public ArrayList<Human> getHumansList() {
+    public ArrayList<E> getHumansList() {
         return this.tree;
     }
 
     @Override
-    public Human getHumanByName(String name) {
-        for (Human human : tree) {
+    public E getHumanByName(String name) {
+        for (E human : tree) {
             if (human.getFirstName() == name) {
                 return human;
             }

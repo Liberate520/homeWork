@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public interface Group extends Iterable<Human> {
-    void addHuman(Human human);
-    ArrayList<Human> getHumansList();
-    Human getHumanByName(String name);
+public interface Group<E extends Human> extends Iterable<E> {
+    void add(E human);
+    ArrayList<E> getHumansList();
+    E getHumanByName(String name);
 }

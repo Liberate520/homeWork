@@ -24,15 +24,15 @@ public class Main {
         Ginevra.addChildren(James_Sirius);
         Ginevra.addChildren(Lily_Luna);
     
-        FamilyTree potterTree = new FamilyTree();
+        FamilyTree<Human> potterTree = new FamilyTree<Human>();
 
-        potterTree.addHuman(James);
-        potterTree.addHuman(Lily);
-        potterTree.addHuman(Harry);
-        potterTree.addHuman(Ginevra);
-        potterTree.addHuman(Albus_Severus);
-        potterTree.addHuman(James_Sirius);
-        potterTree.addHuman(Lily_Luna);
+        potterTree.add(James);
+        potterTree.add(Lily);
+        potterTree.add(Harry);
+        potterTree.add(Ginevra);
+        potterTree.add(Albus_Severus);
+        potterTree.add(James_Sirius);
+        potterTree.add(Lily_Luna);
 
 
         // System.out.println(potterTree);
