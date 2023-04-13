@@ -1,4 +1,4 @@
-package handler;
+package familyTreeApi.handler;
 
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;

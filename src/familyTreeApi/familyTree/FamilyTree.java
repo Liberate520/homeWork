@@ -1,12 +1,10 @@
-package familyTree;
+package familyTreeApi.familyTree;
 
-import member.Member;
+import familyTreeApi.member.Member;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.lang.reflect.Type;
+import java.util.*;
 
 public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     private String name;
@@ -34,6 +32,10 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
 
     public List<E> getMembers() {
         return this.members;
+    }
+
+    public Type getClassE() {
+        return this.getClass().getGenericSuperclass();
     }
 
     private String getSpace(String str) {

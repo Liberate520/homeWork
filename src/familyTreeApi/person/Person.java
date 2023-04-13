@@ -1,6 +1,6 @@
-package person;
+package familyTreeApi.person;
 
-import member.Member;
+import familyTreeApi.member.Member;
 
 import java.io.Serializable;
 import java.util.*;
@@ -58,6 +58,10 @@ public class Person implements Serializable, Comparable<Person>, Member {
         return this.isMale;
     }
 
+    public Map<Person, Boolean> getMarrieds() {
+        return this.married;
+    }
+
     public ThreadLocal<Object> getChildren() {
         return (ThreadLocal<Object>) this.children;
     }
@@ -71,32 +75,38 @@ public class Person implements Serializable, Comparable<Person>, Member {
     }
 
     public Person getMarried() {
-        if (this.married.containsValue(true)) {
-            for (Map.Entry<Person, Boolean> entry : this.married.entrySet())
+        if (this.getMarrieds().containsValue(true)) {
+            for (Map.Entry<Person, Boolean> entry : this.getMarrieds().entrySet())
                 if (entry.getValue()) return entry.getKey();
         }
         return null;
     }
 
-    public void addMarried(Person married, boolean isMarried) {
-        if (!this.hasMarried(married)) {
-            this.married.put(married, isMarried);
+    public boolean addMarried(Member married, boolean isMarried) {
+        if (!this.hasMarried((Person) married)) {
+            this.getMarrieds().put((Person) married, isMarried);
             married.addMarried(this, isMarried);
+            return true;
         }
+        return false;
     }
 
-    public void addChild(Person child) {
-        if (!this.hasChild(child)) {
-            this.children.add(child);
+    public boolean addChild(Member child) {
+        if (!this.hasChild((Person) child)) {
+            ((List<Person>) this.getChildren()).add((Person) child);
             child.addParent(this);
+            return true;
         }
+        return false;
     }
 
-    public void addParent(Person parent) {
-        if (!this.hasParent(parent)) {
-            this.parents.add(parent);
+    public boolean addParent(Member parent) {
+        if (!this.hasParent((Person) parent)) {
+            ((List<Person>) this.getParents()).add((Person) parent);
             parent.addChild(this);
+            return true;
         }
+        return false;
     }
 
     public void updateLinks() {
@@ -143,7 +153,7 @@ public class Person implements Serializable, Comparable<Person>, Member {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return isMale == person.isMale && Objects.equals(name, person.name) && Objects.equals(kind, person.kind) && Objects.equals(bornDate, person.bornDate);
     }

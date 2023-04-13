@@ -1,4 +1,4 @@
-package trees;
+package familyTreeApi.trees;
 
 import java.util.Iterator;
 import java.util.List;

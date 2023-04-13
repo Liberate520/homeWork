@@ -1,6 +1,6 @@
-package dog;
+package familyTreeApi.dog;
 
-import member.Member;
+import familyTreeApi.member.Member;
 
 import java.io.Serializable;
 import java.util.*;
@@ -74,18 +74,25 @@ public class Dog implements Serializable, Comparable<Dog>, Member {
         return this.kind;
     }
 
-    public void addChild(Dog child) {
-        if (!this.hasChild(child)) {
-            this.children.add(child);
+    public boolean addChild(Member child) {
+        if (!this.hasChild((Dog) child)) {
+            ((List<Dog>) this.getChildren()).add((Dog) child);
             child.addParent(this);
         }
+        return true;
     }
 
-    public void addParent(Dog parent) {
-        if (!this.hasParent(parent)) {
-            this.parents.add(parent);
+    public boolean addParent(Member parent) {
+        if (!this.hasParent((Dog) parent)) {
+            ((List<Dog>) this.getParents()).add((Dog) parent);
             parent.addChild(this);
         }
+        return true;
+    }
+
+    @Override
+    public boolean addMarried(Member married, boolean isMarried) {
+        return false;
     }
 
     public void updateLinks() {
@@ -129,7 +136,7 @@ public class Dog implements Serializable, Comparable<Dog>, Member {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Dog dog = (Dog) o;
         return isMale == dog.isMale && Objects.equals(name, dog.name) && Objects.equals(kind, dog.kind) && Objects.equals(bornDate, dog.bornDate);
     }

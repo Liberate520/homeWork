@@ -1,7 +1,7 @@
-package trees;
+package familyTreeApi.trees;
 
-import familyTree.FamilyTree;
-import handler.Writable;
+import familyTreeApi.familyTree.FamilyTree;
+import familyTreeApi.handler.Writable;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -15,8 +15,8 @@ public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<
         this.fTrees = new ArrayList<>();
     }
 
-    public void addFamilyTree(E fTree) {
-        this.getFamilyTrees().add(fTree);
+    public boolean addFamilyTree(E fTree) {
+        return this.getFamilyTrees().add(fTree);
     }
 
     @Override
@@ -47,10 +47,12 @@ public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<
         return result.toString();
     }
 
-    public void printTrees() {
+    public String printTrees() {
+        StringBuilder result = new StringBuilder();
         for (E fTree : getFamilyTrees()) {
-            fTree.printTree();
+            result.append(fTree.printTree());
         }
+        return result.toString();
     }
 
     public void save(Writable<TreeOfTrees<E>> writable, String fileName) {

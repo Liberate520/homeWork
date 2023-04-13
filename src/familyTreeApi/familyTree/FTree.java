@@ -1,6 +1,6 @@
-package familyTree;
+package familyTreeApi.familyTree;
 
-import member.Member;
+import familyTreeApi.member.Member;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package trees;
+package familyTreeApi.trees;
 
-import familyTree.FamilyTree;
-import handler.Writable;
+import familyTreeApi.familyTree.FamilyTree;
+import familyTreeApi.handler.Writable;
 
 import java.util.List;
 
 public interface TOTrees<E extends FamilyTree> extends Iterable<E> {
 
-    void addFamilyTree(E fTree);
+    boolean addFamilyTree(E fTree);
 
     E findFamilyTree(String name);
 
@@ -17,5 +17,5 @@ public interface TOTrees<E extends FamilyTree> extends Iterable<E> {
 
     List<E> getFamilyTrees();
 
-    void printTrees();
+    String printTrees();
 }
