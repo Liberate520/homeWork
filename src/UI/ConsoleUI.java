@@ -56,9 +56,9 @@ public class ConsoleUI implements View{
     private void addMember(){
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
-        System.out.println("Введите пол: ");
+        System.out.println("Введите пол (Male, Female): ");
         String gender = scanner.nextLine();
-        System.out.println("Введите дату рождения: ");
+        System.out.println("Введите дату рождения в формате dd/mm/yyyy: ");
         String dateBirth = scanner.nextLine();
         System.out.println("Введите имя матери: ");
         String nameMother = scanner.nextLine();
