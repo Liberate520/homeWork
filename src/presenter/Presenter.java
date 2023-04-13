@@ -1,11 +1,16 @@
 package presenter;
 import view.View;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-import model.FamilyTree;
-import model.Node;
+import model.*;
 import model.Service;
+import model.FamilyTree.FamilyTree;
+import model.FamilyTree.FindHuman;
+import model.FamilyTree.AddIntoTree.AddHuman;
+import model.Persons.Human;
+import model.Persons.Person;
 import presenter.Presenter;
 import view.Console;
 
@@ -22,31 +27,68 @@ public class Presenter<T>
         view.setPresenter(this);
     }
 
-    public T getFamilyTree(T t)
+    public void PresenterTreeFillsByHuman() // добавление людей в дерево и вывод дерева на экран
     {
-        return t;
+        service.addHuman();
     }
 
-    public T Show(T t)
+    public void PresenterFindPerson() // нахождение персоны по имени и фамилии
     {
-     view.print(t); // работает выводит дерево  
-     return t; 
+        service.FindHuman();
     }
 
-    public <T extends FamilyTree> void startFindHuman(T t)
-     {
-         FamilyTree.findHuman(t);
-    }
-    
-    public void SortId(T t)
+    public void PresenterSortById() // сортировка дерева id
     {
-        ((FamilyTree) t).sortById();
-        System.out.println("Список, отсортированный по Id: " + t);
+        service.SortId();
     }
 
-    public void sortLastName(T t)
+    public void PresenterSortByName() // сортировка дерева по имени 
     {
-        ((FamilyTree) t).sortByLastName();
-        System.out.println("Список, отсортированный по фамилии: " + t);
+        service.SortByLastName();
     }
+    // методы для записи в файл:
+
+    public void PresenterSaveBinFormat() throws IOException, ClassNotFoundException
+    {
+        service.SaveBinFormat(); // сериализация дерева в бинарный файл
+    }
+
+    public void PresenterSaveTxtFormat() throws IOException, ClassNotFoundException
+    {
+        service.SaveTxtFormat(); // сохранение дерева в текстовом формате
+    }
+
+    public void PresenterSaveDocFormat() throws IOException, ClassNotFoundException
+    {
+        service.SaveDocFormat();  // сохранение дерева в формате Doc
+    }
+
+    public void PresenterSaveMdFormat() throws IOException, ClassNotFoundException
+    {
+        service.SaveMdFormat(); // сохранение дерева в формате Md
+    }
+
+    // методы для чтения из файлов:
+
+    public void PresenterReadBinFormat() throws IOException, ClassNotFoundException
+    {
+        service.ReadBin(); // чтение дерева из бинарного файла (десериализация) и загрузка данных в дерево
+    }
+
+    public void PresenterReadTxtFormat() throws IOException, ClassNotFoundException
+    {
+        service.ReadTxt(); // чтение дерева из текстового файла
+    }
+
+    public void PresenterReadDocFormat() throws IOException, ClassNotFoundException
+    {
+        service.ReadDoc(); // чтение дерева из док файла
+    }
+
+    public void PresenterReadMdFormat() throws IOException, ClassNotFoundException
+    {
+        service.ReadMd(); // чтение дерева из Md файлала
+    }
+
 }
+    

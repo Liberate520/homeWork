@@ -4,18 +4,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SaveTextFormat<T> implements InterfaceSave<T>
+import model.FamilyTree.FamilyTree;
+
+public class SaveTextFormat<T extends FamilyTree> implements InterfaceSave<T>
 {
 
     @Override
-    public void write(T t) throws IOException, ClassNotFoundException
+    public void write(FamilyTree familyTree) throws IOException, ClassNotFoundException
      {
             String pathProject = System.getProperty("user.dir");
             String pathFile = pathProject.concat("/file.txt");
             File file = new File(pathFile);
             FileWriter writer = new FileWriter(file.getAbsolutePath(), false);
             writer.write("\nTxt Format\n");
-            writer.write(t.toString()); 
+            writer.write(familyTree.toString()); 
             writer.flush(); 
     }
     

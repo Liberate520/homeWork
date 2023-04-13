@@ -1,26 +1,26 @@
-package model;
+package model.Persons;
 
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human<T extends Node> implements Serializable, Node
+public class Human extends Person implements Serializable, InterfaceHuman
 {
     private int id;
-    private T father;
-    private T mother;
+    private Person father;
+    private Person mother;
     private Gender gender;
     private String firstName;
     private String lastName;
     private LocalDate dataBirth;
     private LocalDate dataDeath;
-    private ArrayList<T> children;
+    private ArrayList<Person> children;
     
 
 
     public Human(int id, String lastName, String firstName, Gender gender,
-    LocalDate dataBirth, LocalDate dataDeath, T father, T mother, ArrayList<T> children)
+    LocalDate dataBirth, LocalDate dataDeath, Person father, Person mother, ArrayList<Person> children)
     {
         this.id = id;
         this.lastName = lastName;
@@ -35,14 +35,14 @@ public class Human<T extends Node> implements Serializable, Node
     
 
     public Human(int id, String lastName, String firstName,Gender gender,
-    LocalDate dataBirth, LocalDate dataDeath, T father, T mother)
+    LocalDate dataBirth, LocalDate dataDeath, Person father, Person mother)
     {
         this(id, lastName, firstName, gender, dataBirth, dataDeath, father, mother,null);
         
     }
 
     public Human(int id, String lastName, String firstName,Gender gender,
-    LocalDate dataBirth, LocalDate dataDeath, T father)
+    LocalDate dataBirth, LocalDate dataDeath, Person father)
     {
         this(id, lastName, firstName, gender, dataBirth, dataDeath, father, null, null);     
     }
@@ -89,76 +89,87 @@ public class Human<T extends Node> implements Serializable, Node
         return id;
     }
 
-    public void setFather(T father)
+    public void setFather(Person father)
     {
         this.father = father;
     }
 
-    public T getFather() 
+    public Person getFather() 
     {
         return father;
     }
-    public void setMother(T mother) 
+    public void setMother(Person mother) 
     {
         this.mother = mother;
     }
-    public T getMother() 
+    public Person getMother() 
     {
         return mother;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(Gender gender) 
+    {
         this.gender = gender;
     }
-    public Gender getGender() {
+    public Gender getGender() 
+    {
         return gender;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) 
+    {
         this.firstName = firstName;
     }
 
-    public String getFirstName() {
+    public String getFirstName() 
+    {
         return firstName;
     }
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName) 
+    {
         this.lastName = lastName;
     }
-    public String getLastName() {
+    public String getLastName() 
+    {
         return lastName;
     }
 
-    public void setDataBirth(LocalDate dataBirth) {
+    public void setDataBirth(LocalDate dataBirth) 
+    {
         this.dataBirth = dataBirth;
     }
-    public LocalDate getDataBirth() {
+    public LocalDate getDataBirth() 
+    {
         return dataBirth;
     }
-    public void setDataDeath(LocalDate dataDeath) {
+    public void setDataDeath(LocalDate dataDeath) 
+    {
         this.dataDeath = dataDeath;
     }
     public LocalDate getDataDeath() {
         return dataDeath;
     }
     
-    public void setChildren(ArrayList<T> children) {
+    public void setChildren(ArrayList<Person> children) 
+    {
         this.children = children;
     }
-    public ArrayList<T> getChildren()
+    public ArrayList<Person> getChildren()
     {
         return children;
     }
 
-    public void addChildren(T human)
+    public void addChildren(Person person)
     {
         if(this.children == null)
         {
             this.children = new ArrayList<>();    
         }
-        this.children.add(human);
+        this.children.add(person);
     }
 
-    public int getAge() {
+    public int getAge() 
+    {
         LocalDate currenDate = LocalDate.now();
         if (getDataDeath() == null)
             return Period.between(dataBirth, currenDate).getYears();
@@ -168,7 +179,8 @@ public class Human<T extends Node> implements Serializable, Node
 
     
     @Override
-    public String toString() {
+    public String toString() 
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("\n").append(id).append(" фамилия: ").append(lastName).append(", имя: ").append(firstName).append("\n");
         sb.append(" дата рождения: ").append(dataBirth);
@@ -205,16 +217,5 @@ public class Human<T extends Node> implements Serializable, Node
             }
         }
         return sb.toString();
-
     }
-
-
-    // public Node get(int i) {
-    //     return null;
-    // }
-
-
-    // public static int size() {
-    //     return 0;
-    // }
 }

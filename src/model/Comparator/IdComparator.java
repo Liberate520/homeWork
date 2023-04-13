@@ -1,8 +1,11 @@
-package model;
+package model.Comparator;
 
 import java.util.Comparator;
 
-public class IdComparator<T extends Node> implements Comparator<T>
+import model.Persons.Human;
+import model.Persons.Person;
+
+public class IdComparator<T extends Person> implements Comparator<T>
 {
         @Override
         public int compare(T member2, T member1) 
@@ -14,5 +17,4 @@ public class IdComparator<T extends Node> implements Comparator<T>
            }
            return 1;
         }
-
     }

@@ -1,8 +1,10 @@
-package model;
+package model.Iterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import model.Persons.Person;
 public class HumanIterator<T> implements Iterator<T> 
 {
     private int index;
