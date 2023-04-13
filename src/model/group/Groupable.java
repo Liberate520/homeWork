@@ -15,7 +15,5 @@ public interface Groupable<T> extends Iterable<T>{
     void sortByAge();
     void sortById();
     void sortByGenderd();
-    void sortByChildren();
-
     }
     

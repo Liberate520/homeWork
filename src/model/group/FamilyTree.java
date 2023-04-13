@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import group.comparators.PersonComparatorByAge;
-import group.comparators.PersonComparatorByChildren;
 import group.comparators.PersonComparatorByGender;
 import group.comparators.PersonComparatorById;
 import group.comparators.PersonComparatorByName;
@@ -75,11 +74,6 @@ public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializ
     public void sortByGenderd() {
         famyliTree.sort(new PersonComparatorByGender<T>());
         ;
-    }
-
-    public void sortByChildren() {
-        famyliTree.sort(new PersonComparatorByChildren<T>());
-
     }
 
     public void sortById() {
