@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-    public class FamilyTree implements Serializable, Iterable<Human>{
-    private List<Human> humanList;
+    public class FamilyTree<E extends Human> implements Serializable, Iterable<Human>{
+    private List<E> humanList;
     public FamilyTree(){this(new ArrayList<>());}
-    public FamilyTree(List<Human> humanList) {this.humanList = humanList;}
+    public FamilyTree(List<E> humanList) {this.humanList = humanList;}
         private FamilyTree famTree;
 
-    public void addHumanToTree (Human human) {
+    public void addHumanToTree (E human) {
         if (human == null) {
             System.out.println("Некорректно указаны данные для добавления");
         }
@@ -55,7 +55,7 @@ import java.util.List;
         return null;
     }
 
-    public List<Human> getHumanList() {
+    public List<E> getHumanList() {
         return humanList;
     }
         @Override

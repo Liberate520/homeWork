@@ -5,7 +5,7 @@ import java.time.LocalDate;
     public class Program implements Serializable{
 
     public static void main(String[] args)  throws IOException, ClassNotFoundException {
-        FamilyTree myTree =new FamilyTree();
+        FamilyTree<Human> myTree =new FamilyTree<>();
 
         Human human1 = new Human ("Андрей", "Шевцов", Gender.Male,LocalDate.of(1915, 1, 14), LocalDate.of(1959, 01, 13));
         Human human2 = new Human("Анатолий", "Шевцов", Gender.Male,LocalDate.of(1931, 2, 19), LocalDate.of(1976, 01, 11));
@@ -39,14 +39,12 @@ import java.time.LocalDate;
 
         myTree.getHumanList().sort(new ComparatorByBirthday());
         System.out.println("\nСортировка по дате рождения ");
-        for (Human human:
-                myTree) {
+        for (Human human: myTree) {
             System.out.println(human.getInfoHuman());
         }
         myTree.getHumanList().sort(new ComparatorByName());
         System.out.println("\nСортировка по имени");
-        for (Human human:
-                myTree) {
+        for (Human human: myTree) {
             System.out.println(human.getInfoHuman());
         }
     }
