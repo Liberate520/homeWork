@@ -7,9 +7,9 @@ import human.Human;
 import presenter.Presenter;
 import tree.Tree;
 
-public class ConsoleUi<E> implements View<E> {
+public class ConsoleUi implements View {
     private Scanner scanner;
-    private Presenter<E> presenter;
+    private Presenter presenter;
     private boolean loop;
 
     public ConsoleUi() {
@@ -26,7 +26,7 @@ public class ConsoleUi<E> implements View<E> {
                             +
                             "\n4. Отсортировать фамильное дерево по количеству детей;\n5. Отсортировать фамильное дерево по порядку добавления людей;"
                             +
-                            "\n6. Добавить человека в дерево;\n7. Выход\n");
+                            "\n6. Добавить человека в дерево;\n7. Показать фамильное дерево;\n8. Выход\n");
             n = scanner.nextInt();
         }
         String str = scanner.nextLine();
@@ -34,7 +34,7 @@ public class ConsoleUi<E> implements View<E> {
     }
 
     @Override
-    public void setPresenter(Presenter<E> presenter) {
+    public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
 
@@ -63,6 +63,9 @@ public class ConsoleUi<E> implements View<E> {
                     addbyhuman();
                     break;
                 case 7:
+                    showtree();
+                    break;
+                case 8:
                     exit();
                     break;
                 default:
@@ -74,37 +77,30 @@ public class ConsoleUi<E> implements View<E> {
     private void findname() throws ClassNotFoundException, IOException {
         System.out.println("Введите имя человека: ");
         String str = scanner.nextLine();
-        E human = presenter.taskfind(str);
-        if (human == null)
-            System.out.printf("Человека с именем %s в этом фамильном дереве нет.\n", str);
-        else
-            System.out.println(human);
+        presenter.taskfind(str);
     }
 
-    private void addbyhuman() throws ClassNotFoundException, IOException {
+    public void addbyhuman() {
+        StringBuilder sb = new StringBuilder();
+        System.out.println("Сначала вводите родителей, потом детей.");
         System.out.println("Введите имя человека: ");
         String name = scanner.nextLine();
+        sb.append(name + " ");
         System.out.println("Введите пол: ");
         String gender = scanner.nextLine();
+        sb.append(gender + " ");
         System.out.println("Введите год рождения: ");
         int birthyear = scanner.nextInt();
-        E human = (E) new Human(name, gender, birthyear);
-        String str = scanner.nextLine();
+        sb.append(birthyear + " ");
+        String sw = scanner.nextLine();
+        System.out.println("Если Вы не знаете имени матери или отца, то введите 0: ");
         System.out.println("Введите имя матери: ");
         String mothername = scanner.nextLine();
-        E motherh = presenter.taskfind(mothername);
-        if ((motherh == null) && (!mothername.equals(""))) {
-            addbyhuman();
-        }
+        sb.append(mothername + " ");
         System.out.println("Введите имя отца: ");
         String fathername = scanner.nextLine();
-        E fatherh = presenter.taskfind(fathername);
-        if ((fatherh == null) && (!fathername.equals(""))) {
-            addbyhuman();
-        }
-        motherh = presenter.taskfind(mothername);
-        fatherh = presenter.taskfind(fathername);
-        presenter.addh(human, motherh, fatherh);
+        sb.append(fathername + " ");
+        presenter.addh(sb.toString());
     }
 
     private void sortbyname() {
@@ -123,14 +119,18 @@ public class ConsoleUi<E> implements View<E> {
         presenter.sbyid();
     }
 
+    public void showtree() {
+        presenter.showt();
+    }
+
     private void exit() {
         System.out.println("Завершение работы");
         loop = false;
     }
 
     @Override
-    public void print(Tree<E> answer) {
-        for (E human : answer) {
+    public void print(Tree<Human> answer) {
+        for (Human human : answer) {
             System.out.println(human);
         }
     }

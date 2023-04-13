@@ -23,12 +23,25 @@ public class FamilyTree<E extends Human> implements Serializable, Tree<E> {
         return people;
     }
 
-    public void addpeople(E h, E mh, E fh) {
-        if (mh != null){
+    public void addpeople(String str) {
+        String[] s1 = str.split(" ");
+        E h = findHuman(s1[0]);
+        if (h != null) {
+            System.out.println("Человек с таким имененм уже есть в этом фамильном дереве!");
+        } else {
+            h = (E) new Human(s1[0], s1[1], Integer.parseInt(s1[2]));
+            E mh = findHuman(s1[3]);
+            E fh = findHuman(s1[4]);
+            addintree(h, mh, fh);
+        }
+    }
+
+    public void addintree(E h, E mh, E fh) {
+        if (mh != null) {
             mh.addchildren(h);
             h.setMother(mh);
         }
-        if (fh != null){
+        if (fh != null) {
             fh.addchildren(h);
             h.setFather(fh);
         }

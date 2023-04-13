@@ -1,14 +1,20 @@
 package service;
 
-import java.io.IOException;
-
+import human.Human;
 import tree.Tree;
 
-public interface Service<E> {
-    E find (String st) throws ClassNotFoundException, IOException;
-    Tree<E> sortname();
-    Tree<E> sortbirthyear();
-    Tree<E> sortchild();
-    Tree<E> sortid();
-    Tree<E> addhuman(E human, E motherh, E fatherh);
+public interface Service {
+    Human find(String st);
+
+    Tree<Human> sortname();
+
+    Tree<Human> sortbirthyear();
+
+    Tree<Human> sortchild();
+
+    Tree<Human> sortid();
+
+    Tree<Human> addhuman(String str);
+
+    Tree<Human> showtr();
 }

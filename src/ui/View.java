@@ -3,13 +3,14 @@ package ui;
 
 import java.io.IOException;
 
+import human.Human;
 import presenter.Presenter;
 import tree.Tree;
 
-public interface View<E> {
+public interface View {
     void start() throws ClassNotFoundException, IOException;
 
-    void print(Tree<E> answer);
+    void print(Tree<Human> answer);
 
-    void setPresenter(Presenter<E> pr);
+    void setPresenter(Presenter pr);
 }

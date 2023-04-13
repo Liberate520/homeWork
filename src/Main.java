@@ -25,20 +25,20 @@ public class Main {
         Human human5 = new Human("Евфалия", "ж", 1907);
         Human human6 = new Human("Дарья", "ж", 1976);
 
-        Tree<Human> famailytree = new FamilyTree<>();
+        Tree<Human> familytree = new FamilyTree<>();
 
-        famailytree.addpeople(human1, human2, human3);
-        famailytree.addpeople(human2, human5, null);
-        famailytree.addpeople(human6, human2, human3);
-        famailytree.addpeople(human3, null, human4);
-        famailytree.addpeople(human4, null, null);
-        famailytree.addpeople(human5, null, null);
+        familytree.addintree(human1, human2, human3);
+        familytree.addintree(human2, human5, null);
+        familytree.addintree(human6, human2, human3);
+        familytree.addintree(human3, null, human4);
+        familytree.addintree(human4, null, null);
+        familytree.addintree(human5, null, null);
 
         OutInput saveload = new Slfamailytree();
-        saveload.save(famailytree);
-        View<Human> view = new ConsoleUi<>();
-        Service<Human> service = new TreeService<>();
-        Presenter<Human> presenter = new Presenter<>(view, service);
+        saveload.save(familytree);
+        View view = new ConsoleUi();
+        Service service = new TreeService((Tree<Human>) saveload.load());
+        Presenter presenter = new Presenter(view, service);
         view.start();
     }
 }

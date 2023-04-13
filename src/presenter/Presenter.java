@@ -1,23 +1,25 @@
 package presenter;
 
-import java.io.IOException;
-
+import human.Human;
 import service.Service;
 import ui.View;
 
-public class Presenter<E> {
-    private View<E> view;
-    private Service<E> service;
+public class Presenter {
+    private View view;
+    private Service service;
 
-    public Presenter(View<E> view, Service<E> service) {
+    public Presenter(View view, Service service) {
         this.view = view;
         this.service = service;
         view.setPresenter(this);
     }
 
-    public E taskfind(String st) throws ClassNotFoundException, IOException {
-        E humanf = service.find(st);
-        return humanf;
+    public void taskfind(String st) {
+        Human humanf = service.find(st);
+        if (humanf == null)
+            System.out.printf("Человека с именем %s в этом фамильном дереве нет.\n", st);
+        else
+            System.out.println(humanf);
     }
 
     public void sbyname() {
@@ -36,7 +38,11 @@ public class Presenter<E> {
         view.print(service.sortid());
     }
 
-    public void addh(E human, E motherh, E fatherh) {
-        view.print(service.addhuman(human, motherh, fatherh));
+    public void addh(String str) {
+        view.print(service.addhuman(str));
+    }
+
+    public void showt() {
+        view.print(service.showtr());
     }
 }
