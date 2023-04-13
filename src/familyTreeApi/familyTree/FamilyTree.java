@@ -8,17 +8,19 @@ import java.util.*;
 
 public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     private String name;
+    private String typeMember;
     private List<E> members;
 
     private List<E> tempMembers;
 
-    public FamilyTree(String name) {
+    public FamilyTree(String name, String typeMember) {
         this.setName(name);
+        this.setTypeMember(typeMember);
         this.members = new ArrayList<>();
     }
 
     public FamilyTree(E member) {
-        this(member.getNameString());
+        this(member.getNameString(), member.getClass().toString());
         this.addMember(member, true);
     }
 
@@ -26,8 +28,16 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
         this.name = name;
     }
 
+    public void setTypeMember(String typeMember) {
+        this.typeMember = typeMember;
+    }
+
     public String getName() {
         return this.name;
+    }
+
+    public String getTypeMember() {
+        return this.typeMember;
     }
 
     public List<E> getMembers() {

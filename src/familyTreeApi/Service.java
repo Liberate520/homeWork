@@ -39,9 +39,9 @@ public class Service {
     public boolean addFamilyTree(String member, String newName) {
         typeMember = member;
         if (typeMember.equals("person")) {
-            currentEditingFTree = new FamilyTree<Person>(newName);
+            currentEditingFTree = new FamilyTree<Person>(newName, typeMember);
         } else if (typeMember.equals("dog")) {
-            currentEditingFTree = new FamilyTree<Dog>(newName);
+            currentEditingFTree = new FamilyTree<Dog>(newName, typeMember);
         } else {
             return false;
         }
@@ -99,6 +99,7 @@ public class Service {
 
     public boolean isFindFamilyTree(String name) {
         currentEditingFTree = this.getTreeOfTrees().findFamilyTree(name);
+        typeMember = currentEditingFTree.getTypeMember();
         return currentEditingFTree != null;
     }
 

@@ -3,6 +3,8 @@ package presenter;
 import familyTreeApi.Service;
 import ui.View;
 
+import java.util.Calendar;
+
 public class Presenter {
     private View view;
     private Service service;
@@ -17,8 +19,8 @@ public class Presenter {
         return service.addFamilyTree(member, name);
     }
 
-    public boolean addMember(String member, String name) {
-        return service.addFamilyTree(member, name);
+    public boolean addMember(String name, String kind, boolean isMale, Calendar bornDate) {
+        return service.addMember(name, kind, isMale, bornDate);
     }
 
     public void editFTree() {

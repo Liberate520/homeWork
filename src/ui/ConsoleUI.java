@@ -2,6 +2,8 @@ package ui;
 
 import presenter.Presenter;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -69,14 +71,14 @@ public class ConsoleUI implements View {
 
     private void newFTree() {
         String typeFTree = requestType();
-        String fTreeName = requestName();
-        if (presenter.addFamilyTree(typeFTree, fTreeName)){
+        String fTreeName = requestNameFTree();
+        if (presenter.addFamilyTree(typeFTree, fTreeName)) {
             editTree();
         }
     }
 
     private void requestEdit() {
-        String fTreeName = requestName();
+        String fTreeName = requestNameFTree();
         if (presenter.isFindFamilyTree(fTreeName)) {
             editTree();
         } else {
@@ -91,15 +93,53 @@ public class ConsoleUI implements View {
         } while (goToUpRequest());
     }
 
-    private void requests(){
+    private void requests() {
         System.out.println("Введите что хотите сделать c генеалогическим древом:\n" +
                 "1 - Создать нового члена семьи\n" +
-                "2 - Добавить одному члену семьи в качестве ребенка другого члена семьи\n" +
-                "3 - Связать в качестве мужа/жены одного члена семьи с другим членом семьи (для людей)");
+                "2 - Создать близнеца члена семьи\n" +
+                "3 - Добавить одному члену семьи в качестве ребенка другого члена семьи\n" +
+                "4 - Связать в качестве мужа/жены одного члена семьи с другим членом семьи (для людей)");
         switch (scanner.nextLine()) {
             case "1":
-                System.out.println("Введите имя нового члена семьи:");
-                presenter.addMember();
+                String name = requestName();
+                String kind = requestKind();
+                boolean isMale = requestIsMale();
+
+                tries = false;
+                int year = 1986;
+                do {
+                    try {
+                        System.out.println("Введите год рождения нового члена семьи:");
+                        year = Integer.getInteger(scanner.nextLine());
+                        tries = true;
+                    } catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
+                } while (!tries);
+                tries = false;
+                int month = 0;
+                do {
+                    try {
+                        System.out.println("Введите месяц рождения нового члена семьи:");
+                        month = Integer.getInteger(scanner.nextLine());
+                        tries = true;
+                    } catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
+                } while (!tries);
+                tries = false;
+                int day = 1;
+                do {
+                    try {
+                        System.out.println("Введите день месяца рождения нового члена семьи:");
+                        day = Integer.getInteger(scanner.nextLine());
+                        tries = true;
+                    } catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
+                } while (!tries);
+                Calendar bornDate = new GregorianCalendar(year, month, day);
+                presenter.addMember(name, kind, isMale, bornDate);
                 break;
             case "2":
 
@@ -107,10 +147,34 @@ public class ConsoleUI implements View {
             case "3":
 
                 break;
+            case "4":
             default:
                 System.out.println("Введено что-то отличное от 1 или 2.");
                 break;
         }
+    }
+
+    private String requestName() {
+        System.out.println("Введите имя нового члена семьи:");
+        return scanner.nextLine();
+    }
+
+    private String requestKind() {
+        System.out.println("Введите расу (породу) нового члена семьи:");
+        return scanner.nextLine();
+    }
+
+    private boolean requestIsMale() {
+        boolean tries = false;
+        do {
+            try {
+                System.out.println("Новый член семьи мужчина?:");
+                return Boolean.getBoolean(scanner.nextLine());
+            } catch (Exception ex){
+                System.out.println(ex.getMessage());
+            }
+        } while (!tries);
+        return false;
     }
 
     private void requestLoad() {
@@ -123,7 +187,7 @@ public class ConsoleUI implements View {
         presenter.save(scanner.nextLine());
     }
 
-    private String requestName() {
+    private String requestNameFTree() {
         System.out.println("Введите имя генеалогического древа:");
         return scanner.nextLine();
     }
