@@ -2,6 +2,8 @@ package main;
 
 import tree.FamilyTree;
 import tree.Human;
+import ui.View;
+import ui.Console;
 
 import java.time.LocalDate;
 
@@ -25,13 +27,15 @@ public class Main {
         familyTree.addHuman(human4);
         familyTree.addHuman(human5);
 
-        familyTree.findHuman("Павел");
-        System.out.println(familyTree.findHuman("Павел"));
+//        System.out.println(familyTree.findHuman("Павел"));
+//
+//        familyTree.sortByName();
+//        System.out.println(familyTree);
+//        System.out.println();
+//        familyTree.sortByBirthDate();
+//        System.out.println(familyTree);
 
-        familyTree.sortByName();
-        System.out.println(familyTree);
-        System.out.println();
-        familyTree.sortByBirthDate();
-        System.out.println(familyTree);
+        View view = new Console(familyTree);
+        view.run();
     }
 }
