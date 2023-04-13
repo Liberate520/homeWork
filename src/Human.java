@@ -70,7 +70,7 @@ public class Human {
         return deathDay;
     }
 
-    @Override
+   @Override
     public String toString() {
         return "имя: " + name + "\n" +
                 birthday + " - " +
