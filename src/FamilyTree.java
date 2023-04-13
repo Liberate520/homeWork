@@ -1,10 +1,9 @@
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FamilyTree extends SaveRestore implements Serializable {
+public class FamilyTree implements Serializable {
     private HashMap<Integer, Human> mapHumans;
 
     public FamilyTree() {
