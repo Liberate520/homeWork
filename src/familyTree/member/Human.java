@@ -1,4 +1,4 @@
-package member;
+package familyTree.member;
 
 
 import java.io.Serializable;
@@ -31,7 +31,22 @@ public class Human implements FamilyMember, Serializable {
         this.name = name;
         this.surname = surname;
         this.dateBirth = dateBirth;
+        this.dateDeath = dateDeath;
         this.gender = gender;
+        this.childList = new ArrayList<>();
+        this.siblings = new ArrayList<>();
+        this.grandparents = new ArrayList<>();
+        this.grandchildrens = new ArrayList<>();
+    }
+
+    public Human(String name, String surname, Gender gender, String dateBirth) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.dateBirth = dateBirth;
+        this.gender = gender;
+        this.father = null;
+        this.mother = null;
         this.childList = new ArrayList<>();
         this.siblings = new ArrayList<>();
         this.grandparents = new ArrayList<>();
@@ -50,11 +65,28 @@ public class Human implements FamilyMember, Serializable {
         this.grandparents = new ArrayList<>();
         this.grandchildrens = new ArrayList<>();
     }
+
+    public Human(int id, String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
+        this.name = name;
+        this.surname = surname;
+        this.dateBirth = dateBirth;
+        this.gender = gender;
+        this.id = id;
+        this.father = father;
+        this.mother = mother;
+
+        this.childList = new ArrayList<>();
+        this.siblings = new ArrayList<>();
+        this.grandparents = new ArrayList<>();
+        this.grandchildrens = new ArrayList<>();
+    }
+
     public Human() {
         this.id = 0;
         this.name = "unknown";
         this.surname = "unknown";
         this.dateBirth = "unknown";
+        this.dateDeath = "unknown";
     }
 
     @Override
@@ -149,13 +181,14 @@ public class Human implements FamilyMember, Serializable {
         return grandchildrens;
     }
 
-    public String getDateDeath() {
-        return dateDeath;
-    }
+//    public String getDateDeath() {
+//        return dateDeath;
+//    }
 
     public List<Human> getChildList() {
         return childList;
     }
+
 
     public int getAge() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
@@ -163,6 +196,18 @@ public class Human implements FamilyMember, Serializable {
         LocalDate date = LocalDate.parse(dateBirth, formatter);
         return Period.between(date, currentDate).getYears();
     }
+
+//    public int getAge() {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+//        LocalDate currentDate = LocalDate.now();
+//        LocalDate date = LocalDate.parse(dateBirth, formatter);
+//        LocalDate endDate = LocalDate.parse(dateDeath, formatter);
+//        if (getDeathDate() == null) {
+//            return Period.between(date, currentDate).getYears();
+//        } else {
+//            return Period.between(date, endDate).getYears();
+//        }
+//    }
 
     public void setId(int id) {
         this.id = id;
@@ -283,8 +328,10 @@ public class Human implements FamilyMember, Serializable {
     }
 
     public void addSibling(Human sibling) {
-        siblings.add(sibling);
-        sibling.getSiblings().add(this);
+        if (!siblings.contains(sibling)) {
+            siblings.add(sibling);
+            sibling.addSibling(this);
+        }
     }
 
     public void addGrandparent(Human grandparent) {
@@ -293,7 +340,26 @@ public class Human implements FamilyMember, Serializable {
     }
 
     public void addGrandchild(Human grandchild) {
-        grandchildrens.add(grandchild);
+        if (!grandchildrens.contains(grandchild)) {
+            grandchildrens.add(grandchild);
+            grandchild.addGrandparent(this);
+        }
+    }
+
+//    public void addSiblings(Human newborn, Human mother, Human father) {
+//        if (father.childList.size() > 1) {
+//            for (Human human: father.childList) {
+//                if (human != newborn) {
+//                newborn.siblings.add(human);
+//                human.siblings.add(newborn);
+//            }
+//        }
+//    }
+
+    public void addNewbornToParents(Human father, Human mother) {
+        father.childList.add(this);
+        mother.childList.add(this);
+
     }
 
 
@@ -304,7 +370,7 @@ public class Human implements FamilyMember, Serializable {
                 .append(getAge()).append(" лет. ")
                 .append(getFatherInfo()).append(", ")
                 .append(getMotherInfo()).append(", ")
-                .append(getChildrenInfo());
+                .append(getChildrenInfo()).append(getSiblingsInfo());
         return builder.toString();
     }
     public String getChildrenInfo() {
@@ -321,11 +387,27 @@ public class Human implements FamilyMember, Serializable {
         }
         return childs.toString();
     }
+
+    public String getSiblingsInfo() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\nбратья и сестры: ");
+        if (siblings.size() != 0){
+            builder.append(siblings.get(0).getName());
+            for (int i = 1; i < siblings.size(); i++) {
+                builder.append(", ");
+                builder.append(siblings.get(i).getName());
+            }
+        } else {
+            builder.append("братьев и сестер нет");
+        }
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         return this.name +  " " + this.surname + " " +
                 "Пол: " + getGender() + " " +
-                "Возраст: " + getAge() + " лет " + "\n";
+                "Возраст: " + getAge() + " лет " + "( " + getBirthDate() + " )" + "\n";
     }
     @Override
     public boolean equals(Object obj) {

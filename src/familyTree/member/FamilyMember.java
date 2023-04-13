@@ -1,4 +1,4 @@
-package member;
+package familyTree.member;
 
 import java.util.List;
 

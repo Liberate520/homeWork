@@ -1,6 +1,6 @@
 package familyTree.comparators;
 
-import member.Human;
+import familyTree.member.Human;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

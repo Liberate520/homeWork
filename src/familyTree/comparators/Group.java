@@ -7,8 +7,8 @@ public interface Group<T> extends Iterable<T> {
     boolean remove(T member);
 
     List<T> getMembers();
-    T getRoot();
+   // T getRoot();
 
-    void setRoot(T root);
+    //void setRoot(T root);
     String getInfo();
 }
