@@ -39,17 +39,6 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E>{
         }
         return true;
     }
-
-    public E getByName(String fio)
-    {
-    for (E human : familyTree) {
-        if (human.getName().equals(fio))
-        {
-            return human;
-        }
-    }
-    return null;
-    }
     public String getInfo()
     {
         StringBuilder sb =new StringBuilder();

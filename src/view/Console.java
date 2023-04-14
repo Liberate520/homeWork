@@ -15,13 +15,14 @@ public class Console implements View{
     String nameTemp;
     @Override
     public void print(String text) {
+
         System.out.println(text);
     }
 
     @Override
     public void start() {
         while (key != 5) {
-            System.out.println(" Введите: " +
+            System.out.println(" Введите:\n " +
                             "0 - Вывести список членов семьи\n " +
                             "1 - Добавить члена семьи\n " +
                             "2 - Загрузить семью из файла\n " +
@@ -31,39 +32,27 @@ public class Console implements View{
             key = scn.nextInt();
             switch (key) {
                 case 0:
-                    System.out.println(familyTolstoy.getInfo());
+                    print(presenter.getInfo());
                     break;
                 case 1:
-                    enterPersonData();
+                   enterPersonData();
                     break;
 
                 case 2:
 
-                    familyTolstoy= (FamilyTree) writable.load("family.txt");
-                    System.out.println(familyTolstoy);
+                   // familyTolstoy= (FamilyTree) writable.load("family.txt");
+                   // System.out.println(familyTolstoy);
                     break;
 
                 case 3:
-                    System.out.println("Введите имя Отца:");
-                    nameFather = scn.next();
-                    boolean found = false;
-                    for (Human human : familyTolstoy) {
-                        if (human.getName().equals(nameFather)) {
-                            System.out.println("Дети отца " + nameFather + " :" + human.getChildrenInfo());
-                            found = true;
-                            break;
-                        }
-                        if (!(found)) {
-                            System.out.println("Отец не найден");
-                        }
-                    }
+                    printChild();
                     break;
                 case 4:
                     System.out.println("Введите искомое имя");
-                    familyTolstoy.find(scn.next());
+                    //familyTolstoy.find(scn.next());
                     break;
                 case 5:
-                    writable.save(familyTolstoy,"family.txt");
+                    //writable.save(familyTolstoy,"family.txt");
                     scn.close();
                     break;
                 default:
@@ -80,9 +69,26 @@ public class Console implements View{
         nameFather = scn.next();
         System.out.println("Введите имя матери:");
         nameMather = scn.next();
-        familyTolstoy.addMember(new Human(nameTemp,familyTolstoy.getByName(nameFather),familyTolstoy.getByName(nameMather)));
-        System.out.println(familyTolstoy);
+        presenter.addMember(nameTemp,nameFather,nameMather);
+        print(presenter.getName(nameTemp) + "  успешно добавлен");
     }
+
+public void printChild()
+{
+//    System.out.println("Введите имя Отца:");
+//    nameFather = scn.next();
+//    boolean found = false;
+//    for (Human human : familyTolstoy) {
+//        if (human.getName().equals(nameFather)) {
+//            System.out.println("Дети отца " + nameFather + " :" + human.getChildrenInfo());
+//            found = true;
+//            break;
+//        }
+//        if (!(found)) {
+//            System.out.println("Отец не найден");
+//        }
+//    }
+}
     @Override
     public void setPresenter(Presenter presenter)
     {
