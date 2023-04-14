@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -123,8 +124,9 @@ public class ConsoleUi implements View {
         presenter.showt();
     }
 
-    private void exit() {
+    private void exit() throws FileNotFoundException, IOException {
         System.out.println("Завершение работы");
+        presenter.savefile();
         loop = false;
     }
 

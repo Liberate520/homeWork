@@ -1,5 +1,8 @@
 package service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import human.Human;
 import tree.Tree;
 
@@ -17,4 +20,6 @@ public interface Service {
     Tree<Human> addhuman(String str);
 
     Tree<Human> showtr();
+
+    void savetree() throws FileNotFoundException, IOException;
 }

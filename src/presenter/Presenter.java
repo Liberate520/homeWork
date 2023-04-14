@@ -1,5 +1,8 @@
 package presenter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import human.Human;
 import service.Service;
 import ui.View;
@@ -44,5 +47,8 @@ public class Presenter {
 
     public void showt() {
         view.print(service.showtr());
+    }
+    public void savefile() throws FileNotFoundException, IOException {
+        service.savetree();
     }
 }
