@@ -1,20 +1,10 @@
-
-
+import Human.Human;
+import Tree.Tree;
 
 import java.io.IOException;
 
-
 public class Main {
     static Tree familyTree = new Tree();
-
-    public static void createFamily(Human father, Human mother, Human child) {
-        child.setFather(father);
-        child.setMother(mother);
-        mother.setWifeOrHusband(father);
-        familyTree.add(mother);
-        familyTree.add(father);
-        familyTree.add(child);
-    }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human people1 = new Human("01,01,1686", "александр", "пушкин", "", "male");
@@ -47,30 +37,50 @@ public class Main {
         Human people20 = new Human("01,01,1833", "александр", "пушкин", "александрович", "male");
 
         //family 1
-        createFamily(people1, people2, people3);
+        familyTree.createFamily(people1, people2, people3);
         //family 2
-        createFamily(people4, people5, people6);
+        familyTree.createFamily(people4, people5, people6);
         //family 3
-        createFamily(people3, people6, people7);
+        familyTree.createFamily(people3, people6, people7);
         //family 4
-        createFamily(people8, people9, people10);
+        familyTree.createFamily(people8, people9, people10);
         //family 5
-        createFamily(people11, people12, people13);
+        familyTree.createFamily(people11, people12, people13);
         //family 6
-        createFamily(people10, people13, people14);
+        familyTree.createFamily(people10, people13, people14);
         //family 7
-        createFamily(people7, people14, people15);
+        familyTree.createFamily(people7, people14, people15);
         //family 8
-        createFamily(people15, people16, people17);
-        createFamily(people15, people16, people18);
-        createFamily(people15, people16, people19);
-        createFamily(people15, people16, people20);
+        familyTree.createFamily(people15, people16, people17);
+        familyTree.createFamily(people15, people16, people18);
+        familyTree.createFamily(people15, people16, people19);
+        familyTree.createFamily(people15, people16, people20);
         System.out.println(familyTree.getInfo());
         SaveTxt data = new SaveTxt();
         data.save(familyTree);
         System.out.println("Загрузка дерева из файла: ");
         Tree treeRestored= (Tree) data.load();
         System.out.println(treeRestored.getInfo());
+        Service service = new Service(familyTree.getRelatives());
+        System.out.println("перебор дерева по собственному итератору: ");
+        for (Human human: familyTree) {
+            System.out.println(human.getFullName());
+        }
+        System.out.println("сортировка дерева по фамилиям: ");
+        service.sortBySecondName();
+        for (Human human: familyTree) {
+            System.out.println(human.getFullName());
+        }
+        System.out.println("сортировка дерева по полу: ");
+        service.sortBySex();
+        for (Human human: familyTree) {
+            System.out.println(human.getFullName());
+        }
 
+        System.out.println("сортировка дерева по году рождения: ");
+        service.sortByYear();
+        for (Human human: familyTree) {
+            System.out.println(human.getFullName());
+        }
     }
 }

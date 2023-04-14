@@ -1,10 +1,12 @@
+package Human;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Human implements Serializable {
+public class Human implements Serializable,Comparable<Human> {
 
     private String birthDay;
     private int birth_date;
@@ -44,7 +46,9 @@ public class Human implements Serializable {
         return bDay;
     }
     public String getFullName(){
-        return secondName+" "+firstName+" "+patronymic;
+        return secondName+" "+firstName+" "+patronymic
+                +" ,год рождения: "+getBirth_year()
+                +" ,пол: "+getSex();
     }
     public int getAge() {
         Date dt=new Date();
@@ -107,11 +111,7 @@ public class Human implements Serializable {
         return temp;
     }
     public void addChild(Human child)  {
-
             this.children.add(child);
-
-
-
     }
 
     public String getChildrenInfo() {
@@ -128,6 +128,9 @@ public class Human implements Serializable {
         return sb.toString();
     }
 
+    public int getBirth_year() {
+        return birth_year;
+    }
 
     public void setWifeOrHusband(Human wifeOrHusband) {
         this.wifeOrHusband = wifeOrHusband;
@@ -166,8 +169,9 @@ public class Human implements Serializable {
                 && Objects.equals(patronymic, human.patronymic);
     }
 
+
     @Override
-    public int hashCode() {
-        return Objects.hash(firstName,secondName,patronymic,birthDay);
+    public int compareTo(Human o) {
+        return this.secondName.compareTo(o.secondName);
     }
 }
