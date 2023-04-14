@@ -109,7 +109,9 @@ private ReadMd readMd;
 
         public void FindHuman() // поиск людей в дереве по имени и фамилии
         {
-            findHuman.findHuman(human, familyTree);
+            FamilyTree familyTree3 = new FamilyTree();
+            familyTree3 = addHuman.FillByHuman();
+            findHuman.findHuman(familyTree3);
         }
 
         public  void SaveBinFormat() throws IOException, ClassNotFoundException  
@@ -166,12 +168,18 @@ private ReadMd readMd;
         
         public void SortById() // сортировка по id
         {
-            sortById.sortBy();
+            FamilyTree familyTree1 = new FamilyTree();
+            familyTree1 = addHuman.FillByHuman();
+            sortById.sortBy(familyTree1); // передаём заполненное дерево и сортируем по убыванию id
+            System.out.println("Список, отсортированный по id: " + familyTree1);
         }
 
         public void SortByLastName() // сортировка по имени
         {
-            sortByLastName.sortByLastName();
+            FamilyTree familyTree2 = new FamilyTree();
+            familyTree2 = addHuman.FillByHuman();
+            sortByLastName.sortByLastName(familyTree2);
+            System.out.println("Список, отсортированный по имени: " + familyTree2);
         }
 
 }

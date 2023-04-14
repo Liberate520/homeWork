@@ -5,7 +5,15 @@ import model.Persons.Human;
 import model.Persons.Person;
 public class FindHuman<T extends Human> 
 {
-    public void findHuman(T t, FamilyTree familyTree)
+    private FamilyTree familyTree;;
+    private T t;
+    void FindHuman(FamilyTree familyTree, T t)
+    {
+        this.familyTree = familyTree;
+        this.t = t;
+    }
+
+    public void findHuman(FamilyTree familyTree)
     {
         System.out.println("Введите фамилию для поиска:");
         Scanner sc1 = new Scanner(System.in, "cp866");

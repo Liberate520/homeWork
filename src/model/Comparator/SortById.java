@@ -11,9 +11,8 @@ public class SortById
         this.familyTree = familyTree;
     }
 
-    public void sortBy()
+    public void sortBy(FamilyTree familyTree)
     {
         familyTree.sort(new IdComparator());
-        System.out.println("Список, отсортированный по id: " + familyTree);
     }
 }

@@ -11,9 +11,8 @@ public class SortByLastName
             this.familyTree = familyTree;
         }
 
-        public void sortByLastName()
+        public void sortByLastName(FamilyTree familyTree)
         {
-            familyTree.sortByLastName(familyTree); 
-            System.out.println("Список, отсортированный по фамилии: " + familyTree);
+            familyTree.sort(new IdComparator()); 
         } 
 }
