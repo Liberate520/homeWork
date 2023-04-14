@@ -1,11 +1,13 @@
 package model;
 
 import java.io.IOException;
+import java.util.Comparator;
+
 import model.*;
 import model.Comparator.IdComparator;
 import model.Comparator.NameComparator;
 import model.Comparator.SortByLastName;
-import model.Comparator.SortId;
+import model.Comparator.SortById;
 import model.FamilyTree.FamilyTree;
 import model.FamilyTree.FindHuman;
 import model.FamilyTree.AddIntoTree.AddHuman;
@@ -44,7 +46,7 @@ private AddPerson addPerson;
 private AddHuman addHuman;
 private AddOthers addOthers;
 private NameComparator nameComparator;
-private SortId sortId;
+private SortById sortById;
 private SortByLastName sortByLastName;
 private HumanIterator humanIterator;
 private IdComparator idComparator;
@@ -60,8 +62,9 @@ private ReadMd readMd;
 
     public Service(FamilyTree familyTree, AddHuman addHuman, 
         SaveBinFormat saveBinFormat, SaveTextFormat saveTextFormat,
-        SaveDocFormat saveDocFormat,
-        SortId sortId, SortByLastName sortByLastName, FindHuman findHuman, AddPerson addPerson)
+        SaveDocFormat saveDocFormat,SaveMdFormat saveMdFormat,
+        SortById sortById, SortByLastName sortByLastName,
+         FindHuman findHuman, AddPerson addPerson)
     {
          this.familyTree = familyTree;
         // this.person = person;
@@ -73,10 +76,10 @@ private ReadMd readMd;
         // this.interfaceRead = interfaceRead;
         this.findHuman = findHuman;
         this.addPerson = addPerson;
-         this.addHuman = addHuman;
+        this.addHuman = addHuman;
         // this.addOthers = addOthers;
         // this.nameComparator = nameComparator;
-         this.sortId = sortId;
+         this.sortById = sortById;
          this.sortByLastName = sortByLastName;
         // this.humanIterator = humanIterator;
         // this.idComparator = idComparator;
@@ -161,14 +164,14 @@ private ReadMd readMd;
             nameComparator.compare(person, person);
         }
         
-        public void SortId() // сортировка по id
+        public void SortById() // сортировка по id
         {
-            sortId.SortId(familyTree);
+            sortById.sortBy();
         }
 
         public void SortByLastName() // сортировка по имени
         {
-            sortByLastName.sortByLastName(person);
+            sortByLastName.sortByLastName();
         }
 
 }

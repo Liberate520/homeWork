@@ -32,15 +32,15 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
         return new HumanIterator(t);
     }
 
-    public void sortById(FamilyTree familyTree) 
-    {
-        ((List) familyTree).sort(new IdComparator());
-    }
+    // public void sortById() 
+    // {
+    //     familyTree.sort(new IdComparator());
+    // }
 
-    public void sortByLastName(FamilyTree familyTree) 
-    {
-        ((List) familyTree).sort(new NameComparator());
-    }
+    // public void sortByLastName(FamilyTree familyTree) 
+    // {
+    //     familyTree.sort(new NameComparator());
+    // }
 
     public void add(T person) 
     {
@@ -63,5 +63,8 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
     public FamilyTree getFamilyTree(FamilyTree familyTree)
     {
         return familyTree;
+    }
+
+    public void sort(IdComparator idComparator) {
     }
 }

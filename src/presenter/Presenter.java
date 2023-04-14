@@ -39,7 +39,8 @@ public class Presenter<T>
 
     public void PresenterSortById() // сортировка дерева id
     {
-        service.SortId();
+        // service.SortId();
+        service.SortById();
     }
 
     public void PresenterSortByName() // сортировка дерева по имени 
