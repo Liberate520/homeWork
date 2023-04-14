@@ -1,17 +1,14 @@
-package Tree;
+package model.Tree;
 
-import Data.DataRepository;
-import People.Person;
-import People.Repository;
-import People.TreeElements;
+import model.Data.DataRepository;
+import model.People.LivingBeings;
+import model.People.Person;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree<E extends Person> extends DataRepository implements
-        Serializable, Repository, Iterable<Person>, TreeElements {
+public class FamilyTree<E extends TreeInterface> extends DataRepository implements
+        Serializable, Iterable<E> {
     public List<E> targariens;
 
     public FamilyTree(List<E> targariens) {
@@ -29,34 +26,42 @@ public class FamilyTree<E extends Person> extends DataRepository implements
         if (!targariens.contains(person)){
             targariens.add(person);
             if (person.getFather() != null){
-                person.getFather().addDescendants(person);
+                person.getFather().addDescendants((Person) person);
             }
             if (person.getMother() != null) {
-                person.getMother().addDescendants(person);
+                person.getMother().addDescendants((Person) person);
             }
             return true;
         }
         return false;
     }
 
-    public List<E> searchPerson(String firstName){
-        List<E> searched = new ArrayList<>();
+    public List<String> searchPerson(){
+        System.out.println("Enter the name of Targarien member to find: ");
+        Scanner srch = new Scanner(System.in);
+        String name = srch.nextLine().toUpperCase();
+
+        List<String> searched = new ArrayList<>();
         for (E item:targariens) {
-            if (item.getFirstName().equals(firstName)){
-                searched.add(item);
+            if (item.getFirstName().equals(name)){
+                searched.add(item.getInfo());
             }
         }
         return searched;
     }
 
-    public List<String> searchPersonDescendance(String firstName){
+    public List<String> searchPersonDescendance(){
+        System.out.println("Enter the name of Targarien member to find he's descendance: ");
+        Scanner srchDesc = new Scanner(System.in);
+        String nameOfAsc = srchDesc.nextLine().toUpperCase();
+
         List<String> searched = new ArrayList<>();
         for (E item: targariens) {
-            if (item.getFirstName().equals(firstName)){
+            if (item.getFirstName().equals(nameOfAsc)){
                 searched.add(item.getDescendantInfo());
             }
         }
-        return searched;
+        return Collections.singletonList(searched.toString());
     }
 
     public String getTreeInfo(){
@@ -72,7 +77,7 @@ public class FamilyTree<E extends Person> extends DataRepository implements
         return targariens;
     }
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<E> iterator() {
         return new TreeIterator(targariens);
     }
 }

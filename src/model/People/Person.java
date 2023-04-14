@@ -1,15 +1,17 @@
-package People;
+package model.People;
 
-import Data.DataRepository;
+import model.Data.DataRepository;
+import model.Tree.TreeInterface;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 
-public class Person extends DataRepository implements
-        Serializable, Repository, Comparable<Person>, TreeElements{
+public class Person implements
+        Serializable, Comparable<Person>, TreeInterface {
     static int generatorId = 1;
     private int id;
     public String firstName;
@@ -80,12 +82,47 @@ public class Person extends DataRepository implements
         this.father = null;
         descendants = new ArrayList<>();
     }
-
+//    @Override
     public boolean addDescendants(Person descendant){
         if (!descendants.contains(descendant)){
             descendants.add(descendant);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean addPerson(Object person) {
+        return false;
+    }
+
+    @Override
+    public List<String> searchPerson() {
+        return null;
+    }
+
+    @Override
+    public List<String> searchPersonDescendance() {
+        return null;
+    }
+
+    @Override
+    public String getTreeInfo() {
+        return null;
+    }
+
+    @Override
+    public List getFamilyTree() {
+        return null;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
+    }
+
+    @Override
+    public boolean addDescendants() {
         return false;
     }
 
@@ -213,10 +250,5 @@ public class Person extends DataRepository implements
     @Override
     public int compareTo(Person o) {
         return firstName.compareTo(o.firstName);
-    }
-
-    @Override
-    public String getTreeInfo() {
-        return null;
     }
 }

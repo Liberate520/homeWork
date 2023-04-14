@@ -1,6 +1,6 @@
-package People.Comparators;
+package model.People.Comparators;
 
-import People.Person;
+import model.People.Person;
 
 import java.util.Comparator;
 

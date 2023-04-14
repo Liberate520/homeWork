@@ -1,12 +1,9 @@
-package Tree;
-
-import People.Person;
-import People.TreeElements;
+package model.Tree;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterator<E> implements Iterator<E> {
+public class TreeIterator<E extends TreeInterface> implements Iterator<E> {
     private int index;
     private List<E> targariens;
 

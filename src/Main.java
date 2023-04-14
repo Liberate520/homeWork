@@ -1,13 +1,15 @@
-// public People.Person(String firstName, String lastName, String birthDate,
-// String deathDate, People.Gender gender, int idMather, int idFather)
+// public model.People.Person(String firstName, String lastName, String birthDate,
+// String deathDate, model.People.Gender gender, int idMather, int idFather)
 
-import Data.DataRepository;
-import Dragons.Dragon;
-import People.Gender;
-import People.Person;
-import Tree.FamilyTree;
-
-import java.util.*;
+import model.Data.DataRepository;
+import model.Dragons.Dragon;
+import model.People.Gender;
+import model.People.Person;
+import model.Service;
+import model.Tree.FamilyTree;
+import presenter.Presenter;
+import ui.Console;
+import ui.View;
 
 
 public class Main {
@@ -16,6 +18,7 @@ public class Main {
         FamilyTree<Person> targariens = new FamilyTree();
         FamilyTree targariensThrone = new FamilyTree();
         Service service = new Service(targariensThrone);
+//        Service service = new Service();
         FamilyTree<Dragon> targarienDragons = new FamilyTree<>();
 
         Person personA = new Person("JEHAELIS", "Targarien",
@@ -68,81 +71,13 @@ public class Main {
         targarienDragons.addPerson(dragonB);
         targarienDragons.addPerson(dragonC);
 
-        System.out.println("\n1 - Output all members of the genus." +
-                "\n2 - Find targarien descendance." +
-                "\n3 - Find the great Targarien." +
-                "\n4 - Download data into file." +
-                "\n5 - Upload data from file." +
-                "\n6 - Sort Targariens by name." +
-                "\n7 - Sort Targariens by ID from last to first." +
-                "\n8 - Sort Targariens by ID from first to last." +
-                "\n9 - Sort Targariens by gender." +
-                "\n10 - Output all Targarien Dragons." +
-                "\n11 - Find targarien dragon.");
+        service.setWritable(new DataRepository());
+        service.dataOutput();
+        service.deserialization();
 
-        Scanner in = new Scanner(System.in);
-        int option = in.nextInt();
-        try {
-            switch (option) {
-                case 1:
-                    System.out.println("Behold and bow before the great Targarien family!!!");
-                    System.out.println("<><><><><><><><><><><><><><><><><><><><><><><><>");
-                    System.out.println(targariens.getTreeInfo());
-                    break;
-                case 2:
-                    System.out.printf("Enter the name of Targarien member to find he's descendance: ");
-                    Scanner srchDesc = new Scanner(System.in);
-                    String nameOfAsc = srchDesc.nextLine().toUpperCase();
-                    System.out.println(targariens.searchPersonDescendance(nameOfAsc));
-                    break;
-                case 3:
-                    System.out.printf("Enter the name of Targarien member: ");
-                    Scanner srch = new Scanner(System.in);
-                    String name = srch.nextLine().toUpperCase();
-                    System.out.println(targariens.searchPerson(name));
-                    break;
-                case 4:
-                    DataRepository dataRepositoryDown = new DataRepository();
-                    dataRepositoryDown.dataOutput(targariens, "Targariens.txt");
-                    break;
-                case 5:
-                    DataRepository dataRepositoryUp = new DataRepository();
-                    FamilyTree familyTree = dataRepositoryUp.deserialization("Targariens.txt");
-                    System.out.println(familyTree.getTreeInfo());
-                    break;
-                case 6:
-                    System.out.println("Targariens sorted by name: ");
-                    service.sortByName();
-                    System.out.println(targariensThrone.getTreeInfo());
-                    break;
-                case 7:
-                    System.out.println("Targariens sorted by ID from last to first: ");
-                    service.sortById();
-                    System.out.println(targariensThrone.getTreeInfo());
-                    break;
-                case 8:
-                    System.out.println("Targariens sorted by ID from first to last: ");
-                    service.sortByIdReverse();
-                    System.out.println(targariensThrone.getTreeInfo());
-                    break;
-                case 9:
-                    System.out.println("Targariens sorted by gender: ");
-                    service.sortByGender();
-                    System.out.println(targariensThrone.getTreeInfo());
-                    break;
-                case 10:
-                    System.out.println("Behold Targarien Dragons: ");
-                    System.out.println(targarienDragons.getTreeInfo());
-                    break;
-                case 11:
-                    System.out.println("Enter the name of Targarien dragon: ");
-                    Scanner srchDrag = new Scanner(System.in);
-                    String nameDrag = srchDrag.nextLine().toUpperCase();
-                    System.out.println(targarienDragons.searchPerson(nameDrag));
-                    break;
-            }
-        }catch (Exception e){
-            System.out.println("Wrong choice, mortal!");
-        }
+        View view = new Console();
+        Presenter presenter = new Presenter(view, service);
+
+        view.start();
     }
 }

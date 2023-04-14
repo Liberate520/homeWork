@@ -1,20 +1,20 @@
-package Data;
+package model.Data;
 
-import People.Repository;
-import Tree.FamilyTree;
+import model.Tree.FamilyTree;
 
 import java.io.*;
 
-public class DataRepository implements Repository {
+public class DataRepository implements Writable {
 
+    @Override
     public void dataOutput(FamilyTree familyTree, String str) {
 
-        File file = new File(str);
+        File filePath = new File(str);
 
         ObjectOutputStream oos = null;
 
         try {
-            FileOutputStream fos = new FileOutputStream(file);
+            FileOutputStream fos = new FileOutputStream(filePath);
             if (fos!=null){
                 oos = new ObjectOutputStream(fos);
                 oos.writeObject(familyTree);
@@ -32,11 +32,12 @@ public class DataRepository implements Repository {
         }
     }
 
+    @Override
     public FamilyTree deserialization(String str){
-        File file = new File(str);
+        File filePath = new File(str);
         ObjectInputStream ois;
         try {
-            FileInputStream fis = new FileInputStream(file);
+            FileInputStream fis = new FileInputStream(filePath);
             if(fis!= null){
                 ois = new ObjectInputStream(fis);
                 FamilyTree familyTree = (FamilyTree) ois.readObject();
