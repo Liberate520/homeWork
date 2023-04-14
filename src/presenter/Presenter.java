@@ -23,20 +23,30 @@ public class Presenter {
         return service.addMember(name, kind, isMale, bornDate);
     }
 
-    public void editFTree() {
-        service.editFTree();
+    public boolean addMember(String newName, String nameSimple) {
+        return service.addMember(newName, nameSimple);
+    }
+
+    public boolean addChild(String parentName, String childName) {
+        return service.addChild(parentName, childName);
+    }
+
+    public boolean addMarried(String married1Name, String married2Name, boolean isMarried) {
+        return service.addMarried(married1Name, married2Name, isMarried);
     }
 
     public boolean isFindFamilyTree(String nameFTree) {
         return service.isFindFamilyTree(nameFTree);
     }
 
-    public void load(String fileName) {
+    public boolean load(String fileName) {
         service = new Service(service.read(fileName));
+        return true;
     }
 
-    public void save(String fileName){
+    public boolean save(String fileName){
         service.save(fileName);
+        return true;
     }
 
     public void printInfo() {

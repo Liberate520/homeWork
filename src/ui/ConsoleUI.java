@@ -9,9 +9,13 @@ import java.util.Scanner;
 public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
+    private boolean work;
+    private Menu menu;
 
     public ConsoleUI() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
+        work = true;
+        menu = new Menu(this);
     }
 
     @Override
@@ -19,195 +23,229 @@ public class ConsoleUI implements View {
         this.presenter = presenter;
     }
 
+    public Presenter getPresenter() {
+        return presenter;
+    }
+
     @Override
     public void start() {
-        while (true) {
+        while (work) {
             mainRequests();
         }
     }
 
     public void mainRequests() {
-        System.out.println("Введите что хотите сделать:\n" +
-                "1 - Создать генеалогическое древо\n" +
-                "2 - Редактировать существующее генеалогическое древо\n" +
-                "3 - Загрузить существующие генеалогические деревья\n" +
-                "4 - Сохранить существующие генеалогические деревья\n" +
-                "5 - Вывести на экран информацию по всем существующим генеалогическим деревьям");
-        switch (scanner.nextLine()) {
-            case "1":
-                do {
-                    newFTree();
-                } while (goToUpRequest());
-                break;
-            case "2":
-                do {
-                    requestEdit();
-                } while (goToUpRequest());
-                break;
-            case "3":
-                requestLoad();
-                break;
-            case "4":
-                requestSave();
-                break;
-            case "5":
-                requestPrint();
-                break;
-            default:
-                System.out.println("Введено что-то отличное от 1, 2, 3, 4 или 5.");
-                break;
+        print(menu.printMainCommands());
+        String nMenuStr = scan();
+        if (isCanBeInt(nMenuStr)) {
+            int nMenu = Integer.parseInt(nMenuStr);
+            if (0 < nMenu && nMenu <= menu.getSizeMainCommands()) {
+                menu.executeMainCommands(nMenu);
+            } else {
+                print("Введен неверный пункт меню.");
+            }
+        } else {
+            print("Введено что-то отличное от пунктов меню.");
         }
     }
 
-    public boolean goToUpRequest() {
-        System.out.println("Для поднятия выше по меню введите 1:");
-        switch (scanner.nextLine()) {
-            case "1":
-                return false;
-            default:
-                return true;
-        }
+    private String scan() {
+        return scanner.nextLine();
     }
 
-    private void newFTree() {
+    private boolean isCanBeInt(String text) {
+        return text.matches("[0-9]+");
+    }
+
+    public void quit() {
+        work = false;
+    }
+
+    public void newFTree() {
         String typeFTree = requestType();
         String fTreeName = requestNameFTree();
         if (presenter.addFamilyTree(typeFTree, fTreeName)) {
-            editTree();
+            while (editTree()) ;
         }
     }
 
-    private void requestEdit() {
+    public void requestEdit() {
         String fTreeName = requestNameFTree();
         if (presenter.isFindFamilyTree(fTreeName)) {
-            editTree();
+            while (editTree()) ;
         } else {
-            System.out.println("Генеалогическое древо с таким именем не найдено.");
+            print("Генеалогическое древо с таким именем не найдено.");
         }
     }
 
-    private void editTree() {
-        do {
-            requests();
-            presenter.editFTree();
-        } while (goToUpRequest());
+    private boolean editTree() {
+        print(menu.printEditTreeCommands());
+        String nMenuStr = scan();
+        if (isCanBeInt(nMenuStr)) {
+            int nMenu = Integer.parseInt(nMenuStr);
+            if (0 < nMenu && nMenu <= menu.getSizeEditTreeCommands()) {
+                return menu.executeEditTreeCommands(nMenu);
+            } else {
+                print("Введен неверный пункт меню.");
+            }
+        } else {
+            print("Введено что-то отличное от пунктов меню.");
+        }
+        return true;
     }
 
-    private void requests() {
-        System.out.println("Введите что хотите сделать c генеалогическим древом:\n" +
-                "1 - Создать нового члена семьи\n" +
-                "2 - Создать близнеца члена семьи\n" +
-                "3 - Добавить одному члену семьи в качестве ребенка другого члена семьи\n" +
-                "4 - Связать в качестве мужа/жены одного члена семьи с другим членом семьи (для людей)");
-        switch (scanner.nextLine()) {
-            case "1":
-                String name = requestName();
-                String kind = requestKind();
-                boolean isMale = requestIsMale();
+    public boolean newMember() {
+        String name = requestName();
+        String kind = requestKind();
+        boolean isMale = requestIsMale();
+        int year = requestYear();
+        int month = requestMonth();
+        int day = requestDay();
+        Calendar bornDate = new GregorianCalendar(year, month, day);
+        return presenter.addMember(name, kind, isMale, bornDate);
+    }
 
-                tries = false;
-                int year = 1986;
-                do {
-                    try {
-                        System.out.println("Введите год рождения нового члена семьи:");
-                        year = Integer.getInteger(scanner.nextLine());
-                        tries = true;
-                    } catch (Exception ex){
-                        System.out.println(ex.getMessage());
-                    }
-                } while (!tries);
-                tries = false;
-                int month = 0;
-                do {
-                    try {
-                        System.out.println("Введите месяц рождения нового члена семьи:");
-                        month = Integer.getInteger(scanner.nextLine());
-                        tries = true;
-                    } catch (Exception ex){
-                        System.out.println(ex.getMessage());
-                    }
-                } while (!tries);
-                tries = false;
-                int day = 1;
-                do {
-                    try {
-                        System.out.println("Введите день месяца рождения нового члена семьи:");
-                        day = Integer.getInteger(scanner.nextLine());
-                        tries = true;
-                    } catch (Exception ex){
-                        System.out.println(ex.getMessage());
-                    }
-                } while (!tries);
-                Calendar bornDate = new GregorianCalendar(year, month, day);
-                presenter.addMember(name, kind, isMale, bornDate);
-                break;
-            case "2":
+    public boolean newTwin() {
+        String newName = requestName();
+        String nameSimple = requestNameSimple();
+        return presenter.addMember(newName, nameSimple);
+    }
 
-                break;
-            case "3":
+    public boolean addChild() {
+        String ParentName = requestParentName();
+        String ChildName = requestChildName();
+        return presenter.addChild(ParentName, ChildName);
+    }
 
-                break;
-            case "4":
-            default:
-                System.out.println("Введено что-то отличное от 1 или 2.");
-                break;
-        }
+    public boolean addMarried() {
+        String Married1Name = requestMarriedName();
+        String Married2Name = requestMarriedName();
+        boolean isMarried = requestIsMarried();
+        return presenter.addMarried(Married1Name, Married2Name, isMarried);
     }
 
     private String requestName() {
-        System.out.println("Введите имя нового члена семьи:");
-        return scanner.nextLine();
+        print("Введите имя нового члена семьи:");
+        return scan();
+    }
+
+    private String requestNameSimple() {
+        print("Введите имя существующего члена семьи:");
+        return scan();
+    }
+
+    private String requestParentName() {
+        print("Введите имя родителя:");
+        return scan();
+    }
+
+    private String requestChildName() {
+        print("Введите имя ребенка:");
+        return scan();
+    }
+
+    private String requestMarriedName() {
+        print("Введите имя одного из женатых:");
+        return scan();
     }
 
     private String requestKind() {
-        System.out.println("Введите расу (породу) нового члена семьи:");
-        return scanner.nextLine();
+        print("Введите расу (породу) нового члена семьи:");
+        return scan();
     }
 
     private boolean requestIsMale() {
-        boolean tries = false;
+        print("Новый член семьи мужчина? (true или иное):");
+        return Boolean.parseBoolean(scan());
+    }
+
+    private boolean requestIsMarried() {
+        print("Они женаты в настоящий момент? (true или иное):");
+        return Boolean.parseBoolean(scan());
+    }
+
+    private int requestYear() {
         do {
-            try {
-                System.out.println("Новый член семьи мужчина?:");
-                return Boolean.getBoolean(scanner.nextLine());
-            } catch (Exception ex){
-                System.out.println(ex.getMessage());
+            print("Введите год рождения нового члена семьи:");
+            String yearStr = scan();
+            if (isCanBeInt(yearStr)) {
+                int year = Integer.parseInt(yearStr);
+                if (1700 <= year && year <= 2023) {
+                    return year;
+                } else {
+                    print("Введен неверный год (допустимый диапазон 1700 - 2023).");
+                }
+            } else {
+                print("Введено что-то отличное от года.");
             }
-        } while (!tries);
-        return false;
+        } while (true);
     }
 
-    private void requestLoad() {
-        System.out.println("Введите имя файла:");
-        presenter.load(scanner.nextLine());
+    private int requestMonth() {
+        do {
+            print("Введите месяц рождения нового члена семьи (допустимый диапазон 1 - 12):");
+            String monthStr = scan();
+            if (isCanBeInt(monthStr)) {
+                int month = Integer.parseInt(monthStr);
+                if (1 <= month && month <= 12) {
+                    return month - 1;
+                } else {
+                    print("Введен неверный месяц (допустимый диапазон 1 - 12).");
+                }
+            } else {
+                print("Введено что-то отличное от месяца.");
+            }
+        } while (true);
     }
 
-    private void requestSave() {
-        System.out.println("Введите имя файла:");
-        presenter.save(scanner.nextLine());
+    private int requestDay() {
+        do {
+            print("Введите день месяца рождения нового члена семьи (допустимый диапазон 1 - 31):");
+            String dayStr = scan();
+            if (isCanBeInt(dayStr)) {
+                int day = Integer.parseInt(dayStr);
+                if (1 <= day && day <= 31) {
+                    return day;
+                } else {
+                    print("Введен неверный месяц (допустимый диапазон 1 - 31).");
+                }
+            } else {
+                print("Введено что-то отличное от дня месяца.");
+            }
+        } while (true);
+    }
+
+    public boolean requestLoad() {
+        print("Введите имя файла:");
+        return presenter.load(scan());
+    }
+
+    public boolean requestSave() {
+        print("Введите имя файла:");
+        return presenter.save(scan());
     }
 
     private String requestNameFTree() {
-        System.out.println("Введите имя генеалогического древа:");
-        return scanner.nextLine();
+        print("Введите имя генеалогического древа:");
+        return scan();
     }
 
     private String requestType() {
-        System.out.println("Введите тип генеалогического древа (1 - для людей или 2 - для собак):");
-        switch (scanner.nextLine()) {
+        print("Введите тип генеалогического древа (1 - для людей или 2 - для собак):");
+        switch (scan()) {
             case "1":
                 return "person";
             case "2":
                 return "dog";
             default:
-                System.out.println("Введено отличное от 1 или 2.");
+                print("Введено отличное от 1 или 2.");
                 return requestType();
         }
     }
 
-    private void requestPrint() {
-        System.out.println("В каком виде вывести информацию на экран (1 - список или 2 - древо):");
-        switch (scanner.nextLine()) {
+    public boolean requestPrint() {
+        print("В каком виде вывести информацию на экран (1 - список или 2 - древо)");
+        switch (scan()) {
             case "1":
                 presenter.printInfo();
                 break;
@@ -215,10 +253,11 @@ public class ConsoleUI implements View {
                 presenter.printFTrees();
                 break;
             default:
-                System.out.println("Введено отличное от 1 или 2.");
+                print("Введено отличное от 1 или 2.");
                 requestPrint();
                 break;
         }
+        return true;
     }
 
     @Override

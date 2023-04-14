@@ -62,12 +62,12 @@ public class Person implements Serializable, Comparable<Person>, Member {
         return this.married;
     }
 
-    public ThreadLocal<Object> getChildren() {
-        return (ThreadLocal<Object>) this.children;
+    public List<Person> getChildren() {
+        return this.children;
     }
 
-    public ThreadLocal<Object> getParents() {
-        return (ThreadLocal<Object>) this.parents;
+    public List<Person> getParents() {
+        return this.parents;
     }
 
     public String getKind() {

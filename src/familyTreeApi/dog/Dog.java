@@ -1,6 +1,7 @@
 package familyTreeApi.dog;
 
 import familyTreeApi.member.Member;
+import familyTreeApi.person.Person;
 
 import java.io.Serializable;
 import java.util.*;
@@ -60,13 +61,18 @@ public class Dog implements Serializable, Comparable<Dog>, Member {
     }
 
     @Override
-    public ThreadLocal<Object> getChildren() {
-        return (ThreadLocal<Object>) this.children;
+    public Member getMarried() {
+        return null;
     }
 
     @Override
-    public ThreadLocal<Object> getParents() {
-        return (ThreadLocal<Object>) this.parents;
+    public List<Dog> getChildren() {
+        return this.children;
+    }
+
+    @Override
+    public List<Dog> getParents() {
+        return this.parents;
     }
 
     @Override

@@ -15,9 +15,11 @@ public interface Member {
 
     Boolean getGender();
 
-    ThreadLocal<Object> getChildren();
+    Member getMarried();
 
-    ThreadLocal<Object> getParents();
+    List<? extends Member> getChildren();
+
+    List<? extends Member> getParents();
 
     String getKind();
 
@@ -30,12 +32,56 @@ public interface Member {
     int countChildren();
 
     public default String print() {
-        return this.getName().stream().map(Object::toString).collect(Collectors.joining(" "));
+        if (this != null) {
+            return this.getName().stream().map(Object::toString).collect(Collectors.joining(" "));
+        } else {
+            return "";
+        }
+    }
+
+    public default String printInfo() {
+        if (this != null) {
+            StringBuilder result = new StringBuilder();
+            result.append(this.printWithBornDate() + "\n");
+            if (this.getMarried() != null) {
+                if (this.getGender().equals(true)) {
+                    result.append("Жена ");
+                } else {
+                    result.append("Муж ");
+                }
+                result.append(this.getMarried().printWithBornDate()+"\n");
+            }
+            if (this.getChildren().size() > 0) {
+                for (Member member : this.getChildren()) {
+                    if (member.getGender().equals(true)){
+                        result.append("Сын ");
+                    }else{
+                        result.append("Дочь ");
+                    }
+                    result.append(member.printWithBornDate() +"\n");
+                }
+            }
+            if (this.getParents().size() > 0) {
+                for (Member member : this.getParents()) {
+                    if (member.getGender().equals(true)){
+                        result.append("Отец ");
+                    }else{
+                        result.append("Мать ");
+                    }
+                    result.append(member.printWithBornDate() +"\n");
+                }
+            }
+            return result.toString();
+        } else {
+            return "";
+        }
     }
 
     public default String printWithBornDate() {
-        return this.toString() + " " + this.getBornDate();
+        return this.print() + " " + this.getBornDate();
     }
 
     void setName(String name);
+
+
 }

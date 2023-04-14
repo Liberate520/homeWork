@@ -1,11 +1,7 @@
 import familyTreeApi.Service;
-import familyTreeApi.trees.TOTrees;
-import familyTreeApi.familyTree.FamilyTree;
 import presenter.Presenter;
 import ui.ConsoleUI;
 import ui.View;
-
-import java.util.GregorianCalendar;
 
 public class Main {
     public static void main(String[] args) {

@@ -32,10 +32,6 @@ public class Service {
         return this.treeOfTrees;
     }
 
-    public void editFTree() {
-
-    }
-
     public boolean addFamilyTree(String member, String newName) {
         typeMember = member;
         if (typeMember.equals("person")) {
@@ -48,41 +44,44 @@ public class Service {
         return this.getTreeOfTrees().addFamilyTree(currentEditingFTree);
     }
 
-    public void addMember(String familyTreeName, Member member) {
-        addMember(this.findFamilyTree(familyTreeName), member);
-    }
-
     public boolean addMember(String name, String kind, boolean isMale, Calendar bornDate) {
         if (typeMember.equals("person")) {
-            addPerson(name, kind, isMale, bornDate);
+            return addPerson(name, kind, isMale, bornDate);
         } else if (typeMember.equals("dog")) {
-            currentEditingFTree.addMember(member);
+            return addDog(name, kind, isMale, bornDate);
         } else {
             return false;
         }
-        return true;
     }
 
-    private Member addPerson(String name, String kind, boolean isMale, Calendar bornDate) {
-        Member member = new Person(name, kind, isMale, bornDate);
-        currentEditingFTree.addMember(member);
-        return member;
+    private boolean addPerson(String name, String kind, boolean isMale, Calendar bornDate) {
+        Member person = new Person(name, kind, isMale, bornDate);
+        return currentEditingFTree.addMember(person);
     }
 
-    public void addMember(String firstName, String firstNameSample) {
-        for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
-            addMember(familyTree, firstName, firstNameSample);
+    private boolean addDog(String name, String kind, boolean isMale, Calendar bornDate) {
+        Member dog = new Dog(name, kind, isMale, bornDate);
+        return currentEditingFTree.addMember(dog);
+    }
+
+    public boolean addMember(String newName, String nameSample) {
+        if (typeMember.equals("person")) {
+            return addPersonByPerson(newName, (Person) currentEditingFTree.findMember(nameSample));
+        } else if (typeMember.equals("dog")) {
+            return addDogByDog(newName, (Dog) currentEditingFTree.findMember(nameSample));
+        } else {
+            return false;
         }
     }
 
-    public boolean addMember(String familyTreeName, String name, String firstNameSample) {
-        addMember(this.findFamilyTree(familyTreeName), firstName, firstNameSample);
+    private boolean addPersonByPerson(String name, Person person) {
+        Member newPerson = new Person(name, person);
+        return currentEditingFTree.addMember(newPerson);
     }
 
-    private void addMember(FamilyTree<Member> familyTree, String name, String nameSample) {
-        Member member = new Member(name, familyTree.findMember(nameSample));
-        member.setName(name);
-        familyTree.addMember(member);
+    private boolean addDogByDog(String name, Dog dog) {
+        Member newDog = new Dog(name, dog);
+        return currentEditingFTree.addMember(newDog);
     }
 
     public boolean addChild(String nameParent, String nameChild) {
@@ -103,11 +102,12 @@ public class Service {
         return currentEditingFTree != null;
     }
 
-    public Member findMember(String firstName) {
-        for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
-            return familyTree.findMember(firstName);
-        }
-        return null;
+    public Member findMember(String name) {
+        return currentEditingFTree.findMember(name);
+    }
+
+    public boolean isFindMember(String name) {
+        return currentEditingFTree.findMember(name) != null;
     }
 
     public void sortByFirstName() {
@@ -123,9 +123,9 @@ public class Service {
     private void sortByFirstName(FamilyTree<Member> familyTree) {
         List<Member> members = familyTree.getMembers();
         members.sort(new MemberComparatorByFirstName<>());
-        for (familyTreeApi.member.Member member : members) {
-            ((List<Member>) ((ThreadLocal<Object>) member.getChildren())).sort(new MemberComparatorByFirstName<>());
-            ((List<Member>) ((ThreadLocal<Object>) member.getParents())).sort(new MemberComparatorByFirstName<>());
+        for (Member member : members) {
+            member.getChildren().sort(new MemberComparatorByFirstName<>());
+            member.getParents().sort(new MemberComparatorByFirstName<>());
         }
     }
 
@@ -143,8 +143,8 @@ public class Service {
         List<Member> members = familyTree.getMembers();
         members.sort(new MemberComparatorByLastName<>());
         for (familyTreeApi.member.Member member : members) {
-            ((List<Member>) ((ThreadLocal<Object>) member.getChildren())).sort(new MemberComparatorByLastName<>());
-            ((List<Member>) ((ThreadLocal<Object>) member.getParents())).sort(new MemberComparatorByLastName<>());
+            member.getChildren().sort(new MemberComparatorByLastName<>());
+            member.getParents().sort(new MemberComparatorByLastName<>());
         }
     }
 
@@ -162,8 +162,8 @@ public class Service {
         List<Member> members = familyTree.getMembers();
         members.sort(new MemberComparatorByGender<>());
         for (familyTreeApi.member.Member member : members) {
-            ((List<Member>) ((ThreadLocal<Object>) member.getChildren())).sort(new MemberComparatorByGender<>());
-            ((List<Member>) ((ThreadLocal<Object>) member.getParents())).sort(new MemberComparatorByGender<>());
+            member.getChildren().sort(new MemberComparatorByGender<>());
+            member.getParents().sort(new MemberComparatorByGender<>());
         }
     }
 
@@ -181,8 +181,8 @@ public class Service {
         List<Member> members = familyTree.getMembers();
         members.sort(new MemberComparatorByBornDate<>());
         for (familyTreeApi.member.Member member : members) {
-            ((List<Member>) ((ThreadLocal<Object>) member.getChildren())).sort(new MemberComparatorByBornDate<>());
-            ((List<Member>) ((ThreadLocal<Object>) member.getParents())).sort(new MemberComparatorByBornDate<>());
+            member.getChildren().sort(new MemberComparatorByBornDate<>());
+            member.getParents().sort(new MemberComparatorByBornDate<>());
         }
     }
 
@@ -192,6 +192,14 @@ public class Service {
 
     public String printTrees() {
         return this.getTreeOfTrees().printTrees();
+    }
+
+    public String printMemberInfo(String name) {
+        if (isFindMember(name)){
+            return this.findMember(name).printInfo();
+        }else{
+            return "";
+        }
     }
 
     public void save(String fileName) {

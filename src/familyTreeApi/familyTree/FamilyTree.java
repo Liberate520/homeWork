@@ -19,10 +19,10 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
         this.members = new ArrayList<>();
     }
 
-    public FamilyTree(E member) {
-        this(member.getNameString(), member.getClass().toString());
-        this.addMember(member, true);
-    }
+//    public FamilyTree(E member) {
+//        this(member.getNameString(), member.getClass().toString());
+//        this.addMember(member, true);
+//    }
 
     public void setName(String name) {
         this.name = name;
@@ -64,20 +64,21 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
         return result.toString();
     }
 
-    public void addMember(E member) {
-        addMember(member, false);
+    public <E extends Member> boolean addMember(E member) {
+        return addMember(member, false);
     }
 
-    public void addMember(E member, boolean isAddAllChildren) {
+    public <E extends Member> boolean addMember(E member, boolean isAddAllChildren) {
         if (!this.hasMember(member)) {
-            this.getMembers().add(member);
             if (isAddAllChildren) {
                 this.addChildren(member);
             }
+            return ((List<E>) this.getMembers()).add(member);
         }
+        return false;
     }
 
-    private void addChildren(E member) {
+    private <E extends Member> void addChildren(E member) {
         if (this.hasMember(member)) {
             if (member.countChildren() != 0) {
                 for (E pers : (List<E>) member.getChildren()) {
@@ -89,7 +90,7 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
         }
     }
 
-    private boolean hasMember(E member) {
+    private <E extends Member> boolean hasMember(E member) {
         return this.getMembers().contains(member);
     }
 
@@ -110,7 +111,7 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     public String printAllInfo() {
         StringBuilder result = new StringBuilder();
         for (E member : this.getMembers()) {
-            result.append(member.print());
+            result.append(member.print() + "\n");
         }
         return result.toString();
     }
@@ -118,7 +119,7 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     public String printTree() {
         StringBuilder result = new StringBuilder();
         tempMembers = new ArrayList<>();
-        result.append(String.format("Members of family %s", this.getName()));
+        result.append(String.format("Members of family %s\n", this.getName()));
         for (E member : this.getMembers()) {
             if (!tempMembers.contains(member)) {
                 result = printTree(result, member);
@@ -140,8 +141,13 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     }
 
     private StringBuilder printTree(StringBuilder result, E member, int iter) {
-        result.append(String.format("%s%s|", member.print(), getSpace(member.print())));
-        tempMembers.add(member);
+        String marriedName = "";
+        if (member.getMarried() != null) {
+            ((List<E>) tempMembers).add((E) member.getMarried());
+            marriedName = "+" + member.getMarried().print();
+        }
+        result.append(String.format("%s%s%s|", member.print(), marriedName, getSpace(member.print() + marriedName)));
+        ((List<E>) tempMembers).add(member);
         if (member.countChildren() > 0) {
             ListIterator<E> children = ((List<E>) member.getChildren()).listIterator();
             while (children.hasNext()) {

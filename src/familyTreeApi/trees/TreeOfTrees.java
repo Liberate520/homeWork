@@ -41,7 +41,7 @@ public class TreeOfTrees<E extends FamilyTree> implements Serializable, TOTrees<
     public String printAllInfo() {
         StringBuilder result = new StringBuilder();
         for (E fTree : getFamilyTrees()) {
-            result.append("Members of family " + fTree.getName() + " :");
+            result.append("Members of family " + fTree.getName() + " :\n");
             result.append(fTree.printAllInfo());
         }
         return result.toString();
