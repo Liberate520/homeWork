@@ -194,11 +194,15 @@ public class Service {
         return this.getTreeOfTrees().printTrees();
     }
 
+    public String printTree() {
+        return currentEditingFTree.printTree();
+    }
+
     public String printMemberInfo(String name) {
         if (isFindMember(name)){
             return this.findMember(name).printInfo();
         }else{
-            return "";
+            return "С таким именем член семьи не найден";
         }
     }
 

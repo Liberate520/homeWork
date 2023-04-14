@@ -49,11 +49,23 @@ public class Presenter {
         return true;
     }
 
-    public void printInfo() {
+    public boolean printInfo() {
         view.print(service.printInfo());
+        return true;
     }
 
-    public void printFTrees() {
+    public boolean printFTrees() {
         view.print(service.printTrees());
+        return true;
+    }
+
+    public boolean printTree() {
+        view.print(service.printTree());
+        return true;
+    }
+
+    public boolean printMember(String name) {
+        view.print(service.printMemberInfo(name));
+        return true;
     }
 }

@@ -2,6 +2,8 @@ package familyTreeApi.member;
 
 import familyTreeApi.person.Person;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,7 +80,8 @@ public interface Member {
     }
 
     public default String printWithBornDate() {
-        return this.print() + " " + this.getBornDate();
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return this.print() + " " + dateFormat.format(this.getBornDate().getTime());
     }
 
     void setName(String name);

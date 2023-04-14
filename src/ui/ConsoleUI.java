@@ -247,17 +247,22 @@ public class ConsoleUI implements View {
         print("В каком виде вывести информацию на экран (1 - список или 2 - древо)");
         switch (scan()) {
             case "1":
-                presenter.printInfo();
-                break;
+                return presenter.printInfo();
             case "2":
-                presenter.printFTrees();
-                break;
+                return presenter.printFTrees();
             default:
                 print("Введено отличное от 1 или 2.");
-                requestPrint();
-                break;
+                return requestPrint();
         }
-        return true;
+    }
+
+    public boolean printTree() {
+        return presenter.printTree();
+    }
+
+    public boolean printMember() {
+        print("Введите имя члена семьи");
+        return presenter.printMember(scan());
     }
 
     @Override

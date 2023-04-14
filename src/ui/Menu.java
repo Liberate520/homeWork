@@ -23,6 +23,8 @@ public class Menu {
         editTreeCommands.add(new NewTwin(consoleUI));
         editTreeCommands.add(new AddChild(consoleUI));
         editTreeCommands.add(new AddMarried(consoleUI));
+        editTreeCommands.add(new PrintTree(consoleUI));
+        editTreeCommands.add(new PrintMember(consoleUI));
         editTreeCommands.add(new QuitMenu(consoleUI));
     }
 

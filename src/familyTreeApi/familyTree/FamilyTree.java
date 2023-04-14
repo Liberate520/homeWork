@@ -44,9 +44,9 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
         return this.members;
     }
 
-    public Type getClassE() {
-        return this.getClass().getGenericSuperclass();
-    }
+//    public Type getClassE() {
+//        return this.getClass().getGenericSuperclass();
+//    }
 
     private String getSpace(String str) {
         StringBuilder result = new StringBuilder();
