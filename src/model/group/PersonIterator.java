@@ -1,4 +1,4 @@
-package Group;
+package model.group;
 
 import java.util.Iterator;
 import java.util.List;

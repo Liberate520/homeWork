@@ -1,16 +1,16 @@
-package Group;
+package model.group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
-import Group.Comparators.PersonComparatorByAge;
-import Group.Comparators.PersonComparatorByGender;
-import Group.Comparators.PersonComparatorById;
-import Group.Comparators.PersonComparatorByChildren;
-import Group.Comparators.PersonComparatorByName;
-import Person.NodeTree;
+
+import model.group.Comparators.PersonComparatorByAge;
+import model.group.Comparators.PersonComparatorByChildren;
+import model.group.Comparators.PersonComparatorByGender;
+import model.group.Comparators.PersonComparatorById;
+import model.group.Comparators.PersonComparatorByName;
+import model.person.NodeTree;
 
 public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializable {
 

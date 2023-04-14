@@ -1,4 +1,4 @@
-package Person;
+package model.person;
 
 import java.util.List;
 

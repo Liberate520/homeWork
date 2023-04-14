@@ -1,7 +1,7 @@
-package Group.Comparators;
+package model.group.Comparators;
 
 import java.util.Comparator;
-import Person.NodeTree;
+import model.person.NodeTree;
 
 public class PersonComparatorByName<T extends NodeTree<T>> implements Comparator<T>{
     @Override

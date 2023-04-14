@@ -1,15 +1,15 @@
-package FileWork;
+package model.fileWork;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import Group.Groupable;
-import Person.NodeTree;
+import model.group.Groupable;
+import model.person.NodeTree;
 
 public class FilehandlerTXT<T extends NodeTree<T>> implements Writeable<T> {
 
-    public void saveToFile(Groupable<T> listPerson, String filename) {
+    public void SaveToFile(Groupable<T> listPerson, String filename) {
         try (FileWriter writer = new FileWriter(filename, false)) {
             writer.write(listPerson.toString());
 

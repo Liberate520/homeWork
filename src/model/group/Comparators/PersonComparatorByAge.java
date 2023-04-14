@@ -1,7 +1,7 @@
-package Group.Comparators;
+package model.group.Comparators;
 
 import java.util.Comparator;
-import Person.NodeTree;
+import model.person.NodeTree;
 
 public class PersonComparatorByAge<T extends NodeTree<T>> implements Comparator<T> {
     @Override
@@ -9,4 +9,4 @@ public class PersonComparatorByAge<T extends NodeTree<T>> implements Comparator<
         return Integer.compare(p1.getAge(), p2.getAge());
 
     }
-}
+} 

@@ -1,16 +1,16 @@
-package FileWork;
+package model.fileWork;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import Group.Groupable;
-import Person.NodeTree;
+import model.group.Groupable;
+import model.person.NodeTree;
 
 public class FilehandlerOS<T extends NodeTree<T>> implements Writeable<T> {
 
     @Override
-    public void saveToFile(Groupable<T> groupList, String filename) {
+    public void SaveToFile(Groupable<T> groupList, String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(groupList);
             System.out.printf("File " + filename + " has been written.\n");

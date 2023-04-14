@@ -1,9 +1,10 @@
-package Person;
+package model.person;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import Group.Groupable;
+
+import model.group.Groupable;
 
 public class TreeConstructor extends Person {
 
