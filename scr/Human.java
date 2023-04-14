@@ -1,3 +1,4 @@
+package scr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ public class Human {
     private int born;
     private Human father;
     private Human mother;
-    private Human child;
     private List<String> children;
 
     public String getName() {
@@ -29,6 +29,10 @@ public class Human {
         children.add(child);
     }
 
+    public void getChildren() {
+        System.out.println(children);
+    }
+
     Human(String name, Human father, Human mother) {
         this.name = name;
         this.father = father;
@@ -44,7 +48,7 @@ public class Human {
     @Override
     public String toString() {
         if (father == null || mother == null) {
-            return name + " имеет ребенка по имени" + children.toString();
+            return name + " имеет ребенка по имени" + children;
         } else if (this.children.size() <= 0)
             return name + " имеет отца по имени " + father.getName() + " ,и мать по имени " + mother.getName();
         else

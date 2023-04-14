@@ -1,7 +1,9 @@
+package scr;
 
 public class Main {
     public static void main(String[] args) {
 
+    
         FamilyTree familyTree = new FamilyTree();
 
         Human natalia = new Human("Наталия");
@@ -30,7 +32,7 @@ public class Main {
 
         // natalia.gender = Gender.Male;
 
-        System.out.println(ksenia);
+        System.out.println(svetlana);
 
     }
 }
