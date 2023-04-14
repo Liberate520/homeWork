@@ -1,7 +1,7 @@
 package Tree.Comporators;
 import java.util.Comparator;
 
-import Person.Person;
+import Tree.Person;
 
 public class ComparByAlive implements Comparator<Person>{
     @Override

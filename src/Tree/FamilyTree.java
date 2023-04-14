@@ -1,31 +1,37 @@
 package Tree;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import Person.*;
+import ui.Sort;
 
-public class FamilyTree<E extends Person> implements Tree<E>{
+public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
 
     private List<E> familytree;
+    private Person person;
+    Sort familyIterator = new Sort(familytree);
     
+    /**
+     * Создание списка семейного древа 
+     */
+    public FamilyTree(){
+        this(new ArrayList<>());
+    }
+    /**
+     * @return Получение списка семейного древа
+     */
+    public List<E> getPersonList(){
+        return familytree;
+    }
 
+    
     /**
      * @param familytree Список семейного древа
      */
     public FamilyTree(List<E> familytree){
         this.familytree = familytree;
-    }
-
-    /**
-     * Создание списка семейного древа 
-     */
-    public FamilyTree(){
-        this.familytree = new ArrayList<>();
     }
 
     /**
@@ -48,23 +54,18 @@ public class FamilyTree<E extends Person> implements Tree<E>{
         if (!familytree.contains(person)){
             familytree.add(person);
             if (person.getFather() != null){
-                for (int i = 0; i < person.getFather().getChildrens().size(); i++) {
-                    if(person.getFather().getChildrens().get(i) == person){
-                        count++;
-                    }
-                }
+                if(person.getFather().getChildrens().contains(person))
+                    {count++;}
+
                 if (count == 0){
                     person.getFather().addChild(person);
                 }
                 count = 0;
             }
-
             if (person.getMother() != null){
-                for (int i = 0; i < person.getMother().getChildrens().size(); i++) {
-                    if(person.getMother().getChildrens().get(i) == person){
-                        count++;
-                    }
-                }
+                if(person.getMother().getChildrens().contains(person))
+                    {count++;}
+
                 if (count == 0){
                     person.getMother().addChild(person);
                 }
@@ -75,12 +76,7 @@ public class FamilyTree<E extends Person> implements Tree<E>{
         return false;
     }
 
-    /**
-     * @return Получение списка семейного древа
-     */
-    public List<E> getPersonList(){
-        return familytree;
-    }
+    
 
 
     /**
@@ -107,31 +103,76 @@ public class FamilyTree<E extends Person> implements Tree<E>{
         return sb.toString();
     }
 
-    /**
-     * @param familytree Список семейного древа
-     * @param fileName Имя файла
-     *  Сохранение семейного древа в файл
-     */
-    public void save(Tree<Person> familytree, String fileName) {
-        StringBuilder sb = new StringBuilder();
-        for (Person person: familytree){
-            sb.append(person);
-            sb.append("\n"); 
-        }
-
-        File file = new File(fileName);
-        try{
-            FileWriter fr = new FileWriter(file,false);
-            fr.write(sb.toString());    
-            fr.close();
-        }
-        catch(IOException e) {
-            System.out.println("ERROR");
-        }
+    public void searchByFirstName(String string) {
+        if(familytree.contains(string)){System.out.print(person.getInfo());}
     }
+
+    public void searchBySecondName(String string) {
+        if(familytree.contains(string)){System.out.print(person.getInfo());}
+    }
+
+    public void searchByFullName(String string) {
+        if(familytree.contains(string)){System.out.print(person.getInfo());}
+    }
+
+    public void searchByDateOfBerth(String string) {
+        if(familytree.contains(string)){System.out.print(person.getInfo());}
+    }
+
+    public void searchByAliveOrNot(int i) {
+        if(i == 1){if(familytree.contains("Жив")){System.out.print(person.getInfo());}}
+        if(i == 2){if(familytree.contains("Мертв")){System.out.print(person.getInfo());}}
+    }
+
+    public void searchByDateOfDeath(String string) {
+        if(familytree.contains(string)){System.out.print(person.getInfo());}
+    }
+
+    
+    public void sortByName() {
+        familyIterator.sortByName();
+        for(E person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
+    }
+
+    public void sortBySecondName() {
+        familyIterator.sortBySecondName();
+        for(E person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
+    }
+
+    public void sortByAlive() {
+        familyIterator.sortByAlive();
+        for(E person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
+    }
+
+    public void sortByChild() {
+        familyIterator.sortByChild();
+        for(E person: familytree){
+            System.out.println(person);
+        }
+        System.out.println();
+    }
+
+    public void dateOfBirth(Integer i) {
+        System.out.print(familytree.get(i - 1).getDateOfBirth());
+    }
+
+
+
+
+    
 
     @Override
     public Iterator<E> iterator(){
         return new PersonIterator<E>(familytree);
     }
+
 }

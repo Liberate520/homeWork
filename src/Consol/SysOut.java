@@ -1,11 +1,11 @@
 package Consol;
 import java.util.Scanner;
 
-import Person.*;
+import SaveAndLoad.SaveInTxt;
 import Tree.*;
 
 //НЕЗАВЕРШЕН (ПОДГОТОВКА)!!!
-
+/// Черновик
 public class SysOut {
 
     public static void getAllPersonFromList(Tree<Person> familytree) {
@@ -18,7 +18,7 @@ public class SysOut {
      * Вызов пользовательского интерфейса
      * @param familytree Список семейного древа
      */
-    public static void SysOut(Tree<Person> familytree) {
+    public static void sysOut(Tree<Person> familytree) {
 
         Scanner scn = new Scanner(System.in,"ibm866");
         System.out.println();
@@ -195,13 +195,13 @@ public class SysOut {
             System.out.println();
         }
         if (answer == 8){
-            familytree.save(familytree,"FamilyTree.txt");
+            SaveInTxt.save(familytree,"FamilyTree.txt");
             System.out.println("Семейное древо сохранено ");
             answer = 0;
         }
 
         if (answer != 9){
-            SysOut(familytree);
+            sysOut(familytree);
         }
     scn.close();
     }

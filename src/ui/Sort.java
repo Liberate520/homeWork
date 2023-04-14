@@ -1,12 +1,13 @@
+package ui;
 import java.util.List;
 
-import Person.Person;
+import Tree.Person;
 import Tree.Comporators.ComparByAlive;
 import Tree.Comporators.ComparByChild;
 import Tree.Comporators.ComparByName;
 import Tree.Comporators.ComparBySecondName;
 
-public class Sort{
+public class Sort<E>{
     private List<Person> familytree;
 
     public Sort(List<Person> personList) {

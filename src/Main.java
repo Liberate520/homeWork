@@ -1,62 +1,52 @@
 import java.io.IOException;
 
 import Consol.SysOut;
-import Person.Person;
 import Tree.FamilyTree;
+import Tree.Person;
 import Tree.Tree;
+import ui.Sort;
 
 
 
 public class Main {
 
-    
-    static Person person1 = new Person("Сергей", "Манеров", "18.04.1996");
-            
-    static Person person2 = new Person("Оксана", "Вилкова", "12.10.1976");
-
-    static Person person3 = new Person("Денис", "Манеров", "11.10.1968");
-
-    static Person person4 = new Person("Вероника", "Вилкова", "04.03.2006");
-
-
-        
     public static void main(String[] args) throws ClassNotFoundException, IOException  {
 
-        Tree <Person> familytree = new FamilyTree<>();
-        Sort familyIterator = new Sort(familytree.getPersonList());
+        // Tree <Person> familytree = new FamilyTree<>();
+        // Sort familyIterator = new Sort(familytree.getPersonList());
 
-        // Добавление детей людям
-        person2.addChild(person1);
-        person3.addChild(person1);
-        person2.addChild(person4);
+    //     // Добавление детей людям
+    //     person2.addChild(person1);
+    //     person3.addChild(person1);
+    //     person2.addChild(person4);
 
-        // Задаем жив человек или нет
-        person1.setAlive(true);
-        person2.setAlive(true);
-        person3.setAlive(true);
-        person4.setAlive(true);
+    //     // Задаем жив человек или нет
+    //     person1.setAlive(true);
+    //     person2.setAlive(true);
+    //     person3.setAlive(true);
+    //     person4.setAlive(true);
 
-        // Задаем родителей человека
-        person1.setMother(person2);
-        person1.setFather(person3);
-        person4.setMother(person2);
+    //     // Задаем родителей человека
+    //     person1.setMother(person2);
+    //     person1.setFather(person3);
+    //     person4.setMother(person2);
 
-       // Добавление человека в семейное дерево
-        familytree.add(person1);
-        familytree.add(person2);
-        familytree.add(person3);
-        familytree.add(person4);
+    //    // Добавление человека в семейное дерево
+    //     familytree.add(person1);
+    //     familytree.add(person2);
+    //     familytree.add(person3);
+    //     familytree.add(person4);
 
 
-        // Получение информации по человеку по отдельным позициям
-        person1.getFirstName();
-        person1.getSecondName();
-        person1.getDateOfBirth();
-        person1.getAlive();
-        person1.getDateOfDeath();
-        person1.getMother();
-        person1.getFather();
-        person1.getChildrens();
+    //     // Получение информации по человеку по отдельным позициям
+    //     person1.getFirstName();
+    //     person1.getSecondName();
+    //     person1.getDateOfBirth();
+    //     person1.getAlive();
+    //     person1.getDateOfDeath();
+    //     person1.getMother();
+    //     person1.getFather();
+    //     person1.getChildrens();
 
         // // Вывод полной информации по людям 
         // System.out.println(person1);
@@ -109,6 +99,6 @@ public class Main {
         // // Сохранение в файл
         // SaveLoad.save(familytree,"FamilyTree.txt");
 
-        SysOut.SysOut(familytree);
+        // SysOut.sysOut(familytree);
     }
 }

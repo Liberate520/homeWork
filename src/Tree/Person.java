@@ -1,4 +1,4 @@
-package Person;
+package Tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,7 +192,7 @@ public class Person implements Comparable<Person>{
     }
 
     /**
-     * @return Информация о человеке (Имя Фамилия, Мать, Отец, Дети)
+     * @return Информация о человеке (Имя Фамилия, Дата рождения, Мать, Отец, Дети)
      */
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
@@ -200,6 +200,9 @@ public class Person implements Comparable<Person>{
         sb.append(firstname);
         sb.append(" ");
         sb.append(secondname);
+        sb.append(", ");
+        sb.append(getDateOfBirth());
+        sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");
         sb.append(getFatherInfo());
