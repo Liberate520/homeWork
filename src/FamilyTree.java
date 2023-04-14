@@ -1,23 +1,26 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FamilyTree {
-    private List<Person> persons;
+    private HashMap<Relation, Human> relatives;
+    private List<HashMap<Relation, Human>> persons;
+
 
     public FamilyTree (){
         this.persons = new ArrayList<>();
     }
 
     public void pushToTree (Person person) {
-        this.persons.add(person);
+        this.relatives = new HashMap<>();
+        this.relatives.put(Relation.Person, (Human) person);
+        this.persons.add(relatives);
     }
 
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Person person: persons) {
-            output.append(person.getFirstName() + " " + person.getLastName() + "\n");
-        }
+        // todo: сделать вывод
         return output.toString();
     }
 }

@@ -38,6 +38,14 @@ public class Person extends Human{
         this.father = father;
     }
 
+    public Human getMother() {
+        return mother;
+    }
+
+    public Human getFather() {
+        return father;
+    }
+
     public String printMother() {
         StringBuilder output = new StringBuilder();
         if (this.mother != null) {
@@ -59,6 +67,10 @@ public class Person extends Human{
         this.brothersOrSistersList.add(brotherOrSister);
     }
 
+    public List<Human> getBrothersOrSistersList() {
+        return brothersOrSistersList;
+    }
+
     public String printBrothersOrSisters() {
         StringBuilder output = new StringBuilder();
         if (this.brothersOrSistersList != null && this.brothersOrSistersList.size() != 0) {
@@ -73,6 +85,10 @@ public class Person extends Human{
     public void addChildren(String firstName, String lastName, int age, Sex sex) {
         Human child = new Human(firstName, lastName, age, sex);
         this.childrens.add(child);
+    }
+
+    public List<Human> getChildrens() {
+        return childrens;
     }
 
     public String printChildrens() {
