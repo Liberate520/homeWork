@@ -1,6 +1,7 @@
 import java.util.Iterator;
 import java.util.List;
 
+
 public class HumanIterator<E> implements Iterator<Human> {
     private int index;
     private List<Human> tree;
