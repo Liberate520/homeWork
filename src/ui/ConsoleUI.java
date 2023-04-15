@@ -57,7 +57,6 @@ public class ConsoleUI implements View{
         }
 
     }
-
     public void printTree() {
         System.out.println("_".repeat(80));
         presenter.printTree();
@@ -184,7 +183,6 @@ public class ConsoleUI implements View{
         presenter.clearTree();
         System.out.println("Дерево очищено\n");
     }
-
     public void loadTree(){
         System.out.println("Введите имя файла для загрузки: ");
         String fileName = scanner.nextLine();
@@ -198,7 +196,6 @@ public class ConsoleUI implements View{
         String fullName = "src/" + fileName + ".dat";
         presenter.saveTree(fullName);
     }
-
 
     public void finish() {work = false;}
 }
