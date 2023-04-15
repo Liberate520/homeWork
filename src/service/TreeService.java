@@ -23,8 +23,7 @@ public class TreeService implements Service {
 
     @Override
     public Human find(String st) {
-        Human humanf = familytree.findHuman(st);
-        return humanf;
+        return familytree.findHuman(st);
     }
 
     @Override
