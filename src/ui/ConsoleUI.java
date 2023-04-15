@@ -57,10 +57,6 @@ public class ConsoleUI implements View{
         }
 
     }
-//    public void getAllMembers() {
-//        presenter.getAllMembers();
-//
-//    }
 
     public void printTree() {
         System.out.println("_".repeat(80));
@@ -155,19 +151,18 @@ public class ConsoleUI implements View{
         // Добавление человека в дерево
         try {
             presenter.addMember(name, surname, sex, birthDate, mother, father);
-            System.out.println("Человек был успешно добавлен в дерево.");
+            System.out.println("Человек был успешно добавлен в дерево.\n");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
-
 
     public void removeMember(){
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
         try {
             presenter.removeMember(name);
-            System.out.println("Человек был успешно удален из дерева.");
+            System.out.println("Человек был успешно удален из дерева.\n");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -183,8 +178,6 @@ public class ConsoleUI implements View{
 
         System.out.println("_".repeat(80));
     }
-
-
 
     public void clearTree() {
         System.out.println("_".repeat(80));

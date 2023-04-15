@@ -172,14 +172,7 @@ public class Service<T extends FamilyMember> {
         System.out.println("Человек с именем '" + name + "' удален из дерева.");
     }
 
-//    public void removeMember(String name) {
-//        for (T member: tree) {
-//            if (member.getName().equals(name)) {
-//                tree.remove(member);
-//            }
-//        }
-//        System.out.println("Человек с таким именем не найден");
-//    }
+
 
 
 

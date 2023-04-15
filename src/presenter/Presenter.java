@@ -34,9 +34,9 @@ public class Presenter {
         return (Human) service.searchMemberByName(name);
     }
 
-    public void searchMember(String name) {
-        service.searchMember(name);
-    }
+//    public void searchMember(String name) {
+//        service.searchMember(name);
+//    }
 
 
 
