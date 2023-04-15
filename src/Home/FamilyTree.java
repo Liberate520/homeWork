@@ -17,6 +17,10 @@ public class FamilyTree extends Human {
                 sb.append(super.getName()).append(" Grandmother:").append("\n");
                 sb.append(mother.getMother().getName()).append(", ").append("age: ").append(mother.getMother().getAge()).append('\n');
             }
+            if (mother.getFather() != null) {
+                sb.append(super.getName()).append(" Grandfather:").append("\n");
+                sb.append(mother.getFather().getName()).append(", ").append("age: ").append(mother.getFather().getAge()).append('\n');
+            }
             return sb.toString();
         } else {
             return "No mother details available.";
@@ -32,6 +36,10 @@ public class FamilyTree extends Human {
                 sb.append(super.getName()).append(" Grandfather:").append("\n");
                 sb.append(father.getFather().getName()).append(", ").append("age: ").append(father.getFather().getAge()).append('\n');
             }
+            if (father.getMother() != null) {
+                sb.append(super.getName()).append(" Grandmother:").append("\n");
+                sb.append(father.getMother().getName()).append(", ").append("age: ").append(father.getMother().getAge()).append('\n');
+            }
             return sb.toString();
         } else {
             return "No father details available.";
@@ -43,7 +51,13 @@ public class FamilyTree extends Human {
             sb.append(super.getName()).append(" Grandfather:").append("\n");
             sb.append(father.getFather().getName()).append(", ").append("age: ").append(father.getFather().getAge()).append('\n');
             return sb.toString();
-        } else {
+        }
+        if (father.getMother() != null) {
+            sb.append(super.getName()).append(" Grandmather:").append("\n");
+            sb.append(father.getMother().getName()).append(", ").append("age: ").append(father.getFather().getAge()).append('\n');
+            return sb.toString();
+        }
+        else {
             return "No grandfather details available.";
         }
     }
@@ -53,7 +67,13 @@ public class FamilyTree extends Human {
             sb.append(super.getName()).append(" Grandmather:").append("\n");
             sb.append(mother.getMother().getName()).append(", ").append("age: ").append(mother.getFather().getAge()).append('\n');
             return sb.toString();
-        } else {
+        }
+        if (mother.getFather() != null) {
+            sb.append(super.getName()).append(" Grandfather:").append("\n");
+            sb.append(mother.getFather().getName()).append(", ").append("age: ").append(mother.getFather().getAge()).append('\n');
+            return sb.toString();
+        }
+        else {
             return "No grandfather details available.";
         }
     }
