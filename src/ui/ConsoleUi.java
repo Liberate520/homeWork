@@ -78,7 +78,10 @@ public class ConsoleUi implements View {
     private void findname() throws ClassNotFoundException, IOException {
         System.out.println("Введите имя человека: ");
         String str = scanner.nextLine();
-        presenter.taskfind(str);
+        if (presenter.taskfind(str) == null)
+            System.out.printf("Человека с именем %s в этом фамильном дереве нет.\n", str);
+        else
+            System.out.println(presenter.taskfind(str));
     }
 
     public void addbyhuman() {

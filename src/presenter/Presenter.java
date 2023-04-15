@@ -17,12 +17,8 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void taskfind(String st) {
-        Human humanf = service.find(st);
-        if (humanf == null)
-            System.out.printf("Человека с именем %s в этом фамильном дереве нет.\n", st);
-        else
-            System.out.println(humanf);
+    public Human taskfind(String st) {
+        return service.find(st);
     }
 
     public void sbyname() {
