@@ -1,3 +1,7 @@
+package saveAndRead;
+
+import familyTree.FamilyTree;
+
 import java.io.*;
 
 public class SaveAndRead implements Interf {

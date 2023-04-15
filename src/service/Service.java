@@ -1,3 +1,8 @@
+package service;
+
+import familyTree.FamilyTree;
+import human.Human;
+
 import java.time.LocalDate;
 
 public class Service {
@@ -6,6 +11,10 @@ public class Service {
 
     public Service(FamilyTree familyGroup) {
         this.familyGroup = familyGroup;
+
+    }
+
+    public Service() {
 
     }
 

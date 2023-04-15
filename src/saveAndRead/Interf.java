@@ -1,5 +1,6 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+package saveAndRead;
+
+import familyTree.FamilyTree;
 
 public interface Interf<E> {
     FamilyTree loadFile(String str);

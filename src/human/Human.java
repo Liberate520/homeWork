@@ -1,3 +1,5 @@
+package human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -14,8 +16,8 @@ public class Human implements Serializable, Comparable<Human> {
      * @param firstName   Имя
      * @param lastname    Фамилия
      * @param dateOfBirth дата рождения (Формат записи "ДД-ММ-ГГГГ")
-     * @param idMather    ссылка на объект Human(sex female)
-     * @param idFather    ссылка на объект Human(sex male)
+     * @param idMather    ссылка на объект human.Human(sex female)
+     * @param idFather    ссылка на объект human.Human(sex male)
      */
     public Human(int id, String firstName, String lastname, LocalDate dateOfBirth, int idMather, int idFather) {
         this.id = id;
