@@ -46,6 +46,7 @@ public class Service<T extends FamilyMember> {
     }
     public void printTree(){
         System.out.println(tree.getInfo());
+        //tree.getInfo();
     }
 
     public void printTrees(){
@@ -105,35 +106,80 @@ public class Service<T extends FamilyMember> {
                 + ", дети: " + person.getChildren() + ", братья и сёстры: " + person.getSiblings();
     }
 
-    public String findHuman(String name) {
-        for (T member: tree) {
-            if (member.getName().equals(name)) {
-                return member.getInfo();
-            }
-        }
-        return "Человек с таким именем не найден";
-    }
+//    public String findHuman(String name) {
+//        for (T member: tree) {
+//            if (member.getName().equals(name)) {
+//                return member.getInfo();
+//            }
+//        }
+//        return "Человек с таким именем не найден";
+//    }
 
     public T searchMemberByName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Имя не может быть пустым.");
-        }
-        for (T member : tree.getMembers()) {
-            if (member.getName().equalsIgnoreCase(name.trim())) {
-                return member;
+        try {
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Имя не может быть пустым.\n");
             }
+            for (T member : tree.getMembers()) {
+                if (member.getName().equalsIgnoreCase(name.trim())) {
+                    return member;
+                }
+            }
+            throw new IllegalArgumentException("Человек с именем '" + name + "' не найден в дереве.\n");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        throw new IllegalArgumentException("Человек с именем '" + name + "' не найден в дереве.");
+    }
+
+    public String searchMember(String name) {
+        try {
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Имя не может быть пустым.");
+            }
+            for (T member : tree.getMembers()) {
+                if (member.getName().equalsIgnoreCase(name.trim())) {
+                    return member.getInfo();
+                }
+            }
+            throw new IllegalArgumentException("Человек с именем '" + name + "' не найден в дереве.");
+        } catch (IllegalArgumentException e) {
+            return "Ошибка: " + e.getMessage() + " Пожалуйста, проверьте правильность введенных данных и попробуйте еще раз.";
+        }
     }
 
     public void removeMember(String name) {
-        for (T member: tree) {
-            if (member.getName().equals(name)) {
-                tree.remove(member);
+        if (tree.getMembers().isEmpty()) {
+            System.out.println("Дерево пустое.");
+            return;
+        }
+        T memberToRemove = null;
+        for (T member : tree.getMembers()) {
+            if (member.getName().equalsIgnoreCase(name.trim())) {
+                memberToRemove = member;
+                break;
             }
         }
-        System.out.println("Человек с таким именем не найден");
+        if (memberToRemove == null) {
+            System.out.println("Человек с именем '" + name + "' не найден в дереве.");
+            return;
+        }
+        if (memberToRemove.getChildren().size() > 0) {
+            System.out.println("Невозможно удалить человека, у которого есть дети.");
+            return;
+        }
+        tree.remove(memberToRemove);
+        System.out.println("Человек с именем '" + name + "' удален из дерева.");
     }
+
+//    public void removeMember(String name) {
+//        for (T member: tree) {
+//            if (member.getName().equals(name)) {
+//                tree.remove(member);
+//            }
+//        }
+//        System.out.println("Человек с таким именем не найден");
+//    }
 
 
 

@@ -8,7 +8,7 @@ public class Finish extends Command{
 
     public Finish(ConsoleUI console) {
         super(console);
-        description = "Выйти из меню";
+        description = "Выйти из меню \n";
     }
 
     @Override

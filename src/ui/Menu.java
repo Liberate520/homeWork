@@ -5,13 +5,13 @@ import ui.commands.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu {
+public class Menu{
 
     private List<Command> commands;
 
     public Menu(ConsoleUI console) {
         commands = new ArrayList<>();
-        commands.add(new GetAllMembers(console));
+        commands.add(new PrintTree(console));
         commands.add(new SearchMember(console));
         commands.add(new AddMember(console));
         commands.add(new RemoveMember(console));
@@ -29,7 +29,7 @@ public class Menu {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < commands.size(); i++) {
             builder.append(i + 1)
-                    .append(") ")
+                    .append(". ")
                     .append(commands.get(i).getDescription());
         }
         return builder.toString();

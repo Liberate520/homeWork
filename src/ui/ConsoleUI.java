@@ -5,10 +5,10 @@ import familyTree.member.Human;
 import presenter.Presenter;
 import service.FileHandler;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
-
     private Presenter presenter;
     private Scanner scanner;
     private FileHandler handler;
@@ -31,22 +31,40 @@ public class ConsoleUI implements View{
 
     @Override
     public void print(String text) {
-        System.out.println(text);
+        System.out.print(text);
     }
 
     @Override
     public void start() {
         while (work) {
-            menu.print();
-            int choice = Integer.parseInt(scan());
-            // добавить проверки, чтобы не упало приложение?!
-            menu.execute(choice);
+            try {
+                print(menu.print() + "-> ");
+                while (!scanner.hasNextInt()) {
+                    print("Некорректный ввод. Введите число");
+                    scanner.next();
+                }
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                menu.execute(choice);
+            } catch (IndexOutOfBoundsException e) {
+                print("Такого пункта меню нет. Выберите пункт из списка.");
+            } catch (InputMismatchException e) {
+                print("Пожалуйста введите число");
+                scanner.next();
+            } catch (Exception e) {
+                print("Произошла ошибка " + e.getMessage());
+            }
         }
 
     }
-    public void getAllMembers() {
-        presenter.getAllMembers();
+//    public void getAllMembers() {
+//        presenter.getAllMembers();
+//
+//    }
 
+    public void printTree() {
+        System.out.println("_".repeat(80));
+        presenter.printTree();
     }
 
     public void addMember(){
@@ -144,23 +162,6 @@ public class ConsoleUI implements View{
     }
 
 
-
-//    public void addMember(){
-//        System.out.println("Введите имя: ");
-//        String name = scanner.nextLine();
-//        System.out.println("Введите фамилию: ");
-//        String surname = scanner.nextLine();
-//        System.out.println("Введите пол 'm' или 'f': ");
-//        String gender = scanner.nextLine();
-//        Gender sex;
-//        if (gender.equals("m")) {
-//            sex = Gender.Male;
-//        }
-//        System.out.println("Введите дату рождения в формате ДД.ММ.ГГГГ: ");
-//        String dateBirth = scanner.nextLine();
-//        presenter.addMember(name, surname, sex, dateBirth);
-//    }
-
     public void removeMember(){
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
@@ -172,26 +173,36 @@ public class ConsoleUI implements View{
         }
     }
 
-    public void searchMember(){
+    public void searchMemberByName(){
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
-        presenter.searchMemberByName(name);
+        if(presenter.searchMemberByName(name) != null) {
+            System.out.println(presenter.searchMemberByName(name).getInfo());
+        } else {
+            System.out.println("Попробуйте еще раз");}
+
+        System.out.println("_".repeat(80));
     }
+
+
+
     public void clearTree() {
+        System.out.println("_".repeat(80));
         presenter.clearTree();
+        System.out.println("Дерево очищено\n");
     }
 
     public void loadTree(){
         System.out.println("Введите имя файла для загрузки: ");
         String fileName = scanner.nextLine();
-        String fullName = fileName + ".dat";
+        String fullName = "src/" + fileName + ".dat";
         presenter.loadTree(fullName);
     }
 
     public void saveTree() {
         System.out.println("Введите имя файла для сохранения: ");
         String fileName = scanner.nextLine();
-        String fullName = fileName + ".dat";
+        String fullName = "src/" + fileName + ".dat";
         presenter.saveTree(fullName);
     }
 

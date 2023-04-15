@@ -5,7 +5,7 @@ import ui.ConsoleUI;
 public class SaveTree extends Command{
     public SaveTree(ConsoleUI console) {
         super(console);
-        description = "Загрузить дерево из файла";
+        description = "Сохранить дерево в файл \n";
     }
 
     @Override

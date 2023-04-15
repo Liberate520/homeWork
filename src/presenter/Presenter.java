@@ -17,27 +17,32 @@ public class Presenter {
         this.service = service;
         view.setPresenter(this);
     }
-    public void addMember(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
-        service.addHuman(name, surname, gender, dateBirth, father, mother);
-    }
-    public void getAllMembers(){
+//    public void getAllMembers(){
+//        service.printTree();
+//    }
+
+    public void printTree(){
         service.printTree();
     }
 
-//    public void searchMemberByName(String name) {
-//        service.getHumanByName(name);
-//    }
+    public void addMember(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
+        service.addHuman(name, surname, gender, dateBirth, father, mother);
+    }
+
 
     public Human searchMemberByName(String name) {
         return (Human) service.searchMemberByName(name);
     }
 
-    public void clearTree() {
-        service.clearTree();
+    public void searchMember(String name) {
+        service.searchMember(name);
     }
 
 
 
+    public void clearTree() {
+        service.clearTree();
+    }
 
 
     public void loadTree(String fileName){
@@ -48,11 +53,12 @@ public class Presenter {
         service.save(fileName);
     }
 
+//    public void searchMemberByName(String name) {
+//        service.getHumanByName(name);
+//    }
     public void removeMember(String name){
         service.removeMember(name);
     }
-
-
 
 
 

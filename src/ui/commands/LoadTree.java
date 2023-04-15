@@ -6,7 +6,7 @@ public class LoadTree extends Command{
 
     public LoadTree(ConsoleUI console) {
         super(console);
-        description = "Загрузить дерево из файла";
+        description = "Загрузить дерево из файла \n";
     }
 
     @Override

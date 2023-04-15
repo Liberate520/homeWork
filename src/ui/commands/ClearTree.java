@@ -5,7 +5,7 @@ import ui.ConsoleUI;
 public class ClearTree extends Command{
     public ClearTree(ConsoleUI console) {
         super(console);
-        description = "Очистить дерево";
+        description = "Очистить дерево \n";
     }
 
     @Override

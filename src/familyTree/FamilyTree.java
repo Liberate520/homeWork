@@ -92,18 +92,6 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         return new ArrayList<>(members);
     }
 
-//    @Override
-//    public void setRoot(T root) {
-//        if (root == null) {
-//            throw new IllegalArgumentException("Root cannot be null");
-//        }
-//        if (this.root != null) {
-//            throw new IllegalStateException("Root is already set");
-//        }
-//        this.root = root;
-//        add(root);
-//    }
-
     public T getMemberById(int id) {
         return members.get(id);
     }

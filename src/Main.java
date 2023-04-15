@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
 
         View view = new ConsoleUI();
-
         FamilyTree<Human> tree = new FamilyTree<>();
         Service service = new Service(tree);
         new Presenter(view, service);
@@ -31,36 +30,19 @@ public class Main {
 
 
 
-//        System.out.println("По имени: ");
-//        service.sortByName();
-//        for (Human human : tree) System.out.println(human);
+
+
+
+//        System.out.println("дерево перед записью\n");
+//        service.printTree();
 //
-//        System.out.println("По дате рождения: ");
-//        service.sortByBirthday();
-//        for (Human human :
-//                tree) {
-//            System.out.println(human);
-//        }
-//        System.out.println("По количеству детей: ");
-//        service.sortByNumChild();
-//        for (Human human :
-//                tree) {
-//            System.out.print(human.getNumChildren() + " ");
-//            System.out.println(human);
-//        }
-//        System.out.println();
-
-
-        System.out.println("дерево перед записью\n");
-        service.printTree();
-
-        service.setHandler(new FileHandler());
-        // организация записи через сервис
-        service.save("src/out.dat");
-        System.out.println("дерево прочитано из файла\n");
-        // организация чтения через сервис
-        service.load("src/out.dat");
-        service.printTree();
+//        service.setHandler(new FileHandler());
+//        // организация записи через сервис
+//        service.save("src/out.dat");
+//        System.out.println("дерево прочитано из файла\n");
+//        // организация чтения через сервис
+//        service.load("src/out.dat");
+//        service.printTree();
 
 
 
