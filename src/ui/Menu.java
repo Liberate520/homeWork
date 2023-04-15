@@ -16,11 +16,6 @@ public class Menu {
         commands.add(new TreeList(console));
         commands.add(new Search(console));
         commands.add(new Sorting(console));
-        commands.add(new DateOfBirth(console));
-        commands.add(new Parents(console));
-        commands.add(new Childrens(console));
-        commands.add(new AliveOrNot(console));
-        commands.add(new DateOfDeath(console));
         commands.add(new NewPerson(console));
         commands.add(new NewFather(console));
         commands.add(new NewMother(console));

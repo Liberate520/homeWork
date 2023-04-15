@@ -1,22 +1,17 @@
-package ui;
+package Tree;
+import java.io.Serializable;
 import java.util.List;
 
-import Tree.Person;
 import Tree.Comporators.ComparByAlive;
 import Tree.Comporators.ComparByChild;
 import Tree.Comporators.ComparByName;
 import Tree.Comporators.ComparBySecondName;
 
-public class Sort<E>{
-    private List<Person> familytree;
+public class Sort<E> implements Serializable{
 
-    public Sort(List<Person> personList) {
-    }
+    private List<E> familytree;
 
-    /**
-     * @param familytree Список семейного древа
-     */
-    public void PersonSort(List<Person> familytree){
+    public Sort(List<E> familytree) {
         this.familytree = familytree;
     }
 
@@ -46,6 +41,6 @@ public class Sort<E>{
      */
     public void sortByAlive(){
         familytree.sort(new ComparByAlive());
-    }    
-
+    }
+    
 }

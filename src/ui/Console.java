@@ -6,6 +6,8 @@ import ui.interfaces.View;
 import java.io.IOException;
 import java.util.Scanner;
 
+import Tree.Person;
+
 
 public class Console implements View {
     private Scanner scanner;
@@ -19,14 +21,14 @@ public class Console implements View {
 
     @Override
     public void start() throws IOException, ClassNotFoundException {
-        scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in, "ibm866");
         menu = new Menu(this);
         work = true;
         while (work){
             hello();
-            String command = scanner.nextLine();
+            Integer command = scanner.nextInt();
             if (checkInput(command)){
-                menu.execute(Integer.parseInt(command));
+                menu.execute(command);
             }else{
                 System.out.println("Ошибка ввода команды");
             }
@@ -39,8 +41,8 @@ public class Console implements View {
     private void hello(){
         System.out.println(menu.printMenu());
     }
-    private boolean checkInput(String text){
-        return text.matches("[1-15]+");
+    private boolean checkInput(Integer command){
+        return (0 < command && command < 11);
     }
     public void finish() {
         work = false;
@@ -48,7 +50,6 @@ public class Console implements View {
 
 
     public void treeList() {
-        System.out.println("Семейное древо: ");
         presenter.treeList();
     }
     public void search() {
@@ -61,16 +62,35 @@ public class Console implements View {
         "6. По дате смерти \n" +
         "Введите число: ");
         int i = scanner.nextInt();
-        if(i == 1){System.out.println("Введие имя: "); presenter.searchByFirstName(scanner.nextLine());}
-        if(i == 2){System.out.println("Введие фамилию: ");presenter.searchBySecondName(scanner.nextLine());}
-        if(i == 3){System.out.println("Введие имя и фамилию: ");presenter.searchByFullName(scanner.nextLine());}
-        if(i == 4){System.out.println("Введие дату рождения: ");presenter.searchByDateOfBirth(scanner.nextLine());}
-        if(i == 5){System.out.println("Выберите число: \n" + "1. Жив \n" + "2. Мертв \n" + "Введите число: ");presenter.searchByAliveOrNot(scanner.nextInt());}
-        if(i == 6){System.out.println("Введие дату смерти: ");presenter.searchByDateOfDeath(scanner.nextLine());}
+        scanner.nextLine();
+        if(i == 1){
+            System.out.println("Введие имя: "); 
+            presenter.searchByFirstName(scanner.nextLine());
+        }
+        if(i == 2){
+            System.out.println("Введие фамилию: ");
+            presenter.searchBySecondName(scanner.nextLine());
+        }
+        if(i == 3){
+            System.out.println("Введие имя и фамилию: ");
+            presenter.searchByFullName(scanner.nextLine());
+        }
+        if(i == 4){
+            System.out.println("Введие дату рождения: ");
+            presenter.searchByDateOfBirth(scanner.nextLine());
+        }
+        if(i == 5){
+            System.out.println("Выберите число: \n" + "1. Жив \n" + "2. Мертв \n" + "Введите число: ");
+            presenter.searchByAliveOrNot(scanner.nextInt());
+        }
+        if(i == 6){
+            System.out.println("Введие дату смерти: ");
+            presenter.searchByDateOfDeath(scanner.nextLine());
+        }
     }
 
     public void sorting() { 
-        System.out.println("Поиск по: \n" + 
+        System.out.println("Сортировка по: \n" + 
         "1. Имени \n"+
         "2. Фамилии \n"+
         "3. По нахождение в живых \n"+ 
@@ -79,26 +99,77 @@ public class Console implements View {
         presenter.sorting(scanner.nextInt());
     }
 
-    public void dateOfBirth(){
-        System.out.println("Выберите человека для просмотра даты рождения: ");
-        presenter.getAllPersonFromList();
-        System.out.println("Введите номер человека: ");
-        presenter.dateOfBirth(scanner.nextInt());
+    public void newPerson(){
+        Person new_person = new Person();
+        System.out.println("Введите имя: ");
+        new_person.setFirstName(scanner.next());
+        System.out.println("Введите фамилию: ");
+        new_person.setSecondName(scanner.next());
+        System.out.println("Введите дату рождения: ");
+        new_person.setDateOfBirth(scanner.next());
+        System.out.println("Выберите жив или нет: ");
+        System.out.println("1. Жив ");
+        System.out.println("2. Мертв ");
+        int answer = scanner.nextInt(); 
+        System.out.println();
+        while(answer < 1 || answer > 2){
+            System.out.println("Выберите жив или нет: ");
+            System.out.println("1. Жив ");
+            System.out.println("2. Мертв "); 
+            answer = scanner.nextInt(); 
+            System.out.println();
+        }
+        if (answer == 1){
+            new_person.setAlive(true);
+            System.out.println();
+        }
+        if(answer == 2){
+            new_person.setAlive(false);
+            System.out.println("Введите дату смерти: ");
+            new_person.setDateOfDeath(scanner.next());
+            System.out.println();
+        }
+        presenter.add(new_person);
+        System.out.println(new_person.getFullName() + " добавлен(а) в семейное древо ");
+        answer = 0;
+        System.out.println();
     }
 
-    public void parents(){
-        System.out.println("Выберите человека для просмотра родителей: ");
+    public void newFather(){
+        System.out.println("Выберите человека для добавления отца: ");
         presenter.getAllPersonFromList();
         System.out.println("Введите номер человека: ");
-        presenter.dateOfBirth(scanner.nextInt());
+        int child = scanner.nextInt();
+        System.out.println("Выберите отца для человека: ");
+        presenter.getAllPersonFromList();
+        System.out.println("Введите номер человека: ");
+        int father = scanner.nextInt();
+        presenter.setFather(father, child);
     }
 
+    public void newMother(){
+        System.out.println("Выберите человека для добавления матери: ");
+        presenter.getAllPersonFromList();
+        System.out.println("Введите номер человека: ");
+        int child = scanner.nextInt();
+        System.out.println("Выберите мать для человека: ");
+        presenter.getAllPersonFromList();
+        System.out.println("Введите номер человека: ");
+        int mother = scanner.nextInt();
+        presenter.setMother(mother, child);
+    }
 
-
-
-
-
-
+    public void newChild(){
+        System.out.println("Выберите человека для добавления ребенка: ");
+        presenter.getAllPersonFromList();
+        System.out.println("Введите номер человека: ");
+        int person = scanner.nextInt();
+        System.out.println("Выберите ребенка для человека: ");
+        presenter.getAllPersonFromList();
+        System.out.println("Введите номер человека: ");
+        int child = scanner.nextInt();
+        presenter.addChild(person, child);
+    }
 
     public void save() throws IOException {
         presenter.save();

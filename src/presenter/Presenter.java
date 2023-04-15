@@ -6,21 +6,24 @@ import ui.interfaces.View;
 
 import java.io.IOException;
 
+
 import static Tree.MyFamily.myFamily;
 
 public class Presenter {
     private View view;
     private FamilyTree familyTree = new FamilyTree();
     private Writable handler = new Handler();
+    
 
     public Presenter(View view) {
         this.view = view;
+        // this.familyTree = familyTree;
         myFamily(familyTree);
         view.setPresenter(this);
     }
 
     public void treeList() {
-        familyTree.getInfo();
+        System.out.println(familyTree.getInfo());
         System.out.println();
     }
    
@@ -37,7 +40,7 @@ public class Presenter {
         System.out.println();
     }
     public void searchByDateOfBirth(String string) {
-        familyTree.searchByDateOfBerth(string);
+        familyTree.searchByDateOfBirth(string);
         System.out.println();
     }
     public void searchByAliveOrNot(Integer i) {
@@ -56,14 +59,12 @@ public class Presenter {
     if(i == 4){familyTree.sortByChild();}
     }
 
-
-
     public void save() throws IOException {
         handler.save(familyTree);
     }
     
     public void read() throws IOException, ClassNotFoundException {
-        handler.read();
+        familyTree = handler.read();
         System.out.println();
     }
     
@@ -73,9 +74,25 @@ public class Presenter {
         }
     }
    
-	public void dateOfBirth(Integer i) {
-        familyTree.dateOfBirth(i);
+	public void dateOfBirth(int nextInt) {
+        familyTree.dateOfBirth(nextInt);
 	}
 
-    
+
+	public void add(Person new_person) {
+        familyTree.add(new_person);
+	}
+
+    public void setFather(int father, int child) {
+        familyTree.setFather(father, child);
+    }
+
+    public void setMother(int mother, int child) {
+        familyTree.setMother(mother, child);
+    }
+
+    public void addChild(int person, int child) {
+        familyTree.addChild(person, child);
+    }
+
 }

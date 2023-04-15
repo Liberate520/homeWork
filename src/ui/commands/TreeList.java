@@ -13,6 +13,5 @@ public class TreeList extends Command{
     @Override
     public void execute() {
         getConsole().treeList();
-
     }
 }

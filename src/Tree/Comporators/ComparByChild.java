@@ -3,13 +3,13 @@ import java.util.Comparator;
 
 import Tree.Person;
 
-public class ComparByChild implements Comparator<Person>{
+public class ComparByChild<E extends Person> implements Comparator<E>{
 
     @Override
-    public int compare(Person person1, Person person2) {
-        if (person1.getChildrens().size() == person2.getChildrens().size()) {
+    public int compare(E person1, E person2) {
+        if (person2.getChildrens().size() == person1.getChildrens().size()) {
             return 0;
-        } else if (person1.getChildrens().size() > person2.getChildrens().size()) {
+        } else if (person2.getChildrens().size() > person1.getChildrens().size()) {
             return 1;
         }
         else{

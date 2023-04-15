@@ -15,7 +15,7 @@ public class NewChild extends Command{
 
     @Override
     public void execute() throws IOException, ClassNotFoundException {{
-            getConsole().read();
+            getConsole().newChild();
         }
     }
 }

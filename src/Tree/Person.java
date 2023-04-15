@@ -1,10 +1,11 @@
 package Tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person implements Comparable<Person>{
+public class Person implements Serializable, Comparable<Person>{
     
     private String firstname;
     private String secondname;
@@ -41,6 +42,17 @@ public class Person implements Comparable<Person>{
      * @param firstname Имя
      * @param secondname Фамилия
      * @param dateofbirth Дата рождения 
+     * @param alive Жив или Мертв
+     */
+    public Person(String firstname, String secondname, String dateofbirth, String alive){
+        this(firstname, secondname, dateofbirth, alive, null, null, null, null);
+    }
+
+
+    /**
+     * @param firstname Имя
+     * @param secondname Фамилия
+     * @param dateofbirth Дата рождения 
      */
     public Person(String firstname, String secondname, String dateofbirth){
         this(firstname, secondname, dateofbirth, null, null, null, null, null);
@@ -52,6 +64,14 @@ public class Person implements Comparable<Person>{
      */
     public Person(String firstname, String secondname){
         this(firstname, secondname, null, null, null, null, null, null);
+    }
+
+    public Person(Object person) {
+        this(null, null, null, null, null, null, null, null);
+    }
+
+    public Person() {
+        this(null, null, null, null, null, null, null, null);
     }
   
     /**
@@ -155,9 +175,9 @@ public class Person implements Comparable<Person>{
      */
     public String setAlive(Boolean alive){
         if (alive == true){
-            return this.alive = "Жив";
+            return this.alive = "Да";
         }
-        return this.alive = "Мертв";
+        return this.alive = "Нет";
     }
 
     /**
@@ -187,8 +207,15 @@ public class Person implements Comparable<Person>{
     /**
      * @param person Человек
      */
-    public void addChild(Person person){
-        childrens.add(person);
+    public boolean addChild(Person child){
+        if (child == null){
+            return false;
+        }
+        if (!childrens.contains(child)){
+            childrens.add(child);
+            return true;
+        }
+        return false;
     }
 
     /**

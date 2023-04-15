@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ui.Sort;
+import Tree.Comporators.ComparByAlive;
+import Tree.Comporators.ComparByChild;
+import Tree.Comporators.ComparByName;
+import Tree.Comporators.ComparBySecondName;
 
-public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
+public class FamilyTree<E extends Person> implements  Tree<E>,Serializable{
 
     private List<E> familytree;
-    private Person person;
-    Sort familyIterator = new Sort(familytree);
     
     /**
      * Создание списка семейного древа 
@@ -19,14 +20,7 @@ public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
     public FamilyTree(){
         this(new ArrayList<>());
     }
-    /**
-     * @return Получение списка семейного древа
-     */
-    public List<E> getPersonList(){
-        return familytree;
-    }
-
-    
+   
     /**
      * @param familytree Список семейного древа
      */
@@ -104,33 +98,64 @@ public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
     }
 
     public void searchByFirstName(String string) {
-        if(familytree.contains(string)){System.out.print(person.getInfo());}
+        for(E person: familytree){
+            if(person.getFirstName().equalsIgnoreCase(string)){
+                System.out.println(person.getInfo());
+            }
+        }
     }
 
     public void searchBySecondName(String string) {
-        if(familytree.contains(string)){System.out.print(person.getInfo());}
+        for(E person: familytree){
+            if(person.getSecondName().equalsIgnoreCase(string)){
+                System.out.println(person.getInfo());
+            }
+        }    
     }
 
     public void searchByFullName(String string) {
-        if(familytree.contains(string)){System.out.print(person.getInfo());}
+        for(E person: familytree){
+            if(person.getFullName().equalsIgnoreCase(string)){
+                System.out.println(person.getInfo());
+            }
+        }    
     }
 
-    public void searchByDateOfBerth(String string) {
-        if(familytree.contains(string)){System.out.print(person.getInfo());}
+    public void searchByDateOfBirth(String string) {
+        for(E person: familytree){
+            if(person.getDateOfBirth().equalsIgnoreCase(string)){
+                System.out.println(person.getInfo());
+            }
+        }    
     }
 
     public void searchByAliveOrNot(int i) {
-        if(i == 1){if(familytree.contains("Жив")){System.out.print(person.getInfo());}}
-        if(i == 2){if(familytree.contains("Мертв")){System.out.print(person.getInfo());}}
+        if(i == 1){
+            for(E person: familytree){
+                if(person.getAlive().equalsIgnoreCase("Да")){
+                    System.out.println(person.getInfo());
+                }
+            }
+        }
+        if(i == 2){
+            for(E person: familytree){
+                if(person.getAlive().equalsIgnoreCase("Нет")){
+                    System.out.println(person.getInfo());
+                }
+            }
+        }
     }
 
     public void searchByDateOfDeath(String string) {
-        if(familytree.contains(string)){System.out.print(person.getInfo());}
+        for(E person: familytree){
+            if(person.getDateOfDeath().equalsIgnoreCase(string)){
+            System.out.println(person.getInfo());}
+        }    
     }
 
     
     public void sortByName() {
-        familyIterator.sortByName();
+        familytree.sort(new ComparByName<>());
         for(E person: familytree){
             System.out.println(person);
         }
@@ -138,7 +163,7 @@ public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
     }
 
     public void sortBySecondName() {
-        familyIterator.sortBySecondName();
+        familytree.sort(new ComparBySecondName<>());
         for(E person: familytree){
             System.out.println(person);
         }
@@ -146,7 +171,7 @@ public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
     }
 
     public void sortByAlive() {
-        familyIterator.sortByAlive();
+        familytree.sort(new ComparByAlive<>());
         for(E person: familytree){
             System.out.println(person);
         }
@@ -154,7 +179,7 @@ public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
     }
 
     public void sortByChild() {
-        familyIterator.sortByChild();
+        familytree.sort(new ComparByChild<>());
         for(E person: familytree){
             System.out.println(person);
         }
@@ -165,14 +190,36 @@ public class FamilyTree<E extends Person> implements Tree<E>, Serializable{
         System.out.print(familytree.get(i - 1).getDateOfBirth());
     }
 
+    public void setMother(int mother, int child) {
+        familytree.get(child - 1).setMother(familytree.get(mother - 1));
+        System.out.println("Человеку " + familytree.get(child - 1).getFullName() + " добавлена мать " + familytree.get(mother - 1).getFullName());
+        familytree.get(mother - 1).addChild(familytree.get(child - 1));
+    }
 
+    public void setFather(int father, int child) {
+        familytree.get(child - 1).setFather(familytree.get(father - 1));
+        System.out.println("Человеку " + familytree.get(child - 1).getFullName() + " добавлен отец " + familytree.get(father - 1).getFullName());
+        familytree.get(father - 1).addChild(familytree.get(child - 1));
+    }
 
-
-    
+    public void addChild(int person, int child) {
+        familytree.get(person - 1).addChild(familytree.get(child - 1));
+        System.out.println("Человеку " + familytree.get(person - 1).getFullName() + " добавлен ребёнок " + familytree.get(child - 1).getFullName());
+    }
 
     @Override
     public Iterator<E> iterator(){
         return new PersonIterator<E>(familytree);
     }
+
+    @Override
+    public List<Person> getPersonList() {
+        return (List<Person>) familytree;
+    }
+
+    
+
+
+
 
 }
