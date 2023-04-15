@@ -12,7 +12,7 @@ import human.Human;
 import human.IRelations;
 
 public class Tree<T extends IRelations> implements Serializable, Iterable<Human<T>> {
-    public static List<Human> humans = new ArrayList<>();
+    
     public HashMap<String, List<? extends T>> relations;
     private List<T> relationList;
 

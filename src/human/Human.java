@@ -22,11 +22,9 @@ public class Human<T> implements Serializable, Comparable, IRelations<Human<T>> 
         this.birthYear = birthYear;
         this.humanId = ++HumansCount;
         mother.addChild(father, this);
-        ;
         this.father = father;
         this.mother = mother;
         this.humanId = HumansCount;
-        Tree.humans.add(this);
     }
 
     public Human(String name, String surname, Gender gender, Integer birthYear) {
@@ -35,7 +33,6 @@ public class Human<T> implements Serializable, Comparable, IRelations<Human<T>> 
         this.gender = gender;
         this.birthYear = birthYear;
         humanId = ++HumansCount;
-        Tree.humans.add(this);
     }
 
     public String getName(){
