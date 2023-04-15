@@ -33,9 +33,7 @@ public class Service <E extends Human> {
 
     public void  addNewHuman(String name, String family, String dateBirth, String father, Object mother){
 
-        //humanLIST.addNewHuman((E) new Human(name, family, dateBirth, humanLIST.getByName(father), humanLIST.getByName(mother)), null);
-
-        humanLIST.addNewHuman((E) new Human(name, family, dateBirth), null);
+        humanLIST.addNewHuman((E) new Human(name, family, dateBirth,humanLIST.getByName(father),humanLIST.getByName(mother)), null);
 
     }
 

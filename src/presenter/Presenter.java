@@ -78,7 +78,7 @@ public class Presenter {
     public  void searchHuman(String nameSearch){
 
         view.print(service.searchHuman(nameSearch).getInfo());
-       //System.out.println(service.searchHuman(newObject));
+
 
     }
 
