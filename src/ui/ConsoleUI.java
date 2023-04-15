@@ -24,7 +24,6 @@ public class ConsoleUI implements View{
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
-
     private String scan(){
         return scanner.nextLine();
     }
@@ -33,7 +32,6 @@ public class ConsoleUI implements View{
     public void print(String text) {
         System.out.print(text);
     }
-
     @Override
     public void start() {
         while (work) {
@@ -196,6 +194,5 @@ public class ConsoleUI implements View{
         String fullName = "src/" + fileName + ".dat";
         presenter.saveTree(fullName);
     }
-
     public void finish() {work = false;}
 }
