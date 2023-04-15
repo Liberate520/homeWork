@@ -1,4 +1,4 @@
-package human;
+package treeUnits;
 
 /**
  * Перечисление полов
