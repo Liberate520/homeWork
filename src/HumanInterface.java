@@ -9,6 +9,6 @@ public interface HumanInterface<E> extends Iterable<E> {
 
     List<E> getHumanList();
     
-    void addHumanForSort(Human human);
+    void addHumanForSort(E human);
 
 }
