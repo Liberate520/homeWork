@@ -1,7 +1,6 @@
 package view;
 
 
-
 //Класс МЕНЮ это часть класса КОНСОЛь
 
 import java.util.ArrayList;
@@ -22,18 +21,19 @@ public class Menu {
         commands.add(new Exit(console));
         commands.add(new TreeView(console));
         commands.add(new SearchObject(console));
+        commands.add(new SortObject(console));
 
     }
 
-    void execute(int num)  {
-        Option option = commands.get(num-1);
+    void execute(int num) {
+        Option option = commands.get(num - 1);
         option.execute();
     }
 
-    public String printMenu(){
+    public String printMenu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commands.size(); i++) {
-            stringBuilder.append(i+1);
+            stringBuilder.append(i + 1);
             stringBuilder.append(": ");
             stringBuilder.append(commands.get(i).description());
             stringBuilder.append("\n");

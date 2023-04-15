@@ -6,7 +6,6 @@ import model.human.Human;
 import java.util.Comparator;
 
 
-
 public class HumanComparatorByName implements Comparator<Human> {
 
     @Override
@@ -14,7 +13,5 @@ public class HumanComparatorByName implements Comparator<Human> {
         return o1.getName().compareTo(o2.getName());
     }
 
-    
 
-    
 }

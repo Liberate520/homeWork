@@ -43,114 +43,64 @@ import view.View;
 // Урок 5. От простого к практике
 // Реализовать проект с семейным деревом в формате MVP
 
+//Урок 6. ООП Дизайн и Solid
+// Рефакторинг и\или оптимизация проекта предыдущего дз с учетом теоретических основ SOLID’а
 
 
 public class Main {
 
-        /**
-         * @param args
-         * @throws IOException
-         * @throws ClassNotFoundException
-         */
-        public static void main(String[] args) throws IOException, ClassNotFoundException {
+    /**
+     * @param args
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-                FamilyTree<Human> tree = new FamilyTree<>();
-
-                
-                tree.addNewHuman(new Human("Ирина", "Малинина", "21.08.1987"), null);
-                tree.addNewHuman(new Human("Владимир", "Малинин", "10.02.1985"), null);
-
-                tree.addNewHuman(new Human("Семен", "Малинин", "17.03.2017", tree.getByName("Владимир"),
-                                                tree.getByName("Ирина")),
-                                null);
-                tree.addNewHuman(new Human("Оля", "Малинина", "27.09.2016", tree.getByName("Владимир"),
-                                                tree.getByName("Ирина")),
-                                null);
-
-                tree.addNewHuman(new Human("Олег", "Титов", "10.07.1989"), null);
-                tree.addNewHuman(new Human("Алексей", "Титов", "27.09.2019", tree.getByName("Олег"),
-                                                tree.getByName(null)), null);
-
-                System.out.println();
-                //System.out.println(tree.getInfo());
+        FamilyTree<Human> tree = new FamilyTree<>();
 
 
+        tree.addNewHuman(new Human("Ирина", "Малинина", "21.08.1987"), null);
+        tree.addNewHuman(new Human("Владимир", "Малинин", "10.02.1985"), null);
+
+        tree.addNewHuman(new Human("Семен", "Малинин", "17.03.2017", tree.getByName("Владимир"),
+                        tree.getByName("Ирина")),
+                null);
+        tree.addNewHuman(new Human("Оля", "Малинина", "27.09.2016", tree.getByName("Владимир"),
+                        tree.getByName("Ирина")),
+                null);
+
+        tree.addNewHuman(new Human("Олег", "Титов", "10.07.1989"), null);
+        tree.addNewHuman(new Human("Алексей", "Титов", "27.09.2019", tree.getByName("Олег"),
+                tree.getByName(null)), null);
+
+        System.out.println();
+        //System.out.println(tree.getInfo());
 
 
-
-                // //////////////////////*****  СЕРИАЛИЗАЦИЯ ******///////////////////////
-
-                        
-
-                
-                Presenter fileName = new Presenter();
-
-                String nameFILE = fileName.getFileName();
+        // //////////////////////*****  СЕРИАЛИЗАЦИЯ ******///////////////////////
 
 
-                // создаем новый экземпляр класса ClassWriteRead
-                ClassWriteRead treeForWrite = new ClassWriteRead<>(null,nameFILE);
+        //Presenter fileName = new Presenter();
 
-                                
-                // сохраняем в файл
-                treeForWrite.save(tree.getInfo(), nameFILE);
-                
-             
+       // String nameFILE = fileName.getFileName();
 
 
-
-                // //////////////////////******  ДЕСЕРИАЛИЗАЦИЯ ***********///////////////////////
-
-                
-
-                // читаем из файла
-                // System.out.println("Before write: \n" + treeForWrite.read(nameFILE));
-
-                 
+        // создаем новый экземпляр класса ClassWriteRead
+      // ClassWriteRead treeForWrite = new ClassWriteRead<>(null, nameFILE);
 
 
-               
-               
-        //         ///////////////////// ********СОРТИРОВКА ОБЪЕКТОВ*********////////////////
+        // сохраняем в файл
+       // treeForWrite.save(tree.getInfo(), nameFILE);
 
 
+        // //////////////////////******  ДЕСЕРИАЛИЗАЦИЯ ***********///////////////////////
 
-        //         // System.out.println("\n"+"-----------до сортировки-----------"+"\n");
 
-        //         Service service = new Service(tree);
-                
-
-        //         // Выводим экземпляры tree перед сортировкой
-        //         for (Human st : tree) {
-        //                 System.out.println(st);
-        //         }
-
-        //         System.out.println("\n" + "------после сортировки по имени--------" + "\n");
-
-        //         // Производим сортировку по имени
-        //         service.sortByName();
-
-        //         // Выводим экземпляры tree после сортировки
-        //         for (Human st : tree) {
-        //                 System.out.println(st);
-        //         }
-
-        //         // // Производим сортировку по фамилии
-        //          service.sortByFamily();
-
-        //          System.out.println("\n"+"------после сортировки по фамилии--------"+"\n");
-
-        //         // Выводим экземпляры tree после сортировки
-        //         for (Human st : tree) {
-        //         System.out.println(st);
-        //         }
-
-                
-        // }
+        // читаем из файла
+       // System.out.println("Before write: \n" + treeForWrite.read(nameFILE));
 
 
         ////////////////////////////////***M V P ****//////////////////////////////////
-
 
 
         View view = new Console();
@@ -159,4 +109,5 @@ public class Main {
         view.start();
 
 
-}}
+    }
+}

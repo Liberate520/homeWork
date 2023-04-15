@@ -22,7 +22,6 @@ public class Human<E> implements Comparable<E>, Serializable {
     }
 
 
-
     // ребенок
 
     public Human(String name, String family, String dateBirth, Human<E> father, Human<E> mother) {
@@ -33,7 +32,9 @@ public class Human<E> implements Comparable<E>, Serializable {
         this.mother = mother;
         children = new ArrayList<>();
     }
-    public Human(){}
+
+    public Human() {
+    }
 
     // добавление ребенка с проверкой
 
@@ -144,7 +145,7 @@ public class Human<E> implements Comparable<E>, Serializable {
 
     @Override
     public String toString() {
-        return "Human { " + "name = " + name +  "\t" +
+        return "Human { " + "name = " + name + "\t" +
                 "family = " + family + '}';
     }
 

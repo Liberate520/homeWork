@@ -3,7 +3,7 @@ package presenter;
 import java.io.IOException;
 import java.util.List;
 
-import model.familyTree.FamilyTree;
+
 import model.human.Human;
 import view.View;
 import model.Service;
@@ -13,23 +13,14 @@ public class Presenter {
     private Service service;
 
     private String nameFile;
-    private List<Human> hUMList;
 
-    FamilyTree<Human>newObject = new FamilyTree<>();
-
-    
 
     /**
      * @nameFile - имя файла для чтения и записи объектов
-     */
+     */ {
+        nameFile = "familyTree.out";
 
-    {
-        nameFile =  "familyTree.out";
-        this.hUMList=hUMList;
     }
-
-
-
 
 
     public Presenter(View view, Service service) {
@@ -50,7 +41,6 @@ public class Presenter {
 
 
     /**
-     * 
      * @throws IOException
      * @addObject - метод добавления объекта в дерево
      */
@@ -59,7 +49,7 @@ public class Presenter {
     public void addObject(String name, String family, String dateBirth, String father, Object mother) {
 
 
-        service.addNewHuman(name, family, dateBirth,  father,  mother);
+        service.addNewHuman(name, family, dateBirth, father, mother);
 
         view.print("Объект добавлен");
 
@@ -71,15 +61,21 @@ public class Presenter {
      */
     public void familyTreeViewAll() {
 
-    service.printListHuman();
+        view.print(service.printListHuman());
+        //service.printListHuman();
 
     }
 
-    public  void searchHuman(String nameSearch){
+    public void searchHuman(String nameSearch) {
 
         view.print(service.searchHuman(nameSearch).getInfo());
 
 
+    }
+
+    public void sortHum(int num)
+    {
+        service.sortObjectHum(num);
     }
 
 }

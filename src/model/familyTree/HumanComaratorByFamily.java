@@ -11,7 +11,5 @@ public class HumanComaratorByFamily implements Comparator<Human> {
         return o1.getFamily().compareTo(o2.getFamily());
     }
 
-    
 
-    
 }

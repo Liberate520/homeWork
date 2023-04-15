@@ -6,17 +6,17 @@ import model.familyTree.HumanComparatorByName;
 import model.human.Human;
 import model.save.Writable;
 import presenter.Presenter;
+
 import java.util.List;
 
-public class Service <E extends Human> {
+public class Service<E extends Human> {
 
     private Writable writable;
     private FamilyTree<E> humanLIST;
 
-    public Service(FamilyTree<E> humanLIST){
-        this.humanLIST=humanLIST;
+    public Service(FamilyTree<E> humanLIST) {
+        this.humanLIST = humanLIST;
     }
-
 
 
     public void sortByName() {
@@ -31,41 +31,52 @@ public class Service <E extends Human> {
 
     }
 
-    public void  addNewHuman(String name, String family, String dateBirth, String father, Object mother){
+    public void addNewHuman(String name, String family, String dateBirth, String father, Object mother) {
 
-        humanLIST.addNewHuman((E) new Human(name, family, dateBirth,humanLIST.getByName(father),humanLIST.getByName(mother)), null);
+        humanLIST.addNewHuman((E) new Human(name, family, dateBirth, humanLIST.getByName(father), humanLIST.getByName(mother)), null);
+
+    }
+
+    public void sortObjectHum(int n) {
+        if (n == 1) {
+            sortByName();
+        } else if (n == 2) {
+            sortByFamily();
+        }
+        else {
+            System.out.println("повторите выбор");
+
+        }
 
     }
 
 
-    public void printListHuman() {
+    public String printListHuman() {
 
-        System.out.println(humanLIST.getInfo());
+        return humanLIST.getInfo();
+       // System.out.println(humanLIST.getInfo());
     }
 
 
     public E searchHuman(String name) {
 
 
-
 //            if (name == null || name.trim().isEmpty()) {
 //                throw new IllegalArgumentException("Заполните имя!");
 //            }
 
-        if (name == null ) {
+        if (name == null) {
             throw new IllegalArgumentException("Заполните имя!");
         }
 
 
-            for (E item : humanLIST.getHumanList()) {
-                if (item.getName().equalsIgnoreCase(name.trim())) {
-                    return item;
-                }
+        for (E item : humanLIST.getHumanList()) {
+            if (item.getName().equalsIgnoreCase(name.trim())) {
+                return item;
             }
-            throw new IllegalArgumentException("Человек  не найден.");
         }
-
-
+        throw new IllegalArgumentException("Человек  не найден.");
+    }
 
 
 }

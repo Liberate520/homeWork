@@ -9,22 +9,24 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree <E extends Human> implements Iterable<E>, Serializable {
+public class FamilyTree<E extends Human> implements Iterable<E>, Serializable {
 
-    public  Object tree;
+    public Object tree;
     public List<E> humanList;
 
-   
+
     public FamilyTree(List<E> humanList) {
-        this.humanList =humanList;
+        this.humanList = humanList;
     }
-    public FamilyTree(){
+
+    public FamilyTree() {
         this(new ArrayList<>());
     }
-    public FamilyTree(Object tree){
-        this.tree=tree;
+
+    public FamilyTree(Object tree) {
+        this.tree = tree;
     }
-    
+
 
     // метод проверки наличия человека в листе и при его отсутствии добавление
     // человека
@@ -39,7 +41,7 @@ public class FamilyTree <E extends Human> implements Iterable<E>, Serializable {
         if (!humanList.contains(human)) {
 
             humanList.add((E) human);
-            
+
             if (human.getFather() != null) {
 
                 human.getFather().addChildren(human);
@@ -82,22 +84,17 @@ public class FamilyTree <E extends Human> implements Iterable<E>, Serializable {
         return infoRes.toString();
 
     }
-    
-   
-    
+
 
     @Override
     public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 
-    
-       
+
     public List<E> getHumanList() {
         return (List<E>) humanList;
     }
-
-        
 
 
 }
