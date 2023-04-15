@@ -32,7 +32,7 @@ public class Main {
 //        System.out.println(Irina);
 //        System.out.println(Igor);
 //        System.out.println(Igor.getChildrenDetails());
-//        System.out.println(Lida.getName());
+        System.out.println(Lida.getName());
 
     }
 }
