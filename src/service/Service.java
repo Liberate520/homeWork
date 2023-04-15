@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Service {
     private  FamilyTree<Human> familyTree;
 
-   private Writable fileHandler;
+    private Writable fileHandler;
 
     public Service() {
         familyTree = new FamilyTree();
@@ -26,7 +26,10 @@ public class Service {
     public Human find(String name) {
         return familyTree.find(name);
     }
-
+    public String getChildren(String nameFather)
+    {
+        return familyTree.find(nameFather).getChildrenInfo();
+    }
     public void sortByName() {
         familyTree.sortByName();
     }
@@ -36,11 +39,16 @@ public class Service {
     }
 
     public boolean save(String fileName) {
-        return fileHandler.save(familyTree, "family.txt");
+        return fileHandler.save(familyTree, fileName);
     }
-    public Object load()
+    public boolean load(String fileName)
     {
-        return fileHandler.load("family.txt");
+        familyTree=(FamilyTree)fileHandler.load(fileName);
+        if(familyTree!=null)
+        {
+            return true;
+        }
+        return false;
     }
 
 }

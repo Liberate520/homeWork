@@ -21,8 +21,8 @@ public class Main implements Serializable {
     }
 }
 
-/*         Person member1 = new Person (1685, 1728, "ИванПетровичТолстой", Gender.Male,null, null);
-        Person  member2 = new Person (1693, 1748, "ПрасковьяМихайловнаРтищева",
+/*       Person member1 = new Person (1685, 1728, "ИванПетровичТолстой", Gender.Male,null, null);
+         Person  member2 = new Person (1693, 1748, "ПрасковьяМихайловнаРтищева",
          Gender.Female, null, null);
          Person  member3 = new Person (1727, 1811, "АлександраИвановнаЩетинина",
          Gender.Female, member1, member2);
