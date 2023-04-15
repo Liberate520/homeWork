@@ -1,39 +1,11 @@
 package Home;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree extends Human {
-    private Human mother;
-    private Human father;
-    private List<Human> sisters;
-    private List<Human> brothers;
-    private List<Human> childrens;
 
     public FamilyTree(String name, int age) {
         super(name, age);
-    }
-
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-
-    public void setChildrens(List<Human> childrens) {
-        this.childrens = childrens;
-    }
-
-    public void setSisters(List<Human> sisters) {
-        this.sisters = sisters;
-    }
-
-    public void setBrothers(List<Human> brothers) {
-        this.brothers = brothers;
     }
 
     public String getMotherDetails() {
@@ -41,6 +13,10 @@ public class FamilyTree extends Human {
         sb.append(super.getName()).append(" Mother:").append("\n");
         if (mother != null) {
             sb.append(mother.getName()).append(", ").append("age: ").append(mother.getAge()).append('\n');
+            if (mother.getMother() != null) {
+                sb.append(super.getName()).append(" Grandmother:").append("\n");
+                sb.append(mother.getMother().getName()).append(", ").append("age: ").append(mother.getMother().getAge()).append('\n');
+            }
             return sb.toString();
         } else {
             return "No mother details available.";
@@ -49,12 +25,36 @@ public class FamilyTree extends Human {
 
     public String getFatherDetails() {
         StringBuilder sb = new StringBuilder();
-        sb.append(super.getName()).append(" Father").append("\n");
+        sb.append(super.getName()).append(" Father:").append("\n");
         if (father != null) {
             sb.append(father.getName()).append(", ").append("age: ").append(father.getAge()).append('\n');
+            if (father.getFather() != null) {
+                sb.append(super.getName()).append(" Grandfather:").append("\n");
+                sb.append(father.getFather().getName()).append(", ").append("age: ").append(father.getFather().getAge()).append('\n');
+            }
             return sb.toString();
         } else {
             return "No father details available.";
+        }
+    }
+    public String getGrandfatherDetails() {
+        StringBuilder sb = new StringBuilder();
+        if (father.getFather() != null) {
+            sb.append(super.getName()).append(" Grandfather:").append("\n");
+            sb.append(father.getFather().getName()).append(", ").append("age: ").append(father.getFather().getAge()).append('\n');
+            return sb.toString();
+        } else {
+            return "No grandfather details available.";
+        }
+    }
+    public String getGrandmatherDetails() {
+        StringBuilder sb = new StringBuilder();
+        if (mother.getMother() != null) {
+            sb.append(super.getName()).append(" Grandmather:").append("\n");
+            sb.append(mother.getMother().getName()).append(", ").append("age: ").append(mother.getFather().getAge()).append('\n');
+            return sb.toString();
+        } else {
+            return "No grandfather details available.";
         }
     }
 
@@ -70,6 +70,7 @@ public class FamilyTree extends Human {
         }
         return sb.toString();
     }
+
     public String getSisterDetails() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.getName()).append(" Sisters:").append("\n");
@@ -82,6 +83,7 @@ public class FamilyTree extends Human {
         }
         return sb.toString();
     }
+
     public String getBrothersDetails() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.getName()).append(" Brothers:").append("\n");
@@ -94,7 +96,6 @@ public class FamilyTree extends Human {
         }
         return sb.toString();
     }
-
 
     @Override
     public String toString() {
@@ -110,12 +111,11 @@ public class FamilyTree extends Human {
             sb.append(getBrothersDetails());
         }
         if (sisters != null) {
-            sb.append(getFatherDetails());
+            sb.append(getSisterDetails());
         }
         if (childrens!= null) {
             sb.append(getChildrenDetails());
         }
-
         return sb.toString();
     }
 
