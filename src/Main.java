@@ -1,16 +1,17 @@
-import java.io.IOException;
+import geotree.GeoTree;
+import io.GeoTreeIO;
+import geotree.Service;
+import person.Gender;
+import person.Person;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.io.IOException;
 
-import homeWork.geotree.GeoTree;
-import homeWork.geotree.Research;
-import homeWork.io.GeoTreeIO;
-import homeWork.io.Service;
-import homeWork.person.Gender;
-import homeWork.person.Person;
-import homeWork.presenter.Presenter;
-import homeWork.ui.DesktopUI;
-import homeWork.ui.View;
+import presenter.Presenter;
+import ui.DesktopUI;
+import ui.View;
+
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -27,8 +28,7 @@ public class Main {
         gt.appendPerson(vasya);
         gt.autoAppendChildren();
         serv.restoreTree();
-        Research research = new Research(gt);
-        Presenter presenter = new Presenter(view, research);
+        Presenter presenter = new Presenter(view, serv);
         view.start();
     }
 }

@@ -1,4 +1,4 @@
-package homeWork.person;
+package person;
 
 import java.util.Iterator;
 import java.util.List;

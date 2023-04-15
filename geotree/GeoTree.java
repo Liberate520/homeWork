@@ -1,13 +1,12 @@
-package homeWork.geotree;
+package geotree;
 
+import person.Person;
+import person.PersonComparatorByAge;
+import person.PersonComparatorByName;
+import person.PersonIterator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import homeWork.person.Person;
-import homeWork.person.PersonComparatorByAge;
-import homeWork.person.PersonComparatorByName;
-import homeWork.person.PersonIterator;
 
 public class GeoTree<T extends Person> implements Serializable, Iterable<T> {
 

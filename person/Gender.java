@@ -1,4 +1,4 @@
-package homeWork.person;
+package person;
 
 public enum Gender {
     Male, Female

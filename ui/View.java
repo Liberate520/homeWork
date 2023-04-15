@@ -1,6 +1,6 @@
-package homeWork.ui;
+package ui;
 
-import homeWork.presenter.Presenter;
+import presenter.Presenter;
 
 public interface View {
     void start();

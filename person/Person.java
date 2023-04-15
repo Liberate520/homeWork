@@ -1,4 +1,4 @@
-package homeWork.person;
+package person;
 
 import java.io.Serializable;
 import java.util.*;
@@ -41,8 +41,8 @@ public class Person implements Serializable, Comparable<Person> {
     }
     public boolean addChild(Person child) {
         if (child!=null){
-        children.add(child);
-        return true;
+            children.add(child);
+            return true;
         }
         return false;
     }
@@ -75,6 +75,7 @@ public class Person implements Serializable, Comparable<Person> {
     public Person getMother() {
         return mother;
     }
+
 
     public Person getFather() {
         return father;
@@ -116,7 +117,7 @@ public class Person implements Serializable, Comparable<Person> {
         res.append("Children: ");
         if (!children.isEmpty()){
             for (Person child:children) {
-                res.append(child.getFullName());
+                res.append(child.getFullName() + " ");
             }
         } else {
             res.append("unknown");

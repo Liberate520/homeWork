@@ -1,10 +1,10 @@
-package homeWork.io;
+package io;
+
+import geotree.GeoTree;
 
 import java.io.*;
 
-import homeWork.geotree.GeoTree;
-
-public class GeoTreeIO implements Writable, Readable, Serializable{
+public class GeoTreeIO implements Writable, Readable{
     public void write(GeoTree geo) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("geo.geotree"));

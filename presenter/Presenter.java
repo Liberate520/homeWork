@@ -1,32 +1,36 @@
-package homeWork.presenter;
+package presenter;
 
-import homeWork.geotree.Research;
-import homeWork.ui.View;
+import geotree.Service;
+import ui.View;
 
 public class Presenter {
     private View view;
-    private Research research;
+    private Service service;
 
-    public Presenter(View view, Research research) {
+    public Presenter(View view, Service service) {
         this.view = view;
-        this.research = research;
+        this.service = service;
         view.setPresenter(this);
     }
 
-    public void onClickFind(String person){
-        String answer = research.findPersonByName(person);
+    public void find(String person){
+        String answer = service.findPersonByName(person);
         view.print(answer);
     }
-    public void onClickAddHuman(String dataForPerson){
-        String answer = research.AddHuman(dataForPerson);
+    public void addHuman(String dataForPerson){
+        String answer = service.addHuman(dataForPerson);
         view.print(answer);
     }
-    public void onClickGetHuman(String person){
-        String answer = research.GetHuman(person);
+    public void getHuman(String person){
+        String answer = service.getHuman(person);
         view.print(answer);
     }
-    public void onClickGetAll(){
-        String answer = research.GetAll();
+    public void getByAge(String age){
+        String answer = service.searchAge(age);
+        view.print(answer);
+    }
+    public void getAll(){
+        String answer = service.getAll();
         view.print(answer);
     }
 }
