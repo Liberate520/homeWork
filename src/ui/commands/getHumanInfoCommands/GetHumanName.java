@@ -19,7 +19,7 @@ public class GetHumanName extends Commands {
     public boolean execute() {
 
         Integer index = new SetHuman(console).getIndex();
-        System.out.println(Console.humans.get(index).name);
+        console.print(Console.humans.get(index).name);
         return true;
     }
     

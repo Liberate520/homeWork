@@ -1,4 +1,5 @@
 package ui;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,13 +14,15 @@ public class Console implements Iview {
     private Presenter presenter;
     boolean work;
     private Menu menu;
-    public Console(){
+
+    public Console() {
         scanner = new Scanner(System.in);
     }
+
     public static List<Human<Family>> humans = new ArrayList<>();
     List<Commands> commands;
 
-    public Scanner getScanner(){
+    public Scanner getScanner() {
         return scanner;
     }
 
@@ -33,29 +36,35 @@ public class Console implements Iview {
         scanner = new Scanner(System.in);
         menu = new Menu(this);
         work = true;
-        while (work){
+        while (work) {
             hello();
-            String command = scanner.nextLine();
-            if (checkInput(command)){
-                menu.execute(Integer.parseInt(command));
-
-            } else {
-                System.out.println("что-то пошло не так");
+            try {
+                Thread.sleep(2000);
+                String command = scanner.nextLine();
+                if (checkInput(command)) {
+                    menu.execute(Integer.parseInt(command));
+    
+                } else {
+                    System.out.println("что-то пошло не так");
+                }
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
     }
 
     @Override
-    public void print(String text){
+    public void print(String text) {
         System.out.println(text);
     }
 
     private void hello() {
-        
+
         System.out.println(menu.printMenu());
     }
 
-    private boolean checkInput(String text){
+    private boolean checkInput(String text) {
         return text.matches("[0-9]+");
     }
 

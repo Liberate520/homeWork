@@ -9,7 +9,7 @@ public class SetHuman {
     private Integer index = -1;
     public SetHuman(Console console) {
         this.console = console;
-        System.out.println("Выберите человека из списка" + parentsList());
+        console.print("Выберите человека из списка" + parentsList());
         index = this.console.getScanner().nextInt()-1;
     }
 

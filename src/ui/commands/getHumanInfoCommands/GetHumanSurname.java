@@ -18,7 +18,7 @@ public class GetHumanSurname extends Commands {
     @Override
     public boolean execute() {
         Integer index = new SetHuman(console).getIndex();
-        System.out.println(Console.humans.get(index).surname);
+        console.print(Console.humans.get(index).surname);
         return true;
     }
 }

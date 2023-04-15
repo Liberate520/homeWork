@@ -22,7 +22,7 @@ public class GetAllHumanRelations extends Commands {
     public boolean execute() {
         Integer index = new SetHuman(console).getIndex();
         Tree<Human<Family>> humantree = new Tree<Human<Family>>(Console.humans.get(index));
-        System.out.println(humantree.relations);
+        console.print(humantree.relations.toString());
         return true;
     }
 }
