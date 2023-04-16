@@ -66,9 +66,9 @@ public class Service {
 
     public boolean addMember(String newName, String nameSample) {
         if (typeMember.equals("person")) {
-            return addPersonByPerson(newName, (Person) currentEditingFTree.findMember(nameSample));
+            return addPersonByPerson(newName, (Person) this.findMember(nameSample));
         } else if (typeMember.equals("dog")) {
-            return addDogByDog(newName, (Dog) currentEditingFTree.findMember(nameSample));
+            return addDogByDog(newName, (Dog) this.findMember(nameSample));
         } else {
             return false;
         }
@@ -85,11 +85,11 @@ public class Service {
     }
 
     public boolean addChild(String nameParent, String nameChild) {
-        return currentEditingFTree.findMember(nameParent).addChild(currentEditingFTree.findMember(nameChild));
+        return this.findMember(nameParent).addChild(this.findMember(nameChild));
     }
 
     public boolean addMarried(String nameMarried1, String nameMarried2, boolean isMarried) {
-        return currentEditingFTree.findMember(nameMarried1).addMarried(currentEditingFTree.findMember(nameMarried2), isMarried);
+        return this.findMember(nameMarried1).addMarried(this.findMember(nameMarried2), isMarried);
     }
 
     private FamilyTree<Member> findFamilyTree(String name) {
@@ -97,9 +97,13 @@ public class Service {
     }
 
     public boolean isFindFamilyTree(String name) {
-        currentEditingFTree = this.getTreeOfTrees().findFamilyTree(name);
-        typeMember = currentEditingFTree.getTypeMember();
-        return currentEditingFTree != null;
+        currentEditingFTree = findFamilyTree(name);
+        if (currentEditingFTree != null) {
+            typeMember = currentEditingFTree.getTypeMember();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Member findMember(String name) {
@@ -107,7 +111,7 @@ public class Service {
     }
 
     public boolean isFindMember(String name) {
-        return currentEditingFTree.findMember(name) != null;
+        return this.findMember(name) != null;
     }
 
     public boolean sortByFirstName() {
@@ -203,9 +207,9 @@ public class Service {
     }
 
     public String printMemberInfo(String name) {
-        if (isFindMember(name)){
+        if (isFindMember(name)) {
             return this.findMember(name).printInfo();
-        }else{
+        } else {
             return "С таким именем член семьи не найден";
         }
     }

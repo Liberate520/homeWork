@@ -64,14 +64,14 @@ public class ConsoleUI implements View {
     public void newFTree() {
         String typeFTree = requestType();
         String fTreeName = requestNameFTree();
-        if (presenter.addFamilyTree(typeFTree, fTreeName)) {
+        if (this.getPresenter().addFamilyTree(typeFTree, fTreeName)) {
             while (editTree()) ;
         }
     }
 
     public void requestEdit() {
         String fTreeName = requestNameFTree();
-        if (presenter.isFindFamilyTree(fTreeName)) {
+        if (this.getPresenter().isFindFamilyTree(fTreeName)) {
             while (editTree()) ;
         } else {
             print("Генеалогическое древо с таким именем не найдено.");
@@ -102,26 +102,26 @@ public class ConsoleUI implements View {
         int month = requestMonth();
         int day = requestDay();
         Calendar bornDate = new GregorianCalendar(year, month, day);
-        return presenter.addMember(name, kind, isMale, bornDate);
+        return this.getPresenter().addMember(name, kind, isMale, bornDate);
     }
 
     public boolean newTwin() {
         String newName = requestName();
         String nameSimple = requestNameSimple();
-        return presenter.addMember(newName, nameSimple);
+        return this.getPresenter().addMember(newName, nameSimple);
     }
 
     public boolean addChild() {
         String ParentName = requestParentName();
         String ChildName = requestChildName();
-        return presenter.addChild(ParentName, ChildName);
+        return this.getPresenter().addChild(ParentName, ChildName);
     }
 
     public boolean addMarried() {
         String Married1Name = requestMarriedName();
         String Married2Name = requestMarriedName();
         boolean isMarried = requestIsMarried();
-        return presenter.addMarried(Married1Name, Married2Name, isMarried);
+        return this.getPresenter().addMarried(Married1Name, Married2Name, isMarried);
     }
 
     public boolean SortBy() {
@@ -233,12 +233,12 @@ public class ConsoleUI implements View {
 
     public boolean requestLoad() {
         print("Введите имя файла:");
-        return presenter.load(scan());
+        return this.getPresenter().load(scan());
     }
 
     public boolean requestSave() {
         print("Введите имя файла:");
-        return presenter.save(scan());
+        return this.getPresenter().save(scan());
     }
 
     private String requestNameFTree() {
@@ -263,9 +263,9 @@ public class ConsoleUI implements View {
         print("В каком виде вывести информацию на экран (1 - список или 2 - древо)");
         switch (scan()) {
             case "1":
-                return presenter.printInfo();
+                return this.getPresenter().printInfo();
             case "2":
-                return presenter.printFTrees();
+                return this.getPresenter().printFTrees();
             default:
                 print("Введено отличное от 1 или 2.");
                 return requestPrint();
@@ -273,12 +273,12 @@ public class ConsoleUI implements View {
     }
 
     public boolean printTree() {
-        return presenter.printTree();
+        return this.getPresenter().printTree();
     }
 
     public boolean printMember() {
         print("Введите имя члена семьи");
-        return presenter.printMember(scan());
+        return this.getPresenter().printMember(scan());
     }
 
     @Override
@@ -287,22 +287,22 @@ public class ConsoleUI implements View {
     }
 
     public boolean sortByFirstName() {
-        return presenter.sortByFirstName();
+        return this.getPresenter().sortByFirstName();
     }
 
     public boolean sortByLastName() {
-        return presenter.sortByLastName();
+        return this.getPresenter().sortByLastName();
     }
 
     public boolean sortByGender() {
-        return presenter.sortByGender();
+        return this.getPresenter().sortByGender();
     }
 
     public boolean sortByBornDate() {
-        return presenter.sortByBornDate();
+        return this.getPresenter().sortByBornDate();
     }
 
     public boolean quitMenu() {
-        return presenter.quit();
+        return this.getPresenter().quit();
     }
 }

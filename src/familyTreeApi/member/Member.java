@@ -1,7 +1,5 @@
 package familyTreeApi.member;
 
-import familyTreeApi.person.Person;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,57 +32,47 @@ public interface Member {
     int countChildren();
 
     public default String print() {
-        if (this != null) {
-            return this.getName().stream().map(Object::toString).collect(Collectors.joining(" "));
-        } else {
-            return "";
-        }
+        return this.getName().stream().map(Object::toString).collect(Collectors.joining(" "));
     }
 
     public default String printInfo() {
-        if (this != null) {
-            StringBuilder result = new StringBuilder();
-            result.append(this.printWithBornDate() + "\n");
-            if (this.getMarried() != null) {
-                if (this.getGender().equals(true)) {
-                    result.append("Жена ");
-                } else {
-                    result.append("Муж ");
-                }
-                result.append(this.getMarried().printWithBornDate()+"\n");
+        StringBuilder result = new StringBuilder();
+        result.append(this.printAllInfo() + "\n");
+        if (this.getMarried() != null) {
+            if (this.getGender().equals(true)) {
+                result.append("Жена ");
+            } else {
+                result.append("Муж ");
             }
-            if (this.getChildren().size() > 0) {
-                for (Member member : this.getChildren()) {
-                    if (member.getGender().equals(true)){
-                        result.append("Сын ");
-                    }else{
-                        result.append("Дочь ");
-                    }
-                    result.append(member.printWithBornDate() +"\n");
-                }
-            }
-            if (this.getParents().size() > 0) {
-                for (Member member : this.getParents()) {
-                    if (member.getGender().equals(true)){
-                        result.append("Отец ");
-                    }else{
-                        result.append("Мать ");
-                    }
-                    result.append(member.printWithBornDate() +"\n");
-                }
-            }
-            return result.toString();
-        } else {
-            return "";
+            result.append(this.getMarried().printAllInfo() + "\n");
         }
+        if (this.getChildren().size() > 0) {
+            for (Member member : this.getChildren()) {
+                if (member.getGender().equals(true)) {
+                    result.append("Сын ");
+                } else {
+                    result.append("Дочь ");
+                }
+                result.append(member.printAllInfo() + "\n");
+            }
+        }
+        if (this.getParents().size() > 0) {
+            for (Member member : this.getParents()) {
+                if (member.getGender().equals(true)) {
+                    result.append("Отец ");
+                } else {
+                    result.append("Мать ");
+                }
+                result.append(member.printAllInfo() + "\n");
+            }
+        }
+        return result.toString();
     }
 
-    public default String printWithBornDate() {
+    public default String printAllInfo() {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return this.print() + " " + dateFormat.format(this.getBornDate().getTime());
+        return this.print() + ", дата рождения: " + dateFormat.format(this.getBornDate().getTime()) + ", раса (порода): " + this.getKind();
     }
 
     void setName(String name);
-
-
 }

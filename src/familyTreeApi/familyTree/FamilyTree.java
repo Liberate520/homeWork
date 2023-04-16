@@ -19,11 +19,6 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
         this.members = new ArrayList<>();
     }
 
-//    public FamilyTree(E member) {
-//        this(member.getNameString(), member.getClass().toString());
-//        this.addMember(member, true);
-//    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -43,10 +38,6 @@ public class FamilyTree<E extends Member> implements Serializable, FTree<E> {
     public List<E> getMembers() {
         return this.members;
     }
-
-//    public Type getClassE() {
-//        return this.getClass().getGenericSuperclass();
-//    }
 
     private String getSpace(String str) {
         StringBuilder result = new StringBuilder();

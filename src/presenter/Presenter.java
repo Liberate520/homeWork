@@ -44,7 +44,7 @@ public class Presenter {
         return true;
     }
 
-    public boolean save(String fileName){
+    public boolean save(String fileName) {
         service.save(fileName);
         return true;
     }
