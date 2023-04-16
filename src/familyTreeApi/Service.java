@@ -110,14 +110,15 @@ public class Service {
         return currentEditingFTree.findMember(name) != null;
     }
 
-    public void sortByFirstName() {
-        for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
-            this.sortByFirstName(familyTree);
+    public boolean sortByFirstName() {
+        if (currentEditingFTree == null) {
+            for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
+                this.sortByFirstName(familyTree);
+            }
+        } else {
+            this.sortByFirstName((FamilyTree<Member>) currentEditingFTree);
         }
-    }
-
-    public void sortByFirstName(String familyTreeName) {
-        this.sortByFirstName(this.findFamilyTree(familyTreeName));
+        return true;
     }
 
     private void sortByFirstName(FamilyTree<Member> familyTree) {
@@ -129,14 +130,15 @@ public class Service {
         }
     }
 
-    public void sortByLastName() {
-        for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
-            this.sortByLastName(familyTree);
+    public boolean sortByLastName() {
+        if (currentEditingFTree == null) {
+            for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
+                this.sortByLastName(familyTree);
+            }
+        } else {
+            this.sortByLastName((FamilyTree<Member>) currentEditingFTree);
         }
-    }
-
-    public void sortByLastName(String familyTreeName) {
-        this.sortByLastName(this.findFamilyTree(familyTreeName));
+        return true;
     }
 
     private void sortByLastName(FamilyTree<Member> familyTree) {
@@ -148,14 +150,15 @@ public class Service {
         }
     }
 
-    public void sortByGender() {
-        for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
-            this.sortByGender(familyTree);
+    public boolean sortByGender() {
+        if (currentEditingFTree == null) {
+            for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
+                this.sortByGender(familyTree);
+            }
+        } else {
+            this.sortByGender((FamilyTree<Member>) currentEditingFTree);
         }
-    }
-
-    public void sortByGender(String familyTreeName) {
-        this.sortByGender(this.findFamilyTree(familyTreeName));
+        return true;
     }
 
     private void sortByGender(FamilyTree<Member> familyTree) {
@@ -167,14 +170,15 @@ public class Service {
         }
     }
 
-    public void sortByBornDate() {
-        for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
-            this.sortByBornDate(familyTree);
+    public boolean sortByBornDate() {
+        if (currentEditingFTree == null) {
+            for (FamilyTree<Member> familyTree : this.getTreeOfTrees()) {
+                this.sortByBornDate(familyTree);
+            }
+        } else {
+            this.sortByBornDate((FamilyTree<Member>) currentEditingFTree);
         }
-    }
-
-    public void sortByBornDate(String familyTreeName) {
-        this.sortByBornDate(this.findFamilyTree(familyTreeName));
+        return true;
     }
 
     private void sortByBornDate(FamilyTree<Member> familyTree) {
@@ -214,5 +218,10 @@ public class Service {
     public TreeOfTrees<FamilyTree> read(String fileName) {
         FileHandler<TreeOfTrees> fileHandler = new FileHandler<>();
         return fileHandler.read(fileName);
+    }
+
+    public boolean quit() {
+        currentEditingFTree = null;
+        return false;
     }
 }

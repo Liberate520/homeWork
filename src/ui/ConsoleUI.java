@@ -124,6 +124,22 @@ public class ConsoleUI implements View {
         return presenter.addMarried(Married1Name, Married2Name, isMarried);
     }
 
+    public boolean SortBy() {
+        print(menu. ());
+        String nMenuStr = scan();
+        if (isCanBeInt(nMenuStr)) {
+            int nMenu = Integer.parseInt(nMenuStr);
+            if (0 < nMenu && nMenu <= menu.getSizeEditTreeCommands()) {
+                return menu.executeEditTreeCommands(nMenu);
+            } else {
+                print("Введен неверный пункт меню.");
+            }
+        } else {
+            print("Введено что-то отличное от пунктов меню.");
+        }
+        return true;
+    }
+
     private String requestName() {
         print("Введите имя нового члена семьи:");
         return scan();
@@ -268,5 +284,13 @@ public class ConsoleUI implements View {
     @Override
     public void print(String text) {
         System.out.println(text);
+    }
+
+    public boolean sortByFirstName() {
+        return presenter.sortByFirstName();
+    }
+
+    public boolean quitMenu() {
+        return presenter.quit();
     }
 }

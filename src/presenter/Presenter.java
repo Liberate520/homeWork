@@ -68,4 +68,24 @@ public class Presenter {
         view.print(service.printMemberInfo(name));
         return true;
     }
+
+    public boolean sortByFirstName() {
+        return service.sortByFirstName();
+    }
+
+    public boolean sortByLastName() {
+        return service.sortByLastName();
+    }
+
+    public boolean sortByGender() {
+        return service.sortByGender();
+    }
+
+    public boolean sortByBornDate() {
+        return service.sortByBornDate();
+    }
+
+    public boolean quit() {
+        return service.quit();
+    }
 }
