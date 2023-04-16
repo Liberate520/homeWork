@@ -1,9 +1,6 @@
-package famyilyTree;
+package model.famyilyTree;
 
-import human.Human;
-import human.HumanComparatorByID;
-import human.HumanComparatorByLastName;
-import human.HumanIterator;
+import model.human.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,12 +22,15 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     }
 
     // Добавить новый объект Human в лист дерева
-    public void add(T human) {
+    public boolean add(T human) {
+        if (human == null) { return false; }
         if (!humanList.contains(human)) {
             this.humanList.add(human);
             if (human.getFather() != null) human.getFather().addChild(human);
             if (human.getMother() != null) human.getMother().addChild(human);
+            return true;
         }
+        return false;
     }
 
     public T getById(int id) {
@@ -47,6 +47,9 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
         humanList.sort(new HumanComparatorByID());
     }
 
+    public void sortByFirstName() {
+        humanList.sort(new HumanComparatorByFirstName());
+    }
     public void sortByLastName() {
         humanList.sort(new HumanComparatorByLastName());
     }
@@ -70,4 +73,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
         FamilyTree other = (FamilyTree) obj;
         return this.humanList.equals(other.humanList);
     }
+
+    //public Iterator<T> iterator() { return new FamilyTreeIterator<T>(humanList); }
+
 }

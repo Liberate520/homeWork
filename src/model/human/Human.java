@@ -1,11 +1,14 @@
-package human;
+package model.human;
+
+import model.famyilyTree.TreeNode;
+import model.human.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeNode<Human> {
     private int id;
     private String firstName;
     private String lastName;
@@ -31,18 +34,6 @@ public class Human implements Serializable {
         this.childrens = new ArrayList<>();
     }
 
-//    public Human(int id, String firstName, String lastName, Gender gender,
-//                 LocalDate dateBirth) {
-//        this.id = id;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.gender = gender;
-//        this.dateBirth = dateBirth;
-//        this.dateDeath = null;
-//        this.father = null;
-//        this.mother = null;
-//        this.childrens = new ArrayList<>();
-//    }
     public Human(int id, String firstName, String lastName, Gender gender,
                  LocalDate dateBirth, Human father, Human mother) {
         this(id, firstName, lastName, gender, dateBirth, null,
@@ -53,6 +44,10 @@ public class Human implements Serializable {
                  LocalDate dateBirth) {
         this(id, firstName, lastName, gender, dateBirth, null,
                 null, null);
+    }
+
+    public Human(int id, String firstName, String lastName, Gender gender) {
+        this(id, firstName, lastName, gender, null);
     }
 
     public boolean addChild(Human child) {

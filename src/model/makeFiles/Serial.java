@@ -1,9 +1,11 @@
-import famyilyTree.FamilyTree;
+package model.makeFiles;
+
+import model.famyilyTree.FamilyTree;
 
 import java.io.*;
 
 public class Serial implements MakeFiles {
-    public void saveToFile (FamilyTree tree, String filename) {
+    public boolean saveToFile (FamilyTree tree, String filename) {
         try {
             FileOutputStream fileOut = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -11,13 +13,15 @@ public class Serial implements MakeFiles {
             out.close();
             fileOut.close();
             System.out.println("Object serialized and saved to file " + filename);
+            return true;
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
-    public FamilyTree loadFromFile (String filename) {
+    public FamilyTree readFromFile (String filename) {
         FamilyTree tree = null;
         try {
             FileInputStream fileIn = new FileInputStream(filename);
