@@ -75,5 +75,9 @@ public class Presenter {
     public void sortByName() {
         service.sortByName();
     }
+
+    public void sortById() {
+        service.sortById();
+    }
 }
 

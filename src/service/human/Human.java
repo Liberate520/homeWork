@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Human implements Serializable, Comparable<Human> {
     private String name;
+    private int id;
     private int yearBirth;
     private int yearDeath;
     private Gender gender;
@@ -25,6 +26,14 @@ public class Human implements Serializable, Comparable<Human> {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public void setName(String name) {
@@ -110,6 +119,9 @@ public class Human implements Serializable, Comparable<Human> {
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
+        sb.append(" id: ");
+        sb.append(getId());
+        sb.append(", ");
         sb.append("Имя: ");
         sb.append(getName());
         sb.append(", ");
@@ -141,13 +153,12 @@ public class Human implements Serializable, Comparable<Human> {
         return human.getName().equals(getName());
 
     }
-
     public String toString() {
-        return getName();
+        return  getName();
     }
 
     @Override
     public int compareTo(Human o) {
-        return name.compareTo(o.getName());
+        return o.getId();
     }
 }

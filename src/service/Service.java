@@ -10,6 +10,7 @@ public class Service {
     public Service() {
         familyTree = new FamilyTree();
         fileHandler = new FileHandler();
+
     }
 
     public boolean addMember(String name, String FatherName, String MatherName) {
@@ -76,5 +77,8 @@ public class Service {
         return false;
     }
 
+    public void sortById() {
+        familyTree.sortById();
+    }
 }
 

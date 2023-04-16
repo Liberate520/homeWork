@@ -1,9 +1,11 @@
 package service;
 
 import service.comporators.HumanComporatorByChild;
+import service.comporators.HumanComporatorById;
 import service.comporators.HumanComporatorByName;
 import service.human.Human;
 import service.human.HumanIterator;
+import service.human.IdGenerator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     private List<E> familyTree;
+    private IdGenerator idGenerator = new IdGenerator();
 
     public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
@@ -26,10 +29,11 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     }
 
     public boolean addMember(E newHuman) {
-        if ((newHuman == null) || familyTree.contains(newHuman)) {
+        if ((newHuman == null) || (newHuman.getId() > idGenerator.getId())) {
             return false;
         }
         this.familyTree.add(newHuman);
+        newHuman.setId(idGenerator.idLast());
         if (newHuman.getFather() != null) {
             newHuman.getFather().addChild(newHuman);
         }
@@ -79,6 +83,11 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     public void sortByChild() {
         familyTree.sort(new HumanComporatorByChild());
     }
+
+    public void sortById() {
+        familyTree.sort(new HumanComporatorById());
+    }
+
 }
 
 

@@ -34,7 +34,7 @@ public class Console implements View {
             key = scn.nextInt();
             switch (key) {
                 case 0:
-                    presenter.sortByName();
+                    presenter.sortById();
                     print(presenter.getInfo());
                     break;
                 case 2:
