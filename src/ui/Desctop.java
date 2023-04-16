@@ -48,8 +48,9 @@ public class Desctop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                presenter.addHuman(family.getText(), name.getText());
-                //presenter.addFamily(family.getText());//при нажатии на кнопу в презентер передается информация из текстового поля
+                Human human = new Human(family.getText(), name.getText());
+                presenter.addHuman(human);
+                //при нажатии на кнопу в презентер передается информация из текстового поля
             }
         });
 

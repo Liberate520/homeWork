@@ -19,8 +19,9 @@ public class Service implements Service1{
     }
 
     @Override
-    public void addHuman(String family, String name){
-        tree.addHuman(new Human(family, name));
+    public void addHuman(Human human){
+       // tree.addHuman(new Human(family, name));
+        tree.addHuman(human);
 
     }
 

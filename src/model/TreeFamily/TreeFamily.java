@@ -20,35 +20,40 @@ public class TreeFamily <E extends Human> implements Iterable<E>, Serializable{/
     }
 
     public void addHuman(E human) {
+        list.add(human);
 
-        if (!list.contains(human)) {
-            list.add(human);
-            if (human.getFather() != null) {
-                human.getFather().addChildrenList(human);
-            }
-            if (human.getMother() != null) {
-                human.getMother().addChildrenList(human);
-            }
-        }
+//        if (!list.contains(human)) {
+//            list.add(human);
+//            if (human.getFather() != null) {
+//                human.getFather().addChildrenList(human);
+//            }
+//            if (human.getMother() != null) {
+//                human.getMother().addChildrenList(human);
+//            }
+//        }
     }
 
 
-        public boolean add (E human){
-        if (human== null) {
+        public boolean add (E human) {
+//            list.add(human);
+//            return true;
+//        }
+//
+            if (human == null) {
+                return false;
+            }
+            if (!list.contains(human)) {
+                list.add(human);
+                if (human.getFather() != null) {
+                    human.getFather().addChildrenList(human);
+                }
+                if (human.getMother() != null) {
+                    human.getMother().addChildrenList(human);
+                }
+                return true;
+            }
             return false;
         }
-        if (!list.contains(human)){
-            list.add(human);
-            if (human.getFather() != null){
-                human.getFather().addChildrenList(human);
-            }
-            if (human.getMother() != null){
-                human.getMother().addChildrenList(human);
-            }
-            return true;
-        }
-        return false;
-    }
 
 //    public void addHuman(model.human.Human model.human) {
 

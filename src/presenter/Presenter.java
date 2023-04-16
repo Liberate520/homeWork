@@ -2,6 +2,7 @@ package presenter;
 
 import model.Service;
 import model.TreeFamily.TreeFamily;
+import model.human.Human;
 import ui.View;
 
 public class Presenter {
@@ -26,9 +27,9 @@ public class Presenter {
 //        view.print(answerFamily);
 //    }
 
-    public void addHuman(String family, String name) {
+    public void addHuman(Human human) {
 
-        service.addHuman(family,name);
+        service.addHuman(human);
        // view.print();
     }
 

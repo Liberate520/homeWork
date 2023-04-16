@@ -48,23 +48,23 @@ public class Main {
 //        model.TreeFamily treeOut1 = (model.TreeFamily) objectInputStream.readObject();
 //        objectInputStream.close();
 
-        System.out.println();
-        System.out.println(treeOut);
-
-        System.out.println();
-
-        Service tr = new Service(tree);
-        tr.sortByFamily();
-        for (Human human: tree){
-            System.out.println(human);
-        }
-        System.out.println();
-
-
-        tr.sortByName();
-        for (Human human: tree) {
-            System.out.println(human);
-        }
+//        System.out.println();
+//        System.out.println(treeOut);
+//
+//        System.out.println();
+//
+//        Service tr = new Service(tree);
+//        tr.sortByFamily();
+//        for (Human human: tree){
+//            System.out.println(human);
+//        }
+//        System.out.println();
+//
+//
+//        tr.sortByName();
+//        for (Human human: tree) {
+//            System.out.println(human);
+//        }
 
         View view = new Console();
         Service service = new Service(tree);

@@ -28,20 +28,27 @@ public class Console implements View {
 
     @Override
     public void start() {
+         while (true) {
+            int num = scanMenu();
+            switch (num) {
+                case 1:{
+                    String name = scanName();
+                    String family = scanFamily();
+                    Human human = new Human(family, name);
+                    presenter.addHuman(human);
+                    print(human);}
+                case 2: {
+                    printTree(presenter.getTree());
+                }
+                case 3:{
+                    break;
+                }
+            }
 
-        int num = scanMenu();
-        switch (num){
-            case 1:
-                String name = scanName();
-                String family = scanFamily();
-                presenter.addHuman(family,name);
-                Human human = new Human(family,name);
-                print(human);
-            case 2:
-                printTree(presenter.getTree());
-                
         }
-        
+//        scannerMenu.close();
+//        scannerName.close();
+//        scannerFamily.close();
 
 
 
@@ -49,10 +56,12 @@ public class Console implements View {
 
     private int scanMenu() {
         System.out.println("Нажмите 1, чтобы добавить человека в дерево\n" +
-                "или 2, чтобы просмотреть генеалогическое древо");
+                "или 2, чтобы просмотреть генеалогическое древо\n"+
+                "3  - чтобы выйти");
         return scannerMenu.nextInt();
-        
-        
+
+
+
     }
 
     private String scanName() {
