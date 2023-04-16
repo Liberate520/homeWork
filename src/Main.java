@@ -1,6 +1,9 @@
-import Human.Human;
-import tree.FamilyTree;
-
+import model.Human.Human;
+import model.FamilyTreeService;
+import model.tree.FamilyTree;
+import view.Console;
+import view.View;
+import presenter.Presenter;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -33,30 +36,34 @@ public class Main {
         tree.add(human7);
         tree.add(human8);
 
-        System.out.println(tree);
-        tree.searchForSurnameAndName("Иванова", "Аня");// вывод данного человека и его детей
+//        System.out.println(tree);
+//        tree.searchForSurnameAndName("Иванова", "Аня");// вывод данного человека и его детей
 
-        Service srv = new Service(tree);
-        srv.save(tree);
-        srv.read();
+        FamilyTreeService srv = new FamilyTreeService(tree);
+//        srv.save(tree);
+//        srv.read();
 
-        for (Object human: tree) {
-            System.out.println(human);
-        }
+//        for (Object human: tree) {
+//            System.out.println(human);
+//        }
+//
+//        srv.sortByName();
+//
+//        System.out.println("\nСортировка по имени:\n");
+//
+//        for (Object human: tree) {
+//            System.out.println(human);
+//        }
+//
+//        System.out.println("\nСортировка по дате рождения:\n");
+//        srv.sortByDateOfBirht();
+//
+//        for (Object human: tree) {
+//            System.out.println(human);
+//        }
 
-        srv.sortByName();
-
-        System.out.println("\nСортировка по имени:\n");
-
-        for (Object human: tree) {
-            System.out.println(human);
-        }
-
-        System.out.println("\nСортировка по дате рождения:\n");
-        srv.sortByDateOfBirht();
-
-        for (Object human: tree) {
-            System.out.println(human);
-        }
+        View view = new Console();
+        new Presenter(view,srv);
+        view.start();
     }
 }
