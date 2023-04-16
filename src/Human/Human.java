@@ -142,7 +142,7 @@ public class Human extends Subject<Human> implements Serializable  {
         return status;
     }
 
-    public void setStatus(String Status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

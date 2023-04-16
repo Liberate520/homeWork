@@ -1,11 +1,13 @@
 package FamilyTree;
 
+import Human.Human;
 import Human.Subject;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class FamilyTree <E extends Subject<E>> implements Iterable<E>, Serializable {
+public class FamilyTree<E extends Subject<E>> implements Iterable<E>, Serializable {
     private List<E> familyTree;
 
     public List<E> getFamilyTree() {
@@ -48,16 +50,16 @@ public class FamilyTree <E extends Subject<E>> implements Iterable<E>, Serializa
         return null;
     }
 
-    /*public HashSet<Human.Human> getAllChildren(String name, String surname) {
-        Human.Human parent = getHuman(name, surname);
-        HashSet<Human.Human> children = new HashSet<>();
-        for (Human.Human h : this.familyTree) {
+    public HashSet<E> getAllChildren(String name, String surname) {
+        E parent = getHuman(name, surname);
+        HashSet<E> children = new HashSet<>();
+        for (E h : this.familyTree) {
             if ((h.getMother() == parent) || (h.getFather() == parent)) {
                 children.add(h);
             }
         }
         return children;
-    }*/
+    }
 
     public E getOldest() {
         LocalDate dateDown = LocalDate.MAX;
@@ -97,4 +99,8 @@ public class FamilyTree <E extends Subject<E>> implements Iterable<E>, Serializa
         return new HumanIterator<>(familyTree);
     }
 
+    public boolean containsOf(String name, String surname) {
+        if (familyTree.contains(this.getHuman(name, surname))) return true;
+        else return false;
+    }
 }
