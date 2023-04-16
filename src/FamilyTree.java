@@ -2,6 +2,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
+    List<Human> people = new ArrayList<>();
+
+    public void addHuman(Human human){
+        people.add(human);
+    }
+    public Human getHuman(String firstName, String lastName, String birthday){
+        for (Human human: people
+        ) {
+            if (human.getFirstName().equals(firstName) && human.getLastName().equals(lastName) && human.getBirthday().equals(birthday)){
+                return human;
+            }
+        }
+        return null;
+    }
+
     public Human getMother(Human human){
         return human.getMother();
     }
@@ -10,7 +25,7 @@ public class FamilyTree {
         return human.getFather();
     }
 
-    public List<Human> getBrothers(Human human, List<Human> people){
+    public List<Human> getBrothers(Human human){
         List<Human> brothers = new ArrayList<>();
         Human mother = human.getMother();
         Human father = human.getFather();
@@ -23,7 +38,7 @@ public class FamilyTree {
         return brothers;
     }
 
-    public List<Human> getSisters(Human human, List<Human> people){
+    public List<Human> getSisters(Human human){
         List<Human> sisters = new ArrayList<>();
         Human mother = human.getMother();
         Human father = human.getFather();

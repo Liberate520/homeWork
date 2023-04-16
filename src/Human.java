@@ -77,4 +77,16 @@ public class Human {
     public String getFullName(){
         return this.firstName + " " + this.lastName;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
 }
