@@ -2,8 +2,6 @@ package service;
 
 import service.human.Human;
 
-import java.io.Serializable;
-
 public class Service {
     private FamilyTree<Human> familyTree;
 
