@@ -12,8 +12,8 @@ public class HumanComporatorByChild implements Comparator<Human> {
             return 0;
         } else if (o1.getChildrenList().size() > o2.getChildrenList().size()) {
             return -1;
+        } else {
+            return 1;
         }
-        else{
-            return 1;}
     }
 }
