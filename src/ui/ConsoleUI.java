@@ -125,12 +125,12 @@ public class ConsoleUI implements View {
     }
 
     public boolean SortBy() {
-        print(menu. ());
+        print(menu.printSortByCommands());
         String nMenuStr = scan();
         if (isCanBeInt(nMenuStr)) {
             int nMenu = Integer.parseInt(nMenuStr);
-            if (0 < nMenu && nMenu <= menu.getSizeEditTreeCommands()) {
-                return menu.executeEditTreeCommands(nMenu);
+            if (0 < nMenu && nMenu <= menu.getSizeSortByCommands()) {
+                return menu.executeSortByCommands(nMenu);
             } else {
                 print("Введен неверный пункт меню.");
             }
@@ -288,6 +288,18 @@ public class ConsoleUI implements View {
 
     public boolean sortByFirstName() {
         return presenter.sortByFirstName();
+    }
+
+    public boolean sortByLastName() {
+        return presenter.sortByLastName();
+    }
+
+    public boolean sortByGender() {
+        return presenter.sortByGender();
+    }
+
+    public boolean sortByBornDate() {
+        return presenter.sortByBornDate();
     }
 
     public boolean quitMenu() {

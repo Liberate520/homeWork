@@ -5,7 +5,7 @@ import ui.ConsoleUI;
 public class SortByFirstName extends Command {
     public SortByFirstName(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Сортировка по первому значению в имени: ";
+        description = "По первому значению в имени";
     }
 
     @Override

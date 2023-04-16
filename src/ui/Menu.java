@@ -17,7 +17,7 @@ public class Menu {
         mainCommands.add(new RequestLoad(consoleUI));
         mainCommands.add(new RequestSave(consoleUI));
         mainCommands.add(new RequestPrint(consoleUI));
-        mainCommands.add(new SortBys(consoleUI));
+        mainCommands.add(new SortBy(consoleUI));
         mainCommands.add(new Quit(consoleUI));
 
         editTreeCommands = new ArrayList<>();
