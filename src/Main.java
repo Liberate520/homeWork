@@ -15,11 +15,7 @@ import ui.View;
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree<Person> targariens = new FamilyTree();
-        FamilyTree targariensThrone = new FamilyTree();
-        Service service = new Service(targariensThrone);
-//        Service service = new Service();
-        FamilyTree<Dragon> targarienDragons = new FamilyTree<>();
+        FamilyTree<Person> targarienTree = new FamilyTree<>();
 
         Person personA = new Person("JEHAELIS", "Targarien",
                 "17.05.134", "24.12.200", Gender.male);
@@ -47,33 +43,22 @@ public class Main {
         Dragon dragonC = new Dragon("MARAXES", "Dragon",
                 "24.03.161", "18.12.401", Gender.male);
 
-        targariens.addPerson(personA);
-        targariens.addPerson(personB);
-        targariens.addPerson(personC);
-        targariens.addPerson(personD);
-        targariens.addPerson(personE);
-        targariens.addPerson(personF);
-        targariens.addPerson(personG);
-        targariens.addPerson(personH);
-        targariens.addPerson(personI);
+        targarienTree.addPerson(personA);
+        targarienTree.addPerson(personB);
+        targarienTree.addPerson(personC);
+        targarienTree.addPerson(personD);
+        targarienTree.addPerson(personE);
+        targarienTree.addPerson(personF);
+        targarienTree.addPerson(personG);
+        targarienTree.addPerson(personH);
+        targarienTree.addPerson(personI);
 
-        service.addTargarien(personA);
-        service.addTargarien(personB);
-        service.addTargarien(personC);
-        service.addTargarien(personD);
-        service.addTargarien(personE);
-        service.addTargarien(personF);
-        service.addTargarien(personG);
-        service.addTargarien(personH);
-        service.addTargarien(personI);
+        targarienTree.addPerson(dragonA);
+        targarienTree.addPerson(dragonB);
+        targarienTree.addPerson(dragonC);
 
-        targarienDragons.addPerson(dragonA);
-        targarienDragons.addPerson(dragonB);
-        targarienDragons.addPerson(dragonC);
-
+        Service service = new Service(targarienTree);
         service.setWritable(new DataRepository());
-        service.dataOutput();
-        service.deserialization();
 
         View view = new Console();
         Presenter presenter = new Presenter(view, service);

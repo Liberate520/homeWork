@@ -1,5 +1,8 @@
 package ui;
 
+import com.sun.tools.javac.Main;
+import model.Dragons.Dragon;
+import model.People.Gender;
 import model.People.Person;
 import presenter.Presenter;
 
@@ -11,8 +14,6 @@ public class Console implements View{
     private boolean work;
     private Menu menu;
 
-//
-
     public Console() {
         scanner = new Scanner(System.in);
         work = true;
@@ -21,7 +22,6 @@ public class Console implements View{
 
     @Override
     public void print(String text) {
-//        scanner = new Scanner(System.in);
         System.out.println(text);
     }
 
@@ -47,18 +47,13 @@ public class Console implements View{
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
-
     public void finish() {
         System.out.println("End!");
         work = false;
     }
-
     public void fail() {
         System.out.println("Wrong input!");
     }
-//    public String addTargarien(){
-//        return presenter.addTargarien(new Person());
-//    }
     public void getTreeInfo(){
         presenter.getTreeInfo();
     }
@@ -80,4 +75,7 @@ public class Console implements View{
     public void sortByGender(){
         presenter.sortByGender();
     }
+    public void dataOutput(){presenter.dataOutput();}
+    public void deserialization(){presenter.deserialization();}
+    public void getInfo(){presenter.getInfo();}
 }

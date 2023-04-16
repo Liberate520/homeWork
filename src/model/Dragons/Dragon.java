@@ -1,7 +1,6 @@
 package model.Dragons;
 
 import model.People.Gender;
-import model.People.LivingBeings;
 import model.People.Person;
 
 public class Dragon extends Person {

@@ -1,13 +1,12 @@
 package model.Tree;
 
 import model.Data.DataRepository;
-import model.People.LivingBeings;
 import model.People.Person;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<E extends TreeInterface> extends DataRepository implements
+public class FamilyTree<E extends TreeInterface> implements
         Serializable, Iterable<E> {
     public List<E> targariens;
 
@@ -47,7 +46,7 @@ public class FamilyTree<E extends TreeInterface> extends DataRepository implemen
                 searched.add(item.getInfo());
             }
         }
-        return searched;
+        return Collections.singletonList(searched.toString());
     }
 
     public List<String> searchPersonDescendance(){
@@ -58,7 +57,7 @@ public class FamilyTree<E extends TreeInterface> extends DataRepository implemen
         List<String> searched = new ArrayList<>();
         for (E item: targariens) {
             if (item.getFirstName().equals(nameOfAsc)){
-                searched.add(item.getDescendantInfo());
+                searched.add(item.getDescendantInfo().toString());
             }
         }
         return Collections.singletonList(searched.toString());

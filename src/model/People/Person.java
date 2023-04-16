@@ -1,13 +1,9 @@
 package model.People;
 
-import model.Data.DataRepository;
 import model.Tree.TreeInterface;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class Person implements
@@ -82,7 +78,8 @@ public class Person implements
         this.father = null;
         descendants = new ArrayList<>();
     }
-//    @Override
+
+    //    @Override
     public boolean addDescendants(Person descendant){
         if (!descendants.contains(descendant)){
             descendants.add(descendant);
@@ -150,6 +147,7 @@ public class Person implements
         return gender;
     }
 
+//    @Override
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("First name: ");
@@ -205,7 +203,7 @@ public class Person implements
         return descendants;
     }
 
-    public String getDescendantInfo(){
+    public List<String> getDescendantInfo(){
         StringBuilder chld = new StringBuilder();
         chld.append("Descendants: ");
         if (descendants.size() != 0){
@@ -221,7 +219,7 @@ public class Person implements
         }else {
             chld.append("no descendants!");
         }
-        return chld.toString();
+        return Collections.singletonList(chld.toString());
     }
 
     @Override
@@ -238,7 +236,6 @@ public class Person implements
 
     @Override
     public String toString() {
-
             return "Firstname: " + firstName +
                     "\nLastname: " + lastName +
                     "\nbirth date -'" + birthDate + '\'' +
@@ -246,7 +243,6 @@ public class Person implements
                     "\nID - " + id;
 
     }
-
     @Override
     public int compareTo(Person o) {
         return firstName.compareTo(o.firstName);

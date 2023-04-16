@@ -34,7 +34,7 @@ public interface TreeInterface<E> {
 
     List<Person> getDescendants();
 
-    String getDescendantInfo();
+    List<Person> getDescendantInfo();
 
     @Override
     boolean equals(Object obj);
