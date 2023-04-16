@@ -25,8 +25,8 @@ public class Console implements View {
         while (key != 6) {
             print(" Введите:\n " +
                     "0 - Вывести список членов семьи\n " +
-                    "1 - Добавить члена семьи\n " +
-                    "2 - Загрузить семью из файла\n " +
+                    "1 - Загрузить семью из файла\n " +
+                    "2 - Добавить члена семьи\n " +
                     "3 - Вывести детей члена семьи\n " +
                     "4 - Найти члена семьи по имени \n " +
                     "5 - Изменить данные члена семьи \n " +
@@ -37,10 +37,10 @@ public class Console implements View {
                     presenter.sortByName();
                     print(presenter.getInfo());
                     break;
-                case 1:
+                case 2:
                     enterPersonData();
                     break;
-                case 2:
+                case 1:
                     presenter.load("family.txt");
                     break;
 
