@@ -1,41 +1,27 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     public String name;
-    private Map<String, Integer> date_of_birth = new HashMap<>();
+    private Map<String, Integer> date_of_birth = new TreeMap<>();
     private Integer day;
     private Integer month;
     private Integer year;
     private Gender gender;
     private ArrayList<Human> children;
-    private Human father;
-    private Human mother;
+    private ArrayList<Human> parents;
     private Human In_marriage_with;
 
-    public Human(String name, Integer day, Integer month, Integer year, Gender gender,
-                 Human father, Human mother, Human Human) {
+
+    public Human(String name, Integer day, Integer month, Integer year, Gender gender) {
         this.children = new ArrayList<>();
+        this.parents = new ArrayList<>();
         this.name = name;
         this.gender = gender;
         this.date_of_birth.put("day", day);
         this.date_of_birth.put("month", month);
         this.date_of_birth.put("year", year);
-        this.father = father;
-        this.mother = mother;
-        this.In_marriage_with = Human;
-    }
-
-
-    public Human(String name, Integer day, Integer month, Integer year, Gender gender) {
-        this(name, day, month, year, gender, null, null, null);
-    }
-
-    public Human(String name, Integer day, Integer month, Integer year, Gender gender, Human human) {
-        this(name, day, month, year, gender, null, null, human);
-    }
-
-    public Human(String name, Integer day, Integer month, Integer year, Gender gender, Human father, Human mother) {
-        this(name, day, month, year, gender, father, mother, null);
+        this.In_marriage_with = null;
     }
 
     public String getName() {
@@ -94,20 +80,17 @@ public class Human {
         this.children.add(children);
     }
 
-    public Human getFather() {
-        return father;
+    public ArrayList<Human> getParents() {
+        return parents;
     }
 
-    public void setFather(Human father) {
-        this.father = father;
+    public void setParents(Human parent) {
+        parents.add(parent);
     }
 
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
+    public void setParents(Human parent1, Human parent2) {
+        parents.add(parent1);
+        parents.add(parent2);
     }
 
     public Human getIn_marriage_with() {
@@ -115,7 +98,7 @@ public class Human {
     }
 
     public void setIn_marriage_with(Human in_marriage_with) {
-        In_marriage_with = in_marriage_with;
+        this.In_marriage_with = in_marriage_with;
     }
 
     @Override

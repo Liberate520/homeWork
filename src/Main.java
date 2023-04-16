@@ -1,77 +1,63 @@
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree Romanovs = new FamilyTree();
-        Human Nikolai_II = new Human("Nikolai_II", 18,5,1868, Gender.Male);
-        Human Aleksandra = new Human("Aleksandra Fedorovna", 11, 2, 1899, Gender.Female,
-                Nikolai_II);
+        Family Romanovs = new Family();
+        Human Nikolai_II = new Human( "Nikolai_II", 18,5,1868, Gender.Male);
+        Human Aleksandra = new Human("Aleksandra Fedorovna", 6, 6, 1872, Gender.Female);
+        Human Olga = new Human( "Olga", 15,11,1895, Gender.Female);
+        Human Aleksei = new Human("Aleksei", 12,8,1904, Gender.Male);
+        Human Maria = new Human("Maria", 26,6,1899, Gender.Female);
+        Human Tatyana = new Human("Tatyana", 10,6,1897, Gender.Female);
+        Human Anastasia = new Human("Anastasia", 18,6,1901, Gender.Female);
+
         Romanovs.addMember(Nikolai_II);
         Romanovs.addMember(Aleksandra);
-        Human Olga = new Human("Olga", 15,11,1895, Gender.Female, Nikolai_II, Aleksandra);
-        Human Aleksei = new Human("Aleksei", 12,8,1904, Gender.Male, Nikolai_II, Aleksandra);
-        Human Maria = new Human("Maria", 26,6,1899, Gender.Female, Nikolai_II, Aleksandra);
-        Human Tatyana = new Human("Tatyana", 10,6,1897, Gender.Female, Nikolai_II, Aleksandra);
-        Human Anastasia = new Human("Anastasia", 18,6,1901, Gender.Female, Nikolai_II,
-                Aleksandra);
-        Nikolai_II.setChildren(Olga);
-        Nikolai_II.setChildren(Aleksei);
-        Nikolai_II.setChildren(Maria);
-        Nikolai_II.setChildren(Tatyana);
-        Nikolai_II.setChildren(Anastasia);
-        Aleksandra.setChildren(Olga);
-        Aleksandra.setChildren(Aleksei);
-        Aleksandra.setChildren(Maria);
-        Aleksandra.setChildren(Tatyana);
-        Aleksandra.setChildren(Anastasia);
-        Aleksei.setFather(Nikolai_II);
-        Aleksei.setMother(Aleksandra);
-        Olga.setFather(Nikolai_II);
-        Olga.setMother(Aleksandra);
-        Maria.setFather(Nikolai_II);
-        Maria.setMother(Aleksandra);
-        Tatyana.setFather(Nikolai_II);
-        Tatyana.setMother(Aleksandra);
-        Anastasia.setFather(Nikolai_II);
-        Anastasia.setMother(Aleksandra);
-        Nikolai_II.setIn_marriage_with(Aleksandra);
-        Aleksandra.setIn_marriage_with(Nikolai_II);
+        Romanovs.setMarriage(Nikolai_II,Aleksandra);
+        Romanovs.setChildren(Nikolai_II,Olga);
+        Romanovs.setChildren(Nikolai_II,Tatyana);
+        Romanovs.setChildren(Nikolai_II,Anastasia);
+        Romanovs.setChildren(Nikolai_II,Aleksei);
+        Romanovs.setChildren(Nikolai_II,Maria);
         System.out.println(Nikolai_II);
+        System.out.println("_______________________");
+
         List<Human> children = Romanovs.getChildren(Aleksandra);
         System.out.println("мать: " + Aleksandra);
         for (Human child : children) {
             System.out.println("\tдети: " + child.toString());
         }
+        System.out.println("_______________________");
 
         List<Human> childList = Romanovs.getChildren(Nikolai_II);
-
         for (Human child : childList) {
             System.out.println(child.toString());
         }
+        System.out.println("_______________________");
 
         List<Human> descendants = Romanovs.getDescendants(Aleksandra);
-
         for (Human descendant : descendants) {
-            System.out.println();
             System.out.println(descendant.toString());
-
         }
+        System.out.println("_______________________");
 
         List<Human> relatives = Romanovs.getRelatives(Aleksei);
-
         for (Human relative : relatives) {
-
             System.out.println(relative.toString());
-
         }
+        System.out.println("_______________________");
 
-        List<Human> searchResult = Romanovs.searchByName("Ольга");
-
-
-        for (Human human : searchResult) {
-            System.out.println();
+        List<Human> searchResult = Romanovs.searchByName("Aleksei");
+        for (Human human : searchResult)
             System.out.println(human.toString());
+        System.out.println("_______________________");
+        Romanovs.getInfo();
+        System.out.println("_______________________");
+        TXTHandler txt = new TXTHandler();
+        txt.save(Romanovs);
+        Family restored = (Family) txt.loadFamily();
+        restored.getInfo();
         }
-    }
     }
