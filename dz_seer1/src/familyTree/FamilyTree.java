@@ -7,21 +7,22 @@ import java.util.*;
 
 public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
-    private Human root;
+    //private Human root;
 
     public FamilyTree(){
         this(new ArrayList<>());
-        this.root = null;
+       // this.root = null;
     }
     public boolean add(Human human){
         if(human == null){
             return false;
         }
-        if(root == null){
-            root = human;
-            return true;
-        }
-        if(human.getFather() != null && human.getMother() != null){
+//        if(root == null){
+//            root = human;
+//            return true;
+//        }
+        if(!humanList.contains(human)){
+            humanList.add(human);
             if(human.getFather() != null){
                 human.getFather().addChild(human);
             }
