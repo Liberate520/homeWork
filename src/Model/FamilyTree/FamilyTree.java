@@ -1,3 +1,7 @@
+package Model.FamilyTree;
+
+import Model.Human.Human;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -57,5 +61,13 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new HumanIterator<>(family);
+    }
+
+    public void sortByName(){
+        family.sort(new ComparatorByName());
+    }
+
+    public void sortByBirthday(){
+        family.sort(new ComparatorByBirthday());
     }
 }

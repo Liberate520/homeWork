@@ -1,3 +1,5 @@
+package Model.Human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -28,6 +30,10 @@ public class Human implements Serializable {
 
     public Human(String firstName, String lastName, Sex sex, LocalDate birthDate, LocalDate deathDate) {
         this(firstName, lastName, sex, birthDate, deathDate, null, null);
+    }
+
+    public Human(String firstName, String lastName, LocalDate birthDate, LocalDate deathDate) {
+        this(firstName, lastName, null, birthDate, deathDate, null, null);
     }
 
     public String getFirstName() {
