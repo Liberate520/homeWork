@@ -28,7 +28,8 @@ public class Console implements View {
 
     @Override
     public void start() {
-         while (true) {
+        Boolean bul = true;
+         while (bul) {
             int num = scanMenu();
             switch (num) {
                 case 1:{
@@ -41,7 +42,7 @@ public class Console implements View {
                     printTree(presenter.getTree());
                 }
                 case 3:{
-                    break;
+                    bul= false;
                 }
             }
 
