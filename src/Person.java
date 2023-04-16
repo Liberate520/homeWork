@@ -1,45 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
 
 public class Person extends Human{
     private Person mother;
     private Person father;
     private Person wife;
     private Person husband;
-    private List<Person> brothersOrSistersList;
-    private List<Person> childrens;
+    private HashSet<Person> brothersOrSistersSet;
+    private HashSet<Person> childrenSet;
 
     public Person(String firstName, String lastName, int age, Sex sex) {
         super(firstName, lastName, age, sex);
-        this.brothersOrSistersList = new ArrayList<>();
-        this.childrens = new ArrayList<>();
+        this.brothersOrSistersSet = new HashSet<>();
+        this.childrenSet = new HashSet<>();
     }
 
     public Person() {
         this ("NoName", "NoName", 0, Sex.Male);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append(super.toString());
-        output.append("Wife: " + this.printPerson(this.wife) + "\n");
-        output.append("Husband: " + this.printPerson(this.husband) + "\n");
-        output.append("Mother: " + this.printPerson(this.mother) + "\n");
-        output.append("Father: " + this.printPerson(this.father) + "\n");
-        output.append(this.printBrothersOrSisters());
-        output.append(this.printChildrens());
-        return output.toString();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Person person) {
-            return this.getFirstName().equals(person.getFirstName()) &&
-                    this.getLastName().equals(person.getLastName()) &&
-                    this.getAge() == person.getAge();
-        }
-        return false;
     }
 
     public void setMother(String firstName, String lastName, int age) {
@@ -94,22 +71,51 @@ public class Person extends Human{
         return husband;
     }
 
-    public void addBrotherOrSister(String firstName, String lastName, int age, Sex sex) {
-        Person brotherOrSister = new Person(firstName, lastName, age, sex);
-        this.brothersOrSistersList.add(brotherOrSister);
+    public void addBrother(String firstName, String lastName, int age) {
+        Person brother = new Person(firstName, lastName, age, Sex.Male);
+        this.brothersOrSistersSet.add(brother);
     }
 
-    public List<Person> getBrothersOrSistersList() {
-        return brothersOrSistersList;
+    public void addBrother(Person brother) {
+        this.brothersOrSistersSet.add(brother);
+    }
+
+    public void addSister(String firstName, String lastName, int age) {
+        Person sister = new Person(firstName, lastName, age, Sex.Female);
+        this.brothersOrSistersSet.add(sister);
+    }
+
+    public void addSister(Person sister) {
+        this.brothersOrSistersSet.add(sister);
+    }
+
+    public void addBrotherOrSisterSet (HashSet<Person> brotherOrSisterSet) {
+        this.brothersOrSistersSet.addAll(brotherOrSisterSet);
+    }
+
+    public void addBrotherOrSisterSet (Person brotherOrSister) {
+        this.brothersOrSistersSet.add(brotherOrSister);
+    }
+
+    public HashSet<Person> getBrothersOrSistersSet() {
+        return brothersOrSistersSet;
     }
 
     public void addChildren(String firstName, String lastName, int age, Sex sex) {
         Person child = new Person(firstName, lastName, age, sex);
-        this.childrens.add(child);
+        this.childrenSet.add(child);
     }
 
-    public List<Person> getChildrens() {
-        return childrens;
+    public void addChildren(HashSet<Person> childrenSet) {
+        this.childrenSet.addAll(childrenSet);
+    }
+
+    public void addChildren(Person child) {
+        this.childrenSet.add(child);
+    }
+
+    public HashSet<Person> getChildrenSet() {
+        return childrenSet;
     }
 
     public String printPerson(Person person) {
@@ -122,25 +128,51 @@ public class Person extends Human{
 
     public String printBrothersOrSisters() {
         StringBuilder output = new StringBuilder();
-        if (this.brothersOrSistersList != null && this.brothersOrSistersList.size() != 0) {
+        if (this.brothersOrSistersSet != null && this.brothersOrSistersSet.size() != 0) {
             output.append("Brothers and sisters:" + "\n");
-            for (Person person: this.brothersOrSistersList) {
+            for (Person person: this.brothersOrSistersSet) {
                 output.append(person.getFirstName() + " " + person.getLastName() + "\n");
             }
         }
         return output.toString();
     }
 
-    public String printChildrens() {
+    public String printChildren() {
         StringBuilder output = new StringBuilder();
-        if (this.childrens != null && this.childrens.size() != 0) {
-            output.append("Childrens:" + "\n");
-            for (Person child: this.childrens) {
+        if (this.childrenSet != null && this.childrenSet.size() != 0) {
+            output.append("Children:" + "\n");
+            for (Person child: this.childrenSet) {
                 output.append(child.getFirstName() + " " + child.getLastName() + "\n");
             }
         }
         return output.toString();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append(super.toString());
+        output.append("Wife: " + this.printPerson(this.wife) + "\n");
+        output.append("Husband: " + this.printPerson(this.husband) + "\n");
+        output.append("Mother: " + this.printPerson(this.mother) + "\n");
+        output.append("Father: " + this.printPerson(this.father) + "\n");
+        output.append(this.printBrothersOrSisters());
+        output.append(this.printChildren());
+        return output.toString();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Person person) {
+            return this.getFirstName().equals(person.getFirstName()) &&
+                    this.getLastName().equals(person.getLastName()) &&
+                    this.getAge() == person.getAge();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getFirstName(), this.getLastName(), this.getAge());
+    }
 }

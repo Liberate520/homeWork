@@ -1,154 +1,206 @@
 import java.util.*;
 
 public class FamilyTree {
-    private List<HashMap<Relation, List<Person>>> persons;
+    private HashSet<Person> personsSet;
 
-    public FamilyTree (){
-        this.persons = new ArrayList<>();
+    public FamilyTree() {
+        this.personsSet = new HashSet<>();
     }
 
-    private void fillPerson (Person targetPerson, Relation relation, LinkedHashMap<Relation, List<Person>> relatives) {
-        List<Person> membersInRelative = new ArrayList<>();
-        membersInRelative.add(targetPerson);
-        relatives.put(relation, membersInRelative);
-        this.pushToTree(targetPerson);
-    }
+    public void pushToTree(Person person) {
 
-    private void fillPersonList (List<Person> personList, LinkedHashMap<Relation, List<Person>> relatives,
-                                 Relation maleRelation, Relation femaleRelation, Person mother, Person father) {
-        List<Person> maleInRelative = new ArrayList<>();
-        List<Person> femaleInRelative = new ArrayList<>();
-        for (Person record: personList) {
-            if (record.getSex() == Sex.Male) {
-                maleInRelative.add(record);
-                relatives.put(maleRelation, maleInRelative);
-            } else {
-                femaleInRelative.add(record);
-                relatives.put(femaleRelation, femaleInRelative);
+        this.personsSet.add(person);
+
+        Person wife = person.getWife();
+        Person husband = person.getHusband();
+        Person father = person.getFather();
+        Person mother = person.getMother();
+
+        if (wife != null) {
+            wife.setHusband(person);
+            if (person.getChildrenSet() != null) {
+                wife.addChildren(person.getChildrenSet());
             }
-            record.setMother(mother);
-            record.setFather(father);
+            this.personsSet.add(wife);
+        }
+
+        if (husband != null) {
+            husband.setWife(person);
+            if (person.getChildrenSet() != null) {
+                husband.addChildren(person.getChildrenSet());
+            }
+            this.personsSet.add(husband);
+        }
+
+        if (father != null) {
+            father.addChildren(person);
+            if (mother != null) {
+                father.setWife(mother);
+            }
+            this.personsSet.add(father);
+        }
+
+        if (mother != null) {
+            mother.addChildren(person);
+            if (father != null) {
+                mother.setHusband(father);
+            }
+            this.personsSet.add(mother);
+        }
+
+        HashSet<Person> brothersOrSistersSet = person.getBrothersOrSistersSet();
+        if (brothersOrSistersSet != null && brothersOrSistersSet.size() == 1) {
+            Iterator<Person> iterator = brothersOrSistersSet.iterator();
+            while (iterator.hasNext()) {
+                Person item = iterator.next();
+                item.setMother(person.getMother());
+                item.setFather(person.getFather());
+                item.addBrotherOrSisterSet(person);
+                this.personsSet.add(item);
+            }
+        } else if (brothersOrSistersSet != null && brothersOrSistersSet.size() > 1) {
+            Iterator<Person> iterator = brothersOrSistersSet.iterator();
+            while (iterator.hasNext()) {
+                Person item = iterator.next();
+                item.setMother(person.getMother());
+                item.setFather(person.getFather());
+                item.addBrotherOrSisterSet(person);
+                HashSet<Person> copyBrothersOrSistersSet = new HashSet<>(brothersOrSistersSet);
+                copyBrothersOrSistersSet.remove(item);
+                item.addBrotherOrSisterSet(copyBrothersOrSistersSet);
+                this.personsSet.add(item);
+            }
+        }
+
+        HashSet<Person> childrenSet = person.getChildrenSet();
+        if (childrenSet != null && childrenSet.size() == 1) {
+            Iterator<Person> iterator = childrenSet.iterator();
+            while (iterator.hasNext()) {
+                Person item = iterator.next();
+                item.setMother(person.getWife());
+                item.setFather(person);
+                this.personsSet.add(item);
+            }
+        } else if (childrenSet != null && childrenSet.size() > 1) {
+            Iterator<Person> iterator = childrenSet.iterator();
+            while (iterator.hasNext()) {
+                Person item = iterator.next();
+                item.setMother(person.getMother());
+                item.setFather(person.getFather());
+                HashSet<Person> copyChildrenSet = new HashSet<>(childrenSet);
+                copyChildrenSet.remove(item);
+                item.addBrotherOrSisterSet(copyChildrenSet);
+                this.personsSet.add(item);
+            }
         }
     }
 
-    /**
-     * @param person
-     */
-    public void pushToTree (Person person) {
-
-        if (this.getPerson(person.getFirstName(), person.getLastName()) == null) {
-            LinkedHashMap<Relation, List<Person>> relatives = new LinkedHashMap<>();
-            Person targetPerson;
-
-            {
-                List<Person> membersInRelative = new ArrayList<>();
-                membersInRelative.add(person);
-                relatives.put(Relation.Person, membersInRelative);
-            }
-
-            if ((targetPerson = person.getWife()) != null) {
-                this.fillPerson(targetPerson, Relation.Wife, relatives);
-            }
-
-            if ((targetPerson = person.getHusband()) != null) {
-                this.fillPerson(targetPerson, Relation.Husband, relatives);
-            }
-
-            if ((targetPerson = person.getMother()) != null) {
-                this.fillPerson(targetPerson, Relation.Mother, relatives);;
-            }
-
-            if ((targetPerson = person.getFather()) != null) {
-                this.fillPerson(targetPerson, Relation.Father, relatives);
-            }
-
-            if (person.getBrothersOrSistersList().size() != 0) {
-                this.fillPersonList(person.getBrothersOrSistersList(), relatives,
-                        Relation.Brother, Relation.Sister, person.getMother(), person.getFather());
-            }
-
-            if (person.getChildrens().size() != 0) {
-                this.fillPersonList(person.getChildrens(), relatives,
-                        Relation.Son, Relation.Daughter, person, person.getWife());
-            }
-            this.persons.add(relatives);
-        }
-
-    }
-
-    /**
-     * @param firstName
-     * @param lastName
-     * @param relation
-     * @return String
-     */
     public String getInfo(String firstName, String lastName, Relation relation) {
         StringBuilder output = new StringBuilder();
-        for (HashMap<Relation, List<Person>> record: persons) {
-            for (Person personItem: record.get(Relation.Person)) {
-                if (personItem.getFirstName().equals(firstName) &&
-                        personItem.getLastName().equals(lastName)) {
-                    if (record.get(relation) != null) {
-                        for (Person relationItem: record.get(relation)) {
-                            output.append(relationItem);
-                            output.append("---------------------------------" + "\n");
+        Iterator<Person> iterator = personsSet.iterator();
+        while (iterator.hasNext()) {
+            Person item = iterator.next();
+            if (item.getFirstName().equals(firstName) && item.getLastName().equals(lastName)) {
+                if (relation == Relation.Mother) {
+                    if (item.getMother() != null) {
+                        return output.append(item.getMother() + "\n").toString();
+                    }
+                } else if (relation == Relation.Father) {
+                    if (item.getFather() != null) {
+                        return output.append(item.getFather() + "\n").toString();
+                    }
+                } else if (relation == Relation.Wife) {
+                    if (item.getFather() != null) {
+                        return output.append(item.getWife() + "\n").toString();
+                    }
+                } else if (relation == Relation.Husband) {
+                    if (item.getHusband() != null) {
+                        return output.append(item.getHusband() + "\n").toString();
+                    }
+                } else if (relation == Relation.Brother) {
+                    if (item.getBrothersOrSistersSet() != null) {
+                        Iterator<Person> iteratorBS = item.getBrothersOrSistersSet().iterator();
+                        while (iteratorBS.hasNext()) {
+                            Person itemBS = iteratorBS.next();
+                            if (itemBS.getSex() == Sex.Male) {
+                                output.append(itemBS + "\n");
+                            }
+                        }
+                        return output.toString();
+                    }
+                } else if (relation == Relation.Sister) {
+                    if (item.getBrothersOrSistersSet() != null) {
+                        Iterator<Person> iteratorBS = item.getBrothersOrSistersSet().iterator();
+                        while (iteratorBS.hasNext()) {
+                            Person itemBS = iteratorBS.next();
+                            if (itemBS.getSex() == Sex.Female) {
+                                output.append(itemBS + "\n");
+                            }
+                        }
+                        return output.toString();
+                    }
+                } else if (relation == Relation.Son) {
+                    if (item.getChildrenSet() != null) {
+                        Iterator<Person> iteratorCh = item.getChildrenSet().iterator();
+                        while (iteratorCh.hasNext()) {
+                            Person itemCh = iteratorCh.next();
+                            if (itemCh.getSex() == Sex.Male) {
+                                output.append(itemCh + "\n");
+                            }
+                        }
+                        return output.toString();
+                    }
+                } else if (relation == Relation.Daughter) {
+                    if (item.getChildrenSet() != null) {
+                        Iterator<Person> iteratorCh = item.getChildrenSet().iterator();
+                        while (iteratorCh.hasNext()) {
+                            Person itemCh = iteratorCh.next();
+                            if (itemCh.getSex() == Sex.Female) {
+                                output.append(itemCh + "\n");
+                            }
                         }
                         return output.toString();
                     }
                 }
             }
         }
-        output.append("Запись отсутствует.");
-        return output.toString();
+        return output.append("Запись отсутствует.").toString();
     }
 
-    public String getInfo(String firstName, String lastName) {
-        Relation relation = Relation.Person;
+    public String getInfo (String firstName, String lastName){
         StringBuilder output = new StringBuilder();
-        for (HashMap<Relation, List<Person>> record: persons) {
-            for (Person personItem: record.get(Relation.Person)) {
-                if (personItem.getFirstName().equals(firstName) &&
-                        personItem.getLastName().equals(lastName)) {
-                    if (record.get(relation) != null) {
-                        for (Person relationItem: record.get(relation)) {
-                            output.append(relationItem);
-                            output.append("---------------------------------" + "\n");
-                        }
-                        return output.toString();
-                    }
-                }
+        Iterator<Person> iterator = personsSet.iterator();
+        while (iterator.hasNext()) {
+            Person item = iterator.next();
+            if (item.getFirstName().equals(firstName) && item.getLastName().equals(lastName)) {
+                return output.append(item + "\n").toString();
             }
         }
-        output.append("Запись отсутствует.");
-        return output.toString();
+        return output.append("Запись отсутствует.").toString();
     }
 
-    public Person getPerson(String firstName, String lastName) {
-        Relation relation = Relation.Person;
-        for (HashMap<Relation, List<Person>> record: persons) {
-            for (Person personItem: record.get(Relation.Person)) {
-                if (personItem.getFirstName().equals(firstName) &&
-                        personItem.getLastName().equals(lastName)) {
-                    return personItem;
-                }
+    public Person getPerson (String firstName, String lastName) {
+        Iterator<Person> iterator = personsSet.iterator();
+        while (iterator.hasNext()) {
+            Person item = iterator.next();
+            if (item.getFirstName().equals(firstName) && item.getLastName().equals(lastName)) {
+                return item;
             }
         }
         return null;
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         StringBuilder output = new StringBuilder();
         output.append("All records of Family Tree:" + "\n");
         output.append("##################################" + "\n");
-        for (HashMap<Relation, List<Person>> record: persons) {
-            String indent = "";
-            for (Person item: record.get(Relation.Person)) {
-                output.append(item.getFirstName() + " " + item.getLastName() + "\n");
-            }
-            output.append("---------------------------------" + "\n");
+        Iterator<Person> iterator = personsSet.iterator();
+        while (iterator.hasNext()) {
+            Person item = iterator.next();
+            output.append(item.getFirstName() + " " + item.getLastName() + "\n");
         }
-        output.append("##################################" + "\n");
+        output.append("---------------------------------" + "\n");
         return output.toString();
     }
 }
