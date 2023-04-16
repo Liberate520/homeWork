@@ -1,5 +1,11 @@
-import TreeFamily.TreeFamily;
-import human.Human;
+import model.FileHandler;
+import model.Service;
+import model.Service1;
+import model.TreeFamily.TreeFamily;
+import model.human.Human;
+import presenter.Presenter;
+import ui.Console;
+import ui.View;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -14,7 +20,7 @@ public class Main {
 //        System.out.println (pa.getMother());
 //        System.out.println (sister1.getMother());
 //        System.out.println (sister1.getFather());
-        TreeFamily tree = new TreeFamily();
+        TreeFamily<Human> tree = new TreeFamily<>();
 
         tree.add(pa);
         tree.add(ma);
@@ -38,8 +44,8 @@ public class Main {
 //        objectOutputStream.close();
 
 //        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.out"));
-//        Human sisterout1 = (human.Human) objectInputStream.readObject();
-//        TreeFamily treeOut1 = (TreeFamily) objectInputStream.readObject();
+//        Human sisterout1 = (model.human.Human) objectInputStream.readObject();
+//        model.TreeFamily treeOut1 = (model.TreeFamily) objectInputStream.readObject();
 //        objectInputStream.close();
 
         System.out.println();
@@ -59,5 +65,12 @@ public class Main {
         for (Human human: tree) {
             System.out.println(human);
         }
+
+        View view = new Console();
+        Service service = new Service(tree);
+        new Presenter(view, service);
+        view.start();
+
+
     }
 }

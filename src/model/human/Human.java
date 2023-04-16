@@ -1,4 +1,4 @@
-package human;
+package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;

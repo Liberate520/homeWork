@@ -1,20 +1,39 @@
-package TreeFamily;
+package model.TreeFamily;
 
-import human.Human;
-import human.HumanIterator;
+import model.human.Human;
+import model.human.HumanIterator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeFamily implements Iterable<Human>, Serializable{
-    public List<Human> list;
+public class TreeFamily <E extends Human> implements Iterable<E>, Serializable{//extends Tree <E>
+    public List<E> list;
+
+    public TreeFamily(List<E> list) {
+        this.list = list;
+    }
+
 
     public TreeFamily() {
         list = new ArrayList<>();
     }
 
-    public boolean add(Human human){
+    public void addHuman(E human) {
+
+        if (!list.contains(human)) {
+            list.add(human);
+            if (human.getFather() != null) {
+                human.getFather().addChildrenList(human);
+            }
+            if (human.getMother() != null) {
+                human.getMother().addChildrenList(human);
+            }
+        }
+    }
+
+
+        public boolean add (E human){
         if (human== null) {
             return false;
         }
@@ -29,13 +48,12 @@ public class TreeFamily implements Iterable<Human>, Serializable{
             return true;
         }
         return false;
-
     }
 
-//    public void addHuman(human.Human human) {
+//    public void addHuman(model.human.Human model.human) {
 
-//            if (!(human1.equals(human))) {
-//                list.add(human);
+//            if (!(human1.equals(model.human))) {
+//                list.add(model.human);
 ////                System.out.printf("%s %s добавлен в генеалогическое древо.");
 ////            } else {
 ////                System.out.printf("%s %s уже добавлен в генеалогическое древо.");
@@ -44,8 +62,8 @@ public class TreeFamily implements Iterable<Human>, Serializable{
 //        }
 //    }
 
-//    public void addHuman(human.Human human) {
-//        list.add(human);
+//    public void addHuman(model.human.Human model.human) {
+//        list.add(model.human);
 //    }
 
     public Human getByMather(Human human) {
@@ -57,10 +75,10 @@ public class TreeFamily implements Iterable<Human>, Serializable{
         return null;
     }
 
-    public Human getByHuman(Human human){
+    public Human getByHuman ( Human human){
         for (Human hum: list){
             if (human.equals(hum)){
-                return human;
+                return hum;
             }
         }
         return null;
@@ -76,7 +94,7 @@ public class TreeFamily implements Iterable<Human>, Serializable{
         }
     }
 
-    public List<Human> getList() {
+    public List<E> getList() {
         return list;
     }
 
@@ -93,18 +111,17 @@ public class TreeFamily implements Iterable<Human>, Serializable{
 
     @Override
     public String toString() {
-        return "TreeFamily.TreeFamily{" +
-                "list=" + list +
-                '}';
+//        return "model.TreeFamily.model.TreeFamily{" +
+//                "list=" + list +
+//                '}';
+        return this.getInfo();
     }
 
 
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(list);
+    public Iterator<E> iterator() {
+        return new HumanIterator<E>(list);
     }
-
-
 
 }
