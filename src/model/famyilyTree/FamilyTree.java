@@ -74,6 +74,20 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
         return this.humanList.equals(other.humanList);
     }
 
+    public List<String> searchHuman() { return null; }
+
+    public String getTreeInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("В дереве ");
+        sb.append(humanList.size());
+        sb.append(" объектов \n");
+        for (T human: humanList) {
+            sb.append(human.getInfo());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     //public Iterator<T> iterator() { return new FamilyTreeIterator<T>(humanList); }
 
 }

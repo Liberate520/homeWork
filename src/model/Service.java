@@ -1,5 +1,6 @@
 package model;
 
+import model.human.HumanComparatorByGender;
 import model.famyilyTree.FamilyTree;
 import model.human.*;
 import model.makeFiles.MakeFiles;
@@ -69,12 +70,15 @@ public class Service {
         tree.getFamilyTree().sort(new HumanComparatorByLastName());
     }
     public void sortByID() { tree.getFamilyTree().sort(new HumanComparatorByID());}
-
+    public void sortByGender() { tree.getFamilyTree().sort(new HumanComparatorByGender());  }
     public void setMakeFiles(MakeFiles makefiles) { this.makeFiles = makefiles; }
-
-    public String getHumanList() {
-        return tree.getInfo();
+    public String getHumanList() { return tree.getInfo(); }
+    public void HumanComparatorByFirstName() {
+        tree.getFamilyTree().sort(new HumanComparatorByFirstName<>());
     }
+    public List<String> searchHuman() { return tree.searchHuman(); }
+    public void dataSave() { serial.saveToFile(tree, filename);  }
+    public String getTreeInfo() { return tree.getTreeInfo();  }
 
     //---- Сериализация
         //mfiles.saveToFile(someFamily, filename);
