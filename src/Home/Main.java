@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Main  {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human igor = new Human("Igor",35);
@@ -47,6 +47,7 @@ public class Main {
 //        familyTree.getHumanInfo(irina);
 //        System.out.println(igor.getChildrenDetails());
 //        System.out.println(lida.getName());
+
 
     }
 
