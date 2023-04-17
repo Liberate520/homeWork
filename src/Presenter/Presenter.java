@@ -30,4 +30,17 @@ public class Presenter {
             throw new RuntimeException(e);
         }
     }
+    public void sortByName(){
+        service.sortByName();
+        showAll();
+    }
+    public void sortByDateBirth(){
+        service.sortByDateBirth();
+        showAll();
+    }
+    public void saveChanges(){
+        service.saveChanges();
+        view.print("Изменения сохранены");
+
+    }
 }

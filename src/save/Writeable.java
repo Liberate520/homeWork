@@ -3,8 +3,10 @@ package save;
 import human.Human;
 import tree.FamilyTree;
 
-public interface Writeable {
-    void saveHuman(Human human, java.lang.String s);
+import java.io.Serializable;
 
-   // FamilyTree load(FamilyTree familyTree, java.lang.String s) throws java.lang.Exception;
+public interface Writeable {
+    boolean save(Serializable serializable, String path);
+
+   Serializable load(String path);
 }

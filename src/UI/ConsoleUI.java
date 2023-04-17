@@ -24,7 +24,9 @@ public class ConsoleUI implements View{
                     "1. Показать всех членов семьи;\n" +
                     "2. Найти члена семьи по имени;\n" +
                     "3. Добавить члена семьи; \n" +
-                    "4. Выход.");
+                    "4. Отсортировать по имени; \n" +
+                    "5. Отсортировать по дате рождения; \n" +
+                    "6. Выход.");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -37,6 +39,12 @@ public class ConsoleUI implements View{
                     addMember();
                     break;
                 case "4":
+                    sortByname();
+                    break;
+                case "5":
+                    sortByDateBirth();
+                    break;
+                case "6":
                     exit();
                     break;
                 default:
@@ -66,7 +74,19 @@ public class ConsoleUI implements View{
         String nameFather = scanner.nextLine();
         presenter.addMember(name, gender, dateBirth, nameMother, nameFather);
     }
+    private void sortByname(){
+        presenter.sortByName();
+    }
+
+    private void sortByDateBirth(){
+        presenter.sortByDateBirth();
+    }
     private void exit(){
+        System.out.println("Сохранить изменения в файл? 1 - да, 2 - нет");
+        String answer = scanner.nextLine();
+        if (answer.equals("1")) {
+            presenter.saveChanges();
+        }
         System.out.println("Работа завершена");
         scanner.close();
         work = false;

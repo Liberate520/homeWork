@@ -4,6 +4,7 @@ import human.Gender;
 import human.Human;
 import iterAndComp.HumanComparatorByDateBirth;
 import iterAndComp.HumanComparatorByName;
+import save.FileHandlerOut;
 import tree.Family;
 import tree.FamilyTree;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 public class Service {
         private Family family;
         private FamilyTree<Human> familyTree;
+        private String pathSave = "familyTree.out";
 
     public Service(FamilyTree<Human> familyTree) {
         this.familyTree = familyTree;
@@ -64,20 +66,23 @@ public class Service {
         } catch (ParseException e){
             e.printStackTrace();
         }
-
-
     }
+    public void saveChanges(){
+        FileHandlerOut fileHandlerOut = new FileHandlerOut();
+        fileHandlerOut.save(familyTree, pathSave);
+    }
+
 
     public Service(Family family) {
             this.family = family;
         }
 
         public void sortByName(){
-           family.getMembers().sort(new HumanComparatorByName());
+           familyTree.getMembers().sort(new HumanComparatorByName());
         }
 
         public void sortByDateBirth(){
-            family.getMembers().sort(new HumanComparatorByDateBirth());
+            familyTree.getMembers().sort(new HumanComparatorByDateBirth());
         }
     }
 
