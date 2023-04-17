@@ -73,5 +73,14 @@ public class Human {
         return gender;
     }
 
-
+    @Override
+    public String toString() {
+        return "Human{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfDeath=" + dateOfDeath +
+                ", gender='" + gender + '\'' +
+                '}';
+    }
 }
