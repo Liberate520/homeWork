@@ -65,10 +65,12 @@ public class Console implements View{
 
     public void sortName() {
         presenter.sortName();
+        showTree();
     }
 
     public void sortDate() {
         presenter.sortDate();
+        showTree();
     }
 
     public void search() {
@@ -76,7 +78,12 @@ public class Console implements View{
         String surname = scanner.nextLine();
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
-        presenter.search(surname, name);
+        if (presenter.search(surname,name).size() == 3) {
+            System.out.println(presenter.search(surname, name).get(0) + " Папа: " + presenter.search(surname, name)
+                    .get(1) + " Мама: " + presenter.search(surname, name).get(2));
+        } else if (presenter.search(surname,name).size() == 1) {
+            System.out.println(presenter.search(surname, name).get(0) + " !Информации о родителей нет!");
+        } else System.out.println("Такого чеовека нет!");
     }
 
     public void load() {

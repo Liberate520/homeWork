@@ -65,5 +65,7 @@ public class Main {
         View view = new Console();
         new Presenter(view,srv);
         view.start();
+
+
     }
 }

@@ -26,29 +26,35 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
         return " ";
     }
 
-    public void searchForSurnameAndName(String surname, String name) {
+    public List<E> searchForSurnameAndName(String surname, String name) {
         List<E> temp = new ArrayList<>();
-        Object res = null;
-        for (E item : tree) {
+//        Object res = null;
+        for (Human item : tree) {
             if (item.getName().equals(name) && item.getSurname().equals(surname)) {
-                res = item;
-            }
-        }
-        for (E item : tree) {
-            if (item.getFather() != null | item.getMother() != null) {
-                if (item.getFather().getSurname().equals(surname) && item.getFather().getName().equals(name) ||
-                        item.getMother().getSurname().equals(surname) && item.getMother().getName().equals(name)) {
-                    temp.add(item);
+                temp.add((E) item);
+                if (item.getFather() != null && item.getMother() != null) {
+                    temp.add((E) item.getFather());
+                    temp.add((E) item.getMother());
                 }
             }
         }
-        if (res != null) {
-            if (!temp.isEmpty()) {
-                System.out.println(res + " Дети: " + temp);
-            } else {
-                System.out.println(res + " Детей нет");
-            }
-        } else System.out.println("Такого человека в дереве нет!");
+        return  temp;
+//        for (E item : tree) {
+//            if (item.getFather() != null | item.getMother() != null) {
+//                if (item.getFather().getSurname().equals(surname) && item.getFather().getName().equals(name) ||
+//                        item.getMother().getSurname().equals(surname) && item.getMother().getName().equals(name)) {
+//                    temp.add(item);
+//                }
+//            }
+//        }
+
+//        if (res != null) {
+//            if (!temp.isEmpty()) {
+//                System.out.println(res + " Дети: " + temp);
+//            } else {
+//                System.out.println(res + " Детей нет");
+//            }
+//        } else System.out.println("Такого человека в дереве нет!");
 
     }
 

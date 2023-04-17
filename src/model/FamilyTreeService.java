@@ -4,12 +4,13 @@ import model.Human.Human;
 import model.tree.FamilyTree;
 import model.tree.comparators.HumanComparatorByDateOfBirth;
 import model.tree.comparators.HumanComparatorByName;
-import java.io.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
-public class FamilyTreeService implements Writeable {
+public class FamilyTreeService extends Data{
     private final FamilyTree<Human> tree;
+    private final Writeable wr = new Data();
     public FamilyTreeService(FamilyTree<Human> tree) {
         this.tree = tree;
     }
@@ -20,38 +21,16 @@ public class FamilyTreeService implements Writeable {
     public void sortByDateOfBirht(){
         tree.getTree().sort(new HumanComparatorByDateOfBirth());
     }
-    @Override
+
     public void save() {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("data.txt"));
-            objectOutputStream.writeObject(tree);
-            objectOutputStream.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("data.txt"));
-//        objectOutputStream.writeObject(o);
-//        objectOutputStream.close();
+        wr.save(tree);
     }
-    @Override
+
     public void read() {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("data.txt"));
-            Object ob = objectInputStream.readObject();
-            objectInputStream.close();
-            System.out.println(ob);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-//        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("data.txt"));
-//        Object ob = objectInputStream.readObject();
-//        objectInputStream.close();
-//        System.out.println(ob);
+        wr.read();
     }
+
     public void addHuman(String name, String surname, LocalDate dayOfBirth) {
-        FamilyTree<Human> tree = new FamilyTree<>();
         tree.add(new Human(name,surname,dayOfBirth));
     }
 
@@ -60,13 +39,7 @@ public class FamilyTreeService implements Writeable {
         return "" + tree;
     }
 
-    public void showWithIter() {
-        for (Object human: tree) {
-            System.out.println(human);
-        }
-    }
-
-    public void search(String name, String surname) {
-        tree.searchForSurnameAndName(name, surname);
+    public List<Human> search(String name, String surname) {
+        return (List<Human>) tree.searchForSurnameAndName(name, surname);
     }
 }

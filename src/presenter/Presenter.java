@@ -1,8 +1,10 @@
 package presenter;
 
+import model.tree.FamilyTree;
 import view.View;
 import model.FamilyTreeService;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Presenter {
     private final View view;
@@ -25,16 +27,14 @@ public class Presenter {
 
     public void sortName() {
         service.sortByName();
-        service.showWithIter();
     }
 
     public void sortDate() {
         service.sortByDateOfBirht();
-        service.showWithIter();
     }
 
-    public void search(String surname, String name) {
-        service.search(surname, name);
+    public List search(String surname, String name) {
+        return service.search(surname, name);
     }
 
     public void load() {

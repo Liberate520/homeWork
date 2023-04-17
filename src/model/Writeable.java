@@ -1,6 +1,6 @@
 package model;
 
 public interface Writeable {
-    void save();
+    void save(Object o);
     void read();
 }
