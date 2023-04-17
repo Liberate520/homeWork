@@ -29,10 +29,10 @@ public class Main {
 ////        System.out.println(testTwo);
 
         Service service = new Service(test);
-//        service.addHuman("Иван", "Пирожков", LocalDate.of(1994, 11, 21));
-//        service.addHuman("Анастасия", "Жалнина", LocalDate.of(1995, 6, 15));
-//        service.addHuman("Маша", "Яковлева", LocalDate.of(1994, 6,16));
-//        service.addHuman("Алия", "Александрова", LocalDate.of(2018, 3, 8));
+        service.addHuman("Иван", "Пирожков", LocalDate.of(1994, 11, 21));
+        service.addHuman("Анастасия", "Жалнина", LocalDate.of(1995, 6, 15));
+        service.addHuman("Маша", "Яковлева", LocalDate.of(1994, 6,16));
+        service.addHuman("Алия", "Александрова", LocalDate.of(2018, 3, 8));
 //
 //
 //        service.sortByLastName();

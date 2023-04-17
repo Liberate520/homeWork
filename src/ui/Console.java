@@ -14,6 +14,10 @@ public class Console implements View {
     private boolean work;
 
     @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
+    }
+    @Override
     public void start() {
         scanner = new Scanner(System.in);
         menu = new Menu(this);
@@ -46,20 +50,43 @@ public class Console implements View {
         work = false;
     }
 
-    public void addNote(){
+    public void addHuman(){
         System.out.println("Введите имя: ");
         String firstName = scanner.nextLine();
         System.out.println("Введите фамилию: ");
         String lastName = scanner.nextLine();
-        System.out.println("Введите дату рождения (пример: 1994,06,16): ");
+        System.out.println("Введите дату рождения (пример: 1994-06-16): ");
         String dateOfBirth = scanner.nextLine();
+        if (!dateOfBirth.matches("[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}")){
+            dateOfBirth = scanner.nextLine();
+        }
         List<String> human = new ArrayList<>();
         Collections.addAll(human, firstName, lastName, dateOfBirth);
-        presenter.addNote(human.toString());
+        presenter.addHuman(human);
     }
 
-    @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
+    public void delHuman() {
+        System.out.println("Введите ID объекта для его удаления: ");
+        String strID = scanner.nextLine();
+        try {
+            int id = Integer.parseInt(strID);
+            presenter.delHuman(id);
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Неверный ввод");
+        }
+    }
+    public void searchHuman() {
+        System.out.println("Введите Фамилию для поиска");
+        String lastName = scanner.nextLine();
+        presenter.searchHuman(lastName);
+    }
+    public void loadFile() {
+        System.out.println("Введите имя файла");
+        String nameFile = scanner.nextLine();
+        presenter.loadList(nameFile);
+    }
+    public void showList(){
+        presenter.showList();
     }
 }

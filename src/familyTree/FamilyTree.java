@@ -16,6 +16,9 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
     }
+    public List<E> getFamilyTree() {
+        return familyTree;
+    }
 
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
@@ -67,5 +70,24 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
 
     public void sortByLastName() {
         familyTree.sort( new HumanComparatorByLastName());
+    }
+
+    public void delHuman(int id) {
+        for (E item : this) {
+            if (item.getId() == id) {
+                getFamilyTree().remove(item);
+            }
+        }
+    }
+
+    public void loadFamilyGroup(String nameFile) {
+    }
+
+    public List<E> searchHuman(String lastName) {
+        List<E> searchTemp = new ArrayList<>();
+        for (E item : familyTree) {
+            if (item.getLastname().equals(lastName)) searchTemp.add(item);
+        }
+        return searchTemp;
     }
 }

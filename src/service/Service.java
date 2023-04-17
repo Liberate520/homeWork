@@ -14,10 +14,6 @@ public class Service {
 
     }
 
-    public Service() {
-
-    }
-
     public FamilyTree getFamilyGroup() {
         return familyGroup;
     }
@@ -38,5 +34,18 @@ public class Service {
 
     public void sortByLastName() {
         familyGroup.sortByLastName();
+    }
+
+    public boolean delHuman(int id) {
+        familyGroup.delHuman(id);
+        return true;
+    }
+
+    public void loadFamilyGroup(String nameFile) {
+        familyGroup.loadFamilyGroup(nameFile);
+    }
+
+    public Object searchHuman(String lastName) {
+        return familyGroup.searchHuman(lastName);
     }
 }

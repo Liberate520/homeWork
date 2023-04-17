@@ -1,5 +1,7 @@
 package ui;
 
+import ui.commands.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,9 @@ public class Menu {
         commands = new ArrayList<>();
         commands.add(new AddHuman(console));
         commands.add(new DelHuman(console));
+        commands.add(new SearchHuman(console));
+//        commands.add(new LoadList(console));
+        commands.add(new ShowFamilyTree(console));
         commands.add(new Exit(console));
     }
 

@@ -1,4 +1,6 @@
-package ui;
+package ui.commands;
+
+import ui.Console;
 
 public class DelHuman extends Command {
     public DelHuman(Console console) {
@@ -12,6 +14,6 @@ public class DelHuman extends Command {
 
     @Override
     public void execute(){
-
+        getConsole().delHuman();
     }
 }

@@ -1,6 +1,8 @@
-package ui;
+package ui.commands;
 
 import service.Service;
+import ui.Console;
+import ui.commands.Option;
 
 public abstract class Command implements Option {
 
