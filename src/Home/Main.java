@@ -6,14 +6,14 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        FamilyTree igor = new FamilyTree("Igor",35);
-        FamilyTree lida = new FamilyTree("Lida",35);
-        FamilyTree max = new FamilyTree("Max",15);
-        FamilyTree irina = new FamilyTree("Irina", 10);
-        FamilyTree victoriya = new FamilyTree("Victoriya",65);
-        FamilyTree vyacceslav = new FamilyTree("Vyacceslav",65);
-        FamilyTree sergey = new FamilyTree("Sergey",65);
-        FamilyTree liza = new FamilyTree("Liza",65);
+        Human igor = new Human("Igor",35);
+        Human lida = new Human("Lida",35);
+        Human max = new Human("Max",15);
+        Human irina = new Human("Irina", 10);
+        Human victoriya = new Human("Victoriya",65);
+        Human vyacceslav = new Human("Vyacceslav",65);
+        Human sergey = new Human("Sergey",65);
+        Human liza = new Human("Liza",65);
         List<Human> latest_generation = new ArrayList<>();
         List<Human> latest_generation_sisters = new ArrayList<>();
         List<Human> latest_generation_brothers = new ArrayList<>();
@@ -32,13 +32,13 @@ public class Main {
         latest_generation.add(irina);
         latest_generation_sisters.add(irina);
         igor.setChildrens(latest_generation);
-
+        FamilyTree familyTree = new FamilyTree();
 //        System.out.println(irina.getFatherDetails());
 //        System.out.println(irina.getMotherDetails());
 //        System.out.println(irina.getSisterDetails());
 //        System.out.println(irina.getBrothersDetails());
 //        System.out.println(lida.getGrandfatherDetails());
-        System.out.println(max);
+        System.out.println(familyTree.getHumanInfo(max.father));
 //        System.out.println(igor.getChildrenDetails());
 //        System.out.println(lida.getName());
 
