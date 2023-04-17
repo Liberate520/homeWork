@@ -15,6 +15,7 @@ public class Console implements View {
     int yearBirth;
     int yearDeath;
 
+
     @Override
     public void print(String text) {
         System.out.println(text);
@@ -22,6 +23,7 @@ public class Console implements View {
 
     @Override
     public void start() {
+        addSomeHuman();
         while (key != "6") {
             print(" Введите:\n " +
                     "0 - Вывести список членов семьи\n " +
@@ -56,7 +58,7 @@ public class Console implements View {
                 case "6":
                     presenter.save("family.txt");
                     print("Работа завершена");
-                    key ="6";
+                    key = "6";
                     break;
                 default:
                     print("Такой команды нет");
@@ -118,6 +120,17 @@ public class Console implements View {
 
             }
         }
+    }
+
+    public void addSomeHuman() {
+        presenter.addMember("Иван", "", "");
+        presenter.addMember("Мария", "", "");
+        presenter.addMember("Василий", "Иван", "Мария");
+        presenter.addMember("Сергей", "Иван", "Мария");
+        presenter.addMember("Екатерина", "Василий", "");
+        presenter.addMember("Мария", "Василий", "Екатерина");
+        presenter.addMember("Александр", "Сергей", "Екатерина");
+        presenter.addMember("Анастасия", "Александр", "Мария");
     }
 
     @Override
