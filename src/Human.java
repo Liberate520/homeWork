@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Human {
     private String name;
@@ -24,6 +25,11 @@ public class Human {
         this.gender = gender;
         this.children = children;
     }
+    public Human (String name, String surname, String gender){
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+    }
 
     public void setMother(Human human){
         this.mother = human;
@@ -31,17 +37,23 @@ public class Human {
 
     }
     public void setFather(Human human){
-        this.father = human;
-        human.setChildren(this);
+        if(father==null || !father.equals(human)){
+            this.father = human;
+            human.setChildren(this);
+        }
+
     }
     public void setChildren(Human human){
-        this.children.add(human);
-        if (gender.equals("female")){
-            human.setMother(this);
+        if(!children.contains(human)){
+            this.children.add(human);
+            if (gender.equals("female")){
+                human.setMother(this);
+            }
+            if (gender.equals("male")){
+                human.setFather(this);
+            }
         }
-        if (gender.equals("male")){
-            human.setFather(this);
-        }
+
 
     }
 
@@ -73,6 +85,10 @@ public class Human {
         return gender;
     }
 
+    public List<Human> getChildren() {
+        return children;
+    }
+
     @Override
     public String toString() {
         return "Human{" +
@@ -82,5 +98,18 @@ public class Human {
                 ", dateOfDeath=" + dateOfDeath +
                 ", gender='" + gender + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return name.equals(human.name) && surname.equals(human.surname) && dateOfBirth.equals(human.dateOfBirth) && gender.equals(human.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, dateOfBirth, gender);
     }
 }
