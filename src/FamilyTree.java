@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    List<Human> people = new ArrayList<>();
+    private List<Human> people = new ArrayList<>();
 
     public void addHuman(Human human){
         people.add(human);
