@@ -11,21 +11,21 @@ public class Main {
         Human aleksey = new Human("Алексей", "Иванов", LocalDate.of(1995, 3, 15), Gender.MALE, anna, petr, null, null, null);
         Human mariya = new Human("Мария", "Иванова", LocalDate.of(1998, 12, 31), Gender.FEMALE, anna, petr, null, null, null);
 
-        List<Human> дети = new ArrayList<>();
-        дети.add(irina);
-        дети.add(aleksey);
-        дети.add(mariya);
+        List<Human> children = new ArrayList<>();
+        children.add(irina);
+        children.add(aleksey);
+        children.add(mariya);
 
-        List<Human> братья = new ArrayList<>();
-        братья.add(aleksey);
+        List<Human> brothers = new ArrayList<>();
+        brothers.add(aleksey);
 
-        List<Human> сестры = new ArrayList<>();
-        сестры.add(mariya);
+        List<Human> sisters = new ArrayList<>();
+        sisters.add(mariya);
 
-        anna.setChildren(дети);
-        anna.setSisters(сестры);
-        petr.setChildren(дети);
-        petr.setBrothers(братья);
+        anna.setChildren(children);
+        anna.setSisters(sisters);
+        petr.setChildren(children);
+        petr.setBrothers(brothers);
 
         System.out.println("Анна: " + anna);
         System.out.println("Петр: " + petr);
