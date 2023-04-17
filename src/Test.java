@@ -13,8 +13,8 @@ public class Test {
 //        family.showAllRelatives();
 //        mama.showKids();
 //        papa.showKids();
-        Human brother = new Human("Лев Урматский", 15, Gender.male, mama, papa);
-        Human sister = new Human("Анастасия Урматская", 6, Gender.female, mama, papa);
+        Human brother = new Human("Лев Петров", 15, Gender.male, mama, papa);
+        Human sister = new Human("Анастасия Петрова", 6, Gender.female, mama, papa);
         family.addRelative(brother);
         family.addRelative(sister);
         family.updateKids();
