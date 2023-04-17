@@ -1,4 +1,7 @@
+package model.familyTreeApi.comporator;
 import java.util.Comparator;
+
+import model.familyTreeApi.Human;
 
 public class CompareByName  implements Comparator<Human> {
     @Override

@@ -1,3 +1,4 @@
+package model.familyTreeApi;
 import java.util.HashSet;
 import java.io.Serializable;
 import java.time.LocalDate;

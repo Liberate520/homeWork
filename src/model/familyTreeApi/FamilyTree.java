@@ -1,5 +1,10 @@
+package model.familyTreeApi;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import model.familyTreeApi.comporator.CompareByBirthDate;
+import model.familyTreeApi.comporator.CompareByName;
+
 import java.io.Serializable;
 
 public class FamilyTree<E extends Human> implements Serializable, Group<E> {
@@ -71,5 +76,19 @@ public class FamilyTree<E extends Human> implements Serializable, Group<E> {
             }
         }
         return null;
+    }
+
+    @Override
+    public void delete(E human) {
+        this.tree.remove(human);
+    }
+
+    @Override
+    public void deleteByName(String name, String lastName) {
+        for (E human : this.tree) {
+            if (human.getFirstName() == name && human.getLastName() == lastName) {
+                this.tree.remove(human);
+            }
+        }
     }
 }

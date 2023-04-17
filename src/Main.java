@@ -1,6 +1,13 @@
 import java.io.IOException;
 import java.time.LocalDate;
 
+import model.Service;
+import model.familyTreeApi.FamilyTree;
+import model.familyTreeApi.Human;
+import presenter.Presenter;
+import ui.ConsoleUI;
+import ui.View;
+
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human James = new Human("James", "Potter", LocalDate.of(1960, 2, 27), "Male");
@@ -34,26 +41,10 @@ public class Main {
         potterTree.add(James_Sirius);
         potterTree.add(Lily_Luna);
 
+        Service service = new Service(potterTree);
+        View view = new ConsoleUI();
+        Presenter presenter = new Presenter(view, service);
 
-        // System.out.println(potterTree);
-
-        LoadFile load = new LoadFile();
-        load.save(potterTree, "treeOut.out");
-        System.out.println(load.read("treeOut.out"));
-
-        System.out.println("-----\n");
-        potterTree.printTree();
-
-        System.out.println("-----\nсортирорвка по имени:\n");
-        potterTree.sortByName();
-        potterTree.printTree();
-
-        System.out.println("-----\nсортирорвка по дате:\n");
-        potterTree.sortByBirthDate();
-        potterTree.printTree();
-
-        System.out.println();
-        System.out.println();
-
+        view.start();
     }
 }
