@@ -40,7 +40,7 @@ public class Main  {
 //        System.out.println(irina.getBrothersDetails());
 //        System.out.println(lida.getGrandfatherDetails());
 //        familyTree.FamilyTreeSave(liza);
-
+        familyTree.FamilyTreeSave(irina);
         familyTree.FamilyTreeload(irina);
 
 //        familyTree.FamilyTreeload(irina);
