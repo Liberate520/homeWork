@@ -3,9 +3,8 @@ package model.tree.classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class Human implements Serializable{
+public class Human implements Serializable {
     private String name;
     private String patronymic;
     private String surname;
@@ -15,7 +14,6 @@ public class Human implements Serializable{
     private Human father;
     private Human mother;
     private List<Human> children = new ArrayList<>();
-    private Scanner scanner;
 
     public Human() {
     }
@@ -42,45 +40,6 @@ public class Human implements Serializable{
         this.mother = mother;
     }
 
-    public void setHuman(){
-        scanner = new Scanner(System.in);
-
-        System.out.println("Input name: ");
-        name = scanner.nextLine();
-
-        System.out.println("Input patronymic: ");
-        patronymic = scanner.nextLine();
-
-        System.out.println("Input surname: ");
-        surname = scanner.nextLine();
-
-        boolean loop = false;
-        while(!loop){
-            System.out.println("Input date of birth: ");
-            String dateBirthString = scanner.nextLine();
-            try{
-                dateBirth = Integer.parseInt(dateBirthString);
-                loop = true;
-            }
-            catch(NumberFormatException e) {
-                System.out.println("Ошибка ввода Catch!");
-            }
-        }
-        
-        loop = false;
-        while(!loop){
-            System.out.println("Input date of death: ");
-            String dateDeathString = scanner.nextLine();
-            try{
-                dateDeath = Integer.parseInt(dateDeathString);
-                loop = true;
-            }
-            catch(NumberFormatException e) {
-                System.out.println("Ошибка ввода Catch!");               
-            }
-        }
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -102,61 +61,67 @@ public class Human implements Serializable{
         return sb.toString();
     }
 
-    public String getDescendants() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(toString() + "\nDescendants:\n");
-        if (children.size() > 0) {
-            for (Human human : children) {
-                sb.append(human.toString() + "\n");
-            }
-        } else
-            sb.append("Unknown!\n");
-        return sb.toString();
-    }
-
-    public String getParents() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(toString() + "\nParents:");
-        sb.append("\nFather:");
-        if (father != null)
-            sb.append("\n" + father.toString());
-        else
-            sb.append("\nUnknown!");
-
-        sb.append("\nMother:");
-        if (mother != null)
-            sb.append("\n" + mother.toString());
-        else
-            sb.append("\nUnknown!\n");
-        return sb.toString();
-    }
-
-    public void addChild(Human child){
-        children.add(child);
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getBirthDate(){
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setDateBirth(int dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public int getDateBirth() {
         return dateBirth;
     }
 
-    public Human getFather(){
+    public void setDateDeath(int dateDeath) {
+        this.dateDeath = dateDeath;
+    }
+
+    public int getDateDeath() {
+        return dateDeath;
+    }
+
+    public Human getFather() {
         return father;
     }
 
-    public Human getMother(){
-        return mother;
-    }
-
-    public void setFather(Human f){
+    public void setFather(Human f) {
         father = f;
     }
 
-    public void setMother(Human m){
+    public Human getMother() {
+        return mother;
+    }
+
+    public void setMother(Human m) {
         mother = m;
     }
 
+    public List<Human> getChildren() {
+        return children;
+    }
+
+    public void addChildren(Human child) {
+        children.add(child);
+    }
 }

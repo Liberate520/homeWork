@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface iTree<E> {
 
+
     List<E> getTree();
 
     List<E> searchPerson(String str);

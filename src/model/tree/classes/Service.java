@@ -2,6 +2,7 @@ package model.tree.classes;
 
 import java.util.List;
 
+
 public class Service {
     private Tree tree;
 
@@ -11,6 +12,11 @@ public class Service {
 
     public List<Human> getTree(){
         return tree.getTree();
+    }
+
+    public void setHuman(Human human){
+        SetHuman setHuman = new SetHuman();
+        setHuman.settingHuman(human);      
     }
 
     public void addPerson(Human person){
@@ -23,5 +29,13 @@ public class Service {
 
     public String treeToString(){
         return tree.treeToString();
+    }
+
+    public void saveTree(){
+        tree.save("src/model/storages/Test.out");
+    }
+
+    public void loadTree(){
+        tree.load("src/model/storages/Test.out");
     }
 }

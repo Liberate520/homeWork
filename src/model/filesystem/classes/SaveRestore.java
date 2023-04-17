@@ -1,38 +1,36 @@
 package model.filesystem.classes;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.filesystem.interfaces.SaveLoad;
-import model.tree.classes.Tree;
-import model.tree.interfaces.iTree;
 
 public class SaveRestore<E> implements SaveLoad<E> {
+    
     @Override
-    public void save (iTree<E> treeToSave, String path) {
-
-        ObjectOutputStream objectOutputStream;
+    public void save (List<E> treeToSave, String path) {
         try {
-            objectOutputStream = new ObjectOutputStream(
-                    new FileOutputStream(path));
-            objectOutputStream.writeObject(treeToSave);
-            objectOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            FileOutputStream out = new FileOutputStream(path);
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            oos.writeObject(treeToSave);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println("Problem serializing: " + e);
+            //e.printStackTrace();
         }
     }
 
     @Override
-    public iTree<E> load(String path) {
-        iTree<E> treeRestored = new Tree<E>();
-        ObjectInputStream objectInputStream;
+    public List<E> load(String path) {
+        List<E> treeRestored = new ArrayList<>();
         try {
-            objectInputStream = new ObjectInputStream(
-                    new FileInputStream(path));
-            treeRestored = (iTree<E>) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            FileInputStream in = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(in);
+            treeRestored = (List<E>) ois.readObject();
+            ois.close();
+        } catch (Exception e) {
+            System.out.println("Problem serializing: " + e);
+            //e.printStackTrace();
         }
         return treeRestored;
     }

@@ -5,12 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.filesystem.classes.SaveRestore;
-import model.filesystem.interfaces.SaveLoad;
 import model.sorting.classes.TreeIterator;
 import model.tree.interfaces.iTree;
 
 
-public class Tree<E> implements SaveLoad<E>, Iterable<E>, iTree<E> {
+public class Tree<E> implements Iterable<E>, iTree<E> {
     private List<E> persons = new ArrayList<>();
 
     @Override
@@ -18,16 +17,17 @@ public class Tree<E> implements SaveLoad<E>, Iterable<E>, iTree<E> {
         return persons;
     }
 
+
     @Override
     public void addPerson(E person) {
         
         if(person instanceof Human){
             Human personHuman = (Human)person;
             if (personHuman.getFather() != null){
-                personHuman.getFather().addChild(personHuman);
+                personHuman.getFather().addChildren(personHuman);
             }
             if (personHuman.getMother() != null){
-                personHuman.getMother().addChild(personHuman);
+                personHuman.getMother().addChildren(personHuman);
             }
         }
         persons.add(person);
@@ -45,16 +45,16 @@ public class Tree<E> implements SaveLoad<E>, Iterable<E>, iTree<E> {
     }
 
 
-    @Override
-    public void save(iTree<E> treeToSave, String path) {
+   
+    public void save(String path) {
         SaveRestore<E> saving = new SaveRestore<E>();
-        saving.save(treeToSave, path);
+        saving.save(persons, path);
     }
 
-    @Override
-    public iTree<E> load(String path) {
+    
+    public void load(String path) {
         SaveRestore<E> loading = new SaveRestore<E>();
-        return loading.load(path);
+        persons = loading.load(path);       
     }
 
     @Override
