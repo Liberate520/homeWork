@@ -6,6 +6,7 @@ import human.Human;
 import presenter.Presenter;
 import service.Service;
 import service.TreeService;
+import tree.FamilyTree;
 import tree.Tree;
 import ui.ConsoleUi;
 import ui.View;

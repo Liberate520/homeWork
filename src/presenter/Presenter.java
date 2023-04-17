@@ -37,8 +37,8 @@ public class Presenter {
         view.print(service.sortid());
     }
 
-    public void addh(String str) {
-        view.print(service.addhuman(str));
+    public boolean addh(String str) {
+        return service.addhuman(str);
     }
 
     public void showt() {

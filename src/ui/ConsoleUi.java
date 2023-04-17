@@ -104,7 +104,12 @@ public class ConsoleUi implements View {
         System.out.println("Введите имя отца: ");
         String fathername = scanner.nextLine();
         sb.append(fathername + " ");
-        presenter.addh(sb.toString());
+        if(presenter.addh(sb.toString())){
+            System.out.println("Человек успешно добавлен в дерево.");
+        }
+        else{
+            System.out.println("Человек уже есть в дереве.");
+        }
     }
 
     private void sortbyname() {

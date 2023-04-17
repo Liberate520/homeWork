@@ -51,9 +51,9 @@ public class TreeService implements Service {
     }
 
     @Override
-    public Tree<Human> addhuman(String str) {
-        familytree.addpeople(str);
-        return familytree;
+    public boolean addhuman(String str) {
+       // familytree.addpeople(str);
+        return familytree.addpeople(str);
     }
 
     @Override

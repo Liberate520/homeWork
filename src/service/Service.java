@@ -17,7 +17,7 @@ public interface Service {
 
     Tree<Human> sortid();
 
-    Tree<Human> addhuman(String str);
+    boolean addhuman(String str);
 
     Tree<Human> showtr();
 
