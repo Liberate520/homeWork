@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
 
     private String name;
 
@@ -86,5 +86,10 @@ public class Human implements Serializable {
         }
         sb.append("дети: ").append(getChildren()).append("\n");
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return -1 * (birthday - o.birthday);
     }
 }

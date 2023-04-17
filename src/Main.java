@@ -1,3 +1,5 @@
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -65,9 +67,11 @@ public class Main {
         System.out.println(pushkin.findHuman("Пушкин Александр Сергеевич").getSpouse().getName());
         System.out.println();
 
+
         // Сериализация в файл.
         FromTo savedFamily = new FromToSerializeFile("pushkin.out");
         savedFamily.saveTo(pushkin);
+
 
         // Получение списка имён из загруженного дерева.
         System.out.println("Загружено из файла:");
@@ -79,9 +83,27 @@ public class Main {
         }
         System.out.println();
 
+
         // Перебор human в дереве
         for (Human human :
                 pushkin) {
+            System.out.println(human);
+        }
+
+
+        // Сортировка по умолчанию по дню рождения (от младших к старшим).
+        pushkin.sort();
+        for (String human:
+                pushkin.getFamily()) {
+            System.out.println(human);
+        }
+        System.out.println();
+
+
+        // Сортировка по имени.
+        pushkin.sortByName();
+        for (String human:
+                pushkin.getFamily()) {
             System.out.println(human);
         }
     }
