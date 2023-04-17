@@ -67,6 +67,17 @@ public class Console implements View {
         }
     }
 
+    public void addSomeHuman() {
+        presenter.addMember("Иван", "", "");
+        presenter.addMember("Мария", "", "");
+        presenter.addMember("Василий", "Иван", "Мария");
+        presenter.addMember("Сергей", "Иван", "Мария");
+        presenter.addMember("Екатерина", "Василий", "");
+        presenter.addMember("Мария", "Василий", "Екатерина");
+        presenter.addMember("Александр", "Сергей", "Екатерина");
+        presenter.addMember("Анастасия", "Александр", "Мария");
+    }
+
     public void enterPersonData() {
         print("Введите имя:");
         name = scn.next();
@@ -106,12 +117,17 @@ public class Console implements View {
                     break;
                 case "2":
                     print("Введите новый год рождения");
-                    yearBirth = scn.nextInt();
+                    if (scn.hasNextInt()) {
+                        yearBirth = scn.nextInt();
+                    } else print("Год введен не верно");
                     presenter.editYearBirth(name, yearBirth);
                     break;
                 case "3":
                     print("Введите новый год смерти");
-                    yearDeath = scn.nextInt();
+                    if (scn.hasNextInt()) {
+                        yearDeath = scn.nextInt();
+                    } else print("Год введен не верно");
+
                     presenter.editYearDeath(name, yearDeath);
                     break;
                 default:
@@ -120,17 +136,6 @@ public class Console implements View {
 
             }
         }
-    }
-
-    public void addSomeHuman() {
-        presenter.addMember("Иван", "", "");
-        presenter.addMember("Мария", "", "");
-        presenter.addMember("Василий", "Иван", "Мария");
-        presenter.addMember("Сергей", "Иван", "Мария");
-        presenter.addMember("Екатерина", "Василий", "");
-        presenter.addMember("Мария", "Василий", "Екатерина");
-        presenter.addMember("Александр", "Сергей", "Екатерина");
-        presenter.addMember("Анастасия", "Александр", "Мария");
     }
 
     @Override
