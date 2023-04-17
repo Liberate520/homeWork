@@ -1,3 +1,3 @@
 public enum Relation {
-    Person, Wife, Husband, Mother, Father, Sister, Brother, Son, Daughter
+    Person, Spouse, Mother, Father, Sister, Brother, Son, Daughter
 }

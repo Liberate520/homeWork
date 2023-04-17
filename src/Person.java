@@ -4,8 +4,7 @@ import java.util.Objects;
 public class Person extends Human{
     private Person mother;
     private Person father;
-    private Person wife;
-    private Person husband;
+    private Person spouse;
     private HashSet<Person> brothersOrSistersSet;
     private HashSet<Person> childrenSet;
 
@@ -37,22 +36,13 @@ public class Person extends Human{
         this.father = father;
     }
 
-    public void setWife(String firstName, String lastName, int age) {
-        Person wife = new Person(firstName, lastName, age, Sex.Female);
-        this.wife = wife;
+    public void setSpouse(String firstName, String lastName, int age, Sex sex) {
+        Person spouse = new Person(firstName, lastName, age, sex);
+        this.spouse = spouse;
     }
 
-    public void setWife(Person wife) {
-        this.wife = wife;
-    }
-
-    public void setHusband(String firstName, String lastName, int age) {
-        Person husband = new Person(firstName, lastName, age, Sex.Male);
-        this.husband = husband;
-    }
-
-    public void setHusband(Person husband) {
-        this.husband = husband;
+    public void setSpouse(Person spouse) {
+        this.spouse = spouse;
     }
 
     public Person getMother() {
@@ -63,12 +53,8 @@ public class Person extends Human{
         return father;
     }
 
-    public Person getWife() {
-        return wife;
-    }
-
-    public Person getHusband() {
-        return husband;
+    public Person getSpouse() {
+        return spouse;
     }
 
     public void addBrother(String firstName, String lastName, int age) {
@@ -152,8 +138,7 @@ public class Person extends Human{
     public String toString() {
         StringBuilder output = new StringBuilder();
         output.append(super.toString());
-        output.append("Wife: " + this.printPerson(this.wife) + "\n");
-        output.append("Husband: " + this.printPerson(this.husband) + "\n");
+        output.append("Spouse: " + this.printPerson(this.spouse) + "\n");
         output.append("Mother: " + this.printPerson(this.mother) + "\n");
         output.append("Father: " + this.printPerson(this.father) + "\n");
         output.append(this.printBrothersOrSisters());

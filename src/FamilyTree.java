@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class FamilyTree {
     private HashSet<Person> personsSet;
@@ -11,31 +12,22 @@ public class FamilyTree {
 
         this.personsSet.add(person);
 
-        Person wife = person.getWife();
-        Person husband = person.getHusband();
+        Person spouse = person.getSpouse();
         Person father = person.getFather();
         Person mother = person.getMother();
 
-        if (wife != null) {
-            wife.setHusband(person);
+        if (spouse != null) {
+            spouse.setSpouse(person);
             if (person.getChildrenSet() != null) {
-                wife.addChildren(person.getChildrenSet());
+                spouse.addChildren(person.getChildrenSet());
             }
-            this.personsSet.add(wife);
-        }
-
-        if (husband != null) {
-            husband.setWife(person);
-            if (person.getChildrenSet() != null) {
-                husband.addChildren(person.getChildrenSet());
-            }
-            this.personsSet.add(husband);
+            this.personsSet.add(spouse);
         }
 
         if (father != null) {
             father.addChildren(person);
             if (mother != null) {
-                father.setWife(mother);
+                father.setSpouse(mother);
             }
             this.personsSet.add(father);
         }
@@ -43,7 +35,7 @@ public class FamilyTree {
         if (mother != null) {
             mother.addChildren(person);
             if (father != null) {
-                mother.setHusband(father);
+                mother.setSpouse(father);
             }
             this.personsSet.add(mother);
         }
@@ -77,7 +69,7 @@ public class FamilyTree {
             Iterator<Person> iterator = childrenSet.iterator();
             while (iterator.hasNext()) {
                 Person item = iterator.next();
-                item.setMother(person.getWife());
+                item.setMother(person.getSpouse());
                 item.setFather(person);
                 this.personsSet.add(item);
             }
@@ -109,13 +101,9 @@ public class FamilyTree {
                     if (item.getFather() != null) {
                         return output.append(item.getFather() + "\n").toString();
                     }
-                } else if (relation == Relation.Wife) {
-                    if (item.getFather() != null) {
-                        return output.append(item.getWife() + "\n").toString();
-                    }
-                } else if (relation == Relation.Husband) {
-                    if (item.getHusband() != null) {
-                        return output.append(item.getHusband() + "\n").toString();
+                } else if (relation == Relation.Spouse){
+                    if (item.getSpouse() != null) {
+                        return output.append(item.getSpouse() + "\n").toString();
                     }
                 } else if (relation == Relation.Brother) {
                     if (item.getBrothersOrSistersSet() != null) {
