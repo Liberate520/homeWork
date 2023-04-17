@@ -4,6 +4,7 @@ import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import model.human.HumanComporatorByName;
 
+import java.io.*;
 import java.util.Collections;
 
 public class Service implements Service1{
@@ -24,57 +25,37 @@ public class Service implements Service1{
         tree.addHuman(human);
 
     }
-
-//    public void sortByName(){
-//        group.getStudentList().sort(new StudentComparatorByName());
-//    }
-//
-//    public void sortById(){
-//        group.getStudentList().sort(new StudentComparatorById());
-//    }
+    @Override
     public void sortByFamily(){
         //tree.getList().sort();
         Collections.sort(tree.getList());
-
-
     }
+    @Override
     public void sortByName(){
         tree.getList().sort(new HumanComporatorByName());
-        //Collections.sort(tree.getList(), new model.human.HumanComporatorByName());
 
     }
-//    public void save(Writable writable) throws IOException {
-//        writable.save(this);
-//
-//    }
-  //  private static final String EMPTY_ERROR = "Вы не заполнили поле";
 
-//    @Override
-//    public String getName(String name) {
-//        if (name.equals("")) {
-//            return EMPTY_ERROR + " Имя!";
-//        }
-//        try {
-//            String nameInput = connection.getInfo(name);
-//            return nameInput;
-//        } catch (NullPointerException e) {
-//            return "Некорректный ввод!";
-//        }
-//    }
+    @Override
+    public void save(Object object) throws IOException {
 
-//    @Override
-//    public String getFamily(String family) {
-//        if (family.equals("")) {
-//            return EMPTY_ERROR + " фамилия!";
-//        }
-//        try {
-//            String nameInput = connection.getInfo(family);
-//            return nameInput;
-//        } catch (NullPointerException e) {
-//            return "Некорректный ввод!";
-//        }
-//    }
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
+        objectOutputStream.writeObject(object);
+        objectOutputStream.writeObject(object);
+        objectOutputStream.close();
 
+    }
 
+    @Override
+    public Object read() throws ClassNotFoundException, IOException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.txt"));
+        Object read = objectInputStream.readObject();
+        objectInputStream.close();
+        return read;
+
+    }
 
 }
+
+
+

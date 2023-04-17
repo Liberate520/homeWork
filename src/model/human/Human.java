@@ -101,9 +101,8 @@ public class Human implements Serializable, Comparable<Human>  {
         if (!(object instanceof Human)) {
             return false;
         }
-
         Human human = (Human) object;
-        return family.equals(human.family) && name.equals(human.name) && gender == human.gender && birthdate.equals(human.birthdate);
+        return family.equals(human.family) && name.equals(human.name) ;
     }
 
 

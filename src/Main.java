@@ -1,10 +1,11 @@
-import model.FileHandler;
+//import model.FileHandler;
 import model.Service;
 import model.Service1;
 import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import presenter.Presenter;
 import ui.Console;
+import ui.Desctop;
 import ui.View;
 
 import java.io.*;
@@ -17,9 +18,9 @@ public class Main {
         Human ma = new Human("Budina", "Anna", Human.Gender.Fimale,LocalDate.parse("1948-09-07"));
         Human sister1 = new Human(pa, ma, "Bazarova","Helga", Human.Gender.Fimale, LocalDate.parse("1978-03-10"));
         Human sister2 = new Human(pa, ma,"Bazarova","Tasy", Human.Gender.Fimale,LocalDate.parse("1980-06-07"));
-//        System.out.println (pa.getMother());
-//        System.out.println (sister1.getMother());
-//        System.out.println (sister1.getFather());
+        System.out.println (pa.getMother());
+        System.out.println (sister1.getMother());
+        System.out.println (sister1.getFather());
         TreeFamily<Human> tree = new TreeFamily<>();
 
         tree.add(pa);
@@ -30,43 +31,43 @@ public class Main {
         pa.addChildrenList(sister1);
         pa.addChildrenList(sister2);
 
-//        System.out.println("Дети "+pa.getName()+" "+ pa.getFamily() +":\n  "+pa.getСhildrenList());
-//        System.out.println("Дети "+ma.getName()+" "+ ma.getFamily() +":\n  "+ma.getСhildrenList());
-//
-//        System.out.println();
-//        System.out.println(tree.getInfo());
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree);
-        TreeFamily treeOut = (TreeFamily) fileHandler.read();
+        System.out.println("Дети "+pa.getName()+" "+ pa.getFamily() +":\n  "+pa.getСhildrenList());
+        System.out.println("Дети "+ma.getName()+" "+ ma.getFamily() +":\n  "+ma.getСhildrenList());
+
+        System.out.println();
+        System.out.println(tree.getInfo());
+
+
 //        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.out"));
 //        objectOutputStream.writeObject(sister1);
 //        objectOutputStream.writeObject(tree);
 //        objectOutputStream.close();
-
+//
 //        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.out"));
-//        Human sisterout1 = (model.human.Human) objectInputStream.readObject();
-//        model.TreeFamily treeOut1 = (model.TreeFamily) objectInputStream.readObject();
+//        Human sis = (model.human.Human) objectInputStream.readObject();
+//        TreeFamily treeOut1 = (TreeFamily) objectInputStream.readObject();
 //        objectInputStream.close();
+//
+//        System.out.println(sis);
+//        System.out.println(treeOut1);
+//
+//        System.out.println();
 
-//        System.out.println();
-//        System.out.println(treeOut);
-//
-//        System.out.println();
-//
-//        Service tr = new Service(tree);
-//        tr.sortByFamily();
-//        for (Human human: tree){
-//            System.out.println(human);
-//        }
-//        System.out.println();
-//
-//
-//        tr.sortByName();
-//        for (Human human: tree) {
-//            System.out.println(human);
-//        }
 
-        View view = new Console();
+        Service tr = new Service(tree);
+        tr.sortByFamily();
+        for (Human human: tree){
+            System.out.println(human);
+        }
+        System.out.println();
+
+
+        tr.sortByName();
+        for (Human human: tree) {
+            System.out.println(human);
+        }
+
+        View view = new Desctop();
         Service service = new Service(tree);
         new Presenter(view, service);
         view.start();
