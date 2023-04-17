@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 public class Service {
@@ -26,6 +28,20 @@ public class Service {
             }
 
         }
-    return "Такого имени не найдено";
+        return "Такого имени не найдено";
+    }
+
+    public void sortByName(){
+        familyTree.sortByName();
+    }
+    public void sortBySex(){
+        familyTree.sortBySex();
+    }
+    public void save(String path) throws IOException {
+        familyTree.save(path);
+    }
+    public String load(String path) throws IOException, ClassNotFoundException {
+        Serializable answer = familyTree.load(path);
+        return answer.toString();
     }
 }

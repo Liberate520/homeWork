@@ -4,6 +4,8 @@ import model.FamilyTree;
 import model.Service;
 import view.View;
 
+import java.io.IOException;
+
 public class Presenter {
     private final View view;
     private final Service service;
@@ -26,6 +28,20 @@ public class Presenter {
 
     public void findByName(String record) {
         String answer = service.findByName(record);
+        view.print(answer);
+    }
+
+    public void sortByName(){
+        service.sortByName();
+    }
+    public void sortBySex(){
+        service.sortBySex();
+    }
+    public void save(String path) throws IOException {
+        service.save(path);
+    }
+    public void load(String path) throws IOException, ClassNotFoundException {
+        String answer = service.load(path);
         view.print(answer);
     }
 }

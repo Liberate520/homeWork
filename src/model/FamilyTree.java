@@ -25,9 +25,12 @@ public class FamilyTree <E extends Human> implements Serializable, Iterable<Huma
 
     @Override
     public String toString() {
-        return "FamilyTree{" +
-                "familyTree=" + familyTree +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        for (Human human:familyTree){
+            sb.append(human.toString());
+            sb.append("\n");
+        }
+        return "Генеалогическоге дерево: \n" + sb;
     }
 
     public Serializable load (String filepath) throws IOException, ClassNotFoundException {
