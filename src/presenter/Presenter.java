@@ -8,7 +8,7 @@ import model.*;
 import model.Service;
 import model.FamilyTree.FamilyTree;
 import model.FamilyTree.FindHuman;
-import model.FamilyTree.AddIntoTree.AddHuman;
+// import model.FamilyTree.AddIntoTree.AddHuman;
 import model.Persons.Human;
 import model.Persons.Person;
 import presenter.Presenter;
@@ -30,6 +30,7 @@ public class Presenter<T>
     public void PresenterTreeFillsByHuman() // добавление людей в дерево и вывод дерева на экран
     {
         service.addHuman();
+        service.addOthers();
     }
 
     public void PresenterFindPerson() // нахождение персоны по имени и фамилии

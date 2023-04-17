@@ -4,16 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.*;
-import model.FamilyTree.FamilyTree;
 import model.Persons.Gender;
 import model.Persons.Human;
-import model.Persons.Others;
-import model.Persons.Person;
 
-public class AddHuman
+public class FillHuman<T extends Human> 
 {
-    public FamilyTree FillByHuman()
+    private List<Human> list = new ArrayList<>();
+
+    public List<Human> fillByHuman()
     {
         Human human1= new Human(1, "Иванов","Владмир", Gender.Male, LocalDate.of(1925, 10, 04), LocalDate.of(1987, 04, 01), null, null, null);
         Human human2= new Human(2, "Петров","Николай", Gender.Male, LocalDate.of(1928, 5, 10), LocalDate.of(1980, 03, 17), null, null,null);     
@@ -30,15 +28,7 @@ public class AddHuman
         Human human13 = new Human(13,"Иванов","Антон",Gender.Male,LocalDate.of(1980, 5, 28) , null,human9,human11,null);
         Human human14 = new Human(14,"Петров","Кирилл",Gender.Male,LocalDate.of(1983, 11, 20),null, human10,human12,null);
         
-        List<Human> List = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12, human13, human14));
-        FamilyTree familyTree = new FamilyTree();
-
-        for (Human human : List) 
-        {
-            // familyTree.addPerson(human, familyTree); 
-            familyTree.add(human);
-        }
-        // System.out.println("Печать дерева Human: " + familyTree);
-       return familyTree;
+        List<Human> listOfHuman = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8, human9, human10, human11, human12, human13, human14));
+        return listOfHuman;
     }
 }

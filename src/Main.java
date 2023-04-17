@@ -4,12 +4,7 @@ import model.Service;
 import model.Comparator.SortByLastName;
 import model.FamilyTree.FamilyTree;
 import model.FamilyTree.FindHuman;
-import model.FamilyTree.AddIntoTree.AddHuman;
 import model.FamilyTree.AddIntoTree.AddPerson;
-import model.Iterator.HumanIterator;
-import model.Persons.Human;
-import model.Persons.Others;
-import model.Persons.Person;
 import model.fileWork.Format.SaveDoc.SaveBinFormat;
 import model.fileWork.Format.SaveDoc.SaveDocFormat;
 import model.fileWork.Format.SaveDoc.SaveMdFormat;
@@ -26,7 +21,6 @@ public class Main
         View view = new Console();
 
         FamilyTree familyTree = new FamilyTree();
-        AddHuman addHuman = new AddHuman();
         SaveBinFormat saveBinFormat = new SaveBinFormat();
         SaveTextFormat saveTextFormat = new SaveTextFormat();
         SaveDocFormat saveDocFormat = new SaveDocFormat();
@@ -36,7 +30,7 @@ public class Main
         AddPerson addPerson = new AddPerson();
         SortById sortById = new SortById();
 
-        Service service = new Service(familyTree, addHuman,
+        Service service = new Service(familyTree,
          saveBinFormat, saveTextFormat, saveDocFormat,
           saveMdFormat, sortById, sortByLastName, findHuman, addPerson);
 

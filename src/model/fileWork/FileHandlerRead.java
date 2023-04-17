@@ -1,17 +1,11 @@
 package model.fileWork;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import model.fileWork.Format.ReadDoc.ReadBin;
 import model.fileWork.Format.ReadDoc.ReadDoc;
 import model.fileWork.Format.ReadDoc.ReadMd;
 import model.fileWork.Format.ReadDoc.ReadTxt;
 import model.fileWork.Format.ReadDoc.interfaceRead;
-import view.Console;
 import view.Starts.Start2;
 import view.Starts.Start3;
 import view.Starts.interfaceStart;

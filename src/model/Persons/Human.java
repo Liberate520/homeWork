@@ -31,6 +31,8 @@ public class Human extends Person implements Serializable, InterfaceHuman
         this.father = father;
         this.mother = mother;
         this.children = children;
+        this.dataBirth = dataBirth;
+        this.dataDeath = dataDeath;
     }    
     
 

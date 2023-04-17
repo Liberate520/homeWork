@@ -3,7 +3,6 @@ package model.Comparator;
 import java.util.Comparator;
 import model.Persons.Human;
 import model.Persons.Person;
-import model.Persons.Others;
 
 public class NameComparator<T extends Person> implements Comparator<T> 
 {

@@ -2,23 +2,15 @@ package model.FamilyTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-
 import model.Comparator.IdComparator;
-import model.Comparator.NameComparator;
 import model.Iterator.HumanIterator;
-import model.Persons.Human;
-import model.Persons.Others;
 import model.Persons.Person;
 
 public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
 {  
     private ArrayList t;
     private ArrayList<T> familyTree = new ArrayList<>();
-
     
     @Override
     public String toString() 
@@ -31,16 +23,6 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
     {
         return new HumanIterator(t);
     }
-
-    // public void sortById() 
-    // {
-    //     familyTree.sort(new IdComparator());
-    // }
-
-    // public void sortByLastName(FamilyTree familyTree) 
-    // {
-    //     familyTree.sort(new NameComparator());
-    // }
 
     public void add(T person) 
     {
@@ -56,15 +38,16 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<T>
     public Object get(int i) {
         return familyTree.get(i);
     }
-
-    public static void addPerson(Person person, FamilyTree familyTree) {
-    }
-
-    public FamilyTree getFamilyTree(FamilyTree familyTree)
+    public Object getLastName()
     {
-        return familyTree;
+        return getLastName();
+    }
+    public Object getFirstName()
+    {
+        return getFirstName();
     }
 
-    public void sort(IdComparator idComparator) {
+    public void sort(IdComparator idComparator) 
+    {
     }
 }
