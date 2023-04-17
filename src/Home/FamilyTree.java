@@ -1,8 +1,11 @@
 package Home;
 
+import java.io.*;
+import java.util.BitSet;
 import java.util.List;
 
-public class FamilyTree {
+
+public class FamilyTree implements WorkWithData{
 
 
 
@@ -114,7 +117,7 @@ public class FamilyTree {
     }
     public String getHumanInfo(Human human){
         StringBuilder sb = new StringBuilder();
-        sb.append(super.toString());
+        sb.append(human.toString());
         if (human.mother != null) {
             sb.append(getMotherDetails(human));
         }
@@ -131,6 +134,26 @@ public class FamilyTree {
             sb.append(getChildrenDetails(human));
         }
         return sb.toString();
+    }
+
+
+    @Override
+    public void FamilyTreeSave(Human human) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream(human.getName()+".out"));
+        objectOutputStream.writeObject(human);
+        objectOutputStream.close();
+
+    }
+
+    @Override
+    public void FamilyTreeload(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName()+".out"));
+        Human humanRestored = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getHumanInfo(humanRestored));
     }
 
 

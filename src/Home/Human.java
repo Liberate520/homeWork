@@ -1,8 +1,9 @@
 package Home;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Human  {
+public class Human implements Serializable {
     private String name;
     private int age;
     protected Human mother;
