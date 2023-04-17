@@ -1,23 +1,46 @@
+package group;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import human.Human;
 
-public class FamilyTree {
+public class FamilyTree implements Groupable, Serializable {
 
-    private ArrayList<Human> famyliTree = new ArrayList<>();
+    private List<Human> famyliTree;
+
+    public FamilyTree() {
+        famyliTree = new ArrayList<>();
+    }
+
+    int id = 0;
 
     public void addHuman(Human human) {
         famyliTree.add(human);
         if (human.getMother() != null)
-            human.getMother().addChildren(human);
+            human.getMother().addChild(human);
 
         if (human.getFather() != null)
-            human.getFather().addChildren(human);
+            human.getFather().addChild(human);
     }
 
     @Override
     public String toString() {
         return famyliTree.toString();
+    }
+
+    public Human getHumanByName(String name) {
+        Human findHuman = null;
+        for (int i = 0; i < famyliTree.size(); i++) {
+            if (famyliTree.get(i).getName().equals(name)) {
+                findHuman = famyliTree.get(i);
+            }
+        }
+        if (findHuman == null)
+            System.out.println("Такой человек не найден.");
+        return findHuman;
     }
 
     public void findHuman(){
@@ -32,7 +55,10 @@ public class FamilyTree {
             }    
         }
         if (!find) System.out.println("Такой человек не найден.");
+        iScanner.close();
     }
 
-    
+    public List<Human> getHumanList() {
+        return famyliTree;
+    }
 }

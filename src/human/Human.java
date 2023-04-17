@@ -1,31 +1,35 @@
+package human;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Human {
+public class Human implements Serializable{
     private int id;
     private String name;
+    private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private Human mom;
     private Human dad;
     private List<Human> childrens;
 
-    public Human(int id, String name, LocalDate birthDate, LocalDate deathDate, Human mom,
-            Human dad,
-            List<Human> childrens) {
+    public Human(int id, String name, LocalDate birthDate, LocalDate deathDate, 
+    Gender gender, Human mom, Human dad, List<Human> childrens) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
+        this.gender = gender;
         this.mom = mom;
         this.dad = dad;
         this.childrens = childrens;
     }
 
     public Human() {
-        this(0, null, null, null, null, null, null);
+        this(0, null, null, null, null, null, null, null);
     }
 
     @Override
@@ -37,15 +41,15 @@ public class Human {
         else
             sb = sb.append(", дата смерти: ").append(deathDate);
         if (mom == null)
-            sb = sb.append(", мать не определена.");
+            sb = sb.append(", мать не определена");
         else
             sb = sb.append(", мать: ").append(mom.getName());
         if (dad == null)
-            sb = sb.append(", отец не определен.");
+            sb = sb.append(", отец не определен");
         else
             sb = sb.append(", отец: ").append(dad.getName());
         if (childrens == null)
-            sb = sb.append(", детей нет.");
+            sb = sb.append(", детей нет");
         else {
             sb = sb.append(", дети:");
             for (int i = 0; i < childrens.size(); i++) {
@@ -54,6 +58,14 @@ public class Human {
         }
 
         return sb.toString();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public String getName() {
@@ -92,11 +104,8 @@ public class Human {
         return childrens;
     }
 
-    public void addChildren(Human person) {
-        if (this.childrens == null)
-            this.childrens = new ArrayList<>();
+    public void addChild(Human person) {
+        if (this.childrens == null) this.childrens = new ArrayList<>();
         this.childrens.add(person);
     }
-
-
 }
