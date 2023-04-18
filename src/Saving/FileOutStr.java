@@ -4,9 +4,9 @@ import Program.FamilyTree;
 
 import java.io.*;
 
-public class Out implements Saveable{
+public class FileOutStr implements Saveable{
     @Override
-    public void saveAs(FamilyTree familyTree, String path) throws IOException {
+    public void saveFamilyTreeAs(FamilyTree familyTree, String path) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(path));
         objectOutputStream.writeObject(familyTree);

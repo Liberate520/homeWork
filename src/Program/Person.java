@@ -152,7 +152,8 @@ public class Person extends Human implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Person person) {
-            if (person.getFirstName() != null && person.getLastName() != null) {
+            if (person.getFirstName() != null &&
+                    person.getLastName() != null) {  // Добавлено условие для избежания ошибки при сериализации
                 return this.getFirstName().equals(person.getFirstName()) &&
                         this.getLastName().equals(person.getLastName()) &&
                         this.getAge() == person.getAge();

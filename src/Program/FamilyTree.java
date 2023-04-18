@@ -1,6 +1,6 @@
 package Program;
 
-import Saving.Out;
+import Saving.FileOutStr;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -198,11 +198,11 @@ public class FamilyTree implements Serializable {
         return output.toString();
     }
 
-    public void saveAs(String path, Out format) throws IOException {
-        format.saveAs(this, path);
+    public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
+        format.saveFamilyTreeAs(this, path);
     }
 
-    public FamilyTree getFamilyTreeFrom(String path, Out format) throws IOException, ClassNotFoundException {
+    public FamilyTree getFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
         return format.getFamilyTreeFrom(path);
     }
 }

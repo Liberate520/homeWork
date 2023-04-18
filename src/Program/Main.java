@@ -1,6 +1,6 @@
 package Program;
 
-import Saving.Out;
+import Saving.FileOutStr;
 
 import java.io.*;
 
@@ -51,10 +51,10 @@ public class Main {
 //        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
 
         // Сериализуем FamilyTree с помощью класса ObjectOutputStream
-        familyTree.saveAs("familyTree.out", new Out());
+        familyTree.saveFamilyTreeAs("familyTree.out", new FileOutStr());
 
         // Десериализация из файла с помощью класса ObjectInputStream
-        FamilyTree familyTreeRestored = familyTree.getFamilyTreeFrom("familyTree.out", new Out());
+        FamilyTree familyTreeRestored = familyTree.getFamilyTreeFrom("familyTree.out", new FileOutStr());
 
         // Вывод восстановленного FamilyTree
         System.out.println();
