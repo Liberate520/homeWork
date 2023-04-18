@@ -13,7 +13,7 @@ private File file = new File("homeWork\\src\\file.txt");
 
 @Override
 public void save(List<Human> familyTree) throws IOException {
-    FileWriter writer = new FileWriter(this.file, true);    
+    FileWriter writer = new FileWriter(file, true);    
         for (Human human : familyTree) {
             if (human.getFather() == null || human.getMother() == null) {
                 writer.write(human.getname() + " имеет детей: " + human.getChildren() + "\n");
