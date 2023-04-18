@@ -21,6 +21,10 @@ public class Presenter {
         this.console.print(this.service.showTheFamily());
     }
 
+    public Service getService(){
+        return this.service;
+    }
+
     public void commandFullPersonInfo(String whom) {
         int id;
         String answer = "";
@@ -91,27 +95,14 @@ public class Presenter {
         this.console.print(answer);
     }
 
-    public void commandEditPerson(String whom, String field, String what){
-        int id,id_parent;
-        try {
-            id = Integer.parseInt(whom.strip());
-        } catch (Exception e) {
-            return;
-        }
+    public void commandAddSex(int id, String what){
+        service.getFamily_tree().get(id).setPerson_sex(what);
+        String answer = service.getFamily_tree().get(id).toStringFull();
+        this.console.print(answer);
+        return;
+    }
 
-        if (field.equals("sex")){
-            service.getFamily_tree().get(id).setPerson_sex(what);
-            String answer = service.getFamily_tree().get(id).toStringFull();
-            this.console.print(answer);
-            return;
-        }
-
-        try {
-            id_parent = Integer.parseInt(what.strip());
-        } catch (Exception e) {
-            this.console.print("Incorrect parent id:" + what);
-            return;
-        }
+    public void commandEditPerson(int id, String field, int id_parent){
 
         if (field.equals("mother"))
             service.getFamily_tree().addMother(id, id_parent);
