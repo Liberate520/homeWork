@@ -1,6 +1,6 @@
-package ui;
-import ui.commands.*;
-import ui.commands.interfaces.Option;
+package UI;
+import UI.commands.*;
+import UI.commands.interfaces.Option;
 
 import java.io.IOException;
 import java.util.*;

@@ -7,7 +7,7 @@ import Tree.Comporators.ComparByChild;
 import Tree.Comporators.ComparByName;
 import Tree.Comporators.ComparBySecondName;
 
-public class Sort<E> implements Serializable{
+public class Sort<E> {
 
     private List<E> familytree;
 

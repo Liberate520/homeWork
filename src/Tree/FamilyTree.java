@@ -10,7 +10,7 @@ import Tree.Comporators.ComparByChild;
 import Tree.Comporators.ComparByName;
 import Tree.Comporators.ComparBySecondName;
 
-public class FamilyTree<E extends Person> implements  Tree<E>,Serializable{
+public class FamilyTree<E extends Person> implements Tree<E>,Serializable{
 
     private List<E> familytree;
     
@@ -207,15 +207,16 @@ public class FamilyTree<E extends Person> implements  Tree<E>,Serializable{
         System.out.println("Человеку " + familytree.get(person - 1).getFullName() + " добавлен ребёнок " + familytree.get(child - 1).getFullName());
     }
 
+    public List<Person> getPersonList() {
+        return (List<Person>) familytree;
+    }
+
     @Override
     public Iterator<E> iterator(){
         return new PersonIterator<E>(familytree);
     }
 
-    @Override
-    public List<Person> getPersonList() {
-        return (List<Person>) familytree;
-    }
+   
 
     
 

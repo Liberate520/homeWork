@@ -1,6 +1,6 @@
-package ui.commands;
+package UI.commands;
 
-import ui.Console;
+import UI.Console;
 
 public class TreeList extends Command{
     public TreeList(Console console) {

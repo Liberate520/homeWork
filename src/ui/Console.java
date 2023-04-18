@@ -1,7 +1,7 @@
-package ui;
+package UI;
 
 import presenter.Presenter;
-import ui.interfaces.View;
+import UI.interfaces.View;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -181,4 +181,5 @@ public class Console implements View {
         presenter.read();
         System.out.println();
     }
+
 }

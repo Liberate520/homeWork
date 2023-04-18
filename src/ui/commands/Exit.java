@@ -1,5 +1,5 @@
-package ui.commands;
-import ui.Console;
+package UI.commands;
+import UI.Console;
 
 public class Exit extends Command {
     public Exit(Console console) {

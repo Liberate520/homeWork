@@ -1,7 +1,7 @@
-package ui.commands;
+package UI.commands;
 
-import ui.Console;
-import ui.commands.interfaces.Option;
+import UI.Console;
+import UI.commands.interfaces.Option;
 
 abstract class Command implements Option {
     private Console console;

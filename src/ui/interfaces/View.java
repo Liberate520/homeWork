@@ -1,4 +1,4 @@
-package ui.interfaces;
+package UI.interfaces;
 
 import presenter.Presenter;
 

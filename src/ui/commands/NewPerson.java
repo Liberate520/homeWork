@@ -1,6 +1,6 @@
-package ui.commands;
+package UI.commands;
 
-import ui.Console;
+import UI.Console;
 import java.io.IOException;
 
 public class NewPerson extends Command {

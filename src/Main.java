@@ -1,8 +1,8 @@
 import java.io.IOException;
 
 import presenter.Presenter;
-import ui.Console;
-import ui.interfaces.View;
+import UI.Console;
+import UI.interfaces.View;
 
 
 public class Main {
