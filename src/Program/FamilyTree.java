@@ -1,7 +1,13 @@
+package Program;
+
+import Saving.Out;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private HashSet<Person> personsSet;
 
     public FamilyTree() {
@@ -190,5 +196,13 @@ public class FamilyTree {
         }
         output.append("---------------------------------" + "\n");
         return output.toString();
+    }
+
+    public void saveAs(String path, Out format) throws IOException {
+        format.saveAs(this, path);
+    }
+
+    public FamilyTree getFamilyTreeFrom(String path, Out format) throws IOException, ClassNotFoundException {
+        return format.getFamilyTreeFrom(path);
     }
 }

@@ -1,5 +1,11 @@
+package Program;
+
+import Saving.Out;
+
+import java.io.*;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Person person1 = new Person("Василий", "Лежебоков", 32, Sex.Male);
         person1.setSpouse("Василиса", "Лежебокова", 27, Sex.Female);
@@ -24,13 +30,14 @@ public class Main {
         System.out.println();
 
         // Получение информации по записи
-        System.out.println(familyTree.getInfo("Василий", "Лежебоков", Relation.Spouse));
-        System.out.println();
-//        System.out.println(familyTree.getInfo("Василий", "Лежебоков", Relation.Son));
+//        System.out.println(familyTree.getInfo("Василий", "Лежебоков", Program.Relation.Spouse));
 //        System.out.println();
-//        System.out.println(familyTree.getInfo("Петр", "Лежебоков", Relation.Father));
+//        System.out.println(familyTree.getInfo("Василий", "Лежебоков", Program.Relation.Son));
+//        System.out.println();
+//        System.out.println(familyTree.getInfo("Петр", "Лежебоков", Program.Relation.Father));
 //        System.out.println();
 //        System.out.println(familyTree.getInfo("Анатолий", "Лежебоков"));
+//
 //        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
 //        System.out.println();
 
@@ -41,6 +48,17 @@ public class Main {
         familyTree.pushToTree(person3);
 
         // Просмотр измененной информации по записи
-        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
+//        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
+
+        // Сериализуем FamilyTree с помощью класса ObjectOutputStream
+        familyTree.saveAs("familyTree.out", new Out());
+
+        // Десериализация из файла с помощью класса ObjectInputStream
+        FamilyTree familyTreeRestored = familyTree.getFamilyTreeFrom("familyTree.out", new Out());
+
+        // Вывод восстановленного FamilyTree
+        System.out.println();
+        System.out.println(familyTreeRestored);
+        System.out.println(familyTreeRestored.getInfo("Василий", "Лежебоков", Program.Relation.Spouse));
     }
 }

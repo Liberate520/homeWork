@@ -1,7 +1,10 @@
+package Program;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Person extends Human{
+public class Person extends Human implements Serializable {
     private Person mother;
     private Person father;
     private Person spouse;
@@ -149,9 +152,11 @@ public class Person extends Human{
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Person person) {
-            return this.getFirstName().equals(person.getFirstName()) &&
-                    this.getLastName().equals(person.getLastName()) &&
-                    this.getAge() == person.getAge();
+            if (person.getFirstName() != null && person.getLastName() != null) {
+                return this.getFirstName().equals(person.getFirstName()) &&
+                        this.getLastName().equals(person.getLastName()) &&
+                        this.getAge() == person.getAge();
+            }
         }
         return false;
     }

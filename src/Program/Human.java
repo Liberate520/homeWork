@@ -1,7 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
+package Program;
 
-public class Human {
+import java.io.Serializable;
+
+public class Human implements Serializable {
     private String firstName;
     private String lastName;
     private int age;
@@ -23,7 +24,7 @@ public class Human {
         StringBuilder output = new StringBuilder();
         output.append("Name: " + this.firstName + " " + this.lastName + "\n");
         output.append("Age: " + this.age + "\n");
-        output.append("Sex: " + this.sex + "\n");
+        output.append("Program.Sex: " + this.sex + "\n");
         return output.toString();
     }
 
