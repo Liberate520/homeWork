@@ -14,7 +14,7 @@ public class Service {
     String filename = "data.txt";
     Serial serial = new Serial();
     private int id;
-    private FamilyTree tree;
+    private FamilyTree<Human> tree;
 
     public boolean saveToFile() {
         if(serial == null) {

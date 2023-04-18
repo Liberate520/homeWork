@@ -34,7 +34,7 @@ public class Main {
 
         //System.out.println(someFamily.getInfo());
 
-        service.readFromFile();
+        //service.readFromFile();
         View view = new Console();
         Presenter presenter = new Presenter(view, service);
 

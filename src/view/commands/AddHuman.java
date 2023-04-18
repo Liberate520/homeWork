@@ -14,6 +14,7 @@ public class AddHuman extends Command {
 
     @Override
     public void execute() {
-        getConsole().getTreeInfo();
+        //getConsole().getTreeInfo();
+        getConsole().addHuman();
     }
 }
