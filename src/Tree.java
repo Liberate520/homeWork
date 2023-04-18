@@ -1,67 +1,70 @@
 package OOPjavaTree.src;
 
-import Data.OperationData;
+import OOPjavaTree.src.Data.Operation;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
-    private List<String> branch;
+public class Tree implements Serializable {
+    private List<Human> famBranch;
 
-
-    public Tree(List<String> branch) {
-        this.branch = branch;
+    public Tree(List<Human> famBranch){
+        this.famBranch = famBranch;
     }
 
-    public List<String> getBranch() {
-        return branch;
+    public Tree(){
+        this(new ArrayList<>());
     }
 
-    public List<String> searchFamily(String scan, List<String> resultFind, String path) {
+    public List<Human> getFamBranch() {
+        return famBranch;
+    }
 
-        OperationData file = new OperationData();
-        List<String> data = loadData(file, path);
+    public Human getByName(String name){
+        for (Human human : famBranch){
+            if (human.getName().equals(name)){
+                return human;
+            }
+        }
+        return null;
+    }
+
+    public boolean add(Human human){
+        if (human == null){
+            return false;
+        }
+        if (!famBranch.contains(human)){
+            famBranch.add(human);
+                if (human.getFather() != null){
+                    human.getFather().addChild(human);
+                }
+                if (human.getMother() != null){
+                    human.getMother().addChild(human);
+                }
+                return true;
+        }
+        return false;
+    }
+
+    public void saveData(Operation file, Object tree) throws IOException, ClassNotFoundException {
+        file.getUsedFile(tree);
+    }
+
+    public Object loadData(Operation file, Object tree) throws IOException, ClassNotFoundException {
+        tree = file.getUsedFile(tree);
+        return tree;
+    }
+
+    @Override
+    public String toString() {
         int count = 1;
-        for (int i = 0; i < data.size(); i+=3) {
-            String[] subData = data.get(i).split(" ");
-            if (subData[0].equals(scan)) {
-                System.out.printf("\n%d: %s", count++, data.get(i));
-                resultFind.add(data.get(i));
-            }
+        StringBuilder sb = new StringBuilder();
+        for (Human human : getFamBranch()) {
+            sb.append(count++).append(": ");
+            sb.append(human.toString()).append("\n");
         }
-        return resultFind;
-    }
-
-    public Human getPerson(String person, String path){
-
-        String[] parsePerson = person.split(" ");
-        Human obj = new Human();
-        obj.setFamily(parsePerson[0]);
-        obj.setName(parsePerson[1]);
-        obj.setBurndate(parsePerson[2]);
-        getFamily(obj, path, person);
-        return obj;
-    }
-
-    public void getFamily (Human object, String path, String person) {
-
-        OperationData file = new OperationData();
-        List<String> data = loadData(file, path);
-        for (int i =0; i < data.size(); i+=3) {
-            if (person.equals(data.get(i))) {
-                String[] valChildren = data.get(i+1).split("/");
-                String[] valParents = data.get(i+2).split("/");
-                for (String child : valChildren) {
-                    object.setChildren(child);
-                }
-                for (String parent : valParents) {
-                    object.setParents(parent);
-                }
-            }
-        }
-    }
-
-    public List<String> loadData(OperationData file, String path){
-        return Arrays.asList(file.loadData(path).split(";"));
+        return sb.toString();
     }
 }

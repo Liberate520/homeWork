@@ -1,69 +1,34 @@
-package OOPjavaTree.src;/*Метод обработки введенной фамилии, после метод поиска Персоны по цельной строке Ф.И.Д,
-* затем метод создания объекта со связями. Далее метод операции над Персоной, при получении детей/родителей отправить в метод выбора Персоны*/
+package OOPjavaTree.src;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import OOPjavaTree.src.Data.Loaded;
+import OOPjavaTree.src.Data.Operation;
+import OOPjavaTree.src.Data.Saved;
 
+import java.io.IOException;
 
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
-    @SuppressWarnings("InfiniteLoopStatement")
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Tree tree = new Tree();
 
-    public static void getStart(List<String> people) {
-        Tree family = new Tree(people);
-        String path = "FamTree/src/Data/DATA.txt";
-        while (true) {
+        tree.add(new Human("Дмитрий23", 1980));
+        tree.add(new Human("Кристина", 1982));
+        tree.add(new Human("Василиса", 2001, tree.getByName("Дмитрий"), tree.getByName("Кристина")));
+        tree.add(new Human("Евгений", 2004, tree.getByName("Дмитрий"), tree.getByName("Кристина")));
+        tree.add(new Human("Леонид", 2008, tree.getByName("Дмитрий"), tree.getByName("Кристина")));
 
-            System.out.println("\nВведите фамилию: ");
-            String scan = scanner.next();
-            List<String> resultFind = new ArrayList<>();
-            resultFind = family.searchFamily(scan, resultFind, path);
-            if (resultFind.isEmpty()) {
-                System.out.println("Фамилия не найдена");
-            } else {
-                getOnce(resultFind, path, family);
-            }
+        //tree.toString() - для общего вывода списка дерева
+        System.out.println(tree);
+
+        //human.getString() - Вывод после запроса детальной информации
+        for (Human human : tree.getFamBranch()) {
+            System.out.println(human.getString());
         }
-    }
+        System.out.println();
 
-    public static void getOnce(List<String> resultMany, String path, Tree tree) {
-        System.out.println("\n0: Ввести другую фамилию: \nВыберите человека для операций: ");
-        int scan = scanner.nextInt();
-        if (!(scan == 0) && (!(resultMany.get(0).equals("null"))) && (!(scan > resultMany.size()))) {
-            Human person = tree.getPerson(resultMany.get(scan - 1), path);
-            getOperation(person, path, tree);
-        }
-    }
-
-
-
-    public static void getOperation(Human select, String path, Tree branch) {
-        System.out.println("1: Список детей" + "\n2: Список родителей" +
-                "\n0: Ввести другую фамилию" + "\nВыберите операцию: ");
-        int choice = scanner.nextInt();
-        int count = 1;
-        switch (choice) {
-            case 1:
-                for (String child : select.getChildren()) {
-                    System.out.printf("\n%d: %s", count++, child);
-                }
-                getOnce(select.getChildren(), path, branch);
-                break;
-            case 2:
-                for (String parent : select.getParents()) {
-                    System.out.printf("\n%d: %s", count++, parent);
-                }
-                getOnce(select.getParents(), path, branch);
-                break;
-            case 0:
-                break;
-        }
-    }
-
-
-    public static void main(String[] args) {
-        List<String> people = new ArrayList<>();
-        getStart(people);
+        //Operation file = new Saved();
+        //tree.saveData(file, tree);
+        Operation file = new Loaded();
+        Tree tree1 = (Tree) tree.loadData(file, tree);
+        System.out.println(tree1);
     }
 }

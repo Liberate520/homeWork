@@ -1,29 +1,66 @@
 package OOPjavaTree.src;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
-    private String family;
-    private String burndate;
-    private List<String> parents;
-    private List<String> children;
+    private int birthdate;
+    private Human father;
+    private Human mother;
+    private List<Human> children;
 
-    public Human(String family, String name, String burndate) {
+    public Human (String name, int birthdate, Human father, Human mother) {
         this.name = name;
-        this.family = family;
-        this.burndate = burndate;
-        this.parents = new ArrayList<String>();
-        this.children = new ArrayList<String>();
+        this.birthdate = birthdate;
+        this.father = father;
+        this.mother = mother;
+        children = new ArrayList<>();
     }
 
-    public Human(){
-        this.name = null;
-        this.family = null;
-        this.burndate = null;
-        this.parents = new ArrayList<String>();
-        this.children = new ArrayList<String>();
+    public Human (String name, int birthdate){
+        this(name, birthdate,null, null);
+    }
+
+    //Вывод детальной информации Персоны (для функции комадной строки)
+    public String getString (){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: ").append(name).append(", ");
+        sb.append("Год рождения: ").append(birthdate).append(", ");
+        sb.append(getFatherInfo()).append(", ");
+        sb.append(getMotherInfo());
+        return sb.toString();
+    }
+
+    public String getFatherInfo(){
+        String result = "Отец: ";
+        if (father != null){
+            result += father.getName();
+        }
+        else {
+            result += "Не известно";
+        }
+        return result;
+    }
+
+    public String getMotherInfo(){
+        String result = "Мать: ";
+        if (mother != null){
+            result += mother.getName();
+        }
+        else {
+            result += "Не известно";
+        }
+        return result;
+    }
+
+    public boolean addChild(Human child){
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
     public String getName() {
@@ -34,36 +71,40 @@ public class Human {
         this.name = name;
     }
 
-    public String getFamily() {
-        return family;
+    public int getBirthdate() {
+        return birthdate;
     }
 
-    public void setFamily(String family) {
-        this.family = family;
+    public void setBirthdate(int birthdate) {
+        this.birthdate = birthdate;
     }
 
-    public void setBurndate(String burndate) {
-        this.burndate = burndate;
+    public Human getFather() {
+        return father;
     }
 
-    public List<String> getParents() {
-        return parents;
+    public void setFather(Human father) {
+        this.father = father;
     }
 
-    public void setParents(String person) {
-        this.parents.add(person);
+    public Human getMother() {
+        return mother;
     }
 
-    public List<String> getChildren() {
-        return children;
+    public void setMother(Human mother) {
+        this.mother = mother;
     }
 
-    public void setChildren(String person) {
-        this.children.add(person);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return human.getName().equals(getName());
     }
 
     @Override
     public String toString() {
-        return this.family + " " + this.name + " " + this.burndate;
+        return "Имя: " + name + ", Год рождения: " + birthdate;
     }
 }
