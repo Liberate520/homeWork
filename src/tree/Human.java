@@ -1,10 +1,11 @@
 package tree;
 
 import java.util.GregorianCalendar;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
 
     private String name;
     private String surname;
@@ -32,6 +33,14 @@ public class Human {
         return parents;
     }
 
+    public List<Human> getMother() {
+        return parents;
+    }
+
+    public List<Human> getFather() {
+        return parents;
+    }
+
     public List<Human> getChildren() {
         return children;
     }
@@ -42,13 +51,13 @@ public class Human {
 
     public void addChild(Human child) {
         this.children.add(child);
-        this.addParent(this);
     }
+
 
     @Override
     public String toString() {
-        return " имя: " + name +
-                ", фамилия: " + surname +
+        return name +
+                " " + surname +
                 ", дата рождения: " + birthdDate.getTime();
 
     }

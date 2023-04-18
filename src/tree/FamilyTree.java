@@ -25,7 +25,7 @@ public class FamilyTree {
     public List<Human> getParents(Human human) {
         return human.getParents();
     }
-
+    
     /**
      * функция getDescendants ищет потомков для
      * указанного персонажа
@@ -56,6 +56,7 @@ public class FamilyTree {
             ancestors.addAll(getAncestors(parent));
         }
         return ancestors;
+        
     }
 
     /**
