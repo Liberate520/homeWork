@@ -10,7 +10,6 @@ public class Finish extends Command{
         super(console);
         description = "Выйти из меню \n";
     }
-
     @Override
     public void execute() {
         console.finish();

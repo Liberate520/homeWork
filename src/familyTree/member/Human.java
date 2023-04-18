@@ -24,48 +24,6 @@ public class Human implements FamilyMember, Serializable {
     private List<Human> grandchildrens;
 
 
-//    private final String nameRegex = "^[\\p{L} .'-]+$";
-
-    public Human(int id, String name, String surname, Gender gender, String dateBirth, String dateDeath) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.dateBirth = dateBirth;
-        this.dateDeath = dateDeath;
-        this.gender = gender;
-        this.childList = new ArrayList<>();
-        this.siblings = new ArrayList<>();
-        this.grandparents = new ArrayList<>();
-        this.grandchildrens = new ArrayList<>();
-    }
-
-    public Human(String name, String surname, Gender gender, String dateBirth) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.dateBirth = dateBirth;
-        this.gender = gender;
-        this.father = null;
-        this.mother = null;
-        this.childList = new ArrayList<>();
-        this.siblings = new ArrayList<>();
-        this.grandparents = new ArrayList<>();
-        this.grandchildrens = new ArrayList<>();
-    }
-    public Human(int id, String name, String surname, Gender gender, String dateBirth) {
-        this.name = name;
-        this.surname = surname;
-        this.dateBirth = dateBirth;
-        this.gender = gender;
-        this.id = id;
-        this.father = null;
-        this.mother = null;
-        this.childList = new ArrayList<>();
-        this.siblings = new ArrayList<>();
-        this.grandparents = new ArrayList<>();
-        this.grandchildrens = new ArrayList<>();
-    }
-
     public Human(int id, String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
         this.name = name;
         this.surname = surname;
@@ -74,11 +32,10 @@ public class Human implements FamilyMember, Serializable {
         this.id = id;
         this.father = father;
         this.mother = mother;
-
         this.childList = new ArrayList<>();
         this.siblings = new ArrayList<>();
-        this.grandparents = new ArrayList<>();
-        this.grandchildrens = new ArrayList<>();
+//        this.grandparents = new ArrayList<>();
+//        this.grandchildrens = new ArrayList<>();
     }
 
     public Human() {

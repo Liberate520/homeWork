@@ -7,7 +7,6 @@ public class SaveTree extends Command{
         super(console);
         description = "Сохранить дерево в файл \n";
     }
-
     @Override
     public void execute() {
         console.saveTree();

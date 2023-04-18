@@ -8,7 +8,6 @@ public class LoadTree extends Command{
         super(console);
         description = "Загрузить дерево из файла \n";
     }
-
     @Override
     public void execute() {
         console.loadTree();

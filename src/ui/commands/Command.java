@@ -11,10 +11,8 @@ public abstract class Command {
     public Command(ConsoleUI console) {
         this.console = console;
     }
-
     public String getDescription() {
         return description;
     }
-
     public abstract void execute();
 }

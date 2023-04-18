@@ -7,7 +7,6 @@ public class ClearTree extends Command{
         super(console);
         description = "Очистить дерево \n";
     }
-
     @Override
     public void execute() {
         console.clearTree();

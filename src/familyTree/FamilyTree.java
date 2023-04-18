@@ -162,7 +162,6 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         }
     }
 
-
     public String getInfo() {
         StringBuilder tree = new StringBuilder();
         tree.append("В дереве ").append(members.size())
@@ -173,12 +172,10 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         return tree.toString();
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return new MemberIterator<>(members);
     }
-
 
 
 }

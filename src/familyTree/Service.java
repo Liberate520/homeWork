@@ -11,7 +11,6 @@ import service.FileHandler;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 
 public class Service<T extends FamilyMember> {
@@ -40,13 +39,9 @@ public class Service<T extends FamilyMember> {
     }
 
 
-    public void addHuman(String name, String surname, Gender gender, String dateBirth) {
-
-        tree.add((T) new Human(id++, name, surname, gender, dateBirth));
-    }
-    public void printTree(){
-        System.out.println(tree.getInfo());
-        //tree.getInfo();
+    public String printTree(){
+//        System.out.println(tree.getInfo());
+        return tree.getInfo();
     }
 
     public void printTrees(){
@@ -106,15 +101,6 @@ public class Service<T extends FamilyMember> {
                 + ", дети: " + person.getChildren() + ", братья и сёстры: " + person.getSiblings();
     }
 
-//    public String findHuman(String name) {
-//        for (T member: tree) {
-//            if (member.getName().equals(name)) {
-//                return member.getInfo();
-//            }
-//        }
-//        return "Человек с таким именем не найден";
-//    }
-
     public T searchMemberByName(String name) {
         try {
             if (name == null || name.trim().isEmpty()) {
@@ -171,8 +157,6 @@ public class Service<T extends FamilyMember> {
         tree.remove(memberToRemove);
         System.out.println("Человек с именем '" + name + "' удален из дерева.");
     }
-
-
 
 
 

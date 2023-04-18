@@ -7,7 +7,6 @@ public class RemoveMember extends Command{
         super(console);
         description = "Удалить элемент дерева \n";
     }
-
     @Override
     public void execute() {
         console.removeMember();

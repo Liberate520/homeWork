@@ -7,7 +7,6 @@ public class AddMember extends Command{
         super(console);
         description = "Добавить элемент к дереву \n";
     }
-
     @Override
     public void execute() {
         console.addMember();

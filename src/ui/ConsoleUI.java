@@ -42,7 +42,8 @@ public class ConsoleUI implements View{
                     scanner.next();
                 }
                 int choice = scanner.nextInt();
-                scanner.nextLine();
+                scan();
+//                scanner.nextLine();
                 menu.execute(choice);
             } catch (IndexOutOfBoundsException e) {
                 print("Такого пункта меню нет. Выберите пункт из списка.");
@@ -58,6 +59,7 @@ public class ConsoleUI implements View{
     public void printTree() {
         System.out.println("_".repeat(80));
         presenter.printTree();
+        System.out.println();
     }
 
     public void addMember(){
@@ -71,7 +73,7 @@ public class ConsoleUI implements View{
         // Ввод имени
         while (name == null) {
             System.out.println("Введите имя: ");
-            String input = scanner.nextLine();
+            String input = scan();
             if (input.trim().isEmpty()) {
                 System.out.println("Имя не может быть пустым.");
             } else {
@@ -81,7 +83,7 @@ public class ConsoleUI implements View{
         // Ввод фамилии
         while (surname == null) {
             System.out.println("Введите фамилию: ");
-            String input = scanner.nextLine();
+            String input = scan();
             if (input.trim().isEmpty()) {
                 System.out.println("Фамилия не может быть пустой.");
             } else {
@@ -91,7 +93,7 @@ public class ConsoleUI implements View{
         // Ввод пола
         while (sex == null) {
             System.out.println("Введите пол 'm' - мужской или 'f' - женский: ");
-            String input = scanner.nextLine();
+            String input = scan();
             if (input.trim().isEmpty()) {
                 System.out.println("Пол не может быть пустым.");
             } else if (input.trim().equalsIgnoreCase("m")) {
@@ -105,21 +107,16 @@ public class ConsoleUI implements View{
         // Ввод даты рождения
         while (birthDate == null) {
             System.out.println("Введите дату рождения в формате ДД.ММ.ГГГГ: ");
-            String input = scanner.nextLine();
+            String input = scan();
             if (input.trim().isEmpty()) {
                 System.out.println("Поле не может быть пустым.");
             } else {
                 birthDate = input.trim();
             }
-//            try {
-//                birthDate = LocalDate.parse(input.trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-//            } catch (DateTimeParseException e) {
-//                System.out.println("Некорректный формат даты рождения.");
-//            }
         }
         // Ввод матери
         System.out.println("Введите имя матери (если неизвестно, нажмите Enter): ");
-        String motherName = scanner.nextLine();
+        String motherName = scan();
         if (!motherName.trim().isEmpty()) {
             try {
                 mother = presenter.searchMemberByName(motherName.trim());
@@ -133,7 +130,7 @@ public class ConsoleUI implements View{
         }
         // Ввод отца
         System.out.println("Введите имя отца (если неизвестно, нажмите Enter): ");
-        String fatherName = scanner.nextLine();
+        String fatherName = scan();
         if (!fatherName.trim().isEmpty()) {
             try {
                 father = presenter.searchMemberByName(fatherName.trim());
@@ -156,7 +153,7 @@ public class ConsoleUI implements View{
 
     public void removeMember(){
         System.out.println("Введите имя: ");
-        String name = scanner.nextLine();
+        String name = scan();
         try {
             presenter.removeMember(name);
             System.out.println("Человек был успешно удален из дерева.\n");
@@ -167,7 +164,7 @@ public class ConsoleUI implements View{
 
     public void searchMemberByName(){
         System.out.println("Введите имя: ");
-        String name = scanner.nextLine();
+        String name = scan();
         if(presenter.searchMemberByName(name) != null) {
             System.out.println(presenter.searchMemberByName(name).getInfo());
         } else {
@@ -183,14 +180,14 @@ public class ConsoleUI implements View{
     }
     public void loadTree(){
         System.out.println("Введите имя файла для загрузки: ");
-        String fileName = scanner.nextLine();
+        String fileName = scan();
         String fullName = "src/" + fileName + ".dat";
         presenter.loadTree(fullName);
     }
 
     public void saveTree() {
         System.out.println("Введите имя файла для сохранения: ");
-        String fileName = scanner.nextLine();
+        String fileName = scan();
         String fullName = "src/" + fileName + ".dat";
         presenter.saveTree(fullName);
     }
