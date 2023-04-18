@@ -50,15 +50,20 @@ public class Main {
         // Просмотр измененной информации по записи
 //        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
 
-        // Сериализуем FamilyTree с помощью класса ObjectOutputStream
+        // Сериализуем FamilyTree и Person1 с помощью класса ObjectOutputStream
         familyTree.saveFamilyTreeAs("familyTree.out", new FileOutStr());
+        familyTree.savePersonAs(person1, "person.out", new FileOutStr());
 
-        // Десериализация из файла с помощью класса ObjectInputStream
+        // Десериализация FamilyTree и Person1 из файлов с помощью класса ObjectInputStream
         FamilyTree familyTreeRestored = familyTree.getFamilyTreeFrom("familyTree.out", new FileOutStr());
+        Person person1Restored = familyTree.getPersonFrom("person.out", new FileOutStr());
 
         // Вывод восстановленного FamilyTree
         System.out.println();
+        System.out.println("Restored FamilyTree:");
         System.out.println(familyTreeRestored);
-        System.out.println(familyTreeRestored.getInfo("Василий", "Лежебоков", Program.Relation.Spouse));
+        System.out.println();
+        System.out.println("Restored Person:");
+        System.out.println(person1Restored);
     }
 }

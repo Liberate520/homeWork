@@ -184,6 +184,22 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
+    public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
+        format.saveFamilyTreeAs(this, path);
+    }
+
+    public FamilyTree getFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
+        return format.getFamilyTreeFrom(path);
+    }
+
+    public void savePersonAs(Person person, String path, FileOutStr format) throws IOException {
+        format.savePersonAs(person, path);
+    }
+
+    public Person getPersonFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
+        return format.getPersonFrom(path);
+    }
+
     @Override
     public String toString () {
         StringBuilder output = new StringBuilder();
@@ -196,13 +212,5 @@ public class FamilyTree implements Serializable {
         }
         output.append("---------------------------------" + "\n");
         return output.toString();
-    }
-
-    public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
-        format.saveFamilyTreeAs(this, path);
-    }
-
-    public FamilyTree getFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
-        return format.getFamilyTreeFrom(path);
     }
 }
