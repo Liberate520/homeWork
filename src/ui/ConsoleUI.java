@@ -4,14 +4,13 @@ import familyTree.member.Gender;
 import familyTree.member.Human;
 import presenter.Presenter;
 import service.FileHandler;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
     private Presenter presenter;
     private Scanner scanner;
-    private FileHandler handler;
+   // private FileHandler handler;
     private boolean work;
     private Menu menu;
 
@@ -156,7 +155,7 @@ public class ConsoleUI implements View{
         String name = scan();
         try {
             presenter.removeMember(name);
-            System.out.println("Человек был успешно удален из дерева.\n");
+            System.out.println();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

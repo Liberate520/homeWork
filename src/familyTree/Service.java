@@ -7,27 +7,26 @@ import familyTree.member.FamilyMember;
 import familyTree.member.Gender;
 import familyTree.member.Human;
 import service.FileHandler;
-
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
 
-public class Service<T extends FamilyMember> {
+public class Service {
     private int id;
-    private FamilyTree<T> tree;
+    private FamilyTree<Human> tree;
     private FileHandler handler;
 
-    public Service(FamilyTree<T> tree) {
+    public Service(FamilyTree<Human> tree) {
         this.tree = tree;
     }
-    public FamilyTree<T> getTree() {
+    public FamilyTree<Human> getTree() {
         return tree;
     }
     public FileHandler getHandler() {
         return handler;
     }
-    public void setTree(FamilyTree<T> tree) {
+    public void setTree(FamilyTree<Human> tree) {
         this.tree = tree;
     }
     public void setHandler(FileHandler handler) {
@@ -35,18 +34,17 @@ public class Service<T extends FamilyMember> {
     }
     public void addHuman(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
 
-        tree.add((T) new Human(id++, name, surname, gender, dateBirth, father, mother));
+        tree.add(new Human(id++, name, surname, gender, dateBirth, father, mother));
     }
 
 
     public String printTree(){
-//        System.out.println(tree.getInfo());
         return tree.getInfo();
     }
 
-    public void printTrees(){
-        tree.printTree();
-    }
+//    public void printTrees(){
+//        tree.printTree();
+//    }
 
     public void save(String fileName){
         if (handler != null && tree != null) {
@@ -61,36 +59,36 @@ public class Service<T extends FamilyMember> {
     public void load(String fileName) {
         if (handler != null) {
             try {
-                tree = (FamilyTree<T>) handler.read(fileName);
+                tree = (FamilyTree<Human>) handler.read(fileName);
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
     }
     public void sortByName () {
-        tree.getMembers().sort((Comparator<? super T>) new MemberComparatorByName());
+        tree.getMembers().sort(new MemberComparatorByName());
     }
 
 
     public void sortByBirthday () {
-        tree.getMembers().sort((Comparator<? super T>) new MemberComparatorByBirthday());
+        tree.getMembers().sort(new MemberComparatorByBirthday());
     }
 
     public void sortByNumChild () {
-        tree.getMembers().sort((Comparator<? super T>) new ByNumberChildComparator());
+        tree.getMembers().sort(new ByNumberChildComparator());
     }
 
     public void clearTree() {
-        List<T> members = tree.getMembers();
+        List<Human> members = tree.getMembers();
         members.clear();
         tree.setMembers(members);
 
     }
     public String getHumanByName(String name) {
-        List<T> members = tree.getMembers();
+        List<Human> members = tree.getMembers();
         String memberName = null;
-        T person = null;
-        for (T member: members) {
+        Human person = null;
+        for (Human member: members) {
             if(member.getName().equals(name)) {
                 memberName = member.getName();
                 person = member;
@@ -101,12 +99,12 @@ public class Service<T extends FamilyMember> {
                 + ", дети: " + person.getChildren() + ", братья и сёстры: " + person.getSiblings();
     }
 
-    public T searchMemberByName(String name) {
+    public Human searchMemberByName(String name) {
         try {
             if (name == null || name.trim().isEmpty()) {
                 throw new IllegalArgumentException("Имя не может быть пустым.\n");
             }
-            for (T member : tree.getMembers()) {
+            for (Human member : tree.getMembers()) {
                 if (member.getName().equalsIgnoreCase(name.trim())) {
                     return member;
                 }
@@ -123,14 +121,14 @@ public class Service<T extends FamilyMember> {
             if (name == null || name.trim().isEmpty()) {
                 throw new IllegalArgumentException("Имя не может быть пустым.");
             }
-            for (T member : tree.getMembers()) {
+            for (Human member : tree.getMembers()) {
                 if (member.getName().equalsIgnoreCase(name.trim())) {
                     return member.getInfo();
                 }
             }
             throw new IllegalArgumentException("Человек с именем '" + name + "' не найден в дереве.");
         } catch (IllegalArgumentException e) {
-            return "Ошибка: " + e.getMessage() + " Пожалуйста, проверьте правильность введенных данных и попробуйте еще раз.";
+            return "Ошибка: " + e.getMessage() + " Проверьте правильность введенных данных и попробуйте еще раз.";
         }
     }
 
@@ -139,8 +137,8 @@ public class Service<T extends FamilyMember> {
             System.out.println("Дерево пустое.");
             return;
         }
-        T memberToRemove = null;
-        for (T member : tree.getMembers()) {
+        Human memberToRemove = null;
+        for (Human member : tree.getMembers()) {
             if (member.getName().equalsIgnoreCase(name.trim())) {
                 memberToRemove = member;
                 break;
