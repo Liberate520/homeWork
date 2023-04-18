@@ -1,6 +1,5 @@
 import familyTree.FamilyTree;
 import familyTree.Service;
-import familyTree.member.Gender;
 import familyTree.member.Human;
 import presenter.Presenter;
 import service.FileHandler;
@@ -19,15 +18,6 @@ public class Main {
 
 
 
-//        System.out.println("дерево перед записью\n");
-//        service.printTree();//
-//        service.setHandler(new FileHandler());
-//        // организация записи через сервис
-//        service.save("src/out.dat");
-//        System.out.println("дерево прочитано из файла\n");
-//        // организация чтения через сервис
-//        service.load("src/out.dat");
-//        service.printTree();
 
     }
 }

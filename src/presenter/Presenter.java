@@ -18,7 +18,6 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-
     public void printTree(){
         view.print(service.printTree());
     }
@@ -26,7 +25,6 @@ public class Presenter {
     public void addMember(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
         service.addHuman(name, surname, gender, dateBirth, father, mother);
     }
-
 
     public Human searchMemberByName(String name) {
         return (Human) service.searchMemberByName(name);
@@ -45,13 +43,13 @@ public class Presenter {
     public void saveTree(String fileName) {
         service.save(fileName);
     }
+    public void removeMember(String name){
+        service.removeMember(name);
+    }
 
 //    public void searchMemberByName(String name) {
 //        service.getHumanByName(name);
 //    }
-    public void removeMember(String name){
-        service.removeMember(name);
-    }
 
 
 

@@ -10,7 +10,7 @@ import java.util.*;
 
 
 public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>, Serializable  {
-    //private T root;
+
     private List<T> members;
 
 //    public FamilyTree(T root) {
@@ -24,17 +24,10 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         this.members = new ArrayList<>();
     }
 
-//    public T getRoot() {
-//        return root;
-//    }
-
     public void setMembers(List<T> members) {
         this.members = members;
     }
 
-//    public <T extends FamilyMember> void setMembers(List<T> members) {
-//        this.members = members;
-//    }
 
     @Override
     public boolean add(T member) {
