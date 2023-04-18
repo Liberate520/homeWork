@@ -15,4 +15,13 @@ public class FamilyTree {
     public void showAllMembers() {
         System.out.println(familyMembers);
     }
+    
+    public Human getInfoByName(String name) {
+        for(Human human : familyMembers) {
+            if(human.getName().equals(name)) {
+                return human;
+            }
+        }
+        return null;
+    }
 }
