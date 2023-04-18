@@ -38,10 +38,11 @@ public class Service {
         familyTree.sortBySex();
     }
     public void save(String path) throws IOException {
-        familyTree.save(path);
+        FileHandler fh = new FileHandler();
+        fh.save(familyTree, path);
     }
     public String load(String path) throws IOException, ClassNotFoundException {
-        Serializable answer = familyTree.load(path);
-        return answer.toString();
+        FileHandler fh = new FileHandler();
+        return fh.load(path).toString();
     }
 }

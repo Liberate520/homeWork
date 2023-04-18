@@ -18,10 +18,6 @@ public class FamilyTree <E extends Human> implements Serializable, Iterable<Huma
         this.familyTree.add(element);
     }
 
-    public void save (String filepath) throws IOException {
-        FileHandler fh = new FileHandler();
-        fh.save((Serializable) familyTree, filepath);
-    }
 
     @Override
     public String toString() {
@@ -31,12 +27,6 @@ public class FamilyTree <E extends Human> implements Serializable, Iterable<Huma
             sb.append("\n");
         }
         return "Генеалогическоге дерево: \n" + sb;
-    }
-
-    public Serializable load (String filepath) throws IOException, ClassNotFoundException {
-        FileHandler fh = new FileHandler();
-        return fh.load(filepath);
-
     }
 
     @Override
