@@ -10,6 +10,10 @@ public class Human {
     public Human(String name) {
         this.name = name;
     }
+    
+    public String getName() {
+        return name;
+    }
 
     public void addChild(Human human) {
         children.add(human);
