@@ -1,3 +1,9 @@
 public enum Gender {
-    МУЖСКОЙ, ЖЕНСКИЙ;
+    МУЖСКОЙ("МУЖСКОГО"), ЖЕНСКИЙ("ЖЕНСКОГО");
+
+    String value;
+
+    private Gender(String value) {
+        this.value=value;
+    }
 }

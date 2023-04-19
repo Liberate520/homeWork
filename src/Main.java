@@ -41,6 +41,11 @@ public class Main {
                 tree.ShowFullTreeInfo();
                 tree.AddHuman(human7);
                 tree.ShowFullTreeInfo();
+                tree.ShowGenderStatistics(Gender.МУЖСКОЙ);
+                tree.ShowGrandmotherInfo("Кот Ольга Игоревна");
+                tree.ShowGrandmotherInfo("Иванова Лариса Вадимовна");
+                tree.ShowGrandfatherInfo("Петров Андрей Адамович");
+                
 
         }
 }

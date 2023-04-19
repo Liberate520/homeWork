@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Tree {
     private List<Human> humans;
@@ -39,11 +38,11 @@ public class Tree {
                 person.CheckParentsRelationRemove(human);
             }
         }
-        if (human.GetMother()!=null) {
+        if (human.GetMother() != null) {
             human.GetMother().RemoveChildren(human);
         }
 
-        if (human.GetFather()!=null) {
+        if (human.GetFather() != null) {
             human.GetFather().RemoveChildren(human);
         }
         humans.remove(human);
@@ -74,7 +73,7 @@ public class Tree {
     }
 
     public void ShowFullTreeInfo() {
-        System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕОЛОГИЧЕСКОМ ДЕРЕВЕ");
+        System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
         for (Human human : humans) {
             System.out.println(human.GetFullHumanInfo());
         }
@@ -82,11 +81,52 @@ public class Tree {
     }
 
     public void ShowShortTreeInfo() {
-        System.out.println("\nКРАТКАЯ ИНФОРМАЦИЯ О ГЕНЕОЛОГИЧЕСКОМ ДЕРЕВЕ");
+        System.out.println("\nКРАТКАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
         for (Human human : humans) {
             System.out.println(human.GetShortHumanInfo());
         }
 
     }
 
+    public void ShowGenderStatistics(Gender gender) {
+        List<Human> list = new ArrayList<>();
+        for (Human human : humans) {
+            if (human.GetGender().equals(gender)) {
+                list.add(human);
+            }
+        }
+        System.out.printf("\nСПИСОК ВСЕХ ЛЮДЕЙ %s ПОЛА В ДЕРЕВЕ\n", gender.value);
+        System.out.println(list);
+    }
+
+    public void ShowGrandmotherInfo(String fullName) {
+        if (!fullName.equals(null)) {
+            String result;
+            try {
+                Human human = GetHumanByFullName(fullName);
+
+                result = human.GetMother().GetMother().GetFullName();
+            } catch (NullPointerException e) {
+                result = "не обнаружено";
+            }
+            System.out.printf("\nЗАПРОС ПОИСКА БАБУШКИ ДЛЯ %s:\n", fullName);
+            System.out.println(result);
+
+        }
+    }
+
+    public void ShowGrandfatherInfo(String fullName) {
+        if (!fullName.equals(null)) {
+            String result;
+            try {
+                Human human = GetHumanByFullName(fullName);
+                result = human.GetFather().GetFather().GetFullName();
+            } catch (NullPointerException e) {
+                result = "не обнаружено";
+            }
+            System.out.printf("\nЗАПРОС ПОИСКА ДЕДУШКИ ДЛЯ %s:\n", fullName);
+            System.out.println(result);
+
+        }
+    }
 }
