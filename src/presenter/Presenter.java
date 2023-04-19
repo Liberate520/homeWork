@@ -5,10 +5,8 @@ import familyTree.member.Gender;
 import familyTree.member.Human;
 import ui.View;
 
-import java.util.List;
 
 public class Presenter {
-
     private View view;
     private Service service;
 
@@ -18,13 +16,13 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-//    public void printTree(){
-//        view.print(service.printTree());
-//    }
-
     public void printTree(){
-        service.printTrees();
+        view.print(service.printTree());
     }
+
+//    public void printTree(){
+//        service.printTrees();
+//    }
 
     public void addMember(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
         service.addHuman(name, surname, gender, dateBirth, father, mother);
@@ -34,11 +32,9 @@ public class Presenter {
         return service.searchMemberByName(name);
     }
 
-
     public void clearTree() {
         service.clearTree();
     }
-
 
     public void loadTree(String fileName){
        service.load(fileName);
@@ -50,10 +46,6 @@ public class Presenter {
     public void removeMember(String name){
         service.removeMember(name);
     }
-
-//    public void searchMemberByName(String name) {
-//        service.getHumanByName(name);
-//    }
 
 
 

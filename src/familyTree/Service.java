@@ -9,7 +9,6 @@ import familyTree.member.Human;
 import service.FileHandler;
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -43,9 +42,9 @@ public class Service {
         return tree.getInfo();
     }
 
-    public void printTrees(){
-        tree.printTree();
-    }
+//    public void printTrees(){
+//        tree.printTree();
+//    }
 
     public void save(String fileName){
         if (handler != null && tree != null) {
@@ -80,16 +79,12 @@ public class Service {
         }
     }
 
-
     public void sortByName () {
         tree.getMembers().sort(new MemberComparatorByName());
     }
-
-
     public void sortByBirthday () {
         tree.getMembers().sort(new MemberComparatorByBirthday());
     }
-
     public void sortByNumChild () {
         tree.getMembers().sort(new ByNumberChildComparator());
     }
@@ -120,7 +115,7 @@ public class Service {
 
     public void removeMember(String name) {
         if (tree.getMembers().isEmpty()) {
-            System.out.println("Дерево пустое.");
+            System.out.println("Дерево пустое.\n");
             return;
         }
         Human memberToRemove = null;
@@ -131,15 +126,15 @@ public class Service {
             }
         }
         if (memberToRemove == null) {
-            System.out.println("Человек с именем '" + name + "' не найден в дереве.");
+            System.out.println("Человек с именем '" + name + "' не найден в дереве.\n");
             return;
         }
         if (memberToRemove.getChildren().size() > 0) {
-            System.out.println("Невозможно удалить человека, у которого есть дети.");
+            System.out.println("Невозможно удалить человека, у которого есть дети.\n");
             return;
         }
         tree.remove(memberToRemove);
-        System.out.println("Человек с именем '" + name + "' удален из дерева.");
+        System.out.println("Человек с именем '" + name + "' удален из дерева.\n");
     }
 
 

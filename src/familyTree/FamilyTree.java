@@ -3,7 +3,6 @@ package familyTree;
 import familyTree.comparators.Group;
 import familyTree.member.FamilyMember;
 import familyTree.member.Human;
-
 import java.io.*;
 import java.util.*;
 
@@ -157,7 +156,6 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         }
         return tree.toString();
     }
-
     @Override
     public Iterator<T> iterator() {
         return new MemberIterator<>(members);
