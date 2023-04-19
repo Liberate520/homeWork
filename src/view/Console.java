@@ -1,96 +1,88 @@
 package view;
 
+import model.Human;
 import presenter.Presenter;
+import java.io.IOException;
 import java.util.Scanner;
-
-
 
 public class Console implements View {
     private Scanner scanner;
     private Presenter presenter;
-    private boolean work = true;
+    private boolean isWorking = true;
 
     public Console() {
-        scanner = new Scanner(System.in, "cp866");
+        scanner = new Scanner(System.in);
+    }
 
+    private void printInvitationForUser() {
+        System.out.println();
+        String str = "Выберите операцию и введите соответствующую цифру:\n" +
+                " 1 - для печати полного списка генеалогического древа с указанием детей\n" +
+                " 2 - для записи и сохранения в файл списка родственников древа \n" +
+                " 3 - для чтения и получения списка родственников из файла \n" +
+                " 4 - для сортировки списка родственников по выбранному параметру \n" +
+                " 5 - для ввода данных и добавления родственника в список древа \n" +
+                " 6 - для поиска в древе родственника по имени \n" +
+                " 0 - для завершения работы \n";
+        System.out.println(str);
     }
 
     @Override
-    public void print(String text) {
-        System.out.println(text);
-    }
-
-    @Override
-    public void start() {
-        while (work) {
-            System.out.println("\n1 - Загрузить все записи\n" +
-                    "2 - Распечатать все записи\n" +
-                    "3 - Добавить новую запись\n" +
-                    "4 - Отсортировать записи по имени\n" +
-                    "5 - Наити запись по имени\n" +
-                    "6 - Сохрянить все записи в файл\n" +
-                    "7 - завершить работу.");
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "1":
-                    loadAllRecords();
-                    break;
-                case "2":
-                    getAllRecord();
-                    break;
-                case "3":
-                    addRecord();
-                    break;
-                case "4":
-                    sortRecordsByName();
-                    break;
-                case "5":
-                    findRecord();
-                    break;
-                case "6":
-                    saveAllRecords();
-                    break;
-                case "7":
+    public void start() throws IOException, ClassNotFoundException {
+        printInvitationForUser();
+        while (isWorking) {
+            int operationNumber = scanner.nextInt();
+            switch (operationNumber) {
+                case 0:
                     exit();
                     break;
+                case 1:
+                    presenter.printChildren();
+                    printInvitationForUser();
+                    break;
+                case 2:
+                    presenter.writeTreeInFile();
+                    System.out.printf("Вы успешно сохранили список генеалогического древа в файл \"%s.%s\" !\n", presenter.getFileName(), presenter.getFileType());
+                    printInvitationForUser();
+                    break;
+                case 3:
+                    System.out.printf("Генеалогическое древо, прочитанное из файла \"%s.%s\":\n", presenter.getFileName(), presenter.getFileType());
+                    presenter.readFromFile();
+                    presenter.print();
+                    printInvitationForUser();
+                    break;
+                case 4:
+                    System.out.println("Для сортировки по имени введите цифру 1:\n" +
+                            "для сортировки по году рождения введите цифру 2: \n" +
+                            "для сортировки по id введите цифру 3:");
+                    try {
+                        int sortNumber = scanner.nextInt();
+                        presenter.sortByParameter(sortNumber);
+                        printInvitationForUser();
+                    } catch (Exception e) {
+                        System.out.println("Ошибка ввода! " + e);
+                    }
+                    break;
+                case 5:
+                    Human human = presenter.readAndCreateHuman();
+                    presenter.addHuman(human);
+                    printInvitationForUser();
+                    break;
+                case 6:
+                    presenter.getHumanByName();
+                    printInvitationForUser();
+                    break;
                 default:
-                    System.out.println("Ошибка ввода");
+                    System.out.println("Вы ввели некорректный номер операции!");
+                    printInvitationForUser();
             }
         }
     }
 
-    private void addRecord() {
-        System.out.println("Введите имя и фамилию.");
-        String name = scanner.nextLine();
-        presenter.addRecord(name);
-    }
-
-    private void findRecord() {
-        System.out.println("Введите имя и фамилию.");
-        String name = scanner.nextLine();
-        presenter.findRecord(name);
-    }
-
-    private void loadAllRecords() {
-        presenter.loadRecords();
-    }
-
-    private void getAllRecord() {
-        presenter.getRecords();
-    }
-
-    private void sortRecordsByName() {
-        presenter.sortRecordsByName();
-    }
-
-    private void saveAllRecords() {
-        presenter.saveRecords();
-    }
-
     private void exit() {
-        System.out.println("Работа завершена");
+        System.out.println("Работа завершена, всего доброго!");
         scanner.close();
-        work = false;
+        isWorking = false;
     }
 
     @Override

@@ -1,17 +1,23 @@
-import model.group.FamilyTree;
-import model.group.Groupable;
-import model.person.Person;
+import model.FamilyTree;
+import model.FileHandler;
+import model.Service;
 import presenter.Presenter;
-import model.service.Service;
 import view.Console;
 import view.View;
 
+import java.io.IOException;
+
 public class Main {
-        public static void main(String[] args) {
-                Groupable<Person> familyTree = new FamilyTree<>();
-                View view = new Console();
-                Service service = new Service(familyTree);
-                Presenter presenter = new Presenter(view, service);
-                view.start();
-        }
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        FileHandler fileHandler = new FileHandler("familyTree", "out");
+        FamilyTree<model.Human> familyTree = new FamilyTree<>();
+        
+        Service service = new Service(familyTree, fileHandler);
+        View view = new Console();
+        
+        Presenter presenter = new Presenter(view, service);
+        presenter.createInitialTree();
+        
+        view.start();
+    }
 }

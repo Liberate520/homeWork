@@ -1,7 +1,9 @@
 package presenter;
 
-import model.service.Service;
+import model.Human;
+import model.Service;
 import view.View;
+import java.io.IOException;
 
 public class Presenter {
     private View view;
@@ -13,30 +15,48 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void addRecord(String name) {
-        service.addRecord(name);
+    public Human readAndCreateHuman() {
+        return service.readAndCreateHuman();
     }
 
-    public void findRecord(String name) {
-        service.findRecord(name);
+    public void getHumanByName() {
+        service.getHumanByName();
     }
 
-    public void getRecords() {
-        String answer = service.getPersonList();
-        view.print(answer);
+    public void print() {
+        service.print();
     }
 
-    public void loadRecords() {
-        String answer = service.loadPersonList();
-        view.print(answer);
+    public String getFileName() {
+        return service.getFileName();
     }
 
-    public void saveRecords() {
-        String answer = service.savePersonList();
-        view.print(answer);
+    public String getFileType() {
+        return service.getFileType();
     }
 
-    public void sortRecordsByName() {
-        service.sortRecordsByName();
+    public void createInitialTree() {
+        service.createInitialTree();
+    }
+
+    public void printChildren() {
+        service.printChildren();
+    }
+
+    public void writeTreeInFile() throws IOException {
+        service.writeTreeInFile();
+    }
+
+    public void readFromFile() throws IOException, ClassNotFoundException {
+        service.readFromFile();
+    }
+
+    public void sortByParameter(int sortNumber) {
+        service.sortByParameter(sortNumber);
+    }
+
+    public void addHuman(Human human) {
+        service.addHuman(human);
+        System.out.printf("Вы успешно добавили добавили в древо нового родственника:\n  %s\n", human.toString());
     }
 }
