@@ -39,9 +39,11 @@ public class Main  {
 //        System.out.println(irina.getSisterDetails());
 //        System.out.println(irina.getBrothersDetails());
 //        System.out.println(lida.getGrandfatherDetails());
-//        familyTree.FamilyTreeSave(liza);
-        familyTree.FamilyTreeSave(irina);
-        familyTree.FamilyTreeload(irina);
+//        familyTree.FamilyTreeSave(max);
+        familyTree.familyTreeloadHumanDitails(max);
+        System.out.println(familyTree.getGrandfatherDetails(max));
+
+
 
 //        familyTree.FamilyTreeload(irina);
 //        familyTree.getHumanInfo(irina);

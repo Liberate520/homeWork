@@ -1,12 +1,15 @@
 package Home;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 public interface WorkWithData extends Serializable {
-    void FamilyTreeSave(Human human) throws IOException;
-    void FamilyTreeload(Human human) throws IOException, ClassNotFoundException;
-
+    void familyTreeSave(Human human) throws IOException;
+    void familyTreeloadHumanDitails(Human human) throws IOException, ClassNotFoundException;
+    public void familyTreeloadMotherDitails(Human human) throws IOException, ClassNotFoundException;
+    public void familyTreeloadFatherDitails(Human human) throws IOException, ClassNotFoundException;
+    public void familyTreeloadSistersDitails(Human human) throws IOException, ClassNotFoundException;
+    public void familyTreeloadBrothersDitails(Human human) throws IOException, ClassNotFoundException;
+    public void FamilyTreeloadGrandmothersDitails(Human human) throws IOException, ClassNotFoundException;
+    public void familyTreeloadGrandfathersDitails(Human human) throws IOException, ClassNotFoundException;
 }

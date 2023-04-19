@@ -1,8 +1,6 @@
 package Home;
 
 import java.io.*;
-import java.util.BitSet;
-import java.util.List;
 
 
 public class FamilyTree implements WorkWithData{
@@ -138,24 +136,84 @@ public class FamilyTree implements WorkWithData{
 
 
     @Override
-    public void FamilyTreeSave(Human human) throws IOException {
+    public void familyTreeSave(Human human) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(human.getName()+".out"));
+                new FileOutputStream(human.getName().toLowerCase()+".out"));
         objectOutputStream.writeObject(human);
-        objectOutputStream.close();
+        objectOutputStream.flush();
 
     }
 
     @Override
-    public void FamilyTreeload(Human human) throws IOException, ClassNotFoundException {
+    public void familyTreeloadHumanDitails(Human human) throws IOException, ClassNotFoundException {
         FamilyTree familyTree = new FamilyTree();
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(human.getName()+".out"));
-        Human humanRestored = (Human) objectInputStream.readObject();
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
         objectInputStream.close();
-        System.out.println(familyTree.getHumanInfo(humanRestored));
+        System.out.println(familyTree.getHumanInfo(human));
     }
 
+    @Override
+    public void familyTreeloadMotherDitails(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getMotherDetails(human));
+    }
+
+    @Override
+    public void familyTreeloadFatherDitails(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getFatherDetails(human));
+    }
+
+    @Override
+    public void familyTreeloadSistersDitails(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getSisterDetails(human));
+    }
+
+    @Override
+    public void familyTreeloadBrothersDitails(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getBrothersDetails(human));
+    }
+
+    @Override
+    public void FamilyTreeloadGrandmothersDitails(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getGrandmatherDetails(human));
+    }
+
+
+    @Override
+    public void familyTreeloadGrandfathersDitails(Human human) throws IOException, ClassNotFoundException {
+        FamilyTree familyTree = new FamilyTree();
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(human.getName().toLowerCase()+".out"));
+        human = (Human) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(familyTree.getGrandfatherDetails(human));
+    }
 
 
 }
