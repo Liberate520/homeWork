@@ -1,4 +1,4 @@
-package tree;
+package model.tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +18,14 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
             }
             famTree.add(human);
         }
+    }
+    public T getByName(String name){
+        for (T human: famTree){
+            if (human.getName().equals(name)){
+                return human;
+            }
+        }
+        return null;
     }
     public T findHuman(String name) {
         for (T human : famTree)

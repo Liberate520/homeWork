@@ -1,9 +1,8 @@
 package ui;
 
 import presenter.Presenter;
-import tree.FamilyTree;
-import tree.Human;
-
+import model.tree.FamilyTree;
+import model.tree.Human;
 
 import java.util.*;
 
@@ -14,30 +13,43 @@ public class Console implements View {
     private Menu menu;
     private boolean temp;
 
-    public Console(FamilyTree<Human> tree) {
-        this.tree = tree;
+    public Console() {
         scanner = new Scanner(System.in);
         menu = new Menu(this);
         temp = true;
     }
 
     public void showPerson() {
-        System.out.println(tree.toString());
+        presenter.toString();
     }
 
     public void addPerson() {
-
+        System.out.println("Введите имя человека");
+        String name = scanner.nextLine();
+        System.out.println("Введите пол человека");
+        String genger = scanner.nextLine();
+        System.out.println("Введите дату рождения человека");
+        String birthDate = scanner.nextLine();
+        System.out.println("Введите дату смерти человека");
+        String deathDate = scanner.nextLine();
+        System.out.println("Введите имя отца человека");
+        String father = scanner.nextLine();
+        System.out.println("Введите имя матери человека");
+        String mother = scanner.nextLine();
+        presenter.addHuman(name, genger, birthDate, deathDate, father, mother);
+    }
+    public void humanList(){
+        presenter.humanList();
     }
 
     public void searchPerson() {
         System.out.println("Введите имя");
         String name = scanner.nextLine();
-        System.out.println(tree.findHuman(name));
+        presenter.findHuman(name);
     }
 
     public void sortName() {
-        tree.sortByName();
-        System.out.println(tree);
+        presenter.sortByName();
     }
 
     public void sortBirthdate() {

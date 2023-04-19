@@ -1,7 +1,11 @@
-package main;
+package model.main;
 
-import tree.FamilyTree;
-import tree.Human;
+import model.FamilyService;
+import model.file.FileUtil;
+import model.file.InterfaceFile;
+import model.tree.FamilyTree;
+import model.tree.Human;
+import presenter.Presenter;
 import ui.View;
 import ui.Console;
 
@@ -35,7 +39,12 @@ public class Main {
 //        familyTree.sortByBirthDate();
 //        System.out.println(familyTree);
 
-        View view = new Console(familyTree);
+        FamilyService service = new FamilyService();
+        service.setWritable(new FileUtil());
+        service.save();
+        service.read();
+        View view = new Console();
+        Presenter presenter = new Presenter((FamilyService) service, (View) view);
         view.run();
     }
 }

@@ -1,4 +1,4 @@
-package tree;
+package model.tree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -28,6 +28,10 @@ public class Human implements Serializable {
 
     public Human(int id, String name, Gender gender, LocalDate birthDate) {
         this(id, name, gender, birthDate, null, null, null, new ArrayList<>());
+    }
+
+    public Human() {
+
     }
 
     public String getName() {

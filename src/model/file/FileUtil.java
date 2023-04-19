@@ -1,16 +1,17 @@
-package file;
+package model.file;
 
-import tree.FamilyTree;
+import model.tree.FamilyTree;
 
 import java.io.*;
 
 public class FileUtil implements InterfaceFile {
-    public void saveToFile(FamilyTree humans, String fileName) {
+    public boolean saveToFile(FamilyTree humans, String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(humans);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public FamilyTree readFromFile(String fileName) {

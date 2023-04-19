@@ -1,4 +1,4 @@
-package commands;
+package ui.commands;
 
 import ui.Console;
 

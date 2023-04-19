@@ -1,6 +1,6 @@
 package ui;
 
-import commands.*;
+import ui.commands.*;
 
 import java.util.*;
 
