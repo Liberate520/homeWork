@@ -186,4 +186,12 @@ public class Person implements Human, Serializable {
         this.person_childs.add(childs);
     }
 
+    public void setPerson_birthday(Date person_birthday) {
+        this.person_birthday = person_birthday;
+    }
+
+    public void setPerson_death(Date person_death) {
+        this.person_death = person_death;
+    }
+
 }

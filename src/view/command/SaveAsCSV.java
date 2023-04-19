@@ -14,7 +14,6 @@ public class SaveAsCSV extends Commands {
         super.setCommandHelp(this.help);
     }
 
-
     @Override
     public void execute(LinkedHashMap<String, String> map) {
         this.getConsole()

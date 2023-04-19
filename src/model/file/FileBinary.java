@@ -42,6 +42,7 @@ public class FileBinary implements Files  {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Tree<Person> readFile() throws ClassNotFoundException {
         Tree<Person> family = new Tree<Person>();
         String bd_file = new File(this.file_name).getAbsolutePath();

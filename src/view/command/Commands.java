@@ -8,7 +8,7 @@ public abstract class Commands {
     private String name;
     private String help;
 
-    public Commands(ConsoleUI console){
+    public Commands(ConsoleUI console) {
         this.console = console;
     }
 
@@ -16,7 +16,7 @@ public abstract class Commands {
         return this.name;
     }
 
-    public void setCommandName(String name){
+    public void setCommandName(String name) {
         this.name = name;
     }
 
@@ -24,11 +24,11 @@ public abstract class Commands {
         return this.help;
     }
 
-    public void setCommandHelp(String help){
+    public void setCommandHelp(String help) {
         this.help = help;
     }
 
-    public ConsoleUI getConsole(){
+    public ConsoleUI getConsole() {
         return this.console;
     }
 

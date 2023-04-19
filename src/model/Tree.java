@@ -70,11 +70,18 @@ public class Tree<E extends Person> implements Iterable<E>, Serializable {
 
     public void addFather(int son_id, int father_id) {
         this.get(son_id).setFather(this.get(father_id));
-        this.get(father_id).setFather(this.get(son_id));
+        this.get(father_id).setPerson_childs(this.get(son_id));
     }
 
     public void addMother(int son_id, int mother_id) {
         this.get(son_id).setMother(this.get(mother_id));
-        this.get(mother_id).setFather(this.get(son_id));
+        this.get(mother_id).setPerson_childs(this.get(son_id));
+    }
+
+    public Boolean existID(int id){
+        if (this.get(id) != null){
+            return true;
+        }
+        return false;
     }
 }

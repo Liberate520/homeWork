@@ -5,7 +5,7 @@ import view.ConsoleUI;
 
 public class AddSexMale extends Commands {
     private final String name = "add sex male";
-    private final String help = "add sex male:1679946500 - Добавить пол мужской\n";
+    private final String help = "add sex male - Добавить пол мужской, к текущему `id`\n";
 
     public AddSexMale(ConsoleUI console) {
         super(console);
@@ -15,15 +15,15 @@ public class AddSexMale extends Commands {
 
     @Override
     public void execute(LinkedHashMap<String, String> map) {
-        int id;
-        try {
-            id = Integer.parseInt(map.get(this.name));
-        } catch (Exception e) {
+        int id = this.getConsole().getCurrent_id();
+        if (id == 0) {
+            this.getConsole().print("For editing: Need change current `id`");
             return;
         }
+
         this.getConsole()
                 .getPresenter()
-                .commandAddSex(id,"male");
+                .commandAddSex(id, "male");
     }
-    
+
 }

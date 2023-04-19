@@ -7,8 +7,10 @@ import view.command.Commands;
 
 public class ConsoleUI implements UI {
     private Scanner scan;
-    private String cursor = "$: ";
+    private String default_cursor = "$: ";
+    private String curr_cursor = default_cursor;
     private Presenter presenter;
+    private int current_id;
     private LinkedHashMap<String, Commands> command_list = new LinkedHashMap<>();
     private StringBuilder helper = new StringBuilder();
 
@@ -41,12 +43,28 @@ public class ConsoleUI implements UI {
         System.out.println(msg);
     }
 
+    public String getDefault_cursor() {
+        return default_cursor;
+    }
+
+    public int getCurrent_id() {
+        return current_id;
+    }
+
+    public void setCursor(String cursor) {
+        this.curr_cursor = cursor;
+    }
+
+    public void setCurrent_id(int current_id) {
+        this.current_id = current_id;
+    }
+
     private void addToHelper(String help) {
         helper.append(help);
     }
 
     private String commandFromConsole() {
-        System.out.print("\n" + this.cursor);
+        System.out.print("\n" + this.curr_cursor);
         String command = scan.nextLine();
         return command;
     }
@@ -72,21 +90,15 @@ public class ConsoleUI implements UI {
             return map;
         }
 
+        if (command_array.length == 2) {
+            map.put(command_array[0], command_array[1]);
+            return map;
+        }
+
         if (command_array.length == 1) {
             map.put(command_array[0], null);
             return map;
         }
-
-        String[] command_info = command_array[1].split("\\.");
-        if (command_info.length == 0) {
-            map.put(command_array[0], null);
-        } else if(command_info.length == 1){
-            map.put(command_array[0], command_info[0]);
-        } else if (command_info.length == 3){
-            map.put(command_array[0], command_info[0]);
-            map.put(command_info[1], command_info[2]);
-        }
-
         return map;
     }
 

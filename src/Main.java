@@ -11,6 +11,7 @@ public class Main {
         ConsoleUI console = new ConsoleUI();
 
         console.addCommands(new NotFound(console));
+        console.addCommands(new ChangeCurrentID(console));
         console.addCommands(new Show(console));
         console.addCommands(new SortByName(console));
         console.addCommands(new SortById(console));
@@ -23,8 +24,8 @@ public class Main {
         console.addCommands(new AddSexFemale(console));
         console.addCommands(new AddMother(console));
         console.addCommands(new AddFather(console));
-
-        
+        console.addCommands(new AddDayOfBirthday(console));
+        console.addCommands(new AddDayOfDeath(console));
 
         new Presenter(service, console);
 

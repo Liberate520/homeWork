@@ -1,5 +1,6 @@
 package presenter;
 
+import java.util.Date;
 import java.util.List;
 import model.Service;
 import model.file.FileBinary;
@@ -114,4 +115,19 @@ public class Presenter {
         this.console.print(answer);
     }
 
+    public boolean commandExistPersonByID(int id){
+        return service.getFamily_tree().existID(id);
+    }
+
+    public void commandAddDOB(int id, Date date){
+        this.service.getFamily_tree().get(id).setPerson_birthday(date);
+        String answer = service.getFamily_tree().get(id).toStringFull();
+        this.console.print(answer);
+    }
+
+    public void commandAddDOD(int id, Date date){
+        this.service.getFamily_tree().get(id).setPerson_death(date);
+        String answer = service.getFamily_tree().get(id).toStringFull();
+        this.console.print(answer);
+    }
 }

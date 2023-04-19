@@ -6,7 +6,7 @@ import view.ConsoleUI;
 
 public class Id extends Commands {
     private final String name = "id";
-    private final String help = "id: 1679946500 - показывает подробную информацию о человеке\n";
+    private final String help = "id: `id` - показывает подробную информацию о человеке\n";
 
     public Id(ConsoleUI console) {
         super(console);
@@ -20,5 +20,5 @@ public class Id extends Commands {
                 .getPresenter()
                 .commandFullPersonInfo(map.get(this.name));
     }
-    
+
 }
