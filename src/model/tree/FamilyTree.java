@@ -7,7 +7,12 @@ import java.util.*;
 
 public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     private List<T> famTree = new ArrayList<>();
-
+    public boolean isEmpty(){
+        if (famTree.size() != 0){
+            return false;
+        }
+        return true;
+    }
     public void addHuman(T human) {
         if (!famTree.contains(human)) {
             if (human.getMother() != null) {

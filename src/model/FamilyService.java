@@ -34,14 +34,26 @@ public class FamilyService {
 
     public String addHuman(String name, String gender, String birthDate, String deathDate, String father, String mother){
         Human humanFather = null;
-        if (!father.equals("")){
-            humanFather = familyTree.getByName(father);
-        }
-        if (humanFather == null){
-            return "отец не найден";
+        Human humanMother = null;
+        if (!familyTree.isEmpty()){
+            if (!father.equals("")){
+                humanFather = familyTree.getByName(father);
+            }
+            if (humanFather == null){
+                return "отец не найден";
+            }
+            if (!mother.equals("")){
+                humanMother = familyTree.getByName(mother);
+            }
+            if (humanMother == null){
+                return "мать не найдена";
+            }
         }
         LocalDate humanBirthDate = LocalDate.parse(birthDate);
-        Human human = new Human();
+        LocalDate humanDeathDate = LocalDate.parse(deathDate);
+        Human.Gender humanGender = Human.Gender.valueOf(gender.toLowerCase());
+
+        Human human = new Human(name, humanGender, humanBirthDate, humanDeathDate, humanFather, humanMother);
         familyTree.addHuman(human);
         return "Человек успешно добавлен в дерево";
     }
