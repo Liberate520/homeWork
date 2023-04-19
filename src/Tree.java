@@ -2,7 +2,6 @@ package OOPjavaTree.src;
 
 import OOPjavaTree.src.Data.Operation;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +48,11 @@ public class Tree implements Serializable {
     }
 
     public void saveData(Operation file, Object tree) {
-        file.getUsedFile(tree);
+        file.saveData(tree);
     }
 
-    public Object loadData(Operation file, Object tree) {
-        tree = file.getUsedFile(tree);
-        return tree;
+    public Object loadData(Operation file) {
+        return file.loadData();
     }
 
     @Override

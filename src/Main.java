@@ -1,9 +1,7 @@
 package OOPjavaTree.src;
 
-import OOPjavaTree.src.Data.Loaded;
+import OOPjavaTree.src.Data.OperationData;
 import OOPjavaTree.src.Data.Operation;
-import OOPjavaTree.src.Data.Saved;
-
 import java.io.IOException;
 
 public class Main {
@@ -25,10 +23,10 @@ public class Main {
         }
         System.out.println();
 
-        //Operation file = new Saved();
+        //Operation file = new OperationData();
         //tree.saveData(file, tree);
-        Operation file = new Loaded();
-        Tree tree1 = (Tree) tree.loadData(file, tree);
+        Operation file = new OperationData();
+        Tree tree1 = (Tree) tree.loadData(file);
         System.out.println(tree1);
     }
 }
