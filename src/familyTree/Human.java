@@ -3,6 +3,9 @@ package familyTree;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Human {
 
@@ -10,13 +13,12 @@ public class Human {
     private String firstName;
     private String middleName;
     private Gender gender;
-    private String dateOfBirth;
-    private String dateOfDeath;
+    private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
     private String mother;
     private String father;
-    private String spouse;
-    private String childs;
-
+    private List<String> spouse;
+    private List<String> childs;
 
     // #region конструкторы
 
@@ -26,10 +28,12 @@ public class Human {
      * @param firstName имя
      * @param middleName отчество
      * @param gender пол
-     * @param dateOfBirth дата рождения
-     * @param dateOfDeath дата смерти
-     * @param mother имя матери
-     * @param father имя отца
+     * @param dateOfBirth дата рождения строка вида дд.мм.гггг
+     * @param dateOfDeath дата смерти строка вида дд.мм.гггг
+     * @param mother строка с именем матери вида ФИО
+     * @param father строка с именем отца вида ФИО
+     * @param spouse строка с именами супругов вида ФИО, через запятую
+     * @param childs строка с именами детей вида ФИО, через запятую
      */
     public Human(String lastName, String firstName, String middleName,
                  Gender gender, String dateOfBirth, String dateOfDeath,
@@ -39,32 +43,22 @@ public class Human {
         this.firstName = firstName;
         this.middleName = middleName;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
+
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        if (!dateOfDeath.equals("")) {
+            this.dateOfDeath = LocalDate.parse(dateOfDeath, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        }
+        else this.dateOfDeath = null;
+
         this.mother = mother;
         this.father = father;
-        this.spouse = spouse;
-        this.childs = childs;
-    }
 
-    /**
-     * Конструктор для живущих людей
-     * @param lastName фамилия
-     * @param firstName имя
-     * @param middleName отчество
-     * @param gender пол
-     * @param dateOfBirth дата рождения
-     * @param mother имя матери
-     * @param father имя отца
-     */
-    public Human(String lastName, String firstName, String middleName,
-                 Gender gender, String dateOfBirth,
-                 String mother, String father,
-                 String spouse, String childs) {
-        this(lastName, firstName, middleName, gender, dateOfBirth, "---",
-                mother, father, spouse, childs);
-    }
+        if (!spouse.equals("")) this.spouse = new ArrayList<>(Arrays.asList(spouse.split(", ")));
+        else this.spouse = new ArrayList<>();
 
+        if (!childs.equals("")) this.childs = new ArrayList<>(Arrays.asList(childs.split(", ")));
+        else this.childs = new ArrayList<>();
+    }
     // #endregion
 
     // #region getter and setter
@@ -82,17 +76,17 @@ public class Human {
      * @return пол человека
      */
     public String getGender() {
-        if (this.gender == Gender.male) return "муж.";
-        if (this.gender == Gender.female) return "жен.";
-        else return null;
+        if (this.gender == Gender.male) return "мужской";
+        if (this.gender == Gender.female) return "женский";
+        return null;
     }
 
     /**
      * Получение даты рождения
-     * @return тип LocalDate вида дд.мм.гггг
+     * @return дата в локальном формате
      */
     public LocalDate getDateOfBirth() {
-        return LocalDate.parse(this.dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        return this.dateOfBirth;
     }
 
     /**
@@ -100,17 +94,15 @@ public class Human {
      * @param dateOfBirth строка вида дд.мм.гггг
      */
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
     }
 
     /**
      * Получение даты смерти
-     * @return строка вида дд.мм.гггг
+     * @return дата в локальном формате
      */
     public LocalDate getDateOfDeath() {
-        if (!this.dateOfDeath.equals("---"))
-            return LocalDate.parse(this.dateOfDeath, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        else return null;
+        return this.dateOfDeath;
     }
 
     /**
@@ -118,7 +110,7 @@ public class Human {
      * @param dateOfDeath строка вида дд.мм.гггг
      */
     public void setDateOfDeath(String dateOfDeath) {
-        this.dateOfDeath = dateOfDeath;
+        this.dateOfDeath = LocalDate.parse(dateOfDeath, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
     }
 
     /**
@@ -138,20 +130,21 @@ public class Human {
     }
 
     /**
-     * Получение имени супруга
-     * @return строка вида Фамилия Имя Отчество
+     * Получение имён супругов
      */
     public String getSpouse() {
-        return spouse;
+        if (this.spouse.size() != 0) return String.join(", ", this.spouse);
+        else return "---";
     }
 
     /**
      * Добавление нового супруга
      * @param str строка вида Фамилия Имя Отчество
-     * @return строка вида  Фамилия Имя Отчество
+     * @return да или нет
      */
-    public String setSpouse(String str) {
-        return this.spouse + ", " + str;
+    public boolean setSpouse(String str) {
+        this.spouse.add(str);
+        return true;
     }
 
     /**
@@ -159,18 +152,19 @@ public class Human {
      * @return строка вида  Фамилия Имя Отчество через запятую
      */
     public String getChilds() {
-        return childs;
+        if (this.childs.size() != 0) return String.join(", ", this.childs);
+        else return "---";
     }
 
     /**
      * Добавление нового ребёнка
      * @param str строка вида  Фамилия Имя Отчество
-     * @return все дети
+     * @return да или нет
      */
-    public String setChild(String str) {
-        return this.childs + ", " + str;
+    public boolean setChild(String str) {
+        this.childs.add(str);
+        return true;
     }
-
     // #endregion
 
     // #region Переопределение equals, hashCode, toString
@@ -199,14 +193,18 @@ public class Human {
 
     @Override
     public String toString() {
-        String dateOfDeath = "---";
+        String dateOfDeath;
         if (this.getDateOfDeath() != null)
             dateOfDeath = this.getDateOfDeath().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        return "ФИО: " + this.getFullName() + ",\nпол: " + this.getGender() + ",\nдаты рождения/смерти: "
+        else dateOfDeath = "---";
+        return "ФИО: " + this.getFullName()
+                + ",\nпол: " + this.getGender()
+                + ",\nдаты рождения/смерти: "
                 + this.getDateOfBirth().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
-                + ", " + dateOfDeath + ",\nмать/отец: " + this.getMother() + ", " + this.getFather()
-                + ",\nсупруг(а): " + this.getSpouse() + ",\nдети: " + this.getChilds();
+                + " / " + dateOfDeath
+                + ",\nмать/отец: " + this.getMother() + ", " + this.getFather()
+                + ",\nсупруги: " + this.getSpouse()
+                + ",\nдети: " + this.getChilds();
     }
-
     // #endregion
 }
