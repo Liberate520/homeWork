@@ -10,10 +10,9 @@ public class TreeIterator<E> implements Iterator<E> {
     private int index = 0;
     private List<E> humanList;
 
-    public TreeIterator (List<E> listOfHumans){
+    public TreeIterator(List<E> listOfHumans) {
         this.humanList = listOfHumans;
     }
-
 
     @Override
     public boolean hasNext() {
@@ -24,5 +23,5 @@ public class TreeIterator<E> implements Iterator<E> {
     public E next() {
         return humanList.get(index++);
     }
-    
+
 }

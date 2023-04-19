@@ -1,8 +1,6 @@
 package presenter;
 
 import java.util.List;
-
-import model.tree.classes.Human;
 import model.tree.classes.Service;
 import view.iView;
 
@@ -16,32 +14,28 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public List getTree(){
+    public List getTree() {
         return service.getTree();
     }
 
-    public void setHuman(Human person){
-        service.setHuman(person);
+    public void setHuman() {
+        service.setHuman();
     }
 
-    public void addPerson(Human person){
-        service.addPerson(person);
+    public void searchPerson() {
+        service.serachPerson();
     }
 
-    public List searchPerson(String str){
-        return service.serachPerson(str);
-    }
-
-    public void printTree(){
+    public void printTree() {
         String tree = service.treeToString();
         view.print(tree);
     }
 
-    public void saveTree(){
-        service.saveTree();
+    public void saveTree() {
+        service.save("src/model/storages/Test.out");
     }
 
-    public void loadTree(){
-        service.loadTree();
+    public void loadTree() {
+        service.load("src/model/storages/Test.out");
     }
 }

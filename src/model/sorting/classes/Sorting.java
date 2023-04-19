@@ -10,17 +10,16 @@ public class Sorting<E> {
     private List<E> persons = new ArrayList<>();
     private iTree<E> tree;
 
-    public Sorting(iTree<E> tree)
-    {
+    public Sorting(iTree<E> tree) {
         this.tree = tree;
     }
 
-    public void sortByName(){
+    public void sortByName() {
         persons = tree.getTree();
         Collections.sort(persons, new HumanComparatorByName());
     }
 
-    public void sortByBirthDate(){
+    public void sortByBirthDate() {
         persons = tree.getTree();
         Collections.sort(persons, new HumanComparatorByBirth());
     }

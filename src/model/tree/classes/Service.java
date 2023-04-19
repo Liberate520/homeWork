@@ -2,40 +2,46 @@ package model.tree.classes;
 
 import java.util.List;
 
+import model.filesystem.classes.SaveRestore;
 
 public class Service {
     private Tree tree;
+    private SearchPerson search;
+    private SetHuman setHuman;
 
-    public Service(){
+    public void save(String path) {
+        SaveRestore<Human> saving = new SaveRestore<Human>();
+        saving.save(tree.getTree(), path);
+    }
+
+    public void load(String path) {
+        SaveRestore<Human> loading = new SaveRestore<Human>();
+        tree.setTree(loading.load(path));
+    }
+
+    public Service() {
         tree = new Tree<Human>();
     }
 
-    public List<Human> getTree(){
+    public List<Human> getTree() {
         return tree.getTree();
     }
 
-    public void setHuman(Human human){
-        SetHuman setHuman = new SetHuman();
-        setHuman.settingHuman(human);      
+    public void setHuman() {
+        setHuman = new SetHuman(tree);
+        setHuman.settingHuman();
     }
 
-    public void addPerson(Human person){
+    public void addPerson(Human person) {
         tree.addPerson(person);
     }
 
-    public List<Human> serachPerson(String str){
-        return tree.searchPerson(str);
+    public void serachPerson() {
+        search = new SearchPerson(tree);
+        search.printSearched();
     }
 
-    public String treeToString(){
+    public String treeToString() {
         return tree.treeToString();
-    }
-
-    public void saveTree(){
-        tree.save("src/model/storages/Test.out");
-    }
-
-    public void loadTree(){
-        tree.load("src/model/storages/Test.out");
     }
 }

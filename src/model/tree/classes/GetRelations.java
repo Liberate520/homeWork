@@ -32,5 +32,5 @@ public class GetRelations {
         else
             sb.append("\nUnknown!\n");
         return sb.toString();
-    }   
+    }
 }

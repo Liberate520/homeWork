@@ -1,4 +1,5 @@
 package model.filesystem.classes;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +7,9 @@ import java.util.List;
 import model.filesystem.interfaces.SaveLoad;
 
 public class SaveRestore<E> implements SaveLoad<E> {
-    
+
     @Override
-    public void save (List<E> treeToSave, String path) {
+    public void save(List<E> treeToSave, String path) {
         try {
             FileOutputStream out = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(out);
@@ -16,7 +17,7 @@ public class SaveRestore<E> implements SaveLoad<E> {
             oos.close();
         } catch (Exception e) {
             System.out.println("Problem serializing: " + e);
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -30,7 +31,7 @@ public class SaveRestore<E> implements SaveLoad<E> {
             ois.close();
         } catch (Exception e) {
             System.out.println("Problem serializing: " + e);
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
         return treeRestored;
     }

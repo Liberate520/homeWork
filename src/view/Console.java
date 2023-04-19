@@ -45,7 +45,7 @@ public class Console implements iView {
                     break;
                 case "3":
                     searchPerson = new SearchPerson(presenter);
-                    searchPerson.printSearched();
+                    searchPerson.searchPerson();
                     break;
                 case "4":
                     presenter.loadTree();
