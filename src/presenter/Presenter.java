@@ -22,41 +22,51 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void treeList() {
-        System.out.println(familyTree.getInfo());
-        System.out.println();
+    public String treeList() {
+        return familyTree.getInfo();
     }
    
-    public void searchByFirstName(String string) {
-        familyTree.searchByFirstName(string);
-        System.out.println();
-    }
-    public void searchBySecondName(String string) {
-        familyTree.searchBySecondName(string);
-        System.out.println();
-    }
-    public void searchByFullName(String string) {
-        familyTree.searchByFullName(string);
-        System.out.println();
-    }
-    public void searchByDateOfBirth(String string) {
-        familyTree.searchByDateOfBirth(string);
-        System.out.println();
-    }
-    public void searchByAliveOrNot(Integer i) {
-        familyTree.searchByAliveOrNot(i);
-        System.out.println();
-    }
-    public void searchByDateOfDeath(String string) {
-        familyTree.searchByDateOfDeath(string);
-        System.out.println();
+    public String searchByFirstName(String string) {
+        return familyTree.searchByFirstName(string);
     }
 
-    public void sorting(Integer i) {
-    if(i == 1){familyTree.sortByName();}
-    if(i == 2){familyTree.sortBySecondName();}
-    if(i == 3){familyTree.sortByAlive();}
-    if(i == 4){familyTree.sortByChild();}
+    public String searchBySecondName(String string) {
+        return familyTree.searchBySecondName(string);
+    }
+
+    public String searchByFullName(String string) {
+        return familyTree.searchByFullName(string);
+    }
+
+    public String searchByDateOfBirth(String string) {
+        return familyTree.searchByDateOfBirth(string);
+    }
+
+    public String searchByAliveOrNot(Integer i) {
+        return familyTree.searchByAliveOrNot(i);
+    }
+
+    public String searchByDateOfDeath(String string) {
+        return familyTree.searchByDateOfDeath(string);
+    }
+
+    public String sortByName() {
+        return familyTree.sortByName();
+    }
+
+
+    public String sortBySecondName() {
+        return familyTree.sortBySecondName();
+    }
+
+
+    public String sortByAlive() {
+        return familyTree.sortByAlive();
+    }
+
+
+    public String sortByChild() {
+        return familyTree.sortByChild();
     }
 
     public void save() throws IOException {
@@ -73,26 +83,21 @@ public class Presenter {
             System.out.println((i+1) + ". " + ((Person) familyTree.getPersonList().get(i)).getFullName());
         }
     }
-   
-	public void dateOfBirth(int nextInt) {
-        familyTree.dateOfBirth(nextInt);
-	}
-
 
 	public void add(Person new_person) {
         familyTree.add(new_person);
 	}
 
-    public void setFather(int father, int child) {
-        familyTree.setFather(father, child);
+    public String setFather(int father, int child) {
+        return familyTree.setFather(father, child);
     }
 
-    public void setMother(int mother, int child) {
-        familyTree.setMother(mother, child);
+    public String setMother(int mother, int child) {
+        return familyTree.setMother(mother, child);
     }
 
-    public void addChild(int person, int child) {
-        familyTree.addChild(person, child);
+    public String addChild(int person, int child) {
+        return familyTree.addChild(person, child);
     }
 
 }

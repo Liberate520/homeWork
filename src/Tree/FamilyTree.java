@@ -97,114 +97,140 @@ public class FamilyTree<E extends Person> implements Tree<E>,Serializable{
         return sb.toString();
     }
 
-    public void searchByFirstName(String string) {
+    public String searchByFirstName(String string) {
+        StringBuilder sb = new StringBuilder();
         for(E person: familytree){
             if(person.getFirstName().equalsIgnoreCase(string)){
-                System.out.println(person.getInfo());
+                sb.append(person.getFullInfo());
+                sb.append("\n");
             }
         }
+        return sb.toString();
     }
 
-    public void searchBySecondName(String string) {
+    public String searchBySecondName(String string) {
+        StringBuilder sb = new StringBuilder();
         for(E person: familytree){
             if(person.getSecondName().equalsIgnoreCase(string)){
-                System.out.println(person.getInfo());
+                sb.append(person.getFullInfo());
+                sb.append("\n");
             }
-        }    
+        }
+        return sb.toString();    
     }
 
-    public void searchByFullName(String string) {
+    public String searchByFullName(String string) {
+        StringBuilder sb = new StringBuilder();
         for(E person: familytree){
             if(person.getFullName().equalsIgnoreCase(string)){
-                System.out.println(person.getInfo());
+                sb.append(person.getFullInfo());
+                sb.append("\n");
             }
-        }    
+        }
+        return sb.toString();    
     }
 
-    public void searchByDateOfBirth(String string) {
+    public String searchByDateOfBirth(String string) {
+        StringBuilder sb = new StringBuilder();
         for(E person: familytree){
             if(person.getDateOfBirth().equalsIgnoreCase(string)){
-                System.out.println(person.getInfo());
+                sb.append(person.getFullInfo());
+                sb.append("\n");
             }
-        }    
+        }
+        return sb.toString();    
     }
 
-    public void searchByAliveOrNot(int i) {
+    public String searchByAliveOrNot(int i) {
+        StringBuilder sb = new StringBuilder();
         if(i == 1){
             for(E person: familytree){
                 if(person.getAlive().equalsIgnoreCase("Да")){
-                    System.out.println(person.getInfo());
+                    sb.append(person.getFullInfo());
+                    sb.append("\n");
                 }
             }
+            return sb.toString();
         }
         if(i == 2){
             for(E person: familytree){
                 if(person.getAlive().equalsIgnoreCase("Нет")){
-                    System.out.println(person.getInfo());
+                    sb.append(person.getFullInfo());
+                    sb.append("\n");
                 }
             }
+            return sb.toString();
         }
+        return "Ведено неверное число! \n";
     }
 
-    public void searchByDateOfDeath(String string) {
+    public String searchByDateOfDeath(String string) {
+        StringBuilder sb = new StringBuilder();
         for(E person: familytree){
             if(person.getDateOfDeath().equalsIgnoreCase(string)){
-            System.out.println(person.getInfo());}
-        }    
+                sb.append(person.getFullInfo());
+                sb.append("\n");
+            }
+        }
+        return sb.toString();    
     }
 
     
-    public void sortByName() {
+    public String sortByName() {
+        StringBuilder sb = new StringBuilder();
         familytree.sort(new ComparByName<>());
         for(E person: familytree){
-            System.out.println(person);
+            sb.append(person.getFullInfo());
+            sb.append("\n");
         }
-        System.out.println();
+        return sb.toString();
     }
 
-    public void sortBySecondName() {
+    public String sortBySecondName() {
+        StringBuilder sb = new StringBuilder();
         familytree.sort(new ComparBySecondName<>());
         for(E person: familytree){
-            System.out.println(person);
+            sb.append(person.getFullInfo());
+            sb.append("\n");
         }
-        System.out.println();
+        return sb.toString();
     }
 
-    public void sortByAlive() {
+    public String sortByAlive() {
+        StringBuilder sb = new StringBuilder();
         familytree.sort(new ComparByAlive<>());
         for(E person: familytree){
-            System.out.println(person);
+            sb.append(person.getFullInfo());
+            sb.append("\n");
         }
-        System.out.println();
+        return sb.toString();
     }
 
-    public void sortByChild() {
+    public String sortByChild() {
+        StringBuilder sb = new StringBuilder();
         familytree.sort(new ComparByChild<>());
         for(E person: familytree){
-            System.out.println(person);
+            sb.append(person.getFullInfo());
+            sb.append("\n");
         }
-        System.out.println();
+        return sb.toString();
     }
 
-    public void dateOfBirth(Integer i) {
-        System.out.print(familytree.get(i - 1).getDateOfBirth());
-    }
-
-    public void setMother(int mother, int child) {
+    public String setMother(int mother, int child) {
         familytree.get(child - 1).setMother(familytree.get(mother - 1));
-        System.out.println("Человеку " + familytree.get(child - 1).getFullName() + " добавлена мать " + familytree.get(mother - 1).getFullName());
         familytree.get(mother - 1).addChild(familytree.get(child - 1));
+        return ("Человеку " + familytree.get(child - 1).getFullName() + " добавлена мать " + familytree.get(mother - 1).getFullName());
     }
 
-    public void setFather(int father, int child) {
+    public String setFather(int father, int child) {
         familytree.get(child - 1).setFather(familytree.get(father - 1));
-        System.out.println("Человеку " + familytree.get(child - 1).getFullName() + " добавлен отец " + familytree.get(father - 1).getFullName());
         familytree.get(father - 1).addChild(familytree.get(child - 1));
+        return ("Человеку " + familytree.get(child - 1).getFullName() + " добавлен отец " + familytree.get(father - 1).getFullName());
     }
 
-    public void addChild(int person, int child) {
+    public String addChild(int person, int child) {
         familytree.get(person - 1).addChild(familytree.get(child - 1));
-        System.out.println("Человеку " + familytree.get(person - 1).getFullName() + " добавлен ребёнок " + familytree.get(child - 1).getFullName());
+        return ("Человеку " + familytree.get(person - 1).getFullName() + " добавлен ребёнок " + familytree.get(child - 1).getFullName());
     }
 
     public List<Person> getPersonList() {
@@ -215,12 +241,5 @@ public class FamilyTree<E extends Person> implements Tree<E>,Serializable{
     public Iterator<E> iterator(){
         return new PersonIterator<E>(familytree);
     }
-
-   
-
-    
-
-
-
 
 }

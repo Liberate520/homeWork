@@ -23,7 +23,6 @@ public class Handler implements Writable {
         FamilyTree familyTree = new FamilyTree<>();
         for (Object person: (FamilyTree) tree){
             familyTree.add((Person) person);
-            System.out.println(person);
         }
         return familyTree;
     }

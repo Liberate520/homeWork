@@ -227,8 +227,32 @@ public class Person implements Serializable, Comparable<Person>{
         sb.append(firstname);
         sb.append(" ");
         sb.append(secondname);
-        sb.append(", ");
+        sb.append(", Дата рождения: ");
         sb.append(getDateOfBirth());
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
+    }
+
+    /**
+     * @return Полная информация о человеке 
+     */
+    public String getFullInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: ");
+        sb.append(firstname);
+        sb.append(" ");
+        sb.append(secondname);
+        sb.append(", Дата рождения: ");
+        sb.append(getDateOfBirth());
+        sb.append(", Жив: ");
+        sb.append(getAlive());
+        sb.append(", Дата смерти: ");
+        sb.append(getDateOfDeath());
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");
@@ -281,8 +305,6 @@ public class Person implements Serializable, Comparable<Person>{
         }
         return res.toString();
     }
-    
-   
     
     @Override
     public String toString() {

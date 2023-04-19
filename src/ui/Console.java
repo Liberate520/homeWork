@@ -50,8 +50,9 @@ public class Console implements View {
 
 
     public void treeList() {
-        presenter.treeList();
+        System.out.println(presenter.treeList());
     }
+    
     public void search() {
         System.out.println("Поиск по: \n" + 
         "1. Имени \n"+
@@ -64,28 +65,28 @@ public class Console implements View {
         int i = scanner.nextInt();
         scanner.nextLine();
         if(i == 1){
-            System.out.println("Введие имя: "); 
-            presenter.searchByFirstName(scanner.nextLine());
+            System.out.println("Введите имя: ");
+            System.out.println(presenter.searchByFirstName(scanner.nextLine()));
         }
         if(i == 2){
-            System.out.println("Введие фамилию: ");
-            presenter.searchBySecondName(scanner.nextLine());
+            System.out.println("Введите фамилию: ");
+            System.out.println(presenter.searchBySecondName(scanner.nextLine()));
         }
         if(i == 3){
-            System.out.println("Введие имя и фамилию: ");
-            presenter.searchByFullName(scanner.nextLine());
+            System.out.println("Введите имя и фамилию: ");
+            System.out.println(presenter.searchByFullName(scanner.nextLine()));
         }
         if(i == 4){
-            System.out.println("Введие дату рождения: ");
-            presenter.searchByDateOfBirth(scanner.nextLine());
+            System.out.println("Введите дату рождения: ");
+            System.out.println(presenter.searchByDateOfBirth(scanner.nextLine()));
         }
         if(i == 5){
             System.out.println("Выберите число: \n" + "1. Жив \n" + "2. Мертв \n" + "Введите число: ");
-            presenter.searchByAliveOrNot(scanner.nextInt());
+            System.out.println(presenter.searchByAliveOrNot(scanner.nextInt()));
         }
         if(i == 6){
-            System.out.println("Введие дату смерти: ");
-            presenter.searchByDateOfDeath(scanner.nextLine());
+            System.out.println("Введите дату смерти: ");
+            System.out.println(presenter.searchByDateOfDeath(scanner.nextLine()));
         }
     }
 
@@ -96,7 +97,24 @@ public class Console implements View {
         "3. По нахождение в живых \n"+ 
         "4. По количеству детей \n" +
         "Введите число: ");
-        presenter.sorting(scanner.nextInt());
+        int i = scanner.nextInt();
+
+        if(1 == i){
+            System.out.println(presenter.sortByName());
+        }
+        
+        if(2 == i){
+            System.out.println(presenter.sortBySecondName());
+        }
+    
+
+        if(3 == i){
+            System.out.println(presenter.sortByAlive());
+        }
+    
+        if(4 == i){
+            System.out.println(presenter.sortByChild());
+        }
     }
 
     public void newPerson(){
@@ -132,7 +150,6 @@ public class Console implements View {
         presenter.add(new_person);
         System.out.println(new_person.getFullName() + " добавлен(а) в семейное древо ");
         answer = 0;
-        System.out.println();
     }
 
     public void newFather(){
@@ -144,7 +161,7 @@ public class Console implements View {
         presenter.getAllPersonFromList();
         System.out.println("Введите номер человека: ");
         int father = scanner.nextInt();
-        presenter.setFather(father, child);
+        System.out.println(presenter.setFather(father, child));
     }
 
     public void newMother(){
