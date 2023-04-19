@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.List;
 import java.util.Objects;
 
 public class Human {
@@ -37,14 +37,12 @@ public class Human {
         humanList.add(human);
     }
         public Human findGender(Gender gender, List humanList) {
-            Iterator iterator = humanList.iterator();
-            while (iterator.hasNext()) {
-                Human var = iterator.next();
-                if (var.getGender().equals(Gender.Female)) {
-                    return var;
-                }
+        for (Human human: humanList) {
+            if (human.getGender() == Gender.Female) {
+                return human;
             }
             return null;
+        }
     }
 
     @Override
