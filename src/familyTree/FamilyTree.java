@@ -13,14 +13,7 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
 
     private List<T> members;
 
-//    public FamilyTree(T root) {
-//        this.root = root;
-//        this.members = new ArrayList<>();
-//        this.members.add(root);
-//    }
-
     public FamilyTree() {
-        //this.root = null;
         this.members = new ArrayList<>();
     }
 
@@ -89,7 +82,7 @@ public class FamilyTree<T extends FamilyMember> implements Group<T>, Iterable<T>
         return members.get(id);
     }
 
-    public List<T> searchByName(String name, String surname) {
+    public List<T> searchByNameAndSurname(String name, String surname) {
         List<T> result = new ArrayList<>();
         for (T member : members) {
             if (member.getName().equals(name) && member.getSurname().equals(surname)) {

@@ -7,6 +7,7 @@ import familyTree.member.FamilyMember;
 import familyTree.member.Gender;
 import familyTree.member.Human;
 import service.FileHandler;
+import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Service {
 
     public Service(FamilyTree<Human> tree) {
         this.tree = tree;
+        this.handler = new FileHandler();
     }
     public FamilyTree<Human> getTree() {
         return tree;
@@ -37,22 +39,28 @@ public class Service {
         tree.add(new Human(id++, name, surname, gender, dateBirth, father, mother));
     }
 
-
     public String printTree(){
         return tree.getInfo();
     }
 
-//    public void printTrees(){
-//        tree.printTree();
-//    }
+    public void printTrees(){
+        tree.printTree();
+    }
 
     public void save(String fileName){
         if (handler != null && tree != null) {
             try {
+                File file = new File(fileName);
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
                 handler.write(tree, fileName);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Ошибка при записи файла: " + e.getMessage(), e);
             }
+        } else {
+            //System.out.println("Что-то пошло не так. Handler: " + handler + ", tree: " + tree);
+            throw new RuntimeException("Дерево пустое\n");
         }
     }
 
@@ -60,11 +68,19 @@ public class Service {
         if (handler != null) {
             try {
                 tree = (FamilyTree<Human>) handler.read(fileName);
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException("Ошибка чтения файла: " + e.getMessage(), e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("Такой класс не создан: " + e.getMessage(), e);
+            } catch (ClassCastException e) {
+                throw new RuntimeException("Недопустимое приведение класса: " + e.getMessage(), e);
             }
+        } else {
+            throw new RuntimeException("Что-то пошло не так\n");
         }
     }
+
+
     public void sortByName () {
         tree.getMembers().sort(new MemberComparatorByName());
     }
@@ -84,20 +100,6 @@ public class Service {
         tree.setMembers(members);
 
     }
-    public String getHumanByName(String name) {
-        List<Human> members = tree.getMembers();
-        String memberName = null;
-        Human person = null;
-        for (Human member: members) {
-            if(member.getName().equals(name)) {
-                memberName = member.getName();
-                person = member;
-            }
-
-        }
-        return memberName + ", отец: " + person.getFather() + ", мать: " + person.getMother()
-                + ", дети: " + person.getChildren() + ", братья и сёстры: " + person.getSiblings();
-    }
 
     public Human searchMemberByName(String name) {
         try {
@@ -113,22 +115,6 @@ public class Service {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return null;
-        }
-    }
-
-    public String searchMember(String name) {
-        try {
-            if (name == null || name.trim().isEmpty()) {
-                throw new IllegalArgumentException("Имя не может быть пустым.");
-            }
-            for (Human member : tree.getMembers()) {
-                if (member.getName().equalsIgnoreCase(name.trim())) {
-                    return member.getInfo();
-                }
-            }
-            throw new IllegalArgumentException("Человек с именем '" + name + "' не найден в дереве.");
-        } catch (IllegalArgumentException e) {
-            return "Ошибка: " + e.getMessage() + " Проверьте правильность введенных данных и попробуйте еще раз.";
         }
     }
 

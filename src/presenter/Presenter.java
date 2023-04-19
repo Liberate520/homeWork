@@ -18,8 +18,12 @@ public class Presenter {
         view.setPresenter(this);
     }
 
+//    public void printTree(){
+//        view.print(service.printTree());
+//    }
+
     public void printTree(){
-        view.print(service.printTree());
+        service.printTrees();
     }
 
     public void addMember(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
@@ -27,7 +31,7 @@ public class Presenter {
     }
 
     public Human searchMemberByName(String name) {
-        return (Human) service.searchMemberByName(name);
+        return service.searchMemberByName(name);
     }
 
 

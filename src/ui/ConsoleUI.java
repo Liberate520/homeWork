@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ConsoleUI implements View{
     private Presenter presenter;
     private Scanner scanner;
-   // private FileHandler handler;
+    private FileHandler handler;
     private boolean work;
     private Menu menu;
 
@@ -42,7 +42,6 @@ public class ConsoleUI implements View{
                 }
                 int choice = scanner.nextInt();
                 scan();
-//                scanner.nextLine();
                 menu.execute(choice);
             } catch (IndexOutOfBoundsException e) {
                 print("Такого пункта меню нет. Выберите пункт из списка.");
@@ -182,6 +181,7 @@ public class ConsoleUI implements View{
         String fileName = scan();
         String fullName = "src/" + fileName + ".dat";
         presenter.loadTree(fullName);
+        System.out.println("Дерево загружено");
     }
 
     public void saveTree() {
@@ -189,6 +189,7 @@ public class ConsoleUI implements View{
         String fileName = scan();
         String fullName = "src/" + fileName + ".dat";
         presenter.saveTree(fullName);
+        System.out.println("Дерево сохранено");
     }
     public void finish() {work = false;}
 }

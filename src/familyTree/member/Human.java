@@ -23,7 +23,6 @@ public class Human implements FamilyMember, Serializable {
     private List<Human> grandparents;
     private List<Human> grandchildrens;
 
-
     public Human(int id, String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
         this.name = name;
         this.surname = surname;
@@ -34,10 +33,8 @@ public class Human implements FamilyMember, Serializable {
         this.mother = mother;
         this.childList = new ArrayList<>();
         this.siblings = new ArrayList<>();
-//        this.grandparents = new ArrayList<>();
-//        this.grandchildrens = new ArrayList<>();
-    }
 
+    }
     public Human() {
         this.id = 0;
         this.name = "unknown";
@@ -45,7 +42,6 @@ public class Human implements FamilyMember, Serializable {
         this.dateBirth = "unknown";
         this.dateDeath = "unknown";
     }
-
     @Override
     public int getId() {
         return id;
@@ -88,7 +84,6 @@ public class Human implements FamilyMember, Serializable {
 //    public FamilyMember getParent() {
 //        return parent;
 //    }
-//
 //    @Override
 //    public void setParent(FamilyMember parent) {
 //        this.parent = parent;
@@ -319,10 +314,9 @@ public class Human implements FamilyMember, Serializable {
 
     }
 
-
     public String getInfo() {
         StringBuilder builder = new StringBuilder();
-        builder.append(name).append(" ")
+        builder.append(getName()).append(" ")
                 .append(surname).append(", ")
                 .append(getAge()).append(" лет. ")
                 .append(getFatherInfo()).append(", ")
