@@ -38,5 +38,4 @@ public class MenuChangeInfo {
     public void execute(int choice){
         listChangeInfo.get(choice-1).execute();
     }
-
 }

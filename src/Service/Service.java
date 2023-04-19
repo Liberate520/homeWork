@@ -13,11 +13,12 @@ import java.util.HashSet;
 
 public class Service {
     private int id;
-    private Human human;
     private FamilyTree familyTree;
+    private InOutTxt copy;
 
     public Service(FamilyTree familyTree) {
         this.familyTree = familyTree;
+        this.copy = new InOutTxt();
     }
 
     public void addHuman(String status, String name, String surname, LocalDate birthDate, Human mother, Human father) {
@@ -45,12 +46,10 @@ public class Service {
     }
 
     public void saveTree() throws IOException {
-        InOutTxt copy = new InOutTxt();
         copy.saveData(familyTree, "tree");
     }
 
     public void loadTree() throws IOException, ClassNotFoundException {
-        InOutTxt copy = new InOutTxt();
         FamilyTree tree = (FamilyTree) copy.loadData("tree");
     }
 
@@ -78,11 +77,9 @@ public class Service {
         familyTree.getHuman(name, surname).setFather(familyTree.getHuman(fatherName, fatherSurname));
     }
 
-
     public void removeHuman(String name, String surname) {
         familyTree.removeKin(familyTree.getHuman(name, surname));
     }
-
 
     public Human getHuman(String name, String surname) {
         return (Human) familyTree.getHuman(name, surname);
@@ -91,7 +88,6 @@ public class Service {
     public String getStatus(String name, String surname) {
         return familyTree.getHuman(name, surname).getStatus();
     }
-
 
     public LocalDate getBirthDate(String name, String surname) {
         return familyTree.getHuman(name, surname).getBirthDate();
@@ -107,11 +103,9 @@ public class Service {
 
     /*public HashSet <Human> getChildren(String name, String surname) {
         return (HashSet<Human>) familyTree.getHuman(name, surname).getChildren();
-
     }*/
 
     public HashSet <Human> getChildren(String name, String surname) {
         return familyTree.getAllChildren(name, surname);
-
     }
 }

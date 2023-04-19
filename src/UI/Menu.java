@@ -3,7 +3,7 @@ package UI;
 import UI.Commands.*;
 import UI.Commands.ChangeInfo.ChangeInfo;
 import UI.Commands.GetFamilyTree.GetFamilyTree;
-import UI.Commands.GetFamilyTree.RemoveHuman;
+import UI.Commands.RemoveHuman;
 import UI.Commands.GetHumanInfo.GetHumanInfo;
 
 import java.util.ArrayList;

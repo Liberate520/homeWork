@@ -35,7 +35,6 @@ public class Console implements View {
     @Override
     public void print(String text) {
         System.out.println(text);
-
     }
 
     @Override
@@ -43,12 +42,11 @@ public class Console implements View {
         while (work) {
             System.out.println(menu.print());
             String choice = scanner.nextLine();
-            if (check(choice)) {
+            if (check(choice, menu.getSize())) {
                 menu.execute(Integer.parseInt(choice));
             } else {
                 fail();
             }
-
         }
     }
 
@@ -56,21 +54,8 @@ public class Console implements View {
         start();
     }
 
-
-    private boolean check(String text) {
-        return text.matches("[0-9]+") && Integer.parseInt(text) <= menu.getSize() && Integer.parseInt(text) > 0;
-    }
-
-    private boolean checkAdd(String text) {
-        return text.matches("[0-9]+") && Integer.parseInt(text) <= menuChangeInfo.getSize() && Integer.parseInt(text) > 0;
-    }
-
-    private boolean checkGetInfo(String text) {
-        return text.matches("[0-9]+") && Integer.parseInt(text) <= menuGetFamilyTree.getSize() && Integer.parseInt(text) > 0;
-    }
-
-    private boolean checkHumanInfo(String text) {
-        return text.matches("[0-9]+") && Integer.parseInt(text) <= menuGetHumanInfo.getSize() && Integer.parseInt(text) > 0;
+    private boolean check(String text, int n) {
+        return text.matches("[0-9]+") && Integer.parseInt(text) <= n && Integer.parseInt(text) > 0;
     }
 
     public void fail() {
@@ -112,7 +97,7 @@ public class Console implements View {
     public void getFamilyTree() {
         System.out.println(menuGetFamilyTree.print());
         String choice = scanner.nextLine();
-        if (checkGetInfo(choice)) {
+        if (check(choice, menuGetFamilyTree.getSize())) {
             menuGetFamilyTree.execute(Integer.parseInt(choice));
         } else {
             fail();
@@ -123,15 +108,12 @@ public class Console implements View {
         presenter.saveChanges();
     }
 
-
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
-
     }
 
     //   Методы изменения информации
-
     public String enterName() {
         System.out.println("Введите имя учетной записи: ");
         String name = scanner.nextLine();
@@ -221,12 +203,11 @@ public class Console implements View {
         }
     }
 
-
     public void changeInfo() {
         while (work) {
             System.out.println(menuChangeInfo.print());
             String choice = scanner.nextLine();
-            if (checkAdd(choice)) {
+            if (check(choice, menuChangeInfo.getSize())) {
                 menuChangeInfo.execute(Integer.parseInt(choice));
             } else {
                 fail();
@@ -267,7 +248,7 @@ public class Console implements View {
         while (work) {
             System.out.println(menuGetHumanInfo.print());
             String choice = scanner.nextLine();
-            if (checkHumanInfo(choice)) {
+            if (check(choice, menuGetHumanInfo.getSize())) {
                 menuGetHumanInfo.execute(Integer.parseInt(choice));
             } else {
                 fail();
@@ -343,4 +324,3 @@ public class Console implements View {
         }
     }
 }
-

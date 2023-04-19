@@ -74,7 +74,6 @@ public class Presenter {
 
     public Human getHuman(String name, String surname) {
         return service.getHuman(name, surname);
-
 }
 
     public String getStatus(String name, String surname) {

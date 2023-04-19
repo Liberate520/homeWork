@@ -1,7 +1,7 @@
 package UI.Commands.GetHumanInfo;
 
-import UI.Commands.ChangeInfo.*;
 import UI.Commands.Option;
+import UI.Commands.ReturnToMenu;
 import UI.Console;
 
 import java.util.ArrayList;

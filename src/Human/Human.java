@@ -16,7 +16,6 @@ public class Human extends Subject<Human> implements Serializable  {
     private Human father;
     //public HashSet<Human> children;
 
-
     public Human(int id, String status, String name, String surname, LocalDate birthDate, Human mother, Human father) {
         this.id = id;
         this.status = status;
