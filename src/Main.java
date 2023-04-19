@@ -9,7 +9,9 @@ public class Main {
         humanList.addHuman(person1);
         humanList.addHuman(person2);
         humanList.addHuman(person3);
-        System.out.println(findGender(Gender.Female, humanList));
+        System.out.println(humanList.getHumanInfo());
+
+
 
 
 

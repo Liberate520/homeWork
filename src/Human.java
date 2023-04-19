@@ -5,7 +5,7 @@ public class Human {
    private Gender gender;
     private String lastName;
     private String firstName;
-    List<Human> humanList;
+
 
 
 
@@ -33,16 +33,15 @@ public class Human {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void addHuman(Human human){
-        humanList.add(human);
-    }
-        public Human findGender(Gender gender, List humanList) {
+
+    public Human findGender(Gender gender, List<Human> humanList) {
         for (Human human: humanList) {
             if (human.getGender() == Gender.Female) {
                 return human;
             }
-            return null;
         }
+        return null;
+
     }
 
     @Override
