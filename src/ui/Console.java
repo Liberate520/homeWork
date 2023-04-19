@@ -58,10 +58,18 @@ public class Console implements View{
         presenter.getTreeInfo();
     }
     public void searchPersonDescendance(){
-        presenter.searchPersonDescendance();
+        System.out.println("Enter the name of Targarien member to find he's descendance: ");
+        Scanner srchDesc = new Scanner(System.in);
+        String nameOfAsc = srchDesc.nextLine().toUpperCase();
+
+        presenter.searchPersonDescendance(nameOfAsc);
     }
     public void searchPerson(){
-        presenter.searchPerson();
+        System.out.println("Enter the name of Targarien member to find: ");
+        Scanner srch = new Scanner(System.in);
+        String name = srch.nextLine().toUpperCase();
+
+        presenter.searchPerson(name);
     }
     public void sortByName() {
         presenter.sortByName();

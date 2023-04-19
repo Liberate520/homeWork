@@ -6,8 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Person implements
-        Serializable, Comparable<Person>, TreeInterface {
+public class Person implements Serializable, Comparable<Person>, TreeInterface {
     static int generatorId = 1;
     private int id;
     public String firstName;
@@ -85,41 +84,6 @@ public class Person implements
             descendants.add(descendant);
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean addPerson(Object person) {
-        return false;
-    }
-
-    @Override
-    public List<String> searchPerson() {
-        return null;
-    }
-
-    @Override
-    public List<String> searchPersonDescendance() {
-        return null;
-    }
-
-    @Override
-    public String getTreeInfo() {
-        return null;
-    }
-
-    @Override
-    public List getFamilyTree() {
-        return null;
-    }
-
-    @Override
-    public Iterator iterator() {
-        return null;
-    }
-
-    @Override
-    public boolean addDescendants() {
         return false;
     }
 

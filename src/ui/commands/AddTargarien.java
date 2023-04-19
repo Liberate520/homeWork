@@ -1,8 +1,9 @@
 package ui.commands;
 
 import ui.Console;
+import ui.View;
 
-public class AddTargarien extends Command{
+public class AddTargarien extends Command {
     public AddTargarien(Console console) {
         super(console);
     }

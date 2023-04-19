@@ -29,11 +29,11 @@ public class Presenter {
         String answer = service.getTreeInfo();
         view.print(answer);
     }
-    public void searchPersonDescendance(){
-         view.print(service.searchPersonDescendance().toString().replace("[]", ""));
+    public void searchPersonDescendance(String nameOfAsc){
+         view.print(service.searchPersonDescendance(nameOfAsc).toString().replaceAll("[ \\[ \\] ]", ""));
     }
-    public void searchPerson(){
-        view.print(service.searchPerson().toString().replace("[]", ""));
+    public void searchPerson(String name){
+        view.print(service.searchPerson(name).toString().replaceAll("[ \\[ \\] ]", ""));
     }
     public void sortByName() {
         service.sortByName();

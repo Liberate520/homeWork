@@ -1,13 +1,11 @@
 package model.Tree;
 
-import model.Data.DataRepository;
 import model.People.Person;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<E extends TreeInterface> implements
-        Serializable, Iterable<E> {
+public class FamilyTree<E extends TreeInterface> implements Serializable, Iterable<E> {
     public List<E> targariens;
 
     public FamilyTree(List<E> targariens) {
@@ -35,10 +33,7 @@ public class FamilyTree<E extends TreeInterface> implements
         return false;
     }
 
-    public List<String> searchPerson(){
-        System.out.println("Enter the name of Targarien member to find: ");
-        Scanner srch = new Scanner(System.in);
-        String name = srch.nextLine().toUpperCase();
+    public List<String> searchPerson(String name){
 
         List<String> searched = new ArrayList<>();
         for (E item:targariens) {
@@ -49,10 +44,7 @@ public class FamilyTree<E extends TreeInterface> implements
         return Collections.singletonList(searched.toString());
     }
 
-    public List<String> searchPersonDescendance(){
-        System.out.println("Enter the name of Targarien member to find he's descendance: ");
-        Scanner srchDesc = new Scanner(System.in);
-        String nameOfAsc = srchDesc.nextLine().toUpperCase();
+    public List<String> searchPersonDescendance(String nameOfAsc){
 
         List<String> searched = new ArrayList<>();
         for (E item: targariens) {

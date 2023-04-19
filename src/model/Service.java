@@ -12,17 +12,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Service {
-
+    public int id;
     public Person person;
     private Writable writable;
     private final String filePath = "Targariens.txt";
-    public void dataOutput(){
-        writable.dataOutput(targariensThrone, filePath);
-    }
-    public void deserialization(){
-        targariensThrone = writable.deserialization(filePath);
-    }
-    public int id;
     public FamilyTree<Person> targariensThrone;
     public Service(){
         targariensThrone = new FamilyTree<>();
@@ -33,6 +26,15 @@ public class Service {
     public void addTargarien(Person person){
         targariensThrone.addPerson(new Person(id++, person.firstName, person.lastName,
                 person.birthDate, person.deathDate, person.gender, person.mother, person.father));
+    }
+    public void dataOutput(){
+        writable.dataOutput(targariensThrone, filePath);
+    }
+    public void deserialization(){
+        targariensThrone = writable.deserialization(filePath);
+    }
+    public void setWritable(Writable writable){
+        this.writable = writable;
     }
     public void sortByName() {
         targariensThrone.getFamilyTree().sort(new PersonComparatorByName());
@@ -46,17 +48,14 @@ public class Service {
     public void sortByGender(){
         targariensThrone.getFamilyTree().sort(new PersonComparatorByGender());
     }
-    public void setWritable(Writable writable){
-        this.writable = writable;
-    }
     public String getTreeInfo(){
         return targariensThrone.getTreeInfo();
     }
-    public List<String> searchPerson(){
-        return targariensThrone.searchPerson();
+    public List<String> searchPerson(String name){
+        return targariensThrone.searchPerson(name);
     }
-    public List<String> searchPersonDescendance(){
-        return targariensThrone.searchPersonDescendance();
+    public List<String> searchPersonDescendance(String nameOfAsc){
+        return targariensThrone.searchPersonDescendance(nameOfAsc);
     }
     public Iterator<Person> iterator(){
         return targariensThrone.iterator();
