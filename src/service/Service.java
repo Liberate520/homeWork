@@ -2,12 +2,15 @@ package service;
 
 import familyTree.FamilyTree;
 import human.Human;
+import human.HumanIterator;
+import saveAndRead.Interf;
+import saveAndRead.SaveAndRead;
 
 import java.time.LocalDate;
 
 public class Service {
     private int id;
-    private FamilyTree familyGroup;
+    private FamilyTree<Human> familyGroup;
 
     public Service(FamilyTree familyGroup) {
         this.familyGroup = familyGroup;
@@ -40,9 +43,18 @@ public class Service {
         familyGroup.delHuman(id);
         return true;
     }
+    public void saveFamilyGroup(String str) {
+        SaveAndRead save = new SaveAndRead();
+        save.saveFile(this.familyGroup, str);
+    }
 
-    public void loadFamilyGroup(String nameFile) {
-        familyGroup.loadFamilyGroup(nameFile);
+    public void loadFamilyGroup(String str) {
+        Interf load = new SaveAndRead();
+        this.familyGroup = load.loadFile(str);
+        id = 1;
+        for (Human item : this.familyGroup) {
+            if (id < item.getId()) id = item.getId();
+        }
     }
 
     public Object searchHuman(String lastName) {

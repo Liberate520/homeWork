@@ -18,7 +18,6 @@ public class Presenter {
 
     public void addHuman(List<String> human) {
         service.addHuman(human.get(0), human.get(1), LocalDate.parse(human.get(2)));
-        System.out.println("человек добавлен");
     }
 
     public void delHuman(int id) {
@@ -31,6 +30,11 @@ public class Presenter {
     }
     public void searchHuman(String lastName) {
         view.print(service.searchHuman(lastName).toString());
+    }
+
+    public void saveList(String nameToFile) {
+        service.saveFamilyGroup(nameToFile);
+        view.print("Сохранено");
     }
 
     public void loadList(String nameFile) {

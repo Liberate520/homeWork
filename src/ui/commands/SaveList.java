@@ -8,10 +8,10 @@ public class SaveList extends Command{
     }
     @Override
     public String description() {
-        return "Сохранить список людей";
+        return "Сохранить изменения в файл";
     }
     @Override
     public void execute() {
-        getConsole().addHuman();
+        getConsole().saveList();
     }
 }

@@ -63,6 +63,7 @@ public class Console implements View {
         List<String> human = new ArrayList<>();
         Collections.addAll(human, firstName, lastName, dateOfBirth);
         presenter.addHuman(human);
+        System.out.println("человек добавлен");
     }
 
     public void delHuman() {
@@ -80,6 +81,11 @@ public class Console implements View {
         System.out.println("Введите Фамилию для поиска");
         String lastName = scanner.nextLine();
         presenter.searchHuman(lastName);
+    }
+    public void saveList() {
+        System.out.println("Введите имя файла");
+        String nameToFile = scanner.nextLine();
+        presenter.saveList(nameToFile);
     }
     public void loadFile() {
         System.out.println("Введите имя файла");

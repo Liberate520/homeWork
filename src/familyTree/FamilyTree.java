@@ -80,9 +80,6 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
         }
     }
 
-    public void loadFamilyGroup(String nameFile) {
-    }
-
     public List<E> searchHuman(String lastName) {
         List<E> searchTemp = new ArrayList<>();
         for (E item : familyTree) {
