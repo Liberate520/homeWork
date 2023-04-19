@@ -1,10 +1,11 @@
 package java_oop_homeWork.src;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Kinsman {
+public class Kinsman implements Serializable {
     private FamilyTree family;
     private Date dateBirth;
     private String name;
