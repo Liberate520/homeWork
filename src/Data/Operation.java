@@ -3,5 +3,5 @@ package OOPjavaTree.src.Data;
 import java.io.IOException;
 
 public interface Operation {
-    public Object getUsedFile(Object data) throws IOException, ClassNotFoundException;
+    public Object getUsedFile(Object data);
 }

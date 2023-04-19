@@ -48,11 +48,11 @@ public class Tree implements Serializable {
         return false;
     }
 
-    public void saveData(Operation file, Object tree) throws IOException, ClassNotFoundException {
+    public void saveData(Operation file, Object tree) {
         file.getUsedFile(tree);
     }
 
-    public Object loadData(Operation file, Object tree) throws IOException, ClassNotFoundException {
+    public Object loadData(Operation file, Object tree) {
         tree = file.getUsedFile(tree);
         return tree;
     }
