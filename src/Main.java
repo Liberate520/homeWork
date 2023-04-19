@@ -14,7 +14,7 @@ public class Main {
         System.out.println(human1.toString());
         System.out.println(human1.getMother());
         System.out.println(human2.getChildren());
-        human2.setChildren(human1);
+        human2.addChildren(human1);
         System.out.println("----");
         System.out.println(human1.toString());
         System.out.println(human1.getFather());

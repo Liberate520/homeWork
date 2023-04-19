@@ -33,17 +33,17 @@ public class Human {
 
     public void setMother(Human human){
         this.mother = human;
-        human.setChildren(this);
+        human.addChildren(this);
 
     }
     public void setFather(Human human){
         if(father==null || !father.equals(human)){
             this.father = human;
-            human.setChildren(this);
+            human.addChildren(this);
         }
 
     }
-    public void setChildren(Human human){
+    public void addChildren(Human human){
         if(!children.contains(human)){
             this.children.add(human);
             if (gender.equals("female")){
