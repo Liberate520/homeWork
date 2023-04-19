@@ -2,17 +2,18 @@ package model.tree;
 
 import human.Human;
 
-public class PersonAdd {
+
+public class InformationAdd {
 
     private FamilyTree<Human> humanList;
 
-    public PersonAdd(FamilyTree<Human> humanList) {
+    public InformationAdd(FamilyTree<Human> humanList) {
         this.humanList = humanList;
     }
 
     public String toFamilyTree(String name, String father, String mother, String year, FamilyTree<Human> humanList) {
-        CheckName checkName = new CheckName(humanList);
-        if (checkName.checkName(humanList, name)) {
+        Check check =  new Check(humanList);
+        if (check.checkname(humanList, name)){
             System.out.println("Такой человек уже есть в базе");
         } else {
 

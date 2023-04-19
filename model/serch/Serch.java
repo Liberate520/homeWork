@@ -1,19 +1,22 @@
-package model.tree;
+package model.serch;
 
 import human.Human;
+import model.tree.Check;
+import model.tree.FamilyTree;
 
-public class SerchPerson {
+
+public class Serch {
 
     private FamilyTree<Human> humanList;
 
-    public SerchPerson(FamilyTree<Human> humanList) {
+    public Serch(FamilyTree<Human> humanList) {
         this.humanList = humanList;
     }
 
-    public String getInformation(String all, FamilyTree<Human> humanList) {
+    public String getInformationName(String all, FamilyTree<Human> humanList) {
         StringBuilder sb = new StringBuilder();
-        CheckName checkName = new CheckName(humanList);
-        if (checkName.checkName(humanList, all)) {
+        Check check = new Check(humanList);
+        if (check.checkname(humanList, all)) {
             for (Human human : humanList) {
                 if (human.getName().equalsIgnoreCase(all)) {
                     sb.append(human.getInfo());

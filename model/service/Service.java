@@ -4,48 +4,48 @@ import java.io.Serializable;
 import human.Human;
 import model.saveFile.FileHandler;
 import model.saveFile.Writable;
+import model.serch.Serch;
 import model.sort.HumanComparatorByName;
 import model.sort.HumanComparatorbyBirthDate;
 import model.tree.FamilyTree;
-import model.tree.PersonAdd;
-import model.tree.SerchPerson;
+import model.tree.InformationAdd;
 
 public class Service {
 
-    private FamilyTree<Human> human;
+    private FamilyTree<Human> humanList;
     private static final String ENPTY_ERROR = "Вы не ввели  ";
 
-    public Service(FamilyTree<Human> human) {
-        this.human = human;
+    public Service(FamilyTree<Human> humanList) {
+        this.humanList=humanList;
     }
 
     public void sortByName() {
-        human.getHumansList().sort(new HumanComparatorByName());
-        System.out.println(human.getInfo());
+        humanList.getHumansList().sort(new HumanComparatorByName());
+        System.out.println(humanList.getInfo());
     }
 
     public void sortBirthDate() {
-        human.getHumansList().sort(new HumanComparatorbyBirthDate());
-        System.out.println(human.getInfo());
+        humanList.getHumansList().sort(new HumanComparatorbyBirthDate());
+        System.out.println(humanList.getInfo());
     }
 
     public void save() {
 
         Writable writable = new FileHandler();
-        writable.save((Serializable) human, "Test.txt");
+        writable.save((Serializable) humanList, "Test.txt");
 
     }
 
     public void read() {
         Writable writable = new FileHandler();
         writable.read("Test.txt");
-        human = (FamilyTree<Human>) writable.read("Test.txt");
+        humanList = (FamilyTree<Human>) writable.read("Test.txt");
         // System.out.println(human.getInfo());
 
     }
 
     public void print() {
-        System.out.println(human.getInfo());
+        System.out.println(humanList.getInfo());
     }
 
     public String get(String all) {
@@ -54,8 +54,8 @@ public class Service {
             return ENPTY_ERROR;
         }
         try {
-            SerchPerson serchPerson = new SerchPerson(human);
-            return serchPerson.getInformation(all, human).toString();
+            Serch serchPerson = new Serch(humanList);
+            return serchPerson.getInformationName(all, humanList).toString();
 
         } catch (NullPointerException e) {
             return "Неверное введеное имя";
@@ -83,8 +83,8 @@ public class Service {
             return ENPTY_ERROR;
         }
         try {
-            PersonAdd personAdd = new PersonAdd(human);
-            return personAdd.toFamilyTree(name, father, mother, year, human);
+            InformationAdd personAdd = new InformationAdd(humanList);
+            return personAdd.toFamilyTree(name, father, mother, year, humanList);
 
         } catch (NullPointerException e) {
             return "Неверное введеное имя";
