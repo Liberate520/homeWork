@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> people = new ArrayList<>();
 
     public void addHuman(Human human){
@@ -50,5 +51,7 @@ public class FamilyTree {
         }
         return sisters;
     }
-
+    public List<Human> getAllHuman(){
+        return people;
+    }
 }
