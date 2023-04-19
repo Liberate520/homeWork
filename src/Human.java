@@ -1,33 +1,19 @@
-import java.awt.geom.Line2D;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Human {
-    private int index;
     private String firstName;
     private String lastName;
     private String birthDate;
-    private String deathDate;
-    private int fatherIndex;
-    private int motherIndex;
-    private int spouseIndex;
+    private Human mother;
+    private Human father;
 
-    public Human(int index, String firstName, String lastName, String birthDate,
-                 String deathDate, int fatherIndex, int motherIndex, int spouseIndex){
-        this.index = index;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Human(String firstname, String lastname, String birthDate, Human mother, Human father) {
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.birthDate = birthDate;
-        this.deathDate = deathDate;
-        this.fatherIndex = fatherIndex;
-        this.motherIndex = motherIndex;
-        this.spouseIndex = spouseIndex;
-    }
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
+        this.mother = mother;
+        this.father = father;
     }
 
     public String getFirstName() {
@@ -49,80 +35,49 @@ public class Human {
     public String getBirthDate() {
         return birthDate;
     }
-
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(String birthDate){
         this.birthDate = birthDate;
     }
 
-    public String getDeathDate() {
-        return deathDate;
+    public Human getMother() {
+        return mother;
     }
 
-    public void setDeathDate(String deathDate) {
-        this.deathDate = deathDate;
+    public void setMother(Human mother) {
+        this.mother = mother;
     }
 
-    public int getFatherIndex() {
-        return fatherIndex;
+    public Human getFather() {
+        return father;
     }
 
-    public void setFatherIndex(int fatherIndex) {
-        this.fatherIndex = fatherIndex;
+    public void setFather(Human father) {
+        this.father = father;
     }
 
-    public int getMotherIndex() {
-        return motherIndex;
+    public List<Human> getChildren() {
+        List<Human> children = new ArrayList<>();
+        for (Human child : GenealogyTree.getHumans()) {
+            if ((child.getMother() == this) || (child.getFather() == this)) {
+                children.add(child);
+            }
+        }
+        return children;
     }
 
-    public void setMotherIndex(int motherIndex) {
-        this.motherIndex = motherIndex;
+    public List<Human> getParents() {
+        List<Human> parents = new ArrayList<>();
+        if (mother != null) {
+            parents.add(mother);
+        }
+        if (father != null) {
+            parents.add(father);
+        }
+        return parents;
     }
 
-    public int getSpouseIndex() {
-        return spouseIndex;
-    }
-
-    public void setSpouseIndex(int spouseIndex) {
-        this.spouseIndex = spouseIndex;
-    }
     @Override
     public String toString() {
-        return "Human{" +
-                "index=" + index +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", deathDate='" + deathDate + '\'' +
-                ", fatherIndex=" + fatherIndex +
-                ", motherIndex=" + motherIndex +
-                ", spouseIndex=" + spouseIndex +
-                '}';
-    }
-    public Human findSpouse(Human person, ArrayList<Human> people) {
-        /**
-         * Поиск супруга.
-         */
-        for (Human otherPerson : people) {
-            if (otherPerson.getSpouseIndex() == person.getIndex()) {
-                return otherPerson;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<Human> findKids(Human person, ArrayList<Human> people) {
-        /**
-         * Поиск детей.
-         */
-        ArrayList<Human> kids = new ArrayList<>();
-        for (Human otherPerson : people) {
-            if (otherPerson.getFatherIndex() == person.getIndex()
-                    || otherPerson.getMotherIndex() == person.getIndex()) {
-                kids.add(otherPerson);
-            }
-            return kids;
-        }
-        return null;
+        return firstName + " " + lastName + " (" + birthDate + ")";
     }
 }
-
