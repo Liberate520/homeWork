@@ -73,6 +73,9 @@ public class ServiceTree implements Serviceble {
         return tree.searchChild(family,name);
 
     }
+    public void clearTree(){
+        tree.clearTree();
+    }
             ;
 }
 

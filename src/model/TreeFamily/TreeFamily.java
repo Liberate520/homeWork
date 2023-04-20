@@ -157,6 +157,9 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
         return new HumanIterator<E>(list);
     }
+    public void clearTree(){
+        list.clear();
+    }
 
 
 

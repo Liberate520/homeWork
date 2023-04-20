@@ -2,6 +2,8 @@ package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -86,10 +88,31 @@ public class Human implements Serializable, Comparable<Human>  {
         return gender;
     }
 
+    public String getGenderInfo() {
+        String res = "Пол: ";
+        if (gender != null){
+            res += this.gender;
+        }
+        else {
+            res += "неизвестен";
+        }
+        return res;
+    }
+
     public LocalDate getBirthdate() {
         return birthdate;
     }
 
+    public String getBirthdateInfo() {
+        String res = "Дата рождения: ";
+        if (birthdate != null){
+            res += this.birthdate.toString();
+        }
+        else {
+            res += "неизвестна";
+        }
+        return res;
+    }
 
     public String getСhildrenList() {
         String res = "Дети: \n";
@@ -117,15 +140,19 @@ public class Human implements Serializable, Comparable<Human>  {
     }
 
     public String getInfo(){
+//        var formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+
         StringBuilder sb = new StringBuilder();
-        sb.append("\nФамилия: ");
+        sb.append("\n");
         sb.append(family);
-        sb.append(", \n");
-        sb.append("Имя: ");
+        sb.append(" ");
+        //sb.append("Имя: ");
         sb.append(name);
-        sb.append(", \n");
+        sb.append(", ");
         sb.append("пол: ");
-        sb.append(gender);
+        sb.append(this.getGenderInfo());
+        sb.append(", ");
+        sb.append(this.getGenderInfo());
         return sb.toString();
                 //String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
     }

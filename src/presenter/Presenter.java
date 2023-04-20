@@ -32,6 +32,9 @@ public class Presenter {
         service.addHuman(family, name);
        // view.print();
     }
+    public void clearTree(){
+        service.clearTree();
+    }
 
     public TreeFamily getTree(){
         return service.getTree();

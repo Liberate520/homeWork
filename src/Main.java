@@ -25,7 +25,6 @@ public class Main {
         tree.add(ma);
         tree.add(sister1);
         tree.add(sister2);
-        tree.add(sister2);
         pa.addChildrenList(sister1);
         pa.addChildrenList(sister2);
         ma.addChildrenList(sister1);
