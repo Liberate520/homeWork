@@ -1,5 +1,10 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        GenealogyTree humans = new GenealogyTree();
         Human person1 = new Human("Мария", "Иванова", "01.01.1970", null, null);
         GenealogyTree.addHuman(person1);
         Human person2 = new Human("Иван", "Иванов", "02.02.1971", null, null);
@@ -11,13 +16,22 @@ public class Main {
         Human person5 = new Human("Ольга", "Кузнецова", "05.05.1998", person1, person2);
         GenealogyTree.addHuman(person5);
 
+        GenealogyTree.saveToFile(humans);
+//        GenealogyTree treerest = GenealogyTree.loadFromFile("file.txt");
+//        List peoples = GenealogyTree.loadFromFile("file.txt").getHumans();
+//        for (Object people: peoples){
+//            System.out.println(people.toString());
+//        }
+
         // Печать родителей и детей
         System.out.println(person3.getMother());  // Мария Иванова
         System.out.println(person4.getFather());  // Иван Иванов
         System.out.println(person1.getChildren());  // [Анна Петрова, Петр Сидоров, Ольга Кузнецова]
         System.out.println(person5.getParents()); // Мария Иванова, Иван Иванов
 
-        // Печать дерева конкретного экземпляра
+//         Печать дерева конкретного экземпляра
         GenealogyTree.printTree("", person1); // [Анна Петрова, Петр Сидоров, Ольга Кузнецова]
+
+
     }
 }
