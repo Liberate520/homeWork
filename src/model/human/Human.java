@@ -45,6 +45,31 @@ public class Human implements Serializable, Comparable<Human>  {
         return father;
     }
 
+
+    public String getMotherInfo() {
+
+        String res = "Мать: ";
+        if (mother!= null){
+            res += mother.getInfo();
+        }
+        else {
+            res += "неизвестна";
+        }
+        return res;
+    }
+
+    public String getFatherInfo() {
+        String res = "Отец: ";
+        if (father!= null){
+            res += father.getInfo();
+        }
+        else {
+            res += "неизвестен";
+        }
+        return res;
+
+    }
+
     public String getFamily() {
         return family;
     }
@@ -66,28 +91,44 @@ public class Human implements Serializable, Comparable<Human>  {
     }
 
 
-    public Set<Human> getСhildrenList() {
-        return сhildrenList;
+    public String getСhildrenList() {
+        String res = "Дети: ";
+        if (this.сhildrenList.size() != 0){
+            res += this.сhildrenList.toString();
+        }
+        else res += "нет!";
+
+        return res;
     }
 
-    public boolean child (Human human){
-        if (!сhildrenList.contains(human)){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-    }
+//    public boolean addchild (Human child){
+//        if (!сhildrenList.contains(child)){
+//            сhildrenList.add(child);
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//
+//    }
 
     public void addChildrenList(Human human) {
-        if (!(human.equals(null)) ){
-            this.сhildrenList.add(human);
-        }
+       this.сhildrenList.add(human);
     }
 
     public String getInfo(){
-        return String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Фамилия: ");
+        sb.append(family);
+        sb.append(", \n");
+        sb.append("Имя: ");
+        sb.append(name);
+        sb.append(", \n");
+        sb.append("пол: ");
+        sb.append(gender);
+        sb.append(". \n\n");
+        return sb.toString();
+                //String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
     }
     @Override
     public String toString() {

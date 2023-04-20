@@ -27,9 +27,17 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     //Метод добавления человека в дерево по имени и фамилии
     public void addHuman(String family, String name) {
-        E human = (E) new Human(family, name);
-        list.add(human);
+        if ((family !="") && (name != "")){
+            E human = (E) new Human(family, name);
+            if (!list.contains(human)) {
+                list.add(human);
+            }
+
+        }
+
+
     }
+
 
     public boolean add (E human) {
             if (human == null) {
@@ -53,31 +61,34 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return list;
     }
 
-    public E getByMather(String family, String name) {
+    public String getByMather(String family, String name) {
+        StringBuilder sb = new StringBuilder();
         E human = (E) new Human(family, name);
+        sb.append("Результаты поиска: \n");
+    //    if (list.contains(human)) {
         for (E hum : list) {
             if (hum.equals(human)) {
-                if (hum.getMother() != null){
-                    return (E) hum.getMother();
-                }
-                else {
-                    return null;
-                }
-
+                sb.append(hum.getMotherInfo());
             }
         }
-        return null;
+        return sb.toString();
     }
 
-    public E getByHuman (String family, String name){
+    public String getByHuman (String family, String name){
+        StringBuilder sb = new StringBuilder();
         E human = (E) new Human(family, name);
-        for (E hum: list){
-            if (human.equals(hum)){
-                return hum;
+        sb.append("Результаты поиска: \n");
+        if (list.contains(human)) {
+            for (E hum : list) {
+                if (human.equals(hum)) {
+                    sb.append(hum.getInfo());
+                }
             }
-
         }
-        return null;
+        else {
+            sb.append("Человек не найден!");
+        }
+        return sb.toString();
     }
 
     public void addKid(E kid) {

@@ -39,11 +39,11 @@ public class Presenter {
 
 
 
-    public Human searchHuman(String family, String name) {
+    public String searchHuman(String family, String name) {
         return service.searchHuman(family, name);
     }
 
-    public Human searchMather(String family, String name) {
+    public String searchMather(String family, String name) {
         return service.searchMather(family, name);
     }
 //    public Hu getTree(){

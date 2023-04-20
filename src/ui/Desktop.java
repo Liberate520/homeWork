@@ -83,7 +83,7 @@ public class Desktop extends JFrame implements View {
         showTree.setBounds(20, 55, 360, 25);
         tree.setBounds(20, 95, 360,650);
         buttonsearchHuman.setBounds(410, 220, 300, 40);
-        buttonsearchMather.setBounds(410, 280, 300, 40);
+        buttonsearchMather.setBounds(410, 270, 300, 40);
 
 
 
@@ -112,7 +112,7 @@ public class Desktop extends JFrame implements View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //presenter.searchHuman(inputFamily.getText(), inputName.getText());
-                printHuman(presenter.searchHuman(inputFamily.getText(), inputName.getText()));
+                tree.setText(presenter.searchHuman(inputFamily.getText(), inputName.getText()));
 
                 //при нажатии на кнопу в презентер передается информация из текстового поля
             }
@@ -123,7 +123,7 @@ public class Desktop extends JFrame implements View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //presenter.searchHuman(inputFamily.getText(), inputName.getText());
-                printHuman(presenter.searchMather(inputFamily.getText(), inputName.getText()));
+                tree.setText(presenter.searchMather(inputFamily.getText(), inputName.getText()));
 
                 //при нажатии на кнопу в презентер передается информация из текстового поля
             }

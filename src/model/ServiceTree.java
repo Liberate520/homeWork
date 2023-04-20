@@ -19,11 +19,6 @@ public class ServiceTree implements Serviceble {
     public TreeFamily<Human> getTree() {
         return tree;
     }
-
-
-
-
-
     @Override
     public void addHuman(String family, String name){
        // tree.addHuman(new Human(family, name));
@@ -60,14 +55,14 @@ public class ServiceTree implements Serviceble {
 
     }
 
-    public Human searchHuman(String family, String name) {
+    public String searchHuman(String family, String name) {
 
-        return (Human) tree.getByHuman(family,name);
+        return tree.getByHuman(family,name);
 
     }
-    public Human searchMather(String family, String name) {
+    public String searchMather(String family, String name) {
 
-        return (Human) tree.getByMather(family,name);
+        return tree.getByMather(family,name);
 
     }
 }
