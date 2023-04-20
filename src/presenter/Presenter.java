@@ -2,6 +2,7 @@ package presenter;
 
 import model.ServiceTree;
 import model.TreeFamily.TreeFamily;
+import model.human.Human;
 import ui.View;
 
 public class Presenter {
@@ -36,8 +37,17 @@ public class Presenter {
         return service.getTree();
     }
 
-//    public boolean searchHuman() {
-//        return service.searchHuman();
+
+
+    public Human searchHuman(String family, String name) {
+        return service.searchHuman(family, name);
+    }
+
+    public Human searchMather(String family, String name) {
+        return service.searchMather(family, name);
+    }
+//    public Hu getTree(){
+//        return service.getTree();
 //    }
 
     //передаем в модель данные от презентера

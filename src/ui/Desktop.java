@@ -22,7 +22,8 @@ public class Desktop extends JFrame implements View {
 //    private JTextField city;
     private JButton showTree;
     private JButton buttonAddHuman;
-    private JButton seachHuman;
+    private JButton buttonsearchHuman;
+    private JButton buttonsearchMather;
     private Presenter presenter;
     private JTextArea tree;//Поле вывода дерева
 
@@ -47,7 +48,8 @@ public class Desktop extends JFrame implements View {
         lTitleAddName = new JLabel("Имя");
         inputName = new JTextField();
         tree = new JTextArea();
-        seachHuman = new JButton("Найти человека");
+        buttonsearchHuman = new JButton("Найти человека");
+        buttonsearchMather = new JButton("Найти мать");
 
 //        lTitleBirth = new JLabel("Дата рождения");
 //        lTitleDateBirth = new JLabel("Число");
@@ -67,7 +69,8 @@ public class Desktop extends JFrame implements View {
         add(inputFamily);
         add(lTitleAddName);
         add(buttonAddHuman);
-        add(seachHuman);
+        add(buttonsearchHuman);
+        add(buttonsearchMather);
         // add(lTitleAddBirthdate);
         //add(inputBirthdate);
         lTitle.setBounds(40, 10, 400, 25);
@@ -79,7 +82,8 @@ public class Desktop extends JFrame implements View {
         inputName.setBounds(500, 135, 200,25);
         showTree.setBounds(20, 55, 360, 25);
         tree.setBounds(20, 95, 360,650);
-        seachHuman.setBounds(500, 135, 200, 25);
+        buttonsearchHuman.setBounds(410, 220, 300, 40);
+        buttonsearchMather.setBounds(410, 280, 300, 40);
 
 
 
@@ -103,12 +107,24 @@ public class Desktop extends JFrame implements View {
             }
         });
 
-        seachHuman.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
+        buttonsearchHuman.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                 presenter.addHuman(inputFamily.getText(), inputName.getText());
-                printTree();
+                //presenter.searchHuman(inputFamily.getText(), inputName.getText());
+                printHuman(presenter.searchHuman(inputFamily.getText(), inputName.getText()));
+
+                //при нажатии на кнопу в презентер передается информация из текстового поля
+            }
+        });
+
+        buttonsearchMather.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
+            //ActionListener()-интерфейс
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //presenter.searchHuman(inputFamily.getText(), inputName.getText());
+                printHuman(presenter.searchMather(inputFamily.getText(), inputName.getText()));
+
                 //при нажатии на кнопу в презентер передается информация из текстового поля
             }
         });
@@ -116,15 +132,20 @@ public class Desktop extends JFrame implements View {
         setVisible(true);//делает окно видимым
     }
 
-    @Override
-    public void print(Human human) {
-        //пишет text  в поле для ответов
-        inputFamily.setText(human.toString());
-    }
+//    @Override
+//    public void print(Human human) {
+//        //пишет text  в поле для ответов
+//        inputFamily.setText(human.toString());
+//    }
 
     @Override
     public void printTree() {
         tree.setText(presenter.getTree().getInfo());
+
+    }
+    @Override
+    public void printHuman(Human human) {
+        tree.setText(human.getInfo());
 
     }
 }

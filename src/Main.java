@@ -28,6 +28,8 @@ public class Main {
         tree.add(sister2);
         pa.addChildrenList(sister1);
         pa.addChildrenList(sister2);
+        ma.addChildrenList(sister1);
+        ma.addChildrenList(sister2);
 
         System.out.println("Дети "+pa.getName()+" "+ pa.getFamily() +":\n  "+pa.getСhildrenList());
         System.out.println("Дети "+ma.getName()+" "+ ma.getFamily() +":\n  "+ma.getСhildrenList());

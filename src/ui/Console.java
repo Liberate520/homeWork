@@ -69,7 +69,7 @@ public class Console implements View {
     }
 
     @Override
-    public void print(Human human) {
+    public void printHuman(Human human) {
         System.out.println(human);
     }
 
@@ -77,6 +77,7 @@ public class Console implements View {
     public void printTree() {
         System.out.println(presenter.getTree().getInfo());
     }
+
 
     public void addHuman(){
         System.out.println("Введите имя");

@@ -53,21 +53,29 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return list;
     }
 
-    public E getByMather(E human) {
+    public E getByMather(String family, String name) {
+        E human = (E) new Human(family, name);
         for (E hum : list) {
-            if (hum.getMother().equals(human.getMother())) {
-                return hum;
+            if (hum.equals(human)) {
+                if (hum.getMother() != null){
+                    return (E) hum.getMother();
+                }
+                else {
+                    return null;
+                }
+
             }
         }
         return null;
     }
 
-    public E getByHuman (E human){
-
+    public E getByHuman (String family, String name){
+        E human = (E) new Human(family, name);
         for (E hum: list){
             if (human.equals(hum)){
                 return hum;
             }
+
         }
         return null;
     }
