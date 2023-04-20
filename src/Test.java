@@ -7,17 +7,18 @@ public class Test {
         nick.setFather(papa);
 
         FamilyTree family = new FamilyTree();
-        family.addRelative(nick);
-        family.addRelative(mama);
-        family.addRelative(papa);
+        family.addHuman(nick);
+        family.addHuman(mama);
+        family.addHuman(papa);
 //        family.showAllRelatives();
 //        mama.showKids();
 //        papa.showKids();
         Human brother = new Human("Лев Петров", 15, Gender.male, mama, papa);
         Human sister = new Human("Анастасия Петрова", 6, Gender.female, mama, papa);
-        family.addRelative(brother);
-        family.addRelative(sister);
-        family.updateKids();
+        family.addHuman(brother);
+        family.addHuman(sister);
+        // check
+//        family.updateKids();
 
         mama.showKids();
         System.out.println();

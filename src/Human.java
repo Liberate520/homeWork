@@ -10,7 +10,7 @@ public class Human {
     private Human father;
     private List<Human> kids;
 
-    Human(String fullName, int age, Gender gender, Human mother, Human father) {
+    public Human(String fullName, int age, Gender gender, Human mother, Human father) {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
@@ -19,7 +19,7 @@ public class Human {
         this.kids = new ArrayList<>();
     }
 
-    Human(String fullName, int age, Gender gender) {
+    public Human(String fullName, int age, Gender gender) {
         this(fullName, age, gender, null, null);
     }
 
@@ -94,14 +94,24 @@ public class Human {
 
     @Override
     public boolean equals(Object obj) {
-        Human h = (Human) obj;
-        return h.fullName == fullName;
+        if (obj instanceof Human) {
+            Human h = (Human) obj;
+            return h.fullName == fullName && h.getAge() == getAge();
+        } else return false;
+
     }
 
     public void findSiblings() {
         Human mama = this.getMother();
+        Human papa = this.getFather();
         if (mama != null) {
             for (Human kid: mama.kids) {
+                if (!kid.equals(this)) {
+                    System.out.println(kid);
+                }
+            }
+        } else {
+            for (Human kid: papa.kids) {
                 if (!kid.equals(this)) {
                     System.out.println(kid);
                 }
