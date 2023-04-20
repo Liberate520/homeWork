@@ -1,6 +1,7 @@
+import java.io.*;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable, FileWorkable{
     private int age;
     private int gender;
     private String name;
@@ -36,7 +37,7 @@ public class Person {
         return "Person [" + getInfo()+"]";
     }
     public String getInfo(){
-        return name  + " age: "+age + " mother: "+ mother.getName() + " father: " + father.getName();
+        return name  + " age: "+age + gender;
     }
 
     public String getName() {
@@ -57,4 +58,6 @@ public class Person {
         }
         return "Male";
     }
+
+
 }

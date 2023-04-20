@@ -1,7 +1,8 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class Tree implements Serializable, FileWorkable {
     private List<Person> family;
     public Tree() {
         family= new ArrayList<>();
@@ -62,6 +63,7 @@ public class Tree {
         return "grandparents: \n"+res;
 
     }
+
 
 
 

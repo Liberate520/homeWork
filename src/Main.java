@@ -34,6 +34,13 @@ public class Main {
         System.out.println(tree.getChildren(person6));
         System.out.println(person5.getGender());
 
+        FileWorker.SaveFile(person2);
+        FileWorker.ReadFile(person2);
+
+        
+
+
+
 
 
 
