@@ -1,11 +1,9 @@
 //import model.FileHandler;
-import model.Service;
-import model.Service1;
+import model.ServiceTree;
 import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import presenter.Presenter;
-import ui.Console;
-import ui.Desctop;
+import ui.Desktop;
 import ui.View;
 
 import java.io.*;
@@ -54,7 +52,7 @@ public class Main {
 //        System.out.println();
 
 
-        Service tr = new Service(tree);
+        ServiceTree tr = new ServiceTree(tree);
         tr.sortByFamily();
         for (Human human: tree){
             System.out.println(human);
@@ -67,11 +65,13 @@ public class Main {
             System.out.println(human);
         }
 
-        View view = new Desctop();
-        Service service = new Service(tree);
-        new Presenter(view, service);
+        View view = new Desktop();
+        //ServiceTree service = new ServiceTree(tree);
+        new Presenter(view, tr);
         view.start();
 
 
     }
+
+
 }

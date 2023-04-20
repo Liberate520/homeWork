@@ -7,11 +7,12 @@ import model.human.HumanComporatorByName;
 import java.io.*;
 import java.util.Collections;
 
-public class Service implements Service1{
-//    private int id;
-    private final TreeFamily<Human> tree;
+public class ServiceTree implements Serviceble {
+    private TreeFamily<Human> tree;
 
-    public Service(TreeFamily<Human> tree) {
+// Конструктор для создания объекта класса ServiceTree для дерева
+    public ServiceTree(TreeFamily<Human> tree) {
+
         this.tree = tree;
     }
 
@@ -20,9 +21,9 @@ public class Service implements Service1{
     }
 
     @Override
-    public void addHuman(Human human){
+    public void addHuman(String family, String name){
        // tree.addHuman(new Human(family, name));
-        tree.addHuman(human);
+        tree.addHuman(family, name);
 
     }
     @Override

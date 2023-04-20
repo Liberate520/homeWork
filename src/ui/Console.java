@@ -1,6 +1,5 @@
 package ui;
 
-import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import presenter.Presenter;
 
@@ -10,41 +9,35 @@ public class Console implements View {
 
     private Presenter presenter;//куда отправлять информацию
     private Scanner scannerName;// для работы с пользователем
-    private Scanner scannerMenu;
-    private Scanner scannerFamily;
-    private  Human human;// для вывода данных о человеке в консоль
-    private TreeFamily tree;
+    private Scanner scanner;
+//    private Scanner scannerMenu;
+//    private Scanner scannerFamily;
+    private boolean work;
+    private Menu menu;
+
 
     public Console() {
-        scannerMenu = new Scanner(System.in);
-        scannerName = new Scanner(System.in);
-        scannerFamily = new Scanner(System.in);
+        scanner = new Scanner(System.in);
+//        scannerName = new Scanner(System.in);
+//        scannerFamily = new Scanner(System.in);
+        work = true;
+        menu = new Menu(this);
     }
 
     @Override
     public void setPresenter(Presenter presenter){
         this.presenter = presenter;
     }
+    public Presenter getPresenter() {
+        return presenter;
+    }
 
     @Override
     public void start() {
-         while (true) {
-            int num = scanMenu();
-            switch (num) {
-                case 1:{
-                    String name = scanName();
-                    String family = scanFamily();
-                    Human human = new Human(family, name);
-                    presenter.addHuman(human);
-                    print(human);}
-                case 2: {
-                    printTree(presenter.getTree());
-                }
-                case 3:{
-                    break;
-                }
-            }
-
+         while (work) {
+             menu.print();
+             int choice = Integer.parseInt(scan());
+             menu.execute(choice);
         }
 //        scannerMenu.close();
 //        scannerName.close();
@@ -54,11 +47,12 @@ public class Console implements View {
 
     }
 
-    private int scanMenu() {
-        System.out.println("Нажмите 1, чтобы добавить человека в дерево\n" +
-                "или 2, чтобы просмотреть генеалогическое древо\n"+
-                "3  - чтобы выйти");
-        return scannerMenu.nextInt();
+    private  boolean check(String text){
+        return text.matches("[0-9]+");//Метод проверки что введено именно целое число из [0-9]
+    }
+
+    private String scan() {
+        return scanner.nextLine();
 
 
 
@@ -66,12 +60,12 @@ public class Console implements View {
 
     private String scanName() {
         System.out.println("Введите имя: ");
-        return scannerName.nextLine();
+        return scanner.nextLine();
     }
 
     private String scanFamily() {
         System.out.println("Введите фамилию: ");
-        return scannerFamily.nextLine();
+        return scanner.nextLine();
     }
 
     @Override
@@ -80,7 +74,28 @@ public class Console implements View {
     }
 
     @Override
-    public void printTree(TreeFamily tree) {
-        System.out.println(tree.getInfo());
+    public void printTree() {
+        System.out.println(presenter.getTree().getInfo());
     }
+
+    public void addHuman(){
+        System.out.println("Введите имя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String family = scanner.nextLine();
+        presenter.addHuman(family,name);
+
+    }
+    public void finish(){
+        work = false;
+    }
+
+    public void getHumanTree() {
+        System.out.println(presenter.getTree());
+
+    }
+
+//    public void searchHuman() {
+//        System.out.println(presenter.searchHuman());
+//    }
 }
