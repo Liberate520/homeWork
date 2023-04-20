@@ -29,30 +29,11 @@ public class Main {
         System.out.println("Сестры для " + forFindSister.getFullName() + ':');
         System.out.println(familyTree.getSisters(forFindSister));
 
-        ReadWriteData rw = new ReadWriteObject();
-        try {
-            rw.writeData(familyTree.getAllHuman());
-            List<Human> restoredData = rw.readData();
-            System.out.println("Прочтено из файла");
-            System.out.println(restoredData);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        familyTree.saveToFile();
+        familyTree.readFromFile();
 
-        ReadWriteData rw2 = new ReadWriteByteArray();
-        try {
-            rw2.writeData(familyTree.getAllHuman());
-            List<Human> restoredData2 = rw2.readData();
-            System.out.println("Прочтено из ByteArrayOutputStream");
-            System.out.println(restoredData2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+        familyTree.saveToByte();
+        familyTree.readFromByte();
     }
 
 }
