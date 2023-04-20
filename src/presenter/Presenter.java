@@ -14,23 +14,23 @@ public class Presenter {
     }
 
     public void find(String person){
-        String answer = service.findPersonByName(person);
+        String answer = service.getGt().findPersonByName(person);
         view.print(answer);
     }
     public void addHuman(String dataForPerson){
-        String answer = service.addHuman(dataForPerson);
+        String answer = service.getGt().addHuman(dataForPerson);
         view.print(answer);
     }
     public void getHuman(String person){
-        String answer = service.getHuman(person);
+        String answer = service.getGt().getHuman(person);
         view.print(answer);
     }
     public void getByAge(String age){
-        String answer = service.searchAge(age);
+        String answer = service.getGt().searchAge(age);
         view.print(answer);
     }
     public void getAll(){
-        String answer = service.getAll();
+        String answer = service.getGt().getAll();
         view.print(answer);
     }
 }
