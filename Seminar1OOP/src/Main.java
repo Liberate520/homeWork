@@ -1,7 +1,9 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.FileHandler;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         FamilyTree familyTree = new FamilyTree();
 
         familyTree.addHuman(new Human("Сабина", 1965, "f"));
@@ -12,5 +14,22 @@ public class Main {
 
         System.out.println(familyTree.getHumanByName("Тимур"));
         System.out.println(familyTree.getAllHuman());
+
+        // Сохраняем в файл
+        FileHandlerWrapper fileHandlerWrapper = new FileHandlerWrapper(new FileHandler());
+        try {
+            fileHandlerWrapper.saveToFile(familyTree.getAllHuman(), "familyTree.dat");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Загружаем из файла
+        try {
+            List<Human> loadedList = fileHandlerWrapper.loadFromFile("familyTree.dat");
+            System.out.println(loadedList);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
