@@ -92,7 +92,7 @@ public class Human implements Serializable, Comparable<Human>  {
 
 
     public String getСhildrenList() {
-        String res = "Дети: ";
+        String res = "Дети: \n";
         if (this.сhildrenList.size() != 0){
             res += this.сhildrenList.toString();
         }
@@ -118,7 +118,7 @@ public class Human implements Serializable, Comparable<Human>  {
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Фамилия: ");
+        sb.append("\nФамилия: ");
         sb.append(family);
         sb.append(", \n");
         sb.append("Имя: ");
@@ -126,7 +126,6 @@ public class Human implements Serializable, Comparable<Human>  {
         sb.append(", \n");
         sb.append("пол: ");
         sb.append(gender);
-        sb.append(". \n\n");
         return sb.toString();
                 //String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
     }

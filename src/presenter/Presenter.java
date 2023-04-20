@@ -46,6 +46,12 @@ public class Presenter {
     public String searchMather(String family, String name) {
         return service.searchMather(family, name);
     }
+    public String searchParents(String family, String name) {
+        return service.searchParents(family, name);
+    }
+    public String searchChild(String family, String name) {
+        return service.searchChild(family, name);
+    }
 //    public Hu getTree(){
 //        return service.getTree();
 //    }

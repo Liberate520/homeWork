@@ -23,7 +23,8 @@ public class Desktop extends JFrame implements View {
     private JButton showTree;
     private JButton buttonAddHuman;
     private JButton buttonsearchHuman;
-    private JButton buttonsearchMather;
+    private JButton buttonsearchPresents;
+    private JButton buttonsearchChild;
     private Presenter presenter;
     private JTextArea tree;//Поле вывода дерева
 
@@ -49,7 +50,9 @@ public class Desktop extends JFrame implements View {
         inputName = new JTextField();
         tree = new JTextArea();
         buttonsearchHuman = new JButton("Найти человека");
-        buttonsearchMather = new JButton("Найти мать");
+        buttonsearchPresents = new JButton("Найти родителей");
+        buttonsearchChild = new JButton("Вывести список детей");
+
 
 //        lTitleBirth = new JLabel("Дата рождения");
 //        lTitleDateBirth = new JLabel("Число");
@@ -70,7 +73,8 @@ public class Desktop extends JFrame implements View {
         add(lTitleAddName);
         add(buttonAddHuman);
         add(buttonsearchHuman);
-        add(buttonsearchMather);
+        add(buttonsearchPresents);
+        add(buttonsearchChild);
         // add(lTitleAddBirthdate);
         //add(inputBirthdate);
         lTitle.setBounds(40, 10, 400, 25);
@@ -83,7 +87,8 @@ public class Desktop extends JFrame implements View {
         showTree.setBounds(20, 55, 360, 25);
         tree.setBounds(20, 95, 360,650);
         buttonsearchHuman.setBounds(410, 220, 300, 40);
-        buttonsearchMather.setBounds(410, 270, 300, 40);
+        buttonsearchPresents.setBounds(410, 270, 300, 40);
+        buttonsearchChild.setBounds(410, 320, 300, 40);
 
 
 
@@ -118,12 +123,23 @@ public class Desktop extends JFrame implements View {
             }
         });
 
-        buttonsearchMather.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
+        buttonsearchPresents.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
+            //ActionListener()-интерфейс
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tree.setText(presenter.searchParents(inputFamily.getText(), inputName.getText()));
+
+                //при нажатии на кнопу в презентер передается информация из текстового поля
+            }
+        });
+
+        buttonsearchChild.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
                 //presenter.searchHuman(inputFamily.getText(), inputName.getText());
-                tree.setText(presenter.searchMather(inputFamily.getText(), inputName.getText()));
+                //tree.setText(presenter.searchMather(inputFamily.getText(), inputName.getText()));
+                tree.setText(presenter.searchChild(inputFamily.getText(), inputName.getText()));
 
                 //при нажатии на кнопу в презентер передается информация из текстового поля
             }

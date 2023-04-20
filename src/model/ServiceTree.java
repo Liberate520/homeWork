@@ -65,6 +65,15 @@ public class ServiceTree implements Serviceble {
         return tree.getByMather(family,name);
 
     }
+    public String searchParents(String family, String name){
+        return tree.searchParents(family,name);
+
+    }
+    public String searchChild(String family, String name){
+        return tree.searchChild(family,name);
+
+    }
+            ;
 }
 
 

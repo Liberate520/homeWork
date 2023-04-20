@@ -91,6 +91,38 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return sb.toString();
     }
 
+    public String searchParents(String family, String name){
+        StringBuilder sb = new StringBuilder();
+        E human = (E) new Human(family, name);
+        sb.append("Результаты поиска: \n");
+        //    if (list.contains(human)) {
+        for (E hum : list) {
+            if (hum.equals(human)) {
+                sb.append(hum.getMotherInfo());
+                sb.append("\n");
+                sb.append(hum.getFatherInfo());
+            }
+        }
+
+        return sb.toString();
+
+    }
+
+    public String searchChild(String family, String name){
+        StringBuilder sb = new StringBuilder();
+        E human = (E) new Human(family, name);
+        sb.append("Результаты поиска: \n");
+        //    if (list.contains(human)) {
+        for (E hum : list) {
+            if (hum.equals(human)) {
+                sb.append(hum.getСhildrenList());
+            }
+        }
+
+        return sb.toString();
+
+    }
+
     public void addKid(E kid) {
         for (E hum : list) {
             if (kid.getMother().equals(hum)
