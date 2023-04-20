@@ -15,18 +15,24 @@ public class FamilyTree implements Serializable {
         kinsman.setFamily(this);
     }
 
-    public void addParent(Kinsman kinsman, Kinsman parent) {
-        kinsman.addParent(parent);
-        parent.addScion(kinsman);
-        this.family.add(parent);
-        parent.setFamily(this);
+    public boolean addParent(Kinsman kinsman, Kinsman parent) {
+        if (kinsman.setParent(parent)) {
+            parent.addChild(kinsman);
+            this.family.add(parent);
+            parent.setFamily(this);
+            return true;
+        }
+        return false;
     }
 
-    public void addScion(Kinsman kinsman, Kinsman scion) {
-        kinsman.addScion(scion);
-        scion.addParent(kinsman);
-        this.family.add(scion);
-        scion.setFamily(this);
+    public boolean addChild(Kinsman kinsman, Kinsman child) {
+        if (child.setParent(kinsman)) {
+            kinsman.addChild(child);
+            this.family.add(child);
+            child.setFamily(this);
+            return true;
+        }
+        return false;
     }
 
     public String getName() { return this.name; }
