@@ -2,31 +2,42 @@ package OOPjavaTree.src;
 
 import OOPjavaTree.src.Data.OperationData;
 import OOPjavaTree.src.Data.Operation;
+import OOPjavaTree.src.Person.Human;
+import OOPjavaTree.src.Service.Service;
+import OOPjavaTree.src.Tree.Branches;
+import OOPjavaTree.src.Tree.Tree;
+
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Tree tree = new Tree();
-
-        tree.add(new Human("Дмитрий23", 1980));
-        tree.add(new Human("Кристина", 1982));
-        tree.add(new Human("Василиса", 2001, tree.getByName("Дмитрий"), tree.getByName("Кристина")));
-        tree.add(new Human("Евгений", 2004, tree.getByName("Дмитрий"), tree.getByName("Кристина")));
-        tree.add(new Human("Леонид", 2008, tree.getByName("Дмитрий"), tree.getByName("Кристина")));
+        Tree branches = new Branches();
+        Service service = new Service(branches);
+        service.add("Дмитрий", 1980);
+        service.add("Кристина", 1982);
+        service.add("Василиса", 2001, service.getByName("Дмитрий"), service.getByName("Кристина"));
+        service.add("Евгений", 2004, service.getByName("Дмитрий"), service.getByName("Кристина"));
+        service.add("Леонид", 2008, service.getByName("Дмитрий"), service.getByName("Кристина"));
 
         //tree.toString() - для общего вывода списка дерева
-        System.out.println(tree);
+        System.out.println(service);
 
         //human.getString() - Вывод после запроса детальной информации
-        for (Human human : tree.getFamBranch()) {
+        for (Human human : branches) {
             System.out.println(human.getString());
         }
         System.out.println();
 
-        //Operation file = new OperationData();
-        //tree.saveData(file, tree);
+        /*Operation file = new OperationData();
+        service.saveData(file);*/
         Operation file = new OperationData();
-        Tree tree1 = (Tree) tree.loadData(file);
-        System.out.println(tree1);
+        branches = (Tree) service.loadData(file);
+        service.setTree(branches);
+        service.sortByName();
+        System.out.println(branches);
+        service.sortByDate();
+        System.out.println(branches);
+
+
     }
 }

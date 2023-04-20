@@ -1,10 +1,11 @@
-package OOPjavaTree.src;
+package OOPjavaTree.src.Person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Comparable<Human>, Serializable {
     private String name;
     private int birthdate;
     private Human father;
@@ -106,5 +107,10 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         return "Имя: " + name + ", Год рождения: " + birthdate;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }
