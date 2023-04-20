@@ -1,14 +1,15 @@
-package human.Comparators;
+package service.Persons.Comparators;
 
-import human.Human;
 
+
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-public class HumanIterator<T extends Human> implements Iterator<T> {
-    private int index;
-    private List<T> familyTree;
 
-    public HumanIterator(List<T> familyTree){
+public class HumanIterator<T> implements Iterator<T> {
+    private int index;
+    private ArrayList<T> familyTree;
+
+    public HumanIterator(ArrayList<T> familyTree){
         this.familyTree = familyTree;
     }
     @Override

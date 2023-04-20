@@ -1,52 +1,40 @@
 package presenter;
 
 
-import human.Comparators.DateComparator;
-import human.Comparators.NameComparator;
-import human.Human;
 import service.Service;
-import tree.FamilyTree;
-import tree.FindScanner;
-import ui.View;
+import view.View;
+
+import java.io.IOException;
+
+
 public class Presenter<T> {
-    private View<T> view;
-    private Service<T> service;
-
-    private FamilyTree<Human> familyTree = new FamilyTree();
-
-    public Presenter(View<T> view, Service<T> service) {
+    private View view;
+    private Service service;
+    public Presenter(View view, Service service) {
         this.view = view;
         this.service = service;
         view.setPresenter(this);
     }
-
-    public T getFamilyTree(T t)
+    public void presenterPrintTree()
     {
-        return t;
+        service.AddPeson();
     }
-    public T printTree(T t)
+    public void presenterFindHuman()
     {
-        view.print(t);
-        return t;
+        service.FindHuman();
     }
-
-    public T findHuman(T t)
+    public void presenterSortByName()
     {
-        FindScanner name = new FindScanner();
-        familyTree.find(name.findScanner());
-        return t;
+        service.SortByName();
     }
-
-    public void sortByName(T t)
-    {   System.out.println("Список, отсортированный по имени: \n");
-        familyTree.getFamilyTree().sort(new NameComparator());
-
+    public void presenterSortByDate()
+    {
+        service.SortByDate();
     }
-
-    public void sortByDate(T t)
-    {   System.out.println("Список, отсортированный по дате смерти: \n");
-        familyTree.getFamilyTree().sort(new DateComparator());
-
+    public void presenterSaveData() throws IOException, ClassNotFoundException {
+        service.DataSaveFile();
     }
-
+    public void presenterLoadData() throws IOException, ClassNotFoundException {
+        service.DataLoadFile();
+    }
 }

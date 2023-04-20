@@ -1,14 +1,11 @@
-package io;
+package service.io;
 
 import java.io.*;
 
-import human.Human;
-import tree.FamilyTree;
+import service.Persons.Human;
+import service.tree.FamilyTree;
 
 public class FileHandlerLoad implements DataLoad {
-
-
-
 
     @Override
     public Object loadData(String fileName) {

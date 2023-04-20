@@ -1,18 +1,18 @@
-package human;
+package service.Persons;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human extends Person implements Serializable, InterfaceHuman {
     private String name;
     private int date;
     private Gender gender;
-    private Human father;
-    private Human mother;
-    private List<Human> children = new ArrayList<>();
+    private Person father;
+    private Person mother;
+    private ArrayList<Person> children;
 
-    public Human(String name, Gender gender, int date, Human father, Human mother, List<Human> children) {
+    public Human(String name, Gender gender, int date, Person father, Person mother, ArrayList<Person> children) {
         this.name = name;
         this.gender = gender;
         this.date = date;
@@ -21,10 +21,13 @@ public class Human implements Serializable, Comparable<Human> {
         this.children=children;
     }
 
+    public Human() {
+
+    }
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -45,36 +48,35 @@ public class Human implements Serializable, Comparable<Human> {
         this.gender = gender;
     }
 
-    public Human getFather() {
+    public Person getFather() {
         return father;
     }
 
-    public Human setFather(Human father) {
+    public void setFather(Person father) {
         this.father = father;
-        return father;
     }
 
-    public Human getMother() {
+    public Person getMother() {
         return mother;
     }
 
-    public void setMother(Human mother) {
+    public void setMother(Person mother) {
         this.mother = mother;
     }
 
-    public List<Human> getChildren() {
+    public ArrayList<Person> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Human> children) {
+    public void setChildren(ArrayList<Person> children) {
         this.children = children;
     }
 
-    public void addChildren(Human human) {
+    public void addChildren(Person person) {
         if (this.children == null) {
             this.children = new ArrayList<>();
         }
-        this.children.add(human);
+        this.children.add(person);
     }
 
     @Override
@@ -107,8 +109,8 @@ public class Human implements Serializable, Comparable<Human> {
         sb.append("\n");
         return sb.toString();
     }
-    @Override
-    public int compareTo(Human human) {
-        return getName().compareTo(human.getName());
-    }
+//    @Override
+//    public int compareTo(Person person) {
+//        return getName().compareTo(person.getName());
+//    }
 }
