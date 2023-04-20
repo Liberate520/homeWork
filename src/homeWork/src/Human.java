@@ -1,6 +1,6 @@
 package homeWork.src;
 
-public class Human {
+public class Human implements Person {
     private String name;
     private int age;
     private String gender;
@@ -12,22 +12,27 @@ public class Human {
         this.gender = gender;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getAge() {
         return age;
     }
 
+    @Override
     public String getGender() {
         return gender;
     }
 
+    @Override
     public void setParent(Human parent) {
         this.parent = parent;
     }
 
+    @Override
     public Human getParent() {
         return parent;
     }
@@ -37,3 +42,4 @@ public class Human {
         return "Имя: " + name + ", Возраст: " + age + ", Пол: " + gender;
     }
 }
+

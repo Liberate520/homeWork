@@ -2,38 +2,38 @@ package homeWork.src;
 
 import java.util.List;
 
-
 public class Research {
     public static void main(String[] args) {
-        Human john = new Human("John", 35, "Мужской");
-        Human sarah = new Human("Sarah", 32, "Женский");
-        Human mark = new Human("Mark", 12, "Мужской");
-        Human jane = new Human("Jane", 9, "Женский");
-        Human lucas = new Human("Lucas", 7, "Мужской");
-
-        FamilyTree familyTree = new FamilyTree();
-        familyTree.addParent(john, mark);
-        familyTree.addParent(john, jane);
-        familyTree.addParent(john, lucas);
-        familyTree.addParent(sarah, mark);
-        familyTree.addParent(sarah, jane);
-        familyTree.addParent(sarah, lucas);
-
+        Person john = new Human("John", 35, "Мужской");
+        Person sarah = new Human("Sarah", 32, "Женский");
+        Person mark = new Human("Mark", 12, "Мужской");
+        Person jane = new Human("Jane", 9, "Женский");
+        Person lucas = new Human("Lucas", 7, "Мужской");
+    
+        GenealogicalTree familyTree = new FamilyTree();
+        familyTree.addParent((Human) john, (Human) mark);
+        familyTree.addParent((Human) john, (Human) jane);
+        familyTree.addParent((Human) john, (Human) lucas);
+        familyTree.addParent((Human) sarah, (Human) mark);
+        familyTree.addParent((Human) sarah, (Human) jane);
+        familyTree.addParent((Human) sarah, (Human) lucas);
+    
         // Add a sibling relationship between Jane and Lucas
-        familyTree.addSibling(jane, lucas);
-
-        List<Human> johnChildren = familyTree.getChildren(john);
+        familyTree.addSibling((Human) jane, (Human) lucas);
+    
+        List<Human> johnChildren = familyTree.getChildren((Human) john);
         if (johnChildren != null) {
             System.out.println("Дети Джона:");
-            for (Human child : johnChildren) {
-            System.out.println(child.toString());
+            for (Person child : johnChildren) {
+                System.out.println(child.toString());
             }
         }
-            // Get all siblings of Jane
+    
+        // Get all siblings of Jane
         List<Human> janeSiblings = familyTree.getChildren(jane.getParent());
         if (janeSiblings != null) {
             System.out.println("\nРодные братья и сестры Джейн:");
-            for (Human sibling : janeSiblings) {
+            for (Person sibling : janeSiblings) {
                 if (!sibling.equals(jane)) {
                     System.out.println(sibling.toString());
                 }
@@ -41,3 +41,4 @@ public class Research {
         }
     }
 }
+    

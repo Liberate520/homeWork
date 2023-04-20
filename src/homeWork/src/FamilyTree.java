@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FamilyTree {
+public class FamilyTree implements GenealogicalTree {
     private Map<Human, List<Human>> familyTree;
 
     public FamilyTree() {
         this.familyTree = new HashMap<>();
     }
 
+    @Override
     public void addParent(Human parent, Human child) {
         child.setParent(parent);
         if (familyTree.containsKey(parent)) {
@@ -23,6 +24,7 @@ public class FamilyTree {
         }
     }
 
+    @Override
     public void addSibling(Human sibling1, Human sibling2) {
         if (!familyTree.containsKey(sibling1.getParent()) || !familyTree.containsKey(sibling2.getParent())) {
             throw new IllegalArgumentException("Оба брата и сестра должны иметь одного родителя в семейном древе.");
@@ -36,6 +38,7 @@ public class FamilyTree {
         }
     }
 
+    @Override
     public List<Human> getChildren(Human parent) {
         if (familyTree.containsKey(parent)) {
             return familyTree.get(parent);
@@ -44,3 +47,4 @@ public class FamilyTree {
         }
     }
 }
+
