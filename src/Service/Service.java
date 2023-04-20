@@ -10,14 +10,13 @@ import OOPjavaTree.src.Tree.Tree;
 public class Service {
     private Tree tree;
 
+    public Service(Tree tree) {
+        this.tree = tree;
+    }
     public Tree getTree() {
         return tree;
     }
     public void setTree(Tree tree) {this.tree = tree;}
-
-    public Service(Tree tree) {
-        this.tree = tree;
-    }
 
     public void add(String name, int birthdate){
         Human human = new Human(name, birthdate);
