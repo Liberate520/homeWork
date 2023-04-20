@@ -25,24 +25,6 @@ public class MemberIterator<T> implements Iterator<T> {
         return members.get(index++);
     }
 
-//    @Override
-//    public boolean hasNext() {
-//        return !members.isEmpty();
-//    }
-//
-//    @Override
-//    public T next() {
-//        if (hasNext()) {
-//            T current = members.poll();
-//            if (current instanceof Group) {
-//                Group<T> group = (Group<T>) current;
-//                for (T member : group.getMembers()) {
-//                    members.offer(member);
-//                }
-//            }
-//            return current;
-//        }
-//        throw new NoSuchElementException();
-//    }
+
 
 }

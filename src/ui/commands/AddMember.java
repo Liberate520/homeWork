@@ -12,5 +12,4 @@ public class AddMember extends Command{
         console.addMember();
     }
 
-
 }

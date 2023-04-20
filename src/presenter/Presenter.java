@@ -20,9 +20,6 @@ public class Presenter {
         view.print(service.printTree());
     }
 
-//    public void printTree(){
-//        service.printTrees();
-//    }
 
     public void addMember(String name, String surname, Gender gender, String dateBirth, Human father, Human mother) {
         service.addHuman(name, surname, gender, dateBirth, father, mother);

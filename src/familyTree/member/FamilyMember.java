@@ -29,6 +29,4 @@ public interface FamilyMember {
 
     String getInfo();
 
-//    void addChild(FamilyMember member);
-
 }

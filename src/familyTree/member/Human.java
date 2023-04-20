@@ -133,9 +133,9 @@ public class Human implements FamilyMember, Serializable {
         return grandchildrens;
     }
 
-//    public String getDateDeath() {
-//        return dateDeath;
-//    }
+    public String getDateDeath() {
+        return dateDeath;
+    }
 
     public List<Human> getChildList() {
         return childList;
@@ -149,17 +149,6 @@ public class Human implements FamilyMember, Serializable {
         return Period.between(date, currentDate).getYears();
     }
 
-//    public int getAge() {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
-//        LocalDate currentDate = LocalDate.now();
-//        LocalDate date = LocalDate.parse(dateBirth, formatter);
-//        LocalDate endDate = LocalDate.parse(dateDeath, formatter);
-//        if (getDeathDate() == null) {
-//            return Period.between(date, currentDate).getYears();
-//        } else {
-//            return Period.between(date, endDate).getYears();
-//        }
-//    }
 
     public void setId(int id) {
         this.id = id;
@@ -230,34 +219,11 @@ public class Human implements FamilyMember, Serializable {
             this.dateDeath = dateDeath;
         }
     }
-//    public String getMaidenName() {
-//        return this.maidenName;
-//    }
-//    public void setMaidenName(String maidenName) {
-//        if (maidenName.trim().matches(nameRegex)) {
-//            if (this.gender == Gender.Male) {
-//                this.maidenName = maidenName.trim();
-//            } else {
-//                throw new IllegalArgumentException("Девичья фамилия для женщин");
-//            }
-//        } else if (maidenName.isEmpty()) {
-//            this.maidenName = "";
-//        } else {
-//            throw new IllegalArgumentException("Неверно задана фамилия");
-//        }
-//
-//    }
+
     public void setChildList(List<Human> childList) {
         this.childList = childList;
     }
 
-//    public void addChild(Human child) {
-//        if (!childList.contains(child)) {
-//            childList.add(child);
-//        } else  {
-//            System.out.println("Ребенок уже есть в списке");
-//        }
-//    }
 
     public void addChild(Human child) {
         if (child != null && !childList.contains(child)) {
@@ -371,6 +337,5 @@ public class Human implements FamilyMember, Serializable {
         Human human = (Human) obj;
         return human.getName().equals(getName());
     }
-
 
 }
