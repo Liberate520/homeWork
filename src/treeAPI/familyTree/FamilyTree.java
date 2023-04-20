@@ -30,9 +30,7 @@ public class FamilyTree<E extends Sample> implements interfaceTree, Serializable
         return this.samples;
     }
     private <E extends Sample> boolean hasSample(E sample) {return this.getSamples().contains(sample);}
-
     public <E extends Sample> boolean addSample(E sample) {return addSample(sample, false);}
-
     public <E extends Sample> boolean addSample(E sample, boolean isAddAllChildren) {
         if (!this.hasSample(sample)) {
             if (isAddAllChildren) {

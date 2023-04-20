@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Service {
-    private FamilyTree<? extends Sample> tree;
+    private FamilyTree<Human> tree;
     private InterfaceTrees<FamilyTree> treesHolder;
 
     public Service() {
@@ -104,17 +104,17 @@ public class Service {
         }
     }
 
-    public void sortByBornDate() {
+    public void sortByBirthDay() {
         for (FamilyTree<Sample> familyTree : this.getTreesHolder()) {
-            this.sortByBornDate(familyTree);
+            this.sortByBirthDay(familyTree);
         }
     }
 
-    public void sortByBornDate(String familyTreeName) {
-        this.sortByBornDate(this.findFamilyTree(familyTreeName));
+    public void sortByBirthDay(String familyTreeName) {
+        this.sortByBirthDay(this.findFamilyTree(familyTreeName));
     }
 
-    private void sortByBornDate(FamilyTree<Sample> familyTree) {
+    private void sortByBirthDay(FamilyTree<Sample> familyTree) {
         List<Sample> members = familyTree.getSamples();
         members.sort(new SampleComparatorByBirthDay<>());
         for (Sample member : members) {
