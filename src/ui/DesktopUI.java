@@ -1,6 +1,5 @@
 package ui;
 
-import person.Person;
 import presenter.Presenter;
 
 import javax.swing.*;

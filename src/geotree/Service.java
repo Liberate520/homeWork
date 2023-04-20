@@ -1,13 +1,8 @@
 package geotree;
 
-import geotree.GeoTree;
 import io.GeoTreeIO;
-import person.Gender;
-import person.Person;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class Service {
     private GeoTreeIO gtio;
