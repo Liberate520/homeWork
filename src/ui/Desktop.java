@@ -96,9 +96,7 @@ public class Desktop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                presenter.addHuman(inputFamily.getText(), inputName.getText());
                 printTree();
-                //при нажатии на кнопу в презентер передается информация из текстового поля
             }
         });
 
@@ -106,9 +104,7 @@ public class Desktop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-               // presenter.addHuman(inputFamily.getText(), inputName.getText());
-                printTree();
-                //при нажатии на кнопу в презентер передается информация из текстового поля
+                presenter.addHuman(inputFamily.getText(), inputName.getText());
             }
         });
 
@@ -116,10 +112,7 @@ public class Desktop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                //presenter.searchHuman(inputFamily.getText(), inputName.getText());
-                tree.setText(presenter.searchHuman(inputFamily.getText(), inputName.getText()));
-
-                //при нажатии на кнопу в презентер передается информация из текстового поля
+                presenter.searchHuman(inputFamily.getText(), inputName.getText());
             }
         });
 
@@ -128,8 +121,6 @@ public class Desktop extends JFrame implements View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tree.setText(presenter.searchParents(inputFamily.getText(), inputName.getText()));
-
-                //при нажатии на кнопу в презентер передается информация из текстового поля
             }
         });
 
@@ -137,11 +128,7 @@ public class Desktop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                //presenter.searchHuman(inputFamily.getText(), inputName.getText());
-                //tree.setText(presenter.searchMather(inputFamily.getText(), inputName.getText()));
                 tree.setText(presenter.searchChild(inputFamily.getText(), inputName.getText()));
-
-                //при нажатии на кнопу в презентер передается информация из текстового поля
             }
         });
 
