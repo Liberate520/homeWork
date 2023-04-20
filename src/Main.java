@@ -25,5 +25,30 @@ public class Main {
         tree_1.save(fh, "tree_1!_out.txt");
         FamilyTree treeRestore = fh.read("tree_1!_out.txt");
         System.out.println(treeRestore.getInfo());
+
+        for (Human human : tree_1) {
+            System.out.println(human.getFullName());
+        }
+
+        System.out.println();
+
+        tree_1.sortByName();
+        for (Human human : tree_1) {
+            System.out.println(human.getFullName());
+        }
+
+        System.out.println();
+
+        System.out.println(
+                kolya.getFullName() + " " + kolya.getAge() + " лет");
+        System.out.println(uriy.getFullName() + " " + uriy.getAge() + " лет");
+        System.out.println(john.getFullName() + " " + john.getAge() + " лет");
+
+        System.out.println();
+
+        tree_1.sortByAge();
+        for (Human human : tree_1) {
+            System.out.println(human.getFullName());
+        }
     }
 }

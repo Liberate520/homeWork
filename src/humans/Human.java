@@ -118,7 +118,7 @@ public class Human implements Serializable {
         return gender;
     }
 
-    public void getAge() {
+    public Integer getAge() {
         LocalDate now_date = LocalDate.now();
         int age = now_date.getYear() - this.birthDate.getYear();
         if (now_date.getMonthValue() < this.birthDate.getMonthValue() ||
@@ -127,6 +127,6 @@ public class Human implements Serializable {
                                 this.birthDate.getDayOfMonth()) {
             age--;
         }
-        System.out.println(this.getFullName() + " " + age + " лет");
+        return age;
     }
 }

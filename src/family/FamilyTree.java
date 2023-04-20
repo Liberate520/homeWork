@@ -1,15 +1,18 @@
 package family;
 
 import humans.Human;
-import service.Readable;
+import service.HumanComparatorByAge;
+import service.HumanComparatorByName;
 import service.Writable;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public FamilyTree() {
@@ -55,5 +58,18 @@ public class FamilyTree implements Serializable {
 
     public void save(Writable writable, String path) throws IOException {
         writable.save(this, path);
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge());
     }
 }
