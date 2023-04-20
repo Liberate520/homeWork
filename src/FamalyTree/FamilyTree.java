@@ -1,7 +1,12 @@
+package FamalyTree;
+
+import SaveAs.TextFormat;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> familyMembers;
 
     public FamilyTree(){
@@ -39,30 +44,30 @@ public class FamilyTree {
      * добавляет родителей в объект ребенка.
      * Также добавляет ребенка в семейное дерево и в список детей обоих родителей
      */
-    public void addChaild(Human human, Human chaild) {
-        if (chaild.getGender().equals(Gender.Female)) {
+    public void addChild(Human human, Human child) {
+        if (child.getGender().equals(Gender.Female)) {
             if (human.getGender().equals(Gender.Female)) {
-                chaild.setLastName(human.getLastName());
+                child.setLastName(human.getLastName());
             } else {
-                chaild.setLastName(human.getPartner().getLastName());
+                child.setLastName(human.getPartner().getLastName());
             }
         } else {
             if (human.getGender().equals(Gender.Female)) {
-                chaild.setLastName(human.getPartner().getLastName());
+                child.setLastName(human.getPartner().getLastName());
             } else {
-                chaild.setLastName(human.getLastName());
+                child.setLastName(human.getLastName());
             }
         }
         if (human.getGender().equals(Gender.Female)) {
-            chaild.setMother(human);
-            chaild.setFather(human.getPartner());
+            child.setMother(human);
+            child.setFather(human.getPartner());
         } else {
-            chaild.setFather(human);
-            chaild.setMother(human.getPartner());
+            child.setFather(human);
+            child.setMother(human.getPartner());
         }
-        this.addMember(chaild);
-        human.addChaild(chaild);
-        human.getPartner().addChaild(chaild);
+        this.addMember(child);
+        human.addChild(child);
+        human.getPartner().addChild(child);
     }
 
     /**
@@ -110,4 +115,5 @@ public class FamilyTree {
                 "Фамилия: " + human.getLastName() + "\n" +
                 "Дети: " + human.getChildren();
     }
+
 }

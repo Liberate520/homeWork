@@ -1,7 +1,12 @@
+package FamalyTree;
+
+import SaveAs.TextFormat;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
 
     private Gender gender;
     private Human partner;
@@ -70,8 +75,8 @@ public class Human {
         return children;
     }
 
-    public void addChaild (Human chaild) {
-        children.add(chaild);
+    public void addChild (Human child) {
+        children.add(child);
     }
 
     @Override
@@ -86,4 +91,9 @@ public class Human {
         }
         return false;
     }
+
+    public void saveAs(String path, TextFormat format) {
+        format.SaveAs(this, path);
+    }
+
 }
