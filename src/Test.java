@@ -1,5 +1,7 @@
+import java.io.*;
+
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
         Human nick = new Human("Никита Петров", 22, Gender.male);
         Human mama = new Human("Елена Петрова", 45, Gender.female);
         Human papa = new Human("Евгений Петров", 46, Gender.male);
@@ -25,5 +27,14 @@ public class Test {
         nick.findSiblings();
         System.out.println();
         brother.findSiblings();
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("family.out"));
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("family.out"));
+        FamilyTree newFamily = family;
+
+        Serialization serialization = new Serialization(objectOutputStream, objectInputStream, newFamily);
+        serialization.save(family);
+        serialization.readFile();
+        newFamily.showAllRelatives();
     }
 }

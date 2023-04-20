@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     public List<Human> people;
 
     FamilyTree() {
@@ -34,15 +35,4 @@ public class FamilyTree {
 
         return null;
     }
-
-//    public void updateKids() {
-//        for (Human human: people) {
-//            if (human.getMother() != null) {
-//                human.getMother().addKid(human);
-//            }
-//            if (human.getFather() != null) {
-//                human.getFather().addKid(human);
-//            }
-//        }
-//    }
 }
