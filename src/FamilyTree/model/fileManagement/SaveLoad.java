@@ -1,4 +1,4 @@
-package FamilyTree;
+package FamilyTree.model.fileManagement;
 
 import java.io.IOException;
 import java.io.Serializable;

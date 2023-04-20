@@ -1,7 +1,8 @@
-package FamilyTree.comparators;
+package FamilyTree.model.comparators;
 
-import FamilyTree.Person;
 import java.util.Comparator;
+
+import FamilyTree.model.nodes.Person;
 
 public class ComparatByYoB implements Comparator<Person>{
 
