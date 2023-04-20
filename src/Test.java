@@ -30,11 +30,10 @@ public class Test {
 
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("family.out"));
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("family.out"));
-        FamilyTree newFamily = family;
 
-        Serialization serialization = new Serialization(objectOutputStream, objectInputStream, newFamily);
+        Serialization serialization = new Serialization(objectOutputStream, objectInputStream, new FamilyTree());
         serialization.save(family);
         serialization.readFile();
-        newFamily.showAllRelatives();
+        serialization.newFamily.showAllRelatives();
     }
 }
