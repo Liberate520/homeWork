@@ -1,57 +1,15 @@
-import java.io.IOException;
-import java.util.List;
+import familyTree.FamilyTree;
+import human.Gender;
+import human.Human;
 
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree();
-        familyTree.addHuman(new Human("Иван", "Иванов", "25.10.1990", Gender.Male));
-        familyTree.addHuman(new Human("Светлана", "Светлова", "14.05.1993", Gender.Female));
-        familyTree.addHuman(new Human("Екатерина", "Иванова", "05.03.2012", Gender.Female,
-                familyTree.getHuman("Светлана", "Светлова", "14.05.1993"),
-                familyTree.getHuman("Иван", "Иванов", "25.10.1990")));
-        familyTree.addHuman(new Human("Петр", "Иванов", "10.08.2015", Gender.Male,
-                familyTree.getHuman("Светлана", "Светлова", "14.05.1993"),
-                familyTree.getHuman("Иван", "Иванов", "25.10.1990")));
-        familyTree.addHuman(new Human("Михаил", "Иванов", "18.12.2017", Gender.Male,
-                familyTree.getHuman("Светлана", "Светлова", "14.05.1993"),
-                familyTree.getHuman("Иван", "Иванов", "25.10.1990")));
-        familyTree.addHuman(new Human("Сидр", "Светлов", "25.02.1970", Gender.Male));
 
-        familyTree.getHuman("Светлана", "Светлова", "14.05.1993").setFather(familyTree.getHuman("Сидр", "Светлов", "25.02.1970"));
+        familyTree.readFromFile("Human.txt");
+        System.out.println(familyTree.getPeople());
 
-        System.out.println(familyTree.getHuman("Светлана", "Светлова", "14.05.1993").getFather());
-
-        Human forFindBrother = familyTree.getHuman("Екатерина", "Иванова", "05.03.2012");
-        System.out.println("Братья для " + forFindBrother.getFullName() + ':');
-        System.out.println(familyTree.getBrothers(forFindBrother));
-
-        Human forFindSister = familyTree.getHuman("Михаил", "Иванов", "18.12.2017");
-        System.out.println("Сестры для " + forFindSister.getFullName() + ':');
-        System.out.println(familyTree.getSisters(forFindSister));
-
-        ReadWriteData rw = new ReadWriteObject();
-        try {
-            rw.writeData(familyTree.getAllHuman());
-            List<Human> restoredData = rw.readData();
-            System.out.println("Прочтено из файла");
-            System.out.println(restoredData);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        ReadWriteData rw2 = new ReadWriteByteArray();
-        try {
-            rw2.writeData(familyTree.getAllHuman());
-            List<Human> restoredData2 = rw2.readData();
-            System.out.println("Прочтено из ByteArrayOutputStream");
-            System.out.println(restoredData2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        familyTree.saveToFile("Human.txt");
 
     }
 

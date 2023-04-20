@@ -1,3 +1,4 @@
+package human;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -41,22 +42,35 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return "[" +
-                 firstName +
-                 " " + lastName +
+        return "[" + firstName +
+                " " + lastName +
                 ", " + birthday +
                 ", " + gender +
-//                ", Мать: " + mother +
-//                ", Отец: " + father +
+                ", Мать: " + getMotherFullName() +
+                ", Отец: " + getFatherFullName() +
                 ']';
     }
 
     public Human getFather() {
-        return father;
+        return this.father;
+    }
+    private String getFatherFullName(){
+        if (this.father != null){
+            return this.getFather().getFullName();
+        } else {
+            return "Неизвестен";
+        }
+    }private String getMotherFullName(){
+        if (this.mother != null){
+            return this.getMother().getFullName();
+        } else {
+            return "Неизвестна";
+        }
     }
 
+
     public Human getMother() {
-        return mother;
+        return this.mother;
     }
 
     public void setFather(Human father) {
@@ -72,7 +86,7 @@ public class Human implements Serializable {
     }
 
     public Gender getGender() {
-        return gender;
+        return this.gender;
     }
 
     public String getFullName(){
@@ -80,14 +94,14 @@ public class Human implements Serializable {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public String getBirthday() {
-        return birthday;
+        return this.birthday;
     }
 }
