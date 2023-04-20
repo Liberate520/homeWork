@@ -10,9 +10,6 @@ public class FamilyService {
     private InterfaceFile interfaceFile;
     private String fileName = "family.txt";
     private FamilyTree<Human> familyTree;
-    public FamilyService(FamilyTree<Human> familyTree){
-        this.familyTree = familyTree;
-    }
     public FamilyService(){
         familyTree = new FamilyTree<>();
     }
@@ -62,18 +59,15 @@ public class FamilyService {
         this.interfaceFile = interfaceFile;
     }
 
-    public String sortByName(){
+    public void sortByName(){
         familyTree.sortByName();
-        return null;
     }
 
-    public String sortByBirthDate(){
+    public void sortByBirthDate(){
         familyTree.sortByBirthDate();
-        return null;
     }
-    public String findHuman(String name){
-        familyTree.findHuman(name);
-        return name;
+    public Object findHuman(String name){
+        return familyTree.findHuman(name);
     }
     public String humanList() {
         return familyTree.toString();

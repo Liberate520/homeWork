@@ -1,5 +1,6 @@
 package ui;
 
+import model.FamilyService;
 import presenter.Presenter;
 import model.tree.FamilyTree;
 import model.tree.Human;
@@ -20,27 +21,27 @@ public class Console implements View {
     }
 
     public void showPerson() {
-        presenter.toString();
+        presenter.humanList();
     }
 
     public void addPerson() {
         System.out.println("Введите имя человека");
         String name = scanner.nextLine();
-        System.out.println("Введите пол человека");
-        String genger = scanner.nextLine();
-        System.out.println("Введите дату рождения человека");
+        System.out.println("Введите пол человека: male(м)/female(ж)");
+        String gender = scanner.nextLine();
+        System.out.println("Введите дату рождения человека в формате 'год-месяц-день'");
         String birthDate = scanner.nextLine();
-        System.out.println("Введите дату смерти человека");
+        System.out.println("Введите дату смерти человека в формате 'год-месяц-день'");
         String deathDate = scanner.nextLine();
         System.out.println("Введите имя отца человека");
         String father = scanner.nextLine();
         System.out.println("Введите имя матери человека");
         String mother = scanner.nextLine();
-        presenter.addHuman(name, genger, birthDate, deathDate, father, mother);
+        presenter.addHuman(name, gender, birthDate, deathDate, father, mother);
     }
-    public void humanList(){
-        presenter.humanList();
-    }
+//    public void humanList(){
+//        presenter.humanList();
+//    }
 
     public void searchPerson() {
         System.out.println("Введите имя");
@@ -53,8 +54,8 @@ public class Console implements View {
     }
 
     public void sortBirthdate() {
-        tree.sortByBirthDate();
-        System.out.println(tree);
+        presenter.sortByBirthDate();
+//        System.out.println(tree);
     }
 
     private void exit() {

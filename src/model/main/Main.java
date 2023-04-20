@@ -14,16 +14,16 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         FamilyTree<Human> familyTree = new FamilyTree<>();
-        Human human1 = new Human(/*1, */"Иван", Human.Gender.male,
+        Human human1 = new Human("Иван", Human.Gender.male,
                 LocalDate.of(1865, 11, 25),
                 LocalDate.of(2017, 7, 3), null, null, null);
-        Human human2 = new Human(/*2, */"Галина", Human.Gender.female,
+        Human human2 = new Human("Галина", Human.Gender.female,
                 LocalDate.of(1869, 10, 15), null, null, null, null);
-        Human human3 = new Human(/*3, */"Павел", Human.Gender.male,
+        Human human3 = new Human("Павел", Human.Gender.male,
                 LocalDate.of(1989, 9, 18), null, null, null, null);
-        Human human4 = new Human(/*4, */"Алеся", Human.Gender.female,
+        Human human4 = new Human("Алеся", Human.Gender.female,
                 LocalDate.of(1995, 7, 5), null, null, null, null);
-        Human human5 = new Human(/*5, */"Дарья", Human.Gender.female,
+        Human human5 = new Human("Дарья", Human.Gender.female,
                 LocalDate.of(1990, 6, 29), null, null, null, null);
         familyTree.addHuman(human1);
         familyTree.addHuman(human2);
@@ -44,7 +44,7 @@ public class Main {
         service.save();
         service.read();
         View view = new Console();
-        Presenter presenter = new Presenter((FamilyService) service, (View) view);
+        Presenter presenter = new Presenter(service, view);
         view.run();
     }
 }

@@ -1,7 +1,6 @@
 package presenter;
 
 import model.FamilyService;
-import model.tree.Human;
 import ui.View;
 
 public class Presenter {
@@ -18,26 +17,20 @@ public class Presenter {
         String answerName = service.addHuman(name, gender, birthDate, deathDate, father, mother);
         view.print(answerName);
     }
-//    public void addHuman(String name, String sex, int age) {
-//        service.addHuman(new Human(name, sex, age));
-//        view.print("Новый член семьи добавлен !");
-//    }
     public void humanList() {
         String answerList = service.humanList();
         view.print(answerList);
     }
     public void findHuman(String name){
-        String answerFind = service.findHuman(name);
+        String answerFind = service.findHuman(name).toString();
         view.print(answerFind);
     }
     public void sortByName(){
-        String answerSortByName = service.sortByName();
-        view.print(answerSortByName);
+        service.sortByName();
     }
 
     public void sortByBirthDate(){
-        String answerSortByBirthDate = service.sortByBirthDate();
-        view.print(answerSortByBirthDate);
+        service.sortByBirthDate();
     }
 
 

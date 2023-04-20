@@ -13,6 +13,7 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
         }
         return true;
     }
+
     public void addHuman(T human) {
         if (!famTree.contains(human)) {
             if (human.getMother() != null) {
@@ -47,11 +48,6 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     public void sortByBirthDate() {
         famTree.sort(Comparator.comparing(Human::getBirthDate));
     }
-
-//    public void famSort() {
-//        Collections.sort(famTree);
-//    }
-
     @Override
     public Iterator<T> iterator() {
         return new FamilyIterator<T>(famTree);
