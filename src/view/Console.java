@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import model.Service;
 import presenter.Presenter;
 
 
@@ -11,6 +12,9 @@ public class Console implements View {
     private Presenter presenter;
     private Menu menu;
     private boolean work;
+
+    Service service = new Service();
+
 
     @Override
     public void start() {
@@ -33,7 +37,7 @@ public class Console implements View {
     }
 
     private void hello() {
-        System.out.println("Программа <<<Семейное дерево V2.0>>>" + "\n");
+        System.out.println("Программа <<<Семейное дерево V2.0 2023>>>" + "\n");
 
         System.out.println(menu.printMenu());
     }
@@ -44,6 +48,7 @@ public class Console implements View {
     }
 
     public void finish() {
+
         work = false;
     }
 
@@ -61,7 +66,12 @@ public class Console implements View {
         System.out.print("Введите имя матери: ");
         String mother = scanner.nextLine();
 
-        presenter.addObject(name, family, dateBirth, father, mother);
+        if (service.checkingInput(name, family, dateBirth, father, mother) == null) {
+
+            System.out.println("Данные не введены!");
+        } else {
+            presenter.addObject(name, family, dateBirth, father, mother);
+        }
 
     }
 
@@ -87,6 +97,22 @@ public class Console implements View {
         System.out.println("1 - по имени" + "\n" + "2- по фамилии");
         int numSort = Integer.parseInt(scanner.nextLine());
         presenter.sortHum(numSort);
+    }
+
+    public void saveInFile() {
+        System.out.println("Сохранить все объекты в файл?");
+        System.out.println("1 - да" + "\n" + "2- нет");
+        int num = Integer.parseInt(scanner.nextLine());
+        presenter.saveObj(num);
+
+    }
+
+    public void readFile() {
+        System.out.println("Прочитать из файла?");
+        System.out.println("1 - да" + "\n" + "2- нет");
+        int num = Integer.parseInt(scanner.nextLine());
+        presenter.readObjFromFile(num);
+
     }
 
 

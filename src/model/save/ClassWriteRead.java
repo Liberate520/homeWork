@@ -11,8 +11,7 @@ public class ClassWriteRead<T, H> implements Writable {
     private String name;
     private String description;
 
-   // ArrayList<T> newHuman = new ArrayList<>();
-
+    // ArrayList<T> newHuman = new ArrayList<>();
 
 
     public ClassWriteRead(String name, String description) {
@@ -20,14 +19,11 @@ public class ClassWriteRead<T, H> implements Writable {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "FamilyTree = " + '{' + name + '\'' + ", description='" + description + '\'' + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "FamilyTree = " + '{' + name + '\'' + ", description='" + description + '\'' + '}';
+//    }
 
-
-
-   
 
     @Override
     public void save(Object obj, String fileName) throws IOException {

@@ -22,7 +22,8 @@ public class Menu {
         commands.add(new TreeView(console));
         commands.add(new SearchObject(console));
         commands.add(new SortObject(console));
-
+        commands.add(new SaveObjInFile(console));
+        commands.add(new ReadObjectFromFile(console));
     }
 
     void execute(int num) {

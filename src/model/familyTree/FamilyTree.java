@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FamilyTree<E extends Human> implements Iterable<E>, Serializable {
 
-    public Object tree;
+    //public Object tree;
     public List<E> humanList;
 
 
@@ -21,10 +21,6 @@ public class FamilyTree<E extends Human> implements Iterable<E>, Serializable {
 
     public FamilyTree() {
         this(new ArrayList<>());
-    }
-
-    public FamilyTree(Object tree) {
-        this.tree = tree;
     }
 
 
@@ -38,7 +34,9 @@ public class FamilyTree<E extends Human> implements Iterable<E>, Serializable {
             return false;
 
         }
+
         if (!humanList.contains(human)) {
+
 
             humanList.add((E) human);
 
@@ -51,6 +49,7 @@ public class FamilyTree<E extends Human> implements Iterable<E>, Serializable {
             }
             return true;
         }
+
         return false;
     }
 

@@ -17,6 +17,7 @@ public class TreeView extends Command{
 
     @Override
     public void execute() {
+        System.out.println("Печатаю весь список объектов...");
         getConsole().treeView();
     }
 

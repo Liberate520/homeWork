@@ -57,8 +57,8 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree<Human> tree = new FamilyTree<>();
-
-
+//
+//
         tree.addNewHuman(new Human("Ирина", "Малинина", "21.08.1987"), null);
         tree.addNewHuman(new Human("Владимир", "Малинин", "10.02.1985"), null);
 
@@ -72,32 +72,26 @@ public class Main {
         tree.addNewHuman(new Human("Олег", "Титов", "10.07.1989"), null);
         tree.addNewHuman(new Human("Алексей", "Титов", "27.09.2019", tree.getByName("Олег"),
                 tree.getByName(null)), null);
-
-        System.out.println();
+//
+//        System.out.println();
         //System.out.println(tree.getInfo());
 
 
         // //////////////////////*****  СЕРИАЛИЗАЦИЯ ******///////////////////////
 
 
-        //Presenter fileName = new Presenter();
-
-       // String nameFILE = fileName.getFileName();
-
-
-        // создаем новый экземпляр класса ClassWriteRead
-      // ClassWriteRead treeForWrite = new ClassWriteRead<>(null, nameFILE);
-
-
-        // сохраняем в файл
-       // treeForWrite.save(tree.getInfo(), nameFILE);
-
-
-        // //////////////////////******  ДЕСЕРИАЛИЗАЦИЯ ***********///////////////////////
-
-
-        // читаем из файла
-       // System.out.println("Before write: \n" + treeForWrite.read(nameFILE));
+//        Service fileName = new Service();
+//
+//        String nameFILE = fileName.getFileName();
+//
+//
+//       //  создаем новый экземпляр класса ClassWriteRead
+//       ClassWriteRead treeForWrite = new ClassWriteRead<>(null, nameFILE);
+//
+//
+//       //  сохраняем в файл
+//        treeForWrite.save(tree.getInfo(), nameFILE);
+//
 
 
         ////////////////////////////////***M V P ****//////////////////////////////////
@@ -105,6 +99,7 @@ public class Main {
 
         View view = new Console();
         Service service = new Service(tree);
+        // Service service = new Service();
         Presenter presenter = new Presenter(view, service);
         view.start();
 
