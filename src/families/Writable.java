@@ -1,4 +1,7 @@
-import java.io.FileNotFoundException;
+package families;
+
+import families.Family;
+
 import java.io.IOException;
 import java.io.Serializable;
 

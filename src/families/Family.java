@@ -1,13 +1,17 @@
+package families;
+
+import human.Human;
+
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Family implements Tree, Serializable{
-    List <Human> family = new ArrayList<>();
+public class Family implements Tree, Serializable, Iterable<Human>{
+    List<Human> family = new ArrayList<>();
     @Override
     public void addMember(Human human) {
-        family.add(human);
+        if(!family.contains(human))family.add(human);
+        else System.out.println("Такой уже есть");
     }
 
     @Override
@@ -67,11 +71,13 @@ public class Family implements Tree, Serializable{
 
     @Override
     public void setChildren(Human human, Human child) {
-        this.addMember(child);
-        human.setChildren(child);
-        (human.getIn_marriage_with()).setChildren(child);
-        child.setParents(human);
-        child.setParents(human.getIn_marriage_with());
+        if(!human.getChildren().contains(child)){
+            this.addMember(child);
+            human.setChildren(child);
+            (human.getIn_marriage_with()).setChildren(child);
+            child.setParents(human);
+            child.setParents(human.getIn_marriage_with());}
+        else System.out.println("Такой уже есть");
     }
 
     @Override
@@ -84,5 +90,10 @@ public class Family implements Tree, Serializable{
         for (Human human : family) {
             System.out.println(human);
         }
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(family);
     }
 }

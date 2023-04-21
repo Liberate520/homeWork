@@ -1,15 +1,17 @@
+package human;
+
 import java.io.Serializable;
 import java.util.*;
 
 public class Human implements Serializable {
     public String name;
-    private Map<String, Integer> date_of_birth = new TreeMap<>();
+    private Calendar date_of_birth;
     private Integer day;
     private Integer month;
     private Integer year;
     private Gender gender;
-    private ArrayList<Human> children;
-    private ArrayList<Human> parents;
+    private List<Human> children;
+    private List<Human> parents;
     private Human In_marriage_with;
 
 
@@ -18,9 +20,7 @@ public class Human implements Serializable {
         this.parents = new ArrayList<>();
         this.name = name;
         this.gender = gender;
-        this.date_of_birth.put("day", day);
-        this.date_of_birth.put("month", month);
-        this.date_of_birth.put("year", year);
+        this.date_of_birth = new GregorianCalendar(year, month, day);
         this.In_marriage_with = null;
     }
 
@@ -32,11 +32,11 @@ public class Human implements Serializable {
         this.name = name;
     }
 
-    public Map<String, Integer> getDate_of_birth() {
-        return date_of_birth;
+    public Date getDate_of_birth() {
+        return date_of_birth.getTime();
     }
 
-    public void setDate_of_birth(Map<String, Integer> date_of_birth) {
+    public void setDate_of_birth(Calendar date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
@@ -72,7 +72,7 @@ public class Human implements Serializable {
         this.gender = gender;
     }
 
-    public ArrayList<Human> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
@@ -80,7 +80,7 @@ public class Human implements Serializable {
         this.children.add(children);
     }
 
-    public ArrayList<Human> getParents() {
+    public List<Human> getParents() {
         return parents;
     }
 
@@ -103,6 +103,6 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return name +" "+ date_of_birth;
+        return name + " ("+ getDate_of_birth()+") ";
     }
 }

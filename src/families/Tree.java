@@ -1,7 +1,9 @@
+package families;
+
+import human.Human;
+
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
 
 public interface Tree {
     void addMember(Human human);
