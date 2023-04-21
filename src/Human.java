@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private String surName;
     private String fatherName;
@@ -29,23 +30,23 @@ public class Human {
         this(name, surName, fatherName, null, null, new ArrayList<Human>(), gender);
     }
 
-    public String GetName() {
+    public String getName() {
         return this.name;
     }
 
-    public String GetFullHumanInfo() {
-        String genderString = this.gender.toString().toLowerCase();
+    public String getFullHumanInfo() {
+        String genderString = this.gender.equals(Gender.Male) ? "мужской" : "женский";
         if (childrens.size() > 0) {
             if (this.fatherName != null && this.fatherName != "") {
                 return String.format("%s %s %s, пол - %s, мать - %s, отец - %s, дети - %s", this.surName, this.name,
                         this.fatherName, genderString, this.mother == null ? "нет" : this.mother,
                         this.father == null ? "нет" : this.father,
-                        ConvertChildrensToString(this.childrens));
+                        convertChildrensToString(this.childrens));
             } else {
                 return String.format("%s %s, пол - %s, мать - %s, отец - %s, дети - %s", this.surName, this.name,
                         genderString, this.mother == null ? "нет" : this.mother,
                         this.father == null ? "нет" : this.father,
-                        ConvertChildrensToString(this.childrens));
+                        convertChildrensToString(this.childrens));
             }
         } else {
 
@@ -62,8 +63,8 @@ public class Human {
         }
     }
 
-    public String GetShortHumanInfo() {
-        String genderString = gender.toString().toLowerCase();
+    public String getShortHumanInfo() {
+        String genderString = this.gender.equals(Gender.Male) ? "мужской" : "женский";
         if (childrens.size() > 0) {
             if (this.fatherName != null && this.fatherName != "") {
                 return String.format("%s %s %s, пол - %s", this.surName, this.name, this.fatherName, genderString);
@@ -82,82 +83,75 @@ public class Human {
         }
     }
 
-    public String GetFullName() {
+    public String getFullName() {
         String temp = ((this.fatherName != null && (!this.fatherName.equals(""))) ? " " + this.fatherName : "");
         return this.surName + " " + this.name + temp;
     }
 
-    public List<Human> GetChildrens() {
+    public List<Human> getChildrens() {
 
         return this.childrens;
     }
 
-    public String ConvertChildrensToString(List<Human> childrens) {
+    public String convertChildrensToString(List<Human> childrens) {
         int count = childrens.size();
         if (count > 0) {
             String result = "";
             for (int i = 0; i < childrens.size() - 1; i++) {
-                result += childrens.get(i).GetFullName() + ", ";
+                result += childrens.get(i).getFullName() + ", ";
             }
-            result += childrens.get(childrens.size() - 1).GetFullName();
+            result += childrens.get(childrens.size() - 1).getFullName();
             return result;
         }
         return "детей нет";
     }
 
-    public void ShowChildrensInfo() {
-        System.out.println("\n" + GetFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
-        System.out.println(ConvertChildrensToString(this.childrens));
+    public void showChildrenInfo() {
+        System.out.println("\n" + getFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
+        System.out.println(convertChildrensToString(this.childrens));
     }
-    
-    public Human GetMother() {
+
+    public Human getMother() {
         return this.mother;
     }
 
-    public void CheckChildrenRelation(Human human) {
-        if (!this.childrens.contains(human)) {
-            AddChildren(human);
-        }
-
-    }
-    
-    public void CheckParentsRelationAdd(Human human) {
-        if (human.GetGender().equals(Gender.МУЖСКОЙ)) {
-            this.father=human;
+    public void addParent(Human human) {
+        if (human.getGender().equals(Gender.Male)) {
+            this.father = human;
         } else {
-            this.mother=human;
+            this.mother = human;
         }
     }
 
-    public void CheckParentsRelationRemove(Human human) {
-        if (human.GetGender().equals(Gender.ЖЕНСКИЙ) && this.mother.equals(human)) {
-            this.mother=null;
-        } else if (human.GetGender().equals(Gender.МУЖСКОЙ) && this.father.equals(human)) {
-            this.father=null;
+    public void removeParent(Human human) {
+        if (human.getGender().equals(Gender.Female) && this.mother.equals(human)) {
+            this.mother = null;
+        } else if (human.getGender().equals(Gender.Male) && this.father.equals(human)) {
+            this.father = null;
         }
     }
-    
-    public Human GetFather() {
+
+    public Human getFather() {
         return this.father;
     }
 
-    public Gender GetGender() {
+    public Gender getGender() {
         return this.gender;
     }
 
-    public void AddChildren(Human newHuman) {
-        List<Human> childrens = GetChildrens();
+    public void addChildren(Human newHuman) {
+        List<Human> childrens = getChildrens();
         if (!childrens.contains(newHuman)) {
             childrens.add(newHuman);
-            this.childrens=childrens;
+            this.childrens = childrens;
         }
     }
 
-    public void RemoveChildren(Human newHuman) {
-        List<Human> childrens = GetChildrens();
+    public void removeChildren(Human newHuman) {
+        List<Human> childrens = getChildrens();
         if (childrens.contains(newHuman)) {
             childrens.remove(newHuman);
-            this.childrens=childrens;
+            this.childrens = childrens;
         }
     }
 
@@ -166,4 +160,15 @@ public class Human {
         return this.surName + " " + this.name + temp;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return this.getFullName().equals(human.getFullName());
+    }
 }

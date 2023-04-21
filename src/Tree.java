@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class Tree implements Serializable {
     private List<Human> humans;
 
     public Tree(List<Human> humans) {
@@ -12,48 +13,49 @@ public class Tree {
         this.humans = new ArrayList<Human>();
     }
 
-    public void AddHuman(Human human) {
-        Human mother = human.GetMother();
-        Human father = human.GetFather();
-        List<Human> childrens = human.GetChildrens();
+    public void addHuman(Human human) {
+        Human mother = human.getMother();
+        Human father = human.getFather();
+        List<Human> childrens = human.getChildrens();
         if (mother != null && this.humans.contains(mother)) {
-            mother.CheckChildrenRelation(human);
+            mother.addChildren(human);
         }
         if (father != null && this.humans.contains(father)) {
-            father.CheckChildrenRelation(human);
+            father.addChildren(human);
         }
         if (childrens.size() > 0) {
             for (Human children : childrens) {
                 if (children != null && this.humans.contains(children)) {
-                    children.CheckParentsRelationAdd(human);
+                    children.addParent(human);
+
                 }
             }
         }
         humans.add(human);
     }
 
-    public void RemoveHuman(Human human) {
-        if (human.GetChildrens().size() > 0) {
-            for (Human person : human.GetChildrens()) {
-                person.CheckParentsRelationRemove(human);
+    public void removeHuman(Human human) {
+        if (human.getChildrens().size() > 0) {
+            for (Human person : human.getChildrens()) {
+                person.removeParent(human);
             }
         }
-        if (human.GetMother() != null) {
-            human.GetMother().RemoveChildren(human);
+        if (human.getMother() != null) {
+            human.getMother().removeChildren(human);
         }
 
-        if (human.GetFather() != null) {
-            human.GetFather().RemoveChildren(human);
+        if (human.getFather() != null) {
+            human.getFather().removeChildren(human);
         }
         humans.remove(human);
     }
 
-    public void ShowChildrensInfo(Human human) {
-        System.out.println("\n" + human.GetFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
+    public void showChildrensInfo(Human human) {
+        System.out.println("\n" + human.getFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
         if (this.humans.contains(human)) {
-            List<Human> childrens = human.GetChildrens();
+            List<Human> childrens = human.getChildrens();
             if (childrens.size() > 0) {
-                System.out.println(human.ConvertChildrensToString(childrens));
+                System.out.println(human.convertChildrensToString(childrens));
             } else {
                 System.out.println("Детей нет");
             }
@@ -63,49 +65,50 @@ public class Tree {
 
     }
 
-    public Human GetHumanByFullName(String fullName) {
+    public Human getHumanByFullName(String fullName) {
         for (Human human : humans) {
-            if (human.GetFullName().equals(fullName)) {
+            if (human.getFullName().equals(fullName)) {
                 return human;
             }
         }
         return null;
     }
 
-    public void ShowFullTreeInfo() {
+    public void showFullTreeInfo() {
         System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
         for (Human human : humans) {
-            System.out.println(human.GetFullHumanInfo());
+            System.out.println(human.getFullHumanInfo());
         }
 
     }
 
-    public void ShowShortTreeInfo() {
+    public void showShortTreeInfo() {
         System.out.println("\nКРАТКАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
         for (Human human : humans) {
-            System.out.println(human.GetShortHumanInfo());
+            System.out.println(human.getShortHumanInfo());
         }
 
     }
 
-    public void ShowGenderStatistics(Gender gender) {
+    public void showGenderStatistics(Gender gender) {
         List<Human> list = new ArrayList<>();
         for (Human human : humans) {
-            if (human.GetGender().equals(gender)) {
+            if (human.getGender().equals(gender)) {
                 list.add(human);
             }
         }
-        System.out.printf("\nСПИСОК ВСЕХ ЛЮДЕЙ %s ПОЛА В ДЕРЕВЕ\n", gender.value);
+        System.out.printf("\nСПИСОК ВСЕХ ЛЮДЕЙ %s ПОЛА В ДЕРЕВЕ\n",
+                (gender.equals(Gender.Male)) ? "МУЖСКОГО" : "ЖЕНСКОГО");
         System.out.println(list);
     }
 
-    public void ShowGrandmotherInfo(String fullName) {
+    public void showGrandmotherInfo(String fullName) {
         if (!fullName.equals(null)) {
             String result;
             try {
-                Human human = GetHumanByFullName(fullName);
+                Human human = getHumanByFullName(fullName);
 
-                result = human.GetMother().GetMother().GetFullName();
+                result = human.getMother().getMother().getFullName();
             } catch (NullPointerException e) {
                 result = "не обнаружено";
             }
@@ -115,12 +118,12 @@ public class Tree {
         }
     }
 
-    public void ShowGrandfatherInfo(String fullName) {
+    public void showGrandfatherInfo(String fullName) {
         if (!fullName.equals(null)) {
             String result;
             try {
-                Human human = GetHumanByFullName(fullName);
-                result = human.GetFather().GetFather().GetFullName();
+                Human human = getHumanByFullName(fullName);
+                result = human.getFather().getFather().getFullName();
             } catch (NullPointerException e) {
                 result = "не обнаружено";
             }
