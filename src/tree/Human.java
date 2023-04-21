@@ -1,7 +1,11 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
+
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
 
 public class Human {
     private Gender gender;
@@ -10,22 +14,22 @@ public class Human {
     private Human mother;
     private Human father;
     private List<Human> children;
-    
-    public Human(Gender gender, String name){
+
+    public Human(Gender gender, String name, Human mother, Human father, Human husband){
         this.gender = gender;
         this.name = name;
+        this.mother = mother;
+        this.father = father;
+        this.husband = husband;
         this.children = new ArrayList<>();
     }
 
     public Human(Gender gender, String name, Human mother, Human father){
-        this(gender, name);
-        this.mother = mother;
-        this.father = father;
+        this(gender, name, mother, father, null);
     }
 
-    public Human(Gender gender, String name, Human mother, Human father, Human husband){
-        this(gender, name, mother, father);
-        this.husband = husband;
+    public Human(Gender gender, String name){
+        this(gender, name, null, null, null);
     }
 
     public String getName() {
@@ -68,21 +72,12 @@ public class Human {
     }
 
     public void addChild(Human child) {
-        if (children == null) {
-            children = new ArrayList<>();
-        }
         children.add(child);
-        for (Human human : children) {
-            if (this.getGender() == Gender.Male){
-                if(human.getFather() == null){
-                    human.setFather(this);
-                }
-            }
-            else{
-                if(human.getMother() == null){
-                    human.setMother(this);
-                }
-            }
+        if (this.getGender() == Gender.Male) {
+            if (child.getFather() != this) child.setFather(this);
+        }
+        else{
+            if(child.getMother() == null) child.setMother(this);
         }
     }
 

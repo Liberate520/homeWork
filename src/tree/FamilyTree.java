@@ -23,15 +23,15 @@ public class FamilyTree {
         return null;
     }
 
-    public List<Human> getFamilyTreeByName(String name){
-        List<Human> res = new ArrayList<>();
-        res.add(getHumanByName(name));
-        res.add(getHumanByName(name).getFather());
-        res.add(getHumanByName(name).getMother());
-        res.addAll(getHumanByName(name).getBrothersAndSisters());
-        res.addAll(getHumanByName(name).getGrandParents());
-        return res;
-    }
+    // public List<Human> getFamilyTreeByName(String name){
+    //     List<Human> res = new ArrayList<>();
+    //     res.add(getHumanByName(name));
+    //     res.add(getHumanByName(name).getFather());
+    //     res.add(getHumanByName(name).getMother());
+    //     res.addAll(getHumanByName(name).getBrothersAndSisters());
+    //     res.addAll(getHumanByName(name).getGrandParents());
+    //     return res;
+    // }
 
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();

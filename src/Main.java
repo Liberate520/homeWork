@@ -44,6 +44,6 @@ public class Main {
         System.out.println(human3.getGrandParents());
         System.out.println(familyTree.getInfo());
         System.out.println(familyTree.getHumanByName("Liv Tyler"));
-        System.out.println(familyTree.getFamilyTreeByName("Liv Tyler"));
+        // System.out.println(familyTree.getFamilyTreeByName("Liv Tyler"));
     }
 }
