@@ -18,6 +18,7 @@ public class Main {
                 "Иванова Елена Степановна", "Иванов Пётр Николаевич",
                 "Петров Александр Максимович",
                 "Петрова Ксения Александровна, Петрова Вера Александровна"));
-        newTree.showHuman("овна");
+        System.out.print(newTree.searchHuman("Петрова Ольга Петровна"));
+        System.out.println(newTree.showAll());
     }
 }

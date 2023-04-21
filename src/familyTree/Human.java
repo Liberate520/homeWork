@@ -15,8 +15,8 @@ public class Human {
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
-    private String mother;
-    private String father;
+    private Human mother;
+    private Human father;
     private List<String> spouse;
     private List<String> childs;
 
@@ -50,8 +50,8 @@ public class Human {
         }
         else this.dateOfDeath = null;
 
-        this.mother = mother;
-        this.father = father;
+        this.mother = FamilyTree.searchHuman(mother);
+        this.father = FamilyTree.searchHuman(father);
 
         if (!spouse.equals("")) this.spouse = new ArrayList<>(Arrays.asList(spouse.split(", ")));
         else this.spouse = new ArrayList<>();
@@ -118,7 +118,8 @@ public class Human {
      * @return строка вида Фамилия Имя Отчество
      */
     public String getMother() {
-        return this.mother;
+        if (this.mother != null) return this.mother.getFullName();
+        else return null;
     }
 
     /**
@@ -126,7 +127,8 @@ public class Human {
      * @return строка вида Фамилия Имя Отчество
      */
     public String getFather() {
-        return this.father;
+        if (this.father != null) return this.father.getFullName();
+        else  return null;
     }
 
     /**
@@ -134,7 +136,7 @@ public class Human {
      */
     public String getSpouse() {
         if (this.spouse.size() != 0) return String.join(", ", this.spouse);
-        else return "---";
+        else return null;
     }
 
     /**
@@ -153,7 +155,7 @@ public class Human {
      */
     public String getChilds() {
         if (this.childs.size() != 0) return String.join(", ", this.childs);
-        else return "---";
+        else return null;
     }
 
     /**
@@ -196,15 +198,15 @@ public class Human {
         String dateOfDeath;
         if (this.getDateOfDeath() != null)
             dateOfDeath = this.getDateOfDeath().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        else dateOfDeath = "---";
-        return "ФИО: " + this.getFullName()
-                + ",\nпол: " + this.getGender()
-                + ",\nдаты рождения/смерти: "
+        else dateOfDeath = null;
+        return "\n__________\nФИО: " + this.getFullName()
+                + "\nпол: " + this.getGender()
+                + "\nдаты рождения/смерти: "
                 + this.getDateOfBirth().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
                 + " / " + dateOfDeath
-                + ",\nмать/отец: " + this.getMother() + ", " + this.getFather()
-                + ",\nсупруги: " + this.getSpouse()
-                + ",\nдети: " + this.getChilds();
+                + "\nмать/отец: " + this.getMother() + ", " + this.getFather()
+                + "\nсупруги: " + this.getSpouse()
+                + "\nдети: " + this.getChilds() + "\n__________\n";
     }
     // #endregion
 }
