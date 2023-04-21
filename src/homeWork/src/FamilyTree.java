@@ -5,46 +5,45 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FamilyTree implements GenealogicalTree {
-    private Map<Human, List<Human>> familyTree;
+public class FamilyTree<T extends Person<T>> implements GenealogicalTree<T> {
+    private Map<T, List<T>> familyTree;
 
     public FamilyTree() {
         this.familyTree = new HashMap<>();
     }
 
     @Override
-    public void addParent(Human parent, Human child) {
+    public void addParent(T parent, T child) {
         child.setParent(parent);
         if (familyTree.containsKey(parent)) {
             familyTree.get(parent).add(child);
         } else {
-            List<Human> children = new ArrayList<>();
+            List<T> children = new ArrayList<>();
             children.add(child);
             familyTree.put(parent, children);
         }
     }
 
     @Override
-    public void addSibling(Human sibling1, Human sibling2) {
-        if (!familyTree.containsKey(sibling1.getParent()) || !familyTree.containsKey(sibling2.getParent())) {
-            throw new IllegalArgumentException("Оба брата и сестра должны иметь одного родителя в семейном древе.");
+    public void addSibling(T sibling1, T sibling2) {
+        T parent = sibling1.getParent();
+        if (parent == null || !parent.equals(sibling2.getParent())) {
+            throw new IllegalArgumentException("У обоих братьев и сестер должен быть один и тот же родитель в семейном дереве.");
         }
-        List<Human> siblings = familyTree.get(sibling1.getParent());
-        if (!siblings.contains(sibling1) || !siblings.contains(sibling2)) {
-            throw new IllegalArgumentException("Оба брата и сестра должны иметь одного родителя в семейном древе.");
-        }
-        if (!sibling1.equals(sibling2) && !siblings.contains(sibling2)) {
-            siblings.add(sibling2);
-        }
+        addParent(parent, sibling2);
     }
 
     @Override
-    public List<Human> getChildren(Human parent) {
+    public List<T> getChildren(T parent) {
         if (familyTree.containsKey(parent)) {
             return familyTree.get(parent);
         } else {
             return null;
         }
     }
+    
 }
+
+
+
 

@@ -2,9 +2,9 @@ package homeWork.src;
 
 import java.util.List;
 
-public interface GenealogicalTree {
-    void addParent(Human parent, Human child);
-    void addSibling(Human sibling1, Human sibling2);
-    List<Human> getChildren(Human parent);
+public interface GenealogicalTree<T extends Person<T>> {
+    void addParent(T parent, T child);
+    void addSibling(T sibling1, T sibling2);
+    List<T> getChildren(T parent);
 }
 
