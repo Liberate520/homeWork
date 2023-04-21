@@ -1,8 +1,5 @@
-package Program;
+package person;
 
-import Saving.FileOutStr;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -121,10 +118,11 @@ public class Person extends Human implements Serializable {
     public String printBrothersOrSisters() {
         StringBuilder output = new StringBuilder();
         if (this.brothersOrSistersSet != null && this.brothersOrSistersSet.size() != 0) {
-            output.append("Brothers and sisters:" + "\n");
+            output.append("Brothers and sisters: ");
             for (Person person: this.brothersOrSistersSet) {
-                output.append(person.getFirstName() + " " + person.getLastName() + "\n");
+                output.append(person.getFirstName() + " " + person.getLastName() + "    ");
             }
+            output.append("\n");
         }
         return output.toString();
     }
@@ -132,10 +130,11 @@ public class Person extends Human implements Serializable {
     public String printChildren() {
         StringBuilder output = new StringBuilder();
         if (this.childrenSet != null && this.childrenSet.size() != 0) {
-            output.append("Children:" + "\n");
+            output.append("Children: ");
             for (Person child: this.childrenSet) {
-                output.append(child.getFirstName() + " " + child.getLastName() + "\n");
+                output.append(child.getFirstName() + " " + child.getLastName() + "    ");
             }
+            output.append("\n");
         }
         return output.toString();
     }

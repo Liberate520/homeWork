@@ -1,14 +1,17 @@
-package Program;
+package person;
 
 import java.io.Serializable;
 
 public class Human implements Serializable {
+    private static int count;
+    private int id;
     private String firstName;
     private String lastName;
     private int age;
     private Sex sex;
 
     public Human(String firstName, String lastName, int age, Sex sex) {
+        this.id = count++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -22,9 +25,10 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append("Name: " + this.firstName + " " + this.lastName + "\n");
-        output.append("Age: " + this.age + "\n");
-        output.append("Program.Sex: " + this.sex + "\n");
+        output.append("ID: " + this.id + "    ");
+        output.append("Name: " + this.firstName + " " + this.lastName + "    ");
+        output.append("Age: " + this.age + "    ");
+        output.append("Program.Sex: " + this.sex + "    " + "\n");
         return output.toString();
     }
 

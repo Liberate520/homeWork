@@ -1,11 +1,11 @@
-package Saving;
+package saving;
 
-import Program.FamilyTree;
-import Program.Person;
+import familyTree.FamilyTree;
+import person.Person;
 
 import java.io.IOException;
 
-public interface Saveable {
+public interface Savable {
     void saveFamilyTreeAs(FamilyTree familyTree, String path) throws IOException;
     FamilyTree getFamilyTreeFrom(String path) throws IOException, ClassNotFoundException;
 

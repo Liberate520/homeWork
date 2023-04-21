@@ -1,11 +1,11 @@
-package Saving;
+package saving;
 
-import Program.FamilyTree;
-import Program.Person;
+import familyTree.FamilyTree;
+import person.Person;
 
 import java.io.*;
 
-public class FileOutStr implements Saveable{
+public class FileOutStr implements Savable {
     @Override
     public void saveFamilyTreeAs(FamilyTree familyTree, String path) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(

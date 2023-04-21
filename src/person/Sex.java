@@ -1,4 +1,4 @@
-package Program;
+package person;
 
 import java.io.Serializable;
 
