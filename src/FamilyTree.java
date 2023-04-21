@@ -37,9 +37,13 @@ public class FamilyTree implements Serializable {
 
     public String getName() { return this.name; }
 
-    @Override
-    public String toString() {
-        return name + " | " + this.family.size() + " членов";
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append(" | ");
+        sb.append(family.size());
+        sb.append(" членов");
+        return sb.toString();
     }
 
     public HashSet<Kinsman> getFamily() {
@@ -48,7 +52,7 @@ public class FamilyTree implements Serializable {
 
     public void printFamily() {
         for (Kinsman kinsman: family) {
-            System.out.println(kinsman.toString());
+            System.out.println(kinsman.getInfo());
         }
     }
 

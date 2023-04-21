@@ -88,12 +88,31 @@ public class Kinsman implements Serializable {
         return this.setMother(parent);
     }
 
-    @Override
-    public String toString() {
-        String aliveStr = alive ? "жив" : "мёртв";
-        String familyStr = family == null ? "-" : family.getName();
+    public String getInfo() {
         Locale locale = new Locale("ru");
-        return familyStr + " " + name + " " + surName + " " + sex + " " + String.format(locale, "%tF", dateBirth) + " " + String.format(locale, "%tF", dateDeath) + " " + aliveStr;
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getFamilyInfo());
+        sb.append(" ");
+        sb.append(name);
+        sb.append(" ");
+        sb.append(surName);
+        sb.append(" ");
+        sb.append(sex);
+        sb.append(" ");
+        sb.append(String.format(locale, "%tF", dateBirth));
+        sb.append(" ");
+        sb.append(String.format(locale, "%tF", dateDeath));
+        sb.append(" ");
+        sb.append(this.getAliveInfo());
+        return sb.toString();
+    }
+
+    public String getAliveInfo() {
+        return alive ? "жив" : "мёртв";
+    }
+
+    public String getFamilyInfo() {
+        return family == null ? "-" : family.getName();
     }
 
     @Override
@@ -115,4 +134,5 @@ public class Kinsman implements Serializable {
             System.out.println(kinsman.toString());
         }
     }
+
 }
