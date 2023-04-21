@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Human{
+public class Human implements Serializable{
     private String firstName;
     private String lastName;
     private Calendar birthday = new GregorianCalendar();
