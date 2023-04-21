@@ -134,7 +134,7 @@ public class Human {
      */
     public String getSpouse() {
         if (this.spouse.size() != 0) return String.join(", ", this.spouse);
-        else return "---";
+        else return null;
     }
 
     /**
@@ -153,7 +153,7 @@ public class Human {
      */
     public String getChilds() {
         if (this.childs.size() != 0) return String.join(", ", this.childs);
-        else return "---";
+        else return null;
     }
 
     /**

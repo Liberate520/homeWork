@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class FamilyTree {
 
-    private LinkedHashMap<String, Human> wholeGenus;
+    LinkedHashMap<String, Human> wholeGenus;
 
     /**
      * Конструктор. Создаёт новое генеалогическое древо
@@ -20,28 +20,24 @@ public class FamilyTree {
      * @param human новый человек
      */
     public void addNewHuman(Human human) {
-        wholeGenus.putIfAbsent(human.getFullName(), human);
+        this.wholeGenus.putIfAbsent(human.getFullName(), human);
     }
 
     /**
      * Демонстрация всех членов древа
      */
-    public void showAll() {
+    public String showAll() {
+        String str = "";
         int id = 1;
         for (Map.Entry<String, Human> human: wholeGenus.entrySet()) {
-            System.out.printf("%d. %s\n__________\n", id, human.getValue());
+            str += String.format("%d. %s\n__________\n", id, human.getValue());
             id++;
         }
+        return "\n__________\n" + str + "\n";
     }
 
-    public void showHuman(String partFullName) {
-        int res = 0;
-        for (Map.Entry<String, Human> human: wholeGenus.entrySet()) {
-            if (human.getKey().contains(partFullName)){
-                System.out.printf("%s\n__________\n", human.getValue());
-                res ++;
-            }
-        }
-        if (res == 0) System.out.println("Такого человека не найдено.");
+    public Human searchHuman(String fullName) {
+        if (wholeGenus.containsKey(fullName)) return wholeGenus.get(fullName);
+        else return null;
     }
 }
