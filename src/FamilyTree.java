@@ -27,4 +27,22 @@ public class FamilyTree implements Serializable{
         }
         return res;
     }
-}
+
+    public void addMember(Human human, Human mother, Human father){
+        if(!familyMembers.contains(human)){
+            familyMembers.add(human);
+            if(mother!=null){
+                human.setMother(mother);
+                if(!mother.getChildren().contains(human)){
+                    mother.addChild(human);
+                }
+               }
+            if(father!=null){
+               human.setFather(father);
+               if(!father.getChildren().contains(human)){
+                    father.addChild(human);
+                }
+            }
+            }
+        }
+    }
