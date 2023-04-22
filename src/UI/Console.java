@@ -1,7 +1,5 @@
 package UI;
 
-import FamilyTree.FamilyTree;
-import Human.Human;
 import Presenter.Presenter;
 import UI.Commands.ChangeInfo.MenuChangeInfo;
 import UI.Commands.GetFamilyTree.MenuGetFamilyTree;
@@ -9,7 +7,6 @@ import UI.Commands.GetHumanInfo.MenuGetHumanInfo;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Console implements View {
@@ -17,16 +14,14 @@ public class Console implements View {
     private Scanner scanner;
     private boolean work;
     private Menu menu;
-    private FamilyTree<Human> tree;
     private MenuChangeInfo menuChangeInfo;
     private MenuGetFamilyTree menuGetFamilyTree;
     private MenuGetHumanInfo menuGetHumanInfo;
 
-    public Console(FamilyTree<Human> tree) {
+    public Console() {
         this.scanner = new Scanner(System.in);
         this.work = true;
         this.menu = new Menu(this);
-        this.tree = tree;
         this.menuChangeInfo = new MenuChangeInfo(this);
         this.menuGetFamilyTree = new MenuGetFamilyTree(this);
         this.menuGetHumanInfo = new MenuGetHumanInfo(this);
@@ -82,15 +77,11 @@ public class Console implements View {
         String motherName = scanner.nextLine();
         System.out.println("Введите фамилию матери: ");
         String motherSurname = scanner.nextLine();
-        Human mother = null;
-        if ((motherName != null) && (motherSurname != null)) mother = tree.getHuman(motherName, motherSurname);
         System.out.println("Введите имя отца: ");
         String fatherName = scanner.nextLine();
         System.out.println("Введите фамилию отца: ");
         String fatherSurname = scanner.nextLine();
-        Human father = null;
-        if ((fatherName != null) && (fatherSurname != null)) father = tree.getHuman(fatherName, fatherSurname);
-        presenter.addHuman(status, name, surname, birthDate, mother, father);
+        presenter.addHuman(status, name, surname, birthDate, motherName, motherSurname, fatherName, fatherSurname);
         System.out.printf("Человек %s %s добавлен\n", name, surname);
     }
 
@@ -113,7 +104,6 @@ public class Console implements View {
         this.presenter = presenter;
     }
 
-    //   Методы изменения информации
     public String enterName() {
         System.out.println("Введите имя учетной записи: ");
         String name = scanner.nextLine();
@@ -129,7 +119,7 @@ public class Console implements View {
     public void setStatus() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.println("Введите новый статус: ");
             String newStatus = scanner.nextLine();
             presenter.setStatus(name, surname, newStatus);
@@ -141,7 +131,7 @@ public class Console implements View {
     public void setName() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.println("Введите новое имя: ");
             String newName = scanner.nextLine();
             presenter.setName(name, surname, newName);
@@ -153,7 +143,7 @@ public class Console implements View {
     public void setSurname() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.println("Введите новую фамилию: ");
             String newSurname = scanner.nextLine();
             presenter.setSurname(name, surname, newSurname);
@@ -165,7 +155,7 @@ public class Console implements View {
     public void setBirthDate() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.println("Введите новую дату рождения в формате ГГГГ ММ ДД: ");
             String[] date = scanner.nextLine().split(" ");
             presenter.setBirthDate(name, surname, Integer.parseInt(date[0]), Integer.parseInt(date[1]),
@@ -178,7 +168,7 @@ public class Console implements View {
     public void setMother() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.println("Введите имя матери: ");
             String motherName = scanner.nextLine();
             System.out.println("Введите фамилию матери: ");
@@ -192,7 +182,7 @@ public class Console implements View {
     public void setFather() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.println("Введите имя отца: ");
             String fatherName = scanner.nextLine();
             System.out.println("Введите фамилию отца: ");
@@ -236,7 +226,7 @@ public class Console implements View {
     public void removeHuman() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             presenter.removeHuman(name, surname);
             System.out.printf("Запись %s %s удалена из генеалогического дерева\n", name, surname);
         } else {
@@ -259,7 +249,7 @@ public class Console implements View {
     public void getHuman() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.printf("Общие сведения о %s %s:", surname, name);
             System.out.println(presenter.getHuman(name, surname));
             System.out.print("дети: ");
@@ -272,7 +262,7 @@ public class Console implements View {
     public void getStatus() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.printf("%s %s. Статус: ", name, surname);
             System.out.println(presenter.getStatus(name, surname));
         } else {
@@ -283,7 +273,7 @@ public class Console implements View {
     public void getBirthDate() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.printf("%s %s. День рождения: ", name, surname);
             System.out.println(presenter.getBirthDate(name, surname));
         } else {
@@ -294,7 +284,7 @@ public class Console implements View {
     public void getMother() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.printf("%s %s. Мать: ", name, surname);
             System.out.println(presenter.getMother(name, surname));
         } else {
@@ -305,7 +295,7 @@ public class Console implements View {
     public void getFather() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.printf("%s %s. Отец: ", name, surname);
             System.out.println(presenter.getFather(name, surname));
         } else {
@@ -316,7 +306,7 @@ public class Console implements View {
     public void getChildren() {
         String name = enterName();
         String surname = enterSurname();
-        if (tree.containsOf(name, surname)) {
+        if (presenter.containsOf(name, surname)) {
             System.out.printf("%s %s. Дети: ", name, surname);
             System.out.println(presenter.getChildren(name, surname));
         } else {

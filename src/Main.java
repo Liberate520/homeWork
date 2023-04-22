@@ -71,8 +71,8 @@ public class Main {
             System.out.println(human);
         }*//*
 
-       *//* System.out.println(tree);
-        System.out.println("=====");
+       */ //System.out.println(tree.toString());
+        /*System.out.println("=====");
         service.sortByName();
         System.out.println(tree);
         System.out.println(tree.getHuman("Денис", "Мягков").getId());
@@ -81,14 +81,14 @@ public class Main {
         service.sortByID();
         for (Human human : tree) {
             System.out.printf("%d %s\n", human.getId(), human.getName());
-        }*/
-
+        }
+*/
 
         InOutTxt copy = new InOutTxt();
         FamilyTree <Human> tree = (FamilyTree) copy.loadData("tree");
         //FamilyTree<Human> tree = new FamilyTree<Human>();
         Service service = new Service(tree);
-        Console view = new Console(tree);
+        Console view = new Console();
         Presenter presenter = new Presenter(service, view);
         view.start();
     }

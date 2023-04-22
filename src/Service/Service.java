@@ -94,18 +94,22 @@ public class Service {
     }
 
     public Human getMother(String name, String surname) {
-        return (Human)familyTree.getHuman(name, surname).getMother();
+        return (Human) familyTree.getHuman(name, surname).getMother();
     }
 
     public Human getFather(String name, String surname) {
-        return (Human)familyTree.getHuman(name, surname).getFather();
+        return (Human) familyTree.getHuman(name, surname).getFather();
     }
 
     /*public HashSet <Human> getChildren(String name, String surname) {
         return (HashSet<Human>) familyTree.getHuman(name, surname).getChildren();
     }*/
 
-    public HashSet <Human> getChildren(String name, String surname) {
+    public HashSet<Human> getChildren(String name, String surname) {
         return familyTree.getAllChildren(name, surname);
+    }
+
+    public boolean containsOf(String name, String surname) {
+        return familyTree.containsOf(name, surname);
     }
 }

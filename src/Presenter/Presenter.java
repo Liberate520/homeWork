@@ -1,13 +1,10 @@
 package Presenter;
 
-import FamilyTree.FamilyTree;
-import Human.Human;
 import Service.Service;
 import UI.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashSet;
 
 public class Presenter {
     private Service service;
@@ -19,13 +16,15 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public FamilyTree getFamilyTree(){
-        return service.getFamilyTree();
+    public String getFamilyTree() {
+        return service.getFamilyTree().toString();
 
     }
 
-    public void addHuman(String status, String name, String surname, LocalDate birthDate, Human mother, Human father) {
-        service.addHuman(status, name, surname, birthDate, mother, father);
+    public void addHuman(String status, String name, String surname, LocalDate birthDate, String motherName,
+                         String motherSurname, String fatherName, String fatherSurname) {
+        service.addHuman(status, name, surname, birthDate, service.getHuman(motherName, motherSurname),
+                service.getHuman(fatherName, fatherSurname));
     }
 
     public void saveChanges() throws IOException {
@@ -56,15 +55,15 @@ public class Presenter {
         service.setFather(name, surname, fatherName, fatherSurname);
     }
 
-    public void sortByName(){
+    public void sortByName() {
         service.sortByName();
     }
 
-    public void sortByBirthDate(){
+    public void sortByBirthDate() {
         service.sortByBirthDate();
     }
 
-    public void sortByID(){
+    public void sortByID() {
         service.sortByID();
     }
 
@@ -72,9 +71,9 @@ public class Presenter {
         service.removeHuman(name, surname);
     }
 
-    public Human getHuman(String name, String surname) {
-        return service.getHuman(name, surname);
-}
+    public String getHuman(String name, String surname) {
+        return service.getHuman(name, surname).toString();
+    }
 
     public String getStatus(String name, String surname) {
         return service.getStatus(name, surname);
@@ -84,16 +83,19 @@ public class Presenter {
         return service.getBirthDate(name, surname);
     }
 
-    public Human getMother(String name, String surname) {
-        return service.getMother(name, surname);
+    public String getMother(String name, String surname) {
+        return service.getMother(name, surname).toString();
     }
 
-    public Human getFather(String name, String surname) {
-        return service.getFather(name, surname);
+    public String getFather(String name, String surname) {
+        return service.getFather(name, surname).toString();
     }
 
-    public HashSet<Human> getChildren(String name, String surname) {
-        return service.getChildren(name, surname);
+    public String getChildren(String name, String surname) {
+        return service.getChildren(name, surname).toString();
     }
 
+    public boolean containsOf(String name, String surname) {
+        return service.containsOf(name, surname);
+    }
 }
