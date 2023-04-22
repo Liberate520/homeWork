@@ -1,8 +1,8 @@
 package io;
 
-import geotree.GeoTree;
-
 import java.io.*;
+
+import geotree.GeoTree;
 
 public class GeoTreeIO implements Writable, Readable{
     public void write(GeoTree geo) throws IOException {

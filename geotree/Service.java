@@ -13,7 +13,7 @@ public class Service {
     private GeoTreeIO gtio;
     private GeoTree gt;
     private ArrayList<Person> tree;
-     public Service(GeoTreeIO gtio, GeoTree gt){
+    public Service(GeoTreeIO gtio, GeoTree gt){
         this.gtio = gtio;
         this.gt = gt;
         this.tree = gt.getTree();

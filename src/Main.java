@@ -1,5 +1,5 @@
-import geotree.GeoTree;
 import io.GeoTreeIO;
+import geotree.GeoTree;
 import geotree.Service;
 import person.Gender;
 import person.Person;
