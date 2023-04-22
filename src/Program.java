@@ -8,15 +8,15 @@ import java.io.Serializable;
 public class Program implements Serializable{
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree tree = new FamilyTree();
-        Human h1 = new Human("Natalia");
-        Human h2 = new Human("Timur");
+        Human h1 = new Human("Natalia", 1966);
+        Human h2 = new Human("Timur", 1965);
         tree.addMember(h1);
         tree.addMember(h2);
         //tree.showAllMembers();
         
-        Human h3 = new Human("Liza");
+        Human h3 = new Human("Liza", 1991, h1, h2);
         tree.addMember(h3);
-        Human h4 = new Human("Lenya");
+        Human h4 = new Human("Lenya", 2015, h1, h2);
         tree.addMember(h4);
         //tree.showAllMembers();
         h1.addChild(h3);

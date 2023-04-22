@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable {
     private List<Human> familyMembers;
 
     public FamilyTree() {
@@ -31,5 +32,11 @@ public class FamilyTree implements Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public Iterator iterator() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }
 }
