@@ -99,4 +99,3 @@ public class ConsoleUserInterface<T extends Person<T>> implements UserInterface<
         }
     }
 }
-    

@@ -1,11 +1,13 @@
 package com.homeWork.familytreeapp.model;
 
+import com.homeWork.familytreeapp.repository.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FamilyTree<T extends Person<T>> implements GenealogicalTree<T> {
+public class FamilyTree<T> implements Repository<T> {
     private Map<T, List<T>> familyTree;
 
     public FamilyTree() {
@@ -14,7 +16,6 @@ public class FamilyTree<T extends Person<T>> implements GenealogicalTree<T> {
 
     @Override
     public void addParent(T parent, T child) {
-        child.setParent(parent);
         if (familyTree.containsKey(parent)) {
             familyTree.get(parent).add(child);
         } else {
@@ -26,24 +27,15 @@ public class FamilyTree<T extends Person<T>> implements GenealogicalTree<T> {
 
     @Override
     public void addSibling(T sibling1, T sibling2) {
-        T parent = sibling1.getParent();
-        if (parent == null || !parent.equals(sibling2.getParent())) {
-            throw new IllegalArgumentException("У обоих братьев и сестер должен быть один и тот же родитель в семейном дереве.");
+        List<T> parentChildren = getChildren(sibling1);
+        if (parentChildren == null || !parentChildren.contains(sibling1)) {
+            throw new IllegalArgumentException("Не найден общий родитель для братьев и сестер.");
         }
-        addParent(parent, sibling2);
+        addParent(parentChildren.get(0), sibling2);
     }
 
     @Override
     public List<T> getChildren(T parent) {
-        if (familyTree.containsKey(parent)) {
-            return familyTree.get(parent);
-        } else {
-            return null;
-        }
+        return familyTree.get(parent);
     }
-    
 }
-
-
-
-
