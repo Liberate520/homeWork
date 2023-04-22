@@ -28,7 +28,7 @@ public class Human implements Serializable {
         output.append("ID: " + this.id + "    ");
         output.append("Name: " + this.firstName + " " + this.lastName + "    ");
         output.append("Age: " + this.age + "    ");
-        output.append("Program.Sex: " + this.sex + "    " + "\n");
+        output.append("Sex: " + this.sex + "    " + "\n");
         return output.toString();
     }
 
@@ -62,5 +62,9 @@ public class Human implements Serializable {
 
     public Sex getSex() {
         return sex;
+    }
+
+    public int getId() {
+        return id;
     }
 }

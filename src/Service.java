@@ -4,6 +4,7 @@ import person.Relation;
 import person.Sex;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Service {
@@ -41,19 +42,27 @@ public class Service {
                 case Mother: activeTree.pushMotherToSet(targetPerson, person); break;
                 case Brother: activeTree.pushBrotherToSet(targetPerson, person); break;
                 case Sister: activeTree.pushSisterToSet(targetPerson, person); break;
-                case Son: activeTree.pushBrotherToSet(targetPerson, person); break;
-                case Daughter: activeTree.pushSisterToSet(targetPerson, person); break;
+                case Son: activeTree.pushSonToSet(targetPerson, person); break;
+                case Daughter: activeTree.pushDaughterToSet(targetPerson, person); break;
             }
         }
     }
 
-    public Person getPerson (String firstName, String lastName) {
+    public Person getPerson(String firstName, String lastName) {
         for (Person item: activeTree) {
             if (item.getFirstName().equals(firstName) && item.getLastName().equals(lastName)) {
                 return item;
             }
         }
         return null;
+    }
+
+    public String getInfo(String firstName, String lastName, Relation relation) {
+        return activeTree.getInfo(firstName, lastName, relation);
+    }
+
+    public String getInfo(String firstName, String lastName) {
+        return activeTree.getInfo(firstName, lastName);
     }
 
     public String getTreeInfo(){
@@ -67,11 +76,27 @@ public class Service {
         return output.toString();
     }
 
-//    public void sortByName(){
-//        activeTree.sortByName();
-//    }
-//
-//    public void sortByAge(){
-//        activeTree.sortByAge();
-//    }
+    public void printSortByLastName(){
+        List<Person> personList = activeTree.getListSortByLastName();
+        for (Person person: personList) {
+            System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
+                    " " + person.getLastName() + " " + person.getAge());
+        }
+    }
+
+    public void printSortByFirstName(){
+        List<Person> personList = activeTree.getListSortByFirstName();
+        for (Person person: personList) {
+            System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
+                    " " + person.getLastName() + " " + person.getAge());
+        }
+    }
+
+    public void printSortByAge(){
+        List<Person> personList = activeTree.getListSortByAge();
+        for (Person person: personList) {
+            System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
+                    " " + person.getLastName() + " " + person.getAge());
+        }
+    }
 }

@@ -3,12 +3,14 @@ package familyTree;
 import person.Person;
 import person.Relation;
 import person.Sex;
+import person.comparators.PersonComparatorByFirstName;
+import person.comparators.PersonComparatorByLastName;
+import person.comparators.PersonComparatorByAge;
 import saving.FileOutStr;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 public class FamilyTree implements Serializable, Iterable<Person> {
     private HashSet<Person> personsSet;
@@ -102,6 +104,28 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
+    public void pushSonToSet(Person person, Person son) {
+        if (son != null) {
+            person.addChildren(son);
+            Person spouse = person.getSpouse();
+            if (spouse != null) {
+                spouse.addChildren(son);
+            }
+            pushChildrenToSet(person);
+        }
+    }
+
+    public void pushDaughterToSet(Person person, Person daughter) {
+        if (daughter != null) {
+            person.addChildren(daughter);
+            Person spouse = person.getSpouse();
+            if (spouse != null) {
+                spouse.addChildren(daughter);
+            }
+            pushChildrenToSet(person);
+        }
+    }
+
     private void pushChildrenToSet(Person person) {
         HashSet<Person> childrenSet = person.getChildrenSet();
         if (childrenSet != null && childrenSet.size() == 1) {
@@ -116,8 +140,8 @@ public class FamilyTree implements Serializable, Iterable<Person> {
             Iterator<Person> iterator = childrenSet.iterator();
             while (iterator.hasNext()) {
                 Person item = iterator.next();
-                item.setMother(person.getMother());
-                item.setFather(person.getFather());
+                item.setMother(person.getSpouse());
+                item.setFather(person);
                 HashSet<Person> copyChildrenSet = new HashSet<>(childrenSet);
                 copyChildrenSet.remove(item);
                 item.addBrotherOrSisterSet(copyChildrenSet);
@@ -244,7 +268,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return "Запись отсутствует." + "\n";
     }
 
-    public String getInfo (String firstName, String lastName){
+    public String getInfo(String firstName, String lastName){
         StringBuilder output = new StringBuilder();
         Iterator<Person> iterator = personsSet.iterator();
         while (iterator.hasNext()) {
@@ -256,7 +280,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return output.append("Запись отсутствует.").toString();
     }
 
-    public Person getPerson (String firstName, String lastName) {
+    public Person getPerson(String firstName, String lastName) {
         Iterator<Person> iterator = personsSet.iterator();
         while (iterator.hasNext()) {
             Person item = iterator.next();
@@ -283,8 +307,26 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return format.getPersonFrom(path);
     }
 
+    public List<Person> getListSortByFirstName(){
+        List<Person> personList = new ArrayList<>(personsSet);
+        personList.sort(new PersonComparatorByFirstName());
+        return personList;
+    }
+
+    public List<Person> getListSortByLastName(){
+        List<Person> personList = new ArrayList<>(personsSet);
+        personList.sort(new PersonComparatorByLastName());
+        return personList;
+    }
+
+    public List<Person> getListSortByAge(){
+        List<Person> personList = new ArrayList<>(personsSet);
+        personList.sort(new PersonComparatorByAge());
+        return personList;
+    }
+
     @Override
-    public String toString () {
+    public String toString() {
         StringBuilder output = new StringBuilder();
         output.append("All records of Family Tree:" + "\n");
         output.append("##################################" + "\n");

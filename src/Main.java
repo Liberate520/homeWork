@@ -1,4 +1,3 @@
-import familyTree.FamilyTree;
 import person.Person;
 import person.Relation;
 import person.Sex;
@@ -10,17 +9,23 @@ public class Main {
 
         Service service = new Service();
         service.addPerson("Василий", "Лежебоков", 32, Sex.Male);
-//        service.addPerson("Константин", "Костров", 35, Sex.Male);
         System.out.println(service.getTreeInfo());
 
         service.addPersonAs("Василиса", "Лежебокова", 27, Sex.Female, "Василий", "Лежебоков", Relation.Spouse);
         service.addPersonAs("Анатолий", "Лежебоков", 57, Sex.Male, "Василий", "Лежебоков", Relation.Father);
         service.addPersonAs("Анна", "Лежебокова", 53, Sex.Female, "Василий", "Лежебоков", Relation.Mother);
-        service.addPersonAs("Мария", "Лежебокова", 25, Sex.Female, "Василий", "Лежебоков", Relation.Sister);
-        service.addPersonAs("Роман", "Лежебоков", 29, Sex.Male, "Василий", "Лежебоков", Relation.Brother);
-
-
+        service.addPersonAs("Мария", "Кузьмина", 25, Sex.Female, "Василий", "Лежебоков", Relation.Sister);
+        service.addPersonAs("Роман", "Билан", 29, Sex.Male, "Василий", "Лежебоков", Relation.Brother);
+        service.addPersonAs("Петр", "Лежебоков", 7, Sex.Male, "Василий", "Лежебоков", Relation.Son);
+        service.addPersonAs("Ирина", "Лежебокова", 5, Sex.Female, "Василий", "Лежебоков", Relation.Daughter);
         System.out.println(service.getTreeInfo());
+        System.out.println();
+        System.out.println(service.getInfo("Петр", "Лежебоков", Relation.Father));
+        service.printSortByAge();
+        System.out.println();
+        service.printSortByLastName();
+        System.out.println();
+        service.printSortByFirstName();
 
 
 
