@@ -1,4 +1,4 @@
-package homeWork.src;
+package com.homeWork.familytreeapp.model;
 
 import java.util.List;
 

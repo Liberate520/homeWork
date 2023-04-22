@@ -1,4 +1,4 @@
-package homeWork.src;
+package com.homeWork.familytreeapp.model;
 
 public class Human implements Person<Human> {
     private String name;

@@ -1,19 +1,27 @@
-package homeWork.src;
+package com.homeWork.familytreeapp.view;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class UserInterface<T extends Person<T>> {
-    private GenealogicalTree<T> familyTree;
+import com.homeWork.familytreeapp.model.Person;
+import com.homeWork.familytreeapp.presenter.FamilyTreePresenter;
+
+public class ConsoleUserInterface<T extends Person<T>> implements UserInterface<T> {
+    private FamilyTreePresenter<T> presenter;
     private Scanner scanner;
     private T parentTemplate;
 
-    public UserInterface(GenealogicalTree<T> familyTree, T parentTemplate) {
-        this.familyTree = familyTree;
+    public ConsoleUserInterface(T parentTemplate) {
         this.scanner = new Scanner(System.in);
         this.parentTemplate = parentTemplate;
     }
 
+    @Override
+    public void setPresenter(FamilyTreePresenter<T> presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
     public void run() {
         int choice;
         while (true) {
@@ -41,7 +49,6 @@ public class UserInterface<T extends Person<T>> {
             }
         }
     }
-    
 
     private void addParent() {
         System.out.print("Введите имя, возраст и пол родителя (через пробел): ");
@@ -52,7 +59,7 @@ public class UserInterface<T extends Person<T>> {
         String[] childInfo = scanner.nextLine().trim().split(" ");
         T child = parentTemplate.createNewInstance(childInfo[0], Integer.parseInt(childInfo[1]), childInfo[2]);
 
-        familyTree.addParent(parent, child);
+        presenter.addParent(parent, child);
         System.out.println("Родитель успешно добавлен.");
     }
 
@@ -60,30 +67,28 @@ public class UserInterface<T extends Person<T>> {
         System.out.print("Введите имя родителя, возраст и пол (через пробел): ");
         String[] parentInfo = scanner.nextLine().trim().split(" ");
         T parent = parentTemplate.createNewInstance(parentInfo[0], Integer.parseInt(parentInfo[1]), parentInfo[2]);
-    
+
         System.out.print("Введите имя, возраст и пол первого брата или сестры (через пробел): ");
         String[] sibling1Info = scanner.nextLine().trim().split(" ");
         T sibling1 = parentTemplate.createNewInstance(sibling1Info[0], Integer.parseInt(sibling1Info[1]), sibling1Info[2]);
         sibling1.setParent(parent);
-    
+
         System.out.print("Введите имя, возраст и пол второго брата или сестры (через пробел): ");
         String[] sibling2Info = scanner.nextLine().trim().split(" ");
         T sibling2 = parentTemplate.createNewInstance(sibling2Info[0], Integer.parseInt(sibling2Info[1]), sibling2Info[2]);
         sibling2.setParent(parent);
-    
-        familyTree.addParent(parent, sibling1);
-        familyTree.addParent(parent, sibling2);
+
+        presenter.addParent(parent, sibling1);
+        presenter.addParent(parent, sibling2);
         System.out.println("Брат и сестра успешно добавлены.");
     }
     
-    
-
     private void getChildren() {
         System.out.print("Введите имя, возраст и пол родителя (через пробел): ");
         String[] parentInfo = scanner.nextLine().trim().split(" ");
         T parent = parentTemplate.createNewInstance(parentInfo[0], Integer.parseInt(parentInfo[1]), parentInfo[2]);
-
-        List<T> children = familyTree.getChildren(parent);
+    
+        List<T> children = presenter.getChildren(parent);
         if (children != null) {
             System.out.println("Дети:");
             for (T child : children) {
@@ -94,6 +99,4 @@ public class UserInterface<T extends Person<T>> {
         }
     }
 }
-
-
-
+    

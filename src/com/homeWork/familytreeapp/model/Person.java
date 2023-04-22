@@ -1,4 +1,4 @@
-package homeWork.src;
+package com.homeWork.familytreeapp.model;
 
 public interface Person<T extends Person<T>> {
     String getName();
