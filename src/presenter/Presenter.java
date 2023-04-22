@@ -18,8 +18,6 @@ import java.util.List;
 public class Presenter {
     public View view;
     public Service service;
-    public Console console;
-    public Person person;
     public Presenter(View view, Service service) {
         this.service = service;
         this.view = view;
