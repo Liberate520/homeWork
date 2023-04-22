@@ -1,15 +1,16 @@
 import java.io.*;
 
-public class OutAndInputInfo {
+public class OutAndInputInfo implements Serializable{
 
     private ObjectOutputStream objectOutputStream = null;
     private ObjectInputStream objectInputStream = null;
 
-    public void WriteInfo(Serializable inputObject){
+    public void WriteInfo(Serializable inputObject, String fileName){
+
 
         try {
             objectOutputStream = new ObjectOutputStream(
-                    new FileOutputStream(inputObject.toString()));
+                    new FileOutputStream(fileName));
             objectOutputStream.writeObject(inputObject);
             objectOutputStream.close();
         } catch (IOException e) {

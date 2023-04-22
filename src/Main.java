@@ -20,5 +20,12 @@ public class Main {
         System.out.println(human1.getFather());
         System.out.println(human2.getChildren());
 
+        Human human6 = new Human("Захар", "Давыдов","male");
+        familyTree.saveHuman(human6);
+        Human human7 = familyTree.readHuman("Захар");
+
+        System.out.println("++++++++++");
+        System.out.println(human7);
+
     }
 }

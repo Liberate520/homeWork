@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
     private List<Human> humans = new ArrayList<Human>();
     private OutAndInputInfo outAndInputInfo =new OutAndInputInfo();
 
@@ -24,11 +24,12 @@ public class FamilyTree {
         return human.toString();
     }
 
-    public void WriteHumanInfo(Serializable inputHuman){
-        outAndInputInfo.WriteInfo(inputHuman);
+    public void saveHuman(Human inputHuman){
+        String name = inputHuman.getName();
+        outAndInputInfo.WriteInfo(inputHuman, name);
     }
 
-    public Human ReadHumanInfo(String name){
+    public Human readHuman(String name){
         return outAndInputInfo.ReadInfo(name);
     }
 }
