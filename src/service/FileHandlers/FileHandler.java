@@ -1,10 +1,11 @@
-package service;
+package service.FileHandlers;
 
 import family.FamilyTree;
+import units.Unit;
 
 import java.io.*;
 
-public class FileHandler implements Writable, Readable {
+public class FileHandler<T extends Unit> implements Writable, Readable {
     @Override
     public void save(Object obj, String path) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
@@ -14,10 +15,12 @@ public class FileHandler implements Writable, Readable {
     }
 
     @Override
-    public FamilyTree read(String path) throws IOException, ClassNotFoundException {
+    public FamilyTree<T> read(
+            String path) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(path));
-        FamilyTree treeRestore = (FamilyTree) objectInputStream.readObject();
+        FamilyTree<T> treeRestore =
+                (FamilyTree<T>) objectInputStream.readObject();
         objectInputStream.close();
         return treeRestore;
     }

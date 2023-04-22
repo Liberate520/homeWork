@@ -1,45 +1,45 @@
 package family;
 
-import humans.Human;
-import service.HumanComparatorByAge;
-import service.HumanComparatorByName;
-import service.Writable;
+import units.UnitComparatorByAge;
+import units.UnitComparatorByName;
+import service.FileHandlers.Writable;
+import units.Unit;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree<T extends Unit> implements Serializable, Iterable<T> {
+    private List<T> currentList;
+
 
     public FamilyTree() {
-        this.humanList = new ArrayList<>();
+        this.currentList = new ArrayList<>();
     }
 
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
+    public FamilyTree(List<T> currentList) {
+        this.currentList = currentList;
     }
 
-    public void add(Human human) {
-        if (human != null) {
-            if (!humanList.contains(human)) {
-                humanList.add(human);
-                if (human.getMother() != null) {
-                    human.getMother().addChild(human);
+    public void add(T unit) {
+        if (unit != null) {
+            if (!currentList.contains(unit)) {
+                currentList.add(unit);
+                if (unit.getMother() != null) {
+                    unit.getMother().addChild(unit);
                 }
-                if (human.getFather() != null) {
-                    human.getFather().addChild(human);
+                if (unit.getFather() != null) {
+                    unit.getFather().addChild(unit);
                 }
             }
         }
     }
 
-    public Human getByName(String name) {
-        for (Human human : humanList) {
-            if (human.getFullName().equals(name)) return human;
+    public T getByName(String name) {
+        for (T unit : currentList) {
+            if (unit.getName().equals(name)) return unit;
         }
         return null;
     }
@@ -47,10 +47,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String getInfo() {
         StringBuilder str = new StringBuilder();
         str.append("В дереве: ");
-        str.append(humanList.size());
+        str.append(currentList.size());
         str.append(" объект(ов).\n");
-        for (Human human : humanList) {
-            str.append(human.getRelatives());
+        for (T unit : currentList) {
+            str.append(unit.getRelatives());
             str.append("\n");
         }
         return str.toString();
@@ -61,15 +61,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return humanList.iterator();
+    public Iterator<T> iterator() {
+        return currentList.iterator();
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        currentList.sort(new UnitComparatorByName());
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        currentList.sort(new UnitComparatorByAge());
     }
 }

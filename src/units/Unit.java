@@ -1,22 +1,20 @@
-package humans;
+package units;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Human implements Serializable {
-    private Human mother, father;
-    private String firstName, secondName;
+public class Unit implements Serializable {
+    private Unit mother, father;
+    private String firstName;
     private Gender gender;
     private LocalDate birthDate;
-    private List<Human> children;
+    private List<Unit> children;
 
-
-    public Human(String firstName, String secondName, Human mother,
-                 Human father, Gender gender, int birthday, int birthmonth,
-                 int birthyear) {
+    public Unit(String firstName, Unit mother, Unit father, Gender gender,
+                int birthday, int birthmonth, int birthyear) {
         this.firstName = firstName;
-        this.secondName = secondName;
         this.gender = gender;
         this.birthDate = LocalDate.of(birthyear, birthmonth, birthday);
         this.mother = mother;
@@ -24,13 +22,7 @@ public class Human implements Serializable {
         this.children = new ArrayList<>();
     }
 
-    public Human(String firstName, String secondName, Gender gender,
-                 int birthday, int birthmonth, int birthyear) {
-        this(firstName, secondName, null, null, gender, birthday, birthmonth,
-             birthyear);
-    }
-
-    public void addParent(Human parent) {
+    public void addParent(Unit parent) {
         if (parent.gender.equals(Gender.Male)) {
             if (this.father == null) this.father = parent;
             else System.out.println("Отец уже определен.");
@@ -40,7 +32,7 @@ public class Human implements Serializable {
         }
     }
 
-    public void addChild(Human child) {
+    public void addChild(Unit child) {
         if (!this.children.contains(child)) {
             this.children.add(child);
             if (this.gender.equals(Gender.Male)) {
@@ -49,18 +41,18 @@ public class Human implements Serializable {
         }
     }
 
-    public Human getFather() {
+    public Unit getFather() {
         return father;
     }
 
-    public Human getMother() {
+    public Unit getMother() {
         return mother;
     }
 
     public String getMotherInfo() {
         String res = "мать: ";
         if (this.mother != null) {
-            res += this.getMother().getFullName();
+            res += this.getMother().getName();
         } else res += "неизвестна";
         return res;
     }
@@ -68,7 +60,7 @@ public class Human implements Serializable {
     public String getFatherInfo() {
         String res = "отец: ";
         if (this.father != null) {
-            res += this.getFather().getFullName();
+            res += this.getFather().getName();
         } else res += "неизвестен";
         return res;
     }
@@ -77,8 +69,8 @@ public class Human implements Serializable {
         StringBuilder str = new StringBuilder();
         str.append("дети: ");
         if (!this.children.isEmpty()) {
-            for (Human child : children) {
-                str.append(child.getFullName());
+            for (Unit child : children) {
+                str.append(child.getName());
                 str.append(", ");
             }
         } else str.append("отсутствуют");
@@ -88,7 +80,7 @@ public class Human implements Serializable {
     public String getRelatives() {
         StringBuilder str = new StringBuilder();
         str.append("Информация о: ");
-        str.append(this.getFullName());
+        str.append(this.getName());
         str.append(":\n\t");
         str.append(this.getMotherInfo());
         str.append(", ");
@@ -101,13 +93,13 @@ public class Human implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Human)) return false;
-        Human human = (Human) obj;
-        return human.getFullName().equals(this.getFullName());
+        if (!(obj instanceof Unit)) return false;
+        Unit unit = (Unit) obj;
+        return unit.getName().equals(this.getName());
     }
 
-    public String getFullName() {
-        return firstName + " " + secondName;
+    public String getName() {
+        return firstName;
     }
 
     public boolean isAnOrhan() {
