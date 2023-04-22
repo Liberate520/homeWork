@@ -1,12 +1,16 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private Human mother;
     private Human father;
     private List<Human> children = new ArrayList<>();
     
+    public Human() {
+
+    }
     public Human(String name) {
         this.name = name;
     }
