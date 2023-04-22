@@ -36,7 +36,13 @@ public class Human implements Serializable {
         }
     }
 
-    
+    public String getFather() {
+        if (father != null) {
+            return father.getName();
+        } else {
+            return "не указан";
+        }
+    }
 
     public void addChild(Human human) {
         children.add(human);
@@ -47,6 +53,6 @@ public class Human implements Serializable {
     }
 
     public String toString() {
-        return "Имя: " + name + ", год рождения: " + birthYear + ", мать: " + getMother();
+        return "Имя: " + name + ", год рождения: " + birthYear + ", мать: " + getMother() + ", отец: " + getFather();
     }
 }
