@@ -1,24 +1,33 @@
 package familyTree;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class Main {
     public static void main(String[] args) {
         FamilyTree newTree = new FamilyTree();
-        newTree.addNewHuman(new Human("Иванов", "Пётр", "Николаевич",
-                Gender.male, "31.03.1973", "",
-                "Иванова Анна Ивановна", "Иванов Николай Васильевич",
-                "Иванова Елена Степановна",
-                "Сидорова Мария Петровна, Петрова Ольга Петровна"));
-        newTree.addNewHuman(new Human("Сидорова", "Мария", "Петровна",
-                Gender.female, "04.11.1994", "",
-                "Иванова Елена Степановна", "Иванов Пётр Николаевич",
-                "Сидоров Павел Константинович",
-                "Сидоров Семён Павлович, Сидорова Елизавета Павловна"));
-        newTree.addNewHuman(new Human("Петрова", "Ольга", "Петровна",
-                Gender.female, "21.05.1997", "",
-                "Иванова Елена Степановна", "Иванов Пётр Николаевич",
-                "Петров Александр Максимович",
-                "Петрова Ксения Александровна, Петрова Вера Александровна"));
-        System.out.print(newTree.searchHuman("Петрова Ольга Петровна"));
+
+        newTree.addNewHuman(new Human("Петров Пётр Петрович", Gender.male,
+                "31.03.1973", "",
+                "Петрова Ольга Александровна", "Петров Пётр Иванович",
+                "Петрова Анастасия Валерьевна",
+                "Петров Константин Петрович"));
+
+        newTree.addNewHuman(new Human("Петров Константин Петрович", Gender.male,
+                "04.11.1994", "",
+                "Петрова Лидия Константиновна", "Петров Пётр Петрович",
+                "Петрова Мария Фёдоровна",
+                ""));
+
         System.out.println(newTree.showAll());
+        try {
+            ObjectOutputStream objOS = new ObjectOutputStream(new FileOutputStream("familyTree.ser"));
+            objOS.writeObject(newTree);
+            objOS.close();
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

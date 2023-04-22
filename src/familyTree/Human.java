@@ -1,17 +1,18 @@
 package familyTree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class Human {
+public class Human implements Serializable {
 
-    private String lastName;
-    private String firstName;
-    private String middleName;
+    private String fullName;
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
@@ -24,24 +25,20 @@ public class Human {
 
     /**
      * Конструктор, принимающий все аргументы
-     * @param lastName фамилия
-     * @param firstName имя
-     * @param middleName отчество
+     * @param fullName строка вида Фамилия Имя Отчество
      * @param gender пол
      * @param dateOfBirth дата рождения строка вида дд.мм.гггг
      * @param dateOfDeath дата смерти строка вида дд.мм.гггг
-     * @param mother строка с именем матери вида ФИО
-     * @param father строка с именем отца вида ФИО
-     * @param spouse строка с именами супругов вида ФИО, через запятую
-     * @param childs строка с именами детей вида ФИО, через запятую
+     * @param mother имя матери строка вида Фамилия Имя Отчество
+     * @param father имя отца строка вида Фамилия Имя Отчество
+     * @param spouse имена супругов строка вида Фамилия Имя Отчество, через запятую
+     * @param childs имена детей строка вида Фамилия Имя Отчество, через запятую
      */
-    public Human(String lastName, String firstName, String middleName,
-                 Gender gender, String dateOfBirth, String dateOfDeath,
+    public Human(String fullName, Gender gender,
+                 String dateOfBirth, String dateOfDeath,
                  String mother, String father,
                  String spouse, String childs) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
+        this.fullName = fullName;
         this.gender = gender;
 
         this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
@@ -50,8 +47,8 @@ public class Human {
         }
         else this.dateOfDeath = null;
 
-        this.mother = FamilyTree.searchHuman(mother);
-        this.father = FamilyTree.searchHuman(father);
+        this.mother = new Human(mother);
+        this.father = new Human(father);
 
         if (!spouse.equals("")) this.spouse = new ArrayList<>(Arrays.asList(spouse.split(", ")));
         else this.spouse = new ArrayList<>();
@@ -59,6 +56,15 @@ public class Human {
         if (!childs.equals("")) this.childs = new ArrayList<>(Arrays.asList(childs.split(", ")));
         else this.childs = new ArrayList<>();
     }
+
+    /**
+     * Конструктор принимающий только ФИО
+     * @param fullName имя строка вида Фамилия Имя Отчество
+     */
+    public Human(String fullName) {
+        this.fullName = fullName;
+    }
+
     // #endregion
 
     // #region getter and setter
@@ -68,7 +74,7 @@ public class Human {
      * @return строка вида Фамилия Имя Отчество
      */
     public String getFullName() {
-        return String.format("%s %s %s", this.lastName, this.firstName, this.middleName);
+        return this.fullName;
     }
 
     /**
@@ -111,6 +117,15 @@ public class Human {
      */
     public void setDateOfDeath(String dateOfDeath) {
         this.dateOfDeath = LocalDate.parse(dateOfDeath, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+    }
+
+    /**
+     * Расчёт возраста
+     * @return число лет
+     */
+    public int getAge(){
+        return Period.between(this.dateOfBirth,
+                Objects.requireNonNullElseGet(this.dateOfDeath, LocalDate::now)).getYears();
     }
 
     /**
@@ -176,7 +191,7 @@ public class Human {
         final int mod = 31;
         int res = 1;
         res = mod * res + (this.getFullName() == null ? 0 : this.getFullName().hashCode());
-        res = mod * res + (this.getDateOfBirth() == null ? 0 : this.getDateOfBirth().hashCode());
+        res = mod * res * (this.getDateOfBirth() == null ? 0 : this.getDateOfBirth().hashCode());
         return res;
     }
 

@@ -1,17 +1,22 @@
 package familyTree;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
-    private static LinkedHashMap<String, Human> wholeGenus;
+    @Serial
+    private static final long serialVersionUID = 6042495868907328366L;
+    private Map<String, Human> wholeGenus;
+    private Human human;
 
     /**
      * Конструктор. Создаёт новое генеалогическое древо
      */
     public FamilyTree() {
-        wholeGenus = new LinkedHashMap<>();
+        this.wholeGenus = new LinkedHashMap<>();
     }
 
     /**
@@ -20,24 +25,27 @@ public class FamilyTree {
      * @param human новый человек
      */
     public void addNewHuman(Human human) {
-        this.wholeGenus.putIfAbsent(human.getFullName(), human);
+        this.human = human;
+        if (human.hashCode() != 0){
+            this.wholeGenus.putIfAbsent(human.getFullName(), human);
+        }
     }
 
     /**
      * Демонстрация всех членов древа
+     * @return список всех членов древа
      */
     public String showAll() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         int id = 1;
-        for (Map.Entry<String, Human> human: wholeGenus.entrySet()) {
-            str += String.format("%d. %s", id, human.getValue());
-            id++;
+        for (Map.Entry<String, Human> human: this.wholeGenus.entrySet()) {
+            str.append(String.format("%d%s", id, human.getValue()));
+            id ++;
         }
         return str + "\n";
     }
 
-    public static Human searchHuman(String fullName) {
-        if (wholeGenus.containsKey(fullName)) return wholeGenus.get(fullName);
-        else return null;
+    public Human searchHuman(String fullName){
+        return this.wholeGenus.getOrDefault(fullName, null);
     }
 }
