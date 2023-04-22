@@ -1,77 +1,71 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+import javax.sql.rowset.spi.SyncResolver;
+
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private Gender gender;
-    private Integer birthAge;
-    private Human mother;
     private Human father;
-    private Human child;
-    private List<Human> childList;
-    private List<Human> parentList;
+    private Human mother;
+    private int birthYear;
+    private List<Human> children;
 
-    public Human(String name, Gender gender, Integer birthAge) {
+    public Human(String name, Gender gender, Human father, Human mother, int birthYear) {
         this.name = name;
         this.gender = gender;
-        this.birthAge = birthAge;
-        this.childList = new ArrayList<>();
-        this.parentList = new ArrayList<>();
+        this.father = father;
+        this.mother = mother;
+        this.birthYear = birthYear;
+        this.children = new ArrayList<>();
+    }
+
+    public Human(String name, Gender gender, int birthYear) {
+        this.name = name;
+        this.gender = gender;
+        this.father = null;
+        this.mother = null;
+        this.birthYear = birthYear;
+        this.children = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("полное имя: %s; год рождения: %d;\n ",this.name, this.birthYear);
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Human> getChild() {
-        return this.childList;
+    public Human getFather() {
+        return father;
     }
 
-    public List<Human> getParent() {
-        return this.parentList;
+    public Human getMother() {
+        return mother;
     }
 
-    public String genderToString() {
-        if (this.gender == gender.Male) {
-            return "М";
-        } else {
-            return "Ж";
-        }
+    public int getBirthYear() {
+        return birthYear;
     }
 
-    public void addFather(Human father) {
-        this.father = father;
-        father.addChild(this);
-        
-    }
-
-    public void addMother(Human mother) {
-        this.mother = mother;
-        mother.addChild(this);
+    public List<Human> getChildren() {
+        return children;
     }
 
     public void addChild(Human child) {
-        childList.add(child);
-        if (this.gender == Gender.Male) {
-            child.setFather(this);
+        int ageParentMin = 18;
+        if (child.getBirthYear() > this.getBirthYear() + ageParentMin) {
+            this.children.add(child);
         } else {
-            child.setMother(this);
+            System.out.printf("Ошибка!!! Родители не могут быть моложе %s лет \n", ageParentMin);
         }
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-        parentList.add(mother);
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-        parentList.add(father);
-    }
-
     @Override
-    public String toString() {
-        return name + ", пол: " + this.genderToString() + ", год рождения: " + birthAge;
+    public int compareTo(Human human) {
+        return name.compareTo(human.getName());
     }
-
 }

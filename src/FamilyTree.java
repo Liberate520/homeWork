@@ -1,88 +1,75 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class FamilyTree implements SaveRead{
-    private List<Human> family;
+public class FamilyTree<H extends Human> implements Serializable {
+    private List<H> familyTree;
 
     public FamilyTree() {
-        this(new ArrayList<>());
+        this.familyTree = new ArrayList<H>();
     }
 
-    public FamilyTree(ArrayList family) {
-        this.family = family;
+    List<H> getFamilyTree() {
+        return familyTree;
     }
 
-    public void printFamily() {
-        System.out.println("Члены семьи");
-        for (Human human : family) {
-            System.out.println(human + "\n");
+    void sortByParameter(int sortNumber) {
+        switch (sortNumber) {
+            case 1:
+                sortByName();
+                System.out.println("Сортировка по имени");
+                print();
+                break;
+            case 2:
+                sortByBirth();
+                System.out.println("Сортировка по году рождения");
+                print();
+                break;
+            default:
+                System.out.println("Вы ввели некорректный номер сортировки!");
         }
     }
 
-    public void printChildrens(Human human) {
-        List<Human> kids = human.getChild();
-        System.out.println("Дети " + human.getName() + ":");
-        for (Human person : kids) {
-            System.out.println(person + "\n");
+    void addHuman(H human) {
+        familyTree.add(human);
+        if (human.getMother() != null) {
+            human.getMother().addChild(human);
+        }
+        if (human.getFather() != null) {
+            human.getFather().addChild(human);
         }
     }
 
-    public void printParents(Human human) {
-        List<Human> parents = human.getParent();
-        System.out.println("Родители " + human.getName() + ":");
-        for (Human person : parents) {
-            System.out.println(person + "\n");
+    Human getHumanByName(String name) {
+        String nameFull = name.replace(",", " ");
+        for (Human human : familyTree) {
+            if (human.getName().equals(nameFull)) {
+                return human;
+            }
         }
+        return null;
     }
 
-    public void addHuman(Human human) {
-        family.add(human);
+    Gender getGender(String gender) {
+        if (gender.equals("M")) {
+            return Gender.Male;
+        } else if (gender.equals("F")){
+            return Gender.Female;
+        }
+        return null;
     }
 
-    public String textForFile() {
-        String text = "Вся семья:\n";
-        
-        for (Human human : family) {
-            text = text + human + "\n";
-        }
-        text = text + "Семейные узы:\n";
-        for (Human human : family) {
-            String parents = "";
-            Set<Human> parentsSet = new HashSet<>();
-            for (Human parent : human.getParent()) {
-                if(!parentsSet.contains(parent)){
-                    parents += parent.getName() + ",";
-                }
-                parentsSet.add(parent);
-            }
-            if(parents.length() >= 1) {
-                parents = parents.substring(0, parents.length()-1);
-            }
-            if (parents.length() < 1) {
-                parents = "неизвестно";
-            }
-            
-            String children = "";
-            Set<Human> childrenSet = new HashSet<>();
-            for (Human child : human.getChild()) {
-                if(!childrenSet.contains(child)){
-                    children += child.getName() + ",";
-                }
-                childrenSet.add(child);
-            }
-            if(children.length() >= 1) {
-                children = children.substring(0, children.length()-1);
-            }
-            if (children.length() < 1) {
-                children = "отсутствуют";
-            }
-            
-            text = text + human.getName() + " - родители: " + parents + " дети: " + children + "\n";
-        }
-        return text;
+    void sortByName() {
+        familyTree.sort(new HumanComparatorByName());
+    }
+
+    void sortByBirth() {
+        familyTree.sort(new HumanComparatorByBirth());
+    }
+
+    public void print() {
+        for (H h : familyTree) {
+            System.out.println(h.toString());
+        } 
     }
 }

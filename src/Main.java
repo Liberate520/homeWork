@@ -1,27 +1,63 @@
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-    Human human1 = new Human("Олег", Gender.Male, 1970);
-    Human human2 = new Human("Ольга", Gender.Female, 1973);
-    Human human3 = new Human("Петя", Gender.Male, 1999);
-    Human human4 = new Human("Света", Gender.Female,2018);
-    Human human5 = new Human("Илья", Gender.Male,2011);
-
-    human3.addFather(human1);
-    human3.addMother(human2);
-    human4.addFather(human1);
-    human4.addMother(human2);
-
-    FamilyTree tree = new FamilyTree();
-    tree.addHuman(human1);
-    tree.addHuman(human2);
-    tree.addHuman(human3);
-    tree.addHuman(human4);
-
-    tree.printFamily();
-
-    tree.printChildrens(human1);
-    tree.printParents(human4);
-
-    tree.saveFile(tree.textForFile(),"family_tree.txt");
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    boolean inProgress = true;
+    FileHandler fileHandler = new FileHandler();
+    FamilyTree<Human> familyTree = new FamilyTree<>();
+        
+    Service service = new Service(familyTree, fileHandler);
+    service.createTree();
+    Scanner scanner = new Scanner(System.in);
+    service.printInvitationForUser();
+    while (inProgress) {
+        int operationNumber = scanner.nextInt();
+        switch (operationNumber) {
+            case 0:
+                System.out.println("Работа завершена");
+                scanner.close();
+                inProgress = false;
+                break;
+            case 1:
+                service.printChildren();
+                service.printInvitationForUser();
+                break;
+            case 2:
+                service.writeInFile();
+                System.out.println("Вы успешно сохранили список генеалогического древа");
+                service.printInvitationForUser();
+                break;
+            case 3:
+                System.out.println("Генеалогическое древо, прочитанное из файла:");
+                service.readFromFile();
+                service.print();
+                service.printInvitationForUser();
+                break;
+            case 4:
+                System.out.println("Для сортировки по имени введите цифру 1:\n" +
+                        "для сортировки по году рождения введите цифру 2: \n");
+                try {
+                    int sortNumber = scanner.nextInt();
+                    service.sortByParameter(sortNumber);
+                    service.printInvitationForUser();
+                } catch (Exception e) {
+                    System.out.println("Ошибка ввода! " + e);
+                }
+                break;
+            case 5:
+                Human human = service.CreateHuman();
+                service.addHuman(human);
+                service.printInvitationForUser();
+                break;
+            case 6:
+                service.getHumanByName();
+                service.printInvitationForUser();
+                break;
+            default:
+                System.out.println("Вы ввели некорректный номер операции!");
+                service.printInvitationForUser();
+        }
+    }
     }
 }
