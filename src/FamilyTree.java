@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> familyMembers;
 
     public FamilyTree() {
@@ -14,6 +15,13 @@ public class FamilyTree {
 
     public void showAllMembers() {
         System.out.println(familyMembers);
+    }
+
+    public String toString() {
+        for(Human human : familyMembers) {
+            human.getName();
+        }
+        return "Члены семьи: " + familyMembers;
     }
     
     public Human getInfoByName(String name) {
