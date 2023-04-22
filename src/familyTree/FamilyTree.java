@@ -1,7 +1,6 @@
 package familyTree;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -45,7 +44,27 @@ public class FamilyTree implements Serializable {
         return str + "\n";
     }
 
+    /**
+     * Поиск человека по полному имени
+     * @param fullName строка вида Фамилия Имя Отчество
+     * @return объект Human или null
+     */
     public Human searchHuman(String fullName){
         return this.wholeGenus.getOrDefault(fullName, null);
+    }
+
+    /**
+     * Сохранение в файл
+     * @param pathStr полный путь
+     */
+    public void savingTree(String pathStr) {
+        try {
+            ObjectOutputStream objOS = new ObjectOutputStream(new FileOutputStream(pathStr));
+            objOS.writeObject(this);
+            objOS.close();
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
