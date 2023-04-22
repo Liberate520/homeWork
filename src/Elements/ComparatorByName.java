@@ -1,3 +1,5 @@
+package Elements;
+
 import java.util.Comparator;
 
 public class ComparatorByName<E extends TreeElement> implements Comparator<E> {

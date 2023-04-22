@@ -1,9 +1,9 @@
+package Elements;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human extends TreeElement{
+public class Human extends TreeElement  {
     private Human father;
     private Human mother;
     private Human spouse;

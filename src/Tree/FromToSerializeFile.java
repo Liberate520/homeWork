@@ -1,3 +1,6 @@
+package Tree;
+
+import Elements.TreeElement;
 import java.io.*;
 
 
@@ -9,7 +12,7 @@ public class FromToSerializeFile implements FromTo {
     }
 
     @Override
-    public void saveTo(GenealogicalTree family) {
+    public <E extends TreeElement> void saveTo(GenealogicalTree<E> family) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
             oos.writeObject(family);
@@ -17,12 +20,11 @@ public class FromToSerializeFile implements FromTo {
             throw new RuntimeException(e.getMessage());
         }
     }
-
+    @Override
     public GenealogicalTree readFrom(String fileName) {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-            GenealogicalTree result = (GenealogicalTree) ois.readObject();
-            return result;
+            return (GenealogicalTree) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e.getMessage());
         }

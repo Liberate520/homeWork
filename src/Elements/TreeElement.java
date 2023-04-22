@@ -1,3 +1,5 @@
+package Elements;
+
 import java.io.Serializable;
 
 public abstract class TreeElement implements Serializable, Comparable<TreeElement> {

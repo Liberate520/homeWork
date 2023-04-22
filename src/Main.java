@@ -1,9 +1,12 @@
-import java.util.Collections;
+import Elements.Human;
+import Tree.FromTo;
+import Tree.FromToSerializeFile;
+import Tree.GenealogicalTree;
 
 public class Main {
     public static void main(String[] args) {
 
-        // Создание объектов Human.
+        // Создание объектов Elements.Human.
         Human human1 = new Human("Пушкин Лев Александрович", 1723, 1790);
         Human human2 = new Human("Чичерина Ольга Васильевна", 1737, 1802);
         Human human3 = new Human("Пушкин Сергей Львович", 1770, 1848);
@@ -13,7 +16,7 @@ public class Main {
         Human human7 = new Human("Пушкин Лев Сергеевич", 1805, 1852);
         Human human8 = new Human("Гончарова Наталья Николаевна", 1812, 1863);
 
-        // Создание связей между Human.
+        // Создание связей между Elements.Human.
         human1.setSpouse(human2);
         human2.setSpouse(human1);
         human2.addChildren(human3);
