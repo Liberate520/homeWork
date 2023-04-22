@@ -1,7 +1,5 @@
 package FamalyTree;
 
-import SaveAs.TextFormat;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,19 +79,44 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        StringBuilder sb = new StringBuilder();
+        String motherName;
+        String fatherName;
+        String partnerName;
+        if(partner == null) {partnerName = "неизвестно";}
+        else {partnerName = partner.getFirstName();}
+        if(mother == null) {motherName = "неизвестно";}
+        else {motherName = mother.getFirstName();}
+        if(father == null) {fatherName = "неизвестно";}
+        else {fatherName = father.getFirstName();}
+        sb.append("Гендер: ");
+        sb.append(gender);
+        sb.append(", Партнер: ");
+        sb.append(partnerName);
+        sb.append(", Имя: ");
+        sb.append(firstName);
+        sb.append(", Фамилия: ");
+        sb.append(lastName);
+        sb.append(", Мать: ");
+        sb.append(motherName);
+        sb.append(", Отец: ");
+        sb.append(fatherName);
+        sb.append(", Дети: ");
+        sb.append(this.getChildrenName());
+        return sb.toString();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Human human) {
-            return (firstName + lastName).equals(human.getFirstName() + human.getLastName());
+    public String getChildrenName(){
+        StringBuilder sb = new StringBuilder();
+        if(children.size() == 0) {
+            sb.append("нет детей");
+        } else {
+            for (Human human : children) {
+                sb.append(human.getFirstName());
+                sb.append(", ");
+            }
         }
-        return false;
-    }
-
-    public void saveAs(String path, TextFormat format) {
-        format.SaveAs(this, path);
+        return sb.toString();
     }
 
 }

@@ -1,6 +1,7 @@
 package SaveAs;
-import FamalyTree.Human;
+import FamalyTree.FamilyTree;
 
 public interface Savable {
-    void SaveAs(Human human, String path);
+    void save(FamilyTree familyTree, String path);
+    FamilyTree upload(String path);
 }

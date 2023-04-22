@@ -1,7 +1,5 @@
 package FamalyTree;
 
-import SaveAs.TextFormat;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,13 +105,12 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * Возвращается строка с полом, именем, фамилией и детьми объекта
+     * Возвращается строка со всей информацией о всех объектах семейного дерева
      */
-    public String getInfoByMember(Human human) {
-        return "Пол: " + human.getGender() + "\n" +
-                "Имя: " + human.getFirstName() + "\n" +
-                "Фамилия: " + human.getLastName() + "\n" +
-                "Дети: " + human.getChildren();
+    public void getInfo() {
+        for (Human human : familyMembers) {
+            System.out.println(human);
+        }
     }
 
 }
