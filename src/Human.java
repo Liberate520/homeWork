@@ -3,27 +3,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
-
-    private String name;
-
-    private int birthday;
-    private int deathDay;
+public class Human extends TreeElement{
     private Human father;
     private Human mother;
     private Human spouse;
     private List<Human>children;
 
     public Human(String name, int birthday, int deathDay) {
-
-        this.name = name;
-        this.birthday = birthday;
-        this.deathDay = deathDay;
+        super(name, birthday, deathDay);
         this.children = new ArrayList<>();
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Human getFather() {
@@ -63,14 +51,6 @@ public class Human implements Serializable, Comparable<Human> {
         return result;
     }
 
-    public int getBirthday() {
-        return birthday;
-    }
-
-    public int getDeathDay() {
-        return deathDay;
-    }
-
    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -89,7 +69,7 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     @Override
-    public int compareTo(Human o) {
+    public int compareTo(TreeElement o) {
         return -1 * (birthday - o.birthday);
     }
 }

@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyIterator<E> implements Iterator {
+public class FamilyIterator<E> implements Iterator<E> {
     private int index;
     private List<E> family;
 

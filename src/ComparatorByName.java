@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class ComparatorByName<E extends Human> implements Comparator<E> {
+public class ComparatorByName<E extends TreeElement> implements Comparator<E> {
 
     @Override
     public int compare(E o1, E o2) {

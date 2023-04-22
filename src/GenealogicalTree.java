@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree<E extends Human> implements Serializable, Iterable<E>{
+public class GenealogicalTree<E extends TreeElement> implements Serializable, Iterable<E>{
    private List<E> family;
 
     public GenealogicalTree(List<E> family) {
@@ -41,7 +41,7 @@ public class GenealogicalTree<E extends Human> implements Serializable, Iterable
 
     @Override
     public Iterator<E> iterator() {
-        return new FamilyIterator<E>(family);
+        return new FamilyIterator<>(family);
     }
 
     public void sort(){
@@ -49,6 +49,6 @@ public class GenealogicalTree<E extends Human> implements Serializable, Iterable
     }
 
     public void sortByName(){
-        family.sort(new ComparatorByName());
+        family.sort(new ComparatorByName<>());
     }
 }
