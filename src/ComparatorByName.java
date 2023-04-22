@@ -1,9 +1,9 @@
 import java.util.Comparator;
 
-public class ComparatorByName implements Comparator<Human> {
+public class ComparatorByName<E extends Human> implements Comparator<E> {
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(E o1, E o2) {
         return o1.getName().compareTo(o2.getName());
     }
 }

@@ -41,7 +41,7 @@ public class Main {
         human8.setSpouse(human6);
 
         // Создание генеалогического дерева.
-        GenealogicalTree pushkin = new GenealogicalTree();
+        GenealogicalTree<Human> pushkin = new GenealogicalTree<>();
         pushkin.addHuman(human1);
         pushkin.addHuman(human2);
         pushkin.addHuman(human3);
@@ -76,7 +76,7 @@ public class Main {
         // Получение списка имён из загруженного дерева.
         System.out.println("Загружено из файла:");
         System.out.println();
-        GenealogicalTree loadedPushkin = savedFamily.readFrom("pushkin.out");
+        GenealogicalTree<Human> loadedPushkin = savedFamily.readFrom("pushkin.out");
         for (String human:
                 loadedPushkin.getFamily()) {
             System.out.println(human);
