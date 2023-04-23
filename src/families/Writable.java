@@ -1,11 +1,11 @@
 package families;
 
-import families.Family;
+import essence.Essence;
 
 import java.io.IOException;
 import java.io.Serializable;
 
-public interface Writable{
+public interface Writable<T extends Essence<T>>{
     void save(Serializable obj) throws IOException;
-    Family loadFamily() throws IOException, ClassNotFoundException;
+    Family<T> loadFamily() throws IOException, ClassNotFoundException;
 }

@@ -1,16 +1,14 @@
 package families;
 
-import human.Human;
+import essence.Essence;
 
 import java.util.*;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<T extends Essence<T>> implements Iterator<T> {
     private int index;
-    private List<Human> family;
+    private final List<T> family;
 
-    public HumanIterator(List<Human> family) {
-        this.family = family;
-    }
+    public HumanIterator(List<T> family) { this.family = family;}
 
     @Override
     public boolean hasNext() {
@@ -18,7 +16,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return family.get(index++);
     }
 }

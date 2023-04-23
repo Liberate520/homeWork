@@ -1,11 +1,12 @@
 package service;
 
+import essence.Essence;
 import families.Family;
 import families.Writable;
 
 import java.io.*;
 
-public class TXTHandler implements Writable {
+public class TXTHandler<T extends Essence<T>> implements Writable<T> {
     @Override
     public void save(Serializable obj) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
@@ -14,12 +15,10 @@ public class TXTHandler implements Writable {
         objectOutputStream.close();
     }
 
-    @Override
-    public Family loadFamily() throws IOException, ClassNotFoundException {
+    @Override@SuppressWarnings("unchecked")
+    public Family<T> loadFamily() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("lib.txt"));
-        Family FamilyRestored = (Family) objectInputStream.readObject();
-        objectInputStream.close();
-        return FamilyRestored;
+        return (Family<T>) objectInputStream.readObject();
     }
 }

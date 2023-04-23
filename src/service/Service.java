@@ -1,29 +1,38 @@
 package service;
 
+import essence.Essence;
+import essence.Human;
 import families.Family;
-import families.Writable;
 
 import java.io.IOException;
 
-public class Service {
-    private Writable writable;
-    private Family family;
+public class Service<T extends Essence<T>> {
+    private final Family<T> family;
 
-    public Service(Family family) {
+    public Service(Family<T> family) {
         this.family = family;
     }
-    public void save(Family family) throws IOException {
-        TXTHandler txt = new TXTHandler();
+
+    public void save(Family<T> family) throws IOException {
+        TXTHandler<T> txt = new TXTHandler<>();
         txt.save(family);
     }
-    public Family loadFamily() throws IOException, ClassNotFoundException {
-        TXTHandler txt = new TXTHandler();
+    public Family<T> loadFamily() throws IOException, ClassNotFoundException {
+        TXTHandler<T> txt = new TXTHandler<>();
         return txt.loadFamily();
     }
     public void sortByName(){
-        family.getPeopleList().sort(new HumanComporatorByName());
+        family.getPeopleList().sort(new HumanComparatorByName<>());
     }
     public void sortByDate(){
-        family.getPeopleList().sort(new HumanComporatorByDate());
+        family.getPeopleList().sort(new HumanComparatorByDate<>());
+    }
+    public StringBuilder getFamily(){
+        StringBuilder sb = new StringBuilder();
+        for (T human: family) {
+            sb.append(human.getName());
+            sb.append("\n");
+        }
+        return sb;
     }
 }

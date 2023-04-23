@@ -1,17 +1,17 @@
-package human;
+package essence;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable {
+public class Human extends Essence<Human> implements Serializable{
     public String name;
     private Calendar date_of_birth;
     private Integer day;
     private Integer month;
     private Integer year;
     private Gender gender;
-    private List<Human> children;
-    private List<Human> parents;
+    private final List<Human> children;
+    private final List<Human> parents;
     private Human In_marriage_with;
 
 

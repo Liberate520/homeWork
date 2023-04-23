@@ -1,7 +1,10 @@
+import essence.Gender;
+import essence.Human;
 import families.Family;
-import human.Gender;
-import human.Human;
+import presenter.Presenter;
 import service.Service;
+import ui.DesktopUI;
+import ui.View;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Family Romanovs = new Family();
+        Family<Human> Romanovs = new Family<>();
         Human Nikolai_II = new Human("Nikolai_II", 18, 5, 1868, Gender.Male);
         Human Aleksandra = new Human("Aleksandra Fedorovna", 6, 6, 1872, Gender.Female);
         Human Olga = new Human("Olga", 15, 11, 1895, Gender.Female);
@@ -60,9 +63,9 @@ public class Main {
         System.out.println("_______________________");
         Romanovs.getInfo();
         System.out.println("_______________________!!!");
-        Service service = new Service(Romanovs);
+        Service<Human> service = new Service<>(Romanovs);
         service.save(Romanovs);
-        Family restored = (Family) service.loadFamily();
+        Family<Human> restored = service.loadFamily();
         restored.getInfo();
         System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
         for (Human human : Romanovs) System.out.println(human.getName());
@@ -73,6 +76,10 @@ public class Main {
         service.sortByDate();
         for (Human human : Romanovs) System.out.println(human.getName());
 
+
+        View view = new DesktopUI();
+        Presenter presenter = new Presenter(view, service);
+        view.start();
 
 
     }

@@ -1,38 +1,41 @@
 package families;
 
-import human.Human;
+import essence.Essence;
+import essence.Human;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class Family implements Tree, Serializable, Iterable<Human>{
-    List<Human> family = new ArrayList<>();
+public class Family<T extends Essence<T>> implements Tree<T>, Serializable, Iterable<T> {
+    List<T> family = new ArrayList<>();
     @Override
-    public void addMember(Human human) {
-        if(!family.contains(human))family.add(human);
+    public void addMember(T t) {
+        if(!family.contains(t))family.add(t);
         else System.out.println("Такой уже есть");
     }
 
     @Override
-    public List<Human> getPeopleList() {
+    public List<T> getPeopleList() {
         return family;
     }
 
     @Override
-    public List<Human> getChildren(Human human) {
-        return new ArrayList<>(human.getChildren());
+    public List<T> getChildren(T t) {
+        return new ArrayList<>(t.getChildren());
     }
 
     @Override
-    public List<Human> getParents(Human human) {
-        return new ArrayList<>(human.getParents());
+    public List<T> getParents(T t) {
+        return new ArrayList<>(t.getParents());
     }
 
     @Override
-    public List<Human> getDescendants(Human Human) {
-        List<Human> descendants = new ArrayList<>();
-        for (Human child : Human.getChildren()) {
+    public List<T> getDescendants(T t) {
+        List<T> descendants = new ArrayList<>();
+        for (T child : t.getChildren()) {
             descendants.add(child);
             descendants.addAll(getDescendants(child));
         }
@@ -40,60 +43,59 @@ public class Family implements Tree, Serializable, Iterable<Human>{
     }
 
     @Override
-    public List<Human> getAncestors(Human Human) {
-        return new ArrayList<>(Human.getParents());
+    public List<T> getAncestors(T t) {
+        return new ArrayList<>(t.getParents());
     }
 
     @Override
-    public List<Human> getRelatives(Human Human) {
-        List<Human> relatives = new ArrayList<>();
-        relatives.addAll(getAncestors(Human));
-        relatives.addAll(getDescendants(Human));
+    public List<T> getRelatives(T t) {
+        List<T> relatives = new ArrayList<>();
+        relatives.addAll(getAncestors(t));
+        relatives.addAll(getDescendants(t));
         return relatives;
     }
 
     @Override
-    public List<Human> searchByName(String name) {
-        List<Human> result = new ArrayList<>();
-        for (Human Human : family) {
-            if (Human.toString().contains(name)) {
-                result.add(Human);
+    public List<T> searchByName(String name) {
+        List<T> result = new ArrayList<>();
+        for (T t : family) {
+            if (t.toString().contains(name)) {
+                result.add(t);
             }
         }
         return result;
     }
 
-    @Override
+
     public void setMarriage(Human human, Human human2) {
         human.setIn_marriage_with(human2);
         human2.setIn_marriage_with(human);
     }
 
     @Override
-    public void setChildren(Human human, Human child) {
-        if(!human.getChildren().contains(child)){
+    public void setChildren(T parent, T child) {
+        if(!parent.getChildren().contains(child)){
             this.addMember(child);
-            human.setChildren(child);
-            (human.getIn_marriage_with()).setChildren(child);
-            child.setParents(human);
-            child.setParents(human.getIn_marriage_with());}
+            parent.setChildren(child);
+            (parent.getIn_marriage_with()).setChildren(child);
+            child.setParents(parent);
+            child.setParents(parent.getIn_marriage_with());}
         else System.out.println("Такой уже есть");
     }
 
     @Override
-    public void save(Writable writable) throws IOException {
-        writable.save((Serializable) this);
+    public void save(Writable<T> writable) throws IOException {
+        writable.save(this);
     }
 
     @Override
     public void getInfo() {
-        for (Human human : family) {
-            System.out.println(human);
+        for (T t : family) {
+            System.out.println(t);
         }
     }
-
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(family);
+    public Iterator<T> iterator() {
+        return new HumanIterator<T>(family);
     }
 }
