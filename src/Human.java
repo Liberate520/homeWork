@@ -1,10 +1,12 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.lang.Comparable;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
@@ -51,6 +53,10 @@ public class Human implements Serializable {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public int getAge() {
+        return (int) ChronoUnit.YEARS.between(getBirthDate(), LocalDate.now());
     }
 
     public void setBirthDate(LocalDate birthDate) {
@@ -170,4 +176,16 @@ public class Human implements Serializable {
         return sb.toString();
     }
 
+    @Override
+    public int compareTo(Human h){
+        return firstName.compareTo(h.firstName);
+    }
+
+    public void childrenSortByName() {
+        children.sort(new ChildrenComparatorByName());
+    }
+
+    public void childrenSortByAge() {
+        children.sort(new ChildrenComparatorByAge());
+    }
 }
