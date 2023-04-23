@@ -36,7 +36,7 @@ public class Presenter {
     }
 
     public boolean load(String fileName) {
-        service = new Service(service.read(fileName));
+        service.read(fileName);
         return true;
     }
 
