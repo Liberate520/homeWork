@@ -1,4 +1,4 @@
-package familyTree;
+package familyTree.human;
 
 import java.io.Serializable;
 

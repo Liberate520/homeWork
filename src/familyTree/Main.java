@@ -1,8 +1,15 @@
 package familyTree;
 
+import familyTree.human.Gender;
+import familyTree.human.Human;
+import familyTree.saving.SaveAndLoad;
+import familyTree.saving.Serial;
+import familyTree.tree.FamilyTree;
+
 public class Main {
     public static void main(String[] args) {
         FamilyTree newTree = new FamilyTree();
+        SaveAndLoad saveLoad = new Serial();
 
         newTree.addNewHuman(new Human("Петров Пётр Петрович", Gender.male,
                 "31.03.1973", "",
@@ -17,6 +24,6 @@ public class Main {
                 ""));
 
         System.out.println(newTree.showAll());
-        newTree.savingTree("familyTree.ser");
+        saveLoad.savingTree(newTree, "familyTree.ser");
     }
 }

@@ -1,13 +1,13 @@
-package familyTree;
+package familyTree.tree;
 
-import java.io.*;
+import familyTree.human.Human;
+
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class FamilyTree implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 6042495868907328366L;
     private Map<String, Human> wholeGenus;
     private Human human;
 
@@ -51,20 +51,5 @@ public class FamilyTree implements Serializable {
      */
     public Human searchHuman(String fullName){
         return this.wholeGenus.getOrDefault(fullName, null);
-    }
-
-    /**
-     * Сохранение в файл
-     * @param pathStr полный путь
-     */
-    public void savingTree(String pathStr) {
-        try {
-            ObjectOutputStream objOS = new ObjectOutputStream(new FileOutputStream(pathStr));
-            objOS.writeObject(this);
-            objOS.close();
-        }
-        catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 }
