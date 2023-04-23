@@ -1,12 +1,17 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String firstName;
     private String lastName;
     private String birthDate;
     private Human mother;
     private Human father;
+    private List<Human> childrens;
+
+    public Human(String firstName, String lastName) {this(firstName,
+            lastName, null, null, null);}
 
     public Human(String firstname, String lastname, String birthDate, Human mother, Human father) {
         this.firstName = firstname;
@@ -14,11 +19,22 @@ public class Human {
         this.birthDate = birthDate;
         this.mother = mother;
         this.father = father;
+        childrens = new ArrayList<>();
     }
 
-    public String getFirstName() {
-        return firstName;
+    public boolean addChild(Human child) {
+        if (!childrens.contains(child)){
+            childrens.add(child);
+            return true;
+        }
+        return false;
     }
+
+    public List<Human> getChildrens() {
+        return childrens;
+    }
+
+    public String getFirstName() { return firstName; }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -55,25 +71,14 @@ public class Human {
         this.father = father;
     }
 
-    public List<Human> getChildren() {
-        List<Human> children = new ArrayList<>();
-        for (Human child : GenealogyTree.getHumans()) {
-            if ((child.getMother() == this) || (child.getFather() == this)) {
-                children.add(child);
-            }
-        }
-        return children;
-    }
-
-    public List<Human> getParents() {
-        List<Human> parents = new ArrayList<>();
-        if (mother != null) {
-            parents.add(mother);
-        }
-        if (father != null) {
-            parents.add(father);
-        }
-        return parents;
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: ");
+        sb.append(firstName);
+        sb.append(", ");
+        sb.append("Фамилия:");
+        sb.append(lastName);
+        return sb.toString();
     }
 
     @Override
