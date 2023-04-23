@@ -2,26 +2,46 @@ package familyTree;
 
 import human.Gender;
 import human.Human;
+import human.comparators.HumanComparatorByFirstName;
+import human.comparators.HumanComparatorById;
+import human.comparators.HumanComparatorByLastName;
+import human.comparators.HumanComparatorByNumberOfChildren;
 import readWrite.ReadWriteData;
 import readWrite.ReadWriteObject;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> people = new ArrayList<>();
-    private ReadWriteData rw2;
 
     public void addHuman(Human human){
         people.add(human);
+        Optional <Human> mother = Optional.ofNullable(human.getMother());
+        Optional <Human> father = Optional.ofNullable(human.getFather());
+        mother.ifPresent(this::IdentifyChildren);
+        father.ifPresent(this::IdentifyChildren);
     }
 
     public Human getHuman(String firstName, String lastName, String birthday){
         for (Human human: people
         ) {
-            if (human.getFirstName().equals(firstName) && human.getLastName().equals(lastName) && human.getBirthday().equals(birthday)){
+            if (human.getFirstName().equals(firstName) &&
+                    human.getLastName().equals(lastName) &&
+                    human.getBirthday().equals(birthday)){
+                return human;
+            }
+        }
+        return null;
+    }
+
+    public Human getHumanById(int id){
+        for (Human human: people) {
+            if (human.getId() == (id)){
                 return human;
             }
         }
@@ -42,7 +62,9 @@ public class FamilyTree implements Serializable {
         Human father = human.getFather();
         for (Human item: people
              ) {
-            if (item != human && item.getMother() == mother && item.getFather() == father && item.getGender() == Gender.Male){
+            if (item != human && item.getMother() == mother &&
+                    item.getFather() == father &&
+                    item.getGender() == Gender.Male){
                 brothers.add(item);
             }
         }
@@ -55,7 +77,9 @@ public class FamilyTree implements Serializable {
         Human father = human.getFather();
         for (Human item: people
         ) {
-            if (item != human && item.getMother() == mother && item.getFather() == father && item.getGender() == Gender.Female){
+            if (item != human && item.getMother() == mother &&
+                    item.getFather() == father &&
+                    item.getGender() == Gender.Female){
                 sisters.add(item);
             }
         }
@@ -90,6 +114,30 @@ public class FamilyTree implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    @Override
+    public Iterator<Human> iterator() {
+        return people.iterator();
+    }
+    public void sortByFirstName(){
+        people.sort(new HumanComparatorByFirstName());
+    }
+    public void sortByLastName(){
+        people.sort(new HumanComparatorByLastName());
+    }
+    public void sortById(){
+        people.sort(new HumanComparatorById());
+    }
+    public void sortByNumberOfChildren(){
+        people.sort(new HumanComparatorByNumberOfChildren());
+    }
 
-
+    public void IdentifyChildren(Human human){
+        for (Human item: people
+        ) {
+            if (item != human && item.getMother() == human ||
+                    item.getFather() == human){
+                human.setChildren(item);
+            }
+        }
+    }
 }
