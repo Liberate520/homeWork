@@ -19,6 +19,11 @@ public class Test {
         }
         father.addChild(new Human("fatherChild", "fatherChild", 2008, Gender.Male));
 
+        String path = "/home/evgen/prog/homeWork/familyTree.txt";
+        FileWriteRead fileWriteRead = new FileWriteRead();
+        fileWriteRead.write(familyTree, path);
+        familyTree = fileWriteRead.read(path);
+
         System.out.println(familyTree.getFamilyInfo());
     }
 }
