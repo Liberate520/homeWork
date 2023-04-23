@@ -1,15 +1,11 @@
 package ui;
 
-import model.FamilyService;
 import presenter.Presenter;
-import model.tree.FamilyTree;
-import model.tree.Human;
 
 import java.util.*;
 
 public class Console implements View {
     private Presenter presenter;
-    private FamilyTree<Human> tree;
     private Scanner scanner;
     private Menu menu;
     private boolean temp;
@@ -39,9 +35,6 @@ public class Console implements View {
         String mother = scanner.nextLine();
         presenter.addHuman(name, gender, birthDate, deathDate, father, mother);
     }
-//    public void humanList(){
-//        presenter.humanList();
-//    }
 
     public void searchPerson() {
         System.out.println("Введите имя");
@@ -55,10 +48,9 @@ public class Console implements View {
 
     public void sortBirthdate() {
         presenter.sortByBirthDate();
-//        System.out.println(tree);
     }
 
-    private void exit() {
+    public void exit() {
         temp = false;
     }
 

@@ -2,7 +2,7 @@ package ui.commands;
 
 import ui.Console;
 
-public class SortBirthdate extends Command{
+public class SortBirthdate extends Command {
     public SortBirthdate(Console console) {
         super(console);
     }

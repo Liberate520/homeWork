@@ -14,6 +14,7 @@ public class Menu {
         sheet.add(new SearchPerson(console));
         sheet.add(new SortName(console));
         sheet.add(new SortBirthdate(console));
+        sheet.add(new Exit(console));
     }
 
     public String print() {

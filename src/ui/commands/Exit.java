@@ -2,18 +2,18 @@ package ui.commands;
 
 import ui.Console;
 
-public class ShowPerson extends Command {
-    public ShowPerson(Console console) {
+public class Exit extends Command{
+    public Exit(Console console) {
         super(console);
     }
 
     @Override
     public String description() {
-        return "Показать весь список.";
+        return "Выход";
     }
 
     @Override
     public void execute() {
-        getConsole().showPerson();
+        getConsole().exit();
     }
 }

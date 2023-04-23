@@ -10,9 +10,11 @@ public class FamilyService {
     private InterfaceFile interfaceFile;
     private String fileName = "family.txt";
     private FamilyTree<Human> familyTree;
-    public FamilyService(){
-        familyTree = new FamilyTree<>();
+
+    public FamilyService(FamilyTree<Human> familyTree) {
+        this.familyTree = familyTree;
     }
+
     public boolean save(){
         if (interfaceFile == null){
             return false;
@@ -49,7 +51,6 @@ public class FamilyService {
         LocalDate humanBirthDate = LocalDate.parse(birthDate);
         LocalDate humanDeathDate = LocalDate.parse(deathDate);
         Human.Gender humanGender = Human.Gender.valueOf(gender.toLowerCase());
-
         Human human = new Human(name, humanGender, humanBirthDate, humanDeathDate, humanFather, humanMother);
         familyTree.addHuman(human);
         return "Человек успешно добавлен в дерево";

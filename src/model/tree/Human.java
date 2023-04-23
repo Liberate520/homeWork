@@ -34,13 +34,9 @@ public class Human implements Serializable {
         this.children = children;
     }
 
-    public Human(/*int id,*/ String name, Gender gender, LocalDate birthDate) {
-        this(/*id,*/ name, gender, birthDate, null, null, null, new ArrayList<>());
+    public Human(String name, Gender gender, LocalDate birthDate) {
+        this(name, gender, birthDate, null, null, null, new ArrayList<>());
     }
-
-//    public Human() {
-//
-//    }
 
     public String getName() {
         return name;

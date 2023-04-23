@@ -2,7 +2,7 @@ package ui.commands;
 
 import ui.Console;
 
-public class SortName extends Command{
+public class SortName extends Command {
     public SortName(Console console) {
         super(console);
     }

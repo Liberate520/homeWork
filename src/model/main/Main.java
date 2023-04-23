@@ -2,7 +2,6 @@ package model.main;
 
 import model.FamilyService;
 import model.file.FileUtil;
-import model.file.InterfaceFile;
 import model.tree.FamilyTree;
 import model.tree.Human;
 import presenter.Presenter;
@@ -31,20 +30,12 @@ public class Main {
         familyTree.addHuman(human4);
         familyTree.addHuman(human5);
 
-//        System.out.println(familyTree.findHuman("Павел"));
-//
-//        familyTree.sortByName();
-//        System.out.println(familyTree);
-//        System.out.println();
-//        familyTree.sortByBirthDate();
-//        System.out.println(familyTree);
-
-        FamilyService service = new FamilyService();
+        FamilyService service = new FamilyService(familyTree);
         service.setWritable(new FileUtil());
         service.save();
         service.read();
         View view = new Console();
-        Presenter presenter = new Presenter(service, view);
+        new Presenter(service, view);
         view.run();
     }
 }

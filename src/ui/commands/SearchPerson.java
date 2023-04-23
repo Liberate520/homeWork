@@ -2,7 +2,7 @@ package ui.commands;
 
 import ui.Console;
 
-public class SearchPerson extends Command{
+public class SearchPerson extends Command {
     public SearchPerson(Console console) {
         super(console);
     }

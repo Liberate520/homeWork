@@ -17,21 +17,22 @@ public class Presenter {
         String answerName = service.addHuman(name, gender, birthDate, deathDate, father, mother);
         view.print(answerName);
     }
+
     public void humanList() {
         String answerList = service.humanList();
         view.print(answerList);
     }
-    public void findHuman(String name){
+
+    public void findHuman(String name) {
         String answerFind = service.findHuman(name).toString();
         view.print(answerFind);
     }
-    public void sortByName(){
+
+    public void sortByName() {
         service.sortByName();
     }
 
-    public void sortByBirthDate(){
+    public void sortByBirthDate() {
         service.sortByBirthDate();
     }
-
-
 }

@@ -7,8 +7,9 @@ import java.util.*;
 
 public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     private List<T> famTree = new ArrayList<>();
-    public boolean isEmpty(){
-        if (famTree.size() != 0){
+
+    public boolean isEmpty() {
+        if (famTree.size() != 0) {
             return false;
         }
         return true;
@@ -25,14 +26,16 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
             famTree.add(human);
         }
     }
-    public T getByName(String name){
-        for (T human: famTree){
-            if (human.getName().equals(name)){
+
+    public T getByName(String name) {
+        for (T human : famTree) {
+            if (human.getName().equals(name)) {
                 return human;
             }
         }
         return null;
     }
+
     public T findHuman(String name) {
         for (T human : famTree)
             if (human.getName().equals(name)) {
@@ -48,6 +51,7 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     public void sortByBirthDate() {
         famTree.sort(Comparator.comparing(Human::getBirthDate));
     }
+
     @Override
     public Iterator<T> iterator() {
         return new FamilyIterator<T>(famTree);
