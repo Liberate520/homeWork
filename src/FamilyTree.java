@@ -11,11 +11,13 @@ public class FamilyTree {
 
     public void addHuman(Human human) {
         humansList.add(human);
-        if (human.getMother() != null)
+        if (human.getMother() != null) {
             human.getMother().addChildren(human);
+        }
 
-        if (human.getFather() != null)
+        if (human.getFather() != null) {
             human.getFather().addChildren(human);
+        }
     }
 
     
@@ -34,6 +36,7 @@ public class FamilyTree {
         for (Human human : humansList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
+            
         }
         return stringBuilder.toString();
     }
