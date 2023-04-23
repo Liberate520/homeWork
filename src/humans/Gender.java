@@ -1,4 +1,4 @@
-package FamalyTree;
+package humans;
 
 public enum Gender {
     Male, Female

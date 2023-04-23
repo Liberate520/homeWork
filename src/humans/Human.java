@@ -1,10 +1,9 @@
-package FamalyTree;
+package humans;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human {
 
     private Gender gender;
     private Human partner;
@@ -23,6 +22,10 @@ public class Human implements Serializable {
         this.father = father;
         children = new ArrayList();
         partner = null;
+    }
+
+    public Human(Gender gender, String firstName, String lastName) {
+        this(gender, firstName, lastName, null, null);
     }
 
     public Human(Gender gender, String firstName) {
@@ -118,5 +121,4 @@ public class Human implements Serializable {
         }
         return sb.toString();
     }
-
 }

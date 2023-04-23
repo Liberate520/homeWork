@@ -1,26 +1,27 @@
-import FamalyTree.FamilyTree;
-import FamalyTree.Gender;
-import FamalyTree.Human;
-import SaveAs.*;
+import humans.*;
 
 public class Main {
     public static void main(String[] args){
         String path = "tree.txt";
-        FileManager fm = new FileManager();
-        FamilyTree familyTree = new FamilyTree();
-        Human ivan = new Human(Gender.Male, "Ivan", "Ivanov", null, null);
-        Human olga = new Human(Gender.Female, "Olga", "Ivanova", null, null);
-        familyTree.addMember(ivan);
-        familyTree.getMarried(ivan, olga);
-        Human masha = new Human(Gender.Female, "Masha");
-        familyTree.addChild(ivan, masha);
-        Human kolya = new Human(Gender.Male, "Kolya");
-        familyTree.addChild(olga, kolya);
-        Human sergey = new Human(Gender.Male, "Sergey", "Sergeev", null, null);
-        familyTree.getMarried(masha, sergey);
-        familyTree.getInfo();
-        fm.save(familyTree, path);
-//        FamilyTree newFamilyTree = fm.upload(path);
-//        newFamilyTree.getInfo();
+        Service service = new Service();
+        service.addFamilyMember(Gender.Male, "Ivan", "Ivanov");
+        service.addFamilyMember(Gender.Female, "Olga", "Ivanova");
+        service.getFamilyTree().getMarried("Ivan", "Olga");
+        service.getFamilyTree().addChild("Ivan", Gender.Female, "Masha");
+        service.getFamilyTree().addChild("Olga", Gender.Male, "Kolya");
+        service.addFamilyMember(Gender.Male, "Sergey", "Sergeev");
+        service.getFamilyTree().getMarried("Masha", "Sergey");
+        service.getFamilyTree().addChild("Masha", Gender.Male, "Misha");
+        service.getInfo();
+        System.out.println();
+        service.sortByName();
+        service.getInfo();
+        System.out.println();
+        service.sortByAmountOfChildren();
+        service.getInfo();
+//        service.save(service.getFamilyTree(), path);
+//        FamilyTree newFamilyTree = service.upload(path);
+//        Service newService = new Service(newFamilyTree);
+//        newService.getFamilyTree().getInfo();
     }
 }
