@@ -11,7 +11,14 @@ public class FamilyTree {
 
     public void addHuman(Human human) {
         humansList.add(human);
+        if (human.getMother() != null)
+            human.getMother().addChildren(human);
+
+        if (human.getFather() != null)
+            human.getFather().addChildren(human);
     }
+
+    
 
     public Human getHumanByName(String name) {
         for (Human human : humansList) {

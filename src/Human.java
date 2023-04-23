@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,7 +70,11 @@ public class Human {
         return name + " " + surname + " Дата рождения: " + dateOfBirth + " Пол: " + gender + " Отец: " + father + " Мать: " + mother + " Дети: " + children;
     }
     
-    
+    public void addChildren(Human person) {
+        if (this.children == null)
+            this.children = new ArrayList<>();
+        this.children.add(person);
+    }
     
 
 }
