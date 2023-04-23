@@ -5,9 +5,10 @@ import humans.comparators.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyMembers;
 
     public FamilyTree() {
@@ -138,7 +139,12 @@ public class FamilyTree implements Serializable {
         familyMembers.sort(new HumanComparatorByName());
     }
 
-    public void sortByAmountOfChildren(){
+    public void sortAmountOfChildren(){
         familyMembers.sort(new HumanComparatorByChildren());
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyMembers);
     }
 }

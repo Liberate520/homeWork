@@ -12,13 +12,13 @@ public class Main {
         service.addFamilyMember(Gender.Male, "Sergey", "Sergeev");
         service.getFamilyTree().getMarried("Masha", "Sergey");
         service.getFamilyTree().addChild("Masha", Gender.Male, "Misha");
-        service.getInfo();
+        System.out.println(service.getInfo());
         System.out.println();
         service.sortByName();
-        service.getInfo();
+        System.out.println(service.getInfo());
         System.out.println();
-        service.sortByAmountOfChildren();
-        service.getInfo();
+        service.sortAmountOfChildren();
+        System.out.println(service.getInfo());
 //        service.save(service.getFamilyTree(), path);
 //        FamilyTree newFamilyTree = service.upload(path);
 //        Service newService = new Service(newFamilyTree);

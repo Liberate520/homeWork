@@ -27,8 +27,12 @@ public class Service implements Savable{
         familyTree.addMember(new Human(gender, firstName, lastName));
     }
 
-    public void getInfo(){
-        familyTree.getInfo();
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        for (Human human : familyTree) {
+            sb.append(human).append("\n");
+        }
+        return sb.toString();
     }
 
     @Override
@@ -52,7 +56,7 @@ public class Service implements Savable{
         familyTree.sortByName();
     }
 
-    public void sortByAmountOfChildren(){
-        familyTree.sortByAmountOfChildren();
+    public void sortAmountOfChildren(){
+        familyTree.sortAmountOfChildren();
     }
 }
