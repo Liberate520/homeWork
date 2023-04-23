@@ -1,12 +1,14 @@
 package tree;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
+
 
 public class main { 
-    public static void main (String[] args){
+    public static void main (String[] args) throws FileNotFoundException, IOException, ClassNotFoundException{
  
         GregorianCalendar dateOfBirth1 = new GregorianCalendar(1984, Calendar.MAY, 6); 
         GregorianCalendar dateOfDeath1 = new GregorianCalendar(0,0,0);
@@ -31,13 +33,18 @@ public class main {
         FamilyTree tree = new FamilyTree();
 
         tree.setHuman(human1);
-        System.out.println(tree.toString());
         tree.setHuman(human2);
         tree.setHuman(human3);
         tree.setHuman(human4);
         tree.setHuman(human5);
 
         System.out.println(tree.toString());
+        System.out.println(tree.getByFio("Колыверов", "Дмитрий", "Вячеславович"));
+
+        ReadWrite rw = new ReadWrite();
+        rw.write(tree);   
+        System.out.println(rw.read().toString());
+
        
                
        

@@ -1,12 +1,13 @@
 package tree;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable{
     private String name;
     private String surname;
     private String patronymic;
@@ -176,6 +177,10 @@ public class Human {
     public boolean contains(Human human) {
         return false;
     }
+
+  
+
+    
 
     
 

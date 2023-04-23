@@ -1,12 +1,13 @@
 package tree;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
 
     private List<Human> humanList;
 
@@ -60,22 +61,6 @@ public class FamilyTree {
         }
         return str;
     }
-
-    
-
-
-
-    
-    
-   
-  
-   
-
-    
-
-    
-
-
 
     
 }
