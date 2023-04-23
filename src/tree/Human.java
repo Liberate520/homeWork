@@ -1,7 +1,8 @@
-package oop_homework_1;
+package tree;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,18 +17,31 @@ public class Human {
     private List<Human> children;
     private List<Human> bro;
    
+    public Human(String surname, String patronymic, String name, Calendar dateOfBirth, Calendar dateOfDeath) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;    
+        this.father = null;
+        this.mother = null; 
+        children = new ArrayList<>();
+        bro = new ArrayList<>(); 
+    }
 
-    public Human(String surname, String patronymic, String name, Calendar dateOfBirth, Calendar dateOfDeath, Human mother, Human father, List<Human> children, List<Human> bro) {
+    public Human(String surname, String patronymic, String name, Calendar dateOfBirth, Calendar dateOfDeath, Human mother, Human father) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.mother = mother;
         this.father = father;
-        this.children = children;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
-        this.bro = bro;
+        children = new ArrayList<>();
+        bro = new ArrayList<>();
     }
+
+
 
     public String getName() {
         return name;
@@ -74,11 +88,15 @@ public class Human {
     public List<Human> getChildren() {
         return children;
     }
-    public void setChildren(List<Human> children) {
-        this.children = children;
+    public void setChildren(Human human) {
+        if(!children.contains(human)){
+            this.children.add(human);
+        } 
     }
-    public void setBro(List<Human> bro) {
-        this.bro = bro;
+    public void setBro(Human human) {
+        if(!children.contains(human)){
+            this.children.add(human);
+        } 
     }
     public List<Human> getBro() {
         return bro;
@@ -122,7 +140,44 @@ public class Human {
         } 
                     
         return str;
+    } 
+
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Human other = (Human) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (surname == null) {
+            if (other.surname != null)
+                return false;
+        } else if (!surname.equals(other.surname))
+            return false;
+        if (patronymic == null) {
+            if (other.patronymic != null)
+                return false;
+        } else if (!patronymic.equals(other.patronymic))
+            return false;
+        return true;
     }
+
+    public void add(Human human) {
+    }
+
+    public boolean contains(Human human) {
+        return false;
+    }
+
+    
 
     
 }
