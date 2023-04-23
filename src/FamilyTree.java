@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     // private int id;
     private List<Human> humansList;
 
@@ -36,8 +37,11 @@ public class FamilyTree {
         for (Human human : humansList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
-            
+
         }
         return stringBuilder.toString();
     }
+  
+    
+
 }
