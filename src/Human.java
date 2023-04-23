@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human{
     private String firstName;
     private String lastName;
     private String dob;
@@ -63,6 +63,11 @@ public class Human {
         sb.append(",");
         sb.append(getChildrenInfo());
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getInfo();
     }
 
     public String getMotherInfo(){

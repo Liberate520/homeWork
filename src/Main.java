@@ -14,8 +14,14 @@ public class Main {
         tree.addHuman(child2);
         tree.addHuman(child3);
 
+        Serializable serializer = new SerializableHuman();
+        serializer.save(tree, "tree.out");
+
+
 //        System.out.println(human6.equals(human6));
 
         System.out.println(child1.getInfo());
+
+
     }
 }
