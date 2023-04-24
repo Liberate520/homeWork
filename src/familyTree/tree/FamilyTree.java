@@ -8,8 +8,7 @@ import java.util.Map;
 
 public class FamilyTree implements Serializable {
 
-    private Map<String, Human> wholeGenus;
-    private Human human;
+    private final Map<String, Human> wholeGenus;
 
     /**
      * Конструктор. Создаёт новое генеалогическое древо
@@ -24,7 +23,6 @@ public class FamilyTree implements Serializable {
      * @param human новый человек
      */
     public void addNewHuman(Human human) {
-        this.human = human;
         if (human.hashCode() != 0){
             this.wholeGenus.putIfAbsent(human.getFullName(), human);
         }
@@ -50,6 +48,6 @@ public class FamilyTree implements Serializable {
      * @return объект Human или null
      */
     public Human searchHuman(String fullName){
-        return this.wholeGenus.getOrDefault(fullName, null);
+        return this.wholeGenus.getOrDefault(fullName, new Human(""));
     }
 }

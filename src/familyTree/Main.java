@@ -23,7 +23,9 @@ public class Main {
                 "Петрова Мария Фёдоровна",
                 ""));
 
-        System.out.println(newTree.showAll());
+        System.out.println(newTree.searchHuman("Петров Константин Петрови").getAge());
+
+        System.out.println(newTree.searchHuman("Петров Пётр Петрови").toString());
         saveLoad.savingTree(newTree, "familyTree.ser");
     }
 }

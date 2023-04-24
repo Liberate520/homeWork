@@ -12,14 +12,14 @@ import java.util.Objects;
 
 public class Human implements Serializable {
 
-    private String fullName;
+    private final String FULL_NAME;
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private Human mother;
     private Human father;
     private List<String> spouse;
-    private List<String> childs;
+    private List<String> children;
 
     // #region конструкторы
 
@@ -32,13 +32,13 @@ public class Human implements Serializable {
      * @param mother имя матери строка вида Фамилия Имя Отчество
      * @param father имя отца строка вида Фамилия Имя Отчество
      * @param spouse имена супругов строка вида Фамилия Имя Отчество, через запятую
-     * @param childs имена детей строка вида Фамилия Имя Отчество, через запятую
+     * @param children имена детей строка вида Фамилия Имя Отчество, через запятую
      */
     public Human(String fullName, Gender gender,
                  String dateOfBirth, String dateOfDeath,
                  String mother, String father,
-                 String spouse, String childs) {
-        this.fullName = fullName;
+                 String spouse, String children) {
+        this.FULL_NAME = fullName;
         this.gender = gender;
 
         this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
@@ -53,8 +53,8 @@ public class Human implements Serializable {
         if (!spouse.equals("")) this.spouse = new ArrayList<>(Arrays.asList(spouse.split(", ")));
         else this.spouse = new ArrayList<>();
 
-        if (!childs.equals("")) this.childs = new ArrayList<>(Arrays.asList(childs.split(", ")));
-        else this.childs = new ArrayList<>();
+        if (!children.equals("")) this.children = new ArrayList<>(Arrays.asList(children.split(", ")));
+        else this.children = new ArrayList<>();
     }
 
     /**
@@ -62,7 +62,7 @@ public class Human implements Serializable {
      * @param fullName имя строка вида Фамилия Имя Отчество
      */
     public Human(String fullName) {
-        this.fullName = fullName;
+        this.FULL_NAME = fullName;
     }
 
     // #endregion
@@ -74,7 +74,8 @@ public class Human implements Serializable {
      * @return строка вида Фамилия Имя Отчество
      */
     public String getFullName() {
-        return this.fullName;
+        if (this.FULL_NAME.equals("")) return "Человек не найден.";
+        return this.FULL_NAME;
     }
 
     /**
@@ -82,9 +83,9 @@ public class Human implements Serializable {
      * @return пол человека
      */
     public String getGender() {
-        if (this.gender == Gender.male) return "мужской";
-        if (this.gender == Gender.female) return "женский";
-        return null;
+        if (this.gender == Gender.male) return "Пол мужской";
+        if (this.gender == Gender.female) return "Пол женский";
+        return "Пол не определён, т.к. человек не найден.";
     }
 
     /**
@@ -123,9 +124,14 @@ public class Human implements Serializable {
      * Расчёт возраста
      * @return число лет
      */
-    public int getAge(){
-        return Period.between(this.dateOfBirth,
+    public String getAge() {
+        if (this.dateOfBirth == null) this.dateOfBirth = LocalDate.now();
+        int ageD = Period.between(this.dateOfBirth,
                 Objects.requireNonNullElseGet(this.dateOfDeath, LocalDate::now)).getYears();
+        String ageS;
+        if (ageD == 0) ageS = "Возраст вычислить невозможно, т.к. человек не найден.";
+        else ageS = String.format("Возраст: %d", ageD);
+        return ageS;
     }
 
     /**
@@ -134,7 +140,7 @@ public class Human implements Serializable {
      */
     public String getMother() {
         if (this.mother != null) return this.mother.getFullName();
-        else return null;
+        else return "Человек не найден.";
     }
 
     /**
@@ -143,15 +149,20 @@ public class Human implements Serializable {
      */
     public String getFather() {
         if (this.father != null) return this.father.getFullName();
-        else  return null;
+        else  return "Человек не найден.";
     }
 
     /**
      * Получение имён супругов
      */
     public String getSpouse() {
-        if (this.spouse.size() != 0) return String.join(", ", this.spouse);
-        else return null;
+        String spouse = "";
+        if (this.spouse != null) {
+            if (this.spouse.size() != 0)
+                spouse = String.join(", ", this.spouse);
+        }
+        else spouse = "Человек не найден.";
+        return spouse;
     }
 
     /**
@@ -168,9 +179,13 @@ public class Human implements Serializable {
      * Дети
      * @return строка вида  Фамилия Имя Отчество через запятую
      */
-    public String getChilds() {
-        if (this.childs.size() != 0) return String.join(", ", this.childs);
-        else return null;
+    public String getChildren() {
+        String children = "";
+        if (this.children != null) {
+            if (this.children.size() != 0) children = String.join(", ", this.children);
+        }
+        else children = "Человек не найден.";
+        return children;
     }
 
     /**
@@ -179,9 +194,10 @@ public class Human implements Serializable {
      * @return да или нет
      */
     public boolean setChild(String str) {
-        this.childs.add(str);
+        this.children.add(str);
         return true;
     }
+
     // #endregion
 
     // #region Переопределение equals, hashCode, toString
@@ -210,18 +226,25 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        String dateOfDeath;
-        if (this.getDateOfDeath() != null)
-            dateOfDeath = this.getDateOfDeath().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        else dateOfDeath = null;
-        return "\n__________\nФИО: " + this.getFullName()
-                + "\nпол: " + this.getGender()
-                + "\nдаты рождения/смерти: "
-                + this.getDateOfBirth().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
-                + " / " + dateOfDeath
-                + "\nмать/отец: " + this.getMother() + ", " + this.getFather()
-                + "\nсупруги: " + this.getSpouse()
-                + "\nдети: " + this.getChilds() + "\n__________\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n__________\nФИО: ").append(this.getFullName()).append("\n");
+        sb.append("пол: ").append(this.getGender()).append("\n");
+
+        if (this.getDateOfBirth() != null) {
+            sb.append("дата рождения: ")
+                    .append(this.getDateOfBirth().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)))
+                    .append("\n");
+        }
+        if (this.getDateOfDeath() != null) {
+            sb.append("дата смерти: ")
+                    .append(this.getDateOfDeath().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)))
+                    .append("\n");
+        }
+        sb.append("мать: ").append(this.getMother()).append("\n");
+        sb.append("отец: ").append(this.getFather()).append("\n");
+        sb.append("супруга(и): ").append(this.getSpouse()).append("\n");
+        sb.append("дети: ").append(this.getChildren()).append("\n__________\n");
+        return sb.toString();
     }
     // #endregion
 }
