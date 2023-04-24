@@ -28,12 +28,12 @@ public class Main {
         service.add("Ксения", familyTree.getByName("Александр"), familyTree.getByName("Наталия"));
         service.add("Мирослава", familyTree.getByName("Никита"), familyTree.getByName("Ксения"));
 
-        FileHandler file = new FileHandler();
+        // FileHandler file = new FileHandler();
 
-        file.outPut(familyTree);
-        FamilyTree newFamily = file.inPut();
+        // file.outPut(familyTree);
+        // FamilyTree newFamily = file.inPut();
 
-        newFamily.getInfo();
+        // newFamily.getInfo();
 
         
         for (Object human : service.sortByName()) {
