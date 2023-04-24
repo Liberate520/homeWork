@@ -31,7 +31,5 @@ public class FamilyTree implements Iterable<Human> {
         humanList.sort(new HumanComparatorByAge());
     }
 
-    public void test(){
-        Service service = new Service();
-    }
+
 }
