@@ -1,8 +1,10 @@
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class FamilyTree implements Serializable{
+
+public class FamilyTree implements Serializable, Iterable{
     private List<Human> humans = new ArrayList<Human>();
     private OutAndInputInfo outAndInputInfo =new OutAndInputInfo();
 
@@ -31,5 +33,10 @@ public class FamilyTree implements Serializable{
 
     public Human readHuman(String name){
         return outAndInputInfo.ReadInfo(name);
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
     }
 }
