@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> allHumans;
 
     public FamilyTree() {
@@ -22,5 +23,17 @@ public class FamilyTree {
                 human.getMother().addChild(human);
             }
         }
+    }
+
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("In a tree");
+        sb.append(allHumans.size());
+        sb.append("obj: \n");
+        for (Human human: allHumans){
+            sb.append(human.getInfo());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

@@ -1,5 +1,10 @@
 public class Main {
     public static void main(String[] args) {
+        String filePath = "tree.txt";
+        Writable writable = new FileHandler();
+
+//        FamilyTree tree = (FamilyTree) writable.load(filePath);
+
         FamilyTree tree = new FamilyTree();
         Human mother = new Human("Ekaterina", "Ivanova", "04.11.1975");
         Human father = new Human("Serg", "Petrov", "05.12.1975");
@@ -14,14 +19,8 @@ public class Main {
         tree.addHuman(child2);
         tree.addHuman(child3);
 
-        Serializable serializer = new SerializableHuman();
-        serializer.save(tree, "tree.out");
+        writable.save(tree, filePath);
 
-
-//        System.out.println(human6.equals(human6));
-
-        System.out.println(child1.getInfo());
-
-
+        System.out.println(tree.getInfo());
     }
 }
