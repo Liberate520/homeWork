@@ -8,7 +8,7 @@ import java.util.List;
 import tree.human.Human;
 import tree.human.comparators.HumanComparatorByAge;
 import tree.human.comparators.HumanComparatorByGender;
-import tree.human.comparators.HunanComparatorByName;
+import tree.human.comparators.HumanComparatorByName;
 
 public class FamilyTree implements Serializable, Iterable<Human>{
     private List<Human> humanList;
@@ -56,7 +56,7 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
 
     public void sortByName(){
-        humanList.sort(new HunanComparatorByName());;
+        humanList.sort(new HumanComparatorByName());;
     }
 
     public void sortByAge(){
