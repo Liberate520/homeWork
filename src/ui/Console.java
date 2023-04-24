@@ -8,12 +8,12 @@ public class Console implements View {
     private Presenter presenter;
     private Scanner scanner;
     private Menu menu;
-    private boolean temp;
+    private boolean loopFlag;
 
     public Console() {
         scanner = new Scanner(System.in);
         menu = new Menu(this);
-        temp = true;
+        loopFlag = true;
     }
 
     public void showPerson() {
@@ -51,18 +51,18 @@ public class Console implements View {
     }
 
     public void exit() {
-        temp = false;
+        loopFlag = false;
     }
 
     @Override
     public void run() {
-        while (temp) {
+        while (loopFlag) {
             menu = new Menu(this);
-            while (temp) {
+            while (loopFlag) {
                 System.out.println(menu.print());
                 System.out.print("Выберите пункт Меню -> ");
                 String command = scanner.nextLine();
-                if (check(command)) {
+                if (checkEnteredValue(command)) {
                     menu.execute(Integer.parseInt(command));
                 } else {
                     System.out.println("Введите число!");
@@ -71,7 +71,7 @@ public class Console implements View {
         }
     }
 
-    private boolean check(String check) {
+    private boolean checkEnteredValue(String check) {
         return check.matches("[0-9]+") && Integer.parseInt(check) <= menu.getSize() && Integer.parseInt(check) > 0;
     }
 
