@@ -1,24 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tree {
-    Human human;
+    List<Human> people;
 
-    public Tree(Human human)
+    public Tree(List<Human> people)
     {
-        this.human = human;
+        this.people = people;
     }
 
-    public void getChildren()
+    public Human Find(String name)
     {
-        for(Human h : human.children)
-            System.out.println(h.name + " " + h.surname);
-    }
-
-    public Human nextHuman(int i)
-    {
-        if(i >= human.children.size())
-            throw new IndexOutOfBoundsException("no child at index (indexoutofbound) " + i);
+        for (Human human : people)
+            if(human.name.equals(name))
+                return human;
         
-        human = human.children.get(i);
+        return null;
+    }
 
-        return human;
+    public List<Human> GetChildren(Human parentHuman)
+    {
+        for (Human human : people) {
+            if(human.equals(parentHuman))
+                return human.children;
+        }
+
+        return new ArrayList<>();
     }
 }
