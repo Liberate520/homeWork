@@ -1,36 +1,42 @@
-package tree;
+package tree.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
     private Gender gender;
     private Human husband;
     private String name;
+    private Integer age;
     private Human mother;
     private Human father;
     private List<Human> children;
 
-    public Human(Gender gender, String name, Human mother, Human father, Human husband){
+    public Human(Gender gender, String name, Integer age, Human mother, Human father, Human husband){
         this.gender = gender;
         this.name = name;
+        this.age = age;
         this.mother = mother;
         this.father = father;
         this.husband = husband;
         this.children = new ArrayList<>();
     }
 
-    public Human(Gender gender, String name, Human mother, Human father){
-        this(gender, name, mother, father, null);
+    public Human(Gender gender, String name, Integer age, Human mother, Human father){
+        this(gender, name, age, mother, father, null);
     }
 
-    public Human(Gender gender, String name){
-        this(gender, name, null, null, null);
+    public Human(Gender gender, String name, Integer age){
+        this(gender, name, age, null, null);
     }
 
     public String getName() {
         return name;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 
     public Gender getGender() {
@@ -151,6 +157,11 @@ public class Human implements Serializable{
         if (father != null) f = father.getName();
         if (husband != null) h = husband.getName();
         if (children != null) c = this.getChildrenNames();
-        return "Имя: " + name + "\nпол: " + gender + "\nМать: " + m + "\nОтец: " + f + "\nСупруг/супруга: " + h +"\nДети: " + c + "\n";
+        return "Имя: " + name + "\nВозраст: " + age + "\nпол: " + gender + "\nМать: " + m + "\nОтец: " + f + "\nСупруг/супруга: " + h +"\nДети: " + c + "\n";
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }
