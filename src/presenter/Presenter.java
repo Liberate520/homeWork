@@ -1,8 +1,11 @@
 package presenter;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import model.Service;
+import model.familyTreeApi.Human;
 import ui.View;
 
 public class Presenter {
@@ -23,12 +26,16 @@ public class Presenter {
         service.deleteByName(firstName, lastName);
     }
 
-    public void getHumanByName(String firstName) {
-        service.getHumanByName(firstName);
+    public Human getHumanByName(String firstName) {
+        return service.getHumanByName(firstName);
     }
 
-    public void printTree() {
-        service.printTree();
+    public ArrayList<Human> getHumansList() {
+        return service.getHumansList();
+    }
+
+    public String printTree() {
+        return service.printTree();
     }
 
     public void sortByBirthDate() {
@@ -37,6 +44,14 @@ public class Presenter {
 
     public void sortByName() {
         service.sortByName();
+    }
+
+    public void saveFile() throws IOException {
+        service.saveFile();
+    }
+
+    public void readFile() {
+        service.readFile();
     }
 
     

@@ -1,6 +1,8 @@
 package model;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import model.familyTreeApi.FamilyTree;
 import model.familyTreeApi.Human;
@@ -25,12 +27,16 @@ public class Service {
         activTree.deleteByName(firstName, lastName);
     }
 
-    public void getHumanByName(String firstName) {
-        activTree.getHumanByName(firstName);
+    public ArrayList<Human> getHumansList() {
+        return activTree.getHumansList();
     }
 
-    public void printTree() {
-        activTree.printTree();
+    public Human getHumanByName(String firstName) {
+        return activTree.getHumanByName(firstName);
+    }
+
+    public String printTree() {
+        return activTree.printTree();
     }
 
     public void sortByBirthDate() {
@@ -40,5 +46,23 @@ public class Service {
     public void sortByName() {
         activTree.sortByName();
     }
+
+
+    public void saveFile() throws IOException {
+        loadFile.save(activTree, "treeOut.out");
+    }
+
+
+    public void readFile() {
+        try {
+            activTree = loadFile.read("treeOut.out");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     
 }

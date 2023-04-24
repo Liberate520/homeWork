@@ -42,7 +42,7 @@ public class Main {
         potterTree.add(Lily_Luna);
 
         Service service = new Service(potterTree);
-        View view = new ConsoleUI();
+        ConsoleUI view = new ConsoleUI();
         Presenter presenter = new Presenter(view, service);
 
         view.start();

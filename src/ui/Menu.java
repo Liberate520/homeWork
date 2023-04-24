@@ -17,6 +17,8 @@ public class Menu {
         list.add(new printTree(consoleUI));
         list.add(new sortByBirthDate(consoleUI));
         list.add(new sortByName(consoleUI));
+        list.add(new SaveFile(consoleUI));
+        list.add(new ReadFile(consoleUI));
     }
 
     public String print() {

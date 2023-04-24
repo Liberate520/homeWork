@@ -31,10 +31,12 @@ public class FamilyTree<E extends Human> implements Serializable, Group<E> {
         this.tree.sort(new CompareByBirthDate());
     }
 
-    public void printTree() {
-        for (E p : this.tree) {
-            System.out.println(p);
+    public String printTree() {
+        StringBuilder result = new StringBuilder();
+        for (E p : getHumansList()) {
+            result.append(p.toString() + "\n");
         }
+        return result.toString();
     }
 
 
@@ -70,7 +72,7 @@ public class FamilyTree<E extends Human> implements Serializable, Group<E> {
 
     @Override
     public E getHumanByName(String name) {
-        for (E human : tree) {
+        for (E human : getHumansList()) {
             if (human.getFirstName() == name) {
                 return human;
             }
@@ -85,9 +87,10 @@ public class FamilyTree<E extends Human> implements Serializable, Group<E> {
 
     @Override
     public void deleteByName(String name, String lastName) {
-        for (E human : this.tree) {
-            if (human.getFirstName() == name && human.getLastName() == lastName) {
-                this.tree.remove(human);
+        for (Human human : tree) {
+            if (human.getFirstName().equals(name) && human.getLastName().equals(lastName)) {
+                tree.remove(human);
+                break;
             }
         }
     }
