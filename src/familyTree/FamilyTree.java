@@ -291,22 +291,6 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return null;
     }
 
-    public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
-        format.saveFamilyTreeAs(this, path);
-    }
-
-    public FamilyTree loadFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
-        return format.getFamilyTreeFrom(path);
-    }
-
-    public void savePersonAs(Person person, String path, FileOutStr format) throws IOException {
-        format.savePersonAs(person, path);
-    }
-
-    public Person loadPersonFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
-        return format.getPersonFrom(path);
-    }
-
     public List<Person> getListSortByFirstName(){
         List<Person> personList = new ArrayList<>(personsSet);
         personList.sort(new PersonComparatorByFirstName());

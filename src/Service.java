@@ -2,7 +2,9 @@ import familyTree.FamilyTree;
 import person.Person;
 import person.Relation;
 import person.Sex;
+import saving.FileOutStr;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -35,7 +37,7 @@ public class Service {
         Person person = new Person(firstName, lastName, age, sex);
         activeTree.pushToTree(person);
         Person targetPerson = getPerson(targetFirstName, targetLastName);
-        if (targetPerson != null) {  // Вроде необязательно
+        if (targetPerson != null) {
             switch (relation) {
                 case Spouse: activeTree.pushSpouseToSet(targetPerson, person); break;
                 case Father: activeTree.pushFatherToSet(targetPerson, person); break;
@@ -98,5 +100,21 @@ public class Service {
             System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
                     " " + person.getLastName() + " " + person.getAge());
         }
+    }
+
+    public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
+        format.saveFamilyTreeAs(activeTree, path);
+    }
+
+    public void loadFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
+        activeTree = format.getFamilyTreeFrom(path);
+    }
+
+    public void savePersonAs(Person person, String path, FileOutStr format) throws IOException {
+        format.savePersonAs(person, path);
+    }
+
+    public Person loadPersonFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
+        return format.getPersonFrom(path);
     }
 }

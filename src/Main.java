@@ -1,6 +1,7 @@
 import person.Person;
 import person.Relation;
 import person.Sex;
+import saving.FileOutStr;
 
 import java.io.IOException;
 
@@ -20,11 +21,28 @@ public class Main {
         service.addPersonAs("Ирина", "Лежебокова", 5, Sex.Female, "Василий", "Лежебоков", Relation.Daughter);
         System.out.println(service.getTreeInfo());
         System.out.println();
+
+        // Сохранение древа в файл и загрузка из файла
+        service.saveFamilyTreeAs("familyTree.out", new FileOutStr());
+        service.loadFamilyTreeFrom("familyTree.out", new FileOutStr());
+        System.out.println(service.getTreeInfo());
+        System.out.println();
+
+        // Сохранение персоны в файл и загрузка из файла
+        Person personBeforeSave = service.getPerson("Мария", "Кузьмина");
+        System.out.println(personBeforeSave);
+        service.savePersonAs(personBeforeSave, "person.out", new FileOutStr());
+        Person personAfterLoad = service.loadPersonFrom("person.out", new FileOutStr());
+        System.out.println(personAfterLoad);
+
         System.out.println(service.getInfo("Петр", "Лежебоков", Relation.Father));
+        System.out.println("Сортировка по возрасту:");
         service.printSortByAge();
         System.out.println();
+        System.out.println("Сортировка по фамилии:");
         service.printSortByLastName();
         System.out.println();
+        System.out.println("Сортировка по имени:");
         service.printSortByFirstName();
 
 
