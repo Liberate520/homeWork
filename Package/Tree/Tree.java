@@ -1,10 +1,14 @@
 package Package.Tree;
 
+import Package.Iteration.Iterable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable {
     private List<Person> family;
 
     public Tree() {
@@ -36,5 +40,25 @@ public class Tree implements Serializable {
             sb.append(person.showInfo());
         }
         return sb.toString();
+    }
+
+    @Override
+    public void iterateByName() {
+        Collections.sort(family, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+    }
+
+    @Override
+    public void iterateByBirthdate() {
+        Collections.sort(family, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getBirthDate().compareTo(o2.getBirthDate());
+            }
+        });
     }
 }

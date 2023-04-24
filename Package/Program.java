@@ -22,14 +22,7 @@ public class Program implements Serializable {
         family.addMember(new Person(8, "Петр", "Иванов", LocalDate.of(1996, 10, 19), null, family.setById(4), null));
         family.addMember(new Person(9, "Валентина", "Иванова", LocalDate.of(1997, 8, 14), null, family.setById(4), null));
 
-//        System.out.println(family.showFamily());
-        Files saveFile = new Files();
-        saveFile.writeObj(family, "genTree");
-
-        Files readFile = new Files();
-        readFile.readObj("genTree");
-        System.out.println(readFile);
-
-
+        family.iterateByName();
+        System.out.println(family.showFamily());
     }
 }
