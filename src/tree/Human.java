@@ -1,13 +1,10 @@
 package tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.List;
 
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
-
-public class Human {
+public class Human implements Serializable{
     private Gender gender;
     private Human husband;
     private String name;
@@ -72,12 +69,14 @@ public class Human {
     }
 
     public void addChild(Human child) {
-        children.add(child);
-        if (this.getGender() == Gender.Male) {
-            if (child.getFather() != this) child.setFather(this);
-        }
-        else{
-            if(child.getMother() == null) child.setMother(this);
+        if(!children.contains(child)){
+            children.add(child);
+            if (this.getGender() == Gender.Male) {
+                if (child.getFather() != this) child.setFather(this);
+            }
+            else{
+                if(child.getMother() == null) child.setMother(this);
+            }
         }
     }
 
