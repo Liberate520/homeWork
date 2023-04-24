@@ -1,8 +1,5 @@
 package model;
 
-import model.Human.Human;
-import model.tree.FamilyTree;
-
 import java.io.*;
 
 public class Data implements Writeable{
@@ -18,16 +15,18 @@ public class Data implements Writeable{
     }
 
     @Override
-    public void read() {
+    public Object read() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("data.txt"));
-            Object ob = objectInputStream.readObject();
+            Object temp = objectInputStream.readObject();
             objectInputStream.close();
-            System.out.println(ob);
+//            System.out.println(tree);
+            return temp;
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return new Object();
     }
 }

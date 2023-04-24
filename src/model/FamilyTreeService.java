@@ -26,20 +26,25 @@ public class FamilyTreeService extends Data{
         wr.save(tree);
     }
 
-    public void read() {
-        wr.read();
+    public FamilyTree read() {
+        FamilyTree treeFromFile = (FamilyTree) wr.read();
+        return treeFromFile;
     }
 
     public void addHuman(String name, String surname, LocalDate dayOfBirth) {
         tree.add(new Human(name,surname,dayOfBirth));
     }
 
-    @Override
-    public String toString() {
-        return "" + tree;
+    public List<Human> search(String name, String surname) {
+        return tree.searchForSurnameAndName(name, surname);
     }
 
-    public List<Human> search(String name, String surname) {
-        return (List<Human>) tree.searchForSurnameAndName(name, surname);
+    public String showAll() {
+        StringBuilder tempTree = new StringBuilder();
+        for (Human item : tree) {
+                tempTree.append(item.getName()).append(" ").append(item.getSurname()).append(" ")
+                        .append(item.getBirthday()).append("\n");
+        }
+        return tempTree.toString();
     }
 }

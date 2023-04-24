@@ -16,19 +16,9 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     public void add(E o) {
         this.tree.add(o);
     }
-    @Override
-    public String toString() {
-        for (E item : tree) {
-            if (item.getFather() != null & item.getMother() != null) {
-                System.out.println(item + " Мама:" + item.getMother() + " Папа: " + item.getFather());
-            }
-        }
-        return " ";
-    }
 
     public List<E> searchForSurnameAndName(String surname, String name) {
         List<E> temp = new ArrayList<>();
-//        Object res = null;
         for (Human item : tree) {
             if (item.getName().equals(name) && item.getSurname().equals(surname)) {
                 temp.add((E) item);
@@ -38,24 +28,7 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
                 }
             }
         }
-        return  temp;
-//        for (E item : tree) {
-//            if (item.getFather() != null | item.getMother() != null) {
-//                if (item.getFather().getSurname().equals(surname) && item.getFather().getName().equals(name) ||
-//                        item.getMother().getSurname().equals(surname) && item.getMother().getName().equals(name)) {
-//                    temp.add(item);
-//                }
-//            }
-//        }
-
-//        if (res != null) {
-//            if (!temp.isEmpty()) {
-//                System.out.println(res + " Дети: " + temp);
-//            } else {
-//                System.out.println(res + " Детей нет");
-//            }
-//        } else System.out.println("Такого человека в дереве нет!");
-
+        return temp;
     }
 
     @Override

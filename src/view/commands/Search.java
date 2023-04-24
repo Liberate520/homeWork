@@ -8,7 +8,7 @@ public class Search extends Command{
     }
     @Override
     public String description() {
-        return "Поиск человека";
+        return "Поиск человека с выводом родителей, если они есть";
     }
 
     @Override

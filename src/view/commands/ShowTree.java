@@ -9,7 +9,7 @@ public class ShowTree extends Command{
     }
     @Override
     public String description() {
-        return "Показать дерево";
+        return "Показать всех людей дерева";
     }
 
     @Override

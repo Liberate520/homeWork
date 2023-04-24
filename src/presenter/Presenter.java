@@ -1,6 +1,5 @@
 package presenter;
 
-import model.tree.FamilyTree;
 import view.View;
 import model.FamilyTreeService;
 import java.time.LocalDate;
@@ -16,9 +15,8 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void showTree(){
-        String info = service.toString();
-        view.print(info);
+    public void showTree() {
+        view.print(service.showAll());
     }
 
     public void addHuman(String name, String surname, LocalDate dayOfBirth) {
