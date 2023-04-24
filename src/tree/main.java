@@ -45,6 +45,39 @@ public class main {
         rw.write(tree);   
         System.out.println(rw.read().toString());
 
+        for (Human human: tree){
+            System.out.print(human.getFio());
+            System.out.println(" (" + human.getDateOfBirthString() + ")");
+        }
+
+        tree.sort();
+        System.out.println("\n");
+
+        for (Human human: tree){
+            System.out.print(human.getFio());
+            System.out.println(" (" + human.getDateOfBirthString() + ")");
+        }
+
+        tree.sortByPatronymic();
+        System.out.println("\n");
+
+        for (Human human: tree){
+            System.out.print(human.getFio());
+            System.out.println(" (" + human.getDateOfBirthString() + ")");
+        }
+
+        tree.sortByBirth();
+        System.out.println("\n");
+
+        for (Human human: tree){
+            System.out.print(human.getFio());
+            System.out.println(" (" + human.getDateOfBirthString() + ")");
+        }
+
+       
+
+        
+
        
                
        

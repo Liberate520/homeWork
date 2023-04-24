@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
     private String name;
     private String surname;
     private String patronymic;
@@ -65,6 +65,11 @@ public class Human implements Serializable{
     public Calendar getDateOfBirth() {
         return dateOfBirth;
     }
+
+    public String getDateOfBirthString() {
+        DateFormat df = new SimpleDateFormat("dd MMM yyy");
+        return df.format(dateOfBirth.getTime());
+    }    
     public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
@@ -176,6 +181,11 @@ public class Human implements Serializable{
 
     public boolean contains(Human human) {
         return false;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 
   

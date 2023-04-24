@@ -5,9 +5,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable{
+import tree.comparators.HumanComparatorByBirth;
+import tree.comparators.HumanComparatorByPatronymic;
+import tree.comparators.HumanComparatorBySurname;
+
+public class FamilyTree implements Serializable, Iterable<Human>{
 
     private List<Human> humanList;
 
@@ -61,6 +67,29 @@ public class FamilyTree implements Serializable{
         }
         return str;
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void sort(){
+        Collections.sort(humanList);
+    }
+
+    public void sortBySurname(){
+        Collections.sort(humanList, new HumanComparatorBySurname());
+    }
+
+    public void sortByPatronymic(){
+        Collections.sort(humanList, new HumanComparatorByPatronymic());
+    }
+
+    public void sortByBirth(){
+        Collections.sort(humanList, new HumanComparatorByBirth());
+    }
+
+    
 
     
 }
