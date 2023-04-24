@@ -1,32 +1,31 @@
 package src;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.HashSet;
-
-import javax.swing.GroupLayout.Group;
-import javax.swing.text.html.HTMLDocument.Iterator;
+import src.presenter.Presenter;
+import src.treeApi.FamilyTree;
+import src.treeApi.Service;
+import src.ui.ConsoleUi;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree familyTree = new FamilyTree();
         Service service = new Service(familyTree);
-        // Human natalia = new Human("Наталия");
-        // Human alexandr = new Human("Александр");
-        // Human svetlana = new Human("Светлана");
-        // Human sergey = new Human("Сергей");
-        // Human nikita = new Human("Никита", sergey, svetlana);
-        // Human ksenia = new Human("Ксения", alexandr, natalia);
-        // Human mira = new Human("Мирослава", nikita, ksenia);
+        // Human natalia = new Human("Nataliya");
+        // Human alexandr = new Human("Aleksandr");
+        // Human svetlana = new Human("Svetlana");
+        // Human sergey = new Human("Sergey");
+        // Human nikita = new Human("Nikita3", sergey, svetlana);
+        // Human ksenia = new Human("Kseniya", alexandr, natalia);
+        // Human mira = new Human("Miroslava", nikita, ksenia);
 
-        service.add("Наталия");
-        service.add("Александр");
-        service.add("Светлана");
-        service.add("Сергей");
-        service.add("Никита", familyTree.getByName("Сергей"), familyTree.getByName("Светлана"));
-        service.add("Ксения", familyTree.getByName("Александр"), familyTree.getByName("Наталия"));
-        service.add("Мирослава", familyTree.getByName("Никита"), familyTree.getByName("Ксения"));
+        service.add("Nataliya");
+        service.add("Aleksandr");
+        service.add("Svetlana");
+        service.add("Sergey");
+        service.add("Nikita", familyTree.getByName("Sergey"), familyTree.getByName("Svetlana"));
+        service.add("Kseniya", familyTree.getByName("Aleksandr"), familyTree.getByName("Nataliya"));
+        service.add("Miroslava", familyTree.getByName("Nikita"), familyTree.getByName("Kseniya"));
 
         // FileHandler file = new FileHandler();
 
@@ -36,16 +35,19 @@ public class Main {
         // newFamily.getInfo();
 
         
-        for (Object human : service.sortByName()) {
-            System.out.println(human);
-        }
-        System.out.println();
-        System.out.println();
+        // for (Object human : service.sortByName()) {
+        //     System.out.println(human);
+        // }
+        // System.out.println();
+        // System.out.println();
 
-        for (Object human : service.sortById()) {
-            System.out.println(human);
-        }
+        // for (Object human : service.sortById()) {
+        //     System.out.println(human);
+        // }
 
     
+        ConsoleUi view = new ConsoleUi();
+        Presenter presenter  = new Presenter(view, service);
+        view.start();
     }
 }

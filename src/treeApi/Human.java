@@ -1,10 +1,10 @@
-package src;
+package src.treeApi;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable {
     private int id;
     private String name;
     private String surname;
@@ -63,15 +63,16 @@ public class Human implements Serializable{
     }
 
     public String getInfo() {
-        if (father == null || mother == null) {
+        if (father == null && mother == null && this.children.size() <= 0) {
+            return name + " не имеет ни родителей, ни детей";
+        } else if (father == null || mother == null) {
             return name + " имеет ребенка по имени" + getChildren();
-        } else if (this.children.size() <= 0)
+        } else if (this.children.size() <= 0) {
             return name + " имеет отца по имени " + father.getName() + " и мать по имени " + mother.getName();
-        else
+        } else
             return name + " имеет отца по имени " + father.getName() + " и мать по имени " + mother.getName()
                     + " ,и имеет детей: " + getChildren();
     }
-
 
     @Override
     public String toString() {

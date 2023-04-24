@@ -1,19 +1,16 @@
-package src;
+package src.treeApi;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
 
-    private HashSet<Human> tree;
+    private HashSet<E> tree;
+    private String res = "";
     
 
-    public FamilyTree(HashSet<Human> tree) {
+    public FamilyTree(HashSet<E> tree) {
         this.tree = tree;
     }
 
@@ -21,11 +18,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new HashSet<>());
     }
 
-    public HashSet<Human> getTree() {
+    public HashSet<E> getTree() {
         return tree;
     }
 
-    public void addHuman(Human husband, Human wife, Human child) {
+    public void addHuman(E husband, E wife, E child) {
 
         husband.addChildren(child);
         wife.addChildren(child);
@@ -36,7 +33,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         tree.add(child);
     }
 
-    public boolean add(Human human) {
+    public boolean add(E human) {
         tree.add(human);
         if (human == null) {
             return false;
@@ -50,8 +47,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return true;
     }
 
-    public Human getByName(String name) {
-        for (Human human : tree) {
+    public E getByName(String name) {
+        for (E human : tree) {
             if (human.getName().equals(name)) {
                 return human;
             }
@@ -59,14 +56,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return null;
     }
 
-    public void getInfo() {
-        for (Human string : tree) {
-            System.out.println(string.getInfo());
+    public String getInfo() {
+        for (E string : tree) {
+            res = res + string.getInfo() + "\n";
         }
+        return res;
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return tree.iterator();
     }
     
