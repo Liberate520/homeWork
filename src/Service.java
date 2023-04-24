@@ -26,6 +26,9 @@ public class Service {
     public void addHuman(String name, int yearOfBirth, Gender gender){
         tree.add(new Human(id++, name, yearOfBirth, gender));
     }
+    public void addChild(String name, int yearOfBirth, Gender gender, String nameOfFather, String nameOfMother){
+        tree.add(new Human(id++, name, yearOfBirth, gender, tree.getByName(nameOfFather), tree.getByName(nameOfMother)));
+    }
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Human> iterator = tree.iterator();
@@ -41,4 +44,15 @@ public class Service {
     public void sortByAge(){
         tree.sortByAge();
     }
+   public void saveFile(){
+        Writable writable = new FileHandler();
+        String filePath = "/Users/mihaillazarenko/Documents/Программа разработчик/ООП/OOP_homeWork/src/tree.txt";
+        writable.save(tree,filePath);
+
+   }
+   public void readFile(){
+       Writable writable = new FileHandler();
+       String filePath = "/Users/mihaillazarenko/Documents/Программа разработчик/ООП/OOP_homeWork/src/tree.txt";
+       writable.read(filePath);
+   }
 }

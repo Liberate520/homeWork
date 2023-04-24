@@ -4,9 +4,10 @@ import human.Human;
 import human.HumanComporatorByAge;
 import human.HymanComporatorByName;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Tree implements Iterable<Human> {
+public class Tree implements Iterable<Human>, Serializable {
     private List<Human> humanList;
     public Tree(){
         this(new ArrayList<>());
