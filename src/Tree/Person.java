@@ -1,20 +1,60 @@
 package Tree;
 
+import java.util.ArrayList;
 
-class Person implements Human {
+public class Person {
+    private String fullName;
+    private Gender gender;
+    private int birthYear;
+    private Person mother;
+    private Person father;
+    private ArrayList<Person> children;
 
-    private String name;
-
-    public String getName() {
-        return name;
+    public Person(String fullName, Gender gender, int birthYear) {
+        this.fullName = fullName;
+        this.gender = gender;
+        this.birthYear = birthYear;
+        children = new ArrayList<>();
     }
 
-    public Person(String name) {
-        this.name = name;
+    public String getFullName() {
+        return fullName;
     }
 
-    @Override
-    public String toString() {
-        return getName();
+    public Gender getGender() {
+        return gender;
+    }
+
+    public int getBirthYear() {
+        return birthYear;
+    }
+
+    public Person getMother() {
+        return mother;
+    }
+
+    public Person getFather() {
+        return father;
+    }
+
+    public ArrayList<Person> getChildren() {
+        return children;
+    }
+
+    public void setMother(Person mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(Person father) {
+        this.father = father;
+    }
+
+    public void addChild(Person child) {
+        children.add(child);
+        if (this.gender == Gender.FEMALE) {
+            child.setMother(this);
+        } else {
+            child.setFather(this);
+        }
     }
 }
