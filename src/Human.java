@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private int birthYear;
     private Human mother;
@@ -54,5 +54,10 @@ public class Human implements Serializable {
 
     public String toString() {
         return "Имя: " + name + ", год рождения: " + birthYear + ", мать: " + getMother() + ", отец: " + getFather();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }

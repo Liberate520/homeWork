@@ -1,9 +1,10 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyMembers;
 
     public FamilyTree() {
@@ -35,8 +36,19 @@ public class FamilyTree implements Serializable, Iterable {
     }
 
     @Override
-    public Iterator iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+    public Iterator<Human> iterator() {
+        return new FamilyIterator(familyMembers);
+    }
+
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        for(Human human : familyMembers) {
+            sb.append(human).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void sortByName() {
+        Collections.sort(familyMembers);
     }
 }
