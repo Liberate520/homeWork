@@ -1,18 +1,20 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
-    Human father;
-    Human mother;
-    List<Human> children;
-    String name;
-    int yearOfBirth;
-    String gender;
+public class Human implements Serializable {
+    private Human father;
+    private Human mother;
+    private List<Human> children;
+    private String name;
+    private int yearOfBirth;
+    private String gender;
 
     public Human(String name, int yearOfBirth, String gender) {
         this.name = name;
         this.yearOfBirth = yearOfBirth;
         this.gender = gender;
+        this.children = new ArrayList<>();
     }
 
     public Human getFather() {
@@ -41,6 +43,14 @@ public class Human {
 
     public String getName() {
         return name;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     @Override

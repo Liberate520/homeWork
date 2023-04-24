@@ -1,9 +1,10 @@
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.FileHandler;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         FamilyTree familyTree = new FamilyTree();
 
         familyTree.addHuman(new Human("Сабина", 1965, "f"));
@@ -31,5 +32,15 @@ public class Main {
             e.printStackTrace();
         }
 
+        // сортировка по имени
+        familyTree.sortByName();
+
+        // сортирока по дате рождения
+        //familyTree.sortByBirthDate();
+
+        // итератор for-each
+        for (Human human : familyTree) {
+            System.out.println(human);
+        }
     }
 }
