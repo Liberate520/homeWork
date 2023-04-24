@@ -99,9 +99,6 @@ public class Human implements Serializable, Comparable<Human>  {
         return res;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
 
     public String getBirthdateInfo() {
         String res = "Дата рождения: ";
@@ -123,17 +120,6 @@ public class Human implements Serializable, Comparable<Human>  {
 
         return res;
     }
-
-//    public boolean addchild (Human child){
-//        if (!сhildrenList.contains(child)){
-//            сhildrenList.add(child);
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//
-//    }
 
     public void addChildrenList(Human human) {
        this.сhildrenList.add(human);
