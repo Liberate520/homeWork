@@ -1,29 +1,24 @@
+package model;
+
 import family.FamilyTree;
+import person.Person;
 
 import java.io.*;
 
-public class SaveRestoreSerializable implements SaveAndLoad, Serializable {
+public class SaveRestoreSerializable<E extends Person> implements SaveAndLoad<E> {
     private final String pathToFile = System.getProperty("user.dir").
             concat(System.getProperty("file.separator"));
-    private FamilyTree tree;
 
-    public SaveRestoreSerializable(FamilyTree tree) {
-        this.tree = tree;
-    }
-
-    public FamilyTree getTree() {
-        return tree;
-    }
-
-    public void save(String fileName) throws IOException {
+    public void save(String fileName, FamilyTree<E> tree) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(pathToFile.concat(fileName)));
         objectOutputStream.writeObject(tree);
         objectOutputStream.close();
     }
 
-    public void load(String fileName) throws ClassNotFoundException, IOException {
+     public FamilyTree<E> load(String fileName) throws ClassNotFoundException, IOException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathToFile.concat(fileName)));
-        tree = (FamilyTree) objectInputStream.readObject();
+        FamilyTree<E> tree = (FamilyTree<E>) objectInputStream.readObject();
         objectInputStream.close();
+        return tree;
     }
 }

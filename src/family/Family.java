@@ -1,13 +1,16 @@
 package family;
 
-import human.Human;
-
 import java.util.List;
 
-public interface Family {
-    void add(int id, Human human);
+public interface Family<E> {
+    void add(E human);
+
+    void delete(Integer id);
 
     String showTree(Integer id);
 
-    List<Human> getHumanList();
+    List<E> getHumanList();
+
+    int getId();
+
 }

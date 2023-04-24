@@ -1,82 +1,75 @@
 import family.FamilyTree;
-import human.Human;
+import model.Service;
+
+import person.Human;
+import person.Person;
+import presenter.Presenter;
+import ui.Console;
+import ui.View;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Main {
+
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree testFamily = new FamilyTree();
-        Service service = new Service(testFamily);
 
-        service.addPerson("Алексей", "Яковлев",
-                new Date(54, 1, 1),
-                new Date(114, 5, 1), null, null, 1);
-        service.addPerson("Алевтина", "Яковлева",
-                new Date(64, 2, 2), null, null, null, 0);
-        service.addPerson("Борис", "Яковлев",
-                new Date(91, 1, 1), null, 1, 0, 6);
-        service.addPerson("Бьянка", "Юргент",
-                new Date(92, 2, 2), null, 1, 0, 7);
-        service.addPerson("Богдан", "Яковлев",
-                new Date(93, 3, 3), null, 1, 0, 8);
-        service.addPerson("Белла", "Юшкова",
-                new Date(94, 4, 4), null, 1, 0, 9);
-        service.addPerson("Белка", "Яковлева",
-                new Date(91, 5, 5), null, null, null, 2);
-        service.addPerson("Билл", "Юргент",
-                new Date(92, 6, 5), null, null, null, 3);
-        service.addPerson("Бибигуль", "Яковлева",
-                new Date(93, 7, 5), null, null, null, 4);
-        service.addPerson("Булат", "Юшков",
-                new Date(94, 8, 5), null, null, null, 5);
-        service.addPerson("Валера", "Яковлев",
-                new Date(111, 1, 1), null, 6, 2, null);
-        service.addPerson("Виолетта", "Яковлева",
-                new Date(112, 2, 1), null, 6, 2, null);
-        service.addPerson("Вилор", "Юргент",
-                new Date(113, 3, 2), null, 3, 7, null);
-        service.addPerson("Валя", "Юргент",
-                new Date(114, 4, 3), null, 3, 7, null);
-        service.addPerson("Веня", "Яковлев",
-                new Date(115, 5, 4), null, 8, 4, null);
-        service.addPerson("Вера", "Яковлева",
-                new Date(116, 6, 5), null, 8, 4, null);
-        service.addPerson("Вано", "Юшков",
-                new Date(117, 7, 6), null, 5, 9, null);
-        service.addPerson("Вета", "Юшкова",
-                new Date(118, 8, 7), null, 5, 9, null);
+        FamilyTree<Person> testFamily = new FamilyTree<>();
+        Service<Person> service = new Service<>(testFamily);
 
-        System.out.println(testFamily.showTree(2)); // относительно какого id Human строить дерево
+//        service.setFileName("test4.fml");
+//        testFamily = service.loadTree();
+        generateTree(service);
 
-        SaveRestoreSerializable serializableTree = new SaveRestoreSerializable(testFamily);
-        serializableTree.save("test2.fml");
+        View view = new Console();
+        Presenter presenter = new Presenter(view, service);
+        view.setPresenter(presenter);
+        view.start();
 
-        FamilyTree loadedTree = new FamilyTree();
-        serializableTree.load("test2.fml");
-        loadedTree = serializableTree.getTree();
+//        service.setFileName("test4.fml");
+//        service.saveTree();
 
-        System.out.println("\n\nЗагруженное из файла дерево: ");
-        System.out.println(loadedTree.showTree(4));
+    }
 
-        System.out.println("\nFor each:");
-        for (Human oneHuman : testFamily) {
-            System.out.println(oneHuman);
-        }
-
-        System.out.println("\nid DESC:");
-        for (Human oneHuman : service.getSortedListByIdDESC()) {
-            System.out.println(oneHuman);
-        }
-
-        System.out.println("\nName ASC:");
-        for (Human oneHuman : service.getSortedListByNameASC()) {
-            System.out.println(oneHuman);
-        }
-
-        System.out.println("\nName DESC:");
-        for (Human oneHuman : service.getSortedListByNameDESC()) {
-            System.out.println(oneHuman);
-        }
+    private static void generateTree (Service<Person> service) {
+        service.addPerson(new Human(), "Алексей", "Яковлев",
+                new Date(54, Calendar.JANUARY, 1),
+                new Date(114, Calendar.JANUARY, 1), null, null, 1);
+        service.addPerson(new Human(), "Алевтина", "Яковлева",
+                new Date(64, Calendar.FEBRUARY, 2), null, null, null, 0);
+        service.addPerson(new Human(), "Борис", "Яковлев",
+                new Date(91, Calendar.FEBRUARY, 1), null, 1, 0, 6);
+        service.addPerson(new Human(), "Бьянка", "Юргент",
+                new Date(92, Calendar.FEBRUARY, 2), null, 1, 0, 7);
+        service.addPerson(new Human(), "Богдан", "Яковлев",
+                new Date(93, Calendar.MARCH, 3), null, 1, 0, 8);
+        service.addPerson(new Human(), "Белла", "Юшкова",
+                new Date(94, Calendar.APRIL, 4), null, 1, 0, 9);
+        service.addPerson(new Human(), "Белка", "Яковлева",
+                new Date(91, Calendar.MAY, 5), null, null, null, 2);
+        service.addPerson(new Human(), "Билл", "Юргент",
+                new Date(92, Calendar.JUNE, 5), null, null, null, 3);
+        service.addPerson(new Human(), "Бибигуль", "Яковлева",
+                new Date(93, Calendar.JULY, 5), null, null, null, 4);
+        service.addPerson(new Human(), "Булат", "Юшков",
+                new Date(94, Calendar.AUGUST, 5), null, null, null, 5);
+        service.addPerson(new Human(), "Валера", "Яковлев",
+                new Date(111, Calendar.SEPTEMBER, 1), null, 6, 2, null);
+        service.addPerson(new Human(), "Виолетта", "Яковлева",
+                new Date(112, Calendar.OCTOBER, 1), null, 6, 2, null);
+        service.addPerson(new Human(), "Вилор", "Юргент",
+                new Date(113, Calendar.NOVEMBER, 2), null, 3, 7, null);
+        service.addPerson(new Human(), "Валя", "Юргент",
+                new Date(114, Calendar.DECEMBER, 3), null, 3, 7, null);
+        service.addPerson(new Human(), "Веня", "Яковлев",
+                new Date(115, Calendar.MARCH, 4), null, 8, 4, null);
+        service.addPerson(new Human(), "Вера", "Яковлева",
+                new Date(116, Calendar.JULY, 5), null, 8, 4, null);
+        service.addPerson(new Human(), "Вано", "Юшков",
+                new Date(117, Calendar.AUGUST, 6), null, 5, 9, null);
+        service.addPerson(new Human(), "Вета", "Юшкова",
+                new Date(118, Calendar.SEPTEMBER, 7), null, 5, 9, null);
     }
 }

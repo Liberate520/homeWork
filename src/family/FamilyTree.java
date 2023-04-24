@@ -1,39 +1,46 @@
 package family;
 
-import human.Human;
-import human.HumanIterator;
+import person.Person;
+import person.PersonIterator;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human>, Family {
-    private HashMap<Integer, Human> mapHumans;
+public class FamilyTree<E extends Person> implements Serializable, Iterable<E>, Family<E> {
+    private HashMap<Integer, E> mapHumans;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
 
     public FamilyTree() {
         mapHumans = new HashMap<>();
     }
 
-    public void add(int id, Human human) {
+    public void add(E human) {
         mapHumans.put(id, human);
+        id++;
     }
 
-    public List<Human> getHumanList() {
+    public void delete (Integer id) {
+        mapHumans.remove(id);
+    }
+
+    public List<E> getHumanList() {
         return new ArrayList<>(mapHumans.values());
     }
 
     public String getNameByID(Integer id) {
-        return mapHumans.get(id).getHumanName();
+        return mapHumans.get(id).getPersonName();
     }
 
     public ArrayList<String> getChildrens(Integer id) {
         ArrayList<String> result = new ArrayList<>();
-        for (Human person : mapHumans.values()) {
+        for (E person : mapHumans.values()) {
             if (id.equals(person.getFatherID()) || id.equals(person.getMotherID()))
-                result.add(person.getHumanName() + " " + person.getHumanSurname());
+                result.add(person.getPersonName() + " " + person.getPersonSurname());
         }
         return result;
     }
@@ -41,8 +48,8 @@ public class FamilyTree implements Serializable, Iterable<Human>, Family {
     public ArrayList<String> getBrothersAndSisters(Integer motherID, Integer fatherID, Integer humanID) {
         ArrayList<String> result = new ArrayList<>();
         if (motherID != null && fatherID != null) {
-            for (Human person : mapHumans.values()) {
-                if (person.getMotherID() == motherID && person.getFatherID() == fatherID && person.getHumanID() != humanID) {
+            for (E person : mapHumans.values()) {
+                if (person.getMotherID() == motherID && person.getFatherID() == fatherID && person.getID() != humanID) {
                     result.add(person.getHumanFullName());
                 }
             }
@@ -51,9 +58,10 @@ public class FamilyTree implements Serializable, Iterable<Human>, Family {
     }
 
     public String showTree(Integer id) {
-        Human person = this.mapHumans.getOrDefault(id, new Human());
+        E person = this.mapHumans.get(id);
+//        E person = this.mapHumans.getOrDefault(id, new <E>());
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        StringBuilder result = new StringBuilder(" [").append(person.getHumanID()).append("] ").
+        StringBuilder result = new StringBuilder(" [").append(person.getID()).append("] ").
                 append(person.getHumanFullName());
         if (person.getDateOfBirth() != null)
             result.append("\n\tдата рождения: ").append(df.format(person.getDateOfBirth()));
@@ -67,7 +75,7 @@ public class FamilyTree implements Serializable, Iterable<Human>, Family {
                 this.mapHumans.get(person.getPartnerID()).getHumanFullName());
 
         ArrayList<String> childrens;
-        childrens = this.getChildrens(person.getHumanID());
+        childrens = this.getChildrens(person.getID());
 
         if (childrens.size() > 0) {
             result.append("\n\n\tДети: ");
@@ -77,7 +85,7 @@ public class FamilyTree implements Serializable, Iterable<Human>, Family {
         }
 
         ArrayList<String> brothersAndSisters;
-        brothersAndSisters = this.getBrothersAndSisters(person.getMotherID(), person.getFatherID(), person.getHumanID());
+        brothersAndSisters = this.getBrothersAndSisters(person.getMotherID(), person.getFatherID(), person.getID());
         if (brothersAndSisters.size() > 0) {
             result.append("\n\n\tБратья и сестры: ");
             for (String bs : brothersAndSisters) {
@@ -98,7 +106,8 @@ public class FamilyTree implements Serializable, Iterable<Human>, Family {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(mapHumans);
+    public Iterator<E> iterator() {
+        return new PersonIterator<>(mapHumans);
     }
+
 }

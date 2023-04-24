@@ -1,12 +1,12 @@
-package human;
+package person;
 
 import java.util.*;
 
-public class HumanIterator implements Iterator<Human> {
+public class PersonIterator<E> implements Iterator<E> {
     private int index;
-    private List<Human> humanList = new ArrayList<>();
+    private List<E> humanList = new ArrayList<>();
 
-    public HumanIterator(HashMap<Integer, Human> humanMap) {
+    public PersonIterator(HashMap<Integer, E> humanMap) {
         this.humanList.addAll(humanMap.values());
     }
 
@@ -16,7 +16,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return humanList.get(index++);
     }
 }
