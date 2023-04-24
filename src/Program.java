@@ -31,7 +31,9 @@ public class Program implements Serializable {
         //     System.out.println(members);
         // }
         System.out.println(tree.getInfo());
-        tree.sortByName();
+        // tree.sortByName();
+        // System.out.println(tree.getInfo());
+        tree.sortByAge();
         System.out.println(tree.getInfo());
     }
 }

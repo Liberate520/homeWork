@@ -28,6 +28,10 @@ public class Human implements Serializable, Comparable<Human> {
         return name;
     }
 
+    public int getBirthYear() {
+        return birthYear;
+    }
+
     public String getMother() {
         if (mother != null) {
             return mother.getName();
