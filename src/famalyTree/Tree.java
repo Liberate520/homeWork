@@ -1,9 +1,12 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+package famalyTree;
 
-public class Tree {
+import human.Human;
+import human.HumanComporatorByAge;
+import human.HymanComporatorByName;
+
+import java.util.*;
+
+public class Tree implements Iterable<Human> {
     private List<Human> humanList;
     public Tree(){
         this(new ArrayList<>());
@@ -46,13 +49,15 @@ public class Tree {
         }
         return sb.toString();
     }
-
-
-
-
-
-
-
-
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+    public void sortByName(){
+        humanList.sort(new HymanComporatorByName());
+    }
+    public void sortByAge(){
+        humanList.sort(new HumanComporatorByAge());
+    }
 
 }

@@ -1,3 +1,5 @@
+import famalyTree.Tree;
+
 import java.io.*;
 
 public class FileHandler implements Writable{

@@ -1,28 +1,41 @@
+package human;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Comparable<Human> {
+    private int id;
+    private int yearOfBirrth;
     private String name;
     private Gender gender;
     private Human mother;
     private Human father;
     private List<Human> children;
 
-    public Human(String name, Gender gender){this(name, gender,  null,  null);}
-    public Human(String name, Gender gender, Human father, Human mother){
+    public Human(int id,String name, int yearOfBirrth,Gender gender){this(id, name, yearOfBirrth, gender,  null,  null);}
+    public Human(int id,String name, int yearOfBirrth,Gender gender, Human father, Human mother){
+        this.id = id;
         this.name = name;
+        this.yearOfBirrth = yearOfBirrth;
         this.gender = gender;
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
 
     }
+
+
+
     public boolean addChild(Human child){
         if (!children.contains(child)){
             children.add(child);
             return true;
         }
         return false;
+    }
+
+    public int getYearOfBirrth() {
+        return yearOfBirrth;
     }
 
     public String getName() {
@@ -58,6 +71,9 @@ public class Human {
         StringBuilder sb = new StringBuilder();
         sb.append("имя: ");
         sb.append(name);
+        sb.append(", ");
+        sb.append("год рождени: ");
+        sb.append(getYearOfBirrth());
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");
@@ -115,5 +131,10 @@ public class Human {
     @Override
     public String toString() {
         return getInfo();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }

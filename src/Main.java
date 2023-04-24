@@ -1,3 +1,5 @@
+import human.Gender;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -13,15 +15,15 @@ public class Main {
 //        person4.setMother(person2);
 //        person1.addChild(person3);
 //        person1.addChild(person4);
-        String filePath = "/Users/mihaillazarenko/Documents/Программа разработчик/ООП/OOP_homeWork/src/tree.txt";
-        Writable writable = new FileHandler();
-        Tree tree = new Tree();
-        tree.add(new Human("Petr", Gender.Male));
-        tree.add(new Human("Nina", Gender.Female));
-        tree.add(new Human("Serg", Gender.Male, tree.getByName("Petr"), tree.getByName("Nina")));
-        tree.add(new Human("Sara", Gender.Female, tree.getByName("Petr"), tree.getByName("Nina")));
-        writable.read(filePath);
-        System.out.println(tree.getInfo());
+        Service service = new Service();
+        service.addHuman("Petr", 1962, Gender.Male);
+        service.addHuman("Nina", 1952, Gender.Female);
+        service.addHuman("Ivan", 2008, Gender.Female);
+        service.addHuman("Sara", 2016, Gender.Female);
+        System.out.println(service.getInfo());
+        service.sortByAge();
+        System.out.println(service.getInfo());
+
     }
 }
 
