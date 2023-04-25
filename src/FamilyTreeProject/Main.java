@@ -21,9 +21,7 @@ public class Main {
         //     System.out.println(human.toString());
         // }
         System.out.println(myFamily.getAllMembers());
-        myFamily.sortByName();
-        System.out.println(myFamily.getAllMembers());
-        myFamily.sortByAge();
+        myFamily.sort();
         System.out.println(myFamily.getAllMembers());
     }
 }
