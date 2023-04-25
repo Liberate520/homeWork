@@ -1,25 +1,24 @@
 import java.io.*;
 
-public class Serialization {
-    private ObjectOutputStream file;
-    private ObjectInputStream newFile;
-    public FamilyTree newFamily;
-
-    public Serialization(ObjectOutputStream file, ObjectInputStream newFile, FamilyTree newFamily) throws IOException {
-        this.file = new ObjectOutputStream(new FileOutputStream("family.out"));
-        this.newFile = new ObjectInputStream(new FileInputStream("family.out"));
-        this.newFamily = newFamily;
+public class Serialization implements Writable {
+    @Override
+    public boolean save(Serializable serializable, String filePath) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            objectOutputStream.writeObject(serializable);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public void save(FamilyTree oldFamily) throws IOException {
-        file.writeObject(oldFamily);
-        System.out.println("Объект сохранен");
-        file.close();
+    @Override
+    public FamilyTree read(String filePath) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
+            return (FamilyTree) objectInputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-
-    public void readFile() throws IOException, ClassNotFoundException {
-        newFamily = (FamilyTree) newFile.readObject();
-        newFile.close();
-    }
-
 }

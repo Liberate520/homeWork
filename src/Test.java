@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Test {
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+    public static void main(String[] args) {
         Human nick = new Human("Никита Петров", 22, Gender.male);
         Human mama = new Human("Елена Петрова", 45, Gender.female);
         Human papa = new Human("Евгений Петров", 46, Gender.male);
@@ -28,12 +28,12 @@ public class Test {
         System.out.println();
         brother.findSiblings();
 
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("family.out"));
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("family.out"));
+        String filePath = "family.txt";
+        Writable writable = new Serialization();
 
-        Serialization serialization = new Serialization(objectOutputStream, objectInputStream, new FamilyTree());
-        serialization.save(family);
-        serialization.readFile();
-        serialization.newFamily.showAllRelatives();
+        writable.save(family, filePath);
+
+        FamilyTree tree = writable.read(filePath);
+        tree.showAllRelatives();
     }
 }
