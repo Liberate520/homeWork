@@ -12,21 +12,25 @@ public class Test {
         family.addHuman(nick);
         family.addHuman(mama);
         family.addHuman(papa);
-//        family.showAllRelatives();
-//        mama.showKids();
-//        papa.showKids();
+
         Human brother = new Human("Лев Петров", 15, Gender.male, mama, papa);
         Human sister = new Human("Анастасия Петрова", 6, Gender.female, mama, papa);
         family.addHuman(brother);
         family.addHuman(sister);
-        // check
-//        family.updateKids();
+
 
         mama.showKids();
         System.out.println();
         nick.findSiblings();
         System.out.println();
         brother.findSiblings();
+        System.out.println();
+
+        System.out.println(family.showAllRelatives());
+        family.sortByName();
+        System.out.println(family.showAllRelatives());
+        family.sortByAge();
+        System.out.println(family.showAllRelatives());
 
         String filePath = "family.txt";
         Writable writable = new Serialization();
@@ -34,6 +38,6 @@ public class Test {
         writable.save(family, filePath);
 
         FamilyTree tree = writable.read(filePath);
-        tree.showAllRelatives();
+        System.out.println(family.showAllRelatives());
     }
 }

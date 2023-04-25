@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String fullName;
     private int age;
     private Gender gender;
@@ -120,4 +120,8 @@ public class Human implements Serializable {
         }
     }
 
+    @Override
+    public int compareTo(Human o) {
+        return fullName.compareTo(o.fullName);
+    }
 }

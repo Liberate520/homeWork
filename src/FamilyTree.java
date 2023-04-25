@@ -1,7 +1,5 @@
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FamilyTree implements Serializable, Iterable<Human> {
     public List<Human> people;
@@ -20,11 +18,12 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    public void showAllRelatives() {
-        System.out.println("Список родственников:");
-        for (Human human : people) {
-            System.out.println(human);
+    public String showAllRelatives() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Human human: people) {
+            stringBuilder.append(human).append("\n");
         }
+        return stringBuilder.toString();
     }
 
     public Human findHumanByName(String name) {
@@ -40,5 +39,13 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public Iterator<Human> iterator() {
         return people.iterator();
+    }
+
+    public void sortByName() {
+        people.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge() {
+        people.sort(new HumanComparatorByAge());
     }
 }
