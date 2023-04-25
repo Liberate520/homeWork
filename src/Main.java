@@ -1,6 +1,7 @@
 import tree.FamilyTree;
 import tree.fileHandler.FileHandler;
 import tree.fileHandler.Writable;
+import tree.human.Cat;
 import tree.human.Gender;
 import tree.human.Human;
 
@@ -23,7 +24,7 @@ public class Main {
         human1.setMother(human6);
         human2.setMother(human8);
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         familyTree.addHuman(human1);
         familyTree.addHuman(human2);
         familyTree.addHuman(human3);
@@ -55,8 +56,20 @@ public class Main {
         // FamilyTree tree = (FamilyTree) writable.read(filePath);
         // writable.save(familyTree, filePath);
         System.out.println(familyTree.getInfo());
-        familyTree.sortByName();
+        familyTree.sortByAge();
         System.out.println("--------------------");
         System.out.println(familyTree.getInfo());
+
+
+        Cat cat1 = new Cat(Gender.Male, "Кокос", 2, null, null, null, "Британец");
+        Cat cat2 = new Cat(Gender.Female, "Мандаринка", 7, null, null, null, "Британец");
+        Cat cat3 = new Cat(Gender.Male, "Персик", 3, null, null, null, "Мейн кун");
+        cat2.addChild(cat1);
+        FamilyTree<Cat> catsFamilyTree = new FamilyTree<>();
+        catsFamilyTree.addHuman(cat1);
+        catsFamilyTree.addHuman(cat2);
+        catsFamilyTree.addHuman(cat3);
+        System.out.println("--------------------");
+        System.out.println(catsFamilyTree.getInfo());
     }
 }

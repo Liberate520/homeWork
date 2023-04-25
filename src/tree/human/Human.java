@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>{
+public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private Gender gender;
     private Human husband;
     private String name;
@@ -157,7 +157,7 @@ public class Human implements Serializable, Comparable<Human>{
         if (father != null) f = father.getName();
         if (husband != null) h = husband.getName();
         if (children != null) c = this.getChildrenNames();
-        return "Имя: " + name + "\nВозраст: " + age + "\nпол: " + gender + "\nМать: " + m + "\nОтец: " + f + "\nСупруг/супруга: " + h +"\nДети: " + c + "\n";
+        return "Имя: " + name + " Возраст: " + age + " пол: " + gender + " Мать: " + m + " Отец: " + f + " Супруг/супруга: " + h +" Дети: " + c;
     }
 
     @Override
