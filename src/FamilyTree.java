@@ -1,9 +1,10 @@
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+
+public class FamilyTree implements Serializable,Iterable<Human> {
 
     private List<Human> familyTree;
 
@@ -31,13 +32,11 @@ public class FamilyTree implements Serializable {
         }
     }
 
-    /**Поиск по имени*/
-    public void searchByName(String find){
-        for (Human human : familyTree) {
-            if (human.getFirstName().equals(find)){
-                human.getInfo();
-            }
-        }
+    @Override
+    public Iterator<Human> iterator() {
+         return new HumanIterator(familyTree);
     }
 
+
 }
+

@@ -1,9 +1,11 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable{
+public class Human implements Serializable {
+    private int id;
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -23,9 +25,10 @@ public class Human implements Serializable{
      * @param father       - Отец (не обязательно)
      * @param childrenList Дети ( не обязательно)
      */
-    public Human(String firstName, String lastName, Gender gender,
+    public Human(int id, String firstName, String lastName, Gender gender,
                  String dateOfBirth, String dateOfDeath, Human mother,
                  Human father, List<Human> childrenList) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -39,8 +42,12 @@ public class Human implements Serializable{
     /**
      * Конструктор ,который позволят не заполнять неочевидные поля
      */
-    public Human(String firstName, String lastName, Gender gender, String dateOfBirth) {
-        this(firstName, lastName, gender, dateOfBirth, null, null, null, null);
+    public Human(int id, String firstName, String lastName, Gender gender, String dateOfBirth) {
+        this(id, firstName, lastName, gender, dateOfBirth, null, null, null, null);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -87,7 +94,9 @@ public class Human implements Serializable{
         return mother;
     }
 
-    /**При изменении  поля "мать" , у обьекта "Мать" добавляется "ребенок"*/
+    /**
+     * При изменении  поля "мать" , у обьекта "Мать" добавляется "ребенок"
+     */
     public void setMother(Human newMother) {
         this.mother = newMother;
         newMother.childrenList = new ArrayList<>();
@@ -99,7 +108,9 @@ public class Human implements Serializable{
         return father;
     }
 
-    /**При изменении  поля "отец" , у обьекта "Отец" добавляется "ребенок"*/
+    /**
+     * При изменении  поля "отец" , у обьекта "Отец" добавляется "ребенок"
+     */
     public void setFather(Human NewFather) {
         this.mother = NewFather;
         NewFather.childrenList = new ArrayList<>();
@@ -127,16 +138,27 @@ public class Human implements Serializable{
 
     @Override
     public String toString() {
-        return "Человек{" +
-                "Имя='" + firstName + '\'' +
-                ", Фамилия='" + lastName + '\'' +
-                ", Пол=" + gender +
-                ", Дата рождения=" + dateOfBirth +
-                ", Дата смерти=" + dateOfDeath +
-                ", Мать=" + mother +
-                ", Отец=" + father +
-                ", Дети=" + childrenList +
-                '}';
+        String temp = "неопределенно";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("id= " + id + "\n");
+        stringBuilder.append("Имя= " + firstName + "\n");
+        stringBuilder.append("Фамилия= " + lastName + "\n");
+        stringBuilder.append("Пол= " + gender + "\n");
+        stringBuilder.append("Дата рождения= " + dateOfBirth + "\n");
+        if (dateOfDeath != null) stringBuilder.append("Дата смерти= " + dateOfDeath + "\n");
+        else stringBuilder.append("Дата смерти= " + temp + "\n");
+        if (mother != null) stringBuilder.append("Мать= " + mother.getFullName() + "\n");
+        else stringBuilder.append("Мать= " + temp + "\n");
+        if (father != null) stringBuilder.append("Отец= " + mother.getFullName() + "\n");
+        else stringBuilder.append("Отец= " + temp + "\n");
+        if (childrenList == null) stringBuilder.append("Дети= " + temp + "\n");
+        else {
+            stringBuilder.append("Дети: ");
+            for (Human child : childrenList) {
+                stringBuilder.append(child.getFullName());
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public String getFullName() {
