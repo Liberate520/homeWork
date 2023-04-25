@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Human implements Serializable {
+public class   Human implements Serializable {
     private String name;
     private String surname;
     private Human mother;

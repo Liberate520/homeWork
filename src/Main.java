@@ -27,27 +27,6 @@ public class Main {
         familyKrivenko2.addFamilyTree(humanKrivenkoAy);
         familyKrivenko2.addFamilyTree(humanKrivenkoO);
 
-        String fileAddress = "fileTree.out";
-        loadUnloadFiles.save(familyKrivenko,fileAddress);
-
-        FamilyTree<Human> familyKrivenkoFile =  loadUnloadFiles.read(fileAddress);
-        familyKrivenkoFile.sortName();
-
-        for(Human human: familyKrivenkoFile){
-            System.out.println(human);
-        }
-
-        System.out.println();
-        familyKrivenkoFile.sortbDay();
-        for(Human human: familyKrivenkoFile){
-            System.out.println(human);
-        }
-
-        System.out.println();
-
-        List<Human> children = humanKrivenkoAy.getMother().getChildren();
-        children.remove(humanKrivenkoAy);
-        System.out.println(children);
         Service service = new Service(familyKrivenko);
         View view = new Console();
         Presenter presenter = new Presenter(service,view);
