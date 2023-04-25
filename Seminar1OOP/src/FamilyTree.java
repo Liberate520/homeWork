@@ -1,10 +1,9 @@
-import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree<T extends Human> implements Iterable<T> {
+    private List<T> humanList;
 
-    public FamilyTree(List<Human> humenList) {
+    public FamilyTree(List<T> humenList) {
         this.humanList = humenList;
     }
 
@@ -12,13 +11,13 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
         humanList.add(human);
     }
 
-    public List<Human> getHumanByName(String name) {
-        List<Human> res = new ArrayList<>();
-        for (Human human : humanList) {
+    public List<T> getHumanByName(String name) {
+        List<T> res = new ArrayList<>();
+        for (T human : humanList) {
             if (human.getName().equals(name)) {
                 res.add(human);
             }
@@ -26,7 +25,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return res;
     }
 
-    public List<Human> getAllHuman() {
+    public List<T> getAllHuman() {
         return new ArrayList<>(humanList);
     }
 
@@ -39,27 +38,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
-    }
-
-    private static class HumanIterator implements Iterator<Human> {
-        private List<Human> humanList;
-        private int index;
-
-        public HumanIterator(List<Human> humanList) {
-            this.humanList = humanList;
-            this.index = 0;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return index < humanList.size();
-        }
-
-        @Override
-        public Human next() {
-            return humanList.get(index++);
-        }
+    public Iterator<T> iterator() {
+        return humanList.iterator();
     }
 }

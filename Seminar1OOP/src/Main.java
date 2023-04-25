@@ -39,7 +39,7 @@ public class Main {
         //familyTree.sortByBirthDate();
 
         // итератор for-each
-        for (Human human : familyTree) {
+        for (Object human : familyTree) {
             System.out.println(human);
         }
     }
