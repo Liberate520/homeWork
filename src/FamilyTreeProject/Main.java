@@ -17,8 +17,13 @@ public class Main {
         myFamily.addMember(myDad, null, null);
         myFamily.addMember(me, myMom, myDad);
 
-        for(Human human:myFamily){
-            System.out.println(human.toString());
-        }
+        // for(Human human:myFamily){
+        //     System.out.println(human.toString());
+        // }
+        System.out.println(myFamily.getAllMembers());
+        myFamily.sortByName();
+        System.out.println(myFamily.getAllMembers());
+        myFamily.sortByAge();
+        System.out.println(myFamily.getAllMembers());
     }
 }

@@ -44,6 +44,9 @@ public class Human implements Serializable, Comparable<Human>{
             return (birthday.get(Calendar.DAY_OF_MONTH)+"."+birthday.get(Calendar.MONTH)+"."+birthday.get(Calendar.YEAR));
         }
     }
+    public Calendar getDateBirthday(){
+        return birthday;
+    }
     public String getDethday(){
         if(dethhday.get(Calendar.DAY_OF_MONTH) == 31 && dethhday.get(Calendar.MONTH) == 11 &&
         dethhday.get(Calendar.YEAR) == 2){
@@ -133,6 +136,11 @@ public class Human implements Serializable, Comparable<Human>{
         birthday.get(Calendar.DAY_OF_MONTH) == h.birthday.get(Calendar.DAY_OF_MONTH) &&
         birthday.get(Calendar.MONTH) == h.birthday.get(Calendar.MONTH) &&
         birthday.get(Calendar.YEAR) == h.birthday.get(Calendar.YEAR));
+    }
+
+    @Override
+    public int compareTo(Human o){
+        return this.getFullName().compareTo(o.getFullName());
     }
 
 }
