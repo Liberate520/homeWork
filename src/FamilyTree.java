@@ -53,6 +53,6 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void sortByAge() {
-        
+        Collections.sort(familyMembers, new HumanComporator());
     }
 }

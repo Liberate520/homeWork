@@ -4,7 +4,7 @@ public class HumanComporator implements Comparator<Human> {
 
     @Override
     public int compare(Human o1, Human o2) {
-        return o2.getBirthYear() - o1.getBirthYear();
+        return o1.getBirthYear() - o2.getBirthYear();
     }
     
 }
