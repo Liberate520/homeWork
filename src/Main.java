@@ -14,7 +14,7 @@ public class Main {
 
         //System.out.println(service.searchByName("Павлина"));
         //System.out.println(service.searchByID(2));
-        //service.searchByName("Ирина").setMother(service.searchByName("Павлина"));
+        service.searchByName("Ирина").setMother(service.searchByName("Павлина"));
 
         //service.searchByName("Павлина").setDateOfDeath("06.04.2008");
 

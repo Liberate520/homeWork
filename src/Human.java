@@ -99,8 +99,7 @@ public class Human implements Serializable {
      */
     public void setMother(Human newMother) {
         this.mother = newMother;
-        newMother.childrenList = new ArrayList<>();
-        newMother.childrenList.add(this);
+        newMother.addChild(this);
 
     }
 
@@ -168,18 +167,19 @@ public class Human implements Serializable {
     /**
      * Выдает информацию о человеке
      */
-    public void getInfo() {
-        System.out.println("Имя------------ " + firstName + "\nФамилия-------- " + lastName + "\nДата рожедния-- " + dateOfBirth);
-        if (dateOfDeath != null) System.out.println("Дата смерти---- " + dateOfDeath);
-        if (mother != null) System.out.println("Мать----------- " + this.mother.getFullName());
-        if (father != null) System.out.println("Отец----------- " + this.father.getFullName());
-        if (childrenList != null) {
-            System.out.println("Дети:");
-            for (Human e : childrenList) {
-                System.out.println("     " + e.getFullName());
-            }
-        }
+    public String getInfo(Human human) {
+       return human.toString();
     }
 
+    public boolean addChild(Human child){
+        if(childrenList == null){
+            childrenList = new ArrayList<>();
+        }
+        if (!childrenList.contains(child)){
+            childrenList.add(child);
+            return true;
+        }
+        return false;
+    }
 }
 
