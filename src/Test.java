@@ -30,12 +30,9 @@ public class Test {
         people.add(c4);
         Tree tree = new Tree(people);
 
-        Human test = tree.Find("m1c4");
-        for (Human human : tree.GetChildren(h1))
-            System.out.println(human.name);
-        for (Human human : tree.GetChildren(h2))
-            System.out.println(human.name);
-        for (Human human : tree.GetChildren(c2))
-            System.out.println(human.name);    
+        FileInteraction fi = new FileInteraction(tree);
+        fi.Save("out");
+        Tree restoredTree = (Tree) fi.Load("out");
+        System.out.println(tree);
     }
 }

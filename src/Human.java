@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     public String name;
     public int birthYear;
     public Gender gender;
@@ -34,5 +35,16 @@ public class Human {
                 && this.birthYear == human.birthYear
                 && this.gender == human.gender;
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Human {" + 
+            "name='" + name + "'" +
+            ", birthyear=" + birthYear +
+            ", gender=" + gender + 
+            ", children=" + children.toString() +
+            "}\n";
     }
 }
