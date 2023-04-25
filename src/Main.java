@@ -11,6 +11,7 @@ public class Main {
 
 
 
+
         Human NadiaGlasovaTree = new Human(ValeriaKomarova, PetrKavalerov);
         Human PetrKavalerovTree = new Human(UliaIvanova, IvanIvanov, NadiaGlasova);
         Human KirillVasilevTree = new Human(UliaIvanova, IvanIvanov);
@@ -31,5 +32,6 @@ public class Main {
 
         System.out.println(PetrKavalerovTree);
         System.out.println(UliaIvanovaTree);
+        IvanIvanov.read();
     }
 }
