@@ -16,10 +16,9 @@ public class Main {
         myFamily.addMember(myMom, null, null);
         myFamily.addMember(myDad, null, null);
         myFamily.addMember(me, myMom, myDad);
-        System.out.println(myFamily.getAllMembers());
-        System.out.println(myMom.getChildren());
-        System.out.println(myDad.getChildren());
-        System.out.println(me.getMother());
-        System.out.println(me.getFather());
+
+        for(Human human:myFamily){
+            System.out.println(human.toString());
+        }
     }
 }
