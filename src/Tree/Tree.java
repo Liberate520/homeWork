@@ -5,18 +5,18 @@ import Human.Human;
 import java.io.Serializable;
 import java.util.*;
 
-public class Tree implements Serializable, Iterable<Human> {
-    private List<Human> relatives;
+public class Tree<E extends Human> implements Serializable, Iterable<E> {
+    private List<E> relatives;
 
     public Tree() {
         relatives = new ArrayList<>();
     }
 
-    public List<Human> getRelatives() {
+    public List<E> getRelatives() {
         return relatives;
     }
 
-    public void add(Human human) {
+    public void add(E human) {
         if (!relatives.contains(human)) {
             relatives.add(human);
             if (human.getFather() != null) {
@@ -30,7 +30,7 @@ public class Tree implements Serializable, Iterable<Human> {
             }
         }
     }
-    public void createFamily(Human father, Human mother, Human child) {
+    public void createFamily(E father, E mother, E child) {
         child.setFather(father);
         child.setMother(mother);
         mother.setWifeOrHusband(father);
@@ -44,7 +44,7 @@ public class Tree implements Serializable, Iterable<Human> {
     }
     public Human getByName(String name) {
         String[] tempString = name.split(" ");
-        for (Human human : relatives) {
+        for (E human : relatives) {
             if (human.getSecondName() == tempString[0]
                     && human.getFirstName() == tempString[1]
                     && human.getPatronymic() == tempString[2]) {
@@ -60,7 +60,7 @@ public class Tree implements Serializable, Iterable<Human> {
         sb.append(relatives.size());
         sb.append(" объектов: \n");
         int count=1;
-        for (Human human : relatives) {
+        for (E human : relatives) {
             sb.append(count + ". ");
             sb.append(human.getInfo());
             sb.append(" \n");
@@ -70,7 +70,7 @@ public class Tree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new humanIterator(relatives);
     }
 

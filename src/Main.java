@@ -1,10 +1,14 @@
 import Human.Human;
+import SaveLoad.SaveTxt;
+import Services.Service;
 import Tree.Tree;
-
+import ui.ConsoleUi;
+import ui.View;
+import Presenter.Presenter;
 import java.io.IOException;
 
 public class Main {
-    static Tree familyTree = new Tree();
+    static Tree<Human> familyTree = new Tree<Human>();
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human people1 = new Human("01,01,1686", "александр", "пушкин", "", "male");
@@ -55,32 +59,12 @@ public class Main {
         familyTree.createFamily(people15, people16, people18);
         familyTree.createFamily(people15, people16, people19);
         familyTree.createFamily(people15, people16, people20);
-        System.out.println(familyTree.getInfo());
-        SaveTxt data = new SaveTxt();
-        data.save(familyTree);
-        System.out.println("Загрузка дерева из файла: ");
-        Tree treeRestored= (Tree) data.load();
-        System.out.println(treeRestored.getInfo());
-        Service service = new Service(familyTree.getRelatives());
-        System.out.println("перебор дерева по собственному итератору: ");
-        for (Human human: familyTree) {
-            System.out.println(human.getFullName());
-        }
-        System.out.println("сортировка дерева по фамилиям: ");
-        service.sortBySecondName();
-        for (Human human: familyTree) {
-            System.out.println(human.getFullName());
-        }
-        System.out.println("сортировка дерева по полу: ");
-        service.sortBySex();
-        for (Human human: familyTree) {
-            System.out.println(human.getFullName());
-        }
+        View view = new ConsoleUi();
+        Service<Human> service = new Service(familyTree.getRelatives());
+        new Presenter(view,service);
+        view.start();
 
-        System.out.println("сортировка дерева по году рождения: ");
-        service.sortByYear();
-        for (Human human: familyTree) {
-            System.out.println(human.getFullName());
-        }
+
+
     }
 }

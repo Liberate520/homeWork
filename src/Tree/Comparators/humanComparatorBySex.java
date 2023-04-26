@@ -4,9 +4,9 @@ import Human.Human;
 
 import java.util.Comparator;
 
-public class humanComparatorBySex implements Comparator<Human> {
+public class humanComparatorBySex<E extends Human> implements Comparator<E> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(E o1, E o2) {
         return o1.getSex().compareTo(o2.getSex());
     }
 }

@@ -1,6 +1,9 @@
+package SaveLoad;
+
 import Tree.Tree;
 
 import java.io.*;
+import java.util.List;
 
 public class SaveTxt implements Saveable {
     @Override
@@ -16,8 +19,8 @@ public class SaveTxt implements Saveable {
     public Serializable load() throws IOException, ClassNotFoundException {
            ObjectInputStream objectInputStream = new ObjectInputStream(
                    new FileInputStream("Java_OOP_homeWork\\src\\treeSave.txt"));
-           Tree treeRestored = (Tree) objectInputStream.readObject();
+           List treeRestored = (List) objectInputStream.readObject();
            objectInputStream.close();
-           return treeRestored;
+           return (Serializable) treeRestored;
     }
 }
