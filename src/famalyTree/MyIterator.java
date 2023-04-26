@@ -1,15 +1,13 @@
 package famalyTree;
 
-import humans.Human;
-
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class MyIterator<T> implements Iterator<T> {
     private int index;
-    private List<Human> familyMembers;
+    private List<T> familyMembers;
 
-    public HumanIterator(List<Human> familyMembers) {
+    public MyIterator(List<T> familyMembers) {
         this.familyMembers = familyMembers;
     }
 
@@ -19,7 +17,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return familyMembers.get(index++);
     }
 }

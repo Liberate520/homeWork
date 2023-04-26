@@ -1,54 +1,44 @@
-package humans;
+package Dogs;
 
 import famalyTree.FamilyTreeItems;
+import humans.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements FamilyTreeItems {
+public class Dog implements FamilyTreeItems {
 
     private Gender gender;
-    private Human partner;
     private String firstName;
-    private String lastName;
-    private Human mother;
-    private Human father;
-    private List<Human> children;
+    private Dog mother;
+    private Dog father;
+    private List<Dog> children;
 
 
-    public Human(Gender gender, String firstName, String lastName, Human mother, Human father) {
+    public Dog(Gender gender, String firstName, Dog mother, Dog father) {
         this.gender = gender;
         this.firstName = firstName;
-        this.lastName = lastName;
         this.mother = mother;
         this.father = father;
         children = new ArrayList();
-        partner = null;
     }
 
-    public Human(Gender gender, String firstName, String lastName) {
-        this(gender, firstName, lastName, null, null);
+    public Dog(Gender gender, String firstName) {
+        this(gender, firstName, null, null);
     }
 
-    public Human(Gender gender, String firstName) {
-        this(gender, firstName, null, null, null);
+    public void name(String name) {
+        this.firstName = name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setMother(Human mother) {
+    public void setMother(Dog mother) {
         this.mother = mother;
     }
 
-    public void setFather(Human father) {
+    public void setFather(Dog father) {
         this.father = father;
     }
 
-    public void setPartner(Human partner) {
-        this.partner = partner;
-    }
 
     public Gender getGender() {
         return gender;
@@ -58,27 +48,19 @@ public class Human implements FamilyTreeItems {
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Human getMother() {
+    public Dog getMother() {
         return mother;
     }
 
-    public Human getFather() {
+    public Dog getFather() {
         return father;
     }
 
-    public Human getPartner() {
-        return partner;
-    }
-
-    public List<Human> getChildren() {
+    public List<Dog> getChildren() {
         return children;
     }
 
-    public void addChild (Human child) {
+    public void addChild (Dog child) {
         children.add(child);
     }
 
@@ -87,21 +69,14 @@ public class Human implements FamilyTreeItems {
         StringBuilder sb = new StringBuilder();
         String motherName;
         String fatherName;
-        String partnerName;
-        if(partner == null) {partnerName = "неизвестно";}
-        else {partnerName = partner.getFirstName();}
         if(mother == null) {motherName = "неизвестно";}
         else {motherName = mother.getFirstName();}
         if(father == null) {fatherName = "неизвестно";}
         else {fatherName = father.getFirstName();}
         sb.append("Гендер: ");
         sb.append(gender);
-        sb.append(", Партнер: ");
-        sb.append(partnerName);
         sb.append(", Имя: ");
         sb.append(firstName);
-        sb.append(", Фамилия: ");
-        sb.append(lastName);
         sb.append(", Мать: ");
         sb.append(motherName);
         sb.append(", Отец: ");
@@ -116,11 +91,12 @@ public class Human implements FamilyTreeItems {
         if(children.size() == 0) {
             sb.append("нет детей");
         } else {
-            for (Human human : children) {
-                sb.append(human.getFirstName());
+            for (Dog dog : children) {
+                sb.append(dog.getFirstName());
                 sb.append(", ");
             }
         }
         return sb.toString();
     }
 }
+
