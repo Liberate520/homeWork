@@ -1,6 +1,10 @@
+package data;
+
+import data.Writable;
+
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable {
     @Override
     public boolean save(Serializable serializable, String fileName) {
         try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(fileName))) {

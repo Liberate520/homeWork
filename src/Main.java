@@ -1,9 +1,14 @@
+import FamilyTree.FamilyTree;
+import data.FileHandler;
+import data.Writable;
+import human.Human;
+
 public class Main {
     public static void main(String[] args) {
-        String filePath = "tree.txt";
-        Writable writable = new FileHandler();
+//        String filePath = "tree.txt";
+//        Writable writable = new FileHandler();
 
-//        FamilyTree tree = (FamilyTree) writable.load(filePath);
+//        FamilyTree.FamilyTree tree = (FamilyTree.FamilyTree) writable.load(filePath);
 
         FamilyTree tree = new FamilyTree();
         Human mother = new Human("Ekaterina", "Ivanova", "04.11.1975");
@@ -19,8 +24,10 @@ public class Main {
         tree.addHuman(child2);
         tree.addHuman(child3);
 
-        writable.save(tree, filePath);
+//        writable.save(tree, filePath);
 
+        System.out.println(tree.getInfo());
+        tree.sortByFirstName();
         System.out.println(tree.getInfo());
     }
 }

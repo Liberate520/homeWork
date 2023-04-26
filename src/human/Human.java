@@ -1,3 +1,5 @@
+package human;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +106,14 @@ public class Human implements Serializable {
             res.append("null");
         }
         return res.toString();
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getFullName() {
