@@ -1,25 +1,26 @@
 package familyTree;
 
-import person.Person;
+import interfaces.Anthropoid;
 import person.Relation;
 import person.Sex;
+import person.comparators.PersonComparatorByAge;
 import person.comparators.PersonComparatorByFirstName;
 import person.comparators.PersonComparatorByLastName;
-import person.comparators.PersonComparatorByAge;
-import saving.FileOutStr;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
-    private HashSet<Person> personsSet;
+public class FamilyTree<E extends Anthropoid> implements Serializable, Iterable<E> {
+    private HashSet<E> personsSet;
 
     public FamilyTree() {
         this.personsSet = new HashSet<>();
     }
 
-    public void pushSpouseToSet(Person person, Person spouse) {
+    public void pushSpouseToSet(E person, E spouse) {
         if (spouse != null) {
             person.setSpouse(spouse);
             spouse.setSpouse(person);
@@ -30,9 +31,9 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void pushFatherToSet(Person person, Person father) {
+    public void pushFatherToSet(E person, E father) {
         person.setFather(father);
-        Person mother = person.getMother();
+        Anthropoid mother = person.getMother();
         if (father != null) {
             father.addChildren(person);
             if (mother != null) {
@@ -43,9 +44,9 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void pushMotherToSet(Person person, Person mother) {
+    public void pushMotherToSet(E person, E mother) {
         person.setMother(mother);
-        Person father = person.getFather();
+        Anthropoid father = person.getFather();
         if (mother != null) {
             mother.addChildren(person);
             if (father != null) {
@@ -56,46 +57,46 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void pushBrotherToSet(Person person, Person brother) {
+    public void pushBrotherToSet(E person, E brother) {
         if (brother != null) {
             person.addBrother(brother);
             pushBrothersOrSistersToSet(person);
         }
     }
 
-    public void pushSisterToSet(Person person, Person sister) {
+    public void pushSisterToSet(E person, E sister) {
         if (sister != null) {
             person.addSister(sister);
             pushBrothersOrSistersToSet(person);
         }
     }
 
-    private void pushBrothersOrSistersToSet(Person person) {
-        HashSet<Person> brothersOrSistersSet = person.getBrothersOrSistersSet();
+    private void pushBrothersOrSistersToSet(E person) {
+        HashSet<Anthropoid> brothersOrSistersSet = new HashSet<>(person.getBrothersOrSistersSet());
         if (brothersOrSistersSet != null && brothersOrSistersSet.size() == 1) {
-            Iterator<Person> iterator = brothersOrSistersSet.iterator();
+            Iterator<Anthropoid> iterator = brothersOrSistersSet.iterator();
             while (iterator.hasNext()) {
-                Person item = iterator.next();
+                Anthropoid item = iterator.next();
                 item.setMother(person.getMother());
                 item.setFather(person.getFather());
                 item.addBrotherOrSisterSet(person);
-                this.personsSet.add(item);
+                this.personsSet.add((E)item);
             }
         } else if (brothersOrSistersSet != null && brothersOrSistersSet.size() > 1) {
-            Iterator<Person> iterator = brothersOrSistersSet.iterator();
+            Iterator<Anthropoid> iterator = brothersOrSistersSet.iterator();
             while (iterator.hasNext()) {
-                Person item = iterator.next();
+                Anthropoid item = iterator.next();
                 item.setMother(person.getMother());
                 item.setFather(person.getFather());
                 item.addBrotherOrSisterSet(person);
-                HashSet<Person> copyBrothersOrSistersSet = new HashSet<>(brothersOrSistersSet);
+                HashSet<Anthropoid> copyBrothersOrSistersSet = new HashSet<>(brothersOrSistersSet);
                 copyBrothersOrSistersSet.remove(item);
                 item.addBrotherOrSisterSet(copyBrothersOrSistersSet);
-                this.personsSet.add(item);
+                this.personsSet.add((E)item);
             }
         }
-        Person mother = person.getMother();
-        Person father = person.getFather();
+        Anthropoid mother = person.getMother();
+        Anthropoid father = person.getFather();
         if (father != null) {
             father.addChildren(brothersOrSistersSet);
         }
@@ -104,10 +105,10 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void pushSonToSet(Person person, Person son) {
+    public void pushSonToSet(E person, E son) {
         if (son != null) {
             person.addChildren(son);
-            Person spouse = person.getSpouse();
+            Anthropoid spouse = person.getSpouse();
             if (spouse != null) {
                 spouse.addChildren(son);
             }
@@ -115,10 +116,10 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void pushDaughterToSet(Person person, Person daughter) {
+    public void pushDaughterToSet(E person, E daughter) {
         if (daughter != null) {
             person.addChildren(daughter);
-            Person spouse = person.getSpouse();
+            Anthropoid spouse = person.getSpouse();
             if (spouse != null) {
                 spouse.addChildren(daughter);
             }
@@ -126,31 +127,31 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private void pushChildrenToSet(Person person) {
-        HashSet<Person> childrenSet = person.getChildrenSet();
+    private void pushChildrenToSet(E person) {
+        HashSet<Anthropoid> childrenSet = person.getChildrenSet();
         if (childrenSet != null && childrenSet.size() == 1) {
-            Iterator<Person> iterator = childrenSet.iterator();
+            Iterator<Anthropoid> iterator = childrenSet.iterator();
             while (iterator.hasNext()) {
-                Person item = iterator.next();
+                Anthropoid item = iterator.next();
                 item.setMother(person.getSpouse());
                 item.setFather(person);
-                this.personsSet.add(item);
+                this.personsSet.add((E)item);
             }
         } else if (childrenSet != null && childrenSet.size() > 1) {
-            Iterator<Person> iterator = childrenSet.iterator();
+            Iterator<Anthropoid> iterator = childrenSet.iterator();
             while (iterator.hasNext()) {
-                Person item = iterator.next();
+                Anthropoid item = iterator.next();
                 item.setMother(person.getSpouse());
                 item.setFather(person);
-                HashSet<Person> copyChildrenSet = new HashSet<>(childrenSet);
+                HashSet<Anthropoid> copyChildrenSet = new HashSet<>(childrenSet);
                 copyChildrenSet.remove(item);
                 item.addBrotherOrSisterSet(copyChildrenSet);
-                this.personsSet.add(item);
+                this.personsSet.add((E)item);
             }
         }
     }
 
-    private String getMotherInfo(Person item) {
+    private String getMotherInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getMother() != null) {
             return output.append(item.getMother() + "\n").toString();
@@ -159,7 +160,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private String getFatherInfo(Person item) {
+    private String getFatherInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getFather() != null) {
             return output.append(item.getFather() + "\n").toString();
@@ -168,7 +169,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private String getSpouseInfo(Person item) {
+    private String getSpouseInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getSpouse() != null) {
             return output.append(item.getSpouse() + "\n").toString();
@@ -177,12 +178,12 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private String getBrotherInfo(Person item) {
+    private String getBrotherInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getBrothersOrSistersSet() != null) {
-            Iterator<Person> iteratorBS = item.getBrothersOrSistersSet().iterator();
+            Iterator<Anthropoid> iteratorBS = item.getBrothersOrSistersSet().iterator();
             while (iteratorBS.hasNext()) {
-                Person itemBS = iteratorBS.next();
+                Anthropoid itemBS = iteratorBS.next();
                 if (itemBS.getSex() == Sex.Male) {
                     output.append(itemBS + "\n");
                 }
@@ -193,12 +194,12 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private String getSisterInfo(Person item) {
+    private String getSisterInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getBrothersOrSistersSet() != null) {
-            Iterator<Person> iteratorBS = item.getBrothersOrSistersSet().iterator();
+            Iterator<Anthropoid> iteratorBS = item.getBrothersOrSistersSet().iterator();
             while (iteratorBS.hasNext()) {
-                Person itemBS = iteratorBS.next();
+                Anthropoid itemBS = iteratorBS.next();
                 if (itemBS.getSex() == Sex.Female) {
                     output.append(itemBS + "\n");
                 }
@@ -209,12 +210,12 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private String getSonInfo(Person item) {
+    private String getSonInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getChildrenSet() != null) {
-            Iterator<Person> iteratorCh = item.getChildrenSet().iterator();
+            Iterator<Anthropoid> iteratorCh = item.getChildrenSet().iterator();
             while (iteratorCh.hasNext()) {
-                Person itemCh = iteratorCh.next();
+                Anthropoid itemCh = iteratorCh.next();
                 if (itemCh.getSex() == Sex.Male) {
                     output.append(itemCh + "\n");
                 }
@@ -225,12 +226,12 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    private String getDaughterInfo(Person item) {
+    private String getDaughterInfo(E item) {
         StringBuilder output = new StringBuilder();
         if (item.getChildrenSet() != null) {
-            Iterator<Person> iteratorCh = item.getChildrenSet().iterator();
+            Iterator<Anthropoid> iteratorCh = item.getChildrenSet().iterator();
             while (iteratorCh.hasNext()) {
-                Person itemCh = iteratorCh.next();
+                Anthropoid itemCh = iteratorCh.next();
                 if (itemCh.getSex() == Sex.Female) {
                     output.append(itemCh + "\n");
                 }
@@ -241,28 +242,28 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public void pushToTree(Person person) {
+    public void pushToTree(E person) {
         this.personsSet.add(person);
-        pushSpouseToSet(person, person.getSpouse());
-        pushMotherToSet(person, person.getMother());
-        pushFatherToSet(person, person.getFather());
+        pushSpouseToSet(person, (E)person.getSpouse());
+        pushMotherToSet(person, (E)person.getMother());
+        pushFatherToSet(person, (E)person.getFather());
         pushBrothersOrSistersToSet(person);
         pushChildrenToSet(person);
     }
 
     public String getInfo(String firstName, String lastName, Relation relation) {
-        Person item = getPerson(firstName, lastName);
+        E item = getPerson(firstName, lastName);
         if (item == null) {
             return "Запись отсутствует." + "\n";
         } else {
             switch (relation) {
-                case Mother: return getMotherInfo(item);
-                case Father: return getFatherInfo(item);
-                case Spouse: return getSpouseInfo(item);
-                case Brother: return getBrotherInfo(item);
-                case Sister: return getSisterInfo(item);
-                case Son: return getSonInfo(item);
-                case Daughter: return getDaughterInfo(item);
+                case Mother: return getMotherInfo((E)item);
+                case Father: return getFatherInfo((E)item);
+                case Spouse: return getSpouseInfo((E)item);
+                case Brother: return getBrotherInfo((E)item);
+                case Sister: return getSisterInfo((E)item);
+                case Son: return getSonInfo((E)item);
+                case Daughter: return getDaughterInfo((E)item);
             }
         }
         return "Запись отсутствует." + "\n";
@@ -270,9 +271,9 @@ public class FamilyTree implements Serializable, Iterable<Person> {
 
     public String getInfo(String firstName, String lastName){
         StringBuilder output = new StringBuilder();
-        Iterator<Person> iterator = personsSet.iterator();
+        Iterator<E> iterator = personsSet.iterator();
         while (iterator.hasNext()) {
-            Person item = iterator.next();
+            E item = iterator.next();
             if (item.getFirstName().equals(firstName) && item.getLastName().equals(lastName)) {
                 return output.append(item + "\n").toString();
             }
@@ -280,10 +281,10 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return output.append("Запись отсутствует.").toString();
     }
 
-    public Person getPerson(String firstName, String lastName) {
-        Iterator<Person> iterator = personsSet.iterator();
+    public E getPerson(String firstName, String lastName) {
+        Iterator<E> iterator = personsSet.iterator();
         while (iterator.hasNext()) {
-            Person item = iterator.next();
+            E item = iterator.next();
             if (item.getFirstName().equals(firstName) && item.getLastName().equals(lastName)) {
                 return item;
             }
@@ -291,21 +292,21 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return null;
     }
 
-    public List<Person> getListSortByFirstName(){
-        List<Person> personList = new ArrayList<>(personsSet);
-        personList.sort(new PersonComparatorByFirstName());
+    public List<E> getListSortByFirstName(){
+        List<E> personList = new ArrayList<>(personsSet);
+        personList.sort(new PersonComparatorByFirstName<E>());
         return personList;
     }
 
-    public List<Person> getListSortByLastName(){
-        List<Person> personList = new ArrayList<>(personsSet);
-        personList.sort(new PersonComparatorByLastName());
+    public List<E> getListSortByLastName(){
+        List<E> personList = new ArrayList<>(personsSet);
+        personList.sort(new PersonComparatorByLastName<E>());
         return personList;
     }
 
-    public List<Person> getListSortByAge(){
-        List<Person> personList = new ArrayList<>(personsSet);
-        personList.sort(new PersonComparatorByAge());
+    public List<E> getListSortByAge(){
+        List<E> personList = new ArrayList<>(personsSet);
+        personList.sort(new PersonComparatorByAge<E>());
         return personList;
     }
 
@@ -314,10 +315,9 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         StringBuilder output = new StringBuilder();
         output.append("All records of Family Tree:" + "\n");
         output.append("##################################" + "\n");
-        Iterator<Person> iterator = personsSet.iterator();
+        Iterator<E> iterator = personsSet.iterator();
         while (iterator.hasNext()) {
-            Person item = iterator.next();
-//            output.append(item.getFirstName() + " " + item.getLastName() + "\n");
+            E item = iterator.next();
             output.append(item + "\n");
         }
         output.append("---------------------------------" + "\n");
@@ -325,7 +325,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<E> iterator() {
         return personsSet.iterator();
     }
 }

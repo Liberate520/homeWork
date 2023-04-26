@@ -1,15 +1,17 @@
 package person;
 
+import interfaces.Anthropoid;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Person extends Human implements Serializable {
-    private Person mother;
-    private Person father;
-    private Person spouse;
-    private HashSet<Person> brothersOrSistersSet;
-    private HashSet<Person> childrenSet;
+public class Person extends Human implements Serializable, Anthropoid {
+    private Anthropoid mother;
+    private Anthropoid father;
+    private Anthropoid spouse;
+    private HashSet<Anthropoid> brothersOrSistersSet;
+    private HashSet<Anthropoid> childrenSet;
 
     public Person(String firstName, String lastName, int age, Sex sex) {
         super(firstName, lastName, age, sex);
@@ -26,7 +28,7 @@ public class Person extends Human implements Serializable {
         this.mother = mother;
     }
 
-    public void setMother(Person mother) {
+    public void setMother(Anthropoid mother) {
         this.mother = mother;
     }
 
@@ -35,7 +37,7 @@ public class Person extends Human implements Serializable {
         this.father = father;
     }
 
-    public void setFather(Person father) {
+    public void setFather(Anthropoid father) {
         this.father = father;
     }
 
@@ -44,20 +46,20 @@ public class Person extends Human implements Serializable {
         this.spouse = spouse;
     }
 
-    public void setSpouse(Person spouse) {
+    public void setSpouse(Anthropoid spouse) {
         this.spouse = spouse;
     }
 
     public Person getMother() {
-        return mother;
+        return (Person) mother;
     }
 
     public Person getFather() {
-        return father;
+        return (Person) father;
     }
 
     public Person getSpouse() {
-        return spouse;
+        return (Person) spouse;
     }
 
     public void addBrother(String firstName, String lastName, int age) {
@@ -65,7 +67,7 @@ public class Person extends Human implements Serializable {
         this.brothersOrSistersSet.add(brother);
     }
 
-    public void addBrother(Person brother) {
+    public void addBrother(Anthropoid brother) {
         this.brothersOrSistersSet.add(brother);
     }
 
@@ -74,19 +76,19 @@ public class Person extends Human implements Serializable {
         this.brothersOrSistersSet.add(sister);
     }
 
-    public void addSister(Person sister) {
+    public void addSister(Anthropoid sister) {
         this.brothersOrSistersSet.add(sister);
     }
 
-    public void addBrotherOrSisterSet (HashSet<Person> brotherOrSisterSet) {
+    public void addBrotherOrSisterSet (HashSet<Anthropoid> brotherOrSisterSet) {
         this.brothersOrSistersSet.addAll(brotherOrSisterSet);
     }
 
-    public void addBrotherOrSisterSet (Person brotherOrSister) {
+    public void addBrotherOrSisterSet (Anthropoid brotherOrSister) {
         this.brothersOrSistersSet.add(brotherOrSister);
     }
 
-    public HashSet<Person> getBrothersOrSistersSet() {
+    public HashSet<Anthropoid> getBrothersOrSistersSet() {
         return brothersOrSistersSet;
     }
 
@@ -95,15 +97,15 @@ public class Person extends Human implements Serializable {
         this.childrenSet.add(child);
     }
 
-    public void addChildren(HashSet<Person> childrenSet) {
+    public void addChildren(HashSet<Anthropoid> childrenSet) {
         this.childrenSet.addAll(childrenSet);
     }
 
-    public void addChildren(Person child) {
+    public void addChildren(Anthropoid child) {
         this.childrenSet.add(child);
     }
 
-    public HashSet<Person> getChildrenSet() {
+    public HashSet<Anthropoid> getChildrenSet() {
         return childrenSet;
     }
 
@@ -119,7 +121,7 @@ public class Person extends Human implements Serializable {
         StringBuilder output = new StringBuilder();
         if (this.brothersOrSistersSet != null && this.brothersOrSistersSet.size() != 0) {
             output.append("Brothers and sisters: ");
-            for (Person person: this.brothersOrSistersSet) {
+            for (Anthropoid person: this.brothersOrSistersSet) {
                 output.append(person.getFirstName() + " " + person.getLastName() + "    ");
             }
             output.append("\n");
@@ -131,7 +133,7 @@ public class Person extends Human implements Serializable {
         StringBuilder output = new StringBuilder();
         if (this.childrenSet != null && this.childrenSet.size() != 0) {
             output.append("Children: ");
-            for (Person child: this.childrenSet) {
+            for (Anthropoid child: this.childrenSet) {
                 output.append(child.getFirstName() + " " + child.getLastName() + "    ");
             }
             output.append("\n");
@@ -139,13 +141,14 @@ public class Person extends Human implements Serializable {
         return output.toString();
     }
 
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
         output.append(super.toString());
-        output.append("Spouse: " + this.printPerson(this.spouse) + "\n");
-        output.append("Mother: " + this.printPerson(this.mother) + "\n");
-        output.append("Father: " + this.printPerson(this.father) + "\n");
+        output.append("Spouse: " + this.printPerson((Person) this.spouse) + "\n");
+        output.append("Mother: " + this.printPerson((Person) this.mother) + "\n");
+        output.append("Father: " + this.printPerson((Person) this.father) + "\n");
         output.append(this.printBrothersOrSisters());
         output.append(this.printChildren());
         return output.toString();
@@ -168,4 +171,6 @@ public class Person extends Human implements Serializable {
     public int hashCode() {
         return Objects.hash(this.getFirstName(), this.getLastName(), this.getAge());
     }
+
+
 }

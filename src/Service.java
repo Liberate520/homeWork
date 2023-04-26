@@ -6,24 +6,23 @@ import saving.FileOutStr;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Service {
-    private FamilyTree activeTree;
-    private List<FamilyTree> familyTreeList;
+    private FamilyTree<Person> activeTree;
+    private List<FamilyTree<Person>> familyTreeList;
 
-    public Service(FamilyTree tree) {
+    public Service(FamilyTree<Person> tree) {
         this.activeTree = tree;
         familyTreeList = new ArrayList<>();
         familyTreeList.add(tree);
     }
 
     public Service(){
-        this(new FamilyTree());
+        this(new FamilyTree<Person>());
     }
 
-    public void addFamilyTree(FamilyTree familyTree){
+    public void addFamilyTree(FamilyTree<Person> familyTree){
         familyTreeList.add(familyTree);
     }
 
@@ -39,13 +38,13 @@ public class Service {
         Person targetPerson = getPerson(targetFirstName, targetLastName);
         if (targetPerson != null) {
             switch (relation) {
-                case Spouse: activeTree.pushSpouseToSet(targetPerson, person); break;
-                case Father: activeTree.pushFatherToSet(targetPerson, person); break;
-                case Mother: activeTree.pushMotherToSet(targetPerson, person); break;
-                case Brother: activeTree.pushBrotherToSet(targetPerson, person); break;
-                case Sister: activeTree.pushSisterToSet(targetPerson, person); break;
-                case Son: activeTree.pushSonToSet(targetPerson, person); break;
-                case Daughter: activeTree.pushDaughterToSet(targetPerson, person); break;
+                case Spouse -> activeTree.pushSpouseToSet(targetPerson, person);
+                case Father -> activeTree.pushFatherToSet(targetPerson, person);
+                case Mother -> activeTree.pushMotherToSet(targetPerson, person);
+                case Brother -> activeTree.pushBrotherToSet(targetPerson, person);
+                case Sister -> activeTree.pushSisterToSet(targetPerson, person);
+                case Son -> activeTree.pushSonToSet(targetPerson, person);
+                case Daughter -> activeTree.pushDaughterToSet(targetPerson, person);
             }
         }
     }
