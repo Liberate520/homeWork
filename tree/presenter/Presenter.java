@@ -1,7 +1,6 @@
 package presenter;
 
 import java.time.LocalDate;
-
 import ui.View;
 
 import model.ServiceFamilyTree;
@@ -27,15 +26,6 @@ public class Presenter<E> {
 
     public boolean addCreature(String firstName, String lastName, Gender gender, LocalDate dateBirth) {
         return famService.addCreature(firstName, lastName, gender, dateBirth);
-    }
-
-    public void makeChild() {
-
-    }
-
-    public boolean validForChild(String childFirstName, String childLastName, String parentFirstName,
-            String parentLastName) {
-        return famService.validForChild(childFirstName, childLastName, parentFirstName, parentLastName);
     }
 
     public boolean readFamilyFromFile() {

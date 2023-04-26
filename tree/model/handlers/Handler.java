@@ -1,11 +1,11 @@
 package model.handlers;
 
 public abstract class Handler {
-    private final String filePath;
+    private final String filePathOut;
     private final String fileNameOut;
 
     public Handler() {
-        this.filePath = "tree\\src\\model\\handlers\\fileLogs\\";
+        this.filePathOut = "tree\\model\\handlers\\fileLogs\\";
         this.fileNameOut = "input.out";
     }
 
@@ -13,8 +13,8 @@ public abstract class Handler {
         return fileNameOut;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getFilePathOut() {
+        return filePathOut;
     }
 
 }

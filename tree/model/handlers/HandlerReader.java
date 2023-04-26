@@ -13,15 +13,16 @@ public class HandlerReader extends Handler implements Reader {
 
     @Override
     public Saveable readFromFile() {
+        Saveable obj = null;
         try {
             ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream(super.getFilePath() + super.getFileNameOut()));
+                    new FileInputStream(super.getFilePathOut() + super.getFileNameOut()));
+            obj = (Saveable) ois.readObject();
             ois.close();
-            return (Saveable) ois.readObject();
         } catch (ClassNotFoundException | IOException e) {
             System.out.println(e.getMessage());
         }
-        return (Saveable) this.object;
+        return obj;
     }
 
 }

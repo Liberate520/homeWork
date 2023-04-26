@@ -6,7 +6,6 @@ import java.util.List;
 import ui.Commands.Command;
 import ui.Commands.Finish;
 import ui.Commands.CreatureCommands.AddCreature;
-import ui.Commands.CreatureCommands.MakeСhild;
 import ui.Commands.CreatureCommands.ViewInfoByNames;
 import ui.Commands.FamilyCommands.ReadFamilyFromFile;
 import ui.Commands.FamilyCommands.ViewFamily;
@@ -18,11 +17,8 @@ public class Menu {
     List<Command> creatureCommands;
 
     public Menu(Console console) {
-        // TreeOfTrees treeOfTrees = new TreeOfTrees<>();
         commands = new ArrayList<>();
         commands.add(new AddCreature(console));
-        // commands.add(new MakeСhild(console));
-        // commands.add(new MakeParent(console));
         commands.add(new WriteFamilyToFile(console));
         commands.add(new ReadFamilyFromFile(console));
         commands.add(new ViewFamily(console));

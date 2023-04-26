@@ -3,16 +3,13 @@ package model.familyTree;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 import model.essences.Creature;
-import model.essences.Human;
 import model.handlers.Saveable;
 
 public class FamilyTree<E extends Creature<E>> implements Saveable, Iterable<E> {
     String familyName;
     private ArrayList<E> creatureList;
-    private FamilyType famType;
 
     public FamilyTree() {
         this.creatureList = new ArrayList<>();
@@ -22,19 +19,15 @@ public class FamilyTree<E extends Creature<E>> implements Saveable, Iterable<E> 
         return familyName;
     }
 
-    // public void addHuman(E human) {
-    // this.creatureList.add(human);
-    // }
-
     @Override
     public Iterator<E> iterator() {
         return creatureList.iterator();
     }
 
-    @Override
-    public String getInfo() {
-        return "";
-    }
+    // @Override
+    // public String getInfo() {
+    // return "";
+    // }
 
     public ArrayList<E> getCreatureList() {
         return this.creatureList;

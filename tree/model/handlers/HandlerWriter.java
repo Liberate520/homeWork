@@ -13,7 +13,7 @@ public class HandlerWriter extends Handler implements Writer {
     public boolean saveToFile(Saveable object) {
         try {
             ObjectOutputStream out = new ObjectOutputStream(
-                    new FileOutputStream(super.getFilePath() + super.getFileNameOut()));
+                    new FileOutputStream(super.getFilePathOut() + super.getFileNameOut()));
             out.writeObject(object);
             return true;
         } catch (Exception e) {
