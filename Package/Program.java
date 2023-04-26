@@ -1,17 +1,19 @@
 package Package;
+import Package.Menu.Menu;
 import Package.WorkWithFiles.Files;
 import Package.Tree.Person;
 import Package.Tree.Tree;
 
 import java.io.*;
+import java.text.ParseException;
 import java.time.LocalDate;
 
 
 public class Program implements Serializable {
     
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
 
-        Tree family = new Tree();
+        Tree<Person> family = new Tree<>();
         family.addMember(new Person(1, "Иван", "Иванов", LocalDate.of(1948, 1, 22), null));
         family.addMember(new Person(2, "Галина", "Иванова", LocalDate.of(1950, 5, 12), null));
         family.addMember(new Person(3, "Артём", "Иванов", LocalDate.of(1973, 2, 25), null, family.setById(1), family.setById(2)));
@@ -22,7 +24,8 @@ public class Program implements Serializable {
         family.addMember(new Person(8, "Петр", "Иванов", LocalDate.of(1996, 10, 19), null, family.setById(4), null));
         family.addMember(new Person(9, "Валентина", "Иванова", LocalDate.of(1997, 8, 14), null, family.setById(4), null));
 
-        family.iterateByName();
-        System.out.println(family.showFamily());
+        Menu menu = new Menu();
+        menu.showMenu();
+        menu.choose("Ваш выбор: ", family);
     }
 }

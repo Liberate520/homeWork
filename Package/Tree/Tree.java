@@ -1,5 +1,6 @@
 package Package.Tree;
 
+import Package.Iteration.Comparators;
 import Package.Iteration.Iterable;
 
 import java.io.Serializable;
@@ -8,14 +9,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Tree implements Serializable, Iterable {
-    private List<Person> family;
+public class Tree <E extends Person> implements Serializable, Iterable {
+    private List<E> family;
 
     public Tree() {
         this.family = new ArrayList<>();
     }
 
-    public void addMember(Person person) {
+    public void addMember(E person) {
         if (!family.contains(person)) {
             family.add(person);
             if (person.getFather() != null){
@@ -27,8 +28,8 @@ public class Tree implements Serializable, Iterable {
         }
     }
 
-    public Person setById(Integer id) {
-        for (Person person: family) {
+    public E setById(Integer id) {
+        for (E person: family) {
             if (person.getId().equals(id)) return person;
         }
         return null;
@@ -36,17 +37,16 @@ public class Tree implements Serializable, Iterable {
 
     public String showFamily(){
         StringBuilder sb = new StringBuilder();
-        for (Person person: family){
+        for (E person: family){
             sb.append(person.showInfo());
         }
         return sb.toString();
     }
 
-    @Override
     public void iterateByName() {
-        Collections.sort(family, new Comparator<Person>() {
+        Collections.sort(family, new Comparator<E>() {
             @Override
-            public int compare(Person o1, Person o2) {
+            public int compare(E o1, E o2) {
                 return o1.getName().compareTo(o2.getName());
             }
         });
@@ -54,9 +54,9 @@ public class Tree implements Serializable, Iterable {
 
     @Override
     public void iterateByBirthdate() {
-        Collections.sort(family, new Comparator<Person>() {
+        Collections.sort(family, new Comparator<E>() {
             @Override
-            public int compare(Person o1, Person o2) {
+            public int compare(E o1, E o2) {
                 return o1.getBirthDate().compareTo(o2.getBirthDate());
             }
         });
