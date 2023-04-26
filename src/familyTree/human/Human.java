@@ -12,6 +12,7 @@ import java.util.Objects;
 
 public class Human implements Serializable {
 
+    private int id;
     private final String FULL_NAME;
     private Gender gender;
     private LocalDate dateOfBirth;
@@ -25,6 +26,7 @@ public class Human implements Serializable {
 
     /**
      * Конструктор, принимающий все аргументы
+     * @param id порядковый номер
      * @param fullName строка вида Фамилия Имя Отчество
      * @param gender пол
      * @param dateOfBirth дата рождения строка вида дд.мм.гггг
@@ -34,10 +36,11 @@ public class Human implements Serializable {
      * @param spouse имена супругов строка вида Фамилия Имя Отчество, через запятую
      * @param children имена детей строка вида Фамилия Имя Отчество, через запятую
      */
-    public Human(String fullName, Gender gender,
+    public Human(int id, String fullName, Gender gender,
                  String dateOfBirth, String dateOfDeath,
                  String mother, String father,
                  String spouse, String children) {
+        this.id = id;
         this.FULL_NAME = fullName;
         this.gender = gender;
 
@@ -124,14 +127,12 @@ public class Human implements Serializable {
      * Расчёт возраста
      * @return число лет
      */
-    public String getAge() {
+    public int getAge() {
         if (this.dateOfBirth == null) this.dateOfBirth = LocalDate.now();
         int ageD = Period.between(this.dateOfBirth,
                 Objects.requireNonNullElseGet(this.dateOfDeath, LocalDate::now)).getYears();
-        String ageS;
-        if (ageD == 0) ageS = "Возраст вычислить невозможно, т.к. человек не найден.";
-        else ageS = String.format("Возраст: %d", ageD);
-        return ageS;
+
+        return ageD;
     }
 
     /**
@@ -227,7 +228,8 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n__________\nФИО: ").append(this.getFullName()).append("\n");
+        sb.append("__________").append("\n");
+        sb.append("ФИО: ").append(this.getFullName()).append("\n");
         sb.append("пол: ").append(this.getGender()).append("\n");
 
         if (this.getDateOfBirth() != null) {
@@ -242,8 +244,8 @@ public class Human implements Serializable {
         }
         sb.append("мать: ").append(this.getMother()).append("\n");
         sb.append("отец: ").append(this.getFather()).append("\n");
-        sb.append("супруга(и): ").append(this.getSpouse()).append("\n");
-        sb.append("дети: ").append(this.getChildren()).append("\n__________\n");
+        sb.append("супруг(а)(и): ").append(this.getSpouse()).append("\n");
+        sb.append("дети: ").append(this.getChildren()).append("\n");
         return sb.toString();
     }
     // #endregion

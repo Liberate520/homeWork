@@ -3,18 +3,22 @@ package familyTree.tree;
 import familyTree.human.Human;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
-    private final Map<String, Human> wholeGenus;
+    private Map<String, Human> wholeGenus;
 
     /**
      * Конструктор. Создаёт новое генеалогическое древо
      */
-    public FamilyTree() {
+    public FamilyTree(){
         this.wholeGenus = new LinkedHashMap<>();
+    }
+
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(wholeGenus);
     }
 
     /**
@@ -33,21 +37,51 @@ public class FamilyTree implements Serializable {
      * @return список всех членов древа
      */
     public String showAll() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int id = 1;
         for (Map.Entry<String, Human> human: this.wholeGenus.entrySet()) {
-            str.append(String.format("%d%s", id, human.getValue()));
+            sb.append(String.format("%d%s", id, human.getValue()));
             id ++;
         }
-        return str + "\n";
+        return sb + "\n";
     }
 
     /**
      * Поиск человека по полному имени
      * @param fullName строка вида Фамилия Имя Отчество
-     * @return объект Human или null
+     * @return объект Human
      */
     public Human searchHuman(String fullName){
         return this.wholeGenus.getOrDefault(fullName, new Human(""));
+    }
+
+    /**
+     * Используется компаратор по умолчанию
+     */
+    public void sortByName(){
+        Map<String, Human> sorted = new TreeMap<>(this.wholeGenus);
+        wholeGenus = sorted;
+        System.out.println(this.showAll());
+    }
+
+    /**
+     * Я честно старался. Но с компаратором, сравнивающим значения по возрасту
+     * у меня ничего не вышло. IDE ругается на разность типов.
+     * Поэтому сделал только так.
+     */
+    public void sortByAge(){
+        List<Integer> list = new ArrayList<>();
+        Map<String, Human> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Human> human : this.wholeGenus.entrySet())
+            list.add(human.getValue().getAge());
+        Collections.sort(list);
+        for (int i : list) {
+            for (Map.Entry<String, Human> human : this.wholeGenus.entrySet())
+                if (human.getValue().getAge() == i){
+                    sortedMap.put(human.getKey(), human.getValue());
+                }
+        }
+        wholeGenus = sortedMap;
+        System.out.println(this.showAll());
     }
 }
