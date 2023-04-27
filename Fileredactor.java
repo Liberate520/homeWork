@@ -1,3 +1,5 @@
+package scr.homeWork-1-1;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
