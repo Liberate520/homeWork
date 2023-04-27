@@ -1,9 +1,8 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
-public class GenealogyTree implements Serializable{
+public class GenealogyTree implements Serializable, Iterable<Human>{
     private List<Human> humans;
 
     public GenealogyTree() { this(new ArrayList<>()); }
@@ -35,9 +34,9 @@ public class GenealogyTree implements Serializable{
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("В дереве ");
-        sb.append(humans.size());
-        sb.append(" Объектов: \n ");
+//        sb.append("В дереве ");
+//        sb.append(humans.size());
+//        sb.append(" объектов:\n ");
         for (Human human: humans){
             sb.append(human.getInfo());
             sb.append("\n");
@@ -63,4 +62,15 @@ public class GenealogyTree implements Serializable{
         return null;
     }
 
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humans);
+    }
+
+    public void sortByName(){
+        humans.sort(new HumanComparatorByName());
+    }
+    public void sortByAge(){
+        humans.sort(new HumanComparatorByAge());
+    }
 }

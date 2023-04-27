@@ -2,24 +2,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String firstName;
     private String lastName;
-    private String birthDate;
+    private Integer age;
     private Human mother;
     private Human father;
     private List<Human> childrens;
 
-    public Human(String firstName, String lastName) {this(firstName,
-            lastName, null, null, null);}
+    public Human(String firstName, String lastName, int age) {this(firstName,
+            lastName, age, null, null);}
 
-    public Human(String firstname, String lastname, String birthDate, Human mother, Human father) {
+    public Human(String firstname, String lastname, Integer age, Human mother, Human father) {
         this.firstName = firstname;
         this.lastName = lastname;
-        this.birthDate = birthDate;
+        this.age = age;
         this.mother = mother;
         this.father = father;
         childrens = new ArrayList<>();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+       return firstName.compareTo(o.firstName);
     }
 
     public boolean addChild(Human child) {
@@ -44,15 +49,12 @@ public class Human implements Serializable {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Integer getAge() {
+        return age;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-    public void setBirthDate(String birthDate){
-        this.birthDate = birthDate;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Human getMother() {
@@ -78,11 +80,15 @@ public class Human implements Serializable {
         sb.append(", ");
         sb.append("Фамилия:");
         sb.append(lastName);
+        sb.append(", Возраст: ");
+        sb.append(age);
         return sb.toString();
     }
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " (" + birthDate + ")";
+        return firstName + " " + lastName + " (" + age + ")";
     }
+
+
 }
