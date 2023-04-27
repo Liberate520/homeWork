@@ -12,6 +12,7 @@ public class Human implements Serializable {
     private Human father;
     private Human mother;
     private List<Human> children;
+    private String res;
 
     public int getId() {
         return id;
@@ -42,10 +43,11 @@ public class Human implements Serializable {
     }
 
     public String getChildren() {
+        res = "";
         for (Human human : children) {
-            return " " + human.getName();
+            res = res + human.getName() + " ";
         }
-        return " " + name;
+        return res;
     }
 
     public Human(int id, String name, Human father, Human mother) {
@@ -65,9 +67,17 @@ public class Human implements Serializable {
     public String getInfo() {
         if (father == null && mother == null && this.children.size() <= 0) {
             return name + " не имеет ни родителей, ни детей";
-        } else if (father == null || mother == null) {
-            return name + " имеет ребенка по имени" + getChildren();
-        } else if (this.children.size() <= 0) {
+        } else if (father == null && mother == null) {
+            return name + " имеет детей по имени " + getChildren();
+        } else if(father == null && this.children.size() <= 0){
+            return name + " имеет мать по имени " + mother.getName();
+        }else if(father == null){
+            return name + " имеет мать по имени " + mother.getName() + ", и имеет детей по имени" + getChildren();
+        }else if(mother == null && this.children.size() <= 0){
+            return name + " имеет отца по имени " + father.getName();
+        }else if(mother == null){
+            return name + " имеет отца по имени " + father.getName() + ", и имеет детей по имени" + getChildren();
+        }else if (this.children.size() <= 0) {
             return name + " имеет отца по имени " + father.getName() + " и мать по имени " + mother.getName();
         } else
             return name + " имеет отца по имени " + father.getName() + " и мать по имени " + mother.getName()
@@ -76,7 +86,7 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return getId() + " " + getName();
+        return getName();
     }
 
 }

@@ -7,8 +7,7 @@ import java.util.Iterator;
 public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
 
     private HashSet<E> tree;
-    private String res = "";
-    
+    private String res;
 
     public FamilyTree(HashSet<E> tree) {
         this.tree = tree;
@@ -34,10 +33,11 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     }
 
     public boolean add(E human) {
-        tree.add(human);
+
         if (human == null) {
             return false;
         }
+        tree.add(human);
         if (human.getFather() != null) {
             human.getFather().addChildren(human);
         }
@@ -56,7 +56,12 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
         return null;
     }
 
+    public void remove(Human human) {
+        tree.remove(human);
+    }
+
     public String getInfo() {
+        res = "";
         for (E string : tree) {
             res = res + string.getInfo() + "\n";
         }
@@ -67,5 +72,5 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
     public Iterator<E> iterator() {
         return tree.iterator();
     }
-    
+
 }
