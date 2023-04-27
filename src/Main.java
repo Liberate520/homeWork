@@ -1,49 +1,68 @@
-import person.Person;
-import person.Relation;
-import person.Sex;
-import saving.FileOutStr;
+import model.Service;
+import presenter.Presenter;
+import view.ConsoleUI;
+import view.View;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
+        View view = new ConsoleUI();
         Service service = new Service();
-        service.addPerson("Василий", "Лежебоков", 32, Sex.Male);
-        System.out.println(service.getTreeInfo());
+        service.addPerson("Василий", "Лежебоков", 32, "м");
+        service.addPersonAs("Василиса", "Лежебокова", 27, "ж", "Василий", "Лежебоков", "сп");
+        service.addPersonAs("Анатолий", "Лежебоков", 57, "м", "Василий", "Лежебоков", "о");
+        service.addPersonAs("Анна", "Лежебокова", 53, "ж", "Василий", "Лежебоков", "м");
+        service.addPersonAs("Мария", "Кузьмина", 25, "ж", "Василий", "Лежебоков", "ст");
+        service.addPersonAs("Роман", "Билан", 29, "м", "Василий", "Лежебоков", "б");
+        service.addPersonAs("Петр", "Лежебоков", 7, "м", "Василий", "Лежебоков", "сн");
+        service.addPersonAs("Ирина", "Лежебокова", 5, "ж", "Василий", "Лежебоков", "д");
+        Presenter presenter = new Presenter(view, service);
 
-        service.addPersonAs("Василиса", "Лежебокова", 27, Sex.Female, "Василий", "Лежебоков", Relation.Spouse);
-        service.addPersonAs("Анатолий", "Лежебоков", 57, Sex.Male, "Василий", "Лежебоков", Relation.Father);
-        service.addPersonAs("Анна", "Лежебокова", 53, Sex.Female, "Василий", "Лежебоков", Relation.Mother);
-        service.addPersonAs("Мария", "Кузьмина", 25, Sex.Female, "Василий", "Лежебоков", Relation.Sister);
-        service.addPersonAs("Роман", "Билан", 29, Sex.Male, "Василий", "Лежебоков", Relation.Brother);
-        service.addPersonAs("Петр", "Лежебоков", 7, Sex.Male, "Василий", "Лежебоков", Relation.Son);
-        service.addPersonAs("Ирина", "Лежебокова", 5, Sex.Female, "Василий", "Лежебоков", Relation.Daughter);
-        System.out.println(service.getTreeInfo());
-        System.out.println();
+        view.start();
+
+
+
+
+//        Service service = new Service();
+//        service.addPerson("Василий", "Лежебоков", 32, Sex.Male);
+//        service.addPersonAs("Василиса", "Лежебокова", 27, Sex.Female, "Василий", "Лежебоков", Relation.Spouse);
+//        service.addPersonAs("Анатолий", "Лежебоков", 57, Sex.Male, "Василий", "Лежебоков", Relation.Father);
+//        service.addPersonAs("Анна", "Лежебокова", 53, Sex.Female, "Василий", "Лежебоков", Relation.Mother);
+//        service.addPersonAs("Мария", "Кузьмина", 25, Sex.Female, "Василий", "Лежебоков", Relation.Sister);
+//        service.addPersonAs("Роман", "Билан", 29, Sex.Male, "Василий", "Лежебоков", Relation.Brother);
+//        service.addPersonAs("Петр", "Лежебоков", 7, Sex.Male, "Василий", "Лежебоков", Relation.Son);
+//        service.addPersonAs("Ирина", "Лежебокова", 5, Sex.Female, "Василий", "Лежебоков", Relation.Daughter);
+
+//        System.out.println(service.getTreeInfo());
+//        System.out.println();
 
         // Сохранение древа в файл и загрузка из файла
-        service.saveFamilyTreeAs("familyTree.out", new FileOutStr());
-        service.loadFamilyTreeFrom("familyTree.out", new FileOutStr());
-        System.out.println(service.getTreeInfo());
-        System.out.println();
+//        service.saveFamilyTreeAs("model.familyTree.out", new FileOutStr());
+//        service.loadFamilyTreeFrom("model.familyTree.out", new FileOutStr());
+//        System.out.println(service.getTreeInfo());
+//        System.out.println();
 
         // Сохранение персоны в файл и загрузка из файла
-        Person personBeforeSave = service.getPerson("Мария", "Кузьмина");
-        System.out.println(personBeforeSave);
-        service.savePersonAs(personBeforeSave, "person.out", new FileOutStr());
-        Person personAfterLoad = service.loadPersonFrom("person.out", new FileOutStr());
-        System.out.println(personAfterLoad);
+//        Person personBeforeSave = service.getPerson("Мария", "Кузьмина");
+//        System.out.println(personBeforeSave);
+//        service.savePersonAs(personBeforeSave, "model.person.out", new FileOutStr());
+//        Person personAfterLoad = service.loadPersonFrom("model.person.out", new FileOutStr());
+//        System.out.println(personAfterLoad);
+//
+//        System.out.println(service.getInfo("Петр", "Лежебоков", Relation.Father));
+//        System.out.println("Сортировка по возрасту:");
+//        service.printSortByAge();
+//        System.out.println();
+//        System.out.println("Сортировка по фамилии:");
+//        service.printSortByLastName();
+//        System.out.println();
+//        System.out.println("Сортировка по имени:");
+//        service.printSortByFirstName();
 
-        System.out.println(service.getInfo("Петр", "Лежебоков", Relation.Father));
-        System.out.println("Сортировка по возрасту:");
-        service.printSortByAge();
-        System.out.println();
-        System.out.println("Сортировка по фамилии:");
-        service.printSortByLastName();
-        System.out.println();
-        System.out.println("Сортировка по имени:");
-        service.printSortByFirstName();
+
+
 
 
 
@@ -61,42 +80,42 @@ public class Main {
 //        person2.setFather("Петр", "Костров", 59);
 //        person2.setMother("Ольга", "Кострова", 50);
 //
-//        FamilyTree familyTree = new FamilyTree();
-//        familyTree.pushToTree(person1);
-//        familyTree.pushToTree(person2);
+//        FamilyTree model.familyTree = new FamilyTree();
+//        model.familyTree.pushToTree(person1);
+//        model.familyTree.pushToTree(person2);
 
         // Вывод всех записей
-//        System.out.println(familyTree);
+//        System.out.println(model.familyTree);
 //        System.out.println();
 
         // Получение информации по записи
-//        System.out.println(familyTree.getInfo("Василий", "Лежебоков", Relation.Spouse));
+//        System.out.println(model.familyTree.getInfo("Василий", "Лежебоков", Relation.Spouse));
 //        System.out.println();
-//        System.out.println(familyTree.getInfo("Василий", "Лежебоков", Relation.Son));
+//        System.out.println(model.familyTree.getInfo("Василий", "Лежебоков", Relation.Son));
 //        System.out.println();
-//        System.out.println(familyTree.getInfo("Петр", "Лежебоков", Relation.Father));
+//        System.out.println(model.familyTree.getInfo("Петр", "Лежебоков", Relation.Father));
 //        System.out.println();
-//        System.out.println(familyTree.getInfo("Анатолий", "Лежебоков"));
+//        System.out.println(model.familyTree.getInfo("Анатолий", "Лежебоков"));
 //        System.out.println();
-//        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
+//        System.out.println(model.familyTree.getInfo("Василиса", "Лежебокова"));
 //        System.out.println();
 
         // Изменение информации по записи
-//        Person person3 = familyTree.getPerson("Василиса", "Лежебокова");
+//        Person person3 = model.familyTree.getPerson("Василиса", "Лежебокова");
 //        person3.setMother("Алефтина", "Маркова", 60);
 //        person3.setFather("Макар", "Марков", 65);
-//        familyTree.pushToTree(person3);
+//        model.familyTree.pushToTree(person3);
 
         // Просмотр измененной информации по записи
-//        System.out.println(familyTree.getInfo("Василиса", "Лежебокова"));
+//        System.out.println(model.familyTree.getInfo("Василиса", "Лежебокова"));
 
         // Сериализуем FamilyTree и Person1 с помощью класса ObjectOutputStream
-//        familyTree.saveFamilyTreeAs("familyTree.out", new FileOutStr());
-//        familyTree.savePersonAs(person1, "person.out", new FileOutStr());
+//        model.familyTree.saveFamilyTreeAs("model.familyTree.out", new FileOutStr());
+//        model.familyTree.savePersonAs(person1, "model.person.out", new FileOutStr());
 
         // Десериализация FamilyTree и Person1 из файлов с помощью класса ObjectInputStream
-//        FamilyTree familyTreeRestored = familyTree.loadFamilyTreeFrom("familyTree.out", new FileOutStr());
-//        Person person1Restored = familyTree.loadPersonFrom("person.out", new FileOutStr());
+//        FamilyTree familyTreeRestored = model.familyTree.loadFamilyTreeFrom("model.familyTree.out", new FileOutStr());
+//        Person person1Restored = model.familyTree.loadPersonFrom("model.person.out", new FileOutStr());
 
         // Вывод восстановленного FamilyTree
 //        System.out.println();
