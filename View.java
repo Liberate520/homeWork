@@ -7,7 +7,7 @@ public class View<T extends Human> {
     public List<String> console_import() throws IOException{
             List<String> data = new ArrayList<>();
             Scanner scan = new Scanner(System.in);
-            System.out.println("Ввыедите данные: ");
+            System.out.println("Выведите данные: ");
             System.out.print("Имя: ");
             String firstname = scan.nextLine();
             data.add(firstname);
