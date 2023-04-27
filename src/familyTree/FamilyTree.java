@@ -1,17 +1,20 @@
-package java_oop_homeWork.src;
+package java_oop_homeWork.src.familyTree;
+
+import java_oop_homeWork.src.kinsman.Kinsman;
+import java_oop_homeWork.src.kinsman.comparators.KinsmanComparatorByDateBirth;
+import java_oop_homeWork.src.kinsman.comparators.KinsmanComparatorByName;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Kinsman> {
     private String name;
-    private HashSet<Kinsman> family;
+    private TreeSet<Kinsman> family;
 
     public FamilyTree(String surName, Kinsman kinsman) {
         this.name = surName;
-        this.family = new HashSet<Kinsman>(Arrays.asList(kinsman));
+        this.family = new TreeSet<>(Arrays.asList(kinsman));
         kinsman.setFamily(this);
     }
 
@@ -46,11 +49,17 @@ public class FamilyTree implements Serializable {
         return sb.toString();
     }
 
-    public HashSet<Kinsman> getFamily() {
+    public SortedSet<Kinsman> getFamily() {
         return this.family;
     }
 
     public void printFamily() {
+        for (Kinsman kinsman: family) {
+            System.out.println(kinsman.getInfo());
+        }
+    }
+
+    public void printFamily(List<Kinsman> family) {
         for (Kinsman kinsman: family) {
             System.out.println(kinsman.getInfo());
         }
@@ -67,4 +76,17 @@ public class FamilyTree implements Serializable {
 
     @Override
     public int hashCode() { return Objects.hash(name, family); }
+
+    @Override
+    public Iterator<Kinsman> iterator() {
+        return family.iterator();
+    }
+
+    public List<Kinsman> sortByName() {
+        return family.stream().sorted(new KinsmanComparatorByName()).collect(Collectors.toList());
+    }
+
+    public List<Kinsman> sortByDateBirth() {
+        return family.stream().sorted(new KinsmanComparatorByDateBirth()).collect(Collectors.toList());
+    }
 }

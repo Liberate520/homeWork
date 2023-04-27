@@ -1,4 +1,6 @@
-package java_oop_homeWork.src;
+package java_oop_homeWork.src.serialization;
+
+import java_oop_homeWork.src.serialization.Writeble;
 
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
@@ -6,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-public class FileHandler implements Writeble{
+public class FileHandler implements Writeble {
     @Override
     public boolean write(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {

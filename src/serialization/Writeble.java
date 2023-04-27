@@ -1,4 +1,4 @@
-package java_oop_homeWork.src;
+package java_oop_homeWork.src.serialization;
 
 import java.io.Serializable;
 import java.util.Objects;

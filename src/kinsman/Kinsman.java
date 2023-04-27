@@ -1,13 +1,12 @@
-package java_oop_homeWork.src;
+package java_oop_homeWork.src.kinsman;
+
+import java_oop_homeWork.src.familyTree.FamilyTree;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.text.*;
 
-public class Kinsman implements Serializable {
+public class Kinsman implements Serializable, Comparable<Kinsman> {
     private FamilyTree family;
     private Date dateBirth;
     private String name;
@@ -15,7 +14,7 @@ public class Kinsman implements Serializable {
     private Sex sex;
     private Kinsman father;
     private Kinsman mother;
-    private HashSet<Kinsman> childs;
+    private TreeSet<Kinsman> childs;
     private Date dateDeath;
     private boolean alive;
 
@@ -39,7 +38,7 @@ public class Kinsman implements Serializable {
             }
         }
         this.alive = alive;
-        this.childs = new HashSet<>();
+        this.childs = new TreeSet<>();
     }
     public Kinsman(String name, String surName, Sex sex, String dateBirth, String dateDeath) {
         this(name, surName, sex, dateBirth, dateDeath, false);
@@ -55,6 +54,14 @@ public class Kinsman implements Serializable {
     }
     public Kinsman(String name, String surName, Sex sex) {
         this(name, surName, sex, null, null, true);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surName;
     }
 
     public FamilyTree getFamily() { return this.family; }
@@ -76,7 +83,7 @@ public class Kinsman implements Serializable {
         }
         return false;
     }
-    public HashSet<Kinsman> getChilds() { return this.childs; }
+    public TreeSet<Kinsman> getChilds() { return this.childs; }
     public void addChild(Kinsman child) { this.childs.add(child); }
 
     public Sex getSex() { return this.sex; }
@@ -133,6 +140,18 @@ public class Kinsman implements Serializable {
         for (Kinsman kinsman: this.childs) {
             System.out.println(kinsman.toString());
         }
+    }
+
+    public Date getDateBirth() {
+        return dateBirth;
+    }
+    public Date getDateDeath() {
+        return dateDeath;
+    }
+
+    @Override
+    public int compareTo(Kinsman o) {
+        return name.compareTo(o.name);
     }
 
 }
