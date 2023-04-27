@@ -1,26 +1,29 @@
-import java.util.logging.FileHandler;
+import fileWorkers.FileWorkable;
+import fileWorkers.FileWorker;
+import person.Person;
+import tree.Tree;
 
 public class Main {
     public static void main(String[] args) {
-       // Tree tree=new Tree();
+        tree.Tree tree=new tree.Tree();
         String filePath="src/tree.txt";
         FileWorkable fileWorkable = new FileWorker();
 
-        Tree tree =(Tree) fileWorkable.readFile(filePath);
+        //Tree tree =(Tree) fileWorkable.readFile(filePath);
         System.out.println(tree.getInfoTree());
 
-        Person person1=new Person(80,0,"Иванова Наталья");
-        Person person2=new Person(90,1,"Иванов Василий");
-        Person person3=new Person(50,0,"Петрова Лилия",person1,person2);
-        Person person4=new Person(50,1,"Петров Владимир");
-        Person person11=new Person(55,0,"Кузнецова Полина");
-        Person person12=new Person(60,1,"Кузнецов Дмитрий");
-        Person person5=new Person(30,1,"Петров Иван",person3,person4);
-        Person person6=new Person(30,0,"Петрова Галина",person11,person12);
-        Person person7=new Person(10,1,"Петров Геннадий",person6,person5);
-        Person person8=new Person(10,0,"Петрова Ольга",person6,person5);
-        Person person9=new Person(10,1,"Петров Максим",person6,person5);
-        Person person10=new Person(40,0,"Иванова Нина",person1,person2);
+        Person person1=new Person(80,"Female","Иванова Наталья");
+        Person person2=new Person(90,"Male","Иванов Василий");
+        Person person3=new Person(50,"Female","Петрова Лилия",person1,person2);
+        Person person4=new Person(50,"Male","Петров Владимир");
+        Person person11=new Person(55,"Female","Кузнецова Полина");
+        Person person12=new Person(60,"Male","Кузнецов Дмитрий");
+        Person person5=new Person(30,"Male","Петров Иван",person3,person4);
+        Person person6=new Person(30,"Female","Петрова Галина",person11,person12);
+        Person person7=new Person(10,"Male","Петров Геннадий",person6,person5);
+        Person person8=new Person(10,"Female","Петрова Ольга",person6,person5);
+        Person person9=new Person(10,"Male","Петров Максим",person6,person5);
+        Person person10=new Person(40,"Female","Иванова Нина",person1,person2);
 
         tree.addPerson(person1);
         tree.addPerson(person2);
@@ -42,6 +45,17 @@ public class Main {
 
         fileWorkable.saveFile(tree,filePath);
         System.out.println(tree.getInfoTree());
+
+        tree.sortName();
+        System.out.println(tree.getInfoTree());
+
+        tree.sortAge();
+        System.out.println(tree.getInfoTree());
+
+        tree.sortGender();
+        System.out.println(tree.getInfoTree());
+
+
 
 
 

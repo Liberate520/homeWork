@@ -1,3 +1,5 @@
+package person;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,13 +7,13 @@ import java.util.Objects;
 
 public class Person implements Serializable {
     private int age;
-    private int gender;
+    private String gender;
     private String name;
     private Person mother;
     private  Person father;
     private List<Person> children;
 
-    public Person(int age, int gender,String name, Person mother, Person father) {
+    public Person(int age, String gender,String name, Person mother, Person father) {
         this.age = age;
         this.gender = gender;
         this.name = name;
@@ -20,7 +22,7 @@ public class Person implements Serializable {
         children=new ArrayList<>();
     }
 
-    public Person(int age, int gender,String name) {
+    public Person(int age, String gender,String name) {
         this(age,gender,name,null,null);
 
     }
@@ -45,10 +47,12 @@ public class Person implements Serializable {
     }
     @Override
     public String toString() {
-        return "Person [" + getInfo()+"]";
+        return "Person.Person [" + getInfo()+"]";
     }
+
+
     public String getInfo(){
-        return name  + " age: "+age + gender;
+        return name  + " age: "+age + " пол: "+ gender;
     }
 
     public String getName() {
@@ -63,12 +67,15 @@ public class Person implements Serializable {
         return father;
     }
 
-    public String getGender() {
-        if (gender==0){
-            return "Female";
+    public int getGender() {
+        if (gender.equals("Female")){
+            return 0;
         }
-        return "Male";
+        return 1;
     }
 
 
+    public int getAge() {
+        return age;
+    }
 }

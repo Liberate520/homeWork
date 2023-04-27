@@ -1,8 +1,14 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+package tree;
 
-public class Tree implements Serializable {
+import person.ComparatorAge;
+import person.ComparatorGender;
+import person.ComparatorName;
+import person.Person;
+
+import java.io.*;
+import java.util.*;
+
+public class Tree implements Serializable, Iterable<Person> {
     private List<Person> family;
     public Tree() {
         family= new ArrayList<>();
@@ -80,6 +86,23 @@ public class Tree implements Serializable {
             info.append("\n");
         }
         return info.toString();
+    }
+
+    @Override
+    public Iterator<Person> iterator(){
+        return new TreeIterator(family);
+    }
+
+    public void sortName(){
+        family.sort(new ComparatorName());
+    }
+
+    public void sortAge(){
+        family.sort(new ComparatorAge());
+    }
+
+    public void sortGender(){
+        family.sort(new ComparatorGender());
     }
 
 
