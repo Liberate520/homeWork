@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>{
+public class Human implements Serializable, Comparable<Human>, FamilyTreeObject{
     private String firstName;
     private String lastName;
     private Calendar birthday = new GregorianCalendar();
@@ -32,6 +32,7 @@ public class Human implements Serializable, Comparable<Human>{
         return lastName;
     }
 
+    @Override
     public String getFullName(){
         return (firstName+" "+lastName);
     }
@@ -44,6 +45,7 @@ public class Human implements Serializable, Comparable<Human>{
             return (birthday.get(Calendar.DAY_OF_MONTH)+"."+birthday.get(Calendar.MONTH)+"."+birthday.get(Calendar.YEAR));
         }
     }
+    @Override
     public Calendar getDateBirthday(){
         return birthday;
     }
@@ -62,6 +64,7 @@ public class Human implements Serializable, Comparable<Human>{
     public Human getFather(){
         return father;
     }
+
     public List<Human> getChildren(){
         return children;
     }

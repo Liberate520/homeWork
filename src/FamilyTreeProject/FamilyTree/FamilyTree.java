@@ -1,27 +1,26 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human>{
+public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Iterable<E>{
     
-    private List<Human> familyMembers;
+    private List<E> familyMembers;
 
     public FamilyTree(){
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> familyMembers){
+    public FamilyTree(List<E> familyMembers){
         this.familyMembers = familyMembers;
     }
 
-    public List<Human> getAllMembers(){
+    public List<E> getAllMembers(){
         return familyMembers;
     }
 
-    public List<Human> getMembersByName(String name){
-        List<Human> res = new ArrayList<>();
+    public List<E> getMembersByName(String name){
+        List<E> res = new ArrayList<>();
         for (int i = 0; i < familyMembers.size(); i++) {
             if (familyMembers.get(i).getFullName().indexOf(name)>=0){
                 res.add(familyMembers.get(i));
@@ -30,38 +29,39 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         return res;
     }
 
-    public void addMember(Human human, Human mother, Human father){
+    // public void addMember(E human, E mother, E father){
+    public void addMember(E human){
         if(!familyMembers.contains(human)){
             familyMembers.add(human);
-            if(mother!=null){
-                human.setMother(mother);
-                if(!mother.getChildren().contains(human)){
-                    mother.addChild(human);
-                }
-               }
-            if(father!=null){
-               human.setFather(father);
-               if(!father.getChildren().contains(human)){
-                    father.addChild(human);
-                }
-            }
+            // if(mother!=null){
+            //     human.setMother(mother);
+            //     if(!mother.getChildren().contains(human)){
+            //         mother.addChild(human);
+                // }
+            //    }
+            // if(father!=null){
+            //    human.setFather(father);
+            //    if(!father.getChildren().contains(human)){
+            //         father.addChild(human);
+            //     }
+            // }
             }
         }
 
         @Override
-        public Iterator<Human> iterator(){
-            return new HumanIterator(familyMembers); 
+        public Iterator<E> iterator(){
+            return new HumanIterator<>(familyMembers); 
         }
 
         public void sortByName(){
-            familyMembers.sort(new HumanComporatorByName());
+            familyMembers.sort(new HumanComporatorByName<>());
         }
 
         public void sortByAge(){
-            familyMembers.sort(new HumanComporatorByAge());
+            familyMembers.sort(new HumanComporatorByAge<>());
         }
 
-        public void sort(){
-            Collections.sort(familyMembers);
-        }
+        // public void sort(){
+        //     Collections.sort(familyMembers);
+        // }
     }

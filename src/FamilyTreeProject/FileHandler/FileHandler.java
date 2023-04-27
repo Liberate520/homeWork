@@ -16,10 +16,10 @@ public class FileHandler implements Savable{
         return false;
     }
 }
-    public FamilyTree load(String path){
+    public FamilyTree<FamilyTreeObject> load(String path){
         try(ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(path))){
-        return (FamilyTree) objectInputStream.readObject();
+            return (FamilyTree<FamilyTreeObject>) objectInputStream.readObject();
         }catch(Exception e){
             e.printStackTrace();
             return null;

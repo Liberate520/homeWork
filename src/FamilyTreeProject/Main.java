@@ -12,16 +12,18 @@ public class Main {
         FileHandler fileHandler = new FileHandler();
         // fileHandler.save(myFamily, path);
         // FamilyTree myFamily = fileHandler.load(path);
-        FamilyTree myFamily = new FamilyTree();
-        myFamily.addMember(myMom, null, null);
-        myFamily.addMember(myDad, null, null);
-        myFamily.addMember(me, myMom, myDad);
+        FamilyTree<Human> myFamily = new FamilyTree<>();
+        // myFamily.addMember(myMom, null, null);
+        // myFamily.addMember(myDad, null, null);
+        // myFamily.addMember(me, myMom, myDad);
+        myFamily.addMember(myMom);
+        myFamily.addMember(myDad);
+        myFamily.addMember(me);
 
-        // for(Human human:myFamily){
-        //     System.out.println(human.toString());
-        // }
-        System.out.println(myFamily.getAllMembers());
-        myFamily.sort();
+        for(Human human:myFamily){
+            System.out.println(human.toString());
+         }
+        myFamily.sortByName();
         System.out.println(myFamily.getAllMembers());
     }
 }
