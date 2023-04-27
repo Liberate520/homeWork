@@ -39,15 +39,15 @@ public class FamilyTree<E extends FamilyTreeItems> implements Serializable, Iter
         return null;
     }
     public void sortByName(){
-        familyMembers.sort(new ComparatorByName());
+        familyMembers.sort(new ComparatorByName<>());
     }
 
     public void sortAmountOfChildren(){
-        familyMembers.sort(new ComparatorByChildren());
+        familyMembers.sort(new ComparatorByChildren<>());
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new MyIterator(familyMembers);
+        return new MyIterator<>(familyMembers);
     }
 }

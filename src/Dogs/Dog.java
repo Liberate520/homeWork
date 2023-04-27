@@ -20,7 +20,7 @@ public class Dog implements FamilyTreeItems {
         this.firstName = firstName;
         this.mother = mother;
         this.father = father;
-        children = new ArrayList();
+        children = new ArrayList<>();
     }
 
     public Dog(Gender gender, String firstName) {

@@ -1,3 +1,4 @@
+import famalyTree.FamilyTree;
 import humans.*;
 
 public class Main {
@@ -20,8 +21,8 @@ public class Main {
         dogServ.addDog(Gender.Female, "Nayda");
         dogServ.sortByName();
         System.out.println(dogServ.getInfo());
-//        humService.save(humService.addHuman(), path);
-//        FamilyTree newFamilyTree = service.upload(path);
-//        Service newService = new Service(newFamilyTree);
-//        System.out.println(newService.getInfo());
+        humService.save(humService.getFamilyTree(), path);
+        FamilyTree newFamilyTree = humService.upload(path);
+        Service newService = new Service(newFamilyTree);
+        System.out.println(newService.getInfo());
     }}

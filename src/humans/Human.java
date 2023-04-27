@@ -2,10 +2,11 @@ package humans;
 
 import famalyTree.FamilyTreeItems;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements FamilyTreeItems {
+public class Human implements Serializable, FamilyTreeItems {
 
     private Gender gender;
     private Human partner;

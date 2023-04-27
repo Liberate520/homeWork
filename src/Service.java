@@ -19,7 +19,7 @@ public class Service implements Savable{
         this(new FamilyTree());
     }
 
-    public FamilyTree addHuman() {
+    public FamilyTree getFamilyTree() {
         return familyTree;
     }
 
