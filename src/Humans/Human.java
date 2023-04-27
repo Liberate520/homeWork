@@ -1,10 +1,12 @@
+package Humans;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable {
     private String name;
     private String surname;
     private Date dateOfBirth = new Date();
@@ -92,7 +94,7 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return "Human{" +
+        return "Humans.Human{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
@@ -112,5 +114,11 @@ public class Human implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(name, surname, dateOfBirth, gender);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Human x = (Human) o;
+        return this.surname.compareTo(x.surname);
     }
 }

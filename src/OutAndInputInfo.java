@@ -1,3 +1,5 @@
+import Humans.Human;
+
 import java.io.*;
 
 public class OutAndInputInfo implements Serializable{
