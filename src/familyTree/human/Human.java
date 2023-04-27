@@ -129,10 +129,8 @@ public class Human implements Serializable {
      */
     public int getAge() {
         if (this.dateOfBirth == null) this.dateOfBirth = LocalDate.now();
-        int ageD = Period.between(this.dateOfBirth,
+        return Period.between(this.dateOfBirth,
                 Objects.requireNonNullElseGet(this.dateOfDeath, LocalDate::now)).getYears();
-
-        return ageD;
     }
 
     /**

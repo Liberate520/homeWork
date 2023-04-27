@@ -14,7 +14,6 @@ public class Main {
                 "Петрова Ольга Александровна", "Петров Пётр Иванович",
                 "Петрова Анастасия Валерьевна",
                 "Петров Константин Петрович");
-
         service.addToTree("Петровы", "Петров Константин Петрович", Gender.male,
                 "04.11.1994", "",
                 "Петрова Лидия Константиновна", "Петров Пётр Петрович",
@@ -26,7 +25,7 @@ public class Main {
                 "Сидорова Ксения Александровна",
                 "Сидорова Елена Максимовна");
         service.addToTree("Петровы", "Петрова Анастасия Валерьевна", Gender.female,
-                "14.03.1983", "",
+                "14.03.1975", "",
                 "Иванова Мария Ивановна", "Иванов Александр Иванович",
                 "Петров Пётр Петрович",
                 "Петров Константин Петрович");
@@ -35,8 +34,12 @@ public class Main {
 
         System.out.println(service.getTree("Петровы")
                 .searchHuman("Петров Константин Петрович").toString());
-
+        System.out.println("Сортировка по возрасту 1: ");
         service.getTree("Петровы").sortByAge();
+        System.out.println("Сортировка по возрасту 2: ");
+        service.getTree("Петровы").sortByAge2();
+        System.out.println();
+        System.out.println("Сортировка по имени: ");
         service.getTree("Петровы").sortByName();
 
         saveLoad.savingWork(service, "familyTree.ser");

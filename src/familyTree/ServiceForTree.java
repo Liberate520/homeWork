@@ -11,14 +11,15 @@ import java.util.Map;
 public class ServiceForTree implements Serializable {
 
     private int id;
-    private String treeName;
-    private FamilyTree currentTree;
-    private Map<String, FamilyTree> treeGroup = new LinkedHashMap<>();
+    private final Map<String, FamilyTree> TREE_GROUP = new LinkedHashMap<>();
 
+    /**
+     * Конструктор
+     * @param treeName имя древа
+     * @param currentTree текущее древо
+     */
     public ServiceForTree(String treeName, FamilyTree currentTree) {
-        this.currentTree = currentTree;
-        this.treeName = treeName;
-        treeGroup.putIfAbsent(treeName, currentTree);
+        TREE_GROUP.putIfAbsent(treeName, currentTree);
     }
 
     /**
@@ -47,7 +48,7 @@ public class ServiceForTree implements Serializable {
                              String dateOfBirth, String dateOfDeath,
                              String mother, String father,
                              String spouse, String children) {
-        for (Map.Entry<String, FamilyTree> tree : treeGroup.entrySet()){
+        for (Map.Entry<String, FamilyTree> tree : TREE_GROUP.entrySet()){
             if (tree.getKey().equals(treeName)) {
                 tree.getValue().addNewHuman(new Human(id++, fullName, gender, dateOfBirth,
                         dateOfDeath, mother, father, spouse, children));
@@ -65,7 +66,7 @@ public class ServiceForTree implements Serializable {
      * @param treeName имя древа
      */
     public void addTree(String treeName){
-        this.treeGroup.putIfAbsent(treeName, new FamilyTree());
+        this.TREE_GROUP.putIfAbsent(treeName, new FamilyTree());
     }
 
 
@@ -75,7 +76,7 @@ public class ServiceForTree implements Serializable {
      */
     public String getAllInfo() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, FamilyTree> tree : treeGroup.entrySet()) {
+        for (Map.Entry<String, FamilyTree> tree : TREE_GROUP.entrySet()) {
             sb.append(tree.getKey()).append("\n");
             sb.append(tree.getValue().showAll()).append("**********\n");
         }
@@ -88,6 +89,6 @@ public class ServiceForTree implements Serializable {
      * @return объект FamilyTree
      */
     public FamilyTree getTree(String treeName){
-        return treeGroup.getOrDefault(treeName, new FamilyTree());
+        return TREE_GROUP.getOrDefault(treeName, new FamilyTree());
     }
 }

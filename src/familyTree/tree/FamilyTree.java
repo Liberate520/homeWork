@@ -1,6 +1,7 @@
 package familyTree.tree;
 
 import familyTree.human.Human;
+import familyTree.human.HumanComparatorByAge;
 
 import java.io.Serializable;
 import java.util.*;
@@ -56,18 +57,16 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     /**
+     * Сортировка по имени
      * Используется компаратор по умолчанию
      */
     public void sortByName(){
-        Map<String, Human> sorted = new TreeMap<>(this.wholeGenus);
-        wholeGenus = sorted;
+        wholeGenus = new TreeMap<>(this.wholeGenus);
         System.out.println(this.showAll());
     }
 
     /**
-     * Я честно старался. Но с компаратором, сравнивающим значения по возрасту
-     * у меня ничего не вышло. IDE ругается на разность типов.
-     * Поэтому сделал только так.
+     * Сортировка по возрасту.
      */
     public void sortByAge(){
         List<Integer> list = new ArrayList<>();
@@ -78,10 +77,24 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         for (int i : list) {
             for (Map.Entry<String, Human> human : this.wholeGenus.entrySet())
                 if (human.getValue().getAge() == i){
-                    sortedMap.put(human.getKey(), human.getValue());
+                    sortedMap.putIfAbsent(human.getKey(), human.getValue());
                 }
         }
         wholeGenus = sortedMap;
         System.out.println(this.showAll());
+    }
+
+    /**
+     * Сортировка по возрасту вариант 2, с использованием
+     * своего компаратора
+     */
+    public void sortByAge2(){
+        Map<String, Human> sortedMap = new TreeMap<>(new HumanComparatorByAge(wholeGenus));
+        sortedMap.putAll(wholeGenus);
+        int id = 1;
+        for (Map.Entry<String, Human> human : sortedMap.entrySet()){
+            System.out.printf("%d%s", id, human.getValue());
+            id ++;
+        }
     }
 }
