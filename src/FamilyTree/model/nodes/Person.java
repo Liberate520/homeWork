@@ -54,4 +54,38 @@ public class Person extends Node{
         return sb.toString();
     }
 
+    @Override
+    public String getFullInfo() {
+        StringBuilder sb = new StringBuilder();//основная информация о человеке
+        sb.append(this).append("\n");//вместо this.toString() можно использовать просто this
+        //информация о родителях(если есть). если нет - писать неизвестен. Родители типа Node, нужно кастовать к Person
+        sb.append("Родители:\n").append("\tотец: ");
+        if (getFather() == null){
+            sb.append("неизвестен");
+        }else{
+            sb.append((Person)getFather());//вызовется toString() отца. 
+        }
+        sb.append("\n\tмать: ");
+        if (getMother() == null){
+            sb.append("неизвестна");
+        }else{
+            sb.append((Person)getMother());//вызовется toString() матери.
+        }
+        //информация о детях, если есть. если нет - писать детей нет. дети - список Node, нужно кастовать к Person
+        sb.append("\nДети:\n");
+        if(getChildren().size() == 0){
+            sb.append("\tотсутствуют\n");
+        }else{
+            for(int i = 0; i < getChildren().size(); i++){
+                sb.append("\t").append(i+1).append(" ").append(getChildren().get(i)).append("\n");
+                //странно, почему сработало без кастования к Person. в List <Node> children добавляются полноценные
+                //объекты Person, но ссылка типа Node, усеченная по возможностям. В Node не прописан toString(), нет фамилии и отчества
+            }
+        }
+        //потом добавить информацию о супругах
+        //проверить информацию о другом родителе у каждого ребенка. может быть от разных браков, тогда выводить список супругов
+        //по идее у последнего добавленного ребенка будет актуальный супруг
+        return sb.toString();
+    }
+
 }

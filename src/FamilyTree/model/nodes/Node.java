@@ -7,6 +7,7 @@ import java.io.Serializable;
 // import java.lang.StringBuilder;
 
 public abstract class Node implements Serializable{
+    static final long SerialVersionUID = 2023;
     private String name;
     private Gender gender;
     private int yearOfBirth;
@@ -67,6 +68,11 @@ public abstract class Node implements Serializable{
     }
 
     public String getShortInfo(){
+        String result = ""; 
+        return result;
+    }
+
+    public String getFullInfo(){
         String result = ""; 
         return result;
     }

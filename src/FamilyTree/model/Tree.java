@@ -11,10 +11,8 @@ import java.io.Serializable;
 import java.lang.StringBuilder;
 
 public class Tree <E extends Node> implements Serializable, Iterable<E>{
+    static final long SerialVersionUID = 2024;//задан вручную, иначе при изменениях в проекте UID генерируется заново и старое сохранение не работает
     private List<E> family;
-    // private Person addedNode;
-
-
     public Tree(List<E> nodes){//конструктор создание дерева из списка записей
         family = nodes;
     }
@@ -57,6 +55,12 @@ public class Tree <E extends Node> implements Serializable, Iterable<E>{
             }
         }
         return foundNodes;
+    }
+
+    public void deleteNode(int index){
+        if(index >=0 && index < family.size()){
+            family.remove(index);
+        }
     }
 
     @Override

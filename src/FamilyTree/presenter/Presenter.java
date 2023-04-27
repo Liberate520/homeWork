@@ -44,6 +44,18 @@ public class Presenter {
         view.print(text);
     }
 
+    public String findNodes(String searchText) {
+        return service.findNodes(searchText);
+    }
+
+    public void showNodeFullInfo(int index) {
+        service.showNodeFullInfo(index);
+    }
+
+    public void deleteNode(int index) {
+        service.deleteNode(index);
+    }
+
     public void load(SaveLoad sl, String path) throws ClassNotFoundException, IOException {//
         service.load(sl, path);
     }

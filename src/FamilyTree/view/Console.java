@@ -15,7 +15,7 @@ public class Console implements View{
 
     public Console() {
         scanner = new Scanner(System.in, "cp866");
-        System.out.println("Консоль готова к работе");
+        print("Консоль готова к работе");
     }
 
 
@@ -28,9 +28,12 @@ public class Console implements View{
     public void start() {
         
         while (work) {
-            System.out.println("1 - добавить новую запись\n" +
+            print("---------------------------------------------------\n" +
+                    "1 - добавить новую запись\n" +
                     "2 - вывести все на экран\n" +
-                    "3 - завершить работу");
+                    "3 - показать подробную информацию о записи\n" +
+                    "4 - удалить запись из дерева\n" +
+                    "5 - завершить работу");
                     System.out.print("Введите команду: ");
                     String choice = scanner.nextLine();
             switch (choice) {
@@ -41,17 +44,23 @@ public class Console implements View{
                     viewAll();
                     break;
                 case "3":
-                    exit();
+                    showNodeInfo();
                     break;
+                case "4":
+                    deleteNode();
+                    break;
+                case "5":
+                    exit();
+                    break;    
                 default:
-                    System.out.println("Ошибка ввода");
+                    print("Ошибка ввода");
             }
         }
     }
 
     @Override
     public void askAndAnswer(String question) {
-        System.out.print(question);
+        System.out.print(question);//тут нужен именно принт, без перевода на новую строку
         String msg = scanner.nextLine();
         presenter.getAnswer(msg);
     }
@@ -104,13 +113,29 @@ public class Console implements View{
     }
 
 
-}
-// try{
+    @Override
+    public void showNodeInfo() {
+        print("Введите текст для поиска человека: ");
+        String search = scanner.nextLine();
+        String result = presenter.findNodes(search);
+        if(result.equals("")){
+            print("Ничего не найдено!");
+        }else{
+            print(result);
+            System.out.print("Введите номер записи: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+            presenter.showNodeFullInfo(index-1);//коррекция индекса на -1, тк спискок с 1, а лист с 0
+        }
+    }
 
-// }catch (FileNotFoundException e) {
-//     print("Файл не найден: " + path);
-// } catch (IOException e) {
-//     print("Ошибка ввода/вывода: " + e.getMessage());
-// } catch (ClassNotFoundException e) {
-//     print("Ошибка десериализации: " + e.getMessage());
-// }
+    public void deleteNode() {
+        viewAll();//пока выводить список всех записей. потом продумать как у найденных сохранять исходный индекс в дереве
+        print("Введите номер записи: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+        presenter.deleteNode(index-1);
+    }
+
+}
+

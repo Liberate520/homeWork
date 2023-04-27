@@ -16,7 +16,7 @@ public class Main {
         Service service = new PersonService();
         Presenter presenter = new Presenter(view, service);
         FileHandler fh = new FileHandler();
-        String path = "tree.save";
+        String path = "homeWork/src/tree.save";
         view.load(fh, path);//автоматическая загрузка при запуске
         view.saveInit(fh, path);//передача параметров во вью, там сохранение запускается при выходе
         view.start();

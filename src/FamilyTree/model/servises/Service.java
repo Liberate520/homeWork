@@ -15,6 +15,9 @@ public interface Service  {
     void getAnswer(String msg);//получить ответ от вью
     void save(SaveLoad sl, String path) throws ClassNotFoundException, IOException;
     void load(SaveLoad sl, String path) throws ClassNotFoundException, IOException;
+    String findNodes (String searchText);
+    void showNodeFullInfo(int index);
+    void deleteNode(int index);
 
     
     //Все основные методы перетащить потом сюда

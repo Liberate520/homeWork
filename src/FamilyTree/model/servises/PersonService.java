@@ -37,6 +37,7 @@ public class PersonService implements Service{
     private int currentQuestion ;//текущий номер вопроса, нужен для соответствия ответу
     List<Person> potentialFathers;
     List<Person> potentialMothers;
+    List<Person> searchResults;
     
     public PersonService(Tree<Person> tree){
         this.tree = tree;
@@ -139,10 +140,12 @@ public class PersonService implements Service{
                     print(tree.showNodeList(potentialMothers));//отправка во вью через презентер списка возможных отцов, переведенного в текст
                 }
                 break;
-            case 7: //выбор матери из списка
+            case 7: //выбор матери из списка !!! список выводится с 1, делать поправку в индексе!
             int mindex = Integer.parseInt(msg);//добавить потом try catch
+            mindex--;
             if(mindex >= 0 && mindex < potentialMothers.size()){//проверка, что индекс в пределах массива
                 Person tempMother = potentialMothers.get(mindex);
+
                 if(tempMother.getGender()==Gender.f){//если выбранный из списка человек - женщина, 
                     mother = tempMother;//выбрать мать
                 }
@@ -167,13 +170,15 @@ public class PersonService implements Service{
                     print(tree.showNodeList(potentialFathers));//отправка во вью через презентер списка возможных отцов, переведенного в текст
                 }
                 break;
-            case 9://выбор отца из списка
+            case 9://выбор отца из списка !!! список выводится с 1, делать поправку в индексе!
                 int index = Integer.parseInt(msg);//добавить потом try catch
+                index--;
                 if(index >= 0 && index < potentialFathers.size()){//проверка, что индекс в пределах массива
                     Person tempFather = potentialFathers.get(index);
                     if(tempFather.getGender()==Gender.m){//если выбранный из списка человек - мужчина, 
                         father = tempFather;//выбрать отца
-                        getSurnameFromFather(father, gender);//На основе отца сформировать фамилию и отчество!
+                        getSurnameFromFather(father, gender);//На основе отца и пола добавляемого человека сформировать фамилию и отчество!
+                        setQuestionNumber(12);//так как фамилия и отчество сформированы, нужно пропустить их ввод вручную,вводим номер вне диапазона
                     }
                     else{//если пол выбранного человека - женский
                         print("Выбран человек не того пола, повторите ввод");
@@ -208,7 +213,7 @@ public class PersonService implements Service{
     }
 
     @Override
-    public void searchNode(String text) {
+    public void searchNode(String text) {//поиск записи. по идее при выборе из найденных
         
     }
 
@@ -232,5 +237,28 @@ public class PersonService implements Service{
     public String getAllPersons() {
         return tree.toString();
     }
+    @Override
+    public String findNodes(String searchText) {
+        searchResults = tree.findNodes(searchText);
+        if(searchResults.size() != 0){//если список не пустой
+            return tree.showNodeList(searchResults);//возвращаем список в виде текста
+        }
+        return "";//иначе возвращаем пустую строку
+    }
+    @Override
+    public void showNodeFullInfo(int index) {
+        if(index >= 0 && index < searchResults.size()){
+            print(searchResults.get(index).getFullInfo());
+        }else{
+            print("Введен неверный номер");
+        }
+    }
+    @Override
+    public void deleteNode(int index) {
+        tree.deleteNode(index);
+        print("Запись удалена");
+    }
+    
+    
     
 }    
