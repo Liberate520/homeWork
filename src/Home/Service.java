@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Service {
 
-    private FamilyTree activeFamily;
+    private FamilyTree<Human> activeFamily;
     private List<FamilyTree> famylyList;
     public Service(FamilyTree family) {
         this.activeFamily = family;

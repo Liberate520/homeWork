@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree<E> implements Iterable<E> {
+    private List<E> humanList;
     public FamilyTree(){
         humanList = new ArrayList<>();
     }
-    public  void addToFamily(Human human){
-        humanList.add(human);
+    public  void addToFamily(E e){
+        humanList.add(e);
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 

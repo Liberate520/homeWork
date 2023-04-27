@@ -4,8 +4,9 @@ import Home.human.Human;
 
 import java.io.IOException;
 
-public interface WorkWithData {
+public interface WorkWithData<E extends Human> {
 
-    void familyTreeSave(Human human) throws IOException;
-    Human familyTreeLoad(Human human) throws IOException, ClassNotFoundException;
+    void familyTreeSave(E e) throws IOException;
+    E familyTreeLoad(E e) throws IOException, ClassNotFoundException;
+
 }
