@@ -1,37 +1,28 @@
 import java.io.*;
-import java.util.Objects;
 
 
-public class FileWorker implements Serializable {
-    Person person;
-    Tree tree;
+public class FileWorker implements FileWorkable {
 
-    public FileWorker(Tree tree) {
-        this.tree = tree;
-    }
-    public FileWorker(Person person) {
-        this.person = person;
-    }
-
-    public static void SaveFile (Person person) {
-        try(ObjectOutputStream data = new ObjectOutputStream(new FileOutputStream("Data.txt")))
+    public boolean saveFile(Serializable serializable,String filePath) {
+        try(ObjectOutputStream data = new ObjectOutputStream(new FileOutputStream(filePath)))
         {
-            data.writeObject(person.getInfo());
-            System.out.println("File saved");
+            data.writeObject(serializable);
+            return true;
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
 
-    public static void ReadFile (Person person) {
-        try(ObjectInputStream data = new ObjectInputStream(new FileInputStream("Data.txt")))
+    public Object readFile(String filePath) {
+        try(ObjectInputStream data = new ObjectInputStream(new FileInputStream(filePath)))
         {
-            Person p=(Person)data.readObject();
-            System.out.println(p);
+            return data.readObject();
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
+            return null;
         }
     }
 

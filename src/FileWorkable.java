@@ -1,4 +1,8 @@
+
+import java.io.Serializable;
+
 public interface FileWorkable {
-    public static void SaveFile (Person person){};
-    public static void ReadFile (Person person){};
+    boolean saveFile (Serializable serializable,String filePath);
+    Object readFile (String filePath);
+
 }

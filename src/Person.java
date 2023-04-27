@@ -1,12 +1,15 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Person implements Serializable, FileWorkable{
+public class Person implements Serializable {
     private int age;
     private int gender;
     private String name;
     private Person mother;
     private  Person father;
+    private List<Person> children;
 
     public Person(int age, int gender,String name, Person mother, Person father) {
         this.age = age;
@@ -14,11 +17,19 @@ public class Person implements Serializable, FileWorkable{
         this.name = name;
         this.mother = mother;
         this.father = father;
+        children=new ArrayList<>();
     }
 
     public Person(int age, int gender,String name) {
         this(age,gender,name,null,null);
 
+    }
+    public boolean addChild(Person child){
+        if(!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
     @Override

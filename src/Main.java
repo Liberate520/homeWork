@@ -1,6 +1,13 @@
+import java.util.logging.FileHandler;
+
 public class Main {
     public static void main(String[] args) {
-        Tree tree=new Tree();
+       // Tree tree=new Tree();
+        String filePath="src/tree.txt";
+        FileWorkable fileWorkable = new FileWorker();
+
+        Tree tree =(Tree) fileWorkable.readFile(filePath);
+        System.out.println(tree.getInfoTree());
 
         Person person1=new Person(80,0,"Иванова Наталья");
         Person person2=new Person(90,1,"Иванов Василий");
@@ -14,8 +21,6 @@ public class Main {
         Person person8=new Person(10,0,"Петрова Ольга",person6,person5);
         Person person9=new Person(10,1,"Петров Максим",person6,person5);
         Person person10=new Person(40,0,"Иванова Нина",person1,person2);
-
-
 
         tree.addPerson(person1);
         tree.addPerson(person2);
@@ -34,8 +39,11 @@ public class Main {
         System.out.println(tree.getChildren(person6));
         System.out.println(person5.getGender());
 
-        FileWorker.SaveFile(person2);
-        FileWorker.ReadFile(person2);
+
+        fileWorkable.saveFile(tree,filePath);
+        System.out.println(tree.getInfoTree());
+
+
 
         
 
