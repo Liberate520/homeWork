@@ -1,62 +1,61 @@
 package presenter;
 
-import model.Human;
 import model.Service;
 import view.View;
+
 import java.io.IOException;
 
 public class Presenter {
     private View view;
-    private Service service;
 
-    public Presenter(View view, Service service) {
+    private Service service = new Service();
+
+
+    public Presenter(View view) {
         this.view = view;
-        this.service = service;
         view.setPresenter(this);
     }
 
-    public Human readAndCreateHuman() {
-        return service.readAndCreateHuman();
+    public String testTree() {
+        return service.testTree();
     }
 
-    public void getHumanByName() {
-        service.getHumanByName();
+    public String loadData() throws IOException, ClassNotFoundException {
+        return service.loadData();
     }
 
-    public void print() {
-        service.print();
+    public String saveData() throws IOException {
+        return service.saveData();
     }
 
-    public String getFileName() {
-        return service.getFileName();
+    public String addPerson(String personName,String personSex, Integer birthData, Integer deathData) {
+        return service.addPerson(personName,personSex, birthData, deathData);
     }
 
-    public String getFileType() {
-        return service.getFileType();
+    public String updatePerson(String personName, Integer birthDate, Integer deathDate) {
+        return service.updatePerson(personName, birthDate, deathDate);
     }
 
-    public void createInitialTree() {
-        service.createInitialTree();
+    public String personEnvironment(String personName, String fatherName, String motherName, String childName, String childSex) {
+        return service.personEnvironment(personName, fatherName, motherName, childName, childSex);
     }
 
-    public void printChildren() {
-        service.printChildren();
+    public String searchPerson(String nextLine) {
+        return service.searchPerson(nextLine);
+    }
+    public String printTree() {
+        return service.printTree();
     }
 
-    public void writeTreeInFile() throws IOException {
-        service.writeTreeInFile();
+    public void sortByName() {
+        service.sortByName();
     }
 
-    public void readFromFile() throws IOException, ClassNotFoundException {
-        service.readFromFile();
+    public void sortByBirthDate() {
+        service.sortByBirthDate();
     }
 
-    public void sortByParameter(int sortNumber) {
-        service.sortByParameter(sortNumber);
-    }
-
-    public void addHuman(Human human) {
-        service.addHuman(human);
-        System.out.printf("Вы успешно добавили добавили в древо нового родственника:\n  %s\n", human.toString());
+    public boolean checkName(String personName){
+        return service.checkName(personName);
     }
 }

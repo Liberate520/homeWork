@@ -1,107 +1,58 @@
 package model;
 
-import model.comparators.HumanComparatorByBirthday;
-import model.comparators.HumanComparatorById;
-import model.comparators.HumanComparatorByName;
+import model.comparators.PersonComparatorByBirthday;
+import model.comparators.PersonComparatorByName;
+import model.comparators.PersonIterator;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree<H extends Human> implements Serializable, FamilyTreeIterator<H> {
-    private int id;
-    private List<H> familyTree;
+public class FamilyTree<T extends Basic> implements Iterable, Serializable {
+
+    private List<T> listOfPersons = new ArrayList<T>();
+
+    public FamilyTree(T person){
+        if (person!=null) {
+            listOfPersons.add(person);
+        }
+    }
 
     public FamilyTree() {
-        this.familyTree = new ArrayList<H>();
+        this(null);
     }
 
-    List<H> getFamilyTree() {
-        return familyTree;
-    }
+    public T getPerson(String name) {
+        T personForSearch = null;
+        for (int i = 0; i<listOfPersons.size();i++){
 
-    void sortByParameter(int sortNumber) {
-        switch (sortNumber) {
-            case 1:
-                sortByName();
-                System.out.println("Генеалогическое древо отсортировано по имени");
-                break;
-            case 2:
-                System.out.println("Генеалогическое древо отсортировано по году рождения");
-                sortByBirthYear();
-                break;
-            case 3:
-                System.out.println("Генеалогическое древо отсортировано по Id");
-                sortById();
-                break;
-            default:
-                System.out.println("Вы ввели некорректный номер сортировки!");
-        }
-    }
-
-    void addHuman(H human) {
-        familyTree.add(human);
-        if (human.getMother() != null) {
-            human.getMother().addChild(human);
-        }
-        if (human.getFather() != null) {
-            human.getFather().addChild(human);
-        }
-    }
-
-    Human getHumanById(int id) {
-        for (Human human : familyTree) {
-            if (human.getId() == id) {
-                return human;
+            if (listOfPersons.get(i).getName().equals(name)){
+                personForSearch = listOfPersons.get(i);
             }
         }
-        return null;
+        return personForSearch ;
     }
 
-    int getLastId() {
-        if (familyTree == null){
-            return -1;
-        }
-        return familyTree.size() - 1;
+    public void setPerson(T person) {
+        listOfPersons.add(person);
     }
 
-    Human getHumanByName(String name) {
-        String nameFull = name.replace(",", " ");
-        for (Human human : familyTree) {
-            if (human.getFullName().equals(nameFull)) {
-                return human;
-            }
-        }
-        return null;
+    public void sortByName (){
+        listOfPersons.sort(new PersonComparatorByName<T>());
     }
 
-    Gender getGender(String gender) {
-        if (gender.equals("м")) {
-            return Gender.male;
-        } else if (gender.equals("ж")){
-            return Gender.female;
-        }
-        return null;
+    public void sortByBirth (){
+        listOfPersons.sort(new PersonComparatorByBirthday<T>());
     }
 
-    void sortByName() {
-        familyTree.sort(new HumanComparatorByName());
-    }
 
-    void sortByBirthYear() {
-        familyTree.sort(new HumanComparatorByBirthday());
-    }
-
-    void sortById() {
-        familyTree.sort(new HumanComparatorById());
+    @Override
+    public String toString() {
+        return "model.FamilyTree\n" + listOfPersons;
     }
 
     @Override
-    public boolean hasNext() {
-        return this.id < familyTree.size();
+    public Iterator<T> iterator() {
+        return new PersonIterator(listOfPersons);
     }
 
-    @Override
-    public H next() {
-        return this.familyTree.get(id++);
-    }
+
 }
