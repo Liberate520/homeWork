@@ -1,8 +1,6 @@
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,7 +11,7 @@ public class FileInteraction implements Saveable{
     Serializable s;
 
     public FileInteraction(Serializable s){
-        this.s = s;
+        
     }
 
     @Override
@@ -32,6 +30,7 @@ public class FileInteraction implements Saveable{
     @Override
     public Serializable Load(String path) {
         ObjectInputStream ois = null;
+        Tree s = new Tree();
 
         try {
             ois = new ObjectInputStream(new FileInputStream(path));

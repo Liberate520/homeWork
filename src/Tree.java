@@ -2,15 +2,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree implements Serializable {
+class Tree implements Serializable {
     List<Human> people;
+
+    public Tree() {}
 
     public Tree(List<Human> people)
     {
         this.people = people;
     }
 
-    public Human Find(String name)
+    public Human find(String name)
     {
         for (Human human : people)
             if(human.name.equals(name))
@@ -19,7 +21,7 @@ public class Tree implements Serializable {
         return null;
     }
 
-    public List<Human> GetChildren(Human parentHuman)
+    public List<Human> getChildren(Human parentHuman)
     {
         for (Human human : people) {
             if(human.equals(parentHuman))
