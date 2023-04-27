@@ -2,30 +2,30 @@ import java.io.*;
 import java.util.*;
 
 
-public class GenealogyTree implements Serializable, Iterable<Human>{
-    private List<Human> humans;
+public class GenealogyTree<E extends TreeGroupItem> implements Serializable, Iterable<Human>{
+    private List<E> humans;
 
     public GenealogyTree() { this(new ArrayList<>()); }
 
-    public GenealogyTree(List<Human> humans) {
+    public GenealogyTree(List<E> humans) {
         this.humans = humans;
     }
 
-    public List<Human> getHumans() {
+    public List<E> getHumans() {
         return humans;
     }
 
-    public boolean addHuman(Human human) {
+    public boolean addHuman(E human) {
         if (human == null) {
             return false;
         };
         if (!humans.contains(human)){
             humans.add(human);
             if (human.getFather() != null){
-                human.getFather().addChild(human);
+                human.getFather().addChild((Human) human);
             }
             if (human.getMother() != null){
-                human.getMother().addChild(human);
+                human.getMother().addChild((Human) human);
             }
             return true;
         }
@@ -37,7 +37,7 @@ public class GenealogyTree implements Serializable, Iterable<Human>{
 //        sb.append("В дереве ");
 //        sb.append(humans.size());
 //        sb.append(" объектов:\n ");
-        for (Human human: humans){
+        for (E human: humans){
             sb.append(human.getInfo());
             sb.append("\n");
         }
@@ -47,14 +47,14 @@ public class GenealogyTree implements Serializable, Iterable<Human>{
 
     public void printTree(String tab, Human human) {
         System.out.println(tab + human.toString());
-        List<Human> children = human.getChildrens();
-        for (Human child : children) {
-            printTree("   ", child); // КОСТЫЛЬ!!!
+        List<E> children = (List<E>) human.getChildrens();
+        for (E child : children) {
+            printTree("   ", (Human) child); // КОСТЫЛЬ!!!
         }
     }
 
-    public Human getByName(String firstname, String lastName){
-        for (Human human: humans){
+    public E getByName(String firstname, String lastName){
+        for (E human: humans){
             if (human.getFirstName() == firstname & human.getLastName() == lastName){
                 return human;
             }
@@ -63,14 +63,18 @@ public class GenealogyTree implements Serializable, Iterable<Human>{
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humans);
-    }
+    public Iterator<Human> iterator() { return (Iterator<Human>) new HumanIterator<E>(humans); }
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//    На семинаре была такая запись. Но у меня так не работает. предлагает изменить так как выше:
+//    @Override
+//    public Iterator<E> iterator() { return new HumanIterator<E>(humans); }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public void sortByName(){
-        humans.sort(new HumanComparatorByName());
+        humans.sort(new HumanComparatorByName<E>());
     }
     public void sortByAge(){
-        humans.sort(new HumanComparatorByAge());
+        humans.sort(new HumanComparatorByAge<E>());
     }
 }

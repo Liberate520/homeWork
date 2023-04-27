@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeGroupItem {
     private String firstName;
     private String lastName;
     private Integer age;
@@ -49,7 +49,7 @@ public class Human implements Serializable, Comparable<Human> {
         return lastName;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 

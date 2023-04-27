@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
-    private GenealogyTree activetree;
+    private GenealogyTree<Human> activetree;
     private List<GenealogyTree> genealogyTreeList;
     public Service(GenealogyTree tree) {
         this.activetree = tree;
