@@ -1,15 +1,16 @@
-import fileWorkers.FileWorkable;
-import fileWorkers.FileWorker;
-import person.Person;
-import tree.Tree;
+package familyTree;
+
+import familyTree.fileWorkers.FileWorkable;
+import familyTree.fileWorkers.FileWorker;
+import familyTree.person.Person;
 
 public class Main {
     public static void main(String[] args) {
-        tree.Tree tree=new tree.Tree();
-        String filePath="src/tree.txt";
+        familyTree.tree.Tree tree=new familyTree.tree.Tree();
+        String filePath="src/familyTree.tree.txt";
         FileWorkable fileWorkable = new FileWorker();
 
-        //Tree tree =(Tree) fileWorkable.readFile(filePath);
+        //Tree familyTree.tree =(Tree) fileWorkable.readFile(filePath);
         System.out.println(tree.getInfoTree());
 
         Person person1=new Person(80,"Female","Иванова Наталья");
