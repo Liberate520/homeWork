@@ -5,12 +5,12 @@ public class Test {
     public static void main(String[] args)
     {
         Human h1 = new Human("m1", 1980, Gender.Male);
-        Human h2 = new Human("f1", 1980, Gender.Male);
+        Human h2 = new Human("f1", 1985, Gender.Male);
 
         Human c1 = new Human("m1c1", 2002, Gender.Male);
-        Human c2 = new Human("m1c2", 2002, Gender.Male);
-        Human c3 = new Human("m1c3", 2002, Gender.Female);
-        Human c4 = new Human("m1c4", 2002, Gender.Female);
+        Human c2 = new Human("m1c2", 2003, Gender.Male);
+        Human c3 = new Human("m1c3", 2005, Gender.Female);
+        Human c4 = new Human("m1c4", 2001, Gender.Female);
 
         h1.AddChild(c1);
         h1.AddChild(c2);
@@ -29,10 +29,12 @@ public class Test {
         people.add(c3);
         people.add(c4);
         Tree tree = new Tree(people);
+        
+        for (Human h : tree) {
+            System.out.println(h);
+        }
 
-        FileInteraction fi = new FileInteraction(tree);
-        fi.Save("out");
-        Tree restoredTree = (Tree) fi.Load("out");
-        System.out.println(tree);
+        System.out.println(tree.sortedByBirthYear());
+        System.out.println(tree.sortedByName());
     }
 }
