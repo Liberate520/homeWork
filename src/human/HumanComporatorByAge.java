@@ -2,9 +2,9 @@ package human;
 
 import java.util.Comparator;
 
-public class HumanComporatorByAge implements Comparator<Human> {
+public class HumanComporatorByAge<T extends HumanItem> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o1.getYearOfBirrth(), o2.getYearOfBirrth());
     }
 }

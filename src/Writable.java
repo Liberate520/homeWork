@@ -1,6 +1,6 @@
-import famalyTree.Tree;
+import famalyTree.Family;
 
 public interface Writable {
-    boolean save(Tree serializable, String filePath);
+    boolean save(Family serializable, String filePath);
     Object read(String filePath);
 }

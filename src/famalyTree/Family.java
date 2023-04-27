@@ -2,41 +2,40 @@ package famalyTree;
 
 import human.Human;
 import human.HumanComporatorByAge;
+import human.HumanItem;
 import human.HymanComporatorByName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-public class Tree implements Iterable<Human>, Serializable {
-    private List<Human> humanList;
-    public Tree(){
+public class Family<E extends HumanItem> implements Iterable<Human>, Serializable {
+    private List<E> humanList;
+    public Family(){
         this(new ArrayList<>());
     }
-    public Tree(List<Human> humanList){
+    public Family(List<E> humanList){
         this.humanList = humanList;
     }
-    public boolean add(Human human){
+    public boolean add(E human){
         if (human == null){
             return false;
         }
         if (!humanList.contains(human)){
             humanList.add(human);
             if (human.getFather() != null){
-                human.getFather().addChild(human);
+                human.getFather().addChild((Human) human);
             }
             if (human.getMother() != null){
-                human.getMother().addChild(human);
+                human.getMother().addChild((Human) human);
             }
             return true;
         }
         return false;
     }
-    public Human getByName(String name){
-        for (Human human: humanList){
+    public E getByName(String name){
+        for (E human: humanList){
             if (human.getName().equals(name)){
-                return (Human) human;
+                return human;
             }
         }
         return null;
@@ -46,7 +45,7 @@ public class Tree implements Iterable<Human>, Serializable {
         sb.append("в дереве ");
         sb.append(humanList.size());
         sb.append("объектов: \n");
-        for (Human human: humanList){
+        for (E human: humanList){
             sb.append(human.getInfo());
             sb.append("\n");
         }
@@ -57,10 +56,10 @@ public class Tree implements Iterable<Human>, Serializable {
         return new HumanIterator(humanList);
     }
     public void sortByName(){
-        humanList.sort(new HymanComporatorByName());
+        humanList.sort(new HymanComporatorByName<>());
     }
     public void sortByAge(){
-        humanList.sort(new HumanComporatorByAge());
+        humanList.sort(new HumanComporatorByAge<>());
     }
 
 }

@@ -12,10 +12,10 @@ public class Main {
         service.addChild("Ivan", 2008, Gender.Female, "Petr", "Nina");
         service.addChild("Sara", 2016, Gender.Female, "Petr", "Nina");
         System.out.println(service.getInfo());
-//        service.sortByAge();
-
-//        service.readFile();
-//        System.out.println(service.getInfo());
+        service.sortByAge();
+        System.out.println(service.getInfo());
+        service.sortByName();
+        System.out.println(service.getInfo());
 
 
     }

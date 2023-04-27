@@ -1,10 +1,10 @@
-import famalyTree.Tree;
+import famalyTree.Family;
 
 import java.io.*;
 
 public class FileHandler implements Writable{
     @Override
-    public boolean save(Tree serializable, String filePath) {
+    public boolean save(Family serializable, String filePath) {
       try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
           objectOutputStream.writeObject(serializable);
           return true;

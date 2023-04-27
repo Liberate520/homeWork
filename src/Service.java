@@ -1,4 +1,4 @@
-import famalyTree.Tree;
+import famalyTree.Family;
 import human.Gender;
 import human.Human;
 
@@ -8,30 +8,30 @@ import java.util.List;
 
 public class Service {
     private int id;
-    private Tree tree;
-    private List<Tree> trees;
+    private Family family;
+    private List<Family> families;
     private Writable writable;
-    public Service(Tree tree){
-        this.tree = tree;
-        trees = new ArrayList<>();
-        trees.add(tree);
+    public Service(Family family){
+        this.family = family;
+        families = new ArrayList<>();
+        families.add(family);
     }
     public Service(){
-        this(new Tree());
+        this(new Family());
     }
-    public void addTrees(Tree tree){
-        trees.add(tree);
+    public void addTrees(Family family){
+        families.add(family);
     }
 
     public void addHuman(String name, int yearOfBirth, Gender gender){
-        tree.add(new Human(id++, name, yearOfBirth, gender));
+        family.add(new Human(id++, name, yearOfBirth, gender));
     }
     public void addChild(String name, int yearOfBirth, Gender gender, String nameOfFather, String nameOfMother){
-        tree.add(new Human(id++, name, yearOfBirth, gender, tree.getByName(nameOfFather), tree.getByName(nameOfMother)));
+        family.add(new Human(id++, name, yearOfBirth, gender, (Human) family.getByName(nameOfFather), (Human) family.getByName(nameOfMother)));
     }
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-        Iterator<Human> iterator = tree.iterator();
+        Iterator<Human> iterator = family.iterator();
         while (iterator.hasNext()){
             Human human = iterator.next();
             stringBuilder.append(human).append("\n");
@@ -39,15 +39,15 @@ public class Service {
         return stringBuilder.toString();
     }
     public void sortByName(){
-        tree.sortByName();
+        family.sortByName();
     }
     public void sortByAge(){
-        tree.sortByAge();
+        family.sortByAge();
     }
    public void saveFile(){
         Writable writable = new FileHandler();
         String filePath = "/Users/mihaillazarenko/Documents/Программа разработчик/ООП/OOP_homeWork/src/tree.txt";
-        writable.save(tree,filePath);
+        writable.save(family,filePath);
 
    }
    public void readFile(){

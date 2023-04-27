@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Comparable<Human>, Serializable {
+public class Human implements Comparable<Human>, Serializable, HumanItem {
     private int id;
     private int yearOfBirrth;
     private String name;
