@@ -3,10 +3,10 @@ package view.commands;
 import view.View;
 
 
-public class printSortByAge implements Command{
+public class PrintSortByAge implements Command{
     private View view;
 
-    public printSortByAge(View view) {
+    public PrintSortByAge(View view) {
         this.view = view;
     }
 

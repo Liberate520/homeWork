@@ -13,17 +13,17 @@ public class MainMenu {
     public MainMenu(View view) {
         this.view = view;
         commandList = new ArrayList<>();
-        commandList.add(new exit(view));
-        commandList.add(new getTreeInfo(view));
-        commandList.add(new printSortByAge(view));
-        commandList.add(new printSortByFirstName(view));
-        commandList.add(new printSortByLastName(view));
-        commandList.add(new addNewPerson(view));
-        commandList.add(new addNewPersonAs(view));
-        commandList.add(new getInfo(view));
-        commandList.add(new getInfoRelation(view));
-        commandList.add(new saveFamilyTree(view));
-        commandList.add(new loadFamilyTree(view));
+        commandList.add(new Exit(view));
+        commandList.add(new GetTreeInfo(view));
+        commandList.add(new PrintSortByAge(view));
+        commandList.add(new PrintSortByFirstName(view));
+        commandList.add(new PrintSortByLastName(view));
+        commandList.add(new AddNewPerson(view));
+        commandList.add(new AddNewPersonAs(view));
+        commandList.add(new GetInfo(view));
+        commandList.add(new GetInfoRelation(view));
+        commandList.add(new SaveFamilyTree(view));
+        commandList.add(new LoadFamilyTree(view));
     }
 
     public String print(){

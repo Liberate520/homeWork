@@ -4,10 +4,10 @@ import view.View;
 
 import java.io.IOException;
 
-public class saveFamilyTree implements Command{
+public class SaveFamilyTree implements Command{
     private View view;
 
-    public saveFamilyTree(View view) {
+    public SaveFamilyTree(View view) {
         this.view = view;
     }
 

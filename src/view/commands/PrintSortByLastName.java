@@ -3,10 +3,10 @@ package view.commands;
 import view.View;
 
 
-public class printSortByLastName implements Command{
+public class PrintSortByLastName implements Command{
     private View view;
 
-    public printSortByLastName(View view) {
+    public PrintSortByLastName(View view) {
         this.view = view;
     }
 

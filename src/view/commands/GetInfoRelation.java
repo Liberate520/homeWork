@@ -2,10 +2,10 @@ package view.commands;
 
 import view.View;
 
-public class getInfoRelation implements Command{
+public class GetInfoRelation implements Command{
     private View view;
 
-    public getInfoRelation(View view) {
+    public GetInfoRelation(View view) {
         this.view = view;
     }
 

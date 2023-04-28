@@ -2,20 +2,20 @@ package view.commands;
 
 import view.View;
 
-public class exit implements Command{
+public class AddNewPerson implements Command{
     private View view;
 
-    public exit(View view) {
+    public AddNewPerson(View view) {
         this.view = view;
     }
 
     @Override
     public String getDescription() {
-        return "Завершение работы";
+        return "Добавить новую персону";
     }
 
     @Override
     public void execute() {
-        view.exit();
+        view.addNewPerson();
     }
 }

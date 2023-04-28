@@ -2,10 +2,10 @@ package view.commands;
 
 import view.View;
 
-public class addNewPersonAs implements Command{
+public class AddNewPersonAs implements Command{
     private View view;
 
-    public addNewPersonAs(View view) {
+    public AddNewPersonAs(View view) {
         this.view = view;
     }
 
