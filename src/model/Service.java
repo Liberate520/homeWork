@@ -64,16 +64,16 @@ public class Service {
     }
 
     public String getInfo(String firstName, String lastName, String rel) {
-        Relation relation = null;
-        switch (rel.toLowerCase()) {
-            case "м": relation = Relation.Mother;break;
-            case "o": relation = Relation.Father;break;
-            case "cп": relation = Relation.Spouse;break;
-            case "б": relation = Relation.Brother;break;
-            case "ст": relation = Relation.Sister;break;
-            case "сн": relation = Relation.Son;break;
-            case "д": relation = Relation.Daughter;break;
-        }
+        Relation relation = switch (rel.toLowerCase()) {
+            case "м" -> Relation.Mother;
+            case "о" -> Relation.Father;
+            case "сп" -> Relation.Spouse;
+            case "б" -> Relation.Brother;
+            case "ст" -> Relation.Sister;
+            case "сн" -> Relation.Son;
+            case "д" -> Relation.Daughter;
+            default -> null;
+        };
         return activeTree.getInfo(firstName, lastName, relation);
     }
 
@@ -120,7 +120,17 @@ public class Service {
         format.saveFamilyTreeAs(activeTree, path);
     }
 
+    public void saveFamilyTreeAs(String path) throws IOException {
+        FileOutStr format = new FileOutStr();
+        format.saveFamilyTreeAs(activeTree, path);
+    }
+
     public void loadFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
+        activeTree = format.getFamilyTreeFrom(path);
+    }
+
+    public void loadFamilyTreeFrom(String path) throws IOException, ClassNotFoundException {
+        FileOutStr format = new FileOutStr();
         activeTree = format.getFamilyTreeFrom(path);
     }
 

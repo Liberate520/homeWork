@@ -10,20 +10,19 @@ public class Main {
 
         View view = new ConsoleUI();
         Service service = new Service();
-        service.addPerson("Василий", "Лежебоков", 32, "м");
-        service.addPersonAs("Василиса", "Лежебокова", 27, "ж", "Василий", "Лежебоков", "сп");
-        service.addPersonAs("Анатолий", "Лежебоков", 57, "м", "Василий", "Лежебоков", "о");
-        service.addPersonAs("Анна", "Лежебокова", 53, "ж", "Василий", "Лежебоков", "м");
-        service.addPersonAs("Мария", "Кузьмина", 25, "ж", "Василий", "Лежебоков", "ст");
-        service.addPersonAs("Роман", "Билан", 29, "м", "Василий", "Лежебоков", "б");
-        service.addPersonAs("Петр", "Лежебоков", 7, "м", "Василий", "Лежебоков", "сн");
-        service.addPersonAs("Ирина", "Лежебокова", 5, "ж", "Василий", "Лежебоков", "д");
         Presenter presenter = new Presenter(view, service);
 
         view.start();
 
 
-
+//        service.addPerson("Василий", "Лежебоков", 32, "м");
+//        service.addPersonAs("Василиса", "Лежебокова", 27, "ж", "Василий", "Лежебоков", "сп");
+//        service.addPersonAs("Анатолий", "Лежебоков", 57, "м", "Василий", "Лежебоков", "о");
+//        service.addPersonAs("Анна", "Лежебокова", 53, "ж", "Василий", "Лежебоков", "м");
+//        service.addPersonAs("Мария", "Кузьмина", 25, "ж", "Василий", "Лежебоков", "ст");
+//        service.addPersonAs("Роман", "Билан", 29, "м", "Василий", "Лежебоков", "б");
+//        service.addPersonAs("Петр", "Лежебоков", 7, "м", "Василий", "Лежебоков", "сн");
+//        service.addPersonAs("Ирина", "Лежебокова", 5, "ж", "Василий", "Лежебоков", "д");
 
 //        Service service = new Service();
 //        service.addPerson("Василий", "Лежебоков", 32, Sex.Male);

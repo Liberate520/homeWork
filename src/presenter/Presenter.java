@@ -3,6 +3,8 @@ package presenter;
 import model.Service;
 import view.View;
 
+import java.io.IOException;
+
 public class Presenter {
     private View view;
     private Service service;
@@ -44,5 +46,13 @@ public class Presenter {
 
     public void printSortByLastName() {
         service.printSortByLastName();
+    }
+
+    public void saveFamilyTree(String path) throws IOException {
+        service.saveFamilyTreeAs(path);
+    }
+
+    public void loadFamilyTree(String path) throws IOException, ClassNotFoundException {
+        service.loadFamilyTreeFrom(path);
     }
 }

@@ -22,16 +22,6 @@ public class Human implements Serializable {
         this ("NoName", "NoName", 0, Sex.Male);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("ID: " + this.id + "    ");
-        output.append("Name: " + this.firstName + " " + this.lastName + "    ");
-        output.append("Age: " + this.age + "    ");
-        output.append("Sex: " + this.sex + "    " + "\n");
-        return output.toString();
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -66,5 +56,16 @@ public class Human implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("ID: " + this.id + "    ");
+        output.append("Имя: " + this.firstName + " " + this.lastName + "    ");
+        output.append("Возраст: " + this.age + "    ");
+        String gender = (this.sex == Sex.Male) ? "муж" : "жен";
+        output.append("Пол: " + gender + "    " + "\n");
+        return output.toString();
     }
 }

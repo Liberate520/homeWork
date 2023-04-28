@@ -2,6 +2,7 @@ package model.person.comparators;
 
 import model.interfaces.Anthropoid;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 
@@ -10,10 +11,7 @@ import java.util.Comparator;
  * могли попасть все записи. Без сравнения остальных полей в TreeSet не попали бы личности
  * с одинаковым именем, фамилией или возрастом (в зависимости от выбранного компаратора).
  */
-public class PersonComparatorByFirstName<E extends Anthropoid> implements Comparator<E> {
-//    @Override
-//    public int compare(E o1, E o2) {
-//        return o1.getFirstName().compareTo(o2.getFirstName());
+public class PersonComparatorByFirstName<E extends Anthropoid> implements Serializable, Comparator<E> {
 
     @Override
     public int compare(E o1, E o2) {

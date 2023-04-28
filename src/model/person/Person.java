@@ -120,7 +120,7 @@ public class Person extends Human implements Serializable, Anthropoid {
     public String printBrothersOrSisters() {
         StringBuilder output = new StringBuilder();
         if (this.brothersOrSistersSet != null && this.brothersOrSistersSet.size() != 0) {
-            output.append("Brothers and sisters: ");
+            output.append("Братья и сестры: ");
             for (Anthropoid person: this.brothersOrSistersSet) {
                 output.append(person.getFirstName() + " " + person.getLastName() + "    ");
             }
@@ -132,7 +132,7 @@ public class Person extends Human implements Serializable, Anthropoid {
     public String printChildren() {
         StringBuilder output = new StringBuilder();
         if (this.childrenSet != null && this.childrenSet.size() != 0) {
-            output.append("Children: ");
+            output.append("Дети: ");
             for (Anthropoid child: this.childrenSet) {
                 output.append(child.getFirstName() + " " + child.getLastName() + "    ");
             }
@@ -145,12 +145,14 @@ public class Person extends Human implements Serializable, Anthropoid {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
+        output.append("-----------------------------------------------------------" + "\n");
         output.append(super.toString());
-        output.append("Spouse: " + this.printPerson((Person) this.spouse) + "\n");
-        output.append("Mother: " + this.printPerson((Person) this.mother) + "\n");
-        output.append("Father: " + this.printPerson((Person) this.father) + "\n");
+        output.append("Супруг/Супруга: " + this.printPerson((Person) this.spouse) + "\n");
+        output.append("Мать: " + this.printPerson((Person) this.mother) + "\n");
+        output.append("Отец: " + this.printPerson((Person) this.father) + "\n");
         output.append(this.printBrothersOrSisters());
         output.append(this.printChildren());
+        output.append("\n" + "-----------------------------------------------------------");
         return output.toString();
     }
 

@@ -2,6 +2,7 @@ package view;
 
 import presenter.Presenter;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
@@ -15,10 +16,14 @@ public class ConsoleUI implements View{
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         this.print("Добро пожаловать в Фамильное Древо!");
-        this.print("-----------------------------------");
+        this.print("************************************");
+        this.print("");
+        this.print("Вы можете наполнить друво вручную или загрузить из файла MyFamilyTree.sfmt,\n" +
+                "прилагаемого к проекту.");
         this.printHelp();
+
         while (run) {
             String userInput = inputString("Введите команду: ");
             switch (userInput.toLowerCase()) {
@@ -32,6 +37,8 @@ public class ConsoleUI implements View{
                 case "2-1" -> this.addNewPersonAs();
                 case "3" -> this.getInfo();
                 case "3-1" -> this.getInfoRelation();
+                case "4-1" -> this.saveFamilyTree();
+                case "4-2" -> this.loadFamilyTree();
                 default -> this.print("Команда введена неверно.");
             }
         }
@@ -49,6 +56,8 @@ public class ConsoleUI implements View{
         this.print("2-1 - Добавить нового родного;");
         this.print("3 - Вывод информации по персоне;");
         this.print("3-1 - Вывод информации по родственнику персоны;");
+        this.print("4-1 - Сохранение древа в файл;");
+        this.print("4-2 - Загрузка древа из файла;");
         this.print("-----------------------------------");
     }
 
@@ -113,6 +122,18 @@ public class ConsoleUI implements View{
         this.print("Доступные степени родства: м - мать, o - отец, cп - супруг/супруга, б - брат, ст - сестра, сн - сын, д - дочь.");
         String relation = this.inputString("Введите степень родства: ");
         presenter.getInfo(firstName, lastName, relation);
+    }
+
+    private void saveFamilyTree() throws IOException {
+        this.print("Сохраняем древо...");
+        String path = this.inputString("Введите имя файла (без расширения): ") + ".sfmt";
+        presenter.saveFamilyTree(path);
+    }
+
+    private void loadFamilyTree() throws IOException, ClassNotFoundException {
+        this.print("Загружаем древо...");
+        String path = this.inputString("Введите имя файла (без расширения): ") + ".sfmt";
+        presenter.loadFamilyTree(path);
     }
 
     private String inputString(String message) {
