@@ -11,7 +11,7 @@ public class Main {
         String filePath="src/familyTree.tree.txt";
 
 //        Tree<Person> tree =(Tree) service.readFile(filePath);
-        System.out.println(service.getInfoTree());
+//        System.out.println(service.getInfoTree());
 
         Person person1=new Person(80,"Female","Иванова Наталья");
         Person person2=new Person(90,"Male","Иванов Василий");

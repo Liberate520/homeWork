@@ -9,7 +9,8 @@ import java.io.Serializable;
 
 public class Service {
     private Tree<Person> currentTree;
-    private FileWorker fileWorker;
+    FileWorker fileWorker = new FileWorker();
+
 
 
     public Service(Tree<Person> currentTree) {
