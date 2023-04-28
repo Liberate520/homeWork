@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ConsoleUI implements View{
     private Presenter presenter;
     private Scanner scanner;
-    boolean run;
+    private boolean run;
 
     public ConsoleUI() {
         this.scanner = new Scanner(System.in);
