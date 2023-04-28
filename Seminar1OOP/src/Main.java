@@ -1,46 +1,38 @@
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
-import java.util.logging.FileHandler;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        FamilyTree familyTree = new FamilyTree();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        FamilyTreeModel model = new FamilyTreeModel();
+        FamilyTreeView view = new FamilyTreeView();
+        FamilyTreePresenter presenter = new FamilyTreePresenter(model, view);
 
-        familyTree.addHuman(new Human("Сабина", 1965, "f"));
-        familyTree.addHuman(new Human("Сергей", 1959, "m"));
-        familyTree.addHuman(new Human("Диана", 1989, "f"));
-        familyTree.addHuman(new Human("Тимур", 1994, "m"));
-        familyTree.addHuman(new Human("Томирис", 1987, "f"));
+        // Добавляем людей в модель
+        presenter.addHuman(new Human("Сабина", 1965, "f"));
+        presenter.addHuman(new Human("Сергей", 1959, "m"));
+        presenter.addHuman(new Human("Диана", 1989, "f"));
+        presenter.addHuman(new Human("Тимур", 1994, "m"));
+        presenter.addHuman(new Human("Томирис", 1987, "f"));
 
-        System.out.println(familyTree.getHumanByName("Тимур"));
-        System.out.println(familyTree.getAllHuman());
+        // Выводим информацию о человеке по имени
+        Human timur = presenter.getHumanByName("Тимур");
+        view.displayHuman(timur);
+
+        // Выводим всех людей
+        List<Human> allHumans = presenter.getAllHuman();
+        view.displayAllHumans(allHumans);
 
         // Сохраняем в файл
-        FileHandlerWrapper fileHandlerWrapper = new FileHandlerWrapper(new FileHandler());
-        try {
-            fileHandlerWrapper.saveToFile(familyTree.getAllHuman(), "familyTree.dat");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        presenter.saveToFile("familyTree.dat");
 
         // Загружаем из файла
-        try {
-            List<Human> loadedList = fileHandlerWrapper.loadFromFile("familyTree.dat");
-            System.out.println(loadedList);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        presenter.loadFromFile("familyTree.dat");
 
-        // сортировка по имени
-        familyTree.sortByName();
+        // Сортируем по имени
+        presenter.sortByName();
 
-        // сортирока по дате рождения
-        //familyTree.sortByBirthDate();
-
-        // итератор for-each
-        for (Object human : familyTree) {
-            System.out.println(human);
-        }
+        // Выводим отсортированный список
+        allHumans = presenter.getAllHuman();
+        view.displayAllHumans(allHumans);
     }
 }
