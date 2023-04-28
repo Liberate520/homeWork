@@ -29,10 +29,10 @@ public class ConsoleUI implements View{
             switch (userInput.toLowerCase()) {
                 case "?" -> this.printHelp();
                 case "q" -> this.exit();
-                case "1" -> getTreeInfo();
-                case "1-1" -> printSortByAge();
-                case "1-2" -> printSortByFirstName();
-                case "1-3" -> printSortByLastName();
+                case "1" -> this.getTreeInfo();
+                case "1-1" -> this.printSortByAge();
+                case "1-2" -> this.printSortByFirstName();
+                case "1-3" -> this.printSortByLastName();
                 case "2" -> this.addNewPerson();
                 case "2-1" -> this.addNewPersonAs();
                 case "3" -> this.getInfo();
