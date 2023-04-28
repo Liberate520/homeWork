@@ -4,6 +4,7 @@ import familyTree.TreeItems;
 import familyTree.person.ComparatorAge;
 import familyTree.person.ComparatorGender;
 import familyTree.person.ComparatorName;
+import familyTree.person.Person;
 
 import java.io.*;
 import java.util.*;
@@ -15,12 +16,13 @@ public class Tree<E extends TreeItems> implements Serializable, Iterable<E> {
     }
     public void addPerson(E e){
         family.add(e);
-//        if(e.getMother()!=null){
-//            e.getMother().addChild(e);
-//        }
-//        if(e.getFather()!=null){
-//            e.getFather().addChild(e);
-//        }
+        if(e.getMother()!=null){
+            var mother = e.getMother();
+            mother.addChild((Person) e);
+        }
+        if(e.getFather()!=null){
+            e.getFather().addChild((Person) e);
+        }
     }
 
     public  String getParents(E e){

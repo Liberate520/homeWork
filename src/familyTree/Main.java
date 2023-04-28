@@ -1,17 +1,17 @@
 package familyTree;
 
-import familyTree.fileWorkers.FileWorkable;
-import familyTree.fileWorkers.FileWorker;
 import familyTree.person.Person;
+import familyTree.tree.Tree;
+
 
 public class Main {
     public static void main(String[] args) {
-        familyTree.tree.Tree tree=new familyTree.tree.Tree();
+        Tree<Person> tree = new Tree<>();
+        Service service = new Service(tree);
         String filePath="src/familyTree.tree.txt";
-        FileWorkable fileWorkable = new FileWorker();
 
-        //Tree familyTree.tree =(Tree) fileWorkable.readFile(filePath);
-        System.out.println(tree.getInfoTree());
+//        Tree<Person> tree =(Tree) service.readFile(filePath);
+        System.out.println(service.getInfoTree());
 
         Person person1=new Person(80,"Female","Иванова Наталья");
         Person person2=new Person(90,"Male","Иванов Василий");
@@ -26,35 +26,36 @@ public class Main {
         Person person9=new Person(10,"Male","Петров Максим",person6,person5);
         Person person10=new Person(40,"Female","Иванова Нина",person1,person2);
 
-        tree.addPerson(person1);
-        tree.addPerson(person2);
-        tree.addPerson(person3);
-        tree.addPerson(person4);
-        tree.addPerson(person5);
-        tree.addPerson(person6);
-        tree.addPerson(person7);
-        tree.addPerson(person8);
-        tree.addPerson(person9);
-        tree.addPerson(person10);
-
-        //System.out.println(person3);
-        System.out.println(tree.getGrandParents(person9));
-        System.out.println(tree.getParents(person9));
-        System.out.println(tree.getChildren(person6));
-        System.out.println(person5.getGender());
+        service.addPerson(person1);
+        service.addPerson(person2);
+        service.addPerson(person3);
+        service.addPerson(person4);
+        service.addPerson(person5);
+        service.addPerson(person6);
+        service.addPerson(person7);
+        service.addPerson(person8);
+        service.addPerson(person9);
+        service.addPerson(person10);
 
 
-        fileWorkable.saveFile(tree,filePath);
-        System.out.println(tree.getInfoTree());
+        System.out.println(service.getGrandParents(person9));
+        System.out.println(service.getParents(person9));
+        System.out.println(service.getChildren(person6));
 
-        tree.sortName();
-        System.out.println(tree.getInfoTree());
 
-        tree.sortAge();
-        System.out.println(tree.getInfoTree());
 
-        tree.sortGender();
-        System.out.println(tree.getInfoTree());
+        service.saveFile(tree,filePath);
+        System.out.println(service.getInfoTree());
+
+        service.sortName();
+        System.out.println(service.getInfoTree());
+
+        service.sortAge();
+        System.out.println(service.getInfoTree());
+
+        System.out.println(service.getInfoTree());
+
+
 
 
 
