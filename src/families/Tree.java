@@ -13,7 +13,7 @@ public interface Tree<T extends Essence<T>>{
     List<T> getDescendants(T t);
     List<T> getAncestors(T t);
     List<T> getRelatives(T t);
-    List<T> searchByName(String name);
+    T searchByName(String name);
 
     void setChildren(T parent, T child);
     void save(Writable<T> writable) throws IOException;

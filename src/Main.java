@@ -1,3 +1,4 @@
+import essence.Essence;
 import essence.Gender;
 import essence.Human;
 import families.Family;
@@ -29,52 +30,51 @@ public class Main {
         Romanovs.setChildren(Nikolai_II, Anastasia);
         Romanovs.setChildren(Nikolai_II, Aleksei);
         Romanovs.setChildren(Nikolai_II, Maria);
-        System.out.println(Nikolai_II);
-        System.out.println("_______________________");
+       // System.out.println(Nikolai_II);
+        // System.out.println("_______________________");
 
-        List<Human> children = Romanovs.getChildren(Aleksandra);
-        System.out.println("мать: " + Aleksandra);
-        for (Human child : children) {
-            System.out.println("\tдети: " + child.toString());
-        }
-        System.out.println("_______________________");
-
-        List<Human> childList = Romanovs.getChildren(Nikolai_II);
-        for (Human child : childList) {
-            System.out.println(child.toString());
-        }
-        System.out.println("_______________________");
-
-        List<Human> descendants = Romanovs.getDescendants(Aleksandra);
-        for (Human descendant : descendants) {
-            System.out.println(descendant.toString());
-        }
-        System.out.println("_______________________");
-
-        List<Human> relatives = Romanovs.getRelatives(Aleksei);
-        for (Human relative : relatives) {
-            System.out.println(relative.toString());
-        }
-        System.out.println("_______________________");
-
-        List<Human> searchResult = Romanovs.searchByName("Aleksei");
-        for (Human human : searchResult)
-            System.out.println(human.toString());
-        System.out.println("_______________________");
-        Romanovs.getInfo();
-        System.out.println("_______________________!!!");
+//        List<Human> children = Romanovs.getChildren(Aleksandra);
+//        System.out.println("мать: " + Aleksandra);
+//        for (Human child : children) {
+//            System.out.println("\tдети: " + child.toString());
+//        }
+//        System.out.println("_______________________");
+//
+//        List<Human> childList = Romanovs.getChildren(Nikolai_II);
+//        for (Human child : childList) {
+//            System.out.println(child.toString());
+//        }
+//        System.out.println("_______________________");
+//
+//        List<Human> descendants = Romanovs.getDescendants(Aleksandra);
+//        for (Human descendant : descendants) {
+//            System.out.println(descendant.toString());
+//        }
+//        System.out.println("_______________________");
+//
+//        List<Human> relatives = Romanovs.getRelatives(Aleksei);
+//        for (Human relative : relatives) {
+//            System.out.println(relative.toString());
+//        }
+//        System.out.println("_______________________");
+//
+//        Human searchResult = Romanovs.searchByName("Aleksei");
+//        System.out.println(searchResult);
+//        System.out.println("_______________________");
+//        Romanovs.getInfo();
+//        System.out.println("_______________________!!!");
         Service<Human> service = new Service<>(Romanovs);
-        service.save(Romanovs);
-        Family<Human> restored = service.loadFamily();
-        restored.getInfo();
-        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-        for (Human human : Romanovs) System.out.println(human.getName());
-        System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
-        service.sortByName();
-        for (Human human : Romanovs) System.out.println(human.getName());
-        System.out.println("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-        service.sortByDate();
-        for (Human human : Romanovs) System.out.println(human.getName());
+//        service.save(Romanovs);
+//        Family<Human> restored = service.loadFamily();
+//        restored.getInfo();
+//        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+//        for (Human human : Romanovs) System.out.println(human.getName());
+//        System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
+//        service.sortByName();
+//        for (Human human : Romanovs) System.out.println(human.getName());
+//        System.out.println("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+//        service.sortByDate();
+//        for (Human human : Romanovs) System.out.println(human.getName());
 
 
         View view = new DesktopUI();

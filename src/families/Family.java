@@ -56,14 +56,13 @@ public class Family<T extends Essence<T>> implements Tree<T>, Serializable, Iter
     }
 
     @Override
-    public List<T> searchByName(String name) {
-        List<T> result = new ArrayList<>();
+    public T searchByName(String name) {
         for (T t : family) {
             if (t.toString().contains(name)) {
-                result.add(t);
+                return t;
             }
         }
-        return result;
+        return null;
     }
 
 
