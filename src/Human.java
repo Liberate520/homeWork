@@ -2,9 +2,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.rowset.spi.SyncResolver;
 
 public class Human implements Serializable, Comparable<Human> {
+    private int id;
     private String name;
     private Gender gender;
     private Human father;
@@ -12,7 +12,8 @@ public class Human implements Serializable, Comparable<Human> {
     private int birthYear;
     private List<Human> children;
 
-    public Human(String name, Gender gender, Human father, Human mother, int birthYear) {
+    public Human(int id, String name, Gender gender, Human father, Human mother, int birthYear) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.father = father;
@@ -21,7 +22,8 @@ public class Human implements Serializable, Comparable<Human> {
         this.children = new ArrayList<>();
     }
 
-    public Human(String name, Gender gender, int birthYear) {
+    public Human(int id, String name, Gender gender, int birthYear) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.father = null;
@@ -32,7 +34,11 @@ public class Human implements Serializable, Comparable<Human> {
 
     @Override
     public String toString() {
-        return String.format("полное имя: %s; год рождения: %d;\n ",this.name, this.birthYear);
+        return String.format("%d. полное имя: %s; год рождения: %d;\n ",this.id, this.name, this.birthYear);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

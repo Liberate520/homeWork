@@ -49,7 +49,7 @@ public class Service {
         int index = 1;
         for (Human human : familyTree.getFamilyTree()) {
             if (human.getChildren().isEmpty()) {
-                System.out.printf("%d)%s (%d) не имеет детей!\n ", index++, human.getName(), human.getBirthYear());
+                System.out.printf("%d)%s (%d) не имеет детей!\n ", index, human.getName(), human.getBirthYear());
                 System.out.println();
             } else {
                 System.out.printf("%d)%s (%d) имеет следующих детей:\n   %s\n", 
@@ -60,18 +60,20 @@ public class Service {
     }
 
     public void print() {
-        familyTree.print();
+        while (familyTree.hasNext()) {
+            System.out.println(familyTree.next().toString());
+        }
     }
 
     public void createTree() {
-        Human human1 = new Human("Oleg", Gender.Male, 1951);
-        Human human2 = new Human("Olga", Gender.Female, 1956);
-        Human human3 = new Human("Petia", Gender.Male, human1, human2, 1978);
-        Human human4 = new Human("Sveta", Gender.Female, human1, human2,1981);
-        Human human5 = new Human("Ilia", Gender.Male,1979);
-        Human human6 = new Human("Kristina", Gender.Male, human5, human4, 2000);
-        Human human7 = new Human("George", Gender.Male,2002);
-        Human human8 = new Human("Ruslan", Gender.Male, human7, human6, 2023);
+        Human human1 = new Human(1, "Oleg", Gender.Male, 1951);
+        Human human2 = new Human(2, "Olga", Gender.Female, 1956);
+        Human human3 = new Human(3, "Petia", Gender.Male, human1, human2, 1978);
+        Human human4 = new Human(4, "Sveta", Gender.Female, human1, human2,1981);
+        Human human5 = new Human(5, "Ilia", Gender.Male,1979);
+        Human human6 = new Human(6, "Kristina", Gender.Male, human5, human4, 2000);
+        Human human7 = new Human(7, "George", Gender.Male,2002);
+        Human human8 = new Human(8, "Ruslan", Gender.Male, human7, human6, 2023);
         List<Human> humans = new ArrayList<>(Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8));
 
         for (Human human : humans) {

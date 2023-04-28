@@ -2,7 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree<H extends Human> implements Serializable {
+public class FamilyTree<H extends Human> implements Serializable, FamilyTreeIterator {
+    private int id;
     private List<H> familyTree;
 
     public FamilyTree() {
@@ -18,16 +19,29 @@ public class FamilyTree<H extends Human> implements Serializable {
             case 1:
                 sortByName();
                 System.out.println("Сортировка по имени");
-                print();
+                printTree();
                 break;
             case 2:
                 sortByBirth();
                 System.out.println("Сортировка по году рождения");
-                print();
+                printTree();
                 break;
             default:
                 System.out.println("Вы ввели некорректный номер сортировки!");
         }
+    }
+
+    public void printTree() {
+        for (H h : familyTree) {
+            System.out.println(h.toString());
+        } 
+    }
+
+    int getLastId() {
+        if (familyTree == null){
+            return 0;
+        }
+        return familyTree.size();
     }
 
     void addHuman(H human) {
@@ -42,9 +56,9 @@ public class FamilyTree<H extends Human> implements Serializable {
 
     Human getHumanByName(String name) {
         String nameFull = name.replace(",", " ");
-        for (Human human : familyTree) {
-            if (human.getName().equals(nameFull)) {
-                return human;
+        for (H h : familyTree) {
+            if (h.getName().equals(nameFull)) {
+                return h;
             }
         }
         return null;
@@ -67,9 +81,13 @@ public class FamilyTree<H extends Human> implements Serializable {
         familyTree.sort(new HumanComparatorByBirth());
     }
 
-    public void print() {
-        for (H h : familyTree) {
-            System.out.println(h.toString());
-        } 
+    @Override
+    public boolean hasNext() {
+        return this.id < familyTree.size();
+    }
+
+    @Override
+    public H next() {
+        return this.familyTree.get(id++);
     }
 }

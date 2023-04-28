@@ -23,7 +23,8 @@ class NewHuman {
             Human father = familyTree.getHumanByName(data[2]);
             Human mother = familyTree.getHumanByName(data[3]);
             int birthYear = Integer.parseInt(data[4]);
-            return new Human(name, familyTree.getGender(data[1]), father, mother, birthYear);
+            int id = familyTree.getLastId() + 1;
+            return new Human(id, name, familyTree.getGender(data[1]), father, mother, birthYear);
         } catch (Exception e) {
             System.out.println("Ошибка ввода! " + e);
         }
