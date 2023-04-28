@@ -83,37 +83,62 @@ public class Service {
 
     public String getTreeInfo(){
         StringBuilder output = new StringBuilder();
-        output.append("All records of Family Tree:" + "\n");
-        output.append("##################################" + "\n");
-        for (Person item: activeTree) {
-            output.append(item + "\n");
+        output.append("-----Записи Фамильного Древа:-----" + "\n");
+        if (this.getCountPerson() != 0) {
+            for (Person item: activeTree) {
+                output.append(item + "\n");
+            }
+        } else {
+            output.append("Записей нет." + "\n");
         }
         output.append("---------------------------------" + "\n");
         return output.toString();
     }
 
+    public int getCountPerson() {
+        return activeTree.getCountPerson();
+    }
+
     public void printSortByLastName(){
         TreeSet<Person> personSet = activeTree.getTreeSortByLastName();
-        for (Person person: personSet) {
-            System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
-                    " " + person.getLastName() + " " + person.getAge());
+        System.out.println("---Персоны (сортировка по Фамилиям)---");
+        if (this.getCountPerson() != 0) {
+            for (Person person: personSet) {
+                System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
+                        " " + person.getLastName() + " " + person.getAge());
+            }
+        } else {
+            System.out.println("Список пуст.");
         }
+        System.out.println("--------------------------------------");
     }
 
     public void printSortByFirstName(){
         TreeSet<Person> personSet = activeTree.getTreeSortByFirstName();
-        for (Person person: personSet) {
-            System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
-                    " " + person.getLastName() + " " + person.getAge());
+        System.out.println("----Персоны (сортировка по Именам)----");
+        if (this.getCountPerson() != 0) {
+            for (Person person: personSet) {
+                System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
+                        " " + person.getLastName() + " " + person.getAge());
+            }
+        } else {
+            System.out.println("Список пуст.");
         }
+        System.out.println("--------------------------------------");
     }
 
     public void printSortByAge(){
         TreeSet<Person> personSet = activeTree.getTreeSortByAge();
-        for (Person person: personSet) {
-            System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
-                    " " + person.getLastName() + " " + person.getAge());
+        System.out.println("----Персоны (сортировка по Именам)----");
+        if (this.getCountPerson() != 0) {
+            for (Person person: personSet) {
+                System.out.println("ID: " + person.getId() + " " + person.getFirstName() +
+                        " " + person.getLastName() + " " + person.getAge());
+            }
+        } else {
+            System.out.println("Список пуст.");
         }
+        System.out.println("--------------------------------------");
     }
 
     public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {

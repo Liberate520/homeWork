@@ -291,6 +291,10 @@ public class FamilyTree<E extends Anthropoid> implements Serializable, Iterable<
         return null;
     }
 
+    public int getCountPerson() {
+        return personsSet.size();
+    }
+
     public TreeSet<E> getTreeSortByFirstName(){
         TreeSet<E> newPersonSet = new TreeSet<>(new PersonComparatorByFirstName());
         newPersonSet.addAll(personsSet);

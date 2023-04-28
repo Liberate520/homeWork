@@ -7,12 +7,14 @@ import java.util.Scanner;
 
 public class ConsoleUI implements View{
     private Presenter presenter;
+    private MainMenu mainMenu;
     private Scanner scanner;
     private boolean run;
 
     public ConsoleUI() {
         this.scanner = new Scanner(System.in);
         this.run = true;
+        mainMenu = new MainMenu(this);
     }
 
     @Override
@@ -20,69 +22,76 @@ public class ConsoleUI implements View{
         this.print("Добро пожаловать в Фамильное Древо!");
         this.print("************************************");
         this.print("");
-        this.print("Вы можете наполнить друво вручную или загрузить из файла MyFamilyTree.sfmt,\n" +
-                "прилагаемого к проекту.");
-        this.printHelp();
-
+        this.print("Вы можете наполнить древо вручную или загрузить" + "\n" +
+                "из файла MyFamilyTree.sfmt, прилагаемого к проекту." + "\n");
         while (run) {
-            String userInput = inputString("Введите команду: ");
-            switch (userInput.toLowerCase()) {
-                case "?" -> this.printHelp();
-                case "q" -> this.exit();
-                case "1" -> this.getTreeInfo();
-                case "1-1" -> this.printSortByAge();
-                case "1-2" -> this.printSortByFirstName();
-                case "1-3" -> this.printSortByLastName();
-                case "2" -> this.addNewPerson();
-                case "2-1" -> this.addNewPersonAs();
-                case "3" -> this.getInfo();
-                case "3-1" -> this.getInfoRelation();
-                case "4-1" -> this.saveFamilyTree();
-                case "4-2" -> this.loadFamilyTree();
-                default -> this.print("Команда введена неверно.");
+            this.printMenu();
+            this.execute();
+        }
+    }
+
+    private void execute() throws IOException, ClassNotFoundException {
+        System.out.print("Введите номер команды> ");
+        String userInput = scanner.nextLine();
+        if (checkTextForInt(userInput)){
+            int numCommand = Integer.parseInt(userInput);
+            if (checkCommand(numCommand)){
+                mainMenu.execute(numCommand);
             }
         }
     }
 
-    private void printHelp() {
-        this.print("-----------------------------------");
-        this.print("? - Вывод списка команд;");
-        this.print("q - Завершение работы;");
-        this.print("1 - Вывод полной информации по дереву;");
-        this.print("1-1 - Вывод персон, отсортированных по возрасту;");
-        this.print("1-2 - Вывод персон, отсортированных по имени;");
-        this.print("1-3 - персон, отсортированных по фамилии;");
-        this.print("2 - Добавить новую персону;");
-        this.print("2-1 - Добавить нового родного;");
-        this.print("3 - Вывод информации по персоне;");
-        this.print("3-1 - Вывод информации по родственнику персоны;");
-        this.print("4-1 - Сохранение древа в файл;");
-        this.print("4-2 - Загрузка древа из файла;");
-        this.print("-----------------------------------");
+    private boolean checkTextForInt(String text){
+        if (text.matches("[0-9]+")){
+            return true;
+        } else {
+            this.print("Введено некорректное значение.");
+            return false;
+        }
     }
 
-    private void exit() {
+    private boolean checkCommand(int numCommand){
+        if (numCommand <= mainMenu.size()){
+            return true;
+        } else {
+            this.print("Введено некорректное значение.");
+            return false;
+        }
+    }
+
+    @Override
+    public void printMenu() {
+        this.print(mainMenu.print());
+    }
+
+    @Override
+    public void exit() {
         run = false;
         System.out.println("Завершение работы.");
     }
 
-    private void getTreeInfo() {
+    @Override
+    public void getTreeInfo() {
         presenter.getTreeInfo();
     }
 
-    private void printSortByAge() {
+    @Override
+    public void printSortByAge() {
         presenter.printSortByAge();
     }
 
-    private void printSortByFirstName() {
+    @Override
+    public void printSortByFirstName() {
         presenter.printSortByFirstName();
     }
 
-    private void printSortByLastName() {
+    @Override
+    public void printSortByLastName() {
         presenter.printSortByLastName();
     }
 
-    private void addNewPerson() {
+    @Override
+    public void addNewPerson() {
         this.print("Собираем информацию о новой персоне...");
         String firstName = this.inputString("Введите имя: ");
         String lastName = this.inputString("Введите фамилию: ");
@@ -92,7 +101,8 @@ public class ConsoleUI implements View{
         this.print("Персона добавлена в дерево.");
     }
 
-    private void addNewPersonAs() {
+    @Override
+    public void addNewPersonAs() {
         this.print("Собираем информацию о новой персоне...");
         String firstName = this.inputString("Введите имя: ");
         String lastName = this.inputString("Введите фамилию: ");
@@ -108,14 +118,16 @@ public class ConsoleUI implements View{
         this.print("Персона добавлена в дерево.");
     }
 
-    private void getInfo() {
+    @Override
+    public void getInfo() {
         this.print("Ищем...");
         String firstName = this.inputString("Введите имя: ");
         String lastName = this.inputString("Введите фамилию: ");
         presenter.getInfo(firstName, lastName);
     }
 
-    private void getInfoRelation() {
+    @Override
+    public void getInfoRelation() {
         this.print("Ищем...");
         String firstName = this.inputString("Введите имя: ");
         String lastName = this.inputString("Введите фамилию: ");
@@ -124,13 +136,15 @@ public class ConsoleUI implements View{
         presenter.getInfo(firstName, lastName, relation);
     }
 
-    private void saveFamilyTree() throws IOException {
+    @Override
+    public void saveFamilyTree() throws IOException {
         this.print("Сохраняем древо...");
         String path = this.inputString("Введите имя файла (без расширения): ") + ".sfmt";
         presenter.saveFamilyTree(path);
     }
 
-    private void loadFamilyTree() throws IOException, ClassNotFoundException {
+    @Override
+    public void loadFamilyTree() throws IOException, ClassNotFoundException {
         this.print("Загружаем древо...");
         String path = this.inputString("Введите имя файла (без расширения): ") + ".sfmt";
         presenter.loadFamilyTree(path);
