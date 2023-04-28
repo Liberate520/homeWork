@@ -1,3 +1,7 @@
+package services;
+
+import familytree.FamilyTree;
+
 import java.io.*;
 
 public class FileWriteRead implements Saveable{

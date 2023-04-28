@@ -1,8 +1,10 @@
+package human;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private String lastName;
     private Integer dateOfBirth;
@@ -128,5 +130,10 @@ public class Human implements Serializable {
         else {stringBuilder.append(" ---- ");}
         stringBuilder.append(" ]");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return 0;
     }
 }
