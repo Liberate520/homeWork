@@ -27,7 +27,7 @@ public class FilehandlerOS<T extends NodeTree<T>> implements Writeable<T> {
         try (
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             groupList = ((Groupable<T>) ois.readObject());
-            System.out.printf("File " + filename + " has been loaded.\n");
+            System.out.printf("\nFile " + filename + " has been loaded:");
         } catch (Exception ex) {
 
             System.out.println(ex.getMessage());

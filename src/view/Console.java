@@ -1,6 +1,9 @@
 package view;
 
 import presenter.Presenter;
+import view.toChoose.ToChooseFormat;
+import view.toChoose.ToChooseInterface;
+import view.toChoose.ToChooseStart;
 
 import java.util.Scanner;
 
@@ -11,7 +14,6 @@ public class Console implements View {
 
     public Console() {
         scanner = new Scanner(System.in, "cp866");
-
     }
 
     @Override
@@ -22,46 +24,47 @@ public class Console implements View {
     @Override
     public void start() {
         while (work) {
-            System.out.println("\n1 - Загрузить все записи\n" +
-                    "2 - Распечатать все записи\n" +
-                    "3 - Добавить новую запись\n" +
-                    "4 - Отсортировать записи по имени\n" +
-                    "5 - Наити запись по имени\n" +
-                    "6 - Сохрянить все записи в файл\n" +
-                    "7 - завершить работу.");
-            String choice = scanner.nextLine();
+            ToChooseStart start = new ToChooseStart();
+            int choice = start.toChoose();
             switch (choice) {
-                case "1":
-                    loadAllRecords();
+                case 1:
+                    ToChooseInterface choiceFormat = new ToChooseFormat();
+                    if (choiceFormat.toChoose() == 1)
+                        loadAllRecordsOS();
+                    else
+                        loadAllRecordsTXT();
                     break;
-                case "2":
+                case 2:
                     getAllRecord();
                     break;
-                case "3":
+                case 3:
                     addRecord();
                     break;
-                case "4":
+                case 4:
                     sortRecordsByName();
                     break;
-                case "5":
+                case 5:
+                    sortRecordsId();
+                    break;
+                case 6:
                     findRecord();
                     break;
-                case "6":
+                case 7:
                     saveAllRecords();
                     break;
-                case "7":
+                case 8:
                     exit();
                     break;
                 default:
-                    System.out.println("Ошибка ввода");
+                    System.out.println("Введите число!");
             }
         }
     }
 
     private void addRecord() {
-        System.out.println("Введите имя и фамилию.");
-        String name = scanner.nextLine();
-        presenter.addRecord(name);
+        CollecterInfo collecterInfo = new CollecterInfo();
+        collecterInfo = collecterInfo.getInfoFromUser();
+        presenter.addRecord(collecterInfo);
     }
 
     private void findRecord() {
@@ -70,8 +73,12 @@ public class Console implements View {
         presenter.findRecord(name);
     }
 
-    private void loadAllRecords() {
-        presenter.loadRecords();
+    private void loadAllRecordsOS() {
+        presenter.loadRecordsOS();
+    }
+
+    private void loadAllRecordsTXT() {
+        presenter.loadRecordsTXT();
     }
 
     private void getAllRecord() {
@@ -82,12 +89,16 @@ public class Console implements View {
         presenter.sortRecordsByName();
     }
 
+    private void sortRecordsId() {
+        presenter.sortRecordsById();
+    }
+
     private void saveAllRecords() {
         presenter.saveRecords();
     }
 
     private void exit() {
-        System.out.println("Работа завершена");
+        System.out.println("Работа программы завершена.");
         scanner.close();
         work = false;
     }

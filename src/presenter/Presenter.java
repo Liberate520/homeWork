@@ -1,6 +1,7 @@
 package presenter;
 
 import service.Service;
+import view.CollecterInfo;
 import view.View;
 
 public class Presenter {
@@ -13,8 +14,8 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void addRecord(String name) {
-        service.addRecord(name);
+    public void addRecord(CollecterInfo collecterInfo) {
+        service.addRecord(collecterInfo);
     }
 
     public void findRecord(String name) {
@@ -26,8 +27,13 @@ public class Presenter {
         view.print(answer);
     }
 
-    public void loadRecords() {
-        String answer = service.loadPersonList();
+    public void loadRecordsOS() {
+        String answer = service.loadPersonListOS();
+        view.print(answer);
+    }
+
+    public void loadRecordsTXT() {
+        String answer = service.loadPersonListTXT();
         view.print(answer);
     }
 
@@ -38,5 +44,9 @@ public class Presenter {
 
     public void sortRecordsByName() {
         service.sortRecordsByName();
+    }
+
+    public void sortRecordsById() {
+        service.sortRecordsById();
     }
 }

@@ -41,8 +41,6 @@ public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializ
                 findPerson = famyliTree.get(i);
             }
         }
-        if (findPerson == null)
-            System.out.println("Такой человек не найден.");
         return findPerson;
     }
 
@@ -73,7 +71,6 @@ public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializ
 
     public void sortByGenderd() {
         famyliTree.sort(new PersonComparatorByGender<T>());
-        ;
     }
 
     public void sortById() {
@@ -84,5 +81,4 @@ public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializ
     public Iterator<T> iterator() {
         return new PersonIterator<T>(famyliTree);
     }
-
 }

@@ -11,6 +11,8 @@ public interface NodeTree<T> {
 
     T getMother();
 
+    void setMother(T t);
+
     T getFather();
 
     int getAge();
@@ -22,6 +24,4 @@ public interface NodeTree<T> {
     void addChild(T t);
 
     List<T> getChildrens();
-
-
 }

@@ -1,54 +1,32 @@
 package service;
 
-import java.time.LocalDate;
-import java.util.Scanner;
 import fileWork.FilehandlerOS;
 import fileWork.FilehandlerTXT;
 import fileWork.Writeable;
 import group.Groupable;
+import group.comparators.PersonComparatorById;
 import group.comparators.PersonComparatorByName;
 import person.Person;
+import restorePerson.RestorePersonFromConsole;
+import view.CollecterInfo;
 
 public class Service {
     private Groupable<Person> group;
     private Writeable<Person> fileOS;
     private Writeable<Person> fileTXT;
-    private Scanner scanner;
 
     public Service(Groupable<Person> group) {
         this.group = group;
-        scanner = new Scanner(System.in, "cp866");
         fileOS = new FilehandlerOS<>();
         fileTXT = new FilehandlerTXT<>();
     }
 
-    public void addRecord(String name) {
-        if (group.getPersonByName(name) == null) {
-
-            Person person = new Person(0, name, null, null, null, null, null, null);
-
-            System.out.println("Введите дату рождения в формате год-месяц-день.");
-            String[] dataBirth = scanner.nextLine().split("-");
-            person.setBirthDate(LocalDate.of(Integer.parseInt(dataBirth[0]), Integer.parseInt(dataBirth[1]),
-                    Integer.parseInt(dataBirth[2])));
-
-            person.setId(group.getPersonList().get(group.getPersonList().size() - 1).getId() + 1);
-
-            System.out.println("Введите имя и фамилию матери, если она не известна введите 'нет'.");
-            String motherName = scanner.nextLine();
-            if (motherName.equals("нет"))
-                person.setMother(null);
-            else
-                person.setMother(group.getPersonByName(motherName));
-
-            System.out.println("Введите имя и фамилию отца, если она не известна введите 'нет'.");
-            String fatherName = scanner.nextLine();
-            if (fatherName.equals("нет"))
-                person.setFather(null);
-            else
-                person.setFather(group.getPersonByName(fatherName));
+    public void addRecord(CollecterInfo collecterInfo) {
+        if (group.getPersonByName(collecterInfo.getName()) == null) {
+            RestorePersonFromConsole rPerson = new RestorePersonFromConsole();
+            Person person = rPerson.restorePersonFromConsole(group, collecterInfo);
             group.addPerson(person);
-            System.out.println(group.toString());
+            System.out.printf("Запись '" + person.getName() + "' добавлена.");
         } else
             System.out.println("Такой человек уже внесен.");
     }
@@ -57,14 +35,17 @@ public class Service {
         return group.getPersonList().toString();
     }
 
-    public Person findRecord(String name) {
-        Person findPerson = group.getPersonByName(name);
-        System.out.println(findPerson);
-        return findPerson;
+    public void findRecord(String name) {
+        group.findPerson(name);
     }
 
-    public String loadPersonList() {
+    public String loadPersonListOS() {
         group = fileOS.LoadFromFile("FamilyTree.dat");
+        return group.getPersonList().toString();
+    }
+
+    public String loadPersonListTXT() {
+        group = fileTXT.LoadFromFile("FamilyTree.txt");
         return group.getPersonList().toString();
     }
 
@@ -76,6 +57,11 @@ public class Service {
 
     public void sortRecordsByName() {
         group.getPersonList().sort(new PersonComparatorByName<>());
+        System.out.println(group);
+    }
+
+    public void sortRecordsById() {
+        group.getPersonList().sort(new PersonComparatorById<>());
         System.out.println(group);
     }
 }
