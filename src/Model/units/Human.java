@@ -1,8 +1,4 @@
-package units;
-
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.*;
+package Model.units;
 
 public class Human extends Unit {
 

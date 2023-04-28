@@ -1,4 +1,4 @@
-package units;
+package Model.units;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Unit implements Serializable {
-    private Unit mother, father;
+    public Unit mother, father;
     private String firstName;
-    private Gender gender;
+    public Gender gender;
     private LocalDate birthDate;
     private List<Unit> children;
 

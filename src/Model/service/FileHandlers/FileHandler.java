@@ -1,7 +1,7 @@
-package service.FileHandlers;
+package Model.service.FileHandlers;
 
-import family.FamilyTree;
-import units.Unit;
+import Model.FamilyTree;
+import Model.units.Unit;
 
 import java.io.*;
 

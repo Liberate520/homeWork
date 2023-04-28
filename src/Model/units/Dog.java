@@ -1,4 +1,4 @@
-package units;
+package Model.units;
 
 public class Dog extends Unit {
     public Dog(String firstName, Dog mother, Dog father, Gender gender,

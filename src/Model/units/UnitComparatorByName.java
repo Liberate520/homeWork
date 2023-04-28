@@ -1,6 +1,4 @@
-package units;
-
-import units.Unit;
+package Model.units;
 
 import java.util.Comparator;
 

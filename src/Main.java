@@ -1,9 +1,10 @@
-import family.FamilyTree;
-import service.UI.Console;
-import units.Dog;
-import units.Gender;
-import units.Human;
-import service.FileHandlers.FileHandler;
+import Model.FamilyTree;
+import Model.units.Dog;
+import Model.units.Gender;
+import Model.units.Human;
+import Model.service.FileHandlers.FileHandler;
+import Presenter.Presenter;
+import UI.Console;
 
 import java.io.IOException;
 
@@ -24,7 +25,7 @@ public class Main {
         tree_1.add(uriy);
         System.out.println(tree_1.getInfo());
         FileHandler<Human> fh = new FileHandler<>();
-        tree_1.save(fh, "tree_oute234.txt");
+        tree_1.save(fh, "OAAO.txt");
 
         for (Human human : tree_1) {
             System.out.println(human.getName());
@@ -62,10 +63,14 @@ public class Main {
         for (Dog dog : tree_2) {
             System.out.println(dog.getName());
         }
-        Console console = new Console(tree_1);
-        console.start();
-        FamilyTree<Human> treeRestore = fh.read("tree_update.txt");
+
+        FamilyTree<Human> treeRestore = fh.read("OAAO.txt");
         System.out.println("Восстановлено");
         System.out.println(treeRestore.getInfo());
+
+        Console console = new Console();
+        new Presenter(console, tree_1);
+        console.run();
+
     }
 }
