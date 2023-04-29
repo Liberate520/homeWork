@@ -5,15 +5,12 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeNode {
 
     private int id;
-    private final String FULL_NAME;
+    private String fullName;
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
@@ -41,7 +38,7 @@ public class Human implements Serializable {
                  String mother, String father,
                  String spouse, String children) {
         this.id = id;
-        this.FULL_NAME = fullName;
+        this.fullName = fullName;
         this.gender = gender;
 
         this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
@@ -65,7 +62,7 @@ public class Human implements Serializable {
      * @param fullName имя строка вида Фамилия Имя Отчество
      */
     public Human(String fullName) {
-        this.FULL_NAME = fullName;
+        this.fullName = fullName;
     }
 
     // #endregion
@@ -77,8 +74,8 @@ public class Human implements Serializable {
      * @return строка вида Фамилия Имя Отчество
      */
     public String getFullName() {
-        if (this.FULL_NAME.equals("")) return "Человек не найден.";
-        return this.FULL_NAME;
+        if (this.fullName.equals("")) return "Человек не найден.";
+        return this.fullName;
     }
 
     /**
@@ -137,31 +134,58 @@ public class Human implements Serializable {
      * Получение имени матери
      * @return строка вида Фамилия Имя Отчество
      */
-    public String getMother() {
-        if (this.mother != null) return this.mother.getFullName();
-        else return "Человек не найден.";
+    public String getNameMother() {
+        StringBuilder name = new StringBuilder();
+        Optional<String> opt = Optional.ofNullable(this.mother.getFullName());
+        opt.ifPresentOrElse(
+                v -> name.append(this.mother.getFullName()),
+                () -> name.append("Человек не найден"));
+        return name.toString();
     }
 
     /**
      * Получение имени отца
      * @return строка вида Фамилия Имя Отчество
      */
-    public String getFather() {
-        if (this.father != null) return this.father.getFullName();
-        else  return "Человек не найден.";
+    public String getNameFather() {
+        StringBuilder name = new StringBuilder();
+        Optional<String> opt = Optional.ofNullable(this.father.getFullName());
+        opt.ifPresentOrElse(
+                v -> name.append(this.father.getFullName()),
+                () -> name.append("Человек не найден"));
+        return name.toString();
+    }
+
+    /**
+     * Получение имён обоих родителей
+     * @return строка с именами
+     */
+    public String getNameParents(){
+        StringBuilder parents = new StringBuilder();
+        StringBuilder nameM = new StringBuilder();
+        Optional<String> optM = Optional.ofNullable(this.mother.getFullName());
+        optM.ifPresentOrElse(
+                v -> nameM.append(this.mother.getFullName()),
+                () -> nameM.append("Человек не найден"));
+        StringBuilder nameF = new StringBuilder();
+        Optional<String> optF = Optional.ofNullable(this.father.getFullName());
+        optF.ifPresentOrElse(
+                v -> nameF.append(this.father.getFullName()),
+                () -> nameF.append("Человек не найден"));
+        return parents.append(nameM).append(", ").append(nameF).toString();
     }
 
     /**
      * Получение имён супругов
      */
     public String getSpouse() {
-        String spouse = "";
+        StringBuilder spouse = new StringBuilder();
         if (this.spouse != null) {
             if (this.spouse.size() != 0)
-                spouse = String.join(", ", this.spouse);
+                spouse.append(String.join(", ", this.spouse));
         }
-        else spouse = "Человек не найден.";
-        return spouse;
+        else spouse.append("Человек не найден.");
+        return spouse.toString();
     }
 
     /**
@@ -176,15 +200,16 @@ public class Human implements Serializable {
 
     /**
      * Дети
-     * @return строка вида  Фамилия Имя Отчество через запятую
+     * @return строка вида Фамилия Имя Отчество через запятую
      */
     public String getChildren() {
-        String children = "";
+        StringBuilder children = new StringBuilder();
         if (this.children != null) {
-            if (this.children.size() != 0) children = String.join(", ", this.children);
+            if (this.children.size() != 0)
+                children.append(String.join(", ", this.children));
         }
-        else children = "Человек не найден.";
-        return children;
+        else children.append("Человек не найден.");
+        return children.toString();
     }
 
     /**
@@ -240,8 +265,8 @@ public class Human implements Serializable {
                     .append(this.getDateOfDeath().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)))
                     .append("\n");
         }
-        sb.append("мать: ").append(this.getMother()).append("\n");
-        sb.append("отец: ").append(this.getFather()).append("\n");
+        sb.append("мать: ").append(this.getNameMother()).append("\n");
+        sb.append("отец: ").append(this.getNameFather()).append("\n");
         sb.append("супруг(а)(и): ").append(this.getSpouse()).append("\n");
         sb.append("дети: ").append(this.getChildren()).append("\n");
         return sb.toString();

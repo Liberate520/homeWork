@@ -26,14 +26,17 @@ public class Main {
                 "Сидорова Елена Максимовна");
         service.addToTree("Петровы", "Петрова Анастасия Валерьевна", Gender.female,
                 "14.03.1975", "",
-                "Иванова Мария Ивановна", "Иванов Александр Иванович",
+                "Иванова Мария Ивановна", "",
                 "Петров Пётр Петрович",
                 "Петров Константин Петрович");
 
         System.out.println(service.getAllInfo());
 
         System.out.println(service.getTree("Петровы")
-                .searchHuman("Петров Константин Петрович").toString());
+                .searchHumanByFullName("Петров ... ...").getFullName());
+        System.out.println(service.getTree("Петровы")
+                .searchHumanByFullName("Петрова Анастасия Валерьевна").getNameParents());
+
         System.out.println("Сортировка по возрасту 1: ");
         service.getTree("Петровы").sortByAge();
         System.out.println("Сортировка по возрасту 2: ");

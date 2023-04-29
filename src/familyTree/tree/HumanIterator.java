@@ -1,18 +1,15 @@
 package familyTree.tree;
 
-import familyTree.human.Human;
-
 import java.util.Iterator;
 import java.util.Map;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<T> implements Iterator<T> {
 
-    private Map<String, Human> wholeGenus;
-    private Map<String, FamilyTree> treeMap;
+    private Map<String, T> wholeGenus;
     private String key;
     private int index;
 
-    public HumanIterator(Map<String, Human> wholeGenus){
+    public HumanIterator(Map<String, T> wholeGenus){
         this.wholeGenus = wholeGenus;
     }
 
@@ -22,7 +19,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return wholeGenus.get(key);
     }
 }

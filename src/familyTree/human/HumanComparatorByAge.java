@@ -3,15 +3,15 @@ package familyTree.human;
 import java.util.Comparator;
 import java.util.Map;
 
-public class HumanComparatorByAge implements Comparator<String> {
+public class HumanComparatorByAge<T extends FamilyTreeNode> implements Comparator<String> {
 
-    private final Map<String, Human> wholeGenus;
+    private final Map<String, T> wholeGenus;
 
     /**
      * Конструктор
      * @param wholeGenus карта для сортировки
      */
-    public HumanComparatorByAge(Map<String, Human> wholeGenus){
+    public HumanComparatorByAge(Map<String, T> wholeGenus){
         this.wholeGenus = wholeGenus;
     }
 
