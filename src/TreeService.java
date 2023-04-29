@@ -1,8 +1,5 @@
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
+import java.io.Serializable;
 import handler.FileHandler;
 import handler.Saveble;
 import human.Gender;
@@ -10,26 +7,26 @@ import human.Human;
 import tree.Tree;
 
 public class TreeService implements Saveble {
-    private Tree tree;
+    private Tree<Human> tree;
     private Saveble saveble;
 
-    public TreeService(Tree tree, Saveble saveble) {
+    public TreeService(Tree<Human> tree, Saveble saveble) {
         this.tree = tree;
         this.saveble = saveble;
     }
 
-    public TreeService(Tree tree) {
+    public TreeService(Tree<Human> tree) {
         this(tree, new FileHandler());
 
     }
 
     public TreeService(Saveble saveble) {
-        this(new Tree(), saveble);
+        this(new Tree<Human>(), saveble);
 
     }
 
     public TreeService() {
-        this(new Tree(), new FileHandler());
+        this(new Tree<Human>(), new FileHandler());
 
     }
 
@@ -79,7 +76,7 @@ public class TreeService implements Saveble {
         StringBuilder sb = new StringBuilder();
         sb.append("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ\n");
         for (Human human : tree) {
-            sb.append(human.getFullHumanInfo()).append("\n");
+            sb.append(human.getFullInfo()).append("\n");
         }
         System.out.println(sb.toString());
     }
@@ -93,9 +90,9 @@ public class TreeService implements Saveble {
     }
 
     @Override
-    public Object load(String path) {
+    public Tree<Human> load(String path) {
         if (saveble != null) {
-            this.tree = (Tree) saveble.load(path);
+            this.tree = (Tree<Human>) saveble.load(path);
             return this.tree;
         } else {
             return null;
@@ -110,7 +107,7 @@ public class TreeService implements Saveble {
 
     }
 
-    public Tree getTree() {
+    public Tree<Human> getTree() {
         return tree;
     }
 

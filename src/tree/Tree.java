@@ -7,43 +7,42 @@ import java.util.Iterator;
 import java.util.List;
 
 import human.Gender;
-import human.Human;
 import human.comparators.HumanComparatorByAge;
 import human.comparators.HumanComparatorByChildrens;
 
-public class Tree implements Serializable, Iterable<Human> {
-    private List<Human> humans;
+public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
+    private List<T> humans;
 
-    public Tree(List<Human> humans) {
+    public Tree(List<T> humans) {
         this.humans = humans;
     }
 
     public Tree() {
-        this.humans = new ArrayList<Human>();
+        this.humans = new ArrayList<T>();
     }
 
     public void sortBySurName() {
-        Collections.sort(humans);
+        Collections.sort(humans,new HumanComparatorByAge<>());    
     }
 
     public void sortByAge() {
-        Collections.sort(humans, new HumanComparatorByAge());
+        Collections.sort(humans, new HumanComparatorByAge<>());
     }
 
     public void sortByChildrens() {
-        humans.sort(new HumanComparatorByChildrens());
+        humans.sort(new HumanComparatorByChildrens<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humans);
+    public Iterator<T> iterator() {
+        return new HumanIterator<>(humans);
 
     }
 
-    public void addHuman(Human human) {
-        Human mother = human.getMother();
-        Human father = human.getFather();
-        List<Human> childrens = human.getChildrens();
+    public void addHuman(T human) {
+        T mother = human.getMother();
+        T father = human.getFather();
+        List<T> childrens = human.getChildrens();
         if (mother != null && this.humans.contains(mother)) {
             mother.addChildren(human);
         }
@@ -51,7 +50,7 @@ public class Tree implements Serializable, Iterable<Human> {
             father.addChildren(human);
         }
         if (childrens.size() > 0) {
-            for (Human children : childrens) {
+            for (T children : childrens) {
                 if (children != null && this.humans.contains(children)) {
                     children.addParent(human);
 
@@ -61,9 +60,9 @@ public class Tree implements Serializable, Iterable<Human> {
         humans.add(human);
     }
 
-    public void removeHuman(Human human) {
+    public void removeHuman(T human) {
         if (human.getChildrens().size() > 0) {
-            for (Human person : human.getChildrens()) {
+            for (T person : human.getChildrens()) {
                 person.removeParent(human);
             }
         }
@@ -77,23 +76,19 @@ public class Tree implements Serializable, Iterable<Human> {
         humans.remove(human);
     }
 
-    public void showChildrensInfo(Human human) {
+    public void showChildrensInfo(T human) {
         System.out.println("\n" + human.getFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
         if (this.humans.contains(human)) {
-            List<Human> childrens = human.getChildrens();
-            if (childrens.size() > 0) {
-                System.out.println(human.convertChildrensToString(childrens));
-            } else {
-                System.out.println("Детей нет");
-            }
+            List<T> childrens = human.getChildrens();
+            System.out.println(human.getChildrenInfo(childrens));
         } else {
             System.out.println("Указанный человек отсутствует в генеологическом дереве");
         }
 
     }
 
-    public Human getHumanByFullName(String fullName) {
-        for (Human human : humans) {
+    public T getHumanByFullName(String fullName) {
+        for (T human : humans) {
             if (human.getFullName().equals(fullName)) {
                 return human;
             }
@@ -103,23 +98,23 @@ public class Tree implements Serializable, Iterable<Human> {
 
     public void showFullTreeInfo() {
         System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
-        for (Human human : humans) {
-            System.out.println(human.getFullHumanInfo());
+        for (T human : humans) {
+            System.out.println(human.getFullInfo());
         }
 
     }
 
     public void showShortTreeInfo() {
         System.out.println("\nКРАТКАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
-        for (Human human : humans) {
-            System.out.println(human.getShortHumanInfo());
+        for (T human : humans) {
+            System.out.println(human.getShortInfo());
         }
 
     }
 
     public void showGenderStatistics(Gender gender) {
-        List<Human> list = new ArrayList<>();
-        for (Human human : humans) {
+        List<T> list = new ArrayList<>();
+        for (T human : humans) {
             if (human.getGender().equals(gender)) {
                 list.add(human);
             }
@@ -133,7 +128,7 @@ public class Tree implements Serializable, Iterable<Human> {
         if (!fullName.equals(null)) {
             String result;
             try {
-                Human human = getHumanByFullName(fullName);
+                T human = getHumanByFullName(fullName);
 
                 result = human.getMother().getMother().getFullName();
             } catch (NullPointerException e) {
@@ -149,7 +144,7 @@ public class Tree implements Serializable, Iterable<Human> {
         if (!fullName.equals(null)) {
             String result;
             try {
-                Human human = getHumanByFullName(fullName);
+                T human = getHumanByFullName(fullName);
                 result = human.getFather().getFather().getFullName();
             } catch (NullPointerException e) {
                 result = "не обнаружено";
@@ -160,7 +155,7 @@ public class Tree implements Serializable, Iterable<Human> {
         }
     }
 
-    public List<Human> getHumans() {
+    public List<T> getHumans() {
         return humans;
     }
 }

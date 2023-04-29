@@ -3,9 +3,10 @@ package human;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import tree.TreeItem;
 
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private String name;
     private String surName;
     private String fatherName;
@@ -53,21 +54,21 @@ public class Human implements Serializable, Comparable<Human> {
         
     }
 
-    public String getFullHumanInfo() {
+    public String getFullInfo() {
         String genderString = this.gender.equals(Gender.Male) ? "мужской" : "женский";
         if (childrens.size() > 0) {
             if (this.fatherName != null && this.fatherName != "") {
                 return String.format("%s %s %s, пол - %s, возраст - %d, мать - %s, отец - %s, дети - %s", this.surName,
                         this.name,
-                        this.fatherName, genderString, this.age, this.mother == null ? "нет" : this.mother.getShortHumanInfo(),
-                        this.father == null ? "нет" : this.father.getShortHumanInfo(),
-                        convertChildrensToString(this.childrens));
+                        this.fatherName, genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
+                        this.father == null ? "нет" : this.father.getShortInfo(),
+                        getChildrenInfo(this.childrens));
             } else {
                 return String.format("%s %s, пол - %s, возраст - %d, мать - %s, отец - %s, дети - %s", this.surName,
                         this.name,
-                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortHumanInfo(),
-                        this.father == null ? "нет" : this.father.getShortHumanInfo(),
-                        convertChildrensToString(this.childrens));
+                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
+                        this.father == null ? "нет" : this.father.getShortInfo(),
+                        getChildrenInfo(this.childrens));
             }
         } else {
 
@@ -75,18 +76,18 @@ public class Human implements Serializable, Comparable<Human> {
                 return String.format("%s %s %s, пол - %s, возраст - %d, мать - %s, отец - %s, детей нет", this.surName,
                         this.name,
                         this.fatherName,
-                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortHumanInfo(),
-                        this.father == null ? "нет" : this.father.getShortHumanInfo());
+                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
+                        this.father == null ? "нет" : this.father.getShortInfo());
             } else {
                 return String.format("%s %s, пол - %s, возраст - %d, мать - %s, отец - %s, детей нет", this.surName,
                         this.name,
-                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortHumanInfo(),
-                        this.father == null ? "нет" : this.father.getShortHumanInfo());
+                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
+                        this.father == null ? "нет" : this.father.getShortInfo());
             }
         }
     }
 
-    public String getShortHumanInfo() {
+    public String getShortInfo() {
         String genderString = this.gender.equals(Gender.Male) ? "мужской" : "женский";
         if (childrens.size() > 0) {
             if (this.fatherName != null && this.fatherName != "") {
@@ -117,7 +118,7 @@ public class Human implements Serializable, Comparable<Human> {
         return this.childrens;
     }
 
-    public String convertChildrensToString(List<Human> childrens) {
+    public String getChildrenInfo(List<Human> childrens) {
         int count = childrens.size();
         if (count > 0) {
             String result = "";
@@ -128,11 +129,6 @@ public class Human implements Serializable, Comparable<Human> {
             return result;
         }
         return "детей нет";
-    }
-
-    public void showChildrenInfo() {
-        System.out.println("\n" + getFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
-        System.out.println(convertChildrensToString(this.childrens));
     }
 
     public Human getMother() {

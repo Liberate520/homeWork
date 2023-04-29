@@ -1,8 +1,7 @@
 import handler.FileHandler;
-import handler.Saveble;
 import human.Gender;
-import human.Human;
-import tree.Tree;
+
+
 
 public class Main {
         public static void main(String[] args) {
@@ -93,7 +92,7 @@ public class Main {
                 // // --------- сохранение данных
                 // service.save(PATH,service.getTree());
 
-                // --------- загрузка сохраненных данных
+                // // --------- загрузка сохраненных данных
                 // service.load(PATH);
                 // service.showInfo();
 
