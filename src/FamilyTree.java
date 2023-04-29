@@ -2,18 +2,30 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
-    public static void main(String[] args) {
-        List<Human> children1 = new ArrayList<>();
+public class FamilyTree  {
+       private List<Human> humanList;
 
-        Human human1 = new Human(Gender.Male, "Юрий", "Алексеев", null, null, children1);
-          Human human2 = new Human(Gender.Female, "Екатерина", "Алексеева", null, null, children1);
-          Human human3 = new Human(Gender.Female, "Валерия", "Алексеева", human2, human1, null);
+       public FamilyTree(){
+        this(new ArrayList<>());
+       }
 
-          children1.add(human3);
+        public FamilyTree(List<Human> humanList) {
+            this.humanList = humanList;
+        }
 
-        System.out.println(human1.toString());
+        public String getInfo(){
+            StringBuilder sb = new StringBuilder();
+            for (Human human: humanList){
+                sb.append(human.toString());
+                sb.append("/n");
+            }
+            return sb.toString();
+        }
+       
+        }
+    
 
 
-    }
-}
+
+
+
