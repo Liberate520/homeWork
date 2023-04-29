@@ -1,3 +1,4 @@
+package model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,8 +41,8 @@ public class Service {
         setFamilyTree(fileHandler.loadFile("family_tree.txt"));
     }
 
-    public void sortByParameter(int sortNumber){
-        familyTree.sortByParameter(sortNumber);
+    public void sortByParameter(int num){
+        familyTree.sortByParameter(num);
     }
 
     public void printChildren() {
@@ -65,6 +66,7 @@ public class Service {
         }
     }
 
+    
     public void createTree() {
         Human human1 = new Human(1, "Oleg", Gender.Male, 1951);
         Human human2 = new Human(2, "Olga", Gender.Female, 1956);
@@ -85,17 +87,5 @@ public class Service {
                 human.getFather().addChild(human);
             }
         }
-    }
-
-    public void printInvitationForUser() {
-        System.out.println();
-        System.out.println("Введите соответствующую цифру:\n" +
-        " 1 - для печати полного списка древа с указанием детей\n" +
-        " 2 - для записи и сохранения в файл списка родственников древа \n" +
-        " 3 - для чтения и вывода списка родственников из файла \n" +
-        " 4 - для сортировки списка родственников по выбранному параметру \n" +
-        " 5 - для ввода данных и добавления родственника в список древа \n" +
-        " 6 - для поиска в древе родственника по имени \n" +
-        " 0 - для завершения работы \n");
     }
 }
