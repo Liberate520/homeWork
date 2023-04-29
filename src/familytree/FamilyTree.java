@@ -10,20 +10,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private List<Human> humans;
+public class FamilyTree<T extends Human > implements Serializable {
+    private List<T> humans;
 
     public FamilyTree() {
-        this.humans = new ArrayList<>();
+        this.humans = new ArrayList<T>();
     }
 
-    public void addHuman(Human human) {
-        if (!this.humans.contains(human)) {
-            this.humans.add(human);
+    public void addHuman(T t) {
+        if (!this.humans.contains(t)) {
+            this.humans.add(t);
         }
     }
 
-    public List<Human> getHumans() {
+    public List<T> getHumans() {
         return humans;
     }
 
