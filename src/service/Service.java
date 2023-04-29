@@ -1,9 +1,10 @@
 package service;
 
-import essence.Essence;
-import essence.Gender;
-import essence.Human;
-import families.Family;
+import module.essence.Essence;
+import module.essence.Gender;
+import module.essence.Human;
+import module.families.Family;
+import module.families.Writable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class Service<T extends Essence<T>> {
     private final Family<T> family;
+    private Writable<T> writable;
 
     public Service(Family<T> family) {
         this.family = family;
@@ -49,8 +51,8 @@ public class Service<T extends Essence<T>> {
         return family.searchByName(human);
     }
 
-//    public void addMember(String name, int day, int month, int year, Gender gender){
-//      Human newww = new Human(name, day, month, year, gender);
-//      family.addMember((T) newww);
-//    }
+    public void addMember(String name, int day, int month, int year, Gender gender){
+      Human newww = new Human(name, day, month, year, gender);
+      family.addMember((T) newww);
+    }
 }

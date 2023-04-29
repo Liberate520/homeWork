@@ -1,8 +1,8 @@
 package service;
 
-import essence.Essence;
-import families.Family;
-import families.Writable;
+import module.essence.Essence;
+import module.families.Family;
+import module.families.Writable;
 
 import java.io.*;
 

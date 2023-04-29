@@ -1,14 +1,12 @@
-import essence.Essence;
-import essence.Gender;
-import essence.Human;
-import families.Family;
+import module.essence.Gender;
+import module.essence.Human;
+import module.families.Family;
 import presenter.Presenter;
 import service.Service;
-import ui.DesktopUI;
 import ui.View;
+import ui.console.ConsoleUI;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -77,7 +75,7 @@ public class Main {
 //        for (Human human : Romanovs) System.out.println(human.getName());
 
 
-        View view = new DesktopUI();
+        View view = new ConsoleUI();
         Presenter presenter = new Presenter(view, service);
         view.start();
 

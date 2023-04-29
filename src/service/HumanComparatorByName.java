@@ -1,6 +1,6 @@
 package service;
 
-import essence.Essence;
+import module.essence.Essence;
 
 import java.util.Comparator;
 

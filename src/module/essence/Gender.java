@@ -1,4 +1,4 @@
-package essence;
+package module.essence;
 
 public enum Gender {
     Male,

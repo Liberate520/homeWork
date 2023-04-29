@@ -1,7 +1,7 @@
-package families;
+package module.families;
 
-import essence.Essence;
-import essence.Human;
+import module.essence.Essence;
+import module.essence.Human;
 
 import java.io.IOException;
 import java.io.Serializable;

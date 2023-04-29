@@ -1,15 +1,16 @@
 package presenter;
 
-import essence.Human;
+import module.essence.Gender;
+import module.essence.Human;
 import service.Service;
 import ui.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Objects;
 
-public class Presenter {
+public class Presenter{
     private final View view;
     private final Service<Human> service;
 
@@ -19,7 +20,7 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void onClick(String text) {
+    public void getFamily() {
         List<String> answer = service.getFamily();
         StringBuilder sb = new StringBuilder();
         for (String s:answer) {
@@ -31,7 +32,7 @@ public class Presenter {
     public List<String> getMembers(){
         return service.getFamily();
     }
-    public void onRoll(String human){
+    public void getRelatives(String human){
         List<Human> answer = new ArrayList<>(service.getRelatives(service.findByName(human)));
         StringBuilder sb = new StringBuilder();
         for (Human s:answer) {
@@ -46,9 +47,16 @@ public class Presenter {
     public void load() throws IOException, ClassNotFoundException {
         service.loadFamily();
     }
-//    public void addNewPerson(String s){
-//        s.split(",");
-//        service.addMember();
-//    }
+
+    public void addMember(String name, String day, String month, String year, String gender) {
+        int day_new = Integer.parseInt(day);
+        int month_new = Integer.parseInt(day);
+        int year_new = Integer.parseInt(day);
+        if (Objects.equals(gender, "м")){
+            service.addMember(name, day_new, month_new, year_new, Gender.Male);;
+        }
+        else if(Objects.equals(gender, "ж"))
+        {service.addMember(name, day_new, month_new, year_new, Gender.Female);}
+    }
 }
 

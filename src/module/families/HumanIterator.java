@@ -1,6 +1,6 @@
-package families;
+package module.families;
 
-import essence.Essence;
+import module.essence.Essence;
 
 import java.util.*;
 
