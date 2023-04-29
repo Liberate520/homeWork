@@ -1,6 +1,6 @@
-package famalyTree;
+package model.famalyTree;
 
-import humans.comparators.*;
+import model.humans.comparators.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;

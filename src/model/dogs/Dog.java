@@ -1,7 +1,7 @@
-package Dogs;
+package model.dogs;
 
-import famalyTree.FamilyTreeItems;
-import humans.Gender;
+import model.famalyTree.FamilyTreeItems;
+import model.humans.Gender;
 
 import java.util.ArrayList;
 import java.util.List;

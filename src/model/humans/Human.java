@@ -1,6 +1,6 @@
-package humans;
+package model.humans;
 
-import famalyTree.FamilyTreeItems;
+import model.famalyTree.FamilyTreeItems;
 
 import java.io.Serializable;
 import java.util.ArrayList;

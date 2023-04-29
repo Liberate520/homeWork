@@ -1,4 +1,4 @@
-package famalyTree;
+package model.famalyTree;
 
 import java.util.Iterator;
 import java.util.List;

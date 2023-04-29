@@ -1,7 +1,9 @@
-import Dogs.Dog;
-import famalyTree.FamilyTree;
-import famalyTree.Savable;
-import humans.*;
+package model;
+
+import model.dogs.Dog;
+import model.famalyTree.FamilyTree;
+import model.famalyTree.Savable;
+import model.humans.*;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -41,15 +43,24 @@ public class Service implements Savable{
         }
     }
 
-    public void addHuman(Gender gender, String firstName, String lastName) {
+    private Gender setGender(String gender){
+        if(gender.toLowerCase().equals("male")) {
+            return Gender.Male;
+        } else return Gender.Female;
+    }
+
+    public void addHuman(String gen, String firstName, String lastName) {
+        Gender gender = setGender(gen);
         familyTree.addMember(new Human(gender, firstName, lastName));
     }
 
-    public void addDog(Gender gender, String firstName) {
+    public void addDog(String gen, String firstName) {
+        Gender gender = setGender(gen);
         familyTree.addMember(new Dog(gender, firstName));
     }
 
-    public void addChild(String parentName, Gender gender, String name) {
+    public void addChild(String parentName, String gen, String name) {
+        Gender gender = setGender(gen);
         Human parent = (Human) familyTree.searchByName(parentName);
         Human child = new Human(gender, name);
         if (child.getGender().equals(Gender.Female)) {
@@ -82,7 +93,7 @@ public class Service implements Savable{
     }
 
     @Override
-    public void save(FamilyTree familyTree, String path) {
+    public void save(String path) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path))) {
             objectOutputStream.writeObject(familyTree);
         } catch (Exception e) {
@@ -90,11 +101,10 @@ public class Service implements Savable{
     }
 
     @Override
-    public FamilyTree upload(String path) {
+    public void upload(String path) {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))) {
-            return (FamilyTree) objectInputStream.readObject();
+            familyTree = (FamilyTree) objectInputStream.readObject();
         } catch (Exception e) {
-            return null;
         }
     }
     public void sortByName() {

@@ -1,4 +1,4 @@
-package famalyTree;
+package model.famalyTree;
 
 public interface FamilyTreeItems {
     String getFirstName();
