@@ -21,7 +21,7 @@ public class Personimport<T extends Human> {
             System.out.print ("Дата смерти: ");
             String deth_date = scan.nextLine();
             data.add(deth_date);
-            System.out.print ("Пол: ");
+            System.out.print ("Пол: W / M? ");
             String gender = scan.nextLine();
             data.add(gender);
             System.out.print ("Идентификационный номер: ");
@@ -34,7 +34,7 @@ public class Personimport<T extends Human> {
             String mother_id = scan.nextLine();
             data.add(mother_id );
             if (firstname.equals("")){
-                System.out.println("Введено слишком мало данных");
+                System.out.println("Вы не ввели данные");
             return null;  }
 
              
@@ -57,12 +57,12 @@ public class Personimport<T extends Human> {
      
         public void c_import(Tree family) throws IOException{
             Scanner scan = new Scanner(System.in);
-            System.out.println("Хотите ли Вы занести данные через Консоль?");
+            System.out.println("Хотите ли Вы занести данные через Консоль? Если да, введите yes");
             String answer = scan.nextLine().toLowerCase();
             while (answer.equals("yes")){
                 Human person = console_import();
                 family.addHuman(person);
-                System.out.println("Хотите продолжить?");
+                System.out.println("Сохраняем? Введите yes");
                 answer = scan.nextLine().toLowerCase();
             }
 

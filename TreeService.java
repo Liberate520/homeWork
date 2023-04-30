@@ -43,9 +43,7 @@ public class TreeService {
         tree.addHuman(person_1);
     }
     
-    
     }
-
 
     public void sortByLastname(){
         Collections.sort(tree.getHumanList());

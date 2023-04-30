@@ -1,7 +1,6 @@
 import java.io.Serializable;
 import java.util.List;
 
-// Сделать наследованием от первого класса
 public class Human  implements Serializable, Comparable<Human>{
     private String firstname;
     private String lastname;
@@ -39,9 +38,6 @@ public class Human  implements Serializable, Comparable<Human>{
 
     }
 
-
-
-    // Нужно прописать способ, чтобы null проставлялся как  - и изучить формат даты, в том числе, как их в f-строку записывать
     @Override
     public String toString() {
         String result = "";
@@ -84,11 +80,6 @@ public class Human  implements Serializable, Comparable<Human>{
 
         return result;
     }
-
-
-
-
-
 
     public String getPerson_id() {
         return person_id;
@@ -148,13 +139,6 @@ public class Human  implements Serializable, Comparable<Human>{
         return lastname.compareTo(o.lastname);
     }
     
-    
-    
-    
-    
-
-
-
-     
+ 
 }
     

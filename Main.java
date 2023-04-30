@@ -13,10 +13,10 @@ public class Main {
     
     public static void main(String[] args) throws IOException, ClassNotFoundException{
 
-        Human person_1 = new Human("Pavel", "Petrov", "10.01.1980", null, "m", "1PP_80", null, null);
-        Human person_2 = new Human("Maria", "Petrova", "15.09.1980", null, "w", "1MP_80", null, null);
-        Human person_3 = new Human("Petr", "Petrov", "12.11.1961", null, "m", "1PP_61", null, null);
-        Human person_4 = new Human("Marina", "Petrova", "22.10.1965", null, "w", "1MP_65", null, null);
+        Human person_1 = new Human("Marya", "Faivisovich", "28.05.1979", null, "w", "1PP_79", null, null);
+        Human person_2 = new Human("Andrey", "Faivisovich", "09.04.1988", null, "m", "1MP_88", null, null);
+        Human person_3 = new Human("Aleksandr", "Faivisovich", "10.07.1953", null, "m", "1PP_53", null, null);
+        Human person_4 = new Human("Irina", "Truschenko", "09.01.1953", null, "w", "1MP_53", null, null);
         View c_import = new View();
         
 
@@ -25,18 +25,17 @@ public class Main {
         TreeService family_service = new TreeService(family);
         
         
-        person_3.setMother_id(person_2.getPerson_id());
-        person_3.setFather_id(person_1.getPerson_id());
-        person_4.setMother_id(person_2.getPerson_id());
-        person_4.setFather_id(person_1.getPerson_id());
+        person_3.setMother_id(person_4.getPerson_id());
+        person_3.setFather_id(person_3.getPerson_id());
+        person_4.setMother_id(person_4.getPerson_id());
+        person_4.setFather_id(person_3.getPerson_id());
        
         family.addHuman(person_1);
         family.addHuman(person_2);
         family.addHuman(person_3);
         family.addHuman(person_4);
-        // family.addHuman(person_5);
         c_import.c_import(family);
-        family.print_sister_and_brother(person_3);
+        family.print_sister_and_brother(person_4);
         Fileredactor read_redactor = new Fileredactor("input_family.txt");
         
         read_redactor.read_info(family);
@@ -47,7 +46,7 @@ public class Main {
         family.age(person_4);
 
 
-        Human father = family.find_father( person_4);
+        Human father = family.find_father( person_3);
         System.out.println("Отец:\n" + father);
         ArrayList<Object> family_list = new ArrayList<>();
         for(Human person : family){

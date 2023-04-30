@@ -7,7 +7,7 @@ public class View<T extends Human> {
     public List<String> console_import() throws IOException{
             List<String> data = new ArrayList<>();
             Scanner scan = new Scanner(System.in);
-            System.out.println("Выведите данные: ");
+            System.out.println("Введите данные: ");
             System.out.print("Имя: ");
             String firstname = scan.nextLine();
             data.add(firstname);
@@ -39,7 +39,7 @@ public class View<T extends Human> {
      
         public void c_import(Tree family) throws IOException{
             Scanner scan = new Scanner(System.in);
-            System.out.println("Хотите ли Вы занести данные через Консоль?");
+            System.out.println("Хотите занести данные через Консоль? Введите yes, если ДА");
             String answer = scan.nextLine().toLowerCase();
             while (answer.equals("yes")){
                 List<String> data = new ArrayList<>();

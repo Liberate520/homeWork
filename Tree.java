@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-// Делаем класс Tree (где собираются объекты других классов) параметизированным (общим), чтобы можно было добавлять любой объект
+
 public class Tree<T extends Human> implements Iterable<T>  {
     
     private ArrayList<T> family;
@@ -14,7 +14,6 @@ public class Tree<T extends Human> implements Iterable<T>  {
     }
     
 
-// На случай, если нужен результат
 public T find_father( T person){
     T res = null;
     String father_id = person.getFather_id();
@@ -77,7 +76,6 @@ public ArrayList<T> find_sister_and_brother(T person){
     }
 
 }
-// На случай, если нужен только вывод
 public void print_father( T person){
     T res = null;
     String father_id = person.getFather_id();
