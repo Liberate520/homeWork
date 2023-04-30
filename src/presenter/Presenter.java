@@ -1,8 +1,7 @@
 package presenter;
 
-import model.ServiceTree;
+import model.TreeFamily.ServiceTree;
 import model.TreeFamily.TreeFamily;
-import model.human.Human;
 import ui.View;
 
 public class Presenter {

@@ -132,15 +132,12 @@ public class Human implements Serializable, Comparable<Human>  {
         sb.append("\n");
         sb.append(family);
         sb.append(" ");
-        //sb.append("Имя: ");
         sb.append(name);
         sb.append(", ");
-        //sb.append("пол: ");
         sb.append(this.getGenderInfo());
         sb.append("\n ");
 
         return sb.toString();
-                //String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
     }
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
-package model;
+package model.TreeFamily;
 
+import model.Service;
 import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import model.human.HumanComporatorByName;
@@ -7,7 +8,7 @@ import model.human.HumanComporatorByName;
 import java.io.*;
 import java.util.Collections;
 
-public class ServiceTree implements Serviceble {
+public class ServiceTree implements Service {
     private TreeFamily<Human> tree;
 
 // Конструктор для создания объекта класса ServiceTree для дерева
@@ -36,24 +37,24 @@ public class ServiceTree implements Serviceble {
 
     }
 
-    @Override
-    public void save(Object object) throws IOException {
+//    @Override
+//    public void save(Object object) throws IOException {
+//
+////        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
+////        objectOutputStream.writeObject(object);
+////        objectOutputStream.writeObject(object);
+////        objectOutputStream.close();
+//
+//    }
 
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
-        objectOutputStream.writeObject(object);
-        objectOutputStream.writeObject(object);
-        objectOutputStream.close();
-
-    }
-
-    @Override
-    public Object read() throws ClassNotFoundException, IOException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.txt"));
-        Object read = objectInputStream.readObject();
-        objectInputStream.close();
-        return read;
-
-    }
+//    @Override
+//    public Object read() throws ClassNotFoundException, IOException {
+//        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.txt"));
+//        Object read = objectInputStream.readObject();
+//        objectInputStream.close();
+//        return read;
+//
+//    }
 
     public String searchHuman(String family, String name) {
 

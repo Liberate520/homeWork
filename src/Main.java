@@ -1,10 +1,10 @@
 //import model.FileHandler;
-import model.ServiceTree;
+import model.TreeFamily.ServiceData;
+import model.TreeFamily.ServiceTree;
 import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import presenter.Presenter;
 import ui.Console;
-import ui.Desktop;
 import ui.View;
 
 import java.io.*;
@@ -13,9 +13,9 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException,ClassNotFoundException {
-//        Human pa = new Human("Bazarov", "Alex", Human.Gender.Mail, LocalDate.parse("1949-01-07"));
-//        Human ma = new Human("Budina", "Anna", Human.Gender.Fimale,LocalDate.parse("1948-09-07"));
-//        Human sister1 = new Human(pa, ma, "Bazarova","Helga", Human.Gender.Fimale, LocalDate.parse("1978-03-10"));
+        Human pa = new Human("Bazarov", "Alex", Human.Gender.Mail, LocalDate.parse("1949-01-07"));
+        Human ma = new Human("Budina", "Anna", Human.Gender.Fimale,LocalDate.parse("1948-09-07"));
+        Human sister1 = new Human(pa, ma, "Bazarova","Helga", Human.Gender.Fimale, LocalDate.parse("1978-03-10"));
 //        Human sister2 = new Human(pa, ma,"Bazarova","Tasy", Human.Gender.Fimale,LocalDate.parse("1980-06-07"));
 //        System.out.println (pa.getMother());
 //        System.out.println (sister1.getMother());
@@ -37,7 +37,7 @@ public class Main {
 //        System.out.println();
 //        System.out.println(tree.getInfo());
 
-
+//
 //        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.out"));
 //        objectOutputStream.writeObject(sister1);
 //        objectOutputStream.writeObject(tree);
@@ -47,14 +47,20 @@ public class Main {
 //        Human sis = (model.human.Human) objectInputStream.readObject();
 //        TreeFamily treeOut1 = (TreeFamily) objectInputStream.readObject();
 //        objectInputStream.close();
-//
-//        System.out.println(sis);
-//        System.out.println(treeOut1);
+
+
+
+  //      System.out.println(sis);
+ //       System.out.println(treeOut1);
 //
 //        System.out.println();
 
 
         ServiceTree tr = new ServiceTree(tree);
+        ServiceData data = new ServiceData();
+        data.save(sister1);
+        Human sis = (Human) data.read();
+        System.out.println(sis.getInfo());
 //        tr.sortByFamily();
 //        for (Human human: tree){
 //            System.out.println(human);
@@ -67,11 +73,11 @@ public class Main {
 //            System.out.println(human);
 //        }
 
-        //View view = new Desktop();
-        View view = new Console();
-        //ServiceTree service = new ServiceTree(tree);
-        new Presenter(view, tr);
-        view.start();
+//        //View view = new Desktop();
+//        View view = new Console();
+//        //ServiceTree service = new ServiceTree(tree);
+//        new Presenter(view, tr);
+//        view.start();
 
 
     }
