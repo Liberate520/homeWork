@@ -1,5 +1,6 @@
 package humans.comporator;
 
+import humans.FamilyTreeItem;
 import humans.Human;
 
 import java.text.DateFormat;
@@ -8,12 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
-public class HumanBirthdayComporator implements Comparator<Human> {
+public class HumanBirthdayComporator<E extends FamilyTreeItem> implements Comparator<E> {
 
     DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
     @Override
-    public int compare(Human humah1, Human human2) {
+    public int compare(E humah1, E human2) {
         try {
             Date date1 = format.parse(humah1.getDateOfBirth());
             Date date2 = format.parse(human2.getDateOfBirth());

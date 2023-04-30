@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 public class Service {
     private int id;
-    private FamilyTree familyTree;
+    private FamilyTree<Human> familyTree;
     private List<FamilyTree> familyTreeList;
 
     public Service(FamilyTree familyTree) {
@@ -25,18 +25,18 @@ public class Service {
         this(new FamilyTree());
     }
 
-    public void addHuman(String firstName, String lastName, Gender gender, String dateOfBirth){
-        familyTree.addHumanOfFamilyTree(new Human(id++,firstName,lastName,gender,dateOfBirth));
+    public void addHuman(String firstName, String lastName, Gender gender, String dateOfBirth) {
+        familyTree.addHumanOfFamilyTree(new Human(id++, firstName, lastName, gender, dateOfBirth));
     }
 
-    public void addHumanList(FamilyTree familyTree){
+    public void addHumanList(FamilyTree familyTree) {
         familyTreeList.add(familyTree);
     }
 
 
-    public String getInfo(){
+    public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: familyTree ){
+        for (Human human : familyTree) {
             stringBuilder.append(human).append("\n");
         }
         return stringBuilder.toString();
@@ -51,24 +51,32 @@ public class Service {
         return null;
     }
 
+    public void listOfNames() {
+        familyTree.listOfNames();
+    }
+
     public Human searchByID(int find) {
         for (Human human : familyTree) {
-            if (human.getId()==find) {
+            if (human.getId() == find) {
                 return human;
             }
         }
         return null;
     }
 
-    public Set<Human> birthdaySort (){
+    public Set<Human> birthdaySort() {
         return familyTree.birthdaySort();
     }
 
-    public Set<Human> firstNameSort(){
+    public Set<Human> firstNameSort() {
         return familyTree.firstNameSort();
     }
-    public void printFamilySet(Set<Human> humanSet){
+
+    public void printFamilySet(Set<Human> humanSet) {
         familyTree.printFamilySet(humanSet);
     }
 
+    public FamilyTree<Human> getFamilyTree() {
+        return familyTree;
+    }
 }

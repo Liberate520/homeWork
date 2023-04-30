@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem {
     private int id;
     private String firstName;
     private String lastName;
@@ -170,14 +170,14 @@ public class Human implements Serializable {
      * Выдает информацию о человеке
      */
     public String getInfo(Human human) {
-       return human.toString();
+        return human.toString();
     }
 
-    public boolean addChild(Human child){
-        if(childrenList == null){
+    public boolean addChild(Human child) {
+        if (childrenList == null) {
             childrenList = new ArrayList<>();
         }
-        if (!childrenList.contains(child)){
+        if (!childrenList.contains(child)) {
             childrenList.add(child);
             return true;
         }
