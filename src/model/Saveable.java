@@ -1,10 +1,9 @@
-package services;
-
-import familytree.FamilyTree;
+package model;
+import model.familytree.FamilyTree;
 
 import java.io.Serializable;
 
-public interface Saveable {
+public interface Saveable extends Serializable {
     void write(Serializable serializable, String path);
     FamilyTree read(String path);
 }
