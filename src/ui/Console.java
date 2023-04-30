@@ -70,7 +70,7 @@ public class Console implements View {
         System.out.println(presenter.getTree().getInfo());
     }
 
-
+//    @Override
     public void addHuman(){
         System.out.println("Введите имя");
         String name = scanner.nextLine();
