@@ -25,6 +25,7 @@ public class Menu {
             stringBuilder.append(i+1);
             stringBuilder.append(". ");
             stringBuilder.append((commands.get(i).getDescription()));
+            stringBuilder.append(" \n");
 
         }
         return stringBuilder.toString();

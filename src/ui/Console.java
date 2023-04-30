@@ -35,7 +35,7 @@ public class Console implements View {
     @Override
     public void start() {
          while (work) {
-             menu.print();
+             System.out.println(menu.print());
              int choice = Integer.parseInt(scan());
              menu.execute(choice);
         }
