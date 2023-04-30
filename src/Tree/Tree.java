@@ -42,32 +42,32 @@ public class Tree<E extends Human> implements Serializable, Iterable<E> {
         if (!relatives.contains(child)){
         relatives.add(child);}
     }
-    public Human getByName(String name) {
-        String[] tempString = name.split(" ");
-        for (E human : relatives) {
-            if (human.getSecondName() == tempString[0]
-                    && human.getFirstName() == tempString[1]
-                    && human.getPatronymic() == tempString[2]) {
-                return human;
-            }
-        }
-        return null;
-    }
+//    public Human getByName(String name) {
+//        String[] tempString = name.split(" ");
+//        for (E human : relatives) {
+//            if (human.getSecondName() == tempString[0]
+//                    && human.getFirstName() == tempString[1]
+//                    && human.getPatronymic() == tempString[2]) {
+//                return human;
+//            }
+//        }
+//        return null;
+//    }
 
-    public String getInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("в дереве: ");
-        sb.append(relatives.size());
-        sb.append(" объектов: \n");
-        int count=1;
-        for (E human : relatives) {
-            sb.append(count + ". ");
-            sb.append(human.getInfo());
-            sb.append(" \n");
-            count++;
-        }
-        return sb.toString();
-    }
+//    public String getInfo() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("в дереве: ");
+//        sb.append(relatives.size());
+//        sb.append(" объектов: \n");
+//        int count=1;
+//        for (E human : relatives) {
+//            sb.append(count + ". ");
+//            sb.append(human.getInfo());
+//            sb.append(" \n");
+//            count++;
+//        }
+//        return sb.toString();
+//    }
 
     @Override
     public Iterator<E> iterator() {

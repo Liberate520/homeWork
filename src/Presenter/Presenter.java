@@ -1,8 +1,7 @@
 package Presenter;
 
-import Human.Human;
 import Services.Service;
-import Tree.Tree;
+
 import ui.ConsoleUi;
 import ui.View;
 
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 public class Presenter {
     private View view;
-    private Service service;
+    public Service service;
 
     public Presenter(View view, Service service) {
         this.view = view;
@@ -19,26 +18,43 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void menuInput(int menuOption) throws IOException, ClassNotFoundException {
-    switch (menuOption){
-        case 1:
-            service.printTree();
-            break;
-        case 2:
-            service.saveTree();
-            break;
-        case 3:
-            service.loadTree();
-            break;
-        case 4:
-            service.sortBySecondName();
-            break;
-        case 5:
-            service.sortBySex();
-            break;
-        case 6:
-            service.sortByYear();
-            break;
+    public Presenter(Service service) {
+        this.service = service;
+        view.setPresenter(this);
+    }
+
+    public Presenter(View view) {
+        this.view = view;
+        view.setPresenter(this);
+    }
+
+    public void setView(View view) {
+        this.view = view;
+//        view.setPresenter(this);
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+//        view.setPresenter(this);
+    }
+
+    public void PrintTree() {
+        view.print(service.printTree().toString());
+    }
+    public void SortBySecondName(){
+        view.print(service.sortBySecondName().toString());}
+    public void LoadTree() throws IOException, ClassNotFoundException {
+        service.loadTree();
+    }
+
+    public void SaveTree() throws IOException {
+        service.saveTree();
+    }
+
+    public void SortBySex(){
+        view.print(service.sortBySex().toString());}
+    public void sortByBirthYear(){
+        view.print(service.sortByYear().toString());
         }
     }
-}
+
