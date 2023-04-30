@@ -8,8 +8,8 @@ public class searchHuman extends Command {
         super(console);
         description = "Найти человека";
     }
-//    @Override
-//    public void execute() {
-//        console.searchHuman();
-//    }
+    @Override
+    public void execute() {
+        console.searchHuman();
+    }
 }

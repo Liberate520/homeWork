@@ -18,12 +18,20 @@ public class Console implements View {
 
     public Console() {
         scanner = new Scanner(System.in);
-//        scannerName = new Scanner(System.in);
-//        scannerFamily = new Scanner(System.in);
         work = true;
         menu = new Menu(this);
     }
 
+
+
+    @Override
+    public void start() {
+        while (work) {
+            System.out.println(menu.print());
+            int choice = Integer.parseInt(scan());
+            menu.execute(choice);
+        }
+    }
     @Override
     public void setPresenter(Presenter presenter){
         this.presenter = presenter;
@@ -32,20 +40,7 @@ public class Console implements View {
         return presenter;
     }
 
-    @Override
-    public void start() {
-         while (work) {
-             System.out.println(menu.print());
-             int choice = Integer.parseInt(scan());
-             menu.execute(choice);
-        }
-//        scannerMenu.close();
-//        scannerName.close();
-//        scannerFamily.close();
 
-
-
-    }
 
     private  boolean check(String text){
         return text.matches("[0-9]+");//Метод проверки что введено именно целое число из [0-9]
@@ -53,9 +48,6 @@ public class Console implements View {
 
     private String scan() {
         return scanner.nextLine();
-
-
-
     }
 
     private String scanName() {
@@ -96,7 +88,11 @@ public class Console implements View {
 
     }
 
-//    public void searchHuman() {
-//        System.out.println(presenter.searchHuman());
-//    }
+    public void searchHuman() {
+        System.out.println("Введите имя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String family = scanner.nextLine();
+        System.out.println(presenter.searchHuman(family,name));
+    }
 }
