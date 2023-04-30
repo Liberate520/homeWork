@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 // Делаем класс Tree (где собираются объекты других классов) параметизированным (общим), чтобы можно было добавлять любой объект
 public class Tree<T extends Human> implements Iterable<T>  {
     
