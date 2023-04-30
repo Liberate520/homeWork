@@ -1,3 +1,8 @@
+package Presenter;
+
+import Model.FamilyTreeModel;
+import Model.Human;
+import View.FamilyTreeView;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +16,8 @@ public class FamilyTreePresenter {
         this.view = view;
     }
 
-    public void addHuman(Human human) {
-        model.addHuman(human);
+    public void addHuman(String name, int yearOfBirth, String gender) {
+        model.addHuman(name, yearOfBirth, gender);
     }
 
     public Human getHumanByName(String name) {
@@ -39,3 +44,5 @@ public class FamilyTreePresenter {
         model.loadFromFile(fileName);
     }
 }
+
+

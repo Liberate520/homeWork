@@ -1,12 +1,10 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+package Model;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.io.FileInputStream;
 
 public class FamilyTreeModel {
     private List<Human> humanList;
@@ -15,7 +13,8 @@ public class FamilyTreeModel {
         humanList = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(String name, int yearOfBirth, String gender) {
+        Human human = new Human(name, yearOfBirth, gender);
         humanList.add(human);
     }
 
@@ -53,3 +52,4 @@ public class FamilyTreeModel {
         }
     }
 }
+

@@ -1,3 +1,6 @@
+package View;
+
+import Model.Human;
 
 import java.util.List;
 
@@ -12,3 +15,4 @@ public class FamilyTreeView {
         }
     }
 }
+
