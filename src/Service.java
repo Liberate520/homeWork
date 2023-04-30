@@ -28,7 +28,7 @@ public class Service {
 
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: activeTree){
+        for (Object human: activeTree){
             stringBuilder.append(human).append("\n");
         }
         return stringBuilder.toString();

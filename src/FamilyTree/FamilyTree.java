@@ -9,25 +9,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> allHumans;
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+    private List<E> allHumans;
 
     public FamilyTree() {
         this.allHumans = new ArrayList<>();
     }
 
-    public FamilyTree(List<Human> allHumans) {
+    public FamilyTree(List<E> allHumans) {
         this.allHumans = allHumans;
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         if (!allHumans.contains(human)){
             allHumans.add(human);
             if (human.getFather() != null){
-                human.getFather().addChild(human);
+                human.getFather().addChild((Human) human);
             }
             if (human.getMother() != null){
-                human.getMother().addChild(human);
+                human.getMother().addChild((Human) human);
             }
         }
     }
@@ -37,14 +37,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sb.append("In a tree");
         sb.append(allHumans.size());
         sb.append("obj: \n");
-        for (Human human: allHumans){
+        for (E human: allHumans){
             sb.append(human.getInfo());
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    public Iterator<Human> iterator(){
+    public Iterator<E> iterator(){
         return new HumanIterator(allHumans);
     }
 
@@ -55,7 +55,5 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public void sortByLastName() {
         allHumans.sort(new HumanComparatorByLastName());
     }
-
-
-
 }
+
