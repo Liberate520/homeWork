@@ -1,3 +1,7 @@
+package humans.tree;
+
+import humans.Human;
+
 import java.util.Iterator;
 import java.util.List;
 

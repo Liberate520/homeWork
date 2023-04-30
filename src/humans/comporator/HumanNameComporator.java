@@ -1,3 +1,7 @@
+package humans.comporator;
+
+import humans.Human;
+
 import java.util.Comparator;
 
 public class HumanNameComporator implements Comparator<Human> {

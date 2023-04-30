@@ -1,3 +1,5 @@
+import humans.Gender;
+
 import java.io.*;
 import java.util.Calendar;
 
@@ -20,14 +22,13 @@ public class Main {
 
 //        workingWithFiles.save(familyTree);
 //
-//        FamilyTree tree = workingWithFiles.write();
+//        humans.tree.FamilyTree humans.tree = workingWithFiles.write();
 //
-//        tree.listOfNames();
+//        humans.tree.listOfNames();
          //System.out.println(service.getInfo());
 
-        // service.PrintBirthdaySort();
-         service.PrintFirstNameSort();
 
-
+         service.printFamilySet(service.firstNameSort());
+         service.printFamilySet(service.birthdaySort());
     }
 }

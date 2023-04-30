@@ -1,3 +1,9 @@
+import humans.Gender;
+import humans.Human;
+import humans.comporator.HumanBirthdayComporator;
+import humans.comporator.HumanNameComporator;
+import humans.tree.FamilyTree;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +25,7 @@ public class Service {
         this(new FamilyTree());
     }
 
-    public void addHuman(String firstName,String lastName,Gender gender,String dateOfBirth){
+    public void addHuman(String firstName, String lastName, Gender gender, String dateOfBirth){
         familyTree.addHumanOfFamilyTree(new Human(id++,firstName,lastName,gender,dateOfBirth));
     }
 
@@ -54,29 +60,15 @@ public class Service {
         return null;
     }
 
-    public void PrintBirthdaySort (){
-        Set<Human> humanSet = new TreeSet<Human>(new HumanBirthdayComporator());
-        for (Human human: familyTree)
-        {
-            humanSet.add(human);
-        }
-
-        for (Human human: humanSet){
-            System.out.println(human.toString());
-        }
+    public Set<Human> birthdaySort (){
+        return familyTree.birthdaySort();
     }
 
-    public void PrintFirstNameSort(){
-        Set<Human> humanSet = new TreeSet<>(new HumanNameComporator());
-        for (Human human:familyTree
-             ) {
-            humanSet.add(human);
-        }
-        for (Human human: humanSet){
-            System.out.println(human.toString());
-        }
+    public Set<Human> firstNameSort(){
+        return familyTree.firstNameSort();
     }
-
-
+    public void printFamilySet(Set<Human> humanSet){
+        familyTree.printFamilySet(humanSet);
+    }
 
 }
