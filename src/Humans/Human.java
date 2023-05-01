@@ -1,12 +1,9 @@
 package Humans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class Human implements Serializable, Comparable {
+public class Human implements Serializable,Comparable{
     private String name;
     private String surname;
     private Date dateOfBirth = new Date();
@@ -121,4 +118,6 @@ public class Human implements Serializable, Comparable {
         Human x = (Human) o;
         return this.surname.compareTo(x.surname);
     }
+
+
 }

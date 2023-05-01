@@ -8,43 +8,32 @@ public class Main {
         Human human3 = new Human("Денис", "Иванов","male");
         Human human4 = new Human("Андрей", "Егоров","male");
         Human human5 = new Human("Илья", "Бобров","male");
-        Human human10 = new Human("Даша", "Давыдова","female");
-        Human human11 = new Human("Матвей", "Игнатьев","male");
-        Human human12 = new Human("Вероника", "Остроумова","female");
-        Human human13 = new Human("Николай", "Угольнико","male");
+        Human human6 = new Human("Даша", "Давыдова","female");
+        Human human7 = new Human("Матвей", "Игнатьев","male");
+        Human human8 = new Human("Вероника", "Остроумова","female");
+        Human human9 = new Human("Николай", "Угольнико","male");
 
         familyTree.addHuman(human1);
         familyTree.addHuman(human2);
         familyTree.addHuman(human3);
         familyTree.addHuman(human4);
         familyTree.addHuman(human5);
-        familyTree.addHuman(human10);
-        familyTree.addHuman(human11);
-        familyTree.addHuman(human12);
-        familyTree.addHuman(human13);
-        System.out.println(human1.toString());
-        System.out.println(human1.getMother());
-        System.out.println(human2.getChildren());
-        human2.addChildren(human1);
-        System.out.println("----");
-        System.out.println(human1.toString());
-        System.out.println(human1.getFather());
-        System.out.println(human2.getChildren());
+        familyTree.addHuman(human6);
+        familyTree.addHuman(human7);
+        familyTree.addHuman(human8);
+        familyTree.addHuman(human9);
 
-        Human human6 = new Human("Захар", "Давыдов","male");
-        familyTree.saveHuman(human6);
-        Human human7 = familyTree.readHuman("Захар");
+        for (Object h: familyTree) {
+            System.out.println(h.toString());
 
-        System.out.println("++++++++++");
-        System.out.println(human7);
-        System.out.println("---------------");
+        }
 
-        System.out.println(familyTree.humansPrint());
-        System.out.println("///////////");
-        System.out.println(familyTree.humanSort());
-        System.out.println("---------");
-        System.out.println(familyTree.humansPrint());
-        System.out.println(familyTree.humanSortByGender());
+
+
+
+
+
+
 
 
     }

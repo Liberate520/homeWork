@@ -2,6 +2,7 @@ import Comparator.HumanComparatorByGender;
 import Comparator.HumanComparatorByName;
 import Humans.Human;
 
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 
 
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable, Iterable{
     private List<Human> humans = new ArrayList<>();
     private OutAndInputInfo outAndInputInfo =new OutAndInputInfo();
 
@@ -62,7 +63,8 @@ public class FamilyTree implements Serializable{
     }
 
 
-
-
-
+    @Override
+    public Iterator<Human> iterator() {
+        return humans.iterator();
+    }
 }
