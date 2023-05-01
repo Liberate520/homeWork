@@ -3,8 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable {
+public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
 
+    private int id;
     private Gender gender;
     private Human mother;
     private Human father;
@@ -13,8 +14,9 @@ public class Human implements Serializable {
     private String surname;
     private String dateOfBirth;
 
-    public Human(String name, String surname, String dateOfBirth, Gender gender, Human father, Human mother,
+    public Human(int id, String name, String surname, String dateOfBirth, Gender gender, Human father, Human mother,
             List<Human> children) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -24,16 +26,20 @@ public class Human implements Serializable {
         this.children = children;
     }
     
-    public Human(String name, String surname, String dateOfBirth, Gender gender, Human father, Human mother) {
-        this(name, surname, dateOfBirth, gender, father, mother, null);
+    public Human(int id, String name, String surname, String dateOfBirth, Gender gender, Human father, Human mother) {
+        this(id, name, surname, dateOfBirth, gender, father, mother, null);
     }
 
-    public Human(String name, String surname, String dateOfBirth, Gender gender, List<Human> children) {
-        this(name, surname, dateOfBirth, gender, null, null, children);
+    public Human(int id, String name, String surname, String dateOfBirth, Gender gender, List<Human> children) {
+        this(id, name, surname, dateOfBirth, gender, null, null, children);
     }
 
-    public Human(String name, String surname, String dateOfBirth, Gender gender) {
-        this(name, surname, dateOfBirth, gender, null, null, null);
+    public Human(int id, String name, String surname, String dateOfBirth, Gender gender) {
+        this(id, name, surname, dateOfBirth, gender, null, null, null);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -122,6 +128,9 @@ public class Human implements Serializable {
 
     public String getInfo() {
         StringBuilder info = new StringBuilder();
+        info.append("ID: ");
+        info.append(id);
+        info.append(" - ");
         info.append("name: ");
         info.append(name);
         info.append(", ");
@@ -132,6 +141,11 @@ public class Human implements Serializable {
         info.append(getInfoChildren(children));
         info.append(". ");
         return info.toString();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 
 
