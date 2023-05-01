@@ -1,8 +1,7 @@
-package FamilyTreeObject.Humans;
+package Model.FamilyTreeObject.Humans;
 
-import FamilyTreeObject.FamilyTreeObject;
+import Model.FamilyTreeObject.FamilyTreeObject;
 
-import java.io.Serializable;
 import java.util.*;
 
 public class Human extends FamilyTreeObject {

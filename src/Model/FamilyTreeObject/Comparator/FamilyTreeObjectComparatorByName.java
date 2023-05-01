@@ -1,9 +1,8 @@
-package Comparator;
+package Model.FamilyTreeObject.Comparator;
 
 import java.util.Comparator;
 
-import FamilyTreeObject.FamilyTreeObject;
-import FamilyTreeObject.Humans.Human;
+import Model.FamilyTreeObject.FamilyTreeObject;
 
 public class FamilyTreeObjectComparatorByName implements Comparator<FamilyTreeObject> {
 

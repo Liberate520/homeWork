@@ -1,7 +1,6 @@
-package OutAndInputInfo;
+package Model.FamilyTreeObject.OutAndInputInfo;
 
-import FamilyTreeObject.FamilyTreeObject;
-import FamilyTreeObject.Humans.Human;
+import Model.FamilyTreeObject.FamilyTreeObject;
 
 import java.io.*;
 

@@ -1,10 +1,9 @@
-package FamilyTree;
+package Model.FamilyTreeObject.FamilyTree;
 
-import Comparator.FamilyTreeObjectComparatorByGender;
-import Comparator.FamilyTreeObjectComparatorByName;
-import FamilyTreeObject.FamilyTreeObject;
-import FamilyTreeObject.Humans.Human;
-import OutAndInputInfo.OutAndInputInfo;
+import Model.FamilyTreeObject.Comparator.FamilyTreeObjectComparatorByGender;
+import Model.FamilyTreeObject.Comparator.FamilyTreeObjectComparatorByName;
+import Model.FamilyTreeObject.FamilyTreeObject;
+import Model.FamilyTreeObject.OutAndInputInfo.OutAndInputInfo;
 
 
 
