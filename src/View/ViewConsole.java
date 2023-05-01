@@ -68,6 +68,9 @@ public class ViewConsole extends View{
 
             }
             if(command == 5){
+
+            }
+            if(command == 5){
                 System.out.println("Введите имя");
                 name = scanner.nextLine();
                 System.out.println("Введите фамилию");
