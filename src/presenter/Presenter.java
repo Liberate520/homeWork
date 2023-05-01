@@ -13,23 +13,23 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void onClick1() {
+    public void showNames() {
         String answer = service.get();
         view.print(answer);
     }
 
-    public void onClick2(String name) {
+    public void add(String name) {
         service.add(name);
     }
 
-    public void onClick3(String name) {
+    public void find(String name) {
         if (service.find(name) == null)
             view.print("Человек не найден в древе.");
         else
             view.print(service.find(name).getInfo());
     }
 
-    public void onClick4() {
+    public void getAllInfo() {
         view.print(service.getInfo());
     }
 
@@ -43,18 +43,20 @@ public class Presenter {
 
     public void findFather(String father, String name) {
         if (service.find(father) == null) {
-            service.add(father);
+            view.print("Такого человека нет в древе.");
+        } else {
+            service.find(name).setFather(service.find(father));
+            service.find(father).addChildren(service.find(name));
         }
-        service.find(name).setFather(service.find(father));
-        service.find(father).addChildren(service.find(name));
     }
 
     public void findMother(String mother, String name) {
         if (service.find(mother) == null) {
-            service.add(mother);
+            view.print("Такого человека нет в древе.");
+        } else {
+            service.find(name).setMother(service.find(mother));
+            service.find(mother).addChildren(service.find(name));
         }
-        service.find(name).setMother(service.find(mother));
-        service.find(mother).addChildren(service.find(name));
     }
 
     public void removeHuman(String name) {

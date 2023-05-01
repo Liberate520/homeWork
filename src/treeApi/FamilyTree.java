@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E>, AddRemove<E> {
 
     private HashSet<E> tree;
     private String res;
@@ -32,6 +32,15 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
         tree.add(child);
     }
 
+    public E getByName(String name) {
+        for (E human : tree) {
+            if (human.getName().equals(name)) {
+                return human;
+            }
+        }
+        return null;
+    }
+
     public boolean add(E human) {
 
         if (human == null) {
@@ -47,16 +56,7 @@ public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
         return true;
     }
 
-    public E getByName(String name) {
-        for (E human : tree) {
-            if (human.getName().equals(name)) {
-                return human;
-            }
-        }
-        return null;
-    }
-
-    public void remove(Human human) {
+    public void remove(E human) {
         tree.remove(human);
     }
 

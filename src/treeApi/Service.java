@@ -1,13 +1,14 @@
 package src.treeApi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class Service {
+
+public class Service implements Serializable{
     private int id;
     private FamilyTree<Human> tree;
-    private FileHandler file = new FileHandler();
+    private Writable file = new FileHandler();
     private Human remover;
     String res;
 
@@ -17,14 +18,14 @@ public class Service {
 
     public String get() {
         res = "";
-        for (Human human : tree) {
+        for (Human human : this.tree) {
             res = res + human.getName() + "\n";
         }
         return res;
     }
 
     public Human find(String name) {
-        for (Human human : tree) {
+        for (Human human : this.tree) {
             if (human.getName().equals(name)) {
                 return human;
             }
@@ -34,6 +35,8 @@ public class Service {
 
     public void add(String name, Human father, Human mother) {
         Human human = new Human(++id, name, father, mother);
+        father.addChildren(human);
+        mother.addChildren(human);
         tree.add(human);
     }
 
@@ -50,33 +53,25 @@ public class Service {
         return res;
     }
 
-    public List sortByName() {
+    public List<Human> sortByName() {
         ArrayList<Human> list = new ArrayList<Human>(tree.getTree());
         list.sort(new HumanComparatorByName());
         return list;
 
     }
 
-    public List sortById() {
+    public List<Human> sortById() {
         ArrayList<Human> list = new ArrayList<Human>(tree.getTree());
         list.sort(new HumanComparatorBYId());
         return list;
     }
 
     public void load() {
-        try {
-            this.tree = file.inPut();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            this.tree = (FamilyTree<Human>) file.inPut();
     }
 
     public void save() {
-        try {
             file.outPut(tree);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void remove(String name) {

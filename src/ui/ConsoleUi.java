@@ -9,6 +9,7 @@ public class ConsoleUi implements View {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work = true;
+    private String name;
 
     public ConsoleUi() {
         scanner = new Scanner(System.in);
@@ -31,28 +32,17 @@ public class ConsoleUi implements View {
             String key = scan();
             switch (key) {
                 case "1":
-                    presenter.onClick1();
+                    presenter.showNames();
                     break;
                 case "2":
-                    String name = scanName();
-                    presenter.onClick2(name);
-                    Integer key1 = ScanQuest1();
-                    if (key1 == 1) {
-                        String father = scanFather();
-                        presenter.findFather(father, name);
-                    }
-                    Integer key2 = ScanQuest2();
-                    if (key2 == 1) {
-                        String mother = scanMother();
-                        presenter.findMother(mother, name);
-                    }
+                    addHuman();
                     break;
                 case "3":
                     name = scanName();
-                    presenter.onClick3(name);
+                    presenter.find(name);
                     break;
                 case "4":
-                    presenter.onClick4();
+                    presenter.getAllInfo();
                     break;
                 case "5":
                     presenter.saveFile();
@@ -70,6 +60,21 @@ public class ConsoleUi implements View {
                     break;
             }
 
+        }
+    }
+
+    private void addHuman() {
+        name = scanName();
+        presenter.add(name);
+        Integer key1 = ScanQuest1();
+        if (key1 == 1) {
+            String father = scanFather();
+            presenter.findFather(father, name);
+        }
+        Integer key2 = ScanQuest2();
+        if (key2 == 1) {
+            String mother = scanMother();
+            presenter.findMother(mother, name);
         }
     }
 

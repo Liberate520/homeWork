@@ -1,10 +1,8 @@
 package src.treeApi;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
+import java.io.Serializable;
 
-public interface Writable {
-    public void outPut();
-    public void inPut();
+public interface Writable{
+    public void outPut(Serializable serializable);
+    public Object inPut();
 }

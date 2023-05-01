@@ -5,6 +5,7 @@ import java.lang.module.FindException;
 import src.presenter.Presenter;
 import src.treeApi.FamilyTree;
 import src.treeApi.FileHandler;
+import src.treeApi.Human;
 import src.treeApi.Service;
 import src.ui.ConsoleUi;
 import src.ui.View;
@@ -12,7 +13,7 @@ import src.ui.View;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         Service service = new Service(familyTree);
 
         // service.add("Nataliya");
@@ -38,6 +39,6 @@ public class Main {
         View view = new ConsoleUi();
         Presenter presenter = new Presenter(view, service);
         view.start();
-      
+     
     }
 }
