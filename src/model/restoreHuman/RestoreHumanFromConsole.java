@@ -13,7 +13,7 @@ public class RestoreHumanFromConsole {
         if (group.getHumanList() == null)
             human.setId(1);
         else {
-            int maxId = 1;
+            int maxId = 0;
             for (int i = 0; i < group.getHumanList().size(); i++) {
                 if (group.getHumanList().get(i).getId() > maxId)
                     maxId = group.getHumanList().get(i).getId();

@@ -13,11 +13,6 @@ public class CollecterInfo {
 
     public CollecterInfo() {
         scanner = new Scanner(System.in, "cp866");
-        // this.name = name;
-        // this.birthDate = birthDate;
-        // this.deathDate = deathDate;
-        // this.motherName = motherName;
-        // this.fatherName = fatherName;
     }
 
     public String getName() {
