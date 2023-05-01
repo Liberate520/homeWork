@@ -1,33 +1,33 @@
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    public List<Human> people;
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+    public List<E> people;
 
     FamilyTree() {
         this.people = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         people.add(human);
-        if (human.getMother() != null) {
-            human.getMother().addKid(human);
-        }
-        if (human.getFather() != null) {
-            human.getFather().addKid(human);
-        }
+//        if (human.getMother() != null) {
+//            human.getMother().addKid(human);
+//        }
+//        if (human.getFather() != null) {
+//            human.getFather().addKid(human);
+//        }
     }
 
     public String showAllRelatives() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: people) {
+        for (E human: people) {
             stringBuilder.append(human).append("\n");
         }
         return stringBuilder.toString();
     }
 
-    public Human findHumanByName(String name) {
-        for (Human human : people) {
+    public E findHumanByName(String name) {
+        for (E human : people) {
             if (human.getFullName().equals(name)) {
                 return human;
             }
@@ -37,7 +37,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return people.iterator();
     }
 
