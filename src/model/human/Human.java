@@ -1,4 +1,4 @@
-package human;
+package model.human;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
-public class Human implements Serializable{
+public class Human implements Serializable, NodeTree<Human>{
     private int id;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private Human mom;
-    private Human dad;
+    private Human mother;
+    private Human father;
     private List<Human> childrens;
 
     public Human(int id, String name, LocalDate birthDate, LocalDate deathDate, 
@@ -23,8 +23,8 @@ public class Human implements Serializable{
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.gender = gender;
-        this.mom = mom;
-        this.dad = dad;
+        this.mother = mom;
+        this.father = dad;
         this.childrens = childrens;
     }
 
@@ -40,14 +40,14 @@ public class Human implements Serializable{
             sb = sb.append(", возраст: ").append(getAge());
         else
             sb = sb.append(", дата смерти: ").append(deathDate);
-        if (mom == null)
+        if (mother == null)
             sb = sb.append(", мать не определена");
         else
-            sb = sb.append(", мать: ").append(mom.getName());
-        if (dad == null)
+            sb = sb.append(", мать: ").append(mother.getName());
+        if (father == null)
             sb = sb.append(", отец не определен");
         else
-            sb = sb.append(", отец: ").append(dad.getName());
+            sb = sb.append(", отец: ").append(father.getName());
         if (childrens == null)
             sb = sb.append(", детей нет");
         else {
@@ -64,16 +64,32 @@ public class Human implements Serializable{
         return id;
     }
 
+    public void setId(int id){
+        this.id=id;
+    }
+
     public Gender getGender() {
         return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public LocalDate getDeathDate() {
@@ -93,19 +109,32 @@ public class Human implements Serializable{
     }
 
     public Human getFather() {
-        return dad;
+        return father;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
     }
 
     public Human getMother() {
-        return mom;
+        return mother;
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
     }
 
     public List<Human> getChildrens() {
         return childrens;
     }
 
-    public void addChild(Human person) {
-        if (this.childrens == null) this.childrens = new ArrayList<>();
-        this.childrens.add(person);
+    public void setChildrens(List<Human> childrens) {
+        this.childrens = childrens;
+    }
+
+    public void addChild(Human human) {
+        if (this.childrens == null)
+            this.childrens = new ArrayList<>();
+        this.childrens.add(human);
     }
 }
