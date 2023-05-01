@@ -1,8 +1,9 @@
-import Humans.Human;
+import FamilyTree.FamilyTree;
+import FamilyTreeObject.Humans.Human;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree familyTreeHumans = new FamilyTree();
         Human human1 = new Human("Иван", "Петров", "male");
         Human human2 = new Human("Федор", "Петров","male");
         Human human3 = new Human("Денис", "Иванов","male");
@@ -13,17 +14,17 @@ public class Main {
         Human human8 = new Human("Вероника", "Остроумова","female");
         Human human9 = new Human("Николай", "Угольнико","male");
 
-        familyTree.addHuman(human1);
-        familyTree.addHuman(human2);
-        familyTree.addHuman(human3);
-        familyTree.addHuman(human4);
-        familyTree.addHuman(human5);
-        familyTree.addHuman(human6);
-        familyTree.addHuman(human7);
-        familyTree.addHuman(human8);
-        familyTree.addHuman(human9);
+        familyTreeHumans.addElement(human1);
+        familyTreeHumans.addElement(human2);
+        familyTreeHumans.addElement(human3);
+        familyTreeHumans.addElement(human4);
+        familyTreeHumans.addElement(human5);
+        familyTreeHumans.addElement(human6);
+        familyTreeHumans.addElement(human7);
+        familyTreeHumans.addElement(human8);
+        familyTreeHumans.addElement(human9);
 
-        for (Object h: familyTree) {
+        for (Object h: familyTreeHumans) {
             System.out.println(h.toString());
 
         }

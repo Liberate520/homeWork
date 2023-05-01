@@ -1,4 +1,7 @@
-import Humans.Human;
+package OutAndInputInfo;
+
+import FamilyTreeObject.FamilyTreeObject;
+import FamilyTreeObject.Humans.Human;
 
 import java.io.*;
 
@@ -21,12 +24,12 @@ public class OutAndInputInfo implements Serializable{
 
     }
 
-    public Human ReadInfo(String name){
-        Human inputHupan = null;
+    public FamilyTreeObject ReadInfo(String name){
+        FamilyTreeObject inputElement = null;
         try {
             objectInputStream = new ObjectInputStream(
                     new FileInputStream(name));
-            inputHupan = (Human) objectInputStream.readObject();
+            inputElement = (FamilyTreeObject) objectInputStream.readObject();
             objectInputStream.close();
 
         } catch (IOException e) {
@@ -34,7 +37,7 @@ public class OutAndInputInfo implements Serializable{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return inputHupan;
+        return inputElement;
 
 
     }
