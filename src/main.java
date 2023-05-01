@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String filePath = "src/tree.txt";
         Writeable writeable = new FileHandler();
         

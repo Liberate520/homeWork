@@ -1,28 +1,42 @@
-import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree  {
-       private List<Human> humanList;
+public class FamilyTree implements Serializable,Iterator<Human> {
+    private List<Human> humanList;
 
-       public FamilyTree(){
+    public FamilyTree() {
         this(new ArrayList<>());
-       }
+    }
 
-        public FamilyTree(List<Human> humanList) {
-            this.humanList = humanList;
-        }
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
+    }
 
-        public String getInfo(){
-            StringBuilder sb = new StringBuilder();
-            for (Human human: humanList){
-                sb.append(human.toString());
-                sb.append("/n");
-            }
-            return sb.toString();
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        for (Human human : humanList) {
+            sb.append(human.toString());
+            sb.append("/n");
         }
-       
-        }
+        return sb.toString();
+    }
+
+
+
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
+    @Override
+    public Human next() {
+        return null;
+    }
+}
+
+
     
 
 
