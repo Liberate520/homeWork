@@ -1,5 +1,6 @@
 package java_oop_homeWork.src.familyTree;
 
+import java_oop_homeWork.src.FamilyTreeItem;
 import java_oop_homeWork.src.kinsman.Kinsman;
 import java_oop_homeWork.src.kinsman.comparators.KinsmanComparatorByDateBirth;
 import java_oop_homeWork.src.kinsman.comparators.KinsmanComparatorByName;
@@ -8,17 +9,17 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FamilyTree implements Serializable, Iterable<Kinsman> {
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<Kinsman> {
     private String name;
-    private TreeSet<Kinsman> family;
+    private TreeSet<E> family;
 
-    public FamilyTree(String surName, Kinsman kinsman) {
+    public FamilyTree(String surName, E kinsman) {
         this.name = surName;
         this.family = new TreeSet<>(Arrays.asList(kinsman));
         kinsman.setFamily(this);
     }
 
-    public boolean addParent(Kinsman kinsman, Kinsman parent) {
+    public boolean addParent(E kinsman, E parent) {
         if (kinsman.setParent(parent)) {
             parent.addChild(kinsman);
             this.family.add(parent);
@@ -28,7 +29,7 @@ public class FamilyTree implements Serializable, Iterable<Kinsman> {
         return false;
     }
 
-    public boolean addChild(Kinsman kinsman, Kinsman child) {
+    public boolean addChild(E kinsman, E child) {
         if (child.setParent(kinsman)) {
             kinsman.addChild(child);
             this.family.add(child);
@@ -49,18 +50,18 @@ public class FamilyTree implements Serializable, Iterable<Kinsman> {
         return sb.toString();
     }
 
-    public SortedSet<Kinsman> getFamily() {
+    public SortedSet<E> getFamily() {
         return this.family;
     }
 
     public void printFamily() {
-        for (Kinsman kinsman: family) {
+        for (E kinsman: family) {
             System.out.println(kinsman.getInfo());
         }
     }
 
-    public void printFamily(List<Kinsman> family) {
-        for (Kinsman kinsman: family) {
+    public void printFamily(List<E> family) {
+        for (E kinsman: family) {
             System.out.println(kinsman.getInfo());
         }
     }
@@ -78,15 +79,15 @@ public class FamilyTree implements Serializable, Iterable<Kinsman> {
     public int hashCode() { return Objects.hash(name, family); }
 
     @Override
-    public Iterator<Kinsman> iterator() {
+    public Iterator iterator() {
         return family.iterator();
     }
 
-    public List<Kinsman> sortByName() {
-        return family.stream().sorted(new KinsmanComparatorByName()).collect(Collectors.toList());
+    public List<E> sortByName() {
+        return family.stream().sorted(new KinsmanComparatorByName<>()).collect(Collectors.toList());
     }
 
-    public List<Kinsman> sortByDateBirth() {
-        return family.stream().sorted(new KinsmanComparatorByDateBirth()).collect(Collectors.toList());
+    public List<E> sortByDateBirth() {
+        return family.stream().sorted(new KinsmanComparatorByDateBirth<>()).collect(Collectors.toList());
     }
 }

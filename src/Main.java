@@ -18,7 +18,7 @@ public class Main {
         Kinsman secondKinsman = new Kinsman("Ольга", "Рюрикович", Sex.women, "01.01.0893", "01.01.0969");
         Kinsman thirdKinsman = new Kinsman("Игорь", "Рюрикович", Sex.men, "01.01.0878", "01.01.0945");
         Kinsman fourKinsman = new Kinsman("Святослав", "Рюрикович", Sex.men, "01.01.0920", "01.01.0972");
-        FamilyTree familyTree = new FamilyTree("Рюрики", firstKinsman);
+        FamilyTree<Kinsman> familyTree = new FamilyTree("Рюрики", firstKinsman);
 //        familyTree = (FamilyTree) writeble.read(filePath);
         familyTree.addChild(firstKinsman, thirdKinsman);
         familyTree.addChild(thirdKinsman, fourKinsman);

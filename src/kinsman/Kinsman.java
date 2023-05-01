@@ -1,12 +1,13 @@
 package java_oop_homeWork.src.kinsman;
 
+import java_oop_homeWork.src.FamilyTreeItem;
 import java_oop_homeWork.src.familyTree.FamilyTree;
 
 import java.io.Serializable;
 import java.util.*;
 import java.text.*;
 
-public class Kinsman implements Serializable, Comparable<Kinsman> {
+public class Kinsman implements Serializable, Comparable<Kinsman>, FamilyTreeItem {
     private FamilyTree family;
     private Date dateBirth;
     private String name;
