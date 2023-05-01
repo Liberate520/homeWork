@@ -42,7 +42,7 @@ public class Main {
         // List<Human> alekseySiblings = familyTree.getSiblings(aleksey);
         // System.out.println("Братья и сестры Алексея: " + alekseySiblings);
 
-        ArrayList<Human> annaChildren = (ArrayList<Human>) anna.getChildren();
+        List<FamalyTreeItem> annaChildren = anna.getChildren();
         // System.out.println("Дети Анны: " + annaChildren);
 
         System.out.println("--------------------------");

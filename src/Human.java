@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.lang.Comparable;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, FamalyTreeItem {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
@@ -75,30 +75,35 @@ public class Human implements Serializable, Comparable<Human> {
         return mother;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
+    public void setMother(FamalyTreeItem mother) {
+        this.mother = (Human) mother;
     }
 
     public Human getFather() {
         return father;
     }
 
-    public void setFather(Human father) {
-        this.father = father;
+    public void setFather(FamalyTreeItem father) {
+        this.father = (Human) father;
     }
 
-    public void addChild(Human child) {
+    public void addChild(FamalyTreeItem child) {
         if (this.gender == Gender.MALE) {
             child.setFather(this);
         } else if (this.gender == Gender.FEMALE) {
             child.setMother(this);
         }
-        children.add(child);
+        children.add((Human) child);
     }
 
-    public List<Human> getChildren() {
-        return children;
+    public List<FamalyTreeItem> getChildren() {
+        List<FamalyTreeItem> childrenList = new ArrayList<>();
+        for (Human child : children) {
+            childrenList.add((FamalyTreeItem) child);
+        }
+        return childrenList;
     }
+    
 
     public void setChildren(List<Human> children) {
         this.children = children;
@@ -182,10 +187,12 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     public void childrenSortByName() {
-        children.sort(new ChildrenComparatorByName());
+        children.sort(new ChildrenComparatorByName<>());
     }
 
     public void childrenSortByAge() {
-        children.sort(new ChildrenComparatorByAge());
+        children.sort(new ChildrenComparatorByAge<>());
     }
+
+
 }
