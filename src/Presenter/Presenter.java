@@ -36,6 +36,10 @@ public class Presenter {
         }
         else{familyTreeObject.setMother(new FamilyTreeObject(name,surname,gender));}
     }
+
+    public void addDescendant(FamilyTreeObject familyTreeObject, String name, String surname, String gender){
+        familyTreeObject.addChildren(new FamilyTreeObject(name,surname,gender));
+    }
     public String objectInfo(String name, String surname){
         return familyTree.getElement(name, surname).toString();
     }

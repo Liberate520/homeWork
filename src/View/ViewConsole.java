@@ -68,6 +68,22 @@ public class ViewConsole extends View{
 
             }
             if(command == 5){
+                System.out.println("Укажите кому хотите добавить потомка");
+                System.out.println("Введите имя");
+                name = scanner.nextLine();
+                System.out.println("Введите фамилию");
+                surname = scanner.nextLine();
+                if (presenter.getObject(name, surname)== null){
+                    System.out.println("Объект не найден");
+                }
+                else {System.out.println("Укажите данные потомка");
+                    System.out.println("Введите имя");
+                    name = scanner.nextLine();
+                    System.out.println("Введите фамилию");
+                    surname = scanner.nextLine();
+                    System.out.println("Введите пол");
+                    surname = scanner.nextLine();
+                    presenter.addParent(presenter.getObject(name, surname), scanner.nextLine(), scanner.nextLine(), scanner.nextLine());}
 
             }
             if(command == 5){
