@@ -1,4 +1,4 @@
-package Model.FamilyTreeObject.Comparator;
+package Model.Comparator;
 
 import Model.FamilyTreeObject.FamilyTreeObject;
 

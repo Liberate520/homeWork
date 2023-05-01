@@ -95,7 +95,7 @@ public class FamilyTreeObject implements Serializable,Comparable {
 
     @Override
     public String toString() {
-        return "Model.FamilyTreeObject.Humans.Human{" +
+        return "Model.FamilyTreeObject.FamilyTreeObject.Humans.Human{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", dateOfBirth=" + dateOfBirth +

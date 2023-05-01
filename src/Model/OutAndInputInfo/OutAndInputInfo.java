@@ -1,4 +1,4 @@
-package Model.FamilyTreeObject.OutAndInputInfo;
+package Model.OutAndInputInfo;
 
 import Model.FamilyTreeObject.FamilyTreeObject;
 

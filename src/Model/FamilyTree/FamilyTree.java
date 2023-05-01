@@ -1,9 +1,9 @@
-package Model.FamilyTreeObject.FamilyTree;
+package Model.FamilyTree;
 
-import Model.FamilyTreeObject.Comparator.FamilyTreeObjectComparatorByGender;
-import Model.FamilyTreeObject.Comparator.FamilyTreeObjectComparatorByName;
+import Model.Comparator.FamilyTreeObjectComparatorByName;
 import Model.FamilyTreeObject.FamilyTreeObject;
-import Model.FamilyTreeObject.OutAndInputInfo.OutAndInputInfo;
+import Model.Comparator.FamilyTreeObjectComparatorByGender;
+import Model.OutAndInputInfo.OutAndInputInfo;
 
 
 
@@ -22,6 +22,16 @@ public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Ite
     public void addElement(E e){
         elements.add(e);
     }
+    public void addElement(String name, String surname, String gender){
+        elements.add((E) new FamilyTreeObject(name, surname, gender));
+    }
+
+
+
+    public Boolean deleteElement(String name, String surname){
+        return elements.remove(getElement(name, surname));
+
+    }
     public E getElement(String name, String surname){
         for(E e: elements){
             if(e.getName().equals(name) && e.getSurname().equals(surname)){
@@ -30,10 +40,8 @@ public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Ite
 
         }
         return null;
-
-
-
     }
+
     public String getElementInfo(E e){
         return e.toString();
     }
@@ -48,8 +56,8 @@ public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Ite
         return (E) outAndInputInfo.ReadInfo(name);
     }
 
-    public List elemensPrint(){
-        return elements;
+    public String elemensPrint(){
+        return elements.toString();
     }
 
     public List elementsSort(){
