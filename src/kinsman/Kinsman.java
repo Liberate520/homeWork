@@ -69,27 +69,27 @@ public class Kinsman implements Serializable, Comparable<Kinsman>, FamilyTreeIte
     public void setFamily(FamilyTree family) { this.family = family; }
 
     public Kinsman getMother() { return this.mother; }
-    private boolean setMother(Kinsman mother) {
+    public boolean setMother(FamilyTreeItem mother) {
         if (this.mother == null) {
-            this.mother = mother;
+            this.mother = (Kinsman) mother;
             return true;
         }
         return false;
     }
     public Kinsman getFather() { return this.father; }
-    private boolean setFather(Kinsman father) {
+    public boolean setFather(FamilyTreeItem father) {
         if (this.father == null) {
-            this.father = father;
+            this.father = (Kinsman) father;
             return true;
         }
         return false;
     }
     public TreeSet<Kinsman> getChilds() { return this.childs; }
-    public void addChild(Kinsman child) { this.childs.add(child); }
+    public void addChild(FamilyTreeItem child) { this.childs.add((Kinsman) child); }
 
     public Sex getSex() { return this.sex; }
 
-    public boolean setParent(Kinsman parent) {
+    public boolean setParent(FamilyTreeItem parent) {
         if (parent.getSex() == Sex.men) {
             return this.setFather(parent);
         }
