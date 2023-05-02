@@ -1,8 +1,10 @@
 package Tree.homeWork.src;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Iterator;
 
-public abstract class Human {
+public class Human implements Serializable {
     private String name;
     private int age;
     private int dateOfDeath;
@@ -47,5 +49,28 @@ public abstract class Human {
     @Override
     public String toString() {
         return name + ". Age - " +  age + ", " + gender + " " + typeCommunication;
+    }
+    int index;
+
+    @Override
+    public boolean hasNext() {
+        return index++ <1;
+    }
+    @Override
+    public String next() {
+        switch (index) {
+            case 1:
+                return String.format(name);
+//            case 2:
+//                return String.format(age);
+//            case 3:
+//                return String.format(Gender);
+//            case 4:
+//                return String.format(dateOfBirth);
+//            case 5:
+//                return String.format(dateOfDeath);
+//            case 6:
+//                return String.format(typeCommunication);
+        }
     }
 }
