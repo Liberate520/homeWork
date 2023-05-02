@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends HumanGroupItem> implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends HumanGroupItem> implements Serializable, Iterable<E> {
    // private HashSet<Human> familyTree;
-    private List<Human> familyTree;
+    private List<E> familyTree;
     // public FamilyTree(HashSet<Human> familyTree) {
     //     this.familyTree = familyTree;
     // }
@@ -19,25 +19,25 @@ public class FamilyTree<E extends HumanGroupItem> implements Serializable, Itera
         familyTree = new ArrayList<>();
     }
 
-    public List<Human> getFamilyTree() {
+    public List<E> getFamilyTree() {
         return familyTree;
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         familyTree.add(human);
-        if (human.getMother() != null) {
-            human.getMother().addChildren(human);
+        if (((Human) human).getMother() != null) {
+            ((Human) human).getMother().addChildren((Human) human);
         }
 
-        if (human.getFather() != null) {
-            human.getFather().addChildren(human);
+        if (((Human) human).getFather() != null) {
+            ((Human) human).getFather().addChildren((Human) human);
         }
     }
 
     
 
-    public Human getHumanByName(String name) {
-        for (Human human : familyTree) {
+    public E getHumanByName(String name) {
+        for (E human : familyTree) {
             if (human.getName().equals(name)) {
                 return human;
             }
@@ -47,7 +47,7 @@ public class FamilyTree<E extends HumanGroupItem> implements Serializable, Itera
 
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
 
@@ -56,7 +56,7 @@ public class FamilyTree<E extends HumanGroupItem> implements Serializable, Itera
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator<>(familyTree);
     }
 
@@ -72,6 +72,8 @@ public class FamilyTree<E extends HumanGroupItem> implements Serializable, Itera
     public void sortById(){
         familyTree.sort(new HumanComparatorById<>());
     }
+
+
   
 
 
