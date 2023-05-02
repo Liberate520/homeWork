@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class Program implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
         Human h1 = new Human("Natalia", 1966);
         Human h2 = new Human("Timur", 1965);
         tree.addMember(h1);

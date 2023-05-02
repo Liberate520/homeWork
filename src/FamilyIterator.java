@@ -1,11 +1,11 @@
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyIterator implements Iterator<Human> {
+public class FamilyIterator<T extends HumanItem> implements Iterator<T> {
     private int index;
-    private List<Human> familyMembers;
+    private List<T> familyMembers;
     
-    public FamilyIterator(List<Human> familyMembers) {
+    public FamilyIterator(List<T> familyMembers) {
         this.familyMembers = familyMembers;
     }
     
@@ -15,7 +15,7 @@ public class FamilyIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return familyMembers.get(index++);
     }
     

@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> familyMembers;
+public class FamilyTree<T extends HumanItem> implements Serializable, Iterable<T> {
+    private List<T> familyMembers;
 
     public FamilyTree() {
         familyMembers = new ArrayList<>();
     }
 
-    public void addMember(Human human) {
+    public void addMember(T human) {
         familyMembers.add(human);
     }
 
@@ -20,14 +20,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public String toString() {
-        for(Human human : familyMembers) {
+        for(T human : familyMembers) {
             human.getName();
         }
         return "Члены семьи: " + familyMembers;
     }
     
-    public Human getInfoByName(String name) {
-        for(Human human : familyMembers) {
+    public T getInfoByName(String name) {
+        for(T human : familyMembers) {
             if(human.getName().equals(name)) {
                 return human;
             }
@@ -36,20 +36,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return new FamilyIterator(familyMembers);
     }
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        for(Human human : familyMembers) {
+        for(T human : familyMembers) {
             sb.append(human).append("\n");
         }
         return sb.toString();
     }
 
     public void sortByName() {
-        Collections.sort(familyMembers);
+        Collections.sort(familyMembers, new HumanComporatorByName<>());
     }
 
     public void sortByAge() {
