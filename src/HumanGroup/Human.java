@@ -1,18 +1,16 @@
-package Tree.homeWork.src;
+package Tree.homeWork.src.HumanGroup;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Iterator;
+import Tree.homeWork.src.TypeCommunication;
 
-public class Human implements Serializable {
+public class Human implements Comparable<Human> {
     private String name;
     private int age;
     private int dateOfDeath;
     private int dateOfBirth;
     private Gender gender;
     private TypeCommunication typeCommunication;
-    private Human mother;
-    private Human father;
+//    private Human mother;
+//    private Human father;
     //private List<Human> children;
     public Human(String name, int age, int DateOfBirth, int DateOfDeath, Gender gender, TypeCommunication typeCommunication){
         this.name = name;
@@ -24,6 +22,9 @@ public class Human implements Serializable {
     }
     public String getName() {
         return name;
+    }
+    public int getAge() {
+        return age;
     }
     public int age() {
         return age;
@@ -72,5 +73,10 @@ public class Human implements Serializable {
 //            case 6:
 //                return String.format(typeCommunication);
         }
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }
