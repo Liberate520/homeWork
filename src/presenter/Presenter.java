@@ -37,15 +37,15 @@ public class Presenter {
     }
 
     public void printSortByAge() {
-        service.printSortByAge();
+        view.print(service.getStringSortByAge());
     }
 
     public void printSortByFirstName() {
-        service.printSortByFirstName();
+        view.print(service.getStringSortByFirstName());
     }
 
     public void printSortByLastName() {
-        service.printSortByLastName();
+        view.print(service.getStringSortByLastName());
     }
 
     public void saveFamilyTree(String path) throws IOException {

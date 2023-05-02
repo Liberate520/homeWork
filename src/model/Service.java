@@ -14,11 +14,13 @@ import java.util.TreeSet;
 public class Service {
     private FamilyTree<Person> activeTree;
     private List<FamilyTree<Person>> familyTreeList;
+    private FileOutStr format;
 
     public Service(FamilyTree<Person> tree) {
         this.activeTree = tree;
         familyTreeList = new ArrayList<>();
         familyTreeList.add(tree);
+        format = new FileOutStr();
     }
 
     public Service(){
@@ -113,6 +115,22 @@ public class Service {
         System.out.println("--------------------------------------");
     }
 
+    public String getStringSortByLastName(){
+        TreeSet<Person> personSet = activeTree.getTreeSortByLastName();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("---Персоны (сортировка по Фамилиям)---" + "\n");
+        if (this.getCountPerson() != 0) {
+            for (Person person: personSet) {
+                stringBuilder.append("ID: " + person.getId() + " " + person.getFirstName() +
+                        " " + person.getLastName() + " " + person.getAge() + "\n");
+            }
+        } else {
+            stringBuilder.append("Список пуст." + "\n");
+        }
+        stringBuilder.append("--------------------------------------" + "\n");
+        return stringBuilder.toString();
+    }
+
     public void printSortByFirstName(){
         TreeSet<Person> personSet = activeTree.getTreeSortByFirstName();
         System.out.println("----Персоны (сортировка по Именам)----");
@@ -125,6 +143,22 @@ public class Service {
             System.out.println("Список пуст.");
         }
         System.out.println("--------------------------------------");
+    }
+
+    public String getStringSortByFirstName(){
+        TreeSet<Person> personSet = activeTree.getTreeSortByFirstName();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("----Персоны (сортировка по Именам)----" + "\n");
+        if (this.getCountPerson() != 0) {
+            for (Person person: personSet) {
+                stringBuilder.append("ID: " + person.getId() + " " + person.getFirstName() +
+                        " " + person.getLastName() + " " + person.getAge() + "\n");
+            }
+        } else {
+            stringBuilder.append("Список пуст." + "\n");
+        }
+        stringBuilder.append("--------------------------------------" + "\n");
+        return stringBuilder.toString();
     }
 
     public void printSortByAge(){
@@ -141,12 +175,27 @@ public class Service {
         System.out.println("--------------------------------------");
     }
 
+    public String getStringSortByAge(){
+        TreeSet<Person> personSet = activeTree.getTreeSortByAge();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("----Персоны (сортировка по Возрасту)----" + "\n");
+        if (this.getCountPerson() != 0) {
+            for (Person person: personSet) {
+                stringBuilder.append("ID: " + person.getId() + " " + person.getFirstName() +
+                        " " + person.getLastName() + " " + person.getAge() + "\n");
+            }
+        } else {
+            stringBuilder.append("Список пуст." + "\n");
+        }
+        stringBuilder.append("--------------------------------------");
+        return stringBuilder.toString();
+    }
+
     public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
         format.saveFamilyTreeAs(activeTree, path);
     }
 
     public void saveFamilyTreeAs(String path) throws IOException {
-        FileOutStr format = new FileOutStr();
         format.saveFamilyTreeAs(activeTree, path);
     }
 
@@ -155,7 +204,6 @@ public class Service {
     }
 
     public void loadFamilyTreeFrom(String path) throws IOException, ClassNotFoundException {
-        FileOutStr format = new FileOutStr();
         activeTree = format.getFamilyTreeFrom(path);
     }
 

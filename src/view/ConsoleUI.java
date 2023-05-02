@@ -19,15 +19,19 @@ public class ConsoleUI implements View{
 
     @Override
     public void start() throws IOException, ClassNotFoundException {
+        this.hello();
+        while (run) {
+            this.printMenu();
+            this.execute();
+        }
+    }
+
+    private void hello() {
         this.print("Добро пожаловать в Фамильное Древо!");
         this.print("************************************");
         this.print("");
         this.print("Вы можете наполнить древо вручную или загрузить" + "\n" +
                 "из файла MyFamilyTree.sfmt, прилагаемого к проекту." + "\n");
-        while (run) {
-            this.printMenu();
-            this.execute();
-        }
     }
 
     private void execute() throws IOException, ClassNotFoundException {

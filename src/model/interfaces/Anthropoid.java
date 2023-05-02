@@ -5,11 +5,6 @@ import model.person.Sex;
 import java.util.HashSet;
 
 public interface Anthropoid {
-    Anthropoid mother = null;
-    Anthropoid father = null;
-    Anthropoid spouse = null;
-    HashSet<Anthropoid> brothersOrSistersSet = null;
-    HashSet<Anthropoid> childrenSet = null;
 
     Sex getSex();
     String getFirstName();
