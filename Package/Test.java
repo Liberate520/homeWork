@@ -1,15 +1,13 @@
 package Package;
 
-import Package.Tree.Tree;
+import Package.Model.WorkWithFiles.Files;
 
 import java.io.*;
 
 public class Test implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        ObjectInputStream input = new ObjectInputStream(new FileInputStream("familyTree.out"));
-        Tree familyRestored = (Tree) input.readObject();
-        input.close();
-
+        Files familyRestored = new Files("familyTree");
+        familyRestored.readObj();
         System.out.println(familyRestored);
     }
 }

@@ -1,11 +1,11 @@
-package Package.Tree;
+package Package.Model.Tree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
     private Integer id;
     private String name;
     private String surname;
@@ -74,7 +74,7 @@ public class Person implements Serializable {
 
     public String showInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append(name + " " + surname + ", " + "дата рождения: " + birthDate +"\n");
+        sb.append("id: " + id + ", " + name + " " + surname + ", " + "дата рождения: " + birthDate +"\n");
         sb.append(fatherInfo() + "\n");
         sb.append(motherInfo() + "\n");
         sb.append(childrenInfo() + "\n");
@@ -124,4 +124,10 @@ public class Person implements Serializable {
         Person person = (Person) obj;
         return person.getId().equals(getId());
     }
+
+    @Override
+    public int compareTo(Person o) {
+        return name.compareTo(o.name);
+    }
+
 }

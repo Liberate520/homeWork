@@ -1,19 +1,24 @@
-package Package.Tree;
+package Package.Model.Tree;
 
-import Package.Iteration.Comparators;
-import Package.Iteration.Iterable;
+import Package.Model.Iteration.ComparatorByBirthdate;
+import Package.Model.Iteration.ComparatorByName;
+import Package.Model.Iteration.ComparatorBySurname;
+import Package.Model.Iteration.MemberIterator;
 
+import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class Tree <E extends Person> implements Serializable, Iterable {
+public class Tree <E extends Person> implements Serializable, Iterable<E>{
+    private ObjectInputStream input;
     private List<E> family;
 
     public Tree() {
         this.family = new ArrayList<>();
+    }
+
+    public List<E> getFamily() {
+        return family;
     }
 
     public void addMember(E person) {
@@ -43,22 +48,20 @@ public class Tree <E extends Person> implements Serializable, Iterable {
         return sb.toString();
     }
 
-    public void iterateByName() {
-        Collections.sort(family, new Comparator<E>() {
-            @Override
-            public int compare(E o1, E o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+    public void sortByName(){
+        family.sort(new ComparatorByName<>());
     }
 
-    @Override
-    public void iterateByBirthdate() {
-        Collections.sort(family, new Comparator<E>() {
-            @Override
-            public int compare(E o1, E o2) {
-                return o1.getBirthDate().compareTo(o2.getBirthDate());
-            }
-        });
+    public void sortBySurname(){
+        family.sort(new ComparatorBySurname<>());
     }
+
+    public void sortByBirthdate(){
+        family.sort(new ComparatorByBirthdate<>());
+    }
+    @Override
+    public Iterator<E> iterator() {
+        return new MemberIterator<>(family);
+    }
+
 }
