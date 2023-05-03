@@ -2,7 +2,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
 
     private int id;
@@ -98,12 +97,12 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
         //          " Информация о детях:  " + getInfoChildren(children);
     }
     
-    public void addChildren(Human human) {
-        if (this.children == null) {
-            this.children = new ArrayList<>();
-            this.children.add(human);
+    public boolean addChildren(Human human) {
+        if (!children.contains(human)) {
+            children.add(human);
+            return true;
         }
-        this.children.size();
+        return false;
     }
 
     public String getMotherInfo() {
@@ -144,9 +143,23 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getName().equals(getName());
+    }
+
+    @Override
     public int compareTo(Human o) {
         return name.compareTo(o.name);
     }
+
+
 
 
 

@@ -1,35 +1,28 @@
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class Service {
-    private int id;
+public class Service {    
     private FamilyTree<Human> activeTree;
-    private List<Human> familyTree;
+    private List<FamilyTree<Human>> familyTreeList;
     
 
-    public Service(FamilyTree tree) {
+    public Service(FamilyTree<Human> tree) {
         this.activeTree = tree;
-        familyTree = new ArrayList<>();
-        familyTree.add(tree);
+        familyTreeList = new ArrayList<>();
+        familyTreeList.add(tree);
     }
     public Service(){
-        this(new FamilyTree());
+        this(new FamilyTree<Human>());
     }
 
-    public void addFamilyTree(FamilyTree familyTree){
-        familyTree.add(familyTree);
+    public void addFamilyTree(FamilyTree<Human> familyTree){
+        familyTreeList.add(familyTree);
     }
 
-    public void addHuman(int id, String name, String string, String string2, Gender male){
+    public void addHuman(int id, String name, String string, String string2, Gender male) {
         activeTree.addHuman(new Human(id, name, null, null, null));
     }
-
-    // public void add(String name, String surname, String dateOfBirth, Gender gender) {
-    //     Human human = new Human(++id, name, surname, dateOfBirth, gender, null, null, null);
-    // }
-
+    
     public void sortByName() {
         activeTree.sortByName();
     }

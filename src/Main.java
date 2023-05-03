@@ -1,4 +1,3 @@
-
 public class Main {
 
     public static void main(String[] args) {
@@ -24,9 +23,7 @@ public class Main {
 
         // // // writable.save(familyTree, filePath);
         //FamilyTree familyTree = (FamilyTree) writable.read(filePath);
-        System.out.println(service.getInfo());
-        
-        System.out.println(service.getInfo());
+
 
         service.sortByName();
         System.out.println(service.getInfo());
