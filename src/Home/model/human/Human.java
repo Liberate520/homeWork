@@ -1,4 +1,4 @@
-package Home.human;
+package Home.model.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;

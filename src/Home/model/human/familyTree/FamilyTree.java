@@ -1,9 +1,7 @@
-package Home.familyTree;
+package Home.model.human.familyTree;
 
-import Home.*;
-import Home.human.Human;
-import Home.human.comparators.HumanComparatorByAge;
-import Home.human.comparators.HumantComparatorByName;
+import Home.model.human.comparators.HumanComparatorByAge;
+import Home.model.human.comparators.HumantComparatorByName;
 
 import java.util.ArrayList;
 import java.util.Iterator;

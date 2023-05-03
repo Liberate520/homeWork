@@ -1,6 +1,6 @@
-package Home.human.comparators;
+package Home.model.human.comparators;
 
-import Home.human.Human;
+import Home.model.human.Human;
 
 import java.util.Comparator;
 

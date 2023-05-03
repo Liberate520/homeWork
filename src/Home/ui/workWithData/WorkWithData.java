@@ -1,6 +1,6 @@
-package Home.workWithData;
+package Home.ui.workWithData;
 
-import Home.human.Human;
+import Home.model.human.Human;
 
 import java.io.IOException;
 

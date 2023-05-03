@@ -1,7 +1,7 @@
-package Home;
+package Home.model.human;
 
-import Home.familyTree.FamilyTree;
-import Home.human.Human;
+import Home.model.human.familyTree.FamilyTree;
+import Home.model.human.Human;
 
 import java.util.ArrayList;
 import java.util.List;
