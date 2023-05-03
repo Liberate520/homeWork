@@ -55,10 +55,11 @@ public class ConsoleWorkMenu implements ViewWorkMenu{
     }
 
     private int getPersonId() {
+        int motherId;
         while (true){
             String text = scanner.nextLine();
             if (checkTextForInt(text)) {
-                int motherId = Integer.parseInt(text);
+                motherId = Integer.parseInt(text);
                 return motherId;
             } else {
                 inputError();
@@ -135,10 +136,9 @@ public class ConsoleWorkMenu implements ViewWorkMenu{
     private Gender getGender(){
         while (true){
             String text = scanner.nextLine();
-            text.toUpperCase();
-            if (text.equals("М")){
+            if (text.toUpperCase().equals("М")){
                 return Gender.Male;
-            } else if (text.equals("Ж")) {
+            } else if (text.toUpperCase().equals("Ж")) {
                 return Gender.Female;
             }
             inputError();

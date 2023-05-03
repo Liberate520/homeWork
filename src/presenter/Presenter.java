@@ -30,10 +30,10 @@ public class Presenter {
     }
 
     public void findHumanById(int id) {
-        service.getHumanById(id);
+        System.out.println(service.getHumanById(id));
     }
 
     public void findHuman(String firstName, String lastName, String birthday) {
-        service.getHuman(firstName, lastName, birthday);
+        System.out.println(service.getHuman(firstName, lastName, birthday));
     }
 }
