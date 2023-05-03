@@ -1,7 +1,6 @@
 package familyTree;
 
 import human.Gender;
-import human.Human;
 import human.comparators.HumanComparatorByFirstName;
 import human.comparators.HumanComparatorById;
 import human.comparators.HumanComparatorByLastName;
@@ -18,8 +17,8 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
 
     public void addHuman(E human){
         people.add(human);
-        Optional <E> mother = Optional.ofNullable((E) human.getMother());
-        Optional <E> father = Optional.ofNullable((E) human.getFather());
+        Optional <FamilyTreeItem> mother = Optional.ofNullable(human.getMother());
+        Optional <FamilyTreeItem> father = Optional.ofNullable(human.getFather());
         mother.ifPresent(this::IdentifyChildren);
         father.ifPresent(this::IdentifyChildren);
     }
@@ -45,18 +44,18 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         return null;
     }
 
-    public E getMother(E human){
-        return (E) human.getMother();
+    public FamilyTreeItem getMother(E human){
+        return human.getMother();
     }
 
-    public E getFather(E human){
-        return (E) human.getFather();
+    public FamilyTreeItem getFather(E human){
+        return human.getFather();
     }
 
     public List<E> getBrothers(E human){
         List<E> brothers = new ArrayList<>();
-        E mother = (E) human.getMother();
-        E father = (E) human.getFather();
+        FamilyTreeItem mother = human.getMother();
+        FamilyTreeItem father = human.getFather();
         for (E item: people
              ) {
             if (item != human && item.getMother() == mother &&
@@ -114,13 +113,25 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         people.sort(new HumanComparatorByNumberOfChildren());
     }
 
-    public void IdentifyChildren(E human){
-        for (E item: people
+    public void IdentifyChildren(FamilyTreeItem human){
+        for (FamilyTreeItem item: people
         ) {
             if (!human.equals(item) && human.equals(item.getMother()) ||
                     human.equals(item.getFather())){
-                human.setChildren((E) item);
+                human.setChildren(item);
             }
         }
+    }
+
+    public int getLastId() {
+        int currentId;
+        int maxId = 0;
+        for (E person: people) {
+            currentId = person.getId();
+            if (currentId > maxId){
+                maxId = currentId;
+            }
+        }
+        return maxId;
     }
 }

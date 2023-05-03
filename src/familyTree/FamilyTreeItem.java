@@ -1,7 +1,6 @@
 package familyTree;
 
 import human.Gender;
-import human.Human;
 
 public interface FamilyTreeItem {
 
@@ -9,10 +8,9 @@ public interface FamilyTreeItem {
     String getFirstName();
     String getLastName();
     Gender getGender();
-    Object getMother();
-    Object getFather();
+    FamilyTreeItem getMother();
+    FamilyTreeItem getFather();
     String getBirthday();
     String getNumberOfChildren();
-
     void setChildren(Object item);
 }

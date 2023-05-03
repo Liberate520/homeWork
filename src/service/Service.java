@@ -6,11 +6,11 @@ import familyTree.FamilyTree;
 import readWrite.ReadWriteData;
 import readWrite.ReadWriteObject;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Service {
+public class Service implements Serializable {
     private int id;
     private FamilyTree<Human> activeFamilyTree;
     private List<FamilyTree> familyTreeList;
@@ -24,9 +24,6 @@ public class Service {
         this(new FamilyTree());
     }
 
-    public void addFamilyTree(FamilyTree familyTree){
-        familyTreeList.add(familyTree);
-    }
     public void writeFamilyTreeToFile(String fileName){
         ReadWriteData rw = new ReadWriteObject();
         try {
@@ -36,17 +33,19 @@ public class Service {
             System.out.println(e.getMessage());
         }
     }
-    public void readFamilyTreeFromFile(String fileName){
+    public void readFamilyTreeFromFile(String fileName) throws Exception{
         ReadWriteData rw = new ReadWriteObject();
-        try {
-            activeFamilyTree.setTree(rw.readData(fileName));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        activeFamilyTree.setTree(rw.readData(fileName));
+        this.id = activeFamilyTree.getLastId();
     }
 
     public void addHuman(String firstName, String lastName, String birthday, Gender gender, Human mother, Human father){
-        activeFamilyTree.addHuman(new Human(id++, firstName, lastName,birthday,gender,mother,father));
+        activeFamilyTree.addHuman(new Human(++id, firstName, lastName,birthday,gender,mother,father));
+    }
+    public void addHuman(String firstName, String lastName, String birthday, Gender gender, int motherId, int fatherId){
+        Human mother = getHumanById(motherId);
+        Human father = getHumanById(fatherId);
+        addHuman(firstName, lastName, birthday, gender, mother, father);
     }
 
     public String getInfo(){
@@ -80,7 +79,6 @@ public class Service {
     public void setFather(Human father, Human child){
         child.setFather(father);
         father.setChildren(child);
-
     }
     public void setMother(Human mother, Human child){
         child.setFather(mother);
@@ -88,5 +86,9 @@ public class Service {
     }
     public Human getHumanById(int id){
         return activeFamilyTree.getHumanById(id);
+    }
+
+    public String getPeople(){
+        return activeFamilyTree.getPeople();
     }
 }
