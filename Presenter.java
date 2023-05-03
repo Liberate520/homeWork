@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Presenter {
-    public Human CreateHuman(List<String> data){
+    public Human addHuman(List<String> data){
         if (data.get(0).equals("")){
             System.out.println("Введено слишком мало данных");
         return null;  }

@@ -6,7 +6,7 @@ import java.util.List;
 public class View<T extends Human> {
     public List<String> console_import() throws IOException{
             List<String> data = new ArrayList<>();
-            Scanner scan = new Scanner(System.in);
+            Scanner scan = new Scanner(System.in, "Cp866");
             System.out.println("Введите данные: ");
             System.out.print("Имя: ");
             String firstname = scan.nextLine();
@@ -45,7 +45,7 @@ public class View<T extends Human> {
                 List<String> data = new ArrayList<>();
                 data = console_import();
                 Presenter presenter = new Presenter();
-                Human person = presenter.CreateHuman(data);
+                Human person = presenter.addHuman(data);
                 family.addHuman(person);
                 System.out.println("Хотите продолжить?");
                 answer = scan.nextLine().toLowerCase();

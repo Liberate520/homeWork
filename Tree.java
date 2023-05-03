@@ -9,7 +9,7 @@ public class Tree<T extends Human> implements Iterable<T>  {
     
     private ArrayList<T> family;
     
-    public Tree(){
+    public T Tree(){
         family = new ArrayList<>();
     }
     

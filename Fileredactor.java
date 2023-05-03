@@ -68,7 +68,7 @@ public class Fileredactor implements SaveAndReadable{
             
         }
         Presenter presenter = new Presenter();    
-        Human new_person = presenter.CreateHuman(data);                            
+        Human new_person = presenter.addHuman(data);                            
         family.addHuman(new_person);
     
         line = breader.readLine();
