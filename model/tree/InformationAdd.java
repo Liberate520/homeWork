@@ -2,7 +2,6 @@ package model.tree;
 
 import human.Human;
 
-
 public class InformationAdd {
 
     private FamilyTree<Human> humanList;
@@ -12,8 +11,8 @@ public class InformationAdd {
     }
 
     public String toFamilyTree(String name, String father, String mother, String year, FamilyTree<Human> humanList) {
-        Check check =  new Check(humanList);
-        if (check.checkname(humanList, name)){
+        Check check = new Check(humanList);
+        if (check.checkname(humanList, name)) {
             System.out.println("Такой человек уже есть в базе");
         } else {
 

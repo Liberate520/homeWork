@@ -18,6 +18,7 @@ public class Presenter {
         service.read();
         String answer = service.get(all);
         view.print(answer);
+
     }
 
     public void addRecord(String name, String father, String mother, String year) {

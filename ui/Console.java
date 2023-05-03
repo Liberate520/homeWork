@@ -75,6 +75,7 @@ public class Console implements View {
         System.out.println("Введите name");
         String all = scanner.nextLine();
         presenter.getRecords(all);
+
     }
 
     private void addRecord() {
@@ -86,7 +87,7 @@ public class Console implements View {
         String mother = scanner.nextLine();
         System.out.println("Введите year of birth:");
         String year = scanner.nextLine();
-        
+
         presenter.addRecord(name, father, mother, year);
 
     }

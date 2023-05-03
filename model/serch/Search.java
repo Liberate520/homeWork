@@ -4,12 +4,11 @@ import human.Human;
 import model.tree.Check;
 import model.tree.FamilyTree;
 
-
-public class Serch {
+public class Search {
 
     private FamilyTree<Human> humanList;
 
-    public Serch(FamilyTree<Human> humanList) {
+    public Search(FamilyTree<Human> humanList) {
         this.humanList = humanList;
     }
 
@@ -24,8 +23,6 @@ public class Serch {
                 }
             }
 
-        } else {
-            System.out.println("Такого человека нет");
         }
         return sb.toString();
 
