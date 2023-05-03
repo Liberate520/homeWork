@@ -10,20 +10,22 @@ public class Menu {
     private List<Command> commandList;
     private View view;
 
-    public Menu(View view){
-        commandList= new ArrayList<>();
+    public Menu(View view) {
+        commandList = new ArrayList<>();
         commandList.add(new PrintTree(view));
         commandList.add(new SaveTree(view));
         commandList.add(new LoadTree(view));
         commandList.add(new SortBySecondName(view));
         commandList.add(new SortBySex(view));
-        commandList.add(new sortByBirthYear(view));
+        commandList.add(new SortByBirthYear(view));
+        commandList.add(new AddHuman(view));
         commandList.add(new Finish(view));
     }
-    public String print(){
+
+    public String print() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < commandList.size(); i++) {
-            sb.append(i+1);
+            sb.append(i + 1);
             sb.append(". ");
             sb.append(commandList.get(i).getDescription());
             sb.append("\n");
@@ -36,7 +38,7 @@ public class Menu {
         commandList.get(choice - 1).execute();
     }
 
-    public int size(){
+    public int size() {
         return commandList.size();
     }
 

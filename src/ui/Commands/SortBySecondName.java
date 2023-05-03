@@ -4,8 +4,9 @@ import ui.View;
 
 public class SortBySecondName implements Command {
     public View view;
-    public SortBySecondName(View view){
-        this.view=view;
+
+    public SortBySecondName(View view) {
+        this.view = view;
     }
 
     @Override
@@ -15,7 +16,7 @@ public class SortBySecondName implements Command {
 
     @Override
     public void execute() {
-        view.SortBySecondName();
+        view.sortBySecondName();
     }
 }
 

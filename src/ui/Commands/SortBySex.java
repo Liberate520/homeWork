@@ -4,8 +4,9 @@ import ui.View;
 
 public class SortBySex implements Command {
     public View view;
-    public SortBySex(View view){
-        this.view=view;
+
+    public SortBySex(View view) {
+        this.view = view;
     }
 
     @Override
@@ -15,7 +16,7 @@ public class SortBySex implements Command {
 
     @Override
     public void execute() {
-        view.SortBySex();
+        view.sortBySex();
     }
 }
 

@@ -4,8 +4,9 @@ import ui.View;
 
 public class Finish implements Command {
     public View view;
-    public Finish(View view){
-        this.view=view;
+
+    public Finish(View view) {
+        this.view = view;
     }
 
     @Override
@@ -15,7 +16,7 @@ public class Finish implements Command {
 
     @Override
     public void execute() {
-        view.Finish();
+        view.finish();
     }
 }
 

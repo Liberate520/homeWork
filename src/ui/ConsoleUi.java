@@ -5,62 +5,62 @@ import Presenter.Presenter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ConsoleUi implements View{
-    private Presenter presenter;
-    private Scanner scanner;
-    private Menu menu;
-    private boolean flag;
+public class ConsoleUi implements View {
+    protected Presenter presenter;
+    protected Scanner scanner;
+    protected Menu menu;
+    protected boolean flag;
 
-public ConsoleUi(){
-    scanner = new Scanner(System.in);
-    flag = true;
-    menu = new Menu(this);
-}
+    public ConsoleUi() {
+        scanner = new Scanner(System.in);
+        flag = true;
+        menu = new Menu(this);
+    }
 
     @Override
     public void setPresenter(Presenter presenter) {
-        this.presenter=presenter;
+        this.presenter = presenter;
     }
 
     @Override
-    public void LoadTree() throws IOException, ClassNotFoundException {
+    public void loadTree() throws IOException, ClassNotFoundException {
         System.out.println("Загружено дерево из файла. ");
-        presenter.LoadTree();
+        presenter.loadTree();
+        presenter.printTree();
     }
 
     @Override
-    public void SaveTree() throws IOException {
+    public void saveTree() throws IOException {
         System.out.println("Дерево сохранено в файл. ");
-    presenter.SaveTree();
+        presenter.saveTree();
     }
 
     @Override
-    public void PrintTree() {
-            System.out.println("распечатать дерево:");
-            presenter.PrintTree();
+    public void printTree() {
+        System.out.println("распечатать дерево:");
+        presenter.printTree();
     }
 
     @Override
     public void sortByBirthYear() {
         System.out.println("Сортировка дерева по году рождения:");
-    presenter.sortByBirthYear();
+        presenter.sortByBirthYear();
     }
 
     @Override
-    public void SortBySecondName() {
-    presenter.SortBySecondName();
-
-
+    public void sortBySecondName() {
+        System.out.println("сортировка дерева по фамилиям: ");
+        presenter.sortBySecondName();
     }
 
     @Override
-    public void SortBySex() {
-    presenter.SortBySex();
-
+    public void sortBySex() {
+        System.out.println("сортировка дерева по полу: ");
+        presenter.sortBySex();
     }
 
     @Override
-    public void Finish() {
+    public void finish() {
         System.out.println("Работа завершена");
         flag = false;
     }
@@ -74,9 +74,10 @@ public ConsoleUi(){
             execute();
         }
     }
-        public void printMenu(){
-            System.out.println(menu.print());
-        }
+
+    public void printMenu() {
+        System.out.println(menu.print());
+    }
 
     @Override
     public void print(String text) {
@@ -85,16 +86,16 @@ public ConsoleUi(){
 
     private void execute() throws IOException, ClassNotFoundException {
         String inputLine = scanner.nextLine();
-        if (checkInput(inputLine)){
+        if (checkInput(inputLine)) {
             int choice = Integer.parseInt(inputLine);
-            if (checkChoice(choice)){
+            if (checkChoice(choice)) {
                 menu.execute(choice);
             }
         }
     }
 
-    private boolean checkInput(String text){
-        if (text.matches("[0-9]+")){
+    private boolean checkInput(String text) {
+        if (text.matches("[0-9]+")) {
             return true;
         } else {
             System.out.println("Неверный ввод команды");
@@ -102,8 +103,8 @@ public ConsoleUi(){
         }
     }
 
-    private boolean checkChoice(int choice){
-        if (choice <= menu.size()){
+    private boolean checkChoice(int choice) {
+        if (choice <= menu.size()) {
             return true;
         } else {
             System.out.print("Неверный ввод команды");
@@ -111,5 +112,18 @@ public ConsoleUi(){
         }
     }
 
+    public void addHuman() {
+        System.out.println("Введите имя:");
+        String firstName = scanner.nextLine();
+        System.out.println("Введите фамилию:");
+        String secondName = scanner.nextLine();
+        System.out.println("Введите отчество:");
+        String patronymic = scanner.nextLine();
+        System.out.println("Введите год рождения в формате 00.00.0000 или 00/00/0000:");
+        String birthDay = scanner.nextLine();
+        System.out.println("Введите пол варианты (male или female):");
+        String sex = scanner.nextLine();
+        presenter.addHuman(birthDay, firstName, secondName, patronymic, sex);
+    }
 
 }

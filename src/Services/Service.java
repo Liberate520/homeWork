@@ -1,52 +1,44 @@
 package Services;
 
 import Human.Human;
-
-import Presenter.Presenter;
 import SaveLoad.SaveTxt;
-
-import SaveLoad.Saveable;
-import Tree.Comparators.humanComparatorByAge;
-import Tree.Comparators.humanComparatorBySecondName;
-import Tree.Comparators.humanComparatorBySex;
-import ui.ConsoleUi;
-import ui.View;
-
+import Tree.Tree;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.List;
 
-public class Service<E extends Human> implements Saveable {
-    private List<E> relatives;
+public class Service<E extends Human> {
+    protected Tree<E> relatives;
+    protected SaveTxt data;
 
-
-
-
-    public Service(List<E> relatives) {
+    public Service(Tree<E> relatives) {
         this.relatives = relatives;
     }
-    public StringBuilder sortBySecondName(){
-        System.out.println("сортировка дерева по фамилиям: ");
-        relatives.sort(new humanComparatorBySecondName());
-        return forEachToTree(relatives);
 
+    public Service() {
+        relatives = new Tree<E>();
     }
-    public StringBuilder sortBySex(){
-        System.out.println("сортировка дерева по полу: ");
-        relatives.sort(new humanComparatorBySex());
+
+    public StringBuilder sortBySecondName() {
+        relatives.sortBySecondName();
         return forEachToTree(relatives);
     }
-    public StringBuilder sortByYear(){
-        relatives.sort(new humanComparatorByAge());
+
+    public StringBuilder sortBySex() {
+        relatives.sortBySex();
         return forEachToTree(relatives);
-        }
+    }
+
+    public StringBuilder sortByYear() {
+        relatives.sortByYear();
+        return forEachToTree(relatives);
+    }
+
     public StringBuilder printTree() {
         StringBuilder sb = new StringBuilder();
         sb.append("в дереве: ");
-        sb.append(relatives.size());
+        sb.append(relatives.getRelatives().size());
         sb.append(" объектов: \n");
-        int count=1;
+        int count = 1;
         for (E human : relatives) {
             sb.append(count + ". ");
             sb.append(human.getInfo());
@@ -54,27 +46,33 @@ public class Service<E extends Human> implements Saveable {
             count++;
         }
         return sb;
-
     }
 
-    public void saveTree() throws IOException {
+    public boolean saveTree() throws IOException {
         SaveTxt data = new SaveTxt();
-        data.save((Serializable) relatives);
+        if (data == null) {
+            return false;
+        }
+        return data.save(relatives);
     }
-    public void loadTree() throws IOException, ClassNotFoundException {
+
+    public boolean loadTree() throws IOException, ClassNotFoundException {
         SaveTxt data = new SaveTxt();
-        List treeRestored= (List) data.load();
-        Service<E> service1 = new Service<>(treeRestored);
-        View view = new ConsoleUi();
-        new Presenter(view, service1);
-        view.print("Загруженное дерево:");
-        view.print(printTree().toString());
-
-
+        if (data == null) {
+            return false;
+        }
+        relatives = (Tree) data.load();
+        return true;
     }
-    public StringBuilder forEachToTree(List<E> relatives){
+
+    public void setData(SaveTxt data) {
+        new SaveTxt();
+        this.data = data;
+    }
+
+    public StringBuilder forEachToTree(Tree<E> relatives) {
         StringBuilder sb = new StringBuilder();
-        int count=1;
+        int count = 1;
         for (E human : relatives) {
             sb.append(count + ". ");
             sb.append(human.getFullName());
@@ -82,17 +80,24 @@ public class Service<E extends Human> implements Saveable {
             count++;
         }
         return sb;
-
     }
 
-    @Override
-    public void save(Serializable obj) throws IOException {
-
+    public String addHuman(String birthDay, String firstName, String secondName, String patronymic, String sex) {
+        Human human = new Human(birthDay, firstName, secondName, patronymic, sex);
+        if (checkHuman((Tree<Human>) relatives, human)) {
+            relatives.add((E) human);
+            return "Человек успешно добавлен в дерево";
+        } else {
+            return "Такой человек уже есть в дереве";
+        }
     }
 
-    @Override
-    public Serializable load() throws IOException, ClassNotFoundException {
-        return null;
+    public boolean checkHuman(Tree<Human> relatives, Human human) {
+        for (Human humanSearch : relatives) {
+            if (human.equals(humanSearch)) {
+                return false;
+            }
+        }
+        return true;
     }
-
 }

@@ -4,8 +4,9 @@ import ui.View;
 
 public class PrintTree implements Command {
     public View view;
-    public PrintTree(View view){
-        this.view=view;
+
+    public PrintTree(View view) {
+        this.view = view;
     }
 
     @Override
@@ -15,7 +16,7 @@ public class PrintTree implements Command {
 
     @Override
     public void execute() {
-        view.PrintTree();
+        view.printTree();
     }
 }
 

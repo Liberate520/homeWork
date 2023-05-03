@@ -2,10 +2,11 @@ package ui.Commands;
 
 import ui.View;
 
-public class sortByBirthYear implements Command {
+public class SortByBirthYear implements Command {
     public View view;
-    public sortByBirthYear(View view){
-        this.view=view;
+
+    public SortByBirthYear(View view) {
+        this.view = view;
     }
 
     @Override

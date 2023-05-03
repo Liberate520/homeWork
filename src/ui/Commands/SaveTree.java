@@ -6,8 +6,9 @@ import java.io.IOException;
 
 public class SaveTree implements Command {
     public View view;
-    public SaveTree(View view){
-        this.view=view;
+
+    public SaveTree(View view) {
+        this.view = view;
     }
 
     @Override
@@ -17,6 +18,6 @@ public class SaveTree implements Command {
 
     @Override
     public void execute() throws IOException {
-        view.SaveTree();
+        view.saveTree();
     }
 }
