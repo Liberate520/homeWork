@@ -30,15 +30,18 @@ public class Console implements View {
         while (work) {
             printMenu(menu.commands);
             String strChoice = scan();
-            if (isNumber(strChoice)) {
-                int choice = Integer.parseInt(strChoice);
-                if (choice > 0 && choice < menu.commands.size())
-                    menu.execute(choice, menu.commands);
-                else
-                    System.out.println("ERR => Неверный номер команды");
-            }
+            if (isNumber(strChoice))
+                runChoice(strChoice);
 
         }
+    }
+
+    public void runChoice(String strChoice) {
+        int choice = Integer.parseInt(strChoice);
+        if (choice > 0 && choice < menu.commands.size())
+            menu.execute(choice, menu.commands);
+        else
+            System.out.println("ERR => Неверный номер команды");
     }
 
     private boolean isNumber(String text) {

@@ -30,11 +30,12 @@ public class ServiceFamilyTree {
         famTree.getCreatureList().sort(new HumanComparatorByFirstName());
     }
 
-    public void saveToFile() {
+    public boolean saveToFile() {
         if (famTree.getCreatureList().size() != 0) {
             hw.saveToFile(famTree);
+            return true;
         } else {
-            System.out.println("Дерево не содержит данных! Выгружать нечего!");
+            return false;
         }
 
     }

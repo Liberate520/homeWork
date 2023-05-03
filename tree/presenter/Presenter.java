@@ -16,10 +16,6 @@ public class Presenter<E> {
         view.setPresenter(this);
     }
 
-    public void saveToFile() {
-        famService.saveToFile();
-    }
-
     public String viewFamily() {
         return famService.viewFamily();
     }

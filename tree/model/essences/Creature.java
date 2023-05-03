@@ -9,20 +9,21 @@ import java.util.Set;
 import model.handlers.Saveable;
 
 public abstract class Creature<E> implements Saveable {
-    String firstName;
-    String lastName;
-    Gender gender;
-    LocalDate dateBirth;
-    LocalDate dateDeath;
-    Set<E> parents;
-    Set<E> children;
-    List<E> creatureList;
+    private String firstName;
+    private String lastName;
+    private Gender gender;
+    private LocalDate dateBirth;
+    private LocalDate dateDeath;
+    private Set<E> parents;
+    private Set<E> children;
+    private List<E> creatureList;
 
-    public Creature(String firstName, String lastName, Gender gender, LocalDate dateBirth) {
+    public Creature(String firstName, String lastName, Gender gender, LocalDate dateBirth, LocalDate dateDeath) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.dateBirth = dateBirth;
+        this.dateDeath = dateDeath;
         this.parents = new HashSet<>();
         this.children = new HashSet<>();
         this.creatureList = new ArrayList<>();

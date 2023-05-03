@@ -8,7 +8,7 @@ import model.essences.Creature;
 import model.handlers.Saveable;
 
 public class FamilyTree<E extends Creature<E>> implements Saveable, Iterable<E> {
-    String familyName;
+    private String familyName;
     private ArrayList<E> creatureList;
 
     public FamilyTree() {

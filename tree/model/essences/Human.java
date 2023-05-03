@@ -7,64 +7,64 @@ import model.handlers.Saveable;
 
 public class Human extends Creature<Human> implements Saveable {
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth) {
-        super(firstName, lastName, gender, dateBirth);
+    public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth, LocalDate dateDeath) {
+        super(firstName, lastName, gender, dateBirth, dateDeath);
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth, LocalDate dateDeath) {
-        super(firstName, lastName, gender, dateBirth);
-        this.dateDeath = dateDeath;
+    public Human(String firstName, String lastName, Gender gender, LocalDate dateBirth) {
+        this(firstName, lastName, gender, dateBirth, null);
+        // super.dateDeath = dateDeath;
     }
 
     public LocalDate getDateBirth() {
-        return dateBirth;
+        return getDateBirth();
     }
 
     public LocalDate getDateDeath() {
-        return dateDeath;
+        return getDateDeath();
     }
 
     public Set<Human> getParents() {
-        return parents;
+        return getParents();
     }
 
     public Set<Human> getChildren() {
-        return children;
+        return getChildren();
     }
 
     public void addParent(Human parent) {
-        this.parents.add(parent);
+        this.getParents().add(parent);
     }
 
     public void addChild(Human child) {
-        this.children.add(child);
+        this.getChildren().add(child);
         child.addParent(this);
     }
 
     public String getFirstName() {
-        return firstName;
+        return getFirstName();
     }
 
     public String getLastName() {
-        return lastName;
+        return getLastName();
     }
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("имя: ");
-        sb.append(firstName);
+        sb.append(getFirstName());
         sb.append(", фамилия: ");
-        sb.append(lastName);
+        sb.append(getLastName());
         sb.append(", дата рождения: ");
-        sb.append(dateBirth);
+        sb.append(getDateBirth());
         sb.append(", дата смерти: ");
         sb.append(getDateDeath());
         sb.append(", родители: ");
         if (getParents().size() > 0) {
             for (Creature human : getParents()) {
-                sb.append(human.firstName);
+                sb.append(human.getFirstName());
                 sb.append(" ");
-                sb.append(human.lastName);
+                sb.append(human.getLastName());
                 sb.append(", ");
             }
         } else
@@ -72,9 +72,9 @@ public class Human extends Creature<Human> implements Saveable {
         sb.append("дети: ");
         if (getChildren().size() > 0) {
             for (Creature human : getChildren()) {
-                sb.append(human.firstName);
+                sb.append(human.getFirstName());
                 sb.append(" ");
-                sb.append(human.lastName);
+                sb.append(human.getLastName());
                 sb.append(", ");
             }
         } else
