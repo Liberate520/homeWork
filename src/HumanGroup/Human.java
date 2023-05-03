@@ -1,6 +1,7 @@
 package Tree.homeWork.src.HumanGroup;
 
-import Tree.homeWork.src.TypeCommunication;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Human implements Comparable<Human> {
     private String name;
@@ -8,17 +9,27 @@ public class Human implements Comparable<Human> {
     private int dateOfDeath;
     private int dateOfBirth;
     private Gender gender;
-    private TypeCommunication typeCommunication;
-//    private Human mother;
-//    private Human father;
-    //private List<Human> children;
-    public Human(String name, int age, int DateOfBirth, int DateOfDeath, Gender gender, TypeCommunication typeCommunication){
+    private Human mother;
+    private Human father;
+    private List<Human> children;
+//    public Human(String name, Gender gender) {this(name, gender, null, null);}    Зачем 2 конструктора?
+    public Human(String name, int age, int DateOfBirth, int DateOfDeath, Gender gender,
+                 Human father, Human mother){
         this.name = name;
         this.age = age;
         this.dateOfBirth = DateOfBirth;
         this.dateOfDeath = DateOfDeath;
         this.gender = gender;
-        this.typeCommunication = typeCommunication;
+        this.father = father;
+        this.mother = mother;
+        children = new ArrayList<>();
+    }
+    public boolean addChild(Human child) {
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
     }
     public String getName() {
         return name;
@@ -26,6 +37,9 @@ public class Human implements Comparable<Human> {
     public int getAge() {
         return age;
     }
+    public Human getFather() {return father;}
+    public Human getMother() {return mother;}
+    public List<Human> getChildren() {return children;}
     public int age() {
         return age;
     }
@@ -38,43 +52,15 @@ public class Human implements Comparable<Human> {
     public void setName(String name) {
         this.name = name;
     }
+    public void setFather(Human father) {this.father = father;}
+    public void setMother(Human mother) {this.mother = mother;}
     public Gender getGender() {
         return gender;
     }
-    public TypeCommunication typeCommunication() {
-        return typeCommunication;
-    }
-    public Human(Human mother) {
-        this.mother = mother;
-    }
     @Override
     public String toString() {
-        return name + ". Age - " +  age + ", " + gender + " " + typeCommunication;
+        return name + ". Age - " +  age + ", " + gender + " ";
     }
-    int index;
-
-    @Override
-    public boolean hasNext() {
-        return index++ <1;
-    }
-    @Override
-    public String next() {
-        switch (index) {
-            case 1:
-                return String.format(name);
-//            case 2:
-//                return String.format(age);
-//            case 3:
-//                return String.format(Gender);
-//            case 4:
-//                return String.format(dateOfBirth);
-//            case 5:
-//                return String.format(dateOfDeath);
-//            case 6:
-//                return String.format(typeCommunication);
-        }
-    }
-
     @Override
     public int compareTo(Human o) {
         return name.compareTo(o.name);

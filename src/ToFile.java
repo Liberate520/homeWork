@@ -1,7 +1,6 @@
 package Tree.homeWork.src;
 
 import java.io.*;
-
 public class ToFile implements WriteTo {
     @Override
     public boolean write(Serializable serializable, String filePath) {

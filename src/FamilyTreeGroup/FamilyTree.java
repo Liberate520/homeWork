@@ -10,17 +10,33 @@ public class FamilyTree implements Iterable<Human> {
     public FamilyTree(){
         humanList = new ArrayList<>();
     }
-    public void addHuman(Human human){
-        humanList.add(human);
-    }
-    public Human getHumanByName(String name){
-        for (Human human: humanList){
-            if (human.getName().equals(name)){
-                return human;
-            }
+//    public void addHuman(Human human){
+//        humanList.add(human);
+//    }
+    public boolean addHuman(Human human){
+        if (human == null) {
+            return false;
         }
-        return null;
+        if (!humanList.contains(human)){
+            humanList.add(human);
+        if (human.getFather() != null){
+            human.getFather().addChild(human);
+        }
+        if (human.getMother() != null){
+            human.getMother().addChild(human);
+        }
+        return true;
+        }
+        return false;
     }
+//    public Human getHumanByName(String name){
+//        for (Human human: humanList){
+//            if (human.getName().equals(name)){
+//                return human;
+//            }
+//        }
+//        return null;
+//    }
     public List<Human> getHumanList() {
         return humanList;
     }

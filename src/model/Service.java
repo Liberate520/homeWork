@@ -1,6 +1,7 @@
 package Tree.homeWork.src.model;
 
 import Tree.homeWork.src.FamilyTreeGroup.FamilyTree;
+import Tree.homeWork.src.HumanGroup.Gender;
 import Tree.homeWork.src.HumanGroup.Human;
 
 import java.util.ArrayList;
@@ -34,8 +35,9 @@ public class Service {
         list = new ArrayList<>();
     }
 
-    public void addHuman(String name) {
-        familyTree.addHuman(new Human(name));
+    public void addHuman(String name, int age, int DateOfBirth, int DateOfDeath, Gender gender,
+                         Human father, Human mother) {
+        familyTree.addHuman(new Human(name, age, DateOfBirth, DateOfDeath, gender, father, mother));
     }
     public String getHumanList(){
         return familyTree.toString();
