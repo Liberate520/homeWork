@@ -2,7 +2,6 @@ package famalyTree;
 
 import human.Human;
 import human.HumanComporatorByAge;
-import human.HumanItem;
 import human.HymanComporatorByName;
 
 import java.io.Serializable;

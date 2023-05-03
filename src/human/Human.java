@@ -1,5 +1,7 @@
 package human;
 
+import famalyTree.HumanItem;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,9 @@ public class Human implements Comparable<Human>, Serializable, HumanItem {
         sb.append(", ");
         sb.append("год рождени: ");
         sb.append(getYearOfBirrth());
+        sb.append(", ");
+        sb.append("пол: ");
+        sb.append(getGender());
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");

@@ -1,3 +1,5 @@
+package model;
+
 import famalyTree.Family;
 
 public interface Writable {

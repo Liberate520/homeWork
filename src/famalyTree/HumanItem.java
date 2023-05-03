@@ -1,4 +1,6 @@
-package human;
+package famalyTree;
+
+import human.Human;
 
 public interface HumanItem {
 

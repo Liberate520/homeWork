@@ -1,5 +1,7 @@
 package human;
 
+import famalyTree.HumanItem;
+
 import java.util.Comparator;
 
 public class HumanComporatorByAge<T extends HumanItem> implements Comparator<T> {

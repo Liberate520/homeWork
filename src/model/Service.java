@@ -1,3 +1,5 @@
+package model;
+
 import famalyTree.Family;
 import human.Gender;
 import human.Human;
