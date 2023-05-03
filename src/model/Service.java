@@ -1,20 +1,24 @@
 package model;
 
-import family.FamilyTree;
+import model.family.FamilyTree;
 
-import person.Person;
-import person.comparators.PersonComparatorByIdASC;
-import person.comparators.PersonComparatorByIdDESC;
-import person.comparators.PersonComparatorByNameASC;
-import person.comparators.PersonComparatorByNameDESC;
+import model.person.Person;
+import model.person.comparators.PersonComparatorByIdASC;
+import model.person.comparators.PersonComparatorByIdDESC;
+import model.person.comparators.PersonComparatorByNameASC;
+import model.person.comparators.PersonComparatorByNameDESC;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Service<E extends Person> {
     private FamilyTree<E> family;
+    private final String pathToFile = System.getProperty("user.dir").concat(System.getProperty("file.separator"));
+    private final String extensionFiles = ".fml";
     private String fileName;
 
     public void setFamily(FamilyTree<E> family) {
@@ -50,18 +54,6 @@ public class Service<E extends Person> {
         }
     }
 
-//    public void changePerson(E person, String newName, String newSurname, Date newDateOfBirth,
-//                             Date newDateOfDeath, Integer newMotherID, Integer newFatherID, Integer newPartnerID) {
-//        family.delete(person.getID());
-//        addPerson(person, newName, newSurname, newDateOfBirth, newDateOfDeath, newMotherID, newFatherID, newPartnerID);
-//  /* добавить проверки на ID :
-//    - mother, father, partner - если != null, то должны существовать в HashMap
-//    - дополнительные проверки (углубленно).
-//
-//    ДОРАБОТАТЬ!
-//  */
-//    }
-
     public List<E> getSortedListByIdDESC() {
         List<E> result = family.getHumanList();
         result.sort(new PersonComparatorByIdDESC<>());
@@ -90,14 +82,26 @@ public class Service<E extends Person> {
         this.fileName = fileName;
     }
 
+    public ArrayList<String> listFiles() {
+        File folder = new File(pathToFile);
+        ArrayList<String> result = new ArrayList<>();
+
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
+            if (file.isFile() && file.getName().substring(file.getName().length() - 4).equals(extensionFiles)) {
+                result.add(file.getName());
+            }
+        }
+        return result;
+    }
+
     public void saveTree() throws IOException {
         SaveRestoreSerializable<E> objSave = new SaveRestoreSerializable<>();
-        objSave.save(fileName, family);
+        objSave.save(pathToFile.concat(fileName).concat(extensionFiles), family);
     }
 
     public FamilyTree<E> loadTree() throws IOException, ClassNotFoundException {
         SaveRestoreSerializable<E> objLoad = new SaveRestoreSerializable<>();
-        FamilyTree<E> result = objLoad.load(fileName);
+        FamilyTree<E> result = objLoad.load(pathToFile.concat(fileName));
         setFamily(result);
         return result;
     }
@@ -114,4 +118,19 @@ public class Service<E extends Person> {
         return family.showTree(id);
     }
 
+    public boolean checkID(Integer id) {
+        return family.checkID(id);
+    }
+
+    public Integer sizeTree() {
+        return family.sizeTree();
+    }
+
+    public String getPathToFile() {
+        return pathToFile;
+    }
+
+    public String getExtensionFiles() {
+        return extensionFiles;
+    }
 }

@@ -1,7 +1,7 @@
 package model;
 
-import family.FamilyTree;
-import person.Person;
+import model.family.FamilyTree;
+import model.person.Person;
 
 import java.io.IOException;
 

@@ -2,6 +2,7 @@ package ui;
 
 import presenter.Presenter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -34,9 +35,9 @@ public class Console implements View {
                         String idStr = this.iScan.nextLine();
                         if (checkInput(idStr)) {
                             int id = Integer.parseInt(idStr);
-                            System.out.println(this.presenter.deletePerson(id));
+                            print(this.presenter.deletePerson(id));
                         } else {
-                            System.out.println("Необходимо ввести ID");
+                            System.out.print("Необходимо ввести ID");
                         }
                     }
                     case 3 -> {
@@ -44,14 +45,38 @@ public class Console implements View {
                         String idStr = this.iScan.nextLine();
                         if (checkInput(idStr)) {
                             int id = Integer.parseInt(idStr);
-                            System.out.println(presenter.showTree(id));
+                            print(presenter.showTree(id));
                         } else {
-                            System.out.println("Необходимо ввести ID");
+                            System.out.print("Необходимо ввести ID");
                         }
                     }
                     case 4 -> {
                         System.out.println("Список: ");
-                        System.out.println(this.presenter.getListPerson());
+                        print(this.presenter.getListPerson());
+                    }
+                    case 5 -> {
+                        System.out.print("Имя файла для сохранения: ");
+                        String fNameForSave = this.iScan.nextLine();
+                        print(presenter.saveToFile(fNameForSave));
+                    }
+                    case 6 -> {
+                        System.out.println("Загрузить из файла: ");
+                        ArrayList<String> filesForLoad = presenter.loadFiles();
+                        print(filesForLoad.get(1));
+                        if (filesForLoad.get(0).equals("OK")) {
+                            System.out.print("Введите номер файла из которого загрузить дерево (0 - для отмены): ");
+                            String numberFile = this.iScan.nextLine();
+                            if (checkInput(numberFile)) {
+                                int id = Integer.parseInt(numberFile);
+                                if (id == 0) System.out.println("Отмена.");
+                                else print(presenter.loadFromFile(id));
+                            } else {
+                                System.out.print("Необходимо ввести номер файла из списка");
+                            }
+                        }
+                    }
+                    case 7 -> {
+                        print(presenter.generateSampleTree());
                     }
                 }
             }
@@ -66,6 +91,11 @@ public class Console implements View {
                 2. Удалить персону
                 3. Построить дерево
                 4. Список всех персон
+                                
+                5. Сохранить дерево в файл
+                6. Загрузить дерево из файла
+                                
+                7. Сгенерировать дерево
                 ================================
                 0. Выход
                 """);
@@ -96,19 +126,20 @@ public class Console implements View {
                 idMother, idFather, idPartner));
     }
 
-    private Integer parseStrToID (String str) {
+    private Integer parseStrToID(String str) {
         return checkInput(str) ? Integer.parseInt(str) : null;
     }
 
-    private Date parseStrToDate (String str) {
+    private Date parseStrToDate(String str) {
         boolean correct = true;
         String[] strArr = str.split("-");
-        for (String e:strArr) {
+        for (String e : strArr) {
             if (!checkInput(e)) {
                 correct = false;
                 break;
             }
         }
+        if (strArr.length != 3) correct = false;
         return correct ? new Date(Integer.parseInt(strArr[2]) - 1900,
                 Integer.parseInt(strArr[1]) - 1, Integer.parseInt(strArr[0])) : null;
     }
@@ -125,5 +156,10 @@ public class Console implements View {
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void print(String text) {
+        System.out.println(text);
     }
 }

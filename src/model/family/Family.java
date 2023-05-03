@@ -1,4 +1,4 @@
-package family;
+package model.family;
 
 import java.util.List;
 

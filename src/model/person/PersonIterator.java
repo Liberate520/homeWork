@@ -1,4 +1,4 @@
-package person;
+package model.person;
 
 import java.util.*;
 

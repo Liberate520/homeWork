@@ -1,7 +1,7 @@
-package family;
+package model.family;
 
-import person.Person;
-import person.PersonIterator;
+import model.person.Person;
+import model.person.PersonIterator;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -59,7 +59,7 @@ public class FamilyTree<E extends Person> implements Serializable, Iterable<E>, 
 
     public String showTree(Integer id) {
         E person = this.mapHumans.get(id);
-//        E person = this.mapHumans.getOrDefault(id, new <E>());
+//        E model.person = this.mapHumans.getOrDefault(id, new <E>());
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         StringBuilder result = new StringBuilder(" [").append(person.getID()).append("] ").
                 append(person.getHumanFullName());
@@ -110,4 +110,11 @@ public class FamilyTree<E extends Person> implements Serializable, Iterable<E>, 
         return new PersonIterator<>(mapHumans);
     }
 
+    public boolean checkID(Integer id) {
+        return mapHumans.containsKey(id);
+    }
+
+    public Integer sizeTree() {
+        return mapHumans.size();
+    }
 }
