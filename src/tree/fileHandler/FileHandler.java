@@ -6,6 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import tree.FamilyTree;
+import tree.human.Human;
+
 public class FileHandler implements Writable{
 
     @Override
@@ -22,8 +25,11 @@ public class FileHandler implements Writable{
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))){
             return objectInputStream.readObject();
         } catch (Exception e) {
-            System.out.println("Прочитать не удалось");
-            return null;
+            FamilyTree<Human> humanFamilyTree = new FamilyTree<>();
+            FileHandler writable = new FileHandler();
+            writable.save(humanFamilyTree, filePath);
+            System.out.println("Создано новое семейное дерево");
+            return humanFamilyTree;
         }
     }
 }
