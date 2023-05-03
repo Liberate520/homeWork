@@ -1,11 +1,13 @@
-import FamilyTree.FamilyTree;
-import human.Human;
+package model;
 
-import java.security.Provider;
+import FamilyTree.FamilyTree;
+import model.human.Human;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
+    public int id;
     private FamilyTree activeTree;
     private List<FamilyTree> familyTreeList;
     public Service(FamilyTree tree){
@@ -40,5 +42,19 @@ public class Service {
 
     public void sortByLastName(){
         activeTree.sortByLastName();
+    }
+
+    public void addHuman(String firstName, String lastName, String dob, int motherId, int fatherId) {
+        Human mother = getHumanById(motherId);
+        Human father = getHumanById(fatherId);
+        activeTree.addHuman(new Human(id++, firstName, lastName, dob, mother, father));
+    }
+
+    public void addHuman(String firstName, String lastName, String dob, Human mother, Human father) {
+        activeTree.addHuman(new Human(id++, firstName, lastName, dob, mother.getId(), father.getId()));
+    }
+
+    public Human getHumanById(int id){
+        return (Human) activeTree.getHumanById(id);
     }
 }

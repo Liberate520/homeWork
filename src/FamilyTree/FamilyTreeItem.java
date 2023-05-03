@@ -1,8 +1,6 @@
 package FamilyTree;
 
-import human.Human;
-
-import java.util.List;
+import model.human.Human;
 
 public interface FamilyTreeItem {
     String getFirstName();
@@ -16,4 +14,5 @@ public interface FamilyTreeItem {
     String getInfo();
     Human getFather();
     Human getMother();
+    int getId();
 }

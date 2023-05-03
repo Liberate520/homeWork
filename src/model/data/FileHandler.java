@@ -1,6 +1,4 @@
-package data;
-
-import data.Writable;
+package model.data;
 
 import java.io.*;
 

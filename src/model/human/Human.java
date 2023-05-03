@@ -1,13 +1,15 @@
-package human;
+package model.human;
 
 import FamilyTree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Human implements Serializable, FamilyTreeItem {
+    static int generatorId = 1;
+    private int id;
     private String firstName;
     private String lastName;
     private String dob;
@@ -15,17 +17,31 @@ public class Human implements Serializable, FamilyTreeItem {
     private Human father;
     private List<Human> children = new ArrayList<>();
 
-    public Human(String firstName, String lastName, String dob) {
-        this(firstName, lastName, dob, null, null);
-    }
-
-
     public Human(String firstName, String lastName, String dob, Human father, Human mother) {
+        this.id = generatorId++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
         this.father = father;
         this.mother = mother;
+    }
+
+    public Human(int id, String firstName, String lastName, String dob, int motherId, int fatherId) {
+        this.id = generatorId++;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.father = null;
+        this.mother = null;
+    }
+
+    public Human(int id, String firstName, String lastName, String dob, Human mother, Human father){
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.mother = mother;
+        this.father = father;
     }
 
     public void setMother(Human mother) {
@@ -40,6 +56,7 @@ public class Human implements Serializable, FamilyTreeItem {
         this.children = child;
     }
 
+    public int getId() { return id; }
     public Human getFather() { return father; }
 
     public Human getMother() { return mother; }
@@ -51,7 +68,7 @@ public class Human implements Serializable, FamilyTreeItem {
         if (obj == null) return false;
         if (!(obj instanceof Human)) return false;
         Human human = (Human) obj;
-        return human.getFull().equals(getFull());
+        return Objects.equals(human.getId(), getId());
     }
 
     public void addChild(Human human) {
@@ -60,7 +77,9 @@ public class Human implements Serializable, FamilyTreeItem {
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Name: ");
+        sb.append("id: ");
+        sb.append(id);
+        sb.append(", Name: ");
         sb.append(getFullName());
         sb.append(",");
         sb.append(getMotherInfo());
@@ -118,6 +137,8 @@ public class Human implements Serializable, FamilyTreeItem {
     public String getLastName() {
         return lastName;
     }
+
+    public String getDob() { return dob; }
 
     public String getFullName() {
         return firstName + " " + lastName;
