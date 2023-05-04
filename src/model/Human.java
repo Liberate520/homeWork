@@ -1,7 +1,8 @@
+package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private String fullName;
@@ -20,9 +21,9 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         this.kids = new ArrayList<>();
     }
 
-    public Human(String fullName, int age, Gender gender) {
-        this(fullName, age, gender, null, null);
-    }
+//    public Human(String fullName, int age, Gender gender) {
+//        this(fullName, age, gender, null, null);
+//    }
 
     public void setAge(int age) {
         if (age < 0) {
@@ -51,6 +52,11 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
 
     public void addKid(Human kid) {
         kids.add(kid);
+    }
+
+    @Override
+    public void addKid(Object human) {
+        kids.add((Human) human);
     }
 
     public void setMother(Human mother) {
@@ -111,7 +117,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
                     System.out.println(kid);
                 }
             }
-        } else {
+        } else if (papa != null) {
             for (Human kid: papa.kids) {
                 if (!kid.equals(this)) {
                     System.out.println(kid);

@@ -1,21 +1,23 @@
+package model;
+
 import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
     public List<E> people;
 
-    FamilyTree() {
+    public FamilyTree() {
         this.people = new ArrayList<>();
     }
 
     public void addHuman(E human) {
         people.add(human);
-//        if (human.getMother() != null) {
-//            human.getMother().addKid(human);
-//        }
-//        if (human.getFather() != null) {
-//            human.getFather().addKid(human);
-//        }
+        if (human.getMother() != null) {
+            human.getMother().addKid(human);
+        }
+        if (human.getFather() != null) {
+            human.getFather().addKid(human);
+        }
     }
 
     public String showAllRelatives() {

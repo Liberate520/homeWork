@@ -1,4 +1,5 @@
-import java.io.ObjectInputStream;
+import model.FamilyTree;
+
 import java.io.Serializable;
 
 public interface Writable {
