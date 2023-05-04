@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class Service {
 
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: activetree){
+        for (TreeGroupItem human: activetree){
             stringBuilder.append(human).append("\n");
         }
         return stringBuilder.toString();

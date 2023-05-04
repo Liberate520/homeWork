@@ -1,3 +1,5 @@
+package model;
+
 public interface TreeGroupItem {
     String getFirstName();
     int getAge();

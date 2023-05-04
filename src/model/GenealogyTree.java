@@ -1,8 +1,10 @@
+package model;
+
 import java.io.*;
 import java.util.*;
 
 
-public class GenealogyTree<E extends TreeGroupItem> implements Serializable, Iterable<Human>{
+public class GenealogyTree<E extends TreeGroupItem> implements Serializable, Iterable<TreeGroupItem>{
     private List<E> humans;
 
     public GenealogyTree() { this(new ArrayList<>()); }
@@ -63,10 +65,10 @@ public class GenealogyTree<E extends TreeGroupItem> implements Serializable, Ite
     }
 
     @Override
-    public Iterator<Human> iterator() { return (Iterator<Human>) new HumanIterator<E>(humans); }
+    public Iterator<TreeGroupItem> iterator() { return (Iterator<TreeGroupItem>) new HumanIterator<E>(humans); }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    На семинаре была такая запись. Но у меня так не работает. предлагает изменить так как выше:
+//    На семинаре была такая запись. Но у меня так не работает. IDE предлагает изменить так как выше:
 //    @Override
 //    public Iterator<E> iterator() { return new HumanIterator<E>(humans); }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -1,3 +1,8 @@
+import model.Service;
+import presenter.Presenter;
+import ui.Console;
+import ui.View;
+
 import java.io.IOException;
 
 public class Main {
@@ -19,18 +24,25 @@ public class Main {
 //        writable.save(tree,filePath);
 //        GenealogyTree tree = (GenealogyTree) writable.read(filePath);
 //        tree.printTree("", tree.getByName("Иван", "Петров"));
+        View view = new Console();
         Service service = new Service();
+        new Presenter(view, service);
+
+
         service.addHuman("Иван", "Петров", 45);
         service.addHuman("Мария", "Петрова", 35);
         service.addHuman("Татьяна", "Петрова",17);
         service.addHuman("Екатерина", "Петрова", 15);
         service.addHuman("Егор", "Петров", 13);
+        view.start();
 
-        System.out.println(service.getInfo());
-        service.sortByName();
-        System.out.println(service.getInfo());
-        service.sortByAge();
-        System.out.println(service.getInfo());
+
+
+//        System.out.println(service.getInfo());
+//        service.sortByName();
+//        System.out.println(service.getInfo());
+//        service.sortByAge();
+//        System.out.println(service.getInfo());
 
 
     }

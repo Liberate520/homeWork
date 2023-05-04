@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Comparator;
 
 public class HumanComparatorByAge<T extends TreeGroupItem> implements Comparator<T> {
