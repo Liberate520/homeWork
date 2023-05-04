@@ -1,10 +1,9 @@
-package familyTree.human;
+package familyTree.model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 
 public class Human implements Serializable, FamilyTreeNode {
@@ -12,6 +11,8 @@ public class Human implements Serializable, FamilyTreeNode {
     private int id;
     private String fullName;
     private Gender gender;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+    private DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private Human mother;
@@ -33,17 +34,18 @@ public class Human implements Serializable, FamilyTreeNode {
      * @param spouse имена супругов строка вида Фамилия Имя Отчество, через запятую
      * @param children имена детей строка вида Фамилия Имя Отчество, через запятую
      */
-    public Human(int id, String fullName, Gender gender,
+    public Human(int id, String fullName, String gender,
                  String dateOfBirth, String dateOfDeath,
                  String mother, String father,
                  String spouse, String children) {
         this.id = id;
         this.fullName = fullName;
-        this.gender = gender;
+        this.gender = setGender(gender);
 
-        this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
         if (!dateOfDeath.equals("")) {
-            this.dateOfDeath = LocalDate.parse(dateOfDeath, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+            this.dateOfDeath = LocalDate.parse(dateOfDeath, formatter);
         }
         else this.dateOfDeath = null;
 
@@ -83,9 +85,20 @@ public class Human implements Serializable, FamilyTreeNode {
      * @return пол человека
      */
     public String getGender() {
-        if (this.gender == Gender.male) return "Пол мужской";
-        if (this.gender == Gender.female) return "Пол женский";
-        return "Пол не определён, т.к. человек не найден.";
+        if (this.gender == Gender.male) return "мужской";
+        if (this.gender == Gender.female) return "женский";
+        else return "не определён";
+    }
+
+    /**
+     * Установка пола
+     * @param strGender строка "м" или "ж"
+     * @return объект типа Gender
+     */
+    public Gender setGender(String strGender){
+        if (strGender.equals("м")) return this.gender.male;
+        if (strGender.equals("ж")) return this.gender.female;
+        return this.gender.undefined;
     }
 
     /**
@@ -101,7 +114,7 @@ public class Human implements Serializable, FamilyTreeNode {
      * @param dateOfBirth строка вида дд.мм.гггг
      */
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
     }
 
     /**
@@ -117,7 +130,7 @@ public class Human implements Serializable, FamilyTreeNode {
      * @param dateOfDeath строка вида дд.мм.гггг
      */
     public void setDateOfDeath(String dateOfDeath) {
-        this.dateOfDeath = LocalDate.parse(dateOfDeath, DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        this.dateOfDeath = LocalDate.parse(dateOfDeath, formatter);
     }
 
     /**
@@ -199,7 +212,7 @@ public class Human implements Serializable, FamilyTreeNode {
     }
 
     /**
-     * Дети
+     * Получение имён детей
      * @return строка вида Фамилия Имя Отчество через запятую
      */
     public String getChildren() {
@@ -257,12 +270,12 @@ public class Human implements Serializable, FamilyTreeNode {
 
         if (this.getDateOfBirth() != null) {
             sb.append("дата рождения: ")
-                    .append(this.getDateOfBirth().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)))
+                    .append(this.getDateOfBirth().format(formatter2))
                     .append("\n");
         }
         if (this.getDateOfDeath() != null) {
             sb.append("дата смерти: ")
-                    .append(this.getDateOfDeath().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)))
+                    .append(this.getDateOfDeath().format(formatter2))
                     .append("\n");
         }
         sb.append("мать: ").append(this.getNameMother()).append("\n");

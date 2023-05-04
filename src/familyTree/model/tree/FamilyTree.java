@@ -1,8 +1,8 @@
-package familyTree.tree;
+package familyTree.model.tree;
 
-import familyTree.human.FamilyTreeNode;
-import familyTree.human.Human;
-import familyTree.human.HumanComparatorByAge;
+import familyTree.model.human.FamilyTreeNode;
+import familyTree.model.human.Human;
+import familyTree.model.human.HumanComparatorByAge;
 
 import java.io.Serializable;
 import java.util.*;
@@ -70,7 +70,7 @@ public class FamilyTree<T extends FamilyTreeNode> implements Serializable, Itera
      * @param fullName полное имя
      * @return объект типа Human
      */
-    public Human searchHumanByFullName(String fullName){
+    public Human getHumanByFullName(String fullName){
         return (Human) wholeGenus.getOrDefault(fullName, (T) new Human(""));
     }
 

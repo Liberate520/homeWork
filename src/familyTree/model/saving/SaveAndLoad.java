@@ -1,6 +1,6 @@
-package familyTree.saving;
+package familyTree.model.saving;
 
-import familyTree.ServiceForTree;
+import familyTree.model.ServiceHuman;
 
 import java.io.Serializable;
 
@@ -18,5 +18,5 @@ public interface SaveAndLoad {
      * @param pathStr путь к файлу
      * @return объект FamilyTree
      */
-    public ServiceForTree loadingWork(String pathStr);
+    ServiceHuman loadingWork(String pathStr);
 }

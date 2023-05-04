@@ -1,7 +1,9 @@
-package familyTree.human;
+package familyTree.model.human;
 
 import java.io.Serializable;
 
 public enum Gender implements Serializable {
-    male, female
+    male,
+    female,
+    undefined
 }

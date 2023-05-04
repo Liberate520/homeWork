@@ -1,12 +1,12 @@
-package familyTree.saving;
+package familyTree.model.saving;
 
-import familyTree.ServiceForTree;
+import familyTree.model.ServiceHuman;
 
 import java.io.*;
 
 public class Serial implements SaveAndLoad {
 
-    private static final long serialVersionUID = 6042495868907328366L;
+    private static final long SerialVersionUID = 6042495868907328366L;
     public void savingWork(Serializable serial, String pathStr) {
         try (ObjectOutputStream objOS = new ObjectOutputStream(new FileOutputStream(pathStr))){
             objOS.writeObject(serial);
@@ -16,9 +16,9 @@ public class Serial implements SaveAndLoad {
         }
     }
 
-    public ServiceForTree loadingWork(String pathStr) {
+    public ServiceHuman loadingWork(String pathStr) {
         try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(pathStr))){
-            return (ServiceForTree) objIS.readObject();
+            return (ServiceHuman) objIS.readObject();
         }
         catch (ClassNotFoundException | IOException ex) {
             System.out.println(ex.getMessage());
