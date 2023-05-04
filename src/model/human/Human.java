@@ -41,15 +41,15 @@ public class Human implements Serializable, NodeTree<Human>{
         else
             sb = sb.append(", дата смерти: ").append(deathDate);
         if (mother == null)
-            sb = sb.append(", мать не определена");
+            sb = sb.append(", мать: не определена");
         else
             sb = sb.append(", мать: ").append(mother.getName());
         if (father == null)
-            sb = sb.append(", отец не определен");
+            sb = sb.append(", отец: не определен");
         else
             sb = sb.append(", отец: ").append(father.getName());
         if (childrens == null)
-            sb = sb.append(", детей нет");
+            sb = sb.append(", дети: нет");
         else {
             sb = sb.append(", дети:");
             for (int i = 0; i < childrens.size(); i++) {

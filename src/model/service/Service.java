@@ -39,18 +39,18 @@ public class Service {
     }
 
     public String loadHumanListOS() {
-        group = fileOS.LoadFromFile("FamilyTree.dat");
+        group = fileOS.LoadFromFile("E:/GeekBrains/Java_OOP2/homeWork/src/FamilyTree.dat");
         return group.getHumanList().toString();
     }
 
     public String loadHumanListTXT() {
-        group = fileTXT.LoadFromFile("FamilyTree.txt");
+        group = fileTXT.LoadFromFile("E:/GeekBrains/Java_OOP2/homeWork/src/FamilyTree.txt");
         return group.getHumanList().toString();
     }
 
     public String saveHumanList() {
-        fileOS.SaveToFile(group, "FamilyTree.dat");
-        fileTXT.SaveToFile(group, "FamilyTree.txt");
+        fileOS.SaveToFile(group, "E:/GeekBrains/Java_OOP2/homeWork/src/FamilyTree.dat");
+        fileTXT.SaveToFile(group, "E:/GeekBrains/Java_OOP2/homeWork/src/FamilyTree.txt");
         return group.getHumanList().toString();
     }
     public void sortRecordsByName() {
