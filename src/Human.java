@@ -6,47 +6,35 @@ public class Human {
     private String lastName;
     private Human mother;
     private Human father;
+    private List<Human> children;
 
     public Human(String firstName, String lastName, Human mother, Human father) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mother = mother;
         this.father = father;
+        children = new ArrayList<>();
+
     }
 
     public Human getMother() {
-
         return mother;
     }
-
     public Human getFather() {
         return father;
     }
 
-
-    public List<Human> getChildren(){
-        List<Human> children = new ArrayList<>();
-        for (Human child: FamilyThree.getHumans()) {
-            if ((child.getMother() == this) || (child.getFather() == this)) {
-                children.add(child);
-            }
-        }
+    public List<Human> getChildren() {
         return children;
     }
-    public List<Human> getParents() {
-        List<Human> parents = new ArrayList<>();
-        if (mother != null) {
-            parents.add(mother);
-        }
-        if (father != null) {
-            parents.add(father);
-        }
-        return parents;
-    }
+
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return firstName + " " +  lastName;
     }
-
-
+    public void addChild(Human child) {
+        if (!children.contains(child)){
+            children.add(child);
+        }
+    }
 }
