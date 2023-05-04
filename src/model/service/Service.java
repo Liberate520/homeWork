@@ -1,7 +1,10 @@
 package service;
 
+import java.util.List;
+
 import fileWork.FilehandlerOS;
 import fileWork.FilehandlerTXT;
+import fileWork.Filename;
 import fileWork.Writeable;
 import group.Groupable;
 import group.comparators.PersonComparatorById;
@@ -14,44 +17,59 @@ public class Service {
     private Groupable<Person> group;
     private Writeable<Person> fileOS;
     private Writeable<Person> fileTXT;
+    private Filename filenameOS;
+    private Filename filenameTXT;
+  
 
     public Service(Groupable<Person> group) {
         this.group = group;
         fileOS = new FilehandlerOS<>();
         fileTXT = new FilehandlerTXT<>();
+        filenameOS = new Filename("FamilyTree.dat");
+        filenameTXT = new Filename("FamilyTree.txt");
+    }
+        
+    public String getFileNameOS() {
+        return filenameOS.getName();
     }
 
-    public void addRecord(CollecterInfo collecterInfo) {
+    public String getFileNameTXT() {
+        return filenameTXT.getName();
+    }
+
+    public boolean addRecord(CollecterInfo collecterInfo) {
+        boolean find=false;
         if (group.getPersonByName(collecterInfo.getName()) == null) {
             RestorePersonFromConsole rPerson = new RestorePersonFromConsole();
             Person person = rPerson.restorePersonFromConsole(group, collecterInfo);
+            find=true;
             group.addPerson(person);
-            System.out.printf("Запись '" + person.getName() + "' добавлена.");
+            return find;
         } else
-            System.out.println("Такой человек уже внесен.");
+            return find;
     }
 
     public String getPersonList() {
         return group.getPersonList().toString();
     }
 
-    public void findRecord(String name) {
-        group.findPerson(name);
+    public List<String> findRecord(String name) {
+        return group.findPerson(name);
     }
 
     public String loadPersonListOS() {
-        group = fileOS.LoadFromFile("FamilyTree.dat");
+        group = fileOS.LoadFromFile(filenameOS.getName());
         return group.getPersonList().toString();
     }
 
     public String loadPersonListTXT() {
-        group = fileTXT.LoadFromFile("FamilyTree.txt");
+        group = fileTXT.LoadFromFile(filenameTXT.getName());
         return group.getPersonList().toString();
     }
 
     public String savePersonList() {
-        fileOS.SaveToFile(group, "FamilyTree.dat");
-        fileTXT.SaveToFile(group, "FamilyTree.txt");
+        fileOS.SaveToFile(group, filenameOS.getName());
+        fileTXT.SaveToFile(group, filenameTXT.getName());
         return group.getPersonList().toString();
     }
 

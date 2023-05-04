@@ -1,5 +1,7 @@
 package presenter;
 
+import java.util.List;
+
 import service.Service;
 import view.CollecterInfo;
 import view.View;
@@ -14,12 +16,12 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void addRecord(CollecterInfo collecterInfo) {
-        service.addRecord(collecterInfo);
+    public boolean addRecord(CollecterInfo collecterInfo) {
+        return service.addRecord(collecterInfo);
     }
 
-    public void findRecord(String name) {
-        service.findRecord(name);
+    public List<String> findRecord(String name) {
+        return service.findRecord(name);
     }
 
     public void getRecords() {
@@ -48,5 +50,13 @@ public class Presenter {
 
     public void sortRecordsById() {
         service.sortRecordsById();
+    }
+
+    public String getFileNameOS() {
+        return service.getFileNameOS();
+    }
+
+    public String getFileNameTXT() {
+        return service.getFileNameTXT();
     }
 }

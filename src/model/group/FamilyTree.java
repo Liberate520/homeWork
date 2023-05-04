@@ -44,16 +44,14 @@ public class FamilyTree<T extends NodeTree<T>> implements Groupable<T>, Serializ
         return findPerson;
     }
 
-    public void findPerson(String findName) {
-        boolean find = false;
+    public List<String> findPerson(String findName) {
+        List<String> find= new ArrayList<>();
         for (int i = 0; i < famyliTree.size(); i++) {
             if (famyliTree.get(i).getName().contains(findName)) {
-                System.out.println(famyliTree.get(i));
-                find = true;
+                find.add(famyliTree.get(i).toString());
             }
         }
-        if (!find)
-            System.out.println("Такой человек не найден.");
+        return find;
     }
 
     public List<T> getPersonList() {

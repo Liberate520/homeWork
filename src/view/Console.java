@@ -4,7 +4,6 @@ import presenter.Presenter;
 import view.toChoose.ToChooseFormat;
 import view.toChoose.ToChooseInterface;
 import view.toChoose.ToChooseStart;
-
 import java.util.Scanner;
 
 public class Console implements View {
@@ -64,20 +63,28 @@ public class Console implements View {
     private void addRecord() {
         CollecterInfo collecterInfo = new CollecterInfo();
         collecterInfo = collecterInfo.getInfoFromUser();
-        presenter.addRecord(collecterInfo);
+        if (presenter.addRecord(collecterInfo))
+            System.out.printf("Запись добавлена.");
+        else
+            System.out.println("Такой человек уже внесен.");
     }
 
     private void findRecord() {
-        System.out.println("Введите имя и фамилию.");
+        System.out.println("Введите имя и/или фамилию.");
         String name = scanner.nextLine();
-        presenter.findRecord(name);
+        if (presenter.findRecord(name).size()==0)
+            System.out.println("Такой человек не найден");
+        else
+            System.out.println(presenter.findRecord(name));
     }
 
     private void loadAllRecordsOS() {
+        System.out.printf("\nFile " + presenter.getFileNameOS() + " has been loaded:\n");
         presenter.loadRecordsOS();
     }
 
     private void loadAllRecordsTXT() {
+        System.out.println("\nFile " + presenter.getFileNameTXT() + " has been loaded:\n");
         presenter.loadRecordsTXT();
     }
 
@@ -94,6 +101,8 @@ public class Console implements View {
     }
 
     private void saveAllRecords() {
+        System.out.printf("File " + presenter.getFileNameOS() + " has been written.\n");
+        System.out.printf("File " + presenter.getFileNameTXT() + " has been written.\n");
         presenter.saveRecords();
     }
 

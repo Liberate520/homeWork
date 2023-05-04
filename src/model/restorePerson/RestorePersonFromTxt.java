@@ -67,7 +67,6 @@ public class RestorePersonFromTxt<T extends NodeTree<T>> {
             rPerson.setFather(groupList.getPersonByName(map.get("отец")));
 
         groupList.addPerson(rPerson);
-
         return (Groupable<T>) groupList;
     }
 }

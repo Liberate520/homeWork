@@ -13,7 +13,6 @@ public class FilehandlerTXT<T extends NodeTree<T>> implements Writeable<T> {
     public void SaveToFile(Groupable<T> listPerson, String filename) {
         try (FileWriter writer = new FileWriter(filename, false)) {
             writer.write(listPerson.toString());
-            System.out.printf("File " + filename + " has been written.\n");
             writer.flush();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -31,7 +30,6 @@ public class FilehandlerTXT<T extends NodeTree<T>> implements Writeable<T> {
                 groupList = (rPerson.restorePersonFromTxt(line));
             }
             br.close();
-            System.out.println("\nFile " + filename + " has been loaded:");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
