@@ -123,9 +123,15 @@ public class ConsoleUI implements View{
         String firstName = this.inputString("Введите имя: ");
         String lastName = this.inputString("Введите фамилию: ");
         int age = this.inputInt("Введите возраст: ");
-        String gender = this.inputString("Введите пол (м/ж): ");
-        presenter.addPerson(firstName, lastName, age, gender);
-        this.print("Персона добавлена в дерево.");
+        boolean runCheck = true;
+        while (runCheck) {
+            String gender = this.inputString("Введите пол (м/ж): ");
+            if (this.checkTextForGender(gender)) {
+                presenter.addPerson(firstName, lastName, age, gender);
+                this.print("Персона добавлена в дерево.");
+                runCheck = false;
+            }
+        }
     }
 
     @Override
