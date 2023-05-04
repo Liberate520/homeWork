@@ -1,5 +1,8 @@
-import handler.FileHandler;
-import human.Gender;
+import model.TreeService;
+import model.handler.FileHandler;
+import presenter.Presenter;
+import ui.Console;
+import ui.View;
 
 
 
@@ -58,36 +61,36 @@ public class Main {
                 // // Tree tree = (Tree) fileHandler.load(path);
 
                 // tree.showFullTreeInfo();
-                final String PATH = "src/Handler/saveTree.txt";
-                TreeService service = new TreeService(new FileHandler());
+                // final String PATH = "src/Handler/saveTree.txt";
+                // TreeService service = new TreeService(new FileHandler());
 
-                service.addHuman("Адам", "Петров", null, null, null, Gender.Male, 60);
-                service.addHuman("Ева", "Гаврилова", null, null, null, Gender.Female, 45);
-                service.addHuman("Сергей", "Максимов", null, null, null, Gender.Male, 50);
-                service.addHuman("Вероника", "Ильина", null, null, null, Gender.Female, 49);
-                service.addHuman("Андрей", "Петров", "Адамович", "Гаврилова Ева", "Петров Адам",
-                                Gender.Male, 25);
-                service.addHuman("Вера", "Максимова", "Сергеевна", "Ильина Вероника", "Максимов Сергей",
-                                Gender.Female, 21);
-                service.addHuman("Лариса", "Иванова", "Сергеевна", "Ильина Вероника", "Максимов Сергей",
-                                Gender.Female, 38);
-                service.addHuman("Ольга", "Кот", null, "Иванова Лариса Сергеевна", null,
-                                Gender.Female, 18);
-                service.addHuman("Мария", "Кот", "Андреевна", "Иванова Лариса Сергеевна", "Петров Андрей Адамович",
-                                Gender.Female, 20);
-                service.showShortTreeInfo();
-                service.showGenderStatistics(Gender.Male);
-                service.showChildrensInfo("Ильина Вероника");
-                service.showInfo();
-                service.sortBySurName();
-                service.showInfo();
-                service.sortByAge();
-                service.showShortTreeInfo();
-                service.sortByChildrens();
-                service.showInfo();
-                service.showGrandmotherInfo("Кот Ольга");
-                service.showGrandmotherInfo("Иванова Лариса Вадимовна");
-                service.showGrandfatherInfo("Петров Андрей Адамович");
+                // service.addHuman("Адам", "Петров", null, null, null, "Male", 60);
+                // service.addHuman("Ева", "Гаврилова", null, null, null, "Female", 45);
+                // service.addHuman("Сергей", "Максимов", null, null, null, "Male", 50);
+                // service.addHuman("Вероника", "Ильина", null, null, null, "Female", 49);
+                // service.addHuman("Андрей", "Петров", "Адамович", "Гаврилова Ева", "Петров Адам",
+                // "Male", 25);
+                // service.addHuman("Вера", "Максимова", "Сергеевна", "Ильина Вероника", "Максимов Сергей",
+                // "Female", 21);
+                // service.addHuman("Лариса", "Иванова", "Сергеевна", "Ильина Вероника", "Максимов Сергей",
+                // "Female", 38);
+                // service.addHuman("Ольга", "Кот", null, "Иванова Лариса Сергеевна", null,
+                // "Female", 18);
+                // service.addHuman("Мария", "Кот", "Андреевна", "Иванова Лариса Сергеевна", "Петров Андрей Адамович",
+                // "Female", 20);
+                // service.showShortTreeInfo();
+                // service.showGenderStatistics("Male");
+                // service.showChildrensInfo("Ильина Вероника");
+                // service.showInfo();
+                // service.sortBySurName();
+                // service.showInfo();
+                // service.sortByAge();
+                // service.showShortTreeInfo();
+                // service.sortByChildrens();
+                // service.showInfo();
+                // service.showGrandmotherInfo("Кот Ольга");
+                // service.showGrandmotherInfo("Иванова Лариса Вадимовна");
+                // service.showGrandfatherInfo("Петров Андрей Адамович");
 
                 // // --------- сохранение данных
                 // service.save(PATH,service.getTree());
@@ -100,5 +103,10 @@ public class Main {
                 // service.removeHuman("Адам", "Петров","");
                 // service.showFullTreeInfo();
 
+                View view = new Console();
+                TreeService treeService = new TreeService();
+                new Presenter(view, treeService);
+                view.start();
+      
         }
 }

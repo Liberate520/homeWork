@@ -1,10 +1,12 @@
+package model;
 
 import java.io.Serializable;
-import handler.FileHandler;
-import handler.Saveble;
-import human.Gender;
-import human.Human;
-import tree.Tree;
+
+import model.handler.FileHandler;
+import model.handler.Saveble;
+import model.human.Gender;
+import model.human.Human;
+import model.tree.Tree;
 
 public class TreeService implements Saveble {
     private Tree<Human> tree;
@@ -30,8 +32,9 @@ public class TreeService implements Saveble {
 
     }
 
-    public void addHuman(String name, String surName, String fatherName, String mother, String father, Gender gender,
+    public void addHuman(String name, String surName, String fatherName, String mother, String father, String sex,
             int age) {
+        Gender gender = (sex.equals("Male")) ? Gender.Male : Gender.Female;
         tree.addHuman(
                 new Human(name, surName, fatherName, tree.getHumanByFullName(mother), tree.getHumanByFullName(father),
                         gender, age));
@@ -60,25 +63,29 @@ public class TreeService implements Saveble {
         tree.sortByChildrens();
     }
 
-    public void showShortTreeInfo() {
-        tree.showShortTreeInfo();
+    public String showShortTreeInfo() {
+        return tree.showShortTreeInfo();
     }
 
-    public void showGenderStatistics(Gender gender) {
-        tree.showGenderStatistics(gender);
+    public String showGenderStatistics(String sex) {
+        Gender gender = (sex.equals("Male"))? Gender.Male: Gender.Female;
+        return tree.showGenderStatistics(gender);
     }
 
     public void showChildrensInfo(String fullName) {
         tree.showChildrensInfo(tree.getHumanByFullName(fullName));
     }
 
-    public void showInfo() {
+    public String showInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ\n");
-        for (Human human : tree) {
-            sb.append(human.getFullInfo()).append("\n");
+        if (tree.size() > 0) {
+            for (Human human : tree) {
+                sb.append(human.getFullInfo()).append("\n");
+            }
+            return sb.toString();
         }
-        System.out.println(sb.toString());
+        return "Данные отсутствуют";
     }
 
     public void showGrandmotherInfo(String fullName) {
@@ -110,5 +117,9 @@ public class TreeService implements Saveble {
     public Tree<Human> getTree() {
         return tree;
     }
+
+    public int getTreeSize() {
+        return tree.size();
+    } 
 
 }

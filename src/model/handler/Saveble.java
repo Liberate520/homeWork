@@ -1,4 +1,4 @@
-package handler;
+package model.handler;
 
 import java.io.Serializable;
 

@@ -1,9 +1,10 @@
-package human;
+package model.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import tree.TreeItem;
+
+import model.tree.TreeItem;
 
 
 public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {

@@ -1,8 +1,8 @@
-package tree;
+package model.tree;
 
 import java.util.List;
 
-import human.Gender;
+import model.human.Gender;
 public interface TreeItem<T> {
     int getAge();
     T getMother();

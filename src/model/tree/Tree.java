@@ -1,4 +1,4 @@
-package tree;
+package model.tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import human.Gender;
-import human.comparators.HumanComparatorByAge;
-import human.comparators.HumanComparatorByChildrens;
+import model.human.Gender;
+import model.human.comparators.HumanComparatorByAge;
+import model.human.comparators.HumanComparatorByChildrens;
 
 public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
     private List<T> humans;
@@ -21,8 +21,12 @@ public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
         this.humans = new ArrayList<T>();
     }
 
+    public int size() {
+        return humans.size();
+    }
+
     public void sortBySurName() {
-        Collections.sort(humans,new HumanComparatorByAge<>());    
+        Collections.sort(humans, new HumanComparatorByAge<>());
     }
 
     public void sortByAge() {
@@ -97,31 +101,42 @@ public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
     }
 
     public void showFullTreeInfo() {
-        System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
+        System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ\n");
         for (T human : humans) {
             System.out.println(human.getFullInfo());
         }
 
     }
 
-    public void showShortTreeInfo() {
-        System.out.println("\nКРАТКАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ");
-        for (T human : humans) {
-            System.out.println(human.getShortInfo());
+    public String showShortTreeInfo() {
+        if (humans.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("\nКРАТКАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ\n");
+            for (T human : humans) {
+                stringBuilder.append(human.getShortInfo()).append("\n");
+            }
+            return stringBuilder.toString();
         }
-
+        return "Данные отсутствуют";
     }
 
-    public void showGenderStatistics(Gender gender) {
+    public String showGenderStatistics(Gender gender) {
         List<T> list = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nСПИСОК ВСЕХ ЛЮДЕЙ ");
+        stringBuilder.append((gender.equals(Gender.Male)) ? "МУЖСКОГО" : "ЖЕНСКОГО");
+        stringBuilder.append(" ПОЛА В ДЕРЕВЕ\n");
+
         for (T human : humans) {
             if (human.getGender().equals(gender)) {
-                list.add(human);
+                // list.add(human);
+                stringBuilder.append(human.getFullInfo());
             }
         }
-        System.out.printf("\nСПИСОК ВСЕХ ЛЮДЕЙ %s ПОЛА В ДЕРЕВЕ\n",
-                (gender.equals(Gender.Male)) ? "МУЖСКОГО" : "ЖЕНСКОГО");
-        System.out.println(list);
+        // System.out.printf("\nСПИСОК ВСЕХ ЛЮДЕЙ %s ПОЛА В ДЕРЕВЕ\n",
+        // (gender.equals(Gender.Male)) ? "МУЖСКОГО" : "ЖЕНСКОГО");
+        // System.out.println(list);
+        return stringBuilder.toString();
     }
 
     public void showGrandmotherInfo(String fullName) {
