@@ -1,9 +1,8 @@
-package humans.tree;
+package model.humans.tree;
 
-import humans.FamilyTreeItem;
-import humans.Human;
-import humans.comporator.HumanBirthdayComporator;
-import humans.comporator.HumanNameComporator;
+import model.humans.FamilyTreeItem;
+import model.humans.comporator.HumanBirthdayComporator;
+import model.humans.comporator.HumanNameComporator;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,19 +21,18 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
      * Добавить нового члена семьи в дерево
      */
     public void addHumanOfFamilyTree(E human) {
-
         familyTree.add(human);
     }
 
     /**
      * Показать список имен и фамилий в генеалогическое дереве
      */
-    public void listOfNames() {
-        int count = 0;
+    public String listOfNames() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (E human : familyTree) {
-            count++;
-            System.out.println(count + " " + human.getFullName());
+            stringBuilder.append(human.getId() + " " + human.getFullName()+"\n");
         }
+        return stringBuilder.toString();
     }
 
     @Override

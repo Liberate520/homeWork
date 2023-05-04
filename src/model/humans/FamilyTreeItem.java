@@ -1,4 +1,4 @@
-package humans;
+package model.humans;
 
 public interface FamilyTreeItem {
     String getFirstName();
@@ -6,4 +6,6 @@ public interface FamilyTreeItem {
     String getDateOfBirth();
 
     String getFullName();
+
+    int getId();
 }

@@ -1,4 +1,4 @@
-import humans.tree.FamilyTree;
+import model.humans.tree.FamilyTree;
 
 import java.io.Serializable;
 

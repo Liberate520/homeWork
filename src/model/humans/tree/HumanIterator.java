@@ -1,6 +1,4 @@
-package humans.tree;
-
-import humans.Human;
+package model.humans.tree;
 
 import java.util.Iterator;
 import java.util.List;

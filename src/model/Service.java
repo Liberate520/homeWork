@@ -1,13 +1,12 @@
-import humans.Gender;
-import humans.Human;
-import humans.comporator.HumanBirthdayComporator;
-import humans.comporator.HumanNameComporator;
-import humans.tree.FamilyTree;
+package model;
+
+import model.humans.Gender;
+import model.humans.Human;
+import model.humans.tree.FamilyTree;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Service {
     private int id;
@@ -18,11 +17,14 @@ public class Service {
         this.familyTree = familyTree;
         familyTreeList = new ArrayList<>();
         familyTreeList.add(familyTree);
-
     }
 
     public Service() {
         this(new FamilyTree());
+        addHuman("Дмитрий", "Бохан", Gender.Male, "12.11.1990");
+        addHuman("Ирина", "Бохан", Gender.Female, "31.10.1965");
+        addHuman("Анна", "Новикова", Gender.Female, "23.10.1988");
+        addHuman("Павлина", "Мищенко", Gender.Female, "13.03.1934");
     }
 
     public void addHuman(String firstName, String lastName, Gender gender, String dateOfBirth) {
@@ -42,17 +44,17 @@ public class Service {
         return stringBuilder.toString();
     }
 
-    public Human searchByName(String find) {
+    public String searchByName(String find) {
         for (Human human : familyTree) {
             if (human.getFirstName().equals(find)) {
-                return human;
+                return human.toString();
             }
         }
-        return null;
+        return "Не найдено\n";
     }
 
-    public void listOfNames() {
-        familyTree.listOfNames();
+    public String listOfNames() {
+        return familyTree.listOfNames();
     }
 
     public Human searchByID(int find) {
