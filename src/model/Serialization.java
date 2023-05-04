@@ -1,3 +1,5 @@
+package model;
+
 import model.FamilyTree;
 
 import java.io.*;
