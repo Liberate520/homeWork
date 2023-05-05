@@ -1,6 +1,7 @@
 package Presenter;
 
 import Model.FamilyTree;
+import Model.service.Filehandlers.FileHandler;
 import Model.service.Filehandlers.Writable;
 import Model.service.Service;
 import Model.units.Gender;
@@ -14,7 +15,8 @@ public class Presenter<T extends Unit> {
     private FamilyTree<T> tree;
     private Service<T> service;
 
-    public Presenter(Console console, FamilyTree<T> tree, Writable fh) {
+    public Presenter(Console console, FamilyTree<T> tree,
+                     FileHandler<T> fh) {
         this.console = console;
         this.tree = tree;
         this.service = new Service<T>(tree, fh);

@@ -1,10 +1,11 @@
 package UI;
 
+import Model.units.Unit;
 import Presenter.Presenter;
 
 import java.io.IOException;
 
-public interface View {
+public interface View{
     void setPresenter(Presenter presenter);
 
     void run() throws IOException;

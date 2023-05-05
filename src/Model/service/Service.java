@@ -1,7 +1,7 @@
 package Model.service;
 
 import Model.FamilyTree;
-import Model.service.Filehandlers.Writable;
+import Model.service.Filehandlers.FileHandler;
 import Model.units.Gender;
 import Model.units.Human;
 import Model.units.Unit;
@@ -9,10 +9,10 @@ import Model.units.Unit;
 import java.io.IOException;
 
 public class Service<T extends Unit>{
-    private Writable fh;
+    private FileHandler<T> fh;
     private FamilyTree<T> tree;
 
-    public Service(FamilyTree<T> tree, Writable fh) {
+    public Service(FamilyTree<T> tree, FileHandler<T> fh) {
         this.tree = tree;
         this.fh = fh;
     }
