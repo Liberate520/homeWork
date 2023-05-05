@@ -1,9 +1,7 @@
 package Model.units;
 
 public class Human extends Unit {
-
     private String secondName;
-
 
     public Human(String firstName, String secondName, Human mother,
                  Human father, Gender gender, int birthday, int birthmonth,

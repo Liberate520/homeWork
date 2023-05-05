@@ -1,6 +1,6 @@
 package Model;
 
-import Model.service.FileHandlers.Writable;
+import Model.service.Filehandlers.Writable;
 import Model.units.UnitComparatorByAge;
 import Model.units.UnitComparatorByName;
 import Model.units.Unit;
@@ -54,10 +54,6 @@ public class FamilyTree<T extends Unit> implements Serializable, Iterable<T> {
             str.append("\n");
         }
         return str.toString();
-    }
-
-    public void save(Writable writable, String path) throws IOException {
-        writable.save(this, path);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package Model.service.FileHandlers;
+package Model.service.Filehandlers;
 
 import java.io.IOException;
 

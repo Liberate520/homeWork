@@ -1,22 +1,23 @@
 package Presenter;
 
 import Model.FamilyTree;
-import Model.service.FileHandlers.FileHandler;
+import Model.service.Filehandlers.Writable;
+import Model.service.Service;
 import Model.units.Gender;
-import Model.units.Human;
 import Model.units.Unit;
-
-import UI.*;
+import UI.Console;
 
 import java.io.IOException;
 
-public class Presenter {
+public class Presenter<T extends Unit> {
     private Console console;
-    private FamilyTree<Unit> tree;
+    private FamilyTree<T> tree;
+    private Service<T> service;
 
-    public Presenter(Console console, FamilyTree tree) {
+    public Presenter(Console console, FamilyTree<T> tree, Writable fh) {
         this.console = console;
         this.tree = tree;
+        this.service = new Service<T>(tree, fh);
         console.setPresenter(this);
     }
 
@@ -25,7 +26,7 @@ public class Presenter {
     }
 
     public void save(String path) throws IOException {
-        tree.save(new FileHandler<Human>(), path);
+        service.save(path, tree);
     }
 
     public void getHumanList() {
@@ -38,8 +39,7 @@ public class Presenter {
     public void addHuman(String firstName, String secondName, String gender,
                          int birthday, int birthmonth, int birthyear) {
         Gender gender1 = Gender.valueOf(gender);
-        tree.add(
-                new Human(firstName, secondName, gender1, birthday, birthmonth,
-                          birthyear));
+        service.addHuman(firstName, secondName, gender1, birthday, birthmonth,
+                         birthyear);
     }
 }

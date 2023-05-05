@@ -5,7 +5,7 @@ import Presenter.Presenter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Console {
+public class Console implements View {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
@@ -17,6 +17,7 @@ public class Console {
         work = true;
     }
 
+    @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
@@ -31,7 +32,7 @@ public class Console {
         }
     }
 
-
+    @Override
     public void run() throws IOException {
         System.out.println("Привет! Выбери действие:");
         while (work) {
@@ -62,6 +63,7 @@ public class Console {
         System.out.println("Вы ввели неверное значение");
     }
 
+    @Override
     public void addHuman() {
         try {
             System.out.println("Введите имя: ");
@@ -85,20 +87,24 @@ public class Console {
 
     }
 
+    @Override
     public void getHumanList() {
         presenter.getHumanList();
     }
 
+    @Override
     public void getAllInfo() {
         presenter.getInfo();
     }
 
+    @Override
     public void update() throws IOException {
         System.out.println("Введите название файла: ");
         String path = scanner.next();
         presenter.save(path);
     }
 
+    @Override
     public void finish() {
         System.out.println("Пока!");
         work = false;

@@ -1,8 +1,9 @@
 import Model.FamilyTree;
+import Model.service.Filehandlers.FileHandler;
 import Model.units.Dog;
 import Model.units.Gender;
 import Model.units.Human;
-import Model.service.FileHandlers.FileHandler;
+import Model.units.Unit;
 import Presenter.Presenter;
 import UI.Console;
 
@@ -25,7 +26,6 @@ public class Main {
         tree_1.add(uriy);
         System.out.println(tree_1.getInfo());
         FileHandler<Human> fh = new FileHandler<>();
-        tree_1.save(fh, "OAAO.txt");
 
         for (Human human : tree_1) {
             System.out.println(human.getName());
@@ -64,13 +64,13 @@ public class Main {
             System.out.println(dog.getName());
         }
 
+
+        Console console = new Console();
+        new Presenter<>(console, tree_1, new FileHandler<>());
+        console.run();
         FamilyTree<Human> treeRestore = fh.read("OAAO.txt");
         System.out.println("Восстановлено");
         System.out.println(treeRestore.getInfo());
-
-        Console console = new Console();
-        new Presenter(console, tree_1);
-        console.run();
 
     }
 }
