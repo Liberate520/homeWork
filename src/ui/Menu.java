@@ -12,7 +12,7 @@ public class Menu {
         commands.add(new AddHuman(console));
         commands.add(new GetHumanTree(console));
         commands.add(new Finish(console));
-        commands.add(new searchHuman(console));
+        commands.add(new SearchHuman(console));
 
     }
     public void execute(int choice){

@@ -8,10 +8,7 @@ import java.util.Scanner;
 public class Console implements View {
 
     private Presenter presenter;//куда отправлять информацию
-    private Scanner scannerName;// для работы с пользователем
     private Scanner scanner;
-//    private Scanner scannerMenu;
-//    private Scanner scannerFamily;
     private boolean work;
     private Menu menu;
 
@@ -65,34 +62,30 @@ public class Console implements View {
         System.out.println(human);
     }
 
-    @Override
-    public void printTree() {
-        System.out.println(presenter.getTree().getInfo());
-    }
 
-//    @Override
+
+    @Override
     public void addHuman(){
-        System.out.println("Введите имя");
-        String name = scanner.nextLine();
-        System.out.println("Введите фамилию");
-        String family = scanner.nextLine();
+        String name = scanName();
+        String family = scanFamily();
         presenter.addHuman(family,name);
 
     }
     public void finish(){
         work = false;
     }
-
-    public void getHumanTree() {
-        System.out.println(presenter.getTree());
-
+    @Override
+    public void printTree() {
+        System.out.println(presenter.getTree().getInfo());
     }
+//    public void getHumanTree() {
+//        System.out.println(presenter.getTree());
+//
+//    }
 
     public void searchHuman() {
-        System.out.println("Введите имя");
-        String name = scanner.nextLine();
-        System.out.println("Введите фамилию");
-        String family = scanner.nextLine();
+        String name = scanName();
+        String family = scanFamily();
         System.out.println(presenter.searchHuman(family,name));
     }
 }

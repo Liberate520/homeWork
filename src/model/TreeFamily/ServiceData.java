@@ -6,7 +6,8 @@ import java.io.*;
 
 public class ServiceData implements Datatable {
     @Override
-    public void save(Object object) throws IOException {
+    public void save(Object object) {
+
 
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.out"));
         objectOutputStream.writeObject(object);

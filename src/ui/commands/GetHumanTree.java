@@ -10,6 +10,6 @@ public class GetHumanTree extends Command{
 
     @Override
     public void execute() {
-        console.getHumanTree();
+        console.printTree();
     }
 }

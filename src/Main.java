@@ -5,6 +5,7 @@ import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import presenter.Presenter;
 import ui.Console;
+import ui.Desktop;
 import ui.View;
 
 import java.io.*;
@@ -73,11 +74,13 @@ public class Main {
 //            System.out.println(human);
 //        }
 
-//        //View view = new Desktop();
-//        View view = new Console();
-//        //ServiceTree service = new ServiceTree(tree);
-//        new Presenter(view, tr);
-//        view.start();
+        View desktopview = new Desktop();
+        View consoleView1 = new Console();
+        //ServiceTree service = new ServiceTree(tree);
+        new Presenter(desktopview, tr);
+        new Presenter(consoleView1,tr);
+        consoleView1.start();
+        desktopview.start();
 
 
     }

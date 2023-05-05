@@ -1,17 +1,21 @@
 package model.TreeFamily;
 
+import model.Datatable;
 import model.Service;
-import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import model.human.HumanComporatorByName;
 
 import java.io.*;
 import java.util.Collections;
 
-public class ServiceTree implements Service {
+public class ServiceTree implements Service{
     private TreeFamily<Human> tree;
+    private Datatable datatable;
 
-// Конструктор для создания объекта класса ServiceTree для дерева
+    public void setDatatable(Datatable datatable) {
+        this.datatable = datatable;
+    }
+
     public ServiceTree(TreeFamily<Human> tree) {
 
         this.tree = tree;
@@ -22,7 +26,6 @@ public class ServiceTree implements Service {
     }
     @Override
     public void addHuman(String family, String name){
-       // tree.addHuman(new Human(family, name));
         tree.addHuman(family, name);
 
     }
@@ -36,48 +39,41 @@ public class ServiceTree implements Service {
         tree.getList().sort(new HumanComporatorByName());
 
     }
-
-//    @Override
-//    public void save(Object object) throws IOException {
-//
-////        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
-////        objectOutputStream.writeObject(object);
-////        objectOutputStream.writeObject(object);
-////        objectOutputStream.close();
-//
-//    }
-
-//    @Override
-//    public Object read() throws ClassNotFoundException, IOException {
-//        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.txt"));
-//        Object read = objectInputStream.readObject();
-//        objectInputStream.close();
-//        return read;
-//
-//    }
-
+    @Override
     public String searchHuman(String family, String name) {
 
         return tree.getByHuman(family,name);
 
     }
+    @Override
     public String searchMather(String family, String name) {
 
         return tree.getByMather(family,name);
 
     }
+    @Override
     public String searchParents(String family, String name){
         return tree.searchParents(family,name);
 
     }
+    @Override
     public String searchChild(String family, String name){
         return tree.searchChild(family,name);
 
     }
+    @Override
     public void clearTree(){
         tree.clearTree();
     }
-            ;
+
+    public void save(Datatable datatable) throws IOException {
+        datatable.save(tree);
+    }
+
+    public Object read (Datatable datatable) throws IOException {
+        return datatable.read();
+    }
+
 }
 
 

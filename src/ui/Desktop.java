@@ -198,7 +198,7 @@ public class Desktop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                presenter.addHuman(inputFamily.getText(), inputName.getText());
+                addHuman();
             }
         });
 
@@ -244,5 +244,10 @@ public class Desktop extends JFrame implements View {
     public void printHuman(Human human) {
         tree.setText(human.getInfo());
 
+    }
+
+    @Override
+    public void addHuman() {
+        presenter.addHuman(inputFamily.getText(), inputName.getText());
     }
 }
