@@ -7,6 +7,16 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class FileHandler implements Writable {
+
+    private static Writable file;
+
+    public static Writable getFile() {
+        if (file == null) {
+            file = new FileHandler();
+        }
+        return file;
+    }
+
     @Override
     public void outPut(Serializable serializable) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(

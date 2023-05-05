@@ -8,16 +8,14 @@ import java.util.List;
 public class Service implements Serializable{
     private int id;
     private FamilyTree<Human> tree;
-    private Writable file = new FileHandler();
-    private Human remover;
-    String res;
+    private FileHandler file = new FileHandler();
 
     public Service(FamilyTree<Human> familyTree) {
         this.tree = familyTree;
     }
 
     public String get() {
-        res = "";
+        String res = "";
         for (Human human : this.tree) {
             res = res + human.getName() + "\n";
         }
@@ -33,12 +31,12 @@ public class Service implements Serializable{
         return null;
     }
 
-    public void add(String name, Human father, Human mother) {
-        Human human = new Human(++id, name, father, mother);
-        father.addChildren(human);
-        mother.addChildren(human);
-        tree.add(human);
-    }
+    // public void add(String name, Human father, Human mother) {
+    //     Human human = new Human(++id, name, father, mother);
+    //     father.addChildren(human);
+    //     mother.addChildren(human);
+    //     tree.add(human);
+    // }
 
     public void add(String name) {
         Human human = new Human(++id, name);
@@ -46,7 +44,7 @@ public class Service implements Serializable{
     }
 
     public String getInfo() {
-        res = "";
+        String res = "";
         for (Human string : tree) {
             res = res + string.getInfo() + "\n";
         }
@@ -67,20 +65,21 @@ public class Service implements Serializable{
     }
 
     public void load() {
-            this.tree = (FamilyTree<Human>) file.inPut();
+            this.tree = (FamilyTree<Human>) file.getFile().inPut();
     }
 
     public void save() {
-            file.outPut(tree);
+            file.getFile().outPut(tree);
     }
 
     public void remove(String name) {
+        Human remover;
         for (Human human : tree) {
             if (human.getName().equals(name)) {
                 remover = human;
-                
+                tree.remove(remover);
             }
         }
-        tree.remove(remover);
+        
     }
 }
