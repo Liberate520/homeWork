@@ -25,12 +25,14 @@ public class Presenter {
         service.readFamilyTreeFromFile(fileName);
     }
 
-    public void writeFamilyTree(String family) {
+    public void writeFamilyTree(String family) throws Exception {
         service.writeFamilyTreeToFile(family);
     }
 
-    public void findHumanById(int id) {
-        System.out.println(service.getHumanById(id));
+    public String findHumanById(int id) {
+        return service
+                .getHumanById(id)
+                .toString();
     }
 
     public void findHuman(String firstName, String lastName, String birthday) {

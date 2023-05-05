@@ -14,27 +14,22 @@ public class Service implements Serializable {
     private int id;
     private FamilyTree<Human> activeFamilyTree;
     private List<FamilyTree> familyTreeList;
+    private ReadWriteData rw;
 
     public Service(FamilyTree familyTree){
         this.activeFamilyTree = familyTree;
         familyTreeList = new ArrayList<>();
+        rw = new ReadWriteObject();
         familyTreeList.add(familyTree);
     }
     public Service(){
         this(new FamilyTree());
     }
 
-    public void writeFamilyTreeToFile(String fileName){
-        ReadWriteData rw = new ReadWriteObject();
-        try {
-            rw.writeData(activeFamilyTree.getTree(),fileName);
-            System.out.println("Данные записаны в файл " + fileName);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void writeFamilyTreeToFile(String fileName) throws Exception{
+        rw.writeData(activeFamilyTree.getTree(),fileName);
     }
     public void readFamilyTreeFromFile(String fileName) throws Exception{
-        ReadWriteData rw = new ReadWriteObject();
         activeFamilyTree.setTree(rw.readData(fileName));
         this.id = activeFamilyTree.getLastId();
     }
@@ -73,8 +68,8 @@ public class Service implements Serializable {
         activeFamilyTree.sortByNumberOfChildren();
     }
 
-    public void IdentifyChildren(int parentId){
-        activeFamilyTree.IdentifyChildren(activeFamilyTree.getHumanById(parentId));
+    public void identifyChildren(int parentId){
+        activeFamilyTree.identifyChildren(activeFamilyTree.getHumanById(parentId));
     }
     public void setFather(Human father, Human child){
         child.setFather(father);

@@ -72,7 +72,12 @@ public class ConsoleMainMenu implements ViewMainMenu{
     public void writeFamilyTree() {
         if (!this.family.equals("")) {
             System.out.println("Сохранить дерево");
-            presenter.writeFamilyTree(this.family + ".txt");
+            try {
+                presenter.writeFamilyTree(this.family + ".txt");
+                System.out.println("Данные записаны в файл " + this.family + ".txt");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("Сначала надо создать дерево.\n");
         }

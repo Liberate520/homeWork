@@ -72,7 +72,7 @@ public class ConsoleWorkMenu implements ViewWorkMenu{
         String line = scanner.nextLine();
         if (checkTextForInt(line)){
             int id = Integer.parseInt(line);
-            presenter.findHumanById(id);
+            System.out.println(presenter.findHumanById(id));
         } else {
             inputError();
         }

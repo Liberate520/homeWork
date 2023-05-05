@@ -19,8 +19,8 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         people.add(human);
         Optional <FamilyTreeItem> mother = Optional.ofNullable(human.getMother());
         Optional <FamilyTreeItem> father = Optional.ofNullable(human.getFather());
-        mother.ifPresent(this::IdentifyChildren);
-        father.ifPresent(this::IdentifyChildren);
+        mother.ifPresent(this::identifyChildren);
+        father.ifPresent(this::identifyChildren);
     }
 
     public E getHuman(String firstName, String lastName, String birthday){
@@ -113,7 +113,7 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         people.sort(new HumanComparatorByNumberOfChildren());
     }
 
-    public void IdentifyChildren(FamilyTreeItem human){
+    public void identifyChildren(FamilyTreeItem human){
         for (FamilyTreeItem item: people
         ) {
             if (!human.equals(item) && human.equals(item.getMother()) ||
