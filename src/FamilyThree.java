@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class FamilyThree {
+public class FamilyThree implements Serializable {
     private List<Human> humans;
 
     public FamilyThree() {
@@ -33,6 +34,7 @@ public class FamilyThree {
         }
     }
 
-
-
+    public List<Human> getHumans() {
+        return humans;
+    }
 }
