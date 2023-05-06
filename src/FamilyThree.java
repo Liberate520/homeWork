@@ -29,12 +29,18 @@ public class FamilyThree implements Serializable {
     public void printTree(Human human) {
         System.out.println("Person: " + human.toString());
         List<Human> children = human.getChildren();
-        for (Human child : children) {
-            System.out.println("  " + "Дети:" + " " + child);
+        if (children.size() != 0) {
+            for (Human child : children) {
+                System.out.println("  " + "Дети:" + " " + child);
+            }
+        } else {
+            System.out.println(" Дети: Нет детей");
         }
+
     }
 
     public List<Human> getHumans() {
         return humans;
     }
 }
+
