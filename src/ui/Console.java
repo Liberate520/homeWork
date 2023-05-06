@@ -3,6 +3,7 @@ package ui;
 import model.human.Human;
 import presenter.Presenter;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Console implements View {
@@ -92,4 +93,9 @@ public class Console implements View {
         String family = scanFamily();
         System.out.println(presenter.searchChild(family,name));
     }
+    @Override
+    public void save() {
+        System.out.println(presenter.save());
+    }
+
 }

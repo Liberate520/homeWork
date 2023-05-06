@@ -45,7 +45,7 @@ public class ServiceTree implements Service{
         return tree.getByHuman(family,name);
 
     }
-    @Override
+
     public String searchMather(String family, String name) {
 
         return tree.getByMather(family,name);
@@ -66,8 +66,15 @@ public class ServiceTree implements Service{
         tree.clearTree();
     }
 
-    public void save(Datatable datatable) throws IOException {
-        datatable.save(tree);
+    public String save(Datatable datatable){
+        if (datatable.save(tree)){
+            return "Дерево сохранено в файл";
+        }
+        else {
+            return "Ошибка сохранения";
+        }
+
+
     }
 
     public Object read (Datatable datatable) throws IOException {

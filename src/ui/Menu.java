@@ -2,6 +2,7 @@ package ui;
 
 import ui.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,11 @@ public class Menu {
         commands.add(new GetHumanTree(console));
         commands.add(new SearchHuman(console));
         commands.add(new SearchChild(console));
+        commands.add(new Save(console));
         commands.add(new Finish(console));
 
     }
-    public void execute(int choice){
+    public void execute(int choice) {
         commands.get(choice - 1).execute();
 
     }

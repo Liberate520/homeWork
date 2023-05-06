@@ -59,7 +59,7 @@ public class Main {
 
 
         ServiceTree tr = new ServiceTree(tree);
-        Datatable data = new ServiceData();
+        ServiceData data = new ServiceData();
         data.save(tree);
         //Human sis = (Human) data.read();
         System.out.println((TreeFamily) data.read());
@@ -76,11 +76,11 @@ public class Main {
 //        }
 
         View desktopview = new Desktop();
-        View consoleView1 = new Console();
+        View consoleView = new Console();
         //ServiceTree service = new ServiceTree(tree);
-        new Presenter(desktopview, tr);
-        new Presenter(consoleView1,tr);
-        consoleView1.start();
+        new Presenter(desktopview, tr, data);
+        new Presenter(consoleView,tr, data);
+        consoleView.start();
         desktopview.start();
 
 

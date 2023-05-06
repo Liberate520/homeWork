@@ -20,13 +20,15 @@ public class ServiceData implements Datatable {
 //        return read;
 //    }
     @Override
-    public void save(Object object){
+    public boolean save(Object object){
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.out"));
             objectOutputStream.writeObject(object);
             objectOutputStream.close();
+            return true;
         } catch (IOException e){
             System.out.println(e.getMessage());
+            return false;
     }}
 
 

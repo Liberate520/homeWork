@@ -2,6 +2,8 @@ package ui.commands;
 
 import ui.Console;
 
+import java.io.IOException;
+
 public abstract class Command {
 
     final  Console console;
