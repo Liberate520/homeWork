@@ -1,4 +1,4 @@
-package service;
+package module.service;
 
 import module.essence.Essence;
 

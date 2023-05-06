@@ -2,7 +2,7 @@ import module.essence.Gender;
 import module.essence.Human;
 import module.families.Family;
 import presenter.Presenter;
-import service.Service;
+import module.service.HumanService;
 import ui.View;
 import ui.console.ConsoleUI;
 
@@ -61,22 +61,22 @@ public class Main {
 //        System.out.println("_______________________");
 //        Romanovs.getInfo();
 //        System.out.println("_______________________!!!");
-        Service<Human> service = new Service<>(Romanovs);
-//        service.save(Romanovs);
-//        Family<Human> restored = service.loadFamily();
+        HumanService humanService = new HumanService(Romanovs);
+//        module.service.save(Romanovs);
+//        Family<Human> restored = module.service.loadFamily();
 //        restored.getInfo();
 //        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
 //        for (Human human : Romanovs) System.out.println(human.getName());
 //        System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
-//        service.sortByName();
+//        module.service.sortByName();
 //        for (Human human : Romanovs) System.out.println(human.getName());
 //        System.out.println("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-//        service.sortByDate();
+//        module.service.sortByDate();
 //        for (Human human : Romanovs) System.out.println(human.getName());
 
 
         View view = new ConsoleUI();
-        Presenter presenter = new Presenter(view, service);
+        Presenter presenter = new Presenter(view, humanService);
         view.start();
 
 

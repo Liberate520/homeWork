@@ -3,7 +3,7 @@ package module.essence;
 import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable, Essence<Human> {
+public class Human extends Essence<Human> implements Serializable {
     public String name;
     private Calendar date_of_birth;
     private Integer day;

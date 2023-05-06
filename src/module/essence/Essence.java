@@ -3,39 +3,58 @@ package module.essence;
 import java.io.Serializable;
 import java.util.*;
 
-public interface Essence<T> extends Serializable {
-    public String getName();
+public abstract class Essence<T> implements Serializable {
+    public String name;
+    private Calendar date_of_birth;
+    private Integer day;
+    private Integer month;
+    private Integer year;
+    private Gender gender;
+    private  List<T> children;
+    private  List<T> parents;
+    private Human In_marriage_with;
+    public String getName() {
+        return name;
+    }
 
-    void setName(String name);
+    abstract void setName(String name);
 
-    public Date getDate_of_birth();
+    abstract public Date getDate_of_birth();
 
-    public void setDate_of_birth(Calendar date_of_birth);
+    abstract public void setDate_of_birth(Calendar date_of_birth);
 
-    public Integer getDay();
+    public Integer getDay() {
+        return day;
+    }
 
-    public void setDay(Integer day);
+    public abstract void setDay(Integer day);
 
-    public Integer getMonth();
+    public Integer getMonth() {
+        return month;
+    }
 
-    public void setMonth(Integer month);
+    public abstract void setMonth(Integer month);
 
-    public Integer getYear();
+    public Integer getYear() {
+        return year;
+    }
 
-    public void setYear(Integer year);
+    public abstract void setYear(Integer year);
 
-    public Gender getGender();
+    public Gender getGender() {
+        return gender;
+    }
 
-    public void setGender(Gender gender);
-    public List<T> getChildren();
+    public abstract void setGender(Gender gender);
+    public abstract List<T> getChildren();
 
-    public void setChildren(T children);
+    public abstract void setChildren(T children);
 
-    public List<T> getParents();
+    public abstract List<T> getParents();
 
-    public void setParents(T parent);
+    public abstract void setParents(T parent);
 
-    public void setParents(T parent1, T parent2);
+    public abstract void setParents(T parent1, T parent2);
 
-    public T getIn_marriage_with();
+    public abstract T getIn_marriage_with();
 }
