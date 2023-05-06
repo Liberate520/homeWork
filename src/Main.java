@@ -1,4 +1,5 @@
 //import model.FileHandler;
+import model.Datatable;
 import model.TreeFamily.ServiceData;
 import model.TreeFamily.ServiceTree;
 import model.TreeFamily.TreeFamily;
@@ -17,20 +18,20 @@ public class Main {
         Human pa = new Human("Bazarov", "Alex", Human.Gender.Mail, LocalDate.parse("1949-01-07"));
         Human ma = new Human("Budina", "Anna", Human.Gender.Fimale,LocalDate.parse("1948-09-07"));
         Human sister1 = new Human(pa, ma, "Bazarova","Helga", Human.Gender.Fimale, LocalDate.parse("1978-03-10"));
-//        Human sister2 = new Human(pa, ma,"Bazarova","Tasy", Human.Gender.Fimale,LocalDate.parse("1980-06-07"));
+        Human sister2 = new Human(pa, ma,"Bazarova","Tasy", Human.Gender.Fimale,LocalDate.parse("1980-06-07"));
 //        System.out.println (pa.getMother());
 //        System.out.println (sister1.getMother());
 //        System.out.println (sister1.getFather());
         TreeFamily<Human> tree = new TreeFamily<>();
 
-//        tree.add(pa);
-//        tree.add(ma);
-//        tree.add(sister1);
-//        tree.add(sister2);
-//        pa.addChildrenList(sister1);
-//        pa.addChildrenList(sister2);
-//        ma.addChildrenList(sister1);
-//        ma.addChildrenList(sister2);
+        tree.add(pa);
+        tree.add(ma);
+        tree.add(sister1);
+        tree.add(sister2);
+        pa.addChildrenList(sister1);
+        pa.addChildrenList(sister2);
+        ma.addChildrenList(sister1);
+        ma.addChildrenList(sister2);
 //
 //        System.out.println("Дети "+pa.getName()+" "+ pa.getFamily() +":\n  "+pa.getСhildrenList());
 //        System.out.println("Дети "+ma.getName()+" "+ ma.getFamily() +":\n  "+ma.getСhildrenList());
@@ -58,10 +59,10 @@ public class Main {
 
 
         ServiceTree tr = new ServiceTree(tree);
-        ServiceData data = new ServiceData();
-        data.save(sister1);
-        Human sis = (Human) data.read();
-        System.out.println(sis.getInfo());
+        Datatable data = new ServiceData();
+        data.save(tree);
+        //Human sis = (Human) data.read();
+        System.out.println((TreeFamily) data.read());
 //        tr.sortByFamily();
 //        for (Human human: tree){
 //            System.out.println(human);

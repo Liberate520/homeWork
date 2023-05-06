@@ -2,8 +2,6 @@ package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

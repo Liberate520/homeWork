@@ -44,6 +44,7 @@ public class Console implements View {
     }
 
     private String scan() {
+
         return scanner.nextLine();
     }
 
@@ -59,33 +60,36 @@ public class Console implements View {
 
     @Override
     public void printHuman(Human human) {
+
         System.out.println(human);
     }
-
-
 
     @Override
     public void addHuman(){
         String name = scanName();
         String family = scanFamily();
         presenter.addHuman(family,name);
-
     }
     public void finish(){
+
         work = false;
     }
     @Override
     public void printTree() {
         System.out.println(presenter.getTree().getInfo());
     }
-//    public void getHumanTree() {
-//        System.out.println(presenter.getTree());
-//
-//    }
+
 
     public void searchHuman() {
         String name = scanName();
         String family = scanFamily();
         System.out.println(presenter.searchHuman(family,name));
+    }
+
+    @Override
+    public void searchChild() {
+        String name = scanName();
+        String family = scanFamily();
+        System.out.println(presenter.searchChild(family,name));
     }
 }

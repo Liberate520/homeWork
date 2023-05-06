@@ -15,23 +15,12 @@ public class Presenter {
         view.setPresenter(this);
         //сообщаем view  с каким презентером она будет работать
     }
-//    public void addName(String name) {
-//        String answerName = service.getName(name);
-//        view.print(answerName);
-//
-//    }
-//
-//    public void addFamily(String family) {
-//        String answerFamily = service1.getName(family);
-//        view.print(answerFamily);
-//    }
 
     public void addHuman(String family, String name) {
-
         service.addHuman(family, name);
-       // view.print();
     }
     public void clearTree(){
+
         service.clearTree();
     }
 
@@ -39,25 +28,20 @@ public class Presenter {
         return service.getTree();
     }
 
-
-
     public String searchHuman(String family, String name) {
-
         return service.searchHuman(family, name);
     }
 
-    public String searchMather(String family, String name) {
-        return service.searchMather(family, name);
-    }
     public String searchParents(String family, String name) {
+
         return service.searchParents(family, name);
     }
     public String searchChild(String family, String name) {
+
         return service.searchChild(family, name);
     }
-//    public Hu getTree(){
-//        return service.getTree();
+//    public String searchMather(String family, String name) {
+//        return service.searchMather(family, name);
 //    }
 
-    //передаем в модель данные от презентера
 }

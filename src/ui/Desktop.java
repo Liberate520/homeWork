@@ -94,16 +94,6 @@ public class Desktop extends JFrame implements View {
         buttonAddChild = new JButton("Добавить ребенка");
 
 
-
-
-
-
-
-//        // inputBirthdate = new JTextArea();
-//        buttonAddHuman = new JButton("Добавить");
-
-
-
         //city = new JTextField();
         setLayout(null);
         add(lTitle);
@@ -222,18 +212,14 @@ public class Desktop extends JFrame implements View {
             //ActionListener()-интерфейс
             @Override
             public void actionPerformed(ActionEvent e) {
-                tree.setText(presenter.searchChild(inputFamily.getText(), inputName.getText()));
+                //tree.setText(presenter.searchChild(inputFamily.getText(), inputName.getText()));
+                searchChild();
             }
         });
 
         setVisible(true);//делает окно видимым
     }
 
-//    @Override
-//    public void print(Human human) {
-//        //пишет text  в поле для ответов
-//        inputFamily.setText(human.toString());
-//    }
 
     @Override
     public void printTree() {
@@ -248,6 +234,13 @@ public class Desktop extends JFrame implements View {
 
     @Override
     public void addHuman() {
+
         presenter.addHuman(inputFamily.getText(), inputName.getText());
+    }
+
+    @Override
+    public void searchChild() {
+
+        tree.setText(presenter.searchChild(inputFamily.getText(), inputName.getText()));
     }
 }

@@ -9,4 +9,5 @@ public interface View {
     void printHuman(Human human);//
     void printTree();
     void addHuman();
+    void searchChild();
 }

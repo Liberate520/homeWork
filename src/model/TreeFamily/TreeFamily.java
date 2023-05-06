@@ -160,10 +160,4 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
     public void clearTree(){
         list.clear();
     }
-
-
-
-
-
-
 }
