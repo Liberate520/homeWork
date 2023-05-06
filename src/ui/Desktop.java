@@ -247,5 +247,9 @@ public class Desktop extends JFrame implements View {
     public void save() {
 
     }
+    @Override
+    public void printFile() {
+
+    }
 
 }

@@ -13,4 +13,5 @@ public interface View {
     void addHuman();
     void searchChild();
     void save();
+    void printFile();
 }

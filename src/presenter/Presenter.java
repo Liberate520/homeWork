@@ -58,5 +58,17 @@ public class Presenter {
         return  service.save(data);
 
 }
+    public String printFile(){
+        try {
+            TreeFamily read = (TreeFamily) service.read(data);
+            return read.toString();
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+            return "Ошибка печати данных из файла";
+
+        }
+
+    }
 
 }

@@ -16,6 +16,7 @@ public class Menu {
         commands.add(new SearchHuman(console));
         commands.add(new SearchChild(console));
         commands.add(new Save(console));
+        commands.add(new PrintFile(console));
         commands.add(new Finish(console));
 
     }

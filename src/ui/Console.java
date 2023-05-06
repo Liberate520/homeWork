@@ -98,4 +98,9 @@ public class Console implements View {
         System.out.println(presenter.save());
     }
 
+    @Override
+    public void printFile() {
+        System.out.println(presenter.printFile());
+    }
+
 }
