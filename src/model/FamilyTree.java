@@ -60,6 +60,7 @@ public class FamilyTree<H extends Human> implements Serializable, FamilyTreeIter
          return null;
     }
 
+    
     void getHumanByName() {
         System.out.println("Введите имя:");
         try {
