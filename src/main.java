@@ -2,6 +2,7 @@
 import java.io.IOException;
 
 
+
 public class main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -21,15 +22,15 @@ public class main {
         tree.addHuman(person5);
         tree.addHuman(person6);
 
-        Writable writeable = new FileHandler();
+        Writable writable = new Filehandler();
         String filePath = "src/person.txt";
-        writeable.write(tree, filePath);
-        FamilyThree familyThree = (FamilyThree) writeable.read(filePath);
+        writable.write(tree, filePath);
+        FamilyThree familyThree = (FamilyThree) writable.read(filePath);
+
         for (Human human: familyThree.getHumans()
              ) {
             tree.printTree(human);
         }
-
 
     }
 }
