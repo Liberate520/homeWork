@@ -7,14 +7,10 @@ import java.util.List;
 public class Service {
     private FamilyTree<Human> familyTree;
     private FileHandler fileHandler;
-    private NewHuman NewHuman;
-    private FindHuman findHuman;
 
     public Service(FamilyTree<Human> familyTree, FileHandler fileHandler) {
         this.familyTree = familyTree;
         this.fileHandler = fileHandler;
-        this.NewHuman = new NewHuman(familyTree);
-        this.findHuman = new FindHuman(familyTree);
     }
 
     private void setFamilyTree(FamilyTree<Human> familyTree) {
@@ -22,15 +18,23 @@ public class Service {
     }
 
     public Human CreateHuman() {
-        return NewHuman.CreateHuman();
+        return familyTree.CreateHuman();
     }
 
     public void getHumanByName(){
-        findHuman.getHumanByName();
+        familyTree.getHumanByName();
     }
 
-   public void addHuman(Human human) {
+    public void addHuman(Human human) {
         familyTree.addHuman(human);
+    }
+
+    public void sortByName() {
+        familyTree.sortByName();
+    }
+
+    public void sortByBirth() {
+        familyTree.sortByBirth();
     }
 
     public void writeInFile() throws IOException {
@@ -39,10 +43,6 @@ public class Service {
 
     public void readFromFile() throws IOException, ClassNotFoundException {
         setFamilyTree(fileHandler.loadFile("family_tree.txt"));
-    }
-
-    public void sortByParameter(int num){
-        familyTree.sortByParameter(num);
     }
 
     public void printChildren() {

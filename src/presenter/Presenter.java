@@ -44,12 +44,15 @@ public class Presenter {
         service.readFromFile();
     }
 
-    public void sortByParameter(int num) {
-        service.sortByParameter(num);
+    public void sortByName() {
+        service.sortByName();
+    }
+
+    public void sortByBirth() {
+        service.sortByBirth();
     }
 
     public void addHuman(Human human) {
         service.addHuman(human);
-        System.out.printf("Вы успешно добавили в древо нового родственника:\n  %s\n", human.toString());
     }
 }

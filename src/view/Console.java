@@ -58,15 +58,31 @@ public class Console implements View {
                             "для сортировки по году рождения введите цифру 2: \n");
                     try {
                         int sortNumber = scanner.nextInt();
-                        presenter.sortByParameter(sortNumber);
+                        switch (sortNumber) {
+                            case 1:
+                            presenter.sortByName();
+                                System.out.println("Сортировка по имени");
+                                presenter.print();
+                                break;
+                            case 2:
+                            presenter.sortByBirth();
+                                System.out.println("Сортировка по году рождения");
+                                presenter.print();
+                                break;
+                            default:
+                                System.out.println("Вы ввели некорректный номер сортировки!");
+                        }
                         printMenu();
                     } catch (Exception e) {
                         System.out.println("Ошибка ввода! " + e);
                     }
                     break;
                 case 5:
+                    System.out.println("Для добавления нового родственника в список введите последовательно через запятую: \n" +
+                    "имя, пол (M или F), имя отца, имя матери, год рождения");
                     Human human = presenter.CreateHuman();
                     presenter.addHuman(human);
+                    System.out.printf("Вы успешно добавили в древо нового родственника:\n  %s\n", human.toString());
                     printMenu();
                     break;
                 case 6:
