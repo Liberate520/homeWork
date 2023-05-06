@@ -237,6 +237,10 @@ public class Desktop extends JFrame implements View {
 
         presenter.addHuman(inputFamily.getText(), inputName.getText());
     }
+    @Override
+    public void addMother(){
+
+    }
 
     @Override
     public void searchChild() {

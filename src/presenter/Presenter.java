@@ -31,6 +31,10 @@ public class Presenter {
     public void addHuman(String family, String name) {
         service.addHuman(family, name);
     }
+    public void addMother(int id, String family, String name) {
+        service.addMother(id, family, name);
+
+    }
     public void clearTree(){
 
         service.clearTree();
@@ -52,6 +56,7 @@ public class Presenter {
 
         return service.searchChild(family, name);
     }
+
 
     public String save(){
 

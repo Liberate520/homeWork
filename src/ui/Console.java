@@ -10,12 +10,14 @@ public class Console implements View {
 
     private Presenter presenter;//куда отправлять информацию
     private Scanner scanner;
+//    private Scanner scannerId;
     private boolean work;
     private Menu menu;
 
 
     public Console() {
         scanner = new Scanner(System.in);
+//        scannerId = new Scanner(System.in);
         work = true;
         menu = new Menu(this);
     }
@@ -48,6 +50,10 @@ public class Console implements View {
 
         return scanner.nextLine();
     }
+    private int scanId() {
+        System.out.println("Введите id: ");
+        return scanner.nextInt();
+    }
 
     private String scanName() {
         System.out.println("Введите имя: ");
@@ -67,10 +73,21 @@ public class Console implements View {
 
     @Override
     public void addHuman(){
+
         String name = scanName();
         String family = scanFamily();
         presenter.addHuman(family,name);
     }
+    @Override
+    public void addMother(){
+            System.out.println("Введите id человека, которому хотите добавить мать!");
+            int id = scanId();
+            scanner.nextLine();
+            String name = scanName();
+            String family = scanFamily();
+            presenter.addMother(id, family, name);
+    }
+
     public void finish(){
 
         work = false;

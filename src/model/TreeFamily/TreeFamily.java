@@ -10,6 +10,7 @@ import java.util.List;
 
 public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//extends Tree <E>
     public List<E> list;
+    private int id;
 
 
     //Конструктор для создания дерева
@@ -27,15 +28,24 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     //Метод добавления человека в дерево по имени и фамилии
     public void addHuman(String family, String name) {
-        if ((family !="") && (name != "")){
-            E human = (E) new Human(family, name);
+        if ((family != "") && (name != "")) {
+            E human = (E) new Human(id++, family, name);
             if (!list.contains(human)) {
                 list.add(human);
             }
 
         }
+    }
 
-
+    public boolean addMother (int idhum, String family, String name) {
+        Human human = getByHuman(idhum);//
+        E mother = (E) new Human(id++, family, name);
+        if ((human != null) && human.setMother(mother)){
+            list.add(mother);
+            mother.addChildrenList(human);
+            return true;
+        }
+        return false;
     }
 
 
@@ -65,7 +75,6 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         StringBuilder sb = new StringBuilder();
         E human = (E) new Human(family, name);
         sb.append("Результаты поиска: \n");
-    //    if (list.contains(human)) {
         for (E hum : list) {
             if (hum.equals(human)) {
                 sb.append(hum.getMotherInfo());
@@ -90,6 +99,16 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         }
         return sb.toString();
     }
+
+    public Human getByHuman (int id){
+        for (E hum : list) {
+            if (hum.getId() == id) {
+                return hum;
+            }
+        }
+        return null;
+    }
+
 
     public String searchParents(String family, String name){
         StringBuilder sb = new StringBuilder();

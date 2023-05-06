@@ -30,6 +30,12 @@ public class ServiceTree implements Service{
 
     }
     @Override
+    public void addMother(int id, String family, String name){
+        tree.addMother(id, family, name);
+
+    }
+
+    @Override
     public void sortByFamily(){
         //tree.getList().sort();
         Collections.sort(tree.getList());

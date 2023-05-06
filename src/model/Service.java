@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public interface Service {
     void addHuman(String family, String name);
+    void addMother(int id, String family, String name);
    // public getByHuman ();
     void sortByName();
     void sortByFamily();

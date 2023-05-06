@@ -11,7 +11,7 @@ public class Menu {
     public Menu(Console console){
         commands = new ArrayList<>();
         commands.add(new AddHuman(console));
-       // commands.add(new )
+        commands.add(new AddMother(console));
         commands.add(new GetHumanTree(console));
         commands.add(new SearchHuman(console));
         commands.add(new SearchChild(console));

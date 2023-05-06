@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Human implements Serializable, Comparable<Human>  {
-
+    private int id;
     private Human mother;
     private Human father;
     private String family;
@@ -17,7 +17,8 @@ public class Human implements Serializable, Comparable<Human>  {
     private Set<Human> сhildrenList;
 
 
-    public Human(Human father, Human mother, String family, String name, Gender gender, LocalDate birthdate) {
+    public Human(int id, Human father, Human mother, String family, String name, Gender gender, LocalDate birthdate) {
+        this.id = id;
         this.mother = mother;
         this.father = father;
         this.family = family;
@@ -27,13 +28,22 @@ public class Human implements Serializable, Comparable<Human>  {
         this.сhildrenList = new HashSet<Human>();
     
     }
+    public int getId() {
+        return id;
+    }
 
-    public Human(String family, String name, Gender gender, LocalDate birthdate) {
-        this (null,null , family, name, gender, birthdate);
+
+
+    public Human(int id,String family, String name, Gender gender, LocalDate birthdate) {
+        this (id, null,null , family, name, gender, birthdate);
+
+    }
+    public Human(int id, String family, String name) {
+        this (id,null,null , family, name, null, null);
 
     }
     public Human(String family, String name) {
-        this (null,null , family, name, null, null);
+        this (0,null,null , family, name, null, null);
 
     }
 
@@ -98,6 +108,7 @@ public class Human implements Serializable, Comparable<Human>  {
     }
 
 
+
     public String getBirthdateInfo() {
         String res = "Дата рождения: ";
         if (birthdate != null){
@@ -119,21 +130,34 @@ public class Human implements Serializable, Comparable<Human>  {
         return res;
     }
 
+    public boolean setMother(Human mother) {
+        if (this.mother == null) {
+            this.mother = mother;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public void addChildrenList(Human human) {
        this.сhildrenList.add(human);
     }
+
 
     public String getInfo(){
 //        var formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("\n");
+        sb.append("id: ");
+        sb.append(id);
+        sb.append(", ");
         sb.append(family);
         sb.append(" ");
         sb.append(name);
         sb.append(", ");
         sb.append(this.getGenderInfo());
-        sb.append("\n ");
+        sb.append("\n");
 
         return sb.toString();
     }
