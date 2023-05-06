@@ -1,17 +1,19 @@
 package Services;
 
 import Human.Human;
+import SaveLoad.SaveDoc;
 import SaveLoad.SaveTxt;
+import SaveLoad.Saveable;
 import Tree.Tree;
-
 import java.io.IOException;
 
 public class Service<E extends Human> {
     protected Tree<E> relatives;
-    protected SaveTxt data;
+    private Saveable saveable;
 
     public Service(Tree<E> relatives) {
         this.relatives = relatives;
+        saveable = new SaveTxt();
     }
 
     public Service() {
@@ -49,26 +51,21 @@ public class Service<E extends Human> {
     }
 
     public boolean saveTree() throws IOException {
-        SaveTxt data = new SaveTxt();
-        if (data == null) {
+        if (saveable == null) {
             return false;
         }
-        return data.save(relatives);
+        return saveable.save(relatives);
     }
 
     public boolean loadTree() throws IOException, ClassNotFoundException {
-        SaveTxt data = new SaveTxt();
-        if (data == null) {
+        if (saveable == null) {
             return false;
         }
-        relatives = (Tree) data.load();
+        relatives = (Tree) saveable.load();
         return true;
     }
 
-    public void setData(SaveTxt data) {
-        new SaveTxt();
-        this.data = data;
-    }
+
 
     public StringBuilder forEachToTree(Tree<E> relatives) {
         StringBuilder sb = new StringBuilder();

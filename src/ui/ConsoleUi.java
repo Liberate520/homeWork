@@ -24,15 +24,15 @@ public class ConsoleUi implements View {
 
     @Override
     public void loadTree() throws IOException, ClassNotFoundException {
-        System.out.println("Загружено дерево из файла. ");
         presenter.loadTree();
+        System.out.println("Загружено дерево из файла. ");
         presenter.printTree();
     }
 
     @Override
     public void saveTree() throws IOException {
-        System.out.println("Дерево сохранено в файл. ");
         presenter.saveTree();
+        System.out.println("Дерево сохранено в файл. ");
     }
 
     @Override
