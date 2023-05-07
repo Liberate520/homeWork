@@ -1,3 +1,4 @@
+package model.files;
 import java.io.Serializable;
 
 public interface Writable {

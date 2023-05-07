@@ -1,4 +1,7 @@
+package model.human.comporatos;
 import java.util.Comparator;
+
+import model.tree.HumanGroupItem;
 
 public class HumanComporatorByName<T extends HumanGroupItem> implements Comparator<T>{
     @Override

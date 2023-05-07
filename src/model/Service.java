@@ -1,9 +1,15 @@
+package model;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.human.Gender;
+import model.human.Human;
+import model.tree.FamilyTree;
 
 public class Service {    
     private FamilyTree<Human> activeTree;
     private List<FamilyTree<Human>> familyTreeList;
+    public int id;
     
 
     public Service(FamilyTree<Human> tree) {
@@ -19,8 +25,8 @@ public class Service {
         familyTreeList.add(familyTree);
     }
 
-    public void addHuman(int id, String name, String string, String string2, Gender male) {
-        activeTree.addHuman(new Human(id, name, null, null, null));
+    public void addHuman(int id, String name, String surname, String dateOfBirth, Gender gender) {
+        activeTree.addHuman(new Human(id++, name, surname, dateOfBirth, gender));
     }
     
     public void sortByName() {
@@ -31,13 +37,16 @@ public class Service {
         activeTree.sortById();
     }
 
-    public String getInfo(){
+    public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
 
-
-        for (Human human: activeTree){
+        for (Human human : activeTree) {
             stringBuilder.append(human).append("\n");
         }
         return stringBuilder.toString();
+    }
+    
+    public String getTree(){
+        return activeTree.toString();
     }
 }

@@ -1,6 +1,9 @@
+package model.human;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.tree.HumanGroupItem;
 
 public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
 
@@ -132,6 +135,12 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
         info.append(" - ");
         info.append("name: ");
         info.append(name);
+        info.append(", ");
+        info.append("surname: ");
+        info.append(surname);
+        info.append(", ");
+        info.append("dataBirth: ");
+        info.append(dateOfBirth);
         info.append(", ");
         info.append(getFatherInfo());
         info.append(", ");

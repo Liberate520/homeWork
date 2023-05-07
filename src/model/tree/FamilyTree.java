@@ -1,9 +1,14 @@
+package model.tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
+
+import model.human.Human;
+import model.human.comporatos.HumanComparatorById;
+import model.human.comporatos.HumanComporatorByName;
 
 public class FamilyTree<E extends HumanGroupItem> implements Serializable, Iterable<E> {
 
