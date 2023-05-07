@@ -15,4 +15,8 @@ public interface View {
     void save();
     void printFile();
     void addMother();
+
+    void addFather();
+    void addChild();
+
 }

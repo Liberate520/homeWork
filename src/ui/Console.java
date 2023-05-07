@@ -80,13 +80,32 @@ public class Console implements View {
     }
     @Override
     public void addMother(){
-            System.out.println("Введите id человека, которому хотите добавить мать!");
+            System.out.println("Введите id человека, которому хотите добавить мать");
             int id = scanId();
             scanner.nextLine();
             String name = scanName();
             String family = scanFamily();
             presenter.addMother(id, family, name);
     }
+    @Override
+    public void addFather(){
+        System.out.println("Введите id человека, которому хотите добавить отца.");
+        int id = scanId();
+        scanner.nextLine();
+        String name = scanName();
+        String family = scanFamily();
+        presenter.addFather(id, family, name);
+    }
+    @Override
+    public void addChild(){
+        System.out.println("Введите id человека, которому хотите добавить ребенка.");
+        int id = scanId();
+        scanner.nextLine();
+        String name = scanName();
+        String family = scanFamily();
+        presenter.addChild(id, family, name);
+    }
+
 
     public void finish(){
 

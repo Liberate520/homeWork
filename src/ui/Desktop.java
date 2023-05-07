@@ -241,6 +241,14 @@ public class Desktop extends JFrame implements View {
     public void addMother(){
 
     }
+    @Override
+    public void addFather(){
+
+    }
+    @Override
+    public void addChild(){
+
+    }
 
     @Override
     public void searchChild() {

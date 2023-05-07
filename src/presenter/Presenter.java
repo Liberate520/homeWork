@@ -35,6 +35,14 @@ public class Presenter {
         service.addMother(id, family, name);
 
     }
+    public void addFather(int id, String family, String name) {
+        service.addFather(id, family, name);
+
+    }
+    public void addChild(int id, String family, String name) {
+        service.addChild(id, family, name);
+
+    }
     public void clearTree(){
 
         service.clearTree();

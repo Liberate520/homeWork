@@ -36,6 +36,17 @@ public class ServiceTree implements Service{
     }
 
     @Override
+    public void addFather(int id, String family, String name){
+        tree.addFather(id, family, name);
+
+    }
+    @Override
+    public void addChild(int id, String family, String name){
+        tree.addChild(id, family, name);
+
+    }
+
+    @Override
     public void sortByFamily(){
         //tree.getList().sort();
         Collections.sort(tree.getList());
@@ -84,6 +95,7 @@ public class ServiceTree implements Service{
     }
 
     public Object read (Datatable datatable) throws IOException {
+        tree = (TreeFamily<Human>) datatable.read();
         return datatable.read();
     }
 

@@ -47,9 +47,37 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         }
         return false;
     }
+    public boolean addFather (int idhum, String family, String name) {
+        Human human = getByHuman(idhum);//
+        E father = (E) new Human(id++, family, name);
+        if ((human != null) && human.setFather(father)){
+            list.add(father);
+            father.addChildrenList(human);
+            return true;
+        }
+        return false;
+    }
+    public boolean addChild (int idhum, String family, String name) {
+        Human human = getByHuman(idhum);//
+        E child = (E) new Human(id++, family, name);
+        if ((human != null) && (addHum(child))){
+            human.addChildrenList(child);
+            return true;
+        }
+        return false;
+    }
+
+    public void addKid(E kid) {
+        for (E hum : list) {
+            if (kid.getMother().equals(hum)
+                    || kid.getFather().equals(hum)) {
+                hum.addChildrenList(kid);
+            }
+        }
+    }
 
 
-    public boolean add (E human) {
+    public boolean addHum (E human) {
             if (human == null) {
                 return false;
             }
@@ -142,14 +170,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     }
 
-    public void addKid(E kid) {
-        for (E hum : list) {
-            if (kid.getMother().equals(hum)
-                    || kid.getFather().equals(hum)) {
-                hum.addChildrenList(kid);
-            }
-        }
-    }
+
 
 
     public String getInfo(){

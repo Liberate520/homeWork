@@ -140,6 +140,16 @@ public class Human implements Serializable, Comparable<Human>  {
         }
     }
 
+    public boolean setFather(Human father) {
+        if (this.father == null) {
+            this.father = father;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public void addChildrenList(Human human) {
        this.сhildrenList.add(human);
     }
