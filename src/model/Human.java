@@ -1,3 +1,4 @@
+package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +24,8 @@ public class Human implements Serializable, Comparable<Human>, FamalyTreeItem {
         this.birthDate = birthDate;
         this.gender = gender;
         this.children = new ArrayList<>();
+        this.brothers = new ArrayList<>();
+        this.sisters = new ArrayList<>();
     }
 
     public Human(String firstName, String lastName, LocalDate birthDate, Gender gender,

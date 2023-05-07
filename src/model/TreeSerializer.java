@@ -1,6 +1,7 @@
+package model;
 import java.io.*;
 
-public class HumanSerializer implements Serializer{
+public class TreeSerializer implements Serializer{
     @Override
     public void save(Object obj, String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {

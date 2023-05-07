@@ -1,3 +1,4 @@
+package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,17 +28,14 @@ public class FamilyTree<T extends FamalyTreeItem> implements Serializable, Itera
 
     public List<T> getParents(T human) {
         List<T> parents = new ArrayList<>();
-
         T mother = (T) human.getMother();
         if (mother != null) {
             parents.add(mother);
         }
-
         T father = (T) human.getFather();
         if (father != null) {
             parents.add(father);
         }
-
         return parents;
     }
 
@@ -49,7 +47,6 @@ public class FamilyTree<T extends FamalyTreeItem> implements Serializable, Itera
             parentSiblings.remove(human);
             siblings.addAll(parentSiblings);
         }
-
         return siblings;
     }
 
@@ -59,27 +56,21 @@ public class FamilyTree<T extends FamalyTreeItem> implements Serializable, Itera
 
     public List<T> getDescendants(T human) {
         List<T> descendants = new ArrayList<>();
-
         List<T> children = getChildren(human);
         descendants.addAll(children);
-
         for (T child : children) {
             descendants.addAll(getDescendants(child));
         }
-
         return descendants;
     }
 
     public List<T> getAncestors(T human) {
         List<T> ancestors = new ArrayList<>();
-
         List<T> parents = getParents(human);
         ancestors.addAll(parents);
-
         for (T parent : parents) {
             ancestors.addAll(getAncestors(parent));
         }
-
         return ancestors;
     }
 
