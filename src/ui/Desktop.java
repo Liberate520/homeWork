@@ -256,11 +256,23 @@ public class Desktop extends JFrame implements View {
         tree.setText(presenter.searchChild(inputFamily.getText(), inputName.getText()));
     }
     @Override
+    public void searchParents(){
+
+    }
+    @Override
     public void save() {
 
     }
     @Override
     public void printFile() {
+
+    }
+    @Override
+    public void deleteHuman() {
+
+    }
+    @Override
+    public void clearTree() {
 
     }
 

@@ -14,6 +14,7 @@ public interface Service {
     public String searchParents(String family, String name);
     public String searchChild(String family, String name);
     public void clearTree();
+    public String deleteHuman(int id);
 
 
 }

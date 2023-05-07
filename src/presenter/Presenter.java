@@ -43,6 +43,10 @@ public class Presenter {
         service.addChild(id, family, name);
 
     }
+    public String deleteHuman(int id){
+
+        return service.deleteHuman(id);
+    }
     public void clearTree(){
 
         service.clearTree();
@@ -73,8 +77,12 @@ public class Presenter {
 }
     public String printFile(){
         try {
-            TreeFamily read = (TreeFamily) service.read(data);
-            return read.toString();
+            if (service.read(data) != null) {
+                TreeFamily read = (TreeFamily) service.read(data);
+                return read.toString();
+            }
+            return "Файл пуст";
+
         }
         catch (IOException e){
             System.out.println(e.getMessage());

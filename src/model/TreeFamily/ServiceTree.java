@@ -80,9 +80,17 @@ public class ServiceTree implements Service{
     }
     @Override
     public void clearTree(){
+
         tree.clearTree();
     }
 
+    @Override
+    public String deleteHuman(int id){
+        if (tree.deleteHuman(id)){
+            return "Человек удален";
+        }
+        return "Человека с таким id нет в дереве";
+    }
     public String save(Datatable datatable){
         if (datatable.save(tree)){
             return "Дерево сохранено в файл";

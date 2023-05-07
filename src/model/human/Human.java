@@ -54,6 +54,9 @@ public class Human implements Serializable, Comparable<Human>  {
     public Human getFather() {
         return father;
     }
+    public Set<Human> getChild() {
+        return this.сhildrenList;
+    }
 
 
     public String getMotherInfo() {

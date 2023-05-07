@@ -11,10 +11,14 @@ public interface View {
     void printHuman(Human human);//
     void printTree();
     void addHuman();
+    void addMother();
     void searchChild();
+    void searchParents();
     void save();
     void printFile();
-    void addMother();
+    void deleteHuman();
+    void clearTree();
+
 
     void addFather();
     void addChild();

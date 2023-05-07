@@ -16,10 +16,14 @@ public class Menu {
         commands.add(new AddChild(console));
         commands.add(new GetHumanTree(console));
         commands.add(new SearchHuman(console));
+        commands.add(new SearchParents(console));
         commands.add(new SearchChild(console));
         commands.add(new Save(console));
         commands.add(new PrintFile(console));
+        commands.add(new DeleteHuman(console));
+        commands.add(new ClearTree(console));
         commands.add(new Finish(console));
+
 
     }
     public void execute(int choice) {

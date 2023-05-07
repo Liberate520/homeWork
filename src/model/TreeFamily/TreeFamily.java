@@ -62,6 +62,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         E child = (E) new Human(id++, family, name);
         if ((human != null) && (addHum(child))){
             human.addChildrenList(child);
+            child.setMother(human);
             return true;
         }
         return false;
@@ -196,6 +197,26 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
     public Iterator<E> iterator() {
 
         return new HumanIterator<E>(list);
+    }
+    public boolean deleteHuman(int idhum){
+        Human human = getByHuman(idhum);
+        if (human!=null){
+            list.remove(human);
+            for (E hum : list) {
+                if ((hum.getMother()!=null) && (hum.getMother().equals(human))){
+                    hum.setMother(null);
+                }
+                if ((hum.getFather() != null) && (hum.getFather().equals(human))){
+                    hum.setFather(null);
+                }
+                if ((hum.getСhildrenList() != null) && (hum.getChild().contains(human))){
+                    hum.getChild().remove(human);
+                }
+            }
+            return true;
+        }
+        return false;
+
     }
     public void clearTree(){
         list.clear();

@@ -130,6 +130,13 @@ public class Console implements View {
         System.out.println(presenter.searchChild(family,name));
     }
     @Override
+    public void searchParents() {
+        String name = scanName();
+        String family = scanFamily();
+        System.out.println(presenter.searchParents(family, name));
+    }
+
+    @Override
     public void save() {
         System.out.println(presenter.save());
     }
@@ -138,5 +145,19 @@ public class Console implements View {
     public void printFile() {
         System.out.println(presenter.printFile());
     }
+    @Override
+    public void deleteHuman(){
+        System.out.println("Введите id человека, которого хотите удалить.");
+        int id = scanId();
+        scanner.nextLine();
+        System.out.println(presenter.deleteHuman(id));
+
+    }
+    @Override
+    public void clearTree() {
+        presenter.clearTree();
+        System.out.println("Дерево очищено!");
+    }
+
 
 }

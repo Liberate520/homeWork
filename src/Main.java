@@ -24,24 +24,5 @@ public class Main {
         new Presenter(consoleView,tr, data);
         consoleView.start();
         desktopview.start();
-
-
-
-        //   Human pa = new Human("Bazarov", "Alex", Human.Gender.Mail, LocalDate.parse("1949-01-07"));
- //       tr.sortByFamily();
-//        for (Human human: tree){
-//            System.out.println(human);
-//        }
-//        System.out.println();`
-//
-//
-//        tr.sortByName();
-//        for (Human human: tree) {
-//            System.out.println(human);
-//        }
-
-
     }
-
-
 }
