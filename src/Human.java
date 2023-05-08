@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable, HumanInterface {
     public Gender gender;
     public String firstName;
     public String lastName;
@@ -35,30 +36,103 @@ public class Human {
     }
 
     public void setParents(Human par) {
-        if (parents.isEmpty() || parents.size() == 1){
-            this.parents.add(par);
+        if (parents.isEmpty() || parents.size() == 1) {
+            switch (par.gender) {
+                case Female:
+                    setMother(par);
+                    break;
+                case Male:
+                    setFather(par);
+                    break;
+            }
+
         }
     }
 
     public void setChilds(Human ch) {
-        this.childs.add(ch);
+        switch (ch.gender) {
+            case Female:
+                // setSon(ch); // происходит вылет
+                break;
+            case Male:
+                // setDaughter(ch); // происходит вылет
+                break;
+        }
+
     }
 
     public String getNamePerson() {
         return String.format("%s %s", firstName, lastName);
     }
 
+    public String getInfoPerson() {
+        return String.format("%s %s %s", firstName, lastName, gender);
+    }
+
+    public String getInfoParents() {
+        return String.format("%s %s |Parent: %s", firstName, lastName, getParents());
+    }
+
+    public String getInfoChilds() {
+        return String.format("%s %s |Child: %s", firstName, lastName, getChilds());
+    }
+
+    public String getInfoBoth() {
+        return String.format("%s %s |Parent: %s |Child: %s", firstName, lastName, getParents(),
+                getChilds());
+    }
+
+    @Override
+    public void setMother(Human par) {
+        boolean part = true;
+        for (Human human : parents) {
+            if (human.gender == Gender.Female) {
+                part = false;
+                System.out.println(String.format("%s %s уже имеет мать %s", firstName, lastName, human));
+                break;
+            }
+        }
+        if (part)
+            this.parents.add(par);
+    }
+
+    @Override
+    public void setFather(Human par) {
+        boolean part = true;
+        for (Human human : parents) {
+            if (human.gender == Gender.Male) {
+                part = false;
+                System.out.println(String.format("%s %s уже имеет отца %s", firstName, lastName, human));
+                break;
+            }
+        }
+        if (part)
+            this.parents.add(par);
+            
+    }
+
+    @Override
+    public void setSon(Human per) {
+        this.childs.add(per);
+        per.setParents(this);
+    }
+
+    @Override
+    public void setDaughter(Human per) {
+        this.childs.add(per);
+        per.setParents(this);
+    }
+
     @Override
     public String toString() {
         if (!parents.isEmpty() && !childs.isEmpty()) {
-            return String.format("%s %s %s |Parent: %s |Child: %s", firstName, lastName, gender, getParents(),
-                    getChilds());
+            return getInfoBoth();
         } else if (!parents.isEmpty()) {
-            return String.format("%s %s %s|Parent: %s", firstName, lastName, gender, getParents());
-        }else if (!childs.isEmpty()) {
-            return String.format("%s %s %s|Child: %s", firstName, lastName, gender, getChilds());
+            return getInfoParents();
+        } else if (!childs.isEmpty()) {
+            return getInfoChilds();
         }
-        return String.format("%s %s %s", firstName, lastName, gender);
+        return getNamePerson();
     }
 
 }
