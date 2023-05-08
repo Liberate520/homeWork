@@ -1,21 +1,22 @@
-package Package.View.Commands;
+package Package.View.Commands.ShowTreeSubMenuCommands;
 
 import Package.View.Console;
 
-public class ShowTree implements Commander{
+public class SortByName implements SubMenuCommands{
     private Console console;
 
-    public ShowTree(Console console) {
+    public SortByName(Console console) {
         this.console = console;
     }
 
     @Override
     public String getDescription() {
-        return "Показать генеалогическое древо";
+        return "Сортировать по имени";
     }
 
     @Override
     public void execute() {
+        console.sortByName();
         console.showTree();
     }
 }

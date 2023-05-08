@@ -3,7 +3,6 @@ package Package.View.Commands;
 import Package.View.Console;
 
 public class DeletePerson implements Commander{
-    private String description;
     private Console console;
 
     public DeletePerson(Console console) {

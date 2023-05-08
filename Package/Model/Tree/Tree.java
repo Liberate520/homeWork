@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Tree <E extends Person> implements Serializable, Iterable<E>{
-    private ObjectInputStream input;
     private List<E> family;
 
     public Tree() {

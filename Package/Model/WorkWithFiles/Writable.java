@@ -1,7 +1,6 @@
 package Package.Model.WorkWithFiles;
-
-import java.io.IOException;
-
+import java.io.Serializable;
 public interface Writable {
-    void writeObj(Object obj) throws IOException;
+    boolean save(Serializable serializable, String filePath);
+    Object read(String filePath);
 }

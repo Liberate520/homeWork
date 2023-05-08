@@ -39,6 +39,10 @@ public class Person implements Serializable, Comparable<Person> {
         return father;
     }
 
+    public void setFather(Person father) {
+        this.father = father;
+    }
+
     public Person getMother() {
         return mother;
     }
@@ -64,6 +68,10 @@ public class Person implements Serializable, Comparable<Person> {
 
     public Person(Integer id, String name, String surname, LocalDate birthDate) {
         this(id, name, surname, birthDate, null, null, null);
+    }
+
+    public Person(Integer id, String name, String surname){
+        this(id, name, surname, null, null, null, null);
     }
 
     public void addChildren(Person person) {

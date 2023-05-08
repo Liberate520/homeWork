@@ -2,20 +2,18 @@ package Package.View.Commands;
 
 import Package.View.Console;
 
-public class FinishProgram implements Commander{
+public class SaveChanges implements Commander{
     private Console console;
-
-    public FinishProgram(Console console) {
+    public SaveChanges(Console console){
         this.console = console;
     }
-
     @Override
     public String getDescription() {
-        return "Завершить работу с деревом";
+        return "Сохранить изменения";
     }
 
     @Override
     public void execute() {
-        console.exit();
+        console.save();
     }
 }

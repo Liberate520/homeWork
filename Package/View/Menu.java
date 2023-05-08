@@ -13,6 +13,7 @@ public class Menu {
         list.add(new ShowTree(console));
         list.add(new AddPerson(console));
         list.add(new DeletePerson(console));
+        list.add(new SaveChanges(console));
         list.add(new FinishProgram(console));
     }
 
