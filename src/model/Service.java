@@ -36,7 +36,7 @@ public class Service {
     }
 
     public void addHuman(String name, int age, int DateOfBirth, int DateOfDeath, Gender gender,
-                         Human father, Human mother) {
+                         String father, String mother) {
         familyTree.addHuman(new Human(name, age, DateOfBirth, DateOfDeath, gender, father, mother));
     }
     public String getHumanList(){

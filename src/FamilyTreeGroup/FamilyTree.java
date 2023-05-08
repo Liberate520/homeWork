@@ -29,14 +29,14 @@ public class FamilyTree implements Iterable<Human> {
         }
         return false;
     }
-//    public Human getHumanByName(String name){
-//        for (Human human: humanList){
-//            if (human.getName().equals(name)){
-//                return human;
-//            }
-//        }
-//        return null;
-//    }
+    public Human getHumanByName(String name){
+        for (Human human: humanList){
+            if (human.getName().equals(name)){
+                return human;
+            }
+        }
+        return null;
+    }
     public List<Human> getHumanList() {
         return humanList;
     }
