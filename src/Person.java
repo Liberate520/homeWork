@@ -1,8 +1,9 @@
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private Gender gender;
     private String firstName;
     private String secondName;
