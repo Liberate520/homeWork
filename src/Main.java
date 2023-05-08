@@ -1,25 +1,31 @@
 public class Main {
     public static void main(String[] args) {
-
-    
         FamilyTree familyTree = new FamilyTree();
+        Human human1 = new Human("Иван", "Петров", "male");
+        Human human2 = new Human("Федор", "Петров","male");
+        Human human3 = new Human("Денис", "Иванов","male");
+        Human human4 = new Human("Андрей", "Егоров","male");
+        Human human5 = new Human("Илья", "Бобров","male");
+        familyTree.addHuman(human1);
+        familyTree.addHuman(human2);
+        familyTree.addHuman(human3);
+        familyTree.addHuman(human4);
+        familyTree.addHuman(human5);
+        System.out.println(human1.toString());
+        System.out.println(human1.getMother());
+        System.out.println(human2.getChildren());
+        human2.addChildren(human1);
+        System.out.println("----");
+        System.out.println(human1.toString());
+        System.out.println(human1.getFather());
+        System.out.println(human2.getChildren());
 
-        Human daria = new Human("Дарья");
-        Human evgenii = new Human("Евгений");
+        Human human6 = new Human("Захар", "Давыдов","male");
+        familyTree.saveHuman(human6);
+        Human human7 = familyTree.readHuman("Захар");
 
-        Human nikita = new Human("Никита", evgenii, daria);
-
-        daria.addChildren(nikita.getName());
-        evgenii.addChildren(nikita.getName());
-
-
-        familyTree.addHuman(nikita);
-        familyTree.addHuman(evgenii);
-        familyTree.addHuman(daria);
-
-        System.out.println(daria);
-        System.out.println(nikita);
-        System.out.println(evgenii);
+        System.out.println("++++++++++");
+        System.out.println(human7);
 
     }
 }

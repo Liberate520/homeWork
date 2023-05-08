@@ -1,25 +1,35 @@
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
+    private List<Human> humans = new ArrayList<Human>();
+    private OutAndInputInfo outAndInputInfo =new OutAndInputInfo();
 
-    private List<Human> tree;
+    public void addHuman(Human human){
+        humans.add(human);
+    }
+    public Human getHuman(String name, String surname){
+        for(Human human: humans){
+            if(human.getName().equals(name) && human.getSurname().equals(surname)){
+                return human;
+            }
 
-    public FamilyTree(List<Human> tree){
-        this.tree = tree;
+        }
+        return null;
+
+
+    }
+    public String getHumanInfo(Human human){
+        return human.toString();
     }
 
-    public FamilyTree(){
-        this(new ArrayList<>());
+    public void saveHuman(Human inputHuman){
+        String name = inputHuman.getName();
+        outAndInputInfo.WriteInfo(inputHuman, name);
     }
 
-    public void addHuman(Human human) {
-        tree.add(human);
+    public Human readHuman(String name){
+        return outAndInputInfo.ReadInfo(name);
     }
-
-    @Override
-    public String toString() {
-        return tree.toString();
-    }
-    
 }
