@@ -9,6 +9,11 @@ import java.util.ArrayList;
 public class Serialise  implements Serialisible<Human> {
 
     @Override
+    public void sortByLastname () {
+
+    }
+
+    @Override
     public void Serialise(String filename, Object o) throws FileNotFoundException, IOException {
         ObjectOutputStream oOS = new ObjectOutputStream(new FileOutputStream(filename));
         oOS.writeObject(o);

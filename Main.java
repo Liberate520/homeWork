@@ -12,7 +12,7 @@ class Main extends Fileredactor {
         Human person_2 = new Human("Andrey", "Faivisovich", "09.04.1988", null, "m", "1MP_88", null, null);
         Human person_3 = new Human("Aleksandr", "Faivisovich", "10.07.1953", null, "m", "1PP_53", null, null);
         Human person_4 = new Human("Irina", "Truschenko", "09.01.1953", null, "w", "1MP_53", null, null);
-        View c_import = new View();
+        Presenter c_import = new Presenter();
         
 
 
@@ -37,8 +37,7 @@ class Main extends Fileredactor {
         ArrayList<Object> family_list = new ArrayList<>();
         Serialise s = new Serialise();
         s.SerialiseList("family.out", family_list);
-        
-        
+
  
  
     }

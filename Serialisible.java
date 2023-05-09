@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 public interface Serialisible<T extends Human> {
 
+    void sortByLastname ();
+
     void Serialise(String filename, Object o) throws FileNotFoundException, IOException;
     Object Out(String filename) throws FileNotFoundException, IOException, ClassNotFoundException;
     void SerialiseList(String filename, ArrayList<Object> list) throws FileNotFoundException, IOException;

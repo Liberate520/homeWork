@@ -6,16 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileEditor implements Saveandreadable {
+public abstract class Fileredactor implements Saveandreadable {
 
     public String filename;
     private String relative;
 
-    private FileEditor(String filename) {
+    private Fileredactor (String filename) {
         this.filename = filename;
     }
 
-    private FileEditor() {
+    private Fileredactor () {
         this(null);
     }
 

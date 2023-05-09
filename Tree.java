@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Tree<T extends Human> implements Serialisible<T>  {
@@ -13,7 +14,7 @@ public class Tree<T extends Human> implements Serialisible<T>  {
         family = new ArrayList<>();
         return null;
     }
-    
+
 
 public T find_father( T person){
     T res = null;
@@ -133,15 +134,27 @@ public void print_sister_and_brother( T person){
 
 
 
-public void age(T person){
+public void age(){
     java.util.Date dateNow = new java.util.Date();
     DateFormat formater = new SimpleDateFormat("y");
     Integer year = Integer.parseInt(formater.format(dateNow));
+    Human person = null;
+    Tree tree = null;
     Integer b_year = Integer.parseInt(person.getBirthDate().substring(6,10));
     Integer res_age = year - b_year;
+
+
     System.out.println(res_age);
 
+
 }
+
+@Override
+public void sortByLastname (){
+    Tree<Human> tree = null;
+    Collections.sort(tree.getHumanList());
+}
+
 
 @Override
 public String toString() {
@@ -158,7 +171,7 @@ public ArrayList<T> getHumanList() {
 }
 
 
-    @java.lang.Override
+    @Override
     public void Serialise (String filename, Object o) throws FileNotFoundException, IOException {
 
     }
@@ -176,5 +189,10 @@ public ArrayList<T> getHumanList() {
     @java.lang.Override
     public ArrayList<Object> OutList (String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
         return null;
+    }
+
+
+    public void setFamily (ArrayList<T> family) {
+        this.family = family;
     }
 }
