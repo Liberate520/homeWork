@@ -6,91 +6,87 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fileredactor implements SaveAndReadable{
+public class FileEditor implements Saveandreadable {
 
-    private String filename;
-    public Fileredactor(String fname){
-        this.filename = fname;
+    public String filename;
+    private String relative;
+
+    private FileEditor(String filename) {
+        this.filename = filename;
     }
-    public Fileredactor(){
+
+    private FileEditor() {
         this(null);
     }
 
     @Override
-    public void read_info(Tree family) throws IOException{
+    public void read_info (Tree family) throws IOException {
         File file = new File(filename);
-            FileReader fr = new FileReader(file);
-            BufferedReader breader = new BufferedReader(fr);
-            String line = breader.readLine();
-            List<String> data = new ArrayList<>();
-            while(line != null){
-                while(!line.equals("Следующий человек")){
-                    if (txt_parse(line).length == 1){
-                        data.add("-");
-                    }
-                    else{
-                    switch(txt_parse(line)[0]){
+        FileReader fr = new FileReader(file);
+        BufferedReader breader = new BufferedReader(fr);
+        String line = breader.readLine();
+        List<String> data = new ArrayList<>();
+        while(line != null){
+            while(!line.equals("Следующий человек")){
+                if (parseLine(line).length == 1){
+                    data.add("-");
+                }
+                else{
+                    switch(parseLine(line)[0]){
                         case "Имя":
-                            String firstname = txt_parse(line)[1];
-                            data.add(firstname);
+                            String firstName = parseLine(line)[1];
+                            data.add(firstName);
                             break;
                         case "Фамилия":
-                            String lastname = txt_parse(line)[1];
-                            data.add(lastname);
+                            String lastName = parseLine(line)[1];
+                            data.add(lastName);
                             break;
                         case "Дата рождения":
-                            String birth_date = txt_parse(line)[1];
-                            data.add(birth_date);
+                            String birthDate = parseLine(line)[1];
+                            data.add(birthDate);
                             break;
                         case "Дата смерти":
-                            String deth_date = txt_parse(line)[1];
-                            data.add(deth_date);
+                            String deathDate = parseLine(line)[1];
+                            data.add(deathDate);
                             break;
                         case "Пол":
-                            String gender = txt_parse(line)[1];
+                            String gender = parseLine(line)[1];
                             data.add(gender);
                             break;
                         case "Идентификационный номер":
-                            String person_id = txt_parse(line)[1];
-                            data.add(person_id);
+                            String personId = parseLine(line)[1];
+                            data.add(personId);
                             break;
                         case "Отец":
-                            String father_id = txt_parse(line)[1];
-                            data.add(father_id);
-                            break;    
+                            String fatherId = parseLine(line)[1];
+                            data.add(fatherId);
+                            break;
                         case "Мать":
-                            String mother_id = txt_parse(line)[1];
-                            data.add(mother_id );
+                            String motherId = parseLine(line)[1];
+                            data.add(motherId);
                             break;
                     }
-                    }
+                }
                 line = breader.readLine();
-            
+            }
+            Presenter presenter = new Presenter();
+            Human newPerson = presenter.addHuman(data);
+            family.addHuman(newPerson);
+            line = breader.readLine();
         }
-        Presenter presenter = new Presenter();    
-        Human new_person = presenter.addHuman(data);                            
-        family.addHuman(new_person);
-    
-        line = breader.readLine();
-       
-        }
-        
     }
 
-    private static String[] txt_parse(String txtstring){
-        String [] str = txtstring.split(": ");
-        return str;
+    private static String[] parseLine(String line) {
+        String [] result = line.split(": ");
+        return result;
     }
+
 
     @Override
-    public void print_info(Tree<Human> family) throws IOException{
-    FileWriter file = new FileWriter("family.txt", true);
-    for(Human relative : family){
-        file.write("\n" +  relative);
+    public void print_info (Tree<Human> o) throws IOException {
+        FileWriter file = new FileWriter("family.txt", true);
+        file.write("\n" + relative);
+        file.close();
     }
-    file.close();
- 
-
-}
 
 }

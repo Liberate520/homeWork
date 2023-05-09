@@ -1,16 +1,17 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 
-public class Tree<T extends Human> implements Iterable<T>  {
+public class Tree<T extends Human> implements Serialisible<T>  {
     
     private ArrayList<T> family;
     
     public T Tree(){
         family = new ArrayList<>();
+        return null;
     }
     
 
@@ -144,23 +145,36 @@ public void age(T person){
 
 @Override
 public String toString() {
-    
-    return super.toString();
+
+    return getClass().getName() + " " + Integer.toHexString(hashCode());
 }
 
 
-@Override
-public Iterator<T> iterator() {
-    
-    return new TreeIterator(family);
-}
-public void addHuman(T human) {
+    public void addHuman(T human) {
     family.add(human);
 }
-public List<T> getHumanList() {
+public ArrayList<T> getHumanList() {
     return family;
 }
 
 
+    @java.lang.Override
+    public void Serialise (String filename, Object o) throws FileNotFoundException, IOException {
 
+    }
+
+    @java.lang.Override
+    public Object Out (String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+        return null;
+    }
+
+    @java.lang.Override
+    public void SerialiseList (String filename, ArrayList<Object> list) throws FileNotFoundException, IOException {
+
+    }
+
+    @java.lang.Override
+    public ArrayList<Object> OutList (String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+        return null;
+    }
 }

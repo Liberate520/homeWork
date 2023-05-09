@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Serialise  implements Serialisible {
+public class Serialise  implements Serialisible<Human> {
 
     @Override
     public void Serialise(String filename, Object o) throws FileNotFoundException, IOException {

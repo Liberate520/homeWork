@@ -5,7 +5,7 @@ public class Human  implements Serializable, Comparable<Human>{
     private String firstname;
     private String lastname;
     private String birth_date;
-    private String deth_date;
+    private String death_date;
     private String gender;
     private String person_id;
     private String father_id;
@@ -17,7 +17,7 @@ public class Human  implements Serializable, Comparable<Human>{
     public Human(String inp_firstname, 
                        String inp_lastname, 
                        String inp_birth_date, 
-                       String inp_deth_date, 
+                       String inp_death_date,
                        String inp_gender, 
                        String inp_person_id, 
                        String inp_father_id, 
@@ -26,7 +26,7 @@ public class Human  implements Serializable, Comparable<Human>{
         this.firstname = inp_firstname;
         this.lastname = inp_lastname;
         this.birth_date = inp_birth_date;
-        this.deth_date = inp_deth_date;
+        this.death_date = inp_death_date;
         this.gender = inp_gender;
         this.person_id = inp_person_id;
         this.father_id = inp_father_id;
@@ -62,21 +62,21 @@ public class Human  implements Serializable, Comparable<Human>{
             result = result + "Дата рождения: " + birth_date + "\n";
         }
 
-        if(deth_date == null){
+        if(death_date == null){
             result = result + "Дата смерти: " + "-" + "\n";
         }
         else{
-            result = result + "Дата смерти: " + deth_date + "\n";
+            result = result + "Дата смерти: " + death_date + "\n";
         }
-        
-       
+
+
         if(gender == null){
             result = result + "Пол: " + "-" + "\n";
         }
         else{
             result = result + "Пол: " + gender + "\n";
         }
-     
+
 
         return result;
     }
@@ -101,10 +101,10 @@ public class Human  implements Serializable, Comparable<Human>{
     }
 
     public String getDethDate() {
-        return deth_date;
+        return death_date;
     }
     public void setDethDate(String deth_date) {
-        this.deth_date = deth_date;
+        this.death_date = deth_date;
     }
 
     public String getFirstName() {
@@ -135,10 +135,10 @@ public class Human  implements Serializable, Comparable<Human>{
     }
     @Override
     public int compareTo(Human o) {
-        
+
         return lastname.compareTo(o.lastname);
     }
-    
- 
+
+
 }
     

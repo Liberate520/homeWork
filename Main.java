@@ -1,17 +1,12 @@
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import Fileredactor.Fileredactor;
+
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javax.sound.sampled.SourceDataLine;
-public class Main {
+class Main extends Fileredactor {
     
     
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+    public static void main(String[] args)  throws IOException, ClassNotFoundException{
 
         Human person_1 = new Human("Marya", "Faivisovich", "28.05.1979", null, "w", "1PP_79", null, null);
         Human person_2 = new Human("Andrey", "Faivisovich", "09.04.1988", null, "m", "1MP_88", null, null);
@@ -36,22 +31,10 @@ public class Main {
         family.addHuman(person_4);
         c_import.c_import(family);
         family.print_sister_and_brother(person_4);
-        Fileredactor read_redactor = new Fileredactor("input_family.txt");
-        
-        read_redactor.read_info(family);
-        Fileredactor print_redactor = new Fileredactor();
-
-        print_redactor.print_info(family);
-        c_import.console_print(family);   
-        family.age(person_4);
-
 
         Human father = family.find_father( person_3);
         System.out.println("Отец:\n" + father);
         ArrayList<Object> family_list = new ArrayList<>();
-        for(Human person : family){
-            family_list.add(person);
-        }
         Serialise s = new Serialise();
         s.SerialiseList("family.out", family_list);
         
