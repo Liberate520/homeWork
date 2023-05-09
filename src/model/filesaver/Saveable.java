@@ -1,4 +1,4 @@
-package model;
+package model.filesaver;
 import model.familytree.FamilyTree;
 
 import java.io.Serializable;

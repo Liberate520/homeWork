@@ -14,10 +14,6 @@ public class HumanCreator {
         this.scanner = new Scanner(System.in);
     }
 
-    public Human createNewHuman(Gender gender, String name, String lastName, Integer age) {
-        return new Human(gender, name, lastName, age);
-    }
-
     public Human createNewHuman() {
         String[] split = getGeneralInfo().split(separator);
         return new Human(Gender.valueOf(split[0]), split[1], split[2], Integer.parseInt(split[3]));

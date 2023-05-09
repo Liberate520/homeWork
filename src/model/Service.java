@@ -1,26 +1,19 @@
-import model.FileReaderWriter;
+package model;
+
 import model.familytree.FamilyTree;
-import model.human.Gender;
+import model.filesaver.FileReaderWriter;
 import model.human.Human;
 import model.human.HumanCreator;
 
-public class FamilyTreeServices {
+public class Service {
     private FamilyTree<Human> familyTree;
     private FileReaderWriter fileReaderWriter;
     private HumanCreator humanCreator;
 
-    public FamilyTreeServices() {
+    public Service() {
         this.familyTree = new FamilyTree();
         this.fileReaderWriter = new FileReaderWriter();
         this.humanCreator = new HumanCreator();
-    }
-
-    public Human createNewHuman() {
-        return humanCreator.createNewHuman();
-    }
-
-    public Human createNewHuman(Gender gender, String name, String lastName, Integer age) {
-        return humanCreator.createNewHuman(gender, name, lastName, age);
     }
 
     public FamilyTree readFamilyTreeFromFile(String path){
@@ -31,8 +24,8 @@ public class FamilyTreeServices {
         fileReaderWriter.write(this.familyTree, path);
     }
 
-    public void addHumanToFamilyTree(Human human) {
-        this.familyTree.addHumanToList(human);
+    public void addNewHumanToFamilyTree() {
+        this.familyTree.addHumanToList(humanCreator.createNewHuman());
     }
 
     public void getFamilyTreeInfo() {
