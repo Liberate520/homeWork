@@ -19,4 +19,12 @@ public class Presenter {
     public void addNewHumanToFamilyTree() {
         this.service.addNewHumanToFamilyTree();
     }
+
+    public void writeFamilyTreeInFile(String path) {
+        this.service.writeFamilyTreeInFile(path);
+    }
+
+    public void readFamilyTreeFromFile(String path){
+
+    }
 }

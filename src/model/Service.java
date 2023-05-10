@@ -16,8 +16,8 @@ public class Service {
         this.humanCreator = new HumanCreator();
     }
 
-    public FamilyTree readFamilyTreeFromFile(String path){
-       return fileReaderWriter.read(path);
+    public void readFamilyTreeFromFile(String path){
+       this.familyTree = fileReaderWriter.read(path);
     }
 
     public void writeFamilyTreeInFile(String path) {
