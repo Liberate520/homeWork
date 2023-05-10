@@ -6,8 +6,6 @@ import javax.print.attribute.standard.Severity;
 
 import human.Human;
 import model.saveFile.FileHandler;
-import model.saveFile.ReadingFile;
-import model.saveFile.SaveFile;
 import model.saveFile.Writable;
 import model.serch.Search;
 import model.sort.HumanComparatorByName;
@@ -18,9 +16,12 @@ import model.tree.InformationAdd;
 public class Service {
 
     private FamilyTree<Human> humanList;
+    private Writable writable;
 
-    public Service(FamilyTree<Human> humanList) {
+    public Service(FamilyTree<Human> humanList, Writable writable) {
         this.humanList = humanList;
+        this.writable=writable;
+    
     }
 
     public void sortByName() {
@@ -35,14 +36,13 @@ public class Service {
 
     public void save() {
 
-        SaveFile saveFile = new SaveFile();
-        saveFile.saveFile(humanList);
+       writable.save(humanList, "Test.txt");
 
     }
 
     public void read() {
-        ReadingFile readingFile = new ReadingFile();
-        readingFile.readFile();
+  
+        humanList = (FamilyTree<Human>) writable.read("Test.txt");
     }
 
     public void print() {

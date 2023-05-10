@@ -11,10 +11,14 @@ public class Console implements View {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work = true;
+    private Menu menu;
 
     public Console() {
         scanner = new Scanner(System.in);
+        menu = new Menu(this);
+        
     }
+
 
     @Override
     public void print(String text) {
@@ -24,43 +28,14 @@ public class Console implements View {
     @Override
     public void start() {
         while (work) {
-            System.out.println("1-addPerson\n" +
-                    "2-serch\n" +
-                    "3-sort\n" +
-                    "4-save File\n" +
-                    "5-read File\n" +
-                    "6-print\n" +
-                    "7-Завершение работы\n");
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "1":
-                    addRecord();
-                    break;
-                case "2":
-                    viewAll();
-                    break;
-                case "3":
-                    sortFree();
-                    break;
-                case "4":
-                    saveTree();
-                    break;
-                case "5":
-                    readTree();
-                    break;
-                case "6":
-                    printTree();
-                    break;
-                case "7":
-                    exit();
-                    break;
-                default:
-                    System.out.println("Ошибка ввода");
-            }
+           System.out.println(menu.printMenu()); 
+           int number = Integer.parseInt(scanner.nextLine()) ;
+           menu.execute(number);
+
         }
     }
 
-    private void exit() {
+    public void exit() {
         System.out.println("Работа завершена");
         scanner.close();
         work = false;
@@ -71,14 +46,14 @@ public class Console implements View {
         this.presenter = presenter;
     }
 
-    private void viewAll() {
+    public void search() {
         System.out.println("Введите name");
         String all = scanner.nextLine();
         presenter.getRecords(all);
 
     }
 
-    private void addRecord() {
+    public void addRecord() {
         System.out.println("Введите name:");
         String name = scanner.nextLine();
         System.out.println("Введите father:");
@@ -92,38 +67,26 @@ public class Console implements View {
 
     }
 
-    private void saveTree() {
+    public void saveTree() {
         presenter.getSaveTree();
         ;
     }
 
-    private void readTree() {
+    public void readTree() {
         presenter.getReadTree();
     }
 
-    private void sortFree() {
-        System.out.println("1-sotrByName\n" +
-                "2-sortBirthDate");
-        String choice = scanner.nextLine();
-        switch (choice) {
-            case "1":
-                sortByName();
-                break;
-            case "2":
-                sortBirthDate();
-                break;
-        }
-    }
+    
 
-    private void sortByName() {
+    public void sortByName() {
         presenter.getSorterByName();
     }
 
-    private void sortBirthDate() {
+    public void sortBirthDate() {
         presenter.getSortBirthDate();
     }
 
-    private void printTree() {
+    public void printTree() {
         presenter.getPrint();
     }
 

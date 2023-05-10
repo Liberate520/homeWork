@@ -8,4 +8,20 @@ public interface View {
     void start();
 
     void serPresenter(Presenter presenter);
+
+    void addRecord();
+
+    void exit();
+
+    void search();
+
+    void saveTree();
+
+    void readTree();
+
+    void sortByName();
+
+    void sortBirthDate();
+
+    void printTree();
 }
