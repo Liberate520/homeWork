@@ -37,7 +37,7 @@ public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Ite
             //     human.setMother(mother);
             //     if(!mother.getChildren().contains(human)){
             //         mother.addChild(human);
-                // }
+            //     }
             //    }
             // if(father!=null){
             //    human.setFather(father);

@@ -1,29 +1,14 @@
-import java.util.List;
+import Presenter.Presenter;
+import ui.Console;
+import ui.View;
 
 public class Main {
     public static void main(String[] args) {
+        View view = new Console();
+        Service<Human> service = new Service<>();
+        new Presenter(view, service);
 
-        Human me = new Human("Екатерина", "Хованская", Gender.Female, 19, 07,1985);
-        Human myMom = new Human("Елена", "Якубюк", Gender.Female, 28, 12,1959);
-        Human myDad = new Human("Константин", "Якубюк", Gender.Male, 17, 2,1961);
-        Human myBrother = new Human("Евгений", "Якубюк", Gender.Male, 9, 8,1987);
-        Human myBrother2 = new Human("Евгений", "Якубюк", Gender.Male, 9, 8,1987);
-        String path = "src/myFamily.txt";
-        FileHandler fileHandler = new FileHandler();
-        // fileHandler.save(myFamily, path);
-        // FamilyTree myFamily = fileHandler.load(path);
-        FamilyTree<Human> myFamily = new FamilyTree<>();
-        // myFamily.addMember(myMom, null, null);
-        // myFamily.addMember(myDad, null, null);
-        // myFamily.addMember(me, myMom, myDad);
-        myFamily.addMember(myMom);
-        myFamily.addMember(myDad);
-        myFamily.addMember(me);
+        view.start();
 
-        for(Human human:myFamily){
-            System.out.println(human.toString());
-         }
-        myFamily.sortByName();
-        System.out.println(myFamily.getAllMembers());
     }
 }
