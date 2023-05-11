@@ -1,16 +1,22 @@
 
+import comparators.PersonComparatorById;
+import comparators.PersonComparatorByName;
+import person.Person;
+import person.PersonIterator;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable{
+public class FamilyTree implements Serializable, Iterable<Person>{
 	private List<Person> personList;
 	
-	public Tree(){
+	public FamilyTree(){
 		this(new ArrayList<>());
 	}
 	
-	public Tree(List<Person> personList) {
+	public FamilyTree(List<Person> personList) {
 		this.personList = personList;
 	}
 	
@@ -41,7 +47,7 @@ public class Tree implements Serializable{
 	}
 	
 	
-	public String getInfo(){
+	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("В дереве ");
 		sb.append(personList.size());
@@ -51,5 +57,18 @@ public class Tree implements Serializable{
 			sb.append("\n");
 		}
 		return sb.toString();
+	}
+	
+	@Override
+	public Iterator<Person> iterator() {
+		return new PersonIterator(personList);
+	}
+	
+	public void sortById(){
+		personList.sort(new PersonComparatorById());
+	}
+	
+	public void sortByName(){
+		personList.sort(new PersonComparatorByName());
 	}
 }

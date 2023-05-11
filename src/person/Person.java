@@ -1,22 +1,28 @@
+package person;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person>{
+	private int id;
 	private String name;
 	private Gender gender;
 	private Person mother;
 	private Person father;
 	private List<Person> children;
 	
-	public Person(String name, Gender gender) {
+	public Person(int id ,String name, Gender gender) {
+		this.id = id;
 		this.name = name;
 		this.father = null;
 		this.mother = null;
 		children = new ArrayList<>();
 	}
 	
-	public Person(String name, Gender gender, Person father, Person mother) {
+	public Person(int id, String name, Gender gender, Person father, Person mother) {
+		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.father = father;
@@ -33,12 +39,13 @@ public class Person implements Serializable {
 	}
 	
 	//Геттеры и сеттеры для всех полей
-	public String getName() {
-		return name;
+	
+	public int getId() {
+		return id;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public String getName() {
+		return name;
 	}
 	
 	public Person getMother() {
@@ -51,18 +58,6 @@ public class Person implements Serializable {
 	
 	public List<Person> getChildren() {
 		return children;
-	}
-	
-	public void setMother(Person mother) {
-		this.mother = mother;
-	}
-	
-	public void setFather(Person father) {
-		this.father = father;
-	}
-	
-	public void setChildren(List<Person> children) {
-		this.children = children;
 	}
 	
 	public String getInfo() {
@@ -118,10 +113,15 @@ public class Person implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (! (obj instanceof Person)) {
+		if (! (obj instanceof Person person)) {
 			return false;
 		}
-		Person person = (Person) obj;
 		return person.getName().equals(getName());
 	}
+	
+	@Override
+	public int compareTo(Person o) {
+		return name.compareTo(o.name);
+	}
+	
 }
