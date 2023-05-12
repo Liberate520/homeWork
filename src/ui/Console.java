@@ -18,7 +18,6 @@ public class Console implements View{
 
     private void hello(){
         System.out.println("Доброго времени суток!");
-        System.out.println("Меню выбора команд:");
     }
 
     @Override

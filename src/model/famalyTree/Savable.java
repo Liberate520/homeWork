@@ -1,7 +1,9 @@
 package model.famalyTree;
 
 
+import java.io.Serializable;
+
 public interface Savable {
-    void save(String path);
-    void upload(String path);
+    void save(Serializable serializable, String path);
+    Object upload(String path);
 }

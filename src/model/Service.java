@@ -2,19 +2,17 @@ package model;
 
 import model.dogs.Dog;
 import model.famalyTree.FamilyTree;
+import model.famalyTree.FileHandler;
 import model.famalyTree.Savable;
 import model.humans.*;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-public class Service implements Savable{
+public class Service{
     private FamilyTree familyTree;
+    private Savable savable;
 
     public Service(FamilyTree familyTree) {
         this.familyTree = familyTree;
+        savable = new FileHandler();
     }
 
     public Service() {
@@ -92,21 +90,14 @@ public class Service implements Savable{
         return familyTree.getInfo();
     }
 
-    @Override
-    public void save(String path) {
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path))) {
-            objectOutputStream.writeObject(familyTree);
-        } catch (Exception e) {
-        }
+    public void save(String path){
+        savable.save(familyTree, path);
     }
 
-    @Override
     public void upload(String path) {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))) {
-            familyTree = (FamilyTree) objectInputStream.readObject();
-        } catch (Exception e) {
-        }
+        this.familyTree = (FamilyTree) savable.upload(path);
     }
+
     public void sortByName() {
         familyTree.sortByName();
     }

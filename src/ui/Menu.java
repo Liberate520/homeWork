@@ -21,6 +21,7 @@ public class Menu {
     }
 
     public void showMenu(){
+        System.out.println("Меню выбора команд:");
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commadndList.size(); i++) {
             stringBuilder.append(i + 1);
