@@ -35,8 +35,22 @@ public class Console implements View{
 
     private void execute(){
         System.out.print("Введите номер команды: ");
-        int commandNumber = Integer.parseInt(scanner.nextLine());
+        int commandNumber = setNumber();
         menu.execute(commandNumber);
+    }
+
+    private int setNumber() {
+        boolean string = true;
+        int number = 0;
+        while (string) {
+            try {
+                number = Integer.parseInt(scanner.nextLine());
+                string = false;
+            } catch (NumberFormatException e) {
+                System.out.print("Вы ввели не число. Повторите попытку ввода: ");
+            }
+        }
+        return number;
     }
 
     @Override
