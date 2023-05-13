@@ -25,15 +25,19 @@ public class main {
 //        writable.write(tree, filePath);
         FamilyThree familyThree = (FamilyThree) writable.read(filePath);
 
-        for (Human human: familyThree.getHumans()
-             ) {
-            tree.printTree(human);
-        }
+//        for (Human human: familyThree.getHumans()
+//             ) {
+//            tree.printTree(human);
+//        }
         System.out.println("Без сортировки: " + familyThree.getHumans());
         familyThree.sortByName();
         System.out.println("Сортировка по фамилии в обратном порядке: " + familyThree.getHumans());
         familyThree.sortByChild();
-        System.out.println("Сортировка по кол-ву детей: " + familyThree.getHumans());
+        System.out.println("Сортировка по кол-ву детей: ");
+        for (Human human: familyThree
+             ) {
+            System.out.println(human + " кол-во детей: " + human.getChildren().size());
+        }
 
     }
 }
