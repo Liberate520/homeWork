@@ -1,8 +1,6 @@
 
 import java.io.IOException;
 
-
-
 public class main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -31,6 +29,11 @@ public class main {
              ) {
             tree.printTree(human);
         }
+        System.out.println("Без сортировки: " + familyThree.getHumans());
+        familyThree.sortByName();
+        System.out.println("Сортировка по фамилии в обратном порядке: " + familyThree.getHumans());
+        familyThree.sortByChild();
+        System.out.println("Сортировка по кол-ву детей: " + familyThree.getHumans());
 
     }
 }

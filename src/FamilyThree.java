@@ -1,7 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-public class FamilyThree implements Serializable {
+public class FamilyThree implements Serializable{
     private List<Human> humans;
 
     public FamilyThree() {
@@ -41,6 +42,13 @@ public class FamilyThree implements Serializable {
 
     public List<Human> getHumans() {
         return humans;
+    }
+    public void sortByName(){
+        humans.sort(new FamilyComparatorByName<>());
+    }
+
+    public void sortByChild(){
+        humans.sort(new FamilyComparatorByChildrens<>());
     }
 }
 

@@ -18,6 +18,10 @@ public class Human implements Serializable {
 
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public Human getMother() {
         return mother;
     }
