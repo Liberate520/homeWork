@@ -3,6 +3,9 @@ import Elements.TreeElement;
 import Tree.FromTo;
 import Tree.FromToSerializeFile;
 import Tree.GenealogicalTree;
+import UI.Console;
+import UI.View;
+import presenter.Presenter;
 
 public class Main {
     public static void main(String[] args) {
@@ -80,7 +83,7 @@ public class Main {
         // Получение списка имён из загруженного дерева.
         System.out.println("Загружено из файла:");
         System.out.println();
-        GenealogicalTree<Human> loadedPushkin = savedFamily.readFrom("pushkin.out");
+        GenealogicalTree<TreeElement> loadedPushkin = savedFamily.readFrom("pushkin.out");
         for (String human:
                 loadedPushkin.getFamily()) {
             System.out.println(human);
@@ -110,5 +113,12 @@ public class Main {
                 pushkin.getFamily()) {
             System.out.println(human);
         }
+        System.out.println();
+
+
+        // MVP реализация
+        View view = new Console();
+        new Presenter(pushkin, view);
+        view.start();
     }
 }

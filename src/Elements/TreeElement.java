@@ -25,4 +25,5 @@ public abstract class TreeElement implements Serializable, Comparable<TreeElemen
     public int getDeathDay() {
         return deathDay;
     }
+
 }

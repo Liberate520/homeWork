@@ -41,7 +41,9 @@ public class GenealogicalTree<E extends TreeElement> implements Serializable, It
             }
         }
         return null;
-
+    }
+    public List<E> getTree(){
+        return family;
     }
 
     @Override
