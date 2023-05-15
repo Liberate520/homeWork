@@ -1,30 +1,29 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-public class FamilyThree implements Serializable, Iterable<Human>{
-    private List<Human> humans;
+public class FamilyThree<E extends FamilyGroup> implements Serializable, Iterable<Human>{
+    private List<E> humans;
 
     public FamilyThree() {
         this(new ArrayList<>());
     }
 
-    public FamilyThree(List<Human> humans) {
+    public FamilyThree(List<E> humans) {
         this.humans = humans;
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         if (human == null) {
             return;
         };
         if (!humans.contains(human)){
             humans.add(human);
             if (human.getFather() != null){
-                human.getFather().addChild(human);
+                human.getFather().addChild((Human)human);
             }
             if (human.getMother() != null){
-                human.getMother().addChild(human);
+                human.getMother().addChild((Human)human);
             }
         }
     }
@@ -41,20 +40,20 @@ public class FamilyThree implements Serializable, Iterable<Human>{
 
     }
 
-    public List<Human> getHumans() {
+    public List<E> getHumans() {
         return humans;
     }
     public void sortByName(){
-        humans.sort(new FamilyComparatorByName<>());
+        humans.sort(new FamilyComparatorByName<E>());
     }
 
     public void sortByChild(){
-        humans.sort(new FamilyComparatorByChildrens<>());
+        humans.sort(new FamilyComparatorByChildrens<E>());
     }
 
     @Override
     public Iterator<Human> iterator() {
-        return new FamilyIterator<>(humans);
+        return (Iterator<Human>) new FamilyIterator<E>(humans);
     }
 }
 
