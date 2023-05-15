@@ -3,11 +3,11 @@ package person;
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<E> implements Iterator<E> {
 	private int index;
-	private List<Person> personList;
+	private List<E> personList;
 	
-	public PersonIterator(List<Person> personList) {
+	public PersonIterator(List<E> personList) {
 		this.personList = personList;
 	}
 	
@@ -17,7 +17,7 @@ public class PersonIterator implements Iterator<Person> {
 	}
 	
 	@Override
-	public Person next() {
+	public E next() {
 		return personList.get(index++);
 	}
 }

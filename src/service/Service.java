@@ -1,5 +1,8 @@
+package service;
+
 import person.Gender;
 import person.Person;
+import tree.FamilyTree;
 
 public class Service {
 	private int id;
@@ -18,10 +21,6 @@ public class Service {
 	}
 	public void addPerson(String name, Gender gender){
 		familyGroup.addPerson(new Person(id++, name, gender));
-	}
-	
-	public void sortById(){
-		familyGroup.sortById();
 	}
 	
 	public void sortByName(){

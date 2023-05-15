@@ -1,5 +1,5 @@
+package tree;
 
-import comparators.PersonComparatorById;
 import comparators.PersonComparatorByName;
 import person.Person;
 import person.PersonIterator;
@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Person>{
-	private List<Person> personList;
+public class FamilyTree<E extends Person> implements Serializable, Iterable<E>{
+	private List<E> personList;
 	
 	public FamilyTree(){
 		this(new ArrayList<>());
 	}
 	
-	public FamilyTree(List<Person> personList) {
+	public FamilyTree(List<E> personList) {
 		this.personList = personList;
 	}
 	
-	public boolean addPerson(Person person){
+	public boolean addPerson(E person){
 		if (person == null) {
 			return false;
 		}
@@ -60,13 +60,13 @@ public class FamilyTree implements Serializable, Iterable<Person>{
 	}
 	
 	@Override
-	public Iterator<Person> iterator() {
-		return new PersonIterator(personList);
+	public Iterator<E> iterator() {
+		return new PersonIterator<E>(personList);
 	}
 	
-	public void sortById(){
-		personList.sort(new PersonComparatorById());
-	}
+//	public void sortById(){
+//		personList.sort(new PersonComparatorById());
+//	}
 	
 	public void sortByName(){
 		personList.sort(new PersonComparatorByName());
