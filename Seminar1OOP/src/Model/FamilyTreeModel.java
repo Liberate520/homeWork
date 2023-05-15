@@ -1,16 +1,15 @@
 package Model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTreeModel {
+public class FamilyTreeModel implements Iterable<Human> {
     private List<Human> humanList;
+    private DataIO dataIO;
 
     public FamilyTreeModel() {
         humanList = new ArrayList<>();
+        dataIO = new FileDataIO();
     }
 
     public void addHuman(String name, int yearOfBirth, String gender) {
@@ -41,15 +40,13 @@ public class FamilyTreeModel {
     }
 
     public void saveToFile(String fileName) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            oos.writeObject(humanList);
-        }
+        dataIO.saveToFile(humanList, fileName);
     }
 
     public void loadFromFile(String fileName) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            humanList = (List<Human>) ois.readObject();
-        }
+        humanList = dataIO.loadFromFile(fileName);
+    }
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
     }
 }
-
