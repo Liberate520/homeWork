@@ -3,30 +3,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E>{
     // класс человек (поля смерть, рождение, отец, мать, дети), enum Gender (male, female), класс дерево (список людей, добавление, поиск), связь через отдельн класс ()
-    private List<Person> familyTree;
+    private List<E> familyTree;
 
     public FamilyTree() {
         familyTree = new ArrayList<>();
     }
 
-    public void addPerson(Person person){
+    public void addPerson(E person){
         familyTree.add(person);
     }
 
     public Person getPersonByFirstSecondName(String firstName, String secondName) {
-        for (Person person: familyTree){
+        for (E person: familyTree){
             if (person.getFirstName().equals(firstName) & person.getSecondName().equals(secondName)){
-                return person;
+                return (Person) person;
             }
         }
         return null;
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator(familyTree);
+    public Iterator<E> iterator() {
+        return new PersonIterator<E>(familyTree);
     }
 
     public void sortByName(){
@@ -38,7 +38,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
     }
     public String getFamilyTree() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Person person: familyTree){
+        for (E person: familyTree){
             stringBuilder.append(person);
             stringBuilder.append("\n");
         }

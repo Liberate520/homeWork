@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, FamilyTreeItem {
     private Gender gender;
     private String firstName;
     private String secondName;
@@ -46,7 +46,7 @@ public class Person implements Serializable {
         this.secondName = secondName;
     }
 
-    public Integer getBorn() {
+    public int getBorn() {
         return born;
     }
 
@@ -54,7 +54,7 @@ public class Person implements Serializable {
         this.born = born;
     }
 
-    public Integer getDie() {
+    public int getDie() {
         return die;
     }
 
