@@ -1,4 +1,10 @@
+
 import Fileredactor.Fileredactor;
+import presenter.Presenter;
+import ui.Tree;
+import ui.commands.Human;
+import ui.commands.Serialise;
+import ui.commands.TreeService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,6 +12,11 @@ import java.util.ArrayList;
 class Main extends Fileredactor {
     
     
+    /**
+     * @param args
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static void main(String[] args)  throws IOException, ClassNotFoundException{
 
         Human person_1 = new Human("Marya", "Faivisovich", "28.05.1979", null, "w", "1PP_79", null, null);

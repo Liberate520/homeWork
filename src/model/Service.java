@@ -1,4 +1,5 @@
-package scr;
+package model;
+
 
 public interface Service {
 }

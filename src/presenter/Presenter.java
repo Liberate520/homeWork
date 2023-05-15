@@ -1,12 +1,16 @@
-import src.View;
+package presenter;
+import ui.Tree;
+import ui.commands.Human;
+import ui.commands.TreeService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.View;
 
 public class Presenter {
-    private View view;
+    public View view;
     private TreeService treeService;
 
     public Human addHuman(List<String> data) {

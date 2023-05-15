@@ -1,3 +1,4 @@
+package ui.commands;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -5,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import presenter.Presenter;
+import ui.Tree;
 
 public abstract class Fileredactor implements Saveandreadable {
 
@@ -70,7 +74,7 @@ public abstract class Fileredactor implements Saveandreadable {
                 line = breader.readLine();
             }
             Presenter presenter = new Presenter();
-            Human newPerson = presenter.addHuman(data);
+            final Human newPerson = presenter.addHuman(data);
             family.addHuman(newPerson);
             line = breader.readLine();
         }
