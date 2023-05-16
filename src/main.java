@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.logging.FileHandler;
 
 public class main {
+    private static final Human Юрий = null;
+    private static final Human Екатерина = null;
+    private static final Human Валерия = null;
+
     public static void main(String[] args) throws IOException {
         String filePath = "src/tree.txt";
-        Writeable writeable = new FileHandler();
+        ReadWrite writeable = (ReadWrite) new FileHandler();
         
         FamilyTree tree = new FamilyTree();
 
@@ -14,7 +18,7 @@ public class main {
         Human human2 = new Human(Gender.Male, Екатерина, null, null, null);
         Human human3 = new Human(Gender.Male, Валерия, Екатерина, Юрий, null);
     
-        writeable.save(tree,filePath);
+        writeable.write(tree,filePath);
 
         System.out.println(tree.getInfo());
 

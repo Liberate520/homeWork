@@ -52,16 +52,10 @@ public class Console implements View {
                 case 4:
                     System.out.println("Для сортировки по имени введите цифру 1:\n" +
                             "для сортировки по году рождения введите цифру 2: \n");
-                    try {
-                        int sortNumber = scanner.nextInt();
-                        presenter.sortByParameter(sortNumber);
-                        printMenu();
-                    } catch (Exception e) {
-                        System.out.println("Ошибка ввода! " + e);
                     }
                     break;
                 case 5:
-                    Human human = presenter.CreateHuman();
+                    Human human = presenter.createHuman();
                     presenter.addHuman(human);
                     printMenu();
                     break;

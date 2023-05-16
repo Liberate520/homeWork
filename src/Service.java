@@ -13,12 +13,8 @@ public class Service {
         this.fileHandler = fileHandler;
     }
 
-    private void setFamilyTree(FamilyTree<Human> familyTree) {
-        this.familyTree = familyTree;
-    }
-
-    public Human CreateHuman() {
-        return familyTree.CreateHuman();
+    public Human сreateHuman() {
+        return FamilyTree.FamilyTree();
     }
 
     public void getHumanByName(){

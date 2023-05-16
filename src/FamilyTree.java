@@ -34,6 +34,10 @@ public class FamilyTree implements Serializable,Iterator<Human> {
     public Human next() {
         return null;
     }
+
+    public static Human FamilyTree() {
+        return null;
+    }
 }
 
 

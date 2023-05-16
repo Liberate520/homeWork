@@ -1,7 +1,3 @@
-import Human;
-import Service;
-import View;
-
 import java.io.IOException;
 
 
@@ -15,8 +11,8 @@ public class Presenter{
         view.setPresenter(this);
     }
 
-    public Human CreateHuman() {
-        return service.CreateHuman();
+    public Human сreateHuman() {
+        return service.сreateHuman();
     }
 
     public void getHumanByName() {
