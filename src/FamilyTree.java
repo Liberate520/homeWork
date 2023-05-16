@@ -2,14 +2,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-public class FamilyThree<E extends FamilyGroup> implements Serializable, Iterable<Human>{
+public class FamilyTree<E extends FamilyGroup<E>> implements Serializable, Iterable<E>{
     private List<E> humans;
 
-    public FamilyThree() {
+    public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public FamilyThree(List<E> humans) {
+    public FamilyTree(List<E> humans) {
         this.humans = humans;
     }
 
@@ -20,18 +20,18 @@ public class FamilyThree<E extends FamilyGroup> implements Serializable, Iterabl
         if (!humans.contains(human)){
             humans.add(human);
             if (human.getFather() != null){
-                human.getFather().addChild((Human)human);
+                human.getFather().addChild(human);
             }
             if (human.getMother() != null){
-                human.getMother().addChild((Human)human);
+                human.getMother().addChild(human);
             }
         }
     }
-    public void printTree(Human human) {
+    public void printTree(E human) {
         System.out.println("Person: " + human.toString());
-        List<Human> children = human.getChildren();
+        var children = human.getChildren();
         if (children.size() != 0) {
-            for (Human child : children) {
+            for (Object child : children) {
                 System.out.println("  " + "Дети:" + " " + child);
             }
         } else {
@@ -44,16 +44,16 @@ public class FamilyThree<E extends FamilyGroup> implements Serializable, Iterabl
         return humans;
     }
     public void sortByName(){
-        humans.sort(new FamilyComparatorByName<E>());
+        humans.sort(new FamilyComparatorByName<>());
     }
 
     public void sortByChild(){
-        humans.sort(new FamilyComparatorByChildrens<E>());
+        humans.sort(new FamilyComparatorByChildrens<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return (Iterator<Human>) new FamilyIterator<E>(humans);
+    public Iterator<E> iterator() {
+        return new FamilyIterator<>(humans);
     }
 }
 

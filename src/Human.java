@@ -2,12 +2,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, FamilyGroup {
+public class Human implements Serializable, FamilyGroup{
     private String firstName;
     private String lastName;
     private Human mother;
     private Human father;
     private List<Human> children;
+
 
     public Human(String firstName, String lastName, Human mother, Human father) {
         this.firstName = firstName;
@@ -33,13 +34,14 @@ public class Human implements Serializable, FamilyGroup {
         return children;
     }
 
+
     @Override
     public String toString() {
         return firstName + " " +  lastName;
     }
-    public void addChild(Human child) {
+    public void addChild(Object child) {
         if (!children.contains(child)){
-            children.add(child);
+            children.add((Human) child);
         }
     }
 }
