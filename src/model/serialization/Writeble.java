@@ -1,7 +1,6 @@
-package java_oop_homeWork.src.serialization;
+package java_oop_homeWork.src.model.serialization;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public interface Writeble {
     boolean write(Serializable serializable, String filePath);

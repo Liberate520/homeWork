@@ -1,6 +1,4 @@
-package java_oop_homeWork.src.serialization;
-
-import java_oop_homeWork.src.serialization.Writeble;
+package java_oop_homeWork.src.model.serialization;
 
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
