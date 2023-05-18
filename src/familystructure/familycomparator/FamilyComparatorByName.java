@@ -1,3 +1,5 @@
+package familystructure.familycomparator;
+
 import java.util.Comparator;
 
 public class FamilyComparatorByName<T extends FamilyGroup> implements Comparator<T> {

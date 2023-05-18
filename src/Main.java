@@ -1,16 +1,22 @@
 
+import familystructure.familycomparator.FamilyGroup;
+import familystructure.FamilyTree;
+import writeAndread.Filehandler;
+import writeAndread.Writable;
+import human.*;
+
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
-//        Human person1  = new Human("ivan", "ivanov", null, null);
-//        Human person2 = new Human("olga", "ivanova", null, null);
-//        Human person3 = new Human("oleg","ivanov", person2, person1);
-//        Human person4 = new Human("ludmila", "ivanova", person2, person1);
-//        Human person5 = new Human("Igor", "Smirnov", null, null);
-//        Human person6 = new Human("Dmitry", "Smirnov", person4, person5);
+//        Human person1  = new human.Human("ivan", "ivanov", null, null);
+//        Human person2 = new human.Human("olga", "ivanova", null, null);
+//        Human person3 = new human.Human("oleg","ivanov", person2, person1);
+//        Human person4 = new human.Human("ludmila", "ivanova", person2, person1);
+//        Human person5 = new human.Human("Igor", "Smirnov", null, null);
+//        Human person6 = new human.Human("Dmitry", "Smirnov", person4, person5);
 
         FamilyTree tree = new FamilyTree();
 //        tree.addHuman(person1);
@@ -21,7 +27,7 @@ public class Main {
 //        tree.addHuman(person6);
 
         Writable writable = new Filehandler();
-        String filePath = "src/person.txt";
+        String filePath = "src/writeAndread/person.txt";
 //        writable.write(tree, filePath);
         FamilyTree familyThree = (FamilyTree) writable.read(filePath);
 

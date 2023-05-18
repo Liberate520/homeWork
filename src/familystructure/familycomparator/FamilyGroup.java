@@ -1,3 +1,5 @@
+package familystructure.familycomparator;
+
 import java.util.List;
 
 public interface FamilyGroup<E> {

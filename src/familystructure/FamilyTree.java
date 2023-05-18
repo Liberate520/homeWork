@@ -1,3 +1,9 @@
+package familystructure;
+
+import familystructure.familycomparator.FamilyComparatorByChildrens;
+import familystructure.familycomparator.FamilyComparatorByName;
+import familystructure.familycomparator.FamilyGroup;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

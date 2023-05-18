@@ -1,6 +1,8 @@
+package writeAndread;
+
 import java.io.*;
 
-public class Filehandler implements Writable{
+public class Filehandler implements Writable {
     @Override
     public void write(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
