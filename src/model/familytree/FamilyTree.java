@@ -1,4 +1,5 @@
 package model.familytree;
+import model.human.Human;
 import model.human.HumanIterator;
 
 import java.io.Serializable;
@@ -20,14 +21,20 @@ public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Itera
         return false;
     }
 
-    public List<T> getList() {
-        return list;
-    }
 
     public void changeDataOfHuman() {
         System.out.println("Choose person that need to change: ");
 
     }
+
+    public String getFamilyTreeInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T t : this.list) {
+            stringBuilder.append(t.getGeneralInfo()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
 
     @Override
     public Iterator<T> iterator() {

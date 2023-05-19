@@ -2,6 +2,7 @@ package model;
 
 import model.familytree.FamilyTree;
 import model.filesaver.FileReaderWriter;
+import model.human.Gender;
 import model.human.Human;
 import model.human.HumanCreator;
 
@@ -24,14 +25,12 @@ public class Service {
         fileReaderWriter.write(this.familyTree, path);
     }
 
-    public void addNewHumanToFamilyTree() {
-        this.familyTree.addHumanToList(humanCreator.createNewHuman());
+    public void addNewHumanToFamilyTree(Gender gender, String name, String lastName, Integer age ) {
+        this.familyTree.addHumanToList(humanCreator.createNewHuman(gender, name, lastName, age));
     }
 
-    public void getFamilyTreeInfo() {
-        for (Human human : familyTree) {
-            System.out.println(human.getGeneralInfo());
-        }
+    public String getFamilyTreeInfo() {
+       return this.familyTree.getFamilyTreeInfo();
     }
 
     public void sortFamilyTreeByName() {

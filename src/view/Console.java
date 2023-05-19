@@ -51,4 +51,6 @@ public class Console implements View{
     public Presenter getPresenter() {
         return this.presenter;
     }
+
+   
 }

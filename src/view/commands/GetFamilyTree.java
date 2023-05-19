@@ -11,6 +11,6 @@ public class GetFamilyTree extends CommandsAbstract{
 
     @Override
     public void execute() {
-        this.getView().getPresenter().getFamilyTreeInfo();
+        System.out.println(this.getView().getPresenter().getFamilyTreeInfo());
     }
 }

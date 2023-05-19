@@ -8,4 +8,5 @@ public interface FamilyTreeItem {
     String getLastname();
     Gender getGender();
     Integer getId();
+    String getGeneralInfo();
 }
