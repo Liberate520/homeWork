@@ -1,12 +1,12 @@
-package human;
+package module.human;
 
-import familystructure.familycomparator.FamilyGroup;
+import module.familystructure.FamilyGroup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, FamilyGroup {
+public class Human implements FamilyGroup<Human>, Serializable {
     private String firstName;
     private String lastName;
     private Human mother;
@@ -14,13 +14,16 @@ public class Human implements Serializable, FamilyGroup {
     private List<Human> children;
 
 
-    public Human(String firstName, String lastName, Human mother, Human father) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Human(String firstName, String lastName)
+    {
+        this(firstName, lastName, null, null);
+    }
+    public Human(String firstname, String lastname, Human mother, Human father) {
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.mother = mother;
         this.father = father;
         children = new ArrayList<>();
-
     }
 
     public String getLastName() {
@@ -43,9 +46,9 @@ public class Human implements Serializable, FamilyGroup {
     public String toString() {
         return firstName + " " +  lastName;
     }
-    public void addChild(Object child) {
+    public void addChild(Human child) {
         if (!children.contains(child)){
-            children.add((Human) child);
+            children.add(child);
         }
     }
 }

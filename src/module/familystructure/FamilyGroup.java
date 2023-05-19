@@ -1,4 +1,4 @@
-package familystructure.familycomparator;
+package module.familystructure;
 
 import java.util.List;
 

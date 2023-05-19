@@ -1,4 +1,4 @@
-package familystructure;
+package module.familystructure;
 
 import java.util.Iterator;
 import java.util.List;

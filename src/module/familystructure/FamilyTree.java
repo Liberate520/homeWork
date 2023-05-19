@@ -1,15 +1,14 @@
-package familystructure;
+package module.familystructure;
 
-import familystructure.familycomparator.FamilyComparatorByChildrens;
-import familystructure.familycomparator.FamilyComparatorByName;
-import familystructure.familycomparator.FamilyGroup;
+import module.familystructure.familycomparator.FamilyComparatorByChildren;
+import module.familystructure.familycomparator.FamilyComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 public class FamilyTree<E extends FamilyGroup<E>> implements Serializable, Iterable<E>{
-    private List<E> humans;
+    private final List<E> humans;
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -50,16 +49,16 @@ public class FamilyTree<E extends FamilyGroup<E>> implements Serializable, Itera
         return humans;
     }
     public void sortByName(){
-        humans.sort(new FamilyComparatorByName<>());
+        humans.sort(new FamilyComparatorByName<E>());
     }
 
     public void sortByChild(){
-        humans.sort(new FamilyComparatorByChildrens<>());
+        humans.sort(new FamilyComparatorByChildren<E>());
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new FamilyIterator<>(humans);
+        return new FamilyIterator<E>(humans);
     }
 }
 
