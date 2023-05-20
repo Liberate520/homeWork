@@ -1,13 +1,20 @@
 package model;
 
 import model.Elements.Human;
+import model.Tree.FromTo;
+import model.Tree.FromToSerializeFile;
 import model.Tree.GenealogicalTree;
+
+import java.util.List;
 
 public class HumanModel implements Model{
     private GenealogicalTree<Human> tree;
 
     public HumanModel(GenealogicalTree<Human> tree) {
         this.tree = tree;
+    }
+    public HumanModel(){
+        this(new GenealogicalTree<Human>());
     }
 
     @Override
@@ -66,5 +73,27 @@ public class HumanModel implements Model{
     public void sort(){
         tree.sort();
     }
-
+    @Override
+    public String connectPerson(String nameElement, String nameHuman){
+        if(isAbsent(nameElement)){
+            return "Такого элемента нет.";
+        }
+        if(isAbsent(nameHuman)){
+            return "Такого человека нет.";
+        }
+        tree.findElement(nameElement).setSpouse(tree.findElement(nameHuman));
+        return "Супруг(а) установлен(а).";
+    }
+    @Override
+    public String save(String fileName){
+        FromTo savedFamily = new FromToSerializeFile(fileName);
+        savedFamily.saveTo(tree);
+        return "Генеалогическое древо сохранено";
+    }
+    @Override
+    public String load(String fileName){
+        FromTo loadedFamily = new FromToSerializeFile(fileName);
+        this.tree = loadedFamily.readFrom(fileName);
+        return "Генеалогическое древо загружено.";
+    }
 }

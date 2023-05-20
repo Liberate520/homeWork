@@ -12,11 +12,17 @@ public class Menu {
     public Menu(Console console) {
         this.console = console;
         commands = new ArrayList<>();
+        commands.add(new LoadFrom(console));
+        commands.add(new SaveTo(console));
         commands.add(new GetTreeElementList(console));
         commands.add(new FindElement(console));
         commands.add(new AddElement(console));
+        commands.add(new SetFather(console));
+        commands.add(new SetMother(console));
+        commands.add(new AddChildren(console));
         commands.add(new Sort(console));
         commands.add(new Exit(console));
+
     }
 
     void doit(int choice) {

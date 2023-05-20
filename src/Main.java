@@ -1,5 +1,6 @@
 import model.Elements.Human;
 import model.Elements.TreeElement;
+import model.HumanModel;
 import model.Tree.FromTo;
 import model.Tree.FromToSerializeFile;
 import model.Tree.GenealogicalTree;
@@ -63,7 +64,7 @@ public class Main {
         System.out.println();
 
         for (String human:
-                pushkin.getFamily()) {
+                pushkin.getViewFamily()) {
             System.out.println(human);
         }
         System.out.println();
@@ -85,7 +86,7 @@ public class Main {
         System.out.println();
         GenealogicalTree<TreeElement> loadedPushkin = savedFamily.readFrom("pushkin.out");
         for (String human:
-                loadedPushkin.getFamily()) {
+                loadedPushkin.getViewFamily()) {
             System.out.println(human);
         }
         System.out.println();
@@ -101,7 +102,7 @@ public class Main {
         // Сортировка по умолчанию по дню рождения (от младших к старшим).
         pushkin.sort();
         for (String human:
-                pushkin.getFamily()) {
+                pushkin.getViewFamily()) {
             System.out.println(human);
         }
         System.out.println();
@@ -110,7 +111,7 @@ public class Main {
         // Сортировка по имени.
         pushkin.sortByName();
         for (String human:
-                pushkin.getFamily()) {
+                pushkin.getViewFamily()) {
             System.out.println(human);
         }
         System.out.println();
@@ -118,7 +119,8 @@ public class Main {
 
         // MVP реализация
         View view = new Console();
-        new Presenter(pushkin, view);
+        new Presenter(new HumanModel(pushkin), view);
+//        new Presenter(new HumanModel(),view);
         view.start();
 
 

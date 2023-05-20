@@ -16,11 +16,16 @@ public class GenealogicalTree<E extends TreeElement> implements Serializable, It
         this.family = family;
     }
 
+
     public GenealogicalTree() {
         this(new ArrayList<>());
     }
 
-    public List<String> getFamily() {
+    public List<E> getFamily() {
+        return family;
+    }
+
+    public List<String> getViewFamily() {
         List<String> result = new ArrayList<>();
         for (E item:
              family) {
