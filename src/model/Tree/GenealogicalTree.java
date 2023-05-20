@@ -1,7 +1,7 @@
-package Tree;
+package model.Tree;
 
-import Elements.ComparatorByName;
-import Elements.TreeElement;
+import model.Elements.ComparatorByName;
+import model.Elements.TreeElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,11 +28,11 @@ public class GenealogicalTree<E extends TreeElement> implements Serializable, It
         }
         return result;
     }
-    public void addHuman(E human){
+    public void addElement(E human){
         family.add(human);
     }
 
-    public E findHuman(String name) {
+    public E findElement(String name) {
 
         for (E item :
                 family) {
@@ -42,8 +42,8 @@ public class GenealogicalTree<E extends TreeElement> implements Serializable, It
         }
         return null;
     }
-    public List<E> getTree(){
-        return family;
+    public GenealogicalTree<E> getTree(){
+        return this;
     }
 
     @Override
@@ -57,5 +57,8 @@ public class GenealogicalTree<E extends TreeElement> implements Serializable, It
 
     public void sortByName(){
         family.sort(new ComparatorByName<>());
+    }
+    public boolean contains(E element){
+        return family.contains(element);
     }
 }

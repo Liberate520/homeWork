@@ -1,8 +1,7 @@
 package presenter;
 
-import Elements.TreeElement;
-import Tree.GenealogicalTree;
-import Elements.Human;
+import model.Elements.TreeElement;
+import model.Tree.GenealogicalTree;
 import UI.View;
 
 public class Presenter<E extends TreeElement> {
@@ -16,7 +15,7 @@ public class Presenter<E extends TreeElement> {
     }
 
     public void addTreeElement(String name, int birthday, int deathDay) {
-        tree.addHuman((E) new Human(name, birthday, deathDay));
+        tree.addElement(new E(name, birthday, deathDay));
         view.print("Добавлено");
     }
 
@@ -28,12 +27,13 @@ public class Presenter<E extends TreeElement> {
     }
 
     public void findTreeElement(String name) {
-        view.print(tree.findHuman(name).toString());
+        view.print(tree.findElement(name).toString());
     }
 
     public void sort(){
         tree.sort();
         view.print("Отсортировано.");
     }
+
 
 }

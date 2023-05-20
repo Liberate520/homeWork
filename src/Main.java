@@ -1,8 +1,8 @@
-import Elements.Human;
-import Elements.TreeElement;
-import Tree.FromTo;
-import Tree.FromToSerializeFile;
-import Tree.GenealogicalTree;
+import model.Elements.Human;
+import model.Elements.TreeElement;
+import model.Tree.FromTo;
+import model.Tree.FromToSerializeFile;
+import model.Tree.GenealogicalTree;
 import UI.Console;
 import UI.View;
 import presenter.Presenter;
@@ -10,7 +10,7 @@ import presenter.Presenter;
 public class Main {
     public static void main(String[] args) {
 
-        // Создание объектов Elements.Human.
+        // Создание объектов model.Elements.Human.
         Human human1 = new Human("Пушкин Лев Александрович", 1723, 1790);
         Human human2 = new Human("Чичерина Ольга Васильевна", 1737, 1802);
         Human human3 = new Human("Пушкин Сергей Львович", 1770, 1848);
@@ -20,7 +20,7 @@ public class Main {
         Human human7 = new Human("Пушкин Лев Сергеевич", 1805, 1852);
         Human human8 = new Human("Гончарова Наталья Николаевна", 1812, 1863);
 
-        // Создание связей между Elements.Human.
+        // Создание связей между model.Elements.Human.
         human1.setSpouse(human2);
         human2.setSpouse(human1);
         human2.addChildren(human3);
@@ -49,17 +49,17 @@ public class Main {
 
         // Создание генеалогического дерева.
         GenealogicalTree<Human> pushkin = new GenealogicalTree<>();
-        pushkin.addHuman(human1);
-        pushkin.addHuman(human2);
-        pushkin.addHuman(human3);
-        pushkin.addHuman(human4);
-        pushkin.addHuman(human5);
-        pushkin.addHuman(human6);
-        pushkin.addHuman(human7);
-        pushkin.addHuman(human8);
+        pushkin.addElement(human1);
+        pushkin.addElement(human2);
+        pushkin.addElement(human3);
+        pushkin.addElement(human4);
+        pushkin.addElement(human5);
+        pushkin.addElement(human6);
+        pushkin.addElement(human7);
+        pushkin.addElement(human8);
 
 
-        System.out.println(human4.getChildren());
+        System.out.println(human4.getChildrensName());
         System.out.println();
 
         for (String human:
@@ -68,10 +68,10 @@ public class Main {
         }
         System.out.println();
 
-        System.out.println(pushkin.findHuman("Пушкин Сергей Львович"));
+        System.out.println(pushkin.findElement("Пушкин Сергей Львович"));
         System.out.println();
 
-        System.out.println(pushkin.findHuman("Пушкин Александр Сергеевич").getSpouse().getName());
+        System.out.println(pushkin.findElement("Пушкин Александр Сергеевич").getSpouse().getName());
         System.out.println();
 
 
@@ -120,5 +120,9 @@ public class Main {
         View view = new Console();
         new Presenter(pushkin, view);
         view.start();
+
+
     }
+
+
 }
