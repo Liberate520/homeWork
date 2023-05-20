@@ -120,7 +120,9 @@ public class Main {
         // MVP реализация
         View view = new Console();
         new Presenter(new HumanModel(pushkin), view);
-//        new Presenter(new HumanModel(),view);
+
+        //Можно начать с выгрузки дерева из файла.
+ //       new Presenter(new HumanModel(),view);
         view.start();
 
 

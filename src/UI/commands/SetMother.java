@@ -9,7 +9,7 @@ public class SetMother extends Command{
 
     @Override
     public String getDescription() {
-        return "Установить матью";
+        return "Установить мать.";
     }
 
     @Override

@@ -67,7 +67,7 @@ public class HumanModel implements Model{
         if(isAbsent(mother)){
             return "Такого родителя нет.";
         }
-        tree.findElement(child).setFather(tree.findElement(mother));
+        tree.findElement(child).setMother(tree.findElement(mother));
         return "Мать установлена.";
     }
     public void sort(){
