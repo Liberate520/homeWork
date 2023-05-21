@@ -1,6 +1,6 @@
 package ui.commands;
 
-import ui.View;
+import ui.View.View;
 
 public class Upload implements Command{
     private View view;

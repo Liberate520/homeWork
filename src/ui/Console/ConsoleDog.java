@@ -1,18 +1,20 @@
-package ui;
+package ui.Console;
 
-import presenter.Presenter;
+import presenter.PresenterDog;
+import ui.Menu.MenuDog;
+import ui.View.ViewDog;
 
 import java.util.Scanner;
 
-public class Console implements View{
-    private Presenter presenter;
+public class ConsoleDog implements ViewDog {
+    private PresenterDog presenterDog;
     private Scanner scanner;
     private boolean work;
-    private Menu menu;
+    private MenuDog menu;
 
-    public Console() {
+    public ConsoleDog() {
         scanner = new Scanner(System.in);
-        menu = new Menu(this);
+        menu = new MenuDog(this);
         work = true;
     }
 
@@ -53,37 +55,6 @@ public class Console implements View{
         return number;
     }
 
-    @Override
-    public void addChild() {
-        System.out.print("Введите имя родителя ребенка: ");
-        String parentName = scanner.nextLine();
-        System.out.print("Введите пол ребенка: ");
-        String gender = scanner.nextLine();
-        System.out.print("Введите имя ребенка: ");
-        String childName = scanner.nextLine();
-        presenter.addChild(parentName, gender, childName);
-    }
-
-    @Override
-    public void addHuman() {
-        System.out.print("Введите пол: ");
-        String gender = scanner.nextLine();
-        System.out.print("Введите имя: ");
-        String firstName = scanner.nextLine();
-        System.out.print("Введите фамилию: ");
-        String lastName = scanner.nextLine();
-        presenter.addHuman(gender, firstName, lastName);
-    }
-
-    @Override
-    public void getMarried() {
-        System.out.print("Введите имя первого партнера: ");
-        String name1 = scanner.nextLine();
-        System.out.print("Введите имя второго партнера: ");
-        String name2 = scanner.nextLine();
-        presenter.getMarried(name1, name2);
-
-    }
 
     @Override
     public void finishWork() {
@@ -93,25 +64,46 @@ public class Console implements View{
 
     @Override
     public void getInfo() {
-        System.out.println(presenter.getInfo());
+        System.out.println(presenterDog.getInfo());
     }
 
     @Override
     public void save() {
         System.out.print("Введите имя файла: ");
         String fileName = scanner.nextLine();
-        presenter.save(fileName + ".txt");
+        presenterDog.save(fileName + ".txt");
     }
 
     @Override
     public void upload() {
         System.out.print("Введите имя файла: ");
         String fileName = scanner.nextLine();
-        presenter.upload(fileName);
+        presenterDog.upload(fileName);
     }
 
     @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
+    public void addChild() {
+        System.out.print("Введите имя родителя ребенка: ");
+        String parentName = scanner.nextLine();
+        System.out.print("Введите пол ребенка: ");
+        String gender = scanner.nextLine();
+        System.out.print("Введите имя ребенка: ");
+        String childName = scanner.nextLine();
+        presenterDog.addChild(parentName, gender, childName);
+    }
+
+    @Override
+    public void addMember() {
+        System.out.print("Введите пол: ");
+        String gender = scanner.nextLine();
+        System.out.print("Введите кличку: ");
+        String firstName = scanner.nextLine();
+        presenterDog.addMember(gender, firstName);
+    }
+
+    @Override
+    public void setPresenter(PresenterDog presenterDog) {
+        this.presenterDog = presenterDog;
     }
 }
+

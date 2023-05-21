@@ -1,28 +1,21 @@
-package model;
+package model.Services;
 
-import model.dogs.Dog;
 import model.famalyTree.FamilyTree;
-import model.famalyTree.FileHandler;
-import model.famalyTree.Savable;
 import model.humans.*;
 
-public class Service{
-    private FamilyTree familyTree;
-    private Savable savable;
+import java.util.List;
 
-    public Service(FamilyTree familyTree) {
-        this.familyTree = familyTree;
-        savable = new FileHandler();
+public class ServiceHuman extends Service implements ServiceMarry {
+
+    public ServiceHuman(FamilyTree familyTree) {
+        super(familyTree);
     }
 
-    public Service() {
+    public ServiceHuman() {
         this(new FamilyTree());
     }
 
-    public FamilyTree getFamilyTree() {
-        return familyTree;
-    }
-
+    @Override
     public void getMarried(String human1Name, String human2Name) {
         Human human1 = (Human) familyTree.searchByName(human1Name);
         Human human2 = (Human) familyTree.searchByName(human2Name);
@@ -41,24 +34,13 @@ public class Service{
         }
     }
 
-    private Gender setGender(String gender){
-        if(gender.toLowerCase().equals("male")) {
-            return Gender.Male;
-        } else return Gender.Female;
-    }
-
-    public void addHuman(String gen, String firstName, String lastName) {
-        Gender gender = setGender(gen);
+    public void addMember(String gen, String firstName, String lastName) {
+        Gender gender = super.setGender(gen);
         familyTree.addMember(new Human(gender, firstName, lastName));
     }
 
-    public void addDog(String gen, String firstName) {
-        Gender gender = setGender(gen);
-        familyTree.addMember(new Dog(gender, firstName));
-    }
-
     public void addChild(String parentName, String gen, String name) {
-        Gender gender = setGender(gen);
+        Gender gender = super.setGender(gen);
         Human parent = (Human) familyTree.searchByName(parentName);
         Human child = new Human(gender, name);
         if (child.getGender().equals(Gender.Female)) {
@@ -84,25 +66,5 @@ public class Service{
         familyTree.addMember(child);
         parent.addChild(child);
         parent.getPartner().addChild(child);
-    }
-
-    public String getInfo(){
-        return familyTree.getInfo();
-    }
-
-    public void save(String path){
-        savable.save(familyTree, path);
-    }
-
-    public void upload(String path) {
-        this.familyTree = (FamilyTree) savable.upload(path);
-    }
-
-    public void sortByName() {
-        familyTree.sortByName();
-    }
-
-    public void sortAmountOfChildren(){
-        familyTree.sortAmountOfChildren();
     }
 }

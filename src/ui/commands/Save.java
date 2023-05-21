@@ -1,6 +1,6 @@
 package ui.commands;
 
-import ui.View;
+import ui.View.View;
 
 public class Save implements Command {
     private View view;

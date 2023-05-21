@@ -1,12 +1,14 @@
-package ui.commands;
+package ui.commands.DogCommands;
 
-import ui.View;
+import ui.View.View;
+import ui.View.ViewDog;
+import ui.commands.Command;
 
-public class AddChild implements Command{
-    private View view;
+public class AddChild implements Command {
+    private ViewDog view;
 
     public AddChild(View view) {
-        this.view = view;
+        this.view = (ViewDog) view;
     }
 
     @Override

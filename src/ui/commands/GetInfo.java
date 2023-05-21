@@ -1,6 +1,6 @@
 package ui.commands;
 
-import ui.View;
+import ui.View.View;
 
 public class GetInfo implements Command{
     private View view;
