@@ -1,9 +1,7 @@
 package presenter;
 
-import model.Elements.TreeElement;
-import model.Model;
-import model.Tree.GenealogicalTree;
 import UI.View;
+import model.Model;
 
 public class Presenter{
     private Model model;
@@ -36,12 +34,10 @@ public class Presenter{
         view.print("Отсортировано.");
     }
     public void load(String fileName){
-        model.load(fileName);
-        view.print("Загружено.");
+        view.print(model.load(fileName));
     }
     public void save(String fileName){
-        model.save(fileName);
-        view.print("Сохранено.");
+        view.print(model.save(fileName));
     }
     public void addChildren(String parent, String child){
         view.print(model.addChildren(parent, child));

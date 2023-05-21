@@ -5,8 +5,6 @@ import model.Tree.FromTo;
 import model.Tree.FromToSerializeFile;
 import model.Tree.GenealogicalTree;
 
-import java.util.List;
-
 public class HumanModel implements Model{
     private GenealogicalTree<Human> tree;
 

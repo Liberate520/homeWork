@@ -1,9 +1,6 @@
 package model;
 
-import model.Elements.Human;
 import model.Elements.TreeElement;
-import model.Tree.FromTo;
-import model.Tree.FromToSerializeFile;
 import model.Tree.GenealogicalTree;
 
 public interface Model<E extends TreeElement> {
