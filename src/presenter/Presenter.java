@@ -1,72 +1,37 @@
 package presenter;
 
-import model.FamilyTree;
-import model.FamilyTreeItem;
-import model.Gender;
-import model.Human;
+import model.*;
 import ui.View;
 
 public class Presenter {
     private View view;
-    private FamilyTree familyTree;
+    private Service service;
 
-    public Presenter(View view, FamilyTree familyTree) {
+    public Presenter(View view, Service service) {
         this.view = view;
-        this.familyTree = familyTree;
+        this.service = service;
         view.setPresenter(this);
     }
 
     public void addHuman(String name, int age, String gender, String motherName, String fatherName) {
-        Gender gender1 = Gender.male;
-        if (gender.equals("ж")) {
-            gender1 = Gender.female;
-        }
-
-        Human mother = null;
-        Human father = null;
-
-        if (familyTree.findHumanByName(motherName) != null) {
-            mother = (Human) familyTree.findHumanByName(motherName);
-        }
-        if (familyTree.findHumanByName(fatherName) != null) {
-            father = (Human) familyTree.findHumanByName(fatherName);
-        }
-
-        Human newHuman = new Human(name, age, gender1, mother, father);
-
-        familyTree.addHuman(newHuman);
+        service.addHuman(name, age, gender, motherName, fatherName);
     }
 
 
     public void showAllRelatives() {
-        view.print(familyTree.showAllRelatives());
+        service.showAllRelatives();
     }
 
     public String findHumanByName(String name) {
-        Human human = null;
-
-        if (familyTree.findHumanByName(name) != null) {
-            human = (Human) familyTree.findHumanByName(name);
-            return human.toString();
-        }
-
-        return "Такого человека не существует";
+        return service.findHumanByName(name);
     }
 
     public void showKids(String name) {
-        Human human = null;
-        if (familyTree.findHumanByName(name) != null) {
-            human = (Human) familyTree.findHumanByName(name);
-            human.showKids();
-        } else System.out.println("Некорректное имя");
+        service.showKids(name);
     }
 
     public void findSiblings(String name) {
-        Human human = null;
-        if (familyTree.findHumanByName(name) != null) {
-            human = (Human) familyTree.findHumanByName(name);
-            human.findSiblings();
-        } else System.out.println("Некорректное имя");
+        service.findSiblings(name);
     }
 
 
