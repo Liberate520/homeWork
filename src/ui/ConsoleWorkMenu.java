@@ -1,17 +1,11 @@
 package ui;
 
 import human.Gender;
-import presenter.Presenter;
-
 import java.util.Scanner;
 
-public class ConsoleWorkMenu implements ViewWorkMenu{
+public class ConsoleWorkMenu extends ConsoleMenu implements ViewWorkMenu{
 
-    private static final String INPUT_ERROR = "Вы ввели неверное значение, повторите ввод";
-    private Presenter presenter;
-    private Scanner scanner;
     private WorkMenu workMenu;
-    private boolean start;
 
     public ConsoleWorkMenu(){
         scanner = new Scanner(System.in);
@@ -20,21 +14,11 @@ public class ConsoleWorkMenu implements ViewWorkMenu{
     }
 
     @Override
-    public void print(String text) {
-        System.out.println(text);
-    }
-
-    @Override
     public void start() {
         while (start){
-            printWorkMenu();
+            printMenu();
             execute();
         }
-    }
-
-    @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -95,44 +79,22 @@ public class ConsoleWorkMenu implements ViewWorkMenu{
         presenter.getPeople();
     }
 
-    @Override
-    public void finish() {
-        start = false;
-    }
 
-    private void printWorkMenu() {
+    public void printMenu() {
         System.out.println(workMenu.print());
     }
 
-    private void execute() {
+    public void execute() {
         String input = scanner.nextLine();
         if (checkTextForInt(input)){
             int numCommand = Integer.parseInt(input);
-            if (checkCommand(numCommand)){
+            if (checkCommand(numCommand, workMenu)){
                 workMenu.execute(numCommand);
             }
         }
     }
-    private boolean checkTextForInt(String text){
-        if (text.matches("[0-9]+")){
-            return true;
-        } else {
-            inputError();
-            return false;
-        }
-    }
-    private boolean checkCommand(int numCommand){
-        if (numCommand <= workMenu.size() && numCommand > 0){
-            return true;
-        } else {
-            inputError();
-            return false;
-        }
-    }
 
-    private void inputError() {
-        System.out.println(INPUT_ERROR);
-    }
+
     private Gender getGender(){
         while (true){
             String text = scanner.nextLine();

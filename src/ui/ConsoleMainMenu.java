@@ -8,13 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-public class ConsoleMainMenu implements ViewMainMenu{
-    private static final String INPUT_ERROR = "Вы ввели неверное значение, повторите ввод";
-    private Presenter presenter;
-    private Scanner scanner;
+public class ConsoleMainMenu extends ConsoleMenu implements ViewMainMenu{
+
     private MainMenu mainMenu;
-    private WorkWithTree workWithTree;
-    private boolean start;
+
     private String family;
 
     public ConsoleMainMenu(){
@@ -24,10 +21,6 @@ public class ConsoleMainMenu implements ViewMainMenu{
         this.family = "";
     }
 
-    @Override
-    public void print(String text) {
-        System.out.println(text);
-    }
 
     @Override
     public void start() {
@@ -36,7 +29,7 @@ public class ConsoleMainMenu implements ViewMainMenu{
             if (!family.equals("")){
                 System.out.println("Дерево: " + family);
             }
-            printMainMenu();
+            printMenu();
             execute();
         }
     }
@@ -100,43 +93,20 @@ public class ConsoleMainMenu implements ViewMainMenu{
         start = false;
     }
 
-    @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
-    }
     private void hello(){
         System.out.println("Добро пожаловать!");
     }
-    private void printMainMenu(){
+    public void printMenu(){
         System.out.println(mainMenu.print());
     }
-    private void execute(){
+    public void execute(){
         String input = scanner.nextLine();
         if (checkTextForInt(input)){
             int numCommand = Integer.parseInt(input);
-            if (checkCommand(numCommand)){
+            if (checkCommand(numCommand,mainMenu)){
                 mainMenu.execute(numCommand);
             }
         }
     }
-    private boolean checkTextForInt(String text){
-        if (text.matches("[0-9]+")){
-            return true;
-        } else {
-            inputError();
-            return false;
-        }
-    }
-    private boolean checkCommand(int numCommand){
-        if (numCommand <= mainMenu.size() && numCommand > 0){
-            return true;
-        } else {
-            inputError();
-            return false;
-        }
-    }
 
-    private void inputError() {
-        System.out.println(INPUT_ERROR);
-    }
 }
