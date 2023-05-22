@@ -1,12 +1,13 @@
-package familyTree.person;
+package familyTree.model.person;
 
-import familyTree.TreeItems;
-import java.io.*;
+import familyTree.model.TreeItems;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Person implements Serializable,TreeItems {
+public class Person implements Serializable,TreeItems<Person> {
     private int age;
     private String gender;
     private String name;
@@ -25,12 +26,10 @@ public class Person implements Serializable,TreeItems {
     public Person(int age, String gender,String name) {
         this(age,gender,name,null,null);
     }
-    public boolean addChild (Person child){
+    public void addChild (Person child){
         if(!children.contains(child)){
             children.add(child);
-            return true;
         }
-        return false;
     }
     @Override
     public boolean equals(Object obj) {

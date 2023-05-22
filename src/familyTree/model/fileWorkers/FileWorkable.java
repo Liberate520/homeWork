@@ -1,4 +1,4 @@
-package familyTree.fileWorkers;
+package familyTree.model.fileWorkers;
 
 import java.io.Serializable;
 

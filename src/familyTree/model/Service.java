@@ -1,11 +1,9 @@
-package familyTree;
+package familyTree.model;
 
 
-import familyTree.fileWorkers.FileWorker;
-import familyTree.person.Person;
-import familyTree.tree.Tree;
-
-import java.io.Serializable;
+import familyTree.model.fileWorkers.FileWorker;
+import familyTree.model.person.Person;
+import familyTree.model.tree.Tree;
 
 public class Service {
     private Tree<Person> currentTree;
@@ -16,6 +14,8 @@ public class Service {
     public Service(Tree<Person> currentTree) {
         this.currentTree = currentTree;
     }
+
+
     public void addPerson(Person person){
         currentTree.addPerson(person);
     }
@@ -44,12 +44,15 @@ public class Service {
         return currentTree.getInfoTree();
     }
 
-    public boolean saveFile(Serializable serializable, String filePath) {
+    public boolean saveFile(String filePath) {
         return fileWorker.saveFile(currentTree,filePath);
     }
-
     public Object readFile(String filePath) {
        return fileWorker.readFile(filePath);
+    }
+
+    public Person search(String e){
+        return currentTree.search(e);
     }
 
 

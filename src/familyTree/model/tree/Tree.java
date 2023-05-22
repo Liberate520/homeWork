@@ -1,28 +1,32 @@
-package familyTree.tree;
+package familyTree.model.tree;
 
-import familyTree.TreeItems;
-import familyTree.person.ComparatorAge;
-import familyTree.person.ComparatorGender;
-import familyTree.person.ComparatorName;
-import familyTree.person.Person;
+import familyTree.model.TreeItems;
+import familyTree.model.person.ComparatorAge;
+import familyTree.model.person.ComparatorGender;
+import familyTree.model.person.ComparatorName;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Tree<E extends TreeItems> implements Serializable, Iterable<E> {
     private List<E> family;
     public Tree() {
         family= new ArrayList<>();
     }
-    public void addPerson(E e){
+    public boolean addPerson(E e){
+        if (e==null){
+            return false;
+        }
         family.add(e);
         if(e.getMother()!=null){
-            var mother = e.getMother();
-            mother.addChild((Person) e);
+            e.getMother().addChild(e);
         }
         if(e.getFather()!=null){
-            e.getFather().addChild((Person) e);
+            e.getFather().addChild(e);
         }
+        return true;
     }
 
     public  String getParents(E e){
@@ -106,6 +110,19 @@ public class Tree<E extends TreeItems> implements Serializable, Iterable<E> {
     public void sortGender(){
         family.sort(new ComparatorGender());
     }
+
+    public E search (String e){
+        for (E x : family) {
+            try {
+                if (x.getName().equals(e)) {
+                    return x;
+                }
+            } catch (NullPointerException y) {
+            }
+        }
+        return null;
+    }
+
 
 
 
