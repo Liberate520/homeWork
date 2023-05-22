@@ -1,8 +1,10 @@
-package ui.commands;
+package model.familyTree;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import model.human.Human;
 
 public interface Serialisible<T extends Human> {
 

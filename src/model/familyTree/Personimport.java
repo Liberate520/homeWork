@@ -1,8 +1,8 @@
-package ui.commands;
+package model.familyTree;
 
 import java.util.Scanner;
 
-import ui.Tree;
+import model.human.Human;
 
 import java.io.IOException;
 import java.util.ArrayList;

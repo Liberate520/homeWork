@@ -1,4 +1,4 @@
-package ui.commands;
+package model.human;
 import java.io.Serializable;
 import java.util.List;
 
@@ -139,7 +139,9 @@ public class Human  implements Serializable, Comparable<Human>{
 
         return lastname.compareTo(o.lastname);
     }
-
-
+    public void setField(String string, String string2) {
+    }
+    public Human(){ 
+    }
 }
     

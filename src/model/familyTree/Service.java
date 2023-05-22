@@ -1,4 +1,4 @@
-package model;
+package model.familyTree;
 
 
 public interface Service {

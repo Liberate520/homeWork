@@ -1,7 +1,8 @@
-package ui.commands;
+package model.familyTree;
 import java.util.Collections;
 
-import ui.Tree;
+import model.human.Human;
+import model.familyTree.*;
 
 public class TreeService {
 

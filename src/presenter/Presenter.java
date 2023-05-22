@@ -1,13 +1,16 @@
 package presenter;
-import ui.Tree;
-import ui.commands.Human;
-import ui.commands.TreeService;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import model.View;
+
+import javax.swing.text.View;
+
+import model.familyTree.*;
+import model.human.Human;
+
 
 public class Presenter {
     public View view;

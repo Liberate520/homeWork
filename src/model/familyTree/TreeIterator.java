@@ -1,6 +1,8 @@
-package ui.commands;
+package model.familyTree;
 import java.util.Iterator;
 import java.util.List;
+
+import model.human.Human;
 
 public class TreeIterator<T extends Human> implements Iterator<T>{
     List<T> HumanList;
