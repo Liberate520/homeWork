@@ -1,0 +1,147 @@
+package model.human;
+import java.io.Serializable;
+import java.util.List;
+
+public class Human  implements Serializable, Comparable<Human>{
+    private String firstname;
+    private String lastname;
+    private String birth_date;
+    private String death_date;
+    private String gender;
+    private String person_id;
+    private String father_id;
+    private String mother_id;
+    private List<Human> family;
+
+    
+    
+    public Human(String inp_firstname, 
+                       String inp_lastname, 
+                       String inp_birth_date, 
+                       String inp_death_date,
+                       String inp_gender, 
+                       String inp_person_id, 
+                       String inp_father_id, 
+                       String inp_mother_id){
+
+        this.firstname = inp_firstname;
+        this.lastname = inp_lastname;
+        this.birth_date = inp_birth_date;
+        this.death_date = inp_death_date;
+        this.gender = inp_gender;
+        this.person_id = inp_person_id;
+        this.father_id = inp_father_id;
+        this.mother_id = inp_mother_id;
+
+    }
+    public Human(String inp_firstname, String inp_lastname, String inp_birth_date, String inp_gender, String inp_person_id){
+        this(inp_firstname, inp_lastname, inp_birth_date, null, inp_gender, inp_person_id, null, null);
+
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        if(firstname == null){
+            result = result + "Имя: " + "-" + "\n";
+        }
+        else{
+            result = result + "Имя: " + firstname + "\n";
+        }
+
+        if(lastname == null){
+            result = result + "Фамилия: " + "-" + "\n";
+        }
+        else{
+            result = result + "Фамилия: " + lastname + "\n";
+        }
+
+        if(birth_date == null){
+            result = result + "Дата рождения: " + "-" + "\n";
+        }
+        else{
+            result = result + "Дата рождения: " + birth_date + "\n";
+        }
+
+        if(death_date == null){
+            result = result + "Дата смерти: " + "-" + "\n";
+        }
+        else{
+            result = result + "Дата смерти: " + death_date + "\n";
+        }
+
+
+        if(gender == null){
+            result = result + "Пол: " + "-" + "\n";
+        }
+        else{
+            result = result + "Пол: " + gender + "\n";
+        }
+
+
+        return result;
+    }
+
+    public String getPerson_id() {
+        return person_id;
+    }
+    public void setPerson_id(String person_id) {
+        this.person_id = person_id;
+    }
+    public String getgender() {
+        return gender;
+    }
+    public void setgender(String gender) {
+        this.gender = gender;
+    }
+    public String getBirthDate() {
+        return birth_date;
+    }
+    public void setBirthDate(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getDethDate() {
+        return death_date;
+    }
+    public void setDethDate(String deth_date) {
+        this.death_date = deth_date;
+    }
+
+    public String getFirstName() {
+        return firstname;
+    }
+    public void setFirstName(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastName() {
+        return lastname;
+    }
+    public void setLastName(String lastname) {
+        this.lastname = lastname;
+    }
+    public String getFather_id() {
+        return father_id;
+    }
+    public void setFather_id(String father_id) {
+        this.father_id = father_id;
+    }
+
+    public String getMother_id() {
+        return mother_id;
+    }
+    public void setMother_id(String mother_id) {
+        this.mother_id = mother_id;
+    }
+    @Override
+    public int compareTo(Human o) {
+
+        return lastname.compareTo(o.lastname);
+    }
+    public void setField(String string, String string2) {
+    }
+    public Human(){ 
+    }
+}
+    
