@@ -16,14 +16,14 @@ public class Service implements Serializable {
     private List<FamilyTree> familyTreeList;
     private ReadWriteData rw;
 
-    public Service(FamilyTree familyTree){
+    public Service(FamilyTree familyTree, ReadWriteData rw){
         this.activeFamilyTree = familyTree;
         familyTreeList = new ArrayList<>();
-        rw = new ReadWriteObject();
+        this.rw = rw;
         familyTreeList.add(familyTree);
     }
     public Service(){
-        this(new FamilyTree());
+        this(new FamilyTree(),new ReadWriteObject());
     }
 
     public void writeFamilyTreeToFile(String fileName) throws Exception{

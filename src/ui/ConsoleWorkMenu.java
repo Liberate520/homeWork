@@ -56,7 +56,11 @@ public class ConsoleWorkMenu extends ConsoleMenu implements ViewWorkMenu{
         String line = scanner.nextLine();
         if (checkTextForInt(line)){
             int id = Integer.parseInt(line);
-            System.out.println(presenter.findHumanById(id));
+            try {
+                System.out.println(presenter.findHumanById(id));
+            } catch (Exception e){
+                    System.out.println("Такого человека нет в семейном дереве");
+            }
         } else {
             inputError();
         }
@@ -71,7 +75,11 @@ public class ConsoleWorkMenu extends ConsoleMenu implements ViewWorkMenu{
         String lastName = scanner.nextLine();
         System.out.println("Введите дату рождения");
         String birthday = scanner.nextLine();
-        presenter.findHuman(firstName, lastName, birthday);
+        try {
+            System.out.println(presenter.findHuman(firstName, lastName, birthday));
+        } catch (Exception e){
+            System.out.println("Такого человека нет в семейном дереве");
+        }
     }
 
     @Override

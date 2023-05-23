@@ -1,6 +1,7 @@
 package presenter;
 
 import human.Gender;
+import human.Human;
 import service.Service;
 import ui.View;
 
@@ -29,13 +30,15 @@ public class Presenter {
         service.writeFamilyTreeToFile(family);
     }
 
-    public String findHumanById(int id) {
+    public String findHumanById(int id) throws Exception{
         return service
                 .getHumanById(id)
                 .toString();
     }
 
-    public void findHuman(String firstName, String lastName, String birthday) {
-        System.out.println(service.getHuman(firstName, lastName, birthday));
+    public String findHuman(String firstName, String lastName, String birthday) throws Exception {
+        return service
+                .getHuman(firstName, lastName, birthday)
+                .toString();
     }
 }

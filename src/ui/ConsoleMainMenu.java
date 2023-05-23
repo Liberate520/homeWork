@@ -14,6 +14,8 @@ public class ConsoleMainMenu extends ConsoleMenu implements ViewMainMenu{
 
     private String family;
 
+    ViewWorkMenu viewWorkMenu;
+
     public ConsoleMainMenu(){
         scanner = new Scanner(System.in);
         start = true;
@@ -79,7 +81,7 @@ public class ConsoleMainMenu extends ConsoleMenu implements ViewMainMenu{
     @Override
     public void workWithTree() {
         if (!this.family.equals("")) {
-            ViewWorkMenu viewWorkMenu = new ConsoleWorkMenu();
+            viewWorkMenu = new ConsoleWorkMenu();
             viewWorkMenu.setPresenter(presenter);
             viewWorkMenu.start();
         } else {
@@ -96,9 +98,11 @@ public class ConsoleMainMenu extends ConsoleMenu implements ViewMainMenu{
     private void hello(){
         System.out.println("Добро пожаловать!");
     }
+
     public void printMenu(){
         System.out.println(mainMenu.print());
     }
+
     public void execute(){
         String input = scanner.nextLine();
         if (checkTextForInt(input)){
