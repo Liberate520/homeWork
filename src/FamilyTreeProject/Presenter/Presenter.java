@@ -1,12 +1,13 @@
 package Presenter;
+import Model.Service;
 
 import ui.View;
 
 public class Presenter {
     private View view;
-    private Service<T> service;
+    private Service service;
 
-    public Presenter(View view, Service<T> service) {
+    public Presenter(View view, Service service) {
         this.view = view;
         this.service = service;
         view.setPresenter(this);
@@ -16,8 +17,7 @@ public class Presenter {
     //     service.addMember(human);
     // }
 
-    public void addMember(String firstName, String lastName, int dayOfBirth, int monthOfBirth,
-    int yearOfBirth){
+    public void addMember(String firstName, String lastName, int dayOfBirth, int monthOfBirth, int yearOfBirth){
         service.addMember(firstName, lastName, dayOfBirth,
         monthOfBirth, yearOfBirth);
     }
