@@ -1,11 +1,14 @@
 package familyTree.model;
 
 
+import familyTree.model.fileWorkers.FileWorkable;
 import familyTree.model.fileWorkers.FileWorker;
 import familyTree.model.person.Person;
 import familyTree.model.tree.Tree;
 
-public class Service {
+import java.io.Serializable;
+
+public class Service implements FileWorkable {
     private Tree<Person> currentTree;
     FileWorker fileWorker = new FileWorker();
 
@@ -16,7 +19,10 @@ public class Service {
     }
 
 
-    public void addPerson(Person person){
+    public void addPerson(int age,String gender,String name,String mother,String father){
+        Person x = ( currentTree.search(mother)) ;
+        Person y = ( currentTree.search(father));
+        Person person = new Person(age,gender,name,x,y);
         currentTree.addPerson(person);
     }
     public void sortName(){
@@ -44,13 +50,14 @@ public class Service {
         return currentTree.getInfoTree();
     }
 
-    public boolean saveFile(String filePath) {
+    @Override
+    public boolean saveFile(Serializable serializable, String filePath) {
         return fileWorker.saveFile(currentTree,filePath);
     }
+    @Override
     public Object readFile(String filePath) {
-       return fileWorker.readFile(filePath);
-    }
-
+            return fileWorker.readFile(filePath);
+        }
     public Person search(String e){
         return currentTree.search(e);
     }

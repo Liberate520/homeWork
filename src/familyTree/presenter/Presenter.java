@@ -1,10 +1,13 @@
 package familyTree.presenter;
 
 import familyTree.model.Service;
+import familyTree.model.fileWorkers.FileWorkable;
 import familyTree.model.person.Person;
 import familyTree.ui.View;
 
-public class Presenter {
+import java.io.Serializable;
+
+public class Presenter implements FileWorkable {
     private View view;
     private Service service;
 
@@ -13,8 +16,8 @@ public class Presenter {
         this.service = service;
         view.setPresenter(this);
     }
-    public boolean addPerson(Person person){
-        service.addPerson(person);
+    public boolean addPerson(int age,String gender,String name,String mother,String father){
+        service.addPerson(age,gender,name,mother,father);
         return true;
     }
     public void sortName(){
@@ -42,11 +45,17 @@ public class Presenter {
         return service.search(e);
     }
 
-    public void saveFile(String path) {
-       service.saveFile(path);
+
+
+    @Override
+    public boolean saveFile(Serializable serializable, String filePath) {
+       return service.saveFile(serializable,filePath);
     }
-    public void readFile(String path) {
-        service.readFile(path);
+
+    @Override
+    public Object readFile(String filePath) {
+       return service.readFile(filePath);
     }
+
 
 }

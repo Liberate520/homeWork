@@ -1,8 +1,8 @@
 package familyTree.ui;
 
-import familyTree.model.person.Person;
 import familyTree.presenter.Presenter;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 public class Console implements View {
@@ -12,6 +12,7 @@ public class Console implements View {
     private Scanner scanner;
     private boolean work;
     private MainMenu mainMenu;
+    private Serializable serializable;
 
     public Console() {
         scanner = new Scanner(System.in);
@@ -31,20 +32,6 @@ public class Console implements View {
     }
 
     @Override
-    public void saveFile() {
-        System.out.println("Enter Save Path");
-        String path = scanner.nextLine();
-        presenter.saveFile(path);
-    }
-
-    @Override
-    public void readFile() {
-        System.out.println("Enter the Path to file");
-        String path = scanner.nextLine();
-        presenter.readFile(path);
-    }
-
-    @Override
     public void addPerson(){
         System.out.println("Enter Name");
         String name = scanner.nextLine();
@@ -56,8 +43,7 @@ public class Console implements View {
         String mother = scanner.nextLine();
         System.out.println("Enter Father name");
         String father = scanner.nextLine();
-        Person person= new Person(age,gender, name,presenter.search(mother),presenter.search(father));
-        presenter.addPerson(person);
+        presenter.addPerson(age,gender,name,mother,father);
     }
 
     @Override
@@ -153,5 +139,19 @@ public class Console implements View {
 
     private void inputError(){
         System.out.println(INPUT_ERROR);
+    }
+
+    @Override
+    public void saveFile() {
+        System.out.println("Enter Save Path");
+        String path = scanner.nextLine();
+        presenter.saveFile(serializable,path);
+    }
+
+    @Override
+    public void readFile() {
+        System.out.println("Enter the Path to file");
+        String path = scanner.nextLine();
+        presenter.readFile(path);
     }
 }

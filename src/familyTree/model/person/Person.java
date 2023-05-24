@@ -26,6 +26,7 @@ public class Person implements Serializable,TreeItems<Person> {
     public Person(int age, String gender,String name) {
         this(age,gender,name,null,null);
     }
+
     public void addChild (Person child){
         if(!children.contains(child)){
             children.add(child);
@@ -67,4 +68,5 @@ public class Person implements Serializable,TreeItems<Person> {
     public int getAge() {
         return age;
     }
+
 }

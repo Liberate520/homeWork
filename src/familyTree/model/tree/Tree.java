@@ -12,12 +12,16 @@ import java.util.List;
 
 public class Tree<E extends TreeItems> implements Serializable, Iterable<E> {
     private List<E> family;
+    private Tree tree;
     public Tree() {
         family= new ArrayList<>();
     }
+
     public boolean addPerson(E e){
-        if (e==null){
-            return false;
+        for (E x : family) {
+            if (x!=null){
+                return false;
+            }
         }
         family.add(e);
         if(e.getMother()!=null){
@@ -100,15 +104,15 @@ public class Tree<E extends TreeItems> implements Serializable, Iterable<E> {
     }
 
     public void sortName(){
-        family.sort(new ComparatorName());
+        family.sort(new ComparatorName<>());
     }
 
     public void sortAge(){
-        family.sort(new ComparatorAge());
+        family.sort(new ComparatorAge<>());
     }
 
     public void sortGender(){
-        family.sort(new ComparatorGender());
+        family.sort(new ComparatorGender<>());
     }
 
     public E search (String e){
