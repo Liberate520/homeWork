@@ -28,7 +28,8 @@ public class Test {
         people.add(c2);
         people.add(c3);
         people.add(c4);
-        Tree tree = new Tree(people);
+
+        ParamTree<Human> tree = new ParamTree<Human>(people);
         
         for (Human h : tree) {
             System.out.println(h);
