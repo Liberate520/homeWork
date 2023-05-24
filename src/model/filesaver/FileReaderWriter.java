@@ -5,7 +5,7 @@ import java.io.*;
 
 public class FileReaderWriter implements Saveable {
     @Override
-    public void write(Serializable serializable, String path) {
+    public void save(Serializable serializable, String path) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
             objectOutputStream.writeObject(serializable);

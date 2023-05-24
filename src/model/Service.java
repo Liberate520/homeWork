@@ -22,7 +22,7 @@ public class Service {
     }
 
     public void writeFamilyTreeInFile(String path) {
-        fileReaderWriter.write(this.familyTree, path);
+        fileReaderWriter.save(this.familyTree, path);
     }
 
     public void addNewHumanToFamilyTree(Gender gender, String name, String lastName, Integer age ) {

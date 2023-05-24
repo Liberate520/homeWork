@@ -1,6 +1,5 @@
 package view.commands;
 
-import view.Console;
 import view.View;
 
 public abstract class CommandsAbstract implements Command{
@@ -18,14 +17,11 @@ public abstract class CommandsAbstract implements Command{
     public String getDescription() {
         return this.number + ". " + this.description;
     }
-
     public Integer getNumber() {
         return this.number;
     }
-
     public View getView() {
         return this.view;
     }
-
     public abstract void execute();
 }
