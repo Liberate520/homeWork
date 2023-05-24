@@ -1,6 +1,6 @@
 package Presenter;
-import Model.Service;
 
+import model.Service;
 import ui.View;
 
 public class Presenter {

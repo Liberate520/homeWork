@@ -70,7 +70,7 @@ public class Console implements View{
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand < mainMenu.size()){
+        if (numCommand <= mainMenu.size()){
             return true;
         } else {
             inputError();

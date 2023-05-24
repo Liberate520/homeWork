@@ -1,5 +1,13 @@
+package model;
 import java.io.Serializable;
 import java.util.List;
+
+import familyTree.FamilyTree;
+import fileHandler.FileHandler;
+import fileHandler.Savable;
+import human.FamilyTreeObject;
+import human.Gender;
+import human.Human;
 
 public class Service implements Savable{
     private FamilyTree<Human> familyTree;

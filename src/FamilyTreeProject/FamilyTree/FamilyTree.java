@@ -1,7 +1,12 @@
+package familyTree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import human.FamilyTreeObject;
+import human.HumanComporatorByAge;
+import human.HumanComporatorByName;
 
 public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Iterable<E>{
     
