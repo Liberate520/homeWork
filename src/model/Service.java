@@ -4,9 +4,7 @@ import model.familyTree.FamilyTree;
 import model.person.Person;
 import model.person.Relation;
 import model.person.Sex;
-import model.saving.FileOutStr;
-import model.saving.LoadFromFile;
-import model.saving.SaveInFile;
+import model.saving.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,15 +14,19 @@ import java.util.TreeSet;
 public class Service {
     private FamilyTree<Person> activeTree;
     private List<FamilyTree<Person>> familyTreeList;
+    private SavableObject saveInFile;
+    private LoadableObject loadFromFile;
 
-    public Service(FamilyTree<Person> tree) {
+    public Service(FamilyTree<Person> tree, SavableObject saveInFile, LoadableObject loadFromFile) {
         this.activeTree = tree;
         familyTreeList = new ArrayList<>();
         familyTreeList.add(tree);
+        this.saveInFile = saveInFile;
+        this.loadFromFile = loadFromFile;
     }
 
-    public Service(){
-        this(new FamilyTree<Person>());
+    public Service(SavableObject saveInFile, LoadableObject loadFromFile){
+        this(new FamilyTree<Person>(), saveInFile, loadFromFile);
     }
 
     public void addFamilyTree(FamilyTree<Person> familyTree){
@@ -155,7 +157,6 @@ public class Service {
     }
 
     public void saveFamilyTreeAs(String path) throws IOException {
-        SaveInFile saveInFile = new SaveInFile();
         saveInFile.saveObjectAs(activeTree, path);
     }
 
@@ -164,7 +165,6 @@ public class Service {
     }
 
     public void loadFamilyTreeFrom(String path) throws IOException, ClassNotFoundException {
-        LoadFromFile loadFromFile = new LoadFromFile();
         activeTree = (FamilyTree) loadFromFile.loadObjectFrom(path);
     }
 
