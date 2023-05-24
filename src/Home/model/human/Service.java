@@ -29,10 +29,6 @@ public class Service {
 
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-
-
-//
-
         for (Human human: activeFamily){
             stringBuilder.append(human).append("\n");
         }

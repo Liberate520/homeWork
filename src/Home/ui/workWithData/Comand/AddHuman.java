@@ -1,8 +1,10 @@
 package Home.ui.workWithData.Comand;
 
+import Home.ui.workWithData.DataHuman;
 import Home.ui.workWithData.View;
+import Home.ui.workWithData.WorkWithData;
 
-public class AddHuman implements Comand{
+public class AddHuman extends DataHuman implements Comand{
 
     private View view;
 
@@ -17,6 +19,6 @@ public class AddHuman implements Comand{
 
     @Override
     public void execute() {
-        view.addHuman();
+         view.addHuman();
     }
 }
