@@ -75,6 +75,14 @@ public class Console implements View {
         presenter.findSiblings(name);
     }
 
+    public void sortByName() {
+        presenter.sortByName();
+    }
+
+    public void sortByAge() {
+        presenter.sortByAge();
+    }
+
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;

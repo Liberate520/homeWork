@@ -21,10 +21,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         this.kids = new ArrayList<>();
     }
 
-//    public Human(String fullName, int age, Gender gender) {
-//        this(fullName, age, gender, null, null);
-//    }
-
     public void setAge(int age) {
         if (age < 0) {
             age = 0;

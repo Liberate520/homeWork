@@ -1,7 +1,5 @@
 package model;
 
-import model.FamilyTree;
-
 import java.io.*;
 
 public class Serialization implements Writable {

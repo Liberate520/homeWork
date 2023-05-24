@@ -19,7 +19,7 @@ public class Presenter {
 
 
     public void showAllRelatives() {
-        service.showAllRelatives();
+        view.print(service.showAllRelatives());
     }
 
     public String findHumanByName(String name) {
@@ -32,6 +32,14 @@ public class Presenter {
 
     public void findSiblings(String name) {
         service.findSiblings(name);
+    }
+
+    public void sortByName() {
+        service.sortByName();
+    }
+
+    public void sortByAge() {
+        service.sortByAge();
     }
 
 

@@ -1,5 +1,7 @@
 package model;
 
+import java.io.*;
+
 public class Service {
     private FamilyTree tree;
 
@@ -32,8 +34,8 @@ public class Service {
         tree.addHuman(newHuman);
     }
 
-    public void showAllRelatives() {
-        System.out.println(tree.showAllRelatives());
+    public String showAllRelatives() {
+        return tree.showAllRelatives();
     }
 
     public String findHumanByName(String name) {
@@ -52,7 +54,7 @@ public class Service {
         if (tree.findHumanByName(name) != null) {
             human = (Human) tree.findHumanByName(name);
             human.showKids();
-        } else System.out.println("Некорректное имя");
+        }
     }
 
     public void findSiblings(String name) {
@@ -60,6 +62,16 @@ public class Service {
         if (tree.findHumanByName(name) != null) {
             human = (Human) tree.findHumanByName(name);
             human.findSiblings();
-        } else System.out.println("Некорректное имя");
+        }
     }
+
+    public void sortByName() {
+        tree.sortByName();
+    }
+
+    public void sortByAge() {
+        tree.sortByAge();
+    }
+
+
 }

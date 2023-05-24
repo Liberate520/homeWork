@@ -15,6 +15,8 @@ public class Menu {
         commandList.add(new FindHumanByName(console));
         commandList.add(new ShowKids(console));
         commandList.add(new FindSiblings(console));
+        commandList.add(new SortByName(console));
+        commandList.add(new SortByAge(console));
         commandList.add(new Finish(console));
 
 
