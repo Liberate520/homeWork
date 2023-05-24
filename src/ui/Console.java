@@ -2,6 +2,7 @@ package ui;
 
 import presenter.Presenter;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Console implements View{
@@ -26,6 +27,15 @@ public class Console implements View{
     public void finish(){
         System.out.println("До скорых встреч");
         work = false;
+    }
+
+    @Override
+    public void save() {
+        presenter.save();
+    }
+
+    public void load() {
+        presenter.load();
     }
 
     @Override
@@ -66,14 +76,25 @@ public class Console implements View{
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException {
         hello();
         while (work){
-            printMenu();
-            execute();
+            System.out.println(mainMenu.print());
+            String choice = scanner.nextLine();
+            if (check(choice)){
+                mainMenu.execute(Integer.parseInt(choice));
+            }else {
+                fail();
+            }
         }
     }
-
+    private boolean check(String text){
+        return  text.matches("[0-9]+") && Integer.parseInt(text) <= mainMenu.size()
+                && Integer.parseInt(text) > 0;
+    }
+    public void fail() {
+        System.out.println("Wrong input!");
+    }
     private void printMenu(){
         System.out.println(mainMenu.print());
     }
@@ -82,7 +103,7 @@ public class Console implements View{
         System.out.println("Доброго времени суток!");
     }
 
-    private void execute(){
+    private void execute() throws IOException {
         String line = scanner.nextLine();
         if (checkTextForInt(line)){
             int numCommand = Integer.parseInt(line);

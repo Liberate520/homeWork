@@ -1,10 +1,8 @@
 package ui;
 
-import ui.commands.AddHuman;
-import ui.commands.Command;
-import ui.commands.GetInfo;
-import ui.commands.Stop;
+import ui.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,8 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(view));
         commandList.add(new GetInfo(view));
+        commandList.add(new Save(view));
+        commandList.add(new Load(view));
         commandList.add(new Stop(view));
     }
 
@@ -32,7 +32,7 @@ public class MainMenu {
         return stringBuilder.toString();
     }
 
-    public void execute(int numCommand){
+    public void execute(int numCommand) throws IOException {
         commandList.get(numCommand - 1).execute();
     }
 

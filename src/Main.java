@@ -1,13 +1,17 @@
+import model.data.FileHandler;
 import model.human.Human;
 import model.Service;
 import ui.Console;
 import presenter.Presenter;
 import ui.View;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         View view = new Console();
         Service service = new Service();
+        service.setWritable(new FileHandler());
         new Presenter(view, service);
 
         view.start();
