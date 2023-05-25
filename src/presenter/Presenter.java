@@ -49,10 +49,10 @@ public class Presenter {
     }
 
     public void saveFamilyTree(String path) throws IOException {
-        service.saveFamilyTreeAs(path);
+        view.print(service.saveFamilyTreeAs(path));
     }
 
     public void loadFamilyTree(String path) throws IOException, ClassNotFoundException {
-        service.loadFamilyTreeFrom(path);
+        view.print(service.loadFamilyTreeFrom(path));
     }
 }

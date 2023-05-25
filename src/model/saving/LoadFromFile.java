@@ -12,7 +12,6 @@ public class LoadFromFile implements LoadableObject{
                 new FileInputStream(path));
         Object object = objectInputStream.readObject();
         objectInputStream.close();
-        System.out.println("Object is restored.");
         return object;
     }
 }

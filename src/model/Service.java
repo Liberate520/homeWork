@@ -146,33 +146,19 @@ public class Service {
             }
         } else {
             output.append("Список пуст." + "\n");
-//            System.out.println("Список пуст.");
         }
         output.append("--------------------------------------");
         return output.toString();
     }
 
-    public void saveFamilyTreeAs(String path, FileOutStr format) throws IOException {
-        format.saveFamilyTreeAs(activeTree, path);
-    }
-
-    public void saveFamilyTreeAs(String path) throws IOException {
+    public String saveFamilyTreeAs(String path) throws IOException {
         saveInFile.saveObjectAs(activeTree, path);
+        return "Древо сохранено в файл " + path;
     }
 
-    public void loadFamilyTreeFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
-        activeTree = format.getFamilyTreeFrom(path);
-    }
-
-    public void loadFamilyTreeFrom(String path) throws IOException, ClassNotFoundException {
+    public String loadFamilyTreeFrom(String path) throws IOException, ClassNotFoundException {
         activeTree = (FamilyTree) loadFromFile.loadObjectFrom(path);
+        return "Древо восстановлено из файла " + path;
     }
 
-    public void savePersonAs(Person person, String path, FileOutStr format) throws IOException {
-        format.savePersonAs(person, path);
-    }
-
-    public Person loadPersonFrom(String path, FileOutStr format) throws IOException, ClassNotFoundException {
-        return format.getPersonFrom(path);
-    }
 }

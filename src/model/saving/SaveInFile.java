@@ -11,6 +11,5 @@ public class SaveInFile implements SavableObject{
                 new FileOutputStream(path));
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
-        System.out.println("Object is saved.");
     }
 }
