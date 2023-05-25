@@ -11,7 +11,7 @@ public interface TreeItem<T> {
     List<T> getChildrens();
     void addChildren(T t);
     void removeChildren(T t);
-    String getChildrenInfo(List<T> list);
+    String getChildrenInfo();
     String getFullName();
     String getFullInfo();
     String getShortInfo();

@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.human.formatters.HumanChildrenInfo;
+import model.human.formatters.HumanFormat;
+import model.human.formatters.HumanFullInfo;
+import model.human.formatters.HumanShortInfo;
 import model.tree.TreeItem;
-
 
 public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private String name;
@@ -16,7 +19,6 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private List<Human> childrens;
     private Gender gender;
     private int age;
-    
 
     private Human(String name, String surName, String fatherName, Human mother, Human father,
             ArrayList<Human> childrens, Gender gender, int age) {
@@ -34,8 +36,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         this(name, surName, fatherName, mother, father, new ArrayList<Human>(), gender, age);
     }
 
-  
-    public Human(String name, String surName, Gender gender,int age) {
+    public Human(String name, String surName, Gender gender, int age) {
         this(name, surName, "", null, null, new ArrayList<Human>(), gender, age);
     }
 
@@ -47,66 +48,20 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         return age;
     }
 
-    
-
     @Override
     public int compareTo(Human o) {
-        return this.surName.compareTo(o.surName);   
-        
+        return this.surName.compareTo(o.surName);
+
     }
 
     public String getFullInfo() {
-        String genderString = this.gender.equals(Gender.Male) ? "мужской" : "женский";
-        if (childrens.size() > 0) {
-            if (this.fatherName != null && this.fatherName != "") {
-                return String.format("%s %s %s, пол - %s, возраст - %d, мать - %s, отец - %s, дети - %s", this.surName,
-                        this.name,
-                        this.fatherName, genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
-                        this.father == null ? "нет" : this.father.getShortInfo(),
-                        getChildrenInfo(this.childrens));
-            } else {
-                return String.format("%s %s, пол - %s, возраст - %d, мать - %s, отец - %s, дети - %s", this.surName,
-                        this.name,
-                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
-                        this.father == null ? "нет" : this.father.getShortInfo(),
-                        getChildrenInfo(this.childrens));
-            }
-        } else {
-
-            if (this.fatherName != null && this.fatherName != "") {
-                return String.format("%s %s %s, пол - %s, возраст - %d, мать - %s, отец - %s, детей нет", this.surName,
-                        this.name,
-                        this.fatherName,
-                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
-                        this.father == null ? "нет" : this.father.getShortInfo());
-            } else {
-                return String.format("%s %s, пол - %s, возраст - %d, мать - %s, отец - %s, детей нет", this.surName,
-                        this.name,
-                        genderString, this.age, this.mother == null ? "нет" : this.mother.getShortInfo(),
-                        this.father == null ? "нет" : this.father.getShortInfo());
-            }
-        }
+        HumanFormat humanFormat = new HumanFullInfo(this);
+        return humanFormat.showHumanInfo();
     }
 
     public String getShortInfo() {
-        String genderString = this.gender.equals(Gender.Male) ? "мужской" : "женский";
-        if (childrens.size() > 0) {
-            if (this.fatherName != null && this.fatherName != "") {
-                return String.format("%s %s %s, пол - %s, возраст - %d", this.surName, this.name, this.fatherName,
-                        genderString, this.age);
-            } else {
-                return String.format("%s %s, пол - %s, возраст - %d", this.surName, this.name, genderString, this.age);
-            }
-        } else {
-
-            if (this.fatherName != null && this.fatherName != "") {
-                return String.format("%s %s %s, пол - %s, возраст - %d", this.surName, this.name,
-                        this.fatherName, genderString, this.age);
-            } else {
-                return String.format("%s %s, пол - %s, возраст - %d", this.surName, this.name,
-                        genderString, this.age);
-            }
-        }
+        HumanFormat humanFormat = new HumanShortInfo(this);
+        return humanFormat.showHumanInfo();
     }
 
     public String getFullName() {
@@ -119,17 +74,10 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         return this.childrens;
     }
 
-    public String getChildrenInfo(List<Human> childrens) {
-        int count = childrens.size();
-        if (count > 0) {
-            String result = "";
-            for (int i = 0; i < childrens.size() - 1; i++) {
-                result += childrens.get(i).getFullName() + ", ";
-            }
-            result += childrens.get(childrens.size() - 1).getFullName();
-            return result;
-        }
-        return "детей нет";
+    public String getChildrenInfo() {
+
+        HumanFormat humanFormat = new HumanChildrenInfo(this);
+        return humanFormat.showHumanInfo();
     }
 
     public Human getMother() {
@@ -158,6 +106,10 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
 
     public Gender getGender() {
         return this.gender;
+    }
+
+    public String getFatherName() {
+        return fatherName;
     }
 
     public void addChildren(Human newHuman) {
@@ -191,5 +143,9 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         }
         Human human = (Human) obj;
         return this.getFullName().equals(human.getFullName());
+    }
+
+    public String getSurName() {
+        return surName;
     }
 }

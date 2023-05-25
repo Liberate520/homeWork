@@ -21,22 +21,18 @@ public class Console implements View {
         genderMenu = new GenderMenu(this);
     }
 
-    @Override
     public void print(String text) {
         System.out.println(text);
     }
 
-    @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
 
     }
 
-    @Override
     public void start() {
         System.out.println("\nЗдравствуйте!");
         while (work) {
-            // System.out.print("\033[H\033[2J");
             printMenu();
             String command = scanner.nextLine();
             mainMenu.execute(command);
@@ -67,8 +63,7 @@ public class Console implements View {
         if (checkTextIsNumber(age)) {
             presenter.addHuman(name, surName, fatherName, mother, father, gender, Integer.parseInt(age));
             System.out.println("\nДобавлено!!!");
-        }
-        else {
+        } else {
             errorMessage();
         }
     }
@@ -85,8 +80,34 @@ public class Console implements View {
         System.out.println("\nУдалено!!!");
     }
 
-    public void showInfo() {
-        presenter.showInfo();
+    public void showFullInfo() {
+        presenter.showFullInfo();
+    }
+
+    public void showGrandFatherInfo() {
+        System.out.println("_Информация о дедушке для человека_");
+        System.out.println("Введите фамилию человека:");
+        String surName = scanner.nextLine();
+        System.out.println("Введите имя человека:");
+        String name = scanner.nextLine();
+        System.out.println("Введите отчество человека:");
+        String fatherName = scanner.nextLine();
+        String temp = ((fatherName != null && (!fatherName.equals(""))) ? " " + fatherName : "");
+        presenter.showGrandFatherInfo(surName + " " + name + temp);
+
+    }
+
+    public void showGrandMotherInfo() {
+        System.out.println("_Информация о бабушке для человека_");
+        System.out.println("Введите фамилию человека:");
+        String surName = scanner.nextLine();
+        System.out.println("Введите имя человека:");
+        String name = scanner.nextLine();
+        System.out.println("Введите отчество человека:");
+        String fatherName = scanner.nextLine();
+        String temp = ((fatherName != null && (!fatherName.equals(""))) ? " " + fatherName : "");
+        presenter.showGrandMotherInfo(surName + " " + name + temp);
+
     }
 
     public void exit() {
@@ -108,11 +129,11 @@ public class Console implements View {
         }
     }
 
-    public void SetMale() {
+    public void setMale() {
         presenter.showGenderStatistics("Male");
     }
 
-    public void SetFemale() {
+    public void setFemale() {
         presenter.showGenderStatistics("Female");
     }
 
@@ -140,13 +161,11 @@ public class Console implements View {
         if (text.matches("[0-9]+")) {
             return true;
         } else {
-            // errorMessage();
             return false;
         }
     }
 
-    private void errorMessage()
-    {
+    private void errorMessage() {
         System.out.println(ERROR);
     }
 }

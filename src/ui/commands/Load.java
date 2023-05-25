@@ -1,17 +1,18 @@
 package ui.commands;
 
-import ui.Console;
+
+import ui.View;
 
 public class Load implements Command {
-    Console console;
+    View view;
 
-    public Load(Console console) {
-        this.console = console;
+    public Load(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.load();
+        view.load();
         
     }
 

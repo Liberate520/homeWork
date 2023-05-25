@@ -1,8 +1,6 @@
 package presenter;
 
 
-import java.io.Serializable;
-
 import model.TreeService;
 import ui.View;
 
@@ -23,8 +21,8 @@ public class Presenter {
         tree.addHuman(name, surName, fatherName, mother, father, gender, age);
     }
     
-    public void showInfo() {
-        view.print(tree.showInfo());
+    public void showFullInfo() {
+        view.print(tree.showFullTreeInfo());
    
     }
 
@@ -52,6 +50,13 @@ public class Presenter {
         return tree.getTreeSize();
     }
 
+    public void showGrandMotherInfo(String fullName) {
+        view.print(tree.showGrandMotherInfo(fullName));
+    }
+
+    public void showGrandFatherInfo(String fullName) {
+        view.print(tree.showGrandFatherInfo(fullName));
+    }
 
 
 

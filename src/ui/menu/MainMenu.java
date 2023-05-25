@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ui.Console;
+import ui.View;
 import ui.commands.AddHuman;
 import ui.commands.Command;
 import ui.commands.Exit;
@@ -11,28 +12,32 @@ import ui.commands.Load;
 import ui.commands.RemoveHuman;
 import ui.commands.Save;
 import ui.commands.ShowGenderStatistics;
-import ui.commands.ShowInfo;
+import ui.commands.ShowGrandFatherInfo;
+import ui.commands.ShowGrandMotherInfo;
+import ui.commands.ShowFullInfo;
 import ui.commands.ShowShortInfo;
 
 public class MainMenu {
     private List<Command> listCommands;
-    private Console console;
+    private View view;
 
-    private MainMenu(List<Command> list, Console console) {
+    private MainMenu(List<Command> list, View view) {
         this.listCommands = list;
-        this.console = console;
+        this.view = view;
     }
 
-    public MainMenu(Console console) {
-        this(new ArrayList<>(), console);
-        listCommands.add(new AddHuman(console));
-        listCommands.add(new RemoveHuman(console));
-        listCommands.add(new ShowInfo(console));
-        listCommands.add(new ShowShortInfo(console));
-        listCommands.add(new ShowGenderStatistics(console));
-        listCommands.add(new Save(console));
-        listCommands.add(new Load(console));
-        listCommands.add(new Exit(console));
+    public MainMenu(View view) {
+        this(new ArrayList<>(), view);
+        listCommands.add(new AddHuman(view));
+        listCommands.add(new RemoveHuman(view));
+        listCommands.add(new ShowFullInfo(view));
+        listCommands.add(new ShowShortInfo(view));
+        listCommands.add(new ShowGenderStatistics(view));
+        listCommands.add(new ShowGrandMotherInfo(view));
+        listCommands.add(new ShowGrandFatherInfo(view));
+        listCommands.add(new Save(view));
+        listCommands.add(new Load(view));
+        listCommands.add(new Exit(view));
 
     }
 

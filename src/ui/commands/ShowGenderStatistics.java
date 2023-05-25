@@ -1,17 +1,17 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 public class ShowGenderStatistics implements Command {
-    Console console;
+    View view;
 
-    public ShowGenderStatistics(Console console) {
-        this.console = console;
+    public ShowGenderStatistics(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.showGenderStatistics();
+        view.showGenderStatistics();
         
     }
 

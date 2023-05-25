@@ -1,17 +1,17 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 public class Exit implements Command {
-    Console console;
+    View view;
 
-    public Exit(Console console) {
-        this.console = console;
+    public Exit(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.exit();
+        view.exit();
         
     }
 

@@ -1,17 +1,17 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 public class Save implements Command {
-    Console console;
+    View view;
 
-    public Save(Console console) {
-        this.console = console;
+    public Save(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.save();
+        view.save();
         
     }
 

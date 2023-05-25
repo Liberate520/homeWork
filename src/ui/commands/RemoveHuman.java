@@ -1,17 +1,17 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 public class RemoveHuman implements Command {
-    Console console;
+    View view;
 
-    public RemoveHuman(Console console) {
-        this.console = console;
+    public RemoveHuman(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.removeHuman();
+        view.removeHuman();
     }
 
     @Override

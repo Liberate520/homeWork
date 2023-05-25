@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler implements Saveble {
+public class FileHandler implements Saveble, Loadable {
     @Override
     public void save(String path, Serializable serializable) {
         try (ObjectOutputStream saveStream = new ObjectOutputStream(new FileOutputStream(path))) {

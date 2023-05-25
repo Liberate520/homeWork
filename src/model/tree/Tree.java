@@ -9,6 +9,10 @@ import java.util.List;
 import model.human.Gender;
 import model.human.comparators.HumanComparatorByAge;
 import model.human.comparators.HumanComparatorByChildrens;
+import model.tree.formatters.TreeFormat;
+import model.tree.formatters.TreeGenderStatistics;
+import model.tree.formatters.TreeGrandFatherInfo;
+import model.tree.formatters.TreeGrandMotherInfo;
 
 public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
     private List<T> humans;
@@ -23,10 +27,6 @@ public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
 
     public int size() {
         return humans.size();
-    }
-
-    public void sortBySurName() {
-        Collections.sort(humans, new HumanComparatorByAge<>());
     }
 
     public void sortByAge() {
@@ -83,8 +83,7 @@ public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
     public void showChildrensInfo(T human) {
         System.out.println("\n" + human.getFullName().toUpperCase() + " ИНФОРМАЦИЯ О ДЕТЯХ");
         if (this.humans.contains(human)) {
-            List<T> childrens = human.getChildrens();
-            System.out.println(human.getChildrenInfo(childrens));
+            System.out.println(human.getChildrenInfo());
         } else {
             System.out.println("Указанный человек отсутствует в генеологическом дереве");
         }
@@ -100,12 +99,16 @@ public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
         return null;
     }
 
-    public void showFullTreeInfo() {
-        System.out.println("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ\n");
-        for (T human : humans) {
-            System.out.println(human.getFullInfo());
+    public String showFullTreeInfo() {
+        if (humans.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("\nПОДРОБНАЯ ИНФОРМАЦИЯ О ГЕНЕАЛОГИЧЕСКОМ ДЕРЕВЕ\n");
+            for (T human : humans) {
+                stringBuilder.append(human.getFullInfo()).append("\n");
+            }
+            return stringBuilder.toString();
         }
-
+        return "Данные отсутствуют";
     }
 
     public String showShortTreeInfo() {
@@ -120,54 +123,24 @@ public class Tree<T extends TreeItem<T>> implements Serializable, Iterable<T> {
         return "Данные отсутствуют";
     }
 
-    public String showGenderStatistics(Gender gender) {
-        List<T> list = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nСПИСОК ВСЕХ ЛЮДЕЙ ");
-        stringBuilder.append((gender.equals(Gender.Male)) ? "МУЖСКОГО" : "ЖЕНСКОГО");
-        stringBuilder.append(" ПОЛА В ДЕРЕВЕ\n");
-
-        for (T human : humans) {
-            if (human.getGender().equals(gender)) {
-                // list.add(human);
-                stringBuilder.append(human.getFullInfo());
-            }
-        }
-        // System.out.printf("\nСПИСОК ВСЕХ ЛЮДЕЙ %s ПОЛА В ДЕРЕВЕ\n",
-        // (gender.equals(Gender.Male)) ? "МУЖСКОГО" : "ЖЕНСКОГО");
-        // System.out.println(list);
-        return stringBuilder.toString();
+    public Gender convertStringToGender(String text) {
+        Gender gender = (text.equals("Male")) ? Gender.Male : Gender.Female;
+        return gender;
     }
 
-    public void showGrandmotherInfo(String fullName) {
-        if (!fullName.equals(null)) {
-            String result;
-            try {
-                T human = getHumanByFullName(fullName);
-
-                result = human.getMother().getMother().getFullName();
-            } catch (NullPointerException e) {
-                result = "не обнаружено";
-            }
-            System.out.printf("\nЗАПРОС ПОИСКА БАБУШКИ ДЛЯ %s:\n", fullName);
-            System.out.println(result);
-
-        }
+    public String showGenderStatistics(String gender) {
+        TreeFormat treeFormat = new TreeGenderStatistics<>(this);
+        return treeFormat.showTreeInfo(gender);
     }
 
-    public void showGrandfatherInfo(String fullName) {
-        if (!fullName.equals(null)) {
-            String result;
-            try {
-                T human = getHumanByFullName(fullName);
-                result = human.getFather().getFather().getFullName();
-            } catch (NullPointerException e) {
-                result = "не обнаружено";
-            }
-            System.out.printf("\nЗАПРОС ПОИСКА ДЕДУШКИ ДЛЯ %s:\n", fullName);
-            System.out.println(result);
+    public String showGrandmotherInfo(String fullName) {
+        TreeFormat treeFormat = new TreeGrandMotherInfo<>(this);
+        return treeFormat.showTreeInfo(fullName);
+    }
 
-        }
+    public String showGrandfatherInfo(String fullName) {
+        TreeFormat treeFormat = new TreeGrandFatherInfo<>(this);
+        return treeFormat.showTreeInfo(fullName);
     }
 
     public List<T> getHumans() {

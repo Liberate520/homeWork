@@ -1,17 +1,17 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 public class ShowShortInfo implements Command {
-    Console console;
+    View view;
 
-    public ShowShortInfo(Console console) {
-        this.console = console;
+    public ShowShortInfo(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.showShortInfo();
+        view.showShortInfo();
     }
 
     @Override

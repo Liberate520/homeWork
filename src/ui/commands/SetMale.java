@@ -1,17 +1,17 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 public class SetMale implements Command {
-    Console console;
+    View view;
 
-    public SetMale(Console console) {
-        this.console = console;
+    public SetMale(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.SetMale();
+        view.setMale();
         
     }
 

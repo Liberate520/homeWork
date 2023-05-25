@@ -1,18 +1,18 @@
 package ui.commands;
 
-import ui.Console;
+import ui.View;
 
 
-public class ShowInfo implements Command {
-    Console console;
+public class ShowFullInfo implements Command {
+    View view;
 
-    public ShowInfo(Console console) {
-        this.console = console;
+    public ShowFullInfo(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-        console.showInfo();
+        view.showFullInfo();
         
     }
 

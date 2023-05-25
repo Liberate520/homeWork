@@ -1,17 +1,18 @@
 package ui.commands;
 
-import ui.Console;
+
+import ui.View;
 
 public class AddHuman implements Command {
-    Console console;
+    View view;
 
-    public AddHuman(Console console) {
-        this.console = console;
+    public AddHuman(View view) {
+        this.view = view;
     }
 
     @Override
     public void execute() {
-       console.addHuman();
+       view.addHuman();
         
     }
 

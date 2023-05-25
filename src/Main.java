@@ -1,10 +1,10 @@
 import model.TreeService;
 import model.handler.FileHandler;
+import model.handler.Loadable;
+import model.handler.Saveble;
 import presenter.Presenter;
 import ui.Console;
 import ui.View;
-
-
 
 public class Main {
         public static void main(String[] args) {
@@ -68,15 +68,19 @@ public class Main {
                 // service.addHuman("Ева", "Гаврилова", null, null, null, "Female", 45);
                 // service.addHuman("Сергей", "Максимов", null, null, null, "Male", 50);
                 // service.addHuman("Вероника", "Ильина", null, null, null, "Female", 49);
-                // service.addHuman("Андрей", "Петров", "Адамович", "Гаврилова Ева", "Петров Адам",
+                // service.addHuman("Андрей", "Петров", "Адамович", "Гаврилова Ева", "Петров
+                // Адам",
                 // "Male", 25);
-                // service.addHuman("Вера", "Максимова", "Сергеевна", "Ильина Вероника", "Максимов Сергей",
+                // service.addHuman("Вера", "Максимова", "Сергеевна", "Ильина Вероника",
+                // "Максимов Сергей",
                 // "Female", 21);
-                // service.addHuman("Лариса", "Иванова", "Сергеевна", "Ильина Вероника", "Максимов Сергей",
+                // service.addHuman("Лариса", "Иванова", "Сергеевна", "Ильина Вероника",
+                // "Максимов Сергей",
                 // "Female", 38);
                 // service.addHuman("Ольга", "Кот", null, "Иванова Лариса Сергеевна", null,
                 // "Female", 18);
-                // service.addHuman("Мария", "Кот", "Андреевна", "Иванова Лариса Сергеевна", "Петров Андрей Адамович",
+                // service.addHuman("Мария", "Кот", "Андреевна", "Иванова Лариса Сергеевна",
+                // "Петров Андрей Адамович",
                 // "Female", 20);
                 // service.showShortTreeInfo();
                 // service.showGenderStatistics("Male");
@@ -104,9 +108,11 @@ public class Main {
                 // service.showFullTreeInfo();
 
                 View view = new Console();
-                TreeService treeService = new TreeService();
+                Saveble saveble = new FileHandler();
+                Loadable loadable = new FileHandler();
+                TreeService treeService = new TreeService(saveble, loadable);
                 new Presenter(view, treeService);
                 view.start();
-      
+
         }
 }

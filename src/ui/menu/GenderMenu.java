@@ -3,24 +3,24 @@ package ui.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import ui.Console;
+import ui.View;
 import ui.commands.Command;
 import ui.commands.SetFemale;
 import ui.commands.SetMale;
 
 public class GenderMenu {
-    Console console;
+    View view;
     List<Command> listCommands;
 
-    private GenderMenu(List<Command> listCommands,Console console) {
+    private GenderMenu(List<Command> listCommands,View view) {
         this.listCommands = listCommands;
-        this.console = console;
+        this.view = view;
     }
 
-    public GenderMenu(Console console) {
-        this(new ArrayList<>(), console);
-        listCommands.add(new SetMale(console));
-        listCommands.add(new SetFemale(console));
+    public GenderMenu(View view) {
+        this(new ArrayList<>(), view);
+        listCommands.add(new SetMale(view));
+        listCommands.add(new SetFemale(view));
 
        
     }
