@@ -2,8 +2,8 @@ package ui;
 
 import java.util.Scanner;
 import presenter.Presenter;
-import tree.human.Gender;
-import tree.human.Human;
+// import tree.human.Gender;
+// import tree.human.Human;
 
 public class Console implements View{
 
@@ -46,7 +46,7 @@ public class Console implements View{
         root: while (addWork){
             try {
                 System.out.println("Выберите пол (Male/Female)");
-                Gender gender = Gender.valueOf(scanner.nextLine());
+                String gender = scanner.nextLine();
                 System.out.println("Введите ФИО");
                 String name = scanner.nextLine();
                 System.out.println("Введите возраст");
@@ -67,9 +67,9 @@ public class Console implements View{
         root: while (addWork){
             try {
                 System.out.println("Введите имя родителя, мы попробуем найти его в базе данных");
-                Human human1 = presenter.getHumanByName(scanner.nextLine());
+                String human1 = scanner.nextLine();
                 System.out.println("Введите имя дитя, мы попробуем найти его в базе данных");
-                Human human2 = presenter.getHumanByName(scanner.nextLine());
+                String human2 = scanner.nextLine();
                 presenter.addChild(human1, human2);
             } catch (Exception e) {
                 System.out.println(e);

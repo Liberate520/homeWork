@@ -15,11 +15,11 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void addHuman(Gender gender, String name, Integer age){
+    public void addHuman(String gender, String name, Integer age){
         service.addHuman(gender, name, age);
     }
 
-    public void addChild(Human human1, Human human2){
+    public void addChild(String human1, String human2){
         service.addChild(human1, human2);
     }
 
