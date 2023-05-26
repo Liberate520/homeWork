@@ -5,6 +5,8 @@ import model.HumanComparatorByName;
 import model.Service;
 import ui.View;
 
+import java.io.IOException;
+
 public class Presenter {
     private View view;
     private Service service;
@@ -24,12 +26,18 @@ public class Presenter {
     }
 
     public void sortByName(){
-
         service.sortByName();
     }
 
     public void sortByAge(){
         service.sortByAge();
+    }
+
+    public void save() throws IOException, ClassNotFoundException {
+        service.save();
+    }
+    public void read() throws IOException, ClassNotFoundException {
+        service.read();
     }
 
 }

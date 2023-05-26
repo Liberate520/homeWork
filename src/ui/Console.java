@@ -2,6 +2,7 @@ package ui;
 
 import presenter.Presenter;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Console implements View {
@@ -21,7 +22,7 @@ public class Console implements View {
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         System.out.println("Добрый день!");
         while (work) {
             System.out.println(mainMenu.print());
@@ -53,7 +54,12 @@ public class Console implements View {
         presenter.sortByAge();
     }
 
-
+    public void save() throws IOException, ClassNotFoundException {
+        presenter.save();
+    }
+    public void read() throws IOException, ClassNotFoundException {
+        presenter.read();
+    }
 
     @Override
     public void setPresenter(Presenter presenter) {

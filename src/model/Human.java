@@ -55,24 +55,13 @@ public class Human implements Serializable, Comparable<Human>, TreeGroupItem {
         return age;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public Human getMother() {
         return mother;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
 
     public Human getFather() {
         return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
     }
 
     public String getInfo() {

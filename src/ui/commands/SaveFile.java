@@ -4,21 +4,20 @@ import ui.Console;
 
 import java.io.IOException;
 
-public class ReadFile implements Command{
+public class SaveFile implements Command{
     private Console console;
 
-
-    public ReadFile(Console console) {
+    public SaveFile(Console console){
         this.console = console;
     }
     @Override
     public String getDescription() {
-        return "Открыть из файла";
+        return "Сохранить в файл";
     }
 
     @Override
     public void execute() throws IOException, ClassNotFoundException {
-    console.read();
-    System.out.println("Данные прочитаны");
+        console.save();
+        System.out.println("Записано в файл успешно");
     }
 }
