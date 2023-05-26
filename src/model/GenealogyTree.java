@@ -34,17 +34,17 @@ public class GenealogyTree<E extends TreeGroupItem> implements Serializable, Ite
         return false;
     }
 
-    public String getInfo() {
-        StringBuilder sb = new StringBuilder();
-//        sb.append("В дереве ");
-//        sb.append(humans.size());
-//        sb.append(" объектов:\n ");
-        for (E human: humans){
-            sb.append(human.getInfo());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
+//    public String getInfo() {
+//        StringBuilder sb = new StringBuilder();
+////        sb.append("В дереве ");
+////        sb.append(humans.size());
+////        sb.append(" объектов:\n ");
+//        for (E human: humans){
+//            sb.append(human.getInfo());
+//            sb.append("\n");
+//        }
+//        return sb.toString();
+//    }
 
 
     public void printTree(String tab, Human human) {
@@ -55,14 +55,14 @@ public class GenealogyTree<E extends TreeGroupItem> implements Serializable, Ite
         }
     }
 
-    public E getByName(String firstname, String lastName){
-        for (E human: humans){
-            if (human.getFirstName() == firstname & human.getLastName() == lastName){
-                return human;
-            }
-        }
-        return null;
-    }
+//    public E getByName(String firstname, String lastName){
+//        for (E human: humans){
+//            if (human.getFirstName() == firstname & human.getLastName() == lastName){
+//                return human;
+//            }
+//        }
+//        return null;
+//    }
 
     @Override
     public Iterator<TreeGroupItem> iterator() { return (Iterator<TreeGroupItem>) new HumanIterator<E>(humans); }

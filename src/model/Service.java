@@ -34,6 +34,7 @@ public class Service {
         return stringBuilder.toString();
     }
     public void sortByName(){
+
         activetree.sortByName();
     }
 

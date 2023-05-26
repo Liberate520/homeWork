@@ -8,8 +8,10 @@ public class Console implements View {
     private Presenter presenter;
     private Scanner scanner;
     private boolean work = true;
+    private MainMenu mainMenu;
 
     public Console(){
+        mainMenu = new MainMenu(this);
         scanner = new Scanner(System.in);
     }
 
@@ -21,38 +23,20 @@ public class Console implements View {
     @Override
     public void start() {
         System.out.println("Добрый день!");
-        while (work){
-            System.out.println("Выберите действие:");
-            System.out.println("1. Добавить человека\n" +
-                    "2. Вывести список \n" +
-                    "3. Завершить работу");
-            String command = scanner.nextLine();
-
-            switch (command){
-                case "1":
-                    addHuman();
-                    break;
-                case "2":
-                    getInfo();
-                    break;
-                case "3":
-                    finish();
-                    break;
-                default:
-                    System.out.println("Неправильный ввод. Повторите: ");
-
-            }
-
+        while (work) {
+            System.out.println(mainMenu.print());
+            String line = scanner.nextLine();
+            int numComand = Integer.parseInt(line);
+            mainMenu.execute(numComand);
         }
     }
-
-    private void finish(){
+    public void finish(){
         work = false;
     }
-    private void getInfo(){
+    public void getInfo(){
         presenter.getInfo();
     }
-    private void addHuman(){
+    public void addHuman(){
         System.out.println("Введите Имя");
         String firstName = scanner.nextLine();
         System.out.println("Введите Фамилию");
@@ -61,6 +45,12 @@ public class Console implements View {
         int age = Integer.parseInt(scanner.nextLine());
         presenter.addHuman(firstName,lastName,age);
     }
+
+    public void sortByName(){
+        presenter.sortByName();
+    }
+
+
 
     @Override
     public void setPresenter(Presenter presenter) {
