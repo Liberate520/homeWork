@@ -1,32 +1,50 @@
 package FamilyTree;
 
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Human {
     String name;
-    String sex;
+    String gender;
     Human father;
     Human mother;
+    List<Human> children;
 
-    public Human(String name, String sex, Human father, Human mother) {
+    public Human(String name, String gender, Human father, Human mother) {
+
         this.name = name;
-        this.sex = sex;
+        this.gender = gender;
         this.father = father;
         this.mother = mother;
+        this.children = new ArrayList<>();
+        if (mother != null) mother.AddChild(this);
+        if (father != null) father.AddChild(this);
     }
-    public Human(String name, String sex) {
-        this(name, sex, null, null);
+
+    public Human(String name, String gender, Human human) {
+            this(name, gender, null, null);
+            AddParent(human);
+    }
+
+    public Human(String name, String gender) {
+        this(name, gender, null);
+    }
+
+    public void AddParent(Human human) {
+        if (human != null) {
+            if (human.gender == "man") this.father = human;
+            else this.mother = human;
+        }
+    }
+
+    public void AddChild(Human human){
+        this.children.add(human);
+
     }
 
 @Override
     public String toString() {
-        return "Имя: " + name + ", Пол: " + sex;// + " (Отец: " + father + ", Мать: " + mother + ")";
+        return "Имя: " + name + ", Пол: " + gender;// + " (Отец: " + father + ", Мать: " + mother + ")";
     }
 
 }
-  /*
-  Calendar calendar = Calendar.getInstance();
-calendar.set(2018, 11, 31, 59, 59, 59);
-        Date happyNewYearDate = calendar.getTime();
-
-   */
