@@ -28,4 +28,8 @@ public class Presenter {
         service.sortByName();
     }
 
+    public void sortByAge(){
+        service.sortByAge();
+    }
+
 }

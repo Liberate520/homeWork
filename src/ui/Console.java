@@ -49,6 +49,9 @@ public class Console implements View {
     public void sortByName(){
         presenter.sortByName();
     }
+    public void sortByAge(){
+        presenter.sortByAge();
+    }
 
 
 

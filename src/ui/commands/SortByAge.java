@@ -2,22 +2,21 @@ package ui.commands;
 
 import ui.Console;
 
-public class SortByName implements Command{
+public class SortByAge implements Command {
     private Console console;
 
-
-    public SortByName(Console console) {
+    public SortByAge(Console console) {
         this.console = console;
     }
 
     @Override
     public String getDescription() {
-        return "Сортировать по имени";
+        return "Сортировать по возрасту";
     }
 
     @Override
     public void execute() {
-        console.sortByName();
+        console.sortByAge();
         console.getInfo();
     }
 }

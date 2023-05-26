@@ -2,22 +2,20 @@ package ui.commands;
 
 import ui.Console;
 
-public class SortByName implements Command{
+public class ReadFile implements Command{
     private Console console;
 
 
-    public SortByName(Console console) {
+    public ReadFile(Console console) {
         this.console = console;
     }
-
     @Override
     public String getDescription() {
-        return "Сортировать по имени";
+        return "Открыть из файла";
     }
 
     @Override
     public void execute() {
-        console.sortByName();
-        console.getInfo();
+
     }
 }
