@@ -1,7 +1,6 @@
 package presenter;
 
 import tree.Service;
-import tree.human.Gender;
 import tree.human.Human;
 import ui.View;
 

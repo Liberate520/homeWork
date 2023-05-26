@@ -77,9 +77,9 @@ public class Main {
         // System.out.println("--------------------");
         // System.out.println(catsFamilyTree.getInfo());
 
-        
+        Writable writable = new FileHandler();
         View view = new Console();
-        Service service = new Service();
+        Service service = new Service(writable);
         new Presenter(view, service);
 
         view.start();

@@ -2,7 +2,6 @@ package tree;
 
 import tree.human.Gender;
 import tree.human.Human;
-import tree.fileHandler.FileHandler;
 import tree.fileHandler.Writable;
 
 public class Service {
@@ -10,10 +9,10 @@ public class Service {
     private String filePath;
     private Writable writable;
 
-    public Service() {
+    public Service(Writable writable) {
+        filePath = "src/tree/familyTreeFile.txt";
+        this.writable = writable;
         try {
-            filePath = "src/tree/familyTreeFile.txt";
-            writable = new FileHandler();
             humanFamilyTree = (FamilyTree<Human>) writable.read(filePath);
         } catch (Exception e) {
             humanFamilyTree = new FamilyTree<>();

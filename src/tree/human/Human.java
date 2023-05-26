@@ -31,14 +31,17 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         this(gender, name, age, null, null);
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public Integer getAge() {
         return age;
     }
 
+    @Override
     public Gender getGender() {
         return gender;
     }
