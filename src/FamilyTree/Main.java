@@ -47,7 +47,12 @@ public class Main {
         System.out.println(Olga.GetParent());
         System.out.println(Misha.GetChild());
         System.out.println(Nikita.GetChild());
+
+        Family pipkins = new Family("Pipkins");
+
+        pipkins.setFamily(Sasha, Masha, Nikita);
+        pipkins.setFamily(Olga, Misha);
+
+        System.out.println(pipkins);
     }
-
-
 }

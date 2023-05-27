@@ -33,11 +33,11 @@ public class Human {
     public void AddParent(Human human) {
         if (human != null) {
             if (human.gender == "man") {
-                if (this.father != null) this.father.children.remove(this);
-                this.father = human;
+                if (father != null) father.children.remove(this);
+                father = human;
             } else {
-                if (this.mother != null) this.mother.children.remove(this);
-                this.mother = human;
+                if (mother != null) mother.children.remove(this);
+                mother = human;
             }
             human.children.add(this);
         }
@@ -45,24 +45,24 @@ public class Human {
 
     public void AddChild(Human human){
         if (human != null) {
-            this.children.add(human);
+            children.add(human);
             human.AddParent(this);
         }
     }
 
     public String GetParent() {
-        if(father == null & mother == null) return this.name + " (Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
-        else if (father == null) return this.name + " (Отец: " + "NULL" + ", Мать: " + mother.name + ")";
-        else if (mother == null) return this.name + " (Отец: " + father.name + ", Мать: " + "NULL" + ")";
-        else return this.name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
+        if(father == null & mother == null) return name + " (Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
+        else if (father == null) return name + " (Отец: " + "NULL" + ", Мать: " + mother.name + ")";
+        else if (mother == null) return name + " (Отец: " + father.name + ", Мать: " + "NULL" + ")";
+        else return name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
     }
 
     public String GetChild() {
         StringBuilder st = new StringBuilder();
         for (Human name : children) {
-            st.append("\tИмя: " + name.name + " Пол: " + name.gender + "\n");
+            st.append("\n\tИмя: " + name.name + " Пол: " + name.gender);
         }
-        return this.name + " 'child' --->\n" + st.toString();
+        return name + " 'child' --->" + st.toString();
     }
 
 @Override
