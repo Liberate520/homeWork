@@ -11,7 +11,6 @@ public class Console implements View {
     private boolean work;
     private MainMenu mainMenu;
     private GenderMenu genderMenu;
-    public static final String PATH = "src/model/handler/saveTree.txt";
     public static final String ERROR = "\nВведено некорректное значение. Попробуйте еще раз";
 
     public Console() {
@@ -141,9 +140,6 @@ public class Console implements View {
         System.out.println("_Сохранение текущего дерева_");
         System.out.println("Введите путь сохранения:");
         String userPath = scanner.nextLine();
-        if ((userPath.equals("")) || userPath == null) {
-            userPath = PATH;
-        }
         presenter.save(userPath);
     }
 
@@ -151,9 +147,6 @@ public class Console implements View {
         System.out.println("_Загрузка сохраненного дерева_");
         System.out.println("Введите путь для загрузки дерева:");
         String userPath = scanner.nextLine();
-        if ((userPath.equals("")) || userPath == null) {
-            userPath = PATH;
-        }
         presenter.load(userPath);
     }
 

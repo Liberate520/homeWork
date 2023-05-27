@@ -57,9 +57,4 @@ public class Presenter {
     public void showGrandFatherInfo(String fullName) {
         view.print(tree.showGrandFatherInfo(fullName));
     }
-
-
-
-
-
 }

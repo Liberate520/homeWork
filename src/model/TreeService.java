@@ -11,6 +11,7 @@ public class TreeService implements Saveble, Loadable {
     private Tree<Human> tree;
     private Saveble saveble;
     private Loadable loadable;
+    private static final String PATH = "src/model/handler/saveTree.txt";
 
     public TreeService(Tree<Human> tree, Saveble saveble, Loadable loadable) {
         this.tree = tree;
@@ -40,7 +41,6 @@ public class TreeService implements Saveble, Loadable {
         }
     }
 
-    
     public void sortByAge() {
         tree.sortByAge();
     }
@@ -74,20 +74,23 @@ public class TreeService implements Saveble, Loadable {
         return tree.showGrandfatherInfo(fullName);
     }
 
-    @Override
     public Tree<Human> load(String path) {
         if (loadable != null) {
-            this.tree = (Tree<Human>) loadable.load(path);
+            this.tree = ((path.equals("")) || (path == null)) ? (Tree<Human>) loadable.load(PATH)
+                    : (Tree<Human>) loadable.load(path);
             return this.tree;
         } else {
             return null;
         }
     }
 
-    @Override
     public void save(String path, Serializable serializable) {
         if (saveble != null) {
-            saveble.save(path, serializable);
+            if ((path.equals("")) || (path == null)) {
+                saveble.save(PATH, serializable);
+            } else {
+                saveble.save(path, serializable);
+            }
         }
 
     }
