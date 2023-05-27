@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
-    private String name;
+    private final String name;
     private Human father;
     private Human mother;
     List<Human> children;
@@ -44,18 +44,6 @@ public class Human {
         return name;
     }
 
-
-    public void showChildren() {
-        if (!children.isEmpty()) {
-            System.out.println("Родитель: " + name);
-            int count = 1;
-            for (Human child : children) {
-                System.out.printf("-> Ребенок %d: %s\n", count++, child.getName());
-            }
-        } else {
-            System.out.printf("%s не имеет детей.", name);
-        }
-    }
 
     @Override
     public String toString() {

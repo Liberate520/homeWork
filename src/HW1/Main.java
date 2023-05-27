@@ -12,10 +12,11 @@ public class Main {
         ruriks.addPersonInFamilyTree(new Human("Ярополк"),"Святослав");
 
 
-        ruriks.getPerson("Рюрик").showChildren();
-        ruriks.getPerson("Ольга").showChildren();
-        ruriks.getPerson("Игорь").showChildren();
-        ruriks.getPerson("Святослав").showChildren();
+
+        ruriks.showChildren("Рюрик");
+        ruriks.showChildren("Игорь");
+        ruriks.showChildren("Святослав");
+        ruriks.showParents("Святослав");
         System.out.println(ruriks.getPerson("Игорь"));
 
     }
