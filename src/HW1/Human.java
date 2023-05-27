@@ -1,16 +1,20 @@
 package HW1;
 
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
-    private final String name;
+    private final String NAME;
+    private Year yearOfBirth;
     private Human father;
     private Human mother;
     List<Human> children;
 
-    public Human(String name) {
-        this.name = name;
+    public Human(String name,int yearOfBirth) {
+        this.NAME = name;
+        this.yearOfBirth = Year.of(yearOfBirth);
         this.father = null;
         this.mother = null;
         this.children = new ArrayList<>();
@@ -40,8 +44,8 @@ public class Human {
         return children;
     }
 
-    public String getName() {
-        return name;
+    public String getNAME() {
+        return NAME;
     }
 
 
@@ -49,12 +53,13 @@ public class Human {
     public String toString() {
         ArrayList<String> temp = new ArrayList<>();
         for (Human child : children) {
-            temp.add(child.getName());
+            temp.add(child.getNAME());
         }
         return "Human{" +
-                "name='" + name + '\'' +
-                ", father=" + ((father != null) ? father.getName() : "unknown") +
-                ", mother=" + ((mother != null) ? mother.getName() : "unknown") +
+                "Name='" + NAME + '\'' +
+                ", date of brith=" + yearOfBirth +
+                ", father=" + ((father != null) ? father.getNAME() : "unknown") +
+                ", mother=" + ((mother != null) ? mother.getNAME() : "unknown") +
                 ", children=" + temp + "}";
 
     }

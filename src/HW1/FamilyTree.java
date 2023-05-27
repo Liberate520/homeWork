@@ -6,7 +6,6 @@ import java.util.List;
 public class FamilyTree {
     List<Human> familyTree;
 
-
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
     }
@@ -41,7 +40,7 @@ public class FamilyTree {
     private boolean checkChildByName(Human parent, Human child) {
         for (Human child_ : parent.getChildren()
         ) {
-            if (child_.getName().equalsIgnoreCase(child.getName())) return true;
+            if (child_.getNAME().equalsIgnoreCase(child.getNAME())) return true;
         }
         return false;
     }
@@ -90,7 +89,7 @@ public class FamilyTree {
     public Human getPerson(String person) {
         for (Human person_ : familyTree
         ) {
-            if (person_.getName().equals(person)) return person_;
+            if (person_.getNAME().equalsIgnoreCase(person)) return person_;
         }
         return null;
     }
@@ -99,28 +98,37 @@ public class FamilyTree {
      * Для вывода родителей
      */
     public void showParents(String childName) {
-        Human father = getPerson(childName).getFather();
-        Human mother = getPerson(childName).getMother();
-        System.out.println(
-                "-> родитель: " + ((father != null) ? father.getName() : "unknown") + " + " +
-                        "родитель: " + ((mother != null) ? mother.getName() : "unknown") + " -> ребенок: " + childName);
+        Human child = getPerson(childName);
+        if (child != null) {
+            Human father = child.getFather();
+            Human mother = child.getMother();
+            System.out.println(
+                    "-> родитель: " + ((father != null) ? father.getNAME() : "unknown") + " + " +
+                            "родитель: " + ((mother != null) ? mother.getNAME() : "unknown") + " -> ребенок: " + childName);
+        } else {
+            System.out.println(childName + " не найден в семейном древе.");
+        }
     }
 
     /**
      * Метод для отображения всех детей человека
      */
-    public void showChildren(String childName) {
-        List<Human> children = getPerson(childName).children;
-        if (!children.isEmpty()) {
-            System.out.print("-> родитель: " + childName);
+    public void showChildren(String parentName) {
+        try {
+            List<Human> children = getPerson(parentName).children;
+            if (!children.isEmpty()) {
+                System.out.print("-> родитель: " + parentName);
 
-            System.out.print(" -> Дети: ");
-            for (Human child : children) {
-                System.out.printf("%s%s ", "\u00B7",  child.getName());
+                System.out.print(" -> Дети: ");
+                for (Human child : children) {
+                    System.out.printf("%s%s ", "·", child.getNAME());
+                }
+                System.out.println();
+            } else {
+                System.out.printf("%s не имеет детей.", parentName);
             }
-            System.out.println();
-        } else {
-            System.out.printf("%s не имеет детей.", childName);
+        } catch (NullPointerException e) {
+            System.out.println("-> ERROR. Проверьте правильность написания имени родителя '" + parentName+"'");
         }
     }
 }
