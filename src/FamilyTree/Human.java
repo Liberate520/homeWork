@@ -1,14 +1,14 @@
 package FamilyTree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Human {
     String name;
     String gender;
     Human father;
     Human mother;
-    List<Human> children;
+    Set<Human> children;
 
     public Human(String name, String gender, Human father, Human mother) {
 
@@ -16,7 +16,7 @@ public class Human {
         this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.children = new ArrayList<>();
+        this.children = new HashSet<>();
         if (mother != null) mother.AddChild(this);
         if (father != null) father.AddChild(this);
     }
@@ -32,19 +32,41 @@ public class Human {
 
     public void AddParent(Human human) {
         if (human != null) {
-            if (human.gender == "man") this.father = human;
-            else this.mother = human;
+            if (human.gender == "man") {
+                if (this.father != null) this.father.children.remove(this);
+                this.father = human;
+            } else {
+                if (this.mother != null) this.mother.children.remove(this);
+                this.mother = human;
+            }
+            human.children.add(this);
         }
     }
 
     public void AddChild(Human human){
-        this.children.add(human);
+        if (human != null) {
+            this.children.add(human);
+            human.AddParent(this);
+        }
+    }
 
+    public String GetParent() {
+        if(father == null & mother == null) return this.name + " (Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
+        else if (father == null) return this.name + " (Отец: " + "NULL" + ", Мать: " + mother.name + ")";
+        else if (mother == null) return this.name + " (Отец: " + father.name + ", Мать: " + "NULL" + ")";
+        else return this.name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
+    }
+
+    public String GetChild() {
+        StringBuilder st = new StringBuilder();
+        for (Human name : children) {
+            st.append("\tИмя: " + name.name + " Пол: " + name.gender + "\n");
+        }
+        return this.name + " 'child' --->\n" + st.toString();
     }
 
 @Override
     public String toString() {
-        return "Имя: " + name + ", Пол: " + gender;// + " (Отец: " + father + ", Мать: " + mother + ")";
+        return "Имя: " + name + ", Пол: " + gender;
     }
-
 }
