@@ -2,4 +2,4 @@
 .mvn/
 *.iml
 .out/
-.src/main/java/com/example/VendingMashine/
+src/main/java/com/example/VendingMachine/
