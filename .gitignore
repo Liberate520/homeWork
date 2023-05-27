@@ -3,3 +3,4 @@
 *.iml
 .out/
 src/main/java/com/example/VendingMachine/
+target/classes/com/example/VendingMachine/
