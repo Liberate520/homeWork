@@ -5,7 +5,7 @@ import static HW1.Trees.ruriks;
 public class Main {
     public static void main(String[] args) {
 
-        
+
         ruriks.showParents("Рюрик",879);
         ruriks.showChildren("Рюрик",879);
         ruriks.showChildren("Игорь",945);

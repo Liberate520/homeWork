@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
+    private Human human;
     private List<Human> familyTree;
 
     public FamilyTree() {

@@ -38,5 +38,7 @@ public class Trees {
             addPersonInFamilyTree(new Human("Глеб", "man", 1015), "Владимир", 1015);
         }
     };
+
+
 }
 
