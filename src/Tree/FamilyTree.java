@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    List<Human> family;
-    String familyName;
+    private List<Human> familyTree;
+    private String familyName;
 
     public FamilyTree(String familyName) {
-        family = new ArrayList<>();
+        familyTree = new ArrayList<>();
         this.familyName = familyName;
     }
 
     public void setFamily(Human... human) {
 
         for (Human someHuman : human) {
-            family.add(someHuman);
+            familyTree.add(someHuman);
         }
     }
 
     public void outFamily(Human human) {
-        family.remove(human);
+        familyTree.remove(human);
     }
 
     @Override
     public String toString() {
         StringBuilder st = new StringBuilder();
-        for (Human human : family)
-            st.append(", " + human.name);
+        for (Human human : familyTree)
+            st.append(", " + human.getName());
         return familyName + ": (" + st.toString().substring(2) + ")";
     }
 }

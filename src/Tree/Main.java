@@ -3,43 +3,40 @@ package Tree;
 public class Main {
     public static void main(String[] args) {
 
-            Human Misha = new Human("Misha", "man");
-            Human Olga = new Human("Olga", "woman");
-            Human Masha = new Human("Masha", "woman");
-            Human Sasha = new Human("Sasha", "man");
-            Human Nikita = new Human("Nikita", "man", Sasha, Masha);
-            Human Vika = new Human("Vika", "woman");
-        System.out.println(Nikita);
-        System.out.println("------------->");
+        Human Sasha = new Human("Sasha", "man");
+        Human Masha = new Human("Masha", "woman");
+        Human Olga = new Human("Olga", "woman", Sasha, Masha);
+        Human Misha = new Human("Misha", "man", Sasha, Masha);
 
-        Nikita.AddChild(Misha);
-        Nikita.AddChild(Olga);
+        Human Oleg = new Human("Oleg", "man");
+        Human Natasha = new Human("Natasha", "woman");
+        Human Nikita = new Human("Nikita", "man", Oleg, Natasha);
+        Human Vika = new Human("Vika", "woman", Oleg, Natasha);
 
-        System.out.println(Nikita.GetParent());
-        System.out.println(Misha.GetParent());
+        Human Roma = new Human("Roma", "man", Nikita, Olga);
+        Human Anna = new Human("Anna", "woman", Misha, Vika);
 
-        System.out.println(Nikita.GetChild());
-        System.out.println("------------->");
-        Olga.AddParent(Vika);
-        System.out.println(Olga);
-        System.out.println(Olga.GetParent());
+        Human Zhora = new Human("Zhora", "man", Roma, Anna);
 
-        Olga.AddParent(Misha);
-        System.out.println(Olga.GetParent());
-        System.out.println(Misha.GetChild());
-        System.out.println(Nikita.GetChild());
-
-        FamilyTree pipkins = new FamilyTree("Pipkins");
-
-        pipkins.setFamily(Sasha, Masha, Nikita, Olga, Misha, Vika);
-
-        System.out.println(pipkins);
+        Human Alena = new Human("Alena", "woman");
 
 
+        FamilyTree Ivanovi = new FamilyTree("Ivanovi");
+        Ivanovi.setFamily(Sasha, Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora);
 
-
-
-
-
+        System.out.println(Sasha);
+        System.out.println(Sasha.GetParent());
+        System.out.println(Sasha.GetChild());
+        System.out.println("--------------");
+        System.out.println(Alena.GetParent());
+        System.out.println(Alena.GetChild());
+        System.out.println("--------------Добавление родителей для Alena-------------");
+        Sasha.AddChild(Alena);
+        Alena.AddParent(Masha);
+        System.out.println(Alena.GetParent());
+        System.out.println(Sasha.GetChild());
+        System.out.println("--------------");
+        Ivanovi.setFamily(Alena);
+        System.out.println(Ivanovi);
     }
 }

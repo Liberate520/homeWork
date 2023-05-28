@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Human {
-    String name;
-    String gender;
-    Human father;
-    Human mother;
-    Set<Human> children;
+    private String name;
+    private String gender;
+    private Human father;
+    private Human mother;
+    private Set<Human> children;
 
     public Human(String name, String gender, Human father, Human mother) {
 
@@ -29,7 +29,9 @@ public class Human {
     public Human(String name, String gender) {
         this(name, gender, null);
     }
-
+    public String getName() {
+        return name;
+    }
     public void AddParent(Human human) {
         if (human != null) {
             if (human.gender == "man") {
@@ -58,6 +60,7 @@ public class Human {
     }
 
     public String GetChild() {
+        if (children.isEmpty()) return name + " 'child' ---> нет";
         StringBuilder st = new StringBuilder();
         for (Human name : children) {
             st.append("\n\tИмя: " + name.name + " Пол: " + name.gender);
