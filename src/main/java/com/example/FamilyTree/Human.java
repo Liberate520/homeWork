@@ -31,7 +31,7 @@ public class Human {
     public String toString() {
         SimpleDateFormat simpDateForm = new SimpleDateFormat("dd MMM yyyy");
         return "\n name = '" + name + '\'' +
-                ", birthday = " + simpDateForm.format(birthday) +
-                ", gender = " + gender.name();
+                ", birthday = " + simpDateForm.format(birthday);/* +
+                ", gender = " + gender.name();*/
     }
 }
