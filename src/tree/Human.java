@@ -1,16 +1,19 @@
-package Tree;
+package tree;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static tree.Gender.*;
+
 public class Human {
     private String name;
-    private String gender;
+    private Gender gender;
+   // private String gender;
     private Human father;
     private Human mother;
     private Set<Human> children;
 
-    public Human(String name, String gender, Human father, Human mother) {
+    public Human(String name, Gender gender, Human father, Human mother) {
 
         this.name = name;
         this.gender = gender;
@@ -21,20 +24,20 @@ public class Human {
         if (father != null) father.AddChild(this);
     }
 
-    public Human(String name, String gender, Human human) {
+    public Human(String name, Gender gender, Human human) {
             this(name, gender, null, null);
-            AddParent(human);
+            addParent(human);
     }
 
-    public Human(String name, String gender) {
+    public Human(String name, Gender gender) {
         this(name, gender, null);
     }
     public String getName() {
         return name;
     }
-    public void AddParent(Human human) {
+    public void addParent(Human human) {
         if (human != null) {
-            if (human.gender == "man") {
+            if (human.gender == man) {
                 if (father != null) father.children.remove(this);
                 father = human;
             } else {
@@ -48,7 +51,7 @@ public class Human {
     public void AddChild(Human human){
         if (human != null) {
             children.add(human);
-            human.AddParent(this);
+            human.addParent(this);
         }
     }
 

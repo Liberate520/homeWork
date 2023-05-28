@@ -1,4 +1,4 @@
-package Tree;
+package tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,14 @@ public class FamilyTree {
         this.familyName = familyName;
     }
 
-    public void setFamily(Human... human) {
-
+    public void setFamily(List<Human> human) {
         for (Human someHuman : human) {
             familyTree.add(someHuman);
         }
+    }
+
+    public void setFamily(Human human) {
+        familyTree.add(human);
     }
 
     public void outFamily(Human human) {
