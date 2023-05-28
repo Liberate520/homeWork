@@ -27,7 +27,7 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
         this.father = father;
         this.children = children;
     }
-    
+
     public Human(int id, String name, String surname, String dateOfBirth, Gender gender, Human father, Human mother) {
         this(id, name, surname, dateOfBirth, gender, father, mother, null);
     }
@@ -59,7 +59,7 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
     }
 
     public String getDateOfBirth() {
-        
+
         return dateOfBirth;
     }
 
@@ -90,7 +90,6 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
         }
         return "not";
     }
-    
 
     @Override
     public String toString() {
@@ -99,7 +98,7 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
         //          " Информация о родителях:  Отец: " + father + " Мать: " + mother +
         //          " Информация о детях:  " + getInfoChildren(children);
     }
-    
+
     public boolean addChildren(Human human) {
         if (!children.contains(human)) {
             children.add(human);
@@ -117,7 +116,11 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
         }
         return res;
     }
-    
+
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
     public String getFatherInfo() {
         String res = "father: ";
         if (father != null) {
@@ -126,6 +129,11 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
             res += "unknown";
         }
         return res;
+    }
+
+
+    public void setFather(Human father) {
+        this.father = father;
     }
 
     public String getInfo() {
@@ -167,9 +175,5 @@ public class Human implements Comparable<Human>, Serializable, HumanGroupItem {
     public int compareTo(Human o) {
         return name.compareTo(o.name);
     }
-
-
-
-
 
 }

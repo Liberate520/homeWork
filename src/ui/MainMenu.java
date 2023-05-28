@@ -7,6 +7,8 @@ import ui.commands.AddHuman;
 import ui.commands.Command;
 import ui.commands.Finish;
 import ui.commands.GetInfo;
+import ui.commands.ReadFile;
+import ui.commands.SaveFile;
 
 public class MainMenu {
     private List<Command> commandList;
@@ -15,6 +17,8 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(console));
         commandList.add(new GetInfo(console));
+        commandList.add(new ReadFile(console));
+        commandList.add(new SaveFile(console));
         commandList.add(new Finish(console));
     }
 

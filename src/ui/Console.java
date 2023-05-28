@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+
 import presenter.Presenter;
 
 public class Console implements View {
@@ -29,35 +30,13 @@ public class Console implements View {
     public void start() {
         System.out.println("Привет!");
         while (work) {
+            presenter.readFile();
             System.out.println(mainMenu.print());
             String line = scanner.nextLine();
             int numCommand = Integer.parseInt(line);
             mainMenu.execute(numCommand);
         }
-        // while (work) {
-        //     System.out.println("Выберите команду:\n" +
-        //             "1. Добавить родственника\n" +
-        //             "2. Получить список людей\n" +
-        //             "3. Завершить работу");
-        //     String command = scanner.nextLine();
-        //     switch (command) {
-        //         case "1":
-        //             addHuman();
-        //             break;
-        //         case "2":
-        //             getInfo();
-        //             break;
-        //         case "3":
-        //             finish();
-        //             break;
-
-        //         default:
-        //             System.out.println("Команда введена неверно. Попробуйте еще раз.");
-
-        //     }
-        //     System.out.println();
-        // }
-
+        
     }
 
     public void finish() {
@@ -86,4 +65,22 @@ public class Console implements View {
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
+
+
+    @Override
+    public void saveFile() {
+        presenter.saveFile();
+    }
+
+
+    @Override
+    public void readFile() {
+        presenter.readFile();
+    }
+
+
+
+
+
+
 }

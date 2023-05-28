@@ -1,25 +1,33 @@
 package presenter;
-
-import model.Service;
+import java.io.Serializable;
 import model.human.Gender;
+import ui.Service;
 import ui.View;
 
-public class Presenter {
+public class Presenter implements Serializable {
     private View view;
-    private Service servise;
-    
+    private Service service;    
 
     public Presenter(View view, Service service) {
         this.view = view;
-        this.servise = service;
+        this.service = service;        
         view.setPresenter(this);
     }
 
     public void addHuman(int id, String name, String surname, String dateOfBirth, Gender gender) {
-        servise.addHuman(id++, name, surname, dateOfBirth, null);
+        service.addHuman(id++, name, surname, dateOfBirth, null);
     }
     
-    public void getInfo(){
-        view.print(servise.getInfo());
+    public void getInfo() {
+        view.print(service.getInfo());
     }
+    
+    public void saveFile() {
+        service.save();
+    }
+    
+    public void readFile() {
+        service.read();
+    }
+
 }

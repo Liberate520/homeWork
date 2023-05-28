@@ -1,11 +1,14 @@
-package model.files;
+package files;
 import java.io.*;
 
-public class FileHandler implements Writable {
+public class FileHandler implements Writable, Serializable {
+
+
+
     @Override
-    public boolean save(Serializable serializable, String filePath) {
+    public boolean save(Serializable serializable) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(filePath))) {
+                new FileOutputStream("file.txt"))) {
             objectOutputStream.writeObject(serializable);
             return true;
         } catch (Exception e) {
@@ -15,10 +18,12 @@ public class FileHandler implements Writable {
 
     }
 
+
+
     @Override
-    public Object read(String filePath) {
+    public Object read() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(filePath))) {
+                new FileInputStream("file.txt"))) {
             return objectInputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,5 +31,7 @@ public class FileHandler implements Writable {
         }
 
     }
+
+
 
 }

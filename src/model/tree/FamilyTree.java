@@ -1,11 +1,8 @@
 package model.tree;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import java.util.Iterator;
 import java.util.List;
-
 import model.human.Human;
 import model.human.comporatos.HumanComparatorById;
 import model.human.comporatos.HumanComporatorByName;
@@ -13,7 +10,7 @@ import model.human.comporatos.HumanComporatorByName;
 public class FamilyTree<E extends HumanGroupItem> implements Serializable, Iterable<E> {
 
     private List<E> familyTree;
-
+   
     public FamilyTree() {        
         this(new ArrayList<>());
     }
@@ -68,11 +65,6 @@ public class FamilyTree<E extends HumanGroupItem> implements Serializable, Itera
         return new HumanIterator<>(familyTree);
     }
 
-    // @Override
-    // public Iterator<Human> iterator() {
-    //     return familyTree.iterator();
-    // }
-
     public void sortByName() {
         familyTree.sort(new HumanComporatorByName<>());
     }
@@ -80,5 +72,9 @@ public class FamilyTree<E extends HumanGroupItem> implements Serializable, Itera
     public void sortById() {
         familyTree.sort(new HumanComparatorById<>());
     }
+
+    
+
+
 
 }

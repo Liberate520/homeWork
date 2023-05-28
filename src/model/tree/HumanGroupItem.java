@@ -9,8 +9,6 @@ public interface HumanGroupItem {
 
     Human getFather();
 
-    Human getMother();
-
-    
+    Human getMother();   
     
 }

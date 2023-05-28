@@ -1,52 +1,32 @@
 import ui.View;
-
 import ui.Console;
+import ui.Service;
 
-import model.Service;
-//import model.human.Gender;
+import java.io.*;
+
+import files.FileHandler;
+import files.Writable;
+import model.human.Human;
+import model.tree.FamilyTree;
 import presenter.Presenter;
+
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //FileHandler fileHandler = new FileHandler();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
+        // Presenter presenter = new Presenter(familyTree);
+        // Console console = new Console(familyTree, fileHandler, presenter);
+        // console.start();
+
+        
 
         View view = new Console();
-        Service service = new Service();
+        Service service = new Service(familyTree);
+        //service.setWritable(new FileHandler());
         new Presenter(view, service);
         view.start();
-
-
-        //String filePath = "src/tree.txt";
-        //Writable writable = new FileHandler();
-        //FamilyTree familyTree = new FamilyTree();
-        // Service service = new Service();
-        // service.addHuman(1, "Anton", "Repov", "02.12.2000", Gender.Male);
-        // service.addHuman(2, "Anna", "Repova", "12.05.2002", Gender.Female);
-        // service.addHuman(3, "Fergat", "Repov", "12.05.2020", Gender.Female);
-
-        // Human human1 = new Human("Anton", "Repov", "02.12.2000", Gender.Male);
-        // Human human2 = new Human("Anna", "Repova", "12.05.2002", Gender.Female);
-        // Human human3 = new Human("Fergat", "Repov", "12.05.2020", Gender.Female, human1, human2);
-        // FamilyTree familyTree = new FamilyTree();
-        // familyTree.addHuman(human1);
-        // familyTree.addHuman(human2);
-        // familyTree.addHuman(human3);
-        // System.out.println(service.getInfo());
-        // System.out.println("-----------------------------------");
-        // //System.out.println(service.getHumanByName("Fergat"));
-        // System.out.println("-----------------------------------");
-
-        // // // // writable.save(familyTree, filePath);
-        // //FamilyTree familyTree = (FamilyTree) writable.read(filePath);
-
-
-        // service.sortByName();
-        // System.out.println(service.getInfo());
-
-        // service.sortById();
-        // System.out.println(service.getInfo());
-
-        //FamilyTree<Human> studyGroup = new FamilyTree<>();
 
     }
 }

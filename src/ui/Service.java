@@ -1,16 +1,22 @@
-package model;
+package ui;
+
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.Serializable;
+import files.FileHandler;
+import files.Writable;
 import model.human.Gender;
 import model.human.Human;
 import model.tree.FamilyTree;
 
-public class Service {    
+
+public class Service implements Serializable {    
     private FamilyTree<Human> activeTree;
     private List<FamilyTree<Human>> familyTreeList;
-    public int id;
-    
+    public int id;        
+   
+
+
 
     public Service(FamilyTree<Human> tree) {
         this.activeTree = tree;
@@ -46,7 +52,21 @@ public class Service {
         return stringBuilder.toString();
     }
     
-    public String getTree(){
+    public String getTree() {
         return activeTree.toString();
     }
+    
+    public void save() {
+        writable.save();
+    }
+
+    public void read() {
+        writable.read();
+        // FileHandler fileHandler = new FileHandler();
+        // fileHandler.read(filePath);
+    }
+
+    
+    
+
 }

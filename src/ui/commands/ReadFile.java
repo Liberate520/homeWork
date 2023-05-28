@@ -2,21 +2,20 @@ package ui.commands;
 
 import ui.Console;
 
-public class Finish implements Command {
+public class ReadFile implements Command {
     private Console console;
 
-    public Finish(Console console) {
+    public ReadFile(Console console) {
         this.console = console;
     }
 
     @Override
     public String getDescription() {
-        return "Завершить работу";
+        return "Распечатать дерево из файла";
     }
 
     @Override
     public void execute() {
-        console.saveFile();
-        console.finish();
+        console.readFile();
     }
 }
