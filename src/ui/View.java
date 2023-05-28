@@ -15,4 +15,8 @@ public interface View {
 
     void save();
     void load();
+
+    void sortByLastName();
+
+    void sortByFirstName();
 }

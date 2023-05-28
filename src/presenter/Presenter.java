@@ -31,4 +31,12 @@ public class Presenter {
     public void load() {
         service.load();
     }
+
+    public void sortByLastName() {
+        service.sortByLastName();
+    }
+
+    public void sortByFirstName() {
+        service.sortByFirstName();
+    }
 }

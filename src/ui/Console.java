@@ -34,6 +34,15 @@ public class Console implements View{
         presenter.save();
     }
 
+    public void sortByLastName() {
+        presenter.sortByLastName();
+    }
+
+    @Override
+    public void sortByFirstName() {
+        presenter.sortByFirstName();
+    }
+
     public void load() {
         presenter.load();
     }

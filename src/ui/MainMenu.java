@@ -14,9 +14,11 @@ public class MainMenu {
         this.view = view;
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(view));
-        commandList.add(new GetInfo(view));
-        commandList.add(new Save(view));
         commandList.add(new Load(view));
+        commandList.add(new Save(view));
+        commandList.add(new GetInfo(view));
+        commandList.add(new SortByLastName(view));
+        commandList.add(new SortByFirstName(view));
         commandList.add(new Stop(view));
     }
 
