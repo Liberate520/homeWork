@@ -1,4 +1,4 @@
-package FamilyTree;
+package Tree;
 
 import java.util.HashSet;
 import java.util.Set;

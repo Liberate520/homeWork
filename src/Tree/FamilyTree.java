@@ -1,20 +1,26 @@
-package FamilyTree;
+package Tree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Family {
+public class FamilyTree {
     List<Human> family;
     String familyName;
 
-    public Family(String familyName) {
+    public FamilyTree(String familyName) {
         family = new ArrayList<>();
         this.familyName = familyName;
     }
 
     public void setFamily(Human... human) {
-        for (Human someHuman : human)
+
+        for (Human someHuman : human) {
             family.add(someHuman);
+        }
+    }
+
+    public void outFamily(Human human) {
+        family.remove(human);
     }
 
     @Override

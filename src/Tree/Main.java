@@ -1,4 +1,4 @@
-package FamilyTree;
+package Tree;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,10 +29,17 @@ public class Main {
         System.out.println(Misha.GetChild());
         System.out.println(Nikita.GetChild());
 
-        Family pipkins = new Family("Pipkins");
+        FamilyTree pipkins = new FamilyTree("Pipkins");
 
         pipkins.setFamily(Sasha, Masha, Nikita, Olga, Misha, Vika);
 
         System.out.println(pipkins);
+
+
+
+
+
+
+
     }
 }
