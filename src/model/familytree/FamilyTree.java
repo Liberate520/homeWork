@@ -21,18 +21,27 @@ public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Itera
         return false;
     }
 
-
-    public void changeDataOfHuman() {
-        System.out.println("Choose person that need to change: ");
-
-    }
-
     public String getFamilyTreeInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         for (T t : this.list) {
             stringBuilder.append(t.getGeneralInfo()).append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public Integer getSizeOfFamilyTree() {
+        return this.list.size();
+    }
+
+    public boolean deleteHumanFromFamilyTree(Integer id) {
+        Human humanToDelete = null;
+        for(T t: this.list) {
+            if (id.equals(t.getId())) {
+                humanToDelete = (Human) t;
+            }
+        }
+        System.out.println(humanToDelete.toString());
+        return this.list.remove(humanToDelete);
     }
 
 
@@ -42,10 +51,6 @@ public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Itera
     }
 
     public void sortByName() {
-
-    }
-
-    public void sortByLastname() {
 
     }
 

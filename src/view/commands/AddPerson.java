@@ -6,16 +6,13 @@ import view.View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class AddPerson extends CommandsAbstract{
-    private Scanner scanner;
     private final String separator;
 
     public AddPerson(View view) {
         super(view, 1, "Add person");
         this.separator = "/";
-        scanner = new Scanner(System.in);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class AddPerson extends CommandsAbstract{
         while (answer < 1 || answer > 2) {
             System.out.println("Choose gender: ");
             System.out.println("[1] - male\n[2] - female");
-            String temp = scanner.nextLine();
+            String temp = super.getScanner().nextLine();
             if (temp.length() == 1 && numbers.contains(temp)) {
                 answer = Integer.parseInt(temp);
             }
@@ -69,6 +66,6 @@ public class AddPerson extends CommandsAbstract{
 
     private String getString(String message) {
         System.out.println(message);
-        return (scanner.nextLine());
+        return (super.getScanner().nextLine());
     }
 }

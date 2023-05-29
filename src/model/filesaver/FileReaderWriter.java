@@ -5,11 +5,12 @@ import java.io.*;
 
 public class FileReaderWriter implements Saveable {
     @Override
-    public void save(Serializable serializable, String path) {
+    public boolean save(Serializable serializable, String path) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
             objectOutputStream.writeObject(serializable);
             objectOutputStream.close();
+            return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -52,5 +52,8 @@ public class Console implements View{
         return this.presenter;
     }
 
-   
+    @Override
+    public MainMenu getMainMenu() {
+        return mainMenu;
+    }
 }

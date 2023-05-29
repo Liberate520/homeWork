@@ -10,6 +10,16 @@ public class DeletePerson extends CommandsAbstract{
 
     @Override
     public void execute() {
-        System.out.println("work " + getDescription());
+        if (this.getView().getPresenter().getFamilyTreeSize() > 0) {
+            System.out.println("Choose person ID: ");
+            super.getView().getMainMenu().execute(3);
+            getView().getPresenter().deleteHumanFromFamilyTree(getId());
+        } else {
+            System.out.println("The family tree is empty!!");
+        }
+    }
+
+    private Integer getId() {
+       return Integer.parseInt(super.getScanner().nextLine());
     }
 }

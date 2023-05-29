@@ -86,6 +86,7 @@ public class Human implements Serializable, FamilyTreeItem {
     }
 
     public Integer getId() {
+        this.id = makeHashCode();
         return id;
     }
 

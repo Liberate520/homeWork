@@ -2,21 +2,31 @@ package view.commands;
 
 import view.View;
 
-import java.util.Scanner;
+import java.io.File;
 
 public class WriteInFile extends CommandsAbstract{
+    String path;
 
     public WriteInFile(View view) {
         super(view, 4, "Write in file.");
+        path = "a";
     }
 
     @Override
     public void execute() {
-        this.getView().getPresenter().writeFamilyTreeInFile(getPath());
+       boolean flag = this.getView().getPresenter().writeFamilyTreeInFile(getPath());
+       if (flag) {
+           System.out.println("Data was written in file.");
+       } else {
+           System.out.println("Error.");
+       }
     }
 
     private String getPath() {
-        System.out.println("Enter absolute path: ");
-        return new Scanner(System.in).nextLine();
+        while (!new File(path).exists()) {
+            System.out.println("Enter absolute path: ");
+            this.path = super.getScanner().nextLine();
+        }
+        return path;
     }
 }

@@ -1,22 +1,27 @@
 package view.commands;
-
 import view.View;
 
-import java.util.Scanner;
+import java.io.File;
 
 public class ReadFromFile extends CommandsAbstract{
+    String path;
 
     public ReadFromFile(View view) {
         super(view, 5, "Read from file.");
+        this.path = "a";
     }
 
     @Override
     public void execute() {
-        this.getView().getPresenter().readFamilyTreeFromFile(getPath());
+        Integer size = this.getView().getPresenter().readFamilyTreeFromFile(getPath());
+        System.out.println("Was read " + size + " person.");
     }
 
     private String getPath() {
-        System.out.println("Enter absolute path: ");
-        return new Scanner(System.in).nextLine();
+        while (!new File(path).exists()) {
+            System.out.println("Enter absolute path: ");
+            this.path = super.getScanner().nextLine();
+        }
+        return path;
     }
 }

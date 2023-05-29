@@ -43,4 +43,8 @@ public class MainMenu {
     public int getNumberOfCommands(){
         return this.commands.size();
     }
+
+    public Map<Integer, Command> getCommands() {
+        return commands;
+    }
 }

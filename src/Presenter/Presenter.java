@@ -1,31 +1,39 @@
 package Presenter;
 
-import model.Service;
+import model.ModelService;
 import model.human.Gender;
 import view.View;
 
 public class Presenter {
-    private Service service;
+    private ModelService modelServiceservice;
     private View view;
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new Service();
+        this.modelServiceservice = new ModelService();
     }
 
     public String getFamilyTreeInfo() {
-       return this.service.getFamilyTreeInfo();
+       return this.modelServiceservice.getFamilyTreeInfo();
     }
 
     public void addNewHumanToFamilyTree(Gender gender, String name, String lastName, Integer age ) {
-        this.service.addNewHumanToFamilyTree(gender, name, lastName, age);
+        this.modelServiceservice.addNewHumanToFamilyTree(gender, name, lastName, age);
     }
 
-    public void writeFamilyTreeInFile(String path) {
-        this.service.writeFamilyTreeInFile(path);
+    public boolean writeFamilyTreeInFile(String path) {
+        return this.modelServiceservice.writeFamilyTreeInFile(path);
     }
 
-    public void readFamilyTreeFromFile(String path){
+    public Integer getFamilyTreeSize() {
+        return this.modelServiceservice.getFamilyTreeSize();
+    }
 
+    public Integer readFamilyTreeFromFile(String path){
+        return this.modelServiceservice.readFamilyTreeFromFile(path);
+    }
+
+    public boolean deleteHumanFromFamilyTree(Integer id) {
+        return this.modelServiceservice.deleteHumanFromFamilyTree(id);
     }
 }
