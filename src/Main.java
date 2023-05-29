@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) {
         View view = new Console();
         Service service = new Service();
-        service.read();
+        service.read("FamilyTrees");
         Presenter presenter = new Presenter(view, service);
         view.start();
-        service.write();
+        service.write("FamilyTrees");
     }
 }

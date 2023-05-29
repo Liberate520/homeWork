@@ -10,11 +10,11 @@ public interface View {
     void startTreeMenu();
     void startAddMenu();
     FullName inputKinsman();
-    void addParent(int idHuman);
-    void addChild(int idHuman);
+    void addParent(int idperson);
+    void addChild(int idperson);
     void getFamilyName();
     void getFamily();
-    int getIdHuman();
+    int getIdPerson();
     int getCommand();
     void finishMainMenu();
     void finishAddMenu();

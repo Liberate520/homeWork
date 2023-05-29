@@ -26,7 +26,7 @@ public class Presenter {
     }
 
     public void getNameActiveFamily() throws NullPointerException {
-        view.print(service.getActiveNameFamily());
+        view.print(service.getActiveInfoFamily());
     }
 
     public void createFamilyTree(String family, String firstName, String lastName, int sex) {

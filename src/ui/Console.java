@@ -13,7 +13,7 @@ public class Console implements View {
     private TreeMenu treeMenu;
     private AddMenu addMenu;
     private SexMenu sexMenu;
-    private int command, idHuman, sex;
+    private int command, idPerson, sex;
     public Console() {
         scanner = new Scanner(System.in);
         workMainMenu = true;
@@ -52,7 +52,7 @@ public class Console implements View {
         workAddMenu = true;
         addMenu = new AddMenu(this);
         System.out.println("Введите номер члена семьи, которому хотите добавить родственника");
-        if (setIdHuman(inputNumber())) {
+        if (setIdPerson(inputNumber())) {
             System.out.println("Выберите кого вы хотите добавить:");
             while (workAddMenu) {
                 implementationMenu(addMenu);
@@ -67,18 +67,18 @@ public class Console implements View {
         if (command != -1) menu.execute(command);
     }
 
-    public void addParent(int idHuman) {
+    public void addParent(int idPerson) {
         FullName name = inputKinsman();
         String firstName = name.getFirstName();
         String lastName = name.getLastName();
-        presenter.addParent(idHuman, firstName, lastName, sex);
+        presenter.addParent(idPerson, firstName, lastName, sex);
     }
 
-    public void addChild(int idHuman) {
+    public void addChild(int idPerson) {
         FullName name = inputKinsman();
         String firstName = name.getFirstName();
         String lastName = name.getLastName();
-        presenter.addChild(idHuman, firstName, lastName, sex);
+        presenter.addChild(idPerson, firstName, lastName, sex);
     }
 
     public FullName inputKinsman() {
@@ -124,13 +124,13 @@ public class Console implements View {
         presenter.getFamilyTree();
     }
 
-    public int getIdHuman() {
-        return this.idHuman;
+    public int getIdPerson() {
+        return this.idPerson;
     }
 
-    private boolean setIdHuman(int intConsole) {
+    private boolean setIdPerson(int intConsole) {
        if (presenter.isKinsman(intConsole)) {
-           idHuman = intConsole;
+           idPerson = intConsole;
            return true;
        }
        else System.out.println("Член семьи с таким id отсутствует");

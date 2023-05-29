@@ -13,7 +13,7 @@ public class AddChild extends ConsoleCommand implements Command {
 
     @Override
     public void execute() {
-        view.addChild(view.getIdHuman());
+        view.addChild(view.getIdPerson());
         view.finishAddMenu();
     }
 }
