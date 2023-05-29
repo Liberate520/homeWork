@@ -1,5 +1,6 @@
 package HW1;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class FamilyTree {
             if (parent.getSex().equalsIgnoreCase("man")) {
                 child.setFather(parent);
                 addChildBranch(parent, child);
-            } else if (parent.getSex().equalsIgnoreCase("woman")) {
+            }
+            if (parent.getSex().equalsIgnoreCase("woman")) {
                 child.setMother(parent);
                 addChildBranch(parent, child);
             }
@@ -58,14 +60,11 @@ public class FamilyTree {
      * @param person ребенок
      * @param parent родитель
      */
-    public void addPersonInFamilyTree(Human person, String parent) {
+    public void addPersonInFamilyTree(Human person, String parent, int yearOfBirth) {
         if (!checkPersonInTree(person)) {
-            addBranchParentChild(getPersonFromTreeByName(parent), person);
+            addBranchParentChild(getPersonFromTree(parent, yearOfBirth), person);
             familyTree.add(person);
         }
-
-        //TODO лучше пользоваться уже написанным методом addPersonInFamilyTree. Например в этом
-        // методе могла бы быть проверка на то, что такого человека еще нет в дереве
     }
 
     /**
@@ -76,10 +75,12 @@ public class FamilyTree {
      * @param fatherName имя отца
      * @param motherName имя матери
      */
-    public void addPersonInFamilyTree(Human child, String fatherName, String motherName) {
-        if (checkPersonInTree(child)) {
-            addBranchParentChild(getPersonFromTreeByName(motherName), child);
-            addBranchParentChild(getPersonFromTreeByName(fatherName), child);
+    public void addPersonInFamilyTree(Human child,
+                                      String fatherName, int yearOfBirthFather,
+                                      String motherName, int yearOfBirthMother) {
+        if (!checkPersonInTree(child)) {
+            addBranchParentChild(getPersonFromTree(fatherName, yearOfBirthFather), child);
+            addBranchParentChild(getPersonFromTree(motherName, yearOfBirthMother), child);
             familyTree.add(child);
         }
     }
@@ -90,10 +91,12 @@ public class FamilyTree {
      * @param person человек
      * @return Human
      */
-    public Human getPersonFromTreeByName(String person) {
+    public Human getPersonFromTree(String person, int yearOfBirth) {
+        Year temp = Year.of(yearOfBirth);
         for (Human person_ : familyTree
         ) {
-            if (person_.getNAME().equalsIgnoreCase(person)) return person_;
+            if (person_.getNAME().equalsIgnoreCase(person)
+                    && person_.getYearOfBirth().equals(temp)) return person_;
         }
         return null;
     }
@@ -102,14 +105,11 @@ public class FamilyTree {
         return familyTree.contains(person);
     }
 
-    //TODO На самом деле лучше писать класс в режиме Api и просто возвращать результат работы, а не выводить его в
-    // консоль. Ведь возможно потом нужно будет инфу выводить не в консоль, а например на страницу веб приложения
-
     /**
      * Для вывода родителей
      */
-    public void showParents(String childName) {
-        Human child = getPersonFromTreeByName(childName);
+    public void showParents(String childName, int yearOfBirth) {
+        Human child = getPersonFromTree(childName, yearOfBirth);
         if (child != null) {
             Human father = child.getFather();
             Human mother = child.getMother();
@@ -124,9 +124,10 @@ public class FamilyTree {
     /**
      * Метод для отображения всех детей человека
      */
-    public void showChildren(String parentName) {
-        try {
-            List<Human> children = getPersonFromTreeByName(parentName).getChildren();
+    public void showChildren(String parentName, int yearOfBirth) {
+        Human parent = getPersonFromTree(parentName, yearOfBirth);
+        if (parent != null) {
+            List<Human> children = parent.getChildren();
             if (!children.isEmpty()) {
                 System.out.print("-> родитель: " + parentName);
 
@@ -136,10 +137,8 @@ public class FamilyTree {
                 }
                 System.out.println();
             } else {
-                System.out.printf("%s не имеет детей.", parentName);
+                System.out.println(parentName + " " + yearOfBirth + " не имеет детей.");
             }
-        } catch (NullPointerException e) {
-            System.out.println("-> ERROR. Проверьте правильность написания имени родителя '" + parentName + "'");
         }
     }
 }
