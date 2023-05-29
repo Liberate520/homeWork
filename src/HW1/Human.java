@@ -1,9 +1,7 @@
 package HW1;
 
-import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Human {

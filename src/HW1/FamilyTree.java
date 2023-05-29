@@ -129,7 +129,7 @@ public class FamilyTree {
         if (parent != null) {
             List<Human> children = parent.getChildren();
             if (!children.isEmpty()) {
-                System.out.print("-> родитель: " + parentName);
+                System.out.print("-> родитель: " + parent.getNAME());
 
                 System.out.print(" -> Дети: ");
                 for (Human child : children) {
