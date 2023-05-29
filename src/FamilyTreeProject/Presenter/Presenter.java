@@ -1,6 +1,7 @@
 package Presenter;
 
 import model.Service;
+import model.human.Gender;
 import ui.View;
 
 public class Presenter {
@@ -17,9 +18,8 @@ public class Presenter {
     //     service.addMember(human);
     // }
 
-    public void addMember(String firstName, String lastName, int dayOfBirth, int monthOfBirth, int yearOfBirth){
-        service.addMember(firstName, lastName, dayOfBirth,
-        monthOfBirth, yearOfBirth);
+    public void addMember(String firstName, String lastName, Gender gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int mother, int father){
+        service.addMember(firstName, lastName, gender, dayOfBirth, monthOfBirth, yearOfBirth, mother, father);
     }
     public void getAllMembers(){
         view.print(service.getAllMembersAsString());

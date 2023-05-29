@@ -1,4 +1,4 @@
-package human;
+package model.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -82,6 +82,10 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeObject<
         this.lastName = lastName;
     }
     
+    public void setGender(String gender){
+        if (gender == "male"){this.gender = Gender.Male;}
+        else if(gender == "female"){this.gender = Gender.Female;}
+    }
     public void setMother(Human mother) {
         if(mother.getGender()==Gender.Female){
             this.mother = mother;

@@ -1,12 +1,14 @@
-package familyTree;
+package model.familyTree;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import human.FamilyTreeObject;
-import human.HumanComporatorByAge;
-import human.HumanComporatorByName;
+import model.human.FamilyTreeObject;
+import model.human.Human;
+import model.human.HumanComporatorByAge;
+import model.human.HumanComporatorByName;
 
 public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Iterable<E>{
     
@@ -34,22 +36,22 @@ public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Ite
         return res;
     }
 
-    // public void addMember(E human, E mother, E father){
-    public void addMember(E human){
+    public void addMember(Human human, Human mother, Human father){
+    // public void addMember(E human){
         if(!familyMembers.contains(human)){
-            familyMembers.add(human);
-            // if(mother!=null){
-            //     human.setMother(mother);
-            //     if(!mother.getChildren().contains(human)){
-            //         mother.addChild(human);
-            //     }
-            //    }
-            // if(father!=null){
-            //    human.setFather(father);
-            //    if(!father.getChildren().contains(human)){
-            //         father.addChild(human);
-            //     }
-            // }
+            familyMembers.add((E) human);
+            if(mother!=null){
+                human.setMother(mother);
+                if(!mother.getChildren().contains(human)){
+                    mother.addChild(human);
+                }
+               }
+            if(father!=null){
+               human.setFather(father);
+               if(!father.getChildren().contains(human)){
+                    father.addChild(human);
+                }
+            }
             }
         }
 
