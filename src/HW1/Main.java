@@ -1,6 +1,6 @@
 package HW1;
 
-import static HW1.Tree.ruriks;
+import static HW1.Trees.ruriks;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,6 +10,8 @@ public class Main {
         ruriks.showChildren("Игорь");
         ruriks.showChildren("Святослав");
         ruriks.showParents("святослав");
-        System.out.println(ruriks.getPerson("игорь"));
+        System.out.println(ruriks.getPersonFromTreeByName("игорь"));
+        ruriks.showParents("Борис");
+        ruriks.showParents("Борис");
     }
 }

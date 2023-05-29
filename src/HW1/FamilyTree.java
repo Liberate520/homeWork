@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    List<Human> familyTree;
+    private List<Human> familyTree;
 
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
@@ -14,35 +14,31 @@ public class FamilyTree {
      * Добавляет связь ребенка и родителя. После выполнения у родителя и ребенка в классе появится необходимая ветвь.
      *
      * @param parent родитель
-     * @param child ребенок
+     * @param child  ребенок
      */
     public void addBranchParentChild(Human parent, Human child) {
-        if (child.getFather() == null) {
-            child.setFather(parent);
-            if (!checkChildByName(parent, child)) {
-                parent.addChild(child);
-            }
-        } else {
-            child.setMother(parent);
-            if (!checkChildByName(parent, child)) {
-                parent.addChild(child);
+        if (parent != null) {
+            if (parent.getSex().equalsIgnoreCase("man")) {
+                child.setFather(parent);
+                addChildBranch(parent, child);
+            } else if (parent.getSex().equalsIgnoreCase("woman")) {
+                child.setMother(parent);
+                addChildBranch(parent, child);
             }
         }
     }
 
+
     /**
-     * Проверяет есть ли ребенок с переданным именем, в списке детей класса Human
+     * Проверяет есть ли у родителя нужный ребенок, если нет, добавляет его в список.
      *
-     * @param parent родитель
-     * @param child ребенок
-     * @return true or false
+     * @param parent
+     * @param child
      */
-    private boolean checkChildByName(Human parent, Human child) {
-        for (Human child_ : parent.getChildren()
-        ) {
-            if (child_.getNAME().equalsIgnoreCase(child.getNAME())) return true;
+    private void addChildBranch(Human parent, Human child) {
+        if (!parent.getChildren().contains(child)) {
+            parent.addChild((child));
         }
-        return false;
     }
 
     /**
@@ -52,41 +48,49 @@ public class FamilyTree {
      * @param person человек
      */
     public void addPersonInFamilyTree(Human person) {
-        familyTree.add(person);
+        if (!checkPersonInTree(person)) familyTree.add(person);
     }
 
     /**
      * Для добавления человека в семейное древо с одним предком.
      * Так же метод добавляет ребенка родителю
      *
-     * @param child ребенок
+     * @param person ребенок
      * @param parent родитель
      */
-    public void addPersonInFamilyTree(Human child, String parent) {
-        addBranchParentChild(getPerson(parent), child);
-        familyTree.add(child);
+    public void addPersonInFamilyTree(Human person, String parent) {
+        if (!checkPersonInTree(person)) {
+            addBranchParentChild(getPersonFromTreeByName(parent), person);
+            familyTree.add(person);
+        }
+
+        //TODO лучше пользоваться уже написанным методом addPersonInFamilyTree. Например в этом
+        // методе могла бы быть проверка на то, что такого человека еще нет в дереве
     }
 
     /**
      * Для добавления человека в семейное древо с двумя родителями.
      * Так же метод добавляет ребенка родителю
      *
-     * @param child ребенок
+     * @param child      ребенок
      * @param fatherName имя отца
      * @param motherName имя матери
      */
     public void addPersonInFamilyTree(Human child, String fatherName, String motherName) {
-        addBranchParentChild(getPerson(fatherName), child);
-        addBranchParentChild(getPerson(motherName), child);
-        familyTree.add(child);
+        if (checkPersonInTree(child)) {
+            addBranchParentChild(getPersonFromTreeByName(motherName), child);
+            addBranchParentChild(getPersonFromTreeByName(fatherName), child);
+            familyTree.add(child);
+        }
     }
 
     /**
      * Возвращает человека из списка древа
+     *
      * @param person человек
      * @return Human
      */
-    public Human getPerson(String person) {
+    public Human getPersonFromTreeByName(String person) {
         for (Human person_ : familyTree
         ) {
             if (person_.getNAME().equalsIgnoreCase(person)) return person_;
@@ -94,11 +98,18 @@ public class FamilyTree {
         return null;
     }
 
+    private boolean checkPersonInTree(Human person) {
+        return familyTree.contains(person);
+    }
+
+    //TODO На самом деле лучше писать класс в режиме Api и просто возвращать результат работы, а не выводить его в
+    // консоль. Ведь возможно потом нужно будет инфу выводить не в консоль, а например на страницу веб приложения
+
     /**
      * Для вывода родителей
      */
     public void showParents(String childName) {
-        Human child = getPerson(childName);
+        Human child = getPersonFromTreeByName(childName);
         if (child != null) {
             Human father = child.getFather();
             Human mother = child.getMother();
@@ -115,7 +126,7 @@ public class FamilyTree {
      */
     public void showChildren(String parentName) {
         try {
-            List<Human> children = getPerson(parentName).children;
+            List<Human> children = getPersonFromTreeByName(parentName).getChildren();
             if (!children.isEmpty()) {
                 System.out.print("-> родитель: " + parentName);
 
@@ -128,7 +139,7 @@ public class FamilyTree {
                 System.out.printf("%s не имеет детей.", parentName);
             }
         } catch (NullPointerException e) {
-            System.out.println("-> ERROR. Проверьте правильность написания имени родителя '" + parentName+"'");
+            System.out.println("-> ERROR. Проверьте правильность написания имени родителя '" + parentName + "'");
         }
     }
 }
