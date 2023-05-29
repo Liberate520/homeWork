@@ -1,9 +1,10 @@
 package homeWork.tree2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class FamilyTree {
+
+public class FamilyTree implements Serializable {
     private ArrayList<Human> families;
 
 
@@ -24,9 +25,7 @@ public class FamilyTree {
         return sb.toString();
     }
 
-    public Human findPersonByName() {
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.next();
+    public Human findPersonByName(FamilyTree familyTree, String name) {
         for(Human man: families) {
             if(man.getName().equalsIgnoreCase(name)){
                 return man;

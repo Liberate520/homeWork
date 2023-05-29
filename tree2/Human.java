@@ -2,8 +2,9 @@ package homeWork.tree2;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.io.*;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private LocalDate birthdate;
     private Human mother;

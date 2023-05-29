@@ -1,9 +1,11 @@
 package homeWork.tree2;
 
+
 import java.time.LocalDate;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Human[] people = new Human[10];
 
         people[0] = new Human("John", LocalDate.of(1950, 5, 15));
@@ -34,15 +36,25 @@ public class Main {
             familyTree.addPeople(people[i]);
         }
 
-        System.out.println(familyTree.getFamilies());
 
-        for(Human person : people) {
-            System.out.println("Человек: "+person.getName());
-            System.out.println("\t\t Мама: " + person.getMother());
-            System.out.println("\t\t Папа: " + person.getFather());
-            System.out.println("\t\t Дети: " + person.getChildren());
-            System.out.println("--------------------------------------------------------");
-        }
+        FileHandler fileHandler = new FileHandler();
+
+
+        fileHandler.save(familyTree);
+        System.out.println(fileHandler.load().getFamilies());
+        fileHandler.saveToJson(familyTree.getFamilies());
+
+
+        String[] familiesArray = fileHandler.load().getFamilies().split("\n");
+        String firstElement = familiesArray[3]; // Выберите 3, т.к. там и родители и дети!
+        System.out.println("Этот тот самый человек!" + " " + familyTree.findPersonByName(familyTree, firstElement));
+        System.out.println("А вот его родители:" + " " + familyTree.findPersonByName(familyTree, firstElement).getFather() +
+                " " + familyTree.findPersonByName(familyTree, firstElement).getMother());
+        System.out.println("А вот его дети:" + " " + familyTree.findPersonByName(familyTree, firstElement).getChildren().toString());
+
+
 
     }
+
+
 }

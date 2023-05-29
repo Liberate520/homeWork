@@ -1,6 +1,6 @@
 package homeWork.tree2;
 
-import tree2.FamilyTree;
+
 
 import java.io.*;
 
