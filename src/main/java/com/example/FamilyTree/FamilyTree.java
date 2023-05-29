@@ -1,7 +1,5 @@
 package com.example.FamilyTree;
 
-import com.example.VendingMachine.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,23 +36,33 @@ public class FamilyTree {
         }
     }
 
-    public String getFamilyTree() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Human human1 : parents) {
-            stringBuilder.append(human1);
-        }
-
-        for (Human human1 : children) {
-            stringBuilder.append(human1);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
     @Override
     public String toString() {
-        return "\nFamilyTree for human:" + human + "\n" +
-                ((parents.size()>0) ? ("parents: " + parents + "\n" ) : ("")) +
-                ((children.size()>0) ? ("children: " + children) : ("")) + "\n";
+        String parent = "parents: \n";
+        if (parents.size()>0) {
+            for (Human parent1 : parents) {
+                parent = parent + ((parent1.getGender() == Gender.female) ? "mother " : "father ") + parent1 + "\n";
+            }
+        } else { parent = "";}
+        String child = "children: \n";
+        if (children.size()>0) {
+            for (Human children1 : children) {
+                child = child + ((children1.getGender() == Gender.female) ? "daughter " : "son ") + children1 + "\n";
+            }
+        } else { child = "\n";}
+
+        return "\nFamilyTree for human: " + human + "\n" + parent + child;
+    }
+
+    public Human getHuman() {
+        return human;
+    }
+
+    public List<Human> getParents() {
+        return parents;
+    }
+
+    public List<Human> getChildren() {
+        return children;
     }
 }

@@ -15,10 +15,6 @@ public class Human {
         this.gender = gender;
     }
 
-    public Human(){
-        this("Name human", "2023-01-01", Gender.male);
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -30,8 +26,6 @@ public class Human {
     @Override
     public String toString() {
         SimpleDateFormat simpDateForm = new SimpleDateFormat("dd MMM yyyy");
-        return "\n name = '" + name + '\'' +
-                ", birthday = " + simpDateForm.format(birthday);/* +
-                ", gender = " + gender.name();*/
+        return name + " (birthday - " + simpDateForm.format(birthday)+")";
     }
 }
