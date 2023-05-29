@@ -3,25 +3,47 @@ package HW1;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Human {
-    private final String NAME;
+    private String NAME;
     private Year yearOfBirth;
+    private String sex;
     private Human father;
     private Human mother;
-    List<Human> children;
+    private List<Human> children;
 
-    public Human(String name,int yearOfBirth) {
+    public Human(String name, String sex, int yearOfBirth) {
         this.NAME = name;
         this.yearOfBirth = Year.of(yearOfBirth);
+        this.sex = sex;
         this.father = null;
         this.mother = null;
         this.children = new ArrayList<>();
     }
 
+    public String getNAME() {
+        return NAME;
+    }
+
+    public Year getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+    public Human getFather() {
+        return father;
+    }
+
     public void setFather(Human father) {
         this.father = father;
+    }
+
+    public Human getMother() {
+        return mother;
     }
 
     public void setMother(Human mother) {
@@ -32,22 +54,9 @@ public class Human {
         this.children.add(child);
     }
 
-    public Human getFather() {
-        return father;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
     public List<Human> getChildren() {
         return children;
     }
-
-    public String getNAME() {
-        return NAME;
-    }
-
 
     @Override
     public String toString() {
