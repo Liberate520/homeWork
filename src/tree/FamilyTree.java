@@ -14,16 +14,33 @@ public class FamilyTree {
 
     public void setFamily(List<Human> human) {
         for (Human someHuman : human) {
-            familyTree.add(someHuman);
+            setFamily(someHuman);
         }
     }
 
     public void setFamily(Human human) {
         familyTree.add(human);
+        for (Human someHuman : familyTree) {
+            if (someHuman == human.getFather()) {
+                someHuman.addChild(human);
+            }
+        }
+        for (Human someHuman : familyTree) {
+            if (someHuman == human.getMother()) {
+                someHuman.addChild(human);
+            }
+        }
     }
 
     public void outFamily(Human human) {
         familyTree.remove(human);
+    }
+
+    public Human findHuman(String name) {
+        for (Human human : familyTree) {
+            if (human.getName().equals(name)) return human;
+        }
+        return null;
     }
 
     @Override

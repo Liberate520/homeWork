@@ -8,7 +8,6 @@ import static tree.Gender.*;
 public class Human {
     private String name;
     private Gender gender;
-   // private String gender;
     private Human father;
     private Human mother;
     private Set<Human> children;
@@ -20,8 +19,8 @@ public class Human {
         this.father = father;
         this.mother = mother;
         this.children = new HashSet<>();
-        if (mother != null) mother.AddChild(this);
-        if (father != null) father.AddChild(this);
+        //if (mother != null) mother.AddChild(this);
+        //if (father != null) father.AddChild(this);
     }
 
     public Human(String name, Gender gender, Human human) {
@@ -35,6 +34,9 @@ public class Human {
     public String getName() {
         return name;
     }
+    public Human getFather() { return father; }
+    public Human getMother() { return mother; }
+
     public void addParent(Human human) {
         if (human != null) {
             if (human.gender == man) {
@@ -48,21 +50,21 @@ public class Human {
         }
     }
 
-    public void AddChild(Human human){
+    public void addChild(Human human){
         if (human != null) {
             children.add(human);
             human.addParent(this);
         }
     }
 
-    public String GetParent() {
+    public String getParent() {
         if(father == null & mother == null) return name + " (Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
         else if (father == null) return name + " (Отец: " + "NULL" + ", Мать: " + mother.name + ")";
         else if (mother == null) return name + " (Отец: " + father.name + ", Мать: " + "NULL" + ")";
         else return name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
     }
 
-    public String GetChild() {
+    public String getChild() {
         if (children.isEmpty()) return name + " 'child' ---> нет";
         StringBuilder st = new StringBuilder();
         for (Human name : children) {

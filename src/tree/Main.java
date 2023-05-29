@@ -28,23 +28,20 @@ public class Main {
 
         FamilyTree Ivanovi = new FamilyTree("Ivanovi");
         List<Human> people = new ArrayList<>();
-        people.addAll(Arrays.asList(Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora));
+        people.addAll(Arrays.asList(Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora, Alena));
 
         Ivanovi.setFamily(people);
-
-        System.out.println(Sasha);
-        System.out.println(Sasha.GetParent());
-        System.out.println(Sasha.GetChild());
-        System.out.println("--------------");
-        System.out.println(Alena.GetParent());
-        System.out.println(Alena.GetChild());
-        System.out.println("--------------Добавление родителей для Alena-------------");
-        Sasha.AddChild(Alena);
-        Alena.addParent(Masha);
-        System.out.println(Alena.GetParent());
-        System.out.println(Sasha.GetChild());
-        System.out.println("--------------");
-        Ivanovi.setFamily(Alena);
         System.out.println(Ivanovi);
+
+        System.out.println("-------------Найти человека-------------");
+        System.out.println(Ivanovi.findHuman("Masha"));
+        System.out.println("Найти Alla ---> " + Ivanovi.findHuman("Alla"));
+        System.out.println(Ivanovi.findHuman("Masha").getParent() + "\n" + Ivanovi.findHuman("Masha").getChild());
+        System.out.println("------------Добавление Parents для Alena------------");
+        System.out.println(Alena.getParent());
+        Alena.addParent(Masha);
+        Sasha.addChild(Alena);
+        System.out.println(Alena.getParent());
+        System.out.println(Masha.getChild());
     }
 }
