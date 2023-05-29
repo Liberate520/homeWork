@@ -8,10 +8,10 @@ public class Main {
         Human ancestor2 = new Human("Eliza  Johnson", 1910, Gender.female);
         Human ancestor3 = new Human("Donald  Ferguson", 1915, Gender.male);
         Human secondGen1 = new Human("Mike  Johnson", 1920, Gender.male);
-        Human secondGen2 = new Human("Betty  Ferguson", 1930, Gender.female, null, ancestor3);
-        Human thirdGen1 = new Human("Bobby  Johnson", 1940, Gender.male, secondGen2, secondGen1);
+        Human secondGen2 = new Human("Betty  Ferguson", 1930, Gender.female);
+        Human thirdGen1 = new Human("Bobby  Johnson", 1940, Gender.male);
         Human thirdGen2 = new Human("Christine  Johnson", 1950, Gender.female);      
-        Human thirdGen3 = new Human("Steve  Gomez", 1960, Gender.male, secondGen2, null);      
+        Human thirdGen3 = new Human("Steve  Gomez", 1960, Gender.male);      
         
         FamilyTree family = new FamilyTree();
         family.addNewMember(ancestor1);
@@ -19,10 +19,12 @@ public class Main {
         family.addNewMember(ancestor3);
         family.addNewMemberChild(secondGen1, ancestor1);
         family.addNewMemberChild(secondGen1, ancestor2);
+        family.addNewMemberChild(secondGen2, ancestor3);
         family.addNewMember(secondGen2);
-        family.addNewMember(thirdGen1);
-        family.addNewMember(thirdGen2);
-        family.addNewMember(thirdGen3);
+        family.addNewMemberChild(thirdGen1, secondGen1);
+        family.addNewMemberChild(thirdGen2, secondGen1);
+        family.addNewMemberChild(thirdGen2, secondGen2);
+        family.addNewMemberChild(thirdGen3, secondGen2);
 
         System.out.println(family);  
         

@@ -13,22 +13,27 @@ public class FamilyTree {
 
     /** added new member */
     public void addNewMember(Human human) {
-        family.add(human);
+        if(!contains(human)){
+            family.add(human);
+        }
     }
 
     /** added new child for member */
     public void addNewMemberChild(Human child, Human human) {
-
-        if (!Contains(child)) {
-            family.add(child);
+        addNewMember(child);
+        if(human.getGender() == Gender.male){
+            child.setFather(human);
+        }
+        if(human.getGender() == Gender.female){
+            child.setMother(human);
         }
         human.addChild(child);
     }
 
     /** checked contains member in family list */
-    private Boolean Contains(Human searchableHuman) {
+    private Boolean contains(Human search) {
         for (Human human : family) {
-            if (human.equals(searchableHuman)) {
+            if (human.equals(search)) {
                 return true;
             }
         }

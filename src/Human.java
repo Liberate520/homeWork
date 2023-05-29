@@ -26,24 +26,11 @@ public class Human {
     }
 
 
-    public Human(String name, int yearBirth, Gender gender, Human mother, Human father) {
+    public Human(String name, int yearBirth, Gender gender) {
         this.name = name;
         this.yearBirth = yearBirth;
         this.gender = gender;
         children = new ArrayList<>();
-        this.mother = mother;
-        this.father = father;
-        if(mother != null){
-            mother.children.add(this);
-        }
-        if(father != null){
-            father.children.add(this);
-        }
-    }
-
-
-    public Human(String name, int yearBirth, Gender gender) {
-        this(name, yearBirth, gender, null, null);
     }
 
     /** checked contains child in children list */
@@ -66,17 +53,21 @@ public class Human {
         return father;
     }
 
+    /** set father */
+    public void setFather(Human father) {
+        this.father = father;
+    }
+
+    /** set mother */
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
     /** added child in children list */
     public Boolean addChild(Human child) {
 
         if(!ContainsChild(child)){
             children.add(child);
-            if(gender == Gender.male){
-                child.father = this;
-            }
-            if(gender == Gender.female){
-                child.mother = this;
-            }
             return true;
         }
         return false;
@@ -108,4 +99,6 @@ public class Human {
         }
         return builder.toString();
     }
+
+
 }
