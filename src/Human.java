@@ -1,148 +1,178 @@
+import org.xml.sax.SAXNotRecognizedException;
+
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Human {
     private String name;
-    private String surname;
     private LocalDate birthdate;
     private LocalDate deathDate;
     private Gender gender;
-    private String father;
-    private String mother;
-    private String sister;
-    private String brother;
-    private String grandFather;
-    private String grandMother;
+    private Human father;
+    private Human mother;
 
-    public Human(String name, String surname, LocalDate birthdate, LocalDate deathDate, Gender gender, String father, String mother, String sister, String brother, String grandFather, String grandMother) {
+    private List<Human> children;
+    private List<Human> brother;
+    private List<Human> sister;
+
+    public Human(String name, Gender gender, LocalDate birthdate) { this(name, birthdate, null, gender, null, null);}
+
+    public Human(String name, LocalDate birthdate, LocalDate deathDate, Gender gender, Human father, Human mother) {
         this.name = name;
-        this.surname = surname;
         this.birthdate = birthdate;
         this.deathDate = deathDate;
         this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.sister = sister;
-        this.brother = brother;
-        this.grandFather = grandFather;
-        this.grandMother = grandMother;
+        children = new ArrayList<>();
+        brother = new ArrayList<>();
+        sister = new ArrayList<>();
     }
 
-
-    public Object getAge(LocalDate birthdate, LocalDate deathDate){
-       int age = Period.between(birthdate, LocalDate.now()).getYears();
-       if(deathDate == null){
-           return " " + age + " лет";
-       } else if (birthdate == null && deathDate == null) {
-           return "Такого персонажа ещее не существует";
-       } else {
-           int yearsBeforeDeath = Period.between(birthdate,deathDate).getYears();
-           return  " умер в возрасте " + yearsBeforeDeath + " лет";
-       }
-   }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public LocalDate getDeathDate() {
-        return deathDate;
-    }
-
-    public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public String getFather() {
-        return "Имя отца: " + father;
-    }
-
-    public void setFather(String father) {
-        this.father = father;
-    }
-
-    public String getMother() {
-        return "Имя матери: " + mother;
-    }
-
-    public void setMother(String mother) {
-        this.mother = mother;
-    }
-
-    public String getSister() {
-        return "Имя сестры: " + sister;
-    }
-
-    public void setSister(String sister) {
-        this.sister = sister;
-    }
-
-    public String getBrother() {
-        return "Имя брата: " + brother;
-    }
-
-    public void setBrother(String brother) {
-        this.brother = brother;
-    }
-
-    public String getGrandFather() {
-        return "Имя деда: " + grandFather;
-    }
-
-    public void setGrandFather(String grandFather) {
-        this.grandFather = grandFather;
-    }
-
-    public String getGrandMother() {
-        return "Имя бабушки: " + grandMother;
-    }
-
-    public void setGrandMother(String grandMother) {
-        this.grandMother = grandMother;
+    public boolean addChild(Human child){
+        if(!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthdate=" + birthdate +
-                ", deathDate=" + deathDate +
-                ", gender=" + gender +
-                ", father='" + father + '\'' +
-                ", mother='" + mother + '\'' +
-                ", sister='" + sister + '\'' +
-                ", brother='" + brother + '\'' +
-                ", grandFather='" + grandFather + '\'' +
-                ", grandMother='" + grandMother + '\'' +
-                '}';
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof Human)){
+            return  false;
+        }
+        Human human = (Human) obj;
+        return human.getName().equals(getName());
+    }
+
+    public Integer getAge(LocalDate birthdate, LocalDate deathDate){
+       int age = Period.between(birthdate, LocalDate.now()).getYears();
+       if(deathDate == null){
+           return age;
+       } else {
+           int yearsBeforeDeath = Period.between(birthdate,deathDate).getYears();
+           return  yearsBeforeDeath;
+       }
+   }
+
+   public String getName(){ return  name;}
+
+    public Human getFather(){ return father;}
+
+    public Human getMother() { return mother;}
+
+    public List<Human> getChildren() { return children;}
+
+    public List<Human> getBrother() { return brother;}
+
+    public List<Human> getSister() { return sister;}
+
+    public void setBirthdate(LocalDate birthdate) { this.birthdate = birthdate;}
+
+    public void setDeathDate(LocalDate deathDate) { this.deathDate = deathDate;}
+
+    public void setFather(Human father) { this.father = father;}
+
+    public void setMother(Human mother) { this.mother = mother;}
+
+    public Gender getGender() { return gender;}
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: ");
+        sb.append(name);
+        sb.append(", ");
+        sb.append(" Пол: ");
+        sb.append(getGender());
+        sb.append(" возраст: ");
+        sb.append(getAge(birthdate, deathDate));
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        sb.append(", ");
+        sb.append(getBrotherInfo());
+        sb.append(", ");
+        sb.append(getSisterInfo());
+        return sb.toString();
+    }
+
+    private String getSisterInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("сестры: ");
+        if(sister.size() >= 1){
+            res.append(sister.get(0).getName());
+            for (int i = 1; i < sister.size(); i++) {
+                res.append(", ");
+                res.append(sister.get(i).getName());
+            }
+        } else if (sister.size() == 1) {
+            res.append(sister.get(0).getName());
+        } else {
+            res.append("отсутствуют");
+        }
+        return res.toString();
+    }
+
+    private String getBrotherInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("братья: ");
+        if(brother.size() >= 1){
+            res.append(brother.get(0).getName());
+            for (int i = 1; i < brother.size(); i++) {
+                res.append(", ");
+                res.append(brother.get(i).getName());
+            }
+        } else if (brother.size() == 1) {
+            res.append(brother.get(0).getName());
+        } else {
+            res.append("отсутствуют");
+        }
+        return res.toString();
+    }
+
+    public String getFatherInfo() {
+        String res = "отец: ";
+        if(father != null){
+            res += father.getName();
+        } else {
+            res += "неизвестен";
+        }
+        return res;
+    }
+
+    public String getMotherInfo() {
+        String res = "мать: ";
+        if (mother != null){
+            res += mother.getName();
+        } else {
+            res = "неизвестна";
+        }
+        return res;
+    }
+
+    private String getChildrenInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("дети: ");
+        if(children.size() >= 1){
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++) {
+                res.append(", ");
+                res.append(children.get(i).getName());
+            }
+        } else if (children.size() == 1) {
+            res.append(children.get(0).getName());
+        } else {
+            res.append("отсутствуют");
+        }
+        return res.toString();
     }
 }

@@ -2,17 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    private int capacity;
     private List<Human> humanList;
 
     public FamilyTree(){
         humanList = new ArrayList<>();
-        capacity = 1000;
     }
 
     public void addHuman(Human human){
-        if(humanList.size() < capacity){
-            humanList.add(human);
+        for(Human human: humanList){
+            if(human.equals(human)){
+                System.out.println("Такой человек уже есть в семейном древе");
+            } else {
+                humanList.add(human);
+            }
         }
     }
 
