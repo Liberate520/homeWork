@@ -1,0 +1,8 @@
+import java.io.IOException;
+import java.io.Serializable;
+
+/** умеющий восстанавливать */
+public interface CapableOfRestore {
+    /** чтение */
+    Serializable read(String path) throws IOException, ClassNotFoundException;
+}

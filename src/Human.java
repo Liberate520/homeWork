@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /** human */
-public class Human {
+public class Human implements Serializable{
     private String name;
     private int yearBirth;
     private Gender gender;
@@ -25,12 +26,17 @@ public class Human {
         return gender;
     }
 
-
-    public Human(String name, int yearBirth, Gender gender) {
+    public Human(String name, int yearBirth, Gender gender, Human father, Human mother) {
         this.name = name;
         this.yearBirth = yearBirth;
         this.gender = gender;
         children = new ArrayList<>();
+        this.father = father;
+        this.mother = mother;
+    }
+
+    public Human(String name, int yearBirth, Gender gender) {
+        this(name, yearBirth, gender, null, null);
     }
 
     /** checked contains child in children list */
@@ -44,12 +50,12 @@ public class Human {
     }
 
     /** returned mother */
-    public Human getMother(int number) {
+    public Human getMother() {
         return mother;
     }
 
     /** returned father */
-    public Human getFather(int number) {
+    public Human getFather() {
         return father;
     }
 
