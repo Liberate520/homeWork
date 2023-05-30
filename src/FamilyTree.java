@@ -47,10 +47,12 @@ public class FamilyTree implements Serializable{
         return builder.toString();
     }
 
+    /** сохранение */
     public void save(String path, CapableOfPreserving preserve) throws ClassNotFoundException, IOException{
         preserve.save(path, this);
     }
 
+    /** чтение */
     public FamilyTree read(String path, CapableOfRestore restore) throws ClassNotFoundException, IOException{
         return (FamilyTree)restore.read(path);
     }

@@ -20,8 +20,7 @@ public class Main implements Serializable {
     }
 
     /** десериализация */
-    private static FamilyTree restore() throws ClassNotFoundException, IOException {
-        
+    private static FamilyTree restore() throws ClassNotFoundException, IOException {        
         CapableOfRestore restorater = new FileHandler();
         return (FamilyTree)(new FamilyTree()).read(PATH, restorater);
     }
