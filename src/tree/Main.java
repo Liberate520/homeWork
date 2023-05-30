@@ -9,7 +9,7 @@ import static tree.Gender.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-/*
+
         Human Sasha = new Human("Sasha", man);
         Human Masha = new Human("Masha", woman);
         Human Olga = new Human("Olga", woman, Sasha, Masha);
@@ -30,7 +30,7 @@ public class Main {
 
         FamilyTree Ivanovi = new FamilyTree("Ivanovi");
         List<Human> people = new ArrayList<>();
-        people.addAll(Arrays.asList(Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora, Alena));
+        people.addAll(Arrays.asList(Sasha, Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora, Alena));
 
         Ivanovi.setFamily(people);
         System.out.println(Ivanovi);
@@ -46,22 +46,14 @@ public class Main {
         System.out.println(Alena.getParent());
         System.out.println(Masha.getChild());
 
+        System.out.println("-----------Тест запись/чтение----------");
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.saveObject(Ivanovi);
 
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("familytree.out"));
-        objectOutputStream.writeObject(Ivanovi);
+        FamilyTree IvanoviTestLoad = (FamilyTree) fileHandler.loadObject();
 
-        objectOutputStream.close();
-*/
-
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("familytree.out"));
-        FamilyTree IvanoviRestored = (FamilyTree) objectInputStream.readObject();
-
-        objectInputStream.close();
-        System.out.println(IvanoviRestored);
-        System.out.println(IvanoviRestored.findHuman("Masha").getChild());
-
+        System.out.println(IvanoviTestLoad);
+        System.out.println(IvanoviTestLoad.findHuman("Sasha").getChild());
 
 
 
