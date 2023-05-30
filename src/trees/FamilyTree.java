@@ -1,4 +1,4 @@
-package HW1;
+package trees;
 
 import java.time.Year;
 import java.util.ArrayList;
@@ -90,7 +90,7 @@ public class FamilyTree {
      * Возвращает человека из списка древа
      *
      * @param person человек
-     * @return Human
+     * @return trees.Human
      */
     public Human getPersonFromTree(String person, int yearOfBirth) {
         Year temp = Year.of(yearOfBirth);

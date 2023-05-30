@@ -1,6 +1,4 @@
-package HW1;
-
-import static HW1.Trees.ruriks;
+import static trees.Trees.ruriks;
 
 public class Main {
     public static void main(String[] args) {

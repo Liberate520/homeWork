@@ -1,8 +1,7 @@
-package HW1;
+package trees;
 
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Human {
@@ -63,7 +62,7 @@ public class Human {
         for (Human child : children) {
             temp.add(child.getNAME());
         }
-        return "Human{" +
+        return "trees.Human{" +
                 "Name='" + NAME + '\'' +
                 ", date of brith=" + yearOfBirth +
                 ", father=" + ((father != null) ? father.getNAME() : "unknown") +

@@ -1,9 +1,11 @@
-package HW1;
+package trees;
+
+import trees.FamilyTree;
 
 public class Trees {
 
     /**
-     * Trees of Rurik dynasty
+     * trees.Trees of Rurik dynasty
      */
     public static FamilyTree ruriks = new FamilyTree() {
         {
