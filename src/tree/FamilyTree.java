@@ -1,5 +1,7 @@
 package tree;
 
+import comparators.PersonComparatorById;
+import comparators.PersonComparatorByLastname;
 import comparators.PersonComparatorByName;
 import person.Person;
 import person.PersonIterator;
@@ -9,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends Person> implements Serializable, Iterable<E>{
+public class FamilyTree<E extends Person> implements Serializable, Iterable<E> {
 	private List<E> personList;
 	
-	public FamilyTree(){
+	public FamilyTree() {
 		this(new ArrayList<>());
 	}
 	
@@ -20,43 +22,52 @@ public class FamilyTree<E extends Person> implements Serializable, Iterable<E>{
 		this.personList = personList;
 	}
 	
-	public boolean addPerson(E person){
-		if (person == null) {
-			return false;
-		}
-		if (!personList.contains(person)){
-			personList.add(person);
-			if (person.getFather() != null) {
-				person.getFather().addChild(person);
-			}
-			if (person.getMother() != null) {
-				person.getMother().addChild(person);
-			}
-			return true;
-		}
-		return false;
+	public List<E> getPersonList() {
+		return personList;
 	}
 	
-	public Person getByName(String name){
-		for (Person person : personList){
-			if (person.getName().equals(name)){
+	public void add(E person) {
+		this.personList.add(person);
+	}
+	
+	public void parentsPerson(E person) {
+		E mother = null;
+		E father = null;
+		for (E item : personList) {
+			if (item.getId() == person.getMotherId()) mother = item;
+			if (item.getId() == person.getFatherId()) father = item;
+		}
+		System.out.printf("Object:\n%s\nMother - %s\nFather - %s", person, mother, father);
+	}
+	
+	public void childrensPerson(E person) {
+		List<E> childrens = new ArrayList<>();
+		for (E item : personList) {
+			if (item.getFatherId() == person.getId() || item.getMotherId() == person.getId()) {
+				childrens.add(item);
+			}
+		}
+		if (childrens.size() > 0) {
+			System.out.printf("\nObject:\n%s\nObject's childrens:\n", person);
+			for (E item : childrens) System.out.print(item);
+		} else System.out.printf("\nObject:\n%s\nObject has no childrens", person);
+	}
+	
+	public Person getByName(String name) {
+		for (Person person : personList) {
+			if (person.getName().equals(name)) {
 				return person;
 			}
 		}
 		return null;
 	}
 	
-	
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append("В дереве ");
-		sb.append(personList.size());
-		sb.append(" Объектов: \n");
-		for (Person person : personList){
-			sb.append(person.getInfo());
-			sb.append("\n");
+	@Override
+	public String toString() {
+		for (Person item : personList) {
+			System.out.println(item);
 		}
-		return sb.toString();
+		return " ";
 	}
 	
 	@Override
@@ -64,11 +75,32 @@ public class FamilyTree<E extends Person> implements Serializable, Iterable<E>{
 		return new PersonIterator<E>(personList);
 	}
 	
-//	public void sortById(){
-//		personList.sort(new PersonComparatorById());
-//	}
+	public void sortById() {
+		personList.sort(new PersonComparatorById());
+	}
 	
-	public void sortByName(){
+	public void sortByName() {
 		personList.sort(new PersonComparatorByName());
+	}
+	
+	public void sortByLastname() {
+		personList.sort(new PersonComparatorByLastname());
+	}
+	
+	public void removePerson(int id) {
+		for (E item : this) {
+			if (item.getId() == id) {
+				getPersonList().remove(item);
+			}
+		}
+	}
+	
+	public List<E> searchPerson(String lastName) {
+		List<E> searchTemp = new ArrayList<>();
+		for (E item : personList) {
+			if (item.getLastname().equals(lastName))
+				searchTemp.add(item);
+		}
+		return searchTemp;
 	}
 }

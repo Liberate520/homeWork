@@ -1,29 +1,57 @@
 package service;
 
-import person.Gender;
 import person.Person;
 import tree.FamilyTree;
+import write_read.FileHandler;
+import write_read.Saveable;
 
 public class Service {
 	private int id;
-	private FamilyTree familyGroup;
+	private FamilyTree<Person> familyGroup;
 	
-	public Service(FamilyTree familyGroup) {
+	public Service(FamilyTree<Person> familyGroup) {
 		this.familyGroup = familyGroup;
 	}
 	
-	public FamilyTree getFamilyGroup(){
+	public FamilyTree<Person> getFamilyGroup() {
 		return familyGroup;
 	}
 	
-	public void addPerson(String name, Gender gender, Person mother, Person father){
-		familyGroup.addPerson(new Person(id++, name, gender, mother.getMother(), father.getFather()));
-	}
-	public void addPerson(String name, Gender gender){
-		familyGroup.addPerson(new Person(id++, name, gender));
+	public void addPerson(String name, String lastname, Person mother, Person father) {
+		familyGroup.add(new Person(id++, name, lastname, mother.getMotherId(), father.getFatherId()));
 	}
 	
-	public void sortByName(){
+	public void addPerson(String name, String lastname) {
+		familyGroup.add(new Person(id++, name, lastname));
+	}
+	
+	public void sortById(){
+		familyGroup.sortById();
+	}
+	public void sortByName() {
 		familyGroup.sortByName();
+	}
+	public void sortByLastname(){
+		familyGroup.sortByLastname();
+	}
+	public boolean removePerson(int id){
+		familyGroup.removePerson(id);
+		return true;
+	}
+	public void saveFamilyGroup(String str) {
+		FileHandler save = new FileHandler();
+		save.saveFile(this.familyGroup, str);
+	}
+	
+	public void loadFamilyGroup(String str) {
+		Saveable load = new FileHandler();
+		this.familyGroup = load.loadFile(str);
+		id = 1;
+		for (Person item : this.familyGroup) {
+			if (id < item.getId()) id = item.getId();
+		}
+	}
+	public Object searchPerson(String lastName) {
+		return familyGroup.searchPerson(lastName);
 	}
 }

@@ -2,44 +2,42 @@ package person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class Person implements Serializable, Comparable<Person>{
-	private int id;
-	private String name;
-	private Gender gender;
-	private Person mother;
-	private Person father;
-	private List<Person> children;
+public class Person implements Serializable, Comparable<Person> {
+	private final int id;
+	private final String name;
+	private final String lastname;
+	private int fatherId;
+	private int motherId;
+	private final List<Person> children;
 	
-	public Person(int id ,String name, Gender gender) {
+	public Person(int id, String name, String lastname) {
 		this.id = id;
 		this.name = name;
-		this.father = null;
-		this.mother = null;
+		this.lastname = lastname;
 		children = new ArrayList<>();
 	}
 	
-	public Person(int id, String name, Gender gender, Person father, Person mother) {
+	public Person(int id, String name, String lastname, int fatherId, int motherId) {
 		this.id = id;
 		this.name = name;
-		this.gender = gender;
-		this.father = father;
-		this.mother = mother;
+		this.lastname = lastname;
+		this.fatherId = fatherId;
+		this.motherId = motherId;
 		children = new ArrayList<>();
 	}
 	
-	public boolean addChild(Person child) {
-		if (!children.contains(child)){
+	/*public boolean addChild(Person child) {
+		if (! children.contains(child)) {
 			children.add(child);
 			return true;
 		}
 		return false;
-	}
+	}*/
+	
 	
 	//Геттеры и сеттеры для всех полей
-	
 	public int getId() {
 		return id;
 	}
@@ -48,49 +46,21 @@ public class Person implements Serializable, Comparable<Person>{
 		return name;
 	}
 	
-	public Person getMother() {
-		return mother;
+	public String getLastname() {
+		return lastname;
 	}
 	
-	public Person getFather() {
-		return father;
+	public int getMotherId() {
+		return motherId;
 	}
 	
-	public List<Person> getChildren() {
-		return children;
+	public int getFatherId() {
+		return fatherId;
 	}
 	
-	public String getInfo() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Имя ");
-		sb.append(name);
-		sb.append(", ");
-		sb.append(getMotherInfo());
-		sb.append(", ");
-		sb.append(getFatherInfo());
-		sb.append(", ");
-		sb.append(getChildrenInfo());
-		return sb.toString();
-	}
-	
-	public String getMotherInfo() {
-		String res = "Mother: ";
-		if (mother != null) {
-			res += mother.getName();
-		} else {
-			res += "no data";
-		}
-		return res;
-	}
-	
-	public String getFatherInfo() {
-		String res = "Father: ";
-		if (father != null) {
-			res += father.getName();
-		} else {
-			res += "no data";
-		}
-		return res;
+	@Override
+	public String toString(){
+		return "id %d, %s %s".formatted(id, name, lastname);
 	}
 	
 	public String getChildrenInfo() {

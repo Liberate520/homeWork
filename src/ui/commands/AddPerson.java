@@ -1,6 +1,8 @@
-package ui;
+package ui.commands;
 
-public class AddPerson extends Commands{
+import ui.Console;
+
+public class AddPerson extends Commands {
 	public AddPerson(Console console){
 		super(console);
 	}
@@ -12,6 +14,6 @@ public class AddPerson extends Commands{
 	
 	@Override
 	public void run(){
-		getConsole().addNote();
+		getConsole().addPerson();
 	}
 }

@@ -1,4 +1,6 @@
-package ui;
+package ui.commands;
+
+import ui.Console;
 
 public class RemovePerson extends Commands {
 	public RemovePerson(Console console) {
@@ -12,7 +14,7 @@ public class RemovePerson extends Commands {
 	
 	@Override
 	public void run() {
-	
+	getConsole().removePerson();
 	}
 	
 }
