@@ -55,8 +55,5 @@ public class Main {
         System.out.println(IvanoviTestLoad);
         System.out.println(IvanoviTestLoad.findHuman("Sasha").getChild());
 
-
-
-
     }
 }
