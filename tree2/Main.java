@@ -42,7 +42,6 @@ public class Main {
 
         fileHandler.save(familyTree);
         System.out.println(fileHandler.load().getFamilies());
-        fileHandler.saveToJson(familyTree.getFamilies());
 
 
         String[] familiesArray = fileHandler.load().getFamilies().split("\n");
