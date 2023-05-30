@@ -19,9 +19,13 @@ public class Person {
         this.children = new ArrayList<>();
     }
 
+    public Person(String name, LocalDate date, Gender gender) {
+        this(name, date, gender, null, null);
+    }
+
     @Override
     public String toString() {
-        return name + ", " + date + ", " + gender;
+        return name + " (" + date + ", " + gender + ")";
     }
 
     public String getName() {

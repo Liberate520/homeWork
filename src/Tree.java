@@ -10,6 +10,12 @@ public class Tree {
 
     public void addPerson(Person person) {
         personList.add(person);
+        if (person.getFather() != null) {
+            person.getFather().addChild(person);
+        }
+        if (person.getMother() != null) {
+            person.getMother().addChild(person);
+        }
     }
 
     public List<Person> getPersonList() {
