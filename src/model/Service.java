@@ -1,9 +1,8 @@
-package ui;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
-import files.FileHandler;
 import files.Writable;
 import model.human.Gender;
 import model.human.Human;
@@ -14,7 +13,7 @@ public class Service implements Serializable {
     private FamilyTree<Human> activeTree;
     private List<FamilyTree<Human>> familyTreeList;
     public int id;        
-   
+    Writable writable;
 
 
 
@@ -57,7 +56,7 @@ public class Service implements Serializable {
     }
     
     public void save() {
-        writable.save();
+        writable.save(activeTree);
     }
 
     public void read() {

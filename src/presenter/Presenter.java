@@ -1,7 +1,8 @@
 package presenter;
 import java.io.Serializable;
+
+import model.Service;
 import model.human.Gender;
-import ui.Service;
 import ui.View;
 
 public class Presenter implements Serializable {
@@ -27,7 +28,7 @@ public class Presenter implements Serializable {
     }
     
     public void readFile() {
-        service.read();
+        this.service.read();
     }
 
 }
