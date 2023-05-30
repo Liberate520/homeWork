@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="ancP1" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop.familyTree.MVP.view.desktop.DesktopController">
+<AnchorPane id="ancP1" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop.familyTree.mvp.view.desktop.DesktopController">
    <children>
       <TabPane id="tp1" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -57,7 +57,7 @@
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF1" fx:id="nameNewTree" layoutX="15.0" layoutY="40.0" prefHeight="25.0" prefWidth="575.0" />
+                                          <TextField id="txtF1" fx:id="txFNameNewTree" layoutX="15.0" layoutY="40.0" prefHeight="25.0" prefWidth="575.0" />
                                           <Button id="btn5" fx:id="addNewTree" layoutX="15.0" layoutY="70.0" mnemonicParsing="false" onAction="#addNewTree" text="Добавить" />
                                        </children>
                                     </Pane>
@@ -133,18 +133,18 @@
                               </AnchorPane>
                             <AnchorPane id="ancP7" minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="585.0">
                                  <children>
-                                    <Label id="lbl4" fx:id="titleFT" layoutX="15.0" layoutY="10.0" text="Фамильное древо: " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                                    <Label id="lbl4" fx:id="lbTitleFT" layoutX="15.0" layoutY="10.0" text="Фамильное древо: " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lbl5" fx:id="titleFT1" layoutX="130.0" layoutY="10.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="10.0">
+                                    <Label id="lbl5" fx:id="lbTitleFT1" layoutX="130.0" layoutY="10.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="10.0">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ListView id="listV2" fx:id="infoFamilyTree" layoutX="10.0" layoutY="30.0" prefHeight="506.0" prefWidth="570.0" visible="false" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
-                                    <Label id="lbl6" fx:id="info" layoutX="15.0" layoutY="546.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="546.0">
+                                    <ListView id="listV2" fx:id="listInfoFamilyTree" layoutX="10.0" layoutY="30.0" prefHeight="506.0" prefWidth="570.0" visible="false" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
+                                    <Label id="lbl6" fx:id="lbInfo" layoutX="15.0" layoutY="546.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="546.0">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
@@ -156,49 +156,49 @@
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF2" fx:id="newFullName" layoutX="10.0" layoutY="30.0" prefHeight="25.0" prefWidth="500.0" />
+                                          <TextField id="txtF2" fx:id="txFNewFullName" layoutX="10.0" layoutY="30.0" prefHeight="25.0" prefWidth="500.0" />
                                           <Label id="lbl6" layoutX="10.0" layoutY="60.0" text="Пол">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF3" fx:id="newGender" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="500.0" />
+                                          <TextField id="txtF3" fx:id="txFNewGender" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="500.0" />
                                           <Label id="lbl7" layoutX="10.0" layoutY="110.0" text="Дата рождения">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <DatePicker id="datePic1" fx:id="newDateOfBirth" layoutX="10.0" layoutY="130.0" />
+                                          <DatePicker id="datePic1" fx:id="dpNewDateOfBirth" layoutX="10.0" layoutY="130.0" />
                                           <Label id="lbl8" layoutX="10.0" layoutY="160.0" text="Дата смерти">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <DatePicker id="datePic2" fx:id="newDateOfDeath" layoutX="10.0" layoutY="180.0" />
+                                          <DatePicker id="datePic2" fx:id="dpNewDateOfDeath" layoutX="10.0" layoutY="180.0" />
                                           <Label id="lbl9" layoutX="10.0" layoutY="210.0" text="Имя матери">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF4" fx:id="newMatherName" layoutX="10.0" layoutY="230.0" prefHeight="25.0" prefWidth="500.0" />
+                                          <TextField id="txtF4" fx:id="txFNewMatherName" layoutX="10.0" layoutY="230.0" prefHeight="25.0" prefWidth="500.0" />
                                           <Label id="lbl10" layoutX="10.0" layoutY="260.0" text="Имя отца">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF5" fx:id="newFatherName" layoutX="10.0" layoutY="280.0" prefHeight="25.0" prefWidth="500.0" />
+                                          <TextField id="txtF5" fx:id="txFNewFatherName" layoutX="10.0" layoutY="280.0" prefHeight="25.0" prefWidth="500.0" />
                                           <Label id="lbl11" layoutX="10.0" layoutY="310.0" text="Имя супруга(и)">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF6" fx:id="newSpouse" layoutX="10.0" layoutY="330.0" prefHeight="25.0" prefWidth="500.0" />
+                                          <TextField id="txtF6" fx:id="txFNewSpouse" layoutX="10.0" layoutY="330.0" prefHeight="25.0" prefWidth="500.0" />
                                           <Label id="lbl12" layoutX="10.0" layoutY="360.0" text="Имена детей">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField id="txtF7" fx:id="newChildren" layoutX="10.0" layoutY="380.0" prefHeight="25.0" prefWidth="500.0" />
+                                          <TextField id="txtF7" fx:id="txFNewChildren" layoutX="10.0" layoutY="380.0" prefHeight="25.0" prefWidth="500.0" />
                                           <Button id="btn14" fx:id="addNewHuman" layoutX="430.0" layoutY="480.0" mnemonicParsing="false" onAction="#addNewHuman" text="Добавить">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
@@ -208,7 +208,7 @@
                                     </Pane>
                                     <Pane id="pane3" fx:id="paneInfoHuman" layoutX="15.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="35.0">
                                        <children>
-                                          <Label id="lbl4" fx:id="titleHuman" layoutX="10.0" layoutY="10.0" text="Член древа: ">
+                                          <Label id="lbl4" fx:id="lbTitleHuman" layoutX="10.0" layoutY="10.0" text="Член древа: ">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>

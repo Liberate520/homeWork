@@ -1,4 +1,4 @@
-package oop.familyTree.MVP.view.desktop;
+package oop.familyTree.mvp.view.desktop;
 
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;

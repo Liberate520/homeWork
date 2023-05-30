@@ -1,4 +1,4 @@
-package oop.familyTree.MVP.model;
+package oop.familyTree.mvp.model;
 
 import javafx.scene.control.Alert;
 import oop.familyTree.human.Human;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceHuman implements SaveAndLoad{
+public class Service implements SaveAndLoad{
 
     // Путь к папке с сохранёнными древами
     private final Path pathDirFamTree = Paths.get("./src/main/resources/archive");
@@ -22,7 +22,18 @@ public class ServiceHuman implements SaveAndLoad{
     /**
      * Конструктор
      */
-    public ServiceHuman() {
+    public Service() {
+    }
+
+    // #Методы для работы с FamilyTree
+
+    /**
+     * Получение объекта древа
+     * @param treeName имя древа
+     * @return FamilyTree
+     */
+    public FamilyTree<Human> getFamilyTree(String treeName){
+        return this.loading(treeName);
     }
 
     /**
@@ -47,6 +58,9 @@ public class ServiceHuman implements SaveAndLoad{
         catch (Exception ex){
             System.out.println(ex.getMessage());
         }
+        if (list.size() == 0){
+            System.out.println("Сохранённых древ пока нет");
+        }
         return list;
     }
 
@@ -59,6 +73,28 @@ public class ServiceHuman implements SaveAndLoad{
         FamilyTree<Human> ft = this.loading(treeName);
         return ft.showAll();
     }
+
+    /**
+     * Сортировка древа по имени
+     * @param treeName имя древа
+     */
+    public void sortByName(String treeName){
+        FamilyTree<Human> ft = this.getFamilyTree(treeName);
+        ft.sortByName();
+    }
+
+    /**
+     * Сортировка древа по возрасту
+     * @param treeName имя древа
+     */
+    public void sortByAge(String treeName){
+        FamilyTree<Human> ft = this.getFamilyTree(treeName);
+        ft.sortByAge();
+    }
+
+    // #Конец
+
+    // #Методы для работы с Human
 
     /**
      * Добавление нового человека в древо
@@ -77,11 +113,47 @@ public class ServiceHuman implements SaveAndLoad{
                             String mother, String father,
                             String spouse, String children){
         FamilyTree<Human> ft = this.loading(treeName);
-        ft.addNewHuman(new Human(fullName, gender,
-                dateOfBirth, dateOfDeath,
-                mother, father, spouse, children));
+        ft.addNewHuman(fullName, gender,
+                dateOfBirth, dateOfDeath, mother, father, spouse, children);
         this.saving(treeName, ft);
     }
+
+    /**
+     * Получение всей информации о человеке
+     * @param treeName имя древа
+     * @param fullName полное имя человека
+     */
+    public void fullInfoHuman(String treeName, String fullName){
+        System.out.println(this.getFamilyTree(treeName).fullInfoHuman(fullName));
+    }
+
+    /**
+     * Удаление человека
+     * @param treeName имя древа
+     * @param fullName имя человека
+     */
+    public void deletingHuman(String treeName, String fullName){
+        FamilyTree<Human> ft = this.getFamilyTree(treeName);
+        System.out.println(ft.deletingHuman(fullName));
+        this.saving(treeName, ft);
+    }
+
+    /**
+     * Изменение значения поля
+     * @param treeName имя древа
+     * @param fullName имя человека
+     * @param numField номер поля
+     * @param newValue новое значение
+     */
+    public void changeField(String treeName, String fullName, int numField, String newValue){
+        FamilyTree<Human> ft = this.getFamilyTree(treeName);
+        ft.changeField(fullName, numField, newValue);
+        this.saving(treeName, ft);
+    }
+
+    // #Конец
+
+    // #Методы интерфейса SaveAndLoad
 
     /**
      * Переопределение метода сохранения из SaveAndLoad
@@ -104,11 +176,7 @@ public class ServiceHuman implements SaveAndLoad{
             oos.writeObject(familyTree);
         }
         catch (Exception ex){
-            Alert message = new Alert(Alert.AlertType.ERROR);
-            message.setTitle("Ошибка");
-            message.setHeaderText("Файл не сохранён");
-            message.setContentText(ex.getMessage());
-            message.showAndWait();
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -118,18 +186,16 @@ public class ServiceHuman implements SaveAndLoad{
      * @return объект FamilyTree
      */
     @Override
+    @SuppressWarnings("unchecked")
     public FamilyTree<Human> loading(String treeName) {
         Path dirPath = Paths.get(pathDirFamTree + "/" + treeName + ".ser");
         try(ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(dirPath))) {
             return (FamilyTree<Human>) ois.readObject();
         }
         catch (Exception ex){
-            Alert message = new Alert(Alert.AlertType.ERROR);
-            message.setTitle("Ошибка");
-            message.setHeaderText("Файл не загружен");
-            message.setContentText(ex.getMessage());
-            message.showAndWait();
+            System.out.printf("Древа с именем %s нет.(файл %s не найден.)\n", treeName, ex.getMessage());
         }
         return new FamilyTree<>();
     }
+    // #Конец
 }

@@ -2,12 +2,14 @@ package oop.familyTree.tree;
 
 import oop.familyTree.human.Human;
 import oop.familyTree.human.HumanComparatorByAge;
+import oop.familyTree.human.HumanNode;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.*;
 
-public class FamilyTree<V extends Human> implements Serializable, Iterable<V> {
-
+public class FamilyTree<V extends HumanNode> implements Serializable, Iterable<Map.Entry<String, V>> {
     private final long SerialVersionUID = 1L;
     private Map<String, V> currentTree;
 
@@ -18,11 +20,6 @@ public class FamilyTree<V extends Human> implements Serializable, Iterable<V> {
         this.currentTree = new LinkedHashMap<>();
     }
 
-    @Override
-    public Iterator<V> iterator(){
-        return new HumanIterator<>(currentTree);
-    }
-
     /**
      * Получение объекта Human из древа для работы с ним.
      * Если будет создан другой класс, для которого можно создать родословное древо,
@@ -30,19 +27,44 @@ public class FamilyTree<V extends Human> implements Serializable, Iterable<V> {
      * @param fullName полное имя
      * @return объект типа Human
      */
+    @SuppressWarnings("unchecked")
     public Human getHumanByFullName(String fullName){
-        return currentTree.getOrDefault(fullName, (V) new Human(""));
+        return (Human) currentTree.getOrDefault(fullName, (V) new Human());
     }
 
     /**
-     * Добавление в древо нового человека
-     * Ключ - полное имя
-     * @param human новый человек
+     * Добавление нового человека
+     * @param fullName имя человека
+     * @param gender пол
+     * @param dateOfBirth дата рождения
+     * @param dateOfDeath дата смерти
+     * @param mother имя матери
+     * @param father имя отца
+     * @param spouse имя супруга
+     * @param children имена детей
      */
-    public void addNewHuman(V human) {
-        if (human.hashCode() != 0){
-            this.currentTree.putIfAbsent(human.getFullName(), human);
+    @SuppressWarnings("unchecked")
+    public void addNewHuman(String fullName, String gender,
+                            LocalDate dateOfBirth, LocalDate dateOfDeath,
+                            String mother, String father,
+                            String spouse, String children) {
+        Human human = new Human(fullName, gender,
+                dateOfBirth, dateOfDeath, mother, father, spouse, children);
+        this.currentTree.putIfAbsent(human.getFullName(), (V) human);
+    }
+
+    /**
+     * Удаление человека из древа
+     * @param fullName имя человека
+     */
+    public String deletingHuman(String fullName){
+        for (Map.Entry<String, V> human : this.currentTree.entrySet()){
+            if (human.getKey().equals(fullName)) {
+                currentTree.remove(human.getKey());
+                return "Человек удалён из древа";
+            }
         }
+        return "Такого человека в древе нет";
     }
 
     /**
@@ -64,7 +86,7 @@ public class FamilyTree<V extends Human> implements Serializable, Iterable<V> {
      * @param fullName строка вида Фамилия Имя Отчество
      * @return строка с данными человека (если таковой имеется)
      */
-    public String searchInfoHuman(String fullName){
+    public String fullInfoHuman(String fullName){
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, V> human : currentTree.entrySet()) {
             if (human.getKey().equals(fullName)) {
@@ -80,39 +102,103 @@ public class FamilyTree<V extends Human> implements Serializable, Iterable<V> {
      */
     public void sortByName(){
         currentTree = new TreeMap<>(this.currentTree);
-        System.out.println(this.showAll());
+        currentTree.forEach((String, V) -> System.out.println(V));
     }
 
     /**
-     * Сортировка по возрасту.
-     */
-    public void sortByAge(){
-        List<Integer> list = new ArrayList<>();
-        Map<String, V> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<String, V> human : this.currentTree.entrySet())
-            list.add(human.getValue().getAge());
-        Collections.sort(list);
-        for (int i : list) {
-            for (Map.Entry<String, V> human : this.currentTree.entrySet())
-                if (human.getValue().getAge() == i){
-                    sortedMap.putIfAbsent(human.getKey(), human.getValue());
-                }
-        }
-        currentTree = sortedMap;
-        System.out.println(this.showAll());
-    }
-
-    /**
-     * Сортировка по возрасту вариант 2, с использованием
+     * Сортировка по возрасту, с использованием
      * своего компаратора
      */
-    public void sortByAge2(){
+    public void sortByAge(){
         Map<String, V> sortedMap = new TreeMap<>(new HumanComparatorByAge<>(currentTree));
         sortedMap.putAll(currentTree);
-        int id = 1;
-        for (Map.Entry<String, V> human : sortedMap.entrySet()){
-            System.out.printf("%d %s", id, human.getValue());
-            id ++;
+        sortedMap.forEach((String, human) -> System.out.println(human));
+    }
+
+    /**
+     * Получение списка всех полей
+     * @param fullName имя человека
+     * @return List
+     */
+    private List<String> getFields(String fullName) {
+        Human human = this.getHumanByFullName(fullName);
+        Field[] fields = human.getClass().getDeclaredFields();
+        List<String> list = new ArrayList<>();
+        for (Field field : fields) {
+            if (!field.getName().equals("SerialVersionUID")) {
+                list.add(field.getName());
+            }
         }
+        return list;
+    }
+
+    /**
+     * Проверка ввода числа
+     * @param numField число
+     * @return да или нет
+     */
+    private boolean checkingNumField(Integer numField){
+        String str = numField.toString();
+        return str.matches("[0-9]+");
+    }
+
+    /**
+     * Изменение значения поля
+     * @param fullName имя человека
+     * @param numField номер поля
+     * @param newValue новое значение
+     */
+    @SuppressWarnings("unchecked")
+    public void changeField(String fullName, int numField, String newValue){
+        List<String> list = this.getFields(fullName);
+        Human human = this.getHumanByFullName(fullName);
+        Field newField;
+        if (this.checkingNumField(numField)) {
+            if (numField == 1) {
+                try {
+                    newField = human.getClass().getDeclaredField(list.get(0));
+                    newField.setAccessible(true);
+                    newField.set(human, newValue);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                this.currentTree.remove(fullName);
+                this.currentTree.putIfAbsent(newValue, (V) human);
+            }
+            if (numField == 2) {
+                try {
+                    newField = human.getClass().getDeclaredField(list.get(numField - 1));
+                    newField.setAccessible(true);
+                    newField.set(human, human.setGender(newValue));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if (numField == 3 || numField == 4) {
+                try {
+                    newField = human.getClass().getDeclaredField(list.get(numField - 1));
+                    newField.setAccessible(true);
+                    newField.set(human, human.setDate(newValue));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if (numField == 5 || numField == 6) {
+                try {
+                    newField = human.getClass().getDeclaredField(list.get(numField - 1));
+                    newField.setAccessible(true);
+                    newField.set(human, human.setName(newValue));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if (numField == 7) human.setSpouse(newValue);
+            if (numField == 8) human.setChild(newValue);
+        }
+    }
+
+    @Override
+    public Iterator<Map.Entry<String, V>> iterator() {
+        return currentTree.entrySet().iterator();
     }
 }

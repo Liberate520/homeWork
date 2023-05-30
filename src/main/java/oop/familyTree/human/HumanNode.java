@@ -35,12 +35,6 @@ public interface HumanNode {
     int getAge();
 
     /**
-     * Получение имён родителей
-     * @return String
-     */
-    String getNameParents();
-
-    /**
      * Получение имён супругов
      * @return String
      */
@@ -48,10 +42,10 @@ public interface HumanNode {
 
     /**
      * Установка супруга
+     *
      * @param str имя
-     * @return boolean
      */
-    boolean setSpouse(String str);
+    void setSpouse(String str);
 
     /**
      * Получение имён детей
@@ -61,8 +55,10 @@ public interface HumanNode {
 
     /**
      * Установка имён детей
+     *
      * @param str имена
-     * @return boolean
      */
-    boolean setChild(String str);
+    void setChild(String str);
+
+
 }

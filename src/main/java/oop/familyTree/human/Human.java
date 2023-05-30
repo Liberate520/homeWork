@@ -6,10 +6,10 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Human implements HumanNode, Serializable {
+public class Human implements Serializable, HumanNode {
 
     private final long SerialVersionUID = 1L;
-    private final String fullName;
+    private String fullName;
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
@@ -36,7 +36,7 @@ public class Human implements HumanNode, Serializable {
                  String mother, String father,
                  String spouse, String children) {
         this.fullName = fullName;
-        this.gender = setGender(gender);
+        this.gender = this.setGender(gender);
 
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
@@ -59,13 +59,21 @@ public class Human implements HumanNode, Serializable {
         this.fullName = fullName;
     }
 
+    /**
+     * Конструктор
+     */
+    public Human(){
+    }
+
     // #Конец
+
+
 
     // #Getter and setter
 
     /**
      * Получение полного имени
-     * @return строка вида Фамилия Имя Отчество
+     * @return String
      */
     public String getFullName() {
         if (this.fullName.equals("")) return "Человек не найден.";
@@ -74,7 +82,7 @@ public class Human implements HumanNode, Serializable {
 
     /**
      * Получение пола
-     * @return пол человека
+     * @return String
      */
     public String getGender() {
         if (this.gender == Gender.male) return "мужской";
@@ -84,18 +92,18 @@ public class Human implements HumanNode, Serializable {
 
     /**
      * Установка пола
-     * @param strGender строка "м" или "ж"
-     * @return объект типа Gender
+     * @param gender строка "мужской" или "женский"
+     * @return Gender
      */
-    public Gender setGender(String strGender){
-        if (strGender.equals("м")) return Gender.male;
-        if (strGender.equals("ж")) return Gender.female;
-        return Gender.undefined;
+    public Gender setGender(String gender){
+        if (gender.equals("мужской")) return Gender.male;
+        if (gender.equals("женский")) return Gender.female;
+        else return Gender.notDefined;
     }
 
     /**
      * Получение даты рождения
-     * @return дата в локальном формате
+     * @return LocalDate
      */
     public LocalDate getDateOfBirth() {
         return this.dateOfBirth;
@@ -103,25 +111,37 @@ public class Human implements HumanNode, Serializable {
 
     /**
      * Получение даты смерти
-     * @return дата в локальном формате
+     * @return LocalDate
      */
     public LocalDate getDateOfDeath() {
         return this.dateOfDeath;
     }
 
     /**
+     * Установка даты
+     * @param date строка вида дд.мм.гггг
+     * @return LocalDate
+     */
+    public LocalDate setDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return LocalDate.parse(date, formatter);
+    }
+
+    /**
      * Расчёт возраста
-     * @return число лет
+     * @return int
      */
     public int getAge() {
-        if (this.dateOfBirth == null) this.dateOfBirth = LocalDate.now();
-        return Period.between(this.dateOfBirth,
-                Objects.requireNonNullElseGet(this.dateOfDeath, LocalDate::now)).getYears();
+        dateOfBirth = this.getDateOfBirth();
+        dateOfDeath = this.getDateOfDeath();
+        if (dateOfBirth == null) dateOfBirth = LocalDate.now();
+        return Period.between(dateOfBirth,
+                Objects.requireNonNullElseGet(dateOfDeath, LocalDate::now)).getYears();
     }
 
     /**
      * Получение имени матери
-     * @return строка вида Фамилия Имя Отчество
+     * @return String
      */
     public String getNameMother() {
         StringBuilder name = new StringBuilder();
@@ -134,7 +154,7 @@ public class Human implements HumanNode, Serializable {
 
     /**
      * Получение имени отца
-     * @return строка вида Фамилия Имя Отчество
+     * @return String
      */
     public String getNameFather() {
         StringBuilder name = new StringBuilder();
@@ -146,26 +166,17 @@ public class Human implements HumanNode, Serializable {
     }
 
     /**
-     * Получение имён обоих родителей
-     * @return строка с именами
+     * Установка имени
+     * @param fullName полное имя
+     * @return Human
      */
-    public String getNameParents(){
-        StringBuilder parents = new StringBuilder();
-        StringBuilder nameM = new StringBuilder();
-        Optional<String> optM = Optional.ofNullable(this.mother.getFullName());
-        optM.ifPresentOrElse(
-                v -> nameM.append(this.mother.getFullName()),
-                () -> nameM.append("Человек не найден"));
-        StringBuilder nameF = new StringBuilder();
-        Optional<String> optF = Optional.ofNullable(this.father.getFullName());
-        optF.ifPresentOrElse(
-                v -> nameF.append(this.father.getFullName()),
-                () -> nameF.append("Человек не найден"));
-        return parents.append(nameM).append(", ").append(nameF).toString();
+    public Human setName(String fullName){
+        return new Human(fullName);
     }
 
     /**
      * Получение имён супругов
+     * @return String
      */
     public String getSpouse() {
         StringBuilder spouse = new StringBuilder();
@@ -178,18 +189,8 @@ public class Human implements HumanNode, Serializable {
     }
 
     /**
-     * Добавление нового супруга
-     * @param str строка вида Фамилия Имя Отчество
-     * @return да или нет
-     */
-    public boolean setSpouse(String str) {
-        this.spouse.add(str);
-        return true;
-    }
-
-    /**
      * Получение имён детей
-     * @return строка вида Фамилия Имя Отчество через запятую
+     * @return String
      */
     public String getChildren() {
         StringBuilder children = new StringBuilder();
@@ -201,14 +202,21 @@ public class Human implements HumanNode, Serializable {
         return children.toString();
     }
 
+
+    /**
+     * Добавление нового супруга
+     * @param str строка вида Фамилия Имя Отчество
+     */
+    public void setSpouse(String str) {
+        this.spouse.add(str);
+    }
+
     /**
      * Добавление нового ребёнка
      * @param str строка вида  Фамилия Имя Отчество
-     * @return да или нет
      */
-    public boolean setChild(String str) {
+    public void setChild(String str) {
         this.children.add(str);
-        return true;
     }
 
     // #Конец
@@ -229,7 +237,7 @@ public class Human implements HumanNode, Serializable {
         if (obj == this) return  true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         Human human = (Human) obj;
-        return (((Human) obj).getFullName() == human.getFullName()
+        return (Objects.equals(((Human) obj).getFullName(), human.getFullName())
                 || (((Human) obj).getFullName() != null
                 && ((Human) obj).getFullName().equals(human.getFullName())))
                 && (((Human) obj).getDateOfBirth() == human.getDateOfBirth()
@@ -239,27 +247,28 @@ public class Human implements HumanNode, Serializable {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         StringBuilder sb = new StringBuilder();
         sb.append("__________").append("\n");
         sb.append("ФИО: ").append(this.getFullName()).append("\n");
         sb.append("пол: ").append(this.getGender()).append("\n");
-
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         if (this.getDateOfBirth() != null) {
             sb.append("дата рождения: ")
-                    .append(this.getDateOfBirth().format(formatter2))
+                    .append(this.getDateOfBirth().format(formatter))
                     .append("\n");
         }
         if (this.getDateOfDeath() != null) {
             sb.append("дата смерти: ")
-                    .append(this.getDateOfDeath().format(formatter2))
+                    .append(this.getDateOfDeath().format(formatter))
                     .append("\n");
         }
+        sb.append("возраст: ").append(this.getAge()).append("\n");
         sb.append("мать: ").append(this.getNameMother()).append("\n");
         sb.append("отец: ").append(this.getNameFather()).append("\n");
         sb.append("супруг(а)(и): ").append(this.getSpouse()).append("\n");
         sb.append("дети: ").append(this.getChildren()).append("\n");
         return sb.toString();
     }
+
     // #Конец
 }

@@ -1,4 +1,4 @@
-package oop.familyTree.MVP.model;
+package oop.familyTree.mvp.model;
 
 import oop.familyTree.human.Human;
 import oop.familyTree.tree.FamilyTree;

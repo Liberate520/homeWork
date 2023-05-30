@@ -1,18 +1,24 @@
-package oop.familyTree.MVP.view.desktop;
+package oop.familyTree.mvp.view.desktop;
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import oop.familyTree.MVP.presenter.Presenter;
+import javafx.stage.Stage;
+import oop.familyTree.MainDesktop;
+import oop.familyTree.mvp.presenter.Presenter;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class DesktopController implements Action {
+public class DesktopController extends Application implements Action {
 
     private static final Presenter PRESENTER = new Presenter();
     @FXML
@@ -38,9 +44,9 @@ public class DesktopController implements Action {
     @FXML
     private Button gender;
     @FXML
-    private Label info;
+    private Label lbInfo;
     @FXML
-    private ListView<String> infoFamilyTree;
+    private ListView<String> listInfoFamilyTree;
     @FXML
     private Button infoPartners;
     @FXML
@@ -54,25 +60,25 @@ public class DesktopController implements Action {
     @FXML
     private ListView<String> listInformationAboutHuman;
     @FXML
-    private TextField nameNewTree;
+    private TextField txFNameNewTree;
     @FXML
-    private TextField newChildren;
+    private TextField txFNewChildren;
     @FXML
-    private DatePicker newDateOfBirth;
+    private DatePicker dpNewDateOfBirth;
     @FXML
-    private DatePicker newDateOfDeath;
+    private DatePicker dpNewDateOfDeath;
     @FXML
-    private TextField newFatherName;
+    private TextField txFNewFatherName;
     @FXML
-    private TextField newFullName;
+    private TextField txFNewFullName;
     @FXML
-    private TextField newGender;
+    private TextField txFNewGender;
     @FXML
     private Button newHuman;
     @FXML
-    private TextField newMatherName;
+    private TextField txFNewMatherName;
     @FXML
-    private TextField newSpouse;
+    private TextField txFNewSpouse;
     @FXML
     private Button newTree;
     @FXML
@@ -86,11 +92,11 @@ public class DesktopController implements Action {
     @FXML
     private Button selectHuman;
     @FXML
-    private Label titleFT;
+    private Label lbTitleFT;
     @FXML
-    private Label titleFT1;
+    private Label lbTitleFT1;
     @FXML
-    private Label titleHuman;
+    private Label lbTitleHuman;
 
     // #Методы из интерфейса Action
     @Override
@@ -113,12 +119,7 @@ public class DesktopController implements Action {
     public void monitoringChangeList(ListView<String> list, Label label){
         MultipleSelectionModel<String> selectionModel = list.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(
-            (observableValue, oldV, newV) -> {
-                if (!label.getText().isEmpty()){
-                    label.setText("");
-                }
-                label.setText(newV);
-            });
+            (observableValue, oldV, newV) -> label.setText(newV));
     }
 
     // #Конец
@@ -131,7 +132,7 @@ public class DesktopController implements Action {
     @FXML
     public void showNameFamilyTree(){
         this.getListFX(listAllTrees, PRESENTER.getNameFamilyTree());
-        this.monitoringChangeList(listAllTrees, titleFT1);
+        this.monitoringChangeList(listAllTrees, lbTitleFT1);
         this.showHideControl(allTrees);
     }
 
@@ -151,15 +152,16 @@ public class DesktopController implements Action {
      */
     @FXML
     public void addNewTree(){
-        if (!nameNewTree.getText().isEmpty()) {
-            PRESENTER.createNewTree(nameNewTree.getText());
+        if (!txFNameNewTree.getText().isEmpty()) {
+            PRESENTER.createNewTree(txFNameNewTree.getText());
             List<String> col = PRESENTER.getNameFamilyTree();
             ObservableList<String> observableList = FXCollections.observableArrayList(col);
             listAllTrees.setItems(observableList);
-            this.monitoringChangeList(listAllTrees, titleFT1);
+
+            this.monitoringChangeList(listAllTrees, lbTitleFT1);
             paneNewTree.setVisible(false);
             allTrees.setDisable(false);
-            nameNewTree.setText("");
+            txFNameNewTree.setText("");
             newTree.setText("Создать новое");
         }
         else {
@@ -176,11 +178,14 @@ public class DesktopController implements Action {
      * о выбранном древе
      */
     public void infoAboutSelectedTree(){
-        if (!titleFT1.getText().isEmpty()) {
-            String treeName = titleFT1.getText();
-            this.getListFX(infoFamilyTree, PRESENTER.showFamilyTree(treeName));
-            infoFamilyTree.setVisible(true);
-            info.setText("Файл загружен");
+        if (!lbTitleFT1.getText().isEmpty()) {
+            String treeName = lbTitleFT1.getText();
+            this.getListFX(listInfoFamilyTree, PRESENTER.showFamilyTree(treeName));
+            this.showHideControl(listInfoFamilyTree);
+            if (paneNewHuman.isVisible()){
+                this.showHideLayout(paneNewHuman);
+            }
+            lbInfo.setText("Файл загружен");
         }
         else {
             Alert message = new Alert(Alert.AlertType.INFORMATION);
@@ -188,7 +193,7 @@ public class DesktopController implements Action {
             message.setHeaderText("Не выбрано древо");
             message.setContentText("Выберите имя древа");
             message.showAndWait();
-            info.setText("");
+            lbInfo.setText("");
         }
     }
 
@@ -197,9 +202,9 @@ public class DesktopController implements Action {
      * для добавления нового человека
      */
     public void btnNewHumanClick(){
-        info.setText("");
-        this.showHideControl(info);
-        this.showHideControl(infoFamilyTree);
+        lbInfo.setText("");
+        this.showHideControl(lbInfo);
+        this.showHideControl(listInfoFamilyTree);
         this.showHideLayout(paneNewHuman);
     }
 
@@ -207,13 +212,37 @@ public class DesktopController implements Action {
      * По нажатию кнопки добавляется новый человек
      */
     public void addNewHuman(){
-        PRESENTER.addNewHuman(titleFT1.getText(),
-                newFullName.getText(), newGender.getText(),
-                newDateOfBirth.getValue(), newDateOfDeath.getValue(),
-                newMatherName.getText(), newFatherName.getText(),
-                newSpouse.getText(), newChildren.getText());
+        PRESENTER.addNewHuman(lbTitleFT1.getText(),
+                txFNewFullName.getText(), txFNewGender.getText(),
+                dpNewDateOfBirth.getValue(), dpNewDateOfDeath.getValue(),
+                txFNewMatherName.getText(), txFNewFatherName.getText(),
+                txFNewSpouse.getText(), txFNewChildren.getText());
         this.infoAboutSelectedTree();
-        this.showHideLayout(paneNewHuman);
+        txFNewFullName.setText(""); txFNewGender.setText("");
+        dpNewDateOfBirth.setValue(null); dpNewDateOfDeath.setValue(null);
+        txFNewMatherName.setText(""); txFNewFatherName.setText("");
+        txFNewSpouse.setText(""); txFNewChildren.setText("");
+    }
+
+    // #Конец
+
+    // #Методы абстрактного класса Application
+
+    public void start(Stage stage) {
+        try {
+            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(
+                    MainDesktop.class.getResource("familyTreeView.fxml")));
+            stage.setTitle("Семейное древо");
+            stage.setScene(new Scene(root, 800, 600));
+            stage.show();
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void appStart(){
+        Application.launch();
     }
 
     // #Конец

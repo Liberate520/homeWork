@@ -3,14 +3,14 @@ package oop.familyTree.human;
 import java.util.Comparator;
 import java.util.Map;
 
-public class HumanComparatorByAge<T extends HumanNode> implements Comparator<String> {
-    private final Map<String, T> wholeGenus;
+public class HumanComparatorByAge<V extends HumanNode> implements Comparator<String> {
+    private final Map<String, V> wholeGenus;
 
     /**
      * Конструктор
      * @param wholeGenus карта для сортировки
      */
-    public HumanComparatorByAge(Map<String, T> wholeGenus){
+    public HumanComparatorByAge(Map<String, V> wholeGenus){
         this.wholeGenus = wholeGenus;
     }
 
@@ -24,6 +24,6 @@ public class HumanComparatorByAge<T extends HumanNode> implements Comparator<Str
     public int compare(String o1, String o2) {
         Integer age1 = this.wholeGenus.get(o1).getAge();
         Integer age2 = this.wholeGenus.get(o2).getAge();
-        return age1.compareTo(age2);
+        return age1 - age2;
     }
 }
