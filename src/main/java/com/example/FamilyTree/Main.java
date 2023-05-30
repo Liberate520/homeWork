@@ -41,6 +41,7 @@ public class Main {
             answer = scan.nextLine();
             if (answer.equals("0")!=true) {filterFamilyTree(answer,humanList,familyTree);}
         } while (answer.equals("0")!=true);
+        scan.close();
     }
 
     public static List<Human> createHumanList() {
