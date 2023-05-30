@@ -4,7 +4,10 @@ import java.util.GregorianCalendar;
 
 public class Main {
     public static void main(String[] args) {
-        // Create humans
+        //Create main record object
+        FamilyRecords records = new FamilyRecords();
+
+        // Create some humans
         Human sergey = new Human("Пушкин Сергей Львович", Gender.MALE,
                 new GregorianCalendar(1770, Calendar.JUNE, 3),
                 new GregorianCalendar(1848, Calendar.JULY, 11)); // parent to olga, aleksandr, lev
@@ -24,33 +27,37 @@ public class Main {
                 new GregorianCalendar(1812, Calendar.SEPTEMBER, 8),
                 new GregorianCalendar(1863, Calendar.DECEMBER, 8)); // Гончарова -> Пушкина -> Ланская
 
+        // add some Humans to record object
+        records.addHuman(sergey);
+        records.addHumans(Arrays.asList(nadezhda, olga, aleksandr, lev));
+
         // create family trees
-        FamilyTree pushkinsTree = new FamilyTree("Пушкины");
-        FamilyTree goncharovsTree = new FamilyTree("Гончаровы", natalya);
-        FamilyTree pavlishevsTree = new FamilyTree("Павлищевы", olga);
-        FamilyTree lanskieTree = new FamilyTree("Ланские", natalya);
+        records.addFamily("Пушкины");
+        records.addFamily("Гончаровы", natalya);
+        records.addFamily("Павлищевы", records.searchHumanByName("Павлищева Ольга Сергеевна"));
+        records.addFamily("Ланские", natalya);
+
+        // get some family objects
+        Family pushkins = records.searchFamilyBeName("Пушкины");
 
         // add connections
-        pushkinsTree.add(sergey);
-        pushkinsTree.add(nadezhda);
-        pushkinsTree.setConnection(sergey, FamilyConnection.HUSBAND, nadezhda);
-        pushkinsTree.addChildren(Arrays.asList(sergey, nadezhda), Arrays.asList(olga, aleksandr, lev));
-        pushkinsTree.addWife(aleksandr, natalya);
-        // У natalya в goncharovsTree был некий неизвестный потомок.
-        // Конструкцию с пустым FamilyMember можно использовать например когда точно не известны часть поколений, а связи построить нужно
-        goncharovsTree.addParent(natalya, null);
+        records.addHumanToFamily(sergey, pushkins);
+        records.addWife(pushkins, sergey, nadezhda);
+        records.addChildren(pushkins, Arrays.asList(sergey, nadezhda), Arrays.asList(olga, aleksandr, lev));
+        records.addWife(pushkins, aleksandr, natalya);
+
 
         /*
-        System.out.println(pushkinsTree);
+        System.out.println(pushkins);
         System.out.println(lanskieTree);
         System.out.println(goncharovsTree);
         System.out.println(pavlishevsTree);
         */
 
         // find all members, to who $sergey is FamilyConnection.PARENT
-        System.out.println(pushkinsTree.findRelatedMembers(sergey, FamilyConnection.PARENT));
+        System.out.println(records.findRelatedMembers(sergey, FamilyConnection.PARENT));
 
         // find all families connected to this family in any way
-        System.out.println(pushkinsTree.findConnectedFamilies());
+        System.out.println(records.findConnectedFamilies(pushkins));
     }
 }
