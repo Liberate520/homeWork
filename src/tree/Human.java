@@ -1,11 +1,11 @@
 package tree;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import static tree.Gender.*;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private Gender gender;
     private Human father;
@@ -13,14 +13,11 @@ public class Human {
     private Set<Human> children;
 
     public Human(String name, Gender gender, Human father, Human mother) {
-
         this.name = name;
         this.gender = gender;
         this.father = father;
         this.mother = mother;
         this.children = new HashSet<>();
-        //if (mother != null) mother.AddChild(this);
-        //if (father != null) father.AddChild(this);
     }
 
     public Human(String name, Gender gender, Human human) {

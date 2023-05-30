@@ -1,13 +1,15 @@
 package tree;
 
+import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static tree.Gender.*;
 
 public class Main {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+/*
         Human Sasha = new Human("Sasha", man);
         Human Masha = new Human("Masha", woman);
         Human Olga = new Human("Olga", woman, Sasha, Masha);
@@ -43,5 +45,26 @@ public class Main {
         Sasha.addChild(Alena);
         System.out.println(Alena.getParent());
         System.out.println(Masha.getChild());
+
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream("familytree.out"));
+        objectOutputStream.writeObject(Ivanovi);
+
+        objectOutputStream.close();
+*/
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream("familytree.out"));
+        FamilyTree IvanoviRestored = (FamilyTree) objectInputStream.readObject();
+
+        objectInputStream.close();
+        System.out.println(IvanoviRestored);
+        System.out.println(IvanoviRestored.findHuman("Masha").getChild());
+
+
+
+
+
     }
 }
