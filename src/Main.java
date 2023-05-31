@@ -1,18 +1,10 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        Tree ft = new Tree();
-        ft.addPerson(new Person("Татьяна", LocalDate.of(1951, 1, 10), Gender.Female));
-        ft.addPerson(new Person("Сергей", LocalDate.of(1951, 10, 23), Gender.Male));
-        ft.addPerson(new Person("Алексей", LocalDate.of(1984, 7, 11), Gender.Male, ft.findPersonByName("Татьяна"), ft.findPersonByName("Сергей")));
-        ft.addPerson(new Person("Ирина", LocalDate.of(1987, 7, 1), Gender.Female));
-        ft.addPerson(new Person("Степан", LocalDate.of(2017, 4, 21), Gender.Male, ft.findPersonByName("Ирина"), ft.findPersonByName("Алексей")));
-        ft.addPerson(new Person("Петр", LocalDate.of(2018, 9, 30), Gender.Male, ft.findPersonByName("Ирина"), ft.findPersonByName("Алексей")));
-        ft.addPerson(new Person("Маша", LocalDate.of(2021, 6, 14), Gender.Female, ft.findPersonByName("Ирина"), ft.findPersonByName("Алексей")));
-        ft.addPerson(new Person("Вика", LocalDate.of(2021, 6, 14), Gender.Female, ft.findPersonByName("Ирина"), ft.findPersonByName("Алексей")));
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Tree ft = Data.dataEntry();
+        DataFileManager.saveData(ft);
+        //Tree ft = (Tree)DataFileManager.loadData();
 
         System.out.println("\nЛица в генеалогическом дереве:");
         Lib.printList(ft.getPersonList());
