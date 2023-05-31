@@ -2,11 +2,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Tree ft = Data.dataEntry();
         DataFileManager datafilemanager = new DataFileManager();
-        datafilemanager.saveData(ft);
-
-        //Tree ft = (Tree)DataFileManager.loadData();
+        //Tree ft = Data.dataEntry();                   // get initial data
+        //datafilemanager.saveData(ft);                 // save data to file
+        Tree ft = (Tree)datafilemanager.loadData();     // load data from file
 
         System.out.println("\nЛица в генеалогическом дереве:");
         Lib.printList(ft.getPersonList());
