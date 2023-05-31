@@ -1,38 +1,42 @@
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private Gender gender;
     private Human father;
     private Human mother;
     private List<Human> children;
 
 
-    public Human(String name, String dateOfBirth, Gender gender, Human father, Human mother, List<Human> children){
+    public Human(String name, LocalDate dateOfBirth, Gender gender, Human father, Human mother){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.children = children;
+        children = new ArrayList<Human>();
     }
 
-    public Human(String name, String dateOfBirth, Gender gender){
+    public Human(String name, LocalDate dateOfBirth, Gender gender){
 
-        this(name, dateOfBirth, gender, null, null, new ArrayList<Human>());
+        this(name, dateOfBirth, gender, null, null);
 
     }
 
     public Human(){
 
-        this("Unknown", "Unknown", Gender.UNKNOWN, null, null, new ArrayList<Human>());
+        this("Unknown", LocalDate.of(00,00,00), Gender.UNKNOWN, null, null);
 
     }
 
     public void addChild(Human human){
-        this.children.add(human);
+        if(!children.contains(human)) {
+            this.children.add(human);
+        }
     }
 
 
@@ -65,7 +69,7 @@ public class Human {
         return father;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
