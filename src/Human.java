@@ -1,8 +1,9 @@
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
 
     private String firstname;
     private String lastname;
