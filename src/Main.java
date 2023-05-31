@@ -3,7 +3,9 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Tree ft = Data.dataEntry();
-        DataFileManager.saveData(ft);
+        DataFileManager datafilemanager = new DataFileManager();
+        datafilemanager.saveData(ft);
+
         //Tree ft = (Tree)DataFileManager.loadData();
 
         System.out.println("\nЛица в генеалогическом дереве:");
