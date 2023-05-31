@@ -28,7 +28,7 @@ public enum FamilyConnection {
         return name;
     }
 
-    public FamilyConnection fromString(String name) {
+    public static FamilyConnection fromString(String name) {
         for (FamilyConnection connection:FamilyConnection.values()) {
             if (name.equals(connection.name)) return connection;
         }

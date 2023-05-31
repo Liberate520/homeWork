@@ -87,5 +87,7 @@ public class Main {
         System.out.printf("Результат загрузки %s\n", binaryConverterErrorPath.convertStatus());
         loadedRecords = FamilyRecords.load(binaryConverter);
         System.out.printf("Результат загрузки %s\n", binaryConverter.convertStatus());
+        loadedRecords = FamilyRecords.load(csvConverter);
+        System.out.printf("Результат загрузки из csv %s\n", csvConverter.convertStatus());
     }
 }

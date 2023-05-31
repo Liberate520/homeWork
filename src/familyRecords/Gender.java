@@ -11,7 +11,7 @@ public enum Gender {
     public String toString() {
         return name;
     }
-    public Gender fromString(String name) {
+    public static Gender fromString(String name) {
         for (Gender gender:Gender.values()) {
             if (name.equals(gender.name)) return gender;
         }

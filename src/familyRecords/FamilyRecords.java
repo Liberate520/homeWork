@@ -31,7 +31,8 @@ public class FamilyRecords implements Serializable {
     }
 
     public void addFamily(String name, Human familyMember) {
-        Family newFamily = new Family(name);
+        Family newFamily = searchFamilyBeName(name);
+        if (newFamily == null) newFamily = new Family(name);
         families.add(newFamily);
         if (familyMember != null) {
             people.add(familyMember);

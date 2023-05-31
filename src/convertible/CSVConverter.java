@@ -1,13 +1,11 @@
 package convertible;
 
-import familyRecords.Family;
-import familyRecords.FamilyConnection;
-import familyRecords.FamilyRecords;
-import familyRecords.Human;
+import familyRecords.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class CSVConverter implements Convertible{
     private final String path;
@@ -37,6 +35,12 @@ public class CSVConverter implements Convertible{
     private String dateToString(Calendar date) {
         if (date == null) return "null";
         return String.format("%d-%d-%d", date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.MONTH), date.get(Calendar.YEAR));
+    }
+
+    private Calendar stringTDate(String str) {
+        if (str.isEmpty() || str.equals("null")) return null;
+        String[] dateParts = str.split("-");
+        return new GregorianCalendar(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
     }
     private String familiesNames(Set<Family> families) {
         if (families == null || families.isEmpty()) return "null";
@@ -86,8 +90,46 @@ public class CSVConverter implements Convertible{
 
     @Override
     public FamilyRecords load() {
-        convertSuccess = false;
-        convertStatus = "Not implemented";
-        return null;
+        // TODO simplify this
+        FamilyRecords records = new FamilyRecords();
+        Map<Human, List<String>> humanConnections = new HashMap<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String line = br.readLine();
+            while (line != null) {
+                String[] elements = line.split(Pattern.quote(csvDelimiter));
+                String fullName = elements[0];
+                Gender gender = Gender.fromString(elements[1]);
+                Calendar birthDate = stringTDate(elements[2]);
+                Calendar deathDate = stringTDate(elements[3]);
+                String[] families = elements[4].split(",");
+                Human human = new Human(fullName, gender, birthDate, deathDate);
+                records.addHuman(human);
+                for (String familyName:families) {
+                    records.addFamily(familyName, human);
+                }
+                List<String> connectedNames = Arrays.asList(elements[5],elements[6],elements[7],elements[8]);
+                humanConnections.put(human, connectedNames);
+//                for (String el:elements) System.out.println(el);
+                line = br.readLine();
+            }
+            br.close();
+        } catch (IOException e) {
+            convertSuccess = false;
+            convertStatus = "Failed: " + e.getLocalizedMessage();
+        }
+        for (Map.Entry<Human, List<String>> entry : humanConnections.entrySet()) {
+            Human human = entry.getKey();
+            for (int i=0;i<FamilyConnection.values().length;i++) {
+                FamilyConnection connection = FamilyConnection.values()[i];
+                String connectedHumanNames = entry.getValue().get(i);
+                for (String humanName:connectedHumanNames.split(",")) {
+                    if (!humanName.equals("null")) records.addConnection(human, connection, records.searchHumanByName(humanName));
+                }
+            }
+        }
+        convertSuccess = true;
+        convertStatus = "Done";
+        return records;
     }
 }
