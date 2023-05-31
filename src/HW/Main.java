@@ -1,5 +1,6 @@
 package HW;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -16,7 +17,7 @@ public class Main {
      * Ссылка на то как сделать пулреквест смотри в материалах к уроку
      * Если PR все таки не дается, то можно и ссылкой на гит репозиторий
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree tree = new FamilyTree();
         tree.addPerson(new Human("Василий", "Иванов", "М", LocalDate.of(1966, 12, 1), LocalDate.of(2000, 11, 5)));
@@ -30,5 +31,8 @@ public class Main {
         System.out.println();
         System.out.println(tree.findPerson("Василий", "Иванов").getChildren());
 
+        UpDownLoader file = new DataSaver();
+        tree.saver(file);
+        FamilyTree newTree = FamilyTree.recovery(file);
     }
 }
