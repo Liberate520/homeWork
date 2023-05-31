@@ -1,4 +1,5 @@
 import convertible.BinaryConverter;
+import convertible.CSVConverter;
 import convertible.Convertible;
 import familyRecords.*;
 
@@ -70,11 +71,14 @@ public class Main {
 
         // export data
         Convertible binaryConverter = new BinaryConverter();
+        Convertible csvConverter = new CSVConverter();
         Convertible binaryConverterErrorPath = new BinaryConverter(String.join(File.separator, Arrays.asList("bla", "bla")));
         records.save(binaryConverter);
         System.out.printf("Результат выгрузки %s\n", binaryConverter.convertStatus());
         records.save(binaryConverterErrorPath);
         System.out.printf("Результат выгрузки %s\n", binaryConverterErrorPath.convertStatus());
+        records.save(csvConverter);
+        System.out.printf("Результат выгрузки в csv %s\n", csvConverter.convertStatus());
 
         System.out.println("-".repeat(10));
 

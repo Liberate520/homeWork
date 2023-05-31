@@ -138,6 +138,10 @@ public class FamilyRecords implements Serializable {
         return result;
     }
 
+    public Set<Human> getPeople() {
+        return people;
+    }
+
     public void save(Convertible converter) {
         converter.save(this);
     }
