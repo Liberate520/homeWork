@@ -1,3 +1,5 @@
+package familyRecords;
+
 public enum FamilyConnection {
     PARENT,
     CHILD,
