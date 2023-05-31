@@ -1,5 +1,3 @@
-import model.humans.Gender;
-import model.humans.tree.FamilyTree;
 import model.Service;
 import presenter.Presenter;
 import ui.Console;
@@ -10,7 +8,9 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        WorkingWithFiles workingWithFiles = new FileHandler();
+        FileHandler fileHandler = new FileHandler();
+
+        fileHandler.write();
 
         View view = new Console();
         Service service = new Service();
@@ -23,7 +23,7 @@ public class Main {
 //        service.searchByName("Ирина").setMother(service.searchByName("Павлина"));
 //        service.searchByName("Павлина").setDateOfDeath("06.04.2008");
 
-//        workingWithFiles.save(service.getFamilyTree());
+        fileHandler.save(service.getFamilyTree());
 //        FamilyTree tree = workingWithFiles.write();
 //        service.printFamilySet(service.firstNameSort());
 //        service.printFamilySet(service.birthdaySort());

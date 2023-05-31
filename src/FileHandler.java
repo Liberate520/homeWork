@@ -2,29 +2,22 @@ import model.humans.tree.FamilyTree;
 
 import java.io.*;
 
-public class FileHandler implements WorkingWithFiles {
+public class FileHandler {
 
-    @Override
-    public boolean save(Serializable serializable) {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
-            objectOutputStream.writeObject(serializable);
-            objectOutputStream.close();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    SaveFile saveFile;
+    WriteFile writeFile;
+
+    public FileHandler() {
+        this.saveFile = new SaveFile();
+        this.writeFile = new WriteFile();
     }
 
-    @Override
-    public FamilyTree write() {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.txt"));
-            return (FamilyTree) objectInputStream.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public void save(Serializable serializable) {
+        saveFile.save(serializable);
+    }
+
+
+    public void write() {
+        writeFile.write();
     }
 }
