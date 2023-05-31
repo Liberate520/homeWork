@@ -1,4 +1,4 @@
-package oop.familyTree.human;
+package oop.familyTree.mvp.model.human;
 
 public enum Gender {
         male,

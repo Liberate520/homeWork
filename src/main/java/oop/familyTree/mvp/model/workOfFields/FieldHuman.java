@@ -1,11 +1,11 @@
-package oop.familyTree.workOfFields;
+package oop.familyTree.mvp.model.workOfFields;
 
-import oop.familyTree.human.Human;
+import oop.familyTree.mvp.model.human.Human;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class FieldName extends HumanField {
+public class FieldHuman extends HumanField{
 
     @Override
     public Human changeField(String treeName, String fullName, int numField, String newValue){
@@ -17,7 +17,7 @@ public class FieldName extends HumanField {
                 try {
                     newField = human.getClass().getDeclaredField(list.get(numField - 1));
                     newField.setAccessible(true);
-                    newField.set(human, newValue);
+                    newField.set(human, human.setName(newValue));
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }

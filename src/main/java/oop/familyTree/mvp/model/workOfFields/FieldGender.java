@@ -1,6 +1,6 @@
-package oop.familyTree.workOfFields;
+package oop.familyTree.mvp.model.workOfFields;
 
-import oop.familyTree.human.Human;
+import oop.familyTree.mvp.model.human.Human;
 
 import java.lang.reflect.Field;
 import java.util.List;

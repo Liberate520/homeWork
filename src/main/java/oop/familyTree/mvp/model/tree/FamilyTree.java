@@ -1,12 +1,12 @@
-package oop.familyTree.tree;
+package oop.familyTree.mvp.model.tree;
 
-import oop.familyTree.human.Human;
-import oop.familyTree.human.HumanComparatorByAge;
-import oop.familyTree.human.HumanNode;
-import oop.familyTree.workOfFields.FieldDate;
-import oop.familyTree.workOfFields.FieldGender;
-import oop.familyTree.workOfFields.FieldHuman;
-import oop.familyTree.workOfFields.FieldName;
+import oop.familyTree.mvp.model.human.Human;
+import oop.familyTree.mvp.model.human.HumanComparatorByAge;
+import oop.familyTree.mvp.model.human.HumanNode;
+import oop.familyTree.mvp.model.workOfFields.FieldDate;
+import oop.familyTree.mvp.model.workOfFields.FieldGender;
+import oop.familyTree.mvp.model.workOfFields.FieldHuman;
+import oop.familyTree.mvp.model.workOfFields.FieldName;
 
 import java.io.Serializable;
 import java.time.LocalDate;

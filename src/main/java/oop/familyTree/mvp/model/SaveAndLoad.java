@@ -1,7 +1,7 @@
 package oop.familyTree.mvp.model;
 
-import oop.familyTree.human.Human;
-import oop.familyTree.tree.FamilyTree;
+import oop.familyTree.mvp.model.human.Human;
+import oop.familyTree.mvp.model.tree.FamilyTree;
 
 public interface SaveAndLoad {
 

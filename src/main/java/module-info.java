@@ -10,8 +10,6 @@ module oop.familyTree {
     opens oop.familyTree.mvp.view.desktop to javafx.fxml;
     exports oop.familyTree.mvp.presenter;
     opens oop.familyTree.mvp.presenter to javafx.fxml;
-    exports oop.familyTree.human;
-    opens oop.familyTree.human to javafx.fxml;
-    exports oop.familyTree.tree;
-    opens oop.familyTree.tree to javafx.fxml;
+    exports oop.familyTree.mvp.model.human;
+    opens oop.familyTree.mvp.model.human to javafx.fxml;
 }

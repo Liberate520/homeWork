@@ -1,8 +1,8 @@
 package oop.familyTree.mvp.model;
 
 import javafx.scene.control.Alert;
-import oop.familyTree.human.Human;
-import oop.familyTree.tree.FamilyTree;
+import oop.familyTree.mvp.model.human.Human;
+import oop.familyTree.mvp.model.tree.FamilyTree;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
