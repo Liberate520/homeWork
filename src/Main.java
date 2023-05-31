@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Human human1 = new Human("Vova V Sidorov", 30, "m", "Viktor K Sidorov", "Elena M Sidorova");
-        Human human2 = new Human("Kola K Ivanov", 35, "m");
+        Human human2 = new Human("Kola K Ivanov", 35, "m", );
         System.out.println(human1);
         System.out.println(human2);
         human1.getInfo();
