@@ -12,12 +12,13 @@ import java.util.TreeSet;
 public class Service implements Serializable {
     private int id;
     private TreeSet<FamilyTree> familyTrees;
-    Writeble writeble = new FileHandler();
+    private Writeble writeble;
 
     private FamilyTree activeFamilyTree;
 
     public Service(){
         familyTrees = new TreeSet<FamilyTree>();
+        writeble = new FileHandler();
     }
 
     public void createFamilyTree(String family, String firstName, String lastName, int idSex) {
@@ -54,8 +55,8 @@ public class Service implements Serializable {
 
     public void read(String filePath) {
         FamilyTreesForWrite familyForest = (FamilyTreesForWrite) writeble.read(filePath);
-        this.familyTrees = familyForest.familyTrees;
-        this.id = familyForest.idLastPerson;
+        this.familyTrees = familyForest.getFamilyTrees();
+        this.id = familyForest.getIdLastPerson();
     }
     public void write(String filePath) {
         FamilyTreesForWrite familyForest = new FamilyTreesForWrite(familyTrees, id);

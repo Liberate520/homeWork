@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 public class FamilyTreesForWrite implements Serializable, Iterable<FamilyTree> {
-    public TreeSet<FamilyTree> familyTrees;
-    public int idLastPerson;
+    private TreeSet<FamilyTree> familyTrees;
+    private int idLastPerson;
 
     public FamilyTreesForWrite(TreeSet familyTrees, int id) {
         this.familyTrees = familyTrees;
@@ -18,6 +18,13 @@ public class FamilyTreesForWrite implements Serializable, Iterable<FamilyTree> {
         this.idLastPerson = 0;
     }
 
+    public TreeSet<FamilyTree> getFamilyTrees() {
+        return familyTrees;
+    }
+
+    public Integer getIdLastPerson() {
+        return idLastPerson;
+    }
     @Override
     public Iterator iterator() {
         return familyTrees.iterator();
