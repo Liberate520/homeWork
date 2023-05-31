@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="ancP1" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop.familyTree.mvp.view.desktop.DesktopController">
+   <TabPane id="tp1" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Tab id="tab1" text="Главная">
+         <AnchorPane id="ancP2" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
+            <SplitPane id="splP1" dividerPositions="0.2" prefHeight="572.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <AnchorPane id="ancP3" minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="274.0">
+                  <Button id="btn1" fx:id="allTrees" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#showNameFamilyTree" text="Все древа" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn2" fx:id="newTree" layoutX="14.0" layoutY="48.0" mnemonicParsing="false" onAction="#btnNewTreeClick" text="Создать новое" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn3" fx:id="exit" layoutX="19.0" layoutY="528.0" mnemonicParsing="false" text="Выход" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+               </AnchorPane>
+               <AnchorPane id="ancP4" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                  <Label id="lbl1" fx:id="lbAllTrees" layoutX="14.0" layoutY="14.0" text="Все фамильные древа" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <ListView id="listV1" fx:id="listAllTrees" layoutX="15.0" layoutY="27.0" prefHeight="100.0" prefWidth="600.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0" />
+                  <Pane id="pane1" fx:id="paneNewTree" layoutX="15.0" layoutY="150.0" prefHeight="110.0" prefWidth="604.0" visible="false" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0">
+                     <Label id="lbl2" layoutX="15.0" layoutY="10.0" text="Новое древо">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF1" fx:id="txFNameNewTree" layoutX="15.0" layoutY="40.0" prefHeight="25.0" prefWidth="575.0" />
+                     <Button id="btn5" fx:id="addNewTree" layoutX="15.0" layoutY="70.0" mnemonicParsing="false" onAction="#addNewTree" text="Добавить" />
+                  </Pane>
+               </AnchorPane>
+            </SplitPane>
+         </AnchorPane>
+      </Tab>
+      <Tab id="tab2" text="Работа с древом">
+         <AnchorPane id="ancP5" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
+            <SplitPane id="splP2" dividerPositions="0.2568922305764411" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <AnchorPane id="ancP6" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                  <Button id="btn4" fx:id="infoSelectedFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#infoAboutSelectedTree" text="Показать выбранное древо" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Separator id="sep1" layoutY="47.0" prefWidth="200.0" />
+                  <Button id="btn7" fx:id="newHuman" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" onAction="#btnNewHumanClick" text="Добавить нового" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="57.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn6" fx:id="deleteHuman" layoutX="10.0" layoutY="97.0" mnemonicParsing="false" text="Удалить выбранного" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="97.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Separator id="sep1" layoutY="137.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
+                  <Label id="lbl3" layoutX="10.0" layoutY="150.0" text="Человек" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button id="btn9" fx:id="infoHuman" layoutX="10.0" layoutY="217.0" mnemonicParsing="false" text="Информация" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn10" fx:id="sortByName" layoutX="10.0" layoutY="215.0" mnemonicParsing="false" text="Сортировка по имени" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="215.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn11" fx:id="sortByAge" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" text="Сортировка по возрасту" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="250.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn12" fx:id="changeField" layoutX="10.0" layoutY="285.0" mnemonicParsing="false" text="Изменить значение поля" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="285.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn13" fx:id="save" layoutX="10.0" layoutY="528.0" mnemonicParsing="false" text="Сохранить" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="528.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+               </AnchorPane>
+               <AnchorPane id="ancP7" minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="585.0">
+                  <Label id="lbl4" fx:id="lbTitleFT" layoutX="15.0" layoutY="10.0" text="Фамильное древо: " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label id="lbl5" fx:id="lbTitleFT1" layoutX="130.0" layoutY="10.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="paneFamilyTree" layoutY="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+                     <ListView id="listV2" fx:id="listInfoFamilyTree" prefHeight="541.0" prefWidth="590.0" visible="false" />
+                  </Pane>
+                  <Pane id="pane2" fx:id="paneNewHuman" layoutY="35.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+                     <Label id="lbl5" layoutX="10.0" layoutY="10.0" text="Полное имя">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF2" fx:id="txFNewFullName" layoutX="10.0" layoutY="30.0" prefHeight="25.0" prefWidth="500.0" />
+                     <Label id="lbl6" layoutX="10.0" layoutY="60.0" text="Пол">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF3" fx:id="txFNewGender" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="500.0" />
+                     <Label id="lbl7" layoutX="10.0" layoutY="110.0" text="Дата рождения">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <DatePicker id="datePic1" fx:id="dpNewDateOfBirth" layoutX="10.0" layoutY="130.0" />
+                     <Label id="lbl8" layoutX="10.0" layoutY="160.0" text="Дата смерти">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <DatePicker id="datePic2" fx:id="dpNewDateOfDeath" layoutX="10.0" layoutY="180.0" />
+                     <Label id="lbl9" layoutX="10.0" layoutY="210.0" text="Имя матери">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF4" fx:id="txFNewMatherName" layoutX="10.0" layoutY="230.0" prefHeight="25.0" prefWidth="500.0" />
+                     <Label id="lbl10" layoutX="10.0" layoutY="260.0" text="Имя отца">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF5" fx:id="txFNewFatherName" layoutX="10.0" layoutY="280.0" prefHeight="25.0" prefWidth="500.0" />
+                     <Label id="lbl11" layoutX="10.0" layoutY="310.0" text="Имя супруга(и)">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF6" fx:id="txFNewSpouse" layoutX="10.0" layoutY="330.0" prefHeight="25.0" prefWidth="500.0" />
+                     <Label id="lbl12" layoutX="10.0" layoutY="360.0" text="Имена детей">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField id="txtF7" fx:id="txFNewChildren" layoutX="10.0" layoutY="380.0" prefHeight="25.0" prefWidth="500.0" />
+                     <Button id="btn14" fx:id="addNewHuman" layoutX="430.0" layoutY="480.0" mnemonicParsing="false" onAction="#addNewHuman" text="Добавить">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Button>
+                  </Pane>
+                  <Pane id="pane3" fx:id="paneHuman" layoutY="35.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+                     <Label id="lbl4" fx:id="lbTitleHuman" layoutX="10.0" layoutY="10.0" text="Член древа: ">
+                        <font>
+                           <Font name="Calibri" size="14.0" />
+                        </font>
+                     </Label>
+                     <ListView id="listV3" fx:id="listAllHuman" layoutX="10.0" layoutY="30.0" prefHeight="150.0" prefWidth="570.0" />
+                     <ListView id="listV4" fx:id="listInformationAboutHuman" layoutX="10.0" layoutY="185.0" prefHeight="340.0" prefWidth="570.0" />
+                  </Pane>
+               </AnchorPane>
+            </SplitPane>
+         </AnchorPane>
+      </Tab>
+   </TabPane>
+</AnchorPane>
