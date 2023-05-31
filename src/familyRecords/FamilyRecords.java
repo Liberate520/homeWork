@@ -1,10 +1,13 @@
 package familyRecords;
 
+import convertible.Convertible;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FamilyRecords {
+public class FamilyRecords implements Serializable {
     private Set<Human> people;
     private Set<Family> families;
     public FamilyRecords(){
@@ -135,4 +138,17 @@ public class FamilyRecords {
         return result;
     }
 
+    public void save(Convertible converter) {
+        converter.save(this);
+    }
+    public static FamilyRecords load(Convertible converter) {
+        return converter.load();
+    }
+//    public void load(Convertible converter) {
+//        // TODO: modify construction to something like 'this = converter.load();', when/if i understand how to do it
+//        // Not sure if this way to load data is correct
+//        FamilyRecords loadedRecords = converter.load();
+//        this.people = loadedRecords.people;
+//        this.families = loadedRecords.families;
+//    }
 }

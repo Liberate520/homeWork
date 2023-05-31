@@ -1,12 +1,13 @@
 package familyRecords;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Human {
+public class Human implements Serializable {
     private String fullName;
     private Gender gender;
     private Calendar birthDate;

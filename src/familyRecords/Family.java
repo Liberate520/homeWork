@@ -1,9 +1,10 @@
 package familyRecords;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Family {
+public class Family implements Serializable {
     private final String familyName;
     private Set<Human> members;
 

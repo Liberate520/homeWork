@@ -1,5 +1,8 @@
+import convertible.BinaryConverter;
+import convertible.Convertible;
 import familyRecords.*;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -54,12 +57,31 @@ public class Main {
         System.out.println(lanskieTree);
         System.out.println(goncharovsTree);
         System.out.println(pavlishevsTree);
-        */
+
 
         // find all members, to who $sergey is FamilyConnection.PARENT
         System.out.println(records.findRelatedMembers(sergey, FamilyConnection.PARENT));
 
         // find all families connected to this family in any way
         System.out.println(records.findConnectedFamilies(pushkins));
+
+        System.out.println("-".repeat(10));
+        */
+
+        // export data
+        Convertible binaryConverter = new BinaryConverter();
+        Convertible binaryConverterErrorPath = new BinaryConverter(String.join(File.separator, Arrays.asList("bla", "bla")));
+        records.save(binaryConverter);
+        System.out.printf("Результат выгрузки %s\n", binaryConverter.convertStatus());
+        records.save(binaryConverterErrorPath);
+        System.out.printf("Результат выгрузки %s\n", binaryConverterErrorPath.convertStatus());
+
+        System.out.println("-".repeat(10));
+
+        // import data
+        FamilyRecords loadedRecords = FamilyRecords.load(binaryConverterErrorPath);
+        System.out.printf("Результат загрузки %s\n", binaryConverterErrorPath.convertStatus());
+        loadedRecords = FamilyRecords.load(binaryConverter);
+        System.out.printf("Результат загрузки %s\n", binaryConverter.convertStatus());
     }
 }
