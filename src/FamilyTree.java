@@ -51,27 +51,27 @@ public class FamilyTree {
         return null;
     }
 
-    public Human getByChildren(List<Human> Children) {
+    public Human getByChildren(List<Human> children) {
         for (Human human : humanList) {
-            if (human.getChildren().equals(Children)) {
+            if (human.getChildren().equals(children)) {
                 return human;
             }
         }
         return null;
     }
 
-    public Human getByBrothers(List<Human> Brothers) {
+    public Human getByBrothers(List<Human> brothers) {
         for (Human human : humanList) {
-            if (human.getBrothers().equals(Brothers)) {
+            if (human.getBrothers().equals(brothers)) {
                 return human;
             }
         }
         return null;
     }
 
-    public Human getBySisters(List<Human> Sisters) {
+    public Human getBySisters(List<Human> sisters) {
         for (Human human : humanList) {
-            if (human.getSisters().equals(Sisters)) {
+            if (human.getSisters().equals(sisters)) {
                 return human;
             }
         }
