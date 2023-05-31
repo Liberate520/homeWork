@@ -1,10 +1,11 @@
 package trees;
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String NAME;
     private Year yearOfBirth;
     private String sex;

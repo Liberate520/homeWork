@@ -1,10 +1,11 @@
 package trees;
 
+import java.io.*;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private Human human;
     private List<Human> familyTree;
 
@@ -13,8 +14,8 @@ public class FamilyTree {
     }
 
     /**
-     * Добавляет связь ребенка и родителя. После выполнения у родителя и ребенка в классе появится необходимая ветвь.
      *
+     * Добавляет связь ребенка и родителя. После выполнения у родителя и ребенка в Добавляет связь ребенка и родителя. После выполнения у родителя и ребенка в классе появится необходимая ветвь.
      * @param parent родитель
      * @param child  ребенок
      */
@@ -141,5 +142,13 @@ public class FamilyTree {
                 System.out.println(parentName + " " + yearOfBirth + " не имеет детей.");
             }
         }
+    }
+
+    public void saveFamilyTree(Conservation converter) {
+        converter.saveFile(this);
+    }
+
+    public static FamilyTree readFile(Conservation converter) {
+        return converter.loadFile();
     }
 }
