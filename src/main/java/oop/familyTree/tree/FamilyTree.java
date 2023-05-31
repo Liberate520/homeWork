@@ -3,9 +3,12 @@ package oop.familyTree.tree;
 import oop.familyTree.human.Human;
 import oop.familyTree.human.HumanComparatorByAge;
 import oop.familyTree.human.HumanNode;
+import oop.familyTree.workOfFields.FieldDate;
+import oop.familyTree.workOfFields.FieldGender;
+import oop.familyTree.workOfFields.FieldHuman;
+import oop.familyTree.workOfFields.FieldName;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -116,84 +119,40 @@ public class FamilyTree<V extends HumanNode> implements Serializable, Iterable<M
     }
 
     /**
-     * Получение списка всех полей
-     * @param fullName имя человека
-     * @return List
-     */
-    private List<String> getFields(String fullName) {
-        Human human = this.getHumanByFullName(fullName);
-        Field[] fields = human.getClass().getDeclaredFields();
-        List<String> list = new ArrayList<>();
-        for (Field field : fields) {
-            if (!field.getName().equals("SerialVersionUID")) {
-                list.add(field.getName());
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Проверка ввода числа
-     * @param numField число
-     * @return да или нет
-     */
-    private boolean checkingNumField(Integer numField){
-        String str = numField.toString();
-        return str.matches("[0-9]+");
-    }
-
-    /**
      * Изменение значения поля
+     * @param treeName имя древа
      * @param fullName имя человека
      * @param numField номер поля
      * @param newValue новое значение
      */
     @SuppressWarnings("unchecked")
-    public void changeField(String fullName, int numField, String newValue){
-        List<String> list = this.getFields(fullName);
-        Human human = this.getHumanByFullName(fullName);
-        Field newField;
-        if (this.checkingNumField(numField)) {
-            if (numField == 1) {
-                try {
-                    newField = human.getClass().getDeclaredField(list.get(0));
-                    newField.setAccessible(true);
-                    newField.set(human, newValue);
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-                this.currentTree.remove(fullName);
-                this.currentTree.putIfAbsent(newValue, (V) human);
+    public void changeValueField(String treeName, String fullName, int numField, String newValue){
+        switch (numField){
+            case 1 -> {
+                Human human = new FieldName().changeField(treeName, fullName, numField, newValue);
+                currentTree.remove(fullName);
+                currentTree.putIfAbsent(newValue, (V) human);
             }
-            if (numField == 2) {
-                try {
-                    newField = human.getClass().getDeclaredField(list.get(numField - 1));
-                    newField.setAccessible(true);
-                    newField.set(human, human.setGender(newValue));
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
+            case 2 -> {
+                Human human = new FieldGender().changeField(treeName, fullName, numField, newValue);
+                currentTree.computeIfPresent(fullName, (String, V) -> (V) human);
             }
-            if (numField == 3 || numField == 4) {
-                try {
-                    newField = human.getClass().getDeclaredField(list.get(numField - 1));
-                    newField.setAccessible(true);
-                    newField.set(human, human.setDate(newValue));
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
+            case 3, 4 -> {
+                Human human = new FieldDate().changeField(treeName, fullName, numField, newValue);
+                currentTree.computeIfPresent(fullName, (String, V) -> (V) human);
             }
-            if (numField == 5 || numField == 6) {
-                try {
-                    newField = human.getClass().getDeclaredField(list.get(numField - 1));
-                    newField.setAccessible(true);
-                    newField.set(human, human.setName(newValue));
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
+            case 5, 6 -> {
+                Human human = new FieldHuman().changeField(treeName, fullName, numField, newValue);
+                currentTree.computeIfPresent(fullName, (String, V) -> (V) human);
             }
-            if (numField == 7) human.setSpouse(newValue);
-            if (numField == 8) human.setChild(newValue);
+            case 7 -> {
+                Human human = this.getHumanByFullName(fullName);
+                human.setSpouse(newValue);
+            }
+            case 8 -> {
+                Human human = this.getHumanByFullName(fullName);
+                human.setChild(newValue);
+            }
         }
     }
 

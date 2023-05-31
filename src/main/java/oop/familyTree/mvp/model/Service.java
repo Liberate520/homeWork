@@ -145,9 +145,9 @@ public class Service implements SaveAndLoad{
      * @param numField номер поля
      * @param newValue новое значение
      */
-    public void changeField(String treeName, String fullName, int numField, String newValue){
+    public void changeValueField(String treeName, String fullName, int numField, String newValue){
         FamilyTree<Human> ft = this.getFamilyTree(treeName);
-        ft.changeField(fullName, numField, newValue);
+        ft.changeValueField(treeName, fullName, numField, newValue);
         this.saving(treeName, ft);
     }
 

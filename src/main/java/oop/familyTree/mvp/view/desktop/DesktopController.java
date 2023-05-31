@@ -28,75 +28,73 @@ public class DesktopController extends Application implements Action {
     @FXML
     private URL location;
     @FXML
-    private Button addNewHuman;
-    @FXML
-    private Button addNewTree;
-    @FXML
-    private Button allHumans;
-    @FXML
     private Button allTrees;
-    @FXML
-    private Button dates;
-    @FXML
-    private Button exit;
-    @FXML
-    private Button fullName;
-    @FXML
-    private Button gender;
-    @FXML
-    private Label lbInfo;
-    @FXML
-    private ListView<String> listInfoFamilyTree;
-    @FXML
-    private Button infoPartners;
-    @FXML
-    private Button infoSelectedFT;
-    @FXML
-    private Label lbAllTrees;
-    @FXML
-    private ListView<String> listAllHuman;
-    @FXML
-    private ListView<String> listAllTrees;
-    @FXML
-    private ListView<String> listInformationAboutHuman;
-    @FXML
-    private TextField txFNameNewTree;
-    @FXML
-    private TextField txFNewChildren;
-    @FXML
-    private DatePicker dpNewDateOfBirth;
-    @FXML
-    private DatePicker dpNewDateOfDeath;
-    @FXML
-    private TextField txFNewFatherName;
-    @FXML
-    private TextField txFNewFullName;
-    @FXML
-    private TextField txFNewGender;
-    @FXML
-    private Button newHuman;
-    @FXML
-    private TextField txFNewMatherName;
-    @FXML
-    private TextField txFNewSpouse;
     @FXML
     private Button newTree;
     @FXML
-    private Pane paneInfoHuman;
+    private Button exit;
     @FXML
-    private Pane paneNewHuman;
+    private Label lbAllTrees;
+    @FXML
+    private ListView<String> listAllTrees;
     @FXML
     private Pane paneNewTree;
     @FXML
-    private Button save;
+    private TextField txFNameNewTree;
     @FXML
-    private Button selectHuman;
+    private Button addNewTree;
+    @FXML
+    private Button infoSelectedFT;
+    @FXML
+    private Button newHuman;
+    @FXML
+    private Button deleteHuman;
+    @FXML
+    private Button infoHuman;
+    @FXML
+    private Button sortByName;
+    @FXML
+    private Button sortByAge;
+    @FXML
+    private Button changeField;
+    @FXML
+    private Button save;
     @FXML
     private Label lbTitleFT;
     @FXML
     private Label lbTitleFT1;
     @FXML
+    private Pane paneFamilyTree;
+    @FXML
+    private ListView<String> listInfoFamilyTree;
+    @FXML
+    private Pane paneNewHuman;
+    @FXML
+    private TextField txFNewFullName;
+    @FXML
+    private TextField txFNewGender;
+    @FXML
+    private DatePicker dpNewDateOfBirth;
+    @FXML
+    private DatePicker dpNewDateOfDeath;
+    @FXML
+    private TextField txFNewMatherName;
+    @FXML
+    private TextField txFNewFatherName;
+    @FXML
+    private TextField txFNewSpouse;
+    @FXML
+    private TextField txFNewChildren;
+    @FXML
+    private Button addNewHuman;
+    @FXML
+    private Pane paneHuman;
+    @FXML
     private Label lbTitleHuman;
+    @FXML
+    private ListView<String> listAllHuman;
+    @FXML
+    private ListView<String> listInformationAboutHuman;
 
     // #Методы из интерфейса Action
     @Override
@@ -185,7 +183,6 @@ public class DesktopController extends Application implements Action {
             if (paneNewHuman.isVisible()){
                 this.showHideLayout(paneNewHuman);
             }
-            lbInfo.setText("Файл загружен");
         }
         else {
             Alert message = new Alert(Alert.AlertType.INFORMATION);
@@ -193,7 +190,6 @@ public class DesktopController extends Application implements Action {
             message.setHeaderText("Не выбрано древо");
             message.setContentText("Выберите имя древа");
             message.showAndWait();
-            lbInfo.setText("");
         }
     }
 
@@ -202,8 +198,6 @@ public class DesktopController extends Application implements Action {
      * для добавления нового человека
      */
     public void btnNewHumanClick(){
-        lbInfo.setText("");
-        this.showHideControl(lbInfo);
         this.showHideControl(listInfoFamilyTree);
         this.showHideLayout(paneNewHuman);
     }

@@ -109,8 +109,8 @@ public class Presenter {
      * @param numField номер поля
      * @param newValue новое значение
      */
-    public void changeField(String treeName, String fullName, int numField, String newValue){
-        service.changeField(treeName, fullName, numField, newValue);
+    public void changeValueField(String treeName, String fullName, int numField, String newValue){
+        service.changeValueField(treeName, fullName, numField, newValue);
     }
 
     // #Конец

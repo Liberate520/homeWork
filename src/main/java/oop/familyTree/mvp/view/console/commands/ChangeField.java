@@ -2,11 +2,11 @@ package oop.familyTree.mvp.view.console.commands;
 
 import oop.familyTree.mvp.view.View;
 
-public class SetChangeField implements Commands {
+public class ChangeField implements Commands {
 
     private final View view;
 
-    public SetChangeField(View view) {
+    public ChangeField(View view) {
         this.view = view;
     }
 

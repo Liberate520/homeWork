@@ -224,14 +224,15 @@ public class UiConsole implements View {
     }
 
     private void showFields(){
-        System.out.println("1. Изменение имени");
-        System.out.println("2. Изменение пола");
-        System.out.println("3. Изменение даты рождения");
-        System.out.println("4. Изменение даты смерти");
-        System.out.println("5. Изменение имени матери");
-        System.out.println("6. Изменение имени отца");
-        System.out.println("7. Новый супруг");
-        System.out.println("8. Добавление ребёнка");
+        System.out.println("Номера полей:");
+        System.out.println("1. Изменение имени (ФИО)");
+        System.out.println("2. Изменение пола (строка \"мужской\" или \"женский\")");
+        System.out.println("3. Изменение даты рождения (строка вида дд.мм.гггг)");
+        System.out.println("4. Изменение даты смерти (строка вида дд.мм.гггг)");
+        System.out.println("5. Изменение имени матери (ФИО)");
+        System.out.println("6. Изменение имени отца (ФИО)");
+        System.out.println("7. Новый супруг (ФИО)");
+        System.out.println("8. Добавление ребёнка (ФИО)");
     }
 
     @Override
@@ -245,7 +246,7 @@ public class UiConsole implements View {
         int numField = Integer.parseInt(scan.nextLine());
         System.out.print("Введите новое значение: ");
         String newValue = scan.nextLine();
-        PRESENTER.changeField(treeName, fullName, numField, newValue);
+        PRESENTER.changeValueField(treeName, fullName, numField, newValue);
     }
 
     @Override

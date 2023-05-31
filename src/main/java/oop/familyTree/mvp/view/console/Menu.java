@@ -24,7 +24,7 @@ public class Menu {
         listCommands.add(new SortByName(view));
         listCommands.add(new SortByAge(view));
         listCommands.add(new FullInfoHuman(view));
-        listCommands.add(new SetChangeField(view));
+        listCommands.add(new ChangeField(view));
         listCommands.add(new Finish(view));
     }
 
