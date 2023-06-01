@@ -2,7 +2,7 @@ package tree;
 
 import java.io.*;
 
-public class FileHandler implements Serializable {
+public class FileHandler implements SaveReadable {
 
     public void saveObject(Serializable ob) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
