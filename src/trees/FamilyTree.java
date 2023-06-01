@@ -157,7 +157,10 @@ public class FamilyTree implements Serializable {
             }
         }
     }
-
+    /**
+     * Отображает семейное древо, печатая имена и годы рождения всех людей в древе.
+     * Если древо пусто, выводит сообщение о пустом древе.
+     */
     public void showFamilyTree() {
         if (familyTree.isEmpty()) {
             System.out.println("Семейное древо пусто.");
@@ -168,12 +171,23 @@ public class FamilyTree implements Serializable {
             }
         }
     }
-
+    /**
+     * Сохраняет текущее семейное древо в файл, используя указанный обработчик файлов.
+     *
+     * @param fileHandler Обработчик файлов, реализующий интерфейс Conservation.
+     */
     public void saveFamilyTree(Conservation fileHandler) {
         fileHandler.saveFile(this);
     }
 
-    public static FamilyTree readFile(Conservation fileHandler) {
+    /**
+     * Загружает семейное древо из файла, используя указанный обработчик файлов.
+     *
+     * @param fileHandler Обработчик файлов, реализующий интерфейс Conservation.
+     * @return Загруженное семейное древо.
+     */
+    public FamilyTree readFile(Conservation fileHandler) {
         return fileHandler.loadFile();
     }
+
 }
