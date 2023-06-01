@@ -11,14 +11,14 @@ public class TreeSerializer implements Serializer{
         }
     }
 
-    public Object load(String fileName) {
-        Object obj = null;
+    public FamilyTree load(String fileName) {
+        FamilyTree tree = null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            obj = ois.readObject();
+            tree = (FamilyTree) ois.readObject();
             System.out.println("Объект загружен из файла: " + fileName);
         } catch (ClassNotFoundException | IOException e) {
             System.err.println("Ошибка загрузки из файла: " + e.getMessage());
         }
-        return obj;
+        return tree;
     }
 }
