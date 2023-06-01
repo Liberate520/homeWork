@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +47,12 @@ public class FamilyTree implements Serializable{
     }
 
     /** сохранение */
-    public void save(String path, CapableOfPreserving preserve) throws ClassNotFoundException, IOException{
+    public void save(String path, CapableOfPreserving preserve){
         preserve.save(path, this);
     }
 
     /** чтение */
-    public FamilyTree read(String path, CapableOfRestore restore) throws ClassNotFoundException, IOException{
+    public FamilyTree read(String path, CapableOfRestore restore){
         return (FamilyTree)restore.read(path);
     }
 }

@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -7,7 +6,7 @@ import java.io.Serializable;
 public class Main implements Serializable {
 
     public static final String PATH = "family.txt";
-    public static void main(String[] args) throws ClassNotFoundException, IOException {      
+    public static void main(String[] args){      
         FamilyTree family = new FamilyTree();
         treeFilling(family);
 
@@ -20,13 +19,13 @@ public class Main implements Serializable {
     }
 
     /** десериализация */
-    private static FamilyTree restore() throws ClassNotFoundException, IOException {        
+    private static FamilyTree restore(){        
         CapableOfRestore restorer = new FileHandler();
         return (new FamilyTree()).read(PATH, restorer);
     }
 
     /** сериализация */
-    private static void serialize(FamilyTree family) throws ClassNotFoundException, IOException {
+    private static void serialize(FamilyTree family){
         CapableOfPreserving preserver = new FileHandler();
         family.save(PATH, preserver);
     }
