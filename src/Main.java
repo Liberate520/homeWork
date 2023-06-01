@@ -26,13 +26,8 @@ public class Main {
 
         ruriks.saveFamilyTree(fileHandler);
 
-        FamilyTree loaderFamilyTree = new FamilyTree();
+        FamilyTree loadedTree = new FamilyTree().readFile(fileHandler);
 
-        FamilyTree loadedTree = loaderFamilyTree.readFile(fileHandler);
-        FamilyTree loadedTree1 = loaderFamilyTree.readFile(fileHandler);
-
-
-        loadedTree1.showFamilyTree();
         loadedTree.showFamilyTree();
 
 
