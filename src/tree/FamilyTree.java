@@ -44,7 +44,7 @@ public class FamilyTree {
     }
 
     public String findHuman() {
-        StringBuilder find = new StringBuilder();
+        StringBuilder find = new StringBuilder(); // создаем экземпляр класса СтрингБилдер
         find.append("Find: ");
         find.append(personList.size());
         find.append(" records: \n");

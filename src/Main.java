@@ -1,6 +1,5 @@
+import tree.FamilyTree;
 import tree.Human;
-
-import java.util.List;
 
 /*
 Реализовать, с учетом ооп подхода, приложение.
@@ -11,10 +10,13 @@ import java.util.List;
 * */
 public class Main {
     public static void main(String[] args) {
-        Human human1 = new Human("Vova V Sidorov", 30, "m", "Viktor K Sidorov", "Elena M Sidorova");
-        Human human2 = new Human("Kola K Ivanov", 35, "m", );
-        System.out.println(human1);
-        System.out.println(human2);
-        human1.getInfo();
+        FamilyTree family = new FamilyTree();
+
+        family.add(new Human("Вова", 30));
+        family.add(new Human("Алла", 30));
+
+        family.add(new Human("Василий", 12, family.findPerson("Вова"), family.findPerson("Алла")));
+
+        System.out.println(family.findHuman());
     }
 }
