@@ -27,6 +27,19 @@ public class FamilyTree {
             }return  null;
         }
 
+    public List<Human> childrenList;
+
+    public List<Human> childrenList(Human human) {
+        childrenList = new ArrayList<>();
+        childrenList.add(human);
+        return childrenList;
+    }
+
+    public void addChild(Human human) {
+        childrenList.add(human);
+
+    }
+
     public String getHumanList() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Human human: humanList){

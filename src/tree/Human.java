@@ -1,5 +1,6 @@
 package tree;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -9,23 +10,30 @@ public class Human {
     private String surName;
     private String name;
     private String secondName;
+    private Gender gender;
+    private LocalDate birthday;
+    private LocalDate die;
     private Human father;
     private Human mother;
+    private List<Human> children;
 
 
-    public Human( String surName, String name, String secondName, Human father, Human mother) {
-        id = global_id++;
+    public Human(int id, String surName, String name, String secondName, Gender gender, LocalDate birthday, LocalDate die, Human father, Human mother, List<Human> children) {
+        this.id = id;
         this.surName = surName;
         this.name = name;
         this.secondName = secondName;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.die = die;
         this.father = father;
         this.mother = mother;
+        this.children = children;
     }
 
     public Human() {
-        this("Unknown", "Unknown", "Unknown",null,null);
+        this("Unknown", "Unknown", "Unknown", null, null);
     }
-
 
 
     public String getSurName() {
