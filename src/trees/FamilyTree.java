@@ -1,21 +1,27 @@
 package trees;
 
-import java.io.*;
+import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, представляющий семейное древо.
+ */
 public class FamilyTree implements Serializable {
-    private Human human;
     private List<Human> familyTree;
 
+    /**
+     * Конструктор класса FamilyTree.
+     */
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
     }
 
     /**
+     * /**
+     * Добавляет связь ребенка и родителя.
      *
-     * Добавляет связь ребенка и родителя. После выполнения у родителя и ребенка в Добавляет связь ребенка и родителя. После выполнения у родителя и ребенка в классе появится необходимая ветвь.
      * @param parent родитель
      * @param child  ребенок
      */
@@ -52,35 +58,36 @@ public class FamilyTree implements Serializable {
      * @param person человек
      */
     public void addPersonInFamilyTree(Human person) {
-        if (!checkPersonInTree(person)) familyTree.add(person);
+        if (!isPersonInTree(person)) familyTree.add(person);
     }
 
     /**
-     * Для добавления человека в семейное древо с одним предком.
-     * Так же метод добавляет ребенка родителю
+     * Добавляет человека в семейное древо с одним предком.
      *
-     * @param person ребенок
-     * @param parent родитель
+     * @param person      ребенок
+     * @param parent      родитель
+     * @param yearOfBirth год рождения родителя
      */
     public void addPersonInFamilyTree(Human person, String parent, int yearOfBirth) {
-        if (!checkPersonInTree(person)) {
+        if (!isPersonInTree(person)) {
             addBranchParentChild(getPersonFromTree(parent, yearOfBirth), person);
             familyTree.add(person);
         }
     }
 
     /**
-     * Для добавления человека в семейное древо с двумя родителями.
-     * Так же метод добавляет ребенка родителю
+     * Добавляет человека в семейное древо с двумя родителями.
      *
-     * @param child      ребенок
-     * @param fatherName имя отца
-     * @param motherName имя матери
+     * @param child             ребенок
+     * @param fatherName        имя отца
+     * @param yearOfBirthFather год рождения отца
+     * @param motherName        имя матери
+     * @param yearOfBirthMother год рождения матери
      */
     public void addPersonInFamilyTree(Human child,
                                       String fatherName, int yearOfBirthFather,
                                       String motherName, int yearOfBirthMother) {
-        if (!checkPersonInTree(child)) {
+        if (!isPersonInTree(child)) {
             addBranchParentChild(getPersonFromTree(fatherName, yearOfBirthFather), child);
             addBranchParentChild(getPersonFromTree(motherName, yearOfBirthMother), child);
             familyTree.add(child);
@@ -88,27 +95,31 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * Возвращает человека из списка древа
+     * Возвращает человека из списка древа.
      *
-     * @param person человек
-     * @return trees.Human
+     * @param personName  имя человека
+     * @param yearOfBirth год рождения человека
+     * @return объект Human, представляющий найденного человека, или null, если человек не найден
      */
-    public Human getPersonFromTree(String person, int yearOfBirth) {
+    public Human getPersonFromTree(String personName, int yearOfBirth) {
         Year temp = Year.of(yearOfBirth);
         for (Human person_ : familyTree
         ) {
-            if (person_.getNAME().equalsIgnoreCase(person)
+            if (person_.getNAME().equalsIgnoreCase(personName)
                     && person_.getYearOfBirth().equals(temp)) return person_;
         }
         return null;
     }
 
-    private boolean checkPersonInTree(Human person) {
+    private boolean isPersonInTree(Human person) {
         return familyTree.contains(person);
     }
 
     /**
-     * Для вывода родителей
+     * Выводит родителей человека.
+     *
+     * @param childName   имя ребенка
+     * @param yearOfBirth год рождения ребенка
      */
     public void showParents(String childName, int yearOfBirth) {
         Human child = getPersonFromTree(childName, yearOfBirth);
@@ -116,15 +127,18 @@ public class FamilyTree implements Serializable {
             Human father = child.getFather();
             Human mother = child.getMother();
             System.out.println(
-                    "-> родитель: " + ((father != null) ? father.getNAME() : "unknown") + " + " +
-                            "родитель: " + ((mother != null) ? mother.getNAME() : "unknown") + " -> ребенок: " + childName);
+                    "-> Родитель: " + ((father != null) ? father.getNAME() : "неизвестно") + " + " +
+                            "Родитель: " + ((mother != null) ? mother.getNAME() : "неизвестно") + " -> Ребенок: " + childName);
         } else {
             System.out.println(childName + " не найден в семейном древе.");
         }
     }
 
     /**
-     * Метод для отображения всех детей человека
+     * Выводит всех детей человека.
+     *
+     * @param parentName  имя родителя
+     * @param yearOfBirth год рождения родителя
      */
     public void showChildren(String parentName, int yearOfBirth) {
         Human parent = getPersonFromTree(parentName, yearOfBirth);
@@ -144,11 +158,22 @@ public class FamilyTree implements Serializable {
         }
     }
 
-    public void saveFamilyTree(Conservation converter) {
-        converter.saveFile(this);
+    public void showFamilyTree() {
+        if (familyTree.isEmpty()) {
+            System.out.println("Семейное древо пусто.");
+        } else {
+            System.out.println("Семейное древо:");
+            for (Human person : familyTree) {
+                System.out.println(person.getNAME() + " (" + person.getYearOfBirth() + ")");
+            }
+        }
     }
 
-    public static FamilyTree readFile(Conservation converter) {
-        return converter.loadFile();
+    public void saveFamilyTree(Conservation fileHandler) {
+        fileHandler.saveFile(this);
+    }
+
+    public static FamilyTree readFile(Conservation fileHandler) {
+        return fileHandler.loadFile();
     }
 }

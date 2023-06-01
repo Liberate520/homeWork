@@ -1,7 +1,5 @@
 package trees;
 
-import trees.FamilyTree;
-
 public class Trees {
 
     /**
