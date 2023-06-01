@@ -1,6 +1,7 @@
 import trees.Conservation;
 import trees.FamilyTree;
 import trees.FamilyTreeRepository;
+import trees.Human;
 
 import java.io.File;
 import java.util.Arrays;
@@ -10,7 +11,6 @@ import static trees.Trees.ruriks;
 
 public class Main {
     public static void main(String[] args) {
-
 
         ruriks.showParents("Рюрик", 879);
         ruriks.showChildren("Рюрик", 879);
@@ -26,9 +26,7 @@ public class Main {
 
         ruriks.saveFamilyTree(fileHandler);
 
-        FamilyTree loadedTree = new FamilyTree().readFile(fileHandler);
-
-        loadedTree.showFamilyTree();
+        ruriks.readFile(fileHandler);
 
 
     }
