@@ -1,12 +1,13 @@
 import org.xml.sax.SAXNotRecognizedException;
 
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private LocalDate birthdate;
     private LocalDate deathDate;
@@ -40,6 +41,21 @@ public class Human {
         return false;
     }
 
+    public boolean addSister(Human sis){
+        if(!sister.contains(sis)){
+            sister.add(sis);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addBrother(Human bro){
+        if(!brother.contains(bro)){
+            brother.add(bro);
+            return true;
+        }
+        return false;
+    }
     @Override
     public boolean equals(Object obj) {
         if(this == obj){
