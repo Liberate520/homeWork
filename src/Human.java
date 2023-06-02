@@ -1,11 +1,13 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 /** human */
 public class Human implements Serializable{
     private String name;
-    private int yearBirth;
+    private LocalDate birthday;
     private Gender gender;
     private Human mother;
     private Human father;
@@ -17,8 +19,8 @@ public class Human implements Serializable{
     }
 
     /** return human year birth */
-    public int getYearBirth() {
-        return this.yearBirth;
+    public LocalDate getBirthday() {
+        return this.birthday;
     }
 
     /** return human gender */
@@ -26,17 +28,17 @@ public class Human implements Serializable{
         return gender;
     }
 
-    public Human(String name, int yearBirth, Gender gender, Human father, Human mother) {
+    public Human(String name, LocalDate birthday, Gender gender, Human father, Human mother) {
         this.name = name;
-        this.yearBirth = yearBirth;
+        this.birthday = birthday;
         this.gender = gender;
         children = new ArrayList<>();
         this.father = father;
         this.mother = mother;
     }
 
-    public Human(String name, int yearBirth, Gender gender) {
-        this(name, yearBirth, gender, null, null);
+    public Human(String name, LocalDate birthday, Gender gender) {
+        this(name, birthday, gender, null, null);
     }
 
     /** checked contains child in children list */
@@ -92,9 +94,10 @@ public class Human implements Serializable{
     /** representation */
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         StringBuilder builder = new StringBuilder();
         builder.append(name + " ");
-        builder.append("(" + yearBirth + ") ");
+        builder.append("(" + formatter.format(birthday) + ") ");
         builder.append("[" + gender + "] ");
         builder.append(children.size() + " children, ");
         if(father != null){

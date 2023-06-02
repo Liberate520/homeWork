@@ -1,11 +1,12 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Family tree
  */
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable, Iterable<Human>{
     private List<Human> family;
 
     public FamilyTree() {
@@ -54,5 +55,22 @@ public class FamilyTree implements Serializable{
     /** чтение */
     public FamilyTree read(String path, CapableOfRestore restore){
         return (FamilyTree)restore.read(path);
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new Iterator<Human>(){
+            private int index = 0;
+            
+            @Override
+            public boolean hasNext(){
+                return index < family.size() && family.get(index) != null;
+            }
+            
+            @Override
+            public Human next() {
+                return family.get(index++);
+            }
+        };       
     }
 }
