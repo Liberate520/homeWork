@@ -13,14 +13,19 @@ public class Service implements Serializable {
     private FamilyTree<Human> activeTree;
     private List<FamilyTree<Human>> familyTreeList;
     public int id;        
-    Writable writable;
+    private Writable writable;
 
+    public Service(Writable writable) {
+        this.activeTree = new FamilyTree<>();
+        this.writable = writable;
+    }
 
 
     public Service(FamilyTree<Human> tree) {
         this.activeTree = tree;
         familyTreeList = new ArrayList<>();
         familyTreeList.add(tree);
+        
     }
     public Service(){
         this(new FamilyTree<Human>());
@@ -56,13 +61,30 @@ public class Service implements Serializable {
     }
     
     public void save() {
-        writable.save(activeTree);
+        writable.save(this);
     }
 
-    public void read() {
-        writable.read();
-        // FileHandler fileHandler = new FileHandler();
-        // fileHandler.read(filePath);
+    public Service read() {       
+        //writable.read();
+
+        if (writable != null) {
+            if (writable instanceof Service) {
+
+                if (writable.read() == null) {
+
+                    System.out.println("Дерева в файле нет! Создаём новое дерево.");
+                    return new Service(writable);
+                } else {
+                    System.out.println("Дерево загружено из файла.");
+
+                    return (Service) writable.read();
+                }
+            }
+        } else {
+            System.out.println("Файл не загружен!");
+            return null;
+        }
+        return null;
     }
 
     
