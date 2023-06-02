@@ -1,5 +1,10 @@
 package com.example.FamilyTree;
 
+import com.example.FamilyTree.DataSource.FamilyTree;
+import com.example.FamilyTree.DataSource.Gender;
+import com.example.FamilyTree.DataSource.Human;
+import com.example.FamilyTree.DataSource.HumanFamily;
+
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.example.FamilyTree;
+package com.example.FamilyTree.DataSource;
 
 import java.io.Serializable;
 import java.text.ParsePosition;
