@@ -1,3 +1,4 @@
+package filework;
 import java.io.Serializable;
 
 /** умеющий сохранять */
