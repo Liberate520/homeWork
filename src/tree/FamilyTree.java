@@ -1,6 +1,8 @@
 package tree;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -76,5 +78,10 @@ public class FamilyTree implements Serializable, Iterable<Human>{
                 return family.get(index++);
             }
         };       
+    }
+    
+    /** сортировка */
+    public void sort(Comparator<Human> comparator) {
+        Collections.sort(family, comparator);
     }
 }

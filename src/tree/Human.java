@@ -29,6 +29,11 @@ public class Human implements Serializable{
         return gender;
     }
 
+    /** количество детей */
+    public int getChildrenAmount(){
+        return children.size();
+    }
+
     public Human(String name, LocalDate birthday, Gender gender, Human father, Human mother) {
         this.name = name;
         this.birthday = birthday;
@@ -98,14 +103,14 @@ public class Human implements Serializable{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         StringBuilder builder = new StringBuilder();
         builder.append(name + " ");
-        builder.append("(" + formatter.format(birthday) + ") ");
+        builder.append("(" + formatter.format(birthday) + ")\n");
         builder.append("[" + gender + "] ");
-        builder.append(children.size() + " children, ");
+        builder.append(children.size() + " children,\n");
         if(father != null){
-            builder.append(" father: " + father.name + " ");
+            builder.append("father: " + father.name + "\n");
         }
         if(mother != null){
-            builder.append(" mother: " + mother.name + " ");
+            builder.append("mother: " + mother.name + "\n");
         }
         return builder.toString();
     }
