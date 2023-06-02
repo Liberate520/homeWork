@@ -1,10 +1,11 @@
 package com.example.FamilyTree;
 
+import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private Date birthday;
     private Gender gender;
