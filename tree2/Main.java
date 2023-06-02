@@ -1,6 +1,10 @@
 package homeWork.tree2;
 
 
+import homeWork.tree2.familyTree.FamilyTree;
+import homeWork.tree2.fileHandler.FileHandler;
+import homeWork.tree2.human.Human;
+
 import java.time.LocalDate;
 import java.io.*;
 
@@ -17,7 +21,7 @@ public class Main {
         people[6] = new Human("Jack", LocalDate.of(2010, 5, 12));
         people[7] = new Human("Jane", LocalDate.of(2012, 7, 12));
         people[8] = new Human("Alex", LocalDate.of(2014, 5, 15));
-        people[9] = new Human("Soo", LocalDate.of(2019, 5, 30));
+        people[9] = new Human("Soo", LocalDate.of(2017, 5, 30));
 
 
         people[3].setFather(people[1]);
@@ -36,20 +40,30 @@ public class Main {
             familyTree.addPeople(people[i]);
         }
 
+        System.out.println("\n-------------Отрабатывает итератор-----------------------------------------\n");
 
-        FileHandler fileHandler = new FileHandler();
+        for(Human human: familyTree){
+            System.out.println(human.getName() + ": " + human.getAge() + " лет");
+        }
 
 
-        fileHandler.save(familyTree);
-        System.out.println(fileHandler.load().getFamilies());
+        Service service = new Service(familyTree);
+
+        System.out.println("\n-------------Отрабатывает сортировка по имени--------------------------------\n");
+
+        service.sortByName();
+        for(Human human: familyTree){
+            System.out.println(human.getName() + ": " + human.getAge() + " лет");
+        }
+
+        System.out.println("\n-------------Отрабатывает сортировка по возрасту-----------------------------\n");
+
+        service.sortByAge();
+        for(Human human: familyTree){
+            System.out.println(human.getName() + ": " + human.getAge() + " лет");
+        }
 
 
-        String[] familiesArray = fileHandler.load().getFamilies().split("\n");
-        String firstElement = familiesArray[3]; // Выберите 3, т.к. там и родители и дети!
-        System.out.println("Этот тот самый человек!" + " " + familyTree.findPersonByName(familyTree, firstElement));
-        System.out.println("А вот его родители:" + " " + familyTree.findPersonByName(familyTree, firstElement).getFather() +
-                " " + familyTree.findPersonByName(familyTree, firstElement).getMother());
-        System.out.println("А вот его дети:" + " " + familyTree.findPersonByName(familyTree, firstElement).getChildren().toString());
 
 
 

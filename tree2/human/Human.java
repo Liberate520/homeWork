@@ -1,10 +1,10 @@
-package homeWork.tree2;
+package homeWork.tree2.human;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.io.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private LocalDate birthdate;
     private Human mother;
@@ -21,11 +21,7 @@ public class Human implements Serializable {
     }
 
     public Human(String name, LocalDate birthdate) {
-        this.name = name;
-        this.birthdate = birthdate;
-        this.mother = null;
-        this.father = null;
-        this.children = new ArrayList<>();
+        this(name, birthdate, null, null, new ArrayList<>());
     }
 
     public void setMother(Human mother) {
@@ -56,12 +52,21 @@ public class Human implements Serializable {
         return father;
     }
 
+    public int getAge() {
+        int i = LocalDate.now().getYear() - this.getBirthdate().getYear();
+        return i; }
+
     public ArrayList<Human> getChildren() {
         return children;
     }
 
     @Override
     public String toString() {
-        return name;
+        return name + ": " + this.getBirthdate();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }

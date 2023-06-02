@@ -1,5 +1,7 @@
-package homeWork.tree2;
+package homeWork.tree2.fileHandler;
 
+
+import homeWork.tree2.familyTree.FamilyTree;
 
 import java.io.IOException;
 

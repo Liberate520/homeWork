@@ -1,10 +1,14 @@
-package homeWork.tree2;
+package homeWork.tree2.familyTree;
+
+import homeWork.tree2.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.function.Consumer;
 
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Family{
     private ArrayList<Human> families;
 
 
@@ -12,8 +16,13 @@ public class FamilyTree implements Serializable {
         families = new ArrayList<>();
     }
 
+    @Override
     public void addPeople(Human person) {
         families.add(person);
+    }
+
+    public ArrayList<Human> FamilyMembersList(){
+        return families;
     }
 
     public String getFamilies() {
@@ -34,5 +43,8 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(families);
+    }
 }
