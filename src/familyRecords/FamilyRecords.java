@@ -8,22 +8,11 @@ import java.util.List;
 import java.util.Set;
 
 public class FamilyRecords implements Serializable {
-    private Set<Human> people;
     private Set<Family> families;
     public FamilyRecords(){
-        people = new HashSet<>();
         families = new HashSet<>();
     }
 
-    public void addHuman(Human human) {
-        people.add(human);
-    }
-
-    public void addHumans(List<Human> humans) {
-        for (Human human : humans) {
-            this.addHuman(human);
-        }
-    }
 
     public void addHumanToFamily(Human human, Family family) {
         human.addFamily(family);
@@ -35,7 +24,6 @@ public class FamilyRecords implements Serializable {
         if (newFamily == null) newFamily = new Family(name);
         families.add(newFamily);
         if (familyMember != null) {
-            people.add(familyMember);
             addHumanToFamily(familyMember, newFamily);
         }
     }
@@ -50,8 +38,10 @@ public class FamilyRecords implements Serializable {
      * @return First founded human or null
      */
     public Human searchHumanByName(String name) {
-        for (Human human : people) {
-            if (human.getName().equals(name)) return human;
+        for (Family family : families) {
+            for (Human human : family.getMembers()) {
+                if (human.getName().equals(name)) return human;
+            }
         }
         return null;
     }
@@ -140,7 +130,11 @@ public class FamilyRecords implements Serializable {
     }
 
     public Set<Human> getPeople() {
-        return people;
+        Set<Human> result = new HashSet<>();
+        for (Family family : families) {
+            result.addAll(family.getMembers());
+        }
+        return result;
     }
 
     public void save(Convertible converter) {

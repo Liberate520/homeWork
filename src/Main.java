@@ -33,15 +33,12 @@ public class Main {
                 new GregorianCalendar(1812, Calendar.SEPTEMBER, 8),
                 new GregorianCalendar(1863, Calendar.DECEMBER, 8)); // Гончарова -> Пушкина -> Ланская
 
-        // add some Humans to record object
-        records.addHuman(sergey);
-        records.addHumans(Arrays.asList(nadezhda, olga, aleksandr, lev));
 
         // create family trees
         records.addFamily("Пушкины");
         records.addFamily("Гончаровы", natalya);
-        records.addFamily("Павлищевы", records.searchHumanByName("Павлищева Ольга Сергеевна"));
-        records.addFamily("Ланские", natalya);
+        records.addFamily("Павлищевы", olga);
+        records.addFamily("Ланские", records.searchHumanByName("Ланская Наталья Николаевна"));
 
         // get some family objects
         Family pushkins = records.searchFamilyBeName("Пушкины");

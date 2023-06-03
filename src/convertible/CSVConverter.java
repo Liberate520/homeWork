@@ -104,7 +104,6 @@ public class CSVConverter implements Convertible{
                 Calendar deathDate = stringTDate(elements[3]);
                 String[] families = elements[4].split(",");
                 Human human = new Human(fullName, gender, birthDate, deathDate);
-                records.addHuman(human);
                 for (String familyName:families) {
                     records.addFamily(familyName, human);
                 }
