@@ -2,9 +2,10 @@ package tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Tree {
     private List<Human> familyTree;
     private String familyName;
 
@@ -33,6 +34,10 @@ public class FamilyTree implements Serializable {
         }
     }
 
+    public List<Human> getFamilyTree() {
+        return this.familyTree;
+    }
+
     public void outFamily(Human human) {
         familyTree.remove(human);
     }
@@ -50,5 +55,10 @@ public class FamilyTree implements Serializable {
         for (Human human : familyTree)
             st.append(", " + human.getName());
         return familyName + ": (" + st.toString().substring(2) + ")";
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyTree);
     }
 }

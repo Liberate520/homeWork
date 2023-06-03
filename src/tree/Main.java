@@ -4,13 +4,14 @@ import java.io.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import static tree.Gender.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Human Sasha = new Human("Sasha", man);
+  /*      Human Sasha = new Human("Sasha", man);
         Human Masha = new Human("Masha", woman);
         Human Olga = new Human("Olga", woman, Sasha, Masha);
         Human Misha = new Human("Misha", man, Sasha, Masha);
@@ -45,15 +46,35 @@ public class Main {
         Sasha.addChild(Alena);
         System.out.println(Alena.getParent());
         System.out.println(Masha.getChild());
-
+*/
         System.out.println("-----------Тест запись/чтение----------");
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.saveObject(Ivanovi);
+
+        SaveReadable fileHandler = new FileHandler();
+        //      fileHandler.saveObject(Ivanovi);
 
         FamilyTree IvanoviTestLoad = (FamilyTree) fileHandler.loadObject();
 
         System.out.println(IvanoviTestLoad);
         System.out.println(IvanoviTestLoad.findHuman("Sasha").getChild());
+
+        System.out.println();
+
+        Service service = new Service(IvanoviTestLoad);
+
+        service.addHuman("Albert", man);
+        System.out.print("No sort ----> ");
+        System.out.println(IvanoviTestLoad);
+        service.sortByName();
+        System.out.print("Sort by Name ----> ");
+        System.out.println(IvanoviTestLoad);
+
+        service.sortByChild();
+        System.out.print("Sort by count of kids ----> ");
+        System.out.println(IvanoviTestLoad);
+
+        for (Human human : IvanoviTestLoad) {
+            System.out.printf("%s (count kids: %d)\n",human.getName(), human.getChildrenList().size());
+        }
 
     }
 }

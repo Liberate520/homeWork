@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import static tree.Gender.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private Gender gender;
     private Human father;
@@ -61,6 +61,10 @@ public class Human implements Serializable {
         else return name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
     }
 
+    public Set<Human> getChildrenList() {
+        return this.children;
+    }
+
     public String getChild() {
         if (children.isEmpty()) return name + " 'child' ---> нет";
         StringBuilder st = new StringBuilder();
@@ -73,5 +77,10 @@ public class Human implements Serializable {
 @Override
     public String toString() {
         return "Имя: " + name + ", Пол: " + gender;
+    }
+
+    @Override
+    public int compareTo(Human human) {
+        return name.compareTo(human.getName());
     }
 }
