@@ -1,5 +1,7 @@
-package convertible;
+package converter;
 
+import human.*;
+import family.*;
 import familyRecords.*;
 
 import java.io.*;
@@ -7,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class CSVConverter implements Convertible{
+public class CSVConverter implements Converter {
     private final String path;
     private final String csvDelimiter;
     public final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.csv"));
@@ -72,7 +74,7 @@ public class CSVConverter implements Convertible{
                 humanStrings.add(dateToString(human.getBirthDate()));
                 humanStrings.add(dateToString(human.getDeathDate()));
                 humanStrings.add(familiesNames(human.getFamilies()));
-                for (FamilyConnection connection:FamilyConnection.values()) {
+                for (Connection connection: Connection.values()) {
                     humanStrings.add(connectedPeopleNames(human.getRelatedMembers(connection)));
                 }
                 writer.write(String.join(csvDelimiter, humanStrings));
@@ -119,8 +121,8 @@ public class CSVConverter implements Convertible{
         }
         for (Map.Entry<Human, List<String>> entry : humanConnections.entrySet()) {
             Human human = entry.getKey();
-            for (int i=0;i<FamilyConnection.values().length;i++) {
-                FamilyConnection connection = FamilyConnection.values()[i];
+            for (int i = 0; i< Connection.values().length; i++) {
+                Connection connection = Connection.values()[i];
                 String connectedHumanNames = entry.getValue().get(i);
                 for (String humanName:connectedHumanNames.split(",")) {
                     if (!humanName.equals("null")) records.addConnection(human, connection, records.searchHumanByName(humanName));

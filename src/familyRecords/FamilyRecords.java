@@ -1,6 +1,9 @@
 package familyRecords;
 
-import convertible.Convertible;
+import human.Human;
+import human.Connection;
+import converter.Converter;
+import family.Family;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -64,7 +67,7 @@ public class FamilyRecords implements Serializable {
     /**
      * Connect humans to each other
      */
-    public void addConnection(Human humanFrom, FamilyConnection connection, Human humanTo) {
+    public void addConnection(Human humanFrom, Connection connection, Human humanTo) {
         humanFrom.addConnection(humanTo, connection);
         if (connection.opposite() != null) humanTo.addConnection(humanFrom, connection.opposite());
     }
@@ -75,7 +78,7 @@ public class FamilyRecords implements Serializable {
      */
     public void addWife(Family family, Human husband, Human wife) {
         addHumanToFamily(wife, family);
-        addConnection(husband, FamilyConnection.HUSBAND, wife);
+        addConnection(husband, Connection.HUSBAND, wife);
     }
 
     /**
@@ -84,7 +87,7 @@ public class FamilyRecords implements Serializable {
      */
     public void addChild(Family family, Human parent, Human child) {
         addHumanToFamily(child, family);
-        addConnection(parent, FamilyConnection.PARENT, child);
+        addConnection(parent, Connection.PARENT, child);
     }
 
     /**
@@ -105,13 +108,13 @@ public class FamilyRecords implements Serializable {
      */
     public void addParent(Family family, Human child, Human parent) {
         addHumanToFamily(parent, family);
-        addConnection(parent, FamilyConnection.PARENT, child);
+        addConnection(parent, Connection.PARENT, child);
     }
 
     /**
      * return Set of Humans to whom this human is $connection
      */
-    public Set<Human> findRelatedMembers(Human human, FamilyConnection connection) {
+    public Set<Human> findRelatedMembers(Human human, Connection connection) {
         Set<Human> result = new HashSet<>();
         if (human != null) {
             result = human.getRelatedMembers(connection);
@@ -140,13 +143,13 @@ public class FamilyRecords implements Serializable {
         return result;
     }
 
-    public void save(Convertible converter) {
+    public void save(Converter converter) {
         converter.save(this);
     }
-    public static FamilyRecords load(Convertible converter) {
+    public static FamilyRecords load(Converter converter) {
         return converter.load();
     }
-//    public void load(Convertible converter) {
+//    public void load(Converter converter) {
 //        // TODO: modify construction to something like 'this = converter.load();', when/if i understand how to do it
 //        // Not sure if this way to load data is correct
 //        FamilyRecords loadedRecords = converter.load();

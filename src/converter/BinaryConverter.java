@@ -1,11 +1,11 @@
-package convertible;
+package converter;
 
 import familyRecords.FamilyRecords;
 
 import java.io.*;
 import java.util.Arrays;
 
-public class BinaryConverter implements Convertible{
+public class BinaryConverter implements Converter {
     private final String path;
     private final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.bin"));
     private boolean convertSuccess;

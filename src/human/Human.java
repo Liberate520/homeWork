@@ -1,4 +1,6 @@
-package familyRecords;
+package human;
+
+import family.Family;
 
 import java.io.Serializable;
 import java.util.*;
@@ -9,7 +11,7 @@ public class Human implements Serializable {
     private Calendar birthDate;
     private Calendar deathDate;
     private Set<Family> families;
-    private Map<FamilyConnection, Set<Human>> connections;
+    private Map<Connection, Set<Human>> connections;
 
     public Human(String fullName, Gender gender, Calendar birthDate, Calendar deathDate, Family family) {
         this.fullName = fullName;
@@ -18,7 +20,7 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
         this.families = new HashSet<>();
         if (family != null) this.families.add(family);
-        connections = new HashMap<FamilyConnection, Set<Human>>();
+        connections = new HashMap<Connection, Set<Human>>();
     }
     public Human(String fullName, Gender gender, Calendar birthDate, Calendar deathDate) {
         this(fullName, gender, birthDate, deathDate, null);
@@ -44,7 +46,7 @@ public class Human implements Serializable {
     /**
      * Add 'connection' to 'human
      */
-    public void addConnection(Human human, FamilyConnection connection) {
+    public void addConnection(Human human, Connection connection) {
         if (!connections.containsKey(connection)) {
             connections.put(connection, new HashSet<>());
         }
@@ -75,7 +77,7 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
     }
 
-    public Set<Human> getRelatedMembers(FamilyConnection connection) {
+    public Set<Human> getRelatedMembers(Connection connection) {
         return connections.get(connection);
     }
 

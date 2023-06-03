@@ -1,4 +1,4 @@
-package familyRecords;
+package human;
 
 public enum Gender {
     MALE("male"),

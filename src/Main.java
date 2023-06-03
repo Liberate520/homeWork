@@ -1,6 +1,6 @@
-import convertible.BinaryConverter;
-import convertible.CSVConverter;
-import convertible.Convertible;
+import human.*;
+import converter.*;
+import family.*;
 import familyRecords.*;
 
 import java.io.File;
@@ -67,9 +67,9 @@ public class Main {
         */
 
         // export data
-        Convertible binaryConverter = new BinaryConverter();
-        Convertible csvConverter = new CSVConverter();
-        Convertible binaryConverterErrorPath = new BinaryConverter(String.join(File.separator, Arrays.asList("bla", "bla")));
+        Converter binaryConverter = new BinaryConverter();
+        Converter csvConverter = new CSVConverter();
+        Converter binaryConverterErrorPath = new BinaryConverter(String.join(File.separator, Arrays.asList("bla", "bla")));
         records.save(binaryConverter);
         System.out.printf("Результат выгрузки %s\n", binaryConverter.convertStatus());
         records.save(binaryConverterErrorPath);

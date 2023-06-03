@@ -1,4 +1,6 @@
-package familyRecords;
+package family;
+
+import human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
