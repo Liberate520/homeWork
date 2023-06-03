@@ -145,7 +145,7 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      */
     public String getFamiliesString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Family family:families) {
+        for (Family family:this) {
             stringBuilder.append(family);
             stringBuilder.append("\n");
         }

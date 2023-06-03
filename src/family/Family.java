@@ -38,7 +38,7 @@ public class Family implements Serializable, Iterable<Human>, Comparable<Family>
      */
     public String getFamiliesString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human:members) {
+        for (Human human:this) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
