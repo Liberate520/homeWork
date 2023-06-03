@@ -3,10 +3,11 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         DataFileManager datafilemanager = new DataFileManager();
-        //Tree ft = Data.dataEntry();                   // get initial data
+        Tree ft = Data.dataEntry();                   // get initial data
         //datafilemanager.saveData(ft);                 // save data to file
-        Tree ft = (Tree)datafilemanager.loadData();     // load data from file
+        //Tree ft = (Tree)datafilemanager.loadData();     // load data from file
 
+        /*
         System.out.println("\nЛица в генеалогическом дереве:");
         Lib.printList(ft.getPersonList());
         System.out.println();
@@ -21,6 +22,21 @@ public class Main {
         Lib.printList(ft.findPersonByName("Татьяна").getChildren());
         System.out.println("Братьями и сетстрами для лица \"" + ft.findPersonByName("Вика") + "\" являются:");
         Lib.printList(ft.findSiblings(ft.findPersonByName("Вика")));
+        */
+
+        ft.sortByName();
+        System.out.println("Сортировка по имени:");
+        for (Person person : ft) {
+            System.out.println(person);
+        }
+        System.out.println();
+
+        System.out.println("Сортировка по дате рождения:");
+        ft.sortByDOB();
+        for (Person person : ft) {
+            System.out.println(person);
+        }
+
     }
 
 }

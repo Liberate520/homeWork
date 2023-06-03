@@ -1,5 +1,3 @@
-package comparators;
-
 import java.util.Comparator;
 
 public class TreeComparatorByName implements Comparator<Person>{

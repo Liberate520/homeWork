@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable<Person> {
     private List<Person> personList;
 
     public Tree() {
@@ -45,5 +46,18 @@ public class Tree implements Serializable {
         siblingsList.addAll(person.getFather().getChildren());
         siblingsList.removeAll(tempList);
         return siblingsList;
+    }
+
+    public void sortByName(){
+        personList.sort(new TreeComparatorByName());
+    }
+
+    public void sortByDOB(){
+        personList.sort(new TreeComparatorByDOB());
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new TreeIterator(personList);
     }
 }
