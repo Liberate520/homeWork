@@ -1,11 +1,12 @@
 package human;
 
 import family.Family;
+import human.comparator.*;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String fullName;
     private Gender gender;
     private Calendar birthDate;
@@ -117,5 +118,11 @@ public class Human implements Serializable {
             }
         }
         return String.format("%s, %s", fullName, datesString);
+    }
+
+    @Override
+    public int compareTo(Human human) {
+        HumanComparator comparator = new HumanComparatorByName();
+        return comparator.compare(this, human);
     }
 }

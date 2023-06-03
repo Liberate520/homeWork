@@ -2,6 +2,7 @@ import human.*;
 import converter.*;
 import family.*;
 import familyRecords.*;
+import human.comparator.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -87,14 +88,18 @@ public class Main {
         System.out.printf("Результат загрузки из csv %s\n", csvConverter.convertStatus());
 
         */
-        for (Family family : records) {
-            System.out.println(family);
-        }
+        System.out.printf(records.getFamiliesString()); // print families as is
+        System.out.println("-".repeat(10));
+        records.sort(); // sort families by names
+        System.out.printf(records.getFamiliesString());
         System.out.println("-".repeat(10));
 
-        for (Human human : pushkins) {
-            System.out.println(human);
-        }
-
+        System.out.printf(pushkins.getFamiliesString()); // print humans in family as is
+        pushkins.sort(); // sort by name
+        System.out.println("-".repeat(10));
+        System.out.printf(pushkins.getFamiliesString());
+        pushkins.sortByBirthDate(); // sort by birthdate
+        System.out.println("-".repeat(10));
+        System.out.printf(pushkins.getFamiliesString());
     }
 }

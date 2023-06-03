@@ -1,14 +1,12 @@
 package family;
 
 import human.Human;
+import human.comparator.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class Family implements Serializable, Iterable<Human> {
+public class Family implements Serializable, Iterable<Human>, Comparable<Family> {
     private final String familyName;
     private List<Human> members;
 
@@ -35,6 +33,33 @@ public class Family implements Serializable, Iterable<Human> {
         return familyName;
     }
 
+    /**
+     * Build and return string of family members
+     */
+    public String getFamiliesString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Human human:members) {
+            stringBuilder.append(human);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private void sort(HumanComparator comparator) {
+        members.sort(comparator);
+    }
+
+    public void sort() {
+        this.sort(null);
+    }
+    public void sortByName() {
+        this.sort(new HumanComparatorByName());
+    }
+
+    public void sortByBirthDate() {
+        this.sort(new HumanComparatorByBirthDate());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,5 +84,10 @@ public class Family implements Serializable, Iterable<Human> {
     @Override
     public Iterator<Human> iterator() {
         return new HumanIterator(members);
+    }
+
+    @Override
+    public int compareTo(Family otherFamily) {
+        return familyName.compareTo(otherFamily.familyName);
     }
 }

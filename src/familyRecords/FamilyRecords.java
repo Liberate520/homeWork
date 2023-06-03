@@ -140,6 +140,18 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
         return result;
     }
 
+    /**
+     * Build and return string of families
+     */
+    public String getFamiliesString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Family family:families) {
+            stringBuilder.append(family);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+    public void sort() {Collections.sort(families);}
     public void save(Converter converter) {
         converter.save(this);
     }
