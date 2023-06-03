@@ -3,14 +3,15 @@ package familyRecords;
 import convertible.Convertible;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class FamilyRecords implements Serializable {
-    private Set<Family> families;
+    private List<Family> families;
     public FamilyRecords(){
-        families = new HashSet<>();
+        families = new ArrayList<>();
     }
 
 
@@ -21,8 +22,10 @@ public class FamilyRecords implements Serializable {
 
     public void addFamily(String name, Human familyMember) {
         Family newFamily = searchFamilyBeName(name);
-        if (newFamily == null) newFamily = new Family(name);
-        families.add(newFamily);
+        if (newFamily == null) {
+            newFamily = new Family(name);
+            families.add(newFamily);
+        }
         if (familyMember != null) {
             addHumanToFamily(familyMember, newFamily);
         }

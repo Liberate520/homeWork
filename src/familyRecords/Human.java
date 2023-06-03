@@ -1,11 +1,7 @@
 package familyRecords;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class Human implements Serializable {
     private String fullName;
@@ -90,6 +86,19 @@ public class Human implements Serializable {
     private String getFancyDate(Calendar calendar) {
         return String.format("%02d.%02d.%d",
                 calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return Objects.equals(fullName, human.fullName) && gender == human.gender && Objects.equals(birthDate, human.birthDate) && Objects.equals(deathDate, human.deathDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, gender, birthDate, deathDate);
     }
 
     @Override

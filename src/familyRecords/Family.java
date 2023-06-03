@@ -1,27 +1,48 @@
 package familyRecords;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Family implements Serializable {
     private final String familyName;
-    private Set<Human> members;
+    private List<Human> members;
 
     public Family(String name) {
         this.familyName = name;
-        members = new HashSet<>();
+        members = new ArrayList<>();
+    }
+
+    private boolean humanInMembers(Human humanToCheck) {
+        for (Human human : members) {
+            if (humanToCheck.equals(human)) return true;
+        }
+        return false;
     }
 
     public void addHuman(Human human) {
-        members.add(human);
+        if (!humanInMembers(human)) members.add(human);
     }
-    public Set<Human> getMembers() {
+    public List<Human> getMembers() {
         return members;
     }
 
     public String getName() {
         return familyName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(familyName, family.familyName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(familyName);
     }
 
     @Override
