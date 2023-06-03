@@ -6,12 +6,9 @@ import converter.Converter;
 import family.Family;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class FamilyRecords implements Serializable {
+public class FamilyRecords implements Serializable, Iterable<Family> {
     private List<Family> families;
     public FamilyRecords(){
         families = new ArrayList<>();
@@ -156,4 +153,8 @@ public class FamilyRecords implements Serializable {
 //        this.people = loadedRecords.people;
 //        this.families = loadedRecords.families;
 //    }
+    @Override
+    public Iterator<Family> iterator() {
+        return families.iterator();
+    }
 }

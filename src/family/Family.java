@@ -4,10 +4,11 @@ import human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class Family implements Serializable {
+public class Family implements Serializable, Iterable<Human> {
     private final String familyName;
     private List<Human> members;
 
@@ -53,5 +54,10 @@ public class Family implements Serializable {
                 "familyName='" + familyName + '\'' +
                 ", members=" + members +
                 '}';
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(members);
     }
 }

@@ -64,7 +64,6 @@ public class Main {
         System.out.println(records.findConnectedFamilies(pushkins));
 
         System.out.println("-".repeat(10));
-        */
 
         // export data
         Converter binaryConverter = new BinaryConverter();
@@ -86,5 +85,16 @@ public class Main {
         System.out.printf("Результат загрузки %s\n", binaryConverter.convertStatus());
         loadedRecords = FamilyRecords.load(csvConverter);
         System.out.printf("Результат загрузки из csv %s\n", csvConverter.convertStatus());
+
+        */
+        for (Family family : records) {
+            System.out.println(family);
+        }
+        System.out.println("-".repeat(10));
+
+        for (Human human : pushkins) {
+            System.out.println(human);
+        }
+
     }
 }
