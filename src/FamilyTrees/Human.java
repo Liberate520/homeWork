@@ -1,9 +1,10 @@
-package trees;
+package FamilyTrees;
 
 import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Human implements Serializable {
     private String NAME;
@@ -33,6 +34,7 @@ public class Human implements Serializable {
     public String getSex() {
         return sex;
     }
+
     public Human getFather() {
         return father;
     }
@@ -66,8 +68,8 @@ public class Human implements Serializable {
         return "trees.Human{" +
                 "Name='" + NAME + '\'' +
                 ", date of brith=" + yearOfBirth +
-                ", father=" + ((father != null) ? father.getNAME() : "unknown") +
-                ", mother=" + ((mother != null) ? mother.getNAME() : "unknown") +
+                ", father=" + Optional.ofNullable(father).map(Human::getNAME).orElse("unknown") +
+                ", mother=" + Optional.ofNullable(mother).map(Human::getNAME).orElse("unknown") +
                 ", children=" + temp + "}";
 
     }

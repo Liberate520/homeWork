@@ -1,34 +1,37 @@
-package trees;
+package FileManage;
 
+
+import FamilyTrees.FamilyTree;
 
 import java.io.*;
 
 /**
- * Класс, реализующий интерфейс Conservation для сохранения и загрузки семейного древа в файл.
+ * Класс, реализующий интерфейс Saveable для сохранения и загрузки семейного древа в файл.
  */
-public class FamilyTreeRepository implements Conservation {
+public class FileManager implements Savable, Loadable {
+
 
     private String filePath;
 
     /**
-     * Конструктор класса FamilyTreeRepository.
+     * Конструктор класса FileManager.
      *
-     * @param path путь к файлу для сохранения и загрузки семейного древа
+     * @param filePath путь к файлу для сохранения и загрузки семейного древа
      */
-    public FamilyTreeRepository(String path) {
-        this.filePath = path;
+    public FileManager(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
      * Сохраняет семейное древо в файл.
      *
-     * @param tree семейное древо для сохранения
+     * @param
      */
     @Override
-    public void saveFile(FamilyTree tree) {
+    public void saveFile(Object object) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
-            objectOutputStream.writeObject(tree);
+            objectOutputStream.writeObject(object);
         } catch (IOException e) {
             System.out.println("Export error");
         }

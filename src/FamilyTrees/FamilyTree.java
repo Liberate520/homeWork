@@ -1,9 +1,10 @@
-package trees;
+package FamilyTrees;
 
 import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Класс, представляющий семейное древо.
@@ -103,12 +104,11 @@ public class FamilyTree implements Serializable {
      */
     public Human getPersonFromTree(String personName, int yearOfBirth) {
         Year temp = Year.of(yearOfBirth);
-        for (Human person_ : familyTree
-        ) {
-            if (person_.getNAME().equalsIgnoreCase(personName)
-                    && person_.getYearOfBirth().equals(temp)) return person_;
-        }
-        return null;
+        Optional<Human> result =
+                familyTree.stream()
+                        .filter(x -> x.getNAME().equalsIgnoreCase(personName) && x.getYearOfBirth().equals(temp))
+                        .findFirst();
+        return result.orElse(null);
     }
 
     private boolean isPersonInTree(Human person) {
@@ -157,6 +157,7 @@ public class FamilyTree implements Serializable {
             }
         }
     }
+
     /**
      * Отображает семейное древо, печатая имена и годы рождения всех людей в древе.
      * Если древо пусто, выводит сообщение о пустом древе.
@@ -171,23 +172,4 @@ public class FamilyTree implements Serializable {
             }
         }
     }
-    /**
-     * Сохраняет текущее семейное древо в файл, используя указанный обработчик файлов.
-     *
-     * @param fileHandler Обработчик файлов, реализующий интерфейс Conservation.
-     */
-    public void saveFamilyTree(Conservation fileHandler) {
-        fileHandler.saveFile(this);
-    }
-
-    /**
-     * Загружает семейное древо из файла, используя указанный обработчик файлов.
-     *
-     * @param fileHandler Обработчик файлов, реализующий интерфейс Conservation.
-     * @return Загруженное семейное древо.
-     */
-    public FamilyTree readFile(Conservation fileHandler) {
-        return fileHandler.loadFile();
-    }
-
 }

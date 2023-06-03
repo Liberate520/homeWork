@@ -1,4 +1,4 @@
-package trees;
+package FamilyTrees;
 
 public class Trees {
 
