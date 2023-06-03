@@ -39,7 +39,7 @@ public class Service {
 		return true;
 	}
 	public void saveFamilyGroup(String str) {
-		FileHandler save = new FileHandler();
+		Saveable save = new FileHandler();
 		save.saveFile(this.familyGroup, str);
 	}
 	
