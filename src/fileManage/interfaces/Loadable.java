@@ -1,4 +1,4 @@
-package FileManage;
+package fileManage.interfaces;
 
 public interface Loadable {
     /**

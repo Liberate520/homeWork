@@ -1,9 +1,12 @@
-package FileManage;
+package fileManage;
 
 
-import FamilyTrees.FamilyTree;
+import familyTrees.FamilyTree;
+import fileManage.interfaces.Loadable;
+import fileManage.interfaces.Savable;
 
 import java.io.*;
+import java.nio.file.Path;
 
 /**
  * Класс, реализующий интерфейс Saveable для сохранения и загрузки семейного древа в файл.
@@ -11,25 +14,26 @@ import java.io.*;
 public class FileManager implements Savable, Loadable {
 
 
-    private String filePath;
+    private Path filePath;
 
     /**
      * Конструктор класса FileManager.
      *
      * @param filePath путь к файлу для сохранения и загрузки семейного древа
      */
-    public FileManager(String filePath) {
+    public FileManager(Path filePath) {
         this.filePath = filePath;
     }
 
+
     /**
-     * Сохраняет семейное древо в файл.
+     * Сохраняет объект в файл
      *
      * @param
      */
     @Override
     public void saveFile(Object object) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath.toFile());
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {
@@ -38,13 +42,13 @@ public class FileManager implements Savable, Loadable {
     }
 
     /**
-     * Загружает семейное древо из файла.
+     * Загружает объект из файла.
      *
-     * @return загруженное семейное древо
+     * @return загруженный объект
      */
     @Override
     public FamilyTree loadFile() {
-        try (FileInputStream fileInputStream = new FileInputStream(filePath);
+        try (FileInputStream fileInputStream = new FileInputStream(filePath.toFile());
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             return (FamilyTree) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {

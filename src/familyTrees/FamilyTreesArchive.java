@@ -1,9 +1,11 @@
-package FamilyTrees;
+package familyTrees;
 
-public class Trees {
+import human.Human;
+
+public class FamilyTreesArchive {
 
     /**
-     * trees.Trees of Rurik dynasty
+     * trees.FamilyTreesArchive of Rurik dynasty
      */
     public static FamilyTree ruriks = new FamilyTree() {
         {

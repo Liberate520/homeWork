@@ -1,4 +1,4 @@
-package FamilyTrees;
+package human;
 
 import java.io.Serializable;
 import java.time.Year;

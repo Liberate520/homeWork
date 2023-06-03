@@ -1,4 +1,6 @@
-package FamilyTrees;
+package familyTrees;
+
+import human.Human;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -17,6 +19,10 @@ public class FamilyTree implements Serializable {
      */
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
+    }
+
+    public List<Human> getFamilyTree() {
+        return familyTree;
     }
 
     /**
@@ -47,6 +53,7 @@ public class FamilyTree implements Serializable {
      * @param child
      */
     private void addChildBranch(Human parent, Human child) {
+
         if (!parent.getChildren().contains(child)) {
             parent.addChild((child));
         }
@@ -172,4 +179,8 @@ public class FamilyTree implements Serializable {
             }
         }
     }
+
+
+
+
 }

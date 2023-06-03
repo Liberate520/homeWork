@@ -1,9 +1,8 @@
-import FileManage.FileManager;
+import fileManage.FileManager;
 
-import java.io.File;
-import java.util.Arrays;
+import java.nio.file.Paths;
 
-import static FamilyTrees.Trees.ruriks;
+import static familyTrees.FamilyTreesArchive.ruriks;
 
 /**
  * Реализовать интерфейс Iterable для дерева.
@@ -13,15 +12,14 @@ import static FamilyTrees.Trees.ruriks;
 public class Main {
     public static void main(String[] args) {
 
+        Service service = new Service(ruriks);
 
-        FileManager fileHandler = new FileManager(String.join(File.separator, Arrays.asList("data", "ruriksTree.bin")));
+        service.sortTreeByDateBirth();
 
-        fileHandler.saveFile(ruriks); //Сохранение в файл .bin
+        FileManager filePath = new FileManager(Paths.get("data","ruriksTree.bin"));
 
-        ruriks = fileHandler.loadFile(); //Загрузка из файла .bin
-
-        ruriks.showFamilyTree(); // Отображение древа
-
+        filePath.saveFile(ruriks); //Сохранение в файл .bin
+        ruriks = filePath.loadFile(); //Загрузка из файла .bin
 
     }
 }
