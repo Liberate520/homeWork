@@ -1,17 +1,22 @@
 package familyTrees;
 
+import familyTrees.comparators.ByDateBirth;
+import familyTrees.comparators.NameAlphabetical;
+import familyTrees.comparators.NameLength;
 import human.Human;
+import human.iterators.HumanIterator;
 
 import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Класс, представляющий семейное древо.
  */
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyTree;
 
     /**
@@ -44,7 +49,6 @@ public class FamilyTree implements Serializable {
             }
         }
     }
-
 
     /**
      * Проверяет есть ли у родителя нужный ребенок, если нет, добавляет его в список.
@@ -118,6 +122,12 @@ public class FamilyTree implements Serializable {
         return result.orElse(null);
     }
 
+    /**
+     * Проверяет есть ли человек в древе
+     *
+     * @param person
+     * @return
+     */
     private boolean isPersonInTree(Human person) {
         return familyTree.contains(person);
     }
@@ -125,20 +135,17 @@ public class FamilyTree implements Serializable {
     /**
      * Выводит родителей человека.
      *
-     * @param childName   имя ребенка
+     * @param parentName  имя родителя
      * @param yearOfBirth год рождения ребенка
      */
-    public void showParents(String childName, int yearOfBirth) {
-        Human child = getPersonFromTree(childName, yearOfBirth);
+    public List<Human> getParents(String parentName, int yearOfBirth) {
+        Human child = getPersonFromTree(parentName, yearOfBirth);
+        List<Human> temp = new ArrayList<>();
         if (child != null) {
-            Human father = child.getFather();
-            Human mother = child.getMother();
-            System.out.println(
-                    "-> Родитель: " + ((father != null) ? father.getNAME() : "неизвестно") + " + " +
-                            "Родитель: " + ((mother != null) ? mother.getNAME() : "неизвестно") + " -> Ребенок: " + childName);
-        } else {
-            System.out.println(childName + " не найден в семейном древе.");
-        }
+            temp.add(child.getFather());
+            temp.add(child.getMother());
+            return temp;
+        } else return temp;
     }
 
     /**
@@ -147,40 +154,41 @@ public class FamilyTree implements Serializable {
      * @param parentName  имя родителя
      * @param yearOfBirth год рождения родителя
      */
-    public void showChildren(String parentName, int yearOfBirth) {
-        Human parent = getPersonFromTree(parentName, yearOfBirth);
-        if (parent != null) {
-            List<Human> children = parent.getChildren();
-            if (!children.isEmpty()) {
-                System.out.print("-> родитель: " + parent.getNAME());
-
-                System.out.print(" -> Дети: ");
-                for (Human child : children) {
-                    System.out.printf("%s%s ", "·", child.getNAME());
-                }
-                System.out.println();
-            } else {
-                System.out.println(parentName + " " + yearOfBirth + " не имеет детей.");
-            }
-        }
+    public List<Human> getChildren(String parentName, int yearOfBirth) {
+        return Optional.ofNullable(getPersonFromTree(parentName, yearOfBirth))
+                .map(Human::getChildren).orElse(null);
     }
 
     /**
      * Отображает семейное древо, печатая имена и годы рождения всех людей в древе.
      * Если древо пусто, выводит сообщение о пустом древе.
      */
-    public void showFamilyTree() {
-        if (familyTree.isEmpty()) {
-            System.out.println("Семейное древо пусто.");
-        } else {
-            System.out.println("Семейное древо:");
-            for (Human person : familyTree) {
-                System.out.println(person.getNAME() + " (" + person.getYearOfBirth() + ")");
-            }
-        }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyTree);
     }
 
+    /**
+     * Сортирует древо по дате рождения
+     */
+    public void sortTreeByDateBirth() {
+        familyTree.sort(new ByDateBirth());
+    }
 
+    /**
+     * Сортирует древо в алфавитном порядке
+     */
+    public void sortTreeByAlphabeticalOrder() {
 
+        familyTree.sort(new NameAlphabetical());
+    }
+
+    /**
+     * Сортирует древо по длине имени
+     */
+    public void sortTreeByNameLength() {
+        familyTree.sort(new NameLength());
+    }
 
 }
