@@ -1,4 +1,5 @@
 package tree;
 
-public class Gender {
+public enum Gender {
+    Male, Female
 }

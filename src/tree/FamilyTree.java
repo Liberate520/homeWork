@@ -1,59 +1,95 @@
 package tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
     private final List<Human> humanList;
 
 
     public FamilyTree() {
-        humanList=new ArrayList<>();
+        this(new ArrayList<>());
     }
 
-    public  void addHuman(Human human){
-        humanList.add(human);
-
-
-
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
     }
 
-        public Human findHumanByName(String name) {
-            for (Human human : humanList) {
-                if (human.getName().equalsIgnoreCase(name)) {
-                    return human;
-                }
-            }return  null;
+    public boolean add(Human human) {
+        if (human == null) {
+            return false;
         }
+        if (!humanList.contains(human)) {
+            humanList.add(human);
+            if (human.getFather() != null) {
+                human.getFather().addChild(human);
+            }
+            if (human.getMother() != null) {
+                human.getMother().addChild(human);
+            }
+            return true;
 
-    public List<Human> childrenList;
-
-    public List<Human> childrenList(Human human) {
-        childrenList = new ArrayList<>();
-        childrenList.add(human);
-        return childrenList;
-    }
-
-    public void addChild(Human human) {
-        childrenList.add(human);
-
-    }
-
-    public String getHumanList() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: humanList){
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
         }
-        return stringBuilder.toString();
+        return false;
+
     }
 
-    @Override
-    public String toString() {
-        return "FamilyTree{" +
-                "humanList=" + humanList +
-                '}';
+    public String getInfoTree() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("В дереве ");
+        sb.append(humanList.size());
+        sb.append(" объектов : \n");
+        for (Human human : humanList) {
+            sb.append((human.getInfoHuman()));
+            sb.append("\n");
+
+        }
+        return sb.toString();
     }
+
+
+    public Human findHumanByName(String name) {
+        for (Human human : humanList) {
+            if (human.getName().equalsIgnoreCase(name)) {
+                return human;
+            }
+        }
+        return null;
+
+    }
+
+    public Human findHumanByFIO(String surName, String name, String secondName) {
+        for (Human human : humanList) {
+            if (human.getInfoName().equalsIgnoreCase(surName + name + secondName)) {
+                return human;
+            }
+        }
+        return null;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,29 +1,26 @@
 package tree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.time.LocalDate;
+
 
 public class Main {
-    public static void main(String[] args) {
-        Human human0 = new Human();
-        Human human1 = new Human("Eryomin", "Mark", "Aleksandrovich", human0, human0);
-        Human human2 = new Human("Eryomina", "Eugeniya", "Anatolievna", human0, human0);
-        Human human3 = new Human("Eryomina", "Yaroslava", "Markovna", human1, human2);
-        Human human4 = new Human("Eryomina", "Aleksandra", "Markovna", human1, human2);
-
-
+    public static void main(String[] args) throws IOException {
         FamilyTree familyTree = new FamilyTree();
-        familyTree.addHuman(human1);
-        familyTree.addHuman(human2);
-        familyTree.addHuman(human3);
-        familyTree.addHuman(human4);
 
-        System.out.println(familyTree.getHumanList());
+        familyTree.add(new Human("Eryomin", "Mark", "Aleksandrovich", Gender.Male, LocalDate.of(1987, 4, 18)));
+        familyTree.add(new Human("Eryomina", "Eugeniya", "Anatolievna", Gender.Female, LocalDate.of(1988, 12, 15)));
+        familyTree.add(new Human("Eryomina", "Yaroslava", "Markovna", Gender.Female, familyTree.findHumanByName("Mark"), familyTree.findHumanByName("Eugeniya")));
+        familyTree.add(new Human("Eryomina", "Aleksandra", "Markovna", Gender.Female, familyTree.findHumanByName("Mark"), familyTree.findHumanByFIO("Eryomina", "Eugeniya", "Anatolievna")));
+        System.out.println(familyTree.getInfoTree());
         System.out.println();
-        System.out.println(familyTree.findHumanByName("mark"));
+        System.out.println(familyTree.findHumanByName("mark").getInfoHuman());
         System.out.println();
-        System.out.println(familyTree);
-
+        System.out.println(familyTree.findHumanByName("eugeniya").getInfoHuman());
+        System.out.println(familyTree.findHumanByName("Aleksandra").getInfoName());
+        System.out.println(familyTree.findHumanByName("Yaroslava").getFatherInfo());
+        new FileHandler().save("FamilyTree.bin", familyTree);
+        new FileHandler().load("FamilyTree.bin", familyTree);
 
     }
 }
