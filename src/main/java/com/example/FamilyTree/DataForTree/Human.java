@@ -1,4 +1,4 @@
-package com.example.FamilyTree.DataSource;
+package com.example.FamilyTree.DataForTree;
 
 import java.io.Serializable;
 import java.text.ParsePosition;
@@ -24,9 +24,14 @@ public class Human implements Serializable {
         return birthday;
     }
 
+    public String getName() {
+        return name;
+    }
     @Override
     public String toString() {
         SimpleDateFormat simpDateForm = new SimpleDateFormat("dd MMM yyyy");
         return name + " (birthday - " + simpDateForm.format(birthday)+")";
     }
+
+
 }
