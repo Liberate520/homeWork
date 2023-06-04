@@ -1,8 +1,11 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-class GenealogicalTree {
+class GenealogicalTree implements Serializable {
+
+
     private List<Person> people;
     private List<Relationship> relationships;
 
@@ -17,6 +20,13 @@ class GenealogicalTree {
 
     public void addRelationship(Relationship relationship) {
         relationships.add(relationship);
+        relationship.getFather().addRelationship(relationship);
+        relationship.getMother().addRelationship(relationship);
+        relationship.getHusband().addRelationship(relationship);
+        relationship.getWife().addRelationship(relationship);
+        for (Person child : relationship.getChildren()) {
+            child.addRelationship(relationship);
+        }
     }
 
     public List<Person> getAncestors(Person person) {
@@ -28,8 +38,10 @@ class GenealogicalTree {
     private void findAncestors(Person person, List<Person> ancestors) {
         for (Relationship relationship : relationships) {
             if (relationship.getChildren().contains(person)) {
-                ancestors.add(relationship.getParent());
-                findAncestors(relationship.getParent(), ancestors);
+                ancestors.add(relationship.getFather());
+                ancestors.add(relationship.getMother());
+                findAncestors(relationship.getFather(), ancestors);
+                findAncestors(relationship.getMother(), ancestors);
                 break;
             }
         }
@@ -43,7 +55,7 @@ class GenealogicalTree {
 
     private void findDescendants(Person person, List<Person> descendants) {
         for (Relationship relationship : relationships) {
-            if (relationship.getParent() == person) {
+            if (relationship.getFather() == person || relationship.getMother() == person) {
                 descendants.addAll(relationship.getChildren());
                 for (Person child : relationship.getChildren()) {
                     findDescendants(child, descendants);
@@ -55,6 +67,7 @@ class GenealogicalTree {
     public List<Person> getPeople() {
         return people;
     }
+
     public void displayAllPeople() {
         System.out.println("All People in the Genealogical Tree:");
         for (Person person : people) {
@@ -62,4 +75,20 @@ class GenealogicalTree {
         }
     }
 
+    public List<Relationship> findPersonRelationships(Person person) {
+        List<Relationship> personRelationships = new ArrayList<>();
+
+        for (Relationship relationship : relationships) {
+            if (relationship.getFather() == person || relationship.getMother() == person || relationship.getChildren().contains(person)) {
+                personRelationships.add(relationship);
+            }
+        }
+
+        return personRelationships;
+    }
+
 }
+
+
+
+

@@ -1,27 +1,43 @@
+
+import java.io.Serializable;
 import java.util.List;
 
-class Relationship {
-    private Person spouse;
-    private Person parent;
+public class Relationship implements Serializable {
+    private Person father;
+    private Person mother;
+    private Person husband;
+    private Person wife;
     private List<Person> children;
 
-    public Relationship(Person spouse, Person parent, List<Person> children) {
-        this.spouse = spouse;
-        this.parent = parent;
+    public Relationship(Person father, Person mother, Person husband, Person wife, List<Person> children) {
+        this.father = father;
+        this.mother = mother;
+        this.husband = husband;
+        this.wife = wife;
         this.children = children;
     }
 
-    public Person getSpouse() {
-        return spouse;
+    public Person getFather() {
+        return father;
     }
 
-    public Person getParent() {
-        return parent;
+    public Person getMother() {
+        return mother;
+    }
+
+    public Person getHusband() {
+        return husband;
+    }
+
+    public Person getWife() {
+        return wife;
     }
 
     public List<Person> getChildren() {
         return children;
     }
 
-
+    public void addChild(Person child) {
+        children.add(child);
+    }
 }
