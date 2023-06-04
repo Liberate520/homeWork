@@ -1,4 +1,6 @@
-package tree;
+package tree.familyTree;
+
+import tree.human.Human;
 
 import java.util.List;
 

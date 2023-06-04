@@ -1,4 +1,7 @@
-package tree;
+package tree.familyTree;
+
+import tree.familyTree.iterators.HumanIterator;
+import tree.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;

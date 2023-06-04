@@ -1,9 +1,9 @@
-package tree;
+package tree.human;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import static tree.Gender.*;
+import static tree.human.Gender.*;
 
 public class Human implements Serializable, Comparable<Human> {
     private String name;

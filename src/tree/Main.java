@@ -1,17 +1,21 @@
 package tree;
 
+import tree.familyTree.FamilyTree;
+import tree.handler.FileHandler;
+import tree.handler.SaveReadable;
+import tree.human.Human;
+
 import java.io.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import static tree.Gender.*;
+import static tree.human.Gender.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-  /*      Human Sasha = new Human("Sasha", man);
+        Human Sasha = new Human("Sasha", man);
         Human Masha = new Human("Masha", woman);
         Human Olga = new Human("Olga", woman, Sasha, Masha);
         Human Misha = new Human("Misha", man, Sasha, Masha);
@@ -46,11 +50,11 @@ public class Main {
         Sasha.addChild(Alena);
         System.out.println(Alena.getParent());
         System.out.println(Masha.getChild());
-*/
+
         System.out.println("-----------Тест запись/чтение----------");
 
         SaveReadable fileHandler = new FileHandler();
-        //      fileHandler.saveObject(Ivanovi);
+        fileHandler.saveObject(Ivanovi);
 
         FamilyTree IvanoviTestLoad = (FamilyTree) fileHandler.loadObject();
 
@@ -75,6 +79,5 @@ public class Main {
         for (Human human : IvanoviTestLoad) {
             System.out.printf("%s (count kids: %d)\n",human.getName(), human.getChildrenList().size());
         }
-
     }
 }

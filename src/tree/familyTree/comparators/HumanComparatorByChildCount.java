@@ -1,4 +1,6 @@
-package tree;
+package tree.familyTree.comparators;
+
+import tree.human.Human;
 
 import java.util.Comparator;
 
