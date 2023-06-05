@@ -1,4 +1,4 @@
-package Tree;
+package tree;
 
 public enum Gender {
     Male,
