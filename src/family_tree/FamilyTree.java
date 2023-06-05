@@ -1,8 +1,12 @@
+package family_tree;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public FamilyTree() {
@@ -39,12 +43,20 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    public String getHumanList() {
-        StringBuilder sb = new StringBuilder();
-        for (Human human : humanList) {
-            sb.append(human.getInfo());
-            sb.append("\n");
-        }
-        return sb.toString();
+    public void sortByFirstName() {
+        humanList.sort(new HumanComparatorByFirstName());
+    }
+
+    public void sortByLastName() {
+        humanList.sort(new HumanComparatorByLastName());
+    }
+
+    public void sortByChildrenCount() {
+        humanList.sort(new HumanComparatorByChildrenCount());
+        Collections.reverse(humanList);
+    }
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
     }
 }
