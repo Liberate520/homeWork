@@ -14,10 +14,10 @@ public class FamilyTree {
         this.family.add(human);
     }
 
-    public List<Human> findChildrens(String name){
+    public List<Human> findChildren(String name){
         for (Human human: family){
             if (human.getName().equalsIgnoreCase(name)){
-                return human.getChildrens();
+                return human.getChildren();
             }
         }
         return null;

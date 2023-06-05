@@ -8,29 +8,32 @@ public class Human {
     private String name;
     private String surname;
     private LocalDate birthdate;
+    private LocalDate deathdate;
     private Gender sex;
     private Human father;
     private Human mother;
-    private List<Human> childrens;
+    private List<Human> children;
 
     public void setFather(Human father) {
         this.father = father;
+        father.addChild(this);
     }
 
     public void setMother(Human mother) {
         this.mother = mother;
+        mother.addChild(this);
     }
 
-    public void addChildrens(Human children) {
-        this.childrens.add(children);
+    public void addChild(Human children) {
+        this.children.add(children);
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Human> getChildrens() {
-        return childrens;
+    public List<Human> getChildren() {
+        return children;
     }
 
     public Human (String name, String surname, LocalDate birthdate, Gender sex){
@@ -38,7 +41,7 @@ public class Human {
         this.surname = surname;
         this.birthdate = birthdate;
         this.sex = sex;
-        this.childrens = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
     @Override
