@@ -2,13 +2,13 @@ package filework;
 import java.io.*;
 
 /** сериализация и восстановление сериализуемых объектов */
-public class FileHandler implements CapableOfPreserving, CapableOfRestore {
+public class FileHandler<T extends Serializable> implements CapableOfPreserving<T>, CapableOfRestore<T> {
 
     @Override
-    public Serializable read(String path) {
+    public T read(String path) {
         try {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(path));
-            Serializable object = (Serializable) stream.readObject();
+            T object = (T)stream.readObject();
             stream.close();
             return object;
         } catch (Exception e) {
@@ -18,7 +18,7 @@ public class FileHandler implements CapableOfPreserving, CapableOfRestore {
     }
 
     @Override
-    public void save(String path, Serializable object) {
+    public void save(String path, T object) {
         try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(path))) {
             stream.writeObject(object);
             stream.flush();

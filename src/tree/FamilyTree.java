@@ -1,5 +1,6 @@
 package tree;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,34 +11,36 @@ import comparers.ComparatorFamilyByChildrenAmount;
 import comparers.ComparatorFamilyByName;
 import filework.CapableOfPreserving;
 import filework.CapableOfRestore;
+import members.Member;
+
 
 /**
  * Family tree
  */
-public class FamilyTree implements Serializable, Iterable<Human>{
-    private List<Human> family;
+public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
+    private List<T> family;
 
     public FamilyTree() {
         family = new ArrayList<>();
     }
 
     /** added new member */
-    public void addNewMember(Human human) {
-        if(!contains(human)){
-            family.add(human);
-            if(human.getFather() != null){
-                human.getFather().addChild(human);
+    public void addNewMember(T member) {
+        if(!contains(member)){
+            family.add(member);
+            if(member.getFather() != null){
+                member.getFather().addChild(member);
             }
-            if(human.getMother() != null){
-                human.getMother().addChild(human);
+            if(member.getMother() != null){
+                member.getMother().addChild(member);
             }
         }
     }
 
     /** checked contains member in family list */
-    private Boolean contains(Human search) {
-        for (Human human : family) {
-            if (human.equals(search)) {
+    private Boolean contains(Member search) {
+        for (Member member : family) {
+            if (member.equals(search)) {
                 return true;
             }
         }
@@ -48,45 +51,45 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (Human human : family) {
-            builder.append(human);
+        for (Member member : family) {
+            builder.append(member);
             builder.append("\n");
         }
         return builder.toString();
     }
 
     /** сохранение */
-    public void save(String path, CapableOfPreserving preserve){
+    public void save(String path, CapableOfPreserving<FamilyTree<T>> preserve){
         preserve.save(path, this);
     }
-
+    
     /** чтение */
-    public FamilyTree read(String path, CapableOfRestore restore){
-        return (FamilyTree)restore.read(path);
+    public FamilyTree<T> read(String path, CapableOfRestore<FamilyTree<T>> restore){
+        return (FamilyTree<T>)restore.read(path);
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return new FamilyTreeIterator();       
     }
 
     /** сортировка по имени*/
     public void sortByName() {
-        Collections.sort(family, new ComparatorFamilyByName());
+        Collections.sort(family, new ComparatorFamilyByName<T>());
     }
 
     /** сортировка дню рождения*/
      public void sortByBirthday() {
-        Collections.sort(family, new ComparatorFamilyByBirthDay());
+        Collections.sort(family, new ComparatorFamilyByBirthDay<T>());
     }
 
     /** сортировка по количеству детей*/
      public void sortByChildrenAmount() {
-        Collections.sort(family, new ComparatorFamilyByChildrenAmount());
+        Collections.sort(family, new ComparatorFamilyByChildrenAmount<T>());
     }
 
 
-    class FamilyTreeIterator implements Iterator<Human>{
+    class FamilyTreeIterator implements Iterator<T>{
         private int index = 0;
             
         @Override
@@ -95,7 +98,7 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         }
         
         @Override
-        public Human next() {
+        public T next() {
             return family.get(index++);
         }
     }

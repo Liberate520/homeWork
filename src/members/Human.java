@@ -1,4 +1,4 @@
-package tree;
+package members;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** human */
-public class Human implements Serializable{
+public class Human implements Serializable, Member{
     private String name;
     private LocalDate birthday;
     private Gender gender;
-    private Human mother;
-    private Human father;
-    private List<Human> children;
+    private Member mother;
+    private Member father;
+    private List<Member> children;
 
     /** return human name */
     public String getName() {
@@ -48,9 +48,9 @@ public class Human implements Serializable{
     }
 
     /** checked contains child in children list */
-    public Boolean ContainsChild(Human child){
-        for (Human human : children) {
-            if(human.equals(child)){
+    public Boolean ContainsChild(Member child){
+        for (Member member : children) {
+            if(member.equals(child)){
                 return true;
             }
         }
@@ -58,43 +58,23 @@ public class Human implements Serializable{
     }
 
     /** returned mother */
-    public Human getMother() {
+    public Member getMother() {
         return mother;
     }
 
     /** returned father */
-    public Human getFather() {
+    public Member getFather() {
         return father;
     }
 
-    /** set father */
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    /** set mother */
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
     /** added child in children list */
-    public Boolean addChild(Human child) {
+    public Boolean addChild(Member child) {
 
         if(!ContainsChild(child)){
             children.add(child);
             return true;
         }
         return false;
-    }
-
-    /** returned string representation of children list */
-    public String getStringPresentationChildren() {
-        StringBuilder builder = new StringBuilder();
-        for (Human child : children) {
-            builder.append(child);
-            builder.append("\n");
-        }
-        return builder.toString();
     }
 
     /** representation */
@@ -107,13 +87,11 @@ public class Human implements Serializable{
         builder.append("[" + gender + "] ");
         builder.append(children.size() + " children,\n");
         if(father != null){
-            builder.append("father: " + father.name + "\n");
+            builder.append("father: " + father.getName() + "\n");
         }
         if(mother != null){
-            builder.append("mother: " + mother.name + "\n");
+            builder.append("mother: " + mother.getName()  + "\n");
         }
         return builder.toString();
     }
-
-
 }

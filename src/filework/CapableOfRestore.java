@@ -2,7 +2,7 @@ package filework;
 import java.io.Serializable;
 
 /** умеющий восстанавливать */
-public interface CapableOfRestore {
+public interface CapableOfRestore<T extends Serializable> {
     /** чтение */
-    Serializable read(String path);
+    T read(String path);
 }

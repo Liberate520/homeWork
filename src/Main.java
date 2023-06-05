@@ -3,9 +3,10 @@ import java.time.LocalDate;
 import filework.CapableOfPreserving;
 import filework.CapableOfRestore;
 import filework.FileHandler;
+import members.Gender;
+import members.Human;
+import members.Member;
 import tree.FamilyTree;
-import tree.Gender;
-import tree.Human;
 
 /**
  * Main
@@ -15,47 +16,47 @@ public class Main implements Serializable {
     public static final String PATH = "family.txt";
 
     public static void main(String[] args) {
-        FamilyTree family = restore();
+        FamilyTree<Member> family = restore();
         System.out.println("ORIGINAL:");
-        for (Human human : family) {
+        for (Member human : family) {
             System.out.println(human);
         }
 
         System.out.println("SORTED BY NAME:");
         family.sortByName();
-        for (Human human : family) {
+        for (Member human : family) {
             System.out.println(human);
         }
 
         System.out.println("SORTED BY BIRTHDAY:");
         family.sortByBirthday();
-        for (Human human : family) {
+        for (Member human : family) {
             System.out.println(human);
         }
 
         System.out.println("SORTED BY CHILDREN AMOUNT:");
         family.sortByChildrenAmount();
-        for (Human human : family) {
+        for (Member human : family) {
             System.out.println(human);
         }
 
         serialize(family);
     }
 
-    /** десериализация */
-    private static FamilyTree restore() {
-        CapableOfRestore restorer = new FileHandler();
-        return (new FamilyTree()).read(PATH, restorer);
+    /** Десериализация  */
+    private static FamilyTree<Member> restore() {
+        CapableOfRestore<FamilyTree<Member>> restorer = new FileHandler<FamilyTree<Member>>();
+        return (new FamilyTree<Member>()).read(PATH, restorer);
     }
 
     /** сериализация */
-    private static void serialize(FamilyTree family) {
-        CapableOfPreserving preserver = new FileHandler();
+    private static void serialize(FamilyTree<Member> family) {
+        CapableOfPreserving<FamilyTree<Member>> preserver = new FileHandler<FamilyTree<Member>>();
         family.save(PATH, preserver);
     }
 
     /** заполнения дерева */
-    public static void treeFilling(FamilyTree family) {
+    public static void treeFilling(FamilyTree<Member> family) {
         Human ancestor1 = new Human("John Johnson", LocalDate.of(1910, 1, 2), Gender.Male);
         Human ancestor2 = new Human("Eliza Johnson", LocalDate.of(1909, 2, 4), Gender.Female);
         Human ancestor3 = new Human("Donald Ferguson", LocalDate.of(1908, 3, 6), Gender.Male);
