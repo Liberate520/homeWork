@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class FileHandler implements Movable{
+public class FileHandler implements Savable {
 
     public void save(Object object, String filename) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(

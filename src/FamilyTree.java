@@ -1,9 +1,10 @@
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Tree {
     private List<Human> humanList;
 
     public FamilyTree(){
@@ -13,6 +14,7 @@ public class FamilyTree implements Serializable {
     public void addHuman(Human human){
         humanList.add(human);
     }
+
 
     public Human getByName(String name){
         for(Human item : humanList){
@@ -61,4 +63,20 @@ public class FamilyTree implements Serializable {
         return printer;
     }
 
+    public List<Human> getHumanList() {
+        return humanList;
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByBirthDate(){
+        humanList.sort(new HumanComparatorByBirthDate());
+    }
 }
