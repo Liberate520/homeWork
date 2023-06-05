@@ -1,8 +1,5 @@
 import java.io.Serializable;
 import java.time.LocalDate;
-import comparers.ComparatorFamilyByBirthDate;
-import comparers.ComparatorFamilyByChildrenAmount;
-import comparers.ComparatorFamilyByName;
 import filework.CapableOfPreserving;
 import filework.CapableOfRestore;
 import filework.FileHandler;
@@ -19,26 +16,25 @@ public class Main implements Serializable {
 
     public static void main(String[] args) {
         FamilyTree family = restore();
-
         System.out.println("ORIGINAL:");
         for (Human human : family) {
             System.out.println(human);
         }
 
         System.out.println("SORTED BY NAME:");
-        family.sort(new ComparatorFamilyByName());
+        family.sortByName();
         for (Human human : family) {
             System.out.println(human);
         }
 
-        System.out.println("SORTED BY BIRTHDATE:");
-        family.sort(new ComparatorFamilyByBirthDate());
+        System.out.println("SORTED BY BIRTHDAY:");
+        family.sortByBirthday();
         for (Human human : family) {
             System.out.println(human);
         }
 
         System.out.println("SORTED BY CHILDREN AMOUNT:");
-        family.sort(new ComparatorFamilyByChildrenAmount());
+        family.sortByChildrenAmount();
         for (Human human : family) {
             System.out.println(human);
         }

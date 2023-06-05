@@ -2,10 +2,12 @@ package tree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import comparers.ComparatorFamilyByBirthDay;
+import comparers.ComparatorFamilyByChildrenAmount;
+import comparers.ComparatorFamilyByName;
 import filework.CapableOfPreserving;
 import filework.CapableOfRestore;
 
@@ -65,23 +67,38 @@ public class FamilyTree implements Serializable, Iterable<Human>{
 
     @Override
     public Iterator<Human> iterator() {
-        return new Iterator<Human>(){
-            private int index = 0;
-            
-            @Override
-            public boolean hasNext(){
-                return index < family.size() && family.get(index) != null;
-            }
-            
-            @Override
-            public Human next() {
-                return family.get(index++);
-            }
-        };       
+        return new FamilyTreeIterator();       
     }
-    
-    /** сортировка */
-    public void sort(Comparator<Human> comparator) {
-        Collections.sort(family, comparator);
+
+    /** сортировка по имени*/
+    public void sortByName() {
+        Collections.sort(family, new ComparatorFamilyByName());
+    }
+
+    /** сортировка дню рождения*/
+     public void sortByBirthday() {
+        Collections.sort(family, new ComparatorFamilyByBirthDay());
+    }
+
+    /** сортировка по количеству детей*/
+     public void sortByChildrenAmount() {
+        Collections.sort(family, new ComparatorFamilyByChildrenAmount());
+    }
+
+
+    class FamilyTreeIterator implements Iterator<Human>{
+        private int index = 0;
+            
+        @Override
+        public boolean hasNext(){
+            return index < family.size() && family.get(index) != null;
+        }
+        
+        @Override
+        public Human next() {
+            return family.get(index++);
+        }
     }
 }
+
+
