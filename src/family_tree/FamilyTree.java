@@ -1,5 +1,10 @@
 package family_tree;
 
+import human.Human;
+import human.comparators.HumanComparatorByChildrenCount;
+import human.comparators.HumanComparatorByFirstName;
+import human.comparators.HumanComparatorByLastName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,6 +60,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         humanList.sort(new HumanComparatorByChildrenCount());
         Collections.reverse(humanList);
     }
+
     @Override
     public Iterator<Human> iterator() {
         return humanList.iterator();

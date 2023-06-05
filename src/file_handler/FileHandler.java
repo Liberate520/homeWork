@@ -1,7 +1,6 @@
 package file_handler;
 
 import family_tree.FamilyTree;
-import file_handler.WorkingFileData;
 
 import java.io.*;
 

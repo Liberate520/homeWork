@@ -38,29 +38,32 @@ public class Main {
         service.sortByChildrenCount();
         System.out.println(service.printHumanList());
 
-//        FamilyTree familyTree = new FamilyTree();
-//        String name = "Галина";
-//        System.out.println("--------------------------------");
-//        System.out.println("Поиск по имени:" + name);
-//        String findHuman = familyTree.getHumanByName(name);
-//        System.out.println(findHuman);
-//
-//        String year = "2010";
-//        System.out.println("--------------------------------");
-//        System.out.println("Поиск по дате рождения: " + year);
-//        String findHumanByDate = familyTree.getHumanByBirthDate(year);
-//        System.out.println(findHumanByDate);
-//
-//        System.out.println("--------------------------------");
-//        System.out.println("Сколько лет человеку:");
-//        System.out.println(h4.getInfo());
-//        System.out.println(h4.getHumanYearsOld());
+        System.out.println("--------------------------------");
+        System.out.println("Реализация предыдущего задания");
+        FamilyTree familyTree = new FamilyTree();
+        String name = "Галина";
+        System.out.println("--------------------------------");
+        System.out.println("Поиск по имени:" + name);
+        String findHuman = familyTree.getHumanByName(name);
+        System.out.println(findHuman);
 
-//        file_handler.FileHandler fileHandler = new file_handler.FileHandler();
-//        fileHandler.save(familyTree);
-//        System.out.println("--------------------------------");
-//        System.out.println("--------------------------------");
-//        System.out.println("Фамильное дерево:");
-//        System.out.println(fileHandler.load().getHumanList());
+        String year = "2010";
+        System.out.println("--------------------------------");
+        System.out.println("Поиск по дате рождения: " + year);
+        String findHumanByDate = familyTree.getHumanByBirthDate(year);
+        System.out.println(findHumanByDate);
+
+        System.out.println("--------------------------------");
+        System.out.println("Сколько лет человеку:");
+        System.out.println(h4.getInfo());
+        System.out.println(h4.getHumanYearsOld());
+
+        file_handler.FileHandler fileHandler = new file_handler.FileHandler();
+        fileHandler.save(familyTree);
+        System.out.println("--------------------------------");
+        System.out.println("--------------------------------");
+        System.out.println("Фамильное дерево:");
+        fileHandler.load();
+        System.out.println(service.printHumanList());
     }
 }
