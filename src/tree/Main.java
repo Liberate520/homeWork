@@ -1,6 +1,7 @@
 package tree;
 
 import tree.familyTree.FamilyTree;
+import tree.familyTree.TreeItem;
 import tree.handler.FileHandler;
 import tree.handler.SaveReadable;
 import tree.human.Human;
@@ -33,7 +34,7 @@ public class Main {
         Human Alena = new Human("Alena", woman);
 
 
-        FamilyTree Ivanovi = new FamilyTree("Ivanovi");
+        FamilyTree<Human> Ivanovi = new FamilyTree<>("Ivanovi");
         List<Human> people = new ArrayList<>();
         people.addAll(Arrays.asList(Sasha, Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora, Alena));
 
@@ -56,7 +57,7 @@ public class Main {
         SaveReadable fileHandler = new FileHandler();
         fileHandler.saveObject(Ivanovi);
 
-        FamilyTree IvanoviTestLoad = (FamilyTree) fileHandler.loadObject();
+        FamilyTree<Human> IvanoviTestLoad = (FamilyTree) fileHandler.loadObject();
 
         System.out.println(IvanoviTestLoad);
         System.out.println(IvanoviTestLoad.findHuman("Sasha").getChild());

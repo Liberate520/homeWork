@@ -1,11 +1,15 @@
 package tree.human;
 
+import tree.familyTree.TreeItem;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import static tree.human.Gender.*;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeItem {
     private String name;
     private Gender gender;
     private Human father;
@@ -28,10 +32,13 @@ public class Human implements Serializable, Comparable<Human> {
     public Human(String name, Gender gender) {
         this(name, gender, null);
     }
+    @Override
     public String getName() {
         return name;
     }
+    @Override
     public Human getFather() { return father; }
+    @Override
     public Human getMother() { return mother; }
 
     public void addParent(Human human) {
@@ -46,11 +53,11 @@ public class Human implements Serializable, Comparable<Human> {
             human.children.add(this);
         }
     }
-
-    public void addChild(Human human){
+    @Override
+    public void addChild(Object human){
         if (human != null) {
-            children.add(human);
-            human.addParent(this);
+            children.add((Human) human);
+            ((Human) human).addParent(this);
         }
     }
 
@@ -60,11 +67,11 @@ public class Human implements Serializable, Comparable<Human> {
         else if (mother == null) return name + " (Отец: " + father.name + ", Мать: " + "NULL" + ")";
         else return name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
     }
-
+    @Override
     public Set<Human> getChildrenList() {
         return this.children;
     }
-
+    @Override
     public String getChild() {
         if (children.isEmpty()) return name + " 'child' ---> нет";
         StringBuilder st = new StringBuilder();
@@ -74,7 +81,7 @@ public class Human implements Serializable, Comparable<Human> {
         return name + " 'child' --->" + st.toString();
     }
 
-@Override
+    @Override
     public String toString() {
         return "Имя: " + name + ", Пол: " + gender;
     }

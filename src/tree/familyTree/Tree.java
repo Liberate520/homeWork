@@ -1,10 +1,10 @@
 package tree.familyTree;
 
-import tree.human.Human;
-
 import java.util.List;
 
-public interface Tree extends Iterable<Human>{
-    void setFamily(Human human);
-    List<Human> getFamilyTree();
+public interface Tree<T> extends Iterable<T>{
+    void setFamily(T human);
+    List<T> getFamilyTree();
+    void sortByName();
+    void sortByChild();
 }
