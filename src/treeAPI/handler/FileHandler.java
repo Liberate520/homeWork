@@ -18,8 +18,7 @@ public class FileHandler<E> implements Writable<E> {
 
     @Override
     public E read(String fileName) {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(fileName))) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             E result = (E) objectInputStream.readObject();
             objectInputStream.close();
             return result;
