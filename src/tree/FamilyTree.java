@@ -3,9 +3,7 @@ package tree;
 import comparers.ComparatorFamilyByBirthDay;
 import comparers.ComparatorFamilyByChildrenAmount;
 import comparers.ComparatorFamilyByName;
-import filework.CapableOfPreserving;
-import filework.CapableOfRestore;
-import members.Member;
+import members.FamilyMember;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.List;
 /**
  * Family tree
  */
-public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
+public class FamilyTree<T extends FamilyMember> implements Serializable, Iterable<T>{
     private List<T> family;
 
     public FamilyTree() {
@@ -37,8 +35,8 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
     }
 
     /** checked contains member in family list */
-    private Boolean contains(Member search) {
-        for (Member member : family) {
+    private Boolean contains(T search) {
+        for (T member : family) {
             if (member.equals(search)) {
                 return true;
             }
@@ -50,26 +48,16 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (Member member : family) {
+        for (T member : family) {
             builder.append(member);
             builder.append("\n");
         }
         return builder.toString();
     }
 
-    /** сохранение */
-    public void save(String path, CapableOfPreserving<FamilyTree<T>> preserve){
-        preserve.save(path, this);
-    }
-    
-    /** чтение */
-    public FamilyTree<T> read(String path, CapableOfRestore<FamilyTree<T>> restore){
-        return restore.read(path);
-    }
-
     @Override
     public Iterator<T> iterator() {
-        return new FamilyTreeIterator();       
+        return new FamilyTreeIterator<T>(family);       
     }
 
     /** сортировка по имени*/
@@ -86,21 +74,4 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
      public void sortByChildrenAmount() {
        family.sort(new ComparatorFamilyByChildrenAmount<>());
     }
-
-
-    class FamilyTreeIterator implements Iterator<T>{
-        private int index = 0;
-            
-        @Override
-        public boolean hasNext(){
-            return index < family.size() && family.get(index) != null;
-        }
-        
-        @Override
-        public T next() {
-            return family.get(index++);
-        }
-    }
 }
-
-

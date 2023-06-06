@@ -1,10 +1,10 @@
 package comparers;
 import java.util.Comparator;
 
-import members.Member;
+import members.FamilyMember;
 
 /** компаратор по количеству детей */
-public class ComparatorFamilyByChildrenAmount<T extends Member> implements Comparator<T>{
+public class ComparatorFamilyByChildrenAmount<T extends FamilyMember> implements Comparator<T>{
 
     @Override
     public int compare(T o1, T o2) {

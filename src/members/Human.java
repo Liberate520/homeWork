@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** human */
-public class Human implements Serializable, Member{
+public class Human implements Serializable, FamilyMember{
     private String name;
     private LocalDate birthday;
     private Gender gender;
-    private Member mother;
-    private Member father;
-    private List<Member> children;
+    private FamilyMember mother;
+    private FamilyMember father;
+    private List<FamilyMember> children;
 
     /** return human name */
     public String getName() {
@@ -48,8 +48,8 @@ public class Human implements Serializable, Member{
     }
 
     /** checked contains child in children list */
-    public Boolean ContainsChild(Member child){
-        for (Member member : children) {
+    public Boolean ContainsChild(FamilyMember child){
+        for (FamilyMember member : children) {
             if(member.equals(child)){
                 return true;
             }
@@ -58,17 +58,17 @@ public class Human implements Serializable, Member{
     }
 
     /** returned mother */
-    public Member getMother() {
+    public FamilyMember getMother() {
         return mother;
     }
 
     /** returned father */
-    public Member getFather() {
+    public FamilyMember getFather() {
         return father;
     }
 
     /** added child in children list */
-    public Boolean addChild(Member child) {
+    public Boolean addChild(FamilyMember child) {
 
         if(!ContainsChild(child)){
             children.add(child);

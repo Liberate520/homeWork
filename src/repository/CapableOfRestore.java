@@ -1,8 +1,8 @@
-package filework;
+package repository;
 import java.io.Serializable;
 
 /** умеющий восстанавливать */
-public interface CapableOfRestore<T extends Serializable> {
+public interface CapableOfRestore {
     /** чтение */
-    T read(String path);
+    Serializable read(String path);
 }
