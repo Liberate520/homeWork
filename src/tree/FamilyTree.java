@@ -1,10 +1,4 @@
 package tree;
-import java.io.Serializable;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 
 import comparers.ComparatorFamilyByBirthDay;
 import comparers.ComparatorFamilyByChildrenAmount;
@@ -12,6 +6,11 @@ import comparers.ComparatorFamilyByName;
 import filework.CapableOfPreserving;
 import filework.CapableOfRestore;
 import members.Member;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -65,7 +64,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
     
     /** чтение */
     public FamilyTree<T> read(String path, CapableOfRestore<FamilyTree<T>> restore){
-        return (FamilyTree<T>)restore.read(path);
+        return restore.read(path);
     }
 
     @Override
@@ -75,17 +74,17 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T>{
 
     /** сортировка по имени*/
     public void sortByName() {
-        Collections.sort(family, new ComparatorFamilyByName<T>());
+        family.sort(new ComparatorFamilyByName<>());
     }
 
     /** сортировка дню рождения*/
      public void sortByBirthday() {
-        Collections.sort(family, new ComparatorFamilyByBirthDay<T>());
+        family.sort(new ComparatorFamilyByBirthDay<>());
     }
 
     /** сортировка по количеству детей*/
      public void sortByChildrenAmount() {
-        Collections.sort(family, new ComparatorFamilyByChildrenAmount<T>());
+       family.sort(new ComparatorFamilyByChildrenAmount<>());
     }
 
 
