@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class Data {
     public static Tree dataEntry() {
-        Tree tree = new Tree();
+        Tree<Person> tree = new Tree<>();
         tree.addPerson(new Person("Татьяна", LocalDate.of(1951, 1, 10), Gender.Female));
         tree.addPerson(new Person("Сергей", LocalDate.of(1951, 10, 23), Gender.Male));
         tree.addPerson(new Person("Алексей", LocalDate.of(1984, 7, 11), Gender.Male,

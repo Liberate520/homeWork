@@ -1,11 +1,13 @@
 package model.person;
 
+import model.GroupItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, GroupItem<Person> {
     private String name;
     private LocalDate date;
     private Gender gender;
@@ -31,6 +33,7 @@ public class Person implements Serializable {
         return name + " (" + date + ", " + gender + ")";
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -39,6 +42,7 @@ public class Person implements Serializable {
         this.name = name;
     }
 
+    @Override
     public LocalDate getDate() {
         return date;
     }
@@ -55,6 +59,7 @@ public class Person implements Serializable {
         this.gender = gender;
     }
 
+    @Override
     public Person getMother() {
         return mother;
     }
@@ -63,6 +68,8 @@ public class Person implements Serializable {
         this.mother = mother;
     }
 
+
+    @Override
     public Person getFather() {
         return father;
     }
@@ -71,6 +78,7 @@ public class Person implements Serializable {
         this.father = father;
     }
 
+    @Override
     public List<Person> getChildren() {
         return children;
     }
@@ -79,15 +87,16 @@ public class Person implements Serializable {
         this.children = children;
     }
 
+    @Override
     public void addChild(Person person) {
         children.add(person);
     }
 
+    @Override
     public List<Person> getParents() {
         List<Person> parentsList = new ArrayList<>();
         parentsList.add(mother);
         parentsList.add(father);
         return parentsList;
     }
-
 }
