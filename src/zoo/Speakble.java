@@ -1,4 +1,4 @@
-package Zoo;
+package zoo;
 
 public interface Speakble {
     void speak();

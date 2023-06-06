@@ -1,4 +1,4 @@
-package Zoo;
+package zoo;
 
 public abstract class Animal implements Speakble {
     public abstract void speak();
