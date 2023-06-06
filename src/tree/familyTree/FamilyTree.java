@@ -4,12 +4,11 @@ import tree.familyTree.comparators.HumanComparatorByChildCount;
 import tree.familyTree.comparators.HumanComparatorByName;
 import tree.familyTree.iterators.HumanIterator;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends TreeItem<T>> implements Serializable, Tree<T> {
+public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
     private List<T> familyTree;
     private String familyName;
 
@@ -18,13 +17,13 @@ public class FamilyTree<T extends TreeItem<T>> implements Serializable, Tree<T> 
         this.familyName = familyName;
     }
 
-    public void setFamily(List<T> human) {
+    public void addHuman(List<T> human) {
         for (T someHuman : human) {
-            setFamily(someHuman);
+            addHuman(someHuman);
         }
     }
 
-    public void setFamily(T human) {
+    public void addHuman(T human) {
         familyTree.add(human);
         for (T someHuman : familyTree) {
             if (someHuman == human.getFather()) {

@@ -37,7 +37,7 @@ public class Main {
         List<Human> people = new ArrayList<>();
         people.addAll(Arrays.asList(Sasha, Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora, Alena));
 
-        Ivanovi.setFamily(people);
+        Ivanovi.addHuman(people);
         System.out.println(Ivanovi);
 
         System.out.println("-------------Найти человека-------------");

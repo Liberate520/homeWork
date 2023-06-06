@@ -14,7 +14,7 @@ public class Service {
 
     public void addHuman(String name, Gender gender) {
         Human human = new Human(name, gender);
-        tree.setFamily(human);
+        tree.addHuman(human);
     }
      public void sortByName() {
         tree.sortByName();
