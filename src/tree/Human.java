@@ -1,12 +1,13 @@
 package tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /*
 * Описание родственных связей надо сделать, человек может быть и родителем и ребенком
 * */
-public class Human {
+public class Human implements Serializable {
     // Описываем все необходимые переменные, Имя, возраст, принадлежность родителей, добавляем ЛИСТ для детей
     private String name; // имя человека
     private int age; // дата рождения

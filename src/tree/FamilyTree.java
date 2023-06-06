@@ -1,6 +1,7 @@
 package tree;
 
 import javax.xml.namespace.QName;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 * у него будет список людей и методы работы с этим списком
 * добавить нового человека в дерево или найти в дереве
 * как вендинг машин из примера семинара*/
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> personList;
 
     public FamilyTree() { this(new ArrayList<>()); }
