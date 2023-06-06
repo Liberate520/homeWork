@@ -1,3 +1,7 @@
+package model.tree.comparators;
+
+import model.person.Person;
+
 import java.util.Comparator;
 
 public class TreeComparatorByName implements Comparator<Person>{

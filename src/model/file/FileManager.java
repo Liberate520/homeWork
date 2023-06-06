@@ -1,3 +1,5 @@
+package model.file;
+
 import java.io.*;
 
 public interface FileManager extends Serializable {

@@ -1,3 +1,5 @@
+package model.file;
+
 import java.io.*;
 
 public class DataFileManager implements FileManager {

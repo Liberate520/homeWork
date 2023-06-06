@@ -1,3 +1,9 @@
+package model;
+
+import model.person.Gender;
+import model.person.Person;
+import model.tree.Tree;
+
 import java.time.LocalDate;
 
 public class Data {

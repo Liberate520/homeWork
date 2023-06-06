@@ -1,3 +1,7 @@
+package model;
+
+import model.person.Person;
+
 import java.util.List;
 
 public class Lib {

@@ -1,3 +1,9 @@
+package model.tree;
+
+import model.person.Person;
+import model.tree.comparators.TreeComparatorByDOB;
+import model.tree.comparators.TreeComparatorByName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

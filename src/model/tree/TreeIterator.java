@@ -1,3 +1,7 @@
+package model.tree;
+
+import model.person.Person;
+
 import java.util.Iterator;
 import java.util.List;
 
