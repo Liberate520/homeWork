@@ -1,4 +1,4 @@
-package homeWork.tree2;
+package homeWork.tree2.familyTree.services;
 
 import homeWork.tree2.familyTree.FamilyTree;
 import homeWork.tree2.familyTree.comparator.HumanComparatorByAge;

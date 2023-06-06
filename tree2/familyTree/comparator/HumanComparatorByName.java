@@ -1,6 +1,7 @@
 package homeWork.tree2.familyTree.comparator;
 
 import homeWork.tree2.human.Human;
+import homeWork.tree2.human.HumanObjectInterface;
 
 import java.util.Comparator;
 

@@ -5,13 +5,13 @@ import homeWork.tree2.human.Human;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyTreeIterator implements Iterator<Human> {
+public class FamilyTreeIterator<E> implements Iterator<E> {
 
     private int index;
-    public ArrayList<Human> familyTree;
+    public ArrayList<E> familyTree;
 
 
-    public FamilyTreeIterator(ArrayList<Human> familyTree) {
+    public FamilyTreeIterator(ArrayList<E> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -21,7 +21,8 @@ public class FamilyTreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return familyTree.get(index++);
     }
 }
+

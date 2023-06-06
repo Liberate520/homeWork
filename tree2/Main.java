@@ -2,8 +2,10 @@ package homeWork.tree2;
 
 
 import homeWork.tree2.familyTree.FamilyTree;
-import homeWork.tree2.fileHandler.FileHandler;
+import homeWork.tree2.familyTree.services.Service;
+import homeWork.tree2.tests.TestServiceClass;
 import homeWork.tree2.human.Human;
+import homeWork.tree2.tests.TestClass;
 
 import java.time.LocalDate;
 import java.io.*;
@@ -34,7 +36,7 @@ public class Main {
         people[7].getChildren().add(people[9]);
 
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
 
         for (int i = 0; i < people.length; i++) {
             familyTree.addPeople(people[i]);
@@ -42,7 +44,7 @@ public class Main {
 
         System.out.println("\n-------------Отрабатывает итератор-----------------------------------------\n");
 
-        for(Human human: familyTree){
+        for (Human human : familyTree) {
             System.out.println(human.getName() + ": " + human.getAge() + " лет");
             System.out.println("Дети: " + human.getChildren());
         }
@@ -63,6 +65,29 @@ public class Main {
         for(Human human: familyTree){
             System.out.println(human.getName() + ": " + human.getAge() + " лет");
         }
+
+
+        System.out.println("\n-------------Создадим несколько экземпляров тестового класса-----------------\n");
+
+        FamilyTree<TestClass> testCase = new FamilyTree<>();
+        for(int i = 0; i < 5; i++){
+            testCase.addPeople(new TestClass());
+        }
+
+        for(TestClass test: testCase){
+            System.out.println(test.getName());
+        }
+
+        TestServiceClass TestService = new TestServiceClass(testCase);
+
+        System.out.println("\n-------------Отрабатывает сортировка по имени--------------------------------\n");
+
+        TestService.sortByParams();
+        for(TestClass element: testCase){
+            System.out.println(element.getName());
+        }
+
+
 
 
     }
