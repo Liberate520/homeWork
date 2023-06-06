@@ -1,5 +1,8 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,7 +55,33 @@ public class Main {
     FileHandler fileHandler = new FileHandler();
     fileHandler.save("/Users/kondratyevivan/Desktop/homeWorkTreeKondratyev/src/savedTree.txt", familyTree);
     Serializable loadObj = fileHandler.load("/Users/kondratyevivan/Desktop/homeWorkTreeKondratyev/src/savedTree.txt", "FamilyTree");
+    FamilyTree loadedFamilyTree = (FamilyTree) loadObj;
 
-        System.out.println(familyTree.getInfo());
+    Iterator<Human> iterator = loadedFamilyTree.iterator();
+
+    if (loadedFamilyTree != null){
+        ArrayList<Human> loadedFamily = loadedFamilyTree.getFamily();
+        Collections.sort(loadedFamily);
+        for(Human human: loadedFamily){
+            System.out.println(human.getInfo());
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        loadedFamily.sort(new ChildComparator());
+        for (Human human: loadedFamily){
+            System.out.println(human.getInfo());
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        loadedFamily.sort(new NameComparator());
+        for(Human human: loadedFamily){
+            System.out.println(human.getInfo());
+        }
+    }
     }
 }

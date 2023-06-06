@@ -1,12 +1,17 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
     private static final long serialVersionUID =1L;
     public FamilyTree(){ this(new ArrayList<>());}
     public FamilyTree(List<Human> humanList) { this.humanList =humanList;}
+    public ArrayList<Human> getFamily(){
+        return (ArrayList<Human>) humanList;
+    }
+
 
 
 //    public void getSisAndBro(Human human){
@@ -70,5 +75,22 @@ public class FamilyTree implements Serializable {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator(){
+        Iterator<Human> iterator = new Iterator<Human>() {
+            private int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < humanList.size();
+            }
+
+            @Override
+            public Human next() {
+                return humanList.get(index++);
+            }
+        };
+        return iterator;
     }
 }
