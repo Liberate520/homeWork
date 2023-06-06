@@ -13,7 +13,7 @@ import tree.FamilyTree;
  */
 public class Main implements Serializable {
 
-    public static final String PATH = "family.txt";
+    public static final String PATH = "family.bin";
 
     public static void main(String[] args) {
         FamilyTree<Member> family = restore();
