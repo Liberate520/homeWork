@@ -22,10 +22,10 @@ public class Service {
     }
 
     public void sortByName(){
-        family.FamilyMembersList().sort(new HumanComparatorByName());
+        family.familyMembersList().sort(new HumanComparatorByName());
     }
 
     public void sortByAge(){
-        family.FamilyMembersList().sort(new HumanComparatorByAge());
+        family.familyMembersList().sort(new HumanComparatorByAge());
     }
 }

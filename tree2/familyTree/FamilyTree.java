@@ -1,6 +1,7 @@
 package homeWork.tree2.familyTree;
 
 import homeWork.tree2.human.Human;
+import homeWork.tree2.human.HumanObjectInterface;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class FamilyTree implements Serializable, Family{
         families.add(person);
     }
 
-    public ArrayList<Human> FamilyMembersList(){
+    public ArrayList<Human> familyMembersList(){
         return families;
     }
 

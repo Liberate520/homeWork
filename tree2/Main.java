@@ -44,6 +44,7 @@ public class Main {
 
         for(Human human: familyTree){
             System.out.println(human.getName() + ": " + human.getAge() + " лет");
+            System.out.println("Дети: " + human.getChildren());
         }
 
 
@@ -62,9 +63,6 @@ public class Main {
         for(Human human: familyTree){
             System.out.println(human.getName() + ": " + human.getAge() + " лет");
         }
-
-
-
 
 
     }
