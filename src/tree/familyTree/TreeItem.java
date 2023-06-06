@@ -1,13 +1,12 @@
 package tree.familyTree;
 
-import tree.human.Human;
 import java.util.Set;
 
-public interface TreeItem {
+public interface TreeItem<T> {
     String getName();
-    Object getFather();
-    Object getMother();
-    Set<Human> getChildrenList();
-    void addChild(Object human);
+    T getFather();
+    T getMother();
+    Set<T> getChildrenList();
+    void addChild(T human);
     String getChild();
 }

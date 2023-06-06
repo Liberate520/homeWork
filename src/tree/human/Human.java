@@ -1,15 +1,12 @@
 package tree.human;
 
 import tree.familyTree.TreeItem;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import static tree.human.Gender.*;
 
-public class Human implements Serializable, Comparable<Human>, TreeItem {
+public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private String name;
     private Gender gender;
     private Human father;
@@ -54,10 +51,10 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
         }
     }
     @Override
-    public void addChild(Object human){
+    public void addChild(Human human){
         if (human != null) {
-            children.add((Human) human);
-            ((Human) human).addParent(this);
+            children.add(human);
+            human.addParent(this);
         }
     }
 

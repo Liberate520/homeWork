@@ -1,7 +1,6 @@
 package tree;
 
 import tree.familyTree.FamilyTree;
-import tree.familyTree.TreeItem;
 import tree.handler.FileHandler;
 import tree.handler.SaveReadable;
 import tree.human.Human;

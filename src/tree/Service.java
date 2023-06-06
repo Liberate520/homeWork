@@ -1,8 +1,5 @@
 package tree;
 
-import tree.familyTree.TreeItem;
-import tree.familyTree.comparators.HumanComparatorByChildCount;
-import tree.familyTree.comparators.HumanComparatorByName;
 import tree.familyTree.Tree;
 import tree.human.Gender;
 import tree.human.Human;

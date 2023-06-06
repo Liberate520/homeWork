@@ -3,7 +3,7 @@ package tree.familyTree.comparators;
 import tree.familyTree.TreeItem;
 import java.util.Comparator;
 
-public class HumanComparatorByChildCount<T extends TreeItem> implements Comparator<T> {
+public class HumanComparatorByChildCount<T extends TreeItem<T>> implements Comparator<T> {
 
     @Override
     public int compare(T human1, T human2) {

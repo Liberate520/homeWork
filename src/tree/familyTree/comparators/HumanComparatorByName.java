@@ -1,11 +1,9 @@
 package tree.familyTree.comparators;
 
 import tree.familyTree.TreeItem;
-import tree.human.Human;
-
 import java.util.Comparator;
 
-public class HumanComparatorByName<T extends TreeItem> implements Comparator<T> {
+public class HumanComparatorByName<T extends TreeItem<T>> implements Comparator<T> {
 
     @Override
     public int compare(T human1, T human2) {
