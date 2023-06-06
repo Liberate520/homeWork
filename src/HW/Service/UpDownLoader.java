@@ -1,4 +1,6 @@
-package HW;
+package HW.Service;
+
+import HW.Tree.FamilyTree;
 
 import java.io.IOException;
 

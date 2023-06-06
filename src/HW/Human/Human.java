@@ -1,4 +1,6 @@
-package HW;
+package HW.Human;
+
+import HW.Human.Enum.Sex;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,22 +10,22 @@ import java.util.List;
 public class Human implements Serializable {
     private String name;
     private String surname;
-    private String sex;
+    private Sex sex;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private Human father;
     private Human mother;
     private List<Human> children;
-    public Human(String name, String surname, String sex, LocalDate dateOfBirth) {
+    public Human(String name, String surname, Sex sex, LocalDate dateOfBirth) {
         this(name, surname, sex, dateOfBirth, null, null, null, new ArrayList<>());
     }
-    public Human(String name, String surname, String sex, LocalDate dateOfBirth, LocalDate dateOfDeath) {
+    public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath) {
         this(name, surname, sex, dateOfBirth, dateOfDeath, null, null, new ArrayList<>());
     }
-    public Human (String name, String surname, String sex, LocalDate dateOfBirth, Human father, Human mother) {
+    public Human (String name, String surname, Sex sex, LocalDate dateOfBirth, Human father, Human mother) {
         this (name, surname, sex, dateOfBirth, null, father, mother, new ArrayList<>());
     }
-    public Human(String name, String surname, String sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother, List<Human> children) {
+    public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother, List<Human> children) {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
@@ -34,9 +36,12 @@ public class Human implements Serializable {
         this.children = children;
     }
 
-
     public String getName() {
         return name;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public String getSurname() {
