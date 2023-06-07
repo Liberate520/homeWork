@@ -25,7 +25,7 @@ public class Main {
 
         service.save("qwe.txt");
 
-//        service.load("qwe.txt");
+//        service.load("qwe.txt"); вф
 
 
         System.out.println(service.getInfo());
