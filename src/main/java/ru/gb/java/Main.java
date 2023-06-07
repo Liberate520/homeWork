@@ -12,6 +12,7 @@ public class Main implements Serializable {
         SubMenu subMenu = new SubMenu();
         SubMenu2 subMenu2 = new SubMenu2();
         Tree tree = new Tree();
+        SaveLoad sl = new SaveLoad();
 
         boolean flag = true;
         while (flag) {
@@ -52,19 +53,21 @@ public class Main implements Serializable {
                     tree.printBranch(listPerson);
                     break;
                 case 5:
-                    //Сериализация в файл с помощью класса ObjectOutputStream
-                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                            new FileOutputStream("tree.out"));
-                    objectOutputStream.writeObject(tree);
-                    objectOutputStream.close();
+                    sl.save(listPerson, tree);
                     break;
                 case 6:
-                    ObjectInputStream objectInputStream = new ObjectInputStream(
-                            new FileInputStream("tree.out"));
-                    Tree treeRestored = (Tree) objectInputStream.readObject();
-                    objectInputStream.close();
+                    sl.load();
                     break;
                 case 7:
+                    System.out.println(listPerson);;
+                    break;
+                case 8:
+                    person.sortedNamePerson(listPerson);
+                    break;
+                case 9:
+                    person.sortedDatePerson(listPerson);
+                    break;
+                case 10:
                     flag = false;
                     break;
             }
