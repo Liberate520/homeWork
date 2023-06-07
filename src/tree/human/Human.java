@@ -1,4 +1,4 @@
-package tree;
+package tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,8 +16,8 @@ public class Human implements Serializable {
     private Human mother;
     private List<Human> children;
 
-    public Human(String name, LocalDate birthDate, Gender gender, Human father, Human mother) { //общий конструктор
-        this.id = ++global_id;
+    public Human(int id, String name, LocalDate birthDate, Gender gender, Human father, Human mother) { //общий конструктор
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -26,8 +26,8 @@ public class Human implements Serializable {
         this.children = new ArrayList<>();
     }
 
-    public Human(String name, LocalDate yearOfBirth, Gender gender) { // конструктор без родителей/детей
-        this(name, yearOfBirth, gender, null, null);
+    public Human(int id, String name, LocalDate yearOfBirth, Gender gender) { // конструктор без родителей/детей
+        this(id, name, yearOfBirth, gender, null, null);
     }
 
     public void addChildren(Human child) {
@@ -97,6 +97,11 @@ public class Human implements Serializable {
         stringBuilder.append(", ");
         stringBuilder.append(getChildrenInfo());
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getInfo();
     }
 
     private String getMotherInfo() {

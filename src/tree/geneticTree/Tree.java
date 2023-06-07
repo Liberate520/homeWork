@@ -1,10 +1,15 @@
-package tree;
+package tree.geneticTree;
+
+import tree.human.Human;
+import tree.human.HumanComparatorByAge;
+import tree.human.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public Tree(List<Human> humanList) {
@@ -44,5 +49,18 @@ public class Tree implements Serializable {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge());
     }
 }

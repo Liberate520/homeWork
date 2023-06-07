@@ -1,4 +1,4 @@
-package tree;
+package tree.saveLoad;
 
 import java.io.*;
 
@@ -12,7 +12,6 @@ public class Write implements Writable {
             exception.printStackTrace();
             return false;
         }
-
     }
 
     public Object load(String filePath) {
