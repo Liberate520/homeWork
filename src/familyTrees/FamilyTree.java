@@ -4,7 +4,7 @@ import familyTrees.comparators.ByDateBirth;
 import familyTrees.comparators.NameAlphabetical;
 import familyTrees.comparators.NameLength;
 import human.Human;
-import human.iterators.HumanIterator;
+import familyTrees.iterators.PersonIterator;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -16,8 +16,8 @@ import java.util.Optional;
 /**
  * Класс, представляющий семейное древо.
  */
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> familyTree;
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
+    private List<T> familyTree;
 
     /**
      * Конструктор класса FamilyTree.
@@ -26,7 +26,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this.familyTree = new ArrayList<>();
     }
 
-    public List<Human> getFamilyTree() {
+    public List<T> getFamilyTree() {
         return familyTree;
     }
 
@@ -37,7 +37,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param parent родитель
      * @param child  ребенок
      */
-    public void addBranchParentChild(Human parent, Human child) {
+    public void addBranchParentChild(T parent, T child) {
         if (parent != null) {
             if (parent.getSex().equalsIgnoreCase("man")) {
                 child.setFather(parent);
@@ -53,10 +53,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     /**
      * Проверяет есть ли у родителя нужный ребенок, если нет, добавляет его в список.
      *
-     * @param parent
-     * @param child
+     * @param parent Родитель
+     * @param child ребенок
      */
-    private void addChildBranch(Human parent, Human child) {
+    private void addChildBranch(T parent, T child) {
 
         if (!parent.getChildren().contains(child)) {
             parent.addChild((child));
@@ -69,7 +69,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      *
      * @param person человек
      */
-    public void addPersonInFamilyTree(Human person) {
+    public void addPersonInFamilyTree(T person) {
         if (!isPersonInTree(person)) familyTree.add(person);
     }
 
@@ -80,7 +80,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param parent      родитель
      * @param yearOfBirth год рождения родителя
      */
-    public void addPersonInFamilyTree(Human person, String parent, int yearOfBirth) {
+    public void addPersonInFamilyTree(T person, String parent, int yearOfBirth) {
         if (!isPersonInTree(person)) {
             addBranchParentChild(getPersonFromTree(parent, yearOfBirth), person);
             familyTree.add(person);
@@ -96,7 +96,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param motherName        имя матери
      * @param yearOfBirthMother год рождения матери
      */
-    public void addPersonInFamilyTree(Human child,
+    public void addPersonInFamilyTree(T child,
                                       String fatherName, int yearOfBirthFather,
                                       String motherName, int yearOfBirthMother) {
         if (!isPersonInTree(child)) {
@@ -113,9 +113,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param yearOfBirth год рождения человека
      * @return объект Human, представляющий найденного человека, или null, если человек не найден
      */
-    public Human getPersonFromTree(String personName, int yearOfBirth) {
+    public T getPersonFromTree(String personName, int yearOfBirth) {
         Year temp = Year.of(yearOfBirth);
-        Optional<Human> result =
+        Optional<T> result =
                 familyTree.stream()
                         .filter(x -> x.getNAME().equalsIgnoreCase(personName) && x.getYearOfBirth().equals(temp))
                         .findFirst();
@@ -128,7 +128,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param person
      * @return
      */
-    private boolean isPersonInTree(Human person) {
+    private boolean isPersonInTree(T person) {
         return familyTree.contains(person);
     }
 
@@ -138,12 +138,12 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param parentName  имя родителя
      * @param yearOfBirth год рождения ребенка
      */
-    public List<Human> getParents(String parentName, int yearOfBirth) {
-        Human child = getPersonFromTree(parentName, yearOfBirth);
-        List<Human> temp = new ArrayList<>();
+    public List<T> getParents(String parentName, int yearOfBirth) {
+        T child = getPersonFromTree(parentName, yearOfBirth);
+        List<T> temp = new ArrayList<>();
         if (child != null) {
-            temp.add(child.getFather());
-            temp.add(child.getMother());
+            temp.add((T) child.getFather());
+            temp.add((T)child.getMother());
             return temp;
         } else return temp;
     }
@@ -154,9 +154,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      * @param parentName  имя родителя
      * @param yearOfBirth год рождения родителя
      */
-    public List<Human> getChildren(String parentName, int yearOfBirth) {
-        return Optional.ofNullable(getPersonFromTree(parentName, yearOfBirth))
-                .map(Human::getChildren).orElse(null);
+    public List<T> getChildren(String parentName, int yearOfBirth) {
+        return (List<T>) Optional.ofNullable(getPersonFromTree(parentName, yearOfBirth))
+                .map(T::getChildren).orElse(null);
     }
 
     /**
@@ -165,8 +165,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
      */
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(familyTree);
+    public Iterator<T> iterator() {
+        return new PersonIterator(familyTree);
     }
 
     /**

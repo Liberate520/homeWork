@@ -1,12 +1,13 @@
 package familyTrees.console_view;
 
 import familyTrees.FamilyTree;
+import familyTrees.comparators.ByDateBirth;
 import human.Human;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FamilyTreeView {
+public class FamilyTreeView <T extends Human>{
     FamilyTree familyTreeView;
 
 
@@ -14,9 +15,7 @@ public class FamilyTreeView {
         this.familyTreeView = familyTree;
     }
 
-    public void showChildren() {
 
-    }
 
     public void showParents(String childName, int yearOfBirth) {
         Human child = familyTreeView.getPersonFromTree(childName, yearOfBirth);
@@ -37,9 +36,14 @@ public class FamilyTreeView {
             System.out.println("Семейное древо пусто.");
         } else {
             System.out.println("Семейное древо:");
-            for (Human person : familyTreeView) {
+            for (Object person1 : familyTreeView) {
+                Human person = (Human)person1;
                 System.out.println(person.getNAME() + " (" + person.getYearOfBirth() + ")");
             }
         }
+    }
+
+    public void sortByDateBirth() {
+        familyTreeView.sortTreeByDateBirth();
     }
 }
