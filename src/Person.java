@@ -9,7 +9,7 @@ public class Person {
     private int DayOfBirth;
     private int MonthOfBirth;
     private int YearOfBirth;
-    private boolean Alive;
+    public boolean Alive;
 
     Person Father;
     Person Mother;
