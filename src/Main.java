@@ -1,5 +1,6 @@
 import familyTrees.console_view.FamilyTreeView;
 import fileManage.FileManager;
+import human.Human;
 
 import java.nio.file.Paths;
 
@@ -24,6 +25,9 @@ public class Main {
         FileManager filePath = new FileManager(Paths.get("data","ruriksTree.bin"));
         filePath.saveFile(ruriks); //Сохранение в файл .bin
         ruriks = filePath.loadFile(); //Загрузка из файла .bin
+
+        ruriks.sortTreeByAlphabeticalOrder();
+
 
     }
 }
