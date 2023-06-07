@@ -1,31 +1,29 @@
 package tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Skills{
-    private String name = "none";
+public class Human implements Skills, Serializable {
+    private String name;
     private LocalDate birthday;
     private Human mother;
     private Human father;
     private List<Human> children;
     private Gender gender;
-    public static List<Human> fullList = new ArrayList<>();
 
     //Консткукторы
-    public Human () {
-    }
     public Human(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
-        fullList.add(this);
+        children = new ArrayList<>();
     }
 
     public Human(String name, LocalDate birthday, Gender gender) {
         this(name, gender);
         this.birthday = birthday;
-        fullList.add(this);
+        children = new ArrayList<>();
     }
 
     public Human(String name, LocalDate birthday, Gender gender, Human mother, Human father) {
@@ -33,7 +31,7 @@ public class Human implements Skills{
         this.birthday = birthday;
         this.mother = mother;
         this.father = father;
-        fullList.add(this);
+        children = new ArrayList<>();
     }
 
     //Поведение сущности
@@ -53,17 +51,17 @@ public class Human implements Skills{
     }
 
     public void setChild(Human child) {
-        if (this.children == null) {
-            this.children = new ArrayList<>();
-        }
-        this.children.add(child);
-        if (this.gender.equals(Gender.Male)) {
+        children.add(child);
+        if (gender.equals(Gender.Male)) {
             child.father = this;
         }
         else child.mother = this;
     }
 
     // Методы
+    public String getName() {
+        return name;
+    }
     public List<Human> getParents() {
         List<Human> parentsList = new ArrayList<>();
         parentsList.add(mother);
@@ -112,10 +110,10 @@ public class Human implements Skills{
     @Override
     public String toString() {
         return "Name: " + name + '\n' +
-                "Birthday date: " + birthday + '\n';
+                "Birthday date: " + birthday + '\n' + PrintList(children) + '\n';
     }
 
-    public String  PrintList (List<Human> children) {
+    public String PrintList (List<Human> children) {
         int i = 1;
         String childrenList = "";
         for (Human child: children) {
