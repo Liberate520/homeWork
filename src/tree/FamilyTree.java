@@ -1,11 +1,12 @@
 package tree;
 
-import human.HumanIterator;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import comparators.HumanComparatorByAge;
+import comparators.HumanComparatorByName;
 
 public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Iterable<F> {
     private List<F> humanList;
@@ -17,7 +18,6 @@ public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Itera
     public FamilyTree(List<F> humanList) {
         this.humanList = humanList;
     }
-
 
     public boolean add(F human) {
         if (human == null) {
@@ -36,52 +36,16 @@ public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Itera
         return false;
     }
 
-    public List<F> getHumans() {
-        return humanList;
+   public void sortByFirstName() {
+        humanList.sort(new HumanComparatorByName<>());
     }
 
-    public String getInfo(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("В дереве: ");
-        sb.append(humanList.size());
-        sb.append(" объектов: \n");
-        for (F human: humanList){
-            sb.append(human.getInfo());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    public List<F> getParents(F human) {
-        List<F> parents = new ArrayList<>();
-        F mother = (F) human.getMother();
-        if (mother != null) {
-            parents.add(mother);
-        }
-        F father = (F) human.getFather();
-        if (father != null) {
-            parents.add(father);
-        }
-        return parents;
-    }
-
-    public List<F> getSiblings(F human) {
-        List<F> siblings = new ArrayList<>();
-        List<F> parents = getParents(human);
-        for (F parent : parents) {
-            List<F> parentSiblings = getChildren(parent);
-            parentSiblings.remove(human);
-            siblings.addAll(parentSiblings);
-        }
-        return siblings;
-    }
-
-    public List<F> getChildren(F human) {
-        return (List<F>) human.getChildren();
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge<>());
     }
 
     @Override
     public Iterator<F> iterator() {
-        return new HumanIterator(humanList);
+        return humanList.iterator();
     }
 }
