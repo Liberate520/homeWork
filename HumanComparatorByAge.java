@@ -4,7 +4,7 @@ import tree.FamilyTreeItem;
 
 import java.util.Comparator;
 
-public class ChildrenComparatorByAge<F extends FamilyTreeItem> implements Comparator<F> {
+public class HumanComparatorByAge<F extends FamilyTreeItem> implements Comparator<F> {
 
     @Override
     public int compare(F o1, F o2) {
