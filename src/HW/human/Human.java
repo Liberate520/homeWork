@@ -1,13 +1,14 @@
-package HW.Human;
+package HW.human;
 
-import HW.Human.Enum.Sex;
+import HW.human.enumerate.Sex;
+import HW.member.Member;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Member {
     private String name;
     private String surname;
     private Sex sex;
@@ -15,7 +16,7 @@ public class Human implements Serializable {
     private LocalDate dateOfDeath;
     private Human father;
     private Human mother;
-    private List<Human> children;
+    private List<Member> children;
     public Human(String name, String surname, Sex sex, LocalDate dateOfBirth) {
         this(name, surname, sex, dateOfBirth, null, null, null, new ArrayList<>());
     }
@@ -25,7 +26,7 @@ public class Human implements Serializable {
     public Human (String name, String surname, Sex sex, LocalDate dateOfBirth, Human father, Human mother) {
         this (name, surname, sex, dateOfBirth, null, father, mother, new ArrayList<>());
     }
-    public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother, List<Human> children) {
+    public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother, List<Member> children) {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
@@ -56,11 +57,12 @@ public class Human implements Serializable {
         return mother;
     }
 
-    public List<Human> getChildren() {
+    public List<Member> getChildren() {
         return children;
     }
 
-    public void setChildren(Human human) {
+
+    public void setChildren(Member human) {
         this.children.add(human);
     }
 
@@ -80,7 +82,7 @@ public class Human implements Serializable {
 
     private String showChild () {
         StringBuilder childResult = new StringBuilder();
-        for (Human human : children) {
+        for (Member human : children) {
             childResult.append(human.getName() + " " + human.getSurname() + " ");
         }
         return childResult.toString();

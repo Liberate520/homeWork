@@ -1,6 +1,6 @@
-package HW.Service;
+package HW.service;
 
-import HW.Tree.FamilyTree;
+import HW.tree.FamilyTree;
 
 import java.io.*;
 
@@ -9,7 +9,7 @@ public class DataSaver implements UpDownLoader {
 
         //Сериализация в файл с помощью класса ObjectOutputStream
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("tree.out"));
+                new FileOutputStream("tree.txt"));
         objectOutputStream.writeObject(tree);
         objectOutputStream.close();
     }
@@ -17,7 +17,7 @@ public class DataSaver implements UpDownLoader {
     public FamilyTree recovery() throws IOException, ClassNotFoundException {
         // Востановление из файла с помощью класса ObjectInputStream
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("tree.out"));
+                new FileInputStream("tree.txt"));
         FamilyTree tree = (FamilyTree) objectInputStream.readObject();
         objectInputStream.close();
         return tree;

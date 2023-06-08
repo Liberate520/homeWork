@@ -1,6 +1,6 @@
-package HW.Tree.Iterators;
+package HW.tree.iterators;
 
-import HW.Human.Human;
+import HW.human.Human;
 
 import java.util.Iterator;
 import java.util.List;

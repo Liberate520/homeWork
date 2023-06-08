@@ -1,10 +1,11 @@
-package HW.Tree;
+package HW.tree;
 
-import HW.Human.Human;
-import HW.Tree.Comparators.SortByDateOfBirth;
-import HW.Tree.Comparators.SortByName;
-import HW.Tree.Comparators.SortByNameLength;
-import HW.Service.UpDownLoader;
+import HW.human.Human;
+import HW.member.Member;
+import HW.tree.comparators.SortByDateOfBirth;
+import HW.tree.comparators.SortByName;
+import HW.tree.comparators.SortByNameLength;
+import HW.service.UpDownLoader;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -12,18 +13,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree <T extends Member> implements Serializable, Iterable<T> {
+
+    private List<T> humanList;
 
     public FamilyTree() {
         this.humanList = new ArrayList<>();
     }
 
-    public void addPerson(Human human) {
+    public void addPerson(T human) {
         humanList.add(human);
     }
 
-    public void addAsChild(Human human) {
+    public void addAsChild(T human) {
         this.addPerson(human);
         if (human.getFather() != null) {
             human.getFather().setChildren(human);
@@ -34,8 +36,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     }
 
-    public Human findPerson(String name, String surname) {
-        for (Human human : humanList) {
+    public T findPerson(String name, String surname) {
+        for (T human : humanList) {
             if (human.getName().equals(name) && human.getSurname().equals(surname)) {
                 return human;
             }
@@ -56,20 +58,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return humanList.listIterator();
     }
 
-    public void SortByName() {
+    public void sortByName() {
         humanList.sort(new SortByName());
     }
 
-    public void SortByDateOfBirth() {
+    public void sortByDateOfBirth() {
         humanList.sort(new SortByDateOfBirth());
     }
 
-    public void PrintHList() {
-        for (Human human : humanList) {
+    public void printHList() {
+        for (T human : humanList) {
             System.out.println(human);
         }
     }
-    public void SortByNameLength() {
+    public void sortByNameLength() {
         humanList.sort(new SortByNameLength());
     }
 }

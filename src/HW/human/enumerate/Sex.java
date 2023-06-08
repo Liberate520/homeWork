@@ -1,4 +1,4 @@
-package HW.Human.Enum;
+package HW.human.enumerate;
 
 public enum Sex {
     M,//("male"),
