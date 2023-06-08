@@ -1,6 +1,12 @@
 import java.util.List;
 
-public interface Tree extends Iterable<Human>{
-    void addHuman(Human human);
-    List<Human> getHumanList();
+public interface Tree<E> extends Iterable<E>{
+    void addHuman(E human);
+    List<E> getHumanList();
+
+    void sortByName();
+
+    void sortByBirthDate();
+
+
 }

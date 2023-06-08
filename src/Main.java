@@ -27,7 +27,7 @@ public class Main {
         human5.addChild(human6);
         human5.addChild(human7);
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         familyTree.addHuman(human1);
         familyTree.addHuman(human2);
         familyTree.addHuman(human3);
@@ -36,7 +36,18 @@ public class Main {
         familyTree.addHuman(human6);
         familyTree.addHuman(human7);
 
+        Dog dog1 = new Dog("dog1", LocalDate.of(2078,4,12), Gender.MALE);
+        Dog dog2 = new Dog("dog2", LocalDate.of(2079,6,17), Gender.FEMALE);
+        Dog dog3 = new Dog("dog3", LocalDate.of(2101,1,4), Gender.MALE);
+        FamilyTree<Dog> dogFamilyTree = new FamilyTree<>();
+        dogFamilyTree.addHuman(dog1);
+        dogFamilyTree.addHuman(dog2);
+        dogFamilyTree.addHuman(dog3);
+
+        System.out.println("--------Исходный список людей--------------");
         System.out.println(familyTree.printHumanList());
+        System.out.println("--------Исходный список собак--------------");
+        System.out.println(dogFamilyTree.printHumanList());
 
         System.out.println("-------------------");
 
@@ -55,21 +66,21 @@ public class Main {
         //System.out.println(familyTreeRestored.printHumanList());
 
         System.out.println();
-        System.out.println("---------------вывод через итератор---------------");
+        System.out.println("---------------вывод людей через итератор---------------");
         for(Human human : familyTree){
             System.out.println(human);
         }
 
         familyTree.sortByName();
         System.out.println();
-        System.out.println("---------------сортировка по имени---------------");
+        System.out.println("---------------сортировка людей по имени---------------");
         for(Human human : familyTree){
             System.out.println(human);
         }
 
         familyTree.sortByBirthDate();
         System.out.println();
-        System.out.println("---------------сортировка по дате рождения---------------");
+        System.out.println("---------------сортировка людей по дате рождения---------------");
         for(Human human : familyTree){
             System.out.println(human);
         }

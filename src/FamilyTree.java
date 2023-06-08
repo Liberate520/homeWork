@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Tree {
-    private List<Human> humanList;
+public class FamilyTree<E extends TreeItem<E>> implements Serializable, Tree<E> {
+    private List<E> humanList;
 
     public FamilyTree(){
         humanList = new ArrayList<>();
     }
 
-    public void addHuman(Human human){
+    public void addHuman(E human){
         humanList.add(human);
     }
 
 
-    public Human getByName(String name){
-        for(Human item : humanList){
+    public E getByName(String name){
+        for(E item : humanList){
             if(item.getName().equals(name)){
                 return item;
             }
@@ -25,28 +25,15 @@ public class FamilyTree implements Serializable, Tree {
         return null;
     }
 
-    public List<Human> findBrothers1(Human humanForSearch){
-        List<Human> brothersList = new ArrayList<>();
 
-        for(Human item : humanList){
-            if(item.getFather() != null) {
-                if (item.getFather().equals(humanForSearch.getFather())
-                        && item.getGender() == Gender.MALE
-                        && !item.getName().equals(humanForSearch.getName())) {
-                    brothersList.add(item);
-                }
-            }
-        }
-        return brothersList;
-    }
 
-    public List<Human> findBrothers(Human humanForSearch){
-        List<Human> brothersList = new ArrayList<>();
-        List<Human> tempList = new ArrayList<>();
+    public List<E> findBrothers(E humanForSearch){
+        List<E> brothersList = new ArrayList<>();
+        List<E> tempList = new ArrayList<>();
         if(humanForSearch.getFather() != null) {tempList = humanForSearch.getFather().getChildren();}
         else if (humanForSearch.getMother() != null) {tempList = humanForSearch.getMother().getChildren();}
 
-        for(Human item : tempList){
+        for(E item : tempList){
             if (item.getGender() == Gender.MALE && !item.getName().equals(humanForSearch.getName())){
                 brothersList.add(item);
             }
@@ -57,26 +44,27 @@ public class FamilyTree implements Serializable, Tree {
 
     public String printHumanList(){
         String printer = "Family tree contains " + humanList.size() + " entities:" + "\n";
-        for(Human item : humanList){
+        for(E item : humanList){
             printer += item.toString() + "\n";
         }
         return printer;
     }
 
-    public List<Human> getHumanList() {
+    public List<E> getHumanList() {
         return humanList;
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(humanList);
     }
 
     public void sortByName(){
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByBirthDate(){
-        humanList.sort(new HumanComparatorByBirthDate());
+        humanList.sort(new HumanComparatorByBirthDate<>());
     }
+
 }
