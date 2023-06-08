@@ -1,42 +1,79 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Human {
-    private static int human_id;
+    private static int humanIdCounter = 0;
     private int id;
     private String name;
-    private String date;
+    private LocalDate dateOfBirth;
+    private LocalDate deathDate;
+    private Human father;
+    private Human mother;
+    private List<Human> children;
 
-
-    public Human(String name, String date) {
+    public Human(String name, LocalDate dateOfBirth, Human father, Human mother) {
         this.name = name;
-        this.date = date;
-        id = human_id++;
+        this.dateOfBirth = dateOfBirth;
+        this.deathDate = null;
+        this.father = father;
+        this.mother = mother;
+        this.children = new ArrayList<>();
+        this.id = humanIdCounter++;
     }
 
-
-//    public Human() {
-//        this("default", LocalDate.parse("00.00.0000"));
-//    }
-
+    public Human(String name, LocalDate dateOfBirth) {
+        this(name, dateOfBirth, null, null);
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
+
+    public Human getFather() {
+        return father;
+    }
+
+    public Human getMother() {
+        return mother;
+    }
+
+    public List<Human> getChildren() {
+        return children;
+    }
+
+    public List<Human> getParents() {
+        List<Human> parents = new ArrayList<>();
+        if (father != null) {
+            parents.add(father);
+        }
+        if (mother != null) {
+            parents.add(mother);
+        }
+        return parents;
+    }
+
+    public boolean addChild(Human child) {
+        if (children == null) {
+            children = new ArrayList<>();
+        }
+        if (!children.contains(child)) {
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public String toString() {
-        return "Human{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", date='" + date + '\'' +
-                '}';
-    }
-
-    protected void displayFamilyTree() {
+        return "Имя: " + name + ", Дата рождения: " + dateOfBirth;
     }
 }
-
