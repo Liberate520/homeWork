@@ -1,7 +1,5 @@
 package com.example.FamilyTree.DataForTree;
 
-import com.example.FamilyTree.FamilyTree;
-
 import java.io.Serializable;
 
 public interface FileProcessing {

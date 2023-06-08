@@ -1,9 +1,6 @@
 package com.example.FamilyTree;
 
-import com.example.FamilyTree.DataForTree.FileHandler;
-import com.example.FamilyTree.DataForTree.Gender;
-import com.example.FamilyTree.DataForTree.Human;
-import com.example.FamilyTree.DataForTree.HumanFamily;
+import com.example.FamilyTree.DataForTree.*;
 
 import java.io.File;
 import java.util.*;
@@ -14,15 +11,15 @@ public class Main {
         List<Human> humanList = createHumanList();
         FamilyTree familyTree = createFamilyTree(humanList);
         System.out.println("Общий список людей: ");
-        System.out.println(familyTree.printHumansList());
+        System.out.println(printHumanList(familyTree));
 
         System.out.println("Сортировка по дню рождения: ");
         familyTree.sortByBirthday();
-        System.out.println(familyTree.printHumansList());
+        System.out.println(printHumanList(familyTree));
 
         System.out.println("Сортировка по имени: ");
         familyTree.sortByName();
-        System.out.println(familyTree.printHumansList());
+        System.out.println(printHumanList(familyTree));
 
         Scanner scan = new Scanner(System.in);
         String answer = "0";
@@ -32,8 +29,8 @@ public class Main {
             System.out.println("---------\n"+
                                "  0: ВЫХОД");
             answer = scan.nextLine();
-            if (answer.equals("0")!=true) {filterFamilyTree(answer, familyTree);}
-        } while (answer.equals("0")!=true);
+            if (!answer.equals("0")) {filterFamilyTree(answer, familyTree);}
+        } while (!answer.equals("0"));
         scan.close();
     }
 
@@ -55,46 +52,49 @@ public class Main {
         String path = "./src/main/java/com/example/FamilyTree/FT.txt";
         File file = new File(path);
         FamilyTree familyTree = new FamilyTree();
+        Family element;
+        //Service human;
         if (!file.exists()) {
-            HumanFamily element = new HumanFamily(humanList.get(0));
+            //human = new Service(humanList.get(0));
+            element = new Family(humanList.get(0));
             element.addChildren(humanList.get(2));
             element.addChildren(humanList.get(3));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(1));
+            element = new Family(humanList.get(1));
             element.addChildren(humanList.get(2));
             element.addChildren(humanList.get(3));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(2));
+            element = new Family(humanList.get(2));
             element.addParents(humanList.get(0));
             element.addParents(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(3));
+            element = new Family(humanList.get(3));
             element.addParents(humanList.get(0));
             element.addParents(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(4));
+            element = new Family(humanList.get(4));
             element.addChildren(humanList.get(0));
             element.addChildren(humanList.get(8));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(5));
+            element = new Family(humanList.get(5));
             element.addChildren(humanList.get(0));
             element.addChildren(humanList.get(8));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(6));
+            element = new Family(humanList.get(6));
             element.addChildren(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(7));
+            element = new Family(humanList.get(7));
             element.addChildren(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new HumanFamily(humanList.get(8));
+            element = new Family(humanList.get(8));
             element.addParents(humanList.get(4));
             element.addParents(humanList.get(5));
             familyTree.addHumanFamilyList(element);
@@ -123,7 +123,7 @@ public class Main {
     public static String printHumanList(FamilyTree familyTree) {
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
-        for (HumanFamily human : familyTree) {
+        for (Family human : familyTree) {
             stringBuilder.append(index++ + ": ");
             stringBuilder.append(human.getHuman());
             stringBuilder.append("\n");
@@ -143,7 +143,7 @@ public class Main {
         }
     }
 
-    public static void showRelatives(HumanFamily human1, HumanFamily human2, FamilyTree familyTree) {
+    public static void showRelatives(Family human1, Family human2, FamilyTree familyTree) {
         if (human1.getParents().contains(human2.getHuman())) {
             System.out.println(human2.getHuman() + (human2.getHuman().getGender() == Gender.female ? " - mother " : " - father") + "\n" +
                     human1.getHuman() + (human1.getHuman().getGender() == Gender.female ? " - daughter " : " - son"));
@@ -186,12 +186,12 @@ public class Main {
         }
     }
 
-    public static boolean getHumanGrandFamily(HumanFamily human1, HumanFamily human2, FamilyTree familyTree) {
+    public static boolean getHumanGrandFamily(Family human1, Family human2, FamilyTree familyTree) {
         Boolean i = false;
         if (!human1.getParents().isEmpty()) {
             for (int j = 0; j < human1.getParents().size(); j++) {
-                if (familyTree.getHumanFamily(human1.getParents().get(j)).getParents().contains(human2.getHuman()) ||
-                    human2.getChildren().contains(familyTree.getHumanFamily(human1.getParents().get(j)).getHuman())) {
+                if (getHumanFamily((Human) human1.getParents().get(j), familyTree).getParents().contains(human2.getHuman()) ||
+                    human2.getChildren().contains(getHumanFamily((Human) human1.getParents().get(j), familyTree).getHuman())) {
                     i = true;
                 }
             }
@@ -199,11 +199,11 @@ public class Main {
         return i;
     }
 
-    public static boolean getHumanFamilyUncle(HumanFamily human1, HumanFamily human2, FamilyTree familyTree) {
+    public static boolean getHumanFamilyUncle(Family human1, Family human2, FamilyTree familyTree) {
         Boolean i = false;
         if (!human1.getParents().isEmpty()) {
             for (int j = 0; j < human1.getParents().size(); j++) {
-                if (getHumanGrandFamily(human2, familyTree.getHumanFamily(human1.getParents().get(j)), familyTree)) {
+                if (getHumanGrandFamily(human2, getHumanFamily((Human) human1.getParents().get(j), familyTree), familyTree)) {
                     i = true;
                 }
             }
@@ -211,7 +211,7 @@ public class Main {
         return i;
     }
 
-    public static boolean getHumanFamilyAtParents(HumanFamily human1, HumanFamily human2, FamilyTree familyTree) {
+    public static boolean getHumanFamilyAtParents(Family human1, Family human2, FamilyTree familyTree) {
         Boolean i = false;
         if (!human1.getParents().isEmpty() && !human2.getParents().isEmpty()) {
             if (human1.getParents().equals(human2.getParents())) {
@@ -219,13 +219,13 @@ public class Main {
             }
         } else if (!human1.getParents().isEmpty()) {
             for (int j = 0; j < human1.getParents().size(); j++) {
-                if (familyTree.getHumanFamily(human1.getParents().get(j)).getChildren().contains(human2.getHuman())) {
+                if (getHumanFamily((Human) human1.getParents().get(j), familyTree).getChildren().contains(human2.getHuman())) {
                     i = true;
                 }
             }
         } else if (!human2.getParents().isEmpty()) {
             for (int j = 0; j < human2.getParents().size(); j++) {
-                if (familyTree.getHumanFamily(human2.getParents().get(j)).getChildren().contains(human1.getHuman())) {
+                if (getHumanFamily((Human) human2.getParents().get(j), familyTree).getChildren().contains(human1.getHuman())) {
                     i = true;
                 }
             }
@@ -236,7 +236,7 @@ public class Main {
     public static boolean getHumanFamilyAtChildren(List<Human> children1, List<Human> children2, FamilyTree familyTree) {
         Boolean i = false;
         for (int j = 0; j < children1.size(); j++) {
-            if (familyTree.getHumanFamily(children1.get(j)).getChildren().equals(children2)) {
+            if (getHumanFamily(children1.get(j), familyTree).getChildren().equals(children2)) {
                     i = true;
             }
         }
@@ -247,12 +247,21 @@ public class Main {
         Boolean i = false;
         for (int j = 0; j < children1.size(); j++) {
             for (int k = 0; k < children2.size(); k++) {
-                if (familyTree.getHumanFamily(children1.get(j)).getChildren().equals(familyTree.getHumanFamily(children2.get(k)).getChildren())) {
+                if (getHumanFamily(children1.get(j), familyTree).getChildren().equals(getHumanFamily(children2.get(k), familyTree).getChildren())) {
                     i = true;
                 }
             }
         }
         return i;
+    }
+
+    public static Family getHumanFamily(Human human, FamilyTree familyTree) {
+        for (int i = 0; i < familyTree.getHumanFamilyList().size(); i++) {
+            if (familyTree.getHumanFamilyList().get(i).getHuman().equals(human)) {
+                return familyTree.getHumanFamilyList().get(i);
+            }
+        }
+        return new Family(human);
     }
 }
 

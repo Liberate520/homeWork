@@ -1,14 +1,18 @@
-package com.example.FamilyTree.DataForTree;
+package com.example.FamilyTree;
+
+import com.example.FamilyTree.DataForTree.FamilyTreeInterface;
+import com.example.FamilyTree.DataForTree.Gender;
 
 import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeInterface {
     private String name;
     private Date birthday;
     private Gender gender;
+    private int puberty = 15; // средний возврат половой зрелости
 
     public Human(String name, String birt, Gender gender) {
         this.name = name;
@@ -27,6 +31,11 @@ public class Human implements Serializable {
     public String getName() {
         return name;
     }
+
+    public int getPuberty() {
+        return puberty;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat simpDateForm = new SimpleDateFormat("dd MMM yyyy");
