@@ -22,7 +22,7 @@ public class Main {
         filePathSkywalkers.saveFile(skywalkers);
 
         ruriks = filePathRuriks.loadFile(); //Загрузка из файла .bin
-//        skywalkers = filePathSkywalkers.loadFile();
+        skywalkers = filePathSkywalkers.loadFile();
 
 
         FamilyTreeView<Human> ruriksView = new FamilyTreeView<>(ruriks);

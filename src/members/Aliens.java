@@ -1,10 +1,11 @@
 package members;
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aliens implements Member {
+public class Aliens implements Member, Serializable {
 
     private String name;
     private String surname;
