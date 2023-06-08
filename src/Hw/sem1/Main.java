@@ -19,5 +19,17 @@ public class Main {
 
         tom.setFather(john);
         tom.setMother(jane);
+
+        List<Person> allMembers = familyTree.getAllMembers();
+        for (Person person : allMembers) {
+            System.out.println("Имя: " + person.getName());
+            System.out.println("Пол: " + person.getGender());
+            System.out.println("День рождения: " + person.getBirthDate());
+            System.out.println("День смерти: " + person.getDeathDate());
+            System.out.println("Отец: " + (person.getFather() != null ? person.getFather().getName() : "Unknown"));
+            System.out.println("Мать: " + (person.getMother() != null ? person.getMother().getName() : "Unknown"));
+            System.out.println("Дети: " + person.getChildren().size());
+            System.out.println("--------------------");
+        }
     }
 }
