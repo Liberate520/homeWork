@@ -1,7 +1,7 @@
 package human;
 
-import comparators.ChildrenComparatorByAge;
-import comparators.ChildrenComparatorByName;
+import comparators.HumanComparatorByAge;
+import comparators.HumanComparatorByName;
 import tree.FamilyTreeItem;
 
 import java.io.*;
@@ -116,6 +116,9 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         sb.append("Фамилия: ");
         sb.append(lastname);
         sb.append(", ");
+        sb.append("Дата рождения: ");
+        sb.append(birthDate);
+        sb.append(", ");
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getMotherInfo());
@@ -201,12 +204,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         return false;
     }
 
-    public void childrenSortByName() { children.sort(new ChildrenComparatorByName());}
-
-    public void childrenSortByAge() {
-        children.sort(new ChildrenComparatorByAge());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -226,43 +223,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         return Objects.hash(firstname, lastname, birthDate, gender, mother, father, children, brothers, sisters);
     }
 
-    @Override
-    public String toString() {
-        String genderString = gender == Gender.Male ? "Мужчина" : "Женщина";
-        StringBuilder sb = new StringBuilder();
-        sb.append(firstname).append(" ").append(lastname).append(", ");
-        sb.append("Дата рождения: ").append(birthDate).append(", ");
-        sb.append("Пол: ").append(genderString).append(", ");
-        if (mother != null) {
-            sb.append("Мать: ").append(mother.getFirstName()).append(" ").append(mother.getLastName()).append(", ");
-        }
-        if (father != null) {
-            sb.append("Отец: ").append(father.getFirstName()).append(" ").append(father.getLastName()).append(", ");
-        }
-        if (brothers != null && !brothers.isEmpty()) {
-            sb.append("Братья: ");
-            for (Human brother : brothers) {
-                sb.append(brother.getFirstName()).append(" ").append(brother.getLastName()).append(", ");
-            }
-            sb.delete(sb.length() - 2, sb.length()).append(", ");
-        }
-        if (sisters != null && !sisters.isEmpty()) {
-            sb.append("Сестры: ");
-            for (Human sister : sisters) {
-                sb.append(sister.getFirstName()).append(" ").append(sister.getLastName()).append(", ");
-            }
-            sb.delete(sb.length() - 2, sb.length()).append(", ");
-        }
-        if (children != null && !children.isEmpty()) {
-            sb.append("Дети: ");
-            for (Human child : children) {
-                sb.append(child.getFirstName()).append(" ").append(child.getLastName()).append(", ");
-            }
-            sb.delete(sb.length() - 2, sb.length()).append(", ");
-        }
-        return sb.toString();
-    }
-
+  
     @Override
     public int compareTo(Human o) {
         return firstname.compareTo(o.firstname);
