@@ -1,11 +1,11 @@
 package familyTrees.comparators;
 
-import human.Human;
+import members.Member;
 
 import java.util.Comparator;
 
-public class NameLength implements Comparator<Human> {
-    public int compare(Human human1, Human human2) {
-        return human1.getNAME().length() - human2.getNAME().length();
+public class NameLength<T extends Member> implements Comparator<T> {
+    public int compare(T human1, T human2) {
+        return human1.getName().length() - human2.getName().length();
     }
 }

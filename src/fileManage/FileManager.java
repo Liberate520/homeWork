@@ -4,6 +4,7 @@ package fileManage;
 import familyTrees.FamilyTree;
 import fileManage.interfaces.Loadable;
 import fileManage.interfaces.Savable;
+import members.Member;
 
 import java.io.*;
 import java.nio.file.Path;

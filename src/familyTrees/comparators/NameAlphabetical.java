@@ -1,12 +1,12 @@
 package familyTrees.comparators;
 
-import human.Human;
+import members.Member;
 
 import java.util.Comparator;
 
 
-public class NameAlphabetical implements Comparator<Human> {
-    public int compare(Human human1, Human human2) {
-        return human1.getNAME().compareTo(human2.getNAME());
+public class NameAlphabetical<T extends Member> implements Comparator<T> {
+    public int compare(T human1, T human2) {
+        return human1.getName().compareTo(human2.getName());
     }
 }

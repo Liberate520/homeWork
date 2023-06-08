@@ -1,11 +1,12 @@
 package familyTrees.iterators;
 
-import human.Human;
+import members.Human;
+import members.Member;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator <T extends Human>implements Iterator<T> {
+public class PersonIterator <T extends Member>implements Iterator<T> {
 
     private int index;
     private List<T> personList;

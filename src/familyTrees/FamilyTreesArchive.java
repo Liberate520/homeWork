@@ -1,13 +1,14 @@
 package familyTrees;
 
-import human.Human;
+import members.Aliens;
+import members.Human;
 
 public class FamilyTreesArchive {
 
     /**
      * trees.FamilyTreesArchive of Rurik dynasty
      */
-    public static FamilyTree ruriks = new FamilyTree() {
+    public static FamilyTree<Human> ruriks = new FamilyTree<>() {
         {
             addPersonInFamilyTree(new Human("Рюрик", "man", 879));
             addPersonInFamilyTree(new Human("Игорь", "man", 945), "Рюрик", 879);
@@ -41,6 +42,17 @@ public class FamilyTreesArchive {
         }
     };
 
+    public static FamilyTree<Aliens> skywalkers = new FamilyTree<>() {
+        {
+            addPersonInFamilyTree(new Aliens("Shmi", "Skywalker", "woman", -72));
+            addPersonInFamilyTree(new Aliens("Anakin", "Skywalker", "man", -42), "Shmi", -72);
+            addPersonInFamilyTree(new Aliens("Padme", "Amidala", "woman", -46));
+            addPersonInFamilyTree(new Aliens("Luke", "Skywalker", "man", -19), "Anakin", -42, "Padme", -46);
+            addPersonInFamilyTree(new Aliens("Leia", "Solo", "woman", -19), "Anakin", -42, "Padme", -46);
+            addPersonInFamilyTree(new Aliens("Mara", "Skywalker", "woman", -18));
+            addPersonInFamilyTree(new Aliens("Ben", "Skywalker", "man", 26), "Luke", -19, "Mara", -18);
+        }
+    };
 
 }
 

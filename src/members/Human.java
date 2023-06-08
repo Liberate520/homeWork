@@ -1,4 +1,4 @@
-package human;
+package members;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -6,24 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Human implements Serializable {
+public class Human implements Member, Serializable {
     private String NAME;
     private Year yearOfBirth;
-    private String sex;
+    private String gender;
     private Human father;
     private Human mother;
-    private List<Human> children;
+    private List<Member> children;
 
-    public Human(String name, String sex, int yearOfBirth) {
+    public Human(String name, String gender, int yearOfBirth) {
         this.NAME = name;
         this.yearOfBirth = Year.of(yearOfBirth);
-        this.sex = sex;
+        this.gender = gender;
         this.father = null;
         this.mother = null;
         this.children = new ArrayList<>();
     }
 
-    public String getNAME() {
+    public String getName() {
         return NAME;
     }
 
@@ -31,12 +31,17 @@ public class Human implements Serializable {
         return yearOfBirth;
     }
 
-    public String getSex() {
-        return sex;
+    public String getGender() {
+        return gender;
     }
 
     public Human getFather() {
         return father;
+    }
+
+    @Override
+    public void setFather(Member father) {
+
     }
 
     public void setFather(Human father) {
@@ -47,6 +52,16 @@ public class Human implements Serializable {
         return mother;
     }
 
+    @Override
+    public void setMother(Member mother) {
+
+    }
+
+    @Override
+    public void addChild(Member child) {
+
+    }
+
     public void setMother(Human mother) {
         this.mother = mother;
     }
@@ -55,21 +70,21 @@ public class Human implements Serializable {
         this.children.add(child);
     }
 
-    public List<Human> getChildren() {
+    public List<Member> getChildren() {
         return children;
     }
 
     @Override
     public String toString() {
         ArrayList<String> temp = new ArrayList<>();
-        for (Human child : children) {
-            temp.add(child.getNAME());
+        for (Member child : children) {
+            temp.add(child.getName());
         }
         return "trees.Human{" +
                 "Name='" + NAME + '\'' +
                 ", date of brith=" + yearOfBirth +
-                ", father=" + Optional.ofNullable(father).map(Human::getNAME).orElse("unknown") +
-                ", mother=" + Optional.ofNullable(mother).map(Human::getNAME).orElse("unknown") +
+                ", father=" + Optional.ofNullable(father).map(Human::getName).orElse("unknown") +
+                ", mother=" + Optional.ofNullable(mother).map(Human::getName).orElse("unknown") +
                 ", children=" + temp + "}";
 
     }
