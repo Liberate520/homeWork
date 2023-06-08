@@ -20,6 +20,9 @@ public class Person {
         this.FirstName = FirstName;
         this.MiddleName = MiddleName;
         this.Sex = Sex;
+        this.Father = null;
+        this.Mother = null;
+        this.Alive = true;
     }
 
     public int getAge() {
@@ -37,6 +40,10 @@ public class Person {
             }
         }
         return Age;
+    }
+
+    public String getSurname() {
+        return Surname;
     }
 
     public void setYearOfBirth(int yearOfBirth) {
