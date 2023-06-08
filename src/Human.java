@@ -6,14 +6,16 @@ public class Human {
     private static int humanIdCounter = 0;
     private int id;
     private String name;
+    private String gender;
     private LocalDate dateOfBirth;
     private LocalDate deathDate;
     private Human father;
     private Human mother;
     private List<Human> children;
 
-    public Human(String name, LocalDate dateOfBirth, Human father, Human mother) {
+    public Human(String name, String gender, LocalDate dateOfBirth, Human father, Human mother) {
         this.name = name;
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.deathDate = null;
         this.father = father;
@@ -22,8 +24,8 @@ public class Human {
         this.id = humanIdCounter++;
     }
 
-    public Human(String name, LocalDate dateOfBirth) {
-        this(name, dateOfBirth, null, null);
+    public Human(String name, String gender, LocalDate dateOfBirth) {
+        this(name, gender, dateOfBirth, null, null);
     }
 
     public String getName() {
@@ -74,6 +76,6 @@ public class Human {
 
     @Override
     public String toString() {
-        return "Имя: " + name + ", Дата рождения: " + dateOfBirth;
+        return "Имя: " + name + ", пол: " + gender + ", Дата рождения: " + dateOfBirth + ", Дата смерти: " + deathDate + ", ";
     }
 }
