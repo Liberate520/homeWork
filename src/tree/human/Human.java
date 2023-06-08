@@ -1,11 +1,13 @@
 package tree.human;
 
+import tree.geneticTree.GroupItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, GroupItem {
     private static int global_id;
     private int id;
     private String name;

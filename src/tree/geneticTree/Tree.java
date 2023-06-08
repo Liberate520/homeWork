@@ -3,16 +3,17 @@ package tree.geneticTree;
 import tree.human.Human;
 import tree.human.HumanComparatorByAge;
 import tree.human.HumanComparatorByName;
+import tree.service.Group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class Tree <T extends GroupItem> implements Serializable, Iterable<T>, Group<T> {
+    private List<T> humanList;
 
-    public Tree(List<Human> humanList) {
+    public Tree(List<T> humanList) {
         this.humanList = humanList;
     }
 
@@ -21,21 +22,21 @@ public class Tree implements Serializable, Iterable<Human> {
     }
 
     public Human getByName(String name) {
-        for (Human human : humanList) {
+        for (T human : humanList) {
             if (human.getName().equals(name)) {
-                return human;
+                return (Human) human;
             }
         }
         return null;
     }
 
-    public void add(Human human) {
+    public void addHuman(T human) {
         humanList.add(human);
         if (human.getFather() != null) {
-            human.getFather().addChildren(human);
+            human.getFather().addChildren((Human) human);
         }
         if (human.getMother() != null) {
-            human.getMother().addChildren(human);
+            human.getMother().addChildren((Human) human);
         }
     }
 
@@ -44,7 +45,7 @@ public class Tree implements Serializable, Iterable<Human> {
         sb.append("В дереве ");
         sb.append(humanList.size());
         sb.append(" объектов: \n");
-        for (Human human : humanList) {
+        for (T human : humanList) {
             sb.append(human.getInfo());
             sb.append("\n");
         }
@@ -52,15 +53,15 @@ public class Tree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return humanList.iterator();
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge<>());
     }
 }

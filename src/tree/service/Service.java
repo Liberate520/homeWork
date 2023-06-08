@@ -5,19 +5,27 @@ import tree.human.Gender;
 import tree.human.Human;
 import tree.saveLoad.Writable;
 import tree.saveLoad.Write;
-
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Service implements Serializable {
     private int id;
-    private Tree geneticTree;
+//    private Tree geneticTree;
+    Group<Human> geneticTree;
     private Writable writable;
 
+    public Service(Group<Human> humans) {
+        this.geneticTree = humans;
+        writable = new Write();
+    }
+
+//    public Service() { // без понятия как сделать такой конструктор
+//        this(new Tree<>());
+//        writable = new Write();
+//    }
+
     public boolean save(String filePath) {
-        return writable.save(geneticTree, filePath);
+        return writable.save((Serializable) geneticTree, filePath);
     }
 
     public void load(String filePath) {
@@ -29,22 +37,12 @@ public class Service implements Serializable {
         }
     }
 
-    public Service(Tree tree) {
-        this.geneticTree = tree;
-        writable = new Write();
-    }
-
-    public Service() {
-        this(new Tree());
-        writable = new Write();
-    }
-
     public void addHuman(String name, LocalDate birthDate, Gender gender, Human father, Human mother) {
-        geneticTree.add(new Human(id++, name, birthDate, gender, father, mother));
+        geneticTree.addHuman(new Human(id++, name, birthDate, gender, father, mother));
     }
 
     public void addHuman(String name, LocalDate yearOfBirth, Gender gender) { // конструктор без родителей/детей
-        geneticTree.add(new Human(id++, name, yearOfBirth, gender, null, null));
+        geneticTree.addHuman(new Human(id++, name, yearOfBirth, gender, null, null));
     }
 
     public String getInfo() {

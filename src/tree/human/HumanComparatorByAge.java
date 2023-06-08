@@ -1,10 +1,12 @@
 package tree.human;
 
+import tree.geneticTree.GroupItem;
+
 import java.util.Comparator;
 
-public class HumanComparatorByAge implements Comparator<Human> {
+public class HumanComparatorByAge<T extends GroupItem> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getBirthDate().getYear() - o2.getBirthDate().getYear();
     }
 }
