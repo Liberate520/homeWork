@@ -13,7 +13,7 @@ public interface Member extends Serializable, Comparable<Member> {
     void addFamily(Family<? extends Member> family);
 
     /**
-     * Add 'connection' to 'other member
+     * Add 'connection' to 'other member'
      */
     void addConnection(Member member, Connection connection);
 

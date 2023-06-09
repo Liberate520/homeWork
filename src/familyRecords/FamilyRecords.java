@@ -15,19 +15,19 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     }
 
 
-    public void addHumanToFamily(E member, Family<E> family) {
+    public void addToFamily(E member, Family<E> family) {
         member.addFamily(family);
         family.addHuman(member);
     }
 
     public void addFamily(String name, E familyMember) {
-        Family<E> newFamily = searchFamilyBeName(name);
+        Family<E> newFamily = searchFamilyByName(name);
         if (newFamily == null) {
             newFamily = new Family<E>(name);
             families.add(newFamily);
         }
         if (familyMember != null) {
-            addHumanToFamily(familyMember, newFamily);
+            addToFamily(familyMember, newFamily);
         }
     }
 
@@ -54,7 +54,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
      * @param name name to search
      * @return First founded family or null
      */
-    public Family<E> searchFamilyBeName(String name) {
+    public Family<E> searchFamilyByName(String name) {
         for (Family<E> family : families) {
             if (family.getName().equals(name)) return family;
         }
@@ -74,7 +74,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
      * 'family', 'husband' and 'wife' must exist and be members of this records
      */
     public void addWife(Family<E> family, E husband, E wife) {
-        addHumanToFamily(wife, family);
+        addToFamily(wife, family);
         addConnection(husband, Connection.HUSBAND, wife);
     }
 
@@ -83,7 +83,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
      * 'family', 'parent' and 'child' must exist and be members of this records
      */
     public void addChild(Family<E> family, E parent, E child) {
-        addHumanToFamily(child, family);
+        addToFamily(child, family);
         addConnection(parent, Connection.PARENT, child);
     }
 
@@ -104,7 +104,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
      * 'family', 'parent' and 'child' must exist and be members of this records
      */
     public void addParent(Family<E> family, E child, E parent) {
-        addHumanToFamily(parent, family);
+        addToFamily(parent, family);
         addConnection(parent, Connection.PARENT, child);
     }
 
