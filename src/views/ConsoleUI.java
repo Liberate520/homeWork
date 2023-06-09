@@ -235,7 +235,7 @@ public class ConsoleUI implements View {
     private void changeBirthday(int input) {
         print("Enter new birthday ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
         LocalDate date = getDateInput(true);
-        if (date == null) {
+        if (date != null) {
             presenter.setDate(input, date);
         }
     }
