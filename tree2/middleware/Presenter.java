@@ -82,4 +82,8 @@ public class Presenter {
             System.out.println("Произошла непредвиденная ошибка");
         }
     }
+
+    public void deleteFamilyTree() {
+        service.deleteFamilyTree();
+    }
 }

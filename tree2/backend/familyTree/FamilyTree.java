@@ -77,4 +77,7 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         families.sort(new HumanObjectInterfaceComparatorbyId().reversed());
     }
 
+    public void delete() {
+        this.families.clear();
+    }
 }

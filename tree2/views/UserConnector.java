@@ -28,7 +28,7 @@ public class UserConnector implements View {
         try {
             System.out.println("Укажите имя человека");
             String name = scanner.nextLine();
-            System.out.println("Укажите дату рождения в формате гггг.м.д");
+            System.out.println("Укажите дату рождения в формате гггг.мм.дд");
             String date = scanner.nextLine();
             String[] parts = date.split("\\.");
             int year = Integer.parseInt(parts[0]);
@@ -101,6 +101,10 @@ public class UserConnector implements View {
 
     public void LoadFile() {
         presenter.loadFile();
+    }
+
+    public void deleteFamilyTree() {
+        presenter.deleteFamilyTree();
     }
 
     public void updatePesron() {

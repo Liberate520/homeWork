@@ -17,8 +17,13 @@ public class Service<E> {
     }
 
     public void addFamilyMember(String name, LocalDate date) {
-        Human member = new Human(name, date);
-        family.addPeople(member);
+        try {
+            Human member = new Human(name, date);
+            family.addPeople(member);
+        }
+        catch (Exception e) {
+            System.out.println("Ошибка ввода данных!");
+        }
     }
 
     public void showAllFamilyMembers() {
@@ -63,8 +68,13 @@ public class Service<E> {
     }
 
     public void updatePersonByName(String oldName, String name, LocalDate birthdate) {
-        Human person = (Human) family.findPersonByName(family, oldName);
-        person.updatePersonParameters(name, birthdate);
+        try {
+            Human person = (Human) family.findPersonByName(family, oldName);
+            person.updatePersonParameters(name, birthdate);
+        }
+        catch (Exception o){
+            System.out.println("Ошибка ввода данных!");
+        }
     }
 
     public void saveFamilyTree() throws IOException {
@@ -76,5 +86,9 @@ public class Service<E> {
         FileHandler fileHandler = new FileHandler();
         this.family = fileHandler.load();
         return this.family;
+    }
+
+    public void deleteFamilyTree() {
+        family.delete();
     }
 }

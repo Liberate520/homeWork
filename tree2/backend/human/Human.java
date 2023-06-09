@@ -1,9 +1,10 @@
 package homeWork.tree2.backend.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Human implements Comparable<Human>, HumanObjectInterface<Human> {
+public class Human implements Serializable, Comparable<Human>, HumanObjectInterface<Human> {
     private String name;
     private LocalDate birthdate;
     private Human mother;

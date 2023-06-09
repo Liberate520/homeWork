@@ -19,6 +19,7 @@ public class MainMenu {
         commandList.add(new UpdatePesron(userConnector));
         commandList.add(new SaveFile(userConnector));
         commandList.add(new LoadFile(userConnector));
+        commandList.add(new DeleteFamilyTree(userConnector));
         commandList.add(new Finish(userConnector));
     }
 
