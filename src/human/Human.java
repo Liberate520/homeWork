@@ -1,35 +1,38 @@
 package human;
 
 import family.Family;
-import human.comparator.*;
+import member.Connection;
+import member.Gender;
+import member.Member;
+import member.comparator.MemberComparator;
+import member.comparator.MemberComparatorByName;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Member {
     private String fullName;
     private Gender gender;
     private Calendar birthDate;
     private Calendar deathDate;
-    private Set<Family> families;
-    private Map<Connection, Set<Human>> connections;
+    private Set<Family<? extends Member>> families;
+    private Map<Connection, Set<Member>> connections;
 
-    public Human(String fullName, Gender gender, Calendar birthDate, Calendar deathDate, Family family) {
+    public Human(String fullName, Gender gender, Calendar birthDate, Calendar deathDate, Family<Member> family) {
         this.fullName = fullName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.families = new HashSet<>();
         if (family != null) this.families.add(family);
-        connections = new HashMap<Connection, Set<Human>>();
+        connections = new HashMap<Connection, Set<Member>>();
     }
     public Human(String fullName, Gender gender, Calendar birthDate, Calendar deathDate) {
         this(fullName, gender, birthDate, deathDate, null);
     }
-    public Human(String fullName, Gender gender, Calendar birthDate, Family family) {
+    public Human(String fullName, Gender gender, Calendar birthDate, Family<Member> family) {
         this(fullName, gender, birthDate, null, family);
     }
-    public Human(String fullName, Gender gender, Family family) {
+    public Human(String fullName, Gender gender, Family<Member> family) {
         this(fullName, gender, null, null, family);
     }
     public Human(String fullName, Gender gender) {
@@ -40,18 +43,18 @@ public class Human implements Serializable, Comparable<Human> {
      * Add to Family connection
      * @param family which family to connect
      */
-    public void addFamily(Family family) {
+    public void addFamily(Family<? extends Member> family) {
         this.families.add(family);
     }
 
     /**
      * Add 'connection' to 'human
      */
-    public void addConnection(Human human, Connection connection) {
+    public void addConnection(Member member, Connection connection) {
         if (!connections.containsKey(connection)) {
             connections.put(connection, new HashSet<>());
         }
-        connections.get(connection).add(human);
+        connections.get(connection).add(member);
     }
 
     public String getName() {
@@ -78,11 +81,11 @@ public class Human implements Serializable, Comparable<Human> {
         this.deathDate = deathDate;
     }
 
-    public Set<Human> getRelatedMembers(Connection connection) {
+    public Set<? extends Member> getRelatedMembers(Connection connection) {
         return connections.get(connection);
     }
 
-    public Set<Family> getFamilies() {
+    public Set<Family<? extends Member>> getFamilies() {
         return families;
     }
 
@@ -121,8 +124,8 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     @Override
-    public int compareTo(Human human) {
-        HumanComparator comparator = new HumanComparatorByName();
-        return comparator.compare(this, human);
+    public int compareTo(Member otherMember) {
+        MemberComparator<Member> comparator = new MemberComparatorByName<>();
+        return comparator.compare(this, otherMember);
     }
 }

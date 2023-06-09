@@ -3,13 +3,16 @@ package converter;
 import human.*;
 import family.*;
 import familyRecords.*;
+import member.Connection;
+import member.Gender;
+import member.Member;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class CSVConverter implements Converter {
+public class CSVConverter implements Converter<Human> {
     private final String path;
     private final String csvDelimiter;
     public final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.csv"));
@@ -44,26 +47,26 @@ public class CSVConverter implements Converter {
         String[] dateParts = str.split("-");
         return new GregorianCalendar(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
     }
-    private String familiesNames(Set<Family> families) {
+    private String familiesNames(Set<Family<? extends Member>> families) {
         if (families == null || families.isEmpty()) return "null";
         List<String> names = new ArrayList<>();
-        for (Family family:families) {
+        for (Family<? extends Member> family:families) {
             names.add(family.getName());
         }
         return String.join(",", names);
     }
 
-    private String connectedPeopleNames(Set<Human> relatedMembers) {
+    private String connectedPeopleNames(Set<? extends Member> relatedMembers) {
         if (relatedMembers == null || relatedMembers.isEmpty()) return "null";
         List<String> names = new ArrayList<>();
-        for (Human human:relatedMembers) {
+        for (Member human:relatedMembers) {
             names.add(human.getName());
         }
         return String.join(",", names);
     }
 
     @Override
-    public void save(FamilyRecords records){
+    public void save(FamilyRecords<Human> records){
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(path), StandardCharsets.UTF_8))) {
             convertStatus = "In progress";
@@ -91,9 +94,9 @@ public class CSVConverter implements Converter {
     }
 
     @Override
-    public FamilyRecords load() {
+    public FamilyRecords<Human> load() {
         // TODO simplify this
-        FamilyRecords records = new FamilyRecords();
+        FamilyRecords<Human> records = new FamilyRecords<>();
         Map<Human, List<String>> humanConnections = new HashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));

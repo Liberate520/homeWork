@@ -1,29 +1,29 @@
 package familyRecords;
 
-import human.Human;
-import human.Connection;
+import member.Connection;
 import converter.Converter;
 import family.Family;
+import member.Member;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyRecords implements Serializable, Iterable<Family> {
-    private List<Family> families;
+public class FamilyRecords<E extends Member> implements Serializable, Iterable<Family<E>> {
+    private List<Family<E>> families;
     public FamilyRecords(){
         families = new ArrayList<>();
     }
 
 
-    public void addHumanToFamily(Human human, Family family) {
-        human.addFamily(family);
-        family.addHuman(human);
+    public void addHumanToFamily(E member, Family<E> family) {
+        member.addFamily(family);
+        family.addHuman(member);
     }
 
-    public void addFamily(String name, Human familyMember) {
-        Family newFamily = searchFamilyBeName(name);
+    public void addFamily(String name, E familyMember) {
+        Family<E> newFamily = searchFamilyBeName(name);
         if (newFamily == null) {
-            newFamily = new Family(name);
+            newFamily = new Family<E>(name);
             families.add(newFamily);
         }
         if (familyMember != null) {
@@ -40,10 +40,10 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      * @param name name to search
      * @return First founded human or null
      */
-    public Human searchHumanByName(String name) {
-        for (Family family : families) {
-            for (Human human : family.getMembers()) {
-                if (human.getName().equals(name)) return human;
+    public E searchHumanByName(String name) {
+        for (Family<E> family : families) {
+            for (E member : family.getMembers()) {
+                if (member.getName().equals(name)) return member;
             }
         }
         return null;
@@ -54,8 +54,8 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      * @param name name to search
      * @return First founded family or null
      */
-    public Family searchFamilyBeName(String name) {
-        for (Family family : families) {
+    public Family<E> searchFamilyBeName(String name) {
+        for (Family<E> family : families) {
             if (family.getName().equals(name)) return family;
         }
         return null;
@@ -64,7 +64,7 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
     /**
      * Connect humans to each other
      */
-    public void addConnection(Human humanFrom, Connection connection, Human humanTo) {
+    public void addConnection(E humanFrom, Connection connection, E humanTo) {
         humanFrom.addConnection(humanTo, connection);
         if (connection.opposite() != null) humanTo.addConnection(humanFrom, connection.opposite());
     }
@@ -73,7 +73,7 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      * Add wife to 'family' and set correct connections
      * 'family', 'husband' and 'wife' must exist and be members of this records
      */
-    public void addWife(Family family, Human husband, Human wife) {
+    public void addWife(Family<E> family, E husband, E wife) {
         addHumanToFamily(wife, family);
         addConnection(husband, Connection.HUSBAND, wife);
     }
@@ -82,7 +82,7 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      * Add child to 'family' and set correct connections
      * 'family', 'parent' and 'child' must exist and be members of this records
      */
-    public void addChild(Family family, Human parent, Human child) {
+    public void addChild(Family<E> family, E parent, E child) {
         addHumanToFamily(child, family);
         addConnection(parent, Connection.PARENT, child);
     }
@@ -91,9 +91,9 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      * Add children from 'child' list to 'parents' list
      * All objects must exist and be members of this records
      */
-    public void addChildren(Family family, List<Human> parents, List<Human> children) {
-        for (Human parent : parents) {
-            for (Human child : children) {
+    public void addChildren(Family<E> family, List<E> parents, List<E> children) {
+        for (E parent : parents) {
+            for (E child : children) {
                 addChild(family, parent, child);
             }
         }
@@ -103,7 +103,7 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      * Add parent to 'family' and set correct connections
      * 'family', 'parent' and 'child' must exist and be members of this records
      */
-    public void addParent(Family family, Human child, Human parent) {
+    public void addParent(Family<E> family, E child, E parent) {
         addHumanToFamily(parent, family);
         addConnection(parent, Connection.PARENT, child);
     }
@@ -111,8 +111,8 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
     /**
      * return Set of Humans to whom this human is $connection
      */
-    public Set<Human> findRelatedMembers(Human human, Connection connection) {
-        Set<Human> result = new HashSet<>();
+    public Set<? extends Member> findRelatedMembers(E human, Connection connection) {
+        Set<? extends Member> result = new HashSet<>();
         if (human != null) {
             result = human.getRelatedMembers(connection);
         }
@@ -122,19 +122,19 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
     /**
      * return Set of all other families that are connected to members of current Family
      */
-    public Set<Family> findConnectedFamilies(Family family) {
-        Set<Family> result = new HashSet<>();
-        for (Human member : family.getMembers()) {
-            for (Family connectedFamily : member.getFamilies()) {
+    public Set<Family<? extends Member>> findConnectedFamilies(Family<E> family) {
+        Set<Family<? extends Member>> result = new HashSet<>();
+        for (E member : family.getMembers()) {
+            for (Family<? extends Member> connectedFamily : member.getFamilies()) {
                 if (!connectedFamily.equals(family)) result.add(connectedFamily);
             }
         }
         return result;
     }
 
-    public Set<Human> getPeople() {
-        Set<Human> result = new HashSet<>();
-        for (Family family : families) {
+    public Set<E> getPeople() {
+        Set<E> result = new HashSet<>();
+        for (Family<E> family : families) {
             result.addAll(family.getMembers());
         }
         return result;
@@ -145,14 +145,14 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
      */
     public String getFamiliesString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Family family:this) {
+        for (Family<E> family:this) {
             stringBuilder.append(family);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
     public void sort() {Collections.sort(families);}
-    public void save(Converter converter) {
+    public void save(Converter<E> converter) {
         converter.save(this);
     }
     public static FamilyRecords load(Converter converter) {
@@ -166,7 +166,7 @@ public class FamilyRecords implements Serializable, Iterable<Family> {
 //        this.families = loadedRecords.families;
 //    }
     @Override
-    public Iterator<Family> iterator() {
+    public Iterator<Family<E>> iterator() {
         return families.iterator();
     }
 }

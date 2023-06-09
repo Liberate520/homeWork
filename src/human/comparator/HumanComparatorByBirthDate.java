@@ -1,8 +1,9 @@
 package human.comparator;
 
 import human.Human;
+import member.comparator.MemberComparator;
 
-public class HumanComparatorByBirthDate extends HumanComparator {
+public class HumanComparatorByBirthDate implements MemberComparator<Human> {
     @Override
     public int compare(Human h1, Human h2) {
         return h1.getBirthDate().compareTo(h2.getBirthDate());

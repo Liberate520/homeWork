@@ -2,30 +2,34 @@ package family;
 
 import human.Human;
 import human.comparator.*;
+import member.Member;
+import member.comparator.MemberComparator;
+import member.comparator.MemberComparatorByName;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Family implements Serializable, Iterable<Human>, Comparable<Family> {
+public class Family<E extends Member> implements Serializable, Iterable<E>, Comparable<Family<E>> {
     private final String familyName;
-    private List<Human> members;
+    private List<E> members;
 
     public Family(String name) {
         this.familyName = name;
         members = new ArrayList<>();
     }
 
-    private boolean humanInMembers(Human humanToCheck) {
-        for (Human human : members) {
-            if (humanToCheck.equals(human)) return true;
+    //    private boolean humanInMembers(Human humanToCheck) {
+    private boolean containMember(E memberToCheck) {
+        for (E member : members) {
+            if (memberToCheck.equals(member)) return true;
         }
         return false;
     }
 
-    public void addHuman(Human human) {
-        if (!humanInMembers(human)) members.add(human);
+    public void addHuman(E member) {
+        if (!containMember(member)) members.add(member);
     }
-    public List<Human> getMembers() {
+    public List<E> getMembers() {
         return members;
     }
 
@@ -38,14 +42,16 @@ public class Family implements Serializable, Iterable<Human>, Comparable<Family>
      */
     public String getFamiliesString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human:this) {
-            stringBuilder.append(human);
+        for (E member:this) {
+            stringBuilder.append(member);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
 
-    private void sort(HumanComparator comparator) {
+    // TODO: unsure how to get rid of "Raw use of parameterized class"
+    //  cause HumanComparatorByBirthDate does not need a parameter
+    private void sort(MemberComparator comparator) {
         members.sort(comparator);
     }
 
@@ -53,7 +59,7 @@ public class Family implements Serializable, Iterable<Human>, Comparable<Family>
         this.sort(null);
     }
     public void sortByName() {
-        this.sort(new HumanComparatorByName());
+        this.sort(new MemberComparatorByName<E>());
     }
 
     public void sortByBirthDate() {
@@ -61,10 +67,17 @@ public class Family implements Serializable, Iterable<Human>, Comparable<Family>
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Family family = (Family) o;
+        Family<E> family = (Family<E>) o;
+        try {
+            // check if other object contain correct elements by iterate over them
+            for (E member : family);
+        } catch (ClassCastException e) {
+            return false;
+        }
         return Objects.equals(familyName, family.familyName);
     }
 
@@ -82,8 +95,8 @@ public class Family implements Serializable, Iterable<Human>, Comparable<Family>
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(members);
+    public Iterator<E> iterator() {
+        return new MemberIterator<E>(members);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package converter;
 
+import family.Family;
 import familyRecords.FamilyRecords;
+import member.Member;
 
 import java.io.*;
 import java.util.Arrays;
 
-public class BinaryConverter implements Converter {
+public class BinaryConverter<E extends Member> implements Converter<E> {
     private final String path;
     private final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.bin"));
     private boolean convertSuccess;
@@ -28,7 +30,7 @@ public class BinaryConverter implements Converter {
     }
 
     @Override
-    public void save(FamilyRecords records){
+    public void save(FamilyRecords<E> records){
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
             convertStatus = "In progress";
@@ -43,19 +45,24 @@ public class BinaryConverter implements Converter {
     }
 
     @Override
-    public FamilyRecords load() {
+    @SuppressWarnings("unchecked")
+    public FamilyRecords<E> load() {
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));
             convertStatus = "In progress";
-            FamilyRecords data = (FamilyRecords) in.readObject();
+            FamilyRecords<E> data = (FamilyRecords<E>) in.readObject();
+            // check if other object contain correct elements by iterate over them
+            for (Family<E> family : data){
+                for (E member : family);
+            }
             convertSuccess = true;
             convertStatus = "Done";
             return data;
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             convertStatus = "Failed: " + e.getLocalizedMessage();
             convertSuccess = false;
-        } catch (ClassNotFoundException e) {
-            convertStatus = "Failed: " + e.getLocalizedMessage();
+        } catch (ClassCastException e) {
+            convertStatus = "Failed: loaded file contains unexpected types";
             convertSuccess = false;
         }
         return null;

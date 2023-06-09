@@ -2,7 +2,8 @@ import human.*;
 import converter.*;
 import family.*;
 import familyRecords.*;
-import human.comparator.*;
+import member.Connection;
+import member.Gender;
 
 import java.io.File;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
 public class Main {
     public static void main(String[] args) {
         //Create main record object
-        FamilyRecords records = new FamilyRecords();
+        FamilyRecords<Human> records = new FamilyRecords<>();
 
         // Create some humans
         Human sergey = new Human("Пушкин Сергей Львович", Gender.MALE,
@@ -42,7 +43,7 @@ public class Main {
         records.addFamily("Ланские", records.searchHumanByName("Ланская Наталья Николаевна"));
 
         // get some family objects
-        Family pushkins = records.searchFamilyBeName("Пушкины");
+        Family<Human> pushkins = records.searchFamilyBeName("Пушкины");
 
         // add connections
         records.addHumanToFamily(sergey, pushkins);
@@ -59,7 +60,7 @@ public class Main {
 
 
         // find all members, to who $sergey is FamilyConnection.PARENT
-        System.out.println(records.findRelatedMembers(sergey, FamilyConnection.PARENT));
+        System.out.println(records.findRelatedMembers(sergey, Connection.PARENT));
 
         // find all families connected to this family in any way
         System.out.println(records.findConnectedFamilies(pushkins));
@@ -67,9 +68,9 @@ public class Main {
         System.out.println("-".repeat(10));
 
         // export data
-        Converter binaryConverter = new BinaryConverter();
-        Converter csvConverter = new CSVConverter();
-        Converter binaryConverterErrorPath = new BinaryConverter(String.join(File.separator, Arrays.asList("bla", "bla")));
+        Converter<Human> binaryConverter = new BinaryConverter<>();
+        Converter<Human> csvConverter = new CSVConverter();
+        Converter<Human> binaryConverterErrorPath = new BinaryConverter<>(String.join(File.separator, Arrays.asList("bla", "bla")));
         records.save(binaryConverter);
         System.out.printf("Результат выгрузки %s\n", binaryConverter.convertStatus());
         records.save(binaryConverterErrorPath);
@@ -80,14 +81,14 @@ public class Main {
         System.out.println("-".repeat(10));
 
         // import data
-        FamilyRecords loadedRecords = FamilyRecords.load(binaryConverterErrorPath);
+        FamilyRecords<Human> loadedRecords = FamilyRecords.load(binaryConverterErrorPath);
         System.out.printf("Результат загрузки %s\n", binaryConverterErrorPath.convertStatus());
         loadedRecords = FamilyRecords.load(binaryConverter);
         System.out.printf("Результат загрузки %s\n", binaryConverter.convertStatus());
         loadedRecords = FamilyRecords.load(csvConverter);
         System.out.printf("Результат загрузки из csv %s\n", csvConverter.convertStatus());
 
-        */
+
         System.out.printf(records.getFamiliesString()); // print families as is
         System.out.println("-".repeat(10));
         records.sort(); // sort families by names
@@ -101,5 +102,6 @@ public class Main {
         pushkins.sortByBirthDate(); // sort by birthdate
         System.out.println("-".repeat(10));
         System.out.printf(pushkins.getFamiliesString());
+         */
     }
 }
