@@ -1,11 +1,9 @@
+import dog.Dog;
 import human.*;
-import converter.*;
 import family.*;
 import familyRecords.*;
-import member.Connection;
 import member.Gender;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -13,7 +11,7 @@ import java.util.GregorianCalendar;
 public class Main {
     public static void main(String[] args) {
         //Create main record object
-        FamilyRecords<Human> records = new FamilyRecords<>();
+        FamilyRecords<Human> humanRecords = new FamilyRecords<>();
 
         // Create some humans
         Human sergey = new Human("Пушкин Сергей Львович", Gender.MALE,
@@ -37,19 +35,19 @@ public class Main {
 
 
         // create family trees
-        records.addFamily("Пушкины");
-        records.addFamily("Гончаровы", natalya);
-        records.addFamily("Павлищевы", olga);
-        records.addFamily("Ланские", records.searchHumanByName("Ланская Наталья Николаевна"));
+        humanRecords.addFamily("Пушкины");
+        humanRecords.addFamily("Гончаровы", natalya);
+        humanRecords.addFamily("Павлищевы", olga);
+        humanRecords.addFamily("Ланские", humanRecords.searchHumanByName("Ланская Наталья Николаевна"));
 
         // get some family objects
-        Family<Human> pushkins = records.searchFamilyBeName("Пушкины");
+        Family<Human> pushkins = humanRecords.searchFamilyByName("Пушкины");
 
         // add connections
-        records.addHumanToFamily(sergey, pushkins);
-        records.addWife(pushkins, sergey, nadezhda);
-        records.addChildren(pushkins, Arrays.asList(sergey, nadezhda), Arrays.asList(olga, aleksandr, lev));
-        records.addWife(pushkins, aleksandr, natalya);
+        humanRecords.addToFamily(sergey, pushkins);
+        humanRecords.addWife(pushkins, sergey, nadezhda);
+        humanRecords.addChildren(pushkins, Arrays.asList(sergey, nadezhda), Arrays.asList(olga, aleksandr, lev));
+        humanRecords.addWife(pushkins, aleksandr, natalya);
 
 
         /*
@@ -60,10 +58,10 @@ public class Main {
 
 
         // find all members, to who $sergey is FamilyConnection.PARENT
-        System.out.println(records.findRelatedMembers(sergey, Connection.PARENT));
+        System.out.println(humanRecords.findRelatedMembers(sergey, Connection.PARENT));
 
         // find all families connected to this family in any way
-        System.out.println(records.findConnectedFamilies(pushkins));
+        System.out.println(humanRecords.findConnectedFamilies(pushkins));
 
         System.out.println("-".repeat(10));
 
@@ -71,11 +69,11 @@ public class Main {
         Converter<Human> binaryConverter = new BinaryConverter<>();
         Converter<Human> csvConverter = new CSVConverter();
         Converter<Human> binaryConverterErrorPath = new BinaryConverter<>(String.join(File.separator, Arrays.asList("bla", "bla")));
-        records.save(binaryConverter);
+        humanRecords.save(binaryConverter);
         System.out.printf("Результат выгрузки %s\n", binaryConverter.convertStatus());
-        records.save(binaryConverterErrorPath);
+        humanRecords.save(binaryConverterErrorPath);
         System.out.printf("Результат выгрузки %s\n", binaryConverterErrorPath.convertStatus());
-        records.save(csvConverter);
+        humanRecords.save(csvConverter);
         System.out.printf("Результат выгрузки в csv %s\n", csvConverter.convertStatus());
 
         System.out.println("-".repeat(10));
@@ -89,10 +87,10 @@ public class Main {
         System.out.printf("Результат загрузки из csv %s\n", csvConverter.convertStatus());
 
 
-        System.out.printf(records.getFamiliesString()); // print families as is
+        System.out.printf(humanRecords.getFamiliesString()); // print families as is
         System.out.println("-".repeat(10));
-        records.sort(); // sort families by names
-        System.out.printf(records.getFamiliesString());
+        humanRecords.sort(); // sort families by names
+        System.out.printf(humanRecords.getFamiliesString());
         System.out.println("-".repeat(10));
 
         System.out.printf(pushkins.getFamiliesString()); // print humans in family as is
@@ -103,5 +101,19 @@ public class Main {
         System.out.println("-".repeat(10));
         System.out.printf(pushkins.getFamiliesString());
          */
+        FamilyRecords<Dog> dogRecords = new FamilyRecords<>();
+
+        Dog layka = new Dog("Лайка", Gender.FEMALE,
+                new GregorianCalendar(1954, Calendar.JANUARY, 12),
+                new GregorianCalendar(1957, Calendar.NOVEMBER, 3));
+        Dog sharik = new Dog("Шарик", Gender.MALE,
+                new GregorianCalendar(1955, Calendar.JUNE, 21),
+                new GregorianCalendar(1958, Calendar.MARCH, 29));
+
+        dogRecords.addFamily("Хорошие мальчики", sharik);
+        dogRecords.addToFamily(layka, dogRecords.searchFamilyByName("Хорошие мальчики"));
+        dogRecords.addWife(dogRecords.searchFamilyByName("Хорошие мальчики"), sharik, layka);
+
+        System.out.printf(dogRecords.searchFamilyByName("Хорошие мальчики").getFamiliesString());
     }
 }
