@@ -1,3 +1,5 @@
+package FamilyTree.interfaces;
+
 import java.io.Serializable;
 
 public interface FileService {
