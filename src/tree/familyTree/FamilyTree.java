@@ -17,7 +17,7 @@ public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
         this.familyName = familyName;
     }
 
-    public void addHuman(List<T> human) {
+    public void addHumanList(List<T> human) {
         for (T someHuman : human) {
             addHuman(someHuman);
         }
@@ -26,12 +26,12 @@ public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
     public void addHuman(T human) {
         familyTree.add(human);
         for (T someHuman : familyTree) {
-            if (someHuman == human.getFather()) {
+            if (someHuman.equals(human.getFather())) {
                 someHuman.addChild(human);
             }
         }
         for (T someHuman : familyTree) {
-            if (someHuman == human.getMother()) {
+            if (someHuman.equals(human.getMother())) {
                 someHuman.addChild(human);
             }
         }

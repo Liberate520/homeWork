@@ -36,7 +36,7 @@ public class Main {
         FamilyTree<Human> Ivanovi = new FamilyTree<>("Ivanovi");
         List<Human> people = new ArrayList<>(Arrays.asList(Sasha, Masha, Olga, Misha, Oleg, Natasha, Nikita, Vika, Roma, Anna, Zhora, Alena));
 
-        Ivanovi.addHuman(people);
+        Ivanovi.addHumanList(people);
         System.out.println(Ivanovi);
 
         System.out.println("-------------Найти человека-------------");
