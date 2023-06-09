@@ -1,16 +1,21 @@
-package homeWork.tree2.human;
+package homeWork.tree2.backend.human;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.io.*;
 
-public class Human implements Serializable, Comparable<Human>, HumanObjectInterface {
+public class Human implements Comparable<Human>, HumanObjectInterface<Human> {
     private String name;
     private LocalDate birthdate;
     private Human mother;
     private Human father;
     private ArrayList<Human> children;
+    private int id;
+    private static int nextId = 1;
 
+    @Override
+    public String toString() {
+        return "Имя: "+ this.name + " (Id=" + this.id +")";
+    }
 
     public Human(String name, LocalDate birthdate, Human mother, Human father, ArrayList<Human> children) {
         this.name = name;
@@ -18,6 +23,8 @@ public class Human implements Serializable, Comparable<Human>, HumanObjectInterf
         this.mother = mother;
         this.father = father;
         this.children = children;
+        this.id = nextId;
+        nextId++;
     }
 
     public Human(String name, LocalDate birthdate) {
@@ -36,9 +43,12 @@ public class Human implements Serializable, Comparable<Human>, HumanObjectInterf
         this.children = children;
     }
 
-    @Override
     public String getName() {
-        return this.name;
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public LocalDate getBirthdate() {
@@ -54,21 +64,31 @@ public class Human implements Serializable, Comparable<Human>, HumanObjectInterf
     }
 
     public int getAge() {
-        int i = LocalDate.now().getYear() - this.getBirthdate().getYear();
-        return i; }
+        int currentYear = LocalDate.now().getYear();
+        return currentYear - birthdate.getYear();
+    }
 
     public ArrayList<Human> getChildren() {
         return children;
     }
 
-    @Override
-    public String toString() {
-        return name + ": " + this.getBirthdate();
-    }
 
     @Override
     public int compareTo(Human o) {
-        return name.compareTo(o.getName());
+        return name.compareTo(o.name);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void updatePersonParameters(String name, LocalDate birthdate) {
+        this.name = name;
+        this.birthdate = birthdate;
     }
 
 }

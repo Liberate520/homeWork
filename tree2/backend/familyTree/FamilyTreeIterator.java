@@ -1,6 +1,4 @@
-package homeWork.tree2.familyTree;
-
-import homeWork.tree2.human.Human;
+package homeWork.tree2.backend.familyTree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
