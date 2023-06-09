@@ -1,4 +1,5 @@
 package models.members;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** human */
-public class Human implements Serializable, FamilyMember{
+public class Human implements Serializable, FamilyMember {
     private String name;
     private LocalDate birthday;
     private Gender gender;
@@ -30,7 +31,7 @@ public class Human implements Serializable, FamilyMember{
     }
 
     /** количество детей */
-    public int getChildrenAmount(){
+    public int getChildrenAmount() {
         return children.size();
     }
 
@@ -48,9 +49,9 @@ public class Human implements Serializable, FamilyMember{
     }
 
     /** checked contains child in children list */
-    public Boolean ContainsChild(FamilyMember child){
+    public Boolean containsChild(FamilyMember child) {
         for (FamilyMember member : children) {
-            if(member.equals(child)){
+            if (member.equals(child)) {
                 return true;
             }
         }
@@ -68,13 +69,11 @@ public class Human implements Serializable, FamilyMember{
     }
 
     /** added child in children list */
-    public Boolean addChild(FamilyMember child) {
+    public void addChild(FamilyMember child) {
 
-        if(!ContainsChild(child)){
+        if (!containsChild(child)) {
             children.add(child);
-            return true;
         }
-        return false;
     }
 
     /** representation */
@@ -86,16 +85,16 @@ public class Human implements Serializable, FamilyMember{
         builder.append("(" + formatter.format(birthday) + ")\n");
         builder.append("[" + gender + "] ");
         builder.append(children.size() + " children,\n");
-        if(father != null){
+        if (father != null) {
             builder.append("father: " + father.getName() + "\n");
         }
-        if(mother != null){
-            builder.append("mother: " + mother.getName()  + "\n");
+        if (mother != null) {
+            builder.append("mother: " + mother.getName() + "\n");
         }
         return builder.toString();
     }
 
-    public String GetShortInfo(){
+    public String GetShortInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         StringBuilder builder = new StringBuilder();
         builder.append(name + " ");
@@ -104,15 +103,35 @@ public class Human implements Serializable, FamilyMember{
         return builder.toString();
     }
 
-    public void setName(String fullname) {
-        this.name = fullname;
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
+    @Override
     public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    public void setDate(LocalDate date) {
-        this.birthday = date;
+    @Override
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public void setFather(FamilyMember father) {
+        this.father = father;
+    }
+
+    @Override
+    public void setMother(FamilyMember mother) {
+        this.mother = mother;
+    }
+
+    @Override
+    public void removeChild(FamilyMember child) {
+        if(containsChild(child)){ 
+            children.remove(child);
+        }
     }
 }

@@ -9,6 +9,11 @@ public interface FamilyMember {
     LocalDate getBirthday();
     FamilyMember getFather();
     FamilyMember getMother();
-    Boolean ContainsChild(FamilyMember child);
-    Boolean addChild(FamilyMember child);
+    void setName(String name);
+    void setGender(Gender gender);
+    void setBirthday(LocalDate birthday);
+    void setFather(FamilyMember father);
+    void setMother(FamilyMember mother);
+    void addChild(FamilyMember child);
+    void removeChild(FamilyMember child);
 }

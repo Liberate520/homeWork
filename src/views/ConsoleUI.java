@@ -40,7 +40,6 @@ public class ConsoleUI implements View {
     // #endregion
 
     // #endregion commands
-
     public void printDetail() {
         print("Enter a number of member for print detail\n");
         print(presenter.getAllMembers());
@@ -72,27 +71,21 @@ public class ConsoleUI implements View {
         print(presenter.getAllMembers());
         int input = getIntegerInput(1, presenter.getAllMembersAmount()) - 1;
         
-        print("Enter new fullname ( old: \"" + presenter.getMemberName(input) + "\") or enter empty: \n");
-        String fullname = getStringInput(null);
-        if(!fullname.equals("")){
-            presenter.setName(input, fullname);
-            print("You entered: " + fullname + "\n");
-        }
+        changeName(input);
 
-        print("Enter new birthday ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
-        LocalDate date = getDateInput(true);
-        if(date == null){
-            presenter.setDate(input, date);
-            print("You entered: " + fullname + "\n");
-        }
+        changeBirthday(input);
 
-        print("Enter new gender ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
-        print(presenter.getGendersList());
-        int gender = getIntegerInput(0, 2) - 1;
-        if(gender != -1){
-            presenter.setGender(input, gender);
-            print("You entered: " + presenter.getGender(gender) + "\n");
-        }
+        changeGender(input);
+
+        changeFather(input);
+
+        changeMother(input);
+
+        print("Changed apply successful \n");
+    }    
+    
+    public void save(){
+        presenter.save();
     }
     // #endregion
 
@@ -193,130 +186,51 @@ public class ConsoleUI implements View {
         print("You entered: " + fullname + "\n");
         return fullname;
     }
+   
+    private void changeMother(int input) {
+        print("Enter new mother (0 for keep old, -1 for remove): \n");
+        print(presenter.getMalesNames());
+        int mother = getIntegerInput(0, presenter.getMaleAmount()) - 1;
+        if (mother != -1) {
+            presenter.setMother(input, mother);
+        }
+    }
+
+    private void changeFather(int input) {
+        print("Enter new father (0 for keep old, -1 for remove): \n");
+        print(presenter.getMalesNames());
+        int father = getIntegerInput(0, presenter.getMaleAmount()) - 1;
+        if (father != -1) {
+            presenter.setFather(input, father);
+        }
+    }
+
+    private void changeGender(int input) {
+        print("Enter new gender ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
+        print(presenter.getGendersList());
+        int gender = getIntegerInput(0, 2) - 1;
+        if(gender != -1){
+            presenter.setGender(input, gender);
+            print("You entered: " + presenter.getGender(gender) + "\n");
+        }
+    }
+
+    private void changeBirthday(int input) {
+        print("Enter new birthday ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
+        LocalDate date = getDateInput(true);
+        if(date == null){
+            presenter.setDate(input, date);
+        }
+    }
+
+    private void changeName(int input) {
+        print("Enter new fullname ( old: \"" + presenter.getMemberName(input) + "\") or enter empty: \n");
+        String fullname = getStringInput(null);
+        if(!fullname.equals("")){
+            presenter.setName(input, fullname);
+            print("You entered: " + fullname + "\n");
+        }
+    }
+
     // #endregion
 }
-
-/*
- * OUTPUT ===================================
-
-1. Print info
-2. Add new member
-3. Print detail
-4. Edit
-5. Quit
-> 1
-        |> 1. John Johnson (1910-01-02)[Male]
-        |> 2. Eliza Johnson (1909-02-04)[Female]
-        |> 3. Donald Ferguson (1908-03-06)[Male]
-        |> 4. Mike Johnson (1930-04-10)[Male]
-        |> 5. Betty Ferguson (1925-05-12)[Female]
-        |> 6. Bobby Johnson (1950-06-14)[Male]
-        |> 7. Christine Johnson (1955-07-16)[Female]
-        |> 8. Steve Gomez (1951-08-18)[Male]
-1. Print info
-2. Add new member
-3. Print detail
-4. Edit
-5. Quit
-> 2
-Enter fullname:
-> Bobby Gomez
-You entered: Bobby Gomez
-Enter birthday ("dd.MM.YYYY"):
-> 25.05.1971
-You entered: 25.05.1971
-Enter gender ('m' or 'f'):
-        |> 1. Male
-        |> 2. Female
-> 1
-You entered: Male
-Select father(0 for keep empty):
-        |> 1. John Johnson (1910-01-02)[Male]
-        |> 2. Donald Ferguson (1908-03-06)[Male]
-        |> 3. Mike Johnson (1930-04-10)[Male]
-        |> 4. Bobby Johnson (1950-06-14)[Male]
-        |> 5. Steve Gomez (1951-08-18)[Male]
-> 5
-You entered: Steve Gomez
-Select mother(0 for keep empty):
-        |> 1. Eliza Johnson (1909-02-04)[Female]
-        |> 2. Betty Ferguson (1925-05-12)[Female]
-        |> 3. Christine Johnson (1955-07-16)[Female]
-> 0
-You entered: 'unknown'
-New member Bobby Gomez was added successful
-1. Print info
-2. Add new member
-3. Print detail
-4. Edit
-5. Quit
-> 3
-Enter a number of member for print detail       
-        |> 1. John Johnson (1910-01-02)[Male]
-        |> 2. Eliza Johnson (1909-02-04)[Female]
-        |> 3. Donald Ferguson (1908-03-06)[Male]
-        |> 4. Mike Johnson (1930-04-10)[Male]
-        |> 5. Betty Ferguson (1925-05-12)[Female]
-        |> 6. Bobby Johnson (1950-06-14)[Male]
-        |> 7. Christine Johnson (1955-07-16)[Female]
-        |> 8. Steve Gomez (1951-08-18)[Male]
-        |> 9. Bobby Gomez (1971-05-25)[Male]
-> 9
-Detail:
-Bobby Gomez (25 May 1971)
-[Male] 0 children,
-father: Steve Gomez
-1. Print info
-2. Add new member
-3. Print detail
-4. Edit
-5. Quit
-> 4
-Enter a number of member for edit
-        |> 1. John Johnson (1910-01-02)[Male]
-        |> 2. Eliza Johnson (1909-02-04)[Female]
-        |> 3. Donald Ferguson (1908-03-06)[Male]
-        |> 4. Mike Johnson (1930-04-10)[Male]
-        |> 5. Betty Ferguson (1925-05-12)[Female]
-        |> 6. Bobby Johnson (1950-06-14)[Male]
-        |> 7. Christine Johnson (1955-07-16)[Female]
-        |> 8. Steve Gomez (1951-08-18)[Male]
-        |> 9. Bobby Gomez (1971-05-25)[Male]
-> 9
-Enter new fullname ( old: "Bobby Gomez") or enter empty:
->
-Enter new birthday ( old: "1971-05-25") or enter empty:
-> 26.06.1972
-Enter new gender ( old: "1971-05-25") or enter empty:
-        |> 1. Male
-        |> 2. Female
-> 1
-You entered: Male
-1. Print info
-2. Add new member
-3. Print detail
-4. Edit
-5. Quit
-> 3
-Enter a number of member for print detail       
-        |> 1. John Johnson (1910-01-02)[Male]
-        |> 2. Eliza Johnson (1909-02-04)[Female]
-        |> 3. Donald Ferguson (1908-03-06)[Male]
-        |> 4. Mike Johnson (1930-04-10)[Male]
-        |> 5. Betty Ferguson (1925-05-12)[Female]
-        |> 6. Bobby Johnson (1950-06-14)[Male]
-        |> 7. Christine Johnson (1955-07-16)[Female]
-        |> 8. Steve Gomez (1951-08-18)[Male]
-        |> 9. Bobby Gomez (1971-05-25)[Male]
-> 9
-Detail:
-Bobby Gomez (25 May 1971)
-[Male] 0 children,
-father: Steve Gomez
-1. Print info
-2. Add new member
-3. Print detail
-4. Edit
-5. Quit
-> 5
- */

@@ -21,11 +21,6 @@ public class Service {
         getFamilyTree();
     }
 
-    @Override
-    public void finalize() throws Throwable {
-        save();
-    }
-
     public FamilyTree<Human> getFamilyTree() {
         if (this.familyTree == null) {
             this.familyTree = read();
@@ -59,7 +54,7 @@ public class Service {
     }
 
     /** сохранение */
-    private void save() {
+    public void save() {
         CapableOfPreserving preserver = new FileHandler();
         preserver.save(path, familyTree);
     }
@@ -70,20 +65,24 @@ public class Service {
         return (FamilyTree<Human>) restorer.read(path);
     }
 
+    /** сортировка по имени */
     public void sortFamilyByName() {
         familyTree.sortByName();
     }
 
+    /** сортировка по дню рождения */
     public void sortFamilyByBirthday() {
         familyTree.sortByBirthday();
     }
 
+    /* сортировка по количеству детей */
     public void sortFamilyByChildrenAmount() {
         familyTree.sortByChildrenAmount();
     }
 
+    /** получение списка членов семьи по условию */
     public String getInfo(Predicate predicate) {
-        
+
         List<Human> members = familyTree.getMembers(predicate);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < members.size(); i++) {
@@ -92,10 +91,11 @@ public class Service {
             builder.append(". ");
             builder.append(members.get(i).GetShortInfo());
             builder.append("\n");
-        } 
+        }
         return builder.toString();
     }
 
+    /** получение списка гендеров */
     public String getGenderList() {
         Gender[] genders = Gender.values();
         StringBuilder builder = new StringBuilder();
@@ -105,54 +105,89 @@ public class Service {
             builder.append(". ");
             builder.append(genders[i]);
             builder.append("\n");
-        } 
+        }
         return builder.toString();
     }
 
-    public Gender getGenderBy(int index) {
-        return Gender.values()[index];
+    /** получение гендера по индексу */
+    public String getGenderBy(int index) {
+        return Gender.values()[index].toString();
     }
 
-    public int getAmount(Predicate predicate) {
+    /** получение количества членов в списке по условию */
+    public int getAmountOfList(Predicate predicate) {
         return familyTree.getMembers(predicate).size();
     }
 
-    public String getMemberName(int index, Predicate predicate) {
-        return familyTree.getMembers(predicate).get(index).getName();
-    }
-
-
-    public Human GetMember(int index, Predicate predicate) {
-        return familyTree.getMembers(predicate).get(index);
-    }
-
+    /** добавление члена в семью */
     public boolean addNewMember(String fullname, LocalDate date, int genderInt, int fatherInt, int motherInt) {
-        
-        Gender gender = getGenderBy(genderInt);
-        Human father = fatherInt == -1 ? null : GetMember(fatherInt, (member) -> (member.getGender() == Gender.Male));
-        Human mother = motherInt == -1 ? null : GetMember(motherInt, (member) -> (member.getGender() == Gender.Female));
-        Human human = new Human(fullname, date, gender, father, mother) ; 
-        familyTree.addNewMember(human);      
+
+        Gender gender = Gender.values()[genderInt];
+        Human father = fatherInt == -1 ? null : getMember(fatherInt, (member) -> (member.getGender() == Gender.Male));
+        Human mother = motherInt == -1 ? null : getMember(motherInt, (member) -> (member.getGender() == Gender.Female));
+        Human human = new Human(fullname, date, gender, father, mother);
+        familyTree.addNewMember(human);
         return true;
     }
 
-    public String getMemberDetail(int index,  Predicate predicate) {
+    /** получение детального описания члена семьи по условию */
+    public String getMemberDetail(int index, Predicate predicate) {
         return familyTree.getMembers(predicate).get(index).toString();
     }
 
-    public void setDifferentName(int index, String fullname) {
-        familyTree.getMembers((member)->true).get(index).setName(fullname);
-    }
-
+    /** получение дня рождения члена семьи по индексу в списке по условию */
     public String getMemberDate(int index, Predicate predicate) {
         return DateTimeFormatter.ISO_LOCAL_DATE.format(familyTree.getMembers(predicate).get(index).getBirthday());
     }
 
-    public void setGender(int index, int gender) {
-        familyTree.getMembers((member)->true).get(index).setGender(Gender.values()[gender]);
+    /** получение имени члена семьи по индексу в списке по условию */
+    public String getMemberName(int index, Predicate predicate) {
+        return familyTree.getMembers(predicate).get(index).getName();
     }
 
-     public void setBirthday(int index, LocalDate date) {
-        familyTree.getMembers((member)->true).get(index).setDate(date);
+    /** получение члена семьи по индексу в списке по условию */
+    private Human getMember(int index, Predicate predicate) {
+        return familyTree.getMembers(predicate).get(index);
+    }
+
+    /** установка имени члена семьи по индексу в списке по условию */
+    public void setDifferentName(int index, String fullname, Predicate predicate) {
+        familyTree.getMembers(predicate).get(index).setName(fullname);
+    }
+
+    /** установка пола члена семьи по индексу в списке по условию */
+    public void setGender(int index, int gender, Predicate predicate) {
+        familyTree.getMembers(predicate).get(index).setGender(Gender.values()[gender]);
+    }
+
+    /** установка дня рождения члена семьи по индексу в списке по условию */
+    public void setBirthday(int index, LocalDate date, Predicate predicate) {
+        familyTree.getMembers(predicate).get(index).setBirthday(date);
+    }
+
+    /** установка отца члена семьи по индексу в списке по условию */
+    public void setFather(int index, int father) {
+        Human current = familyTree.getMembers((member) -> true).get(index);
+        if (current.getFather() != null) {
+            current.getFather().removeChild(current);
+        }
+        if (father >= 0) {
+            Human newFather = familyTree.getMembers((member) -> member.getGender() == Gender.Male).get(father);
+            newFather.addChild(current);
+            current.setFather(newFather);
+        }
+    }
+
+    /** установка матери члена семьи по индексу в списке по условию */
+    public void setMother(int index, int father) {
+        Human current = familyTree.getMembers((member) -> true).get(index);
+        if (current.getFather() != null) {
+            current.getFather().removeChild(current);
+        }
+        if (father >= 0) {
+            Human newFather = familyTree.getMembers((member) -> member.getGender() == Gender.Male).get(father);
+            newFather.addChild(current);
+            current.setFather(newFather);
+        }
     }
 }
