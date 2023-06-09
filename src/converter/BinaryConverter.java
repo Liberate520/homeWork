@@ -51,10 +51,6 @@ public class BinaryConverter<E extends Member> implements Converter<E> {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));
             convertStatus = "In progress";
             FamilyRecords<E> data = (FamilyRecords<E>) in.readObject();
-            // check if other object contain correct elements by iterate over them
-            for (Family<E> family : data){
-                for (E member : family);
-            }
             convertSuccess = true;
             convertStatus = "Done";
             return data;

@@ -72,12 +72,6 @@ public class Family<E extends Member> implements Serializable, Iterable<E>, Comp
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Family<E> family = (Family<E>) o;
-        try {
-            // check if other object contain correct elements by iterate over them
-            for (E member : family);
-        } catch (ClassCastException e) {
-            return false;
-        }
         return Objects.equals(familyName, family.familyName);
     }
 
