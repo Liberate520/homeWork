@@ -1,11 +1,12 @@
 import family_tree.FamilyTree;
+import family_tree.FamilyTreeItem;
 import human.Human;
 
 public class Service {
-    private FamilyTree familyTree;
+    private FamilyTree<Human> familyTree;
 
     public Service() {
-        familyTree = new FamilyTree();
+        familyTree = new FamilyTree<>();
     }
 
     public void addHuman(Human human) {
@@ -14,7 +15,7 @@ public class Service {
 
     public String printHumanList() {
         StringBuilder sb = new StringBuilder();
-        for (Human human : familyTree) {
+        for (FamilyTreeItem human : familyTree) {
             sb.append(human.getInfo());
             sb.append("\n");
         }

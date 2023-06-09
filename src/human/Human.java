@@ -1,11 +1,13 @@
 package human;
 
+import family_tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
@@ -26,6 +28,7 @@ public class Human implements Serializable, Comparable<Human> {
         children = new ArrayList<>();
     }
 
+    @Override
     public boolean addChild(Human child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -34,30 +37,37 @@ public class Human implements Serializable, Comparable<Human> {
         return false;
     }
 
+    @Override
     public String getFirstName() {
         return firstName;
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
 
+    @Override
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
+    @Override
     public LocalDate getDeathDate() {
         return deathDate;
     }
 
+    @Override
     public Human getMother() {
         return mother;
     }
 
+    @Override
     public Human getFather() {
         return father;
     }
 
+    @Override
     public List<Human> getChildren() {
         return children;
     }
@@ -123,6 +133,7 @@ public class Human implements Serializable, Comparable<Human> {
         return childrenInfo.toString();
     }
 
+    @Override
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
@@ -166,6 +177,6 @@ public class Human implements Serializable, Comparable<Human> {
 
     @Override
     public int compareTo(Human o) {
-            return 0;
+        return 0;
     }
 }

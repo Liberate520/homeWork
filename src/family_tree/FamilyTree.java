@@ -7,31 +7,30 @@ import human.comparators.HumanComparatorByLastName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Iterable<T> {
+    private List<T> humanList;
 
     public FamilyTree() {
         humanList = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
         if (!humanList.contains(human)) {
             humanList.add(human);
             if (human.getMother() != null) {
-                human.getMother().addChild(human);
+                human.getMother().addChild((Human) human);
             }
             if (human.getFather() != null) {
-                human.getFather().addChild(human);
+                human.getFather().addChild((Human) human);
             }
         }
     }
 
     public String getHumanByName(String name) {
-        for (Human human : humanList) {
+        for (T human : humanList) {
             if (human.getFirstName().equals(name)) {
                 return human.getInfo();
             }
@@ -40,7 +39,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public String getHumanByBirthDate(String birthDate) {
-        for (Human human : humanList) {
+        for (T human : humanList) {
             if (human.getBirthDate().getYear() == Integer.parseInt(birthDate)) {
                 return human.getInfo();
             }
@@ -49,20 +48,19 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void sortByFirstName() {
-        humanList.sort(new HumanComparatorByFirstName());
+        humanList.sort(new HumanComparatorByFirstName<>());
     }
 
     public void sortByLastName() {
-        humanList.sort(new HumanComparatorByLastName());
+        humanList.sort(new HumanComparatorByLastName<>());
     }
 
     public void sortByChildrenCount() {
-        humanList.sort(new HumanComparatorByChildrenCount());
-        Collections.reverse(humanList);
+        humanList.sort(new HumanComparatorByChildrenCount<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return humanList.iterator();
     }
 }

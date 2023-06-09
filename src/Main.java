@@ -12,6 +12,7 @@ public class Main {
         Human h4 = new Human("Евгения", "Петрова", LocalDate.of(1985, 9, 20), null, h1, h2);
         Human h5 = new Human("Александр", "Петров", LocalDate.of(2010, 5, 7), null, h4, null);
 
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         Service service = new Service();
         service.addHuman(h1);
         service.addHuman(h2);
@@ -40,7 +41,7 @@ public class Main {
 
         System.out.println("--------------------------------");
         System.out.println("Реализация предыдущего задания");
-        FamilyTree familyTree = new FamilyTree();
+
         String name = "Галина";
         System.out.println("--------------------------------");
         System.out.println("Поиск по имени:" + name);
