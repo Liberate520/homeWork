@@ -7,6 +7,7 @@ import views.commands.Command;
 import views.commands.CommandAddNewMember;
 import views.commands.CommandEditMember;
 import views.commands.CommandQuit;
+import views.commands.CommandSave;
 import views.commands.CommandPrintAll;
 import views.commands.CommandPrintDetail;
 
@@ -19,6 +20,7 @@ public class MainMenu {
         commands.add(new CommandAddNewMember(ui));
         commands.add(new CommandPrintDetail(ui));
         commands.add(new CommandEditMember(ui));
+        commands.add(new CommandSave(ui));
         commands.add(new CommandQuit(ui));
     }
 
