@@ -1,7 +1,7 @@
 package views.commands;
 
 import views.ConsoleUI;
-
+/** команда сохранения*/
 public class CommandSave implements Command {
 
     private ConsoleUI ui;

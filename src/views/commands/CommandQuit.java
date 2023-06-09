@@ -1,7 +1,7 @@
 package views.commands;
 
 import views.ConsoleUI;
-
+/** команда выхода */
 public class CommandQuit implements Command {
     
     private ConsoleUI ui;

@@ -1,7 +1,7 @@
 package views.commands;
 
 import views.ConsoleUI;
-
+/** команда редактирования члена семьи */
 public class CommandEditMember implements Command {
 
     private ConsoleUI ui;

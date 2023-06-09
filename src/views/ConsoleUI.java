@@ -40,6 +40,7 @@ public class ConsoleUI implements View {
     // #endregion
 
     // #endregion commands
+    /** вывод подробной информации о члене семьи */
     public void printDetail() {
         print("Enter a number of member for print detail\n");
         print(presenter.getAllMembers());
@@ -48,14 +49,17 @@ public class ConsoleUI implements View {
         print(presenter.getMemberDetail(input));
     }
 
+    /** вывод всех членов семьи */
     public void printAll() {
         print(presenter.getAllMembers());
     }
 
+    /** выход */
     public void quit() {
         isWork = false;
     }
 
+    /** добавление нового члена в семью */
     public void addNewMember() {
         String fullname = getName();
 
@@ -65,12 +69,13 @@ public class ConsoleUI implements View {
             print("something went wrong");
         }
     }
-    
-    public void editMember(){
+
+    /** редактирование данных члена семьи */
+    public void editMember() {
         print("Enter a number of member for edit \n");
         print(presenter.getAllMembers());
         int input = getIntegerInput(1, presenter.getAllMembersAmount()) - 1;
-        
+
         changeName(input);
 
         changeBirthday(input);
@@ -82,9 +87,10 @@ public class ConsoleUI implements View {
         changeMother(input);
 
         print("Changed apply successful \n");
-    }    
-    
-    public void save(){
+    }
+
+    /** сохранение */
+    public void save() {
         presenter.save();
     }
     // #endregion
@@ -99,7 +105,8 @@ public class ConsoleUI implements View {
             try {
                 return LocalDate.parse(input, formatter);
             } catch (Exception e) {
-                if(input.equals("") && canBeNull) return null;
+                if (input.equals("") && canBeNull)
+                    return null;
             }
         } while (true);
     }
@@ -132,6 +139,7 @@ public class ConsoleUI implements View {
     // #endregion
 
     // #region helpers
+    /** проверка на совпадение */
     private boolean contains(String[] match, String input) {
         for (int i = 0; i < match.length; i++) {
             if (input.equals(match[i])) {
@@ -141,6 +149,7 @@ public class ConsoleUI implements View {
         return false;
     }
 
+    /** получение индекса матери */
     private int getMotherIndex() {
         print("Select mother(0 for keep empty): \n");
         print(presenter.getFemalesNames());
@@ -153,6 +162,7 @@ public class ConsoleUI implements View {
         return mother;
     }
 
+    /** получение индекса отца */
     private int getFatherIndex() {
         print("Select father(0 for keep empty): \n");
         print(presenter.getMalesNames());
@@ -165,6 +175,7 @@ public class ConsoleUI implements View {
         return father;
     }
 
+    /** получение гендера */
     private int getGender() {
         print("Enter gender ('m' or 'f'):\n");
         print(presenter.getGendersList());
@@ -173,6 +184,7 @@ public class ConsoleUI implements View {
         return gender;
     }
 
+    /** получение даты рождения */
     private LocalDate getDate() {
         print("Enter birthday (\"dd.MM.YYYY\"):\n");
         LocalDate date = getDateInput(false);
@@ -180,13 +192,15 @@ public class ConsoleUI implements View {
         return date;
     }
 
+    /** получение имени */
     private String getName() {
         print("Enter fullname:\n");
         String fullname = getStringInput(null);
         print("You entered: " + fullname + "\n");
         return fullname;
     }
-   
+
+    /** изменение матери */
     private void changeMother(int input) {
         print("Enter new mother (0 for keep old, -1 for remove): \n");
         print(presenter.getMalesNames());
@@ -196,6 +210,7 @@ public class ConsoleUI implements View {
         }
     }
 
+    /** изменение отца */
     private void changeFather(int input) {
         print("Enter new father (0 for keep old, -1 for remove): \n");
         print(presenter.getMalesNames());
@@ -205,28 +220,31 @@ public class ConsoleUI implements View {
         }
     }
 
+    /** изменение гендера */
     private void changeGender(int input) {
         print("Enter new gender ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
         print(presenter.getGendersList());
         int gender = getIntegerInput(0, 2) - 1;
-        if(gender != -1){
+        if (gender != -1) {
             presenter.setGender(input, gender);
             print("You entered: " + presenter.getGender(gender) + "\n");
         }
     }
 
+    /** изменения дня рождения */
     private void changeBirthday(int input) {
         print("Enter new birthday ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
         LocalDate date = getDateInput(true);
-        if(date == null){
+        if (date == null) {
             presenter.setDate(input, date);
         }
     }
 
+    /** изменение имени */
     private void changeName(int input) {
         print("Enter new fullname ( old: \"" + presenter.getMemberName(input) + "\") or enter empty: \n");
         String fullname = getStringInput(null);
-        if(!fullname.equals("")){
+        if (!fullname.equals("")) {
             presenter.setName(input, fullname);
             print("You entered: " + fullname + "\n");
         }

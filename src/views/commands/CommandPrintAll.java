@@ -1,7 +1,7 @@
 package views.commands;
 
 import views.ConsoleUI;
-
+/** команда вывода всех членов семьи */
 public class CommandPrintAll implements Command {
 
     private ConsoleUI ui;

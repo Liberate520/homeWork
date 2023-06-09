@@ -2,6 +2,7 @@ package views.commands;
 
 import views.ConsoleUI;
 
+/** команда добавления нового члена семьи */
 public class CommandAddNewMember implements Command {
         private ConsoleUI ui;
     public CommandAddNewMember(ConsoleUI ui){
