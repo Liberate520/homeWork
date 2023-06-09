@@ -1,6 +1,6 @@
-package comparers;
+package models.comparers;
 
-import members.FamilyMember;
+import models.members.FamilyMember;
 import java.util.Comparator;
 
 /** компаратор по имени */

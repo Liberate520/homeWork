@@ -1,4 +1,4 @@
-package members;
+package models.members;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -93,5 +93,26 @@ public class Human implements Serializable, FamilyMember{
             builder.append("mother: " + mother.getName()  + "\n");
         }
         return builder.toString();
+    }
+
+    public String GetShortInfo(){
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        StringBuilder builder = new StringBuilder();
+        builder.append(name + " ");
+        builder.append("(" + formatter.format(birthday) + ")");
+        builder.append("[" + gender + "] ");
+        return builder.toString();
+    }
+
+    public void setName(String fullname) {
+        this.name = fullname;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setDate(LocalDate date) {
+        this.birthday = date;
     }
 }

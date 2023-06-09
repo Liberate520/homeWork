@@ -1,14 +1,17 @@
-package tree;
+package models.tree;
 
-import comparers.ComparatorFamilyByBirthDay;
-import comparers.ComparatorFamilyByChildrenAmount;
-import comparers.ComparatorFamilyByName;
-import members.FamilyMember;
+import models.Predicate;
+import models.comparers.ComparatorFamilyByBirthDay;
+import models.comparers.ComparatorFamilyByChildrenAmount;
+import models.comparers.ComparatorFamilyByName;
+import models.members.FamilyMember;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -19,6 +22,10 @@ public class FamilyTree<T extends FamilyMember> implements Serializable, Iterabl
 
     public FamilyTree() {
         family = new ArrayList<>();
+    }
+
+    public int getSize(){
+        return family.size();
     }
 
     /** added new member */
@@ -73,5 +80,9 @@ public class FamilyTree<T extends FamilyMember> implements Serializable, Iterabl
     /** сортировка по количеству детей*/
      public void sortByChildrenAmount() {
        family.sort(new ComparatorFamilyByChildrenAmount<>());
+    }
+
+    public List<T> getMembers(Predicate predicate) {
+        return family.stream().filter(member->predicate.isEqual(member)).collect(Collectors.toList());
     }
 }

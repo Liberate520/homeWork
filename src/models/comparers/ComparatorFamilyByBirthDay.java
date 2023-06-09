@@ -1,7 +1,7 @@
-package comparers;
+package models.comparers;
 import java.util.Comparator;
 
-import members.FamilyMember;
+import models.members.FamilyMember;
 
 /** компаратор по дню рождения */
 public class ComparatorFamilyByBirthDay<T extends FamilyMember> implements Comparator<T>{
