@@ -25,19 +25,19 @@ public class Main {
         System.out.println(find);
         System.out.println();
 
-        List<Human> childrenOfIvan = tree.getChildrenOfHuman(ivan);
-        System.out.println(ivan);
-        for (Human child : childrenOfIvan) {
+        List<Human> children = tree.getChildrenOfHuman(vasilina);
+        System.out.println(vasilina);
+        for (Human child : children) {
             System.out.println("Дети: " + child.getName());
         }
         System.out.println();
 
         // Вывод списка родителей при выборе ребенка
-        List<Human> parentsOfVasilina = tree.getParentsOfHuman(vasilina);
-        System.out.println(vasilina);
-        for (Human parent : parentsOfVasilina) {
+        List<Human> parents = tree.getParentsOfHuman(ivan);
+        System.out.println(ivan);
+        for (Human parent : parents) {
             System.out.println("Родители: " + parent.getName());
         }
-        System.out.println();
+
     }
     }

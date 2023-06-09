@@ -7,6 +7,7 @@ public class Human {
     private int id;
     private String name;
     private String gender;
+    private String loner;
     private LocalDate dateOfBirth;
     private LocalDate deathDate;
     private Human father;
@@ -26,6 +27,10 @@ public class Human {
 
     public Human(String name, String gender, LocalDate dateOfBirth) {
         this(name, gender, dateOfBirth, null, null);
+    }
+
+    public Human(String loner){
+        this.loner = loner;
     }
 
     public String getName() {

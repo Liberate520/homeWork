@@ -44,6 +44,9 @@ public class Tree {
             }
 
         }
+        if(children.isEmpty()){
+            children.add(new Human("Нет детей"));
+        }
 
         return children;
     }
@@ -54,6 +57,10 @@ public class Tree {
             if (h.getChildren().contains(human)) {
                 parents.add(h);
             }
+
+        }
+        if(parents.isEmpty()){
+            parents.add(new Human("Нет родителей"));
         }
         return parents;
     }
