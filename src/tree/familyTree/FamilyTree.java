@@ -3,13 +3,10 @@ package tree.familyTree;
 import tree.familyTree.comparators.HumanComparatorByChildCount;
 import tree.familyTree.comparators.HumanComparatorByName;
 import tree.familyTree.iterators.HumanIterator;
-import tree.human.Human;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static tree.human.Gender.man;
 
 public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
     private List<T> familyTree;
@@ -47,7 +44,7 @@ public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
     public void outFamily(T human) {
         familyTree.remove(human);
     }
-
+    @Override
     public T findHuman(String name) {
         for (T human : familyTree) {
             if (human.getName().equals(name)) return human;

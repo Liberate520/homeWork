@@ -8,11 +8,8 @@ import tree.human.Gender;
 import tree.human.Human;
 
 import java.io.IOException;
-import java.io.Serializable;
 
-import static tree.human.Gender.man;
-
-public class Service implements Serializable {
+public class Service {
 
     private Tree<Human> tree;
     private SaveReadable fileHandler;
