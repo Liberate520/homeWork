@@ -1,5 +1,9 @@
 package ui;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import human.Gender;
 import presenter.Presenter;
 
 public class Console implements View {
@@ -24,12 +28,57 @@ public class Console implements View {
         while (work) {
             presenter.loadFile();
             System.out.println(mainMenu.print());
-            String line = scanner.nextLine();
-            int numCommand = Integer.parseInt(line);
-            mainMenu.execute(numCommand);
+            int choice = inputNumMenu();
+            if (choice == -1){
+                System.out.println("Ошибка ввода");
+                continue;
+            }
+            mainMenu.execute(choice);
         }
     }
 
+    private int inputNumMenu() {
+        String line = scanner.nextLine();
+        if (!checkLine(line)){
+            return -1;
+        }
+        return Integer.parseInt(line);
+    }
+
+    private boolean checkLine(String line) {
+        if (!line.matches("[0-9]+")){
+            return false;
+        }
+        int choice = Integer.parseInt(line);
+        return choice > 0 && choice <= mainMenu.size();
+    }
+
+    public void addHuman() {
+        System.out.println("Введите имя");
+        String firstName = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String lastName = scanner.nextLine();
+        System.out.println("Выберите пол:\n1. Мужской\n2. Женский");
+        Gender gender = null;
+        while (gender == null) {
+            String input = scanner.nextLine();
+            switch (input) {
+                case "1":
+                    gender = Gender.Male;
+                    break;
+                case "2":
+                    gender = Gender.Female;
+                    break;
+                default:
+                    System.out.println("Некорректный ввод. Попробуйте еще раз.");
+            }
+        }
+        System.out.println("Введите дату рождения в формате 'дд.мм.гггг'");
+        String input = scanner.nextLine();
+        LocalDate birthDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        presenter.addHuman(firstName, lastName, gender, birthDate);
+    }
+    
     public void finish() {
         System.out.println("До свидания!");
         work = false;
