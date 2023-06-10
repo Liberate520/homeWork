@@ -57,10 +57,10 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     }
 
     public String getParent() {
-        if(father == null & mother == null) return name + " (Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
-        else if (father == null) return name + " (Отец: " + "NULL" + ", Мать: " + mother.name + ")";
-        else if (mother == null) return name + " (Отец: " + father.name + ", Мать: " + "NULL" + ")";
-        else return name + " (Отец: " + father.name + ", Мать: " + mother.name + ")";
+        if(father == null & mother == null) return "(Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
+        else if (father == null) return "(Отец: " + "NULL" + ", Мать: " + mother.name + ")";
+        else if (mother == null) return "(Отец: " + father.name + ", Мать: " + "NULL" + ")";
+        else return "(Отец: " + father.name + ", Мать: " + mother.name + ")";
     }
     @Override
     public Set<Human> getChildrenList() {
@@ -78,7 +78,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
 
     @Override
     public String toString() {
-        return  "Имя: " + name + ", пол: " + gender;
+        return  String.format("%s, пол: %s %s, (детей: %d)", name, gender, getParent(), children.size());
     }
 
     @Override

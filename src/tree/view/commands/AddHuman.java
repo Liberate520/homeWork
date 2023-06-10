@@ -1,6 +1,6 @@
-package tree.familyTree.view.commands;
+package tree.view.commands;
 
-import tree.familyTree.view.UserUI;
+import tree.view.UserUI;
 
 public class AddHuman implements Command {
 
@@ -11,7 +11,7 @@ public class AddHuman implements Command {
     }
     @Override
     public String getDescription() {
-        return "Добавить чекловека";
+        return "Добавить человека";
     }
 
     @Override

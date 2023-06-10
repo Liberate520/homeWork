@@ -1,14 +1,24 @@
-package tree;
+package tree.model;
 
+import tree.familyTree.FamilyTree;
 import tree.familyTree.Tree;
+import tree.handler.FileHandler;
+import tree.handler.SaveReadable;
 import tree.human.Gender;
 import tree.human.Human;
 
-public class Service {
+import java.io.IOException;
+import java.io.Serializable;
+
+import static tree.human.Gender.man;
+
+public class Service implements Serializable {
 
     private Tree<Human> tree;
+    private SaveReadable fileHandler;
 
     public Service(Tree<Human> tree) {
+        fileHandler = new FileHandler();
         this.tree = tree;
     }
 
@@ -36,10 +46,23 @@ public class Service {
      public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Human human : tree) {
-            stringBuilder.append(String.format("%s, (детей: %d)\n",
+            stringBuilder.append(String.format("%s %s, (детей: %d)\n",
+                    human.getName(),
                     human.getParent(),
                     human.getChildrenList().size()));
         }
         return stringBuilder.toString();
      }
+
+     public void saveObject() throws IOException {
+        fileHandler.saveObject(tree);
+     }
+
+    public void loadFile() throws IOException, ClassNotFoundException {
+        tree = (FamilyTree) fileHandler.loadObject();
+    }
+
+    public void addChild(String human, String child) {
+        findHuman(human).addChild(findHuman(child));
+    }
 }

@@ -1,6 +1,6 @@
-package tree.familyTree.view.commands;
+package tree.view.commands;
 
-import tree.familyTree.view.UserUI;
+import tree.view.UserUI;
 
 public class FindHuman implements Command {
     private UserUI userUI;

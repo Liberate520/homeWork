@@ -1,8 +1,9 @@
-package tree.familyTree.view;
+package tree.view;
 
-import tree.familyTree.presenter.Presenter;
+import tree.presenter.Presenter;
 import tree.human.Gender;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserUI implements View {
@@ -12,20 +13,15 @@ public class UserUI implements View {
     private boolean work;
     private UserMenu userMenu;
 
-    public UserUI() {
+    public UserUI(Presenter presenter) {
         scanner = new Scanner(System.in);
         work = true;
         userMenu = new UserMenu(this);
-    }
-
-    @Override
-    public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
-
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         System.out.println("Превет!");
         while (work) {
             System.out.println(userMenu.printMenu());
@@ -33,12 +29,12 @@ public class UserUI implements View {
         }
     }
 
-    private void inputChoice() {
+    private void inputChoice() throws IOException, ClassNotFoundException {
         String line = scanner.nextLine();
         if (checkLine(line)) {
             userMenu.execute(Integer.parseInt(line));
         } else {
-            System.out.println("Exception");
+            System.out.println("Ошибка ввода!");
         }
     }
 
@@ -71,5 +67,29 @@ public class UserUI implements View {
 
     public void getFamilyTree() {
         presenter.getFamilyTree();
+    }
+
+    public void sortByName() {
+        presenter.sortByName();
+    }
+
+    public void sortByChild() {
+        presenter.sortByChild();
+    }
+
+    public void saveFile() throws IOException {
+        presenter.saveFile();
+    }
+
+    public void loadFile() throws IOException, ClassNotFoundException {
+        presenter.loadFile();
+    }
+
+    public void addChild() {
+        System.out.println("Укажите имя");
+        String human = scanner.nextLine();
+        System.out.println("Укажите ребенка");
+        String child = scanner.nextLine();
+        presenter.addChild(human, child);
     }
 }

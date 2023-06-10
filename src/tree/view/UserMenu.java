@@ -1,7 +1,8 @@
-package tree.familyTree.view;
+package tree.view;
 
-import tree.familyTree.view.commands.*;
+import tree.view.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,11 @@ public class UserMenu {
         commands.add(new GetFamilyTree(userUI));
         commands.add(new FindHuman(userUI));
         commands.add(new AddHuman(userUI));
+        commands.add(new AddChild(userUI));
+        commands.add(new SortByName(userUI));
+        commands.add(new SortByChild(userUI));
+        commands.add(new SaveFile(userUI));
+        commands.add(new LoadFile(userUI));
         commands.add(new FinishWork(userUI));
     }
     public String printMenu() {
@@ -24,7 +30,7 @@ public class UserMenu {
         return stringBuilder.toString();
     }
 
-    public void execute(int choice) {
+    public void execute(int choice) throws IOException, ClassNotFoundException {
         commands.get(choice - 1).execute();
     }
 
