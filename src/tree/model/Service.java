@@ -25,8 +25,10 @@ public class Service {
     }
 
     public Human findHuman(String name) {
-        for (Human human : tree) {
-            if (human.getName().equals(name)) return human;
+        try {
+            return tree.findHuman(name);
+        }catch (Exception e) {
+            System.out.println("NNNNNNNNNNNNNN");
         }
         return null;
     }
@@ -60,6 +62,6 @@ public class Service {
     }
 
     public void addChild(String human, String child) {
-        findHuman(human).addChild(findHuman(child));
+         findHuman(human).addChild(findHuman(child));
     }
 }

@@ -1,5 +1,6 @@
 package tree.presenter;
 
+import tree.human.Human;
 import tree.model.Service;
 import tree.human.Gender;
 
@@ -28,7 +29,11 @@ public class Presenter {
         System.out.println("Файл отсортирован по количеству детей");
     }
     public void findHuman(String name) {
-        System.out.println(service.findHuman(name).toString());
+        try {
+            System.out.println(service.findHuman(name).toString());
+        } catch (Exception e) {
+            System.out.println("Не найден");
+        }
     }
 
     public void saveFile() throws IOException {
@@ -40,7 +45,15 @@ public class Presenter {
     }
 
     public void addChild(String human, String child) {
-        service.addChild(human, child);
-        System.out.println(String.format("%s добавлен ребенок %s", human, child));
+            if (containsHuman(service.findHuman(child)) && containsHuman(service.findHuman(human))) {
+                service.findHuman(human).addChild(service.findHuman(child));
+                System.out.println(String.format("%s добавлен ребенок %s", human, child));
+            } else {
+            System.out.println("Ошибка");
+        }
+    }
+    private boolean containsHuman(Human human) {
+        if (human != null) return true;
+        return false;
     }
 }
