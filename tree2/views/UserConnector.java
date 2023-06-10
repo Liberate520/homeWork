@@ -25,6 +25,7 @@ public class UserConnector implements View {
     }
 
     public void addFamilyMember() {
+        System.out.println("\n=======================Добавление члена семьи================================\n");
         try {
             System.out.println("Укажите имя человека");
             String name = scanner.nextLine();
@@ -36,17 +37,22 @@ public class UserConnector implements View {
             int day = Integer.parseInt(parts[2]);
             LocalDate birthDate = LocalDate.of(year, month, day);
             presenter.addFamilyMember(name, birthDate);
+            System.out.println("\nПользователь под именем " + name + ", год рождения " + date+ " успешно добавлен!\n");
         } catch (Exception e) {
             System.out.println("\nВозникла непредвиденная ошибка, добавление пользователя отклонено!\n");
         }
     }
 
     public void fillFamilyTreeWithTestData() {
+
+        System.out.println("\n==================Заполнили семейное древо тестовыми данными=================\n");
         presenter.fillFamilyTreeWithTestData();
     }
 
 
     public void showAllFamily() {
+
+        System.out.println("\n=============================Все семья================================\n");
         presenter.showFamilyMembers();
     }
 
@@ -62,15 +68,19 @@ public class UserConnector implements View {
         while (flag) {
             switch (param) {
                 case "1":
+                    System.out.println("\n=============================Сортировка по имени================================\n");
                     presenter.sortByName();
                     break;
                 case "2":
+                    System.out.println("\n=====================Обратная сортировка по имени=============================\n");
                     presenter.sortByNameDesc();
                     break;
                 case "3":
+                    System.out.println("\n=============================Сортировка по ID================================\n");
                     presenter.sortById();
                     break;
                 case "4":
+                    System.out.println("\n===========================Обратная сортировка по ID============================\n");
                     presenter.sortByIdDesc();
                     break;
                 case "0":
@@ -84,30 +94,34 @@ public class UserConnector implements View {
 
 
     public void findPerson() {
+        System.out.println("\n===========================Поиск человека по имени============================\n");
         System.out.println("Введите имя пользователя для поиска: \n");
         String name = scanner.nextLine();
-        presenter.findPerson(name);
+        System.out.println(presenter.findPerson(name));
     }
 
     public void deletePerson() {
+        System.out.println("\n===========================Удаление пользователя============================\n");
         System.out.println("Введите имя пользователя для удаления: \n");
         String name = scanner.nextLine();
         presenter.deletePeson(name);
     }
 
     public void saveFile() {
-        presenter.saveFile();
+        System.out.println(presenter.saveFile());
     }
 
     public void LoadFile() {
-        presenter.loadFile();
+        System.out.println(presenter.loadFile());
     }
 
     public void deleteFamilyTree() {
+        System.out.println("\n===========================Удаление дерева============================\n");
         presenter.deleteFamilyTree();
     }
 
     public void updatePesron() {
+        System.out.println("\n===========================Изменение пользователя============================\n");
         System.out.println("Введите имя пользователя, чтобы найти его в базе и изменить: ");
         String oldName = scanner.nextLine();
         System.out.println("Введите новое имя пользователя для изменения: ");

@@ -6,7 +6,7 @@ public class Logger {
         this.logger = logger;
     }
 
-    public void getLod(String textEvent){
+    public void addLod(String textEvent){
         // Сохраняем событие в логах;
     }
 }

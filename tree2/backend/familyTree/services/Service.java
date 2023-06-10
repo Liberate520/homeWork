@@ -8,7 +8,7 @@ import homeWork.tree2.backend.human.HumanObjectInterface;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class Service<E> {
+public class Service {
 
     private FamilyTree family;
 
