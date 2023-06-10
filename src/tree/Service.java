@@ -12,8 +12,6 @@ public class Service implements Serializable {
 
     private FamilyTree<Human> familyTree;
     private Serializer serializ;
-    private List<FamilyTree<Human>> familyTreeList;
-    public int id;
     private final String filePath = "tree.dat";
 
     public Service(Serializer serializ) {
@@ -21,22 +19,16 @@ public class Service implements Serializable {
         this.serializ = serializ;
     }
 
-
     public Service(FamilyTree<Human> tree) {
         this.familyTree = tree;
-        familyTreeList = new ArrayList<>();
-        familyTreeList.add(tree);
 
+        addHuman("Василий", "Иванов", Gender.Male, LocalDate.of(1991, 12, 25));
+        addHuman("Кристина", "Иванова", Gender.Female, LocalDate.of(1988, 1, 2));
+        addHuman("Ольга", "Иванова",Gender.Female, LocalDate.of(1988, 1, 2));
+        addHuman("Иван", "Иванов",Gender.Male, LocalDate.of(1988, 5, 6));
+        addHuman("Сергей", "Иванов",Gender.Male, LocalDate.of(1989, 4, 9));
     }
-    public Service(){
-        this(new FamilyTree<Human>());
-    }
-
-
-    public void addFamilyTree(FamilyTree<Human> familyTree){
-        familyTreeList.add(familyTree);
-    }
-
+    
     public void addHuman(String firstName, String lastname, Gender gender, LocalDate birthDate) {
         familyTree.add(new Human(firstName, lastname, gender, birthDate, null, null, null));
     }
@@ -48,10 +40,6 @@ public class Service implements Serializable {
             sb.append("\n");
         }
         return sb.toString();
-    }
-
-    public String getTree() {
-        return familyTree.toString();
     }
 
     public void sortByFirstName() {
