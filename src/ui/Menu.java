@@ -8,6 +8,7 @@ public class Menu {
 
     public Menu(Console console) {
         commandList = new ArrayList<>();
+        commandList.add(new AddHuman(console));
         commandList.add(new GetInfo(console));
         commandList.add(new LoadFile(console));
         commandList.add(new SaveFile(console));
@@ -28,5 +29,9 @@ public class Menu {
 
     public void execute(int numCommand) {
         commandList.get(numCommand - 1).execute();
+    }
+    
+     public int size(){
+        return commandList.size();
     }
 }
