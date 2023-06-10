@@ -1,3 +1,5 @@
+package org.example;
+
 
 import java.io.*;
 
@@ -40,5 +42,6 @@ public class BinaryDataStorage implements DataStorage {
         return tree;
     }
 }
+
 
 

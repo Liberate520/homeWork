@@ -1,3 +1,5 @@
+package org.example;
+
 
 
 import java.io.Serializable;
@@ -24,7 +26,7 @@ public class Person implements Serializable {
         relationships.add(relationship);
     }
 
-   public List<Relationship> getRelationships() {
+    public List<Relationship> getRelationships() {
         return relationships;
     }
 

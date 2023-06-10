@@ -1,3 +1,5 @@
+package org.example;
+
 
 import java.io.*;
 import java.time.LocalDate;
@@ -212,7 +214,23 @@ public class GenealogicalTreeApp {
 
             System.out.println("------------------");
         }
+        tree.sortPeopleByName();
+
+        System.out.println("\nPeople sorted by name:");
+        for (Person person : tree.getPeople()) {
+            System.out.println(person.getName() + " - " + person.getDateOfBirth());
+        }
+
+        // Sort people by date of birth
+        tree.sortPeopleByDateOfBirth();
+
+        System.out.println("\nPeople sorted by date of birth:");
+        for (Person person : tree.getPeople()) {
+            System.out.println(person.getName() + " - " + person.getDateOfBirth());
+        }
     }
+
+
 
     private static String getChildNames(List<Person> children) {
         StringBuilder builder = new StringBuilder();

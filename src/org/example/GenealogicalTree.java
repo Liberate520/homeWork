@@ -1,10 +1,9 @@
+package org.example;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-class GenealogicalTree implements Serializable {
-
+class GenealogicalTree implements Iterable<Person>, Serializable {
 
     private List<Person> people;
     private List<Relationship> relationships;
@@ -87,8 +86,26 @@ class GenealogicalTree implements Serializable {
         return personRelationships;
     }
 
+    @Override
+    public Iterator<Person> iterator() {
+        return people.iterator();
+    }
+
+    public void sortPeopleByName() {
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person p1, Person p2) {
+                return p1.getName().compareTo(p2.getName());
+            }
+        });
+    }
+
+    public void sortPeopleByDateOfBirth() {
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person p1, Person p2) {
+                return p1.getDateOfBirth().compareTo(p2.getDateOfBirth());
+            }
+        });
+    }
 }
-
-
-
-
