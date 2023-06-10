@@ -1,6 +1,6 @@
 package com.example.FamilyTree;
 
-import com.example.FamilyTree.DataForTree.FamilyTreeInterface;
+import com.example.FamilyTree.DataForTree.FamilyInterface;
 import com.example.FamilyTree.DataForTree.Gender;
 
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Human implements Serializable, FamilyTreeInterface {
+public class Human implements Serializable, FamilyInterface {
     private String name;
     private Date birthday;
     private Gender gender;
@@ -34,6 +34,11 @@ public class Human implements Serializable, FamilyTreeInterface {
 
     public int getPuberty() {
         return puberty;
+    }
+
+    @Override
+    public Object getHuman() {
+        return this;
     }
 
     @Override

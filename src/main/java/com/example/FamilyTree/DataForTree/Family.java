@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-public class Family<T extends FamilyTreeInterface> implements Serializable, FamilyTreeInterface {
+public class Family<T extends FamilyInterface> implements Serializable, FamilyInterface {
     private T human;
     private List<T> parents;
     private List<T> children;
@@ -37,7 +37,7 @@ public class Family<T extends FamilyTreeInterface> implements Serializable, Fami
             System.out.println("не может быть ребенком этому человеку");
         }
     }
-
+    @Override
     public T getHuman() {
         return human;
     }
@@ -74,13 +74,13 @@ public class Family<T extends FamilyTreeInterface> implements Serializable, Fami
     public String toString() {
         String parent = "parents: \n";
         if (parents.size()>0) {
-            for (FamilyTreeInterface parent1 : parents) {
+            for (FamilyInterface parent1 : parents) {
                 parent = parent + ((parent1.getGender() == Gender.female) ? "mother " : "father ") + parent1 + "\n";
             }
         } else { parent = "";}
         String child = "children: \n";
         if (children.size()>0) {
-            for (FamilyTreeInterface children1 : children) {
+            for (FamilyInterface children1 : children) {
                 child = child + ((children1.getGender() == Gender.female) ? "daughter " : "son ") + children1 + "\n";
             }
         } else { child = "\n";}

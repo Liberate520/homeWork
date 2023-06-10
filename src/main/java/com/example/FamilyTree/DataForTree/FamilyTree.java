@@ -5,32 +5,41 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Family> {
+public class FamilyTree<T extends FamilyInterface> implements Serializable, Iterable<T> {
     static final long serialVersionUID = 1L;
-    private List<Family> familyList;
+    private List<T> familyList;
 
     public FamilyTree() {
         familyList = new ArrayList<>();
     }
 
-    public void addHumanFamilyList(Family family) {
+    public void addHumanFamilyList(T family) {
         familyList.add(family);
     }
 
-    public List<Family> getHumanFamilyList() {
+    public List<T> getHumanFamilyList() {
         return familyList;
     }
 
     public void sortByBirthday() {
-        familyList.sort(new ComparatorByBirthday());
+        familyList.sort(new ComparatorByBirthday<>());
     }
 
     public void sortByName() {
-        familyList.sort(new ComparatorByName());
+        familyList.sort(new ComparatorByName<>());
+    }
+
+    public String printHumanList() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T human : familyList) {
+            stringBuilder.append(human.getHuman());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
     }
 
     @Override
-    public Iterator<Family> iterator() {
+    public Iterator<T> iterator() {
         return familyList.iterator();
     }
 }

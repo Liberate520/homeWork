@@ -9,18 +9,17 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         List<Human> humanList = createHumanList();
-        FamilyTree familyTree = createFamilyTree(humanList);
+        FamilyTree<Family<Human>> familyTree = createFamilyTree(humanList);
         System.out.println("Общий список людей: ");
-        System.out.println(printHumanList(familyTree));
+        System.out.println(familyTree.printHumanList());
 
         System.out.println("Сортировка по дню рождения: ");
         familyTree.sortByBirthday();
-        System.out.println(printHumanList(familyTree));
+        System.out.println(familyTree.printHumanList());
 
         System.out.println("Сортировка по имени: ");
         familyTree.sortByName();
-        System.out.println(printHumanList(familyTree));
-
+        System.out.println(familyTree.printHumanList());
         Scanner scan = new Scanner(System.in);
         String answer = "0";
         do {
@@ -48,65 +47,63 @@ public class Main {
         return humanList;
     }
 
-    public static FamilyTree createFamilyTree(List<Human> humanList) {
+    public static FamilyTree<Family<Human>> createFamilyTree(List<Human> humanList) {
         String path = "./src/main/java/com/example/FamilyTree/FT.txt";
         File file = new File(path);
-        FamilyTree familyTree = new FamilyTree();
-        Family element;
-        //Service human;
+        FamilyTree<Family<Human>> familyTree = new FamilyTree<>();
+        Family<Human> element;
         if (!file.exists()) {
-            //human = new Service(humanList.get(0));
-            element = new Family(humanList.get(0));
+            element = new Family<Human>(humanList.get(0));
             element.addChildren(humanList.get(2));
             element.addChildren(humanList.get(3));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(1));
+            element = new Family<Human>(humanList.get(1));
             element.addChildren(humanList.get(2));
             element.addChildren(humanList.get(3));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(2));
+            element = new Family<Human>(humanList.get(2));
             element.addParents(humanList.get(0));
             element.addParents(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(3));
+            element = new Family<Human>(humanList.get(3));
             element.addParents(humanList.get(0));
             element.addParents(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(4));
+            element = new Family<Human>(humanList.get(4));
             element.addChildren(humanList.get(0));
             element.addChildren(humanList.get(8));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(5));
+            element = new Family<Human>(humanList.get(5));
             element.addChildren(humanList.get(0));
             element.addChildren(humanList.get(8));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(6));
+            element = new Family<Human>(humanList.get(6));
             element.addChildren(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(7));
+            element = new Family<Human>(humanList.get(7));
             element.addChildren(humanList.get(1));
             familyTree.addHumanFamilyList(element);
 
-            element = new Family(humanList.get(8));
+            element = new Family<Human>(humanList.get(8));
             element.addParents(humanList.get(4));
             element.addParents(humanList.get(5));
             familyTree.addHumanFamilyList(element);
 
             FileProcessing(1, familyTree, path);
         } else {
-            familyTree = (FamilyTree) FileProcessing(2, familyTree, path);
+            familyTree = (FamilyTree<Family<Human>>) FileProcessing(2, familyTree, path);
         }
         return familyTree;
     }
 
-    public static Object FileProcessing(int index, FamilyTree familyTree, String path) {
+    public static Object FileProcessing(int index, FamilyTree<Family<Human>> familyTree, String path) {
         FileHandler fileHandler = new FileHandler();
         switch (index){
             case 1: {
@@ -120,10 +117,10 @@ public class Main {
         return null;
     }
 
-    public static String printHumanList(FamilyTree familyTree) {
+    public static String printHumanList(FamilyTree<Family<Human>> familyTree) {
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
-        for (Family human : familyTree) {
+        for (Family<Human> human : familyTree) {
             stringBuilder.append(index++ + ": ");
             stringBuilder.append(human.getHuman());
             stringBuilder.append("\n");
@@ -131,7 +128,7 @@ public class Main {
         return stringBuilder.toString();
     }
 
-    public static void filterFamilyTree(String answer, FamilyTree familyTree) {
+    public static void filterFamilyTree(String answer, FamilyTree<Family<Human>> familyTree) {
         List<Integer> listNumber = Arrays.stream(answer.split(" ")).map(s -> Integer.parseInt(s)).collect(Collectors.toList());
         int allHumans = familyTree.getHumanFamilyList().size();
         if (listNumber.size()==1 && listNumber.get(0)<=allHumans){
@@ -255,7 +252,7 @@ public class Main {
         return i;
     }
 
-    public static Family getHumanFamily(Human human, FamilyTree familyTree) {
+    public static Family getHumanFamily(Human human, FamilyTree<Family> familyTree) {
         for (int i = 0; i < familyTree.getHumanFamilyList().size(); i++) {
             if (familyTree.getHumanFamilyList().get(i).getHuman().equals(human)) {
                 return familyTree.getHumanFamilyList().get(i);
