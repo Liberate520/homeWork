@@ -1,6 +1,8 @@
 package presenter;
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import human.Gender;
 import tree.Service;
 import ui.View;
 
@@ -18,6 +20,10 @@ public class Presenter implements Serializable {
         view.print(service.getInfoHuman());
     }
 
+    public void addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate){
+        service.addHuman(firstName, lastName, gender, birthDate);
+    }
+    
     public void saveFile() {
         service.save();
     }
