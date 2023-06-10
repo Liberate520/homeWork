@@ -221,7 +221,7 @@ public class GenealogicalTreeApp {
             System.out.println(person.getName() + " - " + person.getDateOfBirth());
         }
 
-        // Sort people by date of birth
+
         tree.sortPeopleByDateOfBirth();
 
         System.out.println("\nPeople sorted by date of birth:");
