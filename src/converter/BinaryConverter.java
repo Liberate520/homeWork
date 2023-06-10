@@ -1,9 +1,7 @@
 package converter;
 
-import family.Family;
 import familyRecords.FamilyRecords;
 import member.Member;
-
 import java.io.*;
 import java.util.Arrays;
 

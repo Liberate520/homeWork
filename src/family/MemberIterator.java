@@ -1,8 +1,6 @@
 package family;
 
-import human.Human;
 import member.Member;
-
 import java.util.Iterator;
 import java.util.List;
 

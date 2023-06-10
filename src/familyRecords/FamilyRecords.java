@@ -23,7 +23,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     public void addFamily(String name, E familyMember) {
         Family<E> newFamily = searchFamilyByName(name);
         if (newFamily == null) {
-            newFamily = new Family<E>(name);
+            newFamily = new Family<>(name);
             families.add(newFamily);
         }
         if (familyMember != null) {
@@ -158,13 +158,6 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     public static FamilyRecords load(Converter converter) {
         return converter.load();
     }
-//    public void load(Converter converter) {
-//        // TODO: modify construction to something like 'this = converter.load();', when/if i understand how to do it
-//        // Not sure if this way to load data is correct
-//        FamilyRecords loadedRecords = converter.load();
-//        this.people = loadedRecords.people;
-//        this.families = loadedRecords.families;
-//    }
     @Override
     public Iterator<Family<E>> iterator() {
         return families.iterator();

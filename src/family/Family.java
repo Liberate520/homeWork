@@ -1,11 +1,9 @@
 package family;
 
-import human.Human;
-import human.comparator.*;
 import member.Member;
 import member.comparator.MemberComparator;
+import member.comparator.MemberComparatorByBirthDate;
 import member.comparator.MemberComparatorByName;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -18,7 +16,6 @@ public class Family<E extends Member> implements Serializable, Iterable<E>, Comp
         members = new ArrayList<>();
     }
 
-    //    private boolean humanInMembers(Human humanToCheck) {
     private boolean containMember(E memberToCheck) {
         for (E member : members) {
             if (memberToCheck.equals(member)) return true;
@@ -49,9 +46,7 @@ public class Family<E extends Member> implements Serializable, Iterable<E>, Comp
         return stringBuilder.toString();
     }
 
-    // TODO: unsure how to get rid of "Raw use of parameterized class"
-    //  cause HumanComparatorByBirthDate does not need a parameter
-    private void sort(MemberComparator comparator) {
+    private void sort(MemberComparator<E> comparator) {
         members.sort(comparator);
     }
 
@@ -63,7 +58,7 @@ public class Family<E extends Member> implements Serializable, Iterable<E>, Comp
     }
 
     public void sortByBirthDate() {
-        this.sort(new HumanComparatorByBirthDate());
+        this.sort(new MemberComparatorByBirthDate<E>());
     }
 
     @Override
