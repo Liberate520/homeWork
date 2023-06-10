@@ -1,6 +1,8 @@
 package tree;
 
 import tree.familyTree.FamilyTree;
+import tree.familyTree.presenter.Presenter;
+import tree.familyTree.view.UserUI;
 import tree.handler.FileHandler;
 import tree.handler.SaveReadable;
 import tree.human.Human;
@@ -74,9 +76,15 @@ public class Main {
         service.sortByChild();
         System.out.print("Sort by count of kids ----> ");
         System.out.println(IvanoviTestLoad);
-
+        System.out.println("S__________________S");
+        System.out.println(service.findHuman("Sasha"));
+        System.out.println("S---------------------S");
         for (Human human : IvanoviTestLoad) {
             System.out.printf("%s (count kids: %d)\n",human.getName(), human.getChildrenList().size());
         }
+        Presenter presenter = new Presenter(service);
+        UserUI user1 = new UserUI();
+        user1.setPresenter(presenter);
+        user1.start();
     }
 }

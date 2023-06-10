@@ -16,11 +16,30 @@ public class Service {
         Human human = new Human(name, gender);
         tree.addHuman(human);
     }
+
+    public Human findHuman(String name) {
+        for (Human human : tree) {
+            if (human.getName().equals(name)) return human;
+        }
+        return null;
+    }
+
      public void sortByName() {
         tree.sortByName();
      }
 
      public void sortByChild() {
         tree.sortByChild();
+     }
+
+     @Override
+     public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Human human : tree) {
+            stringBuilder.append(String.format("%s, (детей: %d)\n",
+                    human.getParent(),
+                    human.getChildrenList().size()));
+        }
+        return stringBuilder.toString();
      }
 }

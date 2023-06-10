@@ -30,9 +30,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         this(name, gender, null);
     }
     @Override
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
     @Override
     public Human getFather() { return father; }
     @Override
@@ -80,7 +78,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
 
     @Override
     public String toString() {
-        return "Имя: " + name + ", Пол: " + gender;
+        return  "Имя: " + name + ", пол: " + gender;
     }
 
     @Override
