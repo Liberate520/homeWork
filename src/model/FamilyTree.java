@@ -1,4 +1,5 @@
-import java.io.IOException;
+package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

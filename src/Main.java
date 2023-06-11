@@ -1,3 +1,8 @@
+import model.*;
+import presenter.Presenter;
+import view.Console;
+import view.View;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -6,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
+        /*
         Human human1 = new Human("O-647", LocalDate.of(2078,4,12), Gender.MALE);
         Human human2 = new Human("I-693", LocalDate.of(2079,6,17), Gender.FEMALE);
         Human human3 = new Human("K-953", LocalDate.of(2101,1,4), Gender.MALE, human1, human2);
@@ -57,12 +63,12 @@ public class Main {
 
 
         // блок для сохранения
-        //Savable savableSaver = new FileHandler();
+        //model.Savable savableSaver = new model.FileHandler();
         //savableSaver.save(familyTree, "familyTreeOne");
 
         //блок для чтения файла
-        //Savable savableLoader = new FileHandler();
-        //FamilyTree familyTreeRestored = (FamilyTree) savableLoader.load("familyTreeOne");
+        //model.Savable savableLoader = new model.FileHandler();
+        //model.FamilyTree familyTreeRestored = (model.FamilyTree) savableLoader.load("familyTreeOne");
         //System.out.println(familyTreeRestored.printHumanList());
 
         System.out.println();
@@ -86,7 +92,12 @@ public class Main {
         }
 
 
+*/
+        View view = new Console();
+        Service service = new Service();
+        new Presenter(view, service);
 
+        view.start();
     }
 
 

@@ -1,3 +1,5 @@
+package model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
 
     public Human(){
 
-        this("Unknown", LocalDate.of(00,00,00), Gender.UNKNOWN, null, null);
+        this("Unknown", LocalDate.of(0000,01,01), Gender.UNKNOWN, null, null);
 
     }
 
@@ -90,4 +92,15 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         return name.compareTo(o.getName());
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }

@@ -1,3 +1,5 @@
+package model;
+
 import java.util.List;
 
 public interface Tree<E> extends Iterable<E>{
@@ -7,6 +9,5 @@ public interface Tree<E> extends Iterable<E>{
     void sortByName();
 
     void sortByBirthDate();
-
 
 }
