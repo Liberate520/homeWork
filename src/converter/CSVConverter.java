@@ -12,6 +12,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * Implemented only for Human objects
+ * Don`t know how to new E(...) in line 115
+ */
 public class CSVConverter implements Converter<Human> {
     private final String path;
     private final String csvDelimiter;
