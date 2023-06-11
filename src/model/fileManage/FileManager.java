@@ -56,6 +56,14 @@ public class FileManager implements Savable, Loadable {
             System.out.println("Export error");
         }
     }
+    public void saveFile(FamilyTree object) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(object);
+        } catch (IOException e) {
+            System.out.println("Export error");
+        }
+    }
 
     /**
      * Загружает объект из файла.

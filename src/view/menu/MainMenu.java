@@ -14,6 +14,7 @@ public class MainMenu {
 
         this.commandList.add(new AddRecord(consoleUI));
         this.commandList.add(new GetRecord(consoleUI));
+        this.commandList.add(new GetParents(consoleUI));
         this.commandList.add(new GetAllRecord(consoleUI));
         this.commandList.add(new Finish(consoleUI));
 

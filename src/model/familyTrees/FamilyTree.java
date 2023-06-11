@@ -4,6 +4,7 @@ import model.familyTrees.comparators.ByDateBirth;
 import model.familyTrees.comparators.NameAlphabetical;
 import model.familyTrees.comparators.NameLength;
 import model.familyTrees.iterators.PersonIterator;
+import model.members.Gender;
 import model.members.Member;
 
 import java.io.Serializable;
@@ -28,6 +29,8 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         this.familyTree = new ArrayList<>();
     }
 
+
+
     public String getNameFamilyTree() {
         return nameFamilyTree;
     }
@@ -45,11 +48,11 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
      */
     public void addBranchParentChild(T parent, T child) {
         if (parent != null) {
-            if (parent.getGender().equalsIgnoreCase("man")) {
+            if (parent.getGender().equals(Gender.MAN)) {
                 child.setFather(parent);
                 addChildBranch(parent, child);
             }
-            if (parent.getGender().equalsIgnoreCase("woman")) {
+            if (parent.getGender().equals(Gender.WOMAN)) {
                 child.setMother(parent);
                 addChildBranch(parent, child);
             }
@@ -155,6 +158,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
             return temp;
         } else return temp;
     }
+
 
     /**
      * Выводит всех детей человека.

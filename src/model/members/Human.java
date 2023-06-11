@@ -9,12 +9,12 @@ import java.util.Optional;
 public class Human implements Member, Serializable {
     private String NAME;
     private Year yearOfBirth;
-    private String gender;
-    private Human father;
-    private Human mother;
+    private Gender gender;
+    private Member father;
+    private Member mother;
     private List<Member> children;
 
-    public Human(String name, String gender, int yearOfBirth) {
+    public Human(String name, Gender gender, int yearOfBirth) {
         this.NAME = name;
         this.yearOfBirth = Year.of(yearOfBirth);
         this.gender = gender;
@@ -31,16 +31,18 @@ public class Human implements Member, Serializable {
         return yearOfBirth;
     }
 
-    public String getGender() {
+    @Override
+    public Gender getGender() {
         return gender;
     }
 
-    public Human getFather() {
+    public Member getFather() {
         return father;
     }
 
     @Override
     public void setFather(Member father) {
+        this.father = father;
 
     }
 
@@ -48,13 +50,13 @@ public class Human implements Member, Serializable {
         this.father = father;
     }
 
-    public Human getMother() {
+    public Member getMother() {
         return mother;
     }
 
     @Override
     public void setMother(Member mother) {
-
+        this.mother = mother;
     }
 
     @Override
@@ -83,8 +85,8 @@ public class Human implements Member, Serializable {
         return "trees.Human{" +
                 "Name='" + NAME + '\'' +
                 ", date of brith=" + yearOfBirth +
-                ", father=" + Optional.ofNullable(father).map(Human::getName).orElse("unknown") +
-                ", mother=" + Optional.ofNullable(mother).map(Human::getName).orElse("unknown") +
+                ", father=" + Optional.ofNullable(father).map(Member::getName).orElse("unknown") +
+                ", mother=" + Optional.ofNullable(mother).map(Member::getName).orElse("unknown") +
                 ", children=" + temp + "}";
 
     }

@@ -18,7 +18,7 @@ public class ConsoleUI implements View {
         work = true;
         importFileLoaded = false;
         mainMenu = new MainMenu(this);
-        presenter = new Presenter<>();
+        presenter = new Presenter();
     }
 
     @Override
@@ -61,27 +61,30 @@ public class ConsoleUI implements View {
 
 
     public String treeFileImportCheckView() { //TODO надо поменять уведомления
-        if (presenter.getFamilyTree() == null) {
+        if (presenter.getHumanService().getFamilyTree() == null) {
             return "[Импорт файла] Укажите путь к файлу ";
 
-        } else if (presenter.getFileManager() == null && presenter.getFamilyTree() != null) {
+        } else if (presenter.getHumanService() == null && presenter.getHumanService().getFamilyTree() != null) {
             return "[Дерево обнаружено, но не сохранено, укажите путь к файлу]";
         } else {
-            return "[Вы работаете с семейным деревом " + presenter.getFamilyTree().getNameFamilyTree() + "]";
+            return "[Вы работаете с семейным деревом " + presenter.getHumanService().getFamilyTree().getNameFamilyTree() + "]";
         }
     }
 
     public void importFile() {
         System.out.println("Укажите путь к файлу для загрузки");
         presenter.importFile(scanner.nextLine());
-        if (presenter.getFamilyTree() != null) importFileLoaded = true;
+        if (presenter.getHumanService().getFamilyTree() != null) importFileLoaded = true;
     }
+
     public void addRecordInTree() {
         System.out.println("Укажите имя человека");
         String name = scanner.nextLine();
-        System.out.println("Укажите дату рождения");
+        System.out.println("Укажите пол");
+        String gender = scanner.nextLine();
+        System.out.println("Укажите год рождения");
         String dateOfBirth = scanner.nextLine();
-//        presenter.addRecord();
+        presenter.addRecord(name, gender, dateOfBirth);
 
     }
 
@@ -101,5 +104,13 @@ public class ConsoleUI implements View {
         System.out.println("Программа остановлена");
         presenter.saveFile();
         work = false;
+    }
+
+    public void getParents() {
+        System.out.println("Укажите имя");
+        String name = scanner.nextLine();
+        System.out.println("Укажите год рождения");
+        String year = scanner.nextLine();
+        presenter.getParents(name, year);
     }
 }

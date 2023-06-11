@@ -1,14 +1,15 @@
 package model.members;
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.List;
 
-public interface Member {
+public interface Member extends Serializable {
     public String getName();
 
     public Year getYearOfBirth();
 
-    public String getGender();
+    public Gender getGender();
 
     public Member getFather();
 
