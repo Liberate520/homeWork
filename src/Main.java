@@ -1,8 +1,8 @@
-import dog.Dog;
-import human.*;
-import family.*;
-import familyRecords.*;
-import member.Gender;
+import model.dog.Dog;
+import model.human.*;
+import model.family.*;
+import model.familyRecords.*;
+import model.member.Gender;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -34,13 +34,13 @@ public class Main {
                 new GregorianCalendar(1863, Calendar.DECEMBER, 8)); // Гончарова -> Пушкина -> Ланская
 
 
-        // create family trees
+        // create model.family trees
         humanRecords.addFamily("Пушкины");
         humanRecords.addFamily("Гончаровы", natalya);
         humanRecords.addFamily("Павлищевы", olga);
         humanRecords.addFamily("Ланские", humanRecords.searchHumanByName("Ланская Наталья Николаевна"));
 
-        // get some family objects
+        // get some model.family objects
         Family<Human> pushkins = humanRecords.searchFamilyByName("Пушкины");
 
         // add connections
@@ -60,7 +60,7 @@ public class Main {
         // find all members, to who $sergey is FamilyConnection.PARENT
         System.out.println(humanRecords.findRelatedMembers(sergey, Connection.PARENT));
 
-        // find all families connected to this family in any way
+        // find all families connected to this model.family in any way
         System.out.println(humanRecords.findConnectedFamilies(pushkins));
 
         System.out.println("-".repeat(10));
@@ -93,7 +93,7 @@ public class Main {
         System.out.printf(humanRecords.getFamiliesString());
         System.out.println("-".repeat(10));
 
-        System.out.printf(pushkins.getFamiliesString()); // print humans in family as is
+        System.out.printf(pushkins.getFamiliesString()); // print humans in model.family as is
         pushkins.sort(); // sort by name
         System.out.println("-".repeat(10));
         System.out.printf(pushkins.getFamiliesString());

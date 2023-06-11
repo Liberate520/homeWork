@@ -1,8 +1,8 @@
-package dog;
+package model.dog;
 
-import family.Family;
-import member.Gender;
-import member.Member;
+import model.family.Family;
+import model.member.Gender;
+import model.member.Member;
 import java.util.*;
 
 public class Dog extends Member{

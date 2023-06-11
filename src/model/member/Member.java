@@ -1,8 +1,8 @@
-package member;
+package model.member;
 
-import family.Family;
-import member.comparator.MemberComparator;
-import member.comparator.MemberComparatorByName;
+import model.family.Family;
+import model.member.comparator.MemberComparator;
+import model.member.comparator.MemberComparatorByName;
 import java.io.Serializable;
 import java.util.*;
 
@@ -26,14 +26,14 @@ public abstract class Member implements Serializable, Comparable<Member> {
 
     /**
      * Add to Family connection
-     * @param family which family to connect
+     * @param family which model.family to connect
      */
     public void addFamily(Family<? extends Member> family) {
         this.families.add(family);
     }
 
     /**
-     * Add 'connection' to 'other member'
+     * Add 'connection' to 'other model.member'
      */
     public void addConnection(Member member, Connection connection) {
         if (!connections.containsKey(connection)) {

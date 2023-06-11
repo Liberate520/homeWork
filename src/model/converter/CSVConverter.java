@@ -1,11 +1,11 @@
-package converter;
+package model.converter;
 
-import human.*;
-import family.*;
-import familyRecords.*;
-import member.Connection;
-import member.Gender;
-import member.Member;
+import model.human.*;
+import model.family.*;
+import model.familyRecords.*;
+import model.member.Connection;
+import model.member.Gender;
+import model.member.Member;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

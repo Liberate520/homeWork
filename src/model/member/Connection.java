@@ -1,4 +1,4 @@
-package member;
+package model.member;
 
 public enum Connection {
     PARENT("parent"),

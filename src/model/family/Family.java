@@ -1,9 +1,9 @@
-package family;
+package model.family;
 
-import member.Member;
-import member.comparator.MemberComparator;
-import member.comparator.MemberComparatorByBirthDate;
-import member.comparator.MemberComparatorByName;
+import model.member.Member;
+import model.member.comparator.MemberComparator;
+import model.member.comparator.MemberComparatorByBirthDate;
+import model.member.comparator.MemberComparatorByName;
 import java.io.Serializable;
 import java.util.*;
 
@@ -35,7 +35,7 @@ public class Family<E extends Member> implements Serializable, Iterable<E>, Comp
     }
 
     /**
-     * Build and return string of family members
+     * Build and return string of model.family members
      */
     public String getFamiliesString() {
         StringBuilder stringBuilder = new StringBuilder();

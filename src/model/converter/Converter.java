@@ -1,7 +1,7 @@
-package converter;
+package model.converter;
 
-import familyRecords.FamilyRecords;
-import member.Member;
+import model.familyRecords.FamilyRecords;
+import model.member.Member;
 
 public interface Converter<E extends Member> {
     public void save(FamilyRecords<E> records);

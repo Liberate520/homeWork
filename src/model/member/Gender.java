@@ -1,4 +1,4 @@
-package member;
+package model.member;
 
 public enum Gender {
     MALE("male"),

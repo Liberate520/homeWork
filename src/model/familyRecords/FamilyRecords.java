@@ -1,9 +1,9 @@
-package familyRecords;
+package model.familyRecords;
 
-import member.Connection;
-import converter.Converter;
-import family.Family;
-import member.Member;
+import model.member.Connection;
+import model.converter.Converter;
+import model.family.Family;
+import model.member.Member;
 
 import java.io.Serializable;
 import java.util.*;
@@ -38,7 +38,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     /**
      * Search Human by name
      * @param name name to search
-     * @return First founded human or null
+     * @return First founded model.human or null
      */
     public E searchHumanByName(String name) {
         for (Family<E> family : families) {
@@ -52,7 +52,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     /**
      * Search Family by his name
      * @param name name to search
-     * @return First founded family or null
+     * @return First founded model.family or null
      */
     public Family<E> searchFamilyByName(String name) {
         for (Family<E> family : families) {
@@ -70,8 +70,8 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     }
 
     /**
-     * Add wife to 'family' and set correct connections
-     * 'family', 'husband' and 'wife' must exist and be members of this records
+     * Add wife to 'model.family' and set correct connections
+     * 'model.family', 'husband' and 'wife' must exist and be members of this records
      */
     public void addWife(Family<E> family, E husband, E wife) {
         addToFamily(wife, family);
@@ -79,8 +79,8 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     }
 
     /**
-     * Add child to 'family' and set correct connections
-     * 'family', 'parent' and 'child' must exist and be members of this records
+     * Add child to 'model.family' and set correct connections
+     * 'model.family', 'parent' and 'child' must exist and be members of this records
      */
     public void addChild(Family<E> family, E parent, E child) {
         addToFamily(child, family);
@@ -100,8 +100,8 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     }
 
     /**
-     * Add parent to 'family' and set correct connections
-     * 'family', 'parent' and 'child' must exist and be members of this records
+     * Add parent to 'model.family' and set correct connections
+     * 'model.family', 'parent' and 'child' must exist and be members of this records
      */
     public void addParent(Family<E> family, E child, E parent) {
         addToFamily(parent, family);
@@ -109,7 +109,7 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     }
 
     /**
-     * return Set of Humans to whom this human is $connection
+     * return Set of Humans to whom this model.human is $connection
      */
     public Set<? extends Member> findRelatedMembers(E human, Connection connection) {
         Set<? extends Member> result = new HashSet<>();

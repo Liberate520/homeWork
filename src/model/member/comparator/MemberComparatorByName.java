@@ -1,6 +1,6 @@
-package member.comparator;
+package model.member.comparator;
 
-import member.Member;
+import model.member.Member;
 
 public class MemberComparatorByName<E extends Member> implements MemberComparator<E> {
     @Override

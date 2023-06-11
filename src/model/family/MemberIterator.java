@@ -1,6 +1,6 @@
-package family;
+package model.family;
 
-import member.Member;
+import model.member.Member;
 import java.util.Iterator;
 import java.util.List;
 
