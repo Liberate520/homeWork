@@ -44,6 +44,7 @@ public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
     public void outFamily(T human) {
         familyTree.remove(human);
     }
+
     @Override
     public T findHuman(String name) {
         for (T human : familyTree) {

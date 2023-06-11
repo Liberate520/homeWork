@@ -1,7 +1,6 @@
 package tree.view.commands;
 
 import tree.view.UserUI;
-
 import java.io.IOException;
 
 public class AddChild implements Command{

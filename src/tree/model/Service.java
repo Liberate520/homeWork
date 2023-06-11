@@ -27,8 +27,7 @@ public class Service {
     public Human findHuman(String name) {
         try {
             return tree.findHuman(name);
-        }catch (Exception e) {
-            System.out.println("NNNNNNNNNNNNNN");
+        }catch (Exception ignored) {
         }
         return null;
     }
@@ -61,7 +60,7 @@ public class Service {
         tree = (FamilyTree) fileHandler.loadObject();
     }
 
-    public void addChild(String human, String child) {
-         findHuman(human).addChild(findHuman(child));
+    public void addChild(Human human, Human child) {
+         human.addChild(child);
     }
 }

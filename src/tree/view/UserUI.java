@@ -86,9 +86,9 @@ public class UserUI implements View {
     }
 
     public void addChild() {
-        System.out.println("Укажите имя");
+        System.out.println("Укажите имя (parent)");
         String human = scanner.nextLine();
-        System.out.println("Укажите ребенка");
+        System.out.println("Укажите ребенка (child)");
         String child = scanner.nextLine();
         presenter.addChild(human, child);
     }
