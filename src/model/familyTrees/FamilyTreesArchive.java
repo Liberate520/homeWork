@@ -1,14 +1,14 @@
-package familyTrees;
+package model.familyTrees;
 
-import members.Aliens;
-import members.Human;
+import model.members.Aliens;
+import model.members.Human;
 
 public class FamilyTreesArchive {
 
     /**
      * trees.FamilyTreesArchive of Rurik dynasty
      */
-    public static FamilyTree<Human> ruriks = new FamilyTree<>() {
+    public static FamilyTree<Human> ruriks = new FamilyTree<>("Рюриковичи") {
         {
             addPersonInFamilyTree(new Human("Рюрик", "man", 879));
             addPersonInFamilyTree(new Human("Игорь", "man", 945), "Рюрик", 879);
@@ -42,7 +42,7 @@ public class FamilyTreesArchive {
         }
     };
 
-    public static FamilyTree<Aliens> skywalkers = new FamilyTree<>() {
+    public static FamilyTree<Aliens> skywalkers = new FamilyTree<>("Скайвокеры") {
         {
             addPersonInFamilyTree(new Aliens("Shmi", "Skywalker", "woman", -72));
             addPersonInFamilyTree(new Aliens("Anakin", "Skywalker", "man", -42), "Shmi", -72);

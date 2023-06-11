@@ -1,4 +1,4 @@
-package fileManage.interfaces;
+package model.fileManage.interfaces;
 
 /**
  * Интерфейс, определяющий методы для сохранения и загрузки семейного древа.

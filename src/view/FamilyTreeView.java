@@ -1,20 +1,16 @@
-package familyTrees.console_view;
+package view;
 
-import familyTrees.FamilyTree;
-import members.Human;
-import members.Member;
+import model.familyTrees.FamilyTree;
+import model.members.Member;
 
 import java.util.Optional;
 
 public class FamilyTreeView <T extends Member>{
     FamilyTree<T> familyTreeView;
 
-
     public FamilyTreeView(FamilyTree<T> familyTree) {
         this.familyTreeView = familyTree;
     }
-
-
 
     public void showParents(String childName, int yearOfBirth) {
         Member child = familyTreeView.getHumanFromTree(childName, yearOfBirth);

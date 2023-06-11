@@ -1,4 +1,4 @@
-package members;
+package model.members;
 
 import java.time.Year;
 import java.util.List;

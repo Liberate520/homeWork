@@ -1,11 +1,10 @@
-package familyTrees;
+package model.familyTrees;
 
-import familyTrees.comparators.ByDateBirth;
-import familyTrees.comparators.NameAlphabetical;
-import familyTrees.comparators.NameLength;
-import familyTrees.iterators.PersonIterator;
-import members.Aliens;
-import members.Member;
+import model.familyTrees.comparators.ByDateBirth;
+import model.familyTrees.comparators.NameAlphabetical;
+import model.familyTrees.comparators.NameLength;
+import model.familyTrees.iterators.PersonIterator;
+import model.members.Member;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -19,12 +18,18 @@ import java.util.Optional;
  */
 public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
     private List<T> familyTree;
+    private String nameFamilyTree;
 
     /**
      * Конструктор класса FamilyTree.
      */
-    public FamilyTree() {
+    public FamilyTree(String nameFamilyTree) {
+        this.nameFamilyTree = nameFamilyTree;
         this.familyTree = new ArrayList<>();
+    }
+
+    public String getNameFamilyTree() {
+        return nameFamilyTree;
     }
 
     public List<T> getFamilyTree() {
@@ -134,6 +139,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         return familyTree.contains(person);
     }
 
+
     /**
      * Выводит родителей человека.
      *
@@ -191,5 +197,9 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
      */
     public void sortTreeByNameLength() {
         familyTree.sort(new NameLength<>());
+    }
+
+    public int familyTreeSize() {
+        return familyTree.size();
     }
 }

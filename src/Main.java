@@ -1,12 +1,11 @@
-import familyTrees.console_view.FamilyTreeView;
-import fileManage.FileManager;
-import members.Aliens;
-import members.Human;
+import model.fileManage.FileManager;
+import view.ConsoleUI;
+import view.View;
 
 import java.nio.file.Paths;
 
-import static familyTrees.FamilyTreesArchive.ruriks;
-import static familyTrees.FamilyTreesArchive.skywalkers;
+import static model.familyTrees.FamilyTreesArchive.ruriks;
+import static model.familyTrees.FamilyTreesArchive.skywalkers;
 
 /**
  * Реализовать интерфейс Iterable для дерева.
@@ -15,23 +14,17 @@ import static familyTrees.FamilyTreesArchive.skywalkers;
 
 public class Main {
     public static void main(String[] args) {
-        FileManager filePathRuriks = new FileManager(Paths.get("data","ruriksTree.bin"));
-        FileManager filePathSkywalkers = new FileManager(Paths.get("data","skywalkersTree.bin"));
+//        FileManager filePathRuriks = new FileManager("data/ruriksTree.bin");
+//        FileManager filePathSkywalkers = new FileManager("data/skywalkersTree.bin");
+//
+//        filePathRuriks.saveFile(ruriks); //Сохранение в файл .bin
+//        filePathSkywalkers.saveFile(skywalkers);
+//
+//        ruriks = filePathRuriks.loadFile(); //Загрузка из файла .bin
+//        skywalkers = filePathSkywalkers.loadFile();
 
-        filePathRuriks.saveFile(ruriks); //Сохранение в файл .bin
-        filePathSkywalkers.saveFile(skywalkers);
 
-        ruriks = filePathRuriks.loadFile(); //Загрузка из файла .bin
-        skywalkers = filePathSkywalkers.loadFile();
-
-
-        FamilyTreeView<Human> ruriksView = new FamilyTreeView<>(ruriks);
-
-        ruriksView.sortByDateBirth();
-        ruriksView.showFamilyTree();
-
-        FamilyTreeView<Aliens> skywalkersView = new FamilyTreeView<>(skywalkers);
-
-        skywalkersView.showFamilyTree();
+        View view = new ConsoleUI();
+        view.start();
     }
 }
