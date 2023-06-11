@@ -158,6 +158,9 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     public static FamilyRecords load(Converter converter) {
         return converter.load();
     }
+    public List<Family<E>> getFamilies() {
+        return families;
+    }
     @Override
     public Iterator<Family<E>> iterator() {
         return families.iterator();
