@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private static int humanIdCounter = 0;
     private int id;
     private String name;
@@ -31,6 +32,10 @@ public class Human {
 
     public Human(String loner){
         this.loner = loner;
+    }
+
+    public Human() {
+
     }
 
     public String getName() {

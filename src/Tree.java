@@ -1,11 +1,15 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
-    private List<Human> humanList;
+public class Tree implements FileOperations {
+    List<Human> humanList;
+
 
     public Tree() {
+        super();
         this.humanList = new ArrayList<>();
+
     }
 
     public boolean addHuman(Human human) {
@@ -73,6 +77,39 @@ public class Tree {
         }
         return stringBuilder.toString();
     }
+
+    public void setHumanList(List<Human> humanList) {
+        this.humanList = humanList;
+    }
+
+    @Override
+    public void writeExternal(Human human, String filePath) throws IOException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));
+        outputStream.writeObject(human);
+        outputStream.close();
+
+    }
+
+    @Override
+    public Human readExternal(String filePath) throws IOException, ClassNotFoundException {
+        ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath));
+        Human human = (Human) inputStream.readObject();
+        inputStream.close();
+        return human;
+    }
+
+
+//    @Override
+//    public void writeExternal(Human human, String filePath) throws IOException {
+//        outputStream.writeObject(human);;
+//    }
+//
+//    @Override
+//    public Human readExternal(String filePath) throws IOException, ClassNotFoundException {
+//        humanList = (List<Human>) in.readObject();
+//    }
+
+
 
 
 }
