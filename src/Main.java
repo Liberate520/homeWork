@@ -19,6 +19,7 @@ public class Main {
 
         prs_2.showChildren();
 
+        System.out.println(prs_3.getInfo());
 
 
 

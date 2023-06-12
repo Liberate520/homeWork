@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person {
+public class Person implements Serializable {
     private String surname;
     private String firstName;
     private String middleName;
@@ -48,6 +49,21 @@ public class Person {
 
     public String getFullName() {
         return this.surname + " " + this.firstName + " " + this.middleName ;
+    }
+
+    public Person getFather() {
+        return father;
+    }
+
+    public Person getMother() {
+        return mother;
+    }
+
+    public String getInfo(){
+        String result = "";
+        result += this.getFullName() + " ";
+        result += this.dateOfBirth + " г/р";
+        return result;
     }
 
     public void addChild(Person child){
