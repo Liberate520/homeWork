@@ -13,7 +13,6 @@ public class ConsoleUI implements View {
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         mainMenu = new MainMenu(this);
-        presenter = new Presenter();
         repeatFlag = true;
     }
 
@@ -35,6 +34,11 @@ public class ConsoleUI implements View {
     public void finish() {
         System.out.println("Работа завершена.");
         System.exit(0);
+    }
+
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     private int inputNumMenu() {

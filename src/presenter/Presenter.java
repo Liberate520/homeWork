@@ -1,11 +1,19 @@
 package presenter;
 
 import model.Service;
+import view.View;
 
 import java.io.IOException;
 
 public class Presenter {
+    private View view;
     private Service service;
+
+    public Presenter(View view, Service service) {
+        this.view = view;
+        this.service = service;
+    }
+
     public void loadData() throws IOException, ClassNotFoundException {
         service.loadData();
     }
