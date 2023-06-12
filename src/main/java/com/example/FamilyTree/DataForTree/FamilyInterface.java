@@ -7,5 +7,5 @@ public interface FamilyInterface<T> {
     Date getBirthday();
     String getName();
     int getPuberty();
-    T getHuman();
+    T getObject();
 }

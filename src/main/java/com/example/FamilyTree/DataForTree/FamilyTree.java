@@ -13,11 +13,11 @@ public class FamilyTree<T extends FamilyInterface> implements Serializable, Iter
         familyList = new ArrayList<>();
     }
 
-    public void addHumanFamilyList(T family) {
+    public void addObjectFamilyList(T family) {
         familyList.add(family);
     }
 
-    public List<T> getHumanFamilyList() {
+    public List<T> getObjectFamilyList() {
         return familyList;
     }
 
@@ -29,13 +29,24 @@ public class FamilyTree<T extends FamilyInterface> implements Serializable, Iter
         familyList.sort(new ComparatorByName<>());
     }
 
-    public String printHumanList() {
+    public String printObjectList() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (T human : familyList) {
-            stringBuilder.append(human.getHuman());
+        int index = 1;
+        for (T object : familyList) {
+            stringBuilder.append(index++ + ": ");
+            stringBuilder.append(object.getObject());
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public Family getObjectFamily(T object) {
+        for (int i = 0; i < getObjectFamilyList().size(); i++) {
+            if (getObjectFamilyList().get(i).getObject().equals(object)) {
+                return (Family) getObjectFamilyList().get(i);
+            }
+        }
+        return new Family(object);
     }
 
     @Override

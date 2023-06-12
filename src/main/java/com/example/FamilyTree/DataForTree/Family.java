@@ -6,40 +6,40 @@ import java.util.List;
 import java.util.Date;
 
 public class Family<T extends FamilyInterface> implements Serializable, FamilyInterface {
-    private T human;
+    private T object;
     private List<T> parents;
     private List<T> children;
 
-    public Family(T human) {
-        this.human = human;
+    public Family(T object) {
+        this.object = object;
         this.parents = new ArrayList<>();
         this.children = new ArrayList<>();
     }
 
-    public void addParents(T human) {
-        int diff = this.human.getBirthday().getYear() - human.getBirthday().getYear();
-        if (parents.size() == 0 && diff >= human.getPuberty()) {
-            parents.add(human);
-        } else if ((parents.size() == 1 && diff >= human.getPuberty()) && (parents.get(0).getGender() == Gender.male) && (human.getGender() == Gender.female)) {
-            parents.add(human);
-        } else if ((parents.size() == 1 && diff >= human.getPuberty()) && (parents.get(0).getGender() == Gender.female) && (human.getGender() == Gender.male)) {
-            parents.add(human);
+    public void addParents(T object) {
+        int diff = this.object.getBirthday().getYear() - object.getBirthday().getYear();
+        if (parents.size() == 0 && diff >= object.getPuberty()) {
+            parents.add(object);
+        } else if ((parents.size() == 1 && diff >= object.getPuberty()) && (parents.get(0).getGender() == Gender.male) && (object.getGender() == Gender.female)) {
+            parents.add(object);
+        } else if ((parents.size() == 1 && diff >= object.getPuberty()) && (parents.get(0).getGender() == Gender.female) && (object.getGender() == Gender.male)) {
+            parents.add(object);
         } else {
             System.out.println("не может быть родителем этому объекту");
         }
     }
 
-    public void addChildren(T human) {
-        int diff = human.getBirthday().getYear() - this.human.getBirthday().getYear();
-        if (diff >= human.getPuberty()) {
-            children.add(human);
+    public void addChildren(T object) {
+        int diff = object.getBirthday().getYear() - this.object.getBirthday().getYear();
+        if (diff >= object.getPuberty()) {
+            children.add(object);
         } else {
             System.out.println("не может быть ребенком этому человеку");
         }
     }
     @Override
-    public T getHuman() {
-        return human;
+    public T getObject() {
+        return object;
     }
 
     public List<T> getParents() {
@@ -52,22 +52,22 @@ public class Family<T extends FamilyInterface> implements Serializable, FamilyIn
 
     @Override
     public Gender getGender() {
-        return human.getGender();
+        return object.getGender();
     }
 
     @Override
     public Date getBirthday() {
-        return human.getBirthday();
+        return object.getBirthday();
     }
 
     @Override
     public String getName() {
-        return human.getName();
+        return object.getName();
     }
 
     @Override
     public int getPuberty() {
-        return human.getPuberty();
+        return object.getPuberty();
     }
 
     @Override
@@ -85,6 +85,6 @@ public class Family<T extends FamilyInterface> implements Serializable, FamilyIn
             }
         } else { child = "\n";}
 
-        return "\nFamilyTree for object: " + human + "\n" + parent + child;
+        return "\nFamilyTree for object: " + object + "\n" + parent + child;
     }
 }

@@ -1,4 +1,6 @@
-package com.example.FamilyTree.DataForTree;
+package com.example.FamilyTree.Model.FileHandler;
+
+import com.example.FamilyTree.DataForTree.FamilyTree;
 
 import java.io.Serializable;
 
