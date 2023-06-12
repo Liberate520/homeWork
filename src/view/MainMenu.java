@@ -1,41 +1,37 @@
 package view;
 
+import view.commands.*;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenu {
-    public MainMenu() {
+    private List<Command> commandList;
+
+    public MainMenu(ConsoleUI consoleUI) {
+        commandList = new ArrayList<>();
+        commandList.add(new LoadData(consoleUI));
+        commandList.add(new SaveData(consoleUI));
+        commandList.add(new PrintSortByName(consoleUI));
+        commandList.add(new PrintSortByDOB(consoleUI));
+        commandList.add(new Finish(consoleUI));
     }
 
-    public void printMenu(){
-        System.out.println("1: Сохранить данные в файл;");
-        System.out.println("2: Загрузить данные из файла;");
-        System.out.println("3: Вывести данные (сорт. по имени);");
-        System.out.println("4: Вывести данные (сорт. по дате рождения);");
-        System.out.println("0: Завершение работы.");
+    public String printMenu(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < commandList.size(); i++) {
+            stringBuilder.append(i+1);
+            stringBuilder.append(". ");
+            stringBuilder.append(commandList.get(i).getDescription());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
     }
 
     public void execute(int choice) throws IOException, ClassNotFoundException {
-        ConsoleUI consoleUI = new ConsoleUI();
-        System.out.println("Выбрано: " + choice); // удалить это!
-        switch(choice){
-            case(1):
-                consoleUI.loadData();
-                break;
-            case(2):
-                consoleUI.saveData();
-                break;
-            case(3):
-                consoleUI.printSortByName();
-                break;
-            case(4):
-                consoleUI.printSortByDOB();
-                break;
-            case(0):
-                consoleUI.finish();
-                break;
-            default:
-                System.out.println("Ошибка!");
-                break;
-        }
+        Command command = commandList.get(choice-1);
+        command.execute();
     }
+
 }

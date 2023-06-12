@@ -12,7 +12,7 @@ public class ConsoleUI implements View {
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
-        mainMenu = new MainMenu();
+        mainMenu = new MainMenu(this);
         presenter = new Presenter();
         repeatFlag = true;
     }
@@ -21,10 +21,10 @@ public class ConsoleUI implements View {
     public void start() throws IOException, ClassNotFoundException {
         System.out.println("Выберите действие:");
         while (repeatFlag) {
-            mainMenu.printMenu();
+            System.out.println(mainMenu.printMenu());
             int choice = inputNumMenu();
             if (choice == -1) {
-                System.out.println("Ошибка ввода");
+                System.out.println("Ошибка ввода!");
                 continue;
             }
             mainMenu.execute(choice);
@@ -50,7 +50,7 @@ public class ConsoleUI implements View {
             return false;
         }
         int choice = Integer.parseInt(line);
-        return choice >= 0 && choice <= 4;
+        return choice > 0 && choice <= 5;
     }
 
     public void saveData() throws IOException {

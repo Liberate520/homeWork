@@ -2,6 +2,7 @@ package presenter;
 
 import model.Data;
 import model.GroupItem;
+import model.Lib;
 import model.file.DataFileManager;
 import model.person.Person;
 import model.tree.Tree;
@@ -15,15 +16,15 @@ public class Presenter {
         return ft;
     }
 
+    public void loadData() throws IOException, ClassNotFoundException {
+        DataFileManager datafilemanager = new DataFileManager();
+        Tree ft = (Tree) datafilemanager.loadData();
+        Lib.printList(ft.getPersonList());
+    }
+
     public void saveData() throws IOException {
         DataFileManager datafilemanager = new DataFileManager();
         datafilemanager.saveData(getData());
-    }
-
-    public Tree<Person> loadData() throws IOException, ClassNotFoundException {
-        DataFileManager datafilemanager = new DataFileManager();
-        Tree ft = (Tree) datafilemanager.loadData();
-        return ft;
     }
 
     public void printSortByName() {
