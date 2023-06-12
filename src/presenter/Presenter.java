@@ -12,6 +12,7 @@ public class Presenter {
     public Presenter(View view, Service service) {
         this.view = view;
         this.service = service;
+        view.setPresenter(this);
     }
 
     public void loadData() throws IOException, ClassNotFoundException {
