@@ -1,64 +1,77 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class Person {
-    private String Surname;
-    private String FirstName;
-    private String MiddleName;
-    private String Sex;
-    private int DayOfBirth;
-    private int MonthOfBirth;
-    private int YearOfBirth;
-    public boolean Alive;
+    private String surname;
+    private String firstName;
+    private String middleName;
+    private String sex;
+    private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
 
-    Person Father;
-    Person Mother;
-    List<Person> children;
+    private Person father;
+    private Person mother;
+    private List<Person> children;
 
-    public Person(String Surname, String FirstName, String MiddleName, String Sex){
-        this.Surname = Surname;
-        this.FirstName = FirstName;
-        this.MiddleName = MiddleName;
-        this.Sex = Sex;
-        this.Father = null;
-        this.Mother = null;
-        this.Alive = true;
+    public Person(String surname, String firstName, String middleName, String sex){
+        this.surname = surname;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.sex = sex;
+        this.father = null;
+        this.mother = null;
+        this.dateOfDeath = null;
+        this.children = new ArrayList<>();
     }
 
     public int getAge() {
         LocalDate date = LocalDate.now(); // получаем текущую дату
-        int year = date.getYear();
         int month = date.getMonthValue();
-        int day= date.getDayOfMonth();
-        int Age = year - this.YearOfBirth - 1;
-        if (month > this.MonthOfBirth){
-            Age = Age + 1;
+        int age = date.getYear() - this.dateOfBirth.getYear() - 1;
+        if (date.getMonthValue() > this.dateOfBirth.getMonthValue()){
+            age = age + 1;
         }
-        if ((month == this.MonthOfBirth)){
-            if (day >= this.DayOfBirth){
-                Age = Age + 1;
+        if (date.getMonthValue() == this.dateOfBirth.getMonthValue()){
+            if (date.getDayOfMonth() >= this.dateOfBirth.getMonthValue()){
+                age = age + 1;
             }
         }
-        return Age;
+        return age;
     }
 
-    public String getSurname() {
-        return Surname;
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public void setYearOfBirth(int yearOfBirth) {
-        YearOfBirth = yearOfBirth;
+    public String getFullName() {
+        return this.surname + " " + this.firstName + " " + this.middleName ;
     }
 
-    public void setMonthOfBirth(int monthOfBirth) {
-        MonthOfBirth = monthOfBirth;
+    public void addChild(Person child){
+        this.children.add(child);
+        if (this.sex == "F"){
+            child.mother = this;
+        } else {
+            child.father = this;
+        }
     }
 
-    public void setDayOfBirth(int dayOfBirth) {
-        DayOfBirth = dayOfBirth;
+    public List<Person> getChildren() {
+        return this.children;
     }
 
-    public void setAlive(boolean alive) {
-        Alive = alive;
+    public void showChildren(){
+        if (!this.children.isEmpty()){
+            System.out.println("Родитель: " + this.getFullName());
+            int iter = 1;
+            for (Person child : children){
+                System.out.printf("- Ребёнок %d: %s\n", iter++, child.getFullName());
+            }
+        } else {
+            System.out.printf("%s не имеет детей", this.getFullName());
+        }
     }
 }

@@ -1,21 +1,23 @@
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
-        Person Prs_1 = new Person("Иванов", "Семён", "Матвеевич", "М");
+        Person prs_1 = new Person("Иванов", "Семён", "Матвеевич", "М");
+        prs_1.setDateOfBirth(LocalDate.of(1984,10,23));
+        System.out.println(prs_1.getAge());
 
-        Prs_1.setYearOfBirth(1984);
-        Prs_1.setMonthOfBirth(10);
-        Prs_1.setDayOfBirth(23);
+        Person prs_2 = new Person("Иванова", "Анна", "Андреевна", "F");
+        prs_2.setDateOfBirth(LocalDate.of(1993,3,20));
+        System.out.println(prs_2.getAge());
 
-        System.out.println(Prs_1.getAge());
+        Person prs_3 = new Person("Иванова", "Марина", "Семёновна", "F");
+        prs_3.setDateOfBirth(LocalDate.of(2013,7,10));
+        System.out.println(prs_3.getAge());
 
-        Person Prs_2 = new Person("Иванова", "Анна", "Семёновна", "F");
+        prs_1.addChild(prs_3);
+        prs_1.showChildren();
 
-        Prs_2.setYearOfBirth(2002);
-        Prs_2.setMonthOfBirth(2);
-        Prs_2.setDayOfBirth(4);
-
-        System.out.println(Prs_2.getAge());
-
+        prs_2.showChildren();
 
 
 
