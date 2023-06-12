@@ -3,6 +3,7 @@ package views;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 import presenter.Presenter;
 
 public class ConsoleUI implements View {
@@ -33,7 +34,7 @@ public class ConsoleUI implements View {
     public void start() {
         do {
             print(mainMenu.getMenu());
-            int input = getIntegerInput(1, mainMenu.getSize());
+            int input = getIntegerInput(1, mainMenu.getSize(), false);
             mainMenu.execute(input);
         } while (isWork);
     }
@@ -43,15 +44,15 @@ public class ConsoleUI implements View {
     /** вывод подробной информации о члене семьи */
     public void printDetail() {
         print("Enter a number of member for print detail\n");
-        print(presenter.getAllMembers());
-        int input = getIntegerInput(1, presenter.getAllMembersAmount()) - 1;
+        print(presenter.getNamesAllMembers());
+        int input = getIntegerInput(1, presenter.getAllMembersAmount(), false) - 1;
         print("Detail: \n");
         print(presenter.getMemberDetail(input));
     }
 
     /** вывод всех членов семьи */
     public void printAll() {
-        print(presenter.getAllMembers());
+        print(presenter.getNamesAllMembers());
     }
 
     /** выход */
@@ -73,8 +74,8 @@ public class ConsoleUI implements View {
     /** редактирование данных члена семьи */
     public void editMember() {
         print("Enter a number of member for edit \n");
-        print(presenter.getAllMembers());
-        int input = getIntegerInput(1, presenter.getAllMembersAmount()) - 1;
+        print(presenter.getNamesAllMembers());
+        int input = getIntegerInput(1, presenter.getAllMembersAmount(), false) - 1;
 
         changeName(input);
 
@@ -111,11 +112,14 @@ public class ConsoleUI implements View {
         } while (true);
     }
 
-    private int getIntegerInput(int min, int max) {
+    private Integer getIntegerInput(int min, int max, boolean canBeNull) {
         String input = "";
         do {
             print("> ");
             input = scanner.nextLine();
+            if(input.equals("") && canBeNull) {
+                return null;
+            }
             if (input.matches("[0-9]+")) {
                 int parsed = Integer.parseInt(input);
                 if (parsed >= min && parsed <= max)
@@ -153,7 +157,7 @@ public class ConsoleUI implements View {
     private int getMotherIndex() {
         print("Select mother(0 for keep empty): \n");
         print(presenter.getFemalesNames());
-        int mother = getIntegerInput(0, presenter.getFemaleAmount()) - 1;
+        int mother = getIntegerInput(0, presenter.getFemaleAmount(), false) - 1;
         if (mother == -1) {
             print("You entered: 'unknown'\n");
         } else {
@@ -166,11 +170,11 @@ public class ConsoleUI implements View {
     private int getFatherIndex() {
         print("Select father(0 for keep empty): \n");
         print(presenter.getMalesNames());
-        int father = getIntegerInput(0, presenter.getMaleAmount()) - 1;
+        int father = getIntegerInput(0, presenter.getMaleAmount(), false) - 1;
         if (father == -1) {
             print("You entered: 'unknown'\n");
         } else {
-            print("You entered: " + presenter.getMale(father) + "\n");
+            print("You entered: " + presenter.getMaleName(father) + "\n");
         }
         return father;
     }
@@ -179,7 +183,7 @@ public class ConsoleUI implements View {
     private int getGender() {
         print("Enter gender ('m' or 'f'):\n");
         print(presenter.getGendersList());
-        int gender = getIntegerInput(1, 2) - 1;
+        int gender = getIntegerInput(1, 2, false) - 1;
         print("You entered: " + presenter.getGender(gender) + "\n");
         return gender;
     }
@@ -204,7 +208,7 @@ public class ConsoleUI implements View {
     private void changeMother(int input) {
         print("Enter new mother (0 for keep old, -1 for remove): \n");
         print(presenter.getMalesNames());
-        int mother = getIntegerInput(0, presenter.getMaleAmount()) - 1;
+        Integer mother = getIntegerInput(0, presenter.getMaleAmount(), true) - 1;
         if (mother != -1) {
             presenter.setMother(input, mother);
         }
@@ -214,7 +218,7 @@ public class ConsoleUI implements View {
     private void changeFather(int input) {
         print("Enter new father (0 for keep old, -1 for remove): \n");
         print(presenter.getMalesNames());
-        int father = getIntegerInput(0, presenter.getMaleAmount()) - 1;
+        Integer father = getIntegerInput(0, presenter.getMaleAmount(), true) - 1;
         if (father != -1) {
             presenter.setFather(input, father);
         }
@@ -224,7 +228,7 @@ public class ConsoleUI implements View {
     private void changeGender(int input) {
         print("Enter new gender ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
         print(presenter.getGendersList());
-        int gender = getIntegerInput(0, 2) - 1;
+        int gender = getIntegerInput(0, 2, false) - 1;
         if (gender != -1) {
             presenter.setGender(input, gender);
             print("You entered: " + presenter.getGender(gender) + "\n");
@@ -236,7 +240,7 @@ public class ConsoleUI implements View {
         print("Enter new birthday ( old: \"" + presenter.getMemberDate(input) + "\") or enter empty: \n");
         LocalDate date = getDateInput(true);
         if (date != null) {
-            presenter.setDate(input, date);
+            presenter.setBirthday(input, date);
         }
     }
 

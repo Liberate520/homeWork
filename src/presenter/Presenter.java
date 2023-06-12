@@ -3,7 +3,6 @@ package presenter;
 import java.time.LocalDate;
 
 import models.Service;
-import models.members.Gender;
 
 public class Presenter {
 
@@ -14,18 +13,18 @@ public class Presenter {
     }
 
     /** получение списка всех членов семьи */
-    public String getAllMembers() {
-        return service.getInfo((member) -> true);
+    public String getNamesAllMembers() {
+        return service.getNamesAllMembers();
     }
 
     /** получение имен мужчин */
     public String getMalesNames() {
-        return service.getInfo((member) -> member.getGender() == Gender.Male);
+        return service.getMaleNames();
     }
 
     /** получение имен женщин */
     public String getFemalesNames() {
-        return service.getInfo((member) -> member.getGender() == Gender.Female);
+        return service.getFemaleNames();
     }
 
     /** получение списка гендеров */
@@ -40,24 +39,23 @@ public class Presenter {
 
     /** получение количества мужчин в семье */
     public int getMaleAmount() {
-        return service.getAmountOfList((member) -> member.getGender() == Gender.Male);
+        return service.getMaleAmount();
     }
 
-    /** получение имени мужчины по индексу из списка по условию */
-    public String getMale(int index) {
-        if (index == -1)
-            return null;
-        return service.getMemberName(index, (member) -> member.getGender() == Gender.Male);
-    }
 
     /** получение количества женщин в семье */
     public int getFemaleAmount() {
-        return service.getAmountOfList((member) -> member.getGender() == Gender.Female);
+        return service.getFemaleAmount();
+    }
+
+    /** получение имени мужчины по индексу из списка по условию */
+    public String getMaleName(int index) {
+        return service.getMaleName(index);
     }
 
     /** получение имени женщины по индексу из списка по условию */
     public String getFemale(int index) {
-        return service.getMemberName(index, (member) -> member.getGender() == Gender.Female);
+        return service.getFemaleName(index);
     }
 
     /** добавление нового члена семьи */
@@ -67,46 +65,47 @@ public class Presenter {
 
     /** получение количества членов семьи */
     public int getAllMembersAmount() {
-        return service.getAmountOfList((member) -> true);
+        return service.getAllAmount();
     }
 
     /** получение детально описания члена семьи */
     public String getMemberDetail(int index) {
-        return service.getMemberDetail(index, (member) -> true);
+        return service.getMemberDetail(index);
     }
 
     /** получение имени члена семьи */
     public String getMemberName(int index) {
-        return service.getMemberName(index, (member) -> true);
+        return service.getMemberName(index);
     }
+
 
     /** установить имя для члена семьи */
     public void setName(int input, String fullname) {
-        service.setDifferentName(input, fullname, (member) -> true);
+        service.setDifferentName(input, fullname);
     }
 
     /** получение дня рождения для члена семьи */
     public String getMemberDate(int index) {
-        return service.getMemberDate(index, (member) -> true);
+        return service.getMemberDate(index);
     }
 
     /** установка пола для члена семьи */
     public void setGender(int input, int gender) {
-        service.setGender(input, gender, (member) -> true);
+        service.setGender(input, gender);
     }
 
     /** установка дня рождения для члена семьи */
-    public void setDate(int input, LocalDate date) {
-        service.setBirthday(input, date, (member) -> true);
+    public void setBirthday(int input, LocalDate date) {
+        service.setBirthday(input, date);
     }
 
     /** установка отца для члена семьи */
-    public void setFather(int input, int father) {
+    public void setFather(int input, Integer father) {
         service.setFather(input, father);
     }
 
     /** установка матери для члена семьи */
-    public void setMother(int input, int mother) {
+    public void setMother(int input, Integer mother) {
         service.setMother(input, mother);
     }
 
