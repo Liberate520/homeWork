@@ -1,48 +1,25 @@
 package presenter;
 
-import model.Data;
-import model.GroupItem;
-import model.Lib;
-import model.file.DataFileManager;
-import model.person.Person;
-import model.tree.Tree;
+import model.Service;
 
 import java.io.IOException;
 
 public class Presenter {
-
-    protected Tree<Person> getData() {
-        Tree<Person> ft = Data.dataEntry();
-        return ft;
-    }
-
+    private Service service;
     public void loadData() throws IOException, ClassNotFoundException {
-        DataFileManager datafilemanager = new DataFileManager();
-        Tree ft = (Tree) datafilemanager.loadData();
-        Lib.printList(ft.getPersonList());
+        service.loadData();
     }
 
     public void saveData() throws IOException {
-        DataFileManager datafilemanager = new DataFileManager();
-        datafilemanager.saveData(getData());
+        service.saveData();
     }
 
     public void printSortByName() {
-        Tree<Person> ft = getData();
-        ft.sortByName();
-        for (GroupItem person : ft) {
-            System.out.println(person);
-        }
-        System.out.println();
+        service.printSortByName();
     }
 
     public void printSortByDOB() {
-        Tree<Person> ft = getData();
-        ft.sortByDOB();
-        for (GroupItem person : ft) {
-            System.out.println(person);
-        }
-        System.out.println();
+        service.printSortByDOB();
     }
 
 }
