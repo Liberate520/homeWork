@@ -1,11 +1,19 @@
 package view;
 
-import presenter.Presenter;
-
-import java.util.function.Predicate;
-
+/**
+ * Интерфейс, представляющий вид (View) в архитектуре MVP.
+ * Определяет методы для вывода текста и запуска вида.
+ */
 public interface View {
-
+    /**
+     * Выводит текст на экран.
+     *
+     * @param text текст для вывода
+     */
     void print(String text);
+
+    /**
+     * Запускает отображение.
+     */
     void start();
 }

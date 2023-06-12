@@ -3,10 +3,20 @@ package model.familyTrees;
 import model.members.Aliens;
 import model.members.Human;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static model.members.Gender.MAN;
 import static model.members.Gender.WOMAN;
 
 public class FamilyTreesArchive {
+
+    public List<FamilyTree> familyTreeList = new ArrayList<>(){{
+        add(ruriks);
+        add(skywalkers);
+    }};
+
+
 
     /**
      * trees.FamilyTreesArchive of Rurik dynasty

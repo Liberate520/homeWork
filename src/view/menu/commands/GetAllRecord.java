@@ -2,10 +2,19 @@ package view.menu.commands;
 
 import view.ConsoleUI;
 
+/**
+ * Класс GetAllRecord представляет команду показа всех записей в древе в меню консольного пользовательского интерфейса (UI).
+ * Реализует интерфейс Command.
+ */
 public class GetAllRecord implements Command {
 
     private ConsoleUI consoleUI;
 
+    /**
+     * Создает новый объект GetAllRecord.
+     *
+     * @param consoleUI объект ConsoleUI, используемый для показа всех записей в древе
+     */
     public GetAllRecord(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
