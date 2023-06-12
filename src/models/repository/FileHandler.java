@@ -2,7 +2,7 @@ package models.repository;
 import java.io.*;
 
 /** сериализация и восстановление сериализуемых объектов */
-public class FileHandler implements CapableOfPreserving, CapableOfRestore {
+public class FileHandler extends Handler {
 
     private String path;
     public FileHandler(String path){

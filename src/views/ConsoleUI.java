@@ -161,7 +161,7 @@ public class ConsoleUI implements View {
         if (mother == -1) {
             print("You entered: 'unknown'\n");
         } else {
-            print("You entered: " + presenter.getFemale(mother) + "/n");
+            print("You entered: " + presenter.getFemaleName(mother) + "/n");
         }
         return mother;
     }

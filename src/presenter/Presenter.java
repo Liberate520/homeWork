@@ -3,13 +3,14 @@ package presenter;
 import java.time.LocalDate;
 
 import models.Service;
+import models.repository.FileHandler;
 
 public class Presenter {
 
     Service service;
 
     public Presenter() {
-        service = new Service("family.bin");
+        service = new Service(new FileHandler("family.data"));
     }
 
     /** получение списка всех членов семьи */
@@ -48,14 +49,24 @@ public class Presenter {
         return service.getFemaleAmount();
     }
 
+    /** получение количества членов семьи */
+    public int getAllMembersAmount() {
+        return service.getAllAmount();
+    }
+
     /** получение имени мужчины по индексу из списка по условию */
     public String getMaleName(int index) {
         return service.getMaleName(index);
     }
 
     /** получение имени женщины по индексу из списка по условию */
-    public String getFemale(int index) {
+    public String getFemaleName(int index) {
         return service.getFemaleName(index);
+    }
+    
+    /** получение имени члена семьи */
+    public String getMemberName(int index) {
+        return service.getMemberName(index);
     }
 
     /** добавление нового члена семьи */
@@ -63,20 +74,12 @@ public class Presenter {
         return service.addNewMember(fullname, date, gender, father, mother);
     }
 
-    /** получение количества членов семьи */
-    public int getAllMembersAmount() {
-        return service.getAllAmount();
-    }
 
     /** получение детально описания члена семьи */
     public String getMemberDetail(int index) {
         return service.getMemberDetail(index);
     }
 
-    /** получение имени члена семьи */
-    public String getMemberName(int index) {
-        return service.getMemberName(index);
-    }
 
 
     /** установить имя для члена семьи */

@@ -6,15 +6,15 @@ import java.util.List;
 
 import models.members.Gender;
 import models.members.Human;
-import models.repository.FileHandler;
+import models.repository.Handler;
 import models.tree.FamilyTree;
 
 public class Service {
     private FamilyTree<Human> familyTree;
-    private FileHandler handler;
+    private Handler handler;
 
-    public Service(String path) {
-        handler = new FileHandler("family.bin");
+    public Service(Handler handler) {
+        this.handler = handler;
         getFamilyTree();
     }
 
