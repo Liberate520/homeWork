@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Iterable<T> {
+public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable, Iterable<T> {
     private List<T> humanList;
 
     public FamilyTree() {

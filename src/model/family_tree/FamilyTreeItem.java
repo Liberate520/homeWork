@@ -3,8 +3,8 @@ package model.family_tree;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FamilyTreeItem {
-    boolean addChild(FamilyTreeItem child);
+public interface FamilyTreeItem<T> {
+    boolean addChild(T child);
 
     String getFirstName();
 
@@ -14,11 +14,11 @@ public interface FamilyTreeItem {
 
     LocalDate getDeathDate();
 
-    FamilyTreeItem getMother();
+    T getMother();
 
-    FamilyTreeItem getFather();
+    T getFather();
 
-    List<FamilyTreeItem> getChildren();
+    List<T> getChildren();
 
     String getInfo();
 }

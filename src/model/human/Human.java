@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
+public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Human> {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
@@ -18,7 +18,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private String lastDadName;
     private Human mother;
     private Human father;
-    private List<FamilyTreeItem> children;
+    private List<Human> children;
 
     public Human(String firstName, String lastName,
                  LocalDate birthDate, LocalDate deathDate,
@@ -36,9 +36,9 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     }
 
     @Override
-    public boolean addChild(FamilyTreeItem child) {
+    public boolean addChild(Human child) {
         if (!children.contains(child)) {
-            children.add((Human) child);
+            children.add(child);
             return true;
         }
         return false;
@@ -75,8 +75,24 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     }
 
     @Override
-    public List<FamilyTreeItem> getChildren() {
+    public List<Human> getChildren() {
         return children;
+    }
+
+    public String getFirstMomName() {
+        return firstMomName;
+    }
+
+    public String getLastMomName() {
+        return lastMomName;
+    }
+
+    public String getFirstDadName() {
+        return firstDadName;
+    }
+
+    public String getLastDadName() {
+        return lastDadName;
     }
 
     public void setBirthDate(LocalDate birthDate) {
@@ -106,7 +122,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     public String getMotherInfo() {
         String motherInfo = "мать: ";
         if (mother != null) {
-            motherInfo += mother.getFirstName() + " " + mother.getLastName();
+            motherInfo += mother.getFirstMomName() + " " + mother.getLastMomName();
         } else {
             motherInfo += "неизвестна";
         }
@@ -116,7 +132,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     public String getFatherInfo() {
         String fatherInfo = "";
         if (father != null) {
-            fatherInfo += father.getFirstName() + " " + father.getLastName();
+            fatherInfo += father.getFirstDadName() + " " + father.getLastName();
         } else {
             fatherInfo += "неизвестен";
         }
@@ -170,8 +186,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Human)) return false;
-        Human human = (Human) o;
+        if (!(o instanceof Human human)) return false;
         if (human.getFirstName().equals(getFirstName())) {
             if (human.getLastName().equals(getLastName())) {
                 if (human.getBirthDate() != getBirthDate()) {
