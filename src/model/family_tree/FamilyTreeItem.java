@@ -1,12 +1,10 @@
-package family_tree;
-
-import human.Human;
+package model.family_tree;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface FamilyTreeItem {
-    boolean addChild(Human child);
+    boolean addChild(FamilyTreeItem child);
 
     String getFirstName();
 
@@ -16,11 +14,11 @@ public interface FamilyTreeItem {
 
     LocalDate getDeathDate();
 
-    Human getMother();
+    FamilyTreeItem getMother();
 
-    Human getFather();
+    FamilyTreeItem getFather();
 
-    List<Human> getChildren();
+    List<FamilyTreeItem> getChildren();
 
     String getInfo();
 }

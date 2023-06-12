@@ -1,9 +1,8 @@
-package family_tree;
+package model.family_tree;
 
-import human.Human;
-import human.comparators.HumanComparatorByChildrenCount;
-import human.comparators.HumanComparatorByFirstName;
-import human.comparators.HumanComparatorByLastName;
+import model.human.comparators.HumanComparatorByChildrenCount;
+import model.human.comparators.HumanComparatorByFirstName;
+import model.human.comparators.HumanComparatorByLastName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,17 +20,17 @@ public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Itera
         if (!humanList.contains(human)) {
             humanList.add(human);
             if (human.getMother() != null) {
-                human.getMother().addChild((Human) human);
+                human.getMother().addChild(human);
             }
             if (human.getFather() != null) {
-                human.getFather().addChild((Human) human);
+                human.getFather().addChild(human);
             }
         }
     }
 
-    public String getHumanByName(String name) {
+    public String getHumanByName(String firstName, String lastName) {
         for (T human : humanList) {
-            if (human.getFirstName().equals(name)) {
+            if (human.getFirstName().equals(firstName) && human.getLastName().equals(lastName)) {
                 return human.getInfo();
             }
         }

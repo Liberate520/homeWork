@@ -1,6 +1,6 @@
-package file_handler;
+package model.file_handler;
 
-import family_tree.FamilyTree;
+import model.family_tree.FamilyTree;
 
 import java.io.IOException;
 

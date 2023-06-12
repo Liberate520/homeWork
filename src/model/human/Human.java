@@ -1,6 +1,6 @@
-package human;
+package model.human;
 
-import family_tree.FamilyTreeItem;
+import model.family_tree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,26 +12,33 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private String lastName;
     private LocalDate birthDate;
     private LocalDate deathDate;
+    private String firstMomName;
+    private String lastMomName;
+    private String firstDadName;
+    private String lastDadName;
     private Human mother;
     private Human father;
-    private List<Human> children;
+    private List<FamilyTreeItem> children;
 
     public Human(String firstName, String lastName,
                  LocalDate birthDate, LocalDate deathDate,
-                 Human mother, Human father) {
+                 String firstMomName, String lastMomName,
+                 String firstDadName, String lastDadName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-        this.mother = mother;
-        this.father = father;
+        this.firstMomName = firstMomName;
+        this.lastMomName = lastMomName;
+        this.firstDadName = firstDadName;
+        this.lastDadName = lastDadName;
         children = new ArrayList<>();
     }
 
     @Override
-    public boolean addChild(Human child) {
+    public boolean addChild(FamilyTreeItem child) {
         if (!children.contains(child)) {
-            children.add(child);
+            children.add((Human) child);
             return true;
         }
         return false;
@@ -68,7 +75,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     }
 
     @Override
-    public List<Human> getChildren() {
+    public List<FamilyTreeItem> getChildren() {
         return children;
     }
 
@@ -135,13 +142,13 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
 
     @Override
     public String getInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n");
-        sb.append(getHumanInfo()).append("\n");
-        sb.append(getMotherInfo()).append(", ");
-        sb.append(getFatherInfo()).append("\n");
-        sb.append(getChildrenInfo());
-        return sb.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
+        stringBuilder.append(getHumanInfo()).append("\n");
+        stringBuilder.append(getMotherInfo()).append(", ");
+        stringBuilder.append(getFatherInfo()).append("\n");
+        stringBuilder.append(getChildrenInfo());
+        return stringBuilder.toString();
     }
 
     public String getHumanYearsOld() {
