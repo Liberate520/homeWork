@@ -6,18 +6,16 @@ import java.util.List;
 
 import models.members.Gender;
 import models.members.Human;
-import models.repository.CapableOfPreserving;
-import models.repository.CapableOfRestore;
 import models.repository.FileHandler;
 import models.tree.FamilyTree;
 
 public class Service {
     private FamilyTree<Human> familyTree;
+    private FileHandler handler;
 
-    private String path;
 
     public Service(String path) {
-        this.path = path;
+        handler = new FileHandler("family.bin");
         getFamilyTree();
     }
 
@@ -55,14 +53,12 @@ public class Service {
 
     /** сохранение */
     public void save() {
-        CapableOfPreserving preserver = new FileHandler();
-        preserver.save(path, familyTree);
+        handler.save(familyTree);
     }
 
     /** чтение */
     private FamilyTree<Human> read() {
-        CapableOfRestore restorer = new FileHandler();
-        return (FamilyTree<Human>) restorer.read(path);
+        return (FamilyTree<Human>) handler.read();
     }
 
     /** сортировка по имени */
