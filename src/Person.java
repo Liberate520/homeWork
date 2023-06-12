@@ -73,5 +73,6 @@ public class Person {
         } else {
             System.out.printf("%s не имеет детей", this.getFullName());
         }
+
     }
 }
