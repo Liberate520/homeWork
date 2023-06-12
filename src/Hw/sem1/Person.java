@@ -1,17 +1,18 @@
 package Hw.sem1;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private List<Person> children;
     private Person father;
     private Person mother;
+    private List<Person> children;
 
     public Person(String name, Gender gender, LocalDate birthDate, LocalDate deathDate) {
         this.name = name;
@@ -37,16 +38,6 @@ public class Person {
         return deathDate;
     }
 
-    public List<Person> getChildren() {
-        return children;
-    }
-
-    public void addChild(Person child) {
-        children.add(child);
-        child.setMother(this);
-        child.setFather(this);
-    }
-
     public Person getFather() {
         return father;
     }
@@ -63,4 +54,11 @@ public class Person {
         this.mother = mother;
     }
 
+    public List<Person> getChildren() {
+        return children;
+    }
+
+    public void addChild(Person child) {
+        children.add(child);
+    }
 }
