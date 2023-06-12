@@ -59,6 +59,16 @@ public class Person implements Serializable {
         return mother;
     }
 
+    public void setFather(Person father) {
+        this.father = father;
+        father.children.add(this);
+    }
+
+    public void setMother(Person mother) {
+        this.mother = mother;
+        mother.children.add(this);
+    }
+
     public String getInfo(){
         String result = "";
         result += this.getFullName() + " ";
@@ -68,11 +78,6 @@ public class Person implements Serializable {
 
     public void addChild(Person child){
         this.children.add(child);
-        if (this.sex == "F"){
-            child.mother = this;
-        } else {
-            child.father = this;
-        }
     }
 
     public List<Person> getChildren() {
