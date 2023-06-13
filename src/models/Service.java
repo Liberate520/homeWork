@@ -18,7 +18,10 @@ public class Service {
     }
 
     // #region получение дерева
-    /** заполнение дерева */
+
+    /**
+     * заполнение дерева
+     */
     public FamilyTree<Human> getFamilyTree() {
         if (this.familyTree == null) {
             this.familyTree = read();
@@ -29,7 +32,9 @@ public class Service {
         return familyTree;
     }
 
-    /** заполнения дерева */
+    /**
+     * заполнения дерева
+     */
     public FamilyTree<Human> createHumanFamily() {
         FamilyTree<Human> family = new FamilyTree<>();
         Human ancestor1 = new Human("John Johnson", LocalDate.of(1910, 1, 2), Gender.Male);
@@ -51,24 +56,33 @@ public class Service {
         return family;
     }
 
-    /** сохранение */
+    /**
+     * сохранение
+     */
     public void save() {
         keeper.save(familyTree);
     }
 
-    /** чтение */
+    /**
+     * чтение
+     */
     private FamilyTree<Human> read() {
         return (FamilyTree<Human>) keeper.read();
     }
     // #endregion
 
     // #region сортировки
-    /** сортировка по имени */
+
+    /**
+     * сортировка по имени
+     */
     public void sortFamilyByName() {
         familyTree.sortByName();
     }
 
-    /** сортировка по дню рождения */
+    /**
+     * сортировка по дню рождения
+     */
     public void sortFamilyByBirthday() {
         familyTree.sortByBirthday();
     }
@@ -80,12 +94,17 @@ public class Service {
     // #endregion
 
     // #region получение списков
-    /** получение списка членов семьи по условию */
+
+    /**
+     * получение списка членов семьи по условию
+     */
     public String getMembersNames() {
         return getNames((member) -> true);
     }
 
-    /** получение списка гендеров */
+    /**
+     * получение списка гендеров
+     */
     public String getGenderList() {
         Gender[] genders = Gender.values();
         StringBuilder builder = new StringBuilder();
@@ -122,7 +141,10 @@ public class Service {
     // #endregion
 
     // #region получение размеров списков
-    /** получение количества членов в списке по условию */
+
+    /**
+     * получение количества членов в списке по условию
+     */
     public int getMaleAmount() {
         return familyTree.getMembers((member) -> member.getGender() == Gender.Male).size();
     }
@@ -137,18 +159,25 @@ public class Service {
     // #endregion
 
     // #region получение элемента из списка
-    /** получение гендера по индексу */
+
+    /**
+     * получение гендера по индексу
+     */
     public String getGenderBy(int index) {
         return Gender.values()[index].toString();
     }
 
-    /** получение детального описания члена семьи по условию */
+    /**
+     * получение детального описания члена семьи по условию
+     */
     public String getMemberDetail(int index) {
         return familyTree.getMembers((member) -> true).get(index).toString();
     }
 
 
-    /** получение имени члена семьи по индексу в списке по условию */
+    /**
+     * получение имени члена семьи по индексу в списке по условию
+     */
     public String getMaleName(int index) {
         return familyTree.getMembers((member) -> member.getGender() == Gender.Male).get(index).getName();
     }
@@ -157,13 +186,17 @@ public class Service {
         return familyTree.getMembers((member) -> member.getGender() == Gender.Female).get(index).getName();
     }
 
-    /** получение члена семьи по индексу в списке по условию */
+    /**
+     * получение члена семьи по индексу в списке по условию
+     */
     private Human getMember(int index, Predicate predicate) {
         return familyTree.getMembers(predicate).get(index);
     }
     // #endregion
 
-    /** добавление члена в семью */
+    /**
+     * добавление члена в семью
+     */
     public void addNewMember(String fullName, LocalDate date, int genderInt, int fatherInt, int motherInt) {
 
         Gender gender = Gender.values()[genderInt];
@@ -173,23 +206,25 @@ public class Service {
         familyTree.addNewMember(human);
     }
 
-    /** обновление данных */
+    /**
+     * обновление данных
+     */
     public void updateMember(Integer index, String name, LocalDate date, Integer gender, Integer fatherIndex,
-            Integer motherIndex) {
+                             Integer motherIndex) {
         Human currentHuman = getMember(index, (member) -> true);
         currentHuman.setName(name);
         currentHuman.setBirthday(date);
         currentHuman.setGender(gender == 0 ? Gender.Male : Gender.Female);
         if (fatherIndex != -1) {
-            currentHuman.getFather().removeChild(currentHuman);
+            if (currentHuman.getFather() != null) currentHuman.getFather().removeChild(currentHuman);
             currentHuman.setFather(getMember(fatherIndex, (member) -> member.getGender() == Gender.Male));
             if (fatherIndex != null) {
                 currentHuman.getFather().addChild(currentHuman);
             }
         }
         if (motherIndex != -1) {
-            currentHuman.getMother().removeChild(currentHuman);
-            currentHuman.setMother(getMember(motherIndex, (member) -> member.getGender() == Gender.Male));
+            if (currentHuman.getMother() != null) currentHuman.getMother().removeChild(currentHuman);
+            currentHuman.setMother(getMember(motherIndex, (member) -> member.getGender() == Gender.Female));
             if (motherIndex != null) {
                 currentHuman.getMother().addChild(currentHuman);
             }
