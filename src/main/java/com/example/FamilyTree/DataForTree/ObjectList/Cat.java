@@ -12,7 +12,7 @@ public class Cat implements Serializable, FamilyInterface {
     private String name;
     private Date birthday;
     private Gender gender;
-    private int puberty = 1; // средний возврат половой зрелости
+    private int puberty = 1; // средний возраст половой зрелости
 
     public Cat(String name, String birt, Gender gender) {
         this.name = name;

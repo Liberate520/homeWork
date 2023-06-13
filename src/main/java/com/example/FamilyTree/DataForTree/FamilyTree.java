@@ -29,17 +29,6 @@ public class FamilyTree<T extends FamilyInterface> implements Serializable, Iter
         familyList.sort(new ComparatorByName<>());
     }
 
-    public String printObjectList() {
-        StringBuilder stringBuilder = new StringBuilder();
-        int index = 1;
-        for (T object : familyList) {
-            stringBuilder.append(index++ + ": ");
-            stringBuilder.append(object.getObject());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
     public Family getObjectFamily(T object) {
         for (int i = 0; i < getObjectFamilyList().size(); i++) {
             if (getObjectFamilyList().get(i).getObject().equals(object)) {

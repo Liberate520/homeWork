@@ -6,6 +6,8 @@ import com.example.FamilyTree.DataForTree.FamilyTree;
 import com.example.FamilyTree.DataForTree.Gender;
 import com.example.FamilyTree.DataForTree.ObjectList.ObjectList;
 import com.example.FamilyTree.Model.FileHandler.FileHandler;
+import com.example.FamilyTree.Model.Printable.Printable;
+import com.example.FamilyTree.Model.Printable.printObjectList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +35,11 @@ public class Model {
         return null;
     }
 
+    public String printFamilyTree(FamilyTree<Family> familyTree){
+        Printable printable = new printObjectList();
+        return printable.output(familyTree);
+    }
+
     public void filterFamilyTree(String answer, FamilyTree<Family> familyTree) {
         List<Integer> listNumber = Arrays.stream(answer.split(" ")).map(s -> Integer.parseInt(s)).collect(Collectors.toList());
         int allObject = familyTree.getObjectFamilyList().size();
@@ -45,7 +52,7 @@ public class Model {
         }
     }
 
-    public void showRelatives(Family object1, Family object2, FamilyTree familyTree) {
+    private void showRelatives(Family object1, Family object2, FamilyTree familyTree) {
         if (object1.getParents().contains(object2.getObject())) {
             System.out.println(object2.getObject() + (object2.getObject().getGender() == Gender.female ? " - mother " : " - father") + "\n" +
                     object1.getObject() + (object1.getObject().getGender() == Gender.female ? " - daughter " : " - son"));
@@ -88,7 +95,7 @@ public class Model {
         }
     }
 
-    public boolean getObjectGrandFamily(Family object1, Family object2, FamilyTree familyTree) {
+    private boolean getObjectGrandFamily(Family object1, Family object2, FamilyTree familyTree) {
         Boolean i = false;
         if (!object1.getParents().isEmpty()) {
             for (int j = 0; j < object1.getParents().size(); j++) {
@@ -101,7 +108,7 @@ public class Model {
         return i;
     }
 
-    public boolean getObjectFamilyUncle(Family object1, Family object2, FamilyTree familyTree) {
+    private boolean getObjectFamilyUncle(Family object1, Family object2, FamilyTree familyTree) {
         Boolean i = false;
         if (!object1.getParents().isEmpty()) {
             for (int j = 0; j < object1.getParents().size(); j++) {
@@ -113,7 +120,7 @@ public class Model {
         return i;
     }
 
-    public boolean getObjectFamilyAtParents(Family object1, Family object2, FamilyTree familyTree) {
+    private boolean getObjectFamilyAtParents(Family object1, Family object2, FamilyTree familyTree) {
         Boolean i = false;
         if (!object1.getParents().isEmpty() && !object2.getParents().isEmpty()) {
             if (object1.getParents().equals(object2.getParents())) {
@@ -135,7 +142,7 @@ public class Model {
         return i;
     }
 
-    public boolean getObjectFamilyAtChildren(List<FamilyInterface> children1, List<FamilyInterface> children2, FamilyTree familyTree) {
+    private boolean getObjectFamilyAtChildren(List<FamilyInterface> children1, List<FamilyInterface> children2, FamilyTree familyTree) {
         Boolean i = false;
         for (int j = 0; j < children1.size(); j++) {
             if (familyTree.getObjectFamily(children1.get(j)).getChildren().equals(children2)) {
@@ -145,7 +152,7 @@ public class Model {
         return i;
     }
 
-    public boolean getObjectFamilyAllChildren(List<FamilyInterface> children1, List<FamilyInterface> children2, FamilyTree familyTree) {
+    private boolean getObjectFamilyAllChildren(List<FamilyInterface> children1, List<FamilyInterface> children2, FamilyTree familyTree) {
         Boolean i = false;
         for (int j = 0; j < children1.size(); j++) {
             for (int k = 0; k < children2.size(); k++) {

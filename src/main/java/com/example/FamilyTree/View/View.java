@@ -1,9 +1,9 @@
 package com.example.FamilyTree.View;
 
-import com.example.FamilyTree.DataForTree.Family;
-import com.example.FamilyTree.DataForTree.FamilyTree;
-import com.example.FamilyTree.DataForTree.Gender;
+import com.example.FamilyTree.DataForTree.*;
 import com.example.FamilyTree.DataForTree.ObjectList.ObjectList;
+import com.example.FamilyTree.Model.Printable.Printable;
+import com.example.FamilyTree.Model.Printable.printObjectList;
 
 import java.util.Scanner;
 
@@ -13,8 +13,9 @@ public class View {
     private boolean work = true;
 
     public String MenuAction(FamilyTree familyTree) {
+        Printable printable = new printObjectList();
         System.out.println("\nВыберите и введите цифру, кому вывести семейное дерево, или показать родственную связь с другим человеком (цифры через пробел): ");
-        System.out.println(familyTree.printObjectList());
+        System.out.println(printable.output(familyTree));
         System.out.println("---------\n" +
                "  0: ВЫХОД");
         String answer = scan.nextLine();

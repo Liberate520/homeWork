@@ -1,9 +1,9 @@
 package com.example.FamilyTree.Presenter;
 
-import com.example.FamilyTree.DataForTree.Family;
-import com.example.FamilyTree.DataForTree.FamilyTree;
-import com.example.FamilyTree.DataForTree.Gender;
+import com.example.FamilyTree.DataForTree.*;
 import com.example.FamilyTree.Model.Model;
+import com.example.FamilyTree.Model.Printable.Printable;
+import com.example.FamilyTree.Model.Printable.printObjectList;
 import com.example.FamilyTree.View.View;
 
 import java.io.File;
@@ -41,15 +41,15 @@ public class Presenter {
 
         if (!familyTree.getObjectFamilyList().isEmpty()) {
             System.out.println("Общий список лиц семьи: ");
-            System.out.println(familyTree.printObjectList());
+            System.out.println(model.printFamilyTree(familyTree));
 
             System.out.println("Сортировка по дню рождения: ");
             familyTree.sortByBirthday();
-            System.out.println(familyTree.printObjectList());
+            System.out.println(model.printFamilyTree(familyTree));
 
             System.out.println("Сортировка по имени: ");
             familyTree.sortByName();
-            System.out.println(familyTree.printObjectList());
+            System.out.println(model.printFamilyTree(familyTree));
 
             familyTree = view.addFamilyTree(objectSelection, familyTree);
             model.FileProcessing(1, familyTree, path);

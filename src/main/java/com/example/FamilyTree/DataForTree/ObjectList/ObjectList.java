@@ -37,6 +37,7 @@ public class ObjectList {
             case "Cat":
                 return getCat(name, birthday, gender);
         }
+        System.out.println("НЕТ!!!");
         return null;
     }
 

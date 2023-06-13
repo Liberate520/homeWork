@@ -12,7 +12,7 @@ public class Human implements Serializable, FamilyInterface {
     private String name;
     private Date birthday;
     private Gender gender;
-    private int puberty = 15; // средний возврат половой зрелости
+    private int puberty = 15; // средний возраст половой зрелости
 
     public Human(String name, String birt, Gender gender) {
         this.name = name;
