@@ -1,14 +1,7 @@
 package FamilyTree;
 
-import FamilyTree.model.FileHandler;
-import FamilyTree.model.FamilyTree;
-import FamilyTree.model.Gender;
-import FamilyTree.model.Human;
 import FamilyTree.view.ConsoleUI;
 import FamilyTree.view.View;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
