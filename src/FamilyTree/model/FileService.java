@@ -1,4 +1,4 @@
-package FamilyTree.interfaces;
+package FamilyTree.model;
 
 import java.io.Serializable;
 

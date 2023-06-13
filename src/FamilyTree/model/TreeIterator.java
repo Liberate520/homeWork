@@ -1,4 +1,4 @@
-package FamilyTree.iterators;
+package FamilyTree.model;
 
 import javafx.scene.control.TreeItem;
 

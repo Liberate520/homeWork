@@ -1,6 +1,4 @@
-package FamilyTree.interfaces;
-
-import FamilyTree.Human;
+package FamilyTree.model;
 
 import java.util.ArrayList;
 
@@ -14,6 +12,7 @@ public interface TreeItem {
     String getName();
 
     int getAge();
+    String getGender();
 
     ArrayList<Human> getChildrens();
 }

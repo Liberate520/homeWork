@@ -1,7 +1,4 @@
-package FamilyTree.comparators;
-import java.time.LocalDate;
-import java.time.Period;
-import FamilyTree.interfaces.TreeItem;
+package FamilyTree.model;
 
 import java.util.Comparator;
 

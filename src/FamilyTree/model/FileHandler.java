@@ -1,7 +1,4 @@
-package FamilyTree.interfaces;
-
-import FamilyTree.FamilyTree;
-import FamilyTree.interfaces.FileService;
+package FamilyTree.model;
 
 import java.io.*;
 public class FileHandler implements FileService {

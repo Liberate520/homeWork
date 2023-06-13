@@ -1,26 +1,22 @@
-package FamilyTree;
-
-import FamilyTree.interfaces.TreeItem;
+package FamilyTree.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 
 public class Human implements Serializable, Comparable<Human>, TreeItem {
     private String name;
     private int age;
-    private Gender gender;
+    private String sex;
     private Human father;
     private Human mother;
 
     private ArrayList<Human> childrens;
 
 
-    public Human(String name, int age, Gender gender, Human father, Human mother) {
+    public Human(String name, int age, String sex, Human father, Human mother) {
         this.name = name;
         this.age = age;
-        this.gender = gender;
+        this.sex = sex;
         this.father = father;
         this.mother = mother;
         this.childrens = new ArrayList<>();
@@ -68,8 +64,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
     public String toString() {
         return "Имя: " + name + "; Возраст: " + age + "; Отец: " + father + "; Мама: " + mother;
     }
-
-    private Gender getGender() {return gender;}
+    public String getGender() {return sex;}
 
     @Override
     public boolean equals(Object obj) {
