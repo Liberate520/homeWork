@@ -4,7 +4,7 @@ import views.ConsoleUI;
 
 /** команда добавления нового члена семьи */
 public class CommandAddNewMember implements Command {
-        private ConsoleUI ui;
+        private final ConsoleUI ui;
     public CommandAddNewMember(ConsoleUI ui){
         this.ui = ui;
     }

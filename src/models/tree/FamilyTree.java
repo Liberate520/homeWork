@@ -17,31 +17,31 @@ import java.util.stream.Collectors;
 /**
  * Family tree
  */
-public class FamilyTree<T extends FamilyMember> implements Serializable, Iterable<T>{
-    private List<T> family;
+public class FamilyTree<T extends FamilyMember> implements Serializable, Iterable<T> {
+    private final List<T> family;
 
     public FamilyTree() {
         family = new ArrayList<>();
     }
 
-    public int getSize(){
-        return family.size();
-    }
-
-    /** added new member */
+    /**
+     * added new member
+     */
     public void addNewMember(T member) {
-        if(!contains(member)){
+        if (!contains(member)) {
             family.add(member);
-            if(member.getFather() != null){
+            if (member.getFather() != null) {
                 member.getFather().addChild(member);
             }
-            if(member.getMother() != null){
+            if (member.getMother() != null) {
                 member.getMother().addChild(member);
             }
         }
     }
 
-    /** checked contains member in family list */
+    /**
+     * checked contains member in family list
+     */
     private Boolean contains(T search) {
         for (T member : family) {
             if (member.equals(search)) {
@@ -51,7 +51,9 @@ public class FamilyTree<T extends FamilyMember> implements Serializable, Iterabl
         return false;
     }
 
-    /** representation */
+    /**
+     * representation
+     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -64,25 +66,31 @@ public class FamilyTree<T extends FamilyMember> implements Serializable, Iterabl
 
     @Override
     public Iterator<T> iterator() {
-        return new FamilyTreeIterator<T>(family);       
+        return new FamilyTreeIterator<>(family);
     }
 
-    /** сортировка по имени*/
+    /**
+     * сортировка по имени
+     */
     public void sortByName() {
         family.sort(new ComparatorFamilyByName<>());
     }
 
-    /** сортировка дню рождения*/
-     public void sortByBirthday() {
+    /**
+     * сортировка дню рождения
+     */
+    public void sortByBirthday() {
         family.sort(new ComparatorFamilyByBirthDay<>());
     }
 
-    /** сортировка по количеству детей*/
-     public void sortByChildrenAmount() {
-       family.sort(new ComparatorFamilyByChildrenAmount<>());
+    /**
+     * сортировка по количеству детей
+     */
+    public void sortByChildrenAmount() {
+        family.sort(new ComparatorFamilyByChildrenAmount<>());
     }
 
     public List<T> getMembers(Predicate predicate) {
-        return family.stream().filter(member->predicate.isEqual(member)).collect(Collectors.toList());
+        return family.stream().filter(predicate::isEqual).collect(Collectors.toList());
     }
 }

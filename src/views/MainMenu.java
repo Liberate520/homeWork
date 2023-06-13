@@ -12,7 +12,7 @@ import views.commands.CommandPrintAll;
 import views.commands.CommandPrintDetail;
 
 public class MainMenu {
-    private List<Command> commands;
+    private final List<Command> commands;
 
     public MainMenu(ConsoleUI ui) {
         commands = new ArrayList<>();

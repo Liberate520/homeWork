@@ -8,7 +8,7 @@ import models.members.FamilyMember;
 class FamilyTreeIterator<T extends FamilyMember> implements Iterator<T>{
         
     private int index = 0;
-    private List<T> family;
+    private final List<T> family;
     public FamilyTreeIterator(List<T> family){
         this.family = family;
     }

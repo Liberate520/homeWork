@@ -4,7 +4,7 @@ import views.ConsoleUI;
 /** команда редактирования члена семьи */
 public class CommandEditMember implements Command {
 
-    private ConsoleUI ui;
+    private final ConsoleUI ui;
     
     public CommandEditMember(ConsoleUI ui) {
         this.ui = ui;

@@ -4,7 +4,7 @@ import views.ConsoleUI;
 /** команда вывода всех членов семьи */
 public class CommandPrintAll implements Command {
 
-    private ConsoleUI ui;
+    private final ConsoleUI ui;
     public CommandPrintAll(ConsoleUI ui){
         this.ui = ui;
     }

@@ -4,7 +4,7 @@ import views.ConsoleUI;
 /** команда сохранения*/
 public class CommandSave implements Command {
 
-    private ConsoleUI ui;
+    private final ConsoleUI ui;
     
     public CommandSave(ConsoleUI ui) {
         this.ui = ui;

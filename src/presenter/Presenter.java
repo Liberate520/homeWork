@@ -3,19 +3,19 @@ package presenter;
 import java.time.LocalDate;
 
 import models.Service;
-import models.repository.FileHandler;
+import models.repository.BinaryKeeper;
 
 public class Presenter {
 
     Service service;
 
     public Presenter() {
-        service = new Service(new FileHandler("family.data"));
+        service = new Service(new BinaryKeeper("family.bin"));
     }
 
     /** получение списка всех членов семьи */
-    public String getNamesAllMembers() {
-        return service.getNamesAllMembers();
+    public String getMembersNames() {
+        return service.getMembersNames();
     }
 
     /** получение имен мужчин */
@@ -33,16 +33,11 @@ public class Presenter {
         return service.getGenderList();
     }
 
-    /** получение гендера из списка */
-    public String getGender(int index) {
-        return service.getGenderBy(index).toString();
-    }
-
+    //////////////////////////////////////////////////////////////
     /** получение количества мужчин в семье */
     public int getMaleAmount() {
         return service.getMaleAmount();
     }
-
 
     /** получение количества женщин в семье */
     public int getFemaleAmount() {
@@ -54,6 +49,12 @@ public class Presenter {
         return service.getAllAmount();
     }
 
+    /////////////////////////////////////////////////////////////
+    /** получение гендера из списка */
+    public String getGender(int index) {
+        return service.getGenderBy(index);
+    }
+
     /** получение имени мужчины по индексу из списка по условию */
     public String getMaleName(int index) {
         return service.getMaleName(index);
@@ -63,57 +64,25 @@ public class Presenter {
     public String getFemaleName(int index) {
         return service.getFemaleName(index);
     }
-    
-    /** получение имени члена семьи */
-    public String getMemberName(int index) {
-        return service.getMemberName(index);
-    }
 
-    /** добавление нового члена семьи */
-    public boolean addNewMember(String fullname, LocalDate date, int gender, int father, int mother) {
-        return service.addNewMember(fullname, date, gender, father, mother);
-    }
-
-
+    ////////////////////////////////////////////////////////////////
     /** получение детально описания члена семьи */
     public String getMemberDetail(int index) {
         return service.getMemberDetail(index);
     }
 
-
-
-    /** установить имя для члена семьи */
-    public void setName(int input, String fullname) {
-        service.setDifferentName(input, fullname);
-    }
-
-    /** получение дня рождения для члена семьи */
-    public String getMemberDate(int index) {
-        return service.getMemberDate(index);
-    }
-
-    /** установка пола для члена семьи */
-    public void setGender(int input, int gender) {
-        service.setGender(input, gender);
-    }
-
-    /** установка дня рождения для члена семьи */
-    public void setBirthday(int input, LocalDate date) {
-        service.setBirthday(input, date);
-    }
-
-    /** установка отца для члена семьи */
-    public void setFather(int input, Integer father) {
-        service.setFather(input, father);
-    }
-
-    /** установка матери для члена семьи */
-    public void setMother(int input, Integer mother) {
-        service.setMother(input, mother);
-    }
-
     /** сохранение изменений */
     public void save() {
         service.save();
+    }
+
+    /** обновление данных  */
+    public void updateMember(Integer index, String name, LocalDate date, Integer gender, Integer fatherIndex, Integer motherIndex) {
+        service.updateMember(index, name, date, gender, fatherIndex, motherIndex);
+    }
+
+    /** добавление нового члена семьи */
+    public void addNewMember(String fullName, LocalDate date, int gender, int father, int mother) {
+        service.addNewMember(fullName, date, gender, father, mother);
     }
 }

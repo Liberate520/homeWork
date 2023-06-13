@@ -13,7 +13,7 @@ public class Human implements Serializable, FamilyMember {
     private Gender gender;
     private FamilyMember mother;
     private FamilyMember father;
-    private List<FamilyMember> children;
+    private final List<FamilyMember> children;
 
     /** return human name */
     public String getName() {
@@ -81,26 +81,24 @@ public class Human implements Serializable, FamilyMember {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         StringBuilder builder = new StringBuilder();
-        builder.append(name + " ");
-        builder.append("(" + formatter.format(birthday) + ")\n");
-        builder.append("[" + gender + "] ");
-        builder.append(children.size() + " children,\n");
+        builder.append(name).append(" ");
+        builder.append("(").append(formatter.format(birthday)).append(")\n");
+        builder.append("[").append(gender).append("] ");
+        builder.append(children.size()).append(" children,\n");
         if (father != null) {
-            builder.append("father: " + father.getName() + "\n");
+            builder.append("father: ").append(father.getName()).append("\n");
         }
         if (mother != null) {
-            builder.append("mother: " + mother.getName() + "\n");
+            builder.append("mother: ").append(mother.getName()).append("\n");
         }
         return builder.toString();
     }
 
     public String GetShortInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-        StringBuilder builder = new StringBuilder();
-        builder.append(name + " ");
-        builder.append("(" + formatter.format(birthday) + ")");
-        builder.append("[" + gender + "] ");
-        return builder.toString();
+        return name + " " +
+                "(" + formatter.format(birthday) + ")" +
+                "[" + gender + "] ";
     }
 
     @Override

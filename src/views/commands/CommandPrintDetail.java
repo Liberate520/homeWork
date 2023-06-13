@@ -3,7 +3,7 @@ package views.commands;
 import views.ConsoleUI;
 /** команда вывода подробной информации о члене семьи */
 public class CommandPrintDetail implements Command {
-    private ConsoleUI ui;
+    private final ConsoleUI ui;
 
     public CommandPrintDetail(ConsoleUI ui) {
         this.ui = ui;

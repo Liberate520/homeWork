@@ -4,7 +4,7 @@ import views.ConsoleUI;
 /** команда выхода */
 public class CommandQuit implements Command {
     
-    private ConsoleUI ui;
+    private final ConsoleUI ui;
     public CommandQuit(ConsoleUI ui){
         this.ui = ui;
     }
