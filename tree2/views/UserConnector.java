@@ -1,11 +1,10 @@
 package homeWork.tree2.views;
 
 
-import homeWork.tree2.backend.familyTree.FamilyTree;
-import homeWork.tree2.backend.familyTree.services.Service;
+
 import homeWork.tree2.middleware.Presenter;
 
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -15,6 +14,7 @@ public class UserConnector implements View {
     private Scanner scanner;
     private boolean work;
     private MainMenu mainMenu;
+
 
 
     public UserConnector() {
@@ -58,7 +58,7 @@ public class UserConnector implements View {
 
     public void SortByParams() {
         System.out.println("Выбирите параметр сортировки");
-        System.out.println("1 - Сортировка по имени\n+" +
+        System.out.println("1 - Сортировка по имени\n" +
                 "2 - Обратная сортировка по имени\n" +
                 "3 - Сортировка по id\n" +
                 "4 - Обратная сортировка по id\n" +
@@ -70,24 +70,29 @@ public class UserConnector implements View {
                 case "1":
                     System.out.println("\n=============================Сортировка по имени================================\n");
                     presenter.sortByName();
+                    flag = false;
                     break;
                 case "2":
                     System.out.println("\n=====================Обратная сортировка по имени=============================\n");
                     presenter.sortByNameDesc();
+                    flag = false;
                     break;
                 case "3":
                     System.out.println("\n=============================Сортировка по ID================================\n");
                     presenter.sortById();
+                    flag = false;
                     break;
                 case "4":
                     System.out.println("\n===========================Обратная сортировка по ID============================\n");
                     presenter.sortByIdDesc();
+                    flag = false;
                     break;
                 case "0":
+                    flag = false;
                     break;
                 default:
                     System.out.println("Введите корретные данные");
-                    continue;
+                    break;
             }
         }
     }
@@ -108,11 +113,11 @@ public class UserConnector implements View {
     }
 
     public void saveFile() {
-        System.out.println(presenter.saveFile());
+        presenter.saveFile();
     }
 
     public void LoadFile() {
-        System.out.println(presenter.loadFile());
+        presenter.loadFile();
     }
 
     public void deleteFamilyTree() {
@@ -181,3 +186,17 @@ public class UserConnector implements View {
 
 
 }
+
+/*
+Данный класс выглядит довольно громоздко, и можно было предположить, что
+принты в нем нужно убрать, заменив их экземплярами класса MessageForUsers.
+Однако предназначение данного класса - общение с пользователем через консоль.
+Именно это он и делает, поэтому, если мы решим использовать другой интерфейс взаимодействия,
+мы будем писать новый класс, а не изменять текущий.
+
+А добавление дополнительных синтаксических конструкция в виде:
+        MessageForUsers message = new MessageForUsers("текст");
+            message.setTextMessage();
+
+только увеличит код и сделает его менее поддерживаемым.
+ */

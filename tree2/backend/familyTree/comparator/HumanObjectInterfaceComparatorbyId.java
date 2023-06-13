@@ -15,3 +15,5 @@ public class HumanObjectInterfaceComparatorbyId implements Comparator<HumanObjec
         return Comparator.super.reversed();
     }
 }
+
+// Проблем не наблюдаю

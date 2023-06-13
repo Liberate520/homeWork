@@ -9,3 +9,5 @@ public interface HumanObjectInterface<E> extends Comparable<E> {
     int getAge();
     LocalDate getBirthdate();
 }
+
+// Возможно, заходим за черту 4 принципа, но тут все достаточно просто, и, кажется, декомпозиция тут - перебор

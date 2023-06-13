@@ -6,7 +6,7 @@ public class MessageForUsers {
         this.textMessage = textMessage;
     }
 
-    public void setTextMessage(String textMessage){
+    public void setTextMessage(){
         System.out.println(this.textMessage);
     }
 }

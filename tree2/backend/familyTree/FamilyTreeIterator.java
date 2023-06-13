@@ -3,13 +3,13 @@ package homeWork.tree2.backend.familyTree;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyTreeIterator<E> implements Iterator<E> {
+public class FamilyTreeIterator<HumanObjectInterface> implements Iterator<HumanObjectInterface> {
 
     private int index;
-    public ArrayList<E> familyTree;
+    public ArrayList<HumanObjectInterface> familyTree;
 
 
-    public FamilyTreeIterator(ArrayList<E> familyTree) {
+    public FamilyTreeIterator(ArrayList<HumanObjectInterface> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -19,8 +19,14 @@ public class FamilyTreeIterator<E> implements Iterator<E> {
     }
 
     @Override
-    public E next() {
+    public HumanObjectInterface next() {
         return familyTree.get(index++);
     }
 }
 
+
+/*
+Заменил параметр итератора с неопределенного класса E на параметр HumanObjectInterface
+т.к. наше семейное древо работает исключетельно с типом, наследуемым (имплементированным)
+ от интерфейса HumanObjectInterface
+ */

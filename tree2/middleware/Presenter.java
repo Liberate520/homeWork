@@ -52,28 +52,29 @@ public class Presenter {
         service.updatePersonByName(oldName, newName, date);
     }
 
-    public String saveFile(){
+    public void saveFile(){
         try {
             service.saveFamilyTree();
-            String message = "Файл успешно сохранен в байт-формате";
-            return message;
+            MessageForUsers message = new MessageForUsers("Файл успешно сохранен в байт-формате");
+            message.setTextMessage();
         }
         catch (Exception e) {
-            String message = "Произошла непредвиденная ошибка";
-            return message;
+            MessageForUsers message = new MessageForUsers("Произошла непредвиденная ошибка");
+            message.setTextMessage();
 
         }
 
     }
-    public String loadFile() {
+    public void loadFile() {
         try {
             service.loadFamilyTree();
-            String message = "Файл загружен успешно";
-            return message;
+            MessageForUsers message = new MessageForUsers("Файл загружен успешно");
+            message.setTextMessage();
+
         }
         catch (Exception e){
-            String message = "Произошла непредвиденная ошибка";
-            return message;
+            MessageForUsers message = new MessageForUsers("Произошла непредвиденная ошибка");
+            message.setTextMessage();
         }
     }
 
@@ -81,3 +82,16 @@ public class Presenter {
         service.deleteFamilyTree();
     }
 }
+
+/*
+Аналогично сервису убрал принты и не понял как избавится от ретерна. Тут точно ошибка, но не вижу,
+как сделать правильно.
+
+У меня все начинается в UserConnector, оттуда идет запрос в Presenter, оттуда уже в Service и
+уже из Сервиса в FamilyTree. В древе возвращается искомый человек, дальше его передает сервис,
+дальше презентер и уже на выходе возвращает коннектор. Это точно не то что нужно, потому что
+ни презентер, ни сервис не должны возвращать ничего. Они должны только давать команды.
+
+Самое обидно, что я должен именно возвращать экземпляр класса из древа, чтобы можно было дальше
+с ним выполнять различные манипуляции.
+ */

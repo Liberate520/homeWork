@@ -4,6 +4,7 @@ import homeWork.tree2.backend.familyTree.FamilyTree;
 import homeWork.tree2.backend.fileHandler.FileHandler;
 import homeWork.tree2.backend.human.Human;
 import homeWork.tree2.backend.human.HumanObjectInterface;
+import homeWork.tree2.middleware.MessageForUsers;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,27 +13,35 @@ public class Service {
 
     private FamilyTree family;
 
-    public Service(FamilyTree family) {
+    public Service(FamilyTree<HumanObjectInterface> family) {
         this.family = family;
-    }
+    } // Изменил параметр класса
 
     public void addFamilyMember(String name, LocalDate date) {
         try {
             Human member = new Human(name, date);
+            // В данном методе, мы работаем с классмо Человек
+            // принципы не нарушаются, т.к. Человек - вполне может стать родительским классом для новых классов
+            // (сын, дочь, женщина, мужчина и т.д.)
+
             family.addPeople(member);
-        }
-        catch (Exception e) {
-            System.out.println("Ошибка ввода данных!");
+        } catch (Exception e) {
+            MessageForUsers message =  new MessageForUsers("Ошибка ввода данных!");
+            message.setTextMessage();
+
         }
     }
 
     public void showAllFamilyMembers() {
         try {
-            System.out.println(family.getFamilies());
-        }
+                MessageForUsers message = new MessageForUsers(family.getFamilies());
+                message.setTextMessage();
+            }
         catch (Exception e) {
-            System.out.println("Древо пусто");
+            MessageForUsers message =  new MessageForUsers("Дерево пусто!");
+            message.setTextMessage();
         }
+
     }
 
 
@@ -41,7 +50,7 @@ public class Service {
     }
 
     public void sortByNameDesc() {
-        family.byNamereverse();
+        family.byNameReverse();
     }
 
     public void sortById() {
@@ -49,31 +58,30 @@ public class Service {
     }
 
     public void sortByIdDesc() {
-        family.byIdreverse();
+        family.byIdReverse();
     }
 
     public HumanObjectInterface findPersonByName(String name) {
-        return family.findPersonByName(family, name);
+        return family.findPersonByName(name);
     }
 
 
     public void deletePersonByName(String name) {
-        family.deleteByName(family, name);
+        family.deleteByName(name);
     }
 
-    public FamilyTree testFamily() {
+    public void testFamily() {
         TestGenerationFamilyTree generator = new TestGenerationFamilyTree();
         family = generator.testFamilyTree();
-        return family;
     }
 
     public void updatePersonByName(String oldName, String name, LocalDate birthdate) {
         try {
-            Human person = (Human) family.findPersonByName(family, oldName);
+            Human person = (Human) family.findPersonByName(oldName);
             person.updatePersonParameters(name, birthdate);
-        }
-        catch (Exception o){
-            System.out.println("Ошибка ввода данных!");
+        } catch (Exception o) {
+            MessageForUsers message =  new MessageForUsers("Ошибка ввода данных!");
+            message.setTextMessage();
         }
     }
 
@@ -82,13 +90,19 @@ public class Service {
         fileHandler.save(family);
     }
 
-    public FamilyTree loadFamilyTree() throws IOException, ClassNotFoundException {
+    public void loadFamilyTree() throws IOException, ClassNotFoundException {
         FileHandler fileHandler = new FileHandler();
         this.family = fileHandler.load();
-        return this.family;
+
     }
 
     public void deleteFamilyTree() {
         family.delete();
     }
 }
+
+/*
+В данном классе решил убрать печать. Для печати системных сообщений использовал сторонний класс MessageForUsers
+Есть предположение, что заниматься ретерном этот класс также не должен. Поэтому убрал и ретерны.
+Не убрал return только в методе findPersonByName, т.к. там нужно именно возвращать экземпляр.
+ */

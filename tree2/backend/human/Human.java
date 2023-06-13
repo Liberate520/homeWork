@@ -88,8 +88,17 @@ public class Human implements Serializable, Comparable<Human>, HumanObjectInterf
     }
 
     public void updatePersonParameters(String name, LocalDate birthdate) {
-        this.name = name;
-        this.birthdate = birthdate;
+        setName(name);
+        setBirthdate(birthdate);
     }
 
 }
+/*
+ Тут спорно. Класс по факту состоит из свойств и внутренних методов.
+Сам Апдейтер updatePersonParameters можно было вынести отдельно, с другой стороны,
+этот метод работает только с полями данного класса и только с конкретным экземпляром данного класса.
+Но данный метод я немного переделал.
+Мне самому не нравится наличие методов, которые в данный момент не используются, но они точно нужны
+(т.к. класс должен быть расширяемым и мы явно показываем в какую сторону его стоит расширять).
+ */
+

@@ -16,9 +16,6 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         families = new ArrayList<>();
     }
 
-    public ArrayList<E> familyMembersList() {
-        return families;
-    }
 
     public String getFamilies() {
         StringBuilder sb = new StringBuilder();
@@ -29,8 +26,8 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         return sb.toString();
     }
 
-    public HumanObjectInterface findPersonByName(FamilyTree family, String name) {
-        for (HumanObjectInterface man : families) {
+    public E findPersonByName(String name) {
+        for (E man : families) {
             if (man.getName().equalsIgnoreCase(name)) {
                 return man;
             }
@@ -38,8 +35,8 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         return null;
     }
 
-    public void deleteByName(FamilyTree family, String name) {
-        for (HumanObjectInterface person : families) {
+    public void deleteByName(String name) {
+        for (E person : families) {
             if (person.getName().equalsIgnoreCase(name)) {
                 families.remove(person);
                 System.out.println("\nПользователь " + person.getName() + " успешно удален!\n");
@@ -64,7 +61,7 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         families.sort(new HumanObjectInterfaceComparatorbyName());
     }
 
-    public void byNamereverse() {
+    public void byNameReverse() {
         families.sort(new HumanObjectInterfaceComparatorbyName().reversed());
     }
 
@@ -73,7 +70,7 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         families.sort(new HumanObjectInterfaceComparatorbyId());
     }
 
-    public void byIdreverse() {
+    public void byIdReverse() {
         families.sort(new HumanObjectInterfaceComparatorbyId().reversed());
     }
 
