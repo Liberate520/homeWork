@@ -36,6 +36,15 @@ public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Itera
         return false;
     }
 
+    public F getByFirstName(String name){
+       for (F human: humanList){
+            if (human.getFirstName().equals(name)){
+                return human;
+            }
+        }
+       return null;
+    }
+    
    public void sortByFirstName() {
         humanList.sort(new HumanComparatorByName<>());
     }
