@@ -7,8 +7,6 @@ import ui.menu.FamilyMenu;
 import ui.menu.MainMenu;
 import ui.menu.Menu;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,8 +15,6 @@ public class Console implements UI{
     private static final String FAREWELL = "Have a nice day.";
     private static final String WRONGCHOICE = "Такого пункта нет, попробуйте ещё раз.";
     private static final String NODATA = "Нет данных";
-    private static final String DEFAULTPATH = String.join(File.separator, Arrays.asList("data", "saved.bin"));
-    private String lastFilePath;
     private Scanner scanner;
     private Presenter presenter;
     private boolean active;
@@ -27,7 +23,6 @@ public class Console implements UI{
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         active = false;
-        lastFilePath = DEFAULTPATH;
     }
 
     @Override
@@ -114,20 +109,23 @@ public class Console implements UI{
     }
 
     public void saveToFile() {
+        String lastFilePath = presenter.getLastFilepath();
         print(String.format("Рекомендуемый путь '%s'", lastFilePath));
         print("Введите путь для сохранения файла");
         print("Или пустую строку для использования рекомендованного пути");
         String path = scanner.nextLine();
-        if (path.isEmpty()) path = lastFilePath;
-        presenter.saveToFile(path);
+        if (presenter.saveToFile(path)) print("Успешное сохранение файла");
+        else print("Ошибка при сохранении файла");
     }
     public void loadFromFile() {
+        String lastFilePath = presenter.getLastFilepath();
         print(String.format("Рекомендуемый путь '%s'", lastFilePath));
         print("Введите путь до файла для загрузки");
         print("Или пустую строку для использования рекомендованного пути");
         String path = scanner.nextLine();
         if (path.isEmpty()) path = lastFilePath;
-        presenter.loadFromFile(path);
+        if (presenter.loadFromFile(path)) print("Успешная загрузка файла");
+        else print("Ошибка при загрузке файла");
     }
     public void showPeopleFromFamily(Family<Human> family) {
         presenter.listPeopleFromFamily(family);

@@ -7,8 +7,6 @@ import model.member.Connection;
 import model.member.Gender;
 import ui.UI;
 
-import java.nio.file.InvalidPathException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -56,31 +54,16 @@ public class Presenter {
     public Family<Human> getFamily(String name) {
         return model.searchFamily(name);
     }
-
-    /**
-     * https://stackoverflow.com/questions/468789/is-there-a-way-in-java-to-determine-if-a-path-is-valid-without-attempting-to-cre
-     */
-    public static boolean isValidPath(String path) {
-        try {
-            Paths.get(path);
-        } catch (InvalidPathException | NullPointerException ex) {
-            return false;
-        }
-        return true;
+    public String getLastFilepath() {
+        return model.getPathToFile();
     }
-    public void saveToFile(String path) {
-        if (!isValidPath(path)) view.print("Путь до файла задан неправильно");
-        else {
-            if (model.save(path)) view.print("Успешное сохранение файла");
-            else view.print("Ошибка при сохранении файла");
-        }
+    public boolean saveToFile(String path) {
+        if (path.isEmpty()) path = null;
+        return model.save(path);
     }
-    public void loadFromFile(String path) {
-        if (!isValidPath(path)) view.print("Путь до файла задан неправильно");
-        else {
-            if (model.load(path)) view.print("Успешная загрузка файла");
-            else view.print("Ошибка при загрузке файла");
-        }
+    public boolean loadFromFile(String path) {
+        if (path.isEmpty()) path = null;
+        return model.load(path);
     }
     public void listPeopleFromFamily(Family<Human> family) {
         model.getFamilyMembers(family);
@@ -134,6 +117,7 @@ public class Presenter {
     public Human searchHumanByNameInFamily(String name, Family<Human> family) {
         return model.searchHumanInFamily(family, name);
     }
+
     public void addConnection(Human h1, String connectionName, Human h2) {
         model.addConnection(h1, Connection.fromString(connectionName), h2);
         view.print("Связь создана");
