@@ -22,15 +22,15 @@ public class Service implements Serializable {
     public Service(FamilyTree<Human> tree) {
         this.familyTree = tree;
 
-        addHuman("Василий", "Иванов", Gender.Male, LocalDate.of(1991, 12, 25));
-        addHuman("Кристина", "Иванова", Gender.Female, LocalDate.of(1988, 1, 2));
-        addHuman("Ольга", "Иванова",Gender.Female, LocalDate.of(1988, 1, 2));
-        addHuman("Иван", "Иванов",Gender.Male, LocalDate.of(1988, 5, 6));
-        addHuman("Сергей", "Иванов",Gender.Male, LocalDate.of(1989, 4, 9));
+        addHuman("Василий", "Иванов", Gender.Male, LocalDate.of(1991, 12, 25), null, null, null);
+        addHuman("Кристина", "Иванова", Gender.Female, LocalDate.of(1988, 1, 2), null, null, null);
+        addHuman("Ольга", "Иванова",Gender.Female, LocalDate.of(1988, 1, 2), null, tree.getByFirstName("Василий"), tree.getByFirstName("Кристина"));
+        addHuman("Иван", "Иванов",Gender.Male, LocalDate.of(1988, 5, 6), null, tree.getByFirstName("Василий"), tree.getByFirstName("Кристина"));
+        addHuman("Сергей", "Иванов",Gender.Male, LocalDate.of(1989, 4, 9), null, tree.getByFirstName("Василий"), tree.getByFirstName("Кристина"));
     }
     
-    public void addHuman(String firstName, String lastname, Gender gender, LocalDate birthDate) {
-        familyTree.add(new Human(firstName, lastname, gender, birthDate, null, null, null));
+    public void addHuman(String firstName, String lastname, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother) {
+        familyTree.add(new Human(firstName, lastname, gender, birthDate, deathDate, father, mother));
     }
 
     public String getInfoHuman() {
