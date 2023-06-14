@@ -1,13 +1,12 @@
 package presenter;
 
 import model.Gender;
-import model.Human;
 import model.Service;
 import view.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class Presenter {
     private View view;
@@ -19,7 +18,9 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void showList(){service.showList();}
+    public String showList(){
+        return service.showList();
+    }
     public void sortByName(){
         service.sortByName();
     }
@@ -28,14 +29,11 @@ public class Presenter {
     }
     public void addHuman(String name, LocalDate date, Gender gender)
     {
-        Human newHuman = new Human();
-        newHuman.setName(name);
-        newHuman.setDateOfBirth(date);
-        newHuman.setGender(gender);
-        service.addHuman(newHuman);
+        service.addHuman(name, date, gender);
     }
-    public void findByName(String name){
-        System.out.println(service.findByName(name));
+    public String findByName(String name)
+    {
+        return service.findByName(name);
     }
     public void findBrothers(String name){
         System.out.println(service.findBrothers(name));
@@ -46,6 +44,5 @@ public class Presenter {
     public void LoadFromFile(String filename) throws IOException, ClassNotFoundException {
         service.LoadFromFile(filename);
     }
-
 
 }

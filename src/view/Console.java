@@ -1,15 +1,12 @@
 package view;
 
 import model.Gender;
-import model.Human;
 import presenter.Presenter;
 import view.menu.MainMenu;
-import view.menu.SortByBirthDate;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Scanner;
 
 public class Console implements View{
@@ -23,11 +20,6 @@ public class Console implements View{
         scanner = new Scanner(System.in);
         mainLoop = true;
         mainMenu = new MainMenu(this);
-    }
-
-    @Override
-    public void print(String text) {
-
     }
 
     @Override
@@ -83,21 +75,19 @@ public class Console implements View{
 
     @Override
     public void ShowList() {
-        presenter.showList();
+        System.out.println(presenter.showList());
     }
 
-    @Override
     public void sortByName() {
         presenter.sortByName();
         System.out.println("Сортировка выполнена.");
-        presenter.showList();
+        ShowList();
     }
 
-    @Override
     public void sortByBirthDate() {
         presenter.sortByBirthDate();
         System.out.println("Сортировка выполнена.");
-        presenter.showList();
+        ShowList();
     }
 
     @Override
@@ -127,10 +117,9 @@ public class Console implements View{
     public void findByName() {
         System.out.print("Введите имя:");
         String name = (scanner.nextLine());
-        presenter.findByName(name);
+        System.out.println(presenter.findByName(name));
     }
 
-    @Override
     public void findBrothers() {
         System.out.print("Введите имя:");
         String name = (scanner.nextLine());

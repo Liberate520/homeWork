@@ -24,15 +24,11 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     }
 
     public Human(String name, LocalDate dateOfBirth, Gender gender){
-
         this(name, dateOfBirth, gender, null, null);
-
     }
 
     public Human(){
-
         this("Unknown", LocalDate.of(0000,01,01), Gender.UNKNOWN, null, null);
-
     }
 
     public void addChild(Human human){
@@ -40,7 +36,6 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
             this.children.add(human);
         }
     }
-
 
     @Override
     public String toString() {
@@ -86,7 +81,6 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     public Gender getGender() {
         return gender;
     }
-
 
     public int compareTo(Human o) {
         return name.compareTo(o.getName());
