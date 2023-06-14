@@ -1,4 +1,4 @@
-package tree.handler;
+package tree.model.handler;
 
 import java.io.*;
 

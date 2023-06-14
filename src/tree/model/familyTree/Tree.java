@@ -1,4 +1,4 @@
-package tree.familyTree;
+package tree.model.familyTree;
 
 import java.io.IOException;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package tree.familyTree;
+package tree.model.familyTree;
 
 import java.util.Set;
 

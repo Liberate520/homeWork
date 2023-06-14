@@ -1,8 +1,8 @@
 package tree.presenter;
 
-import tree.human.Human;
+import tree.model.human.Human;
 import tree.model.Service;
-import tree.human.Gender;
+import tree.model.human.Gender;
 
 import java.io.IOException;
 
@@ -13,9 +13,9 @@ public class Presenter {
         this.service = service;
     }
 
-    public void addHuman(String name, Gender gender) {
-        service.addHuman(name, gender );
-        System.out.println(name + " добавлен");
+    public void addHuman(String name, Gender gender, String father, String mother) {
+        service.addHuman(name, gender, father, mother);
+
     }
     public void getFamilyTree() {
         System.out.println(service.toString());
@@ -29,11 +29,7 @@ public class Presenter {
         System.out.println("Файл отсортирован по количеству детей");
     }
     public void findHuman(String name) {
-        try {
-            System.out.println(service.findHuman(name).toString());
-        } catch (Exception e) {
-            System.out.println("Не найден");
-        }
+        service.findHuman(name);
     }
 
     public void saveFile() throws IOException {
@@ -44,7 +40,7 @@ public class Presenter {
         service.loadFile();
     }
 
-    public void addChild(String human, String child) {
+   /* public void addChild(String human, String child) {
         Human parent = service.findHuman(human);
         Human kid = service.findHuman(child);
             if (containsHuman(parent) && containsHuman(kid)) {
@@ -56,5 +52,5 @@ public class Presenter {
     }
     private boolean containsHuman(Human human) {
         return human != null;
-    }
+    }*/
 }

@@ -16,6 +16,6 @@ public class AddChild implements Command{
 
     @Override
     public void execute() throws IOException, ClassNotFoundException {
-        userUI.addChild();
+       // userUI.addChild();
     }
 }

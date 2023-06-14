@@ -1,19 +1,17 @@
 package tree;
 
-import tree.familyTree.FamilyTree;
+import tree.model.familyTree.FamilyTree;
 import tree.model.Service;
 import tree.presenter.Presenter;
 import tree.view.UserUI;
-import tree.handler.FileHandler;
-import tree.handler.SaveReadable;
-import tree.human.Human;
+import tree.model.human.Human;
 
 import java.io.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static tree.human.Gender.*;
+import static tree.model.human.Gender.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {

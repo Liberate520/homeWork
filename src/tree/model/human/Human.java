@@ -1,10 +1,10 @@
-package tree.human;
+package tree.model.human;
 
-import tree.familyTree.TreeItem;
+import tree.model.familyTree.TreeItem;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import static tree.human.Gender.*;
+import static tree.model.human.Gender.*;
 
 public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private String name;

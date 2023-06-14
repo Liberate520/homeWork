@@ -1,7 +1,7 @@
 package tree.view;
 
 import tree.presenter.Presenter;
-import tree.human.Gender;
+import tree.model.human.Gender;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -51,7 +51,12 @@ public class UserUI implements View {
         String name = scanner.nextLine();
         System.out.println("Укажите пол");
         String gender = scanner.nextLine();
-        presenter.addHuman(name, Gender.valueOf(gender));
+        System.out.println("Укажите отца");
+        String father = scanner.nextLine();
+        System.out.println("Укажите мать");
+        String mother = scanner.nextLine();
+        presenter.addHuman(name, Gender.valueOf(gender), father, mother);
+        System.out.println(name + " добавлен");
     }
 
     public void findHuman() {
@@ -85,11 +90,11 @@ public class UserUI implements View {
         presenter.loadFile();
     }
 
-    public void addChild() {
+   /* public void addChild() {
         System.out.println("Укажите имя (parent)");
         String human = scanner.nextLine();
         System.out.println("Укажите ребенка (child)");
         String child = scanner.nextLine();
         presenter.addChild(human, child);
-    }
+    }*/
 }

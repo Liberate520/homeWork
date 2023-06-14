@@ -1,8 +1,8 @@
-package tree.familyTree;
+package tree.model.familyTree;
 
-import tree.familyTree.comparators.HumanComparatorByChildCount;
-import tree.familyTree.comparators.HumanComparatorByName;
-import tree.familyTree.iterators.HumanIterator;
+import tree.model.familyTree.comparators.HumanComparatorByChildCount;
+import tree.model.familyTree.comparators.HumanComparatorByName;
+import tree.model.familyTree.iterators.HumanIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
