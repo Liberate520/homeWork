@@ -20,8 +20,8 @@ public class Presenter implements Serializable {
         view.print(service.getInfoHuman());
     }
 
-    public void addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate){
-        service.addHuman(firstName, lastName, gender, birthDate);
+    public void addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother){
+        service.addHuman(firstName, lastName, gender, birthDate, deathDate, father, mother);
     }
     
     public void saveFile() {
