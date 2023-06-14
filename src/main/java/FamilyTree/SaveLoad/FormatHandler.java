@@ -1,4 +1,4 @@
-package FamilyTree;
+package FamilyTree.SaveLoad;
 
 public interface FormatHandler {
     void save(Object obj, String file);

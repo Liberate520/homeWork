@@ -1,8 +1,12 @@
 package FamilyTree;
 
+import FamilyTree.Comparator.HumanComparatorByBirthdate;
+import FamilyTree.Comparator.HumanComparatorByName;
+import FamilyTree.Human.Human;
+import FamilyTree.Human.HumanIterator;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 

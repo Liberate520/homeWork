@@ -1,11 +1,15 @@
 package FamilyTree;
 
+import FamilyTree.Human.Human;
+import FamilyTree.Human.Human.Gender;
+import FamilyTree.SaveLoad.FileHandler;
+
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
-        String file = "src/main/java/FamilyTree/family.sav";
+        String file = "src/main/java/FamilyTree/SaveLoad/family.sav";
         FileHandler fl = new FileHandler();
 
 //        FamilyTree family = (FamilyTree) fl.load(file);

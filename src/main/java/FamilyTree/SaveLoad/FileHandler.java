@@ -1,8 +1,8 @@
-package FamilyTree;
+package FamilyTree.SaveLoad;
 
 import java.io.*;
 
-public class FileHandler implements FormatHandler{
+public class FileHandler implements FormatHandler {
     @Override
     public void save(Object obj, String file) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))){

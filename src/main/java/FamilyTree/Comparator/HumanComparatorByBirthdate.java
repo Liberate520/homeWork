@@ -1,6 +1,7 @@
-package FamilyTree;
+package FamilyTree.Comparator;
 
-import java.time.LocalDate;
+import FamilyTree.Human.Human;
+
 import java.util.Comparator;
 
 public class HumanComparatorByBirthdate implements Comparator<Human> {
