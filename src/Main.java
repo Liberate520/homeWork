@@ -1,31 +1,31 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Tree tree = new Tree();
+        TreeService Service = new TreeService("SampleFree.txt");
+        //Tree tree = (Tree) FH.loadFile();
 
-        Person prs_1 = new Person("Иванов", "Семён", "Матвеевич", "М");
-        prs_1.setDateOfBirth(LocalDate.of(1984,10,23));
-        tree.add(prs_1);
+        //Person prs_1 = new Person("Иванов", "Семён", "Матвеевич", "М");
+        Service.addPerson("Иванов", "Семён", "Матвеевич", "М", LocalDate.of(1990,10,23));
+        Service.addPerson("Петрова", "Анна", "Андреевна", "F", LocalDate.of(1993,3,20));
+        Service.addPerson("Абрамова", "Марина", "Семёновна", "F", LocalDate.of(2013,7,10));
 
-        Person prs_2 = new Person("Иванова", "Анна", "Андреевна", "F");
-        prs_2.setDateOfBirth(LocalDate.of(1993,3,20));
-        tree.add(prs_2);
+        //prs_3.setFather(prs_1);
+        //prs_3.setMother(prs_2);
 
-        Person prs_3 = new Person("Иванова", "Марина", "Семёновна", "F");
-        prs_3.setDateOfBirth(LocalDate.of(2013,7,10));
-        tree.add(prs_3);
-        prs_3.setFather(prs_1);
-        prs_3.setMother(prs_2);
+        //prs_1.showChildren();
+        //prs_2.showChildren();
 
-        prs_1.showChildren();
-        prs_2.showChildren();
+        System.out.println(Service.getTreeInfo());
+        System.out.println(Service.getPersonsInfo());
 
-        System.out.println(tree.getTreeInfo());
+        Service.sortByName();
+        System.out.println(Service.getPersonsInfo());
 
-        FileHandler FH = new FileHandler("SampleFree.txt");
-        FH.saveFile(tree);
+        Service.sortByAge();
+        System.out.println(Service.getPersonsInfo());
 
-        FH.loadFile();
+        //FH.saveFile((Serializable) tree);
     }
 }

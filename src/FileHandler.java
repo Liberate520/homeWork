@@ -1,19 +1,20 @@
 import java.io.*;
 
-public class FileHandler implements Serializable {
-
+public class FileHandler implements Writable{
     private String path;
 
     public FileHandler(String path) {
         this.path = path;
     }
 
-    public void saveFile(Tree tree) {
+    public boolean saveFile(Serializable serializable) {
         try (FileOutputStream fos = new FileOutputStream(path);
              ObjectOutputStream out = new ObjectOutputStream(fos)) {
-            out.writeObject(tree);
+            out.writeObject(serializable);
+            return true;
         } catch (IOException e) {
             System.out.println("Export error");
+            return false;
         }
     }
 
@@ -22,8 +23,8 @@ public class FileHandler implements Serializable {
              ObjectInputStream ops = new ObjectInputStream(fis)) {
             return (Tree) ops.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Нет");
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

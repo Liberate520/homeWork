@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
+    int id;
     private String surname;
     private String firstName;
     private String middleName;
@@ -16,11 +17,13 @@ public class Person implements Serializable {
     private Person mother;
     private List<Person> children;
 
-    public Person(String surname, String firstName, String middleName, String sex){
+    public Person(String surname, String firstName, String middleName, String sex, LocalDate dateOfBirth, int id){
         this.surname = surname;
         this.firstName = firstName;
         this.middleName = middleName;
         this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
+        this.id = id;
         this.father = null;
         this.mother = null;
         this.dateOfDeath = null;
@@ -94,6 +97,23 @@ public class Person implements Serializable {
         } else {
             System.out.printf("%s не имеет детей", this.getFullName());
         }
+
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return surname.compareTo(o.surname);
+    }
+
+    public String toString(){
+        return "Person " +
+                "id=" + id + " " +
+                "Name: " + this.surname + " " + this.firstName + " " + this.middleName +
+                " " + this.getAge() + " лет";
 
     }
 }
