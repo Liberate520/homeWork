@@ -1,7 +1,9 @@
 package FamilyTree;
 
+import FamilyTree.Family.FamilyItem;
+import FamilyTree.Family.FamilyTree;
 import FamilyTree.Human.Human;
-import FamilyTree.Human.Human.Gender;
+import FamilyTree.Human.Gender;
 import FamilyTree.SaveLoad.FileHandler;
 
 import java.time.LocalDate;
@@ -24,7 +26,7 @@ public class Main {
         olga.setMother(anna);
         tamara.setMother(anna);
 
-        FamilyTree family = new FamilyTree();
+        FamilyTree<FamilyItem> family = new FamilyTree<>();
         family.addToFamily(olga);
         family.addToFamily(tamara);
         family.addToFamily(anna);

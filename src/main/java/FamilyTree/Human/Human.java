@@ -1,13 +1,13 @@
 package FamilyTree.Human;
 
-import FamilyTree.Human.Human.Gender;
+import FamilyTree.Family.FamilyItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, FamilyItem {
     private String name;
     private String surname;
     private LocalDate birthdate;
@@ -30,11 +30,11 @@ public class Human implements Serializable, Comparable<Human> {
     public void addChild(Human children) {
         this.children.add(children);
     }
-
+    @Override
     public LocalDate getBirthdate() {
         return birthdate;
     }
-
+    @Override
     public String getName() {
         return name;
     }
