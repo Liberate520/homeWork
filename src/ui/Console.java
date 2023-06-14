@@ -93,12 +93,10 @@ public class Console implements View {
         this.presenter = presenter;
     }
 
-    @Override
     public void saveFile() {
         presenter.saveFile();
     }
 
-    @Override
     public void loadFile() {
         presenter.loadFile();
     }
