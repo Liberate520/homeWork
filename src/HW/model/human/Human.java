@@ -1,7 +1,7 @@
-package HW.human;
+package HW.model.human;
 
-import HW.human.enumerate.Sex;
-import HW.member.Member;
+import HW.model.human.enumerate.Sex;
+import HW.model.member.Member;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,6 +25,9 @@ public class Human implements Serializable, Member {
     }
     public Human (String name, String surname, Sex sex, LocalDate dateOfBirth, Human father, Human mother) {
         this (name, surname, sex, dateOfBirth, null, father, mother, new ArrayList<>());
+    }
+    public Human(String name, String surname) {
+        this (name, surname, null, null, null, null, null, new ArrayList<>());
     }
     public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother, List<Member> children) {
         this.name = name;

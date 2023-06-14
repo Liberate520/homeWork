@@ -1,6 +1,6 @@
-package HW.service;
+package HW.model.dataManager;
 
-import HW.tree.FamilyTree;
+import HW.model.tree.FamilyTree;
 
 import java.io.*;
 

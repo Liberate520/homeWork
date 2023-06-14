@@ -1,6 +1,6 @@
-package HW.tree.comparators;
+package HW.model.tree.comparators;
 
-import HW.member.Member;
+import HW.model.member.Member;
 
 import java.util.Comparator;
 

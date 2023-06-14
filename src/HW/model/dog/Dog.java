@@ -1,7 +1,7 @@
-package HW.dog;
+package HW.model.dog;
 
-import HW.human.enumerate.Sex;
-import HW.member.Member;
+import HW.model.human.enumerate.Sex;
+import HW.model.member.Member;
 
 import java.io.Serializable;
 import java.time.LocalDate;

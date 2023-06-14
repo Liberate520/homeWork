@@ -1,4 +1,4 @@
-package HW.member;
+package HW.model.member;
 
 
 import java.time.LocalDate;

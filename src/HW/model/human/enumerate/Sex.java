@@ -1,4 +1,4 @@
-package HW.human.enumerate;
+package HW.model.human.enumerate;
 
 public enum Sex {
     M,//("male"),

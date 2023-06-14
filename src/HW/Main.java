@@ -1,16 +1,17 @@
 package HW;
 
-import HW.dog.Dog;
-import HW.human.Human;
-import HW.service.DataSaver;
-import HW.service.UpDownLoader;
-import HW.tree.FamilyTree;
+import HW.model.dog.Dog;
+import HW.model.human.Human;
+import HW.model.dataManager.DataSaver;
+import HW.model.dataManager.UpDownLoader;
+import HW.model.tree.FamilyTree;
+import HW.view.ConsoleUI;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static HW.human.enumerate.Sex.F;
-import static HW.human.enumerate.Sex.M;
+import static HW.model.human.enumerate.Sex.F;
+import static HW.model.human.enumerate.Sex.M;
 
 
 public class Main {
@@ -45,27 +46,27 @@ public class Main {
         tree.addAsChild(new Human("Ирина", "Иванова", F, LocalDate.of(2018, 7, 5), tree.findPerson("Игорь", "Иванов"), null));
         tree.addAsChild(new Human("Наталья", "Иванова", F, LocalDate.of(2018, 8, 5), tree.findPerson("Николай", "Иванов"), null));
 
-        System.out.println(tree.findPerson("Василий", "Иванов"));
-        System.out.println();
-        System.out.println(tree.findPerson("Василий", "Иванов").getChildren());
+//        System.out.println(tree.findPerson("Василий", "Иванов"));
+//        System.out.println();
+//        System.out.println(tree.findPerson("Василий", "Иванов").getChildren());
 
         UpDownLoader file = new DataSaver();
         tree.saver(file);
         FamilyTree newTree = FamilyTree.recovery(file);
 
-        tree.printHList();
-        System.out.println();
-
-        tree.sortByName();
-        tree.printHList();
-        System.out.println();
-
-        tree.sortByDateOfBirth();
-        tree.printHList();
-        System.out.println();
-
-        tree.sortByNameLength();
-        tree.printHList();
+//        tree.printHList();
+//        System.out.println();
+//
+//        tree.sortByName();
+//        tree.printHList();
+//        System.out.println();
+//
+//        tree.sortByDateOfBirth();
+//        tree.printHList();
+//        System.out.println();
+//
+//        tree.sortByNameLength();
+//        tree.printHList();
 
 
         FamilyTree<Dog> treeDog = new FamilyTree<>();
@@ -76,13 +77,17 @@ public class Main {
         treeDog.addAsChild(new Dog("Лесси", "Сноу", F, LocalDate.of(2018, 7, 5), treeDog.findPerson("Бетховен", "Сноу"), null));
         treeDog.addAsChild(new Dog("Жучка", "Сноу", F, LocalDate.of(2018, 8, 5), treeDog.findPerson("Мухтар", "Сноу"), null));
 
-        System.out.println();
-        System.out.println(treeDog.findPerson("Бродяга", "Сноу"));
-        System.out.println();
-        System.out.println(treeDog.findPerson("Бродяга", "Сноу").getChildren());
+//        System.out.println();
+//        System.out.println(treeDog.findPerson("Бродяга", "Сноу"));
+//        System.out.println();
+//        System.out.println(treeDog.findPerson("Бродяга", "Сноу").getChildren());
 
 //        UpDownLoader fileDog = new DataSaver();
 //        treeDog.saver(fileDog);
 //        FamilyTree newTreeDog = FamilyTree.recovery(fileDog);
+
+        ConsoleUI consoleUI = new ConsoleUI(tree);
+        consoleUI.start();
     }
+
 }

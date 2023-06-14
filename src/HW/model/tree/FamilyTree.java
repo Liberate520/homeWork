@@ -1,11 +1,10 @@
-package HW.tree;
+package HW.model.tree;
 
-import HW.human.Human;
-import HW.member.Member;
-import HW.tree.comparators.SortByDateOfBirth;
-import HW.tree.comparators.SortByName;
-import HW.tree.comparators.SortByNameLength;
-import HW.service.UpDownLoader;
+import HW.model.member.Member;
+import HW.model.tree.comparators.SortByDateOfBirth;
+import HW.model.tree.comparators.SortByName;
+import HW.model.tree.comparators.SortByNameLength;
+import HW.model.dataManager.UpDownLoader;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -74,4 +73,9 @@ public class FamilyTree <T extends Member> implements Serializable, Iterable<T> 
     public void sortByNameLength() {
         humanList.sort(new SortByNameLength());
     }
+
+    public List<T> getAllNotes() {
+        return humanList;
+    }
+
 }
