@@ -76,7 +76,7 @@ public class Console implements View {
         System.out.println("Введите дату рождения в формате 'дд.мм.гггг'");
         String input = scanner.nextLine();
         LocalDate birthDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        presenter.addHuman(firstName, lastName, gender, birthDate);
+        presenter.addHuman(firstName, lastName, gender, birthDate, null, null, null);
     }
     
     public void finish() {
