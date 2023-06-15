@@ -1,18 +1,28 @@
 import java.io.*;
-import java.util.Base64;
-import java.util.List;
 
-public class Save implements Serializable, FileOperations {
-    public void writeExternal(Human human, String filePath) throws IOException {
-        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));
-        outputStream.writeObject(human);
-        outputStream.close();
+
+public class Save implements FileOperations {
+    @Override
+    public boolean write(Serializable serializable, String filePath)  {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
+            objectOutputStream.writeObject(serializable);
+            System.out.println("Запись успешна произведена");
+            System.out.println();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
-    public Human readExternal(String filePath) throws IOException, ClassNotFoundException {
-        ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath));
-        Human human = (Human) inputStream.readObject();
-        inputStream.close();
-        return human;
+    @Override
+    public Object read(String filePath) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))){
+            return objectInputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
