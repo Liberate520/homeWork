@@ -3,56 +3,73 @@
 
 import java.time.LocalDate;
 
+import geoTree.GeoTree;
+import person.Person;
+
 public class Main {
     public static void main(String[] args) {
-        // GeoTree familyTree = new GeoTree();
+        GeoTree familyTree = new GeoTree();
 
 // =================================ЗАНЕСЕНИЕ ИНФОРМАЦИИ О ЛИЧНОСТЯХ===============================
-        // familyTree.addPerson(new Person(
-        //     "Eger", 
-        //     "Akerman", 
-        //     "Grigoriev", 
-        //     LocalDate.of(1290, 10, 9))
-        // );
+        familyTree.addPerson(new Person(
+            "bEger", 
+            "Akerman", 
+            "Grigoriev", 
+            LocalDate.of(1290, 10, 9))
+        );
 
-        // familyTree.addPerson(new Person(
-        //     "Mikasa", 
-        //     "Akerman", 
-        //     "Titanovich", 
-        //     LocalDate.of(1293, 1, 20))
-        // );
+        familyTree.addPerson(new Person(
+            "aMikasa", 
+            "Akerman", 
+            "Titanovich", 
+            LocalDate.of(1293, 1, 20))
+        );
 
-        // familyTree.addPerson(new Person(
-        //     "Mik", 
-        //     "Akerman", 
-        //     "Egerevich", 
-        //     LocalDate.of(1319, 5, 7),
-        //     familyTree.getByName("Eger", "Akerman", "Grigoriev"),
-        //     familyTree.getByName("Mikasa", "Akerman", "Titanovich"))
-        // );
+        familyTree.addPerson(new Person(
+            "dMik", 
+            "Akerman", 
+            "Egerevich", 
+            LocalDate.of(1321, 5, 7),
+            familyTree.getByName("bEger", "Akerman", "Grigoriev"),
+            familyTree.getByName("aMikasa", "Akerman", "Titanovich"))
+        );
 
-        // familyTree.addPerson(new Person(
-        //     "Kris", 
-        //     "Akerman", 
-        //     "Egerevich", 
-        //     LocalDate.of(1321, 8, 2),
-        //     familyTree.getByName("Eger", "Akerman", "Grigoriev"),
-        //     familyTree.getByName("Mikasa", "Akerman", "Titanovich"))
-        // );
+        familyTree.addPerson(new Person(
+            "cKris", 
+            "Akerman", 
+            "Egerevich", 
+            LocalDate.of(1319, 8, 2),
+            familyTree.getByName("bEger", "Akerman", "Grigoriev"),
+            familyTree.getByName("aMikasa", "Akerman", "Titanovich"))
+        );
 // ================================================================================================
 
 // ======================================ЗАПИСЬ ДАННЫХ В ФАЙЛ======================================
-        String filePath = "src/tree.txt";
+        // String filePath = "src/data/tree.txt";
 
-        Writable writable = new FileHandler();
+        // Writable writable = new FileHandler();
 
         // writable.write(familyTree, filePath);
 // ================================================================================================
 
 // ===================================ИЗВЛЕЧЕНИЕ ДАННЫХ ИЗ ФАЙЛА===================================
-        GeoTree familyTree = (GeoTree) writable.read(filePath);
+        // GeoTree familyTree = (GeoTree) writable.read(filePath);
 // ================================================================================================
 
         System.out.println(familyTree.getInfo());
+        
+// ============================================СОРТИРОВКА ДАННЫХ===================================
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>sortName<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        
+        familyTree.sortByName();
+        System.out.println(familyTree.getInfo());
+
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>sortDateOfBirth<<<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+        familyTree.sortByDateOfBirth();
+        System.out.println(familyTree.getInfo());
+// ================================================================================================
     }
 }

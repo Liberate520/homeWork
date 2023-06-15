@@ -1,8 +1,14 @@
+package geoTree;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class GeoTree implements Serializable{
+import geoTree.comparators.PersonComparatorByDateOfBirth;
+import geoTree.comparators.PersonComparatorByName;
+import person.Person;
+
+public class GeoTree implements Serializable, Iterable<Person>{
     private List<Person> personList;
 
     public GeoTree() {
@@ -79,5 +85,24 @@ public class GeoTree implements Serializable{
         }
         return sInfo.toString();
     }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(personList)/*null*/;
+    }
+
+    public void sortByName(){
+        // Collections.sort(personList);
+        personList.sort(new PersonComparatorByName());
+    }
+
+    public void sortByDateOfBirth(){
+        personList.sort(new PersonComparatorByDateOfBirth());
+    }
+
+    // @Override
+    // public Iterator<Person> iterator(){
+    //     return personList.iterator();
+    // }
 
 }

@@ -1,10 +1,11 @@
+package geoTree.workGeoTreeData;
 import java.io.Serializable;
 /**
  * Writable
  */
 public interface Writable {
     /**
-     * Метод для записи в файл данных
+     * Метод для записи данных в файл 
      * @param serializable - объект для записи
      * @param filePath     - путь к файлу, в который сделать запись
      * @return

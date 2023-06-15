@@ -1,9 +1,10 @@
+package person;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable{
+public class Person implements Serializable, Comparable<Person>{
 
     private String name;
     private String surname;
@@ -147,6 +148,9 @@ public class Person implements Serializable{
         info.append("отчество: ");
         info.append(patronymic);
         info.append("\n");
+        info.append("дата рождения: ");
+        info.append(dateOfBirth);
+        info.append("\n");
         info.append(getMotherInfo());
         info.append("\n");
         info.append(getFatherInfo());
@@ -212,10 +216,6 @@ public class Person implements Serializable{
         return stM.toString();
     }
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!ПРОБЛЕМНОЕ МЕСТО, НАДО УТОЧНИТЬ!!!!!!!!!!!!!!!
-    // iChil.append(children.get(0).getName()); - проблемная строка сложно понять,
-    // как записать занесение данных имени, фамилии, отчества ребенка.
-
     /**
      * Сбор данных о наследниках и возвращение их строкой
      * 
@@ -248,8 +248,6 @@ public class Person implements Serializable{
         return iChil.toString();
     }
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!ПРОБЛЕМНОЕ МЕСТО, НАДО УТОЧНИТЬ!!!!!!!!!!!!!!!
-
     /**
      * Переопределение метода equals
      */
@@ -275,5 +273,10 @@ public class Person implements Serializable{
         return ((person.getName().equals(getName())) &&
                 (person.getSurname().equals(getSurname())) &&
                 (person.getPatronymic().equals(getPatronymic())));
+    }
+
+    @Override
+    public int compareTo(Person o){
+        return name.compareTo(o.name);
     }
 }
