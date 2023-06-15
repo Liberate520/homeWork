@@ -94,7 +94,7 @@ public class Human implements Serializable, FamilyMember {
         return builder.toString();
     }
 
-    public String GetShortInfo() {
+    public String getShortInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         return name + " " +
                 "(" + formatter.format(birthday) + ")" +

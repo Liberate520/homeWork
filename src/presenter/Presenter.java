@@ -7,7 +7,7 @@ import models.repository.BinaryKeeper;
 
 public class Presenter {
 
-    Service service;
+    private Service service;
 
     public Presenter() {
         service = new Service(new BinaryKeeper("family.bin"));

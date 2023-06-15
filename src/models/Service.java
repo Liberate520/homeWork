@@ -125,7 +125,7 @@ public class Service {
             builder.append("\t|> ");
             builder.append(i + 1);
             builder.append(". ");
-            builder.append(members.get(i).GetShortInfo());
+            builder.append(members.get(i).getShortInfo());
             builder.append("\n");
         }
         return builder.toString();
