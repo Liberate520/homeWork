@@ -1,6 +1,6 @@
-package FamilyTree.Comparator;
+package FamilyTree.model.Comparator;
 
-import FamilyTree.Family.FamilyItem;
+import FamilyTree.model.Family.FamilyItem;
 import java.util.Comparator;
 
 public class HumanComparatorByName<T extends FamilyItem> implements Comparator<T> {

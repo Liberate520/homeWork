@@ -1,4 +1,4 @@
-package FamilyTree.SaveLoad;
+package FamilyTree.model.SaveLoad;
 
 import java.io.*;
 
