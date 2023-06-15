@@ -104,6 +104,10 @@ public class Person implements Serializable, Comparable<Person> {
         return surname;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public int compareTo(Person o) {
         return surname.compareTo(o.surname);

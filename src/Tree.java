@@ -39,6 +39,15 @@ public class Tree implements Serializable, Iterable<Person> {
         return null;
     }
 
+    public Person getById(int id){
+        for (Person person : personList){
+            if (person.getId() == id){
+                return person;
+            }
+        }
+        return null;
+    }
+
     public String getTreeInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
@@ -57,7 +66,6 @@ public class Tree implements Serializable, Iterable<Person> {
     }
 
     public void sortByName(){
-       // Collections.sort(personList, new PersonComparatorByName());
         personList.sort(new PersonComparatorByName());
     }
 
