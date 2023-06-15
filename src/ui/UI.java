@@ -1,8 +1,5 @@
 package ui;
 
-import model.family.Family;
-import model.human.Human;
-
 public interface UI {
     void print(String text);
     void start();
@@ -14,7 +11,7 @@ public interface UI {
     void gotoFamily();
     void saveToFile();
     void loadFromFile();
-    void showPeopleFromFamily(Family<Human> family);
-    void addHumanToFamily(Family<Human> family);
-    void addConnection(Family<Human> family);
+    void showPeopleFromFamily(String familyID);
+    void addHumanToFamily(String familyID);
+    void addConnection(String familyID);
 }

@@ -1,15 +1,13 @@
 package ui.menu.command;
 
-import model.family.Family;
-import model.human.Human;
 import ui.UI;
 
 public class ShowPeople implements Command {
     private UI view;
-    private Family<Human> family;
-    public ShowPeople(UI view, Family<Human> family) {
+    private String familyID;
+    public ShowPeople(UI view, String familyID) {
         this.view = view;
-        this.family = family;
+        this.familyID = familyID;
     }
 
     @Override
@@ -19,6 +17,6 @@ public class ShowPeople implements Command {
 
     @Override
     public void exec() {
-        view.showPeopleFromFamily(family);
+        view.showPeopleFromFamily(familyID);
     }
 }

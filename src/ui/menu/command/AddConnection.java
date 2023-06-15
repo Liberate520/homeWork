@@ -1,15 +1,13 @@
 package ui.menu.command;
 
-import model.family.Family;
-import model.human.Human;
 import ui.UI;
 
 public class AddConnection implements Command {
     private UI view;
-    private Family<Human> family;
-    public AddConnection(UI view, Family<Human> family) {
+    private String familyID;
+    public AddConnection(UI view, String familyID) {
         this.view = view;
-        this.family = family;
+        this.familyID = familyID;
     }
 
     @Override
@@ -19,6 +17,6 @@ public class AddConnection implements Command {
 
     @Override
     public void exec() {
-        view.addConnection(family);
+        view.addConnection(familyID);
     }
 }

@@ -1,7 +1,5 @@
 package ui;
 
-import model.family.Family;
-import model.human.Human;
 import presenter.Presenter;
 import ui.menu.FamilyMenu;
 import ui.menu.MainMenu;
@@ -87,7 +85,7 @@ public class Console implements UI{
     }
 
     public void showFamilyTrees() {
-        presenter.showFamilyTrees();
+        presenter.showFamilyTreeStr();
     }
     public void listFamilies() {
         presenter.listFamilies();
@@ -95,15 +93,16 @@ public class Console implements UI{
     public void addFamily() {
         print("Введите имя новой семьи");
         String name = scanner.nextLine();
-        presenter.addFamily(name);
+        if (presenter.addFamily(name)) print(String.format("Семья '%s' создана\n", name));
+        else print("Семья с таким именем уже существует");
     }
     public void gotoFamily() {
         print("Введите имя семьи для поиска");
         String name = scanner.nextLine();
-        Family<Human> family = presenter.getFamily(name);
-        if (family == null) print("Семья с таким именем не найдена");
+        String familyID = presenter.searchFamily(name);
+        if (familyID == null) print("Семья с таким именем не найдена");
         else {
-            Menu familyMenu = new FamilyMenu(this, family);
+            Menu familyMenu = new FamilyMenu(this, familyID);
             enterMenu(familyMenu);
         }
     }
@@ -115,7 +114,7 @@ public class Console implements UI{
         print("Или пустую строку для использования рекомендованного пути");
         String path = scanner.nextLine();
         if (presenter.saveToFile(path)) print("Успешное сохранение файла");
-        else print("Ошибка при сохранении файла");
+        else print("Ошибка при сохранении файла, проверьте логи приложения для подробностей");
     }
     public void loadFromFile() {
         String lastFilePath = presenter.getLastFilepath();
@@ -125,15 +124,15 @@ public class Console implements UI{
         String path = scanner.nextLine();
         if (path.isEmpty()) path = lastFilePath;
         if (presenter.loadFromFile(path)) print("Успешная загрузка файла");
-        else print("Ошибка при загрузке файла");
+        else print("Ошибка при загрузке файла, проверьте логи приложения для подробностей");
     }
-    public void showPeopleFromFamily(Family<Human> family) {
-        presenter.listPeopleFromFamily(family);
+    public void showPeopleFromFamily(String familyID) {
+        presenter.showPeopleFromFamily(familyID);
     }
     private boolean isDateFormatValid(String dateString) {
         return dateString.matches("^\\d{4}-\\d{2}-\\d{2}$") || dateString.isEmpty();
     }
-    public void addHumanToFamily(Family<Human> family) {
+    public void addHumanToFamily(String familyID) {
         print("Введите имя человека");
         String name = scanner.nextLine();
         List<String> genderNames = presenter.getGenderNames();
@@ -157,19 +156,24 @@ public class Console implements UI{
             print("Неизвестный формат даты");
             return;
         }
-        presenter.addHuman(family, name, genderName, birthDateString, deathDateString);
+        if (presenter.addHuman(familyID, name, genderName, birthDateString, deathDateString))
+            print("Человек добавлен");
+        else print("Человек с таким именем уже существует в этой семье");
     }
-    public void addConnection(Family<Human> family) {
+    public void addConnection(String familyID) {
         print("Введите имя первого человека");
         String firstName = scanner.nextLine();
-        Human firstHuman = presenter.searchHumanByNameInFamily(firstName, family);
+//        String firstHuman = presenter.searchHuman(firstName);
+        String firstHuman = presenter.searchHumanInFamily(familyID, firstName);
+//        String firstHuman = presenter.searchHumanByNameInFamily(firstName, familyID);
         if (firstHuman == null) {
             print("Человек с таким именем не найден в текущей семье");
             return;
         }
         print("Введите имя второго человека");
         String secondName = scanner.nextLine();
-        Human secondHuman = presenter.searchHumanByNameInFamily(secondName, family);
+        String secondHuman = presenter.searchHuman(secondName);
+//        String secondHuman = presenter.searchHumanByNameInFamily(secondName, familyID);
         if (secondHuman == null) {
             print("Человек с таким именем не найден в текущей семье");
             return;
@@ -181,6 +185,7 @@ public class Console implements UI{
             print("Неизвестный название связи");
             return;
         }
-        presenter.addConnection(firstHuman, connectionName, secondHuman);
+        if (presenter.addConnection(firstHuman, connectionName, secondHuman)) print("Связь создана");
+        else print("Не удалось создать связь");
     }
 }

@@ -1,15 +1,13 @@
 package ui.menu.command;
 
-import model.family.Family;
-import model.human.Human;
 import ui.UI;
 
 public class AddHuman implements Command {
     private UI view;
-    private Family<Human> family;
-    public AddHuman(UI view, Family<Human> family) {
+    private String familyID;
+    public AddHuman(UI view, String familyID) {
         this.view = view;
-        this.family = family;
+        this.familyID = familyID;
     }
 
     @Override
@@ -19,6 +17,6 @@ public class AddHuman implements Command {
 
     @Override
     public void exec() {
-        view.addHumanToFamily(family);
+        view.addHumanToFamily(familyID);
     }
 }

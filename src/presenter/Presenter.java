@@ -1,15 +1,7 @@
 package presenter;
 
 import model.HumanService;
-import model.family.Family;
-import model.human.Human;
-import model.member.Connection;
-import model.member.Gender;
 import ui.UI;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Presenter {
@@ -21,42 +13,57 @@ public class Presenter {
         model = new HumanService();
     }
 
-    public void showFamilyTrees() {
-        StringBuilder result = new StringBuilder();
-        List<Family<Human>> allFamilies = model.getRecords();
-        for (Family<Human> family:allFamilies) {
-            result.append(String.format("Семья '%s':\n", family.getName()));
-            int lastLen = result.length();
-            for (Human human : family) {
-                result.append(String.format("\t%s\n", human));
-            }
-            if (result.length() == lastLen) result.append(String.format("\t%s\n", view.noData()));
-        }
-        if (result.length() == 0) view.print(view.noData());
-        else view.print(result.toString());
+    private List<String> getFamilyMemberIDs(String familyID){
+        return model.getFamilyMemberIDs(familyID);
     }
-    public void listFamilies() {
-        StringBuilder result = new StringBuilder();
-        List<Family<Human>> allFamilies = model.getRecords();
-        for (Family<Human> family:allFamilies) {
-            result.append(String.format("%s\n", family.getName()));
-        }
-        if (result.length() == 0) view.print(view.noData());
-        else view.print(result.toString());
+
+    private String getFamilyString(String familyId){
+        return model.getFamilyName(familyId);
     }
-    public void addFamily(String name) {
-        if (model.searchFamily(name) != null) view.print("Семья с таким именем уже существует");
+    private String getHumanString(String familyId, String humanID){
+        return model.getHumanInfo(familyId, humanID);
+    }
+
+    public void showFamilyTreeStr() {
+        List<String> familiesIDs = model.getFamiliesIDs();
+        if (familiesIDs == null || familiesIDs.size() == 0) view.print(view.noData());
         else {
-            model.addFamily(name);
-            view.print(String.format("Семья '%s' создана\n", name));
+            StringBuilder result = new StringBuilder();
+            for (String familyID : familiesIDs) {
+                result.append("Семья '").append(getFamilyString(familyID)).append("':\n");
+                List<String> familyMemberIDs = getFamilyMemberIDs(familyID);
+                if (familyMemberIDs == null || familyMemberIDs.size() == 0){
+                    result.append("\t").append(view.noData()).append("\n");
+                } else {
+                    for (String humanID : familyMemberIDs) {
+                        result.append("\t").append(getHumanString(familyID, humanID)).append("\n");
+                    }
+                }
+            }
+            view.print(result.toString());
         }
     }
-    public Family<Human> getFamily(String name) {
+
+    public void listFamilies() {
+        List<String> familiesIDs = model.getFamiliesIDs();
+        if (familiesIDs == null || familiesIDs.size() == 0) view.print(view.noData());
+        else {
+            StringBuilder result = new StringBuilder();
+            for (String familyID : familiesIDs) {
+                result.append(getFamilyString(familyID)).append("\n");
+            }
+            view.print(result.toString());
+        }
+    }
+
+    public boolean addFamily(String name) {
+        return model.addFamily(name);
+    }
+
+    public String searchFamily(String name) {
         return model.searchFamily(name);
     }
-    public String getLastFilepath() {
-        return model.getPathToFile();
-    }
+
     public boolean saveToFile(String path) {
         if (path.isEmpty()) path = null;
         return model.save(path);
@@ -65,61 +72,45 @@ public class Presenter {
         if (path.isEmpty()) path = null;
         return model.load(path);
     }
-    public void listPeopleFromFamily(Family<Human> family) {
-        model.getFamilyMembers(family);
-        StringBuilder result = new StringBuilder();
-        List<Human> familyMembers = model.getFamilyMembers(family);
-        for (Human member:familyMembers) {
-            result.append(String.format("%s\n", member));
-        }
-        if (result.length() == 0) view.print(view.noData());
-        else view.print(result.toString());
-    }
-    public List<String> getGenderNames() {
-        List<String> result = new ArrayList<>();
-        for (Gender gender : model.getGenders()) {
-            result.add(gender.toString());
-        }
-        return result;
-    }
-    private Calendar parseDate(String dateString) {
-        if (dateString.isEmpty()) return null;
-        String[] dateStrings = dateString.split("-");
-        return new GregorianCalendar(Integer.parseInt(dateStrings[0]),
-                Integer.parseInt(dateStrings[1]), Integer.parseInt(dateStrings[2]));
-    }
-    public void addHuman(Family<Human> family, String name, String genderName, String birthDateString, String deathDateString) {
-        Human globalHuman = model.globalSearchHuman(name);
-        Human human;
-        if (globalHuman != null) {
-            human = model.searchHumanInFamily(family, name);
-            if (human != null) view.print("Человек с таким именем уже существует в этой семье");
-            else {
-                model.addToFamily(globalHuman, family);
-                view.print("Человек с таким именем найден вне этой семьи и добавлен в состав семьи");
-            }
-        }
-        else {
-            Calendar birthDate = parseDate(birthDateString);
-            Calendar deathDate = parseDate(deathDateString);
-            human = new Human(name, Gender.fromString(genderName), birthDate, deathDate);
-            model.addToFamily(human, family);
-            view.print(String.format("Человек '%s' создан\n", name));
-        }
-    }
-    public List<String> getConnectionNames() {
-        List<String> result = new ArrayList<>();
-        for (Connection connection : model.getConnections()) {
-            result.add(connection.toString());
-        }
-        return result;
-    }
-    public Human searchHumanByNameInFamily(String name, Family<Human> family) {
-        return model.searchHumanInFamily(family, name);
+
+    public String getLastFilepath() {
+        return model.getPathToFile();
     }
 
-    public void addConnection(Human h1, String connectionName, Human h2) {
-        model.addConnection(h1, Connection.fromString(connectionName), h2);
-        view.print("Связь создана");
+    public void showPeopleFromFamily(String familyID) {
+        StringBuilder result = new StringBuilder();
+        List<String> familyMemberIDs = getFamilyMemberIDs(familyID);
+        if (familyMemberIDs == null || familyMemberIDs.size() == 0){
+            result.append(view.noData()).append("\n");
+        } else {
+            for (String humanID : familyMemberIDs) {
+                result.append(getHumanString(familyID, humanID)).append("\n");
+            }
+        }
+        view.print(result.toString());
+    }
+
+    public List<String> getGenderNames() {
+        return model.getGenderNames();
+    }
+
+    public boolean addHuman(String familyID, String name, String genderName, String birthDateString, String deathDateString) {
+        return model.addHuman(familyID, name, genderName, birthDateString, deathDateString);
+    }
+
+    public String searchHumanInFamily(String familyId, String name) {
+        return model.searchHuman(familyId, name);
+    }
+
+    public String searchHuman(String name) {
+        return model.searchHuman(name);
+    }
+
+    public List<String> getConnectionNames() {
+        return model.getConnectionNames();
+    }
+
+    public boolean addConnection(String firstHumanID, String connectionName, String secondHumanID) {
+        return model.addConnection(firstHumanID, connectionName, secondHumanID);
     }
 }
