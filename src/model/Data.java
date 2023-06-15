@@ -7,6 +7,11 @@ import model.tree.Tree;
 import java.time.LocalDate;
 
 public class Data {
+    public static Tree<Person> getData() {
+        Tree<Person> ft = Data.dataEntry();
+        return ft;
+    }
+
     public static Tree dataEntry() {
         Tree<Person> tree = new Tree<>();
         tree.addPerson(new Person("Татьяна", LocalDate.of(1951, 1, 10), Gender.Female));

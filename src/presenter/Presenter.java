@@ -1,6 +1,6 @@
 package presenter;
 
-import model.Service;
+import model.service.Service;
 import view.View;
 
 import java.io.IOException;
