@@ -2,44 +2,53 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Human implements Serializable {
     private static int humanIdCounter = 0;
     private int id;
     private String name;
     private String gender;
-    private String loner;
-    private LocalDate dateOfBirth;
-    private LocalDate deathDate;
     private Human father;
     private Human mother;
+//    private String loner;
+    private LocalDate dateOfBirth;
+    private LocalDate deathDate;
+
     private List<Human> children;
 
-    public Human(String name, String gender, LocalDate dateOfBirth, Human father, Human mother) {
+    public Human(String name, String gender, LocalDate dateOfBirth, LocalDate deathDate) {
+        this.id = humanIdCounter++;
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.deathDate = null;
+        this.children = new ArrayList<>();
+    }
+
+    public Human(String name, String gender, Human father, Human mother, LocalDate dateOfBirth, LocalDate deathDate) {
+        this.id = humanIdCounter++;
+        this.name = name;
+        this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.children = new ArrayList<>();
-        this.id = humanIdCounter++;
-    }
-
-    public Human(String name, String gender, LocalDate dateOfBirth) {
-        this(name, gender, dateOfBirth, null, null);
-    }
-
-    public Human(String loner){
-        this.loner = loner;
+        this.dateOfBirth = dateOfBirth;
+        this.deathDate = deathDate;
+        children = new ArrayList<>();
     }
 
     public Human() {
 
     }
 
+
+
     public String getName() {
         return name;
+    }
+
+    public String getGender(){
+        return gender;
     }
 
     public LocalDate getDateOfBirth() {
@@ -60,6 +69,15 @@ public class Human implements Serializable {
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+
+    }
+
+    public void setMother(Human mother){
+        this.mother = mother;
     }
 
     public List<Human> getParents() {
@@ -84,8 +102,77 @@ public class Human implements Serializable {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "Имя: " + name + ", пол: " + gender + ", Дата рождения: " + dateOfBirth + ", Дата смерти: " + deathDate + ", ";
+
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: ");
+        sb.append(name);
+        sb.append(", ");
+        sb.append("Дата рождения: ");
+        sb.append(dateOfBirth);
+        sb.append(", ");
+        sb.append("Дата смерти: ");
+        sb.append(deathDate);
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
+
     }
+
+    public String getMotherInfo(){
+        String res = "Мать: ";
+        if(mother != null){
+            res += mother.getName();
+        }
+        else{
+            res += "неизвестна";
+        }
+        return res;
+    }
+
+    public String getFatherInfo(){
+        String res = "Отец: ";
+        if(father != null){
+            res += father.getName();
+        }
+        else{
+            res += "неизвестен";
+        }
+        return res;
+    }
+
+    public String getChildrenInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append("Дети: ");
+        if(children.size() != 0){
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size() ; i++) {
+                res.append(" ,");
+                res.append(children.get(i).getName());
+
+            }
+
+        } else {
+            res.append("отсутствуют");
+        }
+        return res.toString();
+    }
+
+
+
+//    @Override
+//    public boolean equals(Objects obj){
+//        if (this == obj){
+//            return true;
+//        }
+//        if(!(obj instanceof Human)){
+//            return false;
+//        }
+//        Human human = (Human) obj;
+//        return human.getName().equals(getName());
+//    }
 }

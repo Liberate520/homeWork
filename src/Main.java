@@ -7,53 +7,40 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Tree tree = new Tree();
 
-        Human father = new Human("Иван","мужской", LocalDate.of(1987, 7, 20));
-        Human mother = new Human("Мария", "женский", LocalDate.of(1989, 5, 15));
-//        Human human = new Human("Игорь","мужской", LocalDate.of(1987, 7, 20));
-//        Human human = new Human("Наталья", "мужской", LocalDate.of(1989, 5, 15));
+        tree.add(new Human("Иван", "мужской", LocalDate.of(1987,07,15),null));
+        tree.add(new Human("Ирина", "женский", LocalDate.of(1990,05,11),null));
 
-        tree.addHuman(father);
-        tree.addHuman(mother);
-//        tree.addHuman(volodia);
-//        tree.addHuman(sergey);
+        tree.add(new Human("Василина", "женский", tree.findHumanName("Иван"), tree.findHumanName("Ирина"), LocalDate.of(2010,1,1), null));
+        tree.add(new Human("Коля", "мужской", tree.findHumanName("Иван"), tree.findHumanName("Ирина"), LocalDate.of(2012,2,2), null));
 
-        Human daughter = new Human("Василина", "женский", LocalDate.of(2015, 8, 11), father, mother);
-        Human son = new Human("Коля","мужской", LocalDate.of(2011, 1, 16), father, mother);
+        System.out.println(tree.getInfo());
 
-        tree.addHuman(daughter);
-        tree.addHuman(son);
+
+
 
 //        не получается сделать так чтобы можно было дозаписать
-        tree.writeExternal(father,"test.ser");
-        tree.writeExternal(mother, "test.ser");
-        tree.writeExternal(daughter, "test.ser");
-        tree.writeExternal(son, "test.ser");
-        System.out.println("Результат чтения: " + tree.readExternal("test.ser"));
-        System.out.println();
+//        tree.writeExternal(father,"test.ser");
+//        tree.writeExternal(mother, "test.ser");
+//        tree.writeExternal(daughter, "test.ser");
+//        tree.writeExternal(son, "test.ser");
+//        System.out.println("Результат чтения: " + tree.readExternal("test.ser"));
+//        System.out.println();
 
 
 
 
-        System.out.println(tree.getHumanList());
 
-        Human find = tree.findHumanName("Иван");
-        System.out.print("Результат поиска: ");
-        System.out.println(find);
-        System.out.println();
 
-        List<Human> children = tree.getChildrenOfHuman(daughter);
-        System.out.println(daughter);
-        for (Human child : children) {
-            System.out.println("Дети: " + child.getName());
-        }
-        System.out.println();
+//        Human find = tree.findHumanName("Иван");
+//        System.out.print("Результат поиска: ");
+//        System.out.println(find);
+//        System.out.println();
 
-        // Вывод списка родителей при выборе ребенка
-        List<Human> parents = tree.getParentsOfHuman(father);
-        System.out.println(father);
-        for (Human parent : parents) {
-            System.out.println("Родители: " + parent.getName());
-        }
+
+
+
+
+
 
     }
     }
