@@ -99,6 +99,6 @@ public class ConsoleUI implements View {
     }
 
     public void addNewPerson() throws IOException, ClassNotFoundException {
-        presenter.addNewItem();
+        presenter.addNewPerson();
     }
 }

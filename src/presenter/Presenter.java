@@ -31,7 +31,7 @@ public class Presenter {
         PrintData.printTree(service.sortByDOB());
     }
 
-    public void addNewItem() throws IOException, ClassNotFoundException {
+    public void addNewPerson() throws IOException, ClassNotFoundException {
         ConsoleUI console = new ConsoleUI();
         Person person = service.createNewPerson(console.getNewPersonInfo());
         Tree tree = service.file.loadData();
