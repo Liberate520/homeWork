@@ -1,9 +1,6 @@
 package view.commands;
 
-import view.Command;
 import view.ConsoleUI;
-
-import java.io.IOException;
 
 public class Finish implements Command {
     private ConsoleUI consoleUI;

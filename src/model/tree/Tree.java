@@ -1,6 +1,5 @@
 package model.tree;
 
-import model.person.Person;
 import model.GroupItem;
 import model.tree.comparators.TreeComparatorByDOB;
 import model.tree.comparators.TreeComparatorByName;

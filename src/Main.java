@@ -1,4 +1,4 @@
-import model.service.Service;
+import model.Service;
 import presenter.Presenter;
 import view.ConsoleUI;
 import view.View;

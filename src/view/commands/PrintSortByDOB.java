@@ -1,6 +1,5 @@
 package view.commands;
 
-import view.Command;
 import view.ConsoleUI;
 
 import java.io.IOException;
@@ -14,11 +13,11 @@ public class PrintSortByDOB implements Command {
 
     @Override
     public String getDescription() {
-        return "Вывести данные (сорт. по дате рождения)";
+        return "Отсортировать по дате рождения";
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IOException, ClassNotFoundException {
         consoleUI.printSortByDOB();
     }
 }

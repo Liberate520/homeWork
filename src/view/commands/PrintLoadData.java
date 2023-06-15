@@ -4,20 +4,20 @@ import view.ConsoleUI;
 
 import java.io.IOException;
 
-public class PrintSortByName implements Command {
+public class PrintLoadData implements Command {
     private ConsoleUI consoleUI;
 
-    public PrintSortByName(ConsoleUI consoleUI) {
+    public PrintLoadData(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 
     @Override
     public String getDescription() {
-        return "Отсортировать по имени";
+        return "Загрузить данные из файла";
     }
 
     @Override
     public void execute() throws IOException, ClassNotFoundException {
-        consoleUI.printSortByName();
+        consoleUI.printLoadData();
     }
 }

@@ -11,14 +11,14 @@ public class MainMenu {
 
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
-        commandList.add(new LoadData(consoleUI));
-        commandList.add(new SaveData(consoleUI));
+        commandList.add(new PrintLoadData(consoleUI));
         commandList.add(new PrintSortByName(consoleUI));
         commandList.add(new PrintSortByDOB(consoleUI));
+        commandList.add(new AddNewPerson(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 
-    public String printMenu(){
+    public String menuText(){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commandList.size(); i++) {
             stringBuilder.append(i+1);

@@ -1,13 +1,12 @@
-package model.service;
+package view;
 
-import model.Data;
 import model.GroupItem;
 import model.person.Person;
 import model.tree.Tree;
 
 import java.util.List;
 
-public class PrintService {
+public class PrintData {
     public static void printList(List<Person> someList) {
         StringBuilder someString = new StringBuilder();
         for (Person item : someList) {
@@ -17,22 +16,10 @@ public class PrintService {
         System.out.println(someString);
     }
 
-    public void printSortByName() {
-        Tree<Person> ft = Data.getData();
-        ft.sortByName();
-        for (GroupItem person : ft) {
+    public static void printTree(Tree<Person> tree){
+        for (GroupItem person : tree) {
             System.out.println(person);
         }
         System.out.println();
     }
-
-    public void printSortByDOB() {
-        Tree<Person> ft = Data.getData();
-        ft.sortByDOB();
-        for (GroupItem person : ft) {
-            System.out.println(person);
-        }
-        System.out.println();
-    }
-
 }

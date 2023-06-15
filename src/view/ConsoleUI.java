@@ -1,14 +1,17 @@
 package view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 import presenter.Presenter;
 
 public class ConsoleUI implements View {
     private Scanner scanner;
     private Presenter presenter;
     private MainMenu mainMenu;
-    boolean repeatFlag;
+    private boolean repeatFlag;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
@@ -20,7 +23,7 @@ public class ConsoleUI implements View {
     public void start() throws IOException, ClassNotFoundException {
         System.out.println("Выберите действие:");
         while (repeatFlag) {
-            System.out.println(mainMenu.printMenu());
+            System.out.println(mainMenu.menuText());
             int choice = inputNumMenu();
             if (choice == -1) {
                 System.out.println("Ошибка ввода!");
@@ -57,19 +60,45 @@ public class ConsoleUI implements View {
         return choice > 0 && choice <= 5;
     }
 
-    public void saveData() throws IOException {
-        presenter.saveData();
+    public List<String> getNewPersonInfo(){
+        List<String> itemInfo = new ArrayList<>();
+        System.out.println("Введите имя:");
+        itemInfo.add(scanner.nextLine());
+        System.out.println("Введите год рождения в формате \"YYYY\":");
+        itemInfo.add(scanner.nextLine());
+        System.out.println("Введите месяц рождения в формате \"M\":");
+        itemInfo.add(scanner.nextLine());
+        System.out.println("Введите день рождения в формате \"D\":");
+        itemInfo.add(scanner.nextLine());
+        System.out.println("Укажите пол (m - мужской, f - женский):");
+        itemInfo.add(scanner.nextLine());
+        System.out.println("Введите имя матери (\"-\" при отсутствии):");
+        itemInfo.add(scanner.nextLine());
+        System.out.println("Введите имя отца (\"-\" при отсутствии):");
+        itemInfo.add(scanner.nextLine());
+        return itemInfo;
     }
 
-    public void loadData() throws IOException, ClassNotFoundException {
-        presenter.loadData();
+    public boolean askToSave(){
+        System.out.println("Сохранить изменения в файл?");
+        System.out.println("Y - да, N - нет.");
+        if (scanner.nextLine().equalsIgnoreCase("Y")) return true;
+        else return false;
     }
 
-    public void printSortByName() {
+    public void printLoadData() throws IOException, ClassNotFoundException {
+        presenter.printLoadData();
+    }
+
+    public void printSortByName() throws IOException, ClassNotFoundException {
         presenter.printSortByName();
     }
 
-    public void printSortByDOB() {
+    public void printSortByDOB() throws IOException, ClassNotFoundException {
         presenter.printSortByDOB();
+    }
+
+    public void addNewPerson() throws IOException, ClassNotFoundException {
+        presenter.addNewItem();
     }
 }
