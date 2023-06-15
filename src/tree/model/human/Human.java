@@ -31,10 +31,14 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     }
     @Override
     public String getName() { return name; }
+    public Gender getGender() { return gender;}
     @Override
     public Human getFather() { return father; }
+    public void setFather(Human father) { this.father = father; }
     @Override
     public Human getMother() { return mother; }
+    public void setMother(Human mother) { this.mother = mother; }
+    public void setChildren(Human child) { children.add(child); }
 
     public void addParent(Human human) {
         if (human != null) {

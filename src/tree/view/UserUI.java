@@ -59,6 +59,12 @@ public class UserUI implements View {
         System.out.println(name + " добавлен");
     }
 
+    public void removeHumanFromTree() {
+        System.out.println("Укажите имя");
+        String name = scanner.nextLine();
+        presenter.removeHumanFromTree(name);
+    }
+
     public void findHuman() {
         System.out.println("Укажите имя");
         String name = scanner.nextLine();
@@ -76,10 +82,12 @@ public class UserUI implements View {
 
     public void sortByName() {
         presenter.sortByName();
+        System.out.println("Файл отсортирован по имени");
     }
 
     public void sortByChild() {
         presenter.sortByChild();
+        System.out.println("Файл отсортирован по количеству детей");
     }
 
     public void saveFile() throws IOException {
@@ -90,11 +98,11 @@ public class UserUI implements View {
         presenter.loadFile();
     }
 
-   /* public void addChild() {
-        System.out.println("Укажите имя (parent)");
-        String human = scanner.nextLine();
-        System.out.println("Укажите ребенка (child)");
+    public void addParent() {
+        System.out.println("Введите имя ребенка");
         String child = scanner.nextLine();
-        presenter.addChild(human, child);
-    }*/
+        System.out.println(("Введите имя родителя"));
+        String parent = scanner.nextLine();
+        presenter.addParent(child, parent);
+    }
 }

@@ -15,7 +15,8 @@ public class UserMenu {
         commands.add(new GetFamilyTree(userUI));
         commands.add(new FindHuman(userUI));
         commands.add(new AddHuman(userUI));
-        commands.add(new AddChild(userUI));
+        commands.add(new AddParent(userUI));
+        commands.add(new RemoveHumanFromTree(userUI));
         commands.add(new SortByName(userUI));
         commands.add(new SortByChild(userUI));
         commands.add(new SaveFile(userUI));
