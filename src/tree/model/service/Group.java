@@ -1,11 +1,9 @@
-package tree.service;
+package tree.model.service;
 
-import tree.human.Human;
-
-import java.util.List;
+import tree.model.human.Human;
 
 public interface Group<T> extends Iterable<T> {
-    void addHuman(T human);
+    boolean addHuman(T human);
     void sortByName();
     void sortByAge();
     Human getByName(String name);

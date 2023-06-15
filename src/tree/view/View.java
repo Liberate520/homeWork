@@ -1,9 +1,12 @@
-package tree.ui;
+package tree.view;
 
 import tree.presenter.Presenter;
 
 public interface View {
-    void setPresenter(Presenter presenter);
     void start();
+
     void print(String text);
+
+    void setPresenter(Presenter presenter);
+
 }

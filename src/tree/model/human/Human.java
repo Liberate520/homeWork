@@ -1,13 +1,13 @@
-package tree.human;
+package tree.model.human;
 
-import tree.geneticTree.GroupItem;
+import tree.model.geneticTree.GroupItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, GroupItem {
+public class Human implements Serializable, GroupItem<Human> {
     private static int global_id;
     private int id;
     private String name;
@@ -32,8 +32,13 @@ public class Human implements Serializable, GroupItem {
         this(id, name, yearOfBirth, gender, null, null);
     }
 
-    public void addChildren(Human child) {
-        children.add(child);
+    @Override
+    public boolean addChildren(Human child) {
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
     public int getId() {
@@ -118,7 +123,7 @@ public class Human implements Serializable, GroupItem {
 
     private String getFatherInfo() {
         String fatherName = "отец: ";
-        if (mother != null) {
+        if (father != null) {
             fatherName += father.getName();
         } else {
             fatherName += "неизвестен";

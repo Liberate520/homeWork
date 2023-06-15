@@ -1,4 +1,4 @@
-package tree.ui;
+package tree.view;
 
 import tree.presenter.Presenter;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DesktopUI extends JFrame implements View{
+public class DesktopUI extends JFrame implements View {
     private JLabel jLabel;
     private JTextArea answer;
     private JTextField city;

@@ -1,6 +1,6 @@
-package tree.human;
+package tree.model.human;
 
-import tree.geneticTree.GroupItem;
+import tree.model.geneticTree.GroupItem;
 
 import java.util.Comparator;
 

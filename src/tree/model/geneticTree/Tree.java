@@ -1,16 +1,16 @@
-package tree.geneticTree;
+package tree.model.geneticTree;
 
-import tree.human.Human;
-import tree.human.HumanComparatorByAge;
-import tree.human.HumanComparatorByName;
-import tree.service.Group;
+import tree.model.human.Human;
+import tree.model.human.HumanComparatorByAge;
+import tree.model.human.HumanComparatorByName;
+import tree.model.service.Group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree <T extends GroupItem> implements Serializable, Iterable<T>, Group<T> {
+public class Tree<T extends GroupItem<T>> implements Serializable, Iterable<T>, Group<T> {
     private List<T> humanList;
 
     public Tree(List<T> humanList) {
@@ -30,14 +30,21 @@ public class Tree <T extends GroupItem> implements Serializable, Iterable<T>, Gr
         return null;
     }
 
-    public void addHuman(T human) {
-        humanList.add(human);
-        if (human.getFather() != null) {
-            human.getFather().addChildren((Human) human);
+    public boolean addHuman(T human) {
+        if (human == null) {
+            return false;
         }
-        if (human.getMother() != null) {
-            human.getMother().addChildren((Human) human);
+        if (!humanList.contains(human)) {
+            humanList.add(human);
+            if (human.getFather() != null) {
+                human.getFather().addChildren(human);
+            }
+            if (human.getMother() != null) {
+                human.getMother().addChildren(human);
+            }
+            return true;
         }
+        return false;
     }
 
     public String getInfo() {

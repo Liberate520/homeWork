@@ -1,28 +1,28 @@
-package tree.service;
+package tree.model.service;
 
-import tree.geneticTree.Tree;
-import tree.human.Gender;
-import tree.human.Human;
-import tree.saveLoad.Writable;
-import tree.saveLoad.Write;
+import tree.model.geneticTree.Tree;
+import tree.model.human.Gender;
+import tree.model.human.Human;
+import tree.model.saveLoad.Writable;
+import tree.model.saveLoad.Write;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Service implements Serializable {
+public class Service implements Serializable {  //Класс Сервиса является непараметризированным
     private int id;
-//    private Tree geneticTree;
-    Group<Human> geneticTree;
+    private Tree<Human> geneticTree;
+//    Group<Human> geneticTree;
     private Writable writable;
 
-    public Service(Group<Human> humans) {
-        this.geneticTree = humans;
+    public Service(Tree<Human> geneticTree) {
+        this.geneticTree = geneticTree;
         writable = new Write();
     }
 
-//    public Service() { // без понятия как сделать такой конструктор
-//        this(new Tree<>());
-//        writable = new Write();
-//    }
+    public Service() {
+        geneticTree = new Tree<>();
+        writable = new Write();
+    }
 
     public boolean save(String filePath) {
         return writable.save((Serializable) geneticTree, filePath);
