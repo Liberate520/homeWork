@@ -4,6 +4,7 @@ import homeWork.tree2.backend.familyTree.FamilyTree;
 import homeWork.tree2.backend.familyTree.services.Service;
 import homeWork.tree2.backend.human.Human;
 import homeWork.tree2.backend.human.HumanObjectInterface;
+import homeWork.tree2.views.MessageForUsers;
 
 
 import java.time.LocalDate;
@@ -11,8 +12,8 @@ import java.time.LocalDate;
 public class Presenter {
 
     Service service = new Service(new FamilyTree());
-    public void addFamilyMember(String name, LocalDate date){
-            service.addFamilyMember(name, date);
+    public void addFamilyMember(String name, LocalDate date, String mother, String father){
+            service.addFamilyMember(name, date, mother, father);
     }
 
     public void showFamilyMembers(){
@@ -44,9 +45,11 @@ public class Presenter {
         return service.findPersonByName(name);
     }
 
-    public void deletePeson(String name){
-        service.deletePersonByName(name);
+    public boolean deletePerson(String name) {
+        boolean isSuccess = service.deletePersonByName(name);
+        return isSuccess;
     }
+
 
     public void updatePerson(String oldName, String newName, LocalDate date){
         service.updatePersonByName(oldName, newName, date);
@@ -59,8 +62,8 @@ public class Presenter {
             message.setTextMessage();
         }
         catch (Exception e) {
-            MessageForUsers message = new MessageForUsers("Произошла непредвиденная ошибка");
-            message.setTextMessage();
+            MessageForUsers message = new MessageForUsers();
+            message.setTextErrorMessage();
 
         }
 
@@ -73,13 +76,20 @@ public class Presenter {
 
         }
         catch (Exception e){
-            MessageForUsers message = new MessageForUsers("Произошла непредвиденная ошибка");
-            message.setTextMessage();
+            MessageForUsers message = new MessageForUsers();
+            message.setTextErrorMessage();
         }
     }
 
     public void deleteFamilyTree() {
-        service.deleteFamilyTree();
+        try {
+            service.deleteFamilyTree();
+        }
+        catch (Exception e){
+            MessageForUsers message = new MessageForUsers();
+            message.setTextErrorMessage();
+        }
+
     }
 }
 

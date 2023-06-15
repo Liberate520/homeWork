@@ -4,7 +4,7 @@ import homeWork.tree2.backend.familyTree.FamilyTree;
 import homeWork.tree2.backend.fileHandler.FileHandler;
 import homeWork.tree2.backend.human.Human;
 import homeWork.tree2.backend.human.HumanObjectInterface;
-import homeWork.tree2.middleware.MessageForUsers;
+import homeWork.tree2.views.MessageForUsers;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,28 +17,39 @@ public class Service {
         this.family = family;
     } // Изменил параметр класса
 
-    public void addFamilyMember(String name, LocalDate date) {
+
+    public void addFamilyMember(String name, LocalDate date, String mother, String father) {
         try {
             Human member = new Human(name, date);
-            // В данном методе, мы работаем с классмо Человек
-            // принципы не нарушаются, т.к. Человек - вполне может стать родительским классом для новых классов
-            // (сын, дочь, женщина, мужчина и т.д.)
+            HumanObjectInterface mom = family.findPersonByName(mother);
+            HumanObjectInterface dad = family.findPersonByName(father);
+            try {
+                member.setMother((Human) mom);
+                ((Human) mom).getChild(member);
+            } catch (Exception e) {
 
+            }
+            try {
+                member.setFather((Human) dad);
+                ((Human) dad).getChild(member);
+            } catch (Exception e) {
+
+            }
             family.addPeople(member);
         } catch (Exception e) {
-            MessageForUsers message =  new MessageForUsers("Ошибка ввода данных!");
+            MessageForUsers message = new MessageForUsers("Ошибка ввода данных!");
             message.setTextMessage();
 
         }
     }
 
+
     public void showAllFamilyMembers() {
         try {
-                MessageForUsers message = new MessageForUsers(family.getFamilies());
-                message.setTextMessage();
-            }
-        catch (Exception e) {
-            MessageForUsers message =  new MessageForUsers("Дерево пусто!");
+            MessageForUsers message = new MessageForUsers(family.getFamilies());
+            message.setTextMessage();
+        } catch (Exception e) {
+            MessageForUsers message = new MessageForUsers("Дерево пусто!");
             message.setTextMessage();
         }
 
@@ -66,9 +77,11 @@ public class Service {
     }
 
 
-    public void deletePersonByName(String name) {
-        family.deleteByName(name);
+    public boolean deletePersonByName(String name) {
+        HumanObjectInterface deletedPerson = family.deleteByName(name);
+        return deletedPerson != null;
     }
+
 
     public void testFamily() {
         TestGenerationFamilyTree generator = new TestGenerationFamilyTree();
@@ -80,20 +93,18 @@ public class Service {
             Human person = (Human) family.findPersonByName(oldName);
             person.updatePersonParameters(name, birthdate);
         } catch (Exception o) {
-            MessageForUsers message =  new MessageForUsers("Ошибка ввода данных!");
+            MessageForUsers message = new MessageForUsers("Ошибка ввода данных!");
             message.setTextMessage();
         }
     }
 
     public void saveFamilyTree() throws IOException {
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(family);
+        family.save();
     }
 
     public void loadFamilyTree() throws IOException, ClassNotFoundException {
         FileHandler fileHandler = new FileHandler();
         this.family = fileHandler.load();
-
     }
 
     public void deleteFamilyTree() {

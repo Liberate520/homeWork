@@ -2,8 +2,10 @@ package homeWork.tree2.backend.familyTree;
 
 import homeWork.tree2.backend.familyTree.comparator.HumanObjectInterfaceComparatorbyId;
 import homeWork.tree2.backend.familyTree.comparator.HumanObjectInterfaceComparatorbyName;
+import homeWork.tree2.backend.fileHandler.FileHandler;
 import homeWork.tree2.backend.human.HumanObjectInterface;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,16 +37,16 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
         return null;
     }
 
-    public void deleteByName(String name) {
+    public E deleteByName(String name) {
         for (E person : families) {
             if (person.getName().equalsIgnoreCase(name)) {
                 families.remove(person);
-                System.out.println("\nПользователь " + person.getName() + " успешно удален!\n");
-                break;
+                return person;
             }
         }
-        System.out.println("\nТакого человека в базе нет!\n");
+        return null;
     }
+
 
     @Override
     public void addPeople(E person) {
@@ -77,4 +79,10 @@ public class FamilyTree<E extends HumanObjectInterface> implements Serializable,
     public void delete() {
         this.families.clear();
     }
+
+    public void save() throws IOException {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(this);
+    }
+
 }

@@ -36,7 +36,11 @@ public class UserConnector implements View {
             int month = Integer.parseInt(parts[1]);
             int day = Integer.parseInt(parts[2]);
             LocalDate birthDate = LocalDate.of(year, month, day);
-            presenter.addFamilyMember(name, birthDate);
+            System.out.println("Укажите имя мамы");
+            String mother = scanner.nextLine();
+            System.out.println("Укажите имя папы");
+            String father = scanner.nextLine();
+            presenter.addFamilyMember(name, birthDate, mother, father);
             System.out.println("\nПользователь под именем " + name + ", год рождения " + date+ " успешно добавлен!\n");
         } catch (Exception e) {
             System.out.println("\nВозникла непредвиденная ошибка, добавление пользователя отклонено!\n");
@@ -109,7 +113,19 @@ public class UserConnector implements View {
         System.out.println("\n===========================Удаление пользователя============================\n");
         System.out.println("Введите имя пользователя для удаления: \n");
         String name = scanner.nextLine();
-        presenter.deletePeson(name);
+        try {
+            boolean isDeleted = presenter.deletePerson(name);
+            if (isDeleted) {
+                MessageForUsers message = new MessageForUsers("\nПользователь по имени " + name + " был удален\n");
+                message.setTextMessage();
+            } else {
+                MessageForUsers message = new MessageForUsers("\nПользователя с именем " + name + " не существует\n");
+                message.setTextMessage();
+            }
+        } catch (Exception e) {
+            MessageForUsers message = new MessageForUsers();
+            message.setTextErrorMessage();
+        }
     }
 
     public void saveFile() {

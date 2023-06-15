@@ -44,6 +44,10 @@ public class Human implements Serializable, Comparable<Human>, HumanObjectInterf
         this.children = children;
     }
 
+    public void getChild(Human child) {
+        this.children.add(child);
+    }
+
     public String getName() {
         return name;
     }
