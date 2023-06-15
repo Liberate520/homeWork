@@ -1,4 +1,4 @@
-package model.service;
+package model.services;
 
 import model.familyTrees.FamilyTree;
 import model.familyTrees.comparators.ByDateBirth;
@@ -8,8 +8,6 @@ import model.fileManage.FileManager;
 import model.members.Gender;
 import model.members.Human;
 import model.members.Member;
-import view.menu.sortMenu.SortingMenu;
-import view.menu.sortMenu.commands.SortByNameLength;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,10 +88,6 @@ public class HumanService {
         familyTree.addPersonInFamilyTree(new Human(name, gender, dateOfBirth));
     }
 
-    public void addRecord(String name, Gender gender, int dateOfBirth,
-                          String parentName, int yearOfBirth) {
-        familyTree.addPersonInFamilyTree(new Human(name, gender, dateOfBirth), parentName, yearOfBirth);
-    }
 
     public void addRecord(String name, Gender gender, int dateOfBirth,
                           String fatherName, int yearOfBirthFather,

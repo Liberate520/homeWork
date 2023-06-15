@@ -1,6 +1,6 @@
-package view.menu.mainMenu.commands;
+package view.consoleUI.menu.mainMenu.commands;
 
-import view.ConsoleUI;
+import view.consoleUI.ConsoleUI;
 
 /**
  * Класс Finish представляет команду выхода из программы с сохранением в меню консольного пользовательского интерфейса (UI).

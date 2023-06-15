@@ -1,11 +1,11 @@
-package view.menu.mainMenu.commands;
+package view.consoleUI.menu.mainMenu.commands;
 
-import view.ConsoleUI;
+import view.consoleUI.ConsoleUI;
 
-public class SortMenu implements Command{
+public class SortedTree implements Command{
     ConsoleUI consoleUI;
 
-    public SortMenu(ConsoleUI consoleUI) {
+    public SortedTree(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 

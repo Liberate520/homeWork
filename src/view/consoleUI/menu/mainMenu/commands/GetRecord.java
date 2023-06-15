@@ -1,6 +1,6 @@
-package view.menu.mainMenu.commands;
+package view.consoleUI.menu.mainMenu.commands;
 
-import view.ConsoleUI;
+import view.consoleUI.ConsoleUI;
 
 /**
  * Класс GetRecord представляет команду получения записи из древа в меню консольного пользовательского интерфейса (UI).
@@ -25,6 +25,6 @@ public class GetRecord implements Command {
 
     @Override
     public void execute() {
-        consoleUI.getRecordInTree();
+        consoleUI.runRecordMenu(consoleUI.getRecord());
     }
 }

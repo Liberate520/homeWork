@@ -1,8 +1,7 @@
 package model.familyTrees;
 
 import model.familyTrees.comparators.ByDateBirth;
-import model.familyTrees.comparators.NameLength;
-import model.familyTrees.iterators.PersonIterator;
+import model.familyTrees.iterators.FamilyTreeIterator;
 import model.members.Gender;
 import model.members.Member;
 
@@ -63,7 +62,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
     private void addChildBranch(T parent, T child) {
 
         if (!parent.getChildren().contains(child)) {
-            parent.addChild((child));
+            parent.addChild(child);
         }
     }
 
@@ -173,7 +172,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new PersonIterator(familyTree);
+        return new FamilyTreeIterator(familyTree);
     }
 
     /**

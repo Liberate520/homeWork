@@ -1,10 +1,9 @@
 package presenter;
 
 import model.members.Human;
-import model.service.HumanService;
+import model.services.HumanService;
 import model.members.Gender;
 import model.members.Member;
-import view.menu.sortMenu.SortingMenu;
 
 import java.io.Serializable;
 import java.util.List;
@@ -66,10 +65,6 @@ public class Presenter implements Serializable {
         humanService.addRecord(name, gender, yearOfBirth);
     }
 
-    public void addRecord(String name, Gender gender, int dateOfBirth,
-                          String parentName, int yearOfBirth) {
-        humanService.addRecord(name, gender, dateOfBirth, parentName, yearOfBirth);
-    }
 
     public void addRecord(String name, Gender gender, int dateOfBirth,
                           String fatherName, int yearOfBirthFather,

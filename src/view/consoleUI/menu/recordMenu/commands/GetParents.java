@@ -1,12 +1,14 @@
-package view.menu.mainMenu.commands;
+package view.consoleUI.menu.recordMenu.commands;
 
-import view.ConsoleUI;
+import model.members.Member;
+import view.consoleUI.ConsoleUI;
+import view.consoleUI.menu.mainMenu.commands.Command;
 
 /**
  * Класс GetParents представляет команду получения родителей человека из дерева в меню консольного пользовательского интерфейса (UI).
  * Реализует интерфейс Sortedable.
  */
-public class GetChildren implements Command {
+public class GetParents implements Command {
     private ConsoleUI consoleUI;
 
     /**
@@ -14,18 +16,18 @@ public class GetChildren implements Command {
      *
      * @param consoleUI объект ConsoleUI, используемый для получения родителей человека из дерева
      */
-    public GetChildren(ConsoleUI consoleUI) {
+    public GetParents(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 
     @Override
     public String getDescription() {
-        return "Получить детей человека из дерева";
+        return "Получить родителей человека из дерева";
     }
 
     @Override
     public void execute() {
-        consoleUI.getChildren();
+        consoleUI.getParents();
 
     }
 }

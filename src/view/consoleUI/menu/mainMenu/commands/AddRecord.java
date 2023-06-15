@@ -1,6 +1,6 @@
-package view.menu.mainMenu.commands;
+package view.consoleUI.menu.mainMenu.commands;
 
-import view.ConsoleUI;
+import view.consoleUI.ConsoleUI;
 
 /**
  * Класс AddRecord представляет команду добавления записи в древо в меню консольного пользовательского интерфейса (UI).

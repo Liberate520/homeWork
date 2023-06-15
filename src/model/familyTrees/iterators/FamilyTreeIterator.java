@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @param <T> Тип объекта, реализующего интерфейс Member.
  */
-public class PersonIterator<T extends Member> implements Iterator<T> {
+public class FamilyTreeIterator<T extends Member> implements Iterator<T> {
 
     private int index;
     private List<T> personList;
@@ -20,7 +20,7 @@ public class PersonIterator<T extends Member> implements Iterator<T> {
      *
      * @param personList Список объектов, реализующих интерфейс Member.
      */
-    public PersonIterator(List<T> personList) {
+    public FamilyTreeIterator(List<T> personList) {
         this.personList = personList;
     }
 

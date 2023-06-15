@@ -1,14 +1,13 @@
-package view.menu;
+package view.consoleUI.menu;
 
-import view.ConsoleUI;
-import view.menu.mainMenu.commands.*;
+import view.consoleUI.menu.mainMenu.commands.*;
 
 import java.util.List;
 
-public abstract class BaseMenu  {
+public abstract class Menu {
     private List<Command> commandList;
 
-    public BaseMenu(List<Command> commandList) {
+    public Menu(List<Command> commandList) {
         this.commandList = commandList;
     }
 

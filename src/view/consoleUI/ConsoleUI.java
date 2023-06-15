@@ -1,10 +1,13 @@
-package view;
+package view.consoleUI;
 
 import model.members.Gender;
 import model.members.Human;
-import view.menu.sortMenu.SortingMenu;
+import model.members.Member;
+import view.View;
+import view.consoleUI.menu.recordMenu.RecordMenu;
+import view.consoleUI.menu.sortMenu.SortingMenu;
 import presenter.Presenter;
-import view.menu.mainMenu.MainMenu;
+import view.consoleUI.menu.mainMenu.MainMenu;
 
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +21,7 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private boolean work;
     private MainMenu mainMenu;
+    private Member member;
 
 
     /**
@@ -30,13 +34,8 @@ public class ConsoleUI implements View {
         work = true;
         mainMenu = new MainMenu(this);
         this.presenter = presenter;
+        this.member = null;
     }
-
-    /**
-     * Для сокращения написания кода
-     * @param message сообщение
-     * @return Str
-     */
 
 
     /**
@@ -47,7 +46,7 @@ public class ConsoleUI implements View {
     public void start() {
         System.out.println("Здравствуйте");
         importFile();
-        runMenu();
+        runMainMenu();
     }
 
     /**
@@ -66,7 +65,7 @@ public class ConsoleUI implements View {
     /**
      * Запускает отображение Menu
      */
-    private void runMenu() {
+    private void runMainMenu() {
         while (work) {
             System.out.println("[Вы работаете с семейным деревом " +
                     presenter.getNameFamilyTree() + "]");
@@ -121,12 +120,38 @@ public class ConsoleUI implements View {
      * Запрашивает у пользователя имя и год рождения, и выводит соответствующую запись из семейного дерева через
      * Presenter.
      */
-    public void getRecordInTree() {
+    public Member getRecord() {
+
         String name = inputLn("Укажите имя");
         int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
-        if (yearOfBirth == -1) System.out.println(presenter.getRecord(name, yearOfBirth));
-        else System.out.println("Неверно указан год рождения");
+        if (yearOfBirth != -1) {
+            this.member = presenter.getRecord(name, yearOfBirth);
+        } else
+            System.out.println("Неверно указан год рождения");
+        return member;
     }
+
+
+    public void runRecordMenu(Member record) {
+        RecordMenu recordMenu = new RecordMenu(this);
+        System.out.println("Запись найдена в древе ");
+        if (record != null) {
+            while (true) {
+                System.out.printf("[Человек - Имя:%s, Год рождения:%s]\nВыберите действие:\n",
+                        record.getName(),
+                        record.getYearOfBirth());
+                System.out.println(recordMenu.printMenu());
+                int choice = recordMenu.checkInputLineMenu(inputLn("Введите нужную цифру"));
+                if (choice != -1) {
+                    recordMenu.execute(choice);
+                } else System.out.println("Ошибка ввода");
+                if (choice == recordMenu.size()) {
+                    break;
+                }
+            }
+        } else System.out.println("Запись не найдена");
+    }
+
 
     /**
      * Выводит все записи из семейного дерева через Presenter.
@@ -144,20 +169,11 @@ public class ConsoleUI implements View {
      * Запрашивает у пользователя имя и год рождения и выводит родителей человека через Presenter.
      */
     public void getParents() {
-        String name = inputLn("Укажите имя");
-        int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
-        if (yearOfBirth != -1) {
-            System.out.println(presenter.getParents(name, yearOfBirth).toString());
-        } else System.out.println("Неверно указан год рождения");
-
+        System.out.println(presenter.getParents(member.getName(), checkDateOfBirth(member.getYearOfBirth().toString())));
     }
 
     public void getChildren() {
-        String name = inputLn("Укажите имя родителя");
-        int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
-        if (yearOfBirth != -1) {
-            System.out.println(presenter.getChildren(name, yearOfBirth).toString());
-        } else System.out.println("Неверно указан год рождения");
+        System.out.println(presenter.getChildren(member.getName(), checkDateOfBirth(member.getYearOfBirth().toString())));
     }
 
     /**

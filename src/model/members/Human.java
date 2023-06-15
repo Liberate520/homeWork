@@ -61,6 +61,7 @@ public class Human implements Member, Serializable {
 
     @Override
     public void addChild(Member child) {
+        children.add(child);
 
     }
 

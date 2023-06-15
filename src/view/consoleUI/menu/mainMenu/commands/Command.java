@@ -1,4 +1,4 @@
-package view.menu.mainMenu.commands;
+package view.consoleUI.menu.mainMenu.commands;
 
 /**
  * Интерфейс Sortedable представляет команду в меню консольного пользовательского интерфейса (UI).

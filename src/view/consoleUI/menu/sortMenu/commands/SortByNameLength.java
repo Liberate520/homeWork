@@ -1,8 +1,7 @@
-package view.menu.sortMenu.commands;
+package view.consoleUI.menu.sortMenu.commands;
 
-import model.familyTrees.FamilyTree;
-import view.ConsoleUI;
-import view.menu.mainMenu.commands.Command;
+import view.consoleUI.ConsoleUI;
+import view.consoleUI.menu.mainMenu.commands.Command;
 
 public class SortByNameLength implements Command {
     ConsoleUI consoleUI;
