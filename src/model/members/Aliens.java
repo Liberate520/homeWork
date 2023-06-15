@@ -24,6 +24,15 @@ public class Aliens implements Member, Serializable {
         this.mother = null;
         this.children = new ArrayList<>();
     }
+    public Aliens(String name, Gender gender, int yearOfBirth) {
+        this.name = name;
+        this.surname = null;
+        this.yearOfBirth = Year.of(yearOfBirth);
+        this.gender = gender;
+        this.father = null;
+        this.mother = null;
+        this.children = new ArrayList<>();
+    }
 
     @Override
     public String getName() {

@@ -1,10 +1,10 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
 
 /**
  * Класс Finish представляет команду выхода из программы с сохранением в меню консольного пользовательского интерфейса (UI).
- * Реализует интерфейс Command.
+ * Реализует интерфейс Sortedable.
  */
 public class Finish implements Command {
 

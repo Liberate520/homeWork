@@ -1,8 +1,12 @@
 package view;
 
+import model.members.Gender;
+import model.members.Human;
+import view.menu.sortMenu.SortingMenu;
 import presenter.Presenter;
-import view.menu.MainMenu;
+import view.menu.mainMenu.MainMenu;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -13,7 +17,6 @@ public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
     private boolean work;
-    private boolean importFileLoaded;
     private MainMenu mainMenu;
 
 
@@ -22,23 +25,18 @@ public class ConsoleUI implements View {
      * Инициализирует Scanner, устанавливает флаги работы и загрузки файла в false,
      * инициализирует главное меню и Presenter.
      */
-    public ConsoleUI() {
+    public ConsoleUI(Presenter presenter) {
         scanner = new Scanner(System.in);
         work = true;
-        importFileLoaded = false;
         mainMenu = new MainMenu(this);
-        presenter = new Presenter();
+        this.presenter = presenter;
     }
 
     /**
-     * Выводит текст на консоль.
-     *
-     * @param text текст для вывода
+     * Для сокращения написания кода
+     * @param message сообщение
+     * @return Str
      */
-    @Override
-    public void print(String text) {
-        System.out.println(text);
-    }
 
 
     /**
@@ -52,26 +50,18 @@ public class ConsoleUI implements View {
         runMenu();
     }
 
-    private int inputNumMenu() {
-        String line = scanner.nextLine();
-        if (!checkLine(line)) {
-            return -1;
-        }
-        return Integer.parseInt(line);
-    }
-
     /**
-     * Проверяет веденные пользователем данные, являются ли они целыми числами
-     *
-     * @param line введенные данные
-     * @return boolean
+     * Загружает файл с типом Human.
+     * Запрашивает у пользователя путь к файлу и передает его в Presenter для загрузки.
+     * Повторяет запрос, пока файл не будет успешно загружен.
      */
-    private boolean checkLine(String line) {
-        if (!line.matches("[0-9]+")) return false;
-        int choice = Integer.parseInt(line);
-        return choice > 0 && choice <= mainMenu.size();
+    public void importFile() {
+        boolean importFileLoaded = false;
+        while (!importFileLoaded) {
+            presenter.importFile(inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
+            if (presenter.checkCreateFamilyTree()) importFileLoaded = true;
+        }
     }
-
 
     /**
      * Запускает отображение Menu
@@ -79,9 +69,9 @@ public class ConsoleUI implements View {
     private void runMenu() {
         while (work) {
             System.out.println("[Вы работаете с семейным деревом " +
-                    presenter.getHumanService().getFamilyTree().getNameFamilyTree() + "]");
+                    presenter.getNameFamilyTree() + "]");
             System.out.println(mainMenu.printMenu());
-            int choice = inputNumMenu();
+            int choice = mainMenu.checkInputLineMenu(scanner.nextLine());
             if (choice == -1) {
                 System.out.println("Ошибка ввода");
                 continue;
@@ -91,50 +81,97 @@ public class ConsoleUI implements View {
     }
 
     /**
-     * Загружает файл с типом Human.
-     * Запрашивает у пользователя путь к файлу и передает его в Presenter для загрузки.
-     * Повторяет запрос, пока файл не будет успешно загружен.
+     * Проверяет веденные пользователем данные, являются ли они целыми числами
+     *
+     * @param line входная строка
+     * @return boolean
      */
-    public void importFile() {
-        while (!importFileLoaded) {
-            System.out.println("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)");
-            presenter.importFile(scanner.nextLine());
-            if (presenter.getHumanService().getFamilyTree() != null) importFileLoaded = true;
-        }
+    private boolean checkLineOnNumbers(String line) {
+        return line.matches("[0-9]+");
+    }
+
+    private String inputLn(String message) {
+        System.out.println(message);
+        return scanner.nextLine();
+    }
+
+    private int checkDateOfBirth(String dateOfBirth) {
+        return checkLineOnNumbers(dateOfBirth) ? Integer.parseInt(dateOfBirth) : -1;
     }
 
     /**
      * Добавляет запись в семейное дерево.
      * Запрашивает у пользователя имя, пол и год рождения человека, и передает эти данные в Presenter для добавления записи.
      */
-    public void addRecordInTree() {
-        System.out.println("Укажите имя человека");
-        String name = scanner.nextLine();
-        System.out.println("Укажите пол");
-        String gender = scanner.nextLine();
-        System.out.println("Укажите год рождения");
-        String dateOfBirth = scanner.nextLine();
-        presenter.addRecord(name, gender, dateOfBirth);
-
+    public void addRecord() {
+        String name = inputLn("Укажите имя человека");
+        int dateOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
+        Gender gender = Gender.fromStringValue(inputLn("Укажите пол"));
+        if ((inputLn("Добавить родителей? 1.да 2.нет")).equals("1")) {
+            presenter.addRecord(
+                    name, gender, dateOfBirth,
+                    inputLn("Имя отца"), checkDateOfBirth(inputLn("Год рождения отца")),
+                    inputLn("Имя матери"), checkDateOfBirth(inputLn("Год рождения матери")));
+        } else if (gender != null) presenter.addRecord(name, gender, dateOfBirth);
+        else System.out.println("Неверно указан пол человека");
     }
+
 
     /**
      * Запрашивает у пользователя имя и год рождения, и выводит соответствующую запись из семейного дерева через
      * Presenter.
      */
     public void getRecordInTree() {
-        System.out.println("Укажите имя");
-        String name = scanner.nextLine();
-        System.out.println("Укажите год рождения");
-        String year = scanner.nextLine();
-        System.out.println(presenter.getRecord(name, year));
+        String name = inputLn("Укажите имя");
+        int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
+        if (yearOfBirth == -1) System.out.println(presenter.getRecord(name, yearOfBirth));
+        else System.out.println("Неверно указан год рождения");
     }
 
     /**
      * Выводит все записи из семейного дерева через Presenter.
      */
-    public void getAllRecord() {
-        presenter.getAllRecord();
+    public void showAllRecord() {
+        List<Human> allRecord = presenter.getAllRecord();
+        if (allRecord.isEmpty()) System.out.println("Семейное древо пусто.");
+        else {
+            System.out.println("Семейное древо:");
+            allRecord.forEach(person -> System.out.println(person.getName() + " (" + person.getYearOfBirth() + ")"));
+        }
+    }
+
+    /**
+     * Запрашивает у пользователя имя и год рождения и выводит родителей человека через Presenter.
+     */
+    public void getParents() {
+        String name = inputLn("Укажите имя");
+        int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
+        if (yearOfBirth != -1) {
+            System.out.println(presenter.getParents(name, yearOfBirth).toString());
+        } else System.out.println("Неверно указан год рождения");
+
+    }
+
+    public void getChildren() {
+        String name = inputLn("Укажите имя родителя");
+        int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
+        if (yearOfBirth != -1) {
+            System.out.println(presenter.getChildren(name, yearOfBirth).toString());
+        } else System.out.println("Неверно указан год рождения");
+    }
+
+    /**
+     * Запрашивает у пользователя тип сортировки и сортирует семейное дерево через Presenter.
+     */
+    public void sortTree() {
+        System.out.println("Выберите вид сортировки");
+        SortingMenu sortingMenu = new SortingMenu(this);
+        System.out.println(sortingMenu.printMenu());
+        int choice = sortingMenu.checkInputLineMenu(inputLn("Введите число"));
+        if (choice != -1) {
+            sortingMenu.execute(choice);
+        } else System.out.println("Ошибка ввода");
+
     }
 
     /**
@@ -147,26 +184,18 @@ public class ConsoleUI implements View {
         work = false;
     }
 
-    /**
-     * Запрашивает у пользователя имя и год рождения и выводит родителей человека через Presenter.
-     */
-    public void getParents() {
-        System.out.println("Укажите имя");
-        String name = scanner.nextLine();
-        System.out.println("Укажите год рождения");
-        String year = scanner.nextLine();
-        presenter.getParents(name, year);
+    public void sortByAlphabeticalOrder() {
+        presenter.sortByAlphabeticalOrder();
+        System.out.println("Древо отсортировано по именам в алфавитном порядке. ");
     }
 
-    /**
-     * Запрашивает у пользователя тип сортировки и сортирует семейное дерево через Presenter.
-     */
-    public void sortTree() {
-        System.out.println("""
-                Выберите тип сортировки
-                1. Имена по алфавиту
-                2. По длине имени
-                3. По дате рождения""");
-        presenter.sortTree(scanner.nextLine());
+    public void sortByDateBirth() {
+        presenter.sortByDateBirth();
+        System.out.println("Древо отсортировано по дате рождения");
+    }
+
+    public void sortByNameLength() {
+        presenter.sortByNameLength();
+        System.out.println("Древо отсортировано по длине имени");
     }
 }

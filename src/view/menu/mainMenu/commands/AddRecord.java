@@ -1,10 +1,10 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
 
 /**
  * Класс AddRecord представляет команду добавления записи в древо в меню консольного пользовательского интерфейса (UI).
- * Реализует интерфейс Command.
+ * Реализует интерфейс Sortedable.
  */
 public class AddRecord implements Command {
     private ConsoleUI consoleUI;
@@ -25,6 +25,6 @@ public class AddRecord implements Command {
 
     @Override
     public void execute() {
-        consoleUI.addRecordInTree();
+        consoleUI.addRecord();
     }
 }

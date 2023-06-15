@@ -1,15 +1,21 @@
-package model;
+package model.service;
 
 import model.familyTrees.FamilyTree;
+import model.familyTrees.comparators.ByDateBirth;
+import model.familyTrees.comparators.NameAlphabetical;
+import model.familyTrees.comparators.NameLength;
 import model.fileManage.FileManager;
 import model.members.Gender;
 import model.members.Human;
 import model.members.Member;
+import view.menu.sortMenu.SortingMenu;
+import view.menu.sortMenu.commands.SortByNameLength;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Класс HumanService предоставляет функциональность для работы с семейным древом (FamilyTree) и файловым менеджером (FileManager).
+ * Класс model.service.HumanService предоставляет функциональность для работы с семейным древом (FamilyTree) и файловым менеджером (FileManager).
  * <p>
  * Он обеспечивает импорт и экспорт данных, добавление новых записей в древо, получение информации о записях и сортировку древа.
  */
@@ -17,8 +23,9 @@ public class HumanService {
     private FamilyTree<Human> familyTree;
     private FileManager fileManager;
 
+
     /**
-     * Создает новый объект HumanService.
+     * Создает новый объект model.service.HumanService.
      * Инициализирует семейное древо и файловый менеджер.
      */
     public HumanService() {
@@ -26,7 +33,7 @@ public class HumanService {
     }
 
     /**
-     * Возвращает семейное древо, связанное с HumanService.
+     * Возвращает семейное древо, связанное с model.service.HumanService.
      *
      * @return Семейное древо.
      */
@@ -35,12 +42,23 @@ public class HumanService {
     }
 
     /**
-     * Возвращает файловый менеджер, связанный с HumanService.
+     * Возвращает файловый менеджер, связанный с model.service.HumanService.
      *
      * @return Файловый менеджер.
      */
-    public FileManager getFileManager() {
-        return fileManager;
+
+
+    public String getNameFamilyTree() {
+        return familyTree.getNameFamilyTree();
+    }
+
+    /**
+     * Проверяет создано ли семейное древо
+     *
+     * @return true если создано
+     */
+    public boolean checkCreateFamilyTree() {
+        return familyTree != null;
     }
 
     /**
@@ -72,6 +90,20 @@ public class HumanService {
         familyTree.addPersonInFamilyTree(new Human(name, gender, dateOfBirth));
     }
 
+    public void addRecord(String name, Gender gender, int dateOfBirth,
+                          String parentName, int yearOfBirth) {
+        familyTree.addPersonInFamilyTree(new Human(name, gender, dateOfBirth), parentName, yearOfBirth);
+    }
+
+    public void addRecord(String name, Gender gender, int dateOfBirth,
+                          String fatherName, int yearOfBirthFather,
+                          String motherName, int yearOfBirthMother) {
+        familyTree.addPersonInFamilyTree(
+                new Human(name, gender, dateOfBirth),
+                fatherName, yearOfBirthFather,
+                motherName, yearOfBirthMother);
+    }
+
     /**
      * Возвращает запись из семейного древа по указанному имени и году рождения.
      *
@@ -80,22 +112,15 @@ public class HumanService {
      * @return Объект Member с указанным именем и годом рождения, или null, если запись не найдена.
      */
     public Member getRecord(String name, int year) {
-        return familyTree.getHumanFromTree(name, year);
+        return familyTree.getPersonFromTree(name, year);
     }
 
     /**
      * Выводит все записи из семейного древа.
      * Если древо пусто, выводит соответствующее сообщение.
      */
-    public void getAllRecord() {
-        if (familyTree.getFamilyTree().isEmpty()) {
-            System.out.println("Семейное древо пусто.");
-        } else {
-            System.out.println("Семейное древо:");
-            for (Human person : familyTree) {
-                System.out.println(person.getName() + " (" + person.getYearOfBirth() + ")");
-            }
-        }
+    public List<Human> getAllRecord() {
+        return familyTree.getFamilyTree();
     }
 
     /**
@@ -105,31 +130,35 @@ public class HumanService {
      * @param name        Имя человека.
      * @param yearOfBirth Год рождения человека.
      */
-    public void getParents(String name, int yearOfBirth) {
-        Member child = familyTree.getHumanFromTree(name, yearOfBirth);
-        if (child != null) {
-            String father = Optional.ofNullable(child.getFather()).
-                    map(Member::getName).orElse("Неизвестно");
-            String mother = Optional.ofNullable(child.getMother()).
-                    map(Member::getName).orElse("Неизвестно");
-            System.out.printf("Ребенок -> %s, отец -> %s, мать %s\n",
-                    child.getName(), father, mother);
-        } else {
-            System.out.println("Не найден в древе");
-        }
+    public List<Human> getParents(String name, int yearOfBirth) {
+        return convertMemberToChildren(familyTree.getParents(name, yearOfBirth));
     }
 
-    /**
-     * Сортирует семейное древо в соответствии с выбранным вариантом сортировки.
-     *
-     * @param choice Выбранный вариант сортировки (1 - по алфавиту, 2 - по длине имени, 3 - по дате рождения).
-     */
-    public void sortTree(String choice) {
-        switch (choice) {
-            case "1" -> familyTree.sortTreeByAlphabeticalOrder();
-            case "2" -> familyTree.sortTreeByNameLength();
-            case "3" -> familyTree.sortTreeByDateBirth();
-            default -> System.out.println("Ошибка ввода");
+    public List<Human> getChildren(String name, int yearOfBirth) {
+        return convertMemberToChildren(familyTree.getChildren(name, yearOfBirth));
+    }
+
+    private List<Human> convertMemberToChildren(List<Member> memberList) {
+        List<Human> humanList = new ArrayList<>();
+        for (Member member : memberList) {
+            if (member instanceof Human human) {
+                humanList.add(human);
+            }
         }
+        return humanList;
+    }
+
+
+    public void sortByAlphabeticalOrder() {
+        familyTree.sort(new NameAlphabetical<>());
+    }
+
+    public void sortByDateBirth() {
+        familyTree.sort(new NameLength<>());
+    }
+
+    public void sortByNameLength() {
+        familyTree.sort((new ByDateBirth<>()));
+
     }
 }

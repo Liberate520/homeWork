@@ -1,7 +1,6 @@
 package model.familyTrees;
 
 import model.familyTrees.comparators.ByDateBirth;
-import model.familyTrees.comparators.NameAlphabetical;
 import model.familyTrees.comparators.NameLength;
 import model.familyTrees.iterators.PersonIterator;
 import model.members.Gender;
@@ -9,10 +8,7 @@ import model.members.Member;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Класс, представляющий семейное древо.
@@ -28,7 +24,6 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         this.nameFamilyTree = nameFamilyTree;
         this.familyTree = new ArrayList<>();
     }
-
 
 
     public String getNameFamilyTree() {
@@ -91,7 +86,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
      */
     public void addPersonInFamilyTree(T person, String parent, int yearOfBirth) {
         if (!isPersonInTree(person)) {
-            addBranchParentChild(getHumanFromTree(parent, yearOfBirth), person);
+            addBranchParentChild(getPersonFromTree(parent, yearOfBirth), person);
             familyTree.add(person);
         }
     }
@@ -109,8 +104,8 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
                                       String fatherName, int yearOfBirthFather,
                                       String motherName, int yearOfBirthMother) {
         if (!isPersonInTree(child)) {
-            addBranchParentChild(getHumanFromTree(fatherName, yearOfBirthFather), child);
-            addBranchParentChild(getHumanFromTree(motherName, yearOfBirthMother), child);
+            addBranchParentChild(getPersonFromTree(fatherName, yearOfBirthFather), child);
+            addBranchParentChild(getPersonFromTree(motherName, yearOfBirthMother), child);
             familyTree.add(child);
         }
     }
@@ -122,7 +117,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
      * @param yearOfBirth год рождения человека
      * @return объект Human, представляющий найденного человека, или null, если человек не найден
      */
-    public T getHumanFromTree(String personName, int yearOfBirth) {
+    public T getPersonFromTree(String personName, int yearOfBirth) {
         Year temp = Year.of(yearOfBirth);
         Optional<T> result =
                 familyTree.stream()
@@ -150,13 +145,13 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
      * @param yearOfBirth год рождения ребенка
      */
     public List<Member> getParents(String parentName, int yearOfBirth) {
-        T child = getHumanFromTree(parentName, yearOfBirth);
+        T child = getPersonFromTree(parentName, yearOfBirth);
         List<Member> temp = new ArrayList<>();
         if (child != null) {
             temp.add(child.getFather());
             temp.add(child.getMother());
-            return temp;
-        } else return temp;
+        }
+        return temp;
     }
 
 
@@ -167,7 +162,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
      * @param yearOfBirth год рождения родителя
      */
     public List<Member> getChildren(String parentName, int yearOfBirth) {
-        return Optional.ofNullable(getHumanFromTree(parentName, yearOfBirth))
+        return Optional.ofNullable(getPersonFromTree(parentName, yearOfBirth))
                 .map(T::getChildren).orElse(null);
     }
 
@@ -191,19 +186,9 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
     /**
      * Сортирует древо в алфавитном порядке
      */
-    public void sortTreeByAlphabeticalOrder() {
-
-        familyTree.sort(new NameAlphabetical<>());
+    public void sort(Comparator<Member> comparatorSort) {
+        familyTree.sort(comparatorSort);
     }
 
-    /**
-     * Сортирует древо по длине имени
-     */
-    public void sortTreeByNameLength() {
-        familyTree.sort(new NameLength<>());
-    }
 
-    public int familyTreeSize() {
-        return familyTree.size();
-    }
 }

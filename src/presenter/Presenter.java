@@ -1,13 +1,16 @@
 package presenter;
 
-import model.HumanService;
+import model.members.Human;
+import model.service.HumanService;
 import model.members.Gender;
 import model.members.Member;
+import view.menu.sortMenu.SortingMenu;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * Класс Presenter служит посредником между представлением (UI) и моделью (HumanService).
+ * Класс Presenter служит посредником между представлением (UI) и моделью (model.service.HumanService).
  * <p>
  * Он обрабатывает взаимодействие с пользователем, обрабатывает ввод и соответствующим образом обновляет модель.
  */
@@ -16,23 +19,28 @@ public class Presenter implements Serializable {
 
     /**
      * Создает новый объект Presenter.
-     * Инициализирует HumanService.
+     * Инициализирует model.service.HumanService.
      */
     public Presenter() {
         this.humanService = new HumanService();
     }
 
     /**
-     * Возвращает объект HumanService, связанный с Presenter.
+     * Возвращает объект model.service.HumanService, связанный с Presenter.
      *
-     * @return Объект HumanService.
+     * @return Объект model.service.HumanService.
      */
-    public HumanService getHumanService() {
-        return humanService;
+
+    public boolean checkCreateFamilyTree() {
+        return humanService.checkCreateFamilyTree();
+    }
+
+    public String getNameFamilyTree() {
+        return humanService.getNameFamilyTree();
     }
 
     /**
-     * Импортирует файл с указанным путем filePath в HumanService.
+     * Импортирует файл с указанным путем filePath в model.service.HumanService.
      *
      * @param filePath Путь к импортируемому файлу.
      */
@@ -41,65 +49,80 @@ public class Presenter implements Serializable {
     }
 
     /**
-     * Сохраняет данные в HumanService в файл.
+     * Сохраняет данные в model.service.HumanService в файл.
      */
     public void saveFile() {
         humanService.saveFile();
     }
 
     /**
-     * Добавляет запись в HumanService с указанными именем, полом и годом рождения.
+     * Добавляет запись в model.service.HumanService с указанными именем, полом и годом рождения.
      *
      * @param name        Имя человека.
      * @param gender      Пол человека.
-     * @param dateOfBirth Год рождения человека.
+     * @param yearOfBirth Год рождения человека.
      */
-    public void addRecord(String name, String gender, String dateOfBirth) {
-        int year = Integer.parseInt(dateOfBirth);
+    public void addRecord(String name, Gender gender, int yearOfBirth) {
+        humanService.addRecord(name, gender, yearOfBirth);
+    }
 
-        if (Gender.fromStringValue(gender) != null) {
-            humanService.addRecord(name, Gender.fromStringValue(gender), year);
-        } else {
-            System.out.println("Неверно указан пол");
-        }
+    public void addRecord(String name, Gender gender, int dateOfBirth,
+                          String parentName, int yearOfBirth) {
+        humanService.addRecord(name, gender, dateOfBirth, parentName, yearOfBirth);
+    }
+
+    public void addRecord(String name, Gender gender, int dateOfBirth,
+                          String fatherName, int yearOfBirthFather,
+                          String motherName, int yearOfBirthMother) {
+        humanService.addRecord(
+                name, gender, dateOfBirth,
+                fatherName, yearOfBirthFather,
+                motherName, yearOfBirthMother);
     }
 
     /**
-     * Возвращает запись из HumanService по указанному имени и году рождения.
+     * Возвращает запись из model.service.HumanService по указанному имени и году рождения.
      *
-     * @param name Имя человека.
-     * @param year Год рождения человека.
+     * @param name        Имя человека.
+     * @param yearOfBirth Год рождения человека.
      * @return Объект Member с соответствующим именем и годом рождения, или null, если запись не найдена.
      */
-    public Member getRecord(String name, String year) {
-        int num = Integer.parseInt(year);
-        return humanService.getRecord(name, num);
+    public Member getRecord(String name, int yearOfBirth) {
+        return humanService.getRecord(name, yearOfBirth);
     }
 
     /**
-     * Выводит все записи из HumanService.
+     * Выводит все записи из model.service.HumanService.
      */
-    public void getAllRecord() {
-        humanService.getAllRecord();
+    public List<Human> getAllRecord() {
+        return humanService.getAllRecord();
     }
 
     /**
-     * Выводит родителей человека из HumanService по указанному имени и году рождения.
+     * Выводит родителей человека из model.service.HumanService по указанному имени и году рождения.
      *
      * @param name        Имя человека.
      * @param yearOfBirth Год рождения человека.
      */
-    public void getParents(String name, String yearOfBirth) {
-        int num = Integer.parseInt(yearOfBirth);
-        humanService.getParents(name, num);
+    public List<Human> getParents(String name, int yearOfBirth) {
+        return humanService.getParents(name, yearOfBirth);
     }
 
-    /**
-     * Сортирует дерево в HumanService в соответствии с указанным выбором.
-     *
-     * @param choice Выбор типа сортировки.
-     */
-    public void sortTree(String choice) {
-        humanService.sortTree(choice);
+    public List<Human> getChildren(String name, int yearOfBirth) {
+        return humanService.getChildren(name, yearOfBirth);
+
+    }
+
+    public void sortByAlphabeticalOrder() {
+        humanService.sortByAlphabeticalOrder();
+    }
+
+
+    public void sortByDateBirth() {
+        humanService.sortByDateBirth();
+    }
+
+    public void sortByNameLength() {
+        humanService.sortByNameLength();
     }
 }

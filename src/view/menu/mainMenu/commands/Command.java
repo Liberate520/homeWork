@@ -1,7 +1,7 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 /**
- * Интерфейс Command представляет команду в меню консольного пользовательского интерфейса (UI).
+ * Интерфейс Sortedable представляет команду в меню консольного пользовательского интерфейса (UI).
  * Команда содержит описание и метод выполнения.
  */
 public interface Command {

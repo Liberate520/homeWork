@@ -1,12 +1,12 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
 
 /**
  * Класс GetAllRecord представляет команду показа всех записей в древе в меню консольного пользовательского интерфейса (UI).
- * Реализует интерфейс Command.
+ * Реализует интерфейс Sortedable.
  */
-public class GetAllRecord implements Command {
+public class ShowAllRecord implements Command {
 
     private ConsoleUI consoleUI;
 
@@ -15,7 +15,7 @@ public class GetAllRecord implements Command {
      *
      * @param consoleUI объект ConsoleUI, используемый для показа всех записей в древе
      */
-    public GetAllRecord(ConsoleUI consoleUI) {
+    public ShowAllRecord(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 
@@ -26,7 +26,7 @@ public class GetAllRecord implements Command {
 
     @Override
     public void execute() {
-        consoleUI.getAllRecord();
+        consoleUI.showAllRecord();
 
     }
 }

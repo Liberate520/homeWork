@@ -1,34 +1,15 @@
 package view.menu;
 
 import view.ConsoleUI;
-import view.menu.commands.*;
+import view.menu.mainMenu.commands.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Класс MainMenu представляет главное меню консольного пользовательского интерфейса (UI).
- * Содержит список доступных команд и предоставляет методы для выполнения выбранной команды и получения размера меню.
- */
-public class MainMenu {
+public abstract class BaseMenu  {
     private List<Command> commandList;
 
-    /**
-     * Создает новый объект MainMenu.
-     * Инициализирует список команд и добавляет их в список.
-     *
-     * @param consoleUI объект ConsoleUI для передачи в конструкторы команд
-     */
-    public MainMenu(ConsoleUI consoleUI) {
-        this.commandList = new ArrayList<>();
-        this.commandList.add(new AddRecord(consoleUI));
-        this.commandList.add(new GetRecord(consoleUI));
-        this.commandList.add(new GetParents(consoleUI));
-        this.commandList.add(new GetAllRecord(consoleUI));
-        this.commandList.add((new SortingTrees(consoleUI)));
-        this.commandList.add(new Finish(consoleUI));
-
-
+    public BaseMenu(List<Command> commandList) {
+        this.commandList = commandList;
     }
 
     /**
@@ -68,5 +49,20 @@ public class MainMenu {
         return commandList.size();
     }
 
+    /**
+     * Проверяет, входят ли входные данные в пределы функционала menu
+     *
+     * @param choice введенные данные
+     * @return number menu
+     */
+    public int checkInputLineMenu(String choice) {
+        if (choice.matches("[0-9]+")) {
+            int result = Integer.parseInt(choice);
+            if (result > 0 && result <= size()) return result;
+        }
+        return -1;
+    }
+
 
 }
+
