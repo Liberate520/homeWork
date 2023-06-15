@@ -148,11 +148,11 @@ public class HumanService {
     }
 
     public void sortByDateBirth() {
-        familyTree.sort(new NameLength<>());
+        familyTree.sort(new ByDateBirth<>());
     }
 
     public void sortByNameLength() {
-        familyTree.sort((new ByDateBirth<>()));
+        familyTree.sort(new NameLength<>());
 
     }
 }

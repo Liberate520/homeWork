@@ -149,7 +149,7 @@ public class ConsoleUI implements View {
                     break;
                 }
             }
-        } else System.out.println("Запись не найдена");
+        } else System.out.println("Запись не найдена.");
     }
 
 
@@ -158,7 +158,7 @@ public class ConsoleUI implements View {
      */
     public void showAllRecord() {
         List<Human> allRecord = presenter.getAllRecord();
-        if (allRecord.isEmpty()) System.out.println("Семейное древо пусто.");
+        if (allRecord.isEmpty()) System.out.println("Семейное древо пусто. ");
         else {
             System.out.println("Семейное древо:");
             allRecord.forEach(person -> System.out.println(person.getName() + " (" + person.getYearOfBirth() + ")"));
