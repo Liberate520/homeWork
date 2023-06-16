@@ -2,7 +2,7 @@ package Hw.sem1;
 
 import java.io.*;
 
-class FileHandler implements DataStorage {
+public class FileHandler implements DataStorage {
     private FamilyTree familyTree;
 
     public FileHandler(FamilyTree familyTree) {
@@ -15,10 +15,10 @@ class FileHandler implements DataStorage {
         }
     }
 
-    public void loadFromFile(String fileName) throws IOException, ClassNotFoundException {
+    public FamilyTree loadFromFile(String fileName) throws IOException, ClassNotFoundException {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             FamilyTree loadedFamilyTree = (FamilyTree) inputStream.readObject();
-            familyTree = loadedFamilyTree;
+            return loadedFamilyTree;
         }
     }
 }

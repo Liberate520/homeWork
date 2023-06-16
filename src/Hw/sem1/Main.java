@@ -20,7 +20,9 @@ public class Main {
 
         try {
             fileHandler.saveToFile("family_tree.dat");
-            fileHandler.loadFromFile("family_tree.dat");
+
+            FamilyTree loadedFamilyTree = fileHandler.loadFromFile("family_tree.dat");
+            familyTree = loadedFamilyTree;
 
             List<Person> allMembers = familyTree.getAllMembers();
             for (Person person : allMembers) {
