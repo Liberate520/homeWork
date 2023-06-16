@@ -1,10 +1,9 @@
 package Hw.sem1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-class FamilyTree implements Serializable {
+class FamilyTree implements Serializable, Iterable<Person> {
     private Person root;
 
     public FamilyTree(Person root) {
@@ -35,5 +34,21 @@ class FamilyTree implements Serializable {
         for (Person child : person.getChildren()) {
             traverseTree(child, allMembers);
         }
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        List<Person> allMembers = getAllMembers();
+        return allMembers.iterator();
+    }
+
+    public void sortByName() {
+        List<Person> allMembers = getAllMembers();
+        Collections.sort(allMembers, Comparator.comparing(Person::getName));
+    }
+
+    public void sortByBirthDate() {
+        List<Person> allMembers = getAllMembers();
+        Collections.sort(allMembers, Comparator.comparing(Person::getBirthDate));
     }
 }

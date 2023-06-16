@@ -61,4 +61,9 @@ public class Person implements Serializable {
     public void addChild(Person child) {
         children.add(child);
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Gender: " + gender + ", Birth Date: " + birthDate + ", Death Date: " + deathDate;
+    }
 }

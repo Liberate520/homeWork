@@ -17,9 +17,7 @@ public class FileHandler implements DataStorage {
 
     public FamilyTree loadFromFile(String fileName) throws IOException, ClassNotFoundException {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
-            FamilyTree loadedFamilyTree = (FamilyTree) inputStream.readObject();
-            return loadedFamilyTree;
+            return (FamilyTree) inputStream.readObject();
         }
     }
 }
-

@@ -11,10 +11,8 @@ public class Main {
         Person tom = new Person("Tom", Gender.MALE, LocalDate.of(2005, 3, 10), null);
 
         FamilyTree familyTree = new FamilyTree(john);
-
+        familyTree.addChild(john, jane);
         familyTree.addChild(john, tom);
-        tom.setFather(john);
-        tom.setMother(jane);
 
         FileHandler fileHandler = new FileHandler(familyTree);
 
@@ -24,16 +22,20 @@ public class Main {
             FamilyTree loadedFamilyTree = fileHandler.loadFromFile("family_tree.dat");
             familyTree = loadedFamilyTree;
 
-            List<Person> allMembers = familyTree.getAllMembers();
-            for (Person person : allMembers) {
-                System.out.println("Name: " + person.getName());
-                System.out.println("Gender: " + person.getGender());
-                System.out.println("Birth Date: " + person.getBirthDate());
-                System.out.println("Death Date: " + person.getDeathDate());
-                System.out.println("Father: " + (person.getFather() != null ? person.getFather().getName() : "Unknown"));
-                System.out.println("Mother: " + (person.getMother() != null ? person.getMother().getName() : "Unknown"));
-                System.out.println("Children: " + person.getChildren().size());
-                System.out.println("--------------------");
+
+            familyTree.sortByName();
+            System.out.println("Sorted by name:");
+            for (Person person : familyTree) {
+                System.out.println(person);
+            }
+
+            System.out.println();
+
+
+            familyTree.sortByBirthDate();
+            System.out.println("Sorted by birth date:");
+            for (Person person : familyTree) {
+                System.out.println(person);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
