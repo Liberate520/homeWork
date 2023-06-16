@@ -18,7 +18,7 @@ public class Service {
     } // Изменил параметр класса
 
 
-    public void addFamilyMember(String name, LocalDate date, String mother, String father) {
+    public boolean addFamilyMember(String name, LocalDate date, String mother, String father) {
         try {
             Human member = new Human(name, date);
             HumanObjectInterface mom = family.findPersonByName(mother);
@@ -36,21 +36,18 @@ public class Service {
 
             }
             family.addPeople(member);
+            return true;
         } catch (Exception e) {
-            MessageForUsers message = new MessageForUsers("Ошибка ввода данных!");
-            message.setTextMessage();
-
+            return false;
         }
     }
 
 
-    public void showAllFamilyMembers() {
+    public String showAllFamilyMembers() {
         try {
-            MessageForUsers message = new MessageForUsers(family.getFamilies());
-            message.setTextMessage();
+            return family.getFamilies();
         } catch (Exception e) {
-            MessageForUsers message = new MessageForUsers("Дерево пусто!");
-            message.setTextMessage();
+            return null;
         }
 
     }
@@ -88,13 +85,13 @@ public class Service {
         family = generator.testFamilyTree();
     }
 
-    public void updatePersonByName(String oldName, String name, LocalDate birthdate) {
+    public boolean updatePersonByName(String oldName, String name, LocalDate birthdate) {
         try {
             Human person = (Human) family.findPersonByName(oldName);
             person.updatePersonParameters(name, birthdate);
+            return true;
         } catch (Exception o) {
-            MessageForUsers message = new MessageForUsers("Ошибка ввода данных!");
-            message.setTextMessage();
+            return false;
         }
     }
 

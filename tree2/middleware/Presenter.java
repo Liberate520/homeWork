@@ -12,36 +12,51 @@ import java.time.LocalDate;
 public class Presenter {
 
     Service service = new Service(new FamilyTree());
-    public void addFamilyMember(String name, LocalDate date, String mother, String father){
-            service.addFamilyMember(name, date, mother, father);
+
+    public void addFamilyMember(String name, LocalDate date, String mother, String father) {
+        if (!service.addFamilyMember(name, date, mother, father)) {
+            MessageForUsers message = new MessageForUsers();
+            message.setTextErrorMessage();
+        } else {
+            MessageForUsers message = new MessageForUsers("\nПользователь по имени " + name + " успешно добавлен!\n");
+            message.setTextMessage();
+        }
+
     }
 
-    public void showFamilyMembers(){
-            service.showAllFamilyMembers();
+    public void showFamilyMembers() {
+        String result = service.showAllFamilyMembers();
+        MessageForUsers message = new MessageForUsers(result);
+        if (result != null) {
+            message.setTextMessage();
+        } else {
+            message.setTextErrorMessage();
+        }
     }
+
 
     public void fillFamilyTreeWithTestData() {
-            service.testFamily();
+        service.testFamily();
     }
 
 
-    public void sortByName(){
+    public void sortByName() {
         service.sortByName();
     }
 
-    public void sortByNameDesc(){
+    public void sortByNameDesc() {
         service.sortByNameDesc();
     }
 
-    public void sortById(){
+    public void sortById() {
         service.sortById();
     }
 
-    public void sortByIdDesc(){
+    public void sortByIdDesc() {
         service.sortByIdDesc();
     }
 
-    public HumanObjectInterface<Human> findPerson(String name){
+    public HumanObjectInterface<Human> findPerson(String name) {
         return service.findPersonByName(name);
     }
 
@@ -51,31 +66,34 @@ public class Presenter {
     }
 
 
-    public void updatePerson(String oldName, String newName, LocalDate date){
-        service.updatePersonByName(oldName, newName, date);
+    public void updatePerson(String oldName, String newName, LocalDate date) {
+        if (!service.updatePersonByName(oldName, newName, date)) {
+            MessageForUsers message = new MessageForUsers("Ошибка ввода данных!");
+            message.setTextMessage();
+        }
+        ;
     }
 
-    public void saveFile(){
+    public void saveFile() {
         try {
             service.saveFamilyTree();
             MessageForUsers message = new MessageForUsers("Файл успешно сохранен в байт-формате");
             message.setTextMessage();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             MessageForUsers message = new MessageForUsers();
             message.setTextErrorMessage();
 
         }
 
     }
+
     public void loadFile() {
         try {
             service.loadFamilyTree();
             MessageForUsers message = new MessageForUsers("Файл загружен успешно");
             message.setTextMessage();
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             MessageForUsers message = new MessageForUsers();
             message.setTextErrorMessage();
         }
@@ -84,8 +102,7 @@ public class Presenter {
     public void deleteFamilyTree() {
         try {
             service.deleteFamilyTree();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             MessageForUsers message = new MessageForUsers();
             message.setTextErrorMessage();
         }
