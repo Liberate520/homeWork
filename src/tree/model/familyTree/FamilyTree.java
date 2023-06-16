@@ -27,30 +27,18 @@ public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
         familyTree.add(human);
         for (T someHuman : familyTree) {
             if (someHuman.equals(human.getFather())) {
-                someHuman.addChild(human);
+                someHuman.setChildren(human);
             }
         }
         for (T someHuman : familyTree) {
             if (someHuman.equals(human.getMother())) {
-                someHuman.addChild(human);
+                someHuman.setChildren(human);
             }
         }
     }
 
     public List<T> getFamilyTree() {
         return this.familyTree;
-    }
-
-    public void outFamily(T human) {
-        familyTree.remove(human);
-    }
-
-    @Override
-    public T findHuman(String name) {
-        for (T human : familyTree) {
-            if (human.getName().equals(name)) return human;
-        }
-        return null;
     }
 
     public void sortByName() {

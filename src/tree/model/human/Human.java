@@ -23,42 +23,33 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
 
     public Human(String name, Gender gender, Human human) {
             this(name, gender, null, null);
-            addParent(human);
+            if (human != null) {
+                if (human.gender == man) {
+                    setFather(human);
+                } else {
+                    setMother(human);
+                }
+            }
     }
-
     public Human(String name, Gender gender) {
         this(name, gender, null);
     }
+
     @Override
     public String getName() { return name; }
+    @Override
     public Gender getGender() { return gender;}
     @Override
     public Human getFather() { return father; }
-    public void setFather(Human father) { this.father = father; }
     @Override
     public Human getMother() { return mother; }
-    public void setMother(Human mother) { this.mother = mother; }
-    public void setChildren(Human child) { children.add(child); }
-
-    public void addParent(Human human) {
-        if (human != null) {
-            if (human.gender == man) {
-                if (father != null) father.children.remove(this);
-                father = human;
-            } else {
-                if (mother != null) mother.children.remove(this);
-                mother = human;
-            }
-            human.children.add(this);
-        }
-    }
     @Override
-    public void addChild(Human human){
-        if (human != null) {
-            children.add(human);
-            human.addParent(this);
-        }
-    }
+    public void setFather(Human father) { this.father = father; }
+    @Override
+    public void setMother(Human mother) { this.mother = mother; }
+
+    @Override
+    public void setChildren(Human child) { children.add(child); }
 
     public String getParent() {
         if(father == null & mother == null) return "(Отец: " + "NULL" + ", Мать: " + "NULL" + ")";
