@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private static int humanIdCounter = 0;
     private int id;
     private String name;
@@ -18,7 +18,7 @@ public class Human implements Serializable {
     private List<Human> children;
 
     public Human(String name, String gender, LocalDate dateOfBirth, LocalDate deathDate) {
-        this.id = humanIdCounter++;
+        this.id = humanIdCounter;
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -27,7 +27,7 @@ public class Human implements Serializable {
     }
 
     public Human(String name, String gender, Human father, Human mother, LocalDate dateOfBirth, LocalDate deathDate) {
-        this.id = humanIdCounter++;
+        this.id = humanIdCounter;
         this.name = name;
         this.gender = gender;
         this.father = father;
@@ -43,6 +43,9 @@ public class Human implements Serializable {
 
 
 
+    public int getId(){
+        return id;
+    }
     public String getName() {
         return name;
     }
@@ -105,6 +108,9 @@ public class Human implements Serializable {
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
+        sb.append("ID: ");
+        sb.append(humanIdCounter++);
+        sb.append(", ");
         sb.append("Имя: ");
         sb.append(name);
         sb.append(", ");
@@ -162,9 +168,11 @@ public class Human implements Serializable {
         return res.toString();
     }
 
-
-
-//    @Override
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
+    }
+    //    @Override
 //    public boolean equals(Objects obj){
 //        if (this == obj){
 //            return true;

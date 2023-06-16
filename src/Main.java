@@ -8,8 +8,8 @@ public class Main {
         String filePath = "test.txt";
         FileOperations fileOperations = new Save();
 
-        Tree tree = (Tree) fileOperations.read(filePath);
-//        Tree tree = new Tree();
+//        Tree tree = (Tree) fileOperations.read(filePath);
+        Tree tree = new Tree();
 
         tree.add(new Human("Иван", "мужской", LocalDate.of(1987,07,15),null));
         tree.add(new Human("Ирина", "женский", LocalDate.of(1990,05,11),null));
