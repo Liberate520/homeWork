@@ -64,7 +64,7 @@ public class Console implements UI{
         if (choice != -1) {
             menu.exec(choice);
         } else {
-            inputError();
+            print(WRONGCHOICE);
         }
     }
 
@@ -76,13 +76,9 @@ public class Console implements UI{
         return -1;
     }
 
-    private void inputError(){
-        print(WRONGCHOICE);
-    }
-
     public String noData(){
         return NODATA;
-    }
+    } // TODO: mv messages to other class and this become view.messages().NODATA
 
     public void showFamilyTrees() {
         presenter.showFamilyTreeStr();
@@ -163,9 +159,7 @@ public class Console implements UI{
     public void addConnection(String familyID) {
         print("Введите имя первого человека");
         String firstName = scanner.nextLine();
-//        String firstHuman = presenter.searchHuman(firstName);
         String firstHuman = presenter.searchHumanInFamily(familyID, firstName);
-//        String firstHuman = presenter.searchHumanByNameInFamily(firstName, familyID);
         if (firstHuman == null) {
             print("Человек с таким именем не найден в текущей семье");
             return;
@@ -173,7 +167,6 @@ public class Console implements UI{
         print("Введите имя второго человека");
         String secondName = scanner.nextLine();
         String secondHuman = presenter.searchHuman(secondName);
-//        String secondHuman = presenter.searchHumanByNameInFamily(secondName, familyID);
         if (secondHuman == null) {
             print("Человек с таким именем не найден в текущей семье");
             return;
