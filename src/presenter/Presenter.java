@@ -65,11 +65,9 @@ public class Presenter {
     }
 
     public boolean saveToFile(String path) {
-        if (path.isEmpty()) path = null;
         return model.save(path);
     }
     public boolean loadFromFile(String path) {
-        if (path.isEmpty()) path = null;
         return model.load(path);
     }
 
