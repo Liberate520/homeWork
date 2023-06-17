@@ -19,22 +19,33 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable, It
     public void addHuman(T human) {
         if (!humanList.contains(human)) {
             humanList.add(human);
-            if (human.getMother() != null) {
-                human.getMother().addChild(human);
+            T mother = getHumanObjectByName(human.getFirstMomName(), human.getLastMomName());
+            T father = getHumanObjectByName(human.getFirstDadName(), human.getLastDadName());
+            if (mother != null) {
+                mother.addChild(human);
             }
-            if (human.getFather() != null) {
-                human.getFather().addChild(human);
+            if (father != null) {
+                father.addChild(human);
             }
         }
     }
 
-    public String getHumanByName(String firstName, String lastName) {
+    public T getHumanObjectByName(String firstName, String lastName) {
         for (T human : humanList) {
             if (human.getFirstName().equals(firstName) && human.getLastName().equals(lastName)) {
-                return human.getInfo();
+                return human;
             }
         }
         return null;
+    }
+
+    public String getHumanByName(String firstName, String lastName) {
+        T human = getHumanObjectByName(firstName, lastName);
+        if (human != null) {
+            return human.getInfo();
+        } else {
+            return null;
+        }
     }
 
     public String getHumanByBirthDate(String birthDate) {

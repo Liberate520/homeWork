@@ -10,15 +10,21 @@ public interface FamilyTreeItem<T> {
 
     String getLastName();
 
+    String getFirstMomName();
+
+    String getLastMomName();
+
+    String getFirstDadName();
+
+    String getLastDadName();
+
     LocalDate getBirthDate();
 
     LocalDate getDeathDate();
 
-    T getMother();
-
-    T getFather();
-
     List<T> getChildren();
 
     String getInfo();
+
+    String getNotFoundInfo();
 }

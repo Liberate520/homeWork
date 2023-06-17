@@ -16,8 +16,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
     private String lastMomName;
     private String firstDadName;
     private String lastDadName;
-    private Human mother;
-    private Human father;
     private List<Human> children;
 
     public Human(String firstName, String lastName,
@@ -54,31 +52,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
         return lastName;
     }
 
-    @Override
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    @Override
-    public LocalDate getDeathDate() {
-        return deathDate;
-    }
-
-    @Override
-    public Human getMother() {
-        return mother;
-    }
-
-    @Override
-    public Human getFather() {
-        return father;
-    }
-
-    @Override
-    public List<Human> getChildren() {
-        return children;
-    }
-
     public String getFirstMomName() {
         return firstMomName;
     }
@@ -95,20 +68,19 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
         return lastDadName;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    @Override
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
+    @Override
+    public LocalDate getDeathDate() {
+        return deathDate;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
+    @Override
+    public List<Human> getChildren() {
+        return children;
     }
 
     public String getHumanInfo() {
@@ -121,20 +93,20 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
 
     public String getMotherInfo() {
         String motherInfo = "мать: ";
-        if (mother != null) {
-            motherInfo += mother.getFirstMomName() + " " + mother.getLastMomName();
+        if (firstMomName != null && lastMomName != null) {
+            motherInfo += firstMomName + " " + lastMomName;
         } else {
-            motherInfo += "неизвестна";
+            motherInfo += "Неизвестна";
         }
         return motherInfo;
     }
 
     public String getFatherInfo() {
-        String fatherInfo = "";
-        if (father != null) {
-            fatherInfo += father.getFirstDadName() + " " + father.getLastName();
+        String fatherInfo = "отец: ";
+        if (firstDadName != null && lastDadName != null) {
+            fatherInfo += firstDadName + " " + lastDadName;
         } else {
-            fatherInfo += "неизвестен";
+            fatherInfo += "Неизвестен";
         }
         return fatherInfo;
     }
@@ -151,7 +123,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
                 }
             }
         } else {
-            childrenInfo.append("нет");
+            childrenInfo.append("Детей нет");
         }
         return childrenInfo.toString();
     }
@@ -161,32 +133,54 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
         stringBuilder.append(getHumanInfo()).append("\n");
+        stringBuilder.append(getHumanYearsOldInfo()).append("\n");
         stringBuilder.append(getMotherInfo()).append(", ");
         stringBuilder.append(getFatherInfo()).append("\n");
-        stringBuilder.append(getChildrenInfo());
+        stringBuilder.append(getChildrenInfo()).append("\n");
         return stringBuilder.toString();
     }
 
-    public String getHumanYearsOld() {
+    @Override
+    public String getNotFoundInfo() {
+        return "Такого человека в фамильном дереве нет";
+    }
+
+    public String getHumanYearsOldInfo() {
         LocalDate date = LocalDate.now();
         Integer yearNow = date.getYear();
         Integer monthNow = date.getMonthValue();
         Integer birthYear = birthDate.getYear();
         Integer birthMonth = birthDate.getMonthValue();
-        Integer yearsOld = 0;
+        Integer yearsOld;
         if (deathDate != null) {
-            return "Данный человек умер " + deathDate.toString();
+            return "Данный человек умер " + deathDate;
         } else {
             if (monthNow < birthMonth) yearsOld = yearNow - birthYear - 1;
             else yearsOld = yearNow - birthYear;
         }
-        return yearsOld.toString() + " полных лет";
+        return yearsOld + yearsMsg(yearsOld);
+    }
+
+    public String yearsMsg(Integer yearsOld) {
+        if (yearsOld % 10 == 1) {
+            return " год";
+        } else if (yearsOld > 10 && yearsOld < 20) {
+            return " лет";
+        } else if (yearsOld % 10 == 2 || yearsOld % 10 == 3 || yearsOld % 10 == 4) {
+            return " года";
+        } else {
+            return " лет";
+        }
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Human human)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Human human)) {
+            return false;
+        }
         if (human.getFirstName().equals(getFirstName())) {
             if (human.getLastName().equals(getLastName())) {
                 if (human.getBirthDate() != getBirthDate()) {

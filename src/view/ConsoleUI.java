@@ -2,6 +2,7 @@ package view;
 
 import presenter.Presenter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -15,7 +16,11 @@ public class ConsoleUI implements View {
         scanner = new Scanner(System.in);
         work = true;
         mainMenu = new MainMenu(this);
-        presenter = new Presenter();
+    }
+
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
@@ -23,12 +28,22 @@ public class ConsoleUI implements View {
         System.out.println(message);
     }
 
-    private String scan() {
+    @Override
+    public void run() throws IOException, ClassNotFoundException {
+        print("-----Добро пожаловать в генеологическое дерево!-----");
+        printMainMenu();
+    }
+
+    public void stop() {
+        print("Ещё увидимся! Удачи!");
+        work = false;
+    }
+
+    public String scan() {
         return scanner.nextLine();
     }
 
-    public void run() {
-        print("-----Добро пожаловать в генеологическое дерево!-----");
+    public void printMainMenu() throws IOException, ClassNotFoundException {
         while (work) {
             print(mainMenu.printMenu());
             int choice = inputNumMenu();
@@ -38,11 +53,6 @@ public class ConsoleUI implements View {
             }
             mainMenu.execute(choice);
         }
-    }
-
-    public void stop() {
-        print("Ещё увидимся! Удачи!");
-        work = false;
     }
 
     private int inputNumMenu() {
@@ -61,63 +71,57 @@ public class ConsoleUI implements View {
         return choice > 0 && choice <= mainMenu.size();
     }
 
-    private String unknownMsg() {
-        return "неизвестно";
-    }
-
     public void addHuman() {
-        print("Укажите имя и фамилию (через пробел)");
-        String name = enterName();
-        String firstName = getFullName(name)[0];
-        String lastName = getFullName(name)[1];
+        print("Укажите имя");
+        String firstName = inputName();;
+        print("Укажите фамилию");
+        String lastName = inputName();
 
         print("Укажите дату рождения (в формате гггг-мм-дд)");
-        LocalDate birthDate = getDate(enterDate());
+        LocalDate birthDate = getDate(inputDate());
 
         print("Укажите дату смерти, если есть (в формате гггг-мм-дд), или нажмите Enter");
-        LocalDate deathDate = getDate(enterDate());
+        LocalDate deathDate = getDate(inputDate());
 
-        print("Укажите имя и фамилию матери, если есть (через пробел), или нажмите Enter");
-        String mom = enterName();
-        String firstMomName = getFullName(mom)[0];
-        String lastMomName = getFullName(mom)[1];
+        print("Укажите имя матери, если есть, или нажмите Enter");
+        String firstMomName = inputName();
+        print("Укажите фамилию матери, если есть, или нажмите Enter");
+        String lastMomName = inputName();
 
-        print("Укажите имя и фамилию отца, если есть (через пробел), или нажмите Enter");
-        String dad = enterName();
-        String firstDadName = getFullName(dad)[0];
-        String lastDadName = getFullName(dad)[1];
+        print("Укажите имя и фамилию отца, если есть, или нажмите Enter");
+        String firstDadName = inputName();
+        print("Укажите имя и фамилию отца, если есть, или нажмите Enter");
+        String lastDadName = inputName();
 
         presenter.addHuman(firstName, lastName, birthDate, deathDate,
                 firstMomName, lastMomName, firstDadName, lastDadName);
     }
 
-    private boolean checkEmptyEnter(String entered) {
-        return entered.isEmpty();
+    private boolean checkEmptyEnter(String input) {
+        return input.isEmpty();
     }
 
     private boolean checkName(String name) {
-        if (!name.matches("^[\\p{L} .'-]+$")) {
-            return false;
-        }
-        return true;
+//        if (!name.matches("^[\\p{L} .'-]+$")) {
+//        if (!name.isEmpty() && !name.matches("[^\\W\\d_]")) {
+//            return false;
+//        }
+//        return name.matches("^[\\p{L}.]+$");
+        return name.matches("^[\\p{L}]+$");
     }
 
-    private String enterName() {
+    private String inputName() {
         String name = scan();
-        if (!checkEmptyEnter(name)) {
-            while (!checkName(name)) {
-                print("Ошибка ввода имени или фимилии, повторите попытку");
-                name = scan();
-            }
-            return name;
-        } else {
-            return null;
+        while (!checkName(name)) {
+            print("Ошибка ввода имени или фимилии, повторите попытку");
+            name = scan();
         }
+        return name;
     }
 
     private String[] getFullName(String name) {
         if (name == null) {
-            name = unknownMsg() + " " + unknownMsg();
+            name = "Неизвестно";
         }
         return name.split(" ");
     }
@@ -129,9 +133,9 @@ public class ConsoleUI implements View {
         return true;
     }
 
-    private String enterDate() {
+    private String inputDate() {
         String date = scan();
-        if (!checkEmptyEnter(date)) {
+        if (!date.isEmpty()) {
 
             String localDate = LocalDate.now().toString();
             while (!checkDate(date) && date.equals(localDate)) {
@@ -165,7 +169,7 @@ public class ConsoleUI implements View {
 
     private String enterYear() {
         String year = scan();
-        if (!checkEmptyEnter(year)) {
+        if (!year.isEmpty()) {
             while (!checkYear(year)) {
                 print("Ошибка. Год введён неправильно, повторите попытку");
                 year = scan();
@@ -184,10 +188,10 @@ public class ConsoleUI implements View {
     }
 
     public void getHumanByName() {
-        print("Укажите имя и фамилию человека длл поиска (через пробел)");
-        String name = enterName();
-        String firstName = getFullName(name)[0];
-        String lastName = getFullName(name)[1];
+        print("Укажите имя человека для поиска");
+        String firstName = inputName();
+        print("Укажите фамилию человека для поиска");
+        String lastName = inputName();
         presenter.getHumanByName(firstName, lastName);
     }
 
