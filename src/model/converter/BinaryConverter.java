@@ -6,15 +6,16 @@ import java.io.*;
 import java.util.Arrays;
 
 public class BinaryConverter<E extends Member> implements Converter<E> {
-    private final String path;
+    private String path;
     private final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.bin"));
     private boolean convertSuccess;
     private String convertStatus;
 
     public BinaryConverter(String path) {
         convertSuccess = false;
-        convertStatus = "Not requested";
-        this.path = path;
+        convertStatus = "Not requested"; // TODO: probably change this to some enum of statuses
+        if (path != null && !path.isEmpty()) this.path = path;
+        else this.path = defaultPath;
     }
     public BinaryConverter() {
         this(defaultPath);
@@ -27,6 +28,12 @@ public class BinaryConverter<E extends Member> implements Converter<E> {
         return convertStatus;
     }
 
+    public String getPath() {
+        return path;
+    };
+    public void setPath(String newPath) {
+        if (newPath != null && !newPath.isEmpty()) path = newPath;
+    }
     @Override
     public void save(FamilyRecords<E> records){
         try {

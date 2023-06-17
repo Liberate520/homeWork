@@ -4,8 +4,10 @@ import model.familyRecords.FamilyRecords;
 import model.member.Member;
 
 public interface Converter<E extends Member> {
-    public void save(FamilyRecords<E> records);
-    public FamilyRecords<E> load();
-    public boolean convertSuccess();
-    public String convertStatus();
+    void save(FamilyRecords<E> records);
+    FamilyRecords<E> load();
+    boolean convertSuccess();
+    String convertStatus();
+    String getPath();
+    void setPath(String newPath);
 }

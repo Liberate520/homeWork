@@ -14,10 +14,14 @@ import java.util.regex.Pattern;
 
 /**
  * Implemented only for Human objects
- * Don`t know how to new E(...) in line 115
+ * Don`t know how to new E(...) in load method
+ *
+ * This class is probably violates "Liskov substitution principle" because implement logic only for Human objects, not amy Members
+ * Mark this class as Deprecated cause of this
  */
+@Deprecated
 public class CSVConverter implements Converter<Human> {
-    private final String path;
+    private String path;
     private final String csvDelimiter;
     public final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.csv"));
     public final static String  defaultDelimiter = ";";
@@ -27,7 +31,8 @@ public class CSVConverter implements Converter<Human> {
     public CSVConverter(String path, String cdvDelimiter) {
         convertSuccess = false;
         convertStatus = "Not requested";
-        this.path = path;
+        if (path != null && !path.isEmpty()) this.path = path;
+        else this.path = defaultPath;
         this.csvDelimiter = cdvDelimiter;
     }
     public CSVConverter() {
@@ -40,7 +45,12 @@ public class CSVConverter implements Converter<Human> {
     public String convertStatus(){
         return convertStatus;
     }
-
+    public String getPath() {
+        return path;
+    };
+    public void setPath(String newPath) {
+        if (newPath != null && !newPath.isEmpty()) path = newPath;
+    }
     private String dateToString(Calendar date) {
         if (date == null) return "null";
         return String.format("%d-%d-%d", date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.MONTH), date.get(Calendar.YEAR));

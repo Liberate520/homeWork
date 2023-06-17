@@ -8,16 +8,18 @@ import model.human.Human;
 import model.member.Connection;
 import model.member.Gender;
 
-import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 
 public class HumanService {
     private FamilyRecords<Human> records;
-    private static final String DEFAULTPATH = String.join(File.separator, Arrays.asList("data", "saved.bin"));
-    private String pathToFile;
+    Converter<Human> converter;
     public HumanService() {
         records = new FamilyRecords<>();
-        pathToFile = DEFAULTPATH;
+        converter = new BinaryConverter<>();
     }
 
     private String getFamilyID(Family<Human> family) {
@@ -95,30 +97,25 @@ public class HumanService {
     }
 
     private void updateLastFilePath(String path) {
-        if (path != null && !path.equals(pathToFile)) pathToFile = path;
-    }
-    private Converter<Human> getConverter() {
-        return new BinaryConverter<>(pathToFile);
+        if (path != null && !path.isEmpty()) converter.setPath(path);
     }
 
     public String getPathToFile() {
-        return pathToFile;
+        return converter.getPath();
     }
 
     public boolean save(String path) {
         updateLastFilePath(path);
-        Converter<Human> binaryConverter = getConverter();
-        records.save(binaryConverter);
-        // TODO binaryConverter.convertStatus() -> logs
-        return binaryConverter.convertSuccess();
+        records.save(converter);
+        // TODO converter.convertStatus() -> logs
+        return converter.convertSuccess();
     }
 
     public boolean load(String path) {
         updateLastFilePath(path);
-        Converter<Human> binaryConverter = getConverter();
-        records = binaryConverter.load();
-        // TODO binaryConverter.convertStatus() -> logs
-        return binaryConverter.convertSuccess();
+        records = converter.load();
+        // TODO converter.convertStatus() -> logs
+        return converter.convertSuccess();
     }
 
     public List<String> getGenderNames() {
