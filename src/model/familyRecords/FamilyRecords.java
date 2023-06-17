@@ -155,9 +155,6 @@ public class FamilyRecords<E extends Member> implements Serializable, Iterable<F
     public void save(Converter<E> converter) {
         converter.save(this);
     }
-    public static FamilyRecords load(Converter converter) {
-        return converter.load();
-    }
     public List<Family<E>> getFamilies() {
         return families;
     }
