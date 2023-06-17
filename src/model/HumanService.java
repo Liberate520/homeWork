@@ -77,9 +77,10 @@ public class HumanService {
     public List<String> getFamilyMemberIDs(String familyID) {
         List<String> result = new ArrayList<>();
         Family<Human> family = getFamilyFromID(familyID);
-        if (family == null) return result;
-        for (Human member:family) {
-            result.add(member.getName());
+        if (family != null) {
+            for (Human member:family) {
+                result.add(member.getName());
+            }
         }
         return result;
     }
@@ -132,27 +133,32 @@ public class HumanService {
         return new GregorianCalendar(Integer.parseInt(dateStrings[0]),
                 Integer.parseInt(dateStrings[1]), Integer.parseInt(dateStrings[2]));
     }
+
+    private Human createHuman(String name, String genderName, String birthDateString, String deathDateString) {
+        Calendar birthDate = parseDate(birthDateString);
+        Calendar deathDate = parseDate(deathDateString);
+        return new Human(name, Gender.fromString(genderName), birthDate, deathDate);
+    }
+
+    /**
+     * Find or create Human and add it to familyId
+     * @param familyID FamilyID, always assume that family with this ID exist
+     * @param name
+     * @param genderName
+     * @param birthDateString
+     * @param deathDateString
+     * @return true if Human was found in other family or created. Otherwise,(human already in this family) false
+     */
     public boolean addHuman(String familyID, String name, String genderName, String birthDateString, String deathDateString) {
         Family<Human> family = getFamilyFromID(familyID);
         Human human = getHumanFromID(null, name);
-        if (human != null) {
-            if (getHumanFromID(familyID, name) != null) {
-                return false;
-//                view.print("Человек с таким именем уже есть в этой семье");
-            }
-            else {
-                records.addToFamily(human, family);
-                return true;
-//                view.print("Человек с таким именем найден вне этой семьи и добавлен в состав семьи");
-            }
+        if (human == null) human = createHuman(name, genderName, birthDateString, deathDateString);
+        if (getHumanFromID(familyID, name) != null) {
+            return false;
         }
         else {
-            Calendar birthDate = parseDate(birthDateString);
-            Calendar deathDate = parseDate(deathDateString);
-            human = new Human(name, Gender.fromString(genderName), birthDate, deathDate);
             records.addToFamily(human, family);
             return true;
-//            view.print(String.format("Человек '%s' создан\n", name));
         }
     }
 
