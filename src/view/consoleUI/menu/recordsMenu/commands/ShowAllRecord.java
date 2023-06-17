@@ -1,9 +1,10 @@
-package view.consoleUI.menu.mainMenu.commands;
+package view.consoleUI.menu.recordsMenu.commands;
 
 import view.consoleUI.ConsoleUI;
+import view.consoleUI.menu.mainMenu.commands.Command;
 
 /**
- * Класс GetAllRecord представляет команду показа всех записей в древе в меню консольного пользовательского интерфейса (UI).
+ * Класс getAllRecord представляет команду показа всех записей в древе в меню консольного пользовательского интерфейса (UI).
  * Реализует интерфейс Sortedable.
  */
 public class ShowAllRecord implements Command {
@@ -11,7 +12,7 @@ public class ShowAllRecord implements Command {
     private ConsoleUI consoleUI;
 
     /**
-     * Создает новый объект GetAllRecord.
+     * Создает новый объект getAllRecord.
      *
      * @param consoleUI объект ConsoleUI, используемый для показа всех записей в древе
      */

@@ -3,14 +3,17 @@ package view.consoleUI;
 import model.members.Gender;
 import model.members.Human;
 import model.members.Member;
-import view.View;
-import view.consoleUI.menu.recordMenu.RecordMenu;
-import view.consoleUI.menu.sortMenu.SortingMenu;
 import presenter.Presenter;
+import view.View;
+import view.consoleUI.input.InputReader;
+import view.consoleUI.menu.endMenu.EndMenu;
 import view.consoleUI.menu.mainMenu.MainMenu;
+import view.consoleUI.menu.mainMenu.commands.RunEndMenu;
+import view.consoleUI.menu.recordMenu.RecordMenu;
+import view.consoleUI.menu.recordsMenu.RecordsMenu;
+import view.consoleUI.menu.sortingMenu.SortingMenu;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Класс ConsoleUI представляет консольный пользовательский интерфейс (UI).
@@ -18,10 +21,12 @@ import java.util.Scanner;
  */
 public class ConsoleUI implements View {
     private Presenter presenter;
-    private Scanner scanner;
     private boolean work;
     private MainMenu mainMenu;
     private Member member;
+    private List<Human> allRecord;
+    private InputReader input;
+    boolean importFileLoaded;
 
 
     /**
@@ -30,11 +35,13 @@ public class ConsoleUI implements View {
      * инициализирует главное меню и Presenter.
      */
     public ConsoleUI(Presenter presenter) {
-        scanner = new Scanner(System.in);
         work = true;
         mainMenu = new MainMenu(this);
         this.presenter = presenter;
         this.member = null;
+        this.input = new InputReader();
+        importFileLoaded = false;
+
     }
 
 
@@ -55,9 +62,9 @@ public class ConsoleUI implements View {
      * Повторяет запрос, пока файл не будет успешно загружен.
      */
     public void importFile() {
-        boolean importFileLoaded = false;
         while (!importFileLoaded) {
-            presenter.importFile(inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
+            presenter.importFile(
+                    input.inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
             if (presenter.checkCreateFamilyTree()) importFileLoaded = true;
         }
     }
@@ -67,10 +74,9 @@ public class ConsoleUI implements View {
      */
     private void runMainMenu() {
         while (work) {
-            System.out.println("[Вы работаете с семейным деревом " +
-                    presenter.getNameFamilyTree() + "]");
-            System.out.println(mainMenu.printMenu());
-            int choice = mainMenu.checkInputLineMenu(scanner.nextLine());
+            System.out.printf("[Вы работаете с семейным деревом [%s]\n%s",
+                    presenter.getNameFamilyTree(), mainMenu.printMenu());
+            int choice = mainMenu.checkInputLineMenu(input.nextLine());
             if (choice == -1) {
                 System.out.println("Ошибка ввода");
                 continue;
@@ -79,23 +85,56 @@ public class ConsoleUI implements View {
         }
     }
 
-    /**
-     * Проверяет веденные пользователем данные, являются ли они целыми числами
-     *
-     * @param line входная строка
-     * @return boolean
-     */
-    private boolean checkLineOnNumbers(String line) {
-        return line.matches("[0-9]+");
+    public void runRecordMenu(Member record) {
+        if (record != null) {
+            RecordMenu recordMenu = new RecordMenu(this);
+            System.out.println("Запись найдена.");
+            while (true) {
+                System.out.printf("[Человек - Имя: %s, Год рождения: %s]\nВыберите действие:\n%s",
+                        record.getName(),
+                        record.getYearOfBirth(),
+                        recordMenu.printMenu());
+                int choice = recordMenu.checkInputLineMenu(input.inputLn("Введите нужную цифру"));
+                if (choice != -1) recordMenu.execute(choice);
+                else System.out.println("Ошибка ввода");
+                if (choice == recordMenu.size()) break;
+            }
+        } else System.out.println("Запись не найдена.");
     }
 
-    private String inputLn(String message) {
-        System.out.println(message);
-        return scanner.nextLine();
+    public void runRecordsMenu(List<Human> humanList) {
+        if (humanList != null) {
+            RecordsMenu recordsMenu = new RecordsMenu(this);
+            while (true) {
+                System.out.printf("Семейное древо:\n%s",
+                        recordsMenu.printMenu());
+                int choice = recordsMenu.checkInputLineMenu(input.inputLn("Введите нужную цифру"));
+                if (choice != -1) recordsMenu.execute(choice);
+                else System.out.println("Ошибка ввода");
+                if (choice == recordsMenu.size()) break;
+            }
+        } else System.out.println("Ваш список пуст");
     }
 
-    private int checkDateOfBirth(String dateOfBirth) {
-        return checkLineOnNumbers(dateOfBirth) ? Integer.parseInt(dateOfBirth) : -1;
+    public void runSortingMenu() {
+        System.out.println("Выберите вид сортировки");
+        SortingMenu sortingMenu = new SortingMenu(this);
+        System.out.println(sortingMenu.printMenu());
+        int choice = sortingMenu.checkInputLineMenu(input.inputLn("Введите число"));
+        if (choice != -1) {
+            sortingMenu.execute(choice);
+        } else System.out.println("Ошибка ввода");
+
+    }
+
+    public void runEndMenu() {
+        System.out.println("Файл не сохранен.\nВы уверены что хотите выйти?");
+        EndMenu endMenu = new EndMenu(this);
+        System.out.println(endMenu.printMenu());
+        int choice = endMenu.checkInputLineMenu(input.inputLn("Введите число"));
+        if (choice != -1) {
+            endMenu.execute(choice);
+        } else System.out.println("Ошибка ввода");
     }
 
     /**
@@ -103,16 +142,21 @@ public class ConsoleUI implements View {
      * Запрашивает у пользователя имя, пол и год рождения человека, и передает эти данные в Presenter для добавления записи.
      */
     public void addRecord() {
-        String name = inputLn("Укажите имя человека");
-        int dateOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
-        Gender gender = Gender.fromStringValue(inputLn("Укажите пол"));
-        if ((inputLn("Добавить родителей? 1.да 2.нет")).equals("1")) {
-            presenter.addRecord(
-                    name, gender, dateOfBirth,
-                    inputLn("Имя отца"), checkDateOfBirth(inputLn("Год рождения отца")),
-                    inputLn("Имя матери"), checkDateOfBirth(inputLn("Год рождения матери")));
-        } else if (gender != null) presenter.addRecord(name, gender, dateOfBirth);
-        else System.out.println("Неверно указан пол человека");
+        String name = input.inputLn("Укажите имя человека");
+        int yearOfBirth = input.inputDateOfBirth("Укажите год рождения");
+        Gender gender = input.inputGender("Укажите пол");
+        if (gender != null) {
+            if ((input.inputLn("Добавить родителей? 1.да 2.нет")).equals("1")) {
+                presenter.addRecord(
+                        name, gender, yearOfBirth,
+                        input.inputLn("Имя отца"),
+                        input.inputDateOfBirth("Год рождения отца"),
+                        input.inputLn("Имя матери"),
+                        input.inputDateOfBirth("Год рождения матери"));
+            } else {
+                presenter.addRecord(name, gender, yearOfBirth);
+            }
+        } else System.out.println("Неверно указан пол человека");
     }
 
 
@@ -121,43 +165,23 @@ public class ConsoleUI implements View {
      * Presenter.
      */
     public Member getRecord() {
-
-        String name = inputLn("Укажите имя");
-        int yearOfBirth = checkDateOfBirth(inputLn("Укажите год рождения"));
-        if (yearOfBirth != -1) {
-            this.member = presenter.getRecord(name, yearOfBirth);
-        } else
-            System.out.println("Неверно указан год рождения");
-        return member;
+        String name = input.inputLn("Укажите имя");
+        int yearOfBirth = input.inputDateOfBirth("Укажите год рождения");
+        if (yearOfBirth != -1) this.member = presenter.getRecord(name, yearOfBirth);
+        else System.out.println("Неверно указан год рождения");
+        return this.member;
     }
 
 
-    public void runRecordMenu(Member record) {
-        RecordMenu recordMenu = new RecordMenu(this);
-        System.out.println("Запись найдена в древе ");
-        if (record != null) {
-            while (true) {
-                System.out.printf("[Человек - Имя:%s, Год рождения:%s]\nВыберите действие:\n",
-                        record.getName(),
-                        record.getYearOfBirth());
-                System.out.println(recordMenu.printMenu());
-                int choice = recordMenu.checkInputLineMenu(inputLn("Введите нужную цифру"));
-                if (choice != -1) {
-                    recordMenu.execute(choice);
-                } else System.out.println("Ошибка ввода");
-                if (choice == recordMenu.size()) {
-                    break;
-                }
-            }
-        } else System.out.println("Запись не найдена.");
+    public List<Human> getAllRecord() {
+        this.allRecord = presenter.getAllRecord();
+        return this.allRecord;
     }
-
 
     /**
      * Выводит все записи из семейного дерева через Presenter.
      */
     public void showAllRecord() {
-        List<Human> allRecord = presenter.getAllRecord();
         if (allRecord.isEmpty()) System.out.println("Семейное древо пусто. ");
         else {
             System.out.println("Семейное древо:");
@@ -169,26 +193,22 @@ public class ConsoleUI implements View {
      * Запрашивает у пользователя имя и год рождения и выводит родителей человека через Presenter.
      */
     public void getParents() {
-        System.out.println(presenter.getParents(member.getName(), checkDateOfBirth(member.getYearOfBirth().toString())));
+        System.out.println(presenter.getParents(member.getName(),
+                input.checkDateOfBirth(member.getYearOfBirth().toString())));
     }
 
     public void getChildren() {
-        System.out.println(presenter.getChildren(member.getName(), checkDateOfBirth(member.getYearOfBirth().toString())));
+        System.out.println(presenter.getChildren
+                (
+                        member.getName(),
+                        input.checkDateOfBirth(member.getYearOfBirth().toString())
+                ));
     }
 
     /**
      * Запрашивает у пользователя тип сортировки и сортирует семейное дерево через Presenter.
      */
-    public void sortTree() {
-        System.out.println("Выберите вид сортировки");
-        SortingMenu sortingMenu = new SortingMenu(this);
-        System.out.println(sortingMenu.printMenu());
-        int choice = sortingMenu.checkInputLineMenu(inputLn("Введите число"));
-        if (choice != -1) {
-            sortingMenu.execute(choice);
-        } else System.out.println("Ошибка ввода");
 
-    }
 
     /**
      * Завершает работу программы.
@@ -196,8 +216,12 @@ public class ConsoleUI implements View {
      */
     public void finish() {
         System.out.println("Программа остановлена");
-        presenter.saveFile();
         work = false;
+    }
+
+    public void save() {
+        if ((input.inputLn("Вы уверены? 1.да 2.нет")).equals("1"))
+            presenter.saveFile();
     }
 
     public void sortByAlphabeticalOrder() {
@@ -214,4 +238,6 @@ public class ConsoleUI implements View {
         presenter.sortByNameLength();
         System.out.println("Древо отсортировано по длине имени");
     }
+
+
 }

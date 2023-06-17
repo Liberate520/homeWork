@@ -1,23 +1,23 @@
-package view.consoleUI.menu.sortMenu.commands;
+package view.consoleUI.menu.sortingMenu.commands;
 
 import view.consoleUI.ConsoleUI;
 import view.consoleUI.menu.mainMenu.commands.Command;
 
-public class SortByNameLength implements Command {
+public class SortByDateBirth implements Command {
     ConsoleUI consoleUI;
 
-    public SortByNameLength(ConsoleUI consoleUI) {
+    public SortByDateBirth(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 
     @Override
     public String getDescription() {
-        return "Отсортировать по длине имени";
+        return "Отсортировать по году рождения";
     }
 
     @Override
     public void execute() {
-        consoleUI.sortByNameLength();
+        consoleUI.sortByDateBirth();
 
     }
 }

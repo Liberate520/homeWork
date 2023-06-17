@@ -1,4 +1,4 @@
-package view.consoleUI.menu.sortMenu.commands;
+package view.consoleUI.menu.sortingMenu.commands;
 
 import view.consoleUI.ConsoleUI;
 import view.consoleUI.menu.mainMenu.commands.Command;

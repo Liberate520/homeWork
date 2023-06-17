@@ -16,6 +16,7 @@ import java.util.List;
 public class Presenter implements Serializable {
     private HumanService humanService;
 
+
     /**
      * Создает новый объект Presenter.
      * Инициализирует model.service.HumanService.
@@ -25,9 +26,9 @@ public class Presenter implements Serializable {
     }
 
     /**
-     * Возвращает объект model.service.HumanService, связанный с Presenter.
+     * Возвращает bool значение создано ли семейное древо или нет
      *
-     * @return Объект model.service.HumanService.
+     * @return boolean
      */
 
     public boolean checkCreateFamilyTree() {

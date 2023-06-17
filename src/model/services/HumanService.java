@@ -39,6 +39,8 @@ public class HumanService {
         return familyTree;
     }
 
+
+
     /**
      * Возвращает файловый менеджер, связанный с model.service.HumanService.
      *
@@ -153,6 +155,5 @@ public class HumanService {
 
     public void sortByNameLength() {
         familyTree.sort(new NameLength<>());
-
     }
 }

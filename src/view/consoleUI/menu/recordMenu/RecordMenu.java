@@ -9,6 +9,7 @@ import view.consoleUI.menu.recordMenu.commands.GetParents;
 import java.util.Arrays;
 
 public class RecordMenu extends Menu {
+
     public RecordMenu(ConsoleUI consoleUI) {
         super(Arrays.asList(
                 new GetChildren(consoleUI),

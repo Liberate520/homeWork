@@ -2,9 +2,8 @@ package view.consoleUI.menu.mainMenu;
 
 import view.consoleUI.ConsoleUI;
 import view.consoleUI.menu.Menu;
+import view.consoleUI.menu.endMenu.commands.Save;
 import view.consoleUI.menu.mainMenu.commands.*;
-import view.consoleUI.menu.recordMenu.commands.GetChildren;
-import view.consoleUI.menu.recordMenu.commands.GetParents;
 
 import java.util.Arrays;
 
@@ -18,8 +17,7 @@ public class MainMenu extends Menu {
         super(Arrays.asList(
                 new AddRecord(consoleUI),
                 new GetRecord(consoleUI),
-                new ShowAllRecord(consoleUI),
-                new SortedTree(consoleUI),
-                new Finish(consoleUI)));
+                new GetAllRecord(consoleUI),
+                new RunEndMenu(consoleUI)));
     }
 }
