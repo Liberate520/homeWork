@@ -5,6 +5,8 @@ import model.familyTrees.comparators.ByDateBirth;
 import model.familyTrees.comparators.NameAlphabetical;
 import model.familyTrees.comparators.NameLength;
 import model.fileManage.FileManager;
+import model.fileManage.interfaces.Loadable;
+import model.fileManage.interfaces.Savable;
 import model.members.Gender;
 import model.members.Human;
 import model.members.Member;
@@ -19,7 +21,9 @@ import java.util.List;
  */
 public class HumanService {
     private FamilyTree<Human> familyTree;
-    private FileManager fileManager;
+    private Savable savable;
+    private Loadable loadable;
+    private String filePath;
 
 
     /**
@@ -47,7 +51,6 @@ public class HumanService {
      * @return Файловый менеджер.
      */
 
-
     public String getNameFamilyTree() {
         return familyTree.getNameFamilyTree();
     }
@@ -67,16 +70,18 @@ public class HumanService {
      *
      * @param filePath Путь к импортируемому файлу.
      */
-    public void importFile(String filePath) {
-        this.fileManager = new FileManager(filePath);
-        this.familyTree = fileManager.loadFile();
+    public void loadFile(String filePath) {
+        this.filePath = filePath;
+        this.loadable = new FileManager(filePath);
+        this.familyTree = (FamilyTree<Human>) loadable.loadFile();
     }
 
     /**
      * Сохраняет данные из семейного древа в файл с помощью файлового менеджера.
      */
     public void saveFile() {
-        fileManager.saveFile(familyTree);
+        this.savable = new FileManager(filePath);
+        savable.saveFile(familyTree);
     }
 
     /**

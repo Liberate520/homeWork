@@ -5,7 +5,6 @@ import model.services.HumanService;
 import model.members.Gender;
 import model.members.Member;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,10 +12,9 @@ import java.util.List;
  * <p>
  * Он обрабатывает взаимодействие с пользователем, обрабатывает ввод и соответствующим образом обновляет модель.
  */
-public class Presenter implements Serializable {
+public class Presenter {
 
     boolean importFileLoaded;
-
     private HumanService humanService;
 
     /**
@@ -54,11 +52,10 @@ public class Presenter implements Serializable {
      *
      * @param filePath Путь к импортируемому файлу.
      */
-    public void importFile(String filePath) {
-        humanService.importFile(filePath);
+    public void loadFile(String filePath) {
+        humanService.loadFile(filePath);
         if (checkCreateFamilyTree()){
             importFileLoaded = true;
-
         }
     }
 

@@ -73,5 +73,5 @@ public interface Member extends Serializable {
      */
     public List<Member> getChildren();
 
-
+    public int hashCode();
 }

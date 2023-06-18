@@ -2,6 +2,7 @@ package model.familyTrees;
 
 import model.members.Aliens;
 import model.members.Human;
+import model.members.Member;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class FamilyTreesArchive {
     /**
      * trees.FamilyTreesArchive of Rurik dynasty
      */
-    public static FamilyTree<Human> ruriks = new FamilyTree<>("Рюриковичи") {
+    public static FamilyTree<Member> ruriks = new FamilyTree<>("Рюриковичи") {
         {
             addPersonInFamilyTree(new Human("Рюрик", MAN, 879));
             addPersonInFamilyTree(new Human("Игорь", MAN, 945), "Рюрик", 879);

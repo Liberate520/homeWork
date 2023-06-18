@@ -24,6 +24,8 @@ public class RecordMenu extends Menu {
         return member;
     }
 
+
+
     public void setMember(Member member) {
         this.member = member;
     }

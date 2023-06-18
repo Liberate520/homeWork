@@ -6,10 +6,10 @@ import model.members.Member;
 import presenter.Presenter;
 import view.View;
 import view.consoleUI.input.InputReader;
+import view.consoleUI.menu.allRecordsMenu.AllRecordsMenu;
 import view.consoleUI.menu.endMenu.EndMenu;
 import view.consoleUI.menu.mainMenu.MainMenu;
 import view.consoleUI.menu.recordMenu.RecordMenu;
-import view.consoleUI.menu.allRecordsMenu.AllRecordsMenu;
 import view.consoleUI.menu.sortingMenu.SortingMenu;
 
 import java.util.List;
@@ -31,7 +31,6 @@ public class ConsoleUI implements View {
      * инициализирует главное меню и Presenter.
      */
     public ConsoleUI(Presenter presenter) {
-//        work = true;
         mainMenu = new MainMenu(this);
         recordMenu = new RecordMenu(this);
         this.presenter = presenter;
@@ -57,7 +56,7 @@ public class ConsoleUI implements View {
      */
     public void importFile() {
         while (!presenter.isImportFileLoaded()) {
-            presenter.importFile(
+            presenter.loadFile(
                     input.inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
         }
     }
@@ -171,7 +170,6 @@ public class ConsoleUI implements View {
 
     public List<Human> getAllRecord() {
         return presenter.getAllRecord();
-
     }
 
     /**
