@@ -3,37 +3,38 @@ package tree.model.service;
 import tree.model.geneticTree.Tree;
 import tree.model.human.Gender;
 import tree.model.human.Human;
-import tree.model.saveLoad.Writable;
 import tree.model.saveLoad.Write;
+import tree.view.View;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Service implements Serializable {  //Класс Сервиса является непараметризированным
     private int id;
     private Tree<Human> geneticTree;
-//    Group<Human> geneticTree;
-    private Writable writable;
+    private Write write;
+    private View view;
 
     public Service(Tree<Human> geneticTree) {
         this.geneticTree = geneticTree;
-        writable = new Write();
+        write = new Write();
     }
 
     public Service() {
         geneticTree = new Tree<>();
-        writable = new Write();
+        write = new Write();
     }
 
-    public boolean save(String filePath) {
-        return writable.save((Serializable) geneticTree, filePath);
+    public boolean save() {
+        return write.save((Serializable) geneticTree, write.getFILEPATH());
     }
 
     public void load(String filePath) {
-        Object obj = writable.load(filePath);
+        Object obj = write.load(filePath);
         if (obj instanceof Tree) {
             geneticTree = (Tree) obj;
         } else {
-            System.out.println("Неправильный формат");
+            view.print("Неправильный формат");
         }
     }
 

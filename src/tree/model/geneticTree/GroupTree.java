@@ -1,8 +1,8 @@
-package tree.model.service;
+package tree.model.geneticTree;
 
 import tree.model.human.Human;
 
-public interface Group<T> extends Iterable<T> {
+public interface GroupTree<T> extends Iterable<T> {
     boolean addHuman(T human);
     void sortByName();
     void sortByAge();

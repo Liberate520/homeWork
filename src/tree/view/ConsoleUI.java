@@ -1,12 +1,10 @@
 package tree.view;
 
 import tree.model.human.Gender;
-import tree.model.human.Human;
 import tree.model.service.Service;
 import tree.presenter.Presenter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -63,20 +61,19 @@ public class ConsoleUI implements View {
         LocalDate humanBirthDay = LocalDate.parse(scanner.nextLine());
         System.out.println("Пол м/ж: ");
         Gender humanGender = getGender(scanner.nextLine());
-//        System.out.println("Имя отца: ");
-//        String humanFatherName = scanner.nextLine();
-//        System.out.println("Имя матери: ");
-//        String humanMotherName = scanner.nextLine();
+
         presenter.addFromConsoleHuman(humanName, humanBirthDay, humanGender);
     }
 
     public void getFromConsoleHuman() {
+        System.out.println("Получение одной записи по имени");
         System.out.println("Укажите имя: ");
         String choice = scanner.nextLine();
         presenter.getFromConsoleHuman(choice);
     }
 
     public void getFromConsoleAllHuman() {
+        System.out.println("Получение всех записей");
         presenter.getFromConsoleAllHuman();
     }
 
@@ -97,6 +94,7 @@ public class ConsoleUI implements View {
         return null;
     }
 
+
     @Override
     public void print(String text) {
         System.out.println(text);
@@ -108,8 +106,4 @@ public class ConsoleUI implements View {
 
     }
 
-//    @Override
-//    public void setPresenter(Presenter presenter) {
-//        this.presenter = presenter;
-//    }
 }

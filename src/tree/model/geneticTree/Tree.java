@@ -3,14 +3,13 @@ package tree.model.geneticTree;
 import tree.model.human.Human;
 import tree.model.human.HumanComparatorByAge;
 import tree.model.human.HumanComparatorByName;
-import tree.model.service.Group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree<T extends GroupItem<T>> implements Serializable, Iterable<T>, Group<T> {
+public class Tree<T extends GroupItem<T>> implements Serializable, Iterable<T>, GroupTree<T> {
     private List<T> humanList;
 
     public Tree(List<T> humanList) {
