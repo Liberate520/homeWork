@@ -14,7 +14,7 @@ import Views.Commands.CommandQuit;
 
 public class Menu {
     private List<Command> commands;
-    private final String format = "--> %d. %s\r\n";
+    private final String format = "-> %d. %s\r\n";
     
     public Menu(Executable executable){
         commands = new ArrayList<>();
@@ -27,6 +27,10 @@ public class Menu {
         commands.add(new CommandQuit(executable));
     }
     
+    public int getSize(){
+        return commands.size();
+    }
+
     public void execute(int index){
         commands.get(index).execute();
     }
