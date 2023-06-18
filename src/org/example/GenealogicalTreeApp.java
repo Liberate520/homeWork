@@ -25,25 +25,25 @@ public class GenealogicalTreeApp {
         tree.addPerson(david);
         tree.addRelationship(relationship);
 
-        // Save the tree to a file
+
         String fileName = "genealogical_tree.dat";
         tree.saveTree(fileName);
 
-        // Load the tree from the file
+
         GenealogicalTree<Person> loadedTree;
         try {
             loadedTree = dataStorage.loadData(fileName);
             if (loadedTree != null) {
-                // Displaying the people in the loaded tree
+
                 System.out.println("People in the loaded tree:");
                 for (Person person : loadedTree.getPeople()) {
                     System.out.println(person.getName());
                 }
 
-                // Sort the people in the loaded tree by name
+
                 loadedTree.sortPeople(Comparator.comparing(Person::getName));
 
-                // Display the sorted people in the loaded tree
+
                 System.out.println("Sorted people in the loaded tree:");
                 for (Person person : loadedTree.getPeople()) {
                     System.out.println(person.getName());
