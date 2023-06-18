@@ -1,8 +1,8 @@
 import java.util.Comparator;
 
-public class PersonComparatorByAge implements Comparator<Person> {
+public class PersonComparatorByAge<T extends  TreeItem> implements Comparator<T> {
     @Override
-    public int compare(Person o1, Person o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o1.getAge(), o2.getAge());
     }
 }

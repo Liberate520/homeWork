@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person implements Serializable, Comparable<Person> {
+public class Person implements Serializable, Comparable<Person>, TreeItem {
     int id;
     private String surname;
     private String firstName;
@@ -12,7 +12,6 @@ public class Person implements Serializable, Comparable<Person> {
     private String sex;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
-
     private Person father;
     private Person mother;
     private List<Person> children;
@@ -66,12 +65,10 @@ public class Person implements Serializable, Comparable<Person> {
         this.father = father;
         father.children.add(this);
     }
-
     public void setMother(Person mother) {
         this.mother = mother;
         mother.children.add(this);
     }
-
     public String getInfo(){
         String result = "";
         result += this.getFullName() + " ";

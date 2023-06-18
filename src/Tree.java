@@ -4,34 +4,30 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Tree implements Serializable, Iterable<Person> {
-    private List<Person> personList;
-
+public class Tree<T extends TreeItem> implements Serializable, Iterable<T> {
+    private List<T> personList;
     public Tree() {this(new ArrayList<>());}
-
-    public Tree(List<Person> personList){
+    public Tree(List<T> personList){
         this.personList = personList;
     }
-
-    public boolean add(Person person){
+    public Boolean add(T person){
         if (person == null){
             return false;
         }
         if (!personList.contains(person)){
             personList.add(person);
             if (person.getFather() != null){
-                person.getFather().addChild(person);
+                person.getFather().addChild((Person) person);
             }
             if (person.getMother() != null){
-                person.getMother().addChild(person);
+                person.getMother().addChild((Person) person);
             }
             return true;
         }
         return false;
     }
-
-    public Person getByName(String name){
-        for (Person person : personList){
+    public T getByName(String name){
+        for (T person : personList){
             if (person.getFullName().equals(name)){
                 return person;
             }
@@ -39,8 +35,8 @@ public class Tree implements Serializable, Iterable<Person> {
         return null;
     }
 
-    public Person getById(int id){
-        for (Person person : personList){
+    public T getById(int id){
+        for (T person : personList){
             if (person.getId() == id){
                 return person;
             }
@@ -53,7 +49,7 @@ public class Tree implements Serializable, Iterable<Person> {
         sb.append("В дереве ");
         sb.append(personList.size());
         sb.append(" объектов: \n");
-        for (Person person : personList){
+        for (T person : personList){
             sb.append(person.getInfo());
             sb.append("\n");
         }
@@ -61,15 +57,15 @@ public class Tree implements Serializable, Iterable<Person> {
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<T> iterator() {
         return personList.iterator();
     }
 
     public void sortByName(){
-        personList.sort(new PersonComparatorByName());
+        personList.sort(new PersonComparatorByName<>());
     }
 
     public void sortByAge(){
-        personList.sort(new PersonComparatorByAge());
+        personList.sort(new PersonComparatorByAge<>());
     }
 }

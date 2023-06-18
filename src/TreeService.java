@@ -5,11 +5,12 @@ import java.time.LocalDate;
 public class TreeService {
     private int id;
     private String pathFH;
-    private Tree tree;
+    private Tree<Person> tree;
     private Writable FH;
 
     public TreeService(){
-        this.tree = new Tree();
+        tree = new Tree<>();
+        this.tree = tree;
     }
 
     public void SaveLoad(String pathFH, String methodFH){
