@@ -1,16 +1,16 @@
-package view.consoleUI.menu.recordsMenu;
+package view.consoleUI.menu.allRecordsMenu;
 
 import view.consoleUI.ConsoleUI;
 import view.consoleUI.menu.Menu;
 import view.consoleUI.menu.mainMenu.commands.GetRecord;
 import view.consoleUI.menu.mainMenu.commands.ReturnBack;
-import view.consoleUI.menu.recordsMenu.commands.ShowAllRecord;
-import view.consoleUI.menu.recordsMenu.commands.SortedTree;
+import view.consoleUI.menu.allRecordsMenu.commands.ShowAllRecord;
+import view.consoleUI.menu.allRecordsMenu.commands.SortedTree;
 
 import java.util.Arrays;
 
-public class RecordsMenu extends Menu {
-    public RecordsMenu(ConsoleUI consoleUI) {
+public class AllRecordsMenu extends Menu {
+    public AllRecordsMenu(ConsoleUI consoleUI) {
         super(Arrays.asList(
                 new ShowAllRecord(consoleUI),
                 new GetRecord(consoleUI),

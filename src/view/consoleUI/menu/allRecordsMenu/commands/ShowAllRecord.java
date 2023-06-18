@@ -1,4 +1,4 @@
-package view.consoleUI.menu.recordsMenu.commands;
+package view.consoleUI.menu.allRecordsMenu.commands;
 
 import view.consoleUI.ConsoleUI;
 import view.consoleUI.menu.mainMenu.commands.Command;

@@ -14,23 +14,33 @@ import java.util.List;
  * Он обрабатывает взаимодействие с пользователем, обрабатывает ввод и соответствующим образом обновляет модель.
  */
 public class Presenter implements Serializable {
-    private HumanService humanService;
 
+    boolean importFileLoaded;
+
+    private HumanService humanService;
 
     /**
      * Создает новый объект Presenter.
-     * Инициализирует model.service.HumanService.
      */
     public Presenter() {
+        importFileLoaded = false;
+
         this.humanService = new HumanService();
     }
+
+
+    public boolean isImportFileLoaded() {
+        return importFileLoaded;
+    }
+
+
+
 
     /**
      * Возвращает bool значение создано ли семейное древо или нет
      *
      * @return boolean
      */
-
     public boolean checkCreateFamilyTree() {
         return humanService.checkCreateFamilyTree();
     }
@@ -46,6 +56,10 @@ public class Presenter implements Serializable {
      */
     public void importFile(String filePath) {
         humanService.importFile(filePath);
+        if (checkCreateFamilyTree()){
+            importFileLoaded = true;
+
+        }
     }
 
     /**

@@ -8,9 +8,8 @@ import view.View;
 import view.consoleUI.input.InputReader;
 import view.consoleUI.menu.endMenu.EndMenu;
 import view.consoleUI.menu.mainMenu.MainMenu;
-import view.consoleUI.menu.mainMenu.commands.RunEndMenu;
 import view.consoleUI.menu.recordMenu.RecordMenu;
-import view.consoleUI.menu.recordsMenu.RecordsMenu;
+import view.consoleUI.menu.allRecordsMenu.AllRecordsMenu;
 import view.consoleUI.menu.sortingMenu.SortingMenu;
 
 import java.util.List;
@@ -21,12 +20,9 @@ import java.util.List;
  */
 public class ConsoleUI implements View {
     private Presenter presenter;
-    private boolean work;
     private MainMenu mainMenu;
-    private Member member;
-    private List<Human> allRecord;
+    private RecordMenu recordMenu;
     private InputReader input;
-    boolean importFileLoaded;
 
 
     /**
@@ -35,13 +31,11 @@ public class ConsoleUI implements View {
      * инициализирует главное меню и Presenter.
      */
     public ConsoleUI(Presenter presenter) {
-        work = true;
+//        work = true;
         mainMenu = new MainMenu(this);
+        recordMenu = new RecordMenu(this);
         this.presenter = presenter;
-        this.member = null;
         this.input = new InputReader();
-        importFileLoaded = false;
-
     }
 
 
@@ -62,10 +56,9 @@ public class ConsoleUI implements View {
      * Повторяет запрос, пока файл не будет успешно загружен.
      */
     public void importFile() {
-        while (!importFileLoaded) {
+        while (!presenter.isImportFileLoaded()) {
             presenter.importFile(
                     input.inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
-            if (presenter.checkCreateFamilyTree()) importFileLoaded = true;
         }
     }
 
@@ -73,7 +66,7 @@ public class ConsoleUI implements View {
      * Запускает отображение Menu
      */
     private void runMainMenu() {
-        while (work) {
+        while (mainMenu.isRun()) {
             System.out.printf("[Вы работаете с семейным деревом [%s]\n%s",
                     presenter.getNameFamilyTree(), mainMenu.printMenu());
             int choice = mainMenu.checkInputLineMenu(input.nextLine());
@@ -97,14 +90,17 @@ public class ConsoleUI implements View {
                 int choice = recordMenu.checkInputLineMenu(input.inputLn("Введите нужную цифру"));
                 if (choice != -1) recordMenu.execute(choice);
                 else System.out.println("Ошибка ввода");
-                if (choice == recordMenu.size()) break;
+                if (choice == recordMenu.size()) {
+                    recordMenu.setMember(null);
+                    break;
+                }
             }
         } else System.out.println("Запись не найдена.");
     }
 
     public void runRecordsMenu(List<Human> humanList) {
         if (humanList != null) {
-            RecordsMenu recordsMenu = new RecordsMenu(this);
+            AllRecordsMenu recordsMenu = new AllRecordsMenu(this);
             while (true) {
                 System.out.printf("Семейное древо:\n%s",
                         recordsMenu.printMenu());
@@ -167,25 +163,25 @@ public class ConsoleUI implements View {
     public Member getRecord() {
         String name = input.inputLn("Укажите имя");
         int yearOfBirth = input.inputDateOfBirth("Укажите год рождения");
-        if (yearOfBirth != -1) this.member = presenter.getRecord(name, yearOfBirth);
+        if (yearOfBirth != -1) recordMenu.setMember(presenter.getRecord(name, yearOfBirth));
         else System.out.println("Неверно указан год рождения");
-        return this.member;
+        return recordMenu.getMember();
     }
 
 
     public List<Human> getAllRecord() {
-        this.allRecord = presenter.getAllRecord();
-        return this.allRecord;
+        return presenter.getAllRecord();
+
     }
 
     /**
      * Выводит все записи из семейного дерева через Presenter.
      */
     public void showAllRecord() {
-        if (allRecord.isEmpty()) System.out.println("Семейное древо пусто. ");
+        if (presenter.getAllRecord().isEmpty()) System.out.println("Семейное древо пусто. ");
         else {
             System.out.println("Семейное древо:");
-            allRecord.forEach(person -> System.out.println(person.getName() + " (" + person.getYearOfBirth() + ")"));
+            presenter.getAllRecord().forEach(person -> System.out.println(person.getName() + " (" + person.getYearOfBirth() + ")"));
         }
     }
 
@@ -193,21 +189,17 @@ public class ConsoleUI implements View {
      * Запрашивает у пользователя имя и год рождения и выводит родителей человека через Presenter.
      */
     public void getParents() {
-        System.out.println(presenter.getParents(member.getName(),
-                input.checkDateOfBirth(member.getYearOfBirth().toString())));
+        System.out.println(presenter.getParents(recordMenu.getMember().getName(),
+                input.checkDateOfBirth(recordMenu.getMember().getYearOfBirth().toString())));
     }
 
     public void getChildren() {
         System.out.println(presenter.getChildren
                 (
-                        member.getName(),
-                        input.checkDateOfBirth(member.getYearOfBirth().toString())
+                        recordMenu.getMember().getName(),
+                        input.checkDateOfBirth(recordMenu.getMember().getYearOfBirth().toString())
                 ));
     }
-
-    /**
-     * Запрашивает у пользователя тип сортировки и сортирует семейное дерево через Presenter.
-     */
 
 
     /**
@@ -216,7 +208,7 @@ public class ConsoleUI implements View {
      */
     public void finish() {
         System.out.println("Программа остановлена");
-        work = false;
+        mainMenu.setRun(false);
     }
 
     public void save() {
