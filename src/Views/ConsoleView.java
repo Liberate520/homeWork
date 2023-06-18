@@ -29,13 +29,14 @@ public class ConsoleView implements View, Executable {
     }
     // #endregion
 
-    private void Dialog() {
-        print(this.menu.toString());
-        print("> ");
+    private void Dialog() {        
         int input = Integer.parseInt(scanner.nextLine()) - 1;
         clearScreen();
-        menu.execute(input);
-        
+        print(this.menu.toString());
+        print("===================================================\n");
+        menu.execute(input);        
+        print("\n===================================================\n");
+        print("> ");
     }
 
     public static void clearScreen() {  
@@ -44,8 +45,13 @@ public class ConsoleView implements View, Executable {
     }
     // #region implements executable
     @Override
-    public void get() {
+    public void show() {
         print("TODO: show");
+    }
+
+    @Override
+    public void read() {
+        print("TODO: get");
     }
 
     @Override

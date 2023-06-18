@@ -2,7 +2,10 @@ package Views;
 
 public interface Executable {
     /** show list of notes */
-    public void get();
+    public void show();
+
+    /** get concrete note item */
+    public void read();    
 
     /** create new note */
     public void create();
