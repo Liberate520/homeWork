@@ -7,6 +7,7 @@ import Views.Commands.Command;
 import Views.Commands.CommandShow;
 import Views.Commands.CommandRead;
 import Views.Commands.CommandAdd;
+import Views.Commands.CommandClear;
 import Views.Commands.CommandUpdate;
 import Views.Commands.CommandRemove;
 import Views.Commands.CommandSave;
@@ -23,6 +24,7 @@ public class Menu {
         commands.add(new CommandAdd(executable));
         commands.add(new CommandRemove(executable));
         commands.add(new CommandUpdate(executable));
+        commands.add(new CommandClear(executable));
         commands.add(new CommandSave(executable));
         commands.add(new CommandQuit(executable));
     }

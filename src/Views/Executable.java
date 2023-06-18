@@ -21,4 +21,6 @@ public interface Executable {
 
     /** quit */
     public void quit();
+
+    public void clear();
 }

@@ -26,25 +26,6 @@ public class Service {
         }
     }
 
-    private void setDefault() {
-        notes = new Notes<>();
-        create("header1",  "content1",  "author1");
-        create("header2",  "content2",  "author1");
-        create("header3",  "content3",  "author2");
-        create("header4",  "content4",  "author1");
-        create("header5",  "content5",  "author2");
-        create("header6",  "content6",  "author1");
-        create("header7",  "content7",  "author4");
-        create("header8",  "content8",  "author3");
-        create("header9",  "content9",  "author4");
-        create("header10", "content10", "author1");
-        create("header11", "content11", "author3");
-        create("header12", "content12", "author2");
-        create("header13", "content13", "author4");
-        create("header14", "content14", "author2");
-        create("header15", "content15", "author3");
-    }
-
     public boolean save(){
         return keeper.save(notes);
     }
