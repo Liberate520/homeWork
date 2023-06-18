@@ -1,22 +1,20 @@
 package org.example;
 
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Relationship implements Serializable {
+
     private Person father;
     private Person mother;
-    private Person husband;
-    private Person wife;
     private List<Person> children;
 
-    public Relationship(Person father, Person mother, Person husband, Person wife, List<Person> children) {
+    public Relationship(Person father, Person mother) {
         this.father = father;
         this.mother = mother;
-        this.husband = husband;
-        this.wife = wife;
-        this.children = children;
+        this.children = new ArrayList<>();
     }
 
     public Person getFather() {
@@ -27,20 +25,11 @@ public class Relationship implements Serializable {
         return mother;
     }
 
-    public Person getHusband() {
-        return husband;
-    }
-
-    public Person getWife() {
-        return wife;
-    }
-
     public List<Person> getChildren() {
-        return children;
+        return Collections.unmodifiableList(children);
     }
 
     public void addChild(Person child) {
         children.add(child);
     }
 }
-

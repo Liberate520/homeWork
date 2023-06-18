@@ -1,33 +1,22 @@
 package org.example;
 
-
-
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
-public class Person implements Serializable {
+class Person implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate dateOfBirth;
-    private LocalDate dateOfDeath;
-    private List<Relationship> relationships;
+    private Person spouse;
+    private List<Person> children;
 
-    public Person(String name, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath) {
+    public Person(String name, Gender gender, LocalDate dateOfBirth) {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
-        this.relationships = new ArrayList<>();
-    }
-
-    public void addRelationship(Relationship relationship) {
-        relationships.add(relationship);
-    }
-
-    public List<Relationship> getRelationships() {
-        return relationships;
+        this.children = new ArrayList<>();
     }
 
     public String getName() {
@@ -42,7 +31,19 @@ public class Person implements Serializable {
         return dateOfBirth;
     }
 
-    public LocalDate getDateOfDeath() {
-        return dateOfDeath;
+    public Person getSpouse() {
+        return spouse;
+    }
+
+    public void setSpouse(Person spouse) {
+        this.spouse = spouse;
+    }
+
+    public List<Person> getChildren() {
+        return children;
+    }
+
+    public void addChild(Person child) {
+        children.add(child);
     }
 }

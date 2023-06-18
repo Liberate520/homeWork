@@ -1,47 +1,26 @@
 package org.example;
 
-
 import java.io.*;
 
-public class BinaryDataStorage implements DataStorage {
+public class BinaryDataStorage<T> implements DataStorage<T>, Serializable {
+
     @Override
-    public void saveData(GenealogicalTree tree, String fileName) {
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-
-            objectOutputStream.writeObject(tree);
-            objectOutputStream.close();
-            fileOutputStream.close();
-
-            System.out.println("Data saved successfully to the file: " + fileName);
+    public void saveData(T data, String fileName) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            outputStream.writeObject(data);
+            System.out.println("Data saved successfully.");
         } catch (IOException e) {
-            System.out.println("An error occurred while saving the data to the file.");
-            e.printStackTrace();
+            System.out.println("Error saving data: " + e.getMessage());
         }
     }
 
     @Override
-    public GenealogicalTree loadData(String fileName) {
-        GenealogicalTree tree = null;
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream(fileName);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
-            tree = (GenealogicalTree) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
-
-            System.out.println("Data loaded successfully from the file: " + fileName);
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("An error occurred while loading the data from the file.");
-            e.printStackTrace();
+    public T loadData(String fileName) throws ClassNotFoundException {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+            return (T) inputStream.readObject();
+        } catch (IOException e) {
+            System.out.println("Error loading data: " + e.getMessage());
         }
-
-        return tree;
+        return null;
     }
 }
-
-
-

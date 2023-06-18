@@ -1,16 +1,22 @@
 package org.example;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
-class GenealogicalTree implements Iterable<Person>, Serializable {
-
+public class GenealogicalTree<T> implements Serializable, Iterable<Person> {
     private List<Person> people;
     private List<Relationship> relationships;
+    private DataStorage<GenealogicalTree<T>> dataStorage;
 
-    public GenealogicalTree() {
+    public GenealogicalTree(DataStorage<GenealogicalTree<T>> dataStorage) {
         this.people = new ArrayList<>();
         this.relationships = new ArrayList<>();
+        this.dataStorage = dataStorage;
     }
 
     public void addPerson(Person person) {
@@ -19,93 +25,46 @@ class GenealogicalTree implements Iterable<Person>, Serializable {
 
     public void addRelationship(Relationship relationship) {
         relationships.add(relationship);
-        relationship.getFather().addRelationship(relationship);
-        relationship.getMother().addRelationship(relationship);
-        relationship.getHusband().addRelationship(relationship);
-        relationship.getWife().addRelationship(relationship);
-        for (Person child : relationship.getChildren()) {
-            child.addRelationship(relationship);
+    }
+
+    public void saveTree(String fileName) {
+        try {
+            dataStorage.saveData(this, fileName);
+            System.out.println("Tree successfully saved to file.");
+        } catch (Exception e) {
+            System.out.println("Error saving tree to file: " + e.getMessage());
         }
     }
 
-    public List<Person> getAncestors(Person person) {
-        List<Person> ancestors = new ArrayList<>();
-        findAncestors(person, ancestors);
-        return ancestors;
-    }
-
-    private void findAncestors(Person person, List<Person> ancestors) {
-        for (Relationship relationship : relationships) {
-            if (relationship.getChildren().contains(person)) {
-                ancestors.add(relationship.getFather());
-                ancestors.add(relationship.getMother());
-                findAncestors(relationship.getFather(), ancestors);
-                findAncestors(relationship.getMother(), ancestors);
-                break;
+    public void loadTree(String fileName) {
+        try {
+            GenealogicalTree<T> loadedTree = dataStorage.loadData(fileName);
+            if (loadedTree != null) {
+                this.people = loadedTree.people;
+                this.relationships = loadedTree.relationships;
+                System.out.println("Tree loaded successfully from file.");
+            } else {
+                System.out.println("Error loading tree from file: Loaded tree is null.");
             }
-        }
-    }
-
-    public List<Person> getDescendants(Person person) {
-        List<Person> descendants = new ArrayList<>();
-        findDescendants(person, descendants);
-        return descendants;
-    }
-
-    private void findDescendants(Person person, List<Person> descendants) {
-        for (Relationship relationship : relationships) {
-            if (relationship.getFather() == person || relationship.getMother() == person) {
-                descendants.addAll(relationship.getChildren());
-                for (Person child : relationship.getChildren()) {
-                    findDescendants(child, descendants);
-                }
-            }
+        } catch (Exception e) {
+            System.out.println("Error loading tree from file: " + e.getMessage());
         }
     }
 
     public List<Person> getPeople() {
-        return people;
+        return Collections.unmodifiableList(people);
     }
 
-    public void displayAllPeople() {
-        System.out.println("All People in the Genealogical Tree:");
-        for (Person person : people) {
-            System.out.println(person.getName());
-        }
+    public List<Relationship> getRelationships() {
+        return Collections.unmodifiableList(relationships);
     }
 
-    public List<Relationship> findPersonRelationships(Person person) {
-        List<Relationship> personRelationships = new ArrayList<>();
-
-        for (Relationship relationship : relationships) {
-            if (relationship.getFather() == person || relationship.getMother() == person || relationship.getChildren().contains(person)) {
-                personRelationships.add(relationship);
-            }
-        }
-
-        return personRelationships;
+    public void sortPeople(Comparator<Person> comparator) {
+        people.sort(comparator);
     }
 
     @Override
     public Iterator<Person> iterator() {
         return people.iterator();
-    }
-
-    public void sortPeopleByName() {
-        Collections.sort(people, new Comparator<Person>() {
-            @Override
-            public int compare(Person p1, Person p2) {
-                return p1.getName().compareTo(p2.getName());
-            }
-        });
-    }
-
-    public void sortPeopleByDateOfBirth() {
-        Collections.sort(people, new Comparator<Person>() {
-            @Override
-            public int compare(Person p1, Person p2) {
-                return p1.getDateOfBirth().compareTo(p2.getDateOfBirth());
-            }
-        });
     }
 }
