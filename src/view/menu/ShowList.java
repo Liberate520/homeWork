@@ -16,6 +16,6 @@ public class ShowList implements Command{
 
     @Override
     public void execute() {
-        console.ShowList();
+        console.showList();
     }
 }

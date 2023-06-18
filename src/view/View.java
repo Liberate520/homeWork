@@ -7,7 +7,7 @@ import java.io.IOException;
 public interface View {
     void start() throws IOException, ClassNotFoundException;
     void setPresenter(Presenter presenter);
-    void ShowList();
+    void showList();
     void addHuman();
     void findByName();
     void saveToFile() throws IOException;

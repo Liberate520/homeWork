@@ -16,11 +16,18 @@ public class FamilyTree<E extends TreeItem<E>> implements Tree<E> {
         humanList.add(human);
     }
 
-    public void addHuman(String name, LocalDate date, Gender gender){
+    public void addHuman(String name, LocalDate date, Gender gender, String fathersName, String mothersName){
         Human newHuman = new Human();
         newHuman.setName(name);
         newHuman.setDateOfBirth(date);
         newHuman.setGender(gender);
+
+        Human father = (Human)FamilyTree.this.getByName(fathersName);
+        newHuman.setFather(father);
+
+        Human mother = (Human)FamilyTree.this.getByName(mothersName);
+        newHuman.setMother(mother);
+
         humanList.add((E)newHuman);
     }
 

@@ -97,4 +97,8 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    public void setFather(Human father) { this.father = father; }
+
+    public void setMother(Human mother) { this.mother = mother; }
 }

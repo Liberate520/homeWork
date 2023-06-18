@@ -27,9 +27,9 @@ public class Presenter {
     public void sortByBirthDate(){
         service.sortByBirthDate();
     }
-    public void addHuman(String name, LocalDate date, Gender gender)
+    public void addHuman(String name, LocalDate date, Gender gender, String fathersName, String mothersName)
     {
-        service.addHuman(name, date, gender);
+        service.addHuman(name, date, gender, fathersName, mothersName);
     }
     public String findByName(String name)
     {
@@ -38,11 +38,11 @@ public class Presenter {
     public void findBrothers(String name){
         System.out.println(service.findBrothers(name));
     }
-    public void SaveToFile(String filename) throws IOException {
-        service.SaveToFile(filename);
+    public void saveToFile(String filename) throws IOException {
+        service.saveToFile(filename);
     }
-    public void LoadFromFile(String filename) throws IOException, ClassNotFoundException {
-        service.LoadFromFile(filename);
+    public void loadFromFile(String filename) throws IOException, ClassNotFoundException {
+        service.loadFromFile(filename);
     }
 
 }

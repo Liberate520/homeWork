@@ -74,20 +74,20 @@ public class Console implements View{
     }
 
     @Override
-    public void ShowList() {
+    public void showList() {
         System.out.println(presenter.showList());
     }
 
     public void sortByName() {
         presenter.sortByName();
         System.out.println("Сортировка выполнена.");
-        ShowList();
+        showList();
     }
 
     public void sortByBirthDate() {
         presenter.sortByBirthDate();
         System.out.println("Сортировка выполнена.");
-        ShowList();
+        showList();
     }
 
     @Override
@@ -97,19 +97,26 @@ public class Console implements View{
         System.out.print("Введите имя:");
         name = (scanner.nextLine());
 
-        // TODO: 11.06.2023  добавить проверку исключений
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
         System.out.print("Введите дату рождения (dd MM yyyy):");
         LocalDate date = LocalDate.parse(scanner.nextLine(), formatter);
 
-        String gen;
+        String gen = "";
         System.out.print("Введите пол (MALE/FEMALE):");
         gen = (scanner.nextLine());
         Gender gender = Gender.UNKNOWN;
         if(gen.equals("MALE")) {gender = Gender.MALE;}
         if(gen.equals("FEMALE")) {gender = Gender.FEMALE;}
-        presenter.addHuman(name, date, gender);
 
+        String fathersName = "";
+        System.out.print("Введите имя отца:");
+        fathersName = (scanner.nextLine());
+
+        String mothersName = "";
+        System.out.print("Введите имя матери:");
+        mothersName = (scanner.nextLine());
+
+        presenter.addHuman(name, date, gender, fathersName, mothersName);
         System.out.println("Запись добавлена");
     }
 
@@ -130,7 +137,7 @@ public class Console implements View{
     public void saveToFile() throws IOException {
         System.out.print("Введите имя файла для сохранения:");
         String filename = (scanner.nextLine());
-        presenter.SaveToFile(filename);
+        presenter.saveToFile(filename);
         System.out.println("Файл сохранен");
     }
 
@@ -138,7 +145,7 @@ public class Console implements View{
     public void loadFromFile() throws IOException, ClassNotFoundException {
         System.out.print("Введите имя файла для чтения:");
         String filename = (scanner.nextLine());
-        presenter.LoadFromFile(filename);
+        presenter.loadFromFile(filename);
         System.out.println("Файл загружен");
     }
 

@@ -30,8 +30,9 @@ public class Service {
         new SortByBirthDate().sort(tree);
     }
 
-    public void addHuman(String name, LocalDate date, Gender gender){
-        tree.addHuman(name, date, gender);
+    public void addHuman(String name, LocalDate date, Gender gender, String fathersName, String mothersName)
+    {
+        tree.addHuman(name, date, gender, fathersName, mothersName);
     }
 
     public String findByName(String name){
@@ -49,11 +50,11 @@ public class Service {
         return printer;
     }
 
-    public void SaveToFile(String filename) throws IOException {
+    public void saveToFile(String filename) throws IOException {
         savable.save(tree, filename);
     }
 
-    public void LoadFromFile(String filename) throws IOException, ClassNotFoundException {
-        FamilyTree<Human> familyTreeRestored = (FamilyTree<Human>) savable.load(filename);
+    public void loadFromFile(String filename) throws IOException, ClassNotFoundException {
+        tree = (FamilyTree<Human>) savable.load(filename);
     }
 }
