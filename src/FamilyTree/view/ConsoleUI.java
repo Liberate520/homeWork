@@ -1,26 +1,28 @@
 package FamilyTree.view;
 
-import FamilyTree.model.FamilyTree;
-import FamilyTree.model.Human;
+import FamilyTree.model.human.Gender;
 import FamilyTree.presenter.Presenter;
+import FamilyTree.view.menu.MainMenu;
+import FamilyTree.view.menu.Menu;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
+    private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Presenter presenter;
     private Scanner scanner;
-    private MainMenu mainMenu;
+    private Menu menu;
     private boolean work;
     public ConsoleUI(){
         scanner = new Scanner(System.in);
-        mainMenu = new MainMenu(this);
+        menu = new MainMenu(this);
         work = true;
-        presenter = new Presenter(this, new FamilyTree<Human>());
     }
     @Override
     public void print(String text) {
-
+        System.out.println(text);
     }
 
     @Override
@@ -30,86 +32,97 @@ public class ConsoleUI implements View{
 
     @Override
     public void start() {
-        System.out.println("Семейное древо");
+        hello();
         while (work){
-            System.out.println(mainMenu.printMenu());
-            int choice = userInput();
-            if (choice == -1){
-                System.out.println("Ошибка ввода данных");
-                continue;
-            }
-            mainMenu.execute(choice);
+            printMenu();
+            execute();
         }
     }
-    private int userInput(){
-        String line = scanner.nextLine();
-        if (!checkLine(line)){
-            System.out.println("Ошибка ввода данных");
-            return -1;
-        }
-        return  Integer.parseInt(line);
+    public void getHumanList(){
+        presenter.getHumanList();
     }
-    private boolean checkLine(String line){
-        if (!line.matches("[0-9]+")){
-            return false;
-        }
-        int choice = Integer.parseInt(line);
-        return choice > 0 && choice <= mainMenu.size();
-    }
+
     public void addMember(){
+        String name = inputName();
+        Gender gender = inputGender();
+        LocalDate birthDate = inputDate();
+        String father = inputFather();
+        String mother = inputMother();
+        presenter.addHuman(name, gender, birthDate, father, mother);
+    }
+
+    private String inputName(){
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
-        System.out.println("Введите пол: ");
-        String sex = scanner.nextLine();
-        System.out.println("Введите возраст: ");
-        String strAge = scanner.nextLine();
-        int age;
-        if (!strAge.matches("[0-9]+")){
-            age = 0;
-        } else {
-            age = Integer.parseInt(strAge);
-        }
-        System.out.println("Введите число для записи отца: ");
-        ArrayList<Human> males = presenter.getService().getMales();
-        System.out.println("0- без отца");
-        for (int i = 0; i < males.size(); i++) {
-            System.out.println(i + 1 + " - " + males.get(i).getName());
-        }
-        String fatherUserInput = scanner.nextLine();
-        Human father = null;
+        return name;
+    }
 
-        if (fatherUserInput.equals("0")){
-            father = null;
-        } else {
-            father = males.get(Integer.parseInt(fatherUserInput) - 1);
+    private Gender inputGender(){
+        while (true){
+            System.out.println("Выберете пол: ");
+            for (Gender gender: Gender.values()){
+                System.out.println(gender);
+            }
+            String line = scanner.nextLine();
+            for (Gender gender: Gender.values()){
+                if (line.equalsIgnoreCase(gender.toString())){
+                    return gender;
+                }
+            }
+            System.out.println("Пол указан не верно!");
         }
+    }
 
-        System.out.println("Выберите число для записи матери");
-        ArrayList<Human> females = presenter.getService().getFemales();
-        System.out.println("0 - без матери");
-        for (int i = 0; i < females.size(); i++) {
-            System.out.println(i + 1 + " - " + females.get(i).getName());
-        }
-        String motherUserInput = scanner.nextLine();
-        Human mother = null;
-        if (motherUserInput.equals("0")) {
-            mother = null;
-        } else {
-            mother = females.get(Integer.parseInt(motherUserInput) - 1);
-        }
-        System.out.println("Член семьи добавлен");
+    private LocalDate inputDate(){
+        System.out.println("Введите дату рождения формата (YYYY-MM-DD): ");
+        String input = scanner.nextLine();
+        LocalDate birthDate = LocalDate.parse(input, DateTimeFormatter.ISO_LOCAL_DATE);
+        return birthDate;
+    }
 
-        presenter.getService().addMember(new Human(name, age, sex, father, mother));
+    private String inputFather(){
+        System.out.println("Введите имя отца: ");
+        String name = scanner.nextLine();
+        return name;
+    }
+
+    private String inputMother(){
+        System.out.println("Введите имя матери: ");
+        String name = scanner.nextLine();
+        return name;
+    }
+
+    private void hello(){
+        System.out.println("Добро пожаловать в семейное дерево!");
+    }
+
+    private void execute(){
+        String line = scanner.nextLine();
+        if(checkLine(line)){
+            int numCommand = Integer.parseInt(line);
+            if (checkCommand(numCommand)){
+                menu.execute(numCommand);
+                return;
+            }
+        }
+        inputError();
+    }
+
+    private void inputError() {
+        System.out.println(INPUT_ERROR);
+    }
+
+    private boolean checkCommand(int numCommand) {
+        return numCommand < menu.size();
+    }
+    private boolean checkLine(String text){
+        return text.matches("[0-9]+");
+    }
+    private void printMenu(){
+        System.out.println(menu.print());
     }
     public void finish(){
         System.out.println("До новых встреч!");
         work = false;
-    }
-    public void getAllMembers(){
-        ArrayList<Human> humanList = presenter.getService().getFamily();
-        for (Human hum: humanList){
-            System.out.println(hum);
-            System.out.println();
-        }
     }
 }

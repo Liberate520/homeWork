@@ -11,9 +11,8 @@ public class GetAllMembers implements Command{
     public String getDescription() {
         return "Показать все дерево";
     }
-
     @Override
     public void execute() {
-        consoleUI.getAllMembers();
+        consoleUI.getHumanList();
     }
 }

@@ -1,22 +1,21 @@
-package FamilyTree.view;
+package FamilyTree.view.menu;
 
+import FamilyTree.view.ConsoleUI;
 import FamilyTree.view.command.AddMember;
 import FamilyTree.view.command.Command;
-import FamilyTree.view.command.Finish;
 import FamilyTree.view.command.GetAllMembers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu {
+public class MainMenu implements Menu{
     private List<Command> commandList;
     public MainMenu(ConsoleUI consoleUI){
         commandList = new ArrayList<>();
         commandList.add(new AddMember(consoleUI));
         commandList.add(new GetAllMembers(consoleUI));
-        commandList.add(new Finish(consoleUI));
     }
-    public String printMenu(){
+    public String print(){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i=0; i<commandList.size();i++){
             stringBuilder.append(i + 1);
@@ -27,7 +26,7 @@ public class MainMenu {
         return stringBuilder.toString();
     }
     public void execute(int choice){
-        commandList.get(choice - 1).execute();
+        commandList.get(choice-1).execute();
     }
     public int size(){
         return commandList.size();
