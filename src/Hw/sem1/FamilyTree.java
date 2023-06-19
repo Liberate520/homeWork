@@ -3,52 +3,52 @@ package Hw.sem1;
 import java.io.Serializable;
 import java.util.*;
 
-class FamilyTree implements Serializable, Iterable<Person> {
-    private Person root;
+class FamilyTree<T extends Person> implements Iterable<T>, Serializable {
+    private T root;
 
-    public FamilyTree(Person root) {
+    public FamilyTree(T root) {
         this.root = root;
     }
 
-    public Person getRoot() {
+    public T getRoot() {
         return root;
     }
 
-    public void setRoot(Person root) {
+    public void setRoot(T root) {
         this.root = root;
     }
 
-    public void addChild(Person parent, Person child) {
+    public void addChild(T parent, T child) {
         parent.addChild(child);
         child.setFather(parent);
     }
 
-    public List<Person> getAllMembers() {
-        List<Person> allMembers = new ArrayList<>();
+    public List<T> getAllMembers() {
+        List<T> allMembers = new ArrayList<>();
         traverseTree(root, allMembers);
         return allMembers;
     }
 
-    private void traverseTree(Person person, List<Person> allMembers) {
+    private void traverseTree(T person, List<T> allMembers) {
         allMembers.add(person);
         for (Person child : person.getChildren()) {
-            traverseTree(child, allMembers);
+            traverseTree((T) child, allMembers);
         }
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        List<Person> allMembers = getAllMembers();
+    public Iterator<T> iterator() {
+        List<T> allMembers = getAllMembers();
         return allMembers.iterator();
     }
 
     public void sortByName() {
-        List<Person> allMembers = getAllMembers();
+        List<T> allMembers = getAllMembers();
         Collections.sort(allMembers, Comparator.comparing(Person::getName));
     }
 
     public void sortByBirthDate() {
-        List<Person> allMembers = getAllMembers();
+        List<T> allMembers = getAllMembers();
         Collections.sort(allMembers, Comparator.comparing(Person::getBirthDate));
     }
 }

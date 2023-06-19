@@ -9,17 +9,15 @@ public class Person implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate birthDate;
-    private LocalDate deathDate;
-    private Person father;
-    private Person mother;
     private List<Person> children;
+    private Person father;
 
-    public Person(String name, Gender gender, LocalDate birthDate, LocalDate deathDate) {
+    public Person(String name, Gender gender, LocalDate birthDate, Person father) {
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.deathDate = deathDate;
         this.children = new ArrayList<>();
+        this.father = father;
     }
 
     public String getName() {
@@ -34,8 +32,8 @@ public class Person implements Serializable {
         return birthDate;
     }
 
-    public LocalDate getDeathDate() {
-        return deathDate;
+    public List<Person> getChildren() {
+        return children;
     }
 
     public Person getFather() {
@@ -46,24 +44,16 @@ public class Person implements Serializable {
         this.father = father;
     }
 
-    public Person getMother() {
-        return mother;
-    }
-
-    public void setMother(Person mother) {
-        this.mother = mother;
-    }
-
-    public List<Person> getChildren() {
-        return children;
-    }
-
     public void addChild(Person child) {
         children.add(child);
     }
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Gender: " + gender + ", Birth Date: " + birthDate + ", Death Date: " + deathDate;
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
