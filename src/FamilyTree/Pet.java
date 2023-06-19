@@ -33,7 +33,11 @@ public class Pet implements TreeItem {
 
     @Override
     public String getPersonInfo() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Имя: ");
+        sb.append(name);
+
+        return sb.toString();
     }
 
     @Override
