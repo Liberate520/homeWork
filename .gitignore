@@ -3,14 +3,9 @@
 *.iml
 .out/
 src/main/java/com/example/VendingMachine/
-target/classes/com/example/VendingMachine/
 src/main/java/com/example/ZOO/
-target/classes/com/example/ZOO/
-target/classes/com/example/Study/
 src/main/java/com/example/Study/
-target/classes/com/example/FamilyTreeCopy/
 src/main/java/com/example/FamilyTreeCopy/
 src/main/java/com/example/MVP/
-target/classes/com/example/MVP/
-target/classes/com/example/FamilyTreeCopy2/
 src/main/java/com/example/FamilyTreeCopy2/
+target/

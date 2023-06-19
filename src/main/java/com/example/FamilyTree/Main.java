@@ -1,12 +1,12 @@
 package com.example.FamilyTree;
 
-import com.example.FamilyTree.Presenter.Presenter;
+import com.example.FamilyTree.View.View;
 
 
 public class Main {
     public static void main(String[] args) {
-        Presenter start = new Presenter();
-        start.RunFamilyTree();
+        View start = new View();
+        start.objectSelection();
     }
 }
 

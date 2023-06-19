@@ -1,8 +1,10 @@
 package com.example.FamilyTree.Model.Printable;
 
-import com.example.FamilyTree.DataForTree.FamilyInterface;
-import com.example.FamilyTree.DataForTree.FamilyTree;
+import com.example.FamilyTree.Model.DataForTree.Family;
+import com.example.FamilyTree.Model.DataForTree.FamilyInterface;
 
-public interface Printable<T extends FamilyInterface> {
-    String output(FamilyTree<T> familyTree);
+import java.util.List;
+
+public interface Printable<T extends Family & FamilyInterface> {
+    String output(List<T> familyTree);
 }

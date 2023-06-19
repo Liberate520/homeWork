@@ -1,6 +1,6 @@
 package com.example.FamilyTree.Model.FileHandler;
 
-import com.example.FamilyTree.DataForTree.FamilyTree;
+import com.example.FamilyTree.Model.DataForTree.FamilyTree;
 
 import java.io.*;
 

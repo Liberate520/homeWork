@@ -1,9 +1,10 @@
-package com.example.FamilyTree.DataForTree;
+package com.example.FamilyTree.Model.DataForTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Family<T extends FamilyInterface> implements Serializable, FamilyInterface {
     private T object;
@@ -37,18 +38,6 @@ public class Family<T extends FamilyInterface> implements Serializable, FamilyIn
             System.out.println("не может быть ребенком этому человеку");
         }
     }
-    @Override
-    public T getObject() {
-        return object;
-    }
-
-    public List<T> getParents() {
-        return parents;
-    }
-
-    public List<T> getChildren() {
-        return children;
-    }
 
     @Override
     public Gender getGender() {
@@ -65,9 +54,44 @@ public class Family<T extends FamilyInterface> implements Serializable, FamilyIn
         return object.getName();
     }
 
-    @Override
     public int getPuberty() {
         return object.getPuberty();
+    }
+
+    public T getObject() {
+        return object;
+    }
+
+    @Override
+    public List getListFields() {
+        return object.getListFields();
+    }
+
+    @Override
+    public void setName(String name) {
+        object.setName(name);
+    }
+
+    @Override
+    public void setBirthday(Date birthday) {
+        object.setBirthday(birthday);
+    }
+
+    @Override
+    public void setGender(Gender gender) {
+        object.setGender(gender);
+    }
+
+    public List<T> getParents() {
+        return parents;
+    }
+
+    public List<T> getChildren() {
+        return children;
+    }
+
+    public List<T> getFilterParents(Selection selection) {
+        return parents.stream().filter(selection::isEqual).collect(Collectors.toList());
     }
 
     @Override

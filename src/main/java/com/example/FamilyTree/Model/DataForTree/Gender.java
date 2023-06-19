@@ -1,4 +1,4 @@
-package com.example.FamilyTree.DataForTree;
+package com.example.FamilyTree.Model.DataForTree;
 
 public enum Gender {
     male("male"),

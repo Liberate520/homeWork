@@ -1,8 +1,8 @@
-package com.example.FamilyTree.DataForTree;
+package com.example.FamilyTree.Model.DataForTree;
 
 import java.util.Comparator;
 
-public class ComparatorByName<T extends FamilyInterface> implements Comparator<T> {
+public class ComparatorByName<T extends Family> implements Comparator<T> {
 
     @Override
     public int compare(T o1, T o2) {

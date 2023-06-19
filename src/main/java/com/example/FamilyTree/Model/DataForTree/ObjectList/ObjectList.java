@@ -1,13 +1,15 @@
-package com.example.FamilyTree.DataForTree.ObjectList;
+package com.example.FamilyTree.Model.DataForTree.ObjectList;
 
-import com.example.FamilyTree.DataForTree.Family;
-import com.example.FamilyTree.DataForTree.FamilyTree;
-import com.example.FamilyTree.DataForTree.Gender;
+import com.example.FamilyTree.Model.DataForTree.Family;
+import com.example.FamilyTree.Model.DataForTree.FamilyInterface;
+import com.example.FamilyTree.Model.DataForTree.FamilyTree;
+import com.example.FamilyTree.Model.DataForTree.Gender;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjectList {
+public class ObjectList implements Serializable {
     private final List<String> objectList;
 
     public ObjectList() {

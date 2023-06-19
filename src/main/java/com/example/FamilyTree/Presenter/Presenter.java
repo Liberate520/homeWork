@@ -1,68 +1,85 @@
 package com.example.FamilyTree.Presenter;
 
-import com.example.FamilyTree.DataForTree.*;
 import com.example.FamilyTree.Model.Model;
-import com.example.FamilyTree.Model.Printable.Printable;
-import com.example.FamilyTree.Model.Printable.printObjectList;
-import com.example.FamilyTree.View.View;
 
-import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 public class Presenter {
-    private View view;
-    private Model model;
-    private boolean work = true;
+    private Model model = new Model();
 
-    public Presenter() {
-        view = new View();
-        model = new Model();
+    public List<String> getObjectList() {
+        return model.getObjectList();
     }
 
-    public void RunFamilyTree(){
-        String objectSelection = view.ObjectSelection();
-        FamilyTree<Family> familyTree = new FamilyTree<>();
-
-        String path = "./src/main/java/com/example/FamilyTree/FamilyTree"+objectSelection+".txt";
-        File file = new File(path);
-        if (!file.exists()) {
-            familyTree = model.getFamilyTree(objectSelection, path);
-            if (!familyTree.getObjectFamilyList().isEmpty()) {
-                model.FileProcessing(1, familyTree, path);
-            }
+    public String RunFamilyTree(String objectSelection) {
+        model.getFamilyTree(objectSelection);
+        if (model.familyEmpty()) {
+            return "Семейное дерево "+objectSelection+" пустое";
         } else {
-            familyTree = (FamilyTree<Family>) model.FileProcessing(2, familyTree, path);
+            return takeSortingFamilyTree();
         }
-        if (familyTree.getObjectFamilyList().isEmpty()) {
-            familyTree = view.addFamilyTree(objectSelection, familyTree);
-            if (!familyTree.getObjectFamilyList().isEmpty()) {
-                model.FileProcessing(1, familyTree, path);
-            }
-        }
+    }
 
-        if (!familyTree.getObjectFamilyList().isEmpty()) {
-            System.out.println("Общий список лиц семьи: ");
-            System.out.println(model.printFamilyTree(familyTree));
+    private String takeSortingFamilyTree() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Общий список лиц семьи: " + model.printFamilyTree(-1,-1));
+        model.familyTreeSortByBirthday();
+        stringBuilder.append("\n\nСортировка по дню рождения: " + model.printFamilyTree(-1,-1));
+        model.familyTreeSortByName();
+        stringBuilder.append("\n\nСортировка по имени: "+model.printFamilyTree(-1, -1));
+        return stringBuilder.toString();
+    }
 
-            System.out.println("Сортировка по дню рождения: ");
-            familyTree.sortByBirthday();
-            System.out.println(model.printFamilyTree(familyTree));
+    public String takePrintFamilyTree(int whom, int gendInd) {
+        return model.printFamilyTree(whom, gendInd);
+    }
 
-            System.out.println("Сортировка по имени: ");
-            familyTree.sortByName();
-            System.out.println(model.printFamilyTree(familyTree));
+    public String filterFamilyTree(int number) {
+        return model.filterFamily(number);
+    }
 
-            familyTree = view.addFamilyTree(objectSelection, familyTree);
-            model.FileProcessing(1, familyTree, path);
+    public int addFamilyTree(Map<String, Object> objectMap, String objectSelection) {
+        return model.addObjectInFamilyList(objectMap, objectSelection);
+    }
 
-            String answer = "0";
-            do {
-                answer = view.MenuAction(familyTree);
-                if (!answer.equals("0")) {
-                    model.filterFamilyTree(answer, familyTree);
-                }
-            } while (!answer.equals("0"));
-        } else {
-            System.out.println("Семейное дерево "+objectSelection+" пустое");
-        }
+    public List getListFields() {
+        return model.getListFields();
+    }
+
+    public int takeSizeFamilyTree(int whom, int gender) {
+        return model.takeSizeFamilyTree(whom, gender);
+    }
+
+    public String showRelatives(int object1, int object2) {
+        return model.showRelatives(object1, object2);
+    }
+
+    public String deleteRecordFamilyTree(int object) {
+        return model.deleteRecordFamilyTree(object);
+    }
+
+    public void updateObjectName(int whom, String newName) {
+        model.updateObjectName(whom, newName);
+    }
+
+    public void updateObjectBirthday(int whom, String newBirthday) {
+        model.updateObjectBirthday(whom, newBirthday);
+    }
+
+    public void updateObjectGender(int whom, int newGender) {
+        model.updateObjectGender(whom, newGender);
+    }
+
+    public List getGenderList() {
+        return model.getGenderList();
+    }
+
+    public void updateObjectParents(int whom, int parentsInd, int gender) {
+        model.updateObjectParents(whom, parentsInd, gender);
+    }
+
+    public void updateObjectChildren(int whom, int childInd, int gender){
+        model.updateObjectChildren(whom, childInd, gender);
     }
 }
