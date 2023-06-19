@@ -1,5 +1,12 @@
 package FamilyTree;
 
+
+import FamilyTree.fileHandler.FileHandler;
+import FamilyTree.fileHandler.SaveLoader;
+import FamilyTree.tree.FamilyTree;
+import FamilyTree.person.Person;
+import FamilyTree.person.Gender;
+
 import java.time.LocalDate;
 
 public class Main {
@@ -10,7 +17,7 @@ public class Main {
 
         FamilyTree tree = (FamilyTree) saveLoader.load(path);
 //        FamilyTree tree = new FamilyTree();
-
+//
 //        tree.add(new Person("Петрова Ольга Владимировна", Gender.male, LocalDate.of(1941, 6, 24)));
 //        tree.add(new Person("Иванов Иван Иванович", Gender.male, LocalDate.of(1935, 12, 14)));
 //        tree.add(new Person("Иванова Кристина Ивановна", Gender.male, LocalDate.of(1961, 5, 15),
@@ -20,7 +27,7 @@ public class Main {
 //        tree.add(new Person("Митрофанов Константин Дмитриевич", Gender.male, LocalDate.of(1981, 8, 25),
 //                tree.getByName("Иванова Кристина Ивановна"),
 //                tree.getByName("Митрофанов Дмитрий Васильевич")));
-
+//
 //        saveLoader.save(tree, path);
 
         System.out.println(tree.getFamilyTree());

@@ -1,4 +1,4 @@
-package FamilyTree;
+package FamilyTree.fileHandler;
 
 import java.io.Serializable;
 

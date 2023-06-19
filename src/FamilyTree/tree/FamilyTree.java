@@ -1,4 +1,6 @@
-package FamilyTree;
+package FamilyTree.tree;
+
+import FamilyTree.person.Person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,6 +48,4 @@ public class FamilyTree implements Serializable {
         }
         return sb.toString();
     }
-
-
 }

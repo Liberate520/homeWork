@@ -1,4 +1,4 @@
-package FamilyTree;
+package FamilyTree.person;
 
 import java.io.Serializable;
 import java.time.LocalDate;
