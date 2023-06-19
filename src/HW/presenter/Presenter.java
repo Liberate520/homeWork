@@ -2,28 +2,33 @@ package HW.presenter;
 
 import HW.model.ServiceHuman;
 import HW.model.human.Human;
-import HW.model.human.enumerate.Sex;
 import HW.model.tree.FamilyTree;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class Presenter {
-    ServiceHuman serviceHuman;
+    private ServiceHuman serviceHuman;
 
     public Presenter(FamilyTree<Human> tree) {
         this.serviceHuman = new ServiceHuman(tree);
     }
 
-    public void addNote(String name, String surname) {
-        serviceHuman.addNote(name, surname);
+    public void addNote(String name, String surname, String sex, String dateOfBirth, String dateOfDeath, String fatherName, String fatherSurname, String motherName, String motherSurname) {
+        serviceHuman.addNote(name, surname, sex, dateOfBirth, dateOfDeath, fatherName, fatherSurname, motherName, motherSurname);
     }
 
-    public Human getNote(String name, String surname) {
+    public String getNote(String name, String surname) {
         return serviceHuman.getNote(name, surname);
     }
 
-    public List<Human> getAllNote() {
+    public List<String> getAllNote() {
         return serviceHuman.getAllNotes();
+    }
+
+    public void doSave() {
+        serviceHuman.doSave();
+    }
+
+    public void doRecover() {
+        serviceHuman.doRecover();
     }
 }

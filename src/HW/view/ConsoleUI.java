@@ -1,10 +1,10 @@
 package HW.view;
 
 import HW.model.human.Human;
-import HW.model.human.enumerate.Sex;
 import HW.model.tree.FamilyTree;
 import HW.presenter.Presenter;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
@@ -23,15 +23,18 @@ public class ConsoleUI implements View{
     public void print(String text) {
         System.out.println(text);
     }
+    public void printList(List<String> list){
+        System.out.println(list);
+    }
 
     @Override
     public void start() {
-        System.out.println("Hello");
+        print("Hello");
         while (work) {
-            System.out.println(mainMenu.printMenu());
+            print(mainMenu.printMenu());
             int choice = inputNumMenu();
             if (choice == -1){
-                System.out.println("Input error");
+                print("Input error");
                 continue;
             }
             mainMenu.execute(choice);
@@ -55,30 +58,52 @@ public class ConsoleUI implements View{
     }
 
     public void finish() {
-        System.out.println("Good buy. Hope to see you soon!)");
+        print("Good buy. Hope to see you soon!)");
         work = false;
     }
 
     public void addNote(){
-        System.out.println("Enter name");
+        print("Enter name");
         String name = scanner.nextLine();
-        System.out.println("Enter surname");
+        print("Enter surname");
         String surname = scanner.nextLine();
 
-        presenter.addNote(name, surname);
+        print("Enter sex");
+        String sex = scanner.nextLine();
+        print("Enter date of birth");
+        String dateOfBirth = scanner.nextLine();
+        print("Enter date of death");
+        String dateOfDeath = scanner.nextLine();
+        print("Enter father name");
+        String fatherName = scanner.nextLine();
+        print("Enter father surname");
+        String fatherSurname = scanner.nextLine();
+        print("Enter mother name");
+        String motherName = scanner.nextLine();
+        print("Enter mother surname");
+        String motherSurname = scanner.nextLine();
+
+
+        presenter.addNote(name, surname, sex, dateOfBirth, dateOfDeath, fatherName, fatherSurname, motherName,motherSurname);
     }
 
     public void getNote(){
-        System.out.println("Show member");
-        System.out.println("Type name");
+        print("Show member");
+        print("Type name");
         String name = scanner.nextLine();
-        System.out.println("Type surname");
+        print("Type surname");
         String surname = scanner.nextLine();
-        System.out.println(presenter.getNote(name, surname));
+        print(presenter.getNote(name, surname));
     }
 
     public void getAllNote(){
-        System.out.println("All your notes:");
-        System.out.println(presenter.getAllNote());
+        print("All your notes:");
+        printList(presenter.getAllNote());
+    }
+    public void saver(){
+        presenter.doSave();
+    }
+    public void recovery(){
+        presenter.doRecover();
     }
 }

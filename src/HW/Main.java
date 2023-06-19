@@ -1,9 +1,6 @@
 package HW;
 
-import HW.model.dog.Dog;
 import HW.model.human.Human;
-import HW.model.dataManager.DataSaver;
-import HW.model.dataManager.UpDownLoader;
 import HW.model.tree.FamilyTree;
 import HW.view.ConsoleUI;
 
@@ -46,13 +43,16 @@ public class Main {
         tree.addAsChild(new Human("Ирина", "Иванова", F, LocalDate.of(2018, 7, 5), tree.findPerson("Игорь", "Иванов"), null));
         tree.addAsChild(new Human("Наталья", "Иванова", F, LocalDate.of(2018, 8, 5), tree.findPerson("Николай", "Иванов"), null));
 
+        ConsoleUI consoleUI = new ConsoleUI(tree);
+        consoleUI.start();
+
 //        System.out.println(tree.findPerson("Василий", "Иванов"));
 //        System.out.println();
 //        System.out.println(tree.findPerson("Василий", "Иванов").getChildren());
 
-        UpDownLoader file = new DataSaver();
-        tree.saver(file);
-        FamilyTree newTree = FamilyTree.recovery(file);
+//        UpDownLoader file = new DataSaver();
+//        tree.saver(file);
+//        FamilyTree newTree = FamilyTree.recovery(file);
 
 //        tree.printHList();
 //        System.out.println();
@@ -69,13 +69,13 @@ public class Main {
 //        tree.printHList();
 
 
-        FamilyTree<Dog> treeDog = new FamilyTree<>();
-        treeDog.addPerson(new Dog("Бродяга", "Сноу", M, LocalDate.of(1985, 12, 1), LocalDate.of(2000, 11, 5)));
-        treeDog.addPerson(new Dog("Леди", "Сноу", F, LocalDate.of(1986, 12, 1)));
-        treeDog.addAsChild(new Dog("Бетховен", "Сноу", M, LocalDate.of(1998, 5, 5), treeDog.findPerson("Бродяга", "Сноу"), treeDog.findPerson("Леди", "Сноу")));
-        treeDog.addAsChild(new Dog("Мухтар", "Сноу", M, LocalDate.of(2000, 6, 5), treeDog.findPerson("Бродяга", "Сноу"), treeDog.findPerson("Леди", "Сноу")));
-        treeDog.addAsChild(new Dog("Лесси", "Сноу", F, LocalDate.of(2018, 7, 5), treeDog.findPerson("Бетховен", "Сноу"), null));
-        treeDog.addAsChild(new Dog("Жучка", "Сноу", F, LocalDate.of(2018, 8, 5), treeDog.findPerson("Мухтар", "Сноу"), null));
+//        FamilyTree<Dog> treeDog = new FamilyTree<>();
+//        treeDog.addPerson(new Dog("Бродяга", "Сноу", M, LocalDate.of(1985, 12, 1), LocalDate.of(2000, 11, 5)));
+//        treeDog.addPerson(new Dog("Леди", "Сноу", F, LocalDate.of(1986, 12, 1)));
+//        treeDog.addAsChild(new Dog("Бетховен", "Сноу", M, LocalDate.of(1998, 5, 5), treeDog.findPerson("Бродяга", "Сноу"), treeDog.findPerson("Леди", "Сноу")));
+//        treeDog.addAsChild(new Dog("Мухтар", "Сноу", M, LocalDate.of(2000, 6, 5), treeDog.findPerson("Бродяга", "Сноу"), treeDog.findPerson("Леди", "Сноу")));
+//        treeDog.addAsChild(new Dog("Лесси", "Сноу", F, LocalDate.of(2018, 7, 5), treeDog.findPerson("Бетховен", "Сноу"), null));
+//        treeDog.addAsChild(new Dog("Жучка", "Сноу", F, LocalDate.of(2018, 8, 5), treeDog.findPerson("Мухтар", "Сноу"), null));
 
 //        System.out.println();
 //        System.out.println(treeDog.findPerson("Бродяга", "Сноу"));
@@ -86,8 +86,7 @@ public class Main {
 //        treeDog.saver(fileDog);
 //        FamilyTree newTreeDog = FamilyTree.recovery(fileDog);
 
-        ConsoleUI consoleUI = new ConsoleUI(tree);
-        consoleUI.start();
+
     }
 
 }

@@ -29,6 +29,9 @@ public class Human implements Serializable, Member {
     public Human(String name, String surname) {
         this (name, surname, null, null, null, null, null, new ArrayList<>());
     }
+    public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother) {
+        this (name, surname, sex, dateOfBirth, dateOfDeath, father, mother, null);
+    }
     public Human(String name, String surname, Sex sex, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother, List<Member> children) {
         this.name = name;
         this.surname = surname;
@@ -39,6 +42,8 @@ public class Human implements Serializable, Member {
         this.mother = mother;
         this.children = children;
     }
+
+
 
     public String getName() {
         return name;
