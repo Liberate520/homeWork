@@ -2,22 +2,22 @@ package Views.Commands;
 
 import Views.Executable;
 
-public class CommandSave implements Command {
+public class CommandHelp implements Command {
 
     private Executable view;
 
-    public CommandSave(Executable view) {
+    public CommandHelp(Executable view) {
         this.view = view;
     }
 
     @Override
     public String getInfo() {
-        return "Save";
+        return "Help";
     }
 
     @Override
     public void execute() {
-        view.save();
+        view.help();
     }
 
     @Override

@@ -1,26 +1,31 @@
 package Views;
 
 public interface Executable {
-    /** show list of notes */
+    /** показ списка записей */
     public void show();
 
-    /** get concrete note item */
-    public void read();    
+    /** получить запись по id или заголовку */
+    public void read();
 
-    /** create new note */
+    /** создать запись */
     public void create();
 
-    /** remove note */
+    /** удалить запись */
     public void remove();
 
-    /** update note */
+    /** редактировать запись */
     public void update();
 
-    /** save changes */
+    /** очистить все записи */
+    public void clear();
+    
+    /** сохранить изменения */
     public void save();
+    
+    /** очистить все записи */
+    public void help();
 
-    /** quit */
+    /** выход */
     public void quit();
 
-    public void clear();
 }

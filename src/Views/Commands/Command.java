@@ -7,4 +7,7 @@ public interface Command {
 
     /** action */
     void execute();
+
+    /** help */
+    String getHelp(int number);
 }

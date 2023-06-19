@@ -5,52 +5,60 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Post implements NoteItem, Serializable {
-    //#region fields
+    // #region fields
     private Integer id;
     private String header;
     private String content;
     private String author;
     private LocalDateTime dateOfCreation;
     private LocalDateTime dateOfChange;
-    //#endregion
+    // #endregion
 
-    //#region getters
+    // #region getters
     public Integer getId() {
         return this.id;
     }
 
+    /** заголовок */
     public String getHeader() {
         return this.header;
     }
 
+    /** содержание */
     public String getContent() {
         return this.content;
     }
 
+    /** автор */
     public String getAuthor() {
         return this.author;
     }
-
+    /** дата создания */
     public LocalDateTime getDateOfCreation() {
         return this.dateOfCreation;
     }
 
+    /** дата изменения */
     public LocalDateTime getDateOfChange() {
         return this.dateOfChange;
     }
-    //#endregion
+    // #endregion
 
-    public Post(int id, String header, String content, String author){
+    /** статья */
+    public Post(int id, String header, String content, String author) {
         LocalDateTime date = LocalDateTime.now();
-        apply(id, header, content, author, date, date);        
+        apply(id, header, content, author, date, date);
     }
 
-    public void update(String header, String content, String author){
+    /** обновить */
+    public void update(String header, String content, String author) {
         LocalDateTime date = LocalDateTime.now();
-        apply(this.id, header, content, author, this.dateOfCreation, date); 
+        apply(this.id, header, content, author, this.dateOfCreation, date);
     }
 
-    private void apply(int id, String header, String content, String author, LocalDateTime dateOfCreation, LocalDateTime dateOfChange){
+    /** применить */
+    private void apply(int id, String header, String content, String author, LocalDateTime dateOfCreation,
+            LocalDateTime dateOfChange) {
         this.id = id;
         this.header = header;
         this.content = content;
@@ -70,12 +78,13 @@ public class Post implements NoteItem, Serializable {
         return builder.toString();
     }
 
-    public String getShort(){       
+    /** получение короткой инф */
+    public String getShort() {
         return String.format("[#%d] (%s) %s by %s", this.id, dateFormatter(dateOfChange), header, author);
     }
 
-    private String dateFormatter(LocalDateTime date){
+    /** строковое представление даты */
+    private String dateFormatter(LocalDateTime date) {
         return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 }
-

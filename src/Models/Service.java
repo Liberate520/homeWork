@@ -16,20 +16,20 @@ public class Service {
         getNotes();
     }
 
+    /** получение сохраненных записей, или создание нового списка */
     private void getNotes() {
         notes = keeper.read();
-        // if(notes == null){
-        //    setDefault();
-        // }
         if (notes == null) {
             notes = new Notes<>();
         }
     }
 
+    /** сохранение */
     public boolean save(){
         return keeper.save(notes);
     }
 
+    /** получение детальной информации по id */
     public String getDetail(int id) {
         List<Post> items = notes.getFilteredItems((item) -> item.getId() == id);
         if (items.size() > 0) {
@@ -38,6 +38,7 @@ public class Service {
         return "post not found";
     }
 
+    /** получение детальной информации по заголовку статьи */
     public String getDetail(String header) {
         List<Post> items = notes.getFilteredItems((item) -> item.getHeader().equals(header));
         if (items.size() > 0) {
@@ -51,10 +52,12 @@ public class Service {
         return getFilteredString(notes.getFilteredItems((item) -> true));
     }
 
+    /** фильтр по автору */
     public String getNotesListByAuthor(String author) {
         return getFilteredString(notes.getFilteredItems((item) -> item.getAuthor().equals(author)));
     }
 
+    /** получение фильтрованных статей */
     private String getFilteredString(List<Post> items) {
         StringBuilder builder = new StringBuilder();
         for (Post post : items) {
@@ -64,31 +67,38 @@ public class Service {
         return builder.toString();
     }
 
+    /** сортировка по id */
     public void sortById() {
         notes.sortById();
     }
 
+    /** сортировка по заголовку */
     public void sortByHeader() {
         notes.sortByHeader();
     }
 
+    /** сортировка по автору */
     public void sortByAuthor() {
         notes.sortByAuthor();
     }
 
+    /** сортировка по дате изменения */
     public void sortByDateOfChange() {
         notes.sortByDateOfChange();
     }
 
+    /** сортировка по дате создания */
     public void sortByDateOfCreation() {
         notes.sortByDateOfCreation();
     }
 
+    /** создание новой записи */
     public boolean create(String header, String content, String author) {
         notes.add(new Post(index++, header, content, author));
         return true;
     }
 
+    /** обновление статьи */
     public boolean update(int id, String header, String content, String author){
         List<Post> items =  notes.getFilteredItems((item) -> item.getId().equals(id));
         if(items == null || items.size() == 0) {
@@ -98,6 +108,7 @@ public class Service {
         return true;
     }
 
+    /** удаление статьи */
     public boolean remove(int id) {
         List<Post> items =  notes.getFilteredItems((item) -> item.getId().equals(id));
         if(items == null || items.size() == 0) {
@@ -107,6 +118,7 @@ public class Service {
         return true;
     }
 
+    /** очистка списка статей */
     public boolean clear() {
         
         return notes.clear();
