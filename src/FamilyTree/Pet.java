@@ -3,9 +3,10 @@ package FamilyTree;
 import FamilyTree.person.Person;
 import FamilyTree.tree.TreeItem;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Pet implements TreeItem {
+public class Pet implements Serializable, TreeItem {
     String name;
     public Pet(String name) {
         this.name = name;
