@@ -1,20 +1,18 @@
 package geoTree;
 import java.util.Iterator;
 import java.util.List;
-
-import person.Person;
 /**
  * Реализация собственного итератора для листа
  */
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<T> implements Iterator<T> {
     private int index;
-    private List<Person> personList;
+    private List<T> personList;
 
     /**
      * Конструктор принимающий список людей
      * @param personList - список людей
      */
-    public PersonIterator(List<Person> personList) {
+    public PersonIterator(List<T> personList) {
         this.personList = personList;
     }
     /**
@@ -31,7 +29,7 @@ public class PersonIterator implements Iterator<Person> {
      * Метод для возвращения следующего элемента, после увеличиваем индекс на 1
      */
     @Override
-    public Person next() {
+    public T next() {
         return personList.get(index++);
     }
 }

@@ -6,16 +6,15 @@ import java.util.List;
 
 import geoTree.comparators.PersonComparatorByDateOfBirth;
 import geoTree.comparators.PersonComparatorByName;
-import person.Person;
 
-public class GeoTree implements Serializable, Iterable<Person>{
-    private List<Person> personList;
+public class GeoTree<T extends GeoTreeItem<T>> implements Serializable, Iterable<T>{
+    private List<T> personList;
 
     public GeoTree() {
         this(new ArrayList<>());
     }
 
-    public GeoTree(List<Person> personList) {
+    public GeoTree(List<T> personList) {
         this.personList = personList;
     }
 
@@ -27,7 +26,7 @@ public class GeoTree implements Serializable, Iterable<Person>{
      * @param person - личность претендующая на родство
      * @return - успех проведенной проверки
      */
-    public boolean addPerson(Person person) {
+    public boolean addPerson(T person) {
 
         if (person == null) {
             return false;
@@ -56,9 +55,9 @@ public class GeoTree implements Serializable, Iterable<Person>{
      * @param patronymic - отчество;
      * @return - возвращает личность или null, если такого нет в списке
      */
-    public Person getByName(String name, String surname, String patronymic) {
+    public T getByName(String name, String surname, String patronymic) {
 
-        for (Person person : personList) {
+        for (T person : personList) {
 
             if ((person.getName().equals(name)) &&
                     (person.getSurname().equals(surname)) &&
@@ -79,7 +78,7 @@ public class GeoTree implements Serializable, Iterable<Person>{
         sInfo.append("В дереве ");
         sInfo.append(personList.size());
         sInfo.append(" объектов: \n");
-        for (Person person : personList) {
+        for (T person : personList) {
             sInfo.append(person.getInfo());
             sInfo.append("\n");
         }
@@ -87,22 +86,15 @@ public class GeoTree implements Serializable, Iterable<Person>{
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator(personList)/*null*/;
+    public Iterator<T> iterator() {
+        return new PersonIterator<T>(personList);
     }
 
     public void sortByName(){
-        // Collections.sort(personList);
-        personList.sort(new PersonComparatorByName());
+        personList.sort(new PersonComparatorByName<T>());
     }
 
     public void sortByDateOfBirth(){
-        personList.sort(new PersonComparatorByDateOfBirth());
+        personList.sort(new PersonComparatorByDateOfBirth<T>());
     }
-
-    // @Override
-    // public Iterator<Person> iterator(){
-    //     return personList.iterator();
-    // }
-
 }

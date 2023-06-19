@@ -1,11 +1,11 @@
 package geoTree.comparators;
 import java.util.Comparator;
 
-import person.Person;
+import geoTree.GeoTreeItem;
 
-public class PersonComparatorByDateOfBirth implements Comparator<Person> {
+public class PersonComparatorByDateOfBirth<T extends GeoTreeItem<T>> implements Comparator<T> {
     @Override
-    public int compare(Person o1, Person o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o1.getDateOfBirth().getYear(), o2.getDateOfBirth().getYear());
     }
 }

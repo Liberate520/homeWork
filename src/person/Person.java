@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, Comparable<Person>{
+import geoTree.GeoTreeItem;
+
+public class Person implements Serializable, Comparable<Person>, GeoTreeItem<Person>{
 
     private String name;
     private String surname;
