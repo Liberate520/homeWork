@@ -1,9 +1,7 @@
 package tree;
 
 import tree.model.familyTree.FamilyTree;
-import tree.model.Service;
-import tree.presenter.Presenter;
-import tree.view.UserUI;
+import tree.model.humanService.DirectDescendant;
 import tree.model.human.Human;
 
 import java.io.*;
@@ -79,9 +77,14 @@ public class Main {
             System.out.printf("%s (count kids: %d)\n",human.getName(), human.getChildrenList().size());
         }
 */
+        DirectDescendant<Human> a = new DirectDescendant<>(Ivanovi);
 
-        UserUI user1 = new UserUI(new Presenter(new Service(Ivanovi)));
+        a.isDirectDescendant(Anna, Sasha);
+        System.out.println(a.getIsDD());
+        //System.out.println(a.getStackDegree().size());
 
-        user1.start();
+       // UserUI user1 = new UserUI(new Presenter(new Service(Ivanovi)));
+
+       // user1.start();
     }
 }

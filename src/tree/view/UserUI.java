@@ -62,13 +62,17 @@ public class UserUI implements View {
     public void removeHumanFromTree() {
         System.out.println("Укажите имя");
         String name = scanner.nextLine();
-        presenter.removeHumanFromTree(name);
+        if (presenter.removeHumanFromTree(name)) {
+            System.out.println(name + " был удален из семейного дерева");
+        } else {
+            System.out.println("Такого " + name + " нет в дереве");
+        }
     }
 
     public void findHuman() {
         System.out.println("Укажите имя");
         String name = scanner.nextLine();
-        presenter.findHuman(name);
+        System.out.println(presenter.findHuman(name));
     }
 
     public void finish() {
@@ -103,6 +107,20 @@ public class UserUI implements View {
         String child = scanner.nextLine();
         System.out.println(("Введите имя родителя"));
         String parent = scanner.nextLine();
-        presenter.addParent(child, parent);
+        if (presenter.addParent(child, parent)) {
+            System.out.println("Ребенку " + child + " добавлен родитель " + parent);
+        } else {
+            System.out.printf("Ребенок %s или Родитель %s отсутствует в дереве\n", child, parent);;
+        }
+    }
+
+    public void isDirectDescendant() {
+        System.out.println("Введите имя human1");
+        String human1 = scanner.nextLine();
+        System.out.println("Введите имя human2");
+        String human2 = scanner.nextLine();
+        if (presenter.isDirectDescendant(human1, human2))
+            System.out.printf("%s является прямым потомком %s", human1, human2);
+        else System.out.printf("%s не является прямым потомком %s", human1, human2);
     }
 }

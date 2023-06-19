@@ -1,5 +1,6 @@
 package tree.model.humanService;
 
+import tree.model.familyTree.Tree;
 import tree.model.familyTree.TreeItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +8,14 @@ import java.util.Set;
 
 public class FindHumanService<T extends TreeItem<T>> {
 
-    private List<T> familyTree;
+    private Tree<T> familyTree;
 
-    public FindHumanService(List<T> familyTree) {
+    public FindHumanService(Tree<T> familyTree) {
         this.familyTree = familyTree;
     }
 
     public T findHuman(String name) {
-        for (T human : familyTree) {
+        for (T human : familyTree.getFamilyTree()) {
             if (human.getName().equals(name)) {
                 return human;
             }

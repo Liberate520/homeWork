@@ -15,8 +15,8 @@ public class Presenter {
     public void addHuman(String name, Gender gender, String father, String mother) {
         service.addHuman(name, gender, father, mother);
     }
-     public void addParent(String child, String parent) {
-        service.addParent(child, parent);
+     public boolean addParent(String child, String parent) {
+        return service.addParent(child, parent);
      }
 
     public void getFamilyTree() {
@@ -31,12 +31,9 @@ public class Presenter {
         service.sortByChild();
     }
 
-    public void findHuman(String name) {
-        service.findHuman(name);
-    }
+    public String findHuman(String name) { return service.findHuman(name); }
 
-    public void removeHumanFromTree(String name) {
-        service.removeHumanFromTree(name);
+    public boolean removeHumanFromTree(String name) { return service.removeHumanFromTree(name);
     }
 
     public void saveFile() throws IOException {
@@ -45,5 +42,9 @@ public class Presenter {
 
     public void loadFile() throws IOException, ClassNotFoundException {
         service.loadFile();
+    }
+
+    public boolean isDirectDescendant(String human1, String human2) {
+        return service.isDirectDescendant(human1, human2);
     }
 }

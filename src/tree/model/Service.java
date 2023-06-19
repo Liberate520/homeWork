@@ -8,7 +8,9 @@ import tree.model.human.Gender;
 import tree.model.human.Human;
 import tree.model.humanService.AddHumanService;
 import tree.model.humanService.FindHumanService;
+import tree.model.humanService.DirectDescendant;
 import tree.model.humanService.RemoveHumanService;
+
 
 import java.io.IOException;
 
@@ -19,60 +21,56 @@ public class Service {
     private AddHumanService<Human> addHumanService;
     private FindHumanService<Human> findHumanService;
     private RemoveHumanService<Human> removeHumanService;
+    private DirectDescendant<Human> directDescendant;
 
-    public Service() {
-        fileHandler = new FileHandler();
-    }
+    public Service() {}
 
-    public Service(Tree<Human> tree) {
-        fileHandler = new FileHandler();
+    public Service(Tree<Human> tree,
+                   SaveReadable fileHandler,
+                   AddHumanService<Human> addHumanService,
+                   FindHumanService<Human> findHumanService,
+                   RemoveHumanService<Human> removeHumanService,
+                   DirectDescendant<Human> directDescendant) {
         this.tree = tree;
-        addHumanService = new AddHumanService<>(tree.getFamilyTree());
-        removeHumanService = new RemoveHumanService<>(tree.getFamilyTree());
-        findHumanService = new FindHumanService<>(tree.getFamilyTree());
+        this.fileHandler = fileHandler;
+        this.addHumanService = addHumanService;
+        this.removeHumanService = removeHumanService;
+        this.findHumanService = findHumanService;
+        this.directDescendant = directDescendant;
     }
 
-    public void setTree(Tree<Human> tree) {
-        this.tree = tree;
-    }
-    public void setAddHumanService(Tree<Human> tree) {
-        addHumanService = new AddHumanService<>(tree.getFamilyTree());
-    }
-    public void setFindHumanService(Tree<Human> tree) { findHumanService = new FindHumanService<>(tree.getFamilyTree()); }
-    public void setRemoveHumanService(Tree<Human> tree) { removeHumanService = new RemoveHumanService<>(tree.getFamilyTree()); }
+    public void setTree(Tree<Human> tree) { this.tree = tree; }
+    public void setSaveReadable() { fileHandler = new FileHandler(); }
+    public void setAddHumanService(Tree<Human> tree) { addHumanService = new AddHumanService<>(tree); }
+    public void setFindHumanService(Tree<Human> tree) { findHumanService = new FindHumanService<>(tree); }
+    public void setRemoveHumanService(Tree<Human> tree) { removeHumanService = new RemoveHumanService<>(tree); }
+    public void setDirectDescendant(Tree<Human> tree) { directDescendant = new DirectDescendant<>(tree); }
 
     public void addHuman(String name, Gender gender, String father, String mother) {
         Human human = new Human(name, gender);
         Human dad = findHumanService.findHuman(father);
         Human mom = findHumanService.findHuman(mother);
-        addHumanService.addHuman(human);
-        if (dad != null) addHumanService.addParent(human, dad);
-        else if (!father.isEmpty())human.setFather(new Human(father, Gender.man));
-        if (mom != null) addHumanService.addParent(human, mom);
-        else if (!mother.isEmpty())human.setMother(new Human(mother, Gender.woman));
+        addHumanService.addHuman(human, dad, mom);
     }
 
-    public void addParent(String child, String parent) {
+    public boolean addParent(String child, String parent) {
         Human someChild = findHumanService.findHuman(child);
         Human someParent = findHumanService.findHuman(parent);
-        if (someChild != null && someParent !=null)
+        if (someChild != null && someParent !=null) {
             addHumanService.addParent(someChild, someParent);
-        else  {
-            System.out.printf("Ребенок %s или Родитель %s отсутствует в дереве\n", child, parent);
+            return true;
+        } else  {
+            return false;
         }
     }
 
-    public void findHuman(String name) {
+    public String findHuman(String name) {
         Human human = findHumanService.findHuman(name);
-        if (human != null) System.out.println(human);
-        else System.out.println("No human");
+        if (human != null) return human.toString();
+        else return "No human";
     }
-    public void removeHumanFromTree(String name) {
-        if (removeHumanService.removeHumanFromTree(findHumanService.findHuman(name))) {
-            System.out.println(name + " был удален из семейного дерева");
-        } else {
-            System.out.println(name + " такого нет");
-        }
+    public boolean removeHumanFromTree(String name) {
+        return removeHumanService.removeHumanFromTree(findHumanService.findHuman(name));
     }
 
     public void sortByName() {
@@ -100,5 +98,12 @@ public class Service {
 
     public void loadFile() throws IOException, ClassNotFoundException {
         tree = (FamilyTree) fileHandler.loadObject();
+    }
+
+    public boolean isDirectDescendant(String human1,String human2) {
+        Human person1 = findHumanService.findHuman(human1);
+        Human person2 = findHumanService.findHuman(human2);
+        directDescendant.isDirectDescendant(person1, person2);
+        return directDescendant.getIsDD();
     }
 }
