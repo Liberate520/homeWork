@@ -71,47 +71,55 @@ public class ConsoleUI implements View {
         return choice > 0 && choice <= mainMenu.size();
     }
 
-    public void addHuman() {
+    private String[] addHumanName() {
         print("Укажите имя");
-        String firstName = inputName();;
+        String firstName = inputRequiredName();
         print("Укажите фамилию");
-        String lastName = inputName();
-
-        print("Укажите дату рождения (в формате гггг-мм-дд)");
-        LocalDate birthDate = getDate(inputDate());
-
-        print("Укажите дату смерти, если есть (в формате гггг-мм-дд), или нажмите Enter");
-        LocalDate deathDate = getDate(inputDate());
-
-        print("Укажите имя матери, если есть, или нажмите Enter");
-        String firstMomName = inputName();
-        print("Укажите фамилию матери, если есть, или нажмите Enter");
-        String lastMomName = inputName();
-
-        print("Укажите имя и фамилию отца, если есть, или нажмите Enter");
-        String firstDadName = inputName();
-        print("Укажите имя и фамилию отца, если есть, или нажмите Enter");
-        String lastDadName = inputName();
-
-        presenter.addHuman(firstName, lastName, birthDate, deathDate,
-                firstMomName, lastMomName, firstDadName, lastDadName);
+        String lastName = inputRequiredName();
+        return new String[]{firstName, lastName};
     }
 
-    private boolean checkEmptyEnter(String input) {
-        return input.isEmpty();
+    private LocalDate addHumanBirthDate() {
+        print("Укажите дату рождения (в формате гггг-мм-дд)");
+        return getDate(inputRequiredDate());
+    }
+
+    private LocalDate addHumanDeathDate() {
+        print("Укажите дату смерти, если есть (в формате гггг-мм-дд), или нажмите Enter");
+        return getDate(inputOptionalDate());
+    }
+
+    private String[] addHumanMotherName() {
+        print("Укажите имя матери, если есть, или нажмите Enter");
+        String firstMomName = inputOptionalName();
+        print("Укажите фамилию матери, если есть, или нажмите Enter");
+        String lastMomName = inputOptionalName();
+        return new String[]{firstMomName, lastMomName};
+    }
+
+    private String[] addHumanFatherName() {
+        print("Укажите имя и фамилию отца, если есть, или нажмите Enter");
+        String firstDadName = inputOptionalName();
+        print("Укажите имя и фамилию отца, если есть, или нажмите Enter");
+        String lastDadName = inputOptionalName();
+        return new String[]{firstDadName, lastDadName};
+    }
+
+    public void addHuman() {
+        String[] humanName = addHumanName();
+        LocalDate birthDate = addHumanBirthDate();
+        LocalDate deathDate = addHumanDeathDate();
+        String[] momName = addHumanMotherName();
+        String[] dadName = addHumanFatherName();
+        presenter.addHuman(humanName[0], humanName[1], birthDate, deathDate,
+                momName[0], momName[1], dadName[0], dadName[1]);
     }
 
     private boolean checkName(String name) {
-//        if (!name.matches("^[\\p{L} .'-]+$")) {
-//        if (!name.isEmpty() && !name.matches("[^\\W\\d_]")) {
-//            return false;
-//        }
-//        return name.matches("^[\\p{L}.]+$");
         return name.matches("^[\\p{L}]+$");
     }
 
-    private String inputName() {
-        String name = scan();
+    private String inputNameValidation(String name) {
         while (!checkName(name)) {
             print("Ошибка ввода имени или фимилии, повторите попытку");
             name = scan();
@@ -119,11 +127,18 @@ public class ConsoleUI implements View {
         return name;
     }
 
-    private String[] getFullName(String name) {
-        if (name == null) {
-            name = "Неизвестно";
+    private String inputRequiredName() {
+        String name = scan();
+        return inputNameValidation(name);
+    }
+
+    private String inputOptionalName() {
+        String name = scan();
+        if (!name.isEmpty()) {
+            return inputNameValidation(name);
+        } else {
+            return null;
         }
-        return name.split(" ");
     }
 
     private boolean checkDate(String dateLine) {
@@ -133,16 +148,24 @@ public class ConsoleUI implements View {
         return true;
     }
 
-    private String inputDate() {
+    private String inputDateValidation(String date) {
+        String localDate = LocalDate.now().toString();
+        while (!checkDate(date) && date.equals(localDate)) {
+            print("Ошибка ввода даты, повторите попытку");
+            date = scan();
+        }
+        return date;
+    }
+
+    private String inputRequiredDate() {
+        String date = scan();
+        return inputDateValidation(date);
+    }
+
+    private String inputOptionalDate() {
         String date = scan();
         if (!date.isEmpty()) {
-
-            String localDate = LocalDate.now().toString();
-            while (!checkDate(date) && date.equals(localDate)) {
-                print("Ошибка ввода даты, повторите попытку");
-                date = scan();
-            }
-            return date;
+            return inputDateValidation(date);
         } else {
             return null;
         }
@@ -161,23 +184,25 @@ public class ConsoleUI implements View {
         presenter.getHumanList();
     }
 
-    public void getHumanByBirthDate() {
+    private String inputSearchYear() {
         print("Укажите год рождения человека для поиска");
-        String year = enterYear();
-        presenter.getHumanByBirthDate(year);
+        return inputYear();
+    }
+    public void getHumanByBirthDate() {
+        presenter.getHumanByBirthDate(inputSearchYear());
     }
 
-    private String enterYear() {
-        String year = scan();
-        if (!year.isEmpty()) {
-            while (!checkYear(year)) {
-                print("Ошибка. Год введён неправильно, повторите попытку");
-                year = scan();
-            }
-            return year;
-        } else {
-            return null;
+    private String inputYearValidation(String year) {
+        while (!checkYear(year)) {
+            print("Ошибка. Год введён неправильно, повторите попытку");
+            year = scan();
         }
+        return year;
+    }
+
+    private String inputYear() {
+        String year = scan();
+        return inputYearValidation(year);
     }
 
     private boolean checkYear(String year) {
@@ -187,12 +212,16 @@ public class ConsoleUI implements View {
         return true;
     }
 
-    public void getHumanByName() {
+    private String[] inputSearchName() {
         print("Укажите имя человека для поиска");
-        String firstName = inputName();
+        String firstName = inputRequiredName();
         print("Укажите фамилию человека для поиска");
-        String lastName = inputName();
-        presenter.getHumanByName(firstName, lastName);
+        String lastName = inputRequiredName();
+        return new String[]{firstName, lastName};
+    }
+
+    public void getHumanByName() {
+        presenter.getHumanByName(inputSearchName()[0], inputSearchName()[1]);
     }
 
     public void sortByChildrenCount() {
@@ -205,5 +234,13 @@ public class ConsoleUI implements View {
 
     public void sortByFirstName() {
         presenter.sortByFirstName();
+    }
+
+    public void saveTree() throws IOException {
+        presenter.saveTree();
+    }
+
+    public void loadTree() throws IOException, ClassNotFoundException {
+        presenter.loadTree();
     }
 }

@@ -11,7 +11,7 @@ public class Main {
         View view = new ConsoleUI();
         Service service = new Service();
 
-        createTestFamilyTree(service);
+//        createTestFamilyTree(service);
 
         new Presenter(view, service);
         view.run();

@@ -5,15 +5,15 @@ import model.family_tree.FamilyTreeItem;
 import model.file_handler.FileHandler;
 import model.human.Human;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> familyTree;
-    private FileHandler fileHandler;
+//    private FileHandler fileHandler;
 
     public Service() {
         this.familyTree = new FamilyTree<>();
-        fileHandler = new FileHandler();
     }
 
     public void addHuman(String firstName, String lastName,
@@ -50,5 +50,15 @@ public class Service {
 
     public String getHumanByBirthDate(String year) {
         return familyTree.getHumanByBirthDate(year);
+    }
+
+    public void saveTree() throws IOException {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(familyTree);
+    }
+
+    public void loadTree() throws IOException, ClassNotFoundException {
+        FileHandler fileHandler = new FileHandler();
+        familyTree = fileHandler.load();
     }
 }

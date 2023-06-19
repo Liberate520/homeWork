@@ -3,6 +3,7 @@ package presenter;
 import model.Service;
 import view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Presenter {
@@ -48,5 +49,13 @@ public class Presenter {
     public void getHumanByBirthDate(String year) {
         String human = service.getHumanByBirthDate(year);
         view.print(human);
+    }
+
+    public void saveTree() throws IOException {
+        service.saveTree();
+    }
+
+    public void loadTree() throws IOException, ClassNotFoundException {
+        service.loadTree();
     }
 }
