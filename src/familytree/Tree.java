@@ -1,8 +1,13 @@
+package familytree;
+
+import human.Human;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree extends Human implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public Tree(){
@@ -32,6 +37,12 @@ public class Tree implements Serializable {
 
 
 
+
+
+    public List<Human> getHumanList(){
+        return humanList;
+    }
+
     public Human findHumanName(String name) {
         for (Human human : humanList) {
             if (human.getName().equalsIgnoreCase(name)) {
@@ -54,4 +65,8 @@ public class Tree implements Serializable {
     }
 
 
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
+    }
 }

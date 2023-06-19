@@ -1,5 +1,8 @@
+package human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,7 @@ public class Human implements Serializable, Comparable<Human> {
     private LocalDate dateOfBirth;
     private LocalDate deathDate;
 
+
     private List<Human> children;
 
     public Human(String name, String gender, LocalDate dateOfBirth, LocalDate deathDate) {
@@ -22,6 +26,7 @@ public class Human implements Serializable, Comparable<Human> {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
+
         this.deathDate = null;
         this.children = new ArrayList<>();
     }
@@ -33,6 +38,7 @@ public class Human implements Serializable, Comparable<Human> {
         this.father = father;
         this.mother = mother;
         this.dateOfBirth = dateOfBirth;
+
         this.deathDate = deathDate;
         children = new ArrayList<>();
     }
@@ -48,6 +54,13 @@ public class Human implements Serializable, Comparable<Human> {
     }
     public String getName() {
         return name;
+    }
+
+    public int getAge(){
+        LocalDate birthday = getDateOfBirth();
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthday, currentDate);
+        return period.getYears();
     }
 
     public String getGender(){
@@ -117,6 +130,9 @@ public class Human implements Serializable, Comparable<Human> {
         sb.append("Дата рождения: ");
         sb.append(dateOfBirth);
         sb.append(", ");
+        sb.append("Возраст: ");
+        sb.append(getAge());
+        sb.append(", ");
         sb.append("Дата смерти: ");
         sb.append(deathDate);
         sb.append(", ");
@@ -177,10 +193,10 @@ public class Human implements Serializable, Comparable<Human> {
 //        if (this == obj){
 //            return true;
 //        }
-//        if(!(obj instanceof Human)){
+//        if(!(obj instanceof human.Human)){
 //            return false;
 //        }
-//        Human human = (Human) obj;
+//        human.Human human = (human.Human) obj;
 //        return human.getName().equals(getName());
 //    }
 }
