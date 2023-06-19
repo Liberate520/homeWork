@@ -22,9 +22,6 @@ public class FamilyTree<T extends TreeItem> implements Serializable{
         }
         if (!personList.contains(person)) {
             personList.add(person);
-            System.out.println("add");
-            System.out.println(person);
-            System.out.println(personList);
             if (person.getFather() != null) {
                 person.getFather().addChild((Person) person);
             }
