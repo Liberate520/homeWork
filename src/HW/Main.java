@@ -1,5 +1,7 @@
 package HW;
 
+import HW.model.dataManager.DataSaver;
+import HW.model.dataManager.UpDownLoader;
 import HW.model.human.Human;
 import HW.model.tree.FamilyTree;
 import HW.view.ConsoleUI;
@@ -43,7 +45,8 @@ public class Main {
         tree.addAsChild(new Human("Ирина", "Иванова", F, LocalDate.of(2018, 7, 5), tree.findPerson("Игорь", "Иванов"), null));
         tree.addAsChild(new Human("Наталья", "Иванова", F, LocalDate.of(2018, 8, 5), tree.findPerson("Николай", "Иванов"), null));
 
-        ConsoleUI consoleUI = new ConsoleUI(tree);
+        UpDownLoader file = new DataSaver();
+        ConsoleUI consoleUI = new ConsoleUI(tree,file);
         consoleUI.start();
 
 //        System.out.println(tree.findPerson("Василий", "Иванов"));

@@ -1,5 +1,6 @@
 package HW.view;
 
+import HW.model.dataManager.UpDownLoader;
 import HW.model.human.Human;
 import HW.model.tree.FamilyTree;
 import HW.presenter.Presenter;
@@ -13,11 +14,11 @@ public class ConsoleUI implements View{
     private boolean work;
     private MainMenu mainMenu;
 
-    public ConsoleUI(FamilyTree<Human> tree){
+    public ConsoleUI(FamilyTree<Human> tree, UpDownLoader file){
         scanner = new Scanner(System.in);
         work = true;
         mainMenu = new MainMenu(this);
-        presenter = new Presenter(tree);
+        presenter = new Presenter(tree, file);
     }
     @Override
     public void print(String text) {
@@ -102,8 +103,10 @@ public class ConsoleUI implements View{
     }
     public void saver(){
         presenter.doSave();
+        print ("File saved");
     }
     public void recovery(){
         presenter.doRecover();
+        print ("File recovered");
     }
 }

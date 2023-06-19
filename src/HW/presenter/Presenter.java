@@ -1,6 +1,7 @@
 package HW.presenter;
 
 import HW.model.ServiceHuman;
+import HW.model.dataManager.UpDownLoader;
 import HW.model.human.Human;
 import HW.model.tree.FamilyTree;
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.List;
 public class Presenter {
     private ServiceHuman serviceHuman;
 
-    public Presenter(FamilyTree<Human> tree) {
-        this.serviceHuman = new ServiceHuman(tree);
+    public Presenter(FamilyTree<Human> tree, UpDownLoader file) {
+        this.serviceHuman = new ServiceHuman(tree, file);
     }
 
     public void addNote(String name, String surname, String sex, String dateOfBirth, String dateOfDeath, String fatherName, String fatherSurname, String motherName, String motherSurname) {

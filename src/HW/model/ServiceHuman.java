@@ -1,6 +1,5 @@
 package HW.model;
 
-import HW.model.dataManager.DataSaver;
 import HW.model.dataManager.UpDownLoader;
 import HW.model.human.Human;
 import HW.model.human.enumerate.Sex;
@@ -12,10 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceHuman {
-    FamilyTree<Human> tree;
+    private FamilyTree<Human> tree;
 
-    public ServiceHuman(FamilyTree<Human> tree) {
+    private UpDownLoader file;
+
+    public ServiceHuman(FamilyTree<Human> tree, UpDownLoader file) {
         this.tree = tree;
+        this.file = file;
     }
 
     public List<String> getAllNotes() {
@@ -47,9 +49,7 @@ public class ServiceHuman {
         return Sex.fromString(sexStr);
     }
 
-
     public void doSave() {
-        UpDownLoader file = new DataSaver();
         try {
             tree.saver(file);
         } catch (IOException e) {
@@ -57,7 +57,6 @@ public class ServiceHuman {
     }
 
     public void doRecover() {
-        UpDownLoader file = new DataSaver();
         try {
             tree = FamilyTree.recovery(file);
         } catch (IOException | ClassNotFoundException e) {
