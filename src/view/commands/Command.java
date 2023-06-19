@@ -1,4 +1,4 @@
-package FamilyTree.view.command;
+package view.commands;
 
 public interface Command {
     String getDescription();
