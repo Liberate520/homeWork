@@ -1,11 +1,13 @@
 package FamilyTree.person;
 
+import FamilyTree.tree.TreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, TreeItem {
     private String name;
     private Gender gender;
     private LocalDate dateOfBirth;
