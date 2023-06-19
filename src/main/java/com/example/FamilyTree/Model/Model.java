@@ -60,7 +60,7 @@ public class Model {
         }
         familyTree.addObjectFamilyList(element);
         createFileFamilyTree();
-        System.out.println("добавлен элемент номер "+familyTree.getObjectFamilyList().indexOf(element));
+        //System.out.println("добавлен элемент номер "+familyTree.getObjectFamilyList().indexOf(element));
         return familyTree.getObjectFamilyList().indexOf(element);
     }
 
