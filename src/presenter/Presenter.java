@@ -1,5 +1,7 @@
 package presenter;
 
+import model.fileManage.interfaces.Loadable;
+import model.fileManage.interfaces.Savable;
 import model.members.Human;
 import model.services.HumanService;
 import model.members.Gender;
@@ -22,7 +24,6 @@ public class Presenter {
      */
     public Presenter() {
         importFileLoaded = false;
-
         this.humanService = new HumanService();
     }
 
@@ -30,8 +31,6 @@ public class Presenter {
     public boolean isImportFileLoaded() {
         return importFileLoaded;
     }
-
-
 
 
     /**

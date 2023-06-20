@@ -7,4 +7,6 @@ public interface Loadable {
      * @return загруженный объект
      */
     Object loadFile();
+
+    void setFilePath(String filePath);
 }

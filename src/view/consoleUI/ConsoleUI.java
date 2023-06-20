@@ -45,7 +45,7 @@ public class ConsoleUI implements View {
     @Override
     public void start() {
         System.out.println("Здравствуйте");
-        importFile();
+        loadFile();
         runMainMenu();
     }
 
@@ -54,12 +54,17 @@ public class ConsoleUI implements View {
      * Запрашивает у пользователя путь к файлу и передает его в Presenter для загрузки.
      * Повторяет запрос, пока файл не будет успешно загружен.
      */
-    public void importFile() {
+    public void loadFile() {
         while (!presenter.isImportFileLoaded()) {
             presenter.loadFile(
                     input.inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
         }
     }
+    public void save() {
+        if ((input.inputLn("Вы уверены? 1.да 2.нет")).equals("1"))
+            presenter.saveFile();
+    }
+
 
     /**
      * Запускает отображение Menu
@@ -209,10 +214,6 @@ public class ConsoleUI implements View {
         mainMenu.setRun(false);
     }
 
-    public void save() {
-        if ((input.inputLn("Вы уверены? 1.да 2.нет")).equals("1"))
-            presenter.saveFile();
-    }
 
     public void sortByAlphabeticalOrder() {
         presenter.sortByAlphabeticalOrder();

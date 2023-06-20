@@ -1,17 +1,12 @@
 package model.fileManage;
 
 
-import model.familyTrees.FamilyTree;
 import model.fileManage.interfaces.Loadable;
 import model.fileManage.interfaces.Savable;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
-/**
- * Класс, реализующий интерфейс Saveable для сохранения и загрузки семейного древа в файл.
- */
+
 public class FileManager implements Savable, Loadable {
 
 
@@ -20,12 +15,15 @@ public class FileManager implements Savable, Loadable {
     /**
      * Конструктор класса FileManager.
      *
-     * @param filePath путь к файлу для сохранения и загрузки семейного древа
+     * @param filePath путь к файлу для сохранения и загрузки
      */
     public FileManager(String filePath) {
         this.filePath = filePath;
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     /**
      * Сохраняет объект в файл
@@ -43,17 +41,12 @@ public class FileManager implements Savable, Loadable {
     }
 
 
-    /**
-     * Загружает объект из файла.
-     *
-     * @return загруженный объект
-     */
     @Override
-    public FamilyTree loadFile() {
+    public Object loadFile() {
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             System.out.println("load is done");
-            return (FamilyTree) objectInputStream.readObject();
+            return objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error uploading file");
         }

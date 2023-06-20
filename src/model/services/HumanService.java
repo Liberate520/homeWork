@@ -32,17 +32,14 @@ public class HumanService {
      */
     public HumanService() {
         this.familyTree = null;
+        this.loadable = new FileManager(null);
+        this.savable = new FileManager(null);
     }
 
-    /**
-     * Возвращает семейное древо, связанное с model.service.HumanService.
-     *
-     * @return Семейное древо.
-     */
-    public FamilyTree<Human> getFamilyTree() {
-        return familyTree;
+    public void setFileInterface(Savable savable, Loadable loadable) {
+        this.savable = savable;
+        this.loadable = loadable;
     }
-
 
 
     /**
@@ -72,7 +69,7 @@ public class HumanService {
      */
     public void loadFile(String filePath) {
         this.filePath = filePath;
-        this.loadable = new FileManager(filePath);
+        this.loadable.setFilePath(filePath);
         this.familyTree = (FamilyTree<Human>) loadable.loadFile();
     }
 
@@ -80,7 +77,7 @@ public class HumanService {
      * Сохраняет данные из семейного древа в файл с помощью файлового менеджера.
      */
     public void saveFile() {
-        this.savable = new FileManager(filePath);
+        this.savable.setFilePath(filePath);
         savable.saveFile(familyTree);
     }
 
