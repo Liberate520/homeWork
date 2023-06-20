@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class TreeService {
     private Tree tree;
 
-    public TreeService(Tree tree){
+    public TreeService(Tree<Human> tree){
         this.tree = tree;
 
         tree.add(new Human("Иван", "мужской", LocalDate.of(1987,7,15),null));
@@ -23,14 +23,14 @@ public class TreeService {
 
 
     public void sortByName(){
-        tree.getHumanList().sort(new HumanComparatorByName());
+        tree.sortByName();
     }
 
     public void sortById(){
-        tree.getHumanList().sort((new HumanComparatorById()));
+        tree.sortById();
     }
 
     public  void sortByAge(){
-        tree.getHumanList().sort(new HumanComparatorByAge());
+        tree.sortByAge();
     }
 }

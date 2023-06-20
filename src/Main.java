@@ -1,5 +1,6 @@
 import familytree.Tree;
 import familytree.TreeService;
+import human.Human;
 import save.FileOperations;
 import save.Save;
 
@@ -14,7 +15,7 @@ public class Main {
 
 
 //        Tree tree = (Tree) fileOperations.read(filePath);
-        familytree.Tree tree = new familytree.Tree();
+        familytree.Tree<Human> tree = new familytree.Tree<>();
 
         fileOperations.write(tree, filePath);
 

@@ -1,12 +1,15 @@
 package comparator;
 
+import familytree.TreeItem;
 import human.Human;
 
 import java.util.Comparator;
 
-public class HumanComparatorById implements Comparator<Human> {
+public class HumanComparatorById<T extends TreeItem> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o2.getId(), o1.getId());
     }
+
+
 }
