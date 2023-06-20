@@ -18,6 +18,6 @@ public class AddNewPerson implements Command {
 
     @Override
     public void execute() throws IOException, ClassNotFoundException {
-        consoleUI.addNewPerson();
+//        consoleUI.addNewPerson();
     }
 }

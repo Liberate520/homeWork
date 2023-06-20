@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import model.GroupItem;
+import model.person.Person;
+import model.tree.Tree;
 import presenter.Presenter;
 
 public class ConsoleUI implements View {
@@ -42,6 +45,24 @@ public class ConsoleUI implements View {
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void printList(List<Person> someList) {
+        StringBuilder someString = new StringBuilder();
+        for (Person item : someList) {
+            someString.append(item);
+            someString.append("\n");
+        }
+        System.out.println(someString);
+    }
+
+    @Override
+    public void printTree(Tree<Person> tree){
+        for (GroupItem person : tree) {
+            System.out.println(person);
+        }
+        System.out.println();
     }
 
     private int inputNumMenu() {
@@ -101,4 +122,5 @@ public class ConsoleUI implements View {
     public void addNewPerson() throws IOException, ClassNotFoundException {
         presenter.addNewPerson();
     }
+
 }

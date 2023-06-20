@@ -1,7 +1,6 @@
 package presenter;
 
 import model.Service;
-import view.PrintData;
 import view.View;
 
 import java.io.IOException;
@@ -17,15 +16,15 @@ public class Presenter {
     }
 
     public void printLoadData() throws IOException, ClassNotFoundException {
-        service.printLoadData();
+        view.printList(service.loadData());
     }
 
     public void printSortByName() throws IOException, ClassNotFoundException {
-        PrintData.printTree(service.sortByName());
+        view.printTree(service.sortByName());
     }
 
     public void printSortByDOB() throws IOException, ClassNotFoundException {
-        PrintData.printTree(service.sortByDOB());
+        view.printTree(service.sortByDOB());
     }
 
     public void addNewPerson() throws IOException, ClassNotFoundException {

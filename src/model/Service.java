@@ -4,8 +4,6 @@ import model.file.TreeFileManager;
 import model.person.Gender;
 import model.person.Person;
 import model.tree.Tree;
-import view.ConsoleUI;
-import view.PrintData;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,16 +11,15 @@ import java.util.List;
 
 public class Service {
     public TreeFileManager file;
-    private PrintData printData;
 
     public Service() {
         file = new TreeFileManager();
-        printData = new PrintData();
     }
 
-    public void printLoadData() throws IOException, ClassNotFoundException {
+    public List<Person> loadData() throws IOException, ClassNotFoundException {
+        TreeFileManager file = new TreeFileManager();
         Tree ft = (Tree) file.loadData();
-        PrintData.printList(ft.getPersonList());
+        return ft.getPersonList();
     }
 
     public Tree<Person> sortByName() throws IOException, ClassNotFoundException {
@@ -37,7 +34,7 @@ public class Service {
         return ft;
     }
 
-    public Person createNewPerson(List<String> personInfo) throws IOException, ClassNotFoundException {
+    private Person createNewPerson(List<String> personInfo) throws IOException, ClassNotFoundException {
         Tree<Person> tree = (Tree)file.loadData();
         Person person =
                 new Person(personInfo.get(0),
@@ -69,15 +66,14 @@ public class Service {
         return person;
     }
 
-        public void addNewPerson() throws IOException, ClassNotFoundException {
-        ConsoleUI console = new ConsoleUI();
-        Person person = createNewPerson(console.getNewPersonInfo());
-        Tree tree = (Tree)file.loadData();
+    public void addNewPerson() throws IOException, ClassNotFoundException {
+        Person person = createNewPerson(view.getNewPersonInfo());
+        Tree tree = (Tree) file.loadData();
         tree.addPerson(person);
-        PrintData.printTree(tree);
-        if (console.askToSave()) {
+        if (view.askToSave()) {
             file.saveData(tree);
         }
     }
 
 }
+
