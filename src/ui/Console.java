@@ -2,6 +2,7 @@ package ui;
 
 import presenter.Presenter;
 import ui.menu.FamilyMenu;
+import ui.menu.FileOperationsMenu;
 import ui.menu.MainMenu;
 import ui.menu.Menu;
 
@@ -103,6 +104,11 @@ public class Console implements UI{
         }
     }
 
+    public void fileOperations() {
+        Menu familyMenu = new FileOperationsMenu(this);
+        enterMenu(familyMenu);
+    }
+
     public void saveToFile() {
         String lastFilePath = presenter.getLastFilepath();
         print(String.format("Рекомендуемый путь '%s'", lastFilePath));
@@ -180,5 +186,16 @@ public class Console implements UI{
         }
         if (presenter.addConnection(firstHuman, connectionName, secondHuman)) print("Связь создана");
         else print("Не удалось создать связь");
+    }
+    public void setFileFormat() {
+        print(String.format("Текущий формат работы с файлами %s\n", presenter.getCurrentFileFormat()));
+        List<String> fileFormats = presenter.getFileFormats();
+        print(String.format("Введите желаемый формат файла из %s", fileFormats.toString()));
+        String newFormat = scanner.nextLine();
+        if (!fileFormats.contains(newFormat)){
+            print("Неизвестный формат файла");
+            return;
+        }
+        presenter.setFileFormat(newFormat);
     }
 }

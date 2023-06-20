@@ -10,8 +10,7 @@ public class MainMenu extends Menu {
                 new ListFamilies(view),
                 new AddFamily(view),
                 new GotoFamily(view),
-                new SaveToFile(view),
-                new LoadFromFile(view)
+                new FileOperations(view)
         );
     }
 }

@@ -111,4 +111,14 @@ public class Presenter {
     public boolean addConnection(String firstHumanID, String connectionName, String secondHumanID) {
         return model.addConnection(firstHumanID, connectionName, secondHumanID);
     }
+
+    public String getCurrentFileFormat() {
+        return model.getCurrentFileFormat();
+    }
+    public List<String> getFileFormats() {
+        return model.getFileFormats();
+    }
+    public void setFileFormat(String newFormat) {
+        model.setFileFormat(newFormat);
+    }
 }

@@ -2,6 +2,7 @@ package model;
 
 import model.converter.BinaryConverter;
 import model.converter.Converter;
+import model.converter.ConverterFactory;
 import model.family.Family;
 import model.familyRecords.FamilyRecords;
 import model.human.Human;
@@ -16,10 +17,12 @@ import java.util.List;
 
 public class HumanService {
     private FamilyRecords<Human> records;
+    private ConverterFactory<Human> converterFactory;
     private Converter<Human> converter;
     public HumanService() {
         records = new FamilyRecords<>();
-        converter = new BinaryConverter<>();
+        converterFactory = new ConverterFactory<>();
+        converter = converterFactory.getConverter();
     }
 
     private String getFamilyID(Family<Human> family) {
@@ -195,5 +198,17 @@ public class HumanService {
         if (humanFrom == null || humanTo == null) return false;
         records.addConnection(humanFrom, Connection.fromString(connectionName), humanTo);
         return true;
+    }
+
+    public String getCurrentFileFormat() {
+        return converterFactory.getConverterName(converter);
+    }
+
+    public List<String> getFileFormats() {
+        return converterFactory.getConverterNames();
+    }
+
+    public void setFileFormat(String newFormat) {
+        converter = converterFactory.getConverter(newFormat);
     }
 }
