@@ -6,9 +6,9 @@ import model.tree.Tree;
 
 import java.time.LocalDate;
 
-public class Data {
+public class Data_NOT_USED {
     public static Tree<Person> getData() {
-        Tree<Person> ft = Data.dataEntry();
+        Tree<Person> ft = Data_NOT_USED.dataEntry();
         return ft;
     }
 

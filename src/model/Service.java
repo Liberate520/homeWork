@@ -14,11 +14,10 @@ public class Service {
     public Tree tree;
 
     public Service() {
-        file = new TreeFileManager();
+        this.file = new TreeFileManager();
     }
 
     public Tree loadData() throws IOException, ClassNotFoundException {
-        TreeFileManager file = new TreeFileManager();
         Tree ft = (Tree)file.loadData();
         return ft;
     }

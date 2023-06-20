@@ -1,7 +1,6 @@
 package presenter;
 
 import model.Service;
-import model.tree.Tree;
 import view.View;
 
 import java.io.IOException;
@@ -31,8 +30,7 @@ public class Presenter {
     public void addNewPerson() throws IOException, ClassNotFoundException {
         service.tree = service.addPersonToTree(service.createNewPerson(view.getNewPersonInfo()));
         view.printTree(service.tree);
-        service.saveChangesToFile(service.tree,
-                view.askToSave());
+        service.saveChangesToFile(service.tree, view.askToSave());
     }
 }
 
