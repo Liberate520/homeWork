@@ -2,25 +2,30 @@ package model.converter;
 
 import model.member.Member;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConverterFactory<E extends Member> {
-    // TODO: maybe change this to enum or use some kind of map for store converters or ...
+    private Map<String, Converter<E>> converterNamingMap;
+    private final String defaultConverterName = "bin";
+    public ConverterFactory() {
+
+        converterNamingMap = new HashMap<>();
+        converterNamingMap.put("bin", new BinaryConverter<E>());
+        converterNamingMap.put("csv", (Converter<E>) new CSVConverter());
+    }
     public Converter<E> getConverter() {
-        return new BinaryConverter<E>();
+        return converterNamingMap.get(defaultConverterName);
     }
     public Converter<E> getConverter(String converterName) {
-        switch (converterName) {
-            case "csv":
-                return (Converter<E>) new CSVConverter();
-            case "bin":
-            default:
-                return getConverter();
-        }
+        Converter<E> result = converterNamingMap.get(converterName);
+        if (result == null) return getConverter();
+        return result;
     }
     public List<String> getConverterNames() {
-        return Arrays.asList("csv", "bin");
+        return new ArrayList<>(converterNamingMap.keySet());
     }
     public String getConverterName(Converter<E> converter) {
         if (converter.getClass().equals(CSVConverter.class)) return "csv";
