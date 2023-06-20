@@ -11,31 +11,36 @@ import java.util.List;
 
 public class Service {
     public TreeFileManager file;
+    public Tree tree;
 
     public Service() {
         file = new TreeFileManager();
     }
 
-    public List<Person> loadData() throws IOException, ClassNotFoundException {
+    public Tree loadData() throws IOException, ClassNotFoundException {
         TreeFileManager file = new TreeFileManager();
-        Tree ft = (Tree) file.loadData();
-        return ft.getPersonList();
+        Tree ft = (Tree)file.loadData();
+        return ft;
+    }
+
+    public List<Person> getTreeList() throws IOException, ClassNotFoundException {
+        return loadData().getPersonList();
     }
 
     public Tree<Person> sortByName() throws IOException, ClassNotFoundException {
-        Tree<Person> ft = (Tree) file.loadData();
+        Tree<Person> ft = loadData();
         ft.sortByName();
         return ft;
     }
 
     public Tree<Person> sortByDOB() throws IOException, ClassNotFoundException {
-        Tree<Person> ft = (Tree)file.loadData();
+        Tree<Person> ft = loadData();
         ft.sortByDOB();
         return ft;
     }
 
-    private Person createNewPerson(List<String> personInfo) throws IOException, ClassNotFoundException {
-        Tree<Person> tree = (Tree)file.loadData();
+    public Person createNewPerson(List<String> personInfo) throws IOException, ClassNotFoundException {
+        Tree<Person> tree = loadData();
         Person person =
                 new Person(personInfo.get(0),
                 LocalDate.of(Integer.parseInt(personInfo.get(1)),
@@ -66,14 +71,17 @@ public class Service {
         return person;
     }
 
-    public void addNewPerson() throws IOException, ClassNotFoundException {
-        Person person = createNewPerson(view.getNewPersonInfo());
-        Tree tree = (Tree) file.loadData();
+    public Tree addPersonToTree(Person person) throws IOException, ClassNotFoundException {
+        Tree tree = loadData();
         tree.addPerson(person);
-        if (view.askToSave()) {
+        return tree;
+    }
+
+    public void saveChangesToFile(Tree tree, boolean confirm) throws IOException {
+        if (confirm) {
             file.saveData(tree);
         }
     }
-
+    
 }
 

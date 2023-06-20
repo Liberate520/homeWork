@@ -16,7 +16,6 @@ public interface View {
 
     void printList(List<Person> someList);
 
-
     void printTree(Tree<Person> tree);
 
     List<String> getNewPersonInfo();

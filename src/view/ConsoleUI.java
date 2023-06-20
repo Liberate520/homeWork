@@ -103,8 +103,10 @@ public class ConsoleUI implements View {
     public boolean askToSave(){
         System.out.println("Сохранить изменения в файл?");
         System.out.println("Y - да, N - нет.");
-        if (scanner.nextLine().equalsIgnoreCase("Y")) return true;
-        else return false;
+        if (scanner.nextLine().equalsIgnoreCase("Y"))
+            return true;
+        else
+            return false;
     }
 
     public void printLoadData() throws IOException, ClassNotFoundException {
