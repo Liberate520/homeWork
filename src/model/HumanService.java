@@ -8,6 +8,7 @@ import model.familyRecords.FamilyRecords;
 import model.human.Human;
 import model.member.Connection;
 import model.member.Gender;
+import model.memberFactory.FactoryMemberProvider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,7 +22,7 @@ public class HumanService {
     private Converter<Human> converter;
     public HumanService() {
         records = new FamilyRecords<>();
-        converterFactory = new ConverterFactory<>();
+        converterFactory = new ConverterFactory<Human>(FactoryMemberProvider.getFactory("human"));
         converter = converterFactory.getConverter();
     }
 

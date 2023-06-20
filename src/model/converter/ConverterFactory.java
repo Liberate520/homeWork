@@ -1,6 +1,7 @@
 package model.converter;
 
 import model.member.Member;
+import model.memberFactory.AbstractMemberFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +11,11 @@ import java.util.Map;
 public class ConverterFactory<E extends Member> {
     private Map<String, Converter<E>> converterNamingMap;
     private final String defaultConverterName = "bin";
-    public ConverterFactory() {
+    public ConverterFactory(AbstractMemberFactory<E> memberFactory) {
 
         converterNamingMap = new HashMap<>();
         converterNamingMap.put("bin", new BinaryConverter<E>());
-        converterNamingMap.put("csv", (Converter<E>) new CSVConverter());
+        converterNamingMap.put("csv", new CSVConverter<E>(memberFactory));
     }
     public Converter<E> getConverter() {
         return converterNamingMap.get(defaultConverterName);

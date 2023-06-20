@@ -1,11 +1,11 @@
 package model.converter;
 
-import model.human.*;
 import model.family.*;
 import model.familyRecords.*;
 import model.member.Connection;
 import model.member.Gender;
 import model.member.Member;
+import model.memberFactory.AbstractMemberFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,30 +13,27 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * Implemented only for Human objects
- * Don`t know how to new E(...) in load method
- *
- * This class is probably violates "Liskov substitution principle" because implement logic only for Human objects, not amy Members
- * Mark this class as Deprecated cause of this
+ * Implemented using AbstractFactory pattern for create new (E) objects
  */
-@Deprecated
-public class CSVConverter implements Converter<Human> {
+public class CSVConverter<E extends Member> implements Converter<E> {
     private String path;
     private final String csvDelimiter;
     public final static String defaultPath = String.join(File.separator, Arrays.asList("data", "saved.csv"));
     public final static String  defaultDelimiter = ";";
     private boolean convertSuccess;
     private String convertStatus;
+    private AbstractMemberFactory<E> factory;
 
-    public CSVConverter(String path, String cdvDelimiter) {
+    public CSVConverter(String path, String cdvDelimiter, AbstractMemberFactory<E> factory) {
         convertSuccess = false;
         convertStatus = "Not requested";
         if (path != null && !path.isEmpty()) this.path = path;
         else this.path = defaultPath;
         this.csvDelimiter = cdvDelimiter;
+        this.factory = factory;
     }
-    public CSVConverter() {
-        this(defaultPath, defaultDelimiter);
+    public CSVConverter(AbstractMemberFactory<E> factory) {
+        this(defaultPath, defaultDelimiter, factory);
     }
 
     public boolean convertSuccess(){
@@ -80,11 +77,11 @@ public class CSVConverter implements Converter<Human> {
     }
 
     @Override
-    public void save(FamilyRecords<Human> records){
+    public void save(FamilyRecords<E> records){
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(path), StandardCharsets.UTF_8))) {
             convertStatus = "In progress";
-            for (Human human:records.getPeople()) {
+            for (E human:records.getPeople()) {
                 List<String> humanStrings = new ArrayList<>();
                 humanStrings.add(human.getName());
                 humanStrings.add(human.getGender().toString());
@@ -108,10 +105,10 @@ public class CSVConverter implements Converter<Human> {
     }
 
     @Override
-    public FamilyRecords<Human> load() {
+    public FamilyRecords<E> load() {
         // TODO simplify this
-        FamilyRecords<Human> records = new FamilyRecords<>();
-        Map<Human, List<String>> humanConnections = new HashMap<>();
+        FamilyRecords<E> records = new FamilyRecords<>();
+        Map<E, List<String>> humanConnections = new HashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line = br.readLine();
@@ -122,7 +119,8 @@ public class CSVConverter implements Converter<Human> {
                 Calendar birthDate = stringTDate(elements[2]);
                 Calendar deathDate = stringTDate(elements[3]);
                 String[] families = elements[4].split(",");
-                Human human = new Human(fullName, gender, birthDate, deathDate);
+                E human = (E) factory.create(fullName, gender, birthDate, deathDate, null);
+//                Human human = new Human(fullName, gender, birthDate, deathDate);
                 for (String familyName:families) {
                     records.addFamily(familyName, human);
                 }
@@ -136,8 +134,8 @@ public class CSVConverter implements Converter<Human> {
             convertSuccess = false;
             convertStatus = "Failed: " + e.getLocalizedMessage();
         }
-        for (Map.Entry<Human, List<String>> entry : humanConnections.entrySet()) {
-            Human human = entry.getKey();
+        for (Map.Entry<E, List<String>> entry : humanConnections.entrySet()) {
+            E human = entry.getKey();
             for (int i = 0; i< Connection.values().length; i++) {
                 Connection connection = Connection.values()[i];
                 String connectedHumanNames = entry.getValue().get(i);
