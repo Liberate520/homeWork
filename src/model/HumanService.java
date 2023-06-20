@@ -16,7 +16,7 @@ import java.util.List;
 
 public class HumanService {
     private FamilyRecords<Human> records;
-    Converter<Human> converter;
+    private Converter<Human> converter;
     public HumanService() {
         records = new FamilyRecords<>();
         converter = new BinaryConverter<>();
