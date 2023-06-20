@@ -1,9 +1,10 @@
 package model;
 
-import model.file.File;
+import model.file.TreeFileManager;
 import model.person.Gender;
 import model.person.Person;
 import model.tree.Tree;
+import view.ConsoleUI;
 import view.PrintData;
 
 import java.io.IOException;
@@ -11,33 +12,33 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Service {
-    public File file;
+    public TreeFileManager file;
     private PrintData printData;
 
     public Service() {
-        file = new File();
+        file = new TreeFileManager();
         printData = new PrintData();
     }
 
     public void printLoadData() throws IOException, ClassNotFoundException {
-        Tree ft = file.loadData();
+        Tree ft = (Tree) file.loadData();
         PrintData.printList(ft.getPersonList());
     }
 
     public Tree<Person> sortByName() throws IOException, ClassNotFoundException {
-        Tree<Person> ft = file.loadData();
+        Tree<Person> ft = (Tree) file.loadData();
         ft.sortByName();
         return ft;
     }
 
     public Tree<Person> sortByDOB() throws IOException, ClassNotFoundException {
-        Tree<Person> ft = file.loadData();
+        Tree<Person> ft = (Tree)file.loadData();
         ft.sortByDOB();
         return ft;
     }
 
     public Person createNewPerson(List<String> personInfo) throws IOException, ClassNotFoundException {
-        Tree<Person> tree = file.loadData();
+        Tree<Person> tree = (Tree)file.loadData();
         Person person =
                 new Person(personInfo.get(0),
                 LocalDate.of(Integer.parseInt(personInfo.get(1)),
@@ -66,6 +67,17 @@ public class Service {
             person.setFather(tree.findPersonByName(personInfo.get(6)));
         }
         return person;
+    }
+
+        public void addNewPerson() throws IOException, ClassNotFoundException {
+        ConsoleUI console = new ConsoleUI();
+        Person person = createNewPerson(console.getNewPersonInfo());
+        Tree tree = (Tree)file.loadData();
+        tree.addPerson(person);
+        PrintData.printTree(tree);
+        if (console.askToSave()) {
+            file.saveData(tree);
+        }
     }
 
 }

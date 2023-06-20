@@ -1,7 +1,6 @@
 package model.tree.comparators;
 
 import model.GroupItem;
-import model.person.Person;
 
 import java.util.Comparator;
 

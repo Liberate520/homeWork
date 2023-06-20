@@ -2,7 +2,7 @@ package model.file;
 
 import java.io.*;
 
-public class DataFileManager implements FileManager {
+public class TreeFileManager implements FileManager {
     @Override
     public void saveData(Serializable serializable) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("FamilyTreeData.df"));
@@ -17,4 +17,5 @@ public class DataFileManager implements FileManager {
         objectInputStream.close();
         return value;
     }
+
 }
