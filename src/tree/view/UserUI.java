@@ -96,10 +96,12 @@ public class UserUI implements View {
 
     public void saveFile() throws IOException {
         presenter.saveFile();
+        System.out.println("Файл сохранен");
     }
 
     public void loadFile() throws IOException, ClassNotFoundException {
         presenter.loadFile();
+        System.out.println("Файл загружен");
     }
 
     public void addParent() {
@@ -110,17 +112,17 @@ public class UserUI implements View {
         if (presenter.addParent(child, parent)) {
             System.out.println("Ребенку " + child + " добавлен родитель " + parent);
         } else {
-            System.out.printf("Ребенок %s или Родитель %s отсутствует в дереве\n", child, parent);;
+            System.out.printf("Не удалось добавить %s Родителя %s\n", child, parent);;
         }
     }
 
     public void isDirectDescendant() {
-        System.out.println("Введите имя human1");
+        System.out.println("Введите имя прямого потомка");
         String human1 = scanner.nextLine();
-        System.out.println("Введите имя human2");
+        System.out.println("Введите имя");
         String human2 = scanner.nextLine();
         if (presenter.isDirectDescendant(human1, human2))
-            System.out.printf("%s является прямым потомком %s", human1, human2);
-        else System.out.printf("%s не является прямым потомком %s", human1, human2);
+            System.out.printf("%s является прямым потомком %s\n", human1, human2);
+        else System.out.printf("%s не является прямым потомком %s\n", human1, human2);
     }
 }

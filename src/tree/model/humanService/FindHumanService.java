@@ -2,20 +2,15 @@ package tree.model.humanService;
 
 import tree.model.familyTree.Tree;
 import tree.model.familyTree.TreeItem;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class FindHumanService<T extends TreeItem<T>> {
+public class FindHumanService<T extends TreeItem<T>>{
 
-    private Tree<T> familyTree;
-
-    public FindHumanService(Tree<T> familyTree) {
-        this.familyTree = familyTree;
-    }
-
-    public T findHuman(String name) {
-        for (T human : familyTree.getFamilyTree()) {
+    public T findHuman(String name, Tree<T> tree) {
+        for (T human : tree) {
             if (human.getName().equals(name)) {
                 return human;
             }
@@ -39,7 +34,7 @@ public class FindHumanService<T extends TreeItem<T>> {
         return human.getChildrenList();
     }
 
-    public boolean containsHumanInTree(T human) {
-        return human != null && findHuman(human.getName()) != null;
+    public boolean containsHumanInTree(T human, Tree<T> tree) {
+        return human != null && findHuman(human.getName(), tree) != null;
     }
 }

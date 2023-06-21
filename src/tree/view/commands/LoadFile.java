@@ -1,7 +1,6 @@
 package tree.view.commands;
 
 import tree.view.UserUI;
-
 import java.io.IOException;
 
 public class LoadFile implements Command{
@@ -19,6 +18,5 @@ public class LoadFile implements Command{
     @Override
     public void execute() throws IOException, ClassNotFoundException {
         userUI.loadFile();
-        System.out.println("Файл загружен");
     }
 }

@@ -19,6 +19,5 @@ public class SaveFile implements Command{
     @Override
     public void execute() throws IOException {
         userUI.saveFile();
-        System.out.println("Файл сохранен");
     }
 }

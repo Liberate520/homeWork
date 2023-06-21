@@ -21,8 +21,8 @@ public class UserMenu {
         commands.add(new SortByChild(userUI));
         commands.add(new SaveFile(userUI));
         commands.add(new LoadFile(userUI));
-        commands.add(new FinishWork(userUI));
         commands.add(new IsDirectDescendant(userUI));
+        commands.add(new FinishWork(userUI));
     }
     public String printMenu() {
         StringBuilder stringBuilder = new StringBuilder();

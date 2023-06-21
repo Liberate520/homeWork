@@ -37,6 +37,7 @@ public class FamilyTree<T extends TreeItem<T>> implements Tree<T> {
         }
     }
 
+    public String getFamilyName() { return familyName; }
     public List<T> getFamilyTree() {
         return this.familyTree;
     }

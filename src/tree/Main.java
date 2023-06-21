@@ -1,8 +1,15 @@
 package tree;
 
+import tree.model.Service;
 import tree.model.familyTree.FamilyTree;
-import tree.model.humanService.DirectDescendant;
+import tree.model.handler.FileHandler;
 import tree.model.human.Human;
+import tree.model.humanService.AddHumanService;
+import tree.model.humanService.DirectDescendant;
+import tree.model.humanService.FindHumanService;
+import tree.model.humanService.RemoveHumanService;
+import tree.presenter.Presenter;
+import tree.view.UserUI;
 
 import java.io.*;
 
@@ -37,54 +44,26 @@ public class Main {
 
         Ivanovi.addHumanList(people);
         System.out.println(Ivanovi);
-/*
-        System.out.println("-------------Найти человека-------------");
-        System.out.println(Ivanovi.findHuman("Masha"));
-        System.out.println("Найти Alla ---> " + Ivanovi.findHuman("Alla"));
-        System.out.println(Ivanovi.findHuman("Masha").getParent() + "\n" + Ivanovi.findHuman("Masha").getChild());
-        System.out.println("------------Добавление Parents для Alena------------");
-        System.out.println(Alena.getParent());
-        Alena.addParent(Masha);
-        Sasha.addChild(Alena);
-        System.out.println(Alena.getParent());
-        System.out.println(Masha.getChild());
 
-        System.out.println("-----------Тест запись/чтение----------");
+    /*    Service humanService = new Service();
+        humanService.setTree(Ivanovi);
+        humanService.setAddHumanService();
+        humanService.setSaveReadable();
+        humanService.setRemoveHumanService();
+        humanService.setDirectDescendant();
+        humanService.setFindHumanService();
 
-        SaveReadable fileHandler = new FileHandler();
-        fileHandler.saveObject(Ivanovi);
+        UserUI user1 = new UserUI(new Presenter(humanService));
+        user1.start();
 
-        FamilyTree<Human> IvanoviTestLoad = (FamilyTree) fileHandler.loadObject();
+    */    Service service = new Service(new FamilyTree<>("Petrovi"),
+                                      new FileHandler(),
+                                      new AddHumanService<>(),
+                                      new FindHumanService<>(),
+                                      new RemoveHumanService<>(),
+                                      new DirectDescendant<>());
 
-        System.out.println(IvanoviTestLoad);
-        System.out.println(IvanoviTestLoad.findHuman("Sasha").getChild());
-
-        System.out.println();
-
-        Service service = new Service(IvanoviTestLoad);
-
-        service.addHuman("Albert", man);
-        System.out.print("No sort ----> ");
-        System.out.println(IvanoviTestLoad);
-        service.sortByName();
-        System.out.print("Sort by Name ----> ");
-        System.out.println(IvanoviTestLoad);
-
-        service.sortByChild();
-        System.out.print("Sort by count of kids ----> ");
-        System.out.println(IvanoviTestLoad);
-        for (Human human : IvanoviTestLoad) {
-            System.out.printf("%s (count kids: %d)\n",human.getName(), human.getChildrenList().size());
-        }
-*/
-        DirectDescendant<Human> a = new DirectDescendant<>(Ivanovi);
-
-        a.isDirectDescendant(Anna, Sasha);
-        System.out.println(a.getIsDD());
-        //System.out.println(a.getStackDegree().size());
-
-       // UserUI user1 = new UserUI(new Presenter(new Service(Ivanovi)));
-
-       // user1.start();
+        UserUI user2 = new UserUI(new Presenter(service));
+        user2.start();
     }
 }

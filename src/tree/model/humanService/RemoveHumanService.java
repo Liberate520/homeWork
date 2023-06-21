@@ -5,15 +5,9 @@ import tree.model.familyTree.TreeItem;
 
 public class RemoveHumanService<T extends TreeItem<T>> {
 
-    private Tree<T> familyTree;
-
-    public RemoveHumanService(Tree<T> familyTree) {
-        this.familyTree = familyTree;
-    }
-
-    public boolean removeHumanFromTree(T human) {
+    public boolean removeHumanFromTree(T human, Tree<T> tree) {
         if (human != null) {
-            familyTree.getFamilyTree().remove(human);
+            tree.getFamilyTree().remove(human);
             return true;
         }
         return false;

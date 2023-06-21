@@ -1,7 +1,6 @@
 package tree.view.commands;
 
 import tree.view.UserUI;
-
 import java.io.IOException;
 
 public class IsDirectDescendant implements Command {
@@ -12,7 +11,7 @@ public class IsDirectDescendant implements Command {
     }
     @Override
     public String getDescription() {
-        return "Определить степень родства";
+        return "Определить прямого потомка";
     }
 
     @Override
