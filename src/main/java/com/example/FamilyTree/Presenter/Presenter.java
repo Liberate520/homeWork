@@ -1,45 +1,32 @@
 package com.example.FamilyTree.Presenter;
 
 import com.example.FamilyTree.Model.Model;
+import com.example.FamilyTree.View.Printable.Printable;
 
 import java.util.List;
 import java.util.Map;
 
 public class Presenter {
-    private Model model = new Model();
+    private Model model;
+
+    public Presenter(Printable printable) {
+        model = new Model(printable);
+    }
 
     public List<String> getObjectList() {
         return model.getObjectList();
     }
 
-    public String RunFamilyTree(String objectSelection) {
+    public boolean runFamilyTree(int objectSelection) {
         model.getFamilyTree(objectSelection);
-        if (model.familyEmpty()) {
-            return "Семейное дерево "+objectSelection+" пустое";
-        } else {
-            return takeSortingFamilyTree();
-        }
+        return !model.familyEmpty();
     }
 
-    private String takeSortingFamilyTree() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Общий список лиц семьи: " + model.printFamilyTree(-1,-1));
-        model.familyTreeSortByBirthday();
-        stringBuilder.append("\n\nСортировка по дню рождения: " + model.printFamilyTree(-1,-1));
-        model.familyTreeSortByName();
-        stringBuilder.append("\n\nСортировка по имени: "+model.printFamilyTree(-1, -1));
-        return stringBuilder.toString();
+    public String showFamilyTree(int number) {
+        return model.showFamilyTree(number);
     }
 
-    public String takePrintFamilyTree(int whom, int gendInd) {
-        return model.printFamilyTree(whom, gendInd);
-    }
-
-    public String filterFamilyTree(int number) {
-        return model.filterFamily(number);
-    }
-
-    public int addFamilyTree(Map<String, Object> objectMap, String objectSelection) {
+    public int addFamilyTree(Map<String, Object> objectMap, int objectSelection) {
         return model.addObjectInFamilyList(objectMap, objectSelection);
     }
 
@@ -75,11 +62,23 @@ public class Presenter {
         return model.getGenderList();
     }
 
-    public void updateObjectParents(int whom, int parentsInd, int gender) {
-        model.updateObjectParents(whom, parentsInd, gender);
+    public void updateObjectParents(int whom, int parentsInd, int gender, boolean flag) {
+        model.updateObjectParents(whom, parentsInd, gender, flag);
     }
 
-    public void updateObjectChildren(int whom, int childInd, int gender){
-        model.updateObjectChildren(whom, childInd, gender);
+    public void updateObjectChildren(int whom, int childInd, int gender, boolean flag){
+        model.updateObjectChildren(whom, childInd, gender, flag);
+    }
+
+    public void familyTreeSortByBirthday() {
+        model.familyTreeSortByBirthday();
+    }
+
+    public void familyTreeSortByName() {
+        model.familyTreeSortByName();
+    }
+
+    public String printFamilyTree(int whom, int gendInd) {
+        return model.printFamilyTree(whom, gendInd);
     }
 }

@@ -6,7 +6,10 @@ import com.example.FamilyTree.Model.DataForTree.Gender;
 import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public abstract class ObjectsFamilyTree implements Serializable, FamilyInterface {
     protected String name;
@@ -49,5 +52,9 @@ public abstract class ObjectsFamilyTree implements Serializable, FamilyInterface
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public List getListFields(){
+        return new ArrayList<>(Arrays.asList("name", "birthday", "gender", "parents", "children"));
     }
 }

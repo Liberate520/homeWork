@@ -1,12 +1,13 @@
 package com.example.FamilyTree.View.Commands;
 
-import com.example.FamilyTree.View.View;
+import com.example.FamilyTree.View.Console;
 
 public class DeleteRecord implements Command {
-    private View view;
+    private Console console;
+    private boolean foolMenu = false;
 
-    public DeleteRecord(View view) {
-        this.view = view;
+    public DeleteRecord(Console console) {
+        this.console = console;
     }
 
     @Override
@@ -16,6 +17,11 @@ public class DeleteRecord implements Command {
 
     @Override
     public void execute() {
-        view.deleteRecord();
+        console.deleteRecord();
+    }
+
+    @Override
+    public boolean getInMenu() {
+        return foolMenu;
     }
 }

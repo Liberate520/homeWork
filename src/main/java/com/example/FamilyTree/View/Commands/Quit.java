@@ -1,12 +1,13 @@
 package com.example.FamilyTree.View.Commands;
 
-import com.example.FamilyTree.View.View;
+import com.example.FamilyTree.View.Console;
 
 public class Quit implements Command {
-    private View view;
+    private Console console;
+    private boolean foolMenu = true;
 
-    public Quit(View view) {
-        this.view = view;
+    public Quit(Console console) {
+        this.console = console;
     }
 
     @Override
@@ -16,6 +17,11 @@ public class Quit implements Command {
 
     @Override
     public void execute() {
-        view.quit();
+        console.quit();
+    }
+
+    @Override
+    public boolean getInMenu() {
+        return foolMenu;
     }
 }

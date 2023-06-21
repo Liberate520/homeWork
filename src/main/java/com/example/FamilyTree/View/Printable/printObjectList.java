@@ -1,4 +1,4 @@
-package com.example.FamilyTree.Model.Printable;
+package com.example.FamilyTree.View.Printable;
 
 import com.example.FamilyTree.Model.DataForTree.Family;
 import com.example.FamilyTree.Model.DataForTree.FamilyInterface;

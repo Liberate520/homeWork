@@ -30,7 +30,7 @@ public class FamilyTree<T extends Family> implements Serializable, Iterable<T> {
         familyList.sort(new ComparatorByName<T>());
     }
 
-    public T getObjectFamily(T object) {
+    public Family getObjectFamily(FamilyInterface object) {
         for (int i = 0; i < familyList.size(); i++) {
             if (familyList.get(i).getObject().equals(object)) {
                 return familyList.get(i);

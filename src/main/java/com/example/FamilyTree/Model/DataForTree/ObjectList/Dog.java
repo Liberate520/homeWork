@@ -7,20 +7,20 @@ import com.example.FamilyTree.Model.DataForTree.Gender;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-public class Cat extends ObjectsFamilyTree implements Serializable, FamilyInterface, ObjectInterface {
+public class Dog extends ObjectsFamilyTree implements Serializable, FamilyInterface, ObjectInterface {
 
-    public Cat(String name, String birt, Gender gender) {
+    public Dog(String name, String birt, Gender gender) {
         super(name,birt,gender);
-        this.puberty = 1;
+        this.puberty = 2;
     }
 
-    public Cat() {
+    public Dog() {
         this("","2000-01-01",Gender.male);
     }
 
     @Override
     public Family getNewObject(String name, String birthday, Gender gender) {
-        return new Family<Cat>(new Cat(name,birthday,gender));
+        return new Family<Dog>(new Dog(name,birthday,gender));
     }
 
     @Override

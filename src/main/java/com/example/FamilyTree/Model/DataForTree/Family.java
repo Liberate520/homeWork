@@ -17,7 +17,8 @@ public class Family<T extends FamilyInterface> implements Serializable, FamilyIn
         this.children = new ArrayList<>();
     }
 
-    public void addParents(T object) {
+    public boolean addParents(T object) {
+        boolean rez = true;
         int diff = this.object.getBirthday().getYear() - object.getBirthday().getYear();
         if (parents.size() == 0 && diff >= object.getPuberty()) {
             parents.add(object);
@@ -27,16 +28,21 @@ public class Family<T extends FamilyInterface> implements Serializable, FamilyIn
             parents.add(object);
         } else {
             System.out.println("не может быть родителем этому объекту");
+            rez = false;
         }
+        return rez;
     }
 
-    public void addChildren(T object) {
+    public boolean addChildren(T object) {
+        boolean rez = true;
         int diff = object.getBirthday().getYear() - this.object.getBirthday().getYear();
         if (diff >= object.getPuberty()) {
             children.add(object);
         } else {
             System.out.println("не может быть ребенком этому человеку");
+            rez = false;
         }
+        return rez;
     }
 
     @Override

@@ -1,12 +1,13 @@
 package com.example.FamilyTree.View.Commands;
 
-import com.example.FamilyTree.View.View;
+import com.example.FamilyTree.View.Console;
 
 public class ViewRecord implements Command {
-    private View view;
+    private Console console;
+    private boolean foolMenu = false;
 
-    public ViewRecord(View view) {
-        this.view = view;
+    public ViewRecord(Console console) {
+        this.console = console;
     }
 
     @Override
@@ -16,6 +17,11 @@ public class ViewRecord implements Command {
 
     @Override
     public void execute() {
-        view.viewRecord();
+        console.viewRecord();
+    }
+
+    @Override
+    public boolean getInMenu() {
+        return foolMenu;
     }
 }

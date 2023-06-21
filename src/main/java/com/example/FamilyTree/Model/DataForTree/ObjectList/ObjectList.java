@@ -1,48 +1,38 @@
 package com.example.FamilyTree.Model.DataForTree.ObjectList;
 
 import com.example.FamilyTree.Model.DataForTree.Family;
-import com.example.FamilyTree.Model.DataForTree.FamilyInterface;
 import com.example.FamilyTree.Model.DataForTree.FamilyTree;
 import com.example.FamilyTree.Model.DataForTree.Gender;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjectList implements Serializable {
-    private final List<String> objectList;
+public class ObjectList implements ObjectListInterface {
+    private List<ObjectInterface> objectList;
 
     public ObjectList() {
-        this.objectList = new ArrayList<>();
-        objectList.add(Human.class.getSimpleName());
-        objectList.add(Cat.class.getSimpleName());
+        objectList = new ArrayList<>();
+        objectList.add(new Human());
+        objectList.add(new Cat());
+        objectList.add(new Dog());
     }
 
+    @Override
     public List<String> getObjectList() {
-        return objectList;
+        return objectList.stream().map(o -> o.getClass().getSimpleName()).toList();
     }
 
-    public FamilyTree<Family> getFamilyTree(String object){
-        switch (object){
-            case "Human":
-                return getHumanFamilyTree();
-            case "Cat":
-                return getCatFamilyTree();
-        }
-        return new FamilyTree<Family>();
+    @Override
+    public Family getNewObject(int object, String name, String birthday, Gender gender){
+        ObjectInterface command = objectList.get(object);
+        return command.getNewObject(name, birthday, gender);
     }
 
-    public Family createFamily(String object, String name, String birthday, Gender gender){
-        switch (object){
-            case "Human":
-                return getHuman(name, birthday, gender);
-            case "Cat":
-                return getCat(name, birthday, gender);
-        }
-        System.out.println("НЕТ!!!");
-        return null;
+    @Override
+    public FamilyTree<Family> getFamilyTree(int object){
+        FamilyTree<Family> familyTree = new FamilyTree<>();
+        return (object==0) ? getHumanFamilyTree() : familyTree;
     }
-
 
     private FamilyTree<Family> getHumanFamilyTree() {
         List<Human> humanList = new ArrayList<>();
@@ -104,28 +94,4 @@ public class ObjectList implements Serializable {
         return familyTree;
     }
 
-    private FamilyTree<Family> getCatFamilyTree() {
-        FamilyTree<Family> familyTree = new FamilyTree<>();
-        return familyTree;
-    }
-
-    private Family getHuman(String name, String birthday, Gender gender) {
-        return new Family<Human>(new Human(name,birthday,gender));
-    }
-
-    private Family getCat(String name, String birthday, Gender gender) {
-        return new Family<Cat>(new Cat(name,birthday,gender));
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        int index = 1;
-        for (String object : objectList) {
-            stringBuilder.append(index++ + ": ");
-            stringBuilder.append(object);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
 }
