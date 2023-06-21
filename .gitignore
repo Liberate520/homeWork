@@ -1,1 +1,11 @@
-.idea
+.idea/
+.mvn/
+*.iml
+.out/
+src/main/java/com/example/VendingMachine/
+src/main/java/com/example/ZOO/
+src/main/java/com/example/Study/
+src/main/java/com/example/FamilyTreeCopy/
+src/main/java/com/example/MVP/
+src/main/java/com/example/FamilyTreeCopy2/
+target/
