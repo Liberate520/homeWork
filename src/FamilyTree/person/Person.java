@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, TreeItem {
+public class Person implements Serializable, Comparable<Person>, TreeItem  {
     private String name;
     private Gender gender;
     private LocalDate dateOfBirth;
@@ -131,6 +131,10 @@ public class Person implements Serializable, TreeItem {
         return sb.toString();
     }
 
+    @Override
+    public int compareTo(Person p) {
+        return name.compareTo(p.name);
+    }
 }
 
 

@@ -1,13 +1,15 @@
 package FamilyTree.tree;
 
 import FamilyTree.person.Person;
-import org.w3c.dom.ls.LSOutput;
+import FamilyTree.Service;
+import FamilyTree.person.comparators.PersonComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends TreeItem> implements Serializable{
+public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>{
     private List<T> personList;
 
     public FamilyTree(List<T> personList) {
@@ -51,5 +53,13 @@ public class FamilyTree<T extends TreeItem> implements Serializable{
         return sb.toString();
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new PersonIterator<>(personList);
+    }
+
+    public void sortByName() {
+        personList.sort(new PersonComparatorByName<>());
+    }
 
 }

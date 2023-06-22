@@ -13,4 +13,5 @@ public interface TreeItem {
     Person getFather();
 
     String getPersonInfo();
+
 }
