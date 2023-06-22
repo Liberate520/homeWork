@@ -63,7 +63,7 @@ public class Console implements View {
 //        String father = scanner.nextLine();
 //        System.out.println("Введите имя матери: ");
 //        String mother = scanner.nextLine();
-        System.out.println("Введите дату рождения в формате 'гггг,мм,дд': ");
+        System.out.println("Введите дату рождения в формате 'дд.мм.гггг': ");
         String input = scanner.nextLine();
         LocalDate birthDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         presenter.add(name, gender, null, null, birthDate, null);
