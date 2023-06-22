@@ -43,20 +43,30 @@ public class Main {
 //        FamilyTree<Pet> petsLoad = (FamilyTree) saveLoader.load(path1);
 //        System.out.println(petsLoad.getFamilyTree());
 
-        Service service = new Service();
-        service.addPerson(new Person("Петрова Ольга Владимировна", Gender.male, LocalDate.of(1941, 6, 24)));
-        service.addPerson(new Person("Иванов Иван Иванович", Gender.male, LocalDate.of(1935, 12, 14)));
-        service.addPerson(new Person("Иванова Кристина Ивановна", Gender.male, LocalDate.of(1961, 5, 15),
-                service.getByName("Петрова Ольга Владимировна"),
-                service.getByName("Иванов Иван Иванович")));
-        service.addPerson(new Person("Митрофанов Дмитрий Васильевич", Gender.male, LocalDate.of(1963, 9, 1)));
-        service.addPerson(new Person("Митрофанов Константин Дмитриевич", Gender.male, LocalDate.of(1981, 8, 25),
-                service.getByName("Иванова Кристина Ивановна"),
-                service.getByName("Митрофанов Дмитрий Васильевич")));
+        Service<Person> familyTree = new Service<Person>();
+        familyTree.addPerson(new Person("Петрова Ольга Владимировна", Gender.male, LocalDate.of(1941, 6, 24)));
+        familyTree.addPerson(new Person("Иванов Иван Иванович", Gender.male, LocalDate.of(1935, 12, 14)));
+        familyTree.addPerson(new Person("Иванова Кристина Ивановна", Gender.male, LocalDate.of(1961, 5, 15),
+                familyTree.getByName("Петрова Ольга Владимировна"),
+                familyTree.getByName("Иванов Иван Иванович")));
+        familyTree.addPerson(new Person("Митрофанов Дмитрий Васильевич", Gender.male, LocalDate.of(1963, 9, 1)));
+        familyTree.addPerson(new Person("Митрофанов Константин Дмитриевич", Gender.male, LocalDate.of(1981, 8, 25),
+                familyTree.getByName("Иванова Кристина Ивановна"),
+                familyTree.getByName("Митрофанов Дмитрий Васильевич")));
 
-        System.out.println(service.getFamilyTreeInfo());
+        String path = "src/FamilyTree/file.txt";
+        familyTree.saveTree(path);
+        familyTree.loadTree(path);
+        System.out.println(familyTree.getFamilyTreeInfo());
 
-        service.sortByName();
-        System.out.println(service.getFamilyTreeInfo());
+        familyTree.sortByName();
+        System.out.println(familyTree.getFamilyTreeInfo());
+
+        familyTree.sortByAge();
+        System.out.println(familyTree.getFamilyTreeInfo());
+
+
+
+
     }
 }

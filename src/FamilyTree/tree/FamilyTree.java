@@ -2,6 +2,7 @@ package FamilyTree.tree;
 
 import FamilyTree.person.Person;
 import FamilyTree.Service;
+import FamilyTree.person.comparators.PersonComparatorByAge;
 import FamilyTree.person.comparators.PersonComparatorByName;
 
 import java.io.Serializable;
@@ -60,6 +61,10 @@ public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>
 
     public void sortByName() {
         personList.sort(new PersonComparatorByName<>());
+    }
+
+    public void sortByAge() {
+        personList.sort(new PersonComparatorByAge<>());
     }
 
 }

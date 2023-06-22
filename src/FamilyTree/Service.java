@@ -1,31 +1,35 @@
 package FamilyTree;
 
+import FamilyTree.fileHandler.FileHandler;
+import FamilyTree.fileHandler.SaveLoader;
 import FamilyTree.person.Person;
 import FamilyTree.person.comparators.PersonComparatorByName;
 import FamilyTree.tree.FamilyTree;
 import FamilyTree.tree.PersonIterator;
+import FamilyTree.tree.TreeItem;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-public class Service {
+public class Service<T extends TreeItem> {
     private int id;
-    private FamilyTree<Person> familyTree;
+    private FamilyTree<T> familyTree;
 
-    public Service(FamilyTree tree) {
+    public Service(FamilyTree<T> tree) {
         this.familyTree = tree;
     }
 
     public Service() {
-        this(new FamilyTree());
+        this(new FamilyTree<T>());
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(T person) {
         familyTree.add(person);
     }
 
-    public Person getByName(String name) {
-        for(Person person : familyTree) {
+    public T getByName(String name) {
+        for(T person : familyTree) {
             if (person.getName().equals(name)) {
                 return person;
             }
@@ -51,8 +55,22 @@ public class Service {
         return familyTree.getFamilyTree();
     }
 
+    public void saveTree(String path) {
+        SaveLoader fileHandler = new FileHandler();
+        fileHandler.save(familyTree, path);
+    }
+
+    public void loadTree(String path) {
+        SaveLoader fileHandler = new FileHandler();
+        familyTree = (FamilyTree<T>) fileHandler.load(path);
+    }
+
     public void sortByName() {
         familyTree.sortByName();
+    }
+
+    public void sortByAge() {
+        familyTree.sortByAge();
     }
 
 }
