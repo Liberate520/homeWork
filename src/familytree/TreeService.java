@@ -1,15 +1,20 @@
 package familytree;
 
-import comparator.HumanComparatorByAge;
-import comparator.HumanComparatorById;
-import comparator.HumanComparatorByName;
-import familytree.Tree;
 import human.Human;
+import save.FileOperations;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class TreeService {
-    private Tree tree;
+public class TreeService implements Serializable {
+    private Tree<Human> tree;
+    private FileOperations fileOperations;
+    public String filePath = "test.txt";
+
+    public TreeService(FileOperations fileOperations){
+        this.tree = new Tree<>();
+        this.fileOperations = fileOperations;
+    }
 
     public TreeService(Tree<Human> tree){
         this.tree = tree;
@@ -19,6 +24,31 @@ public class TreeService {
 
         tree.add(new Human("Василина", "женский", tree.findHumanName("Иван"), tree.findHumanName("Ирина"), LocalDate.of(2010,1,1), null));
         tree.add(new Human("Коля", "мужской", tree.findHumanName("Иван"), tree.findHumanName("Ирина"), LocalDate.of(2012,2,2), null));
+    }
+
+    public void add(String name, String gender, Human father, Human mother, LocalDate dateOfBirth, LocalDate deathDate) {
+        tree.add(new Human(name, gender, father, mother, dateOfBirth, deathDate));
+    }
+
+    public String getInfoHuman(){
+        StringBuilder sb = new StringBuilder();
+        for (Human human : tree) {
+            sb.append(human.getInfo());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void setWrite(FileOperations writable) {
+        this.fileOperations = writable;
+    }
+
+    public void save(){
+        fileOperations.write(tree, filePath);
+    }
+
+    public void load(){
+        fileOperations.read(filePath);
     }
 
 
