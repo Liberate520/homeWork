@@ -1,4 +1,4 @@
-package FamilyTree;
+package FamilyTree.pet;
 
 import FamilyTree.person.Person;
 import FamilyTree.tree.TreeItem;

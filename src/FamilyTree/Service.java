@@ -2,15 +2,8 @@ package FamilyTree;
 
 import FamilyTree.fileHandler.FileHandler;
 import FamilyTree.fileHandler.SaveLoader;
-import FamilyTree.person.Person;
-import FamilyTree.person.comparators.PersonComparatorByName;
 import FamilyTree.tree.FamilyTree;
-import FamilyTree.tree.PersonIterator;
 import FamilyTree.tree.TreeItem;
-
-import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 
 public class Service<T extends TreeItem> {
     private int id;
@@ -24,17 +17,12 @@ public class Service<T extends TreeItem> {
         this(new FamilyTree<T>());
     }
 
-    public void addPerson(T person) {
+    public void add(T person) {
         familyTree.add(person);
     }
 
     public T getByName(String name) {
-        for(T person : familyTree) {
-            if (person.getName().equals(name)) {
-                return person;
-            }
-        }
-        return null;
+        return familyTree.getByName(name);
     }
 
     public String getFamilyTreeInfo() {
