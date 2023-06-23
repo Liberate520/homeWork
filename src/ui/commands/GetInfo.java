@@ -2,19 +2,19 @@ package ui.commands;
 
 import ui.Console;
 
-public class Finish extends Command {
+public class GetInfo extends Command {
 
-    public Finish(Console console) {
+    public GetInfo(Console console) {
         super(console);
     }
 
     @Override
     public String getDescription() {
-        return "Завершить работу";
+        return "Получить список родственников";
     }
 
     @Override
     public void execute() {
-        getConsole().finish();
+        getConsole().getInfo();
     }
 }
