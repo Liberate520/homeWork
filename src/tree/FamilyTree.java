@@ -8,15 +8,13 @@ import java.util.List;
 import comparators.HumanComparatorByAge;
 import comparators.HumanComparatorByName;
 
+
 public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Iterable<F> {
     private List<F> humanList;
 
-    public FamilyTree() {
-        this(new ArrayList<>());
-    }
-
-    public FamilyTree(List<F> humanList) {
-        this.humanList = humanList;
+    public FamilyTree()
+    {
+        humanList = new ArrayList<>();
     }
 
     public boolean add(F human) {
@@ -37,15 +35,15 @@ public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Itera
     }
 
     public F getByFirstName(String name){
-       for (F human: humanList){
-            if (human.getFirstName().equals(name)){
+        for (F human: humanList){
+            if (human.getFirstName().equalsIgnoreCase(name)){
                 return human;
             }
         }
-       return null;
+        return null;
     }
-    
-   public void sortByFirstName() {
+
+    public void sortByFirstName() {
         humanList.sort(new HumanComparatorByName<>());
     }
 
@@ -54,7 +52,18 @@ public class FamilyTree<F extends FamilyTreeItem> implements Serializable, Itera
     }
 
     @Override
+    public String toString()
+    {
+        String res = "В семье " + humanList.size() + " человек(а):\n";
+        for (int i = 0; i < humanList.size(); i++)
+        {
+            res += (i+1) + ") " + humanList.get(i).toString() + "\n";
+        }
+        return res;
+    }
+
+    @Override
     public Iterator<F> iterator() {
         return humanList.iterator();
-    }
+   }
 }
