@@ -1,15 +1,19 @@
 package ui;
 
+import ui.commands.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    private List<Command> commandList;
+    private List<Option> commandList;
+    private Console console;
 
     public Menu(Console console) {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(console));
         commandList.add(new GetInfo(console));
+        commandList.add(new SortingTrees(console));
         commandList.add(new LoadFile(console));
         commandList.add(new SaveFile(console));
         commandList.add(new Finish(console));
@@ -30,8 +34,13 @@ public class Menu {
     public void execute(int numCommand) {
         commandList.get(numCommand - 1).execute();
     }
-    
-     public int size(){
+
+    public int size(){
         return commandList.size();
+    }
+
+    public Console getConsole()
+    {
+        return console;
     }
 }
