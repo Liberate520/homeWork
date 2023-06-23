@@ -1,32 +1,27 @@
 package ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-
 import human.Gender;
 import presenter.Presenter;
+import tree.Service;
 
 public class Console implements View {
     private Presenter presenter;
-    private Scanner scanner;
+    private Service service;
+    private PrintInput input;
     private boolean work;
     private Menu mainMenu;
-    
+
+
     public Console() {
-        scanner = new Scanner(System.in);
         work = true;
         mainMenu = new Menu(this);
-    }
-
-    @Override
-    public void print(String text) {
-        System.out.println(text);
+        this.input = new PrintInput();
     }
 
     @Override
     public void start() {
         while (work) {
-            presenter.loadFile();
             System.out.println(mainMenu.print());
             int choice = inputNumMenu();
             if (choice == -1){
@@ -38,14 +33,14 @@ public class Console implements View {
     }
 
     private int inputNumMenu() {
-        String line = scanner.nextLine();
-        if (!checkLine(line)){
+        String line = input.nextLine();
+        if (!checkLineMenu(line)){
             return -1;
         }
         return Integer.parseInt(line);
     }
 
-    private boolean checkLine(String line) {
+    private boolean checkLineMenu(String line) {
         if (!line.matches("[0-9]+")){
             return false;
         }
@@ -55,30 +50,25 @@ public class Console implements View {
 
     public void addHuman() {
         System.out.println("Введите имя");
-        String firstName = scanner.nextLine();
+        String firstName = input.nextLine();
         System.out.println("Введите фамилию");
-        String lastName = scanner.nextLine();
+        String lastName = input.nextLine();
         System.out.println("Выберите пол:\n1. Мужской\n2. Женский");
         Gender gender = null;
         while (gender == null) {
-            String input = scanner.nextLine();
-            switch (input) {
-                case "1":
-                    gender = Gender.Male;
-                    break;
-                case "2":
-                    gender = Gender.Female;
-                    break;
-                default:
-                    System.out.println("Некорректный ввод. Попробуйте еще раз.");
+            String inp = input.nextLine();
+            switch (inp) {
+                case "1" -> gender = Gender.Male;
+                case "2" -> gender = Gender.Female;
+                default -> System.out.println("Некорректный ввод. Попробуйте еще раз.");
             }
         }
-        System.out.println("Введите дату рождения в формате 'дд.мм.гггг'");
-        String input = scanner.nextLine();
-        LocalDate birthDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        presenter.addHuman(firstName, lastName, gender, birthDate, null, null, null);
+            System.out.println("Введите дату рождения в формате 'дд.мм.гггг'");
+            String inp = input.nextLine();
+            LocalDate birthDate = LocalDate.parse(inp, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            presenter.addHuman(firstName, lastName, gender, birthDate);
     }
-    
+
     public void finish() {
         System.out.println("До свидания!");
         work = false;
@@ -88,16 +78,38 @@ public class Console implements View {
         presenter.getInfo();
     }
 
+    public void loadFile()
+    {
+        presenter.loadFile("FamilyTree.bin");
+    }
+
+    public void saveFile() {
+        if ((input.inputLn("Вы уверены? 1.да 2.нет")).equals("1"))
+            presenter.saveFile();
+    }
+
+    public void sortTree() {
+        System.out.println("""
+                Выберите тип сортировки
+                1. Имена по алфавиту
+                2. По дате рождения""");
+        presenter.sortTree(input.nextLine());
+    }
+
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
 
-    public void saveFile() {
-        presenter.saveFile();
+    @Override
+    public String scan()
+    {
+        input = new PrintInput();
+        return input.nextLine();
     }
 
-    public void loadFile() {
-        presenter.loadFile();
+    @Override
+    public void print(String text) {
+        System.out.println(text);
     }
 }
