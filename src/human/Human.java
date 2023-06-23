@@ -1,7 +1,5 @@
 package human;
 
-import comparators.HumanComparatorByAge;
-import comparators.HumanComparatorByName;
 import tree.FamilyTreeItem;
 
 import java.io.*;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
+public class Human implements Serializable,Comparable<Human>, FamilyTreeItem {
 
     private String firstname;
     private String lastname;
@@ -21,9 +19,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private Human father;
     private Human mother;
     private List<Human> children;
-    private List<Human> brothers;
-    private List<Human> sisters;
-    private List<Human> humanList;
 
     public Human(String firstName, String lastname, Gender gender, LocalDate birthDate) {
         this(firstName, lastname, gender, birthDate, null, null, null);
@@ -38,8 +33,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
-        brothers = new ArrayList<>();
-        sisters = new ArrayList<>();
     }
 
     public Human(String firstName, String lastname, Gender gender, Human father, Human mother) {
@@ -47,9 +40,8 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     }
 
     public String getFirstName() { return firstname; }
-
     public String getLastName() { return lastname;  }
-    public Gender getGender() { return gender;  }
+
     public Human getFather() { return father; }
 
     @Override
@@ -58,11 +50,8 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     }
 
     public Human getMother() { return mother; }
-
     public LocalDate getBirthDate() { return birthDate; }
     public LocalDate getDeathDate() { return deathDate; }
-    public List<Human> getBrothers() { return brothers; }
-    public List<Human> getSisters() { return sisters; }
 
     @Override
     public void addChild(FamilyTreeItem child) {
@@ -82,16 +71,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         return childrenList;
     }
 
-    public void setFirstname(String firstname) { this.firstname = firstname; }
-    public void setLastname(String lastname) { this.lastname = lastname; }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
     @Override
     public void setFather(FamilyTreeItem father) {
         this.father = (Human) father;
@@ -101,12 +80,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     public void setMother(FamilyTreeItem mother) {
         this.mother = (Human) mother;
     }
-    public void setGender(Gender gender) { this.gender = gender; }
-    public void setChildren(List<Human> children) { this.children = children;  }
-    public void setBrothers(List<Human> brothers) { this.brothers = brothers; }
-    public void setSisters(List<Human> sisters) { this.sisters = sisters; }
-    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
-    public void setDeathDate(LocalDate deathDate) { this.deathDate = deathDate; }
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
@@ -124,10 +97,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         sb.append(getMotherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
-        sb.append(", ");
-        sb.append(getBrothersInfo());
-        sb.append(", ");
-        sb.append(getSistersInfo());
         return sb.toString();
     }
 
@@ -166,36 +135,6 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         return res.toString();
     }
 
-    public String getBrothersInfo(){
-        StringBuilder res = new StringBuilder();
-        res.append("братья: ");
-        if (brothers.size() != 0){
-            res.append(brothers.get(0).getFirstName());
-            for (int i = 1; i < brothers.size(); i++) {
-                res.append(", ");
-                res.append(brothers.get(i).getFirstName());
-            }
-        } else {
-            res.append("отсутствуют");
-        }
-        return res.toString();
-    }
-
-    public String getSistersInfo(){
-        StringBuilder res = new StringBuilder();
-        res.append("сёстры: ");
-        if (sisters.size() != 0){
-            res.append(sisters.get(0).getFirstName());
-            for (int i = 1; i < sisters.size(); i++) {
-                res.append(", ");
-                res.append(sisters.get(i).getFirstName());
-            }
-        } else {
-            res.append("отсутствуют");
-        }
-        return res.toString();
-    }
-
     public boolean addChild(Human child) {
         if(!children.contains(child)){
             children.add(child);
@@ -214,20 +153,18 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
         return Objects.equals(firstname, human.firstname) && Objects.equals(lastname, human.lastname)
                 && Objects.equals(birthDate, human.birthDate) && gender == human.gender
                 && Objects.equals(mother, human.mother) && Objects.equals(father, human.father)
-                && Objects.equals(children, human.children) && Objects.equals(brothers, human.brothers)
-                && Objects.equals(sisters, human.sisters);
+                && Objects.equals(children, human.children);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname, birthDate, gender, mother, father, children, brothers, sisters);
+        return Objects.hash(firstname, lastname, birthDate, gender, mother, father, children);
     }
 
-  
     @Override
-    public int compareTo(Human o) {
-        return firstname.compareTo(o.firstname);
+    public int compareTo(Human o)
+    {
+        return firstname.compareToIgnoreCase(o.firstname);
     }
-
 
 }
