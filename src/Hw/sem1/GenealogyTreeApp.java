@@ -1,4 +1,4 @@
-package Hw.sem3;
+package Hw.sem1;
 
 public class GenealogyTreeApp {
     public static void main(String[] args) {
