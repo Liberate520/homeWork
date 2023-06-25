@@ -1,4 +1,4 @@
-package geoTree.workGeoTreeData;
+package model.geoTree.workGeoTreeData;
 import java.io.*;
 
 public class FileHandler implements Writable {

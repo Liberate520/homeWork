@@ -1,4 +1,4 @@
-package geoTree;
+package model.geoTree;
 
 import java.util.List;
 

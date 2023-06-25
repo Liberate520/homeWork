@@ -3,9 +3,9 @@ package mvp.ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import geoTree.GeoTree;
+import model.geoTree.GeoTree;
+import model.person.Person;
 import mvp.presenter.Presenter;
-import person.Person;
 
 public class ConsoleUI implements View {
     private Presenter presenter;
@@ -18,7 +18,6 @@ public class ConsoleUI implements View {
         scanner = new Scanner(System.in);
         flagWork = true;
         mainMenu = new MainMenu(this);
-        presenter = new Presenter();
         familyTree = new GeoTree<>();
     }
 
@@ -45,30 +44,16 @@ public class ConsoleUI implements View {
     }
 
     /*
-     *ДОБАВЛЕНИЕ ЛИЧНОСТЕЙ В СЕМЕЙНОЕ ДЕРЕВО
+     * ДОБАВЛЕНИЕ ЛИЧНОСТЕЙ В СЕМЕЙНОЕ ДЕРЕВО
      */
     public void addNote() {
-        System.out.println("Дата совершения операции");
-        String timeWrite = scanner.nextLine();
+        LocalDate timeWrite = inputDate("Дата совершения операции");
 
-        System.out.println("Имя:");
-        String name = scanner.nextLine();
+        String name = inputStringText("Имя: ");
+        String surname = inputStringText("Фамилия: ");
+        String patronymic = inputStringText("Отчество: ");
 
-        System.out.println("Фамилия:");
-        String surname = scanner.nextLine();
-
-        System.out.println("Отчество:");
-        String patronymic = scanner.nextLine();
-
-        System.out.println("Дата рождения:");
-        System.out.println("Год:");
-        int year = scanner.nextInt();
-        System.out.println("Месяц:");
-        int month = scanner.nextInt();
-        System.out.println("День:");
-        int day = scanner.nextInt();
-
-        LocalDate dateOfBirth = LocalDate.of(year, month, day);
+        LocalDate dateOfBirth = inputDate("Дата рождения:");
 
         System.out.println("Добавить родственников отца и мать, введите 1:");
         int answer = scanner.nextInt();
@@ -79,24 +64,16 @@ public class ConsoleUI implements View {
 
         if (answer == 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>Отец<<<<<<<<<<<<<<<<<<<<");
-            System.out.println("Имя:");
-            String nameF = scanner.nextLine();
-
-            System.out.println("Фамилия:");
-            String surnameF = scanner.nextLine();
-
-            System.out.println("Отчество:");
-            String patronymicF = scanner.nextLine();
+            
+            String nameF = inputStringText("Имя: ");
+            String surnameF = inputStringText("Фамилия: ");
+            String patronymicF = inputStringText("Отчество: ");
 
             System.out.println(">>>>>>>>>>>>>>>>>>>>Мать<<<<<<<<<<<<<<<<<<<<");
-            System.out.println("Имя:");
-            String nameM = scanner.nextLine();
-
-            System.out.println("Фамилия:");
-            String surnameM = scanner.nextLine();
-
-            System.out.println("Отчество:");
-            String patronymicM = scanner.nextLine();
+            
+            String nameM = inputStringText("Имя: ");
+            String surnameM = inputStringText("Фамилия: ");
+            String patronymicM = inputStringText("Отчество: ");
 
             familyTree.addPerson(new Person(
                     name,
@@ -104,20 +81,36 @@ public class ConsoleUI implements View {
                     patronymic,
                     dateOfBirth,
                     familyTree.getByName(nameF, surnameF, patronymicF),
-                    familyTree.getByName(nameM, surnameM, patronymicM)
-                )
-            );
+                    familyTree.getByName(nameM, surnameM, patronymicM)));
         } else {
             familyTree.addPerson(new Person(
                     name,
                     surname,
                     patronymic,
-                    dateOfBirth
-                )
-            );
+                    dateOfBirth));
         }
 
         // System.out.println(familyTree.getInfo()); //ТЕСТ(УДАЛИТЬ ПОТОМ)
+    }
+
+    private String inputStringText(String text) {
+        System.out.println(text);
+        String textUser = scanner.nextLine();
+        return textUser;
+    }
+
+    private LocalDate inputDate(String textInfo) {
+        System.out.println(textInfo);
+        System.out.println("Год:");
+        int year = scanner.nextInt();
+        System.out.println("Месяц:");
+        int month = scanner.nextInt();
+        System.out.println("День:");
+        int day = scanner.nextInt();
+
+        LocalDate date = LocalDate.of(year, month, day);
+
+        return date;
     }
 
     public void getNote() {
@@ -154,4 +147,8 @@ public class ConsoleUI implements View {
         return choice > 0 && choice <= mainMenu.size();
     }
 
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
+    }
 }

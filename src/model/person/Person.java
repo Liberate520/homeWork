@@ -1,10 +1,10 @@
-package person;
+package model.person;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import geoTree.GeoTreeItem;
+import model.geoTree.GeoTreeItem;
 
 public class Person implements Serializable, Comparable<Person>, GeoTreeItem<Person>{
 

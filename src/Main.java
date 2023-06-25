@@ -3,8 +3,8 @@
 
 import java.time.LocalDate;
 
-import geoTree.GeoTree;
-import person.Person;
+import model.geoTree.GeoTree;
+import model.person.Person;
 
 public class Main {
     public static void main(String[] args) {
