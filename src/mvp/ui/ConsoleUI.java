@@ -6,6 +6,7 @@ import java.util.Scanner;
 import model.geoTree.GeoTree;
 import model.person.Person;
 import mvp.presenter.Presenter;
+import mvp.ui.menu.MainMenu;
 
 public class ConsoleUI implements View {
     private Presenter presenter;
@@ -26,6 +27,9 @@ public class ConsoleUI implements View {
         System.out.println(text);
     }
 
+    /**
+     * ЗАПУСК ПРИЛОЖЕНИЯ
+     */
     @Override
     public void start() {
         while (flagWork) {
@@ -43,11 +47,15 @@ public class ConsoleUI implements View {
         }
     }
 
-    /*
+    /**
      * ДОБАВЛЕНИЕ ЛИЧНОСТЕЙ В СЕМЕЙНОЕ ДЕРЕВО
      */
     public void addNote() {
         LocalDate timeWrite = inputDate("Дата совершения операции");
+
+        // ЗАГЛУШКА, ПРОБЛЕМА С ПОТОКОМ
+        String del1 = scanner.nextLine();
+        // ЗАГЛУШКА, ПРОБЛЕМА С ПОТОКОМ
 
         String name = inputStringText("Имя: ");
         String surname = inputStringText("Фамилия: ");
@@ -59,7 +67,7 @@ public class ConsoleUI implements View {
         int answer = scanner.nextInt();
 
         // ЗАГЛУШКА, ПРОБЛЕМА С ПОТОКОМ
-        String del = scanner.nextLine();
+        String del2 = scanner.nextLine();
         // ЗАГЛУШКА, ПРОБЛЕМА С ПОТОКОМ
 
         if (answer == 1) {
@@ -93,12 +101,18 @@ public class ConsoleUI implements View {
         // System.out.println(familyTree.getInfo()); //ТЕСТ(УДАЛИТЬ ПОТОМ)
     }
 
-    private String inputStringText(String text) {
-        System.out.println(text);
+    /*
+     * Можно вывести в отдельный интерфейс input
+     */
+    private String inputStringText(String textInfo) {
+        System.out.println(textInfo);
         String textUser = scanner.nextLine();
         return textUser;
     }
 
+    /*
+     * Можно вывести в отдельный интерфейс input
+     */
     private LocalDate inputDate(String textInfo) {
         System.out.println(textInfo);
         System.out.println("Год:");
@@ -113,16 +127,24 @@ public class ConsoleUI implements View {
         return date;
     }
 
+    /**
+     * ПОЛУЧЕНИЕ ДАННЫХ ЛИЧНОСТИ
+     */
     public void getNote() {
-        System.out.println("Укажите событие");
-        String text = scanner.nextLine();
+        String text = inputStringText("Укажите событие: ");
         presenter.getNote(text);
     }
 
+    /**
+     * ПОЛУЧЕНИЕ ДАННЫХ ВСЕХ ЛИЧНОСТЕЙ
+     */
     public void getAllNote() {
         presenter.getAllNote();
     }
 
+    /**
+     * ВЫКЛЮЧЕНИЕ ПРИЛОЖЕНИЯ
+     */
     public void end() {
         System.out.println("Хорошего дня;)");
         flagWork = false;

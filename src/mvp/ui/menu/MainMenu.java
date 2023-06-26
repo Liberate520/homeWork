@@ -1,7 +1,9 @@
-package mvp.ui;
+package mvp.ui.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mvp.ui.ConsoleUI;
 import mvp.ui.commands.*;
 
 public class MainMenu {
