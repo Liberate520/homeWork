@@ -101,8 +101,10 @@ public class ConsoleUI implements View {
         // System.out.println(familyTree.getInfo()); //ТЕСТ(УДАЛИТЬ ПОТОМ)
     }
 
-    /*
-     * Можно вывести в отдельный интерфейс input
+    /**
+     * Ввод данных 
+     * @param textInfo - информация об операции
+     * @return - возвращение строки
      */
     private String inputStringText(String textInfo) {
         System.out.println(textInfo);
@@ -110,8 +112,10 @@ public class ConsoleUI implements View {
         return textUser;
     }
 
-    /*
-     * Можно вывести в отдельный интерфейс input
+    /**
+     * Ввод данных 
+     * @param textInfo - информация об операции
+     * @return - возвращение даты: (год, месяц, день), (int-int-int).
      */
     private LocalDate inputDate(String textInfo) {
         System.out.println(textInfo);
