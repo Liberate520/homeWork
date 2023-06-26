@@ -4,7 +4,7 @@ import Exercises.ExerciseData;
 import MenuRender.ConsoleManager;
 import MenuRender.MenuRender;
 
-public class Program {
+public class Main {
     public static void main(String[] args) {
         final int CONST_MENU_COUNT = 30;
         int taskId = 1;
