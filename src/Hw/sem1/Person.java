@@ -1,8 +1,9 @@
 package Hw.sem1;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-class Person {
+class Person implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate birthDate;

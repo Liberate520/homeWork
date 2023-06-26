@@ -1,36 +1,26 @@
 package Hw.sem1;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 interface DataStorage<T> {
-    void saveData(List<T> data, String filename);
-
-    List<T> loadData(String filename);
+    void saveToFile(T data, String filename) throws IOException;
+    T loadFromFile(String filename) throws IOException, ClassNotFoundException;
 }
 
-// Класс для сохранения и загрузки данных в файл
+
 class FileHandler<T> implements DataStorage<T> {
     @Override
-    public void saveData(List<T> data, String filename) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
-            outputStream.writeObject(data);
-            System.out.println("Data saved to file: " + filename);
-        } catch (IOException e) {
-            System.out.println("Error saving data to file: " + e.getMessage());
+    public void saveToFile(T data, String filename) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(data);
         }
     }
 
     @Override
-    public List<T> loadData(String filename) {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filename))) {
-            List<T> data = (List<T>) inputStream.readObject();
-            System.out.println("Data loaded from file: " + filename);
-            return data;
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error loading data from file: " + e.getMessage());
-            return new ArrayList<>();
+    public T loadFromFile(String filename) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            return (T) ois.readObject();
         }
     }
 }

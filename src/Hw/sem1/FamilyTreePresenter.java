@@ -1,5 +1,6 @@
 package Hw.sem1;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -8,92 +9,72 @@ import java.util.Scanner;
 class FamilyTreePresenter<T> {
     private FamilyTree<T> familyTree;
     private Scanner scanner;
-    private DataStorage<T> dataStorage;
-    private String filename;
+    private DataStorage<FamilyTree<T>> dataStorage;
 
-    public FamilyTreePresenter(DataStorage<T> dataStorage, String filename) {
+    public FamilyTreePresenter(FamilyTree<T> familyTree, DataStorage<FamilyTree<T>> dataStorage) {
+        this.familyTree = familyTree;
         this.dataStorage = dataStorage;
-        this.filename = filename;
         scanner = new Scanner(System.in);
     }
 
     public void start() {
-        System.out.println("=== Genealogy Tree App ===");
-
-        T root = null;
-
         while (true) {
             printMenu();
             int choice = getUserChoice();
-
             switch (choice) {
                 case 1:
-                    root = createPerson();
-                    familyTree = new FamilyTreeImpl<>(root);
-                    System.out.println("Root person added successfully.");
+                    createRootPerson();
                     break;
                 case 2:
-                    if (root != null) {
-                        T child = createPerson();
-                        familyTree.addChild(root, child);
-                        System.out.println("Child added successfully.");
-                    } else {
-                        System.out.println("Please add a root person first.");
-                    }
+                    addChild();
                     break;
                 case 3:
-                    if (root != null) {
-                        displayMembers();
-                    } else {
-                        System.out.println("Please add a root person first.");
-                    }
+                    displayFamilyMembers();
                     break;
                 case 4:
-                    if (root != null) {
-                        sortByName();
-                        displayMembers();
-                    } else {
-                        System.out.println("Please add a root person first.");
-                    }
+                    sortByName();
                     break;
                 case 5:
-                    if (root != null) {
-                        sortByBirthDate();
-                        displayMembers();
-                    } else {
-                        System.out.println("Please add a root person first.");
-                    }
+                    sortByBirthDate();
                     break;
                 case 6:
-                    saveToFile();
+                    saveDataToFile();
                     break;
                 case 7:
-                    loadFromFile();
-                    displayMembers();
+                    loadDataFromFile();
                     break;
                 case 0:
-                    System.out.println("Exiting the application.");
+                    System.out.println("Exiting the program.");
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
+                    break;
             }
         }
     }
 
-    private T createPerson() {
-        System.out.println("Enter person details:");
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Gender (MALE/FEMALE): ");
-        Gender gender = Gender.valueOf(scanner.nextLine().toUpperCase());
-        System.out.print("Birth Date (yyyy-MM-dd): ");
-        LocalDate birthDate = LocalDate.parse(scanner.nextLine());
-        return (T) new Person(name, gender, birthDate);
+    private void createRootPerson() {
+        System.out.println("\nAdding root person:");
+        T person = createPerson();
+        familyTree.setRoot(person);
+        System.out.println("Root person added successfully.");
     }
 
-    private void displayMembers() {
+    private void addChild() {
+        System.out.println("\nAdding a child:");
+        T parent = findPersonByName("Enter parent's name:");
+        if (parent != null) {
+            T child = createPerson();
+            familyTree.addChild(parent, child);
+            System.out.println("Child added successfully.");
+        } else {
+            System.out.println("Parent not found.");
+        }
+    }
+
+    private void displayFamilyMembers() {
         List<T> members = familyTree.getAllMembers();
-        System.out.println("\nGenealogy Tree Members:");
+        System.out.println("\nFamily Members:");
         for (T member : members) {
             System.out.println(member);
         }
@@ -101,37 +82,97 @@ class FamilyTreePresenter<T> {
 
     private void sortByName() {
         familyTree.sort(Comparator.comparing(p -> ((Person) p).getName()));
+        System.out.println("\nFamily members sorted by name.");
     }
 
     private void sortByBirthDate() {
         familyTree.sort(Comparator.comparing(p -> ((Person) p).getBirthDate()));
+        System.out.println("\nFamily members sorted by birth date.");
     }
 
-    private void saveToFile() {
-        familyTree.saveToFile(dataStorage, filename);
+    private void saveDataToFile() {
+        System.out.println("\nSaving data to file...");
+        try {
+            System.out.print("Enter filename: ");
+            String filename = scanner.nextLine();
+            dataStorage.saveToFile(familyTree, filename);
+            System.out.println("Data saved to file successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving data to file: " + e.getMessage());
+        }
     }
 
-    private void loadFromFile() {
-        familyTree.loadFromFile(dataStorage, filename);
+    private void loadDataFromFile() {
+        System.out.println("\nLoading data from file...");
+        try {
+            System.out.print("Enter filename: ");
+            String filename = scanner.nextLine();
+            familyTree = dataStorage.loadFromFile(filename);
+            System.out.println("Data loaded from file successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("An error occurred while loading data from file: " + e.getMessage());
+        }
+    }
+
+    private T createPerson() {
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        Gender gender = null;
+        while (gender == null) {
+            System.out.print("Enter gender (MALE or FEMALE): ");
+            try {
+                gender = Gender.valueOf(scanner.nextLine().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid gender. Please enter MALE or FEMALE.");
+            }
+        }
+
+        LocalDate birthDate = null;
+        while (birthDate == null) {
+            System.out.print("Enter birth date (YYYY-MM-DD): ");
+            try {
+                birthDate = LocalDate.parse(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Invalid date format. Please enter date in the format YYYY-MM-DD.");
+            }
+        }
+
+        return (T) new Person(name, gender, birthDate);
+    }
+
+    private T findPersonByName(String prompt) {
+        System.out.print(prompt);
+        String name = scanner.nextLine();
+        List<T> members = familyTree.getAllMembers();
+        for (T member : members) {
+            if (((Person) member).getName().equalsIgnoreCase(name)) {
+                return member;
+            }
+        }
+        return null;
+    }
+
+    private int getUserChoice() {
+        int choice = -1;
+        try {
+            System.out.print("Enter your choice: ");
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice. Please enter a valid number.");
+        }
+        return choice;
     }
 
     private void printMenu() {
         System.out.println("\nMenu:");
-        System.out.println("1. Add child");
-        System.out.println("2. Display members");
-        System.out.println("3. Sort by name");
-        System.out.println("4. Sort by birth date");
-        System.out.println("5. Save to file");
-        System.out.println("6. Load from file");
+        System.out.println("1. Add Root Person");
+        System.out.println("2. Add Child");
+        System.out.println("3. Display Family Members");
+        System.out.println("4. Sort by Name");
+        System.out.println("5. Sort by Birth Date");
+        System.out.println("6. Save Data to File");
+        System.out.println("7. Load Data from File");
         System.out.println("0. Exit");
-        System.out.print("Enter your choice: ");
-    }
-
-    private int getUserChoice() {
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            return -1;
-        }
     }
 }
