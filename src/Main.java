@@ -14,9 +14,10 @@ public class Main {
         // ==== Создаем объект генеалогического древа
         Familytree familytree = new Familytree((petr));
         //===== Заполняем древо
-        familytree.addPerson(ira,petr,petr);// Жена Петра
+        //familytree.addPerson(ira,petr,petr);// Жена Петра
         familytree.addPerson(anna,petr,ira);//Их дети
         familytree.addPerson(boris,petr,ira);//Их дети
+        familytree.addPerson(ira,petr);
 
         // Выводим информацию
 

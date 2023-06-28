@@ -16,6 +16,9 @@ public class Familytree {
         parent2.addChild(person);
         //person.addPartner(parent1);
     }
+    public void addPerson(Person person, Person partner){
+        person.addPartner(partner);
+    }
 
     public List<Person> searchPersonsByName(String name) {
         List<Person> result = new ArrayList<>();
