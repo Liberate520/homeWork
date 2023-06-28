@@ -25,9 +25,11 @@ public class Program {
         john.addChild("Peter Jr.", "Doe", peterDOB, Person.Gender.MALE);
         john.addChild("Anna Jr.", "Doe", annaDOB, Person.Gender.FEMALE);
 
-
+        //вывод семьи
         System.out.println(john);
+        System.out.println(mary);
         System.out.println(peter);
+        System.out.println(anna);
     }
 
 }

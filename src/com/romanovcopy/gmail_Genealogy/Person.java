@@ -8,24 +8,24 @@ import java.util.List;
 
 public class Person {
 
-    private String name;
-    private String surname;
-    private LocalDate dateOfBirth;
-    private Gender gender;
-    private List<Person> children;
-    private List<Person> parents;
-    private MaritalStatus maritalStatus;
+    private String name; // Имя
+    private String surname; // Фамилия
+    private LocalDate dateOfBirth; // Дата рождения
+    private Gender gender; // Пол
+    private List<Person> children; // Дети
+    private List<Person> parents; // Родители
+    private MaritalStatus maritalStatus; // Семейное положение
 
     public enum Gender {
-        MALE,
-        FEMALE
+        MALE, // Мужской
+        FEMALE // Женский
     }
 
     public enum MaritalStatus {
-        SINGLE,
-        MARRIED,
-        DIVORCED,
-        WIDOWED
+        SINGLE, // Не женат/не замужем
+        MARRIED, // Женат/замужем
+        DIVORCED, // Разведен/разведена
+        WIDOWED // Вдовец/вдова
     }
 
     public Person(String name, String surname, LocalDate dateOfBirth, Gender gender) {
