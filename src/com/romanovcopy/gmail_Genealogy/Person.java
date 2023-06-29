@@ -9,6 +9,8 @@ public class Person {
     private String name; // Имя
     private String surname; // Фамилия
     private LocalDate dateOfBirth; // Дата рождения
+    private LocalDate dateOfDeath; // Дата смерти
+
     private Gender gender; // Пол
     private List<Person> children; // Дети
     private List<Person> parents; // Родители
