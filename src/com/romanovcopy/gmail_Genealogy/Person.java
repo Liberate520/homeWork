@@ -48,10 +48,8 @@ public class Person {
         this.gender = gender;
     }
 
-    public void addChild(String childName, String childSurname, LocalDate childDateOfBirth, Gender childGender) {
-        Person child = new Person(childName, childSurname, childDateOfBirth, childGender);
+    public void addChild(Person child){
         children.add(child);
-        child.addParent(this);
     }
 
     public void addParent(Person parent) {

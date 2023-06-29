@@ -1,6 +1,8 @@
 package com.romanovcopy.gmail_Genealogy;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GenealogyGraph {
@@ -11,33 +13,42 @@ public class GenealogyGraph {
         this.people = new HashMap<>();
     }
 
-    public void addPerson(String name) {
-        Person person = new Person(name);
-        people.put(name, person);
+    public void addPerson(Person person) {
+        people.put(person.getSurname(), person);
     }
 
-    public void addParentChildRelationship(String parentName, String childName) {
-        Person parent = people.get(parentName);
-        Person child = people.get(childName);
-
+    /**
+     * отношение родителя и ребенка
+     * @param parent родитель
+     * @param child ребенок
+     */
+    public void addParentChildRelationship(Person parent, Person child) {
         if (parent != null && child != null) {
             parent.addChild(child);
             child.addParent(parent);
         }
     }
 
-    public List<Person> getParents(String name) {
-        Person person = people.get(name);
-        if (person != null) {
-            return person.getParents();
+    /**
+     * получение родителей ребенка
+     * @param child
+     * @return список родителей
+     */
+    public List<Person> getParents(Person child) {
+        if (child != null) {
+            return child.getParents();
         }
         return Collections.emptyList();
     }
 
-    public List<Person> getChildren(String name) {
-        Person person = people.get(name);
-        if (person != null) {
-            return person.getChildren();
+    /**
+     * получение детей родителя
+     * @param parent родитель
+     * @return список детей
+     */
+    public List<Person> getChildren(Person parent) {
+        if (parent != null) {
+            return parent.getChildren();
         }
         return Collections.emptyList();
     }
