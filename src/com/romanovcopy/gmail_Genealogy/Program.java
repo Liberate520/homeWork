@@ -1,6 +1,7 @@
 package com.romanovcopy.gmail_Genealogy;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -10,30 +11,23 @@ public class Program {
     public static void main(String[] args) {
 
 
-        //создаем семейную пару
-        LocalDate johnDOB = LocalDate.of(1950, 1, 1);
-        LocalDate maryDOB = LocalDate.of(1952, 6, 15);
-        Person john = new Person("John", "Doe", johnDOB, Gender.MALE);
-        john.setMaritalStatus(MaritalStatus.MARRIED);
-        Person mary = new Person("Mary", "Smith", maryDOB, Gender.FEMALE);
-
-
-        //создаем детей
-        LocalDate peterDOB = LocalDate.of(1980, 3, 10);
-        LocalDate annaDOB = LocalDate.of(1982, 8, 25);
-        Person peter = new Person("Peter", "Doe", peterDOB, Gender.MALE);
-        peter.setMaritalStatus(MaritalStatus.DIVORCED);
-        Person anna = new Person("Anna", "Doe", annaDOB, Gender.FEMALE);
-
-        //добавляем детей
-        john.addChild("Peter Jr.", "Doe", peterDOB, Gender.MALE);
-        john.addChild("Anna Jr.", "Doe", annaDOB, Gender.FEMALE);
-
-        //вывод семьи
-        System.out.println(john);
-        System.out.println(mary);
-        System.out.println(peter);
-        System.out.println(anna);
+//        GenealogyGraph graph = new GenealogyGraph();
+//
+//        // Добавление людей в граф
+//        graph.addPerson("John");
+//        graph.addPerson("Mary");
+//        graph.addPerson("Peter");
+//
+//        // Установление родительской связи
+//        graph.addParentChildRelationship("John", "Peter");
+//        graph.addParentChildRelationship("Mary", "Peter");
+//
+//        // Получение родителей и детей
+//        List<Person> johnsParents = graph.getParents("John");
+//        List<Person> marysChildren = graph.getChildren("Mary");
+//
+//        System.out.println("John's parents: " + johnsParents);
+//        System.out.println("Mary's children: " + marysChildren);
 
     }
 
@@ -56,6 +50,7 @@ public class Program {
                     switch (mode) {
                         case 1: {
                             System.out.println("Новый граф");
+                            var person=createPerson(scanner);
                             break;
                         }
                         case 2: {
@@ -86,30 +81,94 @@ public class Program {
     }
 
     private static Person createPerson(Scanner scanner) {
+        boolean flag=true;
         Person person = null;
-        System.out.print("Фамилия : ");
-        String surName = scanner.nextLine();
-        System.out.println();
-        System.out.println("Имя : ");
-        String name = scanner.nextLine();
-        System.out.println();
-        System.out.println("Дата рождения :\n Число :");
-        int dayDate = scanner.nextInt();
-        System.out.println();
+        String surName = null;
+        while (flag){
+            surName = requestString(scanner,"Фамилия : ", false);
+            flag=surName==null||surName.length()==0;
+        }
+        String name = null;
+        flag=true;
+        while (flag){
+            name = requestString(scanner,"Имя : ", false);
+            flag=name==null||name.length()==0;
+        }
+        LocalDate birthDay=null;
+        flag=true;
+        requestString(scanner,"Отчество (если есть) : ", false);
+        while (flag){
+            birthDay=requestDate(scanner,"Дата рождения в формате дд.мм.гггг :", false);
+            flag=birthDay==null;
+        }
+
         return person;
     }
 
-    private static String requestString(Scanner scanner) {
+    /**
+     * получение ввода в виде строки
+     * @param scanner поток доступа к консоли
+     * @param text текст запроса
+     * @param neeLine переход на новую строку после текста запроса
+     * @return строка введенная пользователем
+     */
+    private static String requestString(Scanner scanner, String text, boolean newLine) {
+        newLine(text, newLine);
         String result=null;
         if (scanner.hasNext()) {
             result= scanner.next();}
         return result;
     }
 
-    private static int requestInt(Scanner scanner) {
+    /**
+     * получение ввода в виде целого числа
+     * @param scanner поток доступа к консоли
+     * @param text текст запроса
+     * @param neeLine переход на новую строку после текста запроса
+     * @return число введенное пользователем
+     */
+    private static int requestInt(Scanner scanner, String text, boolean newLine) {
+        newLine(text, newLine);
         int result = 0;
         if (scanner.hasNextInt()) {
             result = scanner.nextInt(); }
         return result;
     }
+
+    /**
+     * получение ввода в виде даты (LocalDate)
+     * @param scanner поток доступа к консоли
+     * @param text текст запроса
+     * @param neeLine переход на новую строку после текста запроса
+     * @return дата введенная пользователем
+     */
+    private static LocalDate requestDate(Scanner scanner, String text, boolean newLine){
+        newLine(text, newLine);
+        System.out.println("Введите дату рождения в формате DD.MM.YYYY :");
+        // Устанавливаем формат даты, который ожидаем от пользователя
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String birthDay=scanner.nextLine();
+        try {
+            // Преобразовываем введенную строку в объект LocalDate с использованием заданного формата
+            LocalDate date = LocalDate.parse(birthDay, dateFormatter);
+            return date;
+        } catch (Exception e) {
+            System.out.println("Некорректный формат даты.");
+            return null;
+        }
+    }
+
+    /**
+     * вывод текста
+     * @param text текст
+     * @param newLine перевод на новую строку в конце строки
+     */
+    private static void newLine(String text, boolean newLine){
+        if(newLine){
+            System.out.println(text);
+        }else {
+            System.out.print(text);
+        }
+    }
+
 }
