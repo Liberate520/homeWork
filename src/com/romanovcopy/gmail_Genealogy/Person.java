@@ -16,17 +16,7 @@ public class Person {
     private List<Person> parents; // Родители
     private MaritalStatus maritalStatus; // Семейное положение
 
-    public enum Gender {
-        MALE, // Мужской
-        FEMALE // Женский
-    }
 
-    public enum MaritalStatus {
-        SINGLE, // Не женат/не замужем
-        MARRIED, // Женат/замужем
-        DIVORCED, // Разведен/разведена
-        WIDOWED // Вдовец/вдова
-    }
 
     public Person(String name, String surname, LocalDate dateOfBirth, Gender gender) {
         this.name = name;
