@@ -3,8 +3,8 @@
 
 import java.time.LocalDate;
 
-import model.geoTree.GeoTree;
-import model.person.Person;
+import mvp.model.geoTree.GeoTree;
+import mvp.model.person.Person;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class Main {
 // ================================================================================================
 
 // ======================================ЗАПИСЬ ДАННЫХ В ФАЙЛ======================================
-        // String filePath = "src/data/tree.txt";
+        // String filePath = "src/mvp/model/data/tree.txt";
 
         // Writable writable = new FileHandler();
 

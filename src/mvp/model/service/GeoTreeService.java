@@ -1,14 +1,14 @@
-package model.service;
+package mvp.model.service;
 
 import java.time.LocalDate;
 
-import model.geoTree.GeoTree;
-import model.geoTree.workGeoTreeData.Writable;
-import model.person.Person;
+import mvp.model.geoTree.GeoTree;
+import mvp.model.geoTree.workGeoTreeData.Writable;
+import mvp.model.person.Person;
 
-public class GeoTreeService {
+public class GeoTreeService extends GeoTree<Person>{
     private Writable writable;
-    private final String filePath = "src/model/data/tree.txt";
+    private final String filePath = "src/mvp/model/data/tree.txt";
     private GeoTree<Person> activeGeoTree;
 
     public GeoTreeService(GeoTree<Person> activeGeoTree) {
@@ -57,6 +57,19 @@ public class GeoTreeService {
         
         return "Операция по добавлению выполнена";
 
+    }
+
+    public Person getByName(String name, String surname, String patronymic) {
+
+        for (Person person : activeGeoTree) {
+
+            if ((person.getName().equals(name)) &&
+                    (person.getSurname().equals(surname)) &&
+                    (person.getPatronymic().equals(patronymic))) {
+                return person;
+            }
+        }
+        return null;
     }
 
 }

@@ -1,7 +1,7 @@
-package model.geoTree.comparators;
+package mvp.model.geoTree.comparators;
 import java.util.Comparator;
 
-import model.geoTree.GeoTreeItem;
+import mvp.model.geoTree.GeoTreeItem;
 
 public class PersonComparatorByDateOfBirth<T extends GeoTreeItem<T>> implements Comparator<T> {
     @Override

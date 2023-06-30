@@ -2,9 +2,6 @@ package mvp.ui;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-
-import model.geoTree.GeoTree;
-import model.person.Person;
 import mvp.presenter.Presenter;
 import mvp.ui.menu.MainMenu;
 
@@ -13,13 +10,11 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private boolean flagWork;
     private MainMenu mainMenu;
-    private GeoTree<Person> familyTree;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         flagWork = true;
         mainMenu = new MainMenu(this);
-        familyTree = new GeoTree<>();
     }
 
     @Override
@@ -50,6 +45,7 @@ public class ConsoleUI implements View {
     /**
      * ДОБАВЛЕНИЕ ЛИЧНОСТЕЙ В СЕМЕЙНОЕ ДЕРЕВО
      */
+    @Override
     public void addNote() {
         LocalDate timeWrite = inputDate("Дата совершения операции");
 
@@ -72,37 +68,42 @@ public class ConsoleUI implements View {
 
         if (answer == 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>Отец<<<<<<<<<<<<<<<<<<<<");
-            
+
             String nameF = inputStringText("Имя: ");
             String surnameF = inputStringText("Фамилия: ");
             String patronymicF = inputStringText("Отчество: ");
 
             System.out.println(">>>>>>>>>>>>>>>>>>>>Мать<<<<<<<<<<<<<<<<<<<<");
-            
+
             String nameM = inputStringText("Имя: ");
             String surnameM = inputStringText("Фамилия: ");
             String patronymicM = inputStringText("Отчество: ");
 
-            familyTree.addPerson(new Person(
+            presenter.addNote(
                     name,
                     surname,
                     patronymic,
                     dateOfBirth,
-                    familyTree.getByName(nameF, surnameF, patronymicF),
-                    familyTree.getByName(nameM, surnameM, patronymicM)));
+                    nameF,
+                    surnameF,
+                    patronymicF,
+                    nameM,
+                    surnameM,
+                    patronymicM);
         } else {
-            familyTree.addPerson(new Person(
+            presenter.addNote(
                     name,
                     surname,
                     patronymic,
-                    dateOfBirth));
+                    dateOfBirth);
         }
 
-        // System.out.println(familyTree.getInfo()); //ТЕСТ(УДАЛИТЬ ПОТОМ)
+        // System.out.println(presenter.getInfo()); //ТЕСТ(УДАЛИТЬ ПОТОМ)
     }
 
     /**
-     * Ввод данных 
+     * Ввод данных
+     * 
      * @param textInfo - информация об операции
      * @return - возвращение строки
      */
@@ -113,7 +114,8 @@ public class ConsoleUI implements View {
     }
 
     /**
-     * Ввод данных 
+     * Ввод данных
+     * 
      * @param textInfo - информация об операции
      * @return - возвращение даты: (год, месяц, день), (int-int-int).
      */
@@ -134,6 +136,7 @@ public class ConsoleUI implements View {
     /**
      * ПОЛУЧЕНИЕ ДАННЫХ ЛИЧНОСТИ
      */
+    @Override
     public void getNote() {
         String text = inputStringText("Укажите событие: ");
         presenter.getNote(text);
@@ -142,6 +145,7 @@ public class ConsoleUI implements View {
     /**
      * ПОЛУЧЕНИЕ ДАННЫХ ВСЕХ ЛИЧНОСТЕЙ
      */
+    @Override
     public void getAllNote() {
         presenter.getAllNote();
     }
@@ -149,6 +153,7 @@ public class ConsoleUI implements View {
     /**
      * ВЫКЛЮЧЕНИЕ ПРИЛОЖЕНИЯ
      */
+    @Override
     public void end() {
         System.out.println("Хорошего дня;)");
         flagWork = false;

@@ -1,4 +1,4 @@
-package model.geoTree;
+package mvp.model.geoTree;
 
 import java.time.LocalDate;
 import java.util.List;

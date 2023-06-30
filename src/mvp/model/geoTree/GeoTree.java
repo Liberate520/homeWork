@@ -1,11 +1,11 @@
-package model.geoTree;
+package mvp.model.geoTree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.geoTree.comparators.PersonComparatorByDateOfBirth;
-import model.geoTree.comparators.PersonComparatorByName;
+import mvp.model.geoTree.comparators.PersonComparatorByDateOfBirth;
+import mvp.model.geoTree.comparators.PersonComparatorByName;
 
 public class GeoTree<T extends GeoTreeItem<T>> implements Serializable, Iterable<T>{
     private List<T> personList;

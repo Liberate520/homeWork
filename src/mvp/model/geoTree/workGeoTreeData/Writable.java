@@ -1,4 +1,4 @@
-package model.geoTree.workGeoTreeData;
+package mvp.model.geoTree.workGeoTreeData;
 import java.io.Serializable;
 /**
  * Writable
