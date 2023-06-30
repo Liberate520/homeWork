@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Human implements Serializable {
+    private static final long serialVersionUID = 1L;
     private  String surname;
     private String first_name;
     private String patronymic;
@@ -12,6 +13,8 @@ public class Human implements Serializable {
     private LocalDate day_death;
     private Gender gender;
     private Human mother, father;
+
+    private Human spouse;
     private List<Human> children;
 
     public Human(Gender gender) {
@@ -50,6 +53,9 @@ public class Human implements Serializable {
         this.father = father;
     }
 
+    public void setSpouse(Human spouse) {
+        this.spouse = spouse;
+    }
     public void setChildren(List<Human> children) {
         this.children = children;
     }
@@ -86,10 +92,12 @@ public class Human implements Serializable {
         return father;
     }
 
+    public Human getSpouse() {
+        return spouse;
+    }
     public List<Human> getChildren() {
         return children;
     }
-
 
     @Override
     public String toString() {
@@ -101,6 +109,7 @@ public class Human implements Serializable {
                 "Пол: " + gender + '\n' +
                 "Мать: " + mother + '\n' +
                 "Отец: " + father + '\n' +
+                "Супруг/Супруга: " + spouse + '\n' +
                 "Дети: " + children + '\n' +
                 '}';
     }

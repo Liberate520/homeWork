@@ -12,12 +12,25 @@ public class Main {
     public static void main(String[] args) {
         Main m = new Main();
         System.out.println("СЕМЕЙНОЕ ДРЕВО.");
-        m.menu();
+        m.startMenu();
         sc.close();
         System.out.println("СЕМЕЙНОЕ ДРЕВО. Программа закрыта.");
     }
 
-    private void menu() {
+    private void printMenu() {
+        System.out.println("""
+
+                Меню:
+                1 - Вывод на экран всего древа.;
+                2 - Добавить нового члена.;
+                7 - Очистить древо.;
+                8 - Загрузить семейное древо из файла.;
+                9 - Сохранить семейное древо в файл.;
+                0 - Выход;
+                
+                """);
+    }
+    private void startMenu() {
         String str = "";
         while (!str.equals("0")) {
             printMenu();
@@ -29,6 +42,9 @@ public class Main {
             if (str.equals("2")){
                 add_human();
             }
+            if (str.equals("7")){
+                clearFamilyTree();
+            }
             if (str.equals("8")){
                 loadHumanList();
             }
@@ -37,20 +53,9 @@ public class Main {
             }
         }
     }
-    private void printMenu() {
-        System.out.println("""
 
-                Меню:
-                1 - Вывод на экран всего древа.;
-                2 - Добавить нового члена.;
-                8 - Загрузить семейное древо из файла.;
-                9 - Сохранить семейное древо в файл.;
-                0 - Выход;
-                
-                """);
-    }
 
-    private void add_human(){
+    private Human new_human(){
         Human human = new Human(Gender.Mail);
         System.out.println("\nВвод данных нового человека.");
         System.out.print("Фамилия: ");
@@ -65,10 +70,13 @@ public class Main {
         human.setDay_death(tryLocalDate(sc.nextLine().trim()));
         System.out.print("Пол (по умолчанию M, для смены пола введите любой символ: ");
         human.setGender(tryGender(sc.nextLine().trim()));
+        return human;
+    }
+    private void add_human(){
+        Human human = new_human();
+        family_tree.addToHumanList(human);
         System.out.println("Добавлен новый член.");
         System.out.println(human);
-
-        family_tree.addToHumanList(human);
 
     }
 
@@ -122,6 +130,18 @@ public class Main {
             ioe.printStackTrace();
         }
 
+    }
+
+    private void clearFamilyTree(){
+        System.out.print("Семейное древо будет очищено.\n" +
+                "Для подтверждения введите \"Yes\": ");
+        String str2 = sc.nextLine();
+        if (str2.equalsIgnoreCase("Yes")){
+            family_tree.clearHumanList();
+            System.out.println("Семейное древо успешно очищено");
+        } else {
+            System.out.println("Действие отменено.");
+        }
     }
 
 }
