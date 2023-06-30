@@ -7,21 +7,21 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    private FamilyTree family_tree = new FamilyTree();
+    public FamilyTree family_tree = new FamilyTree();
 
     public static void main(String[] args) {
         Main m = new Main();
         System.out.println("СЕМЕЙНОЕ ДРЕВО.");
         m.menu();
         sc.close();
-        System.out.println("СЕМЕЙНОЕ ДРЕВО. Программа закрытв.");
+        System.out.println("СЕМЕЙНОЕ ДРЕВО. Программа закрыта.");
     }
 
     private void menu() {
         String str = "";
         while (!str.equals("0")) {
             printMenu();
-            System.out.println("Введите соответствующую цифру меню: ");
+            System.out.print("Введите соответствующую цифру меню: ");
             str = sc.nextLine();
             if (str.equals("1")){
                 System.out.println(family_tree);
@@ -41,10 +41,10 @@ public class Main {
         System.out.println("""
 
                 Меню:
-                1 - Вывод на экран всего древа;
-                2 - Добавить нового члена;
-                8 - Загрузить семейное древо из файла;
-                9 - Сохранить семейное древо в файл;
+                1 - Вывод на экран всего древа.;
+                2 - Добавить нового члена.;
+                8 - Загрузить семейное древо из файла.;
+                9 - Сохранить семейное древо в файл.;
                 0 - Выход;
                 
                 """);
@@ -91,13 +91,12 @@ public class Main {
     }
 
     private void loadHumanList(){
-        System.out.println("Загрузка пока тестовая. Текущий список будет удален.");
+        System.out.println("Загрузка данных из файла. Текущий список будет удален.");
         try {
             FileInputStream fis = new FileInputStream("src/family_tree.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            //familyTree.clearHumanList();
             family_tree = (FamilyTree) ois.readObject();
-
+            System.out.println("Семейное древо успешно загружено.");
             ois.close();
             fis.close();
         } catch (IOException | ClassNotFoundException ioe) {
@@ -106,7 +105,7 @@ public class Main {
     }
 
     private void saveHumanList(){
-        System.out.println("Сохранение в файл пока тестовое");
+        System.out.println("Сохранение в файл.");
         try
         {
             FileOutputStream fos = new FileOutputStream("src/family_tree.dat");
@@ -114,7 +113,7 @@ public class Main {
             oos.writeObject(family_tree);
             oos.close();
             fos.close();
-            System.out.println("File has been written");
+            System.out.println("Семейное древо успешно сохранено в файл.");
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
             throw new RuntimeException(e);

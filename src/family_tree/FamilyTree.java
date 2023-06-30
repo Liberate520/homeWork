@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<Human> humanList = new ArrayList<>();
 
 
