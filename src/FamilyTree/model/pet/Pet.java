@@ -1,25 +1,27 @@
-package FamilyTree.pet;
+package FamilyTree.model.pet;
 
-import FamilyTree.person.Person;
-import FamilyTree.tree.TreeItem;
+import FamilyTree.model.person.Person;
+import FamilyTree.model.tree.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Pet implements Serializable, TreeItem {
     String name;
-    public Pet(String name) {
+    LocalDate dateOfBirth;
+    public Pet(String name, LocalDate dateOfBirth) {
         this.name = name;
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public LocalDate getDateOfBirth() {
-        return null;
+        return dateOfBirth;
     }
 
     @Override

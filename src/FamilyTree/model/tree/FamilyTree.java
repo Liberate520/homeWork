@@ -1,9 +1,8 @@
-package FamilyTree.tree;
+package FamilyTree.model.tree;
 
-import FamilyTree.person.Person;
-import FamilyTree.Service;
-import FamilyTree.person.comparators.PersonComparatorByAge;
-import FamilyTree.person.comparators.PersonComparatorByName;
+import FamilyTree.model.person.Person;
+import FamilyTree.model.person.comparators.PersonComparatorByAge;
+import FamilyTree.model.person.comparators.PersonComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,18 +17,18 @@ public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>
     }
     public FamilyTree() { this(new ArrayList<>()); }
 
-    public boolean add(T person) {
-        if (person == null) {
+    public boolean add(T element) {
+        if (element == null) {
             System.out.println("null");
             return false;
         }
-        if (!personList.contains(person)) {
-            personList.add(person);
-            if (person.getFather() != null) {
-                person.getFather().addChild((Person) person);
+        if (!personList.contains(element)) {
+            personList.add(element);
+            if (element.getFather() != null) {
+                element.getFather().addChild((Person) element);
             }
-            if (person.getMother() != null) {
-                person.getMother().addChild((Person) person);
+            if (element.getMother() != null) {
+                element.getMother().addChild((Person) element);
             }
             return true;
         }

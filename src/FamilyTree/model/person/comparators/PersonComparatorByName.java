@@ -1,6 +1,6 @@
-package FamilyTree.person.comparators;
+package FamilyTree.model.person.comparators;
 
-import FamilyTree.tree.TreeItem;
+import FamilyTree.model.tree.TreeItem;
 
 import java.util.Comparator;
 

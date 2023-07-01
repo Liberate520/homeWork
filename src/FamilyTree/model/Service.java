@@ -1,9 +1,9 @@
-package FamilyTree;
+package FamilyTree.model;
 
-import FamilyTree.fileHandler.FileHandler;
-import FamilyTree.fileHandler.SaveLoader;
-import FamilyTree.tree.FamilyTree;
-import FamilyTree.tree.TreeItem;
+import FamilyTree.model.fileHandler.FileHandler;
+import FamilyTree.model.fileHandler.SaveLoader;
+import FamilyTree.model.tree.FamilyTree;
+import FamilyTree.model.tree.TreeItem;
 
 public class Service<T extends TreeItem> {
     private int id;
@@ -17,8 +17,8 @@ public class Service<T extends TreeItem> {
         this(new FamilyTree<T>());
     }
 
-    public void add(T person) {
-        familyTree.add(person);
+    public void add(T element) {
+        familyTree.add(element);
     }
 
     public T getByName(String name) {

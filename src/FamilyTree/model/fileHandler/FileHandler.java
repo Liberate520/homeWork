@@ -1,4 +1,4 @@
-package FamilyTree.fileHandler;
+package FamilyTree.model.fileHandler;
 
 import java.io.*;
 

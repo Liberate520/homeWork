@@ -1,6 +1,6 @@
-package FamilyTree.tree;
+package FamilyTree.model.tree;
 
-import FamilyTree.person.Person;
+import FamilyTree.model.person.Person;
 
 import java.time.LocalDate;
 
