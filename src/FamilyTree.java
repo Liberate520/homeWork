@@ -11,7 +11,7 @@ public class FamilyTree {
         int cnt=0;
         for (Human h : family){
             result.append(h.toString());
-            if(++cnt < family.size()-1) result.append(',');
+            if(cnt++ < family.size()-1) result.append(',');
         }
         return result.toString();
     }

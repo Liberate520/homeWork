@@ -55,7 +55,7 @@ public class Human {
         int cnt=0;
         for(Human child : childrens) {
             namesChildren.append(child.getName());
-            if(++cnt < childrens.size()) namesChildren.append(',');
+            if(cnt++ < childrens.size()-1) namesChildren.append(',');
         }
         result.append(String.format("Дети: %s}", (childrens.isEmpty() ? "Нет" : namesChildren.toString())));
         return result.toString();
