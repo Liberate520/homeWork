@@ -50,13 +50,10 @@ public class Human {
         result.append(String.format("Пол: %s, ", gender==Gender.Male ? "мужской":"женский"));
         result.append(String.format("Отец: %s, ", (father==null ? "Нет данных" : father.getName())));
         result.append(String.format("Мать: %s, ", (mother==null ? "Нет данных" : mother.getName())));
-        StringBuilder namesChildren = new StringBuilder();
-        int cnt=0;
-        for(Human child : childrens) {
-            namesChildren.append(child.getName());
-            if(cnt++ < childrens.size()-1) namesChildren.append(',');
-        }
-        result.append(String.format("Дети: %s}", (childrens.isEmpty() ? "Нет" : namesChildren.toString())));
+        List<String> childrenNames = new ArrayList<>();
+        for(Human child : childrens)
+            childrenNames.add(child.getName());
+        result.append(String.format("Дети: %s}", (childrens.isEmpty() ? "Нет" : String.join(",", childrenNames))));
         return result.toString();
     }
 }

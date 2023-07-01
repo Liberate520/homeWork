@@ -16,6 +16,6 @@ public class Main {
         tree.addHuman(father);
         tree.addHuman(mother);
         tree.addHuman(son);
-        System.out.println(String.format("Состав семьи: %s", tree.toString()));
+        System.out.println(String.format("Состав дерева: %s", tree.toString()));
     }
 }
