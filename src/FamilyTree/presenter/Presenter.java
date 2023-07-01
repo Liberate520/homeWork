@@ -37,10 +37,6 @@ public class Presenter<T extends TreeItem> {
         service.sortByName();
         getFamilyTreeInfo();
     }
-    public void selectMenu(int menu) {
-        String result = "вы выбрали пункт " + menu;
-        view.print(result);
-    }
 
     public void sortByAge() {
         service.sortByAge();

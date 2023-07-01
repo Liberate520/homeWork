@@ -36,22 +36,18 @@ public class Main {
         familyTree.sortByAge();
         System.out.println(familyTree.getFamilyTreeInfo());
 
-        Service<Pet> petTree = new Service<Pet>();
-        petTree.add(new Pet("Маря", LocalDate.of(2018, 5, 20)));
-        petTree.add(new Pet("Джей", LocalDate.of(2016, 8, 15)));
-        String path2 = "src/FamilyTree/model/pets.txt";
-        petTree.saveTree(path2);
-        petTree.loadTree(path2);
-        System.out.println(petTree.getFamilyTreeInfo());
+//        Service<Pet> petTree = new Service<Pet>();
+//        petTree.add(new Pet("Маря", LocalDate.of(2018, 5, 20)));
+//        petTree.add(new Pet("Джей", LocalDate.of(2016, 8, 15)));
+//        String path2 = "src/FamilyTree/model/pets.txt";
+//        petTree.saveTree(path2);
+//        petTree.loadTree(path2);
+//        System.out.println(petTree.getFamilyTreeInfo());
 
 
         View familyTreeUI = new ConsoleUI();
         Presenter presenter = new Presenter(familyTreeUI, familyTree);
         familyTreeUI.start();
-
-//        View petTreeUI = new ConsoleUI();
-//        Presenter presenterPet = new Presenter(petTreeUI, petTree);
-//        petTreeUI.start();
 
 
 
