@@ -31,7 +31,7 @@ public class Human {
         return true;
     }
 
-    public void setChild(Human child){
+    public boolean setChild(Human child){
         boolean flag = false;
         if(this.gender == Gender.Male) {
             flag = child.setFather(this);
@@ -39,6 +39,7 @@ public class Human {
             flag = child.setMother(this);
         }
         if(flag) childrens.add(child);
+        return flag;
     }
 
     @Override
