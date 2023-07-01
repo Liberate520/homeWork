@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class Gender {
+public enum Gender {
+        Male, Female
 }
