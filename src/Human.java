@@ -15,22 +15,19 @@ public class Human {
     }
     public String getName(){ return Name; }
     public Gender getGender(){ return gender; }
-    public Human getMother(){ return mother; }
-    public List<Human> getChildrens() { return childrens; }
-
+    public Human getMother(){ return mother; }    
     public boolean setMother(Human mother){
         if (this.mother != null || mother.getGender() != Gender.Female) return false;
         this.mother = mother;
         return true;
     }
     public Human getFather(){ return father; }
-
     public boolean setFather(Human father){
         if (this.father != null || father.getGender() != Gender.Male) return false;
         this.father = father;
         return true;
     }
-
+    public List<Human> getChildrens() { return childrens; }
     public boolean setChild(Human child){
         boolean flag = false;
         if(this.gender == Gender.Male) {
