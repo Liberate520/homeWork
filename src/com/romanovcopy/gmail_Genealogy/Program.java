@@ -57,23 +57,7 @@ public class Program {
                             break;
                         }
                         case 2: {
-                            System.out.println("Редактировать граф");
-                            System.out.print("Что известно ? \n 1 Фамилия \n 2 Фамилия Имя \n 3 Фамилия Имя Отчество \n");
-                            int select = requestInt(scanner,"Вид поиска : ", false);
-                            if(select==1){
-                                var surname=requestString(scanner,"Фамилия : ", false);
-                                var name=requestString(scanner,"Имя : ", false);
-                                var list = graph.search(surname, name);
-                                printPersons(list);
-                            } else if (select==2) {
-                                var list = graph.search(requestString(scanner,"Фамилия : ", false));
-                                printPersons(list);
-                            } else if (select==3) {
-                                var list = graph.search(requestString(scanner,"Фамилия : ", false));
-                                printPersons(list);
-                            }else {
-
-                            }
+                            personEditing(scanner, graph);
                             break;
                         }
                         case 3: {
@@ -96,6 +80,11 @@ public class Program {
         scanner.close();
     }
 
+    /**
+     * Создание нового персонажа
+     * @param scanner поток чтения с консоли
+     * @return новый персонаж
+     */
     private static Person createPerson(Scanner scanner) {
         boolean flag=true;
         Person person = null;
@@ -124,13 +113,53 @@ public class Program {
                 System.out.println("Некорректное значение.");
             }
         }
+        MaritalStatus maritalStatus=null;
+        String text="Выберите семейное положение : ( SINGLE, MARRIED, DIVORCED, WIDOWED ) ";
+        flag=true;
+        while (flag){
+            String temp=requestString(scanner,text,false);
+            // Преобразуем введенную строку в Enum-значение
+            try {
+                maritalStatus = MaritalStatus.valueOf(temp.toUpperCase());
+                System.out.println("Выбрано семейное положение: " + maritalStatus);
+                flag=false;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Некорректное значение.");
+            }
+        }
         LocalDate birthDay=null;
         flag=true;
         while (flag){
             birthDay=requestDate(scanner,"Дата рождения в формате дд.мм.гггг :", false);
             flag=birthDay==null;
         }
-        person=new Person(name, surName, patronymic,birthDay,gender);
+        person=new Person(name, surName, patronymic,birthDay,gender,maritalStatus);
+        return person;
+    }
+
+    private static Person personEditing(Scanner scanner, GenealogyGraph graph){
+        Person person=null;
+        System.out.println("Редактировать граф");
+        System.out.print("Что известно ? \n 1 Фамилия \n 2 Фамилия Имя \n 3 Фамилия Имя Отчество \n");
+        int select = requestInt(scanner,"Вид поиска : ", false);
+        if(select==1){
+            var surname=requestString(scanner,"Фамилия : ", false);
+            var list = graph.search(surname);
+            printPersons(list);
+        } else if (select==2) {
+            var surname=requestString(scanner,"Фамилия : ", false);
+            var name=requestString(scanner,"Имя : ", false);
+            var list = graph.search(surname,name);
+            printPersons(list);
+        } else if (select==3) {
+            var surname=requestString(scanner,"Фамилия : ", false);
+            var name=requestString(scanner,"Имя : ", false);
+            var patronymic=requestString(scanner,"Отчество : ", false);
+            var list = graph.search(surname,name,patronymic);
+            printPersons(list);
+        }else {
+
+        }
         return person;
     }
 

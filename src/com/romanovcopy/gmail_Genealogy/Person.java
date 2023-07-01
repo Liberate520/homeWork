@@ -19,7 +19,7 @@ public class Person {
 
 
 
-    public Person(String name, String surname, String patronymic, LocalDate dateOfBirth, Gender gender) {
+    public Person(String name, String surname, String patronymic, LocalDate dateOfBirth, Gender gender, MaritalStatus maritalStatus) {
         this.name = name;
         this.surname = surname;
         this.patronymic=patronymic;
@@ -27,7 +27,7 @@ public class Person {
         this.gender = gender;
         this.children = new ArrayList<>();
         this.parents = new ArrayList<>();
-        this.maritalStatus = MaritalStatus.SINGLE;
+        this.maritalStatus = maritalStatus;
     }
 
 
@@ -75,10 +75,11 @@ public class Person {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Name: ").append(name).append(" ").append(patronymic).append(" ").append(surname).append("\n");
-        stringBuilder.append("Date of Birth: ").append(dateOfBirth).append("\n");
-        stringBuilder.append("Gender: ").append(gender).append("\n");
-        stringBuilder.append("Marital Status: ").append(maritalStatus).append("\n");
+        stringBuilder.append("Фамилия: ").append(getSurname()).append("\n").append("Имя: ").
+                append(getName()).append("\n").append("Отчество: ").append(getPatronymic()).append("\n");
+        stringBuilder.append("Дата рождения: ").append(dateOfBirth).append("\n");
+        stringBuilder.append("Пол: ").append(gender).append("\n");
+        stringBuilder.append("Семейное положение: ").append(maritalStatus).append("\n");
         return stringBuilder.toString();
     }
 }
