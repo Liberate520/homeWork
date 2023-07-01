@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Human {
     private String Name;
     private Human mother, father;
-    private List<Human> childrens = new ArrayList<>();
-    public List<Human> getChildrens() { return childrens; }
+    private List<Human> childrens = new ArrayList<>();    
     private LocalDate dateBirth, dateDeath;
     private Gender gender;
     Human(String Name, LocalDate dateBirth, Gender gender){
@@ -17,7 +16,8 @@ public class Human {
     public String getName(){ return Name; }
     public Gender getGender(){ return gender; }
     public Human getMother(){ return mother; }
-    //return false, if mother already exists
+    public List<Human> getChildrens() { return childrens; }
+
     public boolean setMother(Human mother){
         if (this.mother != null || mother.getGender() != Gender.Female) return false;
         this.mother = mother;
@@ -25,7 +25,6 @@ public class Human {
     }
     public Human getFather(){ return father; }
 
-    //return false, if father already exists
     public boolean setFather(Human father){
         if (this.father != null || father.getGender() != Gender.Male) return false;
         this.father = father;
