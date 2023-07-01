@@ -16,7 +16,7 @@ public class FamilyTree<T extends TreeItem<T>> implements Serializable, Iterable
     }
     public FamilyTree() { this(new ArrayList<>()); }
 
-    public boolean add(T element) {
+    public boolean addPerson(T element) {
         if (element == null) {
             System.out.println("null");
             return false;
@@ -43,7 +43,7 @@ public class FamilyTree<T extends TreeItem<T>> implements Serializable, Iterable
         return null;
     }
 
-    public String getFamilyTree() {
+    public String getFamilyTreeInfo() {
         StringBuilder sb = new StringBuilder();
         for (T person : personList) {
             sb.append(person.getPersonInfo());

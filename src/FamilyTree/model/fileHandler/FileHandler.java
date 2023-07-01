@@ -1,5 +1,7 @@
 package FamilyTree.model.fileHandler;
 
+import FamilyTree.model.tree.FamilyTree;
+
 import java.io.*;
 
 public class FileHandler implements SaveLoader {
@@ -16,9 +18,9 @@ public class FileHandler implements SaveLoader {
     }
 
     @Override
-    public Object load(String path) {
+    public FamilyTree load(String path) {
         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))) {
-            return objectInputStream.readObject();
+            return (FamilyTree) objectInputStream.readObject();
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -16,7 +16,6 @@ public class Person implements Serializable, Comparable<Person>, TreeItem<Person
     private Person father;
     private List<Person> children;
 
-
     public Person(String name, Gender gender, LocalDate dateOfBirth, Person mother, Person father)
     {
         this.name = name;
@@ -27,29 +26,19 @@ public class Person implements Serializable, Comparable<Person>, TreeItem<Person
         children = new ArrayList<>();
     }
 
-    public Person(String name, Gender gender, LocalDate dateOfBirth)
-    {
-        this.name = name;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.mother = null;
-        this.father = null;
-        children = new ArrayList<>();
+    private Gender getGender() {
+        return gender;
     }
 
-    public String getName() { return name; }
 
-    public Gender getGender() { return gender; }
-
+    public String getName() {
+        return name;
+    }
     public LocalDate getDateOfBirth() { return dateOfBirth; }
-
-    public LocalDate getDateOfDeath() { return dateOfDeath; }
 
     public Person getMother() { return mother; };
 
     public Person getFather() { return father; }
-
-    public List<Person> getChildren() { return children; }
 
     public void setName(String name) { this.name = name; }
 

@@ -26,10 +26,7 @@ public class Presenter {
     }
 
     public void addPerson(String name, String inputGender, LocalDate dateOfBirth, String inputMotherName, String inputFatherName) {
-        Gender gender = Gender.valueOf(inputGender);
-        Person mother = service.getByName(inputMotherName);
-        Person father = service.getByName(inputFatherName);
-        service.add(name, gender, dateOfBirth, mother, father);
+        service.createPerson(name, inputGender, dateOfBirth, inputMotherName, inputFatherName);
     }
 
     public void sortByName() {
@@ -42,13 +39,13 @@ public class Presenter {
         getFamilyTreeInfo();
     }
 
-    public void saveTree(String path) {
-        service.saveTree(path);
-    }
-
-    public void loadTree(String path) {
-        service.loadTree(path);
-    }
+//    public void saveTree(String path) {
+//        service.saveTree(path);
+//    }
+//
+//    public void loadTree(String path) {
+//        service.loadTree(path);
+//    }
 
     public void updatePerson(String searchRequest, String name, String inputGender, LocalDate dateOfBirth, String inputMotherName, String inputFatherName) {
         if (name != null) {
@@ -67,6 +64,14 @@ public class Presenter {
             service.getByName(name).setFather(service.getByName(inputFatherName));
         }
         getByName(name);
+    }
+
+    public void saveTree(String path){
+        service.saveTree(path);
+    }
+
+    public void loadTree(String path) {
+        service.loadTree(path);
     }
 
 }

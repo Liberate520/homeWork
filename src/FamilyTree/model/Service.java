@@ -2,27 +2,43 @@ package FamilyTree.model;
 
 import FamilyTree.model.fileHandler.FileHandler;
 import FamilyTree.model.fileHandler.SaveLoader;
+import FamilyTree.model.person.CreatePerson;
 import FamilyTree.model.person.Gender;
 import FamilyTree.model.person.Person;
 import FamilyTree.model.tree.FamilyTree;
 
 import java.time.LocalDate;
 
-public class Service {
+public class Service{
     private int id;
     private FamilyTree<Person> familyTree;
-
-    public Service(FamilyTree<Person> tree) {
-        this.familyTree = tree;
-    }
+    private SaveLoader fileHandler;
 
     public Service() {
-        this(new FamilyTree<Person>());
+        this.familyTree = new FamilyTree<>();
+        this.fileHandler = new FileHandler();
     }
 
-    public void add(String name, Gender gender, LocalDate dateOfBirth, Person mother, Person father) {
-        Person person = new Person(name, gender, dateOfBirth, mother, father);
-        familyTree.add(person);
+    public FamilyTree<Person> loadTree(String path) {
+        return familyTree = fileHandler.load(path);
+    }
+
+    public boolean saveTree(String path) {
+        return fileHandler.save(familyTree, path);
+    }
+
+    public void createPerson(String name, String inputGender, LocalDate dateOfBirth, String inputMotherName, String inputFatherName) {
+        CreatePerson cp = new CreatePerson(familyTree);
+        Person person = cp.createPerson(name, inputGender, dateOfBirth, inputMotherName, inputFatherName);
+//        Gender gender = Gender.valueOf(inputGender);
+//        Person mother = familyTree.getByName(inputMotherName);
+//        Person father = familyTree.getByName(inputFatherName);
+//        Person person = new Person(name, gender, dateOfBirth, mother, father);
+        familyTree.addPerson(person);
+    }
+
+    public void addPerson(Person person) {
+        familyTree.addPerson(person);
     }
 
     public Person getByName(String name) {
@@ -44,17 +60,7 @@ public class Service {
 //        }
 //        return stringBuilder.toString();
 
-        return familyTree.getFamilyTree();
-    }
-
-        public void saveTree(String path) {
-        SaveLoader fileHandler = new FileHandler();
-        fileHandler.save(familyTree, path);
-    }
-
-    public void loadTree(String path) {
-        SaveLoader fileHandler = new FileHandler();
-        familyTree = (FamilyTree<Person>) fileHandler.load(path);
+        return familyTree.getFamilyTreeInfo();
     }
 
     public void sortByName() {

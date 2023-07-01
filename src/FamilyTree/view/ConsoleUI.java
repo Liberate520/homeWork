@@ -1,8 +1,6 @@
 package FamilyTree.view;
 
-import FamilyTree.model.person.Gender;
 import FamilyTree.presenter.Presenter;
-import FamilyTree.view.commands.SaveTree;
 
 import java.time.LocalDate;
 import java.util.Scanner;
