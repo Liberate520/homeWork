@@ -29,14 +29,13 @@ public class Human {
     }
     public List<Human> getChildrens() { return childrens; }
     public boolean setChild(Human child){
-        boolean flag = false;
         if(this.gender == Gender.Male) {
-            flag = child.setFather(this);
+            if(!child.setFather(this)) return false;
         }else{
-            flag = child.setMother(this);
+            if(!child.setMother(this)) return false;
         }
-        if(flag) childrens.add(child);
-        return flag;
+        childrens.add(child);
+        return true;
     }
 
     @Override
