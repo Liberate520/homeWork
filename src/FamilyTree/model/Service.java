@@ -3,7 +3,6 @@ package FamilyTree.model;
 import FamilyTree.model.fileHandler.FileHandler;
 import FamilyTree.model.fileHandler.SaveLoader;
 import FamilyTree.model.person.CreatePerson;
-import FamilyTree.model.person.Gender;
 import FamilyTree.model.person.Person;
 import FamilyTree.model.tree.FamilyTree;
 
@@ -30,10 +29,6 @@ public class Service{
     public void createPerson(String name, String inputGender, LocalDate dateOfBirth, String inputMotherName, String inputFatherName) {
         CreatePerson cp = new CreatePerson(familyTree);
         Person person = cp.createPerson(name, inputGender, dateOfBirth, inputMotherName, inputFatherName);
-//        Gender gender = Gender.valueOf(inputGender);
-//        Person mother = familyTree.getByName(inputMotherName);
-//        Person father = familyTree.getByName(inputFatherName);
-//        Person person = new Person(name, gender, dateOfBirth, mother, father);
         familyTree.addPerson(person);
     }
 

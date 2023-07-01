@@ -39,14 +39,6 @@ public class Presenter {
         getFamilyTreeInfo();
     }
 
-//    public void saveTree(String path) {
-//        service.saveTree(path);
-//    }
-//
-//    public void loadTree(String path) {
-//        service.loadTree(path);
-//    }
-
     public void updatePerson(String searchRequest, String name, String inputGender, LocalDate dateOfBirth, String inputMotherName, String inputFatherName) {
         if (name != null) {
             service.getByName(searchRequest).setName(name);;
