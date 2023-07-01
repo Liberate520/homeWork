@@ -2,26 +2,30 @@ package FamilyTree.model;
 
 import FamilyTree.model.fileHandler.FileHandler;
 import FamilyTree.model.fileHandler.SaveLoader;
+import FamilyTree.model.person.Gender;
+import FamilyTree.model.person.Person;
 import FamilyTree.model.tree.FamilyTree;
-import FamilyTree.model.tree.TreeItem;
 
-public class Service<T extends TreeItem> {
+import java.time.LocalDate;
+
+public class Service {
     private int id;
-    private FamilyTree<T> familyTree;
+    private FamilyTree<Person> familyTree;
 
-    public Service(FamilyTree<T> tree) {
+    public Service(FamilyTree<Person> tree) {
         this.familyTree = tree;
     }
 
     public Service() {
-        this(new FamilyTree<T>());
+        this(new FamilyTree<Person>());
     }
 
-    public void add(T element) {
-        familyTree.add(element);
+    public void add(String name, Gender gender, LocalDate dateOfBirth, Person mother, Person father) {
+        Person person = new Person(name, gender, dateOfBirth, mother, father);
+        familyTree.add(person);
     }
 
-    public T getByName(String name) {
+    public Person getByName(String name) {
         return familyTree.getByName(name);
     }
 
@@ -43,14 +47,14 @@ public class Service<T extends TreeItem> {
         return familyTree.getFamilyTree();
     }
 
-    public void saveTree(String path) {
+        public void saveTree(String path) {
         SaveLoader fileHandler = new FileHandler();
         fileHandler.save(familyTree, path);
     }
 
     public void loadTree(String path) {
         SaveLoader fileHandler = new FileHandler();
-        familyTree = (FamilyTree<T>) fileHandler.load(path);
+        familyTree = (FamilyTree<Person>) fileHandler.load(path);
     }
 
     public void sortByName() {

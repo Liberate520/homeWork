@@ -1,6 +1,5 @@
 package FamilyTree.model.tree;
 
-import FamilyTree.model.person.Person;
 import FamilyTree.model.person.comparators.PersonComparatorByAge;
 import FamilyTree.model.person.comparators.PersonComparatorByName;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>{
+public class FamilyTree<T extends TreeItem<T>> implements Serializable, Iterable<T>{
     private List<T> personList;
 
     public FamilyTree(List<T> personList) {
@@ -25,10 +24,10 @@ public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>
         if (!personList.contains(element)) {
             personList.add(element);
             if (element.getFather() != null) {
-                element.getFather().addChild((Person) element);
+                element.getFather().addChild(element);
             }
             if (element.getMother() != null) {
-                element.getMother().addChild((Person) element);
+                element.getMother().addChild(element);
             }
             return true;
         }

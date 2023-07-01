@@ -1,17 +1,17 @@
 package FamilyTree.model.tree;
 
-import FamilyTree.model.person.Person;
-
 import java.time.LocalDate;
+import java.util.List;
 
-public interface TreeItem {
+public interface TreeItem<T> {
     String getName();
     LocalDate getDateOfBirth();
 
-    Person getMother();
+    T getMother();
 
-    Person getFather();
+    T getFather();
 
     String getPersonInfo();
+    boolean addChild(T person);
 
 }

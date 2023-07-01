@@ -1,12 +1,11 @@
 package FamilyTree.model.pet;
 
-import FamilyTree.model.person.Person;
 import FamilyTree.model.tree.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Pet implements Serializable, TreeItem {
+public class Pet implements Serializable, TreeItem<Pet> {
     String name;
     LocalDate dateOfBirth;
     public Pet(String name, LocalDate dateOfBirth) {
@@ -25,12 +24,12 @@ public class Pet implements Serializable, TreeItem {
     }
 
     @Override
-    public Person getMother() {
+    public Pet getMother() {
         return null;
     }
 
     @Override
-    public Person getFather() {
+    public Pet getFather() {
         return null;
     }
 
@@ -41,6 +40,11 @@ public class Pet implements Serializable, TreeItem {
         sb.append(name);
 
         return sb.toString();
+    }
+
+    @Override
+    public boolean addChild(Pet person) {
+        return false;
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, Comparable<Person>, TreeItem  {
+public class Person implements Serializable, Comparable<Person>, TreeItem<Person>  {
     private String name;
     private Gender gender;
     private LocalDate dateOfBirth;

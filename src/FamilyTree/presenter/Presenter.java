@@ -3,16 +3,15 @@ package FamilyTree.presenter;
 import FamilyTree.model.Service;
 import FamilyTree.model.person.Gender;
 import FamilyTree.model.person.Person;
-import FamilyTree.model.tree.TreeItem;
 import FamilyTree.view.View;
 
 import java.time.LocalDate;
 
-public class Presenter<T extends TreeItem> {
+public class Presenter {
     private View view;
-    private Service<Person> service;
+    private Service service;
 
-    public Presenter(View view, Service<Person> service) {
+    public Presenter(View view, Service service) {
         this.view = view;
         this.service = service;
         view.setPresenter(this);
@@ -30,7 +29,7 @@ public class Presenter<T extends TreeItem> {
         Gender gender = Gender.valueOf(inputGender);
         Person mother = service.getByName(inputMotherName);
         Person father = service.getByName(inputFatherName);
-        service.add(new Person(name, gender, dateOfBirth, mother, father));
+        service.add(name, gender, dateOfBirth, mother, father);
     }
 
     public void sortByName() {
@@ -67,6 +66,7 @@ public class Presenter<T extends TreeItem> {
         if (inputFatherName != null) {
             service.getByName(name).setFather(service.getByName(inputFatherName));
         }
-        getFamilyTreeInfo();
+        getByName(name);
     }
+
 }
