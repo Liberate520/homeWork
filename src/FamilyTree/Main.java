@@ -10,6 +10,7 @@ import FamilyTree.view.ConsoleUI;
 import FamilyTree.view.View;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -48,12 +49,5 @@ public class Main {
         View familyTreeUI = new ConsoleUI();
         Presenter presenter = new Presenter(familyTreeUI, familyTree);
         familyTreeUI.start();
-
-
-
-
-
-
-
     }
 }

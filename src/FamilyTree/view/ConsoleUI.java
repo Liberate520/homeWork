@@ -141,27 +141,25 @@ public class ConsoleUI implements View {
 
     public void saveTree() {
         String path = "src/FamilyTree/model/file.txt";
-//        System.out.println("Укажите путь для сохранения дерева. Чтобы оставить путь по умолчению, нажмите ввод.");
+        System.out.println("Укажите путь для сохранения дерева. Чтобы оставить путь по умолчению, нажмите ввод.");
         System.out.println("Путь по умолчанию:" + path);
-//        String input = scanner.nextLine();
-//
-//        if (input != null) {
-//            path = input;
-//        }
+        String input = scanner.nextLine();
 
+        if (!input.isEmpty()) {
+            path = input;
+        }
         presenter.saveTree(path);
     }
 
     public void loadTree() {
         String path = "src/FamilyTree/model/file.txt";
-//        System.out.println("Укажите путь к файлу для загрузки дерева. Чтобы оставить путь по умолчению, нажмите ввод.");
+        System.out.println("Укажите путь к файлу для загрузки дерева. Чтобы оставить путь по умолчению, нажмите ввод.");
         System.out.println("Путь по умолчанию:" + path);
-//        String input = scanner.nextLine();
-//
-//        if (input != null) {
-//            path = input;
-//        }
+        String input = scanner.nextLine();
 
+        if (!input.isEmpty()) {
+            path = input;
+        }
         presenter.loadTree(path);
     }
 
