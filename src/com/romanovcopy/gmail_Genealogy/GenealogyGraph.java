@@ -1,9 +1,6 @@
 package com.romanovcopy.gmail_Genealogy;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GenealogyGraph {
 
@@ -51,6 +48,54 @@ public class GenealogyGraph {
             return parent.getChildren();
         }
         return Collections.emptyList();
+    }
+
+    /**
+     * поиск по фамилии
+     * @param surname фамилия
+     * @return список найденных объектов
+     */
+    public ArrayList<Person>search(String surname){
+        ArrayList<Person>list=new ArrayList<>();
+        for (String key : people.keySet()) {
+            if (people.get(key).getSurname().equals(surname) ) {
+                list.add(people.get(key));
+            }
+        }
+        return list;
+    }
+
+    /**
+     * поиск по фамилии и имени
+     * @param surname фамилия
+     * @param name имя
+     * @return список найденных объектов
+     */
+    public ArrayList<Person>search(String surname, String name){
+        ArrayList<Person>list=new ArrayList<>();
+        for (String key : people.keySet()) {
+            if (people.get(key).getSurname().equals(surname) && people.get(key).getName().equals(name)) {
+                list.add(people.get(key));
+            }
+        }
+        return list;
+    }
+
+    /**
+     * поиск по фамилии имени и отчеству
+     * @param surname
+     * @param name
+     * @param patronymic
+     * @return
+     */
+    public ArrayList<Person>search(String surname, String name, String patronymic){
+        ArrayList<Person>list=new ArrayList<>();
+        for (String key : people.keySet()) {
+            if (people.get(key).getSurname().equals(surname) && people.get(key).getName().equals(name) && people.get(key).getPatronymic().equals(patronymic)) {
+                list.add(people.get(key));
+            }
+        }
+        return list;
     }
 
 }

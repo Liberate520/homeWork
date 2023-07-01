@@ -7,6 +7,7 @@ import java.util.List;
 public class Person {
 
     private String name; // Имя
+    private String patronymic;//Отчество
     private String surname; // Фамилия
     private LocalDate dateOfBirth; // Дата рождения
     private LocalDate dateOfDeath; // Дата смерти
@@ -18,15 +19,17 @@ public class Person {
 
 
 
-    public Person(String name, String surname, LocalDate dateOfBirth, Gender gender) {
+    public Person(String name, String surname, String patronymic, LocalDate dateOfBirth, Gender gender) {
         this.name = name;
         this.surname = surname;
+        this.patronymic=patronymic;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.children = new ArrayList<>();
         this.parents = new ArrayList<>();
         this.maritalStatus = MaritalStatus.SINGLE;
     }
+
 
     public String getName() {
         return name;
@@ -35,6 +38,7 @@ public class Person {
     public String getSurname() {
         return surname;
     }
+    public  String getPatronymic(){ return patronymic; }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
@@ -42,10 +46,6 @@ public class Person {
 
     public Gender getGender() {
         return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
     }
 
     public void addChild(Person child){
@@ -75,7 +75,7 @@ public class Person {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Name: ").append(name).append(" ").append(surname).append("\n");
+        stringBuilder.append("Name: ").append(name).append(" ").append(patronymic).append(" ").append(surname).append("\n");
         stringBuilder.append("Date of Birth: ").append(dateOfBirth).append("\n");
         stringBuilder.append("Gender: ").append(gender).append("\n");
         stringBuilder.append("Marital Status: ").append(maritalStatus).append("\n");

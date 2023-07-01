@@ -2,6 +2,7 @@ package com.romanovcopy.gmail_Genealogy;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -9,9 +10,8 @@ public class Program {
 
 
     public static void main(String[] args) {
-
-
-//        GenealogyGraph graph = new GenealogyGraph();
+        GenealogyGraph graph = new GenealogyGraph();
+        selectMode(graph);
 //
 //        // Добавление людей в граф
 //        graph.addPerson("John");
@@ -31,18 +31,18 @@ public class Program {
 
     }
 
-    private static void selectMode() {
+    private static void selectMode(GenealogyGraph graph) {
         boolean flag = true;
         int mode = 0;
         Scanner scanner = new Scanner(System.in);
         while (flag) {
             System.out.println("Выберите режим работы : ");
-            System.out.printf("1 - $s", "Новый граф.\n");
-            System.out.printf("2 - $s", "Редактировать граф.\n");
-            System.out.printf("3 - $s", "Просмотр графа.\n");
-            System.out.printf("4 - $s", "Удалить граф.\n\n");
-            System.out.printf("0 - %s", "Выход");
-            System.out.printf("** - $s -**", "Введите номер режима : ");
+            System.out.println("1 - Новый граф.");
+            System.out.println("2 - Редактировать граф.");
+            System.out.println("3 - Просмотр графа.");
+            System.out.println("4 - Удалить граф.");
+            System.out.println("0 - Выход");
+            System.out.println("Введите номер режима : ");
             if (scanner.hasNextInt()) {
                 mode = Math.abs(scanner.nextInt());
                 flag = mode != 0;
@@ -51,11 +51,29 @@ public class Program {
                         case 1: {
                             System.out.println("Новый граф");
                             var person=createPerson(scanner);
+                            if(person!=null){
+                                graph.addPerson(person);
+                            }
                             break;
                         }
                         case 2: {
                             System.out.println("Редактировать граф");
+                            System.out.print("Что известно ? \n 1 Фамилия \n 2 Фамилия Имя \n 3 Фамилия Имя Отчество \n");
+                            int select = requestInt(scanner,"Вид поиска : ", false);
+                            if(select==1){
+                                var surname=requestString(scanner,"Фамилия : ", false);
+                                var name=requestString(scanner,"Имя : ", false);
+                                var list = graph.search(surname, name);
+                                printPersons(list);
+                            } else if (select==2) {
+                                var list = graph.search(requestString(scanner,"Фамилия : ", false));
+                                printPersons(list);
+                            } else if (select==3) {
+                                var list = graph.search(requestString(scanner,"Фамилия : ", false));
+                                printPersons(list);
+                            }else {
 
+                            }
                             break;
                         }
                         case 3: {
@@ -72,8 +90,6 @@ public class Program {
                             System.out.println("Неизвестный выбор.\nПовторите ввод.");
                         }
                     }
-
-
                 }
             }
         }
@@ -94,14 +110,27 @@ public class Program {
             name = requestString(scanner,"Имя : ", false);
             flag=name==null||name.length()==0;
         }
+        String patronymic = requestString(scanner,"Отчество (если есть) : ", false);
+        Gender gender=null;
+        flag=true;
+        while (flag){
+            String temp=requestString(scanner,"Выберите пол : (MALE,FEMALE) ",false);
+            // Преобразуем введенную строку в Enum-значение
+            try {
+                gender = Gender.valueOf(temp.toUpperCase());
+                System.out.println("Выбранный пол: " + gender);
+                flag=false;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Некорректное значение.");
+            }
+        }
         LocalDate birthDay=null;
         flag=true;
-        requestString(scanner,"Отчество (если есть) : ", false);
         while (flag){
             birthDay=requestDate(scanner,"Дата рождения в формате дд.мм.гггг :", false);
             flag=birthDay==null;
         }
-
+        person=new Person(name, surName, patronymic,birthDay,gender);
         return person;
     }
 
@@ -131,7 +160,7 @@ public class Program {
         newLine(text, newLine);
         int result = 0;
         if (scanner.hasNextInt()) {
-            result = scanner.nextInt(); }
+            result = scanner.nextInt();}
         return result;
     }
 
@@ -144,10 +173,9 @@ public class Program {
      */
     private static LocalDate requestDate(Scanner scanner, String text, boolean newLine){
         newLine(text, newLine);
-        System.out.println("Введите дату рождения в формате DD.MM.YYYY :");
         // Устанавливаем формат даты, который ожидаем от пользователя
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String birthDay=scanner.nextLine();
+        String birthDay=scanner.next();
         try {
             // Преобразовываем введенную строку в объект LocalDate с использованием заданного формата
             LocalDate date = LocalDate.parse(birthDay, dateFormatter);
@@ -155,6 +183,12 @@ public class Program {
         } catch (Exception e) {
             System.out.println("Некорректный формат даты.");
             return null;
+        }
+    }
+
+    private static void printPersons(ArrayList<Person>list){
+        for(var pers:list){
+            System.out.printf("%d %s", list.indexOf(pers)+1,pers.toString());
         }
     }
 
