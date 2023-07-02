@@ -21,6 +21,10 @@ public class FamilyTree implements Serializable {
         return this.sename;
     }
 
+    public List<Person> getPersons() {
+        return this.persons;
+    }
+
     public Person getPersonById(int id) {
         for (Person person : persons) {
             if (person.getId() == id) {

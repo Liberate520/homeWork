@@ -1,11 +1,8 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.io.File;
 
+import FamilyTree.FamilySerialize;
 import FamilyTree.FamilyTree;
 import FamilyTree.Person;
 import FamilyTree.PersonIdGenerator;
@@ -13,9 +10,6 @@ import FamilyTree.Structs.Gender;
 
 public class Main {
     public static void main(String[] args) {
-        String folderPath = "src\\Data";
-        String fileName = "person.out";
-        String filePath = folderPath + "\\" + fileName;
 
         ConsoleManager cmdManager = new ConsoleManager();
 
@@ -24,13 +18,10 @@ public class Main {
         FamilyTree familyTest;
 
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(
-                    new FileInputStream("person.out"));
-            familyBeta = (FamilyTree) objectInputStream.readObject();
-            objectInputStream.close();
-
+            FamilyTree[] families = FamilySerialize.DeSerialize();
+            familyBeta = families[0];
+            familyTest = families[1];
             anna = familyBeta.getPersonById(0);
-            familyTest = familyBeta.getPersonById(5).getFamilyTree();
         } catch (Exception e) {
             var idGenerator = new PersonIdGenerator();
             anna = new Person(idGenerator.GetNewId(), "Анна", Gender.FEMALE, LocalDate.of(1970, 1, 1));
@@ -71,18 +62,10 @@ public class Main {
             }
         }
 
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-
         try {
-            File file = new File(filePath);
+            File file = new File(FamilySerialize.FILE_PATH);
             if (!file.exists()) {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                        new FileOutputStream(filePath));
-                objectOutputStream.writeObject(familyBeta);
-                objectOutputStream.close();
+                FamilySerialize.Serialize(familyBeta);
             }
         } catch (IOException e) {
             e.printStackTrace();
