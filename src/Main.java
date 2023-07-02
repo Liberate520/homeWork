@@ -8,8 +8,8 @@ public class Main {
         Human son = new Human("Андрей", LocalDate.of(2020, 12, 31), Gender.Male);
 
         //Устанавливаем связи
-        father.setChild(son);
-        mother.setChild(son);
+        father.addChild(son);
+        mother.addChild(son);
 
         //Добавляем в общество
         FamilyTree tree = new FamilyTree();

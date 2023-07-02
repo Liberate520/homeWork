@@ -2,7 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    private List<Human> family = new ArrayList<>();
+    private List<Human> family;
+    public FamilyTree(){
+        family = new ArrayList<>();
+    }
     public void addHuman(Human h){ family.add(h); }
 
     @Override

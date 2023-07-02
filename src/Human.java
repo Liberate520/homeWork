@@ -3,17 +3,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Human {
-    private String Name;
+    private String name;
     private Human mother, father;
-    private List<Human> childrens = new ArrayList<>();    
+    private List<Human> children;
     private LocalDate dateBirth, dateDeath;
     private Gender gender;
-    Human(String Name, LocalDate dateBirth, Gender gender){
-        this.Name = Name;
+    public Human(String name, LocalDate dateBirth, Gender gender){
+        children = new ArrayList<>();
+        this.name = name;
         this.dateBirth = dateBirth;
         this.gender = gender;
     }
-    public String getName(){ return Name; }
+    public String getName(){ return name; }
     public Gender getGender(){ return gender; }
     public Human getMother(){ return mother; }    
     public boolean setMother(Human mother){
@@ -27,14 +28,14 @@ public class Human {
         this.father = father;
         return true;
     }
-    public List<Human> getChildrens() { return childrens; }
-    public boolean setChild(Human child){
+    public List<Human> getChildren() { return children; }
+    public boolean addChild(Human child){
         if(this.gender == Gender.Male) {
             if(!child.setFather(this)) return false;
         }else{
             if(!child.setMother(this)) return false;
         }
-        childrens.add(child);
+        children.add(child);
         return true;
     }
 
@@ -42,15 +43,16 @@ public class Human {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append('{');
-        result.append(String.format("Имя: %s, ", Name));
+        result.append(String.format("Имя: %s, ", name));
         result.append(String.format("Дата рождения: %s, ", dateBirth.toString()));
         result.append(String.format("Пол: %s, ", gender==Gender.Male ? "мужской":"женский"));
         result.append(String.format("Отец: %s, ", (father==null ? "Нет данных" : father.getName())));
         result.append(String.format("Мать: %s, ", (mother==null ? "Нет данных" : mother.getName())));
         List<String> childrenNames = new ArrayList<>();
-        for(Human child : childrens)
+        for(Human child : children)
             childrenNames.add(child.getName());
-        result.append(String.format("Дети: %s}", (childrens.isEmpty() ? "Нет" : String.join(",", childrenNames))));
+        result.append(String.format("Дети: %s", (children.isEmpty() ? "Нет" : String.join(",", childrenNames))));
+        result.append('}');
         return result.toString();
     }
 }
