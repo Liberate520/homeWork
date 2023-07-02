@@ -1,5 +1,7 @@
 package com.romanovcopy.gmail_Genealogy;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class GenealogyGraph {
@@ -11,7 +13,7 @@ public class GenealogyGraph {
     }
 
     public void addPerson(Person person) {
-        people.put(person.getSurname(), person);
+        people.put(createId(), person);
     }
 
     /**
@@ -51,51 +53,36 @@ public class GenealogyGraph {
     }
 
     /**
-     * поиск по фамилии
-     * @param surname фамилия
+     * поиск объектов по совпадению строк
+     * @param surname строка поиска
      * @return список найденных объектов
      */
-    public ArrayList<Person>search(String surname){
+    public ArrayList<Person>search(String searchKey){
+        var myKey=searchKey.toLowerCase();
         ArrayList<Person>list=new ArrayList<>();
         for (String key : people.keySet()) {
-            if (people.get(key).getSurname().equals(surname) ) {
-                list.add(people.get(key));
+            var persone=people.get(key);
+            boolean res=persone.getSurname().contains(myKey)||
+                    persone.getName().toLowerCase().contains(myKey)||
+                    persone.getPatronymic().toLowerCase().contains(myKey)||
+                    persone.getDateOfBirth().toString().toLowerCase().contains(myKey);
+            if(res){
+                list.add(persone);
             }
         }
         return list;
     }
 
-    /**
-     * поиск по фамилии и имени
-     * @param surname фамилия
-     * @param name имя
-     * @return список найденных объектов
-     */
-    public ArrayList<Person>search(String surname, String name){
-        ArrayList<Person>list=new ArrayList<>();
-        for (String key : people.keySet()) {
-            if (people.get(key).getSurname().equals(surname) && people.get(key).getName().equals(name)) {
-                list.add(people.get(key));
-            }
-        }
-        return list;
-    }
 
     /**
-     * поиск по фамилии имени и отчеству
-     * @param surname
-     * @param name
-     * @param patronymic
+     * генерация ключа исходя из текущей даты
      * @return
      */
-    public ArrayList<Person>search(String surname, String name, String patronymic){
-        ArrayList<Person>list=new ArrayList<>();
-        for (String key : people.keySet()) {
-            if (people.get(key).getSurname().equals(surname) && people.get(key).getName().equals(name) && people.get(key).getPatronymic().equals(patronymic)) {
-                list.add(people.get(key));
-            }
-        }
-        return list;
+    private String createId(){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        return formattedDateTime;
     }
 
 }

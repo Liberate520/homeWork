@@ -12,23 +12,6 @@ public class Program {
     public static void main(String[] args) {
         GenealogyGraph graph = new GenealogyGraph();
         selectMode(graph);
-//
-//        // Добавление людей в граф
-//        graph.addPerson("John");
-//        graph.addPerson("Mary");
-//        graph.addPerson("Peter");
-//
-//        // Установление родительской связи
-//        graph.addParentChildRelationship("John", "Peter");
-//        graph.addParentChildRelationship("Mary", "Peter");
-//
-//        // Получение родителей и детей
-//        List<Person> johnsParents = graph.getParents("John");
-//        List<Person> marysChildren = graph.getChildren("Mary");
-//
-//        System.out.println("John's parents: " + johnsParents);
-//        System.out.println("Mary's children: " + marysChildren);
-
     }
 
     private static void selectMode(GenealogyGraph graph) {
@@ -137,29 +120,13 @@ public class Program {
         return person;
     }
 
-    private static Person personEditing(Scanner scanner, GenealogyGraph graph){
-        Person person=null;
+    private static Person personEditing(Scanner scanner, GenealogyGraph graph) {
+        Person person = null;
         System.out.println("Редактировать граф");
-        System.out.print("Что известно ? \n 1 Фамилия \n 2 Фамилия Имя \n 3 Фамилия Имя Отчество \n");
-        int select = requestInt(scanner,"Вид поиска : ", false);
-        if(select==1){
-            var surname=requestString(scanner,"Фамилия : ", false);
-            var list = graph.search(surname);
-            printPersons(list);
-        } else if (select==2) {
-            var surname=requestString(scanner,"Фамилия : ", false);
-            var name=requestString(scanner,"Имя : ", false);
-            var list = graph.search(surname,name);
-            printPersons(list);
-        } else if (select==3) {
-            var surname=requestString(scanner,"Фамилия : ", false);
-            var name=requestString(scanner,"Имя : ", false);
-            var patronymic=requestString(scanner,"Отчество : ", false);
-            var list = graph.search(surname,name,patronymic);
-            printPersons(list);
-        }else {
-
-        }
+        var str = requestString(scanner, "Строка поиска : ", false);
+        var listSelcted = graph.search(str);
+        printPersons(listSelcted);
+        person = listSelcted.get(requestInt(scanner, "Выберите номер персонажа : ", false) - 1);
         return person;
     }
 
@@ -218,6 +185,7 @@ public class Program {
     private static void printPersons(ArrayList<Person>list){
         for(var pers:list){
             System.out.printf("%d %s", list.indexOf(pers)+1,pers.toString());
+            System.out.println();
         }
     }
 
