@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Person {
     private static int counter = 0;
-    private Integer id;
+    private int id;
     private String firstName;
     private String lastName;
     private List<Person> children;
@@ -21,9 +21,11 @@ public class Person {
         this.children = new ArrayList<>();
         this.parents = new ArrayList<>();
     }
+
     public int getId() {
         return id;
     }
+
     public String getName() {
         return firstName;
     }
@@ -76,9 +78,9 @@ public class Person {
     @Override
     public String toString() {
         if (getDateOfDeath() != null) {
-            return getId() + ", " + getName() + ", (" + getDateOfBirth() + " - " + getDateOfDeath() + "), " + getGender();
+            return getId() + ", " + getName() + " " + getLastName() + ", (" + getDateOfBirth() + " - " + getDateOfDeath() + "), " + getGender();
         } else {
-            return getId() + " " + getName() + " (" + getDateOfBirth() + ") " + getGender();
+            return getId() + ", " + getName() + " " + getLastName() + ", (" + getDateOfBirth() + "), " + getGender();
         }
     }
 }

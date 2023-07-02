@@ -13,11 +13,13 @@ public class GenealogyTree {
     public void addPerson(Person person) {
         people.add(person);
     }
+
     public void showTree() {
         for (Person p : people){
             System.out.println(p.toString());
         }
     }
+
     public void findPerson(String name, String lastName) {
         for (Person p : people) {
             if (p.getName().equals(name) && p.getLastName().equals(lastName)) {
@@ -26,15 +28,12 @@ public class GenealogyTree {
         }
     }
 
-    public static void printGenealogyTree(Person person, int level) {
-        for (int i = 0; i < level; i++) {
-            System.out.print("\t");
-        }
-        System.out.println(person.getName());
-
+    public void printGenealogyTree(Person person) {
+        System.out.print(person.getName() + " " + person.getLastName());
         List<Person> children = person.getChildren();
         for (Person child : children) {
-            printGenealogyTree(child, level + 1);
+            System.out.print(" -> ");
+            printGenealogyTree(child);
         }
     }
 }
