@@ -1,9 +1,10 @@
 package ru.gb.FamilyTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree{
     private List<Human> humanList;
 
 //    public FamilyTree(List<Human> humanList) {
@@ -33,9 +34,9 @@ public class FamilyTree {
             child.addParent(human);
         }
     }
-    public  Human getByPerson(String person) {
+    public  Human getByFullName(String fullName) {
         for (Human human: humanList){
-            if (human.getPerson().equals(person)){
+            if (human.getFullName().equals(fullName)){
                 return human;
             }
         }

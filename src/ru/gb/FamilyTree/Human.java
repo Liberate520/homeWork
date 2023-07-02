@@ -6,28 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
-//    private Integer id;
-//    private String surname;
-//    private String name;
-//    private String patronymic;
-    private String person;
+    private String fullName;
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private List<Human> parents;
     private List<Human> children;
 
-    public Human(String person, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father,
+    public Human(String fullName, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father,
                  Human mother) {
-        this.person = person;
+        this.fullName = fullName;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
         parents = new ArrayList<>();
-        if(father != null) parents.add(father);
-        if(mother != null) parents.add(mother);
+        if(father != null) {
+            parents.add(father);
+        }
+        if(mother != null) {
+            parents.add(mother);
+        }
         children = new ArrayList<>();
     }
+    public String getFullName() {return fullName;}
+    public Gender getGender() {return gender;}
+    public List<Human> getParents() {return parents;}
+    public List<Human> getChildren() {return children;}
+    public void setDateOfBirth(LocalDate dateOfBirth) {this.dateOfBirth = dateOfBirth;}
+    public void setDateOfDeath(LocalDate dateOfDeath) {this.dateOfDeath = dateOfDeath;}
 
     public LocalDate getDateOfBirth() {return dateOfBirth;}
     public LocalDate getDateOfDeath() { return dateOfDeath;}
@@ -55,24 +61,18 @@ public class Human {
     public Human getMother() {
         for (Human parent: parents) {
             if(parent.getGender() == Gender.Female){
-                return parent;
+                return  parent;
             }
         }
         return null;
     }
-
-
-    public String getPerson() {return person;}
-    public Gender getGender() {return gender;}
-    public List<Human> getParents() {return parents;}
-    public List<Human> getChildren() {return children;}
-    public void setDateOfBirth(LocalDate dateOfBirth) {this.dateOfBirth = dateOfBirth;}
-    public void setDateOfDeath(LocalDate dateOfDeath) {this.dateOfDeath = dateOfDeath;}
-
+    @Override
+    public String toString() {
+        return getInfo();
+    }
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(person);
+        stringBuilder.append(fullName);
         stringBuilder.append(", ");
         stringBuilder.append(getGender());
         stringBuilder.append(", ");
@@ -86,40 +86,35 @@ public class Human {
         return  stringBuilder.toString();
     }
 
-    @Override
-    public String toString() {
-        return getInfo();
-    }
-    
-
     public String getMotherInfo(){
-        String res = "mother: ";
+        String str = "mother: ";
         Human mother = getMother();
         if (mother != null){
-            res += mother.getPerson();
+            str += mother.getFullName();
         }else{
-            res += null;
+            str += null;
         }
-        return res;
+        return str;
     }
     public String getFatherInfo(){
         String res = "father: ";
         Human father = getFather();
         if (father != null){
-            res += father.getPerson();
+            res += father.getFullName();
         }else {
             res += null;
         }
         return res;
     }
+
     public String getChildrenInfo(){
         StringBuilder res = new StringBuilder();
-        res.append("children: ");
+        res.append("child: ");
         if (children.size() != 0) {
-            res.append(children.get(0).getPerson());
+            res.append(children.get(0).getFullName());
             for (int i = 1; i < children.size(); i++){
                 res.append(", ");
-                res.append(children.get(i).getPerson());
+                res.append(children.get(i).getFullName());
             }
         }else{
             res.append("null");
@@ -149,6 +144,6 @@ public class Human {
             return false;
         }
         Human human = (Human) obj;
-        return human.getPerson().equals(getPerson());
+        return human.getFullName().equals(getFullName());
     }
 }
