@@ -62,10 +62,9 @@ public class GenealogyGraph {
         ArrayList<Person>list=new ArrayList<>();
         for (String key : people.keySet()) {
             var persone=people.get(key);
-            boolean res=persone.getSurname().contains(myKey)||
+            boolean res=persone.getSurname().toLowerCase().contains(myKey)||
                     persone.getName().toLowerCase().contains(myKey)||
-                    persone.getPatronymic().toLowerCase().contains(myKey)||
-                    persone.getDateOfBirth().toString().toLowerCase().contains(myKey);
+                    persone.getPatronymic().toLowerCase().contains(myKey);
             if(res){
                 list.add(persone);
             }
