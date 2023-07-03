@@ -7,14 +7,27 @@ import java.util.List;
 public class Human {
     private String name;
     private LocalDate birthDate;
+    private LocalDate deathDate;
     private Gender gender;
     private List<Human> parents;
+    private List<Human> children;
+    private List<Human> allPeople;
 
     public Human(String name, LocalDate birthDate, Gender gender) {
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
-        parents = new ArrayList<>();
+        this.parents = new ArrayList<>();
+        this.children = new ArrayList<>();
+        allPeople.add(this);
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public List<Human> getAllPeople() {
+        return allPeople;
     }
 
     public String getName() {
@@ -33,8 +46,15 @@ public class Human {
         return parents;
     }
 
+    public List<Human> getChildren(){
+        return children;
+    }
+
     public void addParent(Human parent) {
-        parents.add(parent);
+        this.parents.add(parent);
+    }
+
+    public void addChild(Human child) {
+        this.children.add(child);
     }
 }
-
