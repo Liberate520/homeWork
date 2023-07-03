@@ -1,9 +1,10 @@
 package familytree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Familytree {
+public class Familytree implements Serializable {
     private Person rootPerson; //===Начальная точка дерева
 
     public Familytree(Person rootPerson) {
@@ -13,19 +14,23 @@ public class Familytree {
         person.addParent(parent1);
         person.addParent(parent2);
         parent1.addChild(person);
-        parent2.addChild(person);
+
         //person.addPartner(parent1);
     }
     public void addPerson(Person person, Person partner){
         person.addPartner(partner);
     }
 
-    public List<Person> searchPersonsByName(String name) {
+
+/*
+    public List<Person>  searchPersonsByName(String name) {
         List<Person> result = new ArrayList<>();
         searchPersonsByNameRecursive(rootPerson, name, result);
         return result;
     }
+*/
 
+/*
     private void searchPersonsByNameRecursive(Person currentPerson, String name, List<Person> result) {
         if (currentPerson.getName().equals(name)) {
             result.add(currentPerson);
@@ -34,6 +39,7 @@ public class Familytree {
             searchPersonsByNameRecursive(child, name, result);
         }
     }
+*/
 
     public void printFamilyTree() {
         printFamilyTreeRecursive(rootPerson, 0);
@@ -49,4 +55,7 @@ public class Familytree {
             printFamilyTreeRecursive(child, level + 1);
         }
     }
+
+    //============================================================
+
 }

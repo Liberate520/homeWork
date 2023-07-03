@@ -1,34 +1,64 @@
 package familytree;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Person {
+public class Person implements Serializable{
     private String name;
     private String surname;
     private String dateOfBirth;
     private String dateOfDeath;
     private String gender;
-    List<Person> parents;
-    List<Person> partners;
-    List<Person> children;
+    private String status;
+    private List<Person> parents;
+    private List<Person> partners;
+    private List<Person> children;
+
 
 
     //---Создаем коструктор---------------
     public Person(String name, String surname, String dateOfBirth
-            , String dateOfDeath, String gender
+            , String dateOfDeath, String gender, String status
             ) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;  //---может быть пустым/null, если человек жив
         this.gender = gender;
+        this.status=status;
         this.parents = new ArrayList<>(); //----может быть пустым/null, если родители неизвестны
         this.partners = new ArrayList<>();//----список людей, с которыми он/она состояла/состоит в браке
         this.children = new ArrayList<>();//---список детей
     }
 
+    public Person(String name, String surname, String dateOfBirth, String gender) {
+        this(name,surname,dateOfBirth,null,gender,null);
+        this.parents=new ArrayList<>();
+        this.partners=new ArrayList<>();
+        this.children = new ArrayList<>();
+    }
+
+    public Person(String name, String dateOfBirth) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Person(String status) {
+        this.status = status;
+    }
     //---Геттеры и Сеттеры----------------
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    //-------------------------------------
 
     public String getName() {
         return name;
@@ -95,13 +125,25 @@ public class Person {
     }
 
     //----Методы для добавления/удаления
-
+/**
+ *Добавление родителей
+ */
     public void addParent(Person parent){
         parents.add(parent);
     }
+
+    /**
+     * Удаление родителей
+     * @param parent
+     */
     public void removeParent(Person parent){
         parents.remove(parent);
     }
+
+    /**
+     * Изменение Родственников
+     * @param partner
+     */
     public void addPartner(Person partner){
         partners.add(partner);
     }
@@ -114,16 +156,27 @@ public class Person {
     public void removeChild(Person child){
         children.remove(child);
     }
-    //--Проверка жив человек или нет
+    public void addStatus(Person status){
+        children.add(status);
+    }
+    public void removeStatus(Person status){
+        children.remove(status);
+    }
+
+
+    /**
+     * Проверка жив человек или нет
+     * @return
+     */
     public boolean isAlive(){
         return dateOfDeath==null||dateOfDeath.isEmpty();
     }
-    //---Методы для получения списка предков и потомков
+   /* //---Методы для получения списка предков и потомков
     public List<Person> getAncestors(){
         List<Person> ancestors = new ArrayList<>();
         for(Person parent : partners){
             ancestors.add(parent);
-            ancestors.addAll(parent.getAncestors());
+            //ancestors.addAll(parent.getAncestors());
         }
         return ancestors;
     }
@@ -131,25 +184,26 @@ public class Person {
         List<Person> descendants = new ArrayList<>();
         for(Person child : children){
             children.add(child);
-            children.addAll(child.getDescendants());
+            //children.addAll(child.getDescendants());
         }
         return descendants;
-    }
+    }*/
     //=== Методы вывода информации о людях
     public void printInfo() {
-        System.out.println("Name: " + name);
-        System.out.println("Surname: " + surname);
-        System.out.println("Date of Birth: " + dateOfBirth);
-        System.out.println("Date of Death: " + (dateOfDeath != null ? dateOfDeath : "Alive"));
-        System.out.println("Gender: " + gender);
-        System.out.println("Parents: " + parentsToString());
-        System.out.println("Partners: " + partnersToString());
-        System.out.println("Children: " + childrenToString());
+        System.out.println("Человек: " + surname + " " + name + " ");
+        //System.out.println("Фамилия: " + surname + " ");
+        System.out.println("Дата рождения: " + dateOfBirth + " ");
+        System.out.println("Дата смерти: " + (dateOfDeath != null ? dateOfDeath : "Живой" + " "));
+        System.out.println("Пол: " + gender + " ");
+        System.out.println("Родители: " + parentsToString());
+        System.out.println("Родственники: " + partnersToString());
+        System.out.println("Дети: " + childrenToString());
+        System.out.println("----------------------------------------");
     }
 
     private String parentsToString() {
         if (parents.isEmpty()) {
-            return "Unknown";
+            return "Неизвестный";
         }
         StringBuilder sb = new StringBuilder();
         for (Person parent : parents) {
@@ -160,7 +214,7 @@ public class Person {
     }
     private String partnersToString() {
         if (partners.isEmpty()) {
-            return "None";
+            return "Нет родственников";
         }
         StringBuilder sb = new StringBuilder();
         for (Person partner : partners) {
@@ -171,7 +225,7 @@ public class Person {
     }
     private String childrenToString() {
         if (children.isEmpty()) {
-            return "None";
+            return "Нет";
         }
         StringBuilder sb = new StringBuilder();
         for (Person child : children) {
@@ -179,6 +233,18 @@ public class Person {
         }
         sb.setLength(sb.length() - 2); // Remove the last comma and space
         return sb.toString();
+    }
+    //==================================================
+
+    @Override
+    public String toString() {
+        return "Человек: " +
+                "Фамилия = '" + surname + '\'' +
+                ", Имя = '" + name + '\'' +
+                ", Дата рождения =" + " " + dateOfBirth +
+                ", Дата смерти =" +" "+ dateOfDeath  +
+                ", Пол =" + gender +
+                " ";
     }
 
 }
