@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
  import java.util.List;
  import java.util.Objects;
 
- public class FamilyTree {
+ public class FamilyTree implements Serializable {
      private List<Human> humans;
 
      public FamilyTree() {
@@ -11,6 +12,12 @@ import java.util.ArrayList;
 
      public void addHuman(Human human) {
          humans.add(human);
+         if (human.getMother() != null) {
+             human.getMother().addChild(human);
+         }
+         if (human.getFather() != null) {
+             human.getFather().addChild(human);
+         }
      }
 
      public List<Human> getHumans() {
@@ -46,14 +53,8 @@ import java.util.ArrayList;
      }
 
      public List<Human> getChildren(Human human) {
-         List<Human> children = new ArrayList<>();
+         return human.getChildren();
 
-         List<Human> humanChildren = human.getChildren();
-         if (humanChildren != null) {
-             children.addAll(humanChildren);
-         }
-
-         return children;
      }
 
      public List<Human> getDescendants(Human human) {
@@ -95,5 +96,17 @@ import java.util.ArrayList;
      @Override
      public int hashCode() {
          return Objects.hash(humans);
+     }
+
+     @Override
+     public String toString(){
+         StringBuilder sb = new StringBuilder();
+         sb.append("В дереве ");
+         sb.append(humans);
+         sb.append(" объектов: /n");
+         for (Human human: humans){
+             sb.append(humans.toString());           
+         }
+         return sb.toString();
      }
  }

@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDate;
- import java.util.List;
- import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
- public class Human {
+ public class Human implements Serializable {
      private String firstName;
      private String lastName;
      private LocalDate birthDate;
@@ -12,28 +14,23 @@ import java.time.LocalDate;
      private List<Human> children;
      private List<Human> brothers;
      private List<Human> sisters;
-     private FamilyTree familyTree;
 
      public Human(String firstName, String lastName, LocalDate birthDate, Gender gender) {
          this.firstName = firstName;
          this.lastName = lastName;
          this.birthDate = birthDate;
          this.gender = gender;
+         this.children = new ArrayList<>();
      }
 
      public Human(String firstName, String lastName, LocalDate birthDate, Gender gender,
-             Human mother, Human father, List<Human> children, List<Human> brothers, List<Human> sisters,
-             FamilyTree familyTree) {
-         this.firstName = firstName;
-         this.lastName = lastName;
-         this.birthDate = birthDate;
-         this.gender = gender;
+             Human mother, Human father, List<Human> children, List<Human> brothers, List<Human> sisters) {
+         this(firstName, lastName, birthDate, gender);
          this.mother = mother;
          this.father = father;
          this.children = children;
          this.brothers = brothers;
          this.sisters = sisters;
-         this.familyTree = familyTree;
      }
 
      public String getFirstName() {
@@ -84,6 +81,15 @@ import java.time.LocalDate;
          this.father = father;
      }
 
+     public void addChild(Human child) {
+         if (this.gender == Gender.MALE) {
+             child.setFather(this);
+         } else if (this.gender == Gender.FEMALE) {
+             child.setMother(this);
+         }
+         children.add(child);
+     }
+
      public List<Human> getChildren() {
          return children;
      }
@@ -108,14 +114,6 @@ import java.time.LocalDate;
          this.sisters = sisters;
      }
 
-      public FamilyTree getFamilyTree() {
-         return familyTree;
-     }
-
-     public void setFamilyTree(FamilyTree familyTree) {
-         this.familyTree = familyTree;
-     }
-
      @Override
      public boolean equals(Object o) {
          if (this == o)
@@ -127,12 +125,12 @@ import java.time.LocalDate;
                  && Objects.equals(birthDate, human.birthDate) && gender == human.gender
                  && Objects.equals(mother, human.mother) && Objects.equals(father, human.father)
                  && Objects.equals(children, human.children) && Objects.equals(brothers, human.brothers)
-                 && Objects.equals(sisters, human.sisters) && Objects.equals(familyTree, human.familyTree);
+                 && Objects.equals(sisters, human.sisters);
      }
 
      @Override
      public int hashCode() {
-         return Objects.hash(firstName, lastName, birthDate, gender, mother, father, children, brothers, sisters, familyTree);
+         return Objects.hash(firstName, lastName, birthDate, gender, mother, father, children, brothers, sisters);
      }
 
      @Override
