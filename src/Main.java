@@ -18,7 +18,7 @@ public class Main {
         FamilyTree familyTest;
 
         try {
-            FamilyTree[] families = FamilySerialize.DeSerialize();
+            FamilyTree[] families = FamilySerialize.deserialize();
             familyBeta = families[0];
             familyTest = families[1];
             anna = familyBeta.getPersonById(0);
@@ -65,7 +65,7 @@ public class Main {
         try {
             File file = new File(FamilySerialize.FILE_PATH);
             if (!file.exists()) {
-                FamilySerialize.Serialize(familyBeta);
+                FamilySerialize.serialize(familyBeta);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,13 +1,16 @@
 package FamilyTree;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
-public class FamilyTree implements Serializable {
+import FamilyTree.Iterators.PersonIterator;
+
+public class FamilyTree implements Serializable, Iterable<Person> {
 
     private String sename;
     private List<Person> persons;
@@ -19,10 +22,6 @@ public class FamilyTree implements Serializable {
 
     public String getSename() {
         return this.sename;
-    }
-
-    public List<Person> getPersons() {
-        return this.persons;
     }
 
     public Person getPersonById(int id) {
@@ -112,5 +111,10 @@ public class FamilyTree implements Serializable {
             addPerson(person, allRelatives);
         }
         return true;
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(persons);
     }
 }
