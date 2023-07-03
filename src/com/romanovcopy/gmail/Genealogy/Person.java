@@ -1,4 +1,4 @@
-package com.romanovcopy.gmail_Genealogy;
+package com.romanovcopy.gmail.Genealogy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

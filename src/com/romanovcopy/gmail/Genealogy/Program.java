@@ -1,9 +1,8 @@
-package com.romanovcopy.gmail_Genealogy;
+package com.romanovcopy.gmail.Genealogy;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Program {
@@ -134,7 +133,7 @@ public class Program {
      * получение ввода в виде строки
      * @param scanner поток доступа к консоли
      * @param text текст запроса
-     * @param neeLine переход на новую строку после текста запроса
+     * @param newLine переход на новую строку после текста запроса
      * @return строка введенная пользователем
      */
     private static String requestString(Scanner scanner, String text, boolean newLine) {
@@ -149,7 +148,7 @@ public class Program {
      * получение ввода в виде целого числа
      * @param scanner поток доступа к консоли
      * @param text текст запроса
-     * @param neeLine переход на новую строку после текста запроса
+     * @param newLine переход на новую строку после текста запроса
      * @return число введенное пользователем
      */
     private static int requestInt(Scanner scanner, String text, boolean newLine) {
@@ -164,7 +163,7 @@ public class Program {
      * получение ввода в виде даты (LocalDate)
      * @param scanner поток доступа к консоли
      * @param text текст запроса
-     * @param neeLine переход на новую строку после текста запроса
+     * @param newLine переход на новую строку после текста запроса
      * @return дата введенная пользователем
      */
     private static LocalDate requestDate(Scanner scanner, String text, boolean newLine){
