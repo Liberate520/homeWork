@@ -8,7 +8,7 @@ import java.util.List;
 import FamilyTree.Structs.Gender;
 import FamilyTree.interfaces.Marrieble;
 
-public class Person implements Marrieble, Serializable {
+public class Person implements Marrieble, Serializable, Comparable<Person> {
 
     private int id;
     private String name;
@@ -136,6 +136,11 @@ public class Person implements Marrieble, Serializable {
                 + (getSename().isEmpty() ? "" : " " + getSename())
                 + ", пол: " + this.gender + ", дата рождения: " + dateBirth
                 + (this.dateDaeth != null ? "Дата смерти:" + this.dateDaeth : "");
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return this.name.compareTo(o.name);
     }
 
 }

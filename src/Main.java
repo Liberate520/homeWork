@@ -1,11 +1,14 @@
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.io.File;
 
 import FamilyTree.FamilySerialize;
 import FamilyTree.FamilyTree;
 import FamilyTree.Person;
 import FamilyTree.PersonIdGenerator;
+import FamilyTree.Comparators.PersonComparatorByAge;
 import FamilyTree.Structs.Gender;
 
 public class Main {
@@ -27,7 +30,7 @@ public class Main {
             anna = new Person(idGenerator.GetNewId(), "Анна", Gender.FEMALE, LocalDate.of(1970, 1, 1));
             Person roman = new Person(idGenerator.GetNewId(), "Рома", Gender.MALE, LocalDate.of(1994, 11, 14));
             Person liza = new Person(idGenerator.GetNewId(), "Елизавета", Gender.FEMALE, LocalDate.of(1997, 1, 12));
-            Person danil = new Person(idGenerator.GetNewId(), "Даниил", Gender.MALE, LocalDate.of(2016, 1, 1));
+            Person danil = new Person(idGenerator.GetNewId(), "Даниил", Gender.MALE, LocalDate.of(2017, 3, 13));
             Person daria = new Person(idGenerator.GetNewId(), "Даша", Gender.FEMALE, LocalDate.of(2016, 1, 1));
 
             anna.addChild(roman);
@@ -57,7 +60,10 @@ public class Main {
         var map = familyTest.getAllChildren(anna);
         for (int key : map.keySet()) {
             cmdManager.PrintText("Поколение " + key + ":");
-            for (var person : map.get(key)) {
+            var thisPersons = map.get(key);
+            Collections.sort(thisPersons, new PersonComparatorByAge());
+            Collections.reverse(thisPersons);
+            for (var person : thisPersons) {
                 cmdManager.PrintText("    " + person);
             }
         }

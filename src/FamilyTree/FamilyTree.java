@@ -1,6 +1,7 @@
 package FamilyTree;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
+import FamilyTree.Comparators.PersonComparatorByAge;
+import FamilyTree.Comparators.PersonComparatorBySename;
 import FamilyTree.Iterators.PersonIterator;
 
 public class FamilyTree implements Serializable, Iterable<Person> {
@@ -74,6 +77,18 @@ public class FamilyTree implements Serializable, Iterable<Person> {
 
     public Boolean addPersonsAndRelatives(List<Person> persons) {
         return addPersons(persons, true);
+    }
+
+    public void sortByName() {
+        Collections.sort(this.persons);
+    }
+
+    public void sortByAge() {
+        Collections.sort(this.persons, new PersonComparatorByAge());
+    }
+
+    public void sortBySename() {
+        Collections.sort(this.persons, new PersonComparatorBySename());
     }
 
     public static Boolean isOneGeneration(Person person1, Person person2) {
