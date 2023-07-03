@@ -1,19 +1,25 @@
 package com.romanovcopy.gmail.Genealogy;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class Service {
+public class Service extends BasicMethods{
 
     private Scanner scanner;
+    private HashMap<String, GenealogyGraph>genealogyGraphHashMap;
 
-    public Service(Scanner scanner, GenealogyGraph graph){
+
+
+    public Service(Scanner scanner){
         this.scanner=scanner;
-        selectMode(graph);
     }
 
+    /**
+     * работа с деревом
+     * @param graph дерево
+     */
     public void selectMode(GenealogyGraph graph) {
         boolean flag = true;
         int mode = 0;
@@ -56,6 +62,11 @@ public class Service {
                         default: {
                             System.out.println("Неизвестный выбор.\nПовторите ввод.");
                         }
+                    }
+                    if(!updateGenealogyGraph(graph)){
+                        System.out.println("Дерево не было обновлено.");
+                    }else {
+                        System.out.println("Дерево успешно обновлено");
                     }
                 }
             }
@@ -115,90 +126,101 @@ public class Service {
             birthDay=requestDate(scanner,"Дата рождения в формате дд.мм.гггг :", false);
             flag=birthDay==null;
         }
-        person=new Person(name, surName, patronymic,birthDay,gender,maritalStatus);
-        return person;
-    }
-
-    private Person personEditing(Scanner scanner, GenealogyGraph graph) {
-        Person person = null;
-        System.out.println("Редактировать граф");
-        var str = requestString(scanner, "Строка поиска : ", false);
-        var listSelcted = graph.search(str);
-        printPersons(listSelcted);
-        person = listSelcted.get(requestInt(scanner, "Выберите номер персонажа : ", false) - 1);
+        person=new Person(surName, name, patronymic,birthDay,gender,maritalStatus);
         return person;
     }
 
     /**
-     * получение ввода в виде строки
-     * @param scanner поток доступа к консоли
-     * @param text текст запроса
-     * @param newLine переход на новую строку после текста запроса
-     * @return строка введенная пользователем
+     * запуск программы
      */
-    private String requestString(Scanner scanner, String text, boolean newLine) {
-        newLine(text, newLine);
-        String result=null;
-        if (scanner.hasNext()) {
-            result= scanner.next();}
-        return result;
-    }
-
-    /**
-     * получение ввода в виде целого числа
-     * @param scanner поток доступа к консоли
-     * @param text текст запроса
-     * @param newLine переход на новую строку после текста запроса
-     * @return число введенное пользователем
-     */
-    private int requestInt(Scanner scanner, String text, boolean newLine) {
-        newLine(text, newLine);
-        int result = 0;
-        if (scanner.hasNextInt()) {
-            result = scanner.nextInt();}
-        return result;
-    }
-
-    /**
-     * получение ввода в виде даты (LocalDate)
-     * @param scanner поток доступа к консоли
-     * @param text текст запроса
-     * @param newLine переход на новую строку после текста запроса
-     * @return дата введенная пользователем
-     */
-    private LocalDate requestDate(Scanner scanner, String text, boolean newLine){
-        newLine(text, newLine);
-        // Устанавливаем формат даты, который ожидаем от пользователя
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String birthDay=scanner.next();
-        try {
-            // Преобразовываем введенную строку в объект LocalDate с использованием заданного формата
-            LocalDate date = LocalDate.parse(birthDay, dateFormatter);
-            return date;
-        } catch (Exception e) {
-            System.out.println("Некорректный формат даты.");
-            return null;
+    public void start(HashMap<String, GenealogyGraph> genealogyGraphHashMap){
+        //создание библиотеки для хранения дервевьев
+        if(genealogyGraphHashMap==null || genealogyGraphHashMap.size()==0){
+            genealogyGraphHashMap = new HashMap<>();
+            while (!createGeneallogyGraph()){
+                if(requestInt(scanner,"0 - продолжить \n1 - выйти из программы",false)!=0){
+                    return;
+                }
+            }
         }
-    }
-
-    private void printPersons(ArrayList<Person> list){
-        for(var pers:list){
-            System.out.printf("%d %s", list.indexOf(pers)+1,pers.toString());
-            System.out.println();
+        String name=null;
+        boolean flag=true;
+        while (flag){
+            //вывод доступных деревьев
+            for(String key:genealogyGraphHashMap.keySet()){
+                System.out.println(key);
+            }
+            //запрос нужного дерева и переход к работе с ним
+            name=requestString(scanner,"Введите имя дерева из доступных : ", true);
+            if(name!=null && genealogyGraphHashMap.keySet().contains(name)){
+                    selectMode(genealogyGraphHashMap.get(name));
+            }
+            else{
+                String text = "Выйти из программы ?\n 0 - No\n1 - Yes\n2 - новое дерево";
+                //запрос на выход или создание нового дерева, если дерево не выбрано
+                int temp=requestInt(scanner,"Выйти из программы ?\n 0 - No\n1 - Yes",true);
+                flag=temp!=0;
+                if(temp==2){
+                    createGeneallogyGraph();
+                }
+            }
         }
     }
 
     /**
-     * вывод текста
-     * @param text текст
-     * @param newLine перевод на новую строку в конце строки
+     * создание нового дерева
+     * @return результат: True - удачно; False - неудачно
      */
-    private void newLine(String text, boolean newLine){
-        if(newLine){
-            System.out.println(text);
-        }else {
-            System.out.print(text);
+    public boolean createGeneallogyGraph() {
+        System.out.println("Будет создано новое генеалогическое дерево.\n");
+        String name = requestString(scanner, "Присвойте ему имя : ", false);
+        if (name != null && name.length() > 3) {
+            if (genealogyGraphHashMap.keySet().contains(name)) {
+                System.out.println("Дерево с таким именем уже существует.");
+                return false;
+            } else {
+                GenealogyGraph graph=new GenealogyGraph();
+                genealogyGraphHashMap.put(name,graph);
+                selectMode(graph);
+            }
+        } else {
+            return false;
         }
+        return true;
+    }
+
+    /**
+     * обновление заданного дерева в библиотеке
+     * @param graph обновляемое дерево
+     * @return результат выполнения
+     */
+    public boolean updateGenealogyGraph(GenealogyGraph graph){
+        if(genealogyGraphHashMap.containsValue(graph)){
+            String key=getKeyByValue(genealogyGraphHashMap,graph);
+            if(key!=null){
+                genealogyGraphHashMap.put(key,graph);
+            }else {
+                return false;
+            }
+        }
+        return  true;
+    }
+
+    /**
+     * удаление дерева
+     * @param graph удаляемое дерево
+     * @return результат выполнения
+     */
+    public boolean removeGenealogyGraph(GenealogyGraph graph){
+        if(genealogyGraphHashMap.containsValue(graph)){
+            String key=getKeyByValue(genealogyGraphHashMap,graph);
+            if(key!=null){
+                genealogyGraphHashMap.remove(key);
+            }else {
+                return false;
+            }
+        }
+        return  true;
     }
 
 }

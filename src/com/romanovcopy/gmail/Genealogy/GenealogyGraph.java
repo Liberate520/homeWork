@@ -54,7 +54,7 @@ public class GenealogyGraph {
 
     /**
      * поиск объектов по совпадению строк
-     * @param surname строка поиска
+     * @param searchKey строка поиска
      * @return список найденных объектов
      */
     public ArrayList<Person>search(String searchKey){

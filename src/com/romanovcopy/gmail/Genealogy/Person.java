@@ -2,6 +2,8 @@ package com.romanovcopy.gmail.Genealogy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class Person {
@@ -19,7 +21,7 @@ public class Person {
 
 
 
-    public Person(String name, String surname, String patronymic, LocalDate dateOfBirth, Gender gender, MaritalStatus maritalStatus) {
+    public Person(String surname, String name, String patronymic, LocalDate dateOfBirth, Gender gender, MaritalStatus maritalStatus) {
         this.name = name;
         this.surname = surname;
         this.patronymic=patronymic;
@@ -82,4 +84,5 @@ public class Person {
         stringBuilder.append("Семейное положение: ").append(maritalStatus).append("\n");
         return stringBuilder.toString();
     }
+
 }
