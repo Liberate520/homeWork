@@ -1,12 +1,13 @@
 package com.romanovcopy.gmail.Genealogy;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class GenealogyGraph {
+public class GenealogyGraph implements Serializable {
 
-    private Map<String, Person> people;
+    private HashMap<String, Person> people;
 
     public GenealogyGraph() {
         this.people = new HashMap<>();
@@ -61,15 +62,49 @@ public class GenealogyGraph {
         var myKey=searchKey.toLowerCase();
         ArrayList<Person>list=new ArrayList<>();
         for (String key : people.keySet()) {
-            var persone=people.get(key);
-            boolean res=persone.getSurname().toLowerCase().contains(myKey)||
-                    persone.getName().toLowerCase().contains(myKey)||
-                    persone.getPatronymic().toLowerCase().contains(myKey);
+            var person=people.get(key);
+            boolean res=person.getSurname().toLowerCase().contains(myKey)||
+                    person.getName().toLowerCase().contains(myKey)||
+                    person.getPatronymic().toLowerCase().contains(myKey);
             if(res){
-                list.add(persone);
+                list.add(person);
             }
         }
         return list;
+    }
+
+    /**
+     * замена объектов
+     * @param lastObject старый объект
+     * @param newObject новый объект
+     */
+    public void replace(Person lastObject, Person newObject){
+        var key=getKey(lastObject);
+        people.put(key,newObject);
+    }
+
+    /**
+     * получить ключ по значению
+     * @param person значение
+     * @return ключ
+     */
+    public String getKey(Person person){
+        return getKeyByValue(people,person);
+    }
+
+    /**
+     * получение ключа в библиотеке по значению
+     * @param map библиотека
+     * @param person значение
+     * @return ключ или null, если дерево не найдено
+     */
+    private String getKeyByValue(HashMap<String, Person>map, Person person){
+        for (var entry : map.entrySet()) {
+            if (person.equals(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
 

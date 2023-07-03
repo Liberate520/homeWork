@@ -1,6 +1,5 @@
 package com.romanovcopy.gmail.Genealogy;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -10,10 +9,15 @@ public class Service extends BasicMethods{
     private Scanner scanner;
     private HashMap<String, GenealogyGraph>genealogyGraphHashMap;
 
-
-
-    public Service(Scanner scanner){
-        this.scanner=scanner;
+    public Service(){
+        scanner=new Scanner(System.in);
+        //считывание файла с диска
+        var reader=new ReadStrem(Program.path);
+        genealogyGraphHashMap=(HashMap<String, GenealogyGraph>) reader.read();
+        if(genealogyGraphHashMap==null){
+            genealogyGraphHashMap=new HashMap<>();
+        }
+        start();
     }
 
     /**
@@ -39,7 +43,7 @@ public class Service extends BasicMethods{
                     switch (mode) {
                         case 1: {
                             System.out.println("Новый граф");
-                            var person=createPerson(scanner);
+                            var person=createPerson();
                             if(person!=null){
                                 graph.addPerson(person);
                             }
@@ -59,6 +63,9 @@ public class Service extends BasicMethods{
 
                             break;
                         }
+                        case 0:{
+                            return;
+                        }
                         default: {
                             System.out.println("Неизвестный выбор.\nПовторите ввод.");
                         }
@@ -75,10 +82,9 @@ public class Service extends BasicMethods{
 
     /**
      * Создание нового персонажа
-     * @param scanner поток чтения с консоли
      * @return новый персонаж
      */
-    private Person createPerson(Scanner scanner) {
+    private Person createPerson() {
         boolean flag=true;
         Person person = null;
         String surName = null;
@@ -131,13 +137,42 @@ public class Service extends BasicMethods{
     }
 
     /**
+     * редактирование
+     * @param scanner поток считывания с консоли
+     * @param graph редактируемое дерево
+     * @return
+     */
+    public Person personEditing(Scanner scanner, GenealogyGraph graph) {
+        Person person = null;
+        System.out.println("Редактировать граф");
+        var str = requestString(scanner, "Строка поиска : ", false);
+        var listSelected = graph.search(str);
+        printPersons(listSelected);
+        person = listSelected.get(requestInt(scanner, "Выберите номер персонажа : ", false) - 1);
+        if(person!=null){
+            String key= graph.getKey(person);
+            listSelected=new ArrayList<>();
+            listSelected.add(person);
+            printPersons(listSelected);
+            Person person1=createPerson();
+            System.out.println();
+            if(requestInt(scanner, "Сохранить изменения? 1 - да, 0 - нет", false)>0){
+                graph.replace(person,person1);
+            }
+        }
+
+        return person;
+    }
+
+
+    /**
      * запуск программы
      */
-    public void start(HashMap<String, GenealogyGraph> genealogyGraphHashMap){
+    public void start(){
         //создание библиотеки для хранения дервевьев
         if(genealogyGraphHashMap==null || genealogyGraphHashMap.size()==0){
             genealogyGraphHashMap = new HashMap<>();
-            while (!createGeneallogyGraph()){
+            while (!createGenealogyGraph()){
                 if(requestInt(scanner,"0 - продолжить \n1 - выйти из программы",false)!=0){
                     return;
                 }
@@ -161,7 +196,7 @@ public class Service extends BasicMethods{
                 int temp=requestInt(scanner,"Выйти из программы ?\n 0 - No\n1 - Yes",true);
                 flag=temp!=0;
                 if(temp==2){
-                    createGeneallogyGraph();
+                    createGenealogyGraph();
                 }
             }
         }
@@ -171,7 +206,7 @@ public class Service extends BasicMethods{
      * создание нового дерева
      * @return результат: True - удачно; False - неудачно
      */
-    public boolean createGeneallogyGraph() {
+    public boolean createGenealogyGraph() {
         System.out.println("Будет создано новое генеалогическое дерево.\n");
         String name = requestString(scanner, "Присвойте ему имя : ", false);
         if (name != null && name.length() > 3) {
@@ -221,6 +256,11 @@ public class Service extends BasicMethods{
             }
         }
         return  true;
+    }
+
+    public boolean close(){
+        var stream=new WriteStrem(Program.path);
+        return stream.write(genealogyGraphHashMap);
     }
 
 }

@@ -8,16 +8,6 @@ import java.util.Scanner;
 
 public abstract class BasicMethods {
 
-    public Person personEditing(Scanner scanner, GenealogyGraph graph) {
-        Person person = null;
-        System.out.println("Редактировать граф");
-        var str = requestString(scanner, "Строка поиска : ", false);
-        var listSelected = graph.search(str);
-        printPersons(listSelected);
-        person = listSelected.get(requestInt(scanner, "Выберите номер персонажа : ", false) - 1);
-
-        return person;
-    }
 
     /**
      * получение ввода в виде строки
@@ -92,9 +82,9 @@ public abstract class BasicMethods {
     }
 
     /**
-     * получение ключа по дереву
-     * @param map библиотека деревьев
-     * @param value дерево
+     * получение ключа в библиотеке по значению
+     * @param map библиотека
+     * @param value значение
      * @return ключ или null, если дерево не найдено
      */
     public String getKeyByValue(HashMap<String,GenealogyGraph> map, GenealogyGraph value) {
@@ -105,5 +95,6 @@ public abstract class BasicMethods {
         }
         return null;
     }
+
 
 }

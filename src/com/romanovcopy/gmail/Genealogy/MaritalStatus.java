@@ -1,6 +1,8 @@
 package com.romanovcopy.gmail.Genealogy;
 
-public enum MaritalStatus {
+import java.io.Serializable;
+
+public enum MaritalStatus implements Serializable {
 
     SINGLE, // Не женат/не замужем
     MARRIED, // Женат/замужем
