@@ -1,6 +1,5 @@
 public class Main {
     public static void main(String[] args){
-        FamilyTree FamilyTree = new FamilyTree();
         Human human1 = new Human(Gender.Male);
         human1.setName("father");
         System.out.println(human1.getName());
@@ -10,6 +9,5 @@ public class Main {
         Human human3 = new Human(Gender.Female);
         human3.setName("child");
         System.out.println(human3.getName());
-        System.out.println(FamilyTree.getHumanInfo());
     }
 }
