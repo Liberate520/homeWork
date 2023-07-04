@@ -34,7 +34,7 @@ public class Service extends BasicMethods{
             System.out.println("3 - Просмотр графа.");
             System.out.println("4 - Удалить граф.");
             System.out.println("5 - Вывести все графы");
-            System.out.println("0 - Выход");
+            System.out.println("0 - Сохранить");
             System.out.println("Введите номер режима : ");
             if (scanner.hasNextInt()) {
                 mode = Math.abs(scanner.nextInt());
@@ -64,7 +64,9 @@ public class Service extends BasicMethods{
                             break;
                         }
                         case 0:{
-                            return;
+                            var write=new WriteStrem(Program.path);
+                            write.write(genealogyGraphHashMap);
+                            break;
                         }
                         default: {
                             System.out.println("Неизвестный выбор.\nПовторите ввод.");
