@@ -15,18 +15,14 @@ public class Main {
         Timofei.addParent(Ekaterina);
         Zahar.addParent(Аlexander);
         Zahar.addParent(Ekaterina);
-
-      
         familyTree.addHuman(Аlexander);
         familyTree.addHuman(Ekaterina);
         familyTree.addHuman(Timofei);
         familyTree.addHuman(Zahar);
-
         List<Human> АlexandersChildren = familyTree.getAllChildren(Аlexander);
         System.out.println("Аlexander's children:");
         for (Human child : АlexandersChildren) {
-            System.out.println(child.getName());
-           
+            System.out.println(child.getName());          
         }
     }
 }
