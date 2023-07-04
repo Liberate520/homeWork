@@ -61,7 +61,7 @@ class FamilyTree {
 
     private void addToSpouse(Human human){
         if (human.getSpouse()!= null){
-            human.addSpouse(human);
+            human.addSpouse(human.getSpouse());
 
 
         }
