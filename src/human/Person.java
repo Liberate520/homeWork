@@ -1,9 +1,10 @@
 package human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private static int counter = 0;
     private int id;
     private String firstName;

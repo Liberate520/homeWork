@@ -1,5 +1,10 @@
 import human.Person;
 import human.GenealogyTree;
+
+import java.io.IOException;
+
+import fileHandler.*;
+
 public class Main {
     public static void main(String[] args) {
         Person person1 = new Person("Виктор", "Николаев");
@@ -51,9 +56,34 @@ public class Main {
         tree.addPerson(person6);
         tree.addPerson(person7);
 
+//        Работаем с деревом
 
         tree.showTree();
         tree.findPerson("Виктор", "Николаев");
         tree.printGenealogyTree(person1);
+
+//        Сохраняем дерево в текстовый файл
+
+        Writeable save = new SaveLoadFile();
+        try {
+            save.saveToFile("family_tree.txt", tree);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+//        Загружаем дерево из текстового файла
+
+        System.out.println();
+
+        Writeable load = new SaveLoadFile();
+        try {
+            GenealogyTree loadedTree = load.loadFromFile("family_tree.txt");
+            Person person8 = new Person("Иван", "Иванов");
+            person7.addChild(person8);
+            loadedTree.addPerson(person8);
+            loadedTree.printGenealogyTree(person1);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

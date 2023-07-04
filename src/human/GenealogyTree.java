@@ -1,16 +1,19 @@
 package human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenealogyTree {
+public class GenealogyTree implements Serializable {
     private List<Person> people;
 
-    public GenealogyTree() {
+    public GenealogyTree()
+    {
         this.people = new ArrayList<>();
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(Person person)
+    {
         people.add(person);
     }
 
