@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
 //Класс регистрации брака между двумя людьми
-public class Marriage {
+public class Marriage implements Serializable {
     private int id;
     private LocalDate startDate, endDate;
     private Human wife, husband;
