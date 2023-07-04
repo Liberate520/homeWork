@@ -107,7 +107,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
     private Boolean addPerson(Person person, Boolean allRelatives) {
         if (person != null && !this.persons.contains(person)) {
             this.persons.add(person);
-            person.setFamily(this);
+            person.setSename(this);
         } else {
             return false;
         }
@@ -128,8 +128,13 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return true;
     }
 
+    public boolean contains(Person person) {
+        return this.persons.contains(person);
+    }
+
     @Override
     public Iterator<Person> iterator() {
         return new PersonIterator(persons);
     }
+
 }

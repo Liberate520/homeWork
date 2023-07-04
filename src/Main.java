@@ -17,12 +17,11 @@ public class Main {
 
         Person anna;
         FamilyTree familyBeta;
-        FamilyTree familyTest;
+        FamilyTree familyTest = new FamilyTree("Тестенюк");
+        ;
 
         try {
-            FamilyTree[] families = FamilySerialize.deserialize();
-            familyBeta = families[0];
-            familyTest = families[1];
+            familyBeta = FamilySerialize.deserialize();
             anna = familyBeta.getPersonById(0);
         } catch (Exception e) {
             var idGenerator = new PersonIdGenerator();
@@ -49,7 +48,6 @@ public class Main {
             familyBeta = new FamilyTree("Бетта");
             familyBeta.addPersonAndRelatives(liza);
 
-            familyTest = new FamilyTree("Тестенюк");
             familyTest.addPersonAndRelatives(ivan);
             ivan.addSpouse(liza, LocalDate.of(2021, 1, 25));
             ivan.addChild(katia);

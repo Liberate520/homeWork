@@ -12,7 +12,7 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
 
     private int id;
     private String name;
-    private FamilyTree family;
+    private String sename;
     private Gender gender;
     private Marrieble spouse;
 
@@ -45,8 +45,13 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
         return this.name;
     }
 
+    public void setSename(FamilyTree family) {
+        if (family.contains(this))
+            this.sename = family.getSename();
+    }
+
     public String getSename() {
-        return this.family != null ? this.family.getSename() : "";
+        return this.sename != null ? this.sename : "";
     }
 
     public LocalDate getDateBirth() {
@@ -69,16 +74,12 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
         return parrents;
     }
 
-    public FamilyTree getFamilyTree() {
-        return this.family;
+    public String getFamilyTree() {
+        return this.sename;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setFamily(FamilyTree family) {
-        this.family = family;
     }
 
     public Boolean addChild(Person child) {
@@ -87,9 +88,9 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
                 !this.children.contains(child)) {
             this.children.add(child);
             child.addParrent(this);
-            if (this.family != null &&
-                    child.family == null) {
-                child.setFamily(this.family);
+            if (this.sename != null &&
+                    child.sename == null) {
+                child.setSenameFromParrent(this.sename);
             }
             if (this.spouse != null) {
                 spouse.addChild(child);
@@ -141,6 +142,10 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
     @Override
     public int compareTo(Person o) {
         return this.name.compareTo(o.name);
+    }
+
+    private void setSenameFromParrent(String sename) {
+        this.sename = sename;
     }
 
 }
