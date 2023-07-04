@@ -2,14 +2,14 @@ package com.romanovcopy.gmail.Genealogy;
 
 import java.io.*;
 
-public class ReadStrem {
+public class ReadStream {
     String path;
 
     /**
      * создание потока считывания с диска
      * @param path путь к считываемому файлу
      */
-    public ReadStrem( String path){
+    public ReadStream(String path){
         this.path=path;
     }
 

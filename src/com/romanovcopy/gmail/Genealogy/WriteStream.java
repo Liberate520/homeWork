@@ -2,10 +2,10 @@ package com.romanovcopy.gmail.Genealogy;
 
 import java.io.*;
 
-public class WriteStrem {
+public class WriteStream {
     private String path;
 
-    public WriteStrem(String path) {
+    public WriteStream(String path) {
         this.path = path;
     }
 

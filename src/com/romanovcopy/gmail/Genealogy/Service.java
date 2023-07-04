@@ -12,7 +12,7 @@ public class Service extends BasicMethods{
     public Service(){
         scanner=new Scanner(System.in);
         //считывание файла с диска
-        var reader=new ReadStrem(Program.path);
+        var reader=new ReadStream(Program.path);
         genealogyGraphHashMap=(HashMap<String, GenealogyGraph>) reader.read();
         if(genealogyGraphHashMap==null){
             genealogyGraphHashMap=new HashMap<>();
@@ -64,7 +64,7 @@ public class Service extends BasicMethods{
                             break;
                         }
                         case 0:{
-                            var write=new WriteStrem(Program.path);
+                            var write=new WriteStream(Program.path);
                             write.write(genealogyGraphHashMap);
                             break;
                         }
@@ -261,7 +261,7 @@ public class Service extends BasicMethods{
     }
 
     public boolean close(){
-        var stream=new WriteStrem(Program.path);
+        var stream=new WriteStream(Program.path);
         return stream.write(genealogyGraphHashMap);
     }
 
