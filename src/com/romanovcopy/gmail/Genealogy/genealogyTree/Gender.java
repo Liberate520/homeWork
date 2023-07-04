@@ -1,4 +1,4 @@
-package com.romanovcopy.gmail.Genealogy;
+package com.romanovcopy.gmail.Genealogy.genealogyTree;
 
 import java.io.Serializable;
 

@@ -1,11 +1,13 @@
-package com.romanovcopy.gmail.Genealogy;
+package com.romanovcopy.gmail.Genealogy.genealogyTree;
+
+import com.romanovcopy.gmail.Genealogy.comparatorsAndIterators.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class GenealogyGraph implements Serializable {
+public class GenealogyGraph implements Serializable, Iterable<Person> {
 
     private HashMap<String, Person> people;
 
@@ -14,7 +16,7 @@ public class GenealogyGraph implements Serializable {
     }
 
     public void addPerson(Person person) {
-        people.put(createId(), person);
+        people.put(person.getId(), person);
     }
 
     /**
@@ -52,6 +54,30 @@ public class GenealogyGraph implements Serializable {
         }
         return Collections.emptyList();
     }
+    /**
+     * получить ключ по значению
+     * @param person значение
+     * @return ключ
+     */
+    public String getKey(Person person){
+        return getKeyByValue(people,person);
+    }
+
+    /**
+     * получение ключа в библиотеке по значению
+     * @param map библиотека
+     * @param person значение
+     * @return ключ или null, если дерево не найдено
+     */
+    private String getKeyByValue(HashMap<String, Person>map, Person person){
+        for (var entry : map.entrySet()) {
+            if (person.equals(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
 
     /**
      * поиск объектов по совпадению строк
@@ -83,40 +109,11 @@ public class GenealogyGraph implements Serializable {
         people.put(key,newObject);
     }
 
-    /**
-     * получить ключ по значению
-     * @param person значение
-     * @return ключ
-     */
-    public String getKey(Person person){
-        return getKeyByValue(people,person);
+
+
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(people);
     }
-
-    /**
-     * получение ключа в библиотеке по значению
-     * @param map библиотека
-     * @param person значение
-     * @return ключ или null, если дерево не найдено
-     */
-    private String getKeyByValue(HashMap<String, Person>map, Person person){
-        for (var entry : map.entrySet()) {
-            if (person.equals(entry.getValue())) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
-
-    /**
-     * генерация ключа исходя из текущей даты
-     * @return
-     */
-    private String createId(){
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = currentDateTime.format(formatter);
-        return formattedDateTime;
-    }
-
 }

@@ -1,4 +1,11 @@
 package com.romanovcopy.gmail.Genealogy;
+import com.romanovcopy.gmail.Genealogy.genealogyTree.Gender;
+import com.romanovcopy.gmail.Genealogy.genealogyTree.GenealogyGraph;
+import com.romanovcopy.gmail.Genealogy.genealogyTree.MaritalStatus;
+import com.romanovcopy.gmail.Genealogy.genealogyTree.Person;
+import com.romanovcopy.gmail.Genealogy.serialization.ReadStream;
+import com.romanovcopy.gmail.Genealogy.serialization.WriteStream;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;

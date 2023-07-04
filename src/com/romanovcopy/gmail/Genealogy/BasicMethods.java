@@ -1,5 +1,8 @@
 package com.romanovcopy.gmail.Genealogy;
 
+import com.romanovcopy.gmail.Genealogy.genealogyTree.GenealogyGraph;
+import com.romanovcopy.gmail.Genealogy.genealogyTree.Person;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -87,7 +90,7 @@ public abstract class BasicMethods {
      * @param value значение
      * @return ключ или null, если дерево не найдено
      */
-    public String getKeyByValue(HashMap<String,GenealogyGraph> map, GenealogyGraph value) {
+    public String getKeyByValue(HashMap<String, GenealogyGraph> map, GenealogyGraph value) {
         for (var entry : map.entrySet()) {
             if (value.equals(entry.getValue())) {
                 return entry.getKey();
