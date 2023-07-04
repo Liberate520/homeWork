@@ -48,7 +48,7 @@ public class Human {
         }
     }
 
-    public void createFamily(Human human1, Human human2, Human human3) {
+    public void createRelatings(Human human1, Human human2, Human human3) {
         human3.addParents(human1, human2);
         human1.addChildren(human3);
         human2.addChildren(human3);
@@ -56,9 +56,9 @@ public class Human {
 
     private String getAllChildrens() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nСписок детей:\n");
+        //stringBuilder.append("\nСписок детей:\n");
         for (Human human : children) {
-            stringBuilder.append(human);
+            stringBuilder.append(human.name);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
@@ -78,6 +78,7 @@ public class Human {
             stringBuilder.append(", Отец: " + father.name);
         }
         if (children != null) {
+            stringBuilder.append("\nСписок детей " + name + ":\n");
             stringBuilder.append(getAllChildrens());
         }
         return stringBuilder.toString();
