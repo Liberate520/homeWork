@@ -15,7 +15,7 @@ public class ReadStrem {
 
     /**
      * считывание объекта с диска
-     * @return результат считывания True - удачно False - ошибка
+     * @return object или null при ошибке
      */
     public Object read() {
         try (FileInputStream fileIn = new FileInputStream(path);
