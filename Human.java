@@ -1,25 +1,45 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Human {
-    public Human(Gender male) {
-    }
-    private int id;
-    private String name;    
-    public Human(String name){
+    private String name;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
+    private Gender gender;
+    private List<Human> parents;
+    private List<Human> children;
+    private List<Human> allPeople;
+    public Human(String name, LocalDate birthDate, Gender gender) {
         this.name = name;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.parents = new ArrayList<>();
+        this.children = new ArrayList<>();
+      ;
+    }  
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
     }
-    public String getName(){
+    public List<Human> getAllPeople() {
+        return allPeople;
+    }
+    public String getName() {
         return name;
     }
-    public int getId(){
-        return id;
+    public LocalDate getbirthDate() {
+        return birthDate;
     }
-    public void setName(String name){
-        this.name = name;
+    public Gender getGender() {
+        return gender;
     }
-    public void setId(int id) {
-        this.id = id;
+    public List<Human> getParents() {
+        return parents;
     }
-    @Override
-    public String toString(){
-        return "id: " + id + ",name: " + name;
+    public void addParent(Human parent) {
+        this.parents.add(parent);
+    }
+    public void addChild(Human child) {
+        this.children.add(child);
     }
 }

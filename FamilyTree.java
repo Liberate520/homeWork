@@ -1,20 +1,20 @@
-import java.util.List;
-
-public class FamilyTree{
-    int id;
-    int humanId;
-    List<Human> humanList;
-    public void addHuman(Human human){
-        human.setId(humanId++);
-        humanList.add(human);
+import java.util.ArrayList;
+import java.util.List;  
+public class FamilyTree {
+    private List<Human> humans;
+    public FamilyTree() {
+        humans = new ArrayList<>();
     }
-    public String getHumanInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список людей:\n");
-        for(Human human: humanList){
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
+    public void addHuman(Human human) {
+        humans.add(human);
+    } 
+    public List<Human> getAllChildren(Human parent) {
+        List<Human> children = new ArrayList<>();
+        for (Human human : humans) {
+            if (human.getParents().contains(parent)) {
+                children.add(human);
+            }
         }
-        return stringBuilder.toString();
+        return children;
     }
 }

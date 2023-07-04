@@ -1,13 +1,32 @@
+import java.time.LocalDate;
+import java.util.List;
+
 public class Main {
-    public static void main(String[] args){
-        Human human1 = new Human(Gender.Male);
-        human1.setName("father");
-        System.out.println(human1.getName());
-        Human human2 = new Human(Gender.Female);
-        human2.setName("mother");
-        System.out.println(human2.getName());
-        Human human3 = new Human(Gender.Female);
-        human3.setName("child");
-        System.out.println(human3.getName());
+    public static void main(String[] args) {
+        FamilyTree familyTree = new FamilyTree();
+
+        Human Аlexander = new Human("Аlexander", LocalDate.of(1987, 9, 21), Gender.male);
+        Human Ekaterina = new Human("Ekaterina", LocalDate.of(1985, 12, 23), Gender.FEMALE);
+        Human Timofei = new Human("Timofei", LocalDate.of(2013, 10, 06), Gender.male);
+        Human Zahar = new Human("Zahar", LocalDate.of(2017, 12, 27), Gender.FEMALE);
+        Аlexander.addChild(Zahar);
+        Аlexander.addChild(Timofei);
+        Timofei.addParent(Аlexander);
+        Timofei.addParent(Ekaterina);
+        Zahar.addParent(Аlexander);
+        Zahar.addParent(Ekaterina);
+
+      
+        familyTree.addHuman(Аlexander);
+        familyTree.addHuman(Ekaterina);
+        familyTree.addHuman(Timofei);
+        familyTree.addHuman(Zahar);
+
+        List<Human> АlexandersChildren = familyTree.getAllChildren(Аlexander);
+        System.out.println("Аlexander's children:");
+        for (Human child : АlexandersChildren) {
+            System.out.println(child.getName());
+           
+        }
     }
 }
