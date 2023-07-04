@@ -1,14 +1,57 @@
 package gb.FamilyTree.Node;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Node {
+    protected static int id;
+
+    static {
+        Node.id = 0;
+    }
+
     protected ArrayList<Node> parents;
     protected ArrayList<Node> oneLevelNodes;
+    protected ArrayList<Node> childNodes;
+    protected int uniqId;
+
+    public int getId() {
+        return this.uniqId;
+    }
+
+    public ArrayList<Node> getParents() {
+        return this.parents;
+    }
+
+    public ArrayList<Node> getOneLevelNodes() {
+        return this.oneLevelNodes;
+    }
+
+    public ArrayList<Node> getChilds() {
+        return this.childNodes;
+    }
+
+    /**
+     * Sets a reference to the brother/sister parents object.
+     * This allows you to save memory and avoid unnecessary copying between objects.
+     * 
+     * @param parents - one-level (brother/sister) parents arrayList.
+     */
+    public void setParents(ArrayList<Node> parents) {
+        this.parents = parents;
+    }
+
+    public void setChilds(ArrayList<Node> childs) {
+        this.childNodes = childs;
+    }
 
     public Node() {
+        this.uniqId = ++Node.id;
         this.parents = new ArrayList<>();
         this.oneLevelNodes = new ArrayList<>();
+        this.childNodes = new ArrayList<>();
+
+        this.oneLevelNodes.add(this);
     }
 
     /**
@@ -21,7 +64,7 @@ public class Node {
     }
 
     /**
-     * Addint the received argument to the one-level nodes.
+     * Adding the received argument to the one-level nodes.
      * In this case the oneLevel should be able to get root's parents
      * communications.
      * 
@@ -31,5 +74,19 @@ public class Node {
      */
     public void addOneLevelCommunication(Node oneLevel) {
         this.oneLevelNodes.add(oneLevel);
+    }
+
+    /**
+     * Adding the received argument to the child nodes arr.
+     * 
+     * @param child - child node to add.
+     */
+    public void addChildNode(Node child) {
+        this.childNodes.add(child);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d. ", this.uniqId);
     }
 }
