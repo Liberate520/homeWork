@@ -1,5 +1,6 @@
 package family_tree;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
         human2.setDeathDate(LocalDate.of(1964, 3, 2));
         FamilyTree familyTree = new FamilyTree();
         familyTree.createFamily(human1, human2, human3);
-        System.out.println(familyTree.getFamilyTree());
+        // System.out.println(familyTree.getFamilyTree());
 
         Human human4 = new Human("Olga", LocalDate.of(1915, 12, 5), Gender.Female);
         Human human5 = new Human("Mathew", LocalDate.of(1913, 7, 30), Gender.Male);
@@ -20,11 +21,25 @@ public class Main {
         human5.setDeathDate(LocalDate.of(1964, 3, 2));
         FamilyTree familyTree2 = new FamilyTree();
         familyTree2.createFamily(human4, human5, human6);
-        System.out.println(familyTree2.getFamilyTree());
+        // System.out.println(familyTree2.getFamilyTree());
 
         Human human7 = new Human("Andrew", LocalDate.of(1958, 6, 13), Gender.Male);
         FamilyTree familyTree3 = new FamilyTree();
         familyTree3.createFamily(human3, human6, human7);
-        System.out.println(familyTree3.getFamilyTree());
+        // System.out.println(familyTree3.getFamilyTree());
+
+        FileHandlerForTree fileHandler = new FileHandlerForTree();
+        try {
+            fileHandler.SaveTree(familyTree, false);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Ошбика: ClassNotFoundException!");
+        } catch (IOException e) {
+            System.out.println("Ошибка: IOException!");
+        }
+        try {
+            fileHandler.LoadTree();
+        } catch (IOException e) {
+            System.out.println("Ошибка: IOException!");
+        }
     }
 }

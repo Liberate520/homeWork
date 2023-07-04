@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Human {
-    String name;
-    LocalDate birthDate, deathDate;
-    Gender gender;
-    Human father, mother;
-    List<Human> children;
+    private String name;
+    private LocalDate birthDate, deathDate;
+    private Gender gender;
+    private Human father, mother;
+    private List<Human> children;
 
     public Human(String name, LocalDate birthDate, LocalDate deathDate, Gender gender, Human father, Human mother,
             List<Human> children) {
@@ -56,7 +56,7 @@ public class Human {
 
     private String getAllChildrens() {
         StringBuilder stringBuilder = new StringBuilder();
-        //stringBuilder.append("\nСписок детей:\n");
+        // stringBuilder.append("\nСписок детей:\n");
         for (Human human : children) {
             stringBuilder.append(human.name);
             stringBuilder.append("\n");
