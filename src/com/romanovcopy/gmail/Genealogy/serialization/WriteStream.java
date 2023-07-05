@@ -1,8 +1,10 @@
 package com.romanovcopy.gmail.Genealogy.serialization;
 
+import com.romanovcopy.gmail.Genealogy.interfaces.writerSerializable;
+
 import java.io.*;
 
-public class WriteStream {
+public class WriteStream implements writerSerializable {
     private String path;
 
     public WriteStream(String path) {

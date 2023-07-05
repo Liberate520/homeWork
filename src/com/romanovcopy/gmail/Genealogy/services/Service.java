@@ -1,4 +1,5 @@
-package com.romanovcopy.gmail.Genealogy;
+package com.romanovcopy.gmail.Genealogy.services;
+import com.romanovcopy.gmail.Genealogy.Program;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.Gender;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.GenealogyGraph;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.MaritalStatus;
@@ -11,13 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Service extends BasicMethods{
+public class Service extends BasicMethods {
 
     private Scanner scanner;
     private HashMap<String, GenealogyGraph>genealogyGraphHashMap;
+    private boolean exit;
 
     public Service(){
         scanner=new Scanner(System.in);
+        exit=false;
         //считывание файла с диска
         var reader=new ReadStream(Program.path);
         genealogyGraphHashMap=(HashMap<String, GenealogyGraph>) reader.read();
@@ -25,6 +28,8 @@ public class Service extends BasicMethods{
             genealogyGraphHashMap=new HashMap<>();
         }
         start();
+        if(exit){ return; }
+        else { start(); }
     }
 
     /**
@@ -38,10 +43,10 @@ public class Service extends BasicMethods{
             System.out.println("Выберите режим работы : ");
             System.out.println("1 - Новый граф.");
             System.out.println("2 - Редактировать граф.");
-            System.out.println("3 - Просмотр графа.");
-            System.out.println("4 - Удалить граф.");
-            System.out.println("5 - Вывести все графы");
-            System.out.println("0 - Сохранить");
+            System.out.println("3 - Удалить граф.");
+            System.out.println("4 - Вывести все графы");
+            System.out.println("5 - Сохранить");
+            System.out.println("0 - Выход");
             System.out.println("Введите номер режима : ");
             if (scanner.hasNextInt()) {
                 mode = Math.abs(scanner.nextInt());
@@ -57,20 +62,22 @@ public class Service extends BasicMethods{
                             break;
                         }
                         case 2: {
+                            System.out.println("Редактирование графа");
                             personEditing(scanner, graph);
                             break;
                         }
                         case 3: {
-                            System.out.println("Просмотр графа");
-
-                            break;
-                        }
-                        case 4: {
                             System.out.println("Удаление графа");
 
                             break;
                         }
-                        case 0:{
+                        case 4: {
+                            System.out.println("Вывести все графы");
+
+                            break;
+                        }
+                        case 5: {
+                            System.out.println("Сохранить");
                             var write=new WriteStream(Program.path);
                             write.write(genealogyGraphHashMap);
                             break;
@@ -182,7 +189,8 @@ public class Service extends BasicMethods{
         if(genealogyGraphHashMap==null || genealogyGraphHashMap.size()==0){
             genealogyGraphHashMap = new HashMap<>();
             while (!createGenealogyGraph()){
-                if(requestInt(scanner,"0 - продолжить \n1 - выйти из программы",false)!=0){
+                if(requestInt(scanner,"0 - Выйти из программы \n1 - Продолжить",false)==0){
+                    exit=true;
                     return;
                 }
             }

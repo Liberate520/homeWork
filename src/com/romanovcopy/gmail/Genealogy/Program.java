@@ -1,6 +1,6 @@
 package com.romanovcopy.gmail.Genealogy;
 
-import java.util.Scanner;
+import com.romanovcopy.gmail.Genealogy.services.Service;
 
 public class Program {
     public static Service service;

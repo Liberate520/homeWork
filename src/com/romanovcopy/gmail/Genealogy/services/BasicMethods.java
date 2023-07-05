@@ -1,4 +1,4 @@
-package com.romanovcopy.gmail.Genealogy;
+package com.romanovcopy.gmail.Genealogy.services;
 
 import com.romanovcopy.gmail.Genealogy.genealogyTree.GenealogyGraph;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.Person;

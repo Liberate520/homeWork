@@ -1,8 +1,10 @@
 package com.romanovcopy.gmail.Genealogy.serialization;
 
+import com.romanovcopy.gmail.Genealogy.interfaces.readerSerializable;
+
 import java.io.*;
 
-public class ReadStream {
+public class ReadStream implements readerSerializable {
     String path;
 
     /**
