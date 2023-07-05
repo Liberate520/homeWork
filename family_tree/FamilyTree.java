@@ -1,5 +1,7 @@
 package family_tree;
 
+import java.io.Serializable;
+
 /*
  * 
  * 
@@ -11,7 +13,7 @@ import java.util.List;
 import family_tree.Human;
 import family_tree.Gender;
 
-class FamilyTree {
+class FamilyTree implements Serializable {
     private List< Human> ListHumans;
 
     public FamilyTree() {

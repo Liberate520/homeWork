@@ -1,5 +1,6 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import family_tree.Gender;
 
 
 
-class Human {
+class Human implements Serializable  {
     private String name;
     private Gender gender;
     private String surname;
