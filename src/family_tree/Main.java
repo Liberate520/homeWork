@@ -1,17 +1,22 @@
 package family_tree;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        FamilyTree tree1 = new FamilyTree();
-        fillFamilyTree(tree1);
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //Тестирование записи и чтения из файла (initTree - экземпляр для записи; tree1 - экземпляр для чтения)
+        FamilyTree initTree = new FamilyTree();
+        fillFamilyTree(initTree);
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.write(initTree, "src/family_tree/FamilyTree.txt");
+        FamilyTree tree1;
+        tree1 = (FamilyTree) fileHandler.read("src/family_tree/FamilyTree.txt");
 
-
-        boolean check1 = true, check2 = true;
+        boolean check1 = true, check2;
         int option;
         while (check1) {
             check2 = true;
@@ -22,47 +27,45 @@ public class Main {
             if (sc.hasNextInt()) {
                 option = sc.nextInt();
                 switch (option) {
-                    case 1:
+                    case 1 -> {
                         while (check2) {
-                        System.out.println("----------------------------");
-                        System.out.println(tree1.toString());
-                        System.out.println("----------------------------");
-                        System.out.println("Введите цифру, соответствующую нужной опции.\n" +
-                                "1) Отобразить определённые связи для конкретного человека.\n" +
-                                "2) Вернуться в главное меню.");
-                        System.out.println("----------------------------");
-                        if (sc.hasNextInt()){
-                            option = sc.nextInt();
-                            switch(option){
-                                case 1:
-                                    System.out.println("Введите цифру, соответствующую нужному человеку.");
-                                    System.out.println("----------------------------");
-                                    if (sc.hasNextInt()){
-                                        option = sc.nextInt();
-                                        if (option <= tree1.getHumans().size()) {
-                                            System.out.println(tree1.getHumans().get(option - 1).viewFamily());
-                                        }
+                            System.out.println("----------------------------");
+                            System.out.println(tree1.toString());
+                            System.out.println("----------------------------");
+                            System.out.println("Введите цифру, соответствующую нужной опции.\n" +
+                                    "1) Отобразить определённые связи для конкретного человека.\n" +
+                                    "2) Вернуться в главное меню.");
+                            System.out.println("----------------------------");
+                            if (sc.hasNextInt()) {
+                                option = sc.nextInt();
+                                switch (option) {
+                                    case 1:
+                                        System.out.println("Введите цифру, соответствующую нужному человеку.");
                                         System.out.println("----------------------------");
-                                    }else{
-                                        sc.next();
+                                        if (sc.hasNextInt()) {
+                                            option = sc.nextInt();
+                                            if (option <= tree1.getHumans().size()) {
+                                                System.out.println(tree1.getHumans().get(option - 1).viewAllFamily());
+                                            }
+                                            System.out.println("----------------------------");
+                                        } else {
+                                            sc.next();
+                                            break;
+                                        }
+                                    case 2:
+                                        check2 = false;
                                         break;
-                                    }
-                                case 2:
-                                    check2 = false;
-                                    break;
-                                default:
-                                    break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                sc.next();
                             }
-                        }else{
-                            sc.next();
                         }
-                        }
-                        break;
-                    case 2:
-                        check1 = false;
-                        break;
-                    default:
-                        break;
+                    }
+                    case 2 -> check1 = false;
+                    default -> {
+                    }
                 }
             }else{
                 sc.next();
@@ -70,7 +73,7 @@ public class Main {
         }
     }
 
-    public static void fillFamilyTree(FamilyTree familyTree){
+    public static void fillFamilyTree(FamilyTree familyTree) {
         Human human1 = new Human(
                 1,
                 "Дмитрий",
@@ -172,6 +175,7 @@ public class Main {
         familyTree.addHuman(human7);
         familyTree.addHuman(human8);
         familyTree.addHuman(human9);
+
     }
 }
 

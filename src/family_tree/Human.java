@@ -1,12 +1,13 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private String firstName, lastName;
     private LocalDate dateOfBirth, dateOfDeath;
@@ -65,13 +66,8 @@ public class Human {
         this.children.add(child);
     }
 
-    public String viewFamily() {
+    public String viewGrandparents() {
         StringBuilder grandparents = new StringBuilder();
-        StringBuilder parents = new StringBuilder();
-        StringBuilder siblings = new StringBuilder();
-        StringBuilder spouse = new StringBuilder();
-        StringBuilder childrens = new StringBuilder();
-        StringBuilder grandchildrens = new StringBuilder();
         if (this.mother != null) {
             if (this.mother.mother != null) {
                 grandparents.append(this.mother.mother.toString() + "\n");
@@ -79,14 +75,7 @@ public class Human {
             if (this.mother.father != null) {
                 grandparents.append(this.mother.father.toString() + "\n");
             }
-            if (this.mother.children != null){
-                for (Human sibling : this.mother.children){
-                    if (this.id != sibling.id){
-                        siblings.append(sibling.toString() + "\n");
-                    }
-                }
-            }
-            parents.append("<Мать> " + this.mother.toString() + "\n");
+
         }
         if (this.father != null) {
             if (this.father.mother != null) {
@@ -95,22 +84,72 @@ public class Human {
             if (this.father.father != null) {
                 grandparents.append(this.father.father.toString() + "\n");
             }
-            parents.append("<Отец> " + this.father.toString() + "\n");
+        }
+        if (!grandparents.isEmpty()){
+            grandparents.insert(0,"<Бабушки и дедушки>\n");
+        }
+        return grandparents.toString();
+    }
+
+    public String viewMother() {
+        StringBuilder mother = new StringBuilder();
+        if (this.mother != null) {
+            mother.append("<Мать> \n" + this.mother.toString() + "\n");
+        }
+        return mother.toString();
         }
 
-        if (this.spouse != null) {
-            if (this.spouse.gender.toString().equals("Мужской")) {
-                spouse.append("<Муж> " + this.spouse.toString() + "\n");
-            } else {
-                spouse.append("<Жена> " + this.spouse.toString() + "\n");
+    public String viewFather() {
+        StringBuilder father = new StringBuilder();
+        if (this.father != null) {
+            father.append("<Отец> \n" + this.father.toString() + "\n");
+        }
+        return father.toString();
+    }
+
+    public String viewSiblings(){
+        StringBuilder siblings = new StringBuilder();
+        if (this.mother != null) {
+            if (this.mother.children != null){
+                for (Human sibling : this.mother.children){
+                    if (this.id != sibling.id){
+                        siblings.append(sibling.toString() + "\n");
+                    }
+                }
             }
         }
+        if (!siblings.isEmpty()){
+            siblings.insert(0,"<Братья и сестры>\n");
+        }
+        return siblings.toString();
+    }
 
+    public String viewSpouse() {
+        StringBuilder spouse = new StringBuilder();
+        if (this.spouse != null) {
+            if (this.spouse.gender.toString().equals("Мужской")) {
+                spouse.append("<Муж> \n" + this.spouse.toString() + "\n");
+            } else {
+                spouse.append("<Жена> \n" + this.spouse.toString() + "\n");
+            }
+        }
+        return spouse.toString();
+    }
+
+    public String viewChildrens(){
+        StringBuilder childrens = new StringBuilder();
         if (this.children != null) {
             childrens.append("<Дети>\n");
             for (Human child : this.children) {
                 childrens.append(child.toString() + "\n");
             }
+        }
+        return childrens.toString();
+    }
+
+    public String viewGrandchildrens(){
+        StringBuilder grandchildrens = new StringBuilder();
+        if (this.children != null) {
             for (Human child : this.children) {
                 if (child.children != null) {
                     for (Human grandchild : child.children) {
@@ -119,18 +158,23 @@ public class Human {
                 }
             }
         }
-        if (!grandparents.isEmpty()){
-            grandparents.insert(0,"<Бабушки и дедушки>\n");
-        }
         if (!grandchildrens.isEmpty()){
             grandchildrens.insert(0,"<Внуки и внучки>\n");
         }
-        if (!siblings.isEmpty()){
-            siblings.insert(0,"<Братья и сестры>\n");
-        }
-        return grandparents.toString() + parents.toString() + siblings.toString() + spouse.toString() + childrens.toString() + grandchildrens.toString();
+        return grandchildrens.toString();
     }
-        public String toString () {
+
+    public String viewAllFamily(){
+        return this.viewGrandparents() +
+                this.viewMother() +
+                this.viewFather() +
+                this.viewSiblings() +
+                this.viewSpouse() +
+                this.viewChildrens() +
+                this.viewGrandchildrens();
+    }
+
+    public String toString () {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Имя: " + this.firstName +
                     "; Фамилия: " + this.lastName +
