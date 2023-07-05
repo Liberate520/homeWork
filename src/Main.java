@@ -23,11 +23,11 @@ public class Main {
         anna.setSisters(sisters);
         petr.setBrothers(brothers);
 
-        System.out.println(anna);
-        System.out.println(petr);
-        System.out.println(irina);
-        System.out.println(aleksey);
-        System.out.println(mariya);
+       // System.out.println(anna);
+       // System.out.println(petr);
+       // System.out.println(irina);
+       // System.out.println(aleksey);
+       //  System.out.println(mariya);
 
         FamilyTree familyTree = new FamilyTree();
         familyTree.addHuman(anna);
@@ -36,19 +36,28 @@ public class Main {
         familyTree.addHuman(aleksey);
         familyTree.addHuman(mariya);
 
-        List<Human> irinaParents = familyTree.getParents(irina);
-        System.out.println("Ирины родители: " + irinaParents);
+      //  List<Human> irinaParents = familyTree.getParents(irina);
+      //  System.out.println("Ирины родители: " + irinaParents);
 
-        List<Human> alekseySiblings = familyTree.getSiblings(aleksey);
-        System.out.println("Братья и сестры Алексея: " + alekseySiblings);
+     //   List<Human> alekseySiblings = familyTree.getSiblings(aleksey);
+     //   System.out.println("Братья и сестры Алексея: " + alekseySiblings);
 
-        List<Human> annaChildren = familyTree.getChildren(anna);
-        System.out.println("Дети Анны: " + annaChildren);
+        ArrayList<Human> annaChildren = (ArrayList<Human>) anna.getChildren();
+     //   System.out.println("Дети Анны: " + annaChildren);
 
-        Serializer serializer = new HumanSerializer();
-         serializer.save(familyTree, "hw/OOP/homeWork/src/tree.txt");
+     System.out.println("--------------------------");
+     anna.childrenSortByName();
+     System.out.println("Дети Анны сортированные по имени: " + annaChildren);
 
-         FamilyTree loadedFamilyTree = (FamilyTree) serializer.load("hw/OOP/homeWork/src/tree.txt");
-         System.out.println("Загруженное дерево: " + loadedFamilyTree.toString());
+      System.out.println("--------------------------");
+      anna.childrenSortByAge();
+      System.out.println("Дети Анны сортированные по возрасту: " + annaChildren);
+
+      // System.out.println("Дети Анны: " + annaChildren);
+      // Serializer serializer = new HumanSerializer();
+      // serializer.save(familyTree, "hw/OOP/homeWork/src/tree.txt");
+      // FamilyTree loadedFamilyTree = (FamilyTree) serializer.load("hw/OOP/homeWork/src/tree.txt");
+      // System.out.println("Загруженное дерево: " + loadedFamilyTree.toString());
+
     }
 }

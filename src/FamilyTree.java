@@ -1,9 +1,10 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
  import java.util.List;
  import java.util.Objects;
 
- public class FamilyTree implements Serializable {
+ public class FamilyTree implements Serializable, Iterable<Human> {
      private List<Human> humans;
 
      public FamilyTree() {
@@ -103,10 +104,16 @@ import java.util.ArrayList;
          StringBuilder sb = new StringBuilder();
          sb.append("В дереве ");
          sb.append(humans);
-         sb.append(" объектов: /n");
-         for (Human human: humans){
-             sb.append(humans.toString());           
+          sb.append(" объектов: \n");
+           for (Human human : humans){
+             sb.append(human.toString());    
+             sb.append("\n"); 
          }
          return sb.toString();
+     }
+
+     @Override
+     public Iterator<Human> iterator() {
+         return new HumanIterator(humans);
      }
  }
