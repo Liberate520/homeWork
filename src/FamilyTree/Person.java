@@ -1,5 +1,6 @@
 package FamilyTree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Objects;
 import static FamilyTree.Sex.Female;
 import static FamilyTree.Sex.Male;
 
-public class Person {
+public class Person implements Serializable {
         private String name;
         private Sex sex;
         private LocalDate birthday;

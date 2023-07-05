@@ -1,12 +1,13 @@
 package FamilyTree;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import static FamilyTree.Sex.Female;
 import static FamilyTree.Sex.Male;
 
 public class main {
-    public static void main(String[] args){
+    public static void main (String[] args) throws IOException, ClassNotFoundException {
         Tree tree = new Tree ();
 
         tree.addPerson (new Person("Иван Федорович Крузенштерн", Male, LocalDate.of(1975,07,10 )));
@@ -22,5 +23,17 @@ public class main {
         System.out.println(tree.getInfo());
         System.out.println(tree.getByName("Иван Федорович Крузенштерн").getChildrenInfo());
         System.out.println(tree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
+
+        FileHandler fh= new FileHandler();
+        fh.save(tree);
+        Tree RessoredTree = fh.load ();
+
+        System.out.println(RessoredTree.getInfo());
+        System.out.println(RessoredTree.getByName("Иван Федорович Крузенштерн").getChildrenInfo());
+        System.out.println(RessoredTree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
+
+
     }
+
+
 }
