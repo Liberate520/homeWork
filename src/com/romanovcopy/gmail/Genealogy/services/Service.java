@@ -23,8 +23,10 @@ public class Service extends BasicMethods {
         exit=false;
         //считывание файла с диска
         var reader=new ReadStream(Program.path);
-        genealogyGraphHashMap=(HashMap<String, GenealogyGraph>) reader.read();
-        if(genealogyGraphHashMap==null){
+        Object obj=reader.read();
+        if(obj instanceof HashMap){
+            genealogyGraphHashMap=(HashMap<String, GenealogyGraph>)obj;
+        }else {
             genealogyGraphHashMap=new HashMap<>();
         }
         start();
@@ -40,43 +42,35 @@ public class Service extends BasicMethods {
         boolean flag = true;
         int mode = 0;
         while (flag) {
-            System.out.println("Выберите режим работы : ");
-            System.out.println("1 - Новый граф.");
-            System.out.println("2 - Редактировать граф.");
-            System.out.println("3 - Удалить граф.");
-            System.out.println("4 - Вывести все графы");
-            System.out.println("5 - Сохранить");
-            System.out.println("0 - Выход");
-            System.out.println("Введите номер режима : ");
-            if (scanner.hasNextInt()) {
-                mode = Math.abs(scanner.nextInt());
-                flag = mode != 0;
+            var select =new ModeSelectionDialog(new String[]
+                    {"Новый граф", "Редактировать граф", "Удалить граф", "Вывести все графы", "Сохранить", "Выход"});
+                mode= select.select();
+                flag = mode != 5;
                 if (flag) {
                     switch (mode) {
-                        case 1: {
+                        case 0: {
                             System.out.println("Новый граф");
                             var person=createPerson();
                             if(person!=null){
-                                graph.addPerson(person);
-                            }
+                                graph.addPerson(person);}
                             break;
                         }
-                        case 2: {
+                        case 1: {
                             System.out.println("Редактирование графа");
                             personEditing(scanner, graph);
                             break;
                         }
-                        case 3: {
+                        case 2: {
                             System.out.println("Удаление графа");
 
                             break;
                         }
-                        case 4: {
+                        case 3: {
                             System.out.println("Вывести все графы");
 
                             break;
                         }
-                        case 5: {
+                        case 4: {
                             System.out.println("Сохранить");
                             var write=new WriteStream(Program.path);
                             write.write(genealogyGraphHashMap);
@@ -93,7 +87,7 @@ public class Service extends BasicMethods {
                     }
                 }
             }
-        }
+//        }
     }
 
     /**
