@@ -1,8 +1,9 @@
 package familyTree;
+import java.io.Serializable;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
-public class Human {
+public class Human implements Serializable {
     private Integer id;
     private String surname;
     private String name;

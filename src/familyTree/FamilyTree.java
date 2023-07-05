@@ -1,7 +1,8 @@
 package familyTree;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private int idHuman;
     private List<Human> humanList;
 
@@ -46,9 +47,6 @@ public class FamilyTree {
         }
         return null;
     }
-
-
-
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
