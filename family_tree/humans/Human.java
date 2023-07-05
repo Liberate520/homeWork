@@ -1,4 +1,4 @@
-package family_tree;
+package family_tree.humans;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +11,6 @@ public class Human {
     private Gender gender;
     private List<Human> parents;
     private List<Human> children;
-    private List<Human> allPeople;
 
     public Human(String name, LocalDate birthDate, Gender gender) {
         this.name = name;
@@ -19,21 +18,22 @@ public class Human {
         this.gender = gender;
         this.parents = new ArrayList<>();
         this.children = new ArrayList<>();
-        allPeople.add(this);
+
+    }
+
+    @Override
+    public String toString() {
+        return "Human{" + "name=" + name + ", birthdate=" + birthDate + ", gender=" + gender + '}';
     }
 
     public void setDeathDate(LocalDate deathDate) {
         this.deathDate = deathDate;
     }
 
-    public List<Human> getAllPeople() {
-        return allPeople;
-    }
-
     public String getName() {
         return name;
     }
-
+    
     public LocalDate getbirthDate() {
         return birthDate;
     }
@@ -46,7 +46,7 @@ public class Human {
         return parents;
     }
 
-    public List<Human> getChildren(){
+    public List<Human> getChildren() {
         return children;
     }
 
@@ -57,4 +57,5 @@ public class Human {
     public void addChild(Human child) {
         this.children.add(child);
     }
+
 }

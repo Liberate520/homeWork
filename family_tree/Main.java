@@ -1,10 +1,21 @@
 package family_tree;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.FileHandler;
+
+import family_tree.file_handler.IFileHandler;
+import family_tree.human_family.FamilyTree;
+import family_tree.humans.Gender;
+import family_tree.humans.Human;
+import family_tree.humans.human_repository.HumanRepository;
 
 public class Main {
-    public static void main(String[] args) {
+
+    private static List<Human> allHumans;
+
+    public static void main(String[] args) throws SecurityException, IOException {
         FamilyTree familyTree = new FamilyTree();
 
         Human maksim = new Human("Maksim", LocalDate.of(1984, 8, 11), Gender.MALE);
@@ -28,15 +39,6 @@ public class Main {
         diana.addParent(maksim);
         maria.setDeathDate(LocalDate.of(2008, 01, 30));
 
-        familyTree.addHuman(maria);
-        familyTree.addHuman(maksim);
-        familyTree.addHuman(nataly);
-        familyTree.addHuman(peter);
-        familyTree.addHuman(diana);
-        familyTree.addHuman(yuriy);
-        familyTree.addHuman(kate);
-        familyTree.addHuman(irina);
-
         HumanRepository repository = new HumanRepository();
         repository.addHuman(maria);
         repository.addHuman(maksim);
@@ -52,16 +54,13 @@ public class Main {
         for (Human child : maksimsChildren) {
             System.out.println(child.getName());
         }
-        List<Human> allPeople = maksim.getAllPeople();
-        for (Human person : allPeople) {
-            System.out.println(person.getName());
-        }
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.saveHumansToFile(allPeople, "family_tree\\people.txt");
 
-        List<Human> readPeople = fileHandler.loadHumansFromFile("family_tree\\people.txt");
-        for (Human human : readPeople) {
-            System.out.println(human);
+        IFileHandler fileHandler =  (IFileHandler) new FileHandler();
+        fileHandler.writeToFile(allHumans, "family_tree\\people.txt");
+
+        List<Human> readPeople = fileHandler.readFromFile("family_tree\\people.txt");
+        for (Human person : readPeople) {
+            System.out.println(person.getName());
         }
 
         List<Human> allHumans = repository.getAllHumans();

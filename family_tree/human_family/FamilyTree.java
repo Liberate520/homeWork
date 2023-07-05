@@ -1,7 +1,9 @@
-package family_tree;
+package family_tree.human_family;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import family_tree.humans.Human;
 
 public class FamilyTree {
     private List<Human> humans;

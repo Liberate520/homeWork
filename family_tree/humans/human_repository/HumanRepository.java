@@ -1,7 +1,9 @@
-package family_tree;
+package family_tree.humans.human_repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import family_tree.humans.Human;
 
 public class HumanRepository implements IHumanRepository {
     private List<Human> humans;
