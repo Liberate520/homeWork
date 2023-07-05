@@ -10,10 +10,10 @@ public class Node implements Serializable {
         Node.id = 0;
     }
 
-    protected ArrayList<Node> parents;
-    protected ArrayList<Node> oneLevelNodes;
-    protected ArrayList<Node> childNodes;
-    protected int uniqId;
+    private ArrayList<Node> parents;
+    private ArrayList<Node> oneLevelNodes;
+    private ArrayList<Node> childNodes;
+    private int uniqId;
 
     public int getId() {
         return this.uniqId;
