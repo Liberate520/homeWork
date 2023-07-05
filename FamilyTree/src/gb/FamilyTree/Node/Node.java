@@ -1,9 +1,9 @@
 package gb.FamilyTree.Node;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class Node {
+public class Node implements Serializable {
     protected static int id;
 
     static {

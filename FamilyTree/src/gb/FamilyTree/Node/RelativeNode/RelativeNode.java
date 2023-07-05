@@ -31,7 +31,7 @@ public class RelativeNode extends Node {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(super.toString());
-        builder.append(String.format("%s %s %s.", this.lastName, this.firstName, this.middleName));
+        builder.append(String.format("%s %s %s. ", this.lastName, this.firstName, this.middleName));
 
         return builder.toString();
     }

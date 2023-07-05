@@ -4,6 +4,7 @@ import gb.FamilyTree.Node.Node;
 import gb.FamilyTree.Node.RelativeNode.RelativeNode;
 import gb.FamilyTree.Tree.Relations;
 import gb.FamilyTree.Tree.Tree;
+import gb.FamilyTree.TreeSerializer.TreeSerializer;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -54,5 +55,24 @@ public class App {
         }
 
         System.out.println("... We will encapsulate this later, but now it's just example of the project structure.");
+
+        TreeSerializer serializer = new TreeSerializer("test.out");
+        serializer.writeToFile(familyTree);
+
+        System.out.println("Tree serialization completed successfully!");
+
+        serializer = null;
+
+        System.out.println("Setting serializer to null: " + serializer);
+
+        TreeSerializer testDeserlizer = new TreeSerializer("test.out");
+        Tree deserializedTree = (Tree) testDeserlizer.readFromFile();
+        System.out.println(deserializedTree);
+
+        RelativeNode second = deserializedTree.getNode(2);
+        System.out.println(second.getChilds());
+        System.out.println(second.getParents());
+
+        System.out.println("Tree deserialization completed successfully!");
     }
 }

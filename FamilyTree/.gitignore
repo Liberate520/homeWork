@@ -17,4 +17,4 @@ bin/
 test/resources/projects/**/.vscode
 test/resources/projects/maven/salut/testGradle
 test-temp
-
+*.class

@@ -1,11 +1,12 @@
 package gb.FamilyTree.Tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import gb.FamilyTree.Node.RelativeNode.RelativeNode;
 
-public class Tree {
+public class Tree implements Serializable {
     protected RelativeNode root;
     protected ArrayList<RelativeNode> nodes;
 
@@ -48,5 +49,17 @@ public class Tree {
         }
 
         nodes.add(node);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (RelativeNode relativeNode : nodes) {
+            builder.append(relativeNode);
+            builder.append("\n");
+        }
+
+        return builder.toString();
     }
 }
