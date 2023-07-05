@@ -74,6 +74,12 @@ class Human implements Serializable  {
 
     }
 
+    public void  getAge( ){
+        int age = 2023 - this.getDateOfBirth().getYear();
+        System.out.println("Возвраст " + this.getName()+ " " + this.getSurname()+ " = " + age);
+        //return age;
+    }
+
 
 
     public String getName() {
@@ -168,7 +174,7 @@ class Human implements Serializable  {
 
     public String getInfo(){
         StringBuilder info = new StringBuilder();
-        info.append("имя: " + name + " фамилия: " + surname +" | " +  getInfoMother() + " | " + getInfoFather() + " | "+ getInfoChildren() + " | " + getInfoSpouse());
+        info.append(name + " "+  surname +" | " +  getInfoMother() + " | " + getInfoFather() + " | "+ getInfoChildren() + " | " + getInfoSpouse());
 
         return info.toString();
     }

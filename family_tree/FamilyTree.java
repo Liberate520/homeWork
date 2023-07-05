@@ -81,8 +81,27 @@ class FamilyTree implements Serializable {
         }
         return info.toString();
     }
-    
 
+    public void  getByName(String name){
+        List <Human> findlist = new ArrayList<>();
+        for (Human human : ListHumans) {
+            if(human.getName().equals(name)){
+                findlist.add(human);
+                
+            }   
+        }
+
+        for (Human human : findlist) {
+            System.out.println(human);
+            
+        }
+    
+        
+    }
+    
+    public List<Human> getListHumans() {
+        return this.ListHumans;
+    }
 
 
 
