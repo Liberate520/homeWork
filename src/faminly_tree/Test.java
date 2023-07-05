@@ -1,19 +1,24 @@
 package faminly_tree;
 
+import java.time.LocalDate;
+
 public class Test {
     public static void main(String[] args) {
         FamilyTree tree = new FamilyTree();
-        Human human1 = new Human("Darya", Gender.Female, 1996, 10, 17);
-        tree.addPerson(human1);
-        tree.addFather("Aleksey", 1967, 3, 1, human1);
-        tree.addMother("Elena", 1969, 12, 24, human1);
-        tree.addMother("Lidia", 1949, 5, 20, human1.getMother());
-        tree.addChildren("Lisa", 2004, 10, 8, human1.getFather());
-        tree.addChildren("Ivan", 2012, 8, 10, human1.getFather());
-        //System.out.println(human1);
-        //System.out.println("Бабушка " + human1.getName() + ":\n" + human1.getMother().getMother());
-        //System.out.println("Дети " + human1.getFather().getName() + ":\n" + human1.getFather().getChildrenToString());
-        //System.out.println("Родители " + human1.getName() + ":\n" + tree.findParents(human1));
-        System.out.println("Родители " + human1.getMother().getName() + ":\n" + tree.findParents(human1.getMother()));
+        Human human1 = new Human("Darya", Gender.Female, LocalDate.of(1996, 10, 17));
+        tree.addToTree(human1);
+        Human human2 = new Human("Aleksey", Gender.Male, LocalDate.of(1967, 1, 03));
+        tree.addToTree(human2);
+        human1.childFor(human2);
+        Human human3 = new Human("Elizaveta", Gender.Female, LocalDate.of(2000, 8, 10));
+        tree.addToTree(human3);
+        human3.childFor(human2);
+        Human human4 = new Human("Elena", Gender.Female, LocalDate.of(1969, 12, 24));
+        human1.childFor(human4);
+        tree.addToTree(human4);
+        Human human5 = new Human("Ivan", Gender.Male, LocalDate.of(2020, 5, 12));
+        human5.childFor(human2);
+        tree.addToTree(human5);
+        System.out.println(tree.nextOfKin(human1));
     }
 }
