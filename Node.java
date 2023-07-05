@@ -1,10 +1,11 @@
 package homeWork_OOP_family_tree;
 
-import java.lang.reflect.Member;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node {
+public class Node implements Serializable{
 
     Human people;
     Node mother;
@@ -36,16 +37,27 @@ public class Node {
         parent.children.add(child);
     }
 
-    public void printTree() {
+    public void printDescendants() {
         this.people.printHuman();
         System.out.println();
         if (this.children != null) {
             for (int i = 0; i < this.children.size(); i++) {
-                this.children.get(i).printTree();
+                this.children.get(i).printDescendants();
             }
             return;
         }
     }
+
+    public void printChildren() {
+        System.out.println("Дети: ");
+        if (this.children != null) {
+            for (int i = 0; i < this.children.size(); i++) {
+                this.children.get(i).people.printHuman();
+            }
+        } else {
+            System.out.println("нет");
+        }
+     }
 
     public void printParants() {
         if (this.father != null) {

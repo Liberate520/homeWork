@@ -1,51 +1,63 @@
 package homeWork_OOP_family_tree;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Human gen = new Human("иван", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "male");
-        // System.out.println(gen.getGender());
-        Node per = new Node(gen);
-        // per.printTree();
+        Human anton = new Human("антон", LocalDate.of(1999, 10, 5)
+        ,"male");
+        Node antonN = new Node(anton);
 
-        Human g1 = new Human("иван1", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "male");
-        Node p1 = new Node(g1);
-        Human g2 = new Human("иван2ж", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "female");
-        Node p2 = new Node(g2);
-        Human g3 = new Human("иван3", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "male");
-        Node p3 = new Node(g3);
-        Human g4 = new Human("иван4ж", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "female");
-        Node p4 = new Node(g4);
-        Human g5 = new Human("иван5", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "male");
-        Node p5 = new Node(g5);
-        Human g6 = new Human("иван6ж", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "female");
-        Node p6 = new Node(g6);
-        Human g7 = new Human("иван7", "иванов", "иванович", LocalDate.of(1999, 10, 5), LocalDate.of(3000, 12, 19),
-                "male");
-        Node p7 = new Node(g7);
-        
+        Human masha = new Human("маша", LocalDate.of(1990, 7, 3)
+        ,"female");
+        Node mashaN = new Node(masha);
 
-        p3.addParent(p4);
-        p3.addParent(p5);
+        Human gosha = new Human("гоша", LocalDate.of(2020, 7, 3)
+        ,"male");
+        Node goshaN = new Node(gosha);
 
+        mashaN.addChild(goshaN, antonN);
+
+        FamilywTree fam1 = new FamilywTree();
+        fam1.add(mashaN);
+        fam1.add(goshaN);
+        fam1.add(antonN);
 
         
+
+        List<Node> z = fam1.searchName("антон");
+        System.out.println(z.size());
+        // z.get(0).people.printHuman();
+        // System.out.println();
+        // z.get(0).printChildren();
+        SavingFile fil = new SavingFile("Saving.bin");
+        fil.toStore(fam1);
+        
+        try {
+            FamilywTree f2 = fil.pullFromFile();
+                System.out.println(f2.getInfo());
+
+                Human toha = new Human("антон", LocalDate.of(2020, 7, 3)
+        ,"male");
+        Node tohaN = new Node(toha);
+
+        f2.add(tohaN);
+
+        System.out.println(f2.getInfo());
+
+
+        List<Node> t = f2.searchName("гоша");
+        System.out.println(t.size());
+        t.get(0).people.printHuman();
+        System.out.println();
+        t.get(0).printChildren();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
  
-        p3.addChild(p7, p2);
-        p7.printParants();
-        p3.addChild(p1, p2);
-
-        System.out.println("--------------");
-
-        p5.printTree();
+        // FamilywTree f2 = fil.getResult();
+    
     }
 
 }
