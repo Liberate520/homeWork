@@ -27,6 +27,10 @@ public class RelativeNode extends Node {
         this(id, lastname, firstName, middleName, LocalDate.MIN.toString(), LocalDate.MAX.toString());
     }
 
+    public String getFirstName() {
+        return this.firstName;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

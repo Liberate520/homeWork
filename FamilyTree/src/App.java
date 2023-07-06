@@ -21,13 +21,9 @@ public class App {
 
         System.out.println(service.getTreeInfo());
 
-        // service.saveTree("tst.out");
+        service.sortByName();
 
-        // service = null;
-
-        // Service serviceNew = new Service();
-        // serviceNew.readTree("tst.out");
-        // System.out.println(serviceNew.getTree());
+        System.out.println(service.getTreeInfo());
 
     }
 }

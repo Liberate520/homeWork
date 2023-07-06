@@ -1,5 +1,7 @@
 package gb.FamilyTree.Service;
 
+import java.util.Collection;
+
 import gb.FamilyTree.Node.RelativeNode.RelativeNode;
 import gb.FamilyTree.Tree.Relations;
 import gb.FamilyTree.Tree.Tree;
@@ -62,5 +64,13 @@ public class Service {
         TreeSerializer deserializer = new TreeSerializer(filePath);
         familyTree = (Tree) deserializer.readFromFile();
         return familyTree;
+    }
+
+    public void sortByName() {
+        this.familyTree.sortByName();
+    }
+
+    public void sortByParentsAmount() {
+        this.familyTree.sortByParentsAmount();
     }
 }

@@ -7,6 +7,8 @@ import java.util.NoSuchElementException;
 import java.util.Iterator;
 
 import gb.FamilyTree.Node.RelativeNode.RelativeNode;
+import gb.FamilyTree.Node.comparators.NodeComparatorByName;
+import gb.FamilyTree.Node.comparators.NodeComparatorByParents;
 import gb.FamilyTree.Tree.Iterator.NodeIterator;
 
 public class Tree implements Serializable, Iterable<RelativeNode> {
@@ -69,5 +71,13 @@ public class Tree implements Serializable, Iterable<RelativeNode> {
     @Override
     public Iterator<RelativeNode> iterator() {
         return new NodeIterator(nodes);
+    }
+
+    public void sortByName() {
+        this.nodes.sort(new NodeComparatorByName());
+    }
+
+    public void sortByParentsAmount() {
+        this.nodes.sort(new NodeComparatorByParents());
     }
 }
