@@ -41,6 +41,11 @@ public class main {
         tree.sortName();
         System.out.println(tree.getInfo());
 
+        for (Person person: tree){
+            System.out.println (person.getName());
+        }
+
+
 
 
     }

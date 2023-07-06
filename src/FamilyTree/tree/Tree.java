@@ -2,6 +2,7 @@ package FamilyTree.tree;
 
 import FamilyTree.sort.AgeComparator;
 import FamilyTree.sort.NameComparator;
+import FamilyTree.sort.PersonIterator;
 import FamilyTree.tree.Person;
 
 import java.io.Serializable;
@@ -46,7 +47,7 @@ public class Tree implements Serializable, Iterable <Person> {
         sb.append(treeList.size());
         sb.append(" объектов: \n");
         for (Person person : treeList){
-            sb.append(person.toString());
+            sb.append(person);
             sb.append("\n");
         }
     return sb.toString();
@@ -71,6 +72,6 @@ public class Tree implements Serializable, Iterable <Person> {
 
     @Override
     public Iterator<Person> iterator() {
-        return null;
+        return new PersonIterator(treeList);
     }
 }
