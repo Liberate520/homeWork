@@ -1,6 +1,7 @@
-package FamilyTree;
+package FamilyTree.File;
 
-import java.io.FileNotFoundException;
+import FamilyTree.tree.Tree;
+
 import java.io.IOException;
 
 public interface Writeable {

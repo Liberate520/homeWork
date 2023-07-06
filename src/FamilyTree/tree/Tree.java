@@ -1,10 +1,15 @@
-package FamilyTree;
+package FamilyTree.tree;
+
+import FamilyTree.sort.AgeComparator;
+import FamilyTree.sort.NameComparator;
+import FamilyTree.tree.Person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable <Person> {
 
     private List<Person> treeList;
 
@@ -55,4 +60,17 @@ public class Tree implements Serializable {
     }
 
 
+    public void sortAge() {
+        treeList.sort(new AgeComparator());
+
+    }
+    public void sortName() {
+        treeList.sort(new NameComparator());
+
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return null;
+    }
 }

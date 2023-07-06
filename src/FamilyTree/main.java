@@ -1,10 +1,14 @@
 package FamilyTree;
 
+import FamilyTree.File.FileHandler;
+import FamilyTree.tree.Person;
+import FamilyTree.tree.Tree;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static FamilyTree.Sex.Female;
-import static FamilyTree.Sex.Male;
+import static FamilyTree.tree.Sex.Female;
+import static FamilyTree.tree.Sex.Male;
 
 public class main {
     public static void main (String[] args) throws IOException, ClassNotFoundException {
@@ -31,6 +35,12 @@ public class main {
         System.out.println(RessoredTree.getInfo());
         System.out.println(RessoredTree.getByName("Иван Федорович Крузенштерн").getChildrenInfo());
         System.out.println(RessoredTree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
+
+        tree.sortAge();
+        System.out.println(tree.getInfo());
+        tree.sortName();
+        System.out.println(tree.getInfo());
+
 
 
     }
