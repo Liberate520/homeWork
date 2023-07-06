@@ -9,7 +9,7 @@ import tree.view.View;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Service implements Serializable {  //Класс Сервиса является непараметризированным
+public class Service {  //Класс Сервиса является непараметризированным
     private int id;
     private Tree<Human> geneticTree;
     private Write write;

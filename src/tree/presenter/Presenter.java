@@ -11,10 +11,8 @@ public class Presenter {
     private View view;
     private Service service;
 
-    public Presenter(View view, Service service) {
-        this.view = view;
-        this.service = service;
-        view.setPresenter(this);
+    public Presenter() {
+
     }
 
     public void addFromConsoleHuman(String humanName, LocalDate humanBirthDay, Gender humanGender) {

@@ -1,7 +1,6 @@
 package tree.view;
 
 import tree.model.human.Gender;
-import tree.model.service.Service;
 import tree.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.util.Scanner;
 
 public class ConsoleUI implements View {
     private Presenter presenter;
-    private Service service;
     private Scanner scanner;
     private boolean flag;
     private MainMenu mainMenu;
@@ -18,8 +16,8 @@ public class ConsoleUI implements View {
         scanner = new Scanner(System.in);
         flag = true;
         mainMenu = new MainMenu(this);
-        service = new Service();
-        presenter = new Presenter(this, service);
+//        service = new Service();
+        presenter = new Presenter();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package tree.model.geneticTree;
 
-import tree.model.human.Human;
 import tree.model.human.HumanComparatorByAge;
 import tree.model.human.HumanComparatorByName;
 
@@ -20,10 +19,10 @@ public class Tree<T extends GroupItem<T>> implements Serializable, Iterable<T>, 
         this(new ArrayList<>());
     }
 
-    public Human getByName(String name) {
+    public T getByName(String name) {
         for (T human : humanList) {
             if (human.getName().equals(name)) {
-                return (Human) human;
+                return (T) human;
             }
         }
         return null;
