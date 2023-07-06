@@ -1,6 +1,7 @@
 import java.sql.Array;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +15,5 @@ public class Main {
 
         System.out.println("-".repeat(10));
         System.out.println(ft);
-
     }
 }
