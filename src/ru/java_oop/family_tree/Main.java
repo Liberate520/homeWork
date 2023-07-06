@@ -13,17 +13,17 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 //      SAVE BLOCK
-//        FamilyTree familyTree = new FamilyTree();
-//        createObjectsForFamilyTree(familyTree);
-//
-//        System.out.println(familyTree);
-//
-//        performFamilyTreeSaveToFile(familyTree);
+        FamilyTree familyTree = new FamilyTree();
+        createObjectsForFamilyTree(familyTree);
+
+        performFamilyTreeSaveToFile(familyTree);
 
 //        LOAD BLOCK
-        FamilyTree familyTree = (FamilyTree) loadFamilyTreeFromFile();
+        FamilyTree familyTreeLoaded = (FamilyTree) loadFamilyTreeFromFile();
 
-        System.out.println(familyTree);
+        System.out.println(familyTree + "\nLoaded tree from file:");
+        System.out.println(familyTreeLoaded);
+
     }
 
 
