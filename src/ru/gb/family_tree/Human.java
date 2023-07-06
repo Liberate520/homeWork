@@ -1,11 +1,13 @@
-package ru.gb.FamilyTree;
+package ru.gb.family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable, Comparable<Human> {
+    private int id;
     private String fullName;
     private Gender gender;
     private LocalDate dateOfBirth;
@@ -146,4 +148,10 @@ public class Human {
         Human human = (Human) obj;
         return human.getFullName().equals(getFullName());
     }
+
+    @Override
+    public int compareTo(Human o) {
+        return fullName.compareTo(o.fullName);
+    }
+
 }
