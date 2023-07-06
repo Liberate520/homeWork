@@ -12,12 +12,46 @@ public class FamilyTree {
         familyList = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
-        familyList.add(human);
+    public boolean addHuman(Human human) {
+        if(human == null){
+            return false;
+        }
+        if(!familyList.contains(human)) {
+            familyList.add(human);
+
+            addToParents(human);
+            addToChildren(human);
+            return true;
+        }
+        return false;
+    }
+
+    private void addToParents(Human human){
+        for(Human parent: human.getParents()){
+            parent.addChild(human);
+        }
+    }
+
+    private void addToChildren(Human human){
+        for(Human child: human.getChildren()){
+            child.addParent(human);
+        }
+    }
+
+    public Human getByName(String name){
+        for (Human human: familyList){
+            if(human.getName().equals(name)){
+                return human;
+            }
+        }
+        return null;
     }
 
     public String getHumanInfo() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("В дереве ");
+        stringBuilder.append(familyList.size());
+        stringBuilder.append(" объектов.\n");
         stringBuilder.append("Семья:\n");
         for (Human human : familyList) {
             stringBuilder.append(human);
@@ -26,50 +60,22 @@ public class FamilyTree {
         return stringBuilder.toString();
     }
 
-    public void getHuman(String name) {
-        for (Human human : familyList) {
-            if (human.getName().equals(name)) {
-                System.out.println(human);
-            }
-        }
-    }
-
-    //TODO добавить метод поиска братьев
-
-    //TODO добавить метод поиска родителей
-
-    //TODO добавить метод поиска бабушек/дедушек
-
-    //TODO добавить метод добавления родителей и детей
-
-    //TODO метод getByName - поиска по имени
-
-    public void getChild(String name) {
-        List<String> children = new ArrayList<>();
-        for (Human human : familyList) {
-            if (human.getFather() != null && human.getMother() != null) {
-                if (human.getFather().getName().equals(name) || human.getMother().getName().equals(name)) {
-                    children.add(human.getName());
-                }
-            }
-            if (human.getFather() != null && human.getMother() == null) {
-                if (human.getFather().getName().equals(name)) {
-                    children.add(human.getName());
-                }
-            }
-            if (human.getFather() == null && human.getMother() != null) {
-                if (human.getMother().getName().equals(name)) {
-                    children.add(human.getName());
+    public void getBrotherInfo(Human human) {
+        List<String> bros = new ArrayList<>();
+        for (Human bro : familyList) {
+            if (bro.getMother() != null && bro.getMother() != null) {
+                if (!bro.getName().equals(human.getName()) && (bro.getFather().equals(human.getFather()) || bro.getMother().equals(human.getMother()))) {
+                    bros.add(bro.getName() + "(" + bro.getAge() + " лет)");
                 }
             }
         }
 
-        if (children.isEmpty()) {
-            System.out.println("Извините! Данных о детях " + name + " нет!");
+        if (bros.isEmpty()) {
+            System.out.println("Извините! Данных о братьях/сестрах " + human.getName() + " нет!");
         } else {
-            System.out.println("Дети " + name + ":");
-            for (String child : children) {
-                System.out.println("- " + child);
+            System.out.println("Братья/сестры " + human.getName() + ":");
+            for (String br : bros) {
+                System.out.println("- " + br);
             }
         }
     }

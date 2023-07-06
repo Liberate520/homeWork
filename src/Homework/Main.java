@@ -1,27 +1,31 @@
 package Homework;
 
-import Homework.Human.DeathHuman;
+//import Homework.Human.DeathHuman;
 import Homework.Human.Gender;
 import Homework.Human.Human;
 import Homework.Tree.FamilyTree;
+import Homework.Tree.FileMethods;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree familyTree = new FamilyTree();
 
-        Human human1 = new Human("Смирнова В.Г.", LocalDate.of(1956, 11, 11), Gender.Female);
-        Human human2 = new DeathHuman("Смирнов А.В.", LocalDate.of(1936, 7, 1), LocalDate.of(1996, 7, 12), Gender.Male);
-        Human human3 = new DeathHuman("Иванова Б.П.", LocalDate.of(1955, 3, 8), LocalDate.of(2013, 10, 10), Gender.Female);
-        Human human4 = new Human("Колесников П.П.", LocalDate.of(1954, 1, 1), Gender.Male);
-        Human human5 = new Human("Смирнов В.А.", LocalDate.of(1985, 9, 30), Gender.Male, human2, human1);
-        Human human6 = new Human("Смирнов В.В.", LocalDate.of(2010, 5, 27), Gender.Male, human5);
-        Human human7 = new Human("Колесникова А.А.", LocalDate.of(1983, 12, 19), Gender.Female, human2, human1);
-        Human human8 = new Human("Колесников И.П.", LocalDate.of(1980, 4, 17), Gender.Male, human4, human3);
-        Human human9 = new Human("Колесников В.И.", LocalDate.of(1999, 6, 2), Gender.Male, human8, human7);
-        Human human10 = new Human("Колесникова А.И.", LocalDate.of(2002, 9, 30), Gender.Female, human8, human7);
-        Human human11 = new Human("Колесникова Е.И.", LocalDate.of(2007, 4, 1), Gender.Female, human8, human7);
+        Human human1 = new Human("Смирнова В.Г.", Gender.Female, LocalDate.of(1956, 11, 11));
+        Human human2 = new Human("Смирнов А.В.", Gender.Male, LocalDate.of(1936, 7, 1), LocalDate.of(1996, 7, 12));
+        Human human3 = new Human("Иванова Б.П.", Gender.Female, LocalDate.of(1955, 3, 8), LocalDate.of(2013, 10, 10));
+        Human human4 = new Human("Колесников П.П.", Gender.Male, LocalDate.of(1954, 1, 1));
+        Human human5 = new Human("Смирнов В.А.", Gender.Male, LocalDate.of(1985, 9, 30), human2, human1);
+        Human human6 = new Human("Смирнов В.В.", Gender.Male, LocalDate.of(2010, 5, 27), human5);
+        Human human7 = new Human("Колесникова А.А.", Gender.Female, LocalDate.of(1983, 12, 19),  human2, human1);
+        Human human8 = new Human("Колесников И.П.", Gender.Male, LocalDate.of(1980, 4, 17), human4, human3);
+        Human human9 = new Human("Колесников В.И.", Gender.Male, LocalDate.of(1999, 6, 2), human8, human7);
+        Human human10 = new Human("Колесникова А.И.", Gender.Female, LocalDate.of(2002, 9, 30), human8, human7);
+        Human human11 = new Human("Колесникова Е.И.", Gender.Female, LocalDate.of(2007, 4, 1), human8, human7);
 
         familyTree.addHuman(human1);
         familyTree.addHuman(human2);
@@ -39,14 +43,46 @@ public class Main {
         System.out.println("=".repeat(20));
         System.out.println();
 
-        familyTree.getHuman("Колесникова Е.И.");
+        System.out.println(familyTree.getByName("Колесникова Е.И."));
+        System.out.println("=".repeat(20));
+
+        //Метод поиска детей со всей информацией о них
+        System.out.println(human1.getChildren());
+        System.out.println("=".repeat(20));
+
+        //Метод поиска детей с выводом имени и возраста
+        System.out.println(human1.getChildAndAge());
+        System.out.println("-".repeat(20));
+
+        System.out.println(human5.getChildAndAge());
+        System.out.println("-".repeat(20));
+
+        System.out.println(human11.getChildAndAge());
         System.out.println("=".repeat(20));
 
 
-        familyTree.getChild("Смирнова В.Г.");
+        familyTree.getBrotherInfo(human10);
+        System.out.println("-".repeat(20));
+        familyTree.getBrotherInfo(human1);
         System.out.println("=".repeat(20));
-        familyTree.getChild("Смирнов В.А.");
+
+        System.out.println("Бабушка и дедушка " + human6.getName() + ":");
+        System.out.println(human6.getGrandsInfo());
+        System.out.println("-".repeat(20));
+
+        System.out.println("Бабушка и дедушка " + human9.getName() + ":");
+        System.out.println(human6.getGrandsInfo());
+        System.out.println("-".repeat(20));
+
+        System.out.println("Бабушка и дедушка " + human8.getName() + ":");
+        System.out.println(human6.getGrandsInfo());
         System.out.println("=".repeat(20));
-        familyTree.getChild("Колесникова Е.И.");
+
+
+//        FileMethods.addInFile(human1);  // - ранняя версия ДЗ к 2 семинару
+//        FileMethods.readOutFile(human1);
+//
+//        FileMethods.addInFile(human2);
+//        FileMethods.readOutFile(human2);
     }
 }
