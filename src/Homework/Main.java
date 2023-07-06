@@ -6,7 +6,6 @@ import Homework.Human.Human;
 import Homework.Tree.FamilyTree;
 import Homework.Tree.FileMethods;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.time.LocalDate;
@@ -78,11 +77,15 @@ public class Main {
         System.out.println(human6.getGrandsInfo());
         System.out.println("=".repeat(20));
 
+        FileMethods.saveInFile(human1, "src/Homework/Human1.out");
+        FileMethods.readOutFile("src/Homework/Human1.out");
+        System.out.println("=".repeat(20));
 
-//        FileMethods.addInFile(human1);  // - ранняя версия ДЗ к 2 семинару
-//        FileMethods.readOutFile(human1);
-//
-//        FileMethods.addInFile(human2);
-//        FileMethods.readOutFile(human2);
+        FileMethods fileMethods = new FileMethods();
+
+        fileMethods.saveAllInFile(familyTree, "src/Homework/FamilyTree.out");
+        FamilyTree tree = (FamilyTree) fileMethods.read("src/Homework/FamilyTree.out");
+        System.out.println(tree.getHumanInfo());
+
     }
 }

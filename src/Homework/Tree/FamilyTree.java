@@ -2,10 +2,12 @@ package Homework.Tree;
 
 import Homework.Human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
+    //TODO добавить ID
     private List<Human> familyList;
 
     public FamilyTree() {
