@@ -14,7 +14,7 @@ public class Human implements Serializable {
     private Human spouse;
     public Human(String firstName, String lastName,
                  String middleName, LocalDate dateOfBirth, LocalDate dateOfDeath,
-                 Human mother, Human father,// Human spouse,
+                 Human mother, Human father,
                  Gender sex) {
         id = -1;
         this.firstName = firstName;
@@ -28,7 +28,6 @@ public class Human implements Serializable {
         if (father != null)
             if (father.getGender() == Gender.male)
                 this.father = father;
-        //this.spouse = spouse;
 
         this.children = new ArrayList<>();
 
@@ -36,10 +35,6 @@ public class Human implements Serializable {
     }
     public Human(String firstName, String lastName, String middleName) {
         this(firstName, lastName, middleName, null, null, null,null, null);
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.middleName = middleName;
-        //this.children = new ArrayList<>();
     }
 
     public Human() {
@@ -228,10 +223,6 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         return getInfo();
-//        return "имя: " + this.firstName + ", фамилия: " + this.lastName + ", отчество: " + this.middleName +
-//                ", пол: "+ this.sex + ", дата рождения: " + this.dateOfBirth.get(Calendar.YEAR) +
-//                ", мама: " + this.mother.getLastName() + " " + this.mother.getFirstName() + " " + this.mother.getMiddleName() +
-//                ", папа: " + this.father.getLastName() + " " + this.father.getFirstName() + " " + this.father.getMiddleName();
     }
     @Override
     public boolean equals(Object obj) {
