@@ -1,4 +1,4 @@
-package gb.FamilyTree.Interfaces;
+package gb.FamilyTree.TreeSerializer.Interfaces;
 
 public interface FileReadable {
     public Object readFromFile();

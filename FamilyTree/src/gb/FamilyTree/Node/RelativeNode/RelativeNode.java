@@ -12,9 +12,9 @@ public class RelativeNode extends Node {
     private LocalDate birthDate;
     private LocalDate deathDate;
 
-    public RelativeNode(String lastName, String firstName, String middleName, String birthDate,
+    public RelativeNode(int id, String lastName, String firstName, String middleName, String birthDate,
             String deathDate) {
-        super();
+        super(id);
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -23,8 +23,8 @@ public class RelativeNode extends Node {
         this.deathDate = LocalDate.parse(deathDate);
     }
 
-    public RelativeNode(String lastname, String firstName, String middleName) {
-        this(lastname, firstName, middleName, LocalDate.MIN.toString(), LocalDate.MAX.toString());
+    public RelativeNode(int id, String lastname, String firstName, String middleName) {
+        this(id, lastname, firstName, middleName, LocalDate.MIN.toString(), LocalDate.MAX.toString());
     }
 
     @Override

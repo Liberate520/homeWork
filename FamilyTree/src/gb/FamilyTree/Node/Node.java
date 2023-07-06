@@ -45,8 +45,8 @@ public class Node implements Serializable {
         this.childNodes = childs;
     }
 
-    public Node() {
-        this.uniqId = ++Node.id;
+    public Node(int id) {
+        this.uniqId = id;
         this.parents = new ArrayList<>();
         this.oneLevelNodes = new ArrayList<>();
         this.childNodes = new ArrayList<>();

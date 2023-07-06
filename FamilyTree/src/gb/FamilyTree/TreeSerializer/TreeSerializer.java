@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import gb.FamilyTree.Interfaces.FileReadable;
-import gb.FamilyTree.Interfaces.FileWritable;
+import gb.FamilyTree.TreeSerializer.Interfaces.FileReadable;
+import gb.FamilyTree.TreeSerializer.Interfaces.FileWritable;
 
 public class TreeSerializer implements FileReadable, FileWritable {
     private File currentFile;
