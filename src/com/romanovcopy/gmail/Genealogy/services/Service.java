@@ -42,35 +42,35 @@ public class Service extends BasicMethods {
         boolean flag = true;
         int mode = 0;
         while (flag) {
-            var select =new ModeSelectionDialog(new String[]
-                    {"Новый граф", "Редактировать граф", "Удалить граф", "Вывести все графы", "Сохранить", "Выход"});
-                mode= select.select();
-                flag = mode != 5;
+                mode= dialog(new String[]{"Новый граф", "Редактировать граф", "Удалить " +
+                        "граф", "Вывести все графы", "Сохранить", "Выход"},
+                        scanner,1);
+                flag = mode != 5 && mode>0;
                 if (flag) {
                     switch (mode) {
-                        case 0: {
+                        case 1: {
                             System.out.println("Новый граф");
                             var person=createPerson();
                             if(person!=null){
                                 graph.addPerson(person);}
                             break;
                         }
-                        case 1: {
+                        case 2: {
                             System.out.println("Редактирование графа");
                             personEditing(scanner, graph);
                             break;
                         }
-                        case 2: {
+                        case 3: {
                             System.out.println("Удаление графа");
 
                             break;
                         }
-                        case 3: {
+                        case 4: {
                             System.out.println("Вывести все графы");
 
                             break;
                         }
-                        case 4: {
+                        case 5: {
                             System.out.println("Сохранить");
                             var write=new WriteStream(Program.path);
                             write.write(genealogyGraphHashMap);
@@ -174,7 +174,6 @@ public class Service extends BasicMethods {
         return person;
     }
 
-
     /**
      * запуск программы
      */
@@ -267,6 +266,24 @@ public class Service extends BasicMethods {
             }
         }
         return  true;
+    }
+
+    /**
+     *
+     * @param elements массив строк для выбора
+     * @param scanner поток для считывания с консоли
+     * @param start номер первого элемента для выбора
+     * @return номер выбранного элемента
+     */
+    public int dialog(String[]elements, Scanner scanner,  int start){
+        int count=start;
+        for(String element:elements){
+            System.out.printf("%d %s\n",count,element);
+            count++;
+        }
+        if(scanner.hasNextInt()){
+            return scanner.nextInt();
+        }else return -1;
     }
 
     public boolean close(){

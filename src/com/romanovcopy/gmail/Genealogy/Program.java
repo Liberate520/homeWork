@@ -10,6 +10,4 @@ public class Program {
         service = new Service();
         service.close();
     }
-
-
 }
