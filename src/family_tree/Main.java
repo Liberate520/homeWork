@@ -1,4 +1,4 @@
-package Family_tree;
+package family_tree;
 
 import java.time.LocalDate;
 
@@ -26,7 +26,7 @@ public class Main {
         vanya_1.addParent(petya_2, Parent_Type.Biological_Father);
         vanya_1.addParent(dasha_2, Parent_Type.Biological_Mother);
         vanya_1.addParent(oleg_2, Parent_Type.Foster_Father);
-        vanya_1.getMarried(olya_1);
+        family_1.wedding(vanya_1, olya_1);
         olya_1.setSecondName("Каруселева");
         vanya_1.addChild(kostya_0, Child_type.Biological_Son);
         vanya_1.addChild(petya_0, Child_type.Foster_Son);
@@ -36,8 +36,6 @@ public class Main {
         olya_1.addChild(petya_0, Child_type.Foster_Son);
         olya_1.addChild(masha_0, Child_type.Biological_Daughter);
         olya_1.addChild(katya_0, Child_type.Foster_Daughter);
-        System.out.println(vanya_1);
         System.out.println(family_1);
-        family_1.getSiblings(kostya_0);
     }
 }

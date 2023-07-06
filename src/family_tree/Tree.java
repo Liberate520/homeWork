@@ -1,4 +1,4 @@
-package Family_tree;
+package family_tree;
 
 
 import java.util.ArrayList;
@@ -18,6 +18,24 @@ public class Tree {
             family.add(member);
             member.setId(memberId++);
         }
+    }
+
+    public void wedding(Human husband, Human wife){
+        if(husband.isMarried() || wife.isMarried()){
+            System.out.println("Свадьба невозможна");
+        }
+        else {
+            husband.setSpouse(wife);
+            wife.setSpouse(husband);
+        }
+    }
+
+    public void divorce(Human husband, Human wife){
+        if (husband.getSpouse().equals(wife) && wife.getSpouse().equals(husband)) {
+            husband.removeSpouse();
+            wife.removeSpouse();
+        }
+        else System.out.println("Развод невозможен");
     }
 
     public void getSiblings(Human child)
@@ -44,6 +62,8 @@ public class Tree {
         StringBuilder sb = new StringBuilder();
         for (Human member : this.family) {
             sb.append(member.getId()).append(". ").append(member.getFullName()).append("\n");
+            sb.append(member.infoFormat());
+            sb.append("______________________________").append("\n");
         }
         return sb.toString();
     }
