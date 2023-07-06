@@ -1,16 +1,17 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
-    String name;
-    Sex sex;
-    LocalDate birthDate;
-    LocalDate deathDate;
-    List<Human> parents;
-    List<Human> children;
+public class Human implements Serializable {
+    private String name;
+    private Sex sex;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
+    private List<Human> parents;
+    private List<Human> children;
 
     public Human(String name, Sex sex, LocalDate birthDate, LocalDate deathDate, List<Human> parents) {
         this.parents = new ArrayList<>();

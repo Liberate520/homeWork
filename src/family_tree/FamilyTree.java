@@ -1,9 +1,10 @@
 package family_tree;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> humanList;
 
     public FamilyTree(List<Human> humanList) {
@@ -54,5 +55,4 @@ public class FamilyTree {
         }
         return sb.toString();
     }
-
 }
