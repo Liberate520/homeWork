@@ -1,12 +1,20 @@
-package human;
+package genTree;
 
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
+import interfaces.Loadable;
+import interfaces.Saveable;
 
-public class GenTree {
+public class GenTree implements Saveable, Loadable {
+    private static String fileExt;
+
     private Set<Human> humans;
     private int size;
+
+    static {
+        fileExt = ".genTree";
+    }
 
     // конструктор
     public GenTree() {
@@ -92,5 +100,10 @@ public class GenTree {
         else {
             // что-то сделать если дерево пусто
         }
+    }
+
+    @Override
+    public String getFileExt() {
+        return fileExt;
     }
 }

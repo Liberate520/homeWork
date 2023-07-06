@@ -1,10 +1,13 @@
-package human;
+package genTree;
 
-// есть ещё LocalDate
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
+import interfaces.Loadable;
+import interfaces.Saveable;
 
-public class Human {
+public class Human implements Saveable, Loadable {
+    private static String fileExt;
+
     private int id;
     private String firstName;
     private String midName;
@@ -13,10 +16,15 @@ public class Human {
     private String strGender;
     private GregorianCalendar birthDate;
     private GregorianCalendar deathDate;
+    private String strBirthDate = "UnknownBirthDate";
+    private String strDeathDate = "UnknownDeathDate";
     private Human mother;
     private Human father;
     private ArrayList<Human> childs;
-    private ArrayList<Integer> childsIds;
+
+    static {
+        fileExt = ".human";
+    }
 
     // конструктор
     public Human(int id,
@@ -36,7 +44,6 @@ public class Human {
             strGender = "Женщина";
         }
         childs = new ArrayList<Human>();
-        childsIds = new ArrayList<Integer>();
     }
 
     public int getId() {
@@ -51,44 +58,31 @@ public class Human {
         return childs;
     }
 
-    public ArrayList<Integer> getChildsIds() {
-        return childsIds;
-    }
-
-    // есть ещё LocalDate
     public void setBirthDate(int day, int month, int year) {
         GregorianCalendar birthDate = new GregorianCalendar(year, month - 1, day);
-        if (this.deathDate != null) {
-            if (birthDate.before(this.deathDate)) {
-                this.birthDate = birthDate;
-            }
-            else {
-                throw new ArithmeticException("birthDate can not be after deathDate");
-            }
+        if (this.deathDate != null && birthDate.after(this.deathDate)) {
+            throw new ArithmeticException("birthDate can not be after deathDate");
         }
         else {
             this.birthDate = birthDate;
+            this.strBirthDate = dateToString(birthDate);
         }
     }
 
     public void setDeathDate(int day, int month, int year) {
         GregorianCalendar deathDate = new GregorianCalendar(year, month - 1, day);
-        if (this.birthDate != null) {
-            if (deathDate.after(this.birthDate)) {
-                this.deathDate = deathDate;
-            }
-            else {
-                throw new ArithmeticException("deathDate can not be before birthDate");
-            }
+        if (this.birthDate != null && deathDate.before(this.birthDate)) {
+            throw new ArithmeticException("deathDate can not be before birthDate");
         }
         else {
             this.deathDate = deathDate;
+            this.strDeathDate = dateToString(deathDate);
         }
     }
 
     public void changeFullName(String firstName,
-    String midName,
-    String lastName) {
+                               String midName,
+                               String lastName) {
         this.firstName = firstName;
         this.midName = midName;
         this.lastName = lastName;
@@ -113,10 +107,7 @@ public class Human {
     }
 
     public void addChild(Human child) {
-        if (this.childs.contains(child)) {
-            // pass
-        }
-        else {
+        if (!(this.childs.contains(child))) {
             this.childs.add(child);
             if (this.gender == Gender.man) {
                 child.setFather(this);
@@ -127,8 +118,7 @@ public class Human {
         }
     }
 
-    // требует доработки
-    private String formattedDate(GregorianCalendar date) {
+    private String dateToString(GregorianCalendar date) {
         // day = 5
         // month = 2
         // year = 1
@@ -138,6 +128,11 @@ public class Human {
         return String.format("%s.%s.%s", day, month, year);
     }
 
+    private String datesInfo() {
+        return strBirthDate + " - " + strDeathDate;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -153,19 +148,9 @@ public class Human {
                this.gender == other.gender;
     }
 
+    @Override
     public String toString() {
-        if (birthDate == null && deathDate == null) {
-            return "id=" + id + " " + getFullName() + " UnknownBirthDate - UnknownDeathDate";
-        }
-        else if (birthDate == null) {
-            return "id=" + id + " " + getFullName() + " UnknownBirthDate - " + formattedDate(deathDate);
-        }
-        else if (deathDate == null) {
-            return "id=" + id + " " + getFullName() + " " + formattedDate(birthDate) + " - UnknownDeathDate";
-        }
-        else {
-            return "id=" + id + " " + getFullName() + " " + formattedDate(birthDate) + " - " + formattedDate(deathDate);
-        }
+        return "id=" + id + " " + getFullName() + " " + datesInfo();
     }
 
     public String getFullName() {
@@ -191,5 +176,10 @@ public class Human {
         sb.append(getChilds());
         sb.append("\n-----------------------------------------------------\n");
         System.out.println(sb.toString());
+    }
+
+    @Override
+    public String getFileExt() {
+        return fileExt;
     }
 }

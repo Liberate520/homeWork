@@ -1,13 +1,9 @@
-// Реализовать, с учетом ооп подхода, приложение
-// для проведения исследований с генеалогическим древом.
-// Идея: описать некоторое количество компонентов, например:
-// модель человека и дерева
-// Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
-// Сделать PR к проекту: https://github.com/Liberate520/homeWork
-
-import human.Human;
-import human.Gender;
-import human.GenTree;
+import java.io.IOException;
+import io.Loader;
+import io.Saver;
+import genTree.GenTree;
+import genTree.Gender;
+import genTree.Human;
 
 public class Main {
     public static void main(String[] args) {
@@ -71,6 +67,46 @@ public class Main {
         tree.addChildToId(ivan, 4);
         tree.addChildToId(ivan, 5);
 
-        tree.showAllHumans();
+        // tree.showAllHumans();
+
+
+        Saver saver = new Saver();
+        try {
+            saver.saveData(tree, "MyGenTree");
+        }
+        catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+
+        try {
+            saver.saveData(sveta, "Svetlana");
+        }
+        catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+
+
+        Loader loader = new Loader();
+        try {
+            GenTree restTree = (GenTree)loader.loadData("MyGenTree.genTree");
+            restTree.showAllHumans();
+        }
+        catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+        catch (ClassNotFoundException clsnfe) {
+            System.out.println(clsnfe.getMessage());
+        }
+
+        try {
+            Human restHuman = (Human)loader.loadData("Svetlana.human");
+            restHuman.showFullInfo();
+        }
+        catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+        catch (ClassNotFoundException clsnfe) {
+            System.out.println(clsnfe.getMessage());
+        }
     }
 }
