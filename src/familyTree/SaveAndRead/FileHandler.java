@@ -1,4 +1,4 @@
-package familyTree;
+package familyTree.SaveAndRead;
 
 import java.io.*;
 

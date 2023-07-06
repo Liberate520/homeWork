@@ -1,13 +1,17 @@
-package familyTree;
+package familyTree.Human;
+
 import java.io.Serializable;
 import java.time.*;
+//import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-public class Human implements Serializable {
+
+public class Human implements Serializable, Comparable<Human> {
     private Integer id;
     private String surname;
     private String name;
     private Gender gender;
+    private Integer Age;
     private LocalDate dateOfBirthday;
     private LocalDate dateOfDeath;
     private List<Human> parents;
@@ -53,38 +57,40 @@ public class Human implements Serializable {
         return false;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+    public void getAge(Integer Age) {
+        this.Age = Age;
+    }
     public String getName() {
         return name;
     }
-
     public Gender getGender() {
         return gender;
     }
-
     public LocalDate getDateOfBirthday() {
         return dateOfBirthday;
     }
-
     public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
-
     public List<Human> getParents() {
         return parents;
     }
-
     public List<Human> getChildren() {
         return children;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public void setDateOfBirthday(LocalDate dateOfBirthday) {
         this.dateOfBirthday = dateOfBirthday;
     }
-
     public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
     }
@@ -193,5 +199,20 @@ public class Human implements Serializable {
         }
         Human human = (Human) obj;
         return human.getName().equals(getName());
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
+    }
+
+    public void sortBySurname() {
+        Human.sortByName();
+    }
+    public static void sortByName() {
+        Human.sortByName();
+    }
+    public static void sortByAge() {
+        Human.sortByAge();
     }
 }
