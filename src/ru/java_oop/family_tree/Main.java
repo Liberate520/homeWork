@@ -1,16 +1,44 @@
 package ru.java_oop.family_tree;
 
+import ru.java_oop.family_tree.file_handler.FileHandler;
 import ru.java_oop.family_tree.human.Gender;
 import ru.java_oop.family_tree.human.Human;
 import ru.java_oop.family_tree.family_tree.FamilyTree;
 
+import javax.print.attribute.standard.JobKOctets;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree familyTree = new FamilyTree();
+//      SAVE BLOCK
+//        FamilyTree familyTree = new FamilyTree();
+//        createObjectsForFamilyTree(familyTree);
+//
+//        System.out.println(familyTree);
+//
+//        performFamilyTreeSaveToFile(familyTree);
 
+//        LOAD BLOCK
+        FamilyTree familyTree = (FamilyTree) loadFamilyTreeFromFile();
+
+        System.out.println(familyTree);
+    }
+
+
+    public static void performFamilyTreeSaveToFile(FamilyTree familyTree) throws IOException {
+        FileHandler fh = new FileHandler(familyTree);
+        fh.writeObjToFile();
+    }
+
+    public static FamilyTree loadFamilyTreeFromFile() throws IOException, ClassNotFoundException {
+
+        FileHandler fh = new FileHandler();
+        return (FamilyTree) fh.readObjFromFile();
+    }
+
+    public static void createObjectsForFamilyTree(FamilyTree familyTree) {
         Human parent1 = new Human("Parent1", Gender.Male, LocalDate.parse("1000-01-01"));
         Human parent2 = new Human("Parent2", Gender.Female, LocalDate.parse("1000-02-02"));
 
@@ -23,7 +51,5 @@ public class Main {
         familyTree.addFamilyMember(child2);
 
         familyTree.setWedding(parent1.getId(), parent2.getId());
-
-        System.out.println(familyTree);
     }
 }
