@@ -40,8 +40,13 @@ public class Service {
         familyTree.addNode(addingNode, nodeToBeAdded, relation);
     }
 
-    public String getTree() {
-        return familyTree.toString();
+    public String getTreeInfo() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Nodes:\n");
+        for (RelativeNode node : familyTree) {
+            builder.append(String.format("\t%s\n", node));
+        }
+        return builder.toString();
     }
 
     public RelativeNode getNode(int id) {

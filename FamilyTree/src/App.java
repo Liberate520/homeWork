@@ -19,7 +19,7 @@ public class App {
         RelativeNode sis = service.createNode("K", "P", "D");
         service.addNodeToTree(me, sis, Relations.ONE_LEVEL);
 
-        System.out.println(service.getTree());
+        System.out.println(service.getTreeInfo());
 
         // service.saveTree("tst.out");
 
@@ -28,5 +28,6 @@ public class App {
         // Service serviceNew = new Service();
         // serviceNew.readTree("tst.out");
         // System.out.println(serviceNew.getTree());
+
     }
 }

@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import gb.FamilyTree.Node.RelativeNode.RelativeNode;
+import java.util.Iterator;
 
-public class Tree implements Serializable {
+import gb.FamilyTree.Node.RelativeNode.RelativeNode;
+import gb.FamilyTree.Tree.Iterator.NodeIterator;
+
+public class Tree implements Serializable, Iterable<RelativeNode> {
     protected RelativeNode root;
     protected ArrayList<RelativeNode> nodes;
 
@@ -61,5 +64,10 @@ public class Tree implements Serializable {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public Iterator<RelativeNode> iterator() {
+        return new NodeIterator(nodes);
     }
 }
