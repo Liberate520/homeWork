@@ -51,7 +51,7 @@ public class Human {
 
     public boolean addParents (Human parent) {
         if (!parents.contains(parent)) {
-            children.add(parent);
+            parents.add(parent);
             return true;
         }
         return false;

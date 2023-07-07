@@ -28,6 +28,12 @@ public class Main {
         tree.add(new Human ("Иван", Gender.Male, 
         LocalDate.of(1970, 6, 28)));
 
+
+        Human grandMother = new Human("Клавдия", Gender.Female, LocalDate.of(1950, 8, 15));
+        grandMother.addChild(tree.getByName("Нина"));
+        grandMother.addChild(tree.getByName("Анна"));
+        tree.add(grandMother);
+
         System.out.println(tree.getInfo());
     }
 }
