@@ -1,10 +1,13 @@
-package family_tree;
+package family_tree.fileHandlers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import family_tree.familyTree.FamilyTree;
+import family_tree.human.Human;
 
 public class FileHandlerForTree implements Writable {
 
@@ -25,8 +28,8 @@ public class FileHandlerForTree implements Writable {
                 Human human = new Human(string.split(" "), familyTree);
                 familyTree.addHuman(human);
             }
-            familyTree.addChilrenForParentsName(familyTree);
         }
+        familyTree.addChilrenForParentsName();
         return familyTree;
     }
 }

@@ -1,14 +1,18 @@
-package family_tree;
-
+package family_tree.human;
 
 import java.util.List;
+
+import family_tree.familyTree.FamilyTree;
+
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
-public class Human {
-    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-M-dd");
-    
+public class Human implements Serializable {
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     private String name;
     private LocalDate birthDate, deathDate;
     private Gender gender;
@@ -29,7 +33,7 @@ public class Human {
         this(name, birthDate, null, gender, null, null);
     }
 
-    public Human(String[] args, FamilyTree familyTree){
+    public Human(String[] args, FamilyTree familyTree) {
         this.name = args[0];
         if (args[1].equals("Male")) {
             this.gender = Gender.Male;
@@ -57,6 +61,10 @@ public class Human {
 
     public String getName() {
         return name;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     public void setDeathDate(LocalDate deathDate) {
@@ -100,9 +108,19 @@ public class Human {
         StringBuilder stringBuilder = new StringBuilder();
         for (Human child : children) {
             stringBuilder.append(child.name);
-            stringBuilder.append("\n");
+            stringBuilder.append(", ");
         }
         return stringBuilder.toString();
+    }
+
+    public int getAge() {
+        int age = 0;
+        if (deathDate != null) {
+            age = Period.between(birthDate, deathDate).getYears();
+        } else {
+            age = Period.between(birthDate, LocalDate.now()).getYears();
+        }
+        return age;
     }
 
     private String writeChildrensToTxt() {
@@ -116,28 +134,35 @@ public class Human {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Имя: " + name + ", Пол: " + gender + ", Дата рождения: " + birthDate);
-        if (deathDate != null) {
-            stringBuilder.append(", Дата смерти: " + deathDate);
-        }
+        stringBuilder.append("Имя: " + name + 
+                            ", Пол: " + gender + 
+                            ", Возраст: " + getAge() +
+                            ", Дата рождения: " + birthDate.format(FORMATTER));
         if (mother != null) {
             stringBuilder.append(", Мать: " + mother.name);
+        } else {
+            stringBuilder.append(", Мать: отсутсвует");
         }
         if (father != null) {
             stringBuilder.append(", Отец: " + father.name);
+        } else {
+            stringBuilder.append(", Отец: отсутствует");
         }
         if (!children.isEmpty()) {
-            stringBuilder.append("\nСписок детей " + name + ":\n");
+            stringBuilder.append(", Дети: ");
             stringBuilder.append(getAllChildrens());
+        } else {
+            stringBuilder.append(", Дети: отсутствуют");
         }
+        stringBuilder.append("\n");
         return stringBuilder.toString();
     }
 
-    public String toTxt(){
+    public String toTxt() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(name + " " + gender + " " + birthDate);
+        stringBuilder.append(name + " " + gender + " " + birthDate.format(FORMATTER));
         if (deathDate != null) {
-            stringBuilder.append(" " + deathDate);
+            stringBuilder.append(" " + deathDate.format(FORMATTER));
         } else {
             stringBuilder.append(" null");
         }
