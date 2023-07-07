@@ -12,7 +12,7 @@ public class Main {
         tree.getByName("Нина"), tree.getByName("Иван")));
 
         tree.add(new Human ("Борис", Gender.Male, 
-        LocalDate.of(1980, 2, 15)));
+        LocalDate.of(1980, 2, 15), tree.getByName("Анна")));
 
         tree.add(new Human ("Арина", Gender.Female, 
         LocalDate.of(2010, 3, 30),
@@ -36,7 +36,15 @@ public class Main {
         Human grandMother = new Human("Клавдия", Gender.Female, LocalDate.of(1950, 8, 15));
         grandMother.addChild(tree.getByName("Нина"));
         grandMother.addChild(tree.getByName("Анна"));
+        // grandMother.addSpouse(tree.getByName("Семен"));
         tree.add(grandMother);
+
+        Human grandFother = new Human("Семен", Gender.Male, LocalDate.of(1947, 8, 19), 
+        tree.getByName("Клавдия"));
+        grandFother.addChild(tree.getByName("Нина"));
+        grandFother.addChild(tree.getByName("Анна"));
+        // grandMother.addSpouse(tree.getByName("Семен"));
+        tree.add(grandFother);
 
         System.out.println(tree.getInfo());
     }

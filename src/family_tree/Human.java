@@ -196,9 +196,11 @@ public class Human {
         sb.append(", ");
         sb.append(getChildrenInfo());
         sb.append(", ");
-        sb.append(getWifeInfo());
-        sb.append(", ");
-        sb.append(getHusbandInfo());
+        if (getGender() == Gender.Male) { 
+            sb.append(getWifeInfo());
+            // sb.append(", ");
+        }
+        if (getGender() == Gender.Female) { sb.append(getHusbandInfo()); }
         return sb.toString();
     }
 
