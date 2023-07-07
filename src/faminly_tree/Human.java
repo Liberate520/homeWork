@@ -1,11 +1,11 @@
 package faminly_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private String name, surname, patronymic;
     private Gender gender;

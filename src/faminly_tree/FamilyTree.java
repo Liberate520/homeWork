@@ -1,10 +1,11 @@
 package faminly_tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
    private List<Human> tree = new ArrayList<>();
    private int newID = 0;
 
