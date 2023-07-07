@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> tree = new ArrayList<>();
     private HashMap<Human, Human> fathersList = new HashMap<>();
     private HashMap<Human, Human> mothersList = new HashMap<>();
@@ -13,16 +14,16 @@ public class FamilyTree {
 
     public void addFather(String surname, String name, String patronymic, Gender gender, int birthYear, int birthMonth, int birthDay, Human human){
         Human father = new Human(surname, name, patronymic, Gender.Male, birthYear, birthMonth, birthDay);
-        tree.add(father); //добавляем его в общий список персон
-        fathersList.put(human, father); //добавляем в словарь отцов
-        human.setFather(father); //определяем поле отец у человека, для которого вызвали метод
-        List<Human> children = father.getChildren(); //находим других детей этого отца
+        tree.add(father);
+        fathersList.put(human, father);
+        human.setFather(father);
+        List<Human> children = father.getChildren();
         if (children == null){
             children = new ArrayList<>();
             children.add(human);
         }
-        else children.add(human); //добавляем человека, для которого вызвали метод
-        father.setChildren(children); //переопределяем поле дети у этого отца
+        else children.add(human);
+        father.setChildren(children);
     }
 
     public void addMother(String surname, String name, String patronymic, Gender gender, int birthYear, int birthMonth, int birthDay, Human human){
@@ -43,12 +44,13 @@ public class FamilyTree {
         StringBuilder parents = new StringBuilder();
         Human father = fathersList.get(human);
         Human mother = mothersList.get(human);
-        if (father != null) parents.append("Father:\n" + father + "\n");
-        else parents.append("Father not found\n");
-        if (mother != null) parents.append("Mother:\n" + mother + "\n");
-        else parents.append("Mother not found\n");
+        if (father != null) parents.append("Отец:\n" + father + "\n");
+        else parents.append("Отец не найден\n");
+        if (mother != null) parents.append("Мать:\n" + mother + "\n");
+        else parents.append("Мать не найдена\n");
         return parents.toString().replaceAll("]", "").replaceAll("\\[", "").replaceAll("\n, ", "\n\n");
     }
+
 
     @Override
     public String toString(){
