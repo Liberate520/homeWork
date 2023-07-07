@@ -1,33 +1,34 @@
 package ru.gb.family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private String name;
     private String surname;
     private String patronymic;
     private String gender;
-    private LocalDate birthDay;
-    private LocalDate deathDay;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
     private Human mother;
     private Human father;
-    private List<Human> childrens;
+    private List<Human> childs;
 
-    public Human(String surname, String name, String patronymic, String gender, LocalDate birthDay, LocalDate deathDay) {
+    public Human(String surname, String name, String patronymic, String gender, LocalDate birthDate, LocalDate deathDate) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.gender = gender;
-        this.birthDay = birthDay;
-        this.deathDay = deathDay;
-        this.childrens = new ArrayList<>();
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
+        this.childs = new ArrayList<>();
     }
 
-    public Human(String surname, String name, String patronymic, String gender, LocalDate birthDay) {
-        this(surname, name, patronymic, gender, birthDay, null);
+    public Human(String surname, String name, String patronymic, String gender, LocalDate birthDate) {
+        this(surname, name, patronymic, gender, birthDate, null);
     }
 
     public Human(String surname, String name, String patronymic, String gender) {
@@ -54,18 +55,18 @@ public class Human {
         return gender;
     }
 
-    public LocalDate birthDay() {
-        if (birthDay.equals(null)) {
+    public LocalDate birthDate() {
+        if (birthDate.equals(null)) {
             return LocalDate.of(0, 0, 0);
         }
-        return birthDay;
+        return birthDate;
     }
 
-    public LocalDate deathDay() {
-        if (deathDay.equals(null)) {
+    public LocalDate deathDate() {
+        if (deathDate.equals(null)) {
             return LocalDate.of(0, 0, 0);
         }
-        return deathDay;
+        return deathDate;
     }
 
     public Human father() {
@@ -76,8 +77,8 @@ public class Human {
         return mother;
     }
 
-    public List<Human> childrens() {
-        return childrens;
+    public List<Human> childs() {
+        return childs;
     }
 
     public void setId(int id) {
@@ -100,12 +101,12 @@ public class Human {
         this.gender = gender;
     }
 
-    public void setBirthDay(LocalDate birthDay) {
-        this.birthDay = birthDay;
+    public void setbirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public void setDeathDay(LocalDate deathDay) {
-        this.deathDay = deathDay;
+    public void setdeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
     }
 
     public void setMotherInfo(Human mother) {
@@ -116,31 +117,31 @@ public class Human {
         this.father = father;
     }
 
-    public void addChildrenInfo(Human children) {
-        this.childrens.add(children);
+    public void addChildInfo(Human child) {
+        this.childs.add(child);
     }
 
-    public void addChildrensInfo(List<Human> childrens) {
-        for (Human children : childrens) {
-            this.childrens.add(children);
+    public void addChildInfo(List<Human> childs) {
+        for (Human child : childs) {
+            this.childs.add(child);
         }
     }
 
-    public void removeChildrenInfo(int childrenId) {
-        for (int i = 0; i < childrens.size(); i++) {
-            if (childrens.get(i).id() == childrenId) {
-                childrens.remove(i);
+    public void removeChildInfo(int childId) {
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).id() == childId) {
+                childs.remove(i);
             }
         }
     }
 
-    public void clearChildrenInfo() {
-        childrens.clear();
+    public void clearChildInfo() {
+        childs.clear();
     }
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Фамилия: " + surname + ", Имя: " + name + ", Отчество: " + patronymic + ", Дата рождения: " + birthDay;
+        return "ID: " + id + ", Фамилия: " + surname + ", Имя: " + name + ", Отчество: " + patronymic + ", Дата рождения: " + birthDate;
     }
 
 }
