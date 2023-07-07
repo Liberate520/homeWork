@@ -1,15 +1,19 @@
 package genTree;
 
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Iterator;
+import genTree.comparators.ByAge;
+import genTree.comparators.ByFullName;
+import genTree.comparators.ByHierarchyLevel;
+import human.Human;
+import human.enums.Gender;
 import interfaces.Loadable;
 import interfaces.Saveable;
 
-public class GenTree implements Saveable, Loadable {
+public class GenTree implements Saveable, Loadable, Iterable<Human> {
     private static String fileExt;
 
-    private Set<Human> humans;
+    private ArrayList<Human> humans;
     private int size;
 
     static {
@@ -18,10 +22,11 @@ public class GenTree implements Saveable, Loadable {
 
     // конструктор
     public GenTree() {
-        humans = new HashSet<Human>();
+        humans = new ArrayList<Human>();
         size = 0;
     }
 
+    // вернуть кол-во людей в дереве
     public int size() {
         return size;
     }
@@ -62,6 +67,7 @@ public class GenTree implements Saveable, Loadable {
         return null;
     }
 
+    // добавить человека в дерево
     public void addHuman(Human human) {
         humans.add(human);
         size += 1;
@@ -74,11 +80,11 @@ public class GenTree implements Saveable, Loadable {
                 parent.addChild(child);
             }
             else {
-                // что-то сделать если человек по id не найден
+                // TODO что-то сделать если человек по id не найден
             }
         }
         else {
-            // что-то сделать если дерево пусто
+            // TODO что-то сделать если дерево пусто
         }
     }
 
@@ -102,8 +108,28 @@ public class GenTree implements Saveable, Loadable {
         }
     }
 
+    // переопределение из Saveable
     @Override
     public String getFileExt() {
         return fileExt;
+    }
+
+    // переопределение из Iterable
+    @Override
+    public Iterator<Human> iterator() {
+        return new GenTreeIterator(humans);
+    }
+
+    // сортировки с использованием классов-компараторов
+    public void sortByHierarchyLevel() {
+        humans.sort(new ByHierarchyLevel());
+    }
+
+    public void sortByFullName() {
+        humans.sort(new ByFullName());
+    }
+
+    public void sortByAge() {
+        humans.sort(new ByAge());
     }
 }

@@ -1,9 +1,9 @@
-import java.io.IOException;
 import io.Loader;
 import io.Saver;
+import java.io.IOException;
 import genTree.GenTree;
-import genTree.Gender;
-import genTree.Human;
+import human.Human;
+import human.enums.Gender;
 
 public class Main {
     public static void main(String[] args) {
@@ -67,46 +67,52 @@ public class Main {
         tree.addChildToId(ivan, 4);
         tree.addChildToId(ivan, 5);
 
-        // tree.showAllHumans();
+        tree.sortByHierarchyLevel();
+
+        tree.showAllHumans();
+
+        // for (Human human: tree) {
+        //     human.showFullInfo();
+        // }
 
 
-        Saver saver = new Saver();
-        try {
-            saver.saveData(tree, "MyGenTree");
-        }
-        catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
+        // Saver saver = new Saver();
+        // try {
+        //     saver.writeObj(tree, "MyGenTree");
+        // }
+        // catch (IOException ioe) {
+        //     System.out.println(ioe.getMessage());
+        // }
 
-        try {
-            saver.saveData(sveta, "Svetlana");
-        }
-        catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
+        // try {
+        //     saver.writeObj(anton, "Anton");
+        // }
+        // catch (IOException ioe) {
+        //     System.out.println(ioe.getMessage());
+        // }
 
 
-        Loader loader = new Loader();
-        try {
-            GenTree restTree = (GenTree)loader.loadData("MyGenTree.genTree");
-            restTree.showAllHumans();
-        }
-        catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
-        catch (ClassNotFoundException clsnfe) {
-            System.out.println(clsnfe.getMessage());
-        }
+        // Loader loader = new Loader();
+        // try {
+        //     GenTree restTree = (GenTree)loader.loadObj("MyGenTree.genTree");
+        //     restTree.showAllHumans();
+        // }
+        // catch (IOException ioe) {
+        //     System.out.println(ioe.getMessage());
+        // }
+        // catch (ClassNotFoundException clsnfe) {
+        //     System.out.println(clsnfe.getMessage());
+        // }
 
-        try {
-            Human restHuman = (Human)loader.loadData("Svetlana.human");
-            restHuman.showFullInfo();
-        }
-        catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
-        catch (ClassNotFoundException clsnfe) {
-            System.out.println(clsnfe.getMessage());
-        }
+        // try {
+        //     Human restHuman = (Human)loader.loadObj("Svetlana.human");
+        //     restHuman.showFullInfo();
+        // }
+        // catch (IOException ioe) {
+        //     System.out.println(ioe.getMessage());
+        // }
+        // catch (ClassNotFoundException clsnfe) {
+        //     System.out.println(clsnfe.getMessage());
+        // }
     }
 }
