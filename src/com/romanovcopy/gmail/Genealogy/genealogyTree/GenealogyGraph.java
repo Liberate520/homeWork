@@ -54,6 +54,7 @@ public class GenealogyGraph implements Serializable, Iterable<Person> {
         }
         return Collections.emptyList();
     }
+
     /**
      * получить ключ по значению
      * @param person значение
