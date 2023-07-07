@@ -1,11 +1,13 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
+//    private long id;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
@@ -14,6 +16,7 @@ public class Human {
     private List<Human> children;
 
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother){
+//        id = -1;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -44,6 +47,13 @@ public class Human {
     public String getName() {
         return name;
     }
+
+//    public long getId() {
+//        return id;
+//    };
+//     public void setId(long id){
+//         this.id = id;
+//     }
     public boolean addParent(Human parent){
         if(!parents.contains(parent)){
             parents.add(parent);
@@ -95,6 +105,8 @@ public class Human {
     }
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
+//        sb.append("id: ");
+//        sb.append(id);
         sb.append("имя: ");
         sb.append(name);
         sb.append(", пол: ");
