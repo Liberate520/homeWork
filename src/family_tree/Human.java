@@ -14,7 +14,7 @@ public class Human {
     private List<Human> children;
     private List<Human> wifes;
     private List<Human> husbands;
-    // private Human spouse;
+    private List<Human> spouses;
 
     public Human (String name, Gender gender, LocalDate birthDate, LocalDate deathDate,
     Human father, Human mother, Human wife, Human husband) {
@@ -31,14 +31,22 @@ public class Human {
         }
         children = new ArrayList<>();
 
-        wifes = new ArrayList<>();
+        spouses = new ArrayList<>();
         if (wife != null) {
-            wifes.add(wife);
+            spouses.add(wife);
         }
-        husbands = new ArrayList<>();
         if (husband != null) {
-            husbands.add(husband);
+            spouses.add(husband);
         }
+
+        // wifes = new ArrayList<>();
+        // if (wife != null) {
+        //     wifes.add(wife);
+        // }
+        // husbands = new ArrayList<>();
+        // if (husband != null) {
+        //     husbands.add(husband);
+        // }
     }
 
     public Human(String name, Gender gender, LocalDate birthDate) {
@@ -77,21 +85,29 @@ public class Human {
         return false;
     }
 
-    public boolean addWifes (Human wife) {
-        if (!wifes.contains(wife)) {
-            wifes.add(wife);
+    public boolean addSpouse (Human spouse) {
+        if (!spouses.contains(spouse)) {
+            spouses.add(spouse);
             return true;
         }
         return false;
     }
 
-    public boolean addHusbands (Human husband) {
-        if (!husbands.contains(husband)) {
-            husbands.add(husband);
-            return true;
-        }
-        return false;
-    }
+    // public boolean addWifes (Human wife) {
+    //     if (!wifes.contains(wife)) {
+    //         wifes.add(wife);
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    // public boolean addHusbands (Human husband) {
+    //     if (!husbands.contains(husband)) {
+    //         husbands.add(husband);
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public LocalDate getBirthDate() {return birthDate;}
     public LocalDate getDeathDate() {return deathDate;}
@@ -118,26 +134,44 @@ public class Human {
     public List<Human> getChildren() {return children;}
 
     public Human getWife() {
-        for (Human wife: wifes) {
-            if (wife.getGender() == Gender.Female){
-                return wife;
+        for (Human spouse: spouses) {
+            if (spouse.getGender() == Gender.Female){
+                return spouse;
             }
         }
         return null;
     }
 
     public Human getHusband() {
-        for (Human husband: husbands) {
-            if (husband.getGender() == Gender.Male){
-                return husband;
+        for (Human spouse: spouses) {
+            if (spouse.getGender() == Gender.Male){
+                return spouse;
             }
         }
         return null;
     }
 
-    public List<Human> getWifes() {return wifes;}
-    public List<Human> getHusbands() {return husbands;}
+    // public Human getWife() {
+    //     for (Human wife: wifes) {
+    //         if (wife.getGender() == Gender.Female){
+    //             return wife;
+    //         }
+    //     }
+    //     return null;
+    // }
 
+    // public Human getHusband() {
+    //     for (Human husband: husbands) {
+    //         if (husband.getGender() == Gender.Male){
+    //             return husband;
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    // public List<Human> getWifes() {return wifes;}
+    // public List<Human> getHusbands() {return husbands;}
+    public List<Human> getSpouse() {return spouses;}
 
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
     public void setDeathDate(LocalDate deathDate) {this.deathDate = deathDate;}

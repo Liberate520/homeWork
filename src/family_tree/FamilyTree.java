@@ -22,8 +22,9 @@ public class FamilyTree {
             
             addToParents(human);
             addToChildren(human);
-            addToWifes(human);
-            addToHusbands(human);
+            addToSpouse(human);
+            // addToWifes(human);
+            // addToHusbands(human);
             return true;
         }
         return false;
@@ -41,17 +42,29 @@ public class FamilyTree {
         }
     }
 
-    private void addToWifes(Human human) {
-        for (Human wife: human.getWifes()) {
-            wife.addHusbands(human);
+    private void addToSpouse(Human human) {
+        for (Human spouse: human.getSpouse()) {
+            spouse.addSpouse(human);
         }
     }
 
-    private void addToHusbands(Human human) {
-        for (Human husband: human.getHusbands()) {
-            husband.addWifes(human);
-        }
-    }
+    // private void addToHusbands(Human human) {
+    //     for (Human spouse: human.getHusband()) {
+    //         spouse.addSpouse(human);
+    //     }
+    // }
+
+    // private void addToWifes(Human human) {
+    //     for (Human wife: human.getWifes()) {
+    //         wife.addHusbands(human);
+    //     }
+    // }
+
+    // private void addToHusbands(Human human) {
+    //     for (Human husband: human.getHusbands()) {
+    //         husband.addWifes(human);
+    //     }
+    // }
 
     public Human getByName (String name) {
         for (Human human: humanList) {
