@@ -1,13 +1,1 @@
------------------------------------------------------------------
-Семья:
-Имя: Alex, Пол: Male, Дата рождения: 1914-07-28, Дата смерти: 1964-03-02
-Список детей Alex:
-Bob
----------
-Имя: Susan, Пол: Female, Дата рождения: 1917-03-24, Дата смерти: 1964-03-02
-Список детей Susan:
-Bob
----------
-Имя: Bob, Пол: Male, Дата рождения: 1935-03-12, Мать: Susan, Отец: Alex---------
-
-
+Alex Male 1914-07-28 1964-03-02 null null Bob;Susan Female 1917-03-24 1964-03-02 null null Bob;Bob Male 1935-03-12 null Susan Alex Andrew;Olga Female 1915-12-05 1964-03-02 null null Mary;Mathew Male 1913-07-30 1964-03-02 null null Mary;Mary Female 1938-05-12 null Olga Mathew Andrew;Bob Male 1935-03-12 null Susan Alex Andrew;Mary Female 1938-05-12 null Olga Mathew Andrew;Andrew Male 1958-06-13 null Mary Bob null;

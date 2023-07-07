@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Human human1 = new Human("Alex", LocalDate.of(1914, 7, 28), Gender.Male);
         Human human2 = new Human("Susan", LocalDate.of(1917, 3, 24), Gender.Female);
         Human human3 = new Human("Bob", LocalDate.of(1935, 3, 12), Gender.Male);
@@ -19,27 +19,29 @@ public class Main {
         Human human6 = new Human("Mary", LocalDate.of(1938, 5, 12), Gender.Female);
         human4.setDeathDate(LocalDate.of(1964, 3, 2));
         human5.setDeathDate(LocalDate.of(1964, 3, 2));
-        FamilyTree familyTree2 = new FamilyTree();
-        familyTree2.createFamily(human4, human5, human6);
+        familyTree.createFamily(human4, human5, human6);
         // System.out.println(familyTree2.getFamilyTree());
 
         Human human7 = new Human("Andrew", LocalDate.of(1958, 6, 13), Gender.Male);
-        FamilyTree familyTree3 = new FamilyTree();
-        familyTree3.createFamily(human3, human6, human7);
+        familyTree.createFamily(human3, human6, human7);
         // System.out.println(familyTree3.getFamilyTree());
 
         FileHandlerForTree fileHandler = new FileHandlerForTree();
+        FamilyTree restoredFamilyTree = new FamilyTree();
+        // try {
+        //     fileHandler.saveTree(familyTree, false);
+        // } catch (ClassNotFoundException e) {
+        //     System.out.println("Ошибка: ClassNotFoundException!");
+        // } catch (IOException e) {
+        //     System.out.println("Ошибка: IOException!");
+        // }
         try {
-            fileHandler.SaveTree(familyTree, false);
+            restoredFamilyTree = fileHandler.loadTree();
+        } catch (IOException e) {
+            System.out.println("Ошибка: IOException!");
         } catch (ClassNotFoundException e) {
-            System.out.println("Ошбика: ClassNotFoundException!");
-        } catch (IOException e) {
-            System.out.println("Ошибка: IOException!");
+            System.out.println("Ошибка: ClassNotFoundException!");
         }
-        try {
-            fileHandler.LoadTree();
-        } catch (IOException e) {
-            System.out.println("Ошибка: IOException!");
-        }
+        System.out.println(restoredFamilyTree.getFamilyTree());
     }
 }
