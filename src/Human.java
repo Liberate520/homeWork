@@ -1,13 +1,13 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String surname, name, patronymic;
     private Gender gender;
     private LocalDate birth, death;
     private Human mother, father;
     private List<Human> children;
-    private int age;
 
     private int getAge(LocalDate birth, LocalDate death){
         int age;
@@ -47,7 +47,7 @@ public class Human {
         this.gender = gender;
         this.birth = LocalDate.of(birthYear, birthMonth, birthDay);
         this.death = null;
-        this.age = getAge(birth, death);
+        this.getAge(birth, death);
     }
 
     public void setFather(Human father) {
@@ -86,9 +86,7 @@ public class Human {
 
     @Override
     public String toString(){
-        return "Фамилия: " + surname + ", Имя: " + name + ", Отчество: " + patronymic + ".\n"
-                + "Дата рождения: " + birth + ".\n"
-                + "Возраст: " + age + ".\n";
+        return "ФИО: " + surname + " " + name + " " + patronymic + "; " + "ДР: " + birth + "; " + "Возраст: " + getAge(birth, death);
 
     }
 }
