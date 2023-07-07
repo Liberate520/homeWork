@@ -1,19 +1,20 @@
 package homeWork.FamalyTree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable{
     private long id;
     private String name;
     private String last_name;
     private LocalDate DOB;
-    private LocalDate DOD = null;
+    private LocalDate DOD ;
     private Gender gender;
-    private Human mother = null, father = null;
     private List<Human> children;
+    private List<Human> parents;
 
     public Human(String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender, Human father, Human mother){
         id = -1;
@@ -21,11 +22,24 @@ public class Human {
         this.last_name = last_name;
         this.DOB = DOB;
         this.DOD = DOD;
-        this.father = father;
-        this.mother = mother;
+        this.gender = gender;
+        parents = new ArrayList<>();
+        if (father != null){parents.add(father);}
+        if (mother != null){parents.add(mother);}
         children = new ArrayList<>();
     }
-    
+     public Human(String name, String last_name, LocalDate DOB, Gender gender){
+        this(name, last_name, DOB, null, gender, null, null);
+    }
+
+     public Human(String name, String last_name, LocalDate DOB, Gender gender, Human father, Human mother){
+        this(name, last_name, DOB, null, gender, father, mother);
+    }
+
+     public Human(String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender){
+        this(name, last_name, DOB, DOD, gender, null, null);
+    }
+
     public long getId() {
         return id;
     }
@@ -54,43 +68,43 @@ public class Human {
         return gender;
     }
 
-    public String getFather(){
-        String dad;
-        if (father != null){
-            dad = father.getName();
+    public Human getFather(){
+        for (Human parent: parents){
+            if (parent.getGender() == Gender.Male)
+            return parent;
         }
-        else{
-             dad = "Нет данных";
-        }
-        return dad;
+        return null;
     }
 
-    public String getMother(){
-        String mam;
-        if (mother != null){
-            mam = mother.getName();
+    public Human getMother(){
+        for (Human parent: parents){
+            if (parent.getGender() == Gender.Female)
+            return parent;
         }
-        else{
-             mam = "Нет данных";
-        }
-        return mam;
+        return null;
     }
 
-    public String addChild (Human child){
-        return child.getName();
+    public boolean addChild (Human child){
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
+    }
+    public boolean addParents (Human parent){
+        if (!parents.contains(parent)){
+            parents.add(parent);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Human> getParents(){
+        return parents;
     }
     
-    public String getChildren(){
-        StringBuilder child = new StringBuilder();
-        if (children.size() == 0){
-            child.append("нет");
-        }
-        else{
-            for (int i = 0; i < children.size(); i++){
-                child.append(children.get(i));
-            }            
-        }
-        return child.toString();
+    public List<Human> getChildren(){
+         return children;
     }
 
     public int getAge(){
@@ -126,14 +140,56 @@ public class Human {
         sb.append(", gender: ");
         sb.append(getGender());
         sb.append(", father: ");
-        sb.append(getFather());
+        sb.append(getFatherInfo());
         sb.append(", mother: ");
-        sb.append(getMother());
+        sb.append(getMotherInfo());
         sb.append(", children: ");
-        sb.append(getChildren());
+        sb.append(getChildrenInfo());
         return sb.toString();
     }
     
+    public String getFatherInfo() {
+        String dad;
+        Human father = getFather();
+        if (father != null){dad = father.getName();}
+        else {dad = "none";}
+        return dad;
+    }
+
+    public String getMotherInfo() {
+        String mam;
+        Human mother = getMother();
+        if (mother != null){mam = mother.getName();}
+        else {mam = "none";}
+        return mam;
+    }
+
+    public String getChildrenInfo(){
+        StringBuilder res = new StringBuilder();        
+        if (children.size() != 0){
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++){
+                res.append(", ");
+                res.append(children.get(i).getName());
+            }        
+        }
+        else{
+            res.append("none");
+        }
+        return res.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Human)){
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getId() == getId();
+    }
 }
 
 
