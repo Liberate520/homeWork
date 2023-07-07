@@ -7,27 +7,27 @@ public class Marriage implements Serializable {
     private LocalDate startDate, endDate;
     private Human wife, husband;
     private static final int ageAdulthood = 18;     //возраст совершеннолетия
-    private boolean isError = false;
+    private boolean isError = false; //используется для проверок в конструкторе
 
     public Marriage(int id, LocalDate startDate, Human wife, Human husband){
         this.id = id;
         this.startDate = startDate;
         if(wife == null || wife.getGender() != Gender.Female
                 || wife.getDateBirth().plusYears(ageAdulthood).compareTo(this.startDate) > 0    // не достигнут возраст совершеннолетия
-                || wife.getMarriage() != null) {   //уже в браке
+                || wife.getSpouse() != null) {   //уже в браке
             isError = true;
             return;
         }
         if(husband == null || husband.getGender() != Gender.Male
                 || husband.getDateBirth().plusYears(ageAdulthood).compareTo(this.startDate) > 0    // не достигнут возраст совершеннолетия
-                || husband.getMarriage() != null) {   //уже в браке
+                || husband.getSpouse() != null) {   //уже в браке
             isError = true;
             return;
         }
         this.wife = wife;
-        wife.setMarriage(this);
         this.husband = husband;
-        husband.setMarriage(this);
+        wife.setSpouse(husband);
+        husband.setSpouse(wife);
     }
     public boolean getIsError(){ return isError; }
 
@@ -38,15 +38,15 @@ public class Marriage implements Serializable {
     public boolean finish(LocalDate endDate){
         if(endDate.compareTo(startDate) < 0) return false; //Попытка присвоить дату расторжения брака ранеее даты заключения
         this.endDate = endDate;
-        wife.setMarriage(null);
-        husband.setMarriage(null);
+        wife.setSpouse(null);
+        husband.setSpouse(null);
         return true;
     }
 
     public String getInfo(){
         return "{id: " + id
-                + ", startDate: " + startDate.toString()
-                + (endDate == null ? "" : ", endDate: " + endDate.toString())
+                + ", дата заключения: " + startDate.toString()
+                + (endDate == null ? "" : ", дата расторжения: " + endDate.toString())
                 + ", \nСупруга: " + wife.getInfo()
                 + ", \nСупруг: " + husband.getInfo()
                 + "}";

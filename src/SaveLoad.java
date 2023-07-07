@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface SaveLoad {
     //первый аргумент относится к сохраняемым данным, второй - дополнительный
-    public void SaveTo(Object obj, Object[] s) throws IOException;
+    public void saveTo(Object obj, String path) throws IOException;
 
-    public Object LoadFrom(Object[] s) throws IOException, ClassNotFoundException;
+    public Object loadFrom(String path) throws IOException, ClassNotFoundException;
 }

@@ -1,20 +1,20 @@
 import java.io.*;
 
-public class FileHandler implements SaveLoad, Serializable {
+public class FileHandler implements SaveLoad {
     //Этот класс выполняет сохранение в файл и загрузку из файла
 
-    public void SaveTo(Object obj, Object[] s) throws IOException {
+    public void saveTo(Object obj, String path) throws IOException {
         //Сериализация в файл с помощью класса ObjectOutputStream
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(s[0].toString()));
+                new FileOutputStream(path));
         objectOutputStream.writeObject(obj);
         objectOutputStream.close();
     }
 
-    public Object LoadFrom(Object[] s) throws IOException, ClassNotFoundException {
+    public Object loadFrom(String path) throws IOException, ClassNotFoundException {
         // Востановление из файла с помощью класса ObjectInputStream
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(s[0].toString()));
+                new FileInputStream(path));
         Object result = objectInputStream.readObject();
         objectInputStream.close();
         return result;

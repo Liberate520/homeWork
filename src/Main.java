@@ -30,10 +30,10 @@ public class Main {
 
         //Выполняем запись в файл и последующее чтение
         FileHandler filehandler = new FileHandler();
-        filehandler.SaveTo(tree, new String[] {"tree.txt"});
+        filehandler.saveTo(tree, "tree.txt");
 
-        FamilyTree treeOut = (FamilyTree)filehandler.LoadFrom(new String[] {"tree.txt"});
+        FamilyTree treeOut = (FamilyTree)filehandler.loadFrom("tree.txt");
         //Дублируем вывод:
-        System.out.println(String.format("treeOut info: \n%s", treeOut.toString()));
+        System.out.println(String.format("treeOut info: \n%s", treeOut.getInfoAll()));
     }
 }

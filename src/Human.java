@@ -10,7 +10,7 @@ public class Human implements Serializable {
     private Gender gender;
     private Human mother, father;
     private List<Human> children;
-    private Marriage marriage;  //супружество
+    private Human spouse;
 
     private static final int minParentAge = 17;
 
@@ -53,13 +53,11 @@ public class Human implements Serializable {
         children.add(child);
         return true;
     }
-
-    public Marriage getMarriage() {
-        return marriage;
+    public Human getSpouse() {
+        return spouse;
     }
-    // TO DO как-то сделать этот метод доступным только классу Marriage
-    public void setMarriage(Marriage marriage) {
-        this.marriage = marriage;
+    public void setSpouse(Human spouse) {
+        this.spouse = spouse;
     }
     public String getInfo(){
         StringBuilder result = new  StringBuilder();
@@ -77,10 +75,10 @@ public class Human implements Serializable {
                 childrenNames.add(child.getName());
             result.append(String.format("Дети: %s, ", String.join(",", childrenNames)));
         }
-        if(this.marriage == null){
+        if(this.spouse == null){
             result.append(String.format("Семейное положение: %s", gender==Gender.Male ? "не женат" : "не замужем"));
         }else{
-            result.append(String.format("Семейное положение: %s (idMarriage: %d)", (gender==Gender.Male ? "женат" : "замужем"), this.marriage.getId()));
+            result.append(String.format("Семейное положение: %s", gender==Gender.Male ? "женат" : "замужем"));
         }
         result.append("}");
         return result.toString();
