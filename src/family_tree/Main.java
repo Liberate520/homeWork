@@ -23,10 +23,14 @@ public class Main {
         tree.getByName("Анна"), tree.getByName("Борис")));
 
         tree.add(new Human ("Нина", Gender.Female, 
-        LocalDate.of(1975, 5, 7)));
+        LocalDate.of(1975, 5, 7), tree.getByName("Иван")));
 
         tree.add(new Human ("Иван", Gender.Male, 
-        LocalDate.of(1970, 6, 28)));
+        LocalDate.of(1970, 6, 28), tree.getByName("Нина")));
+
+        tree.add(new Human ("Ирина", Gender.Female, 
+        LocalDate.of(2000, 1, 1),
+        tree.getByName("Нина"), tree.getByName("Иван")));
 
 
         Human grandMother = new Human("Клавдия", Gender.Female, LocalDate.of(1950, 8, 15));
@@ -36,4 +40,10 @@ public class Main {
 
         System.out.println(tree.getInfo());
     }
+    // public static void main(String[] args) {    
+    // for (int i = 0; i < wifes.length; i++) {
+    //         System.out.println(Human.wifes[i]);
+    //     }
+    // }
+    
 }

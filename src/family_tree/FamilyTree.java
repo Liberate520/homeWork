@@ -22,6 +22,8 @@ public class FamilyTree {
             
             addToParents(human);
             addToChildren(human);
+            addToWifes(human);
+            addToHusbands(human);
             return true;
         }
         return false;
@@ -36,6 +38,18 @@ public class FamilyTree {
     private void addToChildren(Human human) {
         for (Human child: human.getChildren()) {
             child.addParents(human);
+        }
+    }
+
+    private void addToWifes(Human human) {
+        for (Human wife: human.getWifes()) {
+            wife.addHusbands(human);
+        }
+    }
+
+    private void addToHusbands(Human human) {
+        for (Human husband: human.getHusbands()) {
+            husband.addWifes(human);
         }
     }
 

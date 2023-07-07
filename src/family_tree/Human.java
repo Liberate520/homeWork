@@ -12,10 +12,12 @@ public class Human {
     private LocalDate deathDate;
     private List<Human> parents;
     private List<Human> children;
+    private List<Human> wifes;
+    private List<Human> husbands;
     // private Human spouse;
 
     public Human (String name, Gender gender, LocalDate birthDate, LocalDate deathDate,
-    Human father, Human mother) {
+    Human father, Human mother, Human wife, Human husband) {
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -28,16 +30,34 @@ public class Human {
             parents.add(mother);
         }
         children = new ArrayList<>();
+
+        wifes = new ArrayList<>();
+        if (wife != null) {
+            wifes.add(wife);
+        }
+        husbands = new ArrayList<>();
+        if (husband != null) {
+            husbands.add(husband);
+        }
     }
 
     public Human(String name, Gender gender, LocalDate birthDate) {
-        this (name, gender, birthDate, null, null, null);
+        this (name, gender, birthDate, null, null, null, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate,
-    Human father, Human mother) {
-        this (name, gender, birthDate, null, father, mother);
+    public Human(String name, Gender gender, LocalDate birthDate, Human wife) {
+        this (name, gender, birthDate, null, null, null, wife);
+    }
+
+    public Human(String name, Gender gender, LocalDate birthDate, Human father, Human mother) {
+        this (name, gender, birthDate, null, father, mother, null, null);
     }    
+
+    public Human(String name, Gender gender, LocalDate birthDate,
+    Human father, Human mother, Human wife, Human husband) {
+        this (name, gender, birthDate, null, father, mother, wife, husband);
+    }
+
 
     public boolean addChild (Human child) {
         if (!children.contains(child)) {
@@ -52,6 +72,22 @@ public class Human {
     public boolean addParents (Human parent) {
         if (!parents.contains(parent)) {
             parents.add(parent);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addWifes (Human wife) {
+        if (!wifes.contains(wife)) {
+            wifes.add(wife);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addHusbands (Human husband) {
+        if (!husbands.contains(husband)) {
+            husbands.add(husband);
             return true;
         }
         return false;
@@ -81,6 +117,28 @@ public class Human {
     public List<Human> getParents() {return parents;}
     public List<Human> getChildren() {return children;}
 
+    public Human getWife() {
+        for (Human wife: wifes) {
+            if (wife.getGender() == Gender.Female){
+                return wife;
+            }
+        }
+        return null;
+    }
+
+    public Human getHusband() {
+        for (Human husband: husbands) {
+            if (husband.getGender() == Gender.Male){
+                return husband;
+            }
+        }
+        return null;
+    }
+
+    public List<Human> getWifes() {return wifes;}
+    public List<Human> getHusbands() {return husbands;}
+
+
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
     public void setDeathDate(LocalDate deathDate) {this.deathDate = deathDate;}
 
@@ -103,6 +161,10 @@ public class Human {
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
+        sb.append(", ");
+        sb.append(getWifeInfo());
+        sb.append(", ");
+        sb.append(getHusbandInfo());
         return sb.toString();
     }
 
@@ -142,6 +204,29 @@ public class Human {
         }
         return res.toString();
     }
+
+    public String getWifeInfo(){
+        String res = "жена: ";
+        Human wife = getWife();
+        if (wife != null) {
+            res += wife.getName();
+        } else {
+            res += "отсутствует";
+        }
+        return res;
+    }
+
+    public String getHusbandInfo(){
+        String res = "муж: ";
+        Human husband = getHusband();
+        if (husband != null) {
+            res += husband.getName();
+        } else {
+            res += "отсутствует";
+        }
+        return res;
+    }
+
 
     public int getAge() {
         if (deathDate == null) {
