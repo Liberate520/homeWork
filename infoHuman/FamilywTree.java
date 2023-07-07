@@ -1,10 +1,17 @@
-package homeWork_OOP_family_tree;
+package homeWork_OOP_family_tree.infoHuman;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-public class FamilywTree implements Serializable{
+import homeWork_OOP_family_tree.comparatorAndIterator.FamilyIterator;
+import homeWork_OOP_family_tree.comparatorAndIterator.NodeComparatorByAge;
+
+import java.util.Iterator;
+
+public class FamilywTree implements Serializable, Iterable<Node>{
     // private long humanId;
     private List<Node> familyList;
 
@@ -14,6 +21,10 @@ public class FamilywTree implements Serializable{
 
     public FamilywTree() {
         this.familyList = new ArrayList<>();
+    }
+
+    public List<Node> getFamilyList() {
+        return familyList;
     }
 
     public void add(Node human) {
@@ -31,6 +42,14 @@ public class FamilywTree implements Serializable{
         return result;
     }
 
+
+    @Override
+    public Iterator<Node> iterator() {
+        return new FamilyIterator(familyList);
+		// return list.iterator();
+        // return null;
+    }
+
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("в дереве ");
@@ -41,5 +60,17 @@ public class FamilywTree implements Serializable{
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public int getAge(Node node) {
+        return node.people.age();
+    }
+
+    public void sortByName(){
+        Collections.sort(familyList);
+    }
+
+    public void sortByAge(){
+        Collections.sort(familyList, new NodeComparatorByAge());
     }
 }

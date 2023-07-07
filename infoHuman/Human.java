@@ -1,4 +1,4 @@
-package homeWork_OOP_family_tree;
+package homeWork_OOP_family_tree.infoHuman;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -54,7 +54,7 @@ public class Human implements Serializable{
         return this.gender;
     }
 
-    private int age() {
+    public int age() {
         if (this.death == null) {
             return Period.between(this.born, LocalDate.now()).getYears();
         }

@@ -1,13 +1,14 @@
-package homeWork_OOP_family_tree;
+package homeWork_OOP_family_tree.infoHuman;
+
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node implements Serializable{
+public class Node implements Serializable, Comparable<Node>{
 
-    Human people;
+    public Human people;
     Node mother;
     Node father;
     public List<Node> children = new ArrayList<>();
@@ -74,5 +75,11 @@ public class Node implements Serializable{
         } else {
             System.out.println("мать не известна");
         }
+    }
+
+    @Override
+    public int compareTo(Node o){
+        int result = this.people.getFirstName().compareTo(o.people.getFirstName());
+        return result;
     }
 }

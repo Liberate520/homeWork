@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import homeWork_OOP_family_tree.infoHuman.FamilywTree;
+
 import java.io.File;
 import java.io.FileInputStream;
 
