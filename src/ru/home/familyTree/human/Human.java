@@ -1,11 +1,12 @@
 package ru.home.familyTree.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private String name;
     private Gender gender;
@@ -29,11 +30,11 @@ public class Human {
         }
         children = new ArrayList<>();
     }
+    public Human(){
+    }
 
     public Human(String name, Gender gender, LocalDate dateOfBirth, Human father, Human mother){
         this(name, gender, dateOfBirth, null, father, mother);
-    }
-    public Human(){
     }
 
     public String getName() {
