@@ -1,8 +1,7 @@
 package human;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GenealogyTree implements Serializable {
     private List<Person> people;
@@ -21,6 +20,7 @@ public class GenealogyTree implements Serializable {
         for (Person p : people){
             System.out.println(p.toString());
         }
+        System.out.println();
     }
 
     public void findPerson(String name, String lastName) {
@@ -29,6 +29,7 @@ public class GenealogyTree implements Serializable {
                 System.out.println("Найден человек:\n" + "\t" + p);
             }
         }
+        System.out.println();
     }
 
     public void printGenealogyTree(Person person) {
@@ -38,5 +39,27 @@ public class GenealogyTree implements Serializable {
             System.out.print(" -> ");
             printGenealogyTree(child);
         }
+    }
+
+    public Iterator<Person> iterator() {
+        return people.iterator();
+    }
+
+    public void sortByName() {
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person person1, Person person2) {
+                return person1.getName().compareTo(person2.getName());
+            }
+        });
+    }
+
+    public void sortByBirthDate() {
+        Collections.sort(people, new Comparator<>() {
+            @Override
+            public int compare(Person person1, Person person2) {
+                return person1.getDateOfBirth().compareTo(person2.getDateOfBirth());
+            }
+        });
     }
 }

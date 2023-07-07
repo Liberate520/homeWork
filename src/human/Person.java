@@ -1,6 +1,7 @@
 package human;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class Person implements Serializable {
     private String lastName;
     private List<Person> children;
     private List<Person> parents;
-    private String dateOfBirth;
-    private String dateOfDeath;
+    private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
     private String gender;
 
     public Person(String firstName, String lastName) {
@@ -52,20 +53,20 @@ public class Person implements Serializable {
         parents.add(parent);
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDateOfBirth(int day, int month, int year) {
+        this.dateOfBirth = LocalDate.of(year,month,day);
     }
 
-    public String getDateOfDeath() {
+    public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
 
-    public void setDateOfDeath(String dateOfDeath) {
-        this.dateOfDeath = dateOfDeath;
+    public void setDateOfDeath(int day, int month, int year) {
+        this.dateOfDeath = LocalDate.of(year,month,day);
     }
 
     public String getGender() {
