@@ -1,27 +1,24 @@
-package FileH;
-
 import java.io.*;
 
-public class FileHandling implements Serializable {
-    private String text;
-
-    FileHandling(String text){
-        this.text = text;
+public class FileHandling implements Writable {
+    @Override
+    public boolean save(Serializable serializable, String filePath) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            objectOutputStream.writeObject(serializable);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public String toString(){
-        return "File: " + text + ".";
-    }
-
-    public void WriteAndReadFile(FileHandling fileHandler, File f){
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
-            oos.writeObject(fileHandler);
-            FileHandling fh = (FileHandling) ois.readObject();
-            System.out.println(fileHandler);
-        } catch (IOException | ClassNotFoundException e){
+    public Object read(String filePath) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
+            return objectInputStream.readObject();
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 }
