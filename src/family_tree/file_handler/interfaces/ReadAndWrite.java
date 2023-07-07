@@ -1,4 +1,4 @@
-package family_tree;
+package family_tree.file_handler.interfaces;
 
 import java.io.IOException;
 

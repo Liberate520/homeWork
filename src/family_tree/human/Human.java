@@ -1,13 +1,14 @@
-package family_tree;
+package family_tree.human;
+
+import family_tree.human.enums.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private int id;
     private String firstName, lastName;
     private LocalDate dateOfBirth, dateOfDeath;
@@ -41,6 +42,13 @@ public class Human implements Serializable {
             age = ChronoUnit.YEARS.between(this.dateOfBirth, LocalDate.now());
         }
         return age;
+    }
+
+    public String getLastName(){
+        return this.lastName;
+    }
+    public LocalDate getDateOfBirth() {
+        return this.dateOfBirth;
     }
 
     public void addDateOfDeath(LocalDate dateOfDeath) {
@@ -186,5 +194,8 @@ public class Human implements Serializable {
             }
             return stringBuilder.toString();
         }
+    public int compareTo(Human o) {
+        return this.firstName.compareTo(o.firstName);
     }
+}
 

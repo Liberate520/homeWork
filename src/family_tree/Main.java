@@ -1,5 +1,10 @@
 package family_tree;
 
+import family_tree.file_handler.FileHandler;
+import family_tree.human.Human;
+import family_tree.human.enums.Gender;
+import family_tree.tree.FamilyTree;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -30,6 +35,7 @@ public class Main {
                     case 1 -> {
                         while (check2) {
                             System.out.println("----------------------------");
+                            tree1.sortByDateOfBirth();
                             System.out.println(tree1.toString());
                             System.out.println("----------------------------");
                             System.out.println("Введите цифру, соответствующую нужной опции.\n" +
