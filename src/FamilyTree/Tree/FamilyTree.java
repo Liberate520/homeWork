@@ -3,32 +3,37 @@ package FamilyTree.Tree;
 
 
 import FamilyTree.Human.Human;
+import FamilyTree.Human.comparators.sortByAge;
+import FamilyTree.Human.comparators.sortByName;
+import FamilyTree.Human.other.Gender;
+import FamilyTree.Human.other.MotFath;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree {
-    private int id;
-    private int humanID;
-    private List<Human> humanList;
+public class FamilyTree implements Iterable<Human>{
+    private long id;
+    private List<Human> humanList = new ArrayList<>();
 
-    public FamilyTree(int id){
+    public FamilyTree(long id) {
         this.id = id;
-        humanList = new ArrayList<>();
     }
 
-    public void addHuman(Human Human){
-        Human.setId(humanID++);
-        humanList.add(Human);
+    public void addHuman(Human human){
+        humanList.add(human);
     }
 
-    public String getHumanInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список человек в генеалогическом древе: \n");
-        for (Human Human : humanList){
-            stringBuilder.append("id " + id++);
-            stringBuilder.append(Human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
+    public void sortByAge() {
+        humanList.sort(new sortByAge());
     }
+
+    public void sortByName(){
+        humanList.sort(new sortByName());
+    }
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
+    }
+
 }

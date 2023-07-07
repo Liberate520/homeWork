@@ -1,4 +1,4 @@
-package FamilyTree.Human;
+package FamilyTree.Human.other;
 
 public enum MotFath {
     Father, Mother, Child;

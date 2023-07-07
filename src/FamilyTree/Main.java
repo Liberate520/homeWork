@@ -1,29 +1,30 @@
 package FamilyTree;
 
 
-import FamilyTree.Tree.FamilyTree;
-import FamilyTree.Human.Gender;
 import FamilyTree.Human.Human;
-import FamilyTree.Human.MotFath;
+import FamilyTree.Human.other.Gender;
+import FamilyTree.Human.other.MotFath;
+import FamilyTree.Tree.FamilyTree;
+import FamilyTree.service.service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = new FamilyTree(1);
-        List<String> kids = new ArrayList<>(Arrays.asList("Иван Поп", "Ева Поп"));
-        Human human1 = new Human(Gender.Male, 26, "Стёпа", "Поп", MotFath.Father, kids);
-        Human human2 = new Human(Gender.Female, 23, "Ольга", "Поп", MotFath.Mother, kids);
-        Human human3 = new Human(Gender.Male, 12, "Стёпа", "Поп", MotFath.Father, null);
-        Human human4 = new Human(Gender.Female, 10, "Ева", "Поп", MotFath.Child, null);
-        tree.addHuman(human1);
-        tree.addHuman(human2);
-        tree.addHuman(human3);
-        tree.addHuman(human4);
-        System.out.println(tree.getHumanInfo());
+        FamilyTree familyTree = new FamilyTree(1);
+        service service = new service();
+        List<String> children = new ArrayList<>(Arrays.asList("Аня Бебр, Жора Бебр"));
+        familyTree.addHuman(new Human(0, Gender.Female, 25, "Таня", "Бебр", MotFath.Mother, children));
+        familyTree.addHuman(new Human(1, Gender.Female, 15, "Аня", "Бебр", MotFath.Child, children));
+        familyTree.addHuman(new Human(2, Gender.Male, 35, "Костя", "Бебр", MotFath.Father, children));
+        familyTree.addHuman(new Human(3, Gender.Male, 5, "Жора", "Бебр", MotFath.Child, children));
+        System.out.println(service.getHumanInfo(familyTree));
+        familyTree.sortByAge();
+        System.out.println(service.getHumanInfo(familyTree));
+        familyTree.sortByName();
+        System.out.println(service.getHumanInfo(familyTree));
     }
 }
 
