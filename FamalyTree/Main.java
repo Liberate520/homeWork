@@ -3,6 +3,9 @@ package homeWork.FamalyTree;
 import java.io.File;
 import java.time.LocalDate;
 
+import homeWork.FamalyTree.Human.Gender;
+import homeWork.FamalyTree.Human.Human;
+
 public class Main {
     public static void main(String[] args) {
         FamalyTree famalyTree = new FamalyTree();
@@ -15,10 +18,13 @@ public class Main {
         humman2.addChild(humman3);
         humman1.addChild(humman3);
         
-        File file = new File("homeWork\\FamalyTree\\Hanler.txt");
+        File file = new File("OOP\\HomeWork\\Hendler.txt");
         // famalyTree.SaveData(famalyTree, file);
-        famalyTree.LoadDate(famalyTree, file);
-        // System.out.println(famalyTree);
+        // famalyTree.LoadDate(famalyTree, file);
         
+        famalyTree.sortByName();
+        System.out.println(famalyTree);
+        famalyTree.sortByAge();
+        System.out.println(famalyTree);
     }
 }

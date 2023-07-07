@@ -3,9 +3,16 @@ package homeWork.FamalyTree;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamalyTree implements Serializable {
+import homeWork.FamalyTree.Human.Human;
+import homeWork.FamalyTree.Human.HumanComporatoByAge;
+import homeWork.FamalyTree.Human.HumanIterator;
+import homeWork.FamalyTree.SaveLoad.FileHandler;
+
+public class FamalyTree implements Serializable, Iterable<Human>  {
     private long humanId;
     private List<Human> humanList;
 
@@ -78,5 +85,18 @@ public class FamalyTree implements Serializable {
     public void LoadDate(FamalyTree list, File file){
         FileHandler fileHandler = new FileHandler();        
         fileHandler.LoadDate(list, file);
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+    
+    public void sortByName(){
+        Collections.sort(humanList);
+    }
+
+    public void sortByAge(){
+        Collections.sort(humanList, new HumanComporatoByAge());
     }
 }
