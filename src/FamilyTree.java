@@ -4,14 +4,14 @@ import java.util.Iterator;
  import java.util.List;
  import java.util.Objects;
 
- public class FamilyTree implements Serializable, Iterable<Human> {
-     private List<Human> humans;
+ public class FamilyTree<T extends FamalyTreeItem> implements Serializable, Iterable<T> {
+     private List<T> humans;
 
      public FamilyTree() {
          humans = new ArrayList<>();
      }
 
-     public void addHuman(Human human) {
+     public void addHuman(T human) {
          humans.add(human);
          if (human.getMother() != null) {
              human.getMother().addChild(human);
@@ -21,19 +21,19 @@ import java.util.Iterator;
          }
      }
 
-     public List<Human> getHumans() {
+     public List<T> getHumans() {
          return humans;
      }
 
-     public List<Human> getParents(Human human) {
-         List<Human> parents = new ArrayList<>();
+     public List<T> getParents(T human) {
+         List<T> parents = new ArrayList<>();
 
-         Human mother = human.getMother();
+         T mother = (T) human.getMother();
          if (mother != null) {
              parents.add(mother);
          }
 
-         Human father = human.getFather();
+         T father = (T) human.getFather();
          if (father != null) {
              parents.add(father);
          }
@@ -41,11 +41,11 @@ import java.util.Iterator;
          return parents;
      }
 
-     public List<Human> getSiblings(Human human) {
-         List<Human> siblings = new ArrayList<>();
-         List<Human> parents = getParents(human);
-         for (Human parent : parents) {
-             List<Human> parentSiblings = getChildren(parent);
+     public List<T> getSiblings(T human) {
+         List<T> siblings = new ArrayList<>();
+         List<T> parents = getParents(human);
+         for (T parent : parents) {
+             List<T> parentSiblings = getChildren(parent);
              parentSiblings.remove(human);
              siblings.addAll(parentSiblings);
          }
@@ -53,31 +53,31 @@ import java.util.Iterator;
          return siblings;
      }
 
-     public List<Human> getChildren(Human human) {
-         return human.getChildren();
+     public List<T> getChildren(T human) {
+         return (List<T>) human.getChildren();
 
      }
 
-     public List<Human> getDescendants(Human human) {
-         List<Human> descendants = new ArrayList<>();
+     public List<T> getDescendants(T human) {
+         List<T> descendants = new ArrayList<>();
 
-         List<Human> children = getChildren(human);
+         List<T> children = getChildren(human);
          descendants.addAll(children);
 
-         for (Human child : children) {
+         for (T child : children) {
              descendants.addAll(getDescendants(child));
          }
 
          return descendants;
      }
 
-     public List<Human> getAncestors(Human human) {
-         List<Human> ancestors = new ArrayList<>();
+     public List<T> getAncestors(T human) {
+         List<T> ancestors = new ArrayList<>();
 
-         List<Human> parents = getParents(human);
+         List<T> parents = getParents(human);
          ancestors.addAll(parents);
 
-         for (Human parent : parents) {
+         for (T parent : parents) {
              ancestors.addAll(getAncestors(parent));
          }
 
@@ -90,7 +90,7 @@ import java.util.Iterator;
              return true;
          if (o == null || getClass() != o.getClass())
              return false;
-         FamilyTree that = (FamilyTree) o;
+         FamilyTree<T> that = (FamilyTree<T>) o;
          return Objects.equals(humans, that.humans);
      }
 
@@ -105,7 +105,7 @@ import java.util.Iterator;
          sb.append("В дереве ");
          sb.append(humans);
           sb.append(" объектов: \n");
-           for (Human human : humans){
+           for (T human : humans){
              sb.append(human.toString());    
              sb.append("\n"); 
          }
@@ -113,7 +113,7 @@ import java.util.Iterator;
      }
 
      @Override
-     public Iterator<Human> iterator() {
+     public Iterator<T> iterator() {
          return new HumanIterator(humans);
      }
  }
