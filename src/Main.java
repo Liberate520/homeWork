@@ -5,14 +5,14 @@ import java.io.IOException;
 import fileHandler.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Person person1 = new Person("Виктор", "Николаев");
-        Person person2 = new Person("Галина", "Николаева");
-        Person person3 = new Person("Николай", "Сиденко");
-        Person person4 = new Person("Валентина", "Сиденко");
-        Person person5 = new Person("Елена", "Сиденко");
-        Person person6 = new Person("Александр", "Сиденко");
-        Person person7 = new Person("Георгий", "Сиденко");
+    public static <T> void main(String[] args) throws IOException, ClassNotFoundException {
+        Person<T> person1 = new Person<T>("Виктор", "Николаев");
+        Person<T> person2 = new Person<T>("Галина", "Николаева");
+        Person<T> person3 = new Person<T>("Николай", "Сиденко");
+        Person<T> person4 = new Person<T>("Валентина", "Сиденко");
+        Person<T> person5 = new Person<T>("Елена", "Сиденко");
+        Person<T> person6 = new Person<T>("Александр", "Сиденко");
+        Person<T> person7 = new Person<T>("Георгий", "Сиденко");
 
         person1.addChild(person5);
         person2.addChild(person5);
@@ -46,7 +46,7 @@ public class Main {
         person7.setDateOfBirth(27,12,1997);
         person7.setGender("Male");
 
-        GenealogyTree tree = new GenealogyTree();
+        GenealogyTree<T> tree = new GenealogyTree<T>();
         tree.addPerson(person1);
         tree.addPerson(person2);
         tree.addPerson(person3);
@@ -70,7 +70,7 @@ public class Main {
 //        Загружаем дерево из текстового файла
 
         GenealogyTree loadedTree = save.loadFromFile("family_tree.txt");
-        Person person8 = new Person("Иван", "Иванов");
+        Person<T> person8 = new Person<T>("Иван", "Иванов");
         person8.setDateOfBirth(1,1,2031);
         person8.setGender("Male");
         person7.addChild(person8);
