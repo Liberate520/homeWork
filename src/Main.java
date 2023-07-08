@@ -1,4 +1,4 @@
 package familyTree.src;
 
-public class main {
+public class Main {
 }
