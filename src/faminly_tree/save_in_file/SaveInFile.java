@@ -1,8 +1,11 @@
-package faminly_tree;
+package faminly_tree.save_in_file;
+
+import faminly_tree.human.Human;
+import faminly_tree.tree.FamilyTree;
 
 import java.io.*;
 
-public class SaveInFile implements WriteAndRead{
+public class SaveInFile implements WriteAndRead {
 
     @Override
     public void write(String path, Human human) throws IOException {

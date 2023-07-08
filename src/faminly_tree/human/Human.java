@@ -1,4 +1,4 @@
-package faminly_tree;
+package faminly_tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ public class Human implements Serializable {
     private LocalDate birth, death;
     private Human mother, father;
     private List<Human> children;
-    private String age;
+    private int age;
 
     public Human(String name, String surname, String patronymic, Gender gender, LocalDate birth, LocalDate death) {
         this.id = -1;
@@ -41,8 +41,8 @@ public class Human implements Serializable {
      * @param death дата смерти
      * @return
      */
-    private String getAge(LocalDate birth, LocalDate death) {
-        if (birth == null) return null;
+    private int getAge(LocalDate birth, LocalDate death) {
+        if (birth == null) return 0;
         int age;
         int birthYear = birth.getYear();
         int birthMonth = birth.getMonthValue();
@@ -69,7 +69,7 @@ public class Human implements Serializable {
             if (deathMonth > birthMonth) age = deathYear - birthYear;
             else age = deathYear - birthYear - 1;
         }
-        return Integer.toString(age);
+        return age;
     }
 
     /**
@@ -115,7 +115,7 @@ public class Human implements Serializable {
     private String childrenGetInfo(){
         StringBuilder sb = new StringBuilder();
         List<Human> children = this.getChildren();
-        if (children == null) sb.append("отсутствуют или не указаны");
+        if (children == null) sb.append("нет");
         else {
             for(Human el : children){
                 sb.append(el.getName());
@@ -141,7 +141,7 @@ public class Human implements Serializable {
             sb.append(", отчество: ");
             sb.append(patronymic);
         }
-        if (this.age != null) {
+        if (this.age != 0) {
             sb.append(", возраст: ");
             sb.append(age);
         }
@@ -185,10 +185,10 @@ public class Human implements Serializable {
     public void setDeath(LocalDate death) {
         this.death = death;
     }
-    public String getAge() {
+    public int getAge() {
         return age;
     }
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
     public int getId() {

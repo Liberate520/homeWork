@@ -1,6 +1,8 @@
-package faminly_tree;
+package faminly_tree.save_in_file;
 
-import java.io.FileNotFoundException;
+import faminly_tree.human.Human;
+import faminly_tree.tree.FamilyTree;
+
 import java.io.IOException;
 import java.io.Serializable;
 

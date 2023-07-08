@@ -1,5 +1,12 @@
 package faminly_tree;
 
+import faminly_tree.human.Gender;
+import faminly_tree.human.Human;
+import faminly_tree.save_in_file.SaveInFile;
+import faminly_tree.tree.FamilyTree;
+import faminly_tree.tree.HumanIterator;
+import faminly_tree.tree.TreeSort;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -21,10 +28,37 @@ public class Test {
         human5.childFor(human2);
         tree.addToTree(human5);
        // System.out.println(tree.nextOfKin(human1));
+
+        //HomeWork2
         SaveInFile sv = new SaveInFile();
         sv.write("tree.out", tree);
-        System.out.println(sv.readTree("tree.out"));
+        //System.out.println(sv.readTree("tree.out"));
         sv.write("human.out", human1);
-        System.out.println(sv.readHuman("human.out"));
+        //System.out.println(sv.readHuman("human.out"));
+
+        //HomeWork3
+        for(Human human: tree){
+            System.out.println(human);
+        }
+
+        TreeSort sort = new TreeSort(tree.getTree());
+        System.out.println("Сортировка по имени:");
+        sort.sortByName();
+        for(Human human: tree){
+            System.out.println(human);
+        }
+
+        System.out.println("Сортировка по дате рождения:");
+        sort.sortByAge();
+        for(Human human: tree){
+            System.out.println(human);
+        }
+
+        System.out.println("Сортировка по возрасту:");
+        sort.sortByAge();
+        for(Human human: tree){
+            System.out.println(human);
+        }
+
     }
 }

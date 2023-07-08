@@ -1,11 +1,18 @@
-package faminly_tree;
+package faminly_tree.tree;
+
+import faminly_tree.human.Gender;
+import faminly_tree.human.Human;
+import faminly_tree.human.comparators.HumanComparatorByAge;
+import faminly_tree.human.comparators.HumanComparatorByBirth;
+import faminly_tree.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
    private List<Human> tree = new ArrayList<>();
    private int newID = 0;
 
@@ -207,7 +214,7 @@ public class FamilyTree implements Serializable {
             sb.append(", отчество: ");
             sb.append(human.getPatronymic());
         }
-        if (human.getAge() != null) {
+        if (human.getAge() != 0) {
             sb.append(", возраст: ");
             sb.append(human.getAge());
         }
@@ -228,4 +235,13 @@ public class FamilyTree implements Serializable {
         else sb.append("Дерево не заполнено");
         return sb.toString();
     }
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(tree);
+    }
+
+    public List<Human> getTree() {
+        return tree;
+    }
+
 }
