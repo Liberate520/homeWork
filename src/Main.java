@@ -19,7 +19,7 @@ public class Main {
         System.out.println(String.format("test anton.getAge(): %d", anton.getAge()));
 
         //Добавляем связи "родители-дети"
-        //!!! Допустимо ли, что это можно сделать вне сервиса ???
+        //!!! Допустимо ли, что это можно сделать напрямую, не используя service?
         anton.addChild(andrew);
         helen.addChild(andrew);
 

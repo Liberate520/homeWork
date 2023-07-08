@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    private HumanGroup humans;  //implements Iterable<family_tree.human.Human>
+    private HumanGroup humans;
     private MarriageGroup marriages;
     //доступен только для service
     FamilyTree(){
