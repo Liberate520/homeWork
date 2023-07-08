@@ -37,28 +37,27 @@ public class Test {
         //System.out.println(sv.readHuman("human.out"));
 
         //HomeWork3
-        for(Human human: tree){
+        for(Object human: tree){
             System.out.println(human);
         }
 
         TreeSort sort = new TreeSort(tree.getTree());
         System.out.println("Сортировка по имени:");
         sort.sortByName();
-        for(Human human: tree){
+        for(Object human: tree){
             System.out.println(human);
         }
 
         System.out.println("Сортировка по дате рождения:");
         sort.sortByAge();
-        for(Human human: tree){
+        for(Object human: tree){
             System.out.println(human);
         }
 
         System.out.println("Сортировка по возрасту:");
         sort.sortByAge();
-        for(Human human: tree){
+        for(Object human: tree){
             System.out.println(human);
         }
-
     }
 }

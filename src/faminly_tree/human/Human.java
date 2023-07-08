@@ -1,11 +1,13 @@
 package faminly_tree.human;
 
+import faminly_tree.tree.FamiliItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamiliItem {
     private int id;
     private String name, surname, patronymic;
     private Gender gender;
@@ -155,6 +157,10 @@ public class Human implements Serializable {
     }
 
     //Далее сеттеры и геттеры
+    @Override
+    public String getName() {
+        return name;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -173,6 +179,7 @@ public class Human implements Serializable {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+    @Override
     public LocalDate getBirth() {
         return birth;
     }
@@ -185,12 +192,14 @@ public class Human implements Serializable {
     public void setDeath(LocalDate death) {
         this.death = death;
     }
+    @Override
     public int getAge() {
         return age;
     }
     public void setAge(int age) {
         this.age = age;
     }
+    @Override
     public int getId() {
         return id;
     }
@@ -200,24 +209,26 @@ public class Human implements Serializable {
     public void setChildren(List<Human> children) {
         this.children = children;
     }
+    @Override
     public List<Human> getChildren() {
         return children;
     }
+    @Override
     public Human getFather() {
         return father;
     }
-    public String getName() {
-        return name;
-    }
+    @Override
     public Gender getGender() {
         return gender;
     }
     public void setMother(Human mother) {
         this.mother = mother;
     }
+    @Override
     public Human getMother() {
         return mother;
     }
+    @Override
     public void setId(int id) {
         this.id = id;
     }

@@ -1,16 +1,13 @@
 package faminly_tree.tree;
 
-import faminly_tree.human.Human;
-
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human>{
-    private List<Human> list = new ArrayList<>();
+public class HumanIterator<E extends FamiliItem> implements Iterator{
+    private List<E> list;
     private int index;
 
-    public HumanIterator(List<Human> list) {
+    public HumanIterator(List<E> list) {
         this.list = list;
     }
 
@@ -20,7 +17,7 @@ public class HumanIterator implements Iterator<Human>{
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return list.get(index++);
     }
 }

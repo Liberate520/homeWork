@@ -1,12 +1,13 @@
 package faminly_tree.human.comparators;
 
 import faminly_tree.human.Human;
+import faminly_tree.tree.FamiliItem;
 
 import java.util.Comparator;
 
-public class HumanComparatorByBirth implements Comparator<Human> {
+public class HumanComparatorByBirth<T extends FamiliItem> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getBirth().compareTo(o2.getBirth());
     }
 }
