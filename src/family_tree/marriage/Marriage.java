@@ -12,7 +12,7 @@ public class Marriage implements Serializable {
     private LocalDate startDate, endDate;
     private Human wife, husband;
     private static final int ageAdulthood = 18;     //возраст совершеннолетия
-    private boolean isError = false; //используется для проверок в конструкторе
+    private boolean isError = false; //результат проверок в конструкторе
 
     public Marriage(int id, LocalDate startDate, Human wife, Human husband){
         this.id = id;

@@ -51,8 +51,8 @@ public class ServiceFamilyTree {
 
     public boolean stopMarriageById(int id, LocalDate date){
         Marriage m = tree.getMarriageById(id);
-        if(m == null) return false; // брак не найден
-        return !m.stop(date);
+        if(m == null) return false;
+        return m.stop(date);
     }
 
     public String getHumansInfo(){

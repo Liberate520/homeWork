@@ -12,17 +12,17 @@ import java.util.List;
 public class FamilyTree implements Serializable {
     private HumanGroup humans;
     private MarriageGroup marriages;
-    //доступен только для service
+    //!!! делаем конструктор доступным только для ServiceFamilyTree. Можно ли так делать?
     FamilyTree(){
         humans = new HumanGroup();
         marriages = new MarriageGroup();
     }
-    //разрешаем вызвать метод только в пакете
+    //разрешаем вызвать метод только в ServiceFamilyTree
     void addHuman(Human h){
         humans.add(h);
     }
 
-    //разрешаем вызвать метод только в пакете
+    //разрешаем вызвать метод только в ServiceFamilyTree
     void addMarriage(Marriage m){
         marriages.add(m);
     }
