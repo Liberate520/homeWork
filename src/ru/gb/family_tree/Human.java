@@ -14,6 +14,8 @@ public class Human implements Serializable, Comparable<Human> {
     private LocalDate dateOfDeath;
     private List<Human> parents;
     private List<Human> children;
+    private List<Human> brothers;
+
 
     public Human(String fullName, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father,
                  Human mother) {
@@ -29,6 +31,7 @@ public class Human implements Serializable, Comparable<Human> {
             parents.add(mother);
         }
         children = new ArrayList<>();
+        brothers = new ArrayList<>();
     }
     public String getFullName() {return fullName;}
     public Gender getGender() {return gender;}
@@ -39,6 +42,7 @@ public class Human implements Serializable, Comparable<Human> {
 
     public LocalDate getDateOfBirth() {return dateOfBirth;}
     public LocalDate getDateOfDeath() { return dateOfDeath;}
+
 
     public void addChild(Human child) {
         if(!children.contains(child)) {
@@ -85,6 +89,7 @@ public class Human implements Serializable, Comparable<Human> {
         stringBuilder.append(getFatherInfo());
         stringBuilder.append(", ");
         stringBuilder.append(getChildrenInfo());
+
         return  stringBuilder.toString();
     }
 
