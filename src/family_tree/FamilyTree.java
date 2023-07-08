@@ -2,11 +2,14 @@ package family_tree;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.*;
 // import java.util.function.Function;
 
 
-// public class FamilyTree implements Serializable {
-public class FamilyTree {
+public class FamilyTree implements Serializable {
+// public class FamilyTree {
+    // private long humansId;
+
     private List<Human> humanList;
     
     public FamilyTree(List<Human> humanList) {this.humanList = humanList;}

@@ -1,10 +1,27 @@
 package family_tree;
 
 import java.time.LocalDate;
+// import java.io.*;
 // import java.util.List;
 
 public class Main {
     public static void main (String [] args) {
+        String filePath = "src/family_tree/tree.out";
+        
+        FileHandler fileHandler = new FileHandler();
+
+        FamilyTree tree = firstTree();
+        // System.out.println(tree.getInfo());
+        System.out.println(tree);
+
+        fileHandler.save(tree, filePath);
+
+        // FileHandler fileHandler = new FileHandler();
+        // FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+        // System.out.println(tree);
+    }
+
+    static FamilyTree firstTree() {
         FamilyTree tree = new FamilyTree();
 
         tree.add(new Human ("Анна", Gender.Female, 
@@ -32,6 +49,9 @@ public class Main {
         LocalDate.of(2000, 1, 1),
         tree.getByName("Нина"), tree.getByName("Иван")));
 
+        tree.add(new Human("Михаил", Gender.Male, LocalDate.of(2022, 05, 10), 
+        tree.getByName("Анна"), tree.getByName("Борис")));
+
 
         Human grandMother = new Human("Клавдия", Gender.Female, LocalDate.of(1950, 8, 15));
         grandMother.addChild(tree.getByName("Нина"));
@@ -43,11 +63,11 @@ public class Main {
         tree.getByName("Клавдия"));
         grandFother.addChild(tree.getByName("Нина"));
         grandFother.addChild(tree.getByName("Анна"));
-        // grandMother.addSpouse(tree.getByName("Семен"));
         tree.add(grandFother);
-
-        System.out.println(tree.getInfo());
-    }
+  
+        return tree;
+        }
+    
     // public static void main(String[] args) {    
     // for (int i = 0; i < wifes.length; i++) {
     //         System.out.println(Human.wifes[i]);

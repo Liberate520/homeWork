@@ -1,19 +1,20 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.Period;
 
-public class Human {
+public class Human implements Serializable{
     private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Human> parents;
     private List<Human> children;
-    private List<Human> wifes;
-    private List<Human> husbands;
+    // private List<Human> wifes;
+    // private List<Human> husbands;
     private List<Human> spouses;
 
     public Human (String name, Gender gender, LocalDate birthDate, LocalDate deathDate,
