@@ -15,7 +15,7 @@ public class Main {
 
 //        FamilyTree familyTree = (FamilyTree) fileHandler.read("src/ru/home/familyTree/family_Tree/info.out");
 
-        System.out.println(familyTree);
+        System.out.println(familyTree.getHumansInfo());
     }
 
        static FamilyTree buildTree(){
@@ -35,8 +35,7 @@ public class Main {
         familyTree.addHuman(human3);
         familyTree.addHuman(human4);
         return familyTree;
-
-//        System.out.println(familyTree.getHumansInfo());
     }
+
 }
 
