@@ -1,10 +1,13 @@
+package family_tree;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable {
     static Integer id = 0;
     private final Integer personId;
     private String name;
@@ -288,7 +291,7 @@ public class Person {
         stringBuilder.append("Partner: ");
         stringBuilder.append(getPartnerInfo());
         stringBuilder.append("\n");
-        stringBuilder.append("Gender: ");
+        stringBuilder.append("family_tree.Gender: ");
         stringBuilder.append(gender.toString());
         stringBuilder.append("\n");
         stringBuilder.append("Birthday: ");

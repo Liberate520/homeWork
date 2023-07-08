@@ -1,13 +1,14 @@
-//Реализовать, с учетом ооп подхода, приложение.
-//        Для проведения исследований с генеалогическим древом.
-//        Идея: описать некоторое количество компонент, например:
-//        модель человека и дерева
-//        Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
-//        Более детальное описание проекта и как его реализовать обсуждали в конце семинара
-//        Сделать PR к проекту: https://github.com/Liberate520/homeWork
-//        В качестве ответа указать ссылку на PR
-//        Ссылка на то как сделать пулреквест смотри в материалах к уроку
-//        Если PR все таки не дается, то можно и ссылкой на гит репозиторий
+//В проекте с гениалогическим древом подумайте и используйте интерфейсы.
+//        Дополнить проект методами записи в файл и чтения из файла.
+//        Для этого создать отдельный класс и реализовать в нем нужные методы.
+//        Для данного класса сделайте интерфейс, который и используйте в своей программе.
+//        Пример работы с интерфейсом Serialazable можно найти в материалах к уроку.
+//        Поправить замечания к первому уроку
+
+import family_tree.FileHandler;
+import family_tree.Gender;
+import family_tree.Person;
+import family_tree.Tree;
 
 import java.time.LocalDate;
 
@@ -38,6 +39,12 @@ public class Main {
         familyTree.reviseDependencies();
 
         System.out.println(familyTree);
+
+        String path = "src/family_tree/familyTree.out";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(familyTree, path);
+        Tree familyTreeFromFile = (Tree) fileHandler.read(path);
+        System.out.println(familyTreeFromFile);
 
     }
 
