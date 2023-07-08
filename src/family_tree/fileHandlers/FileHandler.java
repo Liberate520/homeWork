@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler {
+public class FileHandler implements Writable {
     public boolean save(Serializable serializable, String filePath) {
         try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);

@@ -1,13 +1,10 @@
 package family_tree.fileHandlers;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import family_tree.familyTree.FamilyTree;
+import java.io.Serializable;
 
 public interface Writable {
 
-    void saveTree(FamilyTree familyTree, boolean rewrite) throws IOException, ClassNotFoundException;
+    boolean save(Serializable serializable, String filePath);
 
-    FamilyTree loadTree() throws FileNotFoundException, IOException, ClassNotFoundException;
+    Object read(String filePath);
 }

@@ -2,7 +2,7 @@ package family_tree.human;
 
 import java.util.List;
 
-import family_tree.familyTree.FamilyTree;
+import family_tree.familyTree.TreeItem;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeItem<Human> {
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private String name;
@@ -33,59 +33,66 @@ public class Human implements Serializable {
         this(name, birthDate, null, gender, null, null);
     }
 
-    public Human(String[] args, FamilyTree familyTree) {
-        this.name = args[0];
-        if (args[1].equals("Male")) {
-            this.gender = Gender.Male;
-        } else {
-            this.gender = Gender.Female;
-        }
-        this.birthDate = LocalDate.parse(args[2], FORMATTER);
-        if (args[3].equals("null")) {
-            this.deathDate = null;
-        } else {
-            this.deathDate = LocalDate.parse(args[3], FORMATTER);
-        }
-        if (args[4].equals("null")) {
-            this.mother = null;
-        } else {
-            this.mother = familyTree.getByName(args[4]);
-        }
-        if (args[5].equals("null")) {
-            this.father = null;
-        } else {
-            this.father = familyTree.getByName(args[5]);
-        }
-        this.children = new ArrayList<>();
-    }
+    // public Human(String[] args, FamilyTree familyTree) {
+    //     this.name = args[0];
+    //     if (args[1].equals("Male")) {
+    //         this.gender = Gender.Male;
+    //     } else {
+    //         this.gender = Gender.Female;
+    //     }
+    //     this.birthDate = LocalDate.parse(args[2], FORMATTER);
+    //     if (args[3].equals("null")) {
+    //         this.deathDate = null;
+    //     } else {
+    //         this.deathDate = LocalDate.parse(args[3], FORMATTER);
+    //     }
+    //     if (args[4].equals("null")) {
+    //         this.mother = null;
+    //     } else {
+    //         this.mother = familyTree.getByName(args[4]);
+    //     }
+    //     if (args[5].equals("null")) {
+    //         this.father = null;
+    //     } else {
+    //         this.father = familyTree.getByName(args[5]);
+    //     }
+    //     this.children = new ArrayList<>();
+    // }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
+    @Override
     public void setDeathDate(LocalDate deathDate) {
         this.deathDate = deathDate;
     }
 
+    @Override
     public void addChildren(Human child) {
         if (!children.contains(child)) {
             children.add(child);
         }
     }
 
+    @Override
     public Human getMother() {
         return mother;
     }
 
+    @Override
     public Human getFather() {
         return father;
     }
 
-    private void addParents(Human parent1, Human parent2) {
+    @Override
+    public void addParents(Human parent1, Human parent2) {
         if (parent1.gender == Gender.Male) {
             father = parent1;
         } else {
@@ -98,13 +105,15 @@ public class Human implements Serializable {
         }
     }
 
+    @Override
     public void createRelatings(Human parent1, Human parent2, Human child) {
         child.addParents(parent1, parent2);
         parent1.addChildren(child);
         parent2.addChildren(child);
     }
 
-    private String getAllChildrens() {
+    @Override
+    public String getAllChildrens() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Human child : children) {
             stringBuilder.append(child.name);
@@ -113,6 +122,7 @@ public class Human implements Serializable {
         return stringBuilder.toString();
     }
 
+    @Override
     public int getAge() {
         int age = 0;
         if (deathDate != null) {
@@ -123,13 +133,13 @@ public class Human implements Serializable {
         return age;
     }
 
-    private String writeChildrensToTxt() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Human child : children) {
-            stringBuilder.append(" " + child.name);
-        }
-        return stringBuilder.toString();
-    }
+    // private String writeChildrensToTxt() {
+    //     StringBuilder stringBuilder = new StringBuilder();
+    //     for (Human child : children) {
+    //         stringBuilder.append(" " + child.name);
+    //     }
+    //     return stringBuilder.toString();
+    // }
 
     @Override
     public String toString() {
@@ -158,32 +168,32 @@ public class Human implements Serializable {
         return stringBuilder.toString();
     }
 
-    public String toTxt() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(name + " " + gender + " " + birthDate.format(FORMATTER));
-        if (deathDate != null) {
-            stringBuilder.append(" " + deathDate.format(FORMATTER));
-        } else {
-            stringBuilder.append(" null");
-        }
-        if (mother != null) {
-            stringBuilder.append(" " + mother.name);
-        } else {
-            stringBuilder.append(" null");
-        }
-        if (father != null) {
-            stringBuilder.append(" " + father.name);
-        } else {
-            stringBuilder.append(" null");
-        }
-        if (!children.isEmpty()) {
-            stringBuilder.append(writeChildrensToTxt());
-        } else {
-            stringBuilder.append(" null");
-        }
-        stringBuilder.append(";");
-        return stringBuilder.toString();
-    }
+    // public String toTxt() {
+    //     StringBuilder stringBuilder = new StringBuilder();
+    //     stringBuilder.append(name + " " + gender + " " + birthDate.format(FORMATTER));
+    //     if (deathDate != null) {
+    //         stringBuilder.append(" " + deathDate.format(FORMATTER));
+    //     } else {
+    //         stringBuilder.append(" null");
+    //     }
+    //     if (mother != null) {
+    //         stringBuilder.append(" " + mother.name);
+    //     } else {
+    //         stringBuilder.append(" null");
+    //     }
+    //     if (father != null) {
+    //         stringBuilder.append(" " + father.name);
+    //     } else {
+    //         stringBuilder.append(" null");
+    //     }
+    //     if (!children.isEmpty()) {
+    //         stringBuilder.append(writeChildrensToTxt());
+    //     } else {
+    //         stringBuilder.append(" null");
+    //     }
+    //     stringBuilder.append(";");
+    //     return stringBuilder.toString();
+    // }
 
     @Override
     public boolean equals(Object obj) {

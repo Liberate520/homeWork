@@ -2,7 +2,9 @@ package family_tree;
 
 // import java.io.IOException;
 import java.time.LocalDate;
+// import java.util.Scanner;
 
+// import family_tree.Service.ClientInterface;
 import family_tree.familyTree.FamilyTree;
 import family_tree.fileHandlers.FileHandler;
 //import family_tree.fileHandlers.FileHandlerForTree;
@@ -16,7 +18,7 @@ public class Main {
         Human human3 = new Human("Bob", LocalDate.of(1935, 3, 12), Gender.Male);
         human1.setDeathDate(LocalDate.of(1964, 3, 2));
         human2.setDeathDate(LocalDate.of(1964, 3, 2));
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<Human>();
         familyTree.createFamily(human1, human2, human3);
         // System.out.println(familyTree.getFamilyTree());
 
@@ -28,30 +30,14 @@ public class Main {
         familyTree.createFamily(human4, human5, human6);
         // System.out.println(familyTree2.getFamilyTree());
 
-        // Human human7 = new Human("Andrew", LocalDate.of(1958, 6, 13), Gender.Male);
-        // familyTree.createFamily(human3, human6, human7);
+        Human human7 = new Human("Andrew", LocalDate.of(1958, 6, 13), Gender.Male);
+        familyTree.createFamily(human3, human6, human7);
         // System.out.println(familyTree3.getFamilyTree());
 
-        // FileHandlerForTree fileHandlerForTree = new FileHandlerForTree();
-        FamilyTree restoredFamilyTree = new FamilyTree();
-        // try {
-        //     fileHandlerForTree.saveTree(familyTree, false);
-        // } catch (ClassNotFoundException e) {
-        //     System.out.println("Ошибка: ClassNotFoundException!");
-        // } catch (IOException e) {
-        //     System.out.println("Ошибка: IOException!");
-        // }
-        // try {
-        //     restoredFamilyTree = fileHandlerForTree.loadTree();
-        // } catch (IOException e) {
-        //     System.out.println("Ошибка: IOException!");
-        // } catch (ClassNotFoundException e) {
-        //     System.out.println("Ошибка: ClassNotFoundException!");
-        // }
-        // System.out.println(restoredFamilyTree.getFamilyTree());
+        FamilyTree<Human> restoredFamilyTree = new FamilyTree<Human>();
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(familyTree, "Projects_OOP/Projects_OOP_HomeWork/src/family_tree/FamilyTree1.out");
-        restoredFamilyTree = (FamilyTree) fileHandler.read("Projects_OOP/Projects_OOP_HomeWork/src/family_tree/FamilyTree1.out");
+        restoredFamilyTree = (FamilyTree<Human>) fileHandler.read("Projects_OOP/Projects_OOP_HomeWork/src/family_tree/FamilyTree1.out");
         System.out.println(restoredFamilyTree.getFamilyTree());
         restoredFamilyTree.sortByName();
         System.out.println("Sort by Name:");
@@ -62,5 +48,8 @@ public class Main {
         restoredFamilyTree.sortByAge();
         System.out.println("Sort by Age:");
         System.out.println(restoredFamilyTree.getFamilyTree());
+        // Scanner sc = new Scanner(System.in, "cp866");
+        // ClientInterface client1 = new ClientInterface(sc);
+        // client1.work(0);
     }
 }
