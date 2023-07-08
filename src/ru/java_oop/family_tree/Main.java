@@ -22,6 +22,13 @@ public class Main {
 
         System.out.println(familyTree + "\nLoaded tree from file:");
         System.out.println(familyTreeLoaded);
+
+        familyTreeLoaded.sortByName();
+        System.out.println("\n\nSorted by name:\n" + familyTreeLoaded);
+
+        familyTreeLoaded.sortByAge();
+        System.out.println("\n\nSorted by age:\n" + familyTreeLoaded);
+
     }
 
     public static void performFamilyTreeSaveToFile(FamilyTree familyTree) throws IOException {
@@ -36,11 +43,11 @@ public class Main {
     }
 
     public static void createObjectsForFamilyTree(FamilyTree familyTree) {
-        Human parent1 = new Human("Parent1", Gender.Male, LocalDate.parse("1000-01-01"));
-        Human parent2 = new Human("Parent2", Gender.Female, LocalDate.parse("1000-02-02"));
+        Human parent1 = new Human("C_Parent17", Gender.Male, LocalDate.parse("1965-01-01"));
+        Human parent2 = new Human("A_Parent2", Gender.Female, LocalDate.parse("1970-02-02"));
 
-        Human child1 = new Human("Child1", Gender.Male, LocalDate.parse("1020-03-03"), parent2, parent1);
-        Human child2 = new Human("Child2", Gender.Female, LocalDate.parse("1022-04-04"), parent2, parent1);
+        Human child1 = new Human("D_Child13", Gender.Male, LocalDate.parse("1987-03-03"), parent2, parent1);
+        Human child2 = new Human("B_Child2", Gender.Female, LocalDate.parse("1989-04-04"), parent2, parent1);
 
         familyTree.addFamilyMember(parent1);
         familyTree.addFamilyMember(parent2);

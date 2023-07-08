@@ -1,9 +1,12 @@
 package ru.java_oop.family_tree.family_tree;
 
 import ru.java_oop.family_tree.human.Human;
+import ru.java_oop.family_tree.human.HumanComparatorByAge;
+import ru.java_oop.family_tree.human.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -96,7 +99,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return true;
     }
 
-    public boolean divorce(long humanId1, long humanId2){
+    public boolean divorce(long humanId1, long humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
             Human human1 = getById(humanId1);
             Human human2 = getById(humanId2);
@@ -118,7 +121,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     private String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Family tree contains ").append(this.humanList.size()).append(" objects\n");
-        for (Human human : this.humanList){
+        for (Human human : this.humanList) {
             sb.append(human).append("\n");
         }
         return sb.toString();
@@ -127,5 +130,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public Iterator<Human> iterator() {
         return new HumanIterator(humanList);
+    }
+
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge());
+//        Collections.sort(humanList, new HumanComparatorByAge());
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+//        Collections.sort(humanList, new HumanComparatorByName());
     }
 }
