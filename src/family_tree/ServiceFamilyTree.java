@@ -1,10 +1,16 @@
+package family_tree;
+
+import family_tree.human.Gender;
+import family_tree.human.Human;
+import family_tree.marriage.Marriage;
+
 import java.time.LocalDate;
 
 public class ServiceFamilyTree {
     private int idHuman, idMarriage;
     private FamilyTree tree;
 
-    ServiceFamilyTree(){
+    public ServiceFamilyTree(){
         tree = new FamilyTree();
     }
 
@@ -47,6 +53,20 @@ public class ServiceFamilyTree {
         Marriage m = tree.getMarriageById(id);
         if(m == null) return false; // брак не найден
         return !m.stop(date);
+    }
+
+    public String getHumansInfo(){
+        return tree.getHumansInfo();
+    }
+    public String getMarriagesInfo(){
+        return tree.getMarriagesInfo();
+    }
+
+    public void sortHumansByName(){
+        tree.sortHumansByName();
+    }
+    public void sortHumansByAge(){
+        tree.sortHumansByAge();
     }
 
     public String getInfoAll(){

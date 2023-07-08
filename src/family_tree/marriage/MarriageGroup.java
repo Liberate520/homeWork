@@ -1,3 +1,5 @@
+package family_tree.marriage;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -5,7 +7,7 @@ import java.util.List;
 
 public class MarriageGroup implements Iterable<Marriage>, Serializable {
     private List<Marriage> marriages;
-    MarriageGroup(){
+    public MarriageGroup(){
         marriages = new ArrayList<>();
     }
 

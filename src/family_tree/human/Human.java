@@ -1,5 +1,8 @@
+package family_tree.human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -53,6 +56,9 @@ public class Human implements Serializable {
         children.add(child);
         return true;
     }
+    public int getAge(){
+        return Period.between(dateBirth, LocalDate.now()).getYears(); //из гугла
+    }
     public Human getSpouse() {
         return spouse;
     }
@@ -65,7 +71,7 @@ public class Human implements Serializable {
         result.append(String.format("id: %d, ", id));
         result.append(String.format("Имя: %s, ", name));
         result.append(String.format("Дата рождения: %s, ", dateBirth.toString()));
-        result.append(String.format("Пол: %s, ", gender==Gender.Male ? "мужской":"женский"));
+        result.append(String.format("Пол: %s, ", gender== Gender.Male ? "мужской":"женский"));
         result.append(String.format("Отец: %s, ", (father==null ? "Нет данных" : father.getName())));
         result.append(String.format("Мать: %s, ", (mother==null ? "Нет данных" : mother.getName())));
         if(children.isEmpty()){
@@ -77,9 +83,9 @@ public class Human implements Serializable {
             result.append(String.format("Дети: %s, ", String.join(",", childrenNames)));
         }
         if(this.spouse == null){
-            result.append(String.format("Семейное положение: %s", gender==Gender.Male ? "не женат" : "не замужем"));
+            result.append(String.format("Семейное положение: %s", gender== Gender.Male ? "не женат" : "не замужем"));
         }else{
-            result.append(String.format("Семейное положение: %s", gender==Gender.Male ? "женат" : "замужем"));
+            result.append(String.format("Семейное положение: %s", gender== Gender.Male ? "женат" : "замужем"));
         }
         result.append("}");
         return result.toString();

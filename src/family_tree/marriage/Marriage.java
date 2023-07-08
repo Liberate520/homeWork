@@ -1,3 +1,8 @@
+package family_tree.marriage;
+
+import family_tree.human.Gender;
+import family_tree.human.Human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -46,10 +51,10 @@ public class Marriage implements Serializable {
 
     public String getInfo(){
         return "{id: " + id
-                + ", заключен: " + startDate.toString()
-                + (endDate == null ? ", статус: действителен" : ", статус: расторгнут " + endDate.toString())
                 + ", Супруга: {" + wife.getName() + ", id=" + wife.getId() + '}'
                 + ", Супруг: {" + husband.getName() + ", id=" + husband.getId() + '}'
+                + ", заключен: " + startDate.toString()
+                + (endDate == null ? ", статус: действителен" : ", статус: расторгнут " + endDate.toString())
                 + "}";
     }
 

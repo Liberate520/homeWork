@@ -1,12 +1,19 @@
+package family_tree;
+
+import family_tree.human.Human;
+import family_tree.human.HumanGroup;
+import family_tree.marriage.Marriage;
+import family_tree.marriage.MarriageGroup;
+
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    private HumanGroup humans;
+    private HumanGroup humans;  //implements Iterable<family_tree.human.Human>
     private MarriageGroup marriages;
-    public FamilyTree(){
+    //доступен только для service
+    FamilyTree(){
         humans = new HumanGroup();
         marriages = new MarriageGroup();
     }
@@ -33,13 +40,10 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    public String getInfoMembers(){
-        List<String> familyMembers = new ArrayList<>();
-        for (Human h : humans)
-            familyMembers.add(h.getInfo());
-        return String.join("\n", familyMembers);
+    public String getHumansInfo(){
+        return humans.getInfo();
     }
-    public String getInfoMarriages(){
+    public String getMarriagesInfo(){
         List<String> strings = new ArrayList<>();
         for (Marriage m : marriages)
             strings.add(m.getInfo());
@@ -47,11 +51,20 @@ public class FamilyTree implements Serializable {
     }
     public String getInfoAll(){
         return "{ humans: \n"
-                + getInfoMembers()
+                + getHumansInfo()
                 + ",\nmarriages: \n"
-                + getInfoMarriages()
+                + getMarriagesInfo()
                 + "\n}";
     }
+
+    public void sortHumansByName(){
+        humans.sortByName();
+    }
+
+    public void sortHumansByAge(){
+        humans.sortByAge();
+    }
+
     @Override
     public String toString() {
         return getInfoAll();
