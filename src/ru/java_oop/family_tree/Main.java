@@ -5,7 +5,6 @@ import ru.java_oop.family_tree.human.Gender;
 import ru.java_oop.family_tree.human.Human;
 import ru.java_oop.family_tree.family_tree.FamilyTree;
 
-import javax.print.attribute.standard.JobKOctets;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -23,13 +22,11 @@ public class Main {
 
         System.out.println(familyTree + "\nLoaded tree from file:");
         System.out.println(familyTreeLoaded);
-
     }
 
-
     public static void performFamilyTreeSaveToFile(FamilyTree familyTree) throws IOException {
-        FileHandler fh = new FileHandler(familyTree);
-        fh.writeObjToFile();
+        FileHandler fh = new FileHandler();
+        fh.writeObjToFile(familyTree);
     }
 
     public static FamilyTree loadFamilyTreeFromFile() throws IOException, ClassNotFoundException {

@@ -6,25 +6,19 @@ public class FileHandler implements SavableAndReadable {
     private ObjectOutputStream objOutputStream;
     private ObjectInputStream objInputStream;
     private String fileName;
-    private Object obj;
 
-    public FileHandler(String fileName, Object obj) {
+    public FileHandler(String fileName) {
         this.setFileName(fileName);
-        this.setObj(obj);
-    }
-
-    public FileHandler(Object obj) {
-        this("backup.out", obj);
     }
 
     public FileHandler() {
-        this(null);
+        this("backup.out");
     }
 
     @Override
-    public void writeObjToFile() throws IOException {
+    public void writeObjToFile(Object obj) throws IOException {
         this.objOutputStream = new ObjectOutputStream(new FileOutputStream(this.getFileName()));
-        this.objOutputStream.writeObject(this.getObj());
+        this.objOutputStream.writeObject(obj);
         this.objOutputStream.close();
     }
 
@@ -42,13 +36,5 @@ public class FileHandler implements SavableAndReadable {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public Object getObj() {
-        return obj;
-    }
-
-    public void setObj(Object obj) {
-        this.obj = obj;
     }
 }

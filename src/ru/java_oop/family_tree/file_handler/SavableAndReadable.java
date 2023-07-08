@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public interface SavableAndReadable {
 
-    void writeObjToFile() throws IOException;
+    void writeObjToFile(Object obj) throws IOException;
 
     Object readObjFromFile() throws IOException, ClassNotFoundException;
 }
