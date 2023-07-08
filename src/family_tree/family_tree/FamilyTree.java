@@ -1,10 +1,15 @@
-package family_tree;
+package family_tree.family_tree;
+
+import family_tree.human.Human;
+import family_tree.human.comparators.HumanComparatorByBirthDate;
+import family_tree.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private long humansId;
     private List<Human> humanList;
 
@@ -42,7 +47,6 @@ public class FamilyTree implements Serializable {
             child.addParent(human);
         }
     }
-
     public List<Human> getByName(String name) {
         List<Human> res = new ArrayList<>();
         for (Human human: humanList){
@@ -102,5 +106,13 @@ public class FamilyTree implements Serializable {
     @Override
     public String toString(){
         return getInfo();
+    }
+
+    @Override
+    public Iterator<Human> iterator(){return new HumanIterator(humanList);}
+    public void sortByName(){humanList.sort(new HumanComparatorByName());
+    }
+    public void sortByBirthDate(){
+        humanList.sort(new HumanComparatorByBirthDate());
     }
 }
