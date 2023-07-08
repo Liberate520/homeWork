@@ -4,23 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    private List<Human> humans;
-    private List<Marriage> marriages;
-    private int idMarriage=0;
+    private HumanGroup humans;
+    private MarriageGroup marriages;
     public FamilyTree(){
-        humans = new ArrayList<>();
-        marriages = new ArrayList<>();
+        humans = new HumanGroup();
+        marriages = new MarriageGroup();
     }
-    public void addHuman(Human h){
+    //разрешаем вызвать метод только в пакете
+    void addHuman(Human h){
         humans.add(h);
     }
-    //При нарушении условий заключения брака возвращаем null
-    public Marriage addMarriage(LocalDate startDate, Human wife, Human husband){
-        Marriage marriage = new Marriage(idMarriage, startDate, wife, husband);
-        if(marriage.getIsError()) return null;
-        marriages.add(marriage);
-        idMarriage++;
-        return marriage;
+
+    //разрешаем вызвать метод только в пакете
+    void addMarriage(Marriage m){
+        marriages.add(m);
+    }
+
+    public Human getHumanById(int id){
+        for(Human h : humans)
+            if(h.getId() == id)
+                return h;
+        return null;
+    }
+    public Marriage getMarriageById(int id){
+        for(Marriage m : marriages)
+            if(m.getId() == id)
+                return m;
+        return null;
     }
 
     public String getInfoMembers(){
@@ -35,14 +45,8 @@ public class FamilyTree implements Serializable {
             strings.add(m.getInfo());
         return String.join("\n", strings);
     }
-    public Human getHumanById(int id){
-        for(Human h : humans)
-            if(h.getId() == id)
-                return h;
-        return null;
-    }
     public String getInfoAll(){
-        return "{ members: \n"
+        return "{ humans: \n"
                 + getInfoMembers()
                 + ",\nmarriages: \n"
                 + getInfoMarriages()

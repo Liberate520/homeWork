@@ -62,6 +62,7 @@ public class Human implements Serializable {
     public String getInfo(){
         StringBuilder result = new  StringBuilder();
         result.append("{");
+        result.append(String.format("id: %d, ", id));
         result.append(String.format("Имя: %s, ", name));
         result.append(String.format("Дата рождения: %s, ", dateBirth.toString()));
         result.append(String.format("Пол: %s, ", gender==Gender.Male ? "мужской":"женский"));

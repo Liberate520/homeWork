@@ -35,8 +35,9 @@ public class Marriage implements Serializable {
         return id;
     }
 
-    public boolean finish(LocalDate endDate){
+    public boolean stop(LocalDate endDate){
         if(endDate.compareTo(startDate) < 0) return false; //Попытка присвоить дату расторжения брака ранеее даты заключения
+        if(this.endDate != null) return false;  //брак уже расторгнут
         this.endDate = endDate;
         wife.setSpouse(null);
         husband.setSpouse(null);
@@ -45,10 +46,10 @@ public class Marriage implements Serializable {
 
     public String getInfo(){
         return "{id: " + id
-                + ", дата заключения: " + startDate.toString()
-                + (endDate == null ? "" : ", дата расторжения: " + endDate.toString())
-                + ", \nСупруга: " + wife.getInfo()
-                + ", \nСупруг: " + husband.getInfo()
+                + ", заключен: " + startDate.toString()
+                + (endDate == null ? ", статус: действителен" : ", статус: расторгнут " + endDate.toString())
+                + ", Супруга: {" + wife.getName() + ", id=" + wife.getId() + '}'
+                + ", Супруг: {" + husband.getName() + ", id=" + husband.getId() + '}'
                 + "}";
     }
 
