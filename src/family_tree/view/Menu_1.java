@@ -1,7 +1,7 @@
-package family_tree.menu;
-import family_tree.infrastucture.My_Scanner;
-import family_tree.tree.FamilyTree;
-import family_tree.tree.tree_service.Tree_service;
+package family_tree.view;
+import family_tree.model.infrastucture.My_Scanner;
+import family_tree.model.tree.FamilyTree;
+import family_tree.model.tree.tree_service.Tree_service;
 
 import java.util.Scanner;
 

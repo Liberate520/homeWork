@@ -1,10 +1,10 @@
-package family_tree.menu;
-import family_tree.infrastucture.Config;
-import family_tree.infrastucture.My_Scanner;
-import family_tree.infrastucture.de_serelization.File_using;
-import family_tree.registry_office.Reg_office;
-import family_tree.tree.FamilyTree;
-import family_tree.tree.tree_service.Tree_service;
+package family_tree.view;
+import family_tree.model.infrastucture.Config;
+import family_tree.model.infrastucture.My_Scanner;
+import family_tree.model.infrastucture.de_serelization.File_using;
+import family_tree.model.registry_office.Reg_office;
+import family_tree.model.tree.FamilyTree;
+import family_tree.model.tree.tree_service.Tree_service;
 
 import java.util.Scanner;
 

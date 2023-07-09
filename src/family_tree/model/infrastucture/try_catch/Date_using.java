@@ -1,4 +1,4 @@
-package family_tree.infrastucture.try_catch;
+package family_tree.model.infrastucture.try_catch;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

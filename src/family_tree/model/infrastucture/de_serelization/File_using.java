@@ -1,5 +1,4 @@
-package family_tree.infrastucture.de_serelization;
-import family_tree.tree.FamilyTree;
+package family_tree.model.infrastucture.de_serelization;
 import java.io.*;
 
 public class File_using implements My_Serialization{
