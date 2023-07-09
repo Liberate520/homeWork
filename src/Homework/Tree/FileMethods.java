@@ -6,22 +6,6 @@ import java.io.*;
 
 public class FileMethods extends FamilyTree implements Writable, Serializable {
 
-    public static void saveInFile(Human human, String filePath) throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(filePath));
-        objectOutputStream.writeObject(human);
-        objectOutputStream.close();
-    }
-
-    public static void readOutFile(String filePath) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(filePath));
-        Human humanRestored = (Human) objectInputStream.readObject();
-        objectInputStream.close();
-        System.out.println(humanRestored);
-    }
-
-
     @Override
     public boolean saveAllInFile(Serializable serializable, String filePath) {
         try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath));){

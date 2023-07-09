@@ -77,10 +77,6 @@ public class Main {
         System.out.println(human6.getGrandsInfo());
         System.out.println("=".repeat(20));
 
-        FileMethods.saveInFile(human1, "src/Homework/Human1.out");
-        FileMethods.readOutFile("src/Homework/Human1.out");
-        System.out.println("=".repeat(20));
-
         FileMethods fileMethods = new FileMethods();
 
         fileMethods.saveAllInFile(familyTree, "src/Homework/FamilyTree.out");
