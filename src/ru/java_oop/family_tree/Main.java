@@ -17,7 +17,7 @@ public class Main {
 
         performFamilyTreeSaveToFile(familyTree);
 
-//        LOAD BLOCK
+//      LOAD BLOCK
         FamilyTree familyTreeLoaded = (FamilyTree) loadFamilyTreeFromFile();
 
         System.out.println(familyTree + "\nLoaded tree from file:");
@@ -32,13 +32,13 @@ public class Main {
     }
 
     public static void performFamilyTreeSaveToFile(FamilyTree familyTree) throws IOException {
-        FileHandler fh = new FileHandler();
+        FileHandler fh = new FileHandler("src/ru/java_oop/backup.out");
         fh.writeObjToFile(familyTree);
     }
 
     public static FamilyTree loadFamilyTreeFromFile() throws IOException, ClassNotFoundException {
 
-        FileHandler fh = new FileHandler();
+        FileHandler fh = new FileHandler("src/ru/java_oop/backup.out");
         return (FamilyTree) fh.readObjFromFile();
     }
 

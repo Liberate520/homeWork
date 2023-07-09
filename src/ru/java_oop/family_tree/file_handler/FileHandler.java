@@ -5,10 +5,10 @@ import java.io.*;
 public class FileHandler implements SavableAndReadable {
     private ObjectOutputStream objOutputStream;
     private ObjectInputStream objInputStream;
-    private String fileName;
+    private String filePath;
 
-    public FileHandler(String fileName) {
-        this.setFileName(fileName);
+    public FileHandler(String filePath) {
+        this.setFilePath(filePath);
     }
 
     public FileHandler() {
@@ -16,25 +16,34 @@ public class FileHandler implements SavableAndReadable {
     }
 
     @Override
-    public void writeObjToFile(Object obj) throws IOException {
-        this.objOutputStream = new ObjectOutputStream(new FileOutputStream(this.getFileName()));
-        this.objOutputStream.writeObject(obj);
-        this.objOutputStream.close();
+    public void writeObjToFile(Object obj) {
+        try {
+            this.objOutputStream = new ObjectOutputStream(new FileOutputStream(this.getFilePath()));
+            this.objOutputStream.writeObject(obj);
+            this.objOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public Object readObjFromFile() throws IOException, ClassNotFoundException {
-        this.objInputStream = new ObjectInputStream(new FileInputStream(this.getFileName()));
-        Object result = this.objInputStream.readObject();
-        this.objInputStream.close();
-        return result;
+    public Object readObjFromFile() {
+        try {
+            this.objInputStream = new ObjectInputStream(new FileInputStream(this.getFilePath()));
+            Object result = this.objInputStream.readObject();
+            this.objInputStream.close();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }
