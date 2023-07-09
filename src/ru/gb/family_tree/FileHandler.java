@@ -15,17 +15,19 @@ public class FileHandler implements Writable, Readable {
     public FileHandler(String fileName) {
         this.fileName = fileName;
     }
+    
+    @Override
+    public Object read() throws IOException, FileNotFoundException, ClassNotFoundException {
+        objInputStream = new ObjectInputStream(new FileInputStream(fileName));
+        Object restored = (Object) objInputStream.readObject();
+        objInputStream.close();
+        return restored;
+    }
 
-    public void writeObject(Writable obj) throws IOException, FileNotFoundException {
+    @Override
+    public void write(Object obj) throws IOException, FileNotFoundException {
         objOutStream = new ObjectOutputStream(new FileOutputStream(fileName));
         objOutStream.writeObject(obj);
         objOutStream.close();
-    }
-
-    public Readable readObject() throws IOException, FileNotFoundException, ClassNotFoundException {
-        objInputStream = new ObjectInputStream(new FileInputStream(fileName));
-        Readable restored = (Readable) objInputStream.readObject();
-        objInputStream.close();
-        return restored;
     }
 }

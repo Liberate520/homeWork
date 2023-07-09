@@ -21,17 +21,32 @@ public class Main {
         // Сериализация дерева
         FileHandler fHandler = new FileHandler("obj.out");
         try {
-            fHandler.writeObject(ft);
+            fHandler.write(ft);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Десериализация дерева
+        System.out.println("Десериализация");
         try {
-            FamilyTree familyTree = (FamilyTree) fHandler.readObject();
+            FamilyTree familyTree = (FamilyTree) fHandler.read();
             familyTree.getHumans();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Сортировка по дате рождения
+        System.out.println("Сортировка по дате рождения");
+        ft.sortByBirthDate();
+        ft.getHumans();
+
+        // Сортировка по фамилии
+        System.out.println("Сортировка по фамилии");
+        ft.sortBySurname();
+        ft.getHumans();
+
+        // Проверка итератора
+        System.out.println("Итерация FamilyTree через foreach");
+        for (Human human : ft) System.out.println(human);
     }
 }
