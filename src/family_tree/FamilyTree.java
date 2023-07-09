@@ -22,7 +22,7 @@ public class FamilyTree{
         }
         return false;
     }
-    //TODO метод поиска братьев
+
     private void addToParents(Human human){
         for (Human parent: human.getParents()){
             parent.addChild(human);
@@ -33,9 +33,9 @@ public class FamilyTree{
             child.addParent(human);
         }
     }
-    public Human getByName(String name) {
+    public Human getByDocId(String docId) {
         for (Human human: humanList) {
-            if (human.getName().equals(name)){
+            if (human.getDocId().equals(docId)){
                 return human;
             }
         }

@@ -4,17 +4,18 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 public class Human {
+    private String docId;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Human> parents;
     private List<Human> children;
-    //TODO добавить супруга
-//    private Human spouse;
+    private String spouse;
 
-    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate,
-                 Human father, Human mother) {
+    public Human(String docId, String name, Gender gender, LocalDate birthDate, LocalDate deathDate,
+                 Human father, Human mother, String spouse) {
+        this.docId = docId;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -27,14 +28,19 @@ public class Human {
             parents.add(mother);
         }
         children = new ArrayList<>();
+        this.spouse = spouse;
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate) {
-        this(name, gender, birthDate, null, null, null);
+    public Human(String docId, String name, Gender gender, LocalDate birthDate) {
+        this(docId, name, gender, birthDate, null, null, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate, Human father, Human mother) {
-        this(name, gender, birthDate, null, father, mother);
+    public Human(String docId, String name, Gender gender, LocalDate birthDate, Human father, Human mother) {
+        this(docId, name, gender, birthDate, null, father, mother, null);
+    }
+
+    public Human(String docId, String name, Gender gender, LocalDate birthDate, String spouse) {
+        this(docId, name, gender, birthDate, null, null, null, spouse);
     }
 
     public boolean addChild(Human child) {
@@ -45,8 +51,8 @@ public class Human {
         return false;
     }
 
-    public String getName() {
-        return name;
+    public String getDocId() {
+        return docId;
     }
 
     public boolean addParent(Human parent) {
@@ -102,6 +108,20 @@ public class Human {
     public Gender getGender() {
         return gender;
     }
+    public String getSpouse() {
+        String res = "семейное положение (документ супруга): ";
+        if(spouse !=null) {
+            res += spouse;
+        } else {
+            if(getGender() == Gender.Female) {
+                res += "не замужем";
+            } else {
+                res += "холост";
+            }
+        }
+        return res;
+    }
+
 
     @Override
     public String toString() {
@@ -110,6 +130,8 @@ public class Human {
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
+        sb.append("документ id: ");
+        sb.append(docId);
         sb.append("имя: ");
         sb.append(name);
         sb.append(", пол: ");
@@ -122,6 +144,8 @@ public class Human {
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
+        sb.append(", ");
+        sb.append(getSpouse());
         return sb.toString();
     }
 
@@ -129,7 +153,7 @@ public class Human {
         String res = "мать: ";
         Human mother = getMother();
         if(mother !=null) {
-            res += mother.getName();
+            res += mother.getDocId();
         } else {
             res += "неизвестна";
         }
@@ -139,7 +163,7 @@ public class Human {
         String res = "отец: ";
         Human father = getFather();
         if(father !=null) {
-            res += father.getName();
+            res += father.getDocId();
         } else {
             res += "неизвестен";
         }
@@ -149,10 +173,10 @@ public class Human {
         StringBuilder res = new StringBuilder();
         res.append("дети: ");
         if(children.size() != 0) {
-            res.append(children.get(0).getName());
+            res.append(children.get(0).getDocId());
             for (int i = 1; i < children.size(); i++){
                 res.append(", ");
-                res.append(children.get(i).getName());
+                res.append(children.get(i).getDocId());
             }
         } else {
             res.append("отсутствуют");
@@ -179,6 +203,6 @@ public class Human {
             return false;
         }
         Human human = (Human) obj;
-        return human.getName().equals(getName());
+        return human.getDocId().equals(getDocId());
     }
 }
