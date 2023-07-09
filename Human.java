@@ -2,7 +2,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-public class Human {
+import java.io.Serializable;
+public class Human implements Serializable {
     private long id;
     private String name;
     private Gender gender;
