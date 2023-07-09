@@ -1,5 +1,8 @@
 package Homework.Tree;
 
+import Homework.Human.Comparators.HumanComporatorByAge;
+import Homework.Human.Comparators.HumanComporatorByName;
+import Homework.Human.Comparators.HumanComporatorByChildren;
 import Homework.Human.Human;
 
 import java.io.Serializable;
@@ -81,4 +84,17 @@ public class FamilyTree implements Serializable {
             }
         }
     }
+
+    public void sortByName(){
+        familyList.sort(new HumanComporatorByName());
+    }
+
+    public void sortByAge(){
+        familyList.sort(new HumanComporatorByAge());
+    }
+
+    public void sortByChildren(){
+        familyList.sort(new HumanComporatorByChildren());
+    }
+
 }

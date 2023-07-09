@@ -82,6 +82,22 @@ public class Main {
         fileMethods.saveAllInFile(familyTree, "src/Homework/FamilyTree.out");
         FamilyTree tree = (FamilyTree) fileMethods.read("src/Homework/FamilyTree.out");
         System.out.println(tree.getHumanInfo());
+        System.out.println("=".repeat(20));
+
+        familyTree.sortByAge();
+        System.out.println("Сортировка по возрасту: ");
+        System.out.println(familyTree.getHumanInfo());
+        System.out.println("-".repeat(20));
+
+        System.out.println("Сортировка по имени: ");
+        familyTree.sortByName();
+        System.out.println(familyTree.getHumanInfo());
+        System.out.println("-".repeat(20));
+
+        familyTree.sortByChildren();
+        System.out.println("Сортировка по количеству детей: ");
+        System.out.println(familyTree.getHumanInfo());
+        System.out.println("=".repeat(20));
 
     }
 }
