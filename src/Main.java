@@ -1,9 +1,8 @@
-import human.Gender;
-import human.Person;
-import human.GenealogyTree;
-
+import model.FamilyTreeModel;
+import model.human.Gender;
+import model.human.Person;
 import java.io.IOException;
-import fileHandler.*;
+import model.fileHandler.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -47,7 +46,7 @@ public class Main {
         person7.setDateOfBirth(27,12,1997);
         person7.setGender(Gender.Male);
 
-        GenealogyTree tree = new GenealogyTree();
+        FamilyTreeModel tree = new FamilyTreeModel();
         tree.addPerson(person1);
         tree.addPerson(person2);
         tree.addPerson(person3);
@@ -60,6 +59,7 @@ public class Main {
 
         System.out.println("Генеалогическое дерево:");
         tree.showTree();
+
         tree.findPerson("Виктор", "Николаев");
 
 //        Сохраняем дерево в текстовый файл
@@ -70,7 +70,7 @@ public class Main {
 
 //        Загружаем дерево из текстового файла
 
-        GenealogyTree loadedTree = save.loadFromFile("family_tree.txt");
+        FamilyTreeModel loadedTree = save.loadFromFile("family_tree.txt");
         Person person8 = new Person("Иван", "Иванов");
         person8.setDateOfBirth(1,1,2031);
         person8.setGender(Gender.Male);
@@ -80,6 +80,7 @@ public class Main {
         System.out.println("Сортировка по имени:");
         loadedTree.sortByName(); // сортировка по имени
         loadedTree.showTree();
+
         System.out.println("Сортировка по дате рождения:");
         loadedTree.sortByBirthDate(); // сортировка по дате рождения
         loadedTree.showTree();

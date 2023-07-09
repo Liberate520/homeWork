@@ -1,4 +1,4 @@
-package human;
+package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -34,14 +34,6 @@ public class Person implements Serializable {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public List<Person> getChildren() {
-        return children;
-    }
-
-    public List<Person> getParents() {
-        return parents;
     }
 
     public void addChild(Person child) {
