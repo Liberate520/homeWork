@@ -1,7 +1,6 @@
-package familytree;
+package familytree.Files;
 
-import java.io.IOException;
-import java.io.Serializable;
+import familytree.Tree.Familytree;
 
 public interface IOFile {
 

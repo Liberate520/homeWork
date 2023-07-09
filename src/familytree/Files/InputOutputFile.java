@@ -1,8 +1,10 @@
-package familytree;
+package familytree.Files;
+
+import familytree.Tree.Familytree;
 
 import java.io.*;
 
-public class InputOutputFile implements IOFile{
+public class InputOutputFile implements IOFile {
 @Override
 public void saveFamilyTree(Familytree familytree, String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {

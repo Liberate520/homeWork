@@ -1,8 +1,6 @@
-package familytree;
+package familytree.Tree;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Familytree implements Serializable {
     private Person rootPerson; //===Начальная точка дерева
@@ -14,32 +12,15 @@ public class Familytree implements Serializable {
         person.addParent(parent1);
         person.addParent(parent2);
         parent1.addChild(person);
+        parent2.addChild(person);
 
-        //person.addPartner(parent1);
     }
+
     public void addPerson(Person person, Person partner){
         person.addPartner(partner);
+        partner.addPartner(person);
     }
 
-
-/*
-    public List<Person>  searchPersonsByName(String name) {
-        List<Person> result = new ArrayList<>();
-        searchPersonsByNameRecursive(rootPerson, name, result);
-        return result;
-    }
-*/
-
-/*
-    private void searchPersonsByNameRecursive(Person currentPerson, String name, List<Person> result) {
-        if (currentPerson.getName().equals(name)) {
-            result.add(currentPerson);
-        }
-        for (Person child : currentPerson.getChildren()) {
-            searchPersonsByNameRecursive(child, name, result);
-        }
-    }
-*/
 
     public void printFamilyTree() {
         printFamilyTreeRecursive(rootPerson, 0);
@@ -55,6 +36,12 @@ public class Familytree implements Serializable {
             printFamilyTreeRecursive(child, level + 1);
         }
     }
+
+    /*@Override
+    public Iterator<Person> iterator() {
+        return new FamilyTreeIterator();
+    }*/
+
 
     //============================================================
 

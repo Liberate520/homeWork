@@ -1,8 +1,9 @@
-package familytree;
+package familytree.Tree;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 public class Person implements Serializable{
     private String name;
@@ -11,6 +12,7 @@ public class Person implements Serializable{
     private String dateOfDeath;
     private String gender;
     private String status;
+    private Person partner;
     private List<Person> parents;
     private List<Person> partners;
     private List<Person> children;
@@ -47,6 +49,8 @@ public class Person implements Serializable{
     public Person(String status) {
         this.status = status;
     }
+
+
     //---Геттеры и Сеттеры----------------
 
     public String getStatus() {
@@ -145,8 +149,11 @@ public class Person implements Serializable{
      * @param partner
      */
     public void addPartner(Person partner){
+        /*this.partner = partner;
+        partner.partner =this;*/
         partners.add(partner);
     }
+
     public void removePartner(Person partner){
         partners.remove(partner);
     }
@@ -171,15 +178,17 @@ public class Person implements Serializable{
     public boolean isAlive(){
         return dateOfDeath==null||dateOfDeath.isEmpty();
     }
-   /* //---Методы для получения списка предков и потомков
-    public List<Person> getAncestors(){
+    //---Методы для получения списка предков и потомков
+
+   /* public List<Person> getAncestors(){
         List<Person> ancestors = new ArrayList<>();
         for(Person parent : partners){
-            ancestors.add(parent);
-            //ancestors.addAll(parent.getAncestors());
+            //ancestors.add(parent);
+            ancestors.addAll(parent.getAncestors());
         }
         return ancestors;
     }
+
     public List<Person> getDescendants(){
         List<Person> descendants = new ArrayList<>();
         for(Person child : children){
@@ -203,7 +212,7 @@ public class Person implements Serializable{
 
     private String parentsToString() {
         if (parents.isEmpty()) {
-            return "Неизвестный";
+            return "Неизвестны";
         }
         StringBuilder sb = new StringBuilder();
         for (Person parent : parents) {
@@ -238,13 +247,18 @@ public class Person implements Serializable{
 
     @Override
     public String toString() {
-        return "Человек: " +
-                "Фамилия = '" + surname + '\'' +
-                ", Имя = '" + name + '\'' +
-                ", Дата рождения =" + " " + dateOfBirth +
-                ", Дата смерти =" +" "+ dateOfDeath  +
-                ", Пол =" + gender +
+        String par = parentsToString();
+        String chil = childrenToString();
+        return "==" +
+                " " + surname +
+                "  " + name + "\n"+
+                "   Дата рождения =" + " " + dateOfBirth +"."+
+                //", Дата смерти =" +" "+ dateOfDeath  +
+                " Пол =" + gender +
+                " Родители =" + par +"."+
+                " Дети = " + chil+"."+
                 " ";
     }
+
 
 }
