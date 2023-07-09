@@ -9,7 +9,6 @@ import family_tree.file_handler.IFileHandler;
 import family_tree.human_family.FamilyTree;
 import family_tree.humans.Gender;
 import family_tree.humans.Human;
-import family_tree.humans.human_repository.HumanRepository;
 
 public class Main {
 
@@ -39,15 +38,14 @@ public class Main {
         diana.addParent(maksim);
         maria.setDeathDate(LocalDate.of(2008, 01, 30));
 
-        HumanRepository repository = new HumanRepository();
-        repository.addHuman(maria);
-        repository.addHuman(maksim);
-        repository.addHuman(irina);
-        repository.addHuman(nataly);
-        repository.addHuman(peter);
-        repository.addHuman(diana);
-        repository.addHuman(kate);
-        repository.addHuman(yuriy);
+        familyTree.addHuman(maria);
+        familyTree.addHuman(maksim);
+        familyTree.addHuman(irina);
+        familyTree.addHuman(nataly);
+        familyTree.addHuman(peter);
+        familyTree.addHuman(diana);
+        familyTree.addHuman(kate);
+        familyTree.addHuman(yuriy);
 
         List<Human> maksimsChildren = familyTree.getAllChildren(maksim);
         System.out.println("maksim's children:");
@@ -55,7 +53,7 @@ public class Main {
             System.out.println(child.getName());
         }
 
-        IFileHandler fileHandler =  (IFileHandler) new FileHandler();
+        IFileHandler fileHandler = (IFileHandler) new FileHandler();
         fileHandler.writeToFile(allHumans, "family_tree\\people.txt");
 
         List<Human> readPeople = fileHandler.readFromFile("family_tree\\people.txt");
@@ -63,9 +61,15 @@ public class Main {
             System.out.println(person.getName());
         }
 
-        List<Human> allHumans = repository.getAllHumans();
+        List<Human> allHumans = familyTree.getAllHumans();
         for (Human human : allHumans) {
             System.out.println(human);
         }
+
+        System.out.println(familyTree.getHumanInfo());
+        familyTree.sortByName();
+        System.out.println(familyTree.getHumanInfo());
+        familyTree.sortByYear();
+        System.out.println(familyTree.getHumanInfo());
     }
 }
