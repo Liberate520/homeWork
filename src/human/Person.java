@@ -5,16 +5,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person<T> implements Serializable {
+public class Person implements Serializable {
     private static int counter = 0;
     private int id;
     private String firstName;
     private String lastName;
-    private List<Person<T>> children;
-    private List<Person<T>> parents;
+    private List<Person> children;
+    private List<Person> parents;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
-    private String gender;
+    private Gender gender;
 
     public Person(String firstName, String lastName) {
         this.id = counter++;
@@ -36,20 +36,20 @@ public class Person<T> implements Serializable {
         return lastName;
     }
 
-    public List<Person<T>> getChildren() {
+    public List<Person> getChildren() {
         return children;
     }
 
-    public List<Person<T>> getParents() {
+    public List<Person> getParents() {
         return parents;
     }
 
-    public void addChild(Person<T> child) {
+    public void addChild(Person child) {
         children.add(child);
         child.addParent(this);
     }
 
-    public void addParent(Person<T> parent) {
+    public void addParent(Person parent) {
         parents.add(parent);
     }
 
@@ -69,11 +69,11 @@ public class Person<T> implements Serializable {
         this.dateOfDeath = LocalDate.of(year,month,day);
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

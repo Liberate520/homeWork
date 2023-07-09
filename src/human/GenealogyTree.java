@@ -2,10 +2,10 @@ package human;
 import java.io.Serializable;
 import java.util.*;
 
-public class GenealogyTree<T> implements Serializable {
-    private List<Person<T>> people;
+public class GenealogyTree implements Serializable {
+    private List<Person> people;
 
-    public List<Person<T>> getPeople(){
+    public List<Person> getPeople(){
         return people;
     }
 
@@ -14,20 +14,20 @@ public class GenealogyTree<T> implements Serializable {
         this.people = new ArrayList<>();
     }
 
-    public void addPerson(Person<T> person)
+    public void addPerson(Person person)
     {
         people.add(person);
     }
 
     public void showTree() {
-        for (Person<T> p : people){
+        for (Person p : people){
             System.out.println(p.toString());
         }
         System.out.println();
     }
 
     public void findPerson(String name, String lastName) {
-        for (Person<T> p : people) {
+        for (Person p : people) {
             if (p.getName().equals(name) && p.getLastName().equals(lastName)) {
                 System.out.println("Найден человек:\n" + "\t" + p);
             }
@@ -35,10 +35,10 @@ public class GenealogyTree<T> implements Serializable {
         System.out.println();
     }
 
-    public void printGenealogyTree(Person<T> person) {
+    public void printGenealogyTree(Person person) {
         System.out.print(person.getName() + " " + person.getLastName());
-        List<Person<T>> children = person.getChildren();
-        for (Person<T> child : children) {
+        List<Person> children = person.getChildren();
+        for (Person child : children) {
             System.out.print(" -> ");
             printGenealogyTree(child);
         }

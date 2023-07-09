@@ -1,3 +1,4 @@
+import human.Gender;
 import human.Person;
 import human.GenealogyTree;
 
@@ -5,14 +6,14 @@ import java.io.IOException;
 import fileHandler.*;
 
 public class Main {
-    public static <T> void main(String[] args) throws IOException, ClassNotFoundException {
-        Person<T> person1 = new Person<T>("Виктор", "Николаев");
-        Person<T> person2 = new Person<T>("Галина", "Николаева");
-        Person<T> person3 = new Person<T>("Николай", "Сиденко");
-        Person<T> person4 = new Person<T>("Валентина", "Сиденко");
-        Person<T> person5 = new Person<T>("Елена", "Сиденко");
-        Person<T> person6 = new Person<T>("Александр", "Сиденко");
-        Person<T> person7 = new Person<T>("Георгий", "Сиденко");
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Person person1 = new Person("Виктор", "Николаев");
+        Person person2 = new Person("Галина", "Николаева");
+        Person person3 = new Person("Николай", "Сиденко");
+        Person person4 = new Person("Валентина", "Сиденко");
+        Person person5 = new Person("Елена", "Сиденко");
+        Person person6 = new Person("Александр", "Сиденко");
+        Person person7 = new Person("Георгий", "Сиденко");
 
         person1.addChild(person5);
         person2.addChild(person5);
@@ -22,31 +23,31 @@ public class Main {
         person6.addChild(person7);
 
         person1.setDateOfBirth(21,12,1937);
-        person1.setGender("Male");
+        person1.setGender(Gender.Male);
 
         person2.setDateOfBirth(2,8,1948);
         person2.setDateOfDeath(3,11,2009);
-        person2.setGender("Female");
+        person2.setGender(Gender.Female);
 
         person3.setDateOfBirth(1,1,1954);
         person3.setDateOfDeath(1,1,2004);
-        person3.setGender("Male");
+        person3.setGender(Gender.Male);
 
         person4.setDateOfBirth(1,1,1954);
         person4.setDateOfDeath(1,1,1997);
-        person4.setGender("Female");
+        person4.setGender(Gender.Female);
 
         person5.setDateOfBirth(3,11,1968);
-        person5.setGender("Female");
+        person5.setGender(Gender.Female);
 
         person6.setDateOfBirth(27,5,1966);
         person6.setDateOfDeath(10,5,2009);
-        person6.setGender("Male");
+        person6.setGender(Gender.Male);
 
         person7.setDateOfBirth(27,12,1997);
-        person7.setGender("Male");
+        person7.setGender(Gender.Male);
 
-        GenealogyTree<T> tree = new GenealogyTree<T>();
+        GenealogyTree tree = new GenealogyTree();
         tree.addPerson(person1);
         tree.addPerson(person2);
         tree.addPerson(person3);
@@ -70,9 +71,9 @@ public class Main {
 //        Загружаем дерево из текстового файла
 
         GenealogyTree loadedTree = save.loadFromFile("family_tree.txt");
-        Person<T> person8 = new Person<T>("Иван", "Иванов");
+        Person person8 = new Person("Иван", "Иванов");
         person8.setDateOfBirth(1,1,2031);
-        person8.setGender("Male");
+        person8.setGender(Gender.Male);
         person7.addChild(person8);
         loadedTree.addPerson(person8);
 
