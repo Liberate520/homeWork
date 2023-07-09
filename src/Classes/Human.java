@@ -18,8 +18,8 @@ public class Human {
     private final Human mother;
     private List<Human> children;
 
-    public Human(Integer idHuman, String name, String surname, String surnameOld, Gender gender, LocalDate brithDate, LocalDate deathDate,
-                 Human father, Human mother){
+    public Human(Integer idHuman,String surname,String surnameOld, String name, String patronymic,
+                 Gender gender, LocalDate brithDate, LocalDate deathDate, Human father, Human mother){
         this.idHuman =idHuman;
         this.name =name;
         this.surname = surname;
@@ -33,8 +33,8 @@ public class Human {
     }
     //TODO продумать конструктор
     //Тестовый вариант -проба перегрузки
-    public Human(Integer idHuman, String name, String surname, String gender) {
-        this(idHuman,name,surname,null,null,null,null,null,null);
+    public Human(Integer idHuman, String surname, String name, String patronymic, String gender, Gender male, int i, int i1) {
+        this(idHuman,surname,null, name,null,null,null,null,null,null);
     }
     //TODO addChild Добавлять ребенка
     // TODO getters
