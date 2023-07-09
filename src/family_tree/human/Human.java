@@ -2,9 +2,8 @@ package family_tree.human;
 
 import family_tree.infrastucture.de_serelization.My_Serialization;
 import family_tree.tree.tree_service.HumanIterator;
+import family_tree.tree.tree_service.TreeItem;
 
-//import java.io.Serial;
-//import java.io.Serializable;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -13,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class Human implements My_Serialization, Iterable<Human>, Comparable<Human>{
+public class Human implements My_Serialization, Iterable<Human>, Comparable<Human>, TreeItem<Human> {
     static final long serialVersionUID = My_Serialization.serialVersionUID;
 
     private long id;
@@ -62,6 +61,7 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         this.gender = gender;
     }
 
+    @Override
     public boolean addChild (Human child){
         if (!children.contains(child)){
             children.add(child);
@@ -70,6 +70,7 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         return false;
     }
 
+    @Override
     public boolean addParent (Human parent){
         if (!parents.contains(parent)){
             parents.add(parent);
@@ -99,6 +100,7 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         return null;
     }
 
+    @Override
     public int getAge(){
         return day_death == null ? getPeriod(day_birth, LocalDate.now()) : getPeriod(day_birth, day_death);
     }
@@ -132,6 +134,8 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         this.gender = gender;
     }
 
+
+    @Override
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
     }
@@ -163,23 +167,33 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         return gender;
     }
 
+    @Override
     public Human getSpouse() {
         return spouse;
     }
+    @Override
     public List<Human> getChildren() {
         return children;
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
     public void setId(long id) {
         this.id = id;
     }
 
+    @Override
     public List<Human> getParents() {
         return parents;
+    }
+
+    @Override
+    public boolean addToHumanList(Human human) {
+        return false;
     }
 
     public void setParents(List<Human> parents) {
@@ -210,6 +224,7 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         return sb.toString();
     }
 
+    @Override
     public String getFullName(){
         StringBuilder sb = new StringBuilder();
         sb.append(surname);
@@ -307,6 +322,8 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
     public Object load(String filePath) {
         return null;
     }
+
+
 }
 
 
