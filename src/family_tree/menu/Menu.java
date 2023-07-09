@@ -1,7 +1,9 @@
 package family_tree.menu;
+import family_tree.infrastucture.Config;
 import family_tree.infrastucture.My_Scanner;
 import family_tree.infrastucture.de_serelization.File_using;
 import family_tree.registry_office.Reg_office;
+import family_tree.tree.FamilyTree;
 import family_tree.tree.tree_service.Tree_service;
 
 import java.util.Scanner;
@@ -52,10 +54,19 @@ public class Menu implements My_Scanner {
                 }
             }
             if (str.equals("8")){
-                ro.setFamily_tree(fu.loadHumanList());
+                System.out.println("Загрузка данных из файла. Текущий список будет удален.");
+                ro.setFamily_tree((FamilyTree) fu.load(Config.filePath));
+                System.out.println("Загружено семейное древо:");
+                System.out.println(ro.family_tree);
             }
             if (str.equals("9")){
-                fu.saveHumanList(ro.family_tree);
+                System.out.println("Сохранение в файл.");
+                System.out.println("Загружаю " + ro.family_tree);
+                if (fu.save(ro.family_tree, Config.filePath)){
+                    System.out.println("Семейное древо успешно сохранено в файл.");
+                } else {
+                    System.out.println("Что-то пошло не так.");
+                }
             }
         }
     }

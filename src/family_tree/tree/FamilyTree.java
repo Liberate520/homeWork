@@ -6,6 +6,8 @@ import family_tree.human.comparator.HumanComparatorById;
 import family_tree.human.comparator.HumanComparatorByName;
 import family_tree.infrastucture.de_serelization.My_Serialization;
 import family_tree.tree.tree_service.HumanIterator;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -168,6 +170,16 @@ public class FamilyTree implements My_Serialization, Iterable<Human> {
 
     public void sortByAge(){
         humanList.sort(new HumanComparatorByAge());
+    }
+
+    @Override
+    public boolean save(Serializable serializable, String filePath) {
+        return false;
+    }
+
+    @Override
+    public Object load(String filePath) {
+        return null;
     }
 }
 

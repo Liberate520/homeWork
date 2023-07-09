@@ -5,6 +5,8 @@ import family_tree.infrastucture.My_Scanner;
 import family_tree.infrastucture.de_serelization.My_Serialization;
 import family_tree.infrastucture.try_catch.Date_using;
 import family_tree.tree.FamilyTree;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -49,5 +51,15 @@ public class Reg_office implements My_Serialization, My_Scanner {
     }
     public void setFamily_tree(FamilyTree family_tree) {
         this.family_tree = family_tree;
+    }
+
+    @Override
+    public boolean save(Serializable serializable, String filePath) {
+        return false;
+    }
+
+    @Override
+    public Object load(String filePath) {
+        return null;
     }
 }

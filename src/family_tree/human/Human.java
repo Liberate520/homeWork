@@ -5,6 +5,7 @@ import family_tree.tree.tree_service.HumanIterator;
 
 //import java.io.Serial;
 //import java.io.Serializable;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -297,6 +298,15 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
     }
 
 
+    @Override
+    public boolean save(Serializable serializable, String filePath) {
+        return false;
+    }
+
+    @Override
+    public Object load(String filePath) {
+        return null;
+    }
 }
 
 
