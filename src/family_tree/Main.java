@@ -1,4 +1,4 @@
-package familyTree;
+package familyTree.src.family_tree;
 
 import java.time.LocalDate;
 public class Main {
@@ -13,7 +13,5 @@ public class Main {
             tree.getByName("Василий"), tree.getByName("Мария")));
 
         System.out.println(tree.getInfo());
-
-
     }
 }
