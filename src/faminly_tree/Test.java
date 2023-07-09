@@ -4,8 +4,6 @@ import faminly_tree.human.Gender;
 import faminly_tree.human.Human;
 import faminly_tree.save_in_file.SaveInFile;
 import faminly_tree.tree.FamilyTree;
-import faminly_tree.tree.HumanIterator;
-import faminly_tree.tree.TreeSort;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -41,23 +39,11 @@ public class Test {
             System.out.println(human);
         }
 
-        TreeSort sort = new TreeSort(tree.getTree());
         System.out.println("Сортировка по имени:");
-        sort.sortByName();
-        for(Object human: tree){
-            System.out.println(human);
-        }
-
-        System.out.println("Сортировка по дате рождения:");
-        sort.sortByAge();
-        for(Object human: tree){
-            System.out.println(human);
-        }
-
+        tree.sortByName();
+        System.out.println(tree);
         System.out.println("Сортировка по возрасту:");
-        sort.sortByAge();
-        for(Object human: tree){
-            System.out.println(human);
-        }
+        tree.sortByAge();
+        System.out.println(tree);
     }
 }
