@@ -12,10 +12,10 @@ public class TestData {
     public static FamilyTree testData() {
         FamilyTree familyTree = new FamilyTree();
         Human human1 = new Human("1DWG10", "Сафронов", "Николай", Male, LocalDate.of(2005, 5, 20),
-                (LocalDate) null, familyTree.searchHuman("ЕКАТЕРИНА"), familyTree.searchHuman("АЛЕКСЕЙ"));
+                (LocalDate) null, (Human) familyTree.searchHuman("ЕКАТЕРИНА"), (Human) familyTree.searchHuman("АЛЕКСЕЙ"));
 
         Human human2 = new Human("246H10", "Сафронова", "Елена", Female, LocalDate.of(2010, 10, 10),
-                null, familyTree.searchHuman("ЕКАТЕРИНА"), familyTree.searchHuman("АЛЕКСЕЙ"));
+                (LocalDate) null, (Human) familyTree.searchHuman("ЕКАТЕРИНА"), (Human) familyTree.searchHuman("АЛЕКСЕЙ"));
 
         Human human4 = new Human("4А5810", "САФРОНОВА", "ЕКАТЕРИНА", Female, LocalDate.of(1982, 10, 20), null);
 
@@ -28,7 +28,7 @@ public class TestData {
                 LocalDate.of(2023, 3, 21));
 
         Human human7 = new Human("DH473G", "СафроновА", "МариЯ", Female, LocalDate.of(1964, 3, 21), null);
-        human7.addKid(familyTree.searchHuman("САФРОНОВА"));
+        human7.addKid((Human) familyTree.searchHuman("САФРОНОВА"));
 
         familyTree.addHuman(new Human("DG573G", "СафроноВ", "НиколаЙ", Male, LocalDate.of(1952, 11, 21), null));
 

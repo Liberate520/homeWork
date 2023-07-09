@@ -56,12 +56,12 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
     /**
      * Поиск по Фамилии либо имени либо номеру паспорта
      */
-    public Human searchHuman(String value) {
+    public E searchHuman(String value) {
         for (E human : humanList) {
             if (human.getSurname().equalsIgnoreCase(value) ||
                     human.getName().equalsIgnoreCase(value) ||
                     human.getNumPassport().equalsIgnoreCase(value)) {
-                return (Human) human;
+                return (E) human;
             }
         }
         return null;
