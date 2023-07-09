@@ -1,3 +1,7 @@
+package family_tree.writer;
+
+import family_tree.family_tree.FamilyTree;
+
 import java.io.*;
 
 public class FileHandler implements WritableLoadable {

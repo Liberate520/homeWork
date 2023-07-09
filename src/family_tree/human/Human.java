@@ -1,3 +1,5 @@
+package family_tree.human;
+
 import java.io.Serializable;
 import java.time.Period;
 import java.util.*;
@@ -33,6 +35,9 @@ public class Human implements Serializable {
 
         this.sex = sex;
     }
+    public Human(String firstName, String lastName, LocalDate date, Gender sex) {
+        this(firstName, lastName, "", date, null, null, null, sex);
+    }
     public Human(String firstName, String lastName, String middleName) {
         this(firstName, lastName, middleName, null, null, null,null, null);
     }
@@ -43,9 +48,9 @@ public class Human implements Serializable {
 //        this.lastName = "";
 //        this.middleName = "";
 //        this.dateOfBirth = new GregorianCalendar(2100,0,1);
-//        this.sex = Gender.male;
+//        this.sex = family_tree.human.Gender.male;
 
-  //      this.children = new ArrayList<Human>();
+  //      this.children = new ArrayList<family_tree.human.Human>();
     }
     public void setChildren(ArrayList<Human> child) {
         for (Human human : child) {
@@ -220,10 +225,29 @@ public class Human implements Serializable {
         sb.append(getChildrenInfo());
         return sb.toString();
     }
+
     @Override
     public String toString() {
-        return getInfo();
+        return "family_tree.human.Human{" +
+                "id=" + id +
+                ", имя='" + firstName + '\'' +
+                ", фамилия='" + lastName + '\'' +
+                ", отчество='" + middleName + '\'' +
+                ", рождение=" + dateOfBirth +
+                ", смерть=" + dateOfDeath +
+                ", мать=" + mother +
+                ", отец=" + father +
+                ", дети=" + children +
+                ", пол=" + sex +
+                ", супруг(а)=" + spouse +
+                '}';
     }
+
+
+//    @Override
+//    public String toString() {
+//        return getInfo();
+//    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
