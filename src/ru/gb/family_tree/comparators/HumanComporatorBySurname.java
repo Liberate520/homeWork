@@ -1,6 +1,7 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.comparators;
 
 import java.util.Comparator;
+import ru.gb.family_tree.Human;
 
 public class HumanComporatorBySurname implements Comparator<Human> {
     @Override

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import ru.gb.family_tree.comparators.HumanComparatorByBirthDate;
+import ru.gb.family_tree.comparators.HumanComporatorBySurname;
+
 public class FamilyTree implements Serializable, Iterable<Human> {
     private int personId;
     private List<Human> humans;

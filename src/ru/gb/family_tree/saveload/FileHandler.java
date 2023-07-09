@@ -1,4 +1,4 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.saveload;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
