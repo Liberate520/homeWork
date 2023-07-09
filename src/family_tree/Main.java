@@ -13,5 +13,13 @@ public class Main {
             tree.getByDocId("45№705202"), tree.getByDocId("45№608202")));
 
         System.out.println(tree.getInfo());
+        String path = "src/familyTree/atree.out";
+
+//        FileGeneration fileGeneration = new FileGeneration();
+//        fileGeneration.save(tree, path);
+
+        FileGeneration fileGeneration = new FileGeneration();
+        FamilyTree atree = (FamilyTree) fileGeneration.read(path);
+        System.out.println(tree);
     }
 }

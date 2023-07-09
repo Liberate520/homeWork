@@ -1,8 +1,9 @@
 package familyTree.src.family_tree;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree{
+public class FamilyTree implements Serializable {
     private List<Human> humanList;
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;

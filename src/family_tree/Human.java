@@ -1,9 +1,10 @@
 package familyTree.src.family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-public class Human {
+public class Human implements Serializable {
     private String docId;
     private String name;
     private Gender gender;
