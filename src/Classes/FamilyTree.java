@@ -28,4 +28,9 @@ public class FamilyTree {
     public String toString(){
         return getInfo();
     }
+
+    public void add(Human human) {
+        this.humanList.add(human);
+
+    }
 }
