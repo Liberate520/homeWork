@@ -1,3 +1,5 @@
+package human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,7 +11,7 @@ public class Human implements Serializable {
     private Human mother, father;
     private List<Human> children;
 
-    private int getAge(LocalDate birth, LocalDate death){
+    public int getAge(LocalDate birth, LocalDate death){
         int age;
         int birthYear = birth.getYear();
         int birthMonth = birth.getMonthValue();
@@ -88,5 +90,9 @@ public class Human implements Serializable {
     public String toString(){
         return "ФИО: " + surname + " " + name + " " + patronymic + "; " + "ДР: " + birth + "; " + "Возраст: " + getAge(birth, death);
 
+    }
+
+    public <T> Comparable<T> getAge() {
+        return null;
     }
 }
