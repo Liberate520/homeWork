@@ -2,14 +2,12 @@ package family_tree.human_family;
 
 import java.util.List;
 
-import family_tree.humans.Human;
+public interface IFamilyTree<T> {
+    void addHuman(T human);
 
-public interface IFamilyTree {
-    void addHuman(Human human);
+    void removeHuman(T human);
 
-    void removeHuman(Human human);
+    void updateHuman(T human);
 
-    void updateHuman(Human human);
-
-    List<Human> getAllHumans();
+    List<T> getAllHumans();
 }

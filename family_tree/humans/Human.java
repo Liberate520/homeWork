@@ -1,16 +1,19 @@
 package family_tree.humans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+import family_tree.human_family.HumanItem;
+
+public class Human<T> implements Serializable, HumanItem {
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private Gender gender;
-    private List<Human> parents;
-    private List<Human> children;
+    private List<T> parents;
+    private List<T> children;
 
     public Human(String name, LocalDate birthDate, Gender gender) {
         this.name = name;
@@ -33,7 +36,7 @@ public class Human {
     public String getName() {
         return name;
     }
-    
+
     public LocalDate getbirthDate() {
         return birthDate;
     }
@@ -42,20 +45,28 @@ public class Human {
         return gender;
     }
 
-    public List<Human> getParents() {
+    public List<T> getParents() {
         return parents;
     }
 
-    public List<Human> getChildren() {
+    public List<T> getChildren() {
         return children;
     }
 
-    public void addParent(Human parent) {
+    public void addParent(T parent) {
         this.parents.add(parent);
     }
 
-    public void addChild(Human child) {
+    public void addChild(T child) {
         this.children.add(child);
     }
 
+    @Override
+    public List<T> getAllChildren() {
+        System.out.println("maksim's children:");
+        for (T child : children) {
+            System.out.println(((HumanItem) child).getName());
+    }
+    return children;
+}
 }

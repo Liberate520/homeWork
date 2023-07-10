@@ -4,27 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import family_tree.humans.Human;
+public class HumanGroup<T extends HumanItem> implements Iterable<T> {
+    private List<T> humanList;
 
-public class HumanGroup implements Iterable<Human>{
-    private List<Human> humanList;
-    
-    public HumanGroup(){
+    public HumanGroup() {
         humanList = new ArrayList<>();
     }
 
-    public void addHuman(Human human){
+    public void addHuman(T human) {
         humanList.add(human);
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<T> iterator() {
+        return new HumanIterator<>(humanList);
     }
 
-    public void sortByName() {
-    }
-
-    public void sortByYear() {
-    }
 }

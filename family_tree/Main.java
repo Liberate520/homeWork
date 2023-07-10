@@ -15,7 +15,7 @@ public class Main {
     private static List<Human> allHumans;
 
     public static void main(String[] args) throws SecurityException, IOException {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
 
         Human maksim = new Human("Maksim", LocalDate.of(1984, 8, 11), Gender.MALE);
         Human irina = new Human("Irina", LocalDate.of(1989, 4, 15), Gender.FEMALE);
@@ -47,11 +47,7 @@ public class Main {
         familyTree.addHuman(kate);
         familyTree.addHuman(yuriy);
 
-        List<Human> maksimsChildren = familyTree.getAllChildren(maksim);
-        System.out.println("maksim's children:");
-        for (Human child : maksimsChildren) {
-            System.out.println(child.getName());
-        }
+        
 
         IFileHandler fileHandler = (IFileHandler) new FileHandler();
         fileHandler.writeToFile(allHumans, "family_tree\\people.txt");
