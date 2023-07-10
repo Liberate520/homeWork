@@ -1,11 +1,19 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+package tree;
+
+import human.Gender;
+import human.Human;
+import tree.itrator.TreeIterable;
+
+import java.io.Serializable;
+import java.util.*;
 
 
-public class FamilyTree {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyList;
 
+    public Iterator<Human> iterator() {
+        return new TreeIterable(familyList);
+    }
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -24,8 +32,18 @@ public class FamilyTree {
         }
     }
 
+    public void weading(Human hum1, Human hum2) {
+        hum1.setSpouse(hum2);
+        hum2.setSpouse(hum1);
+    }
+
+    public void divorce(Human human) {
+        human.getSpouse().addOldSpouse(human);
+        human.addOldSpouse(human.getSpouse());
+    }
+
     private void addToMother(Human human) {
-        if(human.getMother() != null) human.getMother().addChild(human);
+        if (human.getMother() != null) human.getMother().addChild(human);
     }
 
     private void addToFather(Human human) {
@@ -40,12 +58,7 @@ public class FamilyTree {
     }
 
     public String getInfo() {
-        familyList.sort(new Comparator<Human>() {
-            @Override
-            public int compare(Human o1, Human o2) {
-                return o2.getAge()-o1.getAge();
-            }
-        });
+
         StringBuilder sb = new StringBuilder();
         sb.append("В дерево добавлено: ");
         sb.append(familyList.size());
@@ -56,5 +69,19 @@ public class FamilyTree {
         }
         return sb.toString();
     }
+
+    public void sortByName() {
+        Collections.sort(familyList);
+    }
+
+    public void sortByAge() {
+        familyList.sort(new Comparator<Human>() {
+            @Override
+            public int compare(Human o1, Human o2) {
+                return o2.getAge() - o1.getAge();
+            }
+        });
+    }
+
 
 }

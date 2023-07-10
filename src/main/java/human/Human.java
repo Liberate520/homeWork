@@ -1,24 +1,32 @@
+package human;
+
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Human {
+public class Human implements Serializable, Comparable<Human>{
     private String name;
     private String surname;
     private String patronymic;
     private Human mother;
     private Human father;
-    private List<Human> childrenList = new ArrayList<>();
+    private List<Human> childrenList;
     private LocalDate birthDay;
     private LocalDate deathDay;
     private Gender gender;
     private Human spouse;
+    private List<Human> oldSpouse;
     private int id;
     private int age;
     static AtomicInteger nextId = new AtomicInteger();
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
+    }
 
     public Human(String name, Gender gen, LocalDate birthDay, LocalDate deathDay) {
         this.name = name.split(" ")[1];
@@ -27,6 +35,7 @@ public class Human {
         this.gender = gen;
         this.birthDay = birthDay;
         this.deathDay = deathDay;
+        this.childrenList = new ArrayList<>();
         id = nextId.incrementAndGet();
 
     }
@@ -37,13 +46,37 @@ public class Human {
         this.patronymic = name.split(" ")[2];
         this.gender = gen;
         this.birthDay = birthDay;
+        this.childrenList = new ArrayList<>();
         id = nextId.incrementAndGet();
-        ;
+
     }
 
-    public void setSpouse(Human spouse) {
-        this.spouse = spouse;
+    public void setSpouse(Human spou) {
+        this.spouse = spou;
 
+    }
+
+    public Human getSpouse() {
+        return this.spouse;
+    }
+
+    public void addOldSpouse(Human hum) {
+        if (this.oldSpouse == null) {
+            this.oldSpouse = new ArrayList<>();
+            this.oldSpouse.add(hum);
+            this.spouse = null;
+        } else this.oldSpouse.add(hum);
+    }
+
+    public String getOldSpouse() {
+        StringBuilder sb = new StringBuilder();
+        if (this.oldSpouse != null) {
+            sb.append("Бывшие супруги: ");
+            for (int i = 0; i < this.oldSpouse.size(); i++) {
+                sb.append(this.oldSpouse.get(i).getFullName() + "; ");
+            }
+        } else sb.append("");
+        return sb.toString();
     }
 
     public void setFullName(String name) {
@@ -52,8 +85,12 @@ public class Human {
         this.patronymic = name.split(" ")[2];
     }
 
+
     public void setName(String name) {
         this.name = name;
+    }
+    public String getName(){
+        return this.name;
     }
 
     public void setSurname(String name) {
@@ -127,13 +164,14 @@ public class Human {
                 ", deathDay=" + deathDay;
     }
 
-    public StringBuilder getInfo() {
+    public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("id:" + this.id + "; ");
         sb.append(this.surname + " " + this.name + " " + this.patronymic + "; ");
         sb.append("Возраст: " + getAge() + "; ");
         sb.append("Пол: " + this.gender + "; ");
-        sb.append(getSpouse());
+        sb.append(getSpouseInfo());
+        sb.append(getOldSpouse());
         sb.append("Дети:");
         sb.append(childGetName());
         sb.append(" Мать: ");
@@ -144,10 +182,10 @@ public class Human {
         else sb.append(" Дата Рождения: " + this.birthDay + "; ");
         if (this.deathDay != null) sb.append(" Дата смерти: " + this.deathDay + "; ");
 
-        return sb;
+        return sb.toString();
     }
 
-    public String getSpouse() {
+    public String getSpouseInfo() {
         if (this.spouse == null) {
             if (this.gender == Gender.Man) return " не женат ";
             else return "Не замужем ";
@@ -183,8 +221,16 @@ public class Human {
         else return this.deathDay.getYear() - this.birthDay.getYear();
     }
 
+    public int getId() {
+        return this.id;
+    }
+
     public boolean equals(Human hum) {
         return (this.name == hum.name) && (this.surname == hum.surname) &&
                 (this.patronymic == hum.patronymic) && (this.birthDay == hum.birthDay);
     }
+
+
 }
+
+
