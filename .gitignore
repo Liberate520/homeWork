@@ -1,1 +1,29 @@
-.idea
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Compiled class file
+*.class
+
+# Compiled output
+/out
+
+# Logs
+*.log
+
+# Maven files
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle files
+.gradle/
+build/
+
+# Other
+.DS_Store
