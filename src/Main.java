@@ -1,6 +1,8 @@
 import Classes.FamilyTree;
 import Classes.Human;
 
+import java.time.LocalDate;
+
 import static Classes.Gender.female;
 import static Classes.Gender.male;
 
@@ -8,10 +10,18 @@ public class Main {
     public static void main(String[] args){
 
         FamilyTree tree =new FamilyTree();
-        Human as=new Human(1,"Пушкин","","Александр","Сергеевич",male, "2nd October 2007","1837- 01 -26",null,null);
-        //Human nn=new Human(2,"Пушкина","Гончарова","Наталья","Николаевна",female,8-9-1812,8-12-1863);
+        tree.add(new Human(1,"Пушкин","","Александр","Сергеевич",male,
+                LocalDate.of(1799,06,06),LocalDate.of(1837,02,10),null,null));
+        tree.add(new Human(2,"Пушкина","Гончарова","Наталья","Николаевна",female,
+              LocalDate.of(1812,9,8),LocalDate.of(1863,12,8),null,null));
 
-        tree.add(as);
+
+//       Human as=new Human(1,"Пушкин","","Александр","Сергеевич",male,
+//              LocalDate.of(1799,06,06),LocalDate.of(1837,02,10),null,null);
+//       Human nn=new Human(2,"Пушкина","Гончарова","Наталья","Николаевна",female,
+//              LocalDate.of(1812,9,8),LocalDate.of(1863,12,8),null,null);
+
+        System.out.println(tree.getInfo());
     }
 
 
