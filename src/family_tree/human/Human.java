@@ -1,4 +1,4 @@
-package familyTree.src.family_tree;
+package familyTree.src.family_tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -55,7 +55,9 @@ public class Human implements Serializable {
     public String getDocId() {
         return docId;
     }
-
+    public String getName() {
+        return name;
+    }
     public boolean addParent(Human parent) {
         if (!parents.contains(parent)) {
             children.add(parent);
@@ -139,6 +141,8 @@ public class Human implements Serializable {
         sb.append(getGender());
         sb.append(", возраст: ");
         sb.append(getAge());
+        sb.append(", дата рождения: ");
+        sb.append(getBirthDate());
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");

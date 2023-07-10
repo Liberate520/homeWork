@@ -1,9 +1,15 @@
-package familyTree.src.family_tree;
+package familyTree.src.family_tree.family_tree1;
+
+import familyTree.src.family_tree.human.Human;
+import familyTree.src.family_tree.human.comparators.HumanComparatorByBirthDate;
+import familyTree.src.family_tree.human.comparators.HumanComparatorByName;
+import java.time.LocalDate;
+import java.time.Period;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human>{
     private List<Human> humanList;
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;
@@ -56,5 +62,17 @@ public class FamilyTree implements Serializable {
     @Override
     public String toString() {
         return getInfo();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+    }
+    public void sortByBirthDate() {
+        humanList.sort(new HumanComparatorByBirthDate());
     }
 }
