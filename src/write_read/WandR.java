@@ -1,3 +1,5 @@
+package write_read;
+
 import java.io.Serializable;
 
 public interface WandR {

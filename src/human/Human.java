@@ -1,25 +1,30 @@
+package human;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-class Human implements Serializable {
+public class Human implements Serializable {
 	private int id;
 
-	private static int count = 1;
 
 	private String lastName;
 	private String firstName;
 	private String fullName;
+	private LocalDate birthDay;
 
 	private List<Human> parents;
 
 	private List<Human> children;
 	private Gender gender;
 
-	public Human(String lastName, String firstName, Gender gender, Human father, Human mother) {
+	public Human(String lastName, String firstName, Gender gender, LocalDate birthDay, Human father, Human mother) {
+		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.gender = gender;
+		this.birthDay = birthDay;
 		fullName = lastName + " " + firstName;
 		parents = new ArrayList<>();
 		if (father != null) {
@@ -30,9 +35,9 @@ class Human implements Serializable {
 		}
 		children = new ArrayList<>();
 	}
-	public Human(String lastName, String firstName, Gender gender) {
-		this(lastName, firstName, gender, null, null);
-		id = count++;
+	public Human(String lastName, String firstName, Gender gender, LocalDate birthDay) {
+		this(lastName, firstName, gender, birthDay, null, null);
+		id++;
 		fullName = lastName + " " + firstName;
 	}
 	public int getId() { return id; }
@@ -40,6 +45,8 @@ class Human implements Serializable {
 	public String getFirstName() { return firstName; }
 
 	public String getFullName() { return fullName; }
+
+	public LocalDate getBirthDay() { return birthDay; }
 
 	public Gender getGender() { return gender; }
 
@@ -66,6 +73,9 @@ class Human implements Serializable {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Name: ");
 		builder.append(fullName);
+		builder.append(" | ");
+		builder.append("Birth Day: ");
+		builder.append(birthDay);
 		builder.append(" | ");
 		builder.append(getFatherInfo());
 		builder.append(" | ");

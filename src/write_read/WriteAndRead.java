@@ -1,3 +1,5 @@
+package write_read;
+
 import java.io.*;
 
 public class WriteAndRead {
