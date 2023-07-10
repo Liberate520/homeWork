@@ -1,10 +1,12 @@
 package familyTree.src.family_tree.human;
 
+import familyTree.src.family_tree.family_tree1.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem {
     private String docId;
     private String name;
     private Gender gender;
@@ -58,6 +60,12 @@ public class Human implements Serializable {
     public String getName() {
         return name;
     }
+
+    @Override
+    public LocalDate birthDate() {
+        return null;
+    }
+
     public boolean addParent(Human parent) {
         if (!parents.contains(parent)) {
             children.add(parent);
