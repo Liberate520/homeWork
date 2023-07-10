@@ -1,8 +1,8 @@
 package ru.gb.family_tree.saveload;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 
 public interface Writable {
-    public void write(Object obj) throws IOException, FileNotFoundException;
+    public void write(Serializable obj) throws IOException;
 }

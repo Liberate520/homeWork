@@ -1,11 +1,6 @@
 package ru.gb.family_tree.saveload;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class FileHandler implements Writable, Readable {
     private String fileName;
@@ -17,7 +12,7 @@ public class FileHandler implements Writable, Readable {
     }
     
     @Override
-    public Object read() throws IOException, FileNotFoundException, ClassNotFoundException {
+    public Object read() throws IOException, ClassNotFoundException {
         objInputStream = new ObjectInputStream(new FileInputStream(fileName));
         Object restored = (Object) objInputStream.readObject();
         objInputStream.close();
@@ -25,7 +20,7 @@ public class FileHandler implements Writable, Readable {
     }
 
     @Override
-    public void write(Object obj) throws IOException, FileNotFoundException {
+    public void write(Serializable obj) throws IOException {
         objOutStream = new ObjectOutputStream(new FileOutputStream(fileName));
         objOutStream.writeObject(obj);
         objOutStream.close();

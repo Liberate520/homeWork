@@ -1,11 +1,13 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.human;
+
+import ru.gb.family_tree.tree.Memberable;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Memberable {
     private int id;
     private String name;
     private String surname;
@@ -35,6 +37,7 @@ public class Human implements Serializable {
         this(surname, name, patronymic, gender, null, null);
     }
 
+    @Override
     public int id() {
         return id;
     }
@@ -43,6 +46,7 @@ public class Human implements Serializable {
         return surname;
     }
 
+    @Override
     public String name() {
         return name;
     }
@@ -55,6 +59,7 @@ public class Human implements Serializable {
         return gender;
     }
 
+    @Override
     public LocalDate birthDate() {
         if (birthDate.equals(null)) {
             return LocalDate.of(0, 0, 0);
@@ -81,6 +86,7 @@ public class Human implements Serializable {
         return childs;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -143,5 +149,4 @@ public class Human implements Serializable {
     public String toString() {
         return "ID: " + id + ", Фамилия: " + surname + ", Имя: " + name + ", Отчество: " + patronymic + ", Дата рождения: " + birthDate;
     }
-
 }
