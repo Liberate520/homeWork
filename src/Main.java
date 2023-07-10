@@ -1,4 +1,6 @@
-import java.io.*;
+import human.Gender;
+import human.Human;
+import family_tree.FamilyTree;
 
 public class Main {
         public static void main(String[] args) {
