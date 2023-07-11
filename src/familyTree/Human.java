@@ -2,92 +2,100 @@ package familyTree;
 
  import java.io.Serializable;
  import java.util.ArrayList;
- import java.util.Arrays;
-
- public class Human implements Serializable {
+ 
+ public class Human implements Serializable, Comparable<Human> {
      private boolean alive;
      private String name;
      private String sex;
      private int age;
-     private ArrayList<Human> children = new ArrayList<>();
-     private Human[] parents = new Human[2];
+     private ArrayList<Human> children;
+     private Human father;
+     private Human mother;
      private static final long serialVersionUID = 1L;
 
      public Human() {
          this.alive = true;
-         this.name = "Очередняра";
+         this.name = "Chad";
          this.sex = "муж";
          this.age = 18;
+         children = new ArrayList<>();
+         FamilyTree.addFamilyTree(this);
      }
 
-     public Human(boolean alive, String name, String sex, int age) {
-         this.alive = alive;
-         this.name = name;
-         this.sex = sex;
-         this.age = age;
+     public Human(boolean alive, String name, String sex, int age, Human father, Human mother) {
+         this();
+         this.father = father;
+         this.mother = mother;
      }
 
      // Геттеры
-     public boolean isAlive() {
-         return alive;
-     }
-
-     public String getName() {
-         return name;
-     }
-
-     public String getSex() {
-         return sex;
-     }
-
-     public int getAge() {
-         return age;
-     }
-
-     // public void - реализовать логику getChildren при отсутствии детей
-
-     public ArrayList<Human> getChildren() {
+    public boolean isAlive() {
+        return alive;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public int getAge() {
+        return age;
+    }
+    // public void - реализовать логику getChildren при отсутствии детей
+    public ArrayList<Human> getChildren() {
          return children;
      }
 
-     public Human[] getParents() {
-         return parents;
+     public Human getFather() {
+         return father;
+     }
+
+     public Human getMother() {
+         return mother;
      }
 
      // Сеттеры
-     public void setAlive(boolean alive) {
-         this.alive = alive;
-     }
-
-     public void setName(String name) {
-         this.name = name;
-     }
-
-     public void setSex(String sex) {
-         this.sex = sex;
-     }
-
-     public void setAge(int age) {
-         this.age = age;
-     }
-
-     public void setChildren(ArrayList<Human> children) {
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public void setChildren(ArrayList<Human> children) {
          this.children = children;
      }
 
-     public void setParents(Human[] parents) {
-         this.parents = parents;
+     public void setFather(Human father) {
+         this.father = father;
      }
+
+     public void setMother(Human mother) {
+         this.mother = mother;
+     }
+
+
+     public void SaveObj(IO save) {
+         save.save("FamilyTree.data", this);
+     }
+
 
      @Override
      public String toString() {
-         if (alive) {
-             return "Человек жив" + ", зовут " + name + ", пол " + sex + ", возраст " + age + " лет, дети=" + children
-                     + ", родители=" + Arrays.toString(parents);
-         } else {
-             return "Человек умер" + ", звали " + name + ", пол " + sex + ", в возрасте " + age + " лет, дети=" + children
-             + ", родители=" + Arrays.toString(parents);
-         }
+         return "Human [alive=" + alive + ", name=" + name + ", sex=" + sex + ", age=" + age + ", children=" + children
+                 + ", father=" + father + ", mother=" + mother + "]";
      }
+
+     @Override
+     public int compareTo(Human o) {
+         return name.compareToIgnoreCase(o.name);
+     }
+
+
 
  }

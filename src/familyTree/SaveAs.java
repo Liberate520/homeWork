@@ -1,7 +1,8 @@
 package familyTree;
 
-import java.io.Serializable;
+
+ import java.io.Serializable;
 
  public interface SaveAs {
-     void save(String path, Serializable obj);
- }
+    void save(String path, Serializable obj);
+}

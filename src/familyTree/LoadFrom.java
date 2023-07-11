@@ -1,5 +1,7 @@
-import java.io.Serializable;
+package familyTree;
+
+ import java.io.Serializable;
 
  public interface LoadFrom {
-     Serializable load(String path);
- }
+    Serializable load(String path);
+}
