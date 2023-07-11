@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeItem {
     private int id;
     private String fullName;
     private Gender gender;
@@ -14,7 +14,7 @@ public class Human implements Serializable, Comparable<Human> {
     private LocalDate dateOfDeath;
     private List<Human> parents;
     private List<Human> children;
-    private List<Human> brothers;
+
 
 
     public Human(String fullName, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father,
@@ -31,7 +31,6 @@ public class Human implements Serializable, Comparable<Human> {
             parents.add(mother);
         }
         children = new ArrayList<>();
-        brothers = new ArrayList<>();
     }
     public String getFullName() {return fullName;}
     public Gender getGender() {return gender;}
@@ -50,11 +49,13 @@ public class Human implements Serializable, Comparable<Human> {
         }
     }
 
+
     public void addParent(Human parent) {
         if(!parents.contains(parent)) {
             parents.add(parent);
         }
     }
+
 
     public Human getFather() {
         for (Human parent: parents) {
@@ -141,8 +142,6 @@ public class Human implements Serializable, Comparable<Human> {
         Period age = Period.between(dateOfBirth, dateOfDeath);
         return age.getYears();
     }
-
-//    public String toString() {return getInfo();}
 
     @Override
     public boolean equals(Object obj) {

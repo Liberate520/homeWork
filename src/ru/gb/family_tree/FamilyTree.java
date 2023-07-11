@@ -5,51 +5,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//public class FamilyTree implements Serializable, Iterable<Human>{
-//    private List<Human> humanList;
+    public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>{
+        private List<T> humanList;
+    public FamilyTree() {
+        humanList = new ArrayList<>();}
 
-    public class FamilyTree<T> implements Serializable, Iterable<Human>{
-        private List<Human> T;
-
-
-//    public FamilyTree(List<Human> humanList) {
-//        this.humanList = humanList;
-//    }
-//    public FamilyTree() {
-//        this(new ArrayList<>());
-//    }
-//    public FamilyTree() {humanList = new ArrayList<>();}
-//
-//    public void addHuman(Human human) {
-//        if (!humanList.contains(human)) {
-//            humanList.add(human);
-
-    public FamilyTree() {T = new ArrayList<>();}
-
-    public void addHuman(Human human) {
-        if (!T.contains(human)) {
-            T.add(human);
+    public void addHuman(T human) {
+        if (!humanList.contains(human)) {
+            humanList.add(human);
 
             addToParents(human);
             addToChildren(human);
         }
     }
 
-    private void addToParents(Human human){
-        for (Human parent: human.getParents()){
-            parent.addChild(human);
-        }
+    private void addToParents(T h){
+//        for (Human parent: h.getParents()){
+//            parent.addChild((Human) h);
+//        }
+
     }
-    private void addToChildren(Human human){
+
+    private void addToChildren(T human){
         for (Human child: human.getChildren()){
-            child.addParent(human);
+            child.addParent((Human) human);
         }
     }
-    public  Human getByFullName(String fullName) {
-//        for (Human human: humanList){
-        for (Human human: T){
+
+    public  T getByFullName(String fullName) {
+        for (T human: humanList){
             if (human.getFullName().equals(fullName)){
-                return human;
+                return (T) human;
             }
         }
         return null;
@@ -58,8 +44,7 @@ import java.util.List;
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семейное древо:\n");
-//        for (Human human :humanList) {
-        for (Human human: T){
+        for (T human: humanList){
             stringBuilder.append(human.getInfo());
             stringBuilder.append("\n");
         }
@@ -71,19 +56,16 @@ import java.util.List;
         return getInfo();
     }
     @Override
-    public Iterator<Human> iterator() {
-//        return humanList.iterator();
-        return T.iterator();
+    public Iterator<T> iterator() {
+        return new TIterator<>(humanList);
     }
 
     public void sortByFullName(){
-//        humanList.sort(new ComparatorByName());
-        T.sort(new ComparatorByName());
+        humanList.sort(new ComparatorByName());
     }
 
     public void sortByAge() {
-//        humanList.sort(new ComparatorByAge());
-        T.sort(new ComparatorByAge());
+        humanList.sort(new ComparatorByAge());
     }
 }
 

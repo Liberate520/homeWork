@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String filePath = "src/ru/gb/family_tree/tree.out";
         FileHandler fileHandler = new FileHandler();
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree();
 //        fileHandler.save(tree, filePath);
 
 //        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
