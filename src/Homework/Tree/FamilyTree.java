@@ -4,12 +4,14 @@ import Homework.Human.Comparators.HumanComporatorByAge;
 import Homework.Human.Comparators.HumanComporatorByName;
 import Homework.Human.Comparators.HumanComporatorByChildren;
 import Homework.Human.Human;
+import Homework.Tree.Iterators.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     //TODO добавить ID
     private List<Human> familyList;
 
@@ -96,5 +98,12 @@ public class FamilyTree implements Serializable {
     public void sortByChildren(){
         familyList.sort(new HumanComporatorByChildren());
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyList);
+    }
+
+    //TODO cортировка по дате рождения, дате смерти
 
 }
