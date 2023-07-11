@@ -1,12 +1,13 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private String fullname;
     private GregorianCalendar birthDate;
     private GregorianCalendar endLifeDate;
