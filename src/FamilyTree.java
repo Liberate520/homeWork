@@ -15,33 +15,34 @@ public class FamilyTree {
     }
 
     public void addHuman(Human human){
-        human.setId(humanId++);
-        humanList.add(human);
-        // addToChildren(human);
-        //addToParent(human);
+        if (!humanList.contains(human) ) {
+            human.setId(humanId++);
+            humanList.add(human);
+            addToParents(human);
+            addToChildren(human);
+
+        }
     }
-    /*public void addToParent(Human human){
-        if (human.getFather()!=null) human.getFather().addChild(human);
-        if (human.getMother()!=null) human.getMother().addChild(human);
+    public void addToParents(Human human){
+        for (Human parent : human.getParents()) {
+            parent.addChild(human);
+        }
     }
     public void addToChildren(Human human){
-        for (Human child:human.getChildren()) {
+        for (Human child : human.getChildren()) {
             child.addParent(human);
         }
-
     }
-    */
 
-    public String getHumanInfo( ){
+
+    public String getInfo( ){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Family tree:\n");
         for (Human human: humanList){
-            stringBuilder.append(human);
+            stringBuilder.append(human.getInfo());
             stringBuilder.append("\n");
-
         }
 
-        //stringBuilder.append(getChildrenInfo);
         return stringBuilder.toString();
     }
 
