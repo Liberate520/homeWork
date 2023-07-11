@@ -18,7 +18,6 @@ public class Main {
         Person anna;
         FamilyTree familyBeta;
         FamilyTree familyTest = new FamilyTree("Тестенюк");
-        ;
 
         try {
             familyBeta = FamilySerialize.deserialize();
