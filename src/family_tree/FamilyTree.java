@@ -37,7 +37,7 @@ public class FamilyTree {
     public void setPeak(String name) {
         for (Person person : allPersons) {
             if (person.getName().equalsIgnoreCase(name))
-                if (person.getGender().equalsIgnoreCase("женский")) {
+                if (person.getGender()== Gender.Female) {
                     this.peakMother = person;
                 } else {
                     this.peakFather = person;
