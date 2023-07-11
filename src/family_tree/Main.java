@@ -33,9 +33,15 @@ public class Main {
 //        WriteObj wo = new WriteObj();
 //        wo.WriteByObjOutput(romanovs);
 
-        ReadObj ro = new ReadObj();
-        romanovs = ro.ReadByObjOutput(romanovs);
+//        WRbyIOStream ro = new WRbyIOStream();
+//        romanovs = ro.ReadObj("romanovs.bin");
+//        System.out.println(romanovs);
+        WRbyByteArrIOStream wobyarray= new WRbyByteArrIOStream();
+//        wobyarray.WriteByte(romanovs, "test1.txt");
+//        System.out.println(romanovs);
+        romanovs = wobyarray.ReadByte("test1.txt");
         System.out.println(romanovs);
+
     }
 }
 
