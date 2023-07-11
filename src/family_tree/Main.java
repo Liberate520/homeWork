@@ -1,8 +1,8 @@
 package family_tree;
 
 import family_tree.file_handler.FileHandler;
-import family_tree.human.Human;
-import family_tree.human.enums.Gender;
+import family_tree.creatures.Human;
+import family_tree.creatures.enums.Gender;
 import family_tree.tree.FamilyTree;
 
 import java.io.IOException;
@@ -14,12 +14,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //Тестирование записи и чтения из файла (initTree - экземпляр для записи; tree1 - экземпляр для чтения)
-        FamilyTree initTree = new FamilyTree();
+        FamilyTree<Human> initTree = new FamilyTree<>();
         fillFamilyTree(initTree);
         FileHandler fileHandler = new FileHandler();
-        fileHandler.write(initTree, "src/family_tree/FamilyTree.txt");
-        FamilyTree tree1;
-        tree1 = (FamilyTree) fileHandler.read("src/family_tree/FamilyTree.txt");
+        fileHandler.write(initTree, "src/family_tree/saves/FamilyTree.txt");
+        FamilyTree<Human> tree1;
+        tree1 = (FamilyTree) fileHandler.read("src/family_tree/saves/FamilyTree.txt");
 
         boolean check1 = true, check2;
         int option;
@@ -50,8 +50,8 @@ public class Main {
                                         System.out.println("----------------------------");
                                         if (sc.hasNextInt()) {
                                             option = sc.nextInt();
-                                            if (option <= tree1.getHumans().size()) {
-                                                System.out.println(tree1.getHumans().get(option - 1).viewAllFamily());
+                                            if (option <= tree1.getFamilyTree().size()) {
+                                                System.out.println(tree1.getFamilyTree().get(option-1).viewAllFamily());
                                             }
                                             System.out.println("----------------------------");
                                         } else {
@@ -172,15 +172,15 @@ public class Main {
         human9.setFather(human6);
         human9.setMother(human7);
 
-        familyTree.addHuman(human1);
-        familyTree.addHuman(human2);
-        familyTree.addHuman(human3);
-        familyTree.addHuman(human4);
-        familyTree.addHuman(human5);
-        familyTree.addHuman(human6);
-        familyTree.addHuman(human7);
-        familyTree.addHuman(human8);
-        familyTree.addHuman(human9);
+        familyTree.addCreature(human1);
+        familyTree.addCreature(human2);
+        familyTree.addCreature(human3);
+        familyTree.addCreature(human4);
+        familyTree.addCreature(human5);
+        familyTree.addCreature(human6);
+        familyTree.addCreature(human7);
+        familyTree.addCreature(human8);
+        familyTree.addCreature(human9);
 
     }
 }

@@ -1,6 +1,7 @@
-package family_tree.human;
+package family_tree.creatures;
 
-import family_tree.human.enums.Gender;
+import family_tree.creatures.enums.Gender;
+import family_tree.creatures.interfaces.Creatures;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, Creatures {
     private int id;
     private String firstName, lastName;
     private LocalDate dateOfBirth, dateOfDeath;
