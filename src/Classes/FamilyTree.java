@@ -15,13 +15,13 @@ public class FamilyTree {
     }
 
     public String getInfo(){
-        StringBuilder tmpSb = new StringBuilder();
-        tmpSb.append("Дерево содержит :");
+          StringBuilder tmpSb = new StringBuilder();
+        tmpSb.append("Дерево содержит персон :");
         tmpSb.append(humanList.size());
-        tmpSb.append("/n");
+        tmpSb.append("\n");
         for(Human human: humanList){
             tmpSb.append(human.getInfo());
-            tmpSb.append("/n");
+            tmpSb.append("\n");
         }
         return tmpSb.toString();
     }
@@ -31,14 +31,14 @@ public class FamilyTree {
     }
 
     public boolean add(Human human) {
-        if(human==null){
-            return false;}
-        if(humanList.contains(human)){
+ //       if(human==null){
+  //          return false;}
+  //      if(humanList.contains(human)){
             humanList.add(human);
-            addToParents(human);
-            addToChildren(human);
-            return true;
-        }
+ //           addToParents(human);
+ //           addToChildren(human);
+ //           return true;
+ //       }
         return false;
     }
 

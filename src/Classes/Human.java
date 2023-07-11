@@ -33,11 +33,13 @@ public class Human {
         this.gender = gender;
         this.brithDate = brithDate;
         this.deathDate = deathDate;
-        ArrayList<Object> parents =new ArrayList<>();
-        if (father != null){
-            parents.add(father);}
-        if (mother != null) {
-            parents.add(mother);}
+        this.father = father;
+        this.mother = mother;
+        ArrayList<Human> parents =new ArrayList<>();
+    //    if (father != null){
+    //        parents.add(father);}
+    //    if (mother != null) {
+    //        parents.add(mother);}
         ArrayList<Object> children = new ArrayList<>();
 
     }
@@ -64,7 +66,7 @@ public class Human {
     private void add(Human parent) {
 
     }
-
+    public Integer getId(){return idHuman;}
     public String getName() {return name;}
     public String getSurname() {return surname;}
     public String getSurnameOld() {return surnameOld;}
@@ -73,20 +75,9 @@ public class Human {
     public LocalDate getBrithDate(){return brithDate;}
     public LocalDate getDeathDate(){return deathDate;}
 
-    public Human getFather() {
-        for (Human parent: parents){
-            if(parent.getGender()==gender.Male){
-                return parent;}
-        }
-        return null;
-    }
-    public Human getMother(){
-        for (Human parent: parents){
-        if(parent.getGender()==gender.Female){
-            return parent;}
-    }
-        return null;
-    }
+    public Human getFather() {return father;}
+    public Human getMother(){return  mother;}
+
 
     public List<Human> getChildren(){return children;}
     public List<Human> getParents(){return parents;}
@@ -98,14 +89,19 @@ public class Human {
     public String toString(){return getInfo();}
     public String getInfo(){
         StringBuilder tmpSb = new StringBuilder();
-        tmpSb.append("Персона: ");
+        tmpSb.append("Персона(");
+        tmpSb.append(getId());
+        tmpSb.append("): ");
         tmpSb.append(getFIO());
+        tmpSb.append(" (");
         tmpSb.append(getGender());
-        tmpSb.append(" ");
+        tmpSb.append(") ");
         tmpSb.append(getBrithDate());
+        if(getDeathDate()!=null){tmpSb.append(" - ");}
         tmpSb.append(getDeathDate());
+        tmpSb.append(" (лет= ");
         tmpSb.append(getAge());
-        tmpSb.append(" ");
+        tmpSb.append(") ");
         tmpSb.append(getFatherInfo());
         tmpSb.append(" ");
         tmpSb.append(getMotherInfo());
@@ -130,43 +126,44 @@ public class Human {
         return tmpSb.toString();
     }
 
-    public String getSurnameOldInfo(){
+    public String getSurnameOldInfo() {
         StringBuilder tmpSb = new StringBuilder();
+        if (getSurnameOld() != "") {
         tmpSb.append(" ( ");
         tmpSb.append(getSurnameOld());
-        tmpSb.append(" ) ");
+        tmpSb.append(" ) ");}
         return tmpSb.toString();
     }
     public String getFatherInfo(){
         StringBuilder tmpSb = new StringBuilder();
         Human father =getFather();
-        tmpSb.append("Отец: ");
         if (father!=null){
-           tmpSb.append(father.getFIO());}
-        else {tmpSb.append("неизвестен");}
+            tmpSb.append("\n");
+            tmpSb.append("Отец: ");
+            tmpSb.append(father.getFIO());}
+        else {tmpSb.append("Отец неизвестен");}
         return tmpSb.toString();
     }
     public String getMotherInfo() {
         StringBuilder tmpSb = new StringBuilder();
         Human mother = getMother();
-        tmpSb.append("Отец: ");
         if (mother != null) {
+            tmpSb.append("\n");
+            tmpSb.append("Мать: ");
             tmpSb.append(mother.getFIO());
-        } else {
-            tmpSb.append("неизвестна");
-        }
+        } else {tmpSb.append("Мать неизвестна");}
         return tmpSb.toString();
     }
         private String getChildreninfo() {
             StringBuilder tmpSb = new StringBuilder();
             tmpSb.append("Дети: ");
-            if (children.size()!=0){
-                tmpSb.append(children.get(0).getName());
-                for (int i=1;i<children.size();i++){
-                    tmpSb.append(", ");
-                    tmpSb.append(children.get(0).getName());}
-            }
-            else {tmpSb.append("отсутствуют ");}
+//            if (children.size()!=0){
+//                tmpSb.append(children.get(0).getName());
+//                for (int i=1;i<children.size();i++){
+//                    tmpSb.append(", ");
+//                    tmpSb.append(children.get(0).getName());}
+//            }
+//            else {tmpSb.append("отсутствуют ");}
             return tmpSb.toString();
         }
 
@@ -178,7 +175,7 @@ public class Human {
 
         private int getPeriod(LocalDate brithDate,LocalDate deathDate){
             Period diff = Period.between(brithDate,deathDate);
-            return diff.getDays();
+            return diff.getYears();
         }
         public boolean equals(Object obj){
             if(this == obj){
