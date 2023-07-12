@@ -1,5 +1,6 @@
 package Classes;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 //import static Classes.Gender.female;
 //import static Classes.Gender.male;
 
-public class Human {
+public class Human implements Serializable {
 
 
     private final Integer idHuman;
