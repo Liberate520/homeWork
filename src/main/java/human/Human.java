@@ -1,6 +1,7 @@
 package human;
 
-import tree.TreeCreaturable;
+import tree.interfaces.TreeCreaturable;
+
 
 import java.io.Serializable;
 import java.time.LocalDate;
