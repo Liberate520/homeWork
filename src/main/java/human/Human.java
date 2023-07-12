@@ -1,13 +1,14 @@
 package human;
 
+import tree.TreeCreaturable;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Human implements Serializable, Comparable<Human>{
+public class Human implements Serializable, Comparable<Human>, TreeCreaturable<Human> {
     private String name;
     private String surname;
     private String patronymic;
@@ -53,7 +54,6 @@ public class Human implements Serializable, Comparable<Human>{
 
     public void setSpouse(Human spou) {
         this.spouse = spou;
-
     }
 
     public Human getSpouse() {
@@ -92,6 +92,7 @@ public class Human implements Serializable, Comparable<Human>{
     public String getName(){
         return this.name;
     }
+
 
     public void setSurname(String name) {
         this.surname = name;
@@ -206,14 +207,14 @@ public class Human implements Serializable, Comparable<Human>{
         return fa;
     }
 
-    public StringBuilder childGetName() {
+    public String childGetName() {
         StringBuilder sb = new StringBuilder();
         if (childrenList.size() != 0) {
             for (Human child : this.childrenList) {
                 sb.append(child.getFullName() + "; ");
             }
         } else sb.append("Отсутствуют; ");
-        return sb;
+        return sb.toString();
     }
 
     public int getAge() {

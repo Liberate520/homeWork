@@ -1,15 +1,16 @@
 package tree.itrator;
 
 import human.Human;
+import tree.TreeCreaturable;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterable implements Iterator<Human> {
+public class TreeIterable<E extends TreeCreaturable<E>> implements Iterator<E> {
     private int index;
-    private List<Human> familyList;
+    private List<E> familyList;
 
-    public TreeIterable(List<Human> familyList){
+    public TreeIterable(List<E> familyList){
         this.familyList = familyList;
     }
     @Override
@@ -18,7 +19,7 @@ public class TreeIterable implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return familyList.get(index++);
     }
 }
