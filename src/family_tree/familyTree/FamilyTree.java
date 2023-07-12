@@ -77,7 +77,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
 
     @Override
     public Iterator<E> iterator() {
-        return new ItemIterator<E>(itemList);
+        return new ItemIterator<>(itemList);
     }
 
     public void sortByName() {
