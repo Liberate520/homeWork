@@ -1,14 +1,15 @@
-package family_tree;
+package family_tree.human;
 
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collection;
 import java.util.HashMap;
 
 
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private int id;
     private String firstName, secondName, fathersName;
     private LocalDate dateOfBirth, dateOfDeath;
@@ -51,6 +52,19 @@ public class Human implements Serializable {
     public String getFullName(){
         return this.secondName + " " + this.firstName + " " + this.fathersName;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public String getFathersName() {
+        return fathersName;
+    }
+
     public Gender getGender(){
         return this.gender;
     }
@@ -127,10 +141,17 @@ public class Human implements Serializable {
         this.married = false;
     }
 
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
 
     public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
         this.alive = false;
+    }
+
+    public LocalDate getDateOfDeath() {
+        return dateOfDeath;
     }
 
     public int getAge(LocalDate dateOfBirth, LocalDate dateOfDeath) {
@@ -240,5 +261,10 @@ public class Human implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
         return id == human.id;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return 0;
     }
 }

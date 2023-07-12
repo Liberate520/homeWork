@@ -1,6 +1,12 @@
 package family_tree;
 
-import java.io.File;
+import family_tree.file_handler.FileHandler;
+import family_tree.human.Child_type;
+import family_tree.human.Gender;
+import family_tree.human.Human;
+import family_tree.human.Parent_Type;
+import family_tree.tree.Tree;
+
 import java.time.LocalDate;
 
 public class Main {
@@ -40,6 +46,18 @@ public class Main {
         System.out.println(family_1);
         FileHandler fh = new FileHandler();
         fh.save(family_1, family_1.getFamilyName());
+        family_1.sortByAge();
+        System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////");
+        System.out.println(family_1);
+        family_1.sortByFirstName();
+        System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////");
+        System.out.println(family_1);
+        family_1.sortBySecondName();
+        System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////");
+        System.out.println(family_1);
+        family_1.sortByFathersName();
+        System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////");
+        System.out.println(family_1);
 //        Tree family_1 = fh.read("Каруселевы.out");
 //        System.out.println(family_1);
     }

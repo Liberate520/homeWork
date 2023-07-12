@@ -1,11 +1,19 @@
-package family_tree;
+package family_tree.tree;
 
+
+import family_tree.human.Gender;
+import family_tree.human.Human;
+import family_tree.human.comparators.HumanComparatorByAge;
+import family_tree.human.comparators.HumanComparatorByFathersName;
+import family_tree.human.comparators.HumanComparatorByFirstName;
+import family_tree.human.comparators.HumanComparatorBySecondName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable<Human> {
     private int memberId;
     private String familyName;
     private List<Human> family;
@@ -60,6 +68,12 @@ public class Tree implements Serializable {
         return familyName;
     }
 
+    public void sortByFirstName() {family.sort(new HumanComparatorByFirstName());}
+    public void sortBySecondName() {family.sort(new HumanComparatorBySecondName());}
+    public void sortByFathersName() {family.sort(new HumanComparatorByFathersName());}
+
+    public void sortByAge() {family.sort(new HumanComparatorByAge());}
+
     @Override
     public String toString() {
         return treeInfo();
@@ -72,5 +86,10 @@ public class Tree implements Serializable {
             sb.append("______________________________").append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new TreeIterator(family);
     }
 }
