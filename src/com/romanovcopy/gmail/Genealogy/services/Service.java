@@ -1,5 +1,6 @@
 package com.romanovcopy.gmail.Genealogy.services;
 import com.romanovcopy.gmail.Genealogy.Program;
+import com.romanovcopy.gmail.Genealogy.comparatorsAndIterators.PersonIterator;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.Gender;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.GenealogyGraph;
 import com.romanovcopy.gmail.Genealogy.genealogyTree.MaritalStatus;
@@ -66,8 +67,32 @@ public class Service<T> extends BasicMethods {
                             break;
                         }
                         case 4: {
-                            System.out.println("Вывести все графы");
-
+                            System.out.println("Вывести все графы:\nСортировать по:");
+                            var sort=dialog(new String[]{"Id","Фамилия","Имя","Возраст"},scanner,1);
+                            PersonIterator iterator= (PersonIterator) graph.iterator();
+                            switch (sort){
+                                case 1:{
+                                    iterator.sortById();
+                                    break;
+                                }
+                                case 2:{
+                                    iterator.sortBySurname();
+                                    break;
+                                }
+                                case 3:{
+                                    iterator.sortByName();
+                                    break;
+                                }
+                                case 4:{
+                                    iterator.sortByAge();
+                                }
+                                default:{
+                                    System.out.println("Недопустимый ввод!");
+                                }
+                            }
+                            while (iterator.hasNext()){
+                                System.out.println(iterator.next());
+                            }
                             break;
                         }
                         case 5: {

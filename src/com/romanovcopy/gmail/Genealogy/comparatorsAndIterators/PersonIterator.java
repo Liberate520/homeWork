@@ -11,7 +11,10 @@ public class PersonIterator implements Iterator<Person> {
     private ArrayList<Person>listPerson;
     public PersonIterator(HashMap<String, Person> map){
         this.map=map;
-        listPerson= (ArrayList<Person>) map.values();
+        listPerson=new ArrayList<>();
+        for(Person person:map.values()){
+            listPerson.add(person);
+        }
     }
 
     public void sortById(){
@@ -37,6 +40,6 @@ public class PersonIterator implements Iterator<Person> {
     }
     @Override
     public Person next() {
-        return map.get(iterator.next());
+        return iterator.next();
     }
 }
