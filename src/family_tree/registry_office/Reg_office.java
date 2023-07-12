@@ -1,9 +1,9 @@
 package family_tree.registry_office;
 import family_tree.human.Gender;
 import family_tree.human.Human;
-import family_tree.infrastucture.My_Scanner;
-import family_tree.infrastucture.de_serelization.My_Serialization;
-import family_tree.infrastucture.try_catch.Date_using;
+import family_tree.model.infrastucture.My_Scanner;
+import family_tree.model.infrastucture.de_serelization.My_Serialization;
+import family_tree.model.infrastucture.try_catch.Date_using;
 import family_tree.tree.FamilyTree;
 
 import java.io.Serializable;
@@ -13,36 +13,20 @@ import java.util.Scanner;
 
 public class Reg_office implements My_Serialization, My_Scanner {
 
-    Scanner sc = My_Scanner.sc;
 
-    public FamilyTree getFamily_tree() {
-        return family_tree;
+
+    public FamilyTree family_tree;
+
+    public Reg_office() {
+        family_tree =new FamilyTree();
     }
 
-    public FamilyTree family_tree = new FamilyTree();
-    Date_using du = new Date_using();
-    private Human new_human(){
-        System.out.println("\nВвод данных нового человека.");
-        System.out.print("Фамилия: ");
-        String surname = sc.nextLine().trim();
-        System.out.print("Имя: ");
-        String first_name = sc.nextLine().trim();
-        System.out.print("Отчество: ");
-        String patronymic = sc.nextLine().trim();
-        System.out.print("Дата рождения (dd.mm.yyyy): ");
-        LocalDate day_birth = du.tryLocalDate(sc.nextLine().trim());
-        System.out.print("Пол (по умолчанию M, для смены пола введите любой символ: ");
-        Gender gender  = tryGender(sc.nextLine().trim());
+    public Human add_human(String surname, String first_name, String patronymic, Gender gender, LocalDate day_birth){
         Human human = new Human(surname, first_name, patronymic, gender, day_birth);
+        family_tree.addToHumanList(human);
         return human;
     }
-    public void add_human(){
-        Human human = new_human();
-        family_tree.addToHumanList(human);
-        System.out.println("Добавлен новый член.");
-        System.out.println(human);
-    }
-    private Gender tryGender(String string) {
+    public Gender tryGender(String string) {
         Gender gender = Gender.Mail;
         if (!string.isEmpty()) {
             gender = Gender.Female;
@@ -51,6 +35,10 @@ public class Reg_office implements My_Serialization, My_Scanner {
     }
     public void setFamily_tree(FamilyTree family_tree) {
         this.family_tree = family_tree;
+    }
+
+    public FamilyTree getFamily_tree() {
+        return family_tree;
     }
 
     @Override

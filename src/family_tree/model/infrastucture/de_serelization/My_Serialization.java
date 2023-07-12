@@ -1,6 +1,6 @@
-package family_tree.infrastucture.de_serelization;
+package family_tree.model.infrastucture.de_serelization;
 
-import family_tree.infrastucture.Config;
+import family_tree.model.infrastucture.Config;
 
 import java.io.Serial;
 import java.io.Serializable;

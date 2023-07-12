@@ -3,7 +3,7 @@ package family_tree.tree;
 import family_tree.human.comparator.HumanComparatorByAge;
 import family_tree.human.comparator.HumanComparatorById;
 import family_tree.human.comparator.HumanComparatorByName;
-import family_tree.infrastucture.de_serelization.My_Serialization;
+import family_tree.model.infrastucture.de_serelization.My_Serialization;
 import family_tree.tree.tree_service.HumanIterator;
 import family_tree.tree.tree_service.TreeItem;
 
@@ -26,29 +26,29 @@ public class FamilyTree<E extends TreeItem<E>> implements My_Serialization, Iter
         this(new ArrayList<>());
     }
 
-    public boolean addToHumanList(E human) {
-        if (human == null) {
+    public boolean addToHumanList(E e) {
+        if (e == null) {
             return false;
         }
-        if (!humanList.contains(human)) {
-            humanList.add(human);
-            human.setId(humanId++);
-            addToParents(human);
-            addToChildren(human);
+        if (!humanList.contains(e)) {
+            humanList.add(e);
+            e.setId(humanId++);
+            addToParents(e);
+            addToChildren(e);
             return true;
         }
         return false;
     }
 
-    private void addToParents(E human) {
-        for (E parent : human.getParents()) {
-            parent.addChild(human);
+    private void addToParents(E e) {
+        for (E parent : e.getParents()) {
+            parent.addChild(e);
         }
     }
 
-    private void addToChildren(E human) {
-        for (E child : human.getChildren()) {
-            child.addParent(human);
+    private void addToChildren(E e) {
+        for (E child : e.getChildren()) {
+            child.addParent(e);
         }
     }
 

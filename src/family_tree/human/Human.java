@@ -1,6 +1,6 @@
 package family_tree.human;
 
-import family_tree.infrastucture.de_serelization.My_Serialization;
+import family_tree.model.infrastucture.de_serelization.My_Serialization;
 import family_tree.tree.tree_service.HumanIterator;
 import family_tree.tree.tree_service.TreeItem;
 

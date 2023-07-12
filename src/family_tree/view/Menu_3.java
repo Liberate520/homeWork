@@ -1,6 +1,6 @@
 package family_tree.view;
 
-import family_tree.infrastucture.My_Scanner;
+import family_tree.model.infrastucture.My_Scanner;
 import family_tree.tree.FamilyTree;
 import family_tree.registry_office.relation.Relatives_finder;
 
