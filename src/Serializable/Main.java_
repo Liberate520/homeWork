@@ -7,21 +7,14 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        FileHandler fileHandler = new FileHandler();
+        FileHandler fileHandler = new FileHandler();
 
         FamilyTree tree = testTree();
+
         System.out.println(tree);
 
-        tree.sortByFullName();
-        System.out.println(tree);
+        fileHandler.save(tree, "src/Serializable/tree.out");
 
-        tree.sortByAge();
-        System.out.println(tree);
-
-        tree.sortByBirthDate();
-        System.out.println(tree);
-
-//        fileHandler.save(tree, "src/Serializable/tree.out");
 //        FileHandler fileHandler = new FileHandler();
 //        FamilyTree tree = (FamilyTree) fileHandler.read("src/Serializable/tree.out");
 //        System.out.println(tree);
@@ -30,11 +23,11 @@ public class Main {
     static FamilyTree testTree() {
         FamilyTree tree = new FamilyTree();
 
-        tree.addHuman(new Human("Дроздов", "С", "Н", Gender.Male, LocalDate.of(1949, 4, 4),
+        tree.addHuman(new Human("Дроздов", "C", "Н", Gender.Male, LocalDate.of(1949, 4, 4),
                 LocalDate.of(1986, 7, 8)));
         tree.addHuman(new Human("Карманова", "Л", "В", Gender.Female, LocalDate.of(1949, 9, 9)));
         tree.addHuman(new Human("Дроздов", "А", "С", Gender.Male, LocalDate.of(1980, 6, 7),
-                tree.getByName("Дроздов", "С", "Н"), tree.getByName("Карманова", "Л", "В")));
+                tree.getByName("Дроздов", "C", "Н"), tree.getByName("Карманова", "Л", "В")));
         tree.addHuman(new Human("Дроздова", "С", "В", Gender.Female, LocalDate.of(1986, 4, 10)));
         tree.addHuman(new Human("Дроздова", "В", "А", Gender.Female, LocalDate.of(2010, 2, 20),
                 tree.getByName("Дроздов", "А", "С"), tree.getByName("Дроздова", "С", "В")));

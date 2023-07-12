@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String surname, name, patronymic;
     private Gender gender;
     private LocalDate birthDate, deathDate;
@@ -198,6 +198,10 @@ public class Human implements Serializable {
         return id;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     // Setting
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
@@ -254,4 +258,8 @@ public class Human implements Serializable {
         return human.getName().equals(getName());
     }
 
+    @Override
+    public int compareTo(Human o) {
+        return fullName.compareTo(o.fullName);
+    }
 }
