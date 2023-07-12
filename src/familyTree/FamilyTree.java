@@ -2,18 +2,61 @@ package familyTree;
 
 import human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private int idHuman;
     private List<Human> humanList;
 
-    public FamilyTree() { humanList = new ArrayList<>(); };
+    //    public FamilyTree() { humanList = new ArrayList<>(); };
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
+    }
 
-    public void addHuman (Human human) {
+    public FamilyTree() {
+        this(new ArrayList<>());
+    }
+
+    public boolean addHuman(Human human) {
         human.setId(idHuman++);
-        humanList.add(human);
+//        humanList.add(human);
+        if (human == null) {
+            return false;
+        }
+        if (!humanList.contains(human)) {
+            humanList.add(human);
+
+            addToParents(human);
+            addToChildren(human);
+
+            return true;
+        }
+        return false;
+    }
+
+    private void addToParents(Human human) {
+        for (Human parent : human.getParents()) {
+            parent.addChild(human);
+        }
+    }
+
+    private void addToChildren(Human human) {
+        for (Human child : human.getChildren()) {
+            child.addParent(human);
+        }
+    }
+
+    public Human getByName(String surname, String name, String patronymic) {
+        for (Human human : humanList) {
+            if ((human.getSurname().equals(surname)) &&
+                    (human.getName().equals(name)) &&
+                    (human.getPatronymic().equals(patronymic))) {
+                return human;
+            }
+        }
+        return null;
     }
 
     public String getFamilyTreeInfo() {
