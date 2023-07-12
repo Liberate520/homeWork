@@ -1,6 +1,7 @@
+package model;
 import java.util.Collections;
- import java.util.Iterator;
- import java.util.List;
+import java.util.Iterator;
+import java.util.List;
 
  public class HumanIterator<T extends Human> implements Iterator<T> {
      private int index;

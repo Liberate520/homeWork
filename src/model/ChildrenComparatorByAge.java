@@ -1,3 +1,4 @@
+package model;
 import java.util.Comparator;
 
  public class ChildrenComparatorByAge<T extends FamalyTreeItem> implements Comparator<T> {
