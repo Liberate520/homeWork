@@ -4,7 +4,7 @@ import human.Comparators.SortByAgeComparator;
 import human.Comparators.SortByNameComporator;
 
 import human.Gender;
-import human.Human;
+
 import tree.interfaces.TreeCreaturable;
 import tree.itrator.TreeIterable;
 

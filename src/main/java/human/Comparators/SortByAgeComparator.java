@@ -2,7 +2,7 @@ package human.Comparators;
 
 
 import human.Human;
-import tree.TreeCreaturable;
+import tree.interfaces.TreeCreaturable;
 
 import java.util.Comparator;
 

@@ -1,7 +1,7 @@
 package tree.itrator;
 
 import human.Human;
-import tree.TreeCreaturable;
+import tree.interfaces.TreeCreaturable;
 
 import java.util.Iterator;
 import java.util.List;

@@ -2,7 +2,6 @@ package human;
 
 import tree.interfaces.TreeCreaturable;
 
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -93,7 +92,6 @@ public class Human implements Serializable, Comparable<Human>, TreeCreaturable<H
     public String getName(){
         return this.name;
     }
-
 
     public void setSurname(String name) {
         this.surname = name;

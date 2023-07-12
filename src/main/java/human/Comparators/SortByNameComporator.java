@@ -1,5 +1,5 @@
 package human.Comparators;
-import tree.TreeCreaturable;
+import tree.interfaces.TreeCreaturable;
 import java.util.Comparator;
 
 public class SortByNameComporator<E extends TreeCreaturable> implements Comparator<E> {
