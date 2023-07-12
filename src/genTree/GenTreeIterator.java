@@ -2,14 +2,14 @@ package genTree;
 
 import java.util.Iterator;
 import java.util.ArrayList;
-import human.Human;
+import interfaces.GenTreeItem;
 
-public class GenTreeIterator implements Iterator<Human> {
+public class GenTreeIterator<T extends GenTreeItem<T>> implements Iterator<T> {
     private int index = 0;
     private int size;
-    private ArrayList<Human> items;
+    private ArrayList<T> items;
 
-    public GenTreeIterator(ArrayList<Human> items) {
+    public GenTreeIterator(ArrayList<T> items) {
         this.items = items;
         this.size = items.size();
     }
@@ -20,9 +20,9 @@ public class GenTreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
-        Human h = items.get(index);
+    public T next() {
+        T item = items.get(index);
         index += 1;
-        return h;
+        return item;
     }
 }

@@ -1,4 +1,4 @@
-package human.enums;
+package treeItems.enums;
 
 public enum Gender {
     man, woman;

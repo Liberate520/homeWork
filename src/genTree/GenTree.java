@@ -5,15 +5,15 @@ import java.util.Iterator;
 import genTree.comparators.ByAge;
 import genTree.comparators.ByFullName;
 import genTree.comparators.ByHierarchyLevel;
-import human.Human;
-import human.enums.Gender;
+import interfaces.GenTreeItem;
 import interfaces.Loadable;
 import interfaces.Saveable;
+import treeItems.enums.Gender;
 
-public class GenTree implements Saveable, Loadable, Iterable<Human> {
+public class GenTree<T extends GenTreeItem<T>> implements Saveable, Loadable, Iterable<T> {
     private static String fileExt;
 
-    private ArrayList<Human> humans;
+    private ArrayList<T> items;
     private int size;
 
     static {
@@ -22,75 +22,72 @@ public class GenTree implements Saveable, Loadable, Iterable<Human> {
 
     // конструктор
     public GenTree() {
-        humans = new ArrayList<Human>();
+        items = new ArrayList<T>();
         size = 0;
     }
 
-    // вернуть кол-во людей в дереве
+    // вернуть кол-во элементов в дереве
     public int size() {
         return size;
     }
 
-    // вывести всех людей в древе
-    public void showAllHumans() {
+    // вывести все элементы в древе
+    public void showAllItems() {
         if (size < 1) {
             System.out.println("GenTree is empty");
         }
         else {
-            for (Human human: humans) {
-                human.showFullInfo();
+            for (T item: items) {
+                item.showFullInfo();
             }
         }
     }
 
-    // вернуть список людей по ФИО
-    public ArrayList<Human> findHumansByFullName(String firstName,
-                                                 String midName,
-                                                 String lastName) {
-        String fullName = String.format("%s %s %s", firstName, midName, lastName);
-        ArrayList<Human> result = new ArrayList<Human>();
-        for (Human human: humans) {
-            if (human.getFullName().equals(fullName)) {
-                result.add(human);
+    // вернуть список элементов по имени
+    public ArrayList<T> findItemsByFullName(String fullName) {
+        ArrayList<T> result = new ArrayList<T>();
+        for (T item: items) {
+            if (item.getFullName().contains(fullName)) {
+                result.add(item);
             }
         }
         return result;
     }
 
-    // вернуть человека по id
-    public Human getHumanById(int id) {
-        for (Human human: humans) {
-            if (human.getId() == id) {
-                return human;
+    // вернуть элемент по id
+    public T getItemById(int id) {
+        for (T item: items) {
+            if (item.getId() == id) {
+                return item;
             }
         }
         return null;
     }
 
-    // добавить человека в дерево
-    public void addHuman(Human human) {
-        humans.add(human);
+    // добавить элемент в дерево
+    public void addItem(T item) {
+        items.add(item);
         size += 1;
     }
 
-    public void addChildToId(Human child, int id) {
+    public void addChildToId(T child, int id) {
         if (size > 0) {
-            Human parent = getHumanById(id);
+            T parent = getItemById(id);
             if (parent != null) {
                 parent.addChild(child);
             }
             else {
-                // TODO что-то сделать если человек по id не найден
+                System.out.println("id not found");
             }
         }
         else {
-            // TODO что-то сделать если дерево пусто
+            System.out.println("tree is empty");
         }
     }
 
-    public void addParentToId(Human parent, int id) {
+    public void addParentToId(T parent, int id) {
         if (size > 0) {
-            Human child = getHumanById(id);
+            T child = getItemById(id);
             if (child != null) {
                 if (parent.getGender() == Gender.man) {
                     child.setFather(parent);
@@ -100,11 +97,11 @@ public class GenTree implements Saveable, Loadable, Iterable<Human> {
                 }
             }
             else {
-                // что-то сделать если человек по id не найден
+                System.out.println("id not found");
             }
         }
         else {
-            // что-то сделать если дерево пусто
+            System.out.println("tree is empty");
         }
     }
 
@@ -116,20 +113,20 @@ public class GenTree implements Saveable, Loadable, Iterable<Human> {
 
     // переопределение из Iterable
     @Override
-    public Iterator<Human> iterator() {
-        return new GenTreeIterator(humans);
+    public Iterator<T> iterator() {
+        return new GenTreeIterator<>(items);
     }
 
     // сортировки с использованием классов-компараторов
     public void sortByHierarchyLevel() {
-        humans.sort(new ByHierarchyLevel());
+        items.sort(new ByHierarchyLevel<>());
     }
 
     public void sortByFullName() {
-        humans.sort(new ByFullName());
+        items.sort(new ByFullName<>());
     }
 
     public void sortByAge() {
-        humans.sort(new ByAge());
+        items.sort(new ByAge<>());
     }
 }

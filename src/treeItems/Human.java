@@ -1,14 +1,13 @@
-package human;
+package treeItems;
 // TODO сделать обработку возраста человека и его состояния жизни
 
-import human.enums.Gender;
-import human.enums.LifeState;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
-import interfaces.Loadable;
-import interfaces.Saveable;
+import interfaces.GenTreeItem;
+import treeItems.enums.Gender;
+import treeItems.enums.LifeState;
 
-public class Human implements Saveable, Loadable, Comparable<Human> {
+public class Human implements Comparable<Human>, GenTreeItem<Human> {
     private static String fileExt;
 
     private int id;
@@ -217,6 +216,7 @@ public class Human implements Saveable, Loadable, Comparable<Human> {
     }
 
     // если не используются классы-компараторы, то этот метод служит для сортировки по умолчанию
+    // переопределение из интерфейса Comparable
     @Override
     public int compareTo(Human other) {
         // нужно вернуть положительный инт если первый объект больше второго

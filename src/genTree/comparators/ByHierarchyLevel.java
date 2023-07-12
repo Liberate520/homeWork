@@ -1,11 +1,11 @@
 package genTree.comparators;
 
 import java.util.Comparator;
-import human.Human;
+import interfaces.GenTreeItem;
 
-public class ByHierarchyLevel implements Comparator<Human> {
+public class ByHierarchyLevel<T extends GenTreeItem<T>> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getHierarchyLevel() - o2.getHierarchyLevel();
     }
 }

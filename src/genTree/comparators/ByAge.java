@@ -1,11 +1,11 @@
 package genTree.comparators;
 
 import java.util.Comparator;
-import human.Human;
+import interfaces.GenTreeItem;
 
-public class ByAge implements Comparator<Human> {
+public class ByAge<T extends GenTreeItem<T>> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getAge() - o2.getAge();
     }
 }
