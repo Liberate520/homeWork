@@ -1,7 +1,7 @@
-package family_tree.model.registry_office.relation;
-import family_tree.model.infrastucture.My_Scanner;
-import family_tree.model.tree.FamilyTree;
-import family_tree.model.infrastucture.try_catch.TryLong;
+package family_tree.registry_office.relation;
+import family_tree.infrastucture.My_Scanner;
+import family_tree.tree.FamilyTree;
+import family_tree.infrastucture.try_catch.TryLong;
 
 import java.util.Scanner;
 

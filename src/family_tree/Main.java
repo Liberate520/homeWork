@@ -1,5 +1,5 @@
 package family_tree;
-import family_tree.model.infrastucture.My_Scanner;
+import family_tree.infrastucture.My_Scanner;
 import family_tree.view.Menu;
 import java.util.Scanner;
 

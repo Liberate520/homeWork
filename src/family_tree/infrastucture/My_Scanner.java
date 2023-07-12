@@ -1,4 +1,4 @@
-package family_tree.model.infrastucture;
+package family_tree.infrastucture;
 
 import java.util.Scanner;
 

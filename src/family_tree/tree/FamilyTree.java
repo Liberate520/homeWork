@@ -1,11 +1,11 @@
-package family_tree.model.tree;
+package family_tree.tree;
 
-import family_tree.model.human.comparator.HumanComparatorByAge;
-import family_tree.model.human.comparator.HumanComparatorById;
-import family_tree.model.human.comparator.HumanComparatorByName;
-import family_tree.model.infrastucture.de_serelization.My_Serialization;
-import family_tree.model.tree.tree_service.HumanIterator;
-import family_tree.model.tree.tree_service.TreeItem;
+import family_tree.human.comparator.HumanComparatorByAge;
+import family_tree.human.comparator.HumanComparatorById;
+import family_tree.human.comparator.HumanComparatorByName;
+import family_tree.infrastucture.de_serelization.My_Serialization;
+import family_tree.tree.tree_service.HumanIterator;
+import family_tree.tree.tree_service.TreeItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
