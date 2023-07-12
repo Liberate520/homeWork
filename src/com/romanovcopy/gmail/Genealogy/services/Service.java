@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Service extends BasicMethods {
+public class Service<T> extends BasicMethods {
 
     private Scanner scanner;
-    private HashMap<String, GenealogyGraph>genealogyGraphHashMap;
+    private HashMap<String, T>genealogyGraphHashMap;
     private boolean exit;
 
     public Service(){
@@ -23,9 +23,9 @@ public class Service extends BasicMethods {
         exit=false;
         //считывание файла с диска
         var reader=new ReadStream(Program.path);
-        Object obj=reader.read();
+        var obj=reader.read();
         if(obj instanceof HashMap){
-            genealogyGraphHashMap=(HashMap<String, GenealogyGraph>)obj;
+            genealogyGraphHashMap=(HashMap<String, T>)obj;
         }else {
             genealogyGraphHashMap=new HashMap<>();
         }

@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class GenealogyGraph implements Serializable, Iterable<Person> {
+public class GenealogyGraph<T> implements Serializable, Iterable<Person> {
 
-    private HashMap<String, Person> people;
+    private HashMap<String, T> people;
 
     public GenealogyGraph() {
         this.people = new HashMap<>();
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(T person) {
         people.put(person.getId(), person);
     }
 

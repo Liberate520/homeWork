@@ -4,7 +4,7 @@ import com.romanovcopy.gmail.Genealogy.interfaces.readerSerializable;
 
 import java.io.*;
 
-public class ReadStream implements readerSerializable {
+public class ReadStream<T> implements readerSerializable {
     String path;
 
     /**
@@ -19,14 +19,19 @@ public class ReadStream implements readerSerializable {
      * считывание объекта с диска
      * @return object или null при ошибке
      */
-    public Object read() {
+    @Override
+    public T read(String path) {
         try (FileInputStream fileIn = new FileInputStream(path);
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
-             Object obj = objectIn.readObject();
-             return obj;
+            T obj = null;
+            Object readObj = objectIn.readObject();
+            if (readObj != null && readObj.getClass().isAssignableFrom(obj.getClass())) {
+                obj = (T) readObj;
+            }
+            return obj;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Ошибка при считывании объекта с диска: " + e.getMessage());
-            return null;
+            throw new RuntimeException("Ошибка при считывании объекта с диска", e);
         }
     }
 
