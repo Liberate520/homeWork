@@ -1,13 +1,14 @@
 package family_tree;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashMap;
 
 
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private String firstName, secondName, fathersName;
     private LocalDate dateOfBirth, dateOfDeath;

@@ -1,15 +1,18 @@
 package family_tree;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class Tree implements Serializable {
     private int memberId;
+    private String familyName;
     private List<Human> family;
 
-    public Tree() {
+    public Tree(String familyName) {
         this.family = new ArrayList<>();
+        this.familyName = familyName;
     }
 
     public void addFamilyMember(Human member){
@@ -53,6 +56,9 @@ public class Tree {
         }
     }
 
+    public String getFamilyName() {
+        return familyName;
+    }
 
     @Override
     public String toString() {

@@ -1,10 +1,11 @@
 package family_tree;
 
+import java.io.File;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Tree family_1 = new Tree();
+        Tree family_1 = new Tree("Каруселевы");
         Human vanya_1 = new Human("Иван", "Каруселев", "Петрович", LocalDate.of(1985, 5, 24), Gender.male);
         Human olya_1 = new Human("Ольга", "Кирова", "Александровна", LocalDate.of(1987, 12, 29), Gender.female);
         Human kostya_0 = new Human("Константин", "Каруселев", "Иванович", LocalDate.of(2009, 9, 29), Gender.male);
@@ -37,5 +38,9 @@ public class Main {
         olya_1.addChild(masha_0, Child_type.Biological_Daughter);
         olya_1.addChild(katya_0, Child_type.Foster_Daughter);
         System.out.println(family_1);
+        FileHandler fh = new FileHandler();
+        fh.save(family_1, family_1.getFamilyName());
+//        Tree family_1 = fh.read("Каруселевы.out");
+//        System.out.println(family_1);
     }
 }
