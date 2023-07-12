@@ -1,10 +1,9 @@
-package family_tree;
+package familytree.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import family_tree.Gender;
 
 /**
  * Human
@@ -15,7 +14,7 @@ import family_tree.Gender;
 
 
 
-class Human implements Serializable  {
+public class Human implements Serializable  {
     private String name;
     private Gender gender;
     private String surname;
@@ -228,7 +227,7 @@ class Human implements Serializable  {
         StringBuilder info = new StringBuilder();
         Human spouse = getSpouse();
         if(spouse != null){
-            info.append(getName() + " " + getSurname() + " в браке с: " + spouse.getName() +" " + spouse.getSurname());
+            info.append(getName() + " " + getSurname() + " в браке с " + spouse.getName() +" " + spouse.getSurname());
         }
         else{
             info.append("не в браке");

@@ -1,5 +1,4 @@
-package family_tree;
-import family_tree.Human;
+package familytree.file_hendler;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,21 +8,24 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class FileHandler {
-    public static void WriteFile(FamilyTree familyTree, String fileName) {
-        try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            write.writeObject(familyTree);
+import familytree.human.Human;
+
+public class FileHandler implements Writeble {
+    @Override
+    public  boolean write(Serializable serializable, String filePath) {
+        try (ObjectOutputStream OOS = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            OOS.writeObject(serializable);
             System.out.println("Файл сохранён!");
+            return true;
         } catch (IOException e) {
             System.out.println("Не удалось сохранить файл, ошибка: " + e.getMessage());
+            return false;
         }
     }
-
-    public static FamilyTree ReadFile(String fileName) {
+    @Override
+    public Object read(String fileName) {
         try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(fileName))) {
-            FamilyTree familyTree = (FamilyTree) read.readObject();
-            System.out.println("Дерево загружено");
-            return familyTree;
+            return read.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Не удалось загрузить файл, ошибка: " + e.getMessage());
             return null;

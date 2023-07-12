@@ -1,4 +1,4 @@
-package family_tree;
+package familytree.family_tree;
 
 import java.io.Serializable;
 
@@ -9,11 +9,15 @@ import java.io.Serializable;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import family_tree.Human;
-import family_tree.Gender;
 
-class FamilyTree implements Serializable {
+import familytree.human.Gender;
+import familytree.human.Human;
+import familytree.human.comporatop.HumanComporatorByBirthDate;
+import familytree.human.comporatop.HumanComporatorBySurname;
+
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List< Human> ListHumans;
 
     public FamilyTree() {
@@ -98,9 +102,26 @@ class FamilyTree implements Serializable {
     
         
     }
+
+    
     
     public List<Human> getListHumans() {
         return this.ListHumans;
+    }
+
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(ListHumans);
+    }
+
+    public void sortBySurname(){
+
+        ListHumans.sort(new HumanComporatorBySurname());
+    }
+
+    public void sortByBirthDate(){
+        ListHumans.sort(new HumanComporatorByBirthDate());
+
     }
 
 
