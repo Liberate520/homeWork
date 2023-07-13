@@ -8,21 +8,21 @@ import human.ComparatorByAge;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> tree = new ArrayList<>();
-    private HashMap<Human, Human> fathersList = new HashMap<>();
-    private HashMap<Human, Human> mothersList = new HashMap<>();
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
+    private List<E> tree = new ArrayList<>();
+    private HashMap<E, E> fathersList = new HashMap<>();
+    private HashMap<E, E> mothersList = new HashMap<>();
 
-    public void addPerson(Human human) {
+    public void addPerson(E human) {
         tree.add(human);
     }
 
-    public void addFather(String surname, String name, String patronymic, Gender gender, int birthYear, int birthMonth, int birthDay, Human human) {
-        Human father = new Human(surname, name, patronymic, Gender.Male, birthYear, birthMonth, birthDay);
+    public void addFather(String surname, String name, String patronymic, Gender gender, int birthYear, int birthMonth, int birthDay, E human) {
+        E father = (E) new Human (surname, name, patronymic, Gender.Male, birthYear, birthMonth, birthDay);
         tree.add(father);
         fathersList.put(human, father);
         human.setFather(father);
-        List<Human> children = father.getChildren();
+        List<E> children = father.getChildren();
         if (children == null) {
             children = new ArrayList<>();
             children.add(human);
@@ -31,22 +31,22 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void addMother(String surname, String name, String patronymic, Gender gender, int birthYear, int birthMonth, int birthDay, Human human) {
-        Human mother = new Human(surname, name, patronymic, Gender.Female, birthYear, birthMonth, birthDay);
+        E mother = new E (surname, name, patronymic, Gender.Female, birthYear, birthMonth, birthDay);
         tree.add(mother);
-        mothersList.put(human, mother);
-        human.setMother(mother);
-        List<Human> children = mother.getChildren();
+        mothersList.put((E) human, mother);
+        human.setMother((Human) mother);
+        List<E> children = mother.getChildren();
         if (children == null) {
             children = new ArrayList<>();
-            children.add(human);
-        } else children.add(human);
+            children.add((E) human);
+        } else children.add((E) human);
         mother.setChildren(children);
     }
 
-    public String findParents(Human human) {
+    public String findParents(E human) {
         StringBuilder parents = new StringBuilder();
-        Human father = fathersList.get(human);
-        Human mother = mothersList.get(human);
+        E father = fathersList.get(human);
+        E mother = mothersList.get(human);
         if (father != null) parents.append("Отец:\n" + father + "\n");
         else parents.append("Отец не найден\n");
         if (mother != null) parents.append("Мать:\n" + mother + "\n");
@@ -61,7 +61,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(tree);
     }
     public void sortByName() {
