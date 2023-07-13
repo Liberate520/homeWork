@@ -6,19 +6,23 @@ import family_tree.marriage.Marriage;
 
 import java.time.LocalDate;
 
-public class ServiceFamilyTree {
-    private int idHuman, idMarriage;
-    private FamilyTree tree;
-
+public class ServiceFamilyTree<T extends ItemAgedNamedId> {
+    private int idMarriage;
+    private FamilyTree<T> tree;
     public ServiceFamilyTree(){
-        tree = new FamilyTree();
+        tree = new FamilyTree<>();
     }
 
-    public Human addHuman(String name, LocalDate dateBirth, Gender gender){
-        Human h = new Human(idHuman++, name, dateBirth, gender);
-        tree.addHuman(h);
-        return h;
+    //!!! Сервис не может создавать объекты !!!
+//    public T addItem(String name, LocalDate dateBirth, Gender gender){
+//        T t = new T(idHuman++, name, dateBirth, gender);
+//        tree.add(h);
+//        return h;
+//    }
+    public void addItem(T t){
+        tree.add(t);
     }
+
     //регистрируем брак и возвращаем ссылку на экземпляр
     //Если нарушены условия, return null
     public Marriage addMarriage(LocalDate startDate, Human wife, Human husband){
@@ -32,16 +36,17 @@ public class ServiceFamilyTree {
     public boolean addChild(Human parent, Human child){
         return parent.addChild(child);
     }
-    public boolean addChild(int idParent, int idChild){
-        Human parent = getHumanById(idParent);
-        if(parent==null) return false;
-        Human child = getHumanById(idChild);
-        if(child==null) return false;
-        return parent.addChild(child);
-    }
+//    public boolean addChild(int idParent, int idChild){
+//        T parent = getItemById(idParent);
+//        if(parent==null) return false;
+//        T child = getItemById(idChild);
+//        if(child==null) return false;
+//        return parent.addChild(child);
+//    }
+
     //return null, если список пуст либо id вне имеющихся
-    public Human getHumanById(int id){
-        return tree.getHumanById(id);
+    public T getItemById(int id){
+        return tree.getItemById(id);
     }
 
     //return null, если список пуст либо id вне имеющихся

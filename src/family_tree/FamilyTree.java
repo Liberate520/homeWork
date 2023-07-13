@@ -1,36 +1,32 @@
 package family_tree;
 
-import family_tree.human.Human;
-import family_tree.human.HumanGroup;
+import family_tree.group.GroupAgedNamed;
+import family_tree.group.Group;
 import family_tree.marriage.Marriage;
-import family_tree.marriage.MarriageGroup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private HumanGroup humans;
-    private MarriageGroup marriages;
-    //!!! делаем конструктор доступным только для ServiceFamilyTree. Можно ли так делать?
-    FamilyTree(){
-        humans = new HumanGroup();
-        marriages = new MarriageGroup();
+public class FamilyTree<T extends ItemAgedNamedId> implements Serializable {
+    private GroupAgedNamed<T> listItems;
+    private Group<Marriage> marriages;
+    public FamilyTree(){
+        listItems = new GroupAgedNamed<>();
+        marriages = new Group<>();
     }
     //разрешаем вызвать метод только в ServiceFamilyTree
-    void addHuman(Human h){
-        humans.add(h);
+    public void add(T t){
+        listItems.add(t);
     }
-
     //разрешаем вызвать метод только в ServiceFamilyTree
-    void addMarriage(Marriage m){
+    public void addMarriage(Marriage m){
         marriages.add(m);
     }
-
-    public Human getHumanById(int id){
-        for(Human h : humans)
-            if(h.getId() == id)
-                return h;
+    public T getItemById(int id){
+        for(T t : listItems)
+            if(t.getId() == id)
+                return t;
         return null;
     }
     public Marriage getMarriageById(int id){
@@ -39,9 +35,8 @@ public class FamilyTree implements Serializable {
                 return m;
         return null;
     }
-
     public String getHumansInfo(){
-        return humans.getInfo();
+        return listItems.getInfo();
     }
     public String getMarriagesInfo(){
         List<String> strings = new ArrayList<>();
@@ -56,15 +51,12 @@ public class FamilyTree implements Serializable {
                 + getMarriagesInfo()
                 + "\n}";
     }
-
     public void sortHumansByName(){
-        humans.sortByName();
+        listItems.sortByName();
     }
-
     public void sortHumansByAge(){
-        humans.sortByAge();
+        listItems.sortByAge();
     }
-
     @Override
     public String toString() {
         return getInfoAll();

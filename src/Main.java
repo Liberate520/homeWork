@@ -11,15 +11,20 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        ServiceFamilyTree service = new ServiceFamilyTree();
+        //с
+        int idHuman=0;
+        ServiceFamilyTree<Human> service = new ServiceFamilyTree<>();
 
-        Human anton = service.addHuman("Антон", LocalDate.of(1990, 10, 16), Gender.Male);
-        Human helen = service.addHuman("Елена", LocalDate.of(1993, 04, 01), Gender.Female);
-        Human andrew = service.addHuman("Андрей", LocalDate.of(2012, 12, 31), Gender.Male);
+        Human anton = new Human(idHuman++,"Антон", LocalDate.of(1990, 10, 16), Gender.Male);
         System.out.println(String.format("test anton.getAge(): %d", anton.getAge()));
 
+        Human helen = new Human(idHuman++,"Елена", LocalDate.of(1993, 04, 01), Gender.Female);
+        Human andrew = new Human(idHuman++,"Андрей", LocalDate.of(2012, 12, 31), Gender.Male);
+        service.addItem(anton);
+        service.addItem(helen);
+        service.addItem(andrew);
+
         //Добавляем связи "родители-дети"
-        //!!! Допустимо ли, что это можно сделать напрямую, не используя service?
         anton.addChild(andrew);
         helen.addChild(andrew);
 
@@ -30,7 +35,8 @@ public class Main {
         //а) расторгаем брак
         service.stopMarriageById(m.getId(), LocalDate.of(2015, 1, 16));
         //б) добавляем персонаж
-        Human masha = service.addHuman("Маша", LocalDate.of(1994, 11, 5), Gender.Female);
+        Human masha = new Human(idHuman++,"Маша", LocalDate.of(1994, 11, 5), Gender.Female);
+        service.addItem(masha);
         //в) заключаем новый брак
         Marriage m2 = service.addMarriage(LocalDate.of(2016, 1, 1), masha, anton);
 
