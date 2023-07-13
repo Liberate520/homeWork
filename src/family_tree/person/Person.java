@@ -1,13 +1,14 @@
-package family_tree;
+package family_tree.person;
 
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
     private String fullname;
     private GregorianCalendar birthDate;
     private GregorianCalendar endLifeDate;
@@ -38,11 +39,11 @@ public class Person implements Serializable {
         this.children = children;
         // при создании экземпляра с указанием родителей конструктор будет проверять у Мамы и Папы,
         // ссылаются ли они на Ребенка в своих экземплярах, если нет, то сразу добавит
-        if (mother != null && !mother.getChildren().contains(this)) {
-            mother.getChildren().add(this);
+        if (this.mother != null && !this.mother.getChildren().contains(this)) {
+            this.mother.getChildren().add(this);
         }
-        if (father != null && !father.getChildren().contains(this)) {
-            father.getChildren().add(this);
+        if (this.father != null && !this.father.getChildren().contains(this)) {
+            this.father.getChildren().add(this);
         }
         this.commit = commit;
     }
@@ -76,7 +77,7 @@ public class Person implements Serializable {
         StringBuilder sb = new StringBuilder();
         DateFormat df = new SimpleDateFormat("dd MMMM yyyy ");
 
-        sb.append(fullname+":\n");
+        sb.append(fullname+": "+this.getAge()+" л.(г.)\n");
 
         String birthDateStr = birthDate == null ? "" : repeat(fullname.length()+1," ")+
                                                         "д.р. "+df.format(birthDate.getTime()).trim()+"\n";
@@ -111,23 +112,31 @@ public class Person implements Serializable {
 
     // SETTERS
     public void setMother(Person mother) {
-        if (mother != null) {
+        if (this.mother == null) {
             this.mother = mother;
+        }
+        if (this.mother != null && this.mother == mother && !this.mother.getChildren().contains(this)) {
+            this.mother.getChildren().add(this);
         }
     }
 
     public void setMotherForcedly(Person mother) {
-            this.mother = mother;
+        this.mother = mother;
+        this.mother.setChildren(this);
     }
 
     public void setFather(Person father) {
-        if (father != null) {
+        if (this.father == null) {
             this.father = father;
+        }
+        if (this.father != null && this.father == father && !this.father.getChildren().contains(this)) {
+            this.father.getChildren().add(this);
         }
     }
 
     public void setFatherForcedly(Person father) {
-            this.father = father;
+        this.father = father;
+        this.father.setChildren(this);
     }
 
     public void setChildren(Person child) {
@@ -204,9 +213,20 @@ public class Person implements Serializable {
         return commit;
     }
 
+    public int getAge() {
+        Date birth = this.birthDate.getTime();
+        Date endLife = this.endLifeDate.getTime();
+        long diff = endLife.getTime() - birth.getTime();
+        return Math.toIntExact((diff / (1000 * 60 * 60 * 24)) / 365);
+    }
+
     // метод используется в toString
     private String repeat(int count, String with) {
         return new String(new char[count]).replace("\0", with);
     }
 
+    @Override
+    public int compareTo(Person o) {
+        return this.fullname.compareTo(o.fullname);
+    }
 }
