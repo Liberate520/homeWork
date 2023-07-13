@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import homeWork.FamalyTree.FamalyTree;
+import homeWork.FamalyTree.FamalysTree.FamalyTree;
 
 
 public class FileHandler implements SaveLoad{
@@ -26,12 +26,13 @@ public class FileHandler implements SaveLoad{
         }
     }
     
-    public void LoadDate(FamalyTree list, File file){
+    public FamalyTree LoadDate(FamalyTree list, File file){
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
             FamalyTree listRestored = (FamalyTree) ois.readObject();
             ois.close();
-            System.out.println(listRestored);;
+            System.out.println(listRestored);
+            return listRestored;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -39,5 +40,7 @@ public class FileHandler implements SaveLoad{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return list;
+        
     }
 }

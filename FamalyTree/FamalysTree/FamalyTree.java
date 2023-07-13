@@ -1,23 +1,22 @@
-package homeWork.FamalyTree;
+package homeWork.FamalyTree.FamalysTree;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import homeWork.FamalyTree.Human.Human;
+
 import homeWork.FamalyTree.Human.HumanComporatoByAge;
 import homeWork.FamalyTree.Human.HumanIterator;
 import homeWork.FamalyTree.SaveLoad.FileHandler;
 
-public class FamalyTree implements Serializable, Iterable<Human>  {
+public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable<E>  {
     private long humanId;
-    private List<Human> humanList;
+    private List<E> humanList;
 
 
-    public FamalyTree(List<Human> humanList){
+    public FamalyTree(List<E> humanList){
         this.humanList = humanList;
     }
 
@@ -25,7 +24,7 @@ public class FamalyTree implements Serializable, Iterable<Human>  {
         this(new ArrayList<>());
     }
 
-    public boolean addHumman(Human human){
+    public boolean addHumman(E human){
         if (human == null){
             return false;
         }
@@ -40,14 +39,14 @@ public class FamalyTree implements Serializable, Iterable<Human>  {
         
     }
 
-    private void addToChildren(Human human){
-        for (Human child: human.getChildren()){
+    private void addToChildren(E human){
+        for (E child: human.getChildren()){
             child.addParents(human);
         }
     }
 
-    private void addToParent(Human human){
-        for (Human child: human.getParents()){
+    private void addToParent(E human){
+        for (E child: human.getParents()){
             child.addChild(human);
         }
     }
@@ -55,7 +54,7 @@ public class FamalyTree implements Serializable, Iterable<Human>  {
 
     public String getHumanInfo(){
         StringBuilder sb = new StringBuilder();
-        for (Human human: humanList){
+        for (E human: humanList){
             sb.append(human);
             sb.append("\n");
         }
@@ -67,9 +66,9 @@ public class FamalyTree implements Serializable, Iterable<Human>  {
         return getHumanInfo();
     }
 
-    public List<Human> getByName(String name){
-        List<Human> res = new ArrayList<>();
-        for (Human human: humanList){
+    public List<E> getByName(String name){
+        List<E> res = new ArrayList<>();
+        for (E human: humanList){
             if (human.getName().equalsIgnoreCase(name)){
                 res.add(human);
             }
@@ -77,26 +76,26 @@ public class FamalyTree implements Serializable, Iterable<Human>  {
         return res;
     }
 
-    public void SaveData(FamalyTree list, File file){
+    public void SaveData(FamalyTree<E> list, File file){
         FileHandler fileHandler = new FileHandler();
         fileHandler.Save(list, file);
     }
 
-    public void LoadDate(FamalyTree list, File file){
+    public void LoadDate(FamalyTree<E> list, File file){
         FileHandler fileHandler = new FileHandler();        
         fileHandler.LoadDate(list, file);
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(humanList);
     }
     
     public void sortByName(){
-        Collections.sort(humanList);
+        humanList.sort(new HumanComporatoByAge<>());
     }
 
     public void sortByAge(){
-        Collections.sort(humanList, new HumanComporatoByAge());
+        humanList.sort(new HumanComporatoByAge<>());
     }
 }

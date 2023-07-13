@@ -4,11 +4,11 @@ import java.util.Comparator;
 
 import homeWork.FamalyTree.FamalysTree.ItemTree;
 
-public class HumanComporatoByAge<T extends ItemTree<T>> implements Comparator<T>{
+public class HumanComporatoByName <T extends ItemTree<T>> implements Comparator<T>{
 
     @Override
     public int compare(T o1, T o2) {
-        return Integer.compare(o1.getAge(), o2.getAge());
+        return o1.getName().compareTo(o2.getName());
     }
     
 }

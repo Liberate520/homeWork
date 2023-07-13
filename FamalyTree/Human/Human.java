@@ -1,12 +1,14 @@
 package homeWork.FamalyTree.Human;
 
-import java.io.Serializable;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>{
+import homeWork.FamalyTree.FamalysTree.ItemTree;
+
+public class Human implements Comparable<Human>, ItemTree {
     private long id;
     private String name;
     private String last_name;
@@ -194,6 +196,30 @@ public class Human implements Serializable, Comparable<Human>{
     @Override
     public int compareTo(Human o) {
         return name.compareTo(o.name);
+    }
+
+    @Override
+    public LocalDate DOD() {
+        return DOD;
+    }
+
+    @Override
+    public LocalDate DOB() {
+        return DOB;
+    }
+
+    @Override
+    public long setId() {
+        return setId();
+    }
+
+    @Override
+    public boolean addChild(Object human) {
+        return addChild(human);
+    }
+    @Override
+    public boolean addParents(Object human) {
+        return addParents(human);
     }
 }
 
