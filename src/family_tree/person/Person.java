@@ -1,4 +1,6 @@
-package family_tree;
+package family_tree.person;
+
+import family_tree.gender.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +10,6 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class Person implements Serializable {
-    static Integer id = 0;
     private final Integer personId;
     private String name;
     private LocalDate birthday;
@@ -26,7 +27,8 @@ public class Person implements Serializable {
                   LocalDate dayOfDeath,
                   Gender gender,
                   Person mother,
-                  Person father) {
+                  Person father
+            , Integer id) {
         this.personId = id++;
         this.name = name;
         this.birthday = birthday;
@@ -49,44 +51,50 @@ public class Person implements Serializable {
                   Person partner,
                   Gender gender,
                   Person mother,
-                  Person father) {
-        this(name, partner, birthday, null, gender, mother, father);
+                  Person father,
+                  Integer id) {
+        this(name, partner, birthday, null, gender, mother, father, id);
     }
 
     public Person(String name,
                   LocalDate birthday,
                   Gender gender,
                   Person mother,
-                  Person father) {
-        this(name, null, birthday, null, gender, mother, father);
+                  Person father,
+                  Integer id) {
+        this(name, null, birthday, null, gender, mother, father, id);
     }
 
     public Person(String name,
                   LocalDate birthday,
-                  Gender gender) {
-        this(name, birthday, null, gender, null, null);
-    }
-
-    public Person(String name,
-                  Person partner,
-                  LocalDate birthday,
-                  Gender gender) {
-        this(name, partner, birthday, null, gender, null, null);
-    }
-
-    public Person(String name,
-                  LocalDate birthday,
-                  LocalDate dayOfDeath,
-                  Gender gender) {
-        this(name, null, birthday, dayOfDeath, gender, null, null);
+                  Gender gender,
+                  Integer id) {
+        this(name, birthday, null, gender, null, null, id);
     }
 
     public Person(String name,
                   Person partner,
                   LocalDate birthday,
+                  Gender gender,
+                  Integer id) {
+        this(name, partner, birthday, null, gender, null, null, id);
+    }
+
+    public Person(String name,
+                  LocalDate birthday,
                   LocalDate dayOfDeath,
-                  Gender gender) {
-        this(name, partner, birthday, dayOfDeath, gender, null, null);
+                  Gender gender,
+                  Integer id) {
+        this(name, null, birthday, dayOfDeath, gender, null, null, id);
+    }
+
+    public Person(String name,
+                  Person partner,
+                  LocalDate birthday,
+                  LocalDate dayOfDeath,
+                  Gender gender,
+                  Integer id) {
+        this(name, partner, birthday, dayOfDeath, gender, null, null, id);
     }
 
     public void addChild(Person person) {
@@ -291,7 +299,7 @@ public class Person implements Serializable {
         stringBuilder.append("Partner: ");
         stringBuilder.append(getPartnerInfo());
         stringBuilder.append("\n");
-        stringBuilder.append("family_tree.Gender: ");
+        stringBuilder.append("family_tree.gender.Gender: ");
         stringBuilder.append(gender.toString());
         stringBuilder.append("\n");
         stringBuilder.append("Birthday: ");

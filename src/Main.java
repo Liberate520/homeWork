@@ -1,51 +1,46 @@
-//В проекте с гениалогическим древом подумайте и используйте интерфейсы.
-//        Дополнить проект методами записи в файл и чтения из файла.
-//        Для этого создать отдельный класс и реализовать в нем нужные методы.
-//        Для данного класса сделайте интерфейс, который и используйте в своей программе.
-//        Пример работы с интерфейсом Serialazable можно найти в материалах к уроку.
-//        Поправить замечания к первому уроку
+//Продолжаем работать с проектом с семейным деревом.
+//        Реализовать интерфейс Iterable для дерева.
+//        Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения (не менее 2)
+//        Создать пакетную структуру для проекта
 
-import family_tree.FileHandler;
-import family_tree.Gender;
-import family_tree.Person;
-import family_tree.Tree;
-
+import family_tree.gender.Gender;
+import family_tree.service.Service;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Tree familyTree = new Tree();
+        Service service = new Service();
 
-        Person grandmotherF = new Person("FathersMom", LocalDate.of(1901, 01, 01), LocalDate.of(2000, 01, 01), Gender.Female);
-        Person grandmotherM = new Person("MothersMom", LocalDate.of(1900, 01, 01), LocalDate.of(1999, 01, 01), Gender.Female);
-        Person grandfatherM = new Person("MothersFather", LocalDate.of(1900, 01, 01), Gender.Male);
-        grandmotherM.setPartner(grandfatherM);
-        Person motherBrother = new Person("MotherBrother", LocalDate.of(1960, 01, 01), Gender.Male, grandmotherM, grandfatherM);
-        Person mother = new Person("Mother", LocalDate.of(1955, 01, 01), Gender.Female, grandmotherM, grandfatherM);
-        Person father = new Person("Father", LocalDate.of(1965, 01, 01), Gender.Male, grandmotherF, null);
-        mother.setPartner(father);
-        Person child1 = new Person("FirstChild", LocalDate.of(2000, 01, 01), Gender.Female, mother, father);
-        Person child2 = new Person("SecondChild", LocalDate.of(2001, 01, 01), Gender.Male, mother, father);
+        service.addPerson("FathersMom", LocalDate.of(1901, 1, 1), LocalDate.of(2000,
+                1, 1), Gender.Female);
+        service.addPerson("MothersMom", LocalDate.of(1900, 1, 1), LocalDate.of(1999,
+                1, 1), Gender.Female);
+        service.addPerson("MothersFather", LocalDate.of(1900, 1, 1), Gender.Male);
+        service.getPerson("MothersMom").setPartner(service.getPerson("MothersFather"));
+        service.addPerson("MotherBrother", LocalDate.of(1960, 1, 1), Gender.Male,
+                service.getPerson("grandmotherM"), service.getPerson("grandfatherM"));
+        service.addPerson("Mother", LocalDate.of(1955, 1, 1), Gender.Female,
+                service.getPerson("grandmotherM"), service.getPerson("grandfatherM"));
+        service.addPerson("Father", LocalDate.of(1965, 1, 1), Gender.Male,
+                service.getPerson("grandmotherF"), null);
+        service.getPerson("Mother").setPartner(service.getPerson("Father"));
+        service.addPerson("FirstChild", LocalDate.of(2000, 1, 1), Gender.Female,
+                service.getPerson("mother"), service.getPerson("father"));
+        service.addPerson("SecondChild", LocalDate.of(2001, 1, 1), Gender.Male,
+                service.getPerson("mother"), service.getPerson("father"));
 
-        familyTree.add(grandfatherM);
-        familyTree.add(grandmotherM);
-        familyTree.add(grandmotherF);
-        familyTree.add(motherBrother);
-        familyTree.add(mother);
-        familyTree.add(father);
-        familyTree.add(child1);
-        familyTree.add(child2);
+        service.reviseDependencies();
 
-        familyTree.reviseDependencies();
+        service.print();
+        service.sortByAge();
+        service.print();
+        service.sortByName();
+        service.print();
 
-        System.out.println(familyTree);
-
-        String path = "src/family_tree/familyTree.out";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(familyTree, path);
-        Tree familyTreeFromFile = (Tree) fileHandler.read(path);
-        System.out.println(familyTreeFromFile);
+        String path = "src/familyTree.out";
+        service.saveTreeInFile(path);
+        service.readTreeFromFile(path);
+        service.print();
 
     }
-
 }

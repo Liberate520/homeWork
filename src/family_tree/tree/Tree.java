@@ -1,17 +1,25 @@
-package family_tree;
+package family_tree.tree;
+
+import family_tree.gender.Gender;
+import family_tree.person.Person;
+import family_tree.person.comparators.PersonComparatorByAge;
+import family_tree.person.comparators.PersonComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable<Person> {
     private final ArrayList<Person> persons;
 
 
     public Tree(ArrayList<Person> persons) {
+
         this.persons = persons;
     }
 
     public Tree() {
+
         this.persons = new ArrayList<>();
     }
 
@@ -116,4 +124,36 @@ public class Tree implements Serializable {
         }
         return stringBuilder.toString();
     }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(persons);
+    }
+
+    public void sortByName() {
+        persons.sort(new PersonComparatorByName());
+    }
+
+    public void sortByAge() {
+        persons.sort(new PersonComparatorByAge());
+    }
+
+    public Person getPerson(Integer id){
+        for (int i = 0; i < persons.size(); i++){
+            if (persons.get(i).getId().equals(id)) {
+                return persons.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Person getPerson(String name){
+        for (int i = 0; i < persons.size(); i++){
+            if (persons.get(i).getName().equals(name)){
+                return persons.get(i);
+            }
+        }
+        return null;
+    }
+
 }
