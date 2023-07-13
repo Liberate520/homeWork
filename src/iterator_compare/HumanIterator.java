@@ -1,15 +1,14 @@
 package iterator_compare;
-
-import java.util.Iterator;
 import java.util.*;
-import human.*;
 
-public abstract class HumanIterator implements Iterator<Human> {
+import common.FTImpersonal;
+
+public class HumanIterator<E extends FTImpersonal<E>> implements Iterator<E> {
 	private int id;
-	private List<Human> humanList;
-	public HumanIterator(List<Human> humanList){
+	private List<E> humanList;
+	public HumanIterator(List<E> humanList){
 		this.humanList = humanList;}
 	public boolean hasNext(){return id < humanList.size();}
-	public Human next() {return humanList.get(id++);}
+	public E next() {return humanList.get(id++);}
 
 }

@@ -1,12 +1,14 @@
 package iterator_compare;
-import human.*;
+
+
+import common.FTImpersonal;
 
 import java.util.Comparator;
 
-public class HumanComparatorByName implements Comparator<Human> {
+public class HumanComparatorByName<E extends FTImpersonal<E>> implements Comparator<E> {
 
 	@Override
-	public int compare(Human o1, Human o2) {
-		return o1.getFullName().compareTo(o2.getFullName());
+	public int compare(E o1, E o2) {
+		return o2.getFullName().compareTo(o1.getFullName());
 	}
 }

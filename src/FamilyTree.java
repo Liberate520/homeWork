@@ -1,14 +1,13 @@
-import human.*;
+import common.FTImpersonal;
 import iterator_compare.*;
-import iterator_compare.Iterable;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable {
-    private List<Human> humanList;
+public class FamilyTree<E extends FTImpersonal<E>> implements Serializable {
+    private List<E> humanList;
 
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<E> humanList) {
         this.humanList = humanList;
     }
 
@@ -16,7 +15,7 @@ public class FamilyTree implements Serializable, Iterable {
         this(new ArrayList<>());
     }
 
-    public boolean add(Human human) {
+    public boolean add(E human) {
         if (human == null) {
             return false;
         }
@@ -31,20 +30,20 @@ public class FamilyTree implements Serializable, Iterable {
         return false;
     }
 
-    public void addToParents(Human human) {
-        for (Human parent : human.getParents()) {
+    public void addToParents(E human) {
+        for (E parent : human.getParents()) {
             parent.addChild(human);
         }
     }
 
-    public void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
+    public void addToChildren(E human) {
+        for (E child : human.getChildren()) {
             child.addParent(human);
         }
     }
 
-    public Human getByName(String fullName){
-        for (Human human : humanList){
+    public E getByName(String fullName){
+        for (E human : humanList){
             if(human.getFullName().equals(fullName)){
                 return human;
             }
@@ -57,7 +56,7 @@ public class FamilyTree implements Serializable, Iterable {
         build.append("In family tree: ");
         build.append(humanList.size());
         build.append(" people: \n");
-        for (Human human : humanList){
+        for (E human : humanList){
             build.append(human.getInfo());
             build.append("\n");
         }
@@ -69,7 +68,7 @@ public class FamilyTree implements Serializable, Iterable {
         return getInfo();
     }
 
-
+    public Iterator<E> iterator() {return new HumanIterator(humanList);}
     public void sortByName(){humanList.sort(new HumanComparatorByName());}
     public void sortByBirthDay(){humanList.sort(new HumanComparatorByBirthDay());}
 

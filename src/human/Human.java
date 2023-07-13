@@ -1,11 +1,13 @@
 package human;
 
+import common.FTImpersonal;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human<E extends FTImpersonal<E>> implements Serializable, FTImpersonal {
 	private int id;
 
 
@@ -54,6 +56,12 @@ public class Human implements Serializable {
 	public void addChild(Human child){ if (!children.contains(child)) children.add(child); }
 	public List<Human> getParents(){ return parents; }
 	public List<Human> getChildren(){ return children; }
+
+	@Override
+	public void sortByName() {
+
+	}
+
 	public Human getFather() {
 		for (Human parent : parents) {
 			if (parent.getGender() == Gender.Male)
@@ -69,6 +77,17 @@ public class Human implements Serializable {
 		}
 	return null;
 	}
+
+	@Override
+	public void addChild(Object human) {
+
+	}
+
+	@Override
+	public void addParent(Object human) {
+
+	}
+
 	public String getInfo (){
 		StringBuilder builder = new StringBuilder();
 		builder.append("Name: ");
@@ -84,6 +103,12 @@ public class Human implements Serializable {
 		builder.append(getChildrenInfo());
 		return builder.toString();
 	}
+
+	@Override
+	public Object getByName() {
+		return null;
+	}
+
 	public String getFatherInfo(){
 		String dad;
 		Human human = getFather();
