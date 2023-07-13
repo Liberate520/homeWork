@@ -1,23 +1,18 @@
 package family_tree.view;
-import family_tree.model.infrastucture.try_catch.Date_using;
 import family_tree.presenter.Presenter;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 public class ConsoleUI implements View {
 
-    private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
-//    private MainMenu menu;
-    private Date_using du = new Date_using();
+
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
-//        menu = new MainMenu(this);
     }
 
     @Override
@@ -25,31 +20,16 @@ public class ConsoleUI implements View {
         System.out.println(text);
     }
 
-    @Override
     public void start() {
-//        hello();
-        while (work){
-//            printMenu();
-//            execute();
+        System.out.println("СЕМЕЙНОЕ ДРЕВО.");
         }
-    }
-
     public void finish() {
-        System.out.println("Приятно было пообщаться");
-        work = false;
-    }
-
-    public void sortByAge() {
-//        presenter.sortByAge();
+        System.out.println("СЕМЕЙНОЕ ДРЕВО. Программа закрыта.");
     }
 
 
-    public void sortByName() {
-//        presenter.sortByName();
-    }
-
-    public void getFamilyTreeInfo() {
-//        presenter.getFamilyTreeInfo();
+    public void getFamilyTreeInfo(String sort_by) {
+        presenter.getFamilyTreeInfo(sort_by);
     }
 
     public void add_human(){
@@ -67,5 +47,42 @@ public class ConsoleUI implements View {
         presenter.add_human(surname, first_name, patronymic, gender, day_birth);
     }
 
+    public void load_file() {
+        System.out.print("Загрузка данных из файла. Текущий список будет удален.\n" +
+                "Для подтверждения введите \"Yes\": ");
+        String str2 = scanner.nextLine();
+        if (str2.equalsIgnoreCase("Yes")){
+            System.out.println("Загружено семейное древо:");
+            presenter.setFamily_tree();
+            getFamilyTreeInfo("1");
+        } else {
+            System.out.println("Действие отменено.");
+        }
+    }
 
+    public void clearFamilyTree() {
+        System.out.print("Семейное древо будет очищено.\n" +
+                "Для подтверждения введите \"Yes\": ");
+        String str2 = scanner.nextLine();
+        if (str2.equalsIgnoreCase("Yes")){
+            presenter.clearFamilyTree();
+            System.out.println("Семейное древо успешно очищено");
+        } else {
+            System.out.println("Действие отменено.");
+        }
+    }
+
+    public void saveFamilyTree() {
+        System.out.println("Сохранение в файл.\nЗагружаю ");
+        getFamilyTreeInfo("1");
+        if (presenter.saveFamily_tree()){
+            System.out.println("Семейное древо успешно сохранено в файл.");
+        } else {
+            System.out.println("Что-то пошло не так.");
+        }
+    }
+
+    public void set_relatives(String str) {
+        presenter.set_relatives(str);
+    }
 }

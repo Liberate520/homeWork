@@ -6,7 +6,7 @@ import family_tree.tree.tree_service.Tree_service;
 import java.util.Scanner;
 
 public class Menu_1 implements My_Scanner {
-    Tree_service ts = new Tree_service();
+    Tree_service tree_service = new Tree_service();
 
     Scanner sc = My_Scanner.sc;
     private void printMenu() {
@@ -20,20 +20,11 @@ public class Menu_1 implements My_Scanner {
                 """);
     }
 
-    public FamilyTree menu_1(FamilyTree family_tree) {
+    public String menu_1() {
         String str;
         printMenu();
         System.out.print("Введите соответствующую цифру меню: ");
         str = sc.nextLine();
-        if (str.equals("1")) {
-            family_tree = ts.sortById(family_tree);
-        }
-        if (str.equals("2")) {
-            family_tree = ts.sortByName(family_tree);
-        }
-        if (str.equals("3")) {
-            family_tree = ts.sortByAge(family_tree);
-        }
-        return family_tree;
+        return str;
     }
 }

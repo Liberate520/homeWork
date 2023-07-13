@@ -10,12 +10,15 @@ import java.util.Scanner;
 
 
 public class Menu implements My_Scanner {
-    File_using file_using = new File_using();
-    Menu_3 menu_3 = new Menu_3();
-    Menu_1 menu_1 = new Menu_1();
-    Reg_office ro = new Reg_office();
-    Tree_service ts = new Tree_service();
-    ConsoleUI consoleUI = new ConsoleUI();
+    Menu_3 menu_3;
+    Menu_1 menu_1;
+    ConsoleUI consoleUI;
+
+    public Menu() {
+        menu_3 = new Menu_3();
+        menu_1 = new Menu_1();
+        consoleUI = new ConsoleUI();
+    }
 
     private void printMenu() {
         System.out.println("""
@@ -33,42 +36,29 @@ public class Menu implements My_Scanner {
     }
     public void startMenu() {
         String str = "";
-//        Reg_office ro = new Reg_office();
-//        Tree_service ts = new Tree_service();
         while (!str.equals("0")) {
             printMenu();
             System.out.print("Введите соответствующую цифру меню: ");
             str = sc.nextLine();
             if (str.equals("1")){
-                ro.family_tree = menu_1.menu_1(ro.family_tree);
-                System.out.println(ro.family_tree);
+                 String sort_by = menu_1.menu_1();
+                 consoleUI.getFamilyTreeInfo(sort_by);
             }
             if (str.equals("2")){
                 consoleUI.add_human();
             }
             if (str.equals("3")){
-                ro.family_tree = menu_3.menu_3(ro.family_tree);
-                System.out.println("Test 3 " + ro.family_tree);
+                consoleUI.set_relatives(menu_3.menu_3());
             }
             if (str.equals("7")){
-                if (ts.clearFamilyTree()) {
-                    ro.family_tree.clearHumanList();
-                }
+                consoleUI.clearFamilyTree();
             }
             if (str.equals("8")){
-                System.out.println("Загрузка данных из файла. Текущий список будет удален.");
-                ro.setFamily_tree((FamilyTree) file_using.load(Config.filePath));
-                System.out.println("Загружено семейное древо:");
-                System.out.println(ro.family_tree);
+                consoleUI.load_file();
             }
             if (str.equals("9")){
-                System.out.println("Сохранение в файл.");
-                System.out.println("Загружаю " + ro.family_tree);
-                if (file_using.save(ro.family_tree, Config.filePath)){
-                    System.out.println("Семейное древо успешно сохранено в файл.");
-                } else {
-                    System.out.println("Что-то пошло не так.");
-                }
+                consoleUI.saveFamilyTree();
+
             }
         }
     }

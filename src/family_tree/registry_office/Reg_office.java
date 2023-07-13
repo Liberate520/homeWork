@@ -18,12 +18,14 @@ public class Reg_office implements My_Serialization, My_Scanner {
     public FamilyTree family_tree;
 
     public Reg_office() {
-        family_tree =new FamilyTree();
+        family_tree = new FamilyTree();
     }
+
 
     public Human add_human(String surname, String first_name, String patronymic, Gender gender, LocalDate day_birth){
         Human human = new Human(surname, first_name, patronymic, gender, day_birth);
-        family_tree.addToHumanList(human);
+        System.out.println(family_tree);
+        this.family_tree.addToHumanList(human);
         return human;
     }
     public Gender tryGender(String string) {
