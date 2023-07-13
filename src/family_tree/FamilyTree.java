@@ -15,11 +15,9 @@ public class FamilyTree<T extends ItemAgedNamedId> implements Serializable {
         listItems = new GroupAgedNamed<>();
         marriages = new Group<>();
     }
-    //разрешаем вызвать метод только в ServiceFamilyTree
     public void add(T t){
         listItems.add(t);
     }
-    //разрешаем вызвать метод только в ServiceFamilyTree
     public void addMarriage(Marriage m){
         marriages.add(m);
     }
