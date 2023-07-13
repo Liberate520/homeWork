@@ -1,11 +1,13 @@
 package family_tree.human;
 
+import family_tree.family_tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem<Human> {
     private String name;
     private Sex sex;
     private LocalDate birthDate;
@@ -14,8 +16,6 @@ public class Human implements Serializable {
     private List<Human> children;
 
     public Human(String name, Sex sex, LocalDate birthDate, LocalDate deathDate, List<Human> parents) {
-        this.parents = new ArrayList<>();
-
         this.name = name;
         this.sex = sex;
         this.birthDate = birthDate;
@@ -23,15 +23,19 @@ public class Human implements Serializable {
         this.parents = parents;
         children = new ArrayList<>();
     }
+
     public Human(String name, Sex sex, LocalDate birthDate) {
-        this(name, sex, birthDate, null,new ArrayList<>());
+        this(name, sex, birthDate, null, new ArrayList<>());
     }
+
     public Human(String name, Sex sex, LocalDate birthDate, List<Human> parents) {
         this(name, sex, birthDate, null, parents);
     }
+
     public void addChild(Human child) {
         children.add(child);
     }
+
     public void addParent(Human parent) {
         parents.add(parent);
     }
@@ -58,7 +62,7 @@ public class Human implements Serializable {
     public String getParentsInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("родители: ");
-        if (!parents.isEmpty()) {
+        if (parents != null && !parents.isEmpty()) {
             sb.append(parents.get(0).getName());
             for (int i = 1; i < parents.size(); i++) {
                 sb.append(", ").append(parents.get(i).getName());
@@ -72,7 +76,7 @@ public class Human implements Serializable {
     public String getChildrenInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("дети: ");
-        if (!children.isEmpty()) {
+        if (children != null && !children.isEmpty()) {
             sb.append(children.get(0).getName());
             for (int i = 1; i < children.size(); i++) {
                 sb.append(", ").append(children.get(i).getName());
@@ -83,8 +87,6 @@ public class Human implements Serializable {
         return sb.toString();
     }
 
-
-    ////////////////////Getter////////////////
     public String getName() {
         return name;
     }
@@ -108,6 +110,4 @@ public class Human implements Serializable {
     public List<Human> getChildren() {
         return children;
     }
-    ////////////////////////////////////////////
-
 }
