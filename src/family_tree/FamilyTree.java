@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FamilyTree<T extends ItemAgedNamedId> implements Serializable {
     private GroupAgedNamed<T> listItems;
-    private Group<Marriage> marriages;
+    private Group<Marriage> marriages;    //only for Human!
     public FamilyTree(){
         listItems = new GroupAgedNamed<>();
         marriages = new Group<>();
