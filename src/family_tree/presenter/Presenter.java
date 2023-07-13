@@ -1,11 +1,7 @@
 package family_tree.presenter;
 
 import family_tree.model.Service;
-import family_tree.model.infrastucture.Config;
-import family_tree.tree.FamilyTree;
 import family_tree.view.View;
-
-import java.time.LocalDate;
 
 public class Presenter {
     private View view;

@@ -1,14 +1,12 @@
-package family_tree.registry_office;
-import family_tree.human.Gender;
-import family_tree.human.Human;
+package family_tree.model.registry_office;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
 import family_tree.model.infrastucture.My_Scanner;
 import family_tree.model.infrastucture.de_serelization.My_Serialization;
-import family_tree.model.infrastucture.try_catch.Date_using;
-import family_tree.tree.FamilyTree;
+import family_tree.model.tree.FamilyTree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 
 public class Reg_office implements My_Serialization, My_Scanner {

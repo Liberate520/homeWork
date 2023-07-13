@@ -1,5 +1,5 @@
-package family_tree.tree.tree_service;
-import family_tree.tree.FamilyTree;
+package family_tree.model.tree.tree_service;
+import family_tree.model.tree.FamilyTree;
 
 public class Tree_service {
 

@@ -21,6 +21,7 @@ public class File_using implements My_Serialization{
             return ois.readObject();
         } catch (Exception e){
             e.printStackTrace();
+            System.out.println("TEST TEST");
             return false;
         }
     }

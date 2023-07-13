@@ -1,14 +1,14 @@
 package family_tree.model;
 
-import family_tree.human.Gender;
-import family_tree.human.Human;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
 import family_tree.model.infrastucture.Config;
 import family_tree.model.infrastucture.de_serelization.File_using;
 import family_tree.model.infrastucture.try_catch.Date_using;
-import family_tree.registry_office.Reg_office;
-import family_tree.registry_office.relation.Relatives_finder;
-import family_tree.tree.FamilyTree;
-import family_tree.tree.tree_service.Tree_service;
+import family_tree.model.registry_office.Reg_office;
+import family_tree.model.registry_office.relation.Relatives_finder;
+import family_tree.model.tree.FamilyTree;
+import family_tree.model.tree.tree_service.Tree_service;
 
 
 import java.time.LocalDate;
