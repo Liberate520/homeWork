@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable, Iterable <Person> {
+public class Tree <Being extends Person>implements Serializable, Iterable <Being> {
 
-    private List<Person> treeList;
+    private List<Being> treeList;
 
     public Tree() {this(new ArrayList<>()); }
 
-    public Tree(List<Person> treeList)  {this.treeList=treeList;}
+    public Tree(List<Being> treeList)  {this.treeList=treeList;}
 
-    public boolean addPerson (Person person){
+    public boolean addPerson (Being person){
         if (person == null) { return false;}
         if (!treeList.contains(person)){
             treeList.add (person);
@@ -29,15 +29,16 @@ public class Tree implements Serializable, Iterable <Person> {
         return false;
 
     }
-    private void addToParents(Person person){
+    private void addToParents(Being person){
         if (person.getMother()!= null){
             person.getMother().addChild(person);}
         if (person.getFather()!= null){
             person.getFather().addChild(person);}
 
     }
-    private void addToChild(Person person){
-        for (Person child :person.getChildren()){
+
+    private void addToChild (Being person){
+        for (Person  child :person.getChildren()){
 
             child.addParent(person);}
     }
@@ -46,14 +47,14 @@ public class Tree implements Serializable, Iterable <Person> {
         sb.append("В дереве ");
         sb.append(treeList.size());
         sb.append(" объектов: \n");
-        for (Person person : treeList){
+        for (Being person : treeList){
             sb.append(person);
             sb.append("\n");
         }
     return sb.toString();
     }
-    public  Person getByName (String name){
-        for (Person person: treeList){
+    public  Being getByName (String name){
+        for (Being person: treeList){
             if (person.getName().equals(name)){return person;}
 
         }
@@ -71,7 +72,8 @@ public class Tree implements Serializable, Iterable <Person> {
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Being> iterator() {
         return new PersonIterator(treeList);
     }
+
 }

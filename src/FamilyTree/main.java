@@ -1,6 +1,7 @@
 package FamilyTree;
 
 import FamilyTree.File.FileHandler;
+import FamilyTree.tree.Dog;
 import FamilyTree.tree.Person;
 import FamilyTree.tree.Tree;
 
@@ -41,9 +42,16 @@ public class main {
         tree.sortName();
         System.out.println(tree.getInfo());
 
-        for (Person person: tree){
-            System.out.println (person.getName());
-        }
+        for (Object person: tree) System.out.println(((Person)(person)).getName());
+
+
+        Tree dogtree = new Tree ();
+
+        dogtree.addPerson (new Dog("Шарик", Male, LocalDate.of(1975,07,10 ), 15));
+        System.out.println(dogtree.getInfo());
+
+
+
 
 
 

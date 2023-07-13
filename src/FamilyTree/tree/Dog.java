@@ -8,28 +8,27 @@ import java.util.List;
 import static FamilyTree.tree.Sex.Female;
 import static FamilyTree.tree.Sex.Male;
 
-public class Person implements Serializable {
+public class Dog extends Person implements Serializable {
     private String name;
-        private Sex sex;
-        private LocalDate birthday;
-        private LocalDate deathday;
-        private List<Person>children;
-        private List<Person> parents;
-        private List<Person> spouses;
+    private Sex sex;
 
-    public Person(String name, Sex sex, LocalDate birthday) {
+    private Integer medals;
+    private LocalDate birthday;
+    private LocalDate deathday;
+    private List<Person>children;
+    private List<Person> parents;
+    private List<Person> spouses;
+
+    public Dog (String name, Sex sex, LocalDate birthday,Integer medals) {
         this.name = name;
         this.sex = sex;
         this.birthday = birthday;
+        this.medals = medals;
         deathday = null;
         children = new ArrayList<>();
         parents = new ArrayList<>();
         spouses =new ArrayList<>();
     }
-
-    public Person() {
-    }
-
     public boolean addChild (Person child){
         if (!children.contains(child)){
             children.add (child);
@@ -80,7 +79,7 @@ public class Person implements Serializable {
                 return father;
             }
         }
-    return  null;
+        return  null;
     }
     public Person getMother() {
         for (Person mother : parents) {
@@ -107,6 +106,7 @@ public class Person implements Serializable {
                 ", sex=" + sex +
                 ", birthday=" + birthday +
                 ", deathday=" + deathday +
+                ", medals =" + medals +
                 '}';
     }
     public String getChildrenInfo(){
@@ -117,15 +117,15 @@ public class Person implements Serializable {
         if (children.size()!=0 ){
             sb.append(children.get(0).getName());
 
-                for (int i = 1; i < children.size(); i++) {
-                    sb.append(", ");
-                    sb.append(children.get(i).getName());
+            for (int i = 1; i < children.size(); i++) {
+                sb.append(", ");
+                sb.append(children.get(i).getName());
 
             }
             return sb.toString();
         }
         sb.append ("не известны");
-    return sb.toString();
+        return sb.toString();
     }
     public String getParentsnfo(){
         StringBuilder sb = new StringBuilder();
