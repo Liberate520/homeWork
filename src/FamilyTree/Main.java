@@ -5,7 +5,6 @@ import FamilyTree.Human.Human;
 import FamilyTree.Human.other.Gender;
 import FamilyTree.Human.other.MotFath;
 import FamilyTree.Tree.FamilyTree;
-import FamilyTree.service.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +13,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree(1);
-        service service = new service();
+        FamilyTree.service.Service service = new FamilyTree.service.Service();
         List<String> children = new ArrayList<>(Arrays.asList("Аня Бебр, Жора Бебр"));
         familyTree.addHuman(new Human(0, Gender.Female, 25, "Таня", "Бебр", MotFath.Mother, children));
         familyTree.addHuman(new Human(1, Gender.Female, 15, "Аня", "Бебр", MotFath.Child, children));

@@ -1,12 +1,13 @@
 package FamilyTree.Human;
 
+import FamilyTree.Human.comparators.GetGroup;
 import FamilyTree.Human.other.Gender;
 import FamilyTree.Human.interfacee.Create;
 import FamilyTree.Human.other.MotFath;
 
 import java.util.List;
 
-public class Human implements Create {
+public class Human implements Create, GetGroup {
     private int id;
     private Gender gender;
     private int age;
@@ -26,10 +27,12 @@ public class Human implements Create {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getAge() {
         return age;
     }
