@@ -4,7 +4,7 @@ package familytree.Tree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Person implements Serializable{
+public class Person implements Serializable, GetByOn{
     private String name;
     private String surname;
     private String dateOfBirth;
@@ -75,6 +75,21 @@ public class Person implements Serializable{
         return surname;
     }
 
+    @Override
+    public <E> void addChild(E child) {
+    //addChild(child);
+    }
+
+    @Override
+    public <E> void addPartner(E partner) {
+    //addPartner(partner);
+    }
+
+    @Override
+    public <E> void addParent(E parent) {
+    //addParent(parent);
+    }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
@@ -131,7 +146,7 @@ public class Person implements Serializable{
 /**
  *Добавление родителей
  */
-    public void addParent(Person parent){
+    public <E> void addParent(Person parent){
         parents.add(parent);
     }
 
@@ -147,7 +162,7 @@ public class Person implements Serializable{
      * Изменение Родственников
      * @param partner
      */
-    public void addPartner(Person partner){
+    public <E> void addPartner(Person partner){
         /*this.partner = partner;
         partner.partner =this;*/
         partners.add(partner);
@@ -156,7 +171,7 @@ public class Person implements Serializable{
     public void removePartner(Person partner){
         partners.remove(partner);
     }
-    public void addChild(Person child){
+    public <E> void addChild(Person child){
         children.add(child);
     }
     public void removeChild(Person child){

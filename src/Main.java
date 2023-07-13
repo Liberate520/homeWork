@@ -24,7 +24,7 @@ public class Main{
         Person soniy = new Person("Соня", "Шварц", "2022-08-10", "", "Женский","");
 
         // ==== Создаем объект генеалогического древа
-        Familytree<Person> familytree = new Familytree<>(petr);
+        Familytree familytree = new Familytree(petr);
         Familytree familytree1 = new Familytree(tony);
         //===== Заполняем древо
         familytree.addPerson(anna,petr,ira);//Их дети

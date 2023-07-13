@@ -11,5 +11,5 @@ public interface GetByOn {
     <E> void addPartner(E partner);
     <E> void addParent(E parent);
 
-    Person[] getChildren();
+    <E> List<Person> getChildren();
 }
