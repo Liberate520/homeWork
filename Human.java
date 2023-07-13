@@ -1,19 +1,22 @@
 package homeWork;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private Gender gender;
-    private Human age;
+    private int age;
     private LocalDate birthdate;
     private LocalDate deathdate;
     private List<Human> parents;
     private List<Human> children;
 
-    public Human(String name, Gender gender, LocalDate birthdate, LocalDate deathdate, Human father, Human mother,List<Human> children) {
+    public Human(String name, Gender gender, LocalDate birthdate, LocalDate deathdate, Human father, Human mother,
+            List<Human> children) {
         this.name = name;
         this.birthdate = birthdate;
         this.deathdate = deathdate;
@@ -26,22 +29,32 @@ public class Human {
             children = new ArrayList<>();
         }
     }
-    //  public Human(String name, Gender gender, LocalDate birthdate) {
-    //     this.name = name;
-    //     this.birthdate = birthdate;
-    //     this.deathdate = deathdate;
-    //     this.gender = gender;
-    //     this.parents = new ArrayList<>();
-    //     this.children = new ArrayList<>();
-    //  }
-    public Human( String name, Gender gender, LocalDate birthDate) {
-         this( name, gender, birthDate, null, null, null, null);
-     }
-    public Human(String name, Gender gender, LocalDate birthdate,Human age){
-       this.name = name; 
-       this.birthdate = birthdate;
-       this.gender = gender;
-       this.age = age;
+
+    // public Human(String name, Gender gender, LocalDate birthdate) {
+    // this.name = name;
+    // this.birthdate = birthdate;
+    // this.deathdate = deathdate;
+    // this.gender = gender;
+    // this.parents = new ArrayList<>();
+    // this.children = new ArrayList<>();
+    // }
+    // public Human( String name, Gender gender, LocalDate birthDate) {
+    // this( name, gender, birthDate, null, null, null, null);
+    // }
+    public Human(String name, Gender gender, LocalDate birthdate, int age) {
+        this.name = name;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.age = getAge();
+    }
+
+    public Human(String name, Gender gender, LocalDate birthdate, int age, List<Human> parents, List<Human> children) {
+        this.name = name;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.age = getAge();
+        this.parents = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
     public boolean addChild(Human child) {
@@ -104,12 +117,17 @@ public class Human {
         sb.append(getGender());
         sb.append(", возраст: ");
         sb.append(getAge());
-        sb.append(getMotherInfo());
-        sb.append(", ");
-        sb.append(getFatherInfo());
-        sb.append(", ");
-        sb.append(getChildrenInfo());
+        // sb.append(getMotherInfo());
+        // sb.append(", ");
+        // sb.append(getFatherInfo());
+        // sb.append(", ");
+        // sb.append(getChildrenInfo());
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getInfo();
     }
 
     public String getMotherInfo() {
@@ -162,16 +180,18 @@ public class Human {
         }
         return result;
     }
-      public int getAge() {
-         int age = 0;
-         if (deathdate != null) {
-             age = Period.between(birthdate, deathdate).getYears();
-         } else {
-             age = Period.between(birthdate, LocalDate.now()).getYears();
-         }
-         return age;
-     }
-    public List<Human> getParents(){
+
+    public int getAge() {
+        int age = 0;
+        if (deathdate != null) {
+            age = Period.between(birthdate, deathdate).getYears();
+        } else {
+            age = Period.between(birthdate, LocalDate.now()).getYears();
+        }
+        return age;
+    }
+
+    public List<Human> getParents() {
         return parents;
     }
 }
