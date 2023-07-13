@@ -1,10 +1,10 @@
-package family_tree.humans.comparators;
+package family_tree.model.humans.comparators;
 
 import java.util.Comparator;
 
-import family_tree.human_family.HumanItem;
+import family_tree.model.human_family.HumanItem;
 
-public class HumanComparatorByYear<T extends HumanItem> implements Comparator<T> {
+public class HumanComparatorByYear<T extends HumanItem<T>> implements Comparator<T> {
 
     @Override
     public int compare(T o1, T o2) {

@@ -1,13 +1,13 @@
-package family_tree.human_family;
+package family_tree.model.human_family;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import family_tree.model.humans.comparators.HumanComparatorByName;
+import family_tree.model.humans.comparators.HumanComparatorByYear;
 
-import family_tree.humans.comparators.HumanComparatorByName;
-import family_tree.humans.comparators.HumanComparatorByYear;
-
-public class FamilyTree<T extends HumanItem> implements IFamilyTree<T> {
+public class FamilyTree<T extends HumanItem> implements IFamilyTree<T>, Iterable<T> {
     private List<T> humans;
 
     public FamilyTree() {
@@ -64,5 +64,9 @@ public class FamilyTree<T extends HumanItem> implements IFamilyTree<T> {
         humans.sort(new HumanComparatorByYear<>());
     }
 
-    
+    @Override
+    public Iterator<T> iterator() {
+        return new HumanIterator<>(humans);
+    }
+
 }

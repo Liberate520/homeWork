@@ -1,4 +1,4 @@
-package family_tree.human_family;
+package family_tree.model.human_family;
 
 import java.util.Iterator;
 import java.util.List;

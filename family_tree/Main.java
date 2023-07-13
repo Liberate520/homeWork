@@ -3,12 +3,11 @@ package family_tree;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.FileHandler;
 
-import family_tree.file_handler.IFileHandler;
-import family_tree.human_family.FamilyTree;
-import family_tree.humans.Gender;
-import family_tree.humans.Human;
+import family_tree.model.file_handler.FileHandler;
+import family_tree.model.human_family.FamilyTree;
+import family_tree.model.humans.Gender;
+import family_tree.model.humans.Human;
 
 public class Main {
 
@@ -47,16 +46,10 @@ public class Main {
         familyTree.addHuman(kate);
         familyTree.addHuman(yuriy);
 
+        FileHandler.saveToFile(familyTree, "family_tree\\people.txt");
+        FamilyTree loadedTree = FileHandler.loadFromFile("family_tree\\people.txt");
         
-
-        IFileHandler fileHandler = (IFileHandler) new FileHandler();
-        fileHandler.writeToFile(allHumans, "family_tree\\people.txt");
-
-        List<Human> readPeople = fileHandler.readFromFile("family_tree\\people.txt");
-        for (Human person : readPeople) {
-            System.out.println(person.getName());
-        }
-
+        
         List<Human> allHumans = familyTree.getAllHumans();
         for (Human human : allHumans) {
             System.out.println(human);
