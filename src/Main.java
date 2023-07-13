@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        //с
+        //!!!сервис не может создавать объекты Human для ServiceFamilyTree<Human>
         int idHuman=0;
         ServiceFamilyTree<Human> service = new ServiceFamilyTree<>();
 
