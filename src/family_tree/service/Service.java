@@ -8,14 +8,14 @@ import java.time.LocalDate;
 
 public class Service {
     private long id;
-    private FamilyTree familyTree;
+    private FamilyTree<Human> familyTree;
     public void addHuman(String firstName, String lastName, LocalDate birthDate, family_tree.human.Gender sex) {
 
         Human human = new Human(firstName, lastName, birthDate, sex);
         familyTree.addHuman(human);
     }
     public Service() {
-        familyTree = new FamilyTree();
+        familyTree = new FamilyTree<>();
     }
     public String getStudentInfo() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -45,5 +45,8 @@ public class Service {
     }
     public void sortByDataBirth() {
         familyTree.sortByDataBirth();
+    }
+    public void sortByAgeByFirstName() {
+        familyTree.sortByAgeByFirstName();
     }
 }

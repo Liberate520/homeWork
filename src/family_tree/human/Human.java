@@ -1,11 +1,13 @@
 package family_tree.human;
 
+import family_tree.family_tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.Period;
 import java.util.*;
 import java.time.LocalDate;
 
-public class Human implements Serializable {
+public class Human implements FamilyTreeItem<Human> {
     private long id;
     private String firstName, lastName, middleName;
     private LocalDate dateOfBirth;
@@ -44,13 +46,7 @@ public class Human implements Serializable {
 
     public Human() {
         this("", "", "", LocalDate.of(2100,12,10), null, null, null, Gender.male);
-//        this.firstName = "";
-//        this.lastName = "";
-//        this.middleName = "";
-//        this.dateOfBirth = new GregorianCalendar(2100,0,1);
-//        this.sex = family_tree.human.Gender.male;
 
-  //      this.children = new ArrayList<family_tree.human.Human>();
     }
     public void setChildren(ArrayList<Human> child) {
         for (Human human : child) {
@@ -243,11 +239,6 @@ public class Human implements Serializable {
                 '}';
     }
 
-
-//    @Override
-//    public String toString() {
-//        return getInfo();
-//    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
