@@ -40,7 +40,7 @@ public class Main {
         //в) заключаем новый брак
         Marriage m2 = service.addMarriage(LocalDate.of(2016, 1, 1), masha, anton);
 
-        service.sortHumansByAge();
+        service.sortItemsByAge();
 
         System.out.println(String.format("tree info: \n%s", service.getInfoAll()));
 

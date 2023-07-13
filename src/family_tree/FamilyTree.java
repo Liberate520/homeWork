@@ -33,7 +33,7 @@ public class FamilyTree<T extends ItemAgedNamedId> implements Serializable {
                 return m;
         return null;
     }
-    public String getHumansInfo(){
+    public String getItemsInfo(){
         return listItems.getInfo();
     }
     public String getMarriagesInfo(){
@@ -43,16 +43,16 @@ public class FamilyTree<T extends ItemAgedNamedId> implements Serializable {
         return String.join("\n", strings);
     }
     public String getInfoAll(){
-        return "{ humans: \n"
-                + getHumansInfo()
+        return "{ items: \n"
+                + getItemsInfo()
                 + ",\nmarriages: \n"
                 + getMarriagesInfo()
                 + "\n}";
     }
-    public void sortHumansByName(){
+    public void sortItemsByName(){
         listItems.sortByName();
     }
-    public void sortHumansByAge(){
+    public void sortItemsByAge(){
         listItems.sortByAge();
     }
     @Override

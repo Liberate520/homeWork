@@ -33,9 +33,9 @@ public class ServiceFamilyTree<T extends ItemAgedNamedId> {
         return m;
     }
     // добавляем связь родитель - потомок
-    public boolean addChild(Human parent, Human child){
-        return parent.addChild(child);
-    }
+//    public boolean addChild(Human parent, Human child){
+//        return parent.addChild(child);
+//    }
 //    public boolean addChild(int idParent, int idChild){
 //        T parent = getItemById(idParent);
 //        if(parent==null) return false;
@@ -61,17 +61,17 @@ public class ServiceFamilyTree<T extends ItemAgedNamedId> {
     }
 
     public String getHumansInfo(){
-        return tree.getHumansInfo();
+        return tree.getItemsInfo();
     }
     public String getMarriagesInfo(){
         return tree.getMarriagesInfo();
     }
 
-    public void sortHumansByName(){
-        tree.sortHumansByName();
+    public void sortItemsByName(){
+        tree.sortItemsByName();
     }
-    public void sortHumansByAge(){
-        tree.sortHumansByAge();
+    public void sortItemsByAge(){
+        tree.sortItemsByAge();
     }
 
     public String getInfoAll(){
