@@ -32,7 +32,11 @@ public class Service {
         System.out.println(tree);
     }
 
-    public void connection(int parentID, int childID){
-        ((Human)tree.getHumanByID(childID)).childFor((Human)tree.getHumanByID(parentID));
+    public boolean connection(int parentID, int childID){
+        Human child = (Human)tree.getHumanByID(childID);
+        Human parent = (Human)tree.getHumanByID(parentID);
+        if (child == null || parent == null) return false;
+        child.childFor(parent);
+        return true;
     }
 }

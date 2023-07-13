@@ -31,7 +31,7 @@ public class Presenter {
     public void showAllTree() {
         service.showAllTree();
     }
-    public void connection(int parentID, int childID) {
-        service.connection(parentID, childID);
+    public boolean connection(int parentID, int childID) {
+        return service.connection(parentID, childID);
     }
 }

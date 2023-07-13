@@ -12,9 +12,6 @@ import java.time.LocalDate;
 public class Test {
     public static void main(String[] args) {
         ConsoleUI consoleUI = new ConsoleUI();
-        consoleUI.addHuman();
-        consoleUI.addHuman();
-        consoleUI.addConnection();
-        consoleUI.showAllTree();
+        consoleUI.start();
     }
 }
