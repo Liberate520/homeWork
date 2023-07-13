@@ -3,9 +3,9 @@ package homeWork_OOP_family_tree;
 import java.time.LocalDate;
 import java.util.List;
 
+import homeWork_OOP_family_tree.comparatorAndIterator.Human;
+import homeWork_OOP_family_tree.comparatorAndIterator.Node;
 import homeWork_OOP_family_tree.infoHuman.FamilywTree;
-import homeWork_OOP_family_tree.infoHuman.Human;
-import homeWork_OOP_family_tree.infoHuman.Node;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Main {
 
         mashaN.addChild(goshaN, antonN);
 
-        FamilywTree fam1 = new FamilywTree();
+        FamilywTree<Node> fam1 = new FamilywTree();
         fam1.add(mashaN);
         fam1.add(goshaN);
         fam1.add(antonN);

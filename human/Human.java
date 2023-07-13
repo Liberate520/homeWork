@@ -1,4 +1,4 @@
-package homeWork_OOP_family_tree.infoHuman;
+package homeWork_OOP_family_tree.comparatorAndIterator;
 
 import java.io.Serializable;
 import java.time.LocalDate;

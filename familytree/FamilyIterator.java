@@ -1,15 +1,15 @@
-package homeWork_OOP_family_tree.comparatorAndIterator;
+package homeWork_OOP_family_tree.infoHuman;
 
 import java.util.Iterator;
 import java.util.List;
 
-import homeWork_OOP_family_tree.infoHuman.Node;
+import homeWork_OOP_family_tree.comparatorAndIterator.Node;
 
-public class FamilyIterator implements Iterable<Node>, Iterator<Node>{
+public class FamilyIterator<E extends Node> implements Iterable<E>, Iterator<E>{
        int index;
-    List<Node> familyHuman;
+    List<E> familyHuman;
 
-    public FamilyIterator(List<Node> familyHuman) {
+    public FamilyIterator(List<E> familyHuman) {
         this.familyHuman = familyHuman;
     }
 
@@ -19,13 +19,13 @@ public class FamilyIterator implements Iterable<Node>, Iterator<Node>{
     }
 
 
-    public Node next() {
+    public E next() {
         return familyHuman.get(index++);
     }
 
 
     @Override
-    public Iterator<Node> iterator() {
+    public Iterator<E> iterator() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }

@@ -6,16 +6,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import homeWork_OOP_family_tree.comparatorAndIterator.FamilyIterator;
+import homeWork_OOP_family_tree.comparatorAndIterator.Node;
 import homeWork_OOP_family_tree.comparatorAndIterator.NodeComparatorByAge;
 
 import java.util.Iterator;
 
-public class FamilywTree implements Serializable, Iterable<Node>{
+public class FamilywTree<E extends Node> implements Serializable, Iterable<E>{
     // private long humanId;
-    private List<Node> familyList;
+    private List<E> familyList;
 
-    public FamilywTree(List<Node> familyList) {
+    public FamilywTree(List<E> familyList) {
         this.familyList = familyList;
     }
 
@@ -23,18 +23,18 @@ public class FamilywTree implements Serializable, Iterable<Node>{
         this.familyList = new ArrayList<>();
     }
 
-    public List<Node> getFamilyList() {
+    public List<E> getFamilyList() {
         return familyList;
     }
 
-    public void add(Node human) {
+    public void add(E human) {
         familyList.add(human);
         // human.people.setId(humanId++);
     }
 
-    public List<Node> searchName(String firstName) {
-        List<Node> result = new ArrayList<>();
-        for (Node node : familyList) {
+    public List<E> searchName(String firstName) {
+        List<E> result = new ArrayList<>();
+        for (E node : familyList) {
             if (node.people.getFirstName() == firstName) {
                 result.add(node);
             }
@@ -44,7 +44,7 @@ public class FamilywTree implements Serializable, Iterable<Node>{
 
 
     @Override
-    public Iterator<Node> iterator() {
+    public Iterator<E> iterator() {
         return new FamilyIterator(familyList);
 		// return list.iterator();
         // return null;
@@ -62,7 +62,7 @@ public class FamilywTree implements Serializable, Iterable<Node>{
         return sb.toString();
     }
 
-    public int getAge(Node node) {
+    public int getAge(E node) {
         return node.people.age();
     }
 
