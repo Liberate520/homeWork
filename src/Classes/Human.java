@@ -132,7 +132,7 @@ public class Human implements Serializable {
 
     public String getSurnameOldInfo() {
         StringBuilder tmpSb = new StringBuilder();
-        if (getSurnameOld() != "") {
+        if (getSurnameOld() != "" ) {
         tmpSb.append(" ( ");
         tmpSb.append(getSurnameOld());
         tmpSb.append(" ) ");}
@@ -143,7 +143,7 @@ public class Human implements Serializable {
         Human father =getFather();
         if (father!=null){
             tmpSb.append("\n");
-            tmpSb.append("Отец: ");
+            tmpSb.append("          Отец: ");
             tmpSb.append(father.getFIO());}
         else {tmpSb.append("Отец неизвестен");}
         return tmpSb.toString();
@@ -153,7 +153,7 @@ public class Human implements Serializable {
         Human mother = getMother();
         if (mother != null) {
             tmpSb.append("\n");
-            tmpSb.append("Мать: ");
+            tmpSb.append("          Мать: ");
             tmpSb.append(mother.getFIO());
         } else {tmpSb.append("Мать неизвестна");}
         return tmpSb.toString();

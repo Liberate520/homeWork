@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class TestInput {
 //        FamilyTree tree =new FamilyTree();
     public static void TestInput(FamilyTree tree) {
-        System.out.println("))))))))))))))");
+
 
         Human as;
         tree.add(as = new Human(1, "Пушкин", "", "Александр", "Сергеевич", male,
@@ -27,7 +27,7 @@ public class TestInput {
         tree.add(new Human(5, "Пушкин", "", "Григорий", "Александрович", male,
                 LocalDate.of(1835, 5, 26), LocalDate.of(1905, 8, 18), null, null));
 
-
+        System.out.println("Тестовый список содержит записей: "+tree.humanList.size());
 //       Human as=new Human(1,"Пушкин","","Александр","Сергеевич",male,
 //              LocalDate.of(1799,06,06),LocalDate.of(1837,02,10),null,null);
 //       tree.humanList.add(as);
