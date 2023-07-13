@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import familytree.family_tree.FamilyTreeItem;
+
 /**
  * Human
  * 
@@ -14,7 +16,7 @@ import java.util.List;
 
 
 
-public class Human implements Serializable  {
+public class Human implements FamilyTreeItem<Human>  {
     private String name;
     private Gender gender;
     private String surname;
@@ -153,6 +155,11 @@ public class Human implements Serializable  {
         children.add(child);
     }
 
+    // public void setSpouse(Human human){
+
+
+    // }
+
     public void addSpouse(Human human) {
         spouse = human;
     }
@@ -236,7 +243,9 @@ public class Human implements Serializable  {
         }
         return info.toString();
     }
-            
+
+
+  
         
 
 

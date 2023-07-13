@@ -40,9 +40,9 @@ public class Main {
         familyTree.add(man);
         System.out.println(familyTree.getInfo());
         //Запись
-        fileHandler.write(familyTree, "family_tree.out");
+        fileHandler.write(familyTree, "HoweWorkJavaOOP\\familytree\\save\\family_tree.out");
         //Чтение
-        FamilyTree loadTree = (FamilyTree)fileHandler.read("family_tree.out");
+        FamilyTree loadTree = (FamilyTree)fileHandler.read("HoweWorkJavaOOP\\familytree\\save\\family_tree.out");
         System.out.println(loadTree.getInfo());
         //System.out.println(familyTree.getInfo());
         //System.out.println(larisa);

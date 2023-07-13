@@ -17,21 +17,21 @@ import familytree.human.Human;
 import familytree.human.comporatop.HumanComporatorByBirthDate;
 import familytree.human.comporatop.HumanComporatorBySurname;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List< Human> ListHumans;
+public class FamilyTree<P extends FamilyTreeItem<P>> implements Serializable, Iterable<P> {
+    private List<P> ListHumans;
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> ListHuman) {
+    public FamilyTree(List<P> ListHuman) {
         this.ListHumans = ListHuman;
     }
 
     
 
 
-    public void add (Human human){
+    public void add (P human){
         if (!ListHumans.contains(human)){
             ListHumans.add(human);
             addParents(human);
@@ -47,80 +47,67 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     //     printFamilyTree(ListHumans);
     // }
 
-    private void addParents (Human human){
-        for (Human parent : human.getParents()) {
+    private void addParents (P human){
+        for (P parent : human.getParents()) {
             parent.addChild(human);
            
         }
 
     }
 
-    private void addChildren(Human human){
-        for (Human child : human.getChildren()) {
-            child.addParent(human);
-            
+    private void addChildren(P human){
+        for (P child : human.getChildren()) {
+            child.addParent(human);          
         }
-
-
-
     }
 
-    private void addToSpouse(Human human){
+    private void addToSpouse(P human){
         if (human.getSpouse()!= null){
-            human.addSpouse(human.getSpouse());
-
-
-        }
-        
-            
+            human.addSpouse(human);
+        }       
     }
 
 
     public String getInfo(){
         StringBuilder info = new StringBuilder();
         info.append("В дереве " + ListHumans.size() + " людей\n");
-        for (Human human : ListHumans) {
-            info.append(human.getInfo()+"\n");
-            
+        for (P human : ListHumans) {
+            info.append( human +"\n");           
         }
         return info.toString();
     }
 
     public void  getByName(String name){
-        List <Human> findlist = new ArrayList<>();
-        for (Human human : ListHumans) {
+        List <P> findlist = new ArrayList<>();
+        for (P human : ListHumans) {
             if(human.getName().equals(name)){
-                findlist.add(human);
-                
+                findlist.add(human);                
             }   
         }
 
-        for (Human human : findlist) {
-            System.out.println(human);
-            
-        }
-    
-        
+        for (P human : findlist) {
+            System.out.println(human);          
+        }       
     }
 
     
     
-    public List<Human> getListHumans() {
+    public List<P> getListHumans() {
         return this.ListHumans;
     }
 
     @Override
-    public Iterator<Human> iterator(){
-        return new HumanIterator(ListHumans);
+    public Iterator <P> iterator(){
+        return new HumanIterator<>(ListHumans);
     }
 
     public void sortBySurname(){
 
-        ListHumans.sort(new HumanComporatorBySurname());
+        ListHumans.sort(new HumanComporatorBySurname<>());
     }
 
     public void sortByBirthDate(){
-        ListHumans.sort(new HumanComporatorByBirthDate());
+        ListHumans.sort(new HumanComporatorByBirthDate<>());
 
     }
 
