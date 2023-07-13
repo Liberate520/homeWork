@@ -1,4 +1,5 @@
 import familytree.Tree.Familytree;
+import familytree.Tree.GetByOn;
 import familytree.Tree.Person;
 
 import java.io.*;
@@ -12,7 +13,7 @@ public class Main{
 
     public static void main(String[] args) throws IOException, ClassNotFoundException{
         // Создаем объекты класса Person
-       // List<Person> familetrees = new ArrayList<>();
+       //List<> familetrees = new ArrayList<>();
         Person petr = new Person("Петр", "Петров", "1970-01-01", "", "Мужской","");
         Person ira = new Person("Ира", "Петрова(Шутова)", "1972-05-10", "", "Женский","");
         Person anna = new Person("Анна", "Петрова", "1992-08-15", "", "Женский","");
@@ -23,8 +24,8 @@ public class Main{
         Person soniy = new Person("Соня", "Шварц", "2022-08-10", "", "Женский","");
 
         // ==== Создаем объект генеалогического древа
-        Familytree familytree = new Familytree((petr));
-        Familytree familytree1 = new Familytree((tony));
+        Familytree<Person> familytree = new Familytree<>(petr);
+        Familytree familytree1 = new Familytree(tony);
         //===== Заполняем древо
         familytree.addPerson(anna,petr,ira);//Их дети
         familytree.addPerson(boris,petr,ira);//Их дети
