@@ -16,10 +16,12 @@ public class TestInput {
         Human as;
         tree.add(as = new Human(1, "Пушкин", "", "Александр", "Сергеевич", male,
                 LocalDate.of(1799, 06, 06), LocalDate.of(1837, 02, 10), null, null));
-        tree.add(new Human(2, "Пушкина", "Гончарова", "Наталья", "Николаевна", female,
+        Human nn;
+        tree.add(nn=new Human(2, "Пушкина", "Гончарова", "Наталья", "Николаевна", female,
                 LocalDate.of(1812, 9, 8), LocalDate.of(1863, 12, 8), null, null));
-        tree.add(new Human(3, "Гартунг", "Пушкина", "Мария", "Александровна", female,
-                LocalDate.of(1832, 5, 31), LocalDate.of(1919, 3, 7), null, null));
+        Human mag;
+        tree.add(mag=new Human(3, "Гартунг", "Пушкина", "Мария", "Александровна", female,
+                LocalDate.of(1832, 5, 31), LocalDate.of(1919, 3, 7), as, nn));
         tree.add(new Human(4, "Пушкин", "", "Александр", "Александрович", male,
                 LocalDate.of(1833, 7, 18), LocalDate.of(1914, 8, 1), null, null));
         tree.add(new Human(5, "Пушкин", "", "Григорий", "Александрович", male,

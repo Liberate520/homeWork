@@ -80,6 +80,8 @@ public class Human implements Serializable {
     public Human getMother(){return  mother;}
 
 
+
+
     public List<Human> getChildren(){return children;}
     public List<Human> getParents(){return parents;}
 
@@ -108,6 +110,7 @@ public class Human implements Serializable {
         tmpSb.append(getMotherInfo());
         tmpSb.append(" ");
         tmpSb.append(getChildreninfo());
+
 
 
         return tmpSb.toString();

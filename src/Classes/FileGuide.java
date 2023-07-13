@@ -10,7 +10,6 @@ public class FileGuide implements Writable{
             objectOutputStream.writeObject(serializable);
             return true;
         } catch (IOException e) {
-            //   throw new RuntimeException(e);
             e.printStackTrace();
             return false;
         }
