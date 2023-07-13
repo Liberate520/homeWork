@@ -5,11 +5,11 @@ import Homework.Human.Human;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<E> implements Iterator<E> {
     private int index;
-    private List<Human> familyList;
+    private List<E> familyList;
 
-    public HumanIterator(List<Human> studentList) {
+    public HumanIterator(List<E> studentList) {
         this.familyList = familyList;
     }
 
@@ -19,7 +19,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return familyList.get(index++);
     }
 }

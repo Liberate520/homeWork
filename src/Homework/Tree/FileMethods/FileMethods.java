@@ -1,6 +1,6 @@
-package Homework.Tree;
+package Homework.Tree.FileMethods;
 
-import Homework.Human.Human;
+import Homework.Tree.FamilyTree;
 
 import java.io.*;
 

@@ -11,20 +11,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    //TODO добавить ID
-    private List<Human> familyList;
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
+    private long humansId;
+    private List<E> familyList;
 
     public FamilyTree() {
         familyList = new ArrayList<>();
     }
 
-    public boolean addHuman(Human human) {
+    public boolean addHuman(E human) {
         if(human == null){
             return false;
         }
         if(!familyList.contains(human)) {
             familyList.add(human);
+//            familyList.setId(humansId++);
 
             addToParents(human);
             addToChildren(human);
@@ -33,20 +34,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    private void addToParents(Human human){
-        for(Human parent: human.getParents()){
+    private void addToParents(E human){
+        for(E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human){
-        for(Human child: human.getChildren()){
+    private void addToChildren(E human){
+        for(E child: human.getChildren()){
             child.addParent(human);
         }
     }
 
-    public Human getByName(String name){
-        for (Human human: familyList){
+    public E getByName(String name){
+        for (E human: familyList){
             if(human.getName().equals(name)){
                 return human;
             }
@@ -60,7 +61,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         stringBuilder.append(familyList.size());
         stringBuilder.append(" объектов.\n");
         stringBuilder.append("Семья:\n");
-        for (Human human : familyList) {
+        for (E human : familyList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
@@ -69,7 +70,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public void getBrotherInfo(Human human) {
         List<String> bros = new ArrayList<>();
-        for (Human bro : familyList) {
+        for (E bro : familyList) {
             if (bro.getMother() != null && bro.getMother() != null) {
                 if (!bro.getName().equals(human.getName()) && (bro.getFather().equals(human.getFather()) || bro.getMother().equals(human.getMother()))) {
                     bros.add(bro.getName() + "(" + bro.getAge() + " лет)");
@@ -100,10 +101,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(familyList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(familyList);
     }
-
-    //TODO cортировка по дате рождения, дате смерти
 
 }

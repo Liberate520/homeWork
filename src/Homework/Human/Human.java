@@ -1,12 +1,14 @@
 package Homework.Human;
 
+import Homework.Tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem {
 
     private String name;
     private Gender gender;
@@ -66,6 +68,16 @@ public class Human implements Serializable {
 
     public LocalDate getDeath() {return death;}
 
+    @Override
+    public void setId(long id) {
+
+    }
+
+    @Override
+    public long genId() {
+        return 0;
+    }
+
     public Human getFather(){
         for(Human parent: parents){
             if(parent.getGender() == Gender.Male){
@@ -84,9 +96,29 @@ public class Human implements Serializable {
         return null;
     }
 
+    @Override
+    public boolean addChild(Object human) {
+        return false;
+    }
+
+    @Override
+    public boolean addParent(Object human) {
+        return false;
+    }
+
     public List<Human> getParents() {return parents;}
 
     public List<Human> getChildren() {return children;}
+
+    @Override
+    public Object getSpouse() {
+        return null;
+    }
+
+    @Override
+    public void setSpouse(Object human) {
+
+    }
 
     public StringBuilder getChildAndAge(){
         StringBuilder sb = new StringBuilder();

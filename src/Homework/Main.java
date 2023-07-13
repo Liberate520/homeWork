@@ -4,7 +4,7 @@ package Homework;
 import Homework.Human.Gender;
 import Homework.Human.Human;
 import Homework.Tree.FamilyTree;
-import Homework.Tree.FileMethods;
+import Homework.Tree.FileMethods.FileMethods;
 
 import java.io.IOException;
 

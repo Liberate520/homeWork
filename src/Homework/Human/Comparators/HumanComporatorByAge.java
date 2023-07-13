@@ -1,10 +1,11 @@
 package Homework.Human.Comparators;
 
 import Homework.Human.Human;
+import Homework.Tree.FamilyTreeItem;
 
 import java.util.Comparator;
 
-public class HumanComporatorByAge implements Comparator<Human> {
+public class HumanComporatorByAge<E extends FamilyTreeItem> implements Comparator<E> {
     @Override
-    public int compare(Human o1, Human o2) {return Integer.compare(o1.getAge(), o2.getAge());}
+    public int compare(E o1, E o2) {return o1.getAge() - (o2.getAge());}
 }
