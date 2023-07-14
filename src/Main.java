@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         //!!!сервис не может создавать объекты Human для ServiceFamilyTree<Human>
         int idHuman=0;
