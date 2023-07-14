@@ -4,10 +4,6 @@ import java.time.LocalDate;
 // import java.io.*;
 // import java.util.List;
 
-import family_tree.family_tree.*;
-import family_tree.human.*;
-import family_tree.writer.*;
-
 public class Main {
     public static void main (String [] args) {
         String filePath = "src/family_tree/tree.out";
@@ -18,14 +14,6 @@ public class Main {
         // System.out.println(tree.getInfo());
         System.out.println(tree);
 
-        tree.sortByName();
-        System.out.println("Сортировка по имени:");
-        System.out.println(tree);
-
-        tree.sortByBirthDate();
-        System.out.println("Сортировка по дате рождения:");
-        System.out.println(tree);
-        
         fileHandler.save(tree, filePath);
 
         // FileHandler fileHandler = new FileHandler();
