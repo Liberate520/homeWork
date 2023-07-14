@@ -1,11 +1,12 @@
 import java.util.List;
 
 public class Main {
-    public static void Main(String[] args) {
-        Human humanKorolevFedor = new Human("Королев","Федор", "Ярославович", humanKorolevaNataly, humanKorolevYaroslav);
-        Human humanKorolevDmitry = new Human("Королев","Дмитрий", "Ярославович" humanKorolevaNataly, humanKorolevYaroslav);
+    public static void main(String[] args) {
         Human humanKorolevaNataly = new Human("Королева","Наталья", "Борисовна");
         Human humanKorolevYaroslav = new Human("Королев","Ярослав", "Петрович");
+        Human humanKorolevFedor = new Human("Королев","Федор", "Ярославович", humanKorolevaNataly, humanKorolevYaroslav);
+        Human humanKorolevDmitry = new Human("Королев","Дмитрий", "Ярославович", humanKorolevaNataly, humanKorolevYaroslav);
+
 
         Tree familyKorolevs = new Tree();
      
@@ -22,6 +23,7 @@ public class Main {
         List<Human> children = humanKorolevDmitry.getMother().getChildren();
         children.remove(humanKorolevDmitry);
         System.out.println(children);
+        Tree.getFamilyTreeInfo();
 
     }
 
