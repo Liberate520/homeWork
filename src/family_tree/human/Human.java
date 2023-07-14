@@ -1,9 +1,10 @@
-package family_tree;
+package family_tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.time.Period;
 
 public class Human implements Serializable{
