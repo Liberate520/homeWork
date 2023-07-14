@@ -10,7 +10,7 @@ import family_tree.writer.*;
 
 public class Main {
     public static void main (String [] args) {
-        String filePath = "src/family_tree/tree.out";
+        String filePath = "family_tree/tree.out";
         
         FileHandler fileHandler = new FileHandler();
 
