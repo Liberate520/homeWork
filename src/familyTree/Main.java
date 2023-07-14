@@ -21,11 +21,11 @@ public class Main {
 
 //        FamilyTree familyTree;
 //        familyTree = new FamilyTree();
-//        familyTree.add(new Human("Иванов", "Иван", Gender.Male, LocalDate.of(1980, 01, 01)));
-//        familyTree.add(new Human("Иванова", "Дарья", Gender.Female, LocalDate.of(1980, 01, 02)));
-//        familyTree.add(new Human("Петрова", "Светлана", Gender.Female, LocalDate.of(2000, 01, 01), familyTree.getByName("Иван"), familyTree.getByName("Дарья")));
-//        familyTree.add(new Human("Иванов", "Павел", Gender.Male, LocalDate.of(2001, 01, 02), familyTree.getByName("Иван"), familyTree.getByName("Дарья")));
-//
+//        familyTree.add((FamilyTreeItem) new Human("Иванов", "Иван", Gender.Male, LocalDate.of(1980, 01, 01)));
+//        familyTree.add((FamilyTreeItem) new Human("Иванова", "Дарья", Gender.Female, LocalDate.of(1980, 01, 02)));
+//        familyTree.add((FamilyTreeItem) new Human("Петрова", "Светлана", Gender.Female, LocalDate.of(2000, 01, 01), (Human) familyTree.getByName("Иван"), (Human) familyTree.getByName("Дарья")));
+//        familyTree.add((FamilyTreeItem) new Human("Иванов", "Павел", Gender.Male, LocalDate.of(2001, 01, 02), (Human) familyTree.getByName("Иван"), (Human) familyTree.getByName("Дарья")));
+
 //        System.out.println(familyTree.getInfo());
 ////        familyTree.sortByName();
 ////        System.out.println(familyTree.getInfo());
@@ -35,12 +35,12 @@ public class Main {
             familyTree = new FamilyTree();
             Human ivan = new Human("Иванов", "Иван", Gender.Male, LocalDate.of(1980, 01, 01));
             Human dasha = new Human("Иванова", "Дарья", Gender.Female, LocalDate.of(1980, 01, 02));
-            Human sveta = new Human("Абрамова", "Светлана", Gender.Female, LocalDate.of(2000, 01, 01), familyTree.getByName("Иван"), familyTree.getByName("Дарья"));
-            Human pasha = new Human("Иванов", "Павел", Gender.Male, LocalDate.of(2001, 01, 02), familyTree.getByName("Иван"), familyTree.getByName("Дарья"));
-            familyTree.add(ivan);
-            familyTree.add(dasha);
-            familyTree.add(sveta);
-            familyTree.add(pasha);
+            Human sveta = new Human("Абрамова", "Светлана", Gender.Female, LocalDate.of(2000, 01, 01), (Human) familyTree.getByName("Иван"), (Human) familyTree.getByName("Дарья"));
+            Human pasha = new Human("Иванов", "Павел", Gender.Male, LocalDate.of(2001, 01, 02), (Human) familyTree.getByName("Иван"), (Human) familyTree.getByName("Дарья"));
+            familyTree.add((FamilyTreeItem) ivan);
+            familyTree.add((FamilyTreeItem) dasha);
+            familyTree.add((FamilyTreeItem) sveta);
+            familyTree.add((FamilyTreeItem) pasha);
 
             System.out.println("Первоначальные данные: \n" + familyTree.getInfo());
             familyTree.sortBySurname();
