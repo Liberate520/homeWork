@@ -1,7 +1,7 @@
-package family_tree.creatures;
+package family_tree.model.creatures;
 
-import family_tree.creatures.enums.Gender;
-import family_tree.creatures.interfaces.Creatures;
+import family_tree.model.creatures.enums.Gender;
+import family_tree.model.creatures.interfaces.Creatures;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -35,8 +35,12 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         this.dateOfDeath = null;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
     public long getAge() {
-        long age;
+        long age  = 0;
         if (dateOfDeath != null) {
             age = ChronoUnit.YEARS.between(this.dateOfBirth, this.dateOfDeath);
         } else {
@@ -50,10 +54,6 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
     }
     public LocalDate getDateOfBirth() {
         return this.dateOfBirth;
-    }
-
-    public void addDateOfDeath(LocalDate dateOfDeath) {
-        this.dateOfDeath = dateOfDeath;
     }
 
     public void setMother(Human mother) {
@@ -185,7 +185,8 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
 
     public String toString () {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Имя: " + this.firstName +
+            stringBuilder.append("ID: " + this.id +
+                    "; Имя: " + this.firstName +
                     "; Фамилия: " + this.lastName +
                     "; Пол: " + this.gender.toString() +
                     "; Возраст: " + this.getAge() + " лет" +

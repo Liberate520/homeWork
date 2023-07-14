@@ -1,6 +1,6 @@
-package family_tree.file_handler;
+package family_tree.model.file_handler;
 
-import family_tree.file_handler.interfaces.ReadAndWrite;
+import family_tree.model.file_handler.interfaces.ReadAndWrite;
 
 import java.io.*;
 

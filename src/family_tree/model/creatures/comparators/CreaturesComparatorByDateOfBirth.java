@@ -1,6 +1,6 @@
-package family_tree.creatures.comparators;
+package family_tree.model.creatures.comparators;
 
-import family_tree.creatures.interfaces.Creatures;
+import family_tree.model.creatures.interfaces.Creatures;
 
 import java.util.Comparator;
 

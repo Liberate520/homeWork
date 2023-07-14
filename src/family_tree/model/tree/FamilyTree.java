@@ -1,7 +1,9 @@
-package family_tree.tree;
+package family_tree.model.tree;
 
-import family_tree.creatures.comparators.CreaturesComparatorByDateOfBirth;
-import family_tree.creatures.interfaces.Creatures;
+import family_tree.model.creatures.comparators.CreaturesComparatorByAge;
+import family_tree.model.creatures.comparators.CreaturesComparatorByDateOfBirth;
+import family_tree.model.creatures.comparators.CreaturesComparatorById;
+import family_tree.model.creatures.interfaces.Creatures;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -16,11 +18,6 @@ public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E
     public void addCreature(E creature) {
        this.tree.add(creature);
     }
-
-    public List<E> getFamilyTree() {
-        return this.tree;
-    }
-
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (E creature: this.tree) {
@@ -32,10 +29,24 @@ public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E
         return stringBuilder.toString();
     }
 
+    public String viewAllFamily (int id){
+        for (E creature: this.tree){
+            if (creature.getId()==id)
+            {
+                return creature.viewAllFamily();
+            }
+        }
+        return "Вы ввели неверное значение!";
+    }
+    public void sortById(){
+        Collections.sort(this.tree, new CreaturesComparatorById<>());
+    }
     public void sortByDateOfBirth(){
       Collections.sort(this.tree, new CreaturesComparatorByDateOfBirth<>());
     }
-
+    public void sortByDateOfAge(){
+        Collections.sort(this.tree, new CreaturesComparatorByAge<>());
+    }
     public Iterator<E> iterator() {
         return new CreaturesIterator(this.tree);
     }
