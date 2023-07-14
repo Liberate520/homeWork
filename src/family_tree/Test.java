@@ -1,10 +1,10 @@
 package family_tree;
 
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.Gender;
-import family_tree.human.Human;
-import family_tree.service.Service;
-import family_tree.writer.FileHandler;
+import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
+import family_tree.model.service.Service;
+import family_tree.model.writer.FileHandler;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -82,11 +82,11 @@ public class Test {
 //        System.out.println(familyTree.getAllChildren(natalia));
 
         Service service = new Service();
-        service.addHuman("Паша", "Петров", LocalDate.of(2000, Calendar.MARCH, 12), family_tree.human.Gender.male);
-        service.addHuman("Маша", "Иванова", LocalDate.of(1999, Calendar.JULY, 25), family_tree.human.Gender.female);
-        service.addHuman("Петя", "Куликов", LocalDate.of(2001, Calendar.FEBRUARY, 8), family_tree.human.Gender.male);
-        service.addHuman("Даша", "Арестова", LocalDate.of(2001, Calendar.APRIL, 6), family_tree.human.Gender.female);
-        service.addHuman("Наташа", "Яковлева", LocalDate.of(2003, Calendar.APRIL, 16), family_tree.human.Gender.female);
+        service.addHuman("Паша", "Петров", LocalDate.of(2000, Calendar.MARCH, 12), Gender.male);
+        service.addHuman("Маша", "Иванова", LocalDate.of(1999, Calendar.JULY, 25), Gender.female);
+        service.addHuman("Петя", "Куликов", LocalDate.of(2001, Calendar.FEBRUARY, 8), Gender.male);
+        service.addHuman("Даша", "Арестова", LocalDate.of(2001, Calendar.APRIL, 6), Gender.female);
+        service.addHuman("Наташа", "Яковлева", LocalDate.of(2003, Calendar.APRIL, 16), Gender.female);
 
 //        System.out.println("Список людей без сортировки:");
 //        System.out.println(service.getHumanInfo());
