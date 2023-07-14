@@ -15,7 +15,7 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
     private String name;
     private Gender gender;
     private LocalDate birthDate;
-    private final LocalDate deathDate;
+    private LocalDate deathDate;
     private List<E> parents, children;
     private E spouse;
 
@@ -76,6 +76,14 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
     }
 
     public E getMother() {

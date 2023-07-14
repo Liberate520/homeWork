@@ -2,6 +2,7 @@ package ru.java_oop.family_tree.family_tree;
 
 import ru.java_oop.family_tree.human.Gender;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FamilyTreeItem <E extends FamilyTreeItem<?>> {
@@ -18,4 +19,8 @@ public interface FamilyTreeItem <E extends FamilyTreeItem<?>> {
     void setSpouse(E spouse);
     Gender getGender();
     void setChildren(List<E> parents);
+    E getFather();
+    E getMother();
+    LocalDate getBirthDate();
+    LocalDate getDeathDate();
 }
