@@ -10,18 +10,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-public class Human <E extends FamilyTreeItem<?>> implements Serializable, FamilyTreeItem<E> {
+public class Human implements Serializable, FamilyTreeItem {
     private long id;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private List<E> parents, children;
-    private E spouse;
+    private List<Human> parents, children;
+    private Human spouse;
 
-    private E NullHuman;
+    private Human NullHuman;
 
-    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, E mother, E father) {
+    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
         id = -100;
         this.name = name;
         this.gender = gender;
@@ -42,7 +42,7 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
         this(name, gender, birthDate, null, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate, E mother, E father) {
+    public Human(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
         this(name, gender, birthDate, null, mother, father);
     }
 
@@ -86,8 +86,8 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
         this.deathDate = deathDate;
     }
 
-    public E getMother() {
-        for (E h : parents) {
+    public Human getMother() {
+        for (Human h : parents) {
             if (h.getGender() == Gender.Female) {
                 return h;
             }
@@ -95,8 +95,8 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
         return null;
     }
 
-    public E getFather() {
-        for (E h : parents) {
+    public Human getFather() {
+        for (Human h : parents) {
             if (h.getGender() == Gender.Male) {
                 return h;
             }
@@ -105,34 +105,34 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
     }
 
     @Override
-    public void addParent(FamilyTreeItem parent) {
-        if (!parents.contains(parent)) {
-            parents.add((E) parent);
+    public void addParent(Object parent) {
+        if (!parents.contains((Human) parent)) {
+            parents.add((Human) parent);
         }
     }
 
-    public List<E> getParents() {
+    public List<Human> getParents() {
         return parents;
     }
 
-    @Override
     public void setParents(List parents) {
         if (!new HashSet<>(parents).containsAll(parents)) {
             for (Object parent : parents) {
-                this.addParent((E) parent);
+                this.addParent((Human) parent);
             }
         }
     }
 
-    public E getSpouse() {
+    public Human getSpouse() {
         return spouse;
     }
 
-    public void setSpouse(FamilyTreeItem spouse) {
-        this.spouse = (E) spouse;
+    @Override
+    public void setSpouse(Object spouse) {
+        this.spouse = (Human) spouse;
     }
 
-    public List<E> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
@@ -140,8 +140,9 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
         this.children = children;
     }
 
-    public void addChild(FamilyTreeItem<?> child) {
-        this.children.add((E) child);
+    @Override
+    public void addChild(Object child) {
+        this.children.add((Human) child);
     }
 
     public int getAge() {
@@ -160,7 +161,7 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
 
     public String getFatherInfo() {
         String result = "father: ";
-        E father = this.getFather();
+        Human father = this.getFather();
         if (father == null) {
             result += "unknown";
         } else {
@@ -171,7 +172,7 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
 
     public String getMotherInfo() {
         String result = "mother: ";
-        E mother = this.getMother();
+        Human mother = this.getMother();
         if (mother == null) {
             result += "unknown";
         } else {
@@ -227,10 +228,10 @@ public class Human <E extends FamilyTreeItem<?>> implements Serializable, Family
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof FamilyTreeItem)) {
+        if (!(obj instanceof Human)) {
             return false;
         }
-        E h = (E) obj;
+        Human h = (Human) obj;
         return h.getId() == this.getId();
     }
 }

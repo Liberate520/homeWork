@@ -2,6 +2,7 @@ package ru.java_oop.family_tree.family_tree;
 
 import ru.java_oop.family_tree.human.EntityComparatorByAge;
 import ru.java_oop.family_tree.human.EntityComparatorByName;
+import ru.java_oop.family_tree.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,24 +29,24 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         if (entity == null) {
             return false;
         }
-        if (!this.entityList.contains(entity)) {
+        if (!this.entityList.contains((E) entity)) {
             this.entityList.add((E) entity);
             entity.setId(entityId++);
-            this.addToParents(entity);
-            this.addToChildren(entity);
+            this.addToParents((E) entity);
+            this.addToChildren((E) entity);
             return true;
         }
         return false;
     }
 
-    private void addToParents(FamilyTreeItem<?> entity) {
-        for (FamilyTreeItem<?> parent : entity.getParents()) {
+    private void addToParents(E entity) {
+        for (E parent : entity.getParents()) {
             parent.addChild(entity);
         }
     }
 
-    private void addToChildren(FamilyTreeItem<?> entity) {
-        for (FamilyTreeItem<?> child : entity.getChildren()) {
+    private void addToChildren(E entity) {
+        for (E child : entity.getChildren()) {
             child.addParent(entity);
         }
     }
