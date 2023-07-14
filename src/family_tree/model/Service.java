@@ -15,7 +15,8 @@ import java.time.LocalDate;
 
 public class Service {
 
-    public Reg_office reg_office;
+
+    private Reg_office reg_office;
     private Date_using date_using;
     private File_using file_using;
     private Tree_service tree_service;
@@ -30,9 +31,7 @@ public class Service {
     }
 
     public String add_human(String surname, String first_name, String patronymic, String str_gender, String str_day_birth){
-        Gender gender = reg_office.tryGender(str_gender);
-        LocalDate day_birth = date_using.tryLocalDate(str_day_birth);
-        Human human = reg_office.add_human(surname, first_name, patronymic, gender, day_birth);
+        Human human = reg_office.add_human(surname, first_name, patronymic, str_gender, str_day_birth);
         if (human != null) {
             return "Добавлен новый член:\n" + human;
         } else {
@@ -42,42 +41,38 @@ public class Service {
 
 
     public void setFamily_tree() {
-        reg_office.setFamily_tree((FamilyTree) file_using.load(Config.filePath));
+        reg_office.setFamily_tree((FamilyTree<Human>) file_using.load(Config.filePath));
     }
 
     public Boolean saveFamily_tree(){
-        return file_using.save(reg_office.family_tree, Config.filePath);
+        return file_using.save(reg_office.getFamily_tree(), Config.filePath);
     }
 
     public String getFamilyTreeInfo(String sort_by) {
         StringBuilder stringBuilder = new StringBuilder();
-        switch (sort_by){
-            case "2":
-                stringBuilder.append(tree_service.sortByName(reg_office.family_tree));
-                break;
-            case "3":
-                stringBuilder.append(tree_service.sortByAge(reg_office.family_tree));
-                break;
-            default:
-                stringBuilder.append(tree_service.sortById(reg_office.family_tree));
+        switch (sort_by) {
+            case "2" -> stringBuilder.append(tree_service.sortByName(reg_office.getFamily_tree()));
+            case "3" -> stringBuilder.append(tree_service.sortByAge(reg_office.getFamily_tree()));
+            default -> stringBuilder.append(tree_service.sortById(reg_office.getFamily_tree()));
         }
         return stringBuilder.toString();
     }
 
     public void clearFamilyTree() {
-        reg_office.family_tree.clearHumanList();
+        reg_office.getFamily_tree().clearHumanList();
     }
 
     public void set_relatives(String str){
         if (str.equals("1")) {
-            reg_office.family_tree = relatives_finder.parents_finder(reg_office.family_tree);
+            reg_office.setFamily_tree(relatives_finder.parents_finder(reg_office.getFamily_tree()));
         }
         if (str.equals("2")) {
-            reg_office.family_tree = relatives_finder.adoption(reg_office.family_tree);
+            reg_office.setFamily_tree(relatives_finder.adoption(reg_office.getFamily_tree()));
         }
         if (str.equals("3")) {
-            reg_office.family_tree = relatives_finder.marriage(reg_office.family_tree);
+            reg_office.setFamily_tree(relatives_finder.marriage(reg_office.getFamily_tree()));
         }
     }
+
 
 }

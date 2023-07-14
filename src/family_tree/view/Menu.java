@@ -1,16 +1,20 @@
 package family_tree.view;
-import family_tree.model.infrastucture.My_Scanner;
 
 
-public class Menu implements My_Scanner {
+import java.util.Scanner;
+
+public class Menu {
+    private Scanner scanner;
     Menu_3 menu_3;
     Menu_1 menu_1;
     ConsoleUI consoleUI;
 
     public Menu() {
+        scanner = new Scanner(System.in);
         menu_3 = new Menu_3();
         menu_1 = new Menu_1();
         consoleUI = new ConsoleUI();
+
     }
 
     private void printMenu() {
@@ -32,16 +36,16 @@ public class Menu implements My_Scanner {
         while (!str.equals("0")) {
             printMenu();
             System.out.print("Введите соответствующую цифру меню: ");
-            str = sc.nextLine();
+            str = scanner.nextLine();
             if (str.equals("1")){
-                 String sort_by = menu_1.menu_1();
+                 String sort_by = menu_1.get_choice();
                  consoleUI.getFamilyTreeInfo(sort_by);
             }
             if (str.equals("2")){
                 consoleUI.add_human();
             }
             if (str.equals("3")){
-                consoleUI.set_relatives(menu_3.menu_3());
+                consoleUI.set_relatives(menu_3.get_choice());
             }
             if (str.equals("7")){
                 consoleUI.clearFamilyTree();

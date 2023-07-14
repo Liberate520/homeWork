@@ -1,6 +1,7 @@
 package family_tree.presenter;
 
 import family_tree.model.Service;
+import family_tree.model.registry_office.Reg_office;
 import family_tree.view.View;
 
 public class Presenter {

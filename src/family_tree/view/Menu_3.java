@@ -1,14 +1,18 @@
 package family_tree.view;
-
-import family_tree.model.infrastucture.My_Scanner;
 import family_tree.model.registry_office.relation.Relatives_finder;
-
 import java.util.Scanner;
 
-public class Menu_3 implements My_Scanner {
+public class Menu_3{
 
-    Relatives_finder relatives_finder = new Relatives_finder();
-    Scanner sc = My_Scanner.sc;
+    private Scanner scanner = new Scanner(System.in);
+
+    public String get_choice(){
+        printMenu();
+        System.out.print("Введите соответствующую цифру меню: ");
+        String str = scanner.nextLine();
+        return str;
+    }
+
 
     private void printMenu() {
         System.out.println("""
@@ -19,14 +23,6 @@ public class Menu_3 implements My_Scanner {
                 3 - Зарегистрировать брак;
                                                 
                 """);
-    }
-
-    public String menu_3() {
-        printMenu();
-        System.out.print("Введите соответствующую цифру меню: ");
-        String str = sc.nextLine();
-        return str;
-
     }
 }
 

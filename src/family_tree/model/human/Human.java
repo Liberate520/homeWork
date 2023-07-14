@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
+
 public class Human implements My_Serialization, Iterable<Human>, Comparable<Human>, TreeItem<Human> {
     static final long serialVersionUID = My_Serialization.serialVersionUID;
 
@@ -298,7 +299,7 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
 
     @Override
     public Iterator<Human> iterator() {
-        return new HumanIterator(parents);
+        return new HumanIterator<>(parents);
     }
 
     @Override

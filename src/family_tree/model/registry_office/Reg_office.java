@@ -1,28 +1,29 @@
 package family_tree.model.registry_office;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
-import family_tree.model.infrastucture.My_Scanner;
-import family_tree.model.infrastucture.de_serelization.My_Serialization;
+import family_tree.model.infrastucture.try_catch.Date_using;
 import family_tree.model.tree.FamilyTree;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class Reg_office implements My_Serialization, My_Scanner {
+public class Reg_office {
 
 
 
-    public FamilyTree family_tree;
+    private FamilyTree<Human> family_tree;
+    private Date_using date_using;
 
     public Reg_office() {
-        family_tree = new FamilyTree();
+        family_tree = new FamilyTree<>();
+        date_using = new Date_using();
     }
 
 
-    public Human add_human(String surname, String first_name, String patronymic, Gender gender, LocalDate day_birth){
+    public Human add_human(String surname, String first_name, String patronymic, String str_gender, String str_day_birth){
+        Gender gender = tryGender(str_gender);
+        LocalDate day_birth = date_using.tryLocalDate(str_day_birth);
         Human human = new Human(surname, first_name, patronymic, gender, day_birth);
-        System.out.println(family_tree);
         this.family_tree.addToHumanList(human);
         return human;
     }
@@ -33,21 +34,13 @@ public class Reg_office implements My_Serialization, My_Scanner {
         }
         return gender;
     }
-    public void setFamily_tree(FamilyTree family_tree) {
+    public void setFamily_tree(FamilyTree<Human> family_tree) {
         this.family_tree = family_tree;
     }
 
-    public FamilyTree getFamily_tree() {
+    public FamilyTree<Human> getFamily_tree() {
         return family_tree;
     }
 
-    @Override
-    public boolean save(Serializable serializable, String filePath) {
-        return false;
-    }
 
-    @Override
-    public Object load(String filePath) {
-        return null;
-    }
 }

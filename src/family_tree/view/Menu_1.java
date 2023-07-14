@@ -1,13 +1,17 @@
 package family_tree.view;
-import family_tree.model.infrastucture.My_Scanner;
 import family_tree.model.tree.tree_service.Tree_service;
 
 import java.util.Scanner;
 
-public class Menu_1 implements My_Scanner {
-    Tree_service tree_service = new Tree_service();
+public class Menu_1  {
+    private Scanner scanner = new Scanner(System.in);
 
-    Scanner sc = My_Scanner.sc;
+
+    public String get_choice(){
+        printMenu();
+        System.out.print("Введите соответствующую цифру меню: ");
+        return scanner.nextLine();
+    }
     private void printMenu() {
         System.out.println("""
 
@@ -17,13 +21,5 @@ public class Menu_1 implements My_Scanner {
                 3 - Сортировка по дате рождения;
                                 
                 """);
-    }
-
-    public String menu_1() {
-        String str;
-        printMenu();
-        System.out.print("Введите соответствующую цифру меню: ");
-        str = sc.nextLine();
-        return str;
     }
 }

@@ -6,7 +6,6 @@ import family_tree.model.human.comparator.HumanComparatorByName;
 import family_tree.model.infrastucture.de_serelization.My_Serialization;
 import family_tree.model.tree.tree_service.HumanIterator;
 import family_tree.model.tree.tree_service.TreeItem;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

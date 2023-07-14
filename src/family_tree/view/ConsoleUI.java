@@ -6,13 +6,12 @@ public class ConsoleUI implements View {
 
     private Scanner scanner;
     private Presenter presenter;
-    private boolean work;
+
 
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
-        work = true;
     }
 
     @Override
