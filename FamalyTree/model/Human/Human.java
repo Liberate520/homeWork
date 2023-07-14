@@ -1,4 +1,4 @@
-package homeWork.FamalyTree.Human;
+package homeWork.FamalyTree.model.Human;
 
 
 import java.time.LocalDate;
@@ -6,9 +6,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import homeWork.FamalyTree.FamalysTree.ItemTree;
+import homeWork.FamalyTree.model.FamalysTree.ItemTree;
 
-public class Human implements Comparable<Human>, ItemTree {
+public class Human implements Comparable<Human>, ItemTree<Human> {
     private long id;
     private String name;
     private String last_name;
@@ -213,14 +213,6 @@ public class Human implements Comparable<Human>, ItemTree {
         return setId();
     }
 
-    @Override
-    public boolean addChild(Object human) {
-        return addChild(human);
-    }
-    @Override
-    public boolean addParents(Object human) {
-        return addParents(human);
-    }
 }
 
 

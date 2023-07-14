@@ -1,4 +1,4 @@
-package homeWork.FamalyTree.FamalysTree;
+package homeWork.FamalyTree.model.FamalysTree;
 
 import java.io.File;
 import java.io.Serializable;
@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-import homeWork.FamalyTree.Human.HumanComporatoByAge;
-import homeWork.FamalyTree.Human.HumanIterator;
-import homeWork.FamalyTree.SaveLoad.FileHandler;
+import homeWork.FamalyTree.model.Human.HumanComporatoByAge;
+import homeWork.FamalyTree.model.Human.HumanIterator;
+import homeWork.FamalyTree.model.Service.SaveLoad.FileHandler;
 
 public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable<E>  {
     private long humanId;
@@ -77,12 +76,12 @@ public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable
     }
 
     public void SaveData(FamalyTree<E> list, File file){
-        FileHandler fileHandler = new FileHandler();
+        FileHandler<E> fileHandler = new FileHandler<E>();
         fileHandler.Save(list, file);
     }
 
     public void LoadDate(FamalyTree<E> list, File file){
-        FileHandler fileHandler = new FileHandler();        
+        FileHandler<E> fileHandler = new FileHandler<E>();        
         fileHandler.LoadDate(list, file);
     }
 

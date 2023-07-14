@@ -1,4 +1,4 @@
-package homeWork.FamalyTree.Human;
+package homeWork.FamalyTree.model.Human;
 
 public enum Gender {
     Male, Female

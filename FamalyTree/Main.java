@@ -3,10 +3,10 @@ package homeWork.FamalyTree;
 import java.io.File;
 import java.time.LocalDate;
 
-import homeWork.FamalyTree.FamalysTree.FamalyTree;
-import homeWork.FamalyTree.Human.Gender;
-import homeWork.FamalyTree.Human.Human;
-import homeWork.FamalyTree.FamalysTree.ItemTree;
+import homeWork.FamalyTree.model.FamalysTree.FamalyTree;
+import homeWork.FamalyTree.model.Human.Gender;
+import homeWork.FamalyTree.model.Human.Human;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -21,8 +21,8 @@ public class Main {
         humman1.addChild(humman3);
         
         File file = new File("OOP\\HomeWork\\Hendler.txt");
-        // famalyTree.SaveData(famalyTree, file);
-        // famalyTree.LoadDate(famalyTree, file);
+        famalyTree.SaveData(famalyTree, file);
+        famalyTree.LoadDate(famalyTree, file);
         
         famalyTree.sortByName();
         System.out.println(famalyTree);

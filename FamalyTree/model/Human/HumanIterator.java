@@ -1,4 +1,4 @@
-package homeWork.FamalyTree.Human;
+package homeWork.FamalyTree.model.Human;
 
 import java.util.Iterator;
 import java.util.List;

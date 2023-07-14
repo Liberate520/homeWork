@@ -1,8 +1,8 @@
-package homeWork.FamalyTree.Human;
+package homeWork.FamalyTree.model.Human;
 
 import java.util.Comparator;
 
-import homeWork.FamalyTree.FamalysTree.ItemTree;
+import homeWork.FamalyTree.model.FamalysTree.ItemTree;
 
 public class HumanComporatoByAge<T extends ItemTree<T>> implements Comparator<T>{
 
