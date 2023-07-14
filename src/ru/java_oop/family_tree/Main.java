@@ -13,13 +13,13 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 //      SAVE BLOCK
-        FamilyTree<Human> familyTree = new FamilyTree<>();
+        FamilyTree<?> familyTree = new FamilyTree<>();
         createObjectsForFamilyTree(familyTree);
 
         performFamilyTreeSaveToFile(familyTree);
 
 //      LOAD BLOCK
-        FamilyTree<Human> familyTreeLoaded = loadFamilyTreeFromFile();
+        FamilyTree<?> familyTreeLoaded = loadFamilyTreeFromFile();
 
         System.out.println(familyTree + "\nLoaded tree from file:");
         System.out.println(familyTreeLoaded);
@@ -32,23 +32,23 @@ public class Main {
 
     }
 
-    public static void performFamilyTreeSaveToFile(FamilyTree<Human> familyTree) throws IOException {
+    public static void performFamilyTreeSaveToFile(FamilyTree<?> familyTree) throws IOException {
         FileHandler fh = new FileHandler("src/ru/java_oop/backup.out");
         fh.writeObjToFile(familyTree);
     }
 
-    public static FamilyTree<Human> loadFamilyTreeFromFile() throws IOException, ClassNotFoundException {
+    public static FamilyTree<?> loadFamilyTreeFromFile() throws IOException, ClassNotFoundException {
 
         FileHandler fh = new FileHandler("src/ru/java_oop/backup.out");
-        return (FamilyTree<Human>) fh.readObjFromFile();
+        return (FamilyTree<?>) fh.readObjFromFile();
     }
 
-    public static void createObjectsForFamilyTree(FamilyTree<Human> familyTree) {
-        Human parent1 = new Human("C_Parent17", Gender.Male, LocalDate.parse("1965-01-01"));
-        Human parent2 = new Human("A_Parent2", Gender.Female, LocalDate.parse("1970-02-02"));
+    public static void createObjectsForFamilyTree(FamilyTree<?> familyTree) {
+        Human<?> parent1 = new Human<>("C_Parent17", Gender.Male, LocalDate.parse("1965-01-01"));
+        Human<?> parent2 = new Human<>("A_Parent2", Gender.Female, LocalDate.parse("1970-02-02"));
 
-        Human child1 = new Human("D_Child13", Gender.Male, LocalDate.parse("1987-03-03"), parent2, parent1);
-        Human child2 = new Human("B_Child2", Gender.Female, LocalDate.parse("1989-04-04"), parent2, parent1);
+        Human<?> child1 = new Human<>("D_Child13", Gender.Male, LocalDate.parse("1987-03-03"), parent2, parent1);
+        Human<?> child2 = new Human<>("B_Child2", Gender.Female, LocalDate.parse("1989-04-04"), parent2, parent1);
 
         familyTree.addFamilyMember(parent1);
         familyTree.addFamilyMember(parent2);

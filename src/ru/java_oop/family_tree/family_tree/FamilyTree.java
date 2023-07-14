@@ -2,7 +2,6 @@ package ru.java_oop.family_tree.family_tree;
 
 import ru.java_oop.family_tree.human.EntityComparatorByAge;
 import ru.java_oop.family_tree.human.EntityComparatorByName;
-import ru.java_oop.family_tree.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,12 +24,12 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         return entityList;
     }
 
-    public boolean addFamilyMember(E entity) {
+    public boolean addFamilyMember(FamilyTreeItem<?> entity) {
         if (entity == null) {
             return false;
         }
         if (!this.entityList.contains(entity)) {
-            this.entityList.add(entity);
+            this.entityList.add((E) entity);
             entity.setId(entityId++);
             this.addToParents(entity);
             this.addToChildren(entity);
@@ -39,14 +38,14 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         return false;
     }
 
-    private void addToParents(E entity) {
-        for (FamilyTreeItem parent : entity.getParents()) {
+    private void addToParents(FamilyTreeItem<?> entity) {
+        for (FamilyTreeItem<?> parent : entity.getParents()) {
             parent.addChild(entity);
         }
     }
 
-    private <T extends FamilyTreeItem> void addToChildren(T entity) {
-        for (FamilyTreeItem child : entity.getChildren()) {
+    private void addToChildren(FamilyTreeItem<?> entity) {
+        for (FamilyTreeItem<?> child : entity.getChildren()) {
             child.addParent(entity);
         }
     }

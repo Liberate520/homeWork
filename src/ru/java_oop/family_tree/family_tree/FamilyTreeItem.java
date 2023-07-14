@@ -4,17 +4,18 @@ import ru.java_oop.family_tree.human.Gender;
 
 import java.util.List;
 
-public interface FamilyTreeItem {
+public interface FamilyTreeItem <E extends FamilyTreeItem<?>> {
     String getName();
     int getAge();
     long getId();
     void setId(long id);
-    void setParents(List<FamilyTreeItem> parents);
-    void addParent(FamilyTreeItem parent);
-    List<FamilyTreeItem> getParents();
-    List<FamilyTreeItem> getChildren();
-    void addChild(FamilyTreeItem child);
-    FamilyTreeItem getSpouse();
-    void setSpouse(FamilyTreeItem spouse);
+    void setParents(List<E> parents);
+    void addParent(FamilyTreeItem<?> parent);
+    List<E> getParents();
+    List<E> getChildren();
+    void addChild(FamilyTreeItem<?> child);
+    E getSpouse();
+    void setSpouse(E spouse);
     Gender getGender();
+    void setChildren(List<E> parents);
 }
