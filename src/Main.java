@@ -44,12 +44,20 @@ public class Main {
 
         System.out.println(String.format("tree info: \n%s", service.getInfoAll()));
 
-        //Выполняем запись в файл и последующее чтение
-        FileHandler filehandler = new FileHandler();
-        filehandler.saveTo(service.getTree(), "tree.txt");
+        try{
+            //Выполняем запись в файл и последующее чтение
+            FileHandler filehandler = new FileHandler();
+            filehandler.saveTo(service.getTree(), "tree.txt");
 
-        FamilyTree treeOut = (FamilyTree)filehandler.loadFrom("tree.txt");
-        //Дублируем вывод:
-        System.out.println(String.format("treeOut info: \n%s", treeOut.getInfoAll()));
+            FamilyTree treeOut = (FamilyTree)filehandler.loadFrom("tree.txt");
+            //Дублируем вывод:
+            System.out.println(String.format("treeOut info: \n%s", treeOut.getInfoAll()));
+        }
+        catch(IOException e){
+            System.out.println(e.toString());
+        }
+        catch(ClassNotFoundException e){
+            System.out.println(e.toString());
+        }
     }
 }
