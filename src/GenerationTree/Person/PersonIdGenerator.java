@@ -1,4 +1,4 @@
-package FamilyTree;
+package GenerationTree.Person;
 
 public class PersonIdGenerator {
     private int id;

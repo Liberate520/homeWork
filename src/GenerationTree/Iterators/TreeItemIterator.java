@@ -1,15 +1,15 @@
-package FamilyTree.Iterators;
+package GenerationTree.Iterators;
 
 import java.util.Iterator;
 import java.util.List;
 
-import FamilyTree.Person;
+import GenerationTree.interfaces.GenTreeItem;
 
-public class PersonIterator implements Iterator<Person> {
+public class TreeItemIterator<E extends GenTreeItem<E>> implements Iterator<E> {
     private int index;
-    private List<Person> persons;
+    private List<E> persons;
 
-    public PersonIterator(List<Person> persons) {
+    public TreeItemIterator(List<E> persons) {
         this.persons = persons;
     }
 
@@ -19,7 +19,7 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public E next() {
         return persons.get(index++);
     }
 

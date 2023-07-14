@@ -1,77 +1,42 @@
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.io.File;
 
-import FamilyTree.FamilySerialize;
-import FamilyTree.FamilyTree;
-import FamilyTree.Person;
-import FamilyTree.PersonIdGenerator;
-import FamilyTree.Comparators.PersonComparatorByAge;
-import FamilyTree.Structs.Gender;
+import GenerationTree.Person.PersonIdGenerator;
+import GenerationTree.Person.PersonService;
+import GenerationTree.Structs.Gender;
 
 public class Main {
     public static void main(String[] args) {
 
         ConsoleManager cmdManager = new ConsoleManager();
 
-        Person anna;
-        FamilyTree familyBeta;
-        FamilyTree familyTest = new FamilyTree("Тестенюк");
+        var idGenerator = new PersonIdGenerator();
+        var betaFamily = new PersonService("Бетта", idGenerator);
+        var testFamily = new PersonService("Тестюк", idGenerator);
 
-        try {
-            familyBeta = FamilySerialize.deserialize();
-            anna = familyBeta.getPersonById(0);
-        } catch (Exception e) {
-            var idGenerator = new PersonIdGenerator();
-            anna = new Person(idGenerator.GetNewId(), "Анна", Gender.FEMALE, LocalDate.of(1970, 1, 1));
-            Person roman = new Person(idGenerator.GetNewId(), "Рома", Gender.MALE, LocalDate.of(1994, 11, 14));
-            Person liza = new Person(idGenerator.GetNewId(), "Елизавета", Gender.FEMALE, LocalDate.of(1997, 1, 12));
-            Person danil = new Person(idGenerator.GetNewId(), "Даниил", Gender.MALE, LocalDate.of(2017, 3, 13));
-            Person daria = new Person(idGenerator.GetNewId(), "Даша", Gender.FEMALE, LocalDate.of(2016, 1, 1));
+        int annaId = betaFamily.addPerson("Анна", Gender.FEMALE, LocalDate.of(1970, 1, 1));
+        int romanId = betaFamily.addPerson("Рома", Gender.MALE, LocalDate.of(1994, 11, 14));
+        int lizaId = betaFamily.addPerson("Елизавета", Gender.FEMALE, LocalDate.of(1997, 1, 12));
+        int danilId = betaFamily.addPerson("Даниил", Gender.MALE, LocalDate.of(2017, 3, 13));
+        int dariaId = betaFamily.addPerson("Даша", Gender.FEMALE, LocalDate.of(2016, 1, 1));
 
-            anna.addChild(roman);
-            anna.addChild(liza);
-            roman.addChild(danil);
-            roman.addChild(daria);
+        betaFamily.addChild(annaId, romanId);
+        betaFamily.addChild(annaId, lizaId);
+        betaFamily.addChild(romanId, danilId);
+        betaFamily.addChild(romanId, dariaId);
 
-            Person maria = new Person(idGenerator.GetNewId(), "Маша", Gender.FEMALE, LocalDate.of(1971, 4, 1));
-            Person ivan = new Person(idGenerator.GetNewId(), "Иван", Gender.MALE, LocalDate.of(1996, 12, 15));
-            Person alan = new Person(idGenerator.GetNewId(), "Алан", Gender.MALE, LocalDate.of(2017, 3, 16));
+        int mariaId = testFamily.addPerson("Маша", Gender.FEMALE, LocalDate.of(1971, 4, 1));
+        int ivanId = testFamily.addPerson("Иван", Gender.MALE, LocalDate.of(1996, 12, 15));
+        int alanId = testFamily.addPerson("Алан", Gender.MALE, LocalDate.of(2017, 3, 16));
 
-            maria.addChild(ivan);
-            ivan.addChild(alan);
+        testFamily.addChild(mariaId, ivanId);
+        testFamily.addChild(ivanId, alanId);
 
-            Person katia = new Person(idGenerator.GetNewId(), "Катя", Gender.FEMALE, LocalDate.of(2022, 2, 17));
+        testFamily.addSpouse(ivanId, betaFamily.getPersonById(lizaId), LocalDate.of(2021, 1, 25));
 
-            familyBeta = new FamilyTree("Бетта");
-            familyBeta.addPersonAndRelatives(liza);
+        int katiaId = testFamily.addPerson("Катя", Gender.FEMALE, LocalDate.of(2022, 2, 17));
+        testFamily.addChild(ivanId, katiaId);
 
-            familyTest.addPersonAndRelatives(ivan);
-            ivan.addSpouse(liza, LocalDate.of(2021, 1, 25));
-            ivan.addChild(katia);
-        }
-
-        cmdManager.PrintText("Потомки: " + anna + "\n");
-        var map = familyTest.getAllChildren(anna);
-        for (int key : map.keySet()) {
-            cmdManager.PrintText("Поколение " + key + ":");
-            var thisPersons = map.get(key);
-            Collections.sort(thisPersons, new PersonComparatorByAge());
-            Collections.reverse(thisPersons);
-            for (var person : thisPersons) {
-                cmdManager.PrintText("    " + person);
-            }
-        }
-
-        try {
-            File file = new File(FamilySerialize.FILE_PATH);
-            if (!file.exists()) {
-                FamilySerialize.serialize(familyBeta);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cmdManager.PrintText(betaFamily.getDescendantsOfPerson(annaId));
 
     }
 }

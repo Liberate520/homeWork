@@ -1,14 +1,15 @@
-package FamilyTree;
+package GenerationTree.Person;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import FamilyTree.Structs.Gender;
-import FamilyTree.interfaces.Marrieble;
+import GenerationTree.Structs.Gender;
+import GenerationTree.Tree.GenerationTree;
+import GenerationTree.interfaces.GenTreeItem;
+import GenerationTree.interfaces.Marrieble;
 
-public class Person implements Marrieble, Serializable, Comparable<Person> {
+public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person> {
 
     private int id;
     private String name;
@@ -37,17 +38,21 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
         this.children = new ArrayList<>();
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSename(GenerationTree<Person> family) {
+        if (family.contains(this))
+            this.sename = family.getTreeName();
+    }
+
     public int getId() {
         return id;
     }
 
     public String getName() {
         return this.name;
-    }
-
-    public void setSename(FamilyTree family) {
-        if (family.contains(this))
-            this.sename = family.getSename();
     }
 
     public String getSename() {
@@ -72,14 +77,6 @@ public class Person implements Marrieble, Serializable, Comparable<Person> {
 
     public List<Person> getParrents() {
         return parrents;
-    }
-
-    public String getFamilyTree() {
-        return this.sename;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Boolean addChild(Person child) {
