@@ -1,6 +1,7 @@
 package family_tree.human;
 
-import family_tree.ItemAgedNamedId;
+import family_tree.Gender;
+import family_tree.ItemFamilyTree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Human implements ItemAgedNamedId, Serializable {
+public class Human implements ItemFamilyTree<Human>, Serializable {
     private int id;
     private String name;
     private LocalDate dateBirth, dateDeath;

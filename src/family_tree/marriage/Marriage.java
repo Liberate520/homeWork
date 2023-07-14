@@ -1,20 +1,20 @@
 package family_tree.marriage;
 
-import family_tree.human.Gender;
-import family_tree.human.Human;
+import family_tree.Gender;
+import family_tree.ItemFamilyTree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 //Класс регистрации брака между двумя людьми
-public class Marriage implements Serializable {
+public class Marriage<T extends ItemFamilyTree<T>> implements Serializable {
     private int id;
     private LocalDate startDate, endDate;
-    private Human wife, husband;
+    private T wife, husband;
     private static final int ageAdulthood = 18;     //возраст совершеннолетия
     private boolean isError = false; //результат проверок в конструкторе
 
-    public Marriage(int id, LocalDate startDate, Human wife, Human husband){
+    public Marriage(int id, LocalDate startDate, T wife, T husband){
         this.id = id;
         this.startDate = startDate;
         if(wife == null || wife.getGender() != Gender.Female

@@ -1,12 +1,10 @@
 package family_tree;
 
-import family_tree.human.Gender;
-import family_tree.human.Human;
 import family_tree.marriage.Marriage;
 
 import java.time.LocalDate;
 
-public class ServiceFamilyTree<T extends ItemAgedNamedId> {
+public class ServiceFamilyTree<T extends ItemFamilyTree<T>> {
     private int idMarriage;
     private FamilyTree<T> tree;
     public ServiceFamilyTree(){
@@ -25,7 +23,7 @@ public class ServiceFamilyTree<T extends ItemAgedNamedId> {
 
     //регистрируем брак и возвращаем ссылку на экземпляр
     //Если нарушены условия, return null
-    public Marriage addMarriage(LocalDate startDate, Human wife, Human husband){
+    public Marriage addMarriage(LocalDate startDate, T wife, T husband){
         Marriage m = new Marriage(idMarriage, startDate, wife, husband);
         if(m.getIsError()) return null;
         tree.addMarriage(m);
@@ -33,9 +31,9 @@ public class ServiceFamilyTree<T extends ItemAgedNamedId> {
         return m;
     }
     // добавляем связь родитель - потомок
-//    public boolean addChild(Human parent, Human child){
-//        return parent.addChild(child);
-//    }
+    public boolean addChild(T parent, T child){
+        return parent.addChild(child);
+    }
 //    public boolean addChild(int idParent, int idChild){
 //        T parent = getItemById(idParent);
 //        if(parent==null) return false;

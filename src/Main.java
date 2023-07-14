@@ -1,6 +1,6 @@
 import family_tree.FamilyTree;
+import family_tree.Gender;
 import family_tree.ServiceFamilyTree;
-import family_tree.human.Gender;
 import family_tree.human.Human;
 import family_tree.marriage.Marriage;
 import saveload.FileHandler;
