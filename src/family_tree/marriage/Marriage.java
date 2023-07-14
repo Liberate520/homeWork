@@ -6,7 +6,7 @@ import family_tree.ItemFamilyTree;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-//Класс регистрации брака между двумя людьми
+//Класс регистрации брака
 public class Marriage<T extends ItemFamilyTree<T>> implements Serializable {
     private int id;
     private LocalDate startDate, endDate;
