@@ -5,12 +5,13 @@ import java.time.LocalDate;
 import GenerationTree.Comparators.PersonComparatorBySename;
 import GenerationTree.Structs.Gender;
 import GenerationTree.Tree.GenerationTree;
+import GenerationTree.interfaces.Service;
 
-public class PersonService {
+public class FamilyTreeService implements Service {
     private PersonIdGenerator idPerson;
     private GenerationTree<Person> tree;
 
-    public PersonService(String treeName, PersonIdGenerator personIdGenerator) {
+    public FamilyTreeService(String treeName, PersonIdGenerator personIdGenerator) {
         this.tree = new GenerationTree<Person>(treeName);
         this.idPerson = personIdGenerator;
     }
@@ -100,5 +101,10 @@ public class PersonService {
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public void addTreeItem(String name, Gender gender, LocalDate dateBirth) {
+        addPerson(name, gender, dateBirth);
     }
 }

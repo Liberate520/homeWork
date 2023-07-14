@@ -1,31 +1,32 @@
+package GenerationTree;
 
 import java.util.Scanner;
 
 public class ConsoleManager {
 
     public ConsoleManager() {
-        SetTextCode("");
+        setTextCode("");
     }
 
     public ConsoleManager(String charsetName) {
-        SetTextCode(charsetName);
+        setTextCode(charsetName);
     }
 
     public ConsoleManager(Boolean onLog) {
         this._onLog = onLog;
-        SetFullSettings("");
+        setFullSettings("");
     }
 
     public ConsoleManager(String charsetName, Boolean onLog) {
         this._onLog = onLog;
-        SetFullSettings(charsetName);
+        setFullSettings(charsetName);
     }
 
     private Scanner _cs;
     private StringBuilder _frame = new StringBuilder();
     private Boolean _onLog = false;
 
-    public String GetFrameText(Boolean toDelete) {
+    public String getFrameText(Boolean toDelete) {
         var text = _frame.toString();
         if (toDelete) {
             _frame.delete(0, _frame.length());
@@ -33,27 +34,27 @@ public class ConsoleManager {
         return text;
     }
 
-    public String InputText(String message) {
+    public String inputText(String message) {
         System.out.print(message);
         var text = _cs.nextLine();
-        ConsoleReading(message + text + "\n");
+        consoleReading(message + text + "\n");
         return text;
     }
 
-    public void PrintText() {
-        PrintText("", "\n");
+    public void printText() {
+        printText("", "\n");
     }
 
     public void PrintText(String text) {
-        PrintText(text, "\n");
+        printText(text, "\n");
     }
 
-    public void PrintText(String text, String end) {
-        ConsoleReading(text + end);
+    public void printText(String text, String end) {
+        consoleReading(text + end);
         System.out.print(text + end);
     }
 
-    public <T> void PrintArray(T[] array) {
+    public <T> void printArray(T[] array) {
         var output = new StringBuilder();
         output.append("[ ");
         for (var item : array) {
@@ -61,33 +62,33 @@ public class ConsoleManager {
         }
         output.append("\b\b ]");
         var text = output.toString();
-        ConsoleReading(text);
+        consoleReading(text);
         System.out.print(text);
     }
 
-    public void ConsoleClear() {
+    public void consoleClear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    private void SetFullSettings(String charsetName) {
-        SetTextCode(charsetName);
+    private void setFullSettings(String charsetName) {
+        setTextCode(charsetName);
     }
 
-    private void SetTextCode(String charsetName) {
+    private void setTextCode(String charsetName) {
         if (charsetName.isEmpty()) {
             charsetName = "cp866";
         }
         _cs = new Scanner(System.in, charsetName);
     }
 
-    private void ConsoleReading(String text) {
+    private void consoleReading(String text) {
         if (_onLog) {
             _frame.append(text);
         }
     }
 
-    public static void HideCursor(boolean isHidden) {
+    public static void hideCursor(boolean isHidden) {
         if (isHidden) {
             System.out.print("\033[?25l");
         } else {
@@ -95,7 +96,7 @@ public class ConsoleManager {
         }
     }
 
-    public static String СompressString(String input) {
+    public static String compressString(String input) {
         StringBuilder result = new StringBuilder();
         int count = 1;
         char prevChar = input.charAt(0);
