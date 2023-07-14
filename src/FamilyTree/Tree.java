@@ -1,62 +1,66 @@
 package FamilyTree;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
-public class Tree {
-    private List<Human> humanList;
+public class Tree<E extends Human> implements Serializable, Iterable<E> {
+    @Override
+    public Iterator<E> iterator() {
+        return new HumanIterator<E>(humans);
+    }
+
+    private List<E> humans;
     public Tree() {
         this(new ArrayList<>());
     }
-    public Tree(List<Human> humanList) { this.humanList = humanList; }
-
-    public boolean addHuman(Human human){
-        if (human == null) {
-            return false;
+    private Tree(List<E> humans) {
+        this.humans = humans;
+    }
+    public void add(E human) {
+        humans.add(human);
+    }
+    public List<E> getPersonList() {
+        return humans;
+    }
+    public List<E> getInfo() {
+        List result = new ArrayList();
+        String info;
+        for (int i = 0; i < humans.size(); i++) {
+            info = humans.get(i).toString();
+            result.add(info);
         }
-        if (!humanList.contains(human)){
-            humanList.add(human);
-            if (human.getFather() != null){
-                human.getFather().addChild(human);
+        return result;
+    }
+
+        public Human getByName(String name){
+            for (int i = 0; i < humans.size(); i++) {
+                if (this.humans.get(i).getName().equals(name))
+                    result = this.humans.get(i);}
+            
+            return result;
+        }
+
+        public List <E> getChildren(String name){
+            List<E> kids = new ArrayList();
+            for (int i = 0; i < humans.size(); i++) {
+                if (this.humans.get(i).getFather() != null) if (this.humans.get(i).getFather().getName().equals(name)) {
+                    kids.add(this.humans.get(i));
+                }
+                if (this.humans.get(i).getMother() != null) {
+                    if (this.humans.get(i).getMother().getName().equals(name)) {
+                        kids.add(this.humans.get(i));
+                    }
+                }
+                if (this.humans.get(i).getMother() != null) {
+                    if (this.humans.get(i).getMother().getName().equals(name)) {
+                        kids.add(this.humans.get(i));
+                    }
+                }
             }
-            if (human.getMother() != null){
-                human.getMother().addChild(human);
-            }
-            return true;
+            return kids;
         }
-        return false;
     }
-
-    public Human getHumanByName(String name){
-        for (Human human: humanList){
-            if (human.getName().equalsIgnoreCase(name)){
-                return human;
-            }
-        }
-        return null;
-    }
-    public void addSpouse(Human spouse) { humanList.add(spouse);}
-
-    public String getInfo(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("В дереве ");
-        sb.append(humanList.size());
-        sb.append(" человек: \n");
-        for (Human human: humanList){
-            sb.append(human.getInfo());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-    public void addHuman(String string, Gender male, LocalDate of) {
-    }
-}
-
-
-    
-    
-
-
-    
-
