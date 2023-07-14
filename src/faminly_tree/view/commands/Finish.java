@@ -5,7 +5,7 @@ import faminly_tree.view.ConsoleUI;
 public class Finish extends Command{
     public Finish(ConsoleUI console){
         super(console);
-        description = "Завершение работы";
+        description = "Завершить работу";
     }
     @Override
     public void execute() {

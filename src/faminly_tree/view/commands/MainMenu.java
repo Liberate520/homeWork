@@ -12,10 +12,13 @@ public class MainMenu {
         commandList.add(new AddHuman(console)); //Добавить человека в семейное древо
         commandList.add(new ShowAllTree(console)); //Показать всех людей в семейном древе
         commandList.add(new AddConnection(console)); //Добавить связь ребенок-родитель для имеющихся в дереве людей
+        //Найти родителей человека
         //Добавить отца/мать/ребенка имеющегося в дереве человека (возможно взаимозаменяющие пункты этот и выше)
-        //Показать ближайших родственников человека и степень родства
+        commandList.add(new NextOfKin(console));//Показать ближайших родственников человека и степень родства
+        commandList.add(new SortByID(console)); //Отсортировать всех людей в семеном древе по id
         commandList.add(new SortByName(console)); //Отсортировать всех людей в семеном древе по имени
         commandList.add(new SortByAge(console)); //Отсортировать всех людей в семеном древе по возрасту
+        commandList.add(new ReturnToFirstMenu(console)); //Вернуться к статовому меню
         commandList.add(new Finish(console)); //Завершение работы
     }
     public String getMenu(){

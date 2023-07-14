@@ -12,6 +12,7 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     boolean work;
     private MainMenu menu;
+    private String pathRemember;
 
     public ConsoleUI() {
         presenter = new Presenter(this);
@@ -19,125 +20,172 @@ public class ConsoleUI implements View {
         work = true;
         menu = new MainMenu(this);
     }
-
     @Override
     public void print(String text) {
         System.out.println(text);
     }
-
     @Override
     public void start() {
         Hello();
         while (work) {
+            System.out.println();
             System.out.println(menu.getMenu());
             int choice = takeChoice();
             if (choice != -1) menu.execute(choice);
             else System.out.printf("Некорректно введена команда. Введите число от 1 до %d\n", menu.getSize());
         }
     }
-
     private void Hello() {
-        System.out.println("Приветствую, пользователь!");
+        print("Приветствую! Выберите действие:\n" +
+                "1. Начать новый проект\n" +
+                "2. Открыть проект");
+        String answer = scanner.nextLine();
+        int choice = examination(answer);
+        if (choice == -1) System.out.printf("Некорректно введена команда. Введите число 1 или 2");
+        if (choice == 2) {
+            print("Укажите имя файла:");
+            String name = scanner.nextLine();
+            if (!name.contains(".out")) name = name + ".out";
+            this.pathRemember = name;
+            downland(name);
+        }
+     }
+    public void downland(String path){
+        presenter.downland(path);
     }
-
     private int takeChoice() {
         String line = scanner.nextLine();
-        if (examination(line)) {
-            int choice =  Integer.parseInt(line);
-            int size = menu.getSize();
-            if ((choice > size) || (choice <= 0)) return -1;
-            return choice;
-        }
-        else return -1;
+        int choice =  examination(line);
+        int size = menu.getSize();
+        if ((choice > size) || (choice <= 0)) return -1;
+        return choice;
     }
-    private boolean examination(String line){
+    private int examination(String line){
         try {
-            Integer.parseInt(line);
-            return true;
+            return Integer.parseInt(line);
         }
         catch (NumberFormatException e) {
-            return false;
+            return -1;
         }
     }
     public void addHuman() {
         Gender gender = null;
         boolean flag = false;
-        System.out.println("Введите имя человека");
+        print("Введите имя человека");
         String name = scanner.nextLine();
-        System.out.println("Укажете пол человека (ж, м):");
+        print("Укажете пол человека (ж, м):");
         String sex = scanner.nextLine().toLowerCase();
-        System.out.println("Укажите дату рождения (год/месяц/день):");
+        print("Укажите дату рождения (год/месяц/день):");
         String birth = scanner.nextLine();
 
         if (sex.contains("м")) gender = Gender.Male;
         else if (sex.contains("ж")) gender = Gender.Female;
         else {
-            System.out.println("Некорректно указан пол");
+            print("Некорректно указан пол");
             flag = true;
         }
         String[] birthDate = birth.split("/");
         int birthYear = 0, birthMonth = 0, birthDay = 0;
         if (birthDate.length != 3) {
-            System.out.println("Некорректно указана дата рождения");
+            print("Некорректно указана дата рождения");
             flag = true;
         } else {
             birthYear = Integer.parseInt(birthDate[0]);
             birthMonth = Integer.parseInt(birthDate[1]);
             birthDay = Integer.parseInt(birthDate[2]);
             if (birthYear <= 0 || (birthMonth <= 0 || birthMonth > 12) || (birthDay <= 0 || birthDay > 31)) {
-                System.out.println("Некорректно указана дата рождения");
+                print("Некорректно указана дата рождения");
                 flag = true;
             }
         }
         if (flag == false) {
             LocalDate date = LocalDate.of(birthYear, birthMonth, birthDay);
             presenter.addHuman(name, gender, date);
+            print("Успешно!");
         }
-
     }
-
     public void addConnection() {
-        System.out.println("Укажите id родителя, имеющегося в древе, для которого вы хотите установить родственную связь: ");
-        int parentID = findHumanID();
-        if (parentID == -1) {
-            System.out.println("Ошибка ввода числа");
+        if (presenter.treeIsEmpty() == 0) {
+            print("Дерево не заполнено");
             return;
         }
-        System.out.println("Укажите id ребенка, имеющегося в древе, для которого вы хотите установить родственную связь: ");
+        print("Укажите id родителя, имеющегося в древе, для которого вы хотите установить родственную связь: ");
+        int parentID = findHumanID();
+        if (parentID == -1) {
+            print("Ошибка ввода числа");
+            return;
+        }
+        print("Укажите id ребенка, имеющегося в древе, для которого вы хотите установить родственную связь: ");
         int childID = findHumanID();
         if (childID == -1) {
-            System.out.println("Ошибка ввода числа");
+            print("Ошибка ввода числа");
             return;
         }
         boolean flag = presenter.connection(parentID, childID);
-        if (flag == false) System.out.println("Человека с таким id нет в семейном древе");
-        else System.out.println("Успешно изменена родственная связь");
+        if (flag == false) print("Человека с таким id нет в семейном древе");
+        else print("Успешно изменена родственная связь");
     }
-
     public void showAllTree() {
         presenter.showAllTree();
     }
-
     public void sortByAge() {
+        if (presenter.treeIsEmpty() == 0) {
+            print("Дерево не заполнено");
+            return;
+        }
         presenter.sortByAge();
     }
-
+    public void sortByID(){
+        presenter.sortByID();
+    }
     public void sortByName() {
+        if (presenter.treeIsEmpty() == 0) {
+            print("Дерево не заполнено");
+            return;
+        }
         presenter.sortByName();
     }
-
     public void finish() {
-        System.out.println("До свидания");
+        print("Вы хотите сохранить работу над проектом?");
+        String answer = scanner.nextLine();
+        if (answer.equals("да") || answer.equals("yes")) {
+            if (pathRemember != null){
+                if (!save(pathRemember)) print("К сожалению, не получилось сохранить файл!");
+                else print("Успешно сохранили вашу работу!");
+            }
+            else {
+                print("Введите имя файла на английском: ");
+                String name = scanner.nextLine().toLowerCase();
+                name = name + ".out";
+                if (!save(name)) print("К сожалению, не получилось сохранить файл!");
+                else print("Успешно сохранили вашу работу!");
+            }
+        }
+        System.out.println("До свидания!");
         work = false;
     }
-
+    public boolean save(String name){
+        return presenter.save(name);
+    }
     private int findHumanID() {
         showAllTree();
         String id = scanner.nextLine();
-        if (examination(id)) {
-
-            return Integer.parseInt(id);
+        return examination(id);
+    }
+    public void nextOfKin() {
+        if (presenter.treeIsEmpty() == 0) {
+            print("Дерево не заполнено");
+            return;
         }
-        else return -1;
+        print("Укажите id родителя, имеющегося в древе, для которого вы хотите установить родственную связь: ");
+        int humanID = findHumanID();
+        if (humanID == -1) {
+            print("Ошибка ввода числа");
+            return;
+        }
+        presenter.nextOfKin(humanID);
+    }
+    public void returnToFirstMenu() {
+        Hello();
     }
 }

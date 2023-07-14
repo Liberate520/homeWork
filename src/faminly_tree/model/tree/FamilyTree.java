@@ -1,9 +1,8 @@
 package faminly_tree.model.tree;
 
 import faminly_tree.model.human.Gender;
-import faminly_tree.model.human.Human;
 import faminly_tree.model.human.comparators.HumanComparatorByAge;
-import faminly_tree.model.human.comparators.HumanComparatorByBirth;
+import faminly_tree.model.human.comparators.HumanComparatorByID;
 import faminly_tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
@@ -13,37 +12,42 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterable<E> {
-   private List<E> tree;
-   private int newID;
+    private List<E> tree;
+    private int newID;
 
     public FamilyTree() {
         this.tree = new ArrayList<>();
     }
 
-    public void addToTree(E human){
+    public void addToTree(E human) {
         tree.add(human);
         human.setId(newID);
         this.newID++;
     }
 
     //TODO
+
     /**
      * Показать всех родственников выбранного человека и степень родства
+     *
      * @param human
      */
     //public void allRelatives(Human human){
     //}
-
-    private void getParent(StringBuilder sb, E human){
-        if (human != null) sb.append(getHumanInfo(human));
-        else sb.append("неизвестен(а)");
+    private void getParent(StringBuilder sb, E human) {
+        if (human == null) return;
+        if (human.getGender() == Gender.Female) sb.append("Мать:\n");
+        else sb.append("Отец:\n");
+        sb.append(getHumanInfo(human));
         sb.append("\n");
     }
-    private void getChildren(StringBuilder sb, E human){
+
+    private void getChildren(StringBuilder sb, E human) {
         List<E> Children = human.getChildren();
-        if (Children == null) sb.append("нет");
+        if (Children == null) return;
         else {
-            for(E el : Children){
+            sb.append("Дети:\n");
+            for (E el : Children) {
                 sb.append(getHumanInfo(el));
                 sb.append("\n");
             }
@@ -54,78 +58,98 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
 
     /**
      * Добавить в StringBuilder всех детей по отцу или матери
+     *
      * @param sb
-     * @param human human.getFather() or human.GetMother()
+     * @param parent human.getFather() or human.GetMother()
      */
-    private void getFatherOrMotherChildren(StringBuilder sb, E human){
-        List<E> children = human.getFather().getChildren();
-        sb.append("Cестры (степень родства определить невозможно):\n");
-        getFemale(sb, children, human);
-        sb.append("Братья (степень родства определить невозможно):\n");
-        getMale(sb, children, human);
-    }
-    private void maternalBrothersAndSisters(StringBuilder sb, List<E> motherChildren, E human){
-        if((motherChildren.size() > 1)){
-            sb.append("Кровные сестры по матери:\n");
-            getFemale(sb, motherChildren, human);
-            sb.append("Кровные братья по матери:\n");
-            getMale(sb, motherChildren, human);
+    private void getFatherOrMotherChildren(StringBuilder sb, E parent, E humanException) {
+        List<E> children = parent.getChildren();
+        if (children.size() == 1) return;
+        if (checkFemale(children, humanException)) {
+            sb.append("Cестры (степень родства определить невозможно):\n");
+            getFemale(sb, children, humanException);
+        }
+        if (checkMale(children, humanException)) {
+            sb.append("Братья (степень родства определить невозможно):\n");
+            getMale(sb, children, humanException);
         }
     }
-    private void paternalBrothersAndSisters(StringBuilder sb, List<E> fatherChildren, E human){
-        if((fatherChildren.size() > 1)){
-            sb.append("Кровные сестры по отцу:\n");
-            getFemale(sb, fatherChildren, human);
-            sb.append("Кровные братья по отцу:\n");
-            getMale(sb, fatherChildren, human);
+
+    private void maternalBrothersAndSisters(StringBuilder sb, List<E> motherChildren, E humanException) {
+        if ((motherChildren.size() > 1)) {
+            if (checkFemale(motherChildren, humanException)) {
+                sb.append("Кровные сестры по матери:\n");
+                getFemale(sb, motherChildren, humanException);
+            }
+            if (checkMale(motherChildren, humanException)) {
+                sb.append("Кровные братья по матери:\n");
+                getMale(sb, motherChildren, humanException);
+            }
         }
     }
-    private void getSiblingsAndBloodBrotherAndSister(StringBuilder sb, List<E> motherChildren, List<E> fatherChildren, E human){
-        if (motherChildren.toString().equals(fatherChildren.toString())) {
+
+    private void paternalBrothersAndSisters(StringBuilder sb, List<E> fatherChildren, E humanException) {
+        if ((fatherChildren.size() > 1)) {
+            if (checkFemale(fatherChildren, humanException)) {
+                sb.append("Кровные сестры по отцу:\n");
+                getFemale(sb, fatherChildren, humanException);
+            }
+            if (checkMale(fatherChildren, humanException)) {
+                sb.append("Кровные братья по отцу:\n");
+                getMale(sb, fatherChildren, humanException);
+            }
+        }
+    }
+
+    private void getSiblingsAndBloodBrotherAndSister(StringBuilder sb, List<E> motherChildren, List<E> fatherChildren, E humanException) {
+        List<E> common = findCommonChildren(motherChildren, fatherChildren);
+        if (checkFemale(common, humanException)) {
             sb.append("Родные сестры:\n");
-            getFemale(sb, motherChildren, human);
+            getFemale(sb, common, humanException);
+        }
+        if (checkMale(common, humanException)) {
             sb.append("Родные братья:\n");
-            getMale(sb, motherChildren, human);
-        } else {
-            List<E> common = findCommonChildren(motherChildren, fatherChildren);
-            sb.append("Родные сестры:\n");
-            getFemale(sb, common, human);
-            sb.append("Родные братья:\n");
-            getMale(sb, common, human);
+            getMale(sb, common, humanException);
+        }
+        if (motherChildren.toString().equals(fatherChildren.toString())) return;
+        List<E> diff = differentChildren(common, fatherChildren);
+        if (checkFemale(diff, humanException)) {
             sb.append("Кровные сестры по отцу:\n");
-            getFemale(sb, differentChildren(common, fatherChildren), human);
+            getFemale(sb, diff, humanException);
+        }
+        if (checkMale(diff, humanException)) {
             sb.append("Кровные братья по отцу:\n");
-            getMale(sb, differentChildren(common, fatherChildren), human);
+            getMale(sb, diff, humanException);
+        }
+        diff = differentChildren(common, motherChildren);
+        if (checkFemale(diff, humanException)) {
             sb.append("Кровные сестры по матери:\n");
-            getFemale(sb, differentChildren(common, motherChildren), human);
+            getFemale(sb, diff, humanException);
+        }
+        if (checkMale(diff, humanException)) {
             sb.append("Кровные братья по матери:\n");
-            getMale(sb, differentChildren(common, motherChildren), human);
+            getMale(sb, diff, humanException);
         }
     }
 
     /**
      * Показать ближайших родственников человека и степень родства
+     *
      * @param human
      */
-    public String nextOfKin(E human){
+    public String nextOfKin(E human) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Отец:\n");
         getParent(sb, human.getFather());
-        sb.append("Мать:\n");
         getParent(sb, human.getMother());
-        sb.append("Дети:\n");
         getChildren(sb, human);
-        if ((human.getMother() == null) && (human.getFather() != null)){
-            getFatherOrMotherChildren(sb, human.getFather());
-        }
-        else if ((human.getMother() != null) && (human.getFather() == null)){
-            getFatherOrMotherChildren(sb, human.getMother());
-        }
-        else if ((human.getMother() != null) && (human.getFather() != null)) {
+        if ((human.getMother() == null) && (human.getFather() != null)) {
+            getFatherOrMotherChildren(sb, human.getFather(), human);
+        } else if ((human.getMother() != null) && (human.getFather() == null)) {
+            getFatherOrMotherChildren(sb, human.getMother(), human);
+        } else if ((human.getMother() != null) && (human.getFather() != null)) {
             List<E> motherChildren = human.getMother().getChildren();
             List<E> fatherChildren = human.getFather().getChildren();
             if ((motherChildren.size() == 1) || (fatherChildren.size() == 1)) {
-                sb.append("Родные сестры и братья: нет \n");
                 maternalBrothersAndSisters(sb, motherChildren, human);
                 paternalBrothersAndSisters(sb, fatherChildren, human);
             } else {
@@ -137,15 +161,16 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
 
     /**
      * Поиск кровных братьев и сестер
+     *
      * @param commonList список общих детей у родителей персоны
      * @param parentList список детей родителя (отца или матери)
      * @return
      */
-    private List<E> differentChildren(List<E> commonList, List<E> parentList){
+    private List<E> differentChildren(List<E> commonList, List<E> parentList) {
         List<E> list = new ArrayList<>();
-        for(E i: commonList){
-            for(E j : parentList){
-                if (!i.equals(j)){
+        for (E i : commonList) {
+            for (E j : parentList) {
+                if (!i.equals(j)) {
                     list.add(i);
                 }
             }
@@ -155,15 +180,16 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
 
     /**
      * Поиск родных братьев и сестер
+     *
      * @param motherChildren список детей матери
      * @param fatherChildren список детей отца
      * @return
      */
-    private List<E> findCommonChildren(List<E> motherChildren, List<E> fatherChildren){
+    private List<E> findCommonChildren(List<E> motherChildren, List<E> fatherChildren) {
         List<E> list = new ArrayList<>();
-        for(E i: motherChildren){
-            for(E j : fatherChildren){
-                if (i.equals(j)){
+        for (E i : motherChildren) {
+            for (E j : fatherChildren) {
+                if (i.equals(j)) {
                     list.add(i);
                 }
             }
@@ -173,26 +199,50 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
 
     /**
      * Поиск сестер
+     *
      * @param sb
-     * @param list список по которому ищем (по родным или кровным)
+     * @param list  список по которому ищем (по родным или кровным)
      * @param human человек, для которого ищем сестер
      */
-    private void getFemale(StringBuilder sb, List<E> list, E human){
+    private void getFemale(StringBuilder sb, List<E> list, E human) {
         boolean flag = false;
-        for(E el : list){
-            if ((el.getGender() == Gender.Female) && (el != human)){
+        for (E el : list) {
+            if ((el.getGender() == Gender.Female) && (el != human)) {
                 sb.append(getHumanInfo(el));
                 sb.append("\n");
                 flag = true;
             }
         }
-        if (flag == false) sb.append("Отсутствуют");
+        if (flag == false) sb.append("Отсутствуют\n");
+    }
+
+    private boolean checkFemale(List<E> list, E human) {
+        if (list == null) return false;
+        boolean flag = false;
+        for (E el : list) {
+            if ((el.getGender() == Gender.Female) && (el != human)) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    private boolean checkMale(List<E> list, E human) {
+        if (list == null) return false;
+        boolean flag = false;
+        for (E el : list) {
+            if ((el.getGender() == Gender.Male) && (el != human)) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     /**
      * Поиск братьев
+     *
      * @param sb
-     * @param list список по которому ищем (по родным или кровным)
+     * @param list  список по которому ищем (по родным или кровным)
      * @param human человек, для которого ищем братьев
      */
     private void getMale(StringBuilder sb, List<E> list, E human) {
@@ -204,11 +254,12 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
                 flag = true;
             }
         }
-        if (flag == false) sb.append("Отсутствуют");
+        if (flag == false) sb.append("Отсутствуют\n");
     }
 
     /**
      * Поиск родителей человека
+     *
      * @param human
      * @return
      */
@@ -243,43 +294,45 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
         }
         return sb.toString();
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return getInfo();
     }
-    public String getInfo(){
+
+    public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        if (tree.size() > 0){
+        if (tree.size() > 0) {
             for (int i = 0; i < tree.size(); i++) {
                 sb.append(tree.get(i));
                 sb.append("\n");
             }
-        }
-        else sb.append("Дерево не заполнено");
+        } else sb.append("Дерево не заполнено");
         return sb.toString();
     }
+
     @Override
     public Iterator<E> iterator() {
         return new HumanIterator(tree);
     }
-    public List<E> getTree() {
-        return tree;
-    }
 
-    public void sortByName(){
+    public void sortByName() {
         Collections.sort(tree, new HumanComparatorByName<>());
     }
-    public void sortByAge(){
+    public void sortByAge() {
         Collections.sort(tree, new HumanComparatorByAge<>());
     }
-    public void sortByBirth(){
-        Collections.sort(tree, new HumanComparatorByBirth<>());
+    public void sortByID(){
+        Collections.sort(tree, new HumanComparatorByID<>());
     }
-
     public E getHumanByID(int id) {
-        for (E el: tree){
-            if(el.getId() == id) return el;
+        for (E el : tree) {
+            if (el.getId() == id) return el;
         }
         return null;
+    }
+
+    public int getSize() {
+        return tree.size();
     }
 }
