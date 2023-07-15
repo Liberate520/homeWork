@@ -1,29 +1,26 @@
-package FamilyTree.Human;
+package FamilyTree.model.Human;
 
-import FamilyTree.Human.comparators.GetGroup;
-import FamilyTree.Human.other.Gender;
-import FamilyTree.Human.interfacee.Create;
-import FamilyTree.Human.other.MotFath;
+import FamilyTree.model.Human.interfacee.GetGroup;
+import FamilyTree.model.Human.other.Gender;
+import FamilyTree.model.Human.interfacee.Create;
 
 import java.util.List;
 
 public class Human implements Create, GetGroup {
     private int id;
     private Gender gender;
+    private String genderr;
     private int age;
     private String name;
     private String surname;
-    private FamilyTree.Human.other.MotFath MotFath;
-    private List<String> children;
+    private FamilyTree.model.Human.other.MotFath MotFath;
 
 
-    public Human(int id, Gender gender, int age, String name, String surname, FamilyTree.Human.other.MotFath motFath, List<String> children) {
-        this.gender = gender;
+    public Human(int id, int age, String name, String surname, String genderr) {
+        this.genderr = genderr;
         this.age = age;
         this.name = name;
         this.surname = surname;
-        MotFath = motFath;
-        this.children = children;
         this.id = id;
     }
 
@@ -50,12 +47,10 @@ public class Human implements Create, GetGroup {
     public String toString() {
         return "Human{" +
                 "id=" + id +
-                ", gender=" + gender +
+                ", gender=" + genderr +
                 ", age=" + age +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", MotFath=" + MotFath +
-                ", children=" + children +
                 '}';
     }
 }
