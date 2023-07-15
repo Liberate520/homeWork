@@ -21,8 +21,8 @@ public class Human implements Serializable, FamilyTreeItem {
 
     private Human NullHuman;
 
-    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
-        id = -100;
+    public Human(long id, String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -35,15 +35,14 @@ public class Human implements Serializable, FamilyTreeItem {
             parents.add(father);
         }
         this.children = new ArrayList<>();
-        ;
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate) {
-        this(name, gender, birthDate, null, null, null);
+    public Human(long id, String name, Gender gender, LocalDate birthDate) {
+        this(id, name, gender, birthDate, null, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
-        this(name, gender, birthDate, null, mother, father);
+    public Human(long id, String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
+        this(id, name, gender, birthDate, null, mother, father);
     }
 
     public long getId() {
