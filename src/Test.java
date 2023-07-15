@@ -9,5 +9,6 @@ public class Test {
         System.out.println(tree.showAllTree());
         tree.showParents(p4);
         tree.showBrothersAndSisters(p3);
+        tree.showChildren(p2);
     }
 }

@@ -21,13 +21,27 @@ public class FamilyTree {
     }
 
     public void showBrothersAndSisters(Person person) {
-        List<Person> print = new ArrayList<>();
+        List<Person> printList = new ArrayList<>();
         for (Person p : personList) {
-            if (person.getFather().equals(p.getFather()) & person.getMother().equals(p.getMother())
+            if (person.getFather().equals(p.getFather())
+                    & person.getMother().equals(p.getMother())
             ) {
-                print.add(p);
+                printList.add(p);
             }
         }
-        System.out.println(print.remove(print.indexOf(person)));
+        System.out.println(printList.remove(printList.indexOf(person)));
+    }
+
+    public void showChildren(Person person) {
+        List<Person> printList = new ArrayList<>();
+        for (Person p : personList) {
+            if (p.getMother() != null || p.getFather() != null) {
+                if (p.getMother().equals(person)
+                        | p.getFather().equals(person)) {
+                    printList.add(p);
+                }
+            }
+        }
+        System.out.println(printList);
     }
 }
