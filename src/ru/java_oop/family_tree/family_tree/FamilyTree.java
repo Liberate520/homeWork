@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
     private long entityId;
     private List<E> entityList;
 
@@ -40,14 +40,14 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     }
 
     private void addToParents(E entity) {
-        for (E parent : entity.getParents()) {
-            parent.addChild(entity);
+        for (Object parent : entity.getParents()) {
+            ((E) parent).addChild(entity);
         }
     }
 
     private void addToChildren(E entity) {
-        for (E child : entity.getChildren()) {
-            child.addParent(entity);
+        for (Object child : entity.getChildren()) {
+            ((E) child).addParent(entity);
         }
     }
 
