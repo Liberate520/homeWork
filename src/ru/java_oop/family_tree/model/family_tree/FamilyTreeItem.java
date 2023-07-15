@@ -1,6 +1,6 @@
-package ru.java_oop.family_tree.family_tree;
+package ru.java_oop.family_tree.model.family_tree;
 
-import ru.java_oop.family_tree.human.Gender;
+import ru.java_oop.family_tree.model.human.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;

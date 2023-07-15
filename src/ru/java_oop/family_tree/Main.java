@@ -1,10 +1,10 @@
 package ru.java_oop.family_tree;
 
-import ru.java_oop.family_tree.service.Service;
-import ru.java_oop.family_tree.file_handler.FileHandler;
-import ru.java_oop.family_tree.human.Gender;
-import ru.java_oop.family_tree.human.Human;
-import ru.java_oop.family_tree.family_tree.FamilyTree;
+import ru.java_oop.family_tree.model.service.Service;
+import ru.java_oop.family_tree.model.file_handler.FileHandler;
+import ru.java_oop.family_tree.model.human.Gender;
+import ru.java_oop.family_tree.model.human.Human;
+import ru.java_oop.family_tree.model.family_tree.FamilyTree;
 
 import java.io.IOException;
 import java.time.LocalDate;

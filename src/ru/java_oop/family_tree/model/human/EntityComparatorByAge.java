@@ -1,6 +1,6 @@
-package ru.java_oop.family_tree.human;
+package ru.java_oop.family_tree.model.human;
 
-import ru.java_oop.family_tree.family_tree.FamilyTreeItem;
+import ru.java_oop.family_tree.model.family_tree.FamilyTreeItem;
 
 import java.util.Comparator;
 

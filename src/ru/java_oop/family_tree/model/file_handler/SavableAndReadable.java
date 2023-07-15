@@ -1,4 +1,4 @@
-package ru.java_oop.family_tree.file_handler;
+package ru.java_oop.family_tree.model.file_handler;
 
 import java.io.IOException;
 

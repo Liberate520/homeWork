@@ -1,8 +1,8 @@
-package ru.java_oop.family_tree.service;
+package ru.java_oop.family_tree.model.service;
 
-import ru.java_oop.family_tree.family_tree.FamilyTree;
-import ru.java_oop.family_tree.human.Gender;
-import ru.java_oop.family_tree.human.Human;
+import ru.java_oop.family_tree.model.family_tree.FamilyTree;
+import ru.java_oop.family_tree.model.human.Gender;
+import ru.java_oop.family_tree.model.human.Human;
 
 import java.time.LocalDate;
 

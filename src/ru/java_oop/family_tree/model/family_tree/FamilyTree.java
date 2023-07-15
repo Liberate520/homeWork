@@ -1,8 +1,7 @@
-package ru.java_oop.family_tree.family_tree;
+package ru.java_oop.family_tree.model.family_tree;
 
-import ru.java_oop.family_tree.human.EntityComparatorByAge;
-import ru.java_oop.family_tree.human.EntityComparatorByName;
-import ru.java_oop.family_tree.human.Human;
+import ru.java_oop.family_tree.model.human.EntityComparatorByAge;
+import ru.java_oop.family_tree.model.human.EntityComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
