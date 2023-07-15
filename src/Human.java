@@ -1,11 +1,11 @@
 
-
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-/** */
-public class Human {
+
+public class Human implements Serializable {
     private String name;
     private String surname;
     private LocalDate dateOfBirth ;
@@ -32,11 +32,11 @@ public class Human {
         this(name, surname, dateOfBirth, null, mother, father, gender);
     }
 
-    public Human(String name, String surname, LocalDate dateOfBirth, Gender gender) {
+    public Human(String name, String surname, LocalDate dateOfBirth, Gender gender) { // перегрузка - метод с тем же названием, но с другим количество аргументов
         this(name, surname, dateOfBirth, null, null, gender);
     }
 
-    public Human(String name, String surname, LocalDate dateOfBirth) {
+    public Human(String name, String surname, LocalDate dateOfBirth) { // перегрузка - для реализации принципа DRY - don't repeat yourself
         this(name, surname, dateOfBirth, null, null, null);
     }
 
