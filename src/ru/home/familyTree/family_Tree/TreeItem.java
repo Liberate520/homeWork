@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ThreeItem<T> extends Serializable {
+public interface TreeItem<T> extends Serializable {
     String getName();
     int getAge();
     LocalDate getDateOfBirth();
     T getFather();
     T getMather();
-    void addChild(T child);
-    void addParent(T parent);
+    Object addChild(T child);
+    Object addParent(T parent);
     List<T> getChildren();
     List<T> getParents();
+
 
 }

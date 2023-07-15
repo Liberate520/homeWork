@@ -1,6 +1,4 @@
-package ru.home.familyTree;
-
-import ru.home.familyTree.family_Tree.FamilyTree;
+package ru.home.familyTree.saveData;
 
 import java.io.*;
 import java.io.Serializable;

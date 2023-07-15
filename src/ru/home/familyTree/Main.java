@@ -3,6 +3,7 @@ package ru.home.familyTree;
 import ru.home.familyTree.family_Tree.FamilyTree;
 import ru.home.familyTree.human.Gender;
 import ru.home.familyTree.human.Human;
+import ru.home.familyTree.saveData.FileHandler;
 
 import java.time.LocalDate;
 
@@ -15,6 +16,8 @@ public class Main {
 
 //        FamilyTree familyTree = (FamilyTree) fileHandler.read("src/ru/home/familyTree/family_Tree/info.out");
 
+        System.out.println(familyTree.getHumansInfo());
+        familyTree.sortDateOfBirth();
         System.out.println(familyTree.getHumansInfo());
     }
 

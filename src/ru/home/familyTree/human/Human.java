@@ -1,13 +1,14 @@
 package ru.home.familyTree.human;
 
+import ru.home.familyTree.family_Tree.TreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
-    private int id;
+public class Human implements TreeItem, Serializable {
     private String name;
     private Gender gender;
     private LocalDate dateOfBirth;
@@ -37,6 +38,7 @@ public class Human implements Serializable {
         this(name, gender, dateOfBirth, null, father, mother);
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -71,12 +73,26 @@ public class Human implements Serializable {
         return null;
     }
 
+    @Override
+    public Object addChild(Object child) {
+        return null;
+    }
+
+    @Override
+    public Object addParent(Object parent) {
+        return null;
+    }
+
     public List<Human> getParents() {
         return parents;
     }
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     @Override
@@ -132,6 +148,7 @@ public class Human implements Serializable {
         return child.toString();
     }
 
+    @Override
     public int getAge(){
         if (dateOfDeath == null) {
             return getPeriod(dateOfBirth, LocalDate.now());
