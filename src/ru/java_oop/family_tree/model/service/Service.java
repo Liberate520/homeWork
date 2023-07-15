@@ -1,6 +1,7 @@
 package ru.java_oop.family_tree.model.service;
 
 import ru.java_oop.family_tree.model.family_tree.FamilyTree;
+import ru.java_oop.family_tree.model.family_tree.FamilyTreeItem;
 import ru.java_oop.family_tree.model.human.Gender;
 import ru.java_oop.family_tree.model.human.Human;
 
@@ -10,22 +11,22 @@ public class Service {
     private long id;
     private FamilyTree<?> familyTree;
 
-    public Service(FamilyTree<?> familyTree) {
-        this.familyTree = familyTree;
+    public Service() {
+        this.familyTree = new FamilyTree<>();
     }
 
-    public Human addFamilyMember(String name, Gender gender, LocalDate birthDate) {
-        return addFamilyMember(name, gender, birthDate, null, null, null);
+    public FamilyTreeItem<?> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate) {
+        return addHumanFamilyMember(name, gender, birthDate, null, null, null);
     }
 
-    public Human addFamilyMember(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
-        return addFamilyMember(name, gender, birthDate, null, mother, father);
+    public FamilyTreeItem<?> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
+        return addHumanFamilyMember(name, gender, birthDate, null, mother, father);
     }
 
-    public Human addFamilyMember(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
-        Human human = new Human(id++, name, gender, birthDate, deathDate, mother, father);
-        familyTree.addFamilyMember(human);
-        return human;
+    public FamilyTreeItem<?> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
+        FamilyTreeItem<?> familyTreeItem = new Human(id++, name, gender, birthDate, deathDate, mother, father);
+        familyTree.addFamilyMember(familyTreeItem);
+        return familyTreeItem;
     }
 
     public String getFamilyTreeInfo() {
@@ -44,4 +45,11 @@ public class Service {
         return familyTree.setWedding(entityId1, entityId2);
     }
 
+    public FamilyTree<?> getFamilyTreeAsObject() {
+        return this.familyTree;
+    }
+
+    public void setFamilyTree(FamilyTree<?> familyTree) {
+        this.familyTree = familyTree;
+    }
 }
