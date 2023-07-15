@@ -6,8 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import GenerationTree.interfaces.Writable;
-
 public class FileHandler implements Writable {
 
     @Override

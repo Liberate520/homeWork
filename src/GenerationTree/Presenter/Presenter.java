@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 import GenerationTree.Person.FamilyTreeService;
 import GenerationTree.Person.PersonIdGenerator;
-import GenerationTree.Structs.Gender;
-import GenerationTree.interfaces.Service;
-import GenerationTree.interfaces.View;
+import GenerationTree.Person.Structs.Gender;
+import GenerationTree.Tree.Service;
+import GenerationTree.ui.View;
 
 public class Presenter {
 

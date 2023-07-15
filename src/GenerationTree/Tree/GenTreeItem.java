@@ -1,4 +1,4 @@
-package GenerationTree.interfaces;
+package GenerationTree.Tree;
 
 import java.io.Serializable;
 import java.time.LocalDate;

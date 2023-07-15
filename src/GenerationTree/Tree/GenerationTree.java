@@ -10,10 +10,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
-import GenerationTree.Comparators.TreeItemComparatorByAge;
-import GenerationTree.Comparators.TreeItemComporatorByName;
-import GenerationTree.Iterators.TreeItemIterator;
-import GenerationTree.interfaces.GenTreeItem;
+import GenerationTree.Tree.Comparators.TreeItemComparatorByAge;
+import GenerationTree.Tree.Comparators.TreeItemComporatorByName;
+import GenerationTree.Tree.Iterators.TreeItemIterator;
 
 public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, Iterable<E> {
 

@@ -1,9 +1,9 @@
-package GenerationTree.Iterators;
+package GenerationTree.Tree.Iterators;
 
 import java.util.Iterator;
 import java.util.List;
 
-import GenerationTree.interfaces.GenTreeItem;
+import GenerationTree.Tree.GenTreeItem;
 
 public class TreeItemIterator<E extends GenTreeItem<E>> implements Iterator<E> {
     private int index;

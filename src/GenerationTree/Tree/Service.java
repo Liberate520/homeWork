@@ -1,8 +1,8 @@
-package GenerationTree.interfaces;
+package GenerationTree.Tree;
 
 import java.time.LocalDate;
 
-import GenerationTree.Structs.Gender;
+import GenerationTree.Person.Structs.Gender;
 
 public interface Service {
     void addTreeItem(String name, Gender gender, LocalDate dateBirth);

@@ -1,4 +1,4 @@
-package GenerationTree;
+package GenerationTree.ui;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package GenerationTree.Structs;
+package GenerationTree.Person.Structs;
 
 public enum Gender {
     MALE {

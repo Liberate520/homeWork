@@ -1,8 +1,6 @@
-package GenerationTree.interfaces;
+package GenerationTree.Person;
 
 import java.time.LocalDate;
-
-import GenerationTree.Person.Person;
 
 public interface Marrieble {
     Boolean addChild(Person child);

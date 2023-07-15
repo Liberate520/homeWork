@@ -2,10 +2,10 @@ package GenerationTree.Person;
 
 import java.time.LocalDate;
 
-import GenerationTree.Comparators.PersonComparatorBySename;
-import GenerationTree.Structs.Gender;
+import GenerationTree.Person.Comparators.PersonComparatorBySename;
+import GenerationTree.Person.Structs.Gender;
 import GenerationTree.Tree.GenerationTree;
-import GenerationTree.interfaces.Service;
+import GenerationTree.Tree.Service;
 
 public class FamilyTreeService implements Service {
     private PersonIdGenerator idPerson;

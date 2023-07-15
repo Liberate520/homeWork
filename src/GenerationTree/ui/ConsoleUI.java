@@ -1,8 +1,6 @@
 package GenerationTree.ui;
 
-import GenerationTree.ConsoleManager;
 import GenerationTree.Presenter.Presenter;
-import GenerationTree.interfaces.View;
 
 public class ConsoleUI implements View {
 

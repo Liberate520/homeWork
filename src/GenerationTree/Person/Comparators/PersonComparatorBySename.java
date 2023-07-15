@@ -1,4 +1,4 @@
-package GenerationTree.Comparators;
+package GenerationTree.Person.Comparators;
 
 import java.util.Comparator;
 

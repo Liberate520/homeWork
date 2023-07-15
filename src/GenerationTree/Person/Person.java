@@ -4,10 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import GenerationTree.Structs.Gender;
+import GenerationTree.Person.Structs.Gender;
+import GenerationTree.Tree.GenTreeItem;
 import GenerationTree.Tree.GenerationTree;
-import GenerationTree.interfaces.GenTreeItem;
-import GenerationTree.interfaces.Marrieble;
 
 public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person> {
 
