@@ -1,7 +1,6 @@
 package ru.java_oop.family_tree.view;
 
-import ru.java_oop.family_tree.view.commands.Command;
-import ru.java_oop.family_tree.view.commands.EndProgram;
+import ru.java_oop.family_tree.view.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,10 @@ public class MainMenu {
 
     public MainMenu(ConsoleUI consoleUI) {
         this.commandList = new ArrayList<>();
+        commandList.add(new AddHuman(consoleUI));
+        commandList.add(new GetFamilyTreeInfo(consoleUI));
+        commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortByAge(consoleUI));
         commandList.add(new EndProgram(consoleUI));
     }
 

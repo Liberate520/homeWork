@@ -1,6 +1,5 @@
 package ru.java_oop.family_tree.presenter;
 
-import ru.java_oop.family_tree.model.family_tree.FamilyTree;
 import ru.java_oop.family_tree.model.human.Gender;
 import ru.java_oop.family_tree.model.service.Service;
 import ru.java_oop.family_tree.view.View;
@@ -16,7 +15,7 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addFamilyMember(String name, Gender gender, LocalDate birthDate) {
+    public void addHumanFamilyMember(String name, Gender gender, LocalDate birthDate) {
         service.addHumanFamilyMember(name, gender, birthDate);
         getFamilyTreeInfo();
     }
