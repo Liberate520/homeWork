@@ -1,4 +1,4 @@
-package family_tree.group;
+package family_tree.model.group;
 
 public interface GroupItemAgedNamed {
     String getName();

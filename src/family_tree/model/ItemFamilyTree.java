@@ -1,6 +1,6 @@
-package family_tree;
+package family_tree.model;
 
-import family_tree.group.GroupItemAgedNamed;
+import family_tree.model.group.GroupItemAgedNamed;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
-package family_tree.group.comparators;
+package family_tree.model.group.comparators;
 
-import family_tree.group.GroupItemAgedNamed;
+import family_tree.model.group.GroupItemAgedNamed;
 
 import java.util.Comparator;
 
