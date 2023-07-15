@@ -1,14 +1,12 @@
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Set<People> boys = new HashSet<>();
-        boys = People.getData();
+        People book = new People();
+        book.getData();
+
         int choice = 0;
         Scanner in = new Scanner(System.in);
-        String choiceFamil = "";
 
         while(true) {
             System.out.printf("""
@@ -16,26 +14,26 @@ public class Main {
                     1. Ввывести все;
                     2. Вывести определённую фамилию;
                     3. Определить дерево;
-                    4. Выход.
+                    4. Выход.\n
                     Введите операцию: 
                     """);
             choice = in.nextInt();
-            if (choice == 4) return;
+            if (choice == 4) {
+                in.close();
+                return;
+            }
 
             switch(choice) {
                 case 1:
-                    for (People i : boys) System.out.println(People.getFio(i));
+                    book.printBook();
                     break;
 
                 case 2:
-                    System.out.print("Введите фимилию: ");
-                    choiceFamil = in.next();
+                    book.getFamil();
+                    break;
 
-                    for (People i : boys) {
-                        // if ()
-                    }
-
-                    System.out.printf("\n\n");
+                case 3:
+                    book.getTree();
                     break;
 
                 default:

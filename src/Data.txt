@@ -1,4 +1,6 @@
-Капибаров; Иван; Васильевич
-Капибарова; Лариса; Дмитриевна
-Бомжев; Вячеслав; Иванович
-Бомжев; Клара; Николаевна
+Kapibarov; Ivan; Vasilievitch
+Kapibarova; Larisa; Dmitrievna
+Bomjev; Viatcheslav; Ivanovitch
+Bomjev; Klara; Nikolaevna
+Kapibarov; Vania; Ivanovitch
+Kapibarov; Sergei; Ivanovitch
