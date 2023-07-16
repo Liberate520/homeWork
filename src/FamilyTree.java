@@ -19,8 +19,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    
-    
+        
     @Override
     public String toString() {
         StringBuilder strb = new StringBuilder();
@@ -31,7 +30,6 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     
-
     @Override
     public Iterator<Human> iterator() {
         return humanList.iterator();
