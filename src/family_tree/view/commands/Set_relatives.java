@@ -9,7 +9,6 @@ public class Set_relatives extends Command{
         description = "Установить родственную связь;";
     }
     public void execute() {
-        System.out.println("Заглушка");
-//        consoleUI.set_relatives(menu_3.get_choice());
+        consoleUI.menu_choice("menu_relatives");
     }
 }

@@ -1,28 +1,20 @@
-package family_tree.view;
+package family_tree.view.menu;
+import family_tree.view.ConsoleUI;
+import family_tree.view.commands.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import family_tree.view.commands.*;
 
-public class Menu {
+
+public class Menu_relatives {
     private final List<Command> commandList;
-    Menu_3 menu_3;
-    Menu_1 menu_1;
-
-
-    public Menu(ConsoleUI consoleUI) {
-        menu_3 = new Menu_3();
-        menu_1 = new Menu_1();
+    public Menu_relatives(ConsoleUI consoleUI) {
 
         commandList = new ArrayList<>();
-        commandList.add(new Print_treeInfo(consoleUI));
-        commandList.add(new Add_human(consoleUI));
-        commandList.add(new Set_relatives(consoleUI));
-        commandList.add(new ClearFamilyTree(consoleUI));
-        commandList.add(new Load_file(consoleUI));
-        commandList.add(new SaveFamilyTree(consoleUI));
-        commandList.add(new Exit(consoleUI));
+        commandList.add(new Parents_finder(consoleUI));
+        commandList.add(new Adoption(consoleUI));
+        commandList.add(new Marriage(consoleUI));
 
     }
 
@@ -37,6 +29,7 @@ public class Menu {
         return stringBuilder.toString();
     }
 
+
     public void execute(int choice){
         Command command = commandList.get(choice-1);
         command.execute();
@@ -47,3 +40,5 @@ public class Menu {
     }
 
 }
+
+

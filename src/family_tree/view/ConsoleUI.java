@@ -1,5 +1,8 @@
 package family_tree.view;
 import family_tree.presenter.Presenter;
+import family_tree.view.menu.Menu;
+import family_tree.view.menu.Menu_relatives;
+import family_tree.view.menu.Menu_sortBy;
 
 import java.util.Scanner;
 public class ConsoleUI implements View {
@@ -9,6 +12,9 @@ public class ConsoleUI implements View {
     private final Presenter presenter;
     private boolean work;
     private final Menu menu;
+    private final Menu_sortBy menu_sortBy;
+    private final Menu_relatives menu_relatives;
+    private String menu_current;
 
 
     public ConsoleUI() {
@@ -16,6 +22,9 @@ public class ConsoleUI implements View {
         presenter = new Presenter(this);
         work = true;
         menu = new Menu(this);
+        menu_sortBy = new Menu_sortBy(this);
+        menu_relatives = new Menu_relatives(this);
+        menu_current = "menu";
     }
 
     @Override
@@ -26,30 +35,39 @@ public class ConsoleUI implements View {
     public void start() {
         System.out.println("\nСЕМЕЙНОЕ ДРЕВО.\n");
         while (work){
-            printMenu();
-            execute();
+            menu_current = "menu";
+            menu_choice(menu_current);
         }
     }
 
-    private void printMenu() {
-        System.out.println(menu.printMenu());
+    public void menu_choice(String menu_current){
+        switch (menu_current) {
+            case "menu" -> System.out.println(menu.printMenu());
+            case "menu_sortBy" -> System.out.println(menu_sortBy.printMenu());
+            case "menu_relatives" -> System.out.println(menu_relatives.printMenu());
+        }
+        execute(menu_current);
     }
 
-
-    private void execute(){
+    private void execute(String menu_current){
         System.out.print("Введите цифру соответствующего пункта меню: ");
-        String line = scanner.nextLine();
-        if (checkTextForInt(line)){
-            int numCommand = Integer.parseInt(line);
-            if (checkCommand(numCommand)){
-                menu.execute(numCommand);
+        String string = scanner.nextLine();
+        if (checkTextForInt(string)){
+            int numCommand = Integer.parseInt(string);
+            if (checkCommand(numCommand, menu_current)){
+                switch (menu_current) {
+                    case "menu" -> menu.execute(numCommand);
+                    case "menu_sortBy" -> menu_sortBy.execute(numCommand);
+                    case "menu_relatives" -> menu_relatives.execute(numCommand);
+
+                }
             }
         }
     }
 
 
-    private boolean checkTextForInt(String text){
-        if (text.matches("[1-9]+")){
+    private boolean checkTextForInt(String string){
+        if (string.matches("[1-9]+")){
             return true;
         } else {
             inputError();
@@ -57,8 +75,15 @@ public class ConsoleUI implements View {
         }
     }
 
-    private boolean checkCommand(int numCommand){
-        if (numCommand <= menu.getSize()){
+    private boolean checkCommand(int numCommand, String menu_current){
+        int size = 1;
+        switch (menu_current) {
+            case "menu" -> size = menu.getSize();
+            case "menu_sortBy" -> size = menu_sortBy.getSize();
+            case "menu_relatives" -> size = menu_relatives.getSize();
+
+        }
+        if (numCommand <= size){
             return true;
         } else {
             inputError();
@@ -104,8 +129,10 @@ public class ConsoleUI implements View {
     }
 
     public void load_file() {
-        System.out.print("\nЗагрузка данных из файла. Текущий список будет удален.\n" +
-                "Для подтверждения введите \"Yes\": ");
+        System.out.print("""
+
+                Загрузка данных из файла. Текущий список будет удален.
+                Для подтверждения введите "Yes":\s""");
         String str2 = scanner.nextLine();
         if (str2.equalsIgnoreCase("Yes")){
             System.out.println("Загружено семейное древо:");
@@ -117,8 +144,10 @@ public class ConsoleUI implements View {
     }
 
     public void clearFamilyTree() {
-        System.out.print("\nСемейное древо будет очищено.\n" +
-                "Для подтверждения введите \"Yes\": ");
+        System.out.print("""
+
+                Семейное древо будет очищено.
+                Для подтверждения введите "Yes":\s""");
         String str2 = scanner.nextLine();
         if (str2.equalsIgnoreCase("Yes")){
             presenter.clearFamilyTree();
@@ -129,8 +158,10 @@ public class ConsoleUI implements View {
     }
 
     public void saveFamilyTree() {
-        System.out.print("\nСохранение в файл. Данные в файле будут заменены.\n" +
-                           "Для подтверждения введите \"Yes\": ");
+        System.out.print("""
+
+                Сохранение в файл. Данные в файле будут заменены.
+                Для подтверждения введите "Yes":\s""");
         String str = scanner.nextLine();
         if (str.equalsIgnoreCase("Yes")){
             System.out.println("Загружаю в файл следующее семейное древо:\n");
@@ -166,4 +197,6 @@ public class ConsoleUI implements View {
     public void marriage() {
         presenter.marriage();
     }
+
+
 }

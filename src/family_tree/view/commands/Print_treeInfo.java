@@ -11,6 +11,6 @@ public class Print_treeInfo extends Command{
     }
     public void execute() {
 //        String sort_by = menu_1.get_choice();
-        consoleUI.treeInfo_sortByID();
+        consoleUI.menu_choice("menu_sortBy");
     }
 }
