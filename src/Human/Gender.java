@@ -1,2 +1,5 @@
-package Human;public enum Gender {
+package Human;
+
+public enum Gender {
+    мужчина, женщина;
 }

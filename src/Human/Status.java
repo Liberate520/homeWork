@@ -1,2 +1,5 @@
-package Human;public enum Status {
+package Human;
+
+public enum Status {
+    мертв, жив
 }
