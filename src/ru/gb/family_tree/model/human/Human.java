@@ -1,6 +1,6 @@
-package ru.gb.family_tree.human;
+package ru.gb.family_tree.model.human;
 
-import ru.gb.family_tree.tree.Memberable;
+import ru.gb.family_tree.model.tree.Memberable;
 
 import java.io.Serializable;
 import java.time.LocalDate;

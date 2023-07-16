@@ -1,4 +1,4 @@
-package ru.gb.family_tree.saveload;
+package ru.gb.family_tree.model.saveload;
 
 import java.io.IOException;
 
