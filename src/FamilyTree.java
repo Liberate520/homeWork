@@ -1,38 +1,55 @@
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
-public class FamilyTree implements Serializable {
 
-    ArrayList<Human> familyTree;
-
-    public FamilyTree(ArrayList<Human> familyTree) {
-        this.familyTree = familyTree;
-    }
+public class FamilyTree implements Serializable, Iterable<Human> {
+    
+    ArrayList<Human> humanList;
 
     public FamilyTree() {
-        this(new ArrayList<>());
+        humanList = new ArrayList<>();
     }
 
     public void add(Human human) {
-        if (!familyTree.contains(human)) {
-            familyTree.add(human);
+        if (!humanList.contains(human)) {
+            humanList.add(human);
         }
     }
 
+    
+    
     @Override
     public String toString() {
-        return getInformation();
+        StringBuilder strb = new StringBuilder();
+        for (Human human : humanList) {
+            strb.append(human);
+        }
+        return strb.toString();
     }
 
-    public String getInformation() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("В семейном дереве %d объектов:\n", familyTree.size()));
-        for (Human human : familyTree) {
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
+    
+
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
     }
+
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge());
+
+    }
+
+    public void sortByBirthdate() {
+        humanList.sort(new HumanComparatorByBirthDate());
+    }
+
+    public void sortByName() {
+        Collections.sort(humanList);
+    }
+
+    
 
 }

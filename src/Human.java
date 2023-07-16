@@ -1,11 +1,12 @@
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.ArrayList;
 
 
-public class Human implements Serializable {
+
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private String surname;
     private LocalDate dateOfBirth ;
@@ -73,19 +74,41 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Имя, фамилия: %s %s\nДата рождения: %s\n", name, surname, dateOfBirth.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        return getInformation();
     }
 
-    public Human getFather() {
-        return father;
+    private String getInformation() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Имя: ");
+        stringBuilder.append(getName() + ", ");
+        stringBuilder.append("Фамилия: ");
+        stringBuilder.append(getSurname() + ", ");
+        stringBuilder.append("Дата рождения: ");
+        stringBuilder.append(getDateOfBirth() + ", ");
+        stringBuilder.append("Возраст: ");
+        stringBuilder.append(getAge() + ", ");
+        stringBuilder.append("Пол: ");
+        stringBuilder.append(getGender() + ", ");
+        stringBuilder.append(fatherInfo()+", ");
+        stringBuilder.append(motherInfo() +", ");
+        stringBuilder.append(getChildren());
+        return stringBuilder.toString();
     }
 
-    public Human getMother() {
-        return mother;
+
+    public int getAge() {
+        if (dateOfDeath == null) {
+            return getPeriod(dateOfBirth, LocalDate.now());
+        } else {
+            return getPeriod(dateOfBirth, dateOfDeath);
+        }
     }
 
-    
-    
+    private int getPeriod(LocalDate date0, LocalDate date1) {
+        Period difference = Period.between(date0, date1);
+        return difference.getYears();
+    }
+
     public ArrayList<Human> getParents() {
         parents = new ArrayList<>();
         if (mother != null) {
@@ -96,6 +119,7 @@ public class Human implements Serializable {
         }
         return parents;
     }
+    
 
     public String getSurname() {
         return surname;
@@ -112,5 +136,43 @@ public class Human implements Serializable {
     public Gender getGender() {
         return gender;
     }
+
+    public Human getFather() {
+        return father;
+    }
+    public String fatherInfo () {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Отец: ");
+        Human father = getFather();
+        if (father == null) {
+            stringBuilder.append("неизвестен");
+        } else {
+            stringBuilder.append(father.getName());
+        }
+        return stringBuilder.toString();
+    }
+
+    public Human getMother() {
+        return mother;
+    }
+    public String motherInfo () {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Мать: ");
+        Human mother = getMother();
+        if (mother == null) {
+            stringBuilder.append("неизвестна");
+        } else {
+            stringBuilder.append(mother.getName());
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public int compareTo(Human nextHuman) {
+        return name.compareTo(nextHuman.name);
+    }
+
+    
+    
     
 }
