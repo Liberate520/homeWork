@@ -1,1 +1,5 @@
-.idea
+'#' Lines starting with '#' are considered comments.
+'#' Ignore any file named
+'#' Ignore (generated) idea, iml files
+*.idea
+*.iml
