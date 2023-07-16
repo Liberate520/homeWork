@@ -1,11 +1,38 @@
 
 
+import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree {
-    FamilyTree(List<Human> humanList){
+public class FamilyTree implements Serializable,Iterable<Integer> {
+    FamilyTree(ArrayList<Human> humanList){
         this.humanList =humanList;
+        this.end = humanList.size();
     }
+    int start = 0;
+    int end;
+    @Override
+    public Iterator iterator() {
+
+
+        return new Iterator(start);
+    }
+    class Iterator implements java.util.Iterator<Integer>{
+
+        public Iterator(int current){
+            this.current=current;
+        }
+        int current;
+        @Override
+        public boolean hasNext() {
+            return current<=end;
+        }
+
+        @Override
+        public Integer next() {
+            return current++;
+        }
+    }
+
     List<Human> humanList = new ArrayList<>();
     public Human getHumanById(int Index){
         for (Human hum: humanList
@@ -44,17 +71,27 @@ public class FamilyTree {
 
     }
     void buildTree(){
+
+        String totalText="";
             for(Map.Entry<Integer, LinkedList<Edge>> m: hashMap.entrySet()){
                 for (int i=0;i<m.getValue().size();i++){
                     Human human =  getHumanById(m.getKey());
                     if(human.GetChildrensList().size()!=0){
-                        System.out.println(human.getName()+" Сделал --> " +m.getValue().get(i).children.getName() + " в " +m.getValue().get(i).ageCreatedChildren);
+                        String str= ("\n"+human.getName()+" Сделал --> " +m.getValue().get(i).children.getName() + " в " +m.getValue().get(i).ageCreatedChildren+"\n");
+                        System.out.println(str);
+                        totalText+=str;
+
                     }
                     else {
-                        System.out.println(human.getName()+" --> " + " Не сделал детей");
+                        String str ="\n" + human.getName()+" --> " + " Не сделал детей\n";
+                        System.out.println(str);
+                        totalText+=str;
+
                     }
 
                 }
+                FileHandler fileHandler = new FileHandler();
+                fileHandler.tryWriteFamilyTreeFile(totalText);
 
         }
     }

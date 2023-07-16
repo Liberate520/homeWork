@@ -25,29 +25,27 @@ public class Main {
         human6.AddChildren(human7);
         human6.AddChildren(human8);
 
-        List<Human> humanList = Arrays.asList(human1, human2, human3, human4, human5, human6, human7, human8);
+        ArrayList<Human> humanList = new ArrayList();
+        humanList.add(human1);
+        humanList.add(human2);
+        humanList.add(human3);
+        humanList.add(human4);
+        humanList.add(human5);
+        humanList.add(human6);
+        humanList.add(human7);
+        humanList.add(human8);
+
 
         FamilyTree familyTree = new FamilyTree(humanList);
-
-
-
-
-
-
-
         familyTree.addNode(new Node(human1));
         familyTree.buildTree();
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.tryWriteHumanFile(humanList);
+        for (Integer item: familyTree
+             ) {
+            System.out.println(item.toString());
 
-//        familyTree.addHuman(human1);
-//        familyTree.addHuman(human2);
-////        for (Integer id: familyTree.graph.keySet()) {
-////            String key = id.toString();
-////            String value = familyTree.graph.get(id).getName();
-////            System.out.println(key + " " + value);
-////
-////        }
-//
-//        familyTree.getAllTree(human1, human2, new LinkedHashSet<>(), familyTree.getPathAllWrap(human1, human2));
+        }
     }
 }
 

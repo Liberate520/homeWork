@@ -1,12 +1,29 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable  {
+
+
+    @Override
+    public String toString(){
+    return
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            ", gender='" + gender + '\''+
+        ", dateOfBirth='" + dateOfBirth + '\''+
+        ", dateOfDeath='" + dateOfDeath + '\'';
+    }
     public Human(String name, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath){
         this.id = idCounter++;
+        this.name = name;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+    }
+    public Human(int id,String name, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath){
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -50,4 +67,6 @@ public class Human {
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
+
+
 }
