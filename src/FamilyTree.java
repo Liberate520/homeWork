@@ -1,19 +1,44 @@
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class FamilyTree {
-    private HashMap<Person, HashMap<String, ArrayList<Person>>> family;
+    private HashMap<Person, HashMap<String, HashSet<Person>>> family;
 
     public FamilyTree() {
+        this.family = new HashMap<>();
     }
 
     public boolean addPerson(Person person) {
-        HashMap<String, ArrayList<Person>> links = new HashMap<>();
         if (!family.containsKey(person)) {
-            family.put(person, links);
+            HashMap<String, HashSet<Person>> connections = new HashMap<>();
+            family.put(person, connections);
             return true;
         }
         return false;
+    }
+
+    public boolean putConnection(Person connectFrom, String key, Person connectTo) {
+        if (family.containsKey(connectFrom))
+            if (family.get(connectFrom).containsKey(key))
+                return family.get(connectFrom).get(key).add(connectTo);
+            else {
+                HashSet<Person> person = new HashSet<>();
+                family.get(connectFrom).put(key, person);
+                return true;
+            }
+        return false;
+    }
+
+//    public String
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Person person :
+                family.keySet()) {
+            sb.append(person).append("\n");
+        }
+        return sb.toString();
     }
 }
