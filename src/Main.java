@@ -13,6 +13,6 @@ public class Main {
         System.out.println(family.addPerson(egor));
         family.addPerson(petr);
         family.addPerson(marina);
-        System.out.println(family.putConnection(egor, "брат", petr));
+        System.out.println(family.putConnection(egor, ConnectionType.SIBLING, petr));
     }
 }
