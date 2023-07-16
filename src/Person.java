@@ -63,6 +63,10 @@ public class Person {
         return yearDeath;
     }
 
+    public String briefName() {
+        return name + " " + surname;
+    }
+
     @Override
     public String toString() {
         if (yearDeath == 0 && sex.equals(Gender.MALE))
