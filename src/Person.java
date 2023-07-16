@@ -32,6 +32,9 @@ public class Person {
         this.yearBirth = yearBirth;
     }
 
+    public Person() {
+    }
+
     public String getName() {
         return name;
     }
