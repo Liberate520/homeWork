@@ -81,25 +81,6 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
     }
 
 
-    public Human getMother() {
-        if (parents != null) {
-            for (Human mother : parents) {
-                if (mother.getGender() == Gender.Female) {
-                    return mother;
-                }
-            }
-        }
-        return null;
-    }
-
-    public Human getFather() {
-        for (Human father : parents) {
-            if (father.getGender() == Gender.Mail) {
-                return father;
-            }
-        }
-        return null;
-    }
 
     @Override
     public int getAge(){
@@ -111,58 +92,12 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         return year_diff.getYears();
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public void setDay_birth(LocalDate day_birth) {
-        this.day_birth = day_birth;
-    }
-
-    public void setDay_death(LocalDate day_death) {
-        this.day_death = day_death;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
 
     @Override
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
     }
-    public void setChildren(List<Human> children) {
-        this.children = children;
-    }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public LocalDate getDay_birth() {
-        return day_birth;
-    }
-
-    public LocalDate getDay_death() {
-        return day_death;
-    }
 
     public Gender getGender() {
         return gender;
@@ -192,14 +127,6 @@ public class Human implements My_Serialization, Iterable<Human>, Comparable<Huma
         return parents;
     }
 
-    @Override
-    public boolean addToHumanList(Human human) {
-        return false;
-    }
-
-    public void setParents(List<Human> parents) {
-        this.parents = parents;
-    }
 
     @Override
     public String toString() {

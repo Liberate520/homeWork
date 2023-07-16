@@ -11,7 +11,6 @@ public interface TreeItem<T> extends Serializable {
     T getSpouse();
     void  setSpouse(T human);
     List<T> getParents();
-    boolean addToHumanList(T human);
     void setId(long id);
     boolean addChild (T child);
     List<T> getChildren();

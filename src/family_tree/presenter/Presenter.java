@@ -14,12 +14,7 @@ public class Presenter {
     }
 
     public Presenter() {
-        view = new View() {
-            @Override
-            public void printAnswer(String text) {
-                System.out.println(text);
-            }
-        };
+        view = System.out::println;
         service = new Service();
     }
 

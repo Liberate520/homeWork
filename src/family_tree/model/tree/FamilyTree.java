@@ -64,20 +64,6 @@ public class FamilyTree<E extends TreeItem<E>> implements My_Serialization, Iter
     }
 
 
-    public boolean setWedding(long humanId_1, long humanId_2) {
-        if (checkId(humanId_1) && checkId(humanId_2)) {
-            E human_1 = getById(humanId_1);
-            E human_2 = getById(humanId_2);
-            if (human_1.getSpouse() == null && human_2.getSpouse() == null) {
-                human_1.setSpouse((E) human_2);
-                human_2.setSpouse((E) human_1);
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
-
     private boolean checkId(long id) {
         if (id >= humanId || id < 0) {
             return false;
@@ -99,13 +85,6 @@ public class FamilyTree<E extends TreeItem<E>> implements My_Serialization, Iter
         return null;
     }
 
-    public List<E> getHumanList() {
-        return humanList;
-    }
-
-    public void setHumanList(List<E> humanList) {
-        this.humanList = humanList;
-    }
 
     public void clearHumanList() {
         this.humanList.clear();
