@@ -17,4 +17,14 @@ public class Tree_service {
          family_tree.sortByAge();
         return  family_tree;
     }
+
+    public String sortBy_choice(String sort_by, FamilyTree<Human> familyTree) {
+        StringBuilder stringBuilder = new StringBuilder();
+        switch (sort_by) {
+            case "2" -> stringBuilder.append(sortByName(familyTree));
+            case "3" -> stringBuilder.append(sortByAge(familyTree));
+            default -> stringBuilder.append(sortById(familyTree));
+        }
+        return stringBuilder.toString();
+    }
 }

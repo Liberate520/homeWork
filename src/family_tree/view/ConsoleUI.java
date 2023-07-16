@@ -72,13 +72,21 @@ public class ConsoleUI implements View {
     }
 
     public void saveFamilyTree() {
-        System.out.println("Сохранение в файл.\nЗагружаю ");
-        getFamilyTreeInfo("1");
-        if (presenter.saveFamily_tree()){
-            System.out.println("Семейное древо успешно сохранено в файл.");
+        System.out.println("Сохранение в файл. Данные в файле будут заменены.\n" +
+                           "Для подтверждения введите \"Yes\": ");
+        String str = scanner.nextLine();
+        if (str.equalsIgnoreCase("Yes")){
+            System.out.println("Загружаю в файл следующее семейное древо:\n");
+            getFamilyTreeInfo("1");
+            if (presenter.saveFamily_tree()){
+                System.out.println("Семейное древо успешно сохранено в файл.");
+            } else {
+                System.out.println("Что-то пошло не так.");
+            }
         } else {
-            System.out.println("Что-то пошло не так.");
+            System.out.println("Действие отменено.");
         }
+
     }
 
     public void set_relatives(String str) {

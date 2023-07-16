@@ -45,13 +45,7 @@ public class Service {
     }
 
     public String getFamilyTreeInfo(String sort_by) {
-        StringBuilder stringBuilder = new StringBuilder();
-        switch (sort_by) {
-            case "2" -> stringBuilder.append(tree_service.sortByName(reg_office.getFamily_tree()));
-            case "3" -> stringBuilder.append(tree_service.sortByAge(reg_office.getFamily_tree()));
-            default -> stringBuilder.append(tree_service.sortById(reg_office.getFamily_tree()));
-        }
-        return stringBuilder.toString();
+        return tree_service.sortBy_choice(sort_by, reg_office.getFamily_tree());
     }
 
     public void clearFamilyTree() {
