@@ -37,18 +37,26 @@ public class Presenter {
         return service.saveFamily_tree();
     }
 
-    public void getFamilyTreeInfo(String sort_by) {
-        String info = service.getFamilyTreeInfo(sort_by);
+    public void treeInfo_sortByID() {
+        String info = service.treeInfo_sortByID();
         view.printAnswer(info);
     }
+
+    public void treeInfo_sortByAge() {
+        String info = service.treeInfo_sortByAge();
+        view.printAnswer(info);
+    }
+
+    public void treeInfo_sortByName() {
+        String info = service.treeInfo_sortByName();
+        view.printAnswer(info);
+    }
+
 
     public void clearFamilyTree() {
         service.clearFamilyTree();
     }
 
-    public void set_relatives(String str) {
-        service.set_relatives(str);
-    }
 
     public String send_request(String string_request) {
         return new ConsoleUI().get_reply(string_request);
@@ -57,5 +65,17 @@ public class Presenter {
 
     public void send_info(String string) {
         view.printAnswer(string);
+    }
+
+    public void parents_finder() {
+        service.parents_finder();
+    }
+
+    public void adoption() {
+        service.adoption();
+    }
+
+    public void marriage() {
+        service.marriage();
     }
 }

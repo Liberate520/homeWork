@@ -4,14 +4,18 @@ import family_tree.presenter.Presenter;
 import java.util.Scanner;
 public class ConsoleUI implements View {
 
-    private Scanner scanner;
-    private Presenter presenter;
-
+    private static final String INPUT_ERROR = "\nВы ввели неверное значение\n";
+    private final Scanner scanner;
+    private final Presenter presenter;
+    private boolean work;
+    private final Menu menu;
 
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
+        work = true;
+        menu = new Menu(this);
     }
 
     @Override
@@ -20,15 +24,68 @@ public class ConsoleUI implements View {
     }
 
     public void start() {
-        System.out.println("СЕМЕЙНОЕ ДРЕВО.");
+        System.out.println("\nСЕМЕЙНОЕ ДРЕВО.\n");
+        while (work){
+            printMenu();
+            execute();
         }
-    public void finish() {
-        System.out.println("СЕМЕЙНОЕ ДРЕВО. Программа закрыта.");
+    }
+
+    private void printMenu() {
+        System.out.println(menu.printMenu());
     }
 
 
-    public void getFamilyTreeInfo(String sort_by) {
-        presenter.getFamilyTreeInfo(sort_by);
+    private void execute(){
+        System.out.print("Введите цифру соответствующего пункта меню: ");
+        String line = scanner.nextLine();
+        if (checkTextForInt(line)){
+            int numCommand = Integer.parseInt(line);
+            if (checkCommand(numCommand)){
+                menu.execute(numCommand);
+            }
+        }
+    }
+
+
+    private boolean checkTextForInt(String text){
+        if (text.matches("[1-9]+")){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    private boolean checkCommand(int numCommand){
+        if (numCommand <= menu.getSize()){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    private void inputError(){
+        System.out.println(INPUT_ERROR);
+    }
+
+    public void finish() {
+        System.out.println("\nСЕМЕЙНОЕ ДРЕВО. Программа закрыта.\n");
+    }
+
+
+
+    public void treeInfo_sortByID() {
+        presenter.treeInfo_sortByID();
+    }
+
+    public void treeInfo_sortByAge() {
+        presenter.treeInfo_sortByAge();
+    }
+
+    public void treeInfo_sortByName() {
+        presenter.treeInfo_sortByName();
     }
 
     public void add_human(){
@@ -47,54 +104,66 @@ public class ConsoleUI implements View {
     }
 
     public void load_file() {
-        System.out.print("Загрузка данных из файла. Текущий список будет удален.\n" +
+        System.out.print("\nЗагрузка данных из файла. Текущий список будет удален.\n" +
                 "Для подтверждения введите \"Yes\": ");
         String str2 = scanner.nextLine();
         if (str2.equalsIgnoreCase("Yes")){
             System.out.println("Загружено семейное древо:");
             presenter.setFamily_tree();
-            getFamilyTreeInfo("1");
+            treeInfo_sortByID();
         } else {
             System.out.println("Действие отменено.");
         }
     }
 
     public void clearFamilyTree() {
-        System.out.print("Семейное древо будет очищено.\n" +
+        System.out.print("\nСемейное древо будет очищено.\n" +
                 "Для подтверждения введите \"Yes\": ");
         String str2 = scanner.nextLine();
         if (str2.equalsIgnoreCase("Yes")){
             presenter.clearFamilyTree();
-            System.out.println("Семейное древо успешно очищено");
+            System.out.println("\nСемейное древо успешно очищено\n");
         } else {
-            System.out.println("Действие отменено.");
+            System.out.println("\nДействие отменено.\n");
         }
     }
 
     public void saveFamilyTree() {
-        System.out.println("Сохранение в файл. Данные в файле будут заменены.\n" +
+        System.out.print("\nСохранение в файл. Данные в файле будут заменены.\n" +
                            "Для подтверждения введите \"Yes\": ");
         String str = scanner.nextLine();
         if (str.equalsIgnoreCase("Yes")){
             System.out.println("Загружаю в файл следующее семейное древо:\n");
-            getFamilyTreeInfo("1");
+            treeInfo_sortByID();
             if (presenter.saveFamily_tree()){
-                System.out.println("Семейное древо успешно сохранено в файл.");
+                System.out.println("\nСемейное древо успешно сохранено в файл.\n");
             } else {
-                System.out.println("Что-то пошло не так.");
+                System.out.println("\nЧто-то пошло не так.\n");
             }
         } else {
-            System.out.println("Действие отменено.");
+            System.out.println("\nДействие отменено.\n");
         }
 
-    }
-
-    public void set_relatives(String str) {
-        presenter.set_relatives(str);
     }
 
     public String get_reply(String string_request) {
         System.out.print(string_request);
         return scanner.nextLine();
+    }
+
+    public void exit() {
+        work = false;
+    }
+
+    public void parents_finder() {
+        presenter.parents_finder();
+    }
+
+    public void adoption() {
+        presenter.adoption();
+    }
+
+    public void marriage() {
+        presenter.marriage();
     }
 }

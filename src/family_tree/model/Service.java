@@ -35,7 +35,6 @@ public class Service {
         }
     }
 
-
     public void setFamily_tree() {
         reg_office.setFamily_tree((FamilyTree<Human>) file_using.load(Config.filePath));
     }
@@ -44,16 +43,20 @@ public class Service {
         return file_using.save(reg_office.getFamily_tree(), Config.filePath);
     }
 
-    public String getFamilyTreeInfo(String sort_by) {
-        return tree_service.sortBy_choice(sort_by, reg_office.getFamily_tree());
+
+    public String treeInfo_sortByID() {
+        return tree_service.sortBy_id(reg_office.getFamily_tree());
     }
 
+    public String treeInfo_sortByAge() {
+        return tree_service.sortBy_age(reg_office.getFamily_tree());
+    }
+
+    public String treeInfo_sortByName() {
+        return tree_service.sortBy_name(reg_office.getFamily_tree());
+    }
     public void clearFamilyTree() {
         reg_office.getFamily_tree().clearHumanList();
-    }
-
-    public void set_relatives(String string){
-        relatives_finder.set_relatives(string, reg_office.getFamily_tree());
     }
 
 
@@ -63,5 +66,17 @@ public class Service {
 
     public void send_info(String string) {
         new Presenter().send_info(string);
+    }
+
+    public void parents_finder() {
+        relatives_finder.parents_finder(reg_office.getFamily_tree());
+    }
+
+    public void adoption() {
+        relatives_finder.adoption(reg_office.getFamily_tree());
+    }
+
+    public void marriage() {
+        relatives_finder.marriage(reg_office.getFamily_tree());
     }
 }

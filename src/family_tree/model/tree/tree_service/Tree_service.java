@@ -18,13 +18,24 @@ public class Tree_service {
         return  family_tree;
     }
 
-    public String sortBy_choice(String sort_by, FamilyTree<Human> familyTree) {
+    public String sortBy_id(FamilyTree<Human> familyTree) {
         StringBuilder stringBuilder = new StringBuilder();
-        switch (sort_by) {
-            case "2" -> stringBuilder.append(sortByName(familyTree));
-            case "3" -> stringBuilder.append(sortByAge(familyTree));
-            default -> stringBuilder.append(sortById(familyTree));
-        }
+        stringBuilder.append(sortById(familyTree));
         return stringBuilder.toString();
     }
+
+    public String sortBy_age(FamilyTree<Human> familyTree) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(sortByAge(familyTree));
+        return stringBuilder.toString();
+    }
+
+    public String sortBy_name(FamilyTree<Human> familyTree) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(sortByName(familyTree));
+        return stringBuilder.toString();
+    }
+
+
+
 }
