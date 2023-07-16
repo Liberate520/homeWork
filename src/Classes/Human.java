@@ -8,7 +8,7 @@ import java.util.List;
 //import static Classes.Gender.female;
 //import static Classes.Gender.male;
 
-public class Human implements Serializable {
+public class Human implements Serializable,Comparable<Human> {
 
 
     private final Integer idHuman;
@@ -250,4 +250,8 @@ public class Human implements Serializable {
         return human.getSurname().equals(getSurname()) & human.getName().equals(getName()) & human.getBrithDate().equals(getBrithDate());
     }
 
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
+    }
 }

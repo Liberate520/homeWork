@@ -2,10 +2,13 @@ package Classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable,Iterable<Human> {
     public List<Human> humanList;
+
 
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;
@@ -55,7 +58,21 @@ public class FamilyTree implements Serializable {
         }
     }
 
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public  void sortByName(){
+        //  humanList.sort(new HumanComparatorByName());
+        Collections.sort(humanList);
+    }
+    public void sortById(){
+        //  humanList.sort(new HumanComparatorByName());
+        Collections.sort(humanList,new HumanComparatorById());
+    }
 //    public Human getByName(String name){
 //
 //    }
 }
+
+
