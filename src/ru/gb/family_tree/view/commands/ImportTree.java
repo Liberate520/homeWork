@@ -1,14 +1,11 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.model.saveload.FileHandler;
-import ru.gb.family_tree.view.ConsoleUI;
+import ru.gb.family_tree.view.console_ui.ConsoleUI;
 
 public class ImportTree extends Command {
-    FileHandler fileHandler;
 
-    public ImportTree(ConsoleUI consoleUI, FileHandler fileHandler) {
+    public ImportTree(ConsoleUI consoleUI) {
         super(consoleUI);
-        this.fileHandler = fileHandler;
         description = "Импортировать дерево из файла объекта";
     }
 

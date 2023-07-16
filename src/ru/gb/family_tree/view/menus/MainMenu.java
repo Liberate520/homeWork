@@ -1,6 +1,6 @@
 package ru.gb.family_tree.view.menus;
 
-import ru.gb.family_tree.view.ConsoleUI;
+import ru.gb.family_tree.view.console_ui.ConsoleUI;
 import ru.gb.family_tree.view.commands.*;
 
 public class MainMenu extends Menu {

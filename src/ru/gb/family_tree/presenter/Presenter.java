@@ -5,6 +5,11 @@ import ru.gb.family_tree.model.saveload.FileHandler;
 import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.view.View;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Presenter {
     private View view;
     private FamilyTree<Human> service;
@@ -14,15 +19,20 @@ public class Presenter {
         service = new FamilyTree<Human>();
     }
 
-    public void addMember(String fio, String gender, String birthDate) {
-        // Парсинг и валидация данных
-        // Добавление пользователя
-        // Ответ пользователю
+    public void addMember(HashMap<String, String> data) {
+        try {
+            Human human = new Human(data.get("surname"), data.get("name"), data.get("patronymic"), data.get("gender"),
+                    LocalDate.parse(data.get("birthDate")));
+            service.addMember(human);
+            view.print("Человек успешно добавлен");
+        } catch (Exception e) {
+            view.print("Произошла ошибка при добавлении человека в семейное древо");
+            view.print(e.getMessage());
+        }
     }
 
     public void getMembers() {
         view.print(service.toString());
-        view.start();
     }
 
     public void sortByName() {
@@ -35,30 +45,20 @@ public class Presenter {
         getMembers();
     }
 
-    public void back() {
-        if (view.previousMenu() == null) view.start();
-        else view.print(view.previousMenu().getMenu());
-    }
-
-    public void importFromObjectFile() {
+    public void importFromObjectFile(String fileName) {
         try {
-            FileHandler fh = new FileHandler("obj.out");
-            service = (FamilyTree<Human>) fh.read();
-        } catch (Exception e) {
-            view.print("Ошибка при импорте объекта из файла");
-            view.print(e.getMessage());
+            service = (FamilyTree<Human>) new FileHandler(fileName).read();
+            view.print("Импорт выполнен успешно");
+        } catch (IOException e) {
+            view.print("Произошла ошибка при импорте из файла: проверьте правильность введенного имени и убедитесь, " +
+                       "что файл существует");
+        } catch (ClassNotFoundException e) {
+            view.print("Произошла ошибка при попытке импортировать дерево: не найден класс для импорта");
+        }
+        catch (ClassCastException e ) {
+            view.print("Произошла ошибка при попытке импортировать дерево: неверные данные");
         }
     }
 
     public int getTreeSize() { return service.countMembers(); }
-
-    public boolean autoimport() {
-        try {
-            FileHandler fh = new FileHandler("obj.out");
-            service = (FamilyTree<Human>) fh.read();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }

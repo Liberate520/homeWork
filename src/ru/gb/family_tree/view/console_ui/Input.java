@@ -1,4 +1,4 @@
-package ru.gb.family_tree.view;
+package ru.gb.family_tree.view.console_ui;
 
 import java.util.Scanner;
 
@@ -20,6 +20,14 @@ public class Input {
             } else {
                 return input;
             }
+        }
+    }
+
+    public String getString() {
+        while (true) {
+            String input = sc.nextLine().trim();
+            if (input.equals("")) System.out.print("Ввод не должен быть пустым. Пожалуйста, повторите ввод: ");
+            else return input;
         }
     }
 
