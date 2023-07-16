@@ -4,18 +4,16 @@ public class Person {
     private String name;
     private Person mother;
     private Person father;
-    Person(String name, Gender gender){
-        this.name = name;
-        this.gender = gender;
-    }
-    Person(String name, Gender gender, Person mother, Person father) {
+    public Person(String name, Gender gender, Person mother, Person father) {
         this.name = name;
         this.father = father;
         this.mother = mother;
         this.gender = gender;
     }
     public String toString(){
-        return this.name;
+        StringBuilder sb = new StringBuilder(name);
+        sb.append(" ").append(gender);
+        return sb.toString();
     }
     public Gender getGender() {
         return this.gender;

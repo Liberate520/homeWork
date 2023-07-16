@@ -4,8 +4,10 @@ import java.util.List;
 
 public class FamilyTree {
     // класс где будут храниться и обрабатываться созданные объекты
-    private List<Person> personList = new ArrayList<>();
-
+    private List<Person> personList;
+    FamilyTree(){
+        personList = new ArrayList<>();
+    }
     void setPerson(Person... person) {
         Collections.addAll(personList, person);
     }
@@ -14,13 +16,15 @@ public class FamilyTree {
         return this.personList;
     }
 
-    public void showParents(Person person) {
+    public String getParents(Person person) {
         if (personList.contains(person)) {
-            System.out.printf("Father is: %s, Mother is: %s\n", person.getFather(), person.getMother());
-        } else System.out.println("Person not found");
+            return String.format(
+                    "Parents %s - Father: %s, Mother: %s",person.getName(),
+                    person.getFather(), person.getMother());
+        } else return "Person not found";
     }
 
-    public void showBrothersAndSisters(Person person) {
+    public List<Person> getBrothersAndSisters(Person person) {
         List<Person> printList = new ArrayList<>();
         for (Person p : personList) {
             if (person.getFather().equals(p.getFather())
@@ -29,10 +33,11 @@ public class FamilyTree {
                 printList.add(p);
             }
         }
-        System.out.println(printList.remove(printList.indexOf(person)));
+        printList.remove(person);
+        return printList;
     }
 
-    public void showChildren(Person person) {
+    public List<Person> getChildren(Person person) {
         List<Person> printList = new ArrayList<>();
         for (Person p : personList) {
             if (p.getMother() != null || p.getFather() != null) {
@@ -42,6 +47,6 @@ public class FamilyTree {
                 }
             }
         }
-        System.out.println(printList);
+        return printList;
     }
 }
