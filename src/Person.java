@@ -7,12 +7,20 @@ public class Person {
 
     public Person(String name, String surname, String patrynomic, Gender sex, int yearBirth,
                   String maidenName, int yearDeath) {
-        this.name = name;
-        this.surname = surname;
-        this.patrynomic = patrynomic;
-        this.sex = sex;
-        this.yearBirth = yearBirth;
+        this(name, surname, patrynomic, sex, yearBirth);
         this.maidenName = maidenName;
+        this.yearDeath = yearDeath;
+    }
+
+    public Person(String name, String surname, String patrynomic, Gender sex, int yearBirth,
+                  String maidenName) {
+        this(name, surname, patrynomic, sex, yearBirth);
+        this.maidenName = maidenName;
+    }
+
+    public Person(String name, String surname, String patrynomic, Gender sex, int yearBirth,
+                  int yearDeath) {
+        this(name, surname, patrynomic, sex, yearBirth);
         this.yearDeath = yearDeath;
     }
 

@@ -10,6 +10,7 @@ public class Main {
                 Gender.FEMALE,1957,"Блохинцева");
         System.out.println(egor);
         System.out.println(petr);
-
+        System.out.println(marina);
+        System.out.println(marina.getMaidenName());
     }
 }
