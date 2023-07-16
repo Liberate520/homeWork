@@ -14,6 +14,7 @@ public class Reg_office {
     private FamilyTree<Human> family_tree;
     private Date_using date_using;
 
+
     public Reg_office() {
         family_tree = new FamilyTree<>();
         date_using = new Date_using();
@@ -24,7 +25,7 @@ public class Reg_office {
         Gender gender = tryGender(str_gender);
         LocalDate day_birth = date_using.tryLocalDate(str_day_birth);
         Human human = new Human(surname, first_name, patronymic, gender, day_birth);
-        this.family_tree.addToHumanList(human);
+        family_tree.addToHumanList(human);
         return human;
     }
     public Gender tryGender(String string) {

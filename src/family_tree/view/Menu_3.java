@@ -1,5 +1,4 @@
 package family_tree.view;
-import family_tree.model.registry_office.relation.Relatives_finder;
 import java.util.Scanner;
 
 public class Menu_3{

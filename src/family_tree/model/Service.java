@@ -1,17 +1,13 @@
 package family_tree.model;
 
-import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
 import family_tree.model.infrastucture.Config;
 import family_tree.model.infrastucture.de_serelization.File_using;
 import family_tree.model.infrastucture.try_catch.Date_using;
 import family_tree.model.registry_office.Reg_office;
-import family_tree.model.registry_office.relation.Relatives_finder;
+import family_tree.model.registry_office.Relatives_finder;
 import family_tree.model.tree.FamilyTree;
 import family_tree.model.tree.tree_service.Tree_service;
-
-
-import java.time.LocalDate;
 
 public class Service {
 
@@ -63,15 +59,7 @@ public class Service {
     }
 
     public void set_relatives(String str){
-        if (str.equals("1")) {
-            reg_office.setFamily_tree(relatives_finder.parents_finder(reg_office.getFamily_tree()));
-        }
-        if (str.equals("2")) {
-            reg_office.setFamily_tree(relatives_finder.adoption(reg_office.getFamily_tree()));
-        }
-        if (str.equals("3")) {
-            reg_office.setFamily_tree(relatives_finder.marriage(reg_office.getFamily_tree()));
-        }
+        relatives_finder.set_relatives(str, reg_office.getFamily_tree());
     }
 
 
