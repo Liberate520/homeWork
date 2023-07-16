@@ -1,28 +1,23 @@
 package family_tree.model.registry_office;
 
 import family_tree.model.human.Human;
-import family_tree.model.registry_office.Reg_office;
 import family_tree.model.tree.FamilyTree;
-import family_tree.model.infrastucture.try_catch.TryLong;
 
-import java.util.Scanner;
 
 
 public class Relatives_finder {
 
-    private final TryLong tryLong;
-    private final Scanner scanner;
+
     Reg_office reg_office;
+    Get_person get_person;
 
 
     public Relatives_finder() {
-        tryLong = new TryLong();
-        scanner = new Scanner(System.in);
         reg_office = new Reg_office();
+        get_person = new Get_person();
     }
 
     public void set_relatives(String str, FamilyTree<Human> familyTree){
-        System.out.println("TST" + familyTree);
         switch (str) {
             case "1" -> reg_office.setFamily_tree(parents_finder(familyTree));
             case "2" -> reg_office.setFamily_tree(adoption(familyTree));
@@ -33,9 +28,9 @@ public class Relatives_finder {
 
         public FamilyTree<Human> parents_finder(FamilyTree<Human> family_tree){
             System.out.println(family_tree);
-            long id_person = get_person("Ребенок", family_tree);
-            long id_mother = get_person("Мать", family_tree);
-            long id_father = get_person("Отец", family_tree);
+            long id_person = get_person.get_person_id("Ребенок", family_tree);
+            long id_mother = get_person.get_person_id("Мать", family_tree);
+            long id_father = get_person.get_person_id("Отец", family_tree);
             if (id_person == -1 || id_father == -1 || id_mother == -1) {
                 System.out.println("\nРодство не установлено.");
                 return family_tree;
@@ -54,8 +49,8 @@ public class Relatives_finder {
 
         public FamilyTree<Human> adoption(FamilyTree<Human> family_tree) {
             System.out.println(family_tree);
-            long id_person = get_person("Родитель", family_tree);
-            long id_child = get_person("Ребенок", family_tree);
+            long id_person = get_person.get_person_id("Родитель", family_tree);
+            long id_child = get_person.get_person_id("Ребенок", family_tree);
             if (id_person == -1 || id_child == -1) {
                 System.out.println("\nУсыновление не состоялось.");
                 return family_tree;
@@ -71,8 +66,8 @@ public class Relatives_finder {
 
         public FamilyTree<Human> marriage(FamilyTree<Human> family_tree) {
             System.out.println(family_tree);
-            long id_1 = get_person("Супруг", family_tree);
-            long id_2 = get_person("Супруга", family_tree);
+            long id_1 = get_person.get_person_id("Супруг", family_tree);
+            long id_2 = get_person.get_person_id("Супруга", family_tree);
             if (id_1 == -1 || id_2 == -1) {
                 System.out.println("\nБрак не зарегистрирован:");
             } else {
@@ -85,17 +80,5 @@ public class Relatives_finder {
             return family_tree;
         }
 
-        private long get_person(String message, FamilyTree<Human> family_tree){
-            String str;
-            System.out.print(message + " - введите id: ");
-            str = scanner.nextLine();
-            long id_person = tryLong.try_long(str);
-            try {
-                family_tree.getById(id_person);
-                System.out.println(message + ": " + family_tree.getById(id_person));
-            } catch (Exception e){
-                id_person = -1;
-            }
-            return id_person;
-        }
+
     }

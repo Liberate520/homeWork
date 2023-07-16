@@ -3,24 +3,24 @@ package family_tree.model;
 import family_tree.model.human.Human;
 import family_tree.model.infrastucture.Config;
 import family_tree.model.infrastucture.de_serelization.File_using;
-import family_tree.model.infrastucture.try_catch.Date_using;
 import family_tree.model.registry_office.Reg_office;
 import family_tree.model.registry_office.Relatives_finder;
 import family_tree.model.tree.FamilyTree;
 import family_tree.model.tree.tree_service.Tree_service;
+import family_tree.presenter.Presenter;
 
 public class Service {
 
 
-    private Reg_office reg_office;
-    private Date_using date_using;
-    private File_using file_using;
-    private Tree_service tree_service;
-    private Relatives_finder relatives_finder;
+    private final Reg_office reg_office;
+
+    private final File_using file_using;
+    private final Tree_service tree_service;
+    private final Relatives_finder relatives_finder;
+
 
     public Service() {
         reg_office = new Reg_office();
-        date_using = new Date_using();
         file_using = new File_using();
         tree_service = new Tree_service();
         relatives_finder = new Relatives_finder();
@@ -58,9 +58,16 @@ public class Service {
         reg_office.getFamily_tree().clearHumanList();
     }
 
-    public void set_relatives(String str){
-        relatives_finder.set_relatives(str, reg_office.getFamily_tree());
+    public void set_relatives(String string){
+        relatives_finder.set_relatives(string, reg_office.getFamily_tree());
     }
 
 
+    public String send_request(String string_request) {
+        return new Presenter().send_request(string_request);
+    }
+
+    public void send_info(String string) {
+        new Presenter().send_info(string);
+    }
 }

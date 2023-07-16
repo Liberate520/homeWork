@@ -12,7 +12,7 @@ public class Reg_office {
 
 
     private FamilyTree<Human> family_tree;
-    private Date_using date_using;
+    private final Date_using date_using;
 
 
     public Reg_office() {

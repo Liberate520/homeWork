@@ -84,4 +84,9 @@ public class ConsoleUI implements View {
     public void set_relatives(String str) {
         presenter.set_relatives(str);
     }
+
+    public String get_reply(String string_request) {
+        System.out.print(string_request);
+        return scanner.nextLine();
+    }
 }
