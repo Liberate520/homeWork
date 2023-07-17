@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String [] args){
-  /*      FamilyTree familyTree = new FamilyTree(0);
+        FamilyTree familyTree = new FamilyTree(0);
 
 
-        Human human1 = new Human("Рикорд", LocalDate.of(1949,10,20),LocalDate.of(1980,01,15),Gender.Male);
+        Human human1 = new Human("Рикорд", LocalDate.of(1949,10,20),LocalDate.of(1980,01,15), Gender.Male);
         familyTree.addHuman(human1);
 
         Human human2 = new Human("Брендон",LocalDate.of(1968,9,10),Gender.Male);
@@ -51,11 +51,16 @@ public class Main {
         human9.addParent(human6);
 
         System.out.println(familyTree.getInfo());
-
-
-        fileHandlerForTree.save(familyTree,"src/ru/gb/family_tree/familyTree.out");*/
+        /*
         FileHandlerForTree fileHandlerForTree=new FileHandlerForTree();
-        FamilyTree familyTree = (FamilyTree) fileHandlerForTree.read("src/ru/gb/family_tree/familyTree.out");
+        fileHandlerForTree.save(familyTree,"src/ru/gb/family_tree/familyTree.out");
+        familyTree = (FamilyTree) fileHandlerForTree.read("src/ru/gb/family_tree/familyTree.out");
+        System.out.println(familyTree.getInfo());
+        */
+
+        familyTree.sortByName();
+        System.out.println(familyTree.getInfo());
+        familyTree.sortByAge();
         System.out.println(familyTree.getInfo());
 
     }
