@@ -58,9 +58,9 @@ public class FamilyTree implements Serializable,Iterable<Human> {
         }
     }
 
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
-    }
+//    public Iterator<Human> iterator() {
+//        return new HumanIterator(humanList);
+//    }
 
     public  void sortByName(){
         //  humanList.sort(new HumanComparatorByName());
