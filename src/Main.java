@@ -40,7 +40,7 @@ public class Main {
 //                System.out.println("1-Тестовый ввод через код в \"TestInput\"");
 //                System.out.println("2-Сохранение в файл");
 //                System.out.println("3-Загрузка из файла");
-            System.out.println("   МЕНЮ >>>> 4-вывод списка людей    5-ввод персоны                            6-Добавить ребенка          7-Добавить родителя");
+            System.out.println("   МЕНЮ >>>> 4-вывод списка людей    5-сортировка по имени   6-сортировка по ID   7-сортировка по дате рождения ");
 //                System.out.println("5-ввод персоны");
 //                System.out.println("6-Добавить ребенка");
 //                System.out.println("7-Добавить родителя");
@@ -69,11 +69,13 @@ public class Main {
                     break;
                 }
                 case ("5"): {
-                    System.out.println("Пока не работает");
+                    tree.sortByName();
+                    System.out.println(tree.getInfo());
                     break;
                 }
                 case ("6"): {
-                    System.out.println("Пока не работает");
+                    tree.sortById();
+                    System.out.println(tree.getInfo());
                     break;
                 }
                 case ("7"): {

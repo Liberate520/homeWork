@@ -17,7 +17,7 @@ public class TestInput {
 
 
         Human as;
-        tree.add(as = new Human(1, "Пушкин", "No", "Александр", "Сергеевич", male,
+        tree.add(as = new Human(1, "Пушкин", "", "Александр", "Сергеевич", male,
                 LocalDate.of(1799, 06, 06), LocalDate.of(1837, 02, 10), null, null));
         Human nn;
         tree.add(nn = new Human(2, "Пушкина", "Гончарова", "Наталья", "Николаевна", female,
