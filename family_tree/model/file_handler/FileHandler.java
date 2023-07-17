@@ -7,10 +7,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import family_tree.model.human_family.FamilyTree;
-import family_tree.model.humans.Human;
+import family_tree.model.human_family.HumanItem;
+
 
 public class FileHandler {
-    public static <T extends Human> void saveToFile(FamilyTree<T> tree, String fileName) {
+    public static <T extends HumanItem> void saveToFile(FamilyTree<T> tree, String fileName) {
         try (FileOutputStream fileOut = new FileOutputStream(fileName);
                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(tree);

@@ -8,6 +8,8 @@ public class HumanIterator<T extends HumanItem> implements Iterator<T> {
     private List<T> humanList;
 
     public HumanIterator(List<T> humanList) {
+        this.humanList = humanList;
+        this.index = 0;
     }
 
     @Override

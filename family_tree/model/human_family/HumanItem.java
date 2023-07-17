@@ -7,7 +7,11 @@ import java.util.List;
 public interface HumanItem<T> extends Serializable {
     List<T> getParents();
 
+    List<T> getAllHumans();
+
     List<T> getAllChildren();
+
+    String getHumansInfo();
 
     String getName();
 

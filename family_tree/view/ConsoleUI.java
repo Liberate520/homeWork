@@ -54,13 +54,9 @@ public class ConsoleUI implements View {
         presenter.sortByYear();
     }
 
-    public void getWomenInfo() {
-        presenter.getWomenInfo();
-        }
+   
 
-    public void getMenInfo(){
-        presenter.getMenInfo();
-    }   
+       
     public void getHumansInfo(){
         presenter.getHumansInfo();
     }

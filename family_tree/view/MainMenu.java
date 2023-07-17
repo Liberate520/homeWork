@@ -7,8 +7,6 @@ import family_tree.view.commands.AddHuman;
 import family_tree.view.commands.Command;
 import family_tree.view.commands.End;
 import family_tree.view.commands.GetHumansInfo;
-import family_tree.view.commands.GetMenInfo;
-import family_tree.view.commands.GetWomenInfo;
 import family_tree.view.commands.SortByYear;
 
 public class MainMenu {
@@ -18,8 +16,6 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new GetHumansInfo(consoleUI));
-        commandList.add(new GetMenInfo(consoleUI));
-        commandList.add(new GetWomenInfo(consoleUI));
         commandList.add(new SortByYear(consoleUI));
         commandList.add(new End(consoleUI));
     }

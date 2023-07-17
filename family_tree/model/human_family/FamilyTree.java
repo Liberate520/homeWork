@@ -4,69 +4,80 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import family_tree.model.humans.Human;
 import family_tree.model.humans.comparators.HumanComparatorByName;
 import family_tree.model.humans.comparators.HumanComparatorByYear;
 
-public class FamilyTree<T extends HumanItem> implements IFamilyTree<T>, Iterable<T> {
-    private List<T> humans;
+public class FamilyTree<T extends HumanItem> implements Iterable<T>, IFamilyTree<T> {
+    private List<T> persons;
+    private List<Human> humans;
+    private HumanPrinter humanPrinter;
 
     public FamilyTree() {
-        humans = new ArrayList<>();
+        this.persons = new ArrayList<>();
+        this.humans = new ArrayList<>();
+    }
+
+    public void addParent(Human parent) {
+        humans.add(parent);
+    }
+
+    public void addChild(Human child) {
+        humans.add(child);
     }
 
     public List<T> getAllChildren(CharSequence parent) {
         List<T> children = new ArrayList<>();
-        for (T human : humans) {
-            if (human.getParents().contains(parent)) {
+        for (T human : persons) {
+            if (((HumanItem) human).getParents().contains(parent)) {
                 children.add(human);
             }
         }
         return children;
     }
 
-    public void addHuman(T human) {
-        humans.add(human);
+    public void sortByName() {
+        persons.sort(new HumanComparatorByName<>());
+    }
+
+    public void sortByYear() {
+        persons.sort(new HumanComparatorByYear<>());
     }
 
     @Override
-    public void removeHuman(T human) {
-        humans.remove(human);
+    public Iterator<T> iterator() {
+        return new HumanIterator<>(persons);
     }
 
     @Override
-    public void updateHuman(T human) {
-        int index = humans.indexOf(human);
+    public void removeHuman(T person) {
+        persons.remove(person);
+    }
+
+    @Override
+    public void updateHuman(T person) {
+        int index = persons.indexOf(person);
         if (index != -1) {
-            humans.set(index, human);
+            persons.set(index, person);
         }
     }
 
     @Override
     public List<T> getAllHumans() {
-        return humans;
+        return persons;
     }
 
     public String getHumanInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Люди:");
-        for (T human : humans) {
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
-    public void sortByName() {
-        humans.sort(new HumanComparatorByName<>());
-    }
-
-    public void sortByYear() {
-        humans.sort(new HumanComparatorByYear<>());
+        return humanPrinter.getHumansInfo();
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new HumanIterator<>(humans);
+    public void addHuman(T human) {
+        persons.add(human);
+    }
+
+    public void addHuman(Human human) {
+        humans.add(human);
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import family_tree.model.file_handler.FileHandler;
 import family_tree.model.human_family.FamilyTree;
+import family_tree.model.human_family.HumanItem;
 import family_tree.model.humans.Gender;
 import family_tree.model.humans.Human;
 
@@ -14,7 +15,7 @@ public class Main {
     private static List<Human> allHumans;
 
     public static void main(String[] args) throws SecurityException, IOException {
-        FamilyTree<Human> familyTree = new FamilyTree<>();
+        FamilyTree<HumanItem> familyTree = new FamilyTree<>();
 
         Human maksim = new Human("Maksim", LocalDate.of(1984, 8, 11), Gender.MALE);
         Human irina = new Human("Irina", LocalDate.of(1989, 4, 15), Gender.FEMALE);
@@ -50,8 +51,8 @@ public class Main {
         FamilyTree loadedTree = FileHandler.loadFromFile("family_tree\\people.txt");
         
         
-        List<Human> allHumans = familyTree.getAllHumans();
-        for (Human human : allHumans) {
+        List<HumanItem> allHumans = familyTree.getAllHumans();
+        for (HumanItem human : allHumans) {
             System.out.println(human);
         }
 
