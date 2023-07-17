@@ -1,9 +1,9 @@
-package model.service;
+package faminly_tree.model.service;
 
-import model.human.Gender;
-import model.human.Human;
-import model.save_in_file.SaveInFile;
-import model.tree.FamilyTree;
+import faminly_tree.model.human.Gender;
+import faminly_tree.model.human.Human;
+import faminly_tree.model.save_in_file.SaveInFile;
+import faminly_tree.model.tree.FamilyTree;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -15,8 +15,8 @@ public class Service {
         this.tree = new FamilyTree<>();
         this.save = new SaveInFile();
     }
-    public void addHuman(String name, Gender gender, LocalDate birth){
-        Human human = new Human(name, gender, birth);
+    public void addHuman(String surname, String name, String patronymic, Gender gender, LocalDate birth){
+        Human human = new Human(name, surname, patronymic, gender, birth);
         tree.addToTree(human);
     }
     public void sortByAge() {
@@ -53,11 +53,6 @@ public class Service {
         } catch (IOException | ClassNotFoundException e) {
             return null;
         }
-    }
-    public void nextOfKin(int humanID) {
-        Human human = (Human) tree.getHumanByID(humanID);
-        if (human == null) System.out.println("Такого человека нет в семейном древе");
-        System.out.println(tree.nextOfKin(human));
     }
     public int treeIsEmpty(){
         return tree.getSize();
