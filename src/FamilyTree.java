@@ -3,6 +3,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+/**
+ * Все семейные связи решил хранить тут, а не в полях класса Person.
+ */
 public class FamilyTree {
     private HashMap<Person, HashMap<ConnectionType, HashSet<Person>>> family;
 
@@ -19,21 +22,55 @@ public class FamilyTree {
         return false;
     }
 
-    public boolean putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
+    /**
+     * Метод ручного добавления связи
+     * @param connectFrom от кого
+     * @param key какая
+     * @param connectTo к кому
+     */
+    public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
         if (family.containsKey(connectFrom))
             if (family.get(connectFrom).containsKey(key))
-                return family.get(connectFrom).get(key).add(connectTo);
+                family.get(connectFrom).get(key).add(connectTo);
             else {
                 HashSet<Person> person = new HashSet<>();
+                person.add(connectTo);
                 family.get(connectFrom).put(key, person);
-                return true;
             }
+    }
+
+    /**
+     * То же самое что сверху, но автоматически добавляется соответствующая обратная связь
+     * @param reverse если этот параметр true
+     */
+    public void putConnection(Person connectFrom, ConnectionType key, Person connectTo, boolean reverse) {
+        putConnection(connectFrom, key, connectTo);
+        if (reverse && !findConnection(connectTo, connectFrom)) {
+            switch (key){
+                case SIBLING -> putConnection(connectTo, ConnectionType.SIBLING, connectFrom);
+                case SPOUSE -> putConnection(connectTo, ConnectionType.SPOUSE, connectFrom);
+                case CHILD -> putConnection(connectTo, ConnectionType.PARENT, connectFrom);
+                case PARENT -> putConnection(connectTo, ConnectionType.CHILD, connectFrom);
+            }
+        }
+    }
+
+    public boolean findConnection(Person connectFrom, Person connectTo) {
+        HashMap<ConnectionType, HashSet<Person>> connections = family.get(connectFrom);
+        for (Map.Entry<ConnectionType, HashSet<Person>> item :
+                connections.entrySet()) {
+            for (Person relative :
+                    item.getValue()) {
+                if (connectTo.equals(relative))
+                    return true;
+            }
+        }
         return false;
     }
 
 public String showConnections (Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(person);
+        sb.append(person).append("\n").append("Близкие родственники:\n");
 
         HashMap<ConnectionType, HashSet<Person>> connections = family.get(person);
         for (Map.Entry<ConnectionType, HashSet<Person>> item :

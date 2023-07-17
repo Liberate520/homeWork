@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Map;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -14,41 +11,20 @@ public class Main {
                 Gender.FEMALE, 1957, "Блохинцева");
         Person leonid = new Person("Леонид", "Меньшиков", "Иеронимович",
                 Gender.MALE, 1954);
+
         System.out.println(family.addPerson(egor));
         family.addPerson(petr);
         family.addPerson(marina);
         family.addPerson(leonid);
-        family.putConnection(egor, ConnectionType.SIBLING, petr);
+        family.putConnection(egor, ConnectionType.PARENT, marina, true);
+        family.putConnection(egor, ConnectionType.SIBLING, petr, true);
         family.putConnection(egor, ConnectionType.PARENT, leonid);
-        family.putConnection(egor, ConnectionType.PARENT, marina);
+        family.putConnection(marina, ConnectionType.SPOUSE, leonid, true);
+
         System.out.println(family.showConnections(egor));
-
-//        HashMap<Person, HashMap<ConnectionType, HashSet<Person>>> ppl = new HashMap<>();
-//        HashMap<ConnectionType, HashSet<Person>> subMap = new HashMap<>();
-//        HashSet<Person> subSet = new HashSet<>();
-//        HashSet<Person> subSet2 = new HashSet<>();
-//        subSet.add(petr);
-//        subSet2.add(marina);
-//        subSet2.add(leonid);
-//        for (Person person :
-//                subSet) {
-//            System.out.println(person.briefName());
-//        }
-//        subMap.put(ConnectionType.SIBLING, subSet);
-//        subMap.put(ConnectionType.PARENT, subSet2);
-//        ppl.put(egor, subMap);
-//        System.out.println(egor);
-//        HashMap<ConnectionType, HashSet<Person>> hm = ppl.get(egor);
-//        for (Map.Entry<ConnectionType, HashSet<Person>> item :
-//                hm.entrySet()) {
-//            System.out.print(item.getKey() + ": ");
-//            for (Person person :
-//                    item.getValue()) {
-//                System.out.print(person.briefName() + "; ");
-//            }
-//            System.out.println();
-//        }
+        System.out.println(family.showConnections(marina));
+        System.out.println(family.showConnections(petr));
+        System.out.println(family.showConnections(leonid));
     }
-
 }
 

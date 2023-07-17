@@ -1,3 +1,3 @@
 public enum ConnectionType {
-    PARENT, SIBLING, CHILD
+    PARENT, CHILD, SIBLING, SPOUSE
 }
