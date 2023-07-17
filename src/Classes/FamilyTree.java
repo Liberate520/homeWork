@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable,Iterable<Human> {
+public class FamilyTree implements Serializable, Iterable<Human> {
     public List<Human> humanList;
 
 
@@ -58,17 +58,18 @@ public class FamilyTree implements Serializable,Iterable<Human> {
         }
     }
 
-//    public Iterator<Human> iterator() {
-//        return new HumanIterator(humanList);
-//    }
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
 
-    public  void sortByName(){
+    public void sortByName() {
         //  humanList.sort(new HumanComparatorByName());
         Collections.sort(humanList);
     }
-    public void sortById(){
+
+    public void sortById() {
         //  humanList.sort(new HumanComparatorByName());
-        Collections.sort(humanList,new HumanComparatorById());
+        Collections.sort(humanList, new HumanComparatorById());
     }
 //    public Human getByName(String name){
 //

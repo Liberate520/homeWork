@@ -8,7 +8,7 @@ import java.util.List;
 //import static Classes.Gender.female;
 //import static Classes.Gender.male;
 
-public class Human implements Serializable,Comparable<Human> {
+public class Human implements Serializable, Comparable<Human> {
 
 
     private final Integer idHuman;
@@ -180,7 +180,7 @@ public class Human implements Serializable,Comparable<Human> {
 
     public String getSurnameOldInfo() {
         StringBuilder tmpSb = new StringBuilder();
-        if (getSurnameOld().equals("")==false) {
+        if (getSurnameOld().equals("") == false) {
             tmpSb.append(" ( ");
             tmpSb.append(getSurnameOld());
             tmpSb.append(" ) ");
@@ -196,7 +196,8 @@ public class Human implements Serializable,Comparable<Human> {
             tmpSb.append("          Отец: ");
             tmpSb.append(father.getFIO());
         } else {
-            tmpSb.append("Отец неизвестен");}
+            tmpSb.append("Отец неизвестен");
+        }
         return tmpSb.toString();
     }
 
