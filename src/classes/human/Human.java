@@ -1,4 +1,6 @@
-package Classes;
+package classes.human;
+
+import classes.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;

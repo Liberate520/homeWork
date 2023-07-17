@@ -1,15 +1,12 @@
-package Classes;
+package classes.service;
 
-import Classes.FamilyTree;
-import Classes.Human;
-
-import java.util.ArrayList;
-import java.time.LocalDate;
-
-import static Classes.Gender.female;
-import static Classes.Gender.male;
+import classes.familyTree.FamilyTree;
+import classes.human.Human;
 
 import java.time.LocalDate;
+
+import static classes.Gender.female;
+import static classes.Gender.male;
 
 public class TestInput {
     //        FamilyTree tree =new FamilyTree();

@@ -1,15 +1,9 @@
-import Classes.FamilyTree;
-import Classes.FileGuide;
-import Classes.Human;
-import Classes.TestInput;
+import classes.familyTree.FamilyTree;
+import classes.service.FileGuide;
+import classes.service.TestInput;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
-
-import static Classes.Gender.female;
-import static Classes.Gender.male;
 
 public class Main {
 

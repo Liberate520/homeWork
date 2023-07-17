@@ -1,4 +1,4 @@
-package Classes;
+package classes.service;
 
 import java.io.*;
 

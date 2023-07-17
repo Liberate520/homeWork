@@ -1,4 +1,9 @@
-package Classes;
+package classes.familyTree;
+
+import classes.human.HumanComparatorByBrithDate;
+import classes.human.HumanComparatorById;
+import classes.human.HumanComparatorByName;
+import classes.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;

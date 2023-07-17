@@ -1,6 +1,7 @@
-package Classes;
+package classes.familyTree;
 
-import java.awt.*;
+import classes.human.Human;
+
 import java.util.Iterator;
 import java.util.List;
 
