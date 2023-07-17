@@ -1,10 +1,12 @@
+package model;
+
 import common.FTImpersonal;
 import iterator_compare.*;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<E extends FTImpersonal<E>> implements Serializable {
+public class FamilyTree<E extends FTImpersonal<E>> implements Serializable, Iterable<E> {
     private List<E> humanList;
 
     public FamilyTree(List<E> humanList) {

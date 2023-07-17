@@ -21,7 +21,11 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 	private List<Human> children;
 	private Gender gender;
 
-	public Human(String lastName, String firstName, Gender gender, LocalDate birthDay, Human father, Human mother) {
+	public Human(){
+
+	}
+
+	public Human(String lastName, String firstName, Gender gender,LocalDate birthDay, Human father, Human mother) {
 		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -52,8 +56,8 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 
 	public Gender getGender() { return gender; }
 
-	public void addParent (Human parent){ if(!parents.contains(parent)) parents.add(parent); }
-	public void addChild(Human child){ if (!children.contains(child)) children.add(child); }
+	public void addParent (Object parent){ if(!parents.contains(parent)) parents.add((Human) parent); }
+	public void addChild(Object child){ if (!children.contains(child)) children.add((Human) child); }
 	public List<Human> getParents(){ return parents; }
 	public List<Human> getChildren(){ return children; }
 
@@ -78,20 +82,13 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 	return null;
 	}
 
-	@Override
-	public void addChild(Object human) {
-
-	}
-
-	@Override
-	public void addParent(Object human) {
-
-	}
-
 	public String getInfo (){
 		StringBuilder builder = new StringBuilder();
 		builder.append("Name: ");
 		builder.append(fullName);
+		builder.append(" | ");
+		builder.append("Gender: ");
+		builder.append(gender);
 		builder.append(" | ");
 		builder.append("Birth Day: ");
 		builder.append(birthDay);
