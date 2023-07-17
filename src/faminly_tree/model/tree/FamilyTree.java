@@ -1,9 +1,9 @@
-package model.tree;
+package faminly_tree.model.tree;
 
-import model.human.comparators.HumanComparatorByAge;
-import model.human.comparators.HumanComparatorByID;
-import model.human.comparators.HumanComparatorByName;
-import model.human.Gender;
+import faminly_tree.model.human.Gender;
+import faminly_tree.model.human.comparators.HumanComparatorByAge;
+import faminly_tree.model.human.comparators.HumanComparatorByID;
+import faminly_tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,8 +27,6 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
 
     //TODO
 
-    //public void allRelatives(Human human){
-    //}
     private void getParent(StringBuilder sb, E human) {
         if (human == null) return;
         if (human.getGender() == Gender.Female) sb.append("Мать:\n");
@@ -224,22 +222,22 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
 
     public String getHumanInfo(E human) {
         StringBuilder sb = new StringBuilder();
-        sb.append("id: ");
+        sb.append("ID: ");
         sb.append(human.getId());
         if (human.getName() != null) {
-            sb.append(", имя: ");
+            sb.append("; Имя: ");
             sb.append(human.getName());
         }
         if (human.getSurname() != null) {
-            sb.append(", фамилия: ");
+            sb.append("; Фамилия: ");
             sb.append(human.getSurname());
         }
         if (human.getPatronymic() != null) {
-            sb.append(", отчество: ");
+            sb.append("; Отчество: ");
             sb.append(human.getPatronymic());
         }
         if (human.getAge() != 0) {
-            sb.append(", возраст: ");
+            sb.append("; Возраст: ");
             sb.append(human.getAge());
         }
         return sb.toString();
