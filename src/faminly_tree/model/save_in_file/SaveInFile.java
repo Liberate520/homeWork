@@ -1,7 +1,7 @@
-package model.save_in_file;
+package faminly_tree.model.save_in_file;
 
-import model.human.Human;
-import model.tree.FamilyTree;
+import faminly_tree.model.human.Human;
+import faminly_tree.model.tree.FamilyTree;
 
 import java.io.*;
 
