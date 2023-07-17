@@ -18,6 +18,7 @@ public class Main {
         String pathToTreeFile = "src/tree.out";
         FileGuide fileGuide = new FileGuide();
         FamilyTree tree = new FamilyTree();
+
 //         TestInput.TestInput(tree);//Тестовый вариант заполнения списка
 //        System.out.println(tree.humanList.size());
 //        System.out.println(tree.getInfo());
@@ -86,6 +87,7 @@ public class Main {
 //                cycle=false;
 
         }
+
     }
 
 

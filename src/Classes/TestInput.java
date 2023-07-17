@@ -31,6 +31,7 @@ public class TestInput {
                 LocalDate.of(1835, 5, 26), LocalDate.of(1905, 8, 18), null, null));
 
         System.out.println("Тестовый список содержит записей: " + tree.humanList.size());
+
 //       Human as=new Human(1,"Пушкин","","Александр","Сергеевич",male,
 //              LocalDate.of(1799,06,06),LocalDate.of(1837,02,10),null,null);
 //       tree.humanList.add(as);

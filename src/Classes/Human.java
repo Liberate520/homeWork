@@ -196,8 +196,7 @@ public class Human implements Serializable,Comparable<Human> {
             tmpSb.append("          Отец: ");
             tmpSb.append(father.getFIO());
         } else {
-            tmpSb.append("Отец неизвестен");
-        }
+            tmpSb.append("Отец неизвестен");}
         return tmpSb.toString();
     }
 
