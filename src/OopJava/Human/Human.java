@@ -1,4 +1,4 @@
-package FamilyTree;
+package OopJava.Human;
 
 import java.util.List;
 import java.io.*;
@@ -7,16 +7,16 @@ public class Human implements Serializable{
     private Gender gender;
     private Human father;
     private Human mother;
-    List<Human> childrens;
+    List<Human> kids;
     private int year;
 
-    public Human(String name, Gender gender, int year, Human father, Human mother, List<Human> childrens) {
+    public Human(String name, Gender gender, int year, Human father, Human mother, List<Human> kids) {
         this.name = name;
         this.gender = gender;
         this.year = year;
         this.father = father;
         this.mother = mother;
-        this.childrens = childrens;
+        this.kids = kids;
     }
 
     public Human(String name, Gender gender, int year, Human father, Human mother) {
@@ -26,12 +26,12 @@ public class Human implements Serializable{
         this.father = father;
         this.mother = mother;
     }
-    public Human(String name, Gender gender, int year, List<Human> childrens) {
+    public Human(String name, Gender gender, int year) {
         this.name = name;
         this.gender = gender;
         this.year = year;
-        this.childrens = childrens;
     }
+
 
     public String getName() {
         return name;
@@ -46,13 +46,13 @@ public class Human implements Serializable{
         return mother;
     }
     public String getFatherStr() {
-        return "Отец: " + father.toString();
+        return "father - " + father;
     }
     public String getMotherStr() {
-        return "Мама: " + mother.toString();
+        return "mother - " + mother;
     }
-    public String getChildren() {
-        return "Ребёнок: " + childrens.toString();
+    public String getChild() {
+        return "children - " + kids.toString();
     }
     public int getYear() {
         return year;
@@ -65,8 +65,8 @@ public class Human implements Serializable{
             str += ": " + getFatherStr() + ";";
         if (mother != null)
             str += " " + getMotherStr();
-        if (childrens != null)
-            str += " " + getChildren();
+        if (kids != null)
+            str += " " + getChild();
         return str;
     }
 }
