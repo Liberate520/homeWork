@@ -37,8 +37,8 @@ public class ConsoleUI implements View {
     }
     private void Hello() {
         print("Приветствую! Выберите действие:\n" +
-                "1. Начать новый проект\n" +
-                "2. Открыть проект");
+                "[1] Начать новый проект\n" +
+                "[2] Открыть проект");
         String answer = scanner.nextLine();
         int choice = examination(answer);
         if (choice == -1) System.out.printf("Некорректно введена команда. Введите число 1 или 2");
@@ -71,9 +71,13 @@ public class ConsoleUI implements View {
     public void addHuman() {
         Gender gender = null;
         boolean flag = false;
+        print("Введите фамилию человека");
+        String surname = scanner.nextLine();
         print("Введите имя человека");
         String name = scanner.nextLine();
-        print("Укажете пол человека (ж, м):");
+        print("Введите отчество человека");
+        String patronymic = scanner.nextLine();
+        print("Укажете пол человека [м/ж]:");
         String sex = scanner.nextLine().toLowerCase();
         print("Укажите дату рождения (год/месяц/день):");
         String birth = scanner.nextLine();
@@ -100,7 +104,7 @@ public class ConsoleUI implements View {
         }
         if (flag == false) {
             LocalDate date = LocalDate.of(birthYear, birthMonth, birthDay);
-            presenter.addHuman(name, gender, date);
+            presenter.addHuman(surname, name, patronymic, gender, date);
             print("Успешно!");
         }
     }
@@ -109,20 +113,20 @@ public class ConsoleUI implements View {
             print("Дерево не заполнено");
             return;
         }
-        print("Укажите id родителя, имеющегося в древе, для которого вы хотите установить родственную связь: ");
+        print("Укажите ID родителя, имеющегося в древе, для которого вы хотите установить родственную связь: ");
         int parentID = findHumanID();
         if (parentID == -1) {
             print("Ошибка ввода числа");
             return;
         }
-        print("Укажите id ребенка, имеющегося в древе, для которого вы хотите установить родственную связь: ");
+        print("Укажите ID ребенка, имеющегося в древе, для которого вы хотите установить родственную связь: ");
         int childID = findHumanID();
         if (childID == -1) {
             print("Ошибка ввода числа");
             return;
         }
         boolean flag = presenter.connection(parentID, childID);
-        if (flag == false) print("Человека с таким id нет в семейном древе");
+        if (flag == false) print("Человека с таким ID нет в семейном древе");
         else print("Успешно изменена родственная связь");
     }
     public void showAllTree() {
@@ -146,9 +150,9 @@ public class ConsoleUI implements View {
         presenter.sortByName();
     }
     public void finish() {
-        print("Вы хотите сохранить работу над проектом?");
+        print("Вы хотите сохранить работу над проектом? [Да/Yes]");
         String answer = scanner.nextLine();
-        if (answer.equals("да") || answer.equals("yes")) {
+        if (answer.equals("Да") || answer.equals("Yes")) {
             if (pathRemember != null){
                 if (!save(pathRemember)) print("К сожалению, не получилось сохранить файл!");
                 else print("Успешно сохранили вашу работу!");
@@ -177,7 +181,7 @@ public class ConsoleUI implements View {
             print("Дерево не заполнено");
             return;
         }
-        print("Укажите id человека, имеющегося в древе, для которого вы хотите вывести ближайших родственников: ");
+        print("Укажите ID человека, имеющегося в древе, для которого вы хотите вывести ближайших родственников: ");
         int humanID = findHumanID();
         if (humanID == -1) {
             print("Ошибка ввода числа");
