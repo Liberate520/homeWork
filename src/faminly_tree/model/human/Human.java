@@ -1,6 +1,6 @@
-package model.human;
+package faminly_tree.model.human;
 
-import model.tree.FamiliItem;
+import faminly_tree.model.tree.FamiliItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -93,19 +93,19 @@ public class Human implements Serializable, FamiliItem {
     private String motherGetInfo() {
         StringBuilder sb = new StringBuilder();
         if (this.getMother() != null) sb.append(this.getMother().getName());
-        else sb.append("неизвестна");
+        else sb.append("Неизвестна");
         return sb.toString();
     }
     private String fatherGetInfo() {
         StringBuilder sb = new StringBuilder();
         if (this.getFather() != null) sb.append(this.getFather().getName());
-        else sb.append("неизвестен");
+        else sb.append("Неизвестен");
         return sb.toString();
     }
     private String childrenGetInfo(){
         StringBuilder sb = new StringBuilder();
         List<Human> children = this.getChildren();
-        if (children == null) sb.append("нет");
+        if (children == null) sb.append("Отсутствуют");
         else {
             for(Human el : children){
                 sb.append(el.getName());
@@ -117,29 +117,29 @@ public class Human implements Serializable, FamiliItem {
     }
     private String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("id: ");
+        sb.append("ID: ");
         sb.append(id);
-        if (this.name != null) {
-            sb.append(", имя: ");
-            sb.append(name);
-        }
         if (this.surname != null) {
-            sb.append(", фамилия: ");
+            sb.append("; Фамилия: ");
             sb.append(surname);
         }
+        if (this.name != null) {
+            sb.append("; Имя: ");
+            sb.append(name);
+        }
         if (this.patronymic != null) {
-            sb.append(", отчество: ");
+            sb.append("; Отчество: ");
             sb.append(patronymic);
         }
         if (this.age != 0) {
-            sb.append(", возраст: ");
+            sb.append("; Возраст: ");
             sb.append(age);
         }
-        sb.append(", мать: ");
+        sb.append("; Мать: ");
         sb.append(motherGetInfo());
-        sb.append(", отец: ");
+        sb.append("; Отец: ");
         sb.append(fatherGetInfo());
-        sb.append(", дети: ");
+        sb.append("; Дети: ");
         sb.append(childrenGetInfo());
         return sb.toString();
     }
