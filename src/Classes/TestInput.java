@@ -26,7 +26,7 @@ public class TestInput {
         tree.add(mag = new Human(3, "Гартунг", "Пушкина", "Мария", "Александровна", female,
                 LocalDate.of(1832, 5, 31), LocalDate.of(1919, 3, 7), as, nn));
         tree.add(new Human(4, "Пушкин", "", "Александр", "Александрович", male,
-                LocalDate.of(1833, 7, 18), LocalDate.of(1914, 8, 1), null, null));
+                LocalDate.of(1633, 7, 18), LocalDate.of(1914, 8, 1), null, null));
         tree.add(new Human(5, "Пушкин", "", "Григорий", "Александрович", male,
                 LocalDate.of(1835, 5, 26), LocalDate.of(1905, 8, 18), null, null));
 

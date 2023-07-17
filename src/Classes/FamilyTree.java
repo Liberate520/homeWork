@@ -63,13 +63,18 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void sortByName() {
-        //  humanList.sort(new HumanComparatorByName());
-        Collections.sort(humanList);
+        humanList.sort(new HumanComparatorByName());
+        //Collections.sort(humanList);//РАБОТАЕТ
     }
 
     public void sortById() {
         //  humanList.sort(new HumanComparatorByName());
         Collections.sort(humanList, new HumanComparatorById());
+    }
+
+    public void sortByBrithDate() {
+        //  humanList.sort(new HumanComparatorByName());
+        Collections.sort(humanList, new HumanComparatorByBrithDate());
     }
 //    public Human getByName(String name){
 //

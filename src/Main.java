@@ -79,7 +79,8 @@ public class Main {
                     break;
                 }
                 case ("7"): {
-                    System.out.println("Пока не работает");
+                    tree.sortByBrithDate();
+                    System.out.println(tree.getInfo());
                 }
                 default: {
                     System.out.println("Непонятная команда");
