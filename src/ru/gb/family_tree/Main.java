@@ -1,54 +1,17 @@
 package ru.gb.family_tree;
 
-import ru.gb.family_tree.Servise.FileHandler;
-import ru.gb.family_tree.Servise.TestData;
-import ru.gb.family_tree.Tree.FamilyTree;
+import ru.gb.family_tree.model.servise.FileHandler;
+import ru.gb.family_tree.model.servise.TestData;
+import ru.gb.family_tree.model.tree.FamilyTree;
+import ru.gb.family_tree.view.ConsoleView;
 
 import java.io.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-        FileHandler fileHandler = new FileHandler();
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("-----------------------");
-            System.out.println("Введите:\n p - вывести инф. о дереве;\n" +
-                    " s - сортировка по имени;\n" +
-                    " a - сортировка по возрасту;\n" +
-                    " b - сортировка по дате рождения;\n" +
-                    " с - выполнить сериализацию проекта;\n" +
-                    " d - десериализация проекта;\n" +
-                    " q - выход.\n");
-            String data = scanner.nextLine();
-            if (data.equalsIgnoreCase("p")) {
-                FamilyTree familyTree = TestData.testData();
-                System.out.println(familyTree.getTreeInfo());
-            } else if (data.equalsIgnoreCase("s")) {
-                FamilyTree familyTree = TestData.testData();
-                System.out.println("Сортировка по имени >>>>>> ");
-                familyTree.sortByName();
-                System.out.println(familyTree.getTreeInfo());
-            } else if (data.equalsIgnoreCase("a")) {
-                FamilyTree familyTree = TestData.testData();
-                System.out.println("Сортировка по возрасту >>>>>>  ");
-                familyTree.sortByAge();
-                System.out.println(familyTree.getTreeInfo());
-            } else if (data.equalsIgnoreCase("b")) {
-                FamilyTree familyTree = TestData.testData();
-                System.out.println("Сортировка по дате рождения >>>>>>  ");
-                familyTree.sortByBirthday();
-                System.out.println(familyTree.getTreeInfo());
-            } else if (data.equalsIgnoreCase("c")) {
-                FamilyTree familyTree = TestData.testData();
-                fileHandler.save(familyTree, "src/ru/gb/family_tree/tree.out");
-                System.out.println("экспорт (tree.out) завершен успещно");}
-            else if(data.equalsIgnoreCase("d")) {
-                FamilyTree familyTree = (FamilyTree) fileHandler.loading("src/ru/gb/family_tree/tree.out");
-                System.out.println("Импорт данных выполнен: " + familyTree);}
-            else if (data.equalsIgnoreCase("q")) System.exit(0);
-        }
+        ConsoleView consoleView = new ConsoleView();
+        consoleView.start();
     }
 }
 

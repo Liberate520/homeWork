@@ -1,6 +1,5 @@
-package ru.gb.family_tree.Servise;
+package ru.gb.family_tree.model.servise;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 
