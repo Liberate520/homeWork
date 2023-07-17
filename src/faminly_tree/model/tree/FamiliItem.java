@@ -1,11 +1,11 @@
-package family_tree;
+package model.tree;
 
-import human.Gender;
-import java.io.Serializable;
+import model.human.Gender;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FamilyTreeItem<E> extends Serializable {
+public interface FamiliItem<E> {
     int getId();
     void setId(int id);
     int getAge();
@@ -17,10 +17,4 @@ public interface FamilyTreeItem<E> extends Serializable {
     E getMother();
     E getFather();
     List<E> getChildren();
-
-    <E extends FamilyTreeItem<E>> void setChildren(List<E> children);
-
-    void setFather(E father);
-
-    void setMother(E mother);
 }
