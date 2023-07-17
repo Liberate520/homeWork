@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
+//задача класса это исследование семейного древа в виде листа, этим он и занимается, кроме метода GetHumanInfo все хорошо
 public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterable<E> {
     private List<E> tree;
     private int newID;
@@ -272,6 +272,10 @@ public class FamilyTree<E extends FamiliItem<E>> implements Serializable, Iterab
         return parents.toString().replaceAll("]", "").replaceAll("\\[", "").replaceAll("\n, ", "\n\n");
     }
 
+
+    //метод завязан на класс Human, а если в дерево передается что-то другое, кроме человека? Нужен интерфейс
+    // getObgectInfo и его реализации для разных существ и, как следствие, отдельный пакет для этого интерфейса и
+    // реализующих его классов
     public String getHumanInfo(E human) {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");

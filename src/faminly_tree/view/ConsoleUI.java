@@ -6,7 +6,8 @@ import faminly_tree.view.commands.MainMenu;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-
+//класс осуществляет общение с пользователем, по идее за рамками его задачи могут быть методы,
+// связанные с проверкой входных данных, можно сделать проверяющий класс и вызывать его методы здесь
 public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
@@ -35,13 +36,19 @@ public class ConsoleUI implements View {
             else System.out.printf("Некорректно введена команда. Введите число от 1 до %d\n", menu.getSize());
         }
     }
+    //Прописать меню Hello также как и меню команд, принцип открытости-закрытости, при расширении функционала придется
+    // переписывать весь метод, включая "магические числа"
     private void Hello() {
         print("Приветствую! Выберите действие:\n" +
                 "1. Начать новый проект\n" +
-                "2. Открыть проект");
+                "2. Открыть проект\n" +
+                "3. Завершение работы");
         String answer = scanner.nextLine();
         int choice = examination(answer);
-        if (choice == -1) System.out.printf("Некорректно введена команда. Введите число 1 или 2");
+        if (choice == -1 || choice > 2 || choice <= 0) {
+            System.out.printf("Некорректно введена команда. Введите число 1 или 2\n");
+            Hello();
+        }
         if (choice == 2) {
             print("Укажите имя файла:");
             String name = scanner.nextLine();
