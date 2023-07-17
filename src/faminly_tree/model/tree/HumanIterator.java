@@ -1,4 +1,4 @@
-package model.tree;
+package faminly_tree.model.tree;
 
 import java.util.Iterator;
 import java.util.List;
