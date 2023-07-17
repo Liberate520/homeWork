@@ -5,9 +5,9 @@ import family_tree.person.Person;
 
 import java.util.Comparator;
 
-public class PersonComparatorByNameReverse<E extends FamilyTreeItem<E>> implements Comparator<E> {
+public class PersonComparatorByName<E extends FamilyTreeItem<E>> implements Comparator<E> {
     @Override
     public int compare(E o1, E o2) {
-        return o2.getName().compareTo(o1.getName());
+        return o1.getName().compareTo(o2.getName());
     }
 }

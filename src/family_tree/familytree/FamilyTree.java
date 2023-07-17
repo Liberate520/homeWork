@@ -10,22 +10,22 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
-    private List<Person> allPersons;
-    private Person peakMother;
-    private Person peakFather;
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
+    private List<E> allPersons;
+    private E peakMother;
+    private E peakFather;
 
     // constructors
     public FamilyTree() {
         allPersons = new ArrayList<>();
     }
 
-    public FamilyTree(Person person) {
+    public FamilyTree(E person) {
         allPersons = new ArrayList<>();
         allPersons.add(person);
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(E person) {
         if (allPersons == null) {
             allPersons = new ArrayList<>();
         }
@@ -35,14 +35,30 @@ public class FamilyTree implements Serializable, Iterable<Person> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Person person:this) {
+        for (E person:this) {
             sb.append(String.format("%s \n", person));
         }
-        return sb.toString();
+        return sb.toString().substring(0,sb.length()-3);
+    }
+
+    public String printShort() {
+        int index = 1;
+        StringBuilder sb = new StringBuilder();
+        for (E person:this) {
+            sb.append(String.format("%s. ", index++));
+            sb.append(person.getName());
+            sb.append(" ");
+            sb.append(person.getBirthDate());
+            sb.append(" ");
+            sb.append(person.getAge());
+            sb.append(" л.(г.)");
+            sb.append("\n");
+        }
+        return sb.toString().substring(0,sb.length()-1);
     }
 
     public void setPeak(String name) {
-        for (Person person : this) {
+        for (E person : this) {
             if (person.getName().equalsIgnoreCase(name))
                 if (person.getGender()== Gender.Female) {
                     this.peakMother = person;
@@ -52,16 +68,16 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public Person getPeakMother() {
+    public E getPeakMother() {
         return peakMother;
     }
 
-    public Person getPeakFather() {
+    public E getPeakFather() {
         return peakFather;
     }
 
-    public Person getPersonByName(String name) {
-        for (Person personAtList:this) {
+    public E getPersonByName(String name) {
+        for (E personAtList:this) {
             if (personAtList.getName().equalsIgnoreCase(name)){
                 return personAtList;
             }
@@ -70,39 +86,60 @@ public class FamilyTree implements Serializable, Iterable<Person> {
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator(this.allPersons);
+    public Iterator<E> iterator() {
+        return new PersonIterator<>(this.allPersons);
     }
 
     public void sortByName() {
-        Collections.sort(this.allPersons);
+        Collections.sort(this.allPersons, new PersonComparatorByName<>());
     }
 
     public void sortByNameReverse() {
-        Collections.sort(this.allPersons, new PersonComparatorByNameReverse());
+        Collections.sort(this.allPersons, new PersonComparatorByNameReverse<>());
     }
 
     public void sortByAge() {
-        Collections.sort(this.allPersons,new PersonComparatorByAge());
+        Collections.sort(this.allPersons,new PersonComparatorByAge<>());
     }
 
     public void sortByAgeReverse() {
-        Collections.sort(this.allPersons,new PersonComparatorByAgeReverse());
+        Collections.sort(this.allPersons,new PersonComparatorByAgeReverse<>());
     }
 
     public void sortByBirth() {
-        Collections.sort(this.allPersons,new PersonComparatorByBirth());
+        Collections.sort(this.allPersons,new PersonComparatorByBirth<>());
     }
 
     public void sortByBirthReverse() {
-        Collections.sort(this.allPersons,new PersonComparatorByBirthReverse());
+        Collections.sort(this.allPersons,new PersonComparatorByBirthReverse<>());
     }
 
     public void sortByChildren() {
-        Collections.sort(this.allPersons,new PersonComparatorByChildren());
+        Collections.sort(this.allPersons,new PersonComparatorByChildren<>());
     }
 
     public void sortByChildrenReverse() {
-        Collections.sort(this.allPersons,new PersonComparatorByChildrenReverse());
+        Collections.sort(this.allPersons,new PersonComparatorByChildrenReverse<>());
     }
+
+    public boolean delByName(String name) {
+        E person = this.getPersonByName(name);
+        return this.allPersons.remove(person);
+    }
+
+    public E getPersonByIndex(int index) {
+        if (index < this.allPersons.size()) {
+            return this.allPersons.get(index);
+        }
+        return null;
+    }
+
+    public int getSize() {
+        return this.allPersons.size();
+    }
+
+    public List<E> getAllUnits() {
+        return this.allPersons;
+    }
+
 }

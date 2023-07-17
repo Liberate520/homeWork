@@ -1,5 +1,8 @@
 package family_tree.person;
 
+import family_tree.familytree.FamilyTree;
+import family_tree.familytree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Person implements Serializable, Comparable<Person> {
+public class Person implements FamilyTreeItem<Person>, Serializable, Comparable<Person> {
     private String fullname;
     private GregorianCalendar birthDate;
     private GregorianCalendar endLifeDate;
@@ -64,6 +67,11 @@ public class Person implements Serializable, Comparable<Person> {
     public Person(String fullname, int birthYYYY, int birthM, int birthD,
                   int endLifeYYYY, int endLifeM, int endLifeD, Gender gender) {
         this(fullname, birthYYYY, birthM, birthD, endLifeYYYY, endLifeM, endLifeD, gender,
+                null, null, new ArrayList<Person>(), null);
+    }
+
+    public Person(String fullname, int birthYYYY, int birthM, int birthD, Gender gender) {
+        this(fullname, birthYYYY, birthM, birthD, null, null, null, gender,
                 null, null, new ArrayList<Person>(), null);
     }
 
@@ -215,7 +223,7 @@ public class Person implements Serializable, Comparable<Person> {
 
     public int getAge() {
         Date birth = this.birthDate.getTime();
-        Date endLife = this.endLifeDate.getTime();
+        Date endLife = this.endLifeDate != null ? this.endLifeDate.getTime() : new Date();
         long diff = endLife.getTime() - birth.getTime();
         return Math.toIntExact((diff / (1000 * 60 * 60 * 24)) / 365);
     }
@@ -228,5 +236,17 @@ public class Person implements Serializable, Comparable<Person> {
     @Override
     public int compareTo(Person o) {
         return this.fullname.compareTo(o.fullname);
+    }
+
+    public String printShort() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getName());
+        sb.append(" ");
+        sb.append(this.getBirthDate());
+        sb.append(" ");
+        sb.append(this.getAge());
+        sb.append(" л.(г.)");
+        sb.append("\n");
+        return sb.toString();
     }
 }
