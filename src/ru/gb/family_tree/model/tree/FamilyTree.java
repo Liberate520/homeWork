@@ -1,41 +1,49 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.model.tree;
+
+import ru.gb.family_tree.model.human.comporators.ComparatorByAge;
+import ru.gb.family_tree.model.human.comporators.ComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-    public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>{
-        private List<T> humanList;
+    public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E>{
+        private List<E> humanList;
     public FamilyTree() {
         humanList = new ArrayList<>();}
 
-    public void addHuman(T human) {
+    public void addHuman(E human) {
         if (!humanList.contains(human)) {
             humanList.add(human);
-
+//            // добавление связей
             addToParents(human);
             addToChildren(human);
         }
     }
 
-    private void addToParents(T h){
-//        for (Human parent: h.getParents()){
-//            parent.addChild((Human) h);
-//        }
+//    public void addConnect(E human) {
+//        addToParents(human);
+//        addToChildren(human);
+//    }
+
+    private void addToParents(E human){
+        for (E parent: human.getParents()){
+            parent.addChild(human);
+        }
 
     }
 
-    private void addToChildren(T human){
-        for (Human child: human.getChildren()){
-            child.addParent((Human) human);
+    private void addToChildren(E human){
+        for (E child: human.getChildren()){
+            child.addParent(human);
         }
     }
 
-    public  T getByFullName(String fullName) {
-        for (T human: humanList){
+    public E getByFullName(String fullName) {
+        for (E human: humanList){
             if (human.getFullName().equals(fullName)){
-                return (T) human;
+                return human;
             }
         }
         return null;
@@ -44,7 +52,7 @@ import java.util.List;
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семейное древо:\n");
-        for (T human: humanList){
+        for (E human: humanList){
             stringBuilder.append(human.getInfo());
             stringBuilder.append("\n");
         }
@@ -55,8 +63,8 @@ import java.util.List;
     public String toString() {
         return getInfo();
     }
-    @Override
-    public Iterator<T> iterator() {
+
+    public Iterator<E> iterator() {
         return new TIterator<>(humanList);
     }
 

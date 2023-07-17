@@ -1,4 +1,4 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.model.tree;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +8,7 @@ public class TIterator<T> implements Iterator<T> {
     private List<T> humanList;
 
     public TIterator(List<T> humanList) {
+        this.humanList = humanList;
     }
 
     @Override
