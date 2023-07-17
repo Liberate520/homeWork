@@ -1,7 +1,6 @@
-package Homework.Human.Comparators;
+package Homework.model.Human.Comparators;
 
-import Homework.Human.Human;
-import Homework.Tree.FamilyTreeItem;
+import Homework.model.Tree.FamilyTreeItem;
 
 import java.util.Comparator;
 

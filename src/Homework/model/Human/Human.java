@@ -1,6 +1,6 @@
-package Homework.Human;
+package Homework.model.Human;
 
-import Homework.Tree.FamilyTreeItem;
+import Homework.model.Tree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -45,6 +45,7 @@ public class Human implements Serializable, FamilyTreeItem {
     public Human(String name, Gender gender, LocalDate birth, Human father){
         this(name, gender, birth, father, null);
     }
+
 
     public boolean addChild(Human child){
         if(!children.contains(child)){

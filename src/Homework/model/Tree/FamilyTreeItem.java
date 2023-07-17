@@ -1,4 +1,4 @@
-package Homework.Tree;
+package Homework.model.Tree;
 
 import java.io.Serializable;
 import java.time.LocalDate;

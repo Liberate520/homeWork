@@ -1,6 +1,6 @@
-package Homework.Tree.FileMethods;
+package Homework.model.Tree.FileMethods;
 
-import Homework.Tree.FamilyTree;
+import Homework.model.Tree.FamilyTree;
 
 import java.io.*;
 

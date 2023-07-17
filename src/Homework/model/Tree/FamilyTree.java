@@ -1,10 +1,10 @@
-package Homework.Tree;
+package Homework.model.Tree;
 
-import Homework.Human.Comparators.HumanComporatorByAge;
-import Homework.Human.Comparators.HumanComporatorByName;
-import Homework.Human.Comparators.HumanComporatorByChildren;
-import Homework.Human.Human;
-import Homework.Tree.Iterators.HumanIterator;
+import Homework.model.Human.Comparators.HumanComporatorByAge;
+import Homework.model.Human.Comparators.HumanComporatorByName;
+import Homework.model.Human.Comparators.HumanComporatorByChildren;
+import Homework.model.Human.Human;
+import Homework.model.Tree.Iterators.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;

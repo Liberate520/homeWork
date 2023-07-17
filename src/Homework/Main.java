@@ -1,10 +1,12 @@
 package Homework;
 
-//import Homework.Human.DeathHuman;
-import Homework.Human.Gender;
-import Homework.Human.Human;
-import Homework.Tree.FamilyTree;
-import Homework.Tree.FileMethods.FileMethods;
+//import Homework.model.Human.DeathHuman;
+import Homework.model.Human.Gender;
+import Homework.model.Human.Human;
+import Homework.model.Tree.FamilyTree;
+import Homework.model.Tree.FileMethods.FileMethods;
+import Homework.view.ConsoleUI;
+import Homework.view.View;
 
 import java.io.IOException;
 
@@ -84,20 +86,24 @@ public class Main {
         System.out.println(tree.getHumanInfo());
         System.out.println("=".repeat(20));
 
-        familyTree.sortByAge();
-        System.out.println("Сортировка по возрасту: ");
-        System.out.println(familyTree.getHumanInfo());
-        System.out.println("-".repeat(20));
+//        familyTree.sortByAge();
+//        System.out.println("Сортировка по возрасту: ");
+//        System.out.println(familyTree.getHumanInfo());
+//        System.out.println("-".repeat(20));
+//
+//        System.out.println("Сортировка по имени: ");
+//        familyTree.sortByName();
+//        System.out.println(familyTree.getHumanInfo());
+//        System.out.println("-".repeat(20));
+//
+//        familyTree.sortByChildren();
+//        System.out.println("Сортировка по количеству детей: ");
+//        System.out.println(familyTree.getHumanInfo());
+//        System.out.println("=".repeat(20));
 
-        System.out.println("Сортировка по имени: ");
-        familyTree.sortByName();
-        System.out.println(familyTree.getHumanInfo());
-        System.out.println("-".repeat(20));
+        View view = new ConsoleUI();
+        view.start();
 
-        familyTree.sortByChildren();
-        System.out.println("Сортировка по количеству детей: ");
-        System.out.println(familyTree.getHumanInfo());
-        System.out.println("=".repeat(20));
 
     }
 }
