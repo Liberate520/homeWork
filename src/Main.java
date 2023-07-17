@@ -18,7 +18,7 @@ public class Main {
         family.addPerson(leonid);
         family.putConnection(egor, ConnectionType.PARENT, marina, true);
         family.putConnection(egor, ConnectionType.SIBLING, petr, true);
-        family.putConnection(egor, ConnectionType.PARENT, leonid);
+        family.putConnection(egor, ConnectionType.PARENT, leonid, true);
         family.putConnection(marina, ConnectionType.SPOUSE, leonid, true);
 
         System.out.println(family.showConnections(egor));
