@@ -89,15 +89,15 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     }
 
     public void sortByName(){
-        familyList.sort(new HumanComporatorByName());
+        familyList.sort(new HumanComporatorByName<>());
     }
 
     public void sortByAge(){
-        familyList.sort(new HumanComporatorByAge());
+        familyList.sort(new HumanComporatorByAge<>());
     }
 
     public void sortByChildren(){
-        familyList.sort(new HumanComporatorByChildren());
+        familyList.sort(new HumanComporatorByChildren<>());
     }
 
     @Override
