@@ -1,21 +1,20 @@
-package family_tree.family_tree;
+package family_tree.model.family_tree;
 
-import family_tree.human.Human;
-import family_tree.human.comparators.HumanComparatorByBirthDate;
-import family_tree.human.comparators.HumanComparatorByName;
-import family_tree.family_tree.FamilyTreeItem;
+import family_tree.model.human.comparators.HumanComparatorByBirthDate;
+import family_tree.model.human.comparators.HumanComparatorByName;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
     private List<E> humanList;
 
     public FamilyTree(List<E> humanList) {
         this.humanList = humanList;
     }
+
     public FamilyTree() {
         this(new ArrayList<>());
     }
@@ -43,19 +42,20 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     }
 
     public E getByName(String name) {
-        for (E human: humanList) {
+        for (E human : humanList) {
             if (human.getName().equals(name)) {
                 return human;
             }
         }
         return null;
     }
+
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
         sb.append(humanList.size());
-        sb.append(" объектов: \n");
-        for (E human: humanList) {
+        sb.append(" объектов:\n");
+        for (E human : humanList) {
             sb.append(human.getInfo());
             sb.append("\n");
         }
@@ -63,14 +63,19 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<E> iterator() {
+        return humanList.iterator();
     }
 
     public void sortByName() {
         humanList.sort(new HumanComparatorByName<>());
     }
+
     public void sortByBirthDate() {
         humanList.sort(new HumanComparatorByBirthDate<>());
+    }
+
+    public void clear() {
+        humanList.clear();
     }
 }

@@ -1,41 +1,48 @@
 package family_tree;
 
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.Human;
-import family_tree.human.Sex;
-import family_tree.writer.FileHandler;
+import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.human.Human;
+import family_tree.model.human.Sex;
+import family_tree.model.writer.FileHandler;
+import family_tree.presenter.Presenter;
+import family_tree.view.ConsoleView;
+import family_tree.view.View;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        FamilyTree<Human> tree = new FamilyTree<>();
+    public static void main(String[] args) {
+        View view = new ConsoleView();
         FileHandler fileHandler = new FileHandler();
+        Presenter presenter = new Presenter(view, fileHandler);
 
-        Human ivanPetrov = new Human("Иван Петров", Sex.Male, LocalDate.of(1954, 10, 11));
-        Human elizavetaKashina = new Human("Елизавета Кашина", Sex.Female, LocalDate.of(1959, 1, 19));
+        // Создание примера семейного дерева
+        FamilyTree<Human> familyTree = new FamilyTree<>();
+        Human ivanPetrov = new Human("Ivan Petrov", Sex.Male, LocalDate.of(1954, 10, 11));
+        Human elizavetaKashina = new Human("Elizaveta Kashina", Sex.Female, LocalDate.of(1959, 1, 19));
 
-        tree.add(ivanPetrov);
-        tree.add(elizavetaKashina);
-        tree.add(new Human("Екатерина Мясникова", Sex.Female, LocalDate.of(1975, 12, 26),
+        familyTree.add(ivanPetrov);
+        familyTree.add(elizavetaKashina);
+        familyTree.add(new Human("Ekaterina Myasnikova", Sex.Female, LocalDate.of(1975, 12, 26),
                 List.of(ivanPetrov, elizavetaKashina)));
-        tree.add(new Human("Пётр Шишкин", Sex.Male, LocalDate.of(1981, 5, 21),
+        familyTree.add(new Human("Petr Shishkin", Sex.Male, LocalDate.of(1981, 5, 21),
                 List.of(ivanPetrov, elizavetaKashina)));
 
-        System.out.println(tree.getInfo());
+        presenter.setFamilyTree(familyTree);
 
-        tree.sortByBirthDate();
-        System.out.println(tree.getInfo());
+        // Демонстрация работы функциональности
+        presenter.displayFamilyTreeInfo();
+        presenter.sortByBirthDate();
+        presenter.displayFamilyTreeInfo();
+        presenter.sortByName();
+        presenter.displayFamilyTreeInfo();
 
-        tree.sortByName();
-        System.out.println(tree.getInfo());
-
-        fileHandler.save(tree, "src/family_tree/tree.out");
-
-        // FileHandler fileHandler = new FileHandler();
-        // FamilyTree<Human> tree = (FamilyTree<Human>) fileHandler.read("src/family_tree/tree.out");
-        // System.out.println(tree.getInfo());
+        // Сохранение и загрузка семейного дерева
+        String filePath = "family_tree.ser";
+        presenter.saveFamilyTree(filePath);
+        presenter.clearFamilyTree();
+        presenter.loadFamilyTree(filePath);
+        presenter.displayFamilyTreeInfo();
     }
 }
