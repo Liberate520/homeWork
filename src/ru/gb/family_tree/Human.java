@@ -1,11 +1,12 @@
 package ru.gb.family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private Human mother, father;
     private List<Human> childrens;
     private Gender gender;

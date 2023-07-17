@@ -1,9 +1,13 @@
 package ru.gb.family_tree;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
         FamilyTree familyTree = new FamilyTree();
         LocalDate birthday1 = LocalDate.of(1990, 5, 20);
         Human Sergey = new Human("Sergey", birthday1, Gender.Male);
@@ -30,6 +34,9 @@ public class Main {
         Sergey.setFather(Daniil);
 //        Sergey.getFather();
 //        familyTree.printMember();
-        Yulia.printChildren();
+//        Yulia.printChildren();
+        FileHandler handler = new FileHandler();
+        handler.save(familyTree);
+        handler.load();
     }
 }
