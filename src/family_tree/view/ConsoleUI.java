@@ -194,4 +194,24 @@ public class ConsoleUI implements View{
     public void printInfoTree(){
         presenter.printInfoTree();
     }
+
+    public void saveToFile(){
+        System.out.println("Введите путь к файлу: ");
+        String path = scanner.nextLine();
+        if(presenter.saveToFile(path)){
+            System.out.println("Запись успешно выполнена");
+        }else{
+            System.out.println("Ошибка записи файла");
+        }
+    }
+
+    public void loadFromFile(){
+        System.out.println("Введите путь к файлу: ");
+        String path = scanner.nextLine();
+        if(presenter.loadFromFile(path)){
+            System.out.println("Чтение успешно выполнено");
+        }else{
+            System.out.println("Ошибка чтения файла");
+        }
+    }
 }

@@ -49,4 +49,10 @@ public class Presenter {
     public void printLastMarriage() {
         view.print(service.getInfoLastMarriage());
     }
+    public boolean saveToFile(String path){
+        return service.saveToFile(path);
+    }
+    public boolean loadFromFile(String path){
+        return service.loadFromFile(path);
+    }
 }
