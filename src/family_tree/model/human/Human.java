@@ -69,6 +69,7 @@ public class Human implements ItemFamilyTree<Human>, Serializable {
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
     }
+
     public String getInfo(){
         StringBuilder result = new  StringBuilder();
         result.append("{");
@@ -94,6 +95,7 @@ public class Human implements ItemFamilyTree<Human>, Serializable {
         result.append("}");
         return result.toString();
     }
+
     @Override
     public String toString() {
         return getInfo();

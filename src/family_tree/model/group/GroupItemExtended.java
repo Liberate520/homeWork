@@ -1,6 +1,7 @@
 package family_tree.model.group;
 
-public interface GroupItemAgedNamed {
+public interface GroupItemExtended  {
     String getName();
+    String getInfo();
     int getAge();
 }

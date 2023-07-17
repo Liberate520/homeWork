@@ -7,18 +7,18 @@ import java.time.LocalDate;
 
 public class ServiceFamilyTree {
     private int idMarriage, idHuman;
-    private FamilyTree tree;
+    private FamilyTree<Human> tree;
     public ServiceFamilyTree(){
         tree = new FamilyTree();
     }
 
     public Human addItem(String name, LocalDate dateBirth, Gender gender){
         Human h = new Human(idHuman++, name, dateBirth, gender);
-        tree.addHuman(h);
+        tree.addItem(h);
         return h;
     }
     public void addItem(Human t){
-        tree.addHuman(t);
+        tree.addItem(t);
     }
 
     //регистрируем брак и возвращаем ссылку на экземпляр
@@ -42,7 +42,6 @@ public class ServiceFamilyTree {
         idMarriage++;
         return true;
     }
-
 
     // добавляем связь родитель - потомок
     public boolean addChild(Human parent, Human child) {
@@ -94,8 +93,8 @@ public class ServiceFamilyTree {
         return tree;
     }
 
-    public String getInfoLastHuman() {
-        return tree.getInfoLastHuman();
+    public String getInfoLastItem() {
+        return tree.getInfoLastItem();
     }
     public String getInfoLastMarriage() {
         return tree.getInfoLastMarriage();

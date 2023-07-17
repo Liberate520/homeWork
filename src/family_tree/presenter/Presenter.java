@@ -40,15 +40,13 @@ public class Presenter {
     }
 
     public void printInfoTree() {
-        System.out.println(service.getInfoAll());
+        view.print(service.getInfoAll());
     }
 
     public void printLastHuman() {
-        String info = service.getInfoLastHuman();
-        if(info != "") System.out.println(info);
+        view.print(service.getInfoLastItem());
     }
     public void printLastMarriage() {
-        String info = service.getInfoLastMarriage();
-        if(info != "") System.out.println(info);
+        view.print(service.getInfoLastMarriage());
     }
 }
