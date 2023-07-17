@@ -1,8 +1,8 @@
-package family_tree.human;
+package family_tree.Model.human;
 
 import java.util.List;
 
-import family_tree.familyTree.TreeItem;
+import family_tree.Model.familyTree.TreeItem;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -70,15 +70,21 @@ public class Human implements Serializable, TreeItem<Human> {
     }
 
     @Override
-    public void setDeathDate(LocalDate deathDate) {
+    public boolean setDeathDate(LocalDate deathDate) {
         this.deathDate = deathDate;
+        if (this.deathDate != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void addChildren(Human child) {
+    public boolean addChildren(Human child) {
         if (!children.contains(child)) {
             children.add(child);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -92,7 +98,7 @@ public class Human implements Serializable, TreeItem<Human> {
     }
 
     @Override
-    public void addParents(Human parent1, Human parent2) {
+    public boolean addParents(Human parent1, Human parent2) {
         if (parent1.gender == Gender.Male) {
             father = parent1;
         } else {
@@ -103,13 +109,18 @@ public class Human implements Serializable, TreeItem<Human> {
         } else {
             mother = parent2;
         }
+        if (this.mother != null & this.father != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void createRelatings(Human parent1, Human parent2, Human child) {
-        child.addParents(parent1, parent2);
-        parent1.addChildren(child);
-        parent2.addChildren(child);
+    public boolean createRelatings(Human parent1, Human parent2, Human child) {
+        if (child.addParents(parent1, parent2) & parent1.addChildren(child) & parent2.addChildren(child)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

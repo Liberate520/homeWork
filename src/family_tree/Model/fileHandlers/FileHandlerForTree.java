@@ -1,4 +1,4 @@
-package family_tree.fileHandlers;
+package family_tree.Model.fileHandlers;
 
 //import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 //import java.util.Scanner;
 
-import family_tree.familyTree.FamilyTree;
-import family_tree.human.Human;
+import family_tree.Model.familyTree.FamilyTree;
+import family_tree.Model.human.Human;
 
 public class FileHandlerForTree{
 

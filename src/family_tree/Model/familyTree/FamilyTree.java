@@ -1,11 +1,11 @@
-package family_tree.familyTree;
+package family_tree.Model.familyTree;
 
 import java.util.List;
 
-import family_tree.familyTree.iterator.ItemIterator;
-import family_tree.human.comparators.ItemComparatorByAge;
-import family_tree.human.comparators.ItemComparatorByBirthDate;
-import family_tree.human.comparators.ItemComparatorByName;
+import family_tree.Model.familyTree.iterator.ItemIterator;
+import family_tree.Model.human.comparators.ItemComparatorByAge;
+import family_tree.Model.human.comparators.ItemComparatorByBirthDate;
+import family_tree.Model.human.comparators.ItemComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,10 +44,20 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     //     }
     // }
 
-    public void addItem(E item) {
+    public boolean addItem(E item) {
         if (!itemList.contains(item)) {
             itemList.add(item);
+            return true;
         }
+        return false;
+    }
+
+    public boolean deleteItem(E item) {
+        if (itemList.contains(item)) {
+            itemList.remove(item);
+            return true;
+        }
+        return false;
     }
 
     public E getByName(String name){
