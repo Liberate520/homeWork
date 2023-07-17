@@ -8,9 +8,11 @@ import java.util.List;
 public class HumanIterator implements Iterator<Human> {
     private int index;
     private List<Human> humanList;
+
     public HumanIterator(List<Human> studentList) {
         this.humanList = humanList;
     }
+
     @Override
     public boolean hasNext() {
         return humanList.size() > index;

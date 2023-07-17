@@ -5,8 +5,8 @@ import classes.human.Human;
 
 import java.time.LocalDate;
 
-import static classes.Gender.female;
-import static classes.Gender.male;
+import static classes.human.Gender.female;
+import static classes.human.Gender.male;
 
 public class TestInput {
     //        FamilyTree tree =new FamilyTree();

@@ -1,8 +1,8 @@
 package classes.familyTree;
 
-import classes.human.HumanComparatorByBrithDate;
-import classes.human.HumanComparatorById;
-import classes.human.HumanComparatorByName;
+import classes.human.comparators.HumanComparatorByBrithDate;
+import classes.human.comparators.HumanComparatorById;
+import classes.human.comparators.HumanComparatorByName;
 import classes.human.Human;
 
 import java.io.Serializable;
