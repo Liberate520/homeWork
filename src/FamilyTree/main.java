@@ -1,25 +1,31 @@
 package FamilyTree;
 
-import FamilyTree.File.FileHandler;
-import FamilyTree.tree.Dog;
-import FamilyTree.tree.Person;
-import FamilyTree.tree.Tree;
+import FamilyTree.Model.tree.Person;
+import FamilyTree.Model.tree.Tree;
+import FamilyTree.View.ConsoleUI;
+import FamilyTree.View.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static FamilyTree.tree.Sex.Female;
-import static FamilyTree.tree.Sex.Male;
+import static FamilyTree.Model.tree.Sex.Female;
+import static FamilyTree.Model.tree.Sex.Male;
 
 public class main {
     public static void main (String[] args) throws IOException, ClassNotFoundException {
-        Tree tree = new Tree ();
+
+
+        View view = new ConsoleUI();
+        view.start();
+      /*  Tree tree = new Tree ();
 
         tree.addPerson (new Person("Иван Федорович Крузенштерн", Male, LocalDate.of(1975,07,10 )));
         tree.addPerson (new Person("Вероника Степановна Кулебякина", Female, LocalDate.of(1977,06,10 )));
-        tree.addPerson (new Person("Дядя Федор", Male, LocalDate.of(1995,06,01 )));
-        tree.addPerson (new Person("Жучка", Female, LocalDate.of(1997,06,01 )));
-        tree.getByName("Иван Федорович Крузенштерн").addChild (tree.getByName("Дядя Федор"));
+        tree.addPerson (new Person(2"Дядя Федор", Male, LocalDate.of(1995,06,01 )));
+        tree.addPerson (new Person("Жучка", Female, LocalDate.of(1997,06,01 )));*/
+
+
+        /*tree.getByName("Иван Федорович Крузенштерн").addChild (tree.getByName("Дядя Федор"));
         tree.getByName("Иван Федорович Крузенштерн").addChild (tree.getByName("Жучка"));
 
         //tree.getByName ("Иван Федорович Крузенщтерн").addDd (LocalDate.of(2022,07,10 ));
@@ -43,12 +49,8 @@ public class main {
         System.out.println(tree.getInfo());
 
         for (Object person: tree) System.out.println(((Person)(person)).getName());
+*/
 
-
-        Tree dogtree = new Tree ();
-
-        dogtree.addPerson (new Dog("Шарик", Male, LocalDate.of(1975,07,10 ), 15));
-        System.out.println(dogtree.getInfo());
 
 
 

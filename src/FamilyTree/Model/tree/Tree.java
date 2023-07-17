@@ -1,24 +1,23 @@
-package FamilyTree.tree;
+package FamilyTree.Model.tree;
 
-import FamilyTree.sort.AgeComparator;
-import FamilyTree.sort.NameComparator;
-import FamilyTree.sort.PersonIterator;
-import FamilyTree.tree.Person;
+import FamilyTree.Model.sort.AgeComparator;
+import FamilyTree.Model.sort.NameComparator;
+import FamilyTree.Model.sort.PersonIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree <Being extends Person>implements Serializable, Iterable <Being> {
+public class Tree <E extends Being>implements Serializable, Iterable <E> {
 
-    private List<Being> treeList;
+    private List<E> treeList;
 
     public Tree() {this(new ArrayList<>()); }
 
-    public Tree(List<Being> treeList)  {this.treeList=treeList;}
+    public Tree(List<E> treeList)  {this.treeList=treeList;}
 
-    public boolean addPerson (Being person){
+    public boolean addPerson (E person){
         if (person == null) { return false;}
         if (!treeList.contains(person)){
             treeList.add (person);
@@ -29,7 +28,7 @@ public class Tree <Being extends Person>implements Serializable, Iterable <Being
         return false;
 
     }
-    private void addToParents(Being person){
+    private void addToParents(E person){
         if (person.getMother()!= null){
             person.getMother().addChild(person);}
         if (person.getFather()!= null){
@@ -37,24 +36,24 @@ public class Tree <Being extends Person>implements Serializable, Iterable <Being
 
     }
 
-    private void addToChild (Being person){
-        for (Person  child :person.getChildren()){
+    private void addToChild (E person){
+        for (Object child :person.getChildren()){
 
-            child.addParent(person);}
+            ((Person)(child)).addParent(person);}
     }
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
         sb.append(treeList.size());
         sb.append(" объектов: \n");
-        for (Being person : treeList){
+        for (E person : treeList){
             sb.append(person);
             sb.append("\n");
         }
     return sb.toString();
     }
-    public  Being getByName (String name){
-        for (Being person: treeList){
+    public  E getByName (String name){
+        for (E person: treeList){
             if (person.getName().equals(name)){return person;}
 
         }
@@ -72,7 +71,7 @@ public class Tree <Being extends Person>implements Serializable, Iterable <Being
     }
 
     @Override
-    public Iterator<Being> iterator() {
+    public Iterator<E> iterator() {
         return new PersonIterator(treeList);
     }
 

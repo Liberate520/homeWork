@@ -1,63 +1,65 @@
-package FamilyTree.tree;
+package FamilyTree.Model.tree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static FamilyTree.tree.Sex.Female;
-import static FamilyTree.tree.Sex.Male;
-
-public class Dog extends Person implements Serializable {
+public class Person implements Serializable, Being {
     private String name;
-    private Sex sex;
+        private Enum sex;
+        private LocalDate birthday;
+        private LocalDate deathday;
+        private List<Person>children;
+        private List<Person> parents;
+        private List<Person> spouses;
 
-    private Integer medals;
-    private LocalDate birthday;
-    private LocalDate deathday;
-    private List<Person>children;
-    private List<Person> parents;
-    private List<Person> spouses;
-
-    public Dog (String name, Sex sex, LocalDate birthday,Integer medals) {
+    public Person(String name, Enum sex, LocalDate birthday) {
         this.name = name;
         this.sex = sex;
         this.birthday = birthday;
-        this.medals = medals;
         deathday = null;
         children = new ArrayList<>();
         parents = new ArrayList<>();
         spouses =new ArrayList<>();
     }
-    public boolean addChild (Person child){
-        if (!children.contains(child)){
-            children.add (child);
+
+    public Person() {
+    }
+
+    public boolean addChild(Being child){
+        if (!children.contains((Person) (child))){
+            children.add ((Person)(child));
             return  true;
         }
         return false;
 
     }
-    public boolean addParent (Person parent){
-        if (!parents.contains(parent)){
-            parents.add (parent);
+
+    public boolean addParent (Being parent){
+        if (!parents.contains((Person) (parent))){
+            parents.add ((Person) (parent));
             return  true;
         }
         return false;
 
     }
-    public boolean addSpouse (Person spouse){
-        if (!spouses.contains(spouse)){
-            spouses.add (spouse);
+
+    public boolean addSpouse (Being spouse){
+        if (!spouses.contains((Person) (spouse))){
+            spouses.add ((Person) (spouse));
             return  true;
         }
         return false;
 
     }
+
+
     public String getName() {
         return name;
     }
 
-    public Sex getSex() {
+    public Enum getSex() {
         return sex;
     }
 
@@ -68,22 +70,24 @@ public class Dog extends Person implements Serializable {
     public LocalDate getDeathday() {
         return deathday;
     }
+
+
     public List<Person> getChildren() {
         return children;
     }
 
     public Person getFather() {
         for (Person father : parents) {
-            if (father.getSex() == Male) {
+            if (father.getSex() == Sex.Male) {
 
                 return father;
             }
         }
-        return  null;
+    return  null;
     }
     public Person getMother() {
         for (Person mother : parents) {
-            if (mother.getSex() == Female) {
+            if (mother.getSex() == Sex.Female) {
 
                 return mother;
             }
@@ -106,7 +110,6 @@ public class Dog extends Person implements Serializable {
                 ", sex=" + sex +
                 ", birthday=" + birthday +
                 ", deathday=" + deathday +
-                ", medals =" + medals +
                 '}';
     }
     public String getChildrenInfo(){
@@ -117,15 +120,15 @@ public class Dog extends Person implements Serializable {
         if (children.size()!=0 ){
             sb.append(children.get(0).getName());
 
-            for (int i = 1; i < children.size(); i++) {
-                sb.append(", ");
-                sb.append(children.get(i).getName());
+                for (int i = 1; i < children.size(); i++) {
+                    sb.append(", ");
+                    sb.append(children.get(i).getName());
 
             }
             return sb.toString();
         }
         sb.append ("не известны");
-        return sb.toString();
+    return sb.toString();
     }
     public String getParentsnfo(){
         StringBuilder sb = new StringBuilder();

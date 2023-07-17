@@ -1,15 +1,15 @@
-package FamilyTree.sort;
+package FamilyTree.Model.sort;
 
-import FamilyTree.tree.Person;
+import FamilyTree.Model.tree.Being;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator <Being extends Person> implements Iterator <Being> {
+public class PersonIterator <E extends Being> implements Iterator <E> {
     private int index;
-    private List<Being> treeList;
+    private List<E> treeList;
 
-    public PersonIterator(List<Being> treeList) {
+    public PersonIterator(List<E> treeList) {
         this.treeList = treeList;
     }
 
@@ -19,7 +19,7 @@ public class PersonIterator <Being extends Person> implements Iterator <Being> {
     }
 
     @Override
-    public Being  next() {
+    public E  next() {
         return treeList.get(index++);
     }
 }
