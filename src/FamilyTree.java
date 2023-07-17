@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class FamilyTree implements Serializable, Iterable<Human> {
     
-    ArrayList<Human> humanList;
+    private ArrayList<Human> humanList;
 
     public FamilyTree() {
         humanList = new ArrayList<>();
