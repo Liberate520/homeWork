@@ -40,8 +40,18 @@ public class ConsoleUI {
     }
 
     public void goodbye() {
-        System.out.println("До новых встреч!");
-        work = false;
+        System.out.print(
+                "Хотите сохранить изменения в дереве:\n [1] - Да\n [2] - Нет\n [3] - Вернуться в главное меню\n--> ");
+        String choise = scanner.nextLine();
+        if (choise.equals("1")) {
+            saveTree();
+            System.out.println("До новых встреч!");
+            work = false;
+        } else if (choise.equals("2")) {
+            System.out.println("До новых встреч!");
+            work = false;
+        } else
+            inputError();
     }
 
     private void execute() {
@@ -72,42 +82,49 @@ public class ConsoleUI {
         }
     }
 
-    public boolean checkDate(String[] dateArray) {
-        if (Integer.parseInt(dateArray[0]) < 32 & Integer.parseInt(dateArray[1]) < 13) {
-            return true;
-        } else {
-            inputError();
-            return false;
-        }
+    public String[] checkDate(String text) {
+        String[] dateArray = {};
+        do {
+            System.out.print(text);
+            String dateString = scanner.nextLine();
+            dateArray = dateString.split("\\.");
+        } while (!(Integer.parseInt(dateArray[0]) < 32 & Integer.parseInt(dateArray[1]) < 13));
+        return dateArray;
+    }
+
+    public String checkItem(String text) {
+        String name = "";
+        do {
+            System.out.print(text);
+            name = scanner.nextLine();
+        } while (!presenter.checkItem(name));
+        return name;
     }
 
     private void printMenu() {
         System.out.print(menu.menu());
     }
 
-    private void inputError() {
+    public void inputError() {
         System.out.println(INPUT_ERROR);
     }
 
     public void addItem() {
         System.out.print("Введите имя: ");
         String name = scanner.nextLine();
-        String[] birthDateArray = {};
-        do {
-            System.out.print("Укажите дату рождения в формате dd.MM.yyyy: ");
-            String birthDateString = scanner.nextLine();
-            birthDateArray = birthDateString.split("\\.");
-        } while (!checkDate(birthDateArray));
-        int genderScanner;
+        String[] birthDateArray = checkDate("Укажите дату рождения в формате dd.MM.yyyy: ");
+        String genderScanner;
         String genderString = "Male";
         System.out.print("Укажите пол\n [1] - Мужской\n [2] - Женский\n --> ");
-        genderScanner = Integer.parseInt(scanner.nextLine());
-        if (genderScanner == 1) {
+        genderScanner = scanner.nextLine();
+        if (genderScanner.equals("1")) {
             genderString = "Male";
-        } else if (genderScanner == 2) {
+        } else if (genderScanner.equals("2")) {
             genderString = "Female";
-        } else
+        } else {
             inputError();
+            System.out.println("Установлено значение по умолчанию.");
+        }
         if (presenter.addItem(name, birthDateArray, genderString)) {
             System.out.println("Добавление прошло успешно!");
         } else {
@@ -116,15 +133,10 @@ public class ConsoleUI {
     }
 
     public void setDeathDate() {
-        System.out.print("Введите имя, кому надо добавить дату смерти: ");
-        String name = scanner.nextLine();
+        String name = checkItem("Введите имя, кому надо добавить дату смерти: ");
         String[] deathDateArray = {};
         do {
-            do {
-                System.out.print("Укажите дату смерти в формате dd.MM.yyyy: ");
-                String deathDateString = scanner.nextLine();
-                deathDateArray = deathDateString.split("\\.");
-            } while (!checkDate(deathDateArray));
+            deathDateArray = checkDate("Укажите дату смерти в формате dd.MM.yyyy: ");
             if (presenter.setDeathDate(name, deathDateArray)) {
                 System.out.println("Добавление даты смерти прошло успешно!");
             } else {
@@ -134,12 +146,9 @@ public class ConsoleUI {
     }
 
     public void addFamily() {
-        System.out.print("Введите имя первого родителя: ");
-        String nameParent1 = scanner.nextLine();
-        System.out.print("Введите имя второго родителя: ");
-        String nameParent2 = scanner.nextLine();
-        System.out.print("Введите имя ребенка: ");
-        String nameChild = scanner.nextLine();
+        String nameParent1 = checkItem("Введите имя первого родителя: ");
+        String nameParent2 = checkItem("Введите имя второго родителя: ");
+        String nameChild = checkItem("Введите имя ребенка: ");
         if (presenter.createFamily(nameParent1, nameParent2, nameChild)) {
             System.out.println("Создание связей прошло успешно!");
         } else {
@@ -148,10 +157,8 @@ public class ConsoleUI {
     }
 
     public void addChild() {
-        System.out.print("Введите имя родителя: ");
-        String nameParent = scanner.nextLine();
-        System.out.print("Введите имя ребенка: ");
-        String nameChild = scanner.nextLine();
+        String nameParent = checkItem("Введите имя родителя: ");
+        String nameChild = checkItem("Введите имя ребенка: ");
         if (presenter.addChild(nameParent, nameChild)) {
             System.out.println("Добавление ребенка прошло успешно!");
         } else {
@@ -160,12 +167,9 @@ public class ConsoleUI {
     }
 
     public void addParents() {
-        System.out.print("Введите имя ребенка: ");
-        String nameChild = scanner.nextLine();
-        System.out.print("Введите имя первого родителя: ");
-        String nameParent1 = scanner.nextLine();
-        System.out.print("Введите имя второго родителя: ");
-        String nameParent2 = scanner.nextLine();
+        String nameChild = checkItem("Введите имя ребенка: ");
+        String nameParent1 = checkItem("Введите имя первого родителя: ");
+        String nameParent2 = checkItem("Введите имя второго родителя: ");
         if (presenter.addParents(nameChild, nameParent1, nameParent2)) {
             System.out.println("Добавление родителей прошло успешно!");
         } else {
@@ -174,8 +178,7 @@ public class ConsoleUI {
     }
 
     public void findItem() {
-        System.out.print("Введите имя, кого ищем: ");
-        String name = scanner.nextLine();
+        String name = checkItem("Введите имя, кого ищем: ");
         System.out.println(presenter.findItem(name));
     }
 
@@ -187,8 +190,7 @@ public class ConsoleUI {
     }
 
     public void deleteItem() {
-        System.out.print("Введите имя, кого надо удалить: ");
-        String name = scanner.nextLine();
+        String name = checkItem("Введите имя, кого надо удалить: ");
         if (presenter.deleteItem(name)) {
             System.out.println("Удаление прошло успешно!");
         } else {

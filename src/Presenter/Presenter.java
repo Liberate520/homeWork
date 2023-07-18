@@ -36,11 +36,22 @@ public class Presenter {
         return service.findItem(name).toString();
     }
 
+    public boolean checkItem(String name) {
+        if (service.checkItem(name)) {
+            return true;
+        } else {
+            view.inputError();
+            return false;
+        }
+    }
+
     public boolean setDeathDate(String nameHuman, String[] deathDateArray) {
         if (service.setDeathDate(nameHuman, deathDateArray)) {
             return true;
+        } else {
+            view.inputError();
+            return false;
         }
-        return false;
     }
 
     public boolean createFamily(String nameParent1, String nameParent2, String nameChild) {
@@ -75,13 +86,13 @@ public class Presenter {
         if (service.loadTree(filePath)) {
             return true;
         }
-        return false;  
+        return false;
     }
 
     public boolean deleteItem(String nameHuman) {
         if (service.deleteItem(nameHuman)) {
             return true;
-        } 
+        }
         return false;
     }
 }

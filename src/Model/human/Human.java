@@ -33,32 +33,6 @@ public class Human implements Serializable, TreeItem<Human> {
         this(name, birthDate, null, gender, null, null);
     }
 
-    // public Human(String[] args, FamilyTree familyTree) {
-    //     this.name = args[0];
-    //     if (args[1].equals("Male")) {
-    //         this.gender = Gender.Male;
-    //     } else {
-    //         this.gender = Gender.Female;
-    //     }
-    //     this.birthDate = LocalDate.parse(args[2], FORMATTER);
-    //     if (args[3].equals("null")) {
-    //         this.deathDate = null;
-    //     } else {
-    //         this.deathDate = LocalDate.parse(args[3], FORMATTER);
-    //     }
-    //     if (args[4].equals("null")) {
-    //         this.mother = null;
-    //     } else {
-    //         this.mother = familyTree.getByName(args[4]);
-    //     }
-    //     if (args[5].equals("null")) {
-    //         this.father = null;
-    //     } else {
-    //         this.father = familyTree.getByName(args[5]);
-    //     }
-    //     this.children = new ArrayList<>();
-    // }
-
     @Override
     public String getName() {
         return name;
@@ -144,14 +118,6 @@ public class Human implements Serializable, TreeItem<Human> {
         return age;
     }
 
-    // private String writeChildrensToTxt() {
-    //     StringBuilder stringBuilder = new StringBuilder();
-    //     for (Human child : children) {
-    //         stringBuilder.append(" " + child.name);
-    //     }
-    //     return stringBuilder.toString();
-    // }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -178,33 +144,6 @@ public class Human implements Serializable, TreeItem<Human> {
         stringBuilder.append("\n");
         return stringBuilder.toString();
     }
-
-    // public String toTxt() {
-    //     StringBuilder stringBuilder = new StringBuilder();
-    //     stringBuilder.append(name + " " + gender + " " + birthDate.format(FORMATTER));
-    //     if (deathDate != null) {
-    //         stringBuilder.append(" " + deathDate.format(FORMATTER));
-    //     } else {
-    //         stringBuilder.append(" null");
-    //     }
-    //     if (mother != null) {
-    //         stringBuilder.append(" " + mother.name);
-    //     } else {
-    //         stringBuilder.append(" null");
-    //     }
-    //     if (father != null) {
-    //         stringBuilder.append(" " + father.name);
-    //     } else {
-    //         stringBuilder.append(" null");
-    //     }
-    //     if (!children.isEmpty()) {
-    //         stringBuilder.append(writeChildrensToTxt());
-    //     } else {
-    //         stringBuilder.append(" null");
-    //     }
-    //     stringBuilder.append(";");
-    //     return stringBuilder.toString();
-    // }
 
     @Override
     public boolean equals(Object obj) {

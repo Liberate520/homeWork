@@ -76,6 +76,13 @@ public class Service {
         return null;
     }
 
+    public boolean checkItem(String name) {
+        if (familyTree.getByName(name) != null) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean deleteItem(String nameHuman) {
         Human human = findItem(nameHuman);
         if (familyTree.deleteItem(human)) {
@@ -84,22 +91,22 @@ public class Service {
         return false;
     }
 
-    public String sortByName(){
+    public String sortByName() {
         familyTree.sortByName();
         return familyTree.getFamilyTree();
     }
 
-    public String sortByBirthDate(){
+    public String sortByBirthDate() {
         familyTree.sortByBirthDate();
         return familyTree.getFamilyTree();
     }
 
-    public String sortByAge(){
+    public String sortByAge() {
         familyTree.sortByAge();
         return familyTree.getFamilyTree();
     }
 
-    public String getFamilyTree(){
+    public String getFamilyTree() {
         return familyTree.getFamilyTree();
     }
 
@@ -115,6 +122,6 @@ public class Service {
         if (this.familyTree != null) {
             return true;
         }
-        return false;  
+        return false;
     }
 }

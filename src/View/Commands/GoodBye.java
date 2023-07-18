@@ -11,7 +11,6 @@ public class GoodBye extends Command {
 
     @Override
     public void execute() {
-        consoleUI.saveTree();
         consoleUI.goodbye();
     }
     
