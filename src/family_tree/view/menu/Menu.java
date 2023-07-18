@@ -18,7 +18,7 @@ public class Menu {
         commandList.add(new Add_human(consoleUI));
         commandList.add(new Set_relatives(consoleUI));
         commandList.add(new ClearFamilyTree(consoleUI));
-        commandList.add(new Load_file(consoleUI));
+        commandList.add(new loadFamily_tree(consoleUI));
         commandList.add(new SaveFamilyTree(consoleUI));
         commandList.add(new Exit(consoleUI));
 

@@ -2,13 +2,13 @@ package family_tree.view.commands;
 
 import family_tree.view.ConsoleUI;
 
-public class Load_file extends Command{
+public class loadFamily_tree extends Command{
 
-    public Load_file(ConsoleUI consoleUI){
+    public loadFamily_tree(ConsoleUI consoleUI){
         super(consoleUI);
         description = "Загрузить семейное древо из файла;";
     }
     public void execute() {
-        consoleUI.load_file();
+        consoleUI.loadFamily_tree();
     }
 }

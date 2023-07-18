@@ -24,8 +24,8 @@ public class Presenter {
         view.printAnswer(info);
     }
 
-    public void setFamily_tree() {
-        service.setFamily_tree();
+    public void loadFamily_tree() {
+        service.loadFamily_tree();
     }
 
     public Boolean saveFamily_tree() {

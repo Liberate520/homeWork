@@ -128,7 +128,7 @@ public class ConsoleUI implements View {
         presenter.add_human(surname, first_name, patronymic, gender, day_birth);
     }
 
-    public void load_file() {
+    public void loadFamily_tree() {
         System.out.print("""
 
                 Загрузка данных из файла. Текущий список будет удален.
@@ -136,7 +136,7 @@ public class ConsoleUI implements View {
         String str2 = scanner.nextLine();
         if (str2.equalsIgnoreCase("Yes")){
             System.out.println("Загружено семейное древо:");
-            presenter.setFamily_tree();
+            presenter.loadFamily_tree();
             treeInfo_sortByID();
         } else {
             System.out.println("Действие отменено.");
