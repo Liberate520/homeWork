@@ -8,16 +8,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class TreeService implements Service {
+public class TreeService {
     private FamilyTree<Human> tree;
 
     public TreeService() {
         this.tree = new FamilyTree<>();
-    }
-
-    @Override
-    public String getData(String data) {
-        return data;
     }
 
     public String addMember(HashMap<String, String> data) {
@@ -30,16 +25,16 @@ public class TreeService implements Service {
                     data.get("gender"),
                     LocalDate.parse(data.get("birthDate"))));
             sb.append("Человек успешно добавлен");
-            return getData(sb.toString());
+            return sb.toString();
         } catch (Exception e) {
             sb.append("Произошла ошибка при добавлении человека в семейное древо");
             sb.append(e.getMessage());
-            return getData(sb.toString());
+            return sb.toString();
         }
     }
 
     public String getMembers() {
-        return getData(tree.toString());
+        return tree.toString();
     }
 
     public void sortByName() {
@@ -53,27 +48,27 @@ public class TreeService implements Service {
     public String importTree(String fileName) {
         try {
             tree = (FamilyTree<Human>) new FileHandler(fileName).read();
-            return getData("Импорт выполнен успешно");
+            return "Импорт выполнен успешно";
         } catch (IOException e) {
-            return getData("Произошла ошибка при импорте из файла: " +
-                           "проверьте правильность введенного имени и убедитесь, " +
-                           "что файл существует");
+            return "Произошла ошибка при импорте из файла: " +
+                    "проверьте правильность введенного имени и убедитесь, " +
+                    "что файл существует";
         } catch (ClassNotFoundException e) {
-            return getData("Произошла ошибка при попытке импортировать дерево: не найден класс для импорта");
+            return "Произошла ошибка при попытке импортировать дерево: не найден класс для импорта";
         }
         catch (ClassCastException e) {
-            return getData("Произошла ошибка при попытке импортировать дерево: неверные данные");
+            return "Произошла ошибка при попытке импортировать дерево: неверные данные";
         }
     }
 
     public String exportTree(String fileName) {
         try {
             new FileHandler(fileName).write(tree);
-            return getData("Экспорт выполнен успешно");
+            return "Экспорт выполнен успешно";
         } catch (IOException e) {
-            return getData("Произошла ошибка при экспорте в файл: " +
+            return "Произошла ошибка при экспорте в файл: " +
                     "проверьте правильность введенного имени и убедитесь, " +
-                    "что файл существует");
+                    "что файл существует";
         }
     }
 
