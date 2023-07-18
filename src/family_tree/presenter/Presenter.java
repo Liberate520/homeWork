@@ -1,55 +1,55 @@
 package family_tree.presenter;
 
-import family_tree.model.Service;
+import family_tree.model.registry_office.Reg_office;
 import family_tree.view.ConsoleUI;
 import family_tree.view.View;
 
 public class Presenter {
     private final View view;
-    private final Service service;
+    private final Reg_office reg_office;
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        reg_office = new Reg_office();
     }
 
     public Presenter() {
         view = System.out::println;
-        service = new Service();
+        reg_office = new Reg_office();
     }
 
 
     public void add_human(String surname, String first_name, String patronymic, String gender, String day_birth){
-        String info = service.add_human(surname, first_name, patronymic, gender, day_birth);
+        String info = reg_office.add_human(surname, first_name, patronymic, gender, day_birth);
         view.printAnswer(info);
     }
 
     public void loadFamily_tree() {
-        service.loadFamily_tree();
+        reg_office.loadFamily_tree();
     }
 
     public Boolean saveFamily_tree() {
-        return service.saveFamily_tree();
+        return reg_office.saveFamily_tree();
     }
 
     public void treeInfo_sortByID() {
-        String info = service.treeInfo_sortByID();
+        String info = reg_office.treeInfo_sortByID();
         view.printAnswer(info);
     }
 
     public void treeInfo_sortByAge() {
-        String info = service.treeInfo_sortByAge();
+        String info = reg_office.treeInfo_sortByAge();
         view.printAnswer(info);
     }
 
     public void treeInfo_sortByName() {
-        String info = service.treeInfo_sortByName();
+        String info = reg_office.treeInfo_sortByName();
         view.printAnswer(info);
     }
 
 
     public void clearFamilyTree() {
-        service.clearFamilyTree();
+        reg_office.getFamily_tree().clearHumanList();
     }
 
 
@@ -63,14 +63,14 @@ public class Presenter {
     }
 
     public void parents_finder() {
-        service.parents_finder();
+        reg_office.parents_finder();
     }
 
     public void adoption() {
-        service.adoption();
+        reg_office.adoption();
     }
 
     public void marriage() {
-        service.marriage();
+        reg_office.marriage();
     }
 }
