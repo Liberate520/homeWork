@@ -6,7 +6,6 @@ import family_tree.model.infrastucture.de_serelization.File_using;
 import family_tree.model.registry_office.Reg_office;
 import family_tree.model.registry_office.Relatives_finder;
 import family_tree.model.tree.FamilyTree;
-import family_tree.model.tree.tree_service.Tree_service;
 import family_tree.presenter.Presenter;
 
 public class Service {
@@ -15,14 +14,13 @@ public class Service {
     private final Reg_office reg_office;
 
     private final File_using file_using;
-    private final Tree_service tree_service;
+
     private final Relatives_finder relatives_finder;
 
 
     public Service() {
         reg_office = new Reg_office();
         file_using = new File_using();
-        tree_service = new Tree_service();
         relatives_finder = new Relatives_finder();
     }
 
@@ -45,15 +43,15 @@ public class Service {
 
 
     public String treeInfo_sortByID() {
-        return tree_service.sortBy_id(reg_office.getFamily_tree());
+        return reg_office.treeInfo_sortByID();
     }
 
     public String treeInfo_sortByAge() {
-        return tree_service.sortBy_age(reg_office.getFamily_tree());
+        return reg_office.treeInfo_sortByAge();
     }
 
     public String treeInfo_sortByName() {
-        return tree_service.sortBy_name(reg_office.getFamily_tree());
+        return reg_office.treeInfo_sortByName();
     }
     public void clearFamilyTree() {
         reg_office.getFamily_tree().clearHumanList();

@@ -43,5 +43,19 @@ public class Reg_office {
         return family_tree;
     }
 
+    public String treeInfo_sortByID() {
+        family_tree.sortById();
+        return family_tree.toString();
+    }
+
+    public String treeInfo_sortByAge() {
+        family_tree.sortByAge();
+        return family_tree.toString();
+    }
+
+    public String treeInfo_sortByName() {
+        family_tree.sortByName();
+        return family_tree.toString();
+    }
 
 }
