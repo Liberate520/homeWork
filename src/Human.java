@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Human {
+public class Human implements Serializable {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;

@@ -1,5 +1,6 @@
 import java.util.*;
 import java.time.LocalDate;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,6 +34,25 @@ public class Main {
         familyTree.addHuman(mother);
         familyTree.addHuman(child1);
         familyTree.addHuman(child2);
+
+        // Сохраняем FamilyTree в файл
+        FileHandler fileHandler = new FileHandler(familyTree);
+        try {
+            fileHandler.saveToFile("family_tree_data.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Чтение FamilyTree из файла
+        FamilyTree loadedFamilyTree = new FamilyTree();
+        FileHandler loadedFileHandler = new FileHandler(loadedFamilyTree);
+        try {
+            loadedFileHandler.loadFromFile("family_tree_data.ser");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Теперь loadedFamilyTree содержит те же данные, что и familyTree
 
         // Проверяем отношения
         System.out.println("Father: " + child1.getFather());
