@@ -17,7 +17,7 @@ import java.util.List;
         if (!humanList.contains(human)) {
             humanList.add(human);
 //            // добавление связей
-            addToParents(human);
+//            addToParents(human);
             addToChildren(human);
         }
     }
@@ -27,27 +27,27 @@ import java.util.List;
 //        addToChildren(human);
 //    }
 
-    private void addToParents(E human){
-        for (E parent: human.getParents()){
-            parent.addChild(human);
-        }
-
-    }
-
+//    private void addToParents(E human){
+//        for (E parent: human.getParents()){
+//            parent.addChild(human);
+//        }
+//
+//    }
+//
     private void addToChildren(E human){
         for (E child: human.getChildren()){
             child.addParent(human);
         }
     }
 
-    public E getByFullName(String fullName) {
-        for (E human: humanList){
-            if (human.getFullName().equals(fullName)){
-                return human;
-            }
-        }
-        return null;
-    }
+//    public E getByFullName(String fullName) {
+//        for (E human: humanList){
+//            if (human.getFullName().equals(fullName)){
+//                return human;
+//            }
+//        }
+//        return null;
+//    }
 
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();

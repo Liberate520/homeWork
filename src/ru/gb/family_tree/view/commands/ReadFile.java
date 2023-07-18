@@ -2,13 +2,11 @@ package ru.gb.family_tree.view.commands;
 
 import ru.gb.family_tree.view.ConsoleUI;
 
-public class WriteFile extends Command{
-    public WriteFile(ConsoleUI consoleUI) {
+public class ReadFile extends Command{
+    public ReadFile(ConsoleUI consoleUI) {
         super(consoleUI);
         description = "Чтение сохраненного файла";
     }
     @Override
-    public void execute() {
-
-    }
+    public void execute() {consoleUI.readFile();}
 }

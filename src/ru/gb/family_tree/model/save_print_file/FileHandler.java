@@ -3,6 +3,7 @@ package ru.gb.family_tree.model.save_print_file;
 import java.io.*;
 
 public class FileHandler implements Writeable {
+    public String filePath = "src/ru/gb/family_tree/tree.out";
 
     @Override
     public boolean save(Serializable serializable, String filePath) {

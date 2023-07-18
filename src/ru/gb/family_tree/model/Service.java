@@ -42,15 +42,13 @@ public class Service {
     }
 
     public void saveFile() {
-        String filePath = "src/ru/gb/family_tree/tree.out";
         FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree, filePath);
+        fileHandler.save(tree, fileHandler.filePath);
     }
 
-    public void writeFile() {
-        String filePath = "src/ru/gb/family_tree/tree.out";
+    public void readFile() {
         FileHandler fileHandler = new FileHandler();
-        tree = (FamilyTree) fileHandler.read(filePath);
+        tree = (FamilyTree) fileHandler.read(fileHandler.filePath);
         getInfo();
 
     }

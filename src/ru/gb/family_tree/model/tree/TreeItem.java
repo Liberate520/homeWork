@@ -11,7 +11,7 @@ public interface TreeItem<T> extends Serializable , Comparable<T>{
     int getAge();
     String getInfo();
     List<T> getChildren();
-    List<T> getParents();
+//    List<T> getParents();
     void addChild(T human);
     void addParent(T human);
     LocalDate getDateOfBirth();

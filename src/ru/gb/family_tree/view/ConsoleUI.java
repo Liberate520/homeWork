@@ -85,7 +85,7 @@ public class ConsoleUI implements View {
     public void saveFile() {
         presenter.saveFile();
     }
-    public void writeFile() {
-        presenter.writeFile();
+    public void readFile() {
+        presenter.readFile();
     }
 }

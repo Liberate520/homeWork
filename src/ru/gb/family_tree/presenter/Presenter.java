@@ -40,7 +40,8 @@ public class Presenter {
         service.saveFile();
     }
 
-    public void writeFile() {
-        service.writeFile();
+    public void readFile() {
+        service.readFile();
+        getInfo();
     }
 }

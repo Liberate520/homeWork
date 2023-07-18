@@ -29,7 +29,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         this.dateOfDeath = dateOfDeath;
         this.father = father;
         this.mother = mother;
-        parents = new ArrayList<>();
+//        parents = new ArrayList<>();
 //        if(father != null) {
 //            parents.add(father);
 //        }

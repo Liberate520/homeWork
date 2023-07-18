@@ -14,7 +14,7 @@ public class MainMenu {
         commandList.add(new SortByFullName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new SaveFile(consoleUI));
-        commandList.add(new WriteFile(consoleUI));
+        commandList.add(new ReadFile(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 
