@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree();
+        FileHandler fileHandler = new FileHandler();
 
         Human human1 = new Human("Ivan", Gender.male, LocalDate.of(2000, 12, 17), LocalDate.of(2021, 12, 15));
         Human human2 = new Human("Sergey", Gender.male, LocalDate.of(2001, 12, 17));
@@ -37,5 +38,10 @@ public class Main {
 
         familyTree.createTree(human1);
         System.out.println(familyTree.getTree());
+
+        fileHandler.save(familyTree);
+        familyTree = (FamilyTree) fileHandler.load();
+        System.out.println(familyTree.getTree());
+
     }
 }
