@@ -8,6 +8,7 @@ public class Human {
     private Gender gender;
     private Human mother;
     private Human father;
+    private Human children;
 
     public Human(String firstName, String lastName, LocalDate birthDate, Gender gender) {
         this.firstName = firstName;
@@ -55,7 +56,13 @@ public class Human {
     public void setFather(Human father) {
         this.father = father;
     }
+    public Human getChildren() {
+        return children;
+    }
 
+    public void setchildren(Human children) {
+        this.children = children;
+    }
     public int getAge() {
         LocalDate now = LocalDate.now();
         if (deathDate != null && deathDate.isBefore(now)) {
