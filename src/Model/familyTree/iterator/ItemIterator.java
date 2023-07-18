@@ -1,9 +1,9 @@
-package family_tree.Model.familyTree.iterator;
+package Model.familyTree.iterator;
 
 import java.util.Iterator;
 import java.util.List;
 
-import family_tree.Model.familyTree.TreeItem;
+import Model.familyTree.TreeItem;
 
 public class ItemIterator<E extends TreeItem<E>> implements Iterator<E> {
     private int index;

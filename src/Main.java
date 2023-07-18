@@ -1,15 +1,12 @@
-package family_tree;
 
-// import java.time.LocalDate;
-
-// import family_tree.Model.familyTree.FamilyTree;
-// import family_tree.Model.fileHandlers.FileHandler;
-// import family_tree.Model.human.Gender;
-// import family_tree.Model.human.Human;
-import family_tree.View.ConsoleUI;
+import View.ConsoleUI;
 
 public class Main {
     public static void main(String[] args){
+        
+        ConsoleUI client1 = new ConsoleUI();
+        client1.work();
+
         // Human human1 = new Human("Alex", LocalDate.of(1914, 7, 28), Gender.Male);
         // Human human2 = new Human("Susan", LocalDate.of(1917, 3, 24), Gender.Female);
         // Human human3 = new Human("Bob", LocalDate.of(1935, 3, 12), Gender.Male);
@@ -32,8 +29,8 @@ public class Main {
         // // System.out.println(familyTree3.getFamilyTree());
 
         //FamilyTree<Human> restoredFamilyTree = new FamilyTree<Human>();
-        //FileHandler fileHandler = new FileHandler();
-        //fileHandler.save(familyTree, "Projects_OOP/Projects_OOP_HomeWork/src/family_tree/FamilyTree1.out");
+        // FileHandler fileHandler = new FileHandler();
+        // fileHandler.save(familyTree, "Projects_OOP/Projects_OOP_HomeWork/src/FamilyTree1.out");
         // restoredFamilyTree = (FamilyTree<Human>) fileHandler.read("Projects_OOP/Projects_OOP_HomeWork/src/family_tree/FamilyTree1.out");
         // System.out.println(restoredFamilyTree.getFamilyTree());
         // restoredFamilyTree.sortByName();
@@ -45,8 +42,5 @@ public class Main {
         // restoredFamilyTree.sortByAge();
         // System.out.println("Sort by Age:");
         // System.out.println(restoredFamilyTree.getFamilyTree());
-        
-        ConsoleUI client1 = new ConsoleUI();
-        client1.work();
     }
 }

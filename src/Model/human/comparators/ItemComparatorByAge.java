@@ -1,7 +1,7 @@
-package family_tree.Model.human.comparators;
+package Model.human.comparators;
 import java.util.Comparator;
 
-import family_tree.Model.familyTree.TreeItem;
+import Model.familyTree.TreeItem;
 
 public class ItemComparatorByAge<E extends TreeItem<E>> implements Comparator<E>  {
 

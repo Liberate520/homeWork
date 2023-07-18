@@ -1,11 +1,11 @@
-package family_tree.Model.familyTree;
+package Model.familyTree;
 
 import java.util.List;
 
-import family_tree.Model.familyTree.iterator.ItemIterator;
-import family_tree.Model.human.comparators.ItemComparatorByAge;
-import family_tree.Model.human.comparators.ItemComparatorByBirthDate;
-import family_tree.Model.human.comparators.ItemComparatorByName;
+import Model.familyTree.iterator.ItemIterator;
+import Model.human.comparators.ItemComparatorByAge;
+import Model.human.comparators.ItemComparatorByBirthDate;
+import Model.human.comparators.ItemComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,19 +30,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
             itemList.add(child);
         }
     }
-
-    // public void addChilrenForParentsName(){
-    //     for (Human possibleChild : humanList) {
-    //         for (Human possibleParent : humanList) {
-    //             if ((possibleChild.getMother() != null) && (possibleChild.getMother().getName().equals(possibleParent.getName()))) {
-    //                 possibleParent.addChildren(possibleChild);
-    //             }
-    //             if ((possibleChild.getMother() != null) && (possibleChild.getFather().getName().equals(possibleParent.getName()))) {
-    //                 possibleParent.addChildren(possibleChild);
-    //             }
-    //         }
-    //     }
-    // }
 
     public boolean addItem(E item) {
         if (!itemList.contains(item)) {
@@ -76,14 +63,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         }
         return stringBuilder.toString();
     }
-
-    // public String toTxt() {
-    //     StringBuilder stringBuilder = new StringBuilder();
-    //     for (Human human : humanList) {
-    //         stringBuilder.append(human.toTxt());
-    //     }
-    //     return stringBuilder.toString();
-    // }
 
     @Override
     public Iterator<E> iterator() {

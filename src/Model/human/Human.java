@@ -1,8 +1,8 @@
-package family_tree.Model.human;
+package Model.human;
 
 import java.util.List;
 
-import family_tree.Model.familyTree.TreeItem;
+import Model.familyTree.TreeItem;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -71,8 +71,8 @@ public class Human implements Serializable, TreeItem<Human> {
 
     @Override
     public boolean setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
-        if (this.deathDate != null) {
+        if (this.birthDate.compareTo(deathDate) < 0) {
+            this.deathDate = deathDate;
             return true;
         }
         return false;

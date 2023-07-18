@@ -1,4 +1,4 @@
-package family_tree.Model.fileHandlers;
+package Model.fileHandlers;
 
 import java.io.Serializable;
 
