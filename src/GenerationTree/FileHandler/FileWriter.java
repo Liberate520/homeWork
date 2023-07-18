@@ -1,9 +1,7 @@
-package GenerationTree.Tree;
+package GenerationTree.FileHandler;
 
 import java.io.Serializable;
 
-public interface Writable {
+public interface FileWriter {
     boolean save(Serializable serializable, String filePath);
-
-    Object read(String filePath);
 }

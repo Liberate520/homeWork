@@ -1,4 +1,4 @@
-package GenerationTree.Tree;
+package GenerationTree.FileHandler;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler implements Writable {
+public class FileHandler<T> implements FileWriter, FileReader<T> {
 
     @Override
     public boolean save(Serializable serializable, String filePath) {
@@ -14,17 +14,15 @@ public class FileHandler implements Writable {
             objectOutputStream.writeObject(serializable);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public Object read(String filePath) {
+    public T read(String filePath) {
         try (var objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
-            return objectInputStream.readObject();
+            return (T) objectInputStream.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

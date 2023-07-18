@@ -12,7 +12,7 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
 
     private int id;
     private String name;
-    private String sename;
+    private String surname;
     private Gender gender;
     private Marrieble spouse;
 
@@ -41,9 +41,9 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
         this.id = id;
     }
 
-    public void setSename(GenerationTree<Person> family) {
+    public void setSurname(GenerationTree<Person> family) {
         if (family.contains(this))
-            this.sename = family.getTreeName();
+            this.surname = family.getTreeName();
     }
 
     public int getId() {
@@ -54,8 +54,8 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
         return this.name;
     }
 
-    public String getSename() {
-        return this.sename != null ? this.sename : "";
+    public String getSurname() {
+        return this.surname != null ? this.surname : "";
     }
 
     public LocalDate getDateBirth() {
@@ -84,9 +84,9 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
                 !this.children.contains(child)) {
             this.children.add(child);
             child.addParrent(this);
-            if (this.sename != null &&
-                    child.sename == null) {
-                child.setSenameFromParrent(this.sename);
+            if (this.surname != null &&
+                    child.surname == null) {
+                child.setSenameFromParrent(this.surname);
             }
             if (this.spouse != null) {
                 spouse.addChild(child);
@@ -130,7 +130,7 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
     @Override
     public String toString() {
         return name
-                + (getSename().isEmpty() ? "" : " " + getSename())
+                + (getSurname().isEmpty() ? "" : " " + getSurname())
                 + ", пол: " + this.gender + ", дата рождения: " + dateBirth
                 + (this.dateDaeth != null ? "Дата смерти:" + this.dateDaeth : "");
     }
@@ -141,7 +141,7 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
     }
 
     private void setSenameFromParrent(String sename) {
-        this.sename = sename;
+        this.surname = sename;
     }
 
 }

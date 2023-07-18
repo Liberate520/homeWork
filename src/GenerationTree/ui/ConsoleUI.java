@@ -14,16 +14,25 @@ public class ConsoleUI implements View {
 
     @Override
     public void start() {
-        String sename = scan();
+        clsField();
+        String sename = cmdManager.inputText("Введите фамилию семьи: ");
         presenter.setTreeService(sename);
-    }
+        var treeF = true;
+        while (treeF) {
 
-    private String scan() {
-        return cmdManager.inputText("Введите фамилию семьи: ");
+        }
     }
 
     @Override
     public void print(String text) {
         cmdManager.PrintText(text);
+    }
+
+    private void clsField() {
+        String header = "ПРОГРАММА: Генеалогическое древо семьи. Версия 0.000.00 pre-Alpha";
+        cmdManager.consoleClear();
+        cmdManager.PrintText(header);
+        cmdManager.PrintText("=".repeat(header.length()));
+
     }
 }

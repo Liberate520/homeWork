@@ -2,6 +2,7 @@ package GenerationTree.Person;
 
 import java.time.LocalDate;
 
+import GenerationTree.FileHandler.FileHandler;
 import GenerationTree.Person.Comparators.PersonComparatorBySename;
 import GenerationTree.Person.Structs.Gender;
 import GenerationTree.Tree.GenerationTree;
@@ -10,10 +11,12 @@ import GenerationTree.Tree.Service;
 public class FamilyTreeService implements Service {
     private PersonIdGenerator idPerson;
     private GenerationTree<Person> tree;
+    private FileHandler<GenerationTree<Person>> fHandler;
 
     public FamilyTreeService(String treeName, PersonIdGenerator personIdGenerator) {
         this.tree = new GenerationTree<Person>(treeName);
         this.idPerson = personIdGenerator;
+        this.fHandler = new FileHandler<>();
     }
 
     public int addPerson(String name, Gender gender, LocalDate dateBirth) {
@@ -26,7 +29,7 @@ public class FamilyTreeService implements Service {
 
     public void addPerson(Person person) {
         tree.addOnlyPerson(person);
-        person.setSename(tree);
+        person.setSurname(tree);
     }
 
     public void addPersonAndRelatives(Person person) {
@@ -101,6 +104,19 @@ public class FamilyTreeService implements Service {
         }
 
         return sb.toString();
+    }
+
+    public boolean saveTree() {
+        return fHandler.save(tree, "Data\\" + this.tree.getTreeName() + ".out");
+    }
+
+    public boolean loadTree() {
+        var tree = fHandler.read("Data\\" + this.tree.getTreeName() + ".out");
+        if (tree != null) {
+            this.tree = tree;
+            return true;
+        }
+        return false;
     }
 
     @Override
