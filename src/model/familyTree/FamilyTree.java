@@ -2,7 +2,6 @@ package model.familyTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import model.human.Human;
@@ -18,6 +17,7 @@ public class FamilyTree implements Serializable {
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;
     }
+    
 
     public boolean add(Human human){
         if (human == null) {
@@ -33,6 +33,15 @@ public class FamilyTree implements Serializable {
             return true;
         }
         return false;
+    }
+   
+    public Human getPersonByName(String name) {
+        for (Human person : humanList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     private void addToParents(Human human){
@@ -128,6 +137,10 @@ public class FamilyTree implements Serializable {
             }
         }
         return null;
+    }
+    
+    public List<Human> getPeople() {
+        return humanList;
     }
 
     @Override
