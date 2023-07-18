@@ -11,6 +11,7 @@ public class MainMenu extends Menu {
         commandList.add(new GetMembers(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByBirthDate(consoleUI));
+        commandList.add(new ExportTree(consoleUI));
         if (checkPreviousMenu()) commandList.add(new Back(consoleUI));
         commandList.add(new Finish(consoleUI));
     }

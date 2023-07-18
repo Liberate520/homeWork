@@ -9,7 +9,9 @@ public class Input {
         sc = new Scanner(System.in);
     }
 
-    private String getInput(String regex, String mismatchMsg) {
+    private String getInput(String startMsg, String regex, String mismatchMsg) {
+        if (!startMsg.equals(""))
+            System.out.print(startMsg + ": ");
         while (true) {
             String input = sc.nextLine().trim();
             if (input.equals("")) {
@@ -23,19 +25,15 @@ public class Input {
         }
     }
 
-    public String getString() {
-        while (true) {
-            String input = sc.nextLine().trim();
-            if (input.equals("")) System.out.print("Ввод не должен быть пустым. Пожалуйста, повторите ввод: ");
-            else return input;
-        }
+    public String getString(String startMsg) {
+       return getInput(startMsg, ".*", "Ошибка ввода");
     }
 
-    public String getString(String regex, String mismatchMsg) {
-       return getInput(regex, mismatchMsg);
+    public String getString(String startMsg, String regex, String mismatchMsg) {
+        return getInput(startMsg, regex, mismatchMsg);
     }
 
-    public Integer getInt(String regex, String mismatchMsg) {
-        return Integer.parseInt(getInput(regex, mismatchMsg));
+    public Integer getInt(String startMsg, String regex, String mismatchMsg) {
+        return Integer.parseInt(getInput(startMsg, regex, mismatchMsg));
     }
 }

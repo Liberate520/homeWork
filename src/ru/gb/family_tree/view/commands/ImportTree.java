@@ -10,5 +10,5 @@ public class ImportTree extends Command {
     }
 
     @Override
-    public void execute() { consoleUI.importFromObjectFile(); }
+    public void execute() { consoleUI.importTree(); }
 }

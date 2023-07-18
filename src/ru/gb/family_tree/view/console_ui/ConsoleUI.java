@@ -5,13 +5,12 @@ import ru.gb.family_tree.view.View;
 import ru.gb.family_tree.view.menus.EmptyTreeMenu;
 import ru.gb.family_tree.view.menus.MainMenu;
 import ru.gb.family_tree.view.menus.Menu;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 
 public class ConsoleUI implements View {
     Presenter presenter;
-    private final Input input;
+    private Input input;
     private Menu previousMenu;
     private boolean work;
 
@@ -59,10 +58,11 @@ public class ConsoleUI implements View {
             else currentMenu = new EmptyTreeMenu(this);
             welcome();
             print(currentMenu.getMenu());
-            System.out.print("Ввод: ");
-            Integer choise = input.getInt(String.format("^[1-%d]$", currentMenu.countItems()),
+            Integer choice = input.getInt(
+                    "Ввод",
+                    String.format("^[1-%d]$", currentMenu.countItems()),
                     "Ошибка ввода. Данный пункт меню не найден");
-            currentMenu.execute(choise - 1);
+            currentMenu.execute(choice - 1);
         }
     }
 
@@ -77,22 +77,29 @@ public class ConsoleUI implements View {
         String pattern;
         LocalDate birthDate;
 
-        print("Введите фамилию человека", true);
-        data.put("surname", input.getString("^[А-Я][а-я]*$",
+        clearConsole();
+        data.put("surname", input.getString(
+                "Введите фамилию человека",
+                "^[А-Я][а-я]*$",
                 "Фамилия должна начинаться с заглавной буквы"));
-        print("Введите имя человека");
-        data.put("name", input.getString("^[А-Я][а-я]*$",
+        data.put("name", input.getString(
+                "Введите имя человека",
+                "^[А-Я][а-я]*$",
                 "Имя должно начинаться с заглавной буквы"));
-        print("Введите отчество человека");
-        data.put("patronymic", input.getString("^[А-Я][а-я]*$",
+        data.put("patronymic", input.getString(
+                "Введите отчество человека",
+                "^[А-Я][а-я]*$",
                 "Отчество должно начинаться с заглавной буквы"));
-        print("Введите пол человека");
-        data.put("gender", input.getString("^[МмЖж]$", "Ошибка ввода. Введите \"м\" или \"ж\""));
-        print("Введите дату рождения человека в формате ГГГГ-ММ-ДД");
+        data.put("gender", input.getString(
+                "Введите пол человека",
+                "^[МмЖж]$",
+                "Ошибка ввода. Введите \"м\" или \"ж\""));
         while (true) {
             try {
-                pattern = input.getString("^\\d{4}-\\d{2}-\\d{2}$",
-                        "Ошибка ввода. Пожалуйста, введите дату согласно формату");
+                pattern = input.getString(
+                        "Введите дату рождения человека в формате ГГГГ-ММ-ДД",
+                        "^\\d{4}-\\d{2}-\\d{2}$",
+                        "Ошибка ввода");
                 birthDate = LocalDate.parse(pattern);
                 break;
             } catch (Exception e) {
@@ -119,9 +126,12 @@ public class ConsoleUI implements View {
         presenter.sortByBirthDate();
     }
 
-    public void importFromObjectFile() {
-        print("Введите имя файла для импорта");
-        presenter.importFromObjectFile(input.getString());
+    public void importTree() {
+        presenter.importTree(input.getString("Введите имя файла для импорта"));
+    }
+
+    public void exportTree() {
+        presenter.exportTree(input.getString("Введите имя файла для экспорта"));
     }
 
     public void back() {
