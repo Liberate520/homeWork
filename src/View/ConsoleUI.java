@@ -41,7 +41,7 @@ public class ConsoleUI {
 
     public void goodbye() {
         System.out.print(
-                "Хотите сохранить изменения в дереве:\n [1] - Да\n [2] - Нет\n [3] - Вернуться в главное меню\n--> ");
+                "Хотите сохранить изменения в дереве:\n [1] - Да\n [2] - Нет\n--> ");
         String choise = scanner.nextLine();
         if (choise.equals("1")) {
             saveTree();
@@ -207,7 +207,7 @@ public class ConsoleUI {
     }
 
     public void loadTree() {
-        if (presenter.loadTree("Projects_OOP/Projects_OOP_HomeWork/src/FamilyTree.out")) {
+        if (presenter.loadTree("FamilyTree.out")) {
             System.out.println("Загрузка дерева прошла успешно!");
         } else {
             System.out.println("При загрузке дерева произошла ошибка!");
