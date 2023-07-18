@@ -26,18 +26,9 @@ public class Main {
         System.out.println("Father: " + child1.getFather());
         System.out.println("Mother: " + child1.getMother());
 
-        // Можем ли мы также найти детей для отца и матери?
-        List<Human> childrenOfFather = new ArrayList<>();
-        List<Human> childrenOfMother = new ArrayList<>();
-
-        for (Human human : familyTree.getAllFamilyMembers()) {
-            if (human.getFather() != null && human.getFather().equals(father)) {
-                childrenOfFather.add(human);
-            }
-            if (human.getMother() != null && human.getMother().equals(mother)) {
-                childrenOfMother.add(human);
-            }
-        }
+        // Используем методы getChildrenOfFather и getChildrenOfMother
+        List<Human> childrenOfFather = familyTree.getChildrenOfFather(father);
+        List<Human> childrenOfMother = familyTree.getChildrenOfMother(mother);
 
         System.out.println("Children of Father:");
         for (Human child : childrenOfFather) {

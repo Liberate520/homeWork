@@ -34,4 +34,25 @@ public class FamilyTree {
     public List<Human> getAllFamilyMembers() {
         return humans;
     }
+
+    public List<Human> getChildrenOfFather(Human father) {
+        List<Human> children = new ArrayList<>();
+        for (Human human : humans) {
+            if (human.getFather() != null && human.getFather().equals(father)) {
+                children.add(human);
+            }
+        }
+        return children;
+    }
+
+    public List<Human> getChildrenOfMother(Human mother) {
+        List<Human> children = new ArrayList<>();
+        for (Human human : humans) {
+            if (human.getMother() != null && human.getMother().equals(mother)) {
+                children.add(human);
+            }
+        }
+        return children;
+    }
 }
+
