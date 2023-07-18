@@ -1,6 +1,6 @@
-package familyTree.src.family_tree.human;
+package familyTree.src.family_tree.model.human;
 
-import familyTree.src.family_tree.family_tree1.FamilyTreeItem;
+import familyTree.src.family_tree.model.family_Tree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -64,6 +64,16 @@ public class Human implements Serializable, FamilyTreeItem {
     @Override
     public LocalDate birthDate() {
         return null;
+    }
+
+    @Override
+    public boolean addChild(Object human) {
+        return false;
+    }
+
+    @Override
+    public boolean addParent(Object human) {
+        return false;
     }
 
     public boolean addParent(Human parent) {
@@ -217,5 +227,10 @@ public class Human implements Serializable, FamilyTreeItem {
         }
         Human human = (Human) obj;
         return human.getDocId().equals(getDocId());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

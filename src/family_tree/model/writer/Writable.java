@@ -1,4 +1,4 @@
-package familyTree.src.family_tree;
+package familyTree.src.family_tree.model.writer;
 
 import java.io.Serial;
 import java.io.Serializable;

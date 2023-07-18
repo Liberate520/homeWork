@@ -1,6 +1,4 @@
-package familyTree.src.family_tree.writer;
-
-import familyTree.src.family_tree.Writable;
+package familyTree.src.family_tree.model.writer;
 
 import java.io.*;
 public class FileGeneration implements Writable {

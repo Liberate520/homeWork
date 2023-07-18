@@ -1,9 +1,8 @@
-package familyTree.src.family_tree.family_tree1;
+package familyTree.src.family_tree.model.family_Tree;
 
-import familyTree.src.family_tree.human.comparators.HumanComparatorByBirthDate;
-import familyTree.src.family_tree.human.comparators.HumanComparatorByName;
-import java.time.LocalDate;
-import java.time.Period;
+import familyTree.src.family_tree.model.family_Tree.iterators.HumanIterator;
+import familyTree.src.family_tree.model.human.comparators.HumanComparatorByBirthDate;
+import familyTree.src.family_tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.*;
@@ -31,12 +30,12 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
 
     private void addToParents(E human){
         for (E parent: human.getParents()){
-            addToChildren(human);
+            parent.addChild(human);
         }
     }
     private void addToChildren(E human){
         for (E child: human.getChildren()){
-            addToParents(human);
+            child.addParent(human);
         }
     }
     public E getByDocId(String docId) {
@@ -69,9 +68,13 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<FamilyTreeItem>());
     }
     public void sortByBirthDate() {
-        humanList.sort(new HumanComparatorByBirthDate());
+        humanList.sort(new HumanComparatorByBirthDate<FamilyTreeItem>());
+    }
+
+    public void addHuman(E human) {
+        humanList.add(human);
     }
 }

@@ -1,6 +1,6 @@
 //package familyTree.src.family_tree;
 //
-//import familyTree.src.family_tree.family_tree1.FamilyTreeItem;
+//import familyTree.src.family_tree.model.family_tree1.FamilyTreeItem;
 //
 //import java.time.LocalDate;
 //

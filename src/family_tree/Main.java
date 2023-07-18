@@ -1,27 +1,43 @@
 package familyTree.src.family_tree;
 
-import familyTree.src.family_tree.family_tree1.FamilyTree;
-import familyTree.src.family_tree.human.Gender;
-import familyTree.src.family_tree.human.Human;
+import familyTree.src.family_tree.model.human.Gender;
+import familyTree.src.family_tree.model.human.Human;
+import familyTree.src.family_tree.model.service.Service;
 
 import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = new FamilyTree();
 
-        tree.add(new Human("45№608202", "Мария", Gender.Female, LocalDate.of(1965, 9, 15), "45№705202"));
-        tree.add(new Human("45№705202", "Василий", Gender.Male, LocalDate.of(1963, 12, 10), "45№608202"));
-        tree.add(new Human("18№752-01", "Кристина", Gender.Female, LocalDate.of(1988, 7, 5),
-                (Human) tree.getByDocId("45№705202"), (Human) tree.getByDocId("45№608202")));
-        tree.add(new Human("18№144-03", "Семен", Gender.Male, LocalDate.of(1991, 1, 25),
-                (Human) tree.getByDocId("45№705202"), (Human) tree.getByDocId("45№608202")));
+        Service service = new Service();
 
-        System.out.println(tree.getInfo());
-        String path = "src/familyTree/atree.out";
-        tree.sortByName();
-        System.out.println(tree);
-        tree.sortByBirthDate();
-        System.out.println(tree);
+        service.addHuman("45№608202", "Мария", Gender.Female, LocalDate.of(1965, 9, 15),,,, "45№705202"));
+        service.addHuman("45№705202", "Василий", Gender.Male, LocalDate.of(1963, 12, 10),,,, "45№608202"));
+        service.addHuman("18№752-01", "Кристина", Gender.Female, LocalDate.of(1988, 7, 5),,
+                (Human) tree.getByDocId("45№705202"), (Human) tree.getByDocId("45№608202")),);
+        service.addHuman("18№144-03", "Семен", Gender.Male, LocalDate.of(1991, 1, 25),,
+                (Human) tree.getByDocId("45№705202"), (Human) tree.getByDocId("45№608202")),);
+        System.out.println(service.getHumanInfo());
+        service.sortByBirthDate();
+        System.out.println(service.getHumanInfo());
+        service.sortByName();
+        System.out.println(service.getHumanInfo());
+    }
+}
+//        FamilyTree tree = new FamilyTree();
+//
+//        tree.add(new Human("45№608202", "Мария", Gender.Female, LocalDate.of(1965, 9, 15), "45№705202"));
+//        tree.add(new Human("45№705202", "Василий", Gender.Male, LocalDate.of(1963, 12, 10), "45№608202"));
+//        tree.add(new Human("18№752-01", "Кристина", Gender.Female, LocalDate.of(1988, 7, 5),
+//                (Human) tree.getByDocId("45№705202"), (Human) tree.getByDocId("45№608202")));
+//        tree.add(new Human("18№144-03", "Семен", Gender.Male, LocalDate.of(1991, 1, 25),
+//                (Human) tree.getByDocId("45№705202"), (Human) tree.getByDocId("45№608202")));
+
+//        System.out.println(tree.getInfo());
+//        String path = "src/familyTree/atree.out";
+//        tree.sortByName();
+//        System.out.println(tree);
+//        tree.sortByBirthDate();
+//        System.out.println(tree);
 
 
 //        FileGeneration fileGeneration = new FileGeneration();
@@ -30,8 +46,8 @@ public class Main {
 //        FileGeneration fileGeneration = new FileGeneration();
 //        FamilyTree atree = (FamilyTree) fileGeneration.read(path);
 //        System.out.println(tree);
-    }
-}
+//    }
+//}
 
 //    Урок 1. Принципы ООП: Инкапсуляция, наследование, полиморфизм
 //    Реализовать, с учетом ооп подхода, приложение.
@@ -61,3 +77,5 @@ public class Main {
 //        сделать родословную для собак(класс собак создавать не надо или создать, но в за пределами
 //        пакета проекта). Продумать(только подумать, но можно и попробовать реализовать) класс общения
 //        с пользователем, набор команд, для операций над деревом
+//Урок 5. От простого к практике
+//        Реализовать паттерн MVP в вашем проекте с семейным деревом. Примеры проектов смотри на 4 и 5 семинаре
