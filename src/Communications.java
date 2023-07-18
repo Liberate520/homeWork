@@ -1,4 +1,4 @@
-public class Communications  {
+public class Communications {
     private Human human1;
     private Human human2;
     private String relationship;

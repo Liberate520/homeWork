@@ -15,6 +15,18 @@ public class Main {
         child2.setFather(father);
         child2.setMother(mother);
 
+        // Определяем связи между родителями и детьми с помощью класса Communications
+        Communications relationship1 = new Communications(father, child1, "Father-Daughter");
+        Communications relationship2 = new Communications(mother, child1, "Mother-Daughter");
+        Communications relationship3 = new Communications(father, child2, "Father-Son");
+        Communications relationship4 = new Communications(mother, child2, "Mother-Son");
+
+        // Выводим информацию о связях
+        System.out.println(relationship1);
+        System.out.println(relationship2);
+        System.out.println(relationship3);
+        System.out.println(relationship4);
+
         // Создаем FamilyTree и добавляем людей
         FamilyTree familyTree = new FamilyTree();
         familyTree.addHuman(father);
