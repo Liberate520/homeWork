@@ -1,10 +1,10 @@
-package io;
+package model.io;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
-import interfaces.Loadable;
-import interfaces.Reading;
+import model.interfaces.Loadable;
+import model.interfaces.Reading;
 
 public class Loader implements Reading {
     @Override

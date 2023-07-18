@@ -1,32 +1,34 @@
-package treeItems;
+package model.treeItems;
 // TODO сделать обработку возраста человека и его состояния жизни
 
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
-import interfaces.GenTreeItem;
-import treeItems.enums.Gender;
-import treeItems.enums.LifeState;
+import model.treeItems.enums.Gender;
+import model.treeItems.enums.LifeState;
 
-public class Human implements Comparable<Human>, GenTreeItem<Human> {
+public class Human implements Comparable<Human>, GenTreeItem {
     private static String fileExt;
 
-    private int id;
+    private int id = 0;
     private String firstName;
     private String midName;
     private String lastName;
     private Gender gender;
     private String strGender;
 
-    private GregorianCalendar birthDate;
-    private GregorianCalendar deathDate;
+    private GregorianCalendar birthDate = null;
+    private GregorianCalendar deathDate = null;
     private String strBirthDate = "UnknownBirthDate";
     private String strDeathDate = "UnknownDeathDate";
-    private int age;
     private LifeState lifeState = LifeState.alive;
 
-    private Human mother;
-    private Human father;
-    private ArrayList<Human> childs;
+    private Human mother = null;
+    private Human father = null;
+    private int motherId = 0;
+    private int fatherId = 0;
+
+    private ArrayList<Human> childs = new ArrayList<Human>();
+    private ArrayList<Integer> childsIds = new ArrayList<Integer>();
 
     private int hierarchyLevel = 0;
 
@@ -35,12 +37,10 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
     }
 
     // конструктор
-    public Human(int id,
-                 String firstName,
+    public Human(String firstName,
                  String midName,
                  String lastName,
                  Gender gender) {
-        this.id = id;
         this.firstName = firstName;
         this.midName = midName;
         this.lastName = lastName;
@@ -51,30 +51,25 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
         else {
             strGender = "Женщина";
         }
-        childs = new ArrayList<Human>();
     }
 
-    public int getId() {
-        return id;
-    }
+    public void setId(int id) {this.id = id;}
 
-    public Gender getGender() {
-        return gender;
-    }
+    public int getId() {return id;}
 
-    public int getAge() {
-        return age;
-    }
+    public int getFatherId() {return fatherId;}
 
-    public int getHierarchyLevel() {
-        return hierarchyLevel;
-    }
+    public int getMotherId() {return motherId;}
 
-    public void setHierarchyLevel(int level) {
-        hierarchyLevel = level;
-    }
+    public Gender getGender() {return gender;}
 
-    public void setBirthDate(int day, int month, int year) {
+    public int getAge() {return 0;}
+
+    public int getHierarchyLevel() {return hierarchyLevel;}
+
+    public void setHierarchyLevel(int level) {hierarchyLevel = level;}
+
+    public void setBirthDate(int day, int month, int year) throws ArithmeticException {
         GregorianCalendar birthDate = new GregorianCalendar(year, month - 1, day);
         if (this.deathDate != null && birthDate.after(this.deathDate)) {
             throw new ArithmeticException("birthDate can not be after deathDate");
@@ -85,7 +80,7 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
         }
     }
 
-    public void setDeathDate(int day, int month, int year) {
+    public void setDeathDate(int day, int month, int year) throws ArithmeticException {
         GregorianCalendar deathDate = new GregorianCalendar(year, month - 1, day);
         if (this.birthDate != null && deathDate.before(this.birthDate)) {
             throw new ArithmeticException("deathDate can not be before birthDate");
@@ -95,10 +90,6 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
             this.strDeathDate = dateToString(deathDate);
             this.lifeState = LifeState.dead;
         }
-    }
-
-    public String getFullName() {
-        return firstName + " " + midName + " " + lastName;
     }
 
     public void changeFullName(String firstName,
@@ -117,31 +108,46 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
         return this.father;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
+    public void setMother(GenTreeItem mother) {
+        this.mother = (Human)mother;
+        motherId = mother.getId();
         mother.setHierarchyLevel(this.hierarchyLevel + 1);
         mother.addChild(this);
     }
 
-    public void setFather(Human father) {
-        this.father = father;
+    public void setFather(GenTreeItem father) {
+        this.father = (Human)father;
+        fatherId = father.getId();
         father.setHierarchyLevel(this.hierarchyLevel + 1);
         father.addChild(this);
+    }
+
+    public void setParent(GenTreeItem parent) {
+        if (parent instanceof Human) {
+            if (parent.getGender() == Gender.man) {
+                this.setFather(parent);
+            }
+            else {
+                this.setMother(parent);
+            }
+        }
     }
 
     public ArrayList<Human> getChilds() {
         return childs;
     }
 
-    public void addChild(Human child) {
-        if (!(this.childs.contains(child))) {
-            this.childs.add(child);
-            child.setHierarchyLevel(this.hierarchyLevel - 1);
-            if (this.gender == Gender.man) {
-                child.setFather(this);
-            }
-            else {
-                child.setMother(this);
+    public ArrayList<Integer> getChildsIds() {
+        return childsIds;
+    }
+
+    public void addChild(GenTreeItem child) {
+        if (child instanceof Human) {
+            if (!(this.childs.contains((Human)child))) {
+                this.childs.add((Human)child);
+                this.childsIds.add(child.getId());
+                child.setHierarchyLevel(this.hierarchyLevel - 1);
+                child.setParent(this);
             }
         }
     }
@@ -173,7 +179,11 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
         return "id=" + id + " hl=" + hierarchyLevel + " " + getFullName() + " " + datesInfo();
     }
 
-    public void showFullInfo() {
+    public String getFullName() {
+        return firstName + " " + midName + " " + lastName;
+    }
+
+    public String getFullInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("-----------------------------------------------------\n");
         sb.append(toString());
@@ -190,8 +200,8 @@ public class Human implements Comparable<Human>, GenTreeItem<Human> {
 
         sb.append("\nДети:\n");
         sb.append(getStrListChilds());
-        sb.append("-----------------------------------------------------");
-        System.out.println(sb.toString());
+        sb.append("-----------------------------------------------------\n");
+        return sb.toString();
     }
 
     @Override

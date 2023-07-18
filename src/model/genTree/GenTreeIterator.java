@@ -1,10 +1,10 @@
-package genTree;
+package model.genTree;
 
 import java.util.Iterator;
 import java.util.ArrayList;
-import interfaces.GenTreeItem;
+import model.treeItems.GenTreeItem;
 
-public class GenTreeIterator<T extends GenTreeItem<T>> implements Iterator<T> {
+public class GenTreeIterator<T extends GenTreeItem> implements Iterator<T> {
     private int index = 0;
     private int size;
     private ArrayList<T> items;

@@ -1,10 +1,10 @@
-package io;
+package model.io;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
-import interfaces.Saveable;
-import interfaces.Writing;
+import model.interfaces.Saveable;
+import model.interfaces.Writing;
 
 public class Saver implements Writing {
     @Override
