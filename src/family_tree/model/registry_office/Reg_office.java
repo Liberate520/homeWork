@@ -28,13 +28,19 @@ public class Reg_office {
 
     }
 
-    public Human add_human(String surname, String first_name, String patronymic, String str_gender, String str_day_birth){
+    public String add_human(String surname, String first_name, String patronymic, String str_gender, String str_day_birth){
         Gender gender = tryGender(str_gender);
         LocalDate day_birth = date_using.tryLocalDate(str_day_birth);
         Human human = new Human(surname, first_name, patronymic, gender, day_birth);
-        family_tree.addToHumanList(human);
-        return human;
+        if (human != null) {
+            family_tree.addToHumanList(human);
+            return "Добавлен новый член:\n" + human;
+        } else {
+            return "Что-то пошло не так";
+        }
     }
+
+
     public Gender tryGender(String string) {
         Gender gender = Gender.Mail;
         if (!string.isEmpty()) {
