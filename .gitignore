@@ -1,1 +1,6 @@
 .idea
+.gitignore
+*.iml
+family_tree.iml
+HomeWork.iml
+out
