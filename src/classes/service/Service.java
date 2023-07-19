@@ -8,7 +8,7 @@ public class Service {
     static FamilyTree tree = new FamilyTree();
     static FileGuide fileGuide = new FileGuide();
 
-    public static void TestInput() {
+    public static void testInput() {
         TestInput.TestInput(tree);
     }
 
@@ -17,17 +17,17 @@ public class Service {
         System.out.println("Список содержит записей: " + tree.humanList.size());
     }
 
-    public static void SortTreeByName() {
+    public static void sortTreeByName() {
         tree.sortByName();
         System.out.println(tree.getInfo());
     }
 
-    public static void SortTreeById() {
+    public static void sortTreeById() {
         tree.sortById();
         System.out.println(tree.getInfo());
     }
 
-    public static void SortTreeByBrithDate() {
+    public static void sortTreeByBrithDate() {
         tree.sortByBrithDate();
         System.out.println(tree.getInfo());
     }
