@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 
-public class FileHandler implements SaveLoad {
+public class FileHandler implements SaveTo, LoadFrom {
     //Этот класс выполняет сохранение в файл и загрузку из файла
 
     public void saveTo(Object obj, String path) throws IOException {
