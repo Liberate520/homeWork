@@ -181,4 +181,8 @@ public class ConsoleUI implements View {
     public Presenter getPresenter() {
         return presenter;
     }
+
+    public void finish() {
+        flagToAddHuman = false;
+    }
 }
