@@ -5,18 +5,18 @@ import java.util.List;
 
 public class TreeIterator<E> implements Iterator<E> {
     private int index;
-    private List<E> animals;
-    public TreeIterator(List<E> animals) {
-        this.animals = animals;
+    private List<E> people;
+    public TreeIterator(List<E> people) {
+        this.people = people;
     }
 
     @Override
     public boolean hasNext() {
-        return animals.size() > index;
+        return people.size() > index;
     }
 
     @Override
     public E next() {
-        return animals.get(index++);
+        return people.get(index++);
     }
 }

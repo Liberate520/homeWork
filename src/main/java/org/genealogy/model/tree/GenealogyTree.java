@@ -1,35 +1,34 @@
 package org.genealogy.model.tree;
 
-import org.genealogy.model.person.comparators.AnimalComparatorByAge;
-import org.genealogy.model.person.comparators.AnimalComparatorByName;
+import org.genealogy.model.person.comparators.HumanComparatorByAge;
+import org.genealogy.model.person.comparators.HumanComparatorByName;
 import org.genealogy.model.tree.iterators.TreeIterator;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class GenealogyTree<E extends TreeItem> implements Iterable<E>{
-    private List<E> animals;
+    private List<E> people;
     public GenealogyTree()
     {
-        this.animals = new ArrayList<>();
+        this.people = new ArrayList<>();
     }
 
-    public void addPerson(E animal)
+    public void addHuman(E person)
     {
-        animals.add(animal);
+        people.add(person);
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new TreeIterator<>(animals);
+        return new TreeIterator<>(people);
     }
 
     public void sortByName(){
-        animals.sort(new AnimalComparatorByName<>());
+        people.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge(){
-        animals.sort(new AnimalComparatorByAge<>());
+        people.sort(new HumanComparatorByAge<>());
     }
 }

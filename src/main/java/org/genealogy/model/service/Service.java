@@ -1,7 +1,5 @@
 package org.genealogy.model.service;
 
-import org.genealogy.model.person.Animal;
-import org.genealogy.model.person.Dog;
 import org.genealogy.model.person.Human;
 import org.genealogy.model.tree.GenealogyTree;
 
@@ -16,30 +14,17 @@ public class Service {
     public void addHuman(String firstName, String lastName)
     {
         Human human = new Human(firstName, lastName);
-        tree.addPerson(human);
-    }
-
-    public void addDog(String firstName)
-    {
-        Dog dog = new Dog(firstName);
-        tree.addPerson(dog);
-    }
-
-    public void showTree() {
-        for (Object animal : tree){
-            System.out.println(animal);
-        }
-        System.out.println();
+        tree.addHuman(human);
     }
 
     //  Iterator
     public String getTreeInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список людей:\n");
-        Iterator<Animal> iterator = tree.iterator();
+        Iterator<Human> iterator = tree.iterator();
         while (iterator.hasNext()) {
-            Animal animal = iterator.next();
-            stringBuilder.append(animal);
+            Human human = iterator.next();
+            stringBuilder.append(human);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
