@@ -13,8 +13,11 @@ public class Presenter {
         this.view = view;
         service = new Service();
     }
-    public void addHuman(String name, Gender gender, LocalDate date) {
+   /* public void addHuman(String name, Gender gender, LocalDate date) {
         service.addHuman(name, gender, date);
+    }*/
+    public void addHuman(){
+        service.addHuman();
     }
     public void sortByAge() {
         service.sortByAge();
@@ -34,13 +37,33 @@ public class Presenter {
     public boolean save(String path) {
         return service.save(path);
     }
-    public void downland(String path) {
-        service.dowland(path);
+    public boolean downland(String path) {
+        return service.dowland(path);
     }
     public void nextOfKin(int humanID) {
         service.nextOfKin(humanID);
     }
     public int treeIsEmpty(){
         return service.treeIsEmpty();
+    }
+
+    public void setHumanName(String name) {
+        service.setHumanName(name);
+    }
+
+    public void setHumanPatronymic(String patronymic) {
+        service.setHumanPatronymic(patronymic);
+    }
+
+    public void setHumanSurname(String surname) {
+        service.setHumanSurname(surname);
+    }
+
+    public void addHumanToTree() {
+        service.addHumanToTree();
+    }
+
+    public void setHumanBirth(LocalDate date) {
+        service.setHumanBirth(date);
     }
 }
