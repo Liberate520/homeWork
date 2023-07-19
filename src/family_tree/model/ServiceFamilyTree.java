@@ -3,8 +3,8 @@ package family_tree.model;
 import family_tree.model.group.Group;
 import family_tree.model.group.GroupItemFamilyTree;
 import family_tree.model.human.Human;
+import family_tree.model.human.InformerHuman;
 import family_tree.model.marriage.Marriage;
-import saveload.FileSaver;
 import saveload.LoadFrom;
 import saveload.SaveTo;
 
@@ -16,6 +16,7 @@ public class ServiceFamilyTree {
     private FamilyTree<Human> tree;
     private SaveTo saver;
     private LoadFrom loader;
+    private InformerHuman informerHuman;
 
     public ServiceFamilyTree(SaveTo saver, LoadFrom loader){
         GroupItemFamilyTree<Human> humans = new GroupItemFamilyTree<>();
@@ -23,11 +24,12 @@ public class ServiceFamilyTree {
         tree = new FamilyTree(humans, marriages);
         this.saver = saver;
         this.loader = loader;
+        informerHuman = new InformerHuman();
     }
 
     public void addItem(String name, LocalDate dateBirth, Gender gender){
         //Объекты Human можем создавать только в сервисе
-        tree.addItem(new Human(idHuman++, name, dateBirth, gender));
+        tree.addItem(new Human(idHuman++, name, dateBirth, gender, informerHuman));
     }
 
     //регистрируем брак

@@ -1,6 +1,7 @@
 package family_tree.model.human;
 
 import family_tree.model.Gender;
+import family_tree.model.Informer;
 import family_tree.model.group.ItemFamilyTree;
 
 import java.io.Serializable;
@@ -10,22 +11,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Human implements ItemFamilyTree<Human>, Serializable {
-    private int id;
-    private String name;
-    private LocalDate dateBirth, dateDeath;
-    private Gender gender;
-    private Human mother, father;
-    private List<Human> children;
-    private Human spouse;
+    //модификатор доступа полей по умолчанию для доступа в InformerHuman:
+    int id;
+    String name;
+    LocalDate dateBirth, dateDeath;
+    Gender gender;
+    Human mother, father;
+    List<Human> children;
+    Human spouse;
+    private Informer<Human> informer;
 
     private static final int minParentAge = 17;
 
-    public Human(int id, String name, LocalDate dateBirth, Gender gender){
+    public Human(int id, String name, LocalDate dateBirth, Gender gender, Informer<Human> informer) {
         this.id = id;
         this.name = name;
         this.dateBirth = dateBirth;
         this.gender = gender;
         children = new ArrayList<>();
+        this.informer = informer;
     }
     public int getId(){ return id; }
     public String getName(){ return name; }
@@ -71,31 +75,8 @@ public class Human implements ItemFamilyTree<Human>, Serializable {
     }
 
     public String getInfo(){
-        StringBuilder result = new  StringBuilder();
-        result.append("{");
-        result.append(String.format("id: %d, ", id));
-        result.append(String.format("Имя: %s, ", name));
-        result.append(String.format("Дата рождения: %s, ", dateBirth.toString()));
-        result.append(String.format("Пол: %s, ", gender== Gender.Male ? "мужской":"женский"));
-        result.append(String.format("Отец: %s, ", (father==null ? "Нет данных" : father.getName())));
-        result.append(String.format("Мать: %s, ", (mother==null ? "Нет данных" : mother.getName())));
-        if(children.isEmpty()){
-            result.append("Дети: нет, ");
-        }else{
-            List<String> childrenNames = new ArrayList<>();
-            for(Human child : children)
-                childrenNames.add(child.getName());
-            result.append(String.format("Дети: %s, ", String.join(",", childrenNames)));
-        }
-        if(this.spouse == null){
-            result.append(String.format("Семейное положение: %s", gender== Gender.Male ? "не женат" : "не замужем"));
-        }else{
-            result.append(String.format("Семейное положение: %s", gender== Gender.Male ? "женат" : "замужем"));
-        }
-        result.append("}");
-        return result.toString();
+        return informer.getInfo(this);
     }
-
     @Override
     public String toString() {
         return getInfo();

@@ -14,7 +14,6 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        //Указываем, что запись и загрузка выполняется в файл и из файла
         FileSaver saver = new FileSaver();
         FileLoader loader = new FileLoader();
         service = new ServiceFamilyTree(saver, loader);

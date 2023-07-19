@@ -93,12 +93,12 @@ public class ConsoleUI implements View{
             System.out.println("Ошибка ввода данных даты");
             return false;
         }
-        System.out.println("Введите пол: м или ж");
+        System.out.println("Введите пол: м (m) или ж (w)");
         String genderStr = scanner.nextLine();
         if(genderStr.length()==0) return false;
         Gender gender=null;
-        if(genderStr.charAt(0) == 'м') gender = Gender.Male;
-        else if(genderStr.charAt(0) == 'ж') gender = Gender.Female;
+        if(genderStr.charAt(0) == 'м' || genderStr.charAt(0) == 'm') gender = Gender.Male;
+        else if(genderStr.charAt(0) == 'ж' || genderStr.charAt(0) == 'w') gender = Gender.Female;
         else return false;
 
         presenter.addHuman(name, dateBirth, gender);
