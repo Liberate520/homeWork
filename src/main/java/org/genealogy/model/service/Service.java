@@ -2,13 +2,14 @@ package org.genealogy.model.service;
 
 import org.genealogy.model.person.Human;
 import org.genealogy.model.tree.GenealogyTree;
+import org.genealogy.model.tree.TreeItem;
 
 import java.util.Iterator;
 
-public class Service {
-    private GenealogyTree tree;
+public class Service<E extends TreeItem> extends GenealogyTree<E>{
+    private GenealogyTree<E> tree;
     public Service() {
-        tree = new GenealogyTree();
+        tree = new GenealogyTree<>();
     }
 
     public void addHuman(String firstName, String lastName)
@@ -21,9 +22,9 @@ public class Service {
     public String getTreeInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список людей:\n");
-        Iterator<Human> iterator = tree.iterator();
+        Iterator<E> iterator = tree.iterator();
         while (iterator.hasNext()) {
-            Human human = iterator.next();
+            E human = iterator.next();
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
