@@ -1,5 +1,6 @@
 import classes.familyTree.FamilyTree;
 import classes.service.FileGuide;
+import classes.service.Service;
 import classes.service.TestInput;
 
 import java.io.IOException;
@@ -8,10 +9,11 @@ import java.util.Scanner;
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
-        String pathToTreeFile = "src/tree.out";
-        FileGuide fileGuide = new FileGuide();
-        FamilyTree tree = new FamilyTree();
+    public static void main(String[] args) {
+//        String pathToTreeFile = "src/tree.out";
+//        FileGuide fileGuide = new FileGuide();
+//        FamilyTree tree = new FamilyTree();
+      //  Service service = new Service();
 
 //         TestInput.TestInput(tree);//Тестовый вариант заполнения списка
 //        System.out.println(tree.humanList.size());
@@ -46,35 +48,42 @@ public class Main {
                     break;
                 }
                 case ("1"): {
-                    TestInput.TestInput(tree);//Тестовый вариант заполнения списка;
+//                    TestInput.TestInput(tree);//Тестовый вариант заполнения списка;
+                    Service.TestInput();
                     break;
                 }
                 case ("2"): {
-                    fileGuide.save(tree, pathToTreeFile);
+                    Service.saveTree();
+                    //             fileGuide.save(tree, pathToTreeFile);
                     break;
                 }
                 case ("3"): {
-                    tree = (FamilyTree) fileGuide.read(pathToTreeFile);
+                    Service.readTree();
+                    //              tree = (FamilyTree) fileGuide.read(pathToTreeFile);
                     break;
                 }
                 case ("4"): {
-                    System.out.println(tree.getInfo());
-                    System.out.println("Список содержит записей: " + tree.humanList.size());
+                    Service.getTreeInfo();
+//                    System.out.println(tree.getInfo());
+//                    System.out.println("Список содержит записей: " + tree.humanList.size());
                     break;
                 }
                 case ("5"): {
-                    tree.sortByName();
-                    System.out.println(tree.getInfo());
+                    Service.SortTreeByName();
+                    //           tree.sortByName();
+                    //           System.out.println(tree.getInfo());
                     break;
                 }
                 case ("6"): {
-                    tree.sortById();
-                    System.out.println(tree.getInfo());
+                    Service.SortTreeById();
+                    //           tree.sortById();
+                    //          System.out.println(tree.getInfo());
                     break;
                 }
                 case ("7"): {
-                    tree.sortByBrithDate();
-                    System.out.println(tree.getInfo());
+                    Service.SortTreeByBrithDate();
+                    //          tree.sortByBrithDate();
+                    //          System.out.println(tree.getInfo());
                 }
                 default: {
                     System.out.println("Непонятная команда");
