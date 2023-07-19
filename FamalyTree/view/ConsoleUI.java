@@ -1,5 +1,6 @@
 package homeWork.FamalyTree.view;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,23 +44,27 @@ public class ConsoleUI implements View {
         System.out.println("Введите дату рождения (в формате YYYY-MM-DD): ");
         String DOBString = scanner.nextLine();
         LocalDate DOB = LocalDate.parse(DOBString);
-        System.out.println("Введите дату смерти (в формате YYYY-MM-DD). Если обьект жив прописать - нет: ");
+        System.out.println("Введите дату смерти (в формате YYYY-MM-DD). Если обьект жив, прописать - нет: ");
         String DODString = scanner.nextLine();
-        if (DODString.toLowerCase() != "нет"){LocalDate DOD = LocalDate.parse(DODString);}
-        else{LocalDate DOD = null;}
+        LocalDate DOD;
+        if (DODString.toLowerCase() != "нет"){DOD = LocalDate.parse(DODString);}
+        else{DOD = null;}
         System.out.println("Введите пол в фомате м/ж: ");
         String genderString = scanner.nextLine();
-        if (genderString.toLowerCase() == "м"){Gender gender = Gender.Male;}
-        else{Gender gender = Gender.Female;}
-        System.out.println("Введите имя отца. Если информация отсутствует прописываем - нет: ");
+        Gender gender;
+        if (genderString.toLowerCase() == "м"){gender = Gender.Male;}
+        else{gender = Gender.Female;}
+        System.out.println("Введите имя отца. Если информация отсутствует, прописываем - нет: ");
         String fatherString = scanner.nextLine();
-        if (fatherString.toLowerCase() != "нет"){String father = fatherString;}
-        else{String father = null;}
-        System.out.println("Введите имя матери. Если информация отсутствует прописываем - нет: ");
+        String father;
+        if (fatherString.toLowerCase() != "нет"){father = fatherString;}
+        else{father = null;}
+        System.out.println("Введите имя матери. Если информация отсутствует, прописываем - нет: ");
         String motherString = scanner.nextLine();
-        if (motherString.toLowerCase() != "нет"){String mother = motherString;}
-        else{String mother = null;}
-        System.out.println("Введите имена детей через запятую. Если информация отсутствует прописываем - нет: ");
+        String mother;
+        if (motherString.toLowerCase() != "нет"){mother = motherString;}
+        else{mother = null;}
+        System.out.println("Введите имена детей через запятую. Если информация отсутствует, прописываем - нет: ");
         String childrenString = scanner.nextLine();
         List<String> children = new ArrayList<>();
         if (childrenString.toLowerCase() != "нет"){            
@@ -86,6 +91,14 @@ public class ConsoleUI implements View {
 
     public void sortByName(){
         presenter.sortByName();
+    }
+
+    public void SaveData(File file){
+        presenter.SaveData(file);
+    }
+
+    public void LoadData(File file){
+        presenter.LoadData(file);
     }
 
     public void finish(){

@@ -18,8 +18,8 @@ public class Human implements Comparable<Human>, ItemTree<Human> {
     private List<Human> children;
     private List<Human> parents;
 
-    public Human(String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender, Human father, Human mother){
-        id = -1;
+    public Human(long id, String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender, Human father, Human mother){
+        this.id = id;
         this.name = name;
         this.last_name = last_name;
         this.DOB = DOB;
@@ -30,16 +30,16 @@ public class Human implements Comparable<Human>, ItemTree<Human> {
         if (mother != null){parents.add(mother);}
         children = new ArrayList<>();
     }
-     public Human(String name, String last_name, LocalDate DOB, Gender gender){
-        this(name, last_name, DOB, null, gender, null, null);
+     public Human(long id, String name, String last_name, LocalDate DOB, Gender gender){
+        this(id, name, last_name, DOB, null, gender, null, null);
     }
 
-     public Human(String name, String last_name, LocalDate DOB, Gender gender, Human father, Human mother){
-        this(name, last_name, DOB, null, gender, father, mother);
+     public Human(long id, String name, String last_name, LocalDate DOB, Gender gender, Human father, Human mother){
+        this(id, name, last_name, DOB, null, gender, father, mother);
     }
 
-     public Human(String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender){
-        this(name, last_name, DOB, DOD, gender, null, null);
+     public Human(long id, String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender){
+        this(id, name, last_name, DOB, DOD, gender, null, null);
     }
 
     public long getId() {

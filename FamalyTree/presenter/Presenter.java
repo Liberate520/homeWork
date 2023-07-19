@@ -1,9 +1,11 @@
 package homeWork.FamalyTree.presenter;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.List;
 
 import homeWork.FamalyTree.model.Human.Gender;
-import homeWork.FamalyTree.model.Human.Human;
+
 import homeWork.FamalyTree.model.Service.Service;
 import homeWork.FamalyTree.view.View;
 
@@ -16,8 +18,8 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String name, String last_name, LocalDate DOB, Gender gender, String father, String mother) {
-        service.addHuman();
+    public void addHuman(String name, String last_name, LocalDate DOB, LocalDate DOD, Gender gender, String father, String mother, List<String> children) {
+        service.addHuman(name, last_name, DOB, DOD, gender, father, mother, children);
         getHumanInfo();        
     }
 
@@ -34,5 +36,13 @@ public class Presenter {
     public void sortByName() {
         service.sortByAge();
         getHumanInfo();
+    }
+
+    public void SaveData(File file){
+        service.SaveData(file);
+    }
+
+    public void LoadData(File file){
+        service.LoadData(file);
     }
 }

@@ -80,9 +80,9 @@ public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable
         fileHandler.Save(list, file);
     }
 
-    public void LoadDate(FamalyTree<E> list, File file){
+    public void LoadData(FamalyTree<E> list, File file){
         FileHandler<E> fileHandler = new FileHandler<E>();        
-        fileHandler.LoadDate(list, file);
+        fileHandler.LoadData(list, file);
     }
 
     @Override

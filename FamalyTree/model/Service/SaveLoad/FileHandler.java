@@ -27,7 +27,7 @@ public class FileHandler<E extends ItemTree<E>> implements SaveLoad<E>{
         }
     }
     
-    public FamalyTree<E> LoadDate(FamalyTree<E> list, File file){
+    public FamalyTree<E> LoadData(FamalyTree<E> list, File file){
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
             FamalyTree<E> listRestored = (FamalyTree<E>) ois.readObject();
