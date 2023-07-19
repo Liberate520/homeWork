@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 /**
  * Все семейные связи решил хранить тут, а не в полях класса Person.
+ * Смотрите Connections.java.
  */
 public class FamilyTree {
     private HashMap<Person, Connections> family;

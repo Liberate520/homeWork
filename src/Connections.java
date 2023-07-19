@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+/**
+ * Класс типа данных, в котором хранятся все родственные связи конкретного человека.
+ */
 public class Connections {
     private HashMap<ConnectionType, HashSet<Person>> connections;
 
