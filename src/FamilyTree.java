@@ -20,13 +20,6 @@ public class FamilyTree {
         return false;
     }
 
-    /**
-     * Метод ручного добавления связи
-     *
-     * @param connectFrom от кого
-     * @param key         какая
-     * @param connectTo   к кому
-     */
     public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
         if (family.containsKey(connectFrom))
             family.get(connectFrom).putConnections(key, connectTo);
