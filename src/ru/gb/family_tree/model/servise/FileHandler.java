@@ -8,22 +8,23 @@ public class FileHandler implements SaveLoading {
      */
     @Override
     public Object save(Serializable serializable, String path) {
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path))) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path))) {
             objectOutputStream.writeObject(serializable);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
     /**
      * Востановление из файла с помощью класса ObjectInputStream
      */
     @Override
     public Object loading(String path) {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream( new FileInputStream(path))){
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))) {
             return objectInputStream.readObject();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

@@ -7,6 +7,7 @@ public class AddHuman extends Command {
     public AddHuman(ConsoleUI consoleUI) {
         super(consoleUI, "добавить новый объект");
     }
+
     @Override
     public void execute() {
         consoleUI.addHuman();

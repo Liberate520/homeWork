@@ -1,8 +1,6 @@
 package ru.gb.family_tree.view;
 
-import com.sun.source.tree.IfTree;
 import ru.gb.family_tree.model.human.Human;
-import ru.gb.family_tree.presenter.FileManager;
 import ru.gb.family_tree.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -13,10 +11,9 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private boolean work;
     private MainMenu mainMenu;
-    private FileManager fileManager ;
 
     public ConsoleUI() {
-        presenter = new Presenter<>(this);
+        presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         work = true;
         mainMenu = new MainMenu(this);
@@ -25,25 +22,26 @@ public class ConsoleUI implements View {
     @Override
     public void start() {
         System.out.println("Добро пожаловать в информационную систему 'Генеалогическое дерево'");
-//        FamilyTree familyTree = TestData.testData(); // подгружаю данные в базу
-        while(work){
-        System.out.println(mainMenu.menu());
-        String choice = scanner.nextLine();
-        // проверка на валидность (цифра в нужном диапазоне и не превышает к-во пунктов)
-        int numChoice = Integer.parseInt(choice);
-        mainMenu.execute(numChoice);
+        while (work) {
+            System.out.println(mainMenu.menu());
+            String choice = scanner.nextLine();
+            // проверка на валидность (цифра в нужном диапазоне и не превышает к-во пунктов)
+            int numChoice = Integer.parseInt(choice);
+            mainMenu.execute(numChoice);
         }
     }
-    public void finish(){
+
+    public void finish() {
         System.out.println("пока!");
         work = false;
     }
-    public void getTreeInfo(){
+
+    public void getTreeInfo() {
         presenter.getTreeInfo();
     }
 
-    // TODO вынесение в отдельный интерфейс? общей информации для заполнения в методах (через AddObjectParam?)
-    public void addHuman (){
+    // TODO проработать вынесение в отдельный интерфейс(или класс?) общей информации для заполнения в методах addXXX
+    public void addHuman() {
         System.out.println("Введите номер паспорта (6 знаков)");
         String numPassport = scanner.nextLine();
 //        String numPassportString = scanner.nextLine();
@@ -57,15 +55,12 @@ public class ConsoleUI implements View {
         Human.Gender gender = Human.Gender.valueOf(scanner.nextLine());
         System.out.println("Введите birthday (format: 1982-10-20)");
         String birthdayString = scanner.nextLine();
-        LocalDate birthday =  LocalDate.parse(birthdayString);
-//        System.out.println("Введите dateOfDeath (format: 1982-10-20)");
-//        String dateOfDeathString = scanner.nextLine();
-//        LocalDate dateOfDeath =  LocalDate.parse(dateOfDeathString);
-        // метод проверки возраста на валидность (что число что не <=0). Также написать Такой команды нет
+        LocalDate birthday = LocalDate.parse(birthdayString);
+    // проверка возраста на валидность (что число что не <=0). Также написать Такой команды нет
         presenter.addHuman(numPassport, surname, name, gender, birthday);
-
     }
-    public String searchHuman(){
+
+    public String searchHuman() {
         System.out.println("Введите для поиска (фамилию либо имя либо номер паспорта)");
         String value = scanner.nextLine();
         presenter.searchHuman(value);
@@ -73,26 +68,29 @@ public class ConsoleUI implements View {
     }
 
     // TODO доработать логику ConsoleUI.addKid
-    public void addKid (){
+    public void addKid() {
+        System.out.println("Введите номер паспорта (6 знаков)");
+        String numPassport = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String surname = scanner.nextLine();
         System.out.println("Введите имя ребенка");
         String name = scanner.nextLine();
         System.out.println("Введите пол (Male или Female)");
         Human.Gender gender = Human.Gender.valueOf(scanner.nextLine());
         System.out.println("Введите birthday (format: 1982-10-20)");
         String birthdayString = scanner.nextLine();
-        LocalDate birthday =  LocalDate.parse(birthdayString);
+        LocalDate birthday = LocalDate.parse(birthdayString);
         // метод проверки возраста на валидность
-        presenter.addKid(name, gender, birthday);
+        presenter.addKid(numPassport, surname, name, gender, birthday);
         getTreeInfo();
         System.out.println("Выберите родителя из списка (введите номер паспорта): \n");
-        String value = scanner.nextLine();
-            // если номер паспорта введен >> добавить human?.addKid((Human) presenter.searchHuman(value));  ??????
+        //
+        // если номер паспорта введен >> добавить human?.addKid((Human) presenter.searchHuman(value));  ??????
 //        String answer = presenter.searchHuman(value);
-        getTreeInfo();
-
     }
+
     // TODO доработать логику ConsoleUI.addParent
-    public void addParent (){
+    public void addParent() {
         System.out.println("Введите фамилию");
         String surname = scanner.nextLine();
         System.out.println("Введите имя");
@@ -101,11 +99,10 @@ public class ConsoleUI implements View {
         Human.Gender gender = Human.Gender.valueOf(scanner.nextLine());
         presenter.addParent(surname, name, gender);
         // логика как в addKid: вывод дерева/ указать параметр конкретного родителя/ добавить родителя /
-
     }
 
     // TODO доработать логику ConsoleUI.addPartner
-    public void addPartner (){
+    public void addPartner() {
         System.out.println("Введите фамилию");
         String surname = scanner.nextLine();
         System.out.println("Введите имя");
@@ -116,20 +113,26 @@ public class ConsoleUI implements View {
         // логика как в addKid: вывод дерева/ указать параметр конкретного партнера/ добавить / вывести дерево
     }
 
-    public void sortByName(){
+    public void sortByName() {
         presenter.sortByName();
     }
-    public void sortByAge(){
+
+    public void sortByAge() {
         presenter.sortByAge();
     }
-    public void sortByBirthday(){
+
+    public void sortByBirthday() {
         presenter.sortByBirthday();
     }
 
-    public void saveInFile() {presenter.saveInFile();}
-//    public void saveInFile() {fileManager.saveInFile();}
-    public void loadFromFile() {presenter.loadFromFile();}
-//    public void loadFromFile() {fileManager.loadFromFile();}
+    public void saveInFile() {
+        presenter.saveInFile();
+    }
+
+    public void loadFromFile() {
+        presenter.loadFromFile();
+    }
+
     @Override
     public void answer(String text) {
         System.out.println(text);

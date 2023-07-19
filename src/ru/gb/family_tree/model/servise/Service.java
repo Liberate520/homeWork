@@ -8,7 +8,12 @@ import java.time.LocalDate;
 public class Service {
     private int idHuman;
     private FamilyTree familyTree;
-    public Service() {familyTree = TestData.testData();}
+    private FileHandler fileHandler;
+
+    public Service() {
+        familyTree = TestData.testData();
+        fileHandler = new FileHandler();
+    }
 
     public String getTreeInfo() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -19,50 +24,52 @@ public class Service {
         return stringBuilder.toString();
     }
 
-    // TODO доработать связь с presenter
-    public void searchHuman(String value){
-        familyTree.searchHuman(value);
+    public Object searchHuman(String value) {
+        String result = String.valueOf(familyTree.searchHuman(value));
+        return result;
     }
 
-    public void addHuman(String numPassport, String surname, String name, Human.Gender gender, LocalDate birthday){
-        Human human = new Human(numPassport, surname,name, gender, birthday);
-            human.setId(idHuman++);
-        familyTree.addHuman(human);
-        }
-
-    private void addHuman(String name, Human.Gender gender, LocalDate birthday) {   // перегрузка для addToKids, addToParents, addToPartners
-        Human human = new Human(name, gender, birthday);
+    public void addHuman(String numPassport, String surname, String name, Human.Gender gender, LocalDate birthday) {
+        Human human = new Human(numPassport, surname, name, gender, birthday);
+        human.setId(idHuman++);
         familyTree.addHuman(human);
     }
-
 
     //TODO доработать service.addToKids (addToParents), addToPartners
-    public void addToKids(String name, Human.Gender gender, LocalDate birthday) {
-        addHuman(name, gender, birthday);
-
-
+    public void addToKids(String numPassport, String surname, String name, Human.Gender gender, LocalDate birthday) {
+        addHuman(numPassport, surname, name, gender, birthday);
     }
 
-
     public void addToParents(String name, Human.Gender gender, LocalDate birthday) {
-
-
     }
 
     public void addToPartners(String name, Human.Gender gender, LocalDate birthday) {
-
-
     }
 
-    public void sortByName() {familyTree.sortByName();}
+    public void sortByName() {
+        familyTree.sortByName();
+    }
+
     public void sortByAge() {
         familyTree.sortByAge();
     }
+
     public void sortByBirthday() {
         familyTree.sortByBirthday();
     }
+
     @Override
     public String toString() {
         return getTreeInfo();
+    }
+
+    public void saveInFile() {
+        fileHandler.save(familyTree, "src/ru/gb/family_tree/tree.out");
+        System.out.println("экспорт (tree.out) завершен успешно");
+    }
+
+    public void loadFromFile() {
+        FamilyTree familyTree = (FamilyTree) fileHandler.loading("src/ru/gb/family_tree/tree.out");
+        System.out.println("Импорт данных выполнен  >>>>>>  " + familyTree);
     }
 }

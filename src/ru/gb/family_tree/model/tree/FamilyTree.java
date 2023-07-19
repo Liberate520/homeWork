@@ -1,14 +1,11 @@
 package ru.gb.family_tree.model.tree;
 
-import ru.gb.family_tree.model.human.Human;
-import ru.gb.family_tree.model.servise.TestData;
 import ru.gb.family_tree.model.tree.comparators.HumanComparatorByAge;
 import ru.gb.family_tree.model.tree.comparators.HumanComparatorByBirthday;
 import ru.gb.family_tree.model.tree.comparators.HumanComparatorByName;
 import ru.gb.family_tree.model.tree.iterator.FamilyTreeIterator;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -60,7 +57,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
             if (human.getSurname().equalsIgnoreCase(value) ||
                     human.getName().equalsIgnoreCase(value) ||
                     human.getNumPassport().equalsIgnoreCase(value)) {
-                return (E) human;
+                return human;
             }
         }
         return null;
@@ -70,9 +67,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     public Iterator<E> iterator() {    // переопределили! см FamilyTreeIterator
         return new FamilyTreeIterator<>(humanList);
     }
-
-//    public void sortByName(){   //  доп. переопределили compareTo в Human
-//        Collections.sort(humanList);}
 
     public void sortByName() {    // создаем отдельный класс с методом (compare) implements Comparator
         Collections.sort(humanList, new HumanComparatorByName<>());

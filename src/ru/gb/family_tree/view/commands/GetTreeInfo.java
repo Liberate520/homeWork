@@ -8,6 +8,7 @@ public class GetTreeInfo extends Command {
         super(consoleUI, "вывести дерево в консоль");
 
     }
+
     @Override
     public void execute() {
         consoleUI.getTreeInfo();

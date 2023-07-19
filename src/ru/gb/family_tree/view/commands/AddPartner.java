@@ -7,6 +7,7 @@ public class AddPartner extends Command {
     public AddPartner(ConsoleUI consoleUI) {
         super(consoleUI, "добавить партнера");
     }
+
     @Override
     public void execute() {
         consoleUI.addPartner();

@@ -13,16 +13,13 @@ public class Human implements Serializable, TreeItem {
     private String numPassport;
     private String surname;
     private String name;
-    private String secondSurname;
+//    private String secondSurname;
     private Gender gender;
     private LocalDate birthday;
     private LocalDate dateOfDeath;
     private List<Human> partners;
     private List<Human> parents;
     private List<Human> kids;
-
-    public Human(String name, Gender gender, LocalDate birthday) {
-    }
 
     public enum Gender {
         Male, Female
@@ -53,51 +50,69 @@ public class Human implements Serializable, TreeItem {
                     Human mother, Human father) {
         this(numPassport, surname, name, gender, birthday, null, mother, father);
     }
+
     public Human(String numPassport, String surname, String name, Gender gender, LocalDate birthday,
                     LocalDate dateOfDeath) {
         this(numPassport, surname, name, gender, birthday, dateOfDeath, null, null);
     }
+
     public Human(String numPassport, String surname, String name, Gender gender, LocalDate birthday) {
         this(numPassport, surname, name, gender, birthday, null, null, null);
     }
 
-    public Human() { }
+    public Human() {
+    }
 
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getNumPassport() {
         return numPassport;
     }
+
     public String getSurname() {
         return surname;
     }
+
     @Override
     public String getName() {
         return name;
     }
+
     public Gender getGender() {
         return gender;
     }
+
     public LocalDate getBirthday() {
         return birthday;
     }
-    public LocalDate getDateOfDeath() {
-        return dateOfDeath;
+
+    @Override
+    public void addKid(Object human) {
     }
 
     @Override
-    public void addKid(Object human) {}
-    @Override
-    public void addParent(Object human) {}
+    public void addParent(Object human) {
+    }
+
     @Override
     public void addPartner(Object human) {
     }
 
+    public LocalDate getDateOfDeath() {
+        return dateOfDeath;
+    }
+
+
     public List<Human> getKids() {
         return kids;
     }
+
     public void addKid(Human kid) {
         if (!kids.contains(kid)) {  // имя не повторяется
             kids.add(kid);
@@ -105,15 +120,21 @@ public class Human implements Serializable, TreeItem {
             System.out.println("не добавлен! такой ребенок уже есть!");
         }
     }
-    public List<Human> getPartner() { return partners;}
+
+    public List<Human> getPartner() {
+        return partners;
+    }
+
     public void addPartner(Human partner) {
         if (!partners.contains(partner)) {
             partners.add(partner);
         }
     }
+
     public List<Human> getParents() {
         return parents;
     }
+
     public void addParent(Human parent) {
         if (!parents.contains(parent)) {
             parents.add(parent);
@@ -138,7 +159,6 @@ public class Human implements Serializable, TreeItem {
         }
         return null;
     }
-
 //    public Human getWedding(Human human) {
 //        for(Human parent: parents){
 //            if(){
@@ -162,18 +182,18 @@ public class Human implements Serializable, TreeItem {
                 ", " + gender +
                 ", возраст: " + getAge() +
                 " (birthday: " + birthday +
-                ", dateOfDeath: " + dateOfDeath+ "),\n" +
-                getPartnerInfo() +"\n"+
-                getMotherInfo()+"\n" +
-                getFatherInfo()+"\n" +
-                getKidInfo()+"\n";
+                ", dateOfDeath: " + dateOfDeath + "),\n" +
+                getPartnerInfo() + "\n" +
+                getMotherInfo() + "\n" +
+                getFatherInfo() + "\n" +
+                getKidInfo() + "\n";
         return sb;
     }
 
     public String getMotherInfo() {
         String result = "   mother: ";
         if (getMother() != null) {
-            result += "id="+ getMother().getId() + ", " + getMother().getSurname() + " " + getMother().getName();
+            result += "id=" + getMother().getId() + ", " + getMother().getSurname() + " " + getMother().getName();
         } else {
             result += "unknown";
         }
@@ -196,7 +216,7 @@ public class Human implements Serializable, TreeItem {
         if (kids.size() != 0) {
             result.append(kids.get(0).getSurname() + " " + kids.get(0).getName());
             for (Human kid : kids) {
-                result.append(" , id="+ kid.getId() + ", возраст " + kid.getAge()).append(" ");
+                result.append(" , id=" + kid.getId() + ", возраст " + kid.getAge()).append(" ");
             }
         } else {
             result.append("отсутствуют");
@@ -207,7 +227,7 @@ public class Human implements Serializable, TreeItem {
     public String getFatherInfo() {
         String result = "   father: ";
         if (getMother() != null) {
-            result += "id="+ getFather().getId() + ", "+ getFather().getSurname() + " " + getFather().getName();
+            result += "id=" + getFather().getId() + ", " + getFather().getSurname() + " " + getFather().getName();
         } else {
             result += "unknown";
         }

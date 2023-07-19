@@ -48,7 +48,6 @@ public class TestData {
 
 
 //        System.out.println(familyTree.getTreeInfo());
-//
 //        System.out.println(grandMother1.toString());
 //        System.out.println();
 //        System.out.println(familyTree.searchHuman("МариЯ"));
