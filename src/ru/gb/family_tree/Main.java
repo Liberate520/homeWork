@@ -15,7 +15,7 @@ public class Main {
         Human human1 = new Human("Рикорд", LocalDate.of(1949,10,20),LocalDate.of(1980,01,15), Gender.Male);
         familyTree.addHuman(human1);
 
-        Human human2 = new Human("Брендон",LocalDate.of(1968,9,10),Gender.Male);
+        Human human2 = new Human("Брендон",LocalDate.of(1968,9,10), Gender.Male);
         familyTree.addHuman(human2);
 
         Human human3 = new Human("Бенджен",LocalDate.of(1972,10,13),LocalDate.of(1990,3,21),Gender.Male);

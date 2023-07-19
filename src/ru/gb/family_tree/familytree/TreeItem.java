@@ -16,6 +16,8 @@ public interface TreeItem<E> extends Serializable {
     LocalDate getDeathDate();
     List<E> getParents();
     List<E> getChildren();
+    E getSpouse();
+    void setSpouse(E human);
 
 
     int getAge();
