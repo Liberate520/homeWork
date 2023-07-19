@@ -21,31 +21,20 @@ public class ServiceFamilyTree {
         this.loader = loader;
     }
 
-    public Human addItem(String name, LocalDate dateBirth, Gender gender){
-        Human h = new Human(idHuman++, name, dateBirth, gender);
-        tree.addItem(h);
-        return h;
-    }
-    public void addItem(Human t){
-        tree.addItem(t);
+    public void addItem(String name, LocalDate dateBirth, Gender gender){
+        //Объекты Human можем создавать только в сервисе
+        tree.addItem(new Human(idHuman++, name, dateBirth, gender));
     }
 
-    //регистрируем брак и возвращаем ссылку на экземпляр
-    //Если нарушены условия, return null
-    public Marriage addMarriage(LocalDate startDate, Human wife, Human husband){
-        Marriage m = new Marriage(idMarriage, startDate, wife, husband);
-        if(m.getIsError()) return null;
-        tree.addMarriage(m);
-        idMarriage++;
-        return m;
-    }
+    //регистрируем брак
     public boolean addMarriage(LocalDate startDate, int idWife, int idHusband){
         Human wife = getItemById(idWife);
         if (wife==null) return false;
         Human husband = getItemById(idHusband);
         if (husband==null) return false;
 
-        Marriage m = new Marriage(idMarriage, startDate, wife, husband);
+        //Объекты Marriage<Human> можем создавать только в сервисе
+        Marriage<Human> m = new Marriage<>(idMarriage, startDate, wife, husband);
         if(m.getIsError()) return false;
         tree.addMarriage(m);
         idMarriage++;
@@ -53,9 +42,6 @@ public class ServiceFamilyTree {
     }
 
     // добавляем связь родитель - потомок
-    public boolean addChild(Human parent, Human child) {
-        return parent.addChild(child);
-    }
     public boolean addChild(int idParent, int idChild){
         Human parent = getItemById(idParent);
         if(parent==null) return false;
@@ -69,21 +55,16 @@ public class ServiceFamilyTree {
         return tree.getItemById(id);
     }
 
-    //return null, если список пуст либо id вне имеющихся
-    public Marriage getMarriageById(int id){
-        return tree.getMarriageById(id);
-    }
-
     public boolean stopMarriageById(int id, LocalDate date){
         Marriage m = tree.getMarriageById(id);
         if(m == null) return false;
         return m.stop(date);
     }
 
-    public String getHumansInfo(){
+    public String getInfoHumans(){
         return tree.getItemsInfo();
     }
-    public String getMarriagesInfo(){
+    public String getInfoMarriages(){
         return tree.getMarriagesInfo();
     }
 
@@ -98,10 +79,6 @@ public class ServiceFamilyTree {
         return tree.getInfoAll();
     }
 
-    public FamilyTree getTree(){
-        return tree;
-    }
-
     public String getInfoLastItem() {
         return tree.getInfoLastItem();
     }
@@ -109,7 +86,7 @@ public class ServiceFamilyTree {
         return tree.getInfoLastMarriage();
     }
 
-    //Выполняем запись содержимого дерева в файл
+    //Выполняем запись содержимого дерева
     public boolean saveTo(String path) {
         try {
             saver.saveTo(tree, path);
@@ -119,7 +96,7 @@ public class ServiceFamilyTree {
         }
         return true;
     }
-    //Выполняем чтение содержимого дерева из файла
+    //Выполняем чтение содержимого дерева
     public boolean loadFrom(String path) {
         try {
             tree = (FamilyTree)loader.loadFrom(path);
