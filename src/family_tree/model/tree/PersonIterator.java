@@ -1,15 +1,15 @@
-package family_tree.tree;
+package family_tree.model.tree;
 
-import family_tree.person.Person;
+import family_tree.model.person.Person;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<E> implements Iterator<E> {
     private int index;
-    ArrayList<Person> persons;
+    ArrayList<E> persons;
 
-    PersonIterator(ArrayList<Person> persons) {
+    PersonIterator(ArrayList<E> persons) {
         this.persons = persons;
     }
 
@@ -19,7 +19,7 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public E next() {
         return persons.get(index++);
     }
 }

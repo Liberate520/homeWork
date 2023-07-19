@@ -1,29 +1,26 @@
-package family_tree.tree;
+package family_tree.model.tree;
 
-import family_tree.gender.Gender;
-import family_tree.person.Person;
-import family_tree.person.comparators.PersonComparatorByAge;
-import family_tree.person.comparators.PersonComparatorByName;
+import family_tree.model.gender.Gender;
+import family_tree.model.person.Person;
+import family_tree.model.person.comparators.PersonComparatorByAge;
+import family_tree.model.person.comparators.PersonComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Tree implements Serializable, Iterable<Person> {
-    private final ArrayList<Person> persons;
+public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
+    private final ArrayList<E> persons;
 
-
-    public Tree(ArrayList<Person> persons) {
-
+    public Tree(ArrayList<E> persons) {
         this.persons = persons;
     }
 
     public Tree() {
-
         this.persons = new ArrayList<>();
     }
 
-    public void add(Person person) {
+    public void add(E person) {
         if (person == null) {
             return;
         }
@@ -36,14 +33,14 @@ public class Tree implements Serializable, Iterable<Person> {
         }
     }
 
-    private void addToParents(Person person) {
-        for (Person parent : person.getParents()) {
+    private void addToParents(E person) {
+        for (E parent : person.getParents()) {
             parent.addChild(person);
         }
     }
 
-    private void addToChildren(Person person) {
-        for (Person children : person.getChildren()) {
+    private void addToChildren(E person) {
+        for (E children : person.getChildren()) {
             if (person.getGender() == Gender.Female) {
                 children.addMother(person);
             } else {
@@ -53,9 +50,9 @@ public class Tree implements Serializable, Iterable<Person> {
         }
     }
 
-    private void addPartner(Person person) {
+    private void addPartner(E person) {
         if (person.getPartner() != null) {
-            for (Person partner : persons) {
+            for (E partner : persons) {
                 if (partner.getPartner() != null) {
                     if (person.getPartner().equals(partner)) {
                         partner.setPartner(person);
@@ -64,7 +61,7 @@ public class Tree implements Serializable, Iterable<Person> {
             }
         }
         if (person.getPartner() == null) {
-            for (Person partner : persons) {
+            for (E partner : persons) {
                 if (partner.getPartner() != null) {
                     if (partner.getPartner().equals(person)) {
                         person.setPartner(partner);
@@ -74,8 +71,8 @@ public class Tree implements Serializable, Iterable<Person> {
         }
     }
 
-    private void addSiblings(Person person) {
-        for (Person otherPerson : persons) {
+    private void addSiblings(E person) {
+        for (E otherPerson : persons) {
             if (otherPerson.equals(person)) {
                 continue;
             }
@@ -104,7 +101,7 @@ public class Tree implements Serializable, Iterable<Person> {
 
 
     public void reviseDependencies() {
-        for (Person person : persons) {
+        for (E person : persons) {
             addPartner(person);
             addToChildren(person);
             addToParents(person);
@@ -118,7 +115,7 @@ public class Tree implements Serializable, Iterable<Person> {
         stringBuilder.append("In the tree: ");
         stringBuilder.append(persons.size());
         stringBuilder.append(" objects:\n\n");
-        for (Person person : persons) {
+        for (E person : persons) {
             stringBuilder.append(person.getInfo());
             stringBuilder.append("\n\n");
         }
@@ -126,8 +123,8 @@ public class Tree implements Serializable, Iterable<Person> {
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator(persons);
+    public Iterator<E> iterator() {
+        return new PersonIterator<E>(persons);
     }
 
     public void sortByName() {
@@ -138,8 +135,8 @@ public class Tree implements Serializable, Iterable<Person> {
         persons.sort(new PersonComparatorByAge());
     }
 
-    public Person getPerson(Integer id){
-        for (int i = 0; i < persons.size(); i++){
+    public E getPerson(Integer id) {
+        for (int i = 0; i < persons.size(); i++) {
             if (persons.get(i).getId().equals(id)) {
                 return persons.get(i);
             }
@@ -147,9 +144,9 @@ public class Tree implements Serializable, Iterable<Person> {
         return null;
     }
 
-    public Person getPerson(String name){
-        for (int i = 0; i < persons.size(); i++){
-            if (persons.get(i).getName().equals(name)){
+    public E getPerson(String name) {
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i).getName().equals(name)) {
                 return persons.get(i);
             }
         }

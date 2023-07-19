@@ -1,29 +1,34 @@
-package family_tree.service;
+package family_tree.model.service;
 
-import family_tree.gender.Gender;
-import family_tree.person.Person;
-import family_tree.tree.Tree;
+import family_tree.model.dog.Dog;
+import family_tree.model.gender.Gender;
+import family_tree.model.person.Person;
+import family_tree.model.person.PersonCreater;
+import family_tree.model.tree.Tree;
+import family_tree.model.tree.Treeable;
+
 import java.time.LocalDate;
 
 
-public class Service {
+public class Service<E extends Treeable<E>> {
     private int idPerson;
     private Tree tree;
+    private ;
+
 
     public Service() {
-        tree = new Tree();
+            tree = new Tree<E>();
     }
 
-
-    public void addPerson(String name,
-                          Person partner,
+        public void addPerson(String name,
+                          E partner,
                           LocalDate birthday,
                           LocalDate dayOfDeath,
                           Gender gender,
-                          Person mother,
-                          Person father) {
+                          E mother,
+                          E father) {
 
-        tree.add(new Person(name,
+        tree.add(new E(name,
                 partner,
                 birthday,
                 dayOfDeath,
@@ -105,12 +110,12 @@ public class Service {
                 idPerson++));
     }
 
-
-    public Person getPerson(Integer id){
+    // TODO: 7/15/23 Object?
+    public E getPerson(Integer id){
         return tree.getPerson(id);
     }
 
-    public Person getPerson(String name){
+    public Object getPerson(String name){
         return tree.getPerson(name);
     }
 

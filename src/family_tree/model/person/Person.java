@@ -1,6 +1,7 @@
-package family_tree.person;
+package family_tree.model.person;
 
-import family_tree.gender.Gender;
+import family_tree.model.gender.Gender;
+import family_tree.model.tree.Treeable;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Treeable<Person> {
     private final Integer personId;
     private String name;
     private LocalDate birthday;
@@ -299,7 +300,7 @@ public class Person implements Serializable {
         stringBuilder.append("Partner: ");
         stringBuilder.append(getPartnerInfo());
         stringBuilder.append("\n");
-        stringBuilder.append("family_tree.gender.Gender: ");
+        stringBuilder.append("family_tree.model.gender.Gender: ");
         stringBuilder.append(gender.toString());
         stringBuilder.append("\n");
         stringBuilder.append("Birthday: ");

@@ -1,7 +1,7 @@
-package family_tree.service;
+package family_tree.model.service;
 
 
-import family_tree.tree.Writeble;
+import family_tree.model.tree.Writeble;
 
 import java.io.*;
 
