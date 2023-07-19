@@ -1,7 +1,7 @@
 package ru.gb.family_tree.presenter;
 
 import ru.gb.family_tree.model.human.Human;
-import ru.gb.family_tree.model.servise.FileHandler;
+import ru.gb.family_tree.model.servise.FileManager;
 import ru.gb.family_tree.model.servise.TestData;
 import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.model.servise.Service;

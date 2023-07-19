@@ -1,8 +1,7 @@
 package ru.gb.family_tree.view;
 
-import com.sun.source.tree.IfTree;
 import ru.gb.family_tree.model.human.Human;
-import ru.gb.family_tree.presenter.FileManager;
+import ru.gb.family_tree.model.servise.FileManager;
 import ru.gb.family_tree.presenter.Presenter;
 
 import java.time.LocalDate;

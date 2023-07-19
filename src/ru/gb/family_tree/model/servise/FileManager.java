@@ -1,4 +1,4 @@
-package ru.gb.family_tree.presenter;
+package ru.gb.family_tree.model.servise;
 
 import ru.gb.family_tree.model.servise.FileHandler;
 import ru.gb.family_tree.model.servise.TestData;
