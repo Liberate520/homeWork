@@ -4,6 +4,7 @@ import family_tree.model.group.Group;
 import family_tree.model.group.GroupItemFamilyTree;
 import family_tree.model.human.Human;
 import family_tree.model.human.InformerHuman;
+import family_tree.model.marriage.InformerMarriage;
 import family_tree.model.marriage.Marriage;
 import saveload.LoadFrom;
 import saveload.SaveTo;
@@ -17,6 +18,7 @@ public class ServiceFamilyTree {
     private SaveTo saver;
     private LoadFrom loader;
     private InformerHuman informerHuman;
+    private InformerMarriage informerMarriage;
 
     public ServiceFamilyTree(SaveTo saver, LoadFrom loader){
         GroupItemFamilyTree<Human> humans = new GroupItemFamilyTree<>();
@@ -40,7 +42,7 @@ public class ServiceFamilyTree {
         if (husband==null) return false;
 
         //Объекты Marriage<Human> можем создавать только в сервисе
-        Marriage<Human> m = new Marriage<>(idMarriage, startDate, wife, husband);
+        Marriage<Human> m = new Marriage<>(idMarriage, startDate, wife, husband, informerMarriage);
         if(m.getIsError()) return false;
         tree.addMarriage(m);
         idMarriage++;

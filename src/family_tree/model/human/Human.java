@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Human implements ItemFamilyTree<Human>, Serializable {
-    //модификатор доступа полей по умолчанию для доступа в InformerHuman:
+    //модификатор доступа полей по умолчанию для InformerHuman:
     int id;
     String name;
     LocalDate dateBirth, dateDeath;
