@@ -8,8 +8,6 @@ import faminly_tree.view.examination.Exam;
 
 import java.util.Scanner;
 
-//класс осуществляет общение с пользователем, по идее за рамками его задачи могут быть методы,
-// связанные с проверкой входных данных, можно сделать проверяющий класс и вызывать его методы здесь
 public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
@@ -56,6 +54,7 @@ public class ConsoleUI implements View {
             Hello();
         }
     }
+    //не уверена в корректности этого метода, то что он пустой, но мне нужно чтобы он пропустил вперед без выполнения каких-либо действий
     public void startNewProject() {
     }
     public void downlandProject() {
@@ -87,42 +86,7 @@ public class ConsoleUI implements View {
             if (choice != -1) addHuman.execute(choice);
             else System.out.printf("Некорректно введена команда. Введите число от 1 до %d\n", addHuman.getSize());
         }
-        /*Gender gender = null;
-        boolean flag = false;
-        print("Введите имя человека");
-        String name = scanner.nextLine();
-        print("Укажете пол человека (ж, м):");
-        String sex = scanner.nextLine().toLowerCase();
-        print("Укажите дату рождения (год/месяц/день):");
-        String birth = scanner.nextLine();
-
-        if (!exam.rightGender(sex)) print("Некорректно указан пол");
-        else {
-            if (sex.contains("м")) gender = Gender.Male;
-            else if (sex.contains("ж")) gender = Gender.Female;
-        }
-
-        String[] birthDate = birth.split("/");
-        int birthYear = 0, birthMonth = 0, birthDay = 0;
-        if (birthDate.length != 3) {
-            print("Некорректно указана дата рождения");
-            flag = true;
-        } else {
-            birthYear = Integer.parseInt(birthDate[0]);
-            birthMonth = Integer.parseInt(birthDate[1]);
-            birthDay = Integer.parseInt(birthDate[2]);
-            if (birthYear <= 0 || (birthMonth <= 0 || birthMonth > 12) || (birthDay <= 0 || birthDay > 31)) {
-                print("Некорректно указана дата рождения");
-                flag = true;
-            }
-        }
-        if (!flag) {
-            LocalDate date = LocalDate.of(birthYear, birthMonth, birthDay);
-            presenter.addHuman(name, gender, date);
-            print("Успешно!");
-        }*/
     }
-
     public void addConnection() {
         if (presenter.treeIsEmpty() == 0) {
             print("Дерево не заполнено");
@@ -210,12 +174,10 @@ public class ConsoleUI implements View {
     public void returnToFirstMenu() {
         Hello();
     }
-
     public void finishAddHuman() {
         flagToAddHuman = false;
         presenter.addHumanToTree();
     }
-
     public Presenter getPresenter() {
         return presenter;
     }

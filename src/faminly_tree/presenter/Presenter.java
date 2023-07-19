@@ -66,4 +66,8 @@ public class Presenter {
     public void setHumanBirth(LocalDate date) {
         service.setHumanBirth(date);
     }
+
+    public void setHumanGender(String sex) {
+        service.setHumanGender(sex);
+    }
 }

@@ -1,7 +1,7 @@
 package faminly_tree.model.service;
 
-import faminly_tree.model.human.HumanConnection;
 import faminly_tree.model.human.Gender;
+import faminly_tree.model.human.HumanConnection;
 import faminly_tree.model.human.Human;
 import faminly_tree.model.save_in_file.SaveInFile;
 import faminly_tree.model.tree.FamilyTree;
@@ -88,5 +88,9 @@ public class Service {
     }
     public void setHumanBirth(LocalDate date) {
         human.setBirth(date);
+    }
+    public void setHumanGender(String sex) {
+        if (sex.contains("м")) human.setGender(Gender.Male);
+        else if (sex.contains("ж")) human.setGender(Gender.Female);
     }
 }
