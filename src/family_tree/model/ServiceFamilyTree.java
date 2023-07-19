@@ -2,7 +2,9 @@ package family_tree.model;
 
 import family_tree.model.human.Human;
 import family_tree.model.marriage.Marriage;
-import saveload.FileHandler;
+import saveload.FileSaver;
+import saveload.LoadFrom;
+import saveload.SaveTo;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -10,8 +12,13 @@ import java.time.LocalDate;
 public class ServiceFamilyTree {
     private int idMarriage, idHuman;
     private FamilyTree<Human> tree;
-    public ServiceFamilyTree(){
+    private SaveTo saver;
+    private LoadFrom loader;
+
+    public ServiceFamilyTree(SaveTo saver, LoadFrom loader){
         tree = new FamilyTree();
+        this.saver = saver;
+        this.loader = loader;
     }
 
     public Human addItem(String name, LocalDate dateBirth, Gender gender){
@@ -103,10 +110,9 @@ public class ServiceFamilyTree {
     }
 
     //Выполняем запись содержимого дерева в файл
-    public boolean saveToFile(String path) {
-        FileHandler filehandler = new FileHandler();
+    public boolean saveTo(String path) {
         try {
-            filehandler.saveTo(tree, path);
+            saver.saveTo(tree, path);
         }
         catch(IOException e) {
             return false;   //System.out.println(e.toString());
@@ -114,10 +120,9 @@ public class ServiceFamilyTree {
         return true;
     }
     //Выполняем чтение содержимого дерева из файла
-    public boolean loadFromFile(String path) {
-        FileHandler filehandler = new FileHandler();
+    public boolean loadFrom(String path) {
         try {
-            tree = (FamilyTree)filehandler.loadFrom(path);
+            tree = (FamilyTree)loader.loadFrom(path);
         }
         catch(IOException e) {
             return false;

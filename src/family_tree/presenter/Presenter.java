@@ -4,6 +4,8 @@ import family_tree.model.Gender;
 import family_tree.model.ItemFamilyTree;
 import family_tree.model.ServiceFamilyTree;
 import family_tree.view.View;
+import saveload.FileLoader;
+import saveload.FileSaver;
 
 import java.time.LocalDate;
 
@@ -13,7 +15,10 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new ServiceFamilyTree();
+        //Указываем, что запись и загрузка выполняется в файл и из файла
+        FileSaver saver = new FileSaver();
+        FileLoader loader = new FileLoader();
+        service = new ServiceFamilyTree(saver, loader);
     }
 
     public void addHuman(String name, LocalDate dateBirth, Gender gender) {
@@ -50,9 +55,9 @@ public class Presenter {
         view.print(service.getInfoLastMarriage());
     }
     public boolean saveToFile(String path){
-        return service.saveToFile(path);
+        return service.saveTo(path);
     }
     public boolean loadFromFile(String path){
-        return service.loadFromFile(path);
+        return service.loadFrom(path);
     }
 }
