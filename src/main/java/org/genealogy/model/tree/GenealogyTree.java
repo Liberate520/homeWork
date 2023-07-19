@@ -1,6 +1,5 @@
 package org.genealogy.model.tree;
 
-import org.genealogy.model.person.Human;
 import org.genealogy.model.person.comparators.HumanComparatorByAge;
 import org.genealogy.model.person.comparators.HumanComparatorByName;
 import org.genealogy.model.tree.iterators.TreeIterator;
@@ -15,9 +14,9 @@ public class GenealogyTree<E extends TreeItem> implements Iterable<E>{
         this.people = new ArrayList<>();
     }
 
-    public void addHuman(Human person)
+    public void addHuman(E person)
     {
-        people.add((E) person);
+        people.add(person);
     }
 
     @Override

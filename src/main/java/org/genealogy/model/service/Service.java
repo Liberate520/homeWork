@@ -3,7 +3,6 @@ package org.genealogy.model.service;
 import org.genealogy.model.person.Human;
 import org.genealogy.model.tree.GenealogyTree;
 import org.genealogy.model.tree.TreeItem;
-
 import java.util.Iterator;
 
 public class Service<E extends TreeItem> extends GenealogyTree<E>{
@@ -15,7 +14,7 @@ public class Service<E extends TreeItem> extends GenealogyTree<E>{
     public void addHuman(String firstName, String lastName)
     {
         Human human = new Human(firstName, lastName);
-        tree.addHuman(human);
+        tree.addHuman((E) human);
     }
 
     //  Iterator
