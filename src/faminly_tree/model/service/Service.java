@@ -54,6 +54,11 @@ public class Service {
             return null;
         }
     }
+    public void nextOfKin(int humanID) {
+        Human human = (Human) tree.getHumanByID(humanID);
+        if (human == null) System.out.println("Такого человека нет в семейном древе");
+        System.out.println(tree.nextOfKin(human));
+    }
     public int treeIsEmpty(){
         return tree.getSize();
     }
