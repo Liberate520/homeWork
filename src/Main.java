@@ -20,11 +20,14 @@ public class Main {
         family.putConnection(egor, ConnectionType.SIBLING, petr, true);
         family.putConnection(egor, ConnectionType.PARENT, leonid, true);
         family.putConnection(marina, ConnectionType.SPOUSE, leonid, true);
+        family.putConnection(marina, ConnectionType.CHILD, petr, true);
+        family.putConnection(leonid, ConnectionType.CHILD, petr, true);
 
-        System.out.println(family.showConnections(egor));
-        System.out.println(family.showConnections(marina));
-        System.out.println(family.showConnections(petr));
         System.out.println(family.showConnections(leonid));
+        System.out.println(family.showConnections(marina));
+        System.out.println(family.showConnections(egor));
+        System.out.println(family.showConnections(petr));
+
     }
 }
 
