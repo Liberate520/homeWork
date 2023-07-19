@@ -49,11 +49,24 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        System.out.println("Введите имя человека");
+        System.out.println("Введите имя человека:");
         String firstName = scanner.nextLine();
-        System.out.println("Введите фамилию человека");
+        System.out.println("Введите фамилию человека:");
         String lastName = scanner.nextLine();
         presenter.addHuman(firstName, lastName);
+    }
+
+    public void addDateOfBirth() {
+        System.out.println("Введите ID:");
+        int id = scanner.nextInt();
+        System.out.println("Введите дату рождения:");
+        System.out.println("Введите день:");
+        int day = scanner.nextInt();
+        System.out.println("Введите месяц:");
+        int month = scanner.nextInt();
+        System.out.println("Введите год:");
+        int year = scanner.nextInt();
+        presenter.addDateOfBirth(id, day, month, year);
     }
 
     private void hello(){

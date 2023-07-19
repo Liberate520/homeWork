@@ -37,4 +37,8 @@ public class Service<E extends TreeItem> extends GenealogyTree<E>{
     public void sortByAge(){
         tree.sortByAge();
     }
+
+    public void addDateOfBirth(int id, int day, int month, int year) {
+        tree.addDateOfBirth(id, day, month, year);
+    }
 }

@@ -10,6 +10,7 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
+        commandList.add(new AddDateOfBirth(consoleUI));
         commandList.add(new GetHumanInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));

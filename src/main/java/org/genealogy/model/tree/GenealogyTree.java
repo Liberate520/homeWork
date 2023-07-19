@@ -19,6 +19,14 @@ public class GenealogyTree<E extends TreeItem> implements Iterable<E>{
         people.add(person);
     }
 
+    public void addDateOfBirth(int id, int day, int month, int year) {
+        for (E person : people) {
+            if (person.getId() == id) {
+                person.setDateOfBirth(day, month, year);
+            }
+        }
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new TreeIterator<>(people);

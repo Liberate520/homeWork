@@ -42,7 +42,7 @@ public class Human implements TreeItem, Comparable<Human> {
     @Override
     public int getAge() {
         if(getDateOfBirth() != null) {
-            return Period.between(LocalDate.now(), getDateOfBirth()).getYears();
+            return Period.between(getDateOfBirth(), LocalDate.now()).getYears();
         }
         return 1;
     }
@@ -61,7 +61,7 @@ public class Human implements TreeItem, Comparable<Human> {
     }
 
     public void setDateOfBirth(int day, int month, int year) {
-        this.dateOfBirth = LocalDate.of(year,month,day);
+        this.dateOfBirth = LocalDate.of(year, month, day);
     }
 
     public LocalDate getDateOfDeath() {
@@ -69,7 +69,7 @@ public class Human implements TreeItem, Comparable<Human> {
     }
 
     public void setDateOfDeath(int day, int month, int year) {
-        this.dateOfDeath = LocalDate.of(year,month,day);
+        this.dateOfDeath = LocalDate.of(year, month, day);
     }
 
     public Gender getGender() {

@@ -31,4 +31,9 @@ public class Presenter {
         service.sortByName();
         getHumanListInfo();
     }
+
+    public void addDateOfBirth(int id, int day, int month, int year) {
+        service.addDateOfBirth(id, day, month, year);
+        getHumanListInfo();
+    }
 }
