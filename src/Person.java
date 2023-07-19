@@ -1,4 +1,5 @@
 import java.lang.management.ThreadInfo;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,8 @@ public class Person extends Human{
     private List<Person> children;
 
 
-    public Person(String firstName, String lastName, String surName, int yearOfBirth) {
-        super(firstName, lastName, surName, yearOfBirth);
+    public Person(String firstName, String lastName, String surName, LocalDate dateOfBirth) {
+        super(firstName, lastName, surName, dateOfBirth);
         this.children = new ArrayList<>();
     }
 

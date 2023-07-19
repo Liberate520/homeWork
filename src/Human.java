@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -5,14 +6,15 @@ public class Human {
     private String firstName;
     private String lastName;
     private String surName;
-    private int yearOfBirth;
+    private LocalDate dateOfBirth;
+//    private int yearOfBirth;
 
 
-    public Human (String firstName, String lastName, String surName, int yearOfBirth){
+    public Human (String firstName, String lastName, String surName,  LocalDate dateOfBirth){
         this.firstName = firstName;
         this.lastName = lastName;
         this.surName = surName;
-        this.yearOfBirth = yearOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 
 
@@ -28,13 +30,13 @@ public class Human {
         return surName;
     }
 
-    public int getDateOfBirth() {
-        return yearOfBirth;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     @Override
     public String toString() {
         return "Имя: " + firstName + "\nФамилия: " + lastName + "\nОтчество: "
-                + surName + "\nГод рождения: " + yearOfBirth + "\n";
+                + surName + "\nГод рождения: " + dateOfBirth + "\n";
     }
 }
