@@ -1,13 +1,11 @@
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 /**
  * Все семейные связи решил хранить тут, а не в полях класса Person.
  */
 public class FamilyTree {
-    private HashMap<Person, HashMap<ConnectionType, HashSet<Person>>> family;
+    private HashMap<Person, Connections> family;
 
     public FamilyTree() {
         this.family = new HashMap<>();
@@ -15,7 +13,7 @@ public class FamilyTree {
 
     public boolean addPerson(Person person) {
         if (!family.containsKey(person)) {
-            HashMap<ConnectionType, HashSet<Person>> connections = new HashMap<>();
+            Connections connections = new Connections();
             family.put(person, connections);
             return true;
         }
@@ -24,29 +22,25 @@ public class FamilyTree {
 
     /**
      * Метод ручного добавления связи
+     *
      * @param connectFrom от кого
-     * @param key какая
-     * @param connectTo к кому
+     * @param key         какая
+     * @param connectTo   к кому
      */
     public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
         if (family.containsKey(connectFrom))
-            if (family.get(connectFrom).containsKey(key))
-                family.get(connectFrom).get(key).add(connectTo);
-            else {
-                HashSet<Person> person = new HashSet<>();
-                person.add(connectTo);
-                family.get(connectFrom).put(key, person);
-            }
+            family.get(connectFrom).putConnections(key, connectTo);
     }
 
     /**
      * То же самое что сверху, но автоматически добавляется соответствующая обратная связь
+     *
      * @param reverse если этот параметр true
      */
     public void putConnection(Person connectFrom, ConnectionType key, Person connectTo, boolean reverse) {
         putConnection(connectFrom, key, connectTo);
         if (reverse && !findConnection(connectTo, connectFrom)) {
-            switch (key){
+            switch (key) {
                 case SIBLING -> putConnection(connectTo, ConnectionType.SIBLING, connectFrom);
                 case SPOUSE -> putConnection(connectTo, ConnectionType.SPOUSE, connectFrom);
                 case CHILD -> putConnection(connectTo, ConnectionType.PARENT, connectFrom);
@@ -56,34 +50,14 @@ public class FamilyTree {
     }
 
     public boolean findConnection(Person connectFrom, Person connectTo) {
-        HashMap<ConnectionType, HashSet<Person>> connections = family.get(connectFrom);
-        for (Map.Entry<ConnectionType, HashSet<Person>> item :
-                connections.entrySet()) {
-            for (Person relative :
-                    item.getValue()) {
-                if (connectTo.equals(relative))
-                    return true;
-            }
-        }
-        return false;
+        Connections connections = family.get(connectFrom);
+        return connections.find(connectTo);
     }
 
-public String showConnections (Person person) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(person).append("\n").append("Близкие родственники:\n");
-
-        HashMap<ConnectionType, HashSet<Person>> connections = family.get(person);
-        for (Map.Entry<ConnectionType, HashSet<Person>> item :
-                connections.entrySet()) {
-            sb.append(item.getKey()).append(": ");
-            for (Person relative :
-                    item.getValue()) {
-                sb.append(relative.briefName()).append("; ");
-            }
-            sb.append("\n");
-        }
-    return sb.toString();
-}
+    public String showConnections(Person person) {
+        return person + "\n" + "Близкие родственники:\n" +
+                family.get(person);
+    }
 
     @Override
     public String toString() {
