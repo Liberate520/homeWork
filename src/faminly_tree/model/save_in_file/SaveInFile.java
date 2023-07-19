@@ -1,6 +1,7 @@
 package faminly_tree.model.save_in_file;
 
 import faminly_tree.model.human.Human;
+import faminly_tree.model.tree.FamiliItem;
 import faminly_tree.model.tree.FamilyTree;
 
 import java.io.*;
