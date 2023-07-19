@@ -38,10 +38,14 @@ public class ConsoleUI implements View {
     private void Hello() {
         print("Приветствую! Выберите действие:\n" +
                 "[1] Начать новый проект\n" +
-                "[2] Открыть проект");
+                "[2] Открыть проект\n" +
+                "[3] Завершить работу");
         String answer = scanner.nextLine();
         int choice = examination(answer);
-        if (choice == -1) System.out.printf("Некорректно введена команда. Введите число 1 или 2");
+        if (choice == -1 || choice > 3 || choice <= 0) {
+            System.out.printf("Некорректно введена команда. Введите число 1 или 2\n");
+            Hello();
+        }
         if (choice == 2) {
             print("Укажите имя файла:");
             String name = scanner.nextLine();
@@ -49,6 +53,8 @@ public class ConsoleUI implements View {
             this.pathRemember = name;
             downland(name);
         }
+        System.out.println("До свидания!");
+        work = false;
     }
     public void downland(String path){
         presenter.downland(path);
