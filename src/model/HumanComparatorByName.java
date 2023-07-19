@@ -1,7 +1,5 @@
-package iterator_compare;
+package model;
 
-
-import common.FTImpersonal;
 
 import java.util.Comparator;
 

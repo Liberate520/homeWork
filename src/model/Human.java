@@ -1,6 +1,4 @@
-package human;
-
-import common.FTImpersonal;
+package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human<E extends FTImpersonal<E>> implements Serializable, FTImpersonal {
-	private int id;
-
-
 	private String lastName;
 	private String firstName;
 	private String fullName;
@@ -21,12 +16,8 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 	private List<Human> children;
 	private Gender gender;
 
-	public Human(){
-
-	}
 
 	public Human(String lastName, String firstName, Gender gender,LocalDate birthDay, Human father, Human mother) {
-		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.gender = gender;
@@ -41,15 +32,6 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 		}
 		children = new ArrayList<>();
 	}
-	public Human(String lastName, String firstName, Gender gender, LocalDate birthDay) {
-		this(lastName, firstName, gender, birthDay, null, null);
-		id++;
-		fullName = lastName + " " + firstName;
-	}
-	public int getId() { return id; }
-	public String getLastName() { return lastName; }
-	public String getFirstName() { return firstName; }
-
 	public String getFullName() { return fullName; }
 
 	public LocalDate getBirthDay() { return birthDay; }
@@ -61,10 +43,6 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 	public List<Human> getParents(){ return parents; }
 	public List<Human> getChildren(){ return children; }
 
-	@Override
-	public void sortByName() {
-
-	}
 
 	public Human getFather() {
 		for (Human parent : parents) {
@@ -101,10 +79,6 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 		return builder.toString();
 	}
 
-	@Override
-	public Object getByName() {
-		return null;
-	}
 
 	public String getFatherInfo(){
 		String dad;

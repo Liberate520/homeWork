@@ -1,8 +1,6 @@
-package iterator_compare;
+package model;
 
 import java.util.Comparator;
-
-import common.FTImpersonal;
 
 public class HumanComparatorByBirthDay<E extends FTImpersonal<E>> implements Comparator<E> {
 	@Override

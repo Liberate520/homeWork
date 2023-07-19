@@ -1,10 +1,8 @@
 package view;
 
-import common.FTImpersonal;
-import human.Human;
+import model.FTImpersonal;
 import presenter.Presenter;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

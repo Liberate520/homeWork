@@ -1,11 +1,11 @@
-package common;
+package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface FTImpersonal<E> extends Serializable {
-	int getId();
+//	int getId();
 	E getFather();
 	E getMother();
 	void addChild(E human);
@@ -14,9 +14,9 @@ public interface FTImpersonal<E> extends Serializable {
 	LocalDate getBirthDay();
 	List<E> getParents();
 	List<E> getChildren();
-	void sortByName();
+//	void sortByName();
 	String getInfo();
-	E getByName();
+//	E getByName();
 
 
 }

@@ -1,8 +1,8 @@
 package presenter;
 
-import common.FTImpersonal;
-import human.Gender;
-import human.Human;
+import model.FTImpersonal;
+import model.Gender;
+import model.Human;
 import model.FamilyTree;
 import view.View;
 

@@ -1,8 +1,5 @@
 package model;
 
-import common.FTImpersonal;
-import iterator_compare.*;
-
 import java.io.Serializable;
 import java.util.*;
 

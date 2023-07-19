@@ -1,7 +1,5 @@
-package iterator_compare;
+package model;
 import java.util.*;
-
-import common.FTImpersonal;
 
 public class HumanIterator<E extends FTImpersonal<E>> implements Iterator<E> {
 	private int id;

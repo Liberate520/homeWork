@@ -1,5 +1,4 @@
-import human.*;
-import model.FamilyTree;
+import model.*;
 import view.Console;
 import view.View;
 
