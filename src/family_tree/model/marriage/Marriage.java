@@ -1,7 +1,7 @@
 package family_tree.model.marriage;
 
 import family_tree.model.Gender;
-import family_tree.model.ItemFamilyTree;
+import family_tree.model.group.ItemFamilyTree;
 
 import java.io.Serializable;
 import java.time.LocalDate;

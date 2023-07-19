@@ -1,5 +1,7 @@
 package family_tree.model;
 
+import family_tree.model.group.Group;
+import family_tree.model.group.GroupItemFamilyTree;
 import family_tree.model.human.Human;
 import family_tree.model.marriage.Marriage;
 import saveload.FileSaver;
@@ -16,7 +18,9 @@ public class ServiceFamilyTree {
     private LoadFrom loader;
 
     public ServiceFamilyTree(SaveTo saver, LoadFrom loader){
-        tree = new FamilyTree();
+        GroupItemFamilyTree<Human> humans = new GroupItemFamilyTree<>();
+        Group<Marriage<Human>> marriages = new Group<>();
+        tree = new FamilyTree(humans, marriages);
         this.saver = saver;
         this.loader = loader;
     }
@@ -92,7 +96,8 @@ public class ServiceFamilyTree {
             saver.saveTo(tree, path);
         }
         catch(IOException e) {
-            return false;   //System.out.println(e.toString());
+            System.out.println(e.toString());
+            return false;
         }
         return true;
     }

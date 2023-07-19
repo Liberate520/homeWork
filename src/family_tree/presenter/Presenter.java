@@ -1,7 +1,6 @@
 package family_tree.presenter;
 
 import family_tree.model.Gender;
-import family_tree.model.ItemFamilyTree;
 import family_tree.model.ServiceFamilyTree;
 import family_tree.view.View;
 import saveload.FileLoader;

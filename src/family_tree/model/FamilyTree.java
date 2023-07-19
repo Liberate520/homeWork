@@ -1,7 +1,6 @@
 package family_tree.model;
 
-import family_tree.model.group.GroupExtended;
-import family_tree.model.group.Group;
+import family_tree.model.group.*;
 import family_tree.model.marriage.Marriage;
 
 import java.io.Serializable;
@@ -9,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree<T extends ItemFamilyTree<T>> implements Serializable {
-    private GroupExtended<T> items;
-    private Group<Marriage<T>> marriages;
-    public FamilyTree(){
-        items = new GroupExtended<>();
-        marriages = new Group<>();
+    private CollectableItemFamilyTree<T> items;
+    private Collectable<Marriage<T>> marriages;
+    public FamilyTree(CollectableItemFamilyTree<T> items, Collectable<Marriage<T>> marriages){
+        this.items = items;
+        this.marriages = marriages;
     }
     public void addItem(T t){
         items.add(t);

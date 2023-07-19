@@ -1,7 +1,7 @@
 package family_tree.model.human;
 
 import family_tree.model.Gender;
-import family_tree.model.ItemFamilyTree;
+import family_tree.model.group.ItemFamilyTree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -65,7 +65,7 @@ public class Human implements ItemFamilyTree<Human>, Serializable {
     public Human getSpouse() {
         return spouse;
     }
-    public boolean isMarried(){ return spouse != null; }
+    //public boolean isMarried(){ return spouse != null; }
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
     }
