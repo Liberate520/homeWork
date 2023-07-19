@@ -21,5 +21,4 @@ public interface TreeItem<T> extends Serializable {
     List<T> getKids();
     T getFather();
     T getMother();
-
 }

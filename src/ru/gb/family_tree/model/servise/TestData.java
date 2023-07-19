@@ -38,11 +38,11 @@ public class TestData {
         grandFather1.addKid((Human) familyTree.searchHuman("ЕКАТЕРИНА"));
 
 
-        Human grandMother2 = new Human("DH473G", "СафроновА", "МариЯ", Female, LocalDate.of(1960, 3, 21), null);
+        Human grandMother2 = new Human("DH473G", "СафроновА", "Оксана", Female, LocalDate.of(1960, 3, 21), null);
         familyTree.addHuman(grandMother2);
         grandMother2.addKid((Human) familyTree.searchHuman("САФРОНОВ"));
 //
-        Human grandFather2 = new Human("DG573G", "СафроноВ", "НиколаЙ", Male, LocalDate.of(1952, 11, 21), null);
+        Human grandFather2 = new Human("DG573G", "СафроноВ", "Михаил", Male, LocalDate.of(1952, 11, 21), null);
         familyTree.addHuman(grandFather2);
         grandFather2.addKid((Human) familyTree.searchHuman("АЛЕКСЕЙ"));
 

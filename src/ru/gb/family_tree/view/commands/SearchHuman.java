@@ -1,14 +1,13 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
-
-import java.io.IOException;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class SearchHuman  extends Command {
-    public SearchHuman(ConsoleView consoleView) {
-        super(consoleView, "поиск (по фамилии или по имени или по номеру паспорта)");
+    public SearchHuman(ConsoleUI consoleUI) {
+        super(consoleUI, "поиск (по фамилии или по имени или по номеру паспорта)");
     }
 
     @Override
-    public void execute() {consoleView.searchHuman();}
+    public void execute() {
+        consoleUI.searchHuman();}
 }

@@ -237,4 +237,3 @@ public class Human implements Serializable, TreeItem {
         return human.getNumPassport().equals(getNumPassport());  // сущности равны если одинаковы номера паспортов
     }
 }
-

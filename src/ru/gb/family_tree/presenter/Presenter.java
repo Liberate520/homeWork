@@ -4,7 +4,7 @@ import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.servise.FileHandler;
 import ru.gb.family_tree.model.servise.TestData;
 import ru.gb.family_tree.model.tree.FamilyTree;
-import ru.gb.family_tree.model.tree.Service;
+import ru.gb.family_tree.model.servise.Service;
 import ru.gb.family_tree.view.View;
 
 import java.time.LocalDate;
@@ -14,25 +14,28 @@ public class Presenter <E> {
     private View view;
     private FamilyTree familyTree;
     private Service service;
-    private FileHandler fileHandler;
+    private FileManager fileManager;
     Scanner scanner;
 
     public Presenter(View view) {
         this.view = view;
         familyTree = TestData.testData();
-        fileHandler = new FileHandler();;
+//        fileHandler = new FileHandler();
+        fileManager = new FileManager();
         service = new Service();;
     }
     public void getTreeInfo(){
-//        String answer = service.getTreeInfo();
-        String answer = familyTree.getTreeInfo();
+        String answer = service.getTreeInfo();
         System.out.println(answer);
     }
-    // TODO доработать addHuman  - создать отдельный класс Service? ()
-    public void addHuman(String numPassport, String surname, String name, Human.Gender gender, LocalDate birthday, LocalDate dateOfDeath){
-        service.addHuman(numPassport, surname, name, gender, birthday, dateOfDeath);
+
+    public void addHuman(String numPassport, String surname, String name, Human.Gender gender, LocalDate birthday){
+        service.addHuman(numPassport, surname, name, gender, birthday);
+        saveInFile();
         getTreeInfo();
     }
+
+    // TODO доработать через service.searchHuman
     public String searchHuman(String value){
         String answerSeach = String.valueOf(familyTree.searchHuman(value));
         System.out.println(answerSeach);
@@ -56,25 +59,24 @@ public class Presenter <E> {
     }
 
     public void sortByName(){
-        familyTree.sortByName();
+        service.sortByName();
         getTreeInfo();
     }
     public void sortByAge() {
-        familyTree.sortByAge();
+        service.sortByAge();
         getTreeInfo();
     }
     public void sortByBirthday(){
-        familyTree.sortByBirthday();
+        service.sortByBirthday();
         getTreeInfo();
     }
-    // TODO методы saveInFile() и loadFromFile() убрать в отд. class FileManager ->
+
+
+    //методы saveInFile() и loadFromFile() убрал в отд. class FileManager ->
     public void saveInFile() {
-        fileHandler.save(familyTree, "src/ru/gb/family_tree/tree.out");
-        System.out.println("экспорт (tree.out) завершен успешно");
+        fileManager.saveInFile();
     }
     public void loadFromFile() {
-//        FileHandler fileHandler = new FileHandler();
-        FamilyTree familyTree = (FamilyTree) fileHandler.loading("src/ru/gb/family_tree/tree.out");
-        System.out.println("Импорт данных выполнен  >>>>>>  " + familyTree);
+        fileManager.loadFromFile();
     }
 }

@@ -1,15 +1,13 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
-
-import java.io.IOException;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public abstract class Command {
-    ConsoleView consoleView;
+    ConsoleUI consoleUI;
     String description;
 
-    public Command(ConsoleView consoleView, String description) {
-        this.consoleView = consoleView;
+    public Command(ConsoleUI consoleUI, String description) {
+        this.consoleUI = consoleUI;
         this.description = description;
     }
 

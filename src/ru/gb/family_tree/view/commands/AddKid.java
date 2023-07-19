@@ -1,14 +1,14 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class AddKid extends Command {
 
-    public AddKid (ConsoleView consoleView) {
-        super(consoleView, "добавить ребенка");
+    public AddKid (ConsoleUI consoleUI) {
+        super(consoleUI, "добавить ребенка");
     }
     @Override
     public void execute() {
-        consoleView.addKid();
+        consoleUI.addKid();
     }
 }

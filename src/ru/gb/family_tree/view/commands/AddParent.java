@@ -1,15 +1,14 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class AddParent extends Command {
 
-    public AddParent (ConsoleView consoleView) {
-        super(consoleView, "добавить родителя");
+    public AddParent (ConsoleUI consoleUI) {
+        super(consoleUI, "добавить родителя");
     }
     @Override
     public void execute() {
-        consoleView.addParent();
+        consoleUI.addParent();
     }
 }
-

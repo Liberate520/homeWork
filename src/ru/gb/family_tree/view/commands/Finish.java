@@ -1,14 +1,14 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class Finish extends Command {
-    public Finish(ConsoleView consoleView) {
-        super(consoleView, "выйти из программы");
+    public Finish(ConsoleUI consoleUI) {
+        super(consoleUI, "выйти из программы");
     }
 
     @Override
     public void execute() {
-        consoleView.finish();
+        consoleUI.finish();
     }
 }

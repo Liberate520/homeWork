@@ -1,15 +1,14 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
-import ru.gb.family_tree.view.commands.Command;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class AddHuman extends Command {
 
-    public AddHuman(ConsoleView consoleView) {
-        super(consoleView, "добавить новый объект");
+    public AddHuman(ConsoleUI consoleUI) {
+        super(consoleUI, "добавить новый объект");
     }
     @Override
     public void execute() {
-        consoleView.addHuman();
+        consoleUI.addHuman();
     }
 }

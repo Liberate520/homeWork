@@ -39,9 +39,8 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     }
 
     public void addToParents(E human) {
-        for (E parent : human.getParents()) {  // ошибка при Обобщении E parent решается передачей обобщения (<E>) для самого интерфейса:  <E extends TreeItem<E>>
+        for (E parent : human.getParents())
             parent.addKid(human);
-        }
     }
 
     public void addToKids(E human) {
@@ -56,16 +55,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         }
     }
 
-    public String getTreeInfo() {
-//        FamilyTree familyTree = TestData.testData();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\tГенеалогическое дерево: \n");
-        for (E human : humanList) {
-            stringBuilder.append(human).append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
     public E searchHuman(String value) {
         for (E human : humanList) {
             if (human.getSurname().equalsIgnoreCase(value) ||
@@ -77,10 +66,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         return null;
     }
 
-    @Override
-    public String toString(){
-        return getTreeInfo();
-    }
     @Override
     public Iterator<E> iterator() {    // переопределили! см FamilyTreeIterator
         return new FamilyTreeIterator<>(humanList);
@@ -101,7 +86,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         humanList.sort(new HumanComparatorByBirthday<>());
     }
 
-    public void addHuman(String numPassport, String surname, String name, Human.Gender gender, LocalDate birthday, LocalDate dateOfDeath) {
-    }
+
 }
 

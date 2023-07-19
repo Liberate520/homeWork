@@ -1,16 +1,14 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
-
-import java.io.IOException;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class SaveInFile extends Command{
-    public SaveInFile(ConsoleView consoleView) {
-        super(consoleView, "выполнить сериализацию проекта");
+    public SaveInFile(ConsoleUI consoleUI) {
+        super(consoleUI, "выполнить сериализацию проекта");
     }
 
     @Override
     public void execute() {
-        consoleView.saveInFile();
+        consoleUI.saveInFile();
     }
 }

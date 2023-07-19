@@ -1,14 +1,14 @@
 package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.view.ConsoleView;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class AddPartner extends Command {
 
-    public AddPartner(ConsoleView consoleView) {
-        super(consoleView, "добавить партнера");
+    public AddPartner(ConsoleUI consoleUI) {
+        super(consoleUI, "добавить партнера");
     }
     @Override
     public void execute() {
-        consoleView.addPartner();
+        consoleUI.addPartner();
     }
 }

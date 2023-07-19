@@ -2,27 +2,26 @@ package ru.gb.family_tree.view;
 
 import ru.gb.family_tree.view.commands.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu {
     private List<Command> commandList;
 
-    public MainMenu(ConsoleView consoleView){
+    public MainMenu(ConsoleUI consoleUI){
         commandList = new ArrayList<>();
-        commandList.add(new GetTreeInfo(consoleView));
-        commandList.add(new AddHuman(consoleView));
-        commandList.add(new AddKid(consoleView));
-        commandList.add(new AddParent(consoleView));
-        commandList.add(new AddPartner(consoleView));
-        commandList.add(new SortByName(consoleView));
-        commandList.add(new SortBYAge(consoleView));
-        commandList.add(new SortByBirthday(consoleView));
-        commandList.add(new SearchHuman(consoleView));
-        commandList.add(new SaveInFile(consoleView));
-        commandList.add(new LoadFromFile(consoleView));
-        commandList.add(new Finish(consoleView));
+        commandList.add(new GetTreeInfo(consoleUI));
+        commandList.add(new AddHuman(consoleUI));
+        commandList.add(new AddKid(consoleUI));
+        commandList.add(new AddParent(consoleUI));
+        commandList.add(new AddPartner(consoleUI));
+        commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortBYAge(consoleUI));
+        commandList.add(new SortByBirthday(consoleUI));
+        commandList.add(new SearchHuman(consoleUI));
+        commandList.add(new SaveInFile(consoleUI));
+        commandList.add(new LoadFromFile(consoleUI));
+        commandList.add(new Finish(consoleUI));
     }
     public int getSize() {
         return commandList.size();

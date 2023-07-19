@@ -12,7 +12,7 @@ public class FileManager {
 
     public FileManager() {
         familyTree = TestData.testData();
-        fileHandler = new FileHandler();;
+        fileHandler = new FileHandler();
     }
 
     public void saveInFile(){

@@ -1,5 +1,6 @@
 package ru.gb.family_tree.view;
 
+import com.sun.source.tree.IfTree;
 import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.presenter.FileManager;
 import ru.gb.family_tree.presenter.Presenter;
@@ -7,14 +8,14 @@ import ru.gb.family_tree.presenter.Presenter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class ConsoleView implements View {
+public class ConsoleUI implements View {
     private Presenter presenter;
     private Scanner scanner;
     private boolean work;
     private MainMenu mainMenu;
     private FileManager fileManager ;
 
-    public ConsoleView() {
+    public ConsoleUI() {
         presenter = new Presenter<>(this);
         scanner = new Scanner(System.in);
         work = true;
@@ -57,11 +58,11 @@ public class ConsoleView implements View {
         System.out.println("Введите birthday (format: 1982-10-20)");
         String birthdayString = scanner.nextLine();
         LocalDate birthday =  LocalDate.parse(birthdayString);
-        System.out.println("Введите dateOfDeath (format: 1982-10-20)");
-        String dateOfDeathString = scanner.nextLine();
-        LocalDate dateOfDeath =  LocalDate.parse(dateOfDeathString);
+//        System.out.println("Введите dateOfDeath (format: 1982-10-20)");
+//        String dateOfDeathString = scanner.nextLine();
+//        LocalDate dateOfDeath =  LocalDate.parse(dateOfDeathString);
         // метод проверки возраста на валидность (что число что не <=0). Также написать Такой команды нет
-        presenter.addHuman(numPassport, surname, name, gender, birthday, dateOfDeath);
+        presenter.addHuman(numPassport, surname, name, gender, birthday);
 
     }
     public String searchHuman(){
@@ -70,23 +71,27 @@ public class ConsoleView implements View {
         presenter.searchHuman(value);
         return value;
     }
+
+    // TODO доработать логику ConsoleUI.addKid
     public void addKid (){
         System.out.println("Введите имя ребенка");
         String name = scanner.nextLine();
         System.out.println("Введите пол (Male или Female)");
         Human.Gender gender = Human.Gender.valueOf(scanner.nextLine());
-        System.out.println("Введите birthday (format: 1982, 10, 20)");
+        System.out.println("Введите birthday (format: 1982-10-20)");
         String birthdayString = scanner.nextLine();
         LocalDate birthday =  LocalDate.parse(birthdayString);
-        // метод проверки возраста на валидность (что число что не <=0). Также написать Такой команды нет
+        // метод проверки возраста на валидность
         presenter.addKid(name, gender, birthday);
-
         getTreeInfo();
         System.out.println("Выберите родителя из списка (введите номер паспорта): \n");
         String value = scanner.nextLine();
-        String answer = presenter.searchHuman(value);
-        // ??????
+            // если номер паспорта введен >> добавить human?.addKid((Human) presenter.searchHuman(value));  ??????
+//        String answer = presenter.searchHuman(value);
+        getTreeInfo();
+
     }
+    // TODO доработать логику ConsoleUI.addParent
     public void addParent (){
         System.out.println("Введите фамилию");
         String surname = scanner.nextLine();
@@ -95,9 +100,11 @@ public class ConsoleView implements View {
         System.out.println("Введите пол (Male или Female)");
         Human.Gender gender = Human.Gender.valueOf(scanner.nextLine());
         presenter.addParent(surname, name, gender);
-        // логика как в addKid: вывода дерева/ запрос на поиск конкретного родителя/ добавление ребенка / добавление связи
+        // логика как в addKid: вывод дерева/ указать параметр конкретного родителя/ добавить родителя /
 
     }
+
+    // TODO доработать логику ConsoleUI.addPartner
     public void addPartner (){
         System.out.println("Введите фамилию");
         String surname = scanner.nextLine();
@@ -106,7 +113,7 @@ public class ConsoleView implements View {
         System.out.println("Введите пол (Male или Female)");
         Human.Gender gender = Human.Gender.valueOf(scanner.nextLine());
         presenter.addPartner(surname, name, gender);
-        // логика как в addKid: вывода дерева/ запрос на поиск конкретного родителя/ добавление ребенка / добавление связи
+        // логика как в addKid: вывод дерева/ указать параметр конкретного партнера/ добавить / вывести дерево
     }
 
     public void sortByName(){
@@ -128,5 +135,3 @@ public class ConsoleView implements View {
         System.out.println(text);
     }
 }
-
-
