@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
     private long entityId;
     private List<E> entityList;
 
@@ -28,7 +28,7 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         if (entity == null) {
             return false;
         }
-        if (!this.entityList.contains((E) entity)) {
+        if (!this.entityList.contains(entity)) {
             this.entityList.add((E) entity);
             entity.setId(entityId++);
             this.addToParents((E) entity);
@@ -39,14 +39,14 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
     }
 
     private void addToParents(E entity) {
-        for (Object parent : entity.getParents()) {
-            ((E) parent).addChild(entity);
+        for (E parent : entity.getParents()) {
+            (parent).addChild(entity);
         }
     }
 
     private void addToChildren(E entity) {
-        for (Object child : entity.getChildren()) {
-            ((E) child).addParent(entity);
+        for (E child : entity.getChildren()) {
+            (child).addParent(entity);
         }
     }
 
