@@ -1,7 +1,7 @@
 package save;
 
-public interface FileIO {
-  void writeToFile(String fileName, String data);
+// public interface FileIO {
+//   void writeToFile(String fileName, String data);
 
-  String readFromFile(String fileName);
-}
+//   String readFromFile(String fileName);
+// }
