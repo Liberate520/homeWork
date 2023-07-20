@@ -1,5 +1,5 @@
 package model.human;
 
 public enum Gender {
-    Male, Female, Unknown
+    Male, Female
 }
