@@ -1,9 +1,10 @@
 package com.britenight.Person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable {
     private final long id;
     private final LocalDate dateOfBirth;
     private String name;
@@ -24,6 +25,11 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, dateOfBirth, gender);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.hashCode() == obj.hashCode();
     }
 
     //region Getters

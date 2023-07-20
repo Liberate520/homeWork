@@ -2,11 +2,12 @@ package com.britenight.FamilyTree;
 
 import com.britenight.Person.Person;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private final ArrayList<Person> people;
     private final ArrayList<Relation> relations;
     public FamilyTree() {
@@ -46,7 +47,7 @@ public class FamilyTree {
     public List<Person> getRelativePeople(Person person, boolean isMainPerson, RelationType searchFor) {
         List<Person> list = new ArrayList<>();
         var tmp = relations.stream().filter(relation ->
-                (isMainPerson && relation.getMainPerson() == person || !isMainPerson && relation.getRelationPerson() == person)
+                (isMainPerson && relation.getMainPerson().equals(person) || !isMainPerson && relation.getRelationPerson().equals(person))
                         && relation.getRelationPersonType() == searchFor).collect(Collectors.toList());
 
         for (Relation i : tmp) {

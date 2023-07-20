@@ -5,11 +5,13 @@ import com.britenight.FamilyTree.Relation;
 import com.britenight.FamilyTree.RelationType;
 import com.britenight.Person.Gender;
 import com.britenight.Person.Person;
+import com.britenight.ImportExport.OperationsWithFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree tree = new FamilyTree();
 
         tree.addPerson(new Person(0, "Sergey", LocalDate.parse("1980-02-24"), Gender.Male));
@@ -35,16 +37,12 @@ public class Main {
         tree.addRelation(new Relation(tree.getPeople().get(5), tree.getPeople().get(3), RelationType.Parent));
         tree.addRelation(new Relation(tree.getPeople().get(5), tree.getPeople().get(4), RelationType.Sibling));
 
-//        for (Person i : tree.getRelativePeople(tree.getPeople().get(2), true, RelationType.Parent)) {
-//            System.out.println(i);
-//        }
-//
-//        for (Person i : tree.getRelativePeople(tree.getPeople().get(4), true, RelationType.Sibling)) {
-//            System.out.println(i);
-//        }
-//
-//        for (Person i : tree.getRelativePeople(tree.getPeople().get(5), true, RelationType.Parent)) {
-//            System.out.println(i);
-//        }
+        OperationsWithFile.saveToFile(tree, "myTree.fmt");
+
+        FamilyTree importedTree = OperationsWithFile.readFromFile("myTree.fmt");
+
+        for (Person i: importedTree.getRelativePeople(tree.getPeople().get(5), true, RelationType.Parent)) {
+            System.out.println(i);
+        }
     }
 }
