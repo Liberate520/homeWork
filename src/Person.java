@@ -4,17 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Person extends Human{
-    private int yearOdDeath;
+    private LocalDate dateOfdDeath;
     private Person mather;
     private Person father;
     private Person spouse;
     private List<Person> children;
 
 
-    public Person(String firstName, String lastName, String surName, LocalDate dateOfBirth) {
-        super(firstName, lastName, surName, dateOfBirth);
+    public Person(String firstName, String lastName, String surName,
+                  LocalDate dateOfBirth, LocalDate dateOfdDeath, Gender gender) {
+        super(firstName, lastName, surName, dateOfBirth, gender);
         this.children = new ArrayList<>();
+        this.dateOfdDeath = dateOfdDeath;
     }
+
+    /**
+     * Перегруженный конструктор на случай заранее известной даты смерти
+     * @param firstName
+     * @param lastName
+     * @param surName
+     * @param dateOfBirth
+     */
+    public Person(String firstName, String lastName,
+                  String surName, LocalDate dateOfBirth, Gender gender) {
+        super(firstName, lastName, surName,
+                dateOfBirth, gender);
+        this.children = new ArrayList<>();
+        this.dateOfdDeath = null;
+    }
+
 
     /**
      * Добавление информации о матери
@@ -66,10 +84,10 @@ public class Person extends Human{
     @Override
     public String toString() {
         if (mather != null) {
-            return super.toString() + "Мать: " + mather.getFullName() + "\n" +
+            return super.toString() + "\nМать: " + mather.getFullName() + "\n" +
                     "Отец: " + father.getFullName() + "\n";
         } else {
-            return super.toString() + "Мать: нет данных \n" +
+            return super.toString() + "\nМать: нет данных \n" +
                     "Отец: нет данных \n";
         }
     }
@@ -86,5 +104,21 @@ public class Person extends Human{
         return stringBuilder.toString();
 
     }
+
+    /**
+     * Задание даты смерти
+     * @param dateOfdDeath
+     */
+    public void setDateOfdDeath(LocalDate dateOfdDeath) {
+        this.dateOfdDeath = dateOfdDeath;
+    }
+    /**
+     * Получение даты смерти
+     * @return
+     */
+    public LocalDate getDateOfdDeath() {
+        return dateOfdDeath;
+    }
+
 
 }

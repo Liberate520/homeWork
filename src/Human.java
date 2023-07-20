@@ -2,7 +2,8 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Human {
+public class Human{
+    private Gender gender;
     private String firstName;
     private String lastName;
     private String surName;
@@ -10,11 +11,13 @@ public class Human {
 //    private int yearOfBirth;
 
 
-    public Human (String firstName, String lastName, String surName,  LocalDate dateOfBirth){
+    public Human (String firstName, String lastName, String surName,
+                  LocalDate dateOfBirth, Gender gender){
         this.firstName = firstName;
         this.lastName = lastName;
         this.surName = surName;
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
     }
 
 
@@ -30,6 +33,10 @@ public class Human {
         return surName;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -37,6 +44,7 @@ public class Human {
     @Override
     public String toString() {
         return "Имя: " + firstName + "\nФамилия: " + lastName + "\nОтчество: "
-                + surName + "\nГод рождения: " + dateOfBirth + "\n";
+                + surName + "\nГод рождения: " + dateOfBirth +
+                "\nПол: " + gender;
     }
 }
