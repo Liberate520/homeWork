@@ -74,7 +74,7 @@ public class ConsoleUI implements View {
 
     private int StartMenu(Map<String, List<String>> menuData, int taskId) {
         var menu = new MenuRender(menuData, 10, true, true, "", "", "> ", "");
-        return menu.StartRenderMenu(taskId - 1);
+        return menu.startRenderMenu(taskId - 1);
     }
 
     private boolean yesNoDialog(String message) {

@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class ConsoleManager {
 
-    private Scanner _cs;
-    private StringBuilder _frame = new StringBuilder();
-    private Boolean _onLog;
+    private Scanner cs;
+    private StringBuilder frame = new StringBuilder();
+    private Boolean onLog;
     private JFrameKeyEvent keyEvent;
 
     public ConsoleManager() {
@@ -22,26 +22,26 @@ public class ConsoleManager {
     }
 
     public ConsoleManager(String charsetName, Boolean onLog) {
-        this._onLog = onLog;
+        this.onLog = onLog;
         setTextCode(charsetName);
         this.keyEvent = new JFrameKeyEvent();
     }
 
     public String getFrameText(Boolean toDelete) {
-        var text = _frame.toString();
+        var text = this.frame.toString();
         if (toDelete) {
-            _frame.delete(0, _frame.length());
+            this.frame.delete(0, this.frame.length());
         }
         return text;
     }
 
     public int getKeyEvent() {
-        return this.keyEvent.Start();
+        return this.keyEvent.start();
     }
 
     public String inputText(String message) {
         System.out.print(message);
-        var text = _cs.nextLine();
+        var text = this.cs.nextLine();
         consoleReading(message + text + "\n");
         return text;
     }
@@ -88,12 +88,12 @@ public class ConsoleManager {
         if (charsetName.isEmpty()) {
             charsetName = "cp866";
         }
-        _cs = new Scanner(System.in, charsetName);
+        this.cs = new Scanner(System.in, charsetName);
     }
 
     private void consoleReading(String text) {
-        if (_onLog) {
-            _frame.append(text);
+        if (this.onLog) {
+            this.frame.append(text);
         }
     }
 }

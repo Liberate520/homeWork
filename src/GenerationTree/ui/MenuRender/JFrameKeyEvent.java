@@ -16,7 +16,7 @@ public class JFrameKeyEvent implements KeyEventManager {
         keyIsPressed = false;
     }
 
-    public int Start() {
+    public int start() {
         int keyCode = 0;
         var frame = new JFrame("Key capture");
         var keManager = new JFrameKeyEvent();
