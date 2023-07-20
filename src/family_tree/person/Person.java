@@ -3,7 +3,13 @@ package family_tree.person;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Map;
+
+import family_tree.ftree.FamilyTree;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class Person {
     static long idc;
@@ -54,6 +60,8 @@ public class Person {
         return firstName + " " + lastName;
     }
 
+    public Gender getGender () {return genderBirth;}
+    
     public LocalDate getBirthDate(){return birthDate;}
 
     public String getBirthData(){
@@ -124,16 +132,22 @@ public class Person {
         if (father != null){
             sb.append("father: ");
             sb.append(father);
-            sb.append("; ");
         }
         if (mother != null){
             sb.append("mother: ");
             sb.append(mother);
-            sb.append("; ");
         }
         return sb.toString();
     }
-        
+
+    public Person getMother(){
+        return mother;
+    }
+
+    public Person getFather(){
+        return father;
+    }
+
     @Override
     public String toString(){
         return getPersonInfo();
@@ -141,14 +155,13 @@ public class Person {
 
     public String getPersonInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append(id);
-        sb.append(". ");
+//        sb.append(id); //ToDo: нужно сделать чтобы ID показывался только при выводе запрашиваемой персоны. Не отображать для Родителей, Детей, Супругов
+//        sb.append(". ");
         sb.append(getPerson());
         sb.append(" (");
         sb.append(getAge());
         sb.append(" y.o.); ");
         sb.append(getParents());
-
         return sb.toString();
     }
 

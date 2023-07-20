@@ -3,6 +3,10 @@ package family_tree.person;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * пока решаю как лучше. 
+ */
+
 public class Spouse extends Person{
     private List<Spouse> spouse;
     private String marriedName;
