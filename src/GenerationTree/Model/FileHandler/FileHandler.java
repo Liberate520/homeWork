@@ -1,5 +1,6 @@
 package GenerationTree.Model.FileHandler;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -10,6 +11,9 @@ public class FileHandler<T> implements FileWriter, FileReader<T> {
 
     @Override
     public boolean save(Serializable serializable, String filePath) {
+        var isFileExist = createFile(filePath);
+        if (!isFileExist)
+            return false;
         try (var objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);
             return true;
@@ -27,4 +31,11 @@ public class FileHandler<T> implements FileWriter, FileReader<T> {
         }
     }
 
+    private boolean createFile(String path) {
+        File file = new File(path);
+        if (!file.getParentFile().exists()) {
+            return file.getParentFile().mkdirs();
+        }
+        return true;
+    }
 }

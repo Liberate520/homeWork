@@ -21,10 +21,12 @@ public class ConsoleUI implements View {
 
     @Override
     public void start() {
-        clsField();
         var appIsRun = true;
         while (appIsRun) {
+            clsField();
             String surname = cmdManager.inputText("Введите фамилию семьи: ");
+            if (surname.isEmpty())
+                continue;
             presenter.setTreeService(surname);
 
             appIsRun = startupMenu(surname);
@@ -65,8 +67,9 @@ public class ConsoleUI implements View {
                     var isClosed = yesNoDialog("Закрыть приложение?");
                     if (isClosed)
                         return !isClosed;
-                    else
-                        break;
+                    else if (commandKey == 0)
+                        commandKey++;
+                    break;
             }
         }
         return true;

@@ -21,6 +21,7 @@ public class Presenter {
             view.print("Древо семьи " + name + " загружено из файла.");
         } else {
             this.service = new FamilyTreeService(name, new PersonIdGenerator());
+            this.service.saveTree();
             view.print("Файл с такой фамилией не найден... Создано новое древо семьи: " + name);
         }
     }
