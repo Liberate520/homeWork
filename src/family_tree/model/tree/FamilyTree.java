@@ -12,9 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E>{
     private List<E> tree = new LinkedList<>();
-
     public void addCreature(E creature) {
        this.tree.add(creature);
     }
@@ -28,7 +27,6 @@ public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E
         }
         return stringBuilder.toString();
     }
-
     public String viewAllFamily (int id){
         for (E creature: this.tree){
             if (creature.getId()==id)
@@ -48,6 +46,6 @@ public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E
         Collections.sort(this.tree, new CreaturesComparatorByAge<>());
     }
     public Iterator<E> iterator() {
-        return new CreaturesIterator(this.tree);
+        return new CreaturesIterator<>(this.tree);
     }
 }

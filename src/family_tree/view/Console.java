@@ -1,5 +1,6 @@
 package family_tree.view;
 
+import family_tree.model.file_handler.interfaces.ReadAndWrite;
 import family_tree.presenter.Presenter;
 
 import java.io.IOException;
@@ -36,8 +37,8 @@ public class Console implements View {
         working = false;
     }
 
-    public void loadFamilyTreeFromFile(String path) throws IOException, ClassNotFoundException {
-        presenter.loadFamilyTreeFromFile(path);
+    public void loadFamilyTreeFromFile(ReadAndWrite readAndWrite, String path) throws IOException, ClassNotFoundException {
+        presenter.loadFamilyTreeFromFile(readAndWrite, path);
     }
 
     public void viewAllFamilyInfo(){

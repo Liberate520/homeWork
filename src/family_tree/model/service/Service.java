@@ -1,28 +1,27 @@
 package family_tree.model.service;
 
-import family_tree.model.creatures.Human;
-import family_tree.model.file_handler.FileHandler;
+import family_tree.model.creatures.interfaces.Creatures;
+import family_tree.model.file_handler.interfaces.ReadAndWrite;
 import family_tree.model.tree.FamilyTree;
 
 import java.io.IOException;
 
-public class Service {
-    private FamilyTree<Human> tree;
+public class Service<E extends Creatures> {
+    private FamilyTree<E> tree;
 
     public Service(){
         tree = new FamilyTree<>();
     }
 
-    public void loadFamilyTreeFromFile(String path) throws IOException, ClassNotFoundException {
-        FileHandler fileHandler = new FileHandler();
-        tree = (FamilyTree) fileHandler.read(path);
+    public void loadFamilyTreeFromFile(ReadAndWrite readAndWrite, String path) throws IOException, ClassNotFoundException {
+        tree = (FamilyTree) readAndWrite.read(path);
     }
 
     public String getFamilyTreeInfo() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список людей в семейном древе:\n");
-        for (Human human: tree){
-            stringBuilder.append(human);
+        stringBuilder.append("Список членов семейного древа:\n");
+        for (Creatures creature: tree){
+            stringBuilder.append(creature);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();

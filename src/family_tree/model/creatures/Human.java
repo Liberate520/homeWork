@@ -49,9 +49,6 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return age;
     }
 
-    public String getLastName(){
-        return this.lastName;
-    }
     public LocalDate getDateOfBirth() {
         return this.dateOfBirth;
     }
@@ -75,7 +72,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         this.children.add(child);
     }
 
-    public String viewGrandparents() {
+    private String viewGrandparents() {
         StringBuilder grandparents = new StringBuilder();
         if (this.mother != null) {
             if (this.mother.mother != null) {
@@ -100,7 +97,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return grandparents.toString();
     }
 
-    public String viewMother() {
+    private String viewMother() {
         StringBuilder mother = new StringBuilder();
         if (this.mother != null) {
             mother.append("<Мать> \n" + this.mother.toString() + "\n");
@@ -108,7 +105,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return mother.toString();
         }
 
-    public String viewFather() {
+    private String viewFather() {
         StringBuilder father = new StringBuilder();
         if (this.father != null) {
             father.append("<Отец> \n" + this.father.toString() + "\n");
@@ -116,7 +113,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return father.toString();
     }
 
-    public String viewSiblings(){
+    private String viewSiblings(){
         StringBuilder siblings = new StringBuilder();
         if (this.mother != null) {
             if (this.mother.children != null){
@@ -133,7 +130,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return siblings.toString();
     }
 
-    public String viewSpouse() {
+    private String viewSpouse() {
         StringBuilder spouse = new StringBuilder();
         if (this.spouse != null) {
             if (this.spouse.gender.toString().equals("Мужской")) {
@@ -145,7 +142,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return spouse.toString();
     }
 
-    public String viewChildrens(){
+    private String viewChildrens(){
         StringBuilder childrens = new StringBuilder();
         if (this.children != null) {
             childrens.append("<Дети>\n");
@@ -156,7 +153,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return childrens.toString();
     }
 
-    public String viewGrandchildrens(){
+    private String viewGrandchildrens(){
         StringBuilder grandchildrens = new StringBuilder();
         if (this.children != null) {
             for (Human child : this.children) {

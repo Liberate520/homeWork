@@ -1,5 +1,6 @@
 package family_tree.presenter;
 
+import family_tree.model.file_handler.interfaces.ReadAndWrite;
 import family_tree.model.service.Service;
 import family_tree.view.View;
 
@@ -11,11 +12,11 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service<>();
     }
 
-    public void loadFamilyTreeFromFile(String path) throws IOException, ClassNotFoundException {
-        service.loadFamilyTreeFromFile(path);
+    public void loadFamilyTreeFromFile(ReadAndWrite readAndWrite, String path) throws IOException, ClassNotFoundException {
+        service.loadFamilyTreeFromFile(readAndWrite, path);
     }
 
     public void getFamilyTreeInfo() {
@@ -36,7 +37,6 @@ public class Presenter {
         service.sortByDateOfBirth();
         getFamilyTreeInfo();
     }
-
     public void sortByAge() {
         service.sortByAge();
         getFamilyTreeInfo();
