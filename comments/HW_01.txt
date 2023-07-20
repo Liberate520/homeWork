@@ -1,0 +1,66 @@
+
+Сбт, 8 Июл 2023 23:51
+Re: [Liberate520/homeWork] домашка JAVA OOP 001 (PR #623)
+От: Liberate520 <notifications@github.com>
+Кому: Liberate520/homeWork <homeWork@noreply.github.com>
+Копии: Artem Drozdov <drozdov_as@mail.ru>, Author <author@noreply.github.com>
+@Liberate520 commented on this pull request.
+
+In src/familyTree/Node.java:
+
+> +    Human human;
++    Node father, mother;
++    List<Node> children;
+не забываем про инкапсуляцию
+
+In src/human/Human.java:
+
+> +    private Human father, mother;
++    private List<Human> children;
+Вы вынесли этот функционал в класс Node. Либо там либо там) надо разделить ответственность)
+
+In src/Main.java:
+
+> +import familyTree.FamilyTree;
++import human.Gender;
++import human.Human;
++
++import java.time.LocalDate;
++
++public class Main {
++    public static void main(String[] args) {
++        FamilyTree tree = new FamilyTree();
++//        Human DSN_myFather, DSN_myMother, DAS_itsMe;
++//        // (String fullName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother, List<Human> children, String placeOfBith)
++//
++//        Human DN_myGrandFather = new Human(" .", Gender.Male, null, null, null, null, null/*DSN_myFather*/, null);
++//        Human JA_myGrandMother = new Human(" .", Gender.Male, null, null, null, null, null/*DSN_myFather*/, null);
++//
++        Human DSN_myFather, KLV_myMother, DAS_me, DVA_myDaughter, DYA_mySon;
+имена переменных с маленькой буквы
+
+In src/human/Human.java:
+
+> +
++public class Human {
++    private String surname, name, patronymic;
++    private Gender gender;
++    private LocalDate birthDate, deathDate;
++    private Human father, mother;
++    private List<Human> children;
++    //    private String placeOfBirth;
++    //    private String location;
++    private int id;
++    private String fullName;
++
++    public Human(){}
++
++    public Human(String surname, String name, String patronymic, Gender gender, LocalDate birthDate,
++                 LocalDate deathDate, Human father, Human mother, List<Human> children, int id) {
+Создайте конструктор без списка детей. Вы все равно никак не используете этот аргумент
+
+—
+Reply to this email directly, view it on GitHub, or unsubscribe.
+You are receiving this because you authored the thread.
+
+

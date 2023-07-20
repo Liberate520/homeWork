@@ -5,20 +5,19 @@ import human.Human;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<E> implements Iterator<E> {
     private int index;
-    private List<Human> humanList;
-    public HumanIterator(List<Human> humanList){
+    private List<E> humanList;
+    public HumanIterator(List<E> humanList){
         this.humanList = humanList;
     }
-
     @Override
     public boolean hasNext() {
         return index < humanList.size();
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return humanList.get(index++);
     }
 }

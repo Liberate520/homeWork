@@ -1,19 +1,22 @@
 package human;
 
+import familyTree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements FamilyTreeItem<Human> {
     private String surname, name, patronymic;
     private Gender gender;
     private LocalDate birthDate, deathDate;
-    private Human father, mother;
+//    private Human father, mother;
     private List<Human> parents, children;
     //    private String placeOfBirth;
     //    private String location;
-    private int id;
+    private long id;
     private String fullName;
     //
     private int age;
@@ -51,6 +54,7 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     // ===========================================================
+    @Override
     public boolean addChild(Human child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -58,7 +62,7 @@ public class Human implements Serializable, Comparable<Human> {
         }
         return false;
     }
-
+    @Override
     public boolean addParent(Human parent) {
         if (!parents.contains(parent)) {
             //TODO здесь ошибка у Константина
@@ -107,14 +111,15 @@ public class Human implements Serializable, Comparable<Human> {
 
     // ===========================================================
     // Getting
+    @Override
     public String getSurname() {
         return surname;
     }
-
+    @Override
     public String getName() {
         return name;
     }
-
+    @Override
     public String getPatronymic() {
         return patronymic;
     }
@@ -122,13 +127,13 @@ public class Human implements Serializable, Comparable<Human> {
     public Gender getGender() {
         return gender;
     }
-
+    @Override
     public LocalDate getBirthDate() {
         if (birthDate != null)
             return birthDate;
         else return null;
     }
-
+    @Override
     public LocalDate getDeathDate() {
         if (deathDate != null)
             return deathDate;
@@ -136,7 +141,15 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     private int getAge(LocalDate birthDate, LocalDate deathDate) {
-        if (birthDate != null) {
+        if (birthDate == null)
+            return 0;
+        else {
+            if (deathDate == null)
+                return Period.between(birthDate, LocalDate.now()).getYears();
+            else
+                return Period.between(birthDate, deathDate).getYears();
+        }
+    /*  if (birthDate != null) {
             int birthYear = birthDate.getYear();
             int birthMonth = birthDate.getMonthValue();
             int birthDay = birthDate.getDayOfMonth();
@@ -166,8 +179,9 @@ public class Human implements Serializable, Comparable<Human> {
                 else return deathYear - birthYear - 1;
             }
         } else return 0;
+    */
     }
-
+    @Override
     public Human getFather() {
         for (Human parent : parents) {
             if (parent.getGender() == Gender.Male) {
@@ -176,7 +190,7 @@ public class Human implements Serializable, Comparable<Human> {
         }
         return null;
     }
-
+    @Override
     public Human getMother() {
         for (Human parent : parents) {
             if (parent.getGender() == Gender.Female) {
@@ -185,19 +199,19 @@ public class Human implements Serializable, Comparable<Human> {
         }
         return null;
     }
-
+    @Override
     public List<Human> getParents() {
         return parents;
     }
-
+    @Override
     public List<Human> getChildren() {
         return children;
     }
-
-    public int getId() {
+    @Override
+    public long getId() {
         return id;
     }
-
+    @Override
     public int getAge() {
         return age;
     }
@@ -214,12 +228,13 @@ public class Human implements Serializable, Comparable<Human> {
     public void setChildren(List<Human> children) {
         this.children = children;
     }
-
-    public void setId(int id) {
+    @Override
+    public void setId(long id) {
         this.id = id;
     }
 
     //
+    @Override
     public String getFullName() {
         return getSurname() + " " + getName() + " " + getPatronymic();
     }
@@ -238,7 +253,9 @@ public class Human implements Serializable, Comparable<Human> {
         sb.append("id " + getId() + ", ");
         sb.append("ФИО: " + getFullName() + ", ");
         sb.append("Дата рождения: " + getBirthDate() + ", ");
-        if(deathDate != null) {sb.append("Дата смерти: " + getDeathDate() + ", ");}
+        if (deathDate != null) {
+            sb.append("Дата смерти: " + getDeathDate() + ", ");
+        }
         sb.append("Возраст: " + age + ", ");
         sb.append(getMotherInfo() + ", ");
         sb.append(getFatherInfo() + ", ");
@@ -258,8 +275,10 @@ public class Human implements Serializable, Comparable<Human> {
         return human.getName().equals(getName());
     }
 
-    @Override
-    public int compareTo(Human o) {
-        return fullName.compareTo(o.fullName);
-    }
+//    @Override
+//    public int compareTo(Human o) {
+//        return fullName.compareTo(o.fullName);
+//    }
 }
+
+

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
     private int idHuman;
-    private List<Human> humanList;
+    private List<E> humanList;
 
     //    public FamilyTree() { humanList = new ArrayList<>(); };
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<E> humanList) {
         this.humanList = humanList;
     }
 
@@ -23,7 +23,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public boolean addHuman(Human human) {
+    public boolean addHuman(E human) {
         human.setId(idHuman++);
 //        humanList.add(human);
         if (human == null) {
@@ -40,23 +40,23 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    private void addToParents(Human human) {
-        for (Human parent : human.getParents()) {
+    private void addToParents(E human) {
+        for (E parent : human.getParents()) {
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
+    private void addToChildren(E human) {
+        for (E child : human.getChildren()) {
             child.addParent(human);
         }
     }
 
-    public Human getByName(String surname, String name, String patronymic) {
-        for (Human human : humanList) {
-            if ((human.getSurname().equals(surname)) &&
-                    (human.getName().equals(name)) &&
-                    (human.getPatronymic().equals(patronymic))) {
+    public E getByName(String surname, String name, String patronymic) {
+        for (E human : humanList) {
+            if ((human.getSurname().equalsIgnoreCase(surname)) &&
+                    (human.getName().equalsIgnoreCase(name)) &&
+                    (human.getPatronymic().equalsIgnoreCase(patronymic))) {
                 return human;
             }
         }
@@ -67,7 +67,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Список всех учтенных родственников в семейном дереве:\n");
-        for (Human human : humanList) {
+        for (E human : humanList) {
             sb.append(human);
             sb.append("\n");
         }
@@ -83,7 +83,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator(){
+    public Iterator<E> iterator(){
         return new HumanIterator(humanList);
     }
     public void sortByFullName() {

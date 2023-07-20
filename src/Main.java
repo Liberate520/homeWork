@@ -34,12 +34,12 @@ public class Main {
                 LocalDate.of(1986, 7, 8)));
         tree.addHuman(new Human("Карманова", "Л", "В", Gender.Female, LocalDate.of(1949, 9, 9)));
         tree.addHuman(new Human("Дроздов", "А", "С", Gender.Male, LocalDate.of(1980, 6, 7),
-                tree.getByName("Дроздов", "С", "Н"), tree.getByName("Карманова", "Л", "В")));
+                (Human) tree.getByName("Дроздов", "С", "Н"), (Human) tree.getByName("Карманова", "Л", "В")));
         tree.addHuman(new Human("Дроздова", "С", "В", Gender.Female, LocalDate.of(1986, 4, 10)));
         tree.addHuman(new Human("Дроздова", "В", "А", Gender.Female, LocalDate.of(2010, 2, 20),
-                tree.getByName("Дроздов", "А", "С"), tree.getByName("Дроздова", "С", "В")));
+                (Human) tree.getByName("Дроздов", "А", "С"), (Human) tree.getByName("Дроздова", "С", "В")));
         tree.addHuman(new Human("Дроздов", "Ю", "А", Gender.Male, LocalDate.of(2014, 2, 2),
-                tree.getByName("Дроздов", "А", "С"), tree.getByName("Дроздова", "С", "В")));
+                (Human) tree.getByName("Дроздов", "А", "С"), (Human) tree.getByName("Дроздова", "С", "В")));
         return tree;
     }
 }
