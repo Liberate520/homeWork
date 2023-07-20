@@ -10,7 +10,7 @@ public class ViewConsole extends View{
     private Boolean flag;
     private Scanner scanner;
     private Menu menu;
-    private String[]commands = new String[]{"0 - выход", "1 - добавить", "2 - удалить", "3 - добавить родителя", "4 - добавить потомка", "5 - получить информацию", "6 - вывести информацию по всем"};
+
 
     public ViewConsole(){
         scanner = new Scanner(System.in);
