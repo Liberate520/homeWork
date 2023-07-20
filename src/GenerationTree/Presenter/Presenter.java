@@ -15,11 +15,12 @@ public class Presenter {
     }
 
     public void setTreeService(String name) {
-        this.service = new FamilyTreeService(name, new PersonIdGenerator());
-        boolean loaded = this.service.loadTree();
+        this.service = new FamilyTreeService();
+        boolean loaded = this.service.loadTree(name);
         if (loaded) {
             view.print("Древо семьи " + name + " загружено из файла.");
         } else {
+            this.service = new FamilyTreeService(name, new PersonIdGenerator());
             view.print("Файл с такой фамилией не найден... Создано новое древо семьи: " + name);
         }
     }

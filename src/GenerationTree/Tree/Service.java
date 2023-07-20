@@ -9,6 +9,6 @@ public interface Service {
 
     boolean saveTree();
 
-    boolean loadTree();
+    boolean loadTree(String treeName);
 
 }

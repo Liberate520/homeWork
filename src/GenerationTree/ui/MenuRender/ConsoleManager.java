@@ -1,30 +1,31 @@
-package GenerationTree.ui;
+package GenerationTree.ui.MenuRender;
 
 import java.util.Scanner;
 
 public class ConsoleManager {
 
+    private Scanner _cs;
+    private StringBuilder _frame = new StringBuilder();
+    private Boolean _onLog;
+    private JFrameKeyEvent keyEvent;
+
     public ConsoleManager() {
-        setTextCode("");
+        this("", false);
     }
 
     public ConsoleManager(String charsetName) {
-        setTextCode(charsetName);
+        this(charsetName, false);
     }
 
     public ConsoleManager(Boolean onLog) {
-        this._onLog = onLog;
-        setFullSettings("");
+        this("", onLog);
     }
 
     public ConsoleManager(String charsetName, Boolean onLog) {
         this._onLog = onLog;
-        setFullSettings(charsetName);
+        setTextCode(charsetName);
+        this.keyEvent = new JFrameKeyEvent();
     }
-
-    private Scanner _cs;
-    private StringBuilder _frame = new StringBuilder();
-    private Boolean _onLog = false;
 
     public String getFrameText(Boolean toDelete) {
         var text = _frame.toString();
@@ -32,6 +33,10 @@ public class ConsoleManager {
             _frame.delete(0, _frame.length());
         }
         return text;
+    }
+
+    public int getKeyEvent() {
+        return this.keyEvent.Start();
     }
 
     public String inputText(String message) {
@@ -71,8 +76,12 @@ public class ConsoleManager {
         System.out.flush();
     }
 
-    private void setFullSettings(String charsetName) {
-        setTextCode(charsetName);
+    public static void hideCursor(boolean isHidden) {
+        if (isHidden) {
+            System.out.print("\033[?25l");
+        } else {
+            System.out.print("\033[?25h");
+        }
     }
 
     private void setTextCode(String charsetName) {
@@ -86,31 +95,5 @@ public class ConsoleManager {
         if (_onLog) {
             _frame.append(text);
         }
-    }
-
-    public static void hideCursor(boolean isHidden) {
-        if (isHidden) {
-            System.out.print("\033[?25l");
-        } else {
-            System.out.print("\033[?25h");
-        }
-    }
-
-    public static String compressString(String input) {
-        StringBuilder result = new StringBuilder();
-        int count = 1;
-        char prevChar = input.charAt(0);
-        for (int i = 1; i < input.length(); i++) {
-            char currentChar = input.charAt(i);
-            if (currentChar == prevChar) {
-                count++;
-            } else {
-                result.append(prevChar).append(count);
-                prevChar = currentChar;
-                count = 1;
-            }
-        }
-        result.append(prevChar).append(count);
-        return result.toString();
     }
 }

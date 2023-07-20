@@ -13,6 +13,14 @@ public class FamilyTreeService implements Service {
     private GenerationTree<Person> tree;
     private FileHandler<GenerationTree<Person>> fHandler;
 
+    public FamilyTreeService() {
+        this("", new PersonIdGenerator());
+    }
+
+    public FamilyTreeService(String treeName) {
+        this(treeName, new PersonIdGenerator());
+    }
+
     public FamilyTreeService(String treeName, PersonIdGenerator personIdGenerator) {
         this.tree = new GenerationTree<Person>(treeName);
         this.idPerson = personIdGenerator;
@@ -110,8 +118,8 @@ public class FamilyTreeService implements Service {
         return fHandler.save(tree, "Data\\" + this.tree.getTreeName() + ".out");
     }
 
-    public boolean loadTree() {
-        var tree = fHandler.read("Data\\" + this.tree.getTreeName() + ".out");
+    public boolean loadTree(String treeName) {
+        var tree = fHandler.read("Data\\" + treeName + ".out");
         if (tree != null) {
             this.tree = tree;
             return true;
