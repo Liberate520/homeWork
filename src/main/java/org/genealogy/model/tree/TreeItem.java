@@ -16,4 +16,6 @@ public interface TreeItem {
     void setDateOfDeath(int day, int month, int year);
 
     void setGender(Gender gender);
+
+    void setExtraInfo(String extraInfo);
 }

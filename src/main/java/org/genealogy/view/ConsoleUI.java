@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
-    private static final String INPUT_ERROR = "";
+    private static final String INPUT_ERROR = "ERROR";
     private Scanner scanner;
     private static Presenter presenter;
     private boolean work;
@@ -53,9 +53,9 @@ public class ConsoleUI implements View {
 
     public void addHuman() throws IOException {
         System.out.println("Введите имя человека:");
-        String firstName = scanner.nextLine();
+        String firstName = scanner.next();
         System.out.println("Введите фамилию человека:");
-        String lastName = scanner.nextLine();
+        String lastName = scanner.next();
         presenter.addHuman(firstName, lastName);
         System.out.println("Сохранено");
     }
@@ -114,6 +114,15 @@ public class ConsoleUI implements View {
         System.out.println("Сохранено");
     }
 
+    public void addExtraInfo() {
+        System.out.println("Введите ID:");
+        int id = scanner.nextInt();
+        System.out.println("Введите дополнительную информацию через запятую:");
+        String extraInfo = scanner.next();
+        presenter.setExtraInfo(id, extraInfo);
+        System.out.println("Сохранено");
+    }
+
     public static void saveTreeToFile() throws IOException {
         presenter.saveTreeToFile();
         System.out.println("Дерево сохранено");
@@ -130,8 +139,8 @@ public class ConsoleUI implements View {
 
     private void execute() throws IOException, ClassNotFoundException {
         System.out.println("Введите номер команды:");
-        String line = scanner.nextLine();
-        if (checkTextForInt(line)){
+        String line = scanner.next();
+        if (checkTextForInt(line)) {
             int numCommand = Integer.parseInt(line);
             if (checkCommand(numCommand)){
                 menu.execute(numCommand);

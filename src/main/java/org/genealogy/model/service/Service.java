@@ -65,6 +65,9 @@ public class Service<E extends TreeItem> extends GenealogyTree<E> {
         tree.addGender(id, gender);
     }
 
+    public void setExtraInfo(int id, String extraInfo) {
+        tree.setExtraInfo(id, extraInfo);
+    }
 
     public void addChildren(int parentId, int childId) {
         tree.addChildren(parentId, childId);

@@ -50,6 +50,11 @@ public class Presenter {
         getHumanListInfo();
     }
 
+    public void setExtraInfo(int id, String extraInfo) {
+        service.setExtraInfo(id, extraInfo);
+        getHumanListInfo();
+    }
+
     public void addChild(int parentId, int childId) {
         service.addChildren(parentId, childId);
         getHumanListInfo();

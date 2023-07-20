@@ -58,6 +58,14 @@ public class GenealogyTree<E extends TreeItem> implements Iterable<E>, Serializa
         }
     }
 
+    public void setExtraInfo(int id, String extraInfo) {
+        for (E person : people) {
+            if (person.getId() == id) {
+                person.setExtraInfo(extraInfo);
+            }
+        }
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new TreeIterator<>(people);
