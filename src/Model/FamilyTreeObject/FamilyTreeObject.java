@@ -2,6 +2,8 @@ package Model.FamilyTreeObject;
 
 
 
+import Model.FamilyTree.FamilyTree;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,10 +18,11 @@ public class FamilyTreeObject implements Serializable,Comparable {
     private FamilyTreeObject mother;
     private FamilyTreeObject father;
     private String gender;
-    private List<FamilyTreeObject> children = new ArrayList<FamilyTreeObject>();
+    private List<FamilyTreeObject> childrens = new ArrayList<FamilyTreeObject>();
+    FamilyTree familyTree;
 
-    public FamilyTreeObject(String name, String surname,
-                 Date dateOfBirth, Date dateOfDead, FamilyTreeObject mother, FamilyTreeObject father,String gender, List children){
+    public FamilyTreeObject(FamilyTree familyTree, String name, String surname,
+                 Date dateOfBirth, Date dateOfDead, FamilyTreeObject mother, FamilyTreeObject father,String gender, List childrens){
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -27,35 +30,42 @@ public class FamilyTreeObject implements Serializable,Comparable {
         this.mother = mother;
         this.father = father;
         this.gender = gender;
-        this.children = children;
+        this.childrens = childrens;
+        this.familyTree = familyTree;
     }
-    public FamilyTreeObject (String name, String surname, String gender){
+    public FamilyTreeObject (FamilyTree familyTree, String name, String surname, String gender){
         this.name = name;
         this.surname = surname;
         this.gender = gender;
+        this.familyTree = familyTree;
     }
 
     public void setMother(FamilyTreeObject familyTreeObject){
-        this.mother = familyTreeObject;
-        familyTreeObject.addChildren(this);
+        if(mother==null || !mother.equals(familyTreeObject)) {
+            this.mother = familyTreeObject;
+            familyTreeObject.addChildren(this);
+            familyTree.addElement(familyTreeObject);
+        }
 
     }
     public void setFather(FamilyTreeObject familyTreeObject){
         if(father==null || !father.equals(familyTreeObject)){
             this.father = familyTreeObject;
             familyTreeObject.addChildren(this);
+            familyTree.addElement(familyTreeObject);
         }
 
     }
     public void addChildren(FamilyTreeObject familyTreeObject){
-        if(!children.contains(familyTreeObject)){
-            this.children.add(familyTreeObject);
-            if (gender.equals("female")){
+        if(!childrens.contains(familyTreeObject)){
+            this.childrens.add(familyTreeObject);
+            if (gender.equals("Женский")){
                 familyTreeObject.setMother(this);
             }
-            if (gender.equals("male")){
+            if (gender.equals("Мужской")){
                 familyTreeObject.setFather(this);
             }
+            familyTree.addElement(familyTreeObject);
         }
 
 
@@ -89,8 +99,8 @@ public class FamilyTreeObject implements Serializable,Comparable {
         return gender;
     }
 
-    public List<FamilyTreeObject> getChildren() {
-        return children;
+    public List<FamilyTreeObject> getChildrens() {
+        return childrens;
     }
 
     @Override

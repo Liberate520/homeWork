@@ -1,15 +1,16 @@
-package Model.OutAndInputInfo;
+package Model.Write;
 
-import Model.FamilyTreeObject.FamilyTreeObject;
+import Model.FamilyTree.FamilyTree;
+
 
 import java.io.*;
 
-public class OutAndInputInfo implements Serializable{
+public class WriteObjectToFile implements WriteObject {
 
     private ObjectOutputStream objectOutputStream = null;
     private ObjectInputStream objectInputStream = null;
 
-    public void WriteInfo(Serializable inputObject, String fileName){
+    public void write(Serializable inputObject, String fileName){
 
 
         try {
@@ -23,12 +24,12 @@ public class OutAndInputInfo implements Serializable{
 
     }
 
-    public FamilyTreeObject ReadInfo(String name){
-        FamilyTreeObject inputElement = null;
+    public FamilyTree read(String fileName){
+        FamilyTree inputElement = null;
         try {
             objectInputStream = new ObjectInputStream(
-                    new FileInputStream(name));
-            inputElement = (FamilyTreeObject) objectInputStream.readObject();
+                    new FileInputStream(fileName));
+            inputElement = (FamilyTree) objectInputStream.readObject();
             objectInputStream.close();
 
         } catch (IOException e) {

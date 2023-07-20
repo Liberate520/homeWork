@@ -1,50 +1,49 @@
 package Presenter;
 
-import Model.FamilyTree.FamilyTree;
 import Model.FamilyTreeObject.FamilyTreeObject;
+import Model.FamilyTreeService;
 import View.View;
 
 public class Presenter {
-    private FamilyTree familyTree;
+    private FamilyTreeService familyTreeService;
     private View view;
-    private FamilyTreeObject familyTreeObject;
 
-    public Presenter(FamilyTree familyTree, View view){
-        this.familyTree = familyTree;
+    public Presenter(FamilyTreeService familyTreeService, View view){
+        this.familyTreeService = familyTreeService;
         this.view = view;
         view.setPresenter(this);
     }
 
-    public void addObject(String name, String surname, String gender){
+    public String addElement(String name, String surname, String gender){
 
-        familyTree.addElement(name, surname, gender);
+        return familyTreeService.addElement(name, surname, gender);
     }
-    public Boolean deleteObject(String name, String surname){
-        return familyTree.deleteElement(name, surname);
-    }
-    public FamilyTreeObject getObject(String name, String surname){
-        return familyTreeObject = familyTree.getElement(name, surname);
-
-
-    }
-
-
-    public void addParent(FamilyTreeObject familyTreeObject, String name, String surname, String gender){
-
-        if(gender.equals("male")){
-            familyTreeObject.setFather(new FamilyTreeObject(name,surname,gender));
+    public String deleteObject(String name, String surname){
+        if(familyTreeService.deleteElement(name, surname)){
+            return "Удаление прошло успешно!";
         }
-        else{familyTreeObject.setMother(new FamilyTreeObject(name,surname,gender));}
+        return "Удаление не удалось!";
+    }
+    public FamilyTreeObject getElement(String name, String surname){
+        return  familyTreeService.getElement(name, surname);
+
+
     }
 
-    public void addDescendant(FamilyTreeObject familyTreeObject, String name, String surname, String gender){
-        familyTreeObject.addChildren(new FamilyTreeObject(name,surname,gender));
+
+    public String addParent(FamilyTreeObject familyTreeObject, String name, String surname, String gender){
+        return familyTreeService.addParent(familyTreeObject,name, surname, gender);
     }
-    public String objectInfo(String name, String surname){
-        return familyTree.getElement(name, surname).toString();
+
+    public String addChildren(FamilyTreeObject familyTreeObject, String name, String surname, String gender){
+        return familyTreeService.addChildren(familyTreeObject, name, surname, gender);
+
+    }
+    public String getElementInfo(String name, String surname){
+        return familyTreeService.getElementInfo(name, surname);
     }
     public String allObjectInfo(){
-        return familyTree.elemensPrint();
+        return familyTreeService.elemensPrint();
     }
 
 }

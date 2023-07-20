@@ -2,117 +2,116 @@ package View;
 
 import Presenter.Presenter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class ViewConsole extends View{
-    private String name;
-    private String surname;
-    private String gender;
-    private int command;
+
     private Presenter presenter;
-    private Boolean flag = true;
-    private Scanner scanner = new Scanner(System.in);
+    private Boolean flag;
+    private Scanner scanner;
+    private Menu menu;
     private String[]commands = new String[]{"0 - выход", "1 - добавить", "2 - удалить", "3 - добавить родителя", "4 - добавить потомка", "5 - получить информацию", "6 - вывести информацию по всем"};
+
+    public ViewConsole(){
+        scanner = new Scanner(System.in);
+        flag = true;
+        menu = new Menu(this);
+    }
+
     @Override
     public void start() {
 
 
-        while(flag){
-
-            for (int i = 0; i < commands.length; i++){
-                System.out.println(commands[i]);
+        while (flag) {
+            System.out.println(menu.print());
+            String choice = scanner.nextLine();
+            if (check(choice)) {
+                menu.execute(Integer.parseInt(choice));
+            } else {
+                System.out.println("Неверный номер пункта");
             }
-            command = scanner.nextInt();
-            scanner.nextLine();
-            name = "";
-            surname = "";
-            gender = "";
-            if(command == 1){
-                System.out.println("Введите имя");
-                name = scanner.nextLine();
-                System.out.println("Введите фамилию");
-                surname = scanner.nextLine();
-                System.out.println("Введите пол");
-                gender = scanner.nextLine();
-                presenter.addObject(name,surname, gender);
-            }
-            if(command == 2){
-                System.out.println("Введите имя");
-                name = scanner.nextLine();
-                System.out.println("Введите фамилию");
-                surname = scanner.nextLine();
-                if (presenter.deleteObject(name, surname)== false){
-                    System.out.println("Объект не найден");
-                }
-            }
-            if(command == 3){
-                System.out.println("Укажите кому хотите добавить родителя");
-                System.out.println("Введите имя");
-                name = scanner.nextLine();
-                System.out.println("Введите фамилию");
-                surname = scanner.nextLine();
-                if (presenter.getObject(name, surname)== null){
-                    System.out.println("Объект не найден");
-                }
-                else {System.out.println("Укажите данные родителя");
-                    System.out.println("Введите имя");
-                    name = scanner.nextLine();
-                    System.out.println("Введите фамилию");
-                    surname = scanner.nextLine();
-                    System.out.println("Введите пол");
-                    surname = scanner.nextLine();
-                    presenter.addParent(presenter.getObject(name, surname), scanner.nextLine(), scanner.nextLine(), scanner.nextLine());}
-
-            }
-            if(command == 5){
-                System.out.println("Укажите кому хотите добавить потомка");
-                System.out.println("Введите имя");
-                name = scanner.nextLine();
-                System.out.println("Введите фамилию");
-                surname = scanner.nextLine();
-                if (presenter.getObject(name, surname)== null){
-                    System.out.println("Объект не найден");
-                }
-                else {System.out.println("Укажите данные потомка");
-                    System.out.println("Введите имя");
-                    name = scanner.nextLine();
-                    System.out.println("Введите фамилию");
-                    surname = scanner.nextLine();
-                    System.out.println("Введите пол");
-                    surname = scanner.nextLine();
-                    presenter.addParent(presenter.getObject(name, surname), scanner.nextLine(), scanner.nextLine(), scanner.nextLine());}
-
-            }
-            if(command == 5){
-                System.out.println("Введите имя");
-                name = scanner.nextLine();
-                System.out.println("Введите фамилию");
-                surname = scanner.nextLine();
-                if(presenter.objectInfo(name, surname)!=null){
-                    System.out.println(presenter.objectInfo(name, surname));
-                }
-                else{
-                    System.out.println("Объект не найден");
-                }
-
-            }
-            if(command == 6){
-                System.out.println(presenter.allObjectInfo());
-            }
-            if (command == 0){
-                flag = false;
-            }
-
-
-
         }
     }
+
+
 
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public void exit(){
+        System.out.println("До свидания!");
+        flag = false;
+    }
+
+    public void addElement(){
+        System.out.println("Введите имя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String surname = scanner.nextLine();
+        System.out.println("Введите пол");
+        String gender = scanner.nextLine();
+
+        System.out.println(presenter.addElement(name,surname, gender));
+    }
+
+    public Boolean check(String text){
+        return (text.matches("[0-9]") && Integer.parseInt(text) <= (menu.getSize()-1)&& Integer.parseInt(text) >=0);
+    }
+
+
+    public void addChildren() {
+        System.out.println("Введите имя кому хотите добавить ребенка");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию кому хотите добавить ребенка");
+        String surname = scanner.nextLine();
+        System.out.println("Введите имя ребенка");
+        String nameChildren = scanner.nextLine();
+        System.out.println("Введите фамилию ребенка");
+        String surnameChildren = scanner.nextLine();
+        System.out.println("Введите пол ребенка");
+        String genderChildren = scanner.nextLine();
+        System.out.println(presenter.addChildren(presenter.getElement(name, surname),nameChildren, surnameChildren, genderChildren));
+
+
+    }
+
+    public void ElementInfo(){
+        System.out.println("Введите имя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String surname = scanner.nextLine();
+        System.out.println(presenter.getElementInfo(name, surname));
+
+    }
+
+
+    public void addParent() {
+        System.out.println("Введите имя кому хотите добавить родителя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию кому хотите добавить родителя");
+        String surname = scanner.nextLine();
+        System.out.println("Введите имя родителя");
+        String nameParent = scanner.nextLine();
+        System.out.println("Введите фамилию родителя");
+        String surnameParent = scanner.nextLine();
+        System.out.println("Введите пол родителя");
+        String genderParent = scanner.nextLine();
+        System.out.println(presenter.addParent(presenter.getElement(name, surname),nameParent, surnameParent, genderParent));
+
+    }
+
+    public void DeleteObject(){
+        System.out.println("Введите имя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию");
+        String surname = scanner.nextLine();
+        System.out.println(presenter.deleteObject(name, surname));
+
+    }
+
+    public void allObjectInfo() {
+        System.out.println(presenter.allObjectInfo());
     }
 }

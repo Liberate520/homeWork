@@ -3,7 +3,7 @@ package Model.FamilyTree;
 import Model.Comparator.FamilyTreeObjectComparatorByName;
 import Model.FamilyTreeObject.FamilyTreeObject;
 import Model.Comparator.FamilyTreeObjectComparatorByGender;
-import Model.OutAndInputInfo.OutAndInputInfo;
+
 
 
 
@@ -17,16 +17,20 @@ import java.util.ArrayList;
 
 public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Iterable{
     private List<E > elements = new ArrayList<E>();
-    private OutAndInputInfo outAndInputInfo =new OutAndInputInfo();
 
     public void addElement(E e){
         elements.add(e);
     }
-    public void addElement(String name, String surname, String gender){
-        elements.add((E) new FamilyTreeObject(name, surname, gender));
+
+    public Boolean checkElement(String name, String surname){
+        for (E o: elements) {
+            if(o.getName().equals(name)&&o.getSurname().equals(surname)){
+                return true;
+            }
+
+        }
+        return false;
     }
-
-
 
     public Boolean deleteElement(String name, String surname){
         return elements.remove(getElement(name, surname));
@@ -46,15 +50,6 @@ public class FamilyTree<E extends FamilyTreeObject> implements Serializable, Ite
         return e.toString();
     }
 
-    public void saveElement(E e){
-        String name = e.getName();
-        outAndInputInfo.WriteInfo(e, name);
-    }
-
-    public E readElement(String name){
-
-        return (E) outAndInputInfo.ReadInfo(name);
-    }
 
     public String elemensPrint(){
         return elements.toString();
