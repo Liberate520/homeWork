@@ -2,6 +2,8 @@ package org.genealogy.view.commands;
 
 import org.genealogy.view.ConsoleUI;
 
+import java.io.IOException;
+
 public abstract class Command {
     String description;
     ConsoleUI consoleUI;
@@ -14,5 +16,5 @@ public abstract class Command {
         return description;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws IOException, ClassNotFoundException;
 }

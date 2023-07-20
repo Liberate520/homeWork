@@ -3,6 +3,8 @@ package org.genealogy.presenter;
 import org.genealogy.model.service.Service;
 import org.genealogy.view.View;
 
+import java.io.IOException;
+
 public class Presenter {
     private View view;
     private Service service;
@@ -12,7 +14,7 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String firstName, String lastName) {
+    public void addHuman(String firstName, String lastName) throws IOException {
         service.addHuman(firstName, lastName);
         getHumanListInfo();
     }
@@ -35,5 +37,13 @@ public class Presenter {
     public void addDateOfBirth(int id, int day, int month, int year) {
         service.addDateOfBirth(id, day, month, year);
         getHumanListInfo();
+    }
+
+    public void saveTreeToFile() throws IOException {
+        service.saveTreeToFile();
+    }
+
+    public void loadTreeFromFile() throws IOException, ClassNotFoundException {
+        service.loadTreeFromFile();
     }
 }

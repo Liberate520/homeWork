@@ -1,13 +1,14 @@
 package org.genealogy.model.tree;
 
-import org.genealogy.model.person.comparators.HumanComparatorByAge;
-import org.genealogy.model.person.comparators.HumanComparatorByName;
+import org.genealogy.model.tree.comparators.HumanComparatorByAge;
+import org.genealogy.model.tree.comparators.HumanComparatorByName;
 import org.genealogy.model.tree.iterators.TreeIterator;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GenealogyTree<E extends TreeItem> implements Iterable<E>{
+public class GenealogyTree<E extends TreeItem> implements Iterable<E>, Serializable {
     private List<E> people;
     public GenealogyTree()
     {

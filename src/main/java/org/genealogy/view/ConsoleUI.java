@@ -1,12 +1,14 @@
 package org.genealogy.view;
 
 import org.genealogy.presenter.Presenter;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;
-    private Presenter presenter;
+    private static Presenter presenter;
     private boolean work;
     private MainMenu menu;
 
@@ -23,7 +25,7 @@ public class ConsoleUI implements View {
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         hello();
         while (work){
             printMenu();
@@ -48,7 +50,7 @@ public class ConsoleUI implements View {
         presenter.getHumanListInfo();
     }
 
-    public void addHuman() {
+    public void addHuman() throws IOException {
         System.out.println("Введите имя человека:");
         String firstName = scanner.nextLine();
         System.out.println("Введите фамилию человека:");
@@ -69,11 +71,21 @@ public class ConsoleUI implements View {
         presenter.addDateOfBirth(id, day, month, year);
     }
 
+    public static void saveTreeToFile() throws IOException {
+        presenter.saveTreeToFile();
+        System.out.println("Дерево сохранено");
+    }
+
+    public static void loadTreeFromFile() throws IOException, ClassNotFoundException {
+        presenter.loadTreeFromFile();
+        System.out.println("Дерево загружено");
+    }
+
     private void hello(){
         System.out.println("Генеалогическое дерево");
     }
 
-    private void execute(){
+    private void execute() throws IOException, ClassNotFoundException {
         System.out.println("Введите номер команды:");
         String line = scanner.nextLine();
         if (checkTextForInt(line)){

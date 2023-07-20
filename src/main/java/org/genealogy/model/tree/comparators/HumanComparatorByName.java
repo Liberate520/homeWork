@@ -1,4 +1,4 @@
-package org.genealogy.model.person.comparators;
+package org.genealogy.model.tree.comparators;
 
 import org.genealogy.model.tree.TreeItem;
 import java.util.Comparator;

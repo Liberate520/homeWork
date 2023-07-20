@@ -1,13 +1,13 @@
 package org.genealogy.model.person;
 
 import org.genealogy.model.tree.TreeItem;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements TreeItem, Comparable<Human> {
-    private static int counter = 0;
+public class Human implements TreeItem, Comparable<Human>, Serializable {
     private int id;
     private String firstName;
     private String lastName;
@@ -19,11 +19,14 @@ public class Human implements TreeItem, Comparable<Human> {
     private String extraInfo;
 
     public Human(String firstName, String lastName) {
-        this.id = counter++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.children = new ArrayList<>();
         this.parents = new ArrayList<>();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
