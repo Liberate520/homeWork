@@ -3,6 +3,7 @@ package family_tree.model.person;
 import family_tree.model.gender.Gender;
 import family_tree.model.tree.Treeable;
 
+import java.awt.desktop.PreferencesEvent;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -17,9 +18,9 @@ public class Person implements Serializable, Treeable<Person> {
     private LocalDate dayOfDeath;
     private Gender gender;
     private Person partner;
-    private final ArrayList<Person> parents;
-    private final ArrayList<Person> children;
-    private final ArrayList<Person> siblings;
+    private ArrayList<Person> parents;
+    private ArrayList<Person> children;
+    private ArrayList<Person> siblings;
 
 
     public Person(String name,
@@ -63,7 +64,13 @@ public class Person implements Serializable, Treeable<Person> {
                   Person mother,
                   Person father,
                   Integer id) {
-        this(name, null, birthday, null, gender, mother, father, id);
+        this(name,
+                null,
+                birthday,
+                null,
+                gender, mother,
+                father,
+                id);
     }
 
     public Person(String name,
@@ -134,7 +141,19 @@ public class Person implements Serializable, Treeable<Person> {
             return false;
         }
         final Person other = (Person) obj;
-        return Objects.equals(this.personId, other.personId);
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (this.birthday != other.birthday) {
+            return false;
+        }
+        if (this.dayOfDeath != other.dayOfDeath) {
+            return false;
+        }
+        if (this.gender == other.gender) {
+            return false;
+        }
+        return true;
     }
 
     public String getName() {
@@ -328,4 +347,15 @@ public class Person implements Serializable, Treeable<Person> {
         return getInfo();
     }
 
+    public void setParents(ArrayList<Person> parents) {
+        this.parents = parents;
+    }
+
+    public void setChildren(ArrayList<Person> children) {
+        this.children = children;
+    }
+
+    public void setSiblings(ArrayList<Person> siblings) {
+        this.siblings = siblings;
+    }
 }

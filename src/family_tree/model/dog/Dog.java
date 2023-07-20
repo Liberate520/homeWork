@@ -4,12 +4,34 @@ import family_tree.model.gender.Gender;
 import family_tree.model.person.Person;
 import family_tree.model.tree.Treeable;
 
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-// TODO: 7/16/23 Class Dog
 public class Dog implements Treeable<Dog>, Serializable {
+
+    String name;
+    LocalDate birthday;
+    LocalDate dayOfDeath;
+    Gender gender;
+    Integer idPerson;
+    private ArrayList<Person> parents;
+    private ArrayList<Person> children;
+    private ArrayList<Person> siblings;
+
+    public Dog(String name,
+               LocalDate birthday,
+               LocalDate dayOfDeath,
+               Gender gender,
+               Integer idPerson) {
+        this.name = name;
+        this.birthday = birthday;
+        this.dayOfDeath = dayOfDeath;
+        this.gender = gender;
+        this.idPerson = idPerson;
+    }
+
     @Override
     public void addChild(Dog person) {
 
@@ -147,6 +169,51 @@ public class Dog implements Treeable<Dog>, Serializable {
 
     @Override
     public String getInfo() {
-        return null;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Name: ");
+        stringBuilder.append(name);
+        stringBuilder.append("\n");
+        stringBuilder.append("Age: ");
+        stringBuilder.append(getAge());
+        stringBuilder.append("\n");
+        stringBuilder.append("Partner: ");
+        stringBuilder.append(getPartnerInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append("family_tree.model.gender.Gender: ");
+        stringBuilder.append(gender.toString());
+        stringBuilder.append("\n");
+        stringBuilder.append("Birthday: ");
+        stringBuilder.append(birthday.toString());
+        stringBuilder.append("\n");
+        stringBuilder.append("Day of death: ");
+        stringBuilder.append(getDayOfDeathInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append("Mother: ");
+        stringBuilder.append(getMotherInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append("Father: ");
+        stringBuilder.append(getFatherInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append("Children: ");
+        stringBuilder.append(getChildrenInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append("siblings: ");
+        stringBuilder.append(getSiblingsInfo());
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public void setParents(ArrayList<Person> parents) {
+        this.parents = parents;
+    }
+
+    @Override
+    public void setChildren(ArrayList<Person> children) {
+        this.children = children;
+    }
+
+    @Override
+    public void setSiblings(ArrayList<Person> siblings) {
+        this.siblings = siblings;
     }
 }

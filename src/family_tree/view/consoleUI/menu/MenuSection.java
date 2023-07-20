@@ -1,9 +1,6 @@
 package family_tree.view.consoleUI.menu;
 
 import family_tree.view.consoleUI.ConsoleUi;
-import family_tree.view.consoleUI.menu.mainMenu.CreateNewTree;
-import family_tree.view.consoleUI.menu.mainMenu.Finish;
-import family_tree.view.consoleUI.menu.mainMenu.ReadTreeFromFile;
 
 import java.util.ArrayList;
 import java.util.List;

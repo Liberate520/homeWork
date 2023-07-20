@@ -11,5 +11,6 @@ public class CreateNewTree extends Command {
     @Override
     public void execute() {
         getConsoleUi().getMenu().openMenuChooseType();
+        getConsoleUi().finishMainMenu();
     }
 }

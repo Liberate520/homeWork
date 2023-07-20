@@ -3,19 +3,13 @@ package family_tree.view.consoleUI.menu;
 import family_tree.view.consoleUI.ConsoleUi;
 import family_tree.view.consoleUI.menu.mainMenu.CreateNewTree;
 import family_tree.view.consoleUI.menu.mainMenu.Finish;
-import family_tree.view.consoleUI.menu.mainMenu.ReadTreeFromFile;
+import family_tree.view.consoleUI.menu.mainMenu.ReadTreeOfPersonFromFile;
+import family_tree.view.consoleUI.menu.menuChooseType.CreateDogsTree;
 import family_tree.view.consoleUI.menu.menuChooseType.CreatePersonTree;
-import family_tree.view.consoleUI.menu.menuWorkWithTree.AddItem;
-import family_tree.view.consoleUI.menu.menuWorkWithTree.PrintTree;
-import family_tree.view.consoleUI.menu.menuWorkWithTree.SortByAge;
-import family_tree.view.consoleUI.menu.menuWorkWithTree.SortByName;
-
-import java.util.Scanner;
+import family_tree.view.consoleUI.menu.menuWorkWithTree.*;
 
 public class Menu {
-    private boolean working;
     ConsoleUi consoleUi;
-    private Scanner scanner;
     private MenuSection mainMenu;
     private MenuSection menuChooseType;
     private MenuSection menuWorkWithTree;
@@ -29,15 +23,16 @@ public class Menu {
         this.menuWorkWithTree = new MenuSection(consoleUi);
 
         mainMenu.addCommand(new CreateNewTree(consoleUi));
-        mainMenu.addCommand(new ReadTreeFromFile(consoleUi));
+        mainMenu.addCommand(new ReadTreeOfPersonFromFile(consoleUi));
         mainMenu.addCommand(new Finish(consoleUi));
 
-        menuChooseType.addCommand(new CreateNewTree(consoleUi));
+        menuChooseType.addCommand(new CreateDogsTree(consoleUi));
         menuChooseType.addCommand(new CreatePersonTree(consoleUi));
         menuChooseType.addCommand(new Finish(consoleUi));
 
         menuWorkWithTree.addCommand(new AddItem(consoleUi));
         menuWorkWithTree.addCommand(new PrintTree(consoleUi));
+        menuWorkWithTree.addCommand(new SaveTree(consoleUi));
         menuWorkWithTree.addCommand(new SortByAge(consoleUi));
         menuWorkWithTree.addCommand(new SortByName(consoleUi));
         menuWorkWithTree.addCommand(new Finish(consoleUi));
@@ -45,7 +40,7 @@ public class Menu {
 
     public void openMainMenu() {
             consoleUi.printAnswer(mainMenu.menu());
-            String choice = scanner.nextLine();
+            String choice = consoleUi.getScanner().nextLine();
             int numChoice = Integer.parseInt(choice);
             mainMenu.execute(numChoice);
 
@@ -53,20 +48,16 @@ public class Menu {
 
     public void openMenuChooseType() {
         consoleUi.printAnswer(menuChooseType.menu());
-        String choice = scanner.nextLine();
+        String choice = consoleUi.getScanner().nextLine();
         int numChoice = Integer.parseInt(choice);
         menuChooseType.execute(numChoice);
     }
 
     public void openMenuWorkWithTree() {
         consoleUi.printAnswer(menuWorkWithTree.menu());
-        String choice = scanner.nextLine();
+        String choice = consoleUi.getScanner().nextLine();
         int numChoice = Integer.parseInt(choice);
         menuWorkWithTree.execute(numChoice);
-    }
-
-    public void finish() {
-        working = false;
     }
 
 }

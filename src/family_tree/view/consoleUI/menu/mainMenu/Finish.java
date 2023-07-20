@@ -10,6 +10,7 @@ public class Finish extends Command {
 
     @Override
     public void execute() {
+        getConsoleUi().finishMainMenu();
         getConsoleUi().finish();
     }
 }

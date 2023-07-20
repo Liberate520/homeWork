@@ -31,21 +31,32 @@ public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
             addPartner(person);
             addSiblings(person);
         }
+        else {
+            System.out.println("XXX");
+        }
     }
 
     private void addToParents(E person) {
-        for (E parent : person.getParents()) {
-            parent.addChild(person);
+        if (person.getParents() == null) {
+            person.setParents(new ArrayList<>());
+        } else {
+            for (E parent : person.getParents()) {
+                parent.addChild(person);
+            }
         }
     }
 
     private void addToChildren(E person) {
-        for (E children : person.getChildren()) {
-            if (person.getGender() == Gender.Female) {
-                children.addMother(person);
-            } else {
+        if (person.getChildren() == null) {
+            person.setChildren(new ArrayList<>());
+        } else {
+            for (E children : person.getChildren()) {
+                if (person.getGender() == Gender.Female) {
+                    children.addMother(person);
+                } else {
 
-                children.addFather(person);
+                    children.addFather(person);
+                }
             }
         }
     }

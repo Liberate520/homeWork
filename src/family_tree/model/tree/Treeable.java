@@ -66,4 +66,9 @@ public interface Treeable<E> {
     String getSiblingsInfo();
 
     String getInfo();
+    public void setParents(ArrayList<Person> parents);
+
+    public void setChildren(ArrayList<Person> children);
+
+    public void setSiblings(ArrayList<Person> siblings);
 }
