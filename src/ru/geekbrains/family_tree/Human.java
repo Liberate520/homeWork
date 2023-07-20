@@ -1,13 +1,14 @@
 package ru.geekbrains.family_tree;
 
-import java.time.YearMonth;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * Человек, обязательно имеющий имя, фамилию, пол и год рождения. Может иметь
- * отца, мать и детей.
+ * Человек, обязательно имеющий имя, фамилию, пол и дату рождения. Может иметь
+ * дату смерти, отца, мать и детей.
  */
-public class Human {
+public class Human implements Serializable {
 
     /**
      * Имя человека.
@@ -25,9 +26,14 @@ public class Human {
     private Sex sex;
        
     /**
-     * Год рождения человека.
+     * Дата рождения человека.
      */
-    private int birthYear;
+    private LocalDate birthDate;
+
+    /**
+     * Дата смерти человека.
+     */
+    private LocalDate deathDate;
 
     /**
      * Отец человека.
@@ -44,8 +50,9 @@ public class Human {
      */
     private ArrayList<Human> children;
 
-    public Human(String name, String surname, Sex sex, int birthYear,
-                 Human father, Human mother, ArrayList<Human> children) {
+    public Human(String name, String surname, Sex sex, LocalDate birthDate,
+                 LocalDate deathDate, Human father, Human mother,
+                 ArrayList<Human> children) {
         if (name.isEmpty()) {
             throw new RuntimeException("Не введено имя.");
         }
@@ -57,13 +64,16 @@ public class Human {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
-        this.birthYear = birthYear;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
         this.father = father;
         this.mother = mother;
         this.children = children;
     }
 
-    public Human(String name, String surname, Sex sex, int birthYear) {
+    public Human(String name, String surname, Sex sex, LocalDate birthDate,
+                 Human father, Human mother, ArrayList<Human> children) {
+        this(name, surname, sex, birthDate, null, father, mother, children);
         if (name.isEmpty()) {
             throw new RuntimeException("Не введено имя.");
         }
@@ -71,11 +81,21 @@ public class Human {
         if (surname.isEmpty()) {
             throw new RuntimeException("Не введена фамилия.");
         }
+    }
 
-        this.name = name;
-        this.surname = surname;
-        this.sex = sex;
-        this.birthYear = birthYear;
+    public Human(String name, String surname, Sex sex, LocalDate birthDate) {
+        this(name, surname, sex, birthDate, null, null, null);
+        if (name.isEmpty()) {
+            throw new RuntimeException("Не введено имя.");
+        }
+
+        if (surname.isEmpty()) {
+            throw new RuntimeException("Не введена фамилия.");
+        }
+    }
+
+    public Human() {
+        this(null, null, null, null);
     }
 
     /**
@@ -127,17 +147,31 @@ public class Human {
     }
 
     /**
-     * Возвращает год рождения человека.
+     * Возвращает дату рождения человека.
      */
-    public int getBirthYear() {
-        return birthYear;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     /**
-     * Устанавливает год рождения человека.
+     * Устанавливает дату рождения человека.
      */
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    /**
+     * Возвращает дату смерти человека.
+     */
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
+
+    /**
+     * Устанавливает дату смерти человека.
+     */
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
     }
 
     /**
@@ -181,27 +215,30 @@ public class Human {
     /**
      * Добавляет ребёнка человека.
      */
-    void addChild(Human child) {
+    public void addChild(Human child) {
         children.add(child);
     }
 
     /**
      * Устанавливает детей человека.
      */
-    void setChildren(ArrayList<Human> children) {
+    public void setChildren(ArrayList<Human> children) {
         this.children = children;
     }
 
     /**
      * Возвращает возраст человека.
      */
-    int getAge() {
-        return YearMonth.now().getYear() - birthYear;
+    public int getAge() {
+        if (deathDate == null) {
+            return LocalDate.now().getYear() - birthDate.getYear();
+        }
+        return deathDate.getYear() - birthDate.getYear();
     }
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s, %d", name, surname, sex, birthYear);
+        return String.format("%s, %s, %s, %s", name, surname, sex, birthDate);
     }
 
     @Override
@@ -216,6 +253,6 @@ public class Human {
 
         Human human = (Human) object;
         return name == human.name && surname == human.surname &&
-               sex == human.sex && birthYear == human.birthYear;
+               sex == human.sex && birthDate == human.birthDate;
     }
 }

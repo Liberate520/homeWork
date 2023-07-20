@@ -1,23 +1,24 @@
 package ru.geekbrains.family_tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Семейное древо, отражающее отношения членов семьи.
  */
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
     /*
      * Члены семьи.
      */
     private ArrayList<Human> familyMembers;
 
-    public FamilyTree() {
-        familyMembers = new ArrayList<>();
-    }
-
     public FamilyTree(ArrayList<Human> familyMembers) {
         this.familyMembers = familyMembers;
+    }
+
+    public FamilyTree() {
+        this(new ArrayList<>());
     }
 
     public void add(Human familyMember) {
@@ -28,5 +29,5 @@ public class FamilyTree {
     public String toString() {
         return familyMembers.toString();
     }
-    
+
 }
