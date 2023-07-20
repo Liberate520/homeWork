@@ -4,32 +4,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import family_tree.model.humans.Human;
+import family_tree.model.humans.Gender;
 import family_tree.model.humans.comparators.HumanComparatorByName;
 import family_tree.model.humans.comparators.HumanComparatorByYear;
 
-public class FamilyTree<T extends HumanItem> implements Iterable<T>, IFamilyTree<T> {
+public class FamilyTree<T extends HumanItem<T>> implements Iterable<T>, IFamilyTree<T> {
     private List<T> persons;
-    private List<Human> humans;
-    private HumanPrinter humanPrinter;
+    private String name;
+    private int birthYear;
+    private Gender gender;
+    private List<T> parents;
+    private List<T> children;
 
     public FamilyTree() {
         this.persons = new ArrayList<>();
-        this.humans = new ArrayList<>();
+
     }
 
-    public void addParent(Human parent) {
-        humans.add(parent);
+    public void addParent(T parent) {
+        persons.add(parent);
     }
 
-    public void addChild(Human child) {
-        humans.add(child);
+    public void addChild(T child) {
+        persons.add(child);
     }
 
     public List<T> getAllChildren(CharSequence parent) {
         List<T> children = new ArrayList<>();
         for (T human : persons) {
-            if (((HumanItem) human).getParents().contains(parent)) {
+            if (human.getParents().contains(parent)) {
                 children.add(human);
             }
         }
@@ -67,17 +70,37 @@ public class FamilyTree<T extends HumanItem> implements Iterable<T>, IFamilyTree
         return persons;
     }
 
-    public String getHumanInfo() {
-        return humanPrinter.getHumansInfo();
-    }
-
     @Override
     public void addHuman(T human) {
         persons.add(human);
     }
+    public String getHumansInfo() {
+        StringBuilder sb = new StringBuilder();
 
-    public void addHuman(Human human) {
-        humans.add(human);
+        sb.append("Имя: ").append(name).append("\n");
+        sb.append("Год рождения: ").append(birthYear).append("\n");
+        sb.append("Гендер: ").append(gender).append("\n");
+        sb.append("Родители: ");
+
+        if (parents.isEmpty()) {
+            sb.append("Неизвестно");
+        } else {
+            for (T parent : parents) {
+                sb.append(parent).append(", ");
+            }
+            sb.setLength(sb.length() - 2);
+        }
+        sb.append("\n");
+        sb.append("Дети: ");
+        if (children.isEmpty()) {
+            sb.append("Нет");
+        } else {
+            for (T child : children) {
+                sb.append(child.getName()).append(", ");
+            }
+            sb.setLength(sb.length() - 2);
+        }
+        return sb.toString();
     }
-
 }
+

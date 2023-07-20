@@ -1,10 +1,11 @@
 package family_tree.model.human_family;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface HumanItem<T> extends Serializable {
+import family_tree.model.humans.Gender;
+
+public interface HumanItem<T> {
     List<T> getParents();
 
     List<T> getAllHumans();
@@ -14,6 +15,10 @@ public interface HumanItem<T> extends Serializable {
     String getHumansInfo();
 
     String getName();
+
+    int getBirthYear();
+
+    Gender getGender();
 
     LocalDate getbirthDate();
 }

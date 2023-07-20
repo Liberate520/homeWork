@@ -11,7 +11,7 @@ import family_tree.model.human_family.HumanItem;
 
 
 public class FileHandler {
-    public static <T extends HumanItem> void saveToFile(FamilyTree<T> tree, String fileName) {
+    public static <T extends HumanItem> void saveToFile(FamilyTree tree, String fileName) {
         try (FileOutputStream fileOut = new FileOutputStream(fileName);
                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(tree);

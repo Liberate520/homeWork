@@ -5,12 +5,12 @@ import java.time.LocalDate;
 import family_tree.model.human_family.FamilyTree;
 import family_tree.model.human_family.HumanItem;
 
-public class Human<T extends HumanItem>  {
+public class Human<T extends HumanItem<T>> {
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private Gender gender;
-    private FamilyTree familyTree;
+    private FamilyTree<T> familyTree;
 
     public Human(String name, LocalDate birthDate, Gender gender) {
         this.name = name;
@@ -41,11 +41,11 @@ public class Human<T extends HumanItem>  {
         return gender;
     }
 
-    public void addChild(Human human) {
+    public void addChild(T human) {
         familyTree.addChild(human);
     }
 
-    public void addParent(Human human) {
+    public void addParent(T human) {
         familyTree.addParent(human);
     }
 
