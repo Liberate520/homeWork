@@ -1,5 +1,6 @@
 package ru.gb.family_tree.model.tree;
 
+
 import ru.gb.family_tree.model.human.comporators.ComparatorByAge;
 import ru.gb.family_tree.model.human.comporators.ComparatorByName;
 
@@ -8,46 +9,40 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-    public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E>{
+public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E>{
         private List<E> humanList;
-    public FamilyTree() {
-        humanList = new ArrayList<>();}
+    public FamilyTree() {this(new ArrayList<>());}
+        public FamilyTree(List<E> humanList) {this.humanList = humanList;}
 
     public void addHuman(E human) {
         if (!humanList.contains(human)) {
             humanList.add(human);
-//            // добавление связей
-//            addToParents(human);
+            // добавление связей
+            addToParents(human);
             addToChildren(human);
         }
     }
 
-//    public void addConnect(E human) {
-//        addToParents(human);
-//        addToChildren(human);
-//    }
+    private void addToParents(E human){
+        for (E parent: human.getParents()){
+            parent.addChild(human);
+        }
+    }
 
-//    private void addToParents(E human){
-//        for (E parent: human.getParents()){
-//            parent.addChild(human);
-//        }
-//
-//    }
-//
     private void addToChildren(E human){
         for (E child: human.getChildren()){
             child.addParent(human);
         }
     }
 
-//    public E getByFullName(String fullName) {
-//        for (E human: humanList){
-//            if (human.getFullName().equals(fullName)){
-//                return human;
-//            }
-//        }
-//        return null;
-//    }
+    public E getByFullName(String fullName) {
+        for (E human: humanList){
+            if (human.getFullName().equals(fullName)){
+                return human;
+            }
+        }
+        return null;
+    }
 
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -76,5 +71,3 @@ import java.util.List;
         humanList.sort(new ComparatorByAge());
     }
 }
-
-

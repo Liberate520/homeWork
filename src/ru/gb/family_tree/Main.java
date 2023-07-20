@@ -20,11 +20,11 @@ public class Main {
 
 //        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
 //        System.out.println(tree);
-
-//        tree.addHuman(new Human("Ivanov Ivan Petrovich", Gender.муж, LocalDate.of(1938, 10, 23), null, null, null));
-//        tree.addHuman(new Human("Ivanov Petr Sergeevich", Gender.муж, LocalDate.of(1958, 2, 12), null, tree.getByFullName("Ivanov Ivan Petrovich"), null));
-//        tree.addHuman(new Human("Ivanova Inna Vasil'evna", Gender.жен, LocalDate.of(1960, 9, 3), null, null, null));
-//        tree.addHuman(new Human("Ivanov Sergey Petrovich", Gender.муж, LocalDate.of(1982, 5, 30), null, tree.getByFullName("Ivanov Petr Sergeevich"), tree.getByFullName("Ivanova Inna Vasil'evna")));
+//
+//        tree.addHuman(new Human(1, "Ivanov Ivan Petrovich", Gender.муж, LocalDate.of(1938, 10, 23), null, null, null));
+//        tree.addHuman(new Human(2, "Ivanov Petr Sergeevich", Gender.муж, LocalDate.of(1958, 2, 12), null, tree.getByFullName("Ivanov Ivan Petrovich"), null));
+//        tree.addHuman(new Human(3, "Ivanova Inna Vasil'evna", Gender.жен, LocalDate.of(1960, 9, 3), null, null, null));
+//        tree.addHuman(new Human(4, "Ivanov Sergey Petrovich", Gender.муж, LocalDate.of(1982, 5, 30), null, tree.getByFullName("Ivanov Petr Sergeevich"), tree.getByFullName("Ivanova Inna Vasil'evna")));
 //
 //        System.out.println(tree.getInfo());
 //        tree.sortByFullName();

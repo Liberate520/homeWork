@@ -11,44 +11,44 @@ import java.util.List;
 public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private int id;
     private String fullName;
-    private  String father;
-    private String mother;
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
+    private Human father;
+    private Human mother;
     private List<Human> parents;
     private List<Human> children;
 
-
-
-    public Human(String fullName, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, String father,
-                 String mother) {
+    public Human(int id, String fullName, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath, Human father, Human mother) {
+        this.id = id;
         this.fullName = fullName;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
         this.father = father;
         this.mother = mother;
-//        parents = new ArrayList<>();
-//        if(father != null) {
-//            parents.add(father);
-//        }
-//        if(mother != null) {
-//            parents.add(mother);
-//        }
+        parents = new ArrayList<>();
+        if(father != null) {
+            parents.add(father);
+        }
+        if(mother != null) {
+            parents.add(mother);
+        }
         children = new ArrayList<>();
     }
 
-    public Human(String fullName, Gender gender, LocalDate dateOfBirth,String father, String mother) {this(fullName, gender, dateOfBirth, null, father, mother);
+    public Human(int id ,String fullName, Gender gender, LocalDate dateOfBirth,Human father, Human mother
+    ) {this(id, fullName, gender, dateOfBirth, null, father, mother);
     }
-
-
+    public Human(int id ,String fullName, Gender gender, LocalDate dateOfBirth) {
+        this(id, fullName, gender, dateOfBirth, null, null, null);
+    }
     public String getFullName() {return fullName;}
     public Gender getGender() {return gender;}
     public List<Human> getParents() {return parents;}
 
 
-
+    public int getId() {return id;}
     public List<Human> getChildren() {return children;}
     public void setDateOfBirth(LocalDate dateOfBirth) {this.dateOfBirth = dateOfBirth;}
     public void setDateOfDeath(LocalDate dateOfDeath) {this.dateOfDeath = dateOfDeath;}
@@ -93,17 +93,19 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     }
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(id);
+        stringBuilder.append(": ");
         stringBuilder.append(fullName);
         stringBuilder.append(", ");
         stringBuilder.append(getGender());
         stringBuilder.append(", ");
         stringBuilder.append(getAge());
         stringBuilder.append(", ");
-//        stringBuilder.append(getMotherInfo());
+        stringBuilder.append(getMotherInfo());
         stringBuilder.append("мать: ");
         stringBuilder.append(mother);
         stringBuilder.append(", ");
-//        stringBuilder.append(getFatherInfo());
+        stringBuilder.append(getFatherInfo());
         stringBuilder.append("отец: ");
         stringBuilder.append(father);
         stringBuilder.append(", ");
