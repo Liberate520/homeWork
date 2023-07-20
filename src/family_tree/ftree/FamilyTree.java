@@ -26,7 +26,9 @@ public class FamilyTree {
     
     public String getRelativesInfo(){
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n============\n");
         stringBuilder.append("Family tree:\n");
+        stringBuilder.append("\n------------\n");
         for (Person person: relations){
             stringBuilder.append(person);
             stringBuilder.append("\n============\n");
