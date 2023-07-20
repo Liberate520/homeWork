@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main {
@@ -44,12 +45,16 @@ public class Main {
 
         System.out.println(service.getInformation());
 
-        // FileHandler fileHandler = new FileHandler();
-        // fileHandler.write("JAVA/HW/homeWork/src/family.out", service);
 
-        // Serializable dataRead = (Serializable)
-        // fileHandler.read("JAVA/HW/homeWork/src/family.out");
-        // System.out.println("Прочитанные данные: " + dataRead);
+        //запись
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.write("family.out", service);
+
+        //чтение
+        Serializable dataRead = (Serializable) fileHandler.read("family.out");
+        System.out.println("Прочитанные данные: " + dataRead);
+
+
 
         service.sortByBirthdate();
         System.out.println(service.getInformation());

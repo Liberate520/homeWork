@@ -1,10 +1,10 @@
 import java.util.Comparator;
 
 
-public class HumanComparatorByAge implements Comparator<Human>{
+public class HumanComparatorByAge<Entity extends Entities> implements Comparator<Entity>{
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(Entity o1, Entity o2) {
         return Integer.compare(o1.getAge(), o2.getAge());
     }
 

@@ -1,21 +1,20 @@
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<Creature extends Entities> implements Serializable, Iterable<Creature> {
     
-    private ArrayList<Human> humanList;
+    private ArrayList<Creature> creatureList;
 
     public FamilyTree() {
-        humanList = new ArrayList<>();
+        creatureList = new ArrayList<>();
     }
 
-    public void add(Human human) {
-        if (!humanList.contains(human)) {
-            humanList.add(human);
+    public void add(Creature creature) {
+        if (!creatureList.contains(creature)) {
+            creatureList.add(creature);
         }
     }
 
@@ -23,7 +22,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public String toString() {
         StringBuilder strb = new StringBuilder();
-        for (Human human : humanList) {
+        for (Creature human : creatureList) {
             strb.append(human);
         }
         return strb.toString();
@@ -31,21 +30,21 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     
     @Override
-    public Iterator<Human> iterator() {
-        return humanList.iterator();
+    public Iterator<Creature> iterator() {
+        return creatureList.iterator();
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        creatureList.sort(new HumanComparatorByAge<>());
 
     }
 
     public void sortByBirthdate() {
-        humanList.sort(new HumanComparatorByBirthDate());
+        creatureList.sort(new HumanComparatorByBirthDate<>());
     }
 
     public void sortByName() {
-        Collections.sort(humanList);
+        creatureList.sort(new HumanComparatorByName<>());
     }
 
     

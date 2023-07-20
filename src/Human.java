@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, Entities {
     private String name;
     private String surname;
     private LocalDate dateOfBirth ;

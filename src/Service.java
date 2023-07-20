@@ -1,12 +1,13 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 
+
 public class Service implements Serializable {
 
-    private FamilyTree familyTree;
+    private FamilyTree<Entities> familyTree;
 
     public Service() {
-        familyTree = new FamilyTree();
+        familyTree = new FamilyTree<>();
     }
 
     public void addHuman(String name, String surname, LocalDate dateOfBirth, Human mother, Human father,
@@ -19,7 +20,7 @@ public class Service implements Serializable {
         StringBuilder stringBuilder = new StringBuilder();
         // stringBuilder.append(String.format("В семейном дереве %d объектов:\n",
         // humanList.size()));
-        for (Human human : familyTree) {
+        for (Entities human : familyTree) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
@@ -28,7 +29,7 @@ public class Service implements Serializable {
 
     public String toString() {
         StringBuilder strb = new StringBuilder();
-        for (Human human : familyTree) {
+        for (Entities human : familyTree) {
             strb.append(human);
         }
         return strb.toString();
