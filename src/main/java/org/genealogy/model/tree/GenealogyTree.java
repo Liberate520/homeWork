@@ -1,5 +1,6 @@
 package org.genealogy.model.tree;
 
+import org.genealogy.model.person.Human;
 import org.genealogy.model.tree.comparators.HumanComparatorByAge;
 import org.genealogy.model.tree.comparators.HumanComparatorByName;
 import org.genealogy.model.tree.iterators.TreeIterator;
@@ -24,6 +25,18 @@ public class GenealogyTree<E extends TreeItem> implements Iterable<E>, Serializa
         for (E person : people) {
             if (person.getId() == id) {
                 person.setDateOfBirth(day, month, year);
+            }
+        }
+    }
+
+    public void addChildren(int parentId, int childId) {
+        for (E parent : people) {
+            if (parent.getId() == parentId) {
+                for (E child : people) {
+                    if (child.getId() == childId) {
+                        parent.addChild((Human) child);
+                    }
+                }
             }
         }
     }

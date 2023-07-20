@@ -56,6 +56,11 @@ public class Service<E extends TreeItem> extends GenealogyTree<E> {
         tree.addDateOfBirth(id, day, month, year);
     }
 
+
+    public void addChildren(int parentId, int childId) {
+        tree.addChildren(parentId, childId);
+    }
+
     public void saveTreeToFile() throws IOException {
         Writeable save = new SaveLoadFile();
         save.saveToFile("family_tree.txt", tree);

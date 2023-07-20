@@ -29,6 +29,7 @@ public class Human implements TreeItem, Comparable<Human>, Serializable {
         this.id = id;
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -50,9 +51,19 @@ public class Human implements TreeItem, Comparable<Human>, Serializable {
         return 1;
     }
 
+    @Override
     public void addChild(Human child) {
         children.add(child);
         child.addParent(this);
+    }
+
+    public String getChildren() {
+        StringBuilder str = new StringBuilder();
+        str.append("Список ID детей: ");
+        for (Human child : children) {
+            str.append(child.getId()).append(", ");
+        }
+        return str.toString();
     }
 
     public void addParent(Human parent) {
@@ -66,6 +77,7 @@ public class Human implements TreeItem, Comparable<Human>, Serializable {
     public void setDateOfBirth(int day, int month, int year) {
         this.dateOfBirth = LocalDate.of(year, month, day);
     }
+
 
     public LocalDate getDateOfDeath() {
         return dateOfDeath;
@@ -99,9 +111,9 @@ public class Human implements TreeItem, Comparable<Human>, Serializable {
     @Override
     public String toString() {
         if (getDateOfDeath() != null) {
-            return getId() + ", " + getName() + " " + getLastName() + ", (" + getDateOfBirth() + " - " + getDateOfDeath() + "), " + getGender() + ", " + getExtraInfo();
+            return "ID: " + getId() + ", " + getName() + " " + getLastName() + ", Годы жизни: (" + getDateOfBirth() + " - " + getDateOfDeath() + "), Пол: " + getGender() + ", Дополнительная информация: " + getExtraInfo() + ", " + getChildren();
         } else {
-            return getId() + ", " + getName() + " " + getLastName() + ", (" + getAge() + "), " + getGender() + ", " + getExtraInfo();
+            return "ID: " + getId() + ", " + getName() + " " + getLastName() + ", Возраст: (" + getAge() + "), Пол: " + getGender() + ", Дополнительная информация: " + getExtraInfo() + ", " + getChildren();
         }
     }
 }

@@ -71,6 +71,14 @@ public class ConsoleUI implements View {
         presenter.addDateOfBirth(id, day, month, year);
     }
 
+    public void addChild() {
+        System.out.println("Введите ID родителя:");
+        int parentId = scanner.nextInt();
+        System.out.println("Введите ID ребенка:");
+        int childId = scanner.nextInt();
+        presenter.addChild(parentId, childId);
+    }
+
     public static void saveTreeToFile() throws IOException {
         presenter.saveTreeToFile();
         System.out.println("Дерево сохранено");

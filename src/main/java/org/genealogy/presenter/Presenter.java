@@ -39,6 +39,11 @@ public class Presenter {
         getHumanListInfo();
     }
 
+    public void addChild(int parentId, int childId) {
+        service.addChildren(parentId, childId);
+        getHumanListInfo();
+    }
+
     public void saveTreeToFile() throws IOException {
         service.saveTreeToFile();
     }
