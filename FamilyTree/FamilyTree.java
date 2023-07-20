@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import homeWork.FamilyTree.iterators.TreeItem;
 import homeWork.human.Human;
 import homeWork.human.comparators.HumanComparatorByAge;
 import homeWork.human.comparators.HumanComparatorByName;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private ArrayList<Human> familyTree;
+public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E> {
+    private ArrayList<E> familyTree;
 
-    public FamilyTree(ArrayList<Human> familyTree) {
+    public FamilyTree(ArrayList<E> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -19,11 +20,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         familyTree = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         familyTree.add(human);
     }
 
-    public boolean add(Human human) {
+    public boolean add(E human) {
         if (familyTree == null) {
             this.familyTree = new ArrayList<>();
         }
@@ -39,20 +40,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    private void addToParents(Human human) {
-        for (Human parent : human.getParents()) {
+    private void addToParents(E human) {
+        for (E parent : human.getParents()) {
             parent.addParent(human);
         }
     }
 
-    private void addToChildren(Human human) {
-        for (Human children : human.getChildren()) {
+    private void addToChildren(E human) {
+        for (E children : human.getChildren()) {
             children.addParent(human);
         }
     }
 
-    public Human getByName(String name) {
-        for (Human human : familyTree) {
+    public E getByName(String name) {
+        for (E human : familyTree) {
             if (human.getName().equalsIgnoreCase(name)) {
                 return human;
             }
@@ -65,7 +66,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sb.append("В дереве ");
         sb.append(familyTree.size());
         sb.append(" объектов: \n ");
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             sb.append(human);
             sb.append("\n");
         }
@@ -78,7 +79,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return familyTree.iterator();
     }
 
@@ -90,11 +91,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         familyTree.sort(new HumanComparatorByAge());
     }
 
-    public void addStudent(Human human) {
-    }
-
     public Object size() {
-        return null;
+        return familyTree.size();
     }
-
 }

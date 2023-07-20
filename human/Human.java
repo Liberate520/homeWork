@@ -2,14 +2,12 @@ package homeWork.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-
-import homeWork.FamilyTree.FamilyTree;
+import homeWork.FamilyTree.iterators.TreeItem;
 import homeWork.gender.Gender;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeItem {
     private String name;
     private Gender gender;
     private int age;
@@ -45,13 +43,14 @@ public class Human implements Serializable, Comparable<Human> {
     // public Human( String name, Gender gender, LocalDate birthDate) {
     // this( name, gender, birthDate, null, null, null, null);
     // }
-    public Human(String name, Gender gender, LocalDate birthdate, int age, int id) {
-        this.name = name;
-        this.birthdate = birthdate;
-        this.gender = gender;
-        this.age = getAge();
-        this.id = id;
-    }
+    // public Human(String name, Gender gender, LocalDate birthdate, int age, int
+    // id) {
+    // this.name = name;
+    // this.birthdate = birthdate;
+    // this.gender = gender;
+    // this.age = getAge();
+    // this.id = id;
+    // }
 
     public Human(String name, Gender gender, LocalDate birthdate, int age, List<Human> parents, List<Human> children) {
         this.name = name;
@@ -65,6 +64,9 @@ public class Human implements Serializable, Comparable<Human> {
     public Human(int i, String name2, int age2) {
     }
 
+    public Human(String string, Gender male, LocalDate of, int i, int j) {
+    }
+
     public boolean addChild(Human child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -72,10 +74,6 @@ public class Human implements Serializable, Comparable<Human> {
         }
         return false;
     }
-
-    // public String getName() {
-    // return name;
-    // }
 
     public boolean addParent(Human parent) {
         if (!parents.contains(parent)) {
@@ -206,9 +204,6 @@ public class Human implements Serializable, Comparable<Human> {
     public int compareTo(Human nextHuman) {
         return name.compareTo(nextHuman.name);
     }
-    // public int compareTo(Human human) {
-    // return human.name.compareTo(name);
-    // }
 
     public int getAge() {
         return age;
