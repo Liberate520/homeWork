@@ -1,10 +1,10 @@
-package familytree.Tree;
+package familytree.model;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Person implements Serializable, GetByOn{
+public class Person implements Serializable{
     private String name;
     private String surname;
     private String dateOfBirth;
@@ -17,20 +17,18 @@ public class Person implements Serializable, GetByOn{
     private List<Person> children;
 
 
-
-    //---Создаем коструктор---------------
     public Person(String name, String surname, String dateOfBirth
             , String dateOfDeath, String gender, String status
             ) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;  //---может быть пустым/null, если человек жив
+        this.dateOfDeath = dateOfDeath;
         this.gender = gender;
         this.status=status;
-        this.parents = new ArrayList<>(); //----может быть пустым/null, если родители неизвестны
-        this.partners = new ArrayList<>();//----список людей, с которыми он/она состояла/состоит в браке
-        this.children = new ArrayList<>();//---список детей
+        this.parents = new ArrayList<>();
+        this.partners = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
     public Person(String name, String surname, String dateOfBirth, String gender) {
@@ -49,8 +47,6 @@ public class Person implements Serializable, GetByOn{
         this.status = status;
     }
 
-
-    //---Геттеры и Сеттеры----------------
 
     public String getStatus() {
         return status;
@@ -73,21 +69,6 @@ public class Person implements Serializable, GetByOn{
 
     public String getSurname() {
         return surname;
-    }
-
-    @Override
-    public <E> void addChild(E child) {
-    //addChild(child);
-    }
-
-    @Override
-    public <E> void addPartner(E partner) {
-    //addPartner(partner);
-    }
-
-    @Override
-    public <E> void addParent(E parent) {
-    //addParent(parent);
     }
 
     public void setSurname(String surname) {
@@ -142,36 +123,23 @@ public class Person implements Serializable, GetByOn{
         this.children = children;
     }
 
-    //----Методы для добавления/удаления
-/**
- *Добавление родителей
- */
-    public <E> void addParent(Person parent){
+    public void addParent(Person parent){
+
         parents.add(parent);
     }
 
-    /**
-     * Удаление родителей
-     * @param parent
-     */
     public void removeParent(Person parent){
         parents.remove(parent);
     }
 
-    /**
-     * Изменение Родственников
-     * @param partner
-     */
-    public <E> void addPartner(Person partner){
-        /*this.partner = partner;
-        partner.partner =this;*/
+    public void addPartner(Person partner){
         partners.add(partner);
     }
 
     public void removePartner(Person partner){
         partners.remove(partner);
     }
-    public <E> void addChild(Person child){
+    public void addChild(Person child){
         children.add(child);
     }
     public void removeChild(Person child){
@@ -185,33 +153,10 @@ public class Person implements Serializable, GetByOn{
     }
 
 
-    /**
-     * Проверка жив человек или нет
-     * @return
-     */
     public boolean isAlive(){
         return dateOfDeath==null||dateOfDeath.isEmpty();
     }
-    //---Методы для получения списка предков и потомков
 
-   /* public List<Person> getAncestors(){
-        List<Person> ancestors = new ArrayList<>();
-        for(Person parent : partners){
-            //ancestors.add(parent);
-            ancestors.addAll(parent.getAncestors());
-        }
-        return ancestors;
-    }
-
-    public List<Person> getDescendants(){
-        List<Person> descendants = new ArrayList<>();
-        for(Person child : children){
-            children.add(child);
-            //children.addAll(child.getDescendants());
-        }
-        return descendants;
-    }*/
-    //=== Методы вывода информации о людях
     public void printInfo() {
         System.out.println("Человек: " + surname + " " + name + " ");
         //System.out.println("Фамилия: " + surname + " ");
@@ -219,7 +164,7 @@ public class Person implements Serializable, GetByOn{
         System.out.println("Дата смерти: " + (dateOfDeath != null ? dateOfDeath : "Живой" + " "));
         System.out.println("Пол: " + gender + " ");
         System.out.println("Родители: " + parentsToString());
-        System.out.println("Родственники: " + partnersToString());
+        //System.out.println("Родственники: " + partnersToString());
         System.out.println("Дети: " + childrenToString());
         System.out.println("----------------------------------------");
     }
@@ -254,7 +199,7 @@ public class Person implements Serializable, GetByOn{
         for (Person child : children) {
             sb.append(child.getName()).append(" ").append(child.getSurname()).append(", ");
         }
-        sb.setLength(sb.length() - 2); // Remove the last comma and space
+        sb.setLength(sb.length() - 2);
         return sb.toString();
     }
     //==================================================
