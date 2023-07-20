@@ -1,9 +1,9 @@
 package GenerationTree.Presenter;
 
-import GenerationTree.Person.FamilyTreeService;
-import GenerationTree.Person.PersonIdGenerator;
-import GenerationTree.Tree.Service;
-import GenerationTree.ui.View;
+import GenerationTree.Model.Person.FamilyTreeService;
+import GenerationTree.Model.Person.PersonIdGenerator;
+import GenerationTree.Model.Tree.Service;
+import GenerationTree.View.View;
 
 public class Presenter {
 

@@ -1,7 +1,7 @@
 package GenerationTree;
 
-import GenerationTree.ui.ConsoleUI;
-import GenerationTree.ui.View;
+import GenerationTree.View.ConsoleUI;
+import GenerationTree.View.View;
 
 public class Main {
     public static void main(String[] args) {

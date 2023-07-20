@@ -1,4 +1,4 @@
-package GenerationTree.ui.MenuRender;
+package GenerationTree.View.MenuRender;
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;

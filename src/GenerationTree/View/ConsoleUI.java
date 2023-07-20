@@ -1,4 +1,4 @@
-package GenerationTree.ui;
+package GenerationTree.View;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import GenerationTree.Presenter.Presenter;
-import GenerationTree.ui.MenuRender.ConsoleManager;
-import GenerationTree.ui.MenuRender.MenuRender;
+import GenerationTree.View.MenuRender.ConsoleManager;
+import GenerationTree.View.MenuRender.MenuRender;
 
 public class ConsoleUI implements View {
 

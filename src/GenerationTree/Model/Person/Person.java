@@ -1,12 +1,12 @@
-package GenerationTree.Person;
+package GenerationTree.Model.Person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import GenerationTree.Person.Structs.Gender;
-import GenerationTree.Tree.GenTreeItem;
-import GenerationTree.Tree.GenerationTree;
+import GenerationTree.Model.Person.Structs.Gender;
+import GenerationTree.Model.Tree.GenTreeItem;
+import GenerationTree.Model.Tree.GenerationTree;
 
 public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person> {
 

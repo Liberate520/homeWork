@@ -1,4 +1,4 @@
-package GenerationTree.Tree;
+package GenerationTree.Model.Tree;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
-import GenerationTree.Tree.Comparators.TreeItemComparatorByAge;
-import GenerationTree.Tree.Comparators.TreeItemComporatorByName;
-import GenerationTree.Tree.Iterators.TreeItemIterator;
+import GenerationTree.Model.Tree.Comparators.TreeItemComparatorByAge;
+import GenerationTree.Model.Tree.Comparators.TreeItemComporatorByName;
+import GenerationTree.Model.Tree.Iterators.TreeItemIterator;
 
 public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, Iterable<E> {
 

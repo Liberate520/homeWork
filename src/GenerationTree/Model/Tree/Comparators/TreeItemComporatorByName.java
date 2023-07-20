@@ -1,8 +1,8 @@
-package GenerationTree.Tree.Comparators;
+package GenerationTree.Model.Tree.Comparators;
 
 import java.util.Comparator;
 
-import GenerationTree.Tree.GenTreeItem;
+import GenerationTree.Model.Tree.GenTreeItem;
 
 public class TreeItemComporatorByName<E extends GenTreeItem<E>> implements Comparator<E> {
     @Override

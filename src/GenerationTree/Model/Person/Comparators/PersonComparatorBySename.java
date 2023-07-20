@@ -1,8 +1,8 @@
-package GenerationTree.Person.Comparators;
+package GenerationTree.Model.Person.Comparators;
 
 import java.util.Comparator;
 
-import GenerationTree.Person.Person;
+import GenerationTree.Model.Person.Person;
 
 public class PersonComparatorBySename implements Comparator<Person> {
 

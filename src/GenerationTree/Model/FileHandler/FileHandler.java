@@ -1,4 +1,4 @@
-package GenerationTree.FileHandler;
+package GenerationTree.Model.FileHandler;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

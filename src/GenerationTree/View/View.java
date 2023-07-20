@@ -1,4 +1,4 @@
-package GenerationTree.ui;
+package GenerationTree.View;
 
 public interface View {
     void start();

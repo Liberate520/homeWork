@@ -1,4 +1,4 @@
-package GenerationTree.ui.MenuRender;
+package GenerationTree.View.MenuRender;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

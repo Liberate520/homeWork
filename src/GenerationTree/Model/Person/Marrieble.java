@@ -1,4 +1,4 @@
-package GenerationTree.Person;
+package GenerationTree.Model.Person;
 
 import java.time.LocalDate;
 
