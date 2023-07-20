@@ -3,7 +3,6 @@ package homeWork.FamalyTree.presenter;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
-
 import homeWork.FamalyTree.model.Human.Gender;
 
 import homeWork.FamalyTree.model.Service.Service;
@@ -39,10 +38,10 @@ public class Presenter {
     }
 
     public void SaveData(File file){
-        service.SaveData(file);
+        service.SaveData(null, file);
     }
 
     public void LoadData(File file){
-        service.LoadData(file);
+        service.LoadData(null, file);
     }
 }

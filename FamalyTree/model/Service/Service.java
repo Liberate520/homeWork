@@ -8,6 +8,7 @@ import java.util.List;
 import homeWork.FamalyTree.model.FamalysTree.FamalyTree;
 import homeWork.FamalyTree.model.Human.Gender;
 import homeWork.FamalyTree.model.Human.Human;
+import homeWork.FamalyTree.model.Service.SaveLoad.FileHandler;
 
 public class Service {
     private long idHuman;
@@ -22,8 +23,18 @@ public class Service {
         famalyTree.addHumman(human);
         
     }
-    public String getHumanInfo() {
-        return null;
+    public String getHumanInfo(){
+        StringBuilder sb = new StringBuilder();
+        for (Human human: famalyTree){
+            sb.append(human);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public String toString(){
+        return getHumanInfo();
     }
 
     public void sortByAge() {
@@ -34,12 +45,14 @@ public class Service {
         famalyTree.sortByName();
     }
 
-    public void SaveData(File file){
-        famalyTree.SaveData(famalyTree, file);
+    public void SaveData(FamalyTree<Human> list, File file){
+        FileHandler<Human> fileHandler = new FileHandler<>();
+        fileHandler.Save(list, file);
     }
 
-    public void LoadData(File file){
-        famalyTree.LoadData(famalyTree, file);
+    public void LoadData(FamalyTree<Human> list, File file){
+        FileHandler<Human> fileHandler = new FileHandler<>();        
+        fileHandler.LoadData(list, file);        
     }
     
         

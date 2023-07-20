@@ -1,6 +1,6 @@
 package homeWork.FamalyTree.model.FamalysTree;
 
-import java.io.File;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import homeWork.FamalyTree.model.Human.HumanComporatoByAge;
 import homeWork.FamalyTree.model.Human.HumanIterator;
-import homeWork.FamalyTree.model.Service.SaveLoad.FileHandler;
+
 
 public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable<E>  {
     private long humanId;
@@ -48,22 +48,7 @@ public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable
         for (E child: human.getParents()){
             child.addChild(human);
         }
-    }
-
-
-    public String getHumanInfo(){
-        StringBuilder sb = new StringBuilder();
-        for (E human: humanList){
-            sb.append(human);
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public String toString(){
-        return getHumanInfo();
-    }
+    }    
 
     public List<E> getByName(String name){
         List<E> res = new ArrayList<>();
@@ -75,17 +60,7 @@ public class FamalyTree<E extends ItemTree<E>> implements Serializable, Iterable
         return res;
     }
 
-    public void SaveData(FamalyTree<E> list, File file){
-        FileHandler<E> fileHandler = new FileHandler<E>();
-        fileHandler.Save(list, file);
-    }
-
-    public void LoadData(FamalyTree<E> list, File file){
-        FileHandler<E> fileHandler = new FileHandler<E>();        
-        fileHandler.LoadData(list, file);
-    }
-
-    @Override
+        @Override
     public Iterator<E> iterator() {
         return new HumanIterator<>(humanList);
     }
