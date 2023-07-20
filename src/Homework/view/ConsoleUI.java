@@ -1,6 +1,7 @@
 package Homework.view;
 
 import Homework.model.Human.Gender;
+import Homework.model.Human.Human;
 import Homework.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -48,7 +49,12 @@ public class ConsoleUI implements View{
         presenter.getHumanInfo();
     }
 
+    public void saveInFile() { presenter.saveInFile(); }
+
+    public void readFile() {presenter.readFile();}
+
     public void addHuman(){
+
         System.out.println("Введите ФИО человека: ");
         String name = scanner.nextLine();
         System.out.println("Введите гендер человека (male/female): ");
@@ -61,7 +67,35 @@ public class ConsoleUI implements View{
         System.out.println("Укажите дату рождения человека в формате 0000-00-00: ");
         String birthString = scanner.nextLine();
         LocalDate birth = LocalDate.parse(birthString);
-        presenter.addHuman(name, gender, birth);
+
+        System.out.println("Укажите дату смерти человека в формате 0000-00-00, при ее наличии, в противном случае - нажмите клавишу ENTER: ");
+        String deathString = scanner.nextLine();
+        LocalDate death;
+        if (deathString.equals("")){death = null;}
+        else {death = LocalDate.parse(deathString);}
+
+        System.out.println("Укажите есть ли у человека родители. Поставьте (+), если да, в противном случае - нажмите клавишу ENTER: ");
+        String res = scanner.nextLine();
+        Human father = null;
+        Human mother = null;
+        if (!res.equals("")) {
+            System.out.println("Укажите ФИО отца в формате (Иванов И.И.): ");
+            String fatherString = scanner.nextLine();
+            father = presenter.addParents(fatherString);
+
+            System.out.println("Укажите ФИО матери в формате (Иванов И.И.): ");
+            String motherString = scanner.nextLine();
+            mother = presenter.addParents(motherString);
+        }
+
+
+        presenter.addHuman(name, gender, birth, death, father, mother);
+
+        Human human = new Human(name, gender, birth, death, father, mother);
+        if (mother != null && father != null){
+            presenter.addChildren(father ,human);
+            presenter.addChildren(mother, human);
+        }
     }
 
     private void hello(){

@@ -27,6 +27,5 @@ public class FileMethods extends FamilyTree implements Writable, Serializable {
         }
     }
 
-    // TODO отдельный метод по доставанию из файла информации об одном человеке
 
 }

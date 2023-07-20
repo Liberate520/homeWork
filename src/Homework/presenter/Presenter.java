@@ -1,6 +1,7 @@
 package Homework.presenter;
 
 import Homework.model.Human.Gender;
+import Homework.model.Human.Human;
 import Homework.model.service.Service;
 import Homework.view.View;
 
@@ -15,8 +16,8 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String name, Gender gender, LocalDate birth){
-        service.addHuman(name, gender, birth);
+    public void addHuman(String name, Gender gender, LocalDate birth, LocalDate death, Human father, Human mother){
+        service.addHuman(name, gender, birth, death, father, mother);
         getHumanInfo();
     }
 
@@ -35,6 +36,23 @@ public class Presenter {
     public void sortByChildren() {
         service.sortByChildren();
         getHumanInfo();
+    }
+
+    public void saveInFile(){
+        service.saveINFile();
+    }
+
+    public void readFile(){
+        service.readFile();
+    }
+
+    public Human addParents(String human){
+        Human Human = service.addParents(human);
+        return Human;
+    }
+
+    public void addChildren(Human human, Human child){
+        service.addChildren(human, child);
     }
 
 }

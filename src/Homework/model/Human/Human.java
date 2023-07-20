@@ -16,8 +16,6 @@ public class Human implements Serializable, FamilyTreeItem {
     private LocalDate death;
     private List<Human> parents;
     private List<Human> children;
-    //TODO добавить супруга
-    private Human spouse;
 
     public Human(String name, Gender gender, LocalDate birth, LocalDate death, Human father, Human mother) {
         this.name = name;
@@ -47,9 +45,9 @@ public class Human implements Serializable, FamilyTreeItem {
     }
 
 
-    public boolean addChild(Human child){
+    public boolean addChild(Object child){
         if(!children.contains(child)){
-            children.add(child);
+            children.add((Human)child);
             return true;
         }
         return false;
@@ -98,11 +96,6 @@ public class Human implements Serializable, FamilyTreeItem {
     }
 
     @Override
-    public boolean addChild(Object human) {
-        return false;
-    }
-
-    @Override
     public boolean addParent(Object human) {
         return false;
     }
@@ -114,11 +107,6 @@ public class Human implements Serializable, FamilyTreeItem {
     @Override
     public Object getSpouse() {
         return null;
-    }
-
-    @Override
-    public void setSpouse(Object human) {
-
     }
 
     public StringBuilder getChildAndAge(){

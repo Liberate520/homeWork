@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
-    private long humansId;
     private List<E> familyList;
 
     public FamilyTree() {
@@ -25,7 +24,6 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         }
         if(!familyList.contains(human)) {
             familyList.add(human);
-//            familyList.setId(humansId++);
 
             addToParents(human);
             addToChildren(human);
@@ -34,13 +32,18 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         return false;
     }
 
-    private void addToParents(E human){
+    public void addToParents(E human){
         for(E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(E human){
+    public boolean addToChild(E human, E child){
+        human.addChild(child);
+        return true;
+    }
+
+    public void addToChildren(E human){
         for(E child: human.getChildren()){
             child.addParent(human);
         }

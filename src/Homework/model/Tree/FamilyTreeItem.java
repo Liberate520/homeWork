@@ -16,8 +16,6 @@ public interface FamilyTreeItem<T> extends Serializable {
     LocalDate getBirth();
     List<T> getParents();
     List<T> getChildren();
-    T getSpouse();
-    void setSpouse(T human);
 
     int getAge();
 }
