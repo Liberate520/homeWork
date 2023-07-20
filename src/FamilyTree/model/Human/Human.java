@@ -2,11 +2,8 @@ package FamilyTree.model.Human;
 
 import FamilyTree.model.Human.interfacee.GetGroup;
 import FamilyTree.model.Human.other.Gender;
-import FamilyTree.model.Human.interfacee.Create;
 
-import java.util.List;
-
-public class Human implements Create, GetGroup {
+public class Human implements GetGroup {
     private int id;
     private Gender gender;
     private String genderr;
@@ -32,11 +29,6 @@ public class Human implements Create, GetGroup {
     @Override
     public int getAge() {
         return age;
-    }
-
-    @Override
-    public void create() {
-        System.out.println("готово");
     }
 
     public void setId(int id) {

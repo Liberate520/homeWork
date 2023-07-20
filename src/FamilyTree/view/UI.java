@@ -10,11 +10,13 @@ public class UI implements View {
     private Scanner sc;
     private Presenter presenter;
     private boolean flag;
+    private MMenu mMenu;
 
     public UI() {
         sc = new Scanner(System.in);
         presenter = new Presenter(this);
         flag = true;
+        mMenu = new MMenu(this);
     }
 
     @Override
@@ -26,35 +28,17 @@ public class UI implements View {
     public void Start() {
         System.out.println("Привет.");
         while (flag) {
-            System.out.println("Выберите команду:\n" +
-                    "1. Добавить в древо\n" +
-                    "2. Получить список древа\n" +
-                    "3. Отсортировать список по возрасту\n" +
-                    "4. Отсортировать список по имени");
+            System.out.println(mMenu.menu());
             int choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                    add();
-                    break;
-                case 2:
-                    getlistinfo();
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    sortByName();
-                    break;
-                case 5:
-                    System.out.println("До свзяи.");
-                    flag = false;
-                    break;
-                default:
-                    System.out.println("Такой комманды нет.");
-            }
+            mMenu.exct(choice);
         }
     }
+        public void end(){
+            System.out.println("До связи.");
+            flag = false;
+        }
 
-        public void add() {
+        public void add () {
             System.out.print("Введите имя: ");
             String name = sc.nextLine();
             System.out.print("Введите фамилию: ");
