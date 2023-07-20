@@ -11,11 +11,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    public List<Human> humanList;
+public class FamilyTree<E extends Human> implements Serializable, Iterable<E> {
+    public List<E> humanList;
 
 
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<E> humanList) {
         this.humanList = humanList;
     }
 
@@ -28,7 +28,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         tmpSb.append("Дерево содержит персон :");
         tmpSb.append(humanList.size());
         tmpSb.append("\n");
-        for (Human human : humanList) {
+        for (E human : humanList) {
             tmpSb.append(human.getInfo());
             tmpSb.append("\n");
         }
@@ -39,7 +39,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return getInfo();
     }
 
-    public boolean add(Human human) {
+    public boolean add(E human) {
         //       if(human==null){
         //          return false;}
         //      if(humanList.contains(human)){
@@ -51,35 +51,23 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    private void addToParents(Human human) {
-        for (Human parent : human.getParents()) {
-            parent.addChild(human);
-        }
-    }
-
-    private void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
-            child.addParent(human);
-        }
-    }
-
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(humanList);
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
         //Collections.sort(humanList);//РАБОТАЕТ
     }
 
     public void sortById() {
         //  humanList.sort(new HumanComparatorByName());
-        Collections.sort(humanList, new HumanComparatorById());
+        Collections.sort(humanList, new HumanComparatorById<>());
     }
 
     public void sortByBrithDate() {
         //  humanList.sort(new HumanComparatorByName());
-        Collections.sort(humanList, new HumanComparatorByBrithDate());
+        Collections.sort(humanList, new HumanComparatorByBrithDate<>());
     }
 //    public Human getByName(String name){
 //
