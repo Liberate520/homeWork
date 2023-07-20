@@ -4,12 +4,18 @@ import family_tree.family_tree.FamilyTree;
 import family_tree.human.Gender;
 import family_tree.human.Human;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree tree = testTree();
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.saveFile(tree,"src/tree.out");
+        //fileHandler.loadFile("tree.out");
+
         System.out.println(tree);
+
     }
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
