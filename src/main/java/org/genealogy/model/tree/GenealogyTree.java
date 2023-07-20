@@ -1,5 +1,6 @@
 package org.genealogy.model.tree;
 
+import org.genealogy.model.person.Gender;
 import org.genealogy.model.person.Human;
 import org.genealogy.model.tree.comparators.HumanComparatorByAge;
 import org.genealogy.model.tree.comparators.HumanComparatorByName;
@@ -29,6 +30,14 @@ public class GenealogyTree<E extends TreeItem> implements Iterable<E>, Serializa
         }
     }
 
+    public void addDateOfDeath(int id, int day, int month, int year) {
+        for (E person : people) {
+            if (person.getId() == id) {
+                person.setDateOfDeath(day, month, year);
+            }
+        }
+    }
+
     public void addChildren(int parentId, int childId) {
         for (E parent : people) {
             if (parent.getId() == parentId) {
@@ -37,6 +46,14 @@ public class GenealogyTree<E extends TreeItem> implements Iterable<E>, Serializa
                         parent.addChild((Human) child);
                     }
                 }
+            }
+        }
+    }
+
+    public void addGender(int id, Gender gender) {
+        for (E person : people) {
+            if (person.getId() == id) {
+                person.setGender(gender);
             }
         }
     }

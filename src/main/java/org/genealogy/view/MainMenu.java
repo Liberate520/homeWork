@@ -13,9 +13,11 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new AddDateOfBirth(consoleUI));
+        commandList.add(new AddDateOfDeath(consoleUI));
         commandList.add(new GetHumanInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
+        commandList.add(new AddGender(consoleUI));
         commandList.add(new AddChild(consoleUI));
         commandList.add(new SaveTreeToFile(consoleUI));
         commandList.add(new LoadTreeFromFile(consoleUI));

@@ -1,5 +1,6 @@
 package org.genealogy.model.service;
 
+import org.genealogy.model.person.Gender;
 import org.genealogy.model.person.Human;
 import org.genealogy.model.tree.GenealogyTree;
 import org.genealogy.model.tree.TreeItem;
@@ -54,6 +55,14 @@ public class Service<E extends TreeItem> extends GenealogyTree<E> {
 
     public void addDateOfBirth(int id, int day, int month, int year) {
         tree.addDateOfBirth(id, day, month, year);
+    }
+
+    public void addDateOfDeath(int id, int day, int month, int year) {
+        tree.addDateOfDeath(id, day, month, year);
+    }
+
+    public void addGender(int id, Gender gender) {
+        tree.addGender(id, gender);
     }
 
 

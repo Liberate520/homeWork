@@ -1,5 +1,6 @@
 package org.genealogy.view;
 
+import org.genealogy.model.person.Gender;
 import org.genealogy.presenter.Presenter;
 
 import java.io.IOException;
@@ -56,6 +57,7 @@ public class ConsoleUI implements View {
         System.out.println("Введите фамилию человека:");
         String lastName = scanner.nextLine();
         presenter.addHuman(firstName, lastName);
+        System.out.println("Сохранено");
     }
 
     public void addDateOfBirth() {
@@ -69,6 +71,30 @@ public class ConsoleUI implements View {
         System.out.println("Введите год:");
         int year = scanner.nextInt();
         presenter.addDateOfBirth(id, day, month, year);
+        System.out.println("Сохранено");
+    }
+
+    public void addDateOfDeath() {
+        System.out.println("Введите ID:");
+        int id = scanner.nextInt();
+        System.out.println("Введите дату смерти:");
+        System.out.println("Введите день:");
+        int day = scanner.nextInt();
+        System.out.println("Введите месяц:");
+        int month = scanner.nextInt();
+        System.out.println("Введите год:");
+        int year = scanner.nextInt();
+        presenter.addDateOfDeath(id, day, month, year);
+        System.out.println("Сохранено");
+    }
+
+    public void addGender() {
+        System.out.println("Введите ID:");
+        int id = scanner.nextInt();
+        System.out.println("Введите пол:");
+        String gender = scanner.nextLine();
+        presenter.addGender(id, Gender.valueOf(gender));
+        System.out.println("Сохранено");
     }
 
     public void addChild() {
@@ -77,6 +103,7 @@ public class ConsoleUI implements View {
         System.out.println("Введите ID ребенка:");
         int childId = scanner.nextInt();
         presenter.addChild(parentId, childId);
+        System.out.println("Сохранено");
     }
 
     public static void saveTreeToFile() throws IOException {
