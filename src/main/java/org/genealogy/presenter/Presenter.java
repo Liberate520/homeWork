@@ -17,7 +17,7 @@ public class Presenter {
 
     public void addHuman(String firstName, String lastName) throws IOException {
         service.addHuman(firstName, lastName);
-//        getHumanListInfo();
+        getHumanListInfo();
     }
 
     public void getHumanListInfo() {
@@ -37,22 +37,22 @@ public class Presenter {
 
     public void addDateOfBirth(int id, int day, int month, int year) {
         service.addDateOfBirth(id, day, month, year);
-//        getHumanListInfo();
+        getHumanListInfo();
     }
 
     public void addDateOfDeath(int id, int day, int month, int year) {
         service.addDateOfDeath(id, day, month, year);
-//        getHumanListInfo();
+        getHumanListInfo();
     }
 
     public void addGender(int id, Gender gender) {
         service.addGender(id, gender);
-//        getHumanListInfo();
+        getHumanListInfo();
     }
 
     public void addChild(int parentId, int childId) {
         service.addChildren(parentId, childId);
-//        getHumanListInfo();
+        getHumanListInfo();
     }
 
     public void saveTreeToFile() throws IOException {

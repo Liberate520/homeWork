@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
-    private static final String INPUT_ERROR = "Вы ввели неверное значение";
+    private static final String INPUT_ERROR = "";
     private Scanner scanner;
     private static Presenter presenter;
     private boolean work;
@@ -92,8 +92,16 @@ public class ConsoleUI implements View {
         System.out.println("Введите ID:");
         int id = scanner.nextInt();
         System.out.println("Введите пол:");
-        String gender = scanner.nextLine();
-        presenter.addGender(id, Gender.valueOf(gender));
+        System.out.println("Мужской пол: введите 1");
+        System.out.println("Женский пол: введите 2");
+        int gender = scanner.nextInt();
+        if (gender == 1) {
+            presenter.addGender(id, Gender.Male);
+        } else if (gender == 2) {
+            presenter.addGender(id, Gender.Female);
+        } else {
+            inputError();
+        }
         System.out.println("Сохранено");
     }
 

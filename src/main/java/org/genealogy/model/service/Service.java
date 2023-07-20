@@ -86,7 +86,7 @@ public class Service<E extends TreeItem> extends GenealogyTree<E> {
         }
         scanner.close();
         count = n;
-        System.out.println(n + " -----------");
+        System.out.println("Счетчик ID = " + n);
         a.close();
     }
 }
