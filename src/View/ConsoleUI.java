@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import Presenter.Presenter;
 
-public class ConsoleUI {
+public class ConsoleUI implements View {
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;
     private Presenter presenter;
@@ -105,6 +105,7 @@ public class ConsoleUI {
         System.out.print(menu.menu());
     }
 
+    @Override
     public void inputError() {
         System.out.println(INPUT_ERROR);
     }
@@ -207,7 +208,7 @@ public class ConsoleUI {
     }
 
     public void loadTree() {
-        if (presenter.loadTree("FamilyTree.out")) {
+        if (presenter.loadTree("Projects_OOP/Projects_OOP_HomeWork/src/FamilyTree.out")) {
             System.out.println("Загрузка дерева прошла успешно!");
         } else {
             System.out.println("При загрузке дерева произошла ошибка!");

@@ -4,16 +4,17 @@ import java.time.LocalDate;
 
 import Model.familyTree.FamilyTree;
 import Model.fileHandlers.FileHandler;
+import Model.fileHandlers.Writable;
 import Model.human.Gender;
 import Model.human.Human;
 
 public class Service {
     private FamilyTree<Human> familyTree;
-    private FileHandler fileHandler;
+    private Writable writable;
 
-    public Service() {
+    public Service(Writable writable) {
         familyTree = new FamilyTree<>();
-        fileHandler = new FileHandler();
+        this.writable = writable;
     }
 
     public boolean addItem(String name, String[] birthDateArray, String genderString) {
@@ -111,14 +112,14 @@ public class Service {
     }
 
     public boolean saveTree(String filePath) {
-        if (fileHandler.save(this.familyTree, filePath)) {
+        if (writable.save(this.familyTree, filePath)) {
             return true;
         }
         return false;
     }
 
     public boolean loadTree(String filePath) {
-        this.familyTree = (FamilyTree<Human>) fileHandler.read(filePath);
+        this.familyTree = (FamilyTree<Human>) writable.read(filePath);
         if (this.familyTree != null) {
             return true;
         }

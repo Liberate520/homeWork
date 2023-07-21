@@ -1,15 +1,18 @@
 package Presenter;
 
+import Model.fileHandlers.FileHandler;
+import Model.fileHandlers.Writable;
 import Model.service.Service;
 import View.ConsoleUI;
+import View.View;
 
 public class Presenter {
-    private ConsoleUI view;
+    private View view;
     private Service service;
 
-    public Presenter(ConsoleUI view) {
+    public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service(new FileHandler());
     }
 
     public boolean addItem(String name, String[] birthDateArray, String genderString) {
