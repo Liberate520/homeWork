@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     // класс где будут храниться и обрабатываться созданные объекты
     private List<Person> personList;
     FamilyTree(){
