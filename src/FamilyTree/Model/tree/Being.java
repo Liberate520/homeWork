@@ -10,6 +10,9 @@ public interface  Being  <T extends Being<T>>{
 
     public boolean addSpouse (T spouse);
 
+    public Integer getId() ;
+
+    public void setId(Integer id);
 
 
     public String getName() ;
@@ -36,6 +39,7 @@ public interface  Being  <T extends Being<T>>{
     public String getSpouseInfo();
 
     public boolean equals(Object o);
+
 }
 
 

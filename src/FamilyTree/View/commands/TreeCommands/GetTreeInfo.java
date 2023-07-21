@@ -1,6 +1,7 @@
-package FamilyTree.View.commands;
+package FamilyTree.View.commands.TreeCommands;
 
 import FamilyTree.View.ConsoleUI;
+import FamilyTree.View.commands.Command;
 
 public class GetTreeInfo extends Command {
     public GetTreeInfo(ConsoleUI consoleUI) {
@@ -9,6 +10,6 @@ public class GetTreeInfo extends Command {
     }
 
     public void execute(){
-        consoleUI.getStudentsListInfo();
+        consoleUI.getTreeInfo();
     }
 }

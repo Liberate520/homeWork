@@ -1,23 +1,24 @@
-package FamilyTree.View;
+package FamilyTree.View.Menu;
 
 
 
+import FamilyTree.View.ConsoleUI;
 import FamilyTree.View.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu {
-    private List<Command> commandList;
+public abstract class Menu {
+    List<Command> commandList;
 
-    public MainMenu(ConsoleUI consoleUI) {
+
+    public Menu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
-        commandList.add(new AddPerson(consoleUI));
-        commandList.add(new GetTreeInfo(consoleUI));
-        commandList.add(new SortByName(consoleUI));
-        commandList.add(new SortByAge(consoleUI));
-        commandList.add(new Finish(consoleUI));
+
     }
+
+
 
     public String menu(){
         StringBuilder stringBuilder = new StringBuilder();
@@ -30,7 +31,7 @@ public class MainMenu {
         return stringBuilder.toString();
     }
 
-    public void execute(int choice){
+    public void execute(int choice) throws IOException, ClassNotFoundException {
         Command command = commandList.get(choice-1);
         command.execute();
     }

@@ -2,9 +2,11 @@ package FamilyTree.View.commands;
 
 import FamilyTree.View.ConsoleUI;
 
+import java.io.IOException;
+
 public abstract class Command {
-    String description;
-    ConsoleUI consoleUI;
+    public String description;
+    public ConsoleUI consoleUI;
 
     public Command(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
@@ -14,5 +16,7 @@ public abstract class Command {
         return description;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws IOException, ClassNotFoundException;
+
+
 }

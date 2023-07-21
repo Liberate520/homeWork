@@ -1,5 +1,6 @@
 package FamilyTree;
 
+import FamilyTree.Model.File.FileHandler;
 import FamilyTree.Model.tree.Person;
 import FamilyTree.Model.tree.Tree;
 import FamilyTree.View.ConsoleUI;
@@ -17,39 +18,40 @@ public class main {
 
         View view = new ConsoleUI();
         view.start();
-      /*  Tree tree = new Tree ();
+//        Tree tree = new Tree ();
+//
+//        tree.addPerson (new Person("Иван Федорович Крузенштерн", Male, LocalDate.of(1975,07,10 )));
+//        tree.addPerson (new Person("Вероника Степановна Кулебякина", Female, LocalDate.of(1977,06,10 )));
+//        tree.addPerson (new Person("Дядя Федор", Male, LocalDate.of(1995,06,01 )));
+//        tree.addPerson (new Person("Жучка", Female, LocalDate.of(1997,06,01 )));
 
-        tree.addPerson (new Person("Иван Федорович Крузенштерн", Male, LocalDate.of(1975,07,10 )));
-        tree.addPerson (new Person("Вероника Степановна Кулебякина", Female, LocalDate.of(1977,06,10 )));
-        tree.addPerson (new Person(2"Дядя Федор", Male, LocalDate.of(1995,06,01 )));
-        tree.addPerson (new Person("Жучка", Female, LocalDate.of(1997,06,01 )));*/
+
+//        tree.getById(1).addChild (tree.getById(3));
+//        tree.getById(1).addChild (tree.getById(4));
+
+       // tree.getByName ("Иван Федорович Крузенщтерн").addDd (LocalDate.of(2022,07,10 ));
 
 
-        /*tree.getByName("Иван Федорович Крузенштерн").addChild (tree.getByName("Дядя Федор"));
-        tree.getByName("Иван Федорович Крузенштерн").addChild (tree.getByName("Жучка"));
+//        System.out.println(tree.getInfo());
+//        System.out.println(tree.getById(1).getChildrenInfo());
+//        System.out.println(tree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
 
-        //tree.getByName ("Иван Федорович Крузенщтерн").addDd (LocalDate.of(2022,07,10 ));
-       // tree.coonectSpouse ("Иван Федорович Крузенщтерн","Вероника Степановна Кулебякина");
+//        FileHandler fh= new FileHandler();
+//        fh.save(tree);
+////        System.out.println("tecn 4");
+//        Tree RessoredTree = fh.load ();
+////
+//        System.out.println(RessoredTree.getInfo());
+//        System.out.println(RessoredTree.getByName("1").getChildrenInfo());
+//        System.out.println(RessoredTree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
 
-        System.out.println(tree.getInfo());
-        System.out.println(tree.getByName("Иван Федорович Крузенштерн").getChildrenInfo());
-        System.out.println(tree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
+//        tree.sortAge();
+//        System.out.println(tree.getInfo());
+//        tree.sortName();
+//        System.out.println(tree.getInfo());
 
-        FileHandler fh= new FileHandler();
-        fh.save(tree);
-        Tree RessoredTree = fh.load ();
+     //   for (Object person: tree) System.out.println(((Person)(person)).getName());
 
-        System.out.println(RessoredTree.getInfo());
-        System.out.println(RessoredTree.getByName("Иван Федорович Крузенштерн").getChildrenInfo());
-        System.out.println(RessoredTree.getByName("Вероника Степановна Кулебякина").getChildrenInfo());
-
-        tree.sortAge();
-        System.out.println(tree.getInfo());
-        tree.sortName();
-        System.out.println(tree.getInfo());
-
-        for (Object person: tree) System.out.println(((Person)(person)).getName());
-*/
 
 
 

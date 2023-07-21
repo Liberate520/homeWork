@@ -5,7 +5,7 @@ import FamilyTree.View.ConsoleUI;
 public class Finish extends Command {
     public Finish(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Закончить работу";
+        description = "Выйти";
     }
 
     public void execute(){

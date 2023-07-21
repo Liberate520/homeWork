@@ -6,6 +6,7 @@ import FamilyTree.Model.sort.PersonIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
     public boolean addPerson (E person){
         if (person == null) { return false;}
         if (!treeList.contains(person)){
+            int maxId = treeList.stream()
+                    .mapToInt(E::getId)
+                    .max() //
+                    .orElse(0);
+            person.setId(maxId+1);
             treeList.add (person);
             addToParents(person);
             addToChild(person);
@@ -28,15 +34,15 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
         return false;
 
     }
-    private void addToParents(E person){
+    public void addToParents(E person){
         if (person.getMother()!= null){
-            person.getMother().addChild(person);}
+            getById(person.getMother().getId()).addChild(person);}
         if (person.getFather()!= null){
-            person.getFather().addChild(person);}
+            getById(person.getFather().getId()).addChild(person);}
 
     }
 
-    private void addToChild (E person){
+    public void addToChild (E person){
         for (Object child :person.getChildren()){
 
             ((Person)(child)).addParent(person);}
@@ -52,17 +58,17 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
         }
     return sb.toString();
     }
-    public  E getByName (String name){
+    public  E getById (Integer id){
         for (E person: treeList){
-            if (person.getName().equals(name)){return person;}
+            if (person.getId().equals(id)){return person;}
 
         }
         return null;
     }
 
 
-    public void sortAge() {
-        treeList.sort(new AgeComparator());
+    public  void sort(Comparator<E> comparator) {
+        treeList.sort(comparator);
 
     }
     public void sortName() {
@@ -74,5 +80,6 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
     public Iterator<E> iterator() {
         return new PersonIterator(treeList);
     }
+
 
 }

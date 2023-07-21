@@ -1,6 +1,7 @@
-package FamilyTree.View.commands;
+package FamilyTree.View.commands.TreeCommands;
 
 import FamilyTree.View.ConsoleUI;
+import FamilyTree.View.commands.Command;
 
 public class SortByAge extends Command {
     public SortByAge(ConsoleUI consoleUI) {

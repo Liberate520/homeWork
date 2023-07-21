@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Person implements Serializable, Being {
     private String name;
+        private Integer id;
         private Enum sex;
         private LocalDate birthday;
         private LocalDate deathday;
@@ -15,13 +16,16 @@ public class Person implements Serializable, Being {
         private List<Person> spouses;
 
     public Person(String name, Enum sex, LocalDate birthday) {
+
         this.name = name;
         this.sex = sex;
         this.birthday = birthday;
+        id = 0;
         deathday = null;
         children = new ArrayList<>();
         parents = new ArrayList<>();
         spouses =new ArrayList<>();
+
     }
 
     public Person() {
@@ -54,6 +58,13 @@ public class Person implements Serializable, Being {
 
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -105,8 +116,8 @@ public class Person implements Serializable, Being {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
+        return "id =" +id+ "{" +
+                ", name='" + name + '\'' +
                 ", sex=" + sex +
                 ", birthday=" + birthday +
                 ", deathday=" + deathday +
@@ -132,28 +143,36 @@ public class Person implements Serializable, Being {
     }
     public String getParentsnfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Родители: ");
-        if (parents.size()!=0 ){
+        sb.append("Родители у: ");
+        sb.append(this.getName());
+        sb.append(" : ");
+        if (parents.size()!=0 ) {
             sb.append(parents.get(0).getName());
-            for (int i=1; i<= parents.size(); i++ ){
+            for (int i = 1; i < parents.size(); i++) {
                 sb.append(", ");
                 sb.append(parents.get(i).getName());
             }
-            sb.append ("не известны");
+            return sb.toString();
         }
+            sb.append ("не известны");
+
         return sb.toString();
     }
     public String getSpouseInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Дети: ");
-        if (spouses.size()!=0 ){
+        sb.append("Супруги у: ");
+        sb.append(this.getName());
+        sb.append(" : ");
+        if (spouses.size()!=0 ) {
             sb.append(spouses.get(0).getName());
-            for (int i=1; i<= spouses.size(); i++ ){
+            for (int i = 1; i < spouses.size(); i++) {
                 sb.append(", ");
                 sb.append(spouses.get(i).getName());
             }
-            sb.append ("не известны");
+            return sb.toString();
         }
+            sb.append ("не известны");
+
         return sb.toString();
     }
 
@@ -164,6 +183,8 @@ public class Person implements Serializable, Being {
         Person person = (Person) o;
         return getName().equals(person.getName());
     }
+
+
 
 
 }

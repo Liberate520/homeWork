@@ -1,11 +1,16 @@
 package FamilyTree.View;
 
+import FamilyTree.Model.tree.Sex;
 import FamilyTree.Presenter.Presenter;
+import FamilyTree.View.Check.ChooseEnum;
+import FamilyTree.View.Menu.*;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 
 public class ConsoleUI implements View {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -14,12 +19,17 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
-    private MainMenu menu;
+
+    private boolean work2;
+    private Menu menu;
+
+
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
+        work2 = true;
         menu = new MainMenu(this);
     }
 
@@ -27,19 +37,49 @@ public class ConsoleUI implements View {
     public void printAnswer(String text) {
         System.out.println(text);
     }
+    public void showSubMenu () throws IOException, ClassNotFoundException {
+        work2 = true;
+        while (work2){
+            printMenu();
+            execute();
+        }
+
+    };
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         hello();
-        while (work){
+        while (work) {
             printMenu();
             execute();
         }
     }
 
+    public void person() throws IOException, ClassNotFoundException {
+        menu = new PersonMenu(this);
+        showSubMenu();
+
+
+    }
+    public void file() throws IOException, ClassNotFoundException {
+        menu = new FileMenu(this);
+       showSubMenu();
+
+
+        }
+
+
+    public void tree() throws IOException, ClassNotFoundException {
+        menu = new TreeMenu(this);
+        showSubMenu();
+
+    }
+
+
     public void finish() {
-        System.out.println("Приятно было пообщаться");
-        work = false;
+        if (menu.getClass()== MainMenu.class) {System.out.println("Приятно было пообщаться");work =false;}
+        else {menu =new MainMenu(this);work2 =false;}
+
     }
 
     public void sortByAge() {
@@ -50,35 +90,24 @@ public class ConsoleUI implements View {
         presenter.sortByName();
     }
 
-    public void getStudentsListInfo() {
-        presenter.treeGetInfo();
-    }
 
     public void addPerson() {
         System.out.println("Введите Фамилию Имя Отчество");
         String name = scanner.nextLine();
-        System.out.println("Выберите пол:" +
-                "1. -Мужской" +
-                "2. -Женский");
-        String sex = scanner.nextLine();
-        while ((sex=="1" || sex=="2)")) {
-            System.out.println("Вы ошиблись. Выберите пол:" +
-                    "1. -Мужской" +
-                    "2. -Женский");
-            sex = scanner.nextLine();
-
-        }
+        ChooseEnum.choose(Sex.class);
+        Sex sex = Sex.valueOf(scanner.nextLine());
         System.out.println("Введите дату рождения dd.mm.yyyy: ");
         LocalDate birthday = LocalDate.parse(scanner.nextLine(), formatter);
 
         presenter.addPerson(name, sex, birthday);
     }
 
-    private void hello(){
+    private void hello() throws IOException, ClassNotFoundException {
         System.out.println("Доброго времени суток!");
+        presenter.load();
     }
 
-    private void execute(){
+    private void execute() throws IOException, ClassNotFoundException {
         String line = scanner.nextLine();
         if (checkTextForInt(line)){
             int numCommand = Integer.parseInt(line);
@@ -114,5 +143,71 @@ public class ConsoleUI implements View {
 
     private void inputError(){
         System.out.println(INPUT_ERROR);
+    }
+
+    public void save() throws IOException, ClassNotFoundException {
+        presenter.save();
+        System.out.println("Сохранение выполнено");
+    }
+
+    public void load() throws IOException, ClassNotFoundException {
+        presenter.load();
+    }
+
+
+    public void addSpouse() {
+        System.out.println("Введите id человека для добавления супруга:");
+        Integer id1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите id  супруга:");
+        Integer id2 = Integer.parseInt(scanner.nextLine());
+
+        presenter.addSpouse(id1, id2);
+    }
+
+    public void addParents() {
+        System.out.println("Введите id человека для добавления родителя:");
+        Integer id1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите id родителя:");
+        Integer id2 = Integer.parseInt(scanner.nextLine());
+        presenter.addParents(id1, id2);
+    }
+
+    public void addChildren() {
+        System.out.println("Введите id человека для добавления ребенка:");
+        Integer id1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите id ребенка:");
+        Integer id2 = Integer.parseInt(scanner.nextLine());
+        presenter.addChildren(id1, id2);
+    }
+
+
+    public void showSpouse() {
+        System.out.println("Введите id человека для просмотра супруга:");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        presenter.showSpouse(id);
+
+    }
+
+    public void showChildren() {
+        System.out.println("Введите id человека для просмотра детей:");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        presenter.showChildren(id);
+    }
+
+    public void showAllPersonInfo() {
+        System.out.println("Введите id человека для просмотра полной информации:");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        presenter.showAllPersonInfo(id);
+    }
+
+    public void getTreeInfo() {
+        presenter.treeGetInfo();
+    }
+
+
+    public void ShowParents() {
+        System.out.println("Введите id человека для просмотра родителей:");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        presenter.showParents(id);
     }
 }

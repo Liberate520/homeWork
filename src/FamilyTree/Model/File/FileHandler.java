@@ -16,15 +16,22 @@ public class FileHandler implements Writeable
         objectOutputStream.writeObject((Object) (tree));
 
         objectOutputStream.close();
+        System.out.println("test5");
     }
 
     @Override
     public Tree load() throws IOException, ClassNotFoundException {
+
         ObjectInputStream objectInputStream = new ObjectInputStream(
+
                 new FileInputStream("Family.tree"));
+
         Tree tree = new  Tree ();
 
+
+
         tree = (Tree) objectInputStream.readObject();
+
 
         objectInputStream.close();
         return tree;
