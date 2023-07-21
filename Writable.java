@@ -1,8 +1,9 @@
+package homeWork;
+import java.io.IOException;
 import java.io.Serializable;
 
-/*
 public interface Writable {
-    Save();
-    Load();
+    void Save(Serializable object) throws IOException;
+
+    Object Load() throws IOException, ClassNotFoundException;
 }
-*/
