@@ -16,6 +16,7 @@ public class Main {
         Human child2 = new Human("Анастасия","Иванова", "Ивановна",LocalDate.of(2010,12,8),Gender.FEMALE);
         familyTree.addRelativeForPerson(parent1,child2,Relation.CHILD);
 
+        familyTree.getBrothersAndSister(child1).forEach(System.out::println);
 
     }
 }

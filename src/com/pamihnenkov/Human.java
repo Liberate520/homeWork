@@ -87,4 +87,13 @@ public class Human {
         result = 31 * result + gender.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Human{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
 }
