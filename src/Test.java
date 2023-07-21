@@ -1,8 +1,12 @@
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree familyTree = new FamilyTree();
+        FamilyTree copy;
+        FileReadWrite fileReadWrite = new FileReadWrite();
+
 
         Person human = new Person("Алексей", "Шишкарев",
                 "Юрьевич", LocalDate.of(1987, 7, 12),
@@ -28,12 +32,31 @@ public class Test {
         familyTree.addHumanList(human3);
         familyTree.addHumanList(human4);
 
+        //Выводим на экран human3
         System.out.println(human3);
+        System.out.println("=".repeat(20));
 
-        System.out.println(familyTree.findPerson("Виталий"));
+        //Записываем в файл дерево
+        fileReadWrite.writeTree(familyTree, "Tree.out");
+        //Изменяем имя human3
+        human3.setFirstName("123");
+        System.out.println(human3);
+        System.out.println("=".repeat(20));
 
-        System.out.println(familyTree.getHumanListInfo());
-        System.out.println(human2.getChildren());
+        //Считываем файл в копию дерева
+        copy = fileReadWrite.readTree( "Tree.out");
+
+        //Выводим копию на экран
+        System.out.println(copy.getHumanListInfo());
+
+//
+//
+//
+//
+//        System.out.println(familyTree.getHumanListInfo());
+//        System.out.println(familyTree.findPerson("Алексей"));
+
+//        System.out.println(human2.getChildren());
 
 
     }

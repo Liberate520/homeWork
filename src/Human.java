@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Human{
+public class Human implements Serializable{
     private Gender gender;
     private String firstName;
     private String lastName;
@@ -46,5 +47,9 @@ public class Human{
         return "Имя: " + firstName + "\nФамилия: " + lastName + "\nОтчество: "
                 + surName + "\nГод рождения: " + dateOfBirth +
                 "\nПол: " + gender;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }
