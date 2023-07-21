@@ -128,6 +128,10 @@ public class FamilyTree {
         return sb.toString();
     }
 
+    public List<Human> getHumanList() {
+        return humanList;
+    }
+
     @Override
     public String toString() { return getInfo(); }
 }

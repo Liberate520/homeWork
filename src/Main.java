@@ -1,13 +1,22 @@
 import human.Human;
 import human.Gender;
 import fam_tree.FamilyTree;
+import file_handler.FileHandler;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = testTree();
-        System.out.println(tree);
+        // FamilyTree tree = testTree();
+        // System.out.println(tree);
+        // List<Human> humanList = tree.getHumanList();
+        // FileHandler.saveToFile(humanList);
+
+        List<Human> loadedHumanList = FileHandler.loadFromFile();
+        FamilyTree loadedTree = new FamilyTree(loadedHumanList);
+        System.out.println("Loaded Tree:");
+        System.out.println(loadedTree);
     }
 
     static FamilyTree testTree() {
