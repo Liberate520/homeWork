@@ -200,7 +200,7 @@ public class ConsoleUI implements View {
     }
 
     public void saveTree() {
-        if (presenter.saveTree("Projects_OOP/Projects_OOP_HomeWork/src/FamilyTree.out")) {
+        if (presenter.saveTree("FamilyTree.out")) {
             System.out.println("Сохранение дерева прошло успешно!");
         } else {
             System.out.println("При сохранении дерева произошла ошибка!");
@@ -208,7 +208,7 @@ public class ConsoleUI implements View {
     }
 
     public void loadTree() {
-        if (presenter.loadTree("Projects_OOP/Projects_OOP_HomeWork/src/FamilyTree.out")) {
+        if (presenter.loadTree("FamilyTree.out")) {
             System.out.println("Загрузка дерева прошла успешно!");
         } else {
             System.out.println("При загрузке дерева произошла ошибка!");
