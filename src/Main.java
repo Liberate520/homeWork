@@ -1,6 +1,6 @@
-import family_tree.human.Human;
-import family_tree.human.Gender;
-import family_tree.fam_tree.FamilyTree;
+import human.Human;
+import human.Gender;
+import fam_tree.FamilyTree;
 
 import java.time.LocalDate;
 
