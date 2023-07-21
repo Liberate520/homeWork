@@ -1,31 +1,96 @@
 package Human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Human {
-    public String name;
-    private Human mother;
-    private Human father;
+public class Human implements Serializable {
+    private String name;
+    private List<Human> children;
     private Gender gender;
+    private LocalDate birthday;
+    private LocalDate deathDate;
+    private Status status;
+    private Human father;
+    private Human mother;
+    private Human spouse;
 
-    LocalDate birthday;
-    Status status;
-
-    public Human(String name, int year, int month, int day, Gender gender, Status status) {
+    public Human(String name, LocalDate birthday,
+                 Gender gender, Status status,
+                 LocalDate deathDate,
+                 Human father, Human mother) {
         this.name = name;
-        this.birthday = LocalDate.of(year, month, day);
+        this.birthday = birthday;
+        this.deathDate = deathDate;
+        if (father != null) {
+            this.father = father;
+        }
+        if (mother != null) {
+            this.mother = mother;
+        }
         this.gender = gender;
         this.status = status;
+        children = new ArrayList<>();
     }
 
-    public void Parents(Human mother, Human father) {
-        this.mother = mother;
+    public Human(String name, LocalDate birthday,
+                 Gender gender, Status status) {
+        this(name, birthday, gender, status, null, null, null);
+    }
+
+    public Human(String name, LocalDate birthday,
+                 Gender gender, Status status, Human father, Human mother) {
+        this(name, birthday, gender, status, null, father, mother);
+    }
+
+    public void addParents(Human father, Human mother) {
         this.father = father;
+        this.mother = mother;
     }
 
-    @Override
-    public String toString() {
+    public boolean setChild(Human ch) {
+        if (!(children.contains(ch))) {
+            this.children.add(ch);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void setChild(List<Human> childrens_s) {
+        for (Human child : childrens_s) {
+            if (!(children.contains(child))) {
+                children.add(child);
+            }
+        }
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    private int getPeriod(LocalDate birthday, LocalDate deathDate) {
+        Period diff = Period.between(birthday, deathDate);
+        return diff.getYears();
+    }
+
+    public void setSpouse(Human spouse) {
+        if ((this.spouse == null) || !(this.spouse.equals(spouse))) {
+            this.spouse = spouse;
+        }
+    }
+
+    public Human getSpouse() {
+        return spouse;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Имя: ");
         stringBuilder.append(name);
@@ -33,11 +98,8 @@ public class Human {
         stringBuilder.append(gender);
         stringBuilder.append(", Дата рождения: ");
         stringBuilder.append(birthday);
-        if (status.equals(Status.мертв)) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.printf("Обозначьте год смерти человека родившегося в %s: ", birthday.toString());
-            int death = scanner.nextInt();
-            int year = death - birthday.getYear();
+        if (status.equals(Status.dead)) {
+            int year = getPeriod(this.birthday, this.deathDate);
             stringBuilder.append(", Возраст на момент смерти: ");
             stringBuilder.append(year);
         } else {
@@ -49,13 +111,43 @@ public class Human {
         stringBuilder.append(", Статус: ");
         stringBuilder.append(status);
         stringBuilder.append(", Родители: ");
+        stringBuilder.append(" Мать: ");
         if (mother == null) {
-            stringBuilder.append("неизвестно");
+            stringBuilder.append("неизвестно, ");
         } else {
-            stringBuilder.append(mother.name);
-            stringBuilder.append(" и ");
-            stringBuilder.append(father.name);
+            stringBuilder.append(mother.getName());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.append(" Отец: ");
+        if (father == null) {
+            stringBuilder.append("неизвестно, ");
+        } else {
+            stringBuilder.append(father.getName());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.append("Дети: ");
+        StringBuilder childrens = new StringBuilder();
+        if (children.size() != 0) {
+            for (Human child : children) {
+                childrens.append(child.getName());
+                childrens.append(", ");
+            }
+            stringBuilder.append(childrens.toString());
+        } else {
+            stringBuilder.append("нет, ");
+        }
+        stringBuilder.append("Партнёр: ");
+        if (!(spouse == null)) {
+            stringBuilder.append(spouse.getName());
+        } else {
+            stringBuilder.append("нет.");
         }
         return stringBuilder.toString();
+
+    }
+
+    @Override
+    public String toString() {
+        return getInfo();
     }
 }

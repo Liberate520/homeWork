@@ -1,5 +1,5 @@
 package Human;
 
 public enum Status {
-    мертв, жив
+    dead, alive
 }

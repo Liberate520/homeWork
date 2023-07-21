@@ -2,15 +2,16 @@ package FamilyTree;
 
 import Human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
-    List<Human> familyTree = new ArrayList<>();
+public class FamilyTree implements Serializable {
+    private List<Human> familyTree;
 
-//    public FamilyTree() {
-//        this.familyTree = familyTree;
-//    }
+    public FamilyTree() {
+        familyTree = new ArrayList<>();
+    }
 
     public void addToList(Human human) {
         familyTree.add(human);
@@ -19,7 +20,7 @@ public class FamilyTree {
     public void findByName(String name) {
         boolean flag = false;
         for (Human member : familyTree) {
-            if (member.name.equalsIgnoreCase(name)) {
+            if (member.getName().equalsIgnoreCase(name)) {
                 flag = true;
                 System.out.println(member);
             }
@@ -29,9 +30,19 @@ public class FamilyTree {
         }
     }
 
-    public void getInfoFamilyTree() {
+    public String getInfoFamilyTree() {
+        StringBuilder info = new StringBuilder();
         for (Human human : familyTree) {
-            System.out.println(human);
+            info.append(human);
+            int length = human.getInfo().length();
+            info.append("\n");
+            String str = "";
+            for (int i = 0; i < length; i++) {
+                str += "-";
+            }
+            info.append(str);
+            info.append("\n");
         }
+        return info.toString();
     }
 }
