@@ -145,6 +145,7 @@ public class Human {
         sb.append(name);
         sb.append(", gender: ");
         sb.append(getGender());
+        sb.append(", age: ");
         sb.append(getAge());
         sb.append(", ");
         sb.append(getSpouseInfo());
