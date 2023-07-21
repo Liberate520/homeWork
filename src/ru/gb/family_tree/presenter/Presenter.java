@@ -2,7 +2,6 @@ package ru.gb.family_tree.presenter;
 
 import ru.gb.family_tree.model.Service;
 import ru.gb.family_tree.model.human.Gender;
-import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.view.View;
 
 import java.time.LocalDate;

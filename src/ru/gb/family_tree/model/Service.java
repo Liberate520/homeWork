@@ -9,28 +9,22 @@ import java.time.LocalDate;
 
 public class Service {
     private int idHuman;
+
+    public Service(int idHuman) {
+        this.idHuman = idHuman;
+    }
+
     public FamilyTree<Human> tree;
 
     public Service() {
         tree = new FamilyTree<>();
     }
 
+
     public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth){
         Human human = new Human(idHuman++, fullName ,gender, dateOfBirth);
         tree.addHuman(human);
     }
-
-
-
-//    public String getInfo() {
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("Семейное древо:\n");
-//        for (Human human: tree){
-//            stringBuilder.append(human.getInfo());
-//            stringBuilder.append("\n");
-//        }
-//        return stringBuilder.toString();
-//    }
 
     public String getInfo() {
         return tree.getInfo();
@@ -56,4 +50,5 @@ public class Service {
         tree = (FamilyTree) fileHandler.read(fileHandler.filePath);
         getInfo();
     }
+
 }

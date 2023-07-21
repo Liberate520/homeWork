@@ -23,6 +23,11 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         }
     }
 
+//    public void addConnect(E human) {
+//        addToParents(human);
+//        addToChildren(human);
+//    }
+
     private void addToParents(E human){
         for (E parent: human.getParents()){
             parent.addChild(human);
@@ -71,3 +76,5 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         humanList.sort(new ComparatorByAge());
     }
 }
+
+

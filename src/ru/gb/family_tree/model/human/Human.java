@@ -102,12 +102,12 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
         stringBuilder.append(getAge());
         stringBuilder.append(", ");
         stringBuilder.append(getMotherInfo());
-        stringBuilder.append("мать: ");
-        stringBuilder.append(mother);
+//        stringBuilder.append("мать: ");
+//        stringBuilder.append(mother);
         stringBuilder.append(", ");
         stringBuilder.append(getFatherInfo());
-        stringBuilder.append("отец: ");
-        stringBuilder.append(father);
+//        stringBuilder.append("отец: ");
+//        stringBuilder.append(father);
         stringBuilder.append(", ");
         stringBuilder.append(getChildrenInfo());
 

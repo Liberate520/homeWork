@@ -58,11 +58,7 @@ public class ConsoleUI implements View {
 
 //        System.out.println("Введите дату смертия");
 //        String deathDate = scanner.nextLine();
-//        LocalDate dateOfDeath = LocalDate.parse(deathDate);
-//        System.out.println("Введите фамилию, имя и отчество отца");
-//        String father = scanner.nextLine();
-//        System.out.println("Введите фамилию, имя и отчество матери");
-//        String mother = scanner.nextLine();
+//        LocalDate dateOfDeath = LocalDate.parse(deathDate, formatter);
 
         presenter.addHuman(fullName ,gender, dateOfBirth);
     }
