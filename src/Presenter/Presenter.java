@@ -1,9 +1,7 @@
 package Presenter;
 
 import Model.fileHandlers.FileHandler;
-import Model.fileHandlers.Writable;
 import Model.service.Service;
-import View.ConsoleUI;
 import View.View;
 
 public class Presenter {

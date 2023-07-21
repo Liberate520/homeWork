@@ -3,7 +3,6 @@ package Model.service;
 import java.time.LocalDate;
 
 import Model.familyTree.FamilyTree;
-import Model.fileHandlers.FileHandler;
 import Model.fileHandlers.Writable;
 import Model.human.Gender;
 import Model.human.Human;
