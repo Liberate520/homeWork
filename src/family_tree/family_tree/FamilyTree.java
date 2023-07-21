@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
     private  long humansId;
-    private List<E> humanList;
+    private  List<E> humanList;
 
     public FamilyTree(List<E> humanList){
         this.humanList = humanList;

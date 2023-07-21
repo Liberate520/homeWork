@@ -1,12 +1,14 @@
 package family_tree.human;
 
+import family_tree.family_tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class E implements Serializable {
+public class E implements Serializable, FamilyTreeItem {
     private long id;
     private String name;
     private Gender gender;
@@ -80,6 +82,16 @@ public class E implements Serializable {
         return null;
     }
 
+    @Override
+    public boolean addChild(Object human) {
+        return false;
+    }
+
+    @Override
+    public boolean addParent(Object human) {
+        return false;
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -90,6 +102,16 @@ public class E implements Serializable {
 
     public List<E> getChildren() {
         return children;
+    }
+
+    @Override
+    public Object getSpouse() {
+        return null;
+    }
+
+    @Override
+    public void getSpouse(Object human) {
+
     }
 
     public void setBirthDate(LocalDate birthDate) {

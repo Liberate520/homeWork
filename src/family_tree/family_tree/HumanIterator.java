@@ -7,7 +7,7 @@ import java.util.List;
 
 public class HumanIterator<E> implements Iterator<E> {
     private int index;
-    private List<E> humanList;
+    private final List<E> humanList;
     public HumanIterator(List<E> humanList){
         this.humanList = humanList;
     }
