@@ -1,9 +1,14 @@
-package view.console;
+package view.console.menus.mainMenu;
+
+// TODO разбить вот это большое меню на подменю, организовать навигацию по этим меню
 
 import java.util.ArrayList;
-import view.console.commands.*;
 
-public class MainMenu {
+import view.console.ConsoleUI;
+import view.console.menus.ConsoleMenu;
+import view.console.menus.mainMenu.commands.*;
+
+public class MainMenu implements ConsoleMenu {
     ConsoleUI consoleUI;
     private ArrayList<Command> commands = new ArrayList<Command>();
 
@@ -14,17 +19,18 @@ public class MainMenu {
         commands.add(new SaveTree(consoleUI));
         commands.add(new SortByHierarchyLevel(consoleUI));
         commands.add(new PrintTree(consoleUI));
-        commands.add(new AddNewHumanInTree(consoleUI));
-        commands.add(new SetCurrentHumanById(consoleUI));
-        commands.add(new GetCurrentHumanFullInfo(consoleUI));
-        commands.add(new SetBirthDateToCurrHuman(consoleUI));
-        commands.add(new SetDeathDateToCurrHuman(consoleUI));
-        commands.add(new SetParentToCurrHumanById(consoleUI));
-        commands.add(new AddChildToCurrHumanById(consoleUI));
+        commands.add(new AddNewItemInTree(consoleUI));
+        commands.add(new SetCurrentItemById(consoleUI));
+        commands.add(new GetCurrentItemFullInfo(consoleUI));
+        commands.add(new SetBirthDateToCurrItem(consoleUI));
+        commands.add(new SetDeathDateToCurrItem(consoleUI));
+        commands.add(new SetParentToCurrItemById(consoleUI));
+        commands.add(new AddChildToCurrItemById(consoleUI));
         commands.add(new Exit(consoleUI));
     }
 
-    public String getMenu() {
+    @Override
+    public String getMenuInfo() {
         StringBuilder sb = new StringBuilder();
         int i;
         for (i = 0; i < commands.size(); i++) {
@@ -39,16 +45,17 @@ public class MainMenu {
         return sb.toString();
     }
 
-    public void execute(int commandNumber) {
+    @Override
+    public void executeCommand(int commandNumber) {
         if (commandNumber > 0 && commandNumber < commands.size() + 1) {
             commands.get(commandNumber - 1).execute();
         }
         else if (commandNumber == commands.size() + 1) {
-            consoleUI.print(getMenu());
+            consoleUI.print(getMenuInfo());
         }
         else {
             consoleUI.print("Нет такой команды\nВот список команд:\n");
-            consoleUI.print(getMenu());
+            consoleUI.print(getMenuInfo());
         }
     }
 }

@@ -2,10 +2,12 @@ package view.console;
 
 import presenter.Presenter;
 import view.View;
+import view.console.menus.ConsoleMenu;
+import view.console.menus.mainMenu.MainMenu;
 
 public class ConsoleUI implements View {
     private Presenter presenter = new Presenter(this);
-    private MainMenu mainMenu = new MainMenu(this);
+    private ConsoleMenu mainMenu = new MainMenu(this);
     private boolean run = true;
 
     @Override
@@ -29,10 +31,10 @@ public class ConsoleUI implements View {
     public void start() {
         int command;
         print("Приложение генеалогическое древо запущено\nКоманды:\n");
-        print(mainMenu.getMenu());
+        print(mainMenu.getMenuInfo());
         while (run) {
             command = Integer.parseInt(input("Введите номер команды: "));
-            mainMenu.execute(command);
+            mainMenu.executeCommand(command);
         }
     }
 
@@ -58,45 +60,45 @@ public class ConsoleUI implements View {
         presenter.getTreeFullInfo();
     }
 
-    public void addNewHumanInTree() {
+    public void addNewItemInTree() {
         String firstName = input("Введите имя: ");
         String midName = input("Введите фамилию: ");
         String lastName = input("Введите отчество: ");
         String gender = input("Введите пол (м/ж): ");
-        presenter.addNewHumanInTree(firstName, midName, lastName, gender);
+        presenter.addNewItemInTree(firstName, midName, lastName, gender);
     }
 
-    public void setCurrentHumanById() {
+    public void setCurrentItemById() {
         int id = Integer.parseInt(input("Введите id: "));
-        presenter.setCurrentHumanById(id);
+        presenter.setCurrentItemById(id);
     }
 
-    public void getCurrentHumanFullInfo() {
-        presenter.getCurrentHumanFullInfo();
+    public void getCurrentItemFullInfo() {
+        presenter.getCurrentItemFullInfo();
     }
 
-    public void setBirthDateToCurrHuman() {
+    public void setBirthDateToCurrItem() {
         int day = Integer.parseInt(input("День: "));
         int month = Integer.parseInt(input("Месяц: "));
         int year = Integer.parseInt(input("Год: "));
-        presenter.setBirthDateToCurrHuman(day, month, year);
+        presenter.setBirthDateToCurrItem(day, month, year);
     }
 
-    public void setDeathDateToCurrHuman() {
+    public void setDeathDateToCurrItem() {
         int day = Integer.parseInt(input("День: "));
         int month = Integer.parseInt(input("Месяц: "));
         int year = Integer.parseInt(input("Год: "));
-        presenter.setDeathDateToCurrHuman(day, month, year);
+        presenter.setDeathDateToCurrItem(day, month, year);
     }
 
-    public void setParentToCurrHumanById() {
+    public void setParentToCurrItemById() {
         int id = Integer.parseInt(input("Введите id: "));
-        presenter.setParentToCurrHumanById(id);
+        presenter.setParentToCurrItemById(id);
     }
 
-    public void addChildToCurrHumanById() {
+    public void addChildToCurrItemById() {
         int id = Integer.parseInt(input("Введите id: "));
-        presenter.addChildToCurrHumanById(id);
+        presenter.addChildToCurrItemById(id);
     }
 
     public void exit() {

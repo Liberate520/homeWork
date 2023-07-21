@@ -1,29 +1,29 @@
 package model;
 
-import model.io.Loader;
-import model.io.Saver;
 import java.io.IOException;
 import model.interfaces.Loadable;
+import model.interfaces.Reader;
+import model.interfaces.Writer;
 import model.genTree.GenTree;
+import model.treeItems.GenTreeItem;
 import model.treeItems.Human;
 import model.treeItems.enums.Gender;
 
 public class Core {
-    private GenTree<Human> currentTree = null;
-    private Human currentHuman = null;
+    private GenTree<GenTreeItem> currentTree = null;
+    private GenTreeItem currentItem = null;
     private boolean saved = true;
 
     public boolean isSaved() {
         return saved;
     }
 
-    public String loadTree(String path) {
+    public String loadTree(Reader reader) {
         if (saved) {
-            Loader loader = new Loader();
             try {
-                Loadable restTree = loader.loadObj(path);
+                Loadable restTree = reader.loadObj();
                 if (restTree instanceof GenTree) {
-                    currentTree = (GenTree<Human>)restTree;
+                    currentTree = (GenTree<GenTreeItem>)restTree;
                     saved = true;
                     return "Древо загружено!";
                 }
@@ -39,12 +39,11 @@ public class Core {
         return "Текущее древо не сохранено!";
     }
 
-    public String saveTree(String path) {
+    public String saveTree(Writer writer) {
         if (currentTree != null) {
             if (!saved) {
-                Saver saver = new Saver();
                 try {
-                    saver.writeObj(currentTree, path);
+                    writer.writeObj(currentTree);
                     saved = true;
                     return "Древо сохранено!";
                 }
@@ -59,7 +58,7 @@ public class Core {
 
     public String newTree() {
         if (saved) {
-            currentTree = new GenTree<Human>();
+            currentTree = new GenTree<GenTreeItem>();
             saved = true;
             return "Новое древо создано!";
         }
@@ -81,13 +80,14 @@ public class Core {
         return "Древо не выбрано! Загрузите или создайте новое!";
     }
 
-    public String addNewHumanInTree(String firstName,
-                                    String midName,
-                                    String lastName,
-                                    String gender) {
+    // TODO сделать фабрику itemsFactory
+    public String addNewItemInTree(String firstName,
+                                   String midName,
+                                   String lastName,
+                                   String gender) {
         if (currentTree != null) {
             if (gender.equals("м") || gender.equals("ж")) {
-                Human human = createNewHuman(firstName, midName, lastName, gender);
+                Human human = createNewItem(firstName, midName, lastName, gender);
                 currentTree.addItem(human);
                 saved = false;
                 return "Новый человек добавлен!";
@@ -97,10 +97,11 @@ public class Core {
         return "Древо не выбрано! Загрузите или создайте новое!";
     }
 
-    private Human createNewHuman(String firstName,
-                                 String midName,
-                                 String lastName,
-                                 String gender) {
+    // TODO сделать фабрику itemsFactory
+    private Human createNewItem(String firstName,
+                                String midName,
+                                String lastName,
+                                String gender) {
         Gender genderEnum;
         if (gender.equals("м")) {
             genderEnum = Gender.man;
@@ -111,11 +112,11 @@ public class Core {
         return new Human(firstName, midName, lastName, genderEnum);
     }
 
-    public String setCurrentHumanById(int id) {
+    public String setCurrentItemById(int id) {
         if (currentTree != null) {
-            Human human = currentTree.getItemById(id);
+            GenTreeItem human = currentTree.getItemById(id);
             if (human != null) {
-                currentHuman = human;
+                currentItem = human;
                 return "Текущий чел выбран!";
             }
             return "Чел не найден!";
@@ -123,20 +124,20 @@ public class Core {
         return "Древо не выбрано! Загрузите или создайте новое!";
     }
 
-    public String getCurrentHumanFullInfo() {
-        if (currentHuman != null) {
-            return currentHuman.getFullInfo();
+    public String getCurrentItemFullInfo() {
+        if (currentItem != null) {
+            return currentItem.getFullInfo();
         }
         return "Текущий человек не выбран!";
     }
 
-    public String setParentToCurrHumanById(int id) {
-        if (currentHuman != null) {
-            int currId = currentHuman.getId();
-            if (id != currId && !currentHuman.getChildsIds().contains(currId)) {
-                Human parent = currentTree.getItemById(id);
+    public String setParentToCurrItemById(int id) {
+        if (currentItem != null) {
+            int currId = currentItem.getId();
+            if (id != currId && !currentItem.getChildsIds().contains(currId)) {
+                GenTreeItem parent = currentTree.getItemById(id);
                 if (parent != null) {
-                    currentHuman.setParent(parent);
+                    currentItem.setParent(parent);
                     saved = false;
                     return "Родитель установлен!";
                 }
@@ -147,15 +148,15 @@ public class Core {
         return "Текущий человек не выбран!";
     }
 
-    public String addChildToCurrHumanById(int id) {
-        if (currentHuman != null) {
-            int currId = currentHuman.getId();
-            int fatherId = currentHuman.getFatherId();
-            int motherId = currentHuman.getMotherId();
+    public String addChildToCurrItemById(int id) {
+        if (currentItem != null) {
+            int currId = currentItem.getId();
+            int fatherId = currentItem.getFatherId();
+            int motherId = currentItem.getMotherId();
             if (id != currId && id != fatherId && id != motherId) {
-                Human parent = currentTree.getItemById(id);
+                GenTreeItem parent = currentTree.getItemById(id);
                 if (parent != null) {
-                    currentHuman.setParent(parent);
+                    currentItem.setParent(parent);
                     saved = false;
                     return "Ребёнок добавлен!";
                 }
@@ -166,26 +167,26 @@ public class Core {
         return "Текущий человек не выбран!";
     }
 
-    public String setBirthDateToCurrHuman(int day, int month, int year) {
-        if (currentHuman != null) {
+    public String setBirthDateToCurrItem(int day, int month, int year) {
+        if (currentItem != null) {
             try {
-                currentHuman.setBirthDate(day, month, year);
+                currentItem.setBirthDate(day, month, year);
                 return "Дата рождения установлена!";
             }
-            catch (ArithmeticException e) {
+            catch (Exception e) {
                 return "Дата рождения после даты смерти!";
             }
         }
         return "Текущий человек не выбран!";
     }
 
-    public String setDeathDateToCurrHuman(int day, int month, int year) {
-        if (currentHuman != null) {
+    public String setDeathDateToCurrItem(int day, int month, int year) {
+        if (currentItem != null) {
             try {
-                currentHuman.setDeathDate(day, month, year);
+                currentItem.setDeathDate(day, month, year);
                 return "Дата смерти установлена!";
             }
-            catch (ArithmeticException e) {
+            catch (Exception e) {
                 return "Дата смерти перед датой рождения!";
             }
         }
@@ -198,42 +199,51 @@ public class Core {
         GenTree<Human> tree = new GenTree<Human>();
 
         Human sashka = new Human("Кондратьев", "Сашка", "Антонович", Gender.man);
-        sashka.setBirthDate(15, 07, 2022);
+        try {sashka.setBirthDate(15, 07, 2022);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(sashka);
 
         Human anton = new Human("Кондратьев", "Антон", "Викторович", Gender.man);
-        anton.setBirthDate(31, 07, 1992);
+        try {anton.setBirthDate(31, 07, 1992);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(anton);
         anton.addChild(sashka);
 
         Human nastya = new Human("Кондратьева", "Настя", "Юрьевна", Gender.woman);
-        nastya.setBirthDate(18, 10, 1993);
+        try {nastya.setBirthDate(18, 10, 1993);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(nastya);
         nastya.addChild(sashka);
 
         Human yuri = new Human("Нудненко", "Юрий", "Васильевич", Gender.man);
-        yuri.setBirthDate(02, 02, 1958);
-        yuri.setDeathDate(23, 06, 2012);
+        try {yuri.setBirthDate(02, 02, 1958);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
+        try {yuri.setDeathDate(23, 06, 2012);}
+        catch (Exception e) {System.out.println("Дата смерти перед датой рождения!");}
         tree.addItem(yuri);
         yuri.addChild(nastya);
 
         Human sveta = new Human("Нудненко", "Светлана", "Юрьевна", Gender.woman);
-        sveta.setBirthDate(14, 04, 1962);
+        try {sveta.setBirthDate(14, 04, 1962);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(sveta);
         sveta.addChild(nastya);
 
         Human viktor = new Human("Кондратьев", "Виктор", "Юрьевич", Gender.man);
-        viktor.setBirthDate(16, 05, 1972);
+        try {viktor.setBirthDate(16, 05, 1972);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(viktor);
         viktor.addChild(anton);
 
         Human tanya = new Human("Кондратьева", "Татьяна", "Александровна", Gender.woman);
-        tanya.setBirthDate(26, 04, 1973);
+        try {tanya.setBirthDate(26, 04, 1973);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(tanya);
         anton.setParent(tanya);
 
         Human ivan = new Human("Нудненко", "Иван", "Юрьевич", Gender.man);
-        ivan.setBirthDate(18, 10, 1993);
+        try {ivan.setBirthDate(18, 10, 1993);}
+        catch (Exception e) {System.out.println("Дата рождения после даты смерти!");}
         tree.addItem(ivan);
         ivan.setParent(yuri);
         ivan.setParent(sveta);

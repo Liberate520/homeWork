@@ -81,7 +81,7 @@ public class GenTree<T extends GenTreeItem> implements Saveable, Loadable, Itera
     // переопределение из Iterable
     @Override
     public Iterator<T> iterator() {
-        return new GenTreeIterator<>(items);
+        return new GenTreeIterator<T>(items);
     }
 
     // сортировки с использованием классов-компараторов

@@ -1,4 +1,4 @@
-package view.console.commands;
+package view.console.menus.mainMenu.commands;
 
 import view.console.ConsoleUI;
 

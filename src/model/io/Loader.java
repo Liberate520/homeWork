@@ -4,11 +4,17 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
 import model.interfaces.Loadable;
-import model.interfaces.Reading;
+import model.interfaces.Reader;
 
-public class Loader implements Reading {
+public class Loader implements Reader {
+    String path;
+
+    public Loader(String path) {
+        this.path = path;
+    }
+
     @Override
-    public Loadable loadObj(String path) throws ClassNotFoundException, IOException {
+    public Loadable loadObj() throws ClassNotFoundException, IOException {
         ObjectInputStream objInStream = new ObjectInputStream(new FileInputStream(path));
         Object restoredObj = objInStream.readObject();
         objInStream.close();

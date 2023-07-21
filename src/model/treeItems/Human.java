@@ -2,6 +2,7 @@ package model.treeItems;
 // TODO сделать обработку возраста человека и его состояния жизни
 
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.ArrayList;
 import model.treeItems.enums.Gender;
 import model.treeItems.enums.LifeState;
@@ -27,8 +28,9 @@ public class Human implements Comparable<Human>, GenTreeItem {
     private int motherId = 0;
     private int fatherId = 0;
 
-    private ArrayList<Human> childs = new ArrayList<Human>();
-    private ArrayList<Integer> childsIds = new ArrayList<Integer>();
+    // List интерфейсы для выполнения принципа OCP и DIP
+    private List<Human> childs = new ArrayList<Human>();
+    private List<Integer> childsIds = new ArrayList<Integer>();
 
     private int hierarchyLevel = 0;
 
@@ -53,26 +55,35 @@ public class Human implements Comparable<Human>, GenTreeItem {
         }
     }
 
+    @Override
     public void setId(int id) {this.id = id;}
 
+    @Override
     public int getId() {return id;}
 
+    @Override
     public int getFatherId() {return fatherId;}
 
+    @Override
     public int getMotherId() {return motherId;}
 
+    @Override
     public Gender getGender() {return gender;}
 
+    @Override
     public int getAge() {return 0;}
 
+    @Override
     public int getHierarchyLevel() {return hierarchyLevel;}
 
+    @Override
     public void setHierarchyLevel(int level) {hierarchyLevel = level;}
 
-    public void setBirthDate(int day, int month, int year) throws ArithmeticException {
+    @Override
+    public void setBirthDate(int day, int month, int year) throws Exception {
         GregorianCalendar birthDate = new GregorianCalendar(year, month - 1, day);
         if (this.deathDate != null && birthDate.after(this.deathDate)) {
-            throw new ArithmeticException("birthDate can not be after deathDate");
+            throw new Exception("birthDate can not be after deathDate");
         }
         else {
             this.birthDate = birthDate;
@@ -80,10 +91,11 @@ public class Human implements Comparable<Human>, GenTreeItem {
         }
     }
 
-    public void setDeathDate(int day, int month, int year) throws ArithmeticException {
+    @Override
+    public void setDeathDate(int day, int month, int year) throws Exception {
         GregorianCalendar deathDate = new GregorianCalendar(year, month - 1, day);
         if (this.birthDate != null && deathDate.before(this.birthDate)) {
-            throw new ArithmeticException("deathDate can not be before birthDate");
+            throw new Exception("deathDate can not be before birthDate");
         }
         else {
             this.deathDate = deathDate;
@@ -108,20 +120,21 @@ public class Human implements Comparable<Human>, GenTreeItem {
         return this.father;
     }
 
-    public void setMother(GenTreeItem mother) {
+    private void setMother(GenTreeItem mother) {
         this.mother = (Human)mother;
         motherId = mother.getId();
         mother.setHierarchyLevel(this.hierarchyLevel + 1);
         mother.addChild(this);
     }
 
-    public void setFather(GenTreeItem father) {
+    private void setFather(GenTreeItem father) {
         this.father = (Human)father;
         fatherId = father.getId();
         father.setHierarchyLevel(this.hierarchyLevel + 1);
         father.addChild(this);
     }
 
+    @Override
     public void setParent(GenTreeItem parent) {
         if (parent instanceof Human) {
             if (parent.getGender() == Gender.man) {
@@ -133,14 +146,16 @@ public class Human implements Comparable<Human>, GenTreeItem {
         }
     }
 
-    public ArrayList<Human> getChilds() {
+    public List<Human> getChilds() {
         return childs;
     }
 
-    public ArrayList<Integer> getChildsIds() {
+    @Override
+    public List<Integer> getChildsIds() {
         return childsIds;
     }
 
+    @Override
     public void addChild(GenTreeItem child) {
         if (child instanceof Human) {
             if (!(this.childs.contains((Human)child))) {
@@ -179,10 +194,12 @@ public class Human implements Comparable<Human>, GenTreeItem {
         return "id=" + id + " hl=" + hierarchyLevel + " " + getFullName() + " " + datesInfo();
     }
 
+    @Override
     public String getFullName() {
         return firstName + " " + midName + " " + lastName;
     }
 
+    @Override
     public String getFullInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("-----------------------------------------------------\n");
