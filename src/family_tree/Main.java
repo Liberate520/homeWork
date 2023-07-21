@@ -8,13 +8,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
+        String path = "src/tree.out";
         FamilyTree tree = testTree();
         FileHandler fileHandler = new FileHandler();
-        fileHandler.saveFile(tree,"src/tree.out");
-        //fileHandler.loadFile("tree.out");
-
+        fileHandler.saveFile(tree,path);
+        FamilyTree tree1 = fileHandler.loadFile(path);
         System.out.println(tree);
+        System.out.println();
+        System.out.println(tree1);
 
     }
     static FamilyTree testTree(){
