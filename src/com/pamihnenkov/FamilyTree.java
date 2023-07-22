@@ -5,30 +5,30 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class FamilyTree {
-    Set<Human> humanList = new HashSet<>();
+    private Set<Human> humanList = new HashSet<>();
 
     public FamilyTree(Human human) {
         addFamilyMember(human);
     }
 
-    Set<Human> getBrothersAndSister(Human person){
+    public Set<Human> getBrothersAndSister(Human person){
         return person.getParents().stream()
                 .map(Human::getChilds)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
 
-    void addParent (Human person){
-        if (person.getChilds().stream().anyMatch(humanList::contains)){
-            addFamilyMember(person);
-        } else System.err.println("Родственные связи не установлены. (Вероятно требуется добавить промежуточных родственников)");
-    }
+   // public void addParent (Human person){
+   //     if (person.getChilds().stream().anyMatch(humanList::contains)){
+   //         addFamilyMember(person);
+   //     } else System.err.println("Родственные связи не установлены. (Вероятно требуется добавить промежуточных родственников)");
+   // }
 
-    void addChild (Human person){
-        if (person.getParents().stream().anyMatch(humanList::contains)){
-            addFamilyMember(person);
-        } else System.err.println("Родственные связи не установлены. (Вероятно требуется добавить промежуточных родственников)");
-    }
+   // public void addChild (Human person){
+   //     if (person.getParents().stream().anyMatch(humanList::contains)){
+   //         addFamilyMember(person);
+   //     } else System.err.println("Родственные связи не установлены. (Вероятно требуется добавить промежуточных родственников)");
+   // }
 
     private void addFamilyMember (Human newMember){
         humanList.add(newMember);
