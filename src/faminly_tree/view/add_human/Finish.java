@@ -13,12 +13,5 @@ public class Finish extends HumanData{
     public void execute() {
         console.finishAddHuman(container.getName(), container.getSurname(), container.getPatronymic(),
                 container.getSex(), container.getBirth(), container.getDeath());
-        container.setName(null);
-        container.setName(null);
-        container.setName(null);
-        container.setName(null);
-        container.setName(null);
-
-
     }
 }
