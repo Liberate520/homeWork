@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Person implements Serializable, Comparable {
+public class Person implements Serializable, Comparable<Object> {
     private final long id;
     private final LocalDate dateOfBirth;
     private String name;

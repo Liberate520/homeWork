@@ -1,35 +1,33 @@
 package com.britenight.FamilyTree;
 
-import com.britenight.Person.Person;
-
 import java.util.List;
 import java.util.Objects;
 
-public class FamilyTreeNode implements Comparable {
-    private final Person person;
-    private final List<Relation> relations;
+public class FamilyTreeNode<E extends Comparable<Object>> implements Comparable<Object> {
+    private final E object;
+    private final List<Relation<E>> relations;
 
-    public FamilyTreeNode(Person person, List<Relation> relations) {
-        this.person = person;
+    public FamilyTreeNode(E object, List<Relation<E>> relations) {
+        this.object = object;
         this.relations = relations;
     }
 
-    public Person getPerson() {
-        return person;
+    public E getObject() {
+        return object;
     }
 
-    public List<Relation> getRelations() {
+    public List<Relation<E>> getRelations() {
         return relations;
     }
 
     @Override
     public String toString() {
-        return String.format("%s | %s - %s, %s", person.getId(), person.getName(), person.getGender(), person.getDateOfBirth());
+        return object.toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(person.getId(), person.getName(), person.getGender(), person.getDateOfBirth());
+        return object.hashCode();
     }
 
     @Override
@@ -39,6 +37,6 @@ public class FamilyTreeNode implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return this.person.compareTo(((FamilyTreeNode) o).getPerson());
+        return this.object.compareTo(((FamilyTreeNode<E>) o).getObject());
     }
 }

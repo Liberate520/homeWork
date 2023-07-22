@@ -1,5 +1,5 @@
 package com.britenight.FamilyTree;
 
 public enum RelationType {
-    Parent, Spouse, Sibling
+    Parent, Spouse, Sibling, Child
 }

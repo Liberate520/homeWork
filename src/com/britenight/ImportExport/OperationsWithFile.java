@@ -4,8 +4,8 @@ import com.britenight.FamilyTree.FamilyTree;
 
 import java.io.*;
 
-public final class OperationsWithFile {
-    public static void saveToFile(FamilyTree tree, String path) throws IOException {
+public final class OperationsWithFile<E extends Comparable<Object>> {
+    public void saveToFile(FamilyTree<E> tree, String path) throws IOException {
         FileOutputStream f = new FileOutputStream(new File(path));
         ObjectOutputStream o = new ObjectOutputStream(f);
 
@@ -15,11 +15,11 @@ public final class OperationsWithFile {
         f.close();
     }
 
-    public static FamilyTree readFromFile(String path) throws ClassNotFoundException, IOException {
+    public FamilyTree<E> readFromFile(String path) throws ClassNotFoundException, IOException {
         FileInputStream fi = new FileInputStream(new File(path));
         ObjectInputStream oi = new ObjectInputStream(fi);
 
-        FamilyTree fmt = (FamilyTree) oi.readObject();
+        FamilyTree<E> fmt = (FamilyTree<E>) oi.readObject();
 
         oi.close();
         fi.close();

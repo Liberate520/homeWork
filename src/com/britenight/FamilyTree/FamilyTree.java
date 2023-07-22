@@ -1,109 +1,111 @@
 package com.britenight.FamilyTree;
 
-import com.britenight.Person.Person;
-import com.sun.source.tree.ArrayAccessTree;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class FamilyTree implements Serializable, Iterable {
-    private final ArrayList<Person> people;
-    private final ArrayList<Relation> relations;
+public class FamilyTree<E extends Comparable<Object>> implements Serializable, Iterable<FamilyTreeNode<E>> {
+    private final ArrayList<E> objArray;
+    private final ArrayList<Relation<E>> relations;
+
     public FamilyTree() {
         relations = new ArrayList<>();
-        people = new ArrayList<>();
+        objArray = new ArrayList<>();
     }
 
-    public void addRelation(Relation relation) {
+    //region Relations
+    public void addRelation(Relation<E> relation) {
         relations.add(relation);
     }
 
-    public void removeRelation(Relation relation) {
+    public void removeRelation(Relation<E> relation) {
         relations.remove(relation);
     }
 
-    public List<Relation> getRelations() {
+    public List<Relation<E>> getRelations() {
         return relations;
     }
 
-    public List<Relation> getRelations(Person person, boolean isMainPerson) {
+    public List<Relation<E>> getRelations(E node, boolean isMainObject) {
         return relations.stream().filter(relation ->
-                isMainPerson && relation.getMainPerson().equals(person)
-                        || !isMainPerson && relation.getRelationPerson().equals(person)).collect(Collectors.toList());
+                isMainObject && relation.getMainObject().equals(node)
+                        || !isMainObject && relation.getRelationObject().equals(node)).collect(Collectors.toList());
     }
 
-    public List<Relation> getRelations(Person person, boolean isMainPerson, RelationType searchFor) {
+    public List<Relation<E>> getRelations(E node, boolean isMainObject, RelationType searchFor) {
         return relations.stream().filter(relation ->
-                (isMainPerson && relation.getMainPerson().equals(person) || !isMainPerson && relation.getRelationPerson().equals(person))
-                        && relation.getRelationPersonType() == searchFor).collect(Collectors.toList());
+                (isMainObject && relation.getMainObject().equals(node) || !isMainObject && relation.getRelationObject().equals(node))
+                        && relation.getRelationObjectType() == searchFor).collect(Collectors.toList());
+    }
+    //endregion
+
+    //region Objects
+    public void addObject(E node) {
+        objArray.add(node);
     }
 
-    public void addPerson(Person person) {
-        people.add(person);
-    }
-
-    public void removePerson(Person person) {
-        var tmp = relations.stream().filter(relation -> relation.getRelationPerson() == person
-                || relation.getMainPerson() == person).collect(Collectors.toList());
-        for (Relation i : tmp) {
+    public void removeObject(E node) {
+        var tmp = relations.stream().filter(relation -> relation.getRelationObject() == node
+                || relation.getMainObject() == node).collect(Collectors.toList());
+        for (Relation<E> i : tmp) {
             relations.remove(i);
         }
-        people.remove(person);
+        objArray.remove(node);
     }
 
-    public List<Person> getPeople() {
-        return people;
+    public List<E> getObjects() {
+        return objArray;
     }
+    //endregion
 
-    private List<Person> getRelativePeople(List<Relation> relations, boolean isMainPerson) {
-        List<Person> list = new ArrayList<>();
+    //region FamilyTreeNodes
+    private List<E> getRelativeObjects(List<Relation<E>> relations, boolean isMainObject) {
+        List<E> list = new ArrayList<>();
 
-        for (Relation i : relations) {
-            if (isMainPerson)
-                list.add(i.getRelationPerson());
+        for (Relation<E> i : relations) {
+            if (isMainObject)
+                list.add(i.getRelationObject());
             else
-                list.add(i.getMainPerson());
+                list.add(i.getMainObject());
         }
 
         return list;
     }
 
-    public List<Person> getRelativePeople(Person person, boolean isMainPerson, RelationType searchFor) {
-        return getRelativePeople(getRelations(person, isMainPerson, searchFor), isMainPerson);
+    public List<E> getRelativeObjects(E node, boolean isMainObject, RelationType searchFor) {
+        return getRelativeObjects(getRelations(node, isMainObject, searchFor), isMainObject);
     }
 
-    public List<Person> getRelativePeople(Person person, boolean isMainPerson) {
-        return getRelativePeople(getRelations(person, isMainPerson), isMainPerson);
+    public List<E> getRelativeObjects(E node, boolean isMainObject) {
+        return getRelativeObjects(getRelations(node, isMainObject), isMainObject);
     }
 
-    public ArrayList<FamilyTreeNode> getNodes() {
-        ArrayList<FamilyTreeNode> list = new ArrayList<>();
+    public ArrayList<FamilyTreeNode<E>> getNodes() {
+        ArrayList<FamilyTreeNode<E>> list = new ArrayList<>();
 
-        for (Person p : people) {
-            List<Relation> relations = getRelations(p, true);
-            list.add(new FamilyTreeNode(p, relations));
+        for (E p : objArray) {
+            List<Relation<E>> relations = getRelations(p, true);
+            list.add(new FamilyTreeNode<E>(p, relations));
         }
 
         return list;
     }
+    //endregion
 
+    //region Overrides
     @Override
-    public Iterator iterator() {
-        return new Iterator() {
-            final Iterator nodesIterator = getNodes().iterator();
+    public Iterator<FamilyTreeNode<E>> iterator() {
+        return new Iterator<>() {
+            final Iterator<FamilyTreeNode<E>> nodesIterator = getNodes().iterator();
             @Override
             public boolean hasNext() {
                 return nodesIterator.hasNext();
             }
 
             @Override
-            public Object next() {
-                return (FamilyTreeNode) nodesIterator.next();
+            public FamilyTreeNode<E> next() {
+                return nodesIterator.next();
             }
         };
     }
@@ -114,7 +116,8 @@ public class FamilyTree implements Serializable, Iterable {
     }
 
     @Override
-    public Spliterator spliterator() {
+    public Spliterator<FamilyTreeNode<E>> spliterator() {
         return getNodes().spliterator();
     }
+    //endregion
 }

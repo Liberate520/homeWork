@@ -5,36 +5,41 @@ import com.britenight.Person.Person;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Relation implements Serializable {
-    private final Person mainPerson;
-    private final Person relationPerson;
-    private final RelationType relationPersonType;
+public class Relation<E> implements Serializable {
+    private final E mainObject;
+    private final E relationObject;
+    private final RelationType relationObjectType;
 
-    public Relation(Person mainPerson, Person relationPerson, RelationType relationPersonType) {
-        this.mainPerson = mainPerson;
-        this.relationPerson = relationPerson;
-        this.relationPersonType = relationPersonType;
+    public Relation(E mainObject, E relationObject, RelationType relationObjectType) {
+        this.mainObject = mainObject;
+        this.relationObject = relationObject;
+        this.relationObjectType = relationObjectType;
     }
 
-    public Person getMainPerson() {
-        return mainPerson;
+    public E getMainObject() {
+        return mainObject;
     }
 
-    public Person getRelationPerson() {
-        return relationPerson;
+    public E getRelationObject() {
+        return relationObject;
     }
 
-    public RelationType getRelationPersonType() {
-        return relationPersonType;
+    public RelationType getRelationObjectType() {
+        return relationObjectType;
     }
 
     @Override
     public String toString() {
-        return String.format("%s has %s as %s", mainPerson, relationPerson, relationPersonType);
+        return String.format("%s has %s as %s", mainObject, relationObject, relationObjectType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mainPerson, relationPerson, relationPersonType);
+        return Objects.hash(mainObject, relationObject, relationObjectType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Relation && this.hashCode() == obj.hashCode();
     }
 }
