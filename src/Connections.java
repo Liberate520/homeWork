@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -5,7 +6,7 @@ import java.util.Map;
 /**
  * Класс типа данных, в котором хранятся все родственные связи конкретного человека.
  */
-public class Connections {
+public class Connections implements Serializable {
     private HashMap<ConnectionType, HashSet<Person>> connections;
 
     public Connections(ConnectionType key, Person person) {

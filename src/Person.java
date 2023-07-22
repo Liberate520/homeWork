@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 /**
  * Пока что ставлю даты просто в формате гггг int. Потому что не знаю всех дней рождений, и тем более смертей,
  * и не умею пока работать с LocalTime. Семейные связи полностью находятся в FamilyTree.
  */
-public class Person {
+public class Person implements Serializable {
     private String name, surname, maidenName, patrynomic;
     private Gender sex;
     private int yearBirth, yearDeath;
