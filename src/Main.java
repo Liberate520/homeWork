@@ -31,7 +31,7 @@ public class Main {
         System.out.println(family.showConnections(petr));
 
         FileHandler fh = new FileHandler();
-        System.out.println(fh.write(family));
+        System.out.println(fh.write(family) ? "Write OK" : "Failed to write");
 
         FamilyTree familyRead = (FamilyTree) fh.read();
         System.out.println(familyRead);
