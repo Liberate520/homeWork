@@ -1,9 +1,9 @@
-package family_tree.tree;
+package family_tree.model.tree;
 
-import family_tree.human.Child_type;
-import family_tree.human.Gender;
-import family_tree.human.Human;
-import family_tree.human.Parent_Type;
+import family_tree.model.human.Child_type;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
+import family_tree.model.human.Parent_Type;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -13,13 +13,8 @@ public interface Entity<E> {
 
     void setId(int id);
 
-    String getFullName();
 
-    String getFirstName();
-
-    String getSecondName();
-
-    String getFathersName();
+    String getName();
 
     Gender getGender();
 

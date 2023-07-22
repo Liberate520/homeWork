@@ -1,7 +1,7 @@
-package family_tree.human;
+package family_tree.model.human;
 
 
-import family_tree.tree.Entity;
+import family_tree.model.tree.Entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     private int id;
-    private String firstName, secondName, fathersName;
+    private String name;
     private LocalDate dateOfBirth, dateOfDeath;
     private boolean alive;
     private Gender gender;
@@ -23,12 +23,10 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     private boolean married;
     private HashMap<Human, Child_type> children;
 
-    public Human(String firstName, String secondName, String fathersName, LocalDate dateOfBirth,
+    public Human(String name, LocalDate dateOfBirth,
                  LocalDate dateOfDeath, Gender gender) {
         id = -1;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.fathersName = fathersName;
+        this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
         this.gender = gender;
@@ -39,8 +37,8 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
         this.hasBioMother = false;
         this.married = false;
     }
-    public Human(String firstName, String secondName, String fathersName, LocalDate dateOfBirth, Gender gender) {
-        this(firstName, secondName, fathersName, dateOfBirth, null, gender);
+    public Human(String name, LocalDate dateOfBirth, Gender gender) {
+        this(name, dateOfBirth, null, gender);
     }
 
     public HashMap<Human, Parent_Type> getParents() {
@@ -60,26 +58,10 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
         this.id = id;
     }
 
-    @Override
-    public String getFullName(){
-        return this.secondName + " " + this.firstName + " " + this.fathersName;
-    }
 
     @Override
-    public String getFirstName() {
-        return firstName;
-    }
-
-
-    @Override
-    public String getSecondName() {
-        return secondName;
-    }
-
-
-    @Override
-    public String getFathersName() {
-        return fathersName;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -96,10 +78,6 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     @Override
     public Boolean isMarried(){
         return this.married;
-    }
-
-    public void setSecondName(String newSecondName){
-        this.secondName = newSecondName;
     }
 
     public void addParent(Human parent, Parent_Type parentType){
@@ -206,9 +184,7 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
 
     public String nameInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Фамилия: ").append(this.secondName).append("\n");
-        sb.append("Имя: ").append(this.firstName).append("\n");
-        sb.append("Отчество: ").append(this.fathersName).append("\n");
+        sb.append("ФИО: ").append(this.name).append("\n");
         return sb.toString();
     }
 
@@ -238,10 +214,10 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     public String parentsInfo(){
         StringBuilder sb = new StringBuilder();
         for (Human parent : this.parents.keySet()) {
-            if(this.parents.get(parent).equals(Parent_Type.Biological_Mother)) sb.append("Родная мать: ").append(parent.getFullName()).append("\n");
-            else if(this.parents.get(parent).equals(Parent_Type.Biological_Father)) sb.append("Родной отец: ").append(parent.getFullName()).append("\n");
-            else if(this.parents.get(parent).equals(Parent_Type.Foster_Father)) sb.append("Приемный отец: ").append(parent.getFullName()).append("\n");
-            else if(this.parents.get(parent).equals(Parent_Type.Foster_Mother)) sb.append("Приемная мать: ").append(parent.getFullName()).append("\n");
+            if(this.parents.get(parent).equals(Parent_Type.Biological_Mother)) sb.append("Родная мать: ").append(parent.getName()).append("\n");
+            else if(this.parents.get(parent).equals(Parent_Type.Biological_Father)) sb.append("Родной отец: ").append(parent.getName()).append("\n");
+            else if(this.parents.get(parent).equals(Parent_Type.Foster_Father)) sb.append("Приемный отец: ").append(parent.getName()).append("\n");
+            else if(this.parents.get(parent).equals(Parent_Type.Foster_Mother)) sb.append("Приемная мать: ").append(parent.getName()).append("\n");
         }
         return sb.toString();
     }
@@ -249,8 +225,8 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     public String marriageInfo(){
         StringBuilder sb = new StringBuilder();
         if (this.married){
-            if(this.spouse.gender.equals(Gender.male)) sb.append("Муж: ").append(spouse.getFullName()).append("\n");
-            else sb.append("Жена: ").append(spouse.getFullName()).append("\n");
+            if(this.spouse.gender.equals(Gender.male)) sb.append("Муж: ").append(spouse.getName()).append("\n");
+            else sb.append("Жена: ").append(spouse.getName()).append("\n");
         }
         else {
             if(this.gender.equals(Gender.male)) sb.append("Не женат").append("\n");
@@ -266,10 +242,10 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
         }
         else {
             for(Human child : this.children.keySet()){
-                if(this.children.get(child).equals(Child_type.Biological_Son)) sb.append("Родной сын: ").append(child.getFullName()).append("\n");
-                else if(this.children.get(child).equals(Child_type.Biological_Daughter)) sb.append("Родная дочь: ").append(child.getFullName()).append("\n");
-                else if(this.children.get(child).equals(Child_type.Foster_Son)) sb.append("Приемный сын: ").append(child.getFullName()).append("\n");
-                else if(this.children.get(child).equals(Child_type.Foster_Daughter)) sb.append("Приемная дочь: ").append(child.getFullName()).append("\n");
+                if(this.children.get(child).equals(Child_type.Biological_Son)) sb.append("Родной сын: ").append(child.getName()).append("\n");
+                else if(this.children.get(child).equals(Child_type.Biological_Daughter)) sb.append("Родная дочь: ").append(child.getName()).append("\n");
+                else if(this.children.get(child).equals(Child_type.Foster_Son)) sb.append("Приемный сын: ").append(child.getName()).append("\n");
+                else if(this.children.get(child).equals(Child_type.Foster_Daughter)) sb.append("Приемная дочь: ").append(child.getName()).append("\n");
             }
         }
         return sb.toString();

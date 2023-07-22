@@ -1,11 +1,9 @@
-package family_tree.tree;
+package family_tree.model.tree;
 
 
-import family_tree.human.Gender;
-import family_tree.human.comparators.HumanComparatorByAge;
-import family_tree.human.comparators.HumanComparatorByFathersName;
-import family_tree.human.comparators.HumanComparatorByFirstName;
-import family_tree.human.comparators.HumanComparatorBySecondName;
+import family_tree.model.human.Gender;
+import family_tree.model.human.comparators.HumanComparatorByAge;
+import family_tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,12 +12,10 @@ import java.util.List;
 
 public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
     private int memberId;
-    private String familyName;
     private List<E> family;
 
-    public Tree(String familyName) {
+    public Tree() {
         this.family = new ArrayList<>();
-        this.familyName = familyName;
     }
 
     public void addFamilyMember(E member){
@@ -28,6 +24,16 @@ public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
             family.add(member);
             member.setId(memberId++);
         }
+    }
+    public E getFamilyMember(int id){
+        return family.get(id);
+    }
+
+    public int getFamilySize(){
+        return family.size();
+    }
+    public void clearFamily(){
+        family.clear();
     }
 
     public void wedding(E husband, E wife){
@@ -58,35 +64,14 @@ public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
             }
         }
         for (E sibling : siblings) {
-            if(sibling.getGender().equals(Gender.female)) System.out.printf("%s - Сестра\n", sibling.getFullName());
-            else if(sibling.getGender().equals(Gender.male)) System.out.printf("%s - Брат\n", sibling.getFullName());
+            if(sibling.getGender().equals(Gender.female)) System.out.printf("%s - Сестра\n", sibling.getName());
+            else if(sibling.getGender().equals(Gender.male)) System.out.printf("%s - Брат\n", sibling.getName());
         }
     }
 
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void sortByFirstName() {family.sort(new HumanComparatorByFirstName<E>());}
-    public void sortBySecondName() {family.sort(new HumanComparatorBySecondName<E>());}
-    public void sortByFathersName() {family.sort(new HumanComparatorByFathersName<E>());}
+    public void sortByName() {family.sort(new HumanComparatorByName<E>());}
 
     public void sortByAge() {family.sort(new HumanComparatorByAge<E>());}
-
-    @Override
-    public String toString() {
-        return treeInfo();
-    }
-    public String treeInfo(){
-        StringBuilder sb = new StringBuilder();
-        for (E member : this.family) {
-            sb.append(member.getId()).append(". ").append(member.getFullName()).append("\n");
-            sb.append(member);
-            sb.append("______________________________").append("\n");
-        }
-        return sb.toString();
-    }
-
     @Override
     public Iterator<E> iterator() {
         return new TreeIterator(family);

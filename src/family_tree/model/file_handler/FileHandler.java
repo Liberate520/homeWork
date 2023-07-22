@@ -1,6 +1,6 @@
-package family_tree.file_handler;
+package family_tree.model.file_handler;
 
-import family_tree.tree.Tree;
+import family_tree.model.tree.Tree;
 
 import java.io.*;
 
