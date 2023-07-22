@@ -1,9 +1,10 @@
-import java.lang.management.ThreadInfo;
+package human;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person extends Human{
+public class Person extends Human implements Comparable<Person> {
     private LocalDate dateOfdDeath;
     private Person mather;
     private Person father;
@@ -121,4 +122,8 @@ public class Person extends Human{
     }
 
 
+    @Override
+    public int compareTo(Person o) {
+        return getFirstName().compareTo(o.getFirstName());
+    }
 }

@@ -1,6 +1,8 @@
+package tree;
+
 import java.io.*;
 
-public class FileReadWrite implements Writable, Readable{
+public class FileReadWrite implements Writable, Readable {
 
     @Override
     public FamilyTree readTree(String fileName) throws IOException, ClassNotFoundException {
