@@ -11,15 +11,13 @@ public class Human implements Serializable{
     private String middleName;
     private LocalDate born;
     private LocalDate death;
-    private String gender;
+    private Gender gender;
 
     public Human(String firstName, String lastName, String middleName, LocalDate born, LocalDate death, String gender) {
         if (gender == "male" || gender == "Male") {
-            this.gender = "male";
+            this.gender = Gender.male;
         } else if (gender == "female" || gender == "Female") {
-            this.gender = "female";
-        } else {
-            this.gender = "male";
+            this.gender = Gender.female; 
         }
         id = -1;
         this.firstName = firstName;
@@ -46,7 +44,7 @@ public class Human implements Serializable{
     }
 
 
-    public String getGender() {
+    public Gender getGender() {
         return this.gender;
     }
 

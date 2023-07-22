@@ -24,15 +24,15 @@ public class Node implements Serializable, Comparable<Node>{
 
     public void addParent(Node parent) {
         parent.children.add(this);
-        if (this.father == null && parent.people.getGender() == "male") {
+        if (this.father == null && parent.people.getGender() == Gender.male) {
             this.father = parent;
-        } else if (this.mother == null && parent.people.getGender() == "female") {
+        } else if (this.mother == null && parent.people.getGender() == Gender.female) {
             this.mother = parent;
         }
     }
 
     public void addChild(Node child, Node parent) {
-        if (this.people.getGender() == "female") {
+        if (this.people.getGender() == Gender.female) {
             child.mother = this;
             child.father = parent;
         } else {
@@ -44,7 +44,7 @@ public class Node implements Serializable, Comparable<Node>{
     }
 
     public void addChildOneParent(Node child) {
-        if (this.people.getGender() == "female") {
+        if (this.people.getGender() == Gender.female) {
             child.mother = this;
         } else {
             child.father = this;
