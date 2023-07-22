@@ -1,3 +1,9 @@
+import enums.Gender;
+import interfaces.Writable;
+import treeWorkspace.FamilyTree;
+import treeWorkspace.Person;
+import treeWorkspace.RecordTree;
+
 public class Test {
     public static void main(String[] args) {
         Person p1 = new Person("Александр", Gender.Male, null, null);
@@ -8,17 +14,7 @@ public class Test {
         tree.setPerson(p1, p2, p3, p4);
         // Демонстрация чтения и записи
         Writable write = new RecordTree();
-        write.saveTree(tree, ".//src//SavedTrees//FamilyTree.bin");
-        write.loadTree(".//src//SavedTrees//FamilyTree.bin");
-//        RecordTree recordTree = new RecordTree();
-//        recordTree.saveTree(tree, ".//src//SavedTrees//FamilyTree.bin");
-//        FamilyTree tree2 = (FamilyTree) recordTree.loadTree(".//src//SavedTrees//FamilyTree.bin");
-//        System.out.println(tree2.showAllTree());
-        // Демонстрация методов взаимодействия с деревом
-//        System.out.println(tree.showAllTree());
-//        System.out.println(tree.getParents(p4));
-//        System.out.println(tree.getBrothersAndSisters(p3));
-//        System.out.println(tree.getChildren(p2));
-
+        write.saveTree(tree, ".//src//SavedTrees//treeWorkspace.FamilyTree.bin");
+        write.loadTree(".//src//SavedTrees//treeWorkspace.FamilyTree.bin");
     }
 }

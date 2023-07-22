@@ -1,3 +1,7 @@
+package treeWorkspace;
+
+import enums.Gender;
+
 import java.io.Serializable;
 
 public class Person implements Serializable {

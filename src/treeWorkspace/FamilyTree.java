@@ -1,3 +1,5 @@
+package treeWorkspace;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,10 +8,10 @@ import java.util.List;
 public class FamilyTree implements Serializable {
     // класс где будут храниться и обрабатываться созданные объекты
     private List<Person> personList;
-    FamilyTree(){
+    public FamilyTree(){
         personList = new ArrayList<>();
     }
-    void setPerson(Person... person) {
+    public void setPerson(Person... person) {
         Collections.addAll(personList, person);
     }
 
@@ -22,7 +24,7 @@ public class FamilyTree implements Serializable {
             return String.format(
                     "Parents %s - Father: %s, Mother: %s",person.getName(),
                     person.getFather(), person.getMother());
-        } else return "Person not found";
+        } else return "treeWorkspace.Person not found";
     }
 
     public List<Person> getBrothersAndSisters(Person person) {

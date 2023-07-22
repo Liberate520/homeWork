@@ -1,8 +1,13 @@
+package treeWorkspace;
+
+import interfaces.Writable;
+import treeWorkspace.FamilyTree;
+
 import java.io.*;
 
-public class RecordTree implements Writable{
-    // Класс для сохранения и загрузки списка Person
-    public void saveTree(FamilyTree tree,String path) {
+public class RecordTree implements Writable {
+    // Класс для сохранения и загрузки списка treeWorkspace.Person
+    public void saveTree(FamilyTree tree, String path) {
         try (ObjectOutputStream objectOutputStream =
                      new ObjectOutputStream(
                              new FileOutputStream(path))) {
