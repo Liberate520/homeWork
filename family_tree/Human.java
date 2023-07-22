@@ -1,4 +1,4 @@
-package homeWork;
+package homeWork.family_tree;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +27,29 @@ public class Human {
         if (mother != null){
             parents.add(mother);
         }
+        children = new ArrayList<>();
+    }
 
+    public Human(String name, Gender gender, LocalDate birthDate) {
+        this(name, gender, birthDate, null, null, null);
+    }
+
+    public Human(String name, Gender gender, LocalDate birthDate, Human father, Human mother) {
+        this(name, gender, birthDate, null, father, mother);
+    }
+    public boolean addChild(Human child) {
+        if (!children.contains(child)){
+            children.add(child);
+            return true;
+        }
+        return false;
+    }
+    public boolean addParent(Human parent) {
+        if (!children.contains(parent)){
+            children.add(parent);
+            return true;
+        }
+        return false;
     }
 
 
