@@ -6,9 +6,7 @@ import faminly_tree.model.tree.FamilyTree;
 import java.io.IOException;
 import java.io.Serializable;
 
-public interface WriteAndRead extends Serializable {
-    void write(String path, Human human) throws IOException;
-    void write(String path, FamilyTree tree) throws IOException;
-    Human readHuman(String path) throws IOException, ClassNotFoundException;
-    FamilyTree readTree(String path) throws IOException, ClassNotFoundException;
+public interface WriteAndRead<E extends Serializable> {
+    void write(String path, E obj) throws IOException;
+    Object readTree(String path) throws IOException, ClassNotFoundException;
 }

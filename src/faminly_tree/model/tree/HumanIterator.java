@@ -3,7 +3,7 @@ package faminly_tree.model.tree;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator<E extends FamiliItem> implements Iterator{
+public class HumanIterator<E extends FamilyItem> implements Iterator{
     private List<E> list;
     private int index;
 

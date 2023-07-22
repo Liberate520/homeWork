@@ -1,6 +1,7 @@
 package faminly_tree.model.service;
 
 import faminly_tree.model.human.Gender;
+import faminly_tree.model.human.HumanConnection;
 import faminly_tree.model.human.Human;
 import faminly_tree.model.save_in_file.SaveInFile;
 import faminly_tree.model.tree.FamilyTree;
@@ -11,13 +12,11 @@ import java.time.LocalDate;
 public class Service {
     private FamilyTree tree;
     private SaveInFile save;
+    private HumanConnection humanConnection;
     public Service() {
         this.tree = new FamilyTree<>();
         this.save = new SaveInFile();
-    }
-    public void addHuman(String name, Gender gender, LocalDate birth){
-        Human human = new Human(name, gender, birth);
-        tree.addToTree(human);
+        this.humanConnection = new HumanConnection();
     }
     public void sortByAge() {
         tree.sortByAge();
@@ -28,14 +27,14 @@ public class Service {
     public void sortByID(){
         tree.sortByID();
     }
-    public void showAllTree() {
-        System.out.println(tree);
+    public FamilyTree showAllTree() {
+        return tree;
     }
     public boolean connection(int parentID, int childID){
         Human child = (Human)tree.getHumanByID(childID);
         Human parent = (Human)tree.getHumanByID(parentID);
         if (child == null || parent == null) return false;
-        child.childFor(parent);
+        humanConnection.childFor(child, parent);
         return true;
     }
     public boolean save(String path) {
@@ -46,20 +45,30 @@ public class Service {
             return false;
         }
     }
-    public FamilyTree dowland(String path) {
+    public boolean dowland(String path) {
         try{
-            this.tree = save.readTree(path);
-            return tree;
+            this.tree = (FamilyTree) save.readTree(path);
+            return true;
         } catch (IOException | ClassNotFoundException e) {
-            return null;
+            return false;
         }
     }
-    public void nextOfKin(int humanID) {
+    public String nextOfKin(int humanID) {
         Human human = (Human) tree.getHumanByID(humanID);
-        if (human == null) System.out.println("Такого человека нет в семейном древе");
-        System.out.println(tree.nextOfKin(human));
+        if (human == null) return null;
+        else return tree.nextOfKin(human);
     }
     public int treeIsEmpty(){
         return tree.getSize();
     }
+    public void addHumanToTree(String name, String surname, String patronymic, String sex, LocalDate birth, LocalDate death) {
+        Gender gender = null;
+        if (sex != null) {
+            if (sex.contains("ж")) gender = Gender.Female;
+            else if (sex.contains("м")) gender = Gender.Male;
+        }
+        Human human = new Human(name, surname, patronymic, gender, birth, death);
+        tree.addToTree(human);
+    }
+
 }
