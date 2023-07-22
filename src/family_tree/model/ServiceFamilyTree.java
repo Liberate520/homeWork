@@ -3,8 +3,8 @@ package family_tree.model;
 import family_tree.model.group.Group;
 import family_tree.model.group.GroupItemFamilyTree;
 import family_tree.model.human.Human;
-import family_tree.model.human.InformerHuman;
-import family_tree.model.marriage.InformerMarriage;
+import family_tree.model.human.ReportableHuman;
+import family_tree.model.marriage.ReportableMarriage;
 import family_tree.model.marriage.Marriage;
 import saveload.LoadFrom;
 import saveload.SaveTo;
@@ -17,16 +17,17 @@ public class ServiceFamilyTree {
     private FamilyTree<Human> tree;
     private SaveTo saver;
     private LoadFrom loader;
-    private InformerHuman informerHuman;
-    private InformerMarriage informerMarriage;
+    private ReportableHuman informerHuman;
+    private ReportableMarriage informerMarriage;
 
     public ServiceFamilyTree(SaveTo saver, LoadFrom loader){
         GroupItemFamilyTree<Human> humans = new GroupItemFamilyTree<>();
         Group<Marriage<Human>> marriages = new Group<>();
-        tree = new FamilyTree(humans, marriages);
+        ReportableFamilyTree reportable = new ReportableFamilyTree();
+        tree = new FamilyTree(humans, marriages, reportable);
         this.saver = saver;
         this.loader = loader;
-        informerHuman = new InformerHuman();
+        informerHuman = new ReportableHuman();
     }
 
     public void addItem(String name, LocalDate dateBirth, Gender gender){

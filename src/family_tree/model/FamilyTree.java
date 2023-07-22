@@ -10,9 +10,11 @@ import java.util.List;
 public class FamilyTree<T extends ItemFamilyTree<T>> implements Serializable {
     private CollectableItemFamilyTree<T> items;
     private Collectable<Marriage<T>> marriages;
-    public FamilyTree(CollectableItemFamilyTree<T> items, Collectable<Marriage<T>> marriages){
+    private Reportable<FamilyTree> reportable;
+    public FamilyTree(CollectableItemFamilyTree<T> items, Collectable<Marriage<T>> marriages, Reportable<FamilyTree> reportable){
         this.items = items;
         this.marriages = marriages;
+        this.reportable = reportable;
     }
     public void addItem(T t){
         items.add(t);
@@ -36,17 +38,10 @@ public class FamilyTree<T extends ItemFamilyTree<T>> implements Serializable {
         return items.getInfo();
     }
     public String getMarriagesInfo(){
-        List<String> strings = new ArrayList<>();
-        for (Marriage m : marriages)
-            strings.add(m.getInfo());
-        return String.join("\n", strings);
+        return marriages.getInfo();
     }
     public String getInfoAll(){
-        return "{ items: \n"
-                + getItemsInfo()
-                + ",\nmarriages: \n"
-                + getMarriagesInfo()
-                + "\n}";
+        return reportable.getInfo(this);
     }
 
     public String getInfoLastItem(){

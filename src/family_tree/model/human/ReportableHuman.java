@@ -1,13 +1,13 @@
 package family_tree.model.human;
 
 import family_tree.model.Gender;
-import family_tree.model.Informer;
+import family_tree.model.Reportable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InformerHuman implements Informer<Human>, Serializable {
+public class ReportableHuman implements Reportable<Human>, Serializable {
 
     @Override
     public String getInfo(Human h) {

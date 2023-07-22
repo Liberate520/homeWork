@@ -1,4 +1,4 @@
 package family_tree.model;
-public interface Informer<T> {
+public interface Reportable<T> {
     String getInfo(T t);
 }

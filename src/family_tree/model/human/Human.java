@@ -1,7 +1,7 @@
 package family_tree.model.human;
 
 import family_tree.model.Gender;
-import family_tree.model.Informer;
+import family_tree.model.Reportable;
 import family_tree.model.group.ItemFamilyTree;
 
 import java.io.Serializable;
@@ -19,17 +19,17 @@ public class Human implements ItemFamilyTree<Human>, Serializable {
     Human mother, father;
     List<Human> children;
     Human spouse;
-    private Informer<Human> informer;
+    private Reportable<Human> reportable;
 
     private static final int minParentAge = 17;
 
-    public Human(int id, String name, LocalDate dateBirth, Gender gender, Informer<Human> informer) {
+    public Human(int id, String name, LocalDate dateBirth, Gender gender, Reportable<Human> reportable) {
         this.id = id;
         this.name = name;
         this.dateBirth = dateBirth;
         this.gender = gender;
         children = new ArrayList<>();
-        this.informer = informer;
+        this.reportable = reportable;
     }
     public int getId(){ return id; }
     public String getName(){ return name; }
@@ -75,7 +75,7 @@ public class Human implements ItemFamilyTree<Human>, Serializable {
     }
 
     public String getInfo(){
-        return informer.getInfo(this);
+        return reportable.getInfo(this);
     }
     @Override
     public String toString() {
