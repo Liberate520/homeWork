@@ -18,12 +18,12 @@ public class Main {
         family.addPerson(petr);
         family.addPerson(marina);
         family.addPerson(leonid);
-        family.putConnection(egor, ConnectionType.PARENT, marina, true);
-        family.putConnection(egor, ConnectionType.SIBLING, petr, true);
-        family.putConnection(egor, ConnectionType.PARENT, leonid, true);
-        family.putConnection(marina, ConnectionType.SPOUSE, leonid, true);
-        family.putConnection(marina, ConnectionType.CHILD, petr, true);
-        family.putConnection(leonid, ConnectionType.CHILD, petr, true);
+        family.putConnection(egor, ConnectionType.PARENT, marina);
+        family.putConnection(egor, ConnectionType.SIBLING, petr);
+        family.putConnection(egor, ConnectionType.PARENT, leonid);
+        family.putConnection(marina, ConnectionType.SPOUSE, leonid);
+        family.putConnection(marina, ConnectionType.CHILD, petr);
+        family.putConnection(leonid, ConnectionType.CHILD, petr);
 
         System.out.println(family.showConnections(leonid));
         System.out.println(family.showConnections(marina));

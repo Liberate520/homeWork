@@ -25,24 +25,22 @@ public class FamilyTree implements Serializable {
         return false;
     }
 
-    public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
+    public void oneWayConnection(Person connectFrom, ConnectionType key, Person connectTo) {
         if (family.containsKey(connectFrom))
             family.get(connectFrom).putConnections(key, connectTo);
     }
 
     /**
      * То же самое что сверху, но автоматически добавляется соответствующая обратная связь
-     *
-     * @param reverse если этот параметр true
      */
-    public void putConnection(Person connectFrom, ConnectionType key, Person connectTo, boolean reverse) {
-        putConnection(connectFrom, key, connectTo);
-        if (reverse && !findConnection(connectTo, connectFrom)) {
+    public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
+        oneWayConnection(connectFrom, key, connectTo);
+        if (!findConnection(connectTo, connectFrom)) {
             switch (key) {
-                case SIBLING -> putConnection(connectTo, ConnectionType.SIBLING, connectFrom);
-                case SPOUSE -> putConnection(connectTo, ConnectionType.SPOUSE, connectFrom);
-                case CHILD -> putConnection(connectTo, ConnectionType.PARENT, connectFrom);
-                case PARENT -> putConnection(connectTo, ConnectionType.CHILD, connectFrom);
+                case SIBLING -> oneWayConnection(connectTo, ConnectionType.SIBLING, connectFrom);
+                case SPOUSE -> oneWayConnection(connectTo, ConnectionType.SPOUSE, connectFrom);
+                case CHILD -> oneWayConnection(connectTo, ConnectionType.PARENT, connectFrom);
+                case PARENT -> oneWayConnection(connectTo, ConnectionType.CHILD, connectFrom);
             }
         }
     }
