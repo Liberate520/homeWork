@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class ConsoleUI implements View {
     Presenter presenter;
-    private Input input;
+    private final Input input;
     private Menu previousMenu;
     private boolean work;
 
@@ -24,7 +24,7 @@ public class ConsoleUI implements View {
         return previousMenu;
     }
 
-    private static void clearConsole() {
+    private void clearConsole() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
