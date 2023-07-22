@@ -7,10 +7,13 @@ public class Test {
         FamilyTree tree = new FamilyTree();
         tree.setPerson(p1, p2, p3, p4);
         // Демонстрация чтения и записи
-        RecordTree<FamilyTree> recordTree = new RecordTree<>();
-        recordTree.saveTree(tree, ".//src//SavedTrees//FamilyTree.bin");
-        FamilyTree tree2 = (FamilyTree) recordTree.loadTree(".//src//SavedTrees//FamilyTree.bin");
-        System.out.println(tree2.showAllTree());
+        Writable write = new RecordTree();
+        write.saveTree(tree, ".//src//SavedTrees//FamilyTree.bin");
+        write.loadTree(".//src//SavedTrees//FamilyTree.bin");
+//        RecordTree recordTree = new RecordTree();
+//        recordTree.saveTree(tree, ".//src//SavedTrees//FamilyTree.bin");
+//        FamilyTree tree2 = (FamilyTree) recordTree.loadTree(".//src//SavedTrees//FamilyTree.bin");
+//        System.out.println(tree2.showAllTree());
         // Демонстрация методов взаимодействия с деревом
 //        System.out.println(tree.showAllTree());
 //        System.out.println(tree.getParents(p4));

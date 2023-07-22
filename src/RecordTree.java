@@ -1,8 +1,8 @@
 import java.io.*;
 
-public class RecordTree<FamilyTree> {
+public class RecordTree implements Writable{
     // Класс для сохранения и загрузки списка Person
-    void saveTree(FamilyTree tree,String path) {
+    public void saveTree(FamilyTree tree,String path) {
         try (ObjectOutputStream objectOutputStream =
                      new ObjectOutputStream(
                              new FileOutputStream(path))) {
@@ -12,7 +12,7 @@ public class RecordTree<FamilyTree> {
         }
     }
 
-    Object loadTree(String path) {
+    public Object loadTree(String path) {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(path)
         )) {
