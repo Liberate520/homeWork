@@ -3,18 +3,23 @@ package family_tree;
 import family_tree.family_tree.FamilyTree;
 import family_tree.human.Gender;
 import family_tree.human.Human;
+import family_tree.writer.FileHandler;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        String path = "src/tree.out";
-        FamilyTree tree = testTree();
+        String filePath = "src/family_tree/data/tree.out";
         FileHandler fileHandler = new FileHandler();
-        fileHandler.saveFile(tree,path);
-        FamilyTree tree1 = fileHandler.loadFile(path);
+
+        FamilyTree tree = testTree();
         System.out.println(tree);
+
+        fileHandler.save(tree,filePath);
+
+        FileHandler fileHandler1 = new FileHandler();
+        FamilyTree tree1 = (FamilyTree) fileHandler1.read(filePath);
+
         System.out.println();
         System.out.println(tree1);
 
