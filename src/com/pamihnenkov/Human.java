@@ -1,14 +1,17 @@
 package com.pamihnenkov;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Human {
+public class Human implements Serializable {
 
-
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String name;
     private String surname;
     private String lastname;
@@ -76,22 +79,22 @@ public class Human {
 
         Human human = (Human) o;
 
-        if (!name.equals(human.name)) return false;
-        if (!surname.equals(human.surname)) return false;
-        if (!lastname.equals(human.lastname)) return false;
-        if (!birthDate.equals(human.birthDate)) return false;
+        if (!Objects.equals(name, human.name)) return false;
+        if (!Objects.equals(surname, human.surname)) return false;
+        if (!Objects.equals(lastname, human.lastname)) return false;
+        if (!Objects.equals(birthDate, human.birthDate)) return false;
         if (!Objects.equals(deathDate, human.deathDate)) return false;
         return gender == human.gender;
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + surname.hashCode();
-        result = 31 * result + lastname.hashCode();
-        result = 31 * result + birthDate.hashCode();
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
         result = 31 * result + (deathDate != null ? deathDate.hashCode() : 0);
-        result = 31 * result + gender.hashCode();
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
         return result;
     }
 

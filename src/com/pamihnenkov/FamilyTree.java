@@ -1,11 +1,17 @@
 package com.pamihnenkov;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.Period;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FamilyTree {
-    private Set<Human> humanList = new HashSet<>();
+public class FamilyTree implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private final Set<Human> humanList = new HashSet<>();
 
     public FamilyTree(Human human) {
         addFamilyMember(human);
@@ -42,5 +48,18 @@ public class FamilyTree {
         if (relation == Relation.PARENT) relative.addChild(member);
         if (relation == Relation.CHILD) relative.addParent(member);
         addFamilyMember(relative);
+    }
+
+    public Human findOldestMember(){
+        return humanList.stream().min((h1,h2) -> Period.between(h2.getBirthDate(),h1.getBirthDate()).getYears()).get();
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Семейное дерево:\n");
+        for (Human human : humanList){
+            sb.append(human).append('\n');
+        }
+        return sb.toString();
     }
 }
