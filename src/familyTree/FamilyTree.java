@@ -1,10 +1,13 @@
+package familyTree;
+
+import person.Person;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * Все семейные связи решил хранить тут, а не в полях класса Person.
- * Смотрите Connections.java.
+ * Все семейные связи решил хранить тут, а не в полях класса person.Person.
+ * Смотрите familyTree.Connections.java.
  */
 public class FamilyTree implements Serializable {
     private HashMap<Person, Connections> family;
