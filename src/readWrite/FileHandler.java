@@ -3,7 +3,7 @@ package readWrite;
 import java.io.*;
 
 public class FileHandler implements Writeable {
-    private final String PATH = "src\\family_tree.txt";
+    private final String PATH = "src\\data\\family_tree.txt";
 
     @Override
     public boolean write(Serializable obj) {
