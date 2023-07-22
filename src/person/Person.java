@@ -38,34 +38,6 @@ public class Person implements Serializable {
         this.yearBirth = yearBirth;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getMaidenName() {
-        return maidenName;
-    }
-
-    public String getPatrynomic() {
-        return patrynomic;
-    }
-
-    public Gender getSex() {
-        return sex;
-    }
-
-    public int getYearBirth() {
-        return yearBirth;
-    }
-
-    public int getYearDeath() {
-        return yearDeath;
-    }
-
     public String briefName() {
         return name + " " + surname;
     }

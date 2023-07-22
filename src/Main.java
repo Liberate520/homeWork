@@ -33,7 +33,6 @@ public class Main {
         FileHandler fh = new FileHandler();
         System.out.println(fh.write(family));
 
-//        FileHandler fh = new FileHandler();
         FamilyTree familyRead = (FamilyTree) fh.read();
         System.out.println(familyRead);
     }
