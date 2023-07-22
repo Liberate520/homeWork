@@ -1,3 +1,5 @@
+package FamTree;
+
 public class Human {
     public String humanName;
     public int humanAge;

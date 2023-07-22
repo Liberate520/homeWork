@@ -1,3 +1,5 @@
+package FamTree;
+
 public class Main {
     public static void main(String[] args) {
         Human Mary = new Human("Mary", 35);

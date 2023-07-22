@@ -1,3 +1,5 @@
+package FamTree;
+
 public class NodeFamilyTree {
     public NodeFamilyTree(Human h1, Family family, Human h2){
         this.h1 = h1;
