@@ -40,8 +40,8 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     public Human(int id ,String fullName, Gender gender, LocalDate dateOfBirth,Human father, Human mother
     ) {this(id, fullName, gender, dateOfBirth, null, father, mother);
     }
-    public Human(int id ,String fullName, Gender gender, LocalDate dateOfBirth) {
-        this(id, fullName, gender, dateOfBirth, null, null, null);
+    public Human(int id ,String fullName, Gender gender, LocalDate dateOfBirth/*, LocalDate dateOfDeath*/) {
+        this(id, fullName, gender, dateOfBirth/*, dateOfDeath*/, null, null);
     }
     public String getFullName() {return fullName;}
     public Gender getGender() {return gender;}

@@ -15,8 +15,8 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth) {
-        service.addHuman(fullName ,gender, dateOfBirth);
+    public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth/*, LocalDate dateOfDeath*/) {
+        service.addHuman(fullName ,gender, dateOfBirth/*, dateOfDeath*/);
         getInfo();
     }
 

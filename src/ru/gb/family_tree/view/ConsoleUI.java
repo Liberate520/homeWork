@@ -56,11 +56,16 @@ public class ConsoleUI implements View {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.y");
         LocalDate dateOfBirth = LocalDate.parse(birthDate, formatter);
 
-//        System.out.println("Введите дату смертия");
+//        System.out.println("Введите дату смерти");
 //        String deathDate = scanner.nextLine();
-//        LocalDate dateOfDeath = LocalDate.parse(deathDate, formatter);
+//        if (deathDate.equals("-")) {
+//            System.out.println("---");
+//        }else {
+//            LocalDate dateOfDeath = LocalDate.parse(deathDate, formatter);
+//        }
 
-        presenter.addHuman(fullName ,gender, dateOfBirth);
+        presenter.addHuman(fullName ,gender, dateOfBirth/*, dateOfDeath*/);
+//        presenter.addHuman(fullName ,gender, dateOfBirth, deathDate);
     }
 
     public void getInfo() {

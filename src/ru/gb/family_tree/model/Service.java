@@ -9,20 +9,16 @@ import java.time.LocalDate;
 
 public class Service {
     private int idHuman;
-
-    public Service(int idHuman) {
-        this.idHuman = idHuman;
-    }
-
     public FamilyTree<Human> tree;
+    public FileHandler fileHandler;
 
     public Service() {
         tree = new FamilyTree<>();
+        fileHandler = new FileHandler();
     }
 
-
-    public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth){
-        Human human = new Human(idHuman++, fullName ,gender, dateOfBirth);
+    public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth/*, LocalDate dateOfDeath*/){
+        Human human = new Human(idHuman++, fullName ,gender, dateOfBirth/*, dateOfDeath*/);
         tree.addHuman(human);
     }
 
@@ -41,14 +37,11 @@ public class Service {
     }
 
     public void saveFile() {
-        FileHandler fileHandler = new FileHandler();
         fileHandler.save(tree, fileHandler.filePath);
     }
 
     public void readFile() {
-        FileHandler fileHandler = new FileHandler();
         tree = (FamilyTree) fileHandler.read(fileHandler.filePath);
         getInfo();
     }
-
 }
