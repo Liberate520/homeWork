@@ -1,18 +1,16 @@
-package homeWork_OOP_family_tree.infoHuman;
+package familly_api.familytree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import homeWork_OOP_family_tree.comparatorAndIterator.Node;
-import homeWork_OOP_family_tree.comparatorAndIterator.NodeComparatorByAge;
+import familly_api.human.Node;
+import familly_api.human.NodeComparatorByAge;
 
 import java.util.Iterator;
 
 public class FamilywTree<E extends Node> implements Serializable, Iterable<E>{
-    // private long humanId;
     private List<E> familyList;
 
     public FamilywTree(List<E> familyList) {
@@ -23,19 +21,26 @@ public class FamilywTree<E extends Node> implements Serializable, Iterable<E>{
         this.familyList = new ArrayList<>();
     }
 
+    public int getSize() {
+        return familyList.size();
+    }
+
+    public E getNode(int numberNode){
+        return familyList.get(numberNode);
+    }
+
     public List<E> getFamilyList() {
         return familyList;
     }
 
     public void add(E human) {
         familyList.add(human);
-        // human.people.setId(humanId++);
     }
 
     public List<E> searchName(String firstName) {
         List<E> result = new ArrayList<>();
         for (E node : familyList) {
-            if (node.people.getFirstName() == firstName) {
+            if (node.getPeople().getFirstName() == firstName) {
                 result.add(node);
             }
         }
@@ -45,25 +50,26 @@ public class FamilywTree<E extends Node> implements Serializable, Iterable<E>{
 
     @Override
     public Iterator<E> iterator() {
-        return new FamilyIterator(familyList);
-		// return list.iterator();
-        // return null;
+        return new FamilyIterator<>(familyList);
+
     }
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
+        int count = 0;
         sb.append("в дереве ");
         sb.append(familyList.size());
         sb.append(" объектов: \n");
         for (Node node : familyList) {
-            sb.append(node.people.getFirstName());
+            sb.append(node.getPeople().getFirstName());
+            sb.append(" " + count++);
             sb.append("\n");
         }
         return sb.toString();
     }
 
     public int getAge(E node) {
-        return node.people.age();
+        return node.getPeople().age();
     }
 
     public void sortByName(){
@@ -71,6 +77,6 @@ public class FamilywTree<E extends Node> implements Serializable, Iterable<E>{
     }
 
     public void sortByAge(){
-        Collections.sort(familyList, new NodeComparatorByAge());
+        Collections.sort(familyList, new NodeComparatorByAge<>());
     }
 }

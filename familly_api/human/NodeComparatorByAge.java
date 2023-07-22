@@ -1,4 +1,4 @@
-package homeWork_OOP_family_tree.comparatorAndIterator;
+package familly_api.human;
 
 import java.util.Comparator;
 

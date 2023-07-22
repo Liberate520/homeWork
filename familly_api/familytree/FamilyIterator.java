@@ -1,9 +1,9 @@
-package homeWork_OOP_family_tree.infoHuman;
+package familly_api.familytree;
 
 import java.util.Iterator;
 import java.util.List;
 
-import homeWork_OOP_family_tree.comparatorAndIterator.Node;
+import familly_api.human.Node;
 
 public class FamilyIterator<E extends Node> implements Iterable<E>, Iterator<E>{
        int index;
@@ -26,7 +26,6 @@ public class FamilyIterator<E extends Node> implements Iterable<E>, Iterator<E>{
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }
 }

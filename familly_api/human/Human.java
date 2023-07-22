@@ -1,4 +1,4 @@
-package homeWork_OOP_family_tree.comparatorAndIterator;
+package familly_api.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -45,10 +45,6 @@ public class Human implements Serializable{
         this.id = id;
     }
 
-    // public Human(String firstName, String lastName, String middleName, LocalDate
-    // born, String gender) {
-    // this(firstName, lastName, middleName, born, born, gender);
-    // }
 
     public String getGender() {
         return this.gender;
@@ -61,11 +57,13 @@ public class Human implements Serializable{
         return Period.between(this.born, this.death).getYears();
     }
 
-    public void printHuman() {
-        System.out.println("имя: " + firstName);
-        System.out.println("фамилия: " + lastName);
-        System.out.println("отчество: " + middleName);
-        System.out.println("возраст: " + this.age());
-        System.out.println("пол: " + gender);
+    public String printHuman() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: " + firstName);
+        sb.append("фамилия: " + lastName);
+        sb.append("отчество: " + middleName);
+        sb.append("возраст: " + this.age());
+        sb.append("пол: " + gender);
+        return sb.toString();  
     }
 }

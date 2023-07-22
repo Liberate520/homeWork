@@ -1,4 +1,4 @@
-package homeWork_OOP_family_tree.comparatorAndIterator;
+package familly_api.human;
 
 
 
@@ -8,13 +8,18 @@ import java.util.List;
 
 public class Node implements Serializable, Comparable<Node>{
 
-    public Human people;
+    Human people;
     Node mother;
     Node father;
-    public List<Node> children = new ArrayList<>();
+    List<Node> children;
 
     public Node(Human people) {
         this.people = people;
+        this.children = new ArrayList<>();
+    }
+
+    public Human getPeople() {
+        return people;
     }
 
     public void addParent(Node parent) {
@@ -36,6 +41,15 @@ public class Node implements Serializable, Comparable<Node>{
         }
         this.children.add(child);
         parent.children.add(child);
+    }
+
+    public void addChildOneParent(Node child) {
+        if (this.people.getGender() == "female") {
+            child.mother = this;
+        } else {
+            child.father = this;
+        }
+        this.children.add(child);
     }
 
     public void printDescendants() {
