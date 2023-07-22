@@ -1,15 +1,17 @@
+package Person;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Person implements Serializable {
-    public String name;
-    public LocalDate birthDate;
-    public  LocalDate deathDate;
-    public  Sex sex;
-    public  Person mother;
-    public  Person father;
+    private String name;
+    private LocalDate birthDate;
+    private  LocalDate deathDate;
+    private  Sex sex;
+    private  Person mother;
+    private  Person father;
     public List<Person> children;
     public Person spouse;
 
@@ -28,6 +30,13 @@ public class Person implements Serializable {
         this(name, birthDate, sex, null, null, null, null, null);
     }
 
+    public String getName (){
+        return name;
+    }
+
+    public LocalDate getBirthDate(){
+        return birthDate;
+    }
     public void setChild (Person adult, Person child){
         if (adult.children == null) {
             adult.children = new ArrayList<>();
