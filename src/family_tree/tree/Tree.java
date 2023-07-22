@@ -2,7 +2,6 @@ package family_tree.tree;
 
 
 import family_tree.human.Gender;
-import family_tree.human.Human;
 import family_tree.human.comparators.HumanComparatorByAge;
 import family_tree.human.comparators.HumanComparatorByFathersName;
 import family_tree.human.comparators.HumanComparatorByFirstName;
@@ -13,17 +12,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable, Iterable<Human> {
+public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
     private int memberId;
     private String familyName;
-    private List<Human> family;
+    private List<E> family;
 
     public Tree(String familyName) {
         this.family = new ArrayList<>();
         this.familyName = familyName;
     }
 
-    public void addFamilyMember(Human member){
+    public void addFamilyMember(E member){
         if (!(member == null)
                 && !family.contains(member)){
             family.add(member);
@@ -31,7 +30,7 @@ public class Tree implements Serializable, Iterable<Human> {
         }
     }
 
-    public void wedding(Human husband, Human wife){
+    public void wedding(E husband, E wife){
         if(husband.isMarried() || wife.isMarried()){
             System.out.println("Свадьба невозможна");
         }
@@ -41,7 +40,7 @@ public class Tree implements Serializable, Iterable<Human> {
         }
     }
 
-    public void divorce(Human husband, Human wife){
+    public void divorce(E husband, E wife){
         if (husband.getSpouse().equals(wife) && wife.getSpouse().equals(husband)) {
             husband.removeSpouse();
             wife.removeSpouse();
@@ -49,16 +48,16 @@ public class Tree implements Serializable, Iterable<Human> {
         else System.out.println("Развод невозможен");
     }
 
-    public void getSiblings(Human child)
+    public void getSiblings(E child)
     {
-        List<Human> siblings = new ArrayList<>();
-        for (Human parent : child.getParents().keySet()) {
-            for (Human sibling : parent.getChildren().keySet()) {
+        List<E> siblings = new ArrayList<>();
+        for (E parent : child.getParents().keySet()) {
+            for (E sibling : parent.getChildren().keySet()) {
                 if(!child.equals(sibling)
                         && !siblings.contains(sibling)) siblings.add(sibling);
             }
         }
-        for (Human sibling : siblings) {
+        for (E sibling : siblings) {
             if(sibling.getGender().equals(Gender.female)) System.out.printf("%s - Сестра\n", sibling.getFullName());
             else if(sibling.getGender().equals(Gender.male)) System.out.printf("%s - Брат\n", sibling.getFullName());
         }
@@ -68,11 +67,11 @@ public class Tree implements Serializable, Iterable<Human> {
         return familyName;
     }
 
-    public void sortByFirstName() {family.sort(new HumanComparatorByFirstName());}
-    public void sortBySecondName() {family.sort(new HumanComparatorBySecondName());}
-    public void sortByFathersName() {family.sort(new HumanComparatorByFathersName());}
+    public void sortByFirstName() {family.sort(new HumanComparatorByFirstName<E>());}
+    public void sortBySecondName() {family.sort(new HumanComparatorBySecondName<E>());}
+    public void sortByFathersName() {family.sort(new HumanComparatorByFathersName<E>());}
 
-    public void sortByAge() {family.sort(new HumanComparatorByAge());}
+    public void sortByAge() {family.sort(new HumanComparatorByAge<E>());}
 
     @Override
     public String toString() {
@@ -80,16 +79,16 @@ public class Tree implements Serializable, Iterable<Human> {
     }
     public String treeInfo(){
         StringBuilder sb = new StringBuilder();
-        for (Human member : this.family) {
+        for (E member : this.family) {
             sb.append(member.getId()).append(". ").append(member.getFullName()).append("\n");
-            sb.append(member.infoFormat());
+            sb.append(member);
             sb.append("______________________________").append("\n");
         }
         return sb.toString();
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new TreeIterator(family);
     }
 }

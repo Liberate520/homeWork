@@ -1,15 +1,16 @@
 package family_tree.human;
 
 
+import family_tree.tree.Entity;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collection;
 import java.util.HashMap;
 
 
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     private int id;
     private String firstName, secondName, fathersName;
     private LocalDate dateOfBirth, dateOfDeath;
@@ -42,33 +43,6 @@ public class Human implements Serializable, Comparable<Human> {
         this(firstName, secondName, fathersName, dateOfBirth, null, gender);
     }
 
-    public int getId(){
-        return this.id;
-    }
-    public void setId(int id){
-        this.id = id;
-    }
-
-    public String getFullName(){
-        return this.secondName + " " + this.firstName + " " + this.fathersName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public String getFathersName() {
-        return fathersName;
-    }
-
-    public Gender getGender(){
-        return this.gender;
-    }
-
     public HashMap<Human, Parent_Type> getParents() {
         return parents;
     }
@@ -77,10 +51,49 @@ public class Human implements Serializable, Comparable<Human> {
         return children;
     }
 
+    @Override
+    public int getId(){
+        return this.id;
+    }
+    @Override
+    public void setId(int id){
+        this.id = id;
+    }
+
+    @Override
+    public String getFullName(){
+        return this.secondName + " " + this.firstName + " " + this.fathersName;
+    }
+
+    @Override
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+    @Override
+    public String getSecondName() {
+        return secondName;
+    }
+
+
+    @Override
+    public String getFathersName() {
+        return fathersName;
+    }
+
+    @Override
+    public Gender getGender(){
+        return this.gender;
+    }
+
+
+    @Override
     public Human getSpouse() {
         return spouse;
     }
 
+    @Override
     public Boolean isMarried(){
         return this.married;
     }
@@ -112,10 +125,12 @@ public class Human implements Serializable, Comparable<Human> {
         }
     }
 
+    @Override
     public void setSpouse(Human spouse){
         this.spouse = spouse;
         this.married = true;
     }
+
 
     public void addChild(Human child, Child_type childType){
         if(!this.children.containsKey(child)) {
@@ -136,24 +151,29 @@ public class Human implements Serializable, Comparable<Human> {
         }
     }
 
+    @Override
     public void removeSpouse(){
         this.spouse = null;
         this.married = false;
     }
 
+    @Override
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
+    @Override
     public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
         this.alive = false;
     }
 
+    @Override
     public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
 
+    @Override
     public int getAge(LocalDate dateOfBirth, LocalDate dateOfDeath) {
         Period difference;
         int age = 0;

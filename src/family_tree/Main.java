@@ -44,8 +44,8 @@ public class Main {
         olya_1.addChild(masha_0, Child_type.Biological_Daughter);
         olya_1.addChild(katya_0, Child_type.Foster_Daughter);
         System.out.println(family_1);
-        FileHandler fh = new FileHandler();
-        fh.save(family_1, family_1.getFamilyName());
+//        FileHandler fh = new FileHandler();
+//        fh.save(family_1, family_1.getFamilyName());
         family_1.sortByAge();
         System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////");
         System.out.println(family_1);
