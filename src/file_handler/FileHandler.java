@@ -5,30 +5,33 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
 
-import human.Human;
+import fam_tree.FamilyTree;
 
 public class FileHandler {
-    private static final String FILE_PATH = "homeWork_family_tree/output/human_data.ser";
+     private String filePath;
 
-    public static void saveToFile(List<Human> humanList) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
-            outputStream.writeObject(humanList);
-            System.out.println("Data saved to file: " + FILE_PATH);
+    public FileHandler(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void saveToFile(FamilyTree tree) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            outputStream.writeObject(tree);
+            System.out.println("Data saved to file: " + filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<Human> loadFromFile() {
-        List<Human> humanList = null;
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
-            humanList = (List<Human>) inputStream.readObject();
-            System.out.println("Data loaded from file: " + FILE_PATH);
+    public FamilyTree loadFromFile() {
+        FamilyTree tree = null;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath))) {
+            tree = (FamilyTree) inputStream.readObject();
+            System.out.println("Data loaded from file: " + filePath);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return humanList;
+        return tree;
     }
 }

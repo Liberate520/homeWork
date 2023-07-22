@@ -4,17 +4,16 @@ import fam_tree.FamilyTree;
 import file_handler.FileHandler;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // FamilyTree tree = testTree();
+        FileHandler fileHandler = new FileHandler("homeWork_family_tree/output/human_data.ser");
+        
+        // FamilyTree tree = testTree(); // create test tree
         // System.out.println(tree);
-        // List<Human> humanList = tree.getHumanList();
-        // FileHandler.saveToFile(humanList);
+        // fileHandler.saveToFile(tree); // save it to the file
 
-        List<Human> loadedHumanList = FileHandler.loadFromFile();
-        FamilyTree loadedTree = new FamilyTree(loadedHumanList);
+        FamilyTree loadedTree = fileHandler.loadFromFile(); // load tree from the file
         System.out.println("Loaded Tree:");
         System.out.println(loadedTree);
     }

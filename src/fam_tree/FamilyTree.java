@@ -3,9 +3,10 @@ package fam_tree;
 import human.Human;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private long humansId;
     private List<Human> humanList;
 
