@@ -1,6 +1,7 @@
 package com.britenight;
 
 import com.britenight.FamilyTree.FamilyTree;
+import com.britenight.FamilyTree.FamilyTreeNode;
 import com.britenight.FamilyTree.Relation;
 import com.britenight.FamilyTree.RelationType;
 import com.britenight.Person.Gender;
@@ -9,6 +10,8 @@ import com.britenight.ImportExport.OperationsWithFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -41,8 +44,25 @@ public class Main {
 
         FamilyTree importedTree = OperationsWithFile.readFromFile("myTree.fmt");
 
-        for (Person i: importedTree.getRelativePeople(tree.getPeople().get(5), true, RelationType.Parent)) {
-            System.out.println(i);
+
+
+
+        List<FamilyTreeNode> nodes = importedTree.getNodes();
+        nodes.sort(new Comparator<FamilyTreeNode>() {
+            @Override
+            public int compare(FamilyTreeNode o1, FamilyTreeNode o2) {
+                return o1.getPerson().compareTo(o2.getPerson());
+            }
+        });
+
+        for (FamilyTreeNode ftn : nodes) {
+            System.out.println("\n");
+            System.out.println("Человек:");
+            System.out.println(ftn.getPerson());
+            System.out.println("Связи:");
+            for (Relation relation : ftn.getRelations()) {
+                System.out.printf("%s - %s\n", relation.getRelationPerson(), relation.getRelationPersonType().name());
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable {
     private final long id;
     private final LocalDate dateOfBirth;
     private String name;
@@ -29,7 +29,15 @@ public class Person implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return this.hashCode() == obj.hashCode();
+        return obj instanceof Person && this.hashCode() == obj.hashCode();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this.name.compareTo(((Person) o).getName()) == 0) {
+            return this.dateOfBirth.compareTo(((Person) o).getDateOfBirth());
+        }
+        return this.name.compareTo(((Person) o).getName());
     }
 
     //region Getters
