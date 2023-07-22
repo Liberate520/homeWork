@@ -2,17 +2,19 @@ import familyTree.ConnectionType;
 import familyTree.FamilyTree;
 import readWrite.FileHandler;
 
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
         FamilyTree family = new FamilyTree();
         person.Person egor = new person.Person("Егор", "Меньшиков", "Леонидович",
-                person.Gender.MALE, 1986);
+                person.Gender.MALE, LocalDate.of(1986,3,13));
         person.Person petr = new person.Person("Петр", "Меньшиков", "Леонидович",
-                person.Gender.MALE, 1988);
+                person.Gender.MALE, LocalDate.of(1988,8,11));
         person.Person marina = new person.Person("Марина", "Меньшикова", "Рудольфовна",
-                person.Gender.FEMALE, 1957, "Блохинцева");
+                person.Gender.FEMALE, LocalDate.of(1957,11,30), "Блохинцева");
         person.Person leonid = new person.Person("Леонид", "Меньшиков", "Иеронимович",
-                person.Gender.MALE, 1954);
+                person.Gender.MALE, LocalDate.of(1954,10,18));
 
         System.out.println(family.addPerson(egor));
         family.addPerson(petr);
