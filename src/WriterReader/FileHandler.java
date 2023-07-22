@@ -1,27 +1,28 @@
-package WriterReader;
+package homeWork.src.WriterReader;
 
 import java.io.*;
 
-public class FileHandler implements Serializable {
-    private String text;
+public class FileHandler implements Wrtr{
 
-    FileHandler(String text){
-        this.text = text;
+
+    @Override
+    public String save(Serializable sr, String path) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
+            oos.writeObject(sr);
+            return "Готово.";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "Ошибка!";
+        }
     }
 
     @Override
-    public String toString(){
-        return "File: " + text + ".";
-    }
-
-    public void WriteAndReadFile(FileHandler fileHandler, File f){
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
-            oos.writeObject(fileHandler);
-            FileHandler fh = (FileHandler) ois.readObject();
-            System.out.println(fileHandler);
-        } catch (IOException | ClassNotFoundException e){
+    public Object read(String path) {
+        try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path))){
+            return oos.readObject();
+        } catch (Exception e){
             e.printStackTrace();
+            return "Ошибка";
         }
     }
 }
