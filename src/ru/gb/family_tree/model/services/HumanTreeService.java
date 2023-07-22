@@ -1,17 +1,18 @@
 package ru.gb.family_tree.model.services;
 
 import ru.gb.family_tree.model.human.Human;
-import ru.gb.family_tree.model.saveload.FileHandler;
+import ru.gb.family_tree.model.saveload.*;
 import ru.gb.family_tree.model.tree.FamilyTree;
 
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class TreeService {
+public class HumanTreeService {
     private FamilyTree<Human> tree;
 
-    public TreeService() {
+    public HumanTreeService() {
         this.tree = new FamilyTree<>();
     }
 
@@ -45,25 +46,26 @@ public class TreeService {
         tree.sortByBirthDate();
     }
 
-    public String importTree(String fileName) {
+    public String importTreeFromObjectFile(Reading<FamilyTree<Human>> reader) {
         try {
-            tree = (FamilyTree<Human>) new FileHandler(fileName).read();
+            this.tree = tree.read(reader);
             return "Импорт выполнен успешно";
+        } catch (InvalidClassException e) {
+            return "Произошла ошибка при попытке импортировать дерево: класс для импорта был модифицирован";
+        } catch (ClassNotFoundException e) {
+            return "Произошла ошибка при попытке импортировать дерево: не найден класс для импорта";
         } catch (IOException e) {
             return "Произошла ошибка при импорте из файла: " +
                     "проверьте правильность введенного имени и убедитесь, " +
-                    "что файл существует";
-        } catch (ClassNotFoundException e) {
-            return "Произошла ошибка при попытке импортировать дерево: не найден класс для импорта";
-        }
-        catch (ClassCastException e) {
+                    "что файл существует\n" + e.getMessage();
+        } catch (ClassCastException e) {
             return "Произошла ошибка при попытке импортировать дерево: неверные данные";
         }
     }
 
-    public String exportTree(String fileName) {
+    public String exportTreeToObjectFile(Writing handler) {
         try {
-            new FileHandler(fileName).write(tree);
+            handler.write(tree);
             return "Экспорт выполнен успешно";
         } catch (IOException e) {
             return "Произошла ошибка при экспорте в файл: " +
@@ -75,4 +77,5 @@ public class TreeService {
     public int getTreeSize() {
         return tree.countMembers();
     }
+
 }

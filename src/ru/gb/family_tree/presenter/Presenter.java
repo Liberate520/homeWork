@@ -1,16 +1,22 @@
 package ru.gb.family_tree.presenter;
 
-import ru.gb.family_tree.model.services.TreeService;
+import ru.gb.family_tree.model.human.Human;
+import ru.gb.family_tree.model.saveload.LoadFileHandler;
+import ru.gb.family_tree.model.saveload.Reading;
+import ru.gb.family_tree.model.saveload.SaveFileHandler;
+import ru.gb.family_tree.model.saveload.Writing;
+import ru.gb.family_tree.model.services.HumanTreeService;
+import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.view.View;
 import java.util.HashMap;
 
 public class Presenter {
     private final View view;
-    private final TreeService service;
+    private final HumanTreeService service;
 
     public Presenter(View view) {
         this.view = view;
-        service   = new TreeService();
+        service   = new HumanTreeService();
     }
 
     public void addMember(HashMap<String, String> data) {
@@ -32,11 +38,13 @@ public class Presenter {
     }
 
     public void importTree(String fileName) {
-        view.print(service.importTree(fileName));
+        Reading<FamilyTree<Human>> handler = new LoadFileHandler<>(fileName);
+        view.print(service.importTreeFromObjectFile(handler));
     }
 
     public void exportTree(String fileName) {
-        view.print(service.exportTree(fileName));
+        Writing handler = new SaveFileHandler(fileName);
+        view.print(service.exportTreeToObjectFile(handler));
     }
 
     public int getTreeSize() {
