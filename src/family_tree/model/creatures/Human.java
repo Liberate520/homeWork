@@ -14,7 +14,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
     private String firstName, lastName;
     private LocalDate dateOfBirth, dateOfDeath;
     private Gender gender;
-    private Human mother, father, spouse;
+    private Human mother, father;
     private List<Human> children;
 
     public Human(int id, String firstName, String lastName, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath) {
@@ -53,23 +53,21 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return this.dateOfBirth;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
+    public void setMother(Creatures mother) {
+        this.mother = (Human) mother;
+        mother.addChildren(this);
     }
 
-    public void setFather(Human father) {
-        this.father = father;
+    public void setFather(Creatures father) {
+        this.father = (Human) father;
+        father.addChildren(this);
     }
 
-    public void setSpouse(Human spouse) {
-        this.spouse = spouse;
-    }
-
-    public void addChildren(Human child) {
+    public void addChildren(Creatures child) {
         if (this.children == null) {
             children = new LinkedList<Human>();
         }
-        this.children.add(child);
+        this.children.add((Human) child);
     }
 
     private String viewGrandparents() {
@@ -130,18 +128,6 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
         return siblings.toString();
     }
 
-    private String viewSpouse() {
-        StringBuilder spouse = new StringBuilder();
-        if (this.spouse != null) {
-            if (this.spouse.gender.toString().equals("Мужской")) {
-                spouse.append("<Муж> \n" + this.spouse.toString() + "\n");
-            } else {
-                spouse.append("<Жена> \n" + this.spouse.toString() + "\n");
-            }
-        }
-        return spouse.toString();
-    }
-
     private String viewChildrens(){
         StringBuilder childrens = new StringBuilder();
         if (this.children != null) {
@@ -175,7 +161,6 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
                 this.viewMother() +
                 this.viewFather() +
                 this.viewSiblings() +
-                this.viewSpouse() +
                 this.viewChildrens() +
                 this.viewGrandchildrens();
     }
@@ -186,7 +171,7 @@ public class Human implements Serializable, Comparable<Human>, Creatures {
                     "; Имя: " + this.firstName +
                     "; Фамилия: " + this.lastName +
                     "; Пол: " + this.gender.toString() +
-                    "; Возраст: " + this.getAge() + " лет" +
+                    "; Возраст: " + this.getAge() +
                     "; Дата рождения: " + this.dateOfBirth);
             if (this.dateOfDeath != null) {
                 stringBuilder.append("; Дата смерти: " + this.dateOfDeath + ";");

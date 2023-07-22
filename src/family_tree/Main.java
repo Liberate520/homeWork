@@ -10,5 +10,7 @@ public class Main {
         FileHandler fileHandler = new FileHandler();
         console.loadFamilyTreeFromFile(fileHandler, "src/family_tree/model/saves/FamilyTree.txt");
         console.start();
+        console.saveFamilyTreeInFile(fileHandler, "src/family_tree/model/saves/FamilyTree.txt");
+
     }
 }

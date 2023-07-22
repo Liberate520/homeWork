@@ -13,6 +13,9 @@ public class MainMenu {
         commandsList.add(new SortByDateOfBirth(console));
         commandsList.add(new SortByAge(console));
         commandsList.add(new GetAllFamilyInfo(console));
+        commandsList.add(new AddMember(console));
+        commandsList.add(new AddMother(console));
+        commandsList.add(new AddFather(console));
         commandsList.add(new Finish(console));
     }
 

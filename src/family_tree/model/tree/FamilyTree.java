@@ -17,6 +17,36 @@ public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E
     public void addCreature(E creature) {
        this.tree.add(creature);
     }
+    public String addMother(int idCreature, int idMother){
+        for (E creature: this.tree){
+            if (creature.getId()==idCreature)
+            {
+                for (E mother: this.tree){
+                    if (mother.getId()==idMother)
+                    {
+                      creature.setMother(mother);
+                      return "Родственная связь обновлена.";
+                    }
+                }
+            }
+        }
+        return "Вы ввели неверное значение!";
+    }
+    public String addFather(int idCreature, int idFather){
+        for (E creature: this.tree){
+            if (creature.getId()==idCreature)
+            {
+                for (E father: this.tree){
+                    if (father.getId()==idFather)
+                    {
+                        creature.setFather(father);
+                        return "Родственная связь обновлена.";
+                    }
+                }
+            }
+        }
+        return "Вы ввели неверное значение!";
+    }
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (E creature: this.tree) {
@@ -44,6 +74,9 @@ public class FamilyTree<E extends Creatures> implements Serializable, Iterable<E
     }
     public void sortByDateOfAge(){
         Collections.sort(this.tree, new CreaturesComparatorByAge<>());
+    }
+    public int getLastId(){
+        return tree.size();
     }
     public Iterator<E> iterator() {
         return new CreaturesIterator<>(this.tree);
