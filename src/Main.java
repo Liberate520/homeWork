@@ -1,7 +1,23 @@
+import family_tree.FamilyTree;
+import person.Gender;
+import person.Person;
+import writer.FileHandler;
+
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        String filePath = "src/family_tree/data/tree.out";
+        FileHandler fileHandler = new FileHandler();
+
+//        FamilyTree familyTree = TreeInitiate();
+//        fileHandler.save(familyTree, filePath);
+
+        FamilyTree familyTree = (FamilyTree) fileHandler.read(filePath);
+        System.out.println(familyTree);
+
+    }
+    static FamilyTree TreeInitiate(){
         FamilyTree familyTree = new FamilyTree();
         Person person1 = new Person("Ivan", "Ivanov", Gender.Male, LocalDate.of(1960, 1, 1));
         Person person2 = new Person("Maria", "Ivanova", Gender.Female, LocalDate.of(1960, 3, 21));
@@ -15,12 +31,11 @@ public class Main {
         familyTree.addPerson(person4);
         familyTree.addPerson(person5);
 
+//        System.out.println(person1.getChildren());
+//        System.out.println(person3.getBirthDate());
+//        System.out.println(person3.getMother());
+//        System.out.println(person2.getMother());
 
-        System.out.println(familyTree);
-
-        System.out.println(person1.getChildren());
-        System.out.println(person3.getBirthDate());
-        System.out.println(person3.getMother());
-        System.out.println(person2.getMother());
+        return familyTree;
     }
 }
