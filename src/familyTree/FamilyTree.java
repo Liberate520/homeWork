@@ -4,12 +4,14 @@ import person.Person;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Все семейные связи решил хранить тут, а не в полях класса person.Person.
  * Смотрите familyTree.Connections.java.
  */
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Connections>> {
     private HashMap<Person, Connections> family;
 
     public FamilyTree() {
@@ -63,5 +65,10 @@ public class FamilyTree implements Serializable {
             sb.append(person).append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Map.Entry<Person, Connections>> iterator() {
+        return family.entrySet().iterator();
     }
 }

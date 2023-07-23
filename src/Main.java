@@ -1,20 +1,23 @@
 import familyTree.ConnectionType;
+import familyTree.Connections;
 import familyTree.FamilyTree;
+import person.Person;
 import readWrite.FileHandler;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         FamilyTree family = new FamilyTree();
         person.Person egor = new person.Person("Егор", "Меньшиков", "Леонидович",
-                person.Gender.MALE, LocalDate.of(1986,3,13));
+                person.Gender.MALE, LocalDate.of(1986, 3, 13));
         person.Person petr = new person.Person("Петр", "Меньшиков", "Леонидович",
-                person.Gender.MALE, LocalDate.of(1988,8,11));
+                person.Gender.MALE, LocalDate.of(1988, 8, 11));
         person.Person marina = new person.Person("Марина", "Меньшикова", "Рудольфовна",
-                person.Gender.FEMALE, LocalDate.of(1957,11,30), "Блохинцева");
+                person.Gender.FEMALE, LocalDate.of(1957, 11, 30), "Блохинцева");
         person.Person leonid = new person.Person("Леонид", "Меньшиков", "Иеронимович",
-                person.Gender.MALE, LocalDate.of(1954,10,18));
+                person.Gender.MALE, LocalDate.of(1954, 10, 18));
 
         System.out.println(family.addPerson(egor));
         family.addPerson(petr);
@@ -37,6 +40,12 @@ public class Main {
 
         FamilyTree familyRead = (FamilyTree) fh.read();
         System.out.println(familyRead);
+
+        for (Map.Entry<Person, Connections> item:
+             familyRead) {
+            System.out.println(item.getKey());
+            System.out.println(item.getValue());
+        }
     }
 }
 
