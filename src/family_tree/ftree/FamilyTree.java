@@ -28,7 +28,8 @@ public class FamilyTree {
         sB.append("Full Family tree:\n");
         sB.append("============\n");
         for (Person person: relations){
-            sB.append(person.getID() + ". ");
+            sB.append(person.getID());
+            sB.append(". ");
             sB.append(person.getPerson());
             if (person.getMother() != null || person.getFather() != null){
                 sB.append("\n :: Parents: ");
@@ -42,9 +43,7 @@ public class FamilyTree {
                     sB.append(person.getFather().getPerson());
                 }
             }
-            if (getSisterBrother(person.getMother(), person.getFather(), person.getID()) != null){
-                sB.append(getSisterBrother(person.getMother(), person.getFather(), person.getID()));
-            }
+            sB.append(getSisterBrother(person.getMother(), person.getFather(), person.getID()));
             sB.append("\n------------\n");
         }
 
@@ -55,7 +54,8 @@ public class FamilyTree {
         StringBuilder sB = new StringBuilder();
         Person person = relations.get(id);
         sB.append("\n============\n");
-        sB.append(person.getID() + ". ");
+        sB.append(person.getID());
+        sB.append(". ");
         sB.append(person);
         sB.append(getSisterBrotherFull(person.getMother(), person.getFather(), person.getID()));
         sB.append("\n============\n");
@@ -66,6 +66,7 @@ public class FamilyTree {
     public String getSisterBrotherFull(Person mother, Person father, long id){
 
         List <Person> result = new ArrayList<>();
+        StringBuilder sB = new StringBuilder();
 
         for (Person person: relations){
             if (person.getID() != id && ((person.getMother() != null && person.getMother() == mother) || 
@@ -75,23 +76,23 @@ public class FamilyTree {
         }
 
         if (result.size() > 0){
-            String resultList = "";
             for(Person entry: result){
                 if (entry.getGender() == Gender.Female){
-                    resultList += "\n :: Sister: " + result.toString();
+                    sB.append("\n :: Sister: ");
+                    sB.append(result);
                 } else {
-                    resultList += "\n :: Brother: " + result.toString();
+                    sB.append("\n :: Brother: ");
+                    sB.append(result);
                 }
             }
-            return resultList;
         }
-        
-        return null;
+        return sB.toString();
     }
 
     public String getSisterBrother(Person mother, Person father, long id){
 
         List <Person> result = new ArrayList<>();
+        StringBuilder sB = new StringBuilder();
 
         for (Person person: relations){
             if (person.getID() != id && ((person.getMother() != null && person.getMother() == mother) ||
@@ -101,18 +102,17 @@ public class FamilyTree {
         }
 
         if (result.size() > 0){
-            String resultList = "";
             for(Person entry: result){
                 if (entry.getGender() == Gender.Female){
-                    resultList += "\n :: Sister: " + entry.getPerson();
+                    sB.append("\n :: Sister: ");
+                    sB.append(entry.getPerson());
                 } else {
-                    resultList += "\n :: Brother: " + entry.getPerson();
+                    sB.append("\n :: Brother: ");
+                    sB.append(entry.getPerson());
                 }
             }
-            return resultList;
         }
-
-        return null;
+        return sB.toString();
     }
 
 }

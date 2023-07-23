@@ -2,7 +2,6 @@ package family_tree;
 
 import family_tree.person.Gender;
 import family_tree.person.Person;
-import family_tree.person.Marriage;
 
 import java.time.LocalDate;
 import family_tree.ftree.FamilyTree;
@@ -57,9 +56,9 @@ public class Main {
         familyTree.addPerson(rec8);
         familyTree.addPerson(rec9);
 
-        System.out.println(familyTree.getFullRelativesInfo());
+//        System.out.println(familyTree.getFullRelativesInfo());
 
-//        System.out.println(familyTree.getPersonalTree(3));
+        System.out.println(familyTree.getPersonalTree(3));
 
     }
 }
