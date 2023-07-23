@@ -26,7 +26,7 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    presenter.addPeople(people);
+                    familyTreeView.addPeople(people);
                     break;
                 case 2:
                     familyTreeView.printPeople(people);
