@@ -1,11 +1,12 @@
 package family_tree.person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     static long idc;
     private long id;
     private String firstName;
@@ -16,9 +17,9 @@ public class Person {
     private Person mother; // biological mother
     private Person father; // biological father
     private List<Marriage> marriage = new ArrayList<>();
-// TODO 
+// TODO: use more fields
 /*
-    private String givenName;
+    private String maidenName;
     private String birthPlace;
     private String deathPlace;
 */

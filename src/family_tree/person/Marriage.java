@@ -1,10 +1,11 @@
 package family_tree.person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
-public class Marriage {
+public class Marriage implements Serializable {
     private List<Person> spousesList;
     private String marriedName; 
     private LocalDate marriedDate;

@@ -3,10 +3,11 @@ package family_tree.ftree;
 import family_tree.person.Gender;
 import  family_tree.person.Person;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     
     private List<Person> relations;
 
