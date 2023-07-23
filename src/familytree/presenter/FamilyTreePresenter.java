@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FamilyTreePresenter {
-    private static Scanner scanner = new Scanner(System.in);
+//    private static Scanner scanner = new Scanner(System.in);
     private Familytree familytree = new Familytree();
     private FamilyTreeView familyTreeView;
     List<Person> people = new ArrayList<>();
@@ -21,7 +21,7 @@ public class FamilyTreePresenter {
     }
 
     //=======================================================================================
-    public void addPeople(List<Person> people) {
+    /*public void addPeople(List<Person> people) {
         System.out.println("Хотите добавить людей? (да/нет)");
         // Scanner scanner;
         String choice = scanner.nextLine();
@@ -112,5 +112,5 @@ public class FamilyTreePresenter {
         }
 
 
-    }
+    }*/
 }
