@@ -1,4 +1,6 @@
-package com.britenight.FamilyTree;
+package com.britenight.Model.FamilyTree;
+
+import com.britenight.Model.Person.Person;
 
 import java.io.Serializable;
 import java.util.*;
@@ -17,9 +19,25 @@ public class FamilyTree<E extends Comparable<Object>> implements Serializable, I
     //region Relations
     public void addRelation(Relation<E> relation) {
         relations.add(relation);
+        if (relation.getRelationObjectType() == RelationType.Parent) {
+            Relation<E> tmpRelation = new Relation<>(relation.getRelationObject(), relation.getMainObject(), RelationType.Child);
+            relations.add(tmpRelation);
+        }
+        else if (relation.getRelationObjectType() == RelationType.Child) {
+            Relation<E> tmpRelation = new Relation<>(relation.getRelationObject(), relation.getMainObject(), RelationType.Parent);
+            relations.add(tmpRelation);
+        }
     }
 
     public void removeRelation(Relation<E> relation) {
+        if (relation.getRelationObjectType() == RelationType.Parent) {
+            Relation<E> tmpRelation = new Relation<>(relation.getRelationObject(), relation.getMainObject(), RelationType.Child);
+            relations.remove(tmpRelation);
+        }
+        else if (relation.getRelationObjectType() == RelationType.Child) {
+            Relation<E> tmpRelation = new Relation<>(relation.getRelationObject(), relation.getMainObject(), RelationType.Parent);
+            relations.remove(tmpRelation);
+        }
         relations.remove(relation);
     }
 
@@ -27,31 +45,31 @@ public class FamilyTree<E extends Comparable<Object>> implements Serializable, I
         return relations;
     }
 
-    public List<Relation<E>> getRelations(E node, boolean isMainObject) {
+    public List<Relation<E>> getRelations(E object, boolean isMainObject) {
         return relations.stream().filter(relation ->
-                isMainObject && relation.getMainObject().equals(node)
-                        || !isMainObject && relation.getRelationObject().equals(node)).collect(Collectors.toList());
+                isMainObject && relation.getMainObject().equals(object)
+                        || !isMainObject && relation.getRelationObject().equals(object)).collect(Collectors.toList());
     }
 
-    public List<Relation<E>> getRelations(E node, boolean isMainObject, RelationType searchFor) {
+    public List<Relation<E>> getRelations(E object, boolean isMainObject, RelationType searchFor) {
         return relations.stream().filter(relation ->
-                (isMainObject && relation.getMainObject().equals(node) || !isMainObject && relation.getRelationObject().equals(node))
+                (isMainObject && relation.getMainObject().equals(object) || !isMainObject && relation.getRelationObject().equals(object))
                         && relation.getRelationObjectType() == searchFor).collect(Collectors.toList());
     }
     //endregion
 
     //region Objects
-    public void addObject(E node) {
-        objArray.add(node);
+    public void addObject(E object) {
+        objArray.add(object);
     }
 
-    public void removeObject(E node) {
-        var tmp = relations.stream().filter(relation -> relation.getRelationObject() == node
-                || relation.getMainObject() == node).collect(Collectors.toList());
+    public void removeObject(E object) {
+        var tmp = relations.stream().filter(relation -> relation.getRelationObject() == object
+                || relation.getMainObject() == object).collect(Collectors.toList());
         for (Relation<E> i : tmp) {
             relations.remove(i);
         }
-        objArray.remove(node);
+        objArray.remove(object);
     }
 
     public List<E> getObjects() {
@@ -71,14 +89,6 @@ public class FamilyTree<E extends Comparable<Object>> implements Serializable, I
         }
 
         return list;
-    }
-
-    public List<E> getRelativeObjects(E node, boolean isMainObject, RelationType searchFor) {
-        return getRelativeObjects(getRelations(node, isMainObject, searchFor), isMainObject);
-    }
-
-    public List<E> getRelativeObjects(E node, boolean isMainObject) {
-        return getRelativeObjects(getRelations(node, isMainObject), isMainObject);
     }
 
     public ArrayList<FamilyTreeNode<E>> getNodes() {

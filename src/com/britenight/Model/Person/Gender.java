@@ -1,4 +1,4 @@
-package com.britenight.Person;
+package com.britenight.Model.Person;
 
 public enum Gender {
     Male,

@@ -1,7 +1,6 @@
-package com.britenight.FamilyTree;
+package com.britenight.Model.FamilyTree;
 
 import java.util.List;
-import java.util.Objects;
 
 public class FamilyTreeNode<E extends Comparable<Object>> implements Comparable<Object> {
     private final E object;

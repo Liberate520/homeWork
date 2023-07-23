@@ -1,20 +1,21 @@
-package com.britenight;
+package com.britenight.Presenter;
 
-import com.britenight.FamilyTree.FamilyTree;
-import com.britenight.FamilyTree.FamilyTreeNode;
-import com.britenight.FamilyTree.Relation;
-import com.britenight.FamilyTree.RelationType;
-import com.britenight.Person.Gender;
-import com.britenight.Person.Person;
-import com.britenight.ImportExport.OperationsWithFile;
+import com.britenight.Model.FamilyTree.FamilyTree;
+import com.britenight.Model.FamilyTree.FamilyTreeNode;
+import com.britenight.Model.FamilyTree.Relation;
+import com.britenight.Model.FamilyTree.RelationType;
+import com.britenight.Model.ImportExport.OperationsWithFile;
+import com.britenight.Model.Person.Gender;
+import com.britenight.Model.Person.Person;
+import com.britenight.View.View;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         FamilyTree<Person> tree = new FamilyTree<>();
 
         tree.addObject(new Person(0, "Sergey", LocalDate.parse("1980-02-24"), Gender.Male));
@@ -40,16 +41,12 @@ public class Main {
         tree.addRelation(new Relation<Person>(tree.getObjects().get(5), tree.getObjects().get(3), RelationType.Parent));
         tree.addRelation(new Relation<Person>(tree.getObjects().get(5), tree.getObjects().get(4), RelationType.Sibling));
 
-        var importExport = new OperationsWithFile<Person>();
-
-        importExport.saveToFile(tree, "myTree.fmt");
-
-        FamilyTree<Person> importedTree = importExport.readFromFile("myTree.fmt");
-
-
-
+        OperationsWithFile.saveToFile(tree, "myTree.fmt");
+        FamilyTree<Person> importedTree = (FamilyTree<Person>) OperationsWithFile.readFromFile("myTree.fmt");
+        assert importedTree != null;
 
         List<FamilyTreeNode<Person>> nodes = importedTree.getNodes();
+
         nodes.sort(new Comparator<FamilyTreeNode<Person>>() {
             @Override
             public int compare(FamilyTreeNode o1, FamilyTreeNode o2) {
@@ -58,12 +55,12 @@ public class Main {
         });
 
         for (FamilyTreeNode<Person> ftn : nodes) {
-            System.out.println("\n");
-            System.out.println("Человек:");
-            System.out.println(ftn.getObject());
-            System.out.println("Связи:");
+            View.print("");
+            View.print("Человек:");
+            View.print(ftn.getObject().toString());
+            View.print("Связи:");
             for (Relation<Person> relation : ftn.getRelations()) {
-                System.out.printf("%s - %s\n", relation.getRelationObject(), relation.getRelationObjectType().name());
+                View.print(String.format("%s - %s", relation.getRelationObject(), relation.getRelationObjectType().name()));
             }
         }
     }

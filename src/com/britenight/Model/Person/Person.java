@@ -1,4 +1,4 @@
-package com.britenight.Person;
+package com.britenight.Model.Person;
 
 import java.io.Serializable;
 import java.time.LocalDate;

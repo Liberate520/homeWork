@@ -1,6 +1,4 @@
-package com.britenight.FamilyTree;
-
-import com.britenight.Person.Person;
+package com.britenight.Model.FamilyTree;
 
 import java.io.Serializable;
 import java.util.Objects;
