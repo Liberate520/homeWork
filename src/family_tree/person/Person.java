@@ -173,8 +173,6 @@ public class Person {
                     sB.append(spouse.getPerson());
                 }
                 sB.append("\n");
-            } else {
-                sB.append("");
             }
         }
         return sB.toString();
