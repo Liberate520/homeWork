@@ -1,6 +1,10 @@
 package GenerationTree.Model.Person;
 
+import java.io.File;
+import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 
 import GenerationTree.Model.FileHandler.FileHandler;
 import GenerationTree.Model.Person.Comparators.PersonComparatorBySename;
@@ -9,26 +13,27 @@ import GenerationTree.Model.Tree.GenerationTree;
 import GenerationTree.Model.Tree.Service;
 
 public class FamilyTreeService implements Service {
-    private PersonIdGenerator idPerson;
-    private GenerationTree<Person> tree;
-    private FileHandler<GenerationTree<Person>> fHandler;
+    private final String DATA_FOLDER = "Data\\";
+    private final String FILE_TREE_EXTENSIONS = ".out";
+    private final String ID_GENERATOR_FILE_NAME = "id_gen.data";
+    private PersonIdGenerator idGenerator;
+    private GenerationTree tree;
+    private FileHandler<GenerationTree> treeFileHandler;
+    private FileHandler<PersonIdGenerator> idFileHandler;
 
     public FamilyTreeService() {
-        this("", new PersonIdGenerator());
+        this("");
     }
 
     public FamilyTreeService(String treeName) {
-        this(treeName, new PersonIdGenerator());
-    }
-
-    public FamilyTreeService(String treeName, PersonIdGenerator personIdGenerator) {
-        this.tree = new GenerationTree<Person>(treeName);
-        this.idPerson = personIdGenerator;
-        this.fHandler = new FileHandler<>();
+        this.tree = new GenerationTree(treeName);
+        this.idGenerator = PersonIdGenerator.getIdGenerator();
+        this.treeFileHandler = new FileHandler<>();
+        this.idFileHandler = new FileHandler<>();
     }
 
     public int addPerson(String name, Gender gender, LocalDate dateBirth) {
-        int id = idPerson.GetNewId();
+        int id = idGenerator.GetNewId();
         Person person = new Person(id, name, gender, dateBirth);
         addPerson(person);
 
@@ -45,7 +50,7 @@ public class FamilyTreeService implements Service {
     }
 
     public boolean addSpouse(int personId, Person spouse, LocalDate dateOfMarriage) {
-        var person = this.tree.getPersonById(personId);
+        var person = (Person) this.tree.getPersonById(personId);
         if (person != null && spouse != null) {
             person.addSpouse(spouse, dateOfMarriage);
             return true;
@@ -54,24 +59,24 @@ public class FamilyTreeService implements Service {
     }
 
     public boolean addChild(int parrentId, int childId) {
-        var parrent = this.tree.getPersonById(parrentId);
+        var parrent = (Person) this.tree.getPersonById(parrentId);
         var child = this.tree.getPersonById(childId);
         if (parrent != null && child != null) {
-            parrent.addChild(child);
+            parrent.addChild((Person) child);
             return true;
         }
         return false;
     }
 
     public Person getPersonById(int id) {
-        return this.tree.getPersonById(id);
+        return (Person) this.tree.getPersonById(id);
     }
 
     public String getPersonsInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список студентов:\n");
 
-        for (Person person : tree) {
+        for (var person : tree) {
             stringBuilder.append(person);
             stringBuilder.append("\n");
         }
@@ -114,21 +119,63 @@ public class FamilyTreeService implements Service {
         return sb.toString();
     }
 
-    public boolean saveTree() {
-        return fHandler.save(tree, "Data\\" + this.tree.getTreeName() + ".out");
+    @Override
+    public List<String> getForest() {
+        File directory = new File(DATA_FOLDER);
+        if (!directory.isDirectory()) {
+            return null;
+        }
+        File[] files = directory.listFiles();
+        List<String> treesNames = new LinkedList<>();
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getName().endsWith(FILE_TREE_EXTENSIONS)) {
+                String fileName = files[i].getName();
+                int lastDotIndex = fileName.lastIndexOf(".");
+                if (lastDotIndex > 0) {
+                    treesNames.add(fileName.substring(0, lastDotIndex));
+                } else {
+                    treesNames.add(fileName);
+                }
+            }
+        }
+        return treesNames;
     }
 
+    @Override
+    public boolean saveTree() {
+        return idFileHandler.save(idGenerator, DATA_FOLDER + ID_GENERATOR_FILE_NAME)
+                && treeFileHandler.save(tree, DATA_FOLDER + this.tree.getTreeName() + FILE_TREE_EXTENSIONS);
+    }
+
+    @Override
     public boolean loadTree(String treeName) {
-        var tree = fHandler.read("Data\\" + treeName + ".out");
-        if (tree != null) {
+        var tree = treeFileHandler.read(DATA_FOLDER + treeName + FILE_TREE_EXTENSIONS);
+        var idGenerator = idFileHandler.read(DATA_FOLDER + ID_GENERATOR_FILE_NAME);
+        if (tree != null && idGenerator != null) {
             this.tree = tree;
+            this.idGenerator = idGenerator;
             return true;
         }
         return false;
+    }
+
+    public boolean deleteTree(String name) {
+        return treeFileHandler.deleteFile(DATA_FOLDER + name + FILE_TREE_EXTENSIONS);
+    }
+
+    @Override
+    public void addNewTree(String name) throws FileAlreadyExistsException {
+        var savedTrees = getForest();
+        if (savedTrees != null && savedTrees.contains(name)) {
+            throw new FileAlreadyExistsException(name);
+        }
+        this.tree = new GenerationTree(name);
+        saveTree();
     }
 
     @Override
     public void addTreeItem(String name, Gender gender, LocalDate dateBirth) {
         addPerson(name, gender, dateBirth);
     }
+
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import GenerationTree.Model.Tree.GenTreeItem;
 
-public class TreeItemIterator<E extends GenTreeItem<E>> implements Iterator<E> {
+public class TreeItemIterator<E extends GenTreeItem> implements Iterator<E> {
     private int index;
     private List<E> persons;
 

@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import GenerationTree.Model.Tree.GenTreeItem;
 
-public class TreeItemComparatorByAge<E extends GenTreeItem<E>> implements Comparator<E> {
+public class TreeItemComparatorByAge<E extends GenTreeItem> implements Comparator<E> {
 
     @Override
     public int compare(E o1, E o2) {

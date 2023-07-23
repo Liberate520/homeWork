@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface GenTreeItem<T> extends Serializable {
+public interface GenTreeItem extends Serializable {
     int getId();
 
     String getName();
 
     LocalDate getDateBirth();
 
-    List<T> getParrents();
+    List<GenTreeItem> getParrents();
 
-    List<T> getChildren();
+    List<GenTreeItem> getChildren();
 }

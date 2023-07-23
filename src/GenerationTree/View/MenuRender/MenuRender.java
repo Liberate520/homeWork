@@ -20,13 +20,15 @@ public class MenuRender {
     private Map<String, List<String>> menuData;
     private int consoleLines;
     private int largestLine;
-    private int helpTextLines = 0;
+    private int helpTextLines;
     private boolean isEscActive;
     private boolean showHelpControl;
     private String prefix;
     private String prefixMark;
     private ConsoleManager cm = new ConsoleManager();
     private Set<PageData> pagesMap;
+
+    private PageData currentPage;
 
     public MenuRender(Map<String, List<String>> menuData, int consoleLines,
             boolean isEscActive, boolean showHelpControl, String headerText, String footerText, String prefix,
@@ -42,48 +44,55 @@ public class MenuRender {
         this.prefixMark = prefixMark == null ? "" : prefixMark;
         this.largestLine = getLargestLineLength();
         this.pagesMap = splitDataToPages(this.menuData, this.consoleLines, HEADER_LINE_COUNT);
+        this.currentPage = null;
     }
 
     public int startRenderMenu(int index) {
         int largestKey = getLargestKeyTasks();
         this.consoleLines = largestKey > this.consoleLines ? largestKey + 1 : this.consoleLines;
-        PageData page = null;
         try {
-            page = getCheckCoordinates(index);
+            currentPage = getCheckCoordinates(index);
         } catch (Exception e) {
             e.printStackTrace();
         }
         int pageCount = this.pagesMap.size();
 
-        ConsoleManager.hideCursor(true);
-        drawMenu(page);
+        // ConsoleManager.hideCursor(true);
+        drawMenu();
         while (true) {
+            var frameChanged = false;
             int key = this.cm.getKeyEvent();
             switch (key) {
                 case KeyEvent.VK_ENTER:
                     ConsoleManager.hideCursor(false);
                     clearConsoleText();
-                    return page.getCurrentLineIndex() + page.getStartLineIndex() + 1;
+                    return currentPage.getCurrentLineIndex() + currentPage.getStartLineIndex() + 1;
                 case KeyEvent.VK_UP:
-                    if (page.getCurrentLineIndex() > 0) {
-                        page.changeCurrentLineIndex(-1);
+                    if (currentPage.getCurrentLineIndex() > 0) {
+                        currentPage.changeCurrentLineIndex(-1);
+                        goCursorToStartPossition();
+                        frameChanged = true;
                     }
                     break;
                 case KeyEvent.VK_DOWN:
-                    if (page.getCurrentLineIndex() < page.getLineCount() - 1) {
-                        page.changeCurrentLineIndex(1);
+                    if (currentPage.getCurrentLineIndex() < currentPage.getLineCount() - 1) {
+                        currentPage.changeCurrentLineIndex(1);
+                        goCursorToStartPossition();
+                        frameChanged = true;
                     }
                     break;
                 case KeyEvent.VK_LEFT:
-                    if (page.getPageId() > 1) {
-                        page = getNexPage(page, this.pagesMap, -1, this.prefix.length());
+                    if (currentPage.getPageId() > 1) {
+                        currentPage = getNexPage(-1);
                         clearConsoleText();
+                        frameChanged = true;
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (page.getPageId() < pageCount) {
-                        page = getNexPage(page, this.pagesMap, 1, this.prefix.length());
+                    if (currentPage.getPageId() < pageCount) {
+                        currentPage = getNexPage(1);
                         clearConsoleText();
+                        frameChanged = true;
                     }
                     break;
                 case KeyEvent.VK_ESCAPE:
@@ -94,8 +103,11 @@ public class MenuRender {
                     }
                     break;
             }
-            setCursorStartPossition();
-            drawMenu(page);
+            if (frameChanged) {
+                drawMenu();
+                frameChanged = false;
+            }
+
         }
     }
 
@@ -118,18 +130,18 @@ public class MenuRender {
         throw new Exception("Page not found!");
     }
 
-    private void drawMenu(PageData page) {
+    private void drawMenu() {
         int blockIdCount = 0;
         this.cm.PrintText(this.headerText);
-        for (String key : page.getDataKeySet()) {
+        for (String key : currentPage.getDataKeySet()) {
             if (blockIdCount > 0) {
                 this.cm.printText();
             }
             this.cm.PrintText(key);
-            List<String> pageData = page.getDataByKey(key);
+            List<String> pageData = currentPage.getDataByKey(key);
             for (int i = 0; i < pageData.size(); i++) {
                 clearLine();
-                boolean isSelected = i + blockIdCount == page.getCurrentLineIndex();
+                boolean isSelected = i + blockIdCount == currentPage.getCurrentLineIndex();
                 String prToConsole;
                 String lineText = pageData.get(i).replace("\n", " ");
                 if (this.prefixMark.equals("")) {
@@ -146,34 +158,35 @@ public class MenuRender {
             }
             blockIdCount += pageData.size();
         }
+        cm.PrintText("\n".repeat(getEmtyLinesCount()));
         if (this.showHelpControl) {
-            drawHelpText(page);
+            drawHelpText();
         }
         if (!footerText.isEmpty()) {
             this.cm.PrintText(this.footerText);
         }
     }
 
-    private void drawHelpText(PageData page) {
+    private void drawHelpText() {
         int pagesCount = this.pagesMap.size();
 
         String strPageNumbers = "";
         if (pagesCount > 1) {
             strPageNumbers = "-".repeat(pagesCount);
-            String strPageId = String.valueOf(page.getPageId());
+            String strPageId = String.valueOf(currentPage.getPageId());
             for (int i = 0; i < strPageId.length(); i++) {
-                strPageNumbers = strPageNumbers.substring(0, page.getPageId() - 1 + i) + strPageId.charAt(i)
-                        + strPageNumbers.substring(page.getPageId() + i);
+                strPageNumbers = strPageNumbers.substring(0, currentPage.getPageId() - 1 + i) + strPageId.charAt(i)
+                        + strPageNumbers.substring(currentPage.getPageId() + i);
             }
         }
         String indent = " ".repeat(50);
         if (pagesCount > 2) {
-            if (page.getPageId() > 1) {
+            if (currentPage.getPageId() > 1) {
                 strPageNumbers = "< " + strPageNumbers;
             } else {
                 strPageNumbers = "  " + strPageNumbers;
             }
-            if (page.getPageId() < pagesCount) {
+            if (currentPage.getPageId() < pagesCount) {
                 strPageNumbers += " >";
             } else {
                 strPageNumbers += "  ";
@@ -185,12 +198,14 @@ public class MenuRender {
         this.largestLine = helpInfo.length() > this.largestLine ? helpInfo.length() : this.largestLine;
         String pagesInfo = indent + strPageNumbers + "\n" + "=".repeat(this.largestLine);
 
-        String padding = "\n"
-                .repeat(this.consoleLines - page.getLinesCount() - page.dataSize() * HEADER_LINE_COUNT);
-        padding += pagesInfo + "\n" + helpInfo;
+        String padding = pagesInfo + "\n" + helpInfo;
 
         this.cm.printText(padding, "\n\n");
-        this.helpTextLines = 6;
+        this.helpTextLines = 4;
+    }
+
+    private int getEmtyLinesCount() {
+        return this.consoleLines - currentPage.getLinesCount() - currentPage.dataSize() * HEADER_LINE_COUNT;
     }
 
     private int getLargestLineLength() {
@@ -244,27 +259,26 @@ public class MenuRender {
         return pagesMap;
     }
 
-    private static PageData getNexPage(PageData page, Set<PageData> pagesMap,
-            int step,
-            int prefixLength) {
-        int currentIndex = page.getCurrentLineIndex();
-        final int pageId = page.getPageId();
-        page = pagesMap.stream().filter(p -> p.getPageId() == pageId + step).findFirst().get();
-        page.setCurrentLineIndex(currentIndex < page.getLinesCount() ? currentIndex : page.getLinesCount() - 1);
-        return page;
+    private PageData getNexPage(int step) {
+        int currentIndex = currentPage.getCurrentLineIndex();
+        final int pageId = currentPage.getPageId();
+        currentPage = pagesMap.stream().filter(p -> p.getPageId() == pageId + step).findFirst().get();
+        currentPage.setCurrentLineIndex(
+                currentIndex < currentPage.getLinesCount() ? currentIndex : currentPage.getLinesCount() - 1);
+        return currentPage;
     }
 
     private void clearConsoleText() {
-        goToStartPossition(this::clearLine);
+        goCursorToStartPossition(this::clearLine);
     }
 
-    private void setCursorStartPossition() {
-        goToStartPossition(null);
+    private void goCursorToStartPossition() {
+        goCursorToStartPossition(null);
     }
 
-    private void goToStartPossition(Runnable methodForLines) {
-        int backCount = this.consoleLines - 1;
-        for (int i = 1; i < backCount + this.helpTextLines; i++) {
+    private void goCursorToStartPossition(Runnable methodForLines) {
+        int backCount = this.consoleLines;
+        for (int i = 0; i <= backCount + this.helpTextLines; i++) {
             if (methodForLines != null) {
                 methodForLines.run();
             }

@@ -1,7 +1,10 @@
 package GenerationTree.Presenter;
 
+import java.nio.file.FileAlreadyExistsException;
+import java.util.LinkedList;
+import java.util.List;
+
 import GenerationTree.Model.Person.FamilyTreeService;
-import GenerationTree.Model.Person.PersonIdGenerator;
 import GenerationTree.Model.Tree.Service;
 import GenerationTree.View.View;
 
@@ -12,17 +15,30 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
+        this.service = new FamilyTreeService();
     }
 
-    public void setTreeService(String name) {
-        this.service = new FamilyTreeService();
-        boolean loaded = this.service.loadTree(name);
-        if (loaded) {
-            view.print("Древо семьи " + name + " загружено из файла.");
-        } else {
-            this.service = new FamilyTreeService(name, new PersonIdGenerator());
-            this.service.saveTree();
-            view.print("Файл с такой фамилией не найден... Создано новое древо семьи: " + name);
+    public void addNewTree(String name) {
+        try {
+            service.addNewTree(name);
+        } catch (FileAlreadyExistsException e) {
+            view.fileExist();
         }
+    }
+
+    public List<String> getAllTrees() {
+        var forest = service.getForest();
+        if (forest == null) {
+            forest = new LinkedList<>();
+        }
+        return forest;
+    }
+
+    public void loadTree(String name) {
+        service.loadTree(name);
+    }
+
+    public boolean deleteTree(String name) {
+        return service.deleteTree(name);
     }
 }

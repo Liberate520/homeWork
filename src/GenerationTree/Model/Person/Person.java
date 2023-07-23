@@ -8,7 +8,7 @@ import GenerationTree.Model.Person.Structs.Gender;
 import GenerationTree.Model.Tree.GenTreeItem;
 import GenerationTree.Model.Tree.GenerationTree;
 
-public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person> {
+public class Person implements Marrieble, GenTreeItem, Comparable<Person> {
 
     private int id;
     private String name;
@@ -19,8 +19,8 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
     private LocalDate dateBirth;
     private LocalDate dateOfMarriage;
     private LocalDate dateDaeth;
-    private List<Person> parrents;
-    private List<Person> children;
+    private List<GenTreeItem> parrents;
+    private List<GenTreeItem> children;
 
     public Person(int id, String name, Gender gender, LocalDate dateBirth) {
         this(id, name, gender, dateBirth, null);
@@ -41,8 +41,8 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
         this.id = id;
     }
 
-    public void setSurname(GenerationTree<Person> family) {
-        if (family.contains(this))
+    public void setSurname(GenerationTree family) {
+        if (family.contains((GenTreeItem) this))
             this.surname = family.getTreeName();
     }
 
@@ -70,11 +70,11 @@ public class Person implements Marrieble, GenTreeItem<Person>, Comparable<Person
         return this.dateDaeth;
     }
 
-    public List<Person> getChildren() {
+    public List<GenTreeItem> getChildren() {
         return this.children;
     }
 
-    public List<Person> getParrents() {
+    public List<GenTreeItem> getParrents() {
         return parrents;
     }
 

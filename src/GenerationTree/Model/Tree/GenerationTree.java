@@ -14,10 +14,10 @@ import GenerationTree.Model.Tree.Comparators.TreeItemComparatorByAge;
 import GenerationTree.Model.Tree.Comparators.TreeItemComporatorByName;
 import GenerationTree.Model.Tree.Iterators.TreeItemIterator;
 
-public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, Iterable<E> {
+public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
 
     private String treeName;
-    private List<E> items;
+    private List<GenTreeItem> items;
 
     public GenerationTree(String treeName) {
         this.treeName = treeName;
@@ -28,8 +28,8 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
         return this.treeName;
     }
 
-    public E getPersonById(int id) {
-        for (E item : items) {
+    public GenTreeItem getPersonById(int id) {
+        for (GenTreeItem item : items) {
             if (item.getId() == id) {
                 return item;
             }
@@ -37,18 +37,18 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
         return null;
     }
 
-    public Map<Integer, List<E>> getAllChildren(int itemId) {
+    public Map<Integer, List<GenTreeItem>> getAllChildren(int itemId) {
         return getAllChildren(getPersonById(itemId));
     }
 
-    public Map<Integer, List<E>> getAllChildren(E person) {
-        Map<Integer, List<E>> generationFiltered = new TreeMap<>();
-        Queue<E> queue = new LinkedList<>();
-        E earlyItem = null;
+    public Map<Integer, List<GenTreeItem>> getAllChildren(GenTreeItem person) {
+        Map<Integer, List<GenTreeItem>> generationFiltered = new TreeMap<>();
+        Queue<GenTreeItem> queue = new LinkedList<>();
+        GenTreeItem earlyItem = null;
         queue.offer(person);
         int step = 0;
         while (!queue.isEmpty()) {
-            E currentItem = queue.poll();
+            GenTreeItem currentItem = queue.poll();
             if (earlyItem != null && isOneGeneration(earlyItem, currentItem)) {
                 var children = generationFiltered.get(step);
                 children.addAll(currentItem.getChildren());
@@ -64,19 +64,19 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
 
     }
 
-    public Boolean addOnlyPerson(E item) {
+    public Boolean addOnlyPerson(GenTreeItem item) {
         return addItem(item, false);
     }
 
-    public Boolean addPersonAndRelatives(E item) {
+    public Boolean addPersonAndRelatives(GenTreeItem item) {
         return addItem(item, true);
     }
 
-    public Boolean addOnlyPersons(List<E> item) {
+    public Boolean addOnlyPersons(List<GenTreeItem> item) {
         return addItems(item, false);
     }
 
-    public Boolean addPersonsAndRelatives(List<E> persons) {
+    public Boolean addPersonsAndRelatives(List<GenTreeItem> persons) {
         return addItems(persons, true);
     }
 
@@ -88,7 +88,7 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
         Collections.sort(this.items, new TreeItemComparatorByAge<>());
     }
 
-    public void sortOutComparator(Comparator<E> outComporator) {
+    public void sortOutComparator(Comparator<GenTreeItem> outComporator) {
         this.items.sort(outComporator);
     }
 
@@ -96,11 +96,11 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
         Collections.reverse(this.items);
     }
 
-    public Boolean isOneGeneration(E person1, E person2) {
+    public Boolean isOneGeneration(GenTreeItem person1, GenTreeItem person2) {
         var parrents1 = person1.getParrents();
         var parrents2 = person2.getParrents();
-        for (E parrent1 : parrents1) {
-            for (E parrent2 : parrents2) {
+        for (GenTreeItem parrent1 : parrents1) {
+            for (GenTreeItem parrent2 : parrents2) {
                 if (parrent1.equals(parrent2)) {
                     return true;
                 }
@@ -109,16 +109,16 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
         return false;
     }
 
-    public boolean contains(E person) {
+    public boolean contains(GenTreeItem person) {
         return this.items.contains(person);
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public Iterator<GenTreeItem> iterator() {
         return new TreeItemIterator<>(items);
     }
 
-    private Boolean addItem(E item, Boolean allRelatives) {
+    private Boolean addItem(GenTreeItem item, Boolean allRelatives) {
         if (item != null && !this.items.contains(item)) {
             this.items.add(item);
         } else {
@@ -131,7 +131,7 @@ public class GenerationTree<E extends GenTreeItem<E>> implements Serializable, I
         return true;
     }
 
-    private Boolean addItems(List<E> items, Boolean allRelatives) {
+    private Boolean addItems(List<GenTreeItem> items, Boolean allRelatives) {
         if (items == null || items.size() == 0) {
             return false;
         }
