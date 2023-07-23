@@ -48,6 +48,16 @@ public class Human {
         StringBuilder sb = new StringBuilder();
         sb.append(name);
         sb.append(" {");
+        sb.append(this.outputData());
+        sb.append(this.outputSpouse());
+        sb.append(this.outputParents());
+        sb.append(this.outputChildren());
+        sb.append("}");
+        return sb.toString();
+    }
+
+    private String outputData() {
+        StringBuilder sb = new StringBuilder();
         if(deathDay == null){
             sb.append("Дата рождения: ");
             sb.append(birthDay);
@@ -58,11 +68,21 @@ public class Human {
             sb.append(" - ");
             sb.append(deathDay);
         }
+        return sb.toString();
+    }
+
+    private String outputSpouse() {
+        StringBuilder sb = new StringBuilder();
         if(spouse != null){
             sb.append("; ");
             sb.append("Супруг(а): ");
             sb.append(spouse.name);
         }
+        return sb.toString();
+    }
+
+    private String outputParents() {
+        StringBuilder sb = new StringBuilder();
         if(!parents.isEmpty()) {
             sb.append("; ");
             sb.append("Родители: ");
@@ -73,6 +93,11 @@ public class Human {
                 }
             }
         }
+        return sb.toString();
+    }
+
+    private String outputChildren() {
+        StringBuilder sb = new StringBuilder();
         if(!children.isEmpty()) {
             sb.append("; ");
             sb.append("Дети: ");
@@ -83,7 +108,6 @@ public class Human {
                 }
             }
         }
-        sb.append("}");
         return sb.toString();
     }
 }
