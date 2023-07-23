@@ -9,7 +9,23 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree family = new FamilyTree();
+        FamilyTree family = makeTree();
+
+        FileHandler fh = new FileHandler();
+        System.out.println(fh.write(family) ? "Write OK" : "Failed to write");
+
+        FamilyTree familyRead = (FamilyTree) fh.read();
+        System.out.println(familyRead);
+
+        for (Map.Entry<Person, Connections> item :
+                familyRead) {
+            System.out.println(item.getKey());
+            System.out.println(item.getValue());
+        }
+    }
+
+    public static FamilyTree makeTree() {
+        FamilyTree result = new FamilyTree();
         person.Person egor = new person.Person("Егор", "Меньшиков", "Леонидович",
                 person.Gender.MALE, LocalDate.of(1986, 3, 13));
         person.Person petr = new person.Person("Петр", "Меньшиков", "Леонидович",
@@ -19,33 +35,17 @@ public class Main {
         person.Person leonid = new person.Person("Леонид", "Меньшиков", "Иеронимович",
                 person.Gender.MALE, LocalDate.of(1954, 10, 18));
 
-        System.out.println(family.addPerson(egor));
-        family.addPerson(petr);
-        family.addPerson(marina);
-        family.addPerson(leonid);
-        family.putConnection(egor, ConnectionType.PARENT, marina);
-        family.putConnection(egor, ConnectionType.SIBLING, petr);
-        family.putConnection(egor, ConnectionType.PARENT, leonid);
-        family.putConnection(marina, ConnectionType.SPOUSE, leonid);
-        family.putConnection(marina, ConnectionType.CHILD, petr);
-        family.putConnection(leonid, ConnectionType.CHILD, petr);
-
-        System.out.println(family.showConnections(leonid));
-        System.out.println(family.showConnections(marina));
-        System.out.println(family.showConnections(egor));
-        System.out.println(family.showConnections(petr));
-
-        FileHandler fh = new FileHandler();
-        System.out.println(fh.write(family) ? "Write OK" : "Failed to write");
-
-        FamilyTree familyRead = (FamilyTree) fh.read();
-        System.out.println(familyRead);
-
-        for (Map.Entry<Person, Connections> item:
-             familyRead) {
-            System.out.println(item.getKey());
-            System.out.println(item.getValue());
-        }
+        result.addPerson(egor);
+        result.addPerson(petr);
+        result.addPerson(marina);
+        result.addPerson(leonid);
+        result.putConnection(egor, ConnectionType.PARENT, marina);
+        result.putConnection(egor, ConnectionType.SIBLING, petr);
+        result.putConnection(egor, ConnectionType.PARENT, leonid);
+        result.putConnection(marina, ConnectionType.SPOUSE, leonid);
+        result.putConnection(marina, ConnectionType.CHILD, petr);
+        result.putConnection(leonid, ConnectionType.CHILD, petr);
+        return result;
     }
 }
 
