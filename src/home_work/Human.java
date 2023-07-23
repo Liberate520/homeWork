@@ -23,9 +23,7 @@ public class Human implements Serializable{
     }
 
     public Human(String name, Gender gender, LocalDate dateOfBirth) {
-        this.name = name;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
+        this(name, gender, dateOfBirth, null);
     }
 
     public void addChildren(Human children) {
@@ -54,7 +52,9 @@ public class Human implements Serializable{
 
     public List<String> getChildrensName() {
         for (Human human : childrens) {
-            childrensName.add(human.name);
+            if (!childrensName.contains(human.name)) {
+                childrensName.add(human.name);
+            }
         }
         return childrensName;
     }
@@ -73,11 +73,11 @@ public class Human implements Serializable{
     @Override
     public String toString() {
         if (dateOfDeath != null) {
-            return "Name: " + this.name + " gender: " + this.gender + " data of birth: " + this.dateOfBirth +
+            return "Name: " + name + " gender: " + gender + " data of birth: " + dateOfBirth +
                                             " date of death: " + dateOfDeath;
         } 
         else {
-            return "Name: " + this.name + " gender: " + this.gender + " data of birth: " + this.dateOfBirth;
+            return "Name: " + name + " gender: " + gender + " data of birth: " + dateOfBirth;
         }
     }
 }
