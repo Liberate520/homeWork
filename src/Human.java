@@ -1,62 +1,91 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
 
     private String name;
-    private String dataOfBirth;
-    private String dateOfDeath;
+    private LocalDate dataOfBirth;
+    private LocalDate dateOfDeath;
     private Gender gender;
+    private Kinship kinship;
     private int id;
-    private Human mother;
-    private Human father;
     private List<Human> cildrenList;
-    private int idCildren;
+    private List<Human> parentsList;
+    private List<Human> tempList;
+    private int idKinship;
+    private String str;
 
-    public Human(String name,Gender gender, String dataOfBirth, String dataOfDeath) {
+    public Human(String name, Gender gender, LocalDate dataOfBirth, LocalDate dataOfDeath) {
         this.name = name;
-        this.gender=gender;
+        this.gender = gender;
         this.dataOfBirth = dataOfBirth;
         this.dateOfDeath = dataOfDeath;
-        cildrenList=new ArrayList<>();
+        cildrenList = new ArrayList<>();
+        parentsList = new ArrayList<>();
+        tempList = new ArrayList<>();
+
     }
-    public Human(String name,Gender gender, String dataOfBirth) {
-        this(name,gender, dataOfBirth,null);
+
+    public Human(String name, Gender gender, LocalDate dataOfBirth) {
+        this(name, gender, dataOfBirth, null);
     }
 
     public int getId() {
         return id;
     }
-    public void addCildren(Human human){
-        this.idCildren ++;
-        cildrenList.add(human);
+
+    public void addKinship(Human human, Kinship kinship) {
+        this.kinship = kinship;
+        if (this.kinship == Kinship.child) {
+            cildrenList.add(human);
+        } else if (this.kinship == Kinship.parent) {
+            parentsList.add(human);
+        }
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public void SetGender(Gender gender) {
         this.gender = gender;
     }
-    public String getCildren(){
+
+    public String getKinshipInfo(Kinship kinship) {
+        this.kinship = kinship;
+        if (this.kinship == Kinship.child) {
+            this.tempList = cildrenList;
+            this.str = "Список детей:\n";
+        } 
+        else if (this.kinship == Kinship.parent) {
+            this.tempList = parentsList;
+            this.str = "Список родителей:\n";
+        }
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append( name +"\n");
-        stringBuilder.append("Список детей:\n");
-        //String str=null;
-        for (Human cildren : cildrenList) {         
-            stringBuilder.append(cildren);
+        stringBuilder.append(name + "\n");
+        stringBuilder.append(this.str);
+        // String str=null;
+        this.idKinship=0;
+        for (Human temp : this.tempList) {
+            this.idKinship++;
+            stringBuilder.append("ID_Kinship: " + idKinship);
+            stringBuilder.append(temp);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
+
     @Override
     public String toString() {
-        String str="мужской";
-        if (this.gender==Gender.female) str="женский";
+        String str = "мужской";
+        if (this.gender == Gender.female)
+            str = "женский";
         if (dateOfDeath == null)
-            return "ID: "+ id+" имя: " + name + ", пол: " + str + ", Дата рождения " + dataOfBirth;
+            return " ID_Human: " + id + " имя: " + name + ", пол: " + str + ", Дата рождения: " + dataOfBirth;
         else
-            return "ID: "+ id+" имя: " + name + ", пол: " + str + ", Дата рождения " + dataOfBirth + ", Дата смерти" + dateOfDeath;
+            return " ID_Human: " + id + " имя: " + name + ", пол: " + str + ", Дата рождения: " + dataOfBirth
+                    + ", Дата смерти: " + dateOfDeath;
     }
-    
 
 }
