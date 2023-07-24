@@ -1,6 +1,6 @@
-package Models.FamilyTree;
+package Model.FamilyTree;
 
-import Models.Relation.Relation;
+import Model.Relation.Relation;
 
 import java.io.Serializable;
 import java.util.ArrayList;

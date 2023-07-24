@@ -1,4 +1,4 @@
-package Models.Relation;
+package Model.Relation;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,7 +1,7 @@
-package Models.FamilyTree;
+package Model.FamilyTree;
 
-import Models.Relation.Relation;
-import Models.Relation.RelationType;
+import Model.Relation.Relation;
+import Model.Relation.RelationType;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -11,13 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterable<Node<E>> {
-    private String treeName;
     private final LinkedList<Node<E>> nodes = new LinkedList<>();
-
-
-    public FamilyTree(String name) {
-        treeName = name;
-    }
 
 
     //region RelationsManagement
@@ -117,20 +111,8 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
 
     //region Getters
 
-    public String getTreeName() {
-        return treeName;
-    }
-
     public LinkedList<Node<E>> getNodes() {
         return nodes;
-    }
-
-    //endregion
-
-    //region Setters
-
-    public void setTreeName(String treeName) {
-        this.treeName = treeName;
     }
 
     //endregion
@@ -158,7 +140,7 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("FamilyTree: %s", treeName));
+        stringBuilder.append("FamilyTree:\n");
 
         for (Node<E> node : nodes) {
             stringBuilder.append("\n\n");
@@ -170,7 +152,7 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
 
     @Override
     public int hashCode() {
-        return Objects.hash(treeName, nodes);
+        return Objects.hash(nodes);
     }
 
     @Override

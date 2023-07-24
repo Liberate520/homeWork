@@ -1,6 +1,4 @@
-package Models.Relation;
-
-import javax.management.relation.Relation;
+package Model.Relation;
 
 public enum RelationType {
     Parent, Child, Sibling, Spouse;

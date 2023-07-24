@@ -1,15 +1,10 @@
-import MVP.Model;
-import MVP.Presenter;
-import MVP.View;
-import Models.Person.Person;
-import UI.ConsoleView;
+import Model.Person.Person;
+import View.ConsoleView;
+import View.View;
 
 public class Main {
     public static void main(String[] args) {
-        Model<Person> model = new Model<>();
-        View view = new ConsoleView();
-        Presenter<Person> presenter = new Presenter<>(model, view);
-
-        presenter.start();
+        View app = new ConsoleView<Person>();
+        app.start();
     }
 }
