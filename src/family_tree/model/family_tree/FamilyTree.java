@@ -78,4 +78,7 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     public void clear() {
         humanList.clear();
     }
+    public List<E> getHumanList() {
+        return humanList;
+    }
 }
