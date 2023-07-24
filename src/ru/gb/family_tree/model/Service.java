@@ -12,13 +12,14 @@ public class Service {
     public FamilyTree<Human> tree;
     public FileHandler fileHandler;
 
+
     public Service() {
         tree = new FamilyTree<>();
         fileHandler = new FileHandler();
     }
 
-    public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth/*, LocalDate dateOfDeath*/){
-        Human human = new Human(idHuman++, fullName ,gender, dateOfBirth/*, dateOfDeath*/);
+    public void addHuman(String fullName, Gender gender, LocalDate dateOfBirth){
+        Human human = new Human(idHuman++, fullName ,gender, dateOfBirth);
         tree.addHuman(human);
     }
 

@@ -14,9 +14,15 @@ public interface TreeItem<T> extends GetByAge, GetByName, Serializable , Compara
     void addChild(T human);
     void addParent(T human);
     LocalDate getDateOfBirth();
-    LocalDate getDateOfDeath();
+//    LocalDate getDateOfDeath();
 
     public List<T> getChildren();
 
     public List<T> getParents();
+
+
+    ////
+    String getNameFather();
+    String getNameMother();
+
 }

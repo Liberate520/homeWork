@@ -11,28 +11,29 @@ import java.util.List;
 
 public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E>{
         private List<E> humanList;
+
+    public FamilyTree(List<E> humanList) {this.humanList = humanList;}
     public FamilyTree() {this(new ArrayList<>());}
-        public FamilyTree(List<E> humanList) {this.humanList = humanList;}
+
+    public List<E> getHumanList() {
+        return humanList;
+    }
 
     public void addHuman(E human) {
         if (!humanList.contains(human)) {
-            humanList.add(human);
+            this.humanList.add(human);
             // добавление связей
             addToParents(human);
             addToChildren(human);
         }
     }
 
-//    public void addConnect(E human) {
-//        addToParents(human);
-//        addToChildren(human);
-//    }
-
     private void addToParents(E human){
         for (E parent: human.getParents()){
             parent.addChild(human);
         }
     }
+
 
     private void addToChildren(E human){
         for (E child: human.getChildren()){
