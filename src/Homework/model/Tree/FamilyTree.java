@@ -58,6 +58,14 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         return null;
     }
 
+    public void getHumanByName(String name){
+        for (E human: familyList){
+            if(human.getName().equals(name)){
+                System.out.println(human);;
+            }
+        }
+    }
+
     public String getHumanInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("В дереве ");

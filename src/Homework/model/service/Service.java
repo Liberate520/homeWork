@@ -4,14 +4,17 @@ import Homework.model.Human.Gender;
 import Homework.model.Human.Human;
 import Homework.model.Tree.FamilyTree;
 import Homework.model.Tree.FileMethods.FileMethods;
+import Homework.model.Tree.FileMethods.Writable;
+import Homework.presenter.Presenter;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Service {
 
     private FamilyTree familyTree;
-    private FileMethods fileMethods;
+    private Writable fileMethods;
 
     public Service() { familyTree = new FamilyTree<>();
         fileMethods = new FileMethods();
@@ -42,6 +45,8 @@ public class Service {
 
 
     }
+
+    public void getByName(String name){familyTree.getHumanByName(name);}
 
     public String getHumanInfo(){return familyTree.getHumanInfo();}
 

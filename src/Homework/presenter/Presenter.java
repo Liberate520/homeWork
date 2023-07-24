@@ -23,6 +23,8 @@ public class Presenter {
 
     public void getHumanInfo() { view.printAnswer(service.getHumanInfo());}
 
+    public void getByName(String name) {service.getByName(name);}
+
     public void sortByName() {
         service.sortByName();
         getHumanInfo();

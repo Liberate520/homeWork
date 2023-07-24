@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, FamilyTreeItem {
+public class Human implements Serializable, FamilyTreeItem<Human> {
 
     private String name;
     private Gender gender;
@@ -45,9 +45,9 @@ public class Human implements Serializable, FamilyTreeItem {
     }
 
 
-    public boolean addChild(Object child){
+    public boolean addChild(Human child){
         if(!children.contains(child)){
-            children.add((Human)child);
+            children.add(child);
             return true;
         }
         return false;
@@ -67,16 +67,6 @@ public class Human implements Serializable, FamilyTreeItem {
 
     public LocalDate getDeath() {return death;}
 
-    @Override
-    public void setId(long id) {
-
-    }
-
-    @Override
-    public long genId() {
-        return 0;
-    }
-
     public Human getFather(){
         for(Human parent: parents){
             if(parent.getGender() == Gender.Male){
@@ -95,19 +85,9 @@ public class Human implements Serializable, FamilyTreeItem {
         return null;
     }
 
-    @Override
-    public boolean addParent(Object human) {
-        return false;
-    }
-
     public List<Human> getParents() {return parents;}
 
     public List<Human> getChildren() {return children;}
-
-    @Override
-    public Object getSpouse() {
-        return null;
-    }
 
     public StringBuilder getChildAndAge(){
         StringBuilder sb = new StringBuilder();
@@ -155,6 +135,11 @@ public class Human implements Serializable, FamilyTreeItem {
         sb.append(", возраст: ");
         sb.append(getAge());
         sb.append(", ");
+        if(getDeath() != null){
+            sb.append("Дата смерти: ");
+            sb.append(getDeath());
+            sb.append(", ");
+        }
         sb.append(getMotherInfo());
         sb.append(", ");
         sb.append(getFatherInfo());

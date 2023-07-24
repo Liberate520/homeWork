@@ -49,6 +49,12 @@ public class ConsoleUI implements View{
         presenter.getHumanInfo();
     }
 
+    public void getByName(){
+        System.out.println("Введите ФИО человека: ");
+        String name = scanner.nextLine();
+        presenter.getByName(name);
+    }
+
     public void saveInFile() { presenter.saveInFile(); }
 
     public void readFile() {presenter.readFile();}
