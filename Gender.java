@@ -1,3 +1,3 @@
-public enum Sex {
+public enum Gender {
     Male, Female, Unknown
 }
