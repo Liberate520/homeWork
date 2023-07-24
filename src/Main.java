@@ -2,26 +2,21 @@ import familyTree.ConnectionType;
 import familyTree.Connections;
 import familyTree.FamilyTree;
 import person.Person;
-import readWrite.FileHandler;
 
 import java.time.LocalDate;
-import java.util.Map;
+import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
         FamilyTree family = makeTree();
 
-        FileHandler fh = new FileHandler();
-        System.out.println(fh.write(family) ? "Write OK" : "Failed to write");
+        TreeMap<Person, Connections> sortAge = family.sortByAge();
+        System.out.println(sortAge);
 
-        FamilyTree familyRead = (FamilyTree) fh.read();
-        System.out.println(familyRead);
+        System.out.println("+++++++++++++++++");
 
-        for (Map.Entry<Person, Connections> item :
-                familyRead) {
-            System.out.println(item.getKey());
-            System.out.println(item.getValue());
-        }
+        TreeMap<Person, Connections> sortName = family.sortByName();
+        System.out.println(sortName);
     }
 
     public static FamilyTree makeTree() {

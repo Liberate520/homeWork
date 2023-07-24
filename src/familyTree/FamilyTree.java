@@ -1,11 +1,11 @@
 package familyTree;
 
 import person.Person;
+import person.comparators.ComparatorByAge;
+import person.comparators.ComparatorByName;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Все семейные связи решил хранить тут, а не в полях класса person.Person.
@@ -55,6 +55,18 @@ public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Conn
     public String showConnections(Person person) {
         return person + "\n" + "Близкие родственники:\n" +
                 family.get(person);
+    }
+
+    public TreeMap<Person, Connections> sortByAge() {
+        TreeMap<Person, Connections> result = new TreeMap<>(new ComparatorByAge());
+        result.putAll(family);
+        return result;
+    }
+
+    public TreeMap<Person, Connections> sortByName() {
+        TreeMap<Person, Connections> result = new TreeMap<>(new ComparatorByName());
+        result.putAll(family);
+        return result;
     }
 
     @Override

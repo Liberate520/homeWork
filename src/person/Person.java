@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * Семейные связи полностью находятся в familyTree.
  */
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
     private String name, surname, maidenName, patronymic;
     private Gender sex;
     private LocalDate dateBirth, dateDeath;
@@ -36,6 +36,22 @@ public class Person implements Serializable {
         this(name, surname, patronymic, sex, dateBirth, null, null);
     }
 
+    public LocalDate getDateBirth() {
+        return dateBirth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
     public String briefName() {
         return name + " " + surname;
     }
@@ -52,5 +68,10 @@ public class Person implements Serializable {
         else
             return String.format("%s %s %s, родилась %s, умерла %s.", name, patronymic, surname,
                     dateBirth, dateDeath);
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return 0;
     }
 }
