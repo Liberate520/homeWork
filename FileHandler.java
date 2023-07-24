@@ -16,8 +16,8 @@ public class FileHandler implements Writable {
     public Object Load() throws IOException, ClassNotFoundException{
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("family.out"));
-        Human human = (Human) objectInputStream.readObject();
+        Family_tree familyTree = (Family_tree) objectInputStream.readObject();
         objectInputStream.close();
-        return human;
+        return familyTree;
     }
 }
