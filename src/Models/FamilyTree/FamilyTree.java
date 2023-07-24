@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterable<Node<E>> {
@@ -165,6 +166,16 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(treeName, nodes);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof FamilyTree && this.hashCode() == obj.hashCode();
     }
 
     //endregion
