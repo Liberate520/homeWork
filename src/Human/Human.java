@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable{
     private String name;
     private List<Human> children;
     private Gender gender;
@@ -82,6 +82,32 @@ public class Human implements Serializable {
         }
     }
 
+    public String getAgeToString() {
+        StringBuilder st = new StringBuilder();
+        if (status.equals(Status.dead)) {
+            int year = getPeriod(this.birthday, this.deathDate);
+            st.append(", Возраст на момент смерти: ");
+            st.append(year);
+        } else {
+            LocalDate date = LocalDate.now();
+            int year_d = date.getYear() - birthday.getYear();
+            st.append(", Возраст: ");
+            st.append(year_d);
+        }
+        return st.toString();
+    }
+
+    public int getAge() {
+        int year;
+        if (status.equals(Status.dead)) {
+            year = getPeriod(this.birthday, this.deathDate);
+        } else {
+            LocalDate date = LocalDate.now();
+            year = date.getYear() - birthday.getYear();
+        }
+        return year;
+    }
+
     public Human getSpouse() {
         return spouse;
     }
@@ -98,16 +124,7 @@ public class Human implements Serializable {
         stringBuilder.append(gender);
         stringBuilder.append(", Дата рождения: ");
         stringBuilder.append(birthday);
-        if (status.equals(Status.dead)) {
-            int year = getPeriod(this.birthday, this.deathDate);
-            stringBuilder.append(", Возраст на момент смерти: ");
-            stringBuilder.append(year);
-        } else {
-            LocalDate date = LocalDate.now();
-            int year_d = date.getYear() - birthday.getYear();
-            stringBuilder.append(", Возраст: ");
-            stringBuilder.append(year_d);
-        }
+        stringBuilder.append(getAgeToString());
         stringBuilder.append(", Статус: ");
         stringBuilder.append(status);
         stringBuilder.append(", Родители: ");

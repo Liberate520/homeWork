@@ -1,8 +1,10 @@
 package FileHandler;
 
-import FamilyTree.FamilyTree;
+
+import java.io.Serializable;
 
 public interface Writable {
-    void writeToFile(FamilyTree familyTree, String path);
-    FamilyTree readFromFile(String path);
+    void writeToFile(Serializable serializable, String path);
+
+    Object readFromFile(String path);
 }

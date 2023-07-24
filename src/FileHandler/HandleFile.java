@@ -1,12 +1,11 @@
 package FileHandler;
 
-import FamilyTree.FamilyTree;
+import FamilyTree.FamilyTree.FamilyTree;
 
 import java.io.*;
 import java.util.logging.FileHandler;
 
 public class HandleFile implements Writable {
-    String filePath;
     FileHandler fileHandler;
 
     public HandleFile(FileHandler fileHandler) {
@@ -18,7 +17,7 @@ public class HandleFile implements Writable {
     }
 
     @Override
-    public void writeToFile(FamilyTree familyTree, String path) {
+    public void writeToFile(Serializable familyTree, String path) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                     new FileOutputStream(path));
