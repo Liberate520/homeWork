@@ -7,48 +7,49 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
-    private Presenter presenter;
-    private Scanner scanner;
-    private boolean work;
-    private MainMenu menu;
+        private static final String INPUT_ERROR = "Вы ввели неверное значение";
+        private Scanner scanner;
+        private Presenter presenter;
+        private boolean work;
+        private MainMenu menu;
 
-    public ConsoleUI() {
-        presenter = new Presenter(this);
-        scanner = new Scanner(System.in);
-        work=true;
-        menu=new MainMenu(this);
-    }
-
-    @Override
-    public void start() {
-        System.out.print("Добро пожаловать");
-        while(work){
-            System.out.println(menu.menu());
-            String choice=scanner.nextLine();
-            //проверка
-            int numChoice=Integer.parseInt(choice);
-            menu.execute(numChoice);
+        public ConsoleUI() {
+            scanner = new Scanner(System.in);
+            presenter = new Presenter(this);
+            work = true;
+            menu = new MainMenu(this);
         }
 
-    }
+        @Override
+        public void printAnswer(String text) {
+            System.out.println(text);
+        }
 
-    public void finish() {
-        System.out.println("Goodbye");
-        work=false;
-    }
+        @Override
+        public void start() {
+            hello();
+            while (work){
+                printMenu();
+                execute();
+            }
+        }
 
-    public  void sortByAge() {
-        presenter.sortByAge();
-    }
+        public void finish() {
+            System.out.println("Приятно было пообщаться");
+            work = false;
+        }
 
-    public  void sortByName() {
-        presenter.sortByName();
-    }
+        public void sortByAge() {
+            presenter.sortByAge();
+        }
 
-    public  void getHumanInfo() {
-        presenter.getHumanInfo();
-    }
+        public void sortByName() {
+            presenter.sortByName();
+        }
 
+        public void getInfo() {
+            presenter.getHumanInfo();
+        }
     public  void addHuman() {
         System.out.print("Введите имя");
         String name=scanner.nextLine();
@@ -61,10 +62,44 @@ public class ConsoleUI implements View{
         String gender =scanner.nextLine();
         presenter.addHuman(name, LocalDate.parse(birthDate),LocalDate.parse(deathDate), Gender.valueOf(gender));
     }
+    private void hello(){
+            System.out.println("Доброго времени суток!");
+        }
 
-    @Override
-    public void printAnswer(String text) {
-        System.out.println(text);
+        private void execute(){
+            String line = scanner.nextLine();
+            if (checkTextForInt(line)){
+                int numCommand = Integer.parseInt(line);
+                if (checkCommand(numCommand)){
+                    menu.execute(numCommand);
+                }
+            }
+        }
 
+        private boolean checkTextForInt(String text){
+            if (text.matches("[0-9]+")){
+                return true;
+            } else {
+                inputError();
+                return false;
+            }
+        }
+
+        private boolean checkCommand(int numCommand){
+            if (numCommand < menu.getSize()){
+                return true;
+            } else {
+                inputError();
+                return false;
+            }
+        }
+
+        private void printMenu(){
+            System.out.println(menu.menu());
+        }
+
+        private void inputError(){
+            System.out.println(INPUT_ERROR);
+        }
     }
-}
+

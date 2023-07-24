@@ -1,8 +1,6 @@
 package ru.gb.family_tree.view;
 
-import ru.gb.family_tree.view.commands.AddHuman;
-import ru.gb.family_tree.view.commands.Command;
-import ru.gb.family_tree.view.commands.GetHumanInfo;
+import ru.gb.family_tree.view.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,9 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new GetHumanInfo(consoleUI));
+        commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortByAge(consoleUI));
+        commandList.add(new Finish(consoleUI));
         //сортировки
     }
     public String menu(){
