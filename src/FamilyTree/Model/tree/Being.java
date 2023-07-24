@@ -39,6 +39,7 @@ public interface  Being  <T extends Being<T>>{
     public String getSpouseInfo();
 
     public boolean equals(Object o);
+    public String showAllPersonInfo();
 
 }
 

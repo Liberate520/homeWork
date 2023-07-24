@@ -10,14 +10,14 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree <E extends Being>implements Serializable, Iterable <E> {
+public class Tree <E extends Being>implements Serializable, Iterable <E>, TreeAble <E>{
 
     private List<E> treeList;
 
     public Tree() {this(new ArrayList<>()); }
 
-    public Tree(List<E> treeList)  {this.treeList=treeList;}
-
+     public Tree(List<E> treeList)  {this.treeList=treeList;}
+    @Override
     public boolean addPerson (E person){
         if (person == null) { return false;}
         if (!treeList.contains(person)){
@@ -34,6 +34,7 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
         return false;
 
     }
+    @Override
     public void addToParents(E person){
         if (person.getMother()!= null){
             getById(person.getMother().getId()).addChild(person);}
@@ -41,12 +42,13 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
             getById(person.getFather().getId()).addChild(person);}
 
     }
-
+    @Override
     public void addToChild (E person){
         for (Object child :person.getChildren()){
 
             ((Person)(child)).addParent(person);}
     }
+    @Override
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
@@ -58,6 +60,7 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
         }
     return sb.toString();
     }
+    @Override
     public  E getById (Integer id){
         for (E person: treeList){
             if (person.getId().equals(id)){return person;}
@@ -67,12 +70,14 @@ public class Tree <E extends Being>implements Serializable, Iterable <E> {
     }
 
 
-    public  void sort(Comparator<E> comparator) {
-        treeList.sort(comparator);
-
-    }
+    @Override
     public void sortName() {
         treeList.sort(new NameComparator());
+
+    }
+    @Override
+    public void sortAge() {
+        treeList.sort(new AgeComparator<>());
 
     }
 

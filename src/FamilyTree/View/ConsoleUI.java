@@ -1,6 +1,11 @@
 package FamilyTree.View;
 
+import FamilyTree.Model.File.FileHandler;
+import FamilyTree.Model.File.Writeable;
+import FamilyTree.Model.Servise;
 import FamilyTree.Model.tree.Sex;
+import FamilyTree.Model.tree.Tree;
+import FamilyTree.Model.tree.TreeAble;
 import FamilyTree.Presenter.Presenter;
 import FamilyTree.View.Check.ChooseEnum;
 import FamilyTree.View.Menu.*;
@@ -25,9 +30,9 @@ public class ConsoleUI implements View {
 
 
 
-    public ConsoleUI() {
+    public ConsoleUI(TreeAble tree,Writeable fh) {
         scanner = new Scanner(System.in);
-        presenter = new Presenter(this);
+        presenter = new Presenter(this, tree,fh);
         work = true;
         work2 = true;
         menu = new MainMenu(this);
@@ -49,7 +54,7 @@ public class ConsoleUI implements View {
     @Override
     public void start() throws IOException, ClassNotFoundException {
         hello();
-        while (work) {
+                while (work) {
             printMenu();
             execute();
         }
@@ -184,20 +189,20 @@ public class ConsoleUI implements View {
     public void showSpouse() {
         System.out.println("Введите id человека для просмотра супруга:");
         Integer id = Integer.parseInt(scanner.nextLine());
-        presenter.showSpouse(id);
+        System.out.println(presenter.showSpouse(id));
 
     }
 
     public void showChildren() {
         System.out.println("Введите id человека для просмотра детей:");
         Integer id = Integer.parseInt(scanner.nextLine());
-        presenter.showChildren(id);
+        System.out.println(presenter.showChildren(id));
     }
 
     public void showAllPersonInfo() {
         System.out.println("Введите id человека для просмотра полной информации:");
         Integer id = Integer.parseInt(scanner.nextLine());
-        presenter.showAllPersonInfo(id);
+        System.out.println(presenter.showAllPersonInfo(id));
     }
 
     public void getTreeInfo() {
@@ -208,6 +213,6 @@ public class ConsoleUI implements View {
     public void ShowParents() {
         System.out.println("Введите id человека для просмотра родителей:");
         Integer id = Integer.parseInt(scanner.nextLine());
-        presenter.showParents(id);
+        System.out.println(presenter.showParents(id));
     }
 }

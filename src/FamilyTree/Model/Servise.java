@@ -1,25 +1,27 @@
 package FamilyTree.Model;
 
 import FamilyTree.Model.File.FileHandler;
+import FamilyTree.Model.File.Writeable;
 import FamilyTree.Model.sort.AgeComparator;
 import FamilyTree.Model.sort.NameComparator;
-import FamilyTree.Model.tree.Person;
-import FamilyTree.Model.tree.Sex;
-import FamilyTree.Model.tree.Tree;
+import FamilyTree.Model.tree.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 
 public class Servise {
-    public Tree tree;
-    public FileHandler fh;
+    public TreeAble <Being> tree;
+    public Writeable fh;
 
 
-    public Servise() {
-        this.tree =new Tree();
-        this.fh = new FileHandler();
+    public Servise(TreeAble tree,Writeable fh) {
+        this.tree= tree;
+        this.fh = fh;
+
     }
+
+
     public void addPerson(String name, Sex sex, LocalDate birthday) {
         tree.addPerson(new Person(name,sex,birthday));
     }
@@ -30,11 +32,11 @@ public class Servise {
 
 
     public void sortAge() {
-        tree.sort (new AgeComparator());
+        tree.sortAge();
 
     }
     public void sortName() {
-        tree.sort(new NameComparator());
+        tree.sortName();
 
     }
 
@@ -61,8 +63,8 @@ public class Servise {
     }
 
 
-    public void showChildren(Integer id) {
-        System.out.println(tree.getById(id).getChildrenInfo());
+    public String showChildren(Integer id) {
+        return    tree.getById(id).getChildrenInfo();
     }
 
 
@@ -72,19 +74,15 @@ public class Servise {
         fh.save(tree);
     }
 
-    public void showSpouse(Integer id) {
-        System.out.println(tree.getById(id).getSpouseInfo());
+    public String showSpouse(Integer id) {
+        return tree.getById(id).getSpouseInfo();
     }
 
-    public void showParents(Integer id) {
-        System.out.println(tree.getById(id).getParentsnfo());
+    public String showParents(Integer id) {
+        return  tree.getById(id).getParentsnfo();
     }
 
-    public void showAllPersonInfo(Integer id) {
-        System.out.println(tree.getById(id).toString());
-        System.out.println(tree.getById(id).getChildrenInfo());
-        System.out.println(tree.getById(id).getParentsnfo());
-        System.out.println(tree.getById(id).getSpouseInfo());
-
+    public String showAllPersonInfo(Integer id) {
+        return tree.getById(id).showAllPersonInfo();
     }
 }

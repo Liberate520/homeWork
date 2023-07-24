@@ -184,7 +184,13 @@ public class Person implements Serializable, Being {
         return getName().equals(person.getName());
     }
 
+    public String showAllPersonInfo() {
+        return this.toString()+ "\n"+
+                this.getChildrenInfo()+"\n"+
+                this.getParentsnfo()+ "\n"+
+                this.getSpouseInfo();
 
+    }
 
 
 }

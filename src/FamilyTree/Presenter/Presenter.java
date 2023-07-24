@@ -1,5 +1,7 @@
 package FamilyTree.Presenter;
 
+import FamilyTree.Model.File.FileHandler;
+import FamilyTree.Model.File.Writeable;
 import FamilyTree.Model.Servise;
 import FamilyTree.Model.tree.*;
 import FamilyTree.Model.tree.Sex;
@@ -15,9 +17,9 @@ public class Presenter {
     private View view;
     private Servise servise;
 
-    public Presenter(View view) {
+    public Presenter(View view, TreeAble tree, Writeable fh) {
         this.view = view;
-        this.servise = new Servise();
+        this.servise = new Servise(tree,fh);
     }
 
     public void addPerson (String name, Sex sex, LocalDate birthday) {
@@ -48,17 +50,16 @@ public class Presenter {
 
     public void save() throws IOException, ClassNotFoundException {
         servise.save ();
-        load();
 
     }
 
 
-    public void showAllPersonInfo(Integer id) {
-        servise.showAllPersonInfo(id);
+    public String showAllPersonInfo(Integer id) {
+        return servise.showAllPersonInfo(id);
     }
 
-    public void showChildren(Integer id) {
-        servise.showChildren(id);
+    public String showChildren(Integer id) {
+        return servise.showChildren(id);
     }
 
 
@@ -76,10 +77,10 @@ public class Presenter {
     }
 
 
-    public void showSpouse(Integer id) {
-        servise.showSpouse(id);
+    public String showSpouse(Integer id) {
+        return servise.showSpouse(id);
     }
 
-    public void showParents(Integer id) {servise.showParents(id);}
+    public String showParents(Integer id) {return servise.showParents(id);}
 
 }
