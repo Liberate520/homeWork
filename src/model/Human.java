@@ -1,15 +1,14 @@
+package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-
-
 public class Human implements Serializable, Comparable<Human>, Entities {
     private String name;
     private String surname;
-    private LocalDate dateOfBirth ;
+    private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private Gender gender;
     private Human mother;
@@ -17,7 +16,8 @@ public class Human implements Serializable, Comparable<Human>, Entities {
     private ArrayList<Human> children;
     private ArrayList<Human> parents;
 
-    public Human(String name, String surname, LocalDate dateOfBirth, LocalDate dateOfDeath, Human mother, Human father, Gender gender) {
+    public Human(String name, String surname, LocalDate dateOfBirth, LocalDate dateOfDeath, Human mother, Human father,
+            Gender gender) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -25,7 +25,7 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         this.mother = mother;
         this.father = father;
         this.children = new ArrayList<>();
-        this.gender=gender;
+        this.gender = gender;
 
     }
 
@@ -33,11 +33,18 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         this(name, surname, dateOfBirth, null, mother, father, gender);
     }
 
-    public Human(String name, String surname, LocalDate dateOfBirth, Gender gender) { // перегрузка - метод с тем же названием, но с другим количество аргументов
+    public Human(String name, String surname, LocalDate dateOfBirth, Gender gender) { // перегрузка - метод с тем же
+                                                                                      // названием, но с другим
+                                                                                      // количество аргументов
         this(name, surname, dateOfBirth, null, null, gender);
     }
 
-    public Human(String name, String surname, LocalDate dateOfBirth) { // перегрузка - для реализации принципа DRY - don't repeat yourself
+    public Human(String name, String surname, Gender gender) {
+        this(name, surname, null, null, null, gender);
+    }
+
+    public Human(String name, String surname, LocalDate dateOfBirth) { // перегрузка - для реализации принципа DRY -
+                                                                       // don't repeat yourself
         this(name, surname, dateOfBirth, null, null, null);
     }
 
@@ -59,18 +66,14 @@ public class Human implements Serializable, Comparable<Human>, Entities {
 
     public void addChildM(Human child) {
         child.mother = this;
-        
+
         children.add(child);
     }
+
     public void addChildF(Human child) {
         child.father = this;
         children.add(child);
     }
-
-
-
-    
-    
 
     @Override
     public String toString() {
@@ -89,24 +92,30 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         stringBuilder.append(getAge() + ", ");
         stringBuilder.append("Пол: ");
         stringBuilder.append(getGender() + ", ");
-        stringBuilder.append(fatherInfo()+", ");
-        stringBuilder.append(motherInfo() +", ");
+        stringBuilder.append(fatherInfo() + ", ");
+        stringBuilder.append(motherInfo() + ", ");
         stringBuilder.append(getChildren());
         return stringBuilder.toString();
     }
 
-
     public int getAge() {
         if (dateOfDeath == null) {
             return getPeriod(dateOfBirth, LocalDate.now());
+        }
+        if (dateOfBirth == null) {
+            return 0;
         } else {
             return getPeriod(dateOfBirth, dateOfDeath);
         }
     }
 
     private int getPeriod(LocalDate date0, LocalDate date1) {
-        Period difference = Period.between(date0, date1);
-        return difference.getYears();
+        if (date0 == null || date1 == null) {
+            return 0;
+        } else {
+            Period difference = Period.between(date0, date1);
+            return difference.getYears();
+        }
     }
 
     public ArrayList<Human> getParents() {
@@ -119,7 +128,6 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         }
         return parents;
     }
-    
 
     public String getSurname() {
         return surname;
@@ -140,7 +148,8 @@ public class Human implements Serializable, Comparable<Human>, Entities {
     public Human getFather() {
         return father;
     }
-    public String fatherInfo () {
+
+    public String fatherInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Отец: ");
         Human father = getFather();
@@ -155,7 +164,8 @@ public class Human implements Serializable, Comparable<Human>, Entities {
     public Human getMother() {
         return mother;
     }
-    public String motherInfo () {
+
+    public String motherInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Мать: ");
         Human mother = getMother();
@@ -172,7 +182,4 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         return name.compareTo(nextHuman.name);
     }
 
-    
-    
-    
 }

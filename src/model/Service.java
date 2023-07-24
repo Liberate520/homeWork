@@ -1,3 +1,4 @@
+package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,6 +14,16 @@ public class Service implements Serializable {
     public void addHuman(String name, String surname, LocalDate dateOfBirth, Human mother, Human father,
             Gender gender) {
         Human human = new Human(name, surname, dateOfBirth, mother, father, gender);
+        familyTree.add(human);
+    }
+
+    public void addHumanConsole(String name, String surname, Gender gender) {
+        Human human = new Human(name, surname, null, null, null,gender);
+        familyTree.add(human);
+    }
+
+    public void addHumanConsole(String name, String surname, Gender gender, LocalDate dateOfBirth) {
+        Human human = new Human(name, surname, dateOfBirth, null, null,gender);
         familyTree.add(human);
     }
 

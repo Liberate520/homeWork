@@ -1,3 +1,4 @@
+package model;
 import java.util.Comparator;
 
 public class HumanComparatorByName<Entity extends Entities> implements Comparator<Entity> {

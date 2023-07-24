@@ -1,3 +1,4 @@
+package model;
 import java.time.LocalDate;
 
 public interface Entities {
@@ -7,3 +8,4 @@ public interface Entities {
     String getName();
 
 }
+    
