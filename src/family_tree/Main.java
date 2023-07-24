@@ -2,6 +2,7 @@ package family_tree;
 
 import family_tree.familytree.*;
 import family_tree.person.*;
+import family_tree.presenter.Presenter;
 import family_tree.service.*;
 import family_tree.ui.ConsoleView;
 import family_tree.ui.View;
@@ -12,8 +13,10 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree<Person> romanovs = romanovsTree();
-        View app = new ConsoleView();
-        app.start(romanovs);
+        Service<Person> service = new Service<>(romanovs);
+        ConsoleView app = new ConsoleView();
+        app.getPresenter().setService(service);
+        app.start();
         // save read через ObjectStream
 //        IOObject ioo = new IOObject();
 //        ioo.save(romanovs, "src/family_tree/in_out_files/romanovs.bin");

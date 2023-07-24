@@ -27,4 +27,5 @@ public interface FamilyTreeItem<T> extends Serializable {
     String getCommit();
     int getAge();
     String printShort();
+    T createItem(String fullName, int birthY, int birthM, int birthD, Gender gender);
 }

@@ -80,6 +80,10 @@ public class Person implements FamilyTreeItem<Person>, Serializable, Comparable<
                 null, null, new ArrayList<Person>(), null);
     }
 
+    public Person createItem(String fullName, int birthY, int birthM, int birthD, Gender gender) {
+        return new Person (fullName, birthY, birthM, birthD, gender);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
