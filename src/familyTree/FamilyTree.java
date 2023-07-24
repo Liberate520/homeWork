@@ -10,6 +10,8 @@ import java.util.*;
 /**
  * Все семейные связи решил хранить тут, а не в полях класса person.Person.
  * Смотрите familyTree.Connections.java.
+ *
+ * Методы сортировки возвращают TreeMap, а не исходную структуру.
  */
 public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Connections>> {
     private HashMap<Person, Connections> family;
