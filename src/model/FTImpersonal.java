@@ -5,12 +5,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FTImpersonal<E> extends Serializable {
-//	int getId();
 	E getFather();
 	E getMother();
 	void addChild(E human);
 	void addParent(E human);
-	String getFullName();
+	String getLastName();
+	String getFirstName();
 	LocalDate getBirthDay();
 	List<E> getParents();
 	List<E> getChildren();

@@ -2,6 +2,8 @@ package view.commands;
 
 import view.Console;
 
+import java.io.IOException;
+
 public abstract class Command {
 	String script;
 	Console console;
@@ -14,7 +16,7 @@ public abstract class Command {
 	public String getScript(){
 		return script;
 	}
-	public abstract void execute();
+	public abstract void execute() throws IOException, ClassNotFoundException;
 
 
 

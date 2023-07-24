@@ -7,6 +7,6 @@ public class HumanComparatorByName<E extends FTImpersonal<E>> implements Compara
 
 	@Override
 	public int compare(E o1, E o2) {
-		return o2.getFullName().compareTo(o1.getFullName());
+		return o2.getLastName().compareTo(o1.getLastName());
 	}
 }

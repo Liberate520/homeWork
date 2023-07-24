@@ -2,6 +2,7 @@ package view;
 
 import view.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class Menu {
 		commands.add(new GetFamilyInfo(console));
 		commands.add(new SortByDate(console));
 		commands.add(new SortByName(console));
+		commands.add(new WriteFile(console));
+		commands.add(new ReadFile(console));
 		commands.add(new Finish(console));
 	}
 	public int getSize(){
@@ -27,7 +30,7 @@ public class Menu {
 		}
 		return builder.toString();
 	}
-	public void execute(int choice){
+	public void execute(int choice) throws IOException, ClassNotFoundException {
 		Command command = commands.get(choice-1);
 		command.execute();
 	}

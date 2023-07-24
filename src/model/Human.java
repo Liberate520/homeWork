@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human<E extends FTImpersonal<E>> implements Serializable, FTImpersonal {
+public class Human implements Serializable, FTImpersonal<Human> {
 	private String lastName;
 	private String firstName;
-	private String fullName;
+//	private String fullName;
 	private LocalDate birthDay;
 
 	private List<Human> parents;
@@ -22,7 +22,7 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 		this.firstName = firstName;
 		this.gender = gender;
 		this.birthDay = birthDay;
-		fullName = lastName + " " + firstName;
+//		fullName = lastName + " " + firstName;
 		parents = new ArrayList<>();
 		if (father != null) {
 			parents.add(father);
@@ -31,15 +31,21 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 			parents.add(mother);
 		}
 		children = new ArrayList<>();
+
 	}
-	public String getFullName() { return fullName; }
+	public Human(String lastName, String firstName, Gender gender) {
+		this (lastName, firstName, gender, null,null, null);
+	}
+
+	public String getLastName() { return lastName; }
+	public String getFirstName() { return firstName; }
 
 	public LocalDate getBirthDay() { return birthDay; }
 
 	public Gender getGender() { return gender; }
 
-	public void addParent (Object parent){ if(!parents.contains(parent)) parents.add((Human) parent); }
-	public void addChild(Object child){ if (!children.contains(child)) children.add((Human) child); }
+	public void addParent (Human parent){ if(!parents.contains(parent)) parents.add(parent); }
+	public void addChild(Human child){ if (!children.contains(child)) children.add(child); }
 	public List<Human> getParents(){ return parents; }
 	public List<Human> getChildren(){ return children; }
 
@@ -63,7 +69,10 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 	public String getInfo (){
 		StringBuilder builder = new StringBuilder();
 		builder.append("Name: ");
-		builder.append(fullName);
+		builder.append(firstName);
+		builder.append(" | ");
+		builder.append("Surname: ");
+		builder.append(lastName);
 		builder.append(" | ");
 		builder.append("Gender: ");
 		builder.append(gender);
@@ -84,7 +93,7 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 		String dad;
 		Human human = getFather();
 		if (human != null){
-			dad = "dad: " + human.getFullName();
+			dad = "dad: " + human.getLastName() + human.getFirstName();
 		}
 		else {
 			dad = "dad: no";
@@ -93,9 +102,9 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 	}
 	public String getMotherInfo(){
 		String mom;
-		Human mother = getMother();
-		if (mother != null){
-			mom = "mom: " + mother.getFullName();
+		Human human = getMother();
+		if (human != null){
+			mom = "mom: " + human.getLastName() + human.getFirstName();
 		}
 		else mom = "mom: no";
 	return mom;
@@ -106,10 +115,10 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 		if (children.size() != 0) {
 			for (int i = 0; i < children.size(); i++) {
 				if (i != children.size()-1) {
-					lst.append(children.get(i).getFullName());
+					lst.append(children.get(i).getLastName());
 					lst.append(", ");
 				}
-				else lst.append(children.get(i).getFullName());
+				else lst.append(children.get(i).getLastName());
 			}
 		}
 		else lst.append("no");
@@ -124,6 +133,6 @@ public class Human<E extends FTImpersonal<E>> implements Serializable, FTImperso
 			return false;
 		}
 		Human human = (Human) obj;
-		return human.getFullName().equals(getFullName());
+		return human.getLastName().equals(getLastName())&&human.getFirstName().equals(getFirstName());
 	}
 }

@@ -1,41 +1,48 @@
 package presenter;
 
 import model.FTImpersonal;
+import model.FamilyTree;
 import model.Gender;
 import model.Human;
-import model.FamilyTree;
+import model.service.Service;
 import view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Presenter<E extends FTImpersonal<E>> {
 	private View view;
-	private FamilyTree familyTree;
+	private Service service;
 	public Presenter(View view) {
 		this.view = view;
-		familyTree = new FamilyTree<>();
+		service = new Service();
 	}
 
-	public void addM(List<String> human) {
-		familyTree.add(new Human(human.get(0),human.get(1),
-				Gender.valueOf(human.get(2)),
-				LocalDate.parse(human.get(3)),
-				(Human) familyTree.getByName(human.get(4)),
-				(Human) familyTree.getByName(human.get(5))));
-		view.answer(familyTree.getInfo());
-	}
-
-	public void getFamilyInfo(){
-		view.answer(familyTree.getInfo());
-	}
 	public void sortByName() {
-		familyTree.sortByName();
-		getFamilyInfo();
+		service.sortByName();
+		getInfo();
 	}
 
 	public void sortByDate() {
-		familyTree.sortByBirthDay();
-		getFamilyInfo();
+		service.sortByBirthDay();
+		getInfo();
+	}
+
+	public void addM(String lastName, String firstName, Gender gender, LocalDate birthDay, String nameDad, String firstNameDad, String nameMom, String firstNameMom) {
+		service.addM(lastName, firstName, gender, birthDay, new Human(nameDad, firstNameDad, gender), new Human(nameMom, firstNameMom, gender));
+		getInfo();
+	}
+	public void getInfo(){
+		String textInfo = service.getInfo();
+		view.answer(textInfo);
+	}
+
+	public void writeF(String file) throws IOException {
+		service.writeF(file);
+	}
+
+	public void readF(String file) throws IOException, ClassNotFoundException {
+		service.readF(file);
 	}
 }
+

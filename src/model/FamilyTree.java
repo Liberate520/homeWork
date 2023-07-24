@@ -6,12 +6,8 @@ import java.util.*;
 public class FamilyTree<E extends FTImpersonal<E>> implements Serializable, Iterable<E> {
     private List<E> humanList;
 
-    public FamilyTree(List<E> humanList) {
-        this.humanList = humanList;
-    }
-
     public FamilyTree() {
-        this(new ArrayList<>());
+        this.humanList = new ArrayList<>();
     }
 
     public boolean add(E human) {
@@ -19,8 +15,8 @@ public class FamilyTree<E extends FTImpersonal<E>> implements Serializable, Iter
             return false;
         }
         if (!humanList.contains(human)) {
-            humanList.add(human);
 
+            humanList.add(human);
             addToParents(human);
             addToChildren(human);
 
@@ -41,9 +37,9 @@ public class FamilyTree<E extends FTImpersonal<E>> implements Serializable, Iter
         }
     }
 
-    public E getByName(String fullName){
+    public E getByName(String lastName){
         for (E human : humanList){
-            if(human.getFullName().equals(fullName)){
+            if(human.getLastName().equals(lastName)){
                 return human;
             }
         }
@@ -62,10 +58,13 @@ public class FamilyTree<E extends FTImpersonal<E>> implements Serializable, Iter
 
         return  build.toString();
     }
+
     @Override
     public String toString (){
         return getInfo();
     }
+
+
 
     public Iterator<E> iterator() {return new HumanIterator(humanList);}
     public void sortByName(){humanList.sort(new HumanComparatorByName());}
