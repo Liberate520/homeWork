@@ -1,7 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-   public static void main(String[] args) {
+   public static void main(String[] args) throws FileNotFoundException, IOException {
+       
       FamilyTree familyTree = new FamilyTree(123);
       
       Human human=new Human("Алексей",Gender.male,LocalDate.of(1979, 05, 22));
@@ -17,7 +20,7 @@ public class Main {
       familyTree.addHuman(human2);
       familyTree.addHuman(human3);
       familyTree.addHuman(human4);
-      System.out.println(familyTree.getHumansInfo());
+      //System.out.println(familyTree.getHumansInfo());
 
       
       human.addKinship(human1,Kinship.child);
@@ -25,11 +28,24 @@ public class Main {
       human.addKinship(human3, Kinship.parent);
       human.addKinship(human4, Kinship.parent);
       
-      System.out.println(human.getKinshipInfo(Kinship.child));
-      System.out.println(human.getKinshipInfo(Kinship.parent));
+      //System.out.println(human.getKinshipInfo(Kinship.child));
+      //System.out.println(human.getKinshipInfo(Kinship.parent));
       
+      FileHandler fileHandler=new FileHandler();
       
 
-        
+      try {
+         fileHandler.save(human.getKinshipInfo(Kinship.child));
+         fileHandler.save(human.getKinshipInfo(Kinship.parent));
+         fileHandler.save(familyTree.getHumansInfo());
+         
+      } 
+      catch (Exception e) {
+         System.out.println("Что-то пошло не так!");
+      }
+      //FileHandler fileHandler2=new FileHandler();
+      System.out.println(fileHandler.load());
+
    }
+
 }

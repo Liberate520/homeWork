@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private int id;
     private int humanId;
     private List<Human> humanList;
@@ -16,6 +17,8 @@ public class FamilyTree {
         human.setId(humanId++);
         humanList.add(human);
     }
+
+   
 
     public void addCildren(Human humanP,Human humanC){
         this.cildrenList.add(humanC);

@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable{
 
     private String name;
     private LocalDate dataOfBirth;
@@ -33,6 +34,9 @@ public class Human {
 
     public int getId() {
         return id;
+    }
+    private Kinship getKinship(){
+        return this.kinship;
     }
 
     public void addKinship(Human human, Kinship kinship) {
@@ -69,7 +73,7 @@ public class Human {
         this.idKinship=0;
         for (Human temp : this.tempList) {
             this.idKinship++;
-            stringBuilder.append("ID_Kinship: " + idKinship);
+            stringBuilder.append("ID_Kinship: " + idKinship+" ");
             stringBuilder.append(temp);
             stringBuilder.append("\n");
         }
@@ -82,9 +86,9 @@ public class Human {
         if (this.gender == Gender.female)
             str = "женский";
         if (dateOfDeath == null)
-            return " ID_Human: " + id + " имя: " + name + ", пол: " + str + ", Дата рождения: " + dataOfBirth;
+            return "ID_Human: " + id + " имя: " + name + ", пол: " + str + ", Дата рождения: " + dataOfBirth;
         else
-            return " ID_Human: " + id + " имя: " + name + ", пол: " + str + ", Дата рождения: " + dataOfBirth
+            return "ID_Human: " + id + " имя: " + name + ", пол: " + str + ", Дата рождения: " + dataOfBirth
                     + ", Дата смерти: " + dateOfDeath;
     }
 
