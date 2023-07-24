@@ -1,11 +1,14 @@
 import java.time.LocalDate;
-import java.util.List;
 
-import familly_api.familytree.FamilywTree;
-import familly_api.human.Human;
-import familly_api.human.Node;
+import ui.ConsoleView;
+
+import java.util.Scanner;
 
 public class Main {
-   
+   Scanner scanner;
 
+   public static void main(String[] args) {
+      ConsoleView сonsoleView = new ConsoleView();
+      сonsoleView.start();
+   }
 }

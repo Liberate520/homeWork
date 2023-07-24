@@ -7,20 +7,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import familly_api.familytree.FamilywTree;
+import familly_api.human.Node;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-public class SavingFile implements Interf<FamilywTree>{
+public class SavingFile implements Interf<FamilywTree<Node>>{
 
-    private FamilywTree yorObject;
+    private FamilywTree<Node> yorObject;
 
     private void createFile(String nameFile) {
         File file = new File(nameFile);
     }
 
-    public void saveFile(FamilywTree yorObject, String nameFile) {
-        this.yorObject = yorObject;
+    public void saveFile(FamilywTree<Node> yorObject, String nameFile) {
         createFile(nameFile);
         try {
             FileOutputStream store = new FileOutputStream(nameFile);
@@ -34,13 +34,13 @@ public class SavingFile implements Interf<FamilywTree>{
         }
     }
 
-    public FamilywTree loadFile(String nameFile) {
-        FamilywTree family = null;
+    public FamilywTree<Node> loadFile(String nameFile) {
+        this.yorObject = null;
         try (ObjectInputStream toStore = new ObjectInputStream(new FileInputStream(nameFile))) {
-            family = (FamilywTree) toStore.readObject();
+            yorObject = (FamilywTree<Node>) toStore.readObject();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return family;
+        return yorObject;
     }
 }

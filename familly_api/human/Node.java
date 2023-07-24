@@ -8,10 +8,10 @@ import java.util.List;
 
 public class Node implements Serializable, Comparable<Node>{
 
-    Human people;
-    Node mother;
-    Node father;
-    List<Node> children;
+    private Human people;
+    private Node mother;
+    private Node father;
+    private List<Node> children;
 
     public Node(Human people) {
         this.people = people;

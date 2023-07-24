@@ -59,7 +59,7 @@ public class ConsoleView implements View {
         System.out.println("жив человек(y - да n - нет): ");
         String isLive = scanner.nextLine();
         LocalDate death;
-        if (isLive == "Y" || isLive == "y") {
+        if (isLive.equals("Y") || isLive.equals("y")) {
             death = null;
         } else {
             System.out.println("Введите день смерти: ");

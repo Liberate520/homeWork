@@ -6,14 +6,16 @@ import java.util.List;
 import familly_api.familytree.FamilywTree;
 import familly_api.human.Human;
 import familly_api.human.Node;
+import familly_api.savinaAnLoad.Interf;
 import familly_api.savinaAnLoad.SavingFile;
 
 public class Service {
     private FamilywTree<Node> familyList;
-    private SavingFile saveLoad;
+    private Interf<FamilywTree<Node>> saveLoad;
 
     public Service() {
         this.familyList = new FamilywTree<>();
+        this.saveLoad = new SavingFile();
     }
 
     public int getSize() {
