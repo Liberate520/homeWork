@@ -1,7 +1,7 @@
 package home_work;
 
 public class Service {
-    private FamilyTree tree;
+    private FamilyTree<Human> tree;
 
     public Service() {
         tree = new FamilyTree();

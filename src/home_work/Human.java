@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, AnimalItem {
     private String name;
     private List<Human> childrens = new ArrayList<>();
     private LocalDate dateOfBirth;

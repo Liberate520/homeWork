@@ -2,8 +2,8 @@ package home_work;
 
 import java.util.Comparator;
 
-public class HumanComparatorByAge implements Comparator<Human>{
-    public int compare(Human h1, Human h2) {
+public class HumanComparatorByAge<E extends AnimalItem> implements Comparator<E>{
+    public int compare(E h1, E h2) {
         return h1.getDateOfBirth().compareTo(h2.getDateOfBirth());
     }
 }

@@ -6,23 +6,26 @@ import java.util.List;
 
 import java.util.Iterator;
 
-public class FamilyTree implements Serializable, Iterable<Human>{
-    private List<Human> humanList;
+public class FamilyTree<E extends AnimalItem> implements Serializable, Iterable<E>{
+    private List<E> humanList;
+    private List<E> childrens;
 
     public FamilyTree() {
         humanList = new ArrayList<>();
+        childrens = new ArrayList<>();
     }
 
-    public void createTree(Human human) {
+    public void createTree(E human) {
+        childrens = human.getChildrens();
         if (!humanList.contains(human)) humanList.add(human);
         if (!human.getChildrens().isEmpty()) {
-            for (Human child : human.getChildrens()) {
+            for (E child : childrens) {
                 createTree(child);
             }
         }
     }
 
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 
