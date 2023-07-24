@@ -1,4 +1,4 @@
-package family_tree.human.compatator;
+package family_tree.human.comparator;
 
 import family_tree.human.Human;
 
