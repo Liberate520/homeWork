@@ -1,4 +1,4 @@
-package family_tree.family_tree;
+package family_tree.family_tree.file_handler;
 
 import java.io.Serializable;
 

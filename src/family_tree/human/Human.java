@@ -170,4 +170,10 @@ public class Human implements Serializable {
     public String toString() {
         return getInfo();
     }
+
+    public int compareTo(Human o){
+        return name.compareTo(o.name);
+    }
 }
+
+
