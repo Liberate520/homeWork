@@ -13,16 +13,23 @@ public class Main {
         FileHandler fileHandler = new FileHandler();
 
         FamilyTree tree = testTree();
-        System.out.println(tree);
+        //System.out.println(tree);
 
         fileHandler.save(tree,filePath);
 
         FileHandler fileHandler1 = new FileHandler();
         FamilyTree tree1 = (FamilyTree) fileHandler1.read(filePath);
 
+        for(Human item:tree){
+            System.out.println(item);
+        }
         System.out.println();
-        System.out.println(tree1);
 
+        tree.sortByName();
+        System.out.println(tree);
+
+        tree.sortByAge();
+        System.out.println(tree);
     }
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
