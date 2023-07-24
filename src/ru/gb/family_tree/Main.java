@@ -1,15 +1,16 @@
 package ru.gb.family_tree;
 
-import ru.gb.family_tree.familytree.FamilyTree;
-import ru.gb.family_tree.human.Gender;
-import ru.gb.family_tree.human.Human;
+import ru.gb.family_tree.model.familytree.FamilyTree;
+import ru.gb.family_tree.model.human.Gender;
+import ru.gb.family_tree.model.human.Human;
 
 import java.time.LocalDate;
 
 
 public class Main {
-    public static void main(String [] args){
-        FamilyTree familyTree = new FamilyTree(0);
+
+    public static void main(String[] args) {
+        FamilyTree familyTree = new FamilyTree();
 
 
         Human human1 = new Human("Рикорд", LocalDate.of(1949,10,20),LocalDate.of(1980,01,15), Gender.Male);

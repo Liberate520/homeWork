@@ -1,6 +1,6 @@
-package ru.gb.family_tree.human;
+package ru.gb.family_tree.model.human;
 
-import ru.gb.family_tree.familytree.TreeItem;
+import ru.gb.family_tree.model.familytree.TreeItem;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -29,19 +29,13 @@ public class Human implements Comparable<Human>, TreeItem {
         parents = new ArrayList<>();
         children = new ArrayList<>();
     }
-
-    public void setChildren(List<Human> children) {
-        this.children = children;
-    }
-
-    public void setParents(List<Human> parents) {
-        this.parents = parents;
-    }
-
     public Human(String name, LocalDate birthDate, Gender gender ){
 
         this( name, birthDate, null, gender);
     }
+
+
+
 
 
     public int getId() {

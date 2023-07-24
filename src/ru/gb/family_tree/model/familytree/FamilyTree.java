@@ -1,7 +1,8 @@
-package ru.gb.family_tree.familytree;
+package ru.gb.family_tree.model.familytree;
 
-import ru.gb.family_tree.human.comparators.HumanComparatorByAge;
-import ru.gb.family_tree.human.comparators.HumanComparatorByName;
+import ru.gb.family_tree.model.human.Human;
+import ru.gb.family_tree.model.human.comparators.HumanComparatorByAge;
+import ru.gb.family_tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class FamilyTree <E extends TreeItem<E>> implements Iterable<E>, Serializ
         return humanId;
     }
 
-    public FamilyTree(int id) {
-        this.id = id;
+    public FamilyTree() {
+
         humanList = new ArrayList<>();
     }
 
@@ -54,14 +55,16 @@ public class FamilyTree <E extends TreeItem<E>> implements Iterable<E>, Serializ
 
     @Override
     public Iterator<E> iterator() {
-        return new HumanIterator<>(humanList);
+        return new HumanIterator(humanList);
     }
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName<>());
+        humanList.sort(new HumanComparatorByName());
     }
 
+
+
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge<>());
+        humanList.sort(new HumanComparatorByAge());
     }
 
     public String getInfo( ){
@@ -74,4 +77,8 @@ public class FamilyTree <E extends TreeItem<E>> implements Iterable<E>, Serializ
 
         return stringBuilder.toString();
     }
+    /*
+
+
+ */
 }
