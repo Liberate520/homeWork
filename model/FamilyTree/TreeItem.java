@@ -5,22 +5,22 @@ import java.util.List;
 
 import homeWork.model.human.Human;
 
-public interface TreeItem<T> extends Serializable {
+public interface TreeItem<E> extends Serializable {
     String getName();
 
     int getAge();
 
-    T getFather();
+    E getFather();
 
-    T getMother();
+    E getMother();
 
     String getChildrenInfo();
 
-    boolean addParent(T parent);
+    boolean addParent(E parent);
 
-    boolean addChild(T child);
+    boolean addChild(E child);
 
-    List<T> getChildren();
+    List<E> getChildren();
 
-    List<T> getParents();
+    List<E> getParents();
 }
