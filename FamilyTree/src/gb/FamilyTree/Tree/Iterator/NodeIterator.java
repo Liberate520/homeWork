@@ -1,14 +1,13 @@
 package gb.FamilyTree.Tree.Iterator;
 
 import java.util.Iterator;
-import gb.FamilyTree.Node.RelativeNode.RelativeNode;
 import java.util.List;
 
-public class NodeIterator implements Iterator<RelativeNode> {
-    private List<RelativeNode> nodes;
+public class NodeIterator<E> implements Iterator<E> {
+    private List<E> nodes;
     private int index;
 
-    public NodeIterator(List<RelativeNode> nodes) {
+    public NodeIterator(List<E> nodes) {
         this.nodes = nodes;
     }
 
@@ -18,7 +17,7 @@ public class NodeIterator implements Iterator<RelativeNode> {
     }
 
     @Override
-    public RelativeNode next() {
+    public E next() {
         return nodes.get(index++);
     }
 }

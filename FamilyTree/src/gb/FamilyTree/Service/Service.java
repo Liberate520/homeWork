@@ -1,8 +1,7 @@
 package gb.FamilyTree.Service;
 
-import java.util.Collection;
-
 import gb.FamilyTree.Node.RelativeNode.RelativeNode;
+import gb.FamilyTree.Node.TreeNodeable;
 import gb.FamilyTree.Tree.Relations;
 import gb.FamilyTree.Tree.Tree;
 import gb.FamilyTree.TreeSerializer.TreeSerializer;
@@ -45,13 +44,13 @@ public class Service {
     public String getTreeInfo() {
         StringBuilder builder = new StringBuilder();
         builder.append("Nodes:\n");
-        for (RelativeNode node : familyTree) {
+        for (Object node : familyTree) {
             builder.append(String.format("\t%s\n", node));
         }
         return builder.toString();
     }
 
-    public RelativeNode getNode(int id) {
+    public TreeNodeable getNode(int id) {
         return familyTree.getNode(id);
     }
 

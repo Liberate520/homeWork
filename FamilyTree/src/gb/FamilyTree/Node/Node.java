@@ -3,7 +3,7 @@ package gb.FamilyTree.Node;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Node implements Serializable {
+public class Node implements Serializable, TreeNodeable<Node> {
     protected static int id;
 
     static {
@@ -37,12 +37,19 @@ public class Node implements Serializable {
      * 
      * @param parents - one-level (brother/sister) parents arrayList.
      */
+    @Override
     public void setParents(ArrayList<Node> parents) {
         this.parents = parents;
     }
 
+    @Override
     public void setChilds(ArrayList<Node> childs) {
         this.childNodes = childs;
+    }
+
+    @Override
+    public String getFirstName() {
+        return "";
     }
 
     public Node(int id) {

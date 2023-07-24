@@ -3,7 +3,7 @@ import gb.FamilyTree.Service.Service;
 import gb.FamilyTree.Tree.Relations;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         testTree();
     }
 

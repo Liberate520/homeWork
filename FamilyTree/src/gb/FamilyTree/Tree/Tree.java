@@ -6,20 +6,20 @@ import java.util.NoSuchElementException;
 
 import java.util.Iterator;
 
-import gb.FamilyTree.Node.RelativeNode.RelativeNode;
+import gb.FamilyTree.Node.TreeNodeable;
 import gb.FamilyTree.Node.comparators.NodeComparatorByName;
 import gb.FamilyTree.Node.comparators.NodeComparatorByParents;
 import gb.FamilyTree.Tree.Iterator.NodeIterator;
 
-public class Tree implements Serializable, Iterable<RelativeNode> {
-    protected RelativeNode root;
-    protected ArrayList<RelativeNode> nodes;
+public class Tree<E extends TreeNodeable<E>> implements Serializable, Iterable<E> {
+    protected E root;
+    protected ArrayList<E> nodes;
 
     public Tree() {
         nodes = new ArrayList<>();
     }
 
-    public void addNode(RelativeNode addingNode, RelativeNode nodeToBeAdded, Relations relation) {
+    public void addNode(E addingNode, E nodeToBeAdded, Relations relation) {
         this.pushToNodes(nodeToBeAdded);
 
         if (relation == Relations.ONE_LEVEL) {
@@ -33,13 +33,13 @@ public class Tree implements Serializable, Iterable<RelativeNode> {
         }
     }
 
-    public void addNode(RelativeNode root) {
+    public void addNode(E root) {
         this.root = root;
         this.nodes.add(root);
     }
 
-    public RelativeNode getNode(int id) throws NoSuchElementException {
-        for (RelativeNode relativeNode : nodes) {
+    public E getNode(int id) throws NoSuchElementException {
+        for (E relativeNode : nodes) {
             if (relativeNode.getId() == id) {
                 return relativeNode;
             }
@@ -48,7 +48,7 @@ public class Tree implements Serializable, Iterable<RelativeNode> {
         throw new NoSuchElementException("No element with such id!");
     }
 
-    private void pushToNodes(RelativeNode node) {
+    private void pushToNodes(E node) {
         if (nodes.isEmpty()) {
             root = node;
         }
@@ -60,7 +60,7 @@ public class Tree implements Serializable, Iterable<RelativeNode> {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (RelativeNode relativeNode : nodes) {
+        for (E relativeNode : nodes) {
             builder.append(relativeNode);
             builder.append("\n");
         }
@@ -69,15 +69,15 @@ public class Tree implements Serializable, Iterable<RelativeNode> {
     }
 
     @Override
-    public Iterator<RelativeNode> iterator() {
-        return new NodeIterator(nodes);
+    public Iterator<E> iterator() {
+        return new NodeIterator<>(nodes);
     }
 
     public void sortByName() {
-        this.nodes.sort(new NodeComparatorByName());
+        this.nodes.sort(new NodeComparatorByName<>());
     }
 
     public void sortByParentsAmount() {
-        this.nodes.sort(new NodeComparatorByParents());
+        this.nodes.sort(new NodeComparatorByParents<>());
     }
 }
