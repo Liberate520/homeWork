@@ -20,10 +20,10 @@ public class MainMenu {
         commandList.add(new Finish(consoleUI));
     }
 
-    public String menu(){
+    public String menu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commandList.size(); i++) {
-            stringBuilder.append(i+1);
+            stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(commandList.get(i).getDescription());
             stringBuilder.append("\n");
@@ -31,12 +31,12 @@ public class MainMenu {
         return stringBuilder.toString();
     }
 
-    public void execute(int choice){
-        Command command = commandList.get(choice-1);
+    public void execute(int choice) {
+        Command command = commandList.get(choice - 1);
         command.execute();
     }
 
-    public int getSize(){
+    public int getSize() {
         return commandList.size();
     }
 }

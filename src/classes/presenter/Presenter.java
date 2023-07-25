@@ -13,18 +13,33 @@ public class Presenter {
         this.view = view;
         service = new Service();
     }
+
     public void testInput() {
-        Service.testInput();}
-    public void saveTree(){
-    Service.saveTree();}
-    public void readTree(){
-        Service.readTree();}
-    public void getTreeInfo(){
-        Service.getTreeInfo();}
-    public void sortTreeByName(){
-        Service.sortTreeByName();;}
-    public void sortTreeById(){
-        Service.sortTreeById();}
-    public void sortTreeByBrithDate(){
-        Service.sortTreeByBrithDate();}
+        Service.testInput();
+    }
+
+    public void saveTree() {
+        Service.saveTree();
+    }
+
+    public void readTree() {
+        Service.readTree();
+    }
+
+    public void getTreeInfo() {
+        Service.getTreeInfo();
+    }
+
+    public void sortTreeByName() {
+        Service.sortTreeByName();
+        ;
+    }
+
+    public void sortTreeById() {
+        Service.sortTreeById();
+    }
+
+    public void sortTreeByBrithDate() {
+        Service.sortTreeByBrithDate();
+    }
 }
