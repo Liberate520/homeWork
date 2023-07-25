@@ -7,7 +7,7 @@ import classes.view.View;
 public class Main {
 
     public static void main(String[] args) {
-       //MenuFast.menu();//СТАРОЕ, НО РАБОТАЕТ
-       //ConsoleUI.start();//НЕ ЗАПУСКАЕТСЯ
+        MenuFast.menu();//СТАРОЕ, НО РАБОТАЕТ
+        //ConsoleUI.start();//НЕ ЗАПУСКАЕТСЯ
     }
 }

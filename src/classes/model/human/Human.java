@@ -138,16 +138,18 @@ public class Human implements NameAgeIzable, Serializable, Comparable<Human> {
         return getInfo();
     }
 
-        public void addToParents(Human human) {
+    public void addToParents(Human human) {
         for (Human parent : human.getParents()) {
             parent.addChild(human);
         }
     }
-        private void addToChildren(Human human) {
+
+    private void addToChildren(Human human) {
         for (Human child : human.getChildren()) {
             child.addParent(human);
         }
     }
+
     public String getInfo() {
         StringBuilder tmpSb = new StringBuilder();
         tmpSb.append("Персона(");
