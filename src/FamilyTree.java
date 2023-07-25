@@ -2,36 +2,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    private Node root;
+    private List<Human> family;
 
-    public FamilyTree(Node root) {
-        this.root = root;
+    public FamilyTree() {
+        family = new ArrayList<>();
     }
 
-    public void addPerson(Human person, Node parentNode) {
-        Node newNode = new Node(person, null, null);
-        parentNode.addChild(newNode);
-    }
-
-    public List<Human> getAllChildren(Human person) {
-        List<Human> allChildren;
-        allChildren = new ArrayList<>();
-        getAllChildrenRecursive(root, allChildren, person);
-        return allChildren;
-    }
-
-    private void getAllChildrenRecursive(Node currentNode, List<Human> allChildren, Human person) {
-        if (currentNode.getHuman().equals(person)) {
-            List<Node> children = currentNode.getChildren();
-            for (Node childNode : children) {
-                allChildren.add(childNode.getHuman());
-                getAllChildrenRecursive(childNode, allChildren, person);
-            }
-        } else {
-            List<Node> children = currentNode.getChildren();
-            for (Node childNode : children) {
-                getAllChildrenRecursive(childNode, allChildren, person);
+    public void addFather(Human father) {
+        for (Human human : family) {
+            if (human.getGender() == Gender.MALE) {
+                System.out.println("Error: Father already exists in the family tree.");
+                return;
             }
         }
+        family.add(father);
+    }
+
+    public void addMother(Human mother) {
+        for (Human human : family) {
+            if (human.getGender() == Gender.FEMALE) {
+                System.out.println("Error: Mother already exists in the family tree.");
+                return;
+            }
+        }
+        family.add(mother);
+    }
+
+    public void addSon(Human son) {
+        for (Human human : family) {
+            if (human.getGender() == Gender.MALE && human.getName().equals(son.getFatherName())) {
+                family.add(son);
+                return;
+            }
+        }
+        System.out.println("Error: Father not found in the family tree.");
+    }
+
+    public void addDaughter(Human daughter) {
+        for (Human human : family) {
+            if (human.getGender() == Gender.FEMALE && human.getName().equals(daughter.getFatherName())) {
+                family.add(daughter);
+                return;
+            }
+        }
+        System.out.println("Error: Father not found in the family tree.");
+    }
+
+    public void addBrother(Human brother) {
+        // TODO: implement
+    }
+
+    public void addSister(Human sister) {
+        // TODO: implement
+    }
+
+    public List<Human> getFamilyMembers() {
+        return family;
     }
 }

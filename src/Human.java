@@ -1,24 +1,52 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Human {
     private Gender gender;
-    private LocalDate birthDate;
+    private String birthDate;
 
     private String name;
+    private String fatherName;
 
-    private List<Human> children;
-
-    public Human(String name, Gender gender, LocalDate birthDate) {
+    public Human(String name, Gender gender, String birthDate) {
         this.gender = gender;
         this.birthDate = birthDate;
         this.name = name;
-
-        this.children = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            Date date = format.parse(birthDate);
+            this.birthDate = String.valueOf(birthDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Геттеры и сеттеры
+
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Gender getGender() {
         return gender;
@@ -26,21 +54,5 @@ public class Human {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public List<Human> getChildren() {
-        return children;
-    }
-
-    public void addChild(Human child) {
-        children.add(child);
     }
 }
