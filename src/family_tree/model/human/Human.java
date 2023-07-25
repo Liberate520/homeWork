@@ -2,6 +2,7 @@ package family_tree.model.human;
 
 
 import family_tree.model.tree.Entity;
+import family_tree.model.tree.SentientEntity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 
 
-public class Human implements Serializable, Comparable<Human>, Entity<Human> {
+public class Human implements Serializable, Comparable<Human>, SentientEntity<Human> {
     private int id;
     private String name;
     private LocalDate dateOfBirth, dateOfDeath;
@@ -41,10 +42,12 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
         this(name, dateOfBirth, null, gender);
     }
 
+    @Override
     public HashMap<Human, Parent_Type> getParents() {
         return parents;
     }
 
+    @Override
     public HashMap<Human, Child_type> getChildren() {
         return children;
     }
@@ -76,57 +79,33 @@ public class Human implements Serializable, Comparable<Human>, Entity<Human> {
     }
 
     @Override
-    public Boolean isMarried(){
+    public boolean isMarried(){
         return this.married;
     }
 
-    public void addParent(Human parent, Parent_Type parentType){
-        if(!this.parents.containsKey(parent)) {
-            if (parentType.equals(Parent_Type.Foster_Mother)
-                    || parentType.equals(Parent_Type.Foster_Father)) {
-                this.parents.put(parent, parentType);
-                if(this.gender.equals(Gender.male)) parent.addChild(this, Child_type.Foster_Son);
-                else parent.addChild(this, Child_type.Foster_Daughter);
-            }
-            if ((hasBioFather == false) && (parentType.equals(Parent_Type.Biological_Father))) {
-                this.parents.put(parent, parentType);
-                this.hasBioFather = true;
-                if(this.gender.equals(Gender.male)) parent.addChild(this, Child_type.Biological_Son);
-                else parent.addChild(this, Child_type.Biological_Daughter);
-            }
-            if ((hasBioMother == false) && (parentType.equals(Parent_Type.Biological_Mother))) {
-                this.parents.put(parent, parentType);
-                this.hasBioMother = true;
-                if(this.gender.equals(Gender.male)) parent.addChild(this, Child_type.Biological_Son);
-                else parent.addChild(this, Child_type.Biological_Daughter);
-            }
-        }
+    @Override
+    public boolean isHasBioFather() {
+        return hasBioFather;
+    }
+
+    @Override
+    public boolean isHasBioMother() {
+        return hasBioMother;
+    }
+    @Override
+    public void setHasBioFather() {
+        hasBioFather = true;
+    }
+
+    @Override
+    public void setHasBioMother() {
+        hasBioMother = true;
     }
 
     @Override
     public void setSpouse(Human spouse){
         this.spouse = spouse;
         this.married = true;
-    }
-
-
-    public void addChild(Human child, Child_type childType){
-        if(!this.children.containsKey(child)) {
-            this.children.put(child, childType);
-            if (childType.equals(Child_type.Foster_Son) || childType.equals(Child_type.Foster_Daughter)) {
-                if (this.gender.equals(Gender.male)) {
-                    child.addParent(Human.this, Parent_Type.Foster_Father);
-                } else {
-                    child.addParent(Human.this, Parent_Type.Foster_Mother);
-                }
-            } else {
-                if (this.gender.equals(Gender.male)) {
-                    child.addParent(Human.this, Parent_Type.Biological_Father);
-                } else {
-                    child.addParent(Human.this, Parent_Type.Biological_Mother);
-                }
-            }
-        }
     }
 
     @Override

@@ -2,7 +2,6 @@ package family_tree.model.tree;
 
 import family_tree.model.human.Child_type;
 import family_tree.model.human.Gender;
-import family_tree.model.human.Human;
 import family_tree.model.human.Parent_Type;
 
 import java.time.LocalDate;
@@ -18,15 +17,6 @@ public interface Entity<E> {
 
     Gender getGender();
 
-    E getSpouse();
-
-    Boolean isMarried();
-
-    void setSpouse(E spouse);
-
-    void setSpouse(Human spouse);
-
-    void removeSpouse();
 
     LocalDate getDateOfBirth();
 
