@@ -1,14 +1,15 @@
 package model.treeItems;
-// TODO сделать обработку возраста человека и его состояния жизни
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 import model.treeItems.enums.Gender;
 import model.treeItems.enums.LifeState;
 
-public class Human implements Comparable<Human>, GenTreeItem {
-    private static String fileExt;
+public class Human implements Comparable<Human>, GenTreeItem, Serializable {
+    private static int maxYearOfLife = 130;
 
     private int id = 0;
     private String firstName;
@@ -17,11 +18,11 @@ public class Human implements Comparable<Human>, GenTreeItem {
     private Gender gender;
     private String strGender;
 
-    private GregorianCalendar birthDate = null;
-    private GregorianCalendar deathDate = null;
+    private LocalDate birthDate = null;
+    private LocalDate deathDate = null;
     private String strBirthDate = "UnknownBirthDate";
     private String strDeathDate = "UnknownDeathDate";
-    private LifeState lifeState = LifeState.alive;
+    private LifeState lifeState;
 
     private Human mother = null;
     private Human father = null;
@@ -34,10 +35,6 @@ public class Human implements Comparable<Human>, GenTreeItem {
 
     private int hierarchyLevel = 0;
 
-    static {
-        fileExt = ".human";
-    }
-
     // конструктор
     public Human(String firstName,
                  String midName,
@@ -48,10 +45,10 @@ public class Human implements Comparable<Human>, GenTreeItem {
         this.lastName = lastName;
         this.gender = gender;
         if (this.gender == Gender.man) {
-            strGender = "Мужчина";
+            strGender = "мужчина";
         }
         else {
-            strGender = "Женщина";
+            strGender = "женщина";
         }
     }
 
@@ -71,7 +68,15 @@ public class Human implements Comparable<Human>, GenTreeItem {
     public Gender getGender() {return gender;}
 
     @Override
-    public int getAge() {return 0;}
+    public int getAge() {
+        if (birthDate != null && deathDate != null) {
+            return Period.between(birthDate, deathDate).getYears();
+        }
+        else if (birthDate != null && deathDate == null) {
+            return Period.between(birthDate, LocalDate.now()).getYears();
+        }
+        return -1;
+    }
 
     @Override
     public int getHierarchyLevel() {return hierarchyLevel;}
@@ -81,20 +86,28 @@ public class Human implements Comparable<Human>, GenTreeItem {
 
     @Override
     public void setBirthDate(int day, int month, int year) throws Exception {
-        GregorianCalendar birthDate = new GregorianCalendar(year, month - 1, day);
-        if (this.deathDate != null && birthDate.after(this.deathDate)) {
+        LocalDate birthDate = LocalDate.of(year, month, day);
+        if (this.deathDate != null && birthDate.isAfter(this.deathDate)) {
             throw new Exception("birthDate can not be after deathDate");
         }
         else {
             this.birthDate = birthDate;
             this.strBirthDate = dateToString(birthDate);
+            if (Period.between(birthDate, LocalDate.now()).getYears() > maxYearOfLife) {
+                lifeState = LifeState.dead;
+            }
+            else {
+                if (deathDate == null) {
+                    lifeState = LifeState.alive;
+                }
+            }
         }
     }
 
     @Override
     public void setDeathDate(int day, int month, int year) throws Exception {
-        GregorianCalendar deathDate = new GregorianCalendar(year, month - 1, day);
-        if (this.birthDate != null && deathDate.before(this.birthDate)) {
+        LocalDate deathDate = LocalDate.of(year, month, day);
+        if (this.birthDate != null && deathDate.isBefore(this.birthDate)) {
             throw new Exception("deathDate can not be before birthDate");
         }
         else {
@@ -175,13 +188,10 @@ public class Human implements Comparable<Human>, GenTreeItem {
         return sb.toString();
     }
 
-    private String dateToString(GregorianCalendar date) {
-        // day = 5
-        // month = 2
-        // year = 1
-        int day = date.get(5);
-        int month = date.get(2) + 1;
-        int year = date.get(1);
+    private String dateToString(LocalDate date) {
+        int day = date.getDayOfMonth();
+        int month = date.getMonthValue();
+        int year = date.getYear();
         return String.format("%d.%d.%d", day, month, year);
     }
 
@@ -203,9 +213,9 @@ public class Human implements Comparable<Human>, GenTreeItem {
     public String getFullInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("-----------------------------------------------------\n");
-        sb.append(toString());
-        sb.append(" ");
-        sb.append(strGender);
+        sb.append(toString()).append(" (").append(getAge()).append(" лет) ");
+        sb.append(strGender).append(" ");
+        sb.append(lifeState);
 
         sb.append("\nОтец: ");
         if (father == null) {sb.append("unknown");}
@@ -219,11 +229,6 @@ public class Human implements Comparable<Human>, GenTreeItem {
         sb.append(getStrListChilds());
         sb.append("-----------------------------------------------------\n");
         return sb.toString();
-    }
-
-    @Override
-    public String getFileExt() {
-        return fileExt;
     }
 
     @Override

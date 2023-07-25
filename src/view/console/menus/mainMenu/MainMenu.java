@@ -3,7 +3,6 @@ package view.console.menus.mainMenu;
 // TODO разбить вот это большое меню на подменю, организовать навигацию по этим меню
 
 import java.util.ArrayList;
-
 import view.console.ConsoleUI;
 import view.console.menus.ConsoleMenu;
 import view.console.menus.mainMenu.commands.*;
@@ -36,8 +35,7 @@ public class MainMenu implements ConsoleMenu {
         for (i = 0; i < commands.size(); i++) {
             sb.append(i + 1);
             sb.append(" - ");
-            sb.append(commands.get(i).getDescription());
-            sb.append("\n");
+            sb.append(commands.get(i).getDescription()).append("\n");
         }
         sb.append(i + 1);
         sb.append(" - ");
@@ -46,11 +44,11 @@ public class MainMenu implements ConsoleMenu {
     }
 
     @Override
-    public void executeCommand(int commandNumber) {
-        if (commandNumber > 0 && commandNumber < commands.size() + 1) {
-            commands.get(commandNumber - 1).execute();
+    public void executeCommand(int number) {
+        if (number > 0 && number < commands.size() + 1) {
+            commands.get(number - 1).execute();
         }
-        else if (commandNumber == commands.size() + 1) {
+        else if (number == commands.size() + 1) {
             consoleUI.print(getMenuInfo());
         }
         else {

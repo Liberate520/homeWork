@@ -1,8 +1,6 @@
 package presenter;
 
 import model.Core;
-import model.io.Loader;
-import model.io.Saver;
 import view.View;
 
 public class Presenter {
@@ -18,7 +16,7 @@ public class Presenter {
     }
 
     public void loadTree(String path) {
-        view.showResult(core.loadTree(new Loader(path)));
+        view.showResult(core.loadTree(path));
     }
 
     public void newTree() {
@@ -26,7 +24,7 @@ public class Presenter {
     }
 
     public void saveTree(String pathName) {
-        view.showResult(core.saveTree(new Saver(pathName)));
+        view.showResult(core.saveTree(pathName));
     }
 
     public void getTreeFullInfo() {
@@ -38,9 +36,9 @@ public class Presenter {
     }
 
     public void addNewItemInTree(String firstName,
-                                  String midName,
-                                  String lastName,
-                                  String gender) {
+                                 String midName,
+                                 String lastName,
+                                 String gender) {
         String result = core.addNewItemInTree(firstName, midName, lastName, gender);
         view.showResult(result);
     }

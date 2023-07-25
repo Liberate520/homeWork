@@ -1,15 +1,18 @@
 package model;
 
 import java.io.IOException;
-import model.interfaces.Loadable;
-import model.interfaces.Reader;
-import model.interfaces.Writer;
+import model.io.Reader;
+import model.io.Loader;
+import model.io.Writer;
+import model.io.Saver;
 import model.genTree.GenTree;
 import model.treeItems.GenTreeItem;
 import model.treeItems.Human;
 import model.treeItems.enums.Gender;
 
 public class Core {
+    private Reader loader = new Loader();
+    private Writer saver = new Saver();
     private GenTree<GenTreeItem> currentTree = null;
     private GenTreeItem currentItem = null;
     private boolean saved = true;
@@ -18,32 +21,34 @@ public class Core {
         return saved;
     }
 
-    public String loadTree(Reader reader) {
+    public String loadTree(String path) {
         if (saved) {
             try {
-                Loadable restTree = reader.loadObj();
+                loader.setPathName(path);
+                Object restTree = loader.loadObj();
                 if (restTree instanceof GenTree) {
                     currentTree = (GenTree<GenTreeItem>)restTree;
                     saved = true;
                     return "Древо загружено!";
                 }
-                return "Неправильный тип файла!";
+                return "Неверный тип файла!";
             }
             catch (IOException ioe) {
                 return "IOException";
             }
             catch (ClassNotFoundException clsnfe) {
-                return "Неправильный тип файла!";
+                return "Неверный тип файла!";
             }
         }
         return "Текущее древо не сохранено!";
     }
 
-    public String saveTree(Writer writer) {
+    public String saveTree(String path) {
         if (currentTree != null) {
             if (!saved) {
                 try {
-                    writer.writeObj(currentTree);
+                    saver.setPathName(path);
+                    saver.writeObj(currentTree);
                     saved = true;
                     return "Древо сохранено!";
                 }

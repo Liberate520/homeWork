@@ -1,11 +1,9 @@
 package model.treeItems;
 
 import java.util.List;
-import model.interfaces.Loadable;
-import model.interfaces.Saveable;
 import model.treeItems.enums.Gender;
 
-public interface GenTreeItem extends Loadable, Saveable {
+public interface GenTreeItem {
     void setBirthDate(int day, int month, int year) throws Exception;
     void setDeathDate(int day, int month, int year) throws Exception;
 

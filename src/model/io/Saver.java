@@ -3,19 +3,17 @@ package model.io;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
-import model.interfaces.Saveable;
-import model.interfaces.Writer;
+import java.io.Serializable;
 
 public class Saver implements Writer {
-    String pathName;
+    String pathName = null;
 
-    public Saver(String pathName) {
+    public void setPathName(String pathName) {
         this.pathName = pathName;
     }
 
     @Override
-    public void writeObj(Saveable obj) throws IOException {
-        pathName = pathName + obj.getFileExt();
+    public void writeObj(Serializable obj) throws IOException {
         ObjectOutputStream objOutStream = new ObjectOutputStream(new FileOutputStream(pathName));
         objOutStream.writeObject(obj);
         objOutStream.close();

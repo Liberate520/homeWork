@@ -1,24 +1,17 @@
 package model.genTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import model.genTree.comparators.ByAge;
 import model.genTree.comparators.ByFullName;
 import model.genTree.comparators.ByHierarchyLevel;
-import model.interfaces.Loadable;
-import model.interfaces.Saveable;
 import model.treeItems.GenTreeItem;
 
-public class GenTree<T extends GenTreeItem> implements Saveable, Loadable, Iterable<T> {
-    private static String fileExt;
-
+public class GenTree<T extends GenTreeItem> implements Serializable, Iterable<T> {
     private ArrayList<T> items = new ArrayList<T>();
     private int id = 1;
     private int size = 0;
-
-    static {
-        fileExt = ".genTree";
-    }
 
     // вернуть кол-во элементов в дереве
     public int size() {
@@ -70,12 +63,6 @@ public class GenTree<T extends GenTreeItem> implements Saveable, Loadable, Itera
         items.add(item);
         id += 1;
         size += 1;
-    }
-
-    // переопределение из Saveable
-    @Override
-    public String getFileExt() {
-        return fileExt;
     }
 
     // переопределение из Iterable
