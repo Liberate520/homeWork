@@ -1,10 +1,7 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class FamilyTree {
     private boolean search;
@@ -45,7 +42,7 @@ public class FamilyTree {
         return result;
     }
 
-    public void save(String file_path) {
+    public void save(String file_path) throws IOException {
         try (DataOutputStream ds = new DataOutputStream(new FileOutputStream(file_path))) {
             ds.writeInt(human.size());
             for (Human h : human.values()) {
