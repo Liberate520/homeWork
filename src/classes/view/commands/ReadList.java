@@ -8,7 +8,7 @@ public class ReadList extends Command {
         String description = "Прочитать из файла";
     }
 
-    public void execute(){
+    public void execute() {
         consoleUI.ReadList();
     }
 }

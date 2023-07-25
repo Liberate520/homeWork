@@ -8,7 +8,7 @@ public class SortById extends Command {
         String description = "Отсортировать список по ID";
     }
 
-    public void execute(){
+    public void execute() {
         consoleUI.sortById();
     }
 }

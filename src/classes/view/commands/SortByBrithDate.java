@@ -8,7 +8,7 @@ public class SortByBrithDate extends Command {
         String description = "Отсортировать список по возрасту";
     }
 
-    public void execute(){
+    public void execute() {
         consoleUI.SortByBrithDate();
     }
 }

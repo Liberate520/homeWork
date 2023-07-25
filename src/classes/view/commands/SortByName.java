@@ -8,7 +8,7 @@ public class SortByName extends Command {
         String description = "Отсортировать список по имени";
     }
 
-    public void execute(){
+    public void execute() {
         consoleUI.sortByName();
     }
 }

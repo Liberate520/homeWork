@@ -8,7 +8,7 @@ public class TestInput extends Command {
         String description = "Тестовый список(создание)";
     }
 
-    public void execute(){
+    public void execute() {
         consoleUI.TestInput();
     }
 }
