@@ -47,6 +47,7 @@ public class ConsoleUi implements View{
 
     @Override
     public void printAnswer(String text) {
+        System.out.println(text);
 
     }
 
@@ -78,6 +79,7 @@ public class ConsoleUi implements View{
             LocalDate birthDate = LocalDate.parse(date);
             presenter.addHuman(name, gender, birthDate);
         }
+
 
     }
 

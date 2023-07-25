@@ -129,7 +129,7 @@ public class E implements Serializable, FamilyTreeItem {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");
         sb.append(id);
-        sb.append("имя: ");
+        sb.append(", имя: ");
         sb.append(name);
         sb.append(", пол: ");
         sb.append(getGender());
