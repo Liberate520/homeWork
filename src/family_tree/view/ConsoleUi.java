@@ -2,12 +2,10 @@ package family_tree.view;
 
 import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
-import family_tree.view.commands.Command;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
 
 
 
@@ -36,13 +34,41 @@ public class ConsoleUi implements View{
         while (work) {
             System.out.println(menu.menu());
             String choice = scanner.nextLine();
+            if(validChoice(choice)) {
+                int numChoice = Integer.parseInt(choice);
+                menu.execute(numChoice);
+            } else {
+                System.out.println("Нет такой команды");
+            }
 
-            int numChoice = Integer.parseInt(choice);
-            menu.execute(numChoice);
         }
 
 
 
+    }
+
+    private boolean validChoice(String choice) {
+        int numChoice;
+        int size = menu.getSize();
+
+//        System.out.println(String.format("Parsing string: \"%s\"", choice));
+
+        if(choice == null || choice.equals("")) {
+            System.out.println("Вы не ввели команду");
+            return false;
+        }
+
+        try {
+            numChoice = Integer.parseInt(choice);
+
+            if (size >=numChoice && numChoice > 0){
+                return true;
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Эту команду нельзя исполнить");
+        }
+        return false;
     }
 
     @Override
@@ -71,10 +97,10 @@ public class ConsoleUi implements View{
     public void addHuman() {
             System.out.println("Введите имя: ");
             String name = scanner.nextLine();
-            System.out.println("Введите пол: ");
+            System.out.println("Введите пол Male или Female: ");
             String gend = scanner.nextLine();
             Gender gender = Gender.valueOf(gend);
-            System.out.println("Введите дату рождения: ");
+            System.out.println("Введите дату рождения в формате гггг-мм-дд: ");
             String date = scanner.nextLine();
             LocalDate birthDate = LocalDate.parse(date);
             presenter.addHuman(name, gender, birthDate);
