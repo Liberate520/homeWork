@@ -1,11 +1,14 @@
+package genealogicalTree;
+
 import human.Human;
 import human.Writable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree implements Serializable {
+public class GenealogicalTree implements Serializable, Iterable<Human> {
 
     private List<Human> humanList;
 
@@ -15,6 +18,17 @@ public class GenealogicalTree implements Serializable {
 
     public GenealogicalTree(List<Human> humanList) {
         this.humanList = humanList;
+    }
+
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        for (Human human: humanList
+             ) {
+            String part = human.getInfo();
+            sb.append(part);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     public void addHuman(Human human){
@@ -58,6 +72,7 @@ public class GenealogicalTree implements Serializable {
         return human.getName(human);
     }
 
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -68,6 +83,12 @@ public class GenealogicalTree implements Serializable {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
     }
 }
 

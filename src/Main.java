@@ -1,3 +1,4 @@
+import genealogicalTree.GenealogicalTree;
 import human.FileHandler;
 import human.Gender;
 import human.Human;
@@ -73,8 +74,13 @@ public class Main {
         fh.saveFile(son);
         fh.saveFile(family1);
 
-        System.out.println(fh.readFile(filePath));
+//        System.out.println(fh.readFile(filePath));
 
+//        System.out.println(family1.getInfo());
+        for (Human human: family1
+             ) {
+            System.out.println(human);
+        }
 
     }
 }

@@ -149,6 +149,35 @@ public class Human implements Serializable {
     }
 
 
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name:");
+        sb.append(this.name);
+        sb.append("/");
+        sb.append("Last name:");
+        sb.append(this.lastName);
+        sb.append("/");
+        sb.append("Birthdate:");
+        sb.append(this.birthDate);
+        sb.append("/");
+        sb.append("Spouse:");
+        if(this.spouse !=null) {
+            sb.append(this.spouse.name);
+            sb.append(" ");
+            sb.append(this.spouse.lastName);
+        }else sb.append("Absent");
+        sb.append("/");
+        sb.append("Children:");
+        if(this.children.size()!=0){
+
+            for (Human human: this.children
+                 ) {
+                sb.append(human.name);
+                sb.append(",");
+            }
+        }else sb.append("Absent");
+        return sb.toString();
+    }
 }
 
 
