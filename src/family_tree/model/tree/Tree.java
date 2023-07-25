@@ -36,26 +36,30 @@ public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
         family.clear();
     }
 
-    public void wedding(E husband, E wife){
+    public boolean wedding(E husband, E wife){
         if(husband.isMarried() || wife.isMarried()){
-            System.out.println("Свадьба невозможна");
+            return false;
         }
         else {
             husband.setSpouse(wife);
             wife.setSpouse(husband);
+            return true;
         }
     }
 
-    public void divorce(E husband, E wife){
-        if (husband.getSpouse().equals(wife) && wife.getSpouse().equals(husband)) {
+    public boolean divorce(E husband, E wife){
+        if (!husband.isMarried() || !wife.isMarried()) return false;
+        else if (husband.getSpouse().equals(wife) && wife.getSpouse().equals(husband)) {
             husband.removeSpouse();
             wife.removeSpouse();
+            return true;
         }
-        else System.out.println("Развод невозможен");
+        return false;
     }
 
-    public void getSiblings(E child)
+    public String getSiblings(E child)
     {
+        StringBuilder stringBuilder = new StringBuilder();
         List<E> siblings = new ArrayList<>();
         for (E parent : child.getParents().keySet()) {
             for (E sibling : parent.getChildren().keySet()) {
@@ -64,9 +68,18 @@ public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
             }
         }
         for (E sibling : siblings) {
-            if(sibling.getGender().equals(Gender.female)) System.out.printf("%s - Сестра\n", sibling.getName());
-            else if(sibling.getGender().equals(Gender.male)) System.out.printf("%s - Брат\n", sibling.getName());
+            if(sibling.getGender().equals(Gender.female)){
+                stringBuilder.append(sibling.getName());
+                stringBuilder.append(" - ");
+                stringBuilder.append("Сестра");
+            }
+            else if(sibling.getGender().equals(Gender.male)){
+                stringBuilder.append(sibling.getName());
+                stringBuilder.append(" - ");
+                stringBuilder.append("Брат");
+            }
         }
+        return stringBuilder.toString();
     }
 
     public void sortByName() {family.sort(new HumanComparatorByName<E>());}
@@ -74,6 +87,6 @@ public class Tree<E extends Entity<E>> implements Serializable, Iterable<E> {
     public void sortByAge() {family.sort(new HumanComparatorByAge<E>());}
     @Override
     public Iterator<E> iterator() {
-        return new TreeIterator(family);
+        return new TreeIterator<>(family);
     }
 }

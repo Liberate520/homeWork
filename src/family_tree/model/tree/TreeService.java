@@ -21,14 +21,14 @@ public class TreeService {
     public void setParentChild(int id_parent, int id_child, Child_type type){
         family.getFamilyMember(id_parent).addChild(family.getFamilyMember(id_child), type);
     }
-    public void setHusbandWife(int id_husband, int id_wife){
-        family.wedding(family.getFamilyMember(id_husband), family.getFamilyMember(id_wife));
+    public boolean setHusbandWife(int id_husband, int id_wife){
+        return family.wedding(family.getFamilyMember(id_husband), family.getFamilyMember(id_wife));
     }
-    public void unsetHusbandWife(int id_husband, int id_wife){
-        family.divorce(family.getFamilyMember(id_husband), family.getFamilyMember(id_wife));
+    public boolean unsetHusbandWife(int id_husband, int id_wife){
+        return family.divorce(family.getFamilyMember(id_husband), family.getFamilyMember(id_wife));
     }
-    public void showSiblings(int id_human){
-        family.getSiblings(family.getFamilyMember(id_human));
+    public String showSiblings(int id_human){
+        return family.getSiblings(family.getFamilyMember(id_human));
     }
     public void sortByAge(){
         family.sortByAge();
@@ -36,27 +36,33 @@ public class TreeService {
     public void sortByName(){
         family.sortByName();
     }
-    public void getFamilyMemberInfo(int id){
-        System.out.println(family.getFamilyMember(id).toString());
+    public String getFamilyMemberInfo(int id){
+        return family.getFamilyMember(id).toString();
     }
     public void setDateOfDeath(int id, LocalDate dateOfDeath){
         family.getFamilyMember(id).setDateOfDeath(dateOfDeath);
     }
 
-    public void getFamilyInfo(){
+    public String getFamilyInfo(){
         StringBuilder sb = new StringBuilder();
         for (Human member : this.family) {
             sb.append(member.getId()).append(". ").append(member.getName()).append("\n");
             sb.append(member);
             sb.append("______________________________").append("\n");
         }
-        System.out.println(sb.toString());
+        return sb.toString();
     }
 
-    public void saveFamily(String fileName){
-        fileHandler.save(family, fileName);
+    public boolean saveFamily(String fileName){
+        return fileHandler.save(family, fileName);
     }
-    public void loadFamily(String fileName){
-        family = fileHandler.read(fileName);
+    public boolean loadFamily(String fileName){
+        if (fileHandler.read(fileName) == null){
+            return false;
+        }
+        else {
+            family = fileHandler.read(fileName);
+            return true;
+        }
     }
 }

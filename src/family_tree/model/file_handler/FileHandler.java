@@ -1,5 +1,6 @@
 package family_tree.model.file_handler;
 
+import family_tree.model.tree.Entity;
 import family_tree.model.tree.Tree;
 
 import java.io.*;
@@ -9,14 +10,15 @@ public class FileHandler implements Saveable, Readable{
     private ObjectInputStream read;
 
     @Override
-    public void save(Tree family, String familyName){
+    public boolean save(Tree family, String familyName){
         try {
             save = new ObjectOutputStream(new FileOutputStream(familyName + ".out"));
             save.writeObject(family);
             save.close();
+            return true;
         }
         catch (IOException e){
-            System.out.println("Файл не найден");
+            return false;
         }
     }
 
@@ -28,11 +30,7 @@ public class FileHandler implements Saveable, Readable{
             read.close();
             return result;
         }
-        catch (IOException e){
-            System.out.println("Файл не найден");
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.out.println("Класс не найден");
+        catch (IOException | ClassNotFoundException e){
             return null;
         }
     }

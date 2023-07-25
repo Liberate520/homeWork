@@ -24,14 +24,14 @@ public class Presenter {
     public void setParentChild(int id_parent, int id_child, Child_type type){
         service.setParentChild(id_parent, id_child, type);
     }
-    public void setHusbandWife(int id_husband, int id_wife){
-        service.setHusbandWife(id_husband, id_wife);
+    public boolean setHusbandWife(int id_husband, int id_wife){
+        return service.setHusbandWife(id_husband, id_wife);
     }
-    public void unsetHusbandWife(int id_husband, int id_wife){
-        service.unsetHusbandWife(id_husband, id_wife);
+    public boolean unsetHusbandWife(int id_husband, int id_wife){
+        return service.unsetHusbandWife(id_husband, id_wife);
     }
-    public void showSiblings(int id_human){
-        service.showSiblings(id_human);
+    public String showSiblings(int id_human){
+        return service.showSiblings(id_human);
     }
     public void sortByAge(){
         service.sortByAge();
@@ -39,21 +39,21 @@ public class Presenter {
     public void sortByName(){
         service.sortByName();
     }
-    public void getFamilyMemberInfo(int id){
-        service.getFamilyMemberInfo(id);
+    public String getFamilyMemberInfo(int id){
+        return service.getFamilyMemberInfo(id);
     }
     public void setDateOfDeath(int id, LocalDate dateOfDeath){
         service.setDateOfDeath(id, dateOfDeath);
     }
 
-    public void getFamilyInfo(){
-        service.getFamilyInfo();
+    public String getFamilyInfo(){
+        return service.getFamilyInfo();
     }
 
-    public void saveFamily(String fileName){
-        service.saveFamily(fileName);
+    public boolean saveFamily(String fileName){
+        return service.saveFamily(fileName);
     }
-    public void loadFamily(String fileName) {
-        service.loadFamily(fileName);
+    public boolean loadFamily(String fileName) {
+        return service.loadFamily(fileName);
     }
 }

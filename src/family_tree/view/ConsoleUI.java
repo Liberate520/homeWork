@@ -60,7 +60,8 @@ public class ConsoleUI implements View{
         Integer id_husband = Integer.parseInt(scanner.nextLine());
         System.out.println("Введите id жены: ");
         Integer id_wife = Integer.parseInt(scanner.nextLine());
-        presenter.setHusbandWife(id_husband, id_wife);
+        if (presenter.setHusbandWife(id_husband, id_wife)) System.out.println("Брак заключен");
+        else System.out.println("Свадьба невозможна");
     }
     public void unsetHusbandWife(){
         getFamilyInfo();
@@ -68,12 +69,13 @@ public class ConsoleUI implements View{
         Integer id_husband = Integer.parseInt(scanner.nextLine());
         System.out.println("Введите id жены: ");
         Integer id_wife = Integer.parseInt(scanner.nextLine());
-        presenter.unsetHusbandWife(id_husband, id_wife);
+        if (presenter.unsetHusbandWife(id_husband, id_wife)) System.out.println("Развод произведен");
+        else System.out.println("Развод невозможен");
     }
     public void showSiblings(){
         System.out.println("Введите id человека: ");
         Integer id_human = Integer.parseInt(scanner.nextLine());
-        presenter.showSiblings(id_human);
+        System.out.println(presenter.showSiblings(id_human));
     }
     public void sortByAge(){
         presenter.sortByAge();
@@ -84,7 +86,7 @@ public class ConsoleUI implements View{
     public void getFamilyMemberInfo(){
         System.out.println("Введите id человека: ");
         Integer id = Integer.parseInt(scanner.nextLine());
-        presenter.getFamilyMemberInfo(id);
+        System.out.println(presenter.getFamilyMemberInfo(id));
     }
     public void setDateOfDeath(){
         System.out.println("Введите id человека: ");
@@ -100,18 +102,30 @@ public class ConsoleUI implements View{
     }
 
     public void getFamilyInfo(){
-        presenter.getFamilyInfo();
+        System.out.println(presenter.getFamilyInfo());
     }
 
     public void saveFamily(){
         System.out.println("Введите имя файла: ");
         String fileName = scanner.nextLine();
-        presenter.saveFamily(fileName);
+        if (!presenter.saveFamily(fileName)) {
+            System.out.println("Файл не найден");
+        }
+        else {
+            System.out.println("Файл сохранен");
+            presenter.saveFamily(fileName);
+        }
     }
     public void loadFamily(){
         System.out.println("Введите путь к загружаемому файлу: ");
         String fileName = scanner.nextLine();
-        presenter.loadFamily(fileName);
+        if (!presenter.loadFamily(fileName)) {
+            System.out.println("Файл не найден");
+        }
+        else {
+            System.out.println("Файл загружен");
+            presenter.loadFamily(fileName);
+        }
     }
 
     public void work(){
