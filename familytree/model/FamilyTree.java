@@ -10,6 +10,7 @@ public class FamilyTree {
     public FamilyTree() {
         people = new ArrayList<>();
         parentNames = new HashSet<>();
+
     }
 
     public void addPerson(Person person) {
@@ -23,7 +24,7 @@ public class FamilyTree {
             for (Person person : people) {
                 writer.print(person.getFirstName() + " ");
                 writer.print(person.getLastName() + " ");
-                writer.print(person.getAge() + " ");
+                writer.print(person.getDateBirthday() + " ");
                 writer.print(person.getFatherFirstName() + " ");
                 writer.print(person.getFatherLastName() + " ");
                 writer.print(person.getMotherFirstName() + " ");
@@ -45,8 +46,7 @@ public class FamilyTree {
                 Person person = new Person();
                 person.setFirstName(tokens[0]);
                 person.setLastName(tokens[1]);
-
-//                person.setAge(Integer.parseInt(tokens[2]));
+                person.setBirthday(tokens[2]);
                 person.setFatherFirstName(tokens[3]);
                 person.setFatherLastName(tokens[4]);
                 person.setMotherFirstName(tokens[5]);
@@ -82,9 +82,9 @@ public class FamilyTree {
         System.out.println("Дети " + firstName + " " + lastName + ":");
 
         for (Person person : people) {
-            if (person.getFatherFirstName().equals(firstName) && person.getFatherLastName().equals(lastName)) {
+            if (person.getFatherFirstName().equalsIgnoreCase(firstName) && person.getFatherLastName().equalsIgnoreCase(lastName)) {
                 System.out.println(person.getFirstName() + " " + person.getLastName());
-            } else if (person.getMotherFirstName().equals(firstName) && person.getMotherLastName().equals(lastName)) {
+            } else if (person.getMotherFirstName().equalsIgnoreCase(firstName) && person.getMotherLastName().equalsIgnoreCase(lastName)) {
                 System.out.println(person.getFirstName() + " " + person.getLastName());
             }
         }
@@ -95,4 +95,5 @@ public class FamilyTree {
     public List<Person> getPeople() {
         return people;
     }
+
 }

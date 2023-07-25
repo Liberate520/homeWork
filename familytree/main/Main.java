@@ -1,6 +1,8 @@
 package homeWork_oop.familytree.main;
 
+import java.util.List;
 import java.util.Scanner;
+
 import homeWork_oop.familytree.model.*;
 
 public class Main {
@@ -16,6 +18,7 @@ public class Main {
             System.out.println("4. Отсортировать по имени");
             System.out.println("5. Отсортировать по возрасту");
             System.out.println("6. Вывести детей");
+            System.out.println("7. Вывести список находящийся в памяти");
             System.out.println("0. Для выхода из программы");
 
             int choice = scanner.nextInt();
@@ -28,7 +31,7 @@ public class Main {
                     System.out.println("Введите фамилию:");
                     person.setLastName(scanner.next());
                     System.out.println("Введите дату рождения в формате 2016-08-16:");
-                    person.setBirthday (scanner.next());
+                    person.setBirthday(scanner.next());
                     System.out.println("Введите имя отца:");
                     person.setFatherFirstName(scanner.next());
                     System.out.println("Введите фамилию отца:");
@@ -68,9 +71,16 @@ public class Main {
                     String lastName = scanner.next();
                     familyTree.printChildren(firstName, lastName);
                     break;
+                case 7:
+                    for (Person personX : familyTree.getPeople()) {
+                        System.out.println(personX);
+                    }
+                    break;
+
+
                 case 0:
                     System.exit(0);
-                        break;
+                    break;
 
                 default:
                     System.out.println("Неверный выбор");

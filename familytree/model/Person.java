@@ -70,7 +70,7 @@ public class Person {
         this.motherLastName = motherLastName;
     }
 
-
+    public LocalDate getDateBirthday(){return birthday;}
     public int getAge() {
         if (dayOfDeath == null) {
             return getPeriod(birthday, LocalDate.now());
@@ -89,4 +89,17 @@ public class Person {
     }
 
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "Имя: '" + firstName + '\'' +
+                ", Фамилия: '" + lastName + '\'' +
+                ", Дата рождения: " + birthday +
+                ", Имя отца: '" + fatherFirstName + '\'' +
+                ", Фамилия отца: '" + fatherLastName + '\'' +
+                ", Имя матери: '" + motherFirstName + '\'' +
+                ", Фамилия матери: '" + motherLastName + '\'' +
+                ", Возраст: '" + getAge() + '\'' +
+                '}';
+    }
 }
