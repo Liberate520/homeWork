@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
 
     private String name;
     private String lastName;
@@ -70,7 +70,7 @@ public class Human implements Serializable {
             sb.append("\n");
         }
         sb.append("Age: ");
-        sb.append(showAge(this));
+        sb.append(this.showAge());
         sb.append("\n");
         if(this.spouse!=null){
             sb.append("Spouse: ");
@@ -101,8 +101,8 @@ public class Human implements Serializable {
         return human.lastName;
     }
 
-    public String getName(Human human){
-        return human.name;
+    public String getName(){
+        return this.name;
     }
     public void addChildren(Human child){
         if(!this.children.contains(child)) {
@@ -137,13 +137,13 @@ public class Human implements Serializable {
         return human.deathDate!= null;
     }
 
-    public int showAge(Human human){
-        if(!checkDead(human)){
+    public int showAge(){
+        if(!checkDead(this)){
             LocalDate today = LocalDate.now();
-            Period intervalPeriod = Period.between(human.birthDate, today);
+            Period intervalPeriod = Period.between(this.birthDate, today);
             return intervalPeriod.getYears();
         }else{
-            Period intervalPeriod = Period.between(human.birthDate, human.deathDate);
+            Period intervalPeriod = Period.between(this.birthDate, this.deathDate);
             return intervalPeriod.getYears();
         }
     }
@@ -177,6 +177,12 @@ public class Human implements Serializable {
             }
         }else sb.append("Absent");
         return sb.toString();
+    }
+
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }
 

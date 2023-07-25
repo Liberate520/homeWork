@@ -77,10 +77,19 @@ public class Main {
 //        System.out.println(fh.readFile(filePath));
 
 //        System.out.println(family1.getInfo());
-        for (Human human: family1
-             ) {
-            System.out.println(human);
-        }
+
+        //Iterator
+//        for (Human human: family1
+//             ) {
+//            System.out.println(human);
+//        }
+        System.out.println(family1.getInfo());
+        System.out.println("------------------");
+        family1.sortByAge();
+        System.out.println(family1.getInfo());
+        family1.sortByName();
+        System.out.println("------------------");
+        System.out.println(family1.getInfo());
 
     }
 }

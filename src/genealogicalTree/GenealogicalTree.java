@@ -1,5 +1,7 @@
 package genealogicalTree;
 
+import human.ComparatorByAge;
+import human.ComparatorByName;
 import human.Human;
 import human.Writable;
 
@@ -69,7 +71,7 @@ public class GenealogicalTree implements Serializable, Iterable<Human> {
     }
 
     private String getName(Human human) {
-        return human.getName(human);
+        return human.getName();
     }
 
 
@@ -89,6 +91,14 @@ public class GenealogicalTree implements Serializable, Iterable<Human> {
     @Override
     public Iterator<Human> iterator() {
         return humanList.iterator();
+    }
+
+    public void sortByAge(){
+        humanList.sort(new ComparatorByAge());
+    }
+
+    public void sortByName(){
+        humanList.sort(new ComparatorByName());
     }
 }
 
