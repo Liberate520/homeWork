@@ -9,22 +9,18 @@ import java.time.LocalDate;
 
 public class Service {
     private long id;
-    private FamilyTree<?> familyTree;
+    private FamilyTree familyTree;
 
     public Service() {
         this.familyTree = new FamilyTree<>();
     }
 
-    public FamilyTreeItem<?> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate) {
-        return addHumanFamilyMember(name, gender, birthDate, null, null, null);
+    public FamilyTreeItem<Human> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate) {
+        return addHumanFamilyMember(name, gender, birthDate, null, null);
     }
 
-    public FamilyTreeItem<?> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
-        return addHumanFamilyMember(name, gender, birthDate, null, mother, father);
-    }
-
-    public FamilyTreeItem<?> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
-        FamilyTreeItem<?> familyTreeItem = new Human(id++, name, gender, birthDate, deathDate, mother, father);
+    public FamilyTreeItem<Human> addHumanFamilyMember(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
+        FamilyTreeItem familyTreeItem = new Human(id++, name, gender, birthDate, mother, father);
         familyTree.addFamilyMember(familyTreeItem);
         return familyTreeItem;
     }
@@ -49,7 +45,7 @@ public class Service {
         return this.familyTree;
     }
 
-    public void setFamilyTree(FamilyTree<?> familyTree) {
+    public void setFamilyTree(FamilyTree familyTree) {
         this.familyTree = familyTree;
     }
 }
