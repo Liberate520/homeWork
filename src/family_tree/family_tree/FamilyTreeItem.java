@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FamilyTreeItem<T> extends Serializable {
-    void setId(int id);
-    int getId();
+    // void setId(int id);
+    // int getId();
     T getFather();
     T getMother();
     boolean addChild(T human);

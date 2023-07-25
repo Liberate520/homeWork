@@ -10,11 +10,11 @@ import family_tree.writer.*;
 
 public class Main {
     public static void main (String [] args) {
-        String filePath = "family_tree/tree.out";
+        String filePath = "src/family_tree/tree.out";
         
         FileHandler fileHandler = new FileHandler();
 
-        FamilyTree<Human> tree = new FamilyTree<>();
+        FamilyTree<Human> tree = new FamilyTree<Human>();
         
         System.out.println(tree);
 
@@ -26,7 +26,7 @@ public class Main {
         System.out.println("Сортировка по дате рождения:");
         System.out.println(tree);
         
-        fileHandler.save(tree, filePath);
+        fileHandler.save(tree, filePath);      
 
         // FileHandler fileHandler = new FileHandler();
         // FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
@@ -34,9 +34,7 @@ public class Main {
     }
 
     static FamilyTree<Human> firstTree() {
-        FamilyTree<> tree = new FamilyTree<>();
-        // static FamilyTree<E> firstTree() {
-        //     FamilyTree<E> tree = new FamilyTree<E>();
+        FamilyTree<Human> tree = new FamilyTree<Human>();
 
         tree.add(new Human (21, "Анна", Gender.Female, 
         LocalDate.of(1981, 1, 11),
@@ -73,11 +71,11 @@ public class Main {
         // grandMother.addSpouse(tree.getByName("Семен"));
         tree.add(grandMother);
 
-        Human grandFother = new Human(12, "Семен", Gender.Male, LocalDate.of(1947, 8, 19), 
+        Human grandFather = new Human(12, "Семен", Gender.Male, LocalDate.of(1947, 8, 19), 
         tree.getByName("Клавдия"));
-        grandFother.addChild(tree.getByName("Нина"));
-        grandFother.addChild(tree.getByName("Анна"));
-        tree.add(grandFother);
+        grandFather.addChild(tree.getByName("Нина"));
+        grandFather.addChild(tree.getByName("Анна"));
+        tree.add(grandFather);
   
         return tree;
         }

@@ -12,14 +12,7 @@ import java.io.*;
 
 
 public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
-// public class FamilyTree {
-
-    // public StudyGroup() {
-    //     studentList = new ArrayList<>();
-    // }
-
-
-    private int humansId;
+    // private int humansId;
     private List<E> humanList;
     
     public FamilyTree(List<E> humanList) {this.humanList = humanList;}
@@ -36,7 +29,7 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         }
         if (!humanList.contains(human)) {
             humanList.add(human);
-            human.setId(humansId++);
+            // human.setId(humansId++);
 
             addToParents(human);
             addToChildren(human);
@@ -84,20 +77,20 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     //     }
     // }
 
-    public List<E> getSiblings(int id) {
-        E human = getById(id);
-        if (human == null) {return null;}
+    // public List<E> getSiblings(int id) {
+    //     E human = getById(id);
+    //     if (human == null) {return null;}
 
-        List<E> res = new ArrayList<>();
-        for (E parent: human.getParents() ) {
-            for (E child: parent.getChildren()) {
-                if (!child.equals(human)) {
-                    res.add(child);
-                }
-            }
-        }
-        return res;
-    }
+    //     List<E> res = new ArrayList<>();
+    //     for (E parent: human.getParents() ) {
+    //         for (E child: parent.getChildren()) {
+    //             if (!child.equals(human)) {
+    //                 res.add(child);
+    //             }
+    //         }
+    //     }
+    //     return res;
+    // }
 
 // public boolean setWedding(String humanName1, String humanName2) {
 //     if (chekName(humanName1) && chekName(humanName2)) {
@@ -144,35 +137,37 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
 
 
 
-public E getById(int id) {
-    for (E human: humanList) {
-        if (human.getId() == id) {
-            return human;
-        }
-    }
-    return null;
-}
+// public E getById(int id) {
+//     for (E human: humanList) {
+//         if (human.getId() == id) {
+//             return human;
+//         }
+//     }
+//     return null;
+// }
 
 
 // 1 version:
-    // public E getByName (String name) {
-    //     for (E human: humanList) {
-    //         if (human.getName().equalsIgnoreCase(name)) {
-    //             return human;
-    //         }
-    //     }
-    //     return null;
-    // }
-
-    public List<E> getByName (String name) {
-        List<E> res = new ArrayList<>();
+    public E getByName (String name) {
         for (E human: humanList) {
             if (human.getName().equalsIgnoreCase(name)) {
-                res.add(human);
+                return human;
             }
         }
-        return res;
+        return null;
     }
+
+
+// 2 version:
+    // public List<E> getByName (String name) {
+    //     List<E> res = new ArrayList<>();
+    //     for (E human: humanList) {
+    //         if (human.getName().equalsIgnoreCase(name)) {
+    //             res.add(human);
+    //         }
+    //     }
+    //     return res;
+    // }
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
@@ -196,6 +191,5 @@ public E getById(int id) {
         return new HumanIterator<>(humanList);}
 
     public void sortByName() {humanList.sort(new HumanComparatorByName<>());}
-    public void sortByBirthDate() {
-        humanList.sort(new HumanComparatorByBirthDate<>());}
+    public void sortByBirthDate() {humanList.sort(new HumanComparatorByBirthDate<>());}
 }

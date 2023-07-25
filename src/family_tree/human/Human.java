@@ -22,9 +22,9 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
 
     @Override
     public boolean addParent(Human human) {return true;}
-    public int getId() {return id;}
-    public void setId(int id) {}
-    public void setSpouse() {}
+    // public int getId() {return id;}
+    // public void setId(int id) {}
+    // public void setSpouse() {}
     public LocalDate getDethDate() {return deathDate;}
     public void setSpouse(Human human) {}
 
@@ -81,6 +81,7 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
     }
 
 
+    @Override
     public boolean addChild (Human child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -89,7 +90,9 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
         return false;
     }
 
+    @Override
     public String getName() {return name;}
+    
     
     public boolean addParents (Human parent) {
         if (!parents.contains(parent)) {
@@ -125,7 +128,7 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
 
     public LocalDate getBirthDate() {return birthDate;}
     public LocalDate getDeathDate() {return deathDate;}
-
+   
     public Human getFather() {
         for (Human parent: parents) {
             if (parent.getGender() == Gender.Male){
@@ -134,7 +137,7 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
         }
         return null;
     }
-
+    
     public Human getMother() {
         for (Human parent: parents) {
             if (parent.getGender() == Gender.Female){
@@ -144,9 +147,9 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
         return null;
     }
 
-    // @Override
+    @Override
     public List<Human> getParents() {return parents;}
-    // @Override
+    @Override
     public List<Human> getChildren() {return children;}
 
     public Human getWife() {
@@ -221,6 +224,33 @@ public class Human implements Serializable, FamilyTreeItem<Human>{
         if (getGender() == Gender.Female) { sb.append(getHusbandInfo()); }
         return sb.toString();
     }
+
+
+
+    // public String getInfo() {
+    //     StringBuilder sb = new StringBuilder();
+    //     sb.append("ID: ");
+    //     sb.append(id);
+    //     sb.append(", имя: ");
+    //     sb.append(name);
+    //     sb.append(", пол: ");
+    //     sb.append(getGender());
+    //     sb.append(", возраст: ");
+    //     sb.append(getAge());
+    //     sb.append(", ");
+    //     sb.append(getMotherInfo());
+    //     sb.append(", ");
+    //     sb.append(getFatherInfo());
+    //     sb.append(", ");
+    //     sb.append(getChildrenInfo());
+    //     sb.append(", ");
+    //     if (getGender() == Gender.Male) { 
+    //         sb.append(getWifeInfo());
+    //         // sb.append(", ");
+    //     }
+    //     if (getGender() == Gender.Female) { sb.append(getHusbandInfo()); }
+    //     return sb.toString();
+    // }
 
     public String getMotherInfo(){
         String res = "мать: ";
