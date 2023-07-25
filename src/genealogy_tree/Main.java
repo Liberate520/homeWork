@@ -1,20 +1,22 @@
 package genealogy_tree;
 import genealogy_tree.WriterAndReader.*;
 
+import java.io.*;
+
+
+import genealogy_tree.WriterAndReader.Reader;
+import genealogy_tree.WriterAndReader.Writer;
 
 
 public class Main {
-    public static void main (String[] args) {
-        /*VeneologiTree geneologiTree = new VeneologiTree();
-        Human1 human1 = new Human1();
-        Human2 human2 = new Human2();
-        Human3 human3 = new Human3();
+    public static void main (String[] args) throws IOException, ClassNotFoundException {
 
-        geneologiTree.addHuman(human1);
-        geneologiTree.addHuman(human3);
-        geneologiTree.addHuman(human2);*/
         new Writer();
         new Reader();
+        Sirealize sier = new Sirealize();
+        sier.ObjectOutputStream();
+        sier.ObjectInputStream();
+
 
 
     }
