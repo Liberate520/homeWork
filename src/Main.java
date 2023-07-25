@@ -16,7 +16,6 @@ public class Main {
         Node rootNode = new Node(mikhail, null, null);
         FamilyTree familyTree = new FamilyTree(rootNode);
 
-        // Дальше можно использовать методы класса FamilyTree для работы с древом
         List<Human> allChildren = familyTree.getAllChildren(mikhail);
         for (Human child : allChildren) {
             System.out.println(child);

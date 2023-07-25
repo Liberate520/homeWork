@@ -5,16 +5,16 @@ import java.util.List;
 public class Human {
     private Gender gender;
     private LocalDate birthDate;
-    private LocalDate deathDate;
-    private Human father;
-    private Human mother;
+
+    private String name;
+
     private List<Human> children;
 
-    public Human(Gender gender, LocalDate birthDate, Human father, Human mother) {
+    public Human(String name, Gender gender, LocalDate birthDate) {
         this.gender = gender;
         this.birthDate = birthDate;
-        this.father = father;
-        this.mother = mother;
+        this.name = name;
+
         this.children = new ArrayList<>();
     }
 
@@ -34,30 +34,6 @@ public class Human {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public LocalDate getDeathDate() {
-        return deathDate;
-    }
-
-    public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
     }
 
     public List<Human> getChildren() {
