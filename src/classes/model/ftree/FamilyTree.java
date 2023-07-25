@@ -1,9 +1,9 @@
-package classes.familyTree;
+package classes.model.ftree;
 
-import classes.human.comparators.HumanComparatorByBrithDate;
-import classes.human.comparators.HumanComparatorById;
-import classes.human.comparators.HumanComparatorByName;
-import classes.human.Human;
+import classes.model.human.comparators.HumanComparatorByBrithDate;
+import classes.model.human.comparators.HumanComparatorById;
+import classes.model.human.comparators.HumanComparatorByName;
+import classes.model.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;

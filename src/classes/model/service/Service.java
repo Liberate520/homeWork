@@ -1,6 +1,6 @@
-package classes.service;
+package classes.model.service;
 
-import classes.familyTree.FamilyTree;
+import classes.model.ftree.FamilyTree;
 
 public class Service {
 

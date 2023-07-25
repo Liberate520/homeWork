@@ -1,6 +1,6 @@
 package classes.view;
 
-import classes.service.Service;
+import classes.model.service.Service;
 
 import java.util.Scanner;
 

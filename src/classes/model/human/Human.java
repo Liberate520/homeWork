@@ -1,4 +1,4 @@
-package classes.human;
+package classes.model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.util.List;
 //import static Classes.Gender.female;
 //import static Classes.Gender.male;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements NameAgeIzable, Serializable, Comparable<Human> {
 
 
     private final Integer idHuman;
@@ -237,11 +237,16 @@ public class Human implements Serializable, Comparable<Human> {
         return tmpSb.toString();
     }
 
-    private int getAge() {
+    public int getAge() {
         //    StringBuilder tmpSb = new StringBuilder();
         if (deathDate == null)
             return getPeriod(brithDate, LocalDate.now());
         else return getPeriod(brithDate, deathDate);
+    }
+
+    @Override
+    public void addToParents() {
+
     }
 
     private int getPeriod(LocalDate brithDate, LocalDate deathDate) {
