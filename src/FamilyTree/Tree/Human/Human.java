@@ -1,9 +1,10 @@
 package FamilyTree.Tree.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     protected List<Human> children = new ArrayList<>();
 
     static protected List<Human> persons;
@@ -12,27 +13,32 @@ public class Human {
     protected String patronymic;
     protected String dateOfBirth;
     protected Human parent = null;
+    protected Gender gender;
 
     static {
         persons = new ArrayList<>();
     }
-    public Human(String surname, String name, String patronymic, String dateOfBirth) {
+    public Human(String surname, String name, String patronymic, String dateOfBirth, Gender gender) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         this.addHuman(this);
     }
-
-    public Human(String surname, String name, String patronymic, String dateOfBirth, Human parent) {
+    public Human(String surname, String name, String patronymic, String dateOfBirth, Gender gender, Human parent) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         this.parent = parent;
         parent.addChild(this);
         this.addHuman(this);
     }
+
+
+
 
     public void addHuman(Human person){
         persons.add(person);
@@ -54,29 +60,29 @@ public class Human {
     public void addChild(Human children){
         this.children.add(children);
     }
-    public void setPatronymic(Human parent){
-        this.parent = parent;
-        parent.addChild(this);
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public String getSurnameName(){
-        return this.surname;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public void setSurname(String surname){
-        this.surname = surname;
-    }
+//    public void setPatronymic(Human parent){
+//        this.parent = parent;
+//        parent.addChild(this);
+//    }
+//
+//    public String getName(){
+//        return this.name;
+//    }
+//
+//    public String getSurname(){
+//        return this.surname;
+//    }
+//
+//    public void setName(String name){
+//        this.name = name;
+//    }
+//
+//    public void setSurname(String surname){
+//        this.surname = surname;
+//    }
 
     @Override
     public String toString() {
-        return " Human: " + surname+ " "  + name + " " + patronymic + ": " + "date of birth: " + dateOfBirth;
+        return " Human: " + surname+ " "  + name + " " + patronymic + ": " + "date of birth: " + dateOfBirth + ": "+ gender;
     }
 }

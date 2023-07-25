@@ -2,10 +2,11 @@ package FamilyTree.Tree.Tree;
 
 import FamilyTree.Tree.Human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class Tree implements Serializable {
     protected   List<Human> humanList;
 
     public Tree() {
@@ -20,4 +21,6 @@ public class Tree {
         }
         return stringBuilder.toString();
     }
+
+
 }
