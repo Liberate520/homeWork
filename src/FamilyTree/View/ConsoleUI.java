@@ -2,7 +2,7 @@ package FamilyTree.View;
 
 import FamilyTree.Model.File.FileHandler;
 import FamilyTree.Model.File.Writeable;
-import FamilyTree.Model.Servise;
+import FamilyTree.Model.Serviсe;
 import FamilyTree.Model.tree.Sex;
 import FamilyTree.Model.tree.Tree;
 import FamilyTree.Model.tree.TreeAble;
@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 
 public class ConsoleUI implements View {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;

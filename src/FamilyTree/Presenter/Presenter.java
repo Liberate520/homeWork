@@ -1,8 +1,7 @@
 package FamilyTree.Presenter;
 
-import FamilyTree.Model.File.FileHandler;
 import FamilyTree.Model.File.Writeable;
-import FamilyTree.Model.Servise;
+import FamilyTree.Model.Serviсe;
 import FamilyTree.Model.tree.*;
 import FamilyTree.Model.tree.Sex;
 import FamilyTree.View.View;
@@ -10,77 +9,74 @@ import FamilyTree.View.View;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static FamilyTree.Model.tree.Sex.Female;
-import static FamilyTree.Model.tree.Sex.Male;
-
 public class Presenter {
     private View view;
-    private Servise servise;
+    private Serviсe serviсe;
 
     public Presenter(View view, TreeAble tree, Writeable fh) {
         this.view = view;
-        this.servise = new Servise(tree,fh);
+        this.serviсe = new Serviсe(tree,fh);
     }
 
     public void addPerson (String name, Sex sex, LocalDate birthday) {
 
-        servise.addPerson(name,sex,birthday);
+        serviсe.addPerson(name,sex,birthday);
         treeGetInfo();
     }
 
     public void treeGetInfo() {
-        String info= servise.getInfo();
+        String info= serviсe.getInfo();
         view.printAnswer(info);
     }
 
     public void sortByAge() {
-        servise.sortAge();
+        serviсe.sortAge();
         treeGetInfo();
     }
 
     public void sortByName() {
-        servise.sortName();
+        serviсe.sortName();
         treeGetInfo();
     }
 
     public void load() throws IOException, ClassNotFoundException {
-        servise.load ();
+        serviсe.load ();
         treeGetInfo();
     }
 
     public void save() throws IOException, ClassNotFoundException {
-        servise.save ();
+        serviсe.save ();
 
     }
 
 
     public String showAllPersonInfo(Integer id) {
-        return servise.showAllPersonInfo(id);
+        return serviсe.showAllPersonInfo(id);
     }
 
     public String showChildren(Integer id) {
-        return servise.showChildren(id);
+        return serviсe.showChildren(id);
     }
 
 
     public void addSpouse(Integer id1, Integer id2) {
-        servise.addSpouse (id1, id2);
+        serviсe.addSpouse (id1, id2);
     }
 
     public void addParents(Integer id1, Integer id2) {
-        servise.addParents(id1, id2);
+        serviсe.addParents(id1, id2);
     }
 
 
     public void addChildren(Integer id1, Integer id2) {
-        servise.addChildren(id1, id2);
+        serviсe.addChildren(id1, id2);
     }
 
 
     public String showSpouse(Integer id) {
-        return servise.showSpouse(id);
+        return serviсe.showSpouse(id);
     }
 
-    public String showParents(Integer id) {return servise.showParents(id);}
+    public String showParents(Integer id) {return serviсe.showParents(id);}
 
 }

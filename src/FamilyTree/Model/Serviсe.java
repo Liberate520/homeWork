@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-public class Servise {
+public class Serviсe {
     public TreeAble <Being> tree;
     public Writeable fh;
 
 
-    public Servise(TreeAble tree,Writeable fh) {
+    public Serviсe (TreeAble tree,Writeable fh) {
         this.tree= tree;
         this.fh = fh;
 
