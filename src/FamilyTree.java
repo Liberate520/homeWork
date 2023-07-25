@@ -50,6 +50,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         System.out.println("Error: Father not found in the family tree.");
     }
 
+    public void sortByName() {
+        family.sort((h1, h2) -> h1.getName().compareTo(h2.getName()));
+    }
+
+    public void sortByBirthDate() {
+        family.sort((h1, h2) -> h1.getBirthDate().compareTo(h2.getBirthDate()));
+    }
+
+
     public void addBrother(Human brother) {
         // TODO: implement
     }
