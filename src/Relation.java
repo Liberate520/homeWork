@@ -1,3 +1,5 @@
+import java.io.DataInputStream;
+
 public class Relation {
     private Human human1;
     private Human human2;

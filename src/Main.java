@@ -1,13 +1,13 @@
 public class Main {
     public static void main(String[] args) {
-        Human n000 = new Human("Даша");
-        Human n001 = new Human("Саша");
-        Human n002 = new Human("Маша");
-        Human n003 = new Human("Вова");
-        Human n004 = new Human("Андрей");
-        Human n005 = new Human("Игорь");
-        Human n006 = new Human("Евдокия");
-        Human n007 = new Human("Клавдия");
+        Human n000 = new Human(0, "Даша", "Иванова", Human.Gender.FEMALE);
+        Human n001 = new Human(1, "Саша", "Андреев", Human.Gender.MALE);
+        Human n002 = new Human(2, "Маша", "Петрова", Human.Gender.FEMALE);
+        Human n003 = new Human(3, "Вова", "Андреев", Human.Gender.MALE);
+        Human n004 = new Human(4, "Андрей", "Андреев", Human.Gender.MALE);
+        Human n005 = new Human(5, "Игорь", "Андреев", Human.Gender.MALE);
+        Human n006 = new Human(6, "Евдокия", "Олегова", Human.Gender.FEMALE);
+        Human n007 = new Human(7, "Клавдия", "Андреева", Human.Gender.FEMALE);
 
         FamilyTree ft = new FamilyTree();
 
