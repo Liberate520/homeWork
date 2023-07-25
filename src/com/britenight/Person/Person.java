@@ -1,8 +1,13 @@
-package Model.Person;
+package com.britenight.Person;
+
+import com.britenight.MVP.Presenter.Fabric;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class Person implements Serializable, Comparable<Person> {
     private final long id;

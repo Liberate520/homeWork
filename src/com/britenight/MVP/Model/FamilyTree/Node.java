@@ -1,6 +1,6 @@
-package Model.FamilyTree;
+package com.britenight.MVP.Model.FamilyTree;
 
-import Model.Relation.Relation;
+import com.britenight.MVP.Model.Relation.Relation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class Node<E extends Comparable<E>> implements Serializable, Comparable<N
 
     @Override
     public int hashCode() {
-        return Objects.hash(mainObject, relations);
+        return Objects.hash(mainObject);
     }
 
     @Override

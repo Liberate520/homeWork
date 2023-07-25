@@ -1,4 +1,4 @@
-package Model.Relation;
+package com.britenight.MVP.Model.Relation;
 
 import java.io.Serializable;
 import java.util.Objects;
