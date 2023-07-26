@@ -31,7 +31,7 @@ public class Person implements Serializable {
     }
 
     public String getName (){
-        return name;
+        return this.name;
     }
 
     public LocalDate getBirthDate(){

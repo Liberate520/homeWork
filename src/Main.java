@@ -1,5 +1,5 @@
+import Dogs.Dog;
 import FamilyTree.FamilyTree;
-import FamilyTree.FileHolder;
 import Person.Person;
 import Person.Sex;
 import java.time.LocalDate;
@@ -12,8 +12,14 @@ public class Main {
         Person mary = new Person("Maria", LocalDate.of(1979,4, 2), Sex.female);
         Person julia = new Person("Julia", LocalDate.of(1992,2, 8), Sex.female);
         Person zoe = new Person("Zoe", LocalDate.of(2009,1, 1), Sex.female);
+        Dog jack = new Dog("Jack", LocalDate.of(2007, 2,3), Sex.male);
         FamilyTree tree = new FamilyTree();
         tree.addPerson(john);tree.addPerson(max);tree.addPerson(mary);tree.addPerson(julia);tree.addPerson(zoe);
+
+        // Тестируем классовые обобщения.
+        tree.addPerson(jack);
+        System.out.println(jack.getName());
+        System.out.println(jack.getBirthDate());
 
         // Тестируем как работают связи
         julia.spouse = john;
@@ -38,6 +44,8 @@ public class Main {
 //        fh.save(tree);
 //        FamilyTree newTree = fh.read();
 //        System.out.println(newTree);
+
+
     }
 
 }

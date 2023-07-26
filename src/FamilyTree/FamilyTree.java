@@ -9,36 +9,36 @@ import Person.PersonIterator;
 import Person.ComparatorPersonByName;
 import Person.ComparatorPersonByBirthday;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
-    private List<Person> personList;
+public class FamilyTree<T extends Person> implements Serializable, Iterable<Person> {
+    private List<T> personList;
 
     public FamilyTree(){
         this.personList = new LinkedList<>();
     }
 
-    public void addPerson(Person somebody){
+    public void addPerson(T somebody){
         this.personList.add(somebody);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Person person: personList){
+        for(T person: personList){
             sb.append(person);
         }
         return sb.toString();
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new PersonIterator(personList);
+    public Iterator iterator() {
+        return new PersonIterator<T>(personList);
     }
 
     public void sortByName(){
-        personList.sort(new ComparatorPersonByName());
+        personList.sort(new ComparatorPersonByName<T>());
     }
     public void sortByBirthday(){
-        personList.sort(new ComparatorPersonByBirthday());
+        personList.sort(new ComparatorPersonByBirthday<T>());
     }
 
 }

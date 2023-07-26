@@ -3,9 +3,9 @@ package Person;
 import java.time.LocalDate;
 import java.util.Comparator;
 
-public class ComparatorPersonByBirthday implements Comparator<Person> {
+public class ComparatorPersonByBirthday<T extends Person> implements Comparator<T> {
     @Override
-    public int compare(Person o1, Person o2) {
+    public int compare(T o1, T o2) {
         if (o1.getBirthDate().isBefore(o2.getBirthDate())) {
             return -1;
         } else if (o1.getBirthDate().isAfter(o2.getBirthDate())) {
