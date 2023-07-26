@@ -1,88 +1,103 @@
 package FamilyTree.Tree.Human;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable {
-    protected List<Human> children = new ArrayList<>();
+    private List<Human> children = new ArrayList<>();
 
-    static protected List<Human> persons;
-    protected String surname;
-    protected String name;
-    protected String patronymic;
-    protected String dateOfBirth;
-    protected Human parent = null;
-    protected Gender gender;
 
-    static {
-        persons = new ArrayList<>();
-    }
-    public Human(String surname, String name, String patronymic, String dateOfBirth, Gender gender) {
-        this.surname = surname;
+    private String name;
+    private String patronymic;
+    private String dateOfBirth;
+    private Gender gender;
+    private List<Human> parents;
+
+
+
+    public Human(String name, String patronymic, Gender gender, String dateOfBirth, Human father, Human mother) {
+
         this.name = name;
         this.patronymic = patronymic;
-        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.addHuman(this);
-    }
-    public Human(String surname, String name, String patronymic, String dateOfBirth, Gender gender, Human parent) {
-        this.surname = surname;
-        this.name = name;
-        this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.parent = parent;
-        parent.addChild(this);
-        this.addHuman(this);
+        parents = new ArrayList<>();
+        if (father != null) {
+            parents.add(father);
+        }
+        if (mother != null){
+            parents.add(mother);
+        }
     }
 
 
-
-
-    public void addHuman(Human person){
-        persons.add(person);
+    public boolean addParent(Human parent) {
+        if (!parents.contains(parent)){
+            parents.add(parent);
+            return true;
+        }
+        return false;
     }
 
-    public static List<Human> getHumans(){
-        return persons;
+    public Human getFather(){
+        for (Human parent: parents){
+            if (parent.getGender() == Gender.Male){
+                return parent;
+            }
+        }
+        return null;
+    }
+    public Human getMother(){
+        for (Human parent: parents){
+            if (parent.getGender() == Gender.Female){
+                return parent;
+            }
+        }
+        return null;
     }
 
     public List<Human> getChildren(){
         return children;
     }
-
-
-    public Human getParent(){
-        return this.parent;
+    public String getName() {
+        return name;
     }
-
-    public void addChild(Human children){
-        this.children.add(children);
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
-//    public void setPatronymic(Human parent){
-//        this.parent = parent;
-//        parent.addChild(this);
-//    }
-//
-//    public String getName(){
-//        return this.name;
-//    }
-//
-//    public String getSurname(){
-//        return this.surname;
-//    }
-//
-//    public void setName(String name){
-//        this.name = name;
-//    }
-//
-//    public void setSurname(String surname){
-//        this.surname = surname;
-//    }
+    public List<Human> getParents() {
+        return parents;
+    }
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = String.valueOf(dateOfBirth);
+    }
+    public Gender getGender() {
+        return gender;
+    }
 
     @Override
     public String toString() {
-        return " Human: " + surname+ " "  + name + " " + patronymic + ": " + "date of birth: " + dateOfBirth + ": "+ gender;
+        return getInfo();
     }
+
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName());
+        sb.append(": ");
+        sb.append(patronymic);
+        sb.append(", : ");
+        sb.append(getDateOfBirth());
+        sb.append(", : ");
+        sb.append(gender);
+        sb.append(" Отец: ");
+        sb.append(getFather());
+        sb.append(" Мать: ");
+        sb.append(getMother());
+        sb.append(" Дети: ");
+        sb.append(getChildren());
+        return sb.toString();
+    }
+
 }

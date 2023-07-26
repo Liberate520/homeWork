@@ -11,7 +11,7 @@ public class Main {
         String filePath = "src/tree.out";
         FileHandler fileHandler = new FileHandler();
 
-        Tree humanList = FamTree();
+        Tree humanList = Tree();
         System.out.println(humanList);
 
         fileHandler.save(humanList, filePath);
@@ -21,28 +21,20 @@ public class Main {
 //        System.out.println(humanList);
     }
 
-    static Tree FamTree() {
+    static Tree Tree() {
         Tree tree = new Tree();
 
-        Human Human1 = new Human("Попов", "Константин", "Андреевич", "25.05.55", Gender.Male);
-        Human Human2 = new Human("Попов", "Андрей", "Сергеевич", "15.03.97", Gender.Male, Human1);
-        Human Human3 = new Human("Попова", "Мария", "Игоревна", "13.01.80", Gender.Female, Human2);
-        Human Human4 = new Human("Попова", "Евгения", "Николаевна", "13.01.00", Gender.Female, Human3);
+        Human kostia = new Human("Константин", "Олегович", Gender.Male, "31.12.1950", null, null);
+        tree.add(kostia);
+        Human andrea = new Human("Андрей", "Константинович", Gender.Male, "13.05.1979", kostia, null);
+        tree.add(andrea);
+        Human maria = new Human("Мария", "Константинович", Gender.Female, "19.01.1975", andrea, null);
+        tree.add(maria);
+        Human julia = new Human("Юлия", "Ивановна", Gender.Female, "26.11.1999", kostia, maria);
+        tree.add(julia);
+        Human stiv = new Human("Светлана", "Олеговна", Gender.Female, "07.7.2000", andrea, maria);
+        tree.add(stiv);
 
-        System.out.println(tree.getHumansInfo());
-
-        System.out.println("Перечень людей: " + Human.getHumans());
-
-        System.out.println("Дети человека 1: " + Human1.getChildren());
-        System.out.println("Дети человека 2: " + Human2.getChildren());
-        System.out.println("Дети человека 3: " + Human3.getChildren());
-
-        System.out.println();
-
-        System.out.println("Родители человека 1: " + Human1.getParent());
-        System.out.println("Родители человека 2: " + Human2.getParent());
-        System.out.println("Родители человека 3: " + Human3.getParent());
-        System.out.println("Родители человека 4: " + Human4.getParent());
         return tree;
     }
 }
