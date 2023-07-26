@@ -72,16 +72,13 @@ public class FamilyTreeService implements Service {
         return (Person) this.tree.getPersonById(id);
     }
 
-    public String getPersonsInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список студентов:\n");
-
+    public List<String> getPersonsInfo() {
+        List<String> infoList = new LinkedList<>();
         for (var person : tree) {
-            stringBuilder.append(person);
-            stringBuilder.append("\n");
+            infoList.add(person.toString());
         }
 
-        return stringBuilder.toString();
+        return infoList;
     }
 
     public void sortByName() {
@@ -142,6 +139,11 @@ public class FamilyTreeService implements Service {
     }
 
     @Override
+    public String getTreeName() {
+        return tree.getTreeName();
+    }
+
+    @Override
     public boolean saveTree() {
         return idFileHandler.save(idGenerator, DATA_FOLDER + ID_GENERATOR_FILE_NAME)
                 && treeFileHandler.save(tree, DATA_FOLDER + this.tree.getTreeName() + FILE_TREE_EXTENSIONS);
@@ -164,18 +166,18 @@ public class FamilyTreeService implements Service {
     }
 
     @Override
-    public void addNewTree(String name) throws FileAlreadyExistsException {
+    public boolean addNewTree(String name) throws FileAlreadyExistsException {
         var savedTrees = getForest();
         if (savedTrees != null && savedTrees.contains(name)) {
             throw new FileAlreadyExistsException(name);
         }
         this.tree = new GenerationTree(name);
-        saveTree();
+        return saveTree();
     }
 
     @Override
-    public void addTreeItem(String name, Gender gender, LocalDate dateBirth) {
-        addPerson(name, gender, dateBirth);
+    public boolean addTreeItem(String name, Gender gender, LocalDate dateBirth) {
+        return addPerson(name, gender, dateBirth) > -1;
     }
 
 }

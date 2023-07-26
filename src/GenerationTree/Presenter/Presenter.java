@@ -18,11 +18,11 @@ public class Presenter {
         this.service = new FamilyTreeService();
     }
 
-    public void addNewTree(String name) {
+    public boolean addNewTree(String name) {
         try {
-            service.addNewTree(name);
+            return service.addNewTree(name);
         } catch (FileAlreadyExistsException e) {
-            view.fileExist();
+            return view.fileExist(name);
         }
     }
 
@@ -34,8 +34,12 @@ public class Presenter {
         return forest;
     }
 
-    public void loadTree(String name) {
-        service.loadTree(name);
+    public String getTreeName() {
+        return service.getTreeName();
+    }
+
+    public boolean loadTree(String name) {
+        return service.loadTree(name);
     }
 
     public boolean deleteTree(String name) {

@@ -17,25 +17,33 @@ public class ConsoleUI implements View {
 
     private Presenter presenter;
     private ConsoleManager cmdManager;
+    private boolean appIsRun;
 
     public ConsoleUI() {
         cmdManager = new ConsoleManager();
         presenter = new Presenter(this);
+        appIsRun = true;
     }
 
     @Override
     public void start() {
-        var appIsRun = true;
         while (appIsRun) {
             clsField();
-            appIsRun = startupMenu();
+            startupMenu();
+            if (appIsRun)
+                treeMenu();
+
         }
         appClose();
     }
 
     @Override
-    public void fileExist() {
-        throw new UnsupportedOperationException("Unimplemented method 'fileExist'");
+    public boolean fileExist(String name) {
+        if (yesNoDialog("Файл семьи " + name + " уже существует. Загрузить его?")) {
+            return presenter.loadTree(name);
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -52,38 +60,37 @@ public class ConsoleUI implements View {
         cmdManager.PrintText("=".repeat(header.length()));
     }
 
-    private boolean startupMenu() {
+    private void startupMenu() {
         Map<String, List<String>> menuData = new LinkedHashMap<>();
         menuData.put("ВЫБЕРИТЕ ДЕЙСТВИЕ",
                 Arrays.asList("СОЗДАТЬ ДРЕВО", "ВЫБРАТЬ ДРЕВО", "УДАЛИТЬ ДРЕВО"));
         menuData.put("-----", Arrays.asList("ВЫХОД"));
         int commandKey = 1;
-        var isActiveMenu = true;
-        while (isActiveMenu) {
+        var isSelectedTree = false;
+        while (!isSelectedTree) {
             clsField();
             commandKey = StartMenu(menuData, commandKey);
             switch (commandKey) {
                 case 1:
-                    newTree();
+                    isSelectedTree = newTree();
                     break;
                 case 2:
-                    menuLoadTree();
+                    isSelectedTree = menuLoadTree();
                     break;
                 case 3:
                     menuDeleteTree();
                     break;
                 default:
                     if (yesNoDialog("Закрыть приложение?"))
-                        return false;
+                        appIsRun = false;
                     else if (commandKey == 0)
                         commandKey++;
                     break;
             }
         }
-        return true;
     }
 
-    private void newTree() {
+    private boolean newTree() {
         var enteringProcess = true;
         while (enteringProcess) {
             clsField();
@@ -91,22 +98,25 @@ public class ConsoleUI implements View {
             if (surname.isEmpty()) {
                 continue;
             }
-            this.presenter.addNewTree(surname);
+
             enteringProcess = false;
+            return this.presenter.addNewTree(surname);
         }
+        return false;
     }
 
-    private void menuLoadTree() {
+    private boolean menuLoadTree() {
         List<String> allTrees = presenter.getAllTrees();
         if (allTrees.size() == 0) {
             if (yesNoDialog("Отсутствуют файлы сохранения. Создать новое древо?")) {
-                newTree();
+                return newTree();
             }
-            return;
+            return false;
         }
         var name = menuSavedTree(allTrees);
         if (!name.isEmpty())
-            this.presenter.loadTree(name);
+            return this.presenter.loadTree(name);
+        return false;
     }
 
     private void menuDeleteTree() {
@@ -142,6 +152,17 @@ public class ConsoleUI implements View {
 
         int nameIndex = StartMenu(menuData, 1) - 1;
         return nameIndex < 0 ? "" : trees.get(nameIndex);
+    }
+
+    private void treeMenu() {
+        Map<String, List<String>> menuData = new LinkedHashMap<>();
+        menuData.put("ДРЕВО СЕМЬИ: " + presenter.getTreeName(),
+                Arrays.asList("Добавить члена семьи", "Найти члена семьи", "Показать список членов семьи"));
+        menuData.put("-----", Arrays.asList("ВЫХОД"));
+        var runTreeMenu = true;
+        while (runTreeMenu) {
+            StartMenu(menuData, 1);
+        }
     }
 
     private int StartMenu(Map<String, List<String>> menuData, int taskId) {

@@ -3,7 +3,7 @@ package GenerationTree.View;
 public interface View {
     void start();
 
-    void fileExist();
+    boolean fileExist(String name);
 
     void print(String text);
 }

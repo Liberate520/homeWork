@@ -7,16 +7,18 @@ import java.util.List;
 import GenerationTree.Model.Person.Structs.Gender;
 
 public interface Service {
-    void addNewTree(String name) throws FileAlreadyExistsException;
+    boolean addNewTree(String name) throws FileAlreadyExistsException;
 
-    List<String> getForest();
-
-    void addTreeItem(String name, Gender gender, LocalDate dateBirth);
+    boolean addTreeItem(String name, Gender gender, LocalDate dateBirth);
 
     boolean saveTree();
 
     boolean loadTree(String treeName);
 
     boolean deleteTree(String name);
+
+    List<String> getForest();
+
+    String getTreeName();
 
 }
