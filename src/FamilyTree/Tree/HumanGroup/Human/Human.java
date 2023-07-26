@@ -1,4 +1,4 @@
-package FamilyTree.Tree.Human;
+package FamilyTree.Tree.HumanGroup.Human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,13 +11,13 @@ public class Human implements Serializable {
 
     private String name;
     private String patronymic;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private Gender gender;
     private List<Human> parents;
 
 
 
-    public Human(String name, String patronymic, Gender gender, String dateOfBirth, Human father, Human mother) {
+    public Human(String name, String patronymic, Gender gender, LocalDate dateOfBirth, Human father, Human mother) {
 
         this.name = name;
         this.patronymic = patronymic;
@@ -30,6 +30,15 @@ public class Human implements Serializable {
         if (mother != null){
             parents.add(mother);
         }
+    }
+
+    public Human(int i, String name, String patronymic) {
+    }
+
+    public Human(Human human) {
+    }
+
+    public Human() {
     }
 
 
@@ -64,40 +73,40 @@ public class Human implements Serializable {
     public String getName() {
         return name;
     }
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
-    public List<Human> getParents() {
+    public String getPatronymic(){
+        return patronymic;
+    }
+    public List<Human> getParent() {
         return parents;
     }
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = String.valueOf(dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
     }
     public Gender getGender() {
         return gender;
     }
 
+
     @Override
     public String toString() {
         return getInfo();
+
     }
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append(getName());
-        sb.append(": ");
-        sb.append(patronymic);
-        sb.append(", : ");
+        sb.append(" ");
+        sb.append(getPatronymic());
+        sb.append("; ");
         sb.append(getDateOfBirth());
-        sb.append(", : ");
-        sb.append(gender);
-        sb.append(" Отец: ");
-        sb.append(getFather());
-        sb.append(" Мать: ");
-        sb.append(getMother());
-        sb.append(" Дети: ");
-        sb.append(getChildren());
+        sb.append("; ");
+        sb.append(getGender());
         return sb.toString();
     }
+
 
 }

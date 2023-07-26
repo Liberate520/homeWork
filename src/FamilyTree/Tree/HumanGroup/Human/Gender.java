@@ -1,4 +1,4 @@
-package FamilyTree.Tree.Human;
+package FamilyTree.Tree.HumanGroup.Human;
 
 public enum Gender {
     Male, Female

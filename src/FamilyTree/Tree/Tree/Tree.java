@@ -1,6 +1,6 @@
 package FamilyTree.Tree.Tree;
 
-import FamilyTree.Tree.Human.Human;
+import FamilyTree.Tree.HumanGroup.Human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +35,6 @@ public class Tree implements Serializable {
         }
         return stringBuilder.toString();
     }
-
     @Override
     public String toString(){
         return getHumansInfo();
