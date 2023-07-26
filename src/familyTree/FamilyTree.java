@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class FamilyTree {
+class FamilyTree implements Serializable{
     private Map<Person, List<Person>> familyTree;
 
     public FamilyTree() {
