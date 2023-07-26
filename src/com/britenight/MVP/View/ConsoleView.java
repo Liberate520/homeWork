@@ -53,6 +53,7 @@ public class ConsoleView<E extends Comparable<E>> implements View {
     private int showMenu(String menu, int min, int max) {
         int res = -1;
         do {
+            System.out.println("===========");
             System.out.println(menu);
             try {
                 res = Integer.parseInt(getInput("\nSelect: "));
@@ -97,7 +98,7 @@ public class ConsoleView<E extends Comparable<E>> implements View {
                 "3 - Remove object\n" +
                 "4 - Manage relations\n" +
                 "5 - Sort objects\n" +
-                "\n0 - Exit", 0, 4)) {
+                "\n0 - Exit", 0, 5)) {
             case 0:
                 return true;
             case 1:
@@ -107,13 +108,48 @@ public class ConsoleView<E extends Comparable<E>> implements View {
                 presenter.addObject(this::prompt);
                 break;
             case 3:
-
+                presenter.removeObject(presenter.selectObject(this::getInput));
                 break;
             case 4:
-
+                boolean exitFlag;
+                E tmp = presenter.selectObject(this::getInput);
+                if (tmp == null) break;
+                do {
+                    exitFlag = relationsMenu(tmp);
+                } while (!exitFlag);
                 break;
             case 5:
+                do {
+                    exitFlag = sortMenu();
+                } while (!exitFlag);
+                break;
+        }
+        return false;
+    }
 
+    private boolean relationsMenu(E object) {
+        switch (showMenu("1 - See relations\n" +
+                "2 - Add parent\n" +
+                "3 - Add child\n" +
+                "4 - Remove Parent\n" +
+                "5 - Remove Child\n" +
+                "\n0 - Exit", 0, 5)) {
+            case 0:
+                return true;
+            case 1:
+                presenter.printRelations(object);
+                break;
+            case 2:
+                presenter.addParent(object, presenter.selectObject(this::getInput));
+                break;
+            case 3:
+                presenter.addChild(object, presenter.selectObject(this::getInput));
+                break;
+            case 4:
+                presenter.removeParent(object, presenter.selectParent(this::getInput, object));
+                break;
+            case 5:
+                presenter.removeChild(object, presenter.selectChild(this::getInput, object));
                 break;
         }
         return false;
@@ -132,6 +168,22 @@ public class ConsoleView<E extends Comparable<E>> implements View {
             case 2:
                 fileName = getInput("File name: ");
                 presenter.readFromFile(fileName);
+                break;
+        }
+        return false;
+    }
+
+    private boolean sortMenu() {
+        switch (showMenu("1 - Sort ascending\n" +
+                "2 - Sort descending\n" +
+                "\n0 - Exit", 0, 2)) {
+            case 0:
+                return true;
+            case 1:
+                presenter.sortAscending();
+                break;
+            case 2:
+                presenter.sortDescending();
                 break;
         }
         return false;

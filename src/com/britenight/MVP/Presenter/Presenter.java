@@ -1,11 +1,12 @@
 package com.britenight.MVP.Presenter;
 
-import com.britenight.Utils.OperationsWithFile;
-import com.britenight.MVP.View.View;
 import com.britenight.MVP.Model.FamilyTree.FamilyTree;
+import com.britenight.MVP.View.View;
+import com.britenight.Utils.OperationsWithFile;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -58,13 +59,23 @@ public class Presenter<E extends Comparable<E>> {
     }
 
     public void addObject(Function<Map<String, String>, Map<String, String>> prompt) {
-        boolean result = model.addObject(fabric.create(prompt));
-        if (result) {
-            view.print("The object successfully added!");
-        } else {
+        try {
+            boolean result = model.addObject(fabric.create(prompt));
+            if (result) {
+                view.print("The object successfully added!");
+            } else {
+                view.print("An error occurred during adding the object!");
+                view.print("Probably the object already exists.");
+            }
+        } catch (Exception e) {
             view.print("An error occurred during adding the object!");
-            view.print("Probably the object already exists.");
+            view.print("You entered wrong data!");
         }
+    }
+
+    public E selectObject(Function<String, String> prompt) {
+        ArrayList<E> objects = model.getObjects();
+        return select(prompt, objects);
     }
 
     public void removeObject(E object) {
@@ -91,35 +102,61 @@ public class Presenter<E extends Comparable<E>> {
 
     //region RelationManagement
 
-    public void getParents(E object) {
-        view.print(object.toString() + " has:");
-        for (String relation : model.getParents(object)) {
-            view.print(relation);
-        }
+    public E selectParent(Function<String, String> prompt, E object) {
+        List<E> objects = model.getParents(object);
+        return select(prompt, objects);
     }
 
-    public void getChildren(E object) {
+    public E selectChild(Function<String, String> prompt, E object) {
+        List<E> objects = model.getChildren(object);
+        return select(prompt, objects);
+    }
+
+    public void printRelations(E object) {
         view.print(object.toString() + " has:");
-        for (String relation : model.getChildren(object)) {
+        List<String> relations = model.printRelations(object);
+        for (String relation : relations) {
             view.print(relation);
+        }
+        if (relations.size() == 0) {
+            view.print("None");
         }
     }
 
     public void addParent(E object, E parent) {
+        if (object == null || parent == null) return;
         model.addParent(object, parent);
     }
 
     public void removeParent(E object, E parent) {
+        if (object == null || parent == null) return;
         model.removeParent(object, parent);
     }
 
     public void addChild(E object, E child) {
+        if (object == null || child == null) return;
         model.addChild(object, child);
     }
 
     public void removeChild(E object, E child) {
+        if (object == null || child == null) return;
         model.removeChild(object, child);
     }
 
     //endregion
+
+    private E select(Function<String, String> prompt, List<E> objects) {
+        if (objects.size() == 0) return null;
+
+        for (int i = 0; i < objects.size(); i++) {
+            view.print(String.format("[%d] - %s", i + 1, objects.get(i).toString()));
+        }
+        try {
+            int res = Integer.parseInt(prompt.apply("\nSelect: "));
+            return objects.get(res - 1);
+        } catch (Exception e) {
+            view.print("Wrong index selected!");
+        }
+        return null;
+    }
 }

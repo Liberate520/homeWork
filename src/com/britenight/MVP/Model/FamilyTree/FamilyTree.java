@@ -13,7 +13,37 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
 
     //region RelationsManagement
 
-    public List<String> getParents(E object) {
+    public List<E> getRelations(E object) {
+        List<Relation<E>> collection = nodes.stream().filter(x -> x.getMainObject().equals(object))
+                .collect(Collectors.toList()).get(0)
+                .getRelations();
+        return collection.stream().map(x -> x.getObject()).collect(Collectors.toList());
+    }
+
+    public List<E> getParents(E object) {
+        List<Relation<E>> collection = nodes.stream().filter(x -> x.getMainObject().equals(object))
+                .collect(Collectors.toList()).get(0)
+                .getRelations().stream().filter(x -> x.getObjectType().equals(RelationType.Parent))
+                .collect(Collectors.toList());
+        return collection.stream().map(x -> x.getObject()).collect(Collectors.toList());
+    }
+
+    public List<E> getChildren(E object) {
+        List<Relation<E>> collection = nodes.stream().filter(x -> x.getMainObject().equals(object))
+                .collect(Collectors.toList()).get(0)
+                .getRelations().stream().filter(x -> x.getObjectType().equals(RelationType.Child))
+                .collect(Collectors.toList());
+        return collection.stream().map(x -> x.getObject()).collect(Collectors.toList());
+    }
+
+    public List<String> printRelations(E object) {
+        List<Relation<E>> collection = nodes.stream().filter(x -> x.getMainObject().equals(object))
+                .collect(Collectors.toList()).get(0)
+                .getRelations();
+        return collection.stream().map(x -> x.toString()).collect(Collectors.toList());
+    }
+
+    public List<String> printParents(E object) {
         List<Relation<E>> collection = nodes.stream().filter(x -> x.getMainObject().equals(object))
                 .collect(Collectors.toList()).get(0)
                 .getRelations().stream().filter(x -> x.getObjectType().equals(RelationType.Parent))
@@ -21,7 +51,7 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
         return collection.stream().map(x -> x.toString()).collect(Collectors.toList());
     }
 
-    public List<String> getChildren(E object) {
+    public List<String> printChildren(E object) {
         List<Relation<E>> collection = nodes.stream().filter(x -> x.getMainObject().equals(object))
                 .collect(Collectors.toList()).get(0)
                 .getRelations().stream().filter(x -> x.getObjectType().equals(RelationType.Parent))
@@ -134,10 +164,10 @@ public class FamilyTree<E extends Comparable<E>> implements Serializable, Iterab
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("FamilyTree:\n");
+        stringBuilder.append("FamilyTree:");
 
         for (Node<E> node : nodes) {
-            stringBuilder.append("\n");
+            stringBuilder.append("\n\n");
             stringBuilder.append(node);
         }
 

@@ -17,17 +17,13 @@ public class PersonFabric implements Fabric<Person> {
         idTitle.put("dateOfBirth", "Date of birth (yyyy-MM-dd)");
 
         Map<String, String> idData = prompt.apply(idTitle);
-        try {
-            int id = Integer.parseInt ((String)idData.get("id"));
-            String name = (String)idData.get("name");
-            Gender gender = (((String)idData.get("gender")).equals("1")) ? Gender.Male
-                    : (((String)idData.get("gender")).equals("2")) ? Gender.Female
-                    : null;
-            LocalDate dateOfBirth = LocalDate.parse((String) idData.get("dateOfBirth"));
+        int id = Integer.parseInt((String) idData.get("id"));
+        String name = (String) idData.get("name");
+        Gender gender = (((String) idData.get("gender")).equals("1")) ? Gender.Male
+                : (((String) idData.get("gender")).equals("2")) ? Gender.Female
+                : null;
+        LocalDate dateOfBirth = LocalDate.parse((String) idData.get("dateOfBirth"));
 
-            return new Person(id, name, gender, dateOfBirth);
-        } catch (Exception e) {
-            return null;
-        }
+        return new Person(id, name, gender, dateOfBirth);
     }
 }
