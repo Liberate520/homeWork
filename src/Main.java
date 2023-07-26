@@ -2,7 +2,6 @@ import familyTree.ConnectionType;
 import familyTree.Connections;
 import familyTree.FamilyTree;
 import person.Person;
-import readWrite.FileHandler;
 
 import java.time.LocalDate;
 import java.util.TreeMap;
