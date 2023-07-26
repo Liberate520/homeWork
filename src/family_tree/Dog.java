@@ -142,7 +142,6 @@ public class Dog implements FamilyTreeItem<Dog> {
                 this.children.add(child);
         }
     }
-
     @Override
     public String toString() {
         return "Dog{" +
