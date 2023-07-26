@@ -3,9 +3,9 @@ package family_tree.view.consoleUI.menu.mainMenu;
 import family_tree.view.consoleUI.ConsoleUi;
 import family_tree.view.consoleUI.menu.Command;
 
-public class ReadTreeOfPersonFromFile extends Command {
-    public ReadTreeOfPersonFromFile(ConsoleUi consoleUi) {
-        super("Read tree of person from file.", consoleUi);
+public class ReadTree extends Command {
+    public ReadTree(ConsoleUi consoleUi) {
+        super("Read tree.", consoleUi);
     }
 
     @Override

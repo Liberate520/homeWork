@@ -6,8 +6,9 @@ import family_tree.model.tree.Writeble;
 import java.io.*;
 
 public class FileHandler implements Writeble {
+    private final String filepath = "src/familyTree.out";
     @Override
-    public boolean save(Serializable object, String filepath) {
+    public boolean save(Serializable object) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filepath))) {
             objectOutputStream.writeObject(object);
             objectOutputStream.close();
@@ -19,7 +20,7 @@ public class FileHandler implements Writeble {
     }
 
     @Override
-    public Object read(String filepath) {
+    public Object read() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filepath))) {
             Object object = objectInputStream.readObject();
             objectInputStream.close();

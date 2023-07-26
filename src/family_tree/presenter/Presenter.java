@@ -1,9 +1,10 @@
 package family_tree.presenter;
 
-import family_tree.model.dog.Dog;
 import family_tree.model.gender.Gender;
-import family_tree.model.person.Person;
+import family_tree.model.service.ReadTree;
 import family_tree.model.service.Service;
+import family_tree.model.service.ServiceDog;
+import family_tree.model.service.ServicePerson;
 import family_tree.view.View;
 
 import java.time.LocalDate;
@@ -11,24 +12,29 @@ import java.time.LocalDate;
 public class Presenter {
     private View view;
     private Service service;
-    final String path = "src/familyTree.out";
+
+
 
     public Presenter(View view) {
         this.view = view;
     }
 
     public void readTreeOfPersonFromFile() {
-        service = new Service<Person>("Person");
-        service.readTreeFromFile(path);
+         ReadTree readTree  = new ReadTree();
+         service = readTree.read();
+//         service = new ServicePerson();
+         service.readTreeFromFile();
+
     }
 
     public void createTreeOfPerson() {
-        service = new Service<Person>("Person");
+
+        service = new ServicePerson();
     }
 
     public void createTreeOfDog() {
 
-        service = new Service<Dog>("Dog");
+        service = new ServiceDog();
     }
 
     public void addItem(String name,
@@ -51,6 +57,6 @@ public class Presenter {
     }
 
     public void saveTree() {
-        service.saveTreeInFile(path);
+        service.saveTreeInFile();
     }
 }

@@ -3,7 +3,7 @@ package family_tree.model.tree;
 import java.io.Serializable;
 
 public interface Writeble {
-    boolean save(Serializable object, String filepath);
+    boolean save(Serializable object);
 
-    Object read(String filepath);
+    Object read();
 }

@@ -2,23 +2,23 @@ package family_tree.model.dog;
 
 import family_tree.model.gender.Gender;
 import family_tree.model.person.Person;
-import family_tree.model.tree.Treeable;
+import family_tree.model.tree.TreeInterface;
 
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Dog implements Treeable<Dog>, Serializable {
+public class Dog implements TreeInterface<Dog>, Serializable {
 
     String name;
     LocalDate birthday;
     LocalDate dayOfDeath;
     Gender gender;
     Integer idPerson;
-    private ArrayList<Person> parents;
-    private ArrayList<Person> children;
-    private ArrayList<Person> siblings;
+    private ArrayList<Dog> parents;
+    private ArrayList<Dog> children;
+    private ArrayList<Dog> siblings;
 
     public Dog(String name,
                LocalDate birthday,
@@ -74,7 +74,7 @@ public class Dog implements Treeable<Dog>, Serializable {
 
     @Override
     public LocalDate getDayOfDeath() {
-        return null;
+        return dayOfDeath;
     }
 
     @Override
@@ -186,7 +186,7 @@ public class Dog implements Treeable<Dog>, Serializable {
         stringBuilder.append(birthday.toString());
         stringBuilder.append("\n");
         stringBuilder.append("Day of death: ");
-        stringBuilder.append(getDayOfDeathInfo());
+        stringBuilder.append(getDayOfDeath());
         stringBuilder.append("\n");
         stringBuilder.append("Mother: ");
         stringBuilder.append(getMotherInfo());
@@ -203,17 +203,17 @@ public class Dog implements Treeable<Dog>, Serializable {
     }
 
     @Override
-    public void setParents(ArrayList<Person> parents) {
+    public void setParents(ArrayList<Dog> parents) {
         this.parents = parents;
     }
 
     @Override
-    public void setChildren(ArrayList<Person> children) {
+    public void setChildren(ArrayList<Dog> children) {
         this.children = children;
     }
 
     @Override
-    public void setSiblings(ArrayList<Person> siblings) {
+    public void setSiblings(ArrayList<Dog> siblings) {
         this.siblings = siblings;
     }
 }

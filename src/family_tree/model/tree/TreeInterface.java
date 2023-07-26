@@ -7,15 +7,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public interface Treeable<E> {
+public interface TreeInterface<E> {
     void addChild(E person);
 
     void addMother(E person);
 
     void addFather(E person);
-
-    @Override
-    boolean equals(Object obj);
 
     String getName();
 
@@ -66,9 +63,9 @@ public interface Treeable<E> {
     String getSiblingsInfo();
 
     String getInfo();
-    public void setParents(ArrayList<Person> parents);
+    public void setParents(ArrayList<E> parents);
 
-    public void setChildren(ArrayList<Person> children);
+    public void setChildren(ArrayList<E> children);
 
-    public void setSiblings(ArrayList<Person> siblings);
+    public void setSiblings(ArrayList<E> siblings);
 }

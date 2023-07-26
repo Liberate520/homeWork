@@ -1,5 +1,6 @@
 package family_tree.model.tree;
 
+import family_tree.model.dog.Dog;
 import family_tree.model.gender.Gender;
 import family_tree.model.person.Person;
 import family_tree.model.person.comparators.PersonComparatorByAge;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
+public class Tree<E extends TreeInterface<E>> implements Serializable, Iterable<E> {
     private final ArrayList<E> persons;
 
     public Tree(ArrayList<E> persons) {
@@ -31,15 +32,10 @@ public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
             addPartner(person);
             addSiblings(person);
         }
-        else {
-            System.out.println("XXX");
-        }
     }
 
     private void addToParents(E person) {
-        if (person.getParents() == null) {
-            person.setParents(new ArrayList<>());
-        } else {
+        if (person.getParents() != null) {
             for (E parent : person.getParents()) {
                 parent.addChild(person);
             }
@@ -47,9 +43,7 @@ public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
     }
 
     private void addToChildren(E person) {
-        if (person.getChildren() == null) {
-            person.setChildren(new ArrayList<>());
-        } else {
+        if (person.getChildren() != null) {
             for (E children : person.getChildren()) {
                 if (person.getGender() == Gender.Female) {
                     children.addMother(person);
@@ -143,7 +137,7 @@ public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
     }
 
     public void sortByAge() {
-        persons.sort(new PersonComparatorByAge());
+        persons.sort(new PersonComparatorByAge<>());
     }
 
     public E getPerson(Integer id) {
@@ -163,5 +157,11 @@ public class Tree<E extends Treeable<E>> implements Serializable, Iterable<E> {
         }
         return null;
     }
-
+    public String getType() {
+        if (persons.get(0) instanceof Person) {
+            return "Person";
+        } else {
+            return "Dog";
+        }
+    }
 }

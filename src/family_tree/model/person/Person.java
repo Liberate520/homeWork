@@ -1,9 +1,8 @@
 package family_tree.model.person;
 
 import family_tree.model.gender.Gender;
-import family_tree.model.tree.Treeable;
+import family_tree.model.tree.TreeInterface;
 
-import java.awt.desktop.PreferencesEvent;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class Person implements Serializable, Treeable<Person> {
+public class Person implements Serializable, TreeInterface<Person> {
     private final Integer personId;
     private String name;
     private LocalDate birthday;
@@ -190,6 +189,7 @@ public class Person implements Serializable, Treeable<Person> {
     }
 
     public void setDayOfDeath(LocalDate dayOfDeath) {
+
         this.dayOfDeath = dayOfDeath;
     }
 

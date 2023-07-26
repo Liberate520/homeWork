@@ -3,7 +3,7 @@ package family_tree.view.consoleUI.menu;
 import family_tree.view.consoleUI.ConsoleUi;
 import family_tree.view.consoleUI.menu.mainMenu.CreateNewTree;
 import family_tree.view.consoleUI.menu.mainMenu.Finish;
-import family_tree.view.consoleUI.menu.mainMenu.ReadTreeOfPersonFromFile;
+import family_tree.view.consoleUI.menu.mainMenu.ReadTree;
 import family_tree.view.consoleUI.menu.menuChooseType.CreateDogsTree;
 import family_tree.view.consoleUI.menu.menuChooseType.CreatePersonTree;
 import family_tree.view.consoleUI.menu.menuWorkWithTree.*;
@@ -23,7 +23,7 @@ public class Menu {
         this.menuWorkWithTree = new MenuSection(consoleUi);
 
         mainMenu.addCommand(new CreateNewTree(consoleUi));
-        mainMenu.addCommand(new ReadTreeOfPersonFromFile(consoleUi));
+        mainMenu.addCommand(new ReadTree(consoleUi));
         mainMenu.addCommand(new Finish(consoleUi));
 
         menuChooseType.addCommand(new CreateDogsTree(consoleUi));
