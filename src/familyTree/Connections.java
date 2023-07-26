@@ -10,12 +10,12 @@ import java.util.Map;
 /**
  * Класс типа данных, в котором хранятся все родственные связи конкретного человека.
  */
-public class Connections implements Serializable {
-    private HashMap<ConnectionType, HashSet<Person>> connections;
+public class Connections<T extends Person> implements Serializable {
+    private HashMap<ConnectionType, HashSet<T>> connections;
 
-    public Connections(ConnectionType key, Person person) {
-        HashMap<ConnectionType, HashSet<Person>> connection = new HashMap<>();
-        HashSet<Person> set = new HashSet<>();
+    public Connections(ConnectionType key, T person) {
+        HashMap<ConnectionType, HashSet<T>> connection = new HashMap<>();
+        HashSet<T> set = new HashSet<>();
         set.add(person);
         connection.put(key, set);
         this.connections = connection;
@@ -25,20 +25,20 @@ public class Connections implements Serializable {
         this.connections = new HashMap<>();
     }
 
-    public void putConnections(ConnectionType key, Person value) {
+    public void putConnections(ConnectionType key, T value) {
         if (connections.containsKey(key))
             connections.get(key).add(value);
         else {
-            HashSet<Person> person = new HashSet<>();
+            HashSet<T> person = new HashSet<>();
             person.add(value);
             connections.put(key, person);
         }
     }
 
-    public boolean find(Person value) {
-        for (Map.Entry<ConnectionType, HashSet<Person>> item :
+    public boolean find(T value) {
+        for (Map.Entry<ConnectionType, HashSet<T>> item :
                 connections.entrySet()) {
-            for (Person relative :
+            for (T relative :
                     item.getValue()) {
                 if (value.equals(relative))
                     return true;
@@ -50,10 +50,10 @@ public class Connections implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<ConnectionType, HashSet<Person>> item :
+        for (Map.Entry<ConnectionType, HashSet<T>> item :
                 connections.entrySet()) {
             sb.append(item.getKey()).append(": ");
-            for (Person relative :
+            for (T relative :
                     item.getValue()) {
                 sb.append(relative.briefName()).append("; ");
             }

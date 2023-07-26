@@ -10,26 +10,25 @@ import java.util.*;
 /**
  * Все семейные связи решил хранить тут, а не в полях класса person.Person.
  * Смотрите familyTree.Connections.java.
- *
  * Методы сортировки возвращают TreeMap, а не исходную структуру.
  */
-public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Connections>> {
-    private HashMap<Person, Connections> family;
+public class FamilyTree<T extends Person> implements Serializable, Iterable<Map.Entry<T, Connections<T>>> {
+    private HashMap<T, Connections<T>> family;
 
     public FamilyTree() {
         this.family = new HashMap<>();
     }
 
-    public boolean addPerson(Person person) {
+    public boolean addPerson(T person) {
         if (!family.containsKey(person)) {
-            Connections connections = new Connections();
+            Connections<T> connections = new Connections<>();
             family.put(person, connections);
             return true;
         }
         return false;
     }
 
-    public void oneWayConnection(Person connectFrom, ConnectionType key, Person connectTo) {
+    public void oneWayConnection(T connectFrom, ConnectionType key, T connectTo) {
         if (family.containsKey(connectFrom))
             family.get(connectFrom).putConnections(key, connectTo);
     }
@@ -37,7 +36,7 @@ public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Conn
     /**
      * То же самое что сверху, но автоматически добавляется соответствующая обратная связь
      */
-    public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {
+    public void putConnection(T connectFrom, ConnectionType key, T connectTo) {
         oneWayConnection(connectFrom, key, connectTo);
         if (!findConnection(connectTo, connectFrom)) {
             switch (key) {
@@ -49,24 +48,24 @@ public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Conn
         }
     }
 
-    public boolean findConnection(Person connectFrom, Person connectTo) {
-        Connections connections = family.get(connectFrom);
+    public boolean findConnection(T connectFrom, T connectTo) {
+        Connections<T> connections = family.get(connectFrom);
         return connections.find(connectTo);
     }
 
-    public String showConnections(Person person) {
+    public String showConnections(T person) {
         return person + "\n" + "Близкие родственники:\n" +
                 family.get(person);
     }
 
-    public TreeMap<Person, Connections> sortByAge() {
-        TreeMap<Person, Connections> result = new TreeMap<>(new ComparatorByAge());
+    public TreeMap<T, Connections<T>> sortByAge() {
+        TreeMap<T, Connections<T>> result = new TreeMap<>(new ComparatorByAge());
         result.putAll(family);
         return result;
     }
 
-    public TreeMap<Person, Connections> sortByName() {
-        TreeMap<Person, Connections> result = new TreeMap<>(new ComparatorByName());
+    public TreeMap<T, Connections<T>> sortByName() {
+        TreeMap<T, Connections<T>> result = new TreeMap<>(new ComparatorByName());
         result.putAll(family);
         return result;
     }
@@ -74,7 +73,7 @@ public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Conn
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Person person :
+        for (T person :
                 family.keySet()) {
             sb.append(person).append("\n");
         }
@@ -82,7 +81,7 @@ public class FamilyTree implements Serializable, Iterable<Map.Entry<Person, Conn
     }
 
     @Override
-    public Iterator<Map.Entry<Person, Connections>> iterator() {
+    public Iterator<Map.Entry<T, Connections<T>>> iterator() {
         return family.entrySet().iterator();
     }
 }

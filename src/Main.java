@@ -2,25 +2,26 @@ import familyTree.ConnectionType;
 import familyTree.Connections;
 import familyTree.FamilyTree;
 import person.Person;
+import readWrite.FileHandler;
 
 import java.time.LocalDate;
 import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree family = makeTree();
+        FamilyTree<Person> family = makeTree();
 
-        TreeMap<Person, Connections> sortAge = family.sortByAge();
+        TreeMap<Person, Connections<Person>> sortAge = family.sortByAge();
         System.out.println(sortAge);
 
         System.out.println("+++++++++++++++++");
 
-        TreeMap<Person, Connections> sortName = family.sortByName();
+        TreeMap<Person, Connections<Person>> sortName = family.sortByName();
         System.out.println(sortName);
     }
 
-    public static FamilyTree makeTree() {
-        FamilyTree result = new FamilyTree();
+    public static FamilyTree<Person> makeTree() {
+        FamilyTree<Person> result = new FamilyTree<>();
         person.Person egor = new person.Person("Егор", "Меньшиков", "Леонидович",
                 person.Gender.MALE, LocalDate.of(1986, 3, 13));
         person.Person petr = new person.Person("Петр", "Меньшиков", "Леонидович",
