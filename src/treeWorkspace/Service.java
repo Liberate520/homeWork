@@ -55,5 +55,12 @@ public class Service  {
     public void sortByGender(){
         currentTree.sortByGender();
     }
-
+    public void saveTree(String path){
+        TreeLoader treeLoader = new TreeLoader();
+        treeLoader.saveTree(currentTree,path);
+    }
+    public FamilyTree loadTree(String path){
+        TreeLoader treeLoader = new TreeLoader();
+        return (FamilyTree) treeLoader.loadTree(path);
+    }
 }
