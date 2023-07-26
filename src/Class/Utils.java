@@ -1,3 +1,5 @@
+package Class;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,16 @@ public class Utils {
 
     public FamilyTree getFamilyTree() {
         return familyTree;
+    }
+
+    public void fillTree() {
+        Human human1 = familyTree.addHuman("Алексей", "Иванов");
+        Human human2 = familyTree.addHuman("Алина", "Петрова");
+        Human human3 = familyTree.addHuman("Андрей", "Иванов");
+
+        familyTree.addRelation(new Relation(human1.id, human2.id, Relation.Node.MARIAGE));
+        familyTree.addRelation(new Relation(human3.id, human1.id, Relation.Node.CHILD));
+        familyTree.addRelation(new Relation(human3.id, human2.id, Relation.Node.CHILD));
     }
 
     public void print() {

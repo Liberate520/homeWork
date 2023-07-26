@@ -1,12 +1,16 @@
+package Class;
+
+import Interfaces.IStream;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Relation implements IStream {
     private int id1, id2;
-    private Node node;
+    public Node node;
 
-    enum Node {
+    public enum Node {
         MARIAGE, //супруги
         CHILD //ребенок
     }

@@ -1,11 +1,15 @@
+package Class;
+
+import Interfaces.IStream;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Human implements IStream{
+public class Human implements IStream {
 
 
-    protected int id;
+    public int id;
     private String Name;
     private String Surname;
 
@@ -38,7 +42,7 @@ public class Human implements IStream{
         stream_out.writeUTF(Surname);
     }
 
-    //чтение для Human из потока
+    //чтение для Class.Human из потока
     public void load(DataInputStream stream_in) throws IOException {
         int id = stream_in.readInt();
         String name = stream_in.readUTF();
