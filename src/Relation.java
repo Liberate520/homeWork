@@ -1,64 +1,61 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 public class Relation implements IStream {
-    private Human human1;
-    private Human human2;
-    private Relationship node;
+    private int id1, id2;
+    private Node node;
 
-    enum Relationship {
-        PARENT,
-        CHILDREN,
-        MARIAGE
+    enum Node {
+        MARIAGE, //супруги
+        CHILD //ребенок
     }
 
-    public Relation(Human human1, Relationship node, Human human2) {
-        this.human1 = human1;
+    //установка связей между людьми
+    public Relation(int id1, int id2, Node node) {
+        setID1toID2(id1, id2, node);
+    }
+
+    void setID1toID2(int id1, int id2, Node node) {
+        this.id1 = id1;
+        this.id2 = id2;
         this.node = node;
-        this.human2 = human2;
     }
 
-    public Human getHuman1() {
-        return human1;
+    public int getId1() {
+        return id1;
     }
 
-    public Human getHuman2() {
-        return human2;
+    public int getId2() {
+        return id2;
     }
 
-    public Relationship getRelationship() {
+    Node getNodeID1toID2() {
         return node;
     }
 
-    @Override
-    public String toString() {
-        return String.format("<%s %s %s>", human1, node, human2);
-    }
-
-    @Override
+    //Запись данных в поток
     public void save(DataOutputStream stream_out) throws IOException {
-        stream_out.writeInt(human1);
-        stream_out.writeInt(human2);
-        int itype = 0;
-        if (node == node.CHILDREN)
-            itype = 1;
-        stream_out.writeInt(itype);
+        stream_out.writeInt(id1);
+        stream_out.writeInt(id2);
+        int inode = 0;
+        if (node == Node.CHILD)
+            inode = 1;
+        stream_out.writeInt(inode);
     }
 
-    @Override
-    public void load(DataInputStream stream_in) throws IOException {
+        //Чтение данных экземпляра из потока
+        public void load(DataInputStream stream_in) throws IOException {
         int id1 = stream_in.readInt();
         int id2 = stream_in.readInt();
-        int itype = stream_in.readInt();
+        int inode = stream_in.readInt();
 
-        Type type = Type.SPOUSES;
-        if (itype == 1)
-            type = Type.CHILD;
+        Node node = Node.MARIAGE;
+        if (inode == 1)
+            node = Node.CHILD;
 
         this.id1 = id1;
         this.id2 = id2;
-        this.type = type;
+        this.node = node;
     }
-
-
 }

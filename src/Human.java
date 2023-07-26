@@ -2,19 +2,22 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Human implements IStream {
-    enum Gender {
-        MALE,
-        FEMALE
-    }
+public class Human implements IStream{
+
 
     protected int id;
     private String Name;
     private String Surname;
-    private Gender gender;
 
-    public Human(int id, String name, String surname, Gender gender) {
+
+    public Human(int id) {
         this.id = id;
+        Name = "";
+        Surname = "";
+    }
+
+    public Human(int id, String name, String surname) {
+        this(id);
         this.Name = name;
         this.Surname = surname;
     }
@@ -25,28 +28,24 @@ public class Human implements IStream {
 
     @Override
     public String toString() {
-        return id + " " + Name + " " + Surname + " " + gender;
+        return id + " " + Name + " " + Surname;
     }
 
-    @Override
+    //запись данных в поток
     public void save(DataOutputStream stream_out) throws IOException {
         stream_out.writeInt(id);
         stream_out.writeUTF(Name);
         stream_out.writeUTF(Surname);
-        int igender = 0;
-        if (gender == Gender.FEMALE)
-            igender = 1;
-        stream_out.writeInt(igender);
     }
 
-    @Override
+    //чтение для Human из потока
     public void load(DataInputStream stream_in) throws IOException {
         int id = stream_in.readInt();
         String name = stream_in.readUTF();
         String surname = stream_in.readUTF();
-        int igender = stream_in.readInt();
-        Gender gender = Gender.MALE;
-        if (igender == 1)
-            gender = Gender.FEMALE;
+
+        this.id = id;
+        this.Name = name;
+        this.Surname = surname;
     }
 }
