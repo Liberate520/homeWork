@@ -16,6 +16,12 @@ public class Main {
         FamilyTree loadedTree = fileHandler.loadFromFile(); // load tree from the file
         System.out.println("Loaded Tree:");
         System.out.println(loadedTree);
+        loadedTree.sortByName();
+        System.out.println("Sorted tree by name: ");
+        System.out.println(loadedTree);
+        loadedTree.sortByBirthDate();
+        System.out.println("Sorted tree by age: ");
+        System.out.println(loadedTree);
     }
 
     static FamilyTree testTree() {
@@ -34,7 +40,7 @@ public class Main {
         tree.add(christina);
         tree.add(semyon);
 
-        Human larisa = new Human("Larisa", Gender.Female, LocalDate.of(194,9,1));
+        Human larisa = new Human("Larisa", Gender.Female, LocalDate.of(1945,9,1));
         larisa.addChild(vasya);
         tree.add(larisa);
         return tree;
