@@ -1,4 +1,5 @@
 import enums.Gender;
+import treeWorkspace.Person;
 import treeWorkspace.Service;
 
 import java.time.LocalDate;
@@ -6,7 +7,7 @@ import java.time.LocalDate;
 public class Test {
     public static void main(String[] args) {
         // Заполняем тестовое дерево
-        Service service = new Service();
+        Service<Person> service = new Service<>();
         service.addPerson("Мария", Gender.Female,
                 LocalDate.of(1900, 12, 25),
                 LocalDate.of(1955, 1, 16));
@@ -35,7 +36,9 @@ public class Test {
 //        service.sortByAge();
 //        service.sortByGender();
         System.out.println();
-        service.getInfo();
-
+//        service.getInfo();
+        // Проверка сохранения и загрузки
+        service.saveTree("./src/savedFiles/TreeOfHumans.bin");
+        System.out.println(service.loadTree("./src/savedFiles/TreeOfHumans.bin"));
     }
 }

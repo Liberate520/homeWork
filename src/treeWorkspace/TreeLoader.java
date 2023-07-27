@@ -1,5 +1,6 @@
 package treeWorkspace;
 
+import interfaces.TreeItem;
 import interfaces.Writable;
 
 import java.io.*;

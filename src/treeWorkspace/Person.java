@@ -1,13 +1,14 @@
 package treeWorkspace;
 
 import enums.Gender;
+import interfaces.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable,Comparable<Person> {
+public class Person implements Serializable,Comparable<Person>, TreeItem<Person> {
     private int id;
     private String name;
     private Gender gender;

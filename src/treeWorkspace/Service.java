@@ -1,32 +1,33 @@
 package treeWorkspace;
 
 import enums.Gender;
+import interfaces.TreeItem;
 
 import java.time.LocalDate;
 
-public class Service  {
+public class Service<E extends TreeItem<E>>  {
     // Класс который руководит поведением класса FamilyTree
     private int id;
-    private FamilyTree currentTree;
-    private Person tmpPerson;
+    private FamilyTree<E> currentTree;
+    private Object tmpPerson;
 
     public Service() {
-        currentTree = new FamilyTree();
+        currentTree = new FamilyTree<>();
     }
 
-    public Person addPerson(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
+    public E addPerson(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
         // Конструктор для тех, у кого известна дата смерти
         tmpPerson = new Person(id++,name,gender,birthDate,deathDate);
-        currentTree.addPerson(tmpPerson);
-        return tmpPerson;
+        currentTree.addPerson((E)tmpPerson);
+        return (E) tmpPerson;
     }
 
-    public FamilyTree getCurrentTree(){
+    public FamilyTree<E> getCurrentTree(){
         return currentTree;
     }
 
-    public Person findPerson(int id) {
-        for (Person p:currentTree){
+    public E findPerson(int id) {
+        for (E p:currentTree){
             if (id==p.getId()){
                 return p;
             }
@@ -34,7 +35,7 @@ public class Service  {
         return null;
     }
     public int findPersonId(String name, Gender gender){
-        for (Person p: currentTree){
+        for (E p: currentTree){
             if(p.getName().equals(name)&&p.getGender().equals(gender)){
                 return p.getId();
             }
@@ -42,7 +43,7 @@ public class Service  {
         return -1;
     }
     public void getInfo(){
-        for (Person p : currentTree) {
+        for (E p : currentTree) {
             System.out.println(p);
         }
     }
@@ -59,7 +60,7 @@ public class Service  {
         TreeLoader treeLoader = new TreeLoader();
         treeLoader.saveTree(currentTree,path);
     }
-    public FamilyTree loadTree(String path){
+    public FamilyTree<E> loadTree(String path){
         TreeLoader treeLoader = new TreeLoader();
         return (FamilyTree) treeLoader.loadTree(path);
     }
