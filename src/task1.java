@@ -2,7 +2,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Test {
+public class task1 {
 
     public static StringBuilder getCondition(Map<String, String> params) {
         StringBuilder result = new StringBuilder();
