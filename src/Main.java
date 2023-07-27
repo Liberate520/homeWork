@@ -36,7 +36,7 @@ public class Main {
         System.out.println(tree);
 
         FamilyTreeFileIO fileIO = new FamilyTreeFileManager();
-
+        
         try {
             
             fileIO.saveToFile(tree, "family_tree_data.ser");
@@ -47,5 +47,9 @@ public class Main {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        tree.sortByBirthDate();
+
+        System.out.println(tree);
     }
 }
