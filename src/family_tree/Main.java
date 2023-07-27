@@ -22,6 +22,8 @@ public class Main {
             FamilyTree familyTree = (FamilyTree) fileHandler.readDump(filePath);
             System.out.println("FamilyTree from the DUMP:");
             System.out.println("=========================");
+            familyTree.sortByNames();
+            familyTree.sortByBirthDays();
             System.out.println(familyTree.getFullRelativesInfo()); // Full of Persons list, but not full for Person tree
             System.out.println(":::::::::::: Personal FamilyTree for person#id ::::::::::::");
             System.out.println(familyTree.getPersonalTree(3)); // prepared for printing selected tree (by Person ID)

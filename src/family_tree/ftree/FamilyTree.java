@@ -1,13 +1,17 @@
 package family_tree.ftree;
 
 import family_tree.person.Gender;
-import  family_tree.person.Person;
+import family_tree.person.Person;
+import family_tree.person.PersonsComparatorByNames;
+import family_tree.person.PersonsComparatorByBirthday;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Person> {
     
     private List<Person> relations;
 
@@ -114,6 +118,19 @@ public class FamilyTree implements Serializable {
             }
         }
         return sB.toString();
+    }
+
+    public void sortByNames(){
+        relations.sort(new PersonsComparatorByNames());
+    }
+
+    public void sortByBirthDays(){
+        relations.sort(new PersonsComparatorByBirthday());
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new FamilyTreeIterator(relations);
     }
 
 }
