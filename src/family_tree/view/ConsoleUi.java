@@ -2,12 +2,8 @@ package family_tree.view;
 
 import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
-
 import java.time.LocalDate;
 import java.util.Scanner;
-
-
-
 
 public class ConsoleUi implements View{
 
@@ -16,15 +12,11 @@ public class ConsoleUi implements View{
     private boolean work;
     private MainMenu menu;
 
-
-
     public ConsoleUi() {
         presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         work = true;
         menu = new MainMenu(this);
-
-
 
     }
 
@@ -38,35 +30,24 @@ public class ConsoleUi implements View{
                 int numChoice = Integer.parseInt(choice);
                 menu.execute(numChoice);
             } else {
-                System.out.println("Нет такой команды");
+                System.out.println("Выберите команду из списка");
             }
-
         }
-
-
 
     }
 
     private boolean validChoice(String choice) {
         int numChoice;
         int size = menu.getSize();
-
-//        System.out.println(String.format("Parsing string: \"%s\"", choice));
-
         if(choice == null || choice.equals("")) {
             System.out.println("Вы не ввели команду");
             return false;
         }
-
         try {
             numChoice = Integer.parseInt(choice);
-
-            if (size >=numChoice && numChoice > 0){
-                return true;
-            }
-
+            return size >= numChoice && numChoice > 0;
         } catch (NumberFormatException e) {
-            System.out.println("Эту команду нельзя исполнить");
+            System.out.println("Нет такой команды");
         }
         return false;
     }
@@ -105,7 +86,6 @@ public class ConsoleUi implements View{
             LocalDate birthDate = LocalDate.parse(date);
             presenter.addHuman(name, gender, birthDate);
         }
-
 
     }
 
