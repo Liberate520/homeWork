@@ -1,6 +1,7 @@
 package ru.java_oop.family_tree.model.file_handler;
 
 import java.io.*;
+import java.util.Objects;
 
 public class FileHandler implements SavableAndReadable {
     private ObjectOutputStream objOutputStream;
@@ -8,11 +9,15 @@ public class FileHandler implements SavableAndReadable {
     private String filePath;
 
     public FileHandler(String filePath) {
-        this.setFilePath(filePath);
+        if (!Objects.equals(filePath, "")) {
+            this.setFilePath("src/ru/java_oop/" + filePath);
+        } else {
+            this.setFilePath("src/ru/java_oop/backup.out");
+        }
     }
 
     public FileHandler() {
-        this("backup.out");
+        this("src/ru/java_oop/backup.out");
     }
 
     @Override

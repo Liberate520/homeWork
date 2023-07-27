@@ -2,6 +2,7 @@ package ru.java_oop.family_tree.model.service;
 
 import ru.java_oop.family_tree.model.family_tree.FamilyTree;
 import ru.java_oop.family_tree.model.family_tree.FamilyTreeItem;
+import ru.java_oop.family_tree.model.file_handler.FileHandler;
 import ru.java_oop.family_tree.model.human.Gender;
 import ru.java_oop.family_tree.model.human.Human;
 
@@ -51,5 +52,15 @@ public class Service {
 
     public void setParentChildRelation(long parent_id, long child_id) {
         this.familyTree.setParentChildRelation(parent_id, child_id);
+    }
+
+    public void saveFamilyTreeToFile(String fileName) {
+        FileHandler fh = new FileHandler(fileName);
+        fh.writeObjToFile(this.familyTree);
+    }
+
+    public void loadFamilyTreeFromFile(String fileName) {
+        FileHandler fh = new FileHandler(fileName);
+        this.familyTree = (FamilyTree) fh.readObjFromFile();
     }
 }

@@ -39,4 +39,15 @@ public class Presenter {
         service.setParentChildRelation(parent_id, child_id);
         getFamilyTreeInfo();
     }
+
+
+    public void saveFamilyTreeToFile(String fileName) {
+        service.saveFamilyTreeToFile(fileName);
+        getFamilyTreeInfo();
+    }
+
+    public void loadFamilyTreeFromFile(String fileName) {
+        service.loadFamilyTreeFromFile(fileName);
+        getFamilyTreeInfo();
+    }
 }

@@ -104,5 +104,18 @@ public class ConsoleUI implements View {
         presenter.setParentRelation(parent_choice, child_choice);
     }
 
+    public void saveFamilyTreeToFile() {
+        System.out.println("Enter file name: ");
+        String fileName = scanner.nextLine();
+        presenter.saveFamilyTreeToFile(fileName);
+        System.out.println("Saved!");
+    }
+
+    public void loadFamilyTreeFromFile() {
+        System.out.println("Enter file name: ");
+        String fileName = scanner.nextLine();
+        presenter.loadFamilyTreeFromFile(fileName);
+        System.out.println("Loaded!");
+    }
 
 }

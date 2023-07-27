@@ -39,13 +39,13 @@ public class Main {
     }
 
     public static void performFamilyTreeSaveToFile(Service service) {
-        FileHandler fh = new FileHandler("src/ru/java_oop/backup.out");
+        FileHandler fh = new FileHandler("backup.out");
         fh.writeObjToFile(service.getFamilyTreeAsObject());
     }
 
     public static FamilyTree<?> loadFamilyTreeFromFile() {
 
-        FileHandler fh = new FileHandler("src/ru/java_oop/backup.out");
+        FileHandler fh = new FileHandler("backup.out");
         return (FamilyTree<?>) fh.readObjFromFile();
     }
 
