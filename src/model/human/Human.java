@@ -7,7 +7,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+import model.familyTree.TreeItem;
+
+public class Human implements Serializable, TreeItem<Human> {
     private long id;
     private String name;
     private Gender gender;

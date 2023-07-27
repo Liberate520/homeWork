@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         Human vasya = new Human("Василий", Gender.Male, LocalDate.of(1963, 12, 10));
         Human masha = new Human("Мария", Gender.Female, LocalDate.of(1965, 9, 15));
@@ -41,7 +41,7 @@ public class Main {
             
             fileIO.saveToFile(tree, "family_tree_data.ser");
 
-            FamilyTree loadedTree = fileIO.loadFromFile("family_tree_data.ser");
+            FamilyTree<Human> loadedTree = fileIO.loadFromFile("family_tree_data.ser");
 
             System.out.println(loadedTree);
         } catch (IOException | ClassNotFoundException e) {
