@@ -4,7 +4,6 @@ import ru.java_oop.family_tree.model.human.Gender;
 import ru.java_oop.family_tree.presenter.Presenter;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -59,7 +58,6 @@ public class ConsoleUI implements View {
             System.out.println("Enter human gender (Male/Female): ");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("male")) {
-                gender = Gender.Male;
                 incorrect = false;
             } else if (input.equalsIgnoreCase("female")) {
                 gender = Gender.Female;
@@ -93,4 +91,18 @@ public class ConsoleUI implements View {
     public void getFamilyTreeInfo() {
         presenter.getFamilyTreeInfo();
     }
+
+    public void setParentChildRelation() {
+        long parent_choice, child_choice;
+        System.out.println("Current tree: ");
+        getFamilyTreeInfo();
+        System.out.println("\nChoose parent ID: ");
+        parent_choice = Long.parseLong(scanner.nextLine());
+        System.out.println("\nChoose child ID: ");
+        child_choice = Long.parseLong(scanner.nextLine());
+
+        presenter.setParentRelation(parent_choice, child_choice);
+    }
+
+
 }

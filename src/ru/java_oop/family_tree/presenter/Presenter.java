@@ -34,4 +34,9 @@ public class Presenter {
         service.sortByAge();
         getFamilyTreeInfo();
     }
+
+    public void setParentRelation(long parent_id, long child_id) {
+        service.setParentChildRelation(parent_id, child_id);
+        getFamilyTreeInfo();
+    }
 }

@@ -139,4 +139,14 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         entityList.sort(new EntityComparatorByName<>());
 //        Collections.sort(humanList, new HumanComparatorByName());
     }
+
+    public void setParentChildRelation(long parent_id, long child_id) {
+        E parent = this.getById(parent_id);
+        E child = this.getById(child_id);
+        child.addParent(parent);
+        if (parent.getSpouse() != null) {
+            child.addParent(parent.getSpouse());
+        }
+        this.addToParents(child);
+    }
 }

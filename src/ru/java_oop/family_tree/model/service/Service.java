@@ -41,11 +41,15 @@ public class Service {
         return familyTree.setWedding(entityId1, entityId2);
     }
 
-    public FamilyTree<?> getFamilyTreeAsObject() {
+    public FamilyTree getFamilyTreeAsObject() {
         return this.familyTree;
     }
 
     public void setFamilyTree(FamilyTree familyTree) {
         this.familyTree = familyTree;
+    }
+
+    public void setParentChildRelation(long parent_id, long child_id) {
+        this.familyTree.setParentChildRelation(parent_id, child_id);
     }
 }

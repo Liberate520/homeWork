@@ -141,7 +141,9 @@ public class Human implements Serializable, FamilyTreeItem {
 
     @Override
     public void addChild(Object child) {
-        this.children.add((Human) child);
+        if (!this.getChildren().contains(child)) {
+            this.children.add((Human) child);
+        }
     }
 
     public int getAge() {
