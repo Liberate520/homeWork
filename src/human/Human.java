@@ -1,5 +1,7 @@
 package human;
 
+import genealogicalTree.GTgeneric;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -38,7 +40,7 @@ public class Human implements Serializable, Comparable<Human> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(name, human.name) && Objects.equals(lastName, human.lastName) && Objects.equals(birthDate, human.birthDate);
+        return Objects.equals(name, human.getName()) && Objects.equals(lastName, human.getLastName()) && Objects.equals(birthDate, human.getBirth());
     }
 
     @Override
@@ -97,12 +99,18 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
 
-    public String getLastName(Human human){
-        return human.lastName;
+    public String getLastName(){
+        return this.lastName;
     }
+
 
     public String getName(){
         return this.name;
+    }
+
+
+    public LocalDate getBirth(){
+        return this.birthDate;
     }
     public void addChildren(Human child){
         if(!this.children.contains(child)) {
@@ -179,11 +187,11 @@ public class Human implements Serializable, Comparable<Human> {
         return sb.toString();
     }
 
-
     @Override
     public int compareTo(Human o) {
-        return this.name.compareTo(o.name);
+        return this.name.compareTo(o.getName());
     }
+
 }
 
 

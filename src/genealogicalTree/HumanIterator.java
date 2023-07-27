@@ -1,17 +1,15 @@
 package genealogicalTree;
 
-import human.Human;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<T extends GTgeneric> implements Iterator<T> {
     private int index;
-    private ArrayList<Human> humanList;
+    private ArrayList<T> humanList;
 
-    public HumanIterator(List<Human> humanList){
-        this.humanList = this.humanList;
+    public HumanIterator(List<T> humanList){
+        this.humanList = (ArrayList<T>) humanList;
     }
 
     @Override
@@ -20,7 +18,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return humanList.get(index++);
     }
 

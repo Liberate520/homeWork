@@ -3,28 +3,27 @@ package genealogicalTree;
 import human.ComparatorByAge;
 import human.ComparatorByName;
 import human.Human;
-import human.Writable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree implements Serializable, Iterable<Human> {
+public class GenealogicalTree<T extends Human > implements Serializable, Iterable<T> {
 
-    private List<Human> humanList;
+    private List<T> humanList;
 
     public GenealogicalTree() {
-        this.humanList = new ArrayList<>();
+        humanList = new ArrayList<>();
     }
 
-    public GenealogicalTree(List<Human> humanList) {
+    public GenealogicalTree(List<T> humanList) {
         this.humanList = humanList;
     }
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
-        for (Human human: humanList
+        for (T human: humanList
              ) {
             String part = human.getInfo();
             sb.append(part);
@@ -33,52 +32,52 @@ public class GenealogicalTree implements Serializable, Iterable<Human> {
         return sb.toString();
     }
 
-    public void addHuman(Human human){
+    public void addHuman(T human){
         if(!humanList.contains(human)) {
             humanList.add(human);
         }
     }
 
     public void showAllHumans(){
-        for (Human human: this.humanList
+        for (T human: this.humanList
         ) {
             System.out.println(human);
         }
     }
 
-    public List<Human> getHumanByLastName(String lastName) {
-        List<Human> result = new ArrayList<>();
-        for (Human human:humanList
+    public List<T> getHumanByLastName(String lastName) {
+        List<T> result = new ArrayList<>();
+        for (T human:humanList
         ) {
-            String lastNameHuman = getLastName(human);
+            String lastNameHuman = getLastName((Human) human);
             if(lastNameHuman.equalsIgnoreCase(lastName)) result.add(human);
         }
         return result;
     }
 
     private String getLastName(Human human) {
-        return human.getLastName(human);
+        return human.getLastName();
     }
 
     public List<Human> getHumanByName(String name) {
         List<Human> result = new ArrayList<>();
-        for (Human human:humanList
+        for (T human:humanList
         ) {
-            String nameHuman = getName(human);
-            if(nameHuman.equalsIgnoreCase(name)) result.add(human);
+            String nameHuman = getName((Human) human);
+            if(nameHuman.equalsIgnoreCase(name)) result.add((Human) human);
         }
         return result;
     }
 
     private String getName(Human human) {
-        return human.getName();
+        return getName(human);
     }
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Human human: humanList
+        for (T human: humanList
         ) {
             sb.append(human.toString());
             sb.append("--------------------");
@@ -89,7 +88,7 @@ public class GenealogicalTree implements Serializable, Iterable<Human> {
 
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return humanList.iterator();
     }
 

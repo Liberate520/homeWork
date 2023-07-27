@@ -1,5 +1,6 @@
+import genealogicalTree.GTgeneric;
 import genealogicalTree.GenealogicalTree;
-import human.FileHandler;
+import Service.FileHandler;
 import human.Gender;
 import human.Human;
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class Main {
     static String filePath = "familytree.out";
     public static void main(String[] args)  {
-        GenealogicalTree family1 = new GenealogicalTree();
+        GenealogicalTree family1 = new GenealogicalTree<>();
 
         Human grandmother1 = new Human("Valentina", "Nazarova", Gender.female, LocalDate.of(1938, Month.JANUARY, 4),LocalDate.of(2020, Month.MARCH, 1),null, null, null, new ArrayList<>() );
         Human grandfather1 = new Human("Eduard", "Nazarov", Gender.male, LocalDate.of(1937, Month.MAY, 20),LocalDate.of(1999, Month.AUGUST, 14),null, null, null,  new ArrayList<>()  );

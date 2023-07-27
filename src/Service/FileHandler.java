@@ -1,9 +1,9 @@
-package human;
+package Service;
 
 
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable {
     @Override
     public Serializable readFile(String path) {
         try (FileInputStream file = new FileInputStream(path)) {
