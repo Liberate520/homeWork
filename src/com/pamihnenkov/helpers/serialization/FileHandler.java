@@ -1,8 +1,10 @@
-package com.pamihnenkov;
+package com.pamihnenkov.helpers.serialization;
+
+import com.pamihnenkov.helpers.serialization.Writeable;
 
 import java.io.*;
 
-public class FileHandler implements Writeable{
+public class FileHandler implements Writeable {
 
     private final String fileName = "backup.txt";
     @Override

@@ -1,6 +1,7 @@
 package com.pamihnenkov;
 
-import java.time.LocalDate;
+import com.pamihnenkov.helpers.serialization.FileHandler;
+import com.pamihnenkov.model.FamilyTree;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,8 +25,13 @@ public class Main {
         Object input = fileHandler.load();
         FamilyTree familyTree = (FamilyTree) input;
         System.out.println(familyTree);
-        System.out.println(familyTree.findOldestMember());
-        System.out.println(familyTree.findOldestMember().getChilds().size());
+        System.out.println();
+        familyTree.printSortedByBirthdate();
+
+        System.out.println();
+        familyTree.printSortedByAge();
+   //    System.out.println(familyTree.findOldestMember());
+   //    System.out.println(familyTree.findOldestMember().getChilds().size());
 
 
 

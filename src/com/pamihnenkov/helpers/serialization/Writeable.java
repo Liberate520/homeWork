@@ -1,4 +1,4 @@
-package com.pamihnenkov;
+package com.pamihnenkov.helpers.serialization;
 
 import java.io.Serializable;
 

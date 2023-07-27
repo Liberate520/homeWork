@@ -1,4 +1,6 @@
-package com.pamihnenkov;
+package com.pamihnenkov.model;
+
+import com.pamihnenkov.model.enums.Relation;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -7,7 +9,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -23,18 +25,6 @@ public class FamilyTree implements Serializable {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
-
-   // public void addParent (Human person){
-   //     if (person.getChilds().stream().anyMatch(humanList::contains)){
-   //         addFamilyMember(person);
-   //     } else System.err.println("Родственные связи не установлены. (Вероятно требуется добавить промежуточных родственников)");
-   // }
-
-   // public void addChild (Human person){
-   //     if (person.getParents().stream().anyMatch(humanList::contains)){
-   //         addFamilyMember(person);
-   //     } else System.err.println("Родственные связи не установлены. (Вероятно требуется добавить промежуточных родственников)");
-   // }
 
     private void addFamilyMember (Human newMember){
         humanList.add(newMember);
@@ -54,6 +44,16 @@ public class FamilyTree implements Serializable {
         return humanList.stream().min((h1,h2) -> Period.between(h2.getBirthDate(),h1.getBirthDate()).getYears()).get();
     }
 
+    public void printSortedByBirthdate(){
+        System.out.println("Список людей отсортированный по дате рождения: ");
+        humanList.stream().sorted(Comparator.comparing(Human::getBirthDate)).forEach(System.out::println);
+    }
+
+    public void printSortedByAge(){
+        System.out.println("Список людей отсортированный по возрасту: ");
+        humanList.stream().sorted((h1,h2) -> h1.getAge()- h2.getAge()).forEach(System.out::println);
+    }
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder("Семейное дерево:\n");
@@ -61,5 +61,10 @@ public class FamilyTree implements Serializable {
             sb.append(human).append('\n');
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return humanList.iterator();
     }
 }
