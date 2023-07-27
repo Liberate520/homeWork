@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class FamilyTree<Creature extends Entities> implements Serializable, Iterable<Creature> {
+public class FamilyTree<T extends Entities> implements Serializable, Iterable<T> {
     
-    private ArrayList<Creature> creatureList;
+    private ArrayList<T> creatureList;
 
     public FamilyTree() {
         creatureList = new ArrayList<>();
     }
 
-    public void add(Creature creature) {
+    public void add(T creature) {
         if (!creatureList.contains(creature)) {
             creatureList.add(creature);
         }
@@ -23,7 +23,7 @@ public class FamilyTree<Creature extends Entities> implements Serializable, Iter
     @Override
     public String toString() {
         StringBuilder strb = new StringBuilder();
-        for (Creature human : creatureList) {
+        for (T human : creatureList) {
             strb.append(human);
         }
         return strb.toString();
@@ -31,7 +31,7 @@ public class FamilyTree<Creature extends Entities> implements Serializable, Iter
 
     
     @Override
-    public Iterator<Creature> iterator() {
+    public Iterator<T> iterator() {
         return creatureList.iterator();
     }
 

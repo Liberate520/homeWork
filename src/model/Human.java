@@ -22,11 +22,15 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
-        this.mother = mother;
+        this.setMother(mother);
         this.father = father;
         this.children = new ArrayList<>();
         this.gender = gender;
 
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
     }
 
     public Human(String name, String surname, LocalDate dateOfBirth, Human mother, Human father, Gender gender) {
@@ -60,13 +64,8 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         return name;
     }
 
-    public ArrayList<Human> getChildren() {
-        return children;
-    }
-
     public void addChildM(Human child) {
-        child.mother = this;
-
+        child.mother= this;
         children.add(child);
     }
 
@@ -94,7 +93,7 @@ public class Human implements Serializable, Comparable<Human>, Entities {
         stringBuilder.append(getGender() + ", ");
         stringBuilder.append(fatherInfo() + ", ");
         stringBuilder.append(motherInfo() + ", ");
-        stringBuilder.append(getChildren());
+        stringBuilder.append(childrenInfo());
         return stringBuilder.toString();
     }
 
@@ -120,8 +119,8 @@ public class Human implements Serializable, Comparable<Human>, Entities {
 
     public ArrayList<Human> getParents() {
         parents = new ArrayList<>();
-        if (mother != null) {
-            parents.add(mother);
+        if (getMother() != null) {
+            parents.add(getMother());
         }
         if (father != null) {
             parents.add(father);
@@ -173,6 +172,25 @@ public class Human implements Serializable, Comparable<Human>, Entities {
             stringBuilder.append("неизвестна");
         } else {
             stringBuilder.append(mother.getName());
+        }
+        return stringBuilder.toString();
+    }
+
+    public ArrayList<Human> getChildren() {
+        return children;
+    }
+
+    public String childrenInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Дети: ");
+        ArrayList<Human> children = getChildren();
+        if (children.size()==0) {
+            stringBuilder.append("нет");
+        } else {
+            for (Human child : children) {
+                stringBuilder.append(child.getName());
+            }
+
         }
         return stringBuilder.toString();
     }

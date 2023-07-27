@@ -10,8 +10,9 @@ public class PrintInformation extends Command {
 
     }
 
+    @Override
     public void execute() {
         console.printInformation();
     }
-    
+
 }

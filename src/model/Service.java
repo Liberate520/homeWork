@@ -1,7 +1,7 @@
 package model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-
 
 public class Service implements Serializable {
 
@@ -17,33 +17,26 @@ public class Service implements Serializable {
         familyTree.add(human);
     }
 
-    public void addHumanConsole(String name, String surname, Gender gender) {
-        Human human = new Human(name, surname, null, null, null,gender);
-        familyTree.add(human);
+    public void addHuman(String name, String surname, Gender gender, LocalDate dateOfBirth) {
+        addHuman(name, surname, dateOfBirth, null, null, gender);
     }
 
-    public void addHumanConsole(String name, String surname, Gender gender, LocalDate dateOfBirth) {
-        Human human = new Human(name, surname, dateOfBirth, null, null,gender);
-        familyTree.add(human);
+    public void addHuman(String name, String surname, LocalDate dateOfBirth) {
+        addHuman(name, surname, null, dateOfBirth);
+    }
+
+    public void addHuman(String name, String surname, Gender gender) {
+        addHuman(name, surname, gender, null);
     }
 
     public String getInformation() {
         StringBuilder stringBuilder = new StringBuilder();
-        // stringBuilder.append(String.format("В семейном дереве %d объектов:\n",
-        // humanList.size()));
+
         for (Entities human : familyTree) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
-    }
-
-    public String toString() {
-        StringBuilder strb = new StringBuilder();
-        for (Entities human : familyTree) {
-            strb.append(human);
-        }
-        return strb.toString();
     }
 
     public void sortByBirthdate() {
@@ -56,6 +49,14 @@ public class Service implements Serializable {
 
     public void sortByName() {
         familyTree.sortByName();
+    }
+
+    public String toString() {
+        StringBuilder strb = new StringBuilder();
+        for (Entities human : familyTree) {
+            strb.append(human);
+        }
+        return strb.toString();
     }
 
 }
