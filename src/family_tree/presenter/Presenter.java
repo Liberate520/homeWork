@@ -1,9 +1,7 @@
 package family_tree.presenter;
 
-//import family_tree.familytree.FamilyTree;
 import family_tree.person.Gender;
 import family_tree.service.Service;
-import family_tree.ui.ConsoleView;
 import family_tree.ui.View;
 
 public class Presenter {
@@ -23,50 +21,42 @@ public class Presenter {
         return service;
     }
 
-    public void getTree() {
-        view.print(service.getTree());
+    public Boolean isContainsItem(String fullName) {
+        return service.isContainsItem(fullName);
     }
 
-    public void getTreeShort() {
-        view.print(service.getTreeShort());
-    }
-
-    public Boolean addToTree(String data, Gender gender) {
-        return service.addToTree(data, gender);
-    }
-
-    public Boolean delFromTree(String fullName) {
-        return service.delFromTree(fullName);
-    }
-
-    public String getPeakTree() {
-        return service.getPeakTree();
-    }
-
-    public void getItem(String fullName) {
-        String item = service.getItemByName(fullName);
-        view.print(item == null ? "Никто не найден! " : item.substring(0, item.length()-1));
-    }
-
-    public void getItemShort(String fullName) {
-        String item = service.getItemByNameShort(fullName);
-        view.print(item == null ? "Никто не найден! " : item.substring(0, item.length()-1));
-    }
-
-    public Boolean setPeakByIndex(int index) {
-        return service.setPeakByIndex(index);
-    }
-
-    public Boolean saveTree(String option){
-        return service.saveTree(option);
-    }
-
-    public Boolean loadTree(String option, String filename) {
-        return service.loadTree(option, filename);
+    public Boolean isTreeEmpty() {
+        return service.isTreeEmpty();
     }
 
     public int getTreeSize() {
         return service.getTreeSize();
+    }
+
+    public void getTree() {
+        view.repeatLine();
+        view.print(service.getTree());
+        view.repeatLine();
+    }
+
+    public void getTreeShort() {
+        view.repeatLine();
+        view.print(service.getTreeShort());
+        view.repeatLine();
+    }
+
+    public void getItem(String fullName) {
+        String item = service.getItemByName(fullName);
+        view.repeatLine();
+        view.print(item);
+        view.repeatLine();
+    }
+
+    public void getItemShort(String fullName) {
+        String item = service.getItemByNameShort(fullName);
+        view.repeatLine();
+        view.print(item.substring(0, item.length()-1));
+        view.repeatLine();
     }
 
     public void sortByName() {
@@ -101,10 +91,13 @@ public class Presenter {
         view.print(service.sortByChildrenReverse());
     }
 
-    public Boolean delTree() {
-        return service.delTree();
+    public Boolean addPersonToTree(String data) {
+        return service.addPersonToTree(data);
     }
 
+    public Boolean delFromTree(String fullName) {
+        return service.delFromTree(fullName);
+    }
 
     public Boolean setFullname(String itemIndex, String fullName) {
         return service.setFullname(itemIndex, fullName);
@@ -138,8 +131,30 @@ public class Presenter {
         return service.setCommit(itemIndex, commit);
     }
 
-    public void exit() {
-        service.exit();
-        view.print("Всего доброго!");
+    public void getPeakTree() {
+        view.repeatLine();
+        view.print(service.getPeakTree());
     }
+
+    public Boolean setPeakByIndex(int index) {
+        return service.setPeakByIndex(index);
+    }
+
+    public Boolean saveTree(String option){
+        return service.saveTree(option);
+    }
+
+    public Boolean loadTree(String option, String filename) {
+        return service.loadTree(option, filename);
+    }
+
+    public Boolean delTree() {
+        return service.delTree();
+    }
+
+    public void exit() {
+        view.print("Всего доброго!");
+        service.exit();
+    }
+
 }

@@ -7,10 +7,8 @@ import family_tree.person.Person;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class Service<T extends FamilyTreeItem<T>> {
     FamilyTree<T> tree;
@@ -23,134 +21,40 @@ public class Service<T extends FamilyTreeItem<T>> {
 
     }
 
+    public Boolean isTreeEmpty() {
+        return tree.isEmpty();
+    }
+
     public String getTree() {
-        if (tree.getAllItems().isEmpty()) {
-            return "Дерево пусто";
-        } else return tree.toString();
+        return tree.toString();
+    }
+
+    public int getTreeSize() {
+        return tree.getSize();
+    }
+
+    public Boolean isContainsItem(String fullName) {
+        return tree.getPersonByName(fullName) != null;
+    }
+
+    public Boolean compareDates(int year, int month, int day, String dateFromTree) {
+        GregorianCalendar dateCompare = new GregorianCalendar(year, month - 1, day);
+        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        return df.format(dateCompare.getTime()).equals(dateFromTree);
     }
 
     public String getTreeShort() {
-        if (tree.getAllItems().isEmpty()) {
-            return "Дерево пусто";
-        } return tree.printShort();
+        return tree.printShort();
     }
 
     public String getItemByName(String fullName) {
         T unit = tree.getPersonByName(fullName);
-        return unit.toString().substring(0, unit.toString().length()-1);
+        return unit.toString().substring(0,unit.toString().length()-1);
     }
 
     public String getItemByNameShort(String fullName) {
         T unit = tree.getPersonByName(fullName);
         return unit.printShort();
-    }
-
-//    public String getUnitAfterChange(String action, String data, FamilyTree<T> tree) {
-//        int index = Integer.parseInt(data) - 1;
-//        T unit = tree.getPersonByIndex(index);
-//        String newParameter = scan();
-//        switch (action) {
-//            case "41" -> unit.setFullname(newParameter);
-//            case "42" -> unit.setBirthDate(Integer.parseInt(newParameter.split(" ".trim())[0]),
-//                    Integer.parseInt(newParameter.split(" ".trim())[1]),
-//                    Integer.parseInt(newParameter.split(" ".trim())[2]));
-//            case "43" -> unit.setEndLifeDate(Integer.parseInt(newParameter.split(" ".trim())[0]),
-//                    Integer.parseInt(newParameter.split(" ".trim())[1]),
-//                    Integer.parseInt(newParameter.split(" ".trim())[2]));
-//            case "44" -> unit.setGender(newParameter.equals("1") ? Gender.Female : Gender.Male);
-//            case "45" -> {
-//                if (tree.getPersonByName(newParameter) == null) {
-//                    System.out.printf("по ФИО %s не найден в дереве -> мама не добавлена\n", newParameter);
-//                } else { unit.setMother(tree.getPersonByName(newParameter)); }
-//            }
-//            case "46" -> {
-//                if (tree.getPersonByName(newParameter) == null) {
-//                    System.out.printf("по ФИО %s не найден в дереве -> папа не добавлен\n", newParameter);
-//                } else { unit.setFather(tree.getPersonByName(newParameter)); }
-//            }
-//            case "47" -> {
-//                if (tree.getPersonByName(newParameter) == null) {
-//                    System.out.printf("по ФИО %s не найден в дереве -> ребенок не добавлен\n", newParameter);
-//                } else { unit.setChildren(tree.getPersonByName(newParameter)); }
-//            }
-//            case "48" -> unit.setCommit(newParameter);
-//        }
-//        return unit.toString();
-//    }
-
-
-    public Boolean addToTree(String data, Gender gender) {
-//        tree.addPerson((T) new Person (fullName, birthY, birthM, birthD, gender));
-        return tree.addPersonStrData(data, gender);
-    }
-
-    public Boolean delFromTree(String data) {
-        return tree.delByName(data);
-    }
-
-    private String scan() {
-        return new Scanner(System.in).nextLine();
-    }
-
-    public Boolean setPeakByIndex(int index) {
-        T unit = tree.getPersonByIndex(index);
-        tree.setPeak(unit.getName());
-        if (unit.getGender() == Gender.Female) {
-            return tree.getPeakMother() == unit;
-        } else {
-            return tree.getPeakFather() == unit;
-        }
-    }
-
-    public String getPeakTree() {
-        T mother = tree.getPeakMother();
-        T father = tree.getPeakFather();
-        StringBuilder sb = new StringBuilder();
-        sb.append("Текущие \"главы:\"\n");
-        sb.append(mother != null ? mother.printShort(): "Пусто\n");
-        sb.append(father != null ? father.printShort(): "Пусто");
-        return sb.toString();
-    }
-
-    public Boolean saveTree(String option) {
-        if (option.equals("1")) {
-            Date date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
-            String fileName = format.format(date);
-            IOObject obj = new IOObject();
-            return obj.save(tree, "src/family_tree/in_out_files/"+fileName+".bin");
-        } else {
-            Date date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
-            String fileName = format.format(date);
-            IOByteArr byteArr = new IOByteArr();
-            return byteArr.save(tree, "src/family_tree/in_out_files/"+fileName+".txt");
-        }
-    }
-
-    public Boolean delTree() {
-        tree = new FamilyTree<>();
-        return tree.isEmpty();
-    }
-
-    public Boolean loadTree(String option, String filename) {
-        if (option.equals("1")) {
-            IOObject obj = new IOObject();
-            tree = (FamilyTree<T>) obj.read("src/family_tree/in_out_files/"+filename+".bin");
-            return tree == (FamilyTree<T>) obj.read("src/family_tree/in_out_files/"+filename+".bin");
-        } else {
-            IOByteArr byteArr = new IOByteArr();
-            tree = (FamilyTree<T>) byteArr.read("src/family_tree/in_out_files/"+filename+".txt");
-            return tree == (FamilyTree<T>) byteArr.read("src/family_tree/in_out_files/"+filename+".txt");
-        }
-    }
-
-    public FamilyTree<T> getNewTree() {
-        return new FamilyTree<>();
-    }
-
-    public int getTreeSize() {
-        return tree.getSize();
     }
 
     public String sortByName() {
@@ -193,6 +97,20 @@ public class Service<T extends FamilyTreeItem<T>> {
         return tree.toString();
     }
 
+    public Boolean addPersonToTree(String data) {
+        String fullName = data.split(",")[0];
+        int birthY = Integer.parseInt(data.split(",")[1]);
+        int birthM = Integer.parseInt(data.split(",")[2]);
+        int birthD = Integer.parseInt(data.split(",")[3]);
+        Gender gender = data.split(",")[4].equalsIgnoreCase("женский") ? Gender.Female : Gender.Male;
+        Person personToAdd = new Person(fullName, birthY, birthM, birthD, gender);
+        return tree.addPerson((T) personToAdd);
+    }
+
+    public Boolean delFromTree(String fullName) {
+        return tree.delByName(fullName);
+    }
+
     public Boolean setFullname(String itemIndex, String fullName) {
         int index = Integer.parseInt(itemIndex);
         T item = tree.getPersonByIndex(index);
@@ -210,14 +128,8 @@ public class Service<T extends FamilyTreeItem<T>> {
     public Boolean setDateEndlife(String itemIndex, int endlifeY, int endlifeM, int endlifeD) {
         int index = Integer.parseInt(itemIndex);
         T item = tree.getPersonByIndex(index);
-        item.setBirthDate(endlifeY, endlifeM, endlifeD);
-        return compareDates(endlifeY, endlifeM, endlifeD, item.getBirthDate());
-    }
-
-    public Boolean compareDates(int year, int month, int day, String dateFromTree) {
-        GregorianCalendar dateCompare = new GregorianCalendar(year, month - 1, day);
-        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
-        return df.format(dateCompare.getTime()).equals(dateFromTree);
+        item.setEndLifeDate(endlifeY, endlifeM, endlifeD);
+        return compareDates(endlifeY, endlifeM, endlifeD, item.getEndLifeDate());
     }
 
     public Boolean setGenderChange(String itemIndex, Gender gender) {
@@ -230,22 +142,37 @@ public class Service<T extends FamilyTreeItem<T>> {
     public Boolean setMother(String itemIndex, String motherName) {
         int index = Integer.parseInt(itemIndex);
         T item = tree.getPersonByIndex(index);
-        item.setMother(tree.getPersonByName(motherName));
-        return motherName.equals(item.getMother().getName());
+        T mother = tree.getPersonByName(motherName);
+        if (mother == null) {
+            return false;
+        } else {
+            item.setMother(mother);
+            return motherName.equals(item.getMother().getName());
+        }
     }
 
     public Boolean setFather(String itemIndex, String fatherName) {
         int index = Integer.parseInt(itemIndex);
         T item = tree.getPersonByIndex(index);
-        item.setMother(tree.getPersonByName(fatherName));
-        return fatherName.equals(item.getFather().getName());
+        T father = tree.getPersonByName(fatherName);
+        if (father == null) {
+            return false;
+        } else {
+            item.setFather(father);
+            return fatherName.equals(item.getFather().getName());
+        }
     }
 
     public Boolean setChild(String itemIndex, String childName) {
         int index = Integer.parseInt(itemIndex);
         T item = tree.getPersonByIndex(index);
-        item.setMother(tree.getPersonByName(childName));
-        return item.getChildren().contains(tree.getPersonByName(childName));
+        T child = tree.getPersonByName(childName);
+        if (child == null) {
+            return false;
+        } else {
+            item.setChildren(child);
+            return item.getChildren().contains(tree.getPersonByName(childName));
+        }
     }
 
     public Boolean setCommit(String itemIndex, String commit) {
@@ -254,7 +181,66 @@ public class Service<T extends FamilyTreeItem<T>> {
         return commit.equals(item.getCommit());
     }
 
+    public String getPeakTree() {
+        T mother = tree.getPeakMother();
+        T father = tree.getPeakFather();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Текущие \"главы:\"\n");
+        sb.append(mother != null ? mother.printShort(): "Пусто\n");
+        sb.append(father != null ? father.printShort(): "Пусто");
+        return sb.toString().substring(0,sb.length()-1);
+    }
+
+    public Boolean setPeakByIndex(int index) {
+        T unit = tree.getPersonByIndex(index);
+        tree.setPeak(unit.getName());
+        // проверка
+        if (unit.getGender() == Gender.Female) {
+            return tree.getPeakMother() == unit;
+        } else {
+            return tree.getPeakFather() == unit;
+        }
+    }
+
+    public Boolean saveTree(String option) {
+        if (option.equals("1")) {
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
+            String fileName = format.format(date);
+            IOObject obj = new IOObject();
+            return obj.save(tree, "src/family_tree/in_out_files/"+fileName+".bin");
+        } else {
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
+            String fileName = format.format(date);
+            IOByteArr byteArr = new IOByteArr();
+            return byteArr.save(tree, "src/family_tree/in_out_files/"+fileName+".txt");
+        }
+    }
+
+    public Boolean loadTree(String option, String filename) {
+        if (option.equals("1")) {
+            IOObject obj = new IOObject();
+            FamilyTree <T> loadedTree = (FamilyTree<T>) obj.read("src/family_tree/in_out_files/"+filename+".bin");
+            FamilyTree <T> oldTree = tree;
+            tree = loadedTree;
+            return oldTree != loadedTree;
+        } else {
+            IOByteArr byteArr = new IOByteArr();
+            FamilyTree <T> loadedTree = (FamilyTree<T>) byteArr.read("src/family_tree/in_out_files/"+filename+".txt");
+            FamilyTree <T> oldTree = tree;
+            tree = loadedTree;
+            return oldTree != loadedTree;
+        }
+    }
+
+    public Boolean delTree() {
+        tree = new FamilyTree<>();
+        return tree.isEmpty();
+    }
+
     public void exit() {
         System.exit(0);
     }
+
 }

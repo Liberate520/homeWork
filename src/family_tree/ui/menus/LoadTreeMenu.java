@@ -22,11 +22,11 @@ public class LoadTreeMenu {
             sb.append(commandsList.get(i).getDescription());
             sb.append("\n");
         }
-        System.out.println(sb.toString());
+        System.out.println(sb.substring(0,sb.length()-1));
     }
 
     public void execute(int option, String data) {
-        Command command = commandsList.get(option - 1);
+        Command command = commandsList.get(option);
         command.execute(data);
     }
 

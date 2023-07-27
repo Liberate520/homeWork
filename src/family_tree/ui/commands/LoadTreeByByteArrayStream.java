@@ -3,14 +3,10 @@ package family_tree.ui.commands;
 import family_tree.ui.ConsoleView;
 
 public class LoadTreeByByteArrayStream extends Command {
+
     public LoadTreeByByteArrayStream(ConsoleView consoleView) {
         super(consoleView);
-        description = "C помощью класса ObjectOutputStream";
-    }
-
-    @Override
-    public String getDescription() {
-        return super.getDescription();
+        description = "C помощью класса ByteArrayInputStream";
     }
 
     @Override

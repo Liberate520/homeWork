@@ -2,18 +2,19 @@ package family_tree.ui.menus;
 
 import family_tree.ui.ConsoleView;
 import family_tree.ui.commands.Command;
-import family_tree.ui.commands.change_item_parameter.*;
+import family_tree.ui.commands.SetGenderFemale;
+import family_tree.ui.commands.SetGenderMale;
+import family_tree.ui.commands.SetPerson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenderMenu {
+public class ChooseItemClassMenu {
     private List<Command> commandsList;
 
-    public GenderMenu(ConsoleView consoleView) {
+    public ChooseItemClassMenu(ConsoleView consoleView) {
         commandsList = new ArrayList<>();
-        commandsList.add(new SetGenderFemale(consoleView));
-        commandsList.add(new SetGenderMale(consoleView));
+        commandsList.add(new SetPerson(consoleView));
     }
 
     public void show() {
@@ -23,11 +24,11 @@ public class GenderMenu {
             sb.append(commandsList.get(i).getDescription());
             sb.append("\n");
         }
-        System.out.println(sb);
+        System.out.println(sb.substring(0,sb.length()-1));
     }
 
     public void execute(int option, String data) {
-        Command command = commandsList.get(option - 1);
+        Command command = commandsList.get(option);
         command.execute(data);
     }
 

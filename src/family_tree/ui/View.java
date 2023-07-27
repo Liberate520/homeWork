@@ -10,5 +10,6 @@ public interface View {
     void print(String text);
     void setPresenter(Presenter presenter);
     Presenter getPresenter();
+    public void repeatLine();
 
 }

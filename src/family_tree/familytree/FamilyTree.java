@@ -33,21 +33,18 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable, It
         return allPeople.contains(person);
     }
 
-    public boolean addPersonStrData(String data, Gender gender) {
-        if (allPeople == null) {
-            allPeople = new ArrayList<>();
-        }
-        String fullName = data.split(",")[0];
-        int birthY = Integer.parseInt(data.split(",")[1].split(" ")[0]);
-        int birthM = Integer.parseInt(data.split(",")[1].split(" ")[1]);
-        int birthD = Integer.parseInt(data.split(",")[1].split(" ")[2]);
-        T person = this.getPersonByName(fullName).createItem(fullName, birthY, birthM, birthD, gender);
-//        person.setFullname(fullName);
-//        person.setBirthDate(birthY, birthM, birthD);
-//        person.setGender(gender);
-        allPeople.add(person);
-        return allPeople.contains(person);
-    }
+//    public boolean addPersonStrData(String data, Gender gender) {
+//        if (allPeople == null) {
+//            allPeople = new ArrayList<>();
+//        }
+//        String fullName = data.split(",")[0];
+//        int birthY = Integer.parseInt(data.split(",")[1].split(" ")[0]);
+//        int birthM = Integer.parseInt(data.split(",")[1].split(" ")[1]);
+//        int birthD = Integer.parseInt(data.split(",")[1].split(" ")[2]);
+//        T person = (T) new FamilyTreeItem<> (fullName, birthY, birthM, birthD, gender);
+//        allPeople.add(person);
+//        return allPeople.contains(person);
+//    }
 
 //    public T getInstanceOfT(Class<T> aClass) throws InstantiationException, IllegalAccessException {
 //        return aClass.newInstance();
@@ -79,13 +76,13 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable, It
             sb.append(" л.(г.)");
             sb.append("\n");
         }
-        return sb.substring(0,sb.length()-1);
+        return sb.toString().substring(0, sb.length()-1);
     }
 
     public void setPeak(String name) {
         for (T person : this) {
             if (person.getName().equalsIgnoreCase(name))
-                if (person.getGender()== Gender.Female) {
+                if (person.getGender() == Gender.Female) {
                     this.peakMother = person;
                 } else {
                     this.peakFather = person;
@@ -154,18 +151,17 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable, It
         Collections.sort(this.allPeople,new PersonComparatorByChildrenReverse<>());
     }
 
-    public boolean delByName(String name) {
-        T person = this.getPersonByName(name);
+    public boolean delByName(String fullName) {
+        T person = this.getPersonByName(fullName);
         return this.allPeople.remove(person);
     }
-
 
 
     public int getSize() {
         return this.allPeople.size();
     }
 
-    public List<T> getAllItems() {
+    public List<T> getItemsList() {
         return this.allPeople;
     }
 

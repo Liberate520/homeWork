@@ -1,26 +1,20 @@
 package family_tree.ui.menus;
 
 import family_tree.ui.ConsoleView;
-import family_tree.ui.commands.*;
-import family_tree.ui.commands.ChangeItemParameter;
+import family_tree.ui.commands.Command;
+import family_tree.ui.commands.SetGenderFemale;
+import family_tree.ui.commands.SetGenderMale;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu{
+public class GenderMenuAdd {
     private List<Command> commandsList;
 
-    public MainMenu(ConsoleView consoleView) {
+    public GenderMenuAdd(ConsoleView consoleView) {
         commandsList = new ArrayList<>();
-        commandsList.add(new OutputConsole(consoleView));
-        commandsList.add(new AddToTree(consoleView));
-        commandsList.add(new DelFromTree(consoleView));
-        commandsList.add(new ChangeItemParameter(consoleView));
-        commandsList.add(new SetTreePeakByIndex(consoleView));
-        commandsList.add(new SaveTree(consoleView));
-        commandsList.add(new LoadTree(consoleView));
-        commandsList.add(new DelTree(consoleView));
-        commandsList.add(new Exit(consoleView));
+        commandsList.add(new SetGenderFemale(consoleView));
+        commandsList.add(new SetGenderMale(consoleView));
     }
 
     public void show() {
