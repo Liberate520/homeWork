@@ -5,15 +5,19 @@ import person.Person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Person> {
+    private int personsId;
     private List<Person> familyTree = new ArrayList<>();
 
     public boolean add(Person person) {
         if (person == null) return false;
         if (!familyTree.contains(person)) {
             familyTree.add(person);
+            person.setId(personsId++);
 
             addToParents(person);
             addToChildren(person);
@@ -38,6 +42,14 @@ public class FamilyTree implements Serializable {
         }
     }
 
+    public void sortByName(){
+        familyTree.sort(new PersonComparatorByName());
+    }
+
+    public void sortByAge(){
+        familyTree.sort(new PersonComparatorByAge());
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -46,4 +58,10 @@ public class FamilyTree implements Serializable {
         }
         return result.toString();
     }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(familyTree);
+    }
+
 }
