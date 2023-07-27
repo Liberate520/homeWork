@@ -64,11 +64,14 @@ public class HumanTree implements Serializable {
 
     public String saveToFile(String aFileName)   throws IOException, ClassNotFoundException   {
          //Сериализация в файл с помощью класса ObjectOutputStream
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(aFileName));
+        ObjIO aIO = new ObjIO();
+        aIO.writeFile(aFileName, (Serializable) fHumensTree);
+         
+        // ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+        //         new FileOutputStream(aFileName));
         
-        objectOutputStream.writeObject(fHumensTree);
-        objectOutputStream.close();
+        // objectOutputStream.writeObject(fHumensTree);
+        // objectOutputStream.close();
         
         fFileName = aFileName;
         return "HumanTree save to " + aFileName;
@@ -77,12 +80,9 @@ public class HumanTree implements Serializable {
     public List <Human> loadFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
         List <Human> aHT;
         // Востановление из файла с помощью класса ObjectInputStream
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(aFileName));
-                
-        aHT = (List <Human>) objectInputStream.readObject();
+        ObjIO aIO = new ObjIO();
+        aHT = (List <Human>) aIO.readFile(aFileName);
         fHumensTree = aHT;
-        objectInputStream.close();
         fFileName = aFileName;
         return aHT;
     }
@@ -90,20 +90,12 @@ public class HumanTree implements Serializable {
     public List <Human> addFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
         List <Human> aHT;
         // Востановление из файла с помощью класса ObjectInputStream
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(aFileName));
-                
-        aHT = (List <Human>) objectInputStream.readObject();
-        objectInputStream.close();
-        fFileName = aFileName;
-        
+        ObjIO aIO = new ObjIO();
+        aHT = (List <Human>) aIO.readFile(aFileName);
         for (Human h: aHT){
             this.addHuman(h);
-            // if(!fHumensTree.contains(h)){  // only unigue aHumen !!!  ???
-            //     fHumensTree.add(h);
-            // }
-        }  // fHumensTree.addAll(aHumensTree); // test only unigue ???
-        
+        }  
+        fFileName = aFileName;
         return fHumensTree;
     }
     

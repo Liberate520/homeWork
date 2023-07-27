@@ -1,10 +1,6 @@
-// https://gb.ru/lessons/344116
-
 import java.util.ArrayList;
 import java.util.List;
-// import java.util.Set;
-import java.time.LocalDate;   
-
+import java.time.LocalDate;
 import java.io.*; // Serializable
 
 public class Human implements Serializable {
@@ -15,7 +11,6 @@ public class Human implements Serializable {
     private LocalDate fbirthDay, fdeathDay; // день рождения, дата смерти
     // https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html
     private Gender fGender; // пол
-    
     
     public Human(String aName, Gender aGender, LocalDate aBirthDay) {
         this.fName = aName;

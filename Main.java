@@ -77,7 +77,7 @@ public class Main
 		System.out.println("h1_ + h2_ + h3_ + h4_ :\n");
 		System.out.println(h1_ + "\n" + h2_ + "\n" + h3_ + "\n" + h4_);
 		
-		System.out.println(h2_.getChilds());
+// 		System.out.println(h2_.getChilds());
 		
 		// test "HumanTree.log";
 		
@@ -124,31 +124,32 @@ public class Main
     
     public static void saveToFile(String aFileName) throws IOException, ClassNotFoundException  {
         
-         //Сериализация в файл с помощью класса ObjectOutputStream
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(aFileName));
+        //Сериализация в файл с помощью класса ObjectOutputStream
+        ObjIO aIO = new ObjIO();
+        aIO.writeFile(aFileName, h1);
+        // aIO.writeFile(aFileName, h2);
+        // aIO.writeFile(aFileName, h3);
+        // aIO.writeFile(aFileName, h4);
 
-        objectOutputStream.writeObject(h1);                
-        objectOutputStream.writeObject(h2); 
-        objectOutputStream.writeObject(h3); 
-        objectOutputStream.writeObject(h4); 
-        objectOutputStream.close();
     }
     
     public static void loadFromFile(String aFileName) throws IOException, ClassNotFoundException {
         // Востановление из файла с помощью класса ObjectInputStream
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(aFileName));
-        h1_ = (Human)  objectInputStream.readObject();
-        h2_ = (Human)  objectInputStream.readObject();        
-        h3_ = (Human)  objectInputStream.readObject();
-        h4_ = (Human)  objectInputStream.readObject();
+        ObjIO aIO = new ObjIO();
+        h1_ = (Human) aIO.readFile(aFileName);
+        
+        // ObjectInputStream objectInputStream = new ObjectInputStream(
+        //         new FileInputStream(aFileName));
+        // h1_ = (Human)  objectInputStream.readObject();
+        // // h2_ = (Human)  objectInputStream.readObject();        
+        // // h3_ = (Human)  objectInputStream.readObject();
+        // // h4_ = (Human)  objectInputStream.readObject();
 
-        objectInputStream.close();
+        // objectInputStream.close();
         
         System.out.println(" !!! loadFromFile getChilds !!! ");
         System.out.println(h1_.getChilds());
-		System.out.println(h2_.getChilds());
+// 		System.out.println(h2_.getChilds());
     }
     
 }
