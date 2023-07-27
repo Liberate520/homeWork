@@ -1,7 +1,7 @@
 
 import family_tree.FamilyTree;
-import family_tree.Gender;
-import family_tree.Human;
+import human.Gender;
+import human.Human;
 import writter.FileHandler;
 
 import java.time.LocalDate;
@@ -21,11 +21,14 @@ public class Main {
         Human semyon = new Human("Семен", Gender.Male, LocalDate.of(1991,1,25),LocalDate.now(), ivan, varvara);
         familyTree.addHuman(chritina);
         familyTree.addHuman(semyon);
-//        System.out.println(familyTree);
+        System.out.println(familyTree);
 //        fileHandler.save(familyTree,filePath);
-          FileHandler fileHandler1 = new FileHandler();
-          FamilyTree read = (FamilyTree)fileHandler.read(filePath);
-        System.out.println(read);
-
+//          FileHandler fileHandler1 = new FileHandler();
+////          FamilyTree read = (FamilyTree)fileHandler.read(filePath);
+//        System.out.println(read);
+        familyTree.sortByName();
+        System.out.println(familyTree);
+        familyTree.sortByDateofBirth();
+        System.out.println(familyTree);
     }
 }

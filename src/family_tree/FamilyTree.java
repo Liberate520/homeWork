@@ -1,9 +1,12 @@
 package family_tree;
 
+import human.Human;
+import human.comparator.ComparatorSortByDateOfBirth;
+import human.comparator.ComparatorSortByName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
 
 public class FamilyTree implements Serializable {
     private int id;
@@ -88,4 +91,11 @@ public class FamilyTree implements Serializable {
 
     @Override
     public String toString(){return getInfo();}
+
+    public void sortByName(){
+        humanList.sort(new ComparatorSortByName());
+    }
+    public void sortByDateofBirth(){
+        humanList.sort(new ComparatorSortByDateOfBirth());
+    }
 }

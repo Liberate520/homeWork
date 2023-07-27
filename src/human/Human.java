@@ -1,4 +1,4 @@
-package family_tree;
+package human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -52,10 +52,10 @@ public class Human implements Serializable {
     public Gender getGender() {
         return gender;
     }
-    public LocalDate setDateOfBirth(LocalDate dateOfBirth){
+    public LocalDate getDateOfBirth(){
         return dateOfBirth;
     }
-    public LocalDate getDateOfDeath(LocalDate dateOfDeath){
+    public LocalDate getDateOfDeath(){
         return dateOfDeath;
     }
     public int getAge(){
@@ -145,6 +145,7 @@ public class Human implements Serializable {
         }
         return res.toString();
     }
+
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");
@@ -153,6 +154,8 @@ public class Human implements Serializable {
         sb.append(name);
         sb.append(", пол: ");
         sb.append(getGender());
+        sb.append(", дата рождения: ");
+        sb.append(getDateOfBirth());
         sb.append(", возраст: ");
         sb.append(getAge());
         sb.append(", ");
