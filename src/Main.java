@@ -10,11 +10,11 @@ public class Main {
         String filePath = "src/family_tree/data/tree.out";
         FileHandler fileHandler = new FileHandler();
 
-//        FamilyTree familyTree = TreeInitiate();
-//        fileHandler.save(familyTree, filePath);
+        FamilyTree familyTree = TreeInitiate();
+        fileHandler.save(familyTree, filePath);
 
-        FamilyTree familyTree = (FamilyTree) fileHandler.read(filePath);
-        System.out.println(familyTree);
+//        FamilyTree familyTree = (FamilyTree) fileHandler.read(filePath);
+//        System.out.println(familyTree);
 
     }
     static FamilyTree TreeInitiate(){
@@ -25,16 +25,18 @@ public class Main {
         Person person4 = new Person("Maxim", "Ivanov", Gender.Male, LocalDate.of(1985, 5, 29), person1, person2);
         Person person5 = new Person("Petr", "Petrov", Gender.Male, LocalDate.of(1965, 2, 12));
 
-        familyTree.addPerson(person1);
-        familyTree.addPerson(person2);
-        familyTree.addPerson(person3);
-        familyTree.addPerson(person4);
-        familyTree.addPerson(person5);
+        familyTree.add(person1);
+        familyTree.add(person2);
+        familyTree.add(person3);
+        familyTree.add(person4);
+        familyTree.add(person5);
 
-//        System.out.println(person1.getChildren());
-//        System.out.println(person3.getBirthDate());
-//        System.out.println(person3.getMother());
-//        System.out.println(person2.getMother());
+        System.out.println(familyTree);
+        System.out.println("____________________________");
+        System.out.println(person1.getChildren());
+        System.out.println(person3.getBirthDate());
+        System.out.println(person3.getMother());
+        System.out.println(person2.getMother());
 
         return familyTree;
     }
