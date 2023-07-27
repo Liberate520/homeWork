@@ -1,48 +1,61 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+// import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Comparator;
+import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humans;
+public class FamilyTree<T extends Serializable> implements Serializable, Iterable<T> {
+    private List<T> elements;
 
     public FamilyTree() {
-        humans = new ArrayList<>();
+        elements = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
-        humans.add(human);
+    public void addElement(T element) {
+        elements.add(element);
     }
 
-    public Human findHumanByName(String name) {
-        for (Human human : humans) {
-            if (human.getFirstName().equals(name) || human.getLastName().equals(name)) {
-                return human;
+    public void addHuman(T human) {
+        elements.add(human);
+    }
+
+    public T findElementByName(String name) {
+        for (T element : elements) {
+            if (element instanceof Human) {
+                Human human = (Human) element;
+                if (human.getFirstName().equals(name) || human.getLastName().equals(name)) {
+                    return element;
+                }
             }
         }
         return null;
     }
 
-    public Human findHumanByFullName(String fullName) {
-        for (Human human : humans) {
-            String fullNameFromHuman = human.getFirstName() + " " + human.getLastName();
-            if (fullNameFromHuman.equals(fullName)) {
-                return human;
+    public T findElementByFullName(String fullName) {
+        for (T element : elements) {
+            if (element instanceof Human) {
+                Human human = (Human) element;
+                String fullNameFromHuman = human.getFirstName() + " " + human.getLastName();
+                if (fullNameFromHuman.equals(fullName)) {
+                    return element;
+                }
             }
         }
         return null;
     }
 
-    public List<Human> getAllFamilyMembers() {
-        return humans;
+    public List<T> getAllElements() {
+        return elements;
     }
 
     public List<Human> getChildrenOfFather(Human father) {
         List<Human> children = new ArrayList<>();
-        for (Human human : humans) {
-            if (human.getFather() != null && human.getFather().equals(father)) {
-                children.add(human);
+        for (T element : elements) {
+            if (element instanceof Human) {
+                Human human = (Human) element;
+                if (human.getFather() != null && human.getFather().equals(father)) {
+                    children.add(human);
+                }
             }
         }
         return children;
@@ -50,24 +63,37 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public List<Human> getChildrenOfMother(Human mother) {
         List<Human> children = new ArrayList<>();
-        for (Human human : humans) {
-            if (human.getMother() != null && human.getMother().equals(mother)) {
-                children.add(human);
+        for (T element : elements) {
+            if (element instanceof Human) {
+                Human human = (Human) element;
+                if (human.getMother() != null && human.getMother().equals(mother)) {
+                    children.add(human);
+                }
             }
         }
         return children;
     }
 
-    public Iterator<Human> iterator() {
-        return humans.iterator();
+    public Iterator<T> iterator() {
+        return elements.iterator();
     }
 
     public void sortByFirstName() {
-        humans.sort(Comparator.comparing(Human::getFirstName));
+        elements.sort((o1, o2) -> {
+            if (o1 instanceof Human && o2 instanceof Human) {
+                return ((Human) o1).getFirstName().compareTo(((Human) o2).getFirstName());
+            }
+            return 0;
+        });
     }
 
     public void sortByBirthDate() {
-        humans.sort(Comparator.comparing(Human::getBirthDate));
+        elements.sort((o1, o2) -> {
+            if (o1 instanceof Human && o2 instanceof Human) {
+                return ((Human) o1).getBirthDate().compareTo(((Human) o2).getBirthDate());
+            }
+            return 0;
+        });
     }
 }
 

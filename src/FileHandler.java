@@ -1,9 +1,9 @@
 import java.io.*;
 
-public class FileHandler implements FileIO {
-    private FamilyTree familyTree;
+public class FileHandler<T extends Serializable> implements FileIO {
+    private FamilyTree<T> familyTree;
 
-    public FileHandler(FamilyTree familyTree) {
+    public FileHandler(FamilyTree<T> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -14,14 +14,15 @@ public class FileHandler implements FileIO {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void loadFromFile(String filename) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            familyTree = (FamilyTree) ois.readObject();
+            familyTree = (FamilyTree<T>) ois.readObject();
         }
     }
 
-    public FamilyTree getFamilyTree() {
+    public FamilyTree<T> getFamilyTree() {
         return familyTree;
     }
 }

@@ -1,5 +1,5 @@
-import java.util.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.io.IOException;
 
 public class Main {
@@ -29,14 +29,14 @@ public class Main {
         System.out.println(relationship4);
 
         // Создаем FamilyTree и добавляем людей
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         familyTree.addHuman(father);
         familyTree.addHuman(mother);
         familyTree.addHuman(child1);
         familyTree.addHuman(child2);
 
         // Сохраняем FamilyTree в файл
-        FileHandler fileHandler = new FileHandler(familyTree);
+        FileHandler<Human> fileHandler = new FileHandler<>(familyTree);
         try {
             fileHandler.saveToFile("family_tree_data.ser");
         } catch (IOException e) {
@@ -44,8 +44,8 @@ public class Main {
         }
 
         // Чтение FamilyTree из файла
-        FamilyTree loadedFamilyTree = new FamilyTree();
-        FileHandler loadedFileHandler = new FileHandler(loadedFamilyTree);
+        FamilyTree<Human> loadedFamilyTree = new FamilyTree<>();
+        FileHandler<Human> loadedFileHandler = new FileHandler<>(loadedFamilyTree);
         try {
             loadedFileHandler.loadFromFile("family_tree_data.ser");
         } catch (IOException | ClassNotFoundException e) {
