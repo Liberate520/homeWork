@@ -1,12 +1,14 @@
 package Human;
 
+import FamilyTree.FamilyTree.EntityItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, EntityItem<Human>{
     private String name;
     private List<Human> children;
     private Gender gender;
@@ -71,7 +73,7 @@ public class Human implements Serializable{
         this.deathDate = deathDate;
     }
 
-    private int getPeriod(LocalDate birthday, LocalDate deathDate) {
+    public int getPeriod(LocalDate birthday, LocalDate deathDate) {
         Period diff = Period.between(birthday, deathDate);
         return diff.getYears();
     }

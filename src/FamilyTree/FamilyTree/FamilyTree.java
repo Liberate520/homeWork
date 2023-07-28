@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> familyTree;
+public class FamilyTree<E extends EntityItem> implements Serializable, Iterable<E> {
+    private List<E> familyTree;
 
     public FamilyTree() {
         familyTree = new ArrayList<>();
     }
 
-    public void addToList(Human human) {
+    public void addToList(E human) {
         familyTree.add(human);
     }
 
     public void findByName(String name) {
         boolean flag = false;
-        for (Human member : familyTree) {
+        for (E member : familyTree) {
             if (member.getName().equalsIgnoreCase(name)) {
                 flag = true;
                 System.out.println(member);
@@ -35,7 +35,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public String getInfoFamilyTree() {
         StringBuilder info = new StringBuilder();
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             info.append(human);
             int length = human.getInfo().length();
             info.append("\n");
@@ -50,8 +50,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyMemberIterator(familyTree);
+    public Iterator<E> iterator() {
+        return new FamilyMemberIterator<>(familyTree);
     }
 
     public void sortByName() {

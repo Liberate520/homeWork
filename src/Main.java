@@ -1,4 +1,5 @@
 import FamilyTree.FamilyTree.FamilyTree;
+import FileHandler.HandleFile;
 import Human.Human;
 import Human.Gender;
 import Human.Status;
@@ -51,7 +52,7 @@ public class Main {
         human3.setChild(human7);
         human6.setChild(human8);
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree();
 
         familyTree.addToList(human1);
         familyTree.addToList(human2);
@@ -62,14 +63,15 @@ public class Main {
         familyTree.addToList(human7);
         familyTree.addToList(human8);
 
-//        HandleFile handleFile = new HandleFile();
-//        String filePath = "src/date/fileText.txt";
-//        handleFile.writeToFile(familyTree, filePath);
 
-//        FamilyTree restoredFamilyTree = handleFile.readFromFile(filePath);
+        HandleFile handleFile = new HandleFile();
+        String filePath = "src/date/fileText.txt";
+        handleFile.writeToFile(familyTree, filePath);
 
-//        System.out.println(restoredFamilyTree.getInfoFamilyTree());
-//        System.out.println(familyTree.getInfoFamilyTree());
+        FamilyTree<Human> restoredFamilyTree = handleFile.readFromFile(filePath);
+
+        System.out.println(restoredFamilyTree.getInfoFamilyTree());
+        System.out.println(familyTree.getInfoFamilyTree());
         System.out.println(familyTree.getInfoFamilyTree());
         familyTree.sortByAge();
         System.out.println(familyTree.getInfoFamilyTree());
