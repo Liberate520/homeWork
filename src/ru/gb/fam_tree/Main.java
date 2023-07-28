@@ -25,9 +25,6 @@ public class Main {
         mother.setChildrens(childrens);
         father.setChildrens(childrens);
 
-        son.printRelativesList(son);
-        olderDaughter.printRelativesList(olderDaughter);
-        youngerDougher.printRelativesList(youngerDougher);
-
+        father.printChildrens(father);
     }
 }

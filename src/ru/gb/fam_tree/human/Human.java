@@ -58,21 +58,19 @@ public class Human {
         return firstName;
     }
 
-    public void printRelativesList(Human human){
-        StringBuilder result = new StringBuilder();
+    public void printChildrens(Human human){
         int temp = 0;
-        for(Human i : father.getChildrens()) {
-            if(!(i.getFirstName().equals(human.getFirstName()))){
-                if(temp == 0){
-                    result.append(i.getFirstName());
-                    temp++;
-                }
-                else {
-                    result.append(", "+ i.getFirstName());
-                }
+        StringBuilder names = new StringBuilder();
+        for(Human i: human.getChildrens()){
+            if(temp == 0){
+                names.append(i.getFirstName());
+                temp++;
+            }
+            else {
+                names.append(", " + i.getFirstName());
             }
         }
-        String res = String.format("%s's sister(s) and/or brother(s): %s", human.getFirstName(), result);
+        String res = String.format("%s's childrens: %s", human.getFirstName(), names);
         System.out.println(res);
     }
 }
