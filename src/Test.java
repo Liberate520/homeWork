@@ -33,12 +33,12 @@ public class Test {
         // Выводим на экран
         service.getInfo();
 //        service.sortByName();
-//        service.sortByAge();
+        service.sortByAge();
 //        service.sortByGender();
         System.out.println();
-//        service.getInfo();
+        service.getInfo();
         // Проверка сохранения и загрузки
-        service.saveTree("./src/savedFiles/TreeOfHumans.bin");
-        System.out.println(service.loadTree("./src/savedFiles/TreeOfHumans.bin"));
+//        service.saveTree("./src/savedFiles/TreeOfHumans.bin");
+//        System.out.println(service.loadTree("./src/savedFiles/TreeOfHumans.bin"));
     }
 }

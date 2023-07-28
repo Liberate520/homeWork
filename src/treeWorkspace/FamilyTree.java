@@ -2,7 +2,8 @@ package treeWorkspace;
 
 
 import enums.Gender;
-import interfaces.TreeItem;
+import treeComparators.ComparatorByAge;
+import treeComparators.ComparatorByGender;
 
 
 import java.io.Serializable;
@@ -34,21 +35,12 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     }
 
     public void sortByAge() {
-        Collections.sort(familyTree, Comparator.comparingInt(TreeItem::getAge));
+        Collections.sort(familyTree, new ComparatorByAge<>());
     }
 
     public void sortByGender() {
-        Collections.sort(familyTree, (p1, p2) -> {
-            if (p1.getGender().equals(p2.getGender())) {
-                return 0;
-            } else if (p1.getGender().equals(Gender.Male)
-                    && p2.getGender().equals(Gender.Female)) {
-                return 1;
-            }
-            return -1;
-        });
+        Collections.sort(familyTree, new ComparatorByGender<>());
     }
-
     @Override
     public String toString() {
         var sb = new StringBuilder();

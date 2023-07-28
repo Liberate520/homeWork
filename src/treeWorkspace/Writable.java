@@ -1,4 +1,4 @@
-package interfaces;
+package treeWorkspace;
 
 import treeWorkspace.FamilyTree;
 

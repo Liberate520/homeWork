@@ -1,4 +1,4 @@
-package interfaces;
+package treeWorkspace;
 
 import enums.Gender;
 import treeWorkspace.Person;

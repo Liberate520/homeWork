@@ -1,8 +1,5 @@
 package treeWorkspace;
 
-import interfaces.TreeItem;
-import interfaces.Writable;
-
 import java.io.*;
 
 public class TreeLoader implements Writable {

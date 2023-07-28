@@ -1,7 +1,6 @@
 package treeWorkspace;
 
 import enums.Gender;
-import interfaces.TreeItem;
 
 import java.time.LocalDate;
 
