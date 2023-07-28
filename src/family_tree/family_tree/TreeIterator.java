@@ -5,21 +5,22 @@ import family_tree.human.Human;
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeIterator implements Iterator<Human> {
+public class TreeIterator <E extends TreeNode<E>>implements Iterator<E> {
     private int index;
-    private List<Human> humanList;
+    private List<E> list;
 
-    public TreeIterator(List<Human> humanList){
-        this.humanList = humanList;
+    public TreeIterator(List<E> list){
+        this.list = list;
+        index = 0;
     }
 
     @Override
     public boolean hasNext() {
-        return humanList.size() > index;
+        return list.size() > index;
     }
 
     @Override
-    public Human next() {
-        return humanList.get(index++);
+    public E next() {
+        return list.get(index++);
     }
 }

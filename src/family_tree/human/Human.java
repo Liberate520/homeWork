@@ -1,12 +1,14 @@
 package family_tree.human;
 
+import family_tree.family_tree.TreeNode;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeNode<Human> {
     private long id;
     private String name;
     private Gender gender;
@@ -47,7 +49,7 @@ public class Human implements Serializable {
         return false;
     }
 
-    public boolean addParent(Human parent){
+    public boolean addParents(Human parent){
         if (!parents.contains(parent)){
             parents.add(parent);
             return true;
@@ -91,10 +93,10 @@ public class Human implements Serializable {
     public String getName(){return name;}
     public void setGender(){this.gender = gender;}
     public Gender getGender(){return gender;}
-    public void setBirthData(LocalDate birthData){this.birthData = birthData;}
-    public LocalDate getBirthData(){return birthData;}
-    public void setDeadData(LocalDate deadData){this.deadData = deadData;}
-    public LocalDate getDeadData(){return deadData;}
+    public void setBirthDate(LocalDate birthData){this.birthData = birthData;}
+    public LocalDate getBirthDate(){return birthData;}
+    public void setDeadDate(LocalDate deadData){this.deadData = deadData;}
+    public LocalDate getDeadDate(){return deadData;}
     public List<Human> getParents(){return parents;}
     public List<Human> getChildren(){return children;}
 

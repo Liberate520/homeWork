@@ -1,20 +1,22 @@
 package family_tree.family_tree;
 
-import family_tree.human.Human;
+import family_tree.human.comporators.HumanComparatorByAge;
+import family_tree.human.comporators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree <E extends TreeNode<E>>implements Serializable, Iterable<E>{
     private long humansId;
-    private List<Human> humanList;
+    private List<E> humanList;
 
-    public FamilyTree(List<Human> humanList){this.humanList = humanList;}
+    public FamilyTree(List<E> humanList){this.humanList = humanList;}
 
     public  FamilyTree(){this(new ArrayList<>());}
 
-    public boolean add(Human human){
+    public boolean add(E human){
         if (human == null){
             return false;
         }
@@ -28,21 +30,21 @@ public class FamilyTree implements Serializable {
         return false;
     }
 
-    private void addToParents(Human human){
-        for (Human parent: human.getParents()){
+    private void addToParents(E human){
+        for (E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human){
-        for (Human child: human.getChildren()){
-            child.addParent(human);
+    private void addToChildren(E human){
+        for (E child: human.getChildren()){
+            child.addParents(human);
         }
     }
 
-    public List<Human> getByName(String name){
-        List<Human> res = new ArrayList<>();
-        for (Human human: humanList){
+    public List<E> getByName(String name){
+        List<E> res = new ArrayList<>();
+        for (E human: humanList){
             if (human.getName().equalsIgnoreCase(name)){
                 res.add(human);
             }
@@ -50,14 +52,14 @@ public class FamilyTree implements Serializable {
         return res;
     }
 
-    public List<Human> getSiblings(String name){
-        Human human = (Human) getByName(name);
+    public List<E> getSiblings(String name){
+        E human = (E) getByName(name);
         if (human == null){
             return null;
         }
-        List<Human> res = new ArrayList<>();
-        for (Human parent: human.getParents()){
-            for (Human child: parent.getChildren()){
+        List<E> res = new ArrayList<>();
+        for (E parent: human.getParents()){
+            for (E child: parent.getChildren()){
                 if (!child.equals(human)){
                     res.add(child);
                 }
@@ -70,7 +72,7 @@ public class FamilyTree implements Serializable {
         if (id >= humansId || id < 0){
             return false;
         }
-        for (Human human: humanList){
+        for (E human: humanList){
             if (human.getId() == id){
                 return true;
             }
@@ -78,8 +80,8 @@ public class FamilyTree implements Serializable {
         return false;
     }
 
-    public Human getById(long id){
-        for (Human human: humanList){
+    public E getById(long id){
+        for (E human: humanList){
             if (human.getId() == id){
                 return human;
             }
@@ -89,7 +91,7 @@ public class FamilyTree implements Serializable {
 
     public boolean remove(long humansId){
         if (cheekId(humansId)){
-            Human del = getById(humansId);
+            E del = getById(humansId);
             return humanList.remove(del);
         }
         return false;
@@ -100,7 +102,7 @@ public class FamilyTree implements Serializable {
         str.append("в древе ");
         str.append(humanList.size());
         str.append(" объектов: \n");
-        for (Human human: humanList){
+        for (E human: humanList){
             str.append(human);
             str.append("\n");
         }
@@ -111,4 +113,19 @@ public class FamilyTree implements Serializable {
     public String toString() {
         return getInfo();
     }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new TreeIterator<>(humanList);
+    }
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName<>());
+    }
+
+    public void sortByAge(){
+        humanList.sort(new HumanComparatorByAge<>());
+    }
 }
+
+
