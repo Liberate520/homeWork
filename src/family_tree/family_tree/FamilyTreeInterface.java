@@ -1,2 +1,4 @@
-package family_tree.family_tree;public interface FamilyTreeInterface {
+package family_tree.family_tree;
+
+public interface FamilyTreeInterface {
 }
