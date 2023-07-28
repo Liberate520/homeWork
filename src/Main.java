@@ -2,50 +2,46 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import Enum.Gender;
+import Enum.Kinship;
+
+import Servis.Service;
+
+
 public class Main {
    public static void main(String[] args) throws FileNotFoundException, IOException {
-       
-      FamilyTree familyTree = new FamilyTree(123);
+      Service service=new Service();
+      service.addHuman("Алексей",Gender.male,LocalDate.of(1979, 5, 22), null, null, null);
+      service.addHuman("Фаина",Gender.female,LocalDate.of(1949,1,13), null, null, null);
+      service.addHuman("Ольга", Gender.female,LocalDate.of(1980, 9, 28), null, null, null);
+      service.addHuman("Антон", Gender.male , LocalDate.of(2001, 12, 11), null, null, null);
+      //System.out.println(service.getInfo());
       
-      Human human=new Human("Алексей",Gender.male,LocalDate.of(1979, 05, 22));
-      Human human1=new Human("Сергей", Gender.male,LocalDate.of(2023, 06, 04));
-      Human human2=new Human("Антон",Gender.male, LocalDate.of(2023, 06, 04));
+      service.addKinship(0,Kinship.child,1);
+      service.addKinship(1,Kinship.parent,0);
+      service.addKinship(3,Kinship.child,0);
+      service.addKinship(0,Kinship.parent,3);
+      service.addKinship(2,Kinship.parent,3);
+      service.addKinship(3,Kinship.child,2);
 
-      Human human3=new Human("Фаина",Gender.female, LocalDate.of(1949, 01, 13));
-      Human human4=new Human("Валерий",Gender.female, LocalDate.of(1947, 01, 13),
-                              LocalDate.of(2000, 11, 14));
+      System.out.println(service.getInfo());
 
-      familyTree.addHuman(human);
-      familyTree.addHuman(human1);
-      familyTree.addHuman(human2);
-      familyTree.addHuman(human3);
-      familyTree.addHuman(human4);
-      //System.out.println(familyTree.getHumansInfo());
+      service.sortByAge();
+      System.out.println(service.getInfo());
+      service.sortByName();
+      System.out.println(service.getInfo());
+      service.sortById();
+      System.out.println(service.getInfo());
 
+      // service.save();
+      // System.out.println(service.load());
+      // Human Alexey = new Human("Алексей",Gender.male,LocalDate.of(1979, 5, 22));
       
-      human.addKinship(human1,Kinship.child);
-      human.addKinship(human2,Kinship.child);
-      human.addKinship(human3, Kinship.parent);
-      human.addKinship(human4, Kinship.parent);
-      
-      //System.out.println(human.getKinshipInfo(Kinship.child));
-      //System.out.println(human.getKinshipInfo(Kinship.parent));
-      
-      FileHandler fileHandler=new FileHandler();
+      // Human Faina=new Human ("Фаина",Gender.female,LocalDate.of(1949,1,13));
       
 
-      try {
-         fileHandler.save(human.getKinshipInfo(Kinship.child));
-         fileHandler.save(human.getKinshipInfo(Kinship.parent));
-         fileHandler.save(familyTree.getHumansInfo());
-         
-      } 
-      catch (Exception e) {
-         System.out.println("Что-то пошло не так!");
-      }
-      //FileHandler fileHandler2=new FileHandler();
-      System.out.println(fileHandler.load());
-
+      
+      
    }
 
 }
