@@ -11,17 +11,17 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeMember<Human> {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private String name;
-    private String surname;
-    private String lastname;
-    private LocalDate birthDate;
-    private LocalDate deathDate;
-    private Set<Human> childs = new HashSet<>();
-    private Set<Human> parents = new HashSet<>();
+    private final String name;
+    private final String surname;
+    private final String lastname;
+    private final LocalDate birthDate;
+    private final LocalDate deathDate;
+    private final Set<Human> childs = new HashSet<>();
+    private final Set<Human> parents = new HashSet<>();
     private final Gender gender;
 
     public Human(String name, String surname, String lastname, LocalDate birthDate, LocalDate deathDate, Gender gender) {
@@ -32,7 +32,6 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
         this.gender = gender;
     }
-
 
 
     public void addChild(Human child) {
@@ -51,8 +50,6 @@ public class Human implements Serializable {
         if (deathDate != null) return Period.between(birthDate,deathDate).getYears();
         else return Period.between(birthDate,LocalDate.now()).getYears();
     }
-
-
 
 
     @Override
@@ -111,6 +108,7 @@ public class Human implements Serializable {
     public LocalDate getDeathDate(){
         return deathDate;
     }
+
 
     public Set<Human> getChilds() {
         return childs;

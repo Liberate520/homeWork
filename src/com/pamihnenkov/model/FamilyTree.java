@@ -1,5 +1,6 @@
 package com.pamihnenkov.model;
 
+import com.pamihnenkov.helpers.serialization.ComparatorByBirthday;
 import com.pamihnenkov.model.enums.Relation;
 
 import java.io.Serial;
@@ -9,62 +10,60 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends FamilyTreeMember<T>> implements Serializable, Iterable<T> {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private final Set<Human> humanList = new HashSet<>();
-
-    public FamilyTree(Human human) {
-        addFamilyMember(human);
+    private final Set<T> memberList = new HashSet<>();
+    public FamilyTree(T member) {
+        addFamilyMember(member);
     }
-
-    public Set<Human> getBrothersAndSister(Human person){
+    public Set<T> getBrothersAndSister(T person){
         return person.getParents().stream()
-                .map(Human::getChilds)
+                .map(T::getChilds)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
-
-    private void addFamilyMember (Human newMember){
-        humanList.add(newMember);
-        newMember.getChilds().stream().filter(Predicate.not(humanList::contains)).forEach(humanList::add);
-        newMember.getParents().stream().filter(Predicate.not(humanList::contains)).forEach(humanList::add);
-        newMember.getChilds().stream().filter(humanList::contains).forEach(child -> child.addParent(newMember));
-        newMember.getParents().stream().filter(humanList::contains).forEach(parent -> parent.addChild(newMember));
+    private void addFamilyMember (T newMember){
+        memberList.add(newMember);
+        newMember.getChilds().stream().filter(Predicate.not(memberList::contains)).forEach(memberList::add);
+        newMember.getParents().stream().filter(Predicate.not(memberList::contains)).forEach(memberList::add);
+        newMember.getChilds().stream().filter(memberList::contains).forEach(child -> child.addParent(newMember));
+        newMember.getParents().stream().filter(memberList::contains).forEach(parent -> parent.addChild(newMember));
     }
-
-    public void addRelativeForPerson(Human member, Human relative, Relation relation){
+    public void addRelativeForPerson(T member, T relative, Relation relation){
         if (relation == Relation.PARENT) relative.addChild(member);
         if (relation == Relation.CHILD) relative.addParent(member);
         addFamilyMember(relative);
     }
-
-    public Human findOldestMember(){
-        return humanList.stream().min((h1,h2) -> Period.between(h2.getBirthDate(),h1.getBirthDate()).getYears()).get();
+    public T findOldestMember(){
+        return memberList.stream().min((h1, h2) -> Period.between(h2.getBirthDate(),h1.getBirthDate()).getYears()).get();
     }
-
-    public void printSortedByBirthdate(){
-        System.out.println("Список людей отсортированный по дате рождения: ");
-        humanList.stream().sorted(Comparator.comparing(Human::getBirthDate)).forEach(System.out::println);
+    public Set<T> getSortedByBirthdate(){
+        Set<T> result = new TreeSet<>(new ComparatorByBirthday<T>());
+        result.addAll(memberList);
+        return result;
     }
-
-    public void printSortedByAge(){
-        System.out.println("Список людей отсортированный по возрасту: ");
-        humanList.stream().sorted((h1,h2) -> h1.getAge()- h2.getAge()).forEach(System.out::println);
+    public Set<T> getSortedByAge(){
+        Set<T> result = new TreeSet<>(Comparator.comparingInt(FamilyTreeMember::getAge));
+        result.addAll(memberList);
+        return result;
     }
-
+    public void print(Set<T> set){
+        for (T t:set) {
+            System.out.println(t.toString());
+        }
+    }
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder("Семейное дерево:\n");
-        for (Human human : humanList){
-            sb.append(human).append('\n');
+        for (T member : memberList){
+            sb.append(member).append('\n');
         }
         return sb.toString();
     }
-
     @Override
-    public Iterator<Human> iterator() {
-        return humanList.iterator();
+    public Iterator<T> iterator() {
+        return memberList.iterator();
     }
 }
