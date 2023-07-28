@@ -1,5 +1,9 @@
+import family_tree.FamilyTree;
+import human.Human;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
@@ -25,13 +29,14 @@ public class Main {
         ft.addChild(listHuman.get(1), listHuman.get(3));
         ft.addParent(listHuman.get(1), listHuman.get(4));
 
-        System.out.println(ft);
-
-        WriteToFile writeToFile = new WriteToFile("ft.output");
-        writeToFile.write(ft);
-
-//        ReadToFile readToFile = new ReadToFile("ft.output");
-//        FamilyTree newFamilyTree = readToFile.read();
-//        System.out.println(newFamilyTree);
+        //ft.sortByName();
+        ft.sortByDateBirthDay();
+        StringBuilder sb = new StringBuilder();
+        Iterator<Human> iterator = ft.iterator();
+        while(iterator.hasNext()){
+            sb.append(iterator.next());
+            sb.append("\n");
+        }
+        System.out.println(sb);
     }
 }

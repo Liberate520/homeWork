@@ -1,8 +1,13 @@
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+package family_tree;
 
-public class FamilyTree implements Serializable {
+import human.Human;
+import human.comparator.HumanComparatorByBirthDay;
+import human.iterator.HumanIterator;
+
+import java.io.Serializable;
+import java.util.*;
+
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humansList;
 
     public FamilyTree(List<Human> humansList){
@@ -38,5 +43,18 @@ public class FamilyTree implements Serializable {
             sb.append("\n\r");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humansList);
+    }
+
+    public void sortByName(){
+        Collections.sort(humansList);
+    }
+
+    public void sortByDateBirthDay(){
+        Collections.sort(humansList, new HumanComparatorByBirthDay());
     }
 }

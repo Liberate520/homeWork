@@ -1,3 +1,8 @@
+package work_with_file;
+
+import family_tree.FamilyTree;
+import work_with_file.interfaces.WriteInterface;
+
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 

@@ -1,9 +1,11 @@
+package human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private String name;
     private LocalDate birthDay;
     private LocalDate deathDay;
@@ -111,4 +113,15 @@ public class Human implements Serializable {
         }
         return sb.toString();
     }
+
+    public LocalDate getBirthDay(){
+        return birthDay;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
+    }
+
+
 }
