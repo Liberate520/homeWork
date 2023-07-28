@@ -3,6 +3,7 @@ package FamilyTree.Tree.FileHander;
 import java.io.*;
 
 public class FileHandler implements Writable {
+
     @Override
     public boolean save(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
@@ -24,7 +25,8 @@ public class FileHandler implements Writable {
                 return null;
             }
         }
-    }
+
+}
 
     
 

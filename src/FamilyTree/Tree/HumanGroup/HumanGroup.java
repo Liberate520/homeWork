@@ -3,7 +3,7 @@ package FamilyTree.Tree.HumanGroup;
 
 import FamilyTree.Tree.Comparators.ComparatorDateOfBirth;
 import FamilyTree.Tree.Comparators.ComparatorPatronymic;
-import FamilyTree.Tree.Comparators.HumanComporatorByName;
+import FamilyTree.Tree.Comparators.HumanComparatorByName;
 import FamilyTree.Tree.HumanGroup.Human.Human;
 
 import java.util.*;
@@ -21,7 +21,7 @@ public class HumanGroup extends Human implements Iterable<Human> {
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComporatorByName());
+        humanList.sort(new HumanComparatorByName());
     }
     public void sortPatronymic() {
         humanList.sort(new ComparatorPatronymic());

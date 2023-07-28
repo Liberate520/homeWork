@@ -4,15 +4,14 @@ import FamilyTree.Tree.HumanGroup.Human.Human;
 
 
 public class Service extends Human {
-    private int idHuman;
-    private HumanGroup group;
 
+    private HumanGroup group;
     public Service() {
         group = new HumanGroup();
     }
 
-    public void addHuman( Human human) {
-        Human Human = new Human(human);
+    public void addHuman(Human human) {
+        Human Human =  new Human(human);
         group.addHuman(human);
     }
     public String getInfo(){

@@ -1,11 +1,13 @@
 package FamilyTree.Tree.HumanGroup.Human;
 
+import FamilyTree.Tree.HumanGroup.HumanGroupItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable{
     private List<Human> children = new ArrayList<>();
 
 
@@ -41,7 +43,6 @@ public class Human implements Serializable {
     public Human() {
     }
 
-
     public boolean addParent(Human parent) {
         if (!parents.contains(parent)){
             parents.add(parent);
@@ -58,6 +59,7 @@ public class Human implements Serializable {
         }
         return null;
     }
+
     public Human getMother(){
         for (Human parent: parents){
             if (parent.getGender() == Gender.Female){
@@ -107,6 +109,4 @@ public class Human implements Serializable {
         sb.append(getGender());
         return sb.toString();
     }
-
-
 }

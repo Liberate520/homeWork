@@ -12,6 +12,7 @@ public class HumanIterator implements Iterator<Human> {
     public HumanIterator(List<Human> humanList) {
         this.humanList = humanList;
     }
+
     @Override
     public boolean hasNext() {
         return humanList.size() > index;
