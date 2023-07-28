@@ -1,12 +1,22 @@
 import family_tree.FamilyTree;
-import family_tree.Gender;
+import human.Gender;
 import human.Human;
+import writer.FileHandler;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = testTree();
+        String filePath="src/family_tree/tree.out";
+ //       FileHandler fileHandler=new FileHandler();
+
+//        FamilyTree tree = testTree();
+//        System.out.println(tree);
+//
+//        fileHandler.save(tree,filePath);
+//
+        FileHandler fileHandler =new FileHandler();
+        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
         System.out.println(tree);
     }
 
