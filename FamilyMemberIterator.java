@@ -1,7 +1,9 @@
+package Service;
+
+import Tree.FamilyMember;
+
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 // Реализовать интерфейс Iterable для членов семьи family
 class FamilyMemberIterator implements Iterator<FamilyMember> {

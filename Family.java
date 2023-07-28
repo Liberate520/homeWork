@@ -1,8 +1,10 @@
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+package Tree;
 
-public class Family extends FamilyMember implements Serializable {
+import java.io.Serializable;
+import java.util.*;
+import java.util.Comparator;
+
+public class Family extends FamilyMember implements Serializable, Iterable<FamilyMember> {
     private List<FamilyMember> family;
     public Family() {
         family = new ArrayList<>();
@@ -14,11 +16,29 @@ public class Family extends FamilyMember implements Serializable {
     public String getFamilyInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Состав семьи: " + "\n");
-        stringBuilder.append(family);
-//        for (FamilyMember familyMember: family) {  Здесь не понял как перебирать объекты добавленные в класс family?
-//            stringBuilder.append(family);
-//            stringBuilder.append("\n");
-//        }
+
+        Iterator<FamilyMember> iterator = family.iterator();
+        while (iterator.hasNext()){
+            FamilyMember familyMember = iterator.next();
+            stringBuilder.append(familyMember);
+        }
+
         return stringBuilder.toString();
     }
+
+    @Override
+    public Iterator<FamilyMember> iterator() {
+        return new FamilyMemberIterator(family);
+    }
+//    @Override
+//    public int compareTo(Tree.FamilyMember o) {
+//        return 0;
+//    }
+    public void sortByAge() {
+        family.sort(new FamilyMemberComparatorByAge());
+    }
+    public void sortByName() {
+        family.sort(new FamilyMemberComparatorByName());
+    }
+
 }

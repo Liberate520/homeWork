@@ -1,9 +1,11 @@
+import java.time.Period;
 import java.util.*;
 import java.text.*;
 import java.io.*;
 import java.time.LocalDate;
 
-public class Human implements Serializable {
+
+public class Human implements Serializable{
     private String dob; // дата рождения
     private String name;
     private Gender gender;
@@ -15,7 +17,7 @@ public class Human implements Serializable {
             this.name = name;
             this.gender = gender;
             this.dateOfBirth = dateOfBirth;
-            this.dateOfBirth = dateOfBirth;
+            this.dateOfDeath = dateOfDeath;
             this.status = status;
     }
 
@@ -30,7 +32,14 @@ public class Human implements Serializable {
     }
 
     public String getDob() {
-        return dob;
+        return dateOfBirth.toString();
+    }
+    public int getAge(){
+        if (dateOfDeath == null){
+            return Period.between(dateOfBirth, LocalDate.now()).getYears();
+        } else {
+            return Period.between(dateOfBirth, dateOfDeath).getYears();
+        }
     }
     public String getName() {
         return name;
