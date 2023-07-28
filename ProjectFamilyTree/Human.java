@@ -1,4 +1,4 @@
-package homeWork.FamilyTree;
+package homeWork.ProjectFamilyTree;
 
 import java.io.Serializable;
 import java.text.DateFormat;

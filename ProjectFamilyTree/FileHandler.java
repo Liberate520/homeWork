@@ -1,6 +1,4 @@
-package homeWork.FamilyTree;
-
-import homeWork.Interfaces.Writable;
+package homeWork.ProjectFamilyTree;
 
 import java.io.Serializable;
 import java.io.*;

@@ -1,17 +1,13 @@
-package homeWork.FamilyTree;
-
-import homeWork.Interfaces.FamilyIterator;
-import homeWork.Interfaces.HumanComparatorByAge;
-import homeWork.Interfaces.HumanComparatorByName;
+package homeWork.ProjectFamilyTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Family_tree implements Serializable, Iterable<Human> {
-    List<Human> list = new ArrayList<>();
-    public void addHuman(Human human){list.add(human);}
+public class Family_tree<E> implements Serializable, Iterable<Human> {
+    private List<E> list = new ArrayList<>();
+    public void addHuman(E human){list.add(human);}
 
 /*    public void setChildrenToParents(Human child, Human parent1, Human parent2) {
         if((child.getFather().equals(parent1) || child.getFather().equals(parent2)) ||
@@ -50,15 +46,15 @@ public class Family_tree implements Serializable, Iterable<Human> {
     public String getFamilyTree(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Дерево:\n");
-        for (Human human: list){
+        for (E human: list){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyIterator(list);
+    public Iterator<E> iterator() {
+        return new FamilyIterator<>(list);
     }
     public void sortByAge(){list.sort(new HumanComparatorByAge());}
     public void sortByName(){list.sort(new HumanComparatorByName());}

@@ -1,15 +1,15 @@
-package homeWork.Interfaces;
+package homeWork.ProjectFamilyTree;
 
-import homeWork.FamilyTree.Human;
+import homeWork.ProjectFamilyTree.Human;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyIterator implements Iterator<Human> {
+public class FamilyIterator<T> implements Iterator<T> {
     private int index;
-    private List<Human> familyList;
+    private List<T> familyList;
 
-    public FamilyIterator(List<Human> familyList) {
+    public FamilyIterator(List<T> familyList) {
         this.familyList = familyList;
     }
 
@@ -19,7 +19,7 @@ public class FamilyIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return familyList.get(index++);
     }
 }

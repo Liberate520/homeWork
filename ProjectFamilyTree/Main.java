@@ -1,8 +1,4 @@
-package homeWork;
-
-import homeWork.FamilyTree.Family_tree;
-import homeWork.FamilyTree.Gender;
-import homeWork.FamilyTree.Human;
+package homeWork.ProjectFamilyTree;
 
 import java.io.IOException;
 import java.time.LocalDate;
