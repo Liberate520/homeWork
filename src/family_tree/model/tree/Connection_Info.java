@@ -5,8 +5,9 @@ import family_tree.model.human.Gender;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Connection_Info<E extends SentientEntity<E>> {
+public class Connection_Info<E extends SentientEntity<E>> implements Group_Info<E>{
 
+    @Override
     public String getSiblings(E child) {
         StringBuilder stringBuilder = new StringBuilder();
         List<E> siblings = new ArrayList<>();

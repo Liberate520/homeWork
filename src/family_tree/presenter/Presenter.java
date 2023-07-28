@@ -1,8 +1,12 @@
 package family_tree.presenter;
 
+import family_tree.model.file_handler.ObjectFileHandler;
 import family_tree.model.human.Child_type;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
+import family_tree.model.tree.Connection_Info;
+import family_tree.model.tree.Connection_Manager;
+import family_tree.model.tree.Tree;
 import family_tree.model.tree.TreeService;
 import family_tree.view.View;
 
@@ -14,7 +18,7 @@ public class Presenter {
 
     public Presenter(View view){
         this.view = view;
-        service = new TreeService();
+        service = new TreeService(new Tree<Human>(), new ObjectFileHandler(), new Connection_Manager<Human>(), new Connection_Info<Human>());
 
     }
     public void addFamilyMember(String name, LocalDate dateOfBirth, Gender gender){

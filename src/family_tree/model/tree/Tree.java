@@ -1,7 +1,7 @@
 package family_tree.model.tree;
 
 
-import family_tree.model.human.Gender;
+
 import family_tree.model.human.comparators.HumanComparatorByAge;
 import family_tree.model.human.comparators.HumanComparatorByName;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree<E extends SentientEntity<E>> implements Serializable, Iterable<E> {
+public class Tree<E extends SentientEntity<E>> implements Serializable, Iterable<E>, Group<E> {
     private int memberId;
     private List<E> family;
 
@@ -18,6 +18,7 @@ public class Tree<E extends SentientEntity<E>> implements Serializable, Iterable
         this.family = new ArrayList<>();
     }
 
+    @Override
     public void addFamilyMember(E member){
         if (!(member == null)
                 && !family.contains(member)){
@@ -25,19 +26,26 @@ public class Tree<E extends SentientEntity<E>> implements Serializable, Iterable
             member.setId(memberId++);
         }
     }
+
+    @Override
     public E getFamilyMember(int id){
         return family.get(id);
     }
 
+    @Override
     public int getFamilySize(){
         return family.size();
     }
+
+    @Override
     public void clearFamily(){
         family.clear();
     }
 
+    @Override
     public void sortByName() {family.sort(new HumanComparatorByName<E>());}
 
+    @Override
     public void sortByAge() {family.sort(new HumanComparatorByAge<E>());}
     @Override
     public Iterator<E> iterator() {

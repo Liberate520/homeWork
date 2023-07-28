@@ -1,6 +1,7 @@
 package family_tree.model.tree;
 
 import family_tree.model.file_handler.FileHandler;
+
 import family_tree.model.human.Child_type;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
@@ -8,15 +9,15 @@ import family_tree.model.human.Human;
 import java.time.LocalDate;
 
 public class TreeService {
-    private Tree<Human> family;
-    private FileHandler fileHandler;
-    private Connection_Manager<Human> connectionManager;
-    private Connection_Info<Human> connectionInfo;
-    public TreeService() {
-        family = new Tree<>();
-        fileHandler = new FileHandler();
-        connectionManager = new Connection_Manager<>();
-        connectionInfo = new Connection_Info<>();
+    private Group<Human> family;
+    private FileHandler<Human> fileHandler;
+    private Group_Manager<Human> connectionManager;
+    private Group_Info<Human> connectionInfo;
+    public TreeService(Group<Human> family, FileHandler<Human> fileHandler, Group_Manager<Human> connectionManager, Group_Info<Human> connectionInfo) {
+        this.family = family;
+        this.fileHandler = fileHandler;
+        this.connectionManager = connectionManager;
+        this.connectionInfo = connectionInfo;
     };
     public void addFamilyMember(String name, LocalDate dateOfBirth, Gender gender){
         Human human = new Human(name, dateOfBirth, gender);

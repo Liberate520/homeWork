@@ -2,11 +2,11 @@ package family_tree.model.tree;
 
 import family_tree.model.human.Child_type;
 import family_tree.model.human.Gender;
-import family_tree.model.human.Human;
 import family_tree.model.human.Parent_Type;
 
-public class Connection_Manager<E extends SentientEntity<E>>{
+public class Connection_Manager<E extends SentientEntity<E>> implements Group_Manager<E>{
 
+    @Override
     public void addParent(E child, E parent, Parent_Type parentType){
         if(!child.getParents().containsKey(parent)) {
             if (parentType.equals(Parent_Type.Foster_Mother)
@@ -29,6 +29,7 @@ public class Connection_Manager<E extends SentientEntity<E>>{
             }
         }
     }
+    @Override
     public void addChild(E child, E parent, Child_type childType){
         if(!parent.getChildren().containsKey(child)) {
             parent.getChildren().put(child, childType);
@@ -48,6 +49,7 @@ public class Connection_Manager<E extends SentientEntity<E>>{
         }
     }
 
+    @Override
     public boolean wedding(E husband, E wife){
         if(husband.isMarried() || wife.isMarried()){
             return false;
@@ -59,6 +61,7 @@ public class Connection_Manager<E extends SentientEntity<E>>{
         }
     }
 
+    @Override
     public boolean divorce(E husband, E wife){
         if (!husband.isMarried() || !wife.isMarried()) return false;
         else if (husband.getSpouse().equals(wife) && wife.getSpouse().equals(husband)) {
