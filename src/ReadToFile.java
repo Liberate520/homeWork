@@ -2,7 +2,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-public class ReadToFile implements Serializable {
+public class ReadToFile implements ReadInterface{
     private String path;
 
     public ReadToFile(String path) {

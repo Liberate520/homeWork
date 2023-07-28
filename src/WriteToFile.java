@@ -1,8 +1,7 @@
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
-public class WriteToFile implements Serializable {
+public class WriteToFile implements WriteInterface {
     private String path;
 
     public WriteToFile(String path) {
