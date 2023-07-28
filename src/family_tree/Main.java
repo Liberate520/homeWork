@@ -13,9 +13,8 @@ public class Main {
         String filePath = "src/family_tree/tree.out";
         
         FileHandler fileHandler = new FileHandler();
-
-        FamilyTree<Human> tree = new FamilyTree<Human>();
-        
+        FamilyTree<Human> tree = firstTree();
+   
         System.out.println(tree);
 
         tree.sortByName();
@@ -28,9 +27,6 @@ public class Main {
         
         fileHandler.save(tree, filePath);      
 
-        // FileHandler fileHandler = new FileHandler();
-        // FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
-        // System.out.println(tree);
     }
 
     static FamilyTree<Human> firstTree() {
