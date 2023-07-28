@@ -1,16 +1,32 @@
 package FamilyTree.Tree.Tree;
 
-import FamilyTree.Tree.Human.Human;
+import FamilyTree.Tree.FileHander.Writable;
+import FamilyTree.Tree.HumanGroup.Human.Human;
+import FamilyTree.Tree.HumanGroup.HumanGroupItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tree implements Serializable {
-    protected   List<Human> humanList;
+    private   List<Human> humanList;
 
-    public Tree() {
-        humanList = new ArrayList<>();
+    public Tree(List<Human> humanList) {
+        this.humanList = humanList;
+    }
+    public Tree(){
+        this(new ArrayList<>());
+    }
+    public boolean add(Human human){
+        if (human == null){
+            return false;
+        }
+        if ( !humanList.contains(human)){
+            humanList.add(human);
+
+            return true;
+        }
+        return false;
     }
     public String getHumansInfo(){
         StringBuilder stringBuilder = new StringBuilder();
@@ -21,6 +37,8 @@ public class Tree implements Serializable {
         }
         return stringBuilder.toString();
     }
-
-
+    @Override
+    public String toString(){
+        return getHumansInfo();
+    }
 }
