@@ -1,7 +1,7 @@
-package treeComparators;
+package familyTree.treeComparators;
 
-import enums.Gender;
-import treeWorkspace.TreeItem;
+import familyTree.enums.Gender;
+import familyTree.treeWorkspace.TreeItem;
 
 import java.util.Comparator;
 

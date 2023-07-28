@@ -1,7 +1,6 @@
-package treeWorkspace;
+package familyTree.treeWorkspace;
 
-import enums.Gender;
-import treeWorkspace.Person;
+import familyTree.enums.Gender;
 
 public interface TreeItem<E> extends Comparable<E>{
     int getId();

@@ -1,6 +1,4 @@
-package treeWorkspace;
-
-import treeWorkspace.FamilyTree;
+package familyTree.treeWorkspace;
 
 public interface Writable {
     public void saveTree(FamilyTree tree,String path);

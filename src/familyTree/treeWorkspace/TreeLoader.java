@@ -1,4 +1,4 @@
-package treeWorkspace;
+package familyTree.treeWorkspace;
 
 import java.io.*;
 

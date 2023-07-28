@@ -1,9 +1,8 @@
-package treeWorkspace;
+package familyTree.treeWorkspace;
 
 
-import enums.Gender;
-import treeComparators.ComparatorByAge;
-import treeComparators.ComparatorByGender;
+import familyTree.treeComparators.ComparatorByAge;
+import familyTree.treeComparators.ComparatorByGender;
 
 
 import java.io.Serializable;
@@ -29,7 +28,14 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         }
         return null;
     }
-
+    public int getMaxId(){
+        int id = 0;
+        if (familyTree.isEmpty()) return 0;
+        for (E e:familyTree){
+            if (e.getId() > id) id =e.getId();
+        }
+        return ++id;
+    }
     public void sortByName() {
         Collections.sort(familyTree);
     }

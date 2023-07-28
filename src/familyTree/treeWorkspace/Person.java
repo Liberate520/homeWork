@@ -1,6 +1,6 @@
-package treeWorkspace;
+package familyTree.treeWorkspace;
 
-import enums.Gender;
+import familyTree.enums.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;

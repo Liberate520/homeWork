@@ -1,8 +1,15 @@
-package treeWorkspace;
+package familyTree;
 
-import enums.Gender;
+import familyTree.enums.Gender;
+import familyTree.treeWorkspace.FamilyTree;
+import familyTree.treeWorkspace.Person;
+import familyTree.treeWorkspace.TreeItem;
+import familyTree.treeWorkspace.TreeLoader;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Service<E extends TreeItem<E>>  {
     // Класс который руководит поведением класса FamilyTree
@@ -15,7 +22,8 @@ public class Service<E extends TreeItem<E>>  {
     }
 
     public E addPerson(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
-        // Конструктор для тех, у кого известна дата смерти
+        //TODO решить проблему обнуления ID при загрузке дерева
+        id = currentTree.getMaxId();
         tmpPerson = new Person(id++,name,gender,birthDate,deathDate);
         currentTree.addPerson((E)tmpPerson);
         return (E) tmpPerson;
@@ -61,6 +69,7 @@ public class Service<E extends TreeItem<E>>  {
     }
     public FamilyTree<E> loadTree(String path){
         TreeLoader treeLoader = new TreeLoader();
-        return (FamilyTree) treeLoader.loadTree(path);
+        currentTree = (FamilyTree<E>) treeLoader.loadTree(path);
+        return (FamilyTree<E>) treeLoader.loadTree(path);
     }
 }
