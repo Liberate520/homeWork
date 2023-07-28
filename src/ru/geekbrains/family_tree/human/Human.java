@@ -1,4 +1,4 @@
-package ru.geekbrains.family_tree;
+package ru.geekbrains.family_tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;

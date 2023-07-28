@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ru.geekbrains.family_tree.family_tree.FamilyTree;
+import ru.geekbrains.family_tree.human.Human;
+import ru.geekbrains.family_tree.human.Sex;
+
 public class Main {
     
     public static void main(String[] args) {
@@ -38,18 +42,35 @@ public class Main {
         familyMember3.setFather(familyMember5);
         familyMember4.setFather(familyMember5);
 
-        FamilyTree familyTree = new FamilyTree(new ArrayList<>(Arrays.asList(familyMember1,
+        FamilyTree familyTree = new FamilyTree(new ArrayList<>(Arrays.asList(familyMember5,
                                                                              familyMember2,
-                                                                             familyMember5,
-                                                                             familyMember6,
-                                                                             familyMember7,
                                                                              familyMember3,
-                                                                             familyMember4)));
+                                                                             familyMember4,
+                                                                             familyMember1,
+                                                                             familyMember7,
+                                                                             familyMember6)));
 
-        
-        FileActions family = new FileActions("src\\ru\\geekbrains\\family_tree\\family_database.txt");
-        family.write(familyTree);
-        System.out.printf("Семья - %s.", (FamilyTree) family.read());
+        System.out.println("Члены семьи до сортировки\n");
+        for (Human familyMember : familyTree) {
+            System.out.printf("%s ", familyMember);
+        }
+        System.out.println("\n");
+
+        familyTree.sortByName();
+
+        System.out.println("Члены семьи после сортировки по имени\n");
+        for (Human familyMember : familyTree) {
+            System.out.printf("%s ", familyMember);
+        }
+        System.out.println("\n");
+
+        familyTree.sortByBirthDate();
+
+        System.out.println("Члены семьи после сортировки по дате рождения\n");
+        for (Human familyMember : familyTree) {
+            System.out.printf("%s ", familyMember);
+        }
+        System.out.println("\n");
     }
 
 }

@@ -1,4 +1,4 @@
-package ru.geekbrains.family_tree;
+package ru.geekbrains.family_tree.database;
 
 public interface ReadableAndWriteable {
     

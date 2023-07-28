@@ -1,4 +1,4 @@
-package ru.geekbrains.family_tree;
+package ru.geekbrains.family_tree.database;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
