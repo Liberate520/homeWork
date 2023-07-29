@@ -16,7 +16,7 @@ public class Main {
         // fileHandler.save(tree, path);
 
         FileHandler fileHandler = new FileHandler();
-        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+        FamilyTree tree = (FamilyTree) fileHandler.read(path);
         System.out.println(tree);
     }    
         
