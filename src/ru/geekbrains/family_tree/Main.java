@@ -28,11 +28,11 @@ public class Main {
         Human familyMember6 = new Human("Евгений", "Иванов", Sex.MALE,
                                         LocalDate.of(1983, 11, 25),
                                         familyMember1, familyMember2,
-                                        new ArrayList<Human>());
+                                        new ArrayList<>());
         Human familyMember7 = new Human("Кристина", "Иванова", Sex.FEMALE,
                                         LocalDate.of(1984, 12, 2),
                                         familyMember1, familyMember2,
-                                        new ArrayList<Human>());
+                                        new ArrayList<>());
         familyMember1.setChildren(new ArrayList<>(Arrays.asList(familyMember5,
                                                                 familyMember6,
                                                                 familyMember7)));
@@ -42,35 +42,15 @@ public class Main {
         familyMember3.setFather(familyMember5);
         familyMember4.setFather(familyMember5);
 
-        FamilyTree familyTree = new FamilyTree(new ArrayList<>(Arrays.asList(familyMember5,
-                                                                             familyMember2,
-                                                                             familyMember3,
-                                                                             familyMember4,
-                                                                             familyMember1,
-                                                                             familyMember7,
-                                                                             familyMember6)));
+        FamilyTree<Human> familyTree = new FamilyTree<>(new ArrayList<>(Arrays.asList(familyMember5,
+                                                                                      familyMember1,
+                                                                                      familyMember2,
+                                                                                      familyMember3,
+                                                                                      familyMember4,
+                                                                                      familyMember6,
+                                                                                      familyMember7)));
+        System.out.printf("Члены семьи - %s.", familyTree);
 
-        System.out.println("Члены семьи до сортировки\n");
-        for (Human familyMember : familyTree) {
-            System.out.printf("%s ", familyMember);
-        }
-        System.out.println("\n");
-
-        familyTree.sortByName();
-
-        System.out.println("Члены семьи после сортировки по имени\n");
-        for (Human familyMember : familyTree) {
-            System.out.printf("%s ", familyMember);
-        }
-        System.out.println("\n");
-
-        familyTree.sortByBirthDate();
-
-        System.out.println("Члены семьи после сортировки по дате рождения\n");
-        for (Human familyMember : familyTree) {
-            System.out.printf("%s ", familyMember);
-        }
-        System.out.println("\n");
     }
 
 }

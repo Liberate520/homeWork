@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ru.geekbrains.family_tree.family_tree.FamilyMember;
+
 /**
  * Человек, обязательно имеющий имя, фамилию, пол и дату рождения. Может иметь
  * дату смерти, отца, мать и детей.
  */
-public class Human implements Serializable {
+public class Human implements FamilyMember, Serializable {
 
     /**
      * Имя человека.

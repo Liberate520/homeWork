@@ -3,14 +3,12 @@ package ru.geekbrains.family_tree.family_tree;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ru.geekbrains.family_tree.human.Human;
-
-public class FamilyTreeIterator implements Iterator<Human> {
+public class FamilyTreeIterator<E> implements Iterator<E> {
 
     private int index;
-    private ArrayList<Human> familyMembers;
+    private ArrayList<E> familyMembers;
 
-    public FamilyTreeIterator(ArrayList<Human> familyMembers) {
+    public FamilyTreeIterator(ArrayList<E> familyMembers) {
         this.familyMembers = familyMembers;
     }
 
@@ -20,7 +18,7 @@ public class FamilyTreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return familyMembers.get(index++);
     }
 
