@@ -1,6 +1,4 @@
-package FamilyTree;
-
-import FamilyTree.FamilyTree;
+package model.FamilyTree;
 
 public interface Writable {
 

@@ -1,4 +1,4 @@
-package Person;
+package model.Organisms.Person;
 
 import java.util.Comparator;
 

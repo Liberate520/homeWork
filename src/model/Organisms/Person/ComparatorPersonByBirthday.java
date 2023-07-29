@@ -1,6 +1,5 @@
-package Person;
+package model.Organisms.Person;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 
 public class ComparatorPersonByBirthday<T extends Person> implements Comparator<T> {

@@ -1,11 +1,14 @@
-package Dogs;
+package model.Organisms.Human;
 
-import Person.Person;
-import Person.Sex;
+import model.Organisms.Person.Person;
+import model.Organisms.Person.Sex;
+import model.Organisms.Person.OrganismType;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public class Dog extends Person {
+public class Human extends Person {
+    private OrganismType type;
     private String name;
     private LocalDate birthDate;
     private  LocalDate deathDate;
@@ -14,8 +17,8 @@ public class Dog extends Person {
     private  Person father;
     public List<Person> children;
     public Person spouse;
-    public Dog(String name, LocalDate birthDate, Sex sex){
-        super(name, birthDate, sex, null, null, null, null, null);
+    public Human(OrganismType type, String name, LocalDate birthDate, Sex sex){
+        super(type, name, birthDate, sex, null, null, null, null, null);
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
@@ -31,6 +34,19 @@ public class Dog extends Person {
     }
     public LocalDate getBirthDate(){
         return birthDate;
+    }
+
+
+    public void setChild(Human adult, Human child) {
+        super.setChild(adult, child);
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
     }
 
     @Override

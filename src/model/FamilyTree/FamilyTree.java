@@ -1,13 +1,13 @@
-package FamilyTree;
+package model.FamilyTree;
 
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import Person.Person;
-import Person.PersonIterator;
-import Person.ComparatorPersonByName;
-import Person.ComparatorPersonByBirthday;
+import model.Organisms.Person.Person;
+import model.Organisms.Person.PersonIterator;
+import model.Organisms.Person.ComparatorPersonByName;
+import model.Organisms.Person.ComparatorPersonByBirthday;
 
 public class FamilyTree<T extends Person> implements Serializable, Iterable<Person> {
     private List<T> personList;

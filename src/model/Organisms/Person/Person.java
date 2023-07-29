@@ -1,11 +1,12 @@
-package Person;
+package model.Organisms.Person;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public abstract class Person implements Serializable {
+    private OrganismType organismType;
     private String name;
     private LocalDate birthDate;
     private  LocalDate deathDate;
@@ -15,7 +16,7 @@ public class Person implements Serializable {
     public List<Person> children;
     public Person spouse;
 
-    public Person(String name, LocalDate birthDate, Sex sex, LocalDate deathDate,
+    public Person(OrganismType type, String name, LocalDate birthDate, Sex sex, LocalDate deathDate,
                   Person mother, Person father, List<Person> children, Person spouse) {
         this.name = name;
         this.birthDate = birthDate;
@@ -25,9 +26,10 @@ public class Person implements Serializable {
         this.father = father;
         this.children = children;
         this.spouse = spouse;
+        this.organismType = type;
     }
-    public Person(String name, LocalDate birthDate, Sex sex){
-        this(name, birthDate, sex, null, null, null, null, null);
+    public Person(OrganismType type, String name, LocalDate birthDate, Sex sex){
+        this(type, name, birthDate, sex, null, null, null, null, null);
     }
 
     public String getName (){
@@ -64,7 +66,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Name: "+name+"; Birthday: "+birthDate+"\n");
+        sb.append(organismType+" Name: "+name+"; Birthday: "+birthDate+"\n");
         return sb.toString();
     }
 
