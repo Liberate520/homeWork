@@ -1,9 +1,12 @@
+package Tree;
+
 import Tree.FamilyMember;
 
 import java.util.Iterator;
 import java.util.List;
 
 // Реализовать интерфейс Iterable для членов семьи family
+
 class FamilyMemberIterator implements Iterator<FamilyMember> {
     private int index;
     private List<FamilyMember> familyList;

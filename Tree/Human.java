@@ -1,3 +1,5 @@
+package Tree;
+
 import java.time.Period;
 import java.util.*;
 import java.text.*;
@@ -49,5 +51,11 @@ public class Human implements Serializable{
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setAge(LocalDate date){
+        this.dateOfBirth = date;
     }
 }

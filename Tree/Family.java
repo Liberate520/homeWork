@@ -1,3 +1,5 @@
+package Tree;
+
 import Tree.FamilyMember;
 import Tree.Human;
 import Service.FamilyMemberComparatorByAge;

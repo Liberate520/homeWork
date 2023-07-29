@@ -1,10 +1,9 @@
+package Tree;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.List;
-import java.util.*;
 
-public class FamilyMember extends Human implements Serializable, Comparable<FamilyMember> {
+// Д.з. 4 сделать класс параметизированным
+
+public class FamilyMember<T extends Human> extends Human implements Serializable, Comparable<T> {
     private String familyStatus;
     private Human human;
 
@@ -34,7 +33,7 @@ public class FamilyMember extends Human implements Serializable, Comparable<Fami
     }
 
     @Override
-    public int compareTo(FamilyMember o) {
+    public int compareTo(T o) {
         return human.getName().compareTo(o.getName());
     }
 }
