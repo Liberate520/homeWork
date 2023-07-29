@@ -13,7 +13,7 @@ import Human.HumanConparatorByAge;
 
 public class FamilyTree implements Iterable<Human>, Serializable {
 
-    // #region Filds
+    // #region Fields
 
     private List<Human> humanList;
     private int humansId;

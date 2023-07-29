@@ -10,7 +10,7 @@ import Enum.Gender;
 
 public class Human implements Serializable {
 
-    // #region Filds
+    // #region Fields
 
     private List<Human> cildrenList;
     private LocalDate dataOfBirth;

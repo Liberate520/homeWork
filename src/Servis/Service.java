@@ -12,7 +12,7 @@ import Human.Human;
 
 public class Service {
 
-    // #region Filds
+    // #region Fields
 
     private int idHuman;
     private FamilyTree tree;
