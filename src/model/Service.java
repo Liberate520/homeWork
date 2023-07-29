@@ -6,9 +6,11 @@ import java.time.LocalDate;
 public class Service implements Serializable {
 
     private FamilyTree<Entities> familyTree;
+    private FileHandler fileHandler;
 
     public Service() {
         familyTree = new FamilyTree<>();
+        fileHandler = new FileHandler();
     }
 
     public void addHuman(String name, String surname, LocalDate dateOfBirth, Human mother, Human father,
@@ -57,6 +59,18 @@ public class Service implements Serializable {
             strb.append(human);
         }
         return strb.toString();
+    }
+
+    public void writeService(String path) {
+
+        fileHandler.write(path, familyTree);
+    }
+
+    public Serializable readService(String path) {
+
+        Serializable dataRead = fileHandler.read(path);
+        return dataRead;
+
     }
 
 }

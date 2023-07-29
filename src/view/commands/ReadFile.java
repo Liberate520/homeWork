@@ -1,6 +1,5 @@
 package view.commands;
 
-import java.io.Serializable;
 
 import view.Console;
 
@@ -14,8 +13,7 @@ public ReadFile(Console console) {
 
     @Override
     public void execute() {
-        Serializable dataForPrint = console.readFile();
-        System.out.println("Прочитанные данные:\n" + dataForPrint);
+        console.readFile();
     }
 
     

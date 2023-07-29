@@ -3,7 +3,6 @@ package view;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import java.io.Serializable;
 
 import model.Gender;
 import presenter.Presenter;
@@ -14,7 +13,7 @@ public class Console implements View {
     private Presenter presenter;
 
     private boolean flag;
-    CommandList commandList;
+    private CommandList commandList;
 
     public Console() {
         iScanner = new Scanner(System.in, "utf-8");
@@ -105,12 +104,14 @@ public class Console implements View {
 
     }
 
-    public Serializable readFile() {
+    public void readFile() {
         System.out.println("Введите название файла, из которого хотите прочитать информацию: \n");
         String path = iScanner.nextLine();
-        Serializable data = presenter.readFile(path);
-        return data;
+        presenter.readFile(path);
+        
 
     }
+
+    
 
 }

@@ -1,9 +1,7 @@
 package presenter;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-import model.FileHandler;
 import model.Gender;
 import model.Human;
 import model.Service;
@@ -13,13 +11,11 @@ public class Presenter {
 
     private View view;
     private Service service;
-    private FileHandler fileHandler;
 
     public Presenter(View view) {
 
         this.view = view;
         service = new Service();
-        fileHandler = new FileHandler();
     }
 
     public void addHuman(String name, String surname, Gender gender, LocalDate dateOfBirth) {
@@ -57,18 +53,15 @@ public class Presenter {
 
     public void writeFile(String path) {
 
-        fileHandler.write(path, service);
+        service.writeService(path);
     }
 
-    public Serializable readFile(String path) {
+    public void readFile(String path) {
 
-        Serializable dataRead = fileHandler.read(path);
-        return dataRead;
-
+        String dataRead = "Прочитанные данные:\n" + service.readService(path);
+        view.print(dataRead);
+        
     }
-
-    
-
     
 
 }
