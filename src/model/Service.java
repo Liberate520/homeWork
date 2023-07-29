@@ -70,7 +70,6 @@ public class Service implements Serializable {
 
         Serializable dataRead = fileHandler.read(path);
         return dataRead;
-
     }
 
 }
