@@ -1,8 +1,10 @@
-package Tree;
+import Tree.FamilyMember;
+import Tree.Human;
+import Service.FamilyMemberComparatorByAge;
+import Service.FamilyMemberComparatorByName;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.Comparator;
 
 public class Family extends FamilyMember implements Serializable, Iterable<FamilyMember> {
     private List<FamilyMember> family;
