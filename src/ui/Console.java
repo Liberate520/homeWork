@@ -35,40 +35,7 @@ public class Console<E extends TreeItem<E>> implements ConsoleUI {
                 switch (scan()) {
 
                     case "1": {
-                        String name, year, month, day, dYear, dMonth, dDay;
-                        Gender gender;
-                        System.out.println("Введите имя:");
-                        name = scan();
-                        System.out.println("Введите пол m/f");
-                        gender = !scan().equalsIgnoreCase("m") ?
-                                Gender.Female : Gender.Male;
-                        System.out.println("Введите дату рождения: год, месяц, день");
-                        year = scan();
-                        month = scan();
-                        day = scan();
-                        System.out.println("Дата смерти известна? e/n");
-                        if (scan().equals("e")) {
-                            System.out.println("Введите дату смерти: год, месяц, день");
-                            dYear = scan();
-                            dMonth = scan();
-                            dDay = scan();
-                            presenter.addPerson(name, gender,
-                                    LocalDate.of(
-                                            Integer.parseInt(year),
-                                            Integer.parseInt(month),
-                                            Integer.parseInt(day)),
-                                    LocalDate.of(
-                                            Integer.parseInt(dYear),
-                                            Integer.parseInt(dMonth),
-                                            Integer.parseInt(dDay)));
-                        } else {
-                            presenter.addPerson(name, gender,
-                                    LocalDate.of(
-                                            Integer.parseInt(year),
-                                            Integer.parseInt(month),
-                                            Integer.parseInt(day)),
-                                    null);
-                        }
+                        addPerson();
                         break;
                     }
                     case "2": {
@@ -115,6 +82,42 @@ public class Console<E extends TreeItem<E>> implements ConsoleUI {
 
     private String scan() {
         return scanner.nextLine();
+    }
+    void addPerson(){
+        String name, year, month, day, dYear, dMonth, dDay;
+        Gender gender;
+        System.out.println("Введите имя:");
+        name = scan();
+        System.out.println("Введите пол m/f");
+        gender = !scan().equalsIgnoreCase("m") ?
+                Gender.Female : Gender.Male;
+        System.out.println("Введите дату рождения: год, месяц, день");
+        year = scan();
+        month = scan();
+        day = scan();
+        System.out.println("Дата смерти известна? e/n");
+        if (scan().equals("e")) {
+            System.out.println("Введите дату смерти: год, месяц, день");
+            dYear = scan();
+            dMonth = scan();
+            dDay = scan();
+            presenter.addPerson(name, gender,
+                    LocalDate.of(
+                            Integer.parseInt(year),
+                            Integer.parseInt(month),
+                            Integer.parseInt(day)),
+                    LocalDate.of(
+                            Integer.parseInt(dYear),
+                            Integer.parseInt(dMonth),
+                            Integer.parseInt(dDay)));
+        } else {
+            presenter.addPerson(name, gender,
+                    LocalDate.of(
+                            Integer.parseInt(year),
+                            Integer.parseInt(month),
+                            Integer.parseInt(day)),
+                    null);
+        }
     }
 }
 

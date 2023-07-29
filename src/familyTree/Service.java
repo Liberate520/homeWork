@@ -22,7 +22,6 @@ public class Service<E extends TreeItem<E>>  {
     }
 
     public E addPerson(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
-        //TODO решить проблему обнуления ID при загрузке дерева
         id = currentTree.getMaxId();
         tmpPerson = new Person(id++,name,gender,birthDate,deathDate);
         currentTree.addPerson((E)tmpPerson);
