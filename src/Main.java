@@ -32,6 +32,8 @@ public class Main {
       System.out.println(service.getInfo());
       service.sortById();
       System.out.println(service.getInfo());
+      service.sortByBirthData();
+      System.out.println(service.getInfo());
 
       // service.save();
       // System.out.println(service.load());

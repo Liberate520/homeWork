@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import Human.Human;
+import Human.HumanComparatorByBirthDate;
 import Human.HumanComparatorById;
 import Human.HumanComparatorByName;
 import Human.HumanConparatorByAge;
@@ -131,6 +132,10 @@ public class FamilyTree implements Iterable<Human>, Serializable {
 
     public void sortByName() {
         humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByBirthData(){
+        humanList.sort(new HumanComparatorByBirthDate());
     }
     // #endregion
 

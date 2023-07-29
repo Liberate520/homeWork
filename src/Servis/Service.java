@@ -152,5 +152,12 @@ public class Service {
     public void sortByName() {
         tree.sortByName();
     }
+
+    /**
+     * Сортировка по дате рождения
+     */
+    public void sortByBirthData(){
+        tree.sortByBirthData();
+    }
     // #endregion
 }
