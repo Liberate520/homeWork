@@ -48,7 +48,8 @@ public class FamilyTree implements Serializable, Iterable<Person> {
                     sB.append(person.getFather().getPerson());
                 }
             }
-            sB.append(getSisterBrother(person.getMother(), person.getFather(), person.getID()));
+            sB.append(getChildrensInfo(person.getID()));
+            sB.append(getSiblings(person.getMother(), person.getFather(), person.getID()));
             sB.append("\n------------\n");
         }
 
@@ -62,13 +63,14 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         sB.append(person.getID());
         sB.append(". ");
         sB.append(person);
-        sB.append(getSisterBrotherFull(person.getMother(), person.getFather(), person.getID()));
+        sB.append(getChildrensInfo(person.getID()));
+        sB.append(getSiblingsFull(person.getMother(), person.getFather(), person.getID()));
         sB.append("\n============\n");
 
         return sB.toString();
 
     }
-    public String getSisterBrotherFull(Person mother, Person father, long id){
+    public String getSiblingsFull(Person mother, Person father, long id){
 
         List <Person> result = new ArrayList<>();
         StringBuilder sB = new StringBuilder();
@@ -94,7 +96,7 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         return sB.toString();
     }
 
-    public String getSisterBrother(Person mother, Person father, long id){
+    public String getSiblings(Person mother, Person father, long id){
 
         List <Person> result = new ArrayList<>();
         StringBuilder sB = new StringBuilder();
@@ -109,10 +111,41 @@ public class FamilyTree implements Serializable, Iterable<Person> {
         if (result.size() > 0){
             for(Person entry: result){
                 if (entry.getGender() == Gender.Female){
-                    sB.append("\n :: Sister: ");
+                    sB.append("\n ::=:: Sister: ");
                     sB.append(entry.getPerson());
                 } else {
-                    sB.append("\n :: Brother: ");
+                    sB.append("\n ::=:: Brother: ");
+                    sB.append(entry.getPerson());
+                }
+            }
+        }
+        return sB.toString();
+    }
+
+    public String getChildrensInfo(long id){
+        StringBuilder sB = new StringBuilder();
+        sB.append(getChildrensList(id));
+        return sB.toString();
+    }
+
+    public String getChildrensList(long id){
+        List <Person> result = new ArrayList<>();
+        StringBuilder sB = new StringBuilder();
+
+        for (Person person: relations){
+            if (person.getID() != id && ((person.getMother() != null && person.getMother().getID() == id) ||
+                    (person.getFather() != null && person.getFather().getID() == id))){
+                result.add(person);
+            }
+        }
+
+        if (result.size() > 0){
+            for(Person entry: result){
+                if (entry.getGender() == Gender.Female){
+                    sB.append("\n ::>> Daughter: ");
+                    sB.append(entry.getPerson());
+                } else {
+                    sB.append("\n ::>> Son: ");
                     sB.append(entry.getPerson());
                 }
             }

@@ -145,8 +145,6 @@ public class Person implements Serializable {
     }
     public String getPersonInfo(){
         StringBuilder sb = new StringBuilder();
-//        sb.append(id); //ToDo: нужно сделать чтобы ID показывался только при выводе запрашиваемой персоны. Не отображать для Родителей, Детей, Супругов
-//        sb.append(". ");
         sb.append(getPerson());
         sb.append(" (");
         sb.append(getAge());
@@ -159,7 +157,6 @@ public class Person implements Serializable {
     public String getMarriageInfo(){
         StringBuilder sB = new StringBuilder();
         sB.append(getSpousesFullList());
-
         return sB.toString();
     }
     public String getSpousesFullList(){
@@ -178,5 +175,4 @@ public class Person implements Serializable {
         }
         return sB.toString();
     }
-
 }
