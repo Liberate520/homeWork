@@ -1,7 +1,7 @@
-package Alive;
+package Alive.Human;
 
+import Alive.Animal;
 import Alive.enums.Gender;
-import Graph.Graph;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -83,11 +83,7 @@ public class Human extends Animal implements Serializable {
     }
     public List<Human> getChildren() {
 
-        if (!this.children.isEmpty()) {
             return this.children;
-        } else
-
-            return null;
     }
     public int getId(){
         return UUIDHuman;

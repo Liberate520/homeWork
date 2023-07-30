@@ -1,42 +1,56 @@
 package Graph;
 
+import Alive.Human.Human;
+
 import java.util.*;
 
 public class Graph {
-    HashMap<Integer, Node> graph;
 
-    public Graph(ArrayList<int[]> graphData) {
-        this.graph = new HashMap<Integer,Node>();
+    HashMap<Integer, Node> nodeHashMap;
+
+
+
+    public Graph(List<Human> graphData) {
+        this.nodeHashMap = new HashMap<Integer,Node>();
         createGraph(graphData);
-
     }
+
     public int getSize(){
-        return graph.size();
+        return nodeHashMap.size();
     }
 
     public Node getNode(int value) {
         if (value == -1) return null;
-        if (this.graph.containsKey(value)) return this.graph.get(value);
+        if (this.nodeHashMap.containsKey(value)) return this.nodeHashMap.get(value);
         else return null;
     }
-    private Node addNode(int value) {
-        if (value == -1) return null;
-        if (this.graph.containsKey(value)) return this.graph.get(value);
-        Node node = new Node(value);
-        this.graph.put(value, node);
+    private Node addNode(Human human) {
+        if (human.getId() == -1) return null;
+        if (this.nodeHashMap.containsKey(human.getId())) return this.nodeHashMap.get(human.getId());
+        Node node = new Node(human);
+        this.nodeHashMap.put(human.getId(), node);
         return node;
 
     }
 
-    private void createGraph(ArrayList<int[]> graphData) {
-        for (int[] row : graphData) {
-            if (row[0]==0) continue;
-            Node node = addNode(row[0]);
-            Node adjacentNode = addNode(row[1]);
-            if (adjacentNode == null) continue;
-            Edge edge = new Edge(adjacentNode, row[2]);
-            node.edges.add(edge);
-            adjacentNode.parents.put(node, edge);
+    private void createGraph(List<Human> graphData) {
+        for (Human human : graphData) {
+
+            Node node = addNode(human);
+
+            if (!human.getChildren().isEmpty()){
+                    for (Human child: human.getChildren()
+                    ) {
+                        Node adjacentNode = addNode(child);
+                        if (adjacentNode == null) continue;
+                        Edge edge = new Edge(adjacentNode, child.getBorn().getYear() - human.getBorn().getYear());
+                        node.edges.add(edge);
+                        adjacentNode.parents.put(node, edge);
+                    }
+
+
+            }
+
 
         }
     }
@@ -86,7 +100,7 @@ public class Graph {
         while (stack.size() != 0) {
             node = stack.peek();
             if (!passed.contains(node)) {
-                System.out.println(node.value);
+                System.out.println(node.getHuman().getId());
                 passed.add(node);
             }
             boolean hasChildren = false;
@@ -119,7 +133,7 @@ public class Graph {
             for (Edge edge : node.edges) {
                 if (!visitingOrPassed.contains(edge.adjacentNode)) {
                     queue.addLast(edge.adjacentNode);
-                    System.out.println(edge.adjacentNode.value);
+                    System.out.println(edge.adjacentNode.getHuman().getId());
                 }
             }
         }
@@ -132,6 +146,11 @@ public class Graph {
                 BFS(entry.getValue(), visitingOrPassed);
         }
     }
+
+    public void clearGraph() {
+        nodeHashMap.clear();
+    }
+
 
 }
 

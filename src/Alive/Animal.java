@@ -5,6 +5,7 @@ import Alive.enums.Gender;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class Animal implements Serializable {
@@ -12,10 +13,21 @@ public abstract class Animal implements Serializable {
     protected Gender gender;
     protected int age;
 
-    public Date born;
+    public Gender getGender() {
+        return gender;
+    }
 
-    public Date die;
-    private List<Animal> children;
+    public Date getBorn() {
+        return born;
+    }
+
+    public Date getDie() {
+        return die;
+    }
+
+    protected Date born;
+
+    protected Date die;
 
 
     public Animal(String name, Gender gender, int age, Date born, Date die) {

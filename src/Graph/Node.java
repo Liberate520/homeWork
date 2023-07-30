@@ -1,19 +1,22 @@
 package Graph;
 
-import java.util.HashMap;
+import Alive.Human.Human;
+
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 public class Node {
-    int value;
     LinkedHashMap<Node, Edge> parents = new LinkedHashMap<Node, Edge>();
     LinkedHashSet<Edge> edges = new LinkedHashSet<Edge>();
-    Node(int value){
-        this.value = value;
+    Human human;
+    Node(Human human){
+
+        this.human = human;
     }
-    public int getId(){
-        return value;
+    public Human getHuman(){
+        return human;
     }
+
 }
 
 
