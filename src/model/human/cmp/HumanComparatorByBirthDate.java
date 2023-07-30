@@ -1,7 +1,6 @@
-package human.cmp;
+package model.human.cmp;
 
-import familyTree.FamilyTreeItem;
-import human.Human;
+import model.familyTree.FamilyTreeItem;
 
 import java.util.Comparator;
 

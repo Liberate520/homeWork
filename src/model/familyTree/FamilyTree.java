@@ -1,9 +1,8 @@
-package familyTree;
+package model.familyTree;
 
-import human.Human;
-import human.cmp.HumanComparatorByAge;
-import human.cmp.HumanComparatorByBirthDate;
-import human.cmp.HumanComparatorByFullName;
+import model.human.cmp.HumanComparatorByAge;
+import model.human.cmp.HumanComparatorByBirthDate;
+import model.human.cmp.HumanComparatorByFullName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         this(new ArrayList<>());
     }
 
-    public boolean addHuman(E human) {
+    public boolean add(E human) {
         human.setId(idHuman++);
 //        humanList.add(human);
         if (human == null) {
@@ -87,12 +86,21 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         return new HumanIterator(humanList);
     }
     public void sortByFullName() {
-        humanList.sort(new HumanComparatorByFullName());
+        humanList.sort(new HumanComparatorByFullName<>());
     }
     public void sortByBirthDate(){
-        humanList.sort(new HumanComparatorByBirthDate());
+        humanList.sort(new HumanComparatorByBirthDate<>());
     }
     public void sortByAge(){
-        humanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge<>());
+    }
+
+    public E getById(long id){
+        for (E human: humanList){
+            if (human.getId() == id){
+                return human;
+            }
+        }
+        return null;
     }
 }

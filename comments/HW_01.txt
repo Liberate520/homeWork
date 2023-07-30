@@ -21,9 +21,9 @@ In src/human/Human.java:
 
 In src/Main.java:
 
-> +import familyTree.FamilyTree;
-+import human.Gender;
-+import human.Human;
+> +import model.familyTree.FamilyTree;
++import model.human.Gender;
++import model.human.Human;
 +
 +import java.time.LocalDate;
 +

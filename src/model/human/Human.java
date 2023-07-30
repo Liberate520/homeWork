@@ -1,8 +1,7 @@
-package human;
+package model.human;
 
-import familyTree.FamilyTreeItem;
+import model.familyTree.FamilyTreeItem;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -51,6 +50,9 @@ public class Human implements FamilyTreeItem<Human> {
 
     public Human(String surname, String name, String patronymic, Gender gender, LocalDate birthDate, Human father, Human mother) {
         this(surname, name, patronymic, gender, birthDate, null, father, mother, 0);
+    }
+    public Human(String surname, String name, String patronymic, Gender gender, LocalDate birthDate, Human father, Human mother, int id) {
+        this(surname, name, patronymic, gender, birthDate, null, father, mother, id);
     }
 
     // ===========================================================

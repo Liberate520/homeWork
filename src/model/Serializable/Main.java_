@@ -1,7 +1,7 @@
-import Serializable.FileHandler;
-import familyTree.FamilyTree;
-import human.Gender;
-import human.Human;
+import model.Serializable.FileHandler;
+import model.familyTree.FamilyTree;
+import model.human.Gender;
+import model.human.Human;
 
 import java.time.LocalDate;
 
