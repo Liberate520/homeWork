@@ -1,5 +1,7 @@
+import java.io.Serializable;
+
 
 public interface Writable {
-    void saveTree();
-    void loadTree();
+    void writeFamilyTree(Serializable serializable, String filePath);
+    Serializable readFamilyTree(String filePath);
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable {
     private List<Human> familyTree;
 
     public FamilyTree(List<Human> familyTree) {
@@ -50,14 +50,16 @@ public class FamilyTree implements Serializable{
         List<String> siblings = new ArrayList<>();
         for (Human human : familyTree) {
             if (human.getMother() != null) {
-                if (humanSibling.getMother().getName().equalsIgnoreCase(human.getMother().getName()) && !human.getName().equalsIgnoreCase(humanSibling.getName()) &&
-                    !siblings.contains(human.getName())) {
+                if (humanSibling.getMother().getName().equalsIgnoreCase(human.getMother().getName())
+                        && !human.getName().equalsIgnoreCase(humanSibling.getName()) &&
+                        !siblings.contains(human.getName())) {
                     siblings.add(human.getName());
                 }
             }
             if (human.getFather() != null) {
-                if (humanSibling.getFather().getName().equalsIgnoreCase(human.getFather().getName()) && !human.getName().equalsIgnoreCase(humanSibling.getName()) &&
-                    !siblings.contains(human.getName())) {
+                if (humanSibling.getFather().getName().equalsIgnoreCase(human.getFather().getName())
+                        && !human.getName().equalsIgnoreCase(humanSibling.getName()) &&
+                        !siblings.contains(human.getName())) {
                     siblings.add(human.getName());
                 }
             }
@@ -68,23 +70,12 @@ public class FamilyTree implements Serializable{
     public List<Human> findHumanByName() {
         List<Human> reqHumans = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
-        while (flag) {
-            System.out.println("Введите действие:\n" +
-                    "1 - Найти человека\n" +
-                    "2 - Завершить\n");
-            String act = scanner.nextLine();
-            if (act.equals("1")) {
-                System.out.println("Введите имя");
-                String requiredHuman = scanner.nextLine();
-                for (Human human : familyTree) {
-                    if (requiredHuman.equalsIgnoreCase(human.getName())) {
-                        reqHumans.add(human);
-                    }
-                }
-            } else if (act.equals("2")) {
-                flag = false;
-            }
+        System.out.println("Введите имя");
+        String requiredHuman = scanner.nextLine();
+        for (Human human : familyTree) {
+            if (requiredHuman.equalsIgnoreCase(human.getName())) {
+                reqHumans.add(human);
+            } 
         }
         return reqHumans;
     }
@@ -99,5 +90,4 @@ public class FamilyTree implements Serializable{
         }
         return strBuilder.toString();
     }
-
 }
