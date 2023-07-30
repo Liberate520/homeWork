@@ -71,4 +71,8 @@ public class Presenter {
     public String getTreeName() {
         return tree.getTreeName();
     }
+
+    public void loadMemberById(int menuTreeMembers) {
+        view.print(tree.getItemInfoById(menuTreeMembers));
+    }
 }

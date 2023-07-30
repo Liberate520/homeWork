@@ -97,20 +97,36 @@ public class FamilyTreeService implements Service {
         tree.sortByAge();
     }
 
-    public String getDescendantsOfPerson(int idPerson) {
+    @Override
+    public String getItemInfoById(int idPerson) {
         Person person = this.getPersonById(idPerson);
         if (person == null) {
             return "";
         }
-        return getDescendantsOfPerson(person);
+        var sb = new StringBuilder();
+        sb.append("Имя: " + person.getName());
+        sb.append("\nФамилия: " + person.getSurname());
+        sb.append("\nДата рождения: " + person.getDateBirth());
+        sb.append("\n\n-----------------------------------\n");
+        sb.append(getDescendantsOfPerson(person));
+        return sb.toString();
     }
 
     public String getDescendantsOfPerson(Person person) {
         var sb = new StringBuilder();
-        sb.append("Потомки: " + person.getName() + "\n\n");
+        sb.append("Потомки: \n\n");
         var map = tree.getAllChildren(person);
         for (int key : map.keySet()) {
-            sb.append("Поколение " + key + ":\n");
+            if (key == 1)
+                sb.append("Дети" + ":\n");
+            else if (key == 2)
+                sb.append("Внуки:\n");
+            else if (key == 3)
+                sb.append("Пра-внуки:\n");
+            else if (key > 3 && key < 10)
+                sb.append("Пра-" + "пра-".repeat(key - 3) + "внуки:\n");
+            else
+                sb.append("Поколение " + key + ":\n");
             var thisPersons = map.get(key);
             for (var thisPerson : thisPersons) {
                 sb.append(" " + thisPerson + "\n");

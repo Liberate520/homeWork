@@ -22,6 +22,8 @@ public interface Service {
 
     String getTreeName();
 
+    String getItemInfoById(int id);
+
     Map<Integer, String> getTreeItemsInfo();
 
     void sortByName();

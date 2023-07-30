@@ -17,8 +17,9 @@ import GenerationTree.View.ConsoleUI.MenuRender.ConsoleManager;
 public class ConsoleUI implements View {
     private Presenter presenter;
     private ConsoleManager cmdManager;
-    private boolean appIsRun;
+
     private ConsoleMenu menu;
+    private boolean appIsRun;
 
     public ConsoleUI() {
         cmdManager = new ConsoleManager();
@@ -181,7 +182,8 @@ public class ConsoleUI implements View {
             }
             return;
         }
-        menuTreeMembers(allMembers);
+
+        presenter.loadMemberById(menuTreeMembers(allMembers));
     }
 
     private boolean menuDeleteMember() {
