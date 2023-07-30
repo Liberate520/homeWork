@@ -26,13 +26,10 @@ public class Test {
         familyTree.addHuman(gen3Human2);
         familyTree.addHuman(gen3Human3);
 
-        fileHandler.writeFamilyTree(familyTree, filePath);
-        System.out.println(fileHandler.readFamilyTree(filePath));
-
+        familyTree.sortByAge();
         System.out.println(familyTree.printFamilyTree());
-        System.out.println(familyTree.getParentName(gen3Human3));
-        System.out.println(familyTree.getSiblingName(gen2Human1));
-        System.out.println(familyTree.getChildName(gen1Human1));
-        familyTree.findHumanByName();
+        familyTree.sortByGender();
+        System.out.println(familyTree.printFamilyTree());
+        
     }
 }

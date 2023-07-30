@@ -80,6 +80,14 @@ public class FamilyTree implements Serializable {
         return reqHumans;
     }
 
+    public void sortByAge() {
+        familyTree.sort(new HumanComparatorByAge());
+    }
+
+    public void sortByGender() {
+        familyTree.sort(new HumanComporatorByGender());
+    }
+
     public String printFamilyTree() {
         StringBuilder strBuilder = new StringBuilder();
         strBuilder.append("Семейное древо:");
