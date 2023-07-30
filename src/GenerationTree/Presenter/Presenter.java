@@ -25,9 +25,12 @@ public class Presenter {
     }
 
     public boolean loadTree(String surname) {
-        tree.loadTree(surname);
-        view.print("Древо успешно загружено.");
-        return true;
+        if (tree.loadTree(surname)) {
+            view.print("Древо успешно загружено.");
+            return true;
+        }
+        view.print("Загрузка древа не удалась.");
+        return false;
     }
 
     public List<String> getAllTrees() {
@@ -57,7 +60,7 @@ public class Presenter {
             view.print("Древо успешно сохранено в файл " + name);
         else
             view.print("Ошибка при сохранении файла...");
-        return true;
+        return result;
     }
 
     public Map<Integer, String> getMembers() {
@@ -73,8 +76,9 @@ public class Presenter {
         return tree.getTreeName();
     }
 
-    public void loadMemberById(int menuTreeMembers) {
-        view.print(tree.getItemInfoById(menuTreeMembers));
+    public void loadMemberById(int menuTreeMemberId) {
+        if (menuTreeMemberId >= 0)
+            view.print(tree.getItemInfoById(menuTreeMemberId) + "\n\n");
     }
 
     public void addParrent(int memberId) {
@@ -90,5 +94,12 @@ public class Presenter {
             tree.addChild(parrentId, memberId);
             view.print("Родитель добавлен.");
         }
+    }
+
+    public void delЕreeItem(int id) {
+        if (tree.delTreeItem(id))
+            view.print("Член семьи удален из всех списков.");
+        else
+            view.print("Проблема при удалении члена семьи.");
     }
 }

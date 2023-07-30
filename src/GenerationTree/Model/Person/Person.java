@@ -101,6 +101,11 @@ public class Person implements Marrieble, GenTreeItem, Comparable<Person> {
     }
 
     @Override
+    public boolean removeItem(GenTreeItem person) {
+        return this.children.remove(person) && this.parrents.remove(person);
+    }
+
+    @Override
     public Boolean addSpouse(Marrieble spouse, LocalDate dateOfMarriage) {
         if (spouse != null &&
                 !this.equals(spouse) &&

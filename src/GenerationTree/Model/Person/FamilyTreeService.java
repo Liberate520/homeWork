@@ -43,18 +43,18 @@ public class FamilyTreeService implements Service {
     }
 
     public boolean addPerson(Person person) {
-        var result = tree.addOnlyPerson(person);
+        var result = tree.addOnlyItem(person);
         if (result)
             person.setSurname(tree);
         return result;
     }
 
     public void addPersonAndRelatives(Person person) {
-        this.tree.addPersonAndRelatives(person);
+        this.tree.addItemAndRelatives(person);
     }
 
     public boolean addSpouse(int personId, Person spouse, LocalDate dateOfMarriage) {
-        var person = (Person) this.tree.getPersonById(personId);
+        var person = (Person) this.tree.getItemById(personId);
         if (person != null && spouse != null) {
             person.addSpouse(spouse, dateOfMarriage);
             return true;
@@ -64,8 +64,8 @@ public class FamilyTreeService implements Service {
 
     @Override
     public boolean addChild(int parrentId, int childId) {
-        var parrent = (Person) this.tree.getPersonById(parrentId);
-        var child = (Person) this.tree.getPersonById(childId);
+        var parrent = (Person) this.tree.getItemById(parrentId);
+        var child = (Person) this.tree.getItemById(childId);
         if (parrent != null && child != null) {
             parrent.addChild(child);
             return true;
@@ -74,7 +74,7 @@ public class FamilyTreeService implements Service {
     }
 
     public Person getPersonById(int id) {
-        return (Person) this.tree.getPersonById(id);
+        return (Person) this.tree.getItemById(id);
     }
 
     public Map<Integer, String> getTreeItemsInfo() {
@@ -96,21 +96,6 @@ public class FamilyTreeService implements Service {
 
     public void sortByAge() {
         tree.sortByAge();
-    }
-
-    @Override
-    public String getItemInfoById(int idPerson) {
-        Person person = this.getPersonById(idPerson);
-        if (person == null) {
-            return "";
-        }
-        var sb = new StringBuilder();
-        sb.append("Имя: " + person.getName());
-        sb.append("\nФамилия: " + person.getSurname());
-        sb.append("\nДата рождения: " + person.getDateBirth());
-        sb.append("\n\n-----------------------------------\n");
-        sb.append(getDescendantsOfPerson(person));
-        return sb.toString();
     }
 
     public String getDescendantsOfPerson(Person person) {
@@ -138,6 +123,21 @@ public class FamilyTreeService implements Service {
             }
         }
 
+        return sb.toString();
+    }
+
+    @Override
+    public String getItemInfoById(int idPerson) {
+        Person person = this.getPersonById(idPerson);
+        if (person == null) {
+            return "";
+        }
+        var sb = new StringBuilder();
+        sb.append("Имя: " + person.getName());
+        sb.append("\nФамилия: " + person.getSurname());
+        sb.append("\nДата рождения: " + person.getDateBirth());
+        sb.append("\n\n-----------------------------------\n");
+        sb.append(getDescendantsOfPerson(person));
         return sb.toString();
     }
 
@@ -204,6 +204,10 @@ public class FamilyTreeService implements Service {
     @Override
     public int addTreeItem(String name, Gender gender, LocalDate dateBirth) {
         return addPerson(name, gender, dateBirth);
+    }
+
+    public boolean delTreeItem(int id) {
+        return tree.deleteItem(id);
     }
 
 }

@@ -28,7 +28,7 @@ public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
         return this.treeName;
     }
 
-    public GenTreeItem getPersonById(int id) {
+    public GenTreeItem getItemById(int id) {
         for (GenTreeItem item : items) {
             if (item.getId() == id) {
                 return item;
@@ -38,7 +38,7 @@ public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
     }
 
     public Map<Integer, List<GenTreeItem>> getAllChildren(int itemId) {
-        return getAllChildren(getPersonById(itemId));
+        return getAllChildren(getItemById(itemId));
     }
 
     public Map<Integer, List<GenTreeItem>> getAllChildren(GenTreeItem person) {
@@ -64,20 +64,28 @@ public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
 
     }
 
-    public Boolean addOnlyPerson(GenTreeItem item) {
+    public Boolean addOnlyItem(GenTreeItem item) {
         return addItem(item, false);
     }
 
-    public Boolean addPersonAndRelatives(GenTreeItem item) {
+    public Boolean addItemAndRelatives(GenTreeItem item) {
         return addItem(item, true);
     }
 
-    public Boolean addOnlyPersons(List<GenTreeItem> item) {
+    public Boolean addOnlyItem(List<GenTreeItem> item) {
         return addItems(item, false);
     }
 
-    public Boolean addPersonsAndRelatives(List<GenTreeItem> persons) {
+    public Boolean addItemAndRelatives(List<GenTreeItem> persons) {
         return addItems(persons, true);
+    }
+
+    public boolean deleteItem(int id) {
+        var item = getItemById(id);
+
+        deleteLinksFromRelatives(item.getChildren(), item);
+        deleteLinksFromRelatives(item.getParrents(), item);
+        return this.items.remove(item);
     }
 
     public void sortByName() {
@@ -139,5 +147,15 @@ public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
             addItem(item, allRelatives);
         }
         return true;
+    }
+
+    private static boolean deleteLinksFromRelatives(List<GenTreeItem> list, GenTreeItem item) {
+        for (GenTreeItem genTreeItem : list) {
+            if (genTreeItem.getChildren().remove(item))
+                return true;
+            if (genTreeItem.getParrents().remove(item))
+                return true;
+        }
+        return false;
     }
 }

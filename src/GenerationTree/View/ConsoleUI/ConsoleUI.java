@@ -50,7 +50,7 @@ public class ConsoleUI implements View {
     @Override
     public void print(String text) {
         cmdManager.PrintText(text);
-        cmdManager.inputText("      Для проболжения нажмите Enter...");
+        cmdManager.inputText("      Для продолжения нажмите Enter...");
         clsField();
     }
 
@@ -98,8 +98,10 @@ public class ConsoleUI implements View {
         }
         var name = menuSavedTree(allTrees);
         if (!name.isEmpty()) {
-            menu.closeMenu();
-            return this.presenter.loadTree(name);
+            var result = this.presenter.loadTree(name);
+            if (result)
+                menu.closeMenu();
+            return result;
         }
         return false;
     }
@@ -153,7 +155,7 @@ public class ConsoleUI implements View {
                 "УДАЛИТЬ ЧЛЕНА СЕМЬИ", "СОХРАНИТЬ ДРЕВО"));
         menuData.put("-----", Arrays.asList("ВЫХОД В ГЛАВНОЕ МЕНЮ"));
         menu.selectedMenu(menuData, this::menuAddMember, this::menuShowMembers,
-                this::menuDeleteMember, this::savethisTree, menu::closeMenu);
+                this::menuDeleteMember, this::saveThisTree, menu::closeMenu);
     }
 
     private boolean menuAddMember() {
@@ -196,12 +198,18 @@ public class ConsoleUI implements View {
         presenter.loadMemberById(menuTreeMembers(allMembers));
     }
 
-    private boolean menuDeleteMember() {
-        stubFunction();
-        return false;
+    private void menuDeleteMember() {
+        var memners = presenter.getMembers();
+        if (memners.size() > 0) {
+            int id = menuTreeMembers(memners);
+            if (menu.yesNoDialog("Удалить выбранного члена семьи?"))
+                presenter.delЕreeItem(id);
+        } else {
+            print("Нет членов семьи.");
+        }
     }
 
-    private boolean savethisTree() {
+    private boolean saveThisTree() {
         return presenter.saveTree();
     }
 
@@ -212,9 +220,5 @@ public class ConsoleUI implements View {
             cmdManager.consoleClear();
             cmdManager.PrintText("Приложение завершило работу.");
         }
-    }
-
-    private void stubFunction() {
-        print("Функционал в разработке.");
     }
 }

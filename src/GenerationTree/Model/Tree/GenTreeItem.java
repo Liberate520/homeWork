@@ -14,4 +14,7 @@ public interface GenTreeItem extends Serializable {
     List<GenTreeItem> getParrents();
 
     List<GenTreeItem> getChildren();
+
+    boolean removeItem(GenTreeItem person);
+
 }

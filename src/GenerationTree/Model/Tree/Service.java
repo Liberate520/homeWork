@@ -12,6 +12,8 @@ public interface Service {
 
     int addTreeItem(String name, Gender gender, LocalDate dateBirth);
 
+    boolean delTreeItem(int id);
+
     boolean addChild(int parrentId, int childId);
 
     boolean saveTree();
