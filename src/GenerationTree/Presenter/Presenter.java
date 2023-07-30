@@ -1,48 +1,74 @@
 package GenerationTree.Presenter;
 
-import java.nio.file.FileAlreadyExistsException;
-import java.util.LinkedList;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import GenerationTree.Model.Person.FamilyTreeService;
+import GenerationTree.Model.Person.Structs.Gender;
 import GenerationTree.Model.Tree.Service;
 import GenerationTree.View.View;
 
 public class Presenter {
-
     private View view;
-    private Service service;
+    private Service tree;
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new FamilyTreeService();
+        this.tree = new FamilyTreeService();
     }
 
-    public boolean addNewTree(String name) {
-        try {
-            return service.addNewTree(name);
-        } catch (FileAlreadyExistsException e) {
-            return view.fileExist(name);
-        }
+    public boolean addNewTree(String surname) {
+        tree = new FamilyTreeService(surname);
+        view.print("Создано новое древо для семьи " + surname);
+        return true;
+    }
+
+    public boolean loadTree(String surname) {
+        tree.loadTree(surname);
+        view.print("Древо успешно загружено.");
+        return true;
     }
 
     public List<String> getAllTrees() {
-        var forest = service.getForest();
-        if (forest == null) {
-            forest = new LinkedList<>();
+        return tree.getAllSavedTrees();
+    }
+
+    public boolean deleteSavedTree(String name) {
+        return tree.deleteSavedTree(name);
+    }
+
+    public void addNewFamilyMember(String name, Gender gender, LocalDate dateBirth) {
+        try {
+            tree.addTreeItem(name, gender, dateBirth);
+            view.print("Член семьи " + name + " " + tree.getTreeName() + " успешно добавлен в древо.");
+        } catch (RuntimeException ex) {
+            view.print(ex.getMessage());
         }
-        return forest;
+    }
+
+    public boolean saveTree(String name) {
+        if (tree == null) {
+            view.print("Создайте новое древо или выберите существующее.");
+        }
+        var result = tree.saveTree();
+        if (result)
+            view.print("Древо успешно сохранено в файл " + name);
+        else
+            view.print("Ошибка при сохранении файла...");
+        return true;
+    }
+
+    public Map<Integer, String> getMembers() {
+        tree.sortByName();
+        return tree.getTreeItemsInfo();
+    }
+
+    public boolean saveTree() {
+        return saveTree(tree.getTreeName());
     }
 
     public String getTreeName() {
-        return service.getTreeName();
-    }
-
-    public boolean loadTree(String name) {
-        return service.loadTree(name);
-    }
-
-    public boolean deleteTree(String name) {
-        return service.deleteTree(name);
+        return tree.getTreeName();
     }
 }

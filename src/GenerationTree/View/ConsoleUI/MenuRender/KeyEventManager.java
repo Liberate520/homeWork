@@ -1,4 +1,4 @@
-package GenerationTree.View.MenuRender;
+package GenerationTree.View.ConsoleUI.MenuRender;
 
 import java.awt.event.KeyListener;
 

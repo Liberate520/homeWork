@@ -1,4 +1,4 @@
-package GenerationTree.View.MenuRender;
+package GenerationTree.View.ConsoleUI.MenuRender;
 
 import java.awt.event.KeyEvent;
 import java.util.Collections;
@@ -33,6 +33,13 @@ public class MenuRender {
     public MenuRender(Map<String, List<String>> menuData, int consoleLines,
             boolean isEscActive, boolean showHelpControl, String headerText, String footerText, String prefix,
             String prefixMark) {
+        this(menuData, consoleLines, isEscActive, showHelpControl, headerText, footerText, prefix, prefixMark,
+                new ConsoleManager());
+    }
+
+    public MenuRender(Map<String, List<String>> menuData, int consoleLines,
+            boolean isEscActive, boolean showHelpControl, String headerText, String footerText, String prefix,
+            String prefixMark, ConsoleManager cm) {
         this.headerText = headerText == null ? "" : headerText;
         this.footerText = footerText == null ? "" : footerText;
 
@@ -45,6 +52,7 @@ public class MenuRender {
         this.largestLine = getLargestLineLength();
         this.pagesMap = splitDataToPages(this.menuData, this.consoleLines, HEADER_LINE_COUNT);
         this.currentPage = null;
+        this.cm = cm;
     }
 
     public int startRenderMenu(int index) {

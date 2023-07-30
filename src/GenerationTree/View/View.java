@@ -1,7 +1,7 @@
 package GenerationTree.View;
 
 public interface View {
-    void start();
+    void startup();
 
     boolean fileExist(String name);
 

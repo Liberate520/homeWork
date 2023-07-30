@@ -3,8 +3,10 @@ package GenerationTree.Model.Person;
 import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import GenerationTree.Model.FileHandler.FileHandler;
 import GenerationTree.Model.Person.Comparators.PersonComparatorBySename;
@@ -32,17 +34,19 @@ public class FamilyTreeService implements Service {
         this.idFileHandler = new FileHandler<>();
     }
 
-    public int addPerson(String name, Gender gender, LocalDate dateBirth) {
+    public int addPerson(String name, Gender gender, LocalDate dateBirth) throws RuntimeException {
         int id = idGenerator.GetNewId();
         Person person = new Person(id, name, gender, dateBirth);
-        addPerson(person);
-
-        return id;
+        if (addPerson(person))
+            return id;
+        throw new RuntimeException("Ошибка при добавлении члена семьи в древо.");
     }
 
-    public void addPerson(Person person) {
-        tree.addOnlyPerson(person);
-        person.setSurname(tree);
+    public boolean addPerson(Person person) {
+        var result = tree.addOnlyPerson(person);
+        if (result)
+            person.setSurname(tree);
+        return result;
     }
 
     public void addPersonAndRelatives(Person person) {
@@ -72,13 +76,13 @@ public class FamilyTreeService implements Service {
         return (Person) this.tree.getPersonById(id);
     }
 
-    public List<String> getPersonsInfo() {
-        List<String> infoList = new LinkedList<>();
+    public Map<Integer, String> getTreeItemsInfo() {
+        Map<Integer, String> info = new HashMap<>();
         for (var person : tree) {
-            infoList.add(person.toString());
+            info.put(person.getId(), person.toString());
         }
 
-        return infoList;
+        return info;
     }
 
     public void sortByName() {
@@ -117,7 +121,7 @@ public class FamilyTreeService implements Service {
     }
 
     @Override
-    public List<String> getForest() {
+    public List<String> getAllSavedTrees() {
         File directory = new File(DATA_FOLDER);
         if (!directory.isDirectory()) {
             return null;
@@ -129,10 +133,10 @@ public class FamilyTreeService implements Service {
                 String fileName = files[i].getName();
                 int lastDotIndex = fileName.lastIndexOf(".");
                 if (lastDotIndex > 0) {
-                    treesNames.add(fileName.substring(0, lastDotIndex));
-                } else {
-                    treesNames.add(fileName);
+                    fileName = fileName.substring(0, lastDotIndex);
                 }
+                treesNames.add(fileName.toUpperCase());
+
             }
         }
         return treesNames;
@@ -146,7 +150,8 @@ public class FamilyTreeService implements Service {
     @Override
     public boolean saveTree() {
         return idFileHandler.save(idGenerator, DATA_FOLDER + ID_GENERATOR_FILE_NAME)
-                && treeFileHandler.save(tree, DATA_FOLDER + this.tree.getTreeName() + FILE_TREE_EXTENSIONS);
+                && treeFileHandler.save(tree,
+                        DATA_FOLDER + this.tree.getTreeName() + FILE_TREE_EXTENSIONS);
     }
 
     @Override
@@ -161,14 +166,14 @@ public class FamilyTreeService implements Service {
         return false;
     }
 
-    public boolean deleteTree(String name) {
+    public boolean deleteSavedTree(String name) {
         return treeFileHandler.deleteFile(DATA_FOLDER + name + FILE_TREE_EXTENSIONS);
     }
 
     @Override
     public boolean addNewTree(String name) throws FileAlreadyExistsException {
-        var savedTrees = getForest();
-        if (savedTrees != null && savedTrees.contains(name)) {
+        var savedTrees = getAllSavedTrees();
+        if (savedTrees != null && savedTrees.contains(name.toLowerCase())) {
             throw new FileAlreadyExistsException(name);
         }
         this.tree = new GenerationTree(name);

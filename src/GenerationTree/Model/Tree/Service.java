@@ -3,6 +3,7 @@ package GenerationTree.Model.Tree;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import GenerationTree.Model.Person.Structs.Gender;
 
@@ -15,10 +16,14 @@ public interface Service {
 
     boolean loadTree(String treeName);
 
-    boolean deleteTree(String name);
+    boolean deleteSavedTree(String name);
 
-    List<String> getForest();
+    List<String> getAllSavedTrees();
 
     String getTreeName();
+
+    Map<Integer, String> getTreeItemsInfo();
+
+    void sortByName();
 
 }
