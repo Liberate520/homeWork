@@ -2,6 +2,8 @@ package family_tree.view;
 
 import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -17,6 +19,7 @@ public class ConsoleUi implements View{
         scanner = new Scanner(System.in);
         work = true;
         menu = new MainMenu(this);
+
 
     }
 
@@ -74,6 +77,12 @@ public class ConsoleUi implements View{
     public void getInfo() {
         presenter.getInfo();
     }
+    public void read() { presenter.read();}
+    public void save() {
+        presenter.save();
+        System.out.println("Данные сохранены");
+        System.out.println("\n");
+    }
 
     public void addHuman() {
             System.out.println("Введите имя: ");
@@ -84,7 +93,12 @@ public class ConsoleUi implements View{
             System.out.println("Введите дату рождения в формате гггг-мм-дд: ");
             String date = scanner.nextLine();
             LocalDate birthDate = LocalDate.parse(date);
-            presenter.addHuman(name, gender, birthDate);
+            System.out.println("Введите имя отца: ");
+            String nameFather = scanner.nextLine();
+            System.out.println("Введите имя матери: ");
+            String nameMother = scanner.nextLine();
+            presenter.addHuman(name, gender, birthDate, nameFather, nameMother);
+
         }
 
     }

@@ -14,6 +14,8 @@ public class MainMenu {
         commandList.add(new SortByBirthDate(consoleUi));
         commandList.add(new SortByName(consoleUi));
         commandList.add(new GetInfo(consoleUi));
+        commandList.add(new Save(consoleUi));
+        commandList.add(new Read(consoleUi));
         commandList.add(new Finish(consoleUi));
     }
     public String menu(){

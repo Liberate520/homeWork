@@ -66,6 +66,15 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         }
         return res;
     }
+    public E humanGetByName(String name){
+        for (E human: humanList){
+            if (human.getName().equalsIgnoreCase(name)){
+                return human;
+            }
+        }
+        return null;
+
+    }
     public boolean setWedding(long humansId1, long humansId2){
         if (checkId(humansId1) && checkId(humansId2)){
             E human1 = getById(humansId1);

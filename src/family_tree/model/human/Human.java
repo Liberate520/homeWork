@@ -8,16 +8,16 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class E implements Serializable, FamilyTreeItem {
+public class Human implements Serializable, FamilyTreeItem {
     private long id;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private List<E> parents;
-    private List<E> children;
+    private List<Human> parents;
+    private List<Human> children;
 
-    public E(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, E father, E mother){
+    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother){
         id = -1;
         this.name = name;
         this.gender = gender;
@@ -32,13 +32,15 @@ public class E implements Serializable, FamilyTreeItem {
         }
         children = new ArrayList<>();
     }
-    public E(String name, Gender gender, LocalDate birthDate){
+    public Human(String name, Gender gender, LocalDate birthDate){
         this(name, gender, birthDate, null, null, null);
     }
-    public E(String name, Gender gender, LocalDate birthDate, E father, E mother){
+    public Human(String name, Gender gender, LocalDate birthDate, Human father, Human mother){
         this(name, gender, birthDate, null, father, mother);
     }
-    public boolean addChild(E child){
+
+
+    public boolean addChild(Human child){
         if(!children.contains(child)){
             children.add(child);
             return true;
@@ -56,7 +58,7 @@ public class E implements Serializable, FamilyTreeItem {
      public void setId(long id){
          this.id = id;
      }
-    public boolean addParent(E parent){
+    public boolean addParent(Human parent){
         if(!parents.contains(parent)){
             parents.add(parent);
             return true;
@@ -69,14 +71,14 @@ public class E implements Serializable, FamilyTreeItem {
     public LocalDate getDeathDate(){
         return deathDate;
     }
-    public E getFather(){
-        for (E parent: parents){
+    public Human getFather(){
+        for (Human parent: parents){
             if(parent.getGender() == Gender.Male) return parent;
         }
         return null;
     }
-    public E getMother(){
-        for (E parent: parents){
+    public Human getMother(){
+        for (Human parent: parents){
             if(parent.getGender() == Gender.Female) return parent;
         }
         return null;
@@ -96,11 +98,11 @@ public class E implements Serializable, FamilyTreeItem {
         return gender;
     }
 
-    public List<E> getParents() {
+    public List<Human> getParents() {
         return parents;
     }
 
-    public List<E> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
@@ -139,13 +141,11 @@ public class E implements Serializable, FamilyTreeItem {
         sb.append(getMotherInfo());
         sb.append(", ");
         sb.append(getFatherInfo());
-        sb.append(", ");
-        sb.append(getChildrenInfo());
         return sb.toString();
     }
     public String getMotherInfo(){
         String res = "мать: ";
-        E mother = getMother();
+        Human mother = getMother();
         if (mother != null){
             res += mother.getName();
         } else {
@@ -155,7 +155,7 @@ public class E implements Serializable, FamilyTreeItem {
     }
     public String getFatherInfo(){
         String res = "отец: ";
-        E father = getFather();
+        Human father = getFather();
         if (father != null){
             res += father.getName();
         } else {
@@ -193,10 +193,10 @@ public class E implements Serializable, FamilyTreeItem {
         boolean result;
         if (this == obj) {
             result = true;
-        } else if (!(obj instanceof E)) {
+        } else if (!(obj instanceof Human)) {
             result = false;
         } else {
-            E human = (E) obj;
+            Human human = (Human) obj;
             result = human.getName().equals(getName());
         }
         return result;
