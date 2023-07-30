@@ -1,13 +1,14 @@
 package family_tree;
 
 import family_tree.family_tree.FamilyTree;
+import family_tree.family_tree.FamilyTreeInterface;
 import family_tree.human.Gender;
 import family_tree.human.Human;
 import family_tree.writer.FileHandler;
 
 import java.time.LocalDate;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         String filePath = "src/family_tree/data/tree.out";
         FileHandler fileHandler = new FileHandler();
@@ -20,9 +21,9 @@ public class Main {
         FileHandler fileHandler1 = new FileHandler();
         FamilyTree tree1 = (FamilyTree) fileHandler1.read(filePath);
 
-        for(Human item:tree){
-            System.out.println(item);
-        }
+//        for(Human item:tree){
+//            System.out.println(item);
+//        }
         System.out.println();
 
         tree.sortByName();
@@ -47,7 +48,7 @@ public class Main {
         tree.add(semyon);
         Human larisa = new Human("Лариса",Gender.Female,LocalDate.of(1945,9,1));
         larisa.addChild(vasya);
-        tree.add(larisa);
+        //tree.add(larisa);
         return tree;
 
     }

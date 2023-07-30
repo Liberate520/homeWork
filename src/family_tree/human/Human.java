@@ -1,12 +1,14 @@
 package family_tree.human;
 
+import family_tree.family_tree.FamilyTreeInterface;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable,FamilyTreeInterface<Human> {
     private long id;
     private String name;
     private Gender gender;

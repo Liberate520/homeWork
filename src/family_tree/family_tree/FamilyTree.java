@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializable, Iterable<E> {
     public long humansId;
     private List<E> humanList;
 
@@ -37,7 +37,8 @@ public class FamilyTree<E> implements Serializable, Iterable<E> {
         }
         return false;
     }
-    private void addToParents(E human){
+    private void addToParents(E human) {
+
         for(E parent:human.getParents()){
             parent.addChild(human);
         }
@@ -114,7 +115,7 @@ public class FamilyTree<E> implements Serializable, Iterable<E> {
         }
         return false;
     }
-    public Human getById(long id){
+    public E getById(long id){
         for (E human: humanList){
             if (human.getId()==id){
                 return human;
@@ -148,6 +149,6 @@ public class FamilyTree<E> implements Serializable, Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new FamilyTreeIterator(humanList);
+        return new FamilyTreeIterator<>(humanList);
     }
 }
