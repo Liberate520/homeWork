@@ -1,19 +1,18 @@
 package ui;
 
 import familyTree.enums.Gender;
-import familyTree.treeWorkspace.TreeItem;
 import presenter.Presenter;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Console<E extends TreeItem<E>> implements ConsoleUI {
+public class Console implements ConsoleUI {
     private Scanner scanner;
-    private Presenter<E> presenter;
+    private Presenter presenter;
 
     public Console() {
         this.scanner = new Scanner(System.in);
-        this.presenter = new Presenter<>(this);
+        this.presenter = new Presenter(this);
     }
 
     @Override
@@ -23,15 +22,7 @@ public class Console<E extends TreeItem<E>> implements ConsoleUI {
             System.out.println("Старт программы");
             while (true) {
                 //TODO решить проблему с текстовым блоком
-                System.out.println("Для выхода из программы нажмите: q\n\n" +
-                                   "Выберите пункт меню:\n" +
-                                   "1. Добавить человека в дерево\n" +
-                                   "2. Распечатать дерево\n" +
-                                   "3. Сохранить дерево\n" +
-                                   "4. Загрузить дерево\n" +
-                                   "Сортировать дерево по: полу(5), возрасту(6), имени(7)\n" +
-                                   "8. Добавить ребенка\n"
-                );
+                printMenu();
                 switch (scan()) {
 
                     case "1": {
@@ -78,6 +69,19 @@ public class Console<E extends TreeItem<E>> implements ConsoleUI {
                 }
             }
         }
+    }
+
+    @Override
+    public void printMenu() {
+        System.out.println("Для выхода из программы нажмите: q\n\n" +
+                           "Выберите пункт меню:\n" +
+                           "1. Добавить человека в дерево\n" +
+                           "2. Распечатать дерево\n" +
+                           "3. Сохранить дерево\n" +
+                           "4. Загрузить дерево\n" +
+                           "Сортировать дерево по: полу(5), возрасту(6), имени(7)\n" +
+                           "8. Добавить ребенка\n"
+        );
     }
 
     private String scan() {

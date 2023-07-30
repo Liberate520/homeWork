@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E> {
-    // Класс для хранения и обработки списка людей в семейном дереве
     private List<E> familyTree;
 
     public FamilyTree() {

@@ -2,19 +2,17 @@ package presenter;
 
 import familyTree.Service;
 import familyTree.enums.Gender;
-import familyTree.treeWorkspace.FamilyTree;
-import familyTree.treeWorkspace.TreeItem;
 import ui.ConsoleUI;
 
 import java.time.LocalDate;
 
-public class Presenter<E extends TreeItem<E>> {
+public class Presenter {
     private ConsoleUI consoleUI;
-    private Service<E> service;
+    private Service service;
 
     public Presenter(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
-        service = new Service<>();
+        service = new Service();
     }
     public void addPerson(String name, Gender gender, LocalDate birthDate, LocalDate deathDate){
         service.addPerson(name, gender, birthDate, deathDate);
