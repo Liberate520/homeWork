@@ -120,7 +120,7 @@ public class Person implements Serializable {
     }
     public String getParents(){
         StringBuilder sb = new StringBuilder();
-        if (father != null && mother != null) {
+        if (father != null || mother != null) {
             sb.append("\n => [");
             if (father != null) {
                 sb.append("father: ");
@@ -134,10 +134,10 @@ public class Person implements Serializable {
         }
         return sb.toString();
     }
-
     public Person getMother(){
         return mother;
     }
+
     public Person getFather(){
         return father;
     }
