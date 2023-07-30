@@ -58,17 +58,19 @@ public class FamilyTree implements Serializable, Iterable<Person> {
 
     public String getPersonalTree(int id){
         StringBuilder sB = new StringBuilder();
-        Person person = relations.get(id);
-        sB.append("\n============\n");
-        sB.append(person.getID());
-        sB.append(". ");
-        sB.append(person);
-        sB.append(getChildrensInfo(person.getID()));
-        sB.append(getSiblingsFull(person.getMother(), person.getFather(), person.getID()));
-        sB.append("\n============\n");
-
+        for (Person person: relations) {
+            if (person.getID() == id) {
+                sB.append("\n============\n");
+                sB.append(person.getID());
+                sB.append(". ");
+                sB.append(person);
+                sB.append(getChildrensInfo(person.getID()));
+                sB.append(getSiblingsFull(person.getMother(), person.getFather(), person.getID()));
+                sB.append("\n============\n");
+                return sB.toString();
+            }
+        }
         return sB.toString();
-
     }
     public String getSiblingsFull(Person mother, Person father, long id){
 

@@ -1,5 +1,7 @@
 package family_tree.person;
 
+import family_tree.ftree.FamilyTreeIterator;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
