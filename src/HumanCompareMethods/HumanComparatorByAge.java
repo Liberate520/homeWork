@@ -1,3 +1,5 @@
+package HumanCompareMethods;
+
 import java.util.Comparator;
 
 public class HumanComparatorByAge implements Comparator<Human>{

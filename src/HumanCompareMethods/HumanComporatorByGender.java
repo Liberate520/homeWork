@@ -1,3 +1,5 @@
+package HumanCompareMethods;
+
 import java.util.Comparator;
 
 public class HumanComporatorByGender implements Comparator<Human> {
