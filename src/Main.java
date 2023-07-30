@@ -7,16 +7,27 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+// write to file
         String filePath = "src/family_tree/tree.out";
-// Запись в файл
+
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree = testTree();
         System.out.println(tree);
         fileHandler.save(tree, filePath);
-// Чтение из файла
+
+// sorting
+//        tree.sortByName();
+//        System.out.println(tree);
+
+//        tree.sortByBirthDate();
+//        System.out.println(tree);
+
+
+// read file
 //        FileHandler fileHandler = new FileHandler();
 //        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
 //        System.out.println(tree);
+
 
     }
     static FamilyTree testTree(){

@@ -1,6 +1,8 @@
 package family_tree;
 
 import human.Human;
+import human.comparators.HumanComparatorByBirthDate;
+import human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -100,6 +102,12 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     @Override
     public Iterator<Human> iterator() {
-        return null;
+        return new HumanIterator(humanList);
+    }
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+    public void sortByBirthDate(){
+        humanList.sort(new HumanComparatorByBirthDate());
     }
 }
