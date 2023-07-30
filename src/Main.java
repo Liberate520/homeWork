@@ -1,8 +1,10 @@
 import family_tree.FamilyTree;
+import family_tree.FamilyTreeItem;
 import human.Gender;
 import human.Human;
 import writer.FileHandler;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main {
@@ -13,7 +15,7 @@ public class Main {
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree = testTree();
         System.out.println(tree);
-        fileHandler.save(tree, filePath);
+        fileHandler.save((Serializable) tree, filePath);
 
 // sorting
 //        tree.sortByName();
@@ -31,7 +33,7 @@ public class Main {
 
     }
     static FamilyTree testTree(){
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         Human fedor = new Human("Федор", Gender.Male, LocalDate.of(1966,2,2));
         Human galina = new Human("Галина", Gender.Female, LocalDate.of(1970,3,3));

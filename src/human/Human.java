@@ -1,12 +1,14 @@
 package human;
 
+import family_tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem<Human> {
     private long id;
     private String name;
     private Gender gender;
@@ -89,6 +91,16 @@ public class Human implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public LocalDate getDeathDate() {
+        return null;
+    }
+
+    @Override
+    public LocalDate getBirthDate() {
+        return null;
     }
 
     public long getId() {
