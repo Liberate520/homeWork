@@ -6,8 +6,6 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import family_tree.Gender;
-
 public class Human implements Serializable{
     private long id;
     private String name;

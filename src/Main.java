@@ -1,23 +1,32 @@
 import java.time.LocalDate;
 import java.util.logging.FileHandler;
 
+import Human.Gender;
 import Human.Human;
 import family_tree.FamilyTree;
-import family_tree.Gender;
 
 public class Main {
    public static void main(String[] args) {
-        String path = "src/family_tree/FMyTree.out";
-        FileHandler fileHandler = new FileHandler();
+        // String path = "src/family_tree/FMyTree.out";
+        // FileHandler fileHandler = new FileHandler();
         
-        // FamilyTree tree = makeTree();
-        // System.out.println(tree);
+        FamilyTree tree = makeTree();
+        System.out.println(tree);
+
+        tree.sortByAge();
+        System.out.println(tree);
+
+        tree.sortById();
+        System.out.println(tree);
+
+        tree.sortByName();
+        System.out.println(tree);
 
         // fileHandler.save(tree, path);
 
-        FileHandler fileHandler = new FileHandler();
-        FamilyTree tree = (FamilyTree) fileHandler.read(path);
-        System.out.println(tree);
+        // FileHandler fileHandler = new FileHandler();
+        // FamilyTree tree = (FamilyTree) fileHandler.read(path);
+        // System.out.println(tree);
     }    
         
     static FamilyTree makeTree(){
