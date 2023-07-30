@@ -1,5 +1,6 @@
 package genealogicalTree;
 
+import Service.TreeNode;
 import human.ComparatorByAge;
 import human.ComparatorByName;
 import human.Human;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree<T extends Human > implements Serializable, Iterable<T> {
+public class GenealogicalTree<T extends TreeNode> implements Serializable, Iterable<T> {
 
     private List<T> humanList;
 
@@ -49,22 +50,19 @@ public class GenealogicalTree<T extends Human > implements Serializable, Iterabl
         List<T> result = new ArrayList<>();
         for (T human:humanList
         ) {
-            String lastNameHuman = getLastName((Human) human);
+            String lastNameHuman = human.getLastName();
             if(lastNameHuman.equalsIgnoreCase(lastName)) result.add(human);
         }
         return result;
     }
 
-    private String getLastName(Human human) {
-        return human.getLastName();
-    }
 
-    public List<Human> getHumanByName(String name) {
-        List<Human> result = new ArrayList<>();
+    public List<T> getHumanByName(String name) {
+        List<T> result = new ArrayList<>();
         for (T human:humanList
         ) {
-            String nameHuman = getName((Human) human);
-            if(nameHuman.equalsIgnoreCase(name)) result.add((Human) human);
+            String nameHuman = human.getName();
+            if(nameHuman.equalsIgnoreCase(name)) result.add(human);
         }
         return result;
     }
@@ -93,11 +91,11 @@ public class GenealogicalTree<T extends Human > implements Serializable, Iterabl
     }
 
     public void sortByAge(){
-        humanList.sort(new ComparatorByAge());
+        humanList.sort(new ComparatorByAge<>());
     }
 
     public void sortByName(){
-        humanList.sort(new ComparatorByName());
+        humanList.sort(new ComparatorByName<>());
     }
 }
 

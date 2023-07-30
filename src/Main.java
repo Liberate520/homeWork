@@ -1,4 +1,3 @@
-import genealogicalTree.GTgeneric;
 import genealogicalTree.GenealogicalTree;
 import Service.FileHandler;
 import human.Gender;

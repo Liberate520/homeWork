@@ -1,10 +1,12 @@
 package genealogicalTree;
 
+import Service.TreeNode;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator<T extends GTgeneric> implements Iterator<T> {
+public class HumanIterator<T extends TreeNode> implements Iterator<T> {
     private int index;
     private ArrayList<T> humanList;
 

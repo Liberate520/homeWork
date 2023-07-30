@@ -1,12 +1,12 @@
 package human;
 
-import genealogicalTree.GTgeneric;
+import Service.TreeNode;
 
 import java.util.Comparator;
 
 
 
-public class ComparatorByName<T extends Human> implements Comparator<T> {
+public class ComparatorByName<T extends TreeNode> implements Comparator<T> {
 
     @Override
     public int compare(T o1, T o2) {

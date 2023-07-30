@@ -1,6 +1,6 @@
 package human;
 
-import genealogicalTree.GTgeneric;
+import Service.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeNode {
 
     private String name;
     private String lastName;
@@ -104,6 +104,9 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
 
+
+
+
     public String getName(){
         return this.name;
     }
@@ -187,11 +190,11 @@ public class Human implements Serializable, Comparable<Human> {
         return sb.toString();
     }
 
+
     @Override
     public int compareTo(Human o) {
         return this.name.compareTo(o.getName());
     }
-
 }
 
 
