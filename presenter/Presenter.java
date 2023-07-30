@@ -17,6 +17,16 @@ public class Presenter {
         getHumanInfo();
     }
 
+    public void addChild(String name, int age) {
+        service.addHuman(name, age);
+        getHumanInfo();
+    }
+
+    public void addParent(String name, int age) {
+        service.addHuman(name, age);
+        getHumanInfo();
+    }
+
     public void sortByAge() {
         service.sortByAge();
         getHumanInfo();
@@ -30,6 +40,14 @@ public class Presenter {
     public void getHumanInfo() {
         String info = service.getHumanInfo();
         view.printAnswer(info);
+    }
+
+    public void saveInFile() {
+        service.saveInFile();
+    }
+
+    public void ReadFromFile() {
+        service.readFromFile();
     }
 
 }

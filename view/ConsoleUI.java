@@ -98,4 +98,34 @@ public class ConsoleUI implements View {
         System.out.println(INPUT_ERROR);
     }
 
+    // public void addChild() {
+    // System.out.println("Введите имя ");
+    // String name = scanner.nextLine();
+    // System.out.println("Укажите возраст ");
+    // String ageString = scanner.nextLine();
+    // int age = Integer.parseInt(ageString);
+    // System.out.println("Укажите мать ");
+    // String name = scanner.nextLine();
+    // System.out.println("Укажите отца ");
+    // String name = scanner.nextLine();
+    // presenter.addHuman(name, age, getMotherInfo(), getFatherInfo());
+
+    // }
+
+    public void addParent() {
+        // System.out.println("Введите имя ");
+        // String name = scanner.nextLine();
+        // System.out.println("Укажите возраст ");
+        // String ageString = scanner.nextLine();
+        // int age = Integer.parseInt(ageString);
+    }
+
+    public void save() {
+        presenter.saveInFile();
+    }
+
+    public void readFromFile() {
+        presenter.ReadFromFile();
+    }
+
 }

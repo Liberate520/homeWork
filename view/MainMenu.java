@@ -3,10 +3,13 @@ package homeWork.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import homeWork.view.Commands.AddChildren;
 import homeWork.view.Commands.AddHuman;
+import homeWork.view.Commands.AddParents;
 import homeWork.view.Commands.Command;
 import homeWork.view.Commands.Finish;
 import homeWork.view.Commands.GetHumanInfo;
+import homeWork.view.Commands.SaveInFile;
 import homeWork.view.Commands.SortByAge;
 import homeWork.view.Commands.SortByName;
 
@@ -20,6 +23,10 @@ public class MainMenu {
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new Finish(consoleUI));
+        commandList.add(new AddChildren(consoleUI));
+        commandList.add(new AddParents(consoleUI));
+        commandList.add(new SaveInFile(consoleUI));
+
     }
 
     public String menu() {
