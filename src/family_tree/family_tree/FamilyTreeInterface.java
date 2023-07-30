@@ -1,7 +1,5 @@
 package family_tree.family_tree;
 
-import family_tree.human.Human;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,4 +18,5 @@ public interface FamilyTreeInterface<E> {
     LocalDate getDeathData();
     LocalDate getBirthData();
 
+    int getAge();
 }

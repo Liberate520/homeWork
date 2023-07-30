@@ -1,7 +1,6 @@
 package family_tree;
 
 import family_tree.family_tree.FamilyTree;
-import family_tree.family_tree.FamilyTreeInterface;
 import family_tree.human.Gender;
 import family_tree.human.Human;
 import family_tree.writer.FileHandler;
@@ -14,16 +13,15 @@ public class Main{
         FileHandler fileHandler = new FileHandler();
 
         FamilyTree tree = testTree();
-        //System.out.println(tree);
 
         fileHandler.save(tree,filePath);
 
         FileHandler fileHandler1 = new FileHandler();
         FamilyTree tree1 = (FamilyTree) fileHandler1.read(filePath);
 
-//        for(Human item:tree){
-//            System.out.println(item);
-//        }
+        for(Object item:tree){
+            System.out.println(item);
+        }
         System.out.println();
 
         tree.sortByName();
@@ -48,7 +46,7 @@ public class Main{
         tree.add(semyon);
         Human larisa = new Human("Лариса",Gender.Female,LocalDate.of(1945,9,1));
         larisa.addChild(vasya);
-        //tree.add(larisa);
+        tree.add(larisa);
         return tree;
 
     }
