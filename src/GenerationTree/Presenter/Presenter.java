@@ -38,13 +38,14 @@ public class Presenter {
         return tree.deleteSavedTree(name);
     }
 
-    public void addNewFamilyMember(String name, Gender gender, LocalDate dateBirth) {
-        try {
-            tree.addTreeItem(name, gender, dateBirth);
+    public int addNewFamilyMember(String name, Gender gender, LocalDate dateBirth) {
+        var id = tree.addTreeItem(name, gender, dateBirth);
+        if (id >= 0) {
             view.print("Член семьи " + name + " " + tree.getTreeName() + " успешно добавлен в древо.");
-        } catch (RuntimeException ex) {
-            view.print(ex.getMessage());
+        } else {
+            throw new RuntimeException("не удалось добавить члена семьи.");
         }
+        return id;
     }
 
     public boolean saveTree(String name) {
@@ -74,5 +75,20 @@ public class Presenter {
 
     public void loadMemberById(int menuTreeMembers) {
         view.print(tree.getItemInfoById(menuTreeMembers));
+    }
+
+    public void addParrent(int memberId) {
+        var members = getMembers();
+        members.remove(memberId);
+        if (members.size() == 0)
+            return;
+        int parrentId = 0;
+        while (parrentId >= 0) {
+            parrentId = view.selectTreeMemberId(members);
+            if (parrentId < 0)
+                continue;
+            tree.addChild(parrentId, memberId);
+            view.print("Родитель добавлен.");
+        }
     }
 }

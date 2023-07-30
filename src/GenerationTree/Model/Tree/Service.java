@@ -10,7 +10,9 @@ import GenerationTree.Model.Person.Structs.Gender;
 public interface Service {
     boolean addNewTree(String name) throws FileAlreadyExistsException;
 
-    boolean addTreeItem(String name, Gender gender, LocalDate dateBirth);
+    int addTreeItem(String name, Gender gender, LocalDate dateBirth);
+
+    boolean addChild(int parrentId, int childId);
 
     boolean saveTree();
 

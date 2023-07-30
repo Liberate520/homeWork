@@ -62,11 +62,12 @@ public class FamilyTreeService implements Service {
         return false;
     }
 
+    @Override
     public boolean addChild(int parrentId, int childId) {
         var parrent = (Person) this.tree.getPersonById(parrentId);
-        var child = this.tree.getPersonById(childId);
+        var child = (Person) this.tree.getPersonById(childId);
         if (parrent != null && child != null) {
-            parrent.addChild((Person) child);
+            parrent.addChild(child);
             return true;
         }
         return false;
@@ -116,6 +117,10 @@ public class FamilyTreeService implements Service {
         var sb = new StringBuilder();
         sb.append("Потомки: \n\n");
         var map = tree.getAllChildren(person);
+        if (map.size() == 0) {
+            sb.append("Детей нет.");
+            return sb.toString();
+        }
         for (int key : map.keySet()) {
             if (key == 1)
                 sb.append("Дети" + ":\n");
@@ -197,8 +202,8 @@ public class FamilyTreeService implements Service {
     }
 
     @Override
-    public boolean addTreeItem(String name, Gender gender, LocalDate dateBirth) {
-        return addPerson(name, gender, dateBirth) > -1;
+    public int addTreeItem(String name, Gender gender, LocalDate dateBirth) {
+        return addPerson(name, gender, dateBirth);
     }
 
 }

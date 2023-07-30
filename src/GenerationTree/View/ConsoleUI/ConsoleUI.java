@@ -112,7 +112,7 @@ public class ConsoleUI implements View {
         }
         var name = menuSavedTree(allTrees);
         if (!name.isEmpty())
-            if (this.presenter.deleteSavedTree(name)) {
+            if (menu.yesNoDialog("Удалить " + name + "?") && this.presenter.deleteSavedTree(name)) {
                 print("Древо успешно удалено.");
             } else {
                 print("Ошбика при удалении файла сохранения.");
@@ -125,9 +125,19 @@ public class ConsoleUI implements View {
         return nameIndex < 0 ? "" : trees.get(nameIndex);
     }
 
-    private int menuTreeMembers(Map<Integer, String> members) {
+    @Override
+    public int selectTreeMemberId(Map<Integer, String> members) {
+        if (menu.yesNoDialog("Добавить родителя?")) {
+            return menuTreeMembers(members);
+        }
+        return -1;
+    }
+
+    public int menuTreeMembers(Map<Integer, String> members) {
         var menuItems = members.values().toArray(new String[members.values().size()]);
         int itemId = menu.contentMenu(Arrays.asList(menuItems), "ЧЛЕНЫ СЕМЬИ");
+        if (itemId < 0)
+            return itemId;
         var selectedItem = menuItems[itemId];
         for (Integer key : members.keySet()) {
             if (members.get(key).equals(selectedItem)) {
@@ -139,7 +149,7 @@ public class ConsoleUI implements View {
 
     private void treeMenu(String treeName) {
         Map<String, List<String>> menuData = new LinkedHashMap<>();
-        menuData.put("ДЕЙСТВИЯ С ДРЕВОМ: " + treeName, Arrays.asList("ДОБАВИТЬ ЧЛЕНА СЕМЬИ", "ПОКАЗАТЬ ДРЕВО",
+        menuData.put("ДЕЙСТВИЯ С ДРЕВОМ: " + treeName, Arrays.asList("ДОБАВИТЬ ЧЛЕНА СЕМЬИ", "ПОКАЗАТЬ ЧЛЕНОВ СЕМЬИ",
                 "УДАЛИТЬ ЧЛЕНА СЕМЬИ", "СОХРАНИТЬ ДРЕВО"));
         menuData.put("-----", Arrays.asList("ВЫХОД В ГЛАВНОЕ МЕНЮ"));
         menu.selectedMenu(menuData, this::menuAddMember, this::menuShowMembers,
@@ -158,7 +168,7 @@ public class ConsoleUI implements View {
             }
             clsField();
             enteringProcess = false;
-            presenter.addNewFamilyMember(name, gender, birthDate);
+            presenter.addParrent(presenter.addNewFamilyMember(name, gender, birthDate));
         }
         return false;
     }
