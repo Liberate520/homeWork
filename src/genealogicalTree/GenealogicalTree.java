@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree<T extends TreeNode> implements Serializable, Iterable<T> {
+public class GenealogicalTree<T extends TreeNode<T>> implements Serializable, Iterable<T> {
 
     private List<T> humanList;
 
@@ -67,7 +67,7 @@ public class GenealogicalTree<T extends TreeNode> implements Serializable, Itera
         return result;
     }
 
-    private String getName(Human human) {
+    private String getName(T human) {
         return getName(human);
     }
 
