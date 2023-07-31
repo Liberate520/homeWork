@@ -1,9 +1,8 @@
-package Service;
+package module.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public interface TreeNode<T> {
+public interface TreeNode {
 
     String getInfo();
 

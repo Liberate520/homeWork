@@ -1,6 +1,6 @@
-package human;
+package module.human;
 
-import Service.TreeNode;
+import module.Service.TreeNode;
 
 import java.util.Comparator;
 

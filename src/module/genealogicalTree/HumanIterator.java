@@ -1,6 +1,6 @@
-package genealogicalTree;
+package module.genealogicalTree;
 
-import Service.TreeNode;
+import module.Service.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Iterator;

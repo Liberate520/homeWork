@@ -1,6 +1,6 @@
-package human;
+package module.human;
 
-import Service.TreeNode;
+import module.Service.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;

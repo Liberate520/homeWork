@@ -1,16 +1,15 @@
-package genealogicalTree;
+package module.genealogicalTree;
 
-import Service.TreeNode;
-import human.ComparatorByAge;
-import human.ComparatorByName;
-import human.Human;
+import module.Service.TreeNode;
+import module.human.ComparatorByAge;
+import module.human.ComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree<T extends TreeNode<T>> implements Serializable, Iterable<T> {
+public class GenealogicalTree<T extends TreeNode> implements Serializable, Iterable<T> {
 
     private List<T> humanList;
 
