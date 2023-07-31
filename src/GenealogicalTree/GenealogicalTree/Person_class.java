@@ -13,9 +13,6 @@ public class Person_class implements Serializable {
 
     public Person_class(String name, String gender, String dateOfBirth, String dateOfDeath) {
 
-    }
-
-    public void Person(String name, String gender, String dateOfBirth, String dateOfDeath) {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
