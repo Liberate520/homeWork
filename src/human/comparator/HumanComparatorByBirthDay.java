@@ -1,13 +1,14 @@
 package human.comparator;
 
+import family_tree.FamilyTreeElement;
 import human.Human;
 
 import java.util.Comparator;
 
-public class HumanComparatorByBirthDay implements Comparator<Human> {
+public class HumanComparatorByBirthDay<E extends FamilyTreeElement> implements Comparator<E> {
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(E o1, E o2) {
         if(o1.getBirthDay().isAfter(o2.getBirthDay())) {
             return 1;
         }

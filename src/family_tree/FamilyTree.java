@@ -2,15 +2,16 @@ package family_tree;
 
 import human.Human;
 import human.comparator.HumanComparatorByBirthDay;
+import human.comparator.HumanComparatorByName;
 import human.iterator.HumanIterator;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humansList;
+public class FamilyTree<E extends FamilyTreeElement> implements Serializable, Iterable<E> {
+    private List<E> humansList;
 
-    public FamilyTree(List<Human> humansList){
+    public FamilyTree(List<E> humansList){
         this.humansList = humansList;
     }
 
@@ -18,19 +19,19 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public void addHuman(Human human){
+    public void addHuman(E human){
         humansList.add(human);
     }
-    public void marry(Human firstHuman, Human secondHuman) {
+    public void marry(E firstHuman, E secondHuman) {
         firstHuman.marry(secondHuman);
     }
 
-    public void addChild(Human parent, Human child) {
+    public void addChild(E parent, E child) {
         parent.addChild(child);
         child.addParent(parent);
     }
 
-    public void addParent(Human child, Human parent) {
+    public void addParent(E child, E parent) {
         parent.addChild(child);
         child.addParent(parent);
     }
@@ -38,7 +39,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Human human: humansList){
+        for (E human: humansList){
             sb.append(human.toString());
             sb.append("\n\r");
         }
@@ -46,12 +47,12 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humansList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(humansList);
     }
 
     public void sortByName(){
-        Collections.sort(humansList);
+        Collections.sort(humansList, new HumanComparatorByName<>());
     }
 
     public void sortByDateBirthDay(){
