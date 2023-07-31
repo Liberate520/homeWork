@@ -1,7 +1,5 @@
 package familyTree;
 
-import person.Person;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;

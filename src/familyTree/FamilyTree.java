@@ -1,6 +1,5 @@
 package familyTree;
 
-import person.Person;
 import person.comparators.ComparatorByAge;
 import person.comparators.ComparatorByName;
 

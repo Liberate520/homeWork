@@ -1,7 +1,6 @@
 package person.comparators;
 
 import familyTree.TreeNode;
-import person.Person;
 
 import java.util.Comparator;
 
