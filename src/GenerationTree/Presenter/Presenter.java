@@ -12,10 +12,12 @@ import GenerationTree.View.View;
 public class Presenter {
     private View view;
     private Service tree;
+    private boolean сhangesSaved;
 
     public Presenter(View view) {
         this.view = view;
         this.tree = new FamilyTreeService();
+        this.сhangesSaved = false;
     }
 
     public boolean addNewTree(String surname) {
@@ -27,7 +29,7 @@ public class Presenter {
     public boolean loadTree(String surname) {
         if (tree.loadTree(surname)) {
             view.print("Древо успешно загружено.");
-            return true;
+            return this.сhangesSaved = true;
         }
         view.print("Загрузка древа не удалась.");
         return false;
@@ -35,6 +37,10 @@ public class Presenter {
 
     public List<String> getAllTrees() {
         return tree.getAllSavedTrees();
+    }
+
+    public boolean getSavedState() {
+        return this.сhangesSaved;
     }
 
     public boolean deleteSavedTree(String name) {
@@ -45,6 +51,7 @@ public class Presenter {
         var id = tree.addTreeItem(name, gender, dateBirth);
         if (id >= 0) {
             view.print("Член семьи " + name + " " + tree.getTreeName() + " успешно добавлен в древо.");
+            this.сhangesSaved = false;
         } else {
             throw new RuntimeException("не удалось добавить члена семьи.");
         }
@@ -60,6 +67,7 @@ public class Presenter {
             view.print("Древо успешно сохранено в файл " + name);
         else
             view.print("Ошибка при сохранении файла...");
+        this.сhangesSaved = result;
         return result;
     }
 
@@ -97,9 +105,10 @@ public class Presenter {
     }
 
     public void delЕreeItem(int id) {
-        if (tree.delTreeItem(id))
+        if (tree.delTreeItem(id)) {
             view.print("Член семьи удален из всех списков.");
-        else
+            this.сhangesSaved = false;
+        } else
             view.print("Проблема при удалении члена семьи.");
     }
 }

@@ -19,6 +19,12 @@ public class ConsoleMenu {
         runMenu = true;
     }
 
+    int yesNoCancelDialog(String message) {
+        Map<String, List<String>> menuData = new LinkedHashMap<>();
+        menuData.put(message, Arrays.asList("Да", "Нет", "Отмена"));
+        return drawDialogMenu(menuData, 0);
+    }
+
     boolean yesNoDialog(String message) {
         Map<String, List<String>> menuData = new LinkedHashMap<>();
         menuData.put(message, Arrays.asList("Да", "Нет"));

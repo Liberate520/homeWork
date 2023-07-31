@@ -155,7 +155,7 @@ public class ConsoleUI implements View {
                 "УДАЛИТЬ ЧЛЕНА СЕМЬИ", "СОХРАНИТЬ ДРЕВО"));
         menuData.put("-----", Arrays.asList("ВЫХОД В ГЛАВНОЕ МЕНЮ"));
         menu.selectedMenu(menuData, this::menuAddMember, this::menuShowMembers,
-                this::menuDeleteMember, this::saveThisTree, menu::closeMenu);
+                this::menuDeleteMember, this::saveThisTree, this::closeTreeMenu);
     }
 
     private boolean menuAddMember() {
@@ -211,6 +211,24 @@ public class ConsoleUI implements View {
 
     private boolean saveThisTree() {
         return presenter.saveTree();
+    }
+
+    private void closeTreeMenu() {
+        if (!presenter.getSavedState()) {
+            int taskIndex = menu.yesNoCancelDialog("Имеются несохраненные изменения. Сохранить?");
+            switch (taskIndex) {
+                case 1:
+                    presenter.saveTree();
+                case 2:
+                    menu.closeMenu();
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            menu.closeMenu();
+        }
+
     }
 
     private void appClose() {
