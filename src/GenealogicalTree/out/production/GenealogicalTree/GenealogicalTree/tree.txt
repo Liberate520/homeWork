@@ -1,0 +1,4 @@
+1,Anna Belaya,female,27-04-1993,null
+2,Zinaida Prohorova,female,14-05-1974,null
+3,Petr Prohorov,male,30-07-1970,17-10-2010,
+4,Aleksandr Belyi,male,15-10-1987,null
