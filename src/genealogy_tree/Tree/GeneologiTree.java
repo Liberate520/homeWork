@@ -1,6 +1,5 @@
 package genealogy_tree.Tree;
 
-import genealogy_tree.Human.Human;
 import genealogy_tree.Human.comparators.HumanComparatorByAge;
 import genealogy_tree.Human.comparators.HumanComparatorByName;
 
@@ -11,21 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class GeneologiTree implements Serializable, Iterable<Human> {
-
-    private List<Human> humanList;
+public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializable, Iterable<E> {
+    private List<E> humanList;
     private long humansId;
 
     public GeneologiTree() {
         humanList = new ArrayList<>();
     }
 
-    public GeneologiTree(List<Human> humanList) {
+    public GeneologiTree(List<E> humanList) {
         this.humanList = humanList;
     }
 
 
-    public boolean addHuman(Human human) {
+    public boolean addHuman(E human) {
         if (human == null) {
             return false;
         }
@@ -39,26 +37,25 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    private void addToChildren(Human human) {
-        for (Human children : human.getChildren()) {
+    private void addToChildren(E human) {
+        for (E children : human.getChildren())
             children.addChild(human);
-        }
     }
 
-    private void addToParents(Human human) {
-        for (Human parents : human.getParents()) {
+    private void addToParents(E human) {
+        for (E parents : human.getParents()) {
             parents.addParents(human);
         }
     }
 
-    public List<Human> getSiblings(int id) {
-        Human human = getById(id);
+    public List<E> getSiblings(int id) {
+        E human = getById(id);
         if (human == null) {
             return null;
         }
-        List<Human> result = new ArrayList<>();
-        for (Human parent : human.getParents()) {
-            for (Human child : parent.getChildren()) {
+        List<E> result = new ArrayList<>();
+        for (E parent : human.getParents()) {
+            for (E child : parent.getChildren()) {
                 if (!child.equals(human)) {
                     result.add(child);
                 }
@@ -67,9 +64,9 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
         return result;
     }
 
-    public List<Human> getByName(String name) {
-        List<Human> result = new ArrayList<>();
-        for (Human human : humanList) {
+    public List<E> getByName(String name) {
+        List<E> result = new ArrayList<>();
+        for (E human : humanList) {
             if (human.getName().equalsIgnoreCase(name)) {
                 result.add(human);
             }
@@ -79,14 +76,14 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
 
     public boolean setWedding(long humanId1, long humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
+            E human1 = getById(humanId1);
+            E human2 = getById(humanId2);
             return setWedding(human1, human2);
         }
         return false;
     }
 
-    public boolean setWedding(Human human1, Human human2) {
+    public boolean setWedding(E human1, E human2) {
         if (human1.getSpouse() == null && human2.getSpouse() == null) {
             human1.setSpouse(human2);
             human2.setSpouse(human1);
@@ -98,15 +95,15 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
 
     public boolean setDivorce(long humanId1, long humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
+            E human1 = getById(humanId1);
+            E human2 = getById(humanId2);
             return setDivorce(human1, human2);
 
         }
         return false;
     }
 
-    public boolean setDivorce(Human human1, Human human2) {
+    public boolean setDivorce(E human1, E human2) {
         if (human1.getSpouse() != null && human2.getSpouse() != null) {
             human1.setSpouse(null);
             human2.setSpouse(null);
@@ -118,7 +115,7 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
 
     public boolean remove(long humansId) {
         if (checkId(humansId)) {
-            Human e = getById(humansId);
+            E e = getById(humansId);
             return humanList.remove(e);
         }
         return false;
@@ -128,7 +125,7 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
         if (id >= humansId || id < 0) {
             return false;
         }
-        for (Human human : humanList) {
+        for (E human : humanList) {
             if (human.getId() == id) {
                 return true;
             }
@@ -136,8 +133,8 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    public Human getById(long id) {
-        for (Human human : humanList) {
+    public E getById(long id) {
+        for (E human : humanList) {
             if (human.getId() == id) {
                 return human;
             }
@@ -149,7 +146,7 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
     public String getHumanInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("List Human:\n");
-        for (Human human : humanList) {
+        for (E human : humanList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
@@ -163,16 +160,16 @@ public class GeneologiTree implements Serializable, Iterable<Human> {
 
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge<>());
     }
 
 }

@@ -1,12 +1,13 @@
 package genealogy_tree.Human.comparators;
 
-import genealogy_tree.Human.Human;
+
+import genealogy_tree.Tree.GeneologiTreeItem;
 
 import java.util.Comparator;
 
-public class HumanComparatorByAge implements Comparator<Human> {
+public class HumanComparatorByAge<T extends GeneologiTreeItem> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o1.getAge(), o2.getAge());
     }
 

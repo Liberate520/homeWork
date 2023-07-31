@@ -19,12 +19,7 @@ public class Main {
 
         service.addHuman("Sabring", Gender.Female, LocalDate.of(1970, 1, 22));
 
-        System.out.println(service.getInfo());
-        service.sortByAge();
-        System.out.println(service.getInfo());
-        service.sortByName();
-        System.out.println(service.getInfo());
-
+        service.start();
 
     }
 

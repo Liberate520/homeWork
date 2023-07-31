@@ -1,5 +1,8 @@
 package genealogy_tree.Human;
 
+import genealogy_tree.Tree.GeneologiTreeItem;
+
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, GeneologiTreeItem<Human> {
 
     private long id;
     private List<Human> parents;
