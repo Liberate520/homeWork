@@ -28,7 +28,7 @@ public class Main {
 //        System.out.println(read);
         familyTree.sortByName();
         System.out.println(familyTree);
-        familyTree.sortByDateofBirth();
+        familyTree.sortByDateOfBirth();
         System.out.println(familyTree);
     }
 }

@@ -1,26 +1,28 @@
 package family_tree;
 
 import human.Human;
+import human.HumanIterator;
 import human.comparator.ComparatorSortByDateOfBirth;
 import human.comparator.ComparatorSortByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree<E extends FamilyItem> implements Iterable<E>{
     private int id;
     private int humanId;
-    private List<Human> humanList;
-    public boolean addHuman (Human human){
+    private List<E> humanList;
+    public boolean addHuman (E human){
         if (human==null){
             return false;
         }
         if (!humanList.contains(human)){
             humanList.add(human);
             human.setId(humanId++);
-            addToParents(human);
-            addToChildren(human);
+            addToParents((Human) human);
+            addToChildren((Human) human);
 
             return true;
         }
@@ -39,7 +41,7 @@ public class FamilyTree implements Serializable {
         sb.append("В дереве ");
         sb.append(humanList.size());
         sb.append(" объектов: \n");
-        for (Human human:humanList) {
+        for (E human:humanList) {
             sb.append(human);
             sb.append("\n");
         }
@@ -49,7 +51,7 @@ public class FamilyTree implements Serializable {
         if(id>=humanId||id<0){
             return false;
         }
-        for (Human human:humanList) {
+        for (E human:humanList) {
             if(human.getId()==id){
                 return true;
             }
@@ -57,9 +59,9 @@ public class FamilyTree implements Serializable {
         return false;
     }
     public Human getById(long id){
-        for (Human human:humanList) {
+        for (E human:humanList) {
             if(human.getId()==id){
-                return human;
+                return (Human) human;
             }
         }
         return null;
@@ -91,11 +93,15 @@ public class FamilyTree implements Serializable {
 
     @Override
     public String toString(){return getInfo();}
+    @Override
+    public Iterator<E> iterator(){
+        return new HumanIterator<>(humanList);
+    }
 
     public void sortByName(){
-        humanList.sort(new ComparatorSortByName());
+        humanList.sort(new ComparatorSortByName<>());
     }
-    public void sortByDateofBirth(){
-        humanList.sort(new ComparatorSortByDateOfBirth());
+    public void sortByDateOfBirth(){
+        humanList.sort(new ComparatorSortByDateOfBirth<>());
     }
 }

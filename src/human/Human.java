@@ -1,12 +1,13 @@
 package human;
 
-import java.io.Serializable;
+import family_tree.FamilyItem;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Comparable<Human>, FamilyItem {
     private int id;
     private String name;
     private Gender gender;
@@ -43,12 +44,15 @@ public class Human implements Serializable {
     public int getId(){
         return id;
     }
-    public void setId(int id){
-        this.id = id;
-    }
     public String getName(){
         return name;
     }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -172,5 +176,10 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         return getInfo();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 }
