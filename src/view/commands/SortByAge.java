@@ -1,0 +1,21 @@
+package view.commands;
+
+import view.ConsoleUI;
+
+public class SortByAge extends Command{
+    private String description;
+    private ConsoleUI consoleUI;
+
+
+    public SortByAge(ConsoleUI consoleUI) {
+        super("Sorting members by age", consoleUI);
+    }
+
+    public void execute(){
+        getConsoleUI().sortByAge();
+    }
+
+    public String getDescription(){
+        return description;
+    }
+}
