@@ -1,18 +1,19 @@
 package homeWork.family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private long id;
-    private String name;
-    private Gender gender;
+    private final String name;
+    private final Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Human> parents;
-    private List<Human> children;
+    private final List<Human> children;
     private Human spouse;
 
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother) {
@@ -56,18 +57,16 @@ public class Human {
     public Human getFather; {
         for (Human parent : parents){
             if (parent.getGender() == Gender.Male){
-                return parent;
             }
         }
-        return null;
+
     }
     public Human getMother; {
         for (Human parent : parents) {
             if (parent.getGender() == Gender.Female) {
-                return parent;
+                return null;
             }
         }
-        return null;
     }
     public int getAge(){
         if (deathDate == null){
@@ -107,24 +106,24 @@ public class Human {
     @Override
     public String toString() {return getInfo();}
     public String getInfo(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("id: ");
-        sb.append(id);
-        sb.append(", имя: ");
-        sb.append(name);
-        sb.append(", пол: ");
-        sb.append(getGender());
-        sb.append(", возраст: ");
-        sb.append(getAge());
-        sb.append(", ");
-        sb.append(getSpouseInfo());
-        sb.append(", ");
-        sb.append(getMotherInfo());
-        sb.append(", ");
-        sb.append(getFatherInfo());
-        sb.append(", ");
-        sb.append(getChildrenInfo());
-        return sb.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("id: ");
+        stringBuilder.append(id);
+        stringBuilder.append(", имя: ");
+        stringBuilder.append(name);
+        stringBuilder.append(", пол: ");
+        stringBuilder.append(getGender());
+        stringBuilder.append(", возраст: ");
+        stringBuilder.append(getAge());
+        stringBuilder.append(", ");
+        stringBuilder.append(getSpouseInfo());
+        stringBuilder.append(", ");
+        stringBuilder.append(getMotherInfo());
+        stringBuilder.append(", ");
+        stringBuilder.append(getFatherInfo());
+        stringBuilder.append(", ");
+        stringBuilder.append(getChildrenInfo());
+        return stringBuilder.toString();
     }
     public String getSpouseInfo(){
         String res = "супруг(а): ";
@@ -147,6 +146,10 @@ public class Human {
         }
         return res;
     }
+
+    private Human getMother(){
+        return null;
+    }
     public String getFatherInfo(){
         String res = "отец: ";
         Human father = getFather();
@@ -157,6 +160,9 @@ public class Human {
             res += "неизвестен";
         }
         return res;
+    }
+    private Human getFather() {
+        return null;
     }
     public String getChildrenInfo(){
         StringBuilder res = new StringBuilder();

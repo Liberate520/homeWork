@@ -1,20 +1,22 @@
 package homeWork.family_tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private long humansId;
-    private List<Human> humanList;
+
+    private final List<Human> humanList;
     public FamilyTree(List<Human> humanList){
         this.humanList = humanList;
     }
     public FamilyTree(){
         this(new ArrayList<>());
     }
-    public boolean add(Human human){
+    public void add(Human human){
         if(human == null){
-            return false;
+            return;
         }
         if (!humanList.contains(human)){
             humanList.add(human);
@@ -23,9 +25,7 @@ public class FamilyTree {
             addToParents(human);
             addToChildren(human);
 
-            return true;
         }
-        return false;
     }
     private void addToParents(Human human){
         for(Human parent: human.getParents()){
@@ -37,7 +37,7 @@ public class FamilyTree {
             child.addParent(human);
         }
     }
-    public List<Human>getSiblings(int id){
+    public List<Human>getSiblings(long id){
         Human human = getById(id);
         if (human == null){
             return null;
@@ -52,18 +52,15 @@ public class FamilyTree {
         }
         return res;
     }
-    public boolean setWedding(long humansId1, long humansId2){
+    public void setWedding(long humansId1, long humansId2){
         if (checkId(humansId1) && checkId(humansId2)){
             Human human1 = getById(humansId1);
             Human human2 = getById(humansId2);
             if (human1.getSpouse() == null && human2.getSpouse() == null){
                 human1.setSpouse(human2);
                 human2.setSpouse(human1);
-            } else {
-                return false;
             }
         }
-        return false;
     }
     private boolean checkId(long id){
         if (id >= humansId || id < 0){

@@ -1,10 +1,13 @@
 package homeWork.family_tree;
 
 import java.time.LocalDate;
+import java.util.logging.FileHandler;
 
 public class Main {
-    public static void main(String[] args) {
-        FamilyTree tree = testTree();
+    public static void main(String[] args){
+        String filePath = "file:///Users/mariannaizotova/Desktop/STUDY/OOProg/exportToHTML/homeWork/family_tree/data/test.out";
+        FileHandler fileHandler = new FileHandler();
+        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
         System.out.println(tree);
     }
     static FamilyTree testTree(){
