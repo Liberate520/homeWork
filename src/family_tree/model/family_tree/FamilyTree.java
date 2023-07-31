@@ -1,10 +1,11 @@
-package family_tree.family_tree;
-
-import family_tree.human.Human;
-import family_tree.family_tree.FamilyTreeItem;
-import family_tree.human.comparators.*;
+package family_tree.model.family_tree;
 
 import java.util.List;
+
+import family_tree.model.family_tree.FamilyTreeItem;
+import family_tree.model.human.Human;
+import family_tree.model.human.comparators.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.*;
@@ -39,6 +40,13 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
             return true;
         }
         return false;
+    }
+
+    public E addHuman(E human) {
+        if (!humanList.contains(human)) {
+            humanList.add((E) human);
+        }
+        return human;
     }
 
     private void addToParents(E human) {

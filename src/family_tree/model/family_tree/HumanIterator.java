@@ -1,4 +1,4 @@
-package family_tree.family_tree;
+package family_tree.model.family_tree;
 
 // import family_tree.human.Human;
 

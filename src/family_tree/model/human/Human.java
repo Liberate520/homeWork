@@ -1,12 +1,13 @@
-package family_tree.human;
+package family_tree.model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.Period;
 
-import family_tree.family_tree.FamilyTreeItem;
+import family_tree.model.family_tree.FamilyTreeItem;
+
+import java.time.Period;
 
 public class Human implements Serializable, FamilyTreeItem<Human>{
     private int id;

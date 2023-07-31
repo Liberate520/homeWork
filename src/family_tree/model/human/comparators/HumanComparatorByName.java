@@ -1,9 +1,8 @@
-package family_tree.human.comparators;
-
-// import family_tree.human.Human;
-import family_tree.family_tree.FamilyTreeItem;
+package family_tree.model.human.comparators;
 
 import java.util.Comparator;
+
+import family_tree.model.family_tree.FamilyTreeItem;
 
 public class HumanComparatorByName<E extends FamilyTreeItem<E>> implements Comparator<E> {
     @Override
