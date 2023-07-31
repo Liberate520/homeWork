@@ -1,12 +1,12 @@
-package person;
+package model.person;
 
-import familyTree.TreeNode;
+import model.familyTree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * Семейные связи полностью находятся в familyTree.
+ * Семейные связи полностью находятся в model.familyTree.
  */
 public class Person implements Serializable, Comparable<Person>, TreeNode<Person> {
     private String name, surname, maidenName, patronymic;

@@ -1,14 +1,14 @@
-package familyTree;
+package model.familyTree;
 
-import person.comparators.ComparatorByAge;
-import person.comparators.ComparatorByName;
+import model.person.comparators.ComparatorByAge;
+import model.person.comparators.ComparatorByName;
 
 import java.io.Serializable;
 import java.util.*;
 
 /**
- * Все семейные связи решил хранить тут, а не в полях класса person.Person.
- * Смотрите familyTree.Connections.java.
+ * Все семейные связи решил хранить тут, а не в полях класса model.person.Person.
+ * Смотрите model.familyTree.Connections.java.
  * Методы сортировки возвращают TreeMap, а не исходную структуру.
  */
 public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<Map.Entry<T, Connections<T>>> {

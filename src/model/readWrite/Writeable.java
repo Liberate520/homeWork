@@ -1,4 +1,4 @@
-package readWrite;
+package model.readWrite;
 
 import java.io.Serializable;
 
