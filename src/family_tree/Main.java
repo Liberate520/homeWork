@@ -1,11 +1,9 @@
 package family_tree;
 
-import family_tree.familytree.*;
-import family_tree.person.*;
-import family_tree.presenter.Presenter;
-import family_tree.service.*;
+import family_tree.model.familytree.FamilyTree;
+import family_tree.model.service.Service;
+import family_tree.model.person.*;
 import family_tree.ui.ConsoleView;
-import family_tree.ui.View;
 
 import java.io.IOException;
 
@@ -17,49 +15,6 @@ public class Main {
         ConsoleView app = new ConsoleView();
         app.getPresenter().setService(service);
         app.start();
-        // save read через ObjectStream
-//        IOObject ioo = new IOObject();
-//        ioo.save(romanovs, "src/family_tree/in_out_files/romanovs.bin");
-//        FamilyTree romanovs = (FamilyTree) ioo.read("src/family_tree/in_out_files/romanovs.bin");
-
-        // save read через ByteArrayStream
-//        IOByteArr ioba = new IOByteArr();
-//        ioba.save(romanovs, "src/family_tree/in_out_files/test1.txt");
-//        FamilyTree romanovs =  (FamilyTree) ioba.read("src/family_tree/in_out_files/test1.txt");
-
-//        System.out.println(romanovs);
-
-//        System.out.println("sortByName==========================================================================");
-//        romanovs.sortByName();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByNameReverse==========================================================================");
-//        romanovs.sortByNameReverse();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByAge==========================================================================");
-//        romanovs.sortByAge();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByAgeReverse==========================================================================");
-//        romanovs.sortByAgeReverse();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByBirth==========================================================================");
-//        romanovs.sortByBirth();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByBirthReverse==========================================================================");
-//        romanovs.sortByBirthReverse();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByChildren==========================================================================");
-//        romanovs.sortByChildren();
-//        System.out.println(romanovs);
-//
-//        System.out.println("sortByChildrenReverse==========================================================================");
-//        romanovs.sortByChildrenReverse();
-//        System.out.println(romanovs);
 
     }
 

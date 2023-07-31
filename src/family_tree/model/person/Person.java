@@ -1,7 +1,6 @@
-package family_tree.person;
+package family_tree.model.person;
 
-import family_tree.familytree.FamilyTree;
-import family_tree.familytree.FamilyTreeItem;
+import family_tree.model.familytree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.text.DateFormat;

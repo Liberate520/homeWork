@@ -1,9 +1,9 @@
-package family_tree.service;
+package family_tree.model.service;
 
-import family_tree.familytree.FamilyTree;
-import family_tree.familytree.FamilyTreeItem;
-import family_tree.person.Gender;
-import family_tree.person.Person;
+import family_tree.model.familytree.FamilyTree;
+import family_tree.model.familytree.FamilyTreeItem;
+import family_tree.model.person.Gender;
+import family_tree.model.person.Person;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Service<T extends FamilyTreeItem<T>> {
-    FamilyTree<T> tree;
+    private FamilyTree<T> tree;
 
     public Service(FamilyTree<T> tree) {
         this.tree = tree;
@@ -204,30 +204,30 @@ public class Service<T extends FamilyTreeItem<T>> {
 
     public Boolean saveTree(String option) {
         if (option.equals("1")) {
-            Date date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
-            String fileName = format.format(date);
+//            Date date = new Date();
+//            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
+//            String fileName = format.format(date);
             IOObject obj = new IOObject();
-            return obj.save(tree, "src/family_tree/in_out_files/"+fileName+".bin");
+            return obj.save(tree);
         } else {
-            Date date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
-            String fileName = format.format(date);
+//            Date date = new Date();
+//            SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
+//            String fileName = format.format(date);
             IOByteArr byteArr = new IOByteArr();
-            return byteArr.save(tree, "src/family_tree/in_out_files/"+fileName+".txt");
+            return byteArr.save(tree);
         }
     }
 
     public Boolean loadTree(String option, String filename) {
         if (option.equals("1")) {
             IOObject obj = new IOObject();
-            FamilyTree <T> loadedTree = (FamilyTree<T>) obj.read("src/family_tree/in_out_files/"+filename+".bin");
+            FamilyTree <T> loadedTree = (FamilyTree<T>) obj.read(filename);
             FamilyTree <T> oldTree = tree;
             tree = loadedTree;
             return oldTree != loadedTree;
         } else {
             IOByteArr byteArr = new IOByteArr();
-            FamilyTree <T> loadedTree = (FamilyTree<T>) byteArr.read("src/family_tree/in_out_files/"+filename+".txt");
+            FamilyTree <T> loadedTree = (FamilyTree<T>) byteArr.read(filename);
             FamilyTree <T> oldTree = tree;
             tree = loadedTree;
             return oldTree != loadedTree;

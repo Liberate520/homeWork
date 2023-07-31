@@ -1,6 +1,4 @@
-package family_tree.familytree.iterator;
-
-import family_tree.person.Person;
+package family_tree.model.familytree.iterator;
 
 import java.util.Iterator;
 import java.util.List;

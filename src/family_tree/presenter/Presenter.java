@@ -1,7 +1,7 @@
 package family_tree.presenter;
 
-import family_tree.person.Gender;
-import family_tree.service.Service;
+import family_tree.model.person.Gender;
+import family_tree.model.service.Service;
 import family_tree.ui.View;
 
 public class Presenter {

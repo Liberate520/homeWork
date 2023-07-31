@@ -1,6 +1,6 @@
 package family_tree.ui;
 
-import family_tree.person.Gender;
+import family_tree.model.person.Gender;
 import family_tree.presenter.Presenter;
 import family_tree.ui.commands.GetTreePeaks;
 import family_tree.ui.commands.GetTreeShort;
@@ -386,8 +386,9 @@ public class ConsoleView implements View{
 
     public void loadTree() {
         LoadTreeMenu curMenu =  new LoadTreeMenu(this);
+        curMenu.show();
         int option = checkOption("Выберите способ загрузки -> ", curMenu.getSize());
-        String fileName = scan("введите имя файла формата ").concat(option == 1?".bin -> ":".txt -> ");
+        String fileName = scan("введите имя файла формата ").concat(option == 1?".bin":".txt");
         curMenu.execute(option - 1, fileName);
     }
 

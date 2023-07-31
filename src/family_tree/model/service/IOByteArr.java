@@ -1,15 +1,21 @@
-package family_tree.service;
+package family_tree.model.service;
 
 
-import family_tree.familytree.FamilyTree;
+import family_tree.model.familytree.FamilyTree;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class IOByteArr implements Writable {
     @Override
     //Сериализация с помощью класса ByteArrayOutputStream
-    public boolean save(Serializable serializable, String filePath) {
+    public boolean save(Serializable serializable) {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss");
+        String fileName = format.format(date);
+        String filePath = "src/family_tree/model/in_out_files/"+fileName+".txt";
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
             oos.writeObject(serializable);
@@ -28,7 +34,8 @@ public class IOByteArr implements Writable {
 
     @Override
     // Десериализация с помощью класса ByteArrayInputStream
-    public Object read(String filePath) {
+    public Object read(String fileName) {
+        String filePath = "src/family_tree/model/in_out_files/"+fileName;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String[] strArr = br.readLine().replaceAll("\\[|\\]", "").split(",");

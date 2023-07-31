@@ -1,8 +1,5 @@
 package family_tree.ui;
 
-import family_tree.familytree.FamilyTree;
-import family_tree.familytree.FamilyTreeItem;
-import family_tree.person.Person;
 import family_tree.presenter.Presenter;
 
 public interface View {

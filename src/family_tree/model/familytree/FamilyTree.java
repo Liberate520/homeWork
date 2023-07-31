@@ -1,8 +1,8 @@
-package family_tree.familytree;
+package family_tree.model.familytree;
 
-import family_tree.familytree.iterator.PersonIterator;
-import family_tree.person.*;
-import family_tree.person.comparator.*;
+import family_tree.model.familytree.iterator.PersonIterator;
+import family_tree.model.person.*;
+import family_tree.model.person.comparator.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,23 +32,6 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable, It
         allPeople.add(person);
         return allPeople.contains(person);
     }
-
-//    public boolean addPersonStrData(String data, Gender gender) {
-//        if (allPeople == null) {
-//            allPeople = new ArrayList<>();
-//        }
-//        String fullName = data.split(",")[0];
-//        int birthY = Integer.parseInt(data.split(",")[1].split(" ")[0]);
-//        int birthM = Integer.parseInt(data.split(",")[1].split(" ")[1]);
-//        int birthD = Integer.parseInt(data.split(",")[1].split(" ")[2]);
-//        T person = (T) new FamilyTreeItem<> (fullName, birthY, birthM, birthD, gender);
-//        allPeople.add(person);
-//        return allPeople.contains(person);
-//    }
-
-//    public T getInstanceOfT(Class<T> aClass) throws InstantiationException, IllegalAccessException {
-//        return aClass.newInstance();
-//    }
 
     @Override
     public String toString() {
