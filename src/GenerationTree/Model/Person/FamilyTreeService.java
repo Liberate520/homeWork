@@ -34,34 +34,6 @@ public class FamilyTreeService implements Service {
         this.idFileHandler = new FileHandler<>();
     }
 
-    public int addPerson(String name, Gender gender, LocalDate dateBirth) throws RuntimeException {
-        int id = idGenerator.GetNewId();
-        Person person = new Person(id, name, gender, dateBirth);
-        if (addPerson(person))
-            return id;
-        throw new RuntimeException("Ошибка при добавлении члена семьи в древо.");
-    }
-
-    public boolean addPerson(Person person) {
-        var result = tree.addOnlyItem(person);
-        if (result)
-            person.setSurname(tree);
-        return result;
-    }
-
-    public void addPersonAndRelatives(Person person) {
-        this.tree.addItemAndRelatives(person);
-    }
-
-    public boolean addSpouse(int personId, Person spouse, LocalDate dateOfMarriage) {
-        var person = (Person) this.tree.getItemById(personId);
-        if (person != null && spouse != null) {
-            person.addSpouse(spouse, dateOfMarriage);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public boolean addChild(int parrentId, int childId) {
         var parrent = (Person) this.tree.getItemById(parrentId);
@@ -73,57 +45,13 @@ public class FamilyTreeService implements Service {
         return false;
     }
 
-    public Person getPersonById(int id) {
-        return (Person) this.tree.getItemById(id);
-    }
-
+    @Override
     public Map<Integer, String> getTreeItemsInfo() {
         Map<Integer, String> info = new HashMap<>();
         for (var person : tree) {
             info.put(person.getId(), person.toString());
         }
-
         return info;
-    }
-
-    public void sortByName() {
-        tree.sortByName();
-    }
-
-    public void sortBySename() {
-        this.tree.sortOutComparator(new PersonComparatorBySename());
-    }
-
-    public void sortByAge() {
-        tree.sortByAge();
-    }
-
-    public String getDescendantsOfPerson(Person person) {
-        var sb = new StringBuilder();
-        sb.append("Потомки: \n\n");
-        var map = tree.getAllChildren(person);
-        if (map.size() == 0) {
-            sb.append("Детей нет.");
-            return sb.toString();
-        }
-        for (int key : map.keySet()) {
-            if (key == 1)
-                sb.append("Дети" + ":\n");
-            else if (key == 2)
-                sb.append("Внуки:\n");
-            else if (key == 3)
-                sb.append("Пра-внуки:\n");
-            else if (key > 3 && key < 10)
-                sb.append("Пра-" + "пра-".repeat(key - 3) + "внуки:\n");
-            else
-                sb.append("Поколение " + key + ":\n");
-            var thisPersons = map.get(key);
-            for (var thisPerson : thisPersons) {
-                sb.append(" " + thisPerson + "\n");
-            }
-        }
-
-        return sb.toString();
     }
 
     @Override
@@ -161,6 +89,18 @@ public class FamilyTreeService implements Service {
             }
         }
         return treesNames;
+
+    }
+
+    @Override
+    public Map<Integer, String> getTreeItemsWithoutCurrentItem(int id) {
+        Map<Integer, String> info = new HashMap<>();
+        var persons = tree.getItemsWithoutfiltItemAndRelatives(tree.getItemById(id));
+        for (var person : persons) {
+            info.put(person.getId(), person.toString());
+        }
+
+        return info;
     }
 
     @Override
@@ -206,8 +146,81 @@ public class FamilyTreeService implements Service {
         return addPerson(name, gender, dateBirth);
     }
 
+    @Override
     public boolean delTreeItem(int id) {
         return tree.deleteItem(id);
+    }
+
+    public int addPerson(String name, Gender gender, LocalDate dateBirth) throws RuntimeException {
+        int id = idGenerator.GetNewId();
+        Person person = new Person(id, name, gender, dateBirth);
+        if (addPerson(person))
+            return id;
+        throw new RuntimeException("Ошибка при добавлении члена семьи в древо.");
+    }
+
+    public boolean addPerson(Person person) {
+        var result = tree.addOnlyItem(person);
+        if (result)
+            person.setSurname(tree);
+        return result;
+    }
+
+    public void addPersonAndRelatives(Person person) {
+        this.tree.addItemAndRelatives(person);
+    }
+
+    public boolean addSpouse(int personId, Person spouse, LocalDate dateOfMarriage) {
+        var person = (Person) this.tree.getItemById(personId);
+        if (person != null && spouse != null) {
+            person.addSpouse(spouse, dateOfMarriage);
+            return true;
+        }
+        return false;
+    }
+
+    public Person getPersonById(int id) {
+        return (Person) this.tree.getItemById(id);
+    }
+
+    public void sortByName() {
+        tree.sortByName();
+    }
+
+    public void sortBySename() {
+        this.tree.sortOutComparator(new PersonComparatorBySename());
+    }
+
+    public void sortByAge() {
+        tree.sortByAge();
+    }
+
+    public String getDescendantsOfPerson(Person person) {
+        var sb = new StringBuilder();
+        sb.append("Потомки: \n\n");
+        var map = tree.getAllChildren(person);
+        if (map.size() == 0) {
+            sb.append("Детей нет.");
+            return sb.toString();
+        }
+        for (int key : map.keySet()) {
+            if (key == 1)
+                sb.append("Дети" + ":\n");
+            else if (key == 2)
+                sb.append("Внуки:\n");
+            else if (key == 3)
+                sb.append("Пра-внуки:\n");
+            else if (key > 3 && key < 10)
+                sb.append("Пра-" + "пра-".repeat(key - 3) + "внуки:\n");
+            else
+                sb.append("Поколение " + key + ":\n");
+            var thisPersons = map.get(key);
+            for (var thisPerson : thisPersons) {
+                sb.append(" " + thisPerson + "\n");
+            }
+        }
+
+        return sb.toString();
     }
 
 }

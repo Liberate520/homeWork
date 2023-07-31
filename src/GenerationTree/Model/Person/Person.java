@@ -101,6 +101,32 @@ public class Person implements Marrieble, GenTreeItem, Comparable<Person> {
     }
 
     @Override
+    public boolean isAncestor(GenTreeItem potentialAncestor) {
+        if (this == potentialAncestor) {
+            return true;
+        }
+        for (var parent : this.parrents) {
+            if (parent.isAncestor(potentialAncestor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isDescendant(GenTreeItem potentialDescendant) {
+        if (this == potentialDescendant) {
+            return true;
+        }
+        for (GenTreeItem child : this.children) {
+            if (child.isDescendant(potentialDescendant)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean removeItem(GenTreeItem person) {
         return this.children.remove(person) && this.parrents.remove(person);
     }

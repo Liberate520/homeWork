@@ -1,6 +1,7 @@
 package GenerationTree.Model.Tree;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -121,9 +122,34 @@ public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
         return this.items.contains(person);
     }
 
+    public List<GenTreeItem> getItemsWithoutfiltItemAndRelatives(GenTreeItem filtItem) {
+        List<GenTreeItem> filteredItems = new ArrayList<>();
+        for (GenTreeItem item : this.items) {
+            if (!isOneGeneration(item, filtItem) &&
+                    !item.equals(filtItem) &&
+                    !isRelative(filtItem, item) &&
+                    !isUncleOrAunt(filtItem, item)) {
+                filteredItems.add(item);
+            }
+        }
+        return filteredItems;
+    }
+
     @Override
     public Iterator<GenTreeItem> iterator() {
         return new TreeItemIterator<>(items);
+    }
+
+    private boolean isUncleOrAunt(GenTreeItem item, GenTreeItem potentialUncleOrAunt) {
+        for (GenTreeItem itemParrent : item.getParrents()) {
+            if (isOneGeneration(itemParrent, potentialUncleOrAunt))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isRelative(GenTreeItem item, GenTreeItem potentialRelative) {
+        return item.isAncestor(potentialRelative) || item.isDescendant(potentialRelative);
     }
 
     private Boolean addItem(GenTreeItem item, Boolean allRelatives) {

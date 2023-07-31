@@ -30,6 +30,8 @@ public interface Service {
 
     Map<Integer, String> getTreeItemsInfo();
 
+    Map<Integer, String> getTreeItemsWithoutCurrentItem(int id);
+
     void sortByName();
 
 }

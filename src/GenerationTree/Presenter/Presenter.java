@@ -90,17 +90,17 @@ public class Presenter {
     }
 
     public void addParrent(int memberId) {
-        var members = getMembers();
-        members.remove(memberId);
-        if (members.size() == 0)
-            return;
+
         int parrentId = 0;
         while (parrentId >= 0) {
+            var members = tree.getTreeItemsWithoutCurrentItem(memberId);
+            if (members.size() == 0)
+                return;
             parrentId = view.selectTreeMemberId(members);
             if (parrentId < 0)
                 continue;
-            tree.addChild(parrentId, memberId);
-            view.print("Родитель добавлен.");
+            if (tree.addChild(parrentId, memberId))
+                view.print("Родитель добавлен.");
         }
     }
 
