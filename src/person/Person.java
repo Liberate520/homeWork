@@ -1,12 +1,14 @@
 package person;
 
+import familyTree.TreeNode;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Семейные связи полностью находятся в familyTree.
  */
-public class Person implements Serializable, Comparable<Person> {
+public class Person implements Serializable, Comparable<Person>, TreeNode<Person> {
     private String name, surname, maidenName, patronymic;
     private Gender sex;
     private LocalDate dateBirth, dateDeath;

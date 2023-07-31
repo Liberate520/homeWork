@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Класс типа данных, в котором хранятся все родственные связи конкретного человека.
  */
-public class Connections<T extends Person> implements Serializable {
+public class Connections<T extends TreeNode<T>> implements Serializable {
     private HashMap<ConnectionType, HashSet<T>> connections;
 
     public Connections(ConnectionType key, T person) {

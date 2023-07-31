@@ -12,7 +12,7 @@ import java.util.*;
  * Смотрите familyTree.Connections.java.
  * Методы сортировки возвращают TreeMap, а не исходную структуру.
  */
-public class FamilyTree<T extends Person> implements Serializable, Iterable<Map.Entry<T, Connections<T>>> {
+public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<Map.Entry<T, Connections<T>>> {
     private HashMap<T, Connections<T>> family;
 
     public FamilyTree() {
