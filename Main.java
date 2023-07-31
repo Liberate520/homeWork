@@ -101,6 +101,11 @@ public class Main
 		System.out.println("addHumanTree newHumanTree  !!! :\n");
 		System.out.println(newHumanTree);
 		
+		
+		// new Human("SidoV SS_2", Gender.Man, LocalDate.of(1989, 3, 8))
+		newHumanTree.addHuman(new Human("SidoV SS", Gender.Man, LocalDate.of(1989, 3, 6)));
+		newHumanTree.addHuman(new Human("SidoV SS", Gender.Man, LocalDate.of(1989, 3, 9)));
+		
 		// save  newHumanTree.saveToFile fHumanTreeLog
 		newHumanTree.saveToFile(fHumanTreeLog);
 		//   
@@ -108,6 +113,14 @@ public class Main
 		newHumanTree.addFromFile(fHumanTreeLog);
 		newHumanTree.addFromFile(fHumanTreeLog);
 		System.out.println(newHumanTree);
+		
+		// Sort by Name
+		newHumanTree.sortByName();
+		System.out.println("HumanTree.sortByName() :\n" + newHumanTree);
+		
+		// Sort by Age
+		newHumanTree.sortByAge();
+		System.out.println("HumanTree.sortByAge() :\n" + newHumanTree);
 	}
 	
 	public static void testCalculateAge_Success()     {

@@ -118,6 +118,18 @@ public class Human implements Serializable {
         return stringBuilder.toString();
     }
 
+    public String getName(){
+        return fName;
+    }
+
+    public String getBirthDay(){
+        return fbirthDay.toString();
+    }
+
+    public LocalDate getBirthDayO(){  // LocalDate fbirthDay
+        return fbirthDay;
+    }
+
 
     @Override
     public String toString() {

@@ -2,23 +2,24 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;   
+import java.util.Iterator;
+import java.time.LocalDate;
 
 import java.io.*; // Serializable
 
 
-public class HumanTree implements Serializable {
-    private List <Human> fHumensTree;
+public class HumanTree<E extends Human> implements Serializable, Iterable<E> {  // E inheritance Human
+    private List <E> fHumensTree;
     private String fFileName;
     
     
-    public HumanTree() { fHumensTree = new ArrayList<Human>(); }  // constructor HumanTree
+    public HumanTree() { fHumensTree = new ArrayList<E>(); }  // constructor HumanTree
     
-    public HumanTree(List <Human> aHumensTree) {  // constructor HumanTree from List
+    public HumanTree(List <E> aHumensTree) {  // constructor HumanTree from List
         fHumensTree = aHumensTree;
     }
     
-    public List <Human> addHuman(Human aHumen){  // merge HumanTree with  aList
+    public List <E> addHuman(E aHumen){  // merge HumanTree with  aList
         if(!fHumensTree.contains(aHumen)){  // only unigue aHumen !!!
             fHumensTree.add(aHumen);
         }
@@ -26,8 +27,8 @@ public class HumanTree implements Serializable {
     }
 
     
-    public List <Human> addHumanTree(List <Human> aHumensTree){  // merge HumanTree with  aList
-        for (Human h: aHumensTree){
+    public List <E> addHumanTree(List <E> aHumensTree){  // merge HumanTree with  aList
+        for (E h: aHumensTree){
             this.addHuman(h);
             // if(!fHumensTree.contains(h)){  // only unigue aHumen !!!
             //     fHumensTree.add(h);
@@ -36,7 +37,7 @@ public class HumanTree implements Serializable {
         return fHumensTree;
     }
     
-    public List <Human> getHumans(){
+    public List <E> getHumans(){
         return fHumensTree;
     }
     
@@ -77,26 +78,39 @@ public class HumanTree implements Serializable {
         return "HumanTree save to " + aFileName;
     }
     
-    public List <Human> loadFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
-        List <Human> aHT;
+    public List <E> loadFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
+        List <E> aHT;
         // Востановление из файла с помощью класса ObjectInputStream
         ObjIO aIO = new ObjIO();
-        aHT = (List <Human>) aIO.readFile(aFileName);
+        aHT = (List <E>) aIO.readFile(aFileName);
         fHumensTree = aHT;
         fFileName = aFileName;
         return aHT;
     }
     
-    public List <Human> addFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
-        List <Human> aHT;
+    public List <E> addFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
+        List <E> aHT;
         // Востановление из файла с помощью класса ObjectInputStream
         ObjIO aIO = new ObjIO();
-        aHT = (List <Human>) aIO.readFile(aFileName);
-        for (Human h: aHT){
+        aHT = (List <E>) aIO.readFile(aFileName);
+        for (E h: aHT){
             this.addHuman(h);
         }  
         fFileName = aFileName;
         return fHumensTree;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(fHumensTree);
+    }
+
+    public void sortByName(){
+        fHumensTree.sort(new HumanComparatorByName<>());
+    }
+
+    public void sortByAge(){
+        fHumensTree.sort(new HumanComparatorByAge<>());
     }
     
 }
