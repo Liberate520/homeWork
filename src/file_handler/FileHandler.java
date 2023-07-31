@@ -7,15 +7,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import fam_tree.FamilyTree;
+import fam_tree.TreeNode;
 
-public class FileHandler {
+public class FileHandler <E extends TreeNode<E>> {
      private String filePath;
 
     public FileHandler(String filePath) {
         this.filePath = filePath;
     }
 
-    public void saveToFile(FamilyTree tree) {
+    public void saveToFile(FamilyTree<E> tree) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             outputStream.writeObject(tree);
             System.out.println("Data saved to file: " + filePath);
@@ -24,10 +25,10 @@ public class FileHandler {
         }
     }
 
-    public FamilyTree loadFromFile() {
-        FamilyTree tree = null;
+    public FamilyTree<E> loadFromFile() {
+        FamilyTree<E> tree = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath))) {
-            tree = (FamilyTree) inputStream.readObject();
+            tree = (FamilyTree<E>) inputStream.readObject();
             System.out.println("Data loaded from file: " + filePath);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

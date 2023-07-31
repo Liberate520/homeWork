@@ -6,7 +6,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+import fam_tree.TreeNode;
+
+public class Human implements Serializable, TreeNode<Human> {
     private long id;
     private String name;
     private Gender gender;

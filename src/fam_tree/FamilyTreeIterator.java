@@ -3,13 +3,11 @@ package fam_tree;
 import java.util.Iterator;
 import java.util.List;
 
-import human.Human;
-
-public class FamilyTreeIterator implements Iterator<Human> {
-    private List<Human> humanList;
+public class FamilyTreeIterator<E extends TreeNode<E>> implements Iterator<E> {
+    private List<E> humanList;
     private int currentIndex;
 
-    public FamilyTreeIterator(List<Human> humanList) {
+    public FamilyTreeIterator(List<E> humanList) {
         this.humanList = humanList;
         this.currentIndex = 0;
     }
@@ -20,9 +18,9 @@ public class FamilyTreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         if (hasNext()) {
-            Human nextHuman = humanList.get(currentIndex);
+            E nextHuman = humanList.get(currentIndex);
             currentIndex++;
             return nextHuman;
         } else {

@@ -7,13 +7,13 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FileHandler fileHandler = new FileHandler("homeWork_family_tree/output/human_data.ser");
+        FileHandler<Human> fileHandler = new FileHandler<>("homeWork_family_tree/output/human_data.ser");
         
-        // FamilyTree tree = testTree(); // create test tree
+        // FamilyTree<Human> tree = testTree(); // create test tree
         // System.out.println(tree);
         // fileHandler.saveToFile(tree); // save it to the file
 
-        FamilyTree loadedTree = fileHandler.loadFromFile(); // load tree from the file
+        FamilyTree<Human> loadedTree = fileHandler.loadFromFile(); // load tree from the file
         System.out.println("Loaded Tree:");
         System.out.println(loadedTree);
         loadedTree.sortByName();
@@ -24,8 +24,8 @@ public class Main {
         System.out.println(loadedTree);
     }
 
-    static FamilyTree testTree() {
-        FamilyTree tree = new FamilyTree();
+    static FamilyTree<Human> testTree() {
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         Human vasya = new Human("Vasiliy", Gender.Male, LocalDate.of(1963, 12, 10));
         Human masha = new Human("Mariya", Gender.Female, LocalDate.of(1965, 9, 15));
