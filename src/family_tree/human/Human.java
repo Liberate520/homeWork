@@ -1,8 +1,10 @@
+package family_tree.human;
+import family_tree.Subject;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Subject {
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -32,7 +34,6 @@ public class Human implements Serializable {
         return name;
     }
 
-
     public int getAge() {
         int age;
         if (this.deathDate == null) {
@@ -46,6 +47,7 @@ public class Human implements Serializable {
     public String getGender() {
         return gender.toString();
     }
+
 
     public Human getMother() {
         if(mother == null) {

@@ -1,15 +1,18 @@
-import HumanCompareMethods.HumanComparatorByAge;
-import HumanCompareMethods.HumanComporatorByGender;
+package family_tree;
 
+import family_tree.comparators.ComparatorByAge;
+import family_tree.comparators.ComporatorByGender;
+import family_tree.human.Human;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FamilyTree implements Serializable {
-    private List<Human> familyTree;
 
-    public FamilyTree(List<Human> familyTree) {
+public class FamilyTree<E extends Subject<Human>> implements Serializable {
+    private List<E> familyTree;
+
+    public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -17,11 +20,11 @@ public class FamilyTree implements Serializable {
         this(new ArrayList<>());
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         familyTree.add(human);
     }
 
-    public List<String> getParentName(Human human) {
+    public List<String> getParentName(E human) {
         List<String> parents = new ArrayList<>();
         if (human.getMother() != null) {
             parents.add("mother: " + human.getMother().getName());
@@ -32,9 +35,9 @@ public class FamilyTree implements Serializable {
         return parents;
     }
 
-    public List<String> getChildName(Human humanParent) {
+    public List<String> getChildName(E humanParent) {
         List<String> children = new ArrayList<>();
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             if (human.getMother() != null) {
                 if (humanParent.getName().equalsIgnoreCase(human.getMother().getName())) {
                     children.add(human.getName());
@@ -49,9 +52,9 @@ public class FamilyTree implements Serializable {
         return children;
     }
 
-    public List<String> getSiblingName(Human humanSibling) {
+    public List<String> getSiblingName(E humanSibling) {
         List<String> siblings = new ArrayList<>();
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             if (human.getMother() != null) {
                 if (humanSibling.getMother().getName().equalsIgnoreCase(human.getMother().getName())
                         && !human.getName().equalsIgnoreCase(humanSibling.getName()) &&
@@ -70,12 +73,12 @@ public class FamilyTree implements Serializable {
         return siblings;
     }
 
-    public List<Human> findHumanByName() {
-        List<Human> reqHumans = new ArrayList<>();
+    public List<E> findHumanByName() {
+        List<E> reqHumans = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите имя");
         String requiredHuman = scanner.nextLine();
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             if (requiredHuman.equalsIgnoreCase(human.getName())) {
                 reqHumans.add(human);
             } 
@@ -84,18 +87,18 @@ public class FamilyTree implements Serializable {
     }
 
     public void sortByAge() {
-        familyTree.sort(new HumanComparatorByAge());
+        familyTree.sort(new ComparatorByAge());
     }
 
     public void sortByGender() {
-        familyTree.sort(new HumanComporatorByGender());
+        familyTree.sort(new ComporatorByGender());
     }
 
     public String printFamilyTree() {
         StringBuilder strBuilder = new StringBuilder();
         strBuilder.append("Семейное древо:");
         strBuilder.append("\n");
-        for (Human human : familyTree) {
+        for (E human : familyTree) {
             strBuilder.append(human);
             strBuilder.append("\n");
         }

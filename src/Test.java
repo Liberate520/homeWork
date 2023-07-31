@@ -1,12 +1,12 @@
-import FileMethods.FileHandler;
+import family_tree.FamilyTree;
+import family_tree.human.Gender;
+import family_tree.human.Human;
 
 import java.time.LocalDate;
 
 public class Test {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "src/familyTree.out";
+        FamilyTree familyTree = new FamilyTree<>();
 
         Human gen1Human1 = new Human("humanA1_1", LocalDate.of(1935, 8, 20), LocalDate.of(2010, 7, 2), Gender.Female);
         Human gen1Human2 = new Human("humanB1_1", LocalDate.of(1936, 5, 11), LocalDate.of(2008, 9, 14), Gender.Male);
