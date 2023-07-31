@@ -57,26 +57,42 @@ public class Service {
 
 
     
-    
-    
-    public static void main (String [] args) {
-        String filePath = "src/family_tree/tree.out";
-        
-        FileHandler fileHandler = new FileHandler();
-        FamilyTree<Human> tree = TestTree.firstTree();
-   
-        System.out.println(tree);
-
-        tree.sortByName();
-        System.out.println("Сортировка по имени:");
-        System.out.println(tree);
-
-        tree.sortByBirthDate();
-        System.out.println("Сортировка по дате рождения:");
-        System.out.println(tree);
-        
-        fileHandler.save(tree, filePath);      
-
+    public boolean saveTree(String filePath) {
+        if (fileHandler.save(this.familyTree, filePath)) {
+            return true;
+        }
+        return false;
     }
+
+    public boolean loadTree(String filePath) {
+        this.familyTree = (FamilyTree<Human>) fileHandler.read(filePath);
+        if (this.familyTree != null) {
+            return true;
+        }
+        return false;
+    }
+
+    
+    
+    
+    // public static void main (String [] args) {
+    //     String filePath = "src/family_tree/tree.out";
+        
+    //     FileHandler fileHandler = new FileHandler();
+    //     FamilyTree<Human> tree = TestTree.firstTree();
+   
+    //     System.out.println(tree);
+
+    //     tree.sortByName();
+    //     System.out.println("Сортировка по имени:");
+    //     System.out.println(tree);
+
+    //     tree.sortByBirthDate();
+    //     System.out.println("Сортировка по дате рождения:");
+    //     System.out.println(tree);
+        
+    //     fileHandler.save(tree, filePath);      
+
+    // }
 
 }

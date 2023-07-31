@@ -98,4 +98,20 @@ public class ConsoleUI implements View {
     public void printAnswer(String text) {
         System.out.println(text);
     }
+
+    public void saveTree() {
+        if (presenter.saveTree("src/family_tree/tree1.out")) {
+            System.out.println("Древо сохранено");
+        } else {
+            System.out.println("Сбой сохранения");
+        }
+    }
+
+    public void loadTree() {
+        if (presenter.loadTree("src/family_tree/tree1.out")) {
+            System.out.println("Древо загружено");
+        } else {
+            System.out.println("Сбой загрузки");
+        }
+    }
 }

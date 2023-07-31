@@ -4,7 +4,7 @@ import family_tree.view.ConsoleUI;
 
 public class GetInfo extends Command {
     public GetInfo(ConsoleUI consoleUI) {
-        super(consoleUI, "Показать дерево");
+        super(consoleUI, "Показать древо");
     }
 
     public void execute() {

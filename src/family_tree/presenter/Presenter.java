@@ -39,4 +39,19 @@ public class Presenter {
         service.sortByBirthDate();
         getInfo();
     }
+
+    
+    public boolean saveTree(String filePath) {
+        if (service.saveTree(filePath)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean loadTree(String filePath) {
+        if (service.loadTree(filePath)) {
+            return true;
+        }
+        return false;
+    }
 }

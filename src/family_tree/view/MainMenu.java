@@ -14,6 +14,8 @@ public class MainMenu {
         commandList.add(new GetInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByBirthDate(consoleUI));
+        commandList.add(new SaveTree(consoleUI));
+        commandList.add(new LoadTree(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 
@@ -21,6 +23,7 @@ public class MainMenu {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commandList.size(); i++) {
             stringBuilder.append(i+1);
+            stringBuilder.append(" ");
             stringBuilder.append(commandList.get(i).getDescription());
             stringBuilder.append("\n");
         }
