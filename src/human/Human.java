@@ -41,6 +41,8 @@ public class Human implements Comparable<Human>, FamilyItem {
         this(name,gender,dateOfBirth,dateOfDeath,null,null);
     }
     public Human getSpouse(){return  spouse;}
+
+
     public int getId(){
         return id;
     }
