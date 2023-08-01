@@ -12,7 +12,6 @@ public class Main {
 
         /*
         FamilyTree<Human> familyTree = new FamilyTree<>();
-
         LocalDate birthday1 = LocalDate.of(1970, 5, 20);
         Human Sergey = new Human("Sergey", birthday1, Gender.Male);
         LocalDate birthday4 = LocalDate.of(1972, 3, 18);
