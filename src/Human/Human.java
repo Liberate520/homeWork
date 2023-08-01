@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Enum.Gender;
+import Servis.HumanItem;
 
-public class Human implements Serializable {
+public class Human implements HumanItem<Human>, Serializable {
 
     // #region Fields
 

@@ -2,13 +2,13 @@ package Human;
 
 import java.util.Comparator;
 
-public class HumanComparatorByName  implements Comparator<Human>{
+import Servis.HumanItem;
+
+public class HumanComparatorByName<T extends HumanItem<T>> implements Comparator<T> {
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getName().compareTo(o2.getName());
     }
 
-    
-    
 }

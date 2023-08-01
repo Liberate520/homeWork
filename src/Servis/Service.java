@@ -15,7 +15,7 @@ public class Service {
     // #region Fields
 
     private int idHuman;
-    private FamilyTree tree;
+    private FamilyTree <Human> tree;
     private Human firsthuman;
     private FileHandler fileSL;
 
@@ -24,7 +24,7 @@ public class Service {
     // #region Constructor
 
     public Service() {
-        tree = new FamilyTree();
+        tree = new FamilyTree<>();
         fileSL = new FileHandler();
     }
 
@@ -73,12 +73,12 @@ public class Service {
      */
     public boolean addKinship(int idHumanAdd, Kinship kinship, int idHuman) {
 
-        for (Human human1 : tree) {
-            if (human1.getId() == idHuman) {
-                this.firsthuman = human1;
-            }
-        }
-
+        // for (Human human1 : tree) {
+        //     if (human1.getId() == idHuman) {
+        //         this.firsthuman = human1;
+        //     }
+        // }
+            this.firsthuman=tree.getById(idHuman);
         for (Human human : tree) {
             if (human.getId() == idHumanAdd) {
                 if (kinship == Kinship.child) {
