@@ -17,6 +17,7 @@ public class Main {
         LocalDate birthday4 = LocalDate.of(1972, 3, 18);
         Human Yulia = new Human("Yulia", birthday4, Gender.Female);
 
+
         LocalDate birthday2 = LocalDate.of(2015, 2, 15);
         Human Sasha = new Human("Sasha", birthday2, Gender.Female);
         LocalDate birthday3 = LocalDate.of(2012, 2, 15);
