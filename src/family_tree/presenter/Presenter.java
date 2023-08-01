@@ -1,6 +1,7 @@
 package family_tree.presenter;
 
 import family_tree.model.service.*;
+import family_tree.model.family_tree.FamilyTree;
 import family_tree.model.human.*;
 import family_tree.view.*;
 
@@ -50,6 +51,13 @@ public class Presenter {
 
     public boolean loadTree(String filePath) {
         if (service.loadTree(filePath)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean loadSampleTree() {
+        if (service.loadSampleTree()) {
             return true;
         }
         return false;

@@ -1,6 +1,7 @@
 package family_tree.view;
 
 import family_tree.presenter.*;
+import family_tree.model.family_tree.FamilyTree;
 import family_tree.model.human.*;
 
 import java.util.Scanner;
@@ -113,5 +114,14 @@ public class ConsoleUI implements View {
         } else {
             System.out.println("Сбой загрузки");
         }
+    }
+
+    public void loadSampleTree() {
+        if (presenter.loadSampleTree()) {
+            System.out.println("Древо-образец загружено");
+        } else {
+            System.out.println("Сбой загрузки");
+        }
+        // FamilyTree<Human> tree = TestTree.firstTree();
     }
 }

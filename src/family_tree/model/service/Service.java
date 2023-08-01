@@ -72,7 +72,13 @@ public class Service {
         return false;
     }
 
-    
+    public boolean loadSampleTree() {
+        this.familyTree = TestTree.firstTree();
+        if (this.familyTree != null) {
+            return true;
+        }
+        return false;
+    }
     
     
     // public static void main (String [] args) {
