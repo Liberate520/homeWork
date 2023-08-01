@@ -1,4 +1,4 @@
-package ru.gb.family_tree;
+package ru.gb.writer;
 
 import java.io.IOException;
 import java.io.Serializable;
