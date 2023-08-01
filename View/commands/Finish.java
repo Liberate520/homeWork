@@ -1,2 +1,14 @@
-package View.commands;public class Finish {
+package View.commands;
+
+import View.*;
+
+public class Finish extends Command {
+    public Finish(ConsoleUI consoleUI) {
+        super(consoleUI);
+        description = "Закончить работу";
+    }
+
+    public void execute() {
+        consoleUI.finish();
+    }
 }

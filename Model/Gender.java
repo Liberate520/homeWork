@@ -1,5 +1,5 @@
-package Tree;
+package Model;
 
 public enum Gender {
-    Male, Female, Unknown
+    Male, Female
 }

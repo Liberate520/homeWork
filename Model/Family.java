@@ -1,18 +1,15 @@
-package Tree;
+package Model;
 
-import Tree.*;
-import Service.*;
-
+import Model.Service.*;
 import java.io.Serializable;
 import java.util.*;
 
-public class Family extends FamilyMember implements Serializable, Iterable<FamilyMember> {
+public class Family implements Serializable, Iterable<FamilyMember> {
     private List<FamilyMember> family;
     public Family() {
         family = new ArrayList<>();
     }
-    public void addFamilyMember(String status, Human human) {
-        FamilyMember familyMember = setFamilyMember(status, human);
+    public void addFamilyMember(FamilyMember familyMember) {
         family.add(familyMember);
     }
     public String getFamilyInfo() {
@@ -21,7 +18,7 @@ public class Family extends FamilyMember implements Serializable, Iterable<Famil
 
         Iterator<FamilyMember> iterator = family.iterator();
         while (iterator.hasNext()){
-            FamilyMember familyMember = iterator.next();
+            Human familyMember = iterator.next();
             stringBuilder.append(familyMember);
         }
 
@@ -32,10 +29,7 @@ public class Family extends FamilyMember implements Serializable, Iterable<Famil
     public Iterator<FamilyMember> iterator() {
         return new FamilyMemberIterator(family);
     }
-//    @Override
-//    public int compareTo(Tree.FamilyMember o) {
-//        return 0;
-//    }
+
     public void sortByAge() {
         family.sort(new FamilyMemberComparatorByAge());
     }

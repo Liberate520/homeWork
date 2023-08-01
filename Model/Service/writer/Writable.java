@@ -1,4 +1,4 @@
-package Service.writer;
+package Model.Service.writer;
 
 import java.io.Serializable;
 

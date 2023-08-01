@@ -1,8 +1,6 @@
-package Tree;
+package Model;
 
 import java.time.Period;
-import java.util.*;
-import java.text.*;
 import java.io.*;
 import java.time.LocalDate;
 
@@ -22,7 +20,6 @@ public class Human implements Serializable{
             this.dateOfDeath = dateOfDeath;
             this.status = status;
     }
-
     public Human() {
     }
 
