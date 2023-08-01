@@ -1,9 +1,10 @@
 package ru.gb.fam_tree.human;
 
-import javax.print.attribute.standard.JobHoldUntil;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private String firstName, lastName;
     private Genger genger;
     private Human mother, father, spouse;
@@ -21,25 +22,11 @@ public class Human {
     }
 
     public Human(String firstName, String lastName, Genger genger, Human mother, Human father) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.genger = genger;
-        this.mother = mother;
-        this.father = father;
-    }
-
-    public Human(String firstName, String lastName, Genger genger, Human spouse, List<Human> childrens) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.genger = genger;
-        this.spouse = spouse;
-        this.childrens = childrens;
+        this(firstName,lastName,genger,mother,father,null,null);
     }
 
     public Human(String firstName, String lastName, Genger genger) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.genger = genger;
+        this(firstName,lastName,genger,null,null,null,null);
     }
 
     public void setSpouse(Human spouse) {
@@ -58,20 +45,13 @@ public class Human {
         return firstName;
     }
 
-    public void printChildrens(Human human){
-        int temp = 0;
+    public List<String> getChildrensNames(Human parentHuman){
+        List<String> res = new ArrayList<>();
         StringBuilder names = new StringBuilder();
-        for(Human i: human.getChildrens()){
-            if(temp == 0){
-                names.append(i.getFirstName());
-                temp++;
-            }
-            else {
-                names.append(", " + i.getFirstName());
-            }
+        for(Human i: parentHuman.getChildrens()) {
+            res.add(i.getFirstName());
         }
-        String res = String.format("%s's childrens: %s", human.getFirstName(), names);
-        System.out.println(res);
+        return res;
     }
 }
 
