@@ -41,7 +41,7 @@ public class Person implements Marrieble, GenTreeItem, Comparable<Person> {
         this.id = id;
     }
 
-    public void setSurname(GenerationTree family) {
+    public void setSurname(GenerationTree<Person> family) {
         if (family.contains((GenTreeItem) this))
             this.surname = family.getTreeName();
     }
@@ -142,6 +142,11 @@ public class Person implements Marrieble, GenTreeItem, Comparable<Person> {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getTreeName() {
+        return this.getSurname();
     }
 
     @Override

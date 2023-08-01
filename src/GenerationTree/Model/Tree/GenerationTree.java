@@ -3,7 +3,6 @@ package GenerationTree.Model.Tree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +11,11 @@ import java.util.Queue;
 import java.util.TreeMap;
 
 import GenerationTree.Model.Tree.Comparators.TreeItemComparatorByAge;
+import GenerationTree.Model.Tree.Comparators.TreeItemComparatorByTreeName;
 import GenerationTree.Model.Tree.Comparators.TreeItemComporatorByName;
 import GenerationTree.Model.Tree.Iterators.TreeItemIterator;
 
-public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
+public class GenerationTree<T extends GenTreeItem> implements Serializable, Iterable<GenTreeItem> {
 
     private String treeName;
     private List<GenTreeItem> items;
@@ -97,8 +97,8 @@ public class GenerationTree implements Serializable, Iterable<GenTreeItem> {
         Collections.sort(this.items, new TreeItemComparatorByAge<>());
     }
 
-    public void sortOutComparator(Comparator<GenTreeItem> outComporator) {
-        this.items.sort(outComporator);
+    public void sortOutComparator() {
+        this.items.sort(new TreeItemComparatorByTreeName());
     }
 
     public void reverse() {

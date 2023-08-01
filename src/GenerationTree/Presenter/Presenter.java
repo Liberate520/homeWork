@@ -90,7 +90,6 @@ public class Presenter {
     }
 
     public void addParrent(int memberId) {
-
         int parrentId = 0;
         while (parrentId >= 0) {
             var members = tree.getTreeItemsWithoutCurrentItem(memberId);

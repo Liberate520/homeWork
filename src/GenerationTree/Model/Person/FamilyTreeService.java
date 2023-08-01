@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import GenerationTree.Model.FileHandler.FileHandler;
-import GenerationTree.Model.Person.Comparators.PersonComparatorBySename;
 import GenerationTree.Model.Person.Structs.Gender;
 import GenerationTree.Model.Tree.GenerationTree;
 import GenerationTree.Model.Tree.Service;
@@ -19,8 +18,8 @@ public class FamilyTreeService implements Service {
     private final String FILE_TREE_EXTENSIONS = ".out";
     private final String ID_GENERATOR_FILE_NAME = "id_gen.data";
     private PersonIdGenerator idGenerator;
-    private GenerationTree tree;
-    private FileHandler<GenerationTree> treeFileHandler;
+    private GenerationTree<Person> tree;
+    private FileHandler<GenerationTree<Person>> treeFileHandler;
     private FileHandler<PersonIdGenerator> idFileHandler;
 
     public FamilyTreeService() {
@@ -28,7 +27,7 @@ public class FamilyTreeService implements Service {
     }
 
     public FamilyTreeService(String treeName) {
-        this.tree = new GenerationTree(treeName);
+        this.tree = new GenerationTree<>(treeName);
         this.idGenerator = PersonIdGenerator.getIdGenerator();
         this.treeFileHandler = new FileHandler<>();
         this.idFileHandler = new FileHandler<>();
@@ -39,8 +38,7 @@ public class FamilyTreeService implements Service {
         var parrent = (Person) this.tree.getItemById(parrentId);
         var child = (Person) this.tree.getItemById(childId);
         if (parrent != null && child != null) {
-            parrent.addChild(child);
-            return true;
+            return parrent.addChild(child);
         }
         return false;
     }
@@ -137,7 +135,7 @@ public class FamilyTreeService implements Service {
         if (savedTrees != null && savedTrees.contains(name.toLowerCase())) {
             throw new FileAlreadyExistsException(name);
         }
-        this.tree = new GenerationTree(name);
+        this.tree = new GenerationTree<>(name);
         return saveTree();
     }
 
@@ -188,7 +186,7 @@ public class FamilyTreeService implements Service {
     }
 
     public void sortBySename() {
-        this.tree.sortOutComparator(new PersonComparatorBySename());
+        this.tree.sortOutComparator();
     }
 
     public void sortByAge() {

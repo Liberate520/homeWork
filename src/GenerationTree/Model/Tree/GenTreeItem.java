@@ -9,6 +9,8 @@ public interface GenTreeItem extends Serializable {
 
     String getName();
 
+    String getTreeName();
+
     LocalDate getDateBirth();
 
     List<GenTreeItem> getParrents();

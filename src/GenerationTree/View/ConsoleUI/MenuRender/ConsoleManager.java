@@ -7,7 +7,7 @@ public class ConsoleManager {
     private Scanner cs;
     private StringBuilder frame = new StringBuilder();
     private Boolean onLog;
-    private JFrameKeyEvent keyEvent;
+    private KeyEventManager keyEvent;
 
     public ConsoleManager() {
         this("", false);
