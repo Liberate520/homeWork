@@ -1,15 +1,39 @@
 package family_tree;
 
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.Gender;
-import family_tree.human.Human;
-import family_tree.writer.FileHandler;
+import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
+import family_tree.model.writer.FileHandler;
+import family_tree.view.ConsoleUI;
+import family_tree.view.View;
 
 import java.time.LocalDate;
 
 public class Main{
     public static void main(String[] args) {
-        String filePath = "src/family_tree/data/tree.out";
+        View view=new ConsoleUI();
+        view.start();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static void extracted1() {
+        String filePath = "src/family_tree/model/data/tree.out";
         FileHandler fileHandler = new FileHandler();
 
         FamilyTree tree = testTree();
@@ -30,6 +54,7 @@ public class Main{
         tree.sortByAge();
         System.out.println(tree);
     }
+
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
         Human vasya = new Human("Василий", Gender.Male, LocalDate.of(1963,12,10));
