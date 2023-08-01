@@ -1,7 +1,4 @@
-package ru.gb.family_tree;
-
-import ru.gb.data.Gender;
-import ru.gb.human.Human;
+package ru.gb.model.family_tree;
 
 public interface FamilyTreeItem<T> {
     void setId(long humanId);

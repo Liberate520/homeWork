@@ -1,11 +1,9 @@
-package ru.gb.family_tree;
+package ru.gb.model.family_tree;
 
-import ru.gb.human.Human;
-import ru.gb.human.HumanComparatorByAge;
-import ru.gb.human.HumanComparatorByName;
-import ru.gb.human.HumanIterator;
-import study_group.model.StudentComparatorByName;
-import study_group.model.StudentComparatorByAge;
+import ru.gb.model.human.Human;
+import ru.gb.model.human.HumanComparatorByAge;
+import ru.gb.model.human.HumanComparatorByName;
+import ru.gb.model.human.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;

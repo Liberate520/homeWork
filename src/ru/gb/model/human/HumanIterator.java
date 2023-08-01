@@ -1,6 +1,4 @@
-package ru.gb.human;
-
-import ru.gb.human.Human;
+package ru.gb.model.human;
 
 import java.util.Iterator;
 import java.util.List;

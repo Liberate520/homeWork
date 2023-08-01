@@ -1,4 +1,4 @@
-package ru.gb.writer;
+package ru.gb.model.writer;
 
 import java.io.IOException;
 import java.io.Serializable;

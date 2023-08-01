@@ -1,15 +1,16 @@
 package ru.gb;
 
-import ru.gb.data.Gender;
-import ru.gb.family_tree.FamilyTree;
-import ru.gb.human.Human;
-import ru.gb.writer.FileHandler;
+import ru.gb.view.ConsoleUI;
+import ru.gb.view.View;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        View view = new ConsoleUI();
+        view.start();
+
+        /*
         FamilyTree<Human> familyTree = new FamilyTree<>();
 
         LocalDate birthday1 = LocalDate.of(1970, 5, 20);
@@ -32,6 +33,7 @@ public class Main {
         familyTree.setConnection(Ivan, Yulia);
 
         System.out.println(familyTree);
+         */
 
         /*
         FileHandler handler = new FileHandler();
