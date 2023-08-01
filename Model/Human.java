@@ -28,7 +28,7 @@ public class Human implements Serializable{
 
     @Override
     public String toString() {
-        return  " имя - " + name +
+        return  "Имя - " + name +
                 ", пол - " + gender +
                 ", дата рождения - " + dateOfBirth.toString();
     }
@@ -49,13 +49,15 @@ public class Human implements Serializable{
     public Gender getGender() {
         return gender;
     }
-    public void setStatus(String status) {
-        this.status = status;
-    }
     public void setName(String name) {
         this.name = name;
     }
+    public void setGender(Gender gender) {
+        this.gender = gender; }
     public void setAge(LocalDate date){
-        this.dateOfBirth = date;
-    }
+        this.dateOfBirth = date; }
+    public void setDateOfDeath(LocalDate date){
+        this.dateOfDeath = date; }
+    public void setStatus(String status){
+        this.status = status; }
 }

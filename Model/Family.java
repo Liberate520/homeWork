@@ -1,9 +1,7 @@
 package Tree;
 
-import Tree.FamilyMember;
-import Tree.Human;
-import Service.FamilyMemberComparatorByAge;
-import Service.FamilyMemberComparatorByName;
+import Tree.*;
+import Service.*;
 
 import java.io.Serializable;
 import java.util.*;
