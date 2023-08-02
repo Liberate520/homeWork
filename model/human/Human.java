@@ -1,7 +1,7 @@
 package homeWork.model.human;
 
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +37,12 @@ public class Human implements TreeItem<Human> {
         this.children = new ArrayList<>();
     }
 
-    public Human(String string, Gender male, LocalDate of, int age, int id) {
-    }
+    public Human(String name, Gender gender, LocalDate birthdate, int age, int id) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.id = id;
 
-    public Human(String name2, int age2) {
     }
 
     public boolean addChild(Human child) {
@@ -163,15 +165,15 @@ public class Human implements TreeItem<Human> {
         return result;
     }
 
-    // public int getAge() {
-    // int age = 0;
-    // if (deathdate != null) {
-    // age = Period.between(birthdate, deathdate).getYears();
-    // } else {
-    // age = Period.between(birthdate, LocalDate.now()).getYears();
-    // }
-    // return age;
-    // }
+    public int getAge() {
+        int age = 0;
+        if (deathdate != null) {
+            age = Period.between(birthdate, deathdate).getYears();
+        } else {
+            age = Period.between(birthdate, LocalDate.now()).getYears();
+        }
+        return age;
+    }
 
     public List<Human> getParents() {
         return parents;
@@ -179,10 +181,6 @@ public class Human implements TreeItem<Human> {
 
     public int compareTo(Human nextHuman) {
         return name.compareTo(nextHuman.name);
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public String getName() {

@@ -1,7 +1,9 @@
 package homeWork.view;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
+import homeWork.model.human.gender.Gender;
 import homeWork.presenter.Presenter;
 
 public class ConsoleUI implements View {
@@ -34,11 +36,23 @@ public class ConsoleUI implements View {
     public void addHuman() {
         System.out.println("Введите имя ");
         String name = scanner.nextLine();
+        System.out.println("Укажите дату рождения (0000-00-00)");
+        String birthString = scanner.nextLine();
+        LocalDate birthDate = null;
+        if (birthString != "")
+            birthDate = LocalDate.parse(birthString);
         System.out.println("Укажите возраст ");
         String ageString = scanner.nextLine();
-        // сделать проверку ввода возраста
         int age = Integer.parseInt(ageString);
-        presenter.addHuman(name, age);
+
+        System.out.println("Укажите Пол М/Ж");
+        String genderString = scanner.nextLine();
+        Gender gender = null;
+        if (genderString.equals("Ж"))
+            gender = Gender.Female;
+        if (genderString.equals("М"))
+            gender = Gender.Male;
+        presenter.addHuman(name, null, null, age, age);
     }
 
     public void getHumanInfo() {
@@ -98,34 +112,30 @@ public class ConsoleUI implements View {
         System.out.println(INPUT_ERROR);
     }
 
-    // public void addChild() {
-    // System.out.println("Введите имя ");
-    // String name = scanner.nextLine();
-    // System.out.println("Укажите возраст ");
-    // String ageString = scanner.nextLine();
-    // int age = Integer.parseInt(ageString);
-    // System.out.println("Укажите мать ");
-    // String name = scanner.nextLine();
-    // System.out.println("Укажите отца ");
-    // String name = scanner.nextLine();
-    // presenter.addHuman(name, age, getMotherInfo(), getFatherInfo());
-
-    // }
+    public void addChild() {
+        System.out.println("Введите имя ");
+        String name = scanner.nextLine();
+        System.out.println("Укажите возраст ");
+        String ageString = scanner.nextLine();
+        int age = Integer.parseInt(ageString);
+    }
 
     public void addParent() {
-        // System.out.println("Введите имя ");
-        // String name = scanner.nextLine();
-        // System.out.println("Укажите возраст ");
-        // String ageString = scanner.nextLine();
-        // int age = Integer.parseInt(ageString);
+        System.out.println("Введите имя ");
+        String name = scanner.nextLine();
+        System.out.println("Укажите возраст ");
+        String ageString = scanner.nextLine();
+        int age = Integer.parseInt(ageString);
     }
 
     public void save() {
         presenter.saveInFile();
+        System.out.println("Экспорт (tree.out) завершен успешно");
     }
 
     public void readFromFile() {
         presenter.ReadFromFile();
+        System.out.println("Импорт данных выполнен  >>>>>>  ");
     }
 
 }
