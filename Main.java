@@ -1,8 +1,8 @@
 package homeWork;
 
-import familytree.Tree;
-import filehandling.FamilyTreeFileHandler;
-import filehandling.FileHandler;
+import homeWork.familytree.Tree;
+import homeWork.filehandling.FamilyTreeFileHandler;
+import homeWork.filehandling.FileHandler;
 
 import java.io.IOException;
 
