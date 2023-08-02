@@ -12,6 +12,8 @@ import static models.Roles.*;
 
 public class FamilyNode {
     private final Map<Roles, List<Human>> family;
+    private final Map<Roles, FamilyNode> upRelatives;
+    private final Map<Roles, FamilyNode> childrenFamilies;
 
     public FamilyNode() {
         family = new HashMap<>();
@@ -19,6 +21,8 @@ public class FamilyNode {
         family.put(FATHER, new ArrayList<>());
         family.put(DAUGHTER, new ArrayList<>());
         family.put(SON, new ArrayList<>());
+        upRelatives = new HashMap<>();
+        childrenFamilies = new HashMap<>();
     }
 
     public boolean findHuman(Human human) {
@@ -50,6 +54,22 @@ public class FamilyNode {
             case DAUGHTER -> this.addDaughter(human);
             case SON -> this.addSon(human);
         }
+    }
+
+    public void addToUpRelatives(Roles role, FamilyNode node){
+        this.upRelatives.put(role, node);
+    }
+
+    public void addToChildrenFamilies(Roles role, FamilyNode node){
+        this.childrenFamilies.put(role, node);
+    }
+
+    public Map<Roles, FamilyNode> getUpRelatives() {
+        return upRelatives;
+    }
+
+    public Map<Roles, FamilyNode> getChildrenFamilies() {
+        return childrenFamilies;
     }
 
     public void delMember(Human human, Roles role) {
