@@ -9,12 +9,5 @@ public interface FamilyTreeElement<E> {
     void addChild(E element);
     void addParent(E element);
     String getName();
-
-    void marry(Human partner);
-
-    void addChild(Human child);
-
-    void addParent(Human parent);
-
     LocalDate getBirthDay();
 }
