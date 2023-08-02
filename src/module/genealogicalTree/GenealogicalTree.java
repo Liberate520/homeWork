@@ -3,8 +3,11 @@ package module.genealogicalTree;
 import module.Service.TreeNode;
 import module.human.ComparatorByAge;
 import module.human.ComparatorByName;
+import module.human.Gender;
+import module.human.Human;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.List;
 public class GenealogicalTree<T extends TreeNode> implements Serializable, Iterable<T> {
 
     private List<T> humanList;
+    private int idPerson;
 
     public GenealogicalTree() {
         humanList = new ArrayList<>();
@@ -20,6 +24,8 @@ public class GenealogicalTree<T extends TreeNode> implements Serializable, Itera
     public GenealogicalTree(List<T> humanList) {
         this.humanList = humanList;
     }
+
+
 
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
@@ -36,6 +42,11 @@ public class GenealogicalTree<T extends TreeNode> implements Serializable, Itera
         if(!humanList.contains(human)) {
             humanList.add(human);
         }
+    }
+
+    public void addHuman(String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children){
+        T human = (T) new Human(idPerson++, name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
+        humanList.add(human);
     }
 
     public void showAllHumans(){

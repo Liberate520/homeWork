@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Main {
     static String filePath = "familytree.out";
     public static void main(String[] args)  {
-        View view = new ConsoleUI();
-        view.start();
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.start();
 //        GenealogicalTree family1 = new GenealogicalTree<>();
 //
 //        Human grandmother1 = new Human("Valentina", "Nazarova", Gender.female, LocalDate.of(1938, Month.JANUARY, 4),LocalDate.of(2020, Month.MARCH, 1),null, null, null, new ArrayList<>() );

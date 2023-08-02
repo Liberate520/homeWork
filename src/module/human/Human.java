@@ -12,6 +12,7 @@ import java.util.Objects;
 
 public class Human implements Serializable, Comparable<Human>, TreeNode {
 
+    private int idPerson;
     private String name;
     private String lastName;
     Gender gender;
@@ -23,7 +24,8 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
     private List<Human> children;
 
 
-    public Human(String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
+    public Human(int idPerson, String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
+        this.idPerson = idPerson;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -40,17 +42,19 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(name, human.getName()) && Objects.equals(lastName, human.getLastName()) && Objects.equals(birthDate, human.getBirth());
+        return Objects.equals(idPerson, ((Human) o).idPerson);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastName, birthDate);
+        return Objects.hash(idPerson);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(this.idPerson);
+        sb.append(" ");
         sb.append(this.name);
         sb.append(" ");
         sb.append(this.lastName);
@@ -103,10 +107,9 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         return this.lastName;
     }
 
-
-
-
-
+    public int getID(){
+        return this.idPerson;
+    }
     public String getName(){
         return this.name;
     }
@@ -115,6 +118,8 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
     public LocalDate getBirth(){
         return this.birthDate;
     }
+
+
     public void addChildren(Human child){
         if(!this.children.contains(child)) {
             this.children.add(child);
@@ -162,6 +167,9 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
+        sb.append("ID:");
+        sb.append(this.idPerson);
+        sb.append("/");
         sb.append("Name:");
         sb.append(this.name);
         sb.append("/");
@@ -190,11 +198,16 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         return sb.toString();
     }
 
-
     @Override
     public int compareTo(Human o) {
-        return this.name.compareTo(o.getName());
+        return 0;
     }
+
+
+//    @Override
+//    public int compareTo(Human o) {
+//        return this.idPerson.compareTo(o.getID());
+//    }
 }
 
 

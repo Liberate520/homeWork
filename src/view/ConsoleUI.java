@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
+
+    private static final String INPUT_ERROR = "WRONG DATA";
     private Presenter presenter;
     private Scanner scanner;
     private boolean work;
@@ -29,12 +31,19 @@ public class ConsoleUI implements View{
 
         while(work){
             System.out.println(menu.menu());
-            System.out.println("You should choose the action");
+            System.out.print("You should choose the action: ");
             String choice = scanner.nextLine();
-            //TODO проверка на валидность введенной цифры(getSize)
 
-            int choiceInt = Integer.parseInt(choice);
-            menu.execute(choiceInt);
+            //TODO проверка на валидность введенной цифры(getSize)
+            try{
+                int choiceInt = Integer.parseInt(choice);
+                if(choiceInt < menu.getSize()) menu.execute(choiceInt);
+                else errorInput();
+            } catch (Exception e) {
+                System.out.println(INPUT_ERROR);
+            }
+
+
 
         }
 
@@ -51,6 +60,7 @@ public class ConsoleUI implements View{
 
     public void sortByAge() {
         presenter.sortByAge();
+
     }
 
     public void sortByName() {
@@ -72,7 +82,6 @@ public class ConsoleUI implements View{
 
 
 
-        //TODO решить вопрос с перечислением
         //GENDER
         Gender gender = null;
         System.out.print("Insert gender of person(male or female): ");
