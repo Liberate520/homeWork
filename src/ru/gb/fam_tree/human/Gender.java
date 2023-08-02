@@ -1,5 +1,5 @@
 package ru.gb.fam_tree.human;
 
-public enum Genger {
+public enum Gender {
     Male, Female
 }

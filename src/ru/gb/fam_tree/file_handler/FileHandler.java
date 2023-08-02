@@ -1,27 +1,22 @@
 package ru.gb.fam_tree.file_handler;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 public class FileHandler implements Writable{
-    public void writeFamilyTree(Serializable serializable, String filePath) {
-        try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+    public boolean save(Serializable serializable, String filePath) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);
-        } catch (IOException e) {
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public Serializable readFamilyTree(String filePath) {
-        try (FileInputStream inputStream = new FileInputStream(filePath)) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-            return (Serializable)objectInputStream.readObject();
-        } catch (ClassNotFoundException | IOException e) {
+    public Object read(String filePath) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
+            return objectInputStream.readObject();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

@@ -1,53 +1,45 @@
 package ru.gb.fam_tree;
 
-import ru.gb.fam_tree.file_handler.FileHandler;
-import ru.gb.fam_tree.human.Genger;
+import ru.gb.fam_tree.family_tree.FamilyTree;
+import ru.gb.fam_tree.human.Gender;
 import ru.gb.fam_tree.human.Human;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree tree = testTree();
+        //сортировка по айди(ну я думаю, что ее можно не счтитать, т.к. она записывается в таком проядке)
+        System.out.println(tree);
 
-        Human mother = new Human("Svetlana", "Vahterova", Genger.Female);
-        Human father = new Human("Aleksei", "Vahterov", Genger.Male);
-        mother.setSpouse(father);
-        father.setSpouse(mother);
+        //сортирвока по возрасту
+        tree.sortByAge();
+        System.out.println(tree);
 
-        Human son = new Human("Zahar", "Vahterov", Genger.Male, mother, father);
-        Human olderDaughter = new Human("Alisa", "Vahterova", Genger.Female, mother, father);
-        Human youngerDougher = new Human("Maria", "Vahterova", Genger.Female, mother, father);
+        //сортировка по имени
+        tree.sortByName();
+        System.out.println(tree);
+    }
 
-        ArrayList<Human> childrens = new ArrayList<>();
-        childrens.add(son);
-        childrens.add(olderDaughter);
-        childrens.add(youngerDougher);
+    static FamilyTree testTree(){
+        FamilyTree tree = new FamilyTree();
+        Human masha = new Human ("Maria", Gender.Female, LocalDate.of(1965,9,15));
+        Human vasya = new Human ("Vasiliy", Gender.Male, LocalDate.of(1963,12,10));
+        tree.add(vasya);
+        tree.add(masha);
+        tree.setWedding(vasya,masha);
 
-        mother.setChildrens(childrens);
-        father.setChildrens(childrens);
+        Human christina = new Human("Kristina", Gender.Female, LocalDate.of(1988, 7,5),
+                vasya,masha);
+        Human semyon = new Human("Semyon", Gender.Male, LocalDate.of(1991,1,25),
+                vasya,masha);
+        tree.add(christina);
+        tree.add(semyon);
 
-        familyTree.addHuman(father);
-        familyTree.addHuman(mother);
-        familyTree.addHuman(son);
-        familyTree.addHuman(olderDaughter);
-        familyTree.addHuman(youngerDougher);
+        Human larisa = new Human("Larisa", Gender.Female, LocalDate.of(1945,9,1));
+        larisa.addChild(vasya);
+        tree.add(larisa);
 
-        List<Human> humanList= new ArrayList<>();
-        humanList.add(father);
-        humanList.add(mother);
-        humanList.add(son);
-        humanList.add(olderDaughter);
-        humanList.add(youngerDougher);
-
-        //System.out.println(familyTree.getChildrensNames(father));
-
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.writeFamilyTree(familyTree,"family.dat");
-
-        System.out.println(fileHandler.readFamilyTree("family.dat"));
+        return tree;
     }
 }
