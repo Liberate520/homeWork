@@ -13,8 +13,7 @@ import static models.Roles.*;
 public class FamilyNode {
     private final Map<Roles, List<Human>> family;
 
-
-    FamilyNode() {
+    public FamilyNode() {
         family = new HashMap<>();
         family.put(MOTHER, new ArrayList<>());
         family.put(FATHER, new ArrayList<>());
@@ -22,7 +21,7 @@ public class FamilyNode {
         family.put(SON, new ArrayList<>());
     }
 
-    boolean findHuman(Human human) {
+    public boolean findHuman(Human human) {
         for (List<Human> humanList : family.values()) {
             if (humanList.contains(human)) {
                 return true;
@@ -31,7 +30,38 @@ public class FamilyNode {
         return false;
     }
 
-    void addMother(Human human) {
+    public Roles getHumanRoleOrNull(Human human) {
+        for (Map.Entry<Roles, List<Human>> entities : family.entrySet()) {
+            if (entities.getValue().contains(human)) {
+                return entities.getKey();
+            }
+        }
+        return null;
+    }
+
+    public boolean checkHumanRole(Human human, Roles role) {
+        return family.get(role).contains(human);
+    }
+
+    public void addMember(Human human, Roles role) {
+        switch (role) {
+            case FATHER -> this.addFather(human);
+            case MOTHER -> this.addMother(human);
+            case DAUGHTER -> this.addDaughter(human);
+            case SON -> this.addSon(human);
+        }
+    }
+
+    public void delMember(Human human, Roles role) {
+        switch (role) {
+            case FATHER -> this.delFather();
+            case MOTHER -> this.delMother();
+            case DAUGHTER -> this.delDaughter(human);
+            case SON -> this.delSon(human);
+        }
+    }
+
+    private void addMother(Human human) {
         List<Human> list = family.get(MOTHER);
         if (list.size() == 0) {
             list.add(human);
@@ -41,12 +71,11 @@ public class FamilyNode {
         }
     }
 
-    void delMother() {
+    private void delMother() {
         family.get(MOTHER).clear();
     }
 
-
-    void addFather(Human human) {
+    private void addFather(Human human) {
         List<Human> list = family.get(FATHER);
         if (list.size() == 0) {
             list.add(human);
@@ -56,39 +85,52 @@ public class FamilyNode {
         }
     }
 
-    void delFather() {
+    private void delFather() {
         family.get(FATHER).clear();
     }
 
-    void addDaughter(Human human) {
+    private void addDaughter(Human human) {
         family.get(DAUGHTER).add(human);
     }
 
-    void delDaughter(Human human) {
+    private void delDaughter(Human human) {
         family.get(DAUGHTER).remove(human);
     }
 
-
-    void addSon(Human human) {
+    private void addSon(Human human) {
         family.get(SON).add(human);
     }
 
-    void delSon(Human human) {
+    private void delSon(Human human) {
         family.get(SON).remove(human);
     }
 
-    Human getMother() {
+    public Human getMother() {
         return family.get(MOTHER).get(0);
     }
 
-    Human getFather() {
+    public Human getFather() {
         return family.get(FATHER).get(0);
     }
 
-    List<Human> getChildren() {
+    public List<Human> getChildren() {
         List<Human> children = new ArrayList<>();
         children.addAll(family.get(DAUGHTER));
         children.addAll(family.get(SON));
         return children;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(family.get(FATHER).get(0).toString())
+                .append("\n")
+                .append(family.get(MOTHER).get(0).toString())
+                .append("\n");
+        family.get(DAUGHTER).forEach(item -> builder.append(item.toString()));
+        builder.append("\n");
+        family.get(SON).forEach(item -> builder.append(item.toString()));
+
+        return builder.toString();
     }
 }

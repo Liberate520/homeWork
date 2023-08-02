@@ -1,6 +1,7 @@
 package models.familyTree;
 
 import models.Human;
+import models.Roles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,10 @@ public class FamilyTree {
         tree.remove(node);
     }
 
-    public FamilyNode findFamilyOrNull(Human human){
+    public FamilyNode findFamilyOrNull(Human human, Roles role) {
         FamilyNode returnNode = null;
         for (FamilyNode familyNode : tree) {
-            if (familyNode.findHuman(human)) {
+            if (familyNode.checkHumanRole(human, role)) {
                 returnNode = familyNode;
             }
         }
