@@ -1,25 +1,13 @@
 import model.familyTree.ConnectionType;
-import model.familyTree.Connections;
 import model.person.Gender;
 import model.person.Person;
 import model.service.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Service<Person> service = makeTree();
-        for (Map.Entry<Person, Connections<Person>> item :
-                service) {
-            System.out.println(item);
-        }
-        System.out.println(Arrays.toString(Gender.values()));
-        LocalDate date = getDate();
-        System.out.println(date);
     }
 
     public static Service<Person> makeTree() {
@@ -49,13 +37,6 @@ public class Main {
         Service<Person> result = new Service<>();
         result.read();
         return result;
-    }
-
-    public static LocalDate getDate() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        if (input.isEmpty()) return null;
-        return LocalDate.parse(input, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 }
 

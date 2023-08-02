@@ -1,20 +1,19 @@
 package presenter;
 
-import model.familyTree.FamilyTree;
-import model.familyTree.TreeNode;
+import model.person.Person;
 import model.service.Service;
 import view.View;
 
 public class Presenter {
     private View view;
-    private Service service;
+    private Service<Person> service;
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new Service();
+        this.service = new Service<>();
     }
 
-    public void addPerson (TreeNode person) {
+    public void addPerson (Person person) {
         service.addPerson(person);
     }
 }

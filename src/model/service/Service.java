@@ -12,15 +12,15 @@ import java.util.TreeMap;
 
 public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Connections<T>>> {
     private FamilyTree<T> tree;
-    private FileHandler fh;
+    private FileHandler fileHandler;
 
-    public Service(FamilyTree<T> ft) {
-        this.tree = ft;
-        this.fh = new FileHandler();
+    public Service(FamilyTree<T> familyTree) {
+        this.tree = familyTree;
+        this.fileHandler = new FileHandler();
     }
 
     public Service() {
-        this(new FamilyTree<T>());
+        this(new FamilyTree<>());
     }
 
     public void addPerson(T person) {
@@ -57,10 +57,10 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
     }
 
     public void write() {
-        fh.write(tree);
+        fileHandler.write(tree);
     }
 
     public void read() {
-        this.tree =  (FamilyTree<T>) fh.read();
+        this.tree =  (FamilyTree<T>) fileHandler.read();
     }
 }
