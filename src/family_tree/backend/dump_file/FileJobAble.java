@@ -1,4 +1,4 @@
-package family_tree.dump_file;
+package family_tree.backend.dump_file;
 
 import java.io.Serializable;
 public interface FileJobAble {

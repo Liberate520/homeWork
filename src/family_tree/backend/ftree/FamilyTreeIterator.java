@@ -1,6 +1,6 @@
-package family_tree.ftree;
+package family_tree.backend.ftree;
 
-import family_tree.person.Person;
+import family_tree.backend.person.Person;
 
 import java.util.Iterator;
 import java.util.List;

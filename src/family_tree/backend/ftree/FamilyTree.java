@@ -1,16 +1,15 @@
-package family_tree.ftree;
+package family_tree.backend.ftree;
 
-import family_tree.person.Gender;
-import family_tree.person.Person;
-import family_tree.person.PersonsComparatorByNames;
-import family_tree.person.PersonsComparatorByBirthday;
+import family_tree.backend.person.Gender;
+import family_tree.backend.person.PersonsComparatorByNames;
+import family_tree.backend.person.PersonsComparatorByBirthday;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<P extends Person> implements Serializable, Iterable<P> {
+public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterable<P>, Wedding, Childrens {
     
     private List<P> relations;
 
@@ -19,7 +18,7 @@ public class FamilyTree<P extends Person> implements Serializable, Iterable<P> {
     }
 
     public FamilyTree(){
-        this(new ArrayList<>());
+        this(new ArrayList<P>());
     }
 
     public void addPerson(P person){
@@ -78,8 +77,8 @@ public class FamilyTree<P extends Person> implements Serializable, Iterable<P> {
         List <P> result = new ArrayList<>();
         StringBuilder sB = new StringBuilder();
         P selPerson = getPersonObj(id);
-        Person personMother = selPerson.getMother();
-        Person personFather = selPerson.getFather();
+        P personMother = selPerson.getMother();
+        P personFather = selPerson.getFather();
 
         for (P person: relations){
             if (person.getID() != id && ((person.getMother() != null && person.getMother() == personMother) ||
@@ -108,8 +107,8 @@ public class FamilyTree<P extends Person> implements Serializable, Iterable<P> {
         StringBuilder sB = new StringBuilder();
 
         P selPerson = getPersonObj(id);
-        Person personMother = selPerson.getMother();
-        Person personFather = selPerson.getFather();
+        P personMother = selPerson.getMother();
+        P personFather = selPerson.getFather();
 
         for (P person: relations){
             if (person.getID() != id && ((person.getMother() != null && person.getMother() == personMother) ||
@@ -163,12 +162,12 @@ public class FamilyTree<P extends Person> implements Serializable, Iterable<P> {
         return sB.toString();
     }
 
-    public void sortByNames(){
-        relations.sort(new PersonsComparatorByNames());
-    }
-
     public void sortByBirthDays(){
         relations.sort(new PersonsComparatorByBirthday());
+    }
+
+    public void sortByNames(){
+        relations.sort(new PersonsComparatorByNames());
     }
 
     @Override

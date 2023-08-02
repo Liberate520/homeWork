@@ -2,3 +2,5 @@
 out
 *.iml
 *.class
+*.dump
+/dump/

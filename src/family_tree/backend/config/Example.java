@@ -1,15 +1,22 @@
-package family_tree.service;
+package family_tree.backend.config;
 
-import family_tree.ftree.FamilyTree;
-import family_tree.person.Gender;
-import family_tree.person.Person;
+import family_tree.backend.ftree.FamilyTree;
+import family_tree.backend.ftree.Relatives;
+import family_tree.backend.person.Gender;
+import family_tree.backend.person.Person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-public class previewGenerator {
 
-    public static FamilyTree<Person> previewTree() {
+public class Example{
+    private FamilyTree<Person> familyTree;
+
+    public Example(){
+        familyTree = new FamilyTree<>();
+    }
+
+    public static FamilyTree<Person> makePreviewTree() {
         FamilyTree<Person> familyTree = new FamilyTree<>();
 
         Person rec1 = new Person("John", "Smith", Gender.Male, LocalDate.of(1965, 7, 14));
@@ -21,6 +28,8 @@ public class previewGenerator {
         Person rec7 = new Person("Ann", "Druon", Gender.Female, LocalDate.of(2004, 12, 7), rec4, rec6);
         Person rec8 = new Person("Moriss", "Druon", Gender.Male, LocalDate.of(2007, 3, 16), rec4, rec6);
         Person rec9 = new Person("Elly", "Nail", Gender.Female, LocalDate.of(1988, 3, 12), rec3, rec5);
+
+        familyTree.addPerson(rec1);
 
         List<Person> marriage1 = new ArrayList<>();
         List<Person> marriage2 = new ArrayList<>();
@@ -44,7 +53,6 @@ public class previewGenerator {
         rec6.setMarriage(marriage6, null, LocalDate.of(2002, 9, 11));
 
 
-        familyTree.addPerson(rec1);
         familyTree.addPerson(rec2);
         familyTree.addPerson(rec3);
         familyTree.addPerson(rec4);
@@ -57,5 +65,4 @@ public class previewGenerator {
         return familyTree;
 
     }
-
 }

@@ -1,11 +1,12 @@
-package family_tree.person;
+package family_tree.backend.person;
+
+import family_tree.backend.ftree.Wedding;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 
-public class Marriage implements Serializable {
+public class Marriage implements Serializable, Wedding {
     private List<Person> spousesList;
     private String marriedName; 
     private LocalDate marriedDate;

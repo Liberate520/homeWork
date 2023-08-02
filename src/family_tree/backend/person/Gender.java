@@ -1,4 +1,4 @@
-package family_tree.person;
+package family_tree.backend.person;
 
 public enum Gender {
     Male, Female

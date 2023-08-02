@@ -1,6 +1,9 @@
-package family_tree.person;
+package family_tree.backend.person;
 
-import family_tree.ftree.FamilyTreeIterator;
+import family_tree.backend.ftree.Childrens;
+import family_tree.backend.ftree.FamilyTree;
+import family_tree.backend.ftree.Relatives;
+import family_tree.backend.Engine;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +11,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Relatives<Person> {
     static long idc;
     private long id;
     private String firstName;
@@ -51,8 +54,6 @@ public class Person implements Serializable {
     public String getName() {
         return firstName + " " + lastName;
     }
-    public Gender getGender () {return genderBirth;}
-    public LocalDate getBirthDate(){return birthDate;}
     public String getBirthData(){
         String result = null;
 
@@ -65,7 +66,6 @@ public class Person implements Serializable {
 //        if (birthPlace != null){ result += "(" + birthPlace + ")"; } // TODO with Places
         return result;
     }
-    public LocalDate getDeathDate(){return deathDate;}
     public String getDeathData(){
         String result = null;
         if (deathDate != null){
@@ -92,21 +92,30 @@ public class Person implements Serializable {
     }
 
     public String getPerson() {
-        return firstName + " " + lastName + ", " + getAlivePeriod();
+        return getName() + ", " + getAlivePeriod();
     }
 
     private int getAge(){
-        if (deathDate == null) {
-            return getPeriod(birthDate,LocalDate.now());
-        } else {
-            return getPeriod(birthDate,deathDate);
-        }
+        return getPeriod(birthDate,deathDate);
     }
-    private int getPeriod(LocalDate firstDate, LocalDate secondDate){
+    public int getPeriod(LocalDate firstDate, LocalDate secondDate){
+        if (secondDate == null) {
+            secondDate = LocalDate.now();
+        }
         Period diff = Period.between(firstDate,secondDate);
         return diff.getYears();
     }
+
+    public Person getMother(){
+        return mother;
+    }
+    public Person getFather(){
+        return father;
+    }
     public Gender getGenderBirth() {return genderBirth;}
+    public Gender getGender () {return genderBirth;}
+    public LocalDate getBirthDate(){return birthDate;}
+    public LocalDate getDeathDate(){return deathDate;}
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
     public void setdeathDate(LocalDate deathDate) {this.deathDate = deathDate;}
 
@@ -133,13 +142,6 @@ public class Person implements Serializable {
             sb.append("] ");
         }
         return sb.toString();
-    }
-    public Person getMother(){
-        return mother;
-    }
-
-    public Person getFather(){
-        return father;
     }
     @Override
     public String toString(){
@@ -176,5 +178,14 @@ public class Person implements Serializable {
             }
         }
         return sB.toString();
+    }
+    public String getPersonChildrens(){
+        FamilyTree relation = new FamilyTree<>();
+        return relation.getChildrensInfo(getID());
+    }
+
+    public String getPersonSiblings(){
+        FamilyTree relation = new FamilyTree<>();
+        return relation.getSiblings(getID());
     }
 }
