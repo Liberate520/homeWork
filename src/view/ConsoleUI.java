@@ -3,6 +3,8 @@ package view;
 import model.person.Gender;
 import presenter.Presenter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -28,6 +30,8 @@ public class ConsoleUI implements View {
         String name = scanner.nextLine();
         String surname = scanner.nextLine();
         String patronymic = scanner.nextLine();
+        Gender gender = (scanner.nextLine().equals("1")) ? Gender.MALE : Gender.FEMALE;
+        LocalDate dateBirth = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
     }
 }

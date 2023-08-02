@@ -32,6 +32,10 @@ public class Person implements Serializable, Comparable<Person>, TreeNode<Person
         return dateBirth;
     }
 
+    public LocalDate getDateDeath() {
+        return dateDeath;
+    }
+
     public String getName() {
         return name;
     }
