@@ -1,4 +1,4 @@
-package save;
+package model.save;
 
 import model.familyTree.FamilyTree;
 import model.human.Human;

@@ -1,15 +1,17 @@
 
+import model.Service;
 import model.familyTree.FamilyTree;
 import model.human.Gender;
 import model.human.Human;
-import save.FamilyTreeFileIO;
-import save.FamilyTreeFileManager;
+import model.save.FamilyTreeFileManager;
+import view.Console;
+import view.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree<Human> tree = new FamilyTree<>();
 
         Human vasya = new Human("Василий", Gender.Male, LocalDate.of(1963, 12, 10));
@@ -18,10 +20,6 @@ public class Main {
                 vasya, masha);
         Human semyon = new Human("Семен", Gender.Male, LocalDate.of(1991, 1, 25),
                 vasya, masha);
-        vasya.addChild(christina);
-        vasya.addChild(semyon);
-        masha.addChild(christina);
-        masha.addChild(semyon);
 
         tree.add(vasya);
         tree.add(masha);
@@ -35,21 +33,14 @@ public class Main {
 
         System.out.println(tree);
 
-        FamilyTreeFileIO fileIO = new FamilyTreeFileManager();
-        
-        try {
-            
-            fileIO.saveToFile(tree, "family_tree_data.ser");
+        Service service = new Service(tree);
+        service.setFileIo(new FamilyTreeFileManager());
+        service.save();
 
-            FamilyTree<Human> loadedTree = fileIO.loadFromFile("family_tree_data.ser");
+        tree = service.load();
+        service.getHumanList();
 
-            System.out.println(loadedTree);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        tree.sortByBirthDate();
-
-        System.out.println(tree);
+        View view = new Console();
+        view.start();
     }
 }
