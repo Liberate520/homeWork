@@ -7,7 +7,8 @@ public class GetInfo extends Command{
     private ConsoleUI consoleUI;
 
     public GetInfo(ConsoleUI consoleUI) {
-        super("Get information about all members of family", consoleUI);
+        super(consoleUI);
+        description = "Get information about all members of family";
     }
 
     public void execute(){

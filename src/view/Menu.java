@@ -22,7 +22,7 @@ public class Menu {
             sb.append(i+1);
             sb.append(". ");
             sb.append(commandList.get(i).getDescription());
-            sb.append("/n");
+            sb.append("\n");
         }
         return sb.toString();
     }

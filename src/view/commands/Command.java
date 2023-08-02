@@ -6,8 +6,7 @@ public abstract class Command implements ICommand {
     private String description;
     public ConsoleUI consoleUI;
 
-    public Command(String description, ConsoleUI consoleUI) {
-        this.description = description;
+    public Command(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 

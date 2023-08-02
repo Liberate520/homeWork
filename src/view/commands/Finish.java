@@ -7,7 +7,8 @@ public class Finish extends Command{
     private ConsoleUI consoleUI;
 
     public Finish(ConsoleUI consoleUI) {
-        super("", consoleUI);
+        super(consoleUI);
+        description = "Finish application";
 
     }
 

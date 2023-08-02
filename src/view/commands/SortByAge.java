@@ -8,7 +8,8 @@ public class SortByAge extends Command{
 
 
     public SortByAge(ConsoleUI consoleUI) {
-        super("Sorting members by age", consoleUI);
+        super(consoleUI);
+        description = "Sorting members by age";
     }
 
     public void execute(){

@@ -7,7 +7,8 @@ public class AddPerson extends Command{
     private ConsoleUI consoleUI;
 
     public AddPerson(ConsoleUI consoleUI) {
-        super("Add human to family", consoleUI);
+        super(consoleUI);
+        description = "Add human to family";
     }
 
     public void execute(){
