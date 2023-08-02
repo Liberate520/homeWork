@@ -60,6 +60,10 @@ public class ConsoleUI implements View{
         presenter.readFile();
     }
 
+    public void saveFile(){
+        presenter.saveFile();
+    }
+
     @Override
     public void start() {
         while (work){

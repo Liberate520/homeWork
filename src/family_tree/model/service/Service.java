@@ -25,4 +25,12 @@ public class Service {
         this.tree = tree;
 
     }
+
+    public FamilyTree<Human> getTree() {
+        return tree;
+    }
+    public void saveFile(){
+
+    }
+
 }

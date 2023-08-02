@@ -32,4 +32,9 @@ public class Presenter {
         FamilyTree tree = (FamilyTree) fileHandler.read("src/family_tree/model/data/tree.out");
         service.setTree(tree);
     }
+    public void saveFile(){
+        FileHandler fileHandler=new FileHandler();
+        //TODO путь
+        fileHandler.save(service.getTree(),"src/family_tree/model/data/tree.out");
+    }
 }
