@@ -5,6 +5,7 @@ import family_tree.backend.person.Gender;
 public interface Relatives<T>{
 
     String getName();
+    String getLFName();
     String getBirthData();
 
     long getID();

@@ -10,8 +10,6 @@ public class Main {
         BaseUI baseUI = new ConsoleUI();
         baseUI.start();
 /*
-        String filePath = "src/family_tree/dump/family_tree.dump";
-
         FileHandler fileHandler = new FileHandler();
         System.out.println("=========================");
 

@@ -6,6 +6,6 @@ import java.util.Comparator;
 public class PersonsComparatorByNames<T extends Relatives> implements Comparator<T> {
     @Override
     public int compare(T sel1, T sel2){
-        return sel1.getName().compareTo(sel2.getName());
+        return sel1.getLFName().compareTo(sel2.getLFName());
     }
 }

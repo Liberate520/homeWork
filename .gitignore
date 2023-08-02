@@ -4,3 +4,4 @@ out
 *.class
 *.dump
 /dump/
+*.bak

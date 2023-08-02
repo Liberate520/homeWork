@@ -5,7 +5,7 @@ import family_tree.iu.ConsoleUI;
 public class SortByName extends Command{
 
     public SortByName(ConsoleUI consoleUI){
-        super("Sort by Name",consoleUI);
+        super("Sort by Name (last, first)",consoleUI);
     }
 
     public void execute(){

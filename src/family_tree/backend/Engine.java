@@ -31,6 +31,11 @@ public class Engine{
         return relations.getFullRelativesInfo();
     }
 
+    public String getPersonTree(long id) {
+        if (!initDone){getBase();}
+        return relations.getPersonalTree(id);
+    }
+
     public String getInit(){
         BaseInit init = new Config();
         return init.baseInit();
@@ -52,5 +57,9 @@ public class Engine{
 
     public void sortTreeByNames() {
         relations.sortByNames();
+    }
+
+    public void sortTreeByID() {
+        relations.sortByID();
     }
 }

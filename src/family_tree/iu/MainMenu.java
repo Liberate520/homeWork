@@ -10,10 +10,12 @@ public class MainMenu {
 
     public MainMenu(ConsoleUI consoleUI){
         commandList = new ArrayList<>();
-        commandList.add(new AddPerson(consoleUI));
+        commandList.add(new ShowFamilyTree(consoleUI));
+        commandList.add(new ShowPersonTree(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByBirthDate(consoleUI));
-        commandList.add(new ShowFamilyTree(consoleUI));
+        commandList.add(new SortByID(consoleUI));
+        commandList.add(new AddPerson(consoleUI));
         commandList.add(new Finish(consoleUI));
 
     }

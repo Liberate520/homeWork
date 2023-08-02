@@ -16,6 +16,7 @@ public class Presenter {
     }
 
     public void initBase(){
+//        System.out.println("Presenter:00");
         engine.getInit();
     }
 
@@ -27,13 +28,25 @@ public class Presenter {
         baseUI.printAnswer(engine.getTree());
     }
 
+    public void getPersonTree(long id){
+        baseUI.printAnswer(engine.getPersonTree(id));
+    }
+
     public void sortByBirthDate() {
+//        System.out.println("Presenter:01");
         engine.sortTreeByBirthDays();
         getFamilyTree();
     }
 
     public void sortByName() {
+//        System.out.println("Presenter:02");
         engine.sortTreeByNames();
+        getFamilyTree();
+    }
+
+    public void sortByID() {
+//        System.out.println("Presenter:03");
+        engine.sortTreeByID();
         getFamilyTree();
     }
 }

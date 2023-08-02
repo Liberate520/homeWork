@@ -3,6 +3,7 @@ package family_tree.backend.ftree;
 import family_tree.backend.person.Gender;
 import family_tree.backend.person.PersonsComparatorByNames;
 import family_tree.backend.person.PersonsComparatorByBirthday;
+import family_tree.backend.person.PersonsComparatorByID;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -162,12 +163,19 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
         return sB.toString();
     }
 
-    public void sortByBirthDays(){
+    public void sortByBirthDays() {
+        System.out.println("Sorting by BirthDay");
         relations.sort(new PersonsComparatorByBirthday());
     }
 
     public void sortByNames(){
+        System.out.println("Sorting by Name");
         relations.sort(new PersonsComparatorByNames());
+    }
+
+    public void sortByID(){
+        System.out.println("Sorting by ID");
+        relations.sort(new PersonsComparatorByID());
     }
 
     @Override

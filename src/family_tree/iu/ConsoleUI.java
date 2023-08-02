@@ -22,7 +22,7 @@ public class ConsoleUI implements BaseUI{
     @Override
     public void start() {
         presenter.initBase();
-        System.out.println("\n --=== FamilyTree ===-- \n");
+        System.out.println("\n --=== FamilyTree loaded... ===-- \n");
         while(workOn){
             System.out.println(menu.menu());
             String choice = scanner.nextLine();
@@ -32,13 +32,13 @@ public class ConsoleUI implements BaseUI{
     }
 
     public void finish() {
-        System.out.println("Finished");
+        System.out.println("Finished. Bye");
         workOn = false;
         System.exit(0);
     }
 
     private void errorInput() {
-        System.out.println("Wrong data");
+        System.out.println("Wrong data. Try again.");
     }
 
     public void sortByBirthDate() {
@@ -49,9 +49,21 @@ public class ConsoleUI implements BaseUI{
         presenter.sortByName();
     }
 
+    public void sortByID() {
+        presenter.sortByID();
+    }
+
     public void showTree(){
 
         presenter.getFamilyTree();
+
+    }
+
+    public void showPersonTree(){
+        System.out.println("Enter Person ID: ");
+        int personId = Integer.parseInt(scanner.nextLine());
+
+        presenter.getPersonTree(personId);
 
     }
     public void addPerson(){

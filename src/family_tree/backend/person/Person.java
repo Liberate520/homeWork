@@ -54,6 +54,9 @@ public class Person implements Serializable, Relatives<Person> {
     public String getName() {
         return firstName + " " + lastName;
     }
+    public String getLFName() {
+        return lastName + " " + firstName;
+    }
     public String getBirthData(){
         String result = null;
 

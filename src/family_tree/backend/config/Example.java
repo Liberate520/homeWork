@@ -19,7 +19,7 @@ public class Example{
     public static FamilyTree<Person> makePreviewTree() {
         FamilyTree<Person> familyTree = new FamilyTree<>();
 
-        Person rec1 = new Person("John", "Smith", Gender.Male, LocalDate.of(1965, 7, 14));
+        Person rec1 = new Person("John", "Smith", Gender.Male, LocalDate.of(1965, 7, 14)); // not assigned person
         Person rec2 = new Person("Mill", "Perri", Gender.Male, LocalDate.of(1940, 1, 19), LocalDate.of(1985, 4, 29), null, null, null);
         Person rec3 = new Person("Linda", "Wayne", Gender.Female, LocalDate.of(1943, 6, 29), LocalDate.of(2007, 7, 21), null, null, null);
         Person rec4 = new Person("Katty", "Perri", Gender.Female, LocalDate.of(1980, 8, 10), rec3, rec2);
