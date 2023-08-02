@@ -53,14 +53,18 @@ public class ConsoleUI implements View{
         work=false;
     }
 
+    public void printInfo(){
+        presenter.getHumanListInfo();
+    }
+
     @Override
     public void start() {
         while (work){
             System.out.println("Здравствуйте");
-            System.out.println("Выберете пункт меню");
             System.out.println(menu.menu());
+            System.out.println("Выберете пункт меню");
             String choice=scanner.nextLine();
-
+            //TODO добавить проверку
             int choiceInt=Integer.parseInt(choice);
             menu.execute(choiceInt);
         }

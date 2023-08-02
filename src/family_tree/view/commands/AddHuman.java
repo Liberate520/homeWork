@@ -9,6 +9,4 @@ public class AddHuman extends Command {
     public void execute(){
         getConsoleUI().addHuman();
     }
-
-
 }
