@@ -40,13 +40,13 @@ public class ConsoleUI implements View {
         System.out.println(text.promptGender);
         Gender gender = (scanner.nextLine().equals("1")) ? Gender.MALE : Gender.FEMALE;
         System.out.println(text.promptDateBirth);
-        LocalDate dateBirth = getDate();
+        LocalDate dateBirth = inputDate();
         System.out.println(text.promptDateDeath);
-        LocalDate dateDeath = getDate();
+        LocalDate dateDeath = inputDate();
         presenter.addPerson(new Person(name, surname, patronymic, gender, dateBirth, dateDeath));
     }
 
-    public LocalDate getDate() {
+    public LocalDate inputDate() {
         String input = scanner.nextLine();
         if (input.isEmpty())
             return null;

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         Service<Person> service = makeTree();
+        System.out.println(service.printTree());
     }
 
     public static Service<Person> makeTree() {
