@@ -1,9 +1,6 @@
 package family_tree.view;
 
-import family_tree.view.commands.AddHuman;
-import family_tree.view.commands.Command;
-import family_tree.view.commands.Finish;
-import family_tree.view.commands.PrintInfo;
+import family_tree.view.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +11,9 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList=new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
-        commandList.add(new Finish(consoleUI));
         commandList.add(new PrintInfo(consoleUI));
+        commandList.add(new ReadFile(consoleUI));
+        commandList.add(new Finish(consoleUI));
     }
 
     public String menu(){

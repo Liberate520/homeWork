@@ -56,6 +56,9 @@ public class ConsoleUI implements View{
     public void printInfo(){
         presenter.getHumanListInfo();
     }
+    public void readFile(){
+        presenter.readFile();
+    }
 
     @Override
     public void start() {

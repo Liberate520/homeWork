@@ -1,7 +1,9 @@
 package family_tree.presenter;
 
+import family_tree.model.family_tree.FamilyTree;
 import family_tree.model.human.Gender;
 import family_tree.model.service.Service;
+import family_tree.model.writer.FileHandler;
 import family_tree.view.View;
 
 import java.time.LocalDate;
@@ -23,5 +25,11 @@ public class Presenter {
     public void getHumanListInfo(){
         String info=service.getHumanInfo();
         view.printAnswer(info);
+    }
+    public void readFile(){
+        FileHandler fileHandler = new FileHandler();
+        //TODO путь
+        FamilyTree tree = (FamilyTree) fileHandler.read("src/family_tree/model/data/tree.out");
+        service.setTree(tree);
     }
 }
