@@ -1,4 +1,6 @@
-package model.Organisms.Person;
+package model.Organisms.Person.Iterators;
+
+import model.Organisms.Person.Person;
 
 import java.util.Iterator;
 import java.util.List;

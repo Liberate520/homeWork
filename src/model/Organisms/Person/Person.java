@@ -39,19 +39,19 @@ public abstract class Person implements Serializable {
     public LocalDate getBirthDate(){
         return birthDate;
     }
-    public void setChild (Person adult, Person child){
-        if (adult.children == null) {
-            adult.children = new ArrayList<>();
+    public void setChild (Person child){
+        if (this.children == null) {
+            this.children = new ArrayList<>();
             }
-        if(!adult.children.contains(child)) {
-            adult.children.add(child);
-            if (adult.sex.equals(Sex.male)){
-                setFather(adult, child);
+        if(!this.children.contains(child)) {
+            this.children.add(child);
+            if (this.sex.equals(Sex.male)){
+                setFather(this, child);
             }else {
-                setMother(adult, child);
+                setMother(this, child);
             }
-            if(adult.spouse != null){
-                setChild(adult.spouse, child);
+            if(this.spouse != null){
+                this.spouse.setChild(child);
             }
         }
 
@@ -66,10 +66,13 @@ public abstract class Person implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(organismType+" Name: "+name+"; Birthday: "+birthDate+"\n");
+        sb.append(organismType+" Name: "+name+"; Birthday: "+birthDate + "; Children: " + children);
         return sb.toString();
     }
 
+    public void setSpouse(Person spouse){
+        this.spouse = spouse;
+    }
 
 
 }

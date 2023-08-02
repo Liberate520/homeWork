@@ -37,8 +37,8 @@ public class Human extends Person {
     }
 
 
-    public void setChild(Human adult, Human child) {
-        super.setChild(adult, child);
+    public void setChild(Human child) {
+        super.setChild(child);
     }
 
     public void setFather(Human father) {

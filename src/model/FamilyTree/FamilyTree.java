@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import model.Organisms.Person.Person;
-import model.Organisms.Person.PersonIterator;
-import model.Organisms.Person.ComparatorPersonByName;
-import model.Organisms.Person.ComparatorPersonByBirthday;
+import model.Organisms.Person.Iterators.PersonIterator;
+import model.Organisms.Person.Comparators.ComparatorPersonByName;
+import model.Organisms.Person.Comparators.ComparatorPersonByBirthday;
 
-public class FamilyTree<T extends Person> implements Serializable, Iterable<Person> {
+public class FamilyTree<T extends Person> implements Serializable, Iterable<T> {
     private List<T> personList;
 
     public FamilyTree(){
@@ -39,6 +39,10 @@ public class FamilyTree<T extends Person> implements Serializable, Iterable<Pers
     }
     public void sortByBirthday(){
         personList.sort(new ComparatorPersonByBirthday<T>());
+    }
+
+    public List<T> getTree(){
+        return personList;
     }
 
 }
