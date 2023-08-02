@@ -21,6 +21,15 @@ public class Main {
         service.addMemberToFamily(newHuman, newHumanDaughter, DAUGHTER);
         service.addMemberToFamily(newHuman, newHumanSon, SON);
 
+        Human newHuman2 = new Human("Anton", "Petrov", MALE, LocalDate.of(2008, 10, 27));
+        Human newHuman2Daughter = new Human("Alina", "Petrova", FEMALE, LocalDate.of(2022, 1, 15));
+
+        service.createNewFamily(newHuman2);
+        service.addMemberToFamily(newHuman2, newHumanDaughter, MOTHER);
+        service.addMemberToFamily(newHuman2, newHuman2Daughter, DAUGHTER);
+
         service.printPrimaryFamily(newHuman);
+        System.out.println();
+        service.printPrimaryFamily(newHuman2);
     }
 }

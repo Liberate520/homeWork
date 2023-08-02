@@ -14,7 +14,7 @@ public class FamilyService {
         this.familyTree = familyTree;
     }
 
-    public void createNewFamily(Human human) {
+    public FamilyNode createNewFamily(Human human) {
         FamilyNode newFamily = new FamilyNode();
         switch (human.gender()) {
             case MALE -> newFamily.addMember(human, FATHER);
@@ -22,13 +22,14 @@ public class FamilyService {
         }
         this.familyTree.addNode(newFamily);
 
-        FamilyNode parentFamily = this.findPrimaryFamilyOrNull(human);
-        if (parentFamily != null) {
-            switch (human.gender()) {
-                case MALE -> newFamily.addToUpRelatives(FATHER, parentFamily);
-                case FEMALE -> newFamily.addToUpRelatives(MOTHER, parentFamily);
-            }
-        }
+//        FamilyNode parentFamily = this.findPrimaryFamilyOrNull(human);
+//        if (parentFamily != null) {
+//            switch (human.gender()) {
+//                case MALE -> newFamily.addToUpRelatives(FATHER, parentFamily);
+//                case FEMALE -> newFamily.addToUpRelatives(MOTHER, parentFamily);
+//            }
+//        }
+        return newFamily;
     }
 
     public void deleteFamily(Human human) {
@@ -41,14 +42,21 @@ public class FamilyService {
         if (node != null) {
             node.addMember(humanToAdd, role);
         } else throw new RuntimeException("Primary Family not found for " + human);
+
         FamilyNode nodeToAdd = this.findPrimaryFamilyOrNull(humanToAdd);
-        if (nodeToAdd != null) {
-            switch (role) {
-                case FATHER -> node.addToUpRelatives(FATHER, nodeToAdd);
-                case MOTHER -> node.addToUpRelatives(MOTHER, nodeToAdd);
-                case DAUGHTER -> node.addToChildrenFamilies(DAUGHTER, nodeToAdd);
-                case SON -> node.addToChildrenFamilies(SON, nodeToAdd);
-            }
+        if (nodeToAdd == null) {
+            nodeToAdd = this.createNewFamily(humanToAdd);
+        }
+
+        this.updateFamilyNodes(node, nodeToAdd, role);
+    }
+
+    private void updateFamilyNodes(FamilyNode targetNode, FamilyNode nodeToAdd, Roles role) {
+        switch (role) {
+            case FATHER -> targetNode.addToUpRelatives(FATHER, nodeToAdd);
+            case MOTHER -> targetNode.addToUpRelatives(MOTHER, nodeToAdd);
+            case DAUGHTER -> targetNode.addToChildrenFamilies(DAUGHTER, nodeToAdd);
+            case SON -> targetNode.addToChildrenFamilies(SON, nodeToAdd);
         }
     }
 
