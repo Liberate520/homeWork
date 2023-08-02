@@ -1,12 +1,12 @@
-package FileHandler;
+package Model.FileHandler;
 
-import FamilyTree.FamilyTree.FamilyTree;
+import Model.FamilyTree.FamilyTree.FamilyTree;
 
 import java.io.*;
 import java.util.logging.FileHandler;
 
 public class HandleFile implements Writable {
-    FileHandler fileHandler;
+    protected FileHandler fileHandler;
 
     public HandleFile(FileHandler fileHandler) {
         this.fileHandler = fileHandler;

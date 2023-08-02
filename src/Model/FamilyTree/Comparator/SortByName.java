@@ -1,8 +1,8 @@
-package FamilyTree.Comparator;
+package Model.FamilyTree.Comparator;
 
 import java.util.Comparator;
 
-import FamilyTree.FamilyTree.EntityItem;
+import Model.FamilyTree.FamilyTree.EntityItem;
 
 
 public class SortByName<E extends EntityItem> implements Comparator<E> {

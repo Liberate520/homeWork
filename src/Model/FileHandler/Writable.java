@@ -1,4 +1,4 @@
-package FileHandler;
+package Model.FileHandler;
 
 
 import java.io.Serializable;

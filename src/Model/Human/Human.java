@@ -1,6 +1,6 @@
-package Human;
+package Model.Human;
 
-import FamilyTree.FamilyTree.EntityItem;
+import Model.FamilyTree.FamilyTree.EntityItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, EntityItem<Human>{
+public class Human implements Serializable, EntityItem<Human> {
     private String name;
     private List<Human> children;
     private Gender gender;
@@ -28,9 +28,11 @@ public class Human implements Serializable, EntityItem<Human>{
         this.deathDate = deathDate;
         if (father != null) {
             this.father = father;
+            this.father.setChild(this);
         }
         if (mother != null) {
             this.mother = mother;
+            this.mother.setChild(this);
         }
         this.gender = gender;
         this.status = status;
@@ -78,18 +80,18 @@ public class Human implements Serializable, EntityItem<Human>{
         return diff.getYears();
     }
 
-    public void setSpouse(Human spouse) {
-        if ((this.spouse == null) || !(this.spouse.equals(spouse))) {
-            this.spouse = spouse;
-        }
-    }
-
     public String getAgeToString() {
         StringBuilder st = new StringBuilder();
         if (status.equals(Status.dead)) {
-            int year = getPeriod(this.birthday, this.deathDate);
             st.append(", Возраст на момент смерти: ");
-            st.append(year);
+            if (!(deathDate == null)) {
+                int year = getPeriod(this.birthday, this.deathDate);
+                st.append(year);
+                st.append(", Дата смерти: ");
+                st.append(this.deathDate);
+            } else {
+                st.append("Неизвестно");
+            }
         } else {
             LocalDate date = LocalDate.now();
             int year_d = date.getYear() - birthday.getYear();
@@ -102,7 +104,11 @@ public class Human implements Serializable, EntityItem<Human>{
     public int getAge() {
         int year;
         if (status.equals(Status.dead)) {
-            year = getPeriod(this.birthday, this.deathDate);
+            if (deathDate == null) {
+                year = 0;
+            } else {
+                year = getPeriod(this.birthday, this.deathDate);
+            }
         } else {
             LocalDate date = LocalDate.now();
             year = date.getYear() - birthday.getYear();
@@ -165,8 +171,9 @@ public class Human implements Serializable, EntityItem<Human>{
 
     }
 
-    @Override
-    public String toString() {
-        return getInfo();
+    public void setSpouse(Human spouse) {
+        if ((this.spouse == null) || !(this.spouse.equals(spouse))) {
+            this.spouse = spouse;
+        }
     }
 }

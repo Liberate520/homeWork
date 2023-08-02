@@ -1,11 +1,11 @@
-package FamilyTree.FamilyTree;
+package Model.FamilyTree.FamilyTree;
 
-import Human.Human;
+import Model.Human.Human;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyMemberIterator<E extends EntityItem<Human>> implements Iterator<E> {
+public class FamilyMemberIterator<E extends EntityItem<E>> implements Iterator<E> {
     private int index;
     private List<E> familyTree;
 

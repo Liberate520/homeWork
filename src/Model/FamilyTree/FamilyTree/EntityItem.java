@@ -1,9 +1,9 @@
-package FamilyTree.FamilyTree;
+package Model.FamilyTree.FamilyTree;
 
-import Human.Human;
+
+import Model.Human.Human;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public interface EntityItem<T> {
     String getName();
@@ -17,4 +17,8 @@ public interface EntityItem<T> {
     int getPeriod(LocalDate birthday, LocalDate deathDate);
 
     String getInfo();
+
+    void setSpouse(T entity);
+
+    void setDeathDate(LocalDate deathDate);
 }

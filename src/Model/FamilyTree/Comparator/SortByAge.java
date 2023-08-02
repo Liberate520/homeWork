@@ -1,7 +1,6 @@
-package FamilyTree.Comparator;
+package Model.FamilyTree.Comparator;
 
-import FamilyTree.FamilyTree.EntityItem;
-import Human.Human;
+import Model.FamilyTree.FamilyTree.EntityItem;
 
 import java.util.Comparator;
 
