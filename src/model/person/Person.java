@@ -9,33 +9,23 @@ import java.time.LocalDate;
  * Семейные связи полностью находятся в model.familyTree.
  */
 public class Person implements Serializable, Comparable<Person>, TreeNode<Person> {
-    private String name, surname, maidenName, patronymic;
+    private String name, surname, patronymic;
     private Gender sex;
     private LocalDate dateBirth, dateDeath;
 
-    public Person(String name, String surname, String patronymic, Gender sex, LocalDate dateBirth,
-                  String maidenName, LocalDate dateDeath) {
+    public Person(String name, String surname, String patronymic, Gender sex,
+                  LocalDate dateBirth, LocalDate dateDeath) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.sex = sex;
         this.dateBirth = dateBirth;
-        this.maidenName = maidenName;
         this.dateDeath = dateDeath;
     }
 
-    public Person(String name, String surname, String patronymic, Gender sex, LocalDate dateBirth,
-                  String maidenName) {
-        this(name, surname, patronymic, sex, dateBirth, maidenName, null);
-    }
-
-    public Person(String name, String surname, String patronymic, Gender sex, LocalDate dateBirth,
-                  LocalDate dateDeath) {
-        this(name, surname, patronymic, sex, dateBirth, null, dateDeath);
-    }
-
-    public Person(String name, String surname, String patronymic, Gender sex, LocalDate dateBirth) {
-        this(name, surname, patronymic, sex, dateBirth, null, null);
+    public Person(String name, String surname, String patronymic, Gender sex,
+                  LocalDate dateBirth) {
+        this(name, surname, patronymic, sex, dateBirth, null);
     }
 
     public LocalDate getDateBirth() {
