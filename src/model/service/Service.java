@@ -6,6 +6,7 @@ import model.familyTree.FamilyTree;
 import model.familyTree.TreeNode;
 import model.readWrite.FileHandler;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -54,6 +55,16 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
 
     public String printTree() {
         return tree.toString();
+    }
+
+    public ArrayList<T> enumeratedList() {
+        ArrayList<T> result = new ArrayList<>();
+        for (Map.Entry<T, Connections<T>> pair:
+             tree) {
+            T item = pair.getKey();
+            result.add(item);
+        }
+        return result;
     }
 
     public void write() {
