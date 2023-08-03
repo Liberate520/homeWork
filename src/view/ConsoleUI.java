@@ -55,7 +55,7 @@ public class ConsoleUI implements View {
         presenter.addPerson(new Person(name, surname, patronymic, gender, dateBirth, dateDeath));
     }
 
-    public void putConnection() {
+    public void putConnection(Boolean twoWay) {
         ArrayList<Person> list = this.enumeratedList();
 
         this.printAsEnumeratedList(list);
@@ -83,7 +83,10 @@ public class ConsoleUI implements View {
         System.out.println(text.promptListNumber);
         Person connectTo = list.get(Integer.parseInt(scanner.nextLine()) - 1);
 
-        presenter.putConnection(connectFrom, key, connectTo);
+        if (twoWay)
+            presenter.putConnection(connectFrom, key, connectTo);
+        else
+            presenter.oneWayConnection(connectFrom, key, connectTo);
     }
 
     public LocalDate inputDate() {
