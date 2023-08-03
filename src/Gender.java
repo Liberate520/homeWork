@@ -1,5 +1,5 @@
 
-//  https://yandex.ru/search/?clid=9582&text=java+enum+to+string&l10n=en-US&lr=213
+
 //  java enum to string
 
 public enum Gender{

@@ -9,7 +9,7 @@ public class Human implements Serializable {
     private List <Human> fChidrens;  // List --> Set for unigue
     private int fChildId;
     private LocalDate fbirthDay, fdeathDay; // день рождения, дата смерти
-    // https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html
+    
     private Gender fGender; // пол
     
     public Human(String aName, Gender aGender, LocalDate aBirthDay) {
