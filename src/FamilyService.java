@@ -7,6 +7,7 @@ import java.util.List;
 
 import static models.Roles.*;
 
+// Сервис для работы с семейным древом.
 public class FamilyService {
     private final FamilyTree familyTree;
 
@@ -14,6 +15,12 @@ public class FamilyService {
         this.familyTree = familyTree;
     }
 
+    /**
+     * Создание новой ячейки семьи для переданного Human и добавление в структуру дерева.
+     *
+     * @param human объект для которого создаётся семья.
+     * @return созданная семья.
+     */
     public FamilyNode createNewFamily(Human human) {
         FamilyNode newFamily = new FamilyNode();
         switch (human.gender()) {
@@ -24,15 +31,35 @@ public class FamilyService {
         return newFamily;
     }
 
-    public boolean containsFamily(FamilyNode node){
+    /**
+     * Проверка на наличие семьи в структуре.
+     *
+     * @param node ячейка для поиска.
+     * @return
+     */
+    public boolean containsFamily(FamilyNode node) {
         return this.familyTree.contain(node);
     }
 
+    /**
+     * Удаление ячейки семьи конкретного Human из структуры.
+     *
+     * @param human объект для поиска и удаления ячейки.
+     */
     public void deleteFamily(Human human) {
         FamilyNode family = this.findPrimaryFamilyOrNull(human);
-        familyTree.delNode(family);
+        if (family != null) {
+            familyTree.delNode(family);
+        } else throw new RuntimeException("Family not found!");
     }
 
+    /**
+     * Добавление нового члена в семью.
+     *
+     * @param human      к кому в семью добавлять.
+     * @param humanToAdd кого добавлять в семью.
+     * @param role
+     */
     public void addMemberToFamily(Human human, Human humanToAdd, Roles role) {
         FamilyNode node = this.findPrimaryFamilyOrNull(human);
         if (node != null) {
@@ -77,11 +104,18 @@ public class FamilyService {
         nodeToAdd.addToUpRelatives(MOTHER, motherNode);
     }
 
+    /**
+     * Удаление члена из семьи.
+     *
+     * @param human      у кого виз семьи удалять.
+     * @param humanToDel кого удалять из семьи.
+     * @param role
+     */
     public void delMemberFromFamily(Human human, Human humanToDel, Roles role) {
         FamilyNode node = this.findPrimaryFamilyOrNull(human);
         if (node != null) {
             node.delMember(humanToDel, role);
-        } else throw new RuntimeException("Primary Family not found for " + human);
+        } else throw new RuntimeException("Primary family not found for " + human);
 
         FamilyNode nodeToExclude = this.findPrimaryFamilyOrNull(humanToDel);
 
@@ -99,6 +133,11 @@ public class FamilyService {
         }
     }
 
+    /**
+     * Вывод в консоль семьи.
+     *
+     * @param human чью семью выводить.
+     */
     public void printPrimaryFamily(Human human) {
         System.out.println(this.findPrimaryFamilyOrNull(human).toString());
     }
@@ -112,12 +151,24 @@ public class FamilyService {
         return node;
     }
 
+    /**
+     * Получить детей из семьи указанного Human.
+     *
+     * @param human объект для поиска семьи.
+     * @return список детей.
+     */
     public List<Human> getChildren(Human human) {
         FamilyNode family = this.findPrimaryFamilyOrNull(human);
         return family.getChildren();
     }
 
-    public List<Human> getParents(Human human){
+    /**
+     * Получить родителей из семьи указанного Human.
+     *
+     * @param human объект для поиска семьи.
+     * @return список родителей.
+     */
+    public List<Human> getParents(Human human) {
         FamilyNode family = this.findPrimaryFamilyOrNull(human);
         return family.getParents();
     }

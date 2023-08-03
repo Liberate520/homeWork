@@ -6,6 +6,7 @@ import models.Roles;
 import java.util.ArrayList;
 import java.util.List;
 
+// Семейное дерево
 public class FamilyTree {
     private final List<FamilyNode> tree;
 
@@ -21,7 +22,7 @@ public class FamilyTree {
         tree.remove(node);
     }
 
-    public boolean contain(FamilyNode node){
+    public boolean contain(FamilyNode node) {
         return this.tree.contains(node);
     }
 

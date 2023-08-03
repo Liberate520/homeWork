@@ -10,6 +10,10 @@ import java.util.Map;
 
 import static models.Roles.*;
 
+/**
+ * Ячейка для хранения семьи.
+ * Содержит ссылки на ячейки семей старших родственников и детей.
+ */
 public class FamilyNode {
     private final Map<Roles, List<Human>> family;
     private final Map<Roles, FamilyNode> upRelatives;
@@ -25,6 +29,11 @@ public class FamilyNode {
         childrenFamilies = new HashMap<>();
     }
 
+    /**
+     * Проверка на присутствия Human в семье.
+     * @param human объект для проверки.
+     * @return
+     */
     public boolean findHuman(Human human) {
         for (List<Human> humanList : family.values()) {
             if (humanList.contains(human)) {
@@ -34,6 +43,11 @@ public class FamilyNode {
         return false;
     }
 
+    /**
+     * Возвращает роль Human в семье, если таковой присутствует.
+     * @param human объект для проверки.
+     * @return
+     */
     public Roles getHumanRoleOrNull(Human human) {
         for (Map.Entry<Roles, List<Human>> entities : family.entrySet()) {
             if (entities.getValue().contains(human)) {
@@ -43,10 +57,21 @@ public class FamilyNode {
         return null;
     }
 
+    /**
+     * Проверка на присутствие в семье определённого Human с определённой ролью.
+     * @param human объект для поиска.
+     * @param role роль для поиска
+     * @return соответствие всем параметрам поиска
+     */
     public boolean checkHumanRole(Human human, Roles role) {
         return family.get(role).contains(human);
     }
 
+    /**
+     * Добавляет Human в семью.
+     * @param human новый Human.
+     * @param role роль для нового Human.
+     */
     public void addMember(Human human, Roles role) {
         switch (role) {
             case FATHER -> this.addFather(human);
@@ -56,30 +81,11 @@ public class FamilyNode {
         }
     }
 
-    public void addToUpRelatives(Roles role, FamilyNode node) {
-        this.upRelatives.put(role, node);
-    }
-
-    public void delFromRelatives(Roles role, FamilyNode node) {
-        this.upRelatives.remove(role, node);
-    }
-
-    public void addToChildrenFamilies(Roles role, FamilyNode node) {
-        this.childrenFamilies.put(role, node);
-    }
-
-    public void delFromChildrenFamilies(Roles role, FamilyNode node) {
-        this.childrenFamilies.remove(role, node);
-    }
-
-    public Map<Roles, FamilyNode> getUpRelatives() {
-        return upRelatives;
-    }
-
-    public Map<Roles, FamilyNode> getChildrenFamilies() {
-        return childrenFamilies;
-    }
-
+    /**
+     * Удаляет Human из семьи.
+     * @param human Human для удаления.
+     * @param role роль удаляемого Human.
+     */
     public void delMember(Human human, Roles role) {
         switch (role) {
             case FATHER -> this.delFather();
@@ -87,6 +93,58 @@ public class FamilyNode {
             case DAUGHTER -> this.delDaughter(human);
             case SON -> this.delSon(human);
         }
+    }
+
+    /**
+     * Добавить ячейку старших родственников.
+     * @param role исходная роль родителя, чьи старшие родители добавляются.
+     * @param node ячейка с родителями.
+     */
+    public void addToUpRelatives(Roles role, FamilyNode node) {
+        this.upRelatives.put(role, node);
+    }
+
+    /**
+     * Удалить ячейку старших родственников.
+     * @param role исходная роль родителя, чьи старшие родители убираются.
+     * @param node ячейка с родителями.
+     */
+    public void delFromRelatives(Roles role, FamilyNode node) {
+        this.upRelatives.remove(role, node);
+    }
+
+    /**
+     * Добавить ячейку детей.
+     * @param role исходная роль ребёнка, чья ячейка добавляется.
+     * @param node ячейка ребёнка.
+     */
+    public void addToChildrenFamilies(Roles role, FamilyNode node) {
+        this.childrenFamilies.put(role, node);
+    }
+
+    /**
+     * Удалить ячейку детей.
+     * @param role исходная роль ребёнка, чья ячейка убирается.
+     * @param node ячейка ребёнка.
+     */
+    public void delFromChildrenFamilies(Roles role, FamilyNode node) {
+        this.childrenFamilies.remove(role, node);
+    }
+
+    /**
+     * Возвращает ячейки старших родственников.
+     * @return
+     */
+    public Map<Roles, FamilyNode> getUpRelatives() {
+        return upRelatives;
+    }
+
+    /**
+     * Возвращает ячейки детей.
+     * @return
+     */
+    public Map<Roles, FamilyNode> getChildrenFamilies() {
+        return childrenFamilies;
     }
 
     private void addMother(Human human) {
@@ -133,6 +191,10 @@ public class FamilyNode {
         family.get(SON).remove(human);
     }
 
+    /**
+     * Возвращает мать из семьи или null при её отсутствии.
+     * @return Human или Null.
+     */
     public Human getMotherOrNull(){
         Human returnHuman = null;
         if (family.get(MOTHER).size() != 0) {
@@ -141,6 +203,10 @@ public class FamilyNode {
         return returnHuman;
     }
 
+    /**
+     * Возвращает отца из семьи или null при его отсутствии.
+     * @return Human или Null.
+     */
     public Human getFatherOrNull(){
         Human returnHuman = null;
         if (family.get(FATHER).size() != 0) {
@@ -149,6 +215,10 @@ public class FamilyNode {
         return returnHuman;
     }
 
+    /**
+     * Возвращает список с детьми из семьи.
+     * @return
+     */
     public List<Human> getChildren() {
         List<Human> children = new ArrayList<>();
         children.addAll(family.get(DAUGHTER));
@@ -156,6 +226,10 @@ public class FamilyNode {
         return children;
     }
 
+    /**
+     * Возвращает список с родителями из семьи.
+     * @return
+     */
     public List<Human> getParents() {
         List<Human> parents = new ArrayList<>();
         parents.addAll(family.get(FATHER));
