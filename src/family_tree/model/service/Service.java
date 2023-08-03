@@ -28,6 +28,7 @@ public class Service {
         Human child = tree.getById(idChildren);
         Human father = tree.getById(idFather);
         Human mother = tree.getById(idMother);
+        //TODO ошибка если нет одного родителя
         father.addChild(child);
         mother.addChild(child);
         child.addParent(father);
@@ -35,6 +36,13 @@ public class Service {
          //TODO удалить коммент
 //        System.out.println(tree.getById(idChildren));
 //        System.out.println(tree.getById(idFather));
+    }
+    public void addParent(long idChildren, long idFather, long idMother){
+        Human child = tree.getById(idChildren);
+        Human father = tree.getById(idFather);
+        Human mother = tree.getById(idMother);
+        child.addParent(father);
+        child.addParent(mother);
     }
 
     public void setTree(FamilyTree<Human> tree) {

@@ -13,6 +13,7 @@ public class Main{
     public static void main(String[] args) {
         View view=new ConsoleUI();
         //TODO Удалить extracted1();
+        //extracted1();
         view.start();
     }
 

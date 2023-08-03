@@ -78,6 +78,23 @@ public class ConsoleUI implements View{
 
         presenter.addChildren(idChildren, idFather, idMother);
     }
+    public void addParents(){
+        System.out.println("Укажите id ребенка");
+        String children = scanner.nextLine();
+        //TODO сделать проверку
+        long idChildren = Integer.parseInt(children);
+
+        System.out.println("Укажите id отца");
+        String father = scanner.nextLine();
+        long idFather = Integer.parseInt(father);
+
+        System.out.println("Укажите id матери");
+        String mother = scanner.nextLine();
+        long idMother = Integer.parseInt(mother);
+
+        presenter.addChildren(idChildren, idFather, idMother);
+
+    }
 
     public void finish(){
         work=false;

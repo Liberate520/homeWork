@@ -7,7 +7,6 @@ public class AddChildren extends Command{
         super("Добавить ребенка",consoleUI);
     }
     public void execute(){
-        // TODO поменять метод
         getConsoleUI().addChildren();
     }
 }

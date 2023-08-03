@@ -28,6 +28,9 @@ public class Presenter {
     public void addChildren(long idChildren, long idFather, long idMother) {
         service.addChildren(idChildren, idFather, idMother);
     }
+    public void addParents(long idChildren, long idFather, long idMother){
+        service.addParent(idChildren, idFather, idMother);
+    }
     public void getHumanListInfo(){
         String info=service.getHumanInfo();
         view.printAnswer(info);

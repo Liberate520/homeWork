@@ -10,11 +10,13 @@ public class MainMenu {
 
     public MainMenu(ConsoleUI consoleUI) {
         commandList=new ArrayList<>();
-        commandList.add(new AddHuman(consoleUI));
-        commandList.add(new Wedding(consoleUI));
-        commandList.add(new AddChildren(consoleUI));
-        commandList.add(new PrintInfo(consoleUI));
+
         commandList.add(new ReadFile(consoleUI));
+        commandList.add(new PrintInfo(consoleUI));
+        commandList.add(new AddHuman(consoleUI));
+        commandList.add(new AddChildren(consoleUI));
+        commandList.add(new AddParents(consoleUI));
+        commandList.add(new Wedding(consoleUI));
         commandList.add(new SaveFile(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
