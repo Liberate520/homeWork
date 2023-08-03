@@ -21,6 +21,10 @@ public class FamilyTree {
         tree.remove(node);
     }
 
+    public boolean contain(FamilyNode node){
+        return this.tree.contains(node);
+    }
+
     public FamilyNode findFamilyOrNull(Human human, Roles role) {
         FamilyNode returnNode = null;
         for (FamilyNode familyNode : tree) {

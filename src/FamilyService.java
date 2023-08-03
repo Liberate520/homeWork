@@ -24,6 +24,10 @@ public class FamilyService {
         return newFamily;
     }
 
+    public boolean containsFamily(FamilyNode node){
+        return this.familyTree.contain(node);
+    }
+
     public void deleteFamily(Human human) {
         FamilyNode family = this.findPrimaryFamilyOrNull(human);
         familyTree.delNode(family);
