@@ -8,6 +8,7 @@ import familyTree.treeWorkspace.TreeLoader;
 import java.time.LocalDate;
 
 public class Service  {
+    // Класс агрегатор
     private int id;
     private FamilyTree<Person> currentTree;
     private Person tmpPerson;
@@ -16,11 +17,10 @@ public class Service  {
         currentTree = new FamilyTree<>();
     }
 
-    public Person addPerson(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
+    public boolean addPerson(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
         id = currentTree.getMaxId();
         tmpPerson = new Person(id++,name,gender,birthDate,deathDate);
-        currentTree.addPerson(tmpPerson);
-        return tmpPerson;
+        return currentTree.addPerson(tmpPerson);
     }
 
     public FamilyTree<Person> getCurrentTree(){
@@ -35,13 +35,13 @@ public class Service  {
         }
         return null;
     }
-    public int findPersonId(String name, Gender gender){
+    public Person findPerson(String name, Gender gender){
         for (Person p: currentTree){
             if(p.getName().equals(name)&&p.getGender().equals(gender)){
-                return p.getId();
+                return p;
             }
         }
-        return -1;
+        return null;
     }
     public void getInfo(){
         for (Person p : currentTree) {

@@ -7,6 +7,7 @@ import ui.ConsoleUI;
 import java.time.LocalDate;
 
 public class Presenter {
+    // Класс для передачи сообщений между моделью и вьювером
     private ConsoleUI consoleUI;
     private Service service;
 
@@ -34,9 +35,6 @@ public class Presenter {
     }
     public void sortName(){
         service.sortByName();
-    }
-    public void addChild(int parentId,int childId){
-        service.findPerson(parentId).addChildren(service.findPerson(childId));
     }
     public void addParent(int childId,int parentId){
         service.findPerson(childId).addParent(service.findPerson(parentId));
