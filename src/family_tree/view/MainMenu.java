@@ -33,8 +33,7 @@ public class MainMenu {
     }
     public void execute(int choice){
         Command command = commandList.get(choice-1);
-        //TODO проверка выбирать из имеющегося меню
-        command.execute();
+            command.execute();
     }
     public int getSize(){
         return commandList.size();

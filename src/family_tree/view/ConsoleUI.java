@@ -119,8 +119,15 @@ public class ConsoleUI implements View{
             System.out.println("Выберете пункт меню");
             String choice=scanner.nextLine();
             //TODO добавить проверку
+
             int choiceInt=Integer.parseInt(choice);
-            menu.execute(choiceInt);
+            if( choiceInt > 0 && choiceInt<= menu.getSize()){
+                menu.execute(choiceInt);
+            }else {
+                System.out.println("Вы ввели неверный пункт меню");
+            }
+
+
         }
 
     }
