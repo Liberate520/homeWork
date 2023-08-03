@@ -2,32 +2,54 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-class Parent extends Person implements Serializable, Marriage{
+class Parent implements Serializable, Marriage, Comparable<Parent>{
+    private String name;
+    private Gender gender;
+    private int age;
     private String dateBorn;
     private String dateDeath;
-    private List<List<Person>> pairs;
+    private List<List<Parent>> pairs;
     
-    public Parent(String name, Gender gender, String age, String dateBorn) {
-        super(name, gender, age);
+    public Parent(String name, Gender gender, int age, String dateBorn) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
         this.dateBorn = dateBorn;
         this.pairs = new ArrayList<>();
     }
     
-    public Parent(String name, Gender gender, String age, String dateBorn, String dateDeath) {
-        super(name, gender, age);
+    public Parent(String name, Gender gender, int age, String dateBorn, String dateDeath) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
         this.dateBorn = dateBorn;
         this.dateDeath = dateDeath;
         this.pairs = new ArrayList<>();
     }
 
-    public List<List<Person>> getPairs() {
-        return pairs;
+    public String getName() {
+        return name;
+    }
+    
+    public Gender getGender() {
+        return gender;
+    }
+    
+    public int getAge() {
+        return age;
     }
 
+    public List<List<Parent>> getPairs() {
+        return pairs;
+    }
+    @Override
+    public int compareTo(Parent o) {
+        return name.compareTo(o.name);
+    }
     // Метод "Женим людей"
     @Override
-    public void marry(Person person1, Person person2) {
-        List<Person> pair = new ArrayList<>();
+    public void marry(Parent person1, Parent person2) {
+        List<Parent> pair = new ArrayList<>();
         pair.add(person1);
         pair.add(person2);
 
@@ -42,8 +64,8 @@ class Parent extends Person implements Serializable, Marriage{
     @Override
     public String toString() {
         if (dateDeath == null){
-        return getName() + ", " + "Пол: " + getGender() + ", " + getAge() + ", " + "Дата рождения: " + dateBorn;
+        return name + ", пол " + gender + ", возраст " + age + ", " + "Дата рождения: " + dateBorn;
         } else 
-        return getName() + ", " + "Пол: " + getGender() + ", " + getAge() + ", " + "Дата рождения: " + dateBorn + ", " + "Дата смерти: " + dateDeath;
+        return name + ", пол " + gender + ", возраст" + age + ", " + "Дата рождения: " + dateBorn + ", " + "Дата смерти: " + dateDeath;
     }
 }
