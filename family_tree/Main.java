@@ -1,12 +1,12 @@
 package homeWork.family_tree;
 
+import homeWork.family_tree.family_tree.FamilyTree;
+import homeWork.family_tree.writer.FileHandler;
 import homeWork.human.Gender;
 import homeWork.human.Human;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.logging.FileHandler;
-
 public class Main {
     public static void main(String[] args) throws IOException {
         String filePath = "file:///Users/mariannaizotova/Desktop/STUDY/OOProg/exportToHTML/homeWork/family_tree/data/test.out";
