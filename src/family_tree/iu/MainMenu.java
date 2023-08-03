@@ -16,6 +16,9 @@ public class MainMenu {
         commandList.add(new SortByBirthDate(consoleUI));
         commandList.add(new SortByID(consoleUI));
         commandList.add(new AddPerson(consoleUI));
+        commandList.add(new SetRelations(consoleUI));
+        commandList.add(new ExportTree(consoleUI));
+        commandList.add(new ImportTree(consoleUI));
         commandList.add(new Finish(consoleUI));
 
     }

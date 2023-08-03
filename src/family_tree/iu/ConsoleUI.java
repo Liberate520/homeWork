@@ -58,6 +58,22 @@ public class ConsoleUI implements BaseUI{
         presenter.getFamilyTree();
 
     }
+    public void exportTree(){
+
+        presenter.getFamilyTree();
+
+    }
+    public void importTree(){
+
+        presenter.getFamilyTree();
+
+    }
+
+    public void setRelations(){
+
+        presenter.getFamilyTree();
+
+    }
 
     public void showPersonTree(){
         System.out.println("Enter Person ID: ");

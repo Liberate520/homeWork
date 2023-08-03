@@ -5,7 +5,7 @@ import family_tree.iu.ConsoleUI;
 public class ShowPersonTree  extends Command {
 
     public ShowPersonTree(ConsoleUI consoleUI){
-        super("Show Personal Tree",consoleUI);
+        super("Show Personal Tree (use Person ID)",consoleUI);
     }
 
     @Override
