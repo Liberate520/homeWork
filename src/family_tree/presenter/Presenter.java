@@ -21,8 +21,12 @@ public class Presenter {
         service.addHuman(name,gender,localDate);
     }
 
-    public void wedding(long idhusband,long idwife){
-        service.wedding(idhusband,idwife);
+    public void wedding(long idHusband,long idWife){
+        service.wedding(idHusband,idWife);
+    }
+
+    public void addChildren(long idChildren, long idFather, long idMother) {
+        service.addChildren(idChildren, idFather, idMother);
     }
     public void getHumanListInfo(){
         String info=service.getHumanInfo();

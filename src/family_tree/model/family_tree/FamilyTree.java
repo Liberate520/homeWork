@@ -30,7 +30,7 @@ public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializabl
             human.setId(humansId++);
 
             addToParents(human);
-            addToCildren(human);
+            addToChildren(human);
 
             return true;
         }
@@ -42,12 +42,13 @@ public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializabl
             parent.addChild(human);
         }
     }
-    private void addToCildren(E human){
+    private void addToChildren(E human){
         for(E child:human.getChildren()){
             child.addParent(human);
         }
     }
     public List<E> getSiblings(int id){
+        //Братья и сестра
         E human = getById(id);
         if (human==null){
             return null;
@@ -73,6 +74,7 @@ public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializabl
     }
 
     public boolean setWedding(long humanId1, long humanId2){
+        //TODO не выводиться супруг(а)
         if(checkId(humanId1) && checkId(humanId2)){
             E human1 = getById(humanId1);
             E human2 = getById(humanId2);
@@ -86,6 +88,7 @@ public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializabl
         return false;
     }
     public boolean setDivorce(long humanId1, long humanId2){
+        // развод
         E human1=getById(humanId1);
         E human2=getById(humanId2);
         if (human1.getSpouse()!=null && human2.getSpouse() != null){

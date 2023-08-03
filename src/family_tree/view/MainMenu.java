@@ -12,6 +12,7 @@ public class MainMenu {
         commandList=new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new Wedding(consoleUI));
+        commandList.add(new AddChildren(consoleUI));
         commandList.add(new PrintInfo(consoleUI));
         commandList.add(new ReadFile(consoleUI));
         commandList.add(new SaveFile(consoleUI));
@@ -30,6 +31,7 @@ public class MainMenu {
     }
     public void execute(int choice){
         Command command = commandList.get(choice-1);
+        //TODO проверка выбирать из имеющегося меню
         command.execute();
     }
     public int getSize(){

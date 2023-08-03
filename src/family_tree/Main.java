@@ -12,17 +12,9 @@ import java.time.LocalDate;
 public class Main{
     public static void main(String[] args) {
         View view=new ConsoleUI();
+        //TODO Удалить extracted1();
         view.start();
     }
-
-
-
-
-
-
-
-
-
 
 
 

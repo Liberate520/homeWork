@@ -23,6 +23,19 @@ public class Service {
     public void wedding(long idHusband, long idWife){
         tree.setWedding(idHusband,idWife);
     }
+    public void addChildren(long idChildren, long idFather, long idMother){
+
+        Human child = tree.getById(idChildren);
+        Human father = tree.getById(idFather);
+        Human mother = tree.getById(idMother);
+        father.addChild(child);
+        mother.addChild(child);
+        child.addParent(father);
+        child.addParent(mother);
+         //TODO удалить коммент
+//        System.out.println(tree.getById(idChildren));
+//        System.out.println(tree.getById(idFather));
+    }
 
     public void setTree(FamilyTree<Human> tree) {
         this.tree = tree;
@@ -32,8 +45,9 @@ public class Service {
     public FamilyTree<Human> getTree() {
         return tree;
     }
-    public void saveFile(){
 
+    public void saveFile(){
+        //TODO убрать метод
     }
 
 }
