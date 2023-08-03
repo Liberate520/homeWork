@@ -9,9 +9,7 @@
 //Ссылка на то как сделать пулреквест смотри в материалах к уроку
 //Если PR все таки не дается,то можно и ссылкой на гит репозиторий
 
-import java.util.Scanner;
-
-public class Family_tree {
+public class Test {
     static int N = 10; // Максимальное количество детей
 
     static class Node {
