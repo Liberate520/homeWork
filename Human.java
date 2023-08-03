@@ -4,42 +4,42 @@ import java.time.LocalDate;
 import java.io.*; // Serializable
 
 public class Human implements Serializable {
-    private String fName;
-    private Human fParentsMom, fParentsDad; // родители
-    private List <Human> fChidrens;  // List --> Set for unigue
-    private int fChildId;
-    private LocalDate fbirthDay, fdeathDay; // день рождения, дата смерти
+    private String name;
+    private Human parentsMom, parentsDad; // родители
+    private List <Human> chidrens;  // List --> Set for unigue
+    private int childId;
+    private LocalDate birthDay, deathDay; // день рождения, дата смерти
     // https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html
-    private Gender fGender; // пол
+    private Gender gender; // пол
     
     public Human(String aName, Gender aGender, LocalDate aBirthDay) {
-        this.fName = aName;
-        this.fGender = aGender;
-        this.fbirthDay = aBirthDay;
+        this.name = aName;
+        this.gender = aGender;
+        this.birthDay = aBirthDay;
         
-        fChidrens = new ArrayList<Human>();
+        chidrens = new ArrayList<Human>();
     }  // constructor Human
     
     public Human setParent(Human aHuman) {
-        if (aHuman.fGender.equals(Gender.Man)){
-            if (this.fParentsDad == null){
-                this.fParentsDad = aHuman;
+        if (aHuman.gender.equals(Gender.Man)){
+            if (this.parentsDad == null){
+                this.parentsDad = aHuman;
             }
-            return this.fParentsDad;
+            return this.parentsDad;
         } else {
-            if (this.fParentsMom == null){
-                this.fParentsMom = aHuman;
+            if (this.parentsMom == null){
+                this.parentsMom = aHuman;
             }
-            return this.fParentsMom;
+            return this.parentsMom;
         }
     }
     
     public Human getParentDad(){
-        return this.fParentsDad;
+        return this.parentsDad;
     }
     
     public Human getParentMom(){
-        return this.fParentsMom;
+        return this.parentsMom;
     }
     
     
@@ -75,10 +75,10 @@ public class Human implements Serializable {
         List <Human> fBrSs = new ArrayList<Human>();
         Human fHmn;
         fHmn = this.getParentDad();
-        if (fHmn != null){  fBrSs.addAll(fHmn.fChidrens);  }
+        if (fHmn != null){  fBrSs.addAll(fHmn.chidrens);  }
 
         fHmn = this.getParentMom(); 
-        if (fHmn != null){  fBrSs.addAll(fHmn.fChidrens);  }
+        if (fHmn != null){  fBrSs.addAll(fHmn.chidrens);  }
         
         return fBrSs;
     }
@@ -98,12 +98,12 @@ public class Human implements Serializable {
     
     
     public List <Human> addChild(Human aChild){
-        if(!fChidrens.contains(aChild)){  // only unigue childs !!!
-            fChildId++;
+        if(!chidrens.contains(aChild)){  // only unigue childs !!!
+            childId++;
             aChild.setParent(this);
-            fChidrens.add(aChild);
+            chidrens.add(aChild);
         }
-        return fChidrens;
+        return chidrens;
     }
     
     public String getChilds(){
@@ -111,7 +111,7 @@ public class Human implements Serializable {
         stringBuilder.append(this.toString());
         stringBuilder.append("\n Дети :\n");
         
-        for (Human h: fChidrens){
+        for (Human h: chidrens){
             stringBuilder.append(h);
             stringBuilder.append("\n");
         }
@@ -119,21 +119,21 @@ public class Human implements Serializable {
     }
 
     public String getName(){
-        return fName;
+        return name;
     }
 
     public String getBirthDay(){
-        return fbirthDay.toString();
+        return birthDay.toString();
     }
 
-    public LocalDate getBirthDayO(){  // LocalDate fbirthDay
-        return fbirthDay;
+    public LocalDate getBirthDayO(){  // LocalDate birthDay
+        return birthDay;
     }
 
 
     @Override
     public String toString() {
-        return "имя : " + fName + ",\t д.р. : " + fbirthDay + ",\t пол : " + fGender;
+        return "имя : " + name + ",\t д.р. : " + birthDay + ",\t пол : " + gender;
     }
     
     @Override
@@ -141,26 +141,25 @@ public class Human implements Serializable {
     	if (this == obj){return true;}
     	if (!(obj instanceof Human)){return false;}
     	Human ahM = (Human) obj;
-    	return (fName.equals(ahM.fName) && // имя
-    		fbirthDay.toString().equals(ahM.fbirthDay.toString()) &&  // день рождения  LocalDate.of(...).toString().equals()
-    		fGender == ahM.fGender);  // пол
+    	return (name.equals(ahM.name) && // имя
+    		birthDay.toString().equals(ahM.birthDay.toString()) &&  // день рождения  LocalDate.of(...).toString().equals()
+    		gender == ahM.gender);  // пол
     }
 
     @Override
     public int hashCode(){
-    	return fName.hashCode() 
-    		+ 3 * fbirthDay.hashCode()
-    		+ 5 * fGender.hashCode()
-    		+ 7 * fbirthDay.hashCode();	
+    	return name.hashCode()
+    		+ 3 * birthDay.hashCode()
+    		+ 5 * gender.hashCode();
     }
     
     /*************
      * private String fName;    
-     * private Human fParentsMom, fParentsDad; // родители
-     * private List <Human> fChidrens;
-     * private int fChildId;
-     * private LocalDate fbirthDay, fdeathDay; // день рождения, дата смерти
-     * private Gender fGender; // пол
+     * private Human parentsMom, parentsDad; // родители
+     * private List <Human> chidrens;
+     * private int childId;
+     * private LocalDate birthDay, deathDay; // день рождения, дата смерти
+     * private Gender gender; // пол
      * 
      * 1 3 5 7 11 13 17 19 
     *************/
