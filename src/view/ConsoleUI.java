@@ -66,7 +66,7 @@ public class ConsoleUI implements View {
         System.out.println(text.promptConnectionType);
         System.out.println(text.promptListNumber);
         String choice = scanner.nextLine();
-        ConnectionType key = null;
+        ConnectionType key;
         switch (choice) {
             case "1" -> key = ConnectionType.PARENT;
             case "2" -> key = ConnectionType.CHILD;
