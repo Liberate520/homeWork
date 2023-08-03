@@ -1,4 +1,4 @@
-package homeWork.family_tree;
+package homeWork.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -64,7 +64,6 @@ public class Human implements Serializable {
     public Human getMother; {
         for (Human parent : parents) {
             if (parent.getGender() == Gender.Female) {
-                return null;
             }
         }
     }

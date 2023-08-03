@@ -1,10 +1,9 @@
 package homeWork.family_tree.writer;
 
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 
 public interface Writable {
-    default boolean save(Serializable serializable, String filePath){
-        return false;
-    }
+    boolean save(Serializable serializable, String filePath);
     Object read(String filePath);
 }

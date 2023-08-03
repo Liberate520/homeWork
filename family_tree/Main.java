@@ -1,14 +1,22 @@
 package homeWork.family_tree;
 
+import homeWork.human.Gender;
+import homeWork.human.Human;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.logging.FileHandler;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         String filePath = "file:///Users/mariannaizotova/Desktop/STUDY/OOProg/exportToHTML/homeWork/family_tree/data/test.out";
         FileHandler fileHandler = new FileHandler();
-        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+        FamilyTree tree = testTree();
         System.out.println(tree);
+        fileHandler.save(tree, filePath);
+
+        //FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+        //System.out.println(tree);
     }
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
