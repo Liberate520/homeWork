@@ -1,11 +1,18 @@
 import java.time.LocalDate;
 
 import FamilyTree.FamilyTree;
+import FileHandler.FileHandler;
 import Human.Human;
 
 public class Main {
 public static void main(String[] args) {
-    FamilyTree tree = NewTree();
+    String path = "homeWork/src/data/familyData.out";
+    // FileHandler fh = new FileHandler();
+    // FamilyTree tree = NewTree();
+    // System.out.println(tree.getInfo());
+    // fh.save(tree, path);
+    FileHandler fh = new FileHandler();
+    FamilyTree tree = (FamilyTree)fh.load(path);
     System.out.println(tree.getInfo());
 }  
 public static FamilyTree NewTree(){

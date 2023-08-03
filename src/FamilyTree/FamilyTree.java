@@ -1,16 +1,17 @@
 package FamilyTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import Human.Human;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
     private long id;
-    List<Human> Family;
+    private List<Human> family;
     
-    public FamilyTree(List<Human> Family){
-        this.Family = Family;
+    public FamilyTree(List<Human> family){
+        this.family = family;
     }
     
     public FamilyTree(){
@@ -22,7 +23,7 @@ public class FamilyTree {
             return false;
         }
         //if(!Family.contains(human)){      //Не работает с проверкой
-            Family.add(human);
+            family.add(human);
             human.setId(id++);
             addToChildren(human);
             addToParents(human);
@@ -45,7 +46,7 @@ public class FamilyTree {
     }
 
     public Human getById(long id){
-        for(Human human: Family){
+        for(Human human: family){
             if(human.getId()==id){
                 return human;
             }
@@ -55,7 +56,7 @@ public class FamilyTree {
 
     public List<Human> getByName(String name){
         List<Human> res = new ArrayList<>();
-        for(Human human: Family){
+        for(Human human: family){
             if(human.getName().equalsIgnoreCase(name)){
                 res.add(human);
             }
@@ -103,9 +104,9 @@ public class FamilyTree {
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("People in the tree: ");
-        sb.append(Family.size());
+        sb.append(family.size());
         sb.append("\n");
-        for(Human human: Family){
+        for(Human human: family){
             sb.append(human);
             sb.append("\n");
         }
