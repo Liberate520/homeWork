@@ -20,6 +20,9 @@ public class Service {
     public String getHumanInfo(){
         return tree.getInfo();
     }
+    public void wedding(long idHusband, long idWife){
+        tree.setWedding(idHusband,idWife);
+    }
 
     public void setTree(FamilyTree<Human> tree) {
         this.tree = tree;

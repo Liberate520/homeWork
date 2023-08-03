@@ -49,6 +49,18 @@ public class ConsoleUI implements View{
 
         presenter.addHuman(name, gender, LocalDate.of(iYear,iMonth,iDayOfMonth));
     }
+
+    public void wedding(){
+        System.out.println("Укажите id мужа");
+        String husband = scanner.nextLine();
+        //TODO сделать проверку
+        long idHusband=Integer.parseInt(husband);
+        System.out.println("Укажите id жены");
+        String wife = scanner.nextLine();
+        long idWife = Integer.parseInt(wife);
+        presenter.wedding(idHusband, idWife);
+
+    }
     public void finish(){
         work=false;
     }
