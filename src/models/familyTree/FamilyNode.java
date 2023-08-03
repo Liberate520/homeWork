@@ -148,13 +148,20 @@ public class FamilyNode {
         return children;
     }
 
+    public List<Human> getParents() {
+        List<Human> parents = new ArrayList<>();
+        parents.addAll(family.get(FATHER));
+        parents.addAll(family.get(MOTHER));
+        return parents;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(family.get(FATHER).toString())
-                .append("\n")
-                .append(family.get(MOTHER).toString())
-                .append("\n");
+        family.get(FATHER).forEach(item -> builder.append(item.toString()));
+        builder.append("\n");
+        family.get(MOTHER).forEach(item -> builder.append(item.toString()));
+        builder.append("\n");
         family.get(DAUGHTER).forEach(item -> builder.append(item.toString()));
         builder.append("\n");
         family.get(SON).forEach(item -> builder.append(item.toString()));

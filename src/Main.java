@@ -31,5 +31,8 @@ public class Main {
         service.printPrimaryFamily(newHuman);
         System.out.println();
         service.printPrimaryFamily(newHuman2);
+        service.getChildren(newHuman).forEach(System.out::println);
+        System.out.println();
+        service.getParents(newHumanDaughter).forEach(System.out::println);
     }
 }

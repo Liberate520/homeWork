@@ -21,14 +21,6 @@ public class FamilyService {
             case FEMALE -> newFamily.addMember(human, MOTHER);
         }
         this.familyTree.addNode(newFamily);
-
-//        FamilyNode parentFamily = this.findPrimaryFamilyOrNull(human);
-//        if (parentFamily != null) {
-//            switch (human.gender()) {
-//                case MALE -> newFamily.addToUpRelatives(FATHER, parentFamily);
-//                case FEMALE -> newFamily.addToUpRelatives(MOTHER, parentFamily);
-//            }
-//        }
         return newFamily;
     }
 
@@ -119,5 +111,10 @@ public class FamilyService {
     public List<Human> getChildren(Human human) {
         FamilyNode family = this.findPrimaryFamilyOrNull(human);
         return family.getChildren();
+    }
+
+    public List<Human> getParents(Human human){
+        FamilyNode family = this.findPrimaryFamilyOrNull(human);
+        return family.getParents();
     }
 }
