@@ -5,7 +5,7 @@ import java.io.*; // Serializable
 
 public class Animal implements Serializable {
     private String name;
-    private Animal parentsMom, parentsDad; // родители
+    private Animal parentMom, parentDad; // родители
     private List <Animal> chidrens;  // List --> Set for unigue
     private int childId;
     private LocalDate birthDay, deathDay; // день рождения, дата смерти
@@ -19,27 +19,47 @@ public class Animal implements Serializable {
         
         chidrens = new ArrayList<Animal>();
     }  // constructor Animal
-    
+
+    public Gender getGender(){      return gender;    }
+
+//    Animal parentsMom, parentsDad; // родители
+    public void setparentMom(Animal anm){
+        parentMom = anm;
+    }
+
+    public Animal getparentMom(){
+        return parentMom;
+    }
+
+    public void setparentDad(Animal anm){
+        parentDad = anm;
+    }
+
+    public Animal getparentDad(){
+        return parentDad;
+    }
+
+
     public Animal setParent(Animal aNM) {
         if (aNM.gender.equals(Gender.Man)){
-            if (this.parentsDad == null){
-                this.parentsDad = aNM;
+            if (this.parentDad == null){
+                this.parentDad = aNM;
             }
-            return this.parentsDad;
+            return this.parentDad;
         } else {
-            if (this.parentsMom == null){
-                this.parentsMom = aNM;
+            if (this.parentMom == null){
+                this.parentMom = aNM;
             }
-            return this.parentsMom;
+            return this.parentMom;
         }
     }
     
     public Animal getParentDad(){
-        return this.parentsDad;
+        return this.parentDad;
     }
     
     public Animal getParentMom(){
-        return this.parentsMom;
+        return this.parentMom;
     }
     
     
