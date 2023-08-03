@@ -4,6 +4,7 @@ import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Scanner;
 
 import static family_tree.model.human.Gender.Female;
@@ -25,29 +26,58 @@ public class ConsoleUI implements View{
     public void addHuman(){
         System.out.println("Укажите имя");
         String name = scanner.nextLine();
-        //TODO добавить проверки
         System.out.println("Укажите пол 1 - мужской, 2 - женский");
         String gen = scanner.nextLine();
-        int igen = Integer.parseInt(gen);
-        Gender gender=null;
-        if(igen==1){
-            gender= Male;
-        }
-        if(igen==2){
-            gender= Female;
+        Gender gender = null;
+        //TODO сделать по другому
+        if (isNumeric(gen)) {
+            int iGen = Integer.parseInt(gen);
+            if (iGen == 1) {
+                gender = Male;
+            } else if (iGen == 2) {
+                gender = Female;
+            } else {
+                System.out.println("Введите правильно пол");
+                return;
+            }
+        } else {
+            System.out.println("Введите правильно пол");
+            return;
         }
 
         System.out.println("Укажите год рождения");
         String year = scanner.nextLine();
+        if(!isNumeric(year)){
+            System.out.println("Год рождения указан не верно");
+            return;
+        }
         int iYear = Integer.parseInt(year);
         System.out.println("Укажите месяц рождения");
         String month = scanner.nextLine();
+        if(!isNumeric(month)){
+            System.out.println("Месяц рождения указан не верно");
+            return;
+        }
         int iMonth = Integer.parseInt(month);
+        if(iMonth<1 || iMonth>12){
+            System.out.println("Месяц рождения указан не верно");
+            return;
+        }
         System.out.println("Укажите день рождения");
         String dayOfMonth = scanner.nextLine();
-        int iDayOfMonth = Integer.parseInt(dayOfMonth);
+        if(!isNumeric(dayOfMonth)){
+            System.out.println("День рождение указан не верно");
+            return;
+        }
 
-        presenter.addHuman(name, gender, LocalDate.of(iYear,iMonth,iDayOfMonth));
+        int iDayOfMonth = Integer.parseInt(dayOfMonth);
+        YearMonth yearMonth= YearMonth.of(iYear,iMonth);
+        int day=yearMonth.lengthOfMonth();
+        if(iDayOfMonth <0 || iDayOfMonth>=day){
+            System.out.println("Дата рождения указана не верно");
+            return;
+        }
+        presenter.addHuman(name, gender, LocalDate.of(iYear, iMonth, iDayOfMonth));
     }
 
     public void wedding(){
@@ -110,6 +140,15 @@ public class ConsoleUI implements View{
     public void saveFile(){
         presenter.saveFile();
     }
+    public boolean isNumeric(String str){
+        // Проверка на число
+        try{
+            Integer.parseInt(str);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
 
     @Override
     public void start() {
@@ -118,15 +157,16 @@ public class ConsoleUI implements View{
             System.out.println(menu.menu());
             System.out.println("Выберете пункт меню");
             String choice=scanner.nextLine();
-            //TODO добавить проверку
-
-            int choiceInt=Integer.parseInt(choice);
-            if( choiceInt > 0 && choiceInt<= menu.getSize()){
-                menu.execute(choiceInt);
+            if(isNumeric(choice)){
+                int choiceInt=Integer.parseInt(choice);
+                if( choiceInt > 0 && choiceInt<= menu.getSize()){
+                    menu.execute(choiceInt);
+                }else {
+                    System.out.println("Вы ввели неверный пункт меню");
+                }
             }else {
-                System.out.println("Вы ввели неверный пункт меню");
+                System.out.println("Введите число");
             }
-
 
         }
 

@@ -8,6 +8,7 @@ import family_tree.view.ConsoleUI;
 import family_tree.view.View;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 public class Main{
     public static void main(String[] args) {
@@ -15,6 +16,7 @@ public class Main{
         //TODO Удалить extracted1();
         //extracted1();
         view.start();
+
     }
 
 
