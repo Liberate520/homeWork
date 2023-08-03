@@ -16,8 +16,8 @@ public class Presenter {
     }
 
     public void initBase(){
-//        System.out.println("Presenter:00");
         engine.getInit();
+        engine.getBase();
     }
 
     public void addPerson(String lName, String fName, Gender gender, LocalDate birthDate){
@@ -33,19 +33,16 @@ public class Presenter {
     }
 
     public void sortByBirthDate() {
-//        System.out.println("Presenter:01");
         engine.sortTreeByBirthDays();
         getFamilyTree();
     }
 
     public void sortByName() {
-//        System.out.println("Presenter:02");
         engine.sortTreeByNames();
         getFamilyTree();
     }
 
     public void sortByID() {
-//        System.out.println("Presenter:03");
         engine.sortTreeByID();
         getFamilyTree();
     }

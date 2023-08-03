@@ -5,7 +5,6 @@ import family_tree.backend.dump_file.FileHandler;
 import java.io.File;
 
 public class Config implements BaseInit{
-    public Config config;
     FileHandler fileHandler = new FileHandler();
     public static String getFilePath(){
         String path = "";

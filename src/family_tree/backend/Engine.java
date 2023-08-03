@@ -11,9 +11,9 @@ import java.time.LocalDate;
 
 public class Engine{
 
-    public FamilyTree<Person> relations;
+    private FamilyTree<Person> relations;
 
-    private int id;
+//    private int id;
     private boolean initDone;
 
     public Engine(){
