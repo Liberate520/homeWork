@@ -7,7 +7,6 @@ public class AddParents extends Command {
         super("Добавить родителей",consoleUI);
     }
     public void execute(){
-        // TODO поменять метод
         getConsoleUI().addParents();
     }
 }

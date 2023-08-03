@@ -165,6 +165,8 @@ public class Human implements Serializable,FamilyTreeInterface<Human> {
         String res = "супруг(а): ";
         if (spouse == null){
             res += "нет";
+        }else {
+            res+=spouse.getName();
         }
         return res;
     }

@@ -33,9 +33,6 @@ public class Service {
         mother.addChild(child);
         child.addParent(father);
         child.addParent(mother);
-         //TODO удалить коммент
-//        System.out.println(tree.getById(idChildren));
-//        System.out.println(tree.getById(idFather));
     }
     public void addParent(long idChildren, long idFather, long idMother){
         Human child = tree.getById(idChildren);
@@ -52,10 +49,6 @@ public class Service {
 
     public FamilyTree<Human> getTree() {
         return tree;
-    }
-
-    public void saveFile(){
-        //TODO убрать метод
     }
 
 }

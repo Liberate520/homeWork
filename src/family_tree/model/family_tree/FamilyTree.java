@@ -74,7 +74,6 @@ public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializabl
     }
 
     public boolean setWedding(long humanId1, long humanId2){
-        //TODO не выводиться супруг(а)
         if(checkId(humanId1) && checkId(humanId2)){
             E human1 = getById(humanId1);
             E human2 = getById(humanId2);
