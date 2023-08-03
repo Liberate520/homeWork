@@ -8,16 +8,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree implements Serializable {
-    private   List<Human> humanList;
+public class Tree <E extends Human> implements Serializable {
+    private   List<E> humanList;
 
-    public Tree(List<Human> humanList) {
+    public Tree(List<E> humanList) {
         this.humanList = humanList;
     }
     public Tree(){
         this(new ArrayList<>());
     }
-    public boolean add(Human human){
+    public boolean add(E human){
         if (human == null){
             return false;
         }
@@ -31,7 +31,7 @@ public class Tree implements Serializable {
     public String getHumansInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список людей: \n");
-        for (Human human: humanList){
+        for (E human: humanList){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }

@@ -6,12 +6,14 @@ import FamilyTree.Tree.FileHander.FileHandler;
 import FamilyTree.Tree.HumanGroup.Human.Gender;
 import FamilyTree.Tree.HumanGroup.Human.Human;
 
+import FamilyTree.Tree.HumanGroup.HumanGroup;
 import FamilyTree.Tree.HumanGroup.Service;
 
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public  static void main(String[] args) {
         String filePath = "src/tree.out";
         FileHandler fileHandler = new FileHandler();
 
@@ -24,7 +26,6 @@ public class Main {
 //        Tree humanList = (Tree) fileHandler.read(filePath);
 //        System.out.println(humanList);
     }
-
     public static Service Tree() {
         Service tree = new Service();
 
@@ -34,7 +35,7 @@ public class Main {
          tree.addHuman(andrea);
          Human maria = new Human("Мария", "Константинович", Gender.Female, LocalDate.of(1980,1,19), andrea, null);
          tree.addHuman(maria);
-         Human julia = new Human("Юлия", "Ивановна", Gender.Female, LocalDate.of(2000,9,25), kostia, maria);
+         Human julia = new Human("Юлия", "Ивановна", Gender.Female, LocalDate.of(2005,9,25), kostia, maria);
          tree.addHuman(julia);
          Human stiv = new Human("Светлана", "Олеговна", Gender.Female, LocalDate.of(2001,2,1), andrea, maria);
          tree.addHuman(stiv);
@@ -55,9 +56,9 @@ public class Main {
         System.out.println("Родители человека 5: " + "Отец:" + stiv.getFather() + ": Мать:" + stiv.getMother());
 
 
-//        HumanGroup<Dogs> group = new HumanGroup<>();
-//        group.sortByName();
-//        group.addHuman(new Dogs());
+        HumanGroup<Dogs> group = new HumanGroup<>();
+        group.sortByName();
+        group.addHuman(new Dogs());
         return tree;
     }
 

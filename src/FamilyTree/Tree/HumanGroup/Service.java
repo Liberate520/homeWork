@@ -5,7 +5,7 @@ import FamilyTree.Tree.HumanGroup.Human.Human;
 
 public class Service extends Human {
 
-    private HumanGroup group;
+    private HumanGroup<Human> group;
     public Service() {
         group = new HumanGroup();
     }

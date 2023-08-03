@@ -7,19 +7,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
-    private List<Human> children = new ArrayList<>();
+public class Human <E extends Human> implements Serializable, HumanGroupItem{
+    private List<E> children = new ArrayList<>();
 
 
     private String name;
     private String patronymic;
     private LocalDate dateOfBirth;
     private Gender gender;
-    private List<Human> parents;
+    private List<E> parents;
 
 
 
-    public Human(String name, String patronymic, Gender gender, LocalDate dateOfBirth, Human father, Human mother) {
+    public Human(String name, String patronymic, Gender gender, LocalDate dateOfBirth, E father, E mother) {
 
         this.name = name;
         this.patronymic = patronymic;
@@ -37,13 +37,13 @@ public class Human implements Serializable{
     public Human(int i, String name, String patronymic) {
     }
 
-    public Human(Human human) {
+    public Human(E human) {
     }
 
     public Human() {
     }
 
-    public boolean addParent(Human parent) {
+    public boolean addParent(E parent) {
         if (!parents.contains(parent)){
             parents.add(parent);
             return true;
@@ -51,8 +51,8 @@ public class Human implements Serializable{
         return false;
     }
 
-    public Human getFather(){
-        for (Human parent: parents){
+    public E getFather(){
+        for (E parent: parents){
             if (parent.getGender() == Gender.Male){
                 return parent;
             }
@@ -60,8 +60,8 @@ public class Human implements Serializable{
         return null;
     }
 
-    public Human getMother(){
-        for (Human parent: parents){
+    public E getMother(){
+        for (E parent: parents){
             if (parent.getGender() == Gender.Female){
                 return parent;
             }
@@ -69,7 +69,7 @@ public class Human implements Serializable{
         return null;
     }
 
-    public List<Human> getChildren(){
+    public List<E> getChildren(){
         return children;
     }
     public String getName() {
@@ -81,7 +81,7 @@ public class Human implements Serializable{
     public String getPatronymic(){
         return patronymic;
     }
-    public List<Human> getParent() {
+    public List<E> getParent() {
         return parents;
     }
     public void setDateOfBirth(LocalDate dateOfBirth) {
@@ -109,4 +109,5 @@ public class Human implements Serializable{
         sb.append(getGender());
         return sb.toString();
     }
+
 }
