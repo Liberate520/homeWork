@@ -133,12 +133,20 @@ public class FamilyNode {
         family.get(SON).remove(human);
     }
 
-    public Human getMother() {
-        return family.get(MOTHER).get(0);
+    public Human getMotherOrNull(){
+        Human returnHuman = null;
+        if (family.get(MOTHER).size() != 0) {
+            returnHuman = family.get(MOTHER).get(0);
+        }
+        return returnHuman;
     }
 
-    public Human getFather() {
-        return family.get(FATHER).get(0);
+    public Human getFatherOrNull(){
+        Human returnHuman = null;
+        if (family.get(FATHER).size() != 0) {
+            returnHuman = family.get(FATHER).get(0);
+        }
+        return returnHuman;
     }
 
     public List<Human> getChildren() {

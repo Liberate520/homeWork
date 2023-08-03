@@ -55,8 +55,8 @@ public class FamilyService {
     private void setUpRelatives(FamilyNode targetNode, FamilyNode nodeToAdd, Roles role) {
         FamilyNode parentNode = null;
         switch (role) {
-            case FATHER -> parentNode = this.findPrimaryFamilyOrNull(nodeToAdd.getFather());
-            case MOTHER -> parentNode = this.findPrimaryFamilyOrNull(nodeToAdd.getMother());
+            case FATHER -> parentNode = this.findPrimaryFamilyOrNull(nodeToAdd.getFatherOrNull());
+            case MOTHER -> parentNode = this.findPrimaryFamilyOrNull(nodeToAdd.getMotherOrNull());
         }
         if (parentNode != null && !parentNode.getUpRelatives().isEmpty()) {
             targetNode.addToUpRelatives(role, parentNode);
@@ -66,8 +66,8 @@ public class FamilyService {
     private void setRelativesToChildren(FamilyNode targetNode, FamilyNode nodeToAdd, Roles role) {
         targetNode.addToChildrenFamilies(role, nodeToAdd);
 
-        FamilyNode fatherNode = this.findPrimaryFamilyOrNull(targetNode.getFather());
-        FamilyNode motherNode = this.findPrimaryFamilyOrNull(targetNode.getMother());
+        FamilyNode fatherNode = this.findPrimaryFamilyOrNull(targetNode.getFatherOrNull());
+        FamilyNode motherNode = this.findPrimaryFamilyOrNull(targetNode.getMotherOrNull());
 
         nodeToAdd.addToUpRelatives(FATHER, fatherNode);
         nodeToAdd.addToUpRelatives(MOTHER, motherNode);
