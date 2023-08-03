@@ -56,12 +56,20 @@ public class FamilyNode {
         }
     }
 
-    public void addToUpRelatives(Roles role, FamilyNode node){
+    public void addToUpRelatives(Roles role, FamilyNode node) {
         this.upRelatives.put(role, node);
     }
 
-    public void addToChildrenFamilies(Roles role, FamilyNode node){
+    public void delFromRelatives(Roles role, FamilyNode node) {
+        this.upRelatives.remove(role, node);
+    }
+
+    public void addToChildrenFamilies(Roles role, FamilyNode node) {
         this.childrenFamilies.put(role, node);
+    }
+
+    public void delFromChildrenFamilies(Roles role, FamilyNode node) {
+        this.childrenFamilies.remove(role, node);
     }
 
     public Map<Roles, FamilyNode> getUpRelatives() {
@@ -143,9 +151,9 @@ public class FamilyNode {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(family.get(FATHER).get(0).toString())
+        builder.append(family.get(FATHER).toString())
                 .append("\n")
-                .append(family.get(MOTHER).get(0).toString())
+                .append(family.get(MOTHER).toString())
                 .append("\n");
         family.get(DAUGHTER).forEach(item -> builder.append(item.toString()));
         builder.append("\n");
