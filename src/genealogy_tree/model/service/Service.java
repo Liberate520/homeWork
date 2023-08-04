@@ -7,6 +7,7 @@ import genealogy_tree.model.Tree.GeneologiTreeItem;
 import genealogy_tree.model.WriterAndReader.FileHandler;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -89,6 +90,8 @@ public class Service {
         tree.getById(id);
         System.out.println("Siblings a person");
         tree.getSiblings(id);
+        List<String> result = tree.getSiblings(id);
+        System.out.println(result);
     }
 
     public void setDivorce() {
