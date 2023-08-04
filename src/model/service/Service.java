@@ -1,12 +1,14 @@
-import family_tree.FamilyTree;
-import person.Gender;
-import person.Person;
+package model.service;
+
+import model.family_tree.FamilyTree;
+import model.person.Gender;
+import model.person.Person;
 
 import java.time.LocalDate;
 
 public class Service {
     private int idPerson;
-    private FamilyTree tree;
+    private FamilyTree<Person> tree;
 
     public Service() {
         tree = new FamilyTree();

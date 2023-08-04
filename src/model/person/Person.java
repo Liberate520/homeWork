@@ -1,4 +1,6 @@
-package person;
+package model.person;
+
+import model.family_tree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, Comparable<Person> {
+public class Person implements Serializable, Comparable<Person>, TreeNode<Person> {
     private int id;
     private String firstName;
     private String lastName;
@@ -39,7 +41,7 @@ public class Person implements Serializable, Comparable<Person> {
         this(firstName, lastName, gender, birthDate, null, null, null);
     }
 
-    public boolean addChildren(Person child) {
+    public boolean addChild(Person child) {
         if (!children.contains(child)) {
             children.add(child);
             return true;
@@ -63,16 +65,24 @@ public class Person implements Serializable, Comparable<Person> {
         return father;
     }
 
-    public void addFather(Person parent) {
-        this.father = parent;
+    public boolean addFather(Person parent) {
+        if (parent != null){
+            this.father = parent;
+            return true;
+        }
+        return false;
     }
 
     public Person getMother() {
         return mother;
     }
 
-    public void addMother(Person parent) {
-        this.mother = parent;
+    public boolean addMother(Person parent) {
+        if (parent != null){
+            this.mother = parent;
+            return true;
+        }
+        return false;
     }
 
     public Gender getGender() {
@@ -91,12 +101,22 @@ public class Person implements Serializable, Comparable<Person> {
         return lastName;
     }
 
+    public String getName(){return firstName + " " + lastName;}
+
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
     public LocalDate getDeathDate() {
         return deathDate;
+    }
+
+    @Override
+    public List<Person> getParents() {
+        List<Person> parents = new ArrayList<>();
+        if (getFather() != null) parents.add(getFather());
+        if (getMother() != null) parents.add(getMother());
+        return parents;
     }
 
     public void setDeathDate(LocalDate deathDate) {
