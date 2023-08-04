@@ -81,8 +81,8 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable,Iterabl
         return false;
     }
     private void addToParents(E human){
-        for (Human parent: human.getParents()){
-            parent.addChild((Human) human);
+        for (E parent: human.getParents()){
+            parent.addChild((E) human);
         }
     }
     private void addToChildren(E human){

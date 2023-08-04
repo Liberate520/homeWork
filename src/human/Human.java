@@ -40,6 +40,10 @@ public class Human implements Comparable<Human>, FamilyItem<Human> {
     public Human(String name, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath){
         this(name,gender,dateOfBirth,dateOfDeath,null,null);
     }
+
+    public Human() {
+    }
+
     public Human getSpouse(){return  spouse;}
 
 
