@@ -92,6 +92,21 @@ public class ConsoleUI implements View {
         System.out.println(presenter.showConnections(person));
     }
 
+    public void sortTree(String sortType) {
+        if (sortType.equals("name"))
+            System.out.println(presenter.sortByName());
+        if (sortType.equals("age"))
+            System.out.println(presenter.sortByAge());
+    }
+
+    public void printTreeConnections() {
+        System.out.println(presenter.printTreeConnections());
+    }
+
+    public void printTree() {
+        System.out.println(presenter.printTree());
+    }
+
     public LocalDate inputDate() {
         String input = scanner.nextLine();
         if (input.isEmpty())

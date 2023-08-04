@@ -44,6 +44,10 @@ public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>
         return service.sortByName();
     }
 
+    public String printTreeConnections() {
+        return service.printTreeConnections();
+    }
+
     @Override
     public Iterator<Map.Entry<Person, Connections<Person>>> iterator() {
         return service.iterator();

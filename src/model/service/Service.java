@@ -9,7 +9,6 @@ import model.readWrite.FileHandler;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Connections<T>>> {
     private FamilyTree<T> tree;
@@ -46,6 +45,15 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
 
     public String sortByName() {
         return tree.sortByName();
+    }
+
+    public String printTreeConnections() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<T, Connections<T>> item:
+             tree) {
+            sb.append(showConnections(item.getKey()));
+        }
+        return sb.toString();
     }
 
     @Override
