@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>>>{
+public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>>> {
     private View view;
     private Service<Person> service;
 
@@ -20,7 +20,7 @@ public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>
         this.service = new Service<>();
     }
 
-    public void addPerson (Person person) {
+    public void addPerson(Person person) {
         service.addPerson(person);
     }
 
@@ -36,11 +36,11 @@ public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>
         return service.showConnections(person);
     }
 
-    public TreeMap<Person, Connections<Person>> sortByAge() {
+    public String sortByAge() {
         return service.sortByAge();
     }
 
-    public TreeMap<Person, Connections<Person>> sortByName() {
+    public String sortByName() {
         return service.sortByName();
     }
 

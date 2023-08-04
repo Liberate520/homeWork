@@ -57,16 +57,26 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
                 family.get(person);
     }
 
-    public TreeMap<T, Connections<T>> sortByAge() {
-        TreeMap<T, Connections<T>> result = new TreeMap<>(new ComparatorByAge());
-        result.putAll(family);
-        return result;
+    public String sortByAge() {
+        TreeMap<T, Connections<T>> treeMap = new TreeMap<>(new ComparatorByAge());
+        treeMap.putAll(family);
+        StringBuilder sb = new StringBuilder();
+        for (T item :
+                treeMap.keySet()) {
+            sb.append(item).append("\n");
+        }
+        return sb.toString();
     }
 
-    public TreeMap<T, Connections<T>> sortByName() {
-        TreeMap<T, Connections<T>> result = new TreeMap<>(new ComparatorByName());
-        result.putAll(family);
-        return result;
+    public String sortByName() {
+        TreeMap<T, Connections<T>> treeMap = new TreeMap<>(new ComparatorByName());
+        treeMap.putAll(family);
+        StringBuilder sb = new StringBuilder();
+        for (T item :
+                treeMap.keySet()) {
+            sb.append(item).append("\n");
+        }
+        return sb.toString();
     }
 
     @Override

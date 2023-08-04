@@ -40,11 +40,11 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
         return tree.showConnections(person);
     }
 
-    public TreeMap<T, Connections<T>> sortByAge() {
+    public String sortByAge() {
         return tree.sortByAge();
     }
 
-    public TreeMap<T, Connections<T>> sortByName() {
+    public String sortByName() {
         return tree.sortByName();
     }
 
@@ -59,8 +59,8 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
 
     public ArrayList<T> enumeratedList() {
         ArrayList<T> result = new ArrayList<>();
-        for (Map.Entry<T, Connections<T>> pair:
-             tree) {
+        for (Map.Entry<T, Connections<T>> pair :
+                tree) {
             T item = pair.getKey();
             result.add(item);
         }
@@ -72,6 +72,6 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
     }
 
     public void read() {
-        this.tree =  (FamilyTree<T>) fileHandler.read();
+        this.tree = (FamilyTree<T>) fileHandler.read();
     }
 }

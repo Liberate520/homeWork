@@ -21,10 +21,10 @@ public class TextUI {
         this.promptSurname = "Введите фамилию:\n";
         this.promptPatronymic = "Введите отчество:\n";
         this.promptGender = """
-            Выберите пол:
-            1. муж
-            2. жен
-            """;
+                Выберите пол:
+                1. муж
+                2. жен
+                """;
         this.promptDateBirth = "Введите дату рождения в формате dd-MM-yy:\n";
         this.promptDateDeath = "Введите дату смерти в формате dd-MM-yy или пустую строку:\n";
         this.promptListNumber = "Выберите пункт списка по номеру:\n";
