@@ -1,8 +1,8 @@
 package model.Service;
 
 import model.FamilyTree.FamilyTree;
-import model.FamilyTree.FileHolders.FileReader;
-import model.FamilyTree.FileHolders.FileSaver;
+import model.FamilyTree.FileHolders.Readable;
+import model.FamilyTree.FileHolders.Savable;
 import model.Organisms.Dogs.Dog;
 import model.Organisms.Human.Human;
 import model.Organisms.Person.Person;
@@ -18,15 +18,15 @@ public class Service{
     public Service(){
         this.tree = new FamilyTree<>();
     }
-    public void addPerson(OrganismType type, String name, LocalDate birthDate, Sex sex) {
-        if(type == OrganismType.dog){
-            Dog somebody = new Dog(type, name, birthDate, sex);
-            tree.addPerson(somebody);
-        }else {
-            Human somebody = new Human(type, name, birthDate, sex);
+    public void addDog(String name, LocalDate birthDate, Sex sex) {
+            Dog somebody = new Dog(OrganismType.dog, name, birthDate, sex);
             tree.addPerson(somebody);
         }
+    public void addHuman(String name, LocalDate birthDate, Sex sex) {
+        Human somebody = new Human(OrganismType.human, name, birthDate, sex);
+        tree.addPerson(somebody);
     }
+
     public void sortByName(){
         tree.sortByName();
     }
@@ -36,15 +36,21 @@ public class Service{
     public List<Person> getTree(){
         return tree.getTree();
     }
-    public void writeToFile(){
-        FileSaver fs = new FileSaver();
-        fs.save(tree);
+    public void writeToFile(Savable saver){
+        saver.save(tree);
     }
-    public void readFromFile(){
-        FileReader fr = new FileReader();
-        this.tree = fr.read();
+    public void readFromFile(Readable reader){
+        this.tree = reader.read();
     }
     public Person getPerson(int index){
         return tree.getTree().get(index);
+    }
+
+    public void setSpouse(int index1, int index2){
+        getPerson(index1).setSpouse(getPerson(index2));
+        getPerson(index2).setSpouse(getPerson(index1));
+    }
+    public void setChild(int indexParent, int indexChild){
+        getPerson(indexParent).setChild(getPerson(indexChild));
     }
 }

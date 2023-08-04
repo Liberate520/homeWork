@@ -1,8 +1,12 @@
 package view;
 
 
+import model.Organisms.Person.OrganismType;
+import model.Organisms.Person.Sex;
 import presenter.Presenter;
 import view.commands.*;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class UI {
@@ -26,6 +30,26 @@ public class UI {
     }
     public void printAnswer(String answer){
         System.out.println(answer);
-    } //TODO не понял зачем этот метод обязательный
+    } //TODO не понял почему этот метод обязательный
 
-}
+    public String inputName(Scanner scanner){
+        Text.inputName();
+        return scanner.next();
+    }
+
+    public Sex inputSex() {
+        Text.inputSex();
+        return Sex.valueOf(scanner.next());
+    }
+
+    public LocalDate inputBirthday() {
+        Text.inputBirthday();
+        return LocalDate.parse(scanner.next());
+    }
+
+    public OrganismType inputType(Scanner scanner) {
+        Text.inputOrganismType();
+        String organismTypeString = scanner.next();
+        return OrganismType.valueOf(organismTypeString);
+    }
+    }

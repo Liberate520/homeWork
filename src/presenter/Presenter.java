@@ -1,14 +1,17 @@
 package presenter;
 
-import model.FamilyTree.FamilyTree;
+import model.FamilyTree.FileHolders.FileReader;
+import model.FamilyTree.FileHolders.FileSaver;
 import model.Organisms.Person.OrganismType;
 import model.Organisms.Person.Person;
 import model.Organisms.Person.Sex;
 import model.Service.Service;
+import view.Text;
 import view.UI;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class Presenter {
     private UI ui;
@@ -20,9 +23,7 @@ public class Presenter {
     }
 
     public List<Person> getTree() {return service.getTree();}
-    public void addPerson(OrganismType type, String name, LocalDate birthDate, Sex sex) {
-        service.addPerson(type, name, birthDate, sex);
-    }
+
 
     public void sortByName() {
         service.sortByName();
@@ -33,21 +34,30 @@ public class Presenter {
     }
 
     public void writeToFile() {
-        service.writeToFile();
+        service.writeToFile(new FileSaver());
     }
 
     public void readFromFile() {
-        service.readFromFile();
+        service.readFromFile(new FileReader());
     }
 
-    private Person getPerson(int index){
-        return service.getPerson(index);
-    }
     public void setSpouse(int index1, int index2){
-        getPerson(index1).setSpouse(getPerson(index2));
-        getPerson(index2).setSpouse(getPerson(index1));
+        service.setSpouse(index1, index2);
     }
     public void setChild(int indexParent, int indexChild){
-        getPerson(indexParent).setChild(getPerson(indexChild));
+        service.setChild(indexParent, indexChild);
+    }
+
+    public void createPerson(){
+        Scanner scanner = new Scanner(System.in);
+        OrganismType organismType = ui.inputType(scanner);
+        String name = ui.inputName(scanner);
+        LocalDate date = ui.inputBirthday();
+        Sex sex = ui.inputSex();
+        if (organismType == OrganismType.dog){
+            service.addDog(name,date,sex);
+        } else if (organismType == OrganismType.human) {
+            service.addHuman(name,date,sex);
+        }
     }
 }

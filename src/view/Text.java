@@ -31,4 +31,10 @@ public abstract class Text {
     public static void setChildChild() {
         System.out.println("Select child");
     }
+
+//    public static void getInfoCreation() {
+//        System.out.println("Whom you want to create?" +
+//                "1. Human;" +
+//                "2. Dog\n");
+//    }
 }
