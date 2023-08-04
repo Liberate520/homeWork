@@ -5,16 +5,17 @@ import human.Human;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FamilyItem {
+public interface FamilyItem<E> {
     LocalDate getDateOfBirth();
     String getName();
     void setId(int id);
     int getId();
-    List<Human> getChildren();
+    List<E> getChildren();
     String getSpouseInfo();
 
     Object getSpouse();
 
     List<Human> getParents();
 
+    boolean addParent(E human);
 }

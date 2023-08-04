@@ -5,11 +5,12 @@ import human.HumanIterator;
 import human.comparator.ComparatorSortByDateOfBirth;
 import human.comparator.ComparatorSortByName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends FamilyItem> implements Iterable<E>{
+public class FamilyTree<E extends FamilyItem<E>> implements Serializable,Iterable<E>{
     private int id;
     private int humanId;
     private List<E> humanList;
@@ -85,8 +86,8 @@ public class FamilyTree<E extends FamilyItem> implements Iterable<E>{
         }
     }
     private void addToChildren(E human){
-        for (Human child: human.getChildren()){
-            child.addParent((Human) human);
+        for (E child: human.getChildren()){
+            child.addParent((E) human);
         }
     }
 
