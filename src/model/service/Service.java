@@ -54,7 +54,7 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<T, Connections<T>> item:
              tree) {
-            sb.append(showConnections(item.getKey()));
+            sb.append(showConnections(item.getKey())).append("\n");
         }
         return sb.toString();
     }

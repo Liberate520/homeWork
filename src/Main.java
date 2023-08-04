@@ -1,10 +1,5 @@
-import model.familyTree.ConnectionType;
-import model.person.Gender;
-import model.person.Person;
-import model.service.Service;
-import view.ConsoleUI;
 
-import java.time.LocalDate;
+import view.ConsoleUI;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,12 +9,12 @@ public class Main {
         ConsoleUI view = new ConsoleUI();
 //        view.addPerson();
         view.read();
-        view.putConnection(true);
-        view.putConnection(true);
-//        view.printTree();
         view.printTreeConnections();
+//        view.putConnection(true);
+//        view.printTree();
 //        view.showConnections();
 //        view.write();
+        view.sortTree("age");
     }
 
 //    public static Service<Person> makeTree() {
