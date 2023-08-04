@@ -1,4 +1,4 @@
-package fam_tree;
+package modell.fam_tree;
 
 import java.util.Iterator;
 import java.util.List;

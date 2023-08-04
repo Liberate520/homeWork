@@ -1,4 +1,4 @@
-package human;
+package modell.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import fam_tree.TreeNode;
+import modell.fam_tree.TreeNode;
 
 public class Human implements Serializable, TreeNode<Human> {
     private long id;

@@ -1,9 +1,10 @@
-package fam_tree;
-
-import human.HumanComparatorByName;
-import human.HumanComparatorByBirthDate;
+package modell.fam_tree;
 
 import java.util.List;
+
+import modell.human.HumanComparatorByBirthDate;
+import modell.human.HumanComparatorByName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

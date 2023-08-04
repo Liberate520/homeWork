@@ -1,8 +1,8 @@
-package human;
+package modell.human;
 
 import java.util.Comparator;
 
-import fam_tree.TreeNode;
+import modell.fam_tree.TreeNode;
 
 public class HumanComparatorByBirthDate<E extends TreeNode<E>> implements Comparator<E> {
     @Override
