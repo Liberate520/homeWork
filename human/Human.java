@@ -1,12 +1,14 @@
 package homeWork.human;
 
+import homeWork.family_tree.family_tree.TreeNode;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeNode<Human> {
     private long id;
     private final String name;
     private final Gender gender;
@@ -57,6 +59,7 @@ public class Human implements Serializable {
     public Human getFather; {
         for (Human parent : parents){
             if (parent.getGender() == Gender.Male){
+
             }
         }
 
@@ -64,6 +67,7 @@ public class Human implements Serializable {
     public Human getMother; {
         for (Human parent : parents) {
             if (parent.getGender() == Gender.Female) {
+
             }
         }
     }
