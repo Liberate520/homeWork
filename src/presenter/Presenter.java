@@ -17,7 +17,7 @@ public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new Service<>();
+        this.service = new Service<>(this);
     }
 
     public void addPerson(Person person) {

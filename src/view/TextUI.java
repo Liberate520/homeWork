@@ -16,19 +16,19 @@ public class TextUI {
     protected String promptShowConnections;
 
     public TextUI() {
-        this.goodbye = "Программа завершает работу.\n";
-        this.promptName = "Введите имя:\n";
-        this.promptSurname = "Введите фамилию:\n";
-        this.promptPatronymic = "Введите отчество:\n";
+        this.goodbye = "Программа завершает работу.";
+        this.promptName = "Введите имя:";
+        this.promptSurname = "Введите фамилию:";
+        this.promptPatronymic = "Введите отчество:";
         this.promptGender = """
                 Выберите пол:
                 1. муж
                 2. жен
                 """;
-        this.promptDateBirth = "Введите дату рождения в формате dd-MM-yy:\n";
-        this.promptDateDeath = "Введите дату смерти в формате dd-MM-yy или пустую строку:\n";
-        this.promptListNumber = "Выберите пункт списка по номеру:\n";
-        this.promptConnectFrom = "От кого создать родственную связь?\n";
+        this.promptDateBirth = "Введите дату рождения в формате dd-MM-yyyy:";
+        this.promptDateDeath = "Введите дату смерти в формате dd-MM-yyyy или пустую строку:";
+        this.promptListNumber = "Выберите пункт списка по номеру:";
+        this.promptConnectFrom = "От кого создать родственную связь?";
         this.promptConnectionType = """
                 Тип родственной связи:
                 1. Родитель
@@ -36,8 +36,8 @@ public class TextUI {
                 3. Брат/Сестра
                 4. Муж/Жена
                 """;
-        this.promptConnectTo = "К кому создать родственную связь?\n";
-        this.inputError = "Ошибка ввода, попробуйте еще раз.\n";
-        this.promptShowConnections = "Чьи родственные связи вы хотите посмотреть?\n";
+        this.promptConnectTo = "К кому создать родственную связь?";
+        this.inputError = "Ошибка ввода, попробуйте еще раз.";
+        this.promptShowConnections = "Чьи родственные связи вы хотите посмотреть?";
     }
 }
