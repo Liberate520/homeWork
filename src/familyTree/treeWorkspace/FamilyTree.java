@@ -15,8 +15,12 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         familyTree = new ArrayList<>();
     }
 
-    public void addPerson(E person) {
+    public boolean addPerson(E person) {
+        if (!familyTree.contains(person)){
         familyTree.add(person);
+        return true;
+        }
+        return false;
     }
 
     public E getPerson(int id) {
