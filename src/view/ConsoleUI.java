@@ -107,6 +107,14 @@ public class ConsoleUI implements View {
         System.out.println(presenter.printTree());
     }
 
+    public void write() {
+        presenter.write();
+    }
+
+    public void read() {
+        presenter.read();
+    }
+
     public LocalDate inputDate() {
         String input = scanner.nextLine();
         if (input.isEmpty())
