@@ -17,5 +17,5 @@ public abstract class Command {
     public String getDescripion(){
         return descripion;
     }
-    public abstract void execut();
+    public abstract void execute();
 }

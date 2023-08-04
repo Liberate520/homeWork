@@ -13,10 +13,10 @@ import java.util.List;
 public class Human implements Serializable, Comparable<Human>, GeneologiTreeItem<Human> {
 
     private int id;
-    private List<Human> parents;
-    private List<Human> children;
-    private Gender gender;
-    private String name;
+    private final List<Human> parents;
+    private final List<Human> children;
+    private final Gender gender;
+    private final String name;
 
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -49,29 +49,21 @@ public class Human implements Serializable, Comparable<Human>, GeneologiTreeItem
 
 
     public boolean addChild(Human child) {
-        try {
             if (!children.contains(child)) {
                 children.add(child);
                 return true;
             }
             return false;
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
-        }
-        return false;
     }
 
     public boolean addParents(Human parent) {
-        try {
-            if (!parents.contains(parent)) {
-                parents.add(parent);
-                return true;
-            }
-            return false;
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
+
+        if (!parents.contains(parent)) {
+            parents.add(parent);
+            return true;
         }
         return false;
+
     }
 
 
@@ -81,32 +73,22 @@ public class Human implements Serializable, Comparable<Human>, GeneologiTreeItem
     }
 
     public Human getFather() {
-        try {
-            for (Human parent : parents) {
-                if (parent.getGender() == Gender.Male) {
-                    return parent;
-                }
+        for (Human parent : parents)
+            if (parent.getGender() == Gender.Male) {
+                return parent;
             }
-            return null;
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
-        }
         return null;
+
     }
 
     public Human getMother() {
-        try {
-            for (Human parent : parents) {
-                if (parent.getGender() == Gender.Female) {
-                    return parent;
-                }
-                return null;
+        for (Human parent : parents)
+            if (parent.getGender() == Gender.Female) {
+                return parent;
             }
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
-        }
         return null;
     }
+
 
     public int getLife(LocalDate birthDate, LocalDate deathDate) {
         Period diff = Period.between(birthDate, deathDate);

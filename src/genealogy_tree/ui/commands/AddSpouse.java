@@ -9,7 +9,7 @@ public class AddSpouse extends Command {
         super(" Add new spouse.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().addSposue();
     }
 

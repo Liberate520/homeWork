@@ -9,7 +9,7 @@ public class SetDivorce extends Command {
         super(" Divorce two person.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().setDivorce();
     }
 

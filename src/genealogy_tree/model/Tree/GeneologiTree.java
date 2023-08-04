@@ -49,9 +49,8 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
     }
 
     public void addParents(E human) {
-        for (E parents : human.getParents()) {
+        for (E parents : human.getParents())
             parents.addParents(human);
-        }
     }
 
     public List<E> getSiblings(int id) {
@@ -81,21 +80,17 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
     }
 
     public boolean setWedding(int humanId1, int humanId2) {
-        try {
+
         if (checkId(humanId1) && checkId(humanId2)) {
             E human1 = getById(humanId1);
             E human2 = getById(humanId2);
             return setWedding(human1, human2);
         }
         return false;
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
-        }
-        return false;
     }
 
     public boolean setWedding(E human1, E human2) {
-        try {
+
         if (human1.getSpouse() == null && human2.getSpouse() == null) {
             human1.setSpouse(human2);
             human2.setSpouse(human1);
@@ -103,40 +98,28 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
         } else {
             return false;
         }
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
-        }
-        return false;
+
     }
 
     public boolean setDivorce(int humanId1, int humanId2) {
-        try {
-            if (checkId(humanId1) && checkId(humanId2)) {
-                E human1 = getById(humanId1);
-                E human2 = getById(humanId2);
-                return setDivorce(human1, human2);
+        if (checkId(humanId1) && checkId(humanId2)) {
+            E human1 = getById(humanId1);
+            E human2 = getById(humanId2);
+            return setDivorce(human1, human2);
 
-            }
-            return false;
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
         }
         return false;
     }
 
     public boolean setDivorce(E human1, E human2) {
-        try {
-            if (human1.getSpouse() != null && human2.getSpouse() != null) {
-                human1.setSpouse(null);
-                human2.setSpouse(null);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Not human");
+
+        if (human1.getSpouse() != null && human2.getSpouse() != null) {
+            human1.setSpouse(null);
+            human2.setSpouse(null);
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public boolean remove(int humansId) {

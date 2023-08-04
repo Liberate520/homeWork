@@ -9,7 +9,7 @@ public class AddParents extends Command {
         super(" Add new parents.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().addParents();
     }
 

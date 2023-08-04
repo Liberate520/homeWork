@@ -9,7 +9,7 @@ public class SortByName extends Command {
         super(" Sort them by Name.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().sortByName();
     }
 }

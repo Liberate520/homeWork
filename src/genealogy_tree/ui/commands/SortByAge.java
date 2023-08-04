@@ -9,7 +9,7 @@ public class SortByAge extends Command {
         super(" Sort them by age of people.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().sortByAge();
     }
 }

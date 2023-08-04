@@ -33,28 +33,28 @@ public class Presenter {
     }
 
 
-    public void addParetns() {
-        service.addParents();
+    public void addParetns(int id, int ids) {
+        service.addParents(id,ids);
         getInfo();
     }
 
-    public void addChildren() {
-        service.addChildren();
+    public void addChildren(int id, int ids) {
+        service.addChildren(id,ids);
         getInfo();
     }
 
-    public void addSpouse() {
-        service.addSpouse();
+    public void addSpouse(int id, int ids) {
+        service.addSpouse(id,ids);
         getInfo();
     }
 
-    public void setDivorce() {
-        service.setDivorce();
+    public void setDivorce(int id,int ids) {
+        service.setDivorce(id,ids);
         getInfo();
     }
 
-    public void getSiblings() {
-        service.getSiblings();
+    public void getSiblings(int id) {
+        service.getSiblings(id);
         getInfo();
     }
 }

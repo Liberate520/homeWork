@@ -55,23 +55,46 @@ public class ConsoleUI implements View {
     }
 
     public void addParents() {
-        presenter.addParetns();
+        System.out.println("Who is person");
+        int id = scanner.nextInt();
+        System.out.println("Who is parents");
+        int ids = scanner.nextInt();
+        presenter.addParetns(id,ids);
+        System.out.println("Add parents");
     }
 
     public void addChildren() {
-        presenter.addChildren();
+        System.out.println("Who is person");
+        int id = scanner.nextInt();
+        System.out.println("Who is your children?");
+        int ids = scanner.nextInt();
+        presenter.addChildren(id,ids);
+        System.out.println("Add children");
     }
 
     public void addSposue() {
-        presenter.addSpouse();
+        System.out.println("Who is person");
+        int id = scanner.nextInt();
+        System.out.println("Choose a spose");
+        int ids = scanner.nextInt();
+        presenter.addSpouse(id,ids);
+        System.out.println("Wedding!");
     }
 
     public void setDivorce() {
-        presenter.setDivorce();
+        System.out.println("Who is person");
+        int id = scanner.nextInt();
+        System.out.println("Choose a spose");
+        int ids = scanner.nextInt();
+        presenter.setDivorce(id,ids);
+        System.out.println("Divorce!");
     }
 
     public void getSiblings() {
-        presenter.getSiblings();
+        System.out.println("Who is person");
+        int id = scanner.nextInt();
+        presenter.getSiblings(id);
+        System.out.println("Siblings a person");
     }
 
     public void addHuman() {

@@ -9,7 +9,7 @@ public class AddHuman extends Command {
         super(" Add new human.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().addHuman();
     }
 

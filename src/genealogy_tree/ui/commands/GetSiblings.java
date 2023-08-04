@@ -9,7 +9,7 @@ public class GetSiblings extends Command {
         super(" Get siblings", consoleUI);
     }
 
-    public void execut() {
+    public void execute() {
         getConsoleUI().getSiblings();
     }
 

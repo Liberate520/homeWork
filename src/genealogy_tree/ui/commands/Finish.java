@@ -6,10 +6,10 @@ public class Finish extends Command {
 
 
     public Finish(ConsoleUI consoleUI){
-        super(" Finish work.",consoleUI);
+        super("Finish work.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().finish();
     }
 }

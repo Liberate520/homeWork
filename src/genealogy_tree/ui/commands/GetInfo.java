@@ -9,7 +9,7 @@ public class GetInfo extends Command {
         super(" Display family trees.",consoleUI);
     }
 
-    public void execut(){
+    public void execute(){
         getConsoleUI().getInfo();
     }
     }
