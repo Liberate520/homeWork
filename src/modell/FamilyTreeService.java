@@ -5,7 +5,7 @@ import modell.human.Human;
 import modell.file_handler.FileHandler;
 
 public class FamilyTreeService {
-    FileHandler<Human> fileHandler = new FileHandler<>("homeWork_family_tree/output/human_data.ser");
+    private FileHandler<Human> fileHandler;
     private FamilyTree<Human> familyTree;
 
     public FamilyTreeService(FamilyTree<Human> familyTree) {
