@@ -1,6 +1,7 @@
 package view;
 
 public class TextUI {
+    protected String goodbye;
     protected String promptName;
     protected String promptSurname;
     protected String promptPatronymic;
@@ -12,8 +13,10 @@ public class TextUI {
     protected String promptConnectTo;
     protected String promptConnectionType;
     protected String inputError;
+    protected String promptShowConnections;
 
     public TextUI() {
+        this.goodbye = "Программа завершает работу.\n";
         this.promptName = "Введите имя:\n";
         this.promptSurname = "Введите фамилию:\n";
         this.promptPatronymic = "Введите отчество:\n";
@@ -35,5 +38,6 @@ public class TextUI {
                 """;
         this.promptConnectTo = "К кому создать родственную связь?\n";
         this.inputError = "Ошибка ввода, попробуйте еще раз.\n";
+        this.promptShowConnections = "Чьи родственные связи вы хотите посмотреть?\n";
     }
 }
