@@ -4,9 +4,10 @@ import family_tree.view.ConsoleUI;
 
 public class AddHuman extends Command {
     public AddHuman(ConsoleUI consoleUI) {
-        super("Добавить человека",consoleUI);
+        super("Добавить человека", consoleUI);
     }
-    public void execute(){
+
+    public void execute() {
         getConsoleUI().addHuman();
     }
 }

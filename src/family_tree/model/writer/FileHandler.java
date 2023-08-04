@@ -21,7 +21,7 @@ public class FileHandler implements Writable {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath));
             return objectInputStream.readObject();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

@@ -14,36 +14,38 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service=new Service();
+        service = new Service();
     }
 
-    public void addHuman(String name, Gender gender, LocalDate localDate){
-        service.addHuman(name,gender,localDate);
+    public void addHuman(String name, Gender gender, LocalDate localDate) {
+        service.addHuman(name, gender, localDate);
     }
 
-    public void wedding(long idHusband,long idWife){
-        service.wedding(idHusband,idWife);
+    public void wedding(long idHusband, long idWife) {
+        service.wedding(idHusband, idWife);
     }
 
     public void addChildren(long idChildren, long idFather, long idMother) {
         service.addChildren(idChildren, idFather, idMother);
     }
-    public void addParents(long idChildren, long idFather, long idMother){
+
+    public void addParents(long idChildren, long idFather, long idMother) {
         service.addParent(idChildren, idFather, idMother);
     }
-    public void getHumanListInfo(){
-        String info=service.getHumanInfo();
+
+    public void getHumanListInfo() {
+        String info = service.getHumanInfo();
         view.printAnswer(info);
     }
-    public void readFile(){
+
+    public void readFile() {
         FileHandler fileHandler = new FileHandler();
-        //TODO путь
         FamilyTree tree = (FamilyTree) fileHandler.read("src/family_tree/model/data/tree.out");
         service.setTree(tree);
     }
-    public void saveFile(){
-        FileHandler fileHandler=new FileHandler();
-        //TODO путь
-        fileHandler.save(service.getTree(),"src/family_tree/model/data/tree.out");
+
+    public void saveFile() {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(service.getTree(), "src/family_tree/model/data/tree.out");
     }
 }

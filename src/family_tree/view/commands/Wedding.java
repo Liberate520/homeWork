@@ -4,9 +4,10 @@ import family_tree.view.ConsoleUI;
 
 public class Wedding extends Command {
     public Wedding(ConsoleUI consoleUI) {
-        super("Свадьба",consoleUI);
+        super("Свадьба", consoleUI);
     }
-    public void execute(){
+
+    public void execute() {
         getConsoleUI().wedding();
     }
 }

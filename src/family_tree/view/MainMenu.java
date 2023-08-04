@@ -9,7 +9,7 @@ public class MainMenu {
     private List<Command> commandList;
 
     public MainMenu(ConsoleUI consoleUI) {
-        commandList=new ArrayList<>();
+        commandList = new ArrayList<>();
 
         commandList.add(new ReadFile(consoleUI));
         commandList.add(new PrintInfo(consoleUI));
@@ -21,7 +21,7 @@ public class MainMenu {
         commandList.add(new Finish(consoleUI));
     }
 
-    public String menu(){
+    public String menu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commandList.size(); i++) {
             stringBuilder.append(i + 1);
@@ -31,11 +31,13 @@ public class MainMenu {
         }
         return stringBuilder.toString();
     }
-    public void execute(int choice){
+
+    public void execute(int choice) {
         Command command = commandList.get(choice - 1);
         command.execute();
     }
-    public int getSize(){
+
+    public int getSize() {
         return commandList.size();
     }
 }

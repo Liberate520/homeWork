@@ -10,12 +10,12 @@ public class FamilyTreeIterator<E extends FamilyTreeInterface> implements Iterat
 
     public FamilyTreeIterator(List<E> treeList) {
         this.treeList = treeList;
-        index=0;
+        index = 0;
     }
 
     @Override
     public boolean hasNext() {
-        return treeList.size()>index;
+        return treeList.size() > index;
     }
 
     @Override

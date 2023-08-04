@@ -4,9 +4,10 @@ import family_tree.view.ConsoleUI;
 
 public class AddParents extends Command {
     public AddParents(ConsoleUI consoleUI) {
-        super("Добавить родителей",consoleUI);
+        super("Добавить родителей", consoleUI);
     }
-    public void execute(){
+
+    public void execute() {
         getConsoleUI().addParents();
     }
 }
