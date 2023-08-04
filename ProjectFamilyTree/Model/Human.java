@@ -1,4 +1,4 @@
-package homeWork.ProjectFamilyTree;
+package homeWork.ProjectFamilyTree.Model;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Family_Tree_Item {
     private String name;
     private Human mother, father;
     private List<Human> children;

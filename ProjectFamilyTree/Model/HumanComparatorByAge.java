@@ -1,6 +1,4 @@
-package homeWork.ProjectFamilyTree;
-
-import homeWork.ProjectFamilyTree.Human;
+package homeWork.ProjectFamilyTree.Model;
 
 import java.util.Comparator;
 

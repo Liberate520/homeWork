@@ -1,4 +1,4 @@
-package homeWork.ProjectFamilyTree;
+package homeWork.ProjectFamilyTree.Model;
 
 import java.io.Serializable;
 import java.io.*;

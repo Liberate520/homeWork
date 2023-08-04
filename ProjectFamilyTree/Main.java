@@ -1,11 +1,17 @@
 package homeWork.ProjectFamilyTree;
 
+import homeWork.ProjectFamilyTree.Model.Family_tree;
+import homeWork.ProjectFamilyTree.Model.Gender;
+import homeWork.ProjectFamilyTree.Model.Human;
+import homeWork.ProjectFamilyTree.View.View;
+import homeWork.ProjectFamilyTree.View.ConsoleUI;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Family_tree familyTree = new Family_tree();
+/*        Family_tree familyTree = new Family_tree();
         Human f1 = new Human("Konstantin", LocalDate.of(1933,12,1), LocalDate.of(1998,11,25), Gender.Male);
         Human m1 = new Human("Efrosinya", LocalDate.of(1934, 7,14), Gender.Female);
         Human h1 = new Human("Vasya", m1, f1, LocalDate.of(1950, 5, 30), null, Gender.Male);
@@ -23,12 +29,15 @@ public class Main {
         familyTree.setParentsAndChilds(child2, h1, h2);
         familyTree.siblings(child1,child2);
         System.out.println(familyTree.getFamilyTree());
-        /*familyTree.sortByAge();*/
+        *//*familyTree.sortByAge();*//*
         familyTree.sortByName();
         System.out.println(familyTree.getFamilyTree());
-/*        FileHandler s1 = new FileHandler();
+*//*        FileHandler s1 = new FileHandler();
         s1.Save(familyTree);
         Family_tree s2 = (Family_tree) s1.Load();
         System.out.println("Family Tree after serialize: \n" + s2.getFamilyTree());*/
+
+        View view = new ConsoleUI();
+        view.start();
     }
 }
