@@ -21,9 +21,6 @@ public class Human implements Serializable {
         this.deathday = deathday;
     }
 
-
-
-
     public String getName() {
         return name;
     }
@@ -49,9 +46,19 @@ public class Human implements Serializable {
     }
 
 
-    @Override
     public String toString() {
-        return "Имя: " + getName() + ", Пол: " + getGender() + " Отец: " + getFather() + ", Мать: " + getMather() + " Дети: " + getChildren() + ", Дата рождения: " + getBirthday();
+        return getInfo();
+    }
+
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: ");
+        sb.append(name);
+        sb.append(", день рожденья: ");
+        sb.append(birthday);
+        sb.append("\n");
+
+        return sb.toString();
     }
 
 

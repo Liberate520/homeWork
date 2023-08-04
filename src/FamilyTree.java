@@ -8,4 +8,8 @@ public class FamilyTree implements Serializable {
     public void familyAdd(Human name){
         familyList.add(name);
     }
+
+    public void familyInfo(){
+        System.out.println(familyList + "\n");
+    }
 }
