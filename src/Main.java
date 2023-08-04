@@ -1,32 +1,43 @@
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
 
-        Human person1 = new Human("Anna", "Koshak", Gender.FEMALE);
-        Human person2 = new Human("Vika", "Macarova", Gender.FEMALE);
-        Human person3 = new Human("Stepan", "Terent", Gender.MALE);
-        Human person4 = new Human("Ily", "Macarov", Gender.MALE);
-        Human person5 = new Human("Yriy", "Savich", Gender.MALE);
+        Human Anna = new Human("Анна", "Кошак", 36);
+        Human Vika = new Human("Вика", "Макарова", 10);
+        Human Stepan = new Human("Степан", "Макаров", 3);
+        Human Ilya = new Human("Илья", "Макаров", 65);
+        Human Yriy = new Human("Юрий", "Савич", 40);
+        Human Kirill = new Human("Кирилл", "Савич", 15);
+        Human Vera = new Human("Вера", "Савич", 39);
+        Human Liza = new Human("Лиза", "Кошак", 6);
+        Human Alena = new Human("Алена", "Макарова", 30);
+        Human Sergey = new Human("Сергей", "Макаров", 35);
 
-        familyTree.addPerson(person1);
-        familyTree.addPerson(person2);
-        familyTree.addPerson(person3);
-        familyTree.addPerson(person4);
-        familyTree.addPerson(person5);
+        GeoTree familyTree = new GeoTree();
 
-        familyTree.addParentChildRelationship(person1, person2);
-        familyTree.addParentChildRelationship(person1, person4);
-        familyTree.addParentChildRelationship(person3, person1);
-        familyTree.addParentChildRelationship(person3, person5);
+        familyTree.appendPerentChild(Anna, Liza);/* Анна мама Лизы, семья Кошак */
+        familyTree.appendPerentChild(Ilya, Sergey);/* Илья отец Сергея, Макаровы */
+        familyTree.appendPerentChild(Alena, Vika);/* Алена мама Вики , Макаровы */
+        familyTree.appendPerentChild(Alena, Stepan);/* Алена мама Степана , Макаровы */
+        familyTree.appendPerentChild(Sergey, Vika);/* Сергей отец Вики , Макаровы */
+        familyTree.appendPerentChild(Sergey, Stepan);/* Сергей отец Степана , Макаровы */
+        familyTree.appendPerentChild(Yriy, Kirill);/* Юрий отец Кирилла , Савич */
+        familyTree.appendPerentChild(Vera, Kirill);/* Вера мама Кирилла , Савич */
+        familyTree.appendVifeHusbent(Sergey, Alena);/* Сергей муж Алены , Макаровы */
+        familyTree.appendVifeHusbent(Yriy, Vera);/* Юрий муж Веры , Савич */
 
-        Human selectedPerson = person1;
-        List<Human> children = familyTree.getChildren(selectedPerson);
+        // Ищем детей Анны
+        System.out.println("Дети " + Anna);
+        System.out.println(new Research(familyTree).spend(Anna, Relationship.parent));
+        // Ищем детей Алены
+        System.out.println("Дети " + Alena);
+        System.out.println(new Research(familyTree).spend(Alena, Relationship.parent));
 
-        System.out.println("Дети из семьи " + selectedPerson.getLast_name() + ":");
-        for (Human child : children) {
-            System.out.println(child.getName());
-        }
+        // Ищем мужа Ирины (Чей муж Сергей?)
+        System.out.println(Sergey + " Муж");
+        System.out.println(new Research(familyTree).spend(Sergey, Relationship.husbent));
+
+        // Ищем людей определенного возраста
+        System.out.println(new Research(familyTree).searchAge());
     }
 }
