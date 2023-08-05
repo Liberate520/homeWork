@@ -47,7 +47,16 @@ public class Console implements ConsoleUI {
 
     @Override
     public void printMenu() {
-        System.out.println(ConsoleMenu.getInstance());
+        System.out.printf("%-40s %s \n", "Для выхода из программы нажмите: ", MenuPoint.EXIT);
+        System.out.printf("Выберите пункт меню: \n");
+        System.out.printf("%-40s %s \n", "Для добавления человека нажмите: ", MenuPoint.ADD_PERSON);
+        System.out.printf("%-40s %s \n", "Для печати нажмите: ", MenuPoint.PRINT);
+        System.out.printf("%-40s %s \n", "Для сохранения программы нажмите: ", MenuPoint.SAVE);
+        System.out.printf("%-40s %s \n", "Для загрузки программы нажмите: ", MenuPoint.LOAD);
+        System.out.printf("%-40s %s \n", "Для сортировки по полу нажмите: ", MenuPoint.SORT_BY_GENDER);
+        System.out.printf("%-40s %s \n", "Для сортировки по возрасту нажмите: ", MenuPoint.SORT_BY_AGE);
+        System.out.printf("%-40s %s \n", "Для сортировки по имени нажмите: ", MenuPoint.SORT_BY_NAME);
+        System.out.printf("%-40s %s \n","Для добавления ребенка нажмите: ",MenuPoint.ADD_CHILDREN);
     }
 
     private String scan() {
