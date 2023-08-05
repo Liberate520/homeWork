@@ -1,8 +1,8 @@
-package ru.geekbrains.family_tree.comparators;
+package ru.geekbrains.family_tree.model.comparators;
 
 import java.util.Comparator;
 
-import ru.geekbrains.family_tree.family_tree.FamilyMember;
+import ru.geekbrains.family_tree.model.family_tree.FamilyMember;
 
 public class FamilyMemberByBirthDateComparator<E extends FamilyMember> implements Comparator<E> {
     

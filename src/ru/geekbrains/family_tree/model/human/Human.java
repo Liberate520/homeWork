@@ -1,16 +1,21 @@
-package ru.geekbrains.family_tree.human;
+package ru.geekbrains.family_tree.model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import ru.geekbrains.family_tree.family_tree.FamilyMember;
+import ru.geekbrains.family_tree.model.family_tree.FamilyMember;
 
 /**
- * Человек, обязательно имеющий имя, фамилию, пол и дату рождения. Может иметь
- * дату смерти, отца, мать и детей.
+ * Человек, обязательно имеющий числовой идентификатор, имя, фамилию, пол и
+ * дату рождения. Может иметь дату смерти, отца, мать и детей.
  */
 public class Human implements FamilyMember, Serializable {
+
+    /**
+     * Числовой идентификатор человека.
+     */
+    private long identifier;
 
     /**
      * Имя человека.
@@ -52,17 +57,10 @@ public class Human implements FamilyMember, Serializable {
      */
     private ArrayList<Human> children;
 
-    public Human(String name, String surname, Sex sex, LocalDate birthDate,
-                 LocalDate deathDate, Human father, Human mother,
-                 ArrayList<Human> children) {
-        if (name.isEmpty()) {
-            throw new RuntimeException("Не введено имя.");
-        }
-
-        if (surname.isEmpty()) {
-            throw new RuntimeException("Не введена фамилия.");
-        }
-
+    public Human(long identifier, String name, String surname, Sex sex,
+                 LocalDate birthDate, LocalDate deathDate, Human father,
+                 Human mother, ArrayList<Human> children) {
+        this.identifier = identifier;
         this.name = name;
         this.surname = surname;
         this.sex = sex;
@@ -73,31 +71,35 @@ public class Human implements FamilyMember, Serializable {
         this.children = children;
     }
 
-    public Human(String name, String surname, Sex sex, LocalDate birthDate,
-                 Human father, Human mother, ArrayList<Human> children) {
-        this(name, surname, sex, birthDate, null, father, mother, children);
-        if (name.isEmpty()) {
-            throw new RuntimeException("Не введено имя.");
-        }
-
-        if (surname.isEmpty()) {
-            throw new RuntimeException("Не введена фамилия.");
-        }
+    public Human(long identifier, String name, String surname, Sex sex,
+                 LocalDate birthDate, Human father, Human mother,
+                 ArrayList<Human> children) {
+        this(identifier, name, surname, sex, birthDate, null, father, mother,
+             children);
     }
 
-    public Human(String name, String surname, Sex sex, LocalDate birthDate) {
-        this(name, surname, sex, birthDate, null, null, null);
-        if (name.isEmpty()) {
-            throw new RuntimeException("Не введено имя.");
-        }
-
-        if (surname.isEmpty()) {
-            throw new RuntimeException("Не введена фамилия.");
-        }
+    public Human(long identifier, String name, String surname, Sex sex,
+                 LocalDate birthDate) {
+        this(identifier, name, surname, sex, birthDate, null, null,
+             new ArrayList<>());
     }
 
-    public Human() {
-        this(null, null, null, null);
+    public Human(long identifier) {
+        this(identifier, null, null, null, null);
+    }
+
+    /**
+     * Возвращает числовой идентификатор человека.
+     */
+    public long getIdentifier() {
+        return identifier;
+    }
+
+    /**
+     * Устанавливает числовой идентификатор человека.
+     */
+    public void setIdentifier(long identifier) {
+        this.identifier = identifier;
     }
 
     /**
@@ -111,9 +113,6 @@ public class Human implements FamilyMember, Serializable {
      * Устанавливает имя человека.
      */
     public void setName(String name) {
-        if (name.isEmpty()) {
-            throw new RuntimeException("Не введено имя.");
-        }
         this.name = name;
     }
 
@@ -128,9 +127,6 @@ public class Human implements FamilyMember, Serializable {
      * Устанавливает фамилию человека.
      */
     public void setSurname(String surname) {
-        if (surname.isEmpty()) {
-            throw new RuntimeException("Не введена фамилия.");
-        }
         this.surname = surname;
     }
 
@@ -208,9 +204,6 @@ public class Human implements FamilyMember, Serializable {
      * Возвращает детей человека.
      */
     public ArrayList<Human> getChildren() {
-        if (this.children.size() == 0) {
-            System.out.println("Детей нет.");
-        }
         return children;
     }
 
@@ -254,7 +247,7 @@ public class Human implements FamilyMember, Serializable {
         }
 
         Human human = (Human) object;
-        return name == human.name && surname == human.surname &&
-               sex == human.sex && birthDate == human.birthDate;
+        return name.equals(human.name) && surname.equals(human.surname) &&
+               sex.equals(human.sex) && birthDate.equals(human.birthDate);
     }
 }

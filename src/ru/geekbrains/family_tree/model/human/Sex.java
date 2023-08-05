@@ -1,4 +1,4 @@
-package ru.geekbrains.family_tree.human;
+package ru.geekbrains.family_tree.model.human;
 
 /**
  * Пол человека.

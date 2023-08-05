@@ -1,12 +1,18 @@
-package ru.geekbrains.family_tree.database;
+package ru.geekbrains.family_tree.model.database;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Чтение и запись данных в файл.
+ */
 public class FileActions implements ReadableAndWriteable {
 
+    /**
+     * Путь к файлу.
+     */
     String file;
 
     public FileActions(String file) {
@@ -17,6 +23,10 @@ public class FileActions implements ReadableAndWriteable {
         this(null);
     }
     
+    /**
+     * Возвращает прочитанные из файла данные или выводит информационное
+     * сообщение, если произошла ошибка при работе с файлами.
+     */
     @Override
     public Object read() {
         try {
@@ -31,6 +41,10 @@ public class FileActions implements ReadableAndWriteable {
         }
     }
     
+    /**
+     * Записывает данные в файл или выводит информационное сообщение, если
+     * произошла ошибка при работе с файлами.
+     */
     @Override
     public void write(Object object) {
         try {

@@ -1,4 +1,4 @@
-package ru.geekbrains.family_tree.family_tree;
+package ru.geekbrains.family_tree.model.family_tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;

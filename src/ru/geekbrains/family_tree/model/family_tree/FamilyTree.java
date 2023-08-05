@@ -1,11 +1,11 @@
-package ru.geekbrains.family_tree.family_tree;
+package ru.geekbrains.family_tree.model.family_tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ru.geekbrains.family_tree.comparators.FamilyMemberByBirthDateComparator;
-import ru.geekbrains.family_tree.comparators.FamilyMemberByNameComparator;
+import ru.geekbrains.family_tree.model.comparators.FamilyMemberByBirthDateComparator;
+import ru.geekbrains.family_tree.model.comparators.FamilyMemberByNameComparator;
 
 /**
  * Семейное древо, отражающее отношения членов семьи.
@@ -25,8 +25,24 @@ public class FamilyTree<E extends FamilyMember> implements Iterable<E>, Serializ
         this(new ArrayList<E>());
     }
 
-    public void add(E familyMember) {
+    /**
+     * Добавляет члена семьи в семейное древо и возвращает true или возвращает
+     * false, если член семьи уже существует в семейном древе.
+     */
+    public boolean add(E familyMember) {
+        if (familyMembers.contains(familyMember)) {
+            return false;
+        }
         familyMembers.add(familyMember);
+        return true;
+    }
+
+    /**
+     * Возвращает true, если семейное древо не содержит людей, и false, если
+     * содержит.
+     */
+    public boolean isEmpty() {
+        return familyMembers.isEmpty();
     }
 
     @Override
