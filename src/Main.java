@@ -8,13 +8,13 @@ public class Main  {
         FileHandler fileHandler = new FileHandler();
 
 
-       // FamilyTree family = testFamily();
-       //System.out.println(family.familyList);
+       //FamilyTree family = testFamily();
+       //System.out.println(family.getFamilyList());
 
        //fileHandler.save(family, filePath);
 
         FamilyTree family = (FamilyTree) fileHandler.read(filePath);
-        System.out.println(family.familyList);
+       System.out.println(family.getFamilyList());
 
     }
         static  FamilyTree testFamily() {
