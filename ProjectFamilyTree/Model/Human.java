@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Human implements Serializable, Family_Tree_Item {
+    private int humanId;
     private String name;
     private Human mother, father;
     private List<Human> children;
@@ -32,7 +33,8 @@ public class Human implements Serializable, Family_Tree_Item {
 
     }
 
-    public Human(String name, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender) {
+    public Human(int humanId, String name, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender) {
+        this.humanId = humanId;
         this.name = name;
         this.mother = null;
         this.father = null;
@@ -132,6 +134,10 @@ public class Human implements Serializable, Family_Tree_Item {
         return "Отсутствуют";
     }
 
+    public int getHumanId() {
+        return humanId;
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -166,7 +172,9 @@ public class Human implements Serializable, Family_Tree_Item {
         /*return "Name: " + "\nMother: " + mother + "\nFather: " + father + "\nChildren(s): " + children + "\nDay of Birth: " + localDateOfBirth +
                 "\nGender: " + gender;*/
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Name: ");
+        stringBuilder.append("Id: ");
+        stringBuilder.append(getHumanId());
+        stringBuilder.append("; Name: ");
         stringBuilder.append(getName());
         stringBuilder.append("; Mother: ");
         stringBuilder.append(getMotherName());

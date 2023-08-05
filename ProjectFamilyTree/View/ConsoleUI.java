@@ -2,6 +2,7 @@ package homeWork.ProjectFamilyTree.View;
 
 import homeWork.ProjectFamilyTree.Model.Gender;
 import homeWork.ProjectFamilyTree.Model.Human;
+import homeWork.ProjectFamilyTree.Model.Service;
 import homeWork.ProjectFamilyTree.Presenter.Presenter;
 
 import java.text.DateFormat;
@@ -59,10 +60,25 @@ public class ConsoleUI implements View {
         System.out.println("Введите дату рождения");
         LocalDate localDateOfBirth = LocalDate.parse(scanner.nextLine());
         System.out.println("Введите дату смерти");
-        LocalDate localDateofDeath = LocalDate.parse(scanner.nextLine());
+        LocalDate localDateofDeath;
+        if (scanner.nextLine().isEmpty()){localDateofDeath = null;}
+        else {localDateofDeath = LocalDate.parse(scanner.nextLine());}
         System.out.println("Введите пол (Male/Female)");
         Gender gender = Gender.valueOf(scanner.nextLine());
         presenter.addHuman(name, localDateOfBirth, localDateofDeath, gender);
+    }
+    public void setParentsAndChilds(){
+        System.out.println("Введите id ребенка:");
+        String childIdString = scanner.nextLine();
+        int childId = Integer.parseInt(childIdString);
+        System.out.println("Введите id одного родителя:");
+        String parent1IdString = scanner.nextLine();
+        int parent1Id = Integer.parseInt(parent1IdString);
+        System.out.println("Введите id другого родителя:");
+        String parent2IdString = scanner.nextLine();
+        int parent2Id = Integer.parseInt(parent2IdString);
+
+        presenter.setParentsAndChilds(child, parent1, parent2);
     }
     @Override
     public void printAnswer(String answer) {
