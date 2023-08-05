@@ -66,6 +66,6 @@ public class ConsoleUI implements View {
     }
     @Override
     public void printAnswer(String answer) {
-
+        System.out.println(answer);
     }
 }
