@@ -1,7 +1,6 @@
 package genealogy_tree.presenter;
 
 import genealogy_tree.model.Human.Gender;
-import genealogy_tree.model.Human.Human;
 import genealogy_tree.model.service.Service;
 import genealogy_tree.ui.View;
 

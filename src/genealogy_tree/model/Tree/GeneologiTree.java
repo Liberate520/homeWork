@@ -48,9 +48,58 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
             children.addChild(human);
     }
 
-    public void addParents(E human) {
+    public void addToParents(E human) {
         for (E parents : human.getParents())
             parents.addParents(human);
+    }
+
+    public void addParentsHuman(int id, int ids) {
+        checkId(id);
+        getById(id);
+        E human = getById(id);
+        checkId(ids);
+        getById(ids);
+        E human1 = getById(ids);
+        addToParents(human1);
+        human.addParents(human1);
+    }
+    public void addChildren(int id, int ids){
+        checkId(id);
+        getById(id);
+        E human = getById(id);
+        checkId(ids);
+        getById(ids);
+        E human1 = getById(ids);
+        addToChildren(human1);
+        human.addChild(human1);
+    }
+
+    public void getSiblingsHuman(int id){
+        checkId(id);
+        getById(id);
+        getSiblings(id);
+        List<E> result = getSiblings(id);
+        System.out.println(result);
+    }
+
+    public void setDivorceHuman(int id, int ids){
+        checkId(id);
+        getById(id);
+        E human = getById(id);
+        checkId(ids);
+        getById(ids);
+        E human1 = getById(ids);
+        setDivorce(human, human1);
+    }
+
+    public void addSpouseHuman(int id, int ids){
+        checkId(id);
+        getById(id);
+        E human = getById(id);
+        checkId(ids);
+        getById(ids);
+        E human3 =  getById(ids);
+        setWedding(human, human3);
     }
 
     public List<E> getSiblings(int id) {
@@ -79,15 +128,6 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
         return result;
     }
 
-    public boolean setWedding(int humanId1, int humanId2) {
-
-        if (checkId(humanId1) && checkId(humanId2)) {
-            E human1 = getById(humanId1);
-            E human2 = getById(humanId2);
-            return setWedding(human1, human2);
-        }
-        return false;
-    }
 
     public boolean setWedding(E human1, E human2) {
 
@@ -101,15 +141,6 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
 
     }
 
-    public boolean setDivorce(int humanId1, int humanId2) {
-        if (checkId(humanId1) && checkId(humanId2)) {
-            E human1 = getById(humanId1);
-            E human2 = getById(humanId2);
-            return setDivorce(human1, human2);
-
-        }
-        return false;
-    }
 
     public boolean setDivorce(E human1, E human2) {
 
@@ -180,5 +211,6 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
     public void sortByAge() {
         humanList.sort(new HumanComparatorByAge<>());
     }
+
 
 }

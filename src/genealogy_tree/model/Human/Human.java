@@ -2,7 +2,6 @@ package genealogy_tree.model.Human;
 
 import genealogy_tree.model.Tree.GeneologiTreeItem;
 
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -49,11 +48,11 @@ public class Human implements Serializable, Comparable<Human>, GeneologiTreeItem
 
 
     public boolean addChild(Human child) {
-            if (!children.contains(child)) {
-                children.add(child);
-                return true;
-            }
-            return false;
+        if (!children.contains(child)) {
+            children.add(child);
+            return true;
+        }
+        return false;
     }
 
     public boolean addParents(Human parent) {

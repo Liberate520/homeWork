@@ -43,9 +43,9 @@ public interface GeneologiTreeItem<E> {
 
     Gender getGender();
 
-    String getInfo();
 
     String getFatherInfo();
 
     String getChildrenInfo();
+
 }

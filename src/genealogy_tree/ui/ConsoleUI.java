@@ -61,6 +61,11 @@ public class ConsoleUI implements View {
         int ids = scanner.nextInt();
         presenter.addParetns(id,ids);
         System.out.println("Add parents");
+
+    }
+
+    public static void answerError(){
+        System.out.println("No human");
     }
 
     public void addChildren() {
@@ -70,6 +75,7 @@ public class ConsoleUI implements View {
         int ids = scanner.nextInt();
         presenter.addChildren(id,ids);
         System.out.println("Add children");
+
     }
 
     public void addSposue() {
@@ -98,12 +104,10 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-
         int id = 0;
         System.out.println("Enter a name : ");
         String name = scanner.next();
         System.out.println("Enter a gender");
-
         String gender = scanner.next();
         while (true) {
             if (gender.equals("Male")) {
@@ -116,8 +120,6 @@ public class ConsoleUI implements View {
             } else System.out.println("Not support Gender, repaid");
             return;
         }
-
-
         System.out.println("Enter a birthDate.");
             System.out.println("Enter a day.");
         while (scanner.hasNextInt()) {
@@ -126,12 +128,10 @@ public class ConsoleUI implements View {
             int birthDateMonth = scanner.nextInt();
             System.out.println("Enter a Year.");
             int birthDateYear = scanner.nextInt();
-
             LocalDate birthDate = LocalDate.of(1, 1, 1);
             int birthDateDays = Integer.valueOf(birthDateDay);
             int birthDateMonths = Integer.valueOf(birthDateMonth);
             int birthDateYears = Integer.valueOf(birthDateYear);
-
             if (birthDateDays > 0 && birthDateDays < 31 && birthDateMonths > 0 && birthDateMonths <= 12 && birthDateYears > 0
                     && birthDateYears < 2030) {
                 birthDate = birthDate.plusDays(birthDateDays);
@@ -140,8 +140,10 @@ public class ConsoleUI implements View {
                 birthDate = birthDate.minusMonths(1);
                 birthDate = birthDate.plusYears(birthDateYears);
                 birthDate = birthDate.minusYears(1);
+                System.out.println(birthDate);
             } else {
                 System.out.println("Data not supported");
+                break;
             }
             presenter.addHuman(id, name, Gender.valueOf(gender), birthDate);
             break;
@@ -177,7 +179,7 @@ public class ConsoleUI implements View {
         if (numCommand <= menu.getSize()) {
             return true;
         } else {
-            //inputError();
+            inputError();
             return false;
         }
     }
@@ -189,4 +191,6 @@ public class ConsoleUI implements View {
     private void inputError() {
         System.out.println("Errors, function not supported");
     }
+
+
 }
