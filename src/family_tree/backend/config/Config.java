@@ -21,6 +21,10 @@ public class Config implements BaseInit{
         }
         return null;
     }
+
+    public String dumpFilePath(){
+        return getFilePath();
+    }
 }
 
 

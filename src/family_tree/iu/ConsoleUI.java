@@ -90,10 +90,10 @@ public class ConsoleUI implements BaseUI{
         System.out.println("Gender (M/F): ");
         String genderIn = scanner.nextLine();
         Gender gender;
-        if (genderIn != "M" || genderIn != "m") {
-            gender = Gender.Female;
-        } else {
+        if (genderIn.equals("M") || genderIn.equals("m")) {
             gender = Gender.Male;
+        } else {
+            gender = Gender.Female;
         }
         System.out.println("BirthDate(DD/MM/YYYY): ");
         String[] bDate = scanner.nextLine().split("/");
@@ -105,7 +105,10 @@ public class ConsoleUI implements BaseUI{
         }
 
         presenter.addPerson(lName,fName,gender,birthDate);
-
+        System.out.println("*---------------");
+        System.out.printf("* New Person - %s %s %s %s added\n",fName,lName,gender,birthDate);
+        System.out.println("* Database Dump saved");
+        System.out.println("*----------------");
     }
 
     @Override

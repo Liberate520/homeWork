@@ -1,9 +1,7 @@
 package family_tree.backend.ftree;
 
-import family_tree.backend.person.Gender;
-import family_tree.backend.person.PersonsComparatorByNames;
-import family_tree.backend.person.PersonsComparatorByBirthday;
-import family_tree.backend.person.PersonsComparatorByID;
+import family_tree.backend.person.*;
+import family_tree.backend.person.Person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -88,7 +86,7 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
             }
         }
 
-        if (result.size() > 0){
+        if (!result.isEmpty()){
             for(P entry: result){
                 if (entry.getGender() == Gender.Female){
                     sB.append("\n :: Sister: ");
@@ -118,7 +116,7 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
             }
         }
 
-        if (result.size() > 0){
+        if (!result.isEmpty()){
             for(P entry: result){
                 if (entry.getGender() == Gender.Female){
                     sB.append("\n ::=:: Sister: ");
@@ -149,7 +147,7 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
             }
         }
 
-        if (result.size() > 0){
+        if (!result.isEmpty()){
             for(P entry: result){
                 if (entry.getGender() == Gender.Female){
                     sB.append("\n ::>> Daughter: ");
@@ -176,6 +174,10 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
     public void sortByID(){
         System.out.println("Sorting by ID");
         relations.sort(new PersonsComparatorByID());
+    }
+
+    public void clear(){
+        relations.clear();
     }
 
     @Override

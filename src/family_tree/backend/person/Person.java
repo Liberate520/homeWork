@@ -1,5 +1,6 @@
 package family_tree.backend.person;
 
+import family_tree.backend.Counts;
 import family_tree.backend.ftree.Childrens;
 import family_tree.backend.ftree.FamilyTree;
 import family_tree.backend.ftree.Relatives;
@@ -11,7 +12,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, Relatives<Person> {
+public class Person implements Serializable, Relatives<Person>, Counts {
     static long idc;
     private long id;
     private String firstName;
@@ -30,6 +31,7 @@ public class Person implements Serializable, Relatives<Person> {
 */
     public Person(String firstName, String lastName, Gender genderBirth, LocalDate birthDate,
                 LocalDate deathDate, Person mother, Person father, List<Marriage> marriage) {
+
         this.id = idc++;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,6 +52,14 @@ public class Person implements Serializable, Relatives<Person> {
         this(firstName, lastName, genderBirth, birthDate, null, mother, father, null);
     }
     public long getID(){return id;}
+
+        public static void setCount(long id){
+        idc = id;
+    }
+
+    public static void nullCount(){
+        setCount(0);
+    }
 
     public String getName() {
         return firstName + " " + lastName;

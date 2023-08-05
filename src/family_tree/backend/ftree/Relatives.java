@@ -11,10 +11,12 @@ public interface Relatives<T>{
     long getID();
     Gender getGender();
     String getPerson();
-//    T getPersonObj();
     T getFather();
     T getMother();
-//    T addPerson();
+
+    //    T addPerson();
+//    T getPersonObj();
     String getPersonSiblings();
     String getPersonChildrens();
+
 }
