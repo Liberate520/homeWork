@@ -26,25 +26,10 @@ public class FamilyTree<E extends EntityItem<E>> implements Serializable, Iterab
         return null;
     }
 
-    public String getInfoFamilyTree() {
-        if (familyTree.size() == 0) {
-            return "Людей пока нет.";
-        }
-        StringBuilder info = new StringBuilder();
-        for (int i = 0; i < familyTree.size(); i++) {
-            String st = "id: %s, %s".formatted(Integer.toString(i + 1), familyTree.get(i).getInfo());
-            info.append(st);
-            int length = familyTree.get(i).getInfo().length();
-            info.append("\n");
-            String str = "";
-            for (int j = 0; j < length; j++) {
-                str += "-";
-            }
-            info.append(str);
-            info.append("\n");
-        }
-        return info.toString();
-    }
+//    @Override
+//    public String toString() {
+//        return super.toString();
+//    }
 
     @Override
     public Iterator<E> iterator() {
@@ -68,4 +53,29 @@ public class FamilyTree<E extends EntityItem<E>> implements Serializable, Iterab
         return familyTree.size();
     }
 
+//    public E returnMember(int i) {
+//        return familyTree.get(i);
+//    }
+
+    public String getInfoFamilyTree() {
+        if (familyTree.size() == 0) {
+            return null;
+        } else {
+            StringBuilder info = new StringBuilder();
+            for (int i = 0; i < familyTree.size(); i++) {
+                String st = "id: %s, %s".formatted(Integer.toString(i + 1),
+                        familyTree.get(i).getInfo());
+                info.append(st);
+                int length = familyTree.get(i).getInfo().length();
+                info.append("\n");
+                String str = "";
+                for (int j = 0; j < length; j++) {
+                    str += "-";
+                }
+                info.append(str);
+                info.append("\n");
+            }
+            return info.toString();
+        }
+    }
 }

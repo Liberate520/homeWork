@@ -2,6 +2,7 @@ package View.tests;
 
 import View.View;
 import View.MainMenu;
+import View.TextInput;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -10,21 +11,22 @@ public class TestForUI implements Test {
     private View view;
     private Scanner scanner;
     private MainMenu menu;
-
-    public TestForUI(View view, MainMenu menu) {
+    private TextInput textInput;
+    public TestForUI(View view, MainMenu menu, TextInput textInput) {
         this.view = view;
         scanner = new Scanner(System.in);
         this.menu = menu;
+        this.textInput = textInput;
     }
 
     public String menuTest(String choice) {
         if (!(testInt(choice))) {
-            view.printAnswer(view.error());
+            textInput.printAnswer("errorInput");
             return null;
         }
         int check = Integer.parseInt(choice);
         if (!((check > 0) && (check <= menu.getSize()))) {
-            view.printAnswer(view.error());
+            textInput.printAnswer("errorInput");
             return null;
         }
         return choice;
@@ -32,23 +34,23 @@ public class TestForUI implements Test {
 
     public boolean testInt(String choice) {
         if (choice == null) {
-            view.printAnswer(view.error());
+            textInput.printAnswer("errorInput");
             return false;
         }
         int length = choice.length();
         if (length == 0) {
-            view.printAnswer(view.error());
+            textInput.printAnswer("errorInput");
             return false;
         }
         int i;
         if (choice.charAt(0) == '-') {
-            view.printAnswer(view.error());
+            textInput.printAnswer("errorInput");
             return false;
         }
         for (i = 0; i < length; i++) {
             char c = choice.charAt(i);
             if (c < '0' || c > '9') {
-                view.printAnswer(view.error());
+                textInput.printAnswer("errorInput");
                 return false;
             }
         }
@@ -62,7 +64,7 @@ public class TestForUI implements Test {
         }
         int year = Integer.parseInt(yearStr);
         while (!((year > -1) && (year <= LocalDate.now().getYear()))) {
-            System.out.println("Неверный год, укажите снова.");
+            textInput.printAnswer("errorSetYear");
             yearStr = scanner.nextLine();
             while (!(testInt(yearStr))) {
                 yearStr = scanner.nextLine();
@@ -79,7 +81,7 @@ public class TestForUI implements Test {
         }
         int month = Integer.parseInt(monthStr);
         while (!((month > 0) && (month < 13))) {
-            System.out.println("Неверный месяц, укажите снова: ");
+            textInput.printAnswer("errorSetMonth");
             monthStr = scanner.nextLine();
             while (!(testInt(monthStr))) {
                 monthStr = scanner.nextLine();
@@ -96,7 +98,7 @@ public class TestForUI implements Test {
         }
         int day = Integer.parseInt(dayStr);
         while (!((day > 0) && (day <= 30))) {
-            System.out.println("Неверный день, укажите снова.");
+            textInput.printAnswer("errorSetDay");
             dayStr = scanner.nextLine();
             while (!(testInt(dayStr))) {
                 dayStr = scanner.nextLine();

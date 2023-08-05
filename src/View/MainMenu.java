@@ -12,13 +12,14 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new AddHumanWithParents(consoleUI));
+        commandList.add(new AddChild(consoleUI));
+        commandList.add(new MakeMarriage(consoleUI));
         commandList.add(new GetInfoFamily(consoleUI));
         commandList.add(new FindById(consoleUI));
-        commandList.add(new Save(consoleUI));
-        commandList.add(new Load(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
-        commandList.add(new MakeMarriage(consoleUI));
+        commandList.add(new Save(consoleUI));
+        commandList.add(new Load(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 

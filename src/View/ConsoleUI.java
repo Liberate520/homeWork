@@ -3,6 +3,7 @@ package View;
 import Model.Human.Gender;
 import Model.Human.Status;
 import Presenter.Presenter;
+import View.tests.Test;
 import View.tests.TestForUI;
 
 import java.time.LocalDate;
@@ -14,14 +15,16 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private boolean flag;
     private MainMenu menu;
-    private TestForUI tests;
+    private Test tests;
+    private TextInput textInput;
 
     public ConsoleUI() {
         presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         flag = true;
         menu = new MainMenu(this);
-        tests = new TestForUI(this, menu);
+        textInput = new TextInput();
+        tests = new TestForUI(this, menu, textInput);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class ConsoleUI implements View {
 
     private void execution() {
         System.out.println(menu.menu());
-        System.out.println("Выберите действие: ");
+        textInput.printAnswer("choice");
         String string = scanner.nextLine();
         String choice = tests.menuTest(string);
         if (choice != null) {
@@ -43,13 +46,8 @@ public class ConsoleUI implements View {
     }
 
     public void exit() {
-        System.out.println("Досвидания!");
+        textInput.printAnswer("farewell");
         flag = false;
-    }
-
-    @Override
-    public String error() {
-        return "Неправильный ввод значения.";
     }
 
     public void sortByName() {
@@ -65,16 +63,17 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        System.out.println("Укажите имя человека: ");
+        textInput.printAnswer("setName");
         String name = setName();
-        System.out.println("Укажите дату рождения: ");
+        textInput.printAnswer("setDate");
         LocalDate date = setDate();
-        System.out.println("Укажите пол человека: ");
+        textInput.printAnswer("setGender");
         Gender gender = setGender();
-        System.out.println("Укажите статус человека");
+        textInput.printAnswer("setStatus");
         Status status = setStatus();
         LocalDate deathDate = null;
         if (status.equals(Status.dead)) {
+            textInput.printAnswer("setName");
             deathDate = setDate();
         }
         presenter.addHuman(name, date, gender, status, deathDate);
@@ -89,7 +88,7 @@ public class ConsoleUI implements View {
         } else {
             boolean flag = true;
             while (flag) {
-                System.out.println("Неверно, укажите заново");
+                textInput.printAnswer("errorSetAgain");
                 gen = scanner.nextLine().toLowerCase();
                 if (genList.contains(gen)) {
                     flag = false;
@@ -109,7 +108,7 @@ public class ConsoleUI implements View {
         } else {
             boolean flag = true;
             while (flag) {
-                System.out.println("Неверно, укажите заново");
+                textInput.printAnswer("errorSetAgain");
                 stat = scanner.nextLine().toLowerCase();
                 if (statList.contains(stat)) {
                     flag = false;
@@ -121,16 +120,18 @@ public class ConsoleUI implements View {
     }
 
     public LocalDate setDate() {
-        System.out.println("Укажите год: ");
+        textInput.printAnswer("setYear");
         String yearStr = scanner.nextLine();
         int year = tests.testYear(yearStr);
-        System.out.println("Укажите месяц: ");
+
+        textInput.printAnswer("setMonth");
         String monthStr = scanner.nextLine();
         int month = tests.testMonth(monthStr);
-        System.out.println("Укажите день: ");
 
+        textInput.printAnswer("setDay");
         String dayStr = scanner.nextLine();
         int day = tests.testDay(dayStr);
+
         return LocalDate.of(year, month, day);
     }
 
@@ -144,34 +145,34 @@ public class ConsoleUI implements View {
     }
 
     public void findById() {
-        System.out.println("Введите id человека: ");
+        textInput.printAnswer("setId");
         String count = scanner.nextLine();
         if (tests.testInt(count)) {
             int countInt = Integer.parseInt(count);
             presenter.findById(countInt);
         } else {
-            printAnswer(error());
+            textInput.printAnswer("error");
         }
     }
 
     public void addHumanWithParents() {
-        System.out.println("Укажите имя человека: ");
+        textInput.printAnswer("setName");
         String name = setName();
-        System.out.println("Укажите дату рождения: ");
+        textInput.printAnswer("setDate");
         LocalDate date = setDate();
-        System.out.println("Укажите пол человека: ");
+        textInput.printAnswer("setGender");
         Gender gender = setGender();
-        System.out.println("Укажите статус человека");
+        textInput.printAnswer("setStatus");
         Status status = setStatus();
         LocalDate deathDate = null;
         if (status.equals(Status.dead)) {
             deathDate = setDate();
         }
-        System.out.println("Укажите id матери: ");
+        textInput.printAnswer("setMotherId");
         String idMotherStr = scanner.nextLine();
         tests.testInt(idMotherStr);
         int idMother = Integer.parseInt(idMotherStr);
-        System.out.println("Укажите id отца: ");
+        textInput.printAnswer("setFatherId");
         String idFatherStr = scanner.nextLine();
         tests.testInt(idFatherStr);
         int idFather = Integer.parseInt(idMotherStr);
@@ -179,19 +180,15 @@ public class ConsoleUI implements View {
     }
 
     public void makeMarriage() {
-        System.out.println("Укажите id первого партнёра: ");
+        textInput.printAnswer("setFirstSpouseId");
         String spouseOneIdStr = scanner.nextLine();
         tests.testInt(spouseOneIdStr);
         int spouseOneId = Integer.parseInt(spouseOneIdStr);
-        System.out.println("Укажите id второго партнёра: ");
+        textInput.printAnswer("setSecondSpouseId");
         String spouseTwoIdStr = scanner.nextLine();
         tests.testInt(spouseOneIdStr);
         int spouseTwoId = Integer.parseInt(spouseTwoIdStr);
         presenter.makeMarriage(spouseOneId, spouseTwoId);
-    }
-
-    public void addChild() {
-        presenter.addChild();
     }
 
     public void save() {
@@ -200,5 +197,31 @@ public class ConsoleUI implements View {
 
     public void load() {
         presenter.loadInfo();
+    }
+
+    public void addChild() {
+        textInput.printAnswer("setChildId");
+        String childIdStr = scanner.nextLine();
+        while (!(tests.testInt(childIdStr))) {
+            childIdStr = scanner.nextLine();
+        }
+        int childId = Integer.parseInt(childIdStr);
+
+        textInput.printAnswer("setParentsId");
+        textInput.printAnswer("setMotherId");
+        String motherIdStr = scanner.nextLine();
+        while (!(tests.testInt(motherIdStr))) {
+            motherIdStr = scanner.nextLine();
+        }
+        int motherId = Integer.parseInt(motherIdStr);
+
+        textInput.printAnswer("setFatherId");
+        String fatherIdStr = scanner.nextLine();
+        while (!(tests.testInt(fatherIdStr))) {
+            fatherIdStr = scanner.nextLine();
+        }
+        int fatherId = Integer.parseInt(fatherIdStr);
+
+        presenter.addChild(childId, motherId, fatherId);
     }
 }

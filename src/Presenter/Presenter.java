@@ -1,88 +1,63 @@
 package Presenter;
 
-import Model.FamilyTree.FamilyTree.FamilyTree;
-import Model.FileHandler.HandleFile;
+import Model.FamilyTree.Service;
 import Model.Human.Gender;
-import Model.Human.Human;
 import Model.Human.Status;
 import View.View;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Presenter implements Serializable {
     private View view;
-    private FamilyTree familyTree;
-    private String filePath = "src/Model/date/fileText.txt";
-    private HandleFile handleFile;
+    private Service service;
 
     public Presenter(View view) {
         this.view = view;
-        familyTree = new FamilyTree<>();
-        try {
-            handleFile = new HandleFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        service = new Service();
     }
 
     public void addHuman(String name, LocalDate date, Gender gender, Status status, LocalDate deathDate) {
-        Human human = new Human(name, date, gender, status);
-        human.setDeathDate(deathDate);
-        familyTree.addToList(human);
+        service.addHuman(name, date, gender, status, deathDate);
     }
 
     public void getInfo() {
-        view.printAnswer(familyTree.getInfoFamilyTree());
+        service.getInfoFamilyTree();
     }
 
     public void sortByName() {
-        familyTree.sortByName();
+        service.sortByName();
         getInfo();
     }
 
     public void sortByAge() {
-        familyTree.sortByAge();
+        service.sortByAge();
         getInfo();
-    }
-
-    public void findById(int count) {
-        if(familyTree.findById(count) == null){
-            view.printAnswer(view.error());
-        } else {
-            view.printAnswer(familyTree.findById(count).getInfo());
-        }
     }
 
     public void addHumanWithParents(String name, LocalDate date, Gender gender, Status status, int fatherId,
                                     int motherId, LocalDate deathDate) {
-        Human father = (Human) familyTree.findById(fatherId);
-        Human mother = (Human) familyTree.findById(motherId);
-        familyTree.addToList(new Human(name, date, gender, status, father, mother));
-        int humanId = familyTree.getSize() - 1;
-        familyTree.findById(humanId).setDeathDate(deathDate);
+        service.addHumanWithParents(name, date, gender, status, fatherId,
+                motherId, deathDate);
     }
 
     public void makeMarriage(int spouseOneId, int spouseTwoId) {
-        Human spouseOne = (Human) familyTree.findById(spouseOneId);
-        Human spouseTwo = (Human) familyTree.findById(spouseTwoId);
-        if (spouseTwo == null || spouseOne == null) {
-            view.printAnswer(view.error());
-        } else {
-            familyTree.makeMarriage(spouseOne, spouseTwo);
-        }
-    }
-
-    public void addChild() {
+        service.makeMarriage(spouseOneId, spouseTwoId);
     }
 
     public void saveInfo() {
-        handleFile.writeToFile(familyTree, filePath);
+        service.saveInfo();
     }
 
-    public void loadInfo(){
-        familyTree = (FamilyTree<Human>) handleFile.readFromFile(filePath);
-        familyTree.getInfoFamilyTree();
+    public void loadInfo() {
+        service.loadInfo();
+    }
+
+    public void findById(int countInt) {
+        service.findById(countInt);
+    }
+
+    public void addChild(int childId, int motherId, int fatherId) {
+        service.addChildToParents(childId, motherId, fatherId);
     }
 }
