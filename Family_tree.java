@@ -1,8 +1,12 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Family_tree implements Serializable{
+import CompareMethods.PersonByGender;
+import CompareMethods.PersonByAge;
+
+public class Family_tree implements Serializable, Iterable<Person> {
     
     protected ArrayList<Node> tree = new ArrayList<>();
 
@@ -22,6 +26,7 @@ public class Family_tree implements Serializable{
 
 
     private List<Person> familyTree;
+
     public Family_tree() {
         this(new ArrayList<>());
     }
@@ -29,4 +34,30 @@ public class Family_tree implements Serializable{
     public void addPerson(Person human) {
         familyTree.add(human);
     }
+
+    public void sortByGender(){
+        familyTree.sort(new PersonByGender<>() );
+    }
+
+    public void sortByAge(){
+        familyTree.sort(new PersonByAge<>() );
+    }
+
+    public String getPersonsInfo(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Список людей:\n");
+
+        for (Person person: familyTree){
+            stringBuilder.append(person);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(familyTree);
+    }
+
+
 }

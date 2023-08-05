@@ -3,7 +3,8 @@ import java.time.LocalDate;
 
 public class Main{
 
-// Не понимаю почему файл не записывается
+// 1. Не понимаю почему файл не записывается
+// 2. The method getGender() getBirthDate() is undefined for the type Person - они же определены? или я что-то не понимаю или у меня сломался вс код
 
     public static void main(String[] args) {
 
@@ -37,9 +38,17 @@ public class Main{
         //System.out.println(fileHandler.readFamilyTree(filePath));
         
         System.out.println(male_1.getInfo());
+        System.out.println(male_1.getGender());
 
         System.out.print("Дети Светланы: ");
         System.out.println(new Research(relat).spend(female_1, Relationship.parent));
+
+        familyTree.getPersonsInfo();
+        familyTree.sortByGender();
+        familyTree.getPersonsInfo();
+        familyTree.sortByAge();
+        familyTree.getPersonsInfo();
+
     }   
 
 }

@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
     private LocalDate birthDate;
     private LocalDate deathDate;
     protected String firstname;
@@ -17,56 +17,20 @@ public class Person implements Serializable {
         this.deathDate = deathDate;
     }
 
-	public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public LocalDate getBirthDate() {
-        return birthDate;
-    }
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public LocalDate getDeathDate() {
-        return deathDate;
-    }
-
-    public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
+        return this.birthDate;
     }
 
     public Gender getGender() {
-        return gender;
+        return this.gender;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    @Override
+    public int compareTo(Person o){
+        return gender.compareTo(o.gender) ;
     }
-
-    
-    public String getInfo(){
-        return String.format("Полное имя: %s %s %s Дата рождения: %s Дата смерти: %s", surname, firstname, patronymic, birthDate, deathDate);
+        public String getInfo(){
+        return String.format("Пол: %s Полное имя: %s %s %s Дата рождения: %s Дата смерти: %s",gender, surname, firstname, patronymic, birthDate, deathDate);
     }
 
 }

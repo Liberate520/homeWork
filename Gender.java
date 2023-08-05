@@ -1,3 +1,3 @@
 public enum Gender {
-    male, female;
+    male, female
 }
