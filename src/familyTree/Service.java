@@ -34,8 +34,8 @@ public class Service {
         return currentTree.findPerson(name, gender);
     }
 
-    public void getInfo() {
-        System.out.println(currentTree);
+    public String getInfo() {
+        return currentTree.toString();
     }
 
     public void sortByName() {

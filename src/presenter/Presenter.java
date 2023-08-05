@@ -16,8 +16,8 @@ public class Presenter {
     public boolean addPerson(String name, Gender gender, LocalDate birthDate, LocalDate deathDate){
         return service.addPerson(name, gender, birthDate, deathDate);
     }
-    public void getTreeInfo(){
-        service.getInfo();
+    public String getTreeInfo(){
+        return service.getInfo();
     }
     public void loadTree(String path){
         service.loadTree(path);

@@ -22,7 +22,7 @@ public class Console implements ConsoleUI {
                 printMenu();
                 switch (scan()) {
                     case MenuPoint.ADD_PERSON -> System.out.println(ParserPerson.addPerson(scanner, presenter));
-                    case MenuPoint.PRINT -> presenter.getTreeInfo();
+                    case MenuPoint.PRINT -> System.out.println(presenter.getTreeInfo());
                     case MenuPoint.SAVE -> presenter.saveTree("./src/familyTree/savedFiles/TreeOfHumans.bin");
                     case MenuPoint.LOAD -> presenter.loadTree("./src/familyTree/savedFiles/TreeOfHumans.bin");
                     case MenuPoint.SORT_BY_GENDER -> presenter.sortGender();
