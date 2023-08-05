@@ -1,6 +1,7 @@
 package familyTree.treeWorkspace;
 
 
+import familyTree.enums.Gender;
 import familyTree.treeComparators.ComparatorByAge;
 import familyTree.treeComparators.ComparatorByGender;
 
@@ -39,6 +40,24 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         }
         return ++id;
     }
+
+    public E findPerson(int id) {
+        for (E e:familyTree){
+            if (id==e.getId()){
+                return e;
+            }
+        }
+        return null;
+    }
+    public E findPerson(String name, Gender gender){
+        for (E e: familyTree){
+            if(e.getName().equals(name)&&e.getGender().equals(gender)){
+                return e;
+            }
+        }
+        return null;
+    }
+
     public void sortByName() {
         Collections.sort(familyTree);
     }

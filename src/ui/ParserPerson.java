@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ParserPerson {
     // Класс для обработки ввода пользователя
-    static void addPerson(Scanner scanner, Presenter presenter) {
+    static boolean addPerson(Scanner scanner, Presenter presenter) {
         String name, year, month, day, dYear, dMonth, dDay;
         Gender gender;
         System.out.println("Введите имя:");
@@ -26,7 +26,7 @@ public class ParserPerson {
             dYear = scanner.nextLine();
             dMonth = scanner.nextLine();
             dDay = scanner.nextLine();
-            presenter.addPerson(name, gender,
+            return presenter.addPerson(name, gender,
                     LocalDate.of(
                             Integer.parseInt(year),
                             Integer.parseInt(month),
@@ -36,7 +36,7 @@ public class ParserPerson {
                             Integer.parseInt(dMonth),
                             Integer.parseInt(dDay)));
         } else {
-            presenter.addPerson(name, gender,
+            return presenter.addPerson(name, gender,
                     LocalDate.of(
                             Integer.parseInt(year),
                             Integer.parseInt(month),

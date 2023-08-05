@@ -7,16 +7,14 @@ import ui.ConsoleUI;
 import java.time.LocalDate;
 
 public class Presenter {
-    // Класс для передачи сообщений между моделью и вьювером
-    private ConsoleUI consoleUI;
-    private Service service;
+    private final Service service;
 
-    public Presenter(ConsoleUI consoleUI) {
-        this.consoleUI = consoleUI;
+    public Presenter() {
+        // Класс для передачи сообщений между моделью и вьювером
         service = new Service();
     }
-    public void addPerson(String name, Gender gender, LocalDate birthDate, LocalDate deathDate){
-        service.addPerson(name, gender, birthDate, deathDate);
+    public boolean addPerson(String name, Gender gender, LocalDate birthDate, LocalDate deathDate){
+        return service.addPerson(name, gender, birthDate, deathDate);
     }
     public void getTreeInfo(){
         service.getInfo();
