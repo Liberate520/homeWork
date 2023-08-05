@@ -1,10 +1,11 @@
 package FamilyTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private Date birthday;
     private Gender gender;
     private String name;

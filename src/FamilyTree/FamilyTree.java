@@ -1,10 +1,11 @@
 package FamilyTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> familyMembers = new ArrayList<>();
     private int counter;
     private String name;
