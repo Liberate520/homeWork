@@ -3,6 +3,7 @@ package com.pamihnenkov.model;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Set;
+import java.util.UUID;
 
 public interface FamilyTreeMember<T> {
 
@@ -16,4 +17,5 @@ public interface FamilyTreeMember<T> {
     LocalDate getDeathDate();
     Set<T> getChilds();
     Set<T> getParents();
+    UUID getId();
 }

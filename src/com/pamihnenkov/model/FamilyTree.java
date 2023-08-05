@@ -18,13 +18,16 @@ public class FamilyTree<T extends FamilyTreeMember<T>> implements Serializable, 
     public FamilyTree(T member) {
         addFamilyMember(member);
     }
+    public FamilyTree() {
+
+    }
     public Set<T> getBrothersAndSister(T person){
         return person.getParents().stream()
                 .map(T::getChilds)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
-    private void addFamilyMember (T newMember){
+    public void addFamilyMember (T newMember){
         memberList.add(newMember);
         newMember.getChilds().stream().filter(Predicate.not(memberList::contains)).forEach(memberList::add);
         newMember.getParents().stream().filter(Predicate.not(memberList::contains)).forEach(memberList::add);
@@ -53,6 +56,10 @@ public class FamilyTree<T extends FamilyTreeMember<T>> implements Serializable, 
         for (T t:set) {
             System.out.println(t.toString());
         }
+    }
+
+    public Set<T> getAllMembers(){
+        return memberList;
     }
     @Override
     public String toString(){

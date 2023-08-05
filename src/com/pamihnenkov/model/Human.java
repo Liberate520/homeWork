@@ -10,11 +10,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 public class Human implements Serializable, FamilyTreeMember<Human> {
 
     @Serial
     private static final long serialVersionUID = 1L;
+    private final UUID id;
     private final String name;
     private final String surname;
     private final String lastname;
@@ -24,7 +26,8 @@ public class Human implements Serializable, FamilyTreeMember<Human> {
     private final Set<Human> parents = new HashSet<>();
     private final Gender gender;
 
-    public Human(String name, String surname, String lastname, LocalDate birthDate, LocalDate deathDate, Gender gender) {
+    public Human(UUID id,String name, String surname, String lastname, LocalDate birthDate, LocalDate deathDate, Gender gender) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.lastname = lastname;
@@ -118,6 +121,11 @@ public class Human implements Serializable, FamilyTreeMember<Human> {
         return parents;
     }
 
+    public UUID getId() {
+        return id;
+    }
 
-
+    public Gender getGender() {
+        return gender;
+    }
 }
