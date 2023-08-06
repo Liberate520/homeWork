@@ -55,8 +55,6 @@ public class Test {
 
         System.out.println(service.getHumanListInfo());
 
-        System.out.println(human.getMather());
-
 
         //region task HomeWork002
 //        //Выводим на экран human3

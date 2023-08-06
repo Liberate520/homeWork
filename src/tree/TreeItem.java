@@ -9,11 +9,7 @@ public interface TreeItem<T> {
     String getFullName();
     String getChildren();
 
-    T getFather();
-    T getMather();
     String getFirstName();
-    String getLastName();
-    String getSurName();
     Gender getGender();
     LocalDate getDateOfBirth();
 
