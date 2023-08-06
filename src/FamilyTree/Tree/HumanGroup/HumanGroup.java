@@ -4,6 +4,7 @@ package FamilyTree.Tree.HumanGroup;
 import FamilyTree.Tree.Comparators.ComparatorDateOfBirth;
 import FamilyTree.Tree.Comparators.ComparatorPatronymic;
 import FamilyTree.Tree.Comparators.HumanComparatorByName;
+import FamilyTree.Tree.HumanGroup.Human.Human;
 
 
 import java.io.Serializable;

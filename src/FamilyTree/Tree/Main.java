@@ -5,8 +5,6 @@ package FamilyTree.Tree;
 import FamilyTree.Tree.FileHander.FileHandler;
 import FamilyTree.Tree.HumanGroup.Human.Gender;
 import FamilyTree.Tree.HumanGroup.Human.Human;
-
-
 import FamilyTree.Tree.HumanGroup.HumanGroup;
 import FamilyTree.Tree.HumanGroup.Service;
 
@@ -42,12 +40,6 @@ public class Main {
          tree.addHuman(stiv);
 
 
-        System.out.println(tree.getHumansInfo());
-        tree.sortByName();
-        System.out.println(tree.getHumansInfo());
-        tree.sortPatronymic();
-        System.out.println(tree.getHumansInfo());
-        tree.sortDateOfBirth();
 
 
         System.out.println("Родители человека 1: " + "Отец:" + kostia.getFather() +": Мать:" + kostia.getMother());
@@ -56,10 +48,17 @@ public class Main {
          System.out.println("Родители человека 4: " + "Отец:" + julia.getFather() + ": Мать:" + julia.getMother());
         System.out.println("Родители человека 5: " + "Отец:" + stiv.getFather() + ": Мать:" + stiv.getMother());
 
+        System.out.println(tree.getHumansInfo());
+        tree.sortByName();
+        System.out.println(tree.getHumansInfo());
+        tree.sortPatronymic();
+        System.out.println(tree.getHumansInfo());
+        tree.sortDateOfBirth();
 
-//        HumanGroup<Dogs> group = new HumanGroup<>();
-//        group.sortByName();
-//        group.addHuman(new Dogs());
+
+        HumanGroup<Dogs> group = new HumanGroup<>();
+        group.sortByName();
+        group.addHuman(new Dogs());
         return tree;
     }
 

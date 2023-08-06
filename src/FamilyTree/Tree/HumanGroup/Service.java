@@ -1,9 +1,8 @@
 package FamilyTree.Tree.HumanGroup;
 
-
 import FamilyTree.Tree.HumanGroup.Human.Human;
 
-public class Service  {
+public class Service    {
 
     private HumanGroup<Human> group;
     public Service() {
@@ -23,6 +22,7 @@ public class Service  {
         }
         return stringBuilder.toString();
     }
+
     @Override
     public String toString(){
         return getHumansInfo();
@@ -36,5 +36,6 @@ public class Service  {
     public void sortDateOfBirth() {
         group.sortDateOfBirth();
     }
+
 
 }
