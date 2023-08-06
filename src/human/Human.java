@@ -32,7 +32,7 @@ public class Human {
         return lastname;
     }
 
-    public LocalDate getBirtchdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
