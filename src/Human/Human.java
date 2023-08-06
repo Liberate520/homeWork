@@ -6,7 +6,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+import family_tree.Element;
+
+public class Human implements Serializable, Element<Human>{
     private long id;
     private String name;
     private Gender gender;
@@ -184,6 +186,12 @@ public class Human implements Serializable{
             res.append("отсутствуют");
         }
         return res.toString();
+    }
+
+    @Override
+    public Human getMother() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMother'");
     }
 
     // @Override

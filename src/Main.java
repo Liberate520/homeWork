@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-import java.util.logging.FileHandler;
+// import java.util.logging.FileHandler;
 
 import Human.Gender;
 import Human.Human;
@@ -13,14 +13,14 @@ public class Main {
         FamilyTree tree = makeTree();
         System.out.println(tree);
 
-        tree.sortByAge();
-        System.out.println(tree);
+        // tree.sortByAge();
+        // System.out.println(tree);
 
-        tree.sortById();
-        System.out.println(tree);
+        // tree.sortById();
+        // System.out.println(tree);
 
-        tree.sortByName();
-        System.out.println(tree);
+        // tree.sortByName();
+        // System.out.println(tree);
 
         // fileHandler.save(tree, path);
 
