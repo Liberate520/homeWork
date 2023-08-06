@@ -1,13 +1,11 @@
 package com.pamihnenkov.view.commands;
-
-import com.pamihnenkov.view.ConsoleUI;
 import com.pamihnenkov.view.View;
 
 public abstract class Command {
-    private String description;
-    protected ConsoleUI view;
+    private final String description;
+    protected View view;
 
-    public Command(ConsoleUI view, String description) {
+    public Command(View view, String description) {
         this.view = view;
         this.description = description;
     }

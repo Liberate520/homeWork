@@ -8,7 +8,7 @@ import java.util.List;
 public class MainMenu {
     private List<Command> commands;
 
-    public MainMenu(ConsoleUI view) {
+    public MainMenu(View view) {
         this.commands = new ArrayList<>();
         commands.add(new ShowAllMembers(view));
         commands.add(new AddFamilyMember(view));
@@ -16,13 +16,14 @@ public class MainMenu {
         commands.add(new GetBrothersAndSister(view));
         commands.add(new OrderByAge(view));
         commands.add(new OrderByBirthDate(view));
+        commands.add(new StopProgram(view));
     }
 
     public String menu(){
-        System.out.println();
         StringBuilder sb = new StringBuilder("Главное меню:\n");
         for (int i = 0; i < commands.size(); i ++){
-            sb.append(i+1).append('.').append(commands.get(i).getDescription()).append('\n');
+            sb.append(i+1).append('.').append(commands.get(i).getDescription());
+            if (i < commands.size() - 1) sb.append('\n');
         }
         return sb.toString();
     }

@@ -1,29 +1,38 @@
 package com.pamihnenkov.view;
 
+import com.pamihnenkov.model.FamilyTreeMember;
 import com.pamihnenkov.model.enums.Relation;
 import com.pamihnenkov.presenter.Presenter;
-import org.w3c.dom.ls.LSOutput;
 
+import java.sql.SQLOutput;
 import java.util.*;
 
-public class ConsoleUI implements View{
+public class ConsoleUI<T extends FamilyTreeMember<T>> implements View{
 
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
-    private Presenter presenter;
-    private Scanner scanner;
+    private final Presenter<T> presenter;
+    private final Scanner scanner;
     private boolean work;
-    private MainMenu menu;
+    private final MainMenu menu;
 
     public ConsoleUI() {
-        this.presenter = new Presenter(this);
+        this.presenter = new Presenter<T>(this);
         this.scanner = new Scanner(System.in);
         this.work = true;
         menu = new MainMenu(this);
     }
 
     @Override
+    public void finish() {
+        System.out.println();
+        System.out.println("Завершение работы...");
+        presenter.finish();
+        this.work = false;
+    }
+
+    @Override
     public void start() {
-        System.out.println("Генеалогическое дерево.  ");
+        System.out.println("Генеалогическое дерево.");
         while (work){
             printMenu();
             execute();
@@ -32,6 +41,7 @@ public class ConsoleUI implements View{
     }
 
     private void execute() {
+        System.out.print("Выберите действие: ");
         String option = scanner.nextLine();
         if (checkForInteger(option)){
             int number = Integer.parseInt(option);
@@ -42,7 +52,7 @@ public class ConsoleUI implements View{
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand > 0 && numCommand < menu.getSize()){
+        if (numCommand > 0 && numCommand <= menu.getSize()){
             return true;
         } else {
             inputError();
@@ -65,21 +75,55 @@ public class ConsoleUI implements View{
     }
 
     private void printMenu() {
+        System.out.println("--------------------------------------------------");
         System.out.println(menu.menu());
+        System.out.println("--------------------------------------------------");
+    }
+
+    private void printCollection(Collection<String> collection) {
+        for (String str:collection) {
+            System.out.println(str);
+        }
+    }
+
+    private UUID chooseMember() {
+        Map<Integer,UUID> menu = new HashMap<>();
+        int count = 1;
+        System.out.println("Выберите члена семьи: ");
+        for (Map.Entry<UUID, String> entry : presenter.getAllMembersForChooseMenu().entrySet()){
+            System.out.println(count + ". " + entry.getValue());
+            menu.put(count,entry.getKey());
+            count = count + 1;
+        }
+        int option = scanner.nextInt();
+        return menu.get(option);
+    }
+
+    private String chooseRelation() {
+        Map<Integer,String> menu = new HashMap<>(Relation.values().length);
+        int count = 1;
+        System.out.print("Выберите вид родства семьи: ");
+        for (String relation : presenter.getRelationVariants()){
+            System.out.println(count + ". " + relation);
+            menu.put(count,relation);
+            count = count + 1;
+        }
+        int option = scanner.nextInt();
+        return menu.get(option);
     }
 
     public void addNewMember() {
-        System.out.print("Введите фамилию:");
+        System.out.print("Введите фамилию: ");
         String surname = scanner.nextLine();
-        System.out.print("Введите имя:");
+        System.out.print("Введите имя: ");
         String name = scanner.nextLine();
-        System.out.print("Введите отчество:");
+        System.out.print("Введите отчество: ");
         String lastname = scanner.nextLine();
-        System.out.print("Введите дату рождения (формат dd/mm/yyyy):");
+        System.out.print("Введите дату рождения (формат dd/mm/yyyy): ");
         String birthdate = scanner.nextLine();
-        System.out.print("Введите дату смерти (формат dd/mm/yyyy) либо оставьте поле пустым, если человек жив:");
+        System.out.print("Введите дату смерти (формат dd/mm/yyyy) либо оставьте поле пустым, если человек жив: ");
         String deathdate = scanner.nextLine();
-        System.out.print("Введите пол (м/ж):");
+        System.out.print("Введите пол (м/ж): ");
         String gender = scanner.nextLine();
         presenter.addNewMember(surname,name,lastname,birthdate,deathdate,gender);
     }
@@ -99,35 +143,7 @@ public class ConsoleUI implements View{
     }
 
     public void showAllMembers(){
-        printCollection(presenter.showAllMembers());
-    }
-
-    private UUID chooseMember() {
-        Map<Integer,UUID> menu = new HashMap<>();
-        int count = 1;
-        System.out.println("Выберите члена семьи: ");
-        for (Object entry : presenter.getAllMembersForChooseMenu().entrySet()){
-            Map.Entry<UUID, String> option = (Map.Entry<UUID, String>) entry;
-            System.out.println(count + ". " + option.getValue());
-            menu.put(count,option.getKey());
-            count = count + 1;
-        }
-        int option = scanner.nextInt();
-        return menu.get(option);
-    }
-
-    private String chooseRelation() {
-        Map<Integer,String> menu = new HashMap<>(Relation.values().length);
-        int count = 1;
-        System.out.print("Выберите вид родства семьи: ");
-        for (Object relation : presenter.getRelationVariants()){
-            String option = (String) relation;
-            System.out.println(count + ". " + option);
-            menu.put(count,option);
-            count = count + 1;
-        }
-        int option = scanner.nextInt();
-        return menu.get(option).toString();
+        printCollection(presenter.getAllMembers());
     }
 
     public void getSortedByBirthdate(){
@@ -138,11 +154,5 @@ public class ConsoleUI implements View{
     public void getSortedByAge(){
         System.out.println("Сортированный по возрасту список:");
         printCollection(presenter.getSortedByAge());
-    }
-
-    private void printCollection(Collection<String> collection) {
-        for (String str:collection) {
-            System.out.println(str);
-        }
     }
 }

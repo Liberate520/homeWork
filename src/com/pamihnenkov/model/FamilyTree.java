@@ -15,14 +15,12 @@ public class FamilyTree<T extends FamilyTreeMember<T>> implements Serializable, 
     @Serial
     private static final long serialVersionUID = 1L;
     private final Set<T> memberList = new HashSet<>();
-    public FamilyTree(T member) {
-        addFamilyMember(member);
-    }
+
     public FamilyTree() {
 
     }
-    public Set<T> getBrothersAndSister(T person){
-        return person.getParents().stream()
+    public Set<T> getBrothersAndSistersForMember(T member){
+        return member.getParents().stream()
                 .map(T::getChilds)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
@@ -42,6 +40,7 @@ public class FamilyTree<T extends FamilyTreeMember<T>> implements Serializable, 
     public T findOldestMember(){
         return memberList.stream().min((h1, h2) -> Period.between(h2.getBirthDate(),h1.getBirthDate()).getYears()).get();
     }
+
     public Set<T> getSortedByBirthdate(){
         Set<T> result = new TreeSet<>(new ComparatorByBirthday<T>());
         result.addAll(memberList);
@@ -51,11 +50,6 @@ public class FamilyTree<T extends FamilyTreeMember<T>> implements Serializable, 
         Set<T> result = new TreeSet<>(Comparator.comparingInt(FamilyTreeMember::getAge));
         result.addAll(memberList);
         return result;
-    }
-    public void print(Set<T> set){
-        for (T t:set) {
-            System.out.println(t.toString());
-        }
     }
 
     public Set<T> getAllMembers(){

@@ -1,10 +1,10 @@
 package com.pamihnenkov.view.commands;
 
-import com.pamihnenkov.view.ConsoleUI;
+import com.pamihnenkov.view.View;
 
 public class OrderByBirthDate extends Command{
 
-    public OrderByBirthDate(ConsoleUI view) {
+    public OrderByBirthDate(View view) {
         super(view, "Показать всех членов семьи отсортированных по дате рождения");
     }
 

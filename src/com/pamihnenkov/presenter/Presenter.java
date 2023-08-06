@@ -17,17 +17,28 @@ import java.util.stream.Collectors;
 
 public class Presenter<T extends FamilyTreeMember<T>> {
     private View view;
-    private Service<T> service;
+    private final Service<T> service;
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service<>();
+        service.load();
+    }
+
+    public Set<String> getAllMembers(){
+        return service.getAllMembers().stream().map(String::valueOf).collect(Collectors.toSet());
     }
 
     public void addNewMember(String surname, String name, String lastname, String birthDate, String deathDate, String gender) {
         System.out.println(deathDate == null);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        T newMember = (T) new Human(UUID.randomUUID(),name,surname,lastname, LocalDate.parse(birthDate,formatter), (deathDate == null || deathDate.length() == 0) ? null : LocalDate.parse(deathDate,formatter), gender.equals("м") ? Gender.MALE : Gender.FEMALE);
+        T newMember = (T) new Human(UUID.randomUUID(),
+                                    name,
+                                    surname,
+                                    lastname,
+                                    LocalDate.parse(birthDate,formatter),
+                                    (deathDate == null || deathDate.length() == 0) ? null : LocalDate.parse(deathDate,formatter),
+                                    gender.equals("м") ? Gender.MALE : Gender.FEMALE);
         service.addNewMember(newMember);
     }
 
@@ -55,7 +66,7 @@ public class Presenter<T extends FamilyTreeMember<T>> {
         return service.getSortedByAge().stream().map(String::valueOf).collect(Collectors.toSet());
     }
 
-    public Set<String> showAllMembers(){
-        return service.getAllMembers().stream().map(String::valueOf).collect(Collectors.toSet());
+    public void finish(){
+        service.save();
     }
 }
