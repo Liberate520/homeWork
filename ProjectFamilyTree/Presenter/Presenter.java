@@ -18,8 +18,8 @@ public class Presenter {
     public void addHuman(String name, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender){
         service.addHuman(name, localDateOfBirth, localDateofDeath, gender);
     }
-    public void setParentsAndChilds(Human child, Human parent1, Human parent2){
-        service.setParentsAndChilds(child, parent1, parent2);
+    public void setParentsAndChilds(int childId, int parent1Id, int parent2Id){
+        service.setParentsAndChilds(childId, parent1Id, parent2Id);
         getFamilyTreeInfo();
     }
     public void getFamilyTreeInfo(){

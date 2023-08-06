@@ -77,8 +77,7 @@ public class ConsoleUI implements View {
         System.out.println("Введите id другого родителя:");
         String parent2IdString = scanner.nextLine();
         int parent2Id = Integer.parseInt(parent2IdString);
-
-        presenter.setParentsAndChilds(child, parent1, parent2);
+        presenter.setParentsAndChilds(childId, parent1Id, parent2Id);
     }
     @Override
     public void printAnswer(String answer) {

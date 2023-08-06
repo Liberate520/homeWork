@@ -11,7 +11,10 @@ public class Service {
         Human human = new Human(idHuman++, name, localDateOfBirth, localDateofDeath, gender);
         familyTree.addHuman(human);
     }
-    public void setParentsAndChilds(Human child, Human parent1, Human parent2) {
+    public void setParentsAndChilds(int childId, int parent1Id, int parent2Id) {
+        Human child = familyTree.findHuman(childId);
+        Human parent1 = familyTree.findHuman(parent1Id);
+        Human parent2 = familyTree.findHuman(parent2Id);
         if(child.getFather() == null && parent1.getGender().equals(Gender.Male)){
             child.setFather(parent1);
             child.setMother(parent2);

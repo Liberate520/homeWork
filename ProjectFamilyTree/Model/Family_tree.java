@@ -11,7 +11,15 @@ public class Family_tree<E extends Family_Tree_Item> implements Serializable, It
     public void addHuman(E human){list.add(human);}
     public Family_tree(){list = new ArrayList<>();}
 
-
+   public E findHuman(int humanId){
+        E human = null;
+       for (int j = 0; j < list.size(); j++) {
+            if(humanId == j){
+                human = list.get(j);
+            }
+       }
+       return human;
+   }
 
     @Override
     public Iterator<E> iterator() {
