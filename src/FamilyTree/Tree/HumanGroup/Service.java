@@ -1,35 +1,31 @@
 package FamilyTree.Tree.HumanGroup;
 
+
 import FamilyTree.Tree.HumanGroup.Human.Human;
 
-
-public class Service extends Human {
+public class Service  {
 
     private HumanGroup<Human> group;
     public Service() {
-        group = new HumanGroup();
+        group = new HumanGroup<>();
     }
 
     public void addHuman(Human human) {
         Human Human =  new Human(human);
         group.addHuman(human);
     }
-    public String getInfo(){
+    public String getHumansInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список людей: \n" + group);
-
-
-//        Iterator<Human> iterator = group.iterator();
-//        while (iterator.hasNext()) {
-//            Human human = iterator.next();
-//            stringBuilder.append(human);
-//            stringBuilder.append("\n");
-//        }
+        stringBuilder.append("Список людей: \n");
         for (Human human: group){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
+    }
+    @Override
+    public String toString(){
+        return getHumansInfo();
     }
     public void sortByName() {
         group.sortByName();

@@ -2,12 +2,13 @@ package FamilyTree.Tree.HumanGroup.Human;
 
 import FamilyTree.Tree.HumanGroup.HumanGroupItem;
 
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human <E extends Human> implements Serializable, HumanGroupItem{
+public class Human <E extends Human> implements Serializable, HumanGroupItem {
     private List<E> children = new ArrayList<>();
 
 

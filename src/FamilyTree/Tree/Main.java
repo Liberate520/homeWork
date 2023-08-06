@@ -6,21 +6,23 @@ import FamilyTree.Tree.FileHander.FileHandler;
 import FamilyTree.Tree.HumanGroup.Human.Gender;
 import FamilyTree.Tree.HumanGroup.Human.Human;
 
+
 import FamilyTree.Tree.HumanGroup.HumanGroup;
 import FamilyTree.Tree.HumanGroup.Service;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main {
 
-    public  static void main(String[] args) {
+    public static void main(String[] args) {
         String filePath = "src/tree.out";
         FileHandler fileHandler = new FileHandler();
 
         Service humanList = Tree();
         System.out.println(humanList);
 
-        fileHandler.save(humanList, filePath);
+        fileHandler.save( humanList, filePath);
 
 //        FileHandler fileHandler = new FileHandler();
 //        Tree humanList = (Tree) fileHandler.read(filePath);
@@ -29,7 +31,7 @@ public class Main {
     public static Service Tree() {
         Service tree = new Service();
 
-         Human kostia = new Human("Константин", "Олегович", Gender.Male, LocalDate.of(1950,12,31), null,null);
+        Human kostia = new Human("Константин", "Олегович", Gender.Male, LocalDate.of(1950,12,31), null,null);
          tree.addHuman(kostia);
          Human andrea = new Human("Андрей", "Константинович", Gender.Male, LocalDate.of(1970,6,11), kostia, null);
          tree.addHuman(andrea);
@@ -41,11 +43,11 @@ public class Main {
          tree.addHuman(stiv);
 
 
-        System.out.println(tree.getInfo());
+        System.out.println(tree.getHumansInfo());
         tree.sortByName();
-        System.out.println(tree.getInfo());
+        System.out.println(tree.getHumansInfo());
         tree.sortPatronymic();
-        System.out.println(tree.getInfo());
+        System.out.println(tree.getHumansInfo());
         tree.sortDateOfBirth();
 
 
@@ -56,9 +58,9 @@ public class Main {
         System.out.println("Родители человека 5: " + "Отец:" + stiv.getFather() + ": Мать:" + stiv.getMother());
 
 
-        HumanGroup<Dogs> group = new HumanGroup<>();
-        group.sortByName();
-        group.addHuman(new Dogs());
+//        HumanGroup<Dogs> group = new HumanGroup<>();
+//        group.sortByName();
+//        group.addHuman(new Dogs());
         return tree;
     }
 

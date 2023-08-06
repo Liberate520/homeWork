@@ -4,12 +4,12 @@ package FamilyTree.Tree.HumanGroup;
 import FamilyTree.Tree.Comparators.ComparatorDateOfBirth;
 import FamilyTree.Tree.Comparators.ComparatorPatronymic;
 import FamilyTree.Tree.Comparators.HumanComparatorByName;
-import FamilyTree.Tree.Dogs;
-import FamilyTree.Tree.HumanGroup.Human.Human;
 
+
+import java.io.Serializable;
 import java.util.*;
 
-public class HumanGroup <E extends HumanGroupItem> implements Iterable<E> {
+public class HumanGroup <E extends HumanGroupItem> implements Iterable<E>, Serializable {
     private List<E> humanList;
 
     public HumanGroup() {
@@ -34,5 +34,6 @@ public class HumanGroup <E extends HumanGroupItem> implements Iterable<E> {
     public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
+
 }
 

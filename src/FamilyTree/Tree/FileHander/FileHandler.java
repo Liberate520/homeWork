@@ -1,5 +1,7 @@
 package FamilyTree.Tree.FileHander;
 
+import FamilyTree.Tree.HumanGroup.Service;
+
 import java.io.*;
 
 public class FileHandler implements Writable {
@@ -26,6 +28,8 @@ public class FileHandler implements Writable {
             }
         }
 
+    public void save(Service humanList, String filePath) {
+    }
 }
 
     
