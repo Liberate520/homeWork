@@ -233,7 +233,8 @@ public class Human implements FamilyMember, Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s, %s", name, surname, sex, birthDate);
+        return String.format("%d, %s, %s, %s, %s", identifier, name, surname,
+                             sex, birthDate);
     }
 
     @Override
@@ -247,7 +248,8 @@ public class Human implements FamilyMember, Serializable {
         }
 
         Human human = (Human) object;
-        return name.equals(human.name) && surname.equals(human.surname) &&
-               sex.equals(human.sex) && birthDate.equals(human.birthDate);
+        return identifier == human.identifier && name.equals(human.name) &&
+               surname.equals(human.surname) && sex.equals(human.sex) &&
+               birthDate.equals(human.birthDate);
     }
 }

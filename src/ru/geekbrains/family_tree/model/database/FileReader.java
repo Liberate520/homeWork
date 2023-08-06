@@ -1,25 +1,23 @@
 package ru.geekbrains.family_tree.model.database;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
- * Чтение и запись данных в файл.
+ * Чтение данных из файла.
  */
-public class FileActions implements ReadableAndWriteable {
+public class FileReader implements Reader {
 
     /**
      * Путь к файлу.
      */
     String file;
 
-    public FileActions(String file) {
+    public FileReader(String file) {
         this.file = file;
     }
 
-    public FileActions() {
+    public FileReader() {
         this(null);
     }
     
@@ -38,22 +36,6 @@ public class FileActions implements ReadableAndWriteable {
         } catch (Exception exception) {
             System.out.println("Произошла ошибка при работе с файлами.");
             return null;
-        }
-    }
-    
-    /**
-     * Записывает данные в файл или выводит информационное сообщение, если
-     * произошла ошибка при работе с файлами.
-     */
-    @Override
-    public void write(Object object) {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                                                    new FileOutputStream(file));
-            objectOutputStream.writeObject(object);
-            objectOutputStream.close();
-        } catch (Exception exception) {
-            System.out.println("Произошла ошибка при работе с файлами.");
         }
     }
 

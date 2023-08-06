@@ -23,6 +23,7 @@ public class Service {
     private FamilyTree<Human> familyTree;
 
     public Service() {
+        humanIdentifier = 1;
         familyTree = new FamilyTree<>();
     }
 
@@ -48,7 +49,7 @@ public class Service {
      */
     public boolean addFamilyMember(String name, String surname, Sex sex,
                                    LocalDate birthDate) {
-        Human familyMember = new Human(humanIdentifier, name, surname, sex,
+        Human familyMember = new Human(humanIdentifier++, name, surname, sex,
                                        birthDate);
         if (familyTree.add(familyMember)) {
             return true;
