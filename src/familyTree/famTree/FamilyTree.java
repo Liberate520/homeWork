@@ -1,7 +1,9 @@
-package familyTree;
+package familyTree.famTree;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import human.Human;
 
 public class FamilyTree {
     private int id;

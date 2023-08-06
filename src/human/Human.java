@@ -1,15 +1,19 @@
-package familyTree;
+package human;
+
+import java.time.LocalDate;
 
 public class Human {
     private int id;
     private String name;
     private String lastname;
-    private String birthdate;
+    private LocalDate birthdate;
+    private Gender gender;
 
-    public Human(String name, String lastname, String birthdate) {
+    public Human(String name, String lastname, LocalDate birthdate, Gender gender) {
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
+        this.gender = gender;
     }
 
     public int getId() {
@@ -28,12 +32,20 @@ public class Human {
         return lastname;
     }
 
-    public String getBirtchdate() {
+    public LocalDate getBirtchdate() {
         return birthdate;
+    }
+
+        public Gender gender() {
+        return gender;
     }
 
     @Override
     public String toString() {
-        return "id: " + id + ", name: " + name + ", lastname: " + lastname + ", birhtdate: " + birthdate + " г.р.";
+        return "id: " + id + 
+        ", name: " + name + 
+        ", lastname: " + lastname + 
+        ", gender: " + gender + 
+        ", birhtdate: " + birthdate + " г.р.";
     }
 }
