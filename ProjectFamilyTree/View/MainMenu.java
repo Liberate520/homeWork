@@ -12,6 +12,7 @@ public class MainMenu {
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new GetFamilyTreeInfo(consoleUI));
         commandList.add(new SetParentsAndChilds(consoleUI));
+        commandList.add(new SetSiblings(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new Finish(consoleUI));

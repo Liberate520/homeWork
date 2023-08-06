@@ -22,6 +22,10 @@ public class Presenter {
         service.setParentsAndChilds(childId, parent1Id, parent2Id);
         getFamilyTreeInfo();
     }
+    public void siblings(int human1Id, int human2Id){
+        service.siblings(human1Id, human2Id);
+        getFamilyTreeInfo();
+    }
     public void getFamilyTreeInfo(){
         String answer = service.getFamilyTree();
         view.printAnswer(answer);

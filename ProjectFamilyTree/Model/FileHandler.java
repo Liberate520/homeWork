@@ -21,3 +21,6 @@ public class FileHandler implements Writable {
         return familyTree;
     }
 }
+    /*FileHandler s1 = new FileHandler();
+        s1.Save(familyTree);
+                Family_tree s2 = (Family_tree) s1.Load();*/

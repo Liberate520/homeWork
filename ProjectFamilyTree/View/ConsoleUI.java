@@ -79,6 +79,15 @@ public class ConsoleUI implements View {
         int parent2Id = Integer.parseInt(parent2IdString);
         presenter.setParentsAndChilds(childId, parent1Id, parent2Id);
     }
+    public void siblings(){
+        System.out.println("Введите id одного из братьев/сестер:");
+        String human1IdString = scanner.nextLine();
+        int human1Id = Integer.parseInt(human1IdString);
+        System.out.println("Введите id другого из братьев/сестер:");
+        String human2IdString = scanner.nextLine();
+        int human2Id = Integer.parseInt(human2IdString);
+        presenter.siblings(human1Id, human2Id);
+    }
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);

@@ -33,11 +33,15 @@ public class Service {
         }
     }
 
-    public void siblings(Human human1, Human human2){
-        if((human1.getFather().equals(human2.getFather())) || human1.getMother().equals(human2.getMother())){
-            human1.getSibling().add(human2);
-            human2.getSibling().add(human1);
-        }
+    public void siblings(int human1Id, int human2Id){
+        Human human1 = familyTree.findHuman(human1Id);
+        Human human2 = familyTree.findHuman(human2Id);
+        human1.getSibling().add(human2);
+        human2.getSibling().add(human1);
+//        if((human1.getFather().equals(human2.getFather())) || human1.getMother().equals(human2.getMother())){
+//            human1.getSibling().add(human2);
+//            human2.getSibling().add(human1);
+//        }
     }
 
     public String getFamilyTree(){
