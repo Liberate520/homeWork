@@ -1,4 +1,12 @@
 package src.view.commands;
-
-public class AddChild {
+import src.view.ConsoleUI;
+public class AddChild  extends Command {
+    public AddChild(ConsoleUI consoleUI) {
+        super(consoleUI);
+        description = "Добавить ребенка ...";
+    }
+    @Override
+    public void execute(){
+        consoleUI.AddChild();
+    }
 }

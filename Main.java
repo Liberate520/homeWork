@@ -8,15 +8,34 @@ Code, Compile, Run and Debug online from anywhere in world.
 
 https://gb.ru/lessons/344116
 *******************************************************************************/
-import   java.time.LocalDate;   
+import   java.time.LocalDate;
+import java.time.format.*;
 // import static org.junit.Assert.*;  // https://junit.org/junit4/javadoc/latest/org/junit/Assert.html
+
+import src.model.Human;
+import src.model.Gender;
+import src.model.HumanTree;
+import src.model.ObjIO;
+import src.model.AgeCalculator;
+import src.model.HumanComparatorByAge;
+import src.model.HumanComparatorByAge;
+
+import src.view.View;
+import src.view.ConsoleUI;
+import src.presenter.Presenter;
+
+//Console;
 
 import java.io.*; // Serializable
 
 public class Main
 {
+	public static String fHumanLog = "Human.log";
+	public static String fHumanTreeLog = "HumanTree.log";
     public static Human h1, h2, h3, h4;
     public static Human h1_, h2_, h3_, h4_;
+
+	public static HumanTree newHumanTree;
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		System.out.println("Hello World\n OOP_FamilyTree.java Main() \n");
 		
@@ -68,8 +87,7 @@ public class Main
 		System.out.println("h1 + h2 + h3 + h4 :\n");
 		System.out.println(h1 + "\n" + h2 + "\n" + h3 + "\n" + h4);
 		
-		String fHumanLog = "Human.log";
-		String fHumanTreeLog = "HumanTree.log";
+
 		
 		saveToFile(fHumanLog);
 		loadFromFile(fHumanLog);
@@ -81,7 +99,7 @@ public class Main
 		
 		// test "HumanTree.log";
 		
-		HumanTree newHumanTree = new HumanTree();
+		newHumanTree = new HumanTree();
 		// add humans
 		newHumanTree.addHuman(h1);
 		newHumanTree.addHuman(h2);
@@ -121,8 +139,35 @@ public class Main
 		// Sort by Age
 		newHumanTree.sortByAge();
 		System.out.println("HumanTree.sortByAge() :\n" + newHumanTree);
+
+		ParseDT();
+
+		TestMVP();
 	}
-	
+
+	public static void ParseDT(){
+
+		// create a formatter
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");  // "dd MMM uuuu"
+
+		// create a LocalDate object and
+		LocalDate lt = LocalDate.parse("31.12.2018", formatter);
+
+		// print result
+		System.out.println("LocalDate 31.12.2018  dd.MM.yyyy : "
+				+ lt.format(formatter));
+	}
+
+	public static void TestMVP(){
+		View view = new ConsoleUI();
+		System.out.println("\n\n\n\n\nHumanTree. TestMVP () :\n");
+
+		ObjIO serialize = new ObjIO();
+		HumanComparatorByAge sortAge =  new HumanComparatorByAge();
+		new Presenter(view, newHumanTree, serialize, sortAge);
+		view.start();
+	}
+
 	public static void testCalculateAge_Success()     {
         // setup
         LocalDate birthDate = LocalDate.of(1961, 5, 17);

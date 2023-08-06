@@ -1,4 +1,12 @@
 package src.view.commands;
-//import study_group.view.ConsoleUI;
-public class AddHuman {
+import src.view.ConsoleUI;
+public class AddHuman extends Command {
+    public AddHuman(ConsoleUI consoleUI) {
+        super(consoleUI);
+        description = "Добавить человека ...";
+    }
+    @Override
+    public void execute(){
+        consoleUI.addHuman();
+    }
 }

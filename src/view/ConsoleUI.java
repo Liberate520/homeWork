@@ -1,21 +1,24 @@
-package src;
 package src.view;
 
+import src.model.Gender;
 import src.presenter.Presenter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;  //   DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.io.IOException;
 public class ConsoleUI  implements View {
 
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;
     private Presenter presenter;
-    private boolean work;
+//    private boolean work;
     private MainMenu menu;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
-        work = true;
         menu = new MainMenu(this);
     }
 
@@ -27,38 +30,98 @@ public class ConsoleUI  implements View {
     @Override
     public void start() {
         hello();
-        while (work){
+        while (menu.work()){
             printMenu();
             execute();
         }
     }
 
-    public void finish() {
-        System.out.println("Приятно было пообщаться...");
-        work = false;
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
-//    public void sortByAge() {
-//        presenter.sortByAge();
-//    }
-//
-//    public void sortByName() {
-//        presenter.sortByName();
-//    }
-//
-//    public void getStudentsListInfo() {
-//        presenter.getStudentsListInfo();
-//    }
+    @Override
+    public String scan() {
+        scanner = new Scanner(System.in, "Cp866");
+        return scanner.nextLine();
+    }
 
-//    public void addStudent() {
-//        System.out.println("Введите имя студента");
-//        String name = scanner.nextLine();
-//        System.out.println("Укажите возраст студента");
-//        String ageString = scanner.nextLine();
-//        //сделать проверку ввода возраста
-//        int age = Integer.parseInt(ageString);
-//        presenter.addStudent(name, age);
-//    }
+    public void finish() {
+        System.out.println("Приятно было пообщаться...");
+    }
+
+    public void sortByAge() {
+        presenter.sortByAge();
+    }
+
+    public void sortByName() {
+        presenter.sortByName();
+    }
+
+    public void getHumansInfo() {
+        presenter.getHumansInfo();
+    }
+
+    public void addHuman() {
+        Gender gSex = Gender.Man;
+        DateTimeFormatter formatterDt;
+        formatterDt = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        System.out.print("Введите имя человека :");
+        String name = scanner.nextLine();
+        System.out.print("Введите пол :");
+        String aG = "м",   aGendeereStr = scanner.nextLine();
+        if (!aGendeereStr.toLowerCase().contains("м")) {
+            gSex = Gender.Femail;  // aG = "ж";
+        }
+        boolean dt_good = false; LocalDate lt = LocalDate.now();
+        while (!dt_good){
+            System.out.print("Введите день рождения :");
+            String aBD = scanner.nextLine();
+            lt = LocalDate.parse(aBD, formatterDt);
+
+            try {  // https://www.programcreek.com/java-api-examples/?api=java.time.format.DateTimeParseException
+                lt = LocalDate.parse(aBD, formatterDt);  dt_good = true;
+            } catch (DateTimeParseException e) {
+//                 java.time.format.DateTimeParseException
+                System.out.print(e.getMessage());
+                dt_good = false; lt = LocalDate.now();
+
+//                e.printStackTrace();
+//                throw MessageException.of("The date '" + aBD + "' does not respect format '" , e);
+            }
+        }
+        presenter.addHuman(name, gSex, lt);
+    }
+
+    public void AddChild(){
+//        presenter.addChild(name, age);
+    }
+
+    public void humanSearch() {
+        System.out.print("Введите имя человека для поиска-> ");
+        String name = scan();
+        presenter.humanSearch(name);
+    }
+
+    public void LoadHumansFromFile() {
+        System.out.print("Введите имя Файла-> ");
+        String fileName = scan();
+        presenter.LoadHumansFromFile(fileName);
+    }
+
+    public void AppendHumansFromFile(){
+        System.out.print("Введите имя Файла-> ");
+        String fileName = scan();
+        presenter.LoadHumansFromFile(fileName);
+    }
+
+    public void SaveHumansToFile() {  // throws IOException, ClassNotFoundException
+        System.out.print("Введите имя Файла-> ");
+        String fileName = scan();
+        presenter.SaveHumansToFile(fileName);
+    }
 
     private void hello(){
         System.out.println("\t Human Tree \nДоброго времени суток!");
@@ -84,7 +147,7 @@ public class ConsoleUI  implements View {
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand < menu.getSize()){
+        if (numCommand <= menu.getSize()){
             return true;
         } else {
             inputError();
@@ -94,10 +157,13 @@ public class ConsoleUI  implements View {
 
     private void printMenu(){
         System.out.println(menu.menu());
+        System.out.print("Выберите пункт Меню -> ");
     }
 
     private void inputError(){
         System.out.println(INPUT_ERROR);
     }
+
+
 
 }
