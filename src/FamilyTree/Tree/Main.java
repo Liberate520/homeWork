@@ -10,7 +10,6 @@ import FamilyTree.Tree.HumanGroup.Human.Human;
 import FamilyTree.Tree.HumanGroup.HumanGroup;
 import FamilyTree.Tree.HumanGroup.Service;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main {
