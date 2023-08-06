@@ -1,3 +1,4 @@
+
 import human.Gender;
 import human.Person;
 import tree.FamilyTree;
@@ -28,6 +29,7 @@ public class Test {
         Person human4 = new Person("Виталий", "Шишкарев",
                 "Юрьевич", LocalDate.of(1981, 9,17),
                 Gender.Male);
+
         //endregion
 
         //region Adding Parent, Child Relationships
@@ -46,9 +48,15 @@ public class Test {
 
         service.sortByName();
 
+
+        System.out.println(service.getHumanListInfo());
+
         service.sortByAge();
 
         System.out.println(service.getHumanListInfo());
+
+        System.out.println(human.getMather());
+
 
         //region task HomeWork002
 //        //Выводим на экран human3

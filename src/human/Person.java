@@ -1,10 +1,12 @@
 package human;
 
+import tree.TreeItem;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person extends Human implements Comparable<Person> {
+public class Person extends Human implements Comparable<Person>, TreeItem<Person> {
     private LocalDate dateOfdDeath;
     private Person mather;
     private Person father;
@@ -47,6 +49,8 @@ public class Person extends Human implements Comparable<Person> {
     public Person getMather() {
         return mather;
     }
+
+
 
     /**
      * Добавление информации об отце с обновлением информации о ребенке
@@ -97,7 +101,7 @@ public class Person extends Human implements Comparable<Person> {
      * Получение ФИО
      * @return
      */
-    private String getFullName(){
+    public String getFullName(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.getLastName() + " " +
                 this.getFirstName().toUpperCase().charAt(0) + ". " +

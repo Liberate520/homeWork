@@ -1,10 +1,11 @@
 import human.Human;
+import human.Person;
 import tree.FamilyTree;
 
 import java.util.Collections;
 
 public class Service {
-    private FamilyTree familyTree;
+    private FamilyTree<Person> familyTree;
 
     public Service(FamilyTree familyTree) {
         this.familyTree = familyTree;
@@ -14,7 +15,7 @@ public class Service {
     public String getHumanListInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список всех людей: \n");
-        for (Human human: familyTree){
+        for (Person human: familyTree){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
