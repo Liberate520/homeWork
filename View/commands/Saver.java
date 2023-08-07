@@ -4,7 +4,7 @@ public class Saver extends Command {
 
     public Saver(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Сохранить";
+        description = "Сохранить в файл";
     }
 
     @Override

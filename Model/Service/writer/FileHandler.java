@@ -1,9 +1,5 @@
 package Model.Service.writer;
 
-import View.MainMenu;
-import View.View;
-import com.sun.tools.javac.Main;
-
 import java.io.*;
 import java.io.FileNotFoundException;
 
@@ -24,8 +20,6 @@ public class FileHandler implements Writable {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))){
             return objectInputStream.readObject();
         }  catch (FileNotFoundException e){
-           // e.printStackTrace();
-            System.out.println("File not found");
             return null;
         } catch (Exception e){
             e.printStackTrace();

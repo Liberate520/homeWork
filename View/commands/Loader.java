@@ -6,7 +6,7 @@ public class Loader extends Command{
 
     public Loader(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Загрузить файл";
+        description = "Загрузить из файл";
     }
 
     @Override

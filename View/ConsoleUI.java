@@ -1,8 +1,11 @@
 package View;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.lang.NullPointerException;
 
 import Model.*;
 import Presenter.*;
@@ -54,9 +57,11 @@ public class ConsoleUI implements View {
     public void save() {
         presenter.saveFile();
     }
+
     public void load() {
         presenter.load();
     }
+
     public void getFamilyInfo() {
         presenter.getFamilyInfo();
     }
@@ -71,13 +76,24 @@ public class ConsoleUI implements View {
         LocalDate dateOfDeath = null;
         System.out.print("Введите роль в семье: ");
         String familyStatus = scanner.nextLine();
-        //TODO сделать проверку ввода возраста
         System.out.printf("Имя: %s\n", name, "роль в семье: %n\n", familyStatus);
         presenter.addHuman(name, gender, dateOfBirth, dateOfDeath, familyStatus);
     }
 
+    public void delHuman() {
+        System.out.print("Удалить человека \nВведите имя: ");
+        String name = scanner.nextLine();
+        FamilyMember human = presenter.findHuman(name);
+        if (human == null) {
+            System.out.println("Нет такого человека!");
+        } else {
+            presenter.removeFamilyMember(human);
+            System.out.printf("Удалили - имя: %s\n", human.getNameFamilyMember() + ", возраст: " + human.getAgeFamilyMember());
+        }
+    }
+
     private void hello() {
-        System.out.println("Hello World :) !");
+        System.out.println("\nHello World! :) This is my Family Tree.\n");
     }
 
     private void execute() {

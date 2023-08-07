@@ -5,7 +5,7 @@ import View.*;
 public class Finish extends Command {
     public Finish(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Закончить работу";
+        description = "Завершение работы";
     }
 
     public void execute() {
