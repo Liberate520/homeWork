@@ -7,15 +7,7 @@ public class Main {
 //        System.out.println(service.printTree());
 //        System.out.println(service.sortByAge());
         ConsoleUI view = new ConsoleUI();
-//        view.addPerson();
-        view.read();
-        view.printTree();
-        view.printTreeConnections();
-//        view.putConnection(true);
-//        view.printTree();
-//        view.showConnections();
-//        view.write();
-        view.sortTree("age");
+        view.start();
     }
 
 //    public static Service<Person> makeTree() {

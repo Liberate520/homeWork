@@ -16,17 +16,25 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private TextUI text;
     private boolean work;
+    private MainMenu menu;
 
     public ConsoleUI() {
         this.scanner = new Scanner(System.in);
         this.presenter = new Presenter(this);
         this.text = new TextUI();
         this.work = true;
+        this.menu = new MainMenu(this);
     }
 
     @Override
     public void start() {
-
+        System.out.println(text.hello);
+        while (work) {
+            printPrompts(menu.printMenu());
+            String choice = scanner.nextLine();
+            // Метод валидации ввода (строка из цифр, в диапазоне пунктов меню)
+            menu.execute(choice);
+        }
     }
 
     public void addPerson() {

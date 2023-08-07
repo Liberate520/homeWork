@@ -1,6 +1,7 @@
 package view;
 
 public class TextUI {
+    protected String hello;
     protected String goodbye;
     protected String promptName;
     protected String promptSurname;
@@ -16,6 +17,7 @@ public class TextUI {
     protected String promptShowConnections;
 
     public TextUI() {
+        this.hello = "Программа запущена.";
         this.goodbye = "Программа завершает работу.";
         this.promptName = "Введите имя:";
         this.promptSurname = "Введите фамилию:";

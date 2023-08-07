@@ -56,6 +56,8 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
              tree) {
             sb.append(showConnections(item.getKey())).append("\n");
         }
+        if (sb.toString().isBlank())
+            return "Список пока пуст. Попробуйте загрузить из файла, или добавить людей.\n";
         return sb.toString();
     }
 
@@ -65,6 +67,8 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
     }
 
     public String printTree() {
+        if (tree.toString().isBlank())
+            return "Список пока пуст. Попробуйте загрузить из файла, или добавить людей.\n";
         return tree.toString();
     }
 
