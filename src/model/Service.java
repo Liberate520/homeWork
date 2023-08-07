@@ -20,17 +20,13 @@ public class Service {
     this(new FamilyTree<>());
 }
 
-  public Service(FamilyTreeFileIO fileIo) {
-    this.fileIo = fileIo;
-    tree = new FamilyTree<>();
-  }
 
   public void save() throws IOException {
-    fileIo.saveToFile(tree, "family_tree_data.ser");
+    fileIo.saveToFile(tree, FamilyTreeFileIO.filename);
   }
 
   public FamilyTree<Human> load() throws ClassNotFoundException, IOException {
-    return tree = fileIo.loadFromFile("family_tree_data.ser");
+    return tree = fileIo.loadFromFile(FamilyTreeFileIO.filename);
   }
 
   public String addHuman(String name, String genderString, String birthDate,
@@ -48,9 +44,13 @@ public class Service {
     this.fileIo = fileIo;
   }
 
+  public void setFamilyTree(FamilyTree<Human> tree) {
+    this.tree = tree;
+  }
 
   public void sortByName(){
     tree.sortByName();
+
   }
 
   public void sortByBirthDate(){

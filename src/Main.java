@@ -3,6 +3,7 @@ import model.Service;
 import model.familyTree.FamilyTree;
 import model.human.Gender;
 import model.human.Human;
+import model.save.FamilyTreeFileIO;
 import model.save.FamilyTreeFileManager;
 import view.Console;
 import view.View;
@@ -31,16 +32,15 @@ public class Main {
 
         tree.add(grandMother);
 
-        System.out.println(tree);
-
+        FamilyTreeFileIO fileIo = new FamilyTreeFileManager();
         Service service = new Service(tree);
-        service.setFileIo(new FamilyTreeFileManager());
+        service.setFileIo(fileIo);
         service.save();
 
         tree = service.load();
-        service.getHumanList();
 
         View view = new Console();
+        view.setFamilyTree(tree);
         view.start();
     }
 }

@@ -2,18 +2,18 @@ package view.commands;
 
 import view.Console;
 
-public class getList {
+public class sortByName {
   private Console console;
 
-  public getList(Console console) {
+  public sortByName(Console console) {
     this.console = console;
   }
 
   public String getDescription() {
-    return "Получить список людей";
+    return "Отсортировать по имени";
   }
 
   public void execute() {
-    console.getHumanList();
+    console.sortByName();
   }
 }

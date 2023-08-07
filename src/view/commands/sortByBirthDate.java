@@ -2,18 +2,18 @@ package view.commands;
 
 import view.Console;
 
-public class getList {
+public class sortByBirthDate {
   private Console console;
 
-  public getList(Console console) {
+  public sortByBirthDate(Console console) {
     this.console = console;
   }
 
   public String getDescription() {
-    return "Получить список людей";
+    return "Отсортировать по дате рождения";
   }
 
   public void execute() {
-    console.getHumanList();
+    console.sortByBirthDate();
   }
 }
