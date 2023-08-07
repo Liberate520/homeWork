@@ -1,5 +1,4 @@
-//enum RelationshipType {
-//    PARENT,
-//    CHILD,
-//
-//}
+enum RelationshipType {
+    PARENT,
+    CHILD,
+}
