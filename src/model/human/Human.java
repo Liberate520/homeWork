@@ -1,6 +1,6 @@
-package human;
+package model.human;
 
-import family_tree.FamilyTreeElement;
+import model.family_tree.FamilyTreeElement;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -43,7 +43,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeElement
 
     @Override
     public void marry(Human partner){
-        if(this.spouse == null || partner.spouse == null) {
+        if(this.spouse == null && partner.spouse == null) {
             this.spouse = partner;
             partner.spouse = this;
         }

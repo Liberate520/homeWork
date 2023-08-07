@@ -1,11 +1,10 @@
-package work_with_file;
+package model.work_with_file;
 
-import family_tree.FamilyTree;
-import work_with_file.interfaces.ReadInterface;
+import model.family_tree.FamilyTree;
+import model.work_with_file.interfaces.ReadInterface;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 
 public class ReadToFile implements ReadInterface {
     private String path;

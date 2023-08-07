@@ -1,6 +1,4 @@
-package human.iterator;
-
-import human.Human;
+package model.human.iterator;
 
 import java.util.Iterator;
 import java.util.List;

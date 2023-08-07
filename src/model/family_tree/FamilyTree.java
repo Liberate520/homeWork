@@ -1,9 +1,8 @@
-package family_tree;
+package model.family_tree;
 
-import human.Human;
-import human.comparator.HumanComparatorByBirthDay;
-import human.comparator.HumanComparatorByName;
-import human.iterator.HumanIterator;
+import model.human.comparator.HumanComparatorByBirthDay;
+import model.human.comparator.HumanComparatorByName;
+import model.human.iterator.HumanIterator;
 
 import java.io.Serializable;
 import java.util.*;
@@ -44,6 +43,10 @@ public class FamilyTree<E extends FamilyTreeElement> implements Serializable, It
             sb.append("\n\r");
         }
         return sb.toString();
+    }
+
+    public List<E> getHumanList() {
+        return humansList;
     }
 
     @Override
