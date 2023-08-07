@@ -1,11 +1,12 @@
-package module.human;
+package model.human;
 
-import module.Service.TreeNode;
+import model.genealogicalTree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,8 +25,8 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
     private List<Human> children;
 
 
-    public Human(int idPerson, String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
-        this.idPerson = idPerson;
+    public Human(String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
+        this.idPerson = -1;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -34,7 +35,11 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         this.mother = mother;
         this.father = father;
         this.spouse = spouse;
-        this.children = children;
+        this.children = new ArrayList<>();
+    }
+
+    public Human(String name, String lastName, Gender gender){
+        this(name, lastName, gender, null, null, null, null, null, null);
     }
 
     @Override
@@ -52,54 +57,7 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.idPerson);
-        sb.append(" ");
-        sb.append(this.name);
-        sb.append(" ");
-        sb.append(this.lastName);
-        sb.append("\n");
-        if (this.gender == Gender.male) {
-            sb.append("male");
-        } else {
-            sb.append("female");
-        }
-
-        sb.append("\n");
-
-        sb.append("Date of birth: ");
-        sb.append(this.birthDate.format(DateTimeFormatter.ISO_DATE));
-        sb.append("\n");
-        if(checkDead(this)){
-            sb.append("Date of death: ");
-            sb.append(this.deathDate.format(DateTimeFormatter.ISO_DATE));
-            sb.append("\n");
-        }
-        sb.append("Age: ");
-        sb.append(this.showAge());
-        sb.append("\n");
-        if(this.spouse!=null){
-            sb.append("Spouse: ");
-            sb.append(this.spouse.name);
-            sb.append(" ");
-            sb.append(this.spouse.lastName);
-            sb.append("\n");
-        }
-        if(!this.children.isEmpty()){
-            sb.append("Children: ");
-            for (Human human: this.children
-            ) {
-                sb.append(human.name);
-                sb.append(" ");
-
-            }
-            sb.append("\n");
-        }
-
-
-
-
-        return sb.toString();
+        return getInfo();
     }
 
 
@@ -110,6 +68,7 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
     public int getID(){
         return this.idPerson;
     }
+    public void setID(int id){idPerson=id;}
     public String getName(){
         return this.name;
     }
@@ -190,7 +149,7 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         if(this.children.size()!=0){
 
             for (Human human: this.children
-                 ) {
+            ) {
                 sb.append(human.name);
                 sb.append(",");
             }
@@ -200,14 +159,12 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
 
     @Override
     public int compareTo(Human o) {
-        return 0;
+        if(this.idPerson > o.idPerson) return 1;
+        else if (idPerson < o.idPerson) {
+            return -1;
+        }else return 0;
     }
 
-
-//    @Override
-//    public int compareTo(Human o) {
-//        return this.idPerson.compareTo(o.getID());
-//    }
 }
 
 

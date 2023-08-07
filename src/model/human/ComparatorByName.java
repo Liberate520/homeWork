@@ -1,6 +1,6 @@
-package module.human;
+package model.human;
 
-import module.Service.TreeNode;
+import model.genealogicalTree.TreeNode;
 
 import java.util.Comparator;
 

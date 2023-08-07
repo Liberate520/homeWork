@@ -1,7 +1,7 @@
 package view;
 
-import module.human.Gender;
-import module.human.Human;
+import model.human.Gender;
+import model.human.Human;
 import presenter.Presenter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -34,7 +34,6 @@ public class ConsoleUI implements View{
             System.out.print("You should choose the action: ");
             String choice = scanner.nextLine();
 
-            //TODO проверка на валидность введенной цифры(getSize)
             try{
                 int choiceInt = Integer.parseInt(choice);
                 if(choiceInt < menu.getSize()) menu.execute(choiceInt);
@@ -60,11 +59,13 @@ public class ConsoleUI implements View{
 
     public void sortByAge() {
         presenter.sortByAge();
+        presenter.getInfo();
 
     }
 
     public void sortByName() {
         presenter.sortByName();
+        presenter.getInfo();
     }
 
     public void getFamilyInfo() {
@@ -116,12 +117,12 @@ public class ConsoleUI implements View{
         //DEATH DATE
         LocalDate deathDate = null;
 
-        System.out.println("Insert date of date in format dd.mm.yyyy\nInsert 00.00.0000 if person is alive: ");
+        System.out.println("Insert date of date in format dd.mm.yyyy\nPrint null if person is alive: ");
         String deathdateString = scanner.nextLine();
         SimpleDateFormat formatDeath = new SimpleDateFormat();
         formatDeath.applyPattern("dd.MM.yyyy");
         try {
-            if(!deathdateString.equals("00.00.0000")) {
+            if(!deathdateString.equals("null")) {
                 Date deathdate = formatDeath.parse(birthdateString);
                 deathDate = convertToLocalDate(deathdate);
             }

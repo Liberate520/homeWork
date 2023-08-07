@@ -1,13 +1,5 @@
-import module.genealogicalTree.GenealogicalTree;
-import module.Service.FileHandler;
-import module.human.Gender;
-import module.human.Human;
+import model.Service.FileHandler;
 import view.ConsoleUI;
-import view.View;
-
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
 
 public class Main {
     static String filePath = "familytree.out";

@@ -1,4 +1,4 @@
-package module.Service;
+package model.Service;
 
 import java.io.Serializable;
 

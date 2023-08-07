@@ -1,4 +1,4 @@
-package module.Service;
+package model.genealogicalTree;
 
 import java.time.LocalDate;
 

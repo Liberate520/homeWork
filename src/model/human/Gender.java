@@ -1,4 +1,4 @@
-package module.human;
+package model.human;
 
 public enum Gender {
     male, female
