@@ -1,8 +1,12 @@
 package view;
 
+
+import model.Service.ServiceTree;
 import model.human.Gender;
 import model.human.Human;
 import presenter.Presenter;
+
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -181,6 +185,52 @@ public class ConsoleUI implements View{
 
         if(idSpouse2<=presenter.getFamilySize() && idSpouse1<= presenter.getFamilySize()){
             presenter.setSpouseTogether(idSpouse1, idSpouse2);
+        }
+    }
+
+    public void addChildren() {
+        System.out.println("Please, enter ID of parent: ");
+        int idParent = scanner.nextInt();
+        System.out.println();
+        System.out.println("Please, enter ID of child: ");
+        int idChild = scanner.nextInt();
+        if(idChild<=presenter.getFamilySize() && idParent<= presenter.getFamilySize()){
+            presenter.setChild(idParent, idChild);
+        }
+    }
+
+    public void saveFile() throws IOException {
+        FileOutputStream file = new FileOutputStream("familytree.out");
+        ObjectOutputStream out = new ObjectOutputStream(file);
+
+        // Method for serialization of object
+        out.writeObject(presenter.getTree());
+
+        out.close();
+        file.close();
+    }
+
+    public void readFile() {
+        try
+        {
+            FileInputStream file = new FileInputStream("familytree.out");
+            ObjectInputStream in = new ObjectInputStream(file);
+            ServiceTree object = (ServiceTree)in.readObject();
+            presenter.setServiceTree(object);
+
+            in.close();
+            file.close();
+
+        }
+
+        catch(IOException ex)
+        {
+            System.out.println("IOException is caught");
+        }
+
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println("ClassNotFoundException is caught");
         }
     }
 }

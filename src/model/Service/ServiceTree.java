@@ -5,15 +5,23 @@ import model.genealogicalTree.TreeNode;
 import model.human.Gender;
 import model.human.Human;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ServiceTree<T extends TreeNode> {
+public class ServiceTree<T extends TreeNode> extends OutputStream implements Serializable {
     private int idHuman;
     private GenealogicalTree<T> family;
 
     public ServiceTree() {
         family = new GenealogicalTree<>();
+    }
+
+    @Override
+    public void write(int b) throws IOException {
+
     }
 
     public void addHuman(String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children){
@@ -53,4 +61,15 @@ public class ServiceTree<T extends TreeNode> {
         first.setSpouse(second);
         second.setSpouse(first);
     }
+
+    public void setChild(int idParent, int idChild) {
+        Human parent = (Human) family.getHumanByID(idParent);
+        Human child = (Human) family.getHumanByID(idChild);
+        parent.setChild(child);
+        Gender genderParent = parent.getGender();
+        if(genderParent.equals(Gender.male)) child.addFather(parent);
+        else child.addMother(parent);
+    }
+
+
 }

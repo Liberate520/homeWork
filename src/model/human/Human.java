@@ -83,16 +83,8 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         return this.birthDate;
     }
 
+    public Gender getGender(){return this.gender;}
 
-    public void addChildren(Human child){
-        if(!this.children.contains(child)) {
-            this.children.add(child);
-        }
-    }
-
-    public void addSpouse(Human human){
-        this.spouse = human;
-    }
 
     public void addMother(Human human){
         this.mother = human;
@@ -140,9 +132,36 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         sb.append("Last name:");
         sb.append(this.lastName);
         sb.append("/");
-        sb.append("Birthdate:");
+        sb.append("Gender:");
+        sb.append(this.gender);
+        sb.append("/");
+        sb.append("Birth date:");
         sb.append(this.birthDate);
         sb.append("/");
+        if(deathDate!=null){
+            sb.append("Death date:");
+            sb.append(this.deathDate);
+            sb.append("/");
+        }
+
+
+        if(this.mother !=null) {
+            sb.append("Mother:");
+            sb.append(this.mother.name);
+            sb.append(" ");
+            sb.append(this.mother.lastName);
+            sb.append("/");
+        }
+
+
+        if(this.father !=null) {
+            sb.append("Father:");
+            sb.append(this.father.name);
+            sb.append(" ");
+            sb.append(this.father.lastName);
+            sb.append("/");
+        }
+
         sb.append("Spouse:");
         if(this.spouse !=null) {
             sb.append(this.spouse.name);
@@ -158,6 +177,7 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
                 sb.append(human.name);
                 sb.append(",");
             }
+            sb.deleteCharAt(sb.length() - 1);
         }else sb.append("Absent");
         return sb.toString();
     }
@@ -169,11 +189,11 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
             return -1;
         }else return 0;
     }
-
-    public int getIdPerson() {
-        return idPerson;
+    public void setChild(Human child) {
+        if(!this.children.contains(child)) {
+            this.children.add(child);
+        }
     }
-
 }
 
 

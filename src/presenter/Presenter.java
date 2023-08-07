@@ -5,6 +5,7 @@ import model.human.Gender;
 import model.human.Human;
 import view.View;
 
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -45,5 +46,17 @@ public class Presenter {
 
     public void setSpouseTogether(int idSpouse1, int idSpouse2) {
         family.setSpouseTogether(idSpouse1, idSpouse2);
+    }
+
+    public void setChild(int idParent, int idChild) {
+        family.setChild(idParent, idChild);
+    }
+
+    public ServiceTree getTree() {
+        return family;
+    }
+
+    public void setServiceTree(ServiceTree object){
+        this.family = object;
     }
 }
