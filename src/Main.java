@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Iterator;
 
 import FamilyTree.FamilyTree;
 import FileHandler.FileHandler;
@@ -8,12 +9,25 @@ public class Main {
 public static void main(String[] args) {
     String path = "homeWork/src/data/familyData.out";
     // FileHandler fh = new FileHandler();
-    // FamilyTree tree = NewTree();
-    // System.out.println(tree.getInfo());
-    // fh.save(tree, path);
-    FileHandler fh = new FileHandler();
-    FamilyTree tree = (FamilyTree)fh.load(path);
+    FamilyTree tree = NewTree();
     System.out.println(tree.getInfo());
+    tree.sortByAge();
+    System.out.println(tree.getInfo());
+    tree.sortByName();
+    System.out.println(tree.getInfo());
+    // fh.save(tree, path);
+    // FileHandler fh = new FileHandler();
+    // FamilyTree tree = (FamilyTree)fh.load(path);
+    // System.out.println(tree.getInfo());
+    Iterator<Human> hIterator = tree.iterator();
+    while(hIterator.hasNext()){
+        Human human = hIterator.next();
+        System.out.println(human.getName());
+    }
+        
+    for(Human human: tree){
+
+    }
 }  
 public static FamilyTree NewTree(){
     FamilyTree tree = new FamilyTree();

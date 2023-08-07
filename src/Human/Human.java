@@ -224,6 +224,10 @@ public class Human implements Serializable{
             return false;
         }
         Human human = (Human)obj;
-        return human.getId()==human.getId();
+        boolean eqName = getName().equalsIgnoreCase(human.getName());
+        boolean eqGender = getGender().equalsIgnoreCase(human.getGender());
+        boolean eqBirth = getDateOfBirth().equals(human.getDateOfBirth());
+        boolean eqAge = getAge()==human.getAge();
+        return eqName&&eqGender&&eqBirth&&eqAge;    
     }
 }
