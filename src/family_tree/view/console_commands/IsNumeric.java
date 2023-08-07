@@ -1,4 +1,4 @@
-package family_tree.view;
+package family_tree.view.console_commands;
 
 public class IsNumeric {
     public boolean checkNum(String str) {

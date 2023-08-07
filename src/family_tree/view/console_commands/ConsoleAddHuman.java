@@ -1,4 +1,4 @@
-package family_tree.view;
+package family_tree.view.console_commands;
 
 import family_tree.model.human.Gender;
 
@@ -13,9 +13,9 @@ public class ConsoleAddHuman{
     private String name;
     private Gender gender;
     private LocalDate localDate;
-    Scanner scanner;
-    TextConsole textConsole;
-    IsNumeric isNumeric;
+   private Scanner scanner;
+   private TextConsole textConsole;
+   private IsNumeric isNumeric;
 
     public ConsoleAddHuman() {
         this.scanner =  new Scanner(System.in);

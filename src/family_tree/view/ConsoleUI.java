@@ -2,6 +2,7 @@ package family_tree.view;
 
 
 import family_tree.presenter.Presenter;
+import family_tree.view.console_commands.*;
 
 import java.util.Scanner;
 

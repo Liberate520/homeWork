@@ -1,4 +1,4 @@
-package family_tree.view;
+package family_tree.view.console_commands;
 
 import java.util.Scanner;
 
