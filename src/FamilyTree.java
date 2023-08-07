@@ -9,6 +9,9 @@ public class FamilyTree {
     public void addPerson(Person person) {
         people.add(person);
     }
+    public List<Person> getPeople() {
+        return people;
+    }
     public Person findPersonByName(String name) {
         for (Person person : people) {
             if (person.getName().equals(name)) {
