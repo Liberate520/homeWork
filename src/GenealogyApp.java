@@ -1,63 +1,49 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Person {
-    private String name;
-    private int age;
-    private List<Person> children;
-
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-        this.children = new ArrayList<>();
-    }
-
-    public void addChild(Person child) {
-        children.add(child);
-    }
-
-    public List<Person> getChildren() {
-        return children;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
+enum Gender {
+    MALE,
+    FEMALE
 }
 
-
-class FamilyTree {
-    private Person root;
-
-    public FamilyTree(Person root) {
-        this.root = root;
-    }
-
-    public Person getRoot() {
-        return root;
-    }
+enum RelationshipType {
+    PARENT,
+    CHILD,
 }
 
 public class GenealogyApp {
     public static void main(String[] args) {
-        Person person1 = new Person("John", 40);
-        Person person2 = new Person("Alice", 35);
-        Person person3 = new Person("Bob", 20);
+        Person person1 = new Person("John", "Smith", Gender.MALE, 1980, 2022);
+        Person person2 = new Person("Alice", "Johnson", Gender.FEMALE, 1915, 2005);
+        Person person3 = new Person("Bob", "Brown", Gender.MALE, 2000, -1);
+        Person person4 = new Person("Emma", "Davis", Gender.FEMALE, 2010, -1);
+        Person person5 = new Person("Michael", "Miller", Gender.MALE, 1975, -1);
 
         person1.addChild(person2);
         person1.addChild(person3);
+        person2.addChild(person4);
+        person2.addChild(person5);
+
+        person1.addRelationship(person2, RelationshipType.PARENT);
+        person2.addRelationship(person1, RelationshipType.CHILD);
 
         FamilyTree familyTree = new FamilyTree(person1);
 
-        // Получение всех детей выбранного человека
-        List<Person> children = familyTree.getRoot().getChildren();
-        System.out.println("Дети " + familyTree.getRoot().getName() + ":");
-        for (Person child : children) {
-            System.out.println(child.getName());
+        List<Relationship> relationships = familyTree.getAllRelationships();
+        for (Relationship relationship : relationships) {
+            System.out.println(
+                    relationship.getPerson1().getFullName() + " is " +
+                            relationship.getType() + " of " +
+                            relationship.getPerson2().getFullName()
+            );
+        }
+        System.out.println("Age " + person1.getFullName() + ": " + person1.getAge() + " years");
+
+        if (person1.isAlive()) {
+            System.out.println(person1.getFullName() + " Alive.");
+        } else {
+            System.out.println("Died at " + person1.getDeathYear());
+            System.out.println("Time since death " + person1.getFullName() + ": " + person1.getYearsSinceDeath() + " years");
         }
     }
 }
