@@ -123,24 +123,24 @@ public class ConsoleUI implements View {
         presenter.read();
     }
 
-    public LocalDate inputDate() {
+    private LocalDate inputDate() {
         String input = scanner.nextLine();
         if (input.isEmpty())
             return null;
         return LocalDate.parse(input, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
-    public ArrayList<Person> enumeratedList() {
+    private ArrayList<Person> enumeratedList() {
         return presenter.enumeratedList();
     }
 
-    public void printAsEnumeratedList(ArrayList<Person> list) {
+    private void printAsEnumeratedList(ArrayList<Person> list) {
         for (int i = 0; i < list.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, list.get(i));
         }
     }
 
-    public void printPrompts(String string) {
+    private void printPrompts(String string) {
         System.out.println(string);
         System.out.println(text.promptListNumber);
     }
