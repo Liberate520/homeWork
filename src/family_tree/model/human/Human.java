@@ -162,7 +162,7 @@ public class Human implements Serializable, FamilyTreeInterface<Human> {
         sb.append(getChildrenInfo());
         return sb.toString();
     }
-
+//TODO попробовать убрать текст
     public String getSpouseInfo() {
         // имя супруга(и)
         String res = "супруг(а): ";

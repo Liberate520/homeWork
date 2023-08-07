@@ -15,22 +15,25 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private boolean work;
     private MainMenu menu;
+    private TextConsole textConsole;
 
     public ConsoleUI() {
         presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         work = true;
         menu = new MainMenu(this);
+        textConsole = new TextConsole();
+
     }
 
     public void addHuman() {
-        System.out.println("Укажите имя");
+        System.out.println(textConsole.indicateNameText);
 
         String name = scanner.nextLine();
-        System.out.println("Укажите пол 1 - мужской, 2 - женский");
+        System.out.println(textConsole.indicateGenderText);
         String gen = scanner.nextLine();
         if (!isNumeric(gen)) {
-            System.out.println("Пол указан неверно");
+            System.out.println(textConsole.genderIsIncorrectText);
             return;
         }
         int iGen = Integer.parseInt(gen);
@@ -40,34 +43,34 @@ public class ConsoleUI implements View {
         } else if (iGen == 2) {
             gender = Female;
         } else {
-            System.out.println("Пол указан неверно");
+            System.out.println(textConsole.genderIsIncorrectText);
             return;
         }
 
-        System.out.println("Укажите год рождения");
+        System.out.println(textConsole.enterYearOfBirthText);
         String year = scanner.nextLine();
         if (!isNumeric(year)) {
-            System.out.println("Год рождения указан не верно");
+            System.out.println(textConsole.enterYearOfBirthErrText);
             return;
         }
         int iYear = Integer.parseInt(year);
 
-        System.out.println("Укажите месяц рождения");
+        System.out.println(textConsole.enterMonthOfBirthText);
         String month = scanner.nextLine();
         if (!isNumeric(month)) {
-            System.out.println("Месяц рождения указан не верно");
+            System.out.println(textConsole.enterMonthOfBirthErrText);
             return;
         }
         int iMonth = Integer.parseInt(month);
         if (iMonth < 1 || iMonth > 12) {
-            System.out.println("Месяц рождения указан не верно");
+            System.out.println(textConsole.enterMonthOfBirthErrText);
             return;
         }
 
-        System.out.println("Укажите день рождения");
+        System.out.println(textConsole.enterBirthdayText);
         String dayOfMonth = scanner.nextLine();
         if (!isNumeric(dayOfMonth)) {
-            System.out.println("День рождение указан не верно");
+            System.out.println(textConsole.enterBirthdayErrText);
             return;
         }
 
@@ -75,25 +78,25 @@ public class ConsoleUI implements View {
         YearMonth yearMonth = YearMonth.of(iYear, iMonth);
         int day = yearMonth.lengthOfMonth();
         if (iDayOfMonth < 0 || iDayOfMonth > day) {
-            System.out.println("Дата рождения указана не верно");
+            System.out.println(textConsole.enterBirthdayErrText);
             return;
         }
         presenter.addHuman(name, gender, LocalDate.of(iYear, iMonth, iDayOfMonth));
     }
 
     public void wedding() {
-        System.out.println("Укажите id мужа");
+        System.out.println(textConsole.enterHusbandIdText);
         String husband = scanner.nextLine();
         if (!isNumeric(husband)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idHusband = Integer.parseInt(husband);
 
-        System.out.println("Укажите id жены");
+        System.out.println(textConsole.enterWifeIdText);
         String wife = scanner.nextLine();
         if (!isNumeric(wife)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idWife = Integer.parseInt(wife);
@@ -102,26 +105,26 @@ public class ConsoleUI implements View {
     }
 
     public void addChildren() {
-        System.out.println("Укажите id ребенка");
+        System.out.println(textConsole.enterChildrenIdText);
         String children = scanner.nextLine();
         if (!isNumeric(children)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idChildren = Integer.parseInt(children);
 
-        System.out.println("Укажите id отца");
+        System.out.println(textConsole.enterFatherIdText);
         String father = scanner.nextLine();
         if (!isNumeric(father)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idFather = Integer.parseInt(father);
 
-        System.out.println("Укажите id матери");
+        System.out.println(textConsole.enterMotherIdText);
         String mother = scanner.nextLine();
         if (!isNumeric(mother)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idMother = Integer.parseInt(mother);
@@ -130,26 +133,26 @@ public class ConsoleUI implements View {
     }
 
     public void addParents() {
-        System.out.println("Укажите id ребенка");
+        System.out.println(textConsole.enterChildrenIdText);
         String children = scanner.nextLine();
         if (!isNumeric(children)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idChildren = Integer.parseInt(children);
 
-        System.out.println("Укажите id отца");
+        System.out.println(textConsole.enterFatherIdText);
         String father = scanner.nextLine();
         if (!isNumeric(father)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idFather = Integer.parseInt(father);
 
-        System.out.println("Укажите id матери");
+        System.out.println(textConsole.enterMotherIdText);
         String mother = scanner.nextLine();
         if (!isNumeric(mother)) {
-            System.out.println("id введен неверно");
+            System.out.println(textConsole.idErrText);
             return;
         }
         long idMother = Integer.parseInt(mother);
@@ -168,12 +171,12 @@ public class ConsoleUI implements View {
 
     public void readFile() {
         presenter.readFile();
-        System.out.println("Дерево открыто");
+        System.out.println(textConsole.openTreeText);
     }
 
     public void saveFile() {
         presenter.saveFile();
-        System.out.println("Дерево записано");
+        System.out.println(textConsole.saveTreeText);
     }
 
     public boolean isNumeric(String str) {
@@ -189,19 +192,19 @@ public class ConsoleUI implements View {
     @Override
     public void start() {
         while (work) {
-            System.out.println("Здравствуйте");
+            System.out.println(textConsole.greetingsText);
             System.out.println(menu.menu());
-            System.out.println("Выберете пункт меню");
+            System.out.println(textConsole.choiceText);
             String choice = scanner.nextLine();
             if (isNumeric(choice)) {
                 int choiceInt = Integer.parseInt(choice);
                 if (choiceInt > 0 && choiceInt <= menu.getSize()) {
                     menu.execute(choiceInt);
                 } else {
-                    System.out.println("Вы ввели неверный пункт меню");
+                    System.out.println(textConsole.choiceText);
                 }
             } else {
-                System.out.println("Введите число");
+                System.out.println(textConsole.enterNumber);
             }
 
         }

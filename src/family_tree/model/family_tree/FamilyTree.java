@@ -146,11 +146,11 @@ public class FamilyTree<E extends FamilyTreeInterface<E>> implements Serializabl
     }
 
     public void sortByName() {
-        Collections.sort(humanList, new HumanComparatorByName());
+        Collections.sort(humanList, new HumanComparatorByName<>());
     }
 
     public void sortByAge() {
-        Collections.sort(humanList, new HumanComparatorByAge());
+        Collections.sort(humanList, new HumanComparatorByAge<>());
     }
 
     @Override
