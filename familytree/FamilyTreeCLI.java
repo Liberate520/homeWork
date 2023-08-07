@@ -51,9 +51,8 @@ public class FamilyTreeCLI {
     }
 
     private void displayFamilyTree() {
-        // Code to display the family tree
+
     }
 
-    // Add more methods for other operations on the tree
 }
 

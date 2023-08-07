@@ -1,53 +1,45 @@
 package homeWork.familytree;
 
-import java.time.LocalDate;
-import java.util.List;
-import homeWork.familytree.Gender;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Tree tree = new Tree();
+        FamilyTreeModel model = new FamilyTreeModelImpl();
+        FamilyTreeView view = new FamilyTreeViewImpl();
+        FamilyTreePresenter presenter = new FamilyTreePresenterImpl(model, view);
 
-        // Adding members to the family tree
-        Human john = new Human("John Doe", LocalDate.of(1980, 5, 15), Human.Gender.MALE);
-        Human jane = new Human("Jane Doe", LocalDate.of(1982, 8, 23), Human.Gender.FEMALE);
-        Human child1 = new Human("Child 1", LocalDate.of(2005, 4, 10), Human.Gender.MALE);
-        Human child2 = new Human("Child 2", LocalDate.of(2008, 9, 17), Human.Gender.FEMALE);
+        Scanner scanner = new Scanner(System.in);
+        int choice;
 
-        john.addChild(child1);
-        jane.addChild(child1);
-        john.addChild(child2);
-        jane.addChild(child2);
+        do {
+            view.displayMenu();
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
-        tree.addMember(john);
-        tree.addMember(jane);
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter date of birth (yyyy-MM-dd): ");
+                    String dateOfBirth = scanner.nextLine();
+                    System.out.print("Enter gender (MALE or FEMALE): ");
+                    String genderStr = scanner.nextLine();
+                    Human.Gender gender = Human.Gender.valueOf(genderStr.toUpperCase());
 
-        // Displaying the sorted list of people by name
-        System.out.println("Sorted by name:");
-        for (Human human : tree.sortByName()) {
-            System.out.println(human);
-        }
-
-        // Displaying the sorted list of people by date of birth
-        System.out.println("\nSorted by date of birth:");
-        for (Human human : tree.sortByDateOfBirth()) {
-            System.out.println(human);
-        }
-
-        // File handling
-        FileHandler fileHandler = new FamilyTreeFileHandler();
-        try {
-            fileHandler.writeToFile(tree.getAllMembers(), "family_tree_data.txt");
-            tree = new Tree();
-            tree.addMember(john);
-
-            List<Human> restoredHumans = fileHandler.readFromFile("family_tree_data.txt");
-            System.out.println("\nRestored family tree data:");
-            for (Human human : restoredHumans) {
-                System.out.println(human);
+                    presenter.onAddMember(name, dateOfBirth, gender);
+                    break;
+                case 2:
+                    presenter.onDisplayFamilyTree();
+                    break;
+                // Add more operations as needed
+                case 0:
+                    System.out.println("Exiting Family Tree Application.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-        } catch (IOException e) {
-            System.err.println("Error in file handling: " + e.getMessage());
-        }
+        } while (choice != 0);
+
+        scanner.close();
     }
 }
