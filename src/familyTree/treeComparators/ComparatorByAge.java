@@ -1,6 +1,5 @@
 package familyTree.treeComparators;
 
-
 import familyTree.treeWorkspace.TreeItem;
 
 import java.util.Comparator;
