@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleUI implements View{
+public class ConsoleUI implements View {
 
     private static final String INPUT_ERROR = "WRONG DATA";
     private static final String INPUT_SUCCESS = "ADDING SUCCESSFULLY";
@@ -23,7 +23,7 @@ public class ConsoleUI implements View{
     private boolean work;
     private Menu menu;
 
-    public ConsoleUI(){
+    public ConsoleUI() {
         presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         work = true;
@@ -32,29 +32,31 @@ public class ConsoleUI implements View{
 
     @Override
     public void start() {
+        System.out.println("**********************************");
         System.out.println("Welcome to GenealogicalTree app");
+        System.out.println("**********************************");
 
-        while(work){
+        while (work) {
             System.out.println(menu.menu());
             System.out.print("You should choose the action: ");
             String choice = scanner.nextLine();
 
-            try{
+            try {
                 int choiceInt = Integer.parseInt(choice);
-                if(choiceInt <= menu.getSize()) menu.execute(choiceInt);
+                if (choiceInt <= menu.getSize()) menu.execute(choiceInt);
                 else errorInput();
             } catch (Exception e) {
                 System.out.println(INPUT_ERROR);
             }
-
-
 
         }
 
     }
 
     public void finish() {
+        System.out.println("*********");
         System.out.println("Goodbye!");
+        System.out.println("*********");
         work = false;
     }
 
@@ -87,12 +89,11 @@ public class ConsoleUI implements View{
         String lastName = scanner.nextLine();
 
 
-
         //GENDER
         Gender gender = null;
         System.out.print("Insert gender of person(male or female): ");
         String genderString = scanner.nextLine();
-        while(!checkGender(genderString)){
+        while (!checkGender(genderString)) {
             System.out.println("Please, reenter!");
             genderString = scanner.nextLine();
         }
@@ -101,12 +102,11 @@ public class ConsoleUI implements View{
 
         for (int i = 0; i < genders.length; i++) {
             String genderCheck = genders[i].toString();
-            if(genderCheck.equalsIgnoreCase(genderString)){
+            if (genderCheck.equalsIgnoreCase(genderString)) {
                 gender = genders[i];
             }
 
         }
-
 
 
         //BIRTH DATE
@@ -116,7 +116,7 @@ public class ConsoleUI implements View{
         SimpleDateFormat formatBirth = new SimpleDateFormat();
         formatBirth.applyPattern("dd.MM.yyyy");
         try {
-            Date birthdate= formatBirth.parse(birthdateString);
+            Date birthdate = formatBirth.parse(birthdateString);
             birthDate = convertToLocalDate(birthdate);
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +131,7 @@ public class ConsoleUI implements View{
         SimpleDateFormat formatDeath = new SimpleDateFormat();
         formatDeath.applyPattern("dd.MM.yyyy");
         try {
-            if(!deathdateString.equals("null")) {
+            if (!deathdateString.equals("null")) {
                 Date deathdate = formatDeath.parse(birthdateString);
                 deathDate = convertToLocalDate(deathdate);
             }
@@ -139,18 +139,9 @@ public class ConsoleUI implements View{
             e.printStackTrace();
         }
 
-        // MOTHER
         Human mother = null;
-
-
-        //FATHER
-
         Human father = null;
-
-        //SPOUSE
         Human spouse = null;
-
-        //CHILDREN
         List<Human> children = null;
 
 
@@ -183,8 +174,12 @@ public class ConsoleUI implements View{
         System.out.println("Second member: ");
         int idSpouse2 = scanner.nextInt();
 
-        if(idSpouse2<=presenter.getFamilySize() && idSpouse1<= presenter.getFamilySize()){
+        if (idSpouse2 <= presenter.getFamilySize() && idSpouse1 <= presenter.getFamilySize()) {
             presenter.setSpouseTogether(idSpouse1, idSpouse2);
+            printAnswer(INPUT_SUCCESS);
+
+        } else {
+            System.out.println("You have entered wrong numbers!");
         }
     }
 
@@ -194,43 +189,37 @@ public class ConsoleUI implements View{
         System.out.println();
         System.out.println("Please, enter ID of child: ");
         int idChild = scanner.nextInt();
-        if(idChild<=presenter.getFamilySize() && idParent<= presenter.getFamilySize()){
+        if (idChild <= presenter.getFamilySize() && idParent <= presenter.getFamilySize()) {
             presenter.setChild(idParent, idChild);
-        }
+            printAnswer(INPUT_SUCCESS);
+        } else printAnswer(INPUT_ERROR);
     }
 
-    public void saveFile() throws IOException {
-        FileOutputStream file = new FileOutputStream("familytree.out");
-        ObjectOutputStream out = new ObjectOutputStream(file);
+        public void saveFile () throws IOException {
+            FileOutputStream file = new FileOutputStream("familytree.out");
+            ObjectOutputStream out = new ObjectOutputStream(file);
 
-        // Method for serialization of object
-        out.writeObject(presenter.getTree());
+            out.writeObject(presenter.getTree());
 
-        out.close();
-        file.close();
-    }
-
-    public void readFile() {
-        try
-        {
-            FileInputStream file = new FileInputStream("familytree.out");
-            ObjectInputStream in = new ObjectInputStream(file);
-            ServiceTree object = (ServiceTree)in.readObject();
-            presenter.setServiceTree(object);
-
-            in.close();
+            out.close();
             file.close();
-
         }
 
-        catch(IOException ex)
-        {
-            System.out.println("IOException is caught");
-        }
+        public void readFile () {
+            try {
+                FileInputStream file = new FileInputStream("familytree.out");
+                ObjectInputStream in = new ObjectInputStream(file);
+                ServiceTree object = (ServiceTree) in.readObject();
+                presenter.setServiceTree(object);
 
-        catch(ClassNotFoundException ex)
-        {
-            System.out.println("ClassNotFoundException is caught");
+                in.close();
+                file.close();
+
+            } catch (IOException ex) {
+                System.out.println("IOException is caught");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("ClassNotFoundException is caught");
+            }
         }
     }
-}
+

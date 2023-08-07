@@ -12,7 +12,11 @@ public class AddChildren extends Command{
     }
 
     public void execute(){
-        getConsoleUI().addChildren();
+        try {
+            getConsoleUI().addChildren();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getDescription(){
