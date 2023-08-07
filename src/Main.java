@@ -1,5 +1,5 @@
 
-import model.Service;
+import model.FileService;
 import model.familyTree.FamilyTree;
 import model.human.Gender;
 import model.human.Human;
@@ -33,7 +33,7 @@ public class Main {
         tree.add(grandMother);
 
         FamilyTreeFileIO fileIo = new FamilyTreeFileManager();
-        Service service = new Service(tree);
+        FileService service = new FileService(tree);
         service.setFileIo(fileIo);
         service.save();
 

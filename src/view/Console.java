@@ -1,6 +1,7 @@
 package view;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import model.familyTree.FamilyTree;
@@ -15,7 +16,7 @@ public class Console implements View {
   private Menu menu;
 
   public Console() {
-    presenter = new Presenter(this);
+    presenter = new Presenter(this, null);
     scanner = new Scanner(System.in);
     menu = new Menu(this);
     work = true;
@@ -47,6 +48,7 @@ public class Console implements View {
     String genderString = gender.toString();
     String birthDateString = birthDate.toString();
     presenter.addHuman(name, genderString, birthDateString, idFather, idMother);
+
   }
 
   public void sortByName() {
