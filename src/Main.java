@@ -9,6 +9,7 @@ public class Main {
         ConsoleUI view = new ConsoleUI();
 //        view.addPerson();
         view.read();
+        view.printTree();
         view.printTreeConnections();
 //        view.putConnection(true);
 //        view.printTree();
