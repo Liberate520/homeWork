@@ -14,6 +14,7 @@ public class Menu {
         commandList.add(new AddPerson(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
+        commandList.add(new AddSpouse(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
     public String menu(){

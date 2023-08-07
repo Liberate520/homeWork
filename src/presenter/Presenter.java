@@ -1,7 +1,6 @@
 package presenter;
 
 import model.Service.ServiceTree;
-import model.genealogicalTree.GenealogicalTree;
 import model.human.Gender;
 import model.human.Human;
 import view.View;
@@ -24,10 +23,9 @@ public class Presenter {
    //TODO создание нового человека, как определять родственные связи (можно через id)
         try {
             family.addHuman(name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
-            System.out.println("Adding successfully!");
             getInfo();
         }catch (Exception e){
-            System.out.println("Something has gone wrong in adding person to family");
+            e.printStackTrace();
         }
     }
 
@@ -41,5 +39,11 @@ public class Presenter {
 
     public void sortByName() {
         family.sortByName();
+    }
+
+    public int getFamilySize() { return family.getFamilySize();}
+
+    public void setSpouseTogether(int idSpouse1, int idSpouse2) {
+        family.setSpouseTogether(idSpouse1, idSpouse2);
     }
 }

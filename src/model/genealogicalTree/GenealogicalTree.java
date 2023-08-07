@@ -100,6 +100,19 @@ public class GenealogicalTree<T extends TreeNode> implements Serializable, Itera
         humanList.sort(new ComparatorByName<>());
     }
 
+    public int getSizeFamily(){
+        return humanList.size();
+    }
+
+
+    public T getHumanByID(int idHuman) {
+        for (T human: humanList
+             ) {
+            if(human.getID()==idHuman) return human;
+        }
+        return null;
+    }
+
 
 }
 

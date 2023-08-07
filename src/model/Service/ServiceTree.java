@@ -42,5 +42,15 @@ public class ServiceTree<T extends TreeNode> {
         family.sortByAge();
     }
 
+    public int getFamilySize(){
+        return family.getSizeFamily();
+    }
 
+
+    public void setSpouseTogether(int idSpouse1, int idSpouse2) {
+        Human first = (Human) family.getHumanByID(idSpouse1);
+        Human second = (Human)family.getHumanByID(idSpouse2);
+        first.setSpouse(second);
+        second.setSpouse(first);
+    }
 }

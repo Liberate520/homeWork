@@ -5,7 +5,6 @@ import model.genealogicalTree.TreeNode;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -68,6 +67,12 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
     public int getID(){
         return this.idPerson;
     }
+
+    @Override
+    public void setSpouse(Human human) {
+        this.spouse = human;
+    }
+
     public void setID(int id){idPerson=id;}
     public String getName(){
         return this.name;
@@ -163,6 +168,10 @@ public class Human implements Serializable, Comparable<Human>, TreeNode {
         else if (idPerson < o.idPerson) {
             return -1;
         }else return 0;
+    }
+
+    public int getIdPerson() {
+        return idPerson;
     }
 
 }

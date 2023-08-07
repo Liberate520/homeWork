@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class ConsoleUI implements View{
 
     private static final String INPUT_ERROR = "WRONG DATA";
+    private static final String INPUT_SUCCESS = "ADDING SUCCESSFULLY";
     private Presenter presenter;
     private Scanner scanner;
     private boolean work;
@@ -36,7 +37,7 @@ public class ConsoleUI implements View{
 
             try{
                 int choiceInt = Integer.parseInt(choice);
-                if(choiceInt < menu.getSize()) menu.execute(choiceInt);
+                if(choiceInt <= menu.getSize()) menu.execute(choiceInt);
                 else errorInput();
             } catch (Exception e) {
                 System.out.println(INPUT_ERROR);
@@ -87,7 +88,13 @@ public class ConsoleUI implements View{
         Gender gender = null;
         System.out.print("Insert gender of person(male or female): ");
         String genderString = scanner.nextLine();
+        while(!checkGender(genderString)){
+            System.out.println("Please, reenter!");
+            genderString = scanner.nextLine();
+        }
         Gender[] genders = Gender.values();
+
+
         for (int i = 0; i < genders.length; i++) {
             String genderCheck = genders[i].toString();
             if(genderCheck.equalsIgnoreCase(genderString)){
@@ -96,8 +103,6 @@ public class ConsoleUI implements View{
 
         }
 
-
-        //TODO проверка на валидность
 
 
         //BIRTH DATE
@@ -139,7 +144,6 @@ public class ConsoleUI implements View{
         Human father = null;
 
         //SPOUSE
-
         Human spouse = null;
 
         //CHILDREN
@@ -147,6 +151,12 @@ public class ConsoleUI implements View{
 
 
         presenter.addHuman(name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
+        printAnswer(INPUT_SUCCESS);
+
+    }
+
+    private boolean checkGender(String genderString) {
+        return genderString.equalsIgnoreCase("male") || genderString.equalsIgnoreCase("female");
     }
 
     @Override
@@ -159,5 +169,18 @@ public class ConsoleUI implements View{
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
+    }
+
+    public void addSpouse() {
+        System.out.println("Please, enter ID of married persons: ");
+        System.out.println("First member: ");
+        int idSpouse1 = scanner.nextInt();
+        System.out.println();
+        System.out.println("Second member: ");
+        int idSpouse2 = scanner.nextInt();
+
+        if(idSpouse2<=presenter.getFamilySize() && idSpouse1<= presenter.getFamilySize()){
+            presenter.setSpouseTogether(idSpouse1, idSpouse2);
+        }
     }
 }
