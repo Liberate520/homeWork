@@ -1,4 +1,4 @@
-package familytree.file_hendler;
+package familytree.model.file_hendler;
 import java.io.Serializable;
 
 public interface Writeble {

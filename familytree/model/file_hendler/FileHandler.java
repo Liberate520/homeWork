@@ -1,4 +1,4 @@
-package familytree.file_hendler;
+package familytree.model.file_hendler;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import familytree.human.Human;
+import familytree.model.human.Human;
 
 public class FileHandler implements Writeble {
     @Override

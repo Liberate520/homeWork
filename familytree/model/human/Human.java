@@ -1,11 +1,11 @@
-package familytree.human;
+package familytree.model.human;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
-import familytree.family_tree.FamilyTreeItem;
+import familytree.model.family_tree.FamilyTreeItem;
 
 /**
  * Human
@@ -20,13 +20,13 @@ public class Human implements FamilyTreeItem<Human>  {
     private String name;
     private Gender gender;
     private String surname;
-    private Date dateOfBirth;
-    private Date dateOfDeath;
+    private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
     private Human spouse;
     private List <Human> children;
     private List <Human> parents;
 
-    public Human(String name, String surname, Gender gender,  Date dateOfBirth, Date dateOfDeath, Human spouse,  Human father, Human mother) {
+    public Human(String name, String surname, Gender gender,  LocalDate dateOfBirth, LocalDate dateOfDeath, Human spouse,  Human father, Human mother) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -49,24 +49,24 @@ public class Human implements FamilyTreeItem<Human>  {
 
 
 
-    public Human(String name, String surname, Gender gender,   Date dateOfBirth, Human spouse) {
+    public Human(String name, String surname, Gender gender,   LocalDate dateOfBirth, Human spouse) {
         this(name, surname, gender, dateOfBirth,null,spouse,null,null);
     }
 
     
 
-    public Human(String name, String surname, Gender gender,  Date dateOfBirth,Human father,Human mother) {
+    public Human(String name, String surname, Gender gender,  LocalDate dateOfBirth,Human father,Human mother) {
       this(name, surname, gender, dateOfBirth,null,null,father, mother);
 
     }
    
 
-    public Human(String name, String surname, Gender gender,  Date dateOfBirth) {
+    public Human(String name, String surname, Gender gender,  LocalDate dateOfBirth) {
       this(name, surname, gender, dateOfBirth,null,null,null,null);
 
     }
 
-    public Human(String name, String surname, Gender gender,  Date dateOfBirth, Date dateOfDate) {
+    public Human(String name, String surname, Gender gender,  LocalDate dateOfBirth, LocalDate dateOfDate) {
       this(name, surname, gender, dateOfBirth,dateOfDate,null,null,null);
 
     }
@@ -74,11 +74,15 @@ public class Human implements FamilyTreeItem<Human>  {
     public Human(){
 
     }
+   
 
-    public void  getAge( ){
-        int age = 2023 - this.getDateOfBirth().getYear();
-        System.out.println("Возвраст " + this.getName()+ " " + this.getSurname()+ " = " + age);
-        //return age;
+    public int  getAge( ){
+        if (dateOfDeath == null) {
+            return LocalDate.now().getYear() - dateOfBirth.getYear();
+        }
+        if (dateOfBirth == null) {
+            return 0;}
+        return -1;
     }
 
 
@@ -123,11 +127,11 @@ public class Human implements FamilyTreeItem<Human>  {
     }
 
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public Date getDateOfDeath() {
+    public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
 
@@ -161,7 +165,7 @@ public class Human implements FamilyTreeItem<Human>  {
     // }
 
     public void addSpouse(Human human) {
-        spouse = human;
+        this.spouse = human;
     }
 
     public void addParent(Human human) {

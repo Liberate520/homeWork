@@ -1,10 +1,10 @@
-package familytree.family_tree;
+package familytree.model.family_tree;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-import familytree.human.Human;
+import familytree.model.human.Human;
 
 
 public interface FamilyTreeItem<T> extends Serializable{
@@ -14,8 +14,8 @@ public interface FamilyTreeItem<T> extends Serializable{
     void addParent(T human);
     String getName();
     String getSurname();
-    Date getDateOfBirth();
-    Date getDateOfDeath();
+    LocalDate getDateOfBirth();
+    LocalDate getDateOfDeath();
     List<T> getParents();
     List<T> getChildren();
     T getSpouse();

@@ -1,4 +1,4 @@
-package familytree.family_tree;
+package familytree.model.family_tree;
 
 import java.io.Serializable;
 
@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import familytree.human.Gender;
-import familytree.human.Human;
-import familytree.human.comporatop.HumanComporatorByBirthDate;
-import familytree.human.comporatop.HumanComporatorBySurname;
+import familytree.model.human.comporatop.HumanComporatorByBirthDate;
+import familytree.model.human.comporatop.HumanComporatorBySurname;
 
 public class FamilyTree<P extends FamilyTreeItem<P>> implements Serializable, Iterable<P> {
     private List<P> ListHumans;
@@ -63,7 +61,7 @@ public class FamilyTree<P extends FamilyTreeItem<P>> implements Serializable, It
 
     private void addToSpouse(P human){
         if (human.getSpouse()!= null){
-            human.addSpouse(human);
+            human.addSpouse(human.getSpouse());
         }       
     }
 
