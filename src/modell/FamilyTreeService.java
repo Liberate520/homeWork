@@ -31,8 +31,8 @@ public class FamilyTreeService {
         return true;
     }
 
-    public void setWritable(FileHandler<Human> fileHandler) {
-        this.fileHandler = fileHandler;
+    public void setWritable(String filePath) {
+        this.fileHandler = new FileHandler<>(filePath);
     }
 
     public void sortByName(){
