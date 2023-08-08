@@ -31,6 +31,9 @@ public class Main {
         // larisa.getAge();
         // System.out.println(larisa);
         // System.out.println(dima.getInfoFather());
+
+
+        
         // System.out.println(dasha.getInfoMother());
         // System.out.println(misha.getInfoFather());
        
