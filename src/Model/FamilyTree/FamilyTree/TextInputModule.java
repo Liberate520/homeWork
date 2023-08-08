@@ -1,14 +1,13 @@
-package View;
+package Model.FamilyTree.FamilyTree;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TextInput {
+public class TextInputModule {
     private Map<String, String> map;
 
-    public TextInput() {
+    public TextInputModule() {
         map = new HashMap<>();
-//        map.put(0,"default, change settings");
         map.put("choice", "Выберите действие: ");
         map.put("input", "Введите значение: ");
         map.put("errorInput", "Неверный ввод.");
@@ -37,9 +36,7 @@ public class TextInput {
 //        map.put("noIdFound","Такого id нет.");
         map.put("errorSetChild", "Не удалось добавить ребёнка родителям.");
         map.put("errorSetParentsToChild", "Не удалось добавить родителей ребёнку.");
-//        map.put("setSecondSpouseId","Укажите id второго партнёра: ");
     }
-
     public String getAnswer(String choice) {
         return map.getOrDefault(choice, "default, change settings");
     }

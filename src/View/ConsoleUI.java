@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
-    private Presenter presenter;
-    private Scanner scanner;
+    private final Presenter presenter;
+    private final Scanner scanner;
     private boolean flag;
-    private MainMenu menu;
-    private Test tests;
-    private TextInput textInput;
+    private final MainMenu menu;
+    private final Test tests;
+    private final TextInput textInput;
 
     public ConsoleUI() {
         presenter = new Presenter(this);
@@ -36,7 +36,7 @@ public class ConsoleUI implements View {
 
     private void execution() {
         System.out.println(menu.menu());
-        textInput.printAnswer("choice");
+        printAnswer(textInput.getAnswer("choice"));
         String string = scanner.nextLine();
         String choice = tests.menuTest(string);
         if (choice != null) {
@@ -46,7 +46,7 @@ public class ConsoleUI implements View {
     }
 
     public void exit() {
-        textInput.printAnswer("farewell");
+        printAnswer(textInput.getAnswer("farewell"));
         flag = false;
     }
 
@@ -63,23 +63,24 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        textInput.printAnswer("setName");
+        printAnswer(textInput.getAnswer("setName"));
         String name = setName();
-        textInput.printAnswer("setDate");
+        printAnswer(textInput.getAnswer("setDate"));
         LocalDate date = setDate();
-        textInput.printAnswer("setGender");
+        printAnswer(textInput.getAnswer("setGender"));
         Gender gender = setGender();
-        textInput.printAnswer("setStatus");
+        printAnswer(textInput.getAnswer("setStatus"));
         Status status = setStatus();
         LocalDate deathDate = null;
         if (status.equals(Status.dead)) {
-            textInput.printAnswer("setName");
+            printAnswer(textInput.getAnswer("setName"));
             deathDate = setDate();
         }
         presenter.addHuman(name, date, gender, status, deathDate);
     }
 
-    private Gender setGender() {
+    @Override
+    public Gender setGender() {
         Gender gender;
         String gen = scanner.nextLine().toLowerCase();
         List<String> genList = List.of(Gender.female.toString(), Gender.male.toString());
@@ -88,7 +89,7 @@ public class ConsoleUI implements View {
         } else {
             boolean flag = true;
             while (flag) {
-                textInput.printAnswer("errorSetAgain");
+                printAnswer(textInput.getAnswer("errorSetAgain"));
                 gen = scanner.nextLine().toLowerCase();
                 if (genList.contains(gen)) {
                     flag = false;
@@ -99,44 +100,105 @@ public class ConsoleUI implements View {
         return gender;
     }
 
-    private Status setStatus() {
+    @Override
+    public Status setStatus() {
         Status status;
         String stat = scanner.nextLine().toLowerCase();
         List<String> statList = List.of(Status.dead.toString(), Status.alive.toString());
-        if (statList.contains(stat)) {
-            status = Status.valueOf(stat);
-        } else {
+        if (!statList.contains(stat)) {
             boolean flag = true;
             while (flag) {
-                textInput.printAnswer("errorSetAgain");
+                printAnswer(textInput.getAnswer("errorSetAgain"));
                 stat = scanner.nextLine().toLowerCase();
                 if (statList.contains(stat)) {
                     flag = false;
                 }
             }
-            status = Status.valueOf(stat);
         }
+        status = Status.valueOf(stat);
         return status;
     }
 
+    @Override
     public LocalDate setDate() {
-        textInput.printAnswer("setYear");
+        printAnswer(textInput.getAnswer("setYear"));
         String yearStr = scanner.nextLine();
         int year = tests.testYear(yearStr);
 
-        textInput.printAnswer("setMonth");
+        printAnswer(textInput.getAnswer("setMonth"));
         String monthStr = scanner.nextLine();
         int month = tests.testMonth(monthStr);
 
-        textInput.printAnswer("setDay");
+        printAnswer(textInput.getAnswer("setDay"));
         String dayStr = scanner.nextLine();
         int day = tests.testDay(dayStr);
 
         return LocalDate.of(year, month, day);
     }
 
-    private String setName() {
+    @Override
+    public String setName() {
         return scanner.nextLine();
+    }
+
+    @Override
+    public void findById() {
+        printAnswer(textInput.getAnswer("setId"));
+        String count = scanner.nextLine();
+        if (tests.testInt(count)) {
+            int countInt = Integer.parseInt(count);
+            presenter.findById(countInt);
+        } else {
+            printAnswer(textInput.getAnswer("error"));
+        }
+    }
+
+    @Override
+    public void addHumanWithParents() {
+        printAnswer(textInput.getAnswer("setName"));
+        String name = setName();
+        printAnswer(textInput.getAnswer("setDate"));
+        LocalDate date = setDate();
+        printAnswer(textInput.getAnswer("setGender"));
+        Gender gender = setGender();
+        printAnswer(textInput.getAnswer("setStatus"));
+        Status status = setStatus();
+        LocalDate deathDate = null;
+        if (status.equals(Status.dead)) {
+            deathDate = setDate();
+        }
+        printAnswer(textInput.getAnswer("setMotherId"));
+        String idMotherStr = scanner.nextLine();
+        tests.testInt(idMotherStr);
+        int idMother = Integer.parseInt(idMotherStr);
+        printAnswer(textInput.getAnswer("setFatherId"));
+        String idFatherStr = scanner.nextLine();
+        tests.testInt(idFatherStr);
+        int idFather = Integer.parseInt(idMotherStr);
+        presenter.addHumanWithParents(name, date, gender, status, idFather, idMother, deathDate);
+    }
+
+    @Override
+    public void makeMarriage() {
+        printAnswer(textInput.getAnswer("setFirstSpouseId"));
+        String spouseOneIdStr = scanner.nextLine();
+        tests.testInt(spouseOneIdStr);
+        int spouseOneId = Integer.parseInt(spouseOneIdStr);
+        printAnswer(textInput.getAnswer("setSecondSpouseId"));
+        String spouseTwoIdStr = scanner.nextLine();
+        tests.testInt(spouseOneIdStr);
+        int spouseTwoId = Integer.parseInt(spouseTwoIdStr);
+        presenter.makeMarriage(spouseOneId, spouseTwoId);
+    }
+
+    @Override
+    public void save() {
+        presenter.saveInfo();
+    }
+
+    @Override
+    public void load() {
+        presenter.loadInfo();
     }
 
     @Override
@@ -144,78 +206,24 @@ public class ConsoleUI implements View {
         System.out.println(text);
     }
 
-    public void findById() {
-        textInput.printAnswer("setId");
-        String count = scanner.nextLine();
-        if (tests.testInt(count)) {
-            int countInt = Integer.parseInt(count);
-            presenter.findById(countInt);
-        } else {
-            textInput.printAnswer("error");
-        }
-    }
-
-    public void addHumanWithParents() {
-        textInput.printAnswer("setName");
-        String name = setName();
-        textInput.printAnswer("setDate");
-        LocalDate date = setDate();
-        textInput.printAnswer("setGender");
-        Gender gender = setGender();
-        textInput.printAnswer("setStatus");
-        Status status = setStatus();
-        LocalDate deathDate = null;
-        if (status.equals(Status.dead)) {
-            deathDate = setDate();
-        }
-        textInput.printAnswer("setMotherId");
-        String idMotherStr = scanner.nextLine();
-        tests.testInt(idMotherStr);
-        int idMother = Integer.parseInt(idMotherStr);
-        textInput.printAnswer("setFatherId");
-        String idFatherStr = scanner.nextLine();
-        tests.testInt(idFatherStr);
-        int idFather = Integer.parseInt(idMotherStr);
-        presenter.addHumanWithParents(name, date, gender, status, idFather, idMother, deathDate);
-    }
-
-    public void makeMarriage() {
-        textInput.printAnswer("setFirstSpouseId");
-        String spouseOneIdStr = scanner.nextLine();
-        tests.testInt(spouseOneIdStr);
-        int spouseOneId = Integer.parseInt(spouseOneIdStr);
-        textInput.printAnswer("setSecondSpouseId");
-        String spouseTwoIdStr = scanner.nextLine();
-        tests.testInt(spouseOneIdStr);
-        int spouseTwoId = Integer.parseInt(spouseTwoIdStr);
-        presenter.makeMarriage(spouseOneId, spouseTwoId);
-    }
-
-    public void save() {
-        presenter.saveInfo();
-    }
-
-    public void load() {
-        presenter.loadInfo();
-    }
-
+    @Override
     public void addChild() {
-        textInput.printAnswer("setChildId");
+        printAnswer(textInput.getAnswer("setChildId"));
         String childIdStr = scanner.nextLine();
         while (!(tests.testInt(childIdStr))) {
             childIdStr = scanner.nextLine();
         }
         int childId = Integer.parseInt(childIdStr);
 
-        textInput.printAnswer("setParentsId");
-        textInput.printAnswer("setMotherId");
+        printAnswer(textInput.getAnswer("setParentsId"));
+        printAnswer(textInput.getAnswer("setMotherId"));
         String motherIdStr = scanner.nextLine();
         while (!(tests.testInt(motherIdStr))) {
             motherIdStr = scanner.nextLine();
         }
         int motherId = Integer.parseInt(motherIdStr);
 
-        textInput.printAnswer("setFatherId");
+        printAnswer(textInput.getAnswer("setFatherId"));
         String fatherIdStr = scanner.nextLine();
         while (!(tests.testInt(fatherIdStr))) {
             fatherIdStr = scanner.nextLine();

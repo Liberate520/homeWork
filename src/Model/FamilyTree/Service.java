@@ -2,27 +2,29 @@ package Model.FamilyTree;
 
 
 import Model.FamilyTree.FamilyTree.EntityItem;
+import Model.FamilyTree.FamilyTree.EntityTree;
 import Model.FamilyTree.FamilyTree.FamilyTree;
+import Model.FamilyTree.FamilyTree.TextInputModule;
 import Model.FileHandler.HandleFile;
+import Model.FileHandler.Writable;
 import Model.Human.Gender;
 import Model.Human.Human;
 import Model.Human.Status;
-import View.TextInput;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Service {
-    private FamilyTree familyTree;
+    private EntityTree<EntityItem> familyTree;
     private int id;
-    private HandleFile handleFile;
-    private String filePath = "src/Model/date/fileText.txt";
-    private TextInput textInput;
+    private final Writable handleFile;
+    private final String filePath = "src/Model/date/fileText.txt";
+    private final TextInputModule textInput;
 
 
     public Service() {
         familyTree = new FamilyTree<>();
-        textInput = new TextInput();
+        textInput = new TextInputModule();
         try {
             handleFile = new HandleFile();
         } catch (IOException e) {
@@ -51,7 +53,7 @@ public class Service {
         Human spouseOne = (Human) familyTree.findById(spouseOneId);
         Human spouseTwo = (Human) familyTree.findById(spouseTwoId);
         if (spouseTwo == null || spouseOne == null) {
-            textInput.printAnswer("error");
+            textInput.printInfo(textInput.getAnswer("error"));
         } else {
             familyTree.makeMarriage(spouseOne, spouseTwo);
         }
@@ -60,7 +62,7 @@ public class Service {
     public void findById(int id) {
         Human human = (Human) familyTree.findById(id);
         if (human == null) {
-            textInput.printAnswer("errorSetId");
+            textInput.printInfo(textInput.getAnswer("errorSetId"));
         } else {
             textInput.printInfo(human.getInfo());
         }
@@ -85,7 +87,7 @@ public class Service {
     public void getInfoFamilyTree() {
         String information = familyTree.getInfoFamilyTree();
         if (information == null) {
-            textInput.printAnswer("noPeople");
+            textInput.printInfo(textInput.getAnswer("noPeople"));
         } else {
             textInput.printInfo(information);
         }
@@ -96,9 +98,9 @@ public class Service {
         Human mother = (Human) familyTree.findById(motherId);
         Human father = (Human) familyTree.findById(fatherId);
         if (child == null) {
-            textInput.printAnswer("errorSetChild");
+            textInput.printInfo(textInput.getAnswer("errorSetChild"));
         } else if ((mother == null) || (father == null)) {
-            textInput.printAnswer("errorParentsToChild");
+            textInput.printInfo(textInput.getAnswer("errorParentsToChild"));
         } else {
             child.addParents(father, mother);
             father.setChild(child);

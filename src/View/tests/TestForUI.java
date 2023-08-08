@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class TestForUI implements Test {
-    private View view;
-    private Scanner scanner;
-    private MainMenu menu;
-    private TextInput textInput;
+    private final View view;
+    private final Scanner scanner;
+    private final MainMenu menu;
+    private final TextInput textInput;
     public TestForUI(View view, MainMenu menu, TextInput textInput) {
         this.view = view;
         scanner = new Scanner(System.in);
@@ -21,12 +21,12 @@ public class TestForUI implements Test {
 
     public String menuTest(String choice) {
         if (!(testInt(choice))) {
-            textInput.printAnswer("errorInput");
+            view.printAnswer(textInput.getAnswer("errorInput"));
             return null;
         }
         int check = Integer.parseInt(choice);
         if (!((check > 0) && (check <= menu.getSize()))) {
-            textInput.printAnswer("errorInput");
+            view.printAnswer(textInput.getAnswer("errorInput"));
             return null;
         }
         return choice;
@@ -34,23 +34,23 @@ public class TestForUI implements Test {
 
     public boolean testInt(String choice) {
         if (choice == null) {
-            textInput.printAnswer("errorInput");
+            view.printAnswer(textInput.getAnswer("errorInput"));
             return false;
         }
         int length = choice.length();
         if (length == 0) {
-            textInput.printAnswer("errorInput");
+            view.printAnswer(textInput.getAnswer("errorInput"));
             return false;
         }
         int i;
         if (choice.charAt(0) == '-') {
-            textInput.printAnswer("errorInput");
+            view.printAnswer(textInput.getAnswer("errorInput"));
             return false;
         }
         for (i = 0; i < length; i++) {
             char c = choice.charAt(i);
             if (c < '0' || c > '9') {
-                textInput.printAnswer("errorInput");
+                view.printAnswer(textInput.getAnswer("errorInput"));
                 return false;
             }
         }
@@ -64,7 +64,7 @@ public class TestForUI implements Test {
         }
         int year = Integer.parseInt(yearStr);
         while (!((year > -1) && (year <= LocalDate.now().getYear()))) {
-            textInput.printAnswer("errorSetYear");
+            view.printAnswer(textInput.getAnswer("errorSetYear"));
             yearStr = scanner.nextLine();
             while (!(testInt(yearStr))) {
                 yearStr = scanner.nextLine();
@@ -81,7 +81,7 @@ public class TestForUI implements Test {
         }
         int month = Integer.parseInt(monthStr);
         while (!((month > 0) && (month < 13))) {
-            textInput.printAnswer("errorSetMonth");
+            view.printAnswer(textInput.getAnswer("errorSetMonth"));
             monthStr = scanner.nextLine();
             while (!(testInt(monthStr))) {
                 monthStr = scanner.nextLine();
@@ -98,7 +98,7 @@ public class TestForUI implements Test {
         }
         int day = Integer.parseInt(dayStr);
         while (!((day > 0) && (day <= 30))) {
-            textInput.printAnswer("errorSetDay");
+            view.printAnswer(textInput.getAnswer("errorSetDay"));
             dayStr = scanner.nextLine();
             while (!(testInt(dayStr))) {
                 dayStr = scanner.nextLine();

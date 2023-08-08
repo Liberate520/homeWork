@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable, EntityItem<Human> {
-    private String name;
-    private List<Human> children;
-    private Gender gender;
-    private LocalDate birthday;
+    private final String name;
+    private final List<Human> children;
+    private final Gender gender;
+    private final LocalDate birthday;
     private LocalDate deathDate;
-    private Status status;
+    private final Status status;
     private Human father;
     private Human mother;
     private Human spouse;
@@ -151,13 +151,13 @@ public class Human implements Serializable, EntityItem<Human> {
             stringBuilder.append(", ");
         }
         stringBuilder.append("Дети: ");
-        StringBuilder childrens = new StringBuilder();
+        StringBuilder childes = new StringBuilder();
         if (children.size() != 0) {
             for (Human child : children) {
-                childrens.append(child.getName());
-                childrens.append(", ");
+                childes.append(child.getName());
+                childes.append(", ");
             }
-            stringBuilder.append(childrens.toString());
+            stringBuilder.append(childes.toString());
         } else {
             stringBuilder.append("нет, ");
         }

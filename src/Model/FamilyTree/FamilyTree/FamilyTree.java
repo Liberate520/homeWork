@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends EntityItem<E>> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends EntityItem<E>> implements Serializable, Iterable<E>, EntityTree<E> {
     private List<E> familyTree;
 
     public FamilyTree() {
         familyTree = new ArrayList<>();
     }
-
+    @Override
     public void addToList(E human) {
         familyTree.add(human);
     }
@@ -26,37 +26,33 @@ public class FamilyTree<E extends EntityItem<E>> implements Serializable, Iterab
         return null;
     }
 
-//    @Override
-//    public String toString() {
-//        return super.toString();
-//    }
-
     @Override
     public Iterator<E> iterator() {
         return new FamilyMemberIterator<>(familyTree);
     }
 
+    @Override
     public void sortByName() {
         familyTree.sort(new SortByName<>());
     }
 
+    @Override
     public void sortByAge() {
         familyTree.sort(new SortByAge<>());
     }
 
+    @Override
     public void makeMarriage(E spouseOne, E spouseTwo) {
         spouseOne.setSpouse(spouseTwo);
         spouseTwo.setSpouse(spouseOne);
     }
 
+    @Override
     public int getSize() {
         return familyTree.size();
     }
 
-//    public E returnMember(int i) {
-//        return familyTree.get(i);
-//    }
-
+    @Override
     public String getInfoFamilyTree() {
         if (familyTree.size() == 0) {
             return null;

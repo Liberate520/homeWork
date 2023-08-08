@@ -1,8 +1,5 @@
 package Model.FamilyTree.FamilyTree;
 
-
-import Model.Human.Human;
-
 import java.time.LocalDate;
 
 public interface EntityItem<T> {
