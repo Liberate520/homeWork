@@ -83,7 +83,7 @@ public class ConsoleUI implements View {
                 if (choiceInt > 0 && choiceInt <= menu.getSize()) {
                     menu.execute(choiceInt);
                 } else {
-                    System.out.println(textConsole.choiceText);
+                    System.out.println(textConsole.choiceTextErr);
                 }
             } else {
                 System.out.println(textConsole.enterNumber);
