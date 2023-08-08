@@ -2,19 +2,11 @@ package family_tree.view.console_commands;
 
 import java.util.Scanner;
 
-public class ConsoleAddChildren {
-   private TextConsole textConsole;
-   private Scanner scanner;
-   private IsNumeric isNumeric;
+public class ConsoleAddChildren extends ConsoleCommands{
+
    private long idChildren;
    private long idFather;
    private long idMother;
-
-    public ConsoleAddChildren() {
-        this.textConsole = new TextConsole();
-        this.scanner = new Scanner(System.in);
-        this.isNumeric = new IsNumeric();
-    }
 
     public long getIdChildren() {
         return idChildren;

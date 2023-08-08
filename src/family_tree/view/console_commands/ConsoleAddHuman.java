@@ -9,19 +9,10 @@ import java.util.Scanner;
 import static family_tree.model.human.Gender.Female;
 import static family_tree.model.human.Gender.Male;
 
-public class ConsoleAddHuman{
+public class ConsoleAddHuman extends ConsoleCommands{
     private String name;
     private Gender gender;
     private LocalDate localDate;
-   private Scanner scanner;
-   private TextConsole textConsole;
-   private IsNumeric isNumeric;
-
-    public ConsoleAddHuman() {
-        this.scanner =  new Scanner(System.in);
-        this.textConsole = new TextConsole();
-        this.isNumeric = new IsNumeric();
-    }
 
     public String getName() {
         return name;
