@@ -30,9 +30,8 @@ public class ConsoleUI implements View {
     public void start() {
         System.out.println(text.hello);
         while (work) {
-            printPrompts(menu.printMenu());
+            printPrompts(menu.toString());
             String choice = scanner.nextLine();
-            // Метод валидации ввода (строка из цифр, в диапазоне пунктов меню)
             menu.execute(choice);
         }
     }

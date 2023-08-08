@@ -23,24 +23,21 @@ public class MainMenu {
         commandList.add(new Finish(consoleUI));
     }
 
-    public String printMenu() {
-        StringBuilder sb = new StringBuilder();
-        for (Command command:
-             commandList) {
-            sb.append(commandList.indexOf(command) + 1);
-            sb.append(". ");
-            sb.append(command.getDescription()).append("\n");
-        }
-        return sb.toString();
-    }
-
     public void execute(String choiceNum) {
         int choice = Integer.parseInt(choiceNum) - 1;
         Command command = commandList.get(choice);
         command.execute();
     }
 
-    public int getSize() {
-        return commandList.size();
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Command command :
+                commandList) {
+            sb.append(commandList.indexOf(command) + 1);
+            sb.append(". ");
+            sb.append(command.getDescription()).append("\n");
+        }
+        return sb.toString();
     }
 }

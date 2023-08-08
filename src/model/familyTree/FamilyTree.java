@@ -6,11 +6,6 @@ import model.person.comparators.ComparatorByName;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * Все семейные связи решил хранить тут, а не в полях класса model.person.Person.
- * Смотрите model.familyTree.Connections.java.
- * Методы сортировки возвращают TreeMap, а не исходную структуру.
- */
 public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<Map.Entry<T, Connections<T>>> {
     private HashMap<T, Connections<T>> family;
 
@@ -32,9 +27,6 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
             family.get(connectFrom).putConnections(key, connectTo);
     }
 
-    /**
-     * То же самое что сверху, но автоматически добавляется соответствующая обратная связь
-     */
     public void putConnection(T connectFrom, ConnectionType key, T connectTo) {
         oneWayConnection(connectFrom, key, connectTo);
         if (!findConnection(connectTo, connectFrom)) {
