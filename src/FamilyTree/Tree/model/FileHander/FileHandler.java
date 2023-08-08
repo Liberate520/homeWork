@@ -1,19 +1,18 @@
-package FamilyTree.Tree.FileHander;
+package FamilyTree.Tree.model.FileHander;
 
-import FamilyTree.Tree.HumanGroup.Service;
+import FamilyTree.Tree.model.HumanGroup.Service;
 
 import java.io.*;
 
 public class FileHandler implements Writable {
 
     @Override
-    public boolean save(Serializable serializable, String filePath) {
+    public void save(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+
         }
     }
 
@@ -27,6 +26,11 @@ public class FileHandler implements Writable {
                 return null;
             }
         }
+
+    @Override
+    public void save(String path, Serializable obj) {
+
+    }
 
     public void save(Service humanList, String filePath) {
     }

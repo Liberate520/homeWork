@@ -2,30 +2,32 @@ package FamilyTree.Tree;
 
 
 
-import FamilyTree.Tree.FileHander.FileHandler;
-import FamilyTree.Tree.HumanGroup.Human.Gender;
-import FamilyTree.Tree.HumanGroup.Human.Human;
-import FamilyTree.Tree.HumanGroup.HumanGroup;
-import FamilyTree.Tree.HumanGroup.Service;
+import FamilyTree.Tree.model.FileHander.readSave;
+import FamilyTree.Tree.model.HumanGroup.Human.Gender;
+import FamilyTree.Tree.model.HumanGroup.Human.Human;
+import FamilyTree.Tree.model.HumanGroup.Service;
+import FamilyTree.Tree.presenter.Presenter;
+import FamilyTree.Tree.view.ConsoleUI;
+import FamilyTree.Tree.view.View;
 
 import java.time.LocalDate;
 
 public class Main {
 
     public static void main(String[] args) {
-        String filePath = "src/tree.out";
-        FileHandler fileHandler = new FileHandler();
-
-        Service humanList = Tree();
-        System.out.println(humanList);
-
-        fileHandler.save( humanList, filePath);
-
+//        String filePath = "src/tree.out";
 //        FileHandler fileHandler = new FileHandler();
-//        Tree humanList = (Tree) fileHandler.read(filePath);
-//        System.out.println(humanList);
-    }
-    public static Service Tree() {
+//
+//        Service consoleUI = Tree();
+//        System.out.println(consoleUI);
+//
+//        fileHandler.save( consoleUI, filePath);
+//
+//        fileHandler = new FileHandler();
+//        ConsoleUI consoleUI1  = (ConsoleUI) fileHandler.read(filePath);
+//        System.out.println(consoleUI1);
+//    }
+//    public static Service Tree() {
         Service tree = new Service();
 
         Human kostia = new Human("Константин", "Олегович", Gender.Male, LocalDate.of(1950,12,31), null,null);
@@ -56,10 +58,13 @@ public class Main {
         tree.sortDateOfBirth();
 
 
-        HumanGroup<Dogs> group = new HumanGroup<>();
-        group.sortByName();
-        group.addHuman(new Dogs());
-        return tree;
+        View view = new ConsoleUI();
+        readSave serialize = new readSave();
+        view.start();
+        new Presenter(view);
+//        HumanGroup<Dogs> group = new HumanGroup<>();
+//        group.sortByName();
+//        group.addHuman(new Dogs());
     }
 
 }

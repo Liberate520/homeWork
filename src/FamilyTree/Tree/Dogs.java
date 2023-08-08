@@ -1,6 +1,6 @@
 package FamilyTree.Tree;
 
-import FamilyTree.Tree.HumanGroup.HumanGroupItem;
+import FamilyTree.Tree.model.HumanGroup.HumanGroupItem;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package FamilyTree.Tree.HumanGroup;
+package FamilyTree.Tree.model.HumanGroup;
 
 import java.time.LocalDate;
 

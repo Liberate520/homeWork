@@ -1,6 +1,6 @@
-package FamilyTree.Tree.HumanGroup.Human;
+package FamilyTree.Tree.model.HumanGroup.Human;
 
-import FamilyTree.Tree.HumanGroup.HumanGroupItem;
+import FamilyTree.Tree.model.HumanGroup.HumanGroupItem;
 
 
 import java.io.Serializable;
@@ -41,7 +41,7 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
     public Human(E human) {
     }
 
-    public Human() {
+    public Human(String name, String patronymic, int dateOfBirth) {
     }
 
     public boolean addParent(E parent) {
@@ -91,6 +91,7 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
     public Gender getGender() {
         return gender;
     }
+
 
 
     @Override

@@ -1,10 +1,9 @@
-package FamilyTree.Tree.HumanGroup;
+package FamilyTree.Tree.model.HumanGroup;
 
 
-import FamilyTree.Tree.Comparators.ComparatorDateOfBirth;
-import FamilyTree.Tree.Comparators.ComparatorPatronymic;
-import FamilyTree.Tree.Comparators.HumanComparatorByName;
-import FamilyTree.Tree.HumanGroup.Human.Human;
+import FamilyTree.Tree.model.Comparators.ComparatorDateOfBirth;
+import FamilyTree.Tree.model.Comparators.ComparatorPatronymic;
+import FamilyTree.Tree.model.Comparators.HumanComparatorByName;
 
 
 import java.io.Serializable;

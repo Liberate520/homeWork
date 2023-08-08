@@ -1,10 +1,12 @@
-package FamilyTree.Tree.HumanGroup;
+package FamilyTree.Tree.model.HumanGroup;
 
-import FamilyTree.Tree.HumanGroup.Human.Human;
+import FamilyTree.Tree.model.HumanGroup.Human.Human;
 
 public class Service    {
 
-    private HumanGroup<Human> group;
+    public HumanGroup<Human> group;
+
+
     public Service() {
         group = new HumanGroup<>();
     }
@@ -23,6 +25,7 @@ public class Service    {
         return stringBuilder.toString();
     }
 
+
     @Override
     public String toString(){
         return getHumansInfo();
@@ -37,5 +40,6 @@ public class Service    {
         group.sortDateOfBirth();
     }
 
-
+    public void addHumans(String name, String patronymic, int dateOfBirth) {
+    }
 }
