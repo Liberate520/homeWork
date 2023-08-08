@@ -157,16 +157,10 @@ public class Person implements Serializable, Relatives<Person> {
 
     public void setFather(Person father){
         this.father = father;
-        System.out.println("***");
-        System.out.println(getPerson());
-        System.out.println(getFather());
     }
 
     public void setMother(Person mother){
         this.mother = mother;
-        System.out.println("***");
-        System.out.println(getPerson());
-        System.out.println(getMother());
     }
 
 
@@ -207,15 +201,4 @@ public class Person implements Serializable, Relatives<Person> {
         return sB.toString();
     }
 
-/*    public String getPersonChildrens(){
-        FamilyTree relation = new FamilyTree<>();
-        return relation.getChildrensInfo(getID());
-    }
-
-    public String getPersonSiblings(){
-        FamilyTree relation = new FamilyTree<>();
-        return relation.getSiblings(getID());
-    }
-
- */
 }
