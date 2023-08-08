@@ -16,7 +16,7 @@ public class Presenter {
     public void loadTreeFromFile() {
         service.setWritable(filePath);
         service.load();
-        view.print("Data loaded from file: ");
+        //view.print("Data loaded from file: ");
     }
 
     public void saveToFile() {
@@ -30,11 +30,11 @@ public class Presenter {
 
     public void sortByName() {
         service.sortByName();
-        view.print("Sorted tree by name: ");
+        view.print("Sorted tree by name!\n");
     }
 
-    public void sortByBirthDate() {
+    public void sortByAge() {
         service.sortByBirthDate();
-        view.print("Sorted tree by age: ");
+        view.print("Sorted tree by age!\n");
     }
 }
