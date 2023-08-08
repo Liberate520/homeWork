@@ -1,7 +1,6 @@
 package family_tree.backend.config;
 
 import family_tree.backend.ftree.FamilyTree;
-import family_tree.backend.ftree.Relatives;
 import family_tree.backend.person.Gender;
 import family_tree.backend.person.Person;
 
@@ -9,10 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Example{
+public class HumanExample{
     private FamilyTree<Person> familyTree;
 
-    public Example(){
+    public HumanExample(){
         familyTree = new FamilyTree<>();
     }
 
@@ -65,4 +64,5 @@ public class Example{
         return familyTree;
 
     }
+
 }

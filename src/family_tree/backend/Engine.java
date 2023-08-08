@@ -2,7 +2,7 @@ package family_tree.backend;
 
 import family_tree.backend.config.BaseInit;
 import family_tree.backend.config.Config;
-import family_tree.backend.config.Example;
+import family_tree.backend.config.HumanExample;
 import family_tree.backend.ftree.FamilyTree;
 import family_tree.backend.person.Gender;
 import family_tree.backend.person.Person;
@@ -12,18 +12,19 @@ import java.time.LocalDate;
 
 public class Engine {
 
+    private long recID;
     private FamilyTree<Person> relations;
 
-//    private int id;
     private boolean initDone;
     private boolean exampleBase;
 
     public Engine(){
         initDone = false;
         relations = new FamilyTree<>();
+        this.recID = relations.setNextID();
     }
 
-    public void addPerson(String lName, String fName, Gender gender, LocalDate birthDate) {
+    public void addObjRecord(String lName, String fName, Gender gender, LocalDate birthDate) {
         if (exampleBase == true){
             relations.clear();
             Person.nullCount();
@@ -31,9 +32,17 @@ public class Engine {
         }
         Person rec = new Person(fName, lName, gender, birthDate);
         relations.addPerson(rec);
+        saveWorkDump();
+
+    }
+    private void saveWorkDump(){
         FileHandler fileHandler = new FileHandler();
         fileHandler.saveDump(relations, getDump());
+    }
 
+    private void readWorkDump(){
+        FileHandler fileHandler = new FileHandler();
+        relations = (FamilyTree) fileHandler.readDump(getInit());
     }
 
     public String getTree() {
@@ -41,9 +50,9 @@ public class Engine {
         return relations.getFullRelativesInfo();
     }
 
-    public String getPersonTree(long id) {
+    public String getUnitTree(long id) {
         if (!initDone){getBase();}
-        return relations.getPersonalTree(id);
+        return relations.getUnitPersonalTree(id);
     }
 
     public String getInit(){
@@ -58,19 +67,11 @@ public class Engine {
 
     public void getBase(){
         if (getInit() == null){
-            relations = Example.makePreviewTree();
+            relations = HumanExample.makePreviewTree();
             exampleBase = true;
         } else {
-            FileHandler fileHandler = new FileHandler();
-            relations = (FamilyTree) fileHandler.readDump(getInit());
-            long tid = 0;
-            for (Person person: relations){
-                if (tid < person.getID()){
-                    tid = person.getID();
-                }
-            }
-            Person.setCount(tid + 1);
-
+            readWorkDump();
+            setIDCount();
             exampleBase = false;
         }
         if (relations != null){
@@ -78,6 +79,9 @@ public class Engine {
         }
     }
 
+    private void setIDCount(){
+        Person.setCount(relations.setNextID());
+    }
     public void sortTreeByBirthDays() {
         relations.sortByBirthDays();
     }
@@ -88,5 +92,16 @@ public class Engine {
 
     public void sortTreeByID() {
         relations.sortByID();
+    }
+
+    public void setRelations(int unit,int relative, String relation){
+        if (relation == "parent"){
+            relations.setParents(unit,relative);
+        } else {
+            String[] mDate=relation.split("-");
+            LocalDate dateOfM = LocalDate.of(Integer.parseInt(mDate[2]),Integer.parseInt(mDate[1]),Integer.parseInt(mDate[0]));
+            relations.setUnitMarriage(unit,"marriage name", relative,dateOfM);
+        }
+        saveWorkDump();
     }
 }

@@ -21,7 +21,7 @@ public class Presenter {
     }
 
     public void addPerson(String lName, String fName, Gender gender, LocalDate birthDate){
-        engine.addPerson(lName, fName, gender, birthDate);
+        engine.addObjRecord(lName, fName, gender, birthDate);
     }
 
     public void getFamilyTree(){
@@ -29,7 +29,7 @@ public class Presenter {
     }
 
     public void getPersonTree(long id){
-        baseUI.printAnswer(engine.getPersonTree(id));
+        baseUI.printAnswer(engine.getUnitTree(id));
     }
 
     public void sortByBirthDate() {
@@ -45,5 +45,9 @@ public class Presenter {
     public void sortByID() {
         engine.sortTreeByID();
         getFamilyTree();
+    }
+
+    public void setRelation(int unitId,int relativeId,String relation){
+        engine.setRelations(unitId,relativeId,relation);
     }
 }

@@ -2,6 +2,8 @@ package family_tree.backend.ftree;
 
 import family_tree.backend.person.Gender;
 
+import java.time.LocalDate;
+
 public interface Relatives<T>{
 
     String getName();
@@ -14,9 +16,15 @@ public interface Relatives<T>{
     T getFather();
     T getMother();
 
+    void setFather(T father);
+
+    void setMother(T mother);
+
+//    void setMarriage(T spouse, String name, LocalDate date);
+
     //    T addPerson();
 //    T getPersonObj();
-    String getPersonSiblings();
-    String getPersonChildrens();
+//    String getPersonSiblings();
+//    String getPersonChildrens();
 
 }

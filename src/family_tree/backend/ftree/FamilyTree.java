@@ -1,12 +1,13 @@
 package family_tree.backend.ftree;
 
 import family_tree.backend.person.*;
-import family_tree.backend.person.Person;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterable<P>, Wedding, Childrens {
     
@@ -34,13 +35,13 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
             sB.append(person.getPerson());
             if (person.getMother() != null || person.getFather() != null){
                 sB.append("\n :: Parents: ");
-                if (person.getMother().getPerson() != null){
+                if (person.getMother() != null){
                     sB.append(person.getMother().getPerson());
                 }
                 if (person.getMother() != null && person.getFather() != null) {
                     sB.append(" & ");
                 }
-                if (person.getFather().getPerson() != null) {
+                if (person.getFather() != null) {
                     sB.append(person.getFather().getPerson());
                 }
             }
@@ -59,7 +60,7 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
     return null;
     }
 
-    public String getPersonalTree(long id){
+    public String getUnitPersonalTree(long id){
         StringBuilder sB = new StringBuilder();
         P selPerson = getPersonObj(id);
         sB.append("\n============\n");
@@ -178,6 +179,38 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
 
     public void clear(){
         relations.clear();
+    }
+
+    public long setNextID(){
+        long id = 0;
+        for (P record: relations){
+            if (id < record.getID()){
+                id = record.getID();
+            }
+        }
+        return id + 1;
+    }
+
+    public void setParents(int personId, int parentId){
+        P unit = relations.get(personId);
+        P parent = relations.get(parentId);
+        System.out.println(unit);
+        System.out.println(parent);
+        if(parent.getGender().equals(Gender.Male)){
+            unit.setFather(parent);
+        } else {
+            unit.setMother(parent);
+        }
+    }
+
+    public void setUnitMarriage(int personId, String newName, int spouseId, LocalDate marriageDate){
+        P unit = relations.get(personId);
+        P spouse = relations.get(spouseId);
+        System.out.println(unit);
+        System.out.println(spouse);
+//        unit.setMarriage(spouse, newName, marriageDate);
+//        spouse.setMarriage(unit, null, marriageDate);
+
     }
 
     @Override

@@ -5,7 +5,7 @@ import family_tree.iu.ConsoleUI;
 public class SetRelations  extends Command{
 
     public SetRelations(ConsoleUI consoleUI){
-        super("TODO: Set Relations",consoleUI);
+        super("Set Relationship",consoleUI);
     }
 
     public void execute(){

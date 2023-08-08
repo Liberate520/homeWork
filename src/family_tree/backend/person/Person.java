@@ -1,10 +1,7 @@
 package family_tree.backend.person;
 
 import family_tree.backend.Counts;
-import family_tree.backend.ftree.Childrens;
-import family_tree.backend.ftree.FamilyTree;
 import family_tree.backend.ftree.Relatives;
-import family_tree.backend.Engine;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +9,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, Relatives<Person>, Counts {
+public class Person implements Serializable, Relatives<Person> {
     static long idc;
     private long id;
     private String firstName;
@@ -53,7 +50,8 @@ public class Person implements Serializable, Relatives<Person>, Counts {
     }
     public long getID(){return id;}
 
-        public static void setCount(long id){
+    public static void setCount(long id){
+
         idc = id;
     }
 
@@ -68,7 +66,7 @@ public class Person implements Serializable, Relatives<Person>, Counts {
         return lastName + " " + firstName;
     }
     public String getBirthData(){
-        String result = null;
+        String result;
 
         if (birthDate != null){
             result = birthDate.toString();
@@ -125,8 +123,8 @@ public class Person implements Serializable, Relatives<Person>, Counts {
     public Person getFather(){
         return father;
     }
-    public Gender getGenderBirth() {return genderBirth;}
     public Gender getGender () {return genderBirth;}
+    public Gender getGenderBirth() {return genderBirth;}
     public LocalDate getBirthDate(){return birthDate;}
     public LocalDate getDeathDate(){return deathDate;}
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
@@ -156,6 +154,22 @@ public class Person implements Serializable, Relatives<Person>, Counts {
         }
         return sb.toString();
     }
+
+    public void setFather(Person father){
+        this.father = father;
+        System.out.println("***");
+        System.out.println(getPerson());
+        System.out.println(getFather());
+    }
+
+    public void setMother(Person mother){
+        this.mother = mother;
+        System.out.println("***");
+        System.out.println(getPerson());
+        System.out.println(getMother());
+    }
+
+
     @Override
     public String toString(){
         return getPersonInfo();
@@ -192,7 +206,8 @@ public class Person implements Serializable, Relatives<Person>, Counts {
         }
         return sB.toString();
     }
-    public String getPersonChildrens(){
+
+/*    public String getPersonChildrens(){
         FamilyTree relation = new FamilyTree<>();
         return relation.getChildrensInfo(getID());
     }
@@ -201,4 +216,6 @@ public class Person implements Serializable, Relatives<Person>, Counts {
         FamilyTree relation = new FamilyTree<>();
         return relation.getSiblings(getID());
     }
+
+ */
 }

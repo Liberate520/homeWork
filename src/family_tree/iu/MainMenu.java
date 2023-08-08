@@ -32,6 +32,7 @@ public class MainMenu {
             sB.append("\n");
         }
         sB.append("0. Exit\n");
+        sB.append("========\n");
         sB.append("Your choice: ");
         return sB.toString();
     }
