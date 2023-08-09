@@ -4,6 +4,7 @@ import family_tree.model.family_tree.FamilyTree;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
 import family_tree.model.writer.FileHandler;
+import family_tree.model.writer.Writable;
 
 import java.time.LocalDate;
 
@@ -12,11 +13,13 @@ public class Service {
     private FamilyTree<Human> tree;
     private String text;
     private InfoText infoText;
+    private Writable writable;
 
 
     public Service() {
         tree = new FamilyTree<>();
         infoText = new InfoText();
+        writable = new FileHandler();
     }
     public void setText(String text) {
         this.text = text;
@@ -81,14 +84,12 @@ public class Service {
 
 
     public void readFile() {
-        FileHandler fileHandler = new FileHandler();
-        FamilyTree newTree = (FamilyTree) fileHandler.read(infoText.filePathText);
+        FamilyTree newTree =(FamilyTree) writable.read(infoText.filePathText);
         setTree(newTree);
     }
 
     public void saveFile() {
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree, infoText.filePathText);
+        writable.save(tree, infoText.filePathText);
     }
 
 }
