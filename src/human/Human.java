@@ -1,8 +1,9 @@
 package human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private String name;
     private String lastname;
@@ -18,7 +19,11 @@ public class Human {
         this.gender = gender;
     }
 
-    public Human(String name, String lastname, LocalDate birthdate, Gender gender ) {
+    public Human(String name, String lastname, LocalDate birthdate) {
+        this(name, lastname, birthdate, null, null);
+    }
+
+    public Human(String name, String lastname, LocalDate birthdate, Gender gender) {
         this(name, lastname, birthdate, null, gender);
     }
 
