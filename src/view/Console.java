@@ -1,12 +1,12 @@
 package view;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import model.familyTree.FamilyTree;
 import model.human.Gender;
 import model.human.Human;
+import model.save.FamilyTreeFileIO;
 import presenter.Presenter;
 
 public class Console implements View {
@@ -29,6 +29,12 @@ public class Console implements View {
       String choice = scanner.nextLine();
       menu.execute(choice);
     }
+  }
+
+  @Override
+  public void exit() {
+    work = false;
+    System.out.println("Программа завершена.");
   }
 
   @Override
@@ -59,5 +65,17 @@ public class Console implements View {
   public void sortByBirthDate() {
     presenter.sortByBirthDate();
     getHumanList();
+  }
+
+  public void save() {
+    presenter.save();
+  }
+
+  public void load() {
+    presenter.load();
+  }
+
+  public void setFileIo(FamilyTreeFileIO fileIo) {
+    presenter.setFileIo(fileIo);
   }
 }
