@@ -12,10 +12,6 @@ import modell.fam_tree.TreeNode;
 public class FileHandler<E extends TreeNode<E>> implements SaveToFile<E> {
     private static String filePath = "homeWork_family_tree/output/human_data.ser";
 
-    // public FileHandler(String filePath) {
-    //     this.filePath = filePath;
-    // }
-
     public boolean saveToFile(FamilyTree<E> tree) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             outputStream.writeObject(tree);

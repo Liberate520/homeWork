@@ -20,6 +20,10 @@ public class FamilyTreeService {
         familyTree = new FamilyTree<>();
     }
 
+    public void setWritable() {
+        this.fileHandler = new FileHandler<>();
+    }
+
     public boolean save(){
         if (fileHandler == null){
             return false;
@@ -46,8 +50,12 @@ public class FamilyTreeService {
         familyTree.remove(humansId);
     }
 
-    public void setWritable() {
-        this.fileHandler = new FileHandler<>();
+    public void setWedding(long humanId1, long humanId2) {
+        familyTree.setWedding(humanId1, humanId2);
+    }
+
+    public void setDivorce(long humanId1, long humanId2) {
+        familyTree.setDivorce(humanId1, humanId2);
     }
 
     public void sortByName(){

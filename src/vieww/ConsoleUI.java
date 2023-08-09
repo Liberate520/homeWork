@@ -32,12 +32,6 @@ public class ConsoleUI implements View {
             String choice = scanner.nextLine();
             menu.execute(choice);
         }
-        // presenter.loadTreeFromFile();
-        // getHumanList();
-        // presenter.sortByName();
-        // getHumanList();
-        // presenter.sortByBirthDate();
-        // getHumanList();
     }
     
     public void getHumanList(){
@@ -115,6 +109,30 @@ public class ConsoleUI implements View {
         scanner.nextLine();
 
         presenter.removeHuman(humansId);
+    }
+
+    public void setWedding() {
+        print("Enter the id of human 1: ");
+        long humanId1 = scanner.nextLong();
+        print("Enter the id of human 2: ");
+        long humanId2 = scanner.nextLong();
+        
+        print("");
+        scanner.nextLine();
+
+        presenter.setWedding(humanId1, humanId2);
+    }
+
+    public void setDivorce() {
+        print("Enter the id of human 1: ");
+        long humanId1 = scanner.nextLong();
+        print("Enter the id of human 2: ");
+        long humanId2 = scanner.nextLong();
+        
+        print("");
+        scanner.nextLine();
+
+        presenter.setDivorce(humanId1, humanId2);
     }
 
     public void sortByName(){

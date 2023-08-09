@@ -6,6 +6,8 @@ import vieww.comands.ExitCommand;
 import vieww.comands.PrintHumanList;
 import vieww.comands.RemoveHuman;
 import vieww.comands.SaveHumanList;
+import vieww.comands.SetDivorce;
+import vieww.comands.SetWedding;
 import vieww.comands.SortByAge;
 import vieww.comands.SortByName;
 
@@ -21,6 +23,8 @@ public class Menu {
         list.add(new SaveHumanList(console));
         list.add(new AddHuman(console));
         list.add(new RemoveHuman(console));
+        list.add(new SetWedding(console));
+        list.add(new SetDivorce(console));
         list.add(new SortByName(console));
         list.add(new SortByAge(console));
         list.add(new ExitCommand(console));

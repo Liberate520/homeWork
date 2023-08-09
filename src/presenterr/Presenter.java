@@ -9,7 +9,6 @@ import vieww.View;
 public class Presenter {
     private View view;
     private FamilyTreeService service;
-    //private String filePath = "homeWork_family_tree/output/human_data.ser";
 
     public Presenter(View view) {
         service = new FamilyTreeService();
@@ -19,7 +18,6 @@ public class Presenter {
     public void loadTreeFromFile() {
         service.setWritable();
         service.load();
-        //view.print("Data loaded from file!");
     }
 
     public void saveToFile() {
@@ -37,6 +35,14 @@ public class Presenter {
 
     public void removeHuman(long humansId) {
         service.removeHuman(humansId);
+    }
+
+    public void setWedding(long humanId1, long humanId2) {
+        service.setWedding(humanId1, humanId2);
+    }
+
+    public void setDivorce(long humanId1, long humanId2) {
+        service.setDivorce(humanId1, humanId2);
     }
 
     public void sortByName() {
