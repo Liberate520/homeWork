@@ -1,4 +1,4 @@
-package family_tree.view.console_commands;
+package family_tree.view.console_commands.CommandsInterface;
 
 import family_tree.model.human.Gender;
 

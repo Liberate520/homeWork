@@ -3,6 +3,10 @@ package family_tree.view;
 
 import family_tree.presenter.Presenter;
 import family_tree.view.console_commands.*;
+import family_tree.view.console_commands.CommandsInterface.IConsoleAddChildren;
+import family_tree.view.console_commands.CommandsInterface.IConsoleAddHuman;
+import family_tree.view.console_commands.CommandsInterface.IConsoleAddParents;
+import family_tree.view.console_commands.CommandsInterface.IConsoleWedding;
 
 import java.util.Scanner;
 

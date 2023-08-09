@@ -1,6 +1,8 @@
 package family_tree.view.console_commands;
 
-public class ConsoleWedding extends ConsoleCommands implements IConsoleWedding{
+import family_tree.view.console_commands.CommandsInterface.IConsoleWedding;
+
+public class ConsoleWedding extends ConsoleCommands implements IConsoleWedding {
 
     private long idHusband;
     private long idWife;

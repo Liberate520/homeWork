@@ -1,5 +1,7 @@
 package family_tree.view.console_commands;
 
+import family_tree.view.console_commands.CommandsInterface.IConsoleAddParents;
+
 public class ConsoleAddParents extends ConsoleCommands implements IConsoleAddParents {
    private long idChildren;
    private long idFather;

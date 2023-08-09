@@ -1,6 +1,7 @@
 package family_tree.view.console_commands;
 
 import family_tree.model.human.Gender;
+import family_tree.view.console_commands.CommandsInterface.IConsoleAddHuman;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -8,7 +9,7 @@ import java.time.YearMonth;
 import static family_tree.model.human.Gender.Female;
 import static family_tree.model.human.Gender.Male;
 
-public class ConsoleAddHuman extends ConsoleCommands implements IConsoleAddHuman{
+public class ConsoleAddHuman extends ConsoleCommands implements IConsoleAddHuman {
     private String name;
     private Gender gender;
     private LocalDate localDate;
