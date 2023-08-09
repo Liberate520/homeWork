@@ -1,6 +1,8 @@
-package human;
+package relative;
 
 public enum Relative {
         parent,
-        children
+        children,
+
+
 }

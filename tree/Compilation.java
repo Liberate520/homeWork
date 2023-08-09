@@ -1,7 +1,7 @@
 package tree;
 
 import human.Human;
-import human.Relative;
+import relative.Relative;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Compilation {
     ArrayList<Node> tree;
 
-    public Compilation(Tree geoTree) {
+    public Compilation(Node geoTree) {
         tree = geoTree.getTree();
     }
 
@@ -17,7 +17,7 @@ public class Compilation {
         ArrayList<Human> result = new ArrayList<>();
         result.add(p);
         for (Node node : tree) {
-            if (node.person1 == p && node.re == rel) {
+            if (node.person1 == p && node.getRe() == rel) {
                 result.add(node.person2);
             }
         }

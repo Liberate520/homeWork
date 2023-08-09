@@ -1,20 +1,47 @@
 package tree;
 import human.Human;
-import human.Relative;
+import relative.Relative;
+
+import java.util.ArrayList;
 
 public class Node {
-    public Human person1;
-    public Relative re;
-    public Human person2;
+    Human person1;
+    private Relative re;
+    Human person2;
+
+
+    public ArrayList<Node> tree = new ArrayList<>();
 
     public Node(Human person1, Relative re, Human person2) {
+
         this.person1 = person1;
         this.re = re;
         this.person2 = person2;
+
     }
 
-    @Override
-    public String toString() {
-        return String.format("<%s %s %s>", person1, re, person2);
+
+    public ArrayList<Node> getTree() {
+        return tree;
+    }
+
+
+    public void append(Human parent, Human children) {
+        tree.add(new Node(parent, Relative.parent, children));
+        tree.add(new Node(children, Relative.children, parent));
+    }
+
+
+    public Human getWho() {
+        return person1;
+    }
+
+    public Relative getRe() {
+        return re;
+
+    }
+
+    public Human getToWhom() {
+        return person2;
     }
 }

@@ -1,8 +1,9 @@
 import human.Gender;
 import human.Human;
-import human.Relative;
+import relative.Relative;
 import tree.Compilation;
-import tree.Tree;
+import tree.Node;
+
 
 import java.time.LocalDate;
 
@@ -15,7 +16,7 @@ public class Main {
         var masha = new Human("Маша", Gender.Female, LocalDate.of(1972, 9, 10));
         var jane = new Human("Женя", Gender.Male, LocalDate.of(2019, 4, 2));
         var ivan = new Human("Ваня", Gender.Male, LocalDate.of(2019, 4, 2));
-        Tree gt = new Tree();
+        Node gt = new Node();
         gt.append(masha, irina);
         gt.append(vasya, masha);
         gt.append(irina, jane);

@@ -1,16 +1,27 @@
 package human;
 
+import relative.Relative;
+
 import java.time.LocalDate;
 
 public class Human {
     private String fullName;
     private Gender gender;
     private LocalDate birthDate;
-    private Relative relative;
+    private LocalDate deathDate;
 
-    public Relative getRelative() {
-        return relative;
+
+
+
+    public Human(String fullName, Gender gender, LocalDate birthDate) {
+        this.fullName = fullName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+
     }
+
+
+
 
     public String getFullName() {
         return fullName;
@@ -23,6 +34,9 @@ public class Human {
     public LocalDate getBirthDate() {
         return birthDate;
     }
+
+
+
     @Override
     public String toString() {
         return getInfo();
@@ -40,13 +54,6 @@ public class Human {
         return sb.toString();
     }
 
-    public Human(String fullName, Gender gender, LocalDate birthDate) {
-        this.fullName = fullName;
-        this.gender = gender;
-        this.birthDate = birthDate;
-
-
-    }
 
 }
 
