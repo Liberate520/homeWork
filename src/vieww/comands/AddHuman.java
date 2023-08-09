@@ -2,18 +2,18 @@ package vieww.comands;
 
 import vieww.ConsoleUI;
 
-public class GetHumanList implements Command {
+public class AddHuman implements Command {
     private ConsoleUI console;
 
-    public GetHumanList(ConsoleUI console) {
+    public AddHuman(ConsoleUI console) {
         this.console = console;
     }
 
     public String getDescription(){
-        return "Get human list";
+        return "Add human";
     }
 
     public void execute(){
-        console.getHumanList();
+        console.addHuman();
     }
 }

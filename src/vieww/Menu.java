@@ -1,8 +1,11 @@
 package vieww;
 
+import vieww.comands.AddHuman;
 import vieww.comands.Command;
 import vieww.comands.ExitCommand;
-import vieww.comands.GetHumanList;
+import vieww.comands.PrintHumanList;
+import vieww.comands.RemoveHuman;
+import vieww.comands.SaveHumanList;
 import vieww.comands.SortByAge;
 import vieww.comands.SortByName;
 
@@ -14,7 +17,10 @@ public class Menu {
 
     public Menu(ConsoleUI console) {
         list = new ArrayList<>();
-        list.add(new GetHumanList(console));
+        list.add(new PrintHumanList(console));
+        list.add(new SaveHumanList(console));
+        list.add(new AddHuman(console));
+        list.add(new RemoveHuman(console));
         list.add(new SortByName(console));
         list.add(new SortByAge(console));
         list.add(new ExitCommand(console));

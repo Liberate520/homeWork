@@ -2,7 +2,11 @@ package vieww;
 
 import presenterr.Presenter;
 
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+
+import modell.human.Gender;
 
 public class ConsoleUI implements View {
     Scanner scanner = new Scanner(System.in);
@@ -38,6 +42,79 @@ public class ConsoleUI implements View {
     
     public void getHumanList(){
         presenter.getHumanList();
+    }
+
+    public void saveToFile() {
+        presenter.saveToFile();
+    }
+
+    public void addHuman () {
+        String name;
+        Gender userGender;
+        LocalDate birthDate = null;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        long idFather;
+        long idMother;
+
+        print("Enter the name: ");
+        name = scanner.nextLine();
+        
+        while (true) {
+            print("Please select your gender:");
+            print("1. Male");
+            print("2. Female");
+
+            System.out.print("Enter the number corresponding to your choice: ");
+            int choice;
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+
+                if (choice == 1) {
+                    userGender = Gender.Male;
+                    break;
+                } else if (choice == 2) {
+                    userGender = Gender.Female;
+                    break;
+                } else {
+                    print("Invalid choice. Please enter 1 for Male or 2 for Female.");
+                }
+            } else {
+                print("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
+
+        while (birthDate == null) {
+            print("Please enter your birth date (YYYY-MM-DD): ");
+            String inputDate = scanner.nextLine();
+
+            try {
+                birthDate = LocalDate.parse(inputDate, dateFormatter);
+            } catch (Exception e) {
+                print("Invalid date format. Please use YYYY-MM-DD format.");
+            }
+        }
+
+        print("Enter the id of Father or -1 if it is undefined: ");
+        idFather = scanner.nextLong();
+
+        print("Enter the id of Mother or -1 if it is undefined: ");
+        idMother = scanner.nextLong();
+        print("");
+        scanner.nextLine();
+
+        presenter.addHuman(name, userGender, birthDate, idFather, idMother);
+    }
+
+    public void removeHuman() {
+        print("Enter the id of human you want to delete: ");
+        long humansId = scanner.nextLong();
+        print("");
+        scanner.nextLine();
+
+        presenter.removeHuman(humansId);
     }
 
     public void sortByName(){

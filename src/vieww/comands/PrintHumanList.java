@@ -2,18 +2,18 @@ package vieww.comands;
 
 import vieww.ConsoleUI;
 
-public class SortByAge implements Command {
+public class PrintHumanList implements Command {
     private ConsoleUI console;
 
-    public SortByAge(ConsoleUI console) {
+    public PrintHumanList(ConsoleUI console) {
         this.console = console;
     }
 
     public String getDescription(){
-        return "Sort by age";
+        return "Print human list";
     }
 
     public void execute(){
-        console.sortByAge();
+        console.getHumanList();
     }
 }

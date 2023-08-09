@@ -2,18 +2,18 @@ package vieww.comands;
 
 import vieww.ConsoleUI;
 
-public class SortByAge implements Command {
+public class RemoveHuman implements Command {
     private ConsoleUI console;
 
-    public SortByAge(ConsoleUI console) {
+    public RemoveHuman(ConsoleUI console) {
         this.console = console;
     }
 
     public String getDescription(){
-        return "Sort by age";
+        return "Remove human";
     }
 
     public void execute(){
-        console.sortByAge();
+        console.removeHuman();
     }
 }

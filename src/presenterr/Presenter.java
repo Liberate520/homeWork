@@ -1,6 +1,9 @@
 package presenterr;
 
+import java.time.LocalDate;
+
 import modell.FamilyTreeService;
+import modell.human.Gender;
 import vieww.View;
 
 public class Presenter {
@@ -16,16 +19,24 @@ public class Presenter {
     public void loadTreeFromFile() {
         service.setWritable();
         service.load();
-        //view.print("Data loaded from file: ");
+        //view.print("Data loaded from file!");
     }
 
     public void saveToFile() {
         service.save();
-        view.print("Data saved to file: ");
+        view.print("Data saved to file!\n");
     }
 
     public void getHumanList() {
         view.print(service.getHumanList());
+    }
+
+    public void addHuman(String name, Gender userGender, LocalDate birthDate, long idFather, long idMother) {
+        service.addHuman(name, userGender, birthDate, idFather, idMother);
+    }
+
+    public void removeHuman(long humansId) {
+        service.removeHuman(humansId);
     }
 
     public void sortByName() {
