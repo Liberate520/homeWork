@@ -24,7 +24,7 @@ public class ConsoleUI implements View {
     public void start() {
         presenter.loadTreeFromFile();
         while (work) {
-            System.out.println(menu.print());
+            print(menu.print());
             String choice = scanner.nextLine();
             menu.execute(choice);
         }
@@ -50,6 +50,6 @@ public class ConsoleUI implements View {
 
     public void exit() {
         work = false;
-        System.out.println("Exiting the program...");
+        print("Exiting the program...");
     }
 }

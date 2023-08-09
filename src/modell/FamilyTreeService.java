@@ -3,9 +3,10 @@ package modell;
 import modell.fam_tree.FamilyTree;
 import modell.human.Human;
 import modell.file_handler.FileHandler;
+import modell.file_handler.SaveToFile;
 
 public class FamilyTreeService {
-    private FileHandler<Human> fileHandler;
+    private SaveToFile<Human> fileHandler;
     private FamilyTree<Human> familyTree;
 
     public FamilyTreeService(FamilyTree<Human> familyTree) {
@@ -31,8 +32,8 @@ public class FamilyTreeService {
         return true;
     }
 
-    public void setWritable(String filePath) {
-        this.fileHandler = new FileHandler<>(filePath);
+    public void setWritable() {
+        this.fileHandler = new FileHandler<>();
     }
 
     public void sortByName(){

@@ -6,7 +6,7 @@ import vieww.View;
 public class Presenter {
     private View view;
     private FamilyTreeService service;
-    private String filePath = "homeWork_family_tree/output/human_data.ser";
+    //private String filePath = "homeWork_family_tree/output/human_data.ser";
 
     public Presenter(View view) {
         service = new FamilyTreeService();
@@ -14,7 +14,7 @@ public class Presenter {
     }
 
     public void loadTreeFromFile() {
-        service.setWritable(filePath);
+        service.setWritable();
         service.load();
         //view.print("Data loaded from file: ");
     }
