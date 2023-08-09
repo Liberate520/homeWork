@@ -44,12 +44,12 @@ public class HumanExample{
         marriage5.add(rec6);
         marriage6.add(rec4);
 
-        rec3.setMarriage(marriage1, "Perri", LocalDate.of(1966, 4, 17));
-        rec3.setMarriage(marriage4, "Nail", LocalDate.of(1987, 2, 6));
-        rec2.setMarriage(marriage2, null, LocalDate.of(1966, 4, 17));
-        rec5.setMarriage(marriage3, null, LocalDate.of(1987, 2, 6));
-        rec4.setMarriage(marriage5, "Druon-Perri", LocalDate.of(2002, 9, 11));
-        rec6.setMarriage(marriage6, null, LocalDate.of(2002, 9, 11));
+        rec3.setMarriage(marriage1, LocalDate.of(1966, 4, 17), "Perri");
+        rec3.setMarriage(marriage4, LocalDate.of(1987, 2, 6), "Nail");
+        rec2.setMarriage(marriage2, LocalDate.of(1966, 4, 17));
+        rec5.setMarriage(marriage3, LocalDate.of(1987, 2, 6));
+        rec4.setMarriage(marriage5, LocalDate.of(2002, 9, 11), "Druon-Perri");
+        rec6.setMarriage(marriage6, LocalDate.of(2002, 9, 11));
 
 
         familyTree.addPerson(rec2);

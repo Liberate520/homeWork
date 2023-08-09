@@ -12,24 +12,24 @@ public class Marriage implements Serializable, Wedding {
     private LocalDate marriedDate;
     private LocalDate divorceDate;
 
-    public Marriage(List<Person> spousesList, String marriedName, LocalDate marriedDate, LocalDate divorceDate){
+    public Marriage(List<Person> spousesList, LocalDate marriedDate, String marriedName, LocalDate divorceDate){
         this.spousesList = spousesList;
         this.marriedName = marriedName;
         this.marriedDate = marriedDate;
         this.divorceDate = divorceDate;
     }
 
-    public Marriage(List<Person> spousesList, String marriedName, LocalDate marriedDate){
+    public Marriage(List<Person> spousesList, LocalDate marriedDate, String marriedName){
         this.spousesList = spousesList;
         this.marriedName = marriedName;
         this.marriedDate = marriedDate;
         this.divorceDate = null;
     }
-
-    public void addSpouse(Person person)
-    {
-        spousesList.add(person);
-
+    public Marriage(List<Person> spousesList, LocalDate marriedDate){
+        this.spousesList = spousesList;
+        this.marriedDate = marriedDate;
+        this.marriedName = null;
+        this.divorceDate = null;
     }
 
     public List<Person> getSpousesList(){
@@ -50,6 +50,10 @@ public class Marriage implements Serializable, Wedding {
         }
 
         return sB.toString();
+    }
+
+    public String getMarriedName(){
+        return marriedName;
     }
 
 }

@@ -130,11 +130,14 @@ public class Person implements Serializable, Relatives<Person> {
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
     public void setdeathDate(LocalDate deathDate) {this.deathDate = deathDate;}
 
-    public void setMarriage(List<Person> spouses,String newName,LocalDate inEvent){
-        setMarriage(spouses,newName,inEvent,null);
+    public void setMarriage(List<Person> spouses,LocalDate inEvent){
+        setMarriage(spouses,inEvent,null,null);
     }
-    public void setMarriage(List<Person> spouses, String newName, LocalDate inEvent, LocalDate outEvent){
-        Marriage event = new Marriage(spouses, newName, inEvent, outEvent);
+    public void setMarriage(List<Person> spouses,LocalDate inEvent,String newName){
+        setMarriage(spouses,inEvent,newName,null);
+    }
+    public void setMarriage(List<Person> spouses, LocalDate inEvent, String newName, LocalDate outEvent){
+        Marriage event = new Marriage(spouses, inEvent, newName, outEvent);
         this.marriage.add(event);
     }
 
@@ -174,6 +177,7 @@ public class Person implements Serializable, Relatives<Person> {
         sb.append(" (");
         sb.append(getAge());
         sb.append(" y.o.) ");
+        sb.append(getMarriedName());
         sb.append(getParents());
         sb.append("; ");
         sb.append(getMarriageInfo());
@@ -196,6 +200,19 @@ public class Person implements Serializable, Relatives<Person> {
                     sB.append(spouse.getPerson());
                 }
                 sB.append("\n");
+            }
+        }
+        return sB.toString();
+    }
+
+    public String getMarriedName(){
+        StringBuilder sB = new StringBuilder();
+
+        for (Marriage marriageList: marriage){
+            Marriage spousesList = marriageList;
+            if (spousesList != null && marriageList.getMarriedName()!=null) {
+                sB.append(" | *");
+                sB.append(marriageList.getMarriedName());
             }
         }
         return sB.toString();

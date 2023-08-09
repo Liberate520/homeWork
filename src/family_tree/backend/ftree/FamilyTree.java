@@ -33,6 +33,7 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
             sB.append(person.getID());
             sB.append(". ");
             sB.append(person.getPerson());
+            sB.append((person.getMarriedName()));
             if (person.getMother() != null || person.getFather() != null){
                 sB.append("\n :: Parents: ");
                 if (person.getMother() != null){
@@ -210,10 +211,8 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
         List<P> spouseList = new ArrayList<>();
         unitList.add(unit);
         spouseList.add(spouse);
-//        System.out.println(unit);
-//        System.out.println(spouse);
-        unit.setMarriage(spouseList, newName, marriageDate);
-        spouse.setMarriage(unitList, "", marriageDate);
+        unit.setMarriage(spouseList, marriageDate, newName);
+        spouse.setMarriage(unitList, marriageDate);
 
     }
 
