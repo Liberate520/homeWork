@@ -2,12 +2,11 @@ package homeWork.ProjectFamilyTree.Model;
 
 import java.io.Serializable;
 import java.io.*;
-
-public class FileHandler implements Writable {
+public class FileHandler implements Save, Load {
     @Override
     public void Save(Serializable object) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("family.out"));
+                new FileOutputStream("homeWork/ProjectFamilyTree/family.out"));
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
     }
@@ -15,12 +14,9 @@ public class FileHandler implements Writable {
     @Override
     public Object Load() throws IOException, ClassNotFoundException{
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("family.out"));
+                new FileInputStream("homeWork/ProjectFamilyTree/family.out"));
         Family_tree familyTree = (Family_tree) objectInputStream.readObject();
         objectInputStream.close();
         return familyTree;
     }
 }
-    /*FileHandler s1 = new FileHandler();
-        s1.Save(familyTree);
-                Family_tree s2 = (Family_tree) s1.Load();*/

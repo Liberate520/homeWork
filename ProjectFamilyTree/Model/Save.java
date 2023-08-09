@@ -2,8 +2,7 @@ package homeWork.ProjectFamilyTree.Model;
 import java.io.IOException;
 import java.io.Serializable;
 
-public interface Writable {
+public interface Save {
     void Save(Serializable object) throws IOException;
 
-    Object Load() throws IOException, ClassNotFoundException;
 }

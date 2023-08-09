@@ -2,6 +2,7 @@ package homeWork.ProjectFamilyTree.View;
 
 import homeWork.ProjectFamilyTree.View.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class MainMenu {
         commandList.add(new SetSiblings(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
+        commandList.add(new Save(consoleUI));
+        commandList.add(new Load(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 
@@ -28,7 +31,7 @@ public class MainMenu {
         }
         return stringBuilder.toString();
     }
-    public void execute(int numCommand){
+    public void execute(int numCommand) throws IOException, ClassNotFoundException {
         Command command = commandList.get(numCommand - 1);
         command.execute();
     }

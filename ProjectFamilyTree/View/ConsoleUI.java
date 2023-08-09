@@ -1,16 +1,10 @@
 package homeWork.ProjectFamilyTree.View;
 
 import homeWork.ProjectFamilyTree.Model.Gender;
-import homeWork.ProjectFamilyTree.Model.Human;
-import homeWork.ProjectFamilyTree.Model.Service;
 import homeWork.ProjectFamilyTree.Presenter.Presenter;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -27,7 +21,7 @@ public class ConsoleUI implements View {
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         System.out.println("Выберите действие: ");
         while (work){
             System.out.println(mainMenu.menu());
@@ -88,6 +82,9 @@ public class ConsoleUI implements View {
         int human2Id = Integer.parseInt(human2IdString);
         presenter.siblings(human1Id, human2Id);
     }
+    public void Save() throws IOException {presenter.Save();}
+    public void Load() throws IOException, ClassNotFoundException {presenter.Load();}
+
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);

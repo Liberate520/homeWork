@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Human implements Serializable, Family_Tree_Item {
+public class Human extends AbstractHuman implements Serializable, Family_Tree_Item {
     private int humanId;
     private String name;
     private Human mother, father;
@@ -22,15 +22,7 @@ public class Human implements Serializable, Family_Tree_Item {
     private Gender gender;
 
     public Human(String name, Human mother, Human father, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender) {
-        this.name = name;
-        this.mother = mother;
-        this.father = father;
-        children = new ArrayList<>();
-        sibling = new ArrayList<>();
-        this.localDateOfBirth = localDateOfBirth;
-        this.localDateofDeath = localDateofDeath;
-        this.gender = gender;
-
+        super(name, mother, father, localDateOfBirth, localDateofDeath, gender);
     }
 
     public Human(int humanId, String name, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender) {
