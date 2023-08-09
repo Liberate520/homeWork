@@ -1,5 +1,5 @@
-package family_tree.comparators;
-import family_tree.Subject;
+package family_tree.model.comparators;
+import family_tree.model.Subject;
 import java.util.Comparator;
 
 

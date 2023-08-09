@@ -1,10 +1,13 @@
-package family_tree.human;
-import family_tree.Subject;
+package family_tree.model.human;
+
+import family_tree.model.Subject;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
 public class Human implements Serializable, Subject {
+    private int id;
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -12,7 +15,8 @@ public class Human implements Serializable, Subject {
     private Human mother;
     private Human father;
 
-    public Human(String name, LocalDate birthDate, LocalDate deathDate, Gender gender, Human mother, Human father) {
+    public Human(int id, String name, LocalDate birthDate, LocalDate deathDate, Gender gender, Human mother, Human father) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
@@ -21,13 +25,18 @@ public class Human implements Serializable, Subject {
         this.father = father;
     }
 
-    public Human(String name, LocalDate birthDate, LocalDate deathDate, Gender gender) {
+    public Human(int id, String name, LocalDate birthDate, LocalDate deathDate, Gender gender) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.gender = gender;
         this.mother = null;
         this.father = null;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getName() {
@@ -48,7 +57,6 @@ public class Human implements Serializable, Subject {
         return gender.toString();
     }
 
-
     public Human getMother() {
         if(mother == null) {
         }
@@ -62,8 +70,22 @@ public class Human implements Serializable, Subject {
     }
 
     @Override
+    public void setMother(Object human) {
+        mother = (Human) human;
+    }
+
+    @Override
+    public void setFather(Object human) {
+        father = (Human) human;
+    }
+
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("ID: ");
+        stringBuilder.append(id);
+        stringBuilder.append("\n");
         stringBuilder.append("name: ");
         stringBuilder.append(name);
         stringBuilder.append("\n");
@@ -78,7 +100,7 @@ public class Human implements Serializable, Subject {
             stringBuilder.append(getMother().getName());
             stringBuilder.append("\n");
         }
-        if(father != null) {
+        if(this.father != null) {
             stringBuilder.append("father: ");
             stringBuilder.append(getFather().getName());
             stringBuilder.append("\n");

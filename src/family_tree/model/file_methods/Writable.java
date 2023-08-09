@@ -1,4 +1,4 @@
-package family_tree.file_methods;
+package family_tree.model.file_methods;
 
 import java.io.Serializable;
 
