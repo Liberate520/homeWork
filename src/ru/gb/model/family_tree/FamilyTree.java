@@ -28,20 +28,35 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
         return humansId;
     }
 
+    public E getHumanById(long id) {
+        for (E human : humans) {
+            if (human.getId() == id) {
+                return human;
+            }
+        }
+        return null;
+    }
+
     /**
      * Сначала указывается ребенок, потом родитель
      * @param child это ребенок
      * @param parent это родитель
      */
 
-    public void setConnection(E child, E parent) {
-        addHuman(child);
-        addHuman(parent);
-
+    public String setConnection(long childId, long parentId) {
+        E child = getHumanById(childId);
+        if (child == null){
+            return "Id ребенка не найдено в дереве";
+        }
+        E parent = getHumanById(parentId);
+        if (parent == null){
+            return "Id родителя не найдено в дереве";
+        }
         parent.addChild(child);
         child.addParent(parent);
+        return "Связь успешно установлена";
     }
-    public List<Human> getParent(Human child) {
+    public List<E> getParent(E child) {
         return child.getParents();
     }
     @Override
@@ -61,10 +76,10 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, It
     public Iterator<E> iterator() {
         return new HumanIterator<>(humans);
     }
-    public void SortByName(){
+    public void sortByName(){
         humans.sort(new HumanComparatorByName<E>());
     }
-    public void SortByAge(){
+    public void sortByAge(){
         humans.sort(new HumanComparatorByAge<E>());
     }
 }

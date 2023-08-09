@@ -47,6 +47,10 @@ public class Human implements Serializable, FamilyTreeItem<Human> {
         this.id = id;
     }
 
+    public long getId() {
+        return this.id;
+    }
+
     public void addChild(Human child) {
         children.add(child);
     }

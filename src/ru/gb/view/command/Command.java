@@ -2,6 +2,8 @@ package ru.gb.view.command;
 
 import ru.gb.view.ConsoleUI;
 
+import java.io.IOException;
+
 public abstract class Command {
     private String description;
     private ConsoleUI consoleUI;
@@ -17,5 +19,5 @@ public abstract class Command {
     public String getDescription() {
         return description;
     }
-    public abstract void execute();
+    public abstract void execute() throws IOException, ClassNotFoundException;
 }

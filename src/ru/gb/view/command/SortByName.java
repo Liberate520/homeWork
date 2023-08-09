@@ -9,6 +9,6 @@ public class SortByName extends Command{
 
     @Override
     public void execute() {
-        super.getConsoleUI().SortByName();
+        super.getConsoleUI().sortByName();
     }
 }

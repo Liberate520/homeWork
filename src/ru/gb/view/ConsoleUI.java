@@ -5,6 +5,7 @@ import ru.gb.model.data.Gender;
 import ru.gb.model.human.Human;
 import ru.gb.presenter.Presenter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class ConsoleUI implements View{
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         System.out.println("Привет! Я помогу тебе составить семейное древо!");
         while (work) {
             System.out.println(menu.menu());
@@ -36,36 +37,30 @@ public class ConsoleUI implements View{
         work = false;
     }
     public void addHuman() {
-        Human human = createHuman();
+        Human human = presenter.createHuman(scanner);
         presenter.addHuman(human);
     }
-    public Human createHuman(){
-        System.out.println("Введите имя человека");
-        String name = scanner.nextLine();
-        System.out.println("Введите дату рождения человека в формате ДД_ММ_ГГ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd_MM_yyyy");
-        LocalDate birthday = LocalDate.parse(scanner.nextLine(), formatter);
-        System.out.println("Введите пол в формате Male или Female");
-        Gender gender = Gender.valueOf(scanner.nextLine());
-
-        return new Human(name, birthday, gender);
+    public void sortByName(){
+        presenter.sortByName();
     }
-    public void SortByName(){
-        presenter.SortByName();
-    }
-    public void SortByAge(){
-        presenter.SortByAge();
+    public void sortByAge(){
+        presenter.sortByAge();
     }
     public void getInfo(){
         presenter.getInfo();
     }
     public void setConnection() {
-        Human child = createHuman();
-        Human parent = createHuman();
-        presenter.setConnection(child, parent);
+        presenter.setConnection(scanner);
     }
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);
+    }
+
+    public void save() throws IOException {
+        presenter.save();
+    }
+    public void load() throws IOException, ClassNotFoundException {
+        presenter.load();
     }
 }
