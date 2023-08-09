@@ -1,6 +1,6 @@
-package human;
+package model;
 
-import tree.TreeItem;
+import model.tree.TreeItem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,9 +14,9 @@ public class Person extends Human implements Comparable<Person>, TreeItem<Person
     private List<Person> children;
 
 
-    public Person(String firstName, String lastName, String surName,
+    public Person(int id, String firstName, String lastName, String surName,
                   LocalDate dateOfBirth, LocalDate dateOfdDeath, Gender gender) {
-        super(firstName, lastName, surName, dateOfBirth, gender);
+        super(id, firstName, lastName, surName, dateOfBirth, gender);
         this.children = new ArrayList<>();
         this.dateOfdDeath = dateOfdDeath;
     }
@@ -28,9 +28,9 @@ public class Person extends Human implements Comparable<Person>, TreeItem<Person
      * @param surName
      * @param dateOfBirth
      */
-    public Person(String firstName, String lastName,
+    public Person(int id, String firstName, String lastName,
                   String surName, LocalDate dateOfBirth, Gender gender) {
-        super(firstName, lastName, surName,
+        super(id, firstName, lastName, surName,
                 dateOfBirth, gender);
         this.children = new ArrayList<>();
         this.dateOfdDeath = null;
@@ -88,10 +88,13 @@ public class Person extends Human implements Comparable<Person>, TreeItem<Person
 
     @Override
     public String toString() {
-        if (mather != null) {
+        if (mather != null && father != null) {
             return super.toString() + "\nМать: " + mather.getFullName() + "\n" +
                     "Отец: " + father.getFullName() + "\n";
-        } else {
+        } else if(mather != null && father == null) {
+            return super.toString() + "\nМать: " + mather.getFullName() + "\n" +
+                    "Отец: нет данных \n";
+        } else{
             return super.toString() + "\nМать: нет данных \n" +
                     "Отец: нет данных \n";
         }

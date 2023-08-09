@@ -1,7 +1,8 @@
-package tree;
+package model.tree;
 
-import human.comparators.PersonComparatorByAge;
-import human.comparators.PersonComparatorByName;
+import model.Person;
+import model.comparators.PersonComparatorByAge;
+import model.comparators.PersonComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,26 +22,17 @@ public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>
         humanList = new ArrayList<>();
     }
 
-    /**
-     * Добавление в список нового человека
-     *
-     * @param human
-     */
     public void addHumanList(T human) {
         humanList.add(human);
     }
 
-    /**
-     * Получение полного списка людей в дереве
-     *
-     * @return
-     */
+
 //    public String getHumanListInfo() {
 //        StringBuilder stringBuilder = new StringBuilder();
 //        stringBuilder.append("Список всех людей: \n");
 //        stringBuilder.append("\n");
-//        for (Human human : humanList) {
-//            stringBuilder.append(human);
+//        for (Human Model.human : humanList) {
+//            stringBuilder.append(Model.human);
 //            stringBuilder.append("\n");
 //        }
 //        stringBuilder.append("=".repeat(50));
@@ -83,5 +75,10 @@ public class FamilyTree<T extends TreeItem> implements Serializable, Iterable<T>
     public void sortByAge(){
         Collections.sort(humanList, new PersonComparatorByAge<>());
     }
+    public int humanListSize(){
+        return humanList.size();
+    }
+    public T getPersonById (int id){
+        return humanList.get(id);
+    }
 }
-

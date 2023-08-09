@@ -1,6 +1,6 @@
-package tree;
+package model.tree;
 
-import human.Gender;
+import model.Gender;
 
 import java.time.LocalDate;
 

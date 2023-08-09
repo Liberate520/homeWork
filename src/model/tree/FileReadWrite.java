@@ -1,13 +1,13 @@
-package tree;
+package model.tree;
 
 import java.io.*;
 
 public class FileReadWrite implements Writable, Readable {
 
     @Override
-    public FamilyTree readTree(String fileName) throws IOException, ClassNotFoundException {
+    public FamilyTree readTree() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(fileName));
+                new FileInputStream("Tree.out"));
         FamilyTree tree = (FamilyTree) objectInputStream.readObject();
         return tree;
     }
@@ -16,13 +16,12 @@ public class FileReadWrite implements Writable, Readable {
     /**
      * Сохранение дерева в файл
      * @param tree дерево для сохранения
-     * @param fileName имя файла
      * @throws IOException
      */
     @Override
-    public void writeTree(FamilyTree tree, String fileName) throws IOException {
+    public void writeTree(FamilyTree tree) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(fileName));
+                new FileOutputStream("Tree.out"));
             objectOutputStream.writeObject(tree);
             objectOutputStream.close();
     }

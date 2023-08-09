@@ -1,11 +1,10 @@
-package human;
-
-import human.Gender;
+package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Human implements Serializable {
+    int id;
     private Gender gender;
     private String firstName;
     private String lastName;
@@ -14,13 +13,14 @@ public class Human implements Serializable {
 //    private int yearOfBirth;
 
 
-    public Human (String firstName, String lastName, String surName,
+    public Human (int id, String firstName, String lastName, String surName,
                   LocalDate dateOfBirth, Gender gender){
         this.firstName = firstName;
         this.lastName = lastName;
         this.surName = surName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.id = id;
     }
 
 
@@ -46,7 +46,7 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return "Имя: " + firstName + "\nФамилия: " + lastName + "\nОтчество: "
+        return "Id: " + id + "\n" + "Имя: " + firstName + "\nФамилия: " + lastName + "\nОтчество: "
                 + surName + "\nГод рождения: " + dateOfBirth +
                 "\nПол: " + gender;
     }
