@@ -130,14 +130,14 @@ public class Person implements Serializable, Relatives<Person> {
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
     public void setdeathDate(LocalDate deathDate) {this.deathDate = deathDate;}
 
-    public void setMarriage(List<Person> spouses,String newName,LocalDate inEvent, LocalDate outEvent){
-        Marriage event = new Marriage(spouses,newName,inEvent,outEvent);
-        this.marriage.add(event);
-    }
-
     public void setMarriage(List<Person> spouses,String newName,LocalDate inEvent){
         setMarriage(spouses,newName,inEvent,null);
     }
+    public void setMarriage(List<Person> spouses, String newName, LocalDate inEvent, LocalDate outEvent){
+        Marriage event = new Marriage(spouses, newName, inEvent, outEvent);
+        this.marriage.add(event);
+    }
+
     public String getParents(){
         StringBuilder sb = new StringBuilder();
         if (father != null || mother != null) {

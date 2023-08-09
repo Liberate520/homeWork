@@ -97,13 +97,19 @@ public class ConsoleUI implements BaseUI{
     }
 
     public void setRelations(){
-        int unitId = getNumId("Enter Person ID: ");
-        int relative = getNumId("Enter Relative ID: ");
+        int unitId = getNumId("Enter Person ID (Enter for Cancel): ");
+        if (unitId == -9){return;}
+        int relative = getNumId("Enter Relative ID (Enter for Cancel): ");
+        if (relative == -9){return;};
         String relation = getRelationType();
+        String marriedName = "";
         if (relation.equals("1")){
-            relation = String.valueOf(getNumId("Enter marriage year"));
-        } else {relation = "parent";}
-        presenter.setRelation(unitId,relative,relation);
+            relation = getStr("Enter marriage date (DD/MM/YYYY): ");
+            marriedName = getStr("Enter married name (if changed): ");
+        } else {
+            relation = "parent";
+        }
+        presenter.setRelation(unitId,relative,relation,marriedName);
         StringBuilder sB = new StringBuilder();
         sB.append("Relation added");
         inputSuccess(sB.toString());
@@ -116,9 +122,16 @@ public class ConsoleUI implements BaseUI{
             String unit = scanner.nextLine();
             if (unit.matches("^\\d+$")) {
                 num = Integer.parseInt(unit);
+            } else if(unit.strip().equals("")){
+                num = -9;
             }
         }
         return num;
+    }
+
+    private String getStr(String text){
+        System.out.println(text);
+        return scanner.nextLine();
     }
     private String getRelationType(){
         System.out.println("Enter RelationType number (any - parent; 1 - spouse,): ");

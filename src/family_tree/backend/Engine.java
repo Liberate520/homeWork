@@ -94,13 +94,14 @@ public class Engine {
         relations.sortByID();
     }
 
-    public void setRelations(int unit,int relative, String relation){
+    public void setRelations(int unit,int relative, String relation, String marriedName){
         if (relation == "parent"){
             relations.setParents(unit,relative);
         } else {
-            String[] mDate=relation.split("-");
+            String[] mDate=relation.split("/");
             LocalDate dateOfM = LocalDate.of(Integer.parseInt(mDate[2]),Integer.parseInt(mDate[1]),Integer.parseInt(mDate[0]));
-            relations.setUnitMarriage(unit,"marriage name", relative,dateOfM);
+            relations.setUnitMarriage(unit, marriedName, relative, dateOfM);
+
         }
         saveWorkDump();
     }

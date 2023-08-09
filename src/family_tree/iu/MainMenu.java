@@ -17,8 +17,10 @@ public class MainMenu {
         commandList.add(new ShowPersonTree(consoleUI));
         commandList.add(new AddPerson(consoleUI));
         commandList.add(new SetRelations(consoleUI));
+        /** TODO: next time - import and export to JSON
         commandList.add(new ExportTree(consoleUI));
         commandList.add(new ImportTree(consoleUI));
+         */
         commandList.add(new Finish(consoleUI));
 
     }

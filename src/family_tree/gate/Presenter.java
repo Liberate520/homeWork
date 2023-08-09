@@ -47,7 +47,7 @@ public class Presenter {
         getFamilyTree();
     }
 
-    public void setRelation(int unitId,int relativeId,String relation){
-        engine.setRelations(unitId,relativeId,relation);
+    public void setRelation(int unitId,int relativeId,String relation,String marriedName){
+        engine.setRelations(unitId,relativeId,relation,marriedName);
     }
 }

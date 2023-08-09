@@ -5,7 +5,7 @@ import family_tree.iu.ConsoleUI;
 public class ShowFamilyTree extends Command{
 
     public ShowFamilyTree(ConsoleUI consoleUI){
-        super("Show Family Tree",consoleUI);
+        super("Show Family Tree (w/o marriage)",consoleUI);
     }
 
     @Override

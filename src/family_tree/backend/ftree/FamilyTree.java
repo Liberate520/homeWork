@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterable<P>, Wedding, Childrens {
+public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterable<P>, Childrens {
     
     private List<P> relations;
 
@@ -206,10 +206,14 @@ public class FamilyTree<P extends Relatives<P>> implements Serializable, Iterabl
     public void setUnitMarriage(int personId, String newName, int spouseId, LocalDate marriageDate){
         P unit = relations.get(personId);
         P spouse = relations.get(spouseId);
-        System.out.println(unit);
-        System.out.println(spouse);
-//        unit.setMarriage(spouse, newName, marriageDate);
-//        spouse.setMarriage(unit, null, marriageDate);
+        List<P> unitList = new ArrayList<>();
+        List<P> spouseList = new ArrayList<>();
+        unitList.add(unit);
+        spouseList.add(spouse);
+//        System.out.println(unit);
+//        System.out.println(spouse);
+        unit.setMarriage(spouseList, newName, marriageDate);
+        spouse.setMarriage(unitList, "", marriageDate);
 
     }
 

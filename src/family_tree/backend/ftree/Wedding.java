@@ -1,4 +1,5 @@
 package family_tree.backend.ftree;
 
-public interface Wedding {
+public interface Wedding <T>{
+
 }
