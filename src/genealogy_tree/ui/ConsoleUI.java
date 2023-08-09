@@ -55,52 +55,71 @@ public class ConsoleUI implements View {
     }
 
     public void addParents() {
+        try {
         System.out.println("Who is person");
         int id = scanner.nextInt();
         System.out.println("Who is parents");
         int ids = scanner.nextInt();
         presenter.addParetns(id,ids);
         System.out.println("Add parents");
-
+        } catch (NullPointerException e) {
+            answerError();
+        }
     }
 
-    public static void answerError(){
+    public void answerError(){
         System.out.println("No human");
     }
 
     public void addChildren() {
+        try {
         System.out.println("Who is person");
         int id = scanner.nextInt();
         System.out.println("Who is your children?");
         int ids = scanner.nextInt();
         presenter.addChildren(id,ids);
         System.out.println("Add children");
+        } catch (NullPointerException e) {
+            answerError();
+        }
 
     }
 
     public void addSposue() {
+        try {
         System.out.println("Who is person");
         int id = scanner.nextInt();
         System.out.println("Choose a spose");
         int ids = scanner.nextInt();
         presenter.addSpouse(id,ids);
         System.out.println("Wedding!");
+        } catch (NullPointerException e) {
+            answerError();
+        }
     }
 
     public void setDivorce() {
+        try {
         System.out.println("Who is person");
         int id = scanner.nextInt();
         System.out.println("Choose a spose");
         int ids = scanner.nextInt();
         presenter.setDivorce(id,ids);
         System.out.println("Divorce!");
+        } catch (NullPointerException e) {
+            answerError();
+        }
     }
 
     public void getSiblings() {
+        try {
         System.out.println("Who is person");
         int id = scanner.nextInt();
         presenter.getSiblings(id);
         System.out.println("Siblings a person");
+        } catch (NullPointerException e) {
+            answerError();
+        }
     }
 
     public void addHuman() {
@@ -140,7 +159,6 @@ public class ConsoleUI implements View {
                 birthDate = birthDate.minusMonths(1);
                 birthDate = birthDate.plusYears(birthDateYears);
                 birthDate = birthDate.minusYears(1);
-                System.out.println(birthDate);
             } else {
                 System.out.println("Data not supported");
                 break;
