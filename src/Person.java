@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,17 +6,17 @@ class Person {
     private String firstName;
     private String lastName;
     private Gender gender;
-    private int birthYear;
-    private int deathYear;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
     private List<Person> children;
     private List<Relationship> relationships;
 
-    public Person(String firstName, String lastName, Gender gender, int birthYear, int deathYear) {
+    public Person(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.birthYear = birthYear;
-        this.deathYear = deathYear;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
         this.children = new ArrayList<>();
         this.relationships = new ArrayList<>();
     }
@@ -36,29 +37,29 @@ class Person {
         return gender;
     }
 
-    public int getBirthYear() {
-        return birthYear;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public int getDeathYear() {
-        return deathYear;
+    public LocalDate getDeathDate() {
+        return deathDate;
     }
 
     public int getAge() {
-        int currentYear = java.time.Year.now().getValue();
-        return deathYear > 0 ? deathYear - birthYear : currentYear - birthYear;
+        LocalDate currentDate = LocalDate.now();
+        return deathDate != null ? deathDate.getYear() - birthDate.getYear() : currentDate.getYear() - birthDate.getYear();
     }
 
     public int getYearsSinceDeath() {
-        if (deathYear > 0) {
-            int currentYear = java.time.Year.now().getValue();
-            return currentYear - deathYear;
+        if (deathDate != null) {
+            LocalDate currentDate = LocalDate.now();
+            return currentDate.getYear() - deathDate.getYear();
         }
         return 0;
     }
 
     public boolean isAlive() {
-        return deathYear == -1;
+        return deathDate == null;
     }
 
     public void addRelationship(Person person, RelationshipType type) {
@@ -77,4 +78,13 @@ class Person {
         this.addRelationship(spouse, RelationshipType.SPOUSE);
         spouse.addRelationship(this, RelationshipType.SPOUSE);
     }
+
+    public String getDeathYear() {
+        if (deathDate != null) {
+            return String.valueOf(deathDate.getYear());
+        } else {
+            return "N/A"; // Или любое другое значение, указывающее на отсутствие данных о смерти
+        }
+    }
+
 }
