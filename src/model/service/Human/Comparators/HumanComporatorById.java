@@ -1,7 +1,8 @@
-package Human.Comparators;
+package model.service.Human.Comparators;
 
 import java.util.Comparator;
-import family_tree.Element;
+
+import model.family_tree.Element;
 
 public class HumanComporatorById<E extends Element> implements Comparator<E> {
     @Override

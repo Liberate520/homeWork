@@ -1,12 +1,13 @@
-package family_tree;
+package model.family_tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import Human.Comparators.HumanComporatorByAge;
-import Human.Comparators.HumanComporatorById;
-import Human.Comparators.HumanComporatorByName;
+
+import model.service.Human.Comparators.HumanComporatorByAge;
+import model.service.Human.Comparators.HumanComporatorById;
+import model.service.Human.Comparators.HumanComporatorByName;
 
 
 public class FamilyTree< E extends Element<E>> implements Serializable, Iterable<E> {
@@ -49,31 +50,31 @@ public class FamilyTree< E extends Element<E>> implements Serializable, Iterable
         }
     }
 
-    public List<E> getSiblings(int id){
-        E human=getById(id);
-        if (human==null){
-            return null;
-        }
-        List<E> res=new ArrayList<>();
-        for (E parent: human.getParents()) {
-            for (E child: parent.getChildren()) {
-                if(!child.equals(human)){
-                    res.add(child);
-                }
-            }
-        }
-        return res;
-    }
+    // public List<E> getSiblings(int id){
+    //     E human = getById(id);
+    //     if (human == null){
+    //         return null;
+    //     }
+    //     List<E> res = new ArrayList<>();
+    //     for (E parent: human.getParents()) {
+    //         for (E child: parent.getChildren()) {
+    //             if(!child.equals(human)){
+    //                 res.add(child);
+    //             }
+    //         }
+    //     }
+    //     return res;
+    // }
 
-    public List<E> getByName(String name){
-        List<E> res = new ArrayList<>();
-        for (E human: humanList) {
-            if (human.getName().equalsIgnoreCase(name)){
-                res.add(human);
-            }
-        }
-        return res;
-    }
+    // public List<E> getByName(String name){
+    //     List<E> res = new ArrayList<>();
+    //     for (E human: humanList) {
+    //         if (human.getName().equalsIgnoreCase(name)){
+    //             res.add(human);
+    //         }
+    //     }
+    //     return res;
+    // }
 
     public boolean setWedding(long humansId1,long humansId2){
         if(checkId(humansId1)&&checkId(humansId2)){
@@ -114,15 +115,6 @@ public class FamilyTree< E extends Element<E>> implements Serializable, Iterable
 
     private boolean checkId(long id){
         return getById(id) != null;
-        // if(id>=humansId||id<0){
-        //     return false;
-        // }
-        // for (Human human:humanList) {
-        //     if(human.getId()==id){
-        //         return true;
-        //     }
-        // }
-        // return false;
     }
 
     public E getById(long id){
@@ -151,15 +143,15 @@ public class FamilyTree< E extends Element<E>> implements Serializable, Iterable
 
     @Override
     public Iterator<E> iterator() {
-        return new HumanIterator(humanList);
+        return new HumanIterator<>(humanList);
     }
     public void sortByName() {
-        humanList.sort(new HumanComporatorByName());
+        humanList.sort(new HumanComporatorByName<>());
     }
     public void sortByAge() {
-        humanList.sort(new HumanComporatorByAge());
+        humanList.sort(new HumanComporatorByAge<>());
     }
     public void sortById() {
-        humanList.sort(new HumanComporatorById());
+        humanList.sort(new HumanComporatorById<>());
     }
 }

@@ -1,34 +1,60 @@
+package model.service;
+
 import java.time.LocalDate;
-// import java.util.logging.FileHandler;
+import java.util.logging.FileHandler;
+import model.family_tree.FamilyTree;
+import model.service.Human.Gender;
+import model.service.Human.Human;
 
-import Human.Gender;
-import Human.Human;
-import family_tree.FamilyTree;
+public class Service {
+    long id;
+    String filePath = "src/family_tree/model/ftree.out";
+    FileHandler fileHandler = new FileHandler();
+    private FamilyTree<Human> tree;
+    
+    public Service(){
+    }
 
-public class Main {
-   public static void main(String[] args) {
-        // String path = "src/family_tree/FMyTree.out";
-        // FileHandler fileHandler = new FileHandler();
-        
-        FamilyTree tree = makeTree();
-        System.out.println(tree);
 
-        // tree.sortByAge();
-        // System.out.println(tree);
+    public void addHuman(String name, LocalDate dateOfBirth, String pol){
+        Gender gender = null;
+        if (pol.equalsIgnoreCase("Male"))
+            gender = Gender.Male;
+        else gender = Gender.Female;
+        Human human = new Human(name, dateOfBirth, null, gender, null, null, null);
+        tree.add(human);
+    }
 
-        // tree.sortById();
-        // System.out.println(tree);
-
-        // tree.sortByName();
-        // System.out.println(tree);
-
-        // fileHandler.save(tree, path);
-
-        // FileHandler fileHandler = new FileHandler();
-        // FamilyTree tree = (FamilyTree) fileHandler.read(path);
-        // System.out.println(tree);
-    }    
-        
+    public void sortByName(){
+        tree.sortByName();
+    }
+    public void sortByAge(){
+        tree.sortByAge();
+    }
+    public void sortById(){
+        tree.sortById();
+    }
+    public void remove(long id){
+        tree.remove(id);
+    }
+    public void setWedding(long id1, long id2){
+        tree.setWedding(id1, id2);
+    }
+    public void setDivorce(long id1, long id2){
+        tree.setDivorce(id1, id2);
+    }
+    public String getTreeInfo(){
+        return tree.getInfo();
+    }
+    
+    public void load(){
+        tree = (FamilyTree) fileHandler.load(filePath);
+        if (tree == null) tree = makeTree();
+    }
+    public void save(){
+        fileHandler.save(tree, filePath);
+    }
+    
     static FamilyTree makeTree(){
         FamilyTree tree = new FamilyTree();
 
@@ -71,7 +97,6 @@ public class Main {
         polina.addParent(marina);
 
         return tree;
+        }
     }
-}
-
 
