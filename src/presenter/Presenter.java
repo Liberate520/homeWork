@@ -39,15 +39,23 @@ public class Presenter {
         humansTreeConnect.addHuman(new Human(name, aSex, aBD));
     }
 
-    public void addChild(String name, int age) {
-        // Find parent
+    public void addChild(String nameParent, LocalDate bdParent,
+                         String nameChild, LocalDate bdChild) {
+        if (!nameParent.equalsIgnoreCase(nameChild)   // names not equal
+                && ! bdParent.toString().equals(bdChild.toString())){  // birthDays not equal
+            // Find parent   nameParent,  bdParent
+            Human aParent = humanFind(nameParent, bdParent);
 
-        // find child
+            // find child   nameChild, bdChild
+            Human aChild = humanFind(nameChild, bdChild);
 
-        // add child to parent
-//        service.addStudent(name, age);
-//        //какой-то ответ
-//        getStudentsListInfo();
+            // add child to parent
+            aParent.addChild(aChild);
+            view.printAnswer(aParent.getChilds());
+        } else {
+            view.printAnswer("Ошибка: Имя (или день Рождения) Родителя и Ребенка совпадают...");
+        }
+
     }
 
     public void getHumansInfo() {
@@ -83,6 +91,11 @@ public class Presenter {
             String foundHuman = human.toString();
             view.printAnswer(foundHuman);
         }
+    }
+
+    public Human humanFind(String name, LocalDate bd) {
+        Human human = humansTreeConnect.getByNameDay (name, bd);
+        return human;
     }
 
     public void humanSearchFamily(String name) {

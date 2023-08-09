@@ -131,7 +131,7 @@ public class Animal implements Serializable {
     
     
     public List <Animal> addChild(Animal aChild){
-        if(!chidrens.contains(aChild)){  // only unigue childs !!!
+        if (!this.equals(aChild) && (!chidrens.contains(aChild))){  // only unigue childs !!!
             childId++;
             aChild.setParent(this);
             chidrens.add(aChild);

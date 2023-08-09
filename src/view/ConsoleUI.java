@@ -63,6 +63,27 @@ public class ConsoleUI  implements View {
         presenter.getHumansInfo();
     }
 
+
+    public LocalDate askBirthDay(){
+        DateTimeFormatter formatterDt;
+        String aPattern = "dd.MM.yyyy";
+        formatterDt = DateTimeFormatter.ofPattern(aPattern);
+
+        boolean dt_good = false; LocalDate lt = LocalDate.now();
+        while (!dt_good){
+            System.out.print("Введите день рождения :");
+            String aBD = scanner.nextLine();
+            lt = LocalDate.parse(aBD, formatterDt);
+            try {  // https://www.programcreek.com/java-api-examples/?api=java.time.format.DateTimeParseException
+                lt = LocalDate.parse(aBD, formatterDt);  dt_good = true;
+            } catch (DateTimeParseException e) {
+                System.out.print(e.getMessage());
+                dt_good = false; lt = LocalDate.now();
+            }
+        }
+        return lt;
+    }
+
     public void addHuman() {
         Gender gSex = Gender.Man;
         DateTimeFormatter formatterDt;
@@ -75,28 +96,20 @@ public class ConsoleUI  implements View {
         if (!aGendeereStr.toLowerCase().contains("м")) {
             gSex = Gender.Femail;  // aG = "ж";
         }
-        boolean dt_good = false; LocalDate lt = LocalDate.now();
-        while (!dt_good){
-            System.out.print("Введите день рождения :");
-            String aBD = scanner.nextLine();
-            lt = LocalDate.parse(aBD, formatterDt);
-
-            try {  // https://www.programcreek.com/java-api-examples/?api=java.time.format.DateTimeParseException
-                lt = LocalDate.parse(aBD, formatterDt);  dt_good = true;
-            } catch (DateTimeParseException e) {
-//                 java.time.format.DateTimeParseException
-                System.out.print(e.getMessage());
-                dt_good = false; lt = LocalDate.now();
-
-//                e.printStackTrace();
-//                throw MessageException.of("The date '" + aBD + "' does not respect format '" , e);
-            }
-        }
+        LocalDate lt = askBirthDay();
         presenter.addHuman(name, gSex, lt);
     }
 
     public void AddChild(){
-//        presenter.addChild(name, age);
+
+        System.out.print("Введите имя Родителя :");
+        String nameP = scanner.nextLine();
+        LocalDate ltP = askBirthDay();
+
+        System.out.print("Введите имя Ребенка :");
+        String nameCh = scanner.nextLine();
+        LocalDate ltCh = askBirthDay();
+        presenter.addChild(nameP, ltP, nameCh, ltCh);
     }
 
     public void humanSearch() {

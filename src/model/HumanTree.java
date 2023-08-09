@@ -1,5 +1,7 @@
 package src.model;// https://gb.ru/lessons/344116
 
+import java.time.LocalDate;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -107,6 +109,17 @@ public class HumanTree<E extends Human> implements Serializable, Iterable<E> {  
         for (E human : humensTree) {
             if (human.getName().equalsIgnoreCase(humanName)) {
                 return human;
+            }
+        }
+        return null;
+    }
+
+    public E getByNameDay(String humanName, LocalDate bd) {
+        for (E human : humensTree) {
+            if (human.getName().equalsIgnoreCase(humanName)) {
+                if (human.getBirthDay().equalsIgnoreCase(bd.toString())){
+                    return human;
+                }
             }
         }
         return null;

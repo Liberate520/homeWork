@@ -23,9 +23,9 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new Finish(consoleUI));  //  1 ==> EXIT  +++
         commandList.add(new AddHuman(consoleUI));  // +++
-        commandList.add(new AddChild(consoleUI));
+        commandList.add(new AddChild(consoleUI));  // +++
         commandList.add(new humanSearch(consoleUI));  // +++
-        commandList.add(new humanSearchFamily(consoleUI));
+        commandList.add(new humanSearchFamily(consoleUI));  // +++
         commandList.add(new GetHumansInfo(consoleUI));  // +++
         commandList.add(new SortByName(consoleUI));  // +++
         commandList.add(new SortByAge(consoleUI));  // +++
