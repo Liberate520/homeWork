@@ -12,7 +12,8 @@ public class Main {
         Human human_2 = new Human("Петр", "Глобусов",  LocalDate.of(1944,4,4), Gender.Male);
         Human human_3 = new Human("Виктор", "Лопатов",  LocalDate.of(1933,3,3), Gender.Male);
         Human human_4 = new Human("Бушар", "Комбарович",  LocalDate.of(1922,2,2), Gender.Male);
-        Human human_5 = new Human("Анастасия", "Загоняева",  LocalDate.of(1911,1,1), Gender.Femala);
+        Human human_5 = new Human("Анастасия", "Загоняева",  LocalDate.of(1911,1,1), 
+            LocalDate.of(1988,8,8), Gender.Femala);
 
         myFamilyTree.addHuman(human_1);
         myFamilyTree.addHuman(human_2);

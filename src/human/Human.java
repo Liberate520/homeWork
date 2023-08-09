@@ -7,13 +7,19 @@ public class Human {
     private String name;
     private String lastname;
     private LocalDate birthdate;
+    private LocalDate deathdate;
     private Gender gender;
 
-    public Human(String name, String lastname, LocalDate birthdate, Gender gender) {
+    public Human(String name, String lastname, LocalDate birthdate, LocalDate deathdate, Gender gender) {
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
+        this.deathdate = deathdate;
         this.gender = gender;
+    }
+
+    public Human(String name, String lastname, LocalDate birthdate, Gender gender ) {
+        this(name, lastname, birthdate, null, gender);
     }
 
     public int getId() {
@@ -36,8 +42,12 @@ public class Human {
         return birthdate;
     }
 
-        public Gender gender() {
-        return gender;
+    public LocalDate getDeathdate() {
+    return birthdate;
+    }
+
+    public Gender gender() {
+    return gender;
     }
 
     @Override
@@ -46,6 +56,7 @@ public class Human {
         ", name: " + name + 
         ", lastname: " + lastname + 
         ", gender: " + gender + 
-        ", birhtdate: " + birthdate + " г.р.";
+        ", birhtdate: " + birthdate + " г.р." +
+        ", deathdate: " + deathdate + " г.р.";
     }
 }
