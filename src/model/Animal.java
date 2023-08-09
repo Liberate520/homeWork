@@ -83,12 +83,23 @@ public class Animal implements Serializable {
     public String getGrandParentsStr(){  //  дедушек и бабушек  ...  grandparents.
         List <Animal> fGPr = getGrandParents();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.toString());
+//        stringBuilder.append(this.toString());
         stringBuilder.append("\n дедушки и бабушки :\n");
         
         for (Animal h: fGPr){
             if (h != null) { stringBuilder.append(h); stringBuilder.append("\n"); }
         }
+        return stringBuilder.toString();
+    }
+
+    public String getParentsStr(){  //  Родители  ...  parents.
+        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append(this.toString());
+        stringBuilder.append("\n Родители :\n");
+
+//        parentMom, parentDad; // родители
+        if (parentDad != null) { stringBuilder.append(parentDad); stringBuilder.append("\n");}
+        if (parentMom != null) { stringBuilder.append(parentMom); stringBuilder.append("\n");}
         return stringBuilder.toString();
     }
     
@@ -109,7 +120,7 @@ public class Animal implements Serializable {
     public String getBrotherSisterStr(){  // братьев и сестер  ...  brothers and sisters
         List <Animal> fBrSs = getBrotherSister();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.toString());
+//        stringBuilder.append(this.toString());
         stringBuilder.append("\n братья сестры :\n");
         
         for (Animal h: fBrSs){

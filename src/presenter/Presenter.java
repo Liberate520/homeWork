@@ -40,6 +40,11 @@ public class Presenter {
     }
 
     public void addChild(String name, int age) {
+        // Find parent
+
+        // find child
+
+        // add child to parent
 //        service.addStudent(name, age);
 //        //какой-то ответ
 //        getStudentsListInfo();
@@ -77,6 +82,23 @@ public class Presenter {
         else {
             String foundHuman = human.toString();
             view.printAnswer(foundHuman);
+        }
+    }
+
+    public void humanSearchFamily(String name) {
+        Human human = humansTreeConnect.getByName(name);
+        if (human == null)
+            view.printAnswer("Такого человека нет в семье !");
+        else {
+            // get full family
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(human.toString());
+            stringBuilder.append(human.getGrandParentsStr());
+            stringBuilder.append(human.getParentsStr());
+            stringBuilder.append(human.getBrotherSisterStr());
+            stringBuilder.append(human.getChilds());
+
+            view.printAnswer(stringBuilder.toString());
         }
     }
 

@@ -105,6 +105,12 @@ public class ConsoleUI  implements View {
         presenter.humanSearch(name);
     }
 
+    public void  humanSearchFamily(){
+        System.out.print("Введите имя человека для поиска-> ");
+        String name = scan();
+        presenter.humanSearchFamily(name);
+    }
+
     public void LoadHumansFromFile() {
         System.out.print("Введите имя Файла-> ");
         String fileName = scan();
