@@ -1,8 +1,8 @@
 package ru.gb.fam_tree;
 
 import ru.gb.fam_tree.family_tree.FamilyTree;
-import ru.gb.fam_tree.human.Gender;
-import ru.gb.fam_tree.human.Human;
+import ru.gb.fam_tree.family_tree.all_tree_items.human.Gender;
+import ru.gb.fam_tree.family_tree.all_tree_items.human.Human;
 
 import java.time.LocalDate;
 

@@ -1,14 +1,30 @@
-package ru.gb.fam_tree.human;
+package ru.gb.fam_tree.family_tree.all_tree_items.human;
+
+import ru.gb.fam_tree.family_tree.all_tree_items.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem {
+    @Override
+    public void addParent(Object o){
+        System.out.println("Error");
+    }
+
+    @Override
+    public void setSpouse(Object o){
+        System.out.println("Error");
+    }
+
+    @Override
+    public void addChild(Object o){
+        System.out.println("Error");
+    }
+
     private long id;
     private String name;
     private Gender gender;
@@ -54,20 +70,16 @@ public class Human implements Serializable {
         this(name,gender,birthDate,null,father,mother);
     }
 
-    public boolean addChild(Human child){
+    public void addChild(Human child){
         if(!childrens.contains(child)){
             childrens.add(child);
-            return true;
         }
-        return false;
     }
 
-    public boolean addParent(Human parent){
+    public void addParent(Human parent){
         if(!parents.contains(parent)){
             parents.add(parent);
-            return true;
         }
-        return false;
     }
 
     public Human getMother(){
