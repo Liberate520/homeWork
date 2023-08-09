@@ -1,6 +1,5 @@
 package human;
 
-public enum Gender{
+public enum Gender {
     Male, Femala;
 }
-

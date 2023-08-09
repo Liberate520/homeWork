@@ -7,12 +7,14 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
 import familyTree.famTree.FamilyTree;
+import human.AllHumans;
 import human.Gender;
 import human.Human;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         FamilyTree myFamilyTree = new FamilyTree(123);
+        AllHumans hu = new AllHumans();
 
         Human human_1 = new Human("Иван", "Пупкин", LocalDate.of(1955,5,5));
         Human human_2 = new Human("Петр", "Глобусов",  LocalDate.of(1944,4,4), Gender.Male);
@@ -38,7 +40,9 @@ public class Main {
         objectInputStream.close();
 
         System.out.println(myFamilyTree.getHumansInfo());
+        hu.relativesAll();
         System.out.println("До сериализации: " + "\n" + human_1);
         System.out.println("После сериализации: " + "\n" + human_1Restored);
+        
     }
 }
