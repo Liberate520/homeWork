@@ -1,12 +1,9 @@
 package view;
 
 
-import model.Service.ServiceTree;
 import model.human.Gender;
 import model.human.Human;
 import presenter.Presenter;
-
-import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -80,36 +77,41 @@ public class ConsoleUI implements View {
     }
 
     public void addPerson() {
-        //NAME
-        System.out.print("Insert name: ");
-        String name = scanner.nextLine();
-
-        //LAST NAME
-        System.out.print("Insert last name: ");
-        String lastName = scanner.nextLine();
-
-
-        //GENDER
-        Gender gender = null;
-        System.out.print("Insert gender of person(male or female): ");
-        String genderString = scanner.nextLine();
-        while (!checkGender(genderString)) {
-            System.out.println("Please, reenter!");
-            genderString = scanner.nextLine();
-        }
-        Gender[] genders = Gender.values();
+        String name = setName();
+        String lastName = setLastName();
+        Gender gender = setGender();
+        LocalDate birthDate = setBirthDate();
+        LocalDate deathDate = setDeathDate();
+        Human mother = null;
+        Human father = null;
+        Human spouse = null;
+        List<Human> children = null;
 
 
-        for (int i = 0; i < genders.length; i++) {
-            String genderCheck = genders[i].toString();
-            if (genderCheck.equalsIgnoreCase(genderString)) {
-                gender = genders[i];
+        presenter.addHuman(name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
+        printAnswer(INPUT_SUCCESS);
+
+    }
+
+    private LocalDate setDeathDate() {
+        LocalDate deathDate = null;
+
+        System.out.println("Insert date of date in format dd.mm.yyyy\nPrint null if person is alive: ");
+        String deathdateString = scanner.nextLine();
+        SimpleDateFormat formatDeath = new SimpleDateFormat();
+        formatDeath.applyPattern("dd.MM.yyyy");
+        try {
+            if (!deathdateString.equals("null")) {
+                Date deathdate = formatDeath.parse(deathdateString);
+                deathDate = convertToLocalDate(deathdate);
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return deathDate;
+    }
 
-
-        //BIRTH DATE
+    private LocalDate setBirthDate() {
         LocalDate birthDate = null;
         System.out.println("Insert date of birth in format dd.mm.yyyy: ");
         String birthdateString = scanner.nextLine();
@@ -121,33 +123,37 @@ public class ConsoleUI implements View {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return birthDate;
+    }
 
-
-        //DEATH DATE
-        LocalDate deathDate = null;
-
-        System.out.println("Insert date of date in format dd.mm.yyyy\nPrint null if person is alive: ");
-        String deathdateString = scanner.nextLine();
-        SimpleDateFormat formatDeath = new SimpleDateFormat();
-        formatDeath.applyPattern("dd.MM.yyyy");
-        try {
-            if (!deathdateString.equals("null")) {
-                Date deathdate = formatDeath.parse(birthdateString);
-                deathDate = convertToLocalDate(deathdate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private Gender setGender() {
+        Gender gender = null;
+        System.out.print("Insert gender of person(male or female): ");
+        String genderString = scanner.nextLine();
+        while (!checkGender(genderString)) {
+            System.out.println("Please, reenter!");
+            genderString = scanner.nextLine();
         }
+        Gender[] genders = Gender.values();
+        for (int i = 0; i < genders.length; i++) {
+            String genderCheck = genders[i].toString();
+            if (genderCheck.equalsIgnoreCase(genderString)) {
+                gender = genders[i];
+            }
+        }
+        return gender;
+    }
 
-        Human mother = null;
-        Human father = null;
-        Human spouse = null;
-        List<Human> children = null;
+    private String setLastName() {
+        System.out.print("Insert last name: ");
+        String lastName = scanner.nextLine();
+        return lastName;
+    }
 
-
-        presenter.addHuman(name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
-        printAnswer(INPUT_SUCCESS);
-
+    private String setName() {
+        System.out.print("Insert name: ");
+        String name = scanner.nextLine();
+        return name;
     }
 
     private boolean checkGender(String genderString) {
@@ -195,31 +201,13 @@ public class ConsoleUI implements View {
         } else printAnswer(INPUT_ERROR);
     }
 
-        public void saveFile () throws IOException {
-            FileOutputStream file = new FileOutputStream("familytree.out");
-            ObjectOutputStream out = new ObjectOutputStream(file);
-
-            out.writeObject(presenter.getTree());
-
-            out.close();
-            file.close();
+        public void saveFile (){
+            presenter.saveTree();
         }
 
         public void readFile () {
-            try {
-                FileInputStream file = new FileInputStream("familytree.out");
-                ObjectInputStream in = new ObjectInputStream(file);
-                ServiceTree object = (ServiceTree) in.readObject();
-                presenter.setServiceTree(object);
+            presenter.setServiceTree();
 
-                in.close();
-                file.close();
-
-            } catch (IOException ex) {
-                System.out.println("IOException is caught");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("ClassNotFoundException is caught");
-            }
         }
     }
 

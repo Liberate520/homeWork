@@ -1,11 +1,13 @@
 package presenter;
 
+import model.Service.FileHandler;
 import model.Service.ServiceTree;
 import model.human.Gender;
 import model.human.Human;
 import view.View;
 
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -56,7 +58,14 @@ public class Presenter {
         return family;
     }
 
-    public void setServiceTree(ServiceTree object){
-        this.family = object;
+    public void setServiceTree(){
+        FileHandler fh = new FileHandler();
+        Serializable object = fh.readFile("familytree.out");
+        this.family = (ServiceTree) object;
+    }
+
+    public void saveTree(){
+        FileHandler fh = new FileHandler();
+        fh.saveFile(getTree());
     }
 }
