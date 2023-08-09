@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GenealogicalTree<T extends TreeNode> implements Serializable, Iterable<T> {
 
-    public List<T> humanList;
+    private List<T> humanList;
     public GenealogicalTree() {
         humanList = new ArrayList<>();
     }
@@ -35,15 +35,6 @@ public class GenealogicalTree<T extends TreeNode> implements Serializable, Itera
     public void addHuman(T human){
         if(!humanList.contains(human)) {
             humanList.add(human);
-        }
-    }
-
-
-
-    public void showAllHumans(){
-        for (T human: this.humanList
-        ) {
-            System.out.println(human);
         }
     }
 

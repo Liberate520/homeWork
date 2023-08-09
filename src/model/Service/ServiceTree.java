@@ -4,14 +4,11 @@ import model.genealogicalTree.GenealogicalTree;
 import model.genealogicalTree.TreeNode;
 import model.human.Gender;
 import model.human.Human;
-
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ServiceTree<T extends TreeNode> extends OutputStream implements Serializable {
+public class ServiceTree<T extends TreeNode> implements Serializable {
     private int idHuman;
     private GenealogicalTree<T> family;
 
@@ -19,16 +16,12 @@ public class ServiceTree<T extends TreeNode> extends OutputStream implements Ser
         family = new GenealogicalTree<>();
     }
 
-    @Override
-    public void write(int b) throws IOException {
-
-    }
 
     public void addHuman(String name, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children){
         idHuman++;
         Human human = new Human(name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
         human.setID(idHuman);
-        family.humanList.add((T)human);
+        family.addHuman((T) human);
     }
 
     public String getHumanInfo() {

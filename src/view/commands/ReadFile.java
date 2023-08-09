@@ -2,8 +2,6 @@ package view.commands;
 
 import view.ConsoleUI;
 
-import java.io.IOException;
-
 public class ReadFile extends Command{
     private String description;
     private ConsoleUI consoleUI;
@@ -13,8 +11,12 @@ public class ReadFile extends Command{
         description = "Read existing file";
     }
 
-    public void execute() throws IOException {
-        getConsoleUI().readFile();
+    public void execute() {
+        try {
+            getConsoleUI().readFile();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getDescription(){
