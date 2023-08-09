@@ -2,7 +2,6 @@ package model.genealogicalTree;
 
 import model.human.ComparatorByAge;
 import model.human.ComparatorByName;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

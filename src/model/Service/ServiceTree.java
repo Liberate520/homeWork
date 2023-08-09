@@ -21,7 +21,7 @@ public class ServiceTree<T extends TreeNode> implements Serializable {
         idHuman++;
         Human human = new Human(name, lastName, gender, birthDate, deathDate, mother, father, spouse, children);
         human.setID(idHuman);
-        family.addHuman((T) human);
+        family.addHuman((T)human);
     }
 
     public String getHumanInfo() {
