@@ -2,19 +2,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 class FamilyTree {
-    private Person root;
+    private List<Person> people;
 
-    public FamilyTree(Person root) {
-        this.root = root;
+    public FamilyTree() {
+        this.people = new ArrayList<>();
     }
 
-    public Person getRoot() {
-        return root;
+    public void addPerson(Person person) {
+        people.add(person);
     }
 
+    public List<Person> getAllPeople() {
+        return people;
+    }
+    public void addRelationship(Person person1, Person person2, RelationshipType type) {
+        person1.addRelationship(person2, type);
+    }
+
+    public List<Relationship> getRelationships(Person person) {
+        return person.getRelationships();
+    }
     public List<Relationship> getAllRelationships() {
         List<Relationship> allRelationships = new ArrayList<>();
-        collectRelationships(root, allRelationships);
+        for (Person person : people) {
+            collectRelationships(person, allRelationships);
+        }
         return allRelationships;
     }
 

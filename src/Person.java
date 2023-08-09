@@ -68,4 +68,13 @@ class Person {
     public List<Relationship> getRelationships() {
         return relationships;
     }
+    public void addParent(Person parent, RelationshipType type) {
+        parent.addChild(this);
+        this.addRelationship(parent, type);
+    }
+
+    public void addSpouse(Person spouse) {
+        this.addRelationship(spouse, RelationshipType.SPOUSE);
+        spouse.addRelationship(this, RelationshipType.SPOUSE);
+    }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,24 +13,12 @@ public class GenealogyApp {
         Person person4 = new Person("Emma", "Davis", Gender.FEMALE, 2010, -1);
         Person person5 = new Person("Michael", "Miller", Gender.MALE, 1975, -1);
 
-        person1.addChild(person2);
-        person1.addChild(person3);
-        person2.addChild(person4);
-        person2.addChild(person5);
+        List<Person> people = new ArrayList<>();
+        people.add(person1);
+        people.add(person2);
+        people.add(person3);
 
-        person1.addRelationship(person2, RelationshipType.PARENT);
-        person2.addRelationship(person1, RelationshipType.CHILD);
 
-        FamilyTree familyTree = new FamilyTree(person1);
-
-        List<Relationship> relationships = familyTree.getAllRelationships();
-        for (Relationship relationship : relationships) {
-            System.out.println(
-                    relationship.getPerson1().getFullName() + " is " +
-                            relationship.getType() + " of " +
-                            relationship.getPerson2().getFullName()
-            );
-        }
         System.out.println("Age " + person1.getFullName() + ": " + person1.getAge() + " years");
 
         if (person1.isAlive()) {
