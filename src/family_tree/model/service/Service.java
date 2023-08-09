@@ -16,6 +16,12 @@ public class Service {
     private Writable writable;
 
 
+    public Service(FamilyTree<Human> tree, InfoText infoText, Writable writable) {
+        this.tree = tree;
+        this.infoText = infoText;
+        this.writable = writable;
+    }
+
     public Service() {
         tree = new FamilyTree<>();
         infoText = new InfoText();

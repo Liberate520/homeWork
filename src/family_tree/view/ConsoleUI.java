@@ -13,6 +13,10 @@ public class ConsoleUI implements View {
     private MainMenu menu;
     private TextConsole textConsole;
     private IsNumeric isNumeric;
+    private IConsoleAddHuman consoleAddHuman;
+    private IConsoleAddChildren consoleAddChildren;
+    private IConsoleAddParents consoleAddParents;
+    private IConsoleWedding consoleWedding;
 
     public ConsoleUI() {
         presenter = new Presenter(this);
@@ -21,33 +25,33 @@ public class ConsoleUI implements View {
         menu = new MainMenu(this);
         textConsole = new TextConsole();
         isNumeric = new IsNumeric();
+        consoleAddHuman = new ConsoleAddHuman();
+        consoleAddChildren = new ConsoleAddChildren();
+        consoleAddParents = new ConsoleAddParents();
+        consoleWedding = new ConsoleWedding();
     }
 
     public void addHuman() {
-        ConsoleAddHuman consoleAddHuman = new ConsoleAddHuman();
-        if (consoleAddHuman.addHuman()) {
+        if (consoleAddHuman.addHumanCon()) {
             presenter.addHuman(consoleAddHuman.getName(), consoleAddHuman.getGender(), consoleAddHuman.getLocalDate());
         }
     }
 
     public void wedding() {
-        ConsoleWedding consoleWedding = new ConsoleWedding();
-        if (consoleWedding.wedding()) {
+        if (consoleWedding.weddingCon()) {
             presenter.wedding(consoleWedding.getIdHusband(), consoleWedding.getIdWife());
         }
     }
 
     public void addChildren() {
-        ConsoleAddChildren consoleAddChildren = new ConsoleAddChildren();
-        if (consoleAddChildren.addChildren()) {
+        if (consoleAddChildren.addChildrenCon()) {
             presenter.addChildren(consoleAddChildren.getIdChildren(), consoleAddChildren.getIdFather(),
                     consoleAddChildren.getIdMother());
         }
     }
 
     public void addParents() {
-        ConsoleAddParents consoleAddParents = new ConsoleAddParents();
-        if (consoleAddParents.addParents()) {
+        if (consoleAddParents.addParentsCon()) {
             presenter.addParents(consoleAddParents.getIdChildren(), consoleAddParents.getIdFather(),
                     consoleAddParents.getIdMother());
         }

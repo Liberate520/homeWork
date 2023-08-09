@@ -4,12 +4,11 @@ import family_tree.model.human.Gender;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.Scanner;
 
 import static family_tree.model.human.Gender.Female;
 import static family_tree.model.human.Gender.Male;
 
-public class ConsoleAddHuman extends ConsoleCommands{
+public class ConsoleAddHuman extends ConsoleCommands implements IConsoleAddHuman{
     private String name;
     private Gender gender;
     private LocalDate localDate;
@@ -39,7 +38,7 @@ public class ConsoleAddHuman extends ConsoleCommands{
         this.localDate = localDate;
     }
 
-    public boolean addHuman() {
+    public boolean addHumanCon() {
         System.out.println(textConsole.indicateNameText);
 
         name = scanner.nextLine();

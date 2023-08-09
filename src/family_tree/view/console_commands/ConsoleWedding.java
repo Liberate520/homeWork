@@ -1,8 +1,6 @@
 package family_tree.view.console_commands;
 
-import java.util.Scanner;
-
-public class ConsoleWedding extends ConsoleCommands{
+public class ConsoleWedding extends ConsoleCommands implements IConsoleWedding{
 
     private long idHusband;
     private long idWife;
@@ -15,7 +13,7 @@ public class ConsoleWedding extends ConsoleCommands{
         return idWife;
     }
 
-    public boolean wedding() {
+    public boolean weddingCon() {
         System.out.println(textConsole.enterHusbandIdText);
         String husband = scanner.nextLine();
         if (!isNumeric.checkNum(husband)) {

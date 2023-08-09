@@ -1,8 +1,6 @@
 package family_tree.view.console_commands;
 
-import java.util.Scanner;
-
-public class ConsoleAddParents extends ConsoleCommands {
+public class ConsoleAddParents extends ConsoleCommands implements IConsoleAddParents {
    private long idChildren;
    private long idFather;
    private long idMother;
@@ -19,7 +17,7 @@ public class ConsoleAddParents extends ConsoleCommands {
         return idMother;
     }
 
-    public boolean addParents() {
+    public boolean addParentsCon() {
         System.out.println(textConsole.enterChildrenIdText);
         String children = scanner.nextLine();
         if (!isNumeric.checkNum(children)) {
