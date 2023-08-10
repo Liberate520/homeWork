@@ -1,6 +1,6 @@
-package homeWork.human;
+package homeWork.family_tree.model.human;
 
-import homeWork.family_tree.family_tree.TreeNode;
+import homeWork.family_tree.model.family_tree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,6 +1,5 @@
-package homeWork.family_tree.writer;
+package homeWork.family_tree.model.writer;
 
-import java.io.FileNotFoundException;
 import java.io.Serializable;
 
 public interface Writable {

@@ -1,5 +1,5 @@
-package homeWork.human;
-import homeWork.family_tree.family_tree.TreeNode;
+package homeWork.family_tree.model.human;
+import homeWork.family_tree.model.family_tree.TreeNode;
 
 import java.util.Comparator;
 

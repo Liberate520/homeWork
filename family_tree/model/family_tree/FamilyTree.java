@@ -1,7 +1,7 @@
-package homeWork.family_tree.family_tree;
+package homeWork.family_tree.model.family_tree;
 
-import homeWork.human.HumanComparatorByBirthDate;
-import homeWork.human.HumanComparatorByName;
+import homeWork.family_tree.model.human.HumanComparatorByBirthDate;
+import homeWork.family_tree.model.human.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;

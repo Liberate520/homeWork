@@ -1,9 +1,9 @@
 package homeWork.family_tree;
 
-import homeWork.family_tree.family_tree.FamilyTree;
-import homeWork.family_tree.writer.FileHandler;
-import homeWork.human.Gender;
-import homeWork.human.Human;
+import homeWork.family_tree.model.family_tree.FamilyTree;
+import homeWork.family_tree.model.writer.FileHandler;
+import homeWork.family_tree.model.human.Gender;
+import homeWork.family_tree.model.human.Human;
 
 import java.io.IOException;
 import java.time.LocalDate;

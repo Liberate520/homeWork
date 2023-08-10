@@ -1,6 +1,5 @@
-package homeWork.family_tree.family_tree;
+package homeWork.family_tree.model.family_tree;
 
-import homeWork.human.Human;
 import java.util.Iterator;
 import java.util.List;
 

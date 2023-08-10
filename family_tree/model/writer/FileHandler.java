@@ -1,4 +1,4 @@
-package homeWork.family_tree.writer;
+package homeWork.family_tree.model.writer;
 import java.io.*;
 
 public class FileHandler implements Writable {
