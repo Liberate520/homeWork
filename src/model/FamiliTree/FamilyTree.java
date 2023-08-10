@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import Human.Human;
 import Human.HumanComparatorByBirthDate;
 import Human.HumanComparatorById;
 import Human.HumanComparatorByName;
@@ -85,6 +86,7 @@ public class FamilyTree<E extends HumanItem<E>> implements Iterable<E>, Serializ
             return false;
         }
         if (!humanList.contains(human)) {
+
             humanList.add(human);
             human.setId(humansId++);
 
@@ -136,6 +138,14 @@ public class FamilyTree<E extends HumanItem<E>> implements Iterable<E>, Serializ
 
     public void sortByBirthData() {
         humanList.sort(new HumanComparatorByBirthDate<>());
+    }
+
+    public void delHuman(int id) {
+        for (int i = 0; i < humanList.size(); i++) {
+            if (i == id) {
+                humanList.remove(i);
+            }
+        }
     }
     // #endregion
 

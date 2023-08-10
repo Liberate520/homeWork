@@ -49,6 +49,9 @@ public class Human implements HumanItem<Human>, Serializable {
     public Human(int id, String name, Gender gender, LocalDate dataOfBirth) {
         this(id, name, gender, dataOfBirth, null, null, null);
     }
+    public Human(){
+       
+    }
 
     // #endregion
 

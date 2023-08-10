@@ -11,11 +11,12 @@ import java.io.ObjectOutputStream;
 import FamiliTree.FamilyTree;
 
 
-public class FileHandler implements Writable {
+
+public class FileHandler implements Writable{
     private String path;
 
     public FileHandler() {
-        this.path = "src/FileHandler/Externals.out";
+        this.path = "src/model/FileHandler/Externals.out";
     }
 
     public String getPath(){
@@ -28,6 +29,7 @@ public class FileHandler implements Writable {
         out.close();
     }
 
+    @Override
     public Object load() throws FileNotFoundException, IOException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(getPath()));
         try {

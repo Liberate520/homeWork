@@ -9,15 +9,18 @@ import Enum.Kinship;
 import FamiliTree.FamilyTree;
 import FileHandler.FileHandler;
 import Human.Human;
+//import Presenter.GenderP;
 
 public class Service {
 
     // #region Fields
 
     private int idHuman;
-    private FamilyTree <Human> tree;
+    private FamilyTree<Human> tree;
     private Human firsthuman;
     private FileHandler fileSL;
+    private Gender gender;
+    private Kinship kinship;
 
     // #endregion
 
@@ -30,7 +33,7 @@ public class Service {
 
     // #endregion
 
-    // #region Get
+    // #region GetInfo
 
     /**
      * Метод печати в консоль дерева родства
@@ -44,24 +47,33 @@ public class Service {
 
     // #endregion
 
-    // #region Metods add
-
+    // #region Metods add Human
+    public void delHuman(int id){
+        tree.delHuman(id);
+    }
     /**
      * Метод добавления человека
      * 
      * @param name        - имя
-     * @param gender      - пол (male или female)
+     * @param genderP     - пол (male или female)
      * @param dataOfBirth - дата рождения
      * @param dataOfDeath - дата смерти
-     * @param father      - отец
-     * @param mother      - мама
      */
-    public void addHuman(String name, Gender gender, LocalDate dataOfBirth, LocalDate dataOfDeath, Human father,
-            Human mother) {
-        Human human = new Human(idHuman++, name, gender, dataOfBirth, father, mother);
+    public void addHuman(String name, int genderP, LocalDate dataOfBirth, LocalDate dataOfDeath) {
+
+        if (genderP == 1) {
+            gender = Gender.male;
+        } else if (genderP == 2) {
+            gender = Gender.female;
+        } else {
+
+        }
+
+        Human human = new Human(idHuman++, name, gender, dataOfBirth);
         tree.add(human);
     }
 
+   
     /**
      * Метод устанавливает связь родства
      * 
@@ -71,14 +83,15 @@ public class Service {
      * 
      * @return boolean
      */
-    public boolean addKinship(int idHumanAdd, Kinship kinship, int idHuman) {
+    public boolean addKinship(int idHumanAdd, int kinshipInt, int idHuman) {
 
-        // for (Human human1 : tree) {
-        //     if (human1.getId() == idHuman) {
-        //         this.firsthuman = human1;
-        //     }
-        // }
-            this.firsthuman=tree.getById(idHuman);
+        if (kinshipInt == 1) {
+            kinship = Kinship.parent;
+        }
+        if (kinshipInt == 2) {
+            kinship = Kinship.child;
+        }
+        this.firsthuman = tree.getById(idHuman);
         for (Human human : tree) {
             if (human.getId() == idHumanAdd) {
                 if (kinship == Kinship.child) {
@@ -103,6 +116,7 @@ public class Service {
      */
     public void save() {
         try {
+            
             fileSL.save(tree);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -117,15 +131,18 @@ public class Service {
      * 
      * @return - дерево родства
      */
-    public Object load() {
+    public void load() {
         try {
-            return fileSL.load();
+            tree=(FamilyTree<Human>) fileSL.load();
+            // return fileSL.load();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return null;
+            System.out.println("worning");
+            //return null;
         } catch (IOException e) {
+            System.out.println("worning2");
             e.printStackTrace();
-            return null;
+            //return null;
         }
 
     }
@@ -156,8 +173,9 @@ public class Service {
     /**
      * Сортировка по дате рождения
      */
-    public void sortByBirthData(){
+    public void sortByBirthData() {
         tree.sortByBirthData();
     }
     // #endregion
+
 }

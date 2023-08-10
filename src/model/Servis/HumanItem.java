@@ -20,4 +20,6 @@ public interface HumanItem<T> {
     String getName();
 
     String getDataOfBirth();
+    
+    String getInfo();
 }
