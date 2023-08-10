@@ -2,15 +2,25 @@ package ru.gb.family_tree;
 
 
 import ru.gb.family_tree.family_tree.FamilyTree;
+import ru.gb.family_tree.filehandler.FileHandler;
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 
 import java.time.LocalDate;
 
+
 public class Main {
     public static void main(String[] args) {
+        String filePath="tree.out";
+
+        FileHandler fileHandler = new FileHandler();
         FamilyTree tree = testTree();
+        fileHandler.write(tree,filePath);
         System.out.println(tree);
+
+//        FileHandler fileHandler = new FileHandler();
+//        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+//        System.out.println(tree);
     }
 
     static FamilyTree testTree(){
