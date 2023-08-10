@@ -1,4 +1,4 @@
-package writer;
+package model.save.writer;
 
 import java.io.Serializable;
 

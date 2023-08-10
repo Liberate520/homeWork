@@ -1,11 +1,11 @@
-package human;
-
-import Tree.HumanItem;
+package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.tree.HumanItem;
 
 public class Human implements Serializable, HumanItem<Human>{
     private String name;

@@ -1,4 +1,4 @@
-package Tree;
+package model.tree;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -1,12 +1,12 @@
-package Tree;
+package model.tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import human.Comparators.ComparatorByAge;
-import human.Comparators.ComparatorByName;
+import model.human.Comparators.ComparatorByAge;
+import model.human.Comparators.ComparatorByName;
 
 public class FamilyTree<E extends HumanItem<E>> implements Serializable, Iterable<E>{
 
