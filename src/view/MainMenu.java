@@ -12,7 +12,6 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new AddChild(consoleUI));
-        commandList.add(new AddParent(consoleUI));
         commandList.add(new Marry(consoleUI));
         commandList.add(new OutputInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));

@@ -4,6 +4,8 @@ import model.family_tree.FamilyTree;
 import model.human.Human;
 import model.work_with_file.ReadToFile;
 import model.work_with_file.WriteToFile;
+import model.work_with_file.interfaces.ReadInterface;
+import model.work_with_file.interfaces.WriteInterface;
 
 import java.time.LocalDate;
 
@@ -20,18 +22,11 @@ public class Service {
     }
 
     public void marry(int firstHuman, int secondHuman) {
-        humanFamilyTree.marry(humanFamilyTree.getHumanList().get(firstHuman-1),
-                humanFamilyTree.getHumanList().get(secondHuman-1));
+        humanFamilyTree.marry(firstHuman-1, secondHuman-1);
     }
 
     public void addChild(int parent, int child) {
-        humanFamilyTree.addChild(humanFamilyTree.getHumanList().get(parent-1),
-                humanFamilyTree.getHumanList().get(child-1));
-    }
-
-    public void addParent(int child, int parent) {
-        humanFamilyTree.addParent(humanFamilyTree.getHumanList().get(child-1),
-                humanFamilyTree.getHumanList().get(parent-1));
+        humanFamilyTree.addChild(parent-1, child-1);
     }
 
     public String outputInfo(){
@@ -62,12 +57,12 @@ public class Service {
     }
 
     public void saveInFile(String path) {
-        WriteToFile writeToFile = new WriteToFile(path);
+        WriteInterface writeToFile = new WriteToFile(path);
         writeToFile.write(humanFamilyTree);
     }
 
     public void loadFromFile(String path) {
-        ReadToFile readToFile = new ReadToFile(path);
+        ReadInterface readToFile = new ReadToFile(path);
         humanFamilyTree = readToFile.read();
     }
 }

@@ -48,16 +48,15 @@ public class ConsoleUI implements View{
     private void execute() {
         String line = scanner.nextLine();
         int numCommand = parser.tryParseInt(line);
-        if(numCommand != -1) {
-            if(check.checkCommand(numCommand, menu)) {
-                menu.execute(numCommand);
-            }
+        if(numCommand != -1 && check.checkCommand(numCommand, menu)) {
+            menu.execute(numCommand);
         }
         else outputError();
     }
 
     private void outputError() {
         System.out.println(ERROR);
+        System.out.println();
     }
 
     public void exit() {
@@ -125,29 +124,6 @@ public class ConsoleUI implements View{
             }
         }
         presenter.addChild(parent, child);
-    }
-
-    public void addParent() {
-        presenter.outputNumHumanList();
-        int parent = -1;
-        while (parent == -1) {
-            System.out.println("Введите номер родителя: ");
-            parent = parser.tryParseInt(scanner.nextLine());
-            if (parent == -1 && correctlyInput(parent)) {
-                parent = -1;
-                outputError();
-            }
-        }
-        int child = -1;
-        while (child == -1) {
-            System.out.println("Введите номер ребенка: ");
-            child = parser.tryParseInt(scanner.nextLine());
-            if (child == -1 && correctlyInput(child)) {
-                child = -1;
-                outputError();
-            }
-        }
-        presenter.addParent(child, parent);
     }
 
     public boolean correctlyInput(int numHuman) {

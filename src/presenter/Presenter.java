@@ -27,10 +27,6 @@ public class Presenter {
         service.addChild(parent, child);
     }
 
-    public void addParent(int child, int parent) {
-        service.addParent(child, parent);
-    }
-
     public void outputInfo() {
         view.printAnswer(service.outputInfo());
     }

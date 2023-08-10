@@ -25,14 +25,22 @@ public class FamilyTree<E extends FamilyTreeElement> implements Serializable, It
         firstHuman.marry(secondHuman);
     }
 
+    public void marry(int firstIndex, int secondIndex) {
+        if(firstIndex >= 0 && firstIndex < humansList.size() && secondIndex >=0 && secondIndex < humansList.size()) {
+            humansList.get(firstIndex).marry(humansList.get(secondIndex));
+        }
+    }
+
     public void addChild(E parent, E child) {
         parent.addChild(child);
         child.addParent(parent);
     }
 
-    public void addParent(E child, E parent) {
-        parent.addChild(child);
-        child.addParent(parent);
+    public void addChild(int parentIndex, int childIndex) {
+        if(parentIndex >= 0 && parentIndex < humansList.size() && childIndex >= 0 && childIndex < humansList.size()) {
+            humansList.get(parentIndex).addChild(humansList.get(childIndex));
+            humansList.get(childIndex).addParent(humansList.get(parentIndex));
+        }
     }
 
     @Override
