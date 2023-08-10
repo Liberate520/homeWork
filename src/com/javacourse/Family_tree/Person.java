@@ -10,13 +10,17 @@ public class Person{
         private Integer age;
         public ArrayList<String> children;
 
-        public void buildperson(String lfm, Person mom, Person dad, Integer age, ArrayList<String> children){
+        public void buildperson(String lfm, Integer age){
             this.lfm = lfm;
-            this.mom = mom;
-            this.dad = dad;
             this.age = age;
-            this.children = children;
+            this.children = new ArrayList<String>();
             this.reset();
+        }
+        public void setMom(Person mom){
+            this.mom = mom;
+        }
+        public void setDad(Person dad){
+            this.dad = dad;
         }
         public String getName(){
             return this.lfm;
@@ -36,11 +40,9 @@ public class Person{
         private void reset(){
                 if (this.dad == null) {
                     this.dad = new Person();
-                    this.dad.lfm = null;
                 }
                 if (this.mom == null) {
                     this.mom = new Person();
-                    this.mom.lfm = null;
                 }
         }
         
