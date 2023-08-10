@@ -1,10 +1,11 @@
 package ru.gb.Tree.Human;
+import java.io.Serializable;
 import java.time.LocalDate;
 // import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable{
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -14,8 +15,6 @@ public class Human {
     private List<Human> childrenList;
     private Human spouse;
    
-
-
     public Human (String name, Gender  gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father){
         this.name = name;
         this.gender = gender;
@@ -30,6 +29,10 @@ public class Human {
         this(name, gender, birthDate, null, mother, father);
     }
 
+     public Human (String name, Gender  gender, LocalDate birthDate, Human mother){
+        this(name, gender, birthDate, null, mother, null);
+    }
+
     public Human (String name, Gender  gender, LocalDate birthDate, LocalDate deathDate){
         this(name, gender, birthDate, deathDate, null, null);
     }
@@ -37,8 +40,6 @@ public class Human {
     public Human (String name, Gender  gender, LocalDate birthDate){
         this(name, gender, birthDate, null, null, null);
     }
-    
-    
     
     public void addToChildren(Human child){
     //    if (!childrenList.contains(child)); // проверка списка на присутствие, изучить позже !!!

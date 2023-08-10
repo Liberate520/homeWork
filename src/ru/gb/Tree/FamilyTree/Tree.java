@@ -1,11 +1,12 @@
 package ru.gb.Tree.FamilyTree;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import ru.gb.Tree.Human.Human;
 
 
-public class Tree {
+public class Tree implements Serializable{
     private List<Human>humanList;
 
     public Tree(){
@@ -32,7 +33,6 @@ public class Tree {
         }
         return stringBuilder.toString();
     }
-
    
     @Override
     public String toString(){

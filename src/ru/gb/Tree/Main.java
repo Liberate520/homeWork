@@ -1,6 +1,7 @@
 package ru.gb.Tree;
 
 import ru.gb.Tree.FamilyTree.Tree;
+import ru.gb.Tree.FileHandler.FileHandler;
 import ru.gb.Tree.Human.Gender;
 import ru.gb.Tree.Human.Human;
 
@@ -10,14 +11,18 @@ public class Main {
         
         Tree tree = familyTree();
         System.out.println(tree);
-        
+        String filePath = "saveFile";
+
+        FileHandler save = new FileHandler();
+        save.saveFile(tree, filePath);
+        System.out.println("");
+        System.out.println("Сохраненный файл: \n"+ save.readFile(filePath));
     }
 
     static Tree familyTree(){
         
         Tree familyTree = new Tree();
-        
-        
+       
         Human ivan = new Human("Иван", Gender.male, Human.getBirthDate(1950, 10, 25), Human.getDeathDate(2015, 5, 10));
         Human natalya = new Human("Наталья", Gender.female, Human.getBirthDate(1955, 12, 31), Human.getDeathDate(2018, 4, 21));
         familyTree.addHuman(ivan);
@@ -42,7 +47,10 @@ public class Main {
         sergey.addToChildren(petr);
         alisa.addToChildren(petr);
 
+        Human anna = new Human("Анна", Gender.female, Human.getBirthDate(2021,5,4), svetlana);
+        familyTree.addHuman(anna);
+        svetlana.addToChildren(anna);
+
         return familyTree;
     }
-    
 }
