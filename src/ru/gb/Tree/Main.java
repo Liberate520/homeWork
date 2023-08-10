@@ -11,7 +11,7 @@ public class Main {
         
         Tree tree = familyTree();
         System.out.println(tree);
-        String filePath = "saveFile";
+        String filePath = "homeWork\\src\\ru\\gb\\Tree\\FileHandler\\saveFile.out";
 
         FileHandler save = new FileHandler();
         save.saveFile(tree, filePath);
