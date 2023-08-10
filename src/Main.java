@@ -9,7 +9,7 @@ public class Main {
 public static void main(String[] args) {
     String path = "homeWork/src/data/familyData.out";
     // FileHandler fh = new FileHandler();
-    FamilyTree tree = NewTree();
+    FamilyTree<Human> tree = NewTree();
     System.out.println(tree.getInfo());
     tree.sortByAge();
     System.out.println(tree.getInfo());
@@ -24,13 +24,9 @@ public static void main(String[] args) {
         Human human = hIterator.next();
         System.out.println(human.getName());
     }
-        
-    for(Human human: tree){
-
-    }
 }  
-public static FamilyTree NewTree(){
-    FamilyTree tree = new FamilyTree();
+public static FamilyTree<Human> NewTree(){
+    FamilyTree<Human> tree = new FamilyTree<>();
     Human ivan = new Human("Ivan","male",LocalDate.of(1990, 12, 9));
     Human ekaterina = new Human("Ekaterina","female",LocalDate.of(1991, 5, 21));
     Human viktoria = new Human("Viktoria","female",LocalDate.of(2015, 3, 12),ekaterina,ivan);

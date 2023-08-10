@@ -6,7 +6,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+import FamilyTree.FamilyItem;
+
+public class Human implements Serializable,FamilyItem<Human>{
     private long id;
     private String name;
     private String gender;
