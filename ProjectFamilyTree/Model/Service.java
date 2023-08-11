@@ -1,13 +1,21 @@
-package homeWork.ProjectFamilyTree.Model.Services;
+package homeWork.ProjectFamilyTree.Model;
 
 import homeWork.ProjectFamilyTree.Model.Family_tree;
+import homeWork.ProjectFamilyTree.Model.FileHandler;
 import homeWork.ProjectFamilyTree.Model.Gender;
 import homeWork.ProjectFamilyTree.Model.Human;
 
-public class Family_ties {
+import java.io.IOException;
+import java.time.LocalDate;
+
+public class Service {
+    private int idHuman;
     private Family_tree<Human> familyTree;
-    public Family_ties() {
-        familyTree = new Family_tree<>();
+    private static FileHandler fileHandler = new FileHandler();
+    public Service(){familyTree = new Family_tree<>();}
+    public void addHuman(String name, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender){
+        Human human = new Human(idHuman++, name, localDateOfBirth, localDateofDeath, gender);
+        familyTree.addHuman(human);
     }
     public void setParentsAndChilds(int childId, int parent1Id, int parent2Id) {
         Human child = familyTree.findHuman(childId);
@@ -37,4 +45,18 @@ public class Family_ties {
         human1.getSibling().add(human2);
         human2.getSibling().add(human1);
     }
+    public String getFamilyTree(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Дерево:\n");
+        for (Human human: familyTree){
+            stringBuilder.append(human);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    public void sortByAge(){familyTree.sortByAge();}
+    public void sortByName(){familyTree.sortByName();}
+    public void Save() throws IOException {fileHandler.Save(familyTree);}
+    public static void Load() throws IOException, ClassNotFoundException {fileHandler.Load();}
 }
