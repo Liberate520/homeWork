@@ -25,7 +25,6 @@ public class ConsoleUI implements View{
             System.out.println("Выберите нужное действие: ");
             System.out.println(menu.menu());
             String choice = scanner.nextLine();
-            //метод проверки на валидность errorInput;
             int choiceInt = Integer.parseInt(choice);
             menu.execute(choiceInt);
             }
@@ -36,10 +35,9 @@ public class ConsoleUI implements View{
         System.out.println("Укажите имя человека");
         String name = scanner.nextLine();
         System.out.println("Укажите возраст человека");
-        String ageString = scanner.nextLine();
-        //метод проверки на валидность;
-        int age = Integer.parseInt(ageString);
-        presenter.addHuman(name, age);
+        String birthDateString = scanner.nextLine();
+        int birthDate = Integer.parseInt(birthDateString);
+        presenter.addHuman(name, String.valueOf(birthDate));
     }
 
     private void hello(){

@@ -11,8 +11,8 @@ public class Service {
         humanList = new FamilyTree<>();
     }
 
-    public void addHuman(String name, int age){
-        Human human = new Human(humanId++, name, age);
+    public void addHuman(String name, String birthDate){
+        Human human = new Human();
         humanList.add(human);
     }
 

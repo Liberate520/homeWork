@@ -150,7 +150,7 @@ public class Human implements Serializable, TreeNode<Human> {
         return res;
     }
 
-    private Human getMother(){
+    public Human getMother(){
         return null;
     }
     public String getFatherInfo(){
@@ -164,7 +164,7 @@ public class Human implements Serializable, TreeNode<Human> {
         }
         return res;
     }
-    private Human getFather() {
+    public Human getFather() {
         return null;
     }
     public String getChildrenInfo(){
