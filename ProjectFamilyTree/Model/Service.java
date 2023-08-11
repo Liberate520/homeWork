@@ -14,8 +14,18 @@ public class Service {
     private static FileHandler fileHandler = new FileHandler();
     public Service(){familyTree = new Family_tree<>();}
     public void addHuman(String name, LocalDate localDateOfBirth, LocalDate localDateofDeath, Gender gender){
-        Human human = new Human(idHuman++, name, localDateOfBirth, localDateofDeath, gender);
+/*        if(idHuman == getIdHuman() && idHuman > getIdHuman()){
+            idHuman++;
+        }*/
+        if(idHuman < getIdHuman()){
+            idHuman = getIdHuman() + 1;
+        }
+        else {idHuman++;}
+        Human human = new Human(idHuman, name, localDateOfBirth, localDateofDeath, gender);
         familyTree.addHuman(human);
+    }
+    public int getIdHuman() {
+        return idHuman;
     }
     public void setParentsAndChilds(int childId, int parent1Id, int parent2Id) {
         Human child = familyTree.findHuman(childId);
@@ -58,5 +68,8 @@ public class Service {
     public void sortByAge(){familyTree.sortByAge();}
     public void sortByName(){familyTree.sortByName();}
     public void Save() throws IOException {fileHandler.Save(familyTree);}
-    public static void Load() throws IOException, ClassNotFoundException {fileHandler.Load();}
+    public Family_tree Load() throws IOException, ClassNotFoundException {
+        familyTree = (Family_tree) fileHandler.Load();
+        return familyTree;
+    }
 }

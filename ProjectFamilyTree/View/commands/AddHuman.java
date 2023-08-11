@@ -4,7 +4,7 @@ import homeWork.ProjectFamilyTree.View.ConsoleUI;
 
 public class AddHuman extends Command{
     public AddHuman(ConsoleUI consoleUI) {
-        super("Добавить человека: ", consoleUI);
+        super("Добавить человека", consoleUI);
     }
 
     @Override

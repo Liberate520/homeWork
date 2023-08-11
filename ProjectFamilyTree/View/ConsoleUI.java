@@ -5,6 +5,7 @@ import homeWork.ProjectFamilyTree.Presenter.Presenter;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -51,7 +52,7 @@ public class ConsoleUI implements View {
     public void addHuman(){
         System.out.println("Введите имя");
         String name = scanner.nextLine();
-        System.out.println("Введите дату рождения");
+        System.out.println("Введите дату рождения в формате: YYYY-MM-DD");
         LocalDate localDateOfBirth = LocalDate.parse(scanner.nextLine());
         System.out.println("Введите дату смерти");
         LocalDate localDateofDeath;
