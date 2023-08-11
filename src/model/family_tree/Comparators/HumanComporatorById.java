@@ -1,4 +1,4 @@
-package model.service.Human.Comparators;
+package model.family_tree.Comparators;
 
 import java.util.Comparator;
 

@@ -1,17 +1,16 @@
-package view.Actions;
+package model.service.FileActions;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileHandler implements Writable{
+public class FileHandler {
 
-    @Override
-    public Serializable load(String path) {
+    public Serializable load(String filePath) {
         Serializable personRestored = null;
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(path))) {
+                new FileInputStream(filePath))) {
             personRestored = (Serializable) objectInputStream.readObject();
         } catch (Exception e) {
             e.getMessage();
@@ -22,14 +21,15 @@ public class FileHandler implements Writable{
     }
 
     
-    @Override
-    public void save(String path, Serializable obj) {
+    boolean save(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(path))) {
-            objectOutputStream.writeObject(obj);
+                new FileOutputStream(filePath))) {
+            objectOutputStream.writeObject(serializable);
+            return true;
         } catch (Exception e) {
             e.getMessage();
             e.printStackTrace();
+            return false;
         }
     }
     

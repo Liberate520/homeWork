@@ -2,17 +2,22 @@ package model.service;
 
 import java.time.LocalDate;
 import java.util.logging.FileHandler;
+
+import model.Human.Gender;
+import model.Human.Human;
 import model.family_tree.FamilyTree;
-import model.service.Human.Gender;
-import model.service.Human.Human;
+import model.service.FileActions.Writable;
 
 public class Service {
-    long id;
-    String filePath = "src/family_tree/model/ftree.out";
-    FileHandler fileHandler = new FileHandler();
+    private Writable writable;
     private FamilyTree<Human> tree;
+
+    public Service(FamilyTree<Human> tree) {
+        this.tree = tree;
+    }
     
     public Service(){
+        tree = new FamilyTree<>();
     }
 
 
@@ -21,7 +26,7 @@ public class Service {
         if (pol.equalsIgnoreCase("Male"))
             gender = Gender.Male;
         else gender = Gender.Female;
-        Human human = new Human(name, dateOfBirth, null, gender, null, null, null);
+        Human human = new Human(name, null, null, null, null);
         tree.add(human);
     }
 
@@ -47,15 +52,21 @@ public class Service {
         return tree.getInfo();
     }
     
-    public void load(){
-        tree = (FamilyTree) fileHandler.load(filePath);
-        if (tree == null) tree = makeTree();
+    public boolean load(){
+        if (writable == null){
+            return false;
+        }
+        tree = writable.load();
+        return true;
     }
-    public void save(){
-        fileHandler.save(tree, filePath);
+    public boolean save(){
+        if (writable == null){
+            return false;
+        }
+        return writable.save(tree);
     }
     
-    static FamilyTree makeTree(){
+    public FamilyTree makeTree(){
         FamilyTree tree = new FamilyTree();
 
         Human roza = new Human("Захарова Роза Карповна", Gender.Male, LocalDate.of(1958,4,12));

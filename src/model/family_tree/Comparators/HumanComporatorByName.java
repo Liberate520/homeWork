@@ -1,9 +1,9 @@
-package model.service.Human.Comparators;
+package model.family_tree.Comparators;
 
 import java.util.Comparator;
 
+import model.Human.Human;
 import model.family_tree.Element;
-import model.service.Human.Human;
 
 
 public class HumanComporatorByName<E extends Element> implements Comparator<E>{

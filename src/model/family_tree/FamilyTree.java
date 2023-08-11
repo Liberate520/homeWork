@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.service.Human.Comparators.HumanComporatorByAge;
-import model.service.Human.Comparators.HumanComporatorById;
-import model.service.Human.Comparators.HumanComporatorByName;
+import model.family_tree.Comparators.HumanComporatorByAge;
+import model.family_tree.Comparators.HumanComporatorById;
+import model.family_tree.Comparators.HumanComporatorByName;
 
 
 public class FamilyTree< E extends Element<E>> implements Serializable, Iterable<E> {
