@@ -1,6 +1,6 @@
-package ru.gb.fam_tree.family_tree;
+package ru.gb.fam_tree.model.family_tree;
 
-import ru.gb.fam_tree.family_tree.all_tree_items.FamilyTreeItem;
+import ru.gb.fam_tree.model.family_tree.all_tree_items.FamilyTreeItem;
 
 import java.util.List;
 

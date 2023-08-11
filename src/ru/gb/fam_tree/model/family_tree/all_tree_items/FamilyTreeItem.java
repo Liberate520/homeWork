@@ -1,4 +1,4 @@
-package ru.gb.fam_tree.family_tree.all_tree_items;
+package ru.gb.fam_tree.model.family_tree.all_tree_items;
 
 import java.util.List;
 

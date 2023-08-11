@@ -1,9 +1,9 @@
-package ru.gb.fam_tree.family_tree;
+package ru.gb.fam_tree.model.family_tree;
 
-import ru.gb.fam_tree.family_tree.all_tree_items.FamilyTreeItem;
-import ru.gb.fam_tree.family_tree.all_tree_items.human.Human;
-import ru.gb.fam_tree.family_tree.comparators.ComparatorByAge;
-import ru.gb.fam_tree.family_tree.comparators.ComparatorByName;
+import ru.gb.fam_tree.model.family_tree.all_tree_items.FamilyTreeItem;
+import ru.gb.fam_tree.model.family_tree.all_tree_items.human.Human;
+import ru.gb.fam_tree.model.family_tree.comparators.ComparatorByAge;
+import ru.gb.fam_tree.model.family_tree.comparators.ComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,10 +38,12 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
         return false;
     }
 
-    private void addToParents(T t){
+    private boolean addToParents(T t){
         for(T parent: t.getParents()){
             parent.addChild(t);
+            return true;
         }
+        return false;
     }
 
     private void addToChidrens(T t){
@@ -50,7 +52,7 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
         }
     }
 
-    public List<T> getSiblings(int id){
+    public List<T> getSiblings(long id){
         T t = getById(id);
         if(t == null){
             return null;
@@ -75,15 +77,6 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
         return res;
     }
 
-    public boolean setWedding(long tId1, long tId2){
-        if(checkId(tId1) && checkId(tId2)){
-            T t1 = getById(tId1);
-            T t2 = getById(tId2);
-            return setWedding(t1, t2);
-        }
-        return false;
-    }
-
     public boolean setWedding(T t1, T t2){
         if(t1.getSpouse() == null && t2.getSpouse() == null){
             t1.setSpouse(t2);
@@ -95,18 +88,11 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
         }
     }
 
-    public boolean setDivorce(long tId1, long tId2){
-        if(checkId(tId1) && checkId(tId2)){
-            T t1 = getById(tId1);
-            T t2 = getById(tId2);
-            if(t1.getSpouse() != null && t2.getSpouse() != null){
-                t1.setSpouse(null);
-                t2.setSpouse(null);
-                return true;
-            }
-            else {
-                return false;
-            }
+    public boolean setDivorce(Human human1, Human human2){
+        if(human1.getSpouse() == human2){
+            human1.setSpouse(null);
+            human2.setSpouse(null);
+            return true;
         }
         return false;
     }
@@ -119,7 +105,7 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
         return false;
     }
 
-    private boolean checkId(long id){
+    public boolean checkId(long id){
         if(id >= objectId || id < 0){
             return false;
         }
@@ -163,10 +149,10 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
     }
 
     public void sortByName(){
-        objectList.sort(new ComparatorByName());
+        objectList.sort(new ComparatorByName<>());
     }
 
     public void sortByAge(){
-        objectList.sort(new ComparatorByAge());
+        objectList.sort(new ComparatorByAge<>());
     }
 }

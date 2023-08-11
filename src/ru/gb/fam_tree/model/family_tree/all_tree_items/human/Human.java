@@ -1,6 +1,6 @@
-package ru.gb.fam_tree.family_tree.all_tree_items.human;
+package ru.gb.fam_tree.model.family_tree.all_tree_items.human;
 
-import ru.gb.fam_tree.family_tree.all_tree_items.FamilyTreeItem;
+import ru.gb.fam_tree.model.family_tree.all_tree_items.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,21 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable, FamilyTreeItem {
-    @Override
-    public void addParent(Object o){
-        System.out.println("Error");
-    }
-
-    @Override
-    public void setSpouse(Object o){
-        System.out.println("Error");
-    }
-
-    @Override
-    public void addChild(Object o){
-        System.out.println("Error");
-    }
+public class Human implements FamilyTreeItem<Human>, Serializable, Comparable<Human> {
 
     private long id;
     private String name;
@@ -254,6 +240,10 @@ public class Human implements Serializable, FamilyTreeItem {
         return human.getId() == getId();
     }
 
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
+    }
 }
 
 

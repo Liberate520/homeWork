@@ -1,4 +1,4 @@
-package ru.gb.fam_tree.file_handler;
+package ru.gb.fam_tree.model.file_handler;
 
 import java.io.*;
 
