@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Person {
+    private int id;
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -11,7 +12,8 @@ class Person {
     private List<Person> children;
     private List<Relationship> relationships;
 
-    public Person(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
+    public Person(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -21,13 +23,6 @@ class Person {
         this.relationships = new ArrayList<>();
     }
 
-    public List<Person> getChildren() {
-        return children;
-    }
-
-    public void addChild(Person child) {
-        children.add(child);
-    }
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -62,21 +57,12 @@ class Person {
         return deathDate == null;
     }
 
-    public void addRelationship(Person person, RelationshipType type) {
-        relationships.add(new Relationship(this, person, type));
+    public void addRelationship(Relationship relationship) {
+        relationships.add(relationship);
     }
 
     public List<Relationship> getRelationships() {
         return relationships;
-    }
-    public void addParent(Person parent, RelationshipType type) {
-        parent.addChild(this);
-        this.addRelationship(parent, type);
-    }
-
-    public void addSpouse(Person spouse) {
-        this.addRelationship(spouse, RelationshipType.SPOUSE);
-        spouse.addRelationship(this, RelationshipType.SPOUSE);
     }
 
     public String getDeathYear() {
@@ -87,4 +73,6 @@ class Person {
         }
     }
 
+    public void addRelationship(Person child, RelationshipType type) {
+    }
 }

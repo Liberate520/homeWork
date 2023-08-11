@@ -1,4 +1,3 @@
 enum RelationshipType {
-    PARENT,
-    CHILD, SPOUSE,
+    SPOUSE, FATHER, MOTHER, CHILD
 }

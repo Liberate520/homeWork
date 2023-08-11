@@ -1,11 +1,11 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-class FamilyTree {
+public class FamilyTree {
     private List<Person> people;
 
-    public FamilyTree() {
-        this.people = new ArrayList<>();
+    public FamilyTree(List<Person> people) {
+        this.people = people;
     }
 
     public void addPerson(Person person) {
@@ -15,25 +15,19 @@ class FamilyTree {
     public List<Person> getAllPeople() {
         return people;
     }
+
     public void addRelationship(Person person1, Person person2, RelationshipType type) {
-        person1.addRelationship(person2, type);
+        person1.addRelationship(new Relationship(person1, person2, type));
     }
 
     public List<Relationship> getRelationships(Person person) {
         return person.getRelationships();
     }
-    public List<Relationship> getAllRelationships() {
-        List<Relationship> allRelationships = new ArrayList<>();
-        for (Person person : people) {
-            collectRelationships(person, allRelationships);
-        }
-        return allRelationships;
-    }
 
-    private void collectRelationships(Person person, List<Relationship> relationships) {
-        relationships.addAll(person.getRelationships());
-        for (Person child : person.getChildren()) {
-            collectRelationships(child, relationships);
-        }
+    public List<Relationship> getAllRelationships() {
+        return people.stream()
+                .flatMap(person -> person.getRelationships().stream())
+                .collect(Collectors.toList());
     }
 }
+
