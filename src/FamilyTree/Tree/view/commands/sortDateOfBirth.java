@@ -4,14 +4,12 @@ import FamilyTree.Tree.view.ConsoleUI;
 
 public class sortDateOfBirth extends Command {
 
+
     public sortDateOfBirth(ConsoleUI consoleUI) {
         super("Отсортировать людей по дате рождения", consoleUI);
     }
 
-    @Override
-    public String description() {
-        return null;
-    }
+
 
     @Override
     public void execute() {

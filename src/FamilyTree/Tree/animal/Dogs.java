@@ -1,4 +1,4 @@
-package FamilyTree.Tree;
+package FamilyTree.Tree.animal;
 
 import FamilyTree.Tree.model.HumanGroup.HumanGroupItem;
 

@@ -40,6 +40,6 @@ public class Service    {
         group.sortDateOfBirth();
     }
 
-    public void addHumans(String name, String patronymic, int dateOfBirth) {
+    public void addHumans(String name, String patronymic, String dateOfBirth) {
     }
 }

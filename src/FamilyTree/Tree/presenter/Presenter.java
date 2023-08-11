@@ -1,11 +1,9 @@
 package FamilyTree.Tree.presenter;
 
-import FamilyTree.Tree.model.HumanGroup.Human.Human;
-import FamilyTree.Tree.model.HumanGroup.HumanGroup;
 import FamilyTree.Tree.model.HumanGroup.Service;
 import FamilyTree.Tree.view.View;
 
-import java.util.ArrayList;
+
 
 public class Presenter {
     private View view;
@@ -17,11 +15,6 @@ public class Presenter {
         service = new Service();
     }
 
-
-    public void addHumans(String name, String patronymic, int dateOfBirth) {
-        service.addHumans(name, patronymic, dateOfBirth);
-
-    }
 
 
     public void getHumansInfo() {
@@ -42,5 +35,8 @@ public class Presenter {
     public void sortPatronymic() {
         service.sortPatronymic();
         getHumansInfo();
+    }
+
+    public void addHumans(String name, String patronymic, int dateOfBirth) {
     }
 }

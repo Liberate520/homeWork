@@ -9,11 +9,6 @@ public class Finish extends Command {
     }
 
     @Override
-    public String description() {
-        return null;
-    }
-
-    @Override
     public void execute() {
         super.getConsoleUI().Finish();
     }

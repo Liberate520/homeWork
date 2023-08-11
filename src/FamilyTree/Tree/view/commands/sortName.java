@@ -9,12 +9,6 @@ public class sortName extends Command {
     }
 
     @Override
-    public String description() {
-        return null;
-    }
-
-    @Override
-    public void execute() {
-        super.getConsoleUI().sortName();
+    public void execute(){super.getConsoleUI().sortDateOfBirth();
     }
 }

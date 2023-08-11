@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 public class MainMenu {
     private List<Command> commandList;
+    private ConsoleUI consoleUI;
 
     public MainMenu(ConsoleUI consoleUI) {
+        this.consoleUI = consoleUI;
         commandList = new ArrayList<>();
         commandList.add(new addHumans(consoleUI));
         commandList.add(new GetHumansInfo(consoleUI));
@@ -22,7 +24,7 @@ public class MainMenu {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n\t    Меню    \n\n");
         for (int i = 0; i < commandList.size(); i++) {
-            stringBuilder.append(i +1);
+            stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(commandList.get(i).getDescription());
             stringBuilder.append("\n");
@@ -39,4 +41,6 @@ public class MainMenu {
     public int size() {
         return commandList.size();
     }
+
+
 }

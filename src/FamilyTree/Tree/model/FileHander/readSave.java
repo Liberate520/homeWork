@@ -1,17 +1,13 @@
 package FamilyTree.Tree.model.FileHander;
 
-import FamilyTree.Tree.model.FileHander.Writable;
+
 
 import java.io.*;
 
 public class readSave implements Writable {
-    @Override
-    public void save(Serializable serializable, String filePath) {
-
-    }
 
     @Override
-    public Serializable read(String path) {
+    public Serializable load(String path) {
         Serializable personRestored = null;
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(path))) {
@@ -25,7 +21,6 @@ public class readSave implements Writable {
         return personRestored;
     }
 
-    // Сохранение данных в файл
     @Override
     public void save(String path, Serializable obj) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
