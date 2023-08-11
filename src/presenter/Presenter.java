@@ -18,17 +18,18 @@ public class Presenter {
         tree.getInfo();
     }
 
-    public String getHumanList() {
-        return tree.getInfo();
+    public void getHumanListInfo() {
+        String answer = tree.getInfo();
+        view.print(answer);
     }
 
-    public String sortByAge() {
+    public void sortByAge() {
         tree.sortByAge();
-        return getHumanList();
+        getHumanListInfo();
     }
 
-    public String sortByName() {
+    public void sortByName() {
         tree.sortByName();
-        return getHumanList();
+        getHumanListInfo();
     }
 }

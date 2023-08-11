@@ -33,6 +33,6 @@ public class ConsoleUI implements View {
     }
 
     public void getHumanList(){
-        presenter.getHumanList();
+        presenter.getHumanListInfo();
     }
 }
