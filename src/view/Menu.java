@@ -18,6 +18,7 @@ public class Menu{
         commandList.add(new FindPerson(consoleUI));
         commandList.add(new SetMather(consoleUI));
         commandList.add(new SetFather(consoleUI));
+        commandList.add(new GetChildren(consoleUI));
         commandList.add(new SaveTree(consoleUI));
         commandList.add(new LoadTree(consoleUI));
         commandList.add(new Finish(consoleUI));

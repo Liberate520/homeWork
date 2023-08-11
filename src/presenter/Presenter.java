@@ -1,6 +1,8 @@
 package presenter;
 
+import jdk.jfr.Percentage;
 import model.Gender;
+import model.Person;
 import model.Service;
 import view.View;
 
@@ -22,7 +24,7 @@ public class Presenter {
             view.printAnswer("Человек успешно добавлен в древо!");
             view.printAnswer(service.getHumanListInfo());
         }else {
-            System.out.println("Человек не добавлен! Что то пошло не так...");
+            view.printAnswer("Человек не добавлен! Что то пошло не так...");
         }
     }
     public void getHumanListInfo(){
@@ -79,6 +81,12 @@ public class Presenter {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void getChildren(int id){
+        String children;
+        children = service.getChildren(id);
+        view.printAnswer(children);
     }
 
 

@@ -179,6 +179,20 @@ public class ConsoleUI implements View{
         }
     }
 
+    public void getChildren(){
+        System.out.println("Введите имя для поиска человека: ");
+        String name = scanner.nextLine();
+        presenter.findPerson(name);
+        System.out.println("Введите ID человека о ком предоставить информацию: ");
+        String idInput = scanner.nextLine();
+        if (isCorrectID(idInput)){
+            int idInt = Integer.parseInt(idInput);
+            presenter.getChildren(idInt - 1);
+        } else {
+            System.out.println("Введен не корректный ID");
+        }
+    }
+
 
 
 }

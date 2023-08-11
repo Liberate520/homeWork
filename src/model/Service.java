@@ -79,5 +79,9 @@ public class Service {
         familyTree = load.readTree();
     }
 
+    public String getChildren(int id){
+       return familyTree.getPersonById(id).getChildren();
+    }
+
 
 }
