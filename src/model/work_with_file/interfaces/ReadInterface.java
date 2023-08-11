@@ -1,0 +1,7 @@
+package model.work_with_file.interfaces;
+
+import model.family_tree.FamilyTree;
+
+public interface ReadInterface {
+    FamilyTree read();
+}
