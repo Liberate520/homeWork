@@ -1,7 +1,10 @@
 package homeWork.family_tree.model.service;
 
 import homeWork.family_tree.model.family_tree.FamilyTree;
+import homeWork.family_tree.model.human.Gender;
 import homeWork.family_tree.model.human.Human;
+
+import java.time.LocalDate;
 
 public class Service {
     private int humanId;

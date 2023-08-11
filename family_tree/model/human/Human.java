@@ -59,7 +59,6 @@ public class Human implements Serializable, TreeNode<Human> {
     public Human getFather; {
         for (Human parent : parents){
             if (parent.getGender() == Gender.Male){
-
             }
         }
 

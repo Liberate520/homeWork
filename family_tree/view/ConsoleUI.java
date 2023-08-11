@@ -5,7 +5,7 @@ import homeWork.family_tree.presenter.Presenter;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
-    private static final String INPUT_ERROR = "Вы ввели неверное значение";
+    private static final String errorInput = "Вы ввели неверное значение";
     private Presenter presenter;
     private final Scanner scanner;
     private boolean work;
@@ -20,15 +20,11 @@ public class ConsoleUI implements View{
 
     @Override
     public void start() {
-        System.out.println("Добро пожаловать на страницу семейного древа!");
+        hello();
         while (work){
-            System.out.println("Выберите нужное действие: ");
-            System.out.println(menu.menu());
-            String choice = scanner.nextLine();
-            int choiceInt = Integer.parseInt(choice);
-            menu.execute(choiceInt);
+            printMenu();
+            execute();
             }
-
         }
 
     public void addHuman(){
@@ -76,20 +72,20 @@ public class ConsoleUI implements View{
         if (text.matches("[0-9]+")){
             return true;
         } else {
-            inputError();
+            errorInput();
             return false;
         }
+    }
+    private void printMenu(){
+        System.out.println(menu.menu());
     }
 
     private boolean checkCommand(int numCommand){
         if (numCommand < menu.getSize()){
             return true;
         } else {
-            inputError();
+            errorInput();
             return false;
         }
-    }
-    private void inputError(){
-        System.out.println(INPUT_ERROR);
     }
 }
