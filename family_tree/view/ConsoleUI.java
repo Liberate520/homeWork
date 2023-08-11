@@ -5,12 +5,11 @@ import homeWork.family_tree.presenter.Presenter;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
-
+    private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Presenter presenter;
-    private Scanner scanner;
-
+    private final Scanner scanner;
     private boolean work;
-    private MainMenu menu;
+    private final MainMenu menu;
 
     public ConsoleUI(Presenter presenter) {
         presenter = new Presenter(this);
@@ -43,6 +42,9 @@ public class ConsoleUI implements View{
         presenter.addHuman(name, age);
     }
 
+    private void hello(){
+        System.out.println("Доброго времени суток!");
+    }
     @Override
     public void printAnswer(String text) {
         System.out.println(text);
@@ -62,5 +64,34 @@ public class ConsoleUI implements View{
     public void finish() {
         System.out.println("До новых встреч!");
         work = false;
+    }
+    private void execute(){
+        String line = scanner.nextLine();
+        if (checkTextForInt(line)){
+            int numCommand = Integer.parseInt(line);
+            if (checkCommand(numCommand)){
+                menu.execute(numCommand);
+            }
+        }
+    }
+    private boolean checkTextForInt(String text){
+        if (text.matches("[0-9]+")){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    private boolean checkCommand(int numCommand){
+        if (numCommand < menu.getSize()){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+    private void inputError(){
+        System.out.println(INPUT_ERROR);
     }
 }
