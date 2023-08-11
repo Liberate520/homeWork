@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import modell.human.Gender;
 
 public class ConsoleUI implements View {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private Presenter presenter;
     private Menu menu;
     private boolean work;
@@ -55,30 +55,29 @@ public class ConsoleUI implements View {
         
         while (true) {
             print("Please select your gender:");
-            print("1. Male");
-            print("2. Female");
-
+            Gender[] genders = Gender.values();
+            for (int i = 0; i < genders.length; i++) {
+                print((i + 1) + ". " + genders[i]);
+            }
+        
             System.out.print("Enter the number corresponding to your choice: ");
             int choice;
-
+        
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 scanner.nextLine();
-
-                if (choice == 1) {
-                    userGender = Gender.Male;
-                    break;
-                } else if (choice == 2) {
-                    userGender = Gender.Female;
+        
+                if (choice >= 1 && choice <= genders.length) {
+                    userGender = genders[choice - 1];
                     break;
                 } else {
-                    print("Invalid choice. Please enter 1 for Male or 2 for Female.");
+                    print("Invalid choice. Please enter a valid number.");
                 }
             } else {
                 print("Invalid input. Please enter a valid number.");
                 scanner.nextLine();
             }
-        }
+        }        
 
         while (birthDate == null) {
             print("Please enter your birth date (YYYY-MM-DD): ");
