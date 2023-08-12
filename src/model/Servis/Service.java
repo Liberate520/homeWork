@@ -9,7 +9,7 @@ import Enum.Kinship;
 import FamiliTree.FamilyTree;
 import FileHandler.FileHandler;
 import Human.Human;
-//import Presenter.GenderP;
+
 
 public class Service {
 
@@ -21,6 +21,7 @@ public class Service {
     private FileHandler fileSL;
     private Gender gender;
     private Kinship kinship;
+    private Human human;
 
     // #endregion
 
@@ -29,6 +30,7 @@ public class Service {
     public Service() {
         tree = new FamilyTree<>();
         fileSL = new FileHandler();
+        human=new Human();
     }
 
     // #endregion
@@ -69,7 +71,7 @@ public class Service {
 
         }
 
-        Human human = new Human(idHuman++, name, gender, dataOfBirth);
+       this. human = new Human(idHuman++, name, gender, dataOfBirth);
         tree.add(human);
     }
 

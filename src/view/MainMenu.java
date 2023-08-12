@@ -20,12 +20,12 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
+        commandList.add(new AddKinship(consoleUI));
         commandList.add(new DelHuman(consoleUI));
         commandList.add(new GetHumanListInfo(consoleUI));
         commandList.add(new SortById(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
-        commandList.add(new AddKinship(consoleUI));
         commandList.add(new LoadFile(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
