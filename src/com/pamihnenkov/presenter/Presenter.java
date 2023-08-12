@@ -1,53 +1,40 @@
 package com.pamihnenkov.presenter;
 
-import com.pamihnenkov.model.FamilyTreeMember;
 import com.pamihnenkov.model.Human;
 import com.pamihnenkov.model.Service;
-import com.pamihnenkov.model.enums.Gender;
 import com.pamihnenkov.model.enums.Relation;
 import com.pamihnenkov.view.View;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class Presenter<T extends FamilyTreeMember<T>> {
+public class Presenter {
     private View view;
-    private final Service<T> service;
+    private final Service service;
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service<>();
+        service = new Service();
         service.load();
     }
 
     public Set<String> getAllMembers(){
-        return service.getAllMembers().stream().map(String::valueOf).collect(Collectors.toSet());
+        return service.getAllMembers().stream().map(String::valueOf).collect(Collectors.toSet()); //comment: Тут я только преобразую Set<Human> в Set<String> для отображения во View
     }
 
     public void addNewMember(String surname, String name, String lastname, String birthDate, String deathDate, String gender) {
-        System.out.println(deathDate == null);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        T newMember = (T) new Human(UUID.randomUUID(),
-                                    name,
-                                    surname,
-                                    lastname,
-                                    LocalDate.parse(birthDate,formatter),
-                                    (deathDate == null || deathDate.length() == 0) ? null : LocalDate.parse(deathDate,formatter),
-                                    gender.equals("м") ? Gender.MALE : Gender.FEMALE);
-        service.addNewMember(newMember);
+        service.addNewMember(surname, name, lastname, birthDate, deathDate,gender);
     }
 
     public Set<String> getBrothersAndSisters(UUID memberId){
-        return service.getBrothersAndSisters(service.getMemberById(memberId)).stream().map(T::toString).collect(Collectors.toSet());
+        return service.getBrothersAndSisters(service.getMemberById(memberId)).stream().map(Human::toString).collect(Collectors.toSet());
     }
 
     public Map<UUID,String> getAllMembersForChooseMenu(){
-        return service.getAllMembers().stream().collect(Collectors.toMap(T::getId,T::toString));
+        return service.getAllMembers().stream().collect(Collectors.toMap(Human::getId,Human::toString));
     }
 
     public Set<String> getRelationVariants(){

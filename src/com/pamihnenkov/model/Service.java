@@ -2,13 +2,16 @@ package com.pamihnenkov.model;
 
 import com.pamihnenkov.helpers.serialization.FileHandler;
 import com.pamihnenkov.helpers.serialization.Writeable;
+import com.pamihnenkov.model.enums.Gender;
 import com.pamihnenkov.model.enums.Relation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.UUID;
 
-public class Service<T extends FamilyTreeMember<T>>{
-    private FamilyTree<T> familyTree;
+public class Service {
+    private FamilyTree<Human> familyTree;
     private Writeable persistance;
 
     public Service() {
@@ -18,22 +21,22 @@ public class Service<T extends FamilyTreeMember<T>>{
 
     public void load(){
         Object input = persistance.load();
-        if (input != null) familyTree = (FamilyTree<T>) input;
+        if (input instanceof Human) familyTree = (FamilyTree<Human>) input;
     }
 
     public void save(){
         persistance.save(familyTree);
     }
 
-    public Set<T> getBrothersAndSisters(T member){
+    public Set<Human> getBrothersAndSisters(Human member){
         return familyTree.getBrothersAndSistersForMember(member);
     }
 
-    public Set<T> getAllMembers(){
+    public Set<Human> getAllMembers(){
         return familyTree.getAllMembers();
     }
 
-    public T getMemberById(UUID id){
+    public Human getMemberById(UUID id){
         return familyTree.getAllMembers().stream().filter(member -> member.getId().equals(id)).findFirst().get();
     }
 
@@ -42,15 +45,23 @@ public class Service<T extends FamilyTreeMember<T>>{
         familyTree.addRelativeForPerson(getMemberById(member), getMemberById(relative), Relation.valueOf(relation));
     }
 
-    public Set<T> getSortedByBirthdate(){
+    public Set<Human> getSortedByBirthdate(){
         return familyTree.getSortedByBirthdate();
     }
 
-    public Set<T> getSortedByAge(){
+    public Set<Human> getSortedByAge(){
         return familyTree.getSortedByAge();
     }
 
-    public void addNewMember(T member){
-        familyTree.addFamilyMember(member);
+    public void addNewMember(String surname, String name, String lastname, String birthDate, String deathDate, String gender){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Human newMember = new Human(UUID.randomUUID(),
+                name,
+                surname,
+                lastname,
+                LocalDate.parse(birthDate,formatter),
+                (deathDate == null || deathDate.length() == 0) ? null : LocalDate.parse(deathDate,formatter),
+                gender.equals("м") ? Gender.MALE : Gender.FEMALE);
+        familyTree.addFamilyMember(newMember);
     }
 }

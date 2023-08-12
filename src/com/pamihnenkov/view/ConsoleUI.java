@@ -1,22 +1,21 @@
 package com.pamihnenkov.view;
 
-import com.pamihnenkov.model.FamilyTreeMember;
 import com.pamihnenkov.model.enums.Relation;
 import com.pamihnenkov.presenter.Presenter;
 
 import java.sql.SQLOutput;
 import java.util.*;
 
-public class ConsoleUI<T extends FamilyTreeMember<T>> implements View{
+public class ConsoleUI implements View{
 
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
-    private final Presenter<T> presenter;
+    private final Presenter presenter;
     private final Scanner scanner;
     private boolean work;
     private final MainMenu menu;
 
     public ConsoleUI() {
-        this.presenter = new Presenter<T>(this);
+        this.presenter = new Presenter(this);
         this.scanner = new Scanner(System.in);
         this.work = true;
         menu = new MainMenu(this);
