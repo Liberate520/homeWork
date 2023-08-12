@@ -10,11 +10,10 @@ public class FileHandler<T> implements Writable<T> {
         objectOutputStream.writeObject(familyTree);
         objectOutputStream.close();
     }
-
+    @SuppressWarnings("unchecked")
     public T load() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("family_tree.out"));
-        //TODO: Найти способ правильного cast
         T familyTree = (T) objectInputStream.readObject();
         objectInputStream.close();
         return familyTree;
