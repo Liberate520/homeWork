@@ -27,4 +27,13 @@ class Relationship {
     public RelationshipType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "Relationship{" +
+                "person1=" + person1.getFullName() +
+                ", person2=" + person2.getFullName() +
+                ", type=" + type +
+                '}';
+    }
 }

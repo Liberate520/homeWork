@@ -75,4 +75,16 @@ class Person {
 
     public void addRelationship(Person child, RelationshipType type) {
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", fullName='" + getFullName() + '\'' +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                ", deathDate=" + getDeathYear() +
+                '}';
+    }
+
 }
