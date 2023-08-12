@@ -155,4 +155,13 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
     public void sortByAge(){
         objectList.sort(new ComparatorByAge<>());
     }
+
+    public long getObjectId() {
+        return objectId;
+    }
+
+    public void setParent(T t, T father){
+        t.addParent(father);
+        father.addChild(t);
+    }
 }

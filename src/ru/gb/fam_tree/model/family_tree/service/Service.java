@@ -48,13 +48,12 @@ public class Service {
         return setDivorce(human1, human2);
     }
 
-    public boolean setDivorce(long id1, long id2){
+    public void setDivorce(long id1, long id2){
         if(checkId(id1) && checkId(id2)){
             Human human1 = famTree.getById(id1);
             Human human2 = famTree.getById(id2);
-            return setDivorce(human1, human2);
+            setDivorce(human1, human2);
         }
-        return false;
     }
 
     public boolean remove(long id){
@@ -87,5 +86,81 @@ public class Service {
 
     public void SaveToFile(String path){
         fileHandler.save(famTree, path);
+    }
+
+    public void setGender(long id, Gender gender){
+        Human human = getById(id);
+        human.setGender(gender);
+    }
+
+    public void setBirthDate(long id, LocalDate birthDate){
+        Human human = getById(id);
+        human.setBirthDate(birthDate);
+    }
+
+    public void setDeathDate(long id, LocalDate deathDate){
+        Human human = getById(id);
+        human.setDeathDate(deathDate);
+    }
+
+    public void setFather(long idChild, long idFather){
+        Human child = getById(idChild);
+        Human father = getById(idFather);
+        famTree.setParent(child,father);
+    }
+
+    public void setMother(long idChild, long idMother){
+        Human child = getById(idChild);
+        Human mother = getById(idMother);
+        famTree.setParent(child, mother);
+    }
+
+    public void setChild(long idParent, long idChild){
+        Human parent = getById(idParent);
+        Human child = getById(idChild);
+        famTree.setParent(child, parent);
+    }
+
+    public void setName(long id, String newName){
+        Human human = getById(id);
+        human.setName(newName);
+    }
+
+    public void getName(long id){
+        Human human = getById(id);
+        human.getName();
+    }
+
+    public long getLastId(){
+        return famTree.getObjectId();
+    }
+
+    public LocalDate getBirthDate(long id){
+        Human human = getById(id);
+        return human.getBirthDate();
+    }
+
+    public Gender getGender(long id){
+        Human human = getById(id);
+        return human.getGender();
+    }
+
+    public Human getMother(long id){
+        Human human = getById(id);
+        return human.getMother();
+    }
+
+    public Human getFather(long id){
+        Human human = getById(id);
+        return human.getFather();
+    }
+
+    public Human getSpouce(long id){
+        Human human = getById(id);
+        return human.getSpouse();
+    }
+
+    public Human getHuman(long id){
+        return getById(id);
     }
 }

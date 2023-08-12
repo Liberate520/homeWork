@@ -11,11 +11,10 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
+        commandList.add(new EditHuman(consoleUI));
         commandList.add(new GetHumansInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
-        //commandList.add(new LoadFromFile(consoleUI)); почему-то не работвет, позже разберусь.
-        //commandList.add(new SaveToFile(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 

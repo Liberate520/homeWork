@@ -51,9 +51,12 @@ public class Human implements FamilyTreeItem<Human>, Serializable, Comparable<Hu
         this(name, gender, birthDate, null, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate,
-                 Human father, Human mother){
-        this(name,gender,birthDate,null,father,mother);
+    public Human(){
+        this(null,null,null,null,null,null);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addChild(Human child){
