@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-class Relationship {
-        private Person person1;
+class Relationship implements Serializable {
+    private Person person1;
     private Person person2;
     private RelationshipType type;
 

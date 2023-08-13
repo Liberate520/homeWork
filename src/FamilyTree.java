@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Person> people;
 
     public FamilyTree(List<Person> people) {
