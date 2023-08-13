@@ -1,6 +1,6 @@
 package family_tree.view.commands;
 
-import family_tree.view.ConsoleUI;
+import family_tree.view.view.ConsoleUI;
 
 public class SortByName extends Command{
     public SortByName(ConsoleUI console) {

@@ -1,4 +1,4 @@
-package family_tree.model;
+package family_tree.model.subject;
 
 public interface Subject<T> {
     int getID();

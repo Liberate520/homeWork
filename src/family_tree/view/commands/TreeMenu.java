@@ -1,6 +1,8 @@
-package family_tree.view;
+package family_tree.view.commands;
 
 import family_tree.view.commands.*;
+import family_tree.view.view.ConsoleUI;
+
 import java.util.ArrayList;
 import java.util.List;
 

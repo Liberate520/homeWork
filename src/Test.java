@@ -1,5 +1,5 @@
-import family_tree.view.View;
-import family_tree.view.ConsoleUI;
+import family_tree.view.view.View;
+import family_tree.view.view.ConsoleUI;
 
 public class Test {
     public static void main(String[] args) {

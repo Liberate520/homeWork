@@ -1,7 +1,9 @@
-package family_tree.view;
+package family_tree.view.view;
 
 import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
+import family_tree.view.commands.TreeMenu;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -35,27 +37,64 @@ public class ConsoleUI implements View{
     public void addHuman() {
         System.out.println("Введите имя");
         String name = scanner.nextLine();
-        System.out.println("Введите дату рождения (год-месяц-день):");
-        String dateOfBirth = scanner.nextLine();
-        System.out.println("Введите дату смерти (год-месяц-день):");
-        String dateOfDeath = scanner.nextLine();
-        System.out.println("Введите пол (Female, Male):");
-        String gender = scanner.nextLine();
-        LocalDate birthDate = null;
+        System.out.println("Введите дату рождения");
+        LocalDate birthDate = inputDate();
         LocalDate deathDate = null;
-        try {
-            birthDate = LocalDate.parse(dateOfBirth);
-            deathDate = LocalDate.parse(dateOfDeath);
-        } catch (DateTimeParseException e) {
-
-        } finally {
-            presenter.addHuman(name, birthDate, deathDate, Gender.valueOf(gender));
+        System.out.println("Ввести дату смерти?");
+        boolean yesorno = inputYesOrNo();
+        if(yesorno) {
+            System.out.println("Введите дату смерти");
+            deathDate = inputDate();
         }
+        System.out.println("Введите пол (Female, Male):");
+        Gender gender = inputGender();
+        presenter.addHuman(name, birthDate, deathDate, gender);
+    }
 
+    public LocalDate inputDate () {
+        boolean inputDate;
+        LocalDate requiredDate = null;
+        do {
+            System.out.println("Введите год:");
+            String year = scanner.nextLine();
+            System.out.println("Введите месяц:");
+            String month = scanner.nextLine();
+            System.out.println("Введите день:");
+            String day = scanner.nextLine();
+            String date = year + "-" + month + "-" + day;
+            inputDate = true;
+            try {
+                requiredDate = LocalDate.parse(date);
+            } catch (DateTimeParseException e) {
+                inputDate = false;
+                System.out.println("Неверные данные");
+            }
+        } while(!inputDate);
+        return requiredDate;
+    }
+
+    public Gender inputGender() {
+        boolean inputGender = true;
+        Gender humanGender = null;
+        do{
+            String gender = scanner.nextLine();
+            if(gender.equalsIgnoreCase("female") || gender.equalsIgnoreCase("f")) {
+                humanGender = Gender.Female;
+                inputGender = true;
+            }
+            else if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("m")){
+                humanGender = Gender.Male;
+                inputGender = true;
+            } else {
+                inputGender = false;
+                System.out.println("Неверные данные\n" +
+                                    "Повторите ввод");
+            }
+        } while (!inputGender);
+        return humanGender;
     }
 
     public void addMother(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите ID матери");
         int motherID = scanner.nextInt();
         System.out.println("Введите ID ребенка");
@@ -64,7 +103,6 @@ public class ConsoleUI implements View{
     }
 
     public void addFather(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите ID отца");
         int fatherID = scanner.nextInt();
         System.out.println("Введите ID ребенка");
@@ -73,36 +111,30 @@ public class ConsoleUI implements View{
     }
 
     public void showParentName(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите ID ребенка");
         int childID = scanner.nextInt();
         System.out.println(presenter.showParentName(childID));
     }
 
     public void showChildName() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите ID человека");
         int id = scanner.nextInt();
         System.out.println(presenter.showChildName(id));
-
     }
 
     public void showSibling() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите ID человека");
         int id = scanner.nextInt();
         System.out.println(presenter.showSiblingName(id));
     }
 
     public void findHumanByID(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите ID");
         int requiredID = scanner.nextInt();
         System.out.println(presenter.findByID(requiredID));
     }
 
     public void findHumanByName() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите имя");
         String requiredHuman = scanner.nextLine();
         System.out.println(presenter.findByName(requiredHuman));
@@ -126,6 +158,20 @@ public class ConsoleUI implements View{
     }
     public void finish() {
         flag = false;
+    }
+
+    public boolean inputYesOrNo(){
+        boolean result = false;
+        System.out.println("'y' - да, 'n' - нет");
+        String choice = scanner.nextLine();
+        switch (choice) {
+            case "y" -> {
+                result = true;
+            }
+            case "n" -> {
+            }
+        }
+        return result;
     }
 
     @Override
