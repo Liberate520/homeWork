@@ -145,7 +145,7 @@ public class FamilyTree<T extends FamilyTreeItem<T>> implements Serializable,Ite
 
 
     public Iterator<T> iterator(){
-        return new HumanIterator(objectList);
+        return new HumanIterator<>(objectList);
     }
 
     public void sortByName(){
