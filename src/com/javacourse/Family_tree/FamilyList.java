@@ -11,27 +11,21 @@ public class FamilyList<T extends Person>{
     ArrayList<T> sorted_map;
 
     public boolean add(T human){
-        if(! tree.containsKey(human.getName())){
-            if (tree.containsValue(human.getDad()) && tree.containsValue(human.getMom())){
-                tree.put(human.getName(), human);
-
-                human.getDad().children.add(human.getName());
-                human.getMom().children.add(human.getName());
-            }
-            else if (tree.containsValue(human.getDad())){
-                tree.put(human.getName(), human);
-                human.getDad().children.add(human.getName());
-            }
-            else if (tree.containsValue(human.getMom())){
-                tree.put(human.getName(), human);
-                human.getMom().children.add(human.getName());
-            }
-            else {
-                tree.put(human.getName(), human);
-            }
-            return true;
+        tree.put(human.getName(), human);
+        //System.out.println(tree.containsKey(human.getName()));
+        if (tree.containsValue(human.getDad()) && tree.containsValue(human.getMom())){
+            
+            human.getDad().children.add(human);
+            human.getMom().children.add(human);
         }
-        return false;
+        else if (tree.containsValue(human.getDad())){
+            
+            human.getDad().children.add(human);
+        }
+        else if (tree.containsValue(human.getMom())){
+            human.getMom().children.add(human);
+        }
+        return true;
     }
     public ArrayList<T> sort_name(){
         sorted_map = new ArrayList<>(tree.values());
@@ -60,12 +54,12 @@ public class FamilyList<T extends Person>{
         System.out.println("\nReceived tree: ");
         if (sorted_map != null){
             for(Person human:sorted_map){
-                System.out.println("Self: " + human.getName() + ", Mom: " + human.getMom().getName() + ", Dad: " + human.getDad().getName());
+                System.out.println("Self: " + human.getName() + ", " + human.getAge() + ", Mom: " + human.getMom().getName() + ", Dad: " + human.getDad().getName());
             }
         }
         else{
             for(Person human:tree.values()){
-                System.out.println("Self: " + human.getName() + ", Mom: " + human.getMom().getName() + ", Dad: " + human.getDad().getName());
+                System.out.println("Self: " + human.getName() + ", " + human.getAge() + ", Mom: " + human.getMom().getName() + ", Dad: " + human.getDad().getName());
             }
         }
     }

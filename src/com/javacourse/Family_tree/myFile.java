@@ -3,26 +3,31 @@ import java.io.*;
 import java.util.*;
 
 public class myFile implements my_File{
-    private File file = new File("FamilyList.txt");
-    public myFile(File f){
-        this.file = f;
+    private File file;
+    public myFile(){
+        this.file = new File("FamilyList.txt");
     }
     Scanner scanner;
+    String[] str;
     String[] params;
 
     public Scanner file() throws IOException{
         scanner = new Scanner(file);
-        while(scanner.hasNextLine()){
+        if (scanner.hasNextLine()){
             return scanner;
+            
         }
+        scanner.close();
         return null;
     }
 
     public String[] read(){
-        while(scanner.hasNextLine()){
-            params = scanner.nextLine().split(", ");
+        if (scanner.hasNextLine()){
+            str = scanner.nextLine().split(", ");
+            params = Arrays.copyOf(str, 4);
             return params;
         }
+        scanner.close();
         return null;
     }
     

@@ -8,12 +8,12 @@ public class Person{
         private Person mom;
         private Person dad;
         private Integer age;
-        public ArrayList<String> children;
+        public ArrayList<Person> children;
 
         public void buildperson(String lfm, Integer age){
             this.lfm = lfm;
             this.age = age;
-            this.children = new ArrayList<String>();
+            this.children = new ArrayList<Person>();
             this.reset();
         }
         public void setMom(Person mom){
@@ -34,7 +34,7 @@ public class Person{
         public Integer getAge(){
             return this.age;
         }
-        public ArrayList<String> getChildren(){
+        public ArrayList<Person> getChildren(){
             return this.children;
         }
         private void reset(){

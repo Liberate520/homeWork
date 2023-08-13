@@ -1,8 +1,8 @@
 package com.javacourse.view;
 
+import java.io.IOException;
 import java.util.*;
 
-import com.javacourse.Family_tree.Person;
 import com.javacourse.presenter.Presenter;
 
 public class ConsoleUI implements View{
@@ -10,7 +10,7 @@ public class ConsoleUI implements View{
     private Scanner scanner;
     private Boolean work;
 
-    public ConsoleUI(){
+    public ConsoleUI() throws IOException{
         presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         work = true;
@@ -54,23 +54,13 @@ public class ConsoleUI implements View{
         String name = scanner.nextLine();
         System.out.println("Enter the age");
         Integer age = Integer.parseInt(scanner.nextLine());
-        Person human = new Person();
-        human.buildperson(name, age);
-        presenter.addhuman(human);
 
         System.out.println("Enter the mom's full name");
         String mom_name = scanner.nextLine();
         System.out.println("Enter the dad's full name");
         String dad_name = scanner.nextLine();
         //System.out.println(parent.getName().equals(mom_name));
-        if (presenter.getTree().keySet().contains(mom_name)){
-            human.setMom(presenter.getTree().get(mom_name));
-            presenter.getTree().get(mom_name).children.add(name);
-        }
-        if (presenter.getTree().keySet().contains(dad_name)){
-            human.setDad(presenter.getTree().get(dad_name));
-            presenter.getTree().get(dad_name).children.add(name);
-        }
+        presenter.addhuman(name, age, mom_name, dad_name);;
     }
     public void listInfo() {
         presenter.getListInfo();

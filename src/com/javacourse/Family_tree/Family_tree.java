@@ -1,5 +1,4 @@
 package com.javacourse.Family_tree;
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import com.javacourse.view.ConsoleUI;
 
 public class Family_tree {
     public static void main(String[] args) throws IOException{
-        Person me = new Person();
+        /*Person me = new Person();
         Person myDad = new Person();
         Person myMom = new Person();
         FamilyList<Person> mytree = new FamilyList<Person>();
@@ -30,7 +29,7 @@ public class Family_tree {
         mytree.add(me);
         mytree.sort_age();
 
-        mytree.print();
+        mytree.print();*/
 
         ConsoleUI consoleUI = new ConsoleUI();
         consoleUI.start();
