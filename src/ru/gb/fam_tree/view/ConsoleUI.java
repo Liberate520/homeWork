@@ -153,6 +153,7 @@ public class ConsoleUI implements View {
     }
 
     public void editHuman(){
+        flag = true;
         while (flag){
             long id = getId();
             printEditMenu();
@@ -389,7 +390,7 @@ public class ConsoleUI implements View {
                     divorceFlag = false;
                 } else {
                     System.out.println(INPUT_ERROR);
-                }
+                    }
             }else {
                 System.out.println(INPUT_ERROR);
             }
