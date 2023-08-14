@@ -9,7 +9,13 @@ public class GetHumansInfo extends Command {
     }
 
     @Override
-    public  void execute() {
+    public  void execute(String path) {
+
         super.getConsoleUI().getHumansInfo();
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

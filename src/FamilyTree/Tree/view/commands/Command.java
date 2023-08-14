@@ -2,8 +2,6 @@ package FamilyTree.Tree.view.commands;
 
 import FamilyTree.Tree.view.ConsoleUI;
 
-import java.io.Console;
-
 public abstract class Command {
     private String description;
     ConsoleUI consoleUI;
@@ -21,6 +19,8 @@ public abstract class Command {
     public String getDescription() {
         return description;
     }
+
+    public abstract void execute(String path);
 
     public abstract void execute();
 }

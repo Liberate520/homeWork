@@ -1,5 +1,6 @@
 package FamilyTree.Tree.model.HumanGroup.Human;
 
+import FamilyTree.Tree.model.HumanGroup.HumanGroup;
 import FamilyTree.Tree.model.HumanGroup.HumanGroupItem;
 
 
@@ -16,7 +17,10 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
     private String patronymic;
     private LocalDate dateOfBirth;
     private Gender gender;
+    private E mother;
+    private E father;
     private List<E> parents;
+    private List<E> childrens = new ArrayList<E>();
 
 
 
@@ -35,14 +39,6 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
         }
     }
 
-    public Human(int i, String name, String patronymic) {
-    }
-
-    public Human(E human) {
-    }
-
-    public Human(String name, String patronymic, int dateOfBirth) {
-    }
 
     public boolean addParent(E parent) {
         if (!parents.contains(parent)){
@@ -52,7 +48,7 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
         return false;
     }
 
-    public E getFather(){
+    public E getFather(Human<E> father){
         for (E parent: parents){
             if (parent.getGender() == Gender.Male){
                 return parent;
@@ -61,7 +57,7 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
         return null;
     }
 
-    public E getMother(){
+    public E getMother(Human<E> mother){
         for (E parent: parents){
             if (parent.getGender() == Gender.Female){
                 return parent;
@@ -69,10 +65,41 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
         }
         return null;
     }
+    public void setMother(E humanGroup){
+        if(mother==null || !mother.equals(humanGroup)) {
+            this.mother = humanGroup;
+            humanGroup.addChildren(this);
+            HumanGroup.addHuman(humanGroup);
+        }
 
-    public List<E> getChildren(){
-        return children;
     }
+    public void setFather(E humanGroup){
+        if(father==null || !father.equals(humanGroup)){
+            this.father = humanGroup;
+            humanGroup.addChildren(this);
+            HumanGroup.addHuman(humanGroup);
+        }
+
+    }
+
+
+
+    public void addChildren(E E){
+        if(!childrens.contains(E)){
+            this.childrens.add(E);
+            if (gender.equals("Женский")){
+                E.getMother(this);
+            }
+            if (gender.equals("Мужской")){
+                E.getFather(this);
+            }
+            HumanGroup.addHuman(E);
+        }
+
+
+    }
+
+
     public String getName() {
         return name;
     }
@@ -82,12 +109,13 @@ public class Human <E extends Human> implements Serializable, HumanGroupItem {
     public String getPatronymic(){
         return patronymic;
     }
-    public List<E> getParent() {
-        return parents;
+
+    @Override
+    public Comparable<Object> readSave() {
+        return null;
     }
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+
+
     public Gender getGender() {
         return gender;
     }

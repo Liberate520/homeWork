@@ -12,7 +12,12 @@ public class sortDateOfBirth extends Command {
 
 
     @Override
-    public void execute() {
+    public void execute(String path) {
         super.getConsoleUI().sortDateOfBirth();
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

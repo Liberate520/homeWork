@@ -23,14 +23,14 @@ public class ConsoleUI implements View{
     }
 
     @Override
-    public void start() {
+    public void start(String path, Service service, Presenter presenter) {
         header();
         while (work) {
             System.out.print("Выберите пункт Меню -> ");
             menuUi();
             String choice = scanner.nextLine();
             int choiceInt = Integer.parseInt(choice);
-            menu.execute(choiceInt);
+            menu.execute(choiceInt, path);
         }
     }
     private void header() {
@@ -56,11 +56,6 @@ public class ConsoleUI implements View{
         
     }
 
-    public void sortName() {
-        presenter.sortName();
-        
-    }
-
     public void getHumansInfo() {
         presenter.getHumansInfo();
     }
@@ -77,8 +72,37 @@ public class ConsoleUI implements View{
         System.out.println("Введите год рождения человека(****)");
         String dateOfBirthString = scanner.nextLine();
         int dateOfBirth = Integer.parseInt(dateOfBirthString);
-        presenter.addHumans(name, patronymic, dateOfBirth );
+        presenter.addHumans(name, patronymic, dateOfBirthString);
     }
+
+    public void addChildren() {
+        System.out.println("Введите имя кому хотите добавить ребенка");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию кому хотите добавить ребенка");
+        String patronymic = scanner.nextLine();
+        System.out.println("Введите год рождения человека(****)");
+        String dateOfBirthString = scanner.nextLine();
+        System.out.println("Введите имя ребенка");
+        String nameChildren = scanner.nextLine();
+        System.out.println("Введите фамилию ребенка");
+        String surnameChildren = scanner.nextLine();
+
+
+
+    }
+
+
+    public void addParent() {
+        System.out.println("Введите имя кому хотите добавить родителя");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию кому хотите добавить родителя");
+        String patronymic = scanner.nextLine();
+        System.out.println("Введите имя родителя");
+        String nameParent = scanner.nextLine();
+        System.out.println("Введите фамилию родителя");
+        String surnameParent = scanner.nextLine();
+    }
+
 
     @Override
     public void printAnswer(String answer) {
@@ -87,4 +111,10 @@ public class ConsoleUI implements View{
     }
 
 
+    public void saveFam(String path) {
+        presenter.saveFam(path);
+    }
+    public void readFam(Object path) {
+        presenter.readFam(path);
+    }
 }

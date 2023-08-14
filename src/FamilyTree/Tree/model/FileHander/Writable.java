@@ -5,9 +5,13 @@ import java.io.Serializable;
 public interface Writable {
 
 
-    void save(String path, Serializable obj);
+    static void save(String path) {
+    }
+
+    static void load(Object path) {
+    }
 
     Serializable load(String path);
 
-
+    void save(String path, Serializable obj);
 }
