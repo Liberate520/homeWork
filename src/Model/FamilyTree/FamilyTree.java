@@ -1,14 +1,14 @@
-package FamilyTree;
+package Model.FamilyTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import FamilyTree.Iterators.FamilyTreeIterator;
-import Human.Human;
-import Human.Comporators.HumanComparatorByAge;
-import Human.Comporators.HumanComparatorByName;
+import Model.FamilyTree.Iterators.FamilyTreeIterator;
+import Model.Human.Human;
+import Model.Human.Comporators.HumanComparatorByAge;
+import Model.Human.Comporators.HumanComparatorByName;
 
 public class FamilyTree<E extends FamilyItem<E>> implements Serializable,Iterable<E>{
     private long id;

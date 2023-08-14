@@ -1,8 +1,8 @@
-package Human.Comporators;
+package Model.Human.Comporators;
 
 import java.util.Comparator;
 
-import FamilyTree.FamilyItem;
+import Model.FamilyTree.FamilyItem;
 
 public class HumanComparatorByAge<E extends FamilyItem<E>> implements Comparator<E>{
     @Override

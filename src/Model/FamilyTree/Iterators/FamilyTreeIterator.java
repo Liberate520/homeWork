@@ -1,9 +1,9 @@
-package FamilyTree.Iterators;
+package Model.FamilyTree.Iterators;
 
 import java.util.Iterator;
 import java.util.List;
 
-import Human.Human;
+import Model.Human.Human;
 
 public class FamilyTreeIterator<E> implements Iterator<E>{
     private int index;

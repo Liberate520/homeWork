@@ -1,4 +1,4 @@
-package Human;
+package Model.Human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import FamilyTree.FamilyItem;
+import Model.FamilyTree.FamilyItem;
 
 public class Human implements Serializable,FamilyItem<Human>{
     private long id;
