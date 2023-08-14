@@ -9,7 +9,12 @@ public class Finish extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String path) {
         super.getConsoleUI().Finish();
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

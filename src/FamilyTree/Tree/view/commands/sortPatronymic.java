@@ -9,7 +9,12 @@ public class sortPatronymic extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String path) {
         super.getConsoleUI().sortPatronymic();
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

@@ -9,6 +9,11 @@ public class sortName extends Command {
     }
 
     @Override
-    public void execute(){super.getConsoleUI().sortDateOfBirth();
+    public void execute(String path){super.getConsoleUI().sortDateOfBirth();
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

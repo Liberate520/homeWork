@@ -12,12 +12,17 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
         commandList = new ArrayList<>();
+        commandList.add(new readFam(consoleUI));
         commandList.add(new addHumans(consoleUI));
+        commandList.add(new addChildren(consoleUI));
+        commandList.add(new addParent(consoleUI));
         commandList.add(new GetHumansInfo(consoleUI));
         commandList.add(new sortName(consoleUI));
         commandList.add(new sortPatronymic(consoleUI));
         commandList.add(new sortDateOfBirth(consoleUI));
+        commandList.add(new saveFam(consoleUI));
         commandList.add(new Finish(consoleUI));
+
     }
 
     public String menu() {
@@ -33,9 +38,9 @@ public class MainMenu {
     }
 
 
-    public void execute(int numCommand) {
+    public void execute(int numCommand, String path) {
         Command command = commandList.get(numCommand - 1);
-        command.execute();
+        command.execute(path);
     }
 
     public int size() {

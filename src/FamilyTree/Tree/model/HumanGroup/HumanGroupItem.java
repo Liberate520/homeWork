@@ -8,4 +8,5 @@ public interface HumanGroupItem<T>{
 
     String getPatronymic();
 
+    Comparable<Object> readSave();
 }

@@ -20,4 +20,9 @@ public class Dogs implements HumanGroupItem {
         return null;
     }
 
+    @Override
+    public Comparable<Object> readSave() {
+        return readSave();
+    }
+
 }
