@@ -69,10 +69,10 @@ public class ConsoleUI implements View {
         String choice = scanner.nextLine();
         ConnectionType key;
         switch (choice) {
-            case "1" -> key = ConnectionType.PARENT;
-            case "2" -> key = ConnectionType.CHILD;
-            case "3" -> key = ConnectionType.SIBLING;
-            case "4" -> key = ConnectionType.SPOUSE;
+            case "1" -> key = ConnectionType.values()[0];
+            case "2" -> key = ConnectionType.values()[1];
+            case "3" -> key = ConnectionType.values()[2];
+            case "4" -> key = ConnectionType.values()[3];
             default -> {
                 System.out.println(text.inputError);
                 return;

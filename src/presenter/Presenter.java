@@ -13,7 +13,7 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new Service<>(this);
+        this.service = new Service<>();
     }
 
     public void addPerson(Person person) {

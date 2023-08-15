@@ -5,7 +5,6 @@ import model.familyTree.Connections;
 import model.familyTree.FamilyTree;
 import model.familyTree.TreeNode;
 import model.readWrite.FileHandler;
-import presenter.Presenter;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,16 +12,10 @@ import java.util.Map;
 public class Service<T extends TreeNode<T>> {
     private FamilyTree<T> tree;
     private FileHandler fileHandler;
-    private Presenter presenter;
 
-    public Service(Presenter presenter, FamilyTree<T> familyTree) {
-        this.tree = familyTree;
+    public Service() {
+        this.tree = new FamilyTree<>();
         this.fileHandler = new FileHandler();
-        this.presenter = presenter;
-    }
-
-    public Service(Presenter presenter) {
-        this(presenter, new FamilyTree<>());
     }
 
     public void addPerson(T person) {
