@@ -1,17 +1,13 @@
 package presenter;
 
 import model.familyTree.ConnectionType;
-import model.familyTree.Connections;
 import model.person.Person;
 import model.service.Service;
 import view.View;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
 
-public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>>> {
+public class Presenter {
     private View view;
     private Service<Person> service;
 
@@ -46,11 +42,6 @@ public class Presenter implements Iterable<Map.Entry<Person, Connections<Person>
 
     public String printTreeConnections() {
         return service.printTreeConnections();
-    }
-
-    @Override
-    public Iterator<Map.Entry<Person, Connections<Person>>> iterator() {
-        return service.iterator();
     }
 
     public String printTree() {
