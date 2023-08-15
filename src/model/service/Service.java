@@ -8,10 +8,9 @@ import model.readWrite.FileHandler;
 import presenter.Presenter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
-public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Connections<T>>> {
+public class Service<T extends TreeNode<T>> {
     private FamilyTree<T> tree;
     private FileHandler fileHandler;
     private Presenter presenter;
@@ -59,11 +58,6 @@ public class Service<T extends TreeNode<T>> implements Iterable<Map.Entry<T, Con
         if (sb.toString().isBlank())
             return "Список пока пуст. Попробуйте загрузить из файла, или добавить людей.\n";
         return sb.toString();
-    }
-
-    @Override
-    public Iterator<Map.Entry<T, Connections<T>>> iterator() {
-        return tree.iterator();
     }
 
     public String printTree() {
