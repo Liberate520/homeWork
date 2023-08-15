@@ -166,15 +166,11 @@ public class Service {
 
         public String printFamilyTree() {
         StringBuilder strBuilder = new StringBuilder();
-        try {
         strBuilder.append("Семейное древо:");
         strBuilder.append("\n");
         for (Human human : familyTree) {
             strBuilder.append(human);
             strBuilder.append("\n");
-        }
-        } catch(NullPointerException e) {
-    }
         return strBuilder.toString();
     }
 }
