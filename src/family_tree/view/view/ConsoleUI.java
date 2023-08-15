@@ -179,8 +179,6 @@ public class ConsoleUI implements View{
         if(!presenter.saveFile(filePath)) {
             System.out.println("Невозможно сохранить объект");
             System.out.println("Введите корректный путь");
-        } else {
-            presenter.saveFile(filePath);
         }
     }
 
