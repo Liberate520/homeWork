@@ -7,11 +7,11 @@ public class Human implements Serializable {
     private Gender gender;
     private Human Father;
     private Human Mather;
-    private String children;
+    private Human children;
     private LocalDate birthday;
     private LocalDate deathday;
 
-    public Human(String name, Gender gender, Human Father, Human Mather, String children, LocalDate birthday, LocalDate deathday) {
+    public Human(String name, Gender gender, Human Father, Human Mather, Human children, LocalDate birthday, LocalDate deathday) {
         this.name = name;
         this.gender = gender;
         this.Father = Father;
@@ -41,7 +41,7 @@ public class Human implements Serializable {
         return Mather;
     }
 
-    public String getChildren() {
+    public Human getChildren() {
         return children;
     }
 

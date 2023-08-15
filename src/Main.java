@@ -11,11 +11,13 @@ public class Main  {
         Human Irina = new Human("Irina");
 
 
-        service.addFamily("Igor", Gender.Male, null, null, "Irina", LocalDate.of(1977, 4, 6), null);
+        service.addFamily("Igor", Gender.Male, null, null, Irina, LocalDate.of(1977, 4, 6), null);
 
-        service.addFamily("Olga", Gender.Female, null, null, "Irina", LocalDate.of(1978, 4, 6), null);
+        service.addFamily("Olga", Gender.Female, null, null, Irina, LocalDate.of(1978, 4, 6), null);
 
         service.addFamily("Irina", Gender.Female, Igor, Olga, null, LocalDate.of(1999, 4, 6), null);
+
+
         System.out.println(service.getInfo());
 
 

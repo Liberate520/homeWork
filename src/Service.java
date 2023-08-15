@@ -8,7 +8,7 @@ public class Service {
 
     }
 
-    void addFamily(String name, Gender gender, Human Father, Human Mather, String children, LocalDate birthday, LocalDate deathday){
+    void addFamily(String name, Gender gender, Human Father, Human Mather, Human children, LocalDate birthday, LocalDate deathday){
         Human member = new Human(name, gender, Father, Mather, children, birthday, deathday);
         familyList.familyAdd(member);
     }
