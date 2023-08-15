@@ -14,8 +14,8 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
-    private boolean flag;
-    public boolean flag2;
+    private boolean EditMenuFlag;
+    public boolean getIdFlag;
     private MainMenu menu;
     private EditMenu editMenu;
 
@@ -24,8 +24,6 @@ public class ConsoleUI implements View {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
-        flag = true;;
-        flag2 = false;
         menu = new MainMenu(this);
         editMenu = new EditMenu(this);
     }
@@ -70,7 +68,7 @@ public class ConsoleUI implements View {
                 gender = Gender.Male;
                 flag1 = false;
             } else {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
         while (flag2) {
@@ -82,11 +80,10 @@ public class ConsoleUI implements View {
                 flag2 = false;
             }
             catch(DateTimeParseException e){
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
-        Human human = new Human(name, gender, birthDate);
-        presenter.addHuman(human);
+        presenter.addHuman(name, gender, birthDate);
     }
 
     public void getHumansInfo(){
@@ -153,8 +150,8 @@ public class ConsoleUI implements View {
     }
 
     public void editHuman(){
-        flag = true;
-        while (flag){
+        EditMenuFlag = true;
+        while (EditMenuFlag){
             long id = getId();
             printEditMenu();
             editMenuExecute(id);
@@ -176,20 +173,21 @@ public class ConsoleUI implements View {
     }
 
     public long getId(){
-        flag2 = true;
+        getIdFlag = true;
         long id = -1;
-        while (flag2){
+        while (getIdFlag){
             presenter.getHumansInfo();
-            System.out.println("Enter the id of the person you want to edit:");
+            System.out.println("Enter the id of the person you want to edit(or enter -1 to return in main menu):");
             String line = scanner.nextLine();
             if (checkTextForInt(line)){
                 id = Long.parseLong(line);
                 if(id < getLastId() && id > -1){
-                    flag2 = false;
-
-                }
-                else{
-                    System.out.println(INPUT_ERROR);
+                    getIdFlag = false;
+                } else if (id == -1) {
+                    getIdFlag = false;
+                    EditMenuFlag = false;
+                } else{
+                    inputError();
                 }
             }
         }
@@ -223,7 +221,7 @@ public class ConsoleUI implements View {
                 genderFlag = false;
                 presenter.setGender(id, gender);
             } else {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
 
@@ -240,7 +238,7 @@ public class ConsoleUI implements View {
                 birthDate = LocalDate.parse(bdate, dateTimeFormatter);
                 bdateflag = false;
             } catch (DateTimeParseException e) {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
         presenter.setBirthDate(id, birthDate);
@@ -259,7 +257,7 @@ public class ConsoleUI implements View {
                     ddateflag = false;
                 }
             } catch (DateTimeParseException e) {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
         presenter.setDeathDate(id, deathDate);
@@ -286,13 +284,13 @@ public class ConsoleUI implements View {
                         presenter.setMother(idChild, idMother);
                         motherFlag = false;
                     } else{
-                            System.out.println(INPUT_ERROR);
+                        inputError();
                     }
                 } else {
-                    System.out.println(INPUT_ERROR);
+                    inputError();
                 }
             }else {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
     }
@@ -314,13 +312,13 @@ public class ConsoleUI implements View {
                         presenter.setFather(idChild, idFather);
                         fatherFlag = false;
                     } else{
-                        System.out.println(INPUT_ERROR);
+                        inputError();
                     }
                 } else {
-                    System.out.println(INPUT_ERROR);
+                    inputError();
                 }
             }else {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
     }
@@ -337,10 +335,10 @@ public class ConsoleUI implements View {
                     presenter.setChild(idParent, idChild);
                     childFlag = false;
                     }else {
-                        System.out.println(INPUT_ERROR);
+                        inputError();
                     }
                 } else {
-                    System.out.println(INPUT_ERROR);
+                    inputError();
                 }
             }
         }
@@ -358,13 +356,13 @@ public class ConsoleUI implements View {
                         presenter.setWedding(id1, id2);
                         weddingFlag = false;
                     }else {
-                        System.out.println(INPUT_ERROR);
+                        inputError();
                     }
                 }else {
-                    System.out.println(INPUT_ERROR);
+                    inputError();
                 }
             }else {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
     }
@@ -389,17 +387,17 @@ public class ConsoleUI implements View {
                     presenter.setDivorce(id1, id2);
                     divorceFlag = false;
                 } else {
-                    System.out.println(INPUT_ERROR);
+                    inputError();
                     }
             }else {
-                System.out.println(INPUT_ERROR);
+                inputError();
             }
         }
     }
 
     public void finishEditMenu(){
         System.out.println("Back to main menu...");
-        flag = false;
+        EditMenuFlag = false;
     }
 
     private boolean checkCommandEditMenu(int numCommand){

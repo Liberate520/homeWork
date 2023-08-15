@@ -19,7 +19,8 @@ public class Service {
         fileHandler = new FileHandler();
     }
 
-    public boolean addHuman(Human human){
+    public boolean addHuman(String name, Gender gender, LocalDate birthdate){
+        Human human = new Human(name, gender, birthdate);
         return famTree.add(human);
     }
 
