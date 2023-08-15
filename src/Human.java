@@ -21,6 +21,10 @@ public class Human implements Serializable {
         this.deathday = deathday;
     }
 
+    public Human(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

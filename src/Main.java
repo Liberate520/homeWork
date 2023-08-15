@@ -4,17 +4,34 @@ import java.time.LocalDate;
 public class Main  {
 
     public static void main(String[] args) {
+
+        Service service = new Service();
+        Human Igor = new Human("Igor");
+        Human Olga = new Human("Olga");
+        Human Irina = new Human("Irina");
+
+
+        service.addFamily("Igor", Gender.Male, null, null, "Irina", LocalDate.of(1977, 4, 6), null);
+
+        service.addFamily("Olga", Gender.Female, null, null, "Irina", LocalDate.of(1978, 4, 6), null);
+
+        service.addFamily("Irina", Gender.Female, Igor, Olga, null, LocalDate.of(1999, 4, 6), null);
+        System.out.println(service.getInfo());
+
+
+/*
+
+
+
         String filePath = "src/person.out";
         FileHandler fileHandler = new FileHandler();
 
-
-       //FamilyTree family = testFamily();
+       FamilyTree family = testFamily();
        //System.out.println(family.getFamilyList());
 
        //fileHandler.save(family, filePath);
-
-        FamilyTree family = (FamilyTree) fileHandler.read(filePath);
-       System.out.println(family.getFamilyList());
+       // FamilyTree family = (FamilyTree) fileHandler.read(filePath);
+       //System.out.println(family.getFamilyList());
 
     }
         static  FamilyTree testFamily() {
@@ -22,11 +39,12 @@ public class Main  {
             FamilyTree family = new FamilyTree();
 
             //создал семью
-            Human Igor = new Human("Igor", Gender.Мужской, null, null, "Irina", LocalDate.of(1977, 4, 6), null);
-            Human Olga = new Human("Olga", Gender.Женский, null, null, "Irina", LocalDate.of(1978, 4, 6), null);
-            Human Irina = new Human("Irina", Gender.Женский, Igor, Olga, null, LocalDate.of(1999, 4, 6), null);
+            Human Igor = new Human("Igor", Gender.Male, null, null, "Irina", LocalDate.of(1977, 4, 6), null);
+            Human Olga = new Human("Olga", Gender.Female, null, null, "Irina", LocalDate.of(1978, 4, 6), null);
+            Human Irina = new Human("Irina", Gender.Female, Igor, Olga, null, LocalDate.of(1999, 4, 6), null);
 
             // добавил семью в семейное древо
+
             family.familyAdd(Igor);
             family.familyAdd(Olga);
             family.familyAdd(Irina);
@@ -34,7 +52,10 @@ public class Main  {
             family.familyInfo();
 
 
+
+
             return family;
+             */
         }
 
 
