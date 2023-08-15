@@ -11,14 +11,15 @@ import FamilyTree.Tree.view.View;
 public class Main {
 
 
-    private static String path;
 
+    private static String path;
     public static void main(String[] args)  {
 
         View view = new ConsoleUI();
         Service service = new Service();
         Presenter presenter = new Presenter(view, service);
-        
+
+
         view.start(path, service,presenter);
     }
 
