@@ -17,6 +17,8 @@ public class ActionMenu {
                                                 new AddFamilyMember(consoleUserInterface),
                                                 new SortFamilyTreeByName(consoleUserInterface),
                                                 new SortFamilyTreeByBirthDate(consoleUserInterface),
+                                                new ReadFamilyTreeFromFile(consoleUserInterface),
+                                                new WriteFamilyTreeToFile(consoleUserInterface),
                                                 new Exit(consoleUserInterface)));
     }
     

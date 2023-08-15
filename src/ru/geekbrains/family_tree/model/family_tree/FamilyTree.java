@@ -38,8 +38,15 @@ public class FamilyTree<E extends FamilyMember> implements Iterable<E>, Serializ
     }
 
     /**
-     * Возвращает true, если семейное древо не содержит людей, и false, если
-     * содержит.
+     * Возвращает количество членов семьи.
+     */
+    public int getSize() {
+        return familyMembers.size();
+    }
+
+    /**
+     * Возвращает true, если семейное древо не содержит членов семьи, и false,
+     * если содержит.
      */
     public boolean isEmpty() {
         return familyMembers.isEmpty();

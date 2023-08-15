@@ -8,6 +8,6 @@ public interface Writer {
     /**
      * Записывает данные в объект.
      */
-    void write(Object object);
+    void write(Object object) throws Exception;
 
 }

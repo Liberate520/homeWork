@@ -8,6 +8,6 @@ public interface Reader {
     /**
      * Возвращает прочитанные данные.
      */
-    Object read();
+    Object read() throws Exception;
 
 }

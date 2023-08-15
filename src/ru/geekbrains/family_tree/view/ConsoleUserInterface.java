@@ -93,7 +93,8 @@ public class ConsoleUserInterface implements UserInterface {
 
     /**
      * Добавляет человека в семейное древо или выводит информационное
-     * сообщение, если данные введены неверно.
+     * сообщение, если данные введены неверно или человек уже существует в
+     * семейном древе.
      */
     public void addFamilyMember() {
         print("Введите имя человека.");
@@ -142,6 +143,22 @@ public class ConsoleUserInterface implements UserInterface {
      */
     public void sortFamilyTreeByBirthDate() {
         presenter.sortFamilyTreeByBirthDate();
+    }
+
+    /**
+     * Читает семейное древо из файла или выводит информационное сообщение,
+     * если произошла ошибка при чтении данных из файла.
+     */
+    public void readFamilyTreeFromFile() {
+        presenter.readFamilyTreeFromFile();
+    }
+
+    /**
+     * Записывает семейное древо в файл или выводит информационное сообщение,
+     * если произошла ошибка при записи данных в файл.
+     */
+    public void writeFamilyTreeToFile() {
+        presenter.writeFamilyTreeToFile();
     }
 
     /**

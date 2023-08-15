@@ -22,21 +22,15 @@ public class FileReader implements Reader {
     }
     
     /**
-     * Возвращает прочитанные из файла данные или выводит информационное
-     * сообщение, если произошла ошибка при работе с файлами.
+     * Возвращает прочитанные из файла данные.
      */
     @Override
-    public Object read() {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(
-                                                  new FileInputStream(file));
-            Object object = objectInputStream.readObject();
-            objectInputStream.close();
-            return object;
-        } catch (Exception exception) {
-            System.out.println("Произошла ошибка при работе с файлами.");
-            return null;
-        }
+    public Object read() throws Exception {
+        ObjectInputStream objectInputStream = new ObjectInputStream(
+                                              new FileInputStream(file));
+        Object object = objectInputStream.readObject();
+        objectInputStream.close();
+        return object;
     }
 
 }

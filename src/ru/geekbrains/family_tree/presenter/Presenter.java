@@ -35,8 +35,8 @@ public class Presenter {
     }
 
     /**
-     * Добавляет человека в семейное древо и возвращает true или возвращает
-     * false, если человек уже существует в семейном древе.
+     * Добавляет человека в семейное древо или выводит информационное
+     * сообщение, если человек уже существует в семейном древе.
      */
     public void addFamilyMember(String name, String surname, Sex sex,
                                 LocalDate birthDate) {
@@ -60,6 +60,34 @@ public class Presenter {
      */
     public void sortFamilyTreeByBirthDate() {
         service.sortFamilyTreeByBirthDate();
+    }
+
+    /**
+     * Читает семейное древо из файла или выводит информационное сообщение,
+     * если произошла ошибка при чтении данных из файла.
+     */
+    public void readFamilyTreeFromFile() {
+        if (service.readFamilyTreeFromFile()) {
+            userInterface.print("Семейное древо прочитано из файла.\n");
+        }
+        else {
+            userInterface.print("Произошла ошибка при чтении семейного древа" +
+                                " из файла.\n");
+        }
+    }
+
+    /**
+     * Записывает семейное древо в файл или выводит информационное сообщение,
+     * если произошла ошибка при записи данных в файл.
+     */
+    public void writeFamilyTreeToFile() {
+        if (service.writeFamilyTreeToFile()) {
+            userInterface.print("Семейное древо записано в файл.\n");
+        }
+        else {
+            userInterface.print("Прозошла ошибка при записи семейного древа " +
+                                "в файл.\n");
+        }
     }
     
 }

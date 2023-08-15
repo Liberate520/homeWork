@@ -23,15 +23,11 @@ public class FileWriter implements Writer {
      * произошла ошибка при работе с файлами.
      */
     @Override
-    public void write(Object object) {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                                                    new FileOutputStream(file));
-            objectOutputStream.writeObject(object);
-            objectOutputStream.close();
-        } catch (Exception exception) {
-            System.out.println("Произошла ошибка при работе с файлами.");
-        }
+    public void write(Object object) throws Exception {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                                                new FileOutputStream(file));
+        objectOutputStream.writeObject(object);
+        objectOutputStream.close();
     }
 
 }
