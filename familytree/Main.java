@@ -1,45 +1,28 @@
 package homeWork.familytree;
 
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTreeModel model = new FamilyTreeModelImpl();
-        FamilyTreeView view = new FamilyTreeViewImpl();
-        FamilyTreePresenter presenter = new FamilyTreePresenterImpl(model, view);
+        FamilyTree tree = new Tree();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice;
+        FamilyMember john = new FamilyMember("John", LocalDate.of(1980, 5, 15));
+        FamilyMember mary = new FamilyMember("Mary", LocalDate.of(1982, 8, 20));
 
-        do {
-            view.displayMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine();
+        john.addChild(new FamilyMember("Alice", LocalDate.of(2005, 3, 10)));
+        mary.addChild(new FamilyMember("Bob", LocalDate.of(2008, 9, 5)));
 
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter date of birth (yyyy-MM-dd): ");
-                    String dateOfBirth = scanner.nextLine();
-                    System.out.print("Enter gender (MALE or FEMALE): ");
-                    String genderStr = scanner.nextLine();
-                    Human.Gender gender = Human.Gender.valueOf(genderStr.toUpperCase());
+        tree.addMember(john);
+        tree.addMember(mary);
 
-                    presenter.onAddMember(name, dateOfBirth, gender);
-                    break;
-                case 2:
-                    presenter.onDisplayFamilyTree();
-                    break;
-                // Add more operations as needed
-                case 0:
-                    System.out.println("Exiting Family Tree Application.");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+        List<FamilyMember> members = tree.getAllMembers();
+        for (FamilyMember member : members) {
+            System.out.println("Name: " + member.getName());
+            List<FamilyMember> children = tree.getChildren(member.getName());
+            for (FamilyMember child : children) {
+                System.out.println("- Child: " + child.getName());
             }
-        } while (choice != 0);
-
-        scanner.close();
+        }
     }
 }

@@ -2,27 +2,35 @@ package homeWork.familytree;
 
 import java.util.*;
 
-public class Tree<T> implements Iterable<T> {
-    private Map<String, T> members;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Tree implements FamilyTree {
+    private List<FamilyMember> members;
 
     public Tree() {
-        members = new HashMap<>();
+        members = new ArrayList<>();
     }
-
-    public void addMember(String key, T member) {
-        members.put(key, member);
-    }
-
-    // Other methods and iterator implementation...
 
     @Override
-    public Iterator<T> iterator() {
-        return members.values().iterator();
+    public void addMember(FamilyMember member) {
+        members.add(member);
     }
 
-    // Method to get all members as a list
-    public List<T> getAllMembers() {
-        return new ArrayList<>(members.values());
+    @Override
+    public List<FamilyMember> getAllMembers() {
+        return new ArrayList<>(members);
+    }
+
+    @Override
+    public List<FamilyMember> getChildren(String parentName) {
+        List<FamilyMember> children = new ArrayList<>();
+        for (FamilyMember member : members) {
+            if (member.getName().equals(parentName)) {
+                children.addAll(member.getChildren());
+            }
+        }
+        return children;
     }
 }
 
