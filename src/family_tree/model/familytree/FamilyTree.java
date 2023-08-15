@@ -6,12 +6,13 @@ import family_tree.model.comparators.ComparatorByName;
 import family_tree.model.human.HumanIterator;
 import family_tree.model.subject.Subject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree<E extends Subject> implements Iterable<E> {
+public class FamilyTree<E extends Subject> implements Serializable, Iterable<E> {
     private List<E> familyTree;
 
     public FamilyTree() {

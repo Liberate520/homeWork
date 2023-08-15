@@ -1,18 +1,25 @@
 package family_tree.model.service;
 
 import family_tree.model.familytree.FamilyTree;
+import family_tree.model.file_methods.FileHandler;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
     public FamilyTree<Human> familyTree;
+    public FileHandler fileHandler;
     private int id = 1;
 
     public Service() {
         familyTree = new FamilyTree<>();
+        fileHandler = new FileHandler();
     }
 
     public void addHuman(String name, LocalDate birthDate, LocalDate deathDate, Gender gender) {
@@ -134,14 +141,40 @@ public class Service {
         familyTree.sortByName();
     }
 
-    public String printFamilyTree() {
+    public boolean saveFile(String filePath) {
+        boolean trySave;
+        try {
+            fileHandler.writeFamilyTree(familyTree, filePath);
+            trySave = true;
+        } catch (IOException e) {
+            trySave = false;
+        }
+        return trySave;
+    }
+
+    public boolean loadFile(String filePath) {
+        boolean tryLoad = true;
+        Serializable loadFile;
+        try {
+            loadFile = fileHandler.readFamilyTree(filePath);
+            familyTree = (FamilyTree<Human>) loadFile;
+        } catch (IOException | ClassNotFoundException e) {
+            tryLoad = false;
+        }
+        return tryLoad;
+    }
+
+        public String printFamilyTree() {
         StringBuilder strBuilder = new StringBuilder();
+        try {
         strBuilder.append("Семейное древо:");
         strBuilder.append("\n");
         for (Human human : familyTree) {
             strBuilder.append(human);
             strBuilder.append("\n");
         }
+        } catch(NullPointerException e) {
+    }
         return strBuilder.toString();
     }
 }

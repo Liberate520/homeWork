@@ -5,6 +5,8 @@ import family_tree.model.human.Human;
 import family_tree.model.service.Service;
 import family_tree.view.view.View;
 
+import java.io.EOFException;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -66,5 +68,13 @@ public class Presenter {
 
     public List<String> showSiblingName(int id) {
         return service.getSiblingName(id);
+    }
+
+    public boolean saveFile(String filePath) {
+        return service.saveFile(filePath);
+    }
+
+    public boolean loadFile(String filePath) {
+        return service.loadFile(filePath);
     }
 }

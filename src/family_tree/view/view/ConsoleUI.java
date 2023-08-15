@@ -3,7 +3,6 @@ package family_tree.view.view;
 import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
 import family_tree.view.commands.TreeMenu;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -172,6 +171,29 @@ public class ConsoleUI implements View{
             }
         }
         return result;
+    }
+
+    public void saveFile() {
+        System.out.println("Введите полный путь и имя файла");
+        String filePath = scanner.nextLine();
+        if(!presenter.saveFile(filePath)) {
+            System.out.println("Невозможно сохранить объект");
+            System.out.println("Введите корректный путь");
+        } else {
+            presenter.saveFile(filePath);
+        }
+    }
+
+    public void loadFile() {
+        System.out.println("Введите полный путь и имя файла");
+        String filePath = scanner.nextLine();
+        if(!presenter.loadFile(filePath)){
+            System.out.println("Невозможно загрузть объект");
+            System.out.println("Введите корректный путь");
+        }
+        else {
+            presenter.showFamilyTree();
+        }
     }
 
     @Override

@@ -23,6 +23,8 @@ public class TreeMenu {
         commandsList.add(new SortByAge(console));
         commandsList.add(new SortByGender(console));
         commandsList.add(new ShowFamilyTree(console));
+        commandsList.add(new SaveFile(console));
+        commandsList.add(new LoadFile(console));
         commandsList.add(new Finish(console));
     }
 
