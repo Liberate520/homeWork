@@ -47,7 +47,7 @@ public class ConsoleUI implements View {
         String patronymic = scanner.nextLine();
 
         printPrompts(text.promptGender);
-        Gender gender = (scanner.nextLine().equals("1")) ? Gender.MALE : Gender.FEMALE;
+        Gender gender = (scanner.nextLine().equals("1")) ? Gender.values()[0] : Gender.values()[1];
 
         System.out.println(text.promptDateBirth);
         LocalDate dateBirth = inputDate();
@@ -55,7 +55,7 @@ public class ConsoleUI implements View {
         System.out.println(text.promptDateDeath);
         LocalDate dateDeath = inputDate();
 
-        presenter.addPerson(new Person(name, surname, patronymic, gender, dateBirth, dateDeath));
+        presenter.addPerson(name, surname, patronymic, gender, dateBirth, dateDeath);
     }
 
     public void putConnection(boolean twoWay) {

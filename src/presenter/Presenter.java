@@ -1,10 +1,12 @@
 package presenter;
 
 import model.familyTree.ConnectionType;
+import model.person.Gender;
 import model.person.Person;
 import model.service.Service;
 import view.View;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Presenter {
@@ -16,8 +18,13 @@ public class Presenter {
         this.service = new Service<>();
     }
 
-    public void addPerson(Person person) {
-        service.addPerson(person);
+    public void addPerson(String name,
+                          String surname,
+                          String patronymic,
+                          Gender gender,
+                          LocalDate dateBirth,
+                          LocalDate dateDeath) {
+        service.addPerson(name, surname, patronymic, gender, dateBirth, dateDeath);
     }
 
     public void putConnection(Person connectFrom, ConnectionType key, Person connectTo) {

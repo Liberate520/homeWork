@@ -4,8 +4,11 @@ import model.familyTree.ConnectionType;
 import model.familyTree.Connections;
 import model.familyTree.FamilyTree;
 import model.familyTree.TreeNode;
+import model.person.Gender;
+import model.person.Person;
 import model.readWrite.FileHandler;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -18,8 +21,13 @@ public class Service<T extends TreeNode<T>> {
         this.fileHandler = new FileHandler();
     }
 
-    public void addPerson(T person) {
-        tree.addPerson(person);
+    public void addPerson(String name,
+                          String surname,
+                          String patronymic,
+                          Gender gender,
+                          LocalDate dateBirth,
+                          LocalDate dateDeath) {
+        tree.addPerson((T) new Person(name, surname, patronymic, gender, dateBirth, dateDeath));
     }
 
     public void oneWayConnection(T connectFrom, ConnectionType key, T connectTo) {
