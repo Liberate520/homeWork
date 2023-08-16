@@ -53,7 +53,7 @@ public class Service {
         if(checkId(id1) && checkId(id2)){
             Human human1 = famTree.getById(id1);
             Human human2 = famTree.getById(id2);
-            setDivorce(human1, human2);
+            famTree.setDivorce(human1, human2);
         }
     }
 

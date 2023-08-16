@@ -184,7 +184,7 @@ public class Human implements FamilyTreeItem<Human>, Serializable, Comparable<Hu
     public String getSpouseInfo(){
         String res = "spouse: ";
         if(spouse == null){
-            res += "нет";
+            res += "none";
         }
         else {
             res += spouse.getName();
