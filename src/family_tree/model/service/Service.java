@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
 import family_tree.model.human.Kinship;
-import family_tree.model.save_file.FileHandler;
+import family_tree.model.save_file.FileHandlerInnterface;
 import family_tree.model.tree.FamilyTree;
 
 public class Service implements Serializable{
@@ -14,12 +14,12 @@ public class Service implements Serializable{
     private String path;
 
     private ConvertListToString<Human> convertListToString;
-    private FileHandler<FamilyTree<Human, Kinship>> fileHandler;
+    private FileHandlerInnterface<FamilyTree<Human, Kinship>> fileHandler;
     private FamilyTree<Human, Kinship> familyTree;
 
-    public Service(String path){
+    public Service(String path, FileHandlerInnterface<FamilyTree<Human, Kinship>> fileHandler){
         this.convertListToString = new ConvertListToString<>();
-        this.fileHandler = new FileHandler<>();
+        this.fileHandler = fileHandler;
         this.familyTree = new FamilyTree<>();
         this.path = path;
     }

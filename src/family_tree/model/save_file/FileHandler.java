@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class FileHandler<E> implements Writable<E>, Readable<E> {
+public class FileHandler<E> implements FileHandlerInnterface<E> {
 
     @Override
     public boolean writeToFile(E file, String path) throws IOException{

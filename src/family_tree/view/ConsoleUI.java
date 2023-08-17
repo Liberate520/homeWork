@@ -1,6 +1,8 @@
 package family_tree.view;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import family_tree.presenter.Presenter;
 import family_tree.view.menu.MainMenu;
@@ -112,17 +114,12 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkDate(String data) {
-        String[] temp = data.split("-");
-        if (temp.length < 3) {
-            inputError();
-            return false;
+        Pattern pattern = Pattern.compile("(\\d{4})[-](0?[1-9]|1[012])[-](0?[1-9]|[12][0-9]|3[01])$");
+        Matcher matcher = pattern.matcher(data);
+        if (matcher.find()) {
+            return true;
         }
-        for (int i = 0; i < temp.length; i++) {
-            if (!checkTextForInt(temp[i])) {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 
     private void hello() {

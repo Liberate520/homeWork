@@ -1,9 +1,12 @@
 package family_tree.presenter;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import family_tree.model.human.Gender;
 import family_tree.model.human.Kinship;
+import family_tree.model.save_file.FileHandler;
 import family_tree.model.service.Service;
 import family_tree.view.View;
 
@@ -13,7 +16,7 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new Service("family.out");
+        this.service = new Service("homeWorkJavaOOP\\family.out", new FileHandler<>());
     }
 
     public void addHuman(String name, String surName, String patronymic, String gender, String dateOfBirth,
@@ -25,7 +28,9 @@ public class Presenter {
     }
 
     private LocalDate convertLocalDate(String locaDate) {
-        if (locaDate != null) {
+        Pattern pattern = Pattern.compile("(\\d{4})[-](0?[1-9]|1[012])[-](0?[1-9]|[12][0-9]|3[01])$");
+        Matcher matcher = pattern.matcher(locaDate);
+        if (matcher.find()) {
             return LocalDate.parse(locaDate);
         }
         return null;
