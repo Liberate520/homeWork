@@ -5,7 +5,13 @@ import homeWork.family_tree.view.ConsoleUI;
 public class SortByBirthDate extends Command {
 
     public SortByBirthDate(ConsoleUI consoleUI) {
-        super("Отсортировать по возрасту", consoleUI);
+
+        super(consoleUI);
+    }
+
+    @Override
+    public String getDescription() {
+        return "Отсортировать по возрасту";
     }
 
     public void execute() {

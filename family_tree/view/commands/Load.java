@@ -2,20 +2,18 @@ package homeWork.family_tree.view.commands;
 
 import homeWork.family_tree.view.ConsoleUI;
 
-public class Finish extends Command {
-
-    public Finish(ConsoleUI consoleUI) {
+public class Load extends Command {
+    public Load(ConsoleUI consoleUI) {
         super(consoleUI);
     }
 
     @Override
     public String getDescription() {
-        return "Закончить работу";
+        return "Загрузить семью";
     }
 
     @Override
     public void execute() {
-        getConsoleUI().finish();
+        getConsoleUI().loadFamily();
     }
-
 }

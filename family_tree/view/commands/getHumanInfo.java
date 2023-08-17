@@ -5,7 +5,13 @@ import homeWork.family_tree.view.ConsoleUI;
 public class getHumanInfo extends Command {
 
     public getHumanInfo(ConsoleUI consoleUI) {
-        super("Получить список членов семьи", consoleUI);
+
+        super(consoleUI);
+    }
+
+    @Override
+    public String getDescription() {
+        return "Получить список членов семьи";
     }
 
     public void execute() {

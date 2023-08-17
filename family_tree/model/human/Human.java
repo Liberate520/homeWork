@@ -11,7 +11,7 @@ import java.util.List;
 public class Human implements Serializable, TreeNode<Human> {
     private long id;
     private final String name;
-    private final Gender gender;
+    private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Human> parents;
@@ -25,10 +25,10 @@ public class Human implements Serializable, TreeNode<Human> {
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         parents = new ArrayList<>();
-        if (father != null){
+        if (father != null) {
             parents.add(father);
         }
-        if (mother != null){
+        if (mother != null) {
             parents.add(mother);
         }
         children = new ArrayList<>();
@@ -41,73 +41,91 @@ public class Human implements Serializable, TreeNode<Human> {
     public Human(String name, Gender gender, LocalDate birthDate, Human father, Human mother) {
         this(name, gender, birthDate, null, father, mother);
     }
+
+
     public boolean addChild(Human child) {
-        if (!children.contains(child)){
+        if (!children.contains(child)) {
             children.add(child);
             return true;
         }
         return false;
     }
+
     public boolean addParent(Human parent) {
-        if (!children.contains(parent)){
+        if (!children.contains(parent)) {
             children.add(parent);
             return true;
         }
         return false;
     }
 
-    public Human getFather; {
-        for (Human parent : parents){
-            if (parent.getGender() == Gender.Male){
-            }
-        }
-
-    }
-    public Human getMother; {
-        for (Human parent : parents) {
-            if (parent.getGender() == Gender.Female) {
-
-            }
-        }
-    }
-    public int getAge(){
-        if (deathDate == null){
+    public int getAge() {
+        if (deathDate == null) {
             return getPeriod(birthDate, LocalDate.now());
-        }
-        else {
+        } else {
             return getPeriod(birthDate, deathDate);
         }
     }
-    private int getPeriod(LocalDate birthDate, LocalDate deathDate){
-        Period diff = Period.between(birthDate,deathDate);
+
+    private int getPeriod(LocalDate birthDate, LocalDate deathDate) {
+        Period diff = Period.between(birthDate, deathDate);
         return diff.getYears();
     }
-    public void setSpouse(Human spouse) {this.spouse = spouse;}
 
-    public Human getSpouse() {return spouse;}
+    public void setSpouse(Human spouse) {
+        this.spouse = spouse;
+    }
 
-    public String getName() {return name;}
+    public Human getSpouse() {
+        return spouse;
+    }
 
-    public long getId() {return id;}
+    public String getName() {
+        return name;
+    }
 
-    public void setId(long id) {this.id = id;}
+    public long getId() {
+        return id;
+    }
 
-    public LocalDate getBirthDate() {return birthDate;}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public LocalDate getDeathDate() {return deathDate;}
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
-    public List<Human> getParents() {return parents;}
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
 
-    public List<Human> getChildren() {return children;}
+    public List<Human> getParents() {
+        return parents;
+    }
 
-    public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
+    public List<Human> getChildren() {
+        return children;
+    }
 
-    public void setDeathDate(LocalDate deathDate) {this.deathDate = deathDate;}
-    public Gender getGender(){return gender;}
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
 
     @Override
-    public String toString() {return getInfo();}
-    public String getInfo(){
+    public String toString() {
+        return getInfo();
+    }
+
+    public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("id: ");
         stringBuilder.append(id);
@@ -127,56 +145,57 @@ public class Human implements Serializable, TreeNode<Human> {
         stringBuilder.append(getChildrenInfo());
         return stringBuilder.toString();
     }
-    public String getSpouseInfo(){
+
+    public String getSpouseInfo() {
         String res = "супруг(а): ";
-        if (spouse == null){
+        if (spouse == null) {
             res += "нет";
-        }
-        else {
+        } else {
             res += spouse.getName();
         }
         return res;
     }
-    public String getMotherInfo(){
+
+    public String getMotherInfo() {
         String res = "мать: ";
         Human mother = getMother();
-        if(mother != null){
+        if (mother != null) {
             res += mother.getName();
-        }
-        else {
+        } else {
             res += "неизвестна";
         }
         return res;
     }
 
-    public Human getMother(){
+    public Human getMother() {
         return null;
     }
-    public String getFatherInfo(){
+
+    public String getFatherInfo() {
         String res = "отец: ";
         Human father = getFather();
-        if(father != null){
+        if (father != null) {
             res += father.getName();
-        }
-        else {
+        } else {
             res += "неизвестен";
         }
         return res;
     }
+
     public Human getFather() {
         return null;
     }
-    public String getChildrenInfo(){
+
+    public String getChildrenInfo() {
         StringBuilder res = new StringBuilder();
-        res.append ("дети: ");
-        if(children.size() != 0){
+        res.append("дети: ");
+        if (children.size() != 0) {
             res.append(children.get(0).getName());
             for (int i = 1; i < children.size(); i++) {
-                res.append (", ");
+                res.append(", ");
                 res.append(children.get(1).getName());
             }
-        }
-        else {
+        } else {
             res.append("отсутствует");
         }
         return res.toString();
@@ -184,10 +203,10 @@ public class Human implements Serializable, TreeNode<Human> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj){
+        if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Human)){
+        if (!(obj instanceof Human)) {
             return false;
         }
         Human human = (Human) obj;

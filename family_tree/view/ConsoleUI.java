@@ -1,7 +1,9 @@
 package homeWork.family_tree.view;
 
+import homeWork.family_tree.model.human.Gender;
 import homeWork.family_tree.presenter.Presenter;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -36,13 +38,19 @@ public class ConsoleUI implements View {
         System.out.println("Доброго времени суток!");
     }
 
+    private void printMenu() {
+        System.out.println(menu.menu());
+    }
+
     public void addHuman() {
         System.out.println("Укажите имя человека");
         String name = scanner.nextLine();
+        System.out.println("Укажите пол человека");
+        Gender gender = Gender.valueOf(scanner.nextLine());
         System.out.println("Укажите возраст человека");
         String birthDateString = scanner.nextLine();
         int birthDate = Integer.parseInt(birthDateString);
-        presenter.addHuman(name, String.valueOf(birthDate));
+        presenter.addHuman(name, Gender.valueOf(String.valueOf(gender)), LocalDate.parse(String.valueOf(birthDate)));
     }
 
     public void getHumanInfo() {
@@ -76,6 +84,11 @@ public class ConsoleUI implements View {
         }
     }
 
+    public void loadFamily() {
+        presenter.loadFamily();
+    }
+
+
     private boolean checkTextForInt(String text) {
         if (text.matches("[0-9]+")) {
             return true;
@@ -85,10 +98,6 @@ public class ConsoleUI implements View {
         }
     }
 
-    private void printMenu() {
-        System.out.println(menu.menu());
-    }
-
     private boolean checkCommand(int numCommand) {
         if (numCommand < menu.getSize()) {
             return true;
@@ -96,5 +105,9 @@ public class ConsoleUI implements View {
             errorInput();
             return false;
         }
+    }
+
+    public void saveFamily() {
+        presenter.saveFamily();
     }
 }

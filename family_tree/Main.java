@@ -8,7 +8,7 @@ import homeWork.family_tree.model.human.Human;
 import java.io.IOException;
 import java.time.LocalDate;
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NullPointerException {
         String filePath = "file:///Users/mariannaizotova/Desktop/STUDY/OOProg/exportToHTML/homeWork/family_tree/data/test.out";
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree = testTree();

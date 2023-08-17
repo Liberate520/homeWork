@@ -105,5 +105,11 @@ public class FamilyTree <E extends TreeNode<E>> implements Serializable, Iterabl
     public Iterator<E> iterator() { return new FamilyTreeIterator(humanList);}
     public void sortByName() {humanList.sort(new HumanComparatorByName());}
     public void sortByBirthDate() {humanList.sort(new HumanComparatorByBirthDate());}
+
+    public void loadFamily() {
+    }
+
+    public void saveFamily() {
+    }
 }
 

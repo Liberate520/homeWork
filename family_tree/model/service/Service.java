@@ -14,9 +14,8 @@ public class Service {
         humanList = new FamilyTree<>();
     }
 
-    public void addHuman(String name, String birthDate){
-        Human human = new Human();
-        humanList.add(human);
+    public void addHuman(String name, Gender gender, LocalDate birthDate) {
+        humanList.add(new Human(name, gender, birthDate));
     }
 
     public String getHumanInfo() {
@@ -36,4 +35,8 @@ public class Service {
     public void sortByBirthDate(){
         humanList.sortByBirthDate();
     }
+
+    public void loadFamily() { humanList.loadFamily(); }
+
+    public void saveFamily() { humanList.saveFamily(); }
 }
