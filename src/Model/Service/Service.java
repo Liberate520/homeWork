@@ -1,6 +1,5 @@
 package Model.Service;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import Model.FamilyTree.FamilyTree;
@@ -10,18 +9,21 @@ import Model.Human.Human;
 public class Service {
     private long humanId;
     private FamilyTree<Human> family;
+    private FileHandler fh;
+
     
     public Service(){
         family = new FamilyTree<>();
+        fh = new FileHandler();
     }
 
-    public void setFamily(FamilyTree<Human> family){
-        this.family = family;
-    }
+    // public void setFamily(FamilyTree<Human> family){
+    //     this.family = family;
+    // }
 
-    public FamilyTree<Human> getFamily(){
-        return family;
-    }
+    // public FamilyTree<Human> getFamily(){
+    //     return family;
+    // }
 
     public FamilyTree<Human> toFamilyTree(Object object){
         return (FamilyTree<Human>)object;
@@ -44,14 +46,12 @@ public class Service {
         return family.getInfo();
     }
 
-    public void save(Serializable serializable, String path){
-        FileHandler fh = new FileHandler();
-        fh.save(serializable,path);
+    public void save(String path){
+        fh.save(family,path);
     }
 
-    public Object load(String path){
-        FileHandler fh = new FileHandler();
-        return fh.load(path);
+    public void load(String path){
+        family = (FamilyTree<Human>) fh.load(path);
     }
 
     public void sortByAge(){

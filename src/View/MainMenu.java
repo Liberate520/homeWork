@@ -1,9 +1,6 @@
 package View;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.crypto.AEADBadTagException;
-
 import View.Commands.*;
 
 public class MainMenu {
@@ -22,7 +19,6 @@ public class MainMenu {
         commands.add(new Save(consoleUI));
         commands.add(new Load(consoleUI));
         commands.add(new Finish(consoleUI));
-        System.out.println(commands.size());
     }
 
     public String menu(){

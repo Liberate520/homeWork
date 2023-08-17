@@ -103,16 +103,15 @@ public class ConsoleUI implements View{
     }
 
     public void save(){
-        Serializable serializable = presenter.getFamily();
         System.out.println("Enter file path");
         String path = scanner.nextLine();
-        presenter.save(serializable, path);
+        presenter.save(path);
     }
 
     public void load(){
         System.out.println("Enter file path");
         String path = scanner.nextLine();
-        presenter.setFamily(presenter.toFamilyTree(presenter.load(path)));
+        presenter.load(path);
     }
 
     private void hello(){
@@ -139,7 +138,7 @@ public class ConsoleUI implements View{
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand < menu.getSize()){
+        if (numCommand <= menu.getSize()){
             return true;
         } else {
             inputError();

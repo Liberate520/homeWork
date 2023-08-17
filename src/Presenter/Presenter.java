@@ -47,21 +47,20 @@ public class Presenter {
         view.printAnswer(service.getInfo());
     }
 
-    public FamilyTree<Human> getFamily(){
-        return service.getFamily();
+    // public FamilyTree<Human> getFamily(){
+    //     return service.getFamily();
+    // }
+
+    // public void setFamily(FamilyTree<Human> family){
+    //     service.setFamily(family);
+    // }
+
+    public void save(String path){
+        service.save(path);
     }
 
-    public void setFamily(FamilyTree<Human> family){
-        service.setFamily(family);
-    }
-
-    public void save(Serializable serializable, String path){
-        serializable = service.getFamily();
-        service.save(serializable, path);
-    }
-
-    public Object load(String path){
-       return service.load(path);
+    public void load(String path){
+       service.load(path);
     }
 
     public FamilyTree<Human> toFamilyTree(Object object){
