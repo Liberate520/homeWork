@@ -2,15 +2,20 @@ package FamilyTree;
 
 import Human.Person;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class Tree implements Serializable {
     private long personID;
     private List<Person> personList;
 
     public Tree(List<Person> personList) {this.personList = personList;}
     public Tree(){this(new ArrayList<>());}
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
 
     public boolean add(Person person){
         if (person == null){
