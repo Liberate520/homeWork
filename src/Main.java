@@ -4,7 +4,8 @@ public class Main {
         System.out.println(tree.getAllHumans());
         FileOperationTXT fileOp = new FileOperationTXT();
         fileOp.write("test.txt",tree);
-        fileOp.read("test.txt");
+        fileOp.read("test.tx" +
+                "t");
     }
 
 
