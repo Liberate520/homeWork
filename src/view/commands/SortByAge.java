@@ -9,6 +9,6 @@ public class SortByAge extends Command {
 
     @Override
     public void execute() {
-        consoleUI.sortTree("age");
+        consoleUI.sortByAge();
     }
 }

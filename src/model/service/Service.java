@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Service{
+public class Service {
     private FamilyTree<Person> tree;
     private FileHandler fileHandler;
 
@@ -51,8 +51,8 @@ public class Service{
 
     public String printTreeConnections() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Person, Connections<Person>> item:
-             tree) {
+        for (Map.Entry<Person, Connections<Person>> item :
+                tree) {
             sb.append(showConnections(item.getKey())).append("\n");
         }
         if (sb.toString().isBlank())

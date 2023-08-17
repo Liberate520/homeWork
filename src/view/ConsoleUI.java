@@ -99,11 +99,12 @@ public class ConsoleUI implements View {
         System.out.println(presenter.showConnections(person));
     }
 
-    public void sortTree(String sortType) {
-        if (sortType.equals("name"))
-            System.out.println(presenter.sortByName());
-        if (sortType.equals("age"))
-            System.out.println(presenter.sortByAge());
+    public void sortByName() {
+        System.out.println(presenter.sortByName());
+    }
+
+    public void sortByAge() {
+        System.out.println(presenter.sortByAge());
     }
 
     public void printTreeConnections() {
