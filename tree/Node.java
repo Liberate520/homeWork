@@ -1,4 +1,5 @@
 package tree;
+
 import human.Human;
 import relative.Relative;
 
@@ -21,6 +22,18 @@ public class Node {
     }
 
 
+
+
+
+    public Node() {
+
+    }
+
+    public Human Node(Human human) {
+        return human;
+    }
+
+
     public ArrayList<Node> getTree() {
         return tree;
     }
@@ -32,16 +45,11 @@ public class Node {
     }
 
 
-    public Human getWho() {
-        return person1;
-    }
 
     public Relative getRe() {
         return re;
 
     }
 
-    public Human getToWhom() {
-        return person2;
-    }
+
 }

@@ -1,19 +1,19 @@
 package human;
 
-import relative.Relative;
+import tree.Node;
 
 import java.time.LocalDate;
 
 public class Human {
     private String fullName;
-    private Gender gender;
+    private human.Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
 
 
 
 
-    public Human(String fullName, Gender gender, LocalDate birthDate) {
+    public Human(String fullName, human.Gender gender, LocalDate birthDate) {
         this.fullName = fullName;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -23,11 +23,12 @@ public class Human {
 
 
 
+
     public String getFullName() {
         return fullName;
 
     }
-    public Gender getGender() {
+    public human.Gender getGender() {
         return gender;
     }
 

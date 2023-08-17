@@ -3,12 +3,12 @@ import human.Human;
 import relative.Relative;
 import tree.Compilation;
 import tree.Node;
-
-
+import workingFile.FileHandlerForFamilyTree;
+import workingFile.Service;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         var irina = new Human("Ирина", Gender.Male, LocalDate.of(1990, 12, 12));
         var kesha = new Human("Кеша", Gender.Male, LocalDate.of(1992, 9, 1));
@@ -37,5 +37,10 @@ public class Main {
         com.printSearch(vasya, Relative.children);
         com.printSearch(ivan, Relative.parent);
 
+
+        Service service = new Service();
+        service.save(com);
+        service.load(com);
+        System.out.println(service);
     }
 }
