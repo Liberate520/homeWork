@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public class Presenter {
     private View view;
-    private Service<Person> service;
+    private Service service;
 
     public Presenter(View view) {
         this.view = view;
-        this.service = new Service<>();
+        this.service = new Service();
     }
 
     public void addPerson(String name,
