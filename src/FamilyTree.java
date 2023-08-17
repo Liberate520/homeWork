@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FamilyTree {
@@ -206,10 +205,9 @@ public class FamilyTree {
     /**
      * метод выводящий в консоль все объекты из списка
      */
-    public void getAllHumans() {
-        for (Human human : humans){
-            System.out.println(human);
-        }
+    public List<Human> getAllHumans() {
+        return humans;
+
 
     }
 

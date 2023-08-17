@@ -178,6 +178,7 @@ public class Human {
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
+        sb.append("\n");
         return sb.toString();
     }
 

@@ -1,8 +1,12 @@
 public class Main {
     public static void main(String[] args) {
         FamilyTree tree = testTree();
-        tree.getAllHumans();
+        System.out.println(tree.getAllHumans());
+        FileOperationTXT fileOp = new FileOperationTXT();
+        fileOp.write("test.txt",tree);
+        fileOp.read("test.txt");
     }
+
 
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
