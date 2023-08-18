@@ -1,7 +1,8 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human>, Item {
 
     private String name;
     private Gender gender;
@@ -24,6 +25,8 @@ public class Human implements Serializable {
     public Human(String name) {
         this.name = name;
     }
+
+
 
     public String getName() {
         return name;
@@ -50,6 +53,19 @@ public class Human implements Serializable {
     }
 
 
+    public int getAge() {
+        if (deathday == null) {
+            return getPeriod(birthday, LocalDate.now());
+        } else {
+            return getPeriod(birthday, deathday);
+        }
+    }
+    private int getPeriod(LocalDate birthday, LocalDate deathday){
+            Period diff = Period.between(birthday, deathday);
+            return diff.getYears();
+        }
+
+
     public String toString() {
         return getInfo();
     }
@@ -60,10 +76,16 @@ public class Human implements Serializable {
         sb.append(name);
         sb.append(", день рожденья: ");
         sb.append(birthday);
+        sb.append(", возраст: ");
+        sb.append(getAge());
         sb.append("\n");
 
         return sb.toString();
     }
 
 
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
+    }
 }

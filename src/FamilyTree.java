@@ -1,24 +1,22 @@
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-     public List<Human> familyList;
+public class FamilyTree <E extends Item> implements Serializable, Iterable<E> {
+     public List<E> familyList;
 
     public FamilyTree() {
         familyList = new ArrayList<>();
     }
 
-    public void familyAdd(Human name){
+    public void familyAdd(E name){
         familyList.add(name);
     }
 
-    public void setFamilyList(List<Human> familyList) {
+    public void setFamilyList(List<E> familyList) {
         this.familyList = familyList;
     }
 
-    public List<Human> getFamilyList() {
+    public List<E> getFamilyList() {
         return familyList;
     }
 
@@ -26,26 +24,18 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         System.out.println(familyList + "\n");
     }
 
+    public  void sortByName(){
+        familyList.sort(new FamilyComparatorByName<>());
+    }
+
+    public  void sortByAge(){
+        familyList.sort(new FamilyComparatorByAge<>());
+    }
+
+
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyIterator();
+    public Iterator<E> iterator() {
+        return new FamilyIterator<>(familyList);
     }
-
-
-    // вложенный класс
-    class FamilyIterator implements Iterator<Human> {
-        private int index;
-
-        @Override
-        public boolean hasNext() {
-            return familyList.size() > index;
-        }
-
-        @Override
-        public Human next () {
-            return familyList.get(index++);
-        }
-    }
-
 
 }

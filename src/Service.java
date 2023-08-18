@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 public class Service {
-    FamilyTree familyList;
+    FamilyTree<Human> familyList;
 
     Service(){
         familyList= new FamilyTree();
@@ -17,11 +17,19 @@ public class Service {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список семьи: \n");
 
-        for (Human members : familyList) {
+        for (Object members : familyList) {
             stringBuilder.append(members);
 
         }
         return stringBuilder.toString();
+    }
+
+    public  void sortByName(){
+        familyList.sortByName();
+    }
+
+    public  void sortByAge(){
+        familyList.sortByAge();
     }
 
 

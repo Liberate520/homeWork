@@ -6,19 +6,26 @@ public class Main  {
     public static void main(String[] args) {
 
         Service service = new Service();
-        Human Igor = new Human("Igor");
-        Human Olga = new Human("Olga");
-        Human Irina = new Human("Irina");
+        Human Andrey = new Human("C - Andrey");
+        Human Olga = new Human("B - Olga");
+        Human Viktoria = new Human("A - Viktoria");
 
 
-        service.addFamily("Igor", Gender.Male, null, null, Irina, LocalDate.of(1977, 4, 6), null);
+        service.addFamily("C - Andrey", Gender.Male, null, null, Viktoria, LocalDate.of(1977, 4, 6), null);
 
-        service.addFamily("Olga", Gender.Female, null, null, Irina, LocalDate.of(1978, 4, 6), null);
+        service.addFamily("B - Olga", Gender.Female, null, null, Viktoria, LocalDate.of(1978, 4, 6), null);
 
-        service.addFamily("Irina", Gender.Female, Igor, Olga, null, LocalDate.of(1999, 4, 6), null);
+        service.addFamily("A - Viktoria", Gender.Female, Andrey, Olga, null, LocalDate.of(1999, 4, 6), null);
 
 
         System.out.println(service.getInfo());
+
+        service.sortByName();
+        System.out.println(service.getInfo());
+
+        service.sortByAge();
+        System.out.println(service.getInfo());
+
 
 
 /*

@@ -1,36 +1,25 @@
-/*
 
 
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-class FamilyIterator implements Iterator<Human> {
+class FamilyIterator<T> implements Iterator<T> {
+    private List<T> familyList;
+    private int index;
 
-    void i(){
-
-         int index;
-
-        @Override
-        public boolean hasNext() {
-            return familyList.size() > index;
-        }
-
-        @Override
-        public Human next () {
-            return familyList.get(index++);
-        }
+    public FamilyIterator(List<T> familyList) {
+        this.familyList = familyList;
     }
-
 
     @Override
     public boolean hasNext() {
-        return false;
+        return familyList.size() > index;
     }
 
     @Override
-    public Human next() {
-        return null;
+    public T next () {
+        return familyList.get(index++);
     }
 }
-
-
- */
