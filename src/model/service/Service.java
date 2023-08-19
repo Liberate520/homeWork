@@ -3,6 +3,7 @@ package model.service;
 import model.family_tree.FamilyTree;
 import model.person.Gender;
 import model.person.Person;
+import model.writer.FileHandler;
 
 import java.time.LocalDate;
 
@@ -45,5 +46,21 @@ public class Service {
 
     public void sortByAge(){
         tree.sortByAge();
+    }
+
+    public void saveTree(){
+        String filePath = "src/model/family_tree/data/tree.out";
+        FileHandler fileHandler = new FileHandler();
+
+        fileHandler.save(tree, filePath);
+        System.out.println("Древо сохранено");
+    }
+
+    public void loadTree(){
+        String filePath = "src/model/family_tree/data/tree.out";
+        FileHandler fileHandler = new FileHandler();
+
+        tree = (FamilyTree) fileHandler.read(filePath);
+        System.out.println("Древо загружено");
     }
 }

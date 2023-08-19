@@ -62,6 +62,14 @@ public class ConsoleUI implements View{
         presenter.sortByName();
     }
 
+    public void saveTree(){
+        presenter.saveTree();
+    }
+
+    public void loadTree(){
+        presenter.loadTree();
+    }
+
     public void getTreeInfo() {
         presenter.getTreeInfo();
     }

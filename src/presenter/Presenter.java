@@ -39,4 +39,13 @@ public class Presenter {
         service.sortByAge();
         getTreeInfo();
     }
+
+    public void saveTree() {
+        service.saveTree();
+    }
+
+    public void loadTree() {
+        service.loadTree();
+        getTreeInfo();
+    }
 }
