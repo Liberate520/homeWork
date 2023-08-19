@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<T extends HouseHold> implements Iterable<HouseHold> {
+public class FamilyTree<T extends HouseHold> implements Iterable<HouseHold>, Serializable {
     private List<T> treeList;
     public FamilyTree(){
         treeList = new ArrayList<>();
@@ -10,13 +11,6 @@ public class FamilyTree<T extends HouseHold> implements Iterable<HouseHold> {
     public List<T> getTreeList() {
         return treeList;
     }
-//    public void print(){
-//        for (T h : treeList) {
-//            System.out.println(h.getName() + " " + h.getBirthday() + " " +
-//                    h.getDeathDate()
-//                    + " " + h.getGender());
-//        }
-//    }
 
     public void add(T houseHold){
         treeList.add(houseHold);

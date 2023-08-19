@@ -1,11 +1,13 @@
 package View;
+
 import Model.Gender;
-import Model.HouseHold;
 import Model.Human;
 import Presenter.Presenter;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class ConsoleUI implements Viewable {
+public class ConsoleUI implements Viewable, Serializable {
     private Presenter presenter;
     private Scanner scanner;
     private Boolean work;
@@ -18,15 +20,16 @@ public class ConsoleUI implements Viewable {
 
     @Override
     public void start(){
-        System.out.println("Hello, World!");
+        System.out.println("Здравствуйте!");
         while(work){
             System.out.println("1. Добавить человека");
             System.out.println("2. Показать семейное дерево");
             System.out.println("3. Отсортировать по именам");
             System.out.println("4. Отсортировать по возрасту");
-            System.out.println("5. Закончить ввод");
-            System.out.println("6. Сохранить дерево в файл");
-            System.out.println("Введите значение от 1 до 6: ");
+            System.out.println("5. Сохранить дерево в файл");
+            System.out.println("6. Считать дерево из файла");
+            System.out.println("7. Закончить ввод");
+            System.out.println("Введите значение от 1 до 7: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch(choice){
                 case 1:
@@ -34,18 +37,26 @@ public class ConsoleUI implements Viewable {
                     break;
                 case 2:
                     listInfo();
+                    System.out.println("Дерево распечатано");
                     break;
                 case 3:
                     sort_name();
+                    System.out.println("Дерево отсортировано по имени");
                     break;
                 case 4:
                     sort_age();
+                    System.out.println("Дерево отсортировано по возрасту");
                     break;
                 case 5:
-                    end();
+                    saveToFile();
+                    System.out.println("Дерево сохранено в папку Data");
                     break;
                 case 6:
-                    saveToFile();
+                    readToFile();
+                    System.out.println("Дерево считано с папки Data");
+                    break;
+                case 7:
+                    end();
                     break;
                 default:
                     error();
@@ -69,7 +80,7 @@ public class ConsoleUI implements Viewable {
                 gender = Gender.WOMAN;
                 break;
         }
-        Human human = new Human(name, age, gender);
+        presenter.addHouseHold(new Human(name, age, gender));
     }
     public void listInfo() {
         presenter.getListInfo();
@@ -93,8 +104,12 @@ public class ConsoleUI implements Viewable {
         System.out.println(answer);
     }
 
-    public void saveToFile(){
+    public void saveToFile() {
         presenter.saveToFile();
+    }
+
+    public void readToFile() {
+        presenter.readFile("src/Data/text.txt");
     }
 
 }

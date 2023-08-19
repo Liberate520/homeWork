@@ -2,9 +2,9 @@ package Model;
 
 import java.io.*;
 
-public class FileHandler implements Writable {
+public class FileHandler implements Writable, Serializable {
     @Override
-    public boolean save(FamilyTree<HouseHold> familyTree, String filePath){
+    public boolean save(FamilyTree<HouseHold> familyTree, String filePath) {
         try (ObjectOutputStream objectOutputStream =
                      new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(familyTree);

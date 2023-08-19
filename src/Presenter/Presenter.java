@@ -1,48 +1,38 @@
 package Presenter;
-import Model.FileHandler;
-import Model.HouseHold;
-import Model.Human;
+import Model.*;
 import View.Viewable;
-import Model.FamilyTree;
 
-import java.io.File;
-import java.nio.file.FileAlreadyExistsException;
+import java.io.Serializable;
 
-public class Presenter {
+public class Presenter implements Serializable {
     private Viewable view;
-    private FamilyTree<HouseHold> tree;
-
-    private FileHandler fileHandler;
+    private Service<HouseHold> service;
 
     public Presenter(Viewable view) {
-        fileHandler = new FileHandler();
         this.view = view;
-        this.tree = tree;
+        service = new Service<>();
     }
     public void addHouseHold(HouseHold houseHold){
-        tree.add(houseHold);
-    }
-
-    public FamilyTree<HouseHold> getTree(){
-        return tree;
+        service.add(houseHold);
     }
 
     public void getListInfo(){
-        tree.print();
-        System.out.println("Дерево распечатано");
+        service.printTree();
     }
 
     public void sortByName(){
-        tree.sortByName();
-        System.out.println("Дерево отсортировано по имени");
+        service.sortByName();
     }
 
     public void sortByAge(){
-        tree.sortByAge();
-        System.out.println("Дерево отсортировано по возрасту");
+        service.sortByAge();
     }
 
     public void saveToFile(){
-        fileHandler.save(tree, "src/Data/text.out");
+        service.saveTree(service.getFamilyTree(), "src/Data/text.txt");
+    }
+
+    public void readFile(String filePath) {
+        service.readTree(filePath);
     }
 }

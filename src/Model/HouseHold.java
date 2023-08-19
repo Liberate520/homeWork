@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class HouseHold {
+public abstract class HouseHold implements Serializable {
     private String name;
     private int age;
     private Gender gender;
