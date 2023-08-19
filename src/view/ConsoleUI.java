@@ -93,4 +93,27 @@ public class ConsoleUI implements View{
         presenter.addPerson(firstName, lastName, gender, birthDate, deathDate);
 
     }
+
+    public void addParent(){
+        System.out.println("Введите id ребенка");
+        int childId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите id родителя");
+        int parentId = Integer.parseInt(scanner.nextLine());
+
+        presenter.addParent(childId, parentId);
+    }
+
+    public void getParents(){
+        System.out.println("Введите id ребенка");
+        int childId = Integer.parseInt(scanner.nextLine());
+
+        presenter.getParents(childId);
+    }
+
+    public void getChildren(){
+        System.out.println("Введите id родителя");
+        int parentId = Integer.parseInt(scanner.nextLine());
+
+        presenter.getChildren(parentId);
+    }
 }

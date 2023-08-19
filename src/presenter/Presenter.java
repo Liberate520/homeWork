@@ -16,13 +16,21 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addPerson(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Person father, Person mother){
-        service.addPerson(firstName, lastName, gender, birthDate, deathDate, father, mother);
+    public void addPerson(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate){
+        service.addPerson(firstName, lastName, gender, birthDate, deathDate);
 
     }
 
-    public void addPerson(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate){
-        addPerson(firstName, lastName, gender, birthDate, deathDate, null, null);
+    public void addParent(int childId, int parentId){
+        service.addParent(childId, parentId);
+    }
+
+    public void getParents(int childId) {
+        view.printAnswer(service.getParents(childId));
+    }
+
+    public void getChildren(int parentId) {
+        view.printAnswer(service.getChildren(parentId));
     }
 
     public void getTreeInfo(){

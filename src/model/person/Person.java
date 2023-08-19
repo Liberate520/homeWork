@@ -21,24 +21,20 @@ public class Person implements Serializable, Comparable<Person>, TreeNode<Person
     private Person mother;
     private List<Person> children;
 
-    public Person(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Person father, Person mother) {
+    public Person(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
         id = -1;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-        this.father = father;
-        this.mother = mother;
+        this.father = null;
+        this.mother = null;
         children = new ArrayList<>();
     }
 
-    public Person(String firstName, String lastName, Gender gender, LocalDate birthDate, Person father, Person mother) {
-        this(firstName, lastName, gender, birthDate, null, father, mother);
-    }
-
     public Person(String firstName, String lastName, Gender gender, LocalDate birthDate) {
-        this(firstName, lastName, gender, birthDate, null, null, null);
+        this(firstName, lastName, gender, birthDate, null);
     }
 
     public boolean addChild(Person child) {
@@ -133,7 +129,7 @@ public class Person implements Serializable, Comparable<Person>, TreeNode<Person
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + ", " + gender + ", " + getAge();
+        return id + ": " + firstName + " " + lastName + ", " + gender + ", " + getAge();
     }
 
     @Override
