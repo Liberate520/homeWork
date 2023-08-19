@@ -32,13 +32,11 @@ public class Presenter {
 
     public void sortByName() {
         service.sortByName();
-        System.out.println("Отсортированное по имени ");
         getTreeInfo();
     }
 
     public void sortByAge() {
         service.sortByAge();
-        System.out.println("Отсортированное по возрасту ");
         getTreeInfo();
     }
 }
