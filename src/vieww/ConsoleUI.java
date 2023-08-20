@@ -54,7 +54,7 @@ public class ConsoleUI implements View {
         name = scanner.nextLine();
         
         while (true) {
-            print("Please select your gender:");
+            print("Please select the gender:");
             Gender[] genders = Gender.values();
             for (int i = 0; i < genders.length; i++) {
                 print((i + 1) + ". " + genders[i]);
@@ -80,7 +80,7 @@ public class ConsoleUI implements View {
         }        
 
         while (birthDate == null) {
-            print("Please enter your birth date (YYYY-MM-DD): ");
+            print("Please enter the birth date (YYYY-MM-DD): ");
             String inputDate = scanner.nextLine();
 
             try {
