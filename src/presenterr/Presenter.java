@@ -3,20 +3,24 @@ package presenterr;
 import java.time.LocalDate;
 
 import modell.FamilyTreeService;
+import modell.file_handler.FileHandler;
+import modell.file_handler.SaveToFile;
 import modell.human.Gender;
+import modell.human.Human;
 import vieww.View;
 
 public class Presenter {
     private View view;
     private FamilyTreeService service;
+    private SaveToFile<Human> fileHandler = new FileHandler<>();
 
     public Presenter(View view) {
-        service = new FamilyTreeService();
+        service = new FamilyTreeService(fileHandler);
         this.view = view;
     }
 
     public void loadTreeFromFile() {
-        service.setWritable();
+        // service.setWritable();
         service.load();
     }
 

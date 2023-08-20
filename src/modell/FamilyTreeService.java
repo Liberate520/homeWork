@@ -5,24 +5,24 @@ import java.time.LocalDate;
 import modell.fam_tree.FamilyTree;
 import modell.human.Human;
 import modell.human.Gender;
-import modell.file_handler.FileHandler;
 import modell.file_handler.SaveToFile;
 
 public class FamilyTreeService {
     private SaveToFile<Human> fileHandler;
     private FamilyTree<Human> familyTree;
 
-    public FamilyTreeService(FamilyTree<Human> familyTree) {
-        this.familyTree = familyTree;
-    }
+    // public FamilyTreeService(FamilyTree<Human> familyTree) {
+    //     this.familyTree = familyTree;
+    // }
 
-    public FamilyTreeService(){
+    public FamilyTreeService(SaveToFile<Human> fileHandler){
         familyTree = new FamilyTree<>();
+        this.fileHandler = fileHandler;
     }
 
-    public void setWritable() {
-        this.fileHandler = new FileHandler<>();
-    }
+    // public void setWritable() {
+    //     this.fileHandler = new FileHandler<>();
+    // }
 
     public boolean save(){
         if (fileHandler == null){
