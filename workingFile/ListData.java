@@ -20,7 +20,6 @@ public class ListData implements WorkingFile {
 
     @Override
     public void remove(Node ob) {
-
     }
 
     @Override
@@ -35,7 +34,6 @@ public class ListData implements WorkingFile {
 
     @Override
     public void change(Node obOld, Node obNew) {
-
     }
 
     @Override

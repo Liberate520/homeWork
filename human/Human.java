@@ -21,9 +21,6 @@ public class Human {
     }
 
 
-
-
-
     public String getFullName() {
         return fullName;
 
@@ -55,16 +52,5 @@ public class Human {
         return sb.toString();
     }
 
-
-    public Object addHuman() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(" имя: ");
-        builder.append(getFullName());
-        builder.append(", пол: ");
-        builder.append(getGender());
-        builder.append(", дата рождения: ");
-        builder.append(getBirthDate());
-        return builder.toString();
-    }
 }
 

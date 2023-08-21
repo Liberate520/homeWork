@@ -62,7 +62,7 @@ public class Node {
     }
 
     public String toString() {
-        return String.format("<%s | %s | %s>", person1.getFullName(), re, person2.getFullName());
+        return String.format("<%s | %s | %s>\n", person1.getFullName(), re, person2.getFullName());
     }
 
     public String toFileString() {

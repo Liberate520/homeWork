@@ -53,9 +53,6 @@ public class FileData extends ListData {
         System.out.println(data);
     }
 
-    public void addToBase(Node n){
-            super.add(n);
-        }
 
     public void change(Node n, Node m) {
         int index = getInd(n);
