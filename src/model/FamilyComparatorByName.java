@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Comparator;
 
 public class FamilyComparatorByName<T extends Item> implements Comparator<T> {

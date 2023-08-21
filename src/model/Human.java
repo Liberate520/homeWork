@@ -1,3 +1,5 @@
+package model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,6 +28,15 @@ public class Human implements Serializable, Comparable<Human>, Item {
         this.name = name;
     }
 
+    public Human(String name, Gender gender, LocalDate birthday, LocalDate deathday) {
+        this.name = name;
+        this.gender = gender;
+        this.Father = Father;
+        this.Mather = Mather;
+        this.children = children;
+        this.birthday = birthday;
+        this.deathday = deathday;
+    }
 
 
     public String getName() {
@@ -74,6 +85,8 @@ public class Human implements Serializable, Comparable<Human>, Item {
         StringBuilder sb = new StringBuilder();
         sb.append("имя: ");
         sb.append(name);
+        sb.append(", пол: ");
+        sb.append(gender);
         sb.append(", день рожденья: ");
         sb.append(birthday);
         sb.append(", возраст: ");
