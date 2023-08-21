@@ -1,14 +1,13 @@
-package Model;
+package Model.BaseCharacter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
-public abstract class HouseHold implements Serializable {
+public abstract class BaseCharacter implements Serializable {
     private String name;
     private int age;
     private Gender gender;
 
-    public HouseHold(String name, int age, Gender gender) {
+    public BaseCharacter(String name, int age, Gender gender) {
         this.name = name;
         this.age = age;
         this.gender = gender;

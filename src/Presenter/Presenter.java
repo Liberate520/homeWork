@@ -1,19 +1,20 @@
 package Presenter;
-import Model.*;
+import Model.BaseCharacter.BaseCharacter;
+import Model.Service.Service;
 import View.Viewable;
 
 import java.io.Serializable;
 
 public class Presenter implements Serializable {
     private Viewable view;
-    private Service<HouseHold> service;
+    private Service<BaseCharacter> service;
 
     public Presenter(Viewable view) {
         this.view = view;
         service = new Service<>();
     }
-    public void addHouseHold(HouseHold houseHold){
-        service.add(houseHold);
+    public void addHouseHold(BaseCharacter baseCharacter){
+        service.add(baseCharacter);
     }
 
     public void getListInfo(){

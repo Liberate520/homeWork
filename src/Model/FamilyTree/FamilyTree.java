@@ -1,9 +1,14 @@
-package Model;
+package Model.FamilyTree;
+
+import Model.BaseCharacter.Comparators.ComparatorSortByAge;
+import Model.BaseCharacter.Comparators.ComparatorSortByName;
+import Model.BaseCharacter.BaseCharacter;
+import Model.FamilyTree.Iterators.IteratorForBuffer;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<T extends HouseHold> implements Iterable<HouseHold>, Serializable {
+public class FamilyTree<T extends BaseCharacter> implements Iterable<BaseCharacter>, Serializable {
     private List<T> treeList;
     public FamilyTree(){
         treeList = new ArrayList<>();
@@ -17,7 +22,7 @@ public class FamilyTree<T extends HouseHold> implements Iterable<HouseHold>, Ser
     }
 
     @Override
-    public Iterator<HouseHold> iterator() {
+    public Iterator<BaseCharacter> iterator() {
         return new IteratorForBuffer<>(treeList);
     }
 

@@ -1,7 +1,7 @@
 package View;
 
-import Model.Gender;
-import Model.Human;
+import Model.BaseCharacter.Gender;
+import Model.BaseCharacter.Human;
 import Presenter.Presenter;
 
 import java.io.Serializable;

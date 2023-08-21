@@ -1,10 +1,14 @@
-package Model;
+package Model.Service;
+
+import Model.FamilyTree.FamilyTree;
+import Model.FamilyTree.FileHandler;
+import Model.BaseCharacter.BaseCharacter;
 
 import java.io.Serializable;
 
-public class Service<T extends HouseHold> implements Serializable {
+public class Service<T extends BaseCharacter> implements Serializable {
     private FileHandler fileHandler;
-    private FamilyTree<HouseHold> familyTree;
+    private FamilyTree<BaseCharacter> familyTree;
     public Service(){
         fileHandler = new FileHandler();
         familyTree = new FamilyTree<>();
@@ -30,12 +34,12 @@ public class Service<T extends HouseHold> implements Serializable {
         familyTree.sortByAge();
     }
 
-    public void saveTree(FamilyTree<HouseHold> familyTree, String filePath){
+    public void saveTree(FamilyTree<BaseCharacter> familyTree, String filePath){
         fileHandler.save(familyTree, filePath);
     }
 
     public void readTree(String filePath){
-        familyTree = (FamilyTree<HouseHold>) fileHandler.read(filePath);
+        familyTree = (FamilyTree<BaseCharacter>) fileHandler.read(filePath);
     }
 
 }

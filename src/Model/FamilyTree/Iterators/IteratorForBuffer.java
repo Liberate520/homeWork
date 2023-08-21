@@ -1,9 +1,11 @@
-package Model;
+package Model.FamilyTree.Iterators;
+
+import Model.BaseCharacter.BaseCharacter;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class IteratorForBuffer<T extends HouseHold> implements Iterator<HouseHold> {
+public class IteratorForBuffer<T extends BaseCharacter> implements Iterator<BaseCharacter> {
     private int index;
     private List<T> bufferList;
     public IteratorForBuffer(List<T> bufferList) {
@@ -15,7 +17,7 @@ public class IteratorForBuffer<T extends HouseHold> implements Iterator<HouseHol
     }
 
     @Override
-    public HouseHold next() {
+    public BaseCharacter next() {
         return bufferList.get(index++);
     }
 }
