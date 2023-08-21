@@ -1,0 +1,1 @@
+[<Маша | parent | Ирина>, <Ирина | children | Маша>, <Вася | parent | Маша>, <Маша | children | Вася>, <Ирина | parent | Женя>, <Женя | children | Ирина>, <Кеша | parent | Женя>, <Женя | children | Кеша>, <Ирина | parent | Ваня>, <Ваня | children | Ирина>, <Кеша | parent | Ваня>, <Ваня | children | Кеша>, <Ирина | parent | Лаиса>, <Лаиса | children | Ирина>] 

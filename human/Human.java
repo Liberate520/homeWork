@@ -56,5 +56,15 @@ public class Human {
     }
 
 
+    public Object addHuman() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(" имя: ");
+        builder.append(getFullName());
+        builder.append(", пол: ");
+        builder.append(getGender());
+        builder.append(", дата рождения: ");
+        builder.append(getBirthDate());
+        return builder.toString();
+    }
 }
 
