@@ -44,7 +44,7 @@ public class Main {
 
         FileData fd = new FileData("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt", "\\s\\|\\s");
         fd.add(gt);
-
+        fd.load("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt");
 
     }
 }

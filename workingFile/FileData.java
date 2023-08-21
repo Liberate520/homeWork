@@ -27,13 +27,14 @@ public class FileData extends ListData {
 
     }
 
-    private void load(String filePath) {
+    public String load(String filePath) {
         try {
             this.file = Paths.get(filePath);
             this.contents = (ArrayList<String>) Files.readAllLines(file);
         } catch (IOException e) {
             this.contents.add("Файл отсутствует или имеет некорректный формат");
         }
+        return filePath;
     }
 
     private String[] parse(int lineNo) {

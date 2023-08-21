@@ -17,6 +17,10 @@ public class ListData implements WorkingFile {
         this.base.add(n);
 
     }
+    @Override
+    public String load(String file){
+        return file;
+    }
 
     @Override
     public void remove(Node ob) {
