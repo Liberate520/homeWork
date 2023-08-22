@@ -1,4 +1,4 @@
-package home_work;
+package home_work.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,6 +25,8 @@ public class Human implements Serializable, AnimalItem {
     public Human(String name, Gender gender, LocalDate dateOfBirth) {
         this(name, gender, dateOfBirth, null);
     }
+
+    
 
     public void addChildren(Human children) {
         this.childrens.add(children);

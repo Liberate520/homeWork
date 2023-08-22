@@ -1,4 +1,4 @@
-package home_work;
+package home_work.model;
 
 import java.util.Comparator;
 

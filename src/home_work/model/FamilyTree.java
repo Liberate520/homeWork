@@ -1,18 +1,21 @@
-package home_work;
+package home_work.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Iterator;
 
 public class FamilyTree<E extends AnimalItem> implements Serializable, Iterable<E>{
-    private List<E> humanList;
+    public List<E> humanList;
     private List<E> childrens;
 
     public FamilyTree() {
         humanList = new ArrayList<>();
         childrens = new ArrayList<>();
+    }
+
+    public void addHuman(E human) {
+        humanList.add(human);
     }
 
     public void createTree(E human) {
@@ -24,7 +27,7 @@ public class FamilyTree<E extends AnimalItem> implements Serializable, Iterable<
             }
         }
     }
-
+ 
     public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
@@ -37,14 +40,14 @@ public class FamilyTree<E extends AnimalItem> implements Serializable, Iterable<
         humanList.sort(new HumanComparatorByAge());
     }
 
-    // public String getTree() {
-    //     StringBuilder stringBuilder = new StringBuilder();
-    //     stringBuilder.append("Family tree: \n");
-    //     for (Human human : humanList) {
-    //         if (!human.getChildrens().isEmpty()) {
-    //             stringBuilder.append(human.getName() + " childrens: " + human.getChildrensName() + "\n");
-    //         }
-    //     }
-    //     return stringBuilder.toString();
-    // }
+    public String getTree() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Family tree: \n");
+        for (E human : humanList) {
+            if (!human.getChildrens().isEmpty()) {
+                stringBuilder.append(human.getName() + " childrens: " + human.getChildrensName() + "\n");
+            }
+        }
+        return stringBuilder.toString();
+    }
 }
