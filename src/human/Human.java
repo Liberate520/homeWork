@@ -4,32 +4,39 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Human implements Serializable {
-    private int id;
+    private long id;
     private String name;
     private String lastname;
     private LocalDate birthdate;
     private LocalDate deathdate;
     private Gender gender;
+    private int age;
 
-    public Human(String name, String lastname, LocalDate birthdate, LocalDate deathdate, Gender gender) {
+    public Human(Long id, String name, String lastname, LocalDate birthdate, LocalDate deathdate, Gender gender, Integer age) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
         this.deathdate = deathdate;
         this.gender = gender;
+        this.age = age;
     }
 
     public Human(String name, String lastname, LocalDate birthdate) {
-        this(name, lastname, birthdate, null, null);
+        this(null, name, lastname, birthdate, null, null, null);
     }
 
     public Human(String name, String lastname, LocalDate birthdate, Gender gender) {
-        this(name, lastname, birthdate, null, gender);
+        this(null, name, lastname, birthdate, null, gender, null);
     }
 
-    public int getId() {
-        return id;
+    public Human(Long id, String name, Integer age) {
+        this(id, name, null, null, null, null, age);
     }
+
+    // public int getId() {
+    //     return id;
+    // }
 
     public void setId(int id) {
         this.id = id;
@@ -55,6 +62,10 @@ public class Human implements Serializable {
     return gender;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     @Override
     public String toString() {
         return "id: " + id + 
@@ -62,6 +73,7 @@ public class Human implements Serializable {
         ", lastname: " + lastname + 
         ", gender: " + gender + 
         ", birhtdate: " + birthdate + " г.р." +
-        ", deathdate: " + deathdate + " г.р.";
+        ", deathdate: " + deathdate + " г.р." + 
+        ", age: " + age + " лет";
     }
 }
