@@ -1,8 +1,10 @@
+package familytree;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileHandler implements FileIO{
+public class FileHandler implements FileIO {
     @Override
     public void writeToFile(List<Person> people, String filename) throws IOException {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filename))) {

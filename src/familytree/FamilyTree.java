@@ -1,8 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+package familytree;
+
+import java.util.*;
 
 public class FamilyTree {
-    private List<Person> people;
+    private final List<Person> people;
     public FamilyTree(){
         this.people = new ArrayList<>();
     }
@@ -12,6 +13,11 @@ public class FamilyTree {
     public List<Person> getPeople() {
         return people;
     }
+
+    public Iterator<Person> iterator() {
+        return people.iterator();
+    }
+
     public Person findPersonByName(String name) {
         for (Person person : people) {
             if (person.getName().equals(name)) {
@@ -33,5 +39,13 @@ public class FamilyTree {
         for (Person child : person.getChildren()) {
             printFamilyTree(child, level + 1);
         }
+    }
+
+    public void sortByName(){
+        people.sort(Comparator.comparing(Person::getName));
+    }
+
+    public void sortByDateOfBirth(){
+        people.sort(Comparator.comparing(Person::getDayOfBirth));
     }
 }

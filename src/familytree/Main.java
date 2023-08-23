@@ -1,3 +1,8 @@
+package familytree;
+
+import familytree.FamilyTree;
+import familytree.FileHandler;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

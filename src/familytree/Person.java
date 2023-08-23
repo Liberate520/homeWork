@@ -1,6 +1,7 @@
+package familytree;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
 enum Gender {
     MALE,
@@ -46,6 +47,6 @@ public class Person {
         return children;
     }
     public  String toString(){
-        return name + " (Gender: " + gender + ", DOB: " + ")";
+        return name + " (familytree.Gender: " + gender + ", DOB: " + ")";
     }
 }
