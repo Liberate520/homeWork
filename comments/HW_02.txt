@@ -1,0 +1,16 @@
+@Liberate520 commented on this pull request.
+
+
+
+> +public interface WriteReadFileTree {
++    boolean save(Serializable serializable, String filePath);
++    Object read(String filePath);
+
+У вас в названии специализация на семейном дереве. Значит надо и сделать более точные аргументы. Например возвращать не Object, а объект FamilyTree. И сохранять тоже
+
+-- 
+Reply to this email directly or view it on GitHub:
+https://github.com/Liberate520/homeWork/pull/623#pullrequestreview-1527594328
+You are receiving this because you authored the thread.
+
+Message ID: <Liberate520/homeWork/pull/623/review/1527594328@github.com>

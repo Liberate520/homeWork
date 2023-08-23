@@ -1,0 +1,29 @@
+Re: [Liberate520/homeWork] домашка JAVA OOP 001 (PR #623)
+Liberate520
+21 июля, 23:36
+Кому:Liberate520/homeWork,вам,Author
+@Liberate520 commented on this pull request.
+
+In src/familyTree/FamilyTree.java:
+
+> +        sb.append(humanList.size() + "\n");
++
++        return sb.toString();
++    }
++
++    @Override
++    public String toString() {
++        return getFamilyTreeInfo();
++    }
++
++    @Override
++    public Iterator<E> iterator(){
++        return new HumanIterator(humanList);
++    }
++    public void sortByFullName() {
++        humanList.sort(new HumanComparatorByFullName());
+лучше все таки добавить угловые скобочки при инициализации компаратора
+
+—
+Reply to this email directly, view it on GitHub, or unsubscribe.
+You are receiving this because you authored the thread.
