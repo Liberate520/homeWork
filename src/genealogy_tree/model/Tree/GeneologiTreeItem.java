@@ -29,20 +29,13 @@ public interface GeneologiTreeItem<E> {
 
     void setId(int id);
 
-    LocalDate getBirthDate();
-
-    LocalDate getDeathDate();
 
     List<E> getParents();
 
     List<E> getChildren();
 
-    void setBirthDate(LocalDate birthDate);
-
-    void setDeathDate(LocalDate deathDate);
 
     Gender getGender();
-
 
     String getFatherInfo();
 

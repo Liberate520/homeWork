@@ -15,7 +15,6 @@ public class FileHandler implements Writable {
         }
 
     }
-
     @Override
     public Object read(String filePath) {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {

@@ -84,6 +84,9 @@ public class ConsoleUI implements View {
         }
 
     }
+    public void readFile(){
+        presenter.readFile();
+    }
 
     public void addSposue() {
         try {

@@ -30,6 +30,10 @@ public class Presenter {
         service.sortByName();
         getInfo();
     }
+    public void readFile(){
+        service.readFile();
+        getInfo();
+    }
 
 
     public void addParetns(int id, int ids) {

@@ -4,6 +4,7 @@ import genealogy_tree.model.Human.Gender;
 import genealogy_tree.model.Human.Human;
 import genealogy_tree.model.Tree.GeneologiTree;
 
+import genealogy_tree.model.Tree.GeneologiTreeItem;
 import genealogy_tree.model.WriterAndReader.FileHandler;
 
 import java.time.LocalDate;
@@ -34,11 +35,18 @@ public class Service {
 
         Human human = new Human(id, name, gender, birthDate);
         tree.addHuman(human);
+        String filePath = "src/genealogy_tree/model/Tree.out";
+        fileHandler.saves(human, filePath);
 
     }
 
     public void addParents(int id, int ids) {
             tree.addParentsHuman(id, ids);
+    }
+
+    public void readFile(){
+        String filePath = "src/genealogy_tree/model/Tree.out";
+        tree = (GeneologiTree) fileHandler.read(filePath);
     }
 
     public void addChildren(int id, int ids) {

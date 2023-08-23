@@ -19,6 +19,7 @@ public class MainMenu {
         commandList.add(new AddSpouse(consoleUI));
         commandList.add(new SetDivorce(consoleUI));
         commandList.add(new GetSiblings(consoleUI));
+        commandList.add(new Read(consoleUI));
         commandList.add(new Finish(consoleUI));
 
 

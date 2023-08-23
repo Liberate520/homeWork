@@ -118,15 +118,6 @@ public class GeneologiTree<E extends GeneologiTreeItem<E>> implements Serializab
         return result;
     }
 
-    public List<E> getByName(String name) {
-        List<E> result = new ArrayList<>();
-        for (E human : humanList) {
-            if (human.getName().equalsIgnoreCase(name)) {
-                result.add(human);
-            }
-        }
-        return result;
-    }
 
 
     public boolean setWedding(E human1, E human2) {

@@ -12,10 +12,10 @@ import java.util.List;
 public class Human implements Serializable, Comparable<Human>, GeneologiTreeItem<Human> {
 
     private int id;
-    private final List<Human> parents;
-    private final List<Human> children;
-    private final Gender gender;
-    private final String name;
+    private List<Human> parents;
+    private List<Human> children;
+    private Gender gender;
+    private String name;
 
     private LocalDate birthDate;
     private LocalDate deathDate;
