@@ -28,8 +28,8 @@ public abstract class BaseCharacter implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getName()).append("\n");
-        sb.append(this.getAge()).append("\n");
+        sb.append(this.getName()).append(", ");
+        sb.append(this.getAge()).append(", ");
         sb.append(this.getGender()).append("\n");
         return sb.toString();
     }

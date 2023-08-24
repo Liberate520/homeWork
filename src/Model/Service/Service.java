@@ -1,5 +1,7 @@
 package Model.Service;
 
+import Model.BaseCharacter.Gender;
+import Model.BaseCharacter.Human;
 import Model.FamilyTree.FamilyTree;
 import Model.FamilyTree.FileHandler;
 import Model.BaseCharacter.BaseCharacter;
@@ -22,8 +24,8 @@ public class Service<T extends BaseCharacter> implements Serializable {
         return familyTree;
     }
 
-    public void add(T houseHold) {
-        familyTree.add(houseHold);
+    public void add(String name, int age, Gender gender) {
+        familyTree.add(new Human(name, age, gender));
     }
 
     public void sortByName() {

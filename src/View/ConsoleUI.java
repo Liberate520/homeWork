@@ -1,7 +1,6 @@
 package View;
 
 import Model.BaseCharacter.Gender;
-import Model.BaseCharacter.Human;
 import Presenter.Presenter;
 
 import java.io.Serializable;
@@ -11,92 +10,50 @@ public class ConsoleUI implements Viewable, Serializable {
     private Presenter presenter;
     private Scanner scanner;
     private Boolean work;
+    private MainMenu menu;
 
     public ConsoleUI(){
         presenter = new Presenter(this);
         scanner = new Scanner(System.in);
         work = true;
+        menu = new MainMenu(this);
     }
 
     @Override
     public void start(){
-        System.out.println("Здравствуйте!");
+        hello();
         while(work){
-            System.out.println("1. Добавить человека");
-            System.out.println("2. Показать семейное дерево");
-            System.out.println("3. Отсортировать по именам");
-            System.out.println("4. Отсортировать по возрасту");
-            System.out.println("5. Сохранить дерево в файл");
-            System.out.println("6. Считать дерево из файла");
-            System.out.println("7. Закончить ввод");
-            System.out.println("Введите значение от 1 до 7: ");
-            int choice = Integer.parseInt(scanner.nextLine());
-            switch(choice){
-                case 1:
-                    add();
-                    break;
-                case 2:
-                    listInfo();
-                    System.out.println("Дерево распечатано");
-                    break;
-                case 3:
-                    sort_name();
-                    System.out.println("Дерево отсортировано по имени");
-                    break;
-                case 4:
-                    sort_age();
-                    System.out.println("Дерево отсортировано по возрасту");
-                    break;
-                case 5:
-                    saveToFile();
-                    System.out.println("Дерево сохранено в папку Data");
-                    break;
-                case 6:
-                    readToFile();
-                    System.out.println("Дерево считано с папки Data");
-                    break;
-                case 7:
-                    end();
-                    break;
-                default:
-                    error();
-            }
+            printMenu();
+            execute();
         }
     }
 
-    public void add() {
-        System.out.println("Введите имя:");
+    public void addBaseCharacter() {
+        System.out.println("Введите имя: ");
         String name = scanner.nextLine();
         System.out.println("Введите возраст: ");
-        Integer age = Integer.parseInt(scanner.nextLine());
-        System.out.println("Введите пол(1 - мужчина, 2 - Женщина): ");
-        int choice = Integer.parseInt(scanner.nextLine());
-        Gender gender = null;
-        switch (choice){
-            case 1:
-                gender = Gender.MAN;
-                break;
-            case 2:
-                gender = Gender.WOMAN;
-                break;
-        }
-        presenter.addHouseHold(new Human(name, age, gender));
+        String ageString = scanner.nextLine();
+        System.out.println("Введите пол(1 - мужчина, 2 - женщина): ");
+        String choice = scanner.nextLine();
+        presenter.addBaseCharacter(name, setAge(ageString), setGender(choice));
     }
+
     public void listInfo() {
         presenter.getListInfo();
     }
+
     public void sort_name(){
         presenter.sortByName();
     }
+
     public void sort_age(){
         presenter.sortByAge();
     }
+
     public void end(){
+        System.out.println("Всего доброго!");
         scanner.close();
         work = false;
-    }
-    private void error(){
-        System.out.println("Ошибка, попробуйте заного");
     }
 
     @Override
@@ -108,8 +65,95 @@ public class ConsoleUI implements Viewable, Serializable {
         presenter.saveToFile();
     }
 
-    public void readToFile() {
+    public void readFromFile() {
         presenter.readFile("src/Data/text.txt");
     }
 
+    private int setAge(String text){
+        if(ageChecker(text)){
+            int age = Integer.parseInt(text);
+            return age;
+        }else{
+            return 0;
+        }
+    }
+
+    private Gender setGender(String string){
+        Gender gender = null;
+        if(checkGender(string)){
+            int num = Integer.parseInt(string);
+            if(num == 1){
+                gender = Gender.MAN;
+            } else {
+                gender = Gender.WOMAN;
+            }
+        }
+        return gender;
+    }
+
+    private void execute(){
+        String line = scanner.nextLine();
+        if(checkTextForInt(line)){
+            int numCommand = Integer.parseInt(line);
+            if(checkCommand(numCommand)){
+                menu.execute(numCommand);
+            }
+        }
+    }
+
+    private void hello(){
+        System.out.println("Здравствуйте!");
+    }
+
+    private void printMenu(){
+        System.out.println(menu.menu());
+    }
+
+    private void errorInput() {
+        System.out.println("Введено некорректное значение");
+    }
+
+    private boolean checkCommand(int numCommand){
+        if(numCommand < menu.size() + 1){
+            return true;
+        }else {
+            errorInput();
+            return false;
+        }
+    }
+
+    private boolean ageChecker(String text) {
+        try{
+            int age = Integer.parseInt(text);
+            if (age > 0 && age < 100){
+                return true;
+            }else {
+                return false;
+            }
+        }catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean checkGender(String string) {
+        try {
+            int buffer = Integer.parseInt(string);
+            if(buffer > 0 && buffer <= 2){
+                return true;
+            }else {
+                return false;
+            }
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    private boolean checkTextForInt(String text){
+        if(text.matches("[0-9]+")){
+            return true;
+        }else {
+            errorInput();
+            return false;
+        }
+    }
 }

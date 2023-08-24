@@ -1,5 +1,7 @@
 package Presenter;
 import Model.BaseCharacter.BaseCharacter;
+import Model.BaseCharacter.Gender;
+import Model.BaseCharacter.Human;
 import Model.Service.Service;
 import View.Viewable;
 
@@ -10,11 +12,10 @@ public class Presenter implements Serializable {
     private Service<BaseCharacter> service;
 
     public Presenter(Viewable view) {
-        this.view = view;
         service = new Service<>();
     }
-    public void addHouseHold(BaseCharacter baseCharacter){
-        service.add(baseCharacter);
+    public void addBaseCharacter(String name, int age, Gender gender){
+        service.add(name, age, gender);
     }
 
     public void getListInfo(){
