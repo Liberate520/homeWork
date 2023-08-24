@@ -1,6 +1,5 @@
 package tree;
 
-import human.Gender;
 import human.Human;
 import relative.Relative;
 
@@ -23,9 +22,13 @@ public class Node {
     }
 
     public Node() {
-
+       this.person1 = getPerson1();
     }
-    
+
+    public Node(Human person1) {
+        this.person1 =person1;
+    }
+
 
     public ArrayList<Node> getTree() {
         return tree;
@@ -37,12 +40,6 @@ public class Node {
         tree.add(new Node(children, Relative.children, parent));
     }
 
-
-
-    public Node(Human person) {
-        super();;
-
-    }
 
 
     public Human getPerson1() {
@@ -57,8 +54,8 @@ public class Node {
         return person2;
     }
 
-    public void addHuman(Human person){
-        listHuman.add(new Node(person));
+    public void addHuman(Human person1){
+        listHuman.add(new Node(person1));
     }
 
     public String toString() {
