@@ -1,35 +1,49 @@
 package presenter;
 
-import model.human.Human;
-import model.tree.FamilyTree;
+import java.time.LocalDate;
+
+import model.human.Gender;
+import model.service.Service;
 import view.View;
 
 public class Presenter {
     private View view;
-    private FamilyTree<Human> tree;
+    private Service service;
 
     public Presenter(View view) {
-        tree = new FamilyTree<>();
         this.view = view;
+        service = new Service();
     }
 
-    public void add(Human human) {
-        tree.add(human);
-        tree.getInfo();
+    public void addHuman(String name, Gender gender, int age, LocalDate birthDate) {
+        service.addHuman(name, gender, age, birthDate);
+        getTreeInfo();
     }
 
-    public void getHumanListInfo() {
-        String answer = tree.getInfo();
-        view.print(answer);
+    public void getHumanList() {
+        view.print(service.getTreeInfo());
+    }
+
+    public void getTreeInfo() {
+        String info = service.getTreeInfo();
+        view.print(info);
+    }
+
+    public void saveTree() {
+        service.save();
+    }
+
+    public void openSaveTree() {
+        service.read();
     }
 
     public void sortByAge() {
-        tree.sortByAge();
-        getHumanListInfo();
+        service.sortByAge();
+        getTreeInfo();
     }
 
     public void sortByName() {
-        tree.sortByName();
-        getHumanListInfo();
+        service.sortByName();
+        getTreeInfo();
     }
 }

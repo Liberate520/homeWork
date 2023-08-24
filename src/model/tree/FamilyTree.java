@@ -9,7 +9,7 @@ import model.human.Comparators.ComparatorByAge;
 import model.human.Comparators.ComparatorByName;
 
 public class FamilyTree<E extends HumanItem<E>> implements Serializable, Iterable<E>{
-
+    private long humansId;
     private List<E> humanList;
 
     public FamilyTree() {
@@ -26,9 +26,9 @@ public class FamilyTree<E extends HumanItem<E>> implements Serializable, Iterabl
         }
         if (!humanList.contains(human)){
             humanList.add(human);
+            human.setId(humansId++);
             addToParents(human);
             addToChildren(human);
-
             return true;
         }
         return false;
@@ -45,16 +45,13 @@ public class FamilyTree<E extends HumanItem<E>> implements Serializable, Iterabl
         }
     }
 
-    public String getInfo(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("В дереве ");
-        sb.append(humanList.size());
-        sb.append(" объектов: \n");
+    public E getById(long id){
         for (E human: humanList){
-            sb.append(human);
-            sb.append("\n");
+            if (human.getId() == id){
+                return human;
+            }
         }
-        return sb.toString();
+        return null;
     }
 
     public void sortByName(){
@@ -70,8 +67,19 @@ public class FamilyTree<E extends HumanItem<E>> implements Serializable, Iterabl
         return new FamilyTreeIterator<>(humanList);
     }
 
+    public String getTreeInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("В дереве:\n");
+
+        for (Object human : humanList) {
+            stringBuilder.append(human);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public String toString() {
-        return getInfo();
+        return getTreeInfo();
     }
 }

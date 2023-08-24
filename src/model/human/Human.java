@@ -8,15 +8,18 @@ import java.util.List;
 import model.tree.HumanItem;
 
 public class Human implements Serializable, HumanItem<Human>{
+    private long id;
     private String name;
     private Gender gender;
-    private String age;
+    private int age;
     private LocalDate dateBorn;
     private LocalDate dateDeath;
     private List<Human> parents;
     private List<Human> children;
     
-    public Human(String name, Gender gender, String age, LocalDate dateBorn, LocalDate dateDeath, Human father, Human mother) {
+    public Human(String name, Gender gender, int age, 
+    LocalDate dateBorn, LocalDate dateDeath, Human father, Human mother) {
+        id = -1;
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -32,11 +35,11 @@ public class Human implements Serializable, HumanItem<Human>{
         children = new ArrayList<>();
     }
 
-    public Human(String name, Gender gender, String age, LocalDate dateBorn) {
+    public Human(String name, Gender gender, int age, LocalDate dateBorn) {
         this(name, gender, age, dateBorn, null, null, null);
     }
 
-    public Human(String name, Gender gender, String age, LocalDate dateBorn, Human father, Human mother) {
+    public Human(String name, Gender gender, int age, LocalDate dateBorn, Human father, Human mother) {
         this(name, gender, age, dateBorn, null, father, mother);
     }
 
@@ -82,7 +85,7 @@ public class Human implements Serializable, HumanItem<Human>{
         return gender;
     }
     
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -100,6 +103,14 @@ public class Human implements Serializable, HumanItem<Human>{
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMotherInfo(){
@@ -138,7 +149,8 @@ public class Human implements Serializable, HumanItem<Human>{
         }
         return res.toString();
     }
-
+    
+    @Override
     public String toString() {
         return getInfo();
     }
@@ -150,7 +162,7 @@ public class Human implements Serializable, HumanItem<Human>{
         sb.append(", пол: ");
         sb.append(getGender());
         sb.append(", возраст: ");
-        sb.append(age);
+        sb.append(getAge());
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");
