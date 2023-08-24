@@ -5,21 +5,27 @@ import ru.gb.family_tree.family_tree.FamilyTree;
 import ru.gb.family_tree.filehandler.FileHandler;
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
-
 import java.time.LocalDate;
 
-
 public class Main {
-    public static void main(String[] args) {
-        String filePath="tree.out";
-
-        FileHandler fileHandler = new FileHandler();
+    public static void main(String[] args){
         FamilyTree tree = testTree();
-        fileHandler.write(tree,filePath);
+//        System.out.println(tree);
+
+        tree.sortByAge();
         System.out.println(tree);
 
-//        FileHandler fileHandler = new FileHandler();
-//        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+        tree.sortByName();
+        System.out.println(tree);
+
+        tree.sortByBirthDate();
+        System.out.println(tree);
+
+//        String filePath = "tree.out";
+//        FileHandler fileHandler = new FileHandler(filePath);
+//        fileHandler.write(tree);
+//
+//        FamilyTree tree = (FamilyTree) fileHandler.read();
 //        System.out.println(tree);
     }
 

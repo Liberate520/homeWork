@@ -3,9 +3,14 @@ package ru.gb.family_tree.filehandler;
 import java.io.*;
 
 public class FileHandler implements Writable {
+    private String filePath;
+
+    public FileHandler(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
-    public boolean write(Serializable serializable, String filePath){
+    public boolean write(Serializable serializable) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
             objectOutputStream.writeObject(serializable);
             return true;
@@ -16,7 +21,7 @@ public class FileHandler implements Writable {
     }
 
     @Override
-    public Object read(String filePath){
+    public Object read() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))){
             return objectInputStream.readObject();
         } catch (Exception e){
@@ -24,4 +29,7 @@ public class FileHandler implements Writable {
             return null;
         }
     }
+
+    @Override
+    public void setFilePath(String filePath) { this.filePath = filePath; }
 }
