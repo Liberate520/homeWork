@@ -1,11 +1,20 @@
 public class Main {
     public static void main(String[] args) {
         FamilyTree tree = testTree();
-        System.out.println(tree.getAllHumans());
-        FileOperationTXT fileOp = new FileOperationTXT();
-        fileOp.write("test.txt",tree);
-        fileOp.read("test.tx" +
-                "t");
+//        System.out.println(tree.getAllHumans());
+
+//        FileOperationTXT fileOp = new FileOperationTXT();
+//        fileOp.write("test.txt",tree);
+//        fileOp.read("test.tx" +
+//                "t");
+
+        String filePath = "testSaveObj.txt";
+        FileHandler fileHandler = new FileHandler(filePath);
+
+//        fileHandler.save(tree);
+
+        FamilyTree treeRead = (FamilyTree) fileHandler.read();
+        System.out.println(treeRead.getAllHumans());
     }
 
 
