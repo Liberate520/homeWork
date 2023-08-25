@@ -1,9 +1,10 @@
 package com.javacourse.Family_tree;
+import java.io.Serializable;
 import java.util.*;
 
 
 
-public class Person{
+public class Person implements Serializable{
         private String lfm;
         private Person mom;
         private Person dad;

@@ -4,14 +4,15 @@ import java.io.IOException;
 
 public class Service {
     private FamilyList<Person> tree;
+    private my_File myfile;
+    private Person human;
     public Service(){
-        this.tree = new FamilyList<>();
+        tree = new FamilyList<>();
+        myfile = new myFile();
     }
     public void file_read() throws IOException{
-        my_File myfile = new myFile();
         myfile.file();
-        Boolean file = true;
-        while (file){
+        while (true){
             String[] params;
             params = myfile.read();
             if (params == null) break;
@@ -20,14 +21,14 @@ public class Service {
         }
     }
     public void addhuman(String name, Integer age, String mom_name, String dad_name){
-        Person human = new Person();
+        human = new Person();
         human.buildperson(name, age);
         tree.add(human);
         if (tree.keySet().contains(mom_name)){
             human.setMom(tree.get(mom_name));
             tree.get(mom_name).children.add(human);
         }
-        else if (mom_name != null){
+        else if (mom_name != null && !mom_name.equals("")){
             Person mom = new Person();
             mom.buildperson(mom_name, null);
             mom.children.add(human);
@@ -38,13 +39,16 @@ public class Service {
             human.setDad(tree.get(dad_name));
             tree.get(dad_name).children.add(human);
         }
-        else if (dad_name != null){
+        else if (dad_name != null && !dad_name.equals("")){
             Person dad = new Person();
             dad.buildperson(dad_name, null);
             dad.children.add(human);
             tree.add(dad);
             human.setDad(dad);
         }
+    }
+    public void addhumanToFile() throws IOException{
+        myfile.write(human);
     }
     public void getListInfo(){
         tree.print();

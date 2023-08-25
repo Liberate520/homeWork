@@ -7,14 +7,16 @@ import com.javacourse.Family_tree.*;
 
 public class Presenter {
     private View view;
-    private Service service = new Service();
+    private Service service;
 
     public Presenter(View view) throws IOException{
         this.view = view;
+        service = new Service();
         service.file_read();
     }
-    public void addhuman(String name, Integer age, String mom_name, String dad_name){
+    public void addhuman(String name, Integer age, String mom_name, String dad_name) throws IOException{
         service.addhuman(name, age, mom_name, dad_name);
+        service.addhumanToFile();
     }
     public void getListInfo(){
         service.getListInfo();

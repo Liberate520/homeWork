@@ -17,7 +17,7 @@ public class ConsoleUI implements View{
     }
 
     @Override
-    public void start(){
+    public void start() throws IOException{
         System.out.println("Hello, World!");
         while(work){
             System.out.println("1. Add a person");
@@ -49,7 +49,7 @@ public class ConsoleUI implements View{
         }
     }
 
-    public void add(){
+    public void add() throws IOException{
         System.out.println("Enter the full name");
         String name = scanner.nextLine();
         System.out.println("Enter the age");
