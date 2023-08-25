@@ -3,10 +3,9 @@ package View;
 import Model.BaseCharacter.Gender;
 import Presenter.Presenter;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class ConsoleUI implements Viewable, Serializable {
+public class ConsoleUI implements Viewable{
     private Presenter presenter;
     private Scanner scanner;
     private Boolean work;

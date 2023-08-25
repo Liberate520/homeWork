@@ -4,7 +4,7 @@ import Model.BaseCharacter.BaseCharacter;
 
 import java.io.*;
 
-public class FileHandler implements Writable, Serializable {
+public class FileHandler implements Writable {
     @Override
     public boolean save(FamilyTree<BaseCharacter> familyTree, String filePath) {
         try (ObjectOutputStream objectOutputStream =

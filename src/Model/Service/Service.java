@@ -8,7 +8,7 @@ import Model.BaseCharacter.BaseCharacter;
 
 import java.io.Serializable;
 
-public class Service<T extends BaseCharacter> implements Serializable {
+public class Service<T extends BaseCharacter>{
     private FileHandler fileHandler;
     private FamilyTree<BaseCharacter> familyTree;
     public Service(){
