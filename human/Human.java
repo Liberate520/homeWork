@@ -2,12 +2,11 @@ package human;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human {
+public class Human implements Comparable<Human>{
     private String fullName;
     private human.Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-
 
     public Human(String fullName, Gender gender, LocalDate birthDate,LocalDate deathDate) {
         this.fullName = fullName;
@@ -15,22 +14,29 @@ public class Human {
         this.birthDate = birthDate;
         this.deathDate = deathDate;
 
-
     }
+
     public Human(String fullName, Gender gender, LocalDate birthDate) {
         this(fullName, gender, birthDate, null);
     }
 
 
-    public String getFullName() {
-        return fullName;
-
+    @Override
+    public String toString() {
+        return  "Имя =" + getFullName()+ '\'' +
+                ", пол =" + getGender() +
+                ", возраст =" + getAge() +
+                '}';
     }
+
+
+
+    public String getFullName() { return fullName; }
 
     public human.Gender getGender() {
         return gender;
-    }
 
+    }
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -51,30 +57,22 @@ public class Human {
     }
 
 
-    @Override
-    public String toString() {
-        return getInfo();
-    }
-
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append(" имя: ");
         sb.append(getFullName());
         sb.append(", пол: ");
         sb.append(getGender());
-        sb.append(", дата рождения: ");
-        sb.append(getBirthDate());
+        sb.append(", возраст: ");
+        sb.append(getAge());
         sb.append(" если он(а) является ");
         return sb.toString();
     }
 
 
-
-    public String getHuman() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(getFullName());
-        builder.append(getAge());
-        return builder.toString();
+    @Override
+    public int compareTo(Human o) {
+        return fullName.compareTo(o.fullName);
     }
 }
 

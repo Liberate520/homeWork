@@ -1,6 +1,7 @@
 import human.Gender;
 import human.Human;
 import relative.Relative;
+import service.Service;
 import tree.Compilation;
 import tree.Node;
 import workingFile.FileData;
@@ -14,7 +15,7 @@ public class Main {
         var kesha = new Human("Кеша", Gender.Male, LocalDate.of(1992, 9, 1));
         var vasya = new Human("Вася", Gender.Male, LocalDate.of(1940, 3, 15));
         var masha = new Human("Маша", Gender.Female, LocalDate.of(1972, 9, 10));
-        var jane = new Human("Женя", Gender.Male, LocalDate.of(2019, 4, 2));
+        var jane = new Human("Женя", Gender.Male, LocalDate.of(2017, 4, 2));
         var ivan = new Human("Ваня", Gender.Male, LocalDate.of(2019, 4, 2));
         var larisa = new Human("Лариса", Gender.Male, LocalDate.of(2022, 5, 10));
         Node gt = new Node();
@@ -53,5 +54,18 @@ public class Main {
         fd.add(gt);
         fd.load("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt");
 
+        Service service = new Service();
+        service.addHumans(irina);
+        service.addHumans(kesha);
+        service.addHumans(vasya);
+        service.addHumans(masha);
+        service.addHumans(jane);
+        service.addHumans(ivan);
+        service.addHumans(larisa);
+        System.out.println(service.getHumanList());
+        service.sortByName();
+        System.out.println(service.getHumanList());
+        service.sortByAge();
+        System.out.println(service.getHumanList());
     }
 }
