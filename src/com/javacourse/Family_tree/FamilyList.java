@@ -1,8 +1,7 @@
 package com.javacourse.Family_tree;
-import java.io.Serializable;
 import java.util.*;
 
-public class FamilyList<T extends Person> implements Serializable{
+public class FamilyList<T extends Person>{
     private HashMap<String, T> tree;
 
     public FamilyList(){
