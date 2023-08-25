@@ -4,11 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import ru.gb.Tree.FamilyTree.Tree;
+
+import ru.gb.Tree.Service.Service;
 
 public class FileHandler implements Writable {
 
-    public void saveFile(Tree tree, String path){
+    public void saveFile(Service tree, String path){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
             oos.writeObject(tree);
@@ -20,11 +21,11 @@ public class FileHandler implements Writable {
         } 
     }
 
-    public Tree readFile(String path){
+    public Service readFile(String path){
         
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path)))
         {
-            return (Tree) ois.readObject();
+            return (Service) ois.readObject();
         }
         catch(Exception e){
             System.out.println(e.getMessage());

@@ -1,11 +1,11 @@
 package ru.gb.Tree.Human;
 import java.io.Serializable;
 import java.time.LocalDate;
-// import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
+    private int id;
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -15,7 +15,8 @@ public class Human implements Serializable{
     private List<Human> childrenList;
     private Human spouse;
    
-    public Human (String name, Gender  gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father){
+    public Human (int id, String name, Gender  gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father){
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -25,28 +26,27 @@ public class Human implements Serializable{
         childrenList = new ArrayList<>();
     }
 
-    public Human (String name, Gender  gender, LocalDate birthDate, Human mother, Human father){
-        this(name, gender, birthDate, null, mother, father);
+    public Human (int id, String name, Gender  gender, LocalDate birthDate, Human mother, Human father){
+        this(id, name, gender, birthDate, null, mother, father);
     }
 
-     public Human (String name, Gender  gender, LocalDate birthDate, Human mother){
-        this(name, gender, birthDate, null, mother, null);
+     public Human (int id, String name, Gender  gender, LocalDate birthDate, Human mother){
+        this(id, name, gender, birthDate, null, mother, null);
     }
 
-    public Human (String name, Gender  gender, LocalDate birthDate, LocalDate deathDate){
-        this(name, gender, birthDate, deathDate, null, null);
+    public Human (int id, String name, Gender  gender, LocalDate birthDate, LocalDate deathDate){
+        this(id, name, gender, birthDate, deathDate, null, null);
     }
 
-    public Human (String name, Gender  gender, LocalDate birthDate){
-        this(name, gender, birthDate, null, null, null);
+    public Human (int id, String name, Gender  gender, LocalDate birthDate){
+        this(id, name, gender, birthDate, null, null, null);
     }
     
     public void addToChildren(Human child){
     //    if (!childrenList.contains(child)); // проверка списка на присутствие, изучить позже !!!
-            childrenList.add(child);
+        childrenList.add(child);
     }
-
-     public String getChildrenInfo(){
+    public String getChildrenInfo(){
         StringBuilder res = new StringBuilder();
         res.append("дети: ");
         if (childrenList.size() != 0){
@@ -115,15 +115,21 @@ public class Human implements Serializable{
         return father;
     }
 
-    public static LocalDate getBirthDate (int year, int month, int day) {
-        LocalDate birthDate = LocalDate.of(year, month, day);
+    public LocalDate getBirthDate () {
         return birthDate;
-     }
+    }
 
-    public static LocalDate getDeathDate (int year, int month, int day) {
-        LocalDate deathDate = LocalDate.of(year, month, day);
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public LocalDate getDeathDate () {
         return deathDate;
-     }
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
     
     public Gender getGender() {
         return gender;
@@ -133,56 +139,47 @@ public class Human implements Serializable{
         return childrenList;
     }
 
-    // public String getAge(LocalDate birthDate, LocalDate deathDate){   // работает, но может быть неудобно в будущем, т.к. age в String
-    //     LocalDate today = LocalDate.now();
-    //     String ageStr = "";
-    //     if (deathDate == null){
-    //         int age = today.getYear() - birthDate.getYear();
-    //         ageStr = Integer.toString(age);
-    //     }else {
-    //         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    //         String birth = birthDate.format(formatter);
-    //         String death = deathDate.format(formatter);
-    //         ageStr = birth + " - " + death;
-    //     }
-    //     return ageStr;
-    // }
-
-    public int getAge(LocalDate birthDate, LocalDate deathDate){
+    public int getId(){
+        return id;
+    }
+    
+    public int getAge(){
         LocalDate today = LocalDate.now();
-        int age = today.getYear() - birthDate.getYear();
-        return age;
+        int age = 0;
+        if (deathDate == null) {
+            age = today.getYear() - birthDate.getYear();
+            return age;
+        } else age = deathDate.getYear() - birthDate.getYear();
+    
+        return age;  
     }
       
     public String getInfo(){
         StringBuilder stringBuilderHuman = new StringBuilder();
-        stringBuilderHuman.append("имя: ");
-        stringBuilderHuman.append(name);
-        stringBuilderHuman.append(", пол: ");
-        stringBuilderHuman.append(getGender());
+        stringBuilderHuman.append("id: " + id);
+        stringBuilderHuman.append(", имя: " + name);
+        stringBuilderHuman.append(", пол: " + getGender());
         if (deathDate != null){
-            stringBuilderHuman.append(", годы жизни: ");
-            stringBuilderHuman.append(birthDate +" - " + deathDate);
-        }
-        else {
+            stringBuilderHuman.append(", годы жизни: " + birthDate +" - " + deathDate);
+            stringBuilderHuman.append(", умер в: " + getAge());
+        } else {
             stringBuilderHuman.append(", родился: " + birthDate);
-            stringBuilderHuman.append(", возраст: ");
-            stringBuilderHuman.append(getAge(birthDate, deathDate));
+            stringBuilderHuman.append(", возраст: " + getAge());
         }
-        stringBuilderHuman.append(", ");
-        stringBuilderHuman.append(getSpouseInfo());
-        stringBuilderHuman.append(", ");
-        stringBuilderHuman.append(getMotherInfo());
-        stringBuilderHuman.append(", ");
-        stringBuilderHuman.append(getFatherInfo());
-        stringBuilderHuman.append(", ");
-        stringBuilderHuman.append(getChildrenInfo());
+        stringBuilderHuman.append(", " + getSpouseInfo());
+        stringBuilderHuman.append(", " + getMotherInfo());
+        stringBuilderHuman.append(", " + getFatherInfo());
+        stringBuilderHuman.append(", " + getChildrenInfo());
         return stringBuilderHuman.toString();
     }
     
     @Override
     public String toString(){
         return getInfo();
+    }
+
+    public int compareTo(Human o) {
+        return name.compareTo(o.name);
     }
 
 

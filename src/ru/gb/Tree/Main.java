@@ -1,16 +1,23 @@
 package ru.gb.Tree;
 
-import ru.gb.Tree.FamilyTree.Tree;
+import java.time.LocalDate;
 import ru.gb.Tree.FileHandler.FileHandler;
 import ru.gb.Tree.Human.Gender;
-import ru.gb.Tree.Human.Human;
+import ru.gb.Tree.Service.Service;
 
 
 public class Main {
     public static void main(String[] args) {
         
-        Tree tree = familyTree();
-        System.out.println(tree);
+        Service tree = familyTree();
+        System.out.println(tree.getServiceInfo());
+        tree.sortByName();
+        System.out.println(tree.getServiceInfo());
+        tree.sortByBirthDate();
+        System.out.println(tree.getServiceInfo());
+        tree.sortByAge();
+        System.out.println(tree.getServiceInfo());
+
         String filePath = "homeWork\\src\\ru\\gb\\Tree\\FileHandler\\saveFile.out";
 
         FileHandler save = new FileHandler();
@@ -19,38 +26,30 @@ public class Main {
         System.out.println("Сохраненный файл: \n"+ save.readFile(filePath));
     }
 
-    static Tree familyTree(){
+    static Service familyTree(){
+
+        Service service = new Service();
+        service.addNewPerson("Наталья", Gender.female, LocalDate.of(1955, 12, 31), LocalDate.of(2018, 4, 21));
+        service.addNewPerson("Иван", Gender.male, LocalDate.of(1950, 10, 25), LocalDate.of(2015, 5, 10));
+        service.addNewWedding(0,1);
+
+        service.addNewPerson("Алиса", Gender.female, LocalDate.of(1976, 10, 10), null);
+        service.addNewPerson("Сергей", Gender.male, LocalDate.of(1975, 6, 21), 0, 1);
+        service.addNewChild(0, 3);
+        service.addNewChild(1, 3);
+        service.addNewWedding(2, 3);
         
-        Tree familyTree = new Tree();
+        service.addNewPerson("Светлана", Gender.female, LocalDate.of(1998, 1, 24), 2, 3);
+        service.addNewChild(3, 4);
+        service.addNewChild(2, 4);
        
-        Human ivan = new Human("Иван", Gender.male, Human.getBirthDate(1950, 10, 25), Human.getDeathDate(2015, 5, 10));
-        Human natalya = new Human("Наталья", Gender.female, Human.getBirthDate(1955, 12, 31), Human.getDeathDate(2018, 4, 21));
-        familyTree.addHuman(ivan);
-        familyTree.addHuman(natalya);
-        Tree.setWedding(ivan,natalya);
 
-        Human sergey = new Human("Сергей", Gender.male, Human.getBirthDate(1975, 6, 21), natalya, ivan);
-        Human alisa = new Human("Алиса", Gender.female, Human.getBirthDate(1976, 10, 10));
-        familyTree.addHuman(sergey);
-        familyTree.addHuman(alisa);
-        ivan.addToChildren(sergey);
-        natalya.addToChildren(sergey);
-        Tree.setWedding(sergey, alisa);
+        service.addNewPerson("Петр", Gender.male, LocalDate.of(2000, 7, 21), 2, 3);
+        service.addNewChild(3, 5);
+        service.addNewChild(2, 5);
 
-        Human svetlana = new Human("Светлана", Gender.female, Human.getBirthDate(1998, 1, 24), alisa, sergey);
-        familyTree.addHuman(svetlana);
-        sergey.addToChildren(svetlana);
-        alisa.addToChildren(svetlana);
-
-        Human petr = new Human("Петр", Gender.male, Human.getBirthDate(2000, 7, 21), alisa, sergey);
-        familyTree.addHuman(petr);
-        sergey.addToChildren(petr);
-        alisa.addToChildren(petr);
-
-        Human anna = new Human("Анна", Gender.female, Human.getBirthDate(2021,5,4), svetlana);
-        familyTree.addHuman(anna);
-        svetlana.addToChildren(anna);
-
-        return familyTree;
+        service.addNewPerson("Анна", Gender.female, LocalDate.of(2021,5,4), 4);
+        service.addNewChild(4, 6);
+        return service;
     }
 }
