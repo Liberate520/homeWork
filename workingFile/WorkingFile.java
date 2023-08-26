@@ -1,17 +1,14 @@
 package workingFile;
 
 import tree.Node;
+import tree.Tree;
 
-public interface WorkingFile {
+public interface WorkingFile<E extends Tree<E>> {
     String load(String file);
-
-    void remove(Node ob);
-
-    int getInd(Node ob);
-
-    Node get(int index);
-
-    void change(Node obOld, Node obNew);
+    void remove(Node<E> ob);
+    int get(int index);
+    int getInd(Node<E> ob);
+    void change(Node<E> obOld, Node<E> obNew);
 
     int getSize();
 }

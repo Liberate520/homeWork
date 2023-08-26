@@ -4,10 +4,10 @@ import humanGroup.ListAllHuman;
 
 
 public class Service {
-    private ListAllHuman listAllHuman;
+    private ListAllHuman<Human> listAllHuman;
 
     public Service() {
-        listAllHuman = new ListAllHuman();
+        listAllHuman = new ListAllHuman<>();
     }
 
     public void addHumans(Human human){
@@ -23,11 +23,11 @@ public class Service {
         return builder.toString();
     }
     public void sortByName(){
-        ListAllHuman.sortByName();
+        listAllHuman.sortByName();
     }
 
     public void sortByAge() {
 
-        ListAllHuman.sortByAge();
+        listAllHuman.sortByAge();
     }
 }

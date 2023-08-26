@@ -4,13 +4,14 @@ import human.Human;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-class ListAllHumanIterator implements Iterator<Human> {
+class ListAllHumanIterator<E> implements Iterator<E> {
     private int index;
-    private ArrayList<Human> listAllHuman;
+    private ArrayList<E> listAllHuman;
 
-    public ListAllHumanIterator(ArrayList<Human> listAllHuman) {
-        this.listAllHuman = listAllHuman;
+    public ListAllHumanIterator(List<E> listAllHuman) {
+        this.listAllHuman = (ArrayList<E>) listAllHuman;
     }
 
     @Override
@@ -19,7 +20,7 @@ class ListAllHumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return listAllHuman.get(index++);
     }
 }

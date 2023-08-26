@@ -1,37 +1,36 @@
 package tree;
 
-import human.Human;
 import relative.Relative;
 
 
 import java.util.ArrayList;
 
 
-public class Compilation {
-    ArrayList<Node> tree;
+public class Compilation<E extends Tree<E>> {
+    ArrayList<Node<E>> tree;
 
-    public Compilation(Node geoTree) {
+    public Compilation(Node<E> geoTree) {
         tree = geoTree.getTree();
     }
 
-    private ArrayList<Human> search(Human p, Relative rel) {
-        ArrayList<Human> result = new ArrayList<>();
+    private ArrayList<E> search(E p, Relative rel) {
+        ArrayList<E> result = new ArrayList<>();
         result.add(p);
-        for (Node node : tree) {
-            if (node.person1 == p && node.getRe() == rel) {
-                result.add(node.person2);
+        for (Node<E> node : tree) {
+            if (node.getPerson1() == p && node.getRe() == rel) {
+                result.add((E) node.getPerson2());
             }
         }
         return result;
     }
 
-    public void printSearch(Human p, Relative rel) {
-        ArrayList<Human> source = search(p, rel);
+    public void printSearch(E p, Relative rel) {
+        ArrayList<E> source = search(p, rel);
         System.out.println(source.remove(0).getInfo() + " " + rel + ":");
         if (source.isEmpty()) {
             System.out.println("Нет информации ");
         }
-        for (Human person : source) {
+        for (E person : source) {
             if (rel == Relative.children)
                 System.out.println(Relative.parent + " " + person.getFullName());
             else {
@@ -40,4 +39,6 @@ public class Compilation {
 
         }
     }
+
+
 }

@@ -1,8 +1,12 @@
 package human;
+import humanGroup.HumanGroupItem;
+import relative.Relative;
+import tree.Tree;
+
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human implements Comparable<Human>{
+public class Human implements Comparable<Human>, HumanGroupItem, Tree {
     private String fullName;
     private human.Gender gender;
     private LocalDate birthDate;
@@ -32,6 +36,21 @@ public class Human implements Comparable<Human>{
 
 
     public String getFullName() { return fullName; }
+
+    @Override
+    public Object getPerson1() {
+        return null;
+    }
+
+    @Override
+    public Object getPerson2() {
+        return null;
+    }
+
+    @Override
+    public Relative getRe() {
+        return null;
+    }
 
     public human.Gender getGender() {
         return gender;

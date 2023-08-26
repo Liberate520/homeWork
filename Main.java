@@ -4,12 +4,13 @@ import relative.Relative;
 import service.Service;
 import tree.Compilation;
 import tree.Node;
+import tree.Tree;
 import workingFile.FileData;
 
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static <E extends Tree<E>> void main(String[] args) {
 
         var irina = new Human("Ирина", Gender.Male, LocalDate.of(1990, 12, 12));
         var kesha = new Human("Кеша", Gender.Male, LocalDate.of(1992, 9, 1));
@@ -26,7 +27,6 @@ public class Main {
         gt.append(irina, ivan);
         gt.append(kesha, ivan);
         gt.append(irina, larisa);
-        gt.addHuman(larisa);
         Compilation com = new Compilation(gt);
         System.out.println("________________");
         com.printSearch(masha, Relative.parent);

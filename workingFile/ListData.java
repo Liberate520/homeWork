@@ -4,7 +4,7 @@ import tree.Node;
 
 import java.util.ArrayList;
 
-public class ListData implements WorkingFile {
+public abstract class ListData {
 
     private ArrayList<Node> base;
 
@@ -17,33 +17,17 @@ public class ListData implements WorkingFile {
         this.base.add(n);
 
     }
-    @Override
-    public String load(String file){
-        return file;
-    }
-
-    @Override
-    public void remove(Node ob) {
-    }
-
-    @Override
-    public int getInd(Node ob) {
-        return 0;
-    }
-
-    @Override
-    public Node get(int index) {
-        return null;
-    }
-
-    @Override
-    public void change(Node obOld, Node obNew) {
-    }
-
-    @Override
-    public int getSize() {
-        return 0;
-    }
 
 
+    public abstract String load(String file);
+
+    public abstract void remove(Node ob);
+
+    public abstract int get(int index);
+
+    public abstract int getInd(Node ob);
+
+    public abstract void change(Node obOld, Node obNew);
+
+    public abstract int getSize();
 }

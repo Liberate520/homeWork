@@ -5,15 +5,16 @@ import tree.Node;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 
-public class FileData extends ListData {
+
+public class FileData extends ListDataImpl{
 
     private Path file;
     public ArrayList<String> contents = new ArrayList<>();
@@ -27,6 +28,7 @@ public class FileData extends ListData {
 
     }
 
+
     public String load(String filePath) {
         try {
             this.file = Paths.get(filePath);
@@ -37,9 +39,7 @@ public class FileData extends ListData {
         return filePath;
     }
 
-    private String[] parse(int lineNo) {
-        return Pattern.compile(this.template).split(this.contents.get(lineNo));
-    }
+
 
 
     public void add(Node n) {
@@ -68,16 +68,19 @@ public class FileData extends ListData {
     }
 
 
+
     public void remove(Node n) {
         int index = getInd(n);
         contents.remove(index);
-        super.remove(n);
         try {
             Files.write(file, contents);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
+
 
 }
 

@@ -1,19 +1,19 @@
 package tree;
 
-import human.Human;
+
 import relative.Relative;
 
 import java.util.ArrayList;
 
-public class Node {
-    Human person1;
+public class Node<E extends Tree<E>>{
+    E person1;
     private Relative re;
-    Human person2;
+    E person2;
 
 
-    public ArrayList<Node> tree = new ArrayList<>();
-    public ArrayList<Node> listHuman = new ArrayList<>();
-    public Node(Human person1, Relative re, Human person2) {
+    public ArrayList<Node<E>> tree = new ArrayList<>();
+
+    public Node(E person1, Relative re, E person2) {
 
         this.person1 = person1;
         this.re = re;
@@ -22,27 +22,23 @@ public class Node {
     }
 
     public Node() {
-       this.person1 = getPerson1();
-    }
-
-    public Node(Human person1) {
-        this.person1 =person1;
+        this.person1 = getPerson1();
     }
 
 
-    public ArrayList<Node> getTree() {
+    public ArrayList<Node<E>> getTree() {
         return tree;
     }
 
 
-    public void append(Human parent, Human children) {
-        tree.add(new Node(parent, Relative.parent, children));
-        tree.add(new Node(children, Relative.children, parent));
+    public void append(E parent, E children) {
+        tree.add(new Node<>(parent, Relative.parent, children));
+        tree.add(new Node<>(children, Relative.children, parent));
     }
 
 
 
-    public Human getPerson1() {
+    public E getPerson1() {
         return person1;
     }
 
@@ -50,13 +46,10 @@ public class Node {
         return re;
     }
 
-    public Human getPerson2() {
+    public E getPerson2() {
         return person2;
     }
 
-    public void addHuman(Human person1){
-        listHuman.add(new Node(person1));
-    }
 
     public String toString() {
         return String.format("<%s | %s | %s>\n", person1.getFullName(), re, person2.getFullName());
@@ -67,4 +60,5 @@ public class Node {
 
 
     }
+
 }
