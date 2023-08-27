@@ -1,3 +1,9 @@
+package Fileworks;
+
+import Model.FamilyTree;
+import Model.FamilyTreeSerializable;
+import Model.Person;
+
 import java.io.*;
 import java.util.List;
 
@@ -8,10 +14,6 @@ public class FamilyTreeFileManager implements FamilyTreeSerializable {
         this.people = people;
     }
 
-    public List<Person> getPeople() {
-        return people;
-    }
-
     @Override
     public void saveFamilyTree(String fileName) throws IOException {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
@@ -19,10 +21,14 @@ public class FamilyTreeFileManager implements FamilyTreeSerializable {
         }
     }
 
-    @Override
-    public void loadFamilyTree(String fileName) throws IOException, ClassNotFoundException {
+
+    public FamilyTree loadFamilyTree(String fileName) throws IOException, ClassNotFoundException {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             people = (List<Person>) inputStream.readObject();
+            return new FamilyTree(people); // Возвращает загруженное дерево семьи
         }
     }
+
+
+
 }

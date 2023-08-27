@@ -1,8 +1,16 @@
+package Model;
+
+import Model.Person;
+import Model.Relationship;
+import Model.RelationshipType;
+
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Iterator;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Person> {
     private List<Person> people;
 
     public FamilyTree(List<Person> people) {
@@ -30,5 +38,16 @@ public class FamilyTree implements Serializable {
                 .flatMap(person -> person.getRelationships().stream())
                 .collect(Collectors.toList());
     }
-}
 
+    public void sortByName() {
+        people.sort(Comparator.comparing(Person::getFullName));
+    }
+
+    public void sortByBirthDate() {
+        people.sort(Comparator.comparing(Person::getBirthDate));
+    }
+    @Override
+    public Iterator<Person> iterator() {
+        return people.iterator();
+    }
+}

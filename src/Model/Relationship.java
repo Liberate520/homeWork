@@ -1,7 +1,11 @@
+package Model;
+
+import Model.Person;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-class Relationship implements Serializable {
+public class Relationship implements Serializable {
     private Person person1;
     private Person person2;
     private RelationshipType type;
@@ -31,7 +35,7 @@ class Relationship implements Serializable {
 
     @Override
     public String toString() {
-        return "Relationship{" +
+        return "Model.Relationship{" +
                 "person1=" + person1.getFullName() +
                 ", person2=" + person2.getFullName() +
                 ", type=" + type +

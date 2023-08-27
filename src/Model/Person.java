@@ -1,20 +1,22 @@
+package Model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-class Person implements Serializable {
+public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-//    private List<Person>parents;
-//    private List<Person> children;
+//    private List<Model.Person>parents;
+//    private List<Model.Person> children;
     private List<Relationship> relationships;
 
-    public Person(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate /*, Person father, Person mother*/) {
+    public Person(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate /*, Model.Person father, Model.Person mother*/) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,7 +66,14 @@ class Person implements Serializable {
     //TODO make collision-like AND GETALLINFO METHOD
     public void addRelationship(Relationship relationship) {
         relationships.add(relationship);
+
+        if (!relationship.getPerson2().relationships.contains(relationship)) {
+            // Create symmetric relationship for person2
+            Relationship symmetricRelationship = new Relationship(relationship.getPerson2(), this, relationship.getType());
+            relationship.getPerson2().relationships.add(symmetricRelationship);
+        }
     }
+
 
     public List<Relationship> getRelationships() {
         return relationships;
@@ -83,7 +92,7 @@ class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Model.Person{" +
                 "id=" + id +
                 ", fullName='" + getFullName() + '\'' +
                 ", gender=" + gender +
@@ -97,7 +106,7 @@ class Person implements Serializable {
 
         info.append("ID: ").append(id).append("\n");
         info.append("Full Name: ").append(getFullName()).append("\n");
-        info.append("Gender: ").append(gender).append("\n");
+        info.append("Model.Gender: ").append(gender).append("\n");
         info.append("Birth Date: ").append(birthDate).append("\n");
         info.append("Death Date: ").append(getDeathYear()).append("\n");
 
@@ -115,15 +124,19 @@ class Person implements Serializable {
                 Person person2 = relationship.getPerson2();
                 RelationshipType type = relationship.getType();
 
-                String relationshipInfo = person1.getFullName() + " (" + person1.getGender() + ") - " +
-                        person2.getFullName() + " (" + person2.getGender() + ") : " +
-                        type;
+                String relationshipInfo = String.format(
+                        "%s (%s) - %s (%s) : %s",
+                        person1.getFullName(), person1.getGender(),
+                        person2.getFullName(), person2.getGender(),
+                        type
+                );
 
                 info.append(relationshipInfo).append("\n");
             }
         } else {
             info.append("No Relationships\n");
         }
+
 
         return info.toString();
     }
