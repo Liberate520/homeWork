@@ -9,65 +9,52 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<TreeEntity> familyTree = new FamilyTree<>();
 
-        // Adding family members
-        Person john = new Person("John", Gender.MALE, "1990-01-01");
-        Person alice = new Person("Alice", Gender.FEMALE, "1992-05-15");
-        Person mike = new Person("Mike", Gender.MALE, "1995-11-30");
-        Person jenny = new Person("Jenny", Gender.FEMALE, "1998-08-20");
-        Person susan = new Person("Susan", Gender.FEMALE, "1965-03-10");
-        Person patrick = new Person("Patrick", Gender.MALE, "1962-07-25");
+        TreeEntity john = new TreeEntity("John", "1990-01-01");
+        TreeEntity alice = new TreeEntity("Alice", "1992-05-15");
+        TreeEntity mike = new TreeEntity("Mike", "1995-11-30");
+        TreeEntity jenny = new TreeEntity("Jenny", "1998-08-20");
+        TreeEntity susan = new TreeEntity("Susan", "1965-03-10");
+        TreeEntity patrick = new TreeEntity("Patrick", "1962-07-25");
 
-        // Creating relationships
-        john.addChild(alice);
-        john.addChild(mike);
-        john.addChild(jenny);
+        familyTree.addEntity(john);
+        familyTree.addEntity(alice);
+        familyTree.addEntity(mike);
+        familyTree.addEntity(jenny);
+        familyTree.addEntity(susan);
+        familyTree.addEntity(patrick);
 
-        susan.addChild(alice);
-        susan.addChild(mike);
-        susan.addChild(jenny);
+        String selectedEntity = "John";
+        List<TreeEntity> childrenOfSelectedEntity = familyTree.getEntitiesByName(selectedEntity);
 
-        patrick.addChild(alice);
-        patrick.addChild(mike);
-        patrick.addChild(jenny);
-
-        familyTree.addPerson(john);
-        familyTree.addPerson(alice);
-        familyTree.addPerson(mike);
-        familyTree.addPerson(jenny);
-        familyTree.addPerson(susan);
-        familyTree.addPerson(patrick);
-
-        String selectedPerson = "John";
-        List<Person> childrenOfSelectedPerson = familyTree.getChildrenOfPerson(selectedPerson);
-
-        if (!childrenOfSelectedPerson.isEmpty()) {
-            System.out.println("Children of " + selectedPerson + ":");
-            for (Person child : childrenOfSelectedPerson) {
+        if (!childrenOfSelectedEntity.isEmpty()) {
+            System.out.println("Children of " + selectedEntity + ":");
+            for (TreeEntity child : childrenOfSelectedEntity) {
                 System.out.println(child);
             }
         } else {
-            System.out.println(selectedPerson + " does not have any children.");
+            System.out.println(selectedEntity + " does not have any children.");
         }
 
         FileHandler fileHandler = new FileHandler();
         try {
-            fileHandler.writeToFile(familyTree.getPeople(), "family_tree.dat");
+            fileHandler.writeToFile(familyTree.getEntities(), "family_tree.dat");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
 
-        List<Person> loadedPeople = new ArrayList<>();
+        List<Person> loadedEntities = new ArrayList<>();
         try {
-            loadedPeople = fileHandler.readFromFile("family_tree.dat");
+            loadedEntities = fileHandler.readFromFile("family_tree.dat");
         } catch (IOException e) {
             System.err.println("Error reading from file: " + e.getMessage());
         }
-        // Printing the family tree
+
+        // Printing the loaded entities
         System.out.println("\nLoaded Family Tree:");
-        for (Person person : loadedPeople) {
-            System.out.println(person);
+        for (Person entity : loadedEntities) {
+            System.out.println(entity);
         }
     }
 }

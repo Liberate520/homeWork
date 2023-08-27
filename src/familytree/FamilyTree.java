@@ -1,21 +1,34 @@
 package familytree;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree {
-    private final List<Person> people;
+public class FamilyTree<T extends TreeEntity> implements Serializable, Iterable<T> {
+    private List<T> entities;
+
     public FamilyTree(){
-        this.people = new ArrayList<>();
-    }
-    public void addPerson(Person person) {
-        people.add(person);
-    }
-    public List<Person> getPeople() {
-        return people;
+        this.entities = new ArrayList<>();
     }
 
-    public Iterator<Person> iterator() {
-        return people.iterator();
+    public void addEntity(TreeEntity entity) {
+        entities.add(entity);
+    }
+
+    public List<Person> getEntities() {
+        return entities;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return entities.iterator();
+    }
+
+    public void sortByName() {
+        entities.sort(Comparator.comparing(TreeEntity::getName));
+    }
+
+    public void sortByDateOfBirth() {
+        entities.sort(Comparator.comparing(TreeEntity::getDOB));
     }
 
     public Person findPersonByName(String name) {
@@ -41,11 +54,13 @@ public class FamilyTree {
         }
     }
 
-    public void sortByName(){
-        people.sort(Comparator.comparing(Person::getName));
-    }
-
-    public void sortByDateOfBirth(){
-        people.sort(Comparator.comparing(Person::getDayOfBirth));
+    public List<T> getEntitiesByName(String name) {
+        List<T> result = new ArrayList<>();
+        for (T entity : entities) {
+            if (entity.getName().equalsIgnoreCase(name)) {
+                result.add(entity);
+            }
+        }
+        return result;
     }
 }

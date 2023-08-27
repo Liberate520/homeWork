@@ -3,10 +3,6 @@ package familytree;
 import java.util.ArrayList;
 import java.util.List;
 
-enum Gender {
-    MALE,
-    FEMALE
-}
 public class Person {
     private String name;
     private Gender gender;
