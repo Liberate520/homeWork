@@ -39,7 +39,7 @@ public class Main {
 
         FileHandler fileHandler = new FileHandler();
         try {
-            fileHandler.writeToFile(familyTree.getEntities(), "family_tree.dat");
+            fileHandler.writeToFile((List<TreeEntity>) familyTree.getEntities(), "family_tree.dat");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }

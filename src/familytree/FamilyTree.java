@@ -11,10 +11,10 @@ public class FamilyTree<T extends TreeEntity> implements Serializable, Iterable<
     }
 
     public void addEntity(TreeEntity entity) {
-        entities.add(entity);
+        entities.add((T) entity);
     }
 
-    public List<Person> getEntities() {
+    public List<T> getEntities() {
         return entities;
     }
 
@@ -31,21 +31,6 @@ public class FamilyTree<T extends TreeEntity> implements Serializable, Iterable<
         entities.sort(Comparator.comparing(TreeEntity::getDOB));
     }
 
-    public Person findPersonByName(String name) {
-        for (Person person : people) {
-            if (person.getName().equals(name)) {
-                return person;
-            }
-        }
-        return null;
-    }
-    public List<Person> getChildrenOfPerson(String name) {
-        Person person = findPersonByName(name);
-        if (person != null) {
-            return person.getChildren();
-        }
-        return new ArrayList<>();
-    }
     public void printFamilyTree(Person person, int level) {
         String indent = "    ".repeat(level);
         System.out.println(indent + person);
