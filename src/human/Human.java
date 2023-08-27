@@ -3,7 +3,9 @@ package human;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Human implements Serializable {
+import familyTree.TreeItem;
+
+public class Human implements Serializable, TreeItem {
     private long id;
     private String name;
     private String lastname;
