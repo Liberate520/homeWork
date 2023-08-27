@@ -1,3 +1,4 @@
+import dog.Dog;
 import human.Gender;
 import human.Human;
 import relative.Relative;
@@ -10,16 +11,16 @@ import workingFile.FileData;
 import java.time.LocalDate;
 
 public class Main {
-    public static <E extends Tree<E>> void main(String[] args) {
+    public static  void main(String[] args) {
 
-        var irina = new Human("Ирина", Gender.Male, LocalDate.of(1990, 12, 12));
+        var irina = new Human("Ирина", Gender.Female, LocalDate.of(1990, 12, 12));
         var kesha = new Human("Кеша", Gender.Male, LocalDate.of(1992, 9, 1));
         var vasya = new Human("Вася", Gender.Male, LocalDate.of(1940, 3, 15));
         var masha = new Human("Маша", Gender.Female, LocalDate.of(1972, 9, 10));
         var jane = new Human("Женя", Gender.Male, LocalDate.of(2017, 4, 2));
         var ivan = new Human("Ваня", Gender.Male, LocalDate.of(2019, 4, 2));
-        var larisa = new Human("Лариса", Gender.Male, LocalDate.of(2022, 5, 10));
-        Node gt = new Node();
+        var larisa = new Human("Лариса", Gender.Female, LocalDate.of(2022, 5, 10));
+        Node gt = new Node<>();
         gt.append(vasya, masha);
         gt.append(masha, irina);
         gt.append(irina, jane);
@@ -67,5 +68,20 @@ public class Main {
         System.out.println(service.getHumanList());
         service.sortByAge();
         System.out.println(service.getHumanList());
+
+        Dog sharik = new Dog("Шарик", dog.Gender.Male,LocalDate.of(2010,10,10));
+        Dog mila = new Dog("Мила", dog.Gender.Famale,LocalDate.of(2012,06,01));
+        Dog fima = new Dog("Фима", dog.Gender.Male, LocalDate.of(2019,05,03));
+        Node dt = new Node<>();
+        dt.append(sharik, fima);
+        dt.append(mila, fima);
+        Compilation dog_com = new Compilation<>(dt);
+        dog_com.printSearch(sharik,Relative.parent);
+        dog_com.printSearch(sharik, Relative.children);
+        fd.add(dt);
+        fd.load("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt");
+
+
+
     }
 }

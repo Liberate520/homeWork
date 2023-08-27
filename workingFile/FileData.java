@@ -1,20 +1,18 @@
 package workingFile;
 
 import tree.Node;
-
+import tree.Tree;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
 
-public class FileData extends ListDataImpl{
+public class FileData<E extends Tree<E>> implements WorkingFile<E> {
 
     private Path file;
     public ArrayList<String> contents = new ArrayList<>();
@@ -39,7 +37,20 @@ public class FileData extends ListDataImpl{
         return filePath;
     }
 
+    @Override
+    public int get(int index) {
+        return index;
+    }
 
+    @Override
+    public int getInd(Node<E> ob) {
+        return 0;
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
+    }
 
 
     public void add(Node n) {
@@ -57,7 +68,7 @@ public class FileData extends ListDataImpl{
 
     public void change(Node n, Node m) {
         int index = getInd(n);
-        super.change(n, m);
+        change(n, m);
         String data = m.toFileString();
         contents.set(index, data);
         try {

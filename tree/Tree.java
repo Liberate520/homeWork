@@ -1,14 +1,9 @@
 package tree;
 
 
-import relative.Relative;
 
-public interface Tree<E>{
-    Object getPerson1();
+public interface Tree<E> {
 
-    Object getPerson2();
-
-    Relative getRe();
 
     String getInfo();;
 

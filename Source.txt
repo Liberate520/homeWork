@@ -1,15 +1,5 @@
-[<Вася | parent | Маша>
-, <Маша | children | Вася>
-, <Маша | parent | Ирина>
-, <Ирина | children | Маша>
-, <Ирина | parent | Женя>
-, <Женя | children | Ирина>
-, <Кеша | parent | Женя>
-, <Женя | children | Кеша>
-, <Ирина | parent | Ваня>
-, <Ваня | children | Ирина>
-, <Кеша | parent | Ваня>
-, <Ваня | children | Кеша>
-, <Ирина | parent | Лариса>
-, <Лариса | children | Ирина>
+[<Шарик | parent | Фима>
+, <Фима | children | Шарик>
+, <Мила | parent | Фима>
+, <Фима | children | Мила>
 ] 
