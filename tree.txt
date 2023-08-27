@@ -1,0 +1,4 @@
+3 Ivanova Tonya Female 2020-12-25 null 1 2 null
+2 Somova Eva Female 1980-05-12 null null null 1
+1 Ivanov Adam Male 1979-10-12 null null null 2
+4 Ivanov Fima Male 2022-08-15 null 1 2 null

@@ -1,10 +1,11 @@
-package family_tree;
+package family_tree.FamilyTree.Person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 
 
-public class Person {
+public class Person implements Serializable {
     private int inn;
     private String firstName;
     private String lastName;
@@ -56,7 +57,7 @@ public class Person {
     }
 
     public void setParents(Person Parent) {
-        this.setParents (Parent, Parent);
+        this.setParents(Parent, Parent);
     }
 
     private void addChildren(Person children) {
@@ -65,10 +66,10 @@ public class Person {
     }
 
     private void addParent(Person parent) {
-        if ((this.mother == null)&&(parent.gender == Gender.Female)) {
+        if ((this.mother == null) && (parent.gender == Gender.Female)) {
             this.mother = parent;
         }
-        if ((this.father == null)&& (parent.gender == Gender.Male)) {
+        if ((this.father == null) && (parent.gender == Gender.Male)) {
             this.father = parent;
         }
 
@@ -76,6 +77,14 @@ public class Person {
 
     public String getInfo() {
         return String.join(" ", this.firstName, this.lastName);
+    }
+
+    public String getName() {
+        return this.lastName;
+    }
+
+    public LocalDate getDataBirth() {
+        return this.dataBirth;
     }
 
     public String getFullInfo() {
@@ -99,12 +108,9 @@ public class Person {
         return new String(info);
     }
 
-    public String getString() {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        info.append(this.inn);
-        info.append(" ");
-        info.append(this.getInfo());
-        info.append(" ");
+        info.append(this.inn + " " + this.getInfo() + " ");
         info.append(this.gender);
         info.append(" ");
         info.append(this.dataBirth);
