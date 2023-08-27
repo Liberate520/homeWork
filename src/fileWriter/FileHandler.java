@@ -1,26 +1,27 @@
+package fileWriter;
+
 import FamilyTree.Tree;
 
 import java.io.*;
 
 
-public class FileHandler extends Tree implements Writable{
+public class FileHandler extends Tree implements Writable {
     private String filename;
-    Tree stream;
 
-    public FileHandler (String filename, Tree stream) {
+    public FileHandler (String filename) {
         this.filename= filename;
-        this.stream = stream;
     }
+
     public String getFilename() {
         return filename;
     }
-
-    public void saveFile() throws IOException {
+    @Override
+    public void saveFile(Tree family) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-        out.writeObject(stream);
+        out.writeObject(family);
         out.close();
     }
-
+    @Override
     public Tree loadFile() throws IOException, ClassNotFoundException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
         Tree tree2 = (Tree) in.readObject();
@@ -28,5 +29,3 @@ public class FileHandler extends Tree implements Writable{
     }
 
 }
-
-

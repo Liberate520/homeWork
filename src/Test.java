@@ -1,3 +1,4 @@
+import fileWriter.FileHandler;
 import FamilyTree.Tree;
 import Human.Gender;
 import Human.Person;
@@ -9,16 +10,20 @@ import java.time.LocalDate;
 public class Test {
     public static void main(String[] args) throws ClassNotFoundException, IOException {
         Tree tree = testTree();
-        System.out.println("Before: \n" + tree);
+       System.out.println("Before: \n" + tree);
 
-        FileHandler fh = new FileHandler("person.out", tree);
-        fh.saveFile();
+        FileHandler fh = new FileHandler("person.txt");
+        fh.saveFile(tree);
         Tree tree2 = fh.loadFile();
+//        tree2.sortByName();
+        tree2.sortByBirthDate();
 
         System.out.println("After: \n" + tree2);
+
+
     }
 
-    static Tree testTree() throws IOException {
+    static Tree testTree(){
         Tree tree = new Tree();
 
         Person james = new Person("James Jonsy", Gender.Male, LocalDate.of(1957, 6, 20));
