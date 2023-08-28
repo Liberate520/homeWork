@@ -19,7 +19,10 @@ public class Main {
         System.out.println(s.getHumanListInfo());
         s.sortByName();
         System.out.println(s.getHumanListInfo());
-
+        s.sortByGender();
+        System.out.println(s.getHumanListInfo());
+        s.sortByAge();
+        System.out.println(s.getHumanListInfo());
     }
 
 

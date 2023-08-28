@@ -1,6 +1,7 @@
 package familyTree;
 
 import human.Human;
+import human.HumanComparatorByGender;
 import human.HumansComparatorByAge;
 
 import java.io.Serializable;
@@ -37,6 +38,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void sortByAge() {
-        Collections.sort(humans, new HumansComparatorByAge());
+        humans.sort(new HumansComparatorByAge());
+    }
+
+    public void sortByGender(){
+        humans.sort(new HumanComparatorByGender());
     }
 }

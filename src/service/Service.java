@@ -222,4 +222,8 @@ public class Service {
     public void sortByAge(){
         tree.sortByAge();
     }
+
+    public void sortByGender(){
+        tree.sortByGender();
+    }
 }
