@@ -1,17 +1,19 @@
-import java.io.Serializable;
+package service;
+
+import familyTree.FamilyTree;
+import human.Gender;
+import human.Human;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private List<Human> humans;
+public class Service {
     private long humansId;
-
-    public FamilyTree(List<Human> humans) {
-        this.humans = humans;
-    }
-
-    public FamilyTree() {
-        this(new ArrayList<>());
+    private  FamilyTree tree;
+    private List<Human> humans;
+    public Service(FamilyTree tree) {
+        this.tree = tree;
+        this.humans = tree.getHumanList();
     }
 
     /**
@@ -29,7 +31,7 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * принимает человека и добавляет его в качестве ребенка родителям (если они есть),
+     * Принимает человека и добавляет его в качестве ребенка родителям (если они есть),
      * если родителя нет то цикл продолжается без добавления ему ребенка
      * @param human
      */
@@ -97,8 +99,8 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * принимает 2 id, с помощью метода getById инициализируем 2 объекта Human,
-     * далее передаем их в перегруженный метод setWedding(Human, Human)
+     * принимает 2 id, с помощью метода getById инициализируем 2 объекта human.Human,
+     * далее передаем их в перегруженный метод setWedding(human.Human, human.Human)
      * @param humanId1
      * @param humanId2
      * @return
@@ -113,7 +115,7 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * принимает 2 объекта Human, методом .getSpouse проверяет нет ли у объектов супругов(Spouse)
+     * принимает 2 объекта human.Human, методом .getSpouse проверяет нет ли у объектов супругов(Spouse)
      * если супругов нет, методом setSpouse устанавливает им супргов(друг друга)
      * @param human1
      * @param human2
@@ -129,8 +131,8 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * принимает 2 id, с помощью метода getById инициализируем 2 объекта Human,
-     * далее передаем их в перегруженный метод setDivorce(Human, Human)
+     * принимает 2 id, с помощью метода getById инициализируем 2 объекта human.Human,
+     * далее передаем их в перегруженный метод setDivorce(human.Human, human.Human)
      * @param humanId1
      * @param humanId2
      * @return
@@ -145,7 +147,7 @@ public class FamilyTree implements Serializable {
     }
 
     /**
-     * принимает 2 объекта Human, методом .getSpouse проверяет являются ли объекты супругами(Spouse)
+     * принимает 2 объекта human.Human, методом .getSpouse проверяет являются ли объекты супругами(Spouse)
      * друг друга, методом setSpouse устанавливает им супргов(null - отсутсвует)
      * @param human1
      * @param human2
@@ -203,13 +205,21 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    /**
-     * метод выводящий в консоль все объекты из списка
-     */
-    public List<Human> getAllHumans() {
-        return humans;
-
-
+    public String getHumanListInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Список людей: \n");
+        for (Human human : humans){
+            sb.append(human);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
+    public void sortByName(){
+        tree.sortByName();
+    }
+
+    public void sortByAge(){
+        tree.sortByAge();
+    }
 }

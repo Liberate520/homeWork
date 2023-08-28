@@ -1,3 +1,8 @@
+package fileOperations;
+
+import familyTree.FamilyTree;
+import human.Human;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +13,7 @@ public class FileOperationTXT implements FileOperation {
     @Override
     public void write(String fileName, FamilyTree tree) {
         try (FileWriter writer = new FileWriter(fileName, false)) {
-            List<Human> humans = tree.getAllHumans();
+            List<Human> humans = tree.getHumanList();
             for (Human human : humans) {
                 writer.write(human.toString());
                 writer.append("\n");
