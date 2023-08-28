@@ -45,8 +45,6 @@ public class ObjIO implements FileReadWrite {
             e.getMessage();
             e.printStackTrace();
         }
-
-
         return aFileName;
 	}
 }

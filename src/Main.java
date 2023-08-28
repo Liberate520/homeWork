@@ -16,7 +16,7 @@ import src.model.Human;
 import src.model.Gender;
 import src.model.HumanTree;
 import src.model.ObjIO;
-import src.model.AgeCalculator;
+//import src.model.AgeCalculator;
 import src.model.HumanComparatorByAge;
 import src.model.HumanComparatorByAge;
 
@@ -125,11 +125,11 @@ public class Main
 		newHumanTree.addHuman(new Human("SidoV SS", Gender.Man, LocalDate.of(1989, 3, 9)));
 		
 		// save  newHumanTree.saveToFile fHumanTreeLog
-		newHumanTree.saveToFile(fHumanTreeLog);
-		//   
+//		newHumanTree.saveToFile(fHumanTreeLog);
+		//
 		System.out.println("add load FromFile HumanTree  !!! 2 :\n");
-		newHumanTree.addFromFile(fHumanTreeLog);
-		newHumanTree.addFromFile(fHumanTreeLog);
+//		newHumanTree.addFromFile(fHumanTreeLog);
+//		newHumanTree.addFromFile(fHumanTreeLog);
 		System.out.println(newHumanTree);
 		
 		// Sort by Name
@@ -168,17 +168,7 @@ public class Main
 		view.start();
 	}
 
-	public static void testCalculateAge_Success()     {
-        // setup
-        LocalDate birthDate = LocalDate.of(1961, 5, 17);
-        // exercise
-        int actual = AgeCalculator.calculateAge(birthDate, LocalDate.of(2016, 7, 12));
-        // assert
-        // Assert.assertEquals(55, actual);
-        
-        System.out.println("AgeCalculator : (2016, 7, 12) - (1961, 5, 17) : " );
-        System.out.println(actual + " == 55  !!!" );
-    }
+
     
     public static void saveToFile(String aFileName) throws IOException, ClassNotFoundException  {
         

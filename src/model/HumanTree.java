@@ -12,8 +12,15 @@ import java.util.List;
 public class HumanTree<E extends Human> implements Serializable, Iterable<E> {  // E inheritance Human
     private List <E> humensTree;
     private String fileName;
-    
-    
+
+    public void setFileName(String aFileName){
+        this.fileName = aFileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
     public HumanTree() { humensTree = new ArrayList<E>(); }  // constructor HumanTree
     
     public HumanTree(List <E> aHumensTree) {  // constructor HumanTree from List
@@ -60,36 +67,36 @@ public class HumanTree<E extends Human> implements Serializable, Iterable<E> {  
     }
     
 
-    public String saveToFile(String aFileName) {  // throws IOException, ClassNotFoundException
-         //Сериализация в файл с помощью класса ObjectOutputStream
-        ObjIO aIO = new ObjIO();
-        aIO.writeFile(aFileName, (Serializable) humensTree);
-
-        fileName = aFileName;
-        return "HumanTree save to " + aFileName;
-    }
+//    public String saveToFile(String aFileName) {  // throws IOException, ClassNotFoundException
+//         //Сериализация в файл с помощью класса ObjectOutputStream
+//        ObjIO aIO = new ObjIO();
+//        aIO.writeFile(aFileName, (Serializable) humensTree);
+//
+//        fileName = aFileName;
+//        return "HumanTree save to " + aFileName;
+//    }
     
-    public List <E> loadFromFile(String aFileName) { //  throws IOException, ClassNotFoundException
-        List <E> aHT;
-        // Востановление из файла с помощью класса ObjectInputStream
-        ObjIO aIO = new ObjIO();
-        aHT = (List <E>) aIO.readFile(aFileName);
-        humensTree = aHT;
-        fileName = aFileName;
-        return aHT;
-    }
+//    public List <E> loadFromFile(String aFileName) { //  throws IOException, ClassNotFoundException
+//        List <E> aHT;
+//        // Востановление из файла с помощью класса ObjectInputStream
+//        ObjIO aIO = new ObjIO();
+//        aHT = (List <E>) aIO.readFile(aFileName);
+//        humensTree = aHT;
+//        fileName = aFileName;
+//        return aHT;
+//    }
     
-    public List <E> addFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
-        List <E> aHT;
-        // Востановление из файла с помощью класса ObjectInputStream
-        ObjIO aIO = new ObjIO();
-        aHT = (List <E>) aIO.readFile(aFileName);
-        for (E h: aHT){
-            this.addHuman(h);
-        }  
-        fileName = aFileName;
-        return humensTree;
-    }
+//    public List <E> addFromFile(String aFileName)  throws IOException, ClassNotFoundException    {
+//        List <E> aHT;
+//        // Востановление из файла с помощью класса ObjectInputStream
+//        ObjIO aIO = new ObjIO();
+//        aHT = (List <E>) aIO.readFile(aFileName);
+//        for (E h: aHT){
+//            this.addHuman(h);
+//        }
+//        fileName = aFileName;
+//        return humensTree;
+//    }
 
     @Override
     public Iterator<E> iterator() {

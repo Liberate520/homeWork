@@ -4,7 +4,7 @@ import src.model.*;
 import src.view.View;
 import java.io.IOException;
 
-//import src.model.service.Service;
+import src.model.Service;
 import src.view.ConsoleUI;
 import src.view.View;
 
@@ -14,92 +14,72 @@ import java.time.format.DateTimeFormatter;
 
 public class Presenter {
     private View view;
-    private HumanTree<Human> humansTreeConnect;
+//    private HumanTree<Human> humansTreeConnect;
     private ObjIO serialize;
 
     private HumanComparatorByAge sortAge;
-
-//    private Service service;
+    private Service service;
 
     public Presenter(View view) {
         this.view = view;
-//        service = new Service();
+        this.service = new Service();
     }
 
     public Presenter(View view, HumanTree<Human> familyConnect, ObjIO serialize, HumanComparatorByAge sortAge) {
-        this.humansTreeConnect = familyConnect;
+//        this.humansTreeConnect = familyConnect;
         this.view = view;
+        this.service = new Service(familyConnect);
         this.serialize = serialize;
         this.sortAge = sortAge;
         view.setPresenter(this);
     }
 
     public void addHuman(String name, Gender aSex, LocalDate aBD) {  // String name, String sex, int age
-        // humansTreeConnect.addHuman(new Human(name, sex, age));
-        humansTreeConnect.addHuman(new Human(name, aSex, aBD));
+        service.addHuman(name, aSex, aBD);
     }
 
     public void addChild(String nameParent, LocalDate bdParent,
                          String nameChild, LocalDate bdChild) {
         if (!nameParent.equalsIgnoreCase(nameChild)   // names not equal
                 && ! bdParent.toString().equals(bdChild.toString())){  // birthDays not equal
-            // Find parent   nameParent,  bdParent
-            Human aParent = humanFind(nameParent, bdParent);
-
-            // find child   nameChild, bdChild
-            Human aChild = humanFind(nameChild, bdChild);
-
-            // add child to parent
-            aParent.addChild(aChild);
-            view.printAnswer(aParent.getChilds());
+            view.printAnswer(service.addChild( nameParent,  bdParent,
+                     nameChild, bdChild));
         } else {
             view.printAnswer("Ошибка: Имя (или день Рождения) Родителя и Ребенка совпадают...");
         }
-
     }
 
     public void getHumansInfo() {
-        String info = humansTreeConnect.toString();
+        String info = service.getTreeInfo();
         view.printAnswer(info);
     }
 
     public void sortByAge() {
-        humansTreeConnect.sortByAge();
-        view.printAnswer(humansTreeConnect.toString());
+        service.sortByAge();
+        view.printAnswer(service.getTreeInfo());
     }
 
     public void sortByName() {
-        humansTreeConnect.sortByName();
-        view.printAnswer(humansTreeConnect.toString());
+        service.sortByName();
+        view.printAnswer(service.getTreeInfo());
     }
 
     public void  LoadHumansFromFile(String fileName) {
         view.printAnswer("LoadHumansFromFile...");
-        humansTreeConnect.loadFromFile(fileName);
+        service.loadFromFile(fileName);
     }
 
     public void  SaveHumansToFile(String fileName)   {   // throws IOException, ClassNotFoundException
         view.printAnswer("SaveHumansToFile...");
-        humansTreeConnect.saveToFile(fileName);
+        service.saveToFile(fileName);
     }
 
     public void humanSearch(String name) {
-        Human human = humansTreeConnect.getByName(name);
-        if (human == null)
-            view.printAnswer("Такого человека нет в семье !");
-        else {
-            String foundHuman = human.toString();
-            view.printAnswer(foundHuman);
-        }
-    }
-
-    public Human humanFind(String name, LocalDate bd) {
-        Human human = humansTreeConnect.getByNameDay (name, bd);
-        return human;
+        view.printAnswer(service.humanSearch(name));
     }
 
     public void humanSearchFamily(String name) {
-        Human human = humansTreeConnect.getByName(name);
+        Human human = service.getByName(name);
         if (human == null)
             view.printAnswer("Такого человека нет в семье !");
         else {
@@ -114,6 +94,5 @@ public class Presenter {
             view.printAnswer(stringBuilder.toString());
         }
     }
-
 
 }
