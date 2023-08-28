@@ -1,0 +1,106 @@
+
+https://gb.ru/lessons/344116/homework
+
+Объектно-ориентированное программирование (семинары)
+Урок 1. Принципы ООП: Инкапсуляция, наследование, полиморфизм
+Реализовать, с учетом ооп подхода, приложение.
+Для проведения исследований с генеалогическим древом.
+Идея: описать некоторое количество компонент, например:
+модель человека и дерева
+Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
+Более детальное описание проекта и как его реализовать обсуждали в конце семинара
+Сделать PR к проекту: https://github.com/Liberate520/homeWork
+В качестве ответа указать ссылку на PR
+Ссылка на то как сделать пулреквест смотри в материалах к уроку
+Если PR все таки не дается, то можно и ссылкой на гит репозиторий
+
+Преподаватель ждет ваше задание до 26 июля, 20:00 +03:00 UTC
+Загрузите работу, чтобы преподаватель смог проверить ее и выставить оценку
+
+===========================================================================================================
+https://habr.com/ru/articles/431524/
+
+Serializable. Это интерфейс — идентификатор, который не имеет методов, но он указывает jvm, что объекты этого 
+класса могут быть сериализованы. Так как механизм сериализации связан с базовой системой ввода/вывода и переводит 
+объект в поток байтов, для его выполнения необходимо создать выходной поток OutputStream, упаковать его в 
+ObjectOutputStream и вызвать метод writeObject(). Для восстановления объекта нужно упаковать InputStream в 
+ObjectInputStream и вызвать метод readObject().
+===========================================================================================================
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html
+
+
+static LocalDate        parse(CharSequence text)    Obtains an instance of LocalDate from a text string such as 2007-12-03.
+static LocalDate        parse(CharSequence text, DateTimeFormatter formatter)   Obtains an instance of LocalDate 
+from a text string using a specific formatter.
+
+String  toString()      Outputs this date as a String, such as 2007-12-03.
+
+===========================================================================================================
+
+public class AgeCalculator {
+    public static int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+}
+==========================================================================================================
+
+https://stackoverflow.com/questions/18398828/how-to-add-new-unique-element-to-list
+    How to add new unique element to List [closed]
+
+Finally, you could combine a Set with a List, i.e., store every element in both: 
+the set gives you fast contains while the list retains order of the elements. With this approach, 
+you're not limited to a specific order defined by a Comparator but you can simply use the order of insertion:
+
+public void addUnique(Object element) throws NotUniqueException {
+    if (set.contains(element)) {
+        throw new NotUniqueException(list, element);
+    } else {
+        list.add(element);
+        set.add(element);
+    }
+}
+==========================================================================================================
+@Override
+public boolean equals(Object obj){
+	if (this == obj){return true;}
+	if (!(ojj instanceof Cat)){return false;}
+	Cat cat = (Cat) obj;
+	return (name.equals(cat.name) && // имя
+		breed.equals(cat.breed) &&  // порода
+		age == cat.age &&  // возраст
+		(owner.equals(cat.owner));	// хозяин]
+}
+
+@Override
+public int hashCode(){
+	return 17 * name.hashCode 
+		+ 11 * breed.hashCode
+		+ 4 * owner.hashCode
+		+ 7 * age;	
+}
+
+===========================================================================================================
+человек             human
+дата рождения       date of birth
+дата смерти         date of death
+
+отец                father
+мать                mother
+родители            parents    
+сын                son
+дочь               daughter 
+бабушка            grandmother    
+дедушка            grandfather    
+
+
+
+
+
+
+
+
