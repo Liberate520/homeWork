@@ -1,12 +1,12 @@
 package ru.gb.family_tree.family_tree.comparator;
 
-import ru.gb.family_tree.human.Human;
+import ru.gb.family_tree.family_tree.TreeItem;
 
 import java.util.Comparator;
 
-public class FamilyTreeComparatorByAge implements Comparator<Human> {
+public class FamilyTreeComparatorByAge<T extends TreeItem<T>> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o1.getAge(), o2.getAge());
     }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args){
         FamilyTree tree = testTree();
-//        System.out.println(tree);
+        System.out.println(tree);
 
         tree.sortByAge();
         System.out.println(tree);
@@ -30,7 +30,7 @@ public class Main {
     }
 
     static FamilyTree testTree(){
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         Human petya = new Human("Петр", Gender.Male, LocalDate.of(1973, 11, 15));
         Human olya = new Human("Ольга", Gender.Female, LocalDate.of(1975, 7, 20));
