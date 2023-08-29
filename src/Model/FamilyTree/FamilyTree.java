@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import Model.FamilyTree.Iterators.FamilyTreeIterator;
-import Model.Human.Human;
 import Model.Human.Comporators.HumanComparatorByAge;
 import Model.Human.Comporators.HumanComparatorByName;
 

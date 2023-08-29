@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 import Model.FamilyTree.FamilyTree;
 import Model.FileHandler.FileHandler;
+import Model.FileHandler.Writeable;
 import Model.Human.Human;
 
 public class Service {
-    private long humanId;
     private FamilyTree<Human> family;
-    private FileHandler fh;
+    private Writeable fh;
 
     
     public Service(){
@@ -25,7 +25,7 @@ public class Service {
     //     return family;
     // }
 
-    public FamilyTree<Human> toFamilyTree(Object object){
+    private FamilyTree<Human> toFamilyTree(Object object){
         return (FamilyTree<Human>)object;
     }
 
@@ -51,7 +51,7 @@ public class Service {
     }
 
     public void load(String path){
-        family = (FamilyTree<Human>) fh.load(path);
+        family = toFamilyTree(fh.load(path));
     }
 
     public void sortByAge(){

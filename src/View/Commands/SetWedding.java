@@ -11,6 +11,6 @@ public class SetWedding extends Command {
     }
 
     public void execute(){
-        consoleUI.setDivorse();
+        consoleUI.setWedding();
     }
 }
