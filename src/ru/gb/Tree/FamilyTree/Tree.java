@@ -7,6 +7,7 @@ import java.util.List;
 import ru.gb.Tree.Human.Comparators.HumanComparatorByBirthDate;
 import ru.gb.Tree.Human.Comparators.HumanComparatorByAge;
 import ru.gb.Tree.Human.Comparators.HumanComparatorByName;
+import ru.gb.Tree.Human.Human;
 
 
 

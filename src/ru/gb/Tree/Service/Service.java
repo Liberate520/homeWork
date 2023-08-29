@@ -15,7 +15,7 @@ public class Service{
 
     public Service(){
         tree = new Tree<>();
-        filePath = "homeWork\\src\\ru\\gb\\Tree\\FileHandler\\saveFile.out";
+        filePath = "saveFile.out";
         this.writable = new FileHandler();
 
     }
@@ -58,7 +58,7 @@ public class Service{
     public void saveFile(){
         
         writable.saveFile(tree, filePath);
-        System.out.println("");
+        System.out.println(" ");
     }
 
     public Tree<Human> readFile(){
