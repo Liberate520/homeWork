@@ -10,15 +10,16 @@ public class Main {
     public static void main(String[] args) {
         
         Service tree = familyTree();
-        // System.out.println(tree.getServiceInfo());
-        // tree.sortByName();
-        // System.out.println(tree.getServiceInfo());
-        // tree.sortByBirthDate();
-        // System.out.println(tree.getServiceInfo());
+        System.out.println(tree.getServiceInfo());
+        tree.saveFile();
+
+        tree.sortByName();
+        System.out.println(tree.getServiceInfo());
+        tree.sortByBirthDate();
+        System.out.println(tree.getServiceInfo());
         tree.sortByAge();
         System.out.println(tree.getServiceInfo());
-
-        tree.saveFile();
+        
         System.out.println(tree.readFile());
     }
 
