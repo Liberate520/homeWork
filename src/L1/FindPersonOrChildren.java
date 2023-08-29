@@ -16,11 +16,8 @@ public class FindPersonOrChildren {
                 System.out.println("//////////////////////////////");
                 return;
             }
-            else {
-                System.out.println("no such person1");
-            }
         }
-
+        System.out.println("no such person");
     }
     public static void findChildrenOfPerson(Family_tree people) {
         System.out.println("input name for finding children");
@@ -32,9 +29,8 @@ public class FindPersonOrChildren {
                 System.out.println(people.getPeople().get(i).children);
                 System.out.println("//////////////////////////////");
                 return;
-            } else {
-                System.out.println("no such person");
             }
         }
+        System.out.println("no such person");
     }
 }

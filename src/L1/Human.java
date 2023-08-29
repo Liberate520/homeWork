@@ -1,19 +1,20 @@
 package L1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
 
     private int ID;
     private int age;
     private String name;
     private String birthday;
     private Gender gender;
-
     private Human father;
     private Human mother;
     List<Human> children;
+    private Human spouse;
 
     public Human(int ID, int age, String name, String birthday, Gender gender, Human father, Human mother) {
         this.ID = ID;
@@ -24,6 +25,20 @@ public class Human {
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
+        father.children.add(this);
+        mother.children.add(this);
+    }
+
+    public Human(int ID, int age, String name, String birthday, Gender gender, Human father, Human mother, Human spouse) {
+        this.ID = ID;
+        this.age = age;
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        father.children.add(this);
+        mother.children.add(this);
+        children = new ArrayList<>();
+        this.spouse = spouse;
     }
 
     public Human(int ID, int age, String name, String birthday, Gender gender) {
@@ -111,9 +126,10 @@ public class Human {
                 ", name='" + name + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", gender=" + gender +
-                ", \n   father=" + father.name +
-                ", \n   mother=" + mother.name +
-                ", \n   children=" + children +
+                ", father=" + father.name +
+                ", mother=" + mother.name +
+                ", count of children=" + children.size() +
+                ", spouse=" + spouse +
                 '}';
     }
 }
