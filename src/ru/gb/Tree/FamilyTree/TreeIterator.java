@@ -4,13 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import ru.gb.Tree.FamilyTree.TreeIterator;
-import ru.gb.Tree.Human.Human;
 
-class TreeIterator implements Iterator<Human>{
+class TreeIterator <T> implements Iterator<T>{
     private int index;
-    private List<Human>humanList;
+    private List<T>humanList;
 
-    public TreeIterator(List<Human>humanList){
+    public TreeIterator(List<T>humanList){
         this.humanList = humanList;
     }
 
@@ -18,7 +17,7 @@ class TreeIterator implements Iterator<Human>{
         return humanList.size() > index;
     }
 
-    public Human next(){
+    public T next(){
         return humanList.get(index++);
     }
 }

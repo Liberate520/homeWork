@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>{
+import ru.gb.Tree.FamilyTree.TreeItem;
+
+public class Human implements Serializable, Comparable<Human>, TreeItem<Human>{
     private int id;
     private String name;
     private LocalDate birthDate;

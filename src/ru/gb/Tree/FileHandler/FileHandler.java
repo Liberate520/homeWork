@@ -5,11 +5,13 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import ru.gb.Tree.Service.Service;
+import ru.gb.Tree.Human.Human;
+import ru.gb.Tree.FamilyTree.Tree;
+
 
 public class FileHandler implements Writable {
 
-    public void saveFile(Service tree, String path){
+    public void saveFile(Tree<Human> tree, String path){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
             oos.writeObject(tree);
@@ -21,11 +23,11 @@ public class FileHandler implements Writable {
         } 
     }
 
-    public Service readFile(String path){
+    public Tree<Human> readFile(String path){
         
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path)))
         {
-            return (Service) ois.readObject();
+            return (Tree <Human>) ois.readObject(); // спросить на семинаре
         }
         catch(Exception e){
             System.out.println(e.getMessage());

@@ -4,26 +4,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ru.gb.Tree.Human.Human;
 import ru.gb.Tree.Human.Comparators.HumanComparatorByBirthDate;
 import ru.gb.Tree.Human.Comparators.HumanComparatorByAge;
 import ru.gb.Tree.Human.Comparators.HumanComparatorByName;
 
 
 
-public class Tree implements Serializable, Iterable<Human>{
-    private List<Human>humanList;
+public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
+    private List<E>humanList;
 
     public Tree(){
         humanList = new ArrayList<>();
     }
 
-    public void addHuman(Human human){
+    public void addHuman(E human){
         humanList.add(human);
     }
 
-    public Human getById(int id){
-        for (Human human: humanList){
+    public E getById(int id){
+        for (E human: humanList){
             if (human.getId() == id){
                 return human;
             }
@@ -31,8 +30,8 @@ public class Tree implements Serializable, Iterable<Human>{
         return null;
     }
     public void setWedding(int firstHumanId, int secondHumanId){
-        Human human1 = getById(firstHumanId);
-        Human human2 = getById(secondHumanId);
+        E human1 = getById(firstHumanId);
+        E human2 = getById(secondHumanId);
         if (human1.getSpouse()== null && human2.getSpouse()==null){
             human1.setSpouse(human2);
             human2.setSpouse(human1);
@@ -42,7 +41,7 @@ public class Tree implements Serializable, Iterable<Human>{
     public String getFamilyTreeInfo(){
         StringBuilder stringBuilder = new StringBuilder(); 
         stringBuilder.append("Семья состоит из:\n");
-        for (Human human : humanList) {
+        for (E human : humanList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
@@ -55,20 +54,20 @@ public class Tree implements Serializable, Iterable<Human>{
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new TreeIterator(humanList);
+    public Iterator<E> iterator() {
+        return new TreeIterator<>(humanList);
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByBirthDate() {
-        humanList.sort(new HumanComparatorByBirthDate());
+        humanList.sort(new HumanComparatorByBirthDate<>());
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge<>());
     }
      
 }

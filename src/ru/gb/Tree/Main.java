@@ -1,7 +1,7 @@
 package ru.gb.Tree;
 
 import java.time.LocalDate;
-import ru.gb.Tree.FileHandler.FileHandler;
+// import ru.gb.Tree.FileHandler.FileHandler;
 import ru.gb.Tree.Human.Gender;
 import ru.gb.Tree.Service.Service;
 
@@ -10,20 +10,16 @@ public class Main {
     public static void main(String[] args) {
         
         Service tree = familyTree();
-        System.out.println(tree.getServiceInfo());
-        tree.sortByName();
-        System.out.println(tree.getServiceInfo());
-        tree.sortByBirthDate();
-        System.out.println(tree.getServiceInfo());
+        // System.out.println(tree.getServiceInfo());
+        // tree.sortByName();
+        // System.out.println(tree.getServiceInfo());
+        // tree.sortByBirthDate();
+        // System.out.println(tree.getServiceInfo());
         tree.sortByAge();
         System.out.println(tree.getServiceInfo());
 
-        String filePath = "homeWork\\src\\ru\\gb\\Tree\\FileHandler\\saveFile.out";
-
-        FileHandler save = new FileHandler();
-        save.saveFile(tree, filePath);
-        System.out.println("");
-        System.out.println("Сохраненный файл: \n"+ save.readFile(filePath));
+        tree.saveFile();
+        System.out.println(tree.readFile());
     }
 
     static Service familyTree(){
@@ -50,6 +46,7 @@ public class Main {
 
         service.addNewPerson("Анна", Gender.female, LocalDate.of(2021,5,4), 4);
         service.addNewChild(4, 6);
+
         return service;
     }
 }

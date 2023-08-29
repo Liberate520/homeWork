@@ -1,8 +1,9 @@
 package ru.gb.Tree.FileHandler;
 
-import ru.gb.Tree.Service.Service;
+import ru.gb.Tree.FamilyTree.Tree;
+import ru.gb.Tree.Human.Human;
 
 public interface Writable {
-    void saveFile(Service tree, String path);
-    Object readFile(String path);
+    void saveFile(Tree<Human> tree, String path);
+    Tree<Human> readFile(String path);
 }
