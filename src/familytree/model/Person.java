@@ -1,9 +1,11 @@
-package familytree;
+package familytree.model;
+
+import familytree.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person extends TreeEntity{
     private String name;
     private Gender gender;
     private String dateOfBirth; //dob
@@ -13,12 +15,12 @@ public class Person {
     private List<Person> children;
 
     public Person(String name, Gender gender, String dob) {
-        this(name, gender, dob, null);
+        super(name, dob);
+        this.gender = gender;
     }
     public Person(String name, Gender gender, String dateOfBirth, String dateOfDeath) {
-        this.name = name;
+        super(name, dateOfBirth);
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
         this.children = new ArrayList<>();
     }
@@ -43,6 +45,6 @@ public class Person {
         return children;
     }
     public  String toString(){
-        return name + " (familytree.Gender: " + gender + ", DOB: " + ")";
+        return "Name: " + getName() + ", Gender: " + gender + ", DOB: " + getDOB();
     }
 }

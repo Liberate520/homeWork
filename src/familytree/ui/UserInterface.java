@@ -1,12 +1,15 @@
-package familytree;
+package familytree.ui;
+
+import familytree.model.FamilyModelTree;
+import familytree.model.TreeEntity;
 
 import java.util.Scanner;
 
 public class UserInterface {
-    private FamilyTree<? extends TreeEntity> tree;
-    private Scanner scanner;
+    private FamilyModelTree<TreeEntity> tree;
+    private java.util.Scanner scanner;
 
-    public UserInterface(FamilyTree<? extends TreeEntity> tree) {
+    public UserInterface(FamilyModelTree<TreeEntity> tree) {
         this.tree = tree;
         this.scanner = new Scanner(System.in);
     }

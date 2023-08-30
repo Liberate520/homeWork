@@ -1,4 +1,4 @@
-package familytree;
+package familytree.model;
 
 import java.io.*;
 import java.util.ArrayList;

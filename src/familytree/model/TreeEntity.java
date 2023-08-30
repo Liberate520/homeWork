@@ -1,4 +1,4 @@
-package familytree;
+package familytree.model;
 
 public class TreeEntity {
     private String name;

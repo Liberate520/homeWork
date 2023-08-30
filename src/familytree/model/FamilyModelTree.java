@@ -1,17 +1,17 @@
-package familytree;
+package familytree.model;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<T extends TreeEntity> implements Serializable, Iterable<T> {
+public class FamilyModelTree<T extends TreeEntity> implements Serializable, Iterable<T> {
     private List<T> entities;
 
-    public FamilyTree(){
-        this.entities = new ArrayList<>();
+    public FamilyModelTree() {
+        entities = new ArrayList<>();
     }
 
-    public void addEntity(TreeEntity entity) {
-        entities.add((T) entity);
+    public void addEntity(T entity) {
+        entities.add(entity);
     }
 
     public List<T> getEntities() {
@@ -39,9 +39,9 @@ public class FamilyTree<T extends TreeEntity> implements Serializable, Iterable<
         }
     }
 
-    public List<T> getEntitiesByName(String name) {
-        List<T> result = new ArrayList<>();
-        for (T entity : entities) {
+    public List<TreeEntity> getEntitiesByName(String name) {
+        List<TreeEntity> result = new ArrayList<>();
+        for (TreeEntity entity : entities) {
             if (entity.getName().equalsIgnoreCase(name)) {
                 result.add(entity);
             }

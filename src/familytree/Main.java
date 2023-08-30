@@ -1,7 +1,13 @@
 package familytree;
 
-import familytree.FamilyTree;
-import familytree.FileHandler;
+import familytree.model.FamilyModelTree;
+import familytree.model.FileHandler;
+import familytree.model.Person;
+import familytree.model.TreeEntity;
+import familytree.view.FamilyTreeView;
+import familytree.presenter.FamilyTreePresenter;
+import familytree.ui.UserInterface;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +15,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree<TreeEntity> familyTree = new FamilyTree<>();
 
+        FamilyModelTree<TreeEntity> familyTree = new FamilyModelTree<>();
         TreeEntity john = new TreeEntity("John", "1990-01-01");
         TreeEntity alice = new TreeEntity("Alice", "1992-05-15");
         TreeEntity mike = new TreeEntity("Mike", "1995-11-30");
@@ -39,7 +45,7 @@ public class Main {
 
         FileHandler fileHandler = new FileHandler();
         try {
-            fileHandler.writeToFile((List<TreeEntity>) familyTree.getEntities(), "family_tree.dat");
+            fileHandler.writeToFile(familyTree.getEntities(), "family_tree.dat");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
@@ -53,7 +59,7 @@ public class Main {
 
         // Printing the loaded entities
         System.out.println("\nLoaded Family Tree:");
-        for (Person entity : loadedEntities) {
+        for (TreeEntity entity : loadedEntities) {
             System.out.println(entity);
         }
     }
