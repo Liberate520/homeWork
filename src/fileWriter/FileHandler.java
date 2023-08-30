@@ -1,11 +1,10 @@
 package fileWriter;
 
 import FamilyTree.Tree;
-
 import java.io.*;
 
 
-public class FileHandler extends Tree implements Writable {
+public class FileHandler implements Writable {
     private String filename;
 
     public FileHandler (String filename) {

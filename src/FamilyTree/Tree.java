@@ -1,26 +1,25 @@
 package FamilyTree;
 
-import Human.Person;
+import Human.GroupItem;
 import Human.PersonComporatorByBirthDate;
 import Human.PersonComporatorByName;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tree implements Serializable, Iterable<Person> {
+public class Tree<E extends GroupItem<E>> implements Serializable, Iterable<E> {
     private long personID;
-    private List<Person> personList;
+    private List<E> personList;
 
-    public Tree(List<Person> personList) {this.personList = personList;}
+    public Tree(List<E> personList) {this.personList = personList;}
     public Tree(){this(new ArrayList<>());}
 
-    public List<Person> getPersonList() {
+    public List<E> getPersonList() {
         return personList;
     }
 
-    public boolean add(Person person){
+    public boolean add(E person){
         if (person == null){
             return false;
         }
@@ -36,37 +35,37 @@ public class Tree implements Serializable, Iterable<Person> {
         return false;
     }
 
-    private void addToParent(Person person) {
-        for (Person parent: person.getParents()){
+    private void addToParent(E person) {
+        for (E parent: person.getParents()){
             parent.addChild(person);
         }
     }
 
-    private void addToChildren(Person person){
-        for(Person child: person.getChildren()){
+    private void addToChildren(E person){
+        for(E child: person.getChildren()){
             child.addParent(person);
         }
     }
 
-    public List<Person> getSiblings(int id) {
-        Person person = getById(id);
+    public List<E> getSiblings(int id) {
+        E person = getById(id);
         if (person == null){
             return null;
         }
-        List<Person> res = new ArrayList<>();
-        for (Person parent: person.getParents()){
-            for (Person child: parent.getChildren()){
+        List<E> res = new ArrayList<>();
+        for (E parent: person.getParents()){
+            for (E child: parent.getChildren()){
                 if (!child.equals(person) && !res.contains(child)){
-                    res.add(child);
+                    res.add((E) child);
                 }
             }
         }
         return res;
     }
 
-    public List<Person> getByName(String name){
-        List<Person> res = new ArrayList<>();
-        for (Person person: personList){
+    public List<E> getByName(String name){
+        List<E> res = new ArrayList<>();
+        for (E person: personList){
             if (person.getName().equalsIgnoreCase(name)){
                 res.add(person);
             }
@@ -76,14 +75,14 @@ public class Tree implements Serializable, Iterable<Person> {
 
     public boolean setWedding(long personID1, long personID2){
         if(checkId(personID1) && checkId(personID2)){
-            Person per1 = getById(personID1);
-            Person per2 = getById(personID2);
+            E per1 = getById(personID1);
+            E per2 = getById(personID2);
             return setWedding(per1, per2);
         }
         return false;
     }
 
-    public boolean setWedding(Person per1, Person per2){
+    public boolean setWedding(E per1, E per2){
         if(per1.getSpouse()==null && per2.getSpouse()==null){
             per1.setSpouse(per2);
             per2.setSpouse(per1);
@@ -95,8 +94,8 @@ public class Tree implements Serializable, Iterable<Person> {
 
     public boolean setDivorce(long personID1, long personID2){
         if(checkId(personID1) && checkId(personID2)) {
-            Person per1 = getById(personID1);
-            Person per2 = getById(personID2);
+            E per1 = getById(personID1);
+            E per2 = getById(personID2);
             if (per1.getSpouse() != null && per2.getSpouse() != null) {
                 per1.setSpouse(null);
                 per2.setSpouse(null);
@@ -109,7 +108,7 @@ public class Tree implements Serializable, Iterable<Person> {
 
     public boolean remove(long personID){
         if(checkId(personID)){
-            Person human = getById(personID);
+            E human = getById(personID);
             return personList.remove(human);
         }
         return false;
@@ -119,7 +118,7 @@ public class Tree implements Serializable, Iterable<Person> {
         if (id > personID || id < 0){
             return false;
         }
-        for (Person person: personList) {
+        for (E person: personList) {
             if (person.getId() == id) {
                 return true;
             }
@@ -127,8 +126,8 @@ public class Tree implements Serializable, Iterable<Person> {
         return false;
     }
 
-    public Person getById(long id){
-        for (Person per: personList){
+    public E getById(long id){
+        for (E per: personList){
             if (per.getId()==id){
                 return per;
             }
@@ -141,7 +140,7 @@ public class Tree implements Serializable, Iterable<Person> {
         sb.append("Tree contains ");
         sb.append(personList.size());
         sb.append(" objects: \n");
-        for (Person per: personList){
+        for (E per: personList){
             sb.append(per);
             sb.append("\n");
         }
@@ -152,12 +151,12 @@ public class Tree implements Serializable, Iterable<Person> {
         return getInfo();
     }
 
-    public void sortByName() {personList.sort(new PersonComporatorByName());}
+    public void sortByName() {personList.sort(new PersonComporatorByName<E>());}
 
-    public void sortByBirthDate() {personList.sort(new PersonComporatorByBirthDate());}
+    public void sortByBirthDate() {personList.sort(new PersonComporatorByBirthDate<>());}
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<E> iterator() {
         return new TreeIterator(personList);
     }
 }

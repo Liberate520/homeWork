@@ -2,19 +2,18 @@ import fileWriter.FileHandler;
 import FamilyTree.Tree;
 import Human.Gender;
 import Human.Person;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
 
 public class Test {
     public static void main(String[] args) throws ClassNotFoundException, IOException {
-        Tree tree = testTree();
+        Tree<Person> tree = testTree();
        System.out.println("Before: \n" + tree);
 
         FileHandler fh = new FileHandler("person.txt");
         fh.saveFile(tree);
-        Tree tree2 = fh.loadFile();
+        Tree<Person> tree2 = fh.loadFile();
 //        tree2.sortByName();
         tree2.sortByBirthDate();
 
@@ -23,8 +22,8 @@ public class Test {
 
     }
 
-    static Tree testTree(){
-        Tree tree = new Tree();
+    static Tree<Person> testTree(){
+        Tree<Person> tree = new Tree<>();
 
         Person james = new Person("James Jonsy", Gender.Male, LocalDate.of(1957, 6, 20));
         Person july = new Person("July Jons", Gender.Female, LocalDate.of(1956, 7, 21));

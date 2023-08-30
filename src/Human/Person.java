@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, GroupItem<Person> {
     private long id;
     private String name;
     private Gender gender;
@@ -39,7 +39,6 @@ public class Person implements Serializable {
     public Person(String name, Gender gender, LocalDate birthDate, Person father, Person mother) {
         this(name, gender, birthDate, null, father, mother);
     }
-
     public boolean addChild(Person child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -55,6 +54,7 @@ public class Person implements Serializable {
         }
         return false;
     }
+
 
     public Person getFather() {
         for (Person parent : parents) {
@@ -82,7 +82,7 @@ public class Person implements Serializable {
         }
     }
 
-    private int getPeriod(LocalDate birth, LocalDate death) {
+    public int getPeriod(LocalDate birth, LocalDate death) {
         Period difference = Period.between(birth, death);
         return difference.getYears();
     }
