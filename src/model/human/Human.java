@@ -1,12 +1,12 @@
-package human;
+package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import familyTree.TreeItem;
+import model.familyTree.TreeItem;
 
 public class Human implements Serializable, TreeItem {
-    private long id;
+    private int id;
     private String name;
     private String lastname;
     private LocalDate birthdate;
@@ -14,7 +14,7 @@ public class Human implements Serializable, TreeItem {
     private Gender gender;
     private int age;
 
-    public Human(Long id, String name, String lastname, LocalDate birthdate, LocalDate deathdate, Gender gender, Integer age) {
+    public Human(int id, String name, String lastname, LocalDate birthdate, LocalDate deathdate, Gender gender, Integer age) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -24,15 +24,15 @@ public class Human implements Serializable, TreeItem {
         this.age = age;
     }
 
-    public Human(String name, String lastname, LocalDate birthdate) {
-        this(null, name, lastname, birthdate, null, null, null);
-    }
+    // public Human(String name, String lastname, LocalDate birthdate) {
+    //     this(null, name, lastname, birthdate, null, null, null);
+    // }
 
-    public Human(String name, String lastname, LocalDate birthdate, Gender gender) {
-        this(null, name, lastname, birthdate, null, gender, null);
-    }
+    // public Human(String name, String lastname, LocalDate birthdate, Gender gender) {
+    //     this(null, name, lastname, birthdate, null, gender, null);
+    // }
 
-    public Human(Long id, String name, Integer age) {
+    public Human(Integer id, String name, Integer age) {
         this(id, name, null, null, null, null, age);
     }
 

@@ -10,7 +10,12 @@
 // import human.AllHumans;
 // import human.Gender;
 // import human.Human;
-import familyTree.service.Service;
+// import model.familyTree.service.Service;
+
+import view.ConsoleUI;
+import view.View;
+
+
 
 public class Main {
     // public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -18,19 +23,21 @@ public class Main {
     //     AllHumans hu = new AllHumans();
 
     public static void main(String[] args) {
-        Service service = new Service();
+        View view = new ConsoleUI();
+        view.start();
+        // Service service = new Service();
 
-        service.addHuman("Игорь", 55);
-        service.addHuman("Егор", 65);
-        service.addHuman("Илья", 45);
-        service.addHuman("Соня", 35);
-        service.addHuman("Варвара", 25);
+        // service.addHuman("Игорь", 55);
+        // service.addHuman("Егор", 65);
+        // service.addHuman("Илья", 45);
+        // service.addHuman("Соня", 35);
+        // service.addHuman("Варвара", 25);
 
-        System.out.println(service.getHumanInfo());
-        service.sortByName();
-        System.out.println(service.getHumanInfo());
-        service.sortByAge();
-        System.out.println(service.getHumanInfo());
+        // System.out.println(service.getHumanInfo());
+        // service.sortByName();
+        // System.out.println(service.getHumanInfo());
+        // service.sortByAge();
+        // System.out.println(service.getHumanInfo());
     }
 
         // Human human_1 = new Human("Иван", "Пупкин", LocalDate.of(1955,5,5));

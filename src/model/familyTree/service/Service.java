@@ -1,10 +1,10 @@
-package familyTree.service;
+package model.familyTree.service;
 
-import familyTree.famTree.FamilyTree;
-import human.Human;
+import model.familyTree.famTree.FamilyTree;
+import model.human.Human;
 
 public class Service {
-    private long id;
+    private int id;
     private FamilyTree<Human> familyTree;
 
     public Service() {
