@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator implements Iterator<Person> {
+public class PersonIterator<T> implements Iterator<T> {
 
     private int index;
-    private List<Person> familyTree;
+    private List<T> familyTree;
 
-    public PersonIterator(ArrayList<Person> tree) {
+    public PersonIterator(ArrayList<T> tree) {
         this.familyTree = tree;
     }
 
@@ -21,8 +21,8 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public T next() {
 
-        return (Person) familyTree.get(index++);
+        return (T) familyTree.get(index++);
     }
 }

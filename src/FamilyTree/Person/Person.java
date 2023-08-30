@@ -1,11 +1,10 @@
 package family_tree.FamilyTree.Person;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 
 
-public class Person implements Serializable {
+public class Person implements TreeModel<Person> {
     private int inn;
     private String firstName;
     private String lastName;
@@ -56,26 +55,20 @@ public class Person implements Serializable {
         }
     }
 
-    public void setParents(Person Parent) {
-        this.setParents(Parent, Parent);
-    }
-
-    private void addChildren(Person children) {
-
+    public void addChildren(Person children) {
         this.children.add(children);
     }
 
-    private void addParent(Person parent) {
+    public void addParent(Person parent) {
         if ((this.mother == null) && (parent.gender == Gender.Female)) {
             this.mother = parent;
         }
         if ((this.father == null) && (parent.gender == Gender.Male)) {
             this.father = parent;
         }
-
     }
 
-    public String getInfo() {
+    public String getFullName() {
         return String.join(" ", this.firstName, this.lastName);
     }
 
@@ -90,7 +83,7 @@ public class Person implements Serializable {
     public String getFullInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Full name: ");
-        info.append(this.getInfo());
+        info.append(this.getFullName());
         info.append(", INN: ");
         info.append(this.inn);
         info.append(", date birth: ");
@@ -102,15 +95,14 @@ public class Person implements Serializable {
         info.append(", parents: ");
         info.append(this.getListParent());
         info.append(",  husband: ");
-        info.append(this.husband != null ? this.husband.getInfo() : "NON");
-
+        info.append(this.husband != null ? this.husband.getFullName() : "NON");
 
         return new String(info);
     }
 
     public String toString() {
         StringBuilder info = new StringBuilder();
-        info.append(this.inn + " " + this.getInfo() + " ");
+        info.append(this.inn + " " + this.getFullName() + " ");
         info.append(this.gender);
         info.append(" ");
         info.append(this.dataBirth);
@@ -131,30 +123,13 @@ public class Person implements Serializable {
 
     }
 
-    public String getListChildren() {
-
-
-        if (this.children == null) {
-            return "there are no children";
-        } else {
-            StringBuilder info = new StringBuilder();
-            for (Person item : this.children) {
-                info.append(item.getFullInfo());
-                info.append("\n");
-            }
-            return new String(info);
-        }
-    }
-
-
     public String getListParent() {
-
 
         StringBuilder info = new StringBuilder();
         info.append("father: ");
-        info.append(this.father == null ? "unknown" : this.father.getInfo());
+        info.append(this.father == null ? "unknown" : this.father.getFullName());
         info.append(", mother: ");
-        info.append(this.mother == null ? "unknown" : this.mother.getInfo());
+        info.append(this.mother == null ? "unknown" : this.mother.getFullName());
 
         return new String(info);
     }
@@ -187,7 +162,7 @@ public class Person implements Serializable {
     }
 
     public boolean divorce(Person partner) {
-        if (this.husband == partner.husband) {
+        if ((this.husband == partner) && (partner.husband == this)) {
             this.husband = null;
             partner.husband = null;
             return true;
