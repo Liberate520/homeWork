@@ -1,7 +1,7 @@
-package tree;
+package model.tree;
 
 
-import relative.Relative;
+import model.tree.relative.Relative;
 
 import java.util.ArrayList;
 

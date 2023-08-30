@@ -1,19 +1,24 @@
 import dog.Dog;
-import human.Gender;
-import human.Human;
-import relative.Relative;
-import service.Service;
-import tree.Compilation;
-import tree.Node;
-import tree.Tree;
-import workingFile.FileData;
+import model.human.Gender;
+import model.human.Human;
+import model.tree.relative.Relative;
+import model.service.Service;
+import model.tree.Compilation;
+import model.tree.Node;
+import model.workingWithFile.FileData;
+import view.Console;
+import view.View;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-    public static  void main(String[] args) {
+    public static void main(String[] args) {
 
-        var irina = new Human("Ирина", Gender.Female, LocalDate.of(1990, 12, 12));
+        //Пока оставила для проверки
+/*
+        var irina = new Human("return getListAllHuman().toString();", Gender.Female, LocalDate.of(1990, 12, 12));
         var kesha = new Human("Кеша", Gender.Male, LocalDate.of(1992, 9, 1));
         var vasya = new Human("Вася", Gender.Male, LocalDate.of(1940, 3, 15));
         var masha = new Human("Маша", Gender.Female, LocalDate.of(1972, 9, 10));
@@ -78,10 +83,23 @@ public class Main {
         Compilation dog_com = new Compilation<>(dt);
         dog_com.printSearch(sharik,Relative.parent);
         dog_com.printSearch(sharik, Relative.children);
-        fd.add(dt);
-        fd.load("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt");
+        FileData fd_dog = new FileData("C:\\Users\\Irina1Fil\\IdeaProjects\\Java_project\\homeWork\\Source_dog.txt", "\\s\\|\\s");
+        fd_dog.add(dt);
+        fd_dog.load("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source_dog.txt");
+        Service  ser = new Service();
+        ser.addHumans(sharik);
+        ser.addHumans(mila);
+        ser.addHumans(fima);
+        ser.sortByName();
+        System.out.println(ser.getHumanList());
+        ser.sortByAge();
+        System.out.println(ser.getHumanList());
+*/
 
 
-
+        View view = new Console();
+        view.start();
     }
+
+
 }

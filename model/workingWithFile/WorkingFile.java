@@ -1,7 +1,7 @@
-package workingFile;
+package model.workingWithFile;
 
-import tree.Node;
-import tree.Tree;
+import model.tree.Node;
+import model.tree.Tree;
 
 public interface WorkingFile<E extends Tree<E>> {
     String load(String file);

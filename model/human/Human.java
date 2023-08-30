@@ -1,15 +1,19 @@
-package human;
-import humanGroup.HumanGroupItem;
-import tree.Tree;
+package model.human;
+import model.human.comparators.HumanComparatorAge;
+import model.human.comparators.HumanComparatorByName;
+import model.tree.humanGroup.HumanGroupItem;
+import model.tree.Tree;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
-public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree {
+public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree<E> {
     private String fullName;
-    private human.Gender gender;
-    private LocalDate birthDate;
-    private LocalDate deathDate;
+    private Gender gender;
+    private  LocalDate birthDate;
+    private  LocalDate deathDate;
+    private ArrayList listAllHuman;
 
     public Human(String fullName, Gender gender, LocalDate birthDate,LocalDate deathDate) {
         this.fullName = fullName;
@@ -38,7 +42,7 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree {
 
 
 
-    public human.Gender getGender() {
+    public Gender getGender() {
         return gender;
 
     }
@@ -56,6 +60,11 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree {
         }
     }
 
+    @Override
+    public ArrayList addHumans() {
+        return listAllHuman;
+    }
+
     private int getPeriod(LocalDate birthDate, LocalDate deathDate){
         Period diff = Period.between(birthDate, deathDate);
         return diff.getYears();
@@ -63,17 +72,24 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree {
 
 
     public String getInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(" имя: ");
-        sb.append(getFullName());
-        sb.append(", пол: ");
-        sb.append(getGender());
-        sb.append(", возраст: ");
-        sb.append(getAge());
-        sb.append(" если он(а) является ");
-        return sb.toString();
+        String sb = " имя: " +
+                getFullName() +
+                ", пол: " +
+                getGender() +
+                ", возраст: " +
+                getAge() +
+                " если он(а) является ";
+        return sb;
     }
 
+
+    public  void getSortByName() {
+        listAllHuman.sort(new HumanComparatorByName<>());
+    }
+
+    public  void getSortByAge() {
+        listAllHuman.sort(new HumanComparatorAge<>());
+    }
 
     @Override
     public int compareTo(Human o) {

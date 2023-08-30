@@ -1,6 +1,4 @@
-package humanGroup;
-
-import human.Human;
+package model.tree.humanGroup;
 
 import java.util.ArrayList;
 import java.util.Iterator;

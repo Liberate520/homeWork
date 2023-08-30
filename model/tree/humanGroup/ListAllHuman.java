@@ -1,8 +1,8 @@
-package humanGroup;
+package model.tree.humanGroup;
 
-import human.Human;
-import human.comparators.HumanComparatorAge;
-import human.comparators.HumanComparatorByName;
+import model.human.Human;
+import model.human.comparators.HumanComparatorAge;
+import model.human.comparators.HumanComparatorByName;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,9 +10,17 @@ import java.util.List;
 
 public class ListAllHuman<E extends HumanGroupItem> implements Iterable<E> {
     private List<E> listAllHuman;
+    private String name;
+
+
+    public String getName() {
+        return name;
+    }
 
     public ListAllHuman() {
         this.listAllHuman = new ArrayList<>();
+        this.name = name;
+
     }
 
 
@@ -32,4 +40,7 @@ public class ListAllHuman<E extends HumanGroupItem> implements Iterable<E> {
     public  void sortByAge() {
         listAllHuman.sort(new HumanComparatorAge<>());
     }
+
+
+
 }

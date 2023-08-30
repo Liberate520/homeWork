@@ -1,7 +1,8 @@
-package workingFile;
+package model.workingWithFile;
 
-import tree.Node;
-import tree.Tree;
+import model.tree.Node;
+import model.tree.Tree;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
