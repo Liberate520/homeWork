@@ -5,18 +5,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class FamilyMember implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-//    private List<Model.Person>parents;
-//    private List<Model.Person> children;
+//    private List<Model.FamilyMember>parents;
+//    private List<Model.FamilyMember> children;
     private List<Relationship> relationships;
 
-    public Person(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate /*, Model.Person father, Model.Person mother*/) {
+    public FamilyMember(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate /*, Model.FamilyMember father, Model.FamilyMember mother*/) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,7 +63,7 @@ public class Person implements Serializable {
     public boolean isAlive() {
         return deathDate == null;
     }
-    //TODO make collision-like AND GETALLINFO METHOD
+    //TODO make collision-like AND GET ALL INFO METHOD
     public void addRelationship(Relationship relationship) {
         relationships.add(relationship);
 
@@ -87,12 +87,12 @@ public class Person implements Serializable {
         }
     }
 
-    public void addRelationship(Person child, RelationshipType type) {
+    public void addRelationship(FamilyMember child, RelationshipType type) {
     }
 
     @Override
     public String toString() {
-        return "Model.Person{" +
+        return "Model.FamilyMember{" +
                 "id=" + id +
                 ", fullName='" + getFullName() + '\'' +
                 ", gender=" + gender +
@@ -120,14 +120,14 @@ public class Person implements Serializable {
         if (!relationships.isEmpty()) {
             info.append("Relationships:\n");
             for (Relationship relationship : relationships) {
-                Person person1 = relationship.getPerson1();
-                Person person2 = relationship.getPerson2();
+                FamilyMember familyMember1 = relationship.getPerson1();
+                FamilyMember familyMember2 = relationship.getPerson2();
                 RelationshipType type = relationship.getType();
 
                 String relationshipInfo = String.format(
                         "%s (%s) - %s (%s) : %s",
-                        person1.getFullName(), person1.getGender(),
-                        person2.getFullName(), person2.getGender(),
+                        familyMember1.getFullName(), familyMember1.getGender(),
+                        familyMember2.getFullName(), familyMember2.getGender(),
                         type
                 );
 

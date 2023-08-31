@@ -12,44 +12,45 @@ import java.util.List;
 public class GenealogyApp {
     public static void main(String[] args) {
 
-        Person person1 = new Person(1,"John","Smith",Gender.MALE,LocalDate.of(1971,8,8),null);
-        Person person2 = new Person(2,"Alise","Smith", Gender.FEMALE,LocalDate.of(1974,3,5),null);
-        Person person3 = new Person(3,"Ann","Smith",Gender.FEMALE,LocalDate.of(1998,9,11),null);
-        Person person4 = new Person(4,"Will","Smith",Gender.MALE,LocalDate.of(1901,1,2),LocalDate.of(1992,4,13));
+        FamilyMember familyMember1 = new FamilyMember(1,"John","Smith",Gender.MALE,LocalDate.of(1971,8,8),null);
+        FamilyMember familyMember2 = new FamilyMember(2,"Alise","Smith", Gender.FEMALE,LocalDate.of(1974,3,5),null);
+        FamilyMember familyMember3 = new FamilyMember(3,"Ann","Smith",Gender.FEMALE,LocalDate.of(1998,9,11),null);
+        FamilyMember familyMember4 = new FamilyMember(4,"Will","Smith",Gender.MALE,LocalDate.of(1901,1,2),LocalDate.of(1992,4,13));
 
-        Relationship spouseRelationship = new Relationship(person1, person2, RelationshipType.SPOUSE);
-        Relationship childRelationship1 = new Relationship(person1, person3, RelationshipType.CHILD);
-        Relationship childRelationship2 = new Relationship(person2, person3, RelationshipType.CHILD);
-        Relationship fatherRelationship = new Relationship(person3, person1, RelationshipType.FATHER);
-        Relationship motherRelationship = new Relationship(person3, person2, RelationshipType.MOTHER);
-        Relationship fatherRelationship2 = new Relationship(person4, person1, RelationshipType.FATHER);
+        Relationship spouseRelationship = new Relationship(familyMember1, familyMember2, RelationshipType.SPOUSE);
+        Relationship fatherRelationship = new Relationship(familyMember3, familyMember1, RelationshipType.FATHER);
+        Relationship motherRelationship = new Relationship(familyMember3, familyMember2, RelationshipType.MOTHER);
+        Relationship childRelationship1 = new Relationship(familyMember1, familyMember3, RelationshipType.CHILD);
+        Relationship childRelationship2 = new Relationship(familyMember2, familyMember3, RelationshipType.CHILD);
+        Relationship fatherRelationship2 = new Relationship(familyMember4, familyMember1, RelationshipType.FATHER);
 
-        // Automate relationship adding
-        person1.addRelationship(spouseRelationship);
-        person2.addRelationship(spouseRelationship);
-        person1.addRelationship(childRelationship1);
-        person2.addRelationship(childRelationship2);
-        person3.addRelationship(fatherRelationship);
-        person3.addRelationship(motherRelationship);
-        person1.addRelationship(fatherRelationship2);
+// Automate relationship adding
+        familyMember1.addRelationship(spouseRelationship);
+        familyMember2.addRelationship(spouseRelationship);
+        familyMember1.addRelationship(childRelationship1);
+        familyMember2.addRelationship(childRelationship2);
+        familyMember3.addRelationship(fatherRelationship);
+        familyMember3.addRelationship(motherRelationship);
+        familyMember1.addRelationship(fatherRelationship2);
 
-        FamilyTree familyTree = new FamilyTree(List.of(person1, person2, person3, person4));
 
-        List<Person> people = List.of(person1, person2, person3, person4);
+        FamilyTree familyTree = new FamilyTree(List.of(familyMember1, familyMember2, familyMember3, familyMember4));
+
+        List<FamilyMember> people = List.of(familyMember1, familyMember2, familyMember3, familyMember4);
         FamilyTreeFileManager fileManager = new FamilyTreeFileManager(people);
-//        try {
-//            /*Save and load family tree from file*/
-//           fileManager.saveFamilyTree("family_tree.dat");
-//           fileManager.loadFamilyTree("family_tree.dat");
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            /*Save and load family tree from file*/
+           fileManager.saveFamilyTree("family_tree.dat");
+           fileManager.loadFamilyTree("family_tree.dat");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             fileManager.loadFamilyTree("family_tree.dat");
 
             List<Relationship> allRelationships = familyTree.getAllRelationships();
-            List<Person> allPeople = familyTree.getAllPeople();
+            List<FamilyMember> allPeople = familyTree.getAllPeople();
 
             // Вывод информации о загруженных отношениях и людях
             System.out.println("All Relationships:");
@@ -58,8 +59,8 @@ public class GenealogyApp {
             }
 
             System.out.println("All People:");
-            for (Person person : allPeople) {
-                System.out.println(person);
+            for (FamilyMember familyMember : allPeople) {
+                System.out.println(familyMember);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -70,55 +71,59 @@ public class GenealogyApp {
 //        System.out.println(allRelationships);
 //        System.out.println(familyTree.getAllPeople());
 
-        System.out.println("Age " + person4.getFullName() + ": " + person4.getAge() + " years");
+        System.out.println("Age " + familyMember4.getFullName() + ": " + familyMember4.getAge() + " years");
 
-        /*if (person4.isAlive()) {
-            System.out.println(person4.getFullName() + " Alive.");
+        /*if (familyMember4.isAlive()) {
+            System.out.println(familyMember4.getFullName() + " Alive.");
         } else {
-            System.out.println("Died at " + person4.getDeathYear());
-            System.out.println("Time since death " + person4.getFullName() + ": " + person4.getYearsSinceDeath() + " years");
+            System.out.println("Died at " + familyMember4.getDeathYear());
+            System.out.println("Time since death " + familyMember4.getFullName() + ": " + familyMember4.getYearsSinceDeath() + " years");
         }
 
-        System.out.println("Age " + person1.getFullName() + ": " + person1.getAge() + " years");
+        System.out.println("Age " + familyMember1.getFullName() + ": " + familyMember1.getAge() + " years");
 
-        if (person1.isAlive()) {
-            System.out.println(person1.getFullName() + " Alive.");
+        if (familyMember1.isAlive()) {
+            System.out.println(familyMember1.getFullName() + " Alive.");
         } else {
-            System.out.println("Died at " + person1.getDeathYear());
-            System.out.println("Time since death " + person1.getFullName() + ": " + person1.getYearsSinceDeath() + " years");
+            System.out.println("Died at " + familyMember1.getDeathYear());
+            System.out.println("Time since death " + familyMember1.getFullName() + ": " + familyMember1.getYearsSinceDeath() + " years");
         }
-        System.out.println(person1.getAllInfo());
+        System.out.println(familyMember1.getAllInfo());
 
          */
 
         System.out.println("==== Family Tree ====");
-        for (Person person : familyTree) {
+        for (FamilyMember familyMember : familyTree) {
             System.out.println("----------------------------");
-            System.out.println("Name: " + person.getFullName());
-            System.out.println("Model.Gender: " + person.getGender());
-            System.out.println("Birth Date: " + person.getBirthDate());
-            System.out.println("Death Date: " + person.getDeathYear());
-            if (person.isAlive()) {
-                System.out.println("Age: " + person.getAge() + " years (Alive)");
+            System.out.println("Name: " + familyMember.getFullName());
+            System.out.println("Gender: " + familyMember.getGender());
+            System.out.println("Birth Date: " + familyMember.getBirthDate());
+            System.out.println("Death Date: " + familyMember.getDeathYear());
+
+            if (familyMember.isAlive()) {
+                System.out.println("Age: " + familyMember.getAge() + " years (Alive)");
             } else {
-                System.out.println("Age: " + person.getAge() + " years (Died " + person.getYearsSinceDeath() + " years ago)");
+                System.out.println("Age: " + familyMember.getAge() + " years (Died " + familyMember.getYearsSinceDeath() + " years ago)");
             }
+
             System.out.println("Relationships:");
-            for (Relationship relationship : person.getRelationships()) {
-                System.out.println("  " + relationship.getType() + ": " + relationship.getPerson2().getFullName());
+            for (Relationship relationship : familyMember.getRelationships()) {
+                FamilyMember relatedFamilyMember = (relationship.getPerson1() == familyMember) ? relationship.getPerson2() : relationship.getPerson1();
+                System.out.println("  " + relationship.getType() + ": " + relatedFamilyMember.getFullName());
             }
         }
 
 
-        List<Person> peopleList = new ArrayList<>(List.of(person1, person2, person3, person4));
+
+        List<FamilyMember> peopleList = new ArrayList<>(List.of(familyMember1, familyMember2, familyMember3, familyMember4));
         FamilyTree familyTreeSorting = new FamilyTree(peopleList);
 
         familyTreeSorting.sortByName();
 
         System.out.println("==== Family Tree Sorted by Name ====");
-        for (Person person : familyTreeSorting) {
+        for (FamilyMember familyMember : familyTreeSorting) {
             System.out.println("----------------------------");
-            System.out.println("Name: " + person.getFullName());
+            System.out.println("Name: " + familyMember.getFullName());
             // ... (output other information)
         }
 
@@ -126,10 +131,10 @@ public class GenealogyApp {
         familyTreeSorting.sortByBirthDate();
 
         System.out.println("\n==== Family Tree Sorted by Birth Date ====");
-        for (Person person : familyTreeSorting) {
+        for (FamilyMember familyMember : familyTreeSorting) {
             System.out.println("----------------------------");
-            System.out.println("Name: " + person.getFullName());
-            System.out.println("Birth Date: " + person.getBirthDate());
+            System.out.println("Name: " + familyMember.getFullName());
+            System.out.println("Birth Date: " + familyMember.getBirthDate());
             // ... (output other information)
         }
 

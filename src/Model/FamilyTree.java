@@ -1,53 +1,64 @@
 package Model;
 
-import Model.Person;
-import Model.Relationship;
-import Model.RelationshipType;
-
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Iterator;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
-    private List<Person> people;
+public class FamilyTree implements Serializable, Iterable<FamilyMember> {
+    private List<FamilyMember> members;
 
-    public FamilyTree(List<Person> people) {
-        this.people = people;
+    public FamilyTree(List<FamilyMember> members) {
+        this.members = members;
     }
 
-    public void addPerson(Person person) {
-        people.add(person);
+    public void addPerson(FamilyMember familyMember) {
+        members.add(familyMember);
     }
 
-    public List<Person> getAllPeople() {
-        return people;
+    public List<FamilyMember> getAllPeople() {
+        return members;
     }
 
-    public void addRelationship(Person person1, Person person2, RelationshipType type) {
-        person1.addRelationship(new Relationship(person1, person2, type));
+    public void addRelationship(FamilyMember familyMember1, FamilyMember familyMember2, RelationshipType type) {
+        familyMember1.addRelationship(new Relationship(familyMember1, familyMember2, type));
     }
 
-    public List<Relationship> getRelationships(Person person) {
-        return person.getRelationships();
+    public List<Relationship> getRelationships(FamilyMember familyMember) {
+        return familyMember.getRelationships();
     }
 
     public List<Relationship> getAllRelationships() {
-        return people.stream()
+        return members.stream()
                 .flatMap(person -> person.getRelationships().stream())
                 .collect(Collectors.toList());
     }
 
     public void sortByName() {
-        people.sort(Comparator.comparing(Person::getFullName));
+        members.sort(Comparator.comparing(FamilyMember::getFullName));
     }
 
     public void sortByBirthDate() {
-        people.sort(Comparator.comparing(Person::getBirthDate));
+        members.sort(Comparator.comparing(FamilyMember::getBirthDate));
+    }
+    public void sortByAge() {
+        members.sort(Comparator.comparingInt(FamilyMember::getAge));
+    }
+
+    public void sortByDeathDate() {
+        members.sort(Comparator.comparing(FamilyMember::getDeathDate));
+    }
+
+    public void sortByGender() {
+        members.sort(Comparator.comparing(FamilyMember::getGender));
+    }
+
+    public void sortByRelationshipsCount() {
+        members.sort(Comparator.comparingInt(person -> person.getRelationships().size()));
     }
     @Override
-    public Iterator<Person> iterator() {
-        return people.iterator();
+    public Iterator<FamilyMember> iterator() {
+        return members.iterator();
     }
 }
