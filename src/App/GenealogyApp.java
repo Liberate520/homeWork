@@ -12,10 +12,10 @@ import java.util.List;
 public class GenealogyApp {
     public static void main(String[] args) {
 
-        FamilyMember familyMember1 = new FamilyMember(1,"John","Smith",Gender.MALE,LocalDate.of(1971,8,8),null);
-        FamilyMember familyMember2 = new FamilyMember(2,"Alise","Smith", Gender.FEMALE,LocalDate.of(1974,3,5),null);
-        FamilyMember familyMember3 = new FamilyMember(3,"Ann","Smith",Gender.FEMALE,LocalDate.of(1998,9,11),null);
-        FamilyMember familyMember4 = new FamilyMember(4,"Will","Smith",Gender.MALE,LocalDate.of(1901,1,2),LocalDate.of(1992,4,13));
+        Person familyMember1 = new Person(1,"John","Smith",Gender.MALE,LocalDate.of(1971,8,8),null);
+        Person familyMember2 = new Person(2,"Alise","Smith", Gender.FEMALE,LocalDate.of(1974,3,5),null);
+        Person familyMember3 = new Person(3,"Ann","Smith",Gender.FEMALE,LocalDate.of(1998,9,11),null);
+        Person familyMember4 = new Person(4,"Will","Smith",Gender.MALE,LocalDate.of(1901,1,2),LocalDate.of(1992,4,13));
 
         Relationship spouseRelationship = new Relationship(familyMember1, familyMember2, RelationshipType.SPOUSE);
         Relationship fatherRelationship = new Relationship(familyMember3, familyMember1, RelationshipType.FATHER);
