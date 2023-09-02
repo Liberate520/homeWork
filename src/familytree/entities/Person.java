@@ -1,11 +1,12 @@
-package familytree.model;
+package familytree.entities;
 
 import familytree.Gender;
+import familytree.model.TreeEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person extends TreeEntity{
+public class Person extends TreeEntity {
     private String name;
     private Gender gender;
     private String dateOfBirth; //dob

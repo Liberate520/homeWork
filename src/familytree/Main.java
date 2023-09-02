@@ -2,11 +2,8 @@ package familytree;
 
 import familytree.model.FamilyModelTree;
 import familytree.model.FileHandler;
-import familytree.model.Person;
+import familytree.entities.Person;
 import familytree.model.TreeEntity;
-import familytree.view.FamilyTreeView;
-import familytree.presenter.FamilyTreePresenter;
-import familytree.ui.UserInterface;
 
 
 import java.io.IOException;

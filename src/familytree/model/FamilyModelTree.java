@@ -1,9 +1,10 @@
 package familytree.model;
 
-import java.io.Serializable;
+import familytree.entities.Person;
+
 import java.util.*;
 
-public class FamilyModelTree<T extends TreeEntity> implements Serializable, Iterable<T> {
+public class FamilyModelTree<T extends TreeEntity> implements java.io.Serializable, Iterable<T> {
     private List<T> entities;
 
     public FamilyModelTree() {

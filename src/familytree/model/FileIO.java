@@ -1,5 +1,7 @@
 package familytree.model;
 
+import familytree.entities.Person;
+
 import java.io.IOException;
 import java.util.List;
 
