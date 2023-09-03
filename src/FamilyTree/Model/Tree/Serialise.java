@@ -1,6 +1,4 @@
-package family_tree.FamilyTree.Tree;
-
-import family_tree.FamilyTree.Tree.FamilyTree;
+package family_tree.FamilyTree.Model.Tree;
 
 import java.io.IOException;
 

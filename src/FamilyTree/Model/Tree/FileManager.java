@@ -1,4 +1,4 @@
-package family_tree.FamilyTree.Tree;
+package family_tree.FamilyTree.Model.Tree;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package family_tree.FamilyTree.Person;
+package family_tree.FamilyTree.Model.Person;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -34,6 +34,7 @@ public class Person implements TreeModel<Person> {
 
     }
 
+
     public void setInn(int valueInn) {
         this.inn = valueInn;
     }
@@ -42,7 +43,6 @@ public class Person implements TreeModel<Person> {
         return this.inn;
     }
 
-    //TODO доработать для одного родителя
     public void setParents(Person fParent, Person sParent) {
         if ((fParent != sParent) && (fParent.gender == sParent.gender)) {
             System.out.println("неверно указаны родители");
@@ -80,7 +80,7 @@ public class Person implements TreeModel<Person> {
         return this.dataBirth;
     }
 
-    public String getFullInfo() {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("Full name: ");
         info.append(this.getFullName());
@@ -96,25 +96,6 @@ public class Person implements TreeModel<Person> {
         info.append(this.getListParent());
         info.append(",  husband: ");
         info.append(this.husband != null ? this.husband.getFullName() : "NON");
-
-        return new String(info);
-    }
-
-    public String toString() {
-        StringBuilder info = new StringBuilder();
-        info.append(this.inn + " " + this.getFullName() + " ");
-        info.append(this.gender);
-        info.append(" ");
-        info.append(this.dataBirth);
-        info.append(" ");
-        info.append(this.dataMort);
-        info.append(" ");
-        info.append(this.father != null ? this.father.inn : "null");
-        info.append(" ");
-        info.append(this.mother != null ? this.mother.inn : "null");
-        info.append(" ");
-        info.append(this.husband != null ? this.husband.inn : "null");
-
         return new String(info);
     }
 
@@ -150,8 +131,7 @@ public class Person implements TreeModel<Person> {
         return this.husband;
     }
 
-
-    public boolean marriage(Person partner) {
+    public boolean setHusband(Person partner) {
         if ((this.gender != partner.gender)
                 && (this.husband == null) && (partner.husband == null)) {
             this.husband = partner;
@@ -159,6 +139,11 @@ public class Person implements TreeModel<Person> {
             return true;
         }
         return false;
+    }
+
+
+    public void deleteHusband() {
+        this.husband = null;
     }
 
     public boolean divorce(Person partner) {

@@ -1,11 +1,15 @@
 package family_tree.FamilyTree;
 
-import family_tree.FamilyTree.Person.Person;
-import family_tree.FamilyTree.Servce.TempSupport;
-import family_tree.FamilyTree.Tree.FamilyTree;
-import family_tree.FamilyTree.Tree.FileManager;
+import family_tree.FamilyTree.Model.Person.Gender;
+import family_tree.FamilyTree.Model.Person.Person;
+import family_tree.FamilyTree.Model.Servce.Service;
+import family_tree.FamilyTree.Model.Tree.FamilyTree;
+import family_tree.FamilyTree.Model.Tree.FileManager;
+import family_tree.FamilyTree.View.ConsoleUI;
+import family_tree.FamilyTree.View.View;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Iterator;
 
 
@@ -13,32 +17,31 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        //TempSupport.manualFill("tree_archive.txt");
-        // достаем из файла
-        FamilyTree <Person> myTree = new FamilyTree();
+        View view = new ConsoleUI();
+        view.start();
 
-        FileManager arhiveFTree = new FileManager("tree_archive.txt");
-        myTree = arhiveFTree.read(); // достала из файла.
+//        Service service = new Service();
+//
+//        service.extractFromFile("archvetree.txt");
 
-        Iterator<Person> iterator = myTree.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next().getFullName());
-        }
-
-        myTree.sortByName();
-
-        System.out.println("\nsort by last name");
-        for (Person item : myTree) {
-            System.out.println(item.getFullName());
-        }
+//        service.addPerson("Ivanov", "Adam", Gender.Male, LocalDate.of(1979, 10, 12));
+//        service.addPerson("Somova", "Eva", Gender.Female, LocalDate.of(1980, 5, 12));
+//        service.addPerson("Ivanova", "Tonya", Gender.Female, LocalDate.of(2020, 12, 25));
+//        service.addPerson("Ivanov", "Fima", Gender.Male, LocalDate.of(2022, 8, 15));
 
 
-        myTree.sortByAge();
+//        System.out.println(service.getListInfo());
+//        service.marriageForINN(0, 1);
+//        service.setParentsForINN(2, 1);
+//        service.setParentsForINN(2, 0);
+//        service.setParentsForINN(3, 0);
+//        service.setParentsForINN(3, 1);
+//        service.sortByAge();
+//
+//        System.out.println("----");
+//        System.out.println(service.getListInfo());
 
-        System.out.println("\nsort by Age");
-        for (Person item : myTree) {
-            System.out.println(item.getFullName() + " - " + item.getDataBirth());
-        }
+//        service.archiveToFile("archvetree.txt");
 
 
     }

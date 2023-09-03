@@ -1,4 +1,4 @@
-package family_tree.FamilyTree.Person;
+package family_tree.FamilyTree.Model.Person;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ public interface TreeModel<T> extends Serializable {
     void addParent(T parent);
     void addChildren(T children);
 
-    boolean marriage(T partner);
+    boolean setHusband(T partner);
     boolean divorce(T partner);
 
 }
