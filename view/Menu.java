@@ -16,6 +16,10 @@ public class Menu {
         list.add(new GetSortByName(console));
         list.add(new GetSortByAge(console));
         list.add(new SearchByName(console));
+        list.add(new FamilyNode(console));
+        list.add(new FamilyCollection(console));
+        list.add(new FamilyTreeEntry(console));
+        list.add(new FamilyTreeRead(console));
         list.add(new Finish(console));
     }
 

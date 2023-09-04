@@ -2,18 +2,19 @@ package model.human;
 import model.human.comparators.HumanComparatorAge;
 import model.human.comparators.HumanComparatorByName;
 import model.tree.humanGroup.HumanGroupItem;
-import model.tree.Tree;
+
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree<E> {
+public class Human<E> implements Comparable<Human>, HumanGroupItem {
     private String fullName;
     private Gender gender;
     private  LocalDate birthDate;
     private  LocalDate deathDate;
     private ArrayList listAllHuman;
+    private ArrayList treeNode;
 
     public Human(String fullName, Gender gender, LocalDate birthDate,LocalDate deathDate) {
         this.fullName = fullName;
@@ -65,6 +66,8 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree<E> {
         return listAllHuman;
     }
 
+
+
     private int getPeriod(LocalDate birthDate, LocalDate deathDate){
         Period diff = Period.between(birthDate, deathDate);
         return diff.getYears();
@@ -79,6 +82,7 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem, Tree<E> {
                 ", возраст: " +
                 getAge() +
                 " если он(а) является ";
+
         return sb;
     }
 

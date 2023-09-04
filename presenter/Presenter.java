@@ -3,24 +3,26 @@ package presenter;
 import model.service.Service;
 
 import model.tree.Node;
+import model.tree.relative.Relative;
 import view.View;
 
-public class Presenter extends Service {
+public class Presenter {
 
     private View view;
     private Service service;
-    private Node tree;
+
 
     public Presenter(View view) {
         service = new Service();
         this.view = view;
-        tree = new Node<>();
+
+
     }
 
 
     public String addHumans(String fullName, String gender, String age) {
         service.addHumans(fullName, gender, age);
-        return getListAllHuman().toString();
+        return service.getListAllHuman().toString();
     }
 
     public String getHumanList() {
@@ -46,6 +48,32 @@ public class Presenter extends Service {
         String answer = service.searchByName();
         view.print(answer);
         return answer;
+    }
+
+    public void familyNode(String parent, String children) {
+        String answer = String.valueOf(service.familyNode(parent, children));
+        view.print(String.valueOf(answer));
+
+
+    }
+
+    public String familyCollection() {
+        String answer = service.familyСollection();
+        view.print(answer);
+        return answer;
+
+    }
+
+    public String familyTreeEntry(String path) {
+        String answer = String.valueOf(service.familyTreeEntry(path));
+        return answer;
+
+    }
+
+    public String familyTreeRead(String path) {
+        String answer = String.valueOf(service.familyTreeRead(path));
+        return answer;
+
     }
 }
 

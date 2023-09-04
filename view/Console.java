@@ -51,11 +51,12 @@ public class Console implements View {
     public void GetSortByName() {
         presenter.sortByName();
     }
+
     public void GetSortByAge() {
         presenter.sortByAge();
     }
 
-    public void SearchBuName(){
+    public void SearchBuName() {
         presenter.searchByName();
     }
 
@@ -64,5 +65,29 @@ public class Console implements View {
         System.out.println("До новых встреч");
         work = false;
     }
+
+
+    public void FamilyNode() {
+        System.out.println("Введите родителя");
+        String name01 = scanner.nextLine();
+        System.out.println("Введите ребенка");
+        String name02 = scanner.nextLine();
+        presenter.familyNode(name01, name02);
+    }
+    public void FamilyCollection() {
+       presenter.familyCollection();
+    }
+    public void FamilyTreeEntry() {
+        System.out.println("Введите путь к файлу");
+        String file = scanner.nextLine();
+        presenter.familyTreeEntry(file);
+    }
+    public void FamilyTreeRead() {
+        System.out.println("Введите путь к файлу");
+        String file = scanner.nextLine();
+        presenter.familyTreeRead(file);
+    }
+
+
 }
 

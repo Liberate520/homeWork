@@ -2,22 +2,29 @@ package model.service;
 
 import model.human.Gender;
 import model.human.Human;
+import model.tree.Compilation;
 import model.tree.Node;
 import model.tree.humanGroup.HumanGroupItem;
 import model.tree.humanGroup.ListAllHuman;
+import model.workingWithFile.FileData;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Service<E extends HumanGroupItem> {
     private ListAllHuman<E> listAllHuman;
-    private Node tree;
+    private Node treeNode;
+    private Compilation compilation;
+    private FileData file;
 
     public Service() {
 
         listAllHuman = new ListAllHuman<>();
-        tree = new Node<>();
+        treeNode = new Node<>();
+        file = new FileData();
+
     }
 
 
@@ -53,6 +60,7 @@ public class Service<E extends HumanGroupItem> {
         listAllHuman.addHumans((E) human);
         return "Человек успешно добавлен в дерево";
     }
+
     public String searchByName() {
         System.out.println("Введите имя:");
         Scanner scan = new Scanner(System.in);
@@ -66,4 +74,25 @@ public class Service<E extends HumanGroupItem> {
 
     }
 
+    public ArrayList familyNode(String parent, String children) {
+        Node person1 = new Node(parent);
+        Node person2 = new Node(children);
+        treeNode.append(parent,children);
+        return treeNode.getTree();
+    }
+
+    public String familyСollection() {
+        return treeNode.toFileString();
+    }
+
+    public String familyTreeEntry(String path) {
+        file.adding(treeNode, path);
+        return file.toString();
+
+    }
+
+    public String familyTreeRead(String path) {
+        file.load(path);
+        return file.toString();
+    }
 }

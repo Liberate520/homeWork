@@ -5,7 +5,7 @@ import model.tree.relative.Relative;
 
 import java.util.ArrayList;
 
-public class Node<E extends Tree<E>>{
+public class Node<E>{
     E person1;
     private Relative re;
     E person2;
@@ -25,6 +25,10 @@ public class Node<E extends Tree<E>>{
         this.person1 = getPerson1();
     }
 
+    public Node(String parent) {
+        parent= (String) person1;
+    }
+
 
     public ArrayList<Node<E>> getTree() {
         return tree;
@@ -39,7 +43,7 @@ public class Node<E extends Tree<E>>{
 
 
     public E getPerson1() {
-        return person1;
+        return (E) person1;
     }
 
     public Relative getRe() {
@@ -47,12 +51,12 @@ public class Node<E extends Tree<E>>{
     }
 
     public E getPerson2() {
-        return person2;
+        return(E) person2;
     }
 
 
     public String toString() {
-        return String.format("<%s | %s | %s>\n", person1.getFullName(), re, person2.getFullName());
+        return String.format("%s | %s | %s\n", person1.toString(), re, person2.toString());
     }
 
     public String toFileString() {
@@ -60,5 +64,6 @@ public class Node<E extends Tree<E>>{
 
 
     }
+
 
 }
