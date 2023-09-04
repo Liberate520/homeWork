@@ -1,16 +1,12 @@
-package ru.gb.family_tree.filehandler;
+package ru.gb.family_tree.model.filehandler.firstsave;
+
+import ru.gb.family_tree.model.filehandler.Writable;
 
 import java.io.*;
 
-public class FileHandler implements Writable {
-    private String filePath;
+public class FileHandler {
 
-    public FileHandler(String filePath) {
-        this.filePath = filePath;
-    }
-
-    @Override
-    public boolean write(Serializable serializable) {
+    public boolean write(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
             objectOutputStream.writeObject(serializable);
             return true;
@@ -20,8 +16,7 @@ public class FileHandler implements Writable {
         }
     }
 
-    @Override
-    public Object read() {
+    public Object read(String filePath) {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))){
             return objectInputStream.readObject();
         } catch (Exception e){
@@ -30,6 +25,5 @@ public class FileHandler implements Writable {
         }
     }
 
-    @Override
-    public void setFilePath(String filePath) { this.filePath = filePath; }
+
 }
