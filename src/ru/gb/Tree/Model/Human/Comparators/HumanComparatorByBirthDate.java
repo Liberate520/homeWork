@@ -1,8 +1,8 @@
-package ru.gb.Tree.Human.Comparators;
+package ru.gb.Tree.Model.Human.Comparators;
 
 import java.util.Comparator;
 
-import ru.gb.Tree.FamilyTree.TreeItem;
+import ru.gb.Tree.Model.FamilyTree.TreeItem;
 
 
 public class HumanComparatorByBirthDate <T extends TreeItem> implements Comparator<T>{

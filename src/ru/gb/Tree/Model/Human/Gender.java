@@ -1,4 +1,4 @@
-package ru.gb.Tree.Human;
+package ru.gb.Tree.Model.Human;
 public enum Gender {
     male, female
 }

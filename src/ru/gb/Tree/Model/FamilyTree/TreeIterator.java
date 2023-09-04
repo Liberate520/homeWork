@@ -1,9 +1,7 @@
-package ru.gb.Tree.FamilyTree;
+package ru.gb.Tree.Model.FamilyTree;
 
 import java.util.Iterator;
 import java.util.List;
-
-import ru.gb.Tree.FamilyTree.TreeIterator;
 
 class TreeIterator <T> implements Iterator<T>{
     private int index;
@@ -20,5 +18,6 @@ class TreeIterator <T> implements Iterator<T>{
     public T next(){
         return humanList.get(index++);
     }
+
 }
 

@@ -1,12 +1,12 @@
-package ru.gb.Tree.FileHandler;
+package ru.gb.Tree.Model.FileHandler;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import ru.gb.Tree.Human.Human;
-import ru.gb.Tree.FamilyTree.Tree;
+import ru.gb.Tree.Model.Human.Human;
+import ru.gb.Tree.Model.FamilyTree.Tree;
 
 
 public class FileHandler implements Writable {

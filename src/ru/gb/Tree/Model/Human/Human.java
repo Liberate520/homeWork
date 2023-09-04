@@ -1,13 +1,13 @@
-package ru.gb.Tree.Human;
+package ru.gb.Tree.Model.Human;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.gb.Tree.FamilyTree.TreeItem;
+import ru.gb.Tree.Model.FamilyTree.TreeItem;
 
 public class Human implements Serializable, Comparable<Human>, TreeItem<Human>{
-    private int id;
+    private Integer id;
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -17,7 +17,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human>{
     private List<Human> childrenList;
     private Human spouse;
    
-    public Human (int id, String name, Gender  gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father){
+    public Human (Integer id, String name, Gender  gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father){
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -28,19 +28,19 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human>{
         childrenList = new ArrayList<>();
     }
 
-    public Human (int id, String name, Gender  gender, LocalDate birthDate, Human mother, Human father){
+    public Human (Integer id, String name, Gender  gender, LocalDate birthDate, Human mother, Human father){
         this(id, name, gender, birthDate, null, mother, father);
     }
 
-     public Human (int id, String name, Gender  gender, LocalDate birthDate, Human mother){
+     public Human (Integer id, String name, Gender  gender, LocalDate birthDate, Human mother){
         this(id, name, gender, birthDate, null, mother, null);
     }
 
-    public Human (int id, String name, Gender  gender, LocalDate birthDate, LocalDate deathDate){
+    public Human (Integer id, String name, Gender  gender, LocalDate birthDate, LocalDate deathDate){
         this(id, name, gender, birthDate, deathDate, null, null);
     }
 
-    public Human (int id, String name, Gender  gender, LocalDate birthDate){
+    public Human (Integer id, String name, Gender  gender, LocalDate birthDate){
         this(id, name, gender, birthDate, null, null, null);
     }
     
@@ -51,7 +51,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human>{
     public String getChildrenInfo(){
         StringBuilder res = new StringBuilder();
         res.append("дети: ");
-        if (childrenList.size() != 0){
+        if (!childrenList.isEmpty()){
             res.append(childrenList.get(0).getName());
             for (int i = 1; i < childrenList.size(); i++) {
                 res.append(", ");
@@ -141,7 +141,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human>{
         return childrenList;
     }
 
-    public int getId(){
+    public Integer getId(){
         return id;
     }
     

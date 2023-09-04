@@ -1,13 +1,14 @@
-package ru.gb.Tree.FamilyTree;
+package ru.gb.Tree.Model.FamilyTree;
 
 import java.time.LocalDate;
+
 
 
 public interface TreeItem <E> {
     String getName();
     int getAge();
     LocalDate getBirthDate();
-    int getId();
+    Integer getId();
     E getSpouse();
     void setSpouse(E spouse);
 }

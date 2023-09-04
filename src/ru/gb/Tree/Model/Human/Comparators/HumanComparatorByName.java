@@ -1,6 +1,6 @@
-package ru.gb.Tree.Human.Comparators;
+package ru.gb.Tree.Model.Human.Comparators;
 
-import ru.gb.Tree.FamilyTree.TreeItem;
+import ru.gb.Tree.Model.FamilyTree.TreeItem;
 import java.util.Comparator;
 
 public class HumanComparatorByName <T extends TreeItem> implements Comparator<T>{   // забыл спросить на семинаре

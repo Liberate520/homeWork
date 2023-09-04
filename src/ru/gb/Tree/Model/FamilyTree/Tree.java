@@ -1,14 +1,13 @@
-package ru.gb.Tree.FamilyTree;
+package ru.gb.Tree.Model.FamilyTree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
-import ru.gb.Tree.Human.Comparators.HumanComparatorByBirthDate;
-import ru.gb.Tree.Human.Comparators.HumanComparatorByAge;
-import ru.gb.Tree.Human.Comparators.HumanComparatorByName;
-import ru.gb.Tree.Human.Human;
-
+import ru.gb.Tree.Model.Human.Comparators.HumanComparatorByBirthDate;
+import ru.gb.Tree.Model.Human.Comparators.HumanComparatorByAge;
+import ru.gb.Tree.Model.Human.Comparators.HumanComparatorByName;
 
 
 public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
@@ -22,15 +21,15 @@ public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
         humanList.add(human);
     }
 
-    public E getById(int id){
+    public E getById(Integer id){
         for (E human: humanList){
-            if (human.getId() == id){
+            if (Objects.equals(human.getId(), id)){
                 return human;
             }
         }
         return null;
     }
-    public void setWedding(int firstHumanId, int secondHumanId){
+    public void setWedding(Integer firstHumanId, Integer secondHumanId){
         E human1 = getById(firstHumanId);
         E human2 = getById(secondHumanId);
         if (human1.getSpouse()== null && human2.getSpouse()==null){
@@ -48,7 +47,11 @@ public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
         }
         return stringBuilder.toString();
     }
-   
+
+//    public Integer getLastIndex(){
+//        return humanList.size()- 1;
+//    }
+
     @Override
     public String toString(){
         return getFamilyTreeInfo();
