@@ -9,11 +9,11 @@ import java.util.List;
 
 public class Service {
     private long humansId;
-    private  FamilyTree tree;
+    private  FamilyTree<Human> tree;
     private List<Human> humans;
-    public Service(FamilyTree tree) {
-        this.tree = tree;
-        this.humans = tree.getHumanList();
+    public Service() {
+        this.tree = new FamilyTree<>();
+        this.humans = tree.getFamilyTree();
     }
 
     /**
@@ -196,7 +196,7 @@ public class Service {
      * @return
      */
 
-    private Human getById(long id){
+    public Human getById(long id){
         for (Human human: humans){
             if (human.getId()==id){
                 return human;
@@ -225,5 +225,26 @@ public class Service {
 
     public void sortByGender(){
         tree.sortByGender();
+    }
+
+    public FamilyTree<Human> testTree(){
+        Human marya = new Human("Мария", Gender.FEMALE,"2000-03-12");
+        Human prohor = new Human("Прохор",Gender.MALE, "1999-06-21");
+        addHuman(marya);
+        addHuman(prohor);
+        setWedding(marya,prohor);
+
+        Human boris = new Human("Борис",Gender.MALE,
+                "2018-07-23", marya,prohor);
+        Human olesia = new Human("Олеся",Gender.FEMALE,
+                "2020-12-05", marya,prohor);
+        addHuman(boris);
+        addHuman(olesia);
+
+        Human pavel = new Human("Павел",Gender.MALE,"1968-07-23");
+        pavel.addChild(prohor);
+        addHuman(pavel);
+
+        return tree;
     }
 }

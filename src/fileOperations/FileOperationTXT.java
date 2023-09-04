@@ -13,7 +13,7 @@ public class FileOperationTXT implements FileOperation {
     @Override
     public void write(String fileName, FamilyTree tree) {
         try (FileWriter writer = new FileWriter(fileName, false)) {
-            List<Human> humans = tree.getHumanList();
+            List<Human> humans = tree.getFamilyTree();
             for (Human human : humans) {
                 writer.write(human.toString());
                 writer.append("\n");

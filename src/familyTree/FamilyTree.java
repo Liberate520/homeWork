@@ -1,21 +1,21 @@
 package familyTree;
 
-import human.Human;
-import human.HumanComparatorByGender;
-import human.HumansComparatorByAge;
+import human.comparators.HumanComparatorByGender;
+import human.comparators.HumanComparatorByName;
+import human.comparators.HumansComparatorByAge;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humans;
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+    private List<E> familyTree;
 
 //    public familyTree.FamilyTree(List<human.Human> humans) {
 //        this.humans = humans;
 //    }
 
     public FamilyTree() {
-        humans = new ArrayList<>();
+        familyTree = new ArrayList<>();
     }
 
 
@@ -23,25 +23,25 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     /**
      * Метод возвращающий Коллекцию типа List
      */
-    public List<Human> getHumanList() {
-        return humans;
+    public List<E> getFamilyTree() {
+        return familyTree;
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIterator(this.humans);
+    public Iterator<E> iterator() {
+        return new FamilyTreeIterator<>(this.familyTree);
     }
 
 
     public void sortByName() {
-        Collections.sort(humans);
+        familyTree.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge() {
-        humans.sort(new HumansComparatorByAge());
+        familyTree.sort(new HumansComparatorByAge<>());
     }
 
     public void sortByGender(){
-        humans.sort(new HumanComparatorByGender());
+        familyTree.sort(new HumanComparatorByGender<>());
     }
 }
