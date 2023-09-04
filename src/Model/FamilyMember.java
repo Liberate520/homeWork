@@ -5,30 +5,39 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyMember implements Serializable {
+public class FamilyMember<T> implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
-//    private List<Model.FamilyMember>parents;
-//    private List<Model.FamilyMember> children;
     private List<Relationship> relationships;
 
-    public FamilyMember(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate /*, Model.FamilyMember father, Model.FamilyMember mother*/) {
+    private T specificData;  // Добавляем специфичные данные
+
+    public FamilyMember(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, T specificData) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-//        this.children = new ArrayList<>();
-//        this.parents = new ArrayList<>():
-//        if (father != null){parents.add(father);}
-//        if (mother != null){parents.add(mother);}
+        this.specificData = specificData;
         this.relationships = new ArrayList<>();
     }
+
+    // Остальной код остается без изменений
+
+    public List<Relationship> getRelationships() {
+        return relationships;
+    }
+
+    public void addRelationship(int personId, RelationshipType type) {
+        relationships.add(new Relationship(id, personId, type));
+    }
+}
+
 
 
     public String getFullName() {
@@ -72,11 +81,6 @@ public class FamilyMember implements Serializable {
             Relationship symmetricRelationship = new Relationship(relationship.getPerson2(), this, relationship.getType());
             relationship.getPerson2().relationships.add(symmetricRelationship);
         }
-    }
-
-
-    public List<Relationship> getRelationships() {
-        return relationships;
     }
 
     public String getDeathYear() {

@@ -2,12 +2,10 @@ package Model;
 
 import java.time.LocalDate;
 
-public class Person extends FamilyMember {
-    private Gender gender;
-
+public class Person extends FamilyMember<PersonData> {
     public Person(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
-        super(id, firstName, lastName, gender, birthDate, deathDate);
+        super(id, firstName, lastName, gender, birthDate, deathDate, new PersonData(gender));
     }
 
-    // Additional attributes, methods specific to humans...
+    // атрибуты и методы, специфичные для класса Person
 }
