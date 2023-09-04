@@ -1,26 +1,24 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Relationship implements Serializable {
-    private int person1Id;
-    private int person2Id;
+    private FamilyMember person1;
+    private FamilyMember person2;
     private RelationshipType type;
 
-    public Relationship(int person1Id, int person2Id, RelationshipType type) {
-        Objects.requireNonNull(type, "type cannot be null");
-        this.person1Id = person1Id;
-        this.person2Id = person2Id;
+    public Relationship(FamilyMember person1, FamilyMember person2, RelationshipType type) {
+        this.person1 = person1;
+        this.person2 = person2;
         this.type = type;
     }
 
-    public int getPerson1Id() {
-        return person1Id;
+    public FamilyMember getPerson1() {
+        return person1;
     }
 
-    public int getPerson2Id() {
-        return person2Id;
+    public FamilyMember getPerson2() {
+        return person2;
     }
 
     public RelationshipType getType() {
@@ -29,10 +27,6 @@ public class Relationship implements Serializable {
 
     @Override
     public String toString() {
-        return "Relationship{" +
-                "person1Id=" + person1Id +
-                ", person2Id=" + person2Id +
-                ", type=" + type +
-                '}';
+        return person1.getFullName() + " - " + type + " - " + person2.getFullName();
     }
 }

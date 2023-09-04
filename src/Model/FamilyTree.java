@@ -1,10 +1,9 @@
 package Model;
-
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.Iterator;
 
 public class FamilyTree implements Serializable, Iterable<FamilyMember> {
     private List<FamilyMember> members;
@@ -22,7 +21,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
     }
 
     public void addRelationship(FamilyMember familyMember1, FamilyMember familyMember2, RelationshipType type) {
-        familyMember1.addRelationship(new Relationship(familyMember1, familyMember2, type));
+        familyMember1.addRelationship(type, familyMember2);
     }
 
     public List<Relationship> getRelationships(FamilyMember familyMember) {
@@ -30,7 +29,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
     }
 
     public List<Relationship> getAllRelationships() {
-        return members.stream()
+        return (List<Relationship>) members.stream()
                 .flatMap(person -> person.getRelationships().stream())
                 .collect(Collectors.toList());
     }
@@ -42,6 +41,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
     public void sortByBirthDate() {
         members.sort(Comparator.comparing(FamilyMember::getBirthDate));
     }
+
     public void sortByAge() {
         members.sort(Comparator.comparingInt(FamilyMember::getAge));
     }
@@ -57,6 +57,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
     public void sortByRelationshipsCount() {
         members.sort(Comparator.comparingInt(person -> person.getRelationships().size()));
     }
+
     @Override
     public Iterator<FamilyMember> iterator() {
         return members.iterator();

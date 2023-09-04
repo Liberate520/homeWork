@@ -6,93 +6,90 @@ import Model.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-
 
 public class GenealogyApp {
     public static void main(String[] args) {
+        GenealogyApp app = new GenealogyApp();
+        app.run();
+    }
 
-        Person familyMember1 = new Person(1,"John","Smith",Gender.MALE,LocalDate.of(1971,8,8),null);
-        Person familyMember2 = new Person(2,"Alise","Smith", Gender.FEMALE,LocalDate.of(1974,3,5),null);
-        Person familyMember3 = new Person(3,"Ann","Smith",Gender.FEMALE,LocalDate.of(1998,9,11),null);
-        Person familyMember4 = new Person(4,"Will","Smith",Gender.MALE,LocalDate.of(1901,1,2),LocalDate.of(1992,4,13));
+    private void run() {
+        List<FamilyMember> familyMembers = createFamilyMembers();
+        FamilyTree familyTree = new FamilyTree(familyMembers);
 
-        Relationship spouseRelationship = new Relationship(familyMember1, familyMember2, RelationshipType.SPOUSE);
-        Relationship fatherRelationship = new Relationship(familyMember3, familyMember1, RelationshipType.FATHER);
-        Relationship motherRelationship = new Relationship(familyMember3, familyMember2, RelationshipType.MOTHER);
-        Relationship childRelationship1 = new Relationship(familyMember1, familyMember3, RelationshipType.CHILD);
-        Relationship childRelationship2 = new Relationship(familyMember2, familyMember3, RelationshipType.CHILD);
-        Relationship fatherRelationship2 = new Relationship(familyMember4, familyMember1, RelationshipType.FATHER);
-
-// Automate relationship adding
-        familyMember1.addRelationship(spouseRelationship);
-        familyMember2.addRelationship(spouseRelationship);
-        familyMember1.addRelationship(childRelationship1);
-        familyMember2.addRelationship(childRelationship2);
-        familyMember3.addRelationship(fatherRelationship);
-        familyMember3.addRelationship(motherRelationship);
-        familyMember1.addRelationship(fatherRelationship2);
-
-
-        FamilyTree familyTree = new FamilyTree(List.of(familyMember1, familyMember2, familyMember3, familyMember4));
-
-        List<FamilyMember> people = List.of(familyMember1, familyMember2, familyMember3, familyMember4);
-        FamilyTreeFileManager fileManager = new FamilyTreeFileManager(people);
-        try {
-            /*Save and load family tree from file*/
-           fileManager.saveFamilyTree("family_tree.dat");
-           fileManager.loadFamilyTree("family_tree.dat");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        FamilyTreeFileManager fileManager = new FamilyTreeFileManager(familyMembers);
 
         try {
-            fileManager.loadFamilyTree("family_tree.dat");
-
-            List<Relationship> allRelationships = familyTree.getAllRelationships();
-            List<FamilyMember> allPeople = familyTree.getAllPeople();
-
-            // Вывод информации о загруженных отношениях и людях
-            System.out.println("All Relationships:");
-            for (Relationship relationship : allRelationships) {
-                System.out.println(relationship);
-            }
-
-            System.out.println("All People:");
-            for (FamilyMember familyMember : allPeople) {
-                System.out.println(familyMember);
-            }
+            saveAndLoadFamilyTree(fileManager);
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            handleException(e);
         }
 
+        displayFamilyTreeInfo(familyTree);
+        displaySortedFamilyTree(familyTree);
+    }
 
-//        List<Model.Relationship> allRelationships = familyTree.getAllRelationships();
-//        System.out.println(allRelationships);
-//        System.out.println(familyTree.getAllPeople());
+    private List<FamilyMember> createFamilyMembers() {
+        // Создаем членов семьи
+        FamilyMember familyMember1 = new FamilyMember(1, "John", "Smith", Gender.MALE, LocalDate.of(1971, 8, 8), null, null);
+        FamilyMember familyMember2 = new FamilyMember(2, "Alise", "Smith", Gender.FEMALE, LocalDate.of(1974, 3, 5), null, null);
+        FamilyMember familyMember3 = new FamilyMember(3, "Ann", "Smith", Gender.FEMALE, LocalDate.of(1998, 9, 11), null, null);
+        FamilyMember familyMember4 = new FamilyMember(4, "Will", "Smith", Gender.MALE, LocalDate.of(1901, 1, 2), LocalDate.of(1992, 4, 13), null);
 
-        System.out.println("Age " + familyMember4.getFullName() + ": " + familyMember4.getAge() + " years");
+        // Создаем список членов семьи
+        List<FamilyMember> familyMembers = new ArrayList<>(List.of(familyMember1, familyMember2, familyMember3, familyMember4));
 
-        /*if (familyMember4.isAlive()) {
-            System.out.println(familyMember4.getFullName() + " Alive.");
-        } else {
-            System.out.println("Died at " + familyMember4.getDeathYear());
-            System.out.println("Time since death " + familyMember4.getFullName() + ": " + familyMember4.getYearsSinceDeath() + " years");
+        // Добавляем отношения
+        familyMember1.addRelationship(RelationshipType.SPOUSE, familyMember2);
+        familyMember2.addRelationship(RelationshipType.SPOUSE, familyMember1);
+        familyMember1.addRelationship(RelationshipType.CHILD, familyMember3);
+        familyMember2.addRelationship(RelationshipType.CHILD, familyMember3);
+        familyMember3.addRelationship(RelationshipType.FATHER, familyMember1);
+        familyMember3.addRelationship(RelationshipType.MOTHER, familyMember2);
+        familyMember1.addRelationship(RelationshipType.FATHER, familyMember4);
+
+        return familyMembers;
+    }
+
+
+
+
+    private void saveAndLoadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
+        // Сохраняем и загружаем семейное дерево из файла
+        fileManager.saveFamilyTree("family_tree.dat");
+        fileManager.loadFamilyTree("family_tree.dat");
+    }
+
+    private void displayFamilyTreeInfo(FamilyTree familyTree) {
+        List<Relationship> allRelationships = familyTree.getAllRelationships();
+        List<FamilyMember> allPeople = familyTree.getAllPeople();
+
+        // Вывод информации о загруженных отношениях и людях
+        System.out.println("All Relationships:");
+        for (Relationship relationship : allRelationships) {
+            System.out.println(relationship);
         }
 
-        System.out.println("Age " + familyMember1.getFullName() + ": " + familyMember1.getAge() + " years");
-
-        if (familyMember1.isAlive()) {
-            System.out.println(familyMember1.getFullName() + " Alive.");
-        } else {
-            System.out.println("Died at " + familyMember1.getDeathYear());
-            System.out.println("Time since death " + familyMember1.getFullName() + ": " + familyMember1.getYearsSinceDeath() + " years");
+        System.out.println("All People:");
+        for (FamilyMember familyMember : allPeople) {
+            System.out.println(familyMember);
         }
-        System.out.println(familyMember1.getAllInfo());
+    }
 
-         */
+    private void displaySortedFamilyTree(FamilyTree familyTree) {
+        // Вывод отсортированного семейного дерева
+        System.out.println("==== Family Tree Sorted by Name ====");
+        familyTree.sortByName();
+        printFamilyTree(familyTree);
 
-        System.out.println("==== Family Tree ====");
+        System.out.println("\nSorting Family Tree by Birth Date...");
+        familyTree.sortByBirthDate();
+        printFamilyTree(familyTree);
+    }
+
+    private void printFamilyTree(FamilyTree familyTree) {
         for (FamilyMember familyMember : familyTree) {
             System.out.println("----------------------------");
             System.out.println("Name: " + familyMember.getFullName());
@@ -112,33 +109,11 @@ public class GenealogyApp {
                 System.out.println("  " + relationship.getType() + ": " + relatedFamilyMember.getFullName());
             }
         }
-
-
-
-        List<FamilyMember> peopleList = new ArrayList<>(List.of(familyMember1, familyMember2, familyMember3, familyMember4));
-        FamilyTree familyTreeSorting = new FamilyTree(peopleList);
-
-        familyTreeSorting.sortByName();
-
-        System.out.println("==== Family Tree Sorted by Name ====");
-        for (FamilyMember familyMember : familyTreeSorting) {
-            System.out.println("----------------------------");
-            System.out.println("Name: " + familyMember.getFullName());
-            // ... (output other information)
-        }
-
-        System.out.println("\nSorting Family Tree by Birth Date...");
-        familyTreeSorting.sortByBirthDate();
-
-        System.out.println("\n==== Family Tree Sorted by Birth Date ====");
-        for (FamilyMember familyMember : familyTreeSorting) {
-            System.out.println("----------------------------");
-            System.out.println("Name: " + familyMember.getFullName());
-            System.out.println("Birth Date: " + familyMember.getBirthDate());
-            // ... (output other information)
-        }
-
-
     }
 
+
+    private void handleException(Exception e) {
+        // Обработка исключения: вывод ошибки и/или дополнительная логика
+        e.printStackTrace();
+    }
 }

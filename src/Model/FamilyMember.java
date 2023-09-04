@@ -27,19 +27,6 @@ public class FamilyMember<T> implements Serializable {
         this.relationships = new ArrayList<>();
     }
 
-    // Остальной код остается без изменений
-
-    public List<Relationship> getRelationships() {
-        return relationships;
-    }
-
-    public void addRelationship(int personId, RelationshipType type) {
-        relationships.add(new Relationship(id, personId, type));
-    }
-}
-
-
-
     public String getFullName() {
         return firstName + " " + lastName;
     }
@@ -72,15 +59,15 @@ public class FamilyMember<T> implements Serializable {
     public boolean isAlive() {
         return deathDate == null;
     }
-    //TODO make collision-like AND GET ALL INFO METHOD
-    public void addRelationship(Relationship relationship) {
-        relationships.add(relationship);
 
-        if (!relationship.getPerson2().relationships.contains(relationship)) {
-            // Create symmetric relationship for person2
-            Relationship symmetricRelationship = new Relationship(relationship.getPerson2(), this, relationship.getType());
-            relationship.getPerson2().relationships.add(symmetricRelationship);
-        }
+    public void addRelationship(RelationshipType type, FamilyMember relatedMember) {
+        Relationship relationship = new Relationship(this, relatedMember, type);
+        relatedMember.relationships.add(relationship);
+    }
+
+
+    public List<Relationship> getRelationships() {
+        return relationships;
     }
 
     public String getDeathYear() {
@@ -89,9 +76,6 @@ public class FamilyMember<T> implements Serializable {
         } else {
             return "N/A"; // Или любое другое значение, указывающее на отсутствие данных о смерти
         }
-    }
-
-    public void addRelationship(FamilyMember child, RelationshipType type) {
     }
 
     @Override
@@ -141,9 +125,6 @@ public class FamilyMember<T> implements Serializable {
             info.append("No Relationships\n");
         }
 
-
         return info.toString();
     }
-
-
 }
