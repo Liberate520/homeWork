@@ -10,4 +10,6 @@ public interface HumanGroupItem {
 
     ArrayList addHumans();
 
+    String getInfo();
+
 }

@@ -36,9 +36,9 @@ public class Console implements View {
         getHumanList();
         System.out.println("Введите имя человека");
         String name = scanner.nextLine();
-        System.out.println("Введите пол человека");
+        System.out.println("Введите пол человека Female или Male");
         String gender = scanner.nextLine();
-        System.out.println("Введите возраст человека");
+        System.out.println("Введите дату рождения 'YYYY-MM-DD' ");
         String age = scanner.nextLine();
         presenter.addHumans(name, gender, age);
     }
@@ -74,14 +74,21 @@ public class Console implements View {
         String name02 = scanner.nextLine();
         presenter.familyNode(name01, name02);
     }
+
     public void FamilyCollection() {
-       presenter.familyCollection();
+        System.out.println("Введите родителя");
+        String name = scanner.nextLine();
+        System.out.println("Введите  parent или children");
+        String relative = scanner.nextLine();
+        presenter.familyCollection(name, relative);
     }
+
     public void FamilyTreeEntry() {
         System.out.println("Введите путь к файлу");
         String file = scanner.nextLine();
         presenter.familyTreeEntry(file);
     }
+
     public void FamilyTreeRead() {
         System.out.println("Введите путь к файлу");
         String file = scanner.nextLine();

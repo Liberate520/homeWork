@@ -12,6 +12,6 @@ public class FamilyTreeRead extends Command {
     }
 
     public void execute() {
-        console.FamilyTreeEntry();
+        console.FamilyTreeRead();
     }
 }

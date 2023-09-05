@@ -80,8 +80,7 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem {
                 ", пол: " +
                 getGender() +
                 ", возраст: " +
-                getAge() +
-                " если он(а) является ";
+                getAge();
 
         return sb;
     }

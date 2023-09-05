@@ -1,3 +1,1 @@
-[<Irina | parent | Vany>
-, <Vany | children | Irina>
-] 
+Записано в файл{tree=[<Ирина parent Тимофей>, <Тимофей children Ирина>, <Ваня parent Тимофей>, <Тимофей children Ваня>]}

@@ -3,9 +3,11 @@ package model.service;
 import model.human.Gender;
 import model.human.Human;
 import model.tree.Compilation;
+import model.tree.GeoTree;
 import model.tree.Node;
 import model.tree.humanGroup.HumanGroupItem;
 import model.tree.humanGroup.ListAllHuman;
+import model.tree.relative.Relative;
 import model.workingWithFile.FileData;
 
 import java.time.LocalDate;
@@ -15,22 +17,21 @@ import java.util.Scanner;
 
 public class Service<E extends HumanGroupItem> {
     private ListAllHuman<E> listAllHuman;
-    private Node treeNode;
+    private GeoTree treeNode;
     private Compilation compilation;
     private FileData file;
-
+    private Relative rel;
     public Service() {
 
         listAllHuman = new ListAllHuman<>();
-        treeNode = new Node<>();
+        treeNode = new GeoTree();
         file = new FileData();
-
+        compilation = new Compilation(treeNode);
     }
 
 
     public String getHumanList() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Семья:\n");
         for (E human : listAllHuman) {
             builder.append(human);
             builder.append("\n");
@@ -67,7 +68,7 @@ public class Service<E extends HumanGroupItem> {
         String st = scan.nextLine();
         for (E lst : listAllHuman) {
             if (lst.getFullName().equals(st)) {
-                return "Имя  " + st + " найдено";
+                return  lst.getInfo();
             }
         }
         return "Имя не найдено";
@@ -75,19 +76,19 @@ public class Service<E extends HumanGroupItem> {
     }
 
     public ArrayList familyNode(String parent, String children) {
-        Node person1 = new Node(parent);
-        Node person2 = new Node(children);
         treeNode.append(parent,children);
         return treeNode.getTree();
     }
 
-    public String familyСollection() {
-        return treeNode.toFileString();
+    public String familyСollection(String person, String relative) {
+        Relative rel = Relative.valueOf(relative);
+        compilation.printSearch(person.toString(), rel);
+        return compilation.toString();
     }
 
     public String familyTreeEntry(String path) {
-        file.adding(treeNode, path);
-        return file.toString();
+        file.add(treeNode, path);
+        return "Запись в файл";
 
     }
 

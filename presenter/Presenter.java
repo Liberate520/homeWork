@@ -57,21 +57,23 @@ public class Presenter {
 
     }
 
-    public String familyCollection() {
-        String answer = service.familyСollection();
-        view.print(answer);
+    public String familyCollection(String person, String rel) {
+        String answer = service.familyСollection(person.toString(), rel);
+        view.print(String.valueOf(answer));
         return answer;
 
     }
 
     public String familyTreeEntry(String path) {
         String answer = String.valueOf(service.familyTreeEntry(path));
+        view.print(String.valueOf(answer));
         return answer;
 
     }
 
     public String familyTreeRead(String path) {
         String answer = String.valueOf(service.familyTreeRead(path));
+        view.print(String.valueOf(answer));
         return answer;
 
     }

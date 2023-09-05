@@ -1,5 +1,6 @@
 import model.human.Gender;
 import model.human.Human;
+import model.tree.GeoTree;
 import model.tree.relative.Relative;
 import model.service.Service;
 import model.tree.Compilation;
@@ -24,7 +25,7 @@ public class Main {
 //        var jane = new Human("Женя", Gender.Male, LocalDate.of(2017, 4, 2));
 //        var ivan = new Human("Ваня", Gender.Male, LocalDate.of(2019, 4, 2));
 //        var larisa = new Human("Лариса", Gender.Female, LocalDate.of(2022, 5, 10));
-//        Node gt = new Node<>();
+//        GeoTree gt = new GeoTree();
 //        gt.append(vasya, masha);
 //        gt.append(masha, irina);
 //        gt.append(irina, jane);
@@ -55,11 +56,12 @@ public class Main {
 //        com.printSearch(larisa, Relative.parent);
 //        com.printSearch(larisa, Relative.children);
 //        System.out.println("*****************");
+////        System.out.println(gt.getTree());
 //        FileData fd = new FileData("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt", "\\s\\|\\s");
-//        fd.add(gt);
+//        fd.add(gt,"C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt");
 //        fd.load("C:\\Users\\IrinaFil\\IdeaProjects\\Java_project\\homeWork\\Source.txt");
-//
-//
+
+
 //        Dog sharik = new Dog("Шарик", dog.Gender.Male, LocalDate.of(2010, 10, 10));
 //        Dog mila = new Dog("Мила", dog.Gender.Famale, LocalDate.of(2012, 06, 01));
 //        Dog fima = new Dog("Фима", dog.Gender.Male, LocalDate.of(2019, 05, 03));
@@ -82,7 +84,6 @@ public class Main {
         View view = new Console();
         view.start();
     }
-
 
 
 }

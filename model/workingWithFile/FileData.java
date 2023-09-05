@@ -1,6 +1,6 @@
 package model.workingWithFile;
 
-import model.tree.Node;
+import model.tree.GeoTree;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-public class FileData<E> implements WorkingFile {
+public class FileData<E> {
 
     private Path file;
     public ArrayList<String> contents = new ArrayList<>();
@@ -38,13 +38,12 @@ public class FileData<E> implements WorkingFile {
         } catch (IOException e) {
             this.contents.add("Файл отсутствует или имеет некорректный формат");
         }
+
     }
 
 
-
-
-    public void adding(Node n, String file) {
-        String data = n.toFileString();
+    public void add(GeoTree n, String file) {
+        String data = n.toString();
         this.contents.add(data);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(data);
@@ -52,10 +51,16 @@ public class FileData<E> implements WorkingFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(data);
+        System.out.println(data.toString());
     }
 
 
+    @Override
+    public String toString() {
+        return "Считано из файла{" +
+                "contents=" + contents +
+                '}';
+    }
 }
 
 
