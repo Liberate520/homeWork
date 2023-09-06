@@ -1,7 +1,6 @@
 package view;
 
-import familyTree.FamilyTree;
-import familyTree.FamilyTreeItem;
+
 import human.Gender;
 import human.Human;
 import service.Service;
@@ -29,11 +28,11 @@ public class View {
             }
             if (cmd == Commands.EXIT) return;
             switch (cmd) {
-                case ADD -> service.addHuman(getHuman());
-                case SEARCH -> System.out.println(service.getById(getHumanId()));
+                case ADD -> service.addItemToTree(getHuman());
+                case SEARCH -> System.out.println(service.getItemById(getHumanId()));
                 case DELETE -> {
                     System.out.println("Delete person");
-                    service.remove(getHumanId());
+                    service.removeItem(getHumanId());
                 }
                 case SHOW -> System.out.println(service.getHumanListInfo());
             }
@@ -100,9 +99,9 @@ public class View {
      */
     private List<Human> getParents() {
         List<Human> parents = new ArrayList<>();
-        Human father = service.getById(Integer.parseInt(prompt("Enter father ID: \n")));
+        Human father = service.getItemById(Long.parseLong(prompt("Enter father ID: \n")));
         System.out.println(father);
-        Human mother = service.getById(Integer.parseInt(prompt("Enter mother ID: \n")));
+        Human mother = service.getItemById(Long.parseLong(prompt("Enter mother ID: \n")));
         System.out.println(mother);
         parents.add(father);
         parents.add(mother);
