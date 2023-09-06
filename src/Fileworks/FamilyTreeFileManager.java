@@ -17,19 +17,17 @@ public class FamilyTreeFileManager implements FamilyTreeSerializable {
     @Override
     public void saveFamilyTree(String fileName) throws IOException {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            outputStream.writeObject(this);
+            outputStream.writeObject(people);
         }
     }
-
 
 
     public FamilyTree loadFamilyTree(String fileName) throws IOException, ClassNotFoundException {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
-            FamilyTree loadedTree = (FamilyTree) inputStream.readObject();
-            return loadedTree;
+            people = (List<FamilyMember>) inputStream.readObject();
+            return new FamilyTree(people); // Возвращает загруженное дерево семьи
         }
     }
-
 
 
 

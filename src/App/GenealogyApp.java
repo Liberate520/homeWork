@@ -6,7 +6,6 @@ import Model.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class GenealogyApp {
@@ -58,8 +57,8 @@ public class GenealogyApp {
 
     private void saveAndLoadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
         // Сохраняем и загружаем семейное дерево из файла
-        fileManager.saveFamilyTree("family_tree.dat");
-        fileManager.loadFamilyTree("family_tree.dat");
+        fileManager.saveFamilyTree("family_bush.dat");
+        fileManager.loadFamilyTree("family_bush.dat");
     }
 
     private void displayFamilyTreeInfo(FamilyTree familyTree) {
@@ -104,12 +103,13 @@ public class GenealogyApp {
             }
 
             System.out.println("Relationships:");
-            for (Relationship relationship : familyMember.getRelationships()) {
+            for (Relationship relationship : familyTree.getRelationships(familyMember)) {
                 FamilyMember relatedFamilyMember = (relationship.getPerson1() == familyMember) ? relationship.getPerson2() : relationship.getPerson1();
                 System.out.println("  " + relationship.getType() + ": " + relatedFamilyMember.getFullName());
             }
         }
     }
+
 
 
     private void handleException(Exception e) {

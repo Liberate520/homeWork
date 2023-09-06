@@ -1,6 +1,6 @@
 package Model;
 
-import Model.FamilyTree;
+
 
 import java.io.IOException;
 
