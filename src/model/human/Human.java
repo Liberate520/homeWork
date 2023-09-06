@@ -32,8 +32,8 @@ public class Human implements Serializable, TreeItem {
     //     this(null, name, lastname, birthdate, null, gender, null);
     // }
 
-    public Human(Integer id, String name, Integer age) {
-        this(id, name, null, null, null, null, age);
+    public Human(Integer id, String name, String lastname, Integer age) {
+        this(id, name, lastname, null, null, null, age);
     }
 
     // public int getId() {

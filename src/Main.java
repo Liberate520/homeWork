@@ -12,8 +12,17 @@
 // import human.Human;
 // import model.familyTree.service.Service;
 
+// import java.security.Provider.Service;
+
+// import model.familyTree.famTree.FamilyTree;
+// import model.human.Human;
+// import model.familyTree.service.Service;
+// import model.write.FileHandlerForFamilyTree;
 import view.ConsoleUI;
 import view.View;
+import model.familyTree.service.Service;
+import model.write.FileHandlerForFamilyTree;
+
 
 
 
@@ -23,8 +32,12 @@ public class Main {
     //     AllHumans hu = new AllHumans();
 
     public static void main(String[] args) {
+               
         View view = new ConsoleUI();
         view.start();
+        Service service = new Service();
+        service.setWritable(new FileHandlerForFamilyTree());
+        service.save();
         // Service service = new Service();
 
         // service.addHuman("Игорь", 55);

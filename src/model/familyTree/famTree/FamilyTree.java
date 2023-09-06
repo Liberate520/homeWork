@@ -1,5 +1,6 @@
 package model.familyTree.famTree;
 
+import java.io.Serializable;
 // import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,7 +11,7 @@ import model.familyTree.TreeItem;
 import model.human.comparators.HumanComparatorByAge;
 import model.human.comparators.HumanComparatorByName;
 
-public class FamilyTree<E extends TreeItem> implements Iterable<E> {
+public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E> {
     private int id;
     // private int humanId;
     private List<E> humanList;

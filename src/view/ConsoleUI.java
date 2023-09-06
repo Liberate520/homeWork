@@ -54,16 +54,20 @@ public class ConsoleUI implements View {
     public void addHuman() {
         System.out.println("Введите имя члена семьи");
         String name = scanner.nextLine();
+        System.out.println("Введите фамилию члена семьи");
+        String lastname = scanner.nextLine();
         System.out.println("Укажите возраст члена семьи");
         String ageString = scanner.nextLine();
         // if(scanner.hasNextInt()) { 
         //     num = scanner.nextInt();
         //     System.out.println("Возраст введен верно!");
+        //     int age = Integer.parseInt(ageString);
+        //     presenter.addHuman(name, age);
         //   } else {
         //     System.out.println("Вы ввели не число");
         //   }
         int age = Integer.parseInt(ageString);
-        presenter.addHuman(name, age);
+        presenter.addHuman(name,lastname, age);
     }
 
     private void hello(){
@@ -81,7 +85,7 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkTextForInt(String text){
-        if (text.matches("[0-4]+")){
+        if (text.matches("[1-5]+")){
             return true;
         } else {
             inputError();
@@ -90,7 +94,7 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand < menu.getSize()){
+        if (numCommand <= menu.getSize()){  // вот из-за этого у меня не работала команда 5(Finish). Стояло меньше, а надо меньше или равно, так-как команда последняя в списке :)
             return true;
         } else {
             inputError();
