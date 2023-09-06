@@ -41,13 +41,13 @@ public class Presenter {
         getTree();
     }
 
-    //TODO добавить вывод сообщение что выгрузка прошла успешна. куда??? ПЕРЕИМЕНОВАТЬ
+    //TODO добавить вывод сообщение что выгрузка прошла успешна.
     public void importToFile(String namefile) throws IOException {
         service.extractFromFile(namefile); //доста из файла
         getTree();
     }
 
-    //TODO добавить вывод сообщение что загрузка прошла успешна. куда??? ПЕРЕИМЕНОВАТЬ
+    //TODO добавить вывод сообщение что загрузка прошла успешна. к
     public void exportFromFile(String namefile) throws IOException {
         service.archiveToFile(namefile); // заархивировать
 

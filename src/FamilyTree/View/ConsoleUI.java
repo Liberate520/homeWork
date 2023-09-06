@@ -71,23 +71,20 @@ public class ConsoleUI implements View {
         while (flag) {
             System.out.println("введите дату рождения(дд-мм-гггг):");
             String temp = scanner.nextLine();
-            // проверить что ввел пользователь
-            //TODO доделать обработку даты. сделать отдельную функцию. регулярные выражения???
-            String[] tempDate = temp.split("-");
-            dataB = LocalDate.of(Integer.parseInt(tempDate[2]), Integer.parseInt(tempDate[1]), Integer.parseInt(tempDate[0]));
-            flag = false;
+
+            if (temp.matches("(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)")) {
+                String[] tempDate = temp.split("-");
+                dataB = LocalDate.of(Integer.parseInt(tempDate[2]), Integer.parseInt(tempDate[1]), Integer.parseInt(tempDate[0]));
+                flag = false;
+            }
         }
-
         presenter.addPerson(fName, lName, gender, dataB);
-
-
     }
 
     public void getTree() { //вывести дерево на экран
         presenter.getTree();
     }
 
-    //TODO обработать исключения
     public void addParent() {
         int innChilgren = -1;
         int innParent = -1;
@@ -137,9 +134,7 @@ public class ConsoleUI implements View {
             innSPartner = Integer.parseInt(temp);
         }
         presenter.divorce(innFPartner, innSPartner);
-
     }
-
 
     public void sortByName() {
         presenter.sortByName();
@@ -162,11 +157,9 @@ public class ConsoleUI implements View {
         presenter.exportFromFile(namefile);
     }
 
-
     public void finish() {
         System.out.println("Работа закончена. До свидание");
         work = false;
     }
-
 
 }

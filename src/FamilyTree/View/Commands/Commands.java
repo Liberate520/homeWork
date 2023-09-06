@@ -4,6 +4,7 @@ import family_tree.FamilyTree.View.ConsoleUI;
 
 import java.io.IOException;
 
+
 public abstract class Commands {
     private String description;
     private ConsoleUI consoleUI;

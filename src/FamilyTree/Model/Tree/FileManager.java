@@ -10,8 +10,6 @@ public class FileManager implements Serialise {
         this.name = name;
     }
 
-
-    //TODO на тесте (интерфейс Serializable). есть вопросы по правильности. Доработано
     @Override
     public void write(FamilyTree tree) throws IOException {
 
@@ -23,7 +21,6 @@ public class FileManager implements Serialise {
 
     }
 
-    //TODO на тесте (интерфейс Serializable). есть вопросы по правильности. Доработано
     @Override
     public FamilyTree read() throws IOException {
         FamilyTree tree = new FamilyTree();
