@@ -7,6 +7,6 @@ public class SortByAge extends Command{
         super(consoleUI, "Сортировать по возрасту");
     }
     public void execute(){
-        consoleUI.sortByAge();
+        consoleUI.sortByAgeUI();
     }
 }

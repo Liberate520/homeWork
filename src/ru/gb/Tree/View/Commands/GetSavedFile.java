@@ -9,7 +9,7 @@ public class GetSavedFile extends Command{
         super(consoleUI, "Показать семейное дерево");
     }
     public void execute(){
-        consoleUI.getSavedFile();
+        consoleUI.getSavedFileUI();
     }
 }
 

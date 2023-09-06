@@ -7,6 +7,6 @@ public class SortByName extends Command{
         super(consoleUI, "Сортировать по имени");
     }
     public void execute(){
-        consoleUI.sortByName();
+        consoleUI.sortByNameUI();
     }
 }

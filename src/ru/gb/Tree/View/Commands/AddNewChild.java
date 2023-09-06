@@ -9,6 +9,6 @@ public class AddNewChild extends Command{
         super(consoleUI, "Определить детей");
     }
     public void execute(){
-        consoleUI.addNewChild();
+        consoleUI.addNewChildUI();
     }
 }

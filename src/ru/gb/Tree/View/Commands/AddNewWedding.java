@@ -9,7 +9,7 @@ public class AddNewWedding extends Command{
         super(consoleUI, "Установить супружескую связь");
     }
     public void execute(){
-        consoleUI.addNewWedding();
+        consoleUI.addNewWeddingUI();
     }
 }
 

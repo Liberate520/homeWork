@@ -10,10 +10,12 @@ import ru.gb.Tree.Model.FamilyTree.Tree;
 
 
 public class FileHandler implements Writable {
+    private String filePath = "saveFile.out";
 
-    public void saveFile(Tree<Human> tree, String path){
+
+    public void saveFile(Tree<Human> tree){
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
             oos.writeObject(tree);
             System.out.println("Файл записан");
             oos.close();
@@ -23,14 +25,15 @@ public class FileHandler implements Writable {
         } 
     }
 
-    public Tree<Human> readFile(String path){
+    public Tree<Human> readFile(){
         
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path)))
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath)))
         {
-            return (Tree <Human>) ois.readObject(); // спросить на семинаре
+            return (Tree <Human>) ois.readObject();
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            System.out.println("Ошибка");
         } 
         return null;
     } 

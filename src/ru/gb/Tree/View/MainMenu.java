@@ -36,7 +36,7 @@ public class MainMenu {
         command.execute();
     }
 
-//    public int getSize(){
-//        return commandList.size();
-//    }
+    public int getMenuSize(){
+        return commandList.size();
+    }
 }

@@ -7,6 +7,6 @@ public class SortByBirthDate extends Command{
         super(consoleUI, "Сортировать по дате рождения");
     }
     public void execute(){
-        consoleUI.sortByBirthDate();
+        consoleUI.sortByBirthDateUI();
     }
 }

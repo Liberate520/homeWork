@@ -9,6 +9,6 @@ public class AddPerson extends Command{
         super(consoleUI, "Добавить нового члена семьи");
     }
     public void execute(){
-        consoleUI.addPerson();
+        consoleUI.addPersonUI();
     }
 }

@@ -1,6 +1,4 @@
 package ru.gb.Tree.Model.Service;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 
 import ru.gb.Tree.Model.FamilyTree.Tree;
@@ -11,52 +9,53 @@ import ru.gb.Tree.Model.Human.Human;
 
 public class Service{
     private int id;
-    private final Tree <Human> tree;
-    private final String filePath;
+    private Tree <Human> tree;
     private final Writable writable;
 
     public Service(){
-        filePath = "saveFile.out";
         this.writable = new FileHandler();
-        Path file = Path.of(filePath);
-        if (Files.exists(file)){
-            tree = readFile();
-//            id = tree.getLastIndex();
+        tree = readFile();
 
-        } else {
+        if (tree == null){
             tree = new Tree<>();
         }
+        id = tree.getLastIndex();
     }
-
 
     public void addNewPerson(String name, String  gender, LocalDate birthDate, LocalDate deathDate, Integer motherId, Integer fatherId){
         Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, deathDate, tree.getById(motherId), tree.getById(fatherId));
         tree.addHuman(human);
+        writable.saveFile(tree);
     }
     public void addNewPerson(String name, String gender, LocalDate birthDate, Integer motherId, Integer fatherId){
 
         Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, tree.getById(motherId), tree.getById(fatherId));
         tree.addHuman(human);
+        writable.saveFile(tree);
     }
 
      public void addNewPerson(String name, String  gender, LocalDate birthDate, LocalDate deathDate){
         Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, deathDate);
         tree.addHuman(human);
+         writable.saveFile(tree);
     }
 
     public void addNewPerson(String name, String  gender, LocalDate birthDate, Integer motherId){
         Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, tree.getById(motherId));
         tree.addHuman(human);
+        writable.saveFile(tree);
     }
 
     public void addNewWedding(int firstHumanId, int secondHumanId){
         tree.setWedding(firstHumanId, secondHumanId);
+        writable.saveFile(tree);
     }
 
     public void addNewChild(int parentId, int childId){
         Human parent = tree.getById(parentId);
         Human child = tree.getById(childId);
         parent.addToChildren(child);
+        writable.saveFile(tree);
     }
 
     public String getServiceInfo(){
@@ -69,25 +68,22 @@ public class Service{
         return stringBuilder.toString();
     }
 
-    public void saveFile(){
-        writable.saveFile(tree, filePath);
-        System.out.println(" ");
-    }
-
     public Tree<Human> readFile(){
-        System.out.println("Сохраненный файл: \n");
-        return  writable.readFile(filePath);
+        return  writable.readFile();
     }
 
     public void sortByName(){
         tree.sortByName();
+        getServiceInfo();
     }
 
     public void sortByAge() {
         tree.sortByAge();
+        getServiceInfo();
     }
     
     public void sortByBirthDate(){
         tree.sortByBirthDate();
+        getServiceInfo();
     }
 }

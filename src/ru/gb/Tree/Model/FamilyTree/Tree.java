@@ -29,13 +29,14 @@ public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
         }
         return null;
     }
+
     public void setWedding(Integer firstHumanId, Integer secondHumanId){
         E human1 = getById(firstHumanId);
         E human2 = getById(secondHumanId);
         if (human1.getSpouse()== null && human2.getSpouse()==null){
             human1.setSpouse(human2);
             human2.setSpouse(human1);
-        } 
+        }
     }
 
     public String getFamilyTreeInfo(){
@@ -48,9 +49,9 @@ public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
         return stringBuilder.toString();
     }
 
-//    public Integer getLastIndex(){
-//        return humanList.size()- 1;
-//    }
+    public Integer getLastIndex(){
+        return humanList.size();
+    }
 
     @Override
     public String toString(){
@@ -73,5 +74,5 @@ public class Tree <E extends TreeItem<E>> implements Serializable, Iterable<E>{
     public void sortByAge() {
         humanList.sort(new HumanComparatorByAge<>());
     }
-     
+
 }
