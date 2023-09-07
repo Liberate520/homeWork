@@ -1,6 +1,7 @@
 package ru.gb.family_tree.view;
 
 import ru.gb.family_tree.model.human.Gender;
+import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.presenter.Presenter;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ public class ConsoleUI implements View{
     private Scanner scanner;
     private Menu menu;
     private boolean work;
+    public int id;
 
     public ConsoleUI() {
         presenter = new Presenter(this);
@@ -45,42 +47,18 @@ public class ConsoleUI implements View{
     }
 
     public void addHuman() {
-        System.out.println("Введите имя: ");
-        String name = scanner.nextLine();
-        System.out.println("Укажите дату рождения (гггг-мм-дд)");
-        String birthString = scanner.nextLine();
-        LocalDate birthDate = null;
-        if (birthString != "") {
-            birthDate = LocalDate.parse(birthString);
-        }
-        System.out.println("Укажите возраст: ");
-        String ageString = scanner.nextLine();
-        int age = Integer.parseInt(ageString);
-
-        System.out.println("Укажите пол: М/Ж");
-        String genderString = scanner.nextLine();
-        Gender gender = null;
-        if (genderString.equals("Ж"))
-            gender = Gender.Female;
-        if (genderString.equals("М"))
-            gender = Gender.Male;
-        presenter.addHuman(name, null, null, age, age);
-    }
-
-    public void addChild() {
-        System.out.println("Введите имя: ");
-        String name = scanner.nextLine();
-        System.out.println("Укажите возраст: ");
-        String ageString = scanner.nextLine();
-        int age = Integer.parseInt(ageString);
-    }
-
-    public void addParent() {
-        System.out.println("Введите имя: ");
-        String name = scanner.nextLine();
-        System.out.println("Укажите возраст: ");
-        String ageString = scanner.nextLine();
-        int age = Integer.parseInt(ageString);
+    System.out.println("Введите имя: ");
+    String name = scanner.nextLine();
+    System.out.println("Введите дату рождения (гггг-мм-дд): ");
+    String birthDate = scanner.nextLine();
+    System.out.println("Укажите пол(Male/Female): ");
+    String genderString = scanner.nextLine();
+    Gender gender = Gender.valueOf(genderString);
+    System.out.println("Введите имя отца:");
+    String father = scanner.nextLine();
+    System.out.println("Введите имя матери:");
+    String mother = scanner.nextLine();
+    presenter.addHuman(id, name, birthDate, gender, father, mother);
     }
 
     public void getHumanList(){
@@ -129,5 +107,15 @@ public class ConsoleUI implements View{
 
     private void inputError(){
         System.out.println(INPUT_ERROR);
+    }
+
+    public void readFile() {
+        presenter.ReadFile();
+        System.out.println("Данные импортированы.");
+    }
+
+    public void saveToFile() {
+        presenter.saveToFile();
+        System.out.println("Экспорт завершен");
     }
 }

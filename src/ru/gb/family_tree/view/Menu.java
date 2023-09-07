@@ -12,10 +12,10 @@ public class Menu {
         list = new ArrayList<>();
         list.add(new GetHumanList(console));
         list.add(new AddHuman(console));
-        list.add(new AddParents(console));
-        list.add(new AddChildren(console));
         list.add(new SortByAge(console));
         list.add(new SortByName(console));
+        list.add(new ReadFile(console));
+        list.add(new SaveToFile(console));
         list.add(new Finish(console));
 
     }

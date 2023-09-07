@@ -4,6 +4,7 @@ import ru.gb.family_tree.model.family_tree.comparator.FamilyTreeComparatorByAge;
 import ru.gb.family_tree.model.family_tree.comparator.FamilyTreeComparatorByName;
 
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,31 +22,11 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         this(new ArrayList<>());
     }
 
-    public boolean add(E human){
-        if (human == null){
-            return false;
-        }
-        if (!humanlist.contains(human)){
-            humanlist.add(human);
-            addToParents(human);
-            addToChildren(human);
-            return true;
-        }
-        return false;
+    public void add(E human){
+        humanlist.add(human);
     }
 
-    private void addToParents(E human){
-        for (E parent: human.getParents()){
-            parent.addChild(human);
-        }
-    }
-
-    private void addToChildren(E human){
-        for (E child: human.getChildren()){
-            child.addParent(human);
-        }
-    }
-
+//
     public List<E> getSiblings(int id){
         E human = getById(id);
         if (human == null){
@@ -72,48 +53,6 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         return res;
     }
 
-//    public boolean setWedding(long humanId1, long humanId2){
-//        if (checkId(humanId1) && checkId(humanId2)){
-//            E human1 = getById(humanId1);
-//            E human2 = getById(humanId2);
-//            return setWedding(human1, human2);
-//        }
-//        return false;
-//    }
-
-//    public boolean setWedding(E human1, E human2){
-//        if (human1.getSpouse() == null && human2.getSpouse() == null){
-//            human1.setSpouse(human2);
-//            human2.setSpouse(human1);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
-//    public boolean setDevorce(long humanId1, long humanId2){
-//        if (checkId(humanId1) && checkId(humanId2)) {
-//            E human1 = getById(humanId1);
-//            E human2 = getById(humanId2);
-//            if (human1.getSpouse() != null && human2.getSpouse() != null) {
-//                human1.setSpouse(null);
-//                human2.setSpouse(null);
-//            } else {
-//                return false;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public boolean setDevorce(E human1, E human2){
-//        if (human1.getSpouse() != null && human2.getSpouse() != null) {
-//            human1.setSpouse(null);
-//            human2.setSpouse(null);
-//        } else {
-//            return false;
-//        }
-//        return false;
-//    }
 
     public boolean remove(int humansId){
         if (checkId(humansId)){
@@ -123,7 +62,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         return false;
     }
 
-    private boolean checkId(int id){
+    private boolean checkId(long id){
         if (id > humansId || id < 0){
             return false;
         }
@@ -135,7 +74,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         return false;
     }
 
-    public E getById(int id){
+    public E getById(long id){
         for (E human: humanlist){
             if (human.getId() == id){
                 return human;

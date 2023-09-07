@@ -5,46 +5,20 @@ import ru.gb.family_tree.model.filehandler.Writable;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.human.Human;
 
-import java.time.LocalDate;
-
 public class TreeService {
-    private int id;
     private Writable writable;
     private FamilyTree<Human> activeTree;
-
-    public TreeService(FamilyTree<Human> activeTree) {
-        this.activeTree = activeTree;
-    }
 
     public TreeService(){
         activeTree = new FamilyTree<>();
     }
 
-
-
-//    public String addHuman(String name, String genderString, String birthDate,
-//                           long idFather, long idMother){
-//        Human father = activeTree.getById(idFather);
-//        Human mother = activeTree.getById(idMother);
-//        Gender gender = Gender.valueOf(genderString);
-//        LocalDate humanBirthDate = LocalDate.parse(birthDate);
-//        Human human = new Human(name, gender, humanBirthDate, father, mother);
-//        activeTree.add(human);
-//        return "Человек успешно добавлен в дерево";
-//    }
-
-    public void addHuman(String name, Gender gender, LocalDate birthdate, int age, int id) {
-        Human human = new Human(name, gender, birthdate, age, id++);
-        activeTree.add(human);
+    public TreeService(FamilyTree<Human> activeTree) {
+        this.activeTree = activeTree;
     }
 
-    public void addChild(String name, int age) {
-        Human human = new Human(name, null, null, age, id);
-        activeTree.add(human);
-    }
-
-    public void addParent(String name, int age) {
-        Human human = new Human(name, null, null, age, id);
+    public void addHuman(int id, String name, String birthDate, Gender gender, String father, String mother) {
+        Human human = new Human(id, name, birthDate, gender, father, mother);
         activeTree.add(human);
     }
 
@@ -64,18 +38,18 @@ public class TreeService {
         return activeTree.getInfo();
     }
 
-    public boolean write(){
+    public void write(){
         if (writable == null){
-            return false;
+            return;
         }
-        return writable.write(activeTree);
+        writable.write(activeTree);
     }
 
-    public boolean read(){
+    public void read(){
         if (writable == null){
-            return false;
+            return;
         }
         activeTree = writable.read();
-        return true;
     }
+
 }
