@@ -1,9 +1,5 @@
-package App;
+package Model;
 
-import Fileworks.FamilyTreeFileManager;
-import Model.*;
-
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +12,22 @@ public class GenealogyApp {
 
     private void run() {
         List<FamilyMember> familyMembers = createFamilyMembers();
-        FamilyTree familyTree = new FamilyTree(familyMembers);
+        FamilyTree<FamilyMember> familyTree = new FamilyTree<>(familyMembers);
 
-        FamilyTreeFileManager fileManager = new FamilyTreeFileManager(familyMembers);
+//        FamilyTreeFileManager fileManager = new FamilyTreeFileManager(familyMembers);
 
-        try {
-            saveAndLoadFamilyTree(fileManager);
-        } catch (IOException | ClassNotFoundException e) {
-            handleException(e);
-        }
+//        try {
+//            saveAndLoadFamilyTree(fileManager);
+//        } catch (IOException | ClassNotFoundException e) {
+//            handleException(e);
+//        }
 
-        displayFamilyTreeInfo(familyTree);
-        displaySortedFamilyTree(familyTree);
+        GenealogyPresenter presenter = new GenealogyPresenter(familyTree);
+
+        ConsoleUI consoleUI = new ConsoleUI(presenter);
+        consoleUI.start();
     }
+
 
     private List<FamilyMember> createFamilyMembers() {
         // Создаем членов семьи
@@ -55,29 +54,29 @@ public class GenealogyApp {
 
 
 
-    private void saveAndLoadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
-        // Сохраняем и загружаем семейное дерево из файла
-        fileManager.saveFamilyTree("family_bush.dat");
-        fileManager.loadFamilyTree("family_bush.dat");
-    }
+//    private void saveAndLoadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
+//        // Сохраняем и загружаем семейное дерево из файла
+//        fileManager.saveFamilyTree("family_bush.dat");
+//        fileManager.loadFamilyTree("family_bush.dat");
+//    }
 
     private void displayFamilyTreeInfo(FamilyTree familyTree) {
         List<Relationship> allRelationships = familyTree.getAllRelationships();
         List<FamilyMember> allPeople = familyTree.getAllPeople();
 
         // Вывод информации о загруженных отношениях и людях
-        System.out.println("All Relationships:");
-        for (Relationship relationship : allRelationships) {
-            System.out.println(relationship);
-        }
+//        System.out.println("All Relationships:");
+//        for (Relationship relationship : allRelationships) {
+//            System.out.println(relationship);
+//        }
 
-        System.out.println("All People:");
-        for (FamilyMember familyMember : allPeople) {
-            System.out.println(familyMember);
-        }
+//        System.out.println("All People:");
+//        for (FamilyMember familyMember : allPeople) {
+//            System.out.println(familyMember);
+//        }
     }
 
-    private void displaySortedFamilyTree(FamilyTree familyTree) {
+    /*private void displaySortedFamilyTree(FamilyTree familyTree) {
         // Вывод отсортированного семейного дерева
         System.out.println("==== Family Tree Sorted by Name ====");
         familyTree.sortByName();
@@ -86,9 +85,9 @@ public class GenealogyApp {
         System.out.println("\nSorting Family Tree by Birth Date...");
         familyTree.sortByBirthDate();
         printFamilyTree(familyTree);
-    }
+    }*/
 
-    private void printFamilyTree(FamilyTree familyTree) {
+    private void printFamilyTree(FamilyTree<FamilyMember> familyTree) {
         for (FamilyMember familyMember : familyTree) {
             System.out.println("----------------------------");
             System.out.println("Name: " + familyMember.getFullName());
@@ -109,6 +108,7 @@ public class GenealogyApp {
             }
         }
     }
+
 
 
 

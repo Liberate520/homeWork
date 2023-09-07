@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Gender;
+
 public class PersonData {
     private Gender gender;
 

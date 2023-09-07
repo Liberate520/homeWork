@@ -16,6 +16,7 @@ public class FamilyMember<T> implements Serializable {
 
     private T specificData;  // Добавляем специфичные данные
 
+
     public FamilyMember(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, T specificData) {
         this.id = id;
         this.firstName = firstName;
@@ -26,6 +27,8 @@ public class FamilyMember<T> implements Serializable {
         this.specificData = specificData;
         this.relationships = new ArrayList<>();
     }
+
+
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -48,6 +51,10 @@ public class FamilyMember<T> implements Serializable {
         return deathDate != null ? deathDate.getYear() - birthDate.getYear() : currentDate.getYear() - birthDate.getYear();
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getYearsSinceDeath() {
         if (deathDate != null) {
             LocalDate currentDate = LocalDate.now();
@@ -63,12 +70,45 @@ public class FamilyMember<T> implements Serializable {
     public void addRelationship(RelationshipType type, FamilyMember relatedMember) {
         Relationship relationship = new Relationship(this, relatedMember, type);
         relatedMember.relationships.add(relationship);
+
+        if (type == RelationshipType.ANCESTOR || type == RelationshipType.FATHER || type == RelationshipType.MOTHER) {
+            if (!this.relationships.contains(relationship)) {
+                this.relationships.add(relationship);
+            }
+            if (!relatedMember.relationships.contains(relationship)) {
+                relatedMember.relationships.add(relationship);
+            }
+        } else if (type == RelationshipType.CHILD) {
+            if (!this.relationships.contains(relationship)) {
+                this.relationships.add(relationship);
+            }
+            if (!relatedMember.relationships.contains(relationship)) {
+                relatedMember.relationships.add(relationship);
+            }
+        } else if (type == RelationshipType.SPOUSE) {
+            if (!this.relationships.contains(relationship)) {
+                this.relationships.add(relationship);
+            }
+            if (!relatedMember.relationships.contains(relationship)) {
+                relatedMember.relationships.add(relationship);
+            }
+        } else if (type == RelationshipType.SIBLING) {
+            if (!this.relationships.contains(relationship)) {
+                this.relationships.add(relationship);
+            }
+            if (!relatedMember.relationships.contains(relationship)) {
+                relatedMember.relationships.add(relationship);
+            }
+        }
     }
+
+
 
 
     public List<Relationship> getRelationships() {
         return relationships;
     }
+
 
     public String getDeathYear() {
         if (deathDate != null) {
