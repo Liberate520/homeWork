@@ -1,5 +1,8 @@
 package Model;
 
+import Fileworks.FamilyTreeFileManager;
+import Model.Tree.FamilyTree;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -62,12 +65,11 @@ public class GenealogyPresenter {
     }
 
     public void saveFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
-        fileManager.saveFamilyTree(this.model, "family_bush.dat");
+        fileManager.saveFamilyTree("family_bush.dat");
     }
-
     public void loadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
-        FamilyTree<FamilyMember> loadedTree = fileManager.loadFamilyTree("family_bush.dat");
 
+        fileManager.loadFamilyTree("family_bush.dat");
     }
     // Другие методы для управления данными
 }

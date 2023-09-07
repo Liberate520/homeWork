@@ -1,4 +1,7 @@
-package Model;
+package App;
+
+import Model.*;
+import Model.Tree.FamilyTree;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,17 +20,16 @@ public class ConsoleUI {
     }
 
     public void start() {
-        FamilyTreeFileManager fileManager = new FamilyTreeFileManager();
-        try {
-            presenter.loadFamilyTree(fileManager);
-            System.out.println("Family Tree loaded successfully.");
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error loading Family Tree: " + e.getMessage());
-        }
-
 
         while (true) {
-            printMainMenu();
+            System.out.println("Genealogy App Menu:");
+            System.out.println("1. Add Family Member");
+            System.out.println("2. Display Family Tree");
+            System.out.println("3. Display All Relationships");
+            System.out.println("4. Sort and Display Family Tree");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
             try {
                 int choice = Integer.parseInt(reader.readLine());
 
@@ -45,6 +47,7 @@ public class ConsoleUI {
                         displaySortedFamilyTree();
                         break;
                     case 5:
+                        System.out.println("Goodbye!");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -53,16 +56,6 @@ public class ConsoleUI {
                 System.out.println("Invalid input. Please try again.");
             }
         }
-    }
-
-    private void printMainMenu() {
-        System.out.println("Genealogy App Menu:");
-        System.out.println("1. Add Family Member");
-        System.out.println("2. Display Family Tree");
-        System.out.println("3. Display All Relationships");
-        System.out.println("4. Sort and Display Family Tree");
-        System.out.println("5. Exit");
-        System.out.print("Enter your choice: ");
     }
 
     private void addFamilyMember() throws IOException {

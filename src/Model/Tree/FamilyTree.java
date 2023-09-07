@@ -1,4 +1,8 @@
-package Model;
+package Model.Tree;
+
+import Model.FamilyMember;
+import Model.Relationship;
+import Model.RelationshipType;
 
 import java.io.Serializable;
 import java.time.LocalDate;

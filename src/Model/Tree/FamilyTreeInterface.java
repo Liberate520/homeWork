@@ -1,4 +1,4 @@
-package Model;
+package Model.Tree;
 
 import Model.FamilyMember;
 import Model.Relationship;

@@ -1,4 +1,7 @@
-package Model;
+package Model.Person;
+
+import Model.FamilyMember;
+import Model.Gender;
 
 import java.time.LocalDate;
 
