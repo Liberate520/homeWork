@@ -14,7 +14,7 @@ public class Service{
 
     public Service(){
         this.writable = new FileHandler();
-        tree = readFile();
+        tree = writable.readFile();
 
         if (tree == null){
             tree = new Tree<>();
@@ -24,24 +24,6 @@ public class Service{
 
     public void addNewPerson(String name, String  gender, LocalDate birthDate, LocalDate deathDate, Integer motherId, Integer fatherId){
         Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, deathDate, tree.getById(motherId), tree.getById(fatherId));
-        tree.addHuman(human);
-        writable.saveFile(tree);
-    }
-    public void addNewPerson(String name, String gender, LocalDate birthDate, Integer motherId, Integer fatherId){
-
-        Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, tree.getById(motherId), tree.getById(fatherId));
-        tree.addHuman(human);
-        writable.saveFile(tree);
-    }
-
-     public void addNewPerson(String name, String  gender, LocalDate birthDate, LocalDate deathDate){
-        Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, deathDate);
-        tree.addHuman(human);
-         writable.saveFile(tree);
-    }
-
-    public void addNewPerson(String name, String  gender, LocalDate birthDate, Integer motherId){
-        Human human = new Human(id++, name, Gender.valueOf(gender), birthDate, tree.getById(motherId));
         tree.addHuman(human);
         writable.saveFile(tree);
     }
@@ -58,32 +40,19 @@ public class Service{
         writable.saveFile(tree);
     }
 
-    public String getServiceInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Семья состоит из:\n");
-        for (Human human : tree) {
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
-    public Tree<Human> readFile(){
-        return  writable.readFile();
-    }
-
     public void sortByName(){
         tree.sortByName();
-        getServiceInfo();
     }
 
     public void sortByAge() {
         tree.sortByAge();
-        getServiceInfo();
     }
     
     public void sortByBirthDate(){
         tree.sortByBirthDate();
-        getServiceInfo();
+    }
+
+    public String getHumanInfo() {
+        return tree.getFamilyTreeInfo();
     }
 }

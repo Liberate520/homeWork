@@ -19,17 +19,6 @@ public class Presenter {
     public void addPerson(String name, String gender, LocalDate birthDate, LocalDate deathDate, Integer motherId, Integer fatherId) {
         service.addNewPerson(name, gender, birthDate, deathDate, motherId, fatherId);
     }
-    public void addPerson(String name, String gender, LocalDate birthDate, Integer motherId, Integer fatherId) {
-        service.addNewPerson(name, gender, birthDate, motherId, fatherId);
-    }
-
-    public void addPerson(String name, String gender, LocalDate birthDate, LocalDate deathDate) {
-        service.addNewPerson(name, gender, birthDate, deathDate);
-    }
-
-    public void addPerson(String name, String gender, LocalDate birthDate, Integer motherId) {
-        service.addNewPerson(name, gender, birthDate, motherId);
-    }
 
     public void addNewWedding(int firstHumanId, int secondHumanId){
         service.addNewWedding(firstHumanId, secondHumanId);
@@ -39,19 +28,22 @@ public class Presenter {
         service.addNewChild(parentId, childId);
     }
 
-    public void getSavedInfo() {
-        view.printAnswers(String.valueOf(service.readFile()));
+    public void getHumanList() {
+        view.printAnswers(service.getHumanInfo());
     }
 
     public void sortByAge() {
         service.sortByAge();
+
     }
 
     public void sortByName() {
         service.sortByName();
+
     }
 
     public void sortByBirthDate() {
         service.sortByBirthDate();
+
     }
 }

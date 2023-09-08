@@ -2,14 +2,14 @@ package ru.gb.Tree.View.Commands;
 
 import ru.gb.Tree.View.ConsoleUI;
 
-public class GetSavedFile extends Command{
+public class GetListInfo extends Command{
 
 
-    public GetSavedFile(ConsoleUI consoleUI) {
+    public GetListInfo(ConsoleUI consoleUI) {
         super(consoleUI, "Показать семейное дерево");
     }
     public void execute(){
-        consoleUI.getSavedFileUI();
+        consoleUI.getHumanListUI();
     }
 }
 

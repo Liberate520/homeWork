@@ -45,18 +45,21 @@ public class ConsoleUI implements View{
 
     public void sortByAgeUI(){
         presenter.sortByAge();
+        getHumanListUI();
     }
 
     public void sortByNameUI(){
         presenter.sortByName();
+        getHumanListUI();
     }
 
     public void sortByBirthDateUI(){
         presenter.sortByBirthDate();
+        getHumanListUI();
     }
 
-    public void getSavedFileUI(){
-        presenter.getSavedInfo();
+    public void getHumanListUI(){
+        presenter.getHumanList();
     }
 
     public void addNewWeddingUI(){
