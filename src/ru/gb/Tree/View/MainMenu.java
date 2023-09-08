@@ -18,8 +18,8 @@ public class MainMenu {
         commandList.add(new SortByBirthDate(consoleUI));
         commandList.add(new GetListInfo(consoleUI));
         commandList.add(new Finish(consoleUI));
-
     }
+
     public String menu(){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commandList.size(); i++) {

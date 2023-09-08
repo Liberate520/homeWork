@@ -4,7 +4,6 @@ import ru.gb.Tree.View.ConsoleUI;
 
 public class GetListInfo extends Command{
 
-
     public GetListInfo(ConsoleUI consoleUI) {
         super(consoleUI, "Показать семейное дерево");
     }
