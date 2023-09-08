@@ -17,13 +17,16 @@ public class Presenter {
 
     public void addHuman(String name, String lastname,  int age) {
         service.addHuman(name, lastname, age);
-        System.out.println("Добавление члена семьи выполнено!");
         getHumanListInfo();
+        // String answer = service.addHuman(name, lastname, age);
+        // view.printAnswer(answer);
     }
 
     public void getHumanListInfo() {
         String info = service.getHumanInfo();
         view.printAnswer(info);
+        // String answer = service.getHumanInfo();
+        // view.printAnswer(answer);
     }
 
     public void sortByAge() {
