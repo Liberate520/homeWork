@@ -16,15 +16,12 @@ public class GenealogyApp {
     }
 
     private void run() {
-        List<FamilyMember> familyMembers = createFamilyMembers();
-        FamilyTree<FamilyMember> familyTree = new FamilyTree<>(familyMembers);
+        FamilyTree<FamilyMember> familyTree = loadFamilyTreeFromFile(); // Попытка загрузки семейного дерева из файла
 
-        FamilyTreeFileManager fileManager = new FamilyTreeFileManager(familyMembers);
-
-        try {
-            saveAndLoadFamilyTree(fileManager);
-        } catch (IOException | ClassNotFoundException e) {
-            handleException(e);
+        if (familyTree == null) {
+            // Если загрузка не удалась, создаем новое семейное дерево и членов семьи
+            List<FamilyMember> familyMembers = createFamilyMembers();
+            familyTree = new FamilyTree<>(familyMembers);
         }
 
         GenealogyPresenter presenter = new GenealogyPresenter(familyTree);
@@ -32,6 +29,22 @@ public class GenealogyApp {
         ConsoleUI consoleUI = new ConsoleUI(presenter);
         consoleUI.start();
     }
+
+    private FamilyTree<FamilyMember> loadFamilyTreeFromFile() {
+        FamilyTree<FamilyMember> familyTree = null;
+        FamilyTreeFileManager fileManager = new FamilyTreeFileManager();
+
+        try {
+            familyTree = fileManager.loadFamilyTree("family_bush.dat");
+            System.out.println("Family Tree loaded successfully from file.");
+        } catch (IOException | ClassNotFoundException e) {
+            // Обработка ошибки загрузки из файла
+            System.out.println("Error loading Family Tree from file: " + e.getMessage());
+        }
+
+        return familyTree;
+    }
+
 
 
     private List<FamilyMember> createFamilyMembers() {
@@ -58,67 +71,60 @@ public class GenealogyApp {
 
 
 
+//    private void displayFamilyTreeInfo(FamilyTree familyTree) {
+//        List<Relationship> allRelationships = familyTree.getAllRelationships();
+//        List<FamilyMember> allPeople = familyTree.getAllPeople();
+//
+//        // Вывод информации о загруженных отношениях и людях
+//        System.out.println("All Relationships:");
+//        for (Relationship relationship : allRelationships) {
+//            System.out.println(relationship);
+//        }
+//
+//        System.out.println("All People:");
+//        for (FamilyMember familyMember : allPeople) {
+//            System.out.println(familyMember);
+//        }
+//    }
 
-    private void saveAndLoadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
-        // Сохраняем и загружаем семейное дерево из файла
-        fileManager.saveFamilyTree("family_bush.dat");
-        fileManager.loadFamilyTree("family_bush.dat");
-    }
-
-    private void displayFamilyTreeInfo(FamilyTree familyTree) {
-        List<Relationship> allRelationships = familyTree.getAllRelationships();
-        List<FamilyMember> allPeople = familyTree.getAllPeople();
-
-        // Вывод информации о загруженных отношениях и людях
-        System.out.println("All Relationships:");
-        for (Relationship relationship : allRelationships) {
-            System.out.println(relationship);
-        }
-
-        System.out.println("All People:");
-        for (FamilyMember familyMember : allPeople) {
-            System.out.println(familyMember);
-        }
-    }
-
-    private void displaySortedFamilyTree(FamilyTree familyTree) {
-        // Вывод отсортированного семейного дерева
-        System.out.println("==== Family Tree Sorted by Name ====");
-        familyTree.sortByName();
-        printFamilyTree(familyTree);
-
-        System.out.println("\nSorting Family Tree by Birth Date...");
-        familyTree.sortByBirthDate();
-        printFamilyTree(familyTree);
-    }
-
-    private void printFamilyTree(FamilyTree<FamilyMember> familyTree) {
-        for (FamilyMember familyMember : familyTree) {
-            System.out.println("----------------------------");
-            System.out.println("Name: " + familyMember.getFullName());
-            System.out.println("Gender: " + familyMember.getGender());
-            System.out.println("Birth Date: " + familyMember.getBirthDate());
-            System.out.println("Death Date: " + familyMember.getDeathYear());
-
-            if (familyMember.isAlive()) {
-                System.out.println("Age: " + familyMember.getAge() + " years (Alive)");
-            } else {
-                System.out.println("Age: " + familyMember.getAge() + " years (Died " + familyMember.getYearsSinceDeath() + " years ago)");
-            }
-
-            System.out.println("Relationships:");
-            for (Relationship relationship : familyTree.getRelationships(familyMember)) {
-                FamilyMember relatedFamilyMember = (relationship.getPerson1() == familyMember) ? relationship.getPerson2() : relationship.getPerson1();
-                System.out.println("  " + relationship.getType() + ": " + relatedFamilyMember.getFullName());
-            }
-        }
-    }
-
-
-
-
-    private void handleException(Exception e) {
-        // Обработка исключения: вывод ошибки и/или дополнительная логика
-        e.printStackTrace();
-    }
+//    private void displaySortedFamilyTree(FamilyTree familyTree) {
+//        // Вывод отсортированного семейного дерева
+//        System.out.println("==== Family Tree Sorted by Name ====");
+//        familyTree.sortByName();
+//        printFamilyTree(familyTree);
+//
+//        System.out.println("\nSorting Family Tree by Birth Date...");
+//        familyTree.sortByBirthDate();
+//        printFamilyTree(familyTree);
+//    }
+//
+//    private void printFamilyTree(FamilyTree<FamilyMember> familyTree) {
+//        for (FamilyMember familyMember : familyTree) {
+//            System.out.println("----------------------------");
+//            System.out.println("Name: " + familyMember.getFullName());
+//            System.out.println("Gender: " + familyMember.getGender());
+//            System.out.println("Birth Date: " + familyMember.getBirthDate());
+//            System.out.println("Death Date: " + familyMember.getDeathYear());
+//
+//            if (familyMember.isAlive()) {
+//                System.out.println("Age: " + familyMember.getAge() + " years (Alive)");
+//            } else {
+//                System.out.println("Age: " + familyMember.getAge() + " years (Died " + familyMember.getYearsSinceDeath() + " years ago)");
+//            }
+//
+//            System.out.println("Relationships:");
+//            for (Relationship relationship : familyTree.getRelationships(familyMember)) {
+//                FamilyMember relatedFamilyMember = (relationship.getPerson1() == familyMember) ? relationship.getPerson2() : relationship.getPerson1();
+//                System.out.println("  " + relationship.getType() + ": " + relatedFamilyMember.getFullName());
+//            }
+//        }
+//    }
+//
+//
+//
+//
+//    private void handleException(Exception e) {
+//        // Обработка исключения: вывод ошибки и/или дополнительная логика
+//        e.printStackTrace();
+//    }
 }

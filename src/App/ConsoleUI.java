@@ -1,8 +1,7 @@
 package App;
 
 import Model.*;
-import Model.Tree.FamilyTree;
-
+import Model.Tree.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +19,12 @@ public class ConsoleUI {
     }
 
     public void start() {
+        try {
+            presenter.loadFamilyTree(); // Перенесли загрузку в модель
+            System.out.println("Family Tree loaded successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading Family Tree: " + e.getMessage());
+        }
 
         while (true) {
             System.out.println("Genealogy App Menu:");
@@ -47,7 +52,7 @@ public class ConsoleUI {
                         displaySortedFamilyTree();
                         break;
                     case 5:
-                        System.out.println("Goodbye!");
+                        saveAndExit();
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -83,22 +88,17 @@ public class ConsoleUI {
             }
         }
 
-        FamilyMember newMember = new FamilyMember(
-                presenter.getNextAvailableId(),
-                firstName,
-                lastName,
-                gender,
-                birthDate,
-                deathDate,
-                null
-        );
+        FamilyMember newMember = presenter.saveFamilyMember(firstName, lastName, gender, birthDate, deathDate);
+        presenter.addFamilyMember(newMember);
 
         // Добавление отношений
         addRelationships(newMember);
 
-        presenter.addFamilyMember(newMember);
         System.out.println("Family Member added successfully.");
+
+        presenter.saveFamilyTree();
     }
+
 
     private void addRelationships(FamilyMember newMember) throws IOException {
         boolean addMoreRelationships = true;
@@ -274,5 +274,16 @@ public class ConsoleUI {
                     .append("\n");
         }
         return relationships.toString();
+    }
+    private void saveAndExit() {
+        try {
+            presenter.saveFamilyTree(); // Сохранение семейного дерева
+            System.out.println("Family Tree saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving Family Tree: " + e.getMessage());
+        } finally {
+            System.out.println("Goodbye!");
+            System.exit(0); // Завершаем работу приложения
+        }
     }
 }

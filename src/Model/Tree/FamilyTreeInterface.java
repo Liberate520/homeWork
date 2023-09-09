@@ -6,7 +6,7 @@ import Model.RelationshipType;
 
 import java.util.List;
 
-public interface FamilyTreeInterface<T extends FamilyMember> {
+public interface FamilyTreeInterface<T extends FamilyMember>  {
     void addPerson(T familyMember);
     List<T> getAllPeople();
     void addRelationship(T familyMember1, T familyMember2, RelationshipType type);

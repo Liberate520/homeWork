@@ -1,16 +1,20 @@
 package Model;
 
-import Fileworks.FamilyTreeFileManager;
-import Model.Tree.FamilyTree;
+import Model.Tree.*;
+import Fileworks.*;
+
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class GenealogyPresenter {
     private final FamilyTree<FamilyMember> model;
+    private FamilyTreeFileManager fileManager;
 
     public GenealogyPresenter(FamilyTree<FamilyMember> model) {
         this.model = model;
+        this.fileManager = new FamilyTreeFileManager();
     }
 
     public void addFamilyMember(FamilyMember familyMember) {
@@ -64,12 +68,44 @@ public class GenealogyPresenter {
         model.addRelationship(familyMember1, familyMember2, type);
     }
 
-    public void saveFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
-        fileManager.saveFamilyTree("family_bush.dat");
-    }
-    public void loadFamilyTree(FamilyTreeFileManager fileManager) throws IOException, ClassNotFoundException {
-
+    public void loadFamilyTree() throws IOException, ClassNotFoundException {
         fileManager.loadFamilyTree("family_bush.dat");
+    }
+
+    public void saveFamilyTree() throws IOException {
+        fileManager.saveFamilyTree(model, "family_bush.dat");
+    }
+
+    private FamilyMember newMember;
+    public void addFamilyMember(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) throws IOException {
+        newMember = new FamilyMember(
+                getNextAvailableId(),
+                firstName,
+                lastName,
+                gender,
+                birthDate,
+                deathDate,
+                null
+        );
+
+
+
+    }
+    public FamilyMember getNewMember() {
+        return newMember;
+    }
+
+    public FamilyMember saveFamilyMember(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) throws IOException {
+        FamilyMember Member = new FamilyMember(
+                getNextAvailableId(),
+                firstName,
+                lastName,
+                gender,
+                birthDate,
+                deathDate,
+                null
+        );
+        return Member;
     }
     // Другие методы для управления данными
 }
