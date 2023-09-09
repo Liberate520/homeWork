@@ -1,18 +1,18 @@
-package familyTree;
+package model.familyTree;
 
-import human.Gender;
-import human.comparators.HumanComparatorByGender;
-import human.comparators.HumanComparatorByName;
-import human.comparators.HumansComparatorByAge;
+import model.human.Gender;
+import model.human.comparators.HumanComparatorByGender;
+import model.human.comparators.HumanComparatorByName;
+import model.human.comparators.HumansComparatorByAge;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
     private List<E> familyTree;
     private long humansId;
 
-//    public familyTree.FamilyTree(List<human.Human> humans) {
+//    public model.familyTree.FamilyTree(List<model.human.Human> humans) {
 //        this.humans = humans;
 //    }
 
@@ -57,7 +57,7 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
      */
 
     private void addToChildren(E human) {
-        for (FamilyTreeItem child : (List<FamilyTreeItem>) human.getChildren()) {
+        for (E child :  human.getChildren()) {
             if (human.getGender() == Gender.MALE)
                 child.setFather(human);
             else child.setMother(human);
@@ -70,15 +70,15 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
      * @param id
      * @return
      */
-    private List<FamilyTreeItem> getSiblings(int id){
+    private List<E> getSiblings(int id){
         E human = getById(id);
         if (human == null)
             return null;
-        List<FamilyTreeItem> res = new ArrayList<>();
-        List<FamilyTreeItem> parents =  new ArrayList<>(List.of((FamilyTreeItem) human.getMother(),
-                (FamilyTreeItem) human.getFather()));
-        for (FamilyTreeItem parent : parents){
-            for (FamilyTreeItem child : (List<FamilyTreeItem>) parent.getChildren()){
+        List<E> res = new ArrayList<>();
+        List<E> parents =  new ArrayList<>(List.of(human.getMother(),
+                 human.getFather()));
+        for (E parent : parents){
+            for (E child :  parent.getChildren()){
                 if(!child.equals(human) && !res.contains(child)){
                     res.add(child);
                 }
@@ -112,8 +112,8 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
     }
 
     /**
-     * принимает 2 id, с помощью метода getById инициализируем 2 объекта human.Human,
-     * далее передаем их в перегруженный метод setWedding(human.Human, human.Human)
+     * принимает 2 id, с помощью метода getById инициализируем 2 объекта model.human.Human,
+     * далее передаем их в перегруженный метод setWedding(model.human.Human, model.human.Human)
      * @param humanId1
      * @param humanId2
      * @return
@@ -128,7 +128,7 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
     }
 
     /**
-     * принимает 2 объекта human.Human, методом .getSpouse проверяет нет ли у объектов супругов(Spouse)
+     * принимает 2 объекта model.human.Human, методом .getSpouse проверяет нет ли у объектов супругов(Spouse)
      * если супругов нет, методом setSpouse устанавливает им супргов(друг друга)
      * @param human1
      * @param human2
@@ -144,8 +144,8 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
     }
 
     /**
-     * принимает 2 id, с помощью метода getById инициализируем 2 объекта human.Human,
-     * далее передаем их в перегруженный метод setDivorce(human.Human, human.Human)
+     * принимает 2 id, с помощью метода getById инициализируем 2 объекта model.human.Human,
+     * далее передаем их в перегруженный метод setDivorce(model.human.Human, model.human.Human)
      * @param humanId1
      * @param humanId2
      * @return
@@ -160,7 +160,7 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
     }
 
     /**
-     * принимает 2 объекта human.Human, методом .getSpouse проверяет являются ли объекты супругами(Spouse)
+     * принимает 2 объекта model.human.Human, методом .getSpouse проверяет являются ли объекты супругами(Spouse)
      * друг друга, методом setSpouse устанавливает им супргов(null - отсутсвует)
      * @param human1
      * @param human2

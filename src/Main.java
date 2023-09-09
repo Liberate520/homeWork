@@ -1,21 +1,18 @@
-import familyTree.FamilyTree;
-import human.Gender;
-import human.Human;
-import service.Service;
-import view.View;
+import model.service.ServiceHuman;
+import view.ViewHuman;
 
 public class Main {
     public static void main(String[] args) {
 
 
 //        String filePath = "testSaveObj.txt";
-//        fileOperations.FileHandler fileHandler = new fileOperations.FileHandler(filePath);
+//        model.fileOperations.FileHandler fileHandler = new model.fileOperations.FileHandler(filePath);
 //
 ////        fileHandler.save(tree);
 //
-//        familyTree.FamilyTree treeRead = (familyTree.FamilyTree) fileHandler.read();
+//        model.familyTree.FamilyTree treeRead = (model.familyTree.FamilyTree) fileHandler.read();
 //        System.out.println(tree.getHumanList());
-        Service s = new Service();
+        ServiceHuman s = new ServiceHuman();
 //        s.testTree();
 //        System.out.println(s.getHumanListInfo());
 //        s.sortByName();
@@ -25,7 +22,7 @@ public class Main {
 //        s.sortByAge();
 //        System.out.println(s.getHumanListInfo());
 
-        View v = new View(s);
+        ViewHuman v = new ViewHuman(s);
         v.run();
     }
 }

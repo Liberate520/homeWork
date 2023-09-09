@@ -1,6 +1,6 @@
-package fileOperations;
+package model.fileOperations;
 
-import familyTree.FamilyTree;
+import model.familyTree.FamilyTree;
 
 public interface FileOperation {
     void write(String fileName, FamilyTree tree);

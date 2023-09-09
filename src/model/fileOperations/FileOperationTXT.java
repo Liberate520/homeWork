@@ -1,7 +1,7 @@
-package fileOperations;
+package model.fileOperations;
 
-import familyTree.FamilyTree;
-import human.Human;
+import model.familyTree.FamilyTree;
+import model.human.Human;
 
 import java.io.FileReader;
 import java.io.FileWriter;
