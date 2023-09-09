@@ -86,6 +86,7 @@ public class Node<E>{
         this.person2 = p2;
     }
 
+
     @Override
     public String toString() {
         return String.format("<%s %s %s>", person1, rel, person2);

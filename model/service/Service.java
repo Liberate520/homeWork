@@ -4,7 +4,6 @@ import model.human.Gender;
 import model.human.Human;
 import model.tree.Compilation;
 import model.tree.GeoTree;
-import model.tree.Node;
 import model.tree.humanGroup.HumanGroupItem;
 import model.tree.humanGroup.ListAllHuman;
 import model.tree.relative.Relative;
@@ -12,15 +11,15 @@ import model.workingWithFile.FileData;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Service<E extends HumanGroupItem> {
     private ListAllHuman<E> listAllHuman;
-    private GeoTree treeNode;
+    private GeoTree<String> treeNode;
     private Compilation compilation;
     private FileData file;
     private Relative rel;
+
     public Service() {
 
         listAllHuman = new ListAllHuman<>();
@@ -62,17 +61,13 @@ public class Service<E extends HumanGroupItem> {
         return "Человек успешно добавлен в дерево";
     }
 
-    public String searchByName() {
-        System.out.println("Введите имя:");
-        Scanner scan = new Scanner(System.in);
-        String st = scan.nextLine();
+    public String searchByName(String name) {
         for (E lst : listAllHuman) {
-            if (lst.getFullName().equals(st)) {
-                return  lst.getInfo();
+            if (lst.getFullName().equals(name)) {
+                return name;
             }
         }
         return "Имя не найдено";
-
     }
 
     public ArrayList familyNode(String parent, String children) {
@@ -96,4 +91,6 @@ public class Service<E extends HumanGroupItem> {
         file.load(path);
         return file.toString();
     }
+
+
 }

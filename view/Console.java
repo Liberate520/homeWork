@@ -57,7 +57,10 @@ public class Console implements View {
     }
 
     public void SearchBuName() {
-        presenter.searchByName();
+        System.out.println("Введите имя:");
+        Scanner scan = new Scanner(System.in);
+        String st = scan.nextLine();
+        presenter.searchByName(st);
     }
 
 

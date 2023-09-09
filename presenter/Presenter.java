@@ -2,9 +2,10 @@ package presenter;
 
 import model.service.Service;
 
-import model.tree.Node;
-import model.tree.relative.Relative;
 import view.View;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Presenter {
 
@@ -44,14 +45,14 @@ public class Presenter {
         return answer;
     }
 
-    public String searchByName() {
-        String answer = service.searchByName();
+    public String searchByName(String name) {
+        String answer = service.searchByName(name);
         view.print(answer);
         return answer;
     }
 
     public void familyNode(String parent, String children) {
-        String answer = String.valueOf(service.familyNode(parent, children));
+        ArrayList answer = service.familyNode(parent, children);
         view.print(String.valueOf(answer));
 
 

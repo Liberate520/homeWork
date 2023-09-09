@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class GeoTree<E> implements Tree<E>{
     private ArrayList<Node<E>> tree = new ArrayList<>();
 
+
+
     @Override
     public String toString() {
         return "Записано в файл{" +
