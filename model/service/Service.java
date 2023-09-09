@@ -16,16 +16,15 @@ import java.util.ArrayList;
 public class Service<E extends HumanGroupItem> {
     private ListAllHuman<E> listAllHuman;
     private GeoTree<String> treeNode;
-    private Compilation compilation;
     private FileData file;
-    private Relative rel;
+
 
     public Service() {
 
         listAllHuman = new ListAllHuman<>();
         treeNode = new GeoTree();
         file = new FileData();
-        compilation = new Compilation(treeNode);
+
     }
 
 
@@ -43,9 +42,7 @@ public class Service<E extends HumanGroupItem> {
         return getHumanList();
     }
 
-    public ListAllHuman<E> getListAllHuman() {
-        return listAllHuman;
-    }
+
 
     public String sortByAge() {
         listAllHuman.sortByAge();
@@ -64,21 +61,20 @@ public class Service<E extends HumanGroupItem> {
     public String searchByName(String name) {
         for (E lst : listAllHuman) {
             if (lst.getFullName().equals(name)) {
-                return name;
+                return name.toString();
             }
         }
         return "Имя не найдено";
     }
 
     public ArrayList familyNode(String parent, String children) {
-        treeNode.append(parent,children);
+        treeNode.append(parent,
+                children);
         return treeNode.getTree();
     }
 
-    public String familyСollection(String person, String relative) {
-        Relative rel = Relative.valueOf(relative);
-        compilation.printSearch(person.toString(), rel);
-        return compilation.toString();
+    public String familyСollection() {
+        return String.valueOf(treeNode.getTree());
     }
 
     public String familyTreeEntry(String path) {

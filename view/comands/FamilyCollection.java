@@ -8,7 +8,7 @@ public class FamilyCollection extends Command {
     }
 
     public String getDescription() {
-        return "Посмотреть связи";
+        return "Посмотреть дерево";
     }
 
     public void execute() {

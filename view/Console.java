@@ -79,11 +79,7 @@ public class Console implements View {
     }
 
     public void FamilyCollection() {
-        System.out.println("Введите родителя");
-        String name = scanner.nextLine();
-        System.out.println("Введите  parent или children");
-        String relative = scanner.nextLine();
-        presenter.familyCollection(name, relative);
+        presenter.familyCollection();
     }
 
     public void FamilyTreeEntry() {

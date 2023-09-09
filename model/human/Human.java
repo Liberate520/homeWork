@@ -2,6 +2,7 @@ package model.human;
 import model.human.comparators.HumanComparatorAge;
 import model.human.comparators.HumanComparatorByName;
 import model.tree.humanGroup.HumanGroupItem;
+import model.tree.humanGroup.ListAllHuman;
 
 
 import java.time.LocalDate;
@@ -84,6 +85,19 @@ public class Human<E> implements Comparable<Human>, HumanGroupItem {
 
         return sb;
     }
+
+
+
+    @Override
+    public String searchByName() {
+        return fullName;
+    }
+
+    @Override
+    public ArrayList familyNode() {
+        return treeNode;
+    }
+
 
 
     public  void getSortByName() {

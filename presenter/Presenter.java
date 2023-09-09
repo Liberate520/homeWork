@@ -23,7 +23,7 @@ public class Presenter {
 
     public String addHumans(String fullName, String gender, String age) {
         service.addHumans(fullName, gender, age);
-        return service.getListAllHuman().toString();
+        return service.getHumanList().toString();
     }
 
     public String getHumanList() {
@@ -58,8 +58,8 @@ public class Presenter {
 
     }
 
-    public String familyCollection(String person, String rel) {
-        String answer = service.familyСollection(person.toString(), rel);
+    public String familyCollection() {
+        String answer = service.familyСollection();
         view.print(String.valueOf(answer));
         return answer;
 
