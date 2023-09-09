@@ -54,7 +54,7 @@ public class Presenter {
     }
 
     public void marriage(int innFPartner, int innSPartner) {
-        service.marriageForINN(innFPartner, innFPartner);
+        service.marriageForINN(innFPartner, innSPartner);
         getTree();
     }
 

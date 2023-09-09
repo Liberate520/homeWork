@@ -2,6 +2,7 @@ package family_tree.FamilyTree.Model.Tree;
 
 import family_tree.FamilyTree.Model.Person.Comparators.ComparatorByAge;
 import family_tree.FamilyTree.Model.Person.Comparators.ComparatorByName;
+import family_tree.FamilyTree.Model.Person.Person;
 import family_tree.FamilyTree.Model.Person.TreeModel;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,17 +13,18 @@ import java.util.function.Consumer;
 public class FamilyTree<T extends TreeModel<T>> implements Serializable, Iterable<T> {
 
     private final ArrayList<T> family;
-//    private int inn;
+    private int inn;
 
     public FamilyTree() {
         family = new ArrayList<>();
-//        this.inn = 0;
+        this.inn = 0;
     }
     public void addPerson(T person) {
-//        if (person.getInn() == 0) {
-//            this.inn++;
-//            person.setInn(this.inn);
-//        }
+        if (person.getInn() == 0) {
+            this.inn++;
+            person.setInn(this.inn);
+        }
+
         if (!this.family.contains(person)) {
             this.family.add(person);
         }
@@ -71,6 +73,16 @@ public class FamilyTree<T extends TreeModel<T>> implements Serializable, Iterabl
 
     public ArrayList<T> getTree() {
         return this.family;
+    }
+
+    public void checkINN(){
+        int index = 0;
+        for (T item : this.family){
+            if ( item.getInn() > index){
+                index = item.getInn();
+            }
+        }
+        this.inn = index;
     }
 
     @Override

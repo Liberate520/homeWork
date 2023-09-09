@@ -2,6 +2,8 @@ package family_tree.FamilyTree.View.Commands;
 
 import family_tree.FamilyTree.View.ConsoleUI;
 
+import java.io.IOException;
+
 public class Finish extends Commands {
     private String description;
     private ConsoleUI consoleUI;
@@ -11,7 +13,7 @@ public class Finish extends Commands {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IOException {
         super.getConsoleUI().finish();
     }
 }

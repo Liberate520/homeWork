@@ -11,7 +11,6 @@ import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Person> tree;
-    private int inn;
 
     public Service() {
         tree = new FamilyTree<>();
@@ -19,7 +18,6 @@ public class Service {
 
     public void addPerson(String fName, String lName, Gender gen, LocalDate dataB) {
         Person person = new Person(fName, lName, gen, dataB);
-        person.setInn(this.inn++);
         this.tree.addPerson(person);
     }
 
@@ -54,7 +52,7 @@ public class Service {
         Person fPartner = tree.getForInn(innFPartner);
         Person sPartner = tree.getForInn(innSPartner);
 
-        if (fPartner.getHusband() == sPartner.getHusband()) {
+        if ((fPartner.getHusband() == sPartner) && (sPartner.getHusband() == fPartner)){
             fPartner.deleteHusband();
             sPartner.deleteHusband();
             // пробуем удалить обоих партнеров (в функции удаления прописана проверка на оставшиеся связи)
@@ -83,12 +81,6 @@ public class Service {
     public void extractFromFile(String nameFile) throws IOException {
         FileManager arhive = new FileManager(nameFile);
         tree = arhive.read();
-        int index = 0;
-        for (Person item : tree) {
-            if (item.getInn() > index) {
-                index = item.getInn();
-            }
-        }
-        this.inn = index + 1;
+
     }
 }

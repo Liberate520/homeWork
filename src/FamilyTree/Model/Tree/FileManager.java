@@ -30,7 +30,7 @@ public class FileManager implements Serialise {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
+        tree.checkINN();
         return tree;
     }
 

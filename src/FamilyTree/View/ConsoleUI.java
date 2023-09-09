@@ -33,9 +33,11 @@ public class ConsoleUI implements View {
                 intChoice = Integer.parseInt(choice);
                 if ((intChoice <= menu.getSize()) && (intChoice > 0)) {
                     menu.execute(intChoice);
+                } else{
+                    System.out.println("Пункта меню с таким номером нет. Попробуйте еще раз");
                 }
             } else {
-                System.out.println("неправильно выбран пункт меню");
+                System.out.println("Необходимо ввести номер пункта меню. Попробуйте еще раз");
             }
         }
     }
@@ -88,12 +90,12 @@ public class ConsoleUI implements View {
     public void addParent() {
         int innChilgren = -1;
         int innParent = -1;
-        System.out.println("введите ИНН ребенка:\n");
+        System.out.println("введите ИНН ребенка:");
         String temp = scanner.nextLine();
         if (temp.matches("[0-9]+")) {
             innChilgren = Integer.parseInt(temp);
         }
-        System.out.println("введите ИНН родителя:\n");
+        System.out.println("введите ИНН родителя:");
         temp = scanner.nextLine();
         if (temp.matches("[0-9]+")) {
             innParent = Integer.parseInt(temp);
@@ -106,12 +108,12 @@ public class ConsoleUI implements View {
     public void marriage() {
         int innFPartner = -1;
         int innSPartner = -1;
-        System.out.println("введите ИНН первого партнера:\n");
+        System.out.println("введите ИНН первого партнера:");
         String temp = scanner.nextLine();
         if (temp.matches("[0-9]+")) {
             innFPartner = Integer.parseInt(temp);
         }
-        System.out.println("введите ИНН второго партнера:\n");
+        System.out.println("введите ИНН второго партнера:");
         temp = scanner.nextLine();
         if (temp.matches("[0-9]+")) {
             innSPartner = Integer.parseInt(temp);
@@ -157,7 +159,21 @@ public class ConsoleUI implements View {
         presenter.exportFromFile(namefile);
     }
 
-    public void finish() {
+    public void finish() throws IOException {
+        System.out.println("Хотите сохранить дерево в файл? (y/n)?");
+        boolean flag = true;
+        while (flag){
+            String choice = scanner.nextLine();
+            if (choice.matches("[y|n|Y|N]")){
+                if ((choice.equals("y")) || (choice.equals("Y"))) {
+                    exportFromFile();
+                    System.out.println("дерево сохранено");
+                } else {
+                    System.out.println("данные дерева не сохранены");
+                }
+                flag = false;
+            }
+        }
         System.out.println("Работа закончена. До свидание");
         work = false;
     }

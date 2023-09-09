@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu {
+
     private List<Commands> mainMenu;
 
     public MainMenu(ConsoleUI consoleUI) {
