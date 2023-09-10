@@ -17,28 +17,22 @@ public class FamilyTree<T extends FamilyMember> implements FamilyTreeInterface<T
     public FamilyTree(List<T> members) {
         this.members = members;
     }
-
     @Override
     public void addPerson(T familyMember) {
         members.add(familyMember);
     }
-
     @Override
     public List<T> getAllPeople() {
         return members;
     }
-
     @Override
     public void addRelationship(T familyMember1, T familyMember2, RelationshipType type) {
         familyMember1.addRelationship(type, familyMember2);
     }
-
-
     @Override
     public List<Relationship> getRelationships(T familyMember) {
         return familyMember.getRelationships();
     }
-
     @Override
     public List<Relationship> getAllRelationships() {
         List<Relationship> relationships = new ArrayList<>();
@@ -46,15 +40,12 @@ public class FamilyTree<T extends FamilyMember> implements FamilyTreeInterface<T
         for (FamilyMember<T> member : members) {
             relationships.addAll(member.getRelationships());
         }
-
         return relationships;
     }
-
     @Override
     public int size() {
         return members.size();
     }
-
     @Override
     public T get(int index) {
         if (index < 0 || index >= size()) {
@@ -62,29 +53,23 @@ public class FamilyTree<T extends FamilyMember> implements FamilyTreeInterface<T
         }
         return members.get(index);
     }
-
-
     @Override
     public void sortByName() {
         members.sort(Comparator.comparing(FamilyMember::getFullName));
     }
-
     @Override
     public void sortByBirthDate() {
         members.sort(Comparator.comparing(FamilyMember::getBirthDate));
     }
-
     @Override
     public void sortByAge() {
         members.sort(Comparator.comparingInt(FamilyMember::getAge));
     }
-
     @Override
     public void sortByDeathDate() {
         members.sort((m1, m2) -> {
             LocalDate deathDate1 = m1.getDeathDate();
             LocalDate deathDate2 = m2.getDeathDate();
-
             if (deathDate1 == null && deathDate2 == null) {
                 return 0; // Если оба null, то считаем их равными
             } else if (deathDate1 == null) {
@@ -92,23 +77,17 @@ public class FamilyTree<T extends FamilyMember> implements FamilyTreeInterface<T
             } else if (deathDate2 == null) {
                 return -1; // Если только deathDate2 null, то считаем m2 больше
             }
-
             return deathDate1.compareTo(deathDate2);
         });
     }
-
-
-
     @Override
     public void sortByGender() {
         members.sort(Comparator.comparing(FamilyMember::getGender));
     }
-
     @Override
     public void sortByRelationshipsCount() {
         members.sort(Comparator.comparingInt(person -> person.getRelationships().size()));
     }
-
     @Override
     public Iterator<T> iterator() {
         return members.iterator();

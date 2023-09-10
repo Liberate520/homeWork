@@ -1,5 +1,4 @@
 package App;
-
 import Model.*;
 import Model.Tree.*;
 import java.io.BufferedReader;
@@ -8,12 +7,11 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
 public class ConsoleUI {
-    private GenealogyPresenter presenter;
-    private BufferedReader reader;
+    private final GenealogyPresenterInterface presenter;
+    private final BufferedReader reader;
 
-    public ConsoleUI(GenealogyPresenter presenter) {
+    public ConsoleUI(GenealogyPresenterInterface presenter) {
         this.presenter = presenter;
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -39,30 +37,21 @@ public class ConsoleUI {
                 int choice = Integer.parseInt(reader.readLine());
 
                 switch (choice) {
-                    case 1:
-                        addFamilyMember();
-                        break;
-                    case 2:
-                        displayFamilyTree();
-                        break;
-                    case 3:
-                        displayAllRelationships();
-                        break;
-                    case 4:
-                        displaySortedFamilyTree();
-                        break;
-                    case 5:
+                    case 1 -> addFamilyMember();
+                    case 2 -> displayFamilyTree();
+                    case 3 -> displayAllRelationships();
+                    case 4 -> displaySortedFamilyTree();
+                    case 5 -> {
                         saveAndExit();
                         return;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
+                    }
+                    default -> System.out.println("Invalid choice. Please try again.");
                 }
             } catch (NumberFormatException | IOException e) {
                 System.out.println("Invalid input. Please try again.");
             }
         }
     }
-
     private void addFamilyMember() throws IOException {
         System.out.println("Enter Family Member Details:");
         System.out.print("First Name: ");
@@ -78,7 +67,6 @@ public class ConsoleUI {
         System.out.print("Death Date (yyyy-MM-dd, or 'N/A' for alive): ");
         String deathDateStr = reader.readLine();
         LocalDate deathDate = null;
-
         if (!deathDateStr.equalsIgnoreCase("N/A")) {
             try {
                 deathDate = LocalDate.parse(deathDateStr);
@@ -87,7 +75,6 @@ public class ConsoleUI {
                 return;
             }
         }
-
         FamilyMember newMember = presenter.saveFamilyMember(firstName, lastName, gender, birthDate, deathDate);
         presenter.addFamilyMember(newMember);
 
@@ -98,8 +85,6 @@ public class ConsoleUI {
 
         presenter.saveFamilyTree();
     }
-
-
     private void addRelationships(FamilyMember newMember) throws IOException {
         boolean addMoreRelationships = true;
         while (addMoreRelationships) {
@@ -113,7 +98,6 @@ public class ConsoleUI {
             }
         }
     }
-
     private void addRelationship(FamilyMember newMember) throws IOException {
         System.out.println("Select Relationship Type:");
         RelationshipType relationshipType = selectRelationshipType();
@@ -139,24 +123,28 @@ public class ConsoleUI {
             int choice = Integer.parseInt(reader.readLine());
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     return RelationshipType.SPOUSE;
-                case 2:
+                }
+                case 2 -> {
                     return RelationshipType.FATHER;
-                case 3:
+                }
+                case 3 -> {
                     return RelationshipType.MOTHER;
-                case 4:
+                }
+                case 4 -> {
                     return RelationshipType.CHILD;
-                case 5:
+                }
+                case 5 -> {
                     return RelationshipType.ANCESTOR;
-                case 6:
+                }
+                case 6 -> {
                     return RelationshipType.SIBLING;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
-
     private FamilyMember selectExistingFamilyMember() throws IOException {
         FamilyTree<FamilyMember> familyTree = presenter.getFamilyTree();
         System.out.println("Select a Family Member:");
@@ -180,11 +168,9 @@ public class ConsoleUI {
                 System.out.println("Invalid input. Please enter a number.");
             }
         }
-
         // Индексация начинается с 0, поэтому вычитаем 1
         return familyTree.get(choice - 1);
     }
-
     private void displayFamilyTree() {
         FamilyTree<FamilyMember> familyTree = presenter.getFamilyTree();
 
@@ -193,7 +179,6 @@ public class ConsoleUI {
             System.out.println(formatFamilyMember(familyMember));
         }
     }
-
     private void displayAllRelationships() {
         FamilyTree<FamilyMember> familyTree = presenter.getFamilyTree();
         List<Relationship> allRelationships = familyTree.getAllRelationships();
@@ -203,7 +188,6 @@ public class ConsoleUI {
             System.out.println(formatRelationship(relationship));
         }
     }
-
     private void displaySortedFamilyTree() {
         System.out.println("Sort Family Tree by:");
         System.out.println("1. Name");
@@ -218,25 +202,15 @@ public class ConsoleUI {
             int choice = Integer.parseInt(reader.readLine());
 
             switch (choice) {
-                case 1:
-                    presenter.sortFamilyTreeByName();
-                    break;
-                case 2:
-                    presenter.sortFamilyTreeByBirthDate();
-                    break;
-                case 3:
-                    presenter.sortFamilyTreeByAge();
-                    break;
-                case 4:
-                    presenter.sortFamilyTreeByGender();
-                    break;
-                case 5:
-                    presenter.sortFamilyTreeByRelationshipsCount();
-                    break;
-                case 6:
+                case 1 -> presenter.sortFamilyTreeByName();
+                case 2 -> presenter.sortFamilyTreeByBirthDate();
+                case 3 -> presenter.sortFamilyTreeByAge();
+                case 4 -> presenter.sortFamilyTreeByGender();
+                case 5 -> presenter.sortFamilyTreeByRelationshipsCount();
+                case 6 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
 
             displayFamilyTree();
@@ -244,14 +218,12 @@ public class ConsoleUI {
             System.out.println("Invalid input. Please try again.");
         }
     }
-
     private String formatRelationship(Relationship relationship) {
         return String.format("%s - %s - %s",
                 relationship.getPerson1().getFullName(),
                 relationship.getType(),
                 relationship.getPerson2().getFullName());
     }
-
     private String formatFamilyMember(FamilyMember familyMember) {
         String deathInfo = familyMember.isAlive() ?
                 familyMember.getAge() + " years (Alive)" :
@@ -265,7 +237,6 @@ public class ConsoleUI {
                 deathInfo,
                 formatRelationships(familyMember));
     }
-
     private String formatRelationships(FamilyMember familyMember) {
         StringBuilder relationships = new StringBuilder();
         for (Relationship relationship : presenter.getFamilyTree().getRelationships(familyMember)) {

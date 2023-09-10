@@ -1,10 +1,8 @@
 package Model;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 public class FamilyMember<T> implements Serializable {
     private int id;
     private String firstName;
@@ -13,10 +11,7 @@ public class FamilyMember<T> implements Serializable {
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Relationship> relationships;
-
     private T specificData;  // Добавляем специфичные данные
-
-
     public FamilyMember(int id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, T specificData) {
         this.id = id;
         this.firstName = firstName;
@@ -27,9 +22,6 @@ public class FamilyMember<T> implements Serializable {
         this.specificData = specificData;
         this.relationships = new ArrayList<>();
     }
-
-
-
     public String getFullName() {
         return firstName + " " + lastName;
     }
@@ -50,11 +42,9 @@ public class FamilyMember<T> implements Serializable {
         LocalDate currentDate = LocalDate.now();
         return deathDate != null ? deathDate.getYear() - birthDate.getYear() : currentDate.getYear() - birthDate.getYear();
     }
-
     public int getId() {
         return id;
     }
-
     public int getYearsSinceDeath() {
         if (deathDate != null) {
             LocalDate currentDate = LocalDate.now();
@@ -62,11 +52,9 @@ public class FamilyMember<T> implements Serializable {
         }
         return 0;
     }
-
     public boolean isAlive() {
         return deathDate == null;
     }
-
     public void addRelationship(RelationshipType type, FamilyMember relatedMember) {
         Relationship relationship = new Relationship(this, relatedMember, type);
         relatedMember.relationships.add(relationship);
@@ -101,15 +89,9 @@ public class FamilyMember<T> implements Serializable {
             }
         }
     }
-
-
-
-
-    public List<Relationship> getRelationships() {
+  public List<Relationship> getRelationships() {
         return relationships;
     }
-
-
     public String getDeathYear() {
         if (deathDate != null) {
             return String.valueOf(deathDate.getYear());
@@ -117,7 +99,6 @@ public class FamilyMember<T> implements Serializable {
             return "N/A"; // Или любое другое значение, указывающее на отсутствие данных о смерти
         }
     }
-
     @Override
     public String toString() {
         return "Model.FamilyMember{" +
@@ -128,7 +109,6 @@ public class FamilyMember<T> implements Serializable {
                 ", deathDate=" + getDeathYear() +
                 '}';
     }
-
     public String getAllInfo() {
         StringBuilder info = new StringBuilder();
 
@@ -143,7 +123,6 @@ public class FamilyMember<T> implements Serializable {
         } else {
             info.append("Age: ").append(getAge()).append(" years (died ").append(getYearsSinceDeath()).append(" years ago)\n");
         }
-
         List<Relationship> relationships = getRelationships();
         if (!relationships.isEmpty()) {
             info.append("Relationships:\n");
@@ -158,13 +137,11 @@ public class FamilyMember<T> implements Serializable {
                         familyMember2.getFullName(), familyMember2.getGender(),
                         type
                 );
-
                 info.append(relationshipInfo).append("\n");
             }
         } else {
             info.append("No Relationships\n");
         }
-
         return info.toString();
     }
 }
