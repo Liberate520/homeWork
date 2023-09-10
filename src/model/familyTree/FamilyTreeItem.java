@@ -1,10 +1,12 @@
 package model.familyTree;
 
 import model.human.Gender;
+import model.service.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface FamilyTreeItem<T> {
+public interface FamilyTreeItem<T> extends Serializable {
     int getAge();
     void setId(long Id);
     Gender getGender();

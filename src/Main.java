@@ -1,28 +1,27 @@
-import model.service.ServiceHuman;
-import view.ViewHuman;
+import presenter.Presenter;
+import view.ConsoleUI;
 
 public class Main {
     public static void main(String[] args) {
 
-
-//        String filePath = "testSaveObj.txt";
-//        model.fileOperations.FileHandler fileHandler = new model.fileOperations.FileHandler(filePath);
-//
-////        fileHandler.save(tree);
-//
-//        model.familyTree.FamilyTree treeRead = (model.familyTree.FamilyTree) fileHandler.read();
-//        System.out.println(tree.getHumanList());
-        ServiceHuman s = new ServiceHuman();
-//        s.testTree();
-//        System.out.println(s.getHumanListInfo());
-//        s.sortByName();
-//        System.out.println(s.getHumanListInfo());
-//        s.sortByGender();
-//        System.out.println(s.getHumanListInfo());
-//        s.sortByAge();
-//        System.out.println(s.getHumanListInfo());
-
-        ViewHuman v = new ViewHuman(s);
+        ConsoleUI v = new ConsoleUI();
+        Presenter p = new Presenter(v);
         v.run();
     }
+
+    /**
+     * TODO
+     * валидация имени объекта
+     *      мы должны иметь возможность вводить только символы
+     * валидация ConsoleUI.getGender
+     *      1.при не правильном выборе пропускается шаг, значение - null
+     * валидация даты
+     *          пропускает шаг, при попытке вывода объекта в консоль,
+     *          выдает DateTimeFormatter так как не может спарсить дату
+     * валидация ConsoleUI.getParents
+     *          пропускает шаг, в консоле выводится мое сообщение об ошибке
+     *          объект не создается
+     *
+     * РАЗОБРАТСЯ В РЕГУЛЯРНЫХ ВЫРАЖЕНИЯХ
+     */
 }

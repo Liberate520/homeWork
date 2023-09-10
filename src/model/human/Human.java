@@ -45,8 +45,6 @@ public  class Human implements Serializable, Comparable<Human>, FamilyTreeItem<H
      * Метод добавляющий родителю ссылку на ребенка
      *
      * @param child - ссылка на ребенка
-     *                           TODO
-     *                           пока не понимаю для чего нужен return
      * @return
      */
     public boolean addChild(Human child) {

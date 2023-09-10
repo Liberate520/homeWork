@@ -1,6 +1,6 @@
 package view;
 
-public enum Commands {
+public enum CommandsEnum {
     NONE,
     ADD,
     SEARCH,
