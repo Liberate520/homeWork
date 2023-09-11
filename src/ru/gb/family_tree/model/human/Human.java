@@ -8,19 +8,19 @@ import java.time.Period;
 import java.util.List;
 
 public class Human implements Serializable, TreeItem<Human> {
-    private int id;
+    private long id;
     private String name;
     private Gender gender;
     private LocalDate deathDate;
     private List<Human> parents;
-    private String mother;
-    private String father;
+    private Human mother;
+    private Human father;
     private String birthDate;
     private List<Human> children;
     private Human spouse;
 
-    public Human(int id, String name, String birthDate, Gender gender, String father, String mother,
-                List<Human> children) {
+    public Human(long id, String name, String birthDate, Gender gender, Human father, Human mother,
+                 List<Human> children) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -29,7 +29,7 @@ public class Human implements Serializable, TreeItem<Human> {
         this.father = father;
         this.children = children;
     }
-    public Human(int id, String name, String birthDate, Gender gender, String father, String mother) {
+    public Human(int id, String name, String birthDate, Gender gender, Human father, Human mother) {
         this(id, name, birthDate, gender, father, mother, null);
     }
 
@@ -66,11 +66,11 @@ public class Human implements Serializable, TreeItem<Human> {
     return birthDate;
     }
 
-    public String getFather() {
+    public Human getFather() {
         return father;
     }
 
-    public String getMother() {
+    public Human getMother() {
         return mother;
     }
 
@@ -90,12 +90,7 @@ public class Human implements Serializable, TreeItem<Human> {
         return id;
     }
 
-//    @Override
-//    public void setId(long id) {
-//
-//    }
-
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -146,22 +141,22 @@ public class Human implements Serializable, TreeItem<Human> {
 
     public String getFatherInfo(){
         String res = "отец: ";
-        String father = getFather();
-        if (father != ""){
-            res += getFather();
-        } else {
+        Human father = getFather();
+        if (father == null){
             res += "неизвестен";
+        } else {
+            res += father.getFather();
         }
         return res;
     }
 
     public String getMotherInfo(){
         String res = "мать: ";
-        String mother = getMother();
-        if (mother != ""){
-            res += getMother();
-        } else {
+        Human mother = getMother();
+        if (mother == null){
             res += "неизвестна";
+        } else {
+            res += mother.getMother();
         }
         return res;
     }

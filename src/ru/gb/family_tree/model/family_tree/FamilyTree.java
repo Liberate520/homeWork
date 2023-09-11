@@ -3,8 +3,6 @@ package ru.gb.family_tree.model.family_tree;
 import ru.gb.family_tree.model.family_tree.comparator.FamilyTreeComparatorByAge;
 import ru.gb.family_tree.model.family_tree.comparator.FamilyTreeComparatorByName;
 
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,11 +20,18 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         this(new ArrayList<>());
     }
 
-    public void add(E human){
-        humanlist.add(human);
+    public boolean add(E human){
+        if (human == null) {
+            return false;
+        }
+        if (!humanlist.contains(human)){
+            humanlist.add(human);
+            human.setId(humansId++);
+            return true;
+        }
+        return false;
     }
 
-//
     public List<E> getSiblings(int id){
         E human = getById(id);
         if (human == null){
