@@ -1,8 +1,8 @@
-package FamilyTree;
+package model.FamilyTree;
 
-import Human.GroupItem;
-import Human.PersonComporatorByBirthDate;
-import Human.PersonComporatorByName;
+import model.Human.GroupItem;
+import model.Human.PersonComporatorByBirthDate;
+import model.Human.PersonComporatorByName;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +25,7 @@ public class Tree<E extends GroupItem<E>> implements Serializable, Iterable<E> {
         }
         if (!personList.contains(person)){
             personList.add(person);
-            person.setId(personID++);
+            person.setId(++personID);
 
             addToParent(person);
             addToChildren(person);

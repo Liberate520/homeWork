@@ -1,6 +1,6 @@
-package fileWriter;
+package model.fileWriter;
 
-import FamilyTree.Tree;
+import model.FamilyTree.Tree;
 import java.io.IOException;
 
 public interface Writable {

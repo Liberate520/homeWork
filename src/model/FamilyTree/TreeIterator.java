@@ -1,6 +1,6 @@
-package FamilyTree;
+package model.FamilyTree;
 
-import Human.GroupItem;
+import model.Human.GroupItem;
 
 import java.util.Iterator;
 import java.util.List;
