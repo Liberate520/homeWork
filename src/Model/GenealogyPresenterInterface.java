@@ -1,5 +1,8 @@
 package Model;
 
+import Model.FamilyMember;
+import Model.Gender;
+import Model.RelationshipType;
 import Model.Tree.FamilyTree;
 
 import java.io.IOException;

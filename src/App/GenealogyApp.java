@@ -1,7 +1,10 @@
 package App;
-import Fileworks.FamilyTreeFileManager;
+import Model.Fileworks.FamilyTreeFileHandler;
+import Model.Fileworks.FamilyTreeFileManager;
 import Model.*;
 import Model.Tree.FamilyTree;
+import Presenter.GenealogyPresenter;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,31 +14,32 @@ public class GenealogyApp {
         GenealogyApp app = new GenealogyApp();
         app.run();
     }
+
     private void run() {
-        FamilyTree<FamilyMember> familyTree = loadFamilyTreeFromFile(); // Попытка загрузки семейного дерева из файла
+        FamilyTreeFileManager fileManager = new FamilyTreeFileManager(); // Создаем экземпляр FamilyTreeFileManager
+        FamilyTree<FamilyMember> familyTree = loadFamilyTreeFromFile(fileManager); // Передаем его в метод загрузки
 
         if (familyTree == null) {
-            // Если загрузка не удалась, создаем новое семейное дерево и членов семьи
             List<FamilyMember> familyMembers = createFamilyMembers();
             familyTree = new FamilyTree<>(familyMembers);
         }
 
-        GenealogyPresenter presenter = new GenealogyPresenter(familyTree);
+        GenealogyPresenter presenter = new GenealogyPresenter(familyTree, fileManager);
 
         ConsoleUI consoleUI = new ConsoleUI(presenter);
         consoleUI.start();
     }
-    private FamilyTree<FamilyMember> loadFamilyTreeFromFile() {
+
+    private FamilyTree<FamilyMember> loadFamilyTreeFromFile(FamilyTreeFileHandler fileHandler) {
         FamilyTree<FamilyMember> familyTree = null;
-        FamilyTreeFileManager fileManager = new FamilyTreeFileManager();
 
         try {
-            familyTree = fileManager.loadFamilyTree("family_bush.dat");
+            familyTree = fileHandler.loadFamilyTree("family_bush.dat"); // Используем переданный FileHandler
             System.out.println("Family Tree loaded successfully from file.");
         } catch (IOException | ClassNotFoundException e) {
-            // Обработка ошибки загрузки из файла
             System.out.println("Error loading Family Tree from file: " + e.getMessage());
         }
+
         return familyTree;
     }
     private List<FamilyMember> createFamilyMembers() {

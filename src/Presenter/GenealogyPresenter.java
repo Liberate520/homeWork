@@ -1,20 +1,21 @@
-package Model;
+package Presenter;
 
+import Model.*;
 import Model.Tree.*;
-import Fileworks.*;
+import Model.Fileworks.*;
 
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class GenealogyPresenter implements GenealogyPresenterInterface{
+public class GenealogyPresenter implements GenealogyPresenterInterface, GenealogyService {
     private final FamilyTree<FamilyMember> model;
-    private FamilyTreeFileManager fileManager;
+    private final FamilyTreeFileManager fileManager;
 
-    public GenealogyPresenter(FamilyTree<FamilyMember> model) {
+    public GenealogyPresenter(FamilyTree<FamilyMember> model, FamilyTreeFileManager fileManager) {
         this.model = model;
-        this.fileManager = new FamilyTreeFileManager();
+        this.fileManager = fileManager;
     }
 
     public void addFamilyMember(FamilyMember familyMember) {

@@ -1,9 +1,11 @@
 package Model;
 
 import Model.Tree.FamilyTree;
-public class GenealogyService {
-    private final FamilyTree<FamilyMember> model;
-    public GenealogyService(FamilyTree<FamilyMember> model) {
-        this.model = model;
-    }
+
+import java.io.IOException;
+
+public interface GenealogyService {
+    void loadFamilyTree() throws IOException, ClassNotFoundException;
+    void saveFamilyTree() throws IOException;
+    // Другие методы, связанные с работой с генеалогическим деревом
 }

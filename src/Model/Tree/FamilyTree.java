@@ -28,7 +28,29 @@ public class FamilyTree<T extends FamilyMember> implements FamilyTreeInterface<T
     @Override
     public void addRelationship(T familyMember1, T familyMember2, RelationshipType type) {
         familyMember1.addRelationship(type, familyMember2);
+        // Теперь создаем обратную связь
+        RelationshipType oppositeType = getOppositeRelationship(type);
+        familyMember2.addRelationship(oppositeType, familyMember1);
     }
+
+    // Метод для получения обратной связи
+    private RelationshipType getOppositeRelationship(RelationshipType type) {
+        switch (type) {
+            case SPOUSE:
+                return RelationshipType.SPOUSE;
+            case FATHER, MOTHER:
+                return RelationshipType.CHILD;
+            case CHILD:
+                return RelationshipType.FATHER; // В зависимости от вашей логики может быть и MOTHER
+            case ANCESTOR:
+                return RelationshipType.ANCESTOR;
+            case SIBLING:
+                return RelationshipType.SIBLING;
+            default:
+                throw new IllegalArgumentException("Unknown relationship type: " + type);
+        }
+    }
+
     @Override
     public List<Relationship> getRelationships(T familyMember) {
         return familyMember.getRelationships();
