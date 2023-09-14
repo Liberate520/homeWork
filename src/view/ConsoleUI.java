@@ -14,7 +14,7 @@ public class ConsoleUI implements View {
 
 
     public ConsoleUI() {
-        this.presenter = new Presenter(this);
+        this.presenter = new Presenter();
         this.work = true;
         this.menu = new Menu(this);
     }
@@ -48,9 +48,9 @@ public class ConsoleUI implements View {
             long motherId = Long.parseLong(prompt("Enter mother ID: \n"));
             Human father = presenter.getById(fatherId);
             Human mother = presenter.getById(motherId);
-            presenter.addTreeItem(new Human(name, gender, birthDate, father, mother));
+            presenter.addTreeItem(name, gender, birthDate, father, mother);
         }
-        if (parentsKnown == 2) presenter.addTreeItem(new Human(name, gender, birthDate));
+        if (parentsKnown == 2) presenter.addTreeItem(name, gender, birthDate);
         else print("Error switch between 1 or 2");
     }
 
@@ -91,13 +91,32 @@ public class ConsoleUI implements View {
     public void getHumanListInfo() {
         print(presenter.getHumanListInfo());
     }
+    public void saveAsFile() {
+        presenter.saveAsFile(getPath());
+    }
 
-    public void finish(){
+
+    public void readFromFile() {
+        presenter.readFromFile(getPath());
+    }
+    public String getPath(){
+        return prompt("Enter file name: ");
+    }
+    public void sortByName() {
+        presenter.sortByName();
+    }
+    public void sortByAge() {
+        presenter.sortByAge();
+    }
+    public void sortByGender() {
+        presenter.sortByGender();
+    }
+    public void finish() {
         print("Good bye!");
         work = false;
     }
 
-    private boolean validationNumbers(int number, int maxValue){
+    private boolean validationNumbers(int number, int maxValue) {
         return number <= maxValue && number > 0;
     }
 
@@ -111,7 +130,6 @@ public class ConsoleUI implements View {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
-
 
 
 }

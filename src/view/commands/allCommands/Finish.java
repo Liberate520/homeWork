@@ -1,4 +1,4 @@
-package view.commands;
+package view.commands.allCommands;
 
 import view.ConsoleUI;
 

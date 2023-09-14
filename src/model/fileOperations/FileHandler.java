@@ -16,6 +16,7 @@ public class FileHandler implements Writable{
             objectOutputStream.writeObject(serializable);
             return true;
         }catch (Exception e){
+            System.out.println(filePath);
             e.printStackTrace();
             return false;
         }
@@ -27,6 +28,7 @@ public class FileHandler implements Writable{
                 new FileInputStream(filePath))){
             return objectInputStream.readObject();
         }catch (Exception e){
+            System.out.println("File not found");
             e.printStackTrace();
             return null;
         }

@@ -1,20 +1,24 @@
 package presenter;
 
+import model.human.Gender;
 import model.human.Human;
 import model.service.ServiceHuman;
 import view.ConsoleUI;
 
 public class Presenter {
-    private ConsoleUI view;
     private ServiceHuman service;
 
-    public Presenter(ConsoleUI view) {
-        this.view = view;
+    public Presenter() {
         this.service = new ServiceHuman();
     }
 
-    public void addTreeItem(Human item){
-        service.addTreeItem(item);
+    public void addTreeItem(String name, Gender gender, String birthDate,
+                            Human father, Human mother){
+        service.addTreeItem(name, gender,birthDate,father,mother);
+    }
+
+    public void addTreeItem(String name, Gender gender, String birthDate){
+        service.addTreeItem(name, gender,birthDate);
     }
     public Human getById(long id){
         return service.getById(id);
@@ -25,5 +29,25 @@ public class Presenter {
 
     public String getHumanListInfo(){
         return service.getHumanListInfo();
+    }
+
+    public void saveAsFile(String path) {
+        service.saveAsFile(path);
+    }
+
+    public void readFromFile(String path) {
+        service.readFromFile(path);
+    }
+
+    public void sortByName() {
+        service.sortByName();
+    }
+
+    public void sortByAge() {
+        service.sortByAge();
+    }
+
+    public void sortByGender() {
+        service.sortByGender();
     }
 }

@@ -1,11 +1,12 @@
 import presenter.Presenter;
 import view.ConsoleUI;
+import view.commands.Commander;
+import view.commands.CommandsList;
 
 public class Main {
     public static void main(String[] args) {
 
         ConsoleUI v = new ConsoleUI();
-        Presenter p = new Presenter(v);
         v.run();
     }
 
@@ -23,5 +24,6 @@ public class Main {
      *          объект не создается
      *
      * РАЗОБРАТСЯ В РЕГУЛЯРНЫХ ВЫРАЖЕНИЯХ
+     * МЕТОДЫ СОХРАНЕНИЯ ЗАГРУЗКИ И СОРТИРОВОК
      */
 }
