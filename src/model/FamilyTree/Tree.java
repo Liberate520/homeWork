@@ -15,9 +15,6 @@ public class Tree<E extends GroupItem<E>> implements Serializable, Iterable<E> {
     public Tree(List<E> personList) {this.personList = personList;}
     public Tree(){this(new ArrayList<>());}
 
-    public List<E> getPersonList() {
-        return personList;
-    }
 
     public boolean add(E person){
         if (person == null){
@@ -41,9 +38,19 @@ public class Tree<E extends GroupItem<E>> implements Serializable, Iterable<E> {
         }
     }
 
+    private void removeFromParent(E person) {
+        for (E parent: person.getParents()){
+            parent.removeChild(person);
+        }
+    }
     private void addToChildren(E person){
         for(E child: person.getChildren()){
             child.addParent(person);
+        }
+    }
+    private void removeFromChildren(E person){
+        for(E child: person.getChildren()){
+            child.removeParent(person);
         }
     }
 
@@ -109,6 +116,10 @@ public class Tree<E extends GroupItem<E>> implements Serializable, Iterable<E> {
     public boolean remove(long personID){
         if(checkId(personID)){
             E human = getById(personID);
+            removeFromParent(human);
+            removeFromChildren(human);
+            E spouse = human.getSpouse();
+            setDivorce(human.getId(),spouse.getId());
             return personList.remove(human);
         }
         return false;

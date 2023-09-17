@@ -7,10 +7,14 @@ public interface GroupItem<P> {
 
     boolean addChild(P child);
 
+    boolean removeChild(P person);
     boolean addParent(P parent);
+
+    boolean removeParent(P person);
     void setSpouse(P spouse);
 
     P getFather();
+
     P getMother();
 
     int getAge();
@@ -46,7 +50,4 @@ public interface GroupItem<P> {
     String getFatherInfo();
 
     String getChildrenInfo();
-
-
-
 }

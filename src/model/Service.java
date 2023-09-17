@@ -8,18 +8,22 @@ import model.fileWriter.Writable;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Service {
     private Writable writable;
     private Tree<Person> activeTree;
-    private FileHandler fh;
-    private String fileName;
+
 
     public Service(Tree<Person> tree){
         this.activeTree = tree;
     }
     public Service(){
         activeTree = new Tree<>();
+    }
+
+    public Tree<Person> getActiveTree() {
+        return activeTree;
     }
 
     public String addPerson(String name, String genderString, String birthYear, String birthMonth, String birthDate, long idFather, long idMother) {
@@ -41,35 +45,44 @@ public class Service {
         Person parent = activeTree.getById(idParent);
         Person child = activeTree.getById(idChild);
         parent.addChild(child);
-        activeTree.add(parent);
+        child.addParent(parent);
+    }
+
+    public void addParent(long idParent, long idChild) {
+        Person parent = activeTree.getById(idParent);
+        Person child = activeTree.getById(idChild);
+        parent.addChild(child);
+        child.addParent(parent);
     }
 
     public void setWedding(long idFirstSpouse, long idSecondSpouse) {
         activeTree.setWedding(idFirstSpouse, idSecondSpouse);
     }
 
-    public void getInfo() {
-        System.out.println(activeTree);
+    public void setDevorce(long idFirstSpouse, long idSecondSpouse) {
+        activeTree.setDivorce(idFirstSpouse, idSecondSpouse);
     }
 
     public void save(String filename) throws IOException {
-        this.fileName = filename;
-        fh = new FileHandler(fileName);
-        fh.saveFile(activeTree);
+        writable = new FileHandler(filename);
+        writable.saveFile(activeTree);
     }
 
     public Tree load(String filename) throws IOException, ClassNotFoundException {
-        this.fileName = filename;
-        fh = new FileHandler(fileName);
-        activeTree = fh.loadFile();
+        writable = new FileHandler(filename);
+        activeTree = writable.loadFile();
         return activeTree;
     }
 
-    public void getSiblings(String sibID) {
-        System.out.println(activeTree.getSiblings(Integer.valueOf(sibID)));
+    public List<Person> getSiblings(String sibID) {
+        return activeTree.getSiblings(Integer.valueOf(sibID));
     }
 
     public void sortByBirthDate() {
         activeTree.sortByBirthDate();
+    }
+
+    public void removePerson(long idPerson) {
+        activeTree.remove(idPerson);
     }
 }

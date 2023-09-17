@@ -1,9 +1,12 @@
 package presenter;
 
+import model.FamilyTree.Tree;
+import model.Human.Person;
 import model.Service;
 import view.View;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Presenter {
     private View view;
@@ -26,12 +29,20 @@ public class Presenter {
         service.addChild(idParent, idChild);
     }
 
+    public void addParent(long idParent, long idChild) {
+        service.addParent(idParent, idChild);
+    }
+
     public void setWedding(long idFirstSpouse, long idSecondSpouse) {
         service.setWedding(idFirstSpouse, idSecondSpouse);
     }
 
-    public void getInfo() {
-        service.getInfo();
+    public void setDevorce(long idFirstSpouse, long idSecondSpouse) {
+        service.setDevorce(idFirstSpouse, idSecondSpouse);
+    }
+
+    public Tree<Person> getInfo() {
+       return service.getActiveTree();
     }
 
     public void save(String filename) throws IOException {
@@ -42,11 +53,15 @@ public class Presenter {
         service.load(filename);
     }
 
-    public void getSiblings(String sibID) {
-        service.getSiblings(sibID);
+    public List<Person> getSiblings(String sibID) {
+        return service.getSiblings(sibID);
     }
 
     public void sortByBirthDate() {
         service.sortByBirthDate();
+    }
+
+    public void removePerson(long idPerson) {
+        service.removePerson(idPerson);
     }
 }

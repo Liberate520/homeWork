@@ -32,6 +32,12 @@ public class Person implements Serializable, GroupItem<Person> {
         children = new ArrayList<>();
     }
 
+    public List<Person> getParentList(){
+        return parents;
+    }
+    public List<Person> getChildrenList(){
+        return children;
+    }
     public Person(String name, Gender gender, LocalDate birthDate) {
         this(name, gender, birthDate, null, null, null);
     }
@@ -46,6 +52,13 @@ public class Person implements Serializable, GroupItem<Person> {
         }
         return false;
     }
+    public boolean removeChild(Person child){
+        if (children.contains(child)) {
+            children.remove(child);
+            return true;
+        }
+        return false;
+    }
 
     public boolean addParent(Person parent) {
         if (!parents.contains(parent)) {
@@ -54,7 +67,13 @@ public class Person implements Serializable, GroupItem<Person> {
         }
         return false;
     }
-
+    public boolean removeParent(Person parent) {
+        if (parents.contains(parent)) {
+            parents.remove(parent);
+            return true;
+        }
+        return false;
+    }
 
     public Person getFather() {
         for (Person parent : parents) {

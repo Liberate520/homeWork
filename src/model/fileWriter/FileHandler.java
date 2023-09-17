@@ -21,7 +21,7 @@ public class FileHandler implements Writable {
         out.close();
     }
     @Override
-    public Tree loadFile() throws IOException, ClassNotFoundException {
+    public Tree loadFile() throws FileNotFoundException, ClassNotFoundException, IOException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
         Tree tree2 = (Tree) in.readObject();
         return tree2;
