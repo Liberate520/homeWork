@@ -11,13 +11,14 @@ public class GenerationMain extends Human {
         super(fstName, lstName, bornDate, gender);
     }
 
-    public List<Human> getYngGen() {
+    public List<Human> getGrandchildren() {
         List<Human> result = new ArrayList<Human>();
-        for(Human childrens: this.getChildrens()) {
-            for (Human child : childrens.getChildrens()) {
-                result.add(child);
+        for(Human child: this.getChildren()) {
+            for (Human grandchild : child.getChildren()) {
+                result.add(grandchild);
             }
         }
         return result;
     }
-}
+    
+

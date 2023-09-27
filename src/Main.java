@@ -1,61 +1,59 @@
 public class Main {
     public static void main(String[] args) {
+        GenerationMain бабушкаСмит = new GenerationMain("Смит", "Лидия", "15.06.1945", "25.05.2010", Gender.FEMALE);
+        GenerationMain дедушкаСмит = new GenerationMain("Смит", "Роберт", "10.07.1942", Gender.MALE);
+        GenerationMain бабушкаДжонсон = new GenerationMain("Джонсон", "Сюзан", "14.04.1949", "15.07.2011", Gender.FEMALE);
+        GenerationMain дедушкаДжонсон = new GenerationMain("Джонсон", "Майкл", "12.02.1940", Gender.MALE);
 
-        GenerationMain grandMother1_1 = new GenerationMain("Smith", "Linda", "15.06.1945", "25.05.2010", Gender.FEMALE);
-        GenerationMain grandFather1_1 = new GenerationMain("Smith", "Robert", "10.07.1942", Gender.MALE);
-        GenerationMain grandMother1_2 = new GenerationMain("Johnson", "Susan", "14.04.1949", "15.07.2011", Gender.FEMALE);
-        GenerationMain grandFather1_2 = new GenerationMain("Johnson", "Michael", "12.02.1940", Gender.MALE);
-        
-        Human mother1_1 = new Human("Williams", "Jessica", "20.03.1975", Gender.FEMALE);
-        Human father1_1 = new Human("Williams", "William", "22.06.1972", Gender.MALE);
-        
-        YngGeneration child1_1 = new YngGeneration("Williams", "Emily", "05.05.2005", Gender.FEMALE);
-        YngGeneration child1_2 = new YngGeneration("Williams", "James", "18.09.2007", Gender.MALE);
+        Human мамаУильямс = new Human("Уильямс", "Екатерина", "20.03.1975", Gender.FEMALE);
+        Human папаУильямс = new Human("Уильямс", "Александр", "22.06.1972", Gender.MALE);
 
-        //Добавляем родителей
-        mother1_1.addParent(grandMother1_1);
-        mother1_1.addParent(grandFather1_1);
-        father1_1.addParent(grandMother1_2);
-        father1_1.addParent(grandFather1_2);
+        YngGeneration дочьЕмилия = new YngGeneration("Уильямс", "Емилия", "05.05.2005", Gender.FEMALE);
+        YngGeneration сынЯков = new YngGeneration("Уильямс", "Яков", "18.09.2007", Gender.MALE);
 
-        child1_1.addParent(mother1_1);
-        child1_1.addParent(father1_1);
-        child1_2.addParent(mother1_1);
-        child1_2.addParent(father1_1);
+        YngGeneration дочьЛюдмила = new YngGeneration("Уильямс", "Людмила", "10.10.2010", Gender.FEMALE);
 
-        //Добавляем детей
-        grandMother1_1.addChild(mother1_1);
-        grandFather1_1.addChild(mother1_1);
-        grandMother1_2.addChild(father1_1);
-        grandFather1_2.addChild(father1_1);
+        мамаУильямс.addParent(бабушкаСмит);
+        мамаУильямс.addParent(дедушкаСмит);
+        папаУильямс.addParent(бабушкаДжонсон);
+        папаУильямс.addParent(дедушкаДжонсон);
 
-        mother1_1.addChild(child1_1);
-        mother1_1.addChild(child1_2);
-        father1_1.addChild(child1_1);
-        father1_1.addChild(child1_2);
+        дочьЕмилия.addParent(мамаУильямс);
+        дочьЕмилия.addParent(папаУильямс);
+        сынЯков.addParent(мамаУильямс);
+        сынЯков.addParent(папаУильямс);
+        дочьЛюдмила.addParent(мамаУильямс);
+        дочьЛюдмила.addParent(папаУильямс);
 
-        FamilyTree familyTree = new FamilyTree(grandMother1_1);
-        Human root = familyTree.getRoot();
+        бабушкаСмит.addChild(мамаУильямс);
+        дедушкаСмит.addChild(мамаУильямс);
+        бабушкаДжонсон.addChild(папаУильямс);
+        дедушкаДжонсон.addChild(папаУильямс);
+
+        мамаУильямс.addChild(дочьЕмилия);
+        мамаУильямс.addChild(сынЯков);
+        мамаУильямс.addChild(дочьЛюдмила);
+        папаУильямс.addChild(дочьЕмилия);
+        папаУильямс.addChild(сынЯков);
+        папаУильямс.addChild(дочьЛюдмила);
+
+        FamilyTree семейноеДрево = new FamilyTree(бабушкаСмит);
+        Human корень = семейноеДрево.getRoot();
         System.out.println("Человек: ");
-        System.out.println(root);
+        System.out.println(корень);
         System.out.println("Дети: ");
-        root.printChildrens();
+        корень.printChildrens();
         System.out.println("Родители:");
-        root.printParents();
+        корень.printParents();
 
         System.out.println("Старшее поколение:");
-        for(Human person: child1_2.getMainGen()) {
-            System.out.println(person);
-        }
-
-        System.out.println("Старшее поколение:");
-        for(Human person: child1_2.getMainGen()) {
-            System.out.println(person);
+        for(Human человек: дочьЛюдмила.getMainGen()) {
+            System.out.println(человек);
         }
 
         System.out.println("Младшее поколение:");
-        for(Human person: grandMother1_1.getYngGen()) {
-            System.out.println(person);
+        for(Human человек: бабушкаСмит.getYngGen()) {
+            System.out.println(человек);
         }
     }
 }
