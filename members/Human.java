@@ -1,5 +1,8 @@
 package members;
-public class Human {
+
+import java.io.Serializable;
+
+public class Human implements Serializable{
     private int id;
     private String name;
     private String surname;
@@ -9,9 +12,9 @@ public class Human {
     private int mother_id;
     private String birthday_date;
     private String birth_place;
-    private String siblings;
+    /*private String siblings;
     private String children;
-    private Boolean alive_status;
+    private Boolean alive_status;  */
 
     public Human(String name, String surname, String patronymic){
         this.name = name;
@@ -22,10 +25,22 @@ public class Human {
     public int getId(){
         return id;
     }
-
+    
     public void setId(int id){
         this.id = id;
     }
+    public Boolean getGender(){
+        return gender;
+    }
+
+    public int getFather_id(){
+        return father_id;
+    }
+
+    public int getMother_id(){
+        return mother_id;
+    }
+
 
     public String getName() {
         return name;
