@@ -56,7 +56,7 @@ public class FamilyTree implements Serializable {
     public List<Human> getByFIO(String name, String family){
         List<Human> list = new ArrayList<>();
         for(Human human : humanList){
-            if(human.getLstName().equals(name) && human.getFstName().equals(name)){
+            if((human.getLstName().equals(name)) && (human.getFstName().equals(family))){
                 list.add(human);
             }
         }
@@ -115,4 +115,5 @@ public class FamilyTree implements Serializable {
 
     @Override
     public String toString() {return info();}
+
 }

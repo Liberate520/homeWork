@@ -17,8 +17,6 @@ public class Human implements Serializable {
     private Human mother;
     private Human father;
 
-    private static final long serialVersionUID = 1L;
-
 
     public Human(String fstName, String lstName, LocalDate bornDate, LocalDate deathDate,
                  Gender gender, Human mother, Human father) {
@@ -176,6 +174,25 @@ public class Human implements Serializable {
         return gender;
     }
 
+    public LocalDate getBornDate() {
+        return bornDate;
+    }
+
+    public void setBornDate(LocalDate bornDate) {
+        this.bornDate = bornDate;
+    }
+
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }
 
 

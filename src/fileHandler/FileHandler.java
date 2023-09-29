@@ -4,9 +4,9 @@ import familyTree.FamilyTree;
 import java.io.*;
 
 
-public class FileHandler extends FamilyTree {
+public class FileHandler {
 
-    public static void treeSerialize(FamilyTree tree){
+    public void treeSerialize(FamilyTree tree){
         try{
             FileOutputStream fos = new FileOutputStream("tree.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -33,5 +33,6 @@ public class FileHandler extends FamilyTree {
             c.printStackTrace();
         }
         return tree;
+
     }
 }
