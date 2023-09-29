@@ -12,6 +12,7 @@ public class Human {
 
     public Human(String firstName, String lastName, Gender sex) {
         this();
+        this.id = -1;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
