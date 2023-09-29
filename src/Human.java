@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Human {
     private long id;
@@ -94,7 +91,7 @@ public class Human {
     }
     public void addChildren(Human... children) {
         for (Human child : children) {
-            if (child.isMan()) {
+            if (isMan()) {
                 child.setFatherWithoutAddingChild(this);
             } else {
                 child.setMotherWithoutAddingChild(this);
@@ -107,14 +104,32 @@ public class Human {
         return marriagePartner;
     }
     public boolean setMarriagePartner(Human marriagePartner) {
-        if (marriagePartner.isMan() != marriagePartner.isMan()) {
+        if (isMan() != marriagePartner.isMan()) {
             this.marriagePartner = marriagePartner;
             if (isWom()) {
                 setLastName(marriagePartner.getLastName());
             }
+            else {
+                marriagePartner.setLastName(lastName);
+            }
             return true;
         }
         return false;
+    }
+    public String getChildrenInf(){
+        StringBuilder res = new StringBuilder();
+        res.append("Childrens: ");
+        if (!children.isEmpty()) {
+            for (Human child : children
+            ) {
+                res.append(child.getFirstName());
+                res.append(" | ");
+            }
+        }
+        else {
+            res.append("No");
+            }
+        return res.toString();
     }
     @Override
     public String toString(){
@@ -134,7 +149,21 @@ public class Human {
         sb.append(getMother().firstName);
         sb.append("Partner: ");
         sb.append(getMarriagePartner().firstName);
+        sb.append(getChildrenInf());
         return sb.toString();
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return getId() == human.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
