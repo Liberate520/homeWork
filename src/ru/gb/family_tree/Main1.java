@@ -4,12 +4,19 @@ import ru.gb.family_tree.Family.Gender;
 import ru.gb.family_tree.Family.Human;
 import ru.gb.family_tree.Tree.FamilyTree;
 
+import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Main1 {
-    public static void main(String[] args) {
+public class Main1 implements Serializable{
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree tree = test();
-
+        System.out.println(tree);
+        tree.saveTree();
+        FamilyTree tree1 = new FamilyTree();
+        tree1.readTree();
+        System.out.println(tree1);
 /*      Human human1 = new Human("Петрова Наталья Ивановна", Gender.Female,"12.12.1945", "11.11.2010");
         Human human2 = new Human("Петров Михаил Сергеевич", Gender.Male,"12.06.1945", "21.12.2011");
         Human human3 = new Human("Петров Сергей  Михайлович", Gender.Male, "12.12.1967", "No");
@@ -18,7 +25,7 @@ public class Main1 {
         Human human6 = new Human("Иванов Aндрей Юрьевич", Gender.Male, "12.10.1964", "No");
         Human human7 = new Human("Петров Сергей Сергеевич", Gender.Male, "11.02.1989", "No");
 */
-        System.out.println(tree);
+        //System.out.println(tree);
     }
     static FamilyTree test(){
         FamilyTree tree  = new FamilyTree();
@@ -49,6 +56,21 @@ public class Main1 {
         tree.setWedding(human3, human5);
         tree.setWedding(human4, human6);
 
+
+        return tree;
+    }
+    public static void saverTree(FamilyTree tree) throws IOException{
+        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("text.txt"));
+        os.writeObject(tree);
+        os.close();
+    }
+
+    public FamilyTree reTree() throws IOException, ClassNotFoundException {
+        FamilyTree tree = new FamilyTree();
+        ObjectInputStream is = new ObjectInputStream(new FileInputStream("text.txt"));
+        tree = (FamilyTree) is.readObject();
+        is.close();
         return tree;
     }
 }
+

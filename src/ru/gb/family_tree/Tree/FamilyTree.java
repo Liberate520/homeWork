@@ -1,13 +1,28 @@
 package ru.gb.family_tree.Tree;
 
 import ru.gb.family_tree.Family.Human;
+import ru.gb.family_tree.Saveble;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
-    private long humanId;
+public class FamilyTree implements Serializable {
+    private  long humanId;
     private List<Human> humans;
+
+    public void saveTree() throws IOException {
+        for (Human human : humans)
+            human.save();
+    }
+    public Human readTree() throws IOException, ClassNotFoundException {
+        List<Human> tree = new ArrayList<>();
+        for (Human human : humans) {;
+            tree.add(human.read());
+        }
+        return (Human) tree;
+    }
 
     public FamilyTree() {
         this(new ArrayList<>());

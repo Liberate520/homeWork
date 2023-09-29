@@ -1,11 +1,14 @@
 package ru.gb.family_tree.Family;
 
+import ru.gb.family_tree.Saveble;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Saveble, Serializable{
     private long id;
     private String name;
     private Gender gender;
@@ -14,6 +17,18 @@ public class Human {
     private List<Human> children;
     private Human spouse;
     private Human mother, father;
+
+    public void save() throws IOException {
+        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("text.txt"));
+        os.writeObject(this);
+        os.close();
+    }
+    public Human read() throws IOException, ClassNotFoundException {
+        ObjectInputStream is = new ObjectInputStream(new FileInputStream("text.txt"));
+        Human human = (Human) is.readObject();
+        is.close();
+        return human;
+    }
 
     public Human(String name, Gender gender,
                  LocalDate dateOfBirth, LocalDate dateOfDeath, Human mother, Human father){
@@ -206,4 +221,7 @@ public class Human {
         Human human = (Human) obj;
         return human.getId() == getId();
     }
+
+
+
 }
