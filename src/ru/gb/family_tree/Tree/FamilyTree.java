@@ -5,6 +5,7 @@ import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByAge;
 import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByGender;
 import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByName;
 import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByDateOfBirth;
+import ru.gb.family_tree.HumanIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -158,20 +159,8 @@ public class FamilyTree implements Iterable<Human> {
 
     @Override
     public Iterator<Human> iterator() {
-        return new HumanIterator();
+        return new HumanIterator(humans);
     }
 
-    class HumanIterator implements Iterator<Human> {
-        private int index;
 
-        @Override
-        public boolean hasNext() {
-            return index < humans.size();
-        }
-
-        @Override
-        public Human next() {
-            return humans.get(index++);
-        }
-    }
 }
