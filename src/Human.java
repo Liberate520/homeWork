@@ -79,3 +79,20 @@ public class Human {
         }
     }
 }
+
+
+    public static Comparator<Human> sortByFirstName() {
+        return Comparator.comparing(Human::getFirstName);
+    }
+
+    public static Comparator<Human> sortByBornDate() {
+        return Comparator.comparing(Human::getBornDate);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getBornDate() {
+        return bornDate;
+    }
