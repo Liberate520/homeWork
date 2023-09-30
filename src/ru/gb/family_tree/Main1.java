@@ -5,10 +5,7 @@ import ru.gb.family_tree.Family.Human;
 import ru.gb.family_tree.Tree.FamilyTree;
 import ru.gb.family_tree.writer.FileHandler;
 
-import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main1{
     public static void main(String[] args){
@@ -18,6 +15,8 @@ public class Main1{
         FamilyTree tree =  test();
         //FamilyTree tree = (FamilyTree) fileHandler.read(fileName);
         System.out.println(tree.getHumanInfo());
+
+
         //fileHandler.save(tree, fileName);
         //tree.sortByAge();
         //tree.sortByGender();
@@ -26,6 +25,9 @@ public class Main1{
         //System.out.println(tree);
 
     }
+
+
+
     static FamilyTree test(){
         FamilyTree tree  = new FamilyTree();
         Human human1 = new Human("Петрова Наталья Ивановна", Gender.Female,

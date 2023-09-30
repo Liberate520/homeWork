@@ -14,8 +14,6 @@ import java.util.List;
 public class FamilyTree implements Iterable<Human> {
     private long humanId;
     private List<Human> humans;
-    private FamilyTree familyTree;
-
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -132,8 +130,9 @@ public class FamilyTree implements Iterable<Human> {
     }
 
     public String getHumanInfo() {
+        FamilyTree familyTree =new FamilyTree(humans);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Family:\n");
+        stringBuilder.append("FamilyInfo:\n");
         for (Human human : familyTree) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
