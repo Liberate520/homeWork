@@ -17,15 +17,13 @@ public class Main1{
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree =  test();
         //FamilyTree tree = (FamilyTree) fileHandler.read(fileName);
-        System.out.println(tree);
+        System.out.println(tree.getHumanInfo());
         //fileHandler.save(tree, fileName);
         //tree.sortByAge();
         //tree.sortByGender();
         //tree.sortByName();
-        tree.sortByDateOfBirth();
-        System.out.println(tree);
-
-
+        //tree.sortByDateOfBirth();
+        //System.out.println(tree);
 
     }
     static FamilyTree test(){
@@ -61,7 +59,7 @@ public class Main1{
         return tree;
     }
 
-    //public void sortByName(){}
+
 }
 
 /*      Human human1 = new Human("Петрова Наталья Ивановна", Gender.Female,"12.12.1945", "11.11.2010");
