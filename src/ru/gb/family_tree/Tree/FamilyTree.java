@@ -1,28 +1,20 @@
 package ru.gb.family_tree.Tree;
 
 import ru.gb.family_tree.Family.Human;
-import ru.gb.family_tree.Saveble;
+import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByAge;
+import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByGender;
+import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByName;
+import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByDateOfBirth;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree {
     private  long humanId;
     private List<Human> humans;
 
-    public void saveTree() throws IOException {
-        for (Human human : humans)
-            human.save();
-    }
-    public Human readTree() throws IOException, ClassNotFoundException {
-        List<Human> tree = new ArrayList<>();
-        for (Human human : humans) {;
-            tree.add(human.read());
-        }
-        return (Human) tree;
-    }
+
+
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -132,5 +124,19 @@ public class FamilyTree implements Serializable {
     @Override
     public String toString() {
         return getHumansNames();
+    }
+
+    public void sortByName() {
+        humans.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge() {
+        humans.sort(new HumanComparatorByAge());
+    }
+    public void sortByGender() {
+        humans.sort(new HumanComparatorByGender());
+    }
+    public void sortByDateOfBirth() {
+        humans.sort(new HumanComparatorByDateOfBirth());
     }
 }
