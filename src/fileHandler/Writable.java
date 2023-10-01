@@ -1,55 +1,53 @@
 package fileHandler;
 
-import familyTree.FamilyTree;
 import human.Gender;
 import human.Human;
 
-import java.io.BufferedWriter;
 import java.io.*;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public interface FamilyTreeFileWriter {
+public interface Writable {
+    boolean save(Serializable tree,String path);
+    Object read(String path);
 
-    static void saveFamilyTreeToFile(FamilyTree tree) {
-        String filePath = "tree2.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            List<Human> list = tree.getList();
-            for (Human human : list) {
-                writer.write(human.getFstName() + ";" + human.getLstName() + ";" + human.getBornDate() +
-                        ";" + human.getBornDate() + ";" + human.getGender() + ";" + human.getMother() +
-                        ";" + human.getFather());
-                writer.newLine();
-            }
-            System.out.println("Successfully upload " + filePath);
-        } catch (IOException e) {
-            System.err.println("Failed " + e.getMessage());
-        }
-    }
-
-
-    static FamilyTree readFamilyTreeFromFile() {
-        String filePath = "tree2.txt";
-        FamilyTree tree = new FamilyTree();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(";");
-                Human human = new Human(data[0], data[1], getData(data[2]), getData(data[3]),
-                        getGender(data[4]),getHuman(data[5]), getHuman(data[6]));
-                tree.add(human);
-            }
-            System.out.println("Successfully download " + filePath);
-        } catch (IOException e) {
-            System.err.println("Failed " + e.getMessage());
-        }
-        return tree;
-    }
+//    static void saveFamilyTreeToFile(FamilyTree tree) {
+//        String filePath = "tree2.txt";
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+//            List<Human> list = tree.getList();
+//            for (Human human : list) {
+//                writer.write(human.getFstName() + ";" + human.getLstName() + ";" + human.getBornDate() +
+//                        ";" + human.getBornDate() + ";" + human.getGender() + ";" + human.getMother() +
+//                        ";" + human.getFather());
+//                writer.newLine();
+//            }
+//            System.out.println("Successfully upload " + filePath);
+//        } catch (IOException e) {
+//            System.err.println("Failed " + e.getMessage());
+//        }
+//    }
+//
+//
+//    static FamilyTree readFamilyTreeFromFile() {
+//        String filePath = "tree2.txt";
+//        FamilyTree tree = new FamilyTree();
+//
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                String[] data = line.split(";");
+//                Human human = new Human(data[0], data[1], getData(data[2]), getData(data[3]),
+//                        getGender(data[4]),getHuman(data[5]), getHuman(data[6]));
+//                tree.add(human);
+//            }
+//            System.out.println("Successfully download " + filePath);
+//        } catch (IOException e) {
+//            System.err.println("Failed " + e.getMessage());
+//        }
+//        return tree;
+//    }
 
 //    static LocalDate getData(String data){
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

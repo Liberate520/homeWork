@@ -4,35 +4,24 @@ import familyTree.FamilyTree;
 import java.io.*;
 
 
-public class FileHandler {
+public class FileHandler implements Writable{
 
-    public void treeSerialize(FamilyTree tree){
-        try{
-            FileOutputStream fos = new FileOutputStream("tree.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(tree);
-            oos.close();
-            fos.close();
+    public boolean save(Serializable ser,String path){
+        try{ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
+            oos.writeObject(ser);
+            return true;
         } catch (IOException e){
             e.printStackTrace();
+            return false;
         }
     }
 
-    public static FamilyTree treeDeserialize(){
-        FamilyTree tree = new FamilyTree();
-        try{
-            FileInputStream fis = new FileInputStream("tree.txt");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            tree = (FamilyTree) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (IOException i){
+    public Object read(String path){
+        try{ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+            return ois.readObject();
+        } catch (Exception i){
             i.printStackTrace();
-        } catch (ClassNotFoundException c){
-            System.out.println("NOT FOUND");
-            c.printStackTrace();
+            return null;
         }
-        return tree;
-
     }
 }

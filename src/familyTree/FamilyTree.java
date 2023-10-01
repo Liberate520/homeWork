@@ -1,6 +1,10 @@
 package familyTree;
 
 import human.Human;
+import human.sort.sortByAge;
+import human.sort.sortByFirstName;
+import human.sort.sortByLastName;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,5 +119,17 @@ public class FamilyTree implements Serializable {
 
     @Override
     public String toString() {return info();}
+
+    public void sortByFirstName(){
+        humanList.sort(new sortByFirstName());
+    }
+
+    public void sortByLastName(){
+        humanList.sort(new sortByLastName());
+    }
+
+    public void sortByAge(){
+        humanList.sort(new sortByAge());
+    }
 
 }

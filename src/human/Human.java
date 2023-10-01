@@ -105,6 +105,8 @@ public class Human implements Serializable {
         sb.append(" ДС: ").append(deathDate);
         sb.append(getMotherInfo()).append(" ");
         sb.append(getFatherInfo()).append(" ");
+        sb.append(" Возраст: ").append(getAge());
+
         return sb.toString();
     }
 
@@ -119,6 +121,10 @@ public class Human implements Serializable {
         Human human = (Human) obj;
         return human.getId() == getId();
     }
+
+//    public int compareTo(Human human) {
+//        return human.getId();
+//    }
 
 
     public long getId() {
@@ -193,6 +199,7 @@ public class Human implements Serializable {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
 }
 
 
