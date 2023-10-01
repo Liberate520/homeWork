@@ -107,6 +107,7 @@ public class Human {
     public boolean setMarriagePartner(Human marriagePartner) {
         if (isMan() != marriagePartner.isMan()) {
             this.marriagePartner = marriagePartner;
+            marriagePartner.marriagePartner = this;
             if (isWom()) {
                 setLastName(marriagePartner.getLastName());
             }
@@ -119,7 +120,7 @@ public class Human {
     }
     public String getChildrenInf(){
         StringBuilder res = new StringBuilder();
-        res.append("Childrens: ");
+        res.append(" Childrens: ");
         if (!children.isEmpty()) {
             for (Human child : children
             ) {
@@ -140,16 +141,34 @@ public class Human {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");
         sb.append(id);
-        sb.append("Name: ");
+        sb.append(" Name: ");
         sb.append(firstName);
-        sb.append("Famil: ");
+        sb.append(" Famil: ");
         sb.append(lastName);
-        sb.append("Father: ");
-        sb.append(getFather().firstName);
-        sb.append("Mother: ");
-        sb.append(getMother().firstName);
-        sb.append("Partner: ");
-        sb.append(getMarriagePartner().firstName);
+        sb.append(" Father: ");
+        if (father!= null) {
+
+            sb.append(getFather().firstName);
+        }
+        else {
+            sb.append(" n/a");
+        }
+        sb.append(" Mother: ");
+        if (mother!= null) {
+
+            sb.append(getMother().firstName);
+        }
+        else {
+            sb.append(" n/a");
+        }
+        sb.append(" Partner: ");
+        if (marriagePartner!= null) {
+
+            sb.append(getMarriagePartner().firstName);
+        }
+        else {
+            sb.append(" n/a");
+        }
         sb.append(getChildrenInf());
         return sb.toString();
 

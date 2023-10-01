@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FamTree {
+public class FamTree implements Serializable {
 //    private List<Human> humans;
 //    private Map<Human, List<Human>> relationships;
 //
@@ -80,4 +81,40 @@ public class FamTree {
         }
         return res;
     }
+    public Human[] getGrandFathers(Human human) {
+        Human[] grandFathers = new Human[2];
+        if (human.getMother() != null) {
+            grandFathers[0] = human.getMother().getFather();
+        }
+        if(human.getFather() != null) {
+            grandFathers[1] = human.getFather().getFather();
+        }
+        return grandFathers;
+    }
+    public Human[] getGrandMothers(Human human) {
+        Human[] grandMothers = new Human[2];
+        if (human.getMother() != null) {
+            grandMothers[0] = human.getMother().getMother();
+        }
+        if(human.getFather() != null) {
+            grandMothers[1] = human.getFather().getMother();
+        }
+        return grandMothers;
+    }
+@Override
+    public String toString(){
+    return getTreeInf();
+    }
+
+    public String getTreeInf(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Family Try ");
+        sb.append('\n');
+        for (Human human: humanList) {
+            sb.append(human.getInfo());
+            sb.append('\n');
+        }
+        return sb.toString();
+    }
 }
+
