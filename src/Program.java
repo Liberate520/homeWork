@@ -6,17 +6,12 @@ import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args){
-//        FamilyTree tree = treeFamily();
-//        System.out.println(tree);
-//        treeSerialize(tree);
-//        FamilyTree tree1 = treeDeserialize();
-//        System.out.println(tree1);
-//        System.out.println(tree1.getByFIO("Henry","Huse"));
-        String filePath = "C:\\Users\\Ivanlogin888\\Desktop\\JAVA\\Java_geek\\OOP_Java_sem_lec\\homeWork\\src\\testTree.txt";
-        FileHandler fileHandler = new FileHandler();
-
         FamilyTree tree = treeFamily();
         System.out.println(tree);
+//        FileHandler fileHandler = new FileHandler();
+//        fileHandler.save(tree, filePath);
+//        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+//        System.out.println(tree);
 
         tree.sortByFirstName();
         System.out.println(tree);
@@ -27,10 +22,8 @@ public class Program {
         tree.sortByLastName();
         System.out.println(tree);
 
-//        fileHandler.save(tree, filePath);
-
-//        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
-//        System.out.println(tree);
+        tree.sortByBornDate();
+        System.out.println(tree);
     }
     public static FamilyTree treeFamily(){
         FamilyTree tree = new FamilyTree();

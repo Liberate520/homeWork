@@ -122,10 +122,6 @@ public class Human implements Serializable {
         return human.getId() == getId();
     }
 
-//    public int compareTo(Human human) {
-//        return human.getId();
-//    }
-
 
     public long getId() {
         return id;

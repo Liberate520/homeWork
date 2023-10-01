@@ -2,6 +2,7 @@ package familyTree;
 
 import human.Human;
 import human.sort.sortByAge;
+import human.sort.sortByBornDate;
 import human.sort.sortByFirstName;
 import human.sort.sortByLastName;
 
@@ -131,5 +132,7 @@ public class FamilyTree implements Serializable {
     public void sortByAge(){
         humanList.sort(new sortByAge());
     }
+
+    public void sortByBornDate(){ humanList.sort(new sortByBornDate()); }
 
 }
