@@ -1,4 +1,6 @@
-package familyTree;
+package familyTree.familyTree;
+
+import familyTree.human.Human;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +9,14 @@ public class FamilyTree {
     private int humanId;
     private List<Human> humanList;
 
+    public FamilyTree() {
+        this(new ArrayList<>());
+    }
+
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;
     }
 
-    public FamilyTree() {
-        this(new ArrayList<>());
-    }
 
     public int getId() {
         return humanId;
@@ -33,8 +36,21 @@ public class FamilyTree {
 
             addToParents(human);
             addToChildren(human);
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    public Human getById(int id) {
+        if (!checkId(id)) {
+            return null;
+        }
+        for (Human human : humanList) {
+            if (human.getId() == id) {
+                return human;
+            }
+        }
+        return null;
     }
 
     public List<Human> getSiblings(int id) {
@@ -107,17 +123,6 @@ public class FamilyTree {
         }
     }
 
-    public Human getById(int id) {
-        if (!checkId(id)) {
-            return null;
-        }
-        for (Human human : humanList) {
-            if (human.getId() == id) {
-                return human;
-            }
-        }
-        return null;
-    }
 
     public boolean remove(int humanId) {
         if (checkId(humanId)) {
@@ -139,20 +144,24 @@ public class FamilyTree {
     }
 
     private void addToChildren(Human human) {
-        Human child = human.getChildren().get(0);
-        if (child != null) {
+        for (Human child : human.getChildren()) {
             child.addParent(human);
         }
     }
 
     // TODO: 10/1/2023 method wrote by myself
     private boolean checkId(int id) {
-        if (id <= humanId || id > 0) {
-            humanList.get(id);
-            return true;
+        if (id >= humanId || id < 0) {
+            return false;
+        }
+        for (Human human : humanList) {
+            if (human.getId() == id) {
+                return true;
+            }
         }
         return false;
     }
+
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
@@ -167,7 +176,7 @@ public class FamilyTree {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return getInfo();
     }
 }

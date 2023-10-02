@@ -1,4 +1,4 @@
-package familyTree;
+package familyTree.human;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
-    private int id;
+    private long id;
     private String name;
     private Gender gender;
-
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private Human mother;
@@ -20,7 +19,7 @@ public class Human {
     public Human(String name, LocalDate dateOfBirth,
                  Gender gender, LocalDate dateOfDeath,
                  Human mother, Human father) {
-        id = 0;
+        id = -1;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
@@ -45,20 +44,19 @@ public class Human {
         if (!children.contains(child)) {
             children.add(child);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void addParent(Human parent) {
-        if (getGender().equals(Gender.Male)) {
+        if (parent.getGender().equals(Gender.Male)) {
             setFather(parent);
-        } else if (getGender().equals(Gender.Female)) {
+        } else if (parent.getGender().equals(Gender.Female)) {
             setMother(parent);
         }
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -153,21 +151,19 @@ public class Human {
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");
-        sb.append(id);
+        sb.append(id + 1);
         sb.append(", name: ");
-        sb.append(getName());
-        sb.append(getGender());
+        sb.append(name);
         sb.append(", gender: ");
-        sb.append(", date of birth: ");
-        sb.append(getDateOfBirth());
+        sb.append(getGender());
         sb.append(", age: ");
         sb.append(getAge());
+        sb.append(", ");
+        sb.append(getSpouseInfo());
         sb.append(", ");
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getMotherInfo());
-        sb.append(", ");
-        sb.append(getSpouseInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
         return sb.toString();
@@ -219,14 +215,14 @@ public class Human {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(this == obj){
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if(!(obj instanceof Human)){
+        if (!(obj instanceof Human)) {
             return false;
         }
-        Human human = (Human)obj;
+        Human human = (Human) obj;
         return human.getId() == getId();
     }
 }
