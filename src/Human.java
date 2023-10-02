@@ -67,12 +67,22 @@ public class Human {
     public Set<Human> getChildren() {
         return children;
     }
-    public void addChild()
+    public void addChild( Human child )
     {
-        // добавить ребенка
+        // добавить инфо о ребенке
+        this.children.add( child );
     }
-    public void addMarriage()
+    public void addMarriage( Marriage marriage )
     {
         // Добавить инфо о браке
+        this.marriages.add( marriage );
+    }
+    public void setMother( Human mother )
+    {
+        this.mother = mother;
+    }
+    public void setFather( Human father )
+    {
+        this.father = father;
     }
 }
