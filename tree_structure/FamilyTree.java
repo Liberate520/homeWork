@@ -28,8 +28,9 @@ public class FamilyTree implements Serializable{
         for (Human human: humanList){
             stringBuilder.append(human);
             stringBuilder.append("\n");
+            
         }
         return stringBuilder.toString();
     }
-
+   
 }

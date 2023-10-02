@@ -10,16 +10,17 @@ public class Human implements Serializable{
     private Boolean gender;
     private int father_id;
     private int mother_id;
-    private String birthday_date;
+    private int birthday_date;
     private String birth_place;
     /*private String siblings;
     private String children;
     private Boolean alive_status;  */
 
-    public Human(String name, String surname, String patronymic){
+    public Human(String name, String surname, String patronymic, String birth_place){
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
+        this.birth_place = birth_place;
     }
 
     public int getId(){
@@ -50,13 +51,13 @@ public class Human implements Serializable{
         return birth_place;
     }
 
-    public String getBirthday_date(){
+    public Integer getBirthday_date(){
         return birthday_date;
     }
 
     @Override
     public String toString() {
-        return "id: " + id + ", name: " + name + ", surname: " + surname + ", patronymic" + patronymic;
+        return "id: " + id + ", name: " + name + ", surname: " + surname + ", patronymic: " + patronymic + ", birth place: " + birth_place;
     }
 
 }   
