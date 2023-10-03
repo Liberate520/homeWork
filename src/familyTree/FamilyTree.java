@@ -3,14 +3,16 @@ package familyTree;
 import human.Human;
 import human.sort.sortByAge;
 import human.sort.sortByBornDate;
-import human.sort.sortByFirstName;
+//import human.sort.sortByFirstName;
 import human.sort.sortByLastName;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human>{
 
     private  long humansId;
     private List<Human> humanList;
@@ -118,11 +120,19 @@ public class FamilyTree implements Serializable {
         return sb.toString();
     }
 
+    public Iterator<Human> iterator(){
+        return new FamilyTreeIterator(humanList);
+    }
+
     @Override
     public String toString() {return info();}
 
+//    public void sortByFirstName(){
+//        humanList.sort(new sortByFirstName());
+//    }
+
     public void sortByFirstName(){
-        humanList.sort(new sortByFirstName());
+        Collections.sort(humanList);
     }
 
     public void sortByLastName(){
@@ -133,6 +143,8 @@ public class FamilyTree implements Serializable {
         humanList.sort(new sortByAge());
     }
 
-    public void sortByBornDate(){ humanList.sort(new sortByBornDate()); }
+    public void sortByBornDate(){
+        humanList.sort(new sortByBornDate());
+    }
 
 }

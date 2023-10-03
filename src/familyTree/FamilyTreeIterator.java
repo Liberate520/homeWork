@@ -1,14 +1,14 @@
-package iterable;
+package familyTree;
 
 import human.Human;
 import java.util.Iterator;
 import java.util.List;
 
-public class iterable implements Iterator<Human> {
+public class FamilyTreeIterator implements Iterator<Human> {
     private int index;
     private List<Human> humanList;
 
-    public iterable(List<Human> humanList) {
+    public FamilyTreeIterator(List<Human> humanList) {
         this.humanList = humanList;
     }
 

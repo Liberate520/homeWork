@@ -3,10 +3,11 @@ package human;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.time.Period;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private long id;
     private String fstName;
     private String lstName;
@@ -194,6 +195,10 @@ public class Human implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public int compareTo(Human o){
+        return fstName.compareTo(o.getFstName());
     }
 
 }
