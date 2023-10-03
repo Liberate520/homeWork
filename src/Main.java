@@ -1,41 +1,58 @@
 import people.Gender;
 import people.Person;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree("Романовы");
 
         Person mihail = new Person("Михаил Федорович",
-                                    1596, 1645, Gender.Male);
+                                    LocalDate.of(1596, Month.JULY, 22),
+                                    LocalDate.of(1596, Month.JULY, 22),
+                                    Gender.Male);
 
         Person evdakia = new Person("Евдакия Лукьянина",
-                                    1608, 1645, Gender.Female);
+                                    LocalDate.of(1608, 1, 1),
+                                    LocalDate.of(1645, Month.AUGUST, 18),
+                                    Gender.Female);
 
         familyTree.isHusbands(mihail, evdakia);
 
         Person alexey = new Person("Алексей Михайлович",
-                                  1629, 1676, Gender.Male);
+                                    LocalDate.of(1629, Month.MARCH, 19),
+                                    LocalDate.of(1676, Month.FEBRUARY, 8),
+                                    Gender.Male);
 
         familyTree.isChildren(alexey, mihail, evdakia);
 
         Person maria = new Person("Мария Ильинична",
-                                1624, 1669, Gender.Female);
+                                    LocalDate.of(1624, Month.APRIL, 11),
+                                    LocalDate.of(1669, Month.MARCH, 13),
+                                    Gender.Female);
 
         Person natalya = new Person("Наталья Кирилловна",
-                                  1651, 1694, Gender.Female);
+                                    LocalDate.of(1651, Month.SEPTEMBER, 1),
+                                    LocalDate.of(1694, Month.FEBRUARY, 4),
+                                    Gender.Female);
 
         familyTree.isHusbands(alexey, maria);
         familyTree.isHusbands(alexey, natalya);
 
         Person petr1 = new Person("Петр I Алексеевич",
-                                1672, 1725, Gender.Male);
+                                    LocalDate.of(1672, Month.JUNE, 9),
+                                    LocalDate.of(1725, Month.FEBRUARY, 8),
+                                    Gender.Male);
 
         familyTree.isChildren(petr1, alexey, natalya);
 
-        Person ivann5 = new Person("Иоанн V Алексеевич",
-                                1666, 1696, Gender.Male);
+        Person ivan5 = new Person("Иоанн V Алексеевич",
+                                    LocalDate.of(1666, Month.SEPTEMBER, 6),
+                                    LocalDate.of(1696, Month.FEBRUARY, 8),
+                                    Gender.Male);
 
-        familyTree.isChildren(ivann5, alexey, maria);
+        familyTree.isChildren(ivan5, alexey, maria);
 
         System.out.println(familyTree.getPersonInfo(alexey));
 
@@ -45,8 +62,8 @@ public class Main {
         familyTree.addInFamily(maria);
         familyTree.addInFamily(natalya);
         familyTree.addInFamily(petr1);
-        familyTree.addInFamily(ivann5);
+        familyTree.addInFamily(ivan5);
 
-        System.out.println(familyTree.getFamilyInfo());
+        System.out.println(familyTree);
     }
 }

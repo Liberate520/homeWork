@@ -1,26 +1,40 @@
 package people;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Person {
+    private int id;
     private String name;
-    private int birthDate;
-    private int deathDate;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
     private Gender gender;
     private List<Person> husbands;
     private Person mother;
     private Person father;
     private List<Person> children;
 
-    public Person(String name, int birthDate, int deathDate, Gender gender) {
+    public Person(String name, LocalDate birthDate, LocalDate deathDate, Gender gender) {
+        id = -1;
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.gender = gender;
         husbands = new ArrayList<>();
         children = new ArrayList<>();
+    }
+
+    public Person (String name, LocalDate birthDate, Gender gender) {
+        this(name, birthDate, null, gender);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,8 +75,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return  name + " (" + gender + ")\n" +
-                "(" + birthDate + " - " + deathDate + ")\n";
+        return  "\t" + name + " (" + gender + ")\n" +
+                "\t(" + birthDate.getYear() + " - " + deathDate.getYear() + ")\n";
     }
 
 }

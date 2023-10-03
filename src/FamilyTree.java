@@ -6,6 +6,7 @@ import java.util.List;
 public class FamilyTree {
     private List<Person> peopleList;
     private String familyName;
+    private int count = 1;
 
     public FamilyTree(String familyName) {
         this.familyName = familyName;
@@ -17,6 +18,7 @@ public class FamilyTree {
     }
 
     public void addInFamily(Person person) {
+        person.setId(count++);
         peopleList.add(person);
     }
 
@@ -49,6 +51,7 @@ public class FamilyTree {
 
     public String getPersonInfo(Person person) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
         stringBuilder.append(person.getName());
         stringBuilder.append(":\n\n");
 
@@ -69,13 +72,15 @@ public class FamilyTree {
         }
 
         if (person.getMother() != null) {
-            stringBuilder.append("Мать: ");
+            stringBuilder.append("Мать:\n");
             stringBuilder.append(person.getMother());
+            stringBuilder.append("\n");
         }
 
         if (person.getFather() != null) {
-            stringBuilder.append("Отец: ");
+            stringBuilder.append("Отец:\n");
             stringBuilder.append(person.getFather());
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
@@ -85,9 +90,15 @@ public class FamilyTree {
         stringBuilder.append(familyName);
         stringBuilder.append(":\n");
         for (Person person: peopleList) {
+            stringBuilder.append(person.getId());
+            stringBuilder.append(". ");
             stringBuilder.append(person);
         }
         return stringBuilder.toString();
     }
 
+    @Override
+    public String toString() {
+        return getFamilyInfo();
+    }
 }
