@@ -1,10 +1,10 @@
 package familyTree;
 
 import human.Human;
-import human.sort.sortByAge;
-import human.sort.sortByBornDate;
+import human.sort.SortByAge;
+import human.sort.SortByBornDate;
 //import human.sort.sortByFirstName;
-import human.sort.sortByLastName;
+import human.sort.SortByLastName;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -136,15 +136,15 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
 
     public void sortByLastName(){
-        humanList.sort(new sortByLastName());
+        humanList.sort(new SortByLastName());
     }
 
     public void sortByAge(){
-        humanList.sort(new sortByAge());
+        humanList.sort(new SortByAge());
     }
 
     public void sortByBornDate(){
-        humanList.sort(new sortByBornDate());
+        humanList.sort(new SortByBornDate());
     }
 
 }
