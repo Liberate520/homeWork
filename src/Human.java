@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     private long id;
     private String firstName;
     private String lastName;

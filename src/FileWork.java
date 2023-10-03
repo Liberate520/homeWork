@@ -17,7 +17,7 @@ public class FileWork implements Save{
         }
         catch(Exception ex){
 
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
             return false;
         }
 
@@ -30,7 +30,7 @@ public class FileWork implements Save{
            return ois.readObject();
         }
         catch(Exception ex){
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
             return null;
 
         }
