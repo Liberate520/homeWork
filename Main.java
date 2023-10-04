@@ -23,7 +23,7 @@ import tree_structure.FamilyTree;
         String filepath = "FamilyTree.txt";
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree = (FamilyTree) fileHandler.read(filepath);
-        System.out.println(tree);
+        //System.out.println(tree);
 
         fileHandler.save(tree, filepath);
 
@@ -34,9 +34,12 @@ import tree_structure.FamilyTree;
         
         System.out.println(familyTree.getHumanInfo());
         
-        Service service = new Service();
-        service.sortByBirthdate();
-        service.sortByName();
+        //Service service = new Service();
+        //service.sortByBirthdate();
+        //service.sortByName();
+
+        System.out.println(tree);
+
 
 
 
