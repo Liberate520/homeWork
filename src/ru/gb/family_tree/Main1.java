@@ -5,6 +5,7 @@ import ru.gb.family_tree.Family.Human;
 import ru.gb.family_tree.Tree.FamilyTree;
 import ru.gb.family_tree.writer.FileHandler;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main1{
@@ -14,15 +15,16 @@ public class Main1{
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree =  test();
         //FamilyTree tree = (FamilyTree) fileHandler.read(fileName);
-        System.out.println(tree.getHumanInfo());
+        //System.out.println(tree.getHumanInfo());
+
 
 
         //fileHandler.save(tree, fileName);
         //tree.sortByAge();
         //tree.sortByGender();
         //tree.sortByName();
-        //tree.sortByDateOfBirth();
-        //System.out.println(tree);
+        tree.sortByDateOfBirth();
+        System.out.println(tree);
 
     }
 
