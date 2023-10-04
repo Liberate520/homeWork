@@ -5,15 +5,19 @@ import familyTree.familyTree.FamilyTree;
 import familyTree.human.Gender;
 import familyTree.human.Human;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Main {
-    public static void main(String[] args) {
+import static familyTree.writer.FileHandler.serialization;
+
+public class Main implements Serializable {
+    public static void main(String[] args) throws IOException {
         FamilyTree tree = testTree();
         System.out.println(tree);
     }
 
-    static FamilyTree testTree() {
+    static FamilyTree testTree() throws IOException {
         FamilyTree tree = new FamilyTree();
 
         Human dinara = new Human("Динара",
@@ -39,7 +43,11 @@ public class Main {
         Human nadezda = new Human("Надежда", LocalDate.of(1962, 3, 8), Gender.Female);
         nadezda.addChild(dinara);
         tree.add(nadezda);
+
+        serialization();
         return tree;
     }
+
+
 
 }
