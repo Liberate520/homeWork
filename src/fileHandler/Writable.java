@@ -1,7 +1,7 @@
 package fileHandler;
 
-import human.Gender;
-import human.Human;
+import obj.Gender;
+import obj.human.Human;
 
 import java.io.*;
 import java.time.*;
@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public interface Writable {
+public interface Writable<E> {
     boolean save(Serializable tree,String path);
     Object read(String path);
 

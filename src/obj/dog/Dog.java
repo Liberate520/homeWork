@@ -1,56 +1,63 @@
-package human;
+package obj.dog;
 
-import java.io.Serializable;
+import familyTree.FamilyTreeItem;
+import obj.Gender;
+import obj.human.Human;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Dog implements Comparable<Dog>, FamilyTreeItem<Dog> {
     private long id;
+    private Human human;
     private String fstName;
     private String lstName;
+    private Gender gender;
     private LocalDate bornDate;
     private LocalDate deathDate;
-    private Gender gender;
-    private List<Human> childrens;
-    private Human mother;
-    private Human father;
+    private List<Dog> childrens;
+    private Dog mother;
+    private Dog father;
 
 
-    public Human(String fstName, String lstName, LocalDate bornDate, LocalDate deathDate,
-                 Gender gender, Human mother, Human father) {
+    public Dog(Human human, String fstName,String lstName, Gender gender, LocalDate bornDate, LocalDate deathDate, Dog mother, Dog father) {
         id = -1;
+        this.human = human;
         this.fstName = fstName;
         this.lstName = lstName;
+        this.gender = gender;
         this.bornDate = bornDate;
         this.deathDate = deathDate;
-        this.gender = gender;
         this.mother = mother;
         this.father = father;
         childrens = new ArrayList<>();
     }
 
-    public Human(String fstName, String lstName, LocalDate bornDate, Gender gender, Human mother, Human father) {
-        this(fstName, lstName, bornDate, null, gender, mother, father);
+    public Dog(Human human, String fstName,String lstName, Gender gender, LocalDate bornDate, LocalDate deathDate) {
+        this(human,fstName,lstName, gender, bornDate, deathDate,null,null);
     }
 
-    public Human(String fstName, String lstName, LocalDate bornDate, Gender gender) {
-        this(fstName, lstName, bornDate, null, gender, null, null);
+    public Dog(Human human, String fstName,String lstName, Gender gender, LocalDate bornDate) {
+        this(human,fstName,lstName, gender, bornDate, null,null,null);
     }
 
-    public Human(String fstName, String lstName, LocalDate bornDate, LocalDate deathDate, Gender gender) {
-        this(fstName, lstName, bornDate, deathDate, gender, null, null);
+    public Dog(Human human, String fstName, Gender gender, LocalDate bornDate) {
+        this(human,fstName,null, gender, bornDate, null,null,null);
     }
 
-    public void addChild(Human child) {
+    public Dog(String fstName,String lstName, Gender gender, LocalDate bornDate) {
+        this(null,fstName,lstName, gender, bornDate, null,null,null);
+    }
+
+    public void addChild(Dog child) {
         if (!childrens.contains(child)) {
             childrens.add(child);
         }
     }
 
-    public void addParent(Human parent) {
+    public void addParent(Dog parent) {
         if (parent.getGender().equals(Gender.MALE)) {
             setFather(parent);
         } else if (parent.getGender().equals(Gender.FEMALE)) {
@@ -91,6 +98,16 @@ public class Human implements Serializable, Comparable<Human> {
         return res;
     }
 
+    public String getHumanInfo() {
+        String res = " Xозяин: ";
+        if (human != null) {
+            res += human.getFstName() + " " + human.getLstName();
+        } else {
+            res += "Неизвестно";
+        }
+        return res;
+    }
+
 
     public String toString() {
         return info();
@@ -99,8 +116,9 @@ public class Human implements Serializable, Comparable<Human> {
     public String info() {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ").append(id);
-        sb.append(" Фамилия: ").append(fstName);
-        sb.append(" Имя: ").append(lstName);
+        sb.append(getHumanInfo()).append(" ");
+        sb.append(" Кличка(Имя): ").append(fstName);
+        sb.append(" Фамилия: ").append(lstName);
         sb.append(" Пол: ").append(gender);
         sb.append(" ДР: ").append(bornDate);
         sb.append(" ДС: ").append(deathDate);
@@ -119,9 +137,10 @@ public class Human implements Serializable, Comparable<Human> {
         if (!(obj instanceof Human)) {
             return false;
         }
-        Human human = (Human) obj;
+        Dog dog = (Dog) obj;
         return human.getId() == getId();
     }
+
 
 
     public long getId() {
@@ -132,49 +151,32 @@ public class Human implements Serializable, Comparable<Human> {
         this.id = id;
     }
 
+    @Override
     public String getFstName() {
         return fstName;
     }
 
+    @Override
     public void setFstName(String fstName) {
         this.fstName = fstName;
     }
 
+    @Override
     public String getLstName() {
         return lstName;
     }
 
+    @Override
     public void setLstName(String lstName) {
         this.lstName = lstName;
     }
 
-    public List<Human> getChildrens() {
-        return childrens;
-    }
-
-    public void setChildrens(List<Human> childrens) {
-        this.childrens = childrens;
-    }
-
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
     public Gender getGender() {
         return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public LocalDate getBornDate() {
@@ -193,16 +195,44 @@ public class Human implements Serializable, Comparable<Human> {
         this.deathDate = deathDate;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public List<Dog> getChildrens() {
+        return childrens;
     }
 
-    public int compareTo(Human o){
+    public void setChildrens(List<Dog> childrens) {
+        this.childrens = childrens;
+    }
+
+    public Human getHuman() {
+        return human;
+    }
+
+    public void setHuman(Human human) {
+        this.human = human;
+    }
+
+    @Override
+    public Dog getMother() {
+        return mother;
+    }
+
+    @Override
+    public void setMother(Dog mother) {
+        this.mother = mother;
+    }
+
+    @Override
+    public Dog getFather() {
+        return father;
+    }
+
+    @Override
+    public void setFather(Dog father) {
+        this.father = father;
+    }
+
+
+    public int compareTo(Dog o){
         return fstName.compareTo(o.getFstName());
     }
-
 }
-
-
-
-
