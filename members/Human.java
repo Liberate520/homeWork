@@ -47,6 +47,10 @@ public class Human implements Serializable{
         return name;
     }
 
+    public String getSurName(){
+        return surname;
+    }
+
     public String getBirth_place(){
         return birth_place;
     }

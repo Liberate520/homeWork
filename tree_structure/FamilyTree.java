@@ -6,11 +6,22 @@ import members.Human;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
-public class FamilyTree implements Serializable{
+import comparators.HumanComparatorByBirthdayDate;
+import comparators.HumanComparatorByName;
+import comparators.HumanComparatorBySurname;
+import iterators.HumanIterator;
+
+
+
+
+
+public class FamilyTree implements Serializable, Iterable<Human>{
     private int id;
     private int humanId;
     private List<Human> humanList;
+
 
     public FamilyTree(int id){
         this.id = id;
@@ -32,5 +43,19 @@ public class FamilyTree implements Serializable{
         }
         return stringBuilder.toString();
     }
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(humanList);
+    }
+    public void sortbyName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortbyBirthdate(){
+        humanList.sort(new HumanComparatorByBirthdayDate());
+    }
    
+    public void sortbySurname(){
+        humanList.sort(new HumanComparatorBySurname());
+    }
 }

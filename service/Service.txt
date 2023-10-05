@@ -1,0 +1,20 @@
+package service;
+
+public class Service {
+    private HumanSort humanSort;
+    public Service(HumanSort humanSort){
+        //this.humanSort = humanSort;
+        
+    }
+    //HumanSort humanSort = new HumanSort();
+
+    public void sortByName(){
+        humanSort.sortbyName();
+    }
+
+    public void sortByBirthdate(){
+        humanSort.sortbyBirthdate();
+    }
+
+    }
+
