@@ -3,12 +3,13 @@ package iterators;
 import java.util.Iterator;
 import java.util.List;
 
-import members.Human;
+//import members.Human;
+//import members.Dog;
 
-public class HumanIterator implements Iterator<Human>{
+public class HumanIterator<E> implements Iterator<E>{
     private int index;
-    private List<Human> humanList;
-    public HumanIterator(List<Human> humanList){
+    private List<E> humanList;
+    public HumanIterator(List<E> humanList){
         this.humanList = humanList;
     }
     @Override
@@ -17,7 +18,7 @@ public class HumanIterator implements Iterator<Human>{
     }
 
     @Override
-    public Human next(){
+    public E next(){
         return humanList.get(index++);
     }
 }

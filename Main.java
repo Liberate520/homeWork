@@ -1,4 +1,5 @@
 import Input_output.FileHandler;
+import members.Dog;
 import members.Human;
 //import service.HumanSort;
 //import service.Service;
@@ -19,6 +20,7 @@ import tree_structure.FamilyTree;
         Human human2 = new Human("Sergey", "Ivanov", "Sergeevich", "Vladimir");
         Human human3 = new Human("Boris", "Alexandrov" , null, "Nizhni Novgorod");
         Human human4 = new Human("Dmitry", "Borisov", "Sergeevich", "SPb");
+        //Dog dog1 = new Dog ("Sharik", true, 31122022);
 
 
         String filepath = "FamilyTree.txt";
@@ -32,6 +34,7 @@ import tree_structure.FamilyTree;
         familyTree.addHuman(human2);
         familyTree.addHuman(human3);
         familyTree.addHuman(human4);
+        //familyTree.addHuman(dog1);
         
         System.out.println(familyTree.getHumanInfo());
 
@@ -39,8 +42,8 @@ import tree_structure.FamilyTree;
         System.out.println(familyTree.getHumanInfo());
         familyTree.sortbyBirthdate();
         System.out.println(familyTree.getHumanInfo());
-        familyTree.sortbySurname();
-        System.out.println(familyTree.getHumanInfo());
+        //familyTree.sortbySurname();
+        //System.out.println(familyTree.getHumanInfo());
 
 
 

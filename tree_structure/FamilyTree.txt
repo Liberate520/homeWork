@@ -10,17 +10,17 @@ import java.util.*;
 
 import comparators.HumanComparatorByBirthdayDate;
 import comparators.HumanComparatorByName;
-//import comparators.HumanComparatorBySurname;
+import comparators.HumanComparatorBySurname;
 import iterators.HumanIterator;
 
 
 
 
 
-public class FamilyTree <E extends Subject> implements Serializable, Iterable<E>{
+public class FamilyTree implements Serializable, Iterable<Human>{
     private int id;
     private int humanId;
-    private List<E> humanList;
+    private List<Human> humanList;
 
 
     public FamilyTree(int id){
@@ -28,15 +28,15 @@ public class FamilyTree <E extends Subject> implements Serializable, Iterable<E>
         humanList = new ArrayList<>();
     }
 
-    public void addHuman(E human){
-        ((Human) human).setId(humanId++);
+    public void addHuman(Human human){
+        human.setId(humanId++);
         humanList.add(human);
     }
 
     public String getHumanInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Members list:\n");
-        for (E human: humanList){
+        for (Human human: humanList){
             stringBuilder.append(human);
             stringBuilder.append("\n");
             
@@ -44,7 +44,7 @@ public class FamilyTree <E extends Subject> implements Serializable, Iterable<E>
         return stringBuilder.toString();
     }
     @Override
-    public Iterator<E> iterator(){
+    public Iterator<Human> iterator(){
         return new HumanIterator(humanList);
     }
     public void sortbyName(){
@@ -55,8 +55,7 @@ public class FamilyTree <E extends Subject> implements Serializable, Iterable<E>
         humanList.sort(new HumanComparatorByBirthdayDate());
     }
    
-    /*public void sortbySurname(){
+    public void sortbySurname(){
         humanList.sort(new HumanComparatorBySurname());
-    }/* */
+    }
 }
-
