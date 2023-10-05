@@ -4,7 +4,7 @@ import familyTree.FamilyTree;
 import java.io.*;
 
 
-public class FileHandler implements Writable{
+public class FileHandler {
 
     public boolean save(Serializable ser,String path){
         try{ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));

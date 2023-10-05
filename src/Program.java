@@ -1,4 +1,5 @@
 import familyTree.FamilyTree;
+import fileHandler.FileHandler;
 import obj.Gender;
 import obj.dog.Dog;
 import obj.human.Human;
@@ -8,21 +9,21 @@ import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args){
-        FamilyTree tree = treeFamily();
+//        FamilyTree tree = treeFamily();
 //        System.out.println(tree);
 //        String filePath = "tree.txt";
 //        FileHandler fileHandler = new FileHandler();
-////        fileHandler.save(tree, filePath);
+//        fileHandler.save(tree, filePath);
 //        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
 //        System.out.println(tree);
+        FamilyTree tree = treeFamily();
         FamilyTree treedog = treeFamilyDog();
-
 
         System.out.println("Люди: Сортировка по Возрасту");
         tree.sortByAge();
         System.out.println(tree);
 
-        System.out.println("Собаки: Сортировка по Возрасту");
+        System.out.println("Собаки: СFamilyTree tree = treeFamily();ортировка по Возрасту");
         treedog.sortByAge();
         System.out.println(treedog);
 
