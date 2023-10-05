@@ -6,16 +6,27 @@ import serialization.FileHandler;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         String serializationFile = "src/serialization/saveFile.txt";
         FileHandler fileHandler = new FileHandler();
+        Scanner scanner = new Scanner(System.in);
 
-        FamilyTree familyTree = getCustomFamilyTree();
+        System.out.print("Запись (true) или чтение (false) > ");
+        boolean serializationFlag = scanner.nextBoolean();
+
+        FamilyTree familyTree;
+
+        if (serializationFlag) {
+            familyTree = getCustomFamilyTree();
+            fileHandler.writeObject(familyTree, serializationFile);
+        } else {
+            familyTree = (FamilyTree) fileHandler.readObject(serializationFile);
+        }
 
         System.out.println(familyTree);
-        fileHandler.writeObject(familyTree, serializationFile);
 
     }
 

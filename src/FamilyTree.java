@@ -1,9 +1,11 @@
 import people.Person;
+import serialization.FileHandler;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree extends FileHandler {
     private List<Person> peopleList;
     private String familyName;
     private int count = 1;
