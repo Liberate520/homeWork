@@ -1,3 +1,6 @@
+import human.Gender;
+import human.Human;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

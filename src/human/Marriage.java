@@ -1,3 +1,5 @@
+package human;
+
 import java.util.Date;
 
 //  Браки

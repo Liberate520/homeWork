@@ -1,3 +1,7 @@
+package fileWorker;
+
+import fileWorker.Writable;
+
 import java.io.*;
 
 public class FileWorker implements Writable {

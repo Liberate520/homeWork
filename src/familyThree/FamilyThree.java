@@ -1,16 +1,20 @@
-import javax.xml.crypto.Data;
+package familyThree;
+
+import human.Human;
+import human.Marriage;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
-public class FamilyThree {
+public class FamilyThree implements Iterable<Human> {
     private ArrayList<Human> familyMembers;
+    private double lastMarriageId = 1;
     public FamilyThree()
     {
         familyMembers = new ArrayList<>();
     }
-    double lastMarriageId = 1;
     public ArrayList<Human> getAllFamilyMembers()
     {
         return familyMembers;
@@ -50,5 +54,10 @@ public class FamilyThree {
     public Set<Human> getChildren(Human human )
     {
         return human.getChildren();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return null;
     }
 }

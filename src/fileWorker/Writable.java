@@ -1,3 +1,5 @@
+package fileWorker;
+
 import java.io.Serializable;
 
 public interface Writable {
