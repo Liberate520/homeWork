@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 
-import FamailyTree.FamilyTree;
-import Human.Gender;
-import Human.Human;
 import Writer.FileHandler;
+import model.famailyTree.FamilyTree;
+import model.human.Gender;
+import model.human.Human;
 
 public class Main {
         public static void main(String[] args) {
@@ -13,7 +13,19 @@ public class Main {
                 FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
                 System.out.println(tree);
                 fileHandler.save(tree, filePath);
+
+                
+
+                System.out.println("Сортирвка по Возрасту");
+                tree.sortByAge();
+                System.out.println(tree);
+
+                System.out.println("Сортировка по дате рождения");
+                tree.sortBirthDay();
+                System.out.println(tree);
         }
+
+        
 
         public static FamilyTree treeFamily() {
                 FamilyTree tree = new FamilyTree();

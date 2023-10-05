@@ -1,4 +1,4 @@
-package Human;
+package model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -190,6 +190,10 @@ public class Human implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public int compareTo(Human o){
+        return fistName.compareTo(o.getFistName());
     }
 }
     
