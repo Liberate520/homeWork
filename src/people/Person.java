@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person extends FileHandler {
+public class Person extends FileHandler implements Comparable<Person>{
     private int id;
     private String name;
     private LocalDate birthDate;
@@ -38,6 +38,18 @@ public class Person extends FileHandler {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public LocalDate getDeathDate() {
+        return deathDate;
     }
 
     public String getName() {
@@ -80,6 +92,11 @@ public class Person extends FileHandler {
     public String toString() {
         return  "\t" + name + " (" + gender + ")\n" +
                 "\t(" + birthDate.getYear() + " - " + deathDate.getYear() + ")\n";
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return name.compareTo(o.getName());
     }
 
 }

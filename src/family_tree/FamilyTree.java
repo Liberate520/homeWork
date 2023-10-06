@@ -1,11 +1,15 @@
+package family_tree;
+
 import people.Person;
+import people.comparators.PersonComparatorByBirthDate;
+import people.comparators.PersonComparatorByName;
 import serialization.FileHandler;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree extends FileHandler {
+public class FamilyTree extends FileHandler implements Iterable<Person>{
     private List<Person> peopleList;
     private String familyName;
     private int count = 1;
@@ -102,5 +106,17 @@ public class FamilyTree extends FileHandler {
     @Override
     public String toString() {
         return getFamilyInfo();
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(peopleList);
+    }
+
+    public void sortByName() {
+        peopleList.sort(new PersonComparatorByName());
+    }
+    public void sortByBirthDate() {
+        peopleList.sort(new PersonComparatorByBirthDate());
     }
 }

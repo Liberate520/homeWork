@@ -1,37 +1,39 @@
+import family_tree.FamilyTree;
 import people.Gender;
 import people.Person;
+import people.comparators.PersonComparatorByName;
 import serialization.FileHandler;
 
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String serializationFile = "src/serialization/saveFile.txt";
-        FileHandler fileHandler = new FileHandler();
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Запись (true) или чтение (false) > ");
-        boolean serializationFlag = scanner.nextBoolean();
+        FamilyTree familyTree = getCustomFamilyTree();
 
-        FamilyTree familyTree;
-
-        if (serializationFlag) {
-            familyTree = getCustomFamilyTree();
-            fileHandler.writeObject(familyTree, serializationFile);
-        } else {
-            familyTree = (FamilyTree) fileHandler.readObject(serializationFile);
+        // FamilyTree теперь итерируемый, ура
+        for (Person person: familyTree) {
+            System.out.println(person);
         }
+
+        System.out.println("_______________");
+
+        familyTree.sortByName();
+
+        System.out.println(familyTree);
+
+        System.out.println("_______________");
+
+        familyTree.sortByBirthDate();
 
         System.out.println(familyTree);
 
     }
 
-
-    static FamilyTree getCustomFamilyTree (){
+    static FamilyTree getCustomFamilyTree() {
         FamilyTree familyTree = new FamilyTree("Романовы");
 
         Person mihail = new Person("Михаил Федорович",
@@ -91,5 +93,17 @@ public class Main {
         familyTree.addInFamily(ivan5);
 
         return familyTree;
+    }
+
+    static void serializationFamilyTree(FamilyTree familyTree) {
+        FileHandler fileHandler = new FileHandler();
+        String serializationFile = "src/serialization/saveFile.txt";
+        fileHandler.writeObject(familyTree, serializationFile);
+    }
+
+    static FamilyTree deserializationFamilyTree() {
+        FileHandler fileHandler = new FileHandler();
+        String serializationFile = "src/serialization/saveFile.txt";
+        return (FamilyTree) fileHandler.readObject(serializationFile);
     }
 }
