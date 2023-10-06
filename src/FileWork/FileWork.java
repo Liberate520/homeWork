@@ -1,6 +1,8 @@
+package FileWork;
+
 import java.io.*;
 
-public class FileWork implements Save{
+public class FileWork implements Save {
 
 
 

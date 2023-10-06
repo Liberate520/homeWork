@@ -1,22 +1,26 @@
+package Human;
+
 import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private long id;
     private String firstName;
     private String lastName;
     private Gender sex;
+    private int age;
     private Human father;
     private Human mother;
     private Set<Human> children;
     private Human marriagePartner;
 
-    public Human(String firstName, String lastName, Gender sex) {
+    public Human(int id, String firstName, String lastName, Gender sex, int age) {
         this();
-        this.id = -1;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
+        this.age = age;
     }
     public Human() {
         children = new HashSet<>();
@@ -46,10 +50,10 @@ public class Human implements Serializable {
         return sex;
     }
     public boolean isMan() {
-        return (sex==Gender.M);
+        return (sex== Gender.M);
     }
     public boolean isWom() {
-        return (sex==Gender.W);
+        return (sex== Gender.W);
     }
 
     public void setSex(Gender sex) {
@@ -146,6 +150,8 @@ public class Human implements Serializable {
         sb.append(firstName);
         sb.append(" Famil: ");
         sb.append(lastName);
+        sb.append("Age: ");
+        sb.append(age);
         sb.append(" Father: ");
         if (father!= null) {
 
@@ -175,6 +181,7 @@ public class Human implements Serializable {
 
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -186,5 +193,16 @@ public class Human implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+
+    @Override
+    public int compareTo(Human o) {
+        long l = id - (long) o.getId();
+        return (int) l;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

@@ -1,27 +1,13 @@
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package FamTree;
 
-public class FamTree implements Serializable {
-//    private List<Human> humans;
-//    private Map<Human, List<Human>> relationships;
-//
-//    public FamTree() {
-//        this.humans = new ArrayList<>();
-//        this.relationships = new HashMap<>();
-//
-//    }
-//    public void addPers(Human person){
-//        humans.add(person);
-//    }
-//    public void addParentChildRelationship(Human parent, Human child) {
-//        if (!relationships.containsKey(parent)) {
-//            relationships.put(parent, new ArrayList<>());
-//        }
-//        relationships.get(parent).add(child);
-//    }
+import Human.Human;
+import Human.HumanComparatorName;
+import Human.HumanComparatorAge;
+import java.io.Serializable;
+import java.util.*;
+
+public class FamTree implements Serializable, Iterable<Human> {
+
     private long humId;
     private List<Human> humanList;
 
@@ -115,6 +101,19 @@ public class FamTree implements Serializable {
             sb.append('\n');
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+    public void sortName(){
+        humanList.sort(new HumanComparatorName());
+
+    }
+
+    public void sortAge(){
+        humanList.sort(new HumanComparatorAge());
     }
 }
 
