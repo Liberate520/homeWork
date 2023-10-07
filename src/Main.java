@@ -9,8 +9,8 @@ public class Main {
         public static void main(String[] args) {
                 String filePath = "src/Writer/treeFamily.txt";
                 FileHandler fileHandler = new FileHandler();
-//                FamilyTree tree = treeFamily();
-                FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+                FamilyTree tree = treeFamily();
+//                FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
                 System.out.println(tree);
                 fileHandler.save(tree, filePath);
 
