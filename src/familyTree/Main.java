@@ -14,7 +14,12 @@ import static familyTree.writer.FileHandler.serialization;
 public class Main implements Serializable {
     public static void main(String[] args) throws IOException {
         FamilyTree tree = testTree();
-        System.out.println(tree);
+        System.out.println("Without sort: " + tree);
+        tree.sortByName();
+        System.out.println("Sort by name: " + tree);
+        tree.sortByAge();
+        System.out.println("Sort by age (from lowest to highest): " + tree);
+
     }
 
     static FamilyTree testTree() throws IOException {
@@ -47,7 +52,6 @@ public class Main implements Serializable {
         serialization();
         return tree;
     }
-
 
 
 }
