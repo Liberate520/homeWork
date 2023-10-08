@@ -1,13 +1,13 @@
-package people;
+package person;
 
+import family_tree.FamilyTreeItem;
 import serialization.FileHandler;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person extends FileHandler implements Comparable<Person>{
+public class Person extends FileHandler implements Comparable<Person>, FamilyTreeItem {
     private int id;
     private String name;
     private LocalDate birthDate;

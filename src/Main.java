@@ -1,40 +1,40 @@
 import family_tree.FamilyTree;
-import people.Gender;
-import people.Person;
-import people.comparators.PersonComparatorByName;
+import person.Gender;
+import person.Person;
+import person.PersonService;
 import serialization.FileHandler;
 
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree familyTree = getCustomFamilyTree();
+        FamilyTree<Person> familyTree = getCustomFamilyTree();
 
         // FamilyTree теперь итерируемый, ура
         for (Person person: familyTree) {
             System.out.println(person);
         }
 
-        System.out.println("_______________");
-
-        familyTree.sortByName();
-
-        System.out.println(familyTree);
-
-        System.out.println("_______________");
-
-        familyTree.sortByBirthDate();
-
-        System.out.println(familyTree);
+//        System.out.println("_______________");
+//
+//        familyTree.sortByName();
+//
+//        System.out.println(familyTree);
+//
+//        System.out.println("_______________");
+//
+//        familyTree.sortByBirthDate();
+//
+//        System.out.println(familyTree);
 
     }
 
-    static FamilyTree getCustomFamilyTree() {
-        FamilyTree familyTree = new FamilyTree("Романовы");
+    static FamilyTree<Person> getCustomFamilyTree() {
+        FamilyTree<Person> familyTree = new FamilyTree<>("Романовы");
+        PersonService service = new PersonService();
 
         Person mihail = new Person("Михаил Федорович",
                 LocalDate.of(1596, Month.JULY, 22),
@@ -46,14 +46,14 @@ public class Main {
                 LocalDate.of(1645, Month.AUGUST, 18),
                 Gender.Female);
 
-        familyTree.isHusbands(mihail, evdakia);
+        service.isHusbands(mihail, evdakia);
 
         Person alexey = new Person("Алексей Михайлович",
                 LocalDate.of(1629, Month.MARCH, 19),
                 LocalDate.of(1676, Month.FEBRUARY, 8),
                 Gender.Male);
 
-        familyTree.isChildren(alexey, mihail, evdakia);
+        service.isChildren(alexey, mihail, evdakia);
 
         Person maria = new Person("Мария Ильинична",
                 LocalDate.of(1624, Month.APRIL, 11),
@@ -65,22 +65,22 @@ public class Main {
                 LocalDate.of(1694, Month.FEBRUARY, 4),
                 Gender.Female);
 
-        familyTree.isHusbands(alexey, maria);
-        familyTree.isHusbands(alexey, natalya);
+        service.isHusbands(alexey, maria);
+        service.isHusbands(alexey, natalya);
 
         Person petr1 = new Person("Петр I Алексеевич",
                 LocalDate.of(1672, Month.JUNE, 9),
                 LocalDate.of(1725, Month.FEBRUARY, 8),
                 Gender.Male);
 
-        familyTree.isChildren(petr1, alexey, natalya);
+        service.isChildren(petr1, alexey, natalya);
 
         Person ivan5 = new Person("Иоанн V Алексеевич",
                 LocalDate.of(1666, Month.SEPTEMBER, 6),
                 LocalDate.of(1696, Month.FEBRUARY, 8),
                 Gender.Male);
 
-        familyTree.isChildren(ivan5, alexey, maria);
+        service.isChildren(ivan5, alexey, maria);
 
         // System.out.println(familyTree.getPersonInfo(alexey));
 
@@ -95,13 +95,13 @@ public class Main {
         return familyTree;
     }
 
-    static void serializationFamilyTree(FamilyTree familyTree) {
+    static void serializationFamilyTree(FamilyTree<Person> familyTree) {
         FileHandler fileHandler = new FileHandler();
         String serializationFile = "src/serialization/saveFile.txt";
         fileHandler.writeObject(familyTree, serializationFile);
     }
 
-    static FamilyTree deserializationFamilyTree() {
+    static FamilyTree<Person> deserializationFamilyTree() {
         FileHandler fileHandler = new FileHandler();
         String serializationFile = "src/serialization/saveFile.txt";
         return (FamilyTree) fileHandler.readObject(serializationFile);
