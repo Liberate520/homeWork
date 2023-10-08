@@ -3,17 +3,29 @@ package FamilyTree;
 import FamilyTree.FamilyTree.FamilyTree;
 import FamilyTree.human.Gender;
 import FamilyTree.human.Human;
+import FamilyTree.writer.FileHandler;
 
+import java.io.IOException;
 import java.time.LocalDate;
+
 
 public class Main {
     // Добавлять людей и связи между ними.
-    public static void main(String[] args) {
-        FamilyTree tree = testTree();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        String filePath = "E:\\GB\\2 четверть\\ООП\\Homework\\Project\\src\\FamilyTree\\writer\\Human.out";
+        FileHandler fileHandler = new FileHandler();
+
+        //FamilyTree tree = testTree();
+        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
         System.out.println(tree);
+
+        //fileHandler.write(tree, filePath);
     }
+
     static  FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
+
+
 
         Human andrey = new Human("andrey", Gender.Male, LocalDate.of(1983,10,1));
         Human masha = new Human("masha", Gender.Female, LocalDate.of(1987,1,19));
