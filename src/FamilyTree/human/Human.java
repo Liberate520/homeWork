@@ -1,13 +1,14 @@
 package FamilyTree.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable, Comparable<Human> {
     private long id;
-    private  String Name;
+    private String Name;
     private Gender gender;
     private LocalDate dataBirth;
     private LocalDate dataDeath;
@@ -35,36 +36,36 @@ public class Human {
         this(name, gender, dataBirth, null, mother, father);
     }
 
-    public boolean addChildren(Human child){
-        if (!children.contains(child)){
+    public boolean addChildren(Human child) {
+        if (!children.contains(child)) {
             children.add(child);
             return true;
         }
         return false;
     }
 
-    public void addParent(Human parent){
-        if (parent.getGender().equals(Gender.Male)){
+    public void addParent(Human parent) {
+        if (parent.getGender().equals(Gender.Male)) {
             setFather(parent);
-        } else if (parent.getGender().equals(Gender.Female)){
+        } else if (parent.getGender().equals(Gender.Female)) {
             setMother(parent);
         }
     }
 
-    public int getAge(){
-        if (dataDeath == null){
+    public int getAge() {
+        if (dataDeath == null) {
             return getPeriod(dataBirth, LocalDate.now());
-        } else{
+        } else {
             return getPeriod(dataBirth, dataDeath);
         }
     }
 
-    public  int getPeriod(LocalDate dataBirth, LocalDate dataDeath){
+    public int getPeriod(LocalDate dataBirth, LocalDate dataDeath) {
         Period diff = Period.between(dataBirth, dataDeath);
         return diff.getYears();
     }
 
-    public  String getInfo(){
+    public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("id: ");
         stringBuilder.append(id);
@@ -85,18 +86,19 @@ public class Human {
         return stringBuilder.toString();
     }
 
-    public String getSpouseInfo(){
+    public String getSpouseInfo() {
         String res = "spouse: ";
-        if (spouse == null){
+        if (spouse == null) {
             res += "no";
         } else {
             res += spouse.getName();
         }
         return res;
     }
-    public String getMotherInfo(){
+
+    public String getMotherInfo() {
         String res = "mother: ";
-        if (mother != null){
+        if (mother != null) {
             res += mother.getName();
         } else {
             res += "unknown";
@@ -104,9 +106,9 @@ public class Human {
         return res;
     }
 
-    public String getFatherInfo(){
+    public String getFatherInfo() {
         String res = "father: ";
-        if (father != null){
+        if (father != null) {
             res += father.getName();
         } else {
             res += "unknown";
@@ -114,12 +116,12 @@ public class Human {
         return res;
     }
 
-    public String getChildrenInfo(){
+    public String getChildrenInfo() {
         StringBuilder res = new StringBuilder();
         res.append("children: ");
-        if (children.size() != 0){
+        if (children.size() != 0) {
             res.append(children.get(0).getName());
-            for (int i = 1; i < children.size(); i++){
+            for (int i = 1; i < children.size(); i++) {
                 res.append(", ");
                 res.append(children.get(i).getName());
             }
@@ -136,10 +138,10 @@ public class Human {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj){
+        if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Human)){
+        if (!(obj instanceof Human)) {
             return false;
         }
         Human human = (Human) obj;
@@ -216,6 +218,11 @@ public class Human {
 
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return Name.compareTo(o.getName());
     }
 }
 
