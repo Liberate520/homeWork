@@ -1,23 +1,32 @@
 package FamTree;
 
 import Human.Human;
-import Human.HumanComparatorName;
-import Human.HumanComparatorAge;
+import Human.ComparatorName;
+import Human.ComparatorAge;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamTree implements Serializable, Iterable<Human> {
+public class FamTree<E extends TreeMembers<E>> implements Serializable, Iterable<E> {
 
     private long humId;
-    private List<Human> humanList;
+    private List<E> humanList;
 
     public FamTree() {
         this(new ArrayList<>());
     }
-    public FamTree(List<Human> humanList) {
+    public FamTree(List<E> humanList) {
         this.humanList = humanList;
     }
-    public boolean addHum(Human human){
+   public void setId(long id){
+        this.humId = id;
+
+    }
+    long getId(){
+        return humId;
+    }
+
+
+    public boolean addHum(E human){
         if (human == null) {
             return false;
         }
@@ -31,9 +40,9 @@ public class FamTree implements Serializable, Iterable<Human> {
         return true;
     }
 
-    private void addToPerents(Human human){
-        Human mother = human.getMother();
-        Human father = human.getFather();
+    private void addToPerents(E human){
+        E mother = human.getMother();
+        E father = human.getFather();
         if(mother != null){
             mother.addChildren(human);
         }
@@ -42,13 +51,13 @@ public class FamTree implements Serializable, Iterable<Human> {
         }
     }
 
-    private void addToChildren(Human human){
-        for (Human child: human.getChildren()){
+    private void addToChildren(E human){
+        for (E child: human.getChildren()){
             addToPerents(human);
         }
     }
-    public Human getHumahById(long id){
-        for (Human human: humanList){
+    public E getHumahById(long id){
+        for (E human: humanList){
             if (human.getId() == id){
                 return human;
             }
@@ -56,9 +65,9 @@ public class FamTree implements Serializable, Iterable<Human> {
     return null;
     }
 
-    public List<Human> getByFullName(String name, String soname){
-        List<Human> res = new ArrayList<>();
-        for (Human human: humanList) {
+    public List<E> getByFullName(String name, String soname){
+        List<E> res = new ArrayList<>();
+        for (E human: humanList) {
             if (human.getFirstName().equals(name) && human.getLastName().equals(soname)){
                 res.add(human);
 
@@ -67,25 +76,57 @@ public class FamTree implements Serializable, Iterable<Human> {
         }
         return res;
     }
-    public Human[] getGrandFathers(Human human) {
-        Human[] grandFathers = new Human[2];
-        if (human.getMother() != null) {
-            grandFathers[0] = human.getMother().getFather();
+//    public List<E> getGrandFathers(E human) {
+//        ArrayList<E> grandFathers;
+//        grandFathers = new ArrayList<>();
+//        if (human.getMother() != null) {
+//            grandFathers.get(0) = human.getMother().getFather();
+//        }
+//        if(human.getFather() != null) {
+//            grandFathers.get(1) = human.getFather().getFather();
+//        }
+//        return grandFathers;
+//    }
+//    public Human[] getGrandMothers(Human human) {
+//        Human[] grandMothers = new Human[2];
+//        if (human.getMother() != null) {
+//            grandMothers[0] = human.getMother().getMother();
+//        }
+//        if(human.getFather() != null) {
+//            grandMothers[1] = human.getFather().getMother();
+//        }
+//        return grandMothers;
+//    }
+
+    String getInfo(E human){
+        StringBuilder sb = new StringBuilder();
+        sb.append("id: ");
+        sb.append(humId);
+        sb.append(" Name: ");
+        sb.append(human.getFirstName());
+        sb.append(" Famil: ");
+        sb.append(human.getLastName());
+        sb.append("Age: ");
+        sb.append(human.getAge());
+        sb.append(" Father: ");
+        if (human.getFather()!= null) {
+
+            sb.append(human.getFather().getFirstName());
         }
-        if(human.getFather() != null) {
-            grandFathers[1] = human.getFather().getFather();
+        else {
+            sb.append(" n/a");
         }
-        return grandFathers;
-    }
-    public Human[] getGrandMothers(Human human) {
-        Human[] grandMothers = new Human[2];
-        if (human.getMother() != null) {
-            grandMothers[0] = human.getMother().getMother();
+        sb.append(" Mother: ");
+        if (human.getMother()!= null) {
+
+            sb.append(human.getMother().getFirstName());
         }
-        if(human.getFather() != null) {
-            grandMothers[1] = human.getFather().getMother();
+        else {
+            sb.append(" n/a");
         }
-        return grandMothers;
+
+        sb.append(human.getChildrenInf());
+        return sb.toString();
     }
 @Override
     public String toString(){
@@ -96,24 +137,25 @@ public class FamTree implements Serializable, Iterable<Human> {
         StringBuilder sb = new StringBuilder();
         sb.append("Family Try ");
         sb.append('\n');
-        for (Human human: humanList) {
+        for (E human: humanList) {
             sb.append(human.getInfo());
             sb.append('\n');
         }
         return sb.toString();
     }
 
-    @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
-    }
-    public void sortName(){
-        humanList.sort(new HumanComparatorName());
+       public void sortName(){
+        humanList.sort(new ComparatorName());
 
     }
 
     public void sortAge(){
-        humanList.sort(new HumanComparatorAge());
+        humanList.sort(new ComparatorAge());
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return null;
     }
 }
 

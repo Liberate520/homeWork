@@ -1,9 +1,11 @@
 package Human;
 
+import FamTree.TreeMembers;
+
 import java.io.Serializable;
 import java.util.*;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, TreeMembers {
     private long id;
     private String firstName;
     private String lastName;
@@ -64,6 +66,7 @@ public class Human implements Serializable, Comparable<Human> {
         return father;
     }
 
+
     public void setFather(Human father) {
         this.father = father;
         father.addChildrenWithoutSettingParents(this);
@@ -75,6 +78,11 @@ public class Human implements Serializable, Comparable<Human> {
     }
     public Human getMother() {
         return mother;
+    }
+
+    @Override
+    public void setFather(Object father) {
+
     }
 
     public void setMother(Human mother) {
@@ -204,5 +212,10 @@ public class Human implements Serializable, Comparable<Human> {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public void addChildren(Object[] children) {
+
     }
 }

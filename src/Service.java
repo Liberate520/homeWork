@@ -19,7 +19,7 @@ public class Service implements Serializable {
     public String getHumanListInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("Family tree \n");
-        for (Human human : famtree){
+        for (Object human : famtree){
             sb.append(human);
             sb.append("\n");
         }

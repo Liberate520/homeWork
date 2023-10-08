@@ -5,12 +5,14 @@ import Human.Human;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<E> implements Iterator<E>{
     private int ind;
-    private List<Human> humansList;
-    public  HumanIterator(List<Human> humansList){
+    private List<E> humansList;
+    public  HumanIterator(List<E> humansList){
         this.humansList = humansList;
     }
+
+
 
     @Override
     public boolean hasNext() {
@@ -18,7 +20,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return humansList.get(ind++);
     }
 }
