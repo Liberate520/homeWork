@@ -1,10 +1,12 @@
 package human;
 
+import familyThree.FamilyThreeElement;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Human {
+public class Human implements FamilyThreeElement<Human> {
     private double id;
     private Gender gender;
     private String firstName;

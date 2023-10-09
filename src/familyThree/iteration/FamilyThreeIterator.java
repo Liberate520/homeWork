@@ -1,15 +1,16 @@
 package familyThree.iteration;
 
+import familyThree.FamilyThreeElement;
 import human.Human;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FamilyThreeIterator implements Iterator<Human> {
-    private ArrayList<Human> familyMembers;
+public class FamilyThreeIterator<E extends FamilyThreeElement<E>> implements Iterator<E> {
+    private ArrayList<E> familyMembers;
     private int i = 0;
 
-    public FamilyThreeIterator( ArrayList<Human> familyMembers )
+    public FamilyThreeIterator( ArrayList<E> familyMembers )
     {
         this.familyMembers = familyMembers;
     }
@@ -20,7 +21,7 @@ public class FamilyThreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return familyMembers.get( this.i++ );
     }
 }
