@@ -8,27 +8,32 @@ public class FamilyTree {
     }
 
     // Дообавить ребёнка родителю
-    public void addChild(Relationship parent, Human child) {
+    public void addChild(Activities parent, Human child) {
 
     }
-
     // Дообавить родителя ребёнку
-    public void addParent(Relationship parent, Human child) {
+    public void addParent(Activities parent, Human child) {
 
     }
 
-    // Связать родителей
-    public void addVife(Relationship vife, Relationship husband) {
+    // Женить родителей
+    public void addVife(Activities vife, Human husband) {
+
+    }
+    public void addHusband(Activities husband, Human vife) {
 
     }
 
     // Добавить сестру
-    public void addSister(Relationship sister, Relationship brother) {
+    public void addSister(Activities sister, Activities brother) {
 
     }
-
     // Добавить брата
-    public void addBrother(Relationship sister, Relationship brother) {
+    public void addBrother(Activities sister, Activities brother) {
+
+    }
+    // Добавить дедов
+    public void addGrandparent(Activities grandparent, Activities child) {
 
     }
 }

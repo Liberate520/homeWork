@@ -6,19 +6,21 @@ public class Human {
     private long id;
     private String fullName;
     private Gender gender;
-    private Relationship relationship;
+    private Activities relationship;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Human> child;
+    private List<Human> mother;
+    private List<Human> father;
 
-    public Human(String fullName, Gender gender, Relationship relationship,
+    public Human(String fullName, Gender gender, Activities relationship,
                  LocalDate birthDate, LocalDate deathDate) {
         id = -1;
         this.fullName = fullName;
         this.gender = gender;
+        this.relationship = relationship;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-        this.relationship = relationship;
         child = new ArrayList<>();
     }
 
@@ -43,10 +45,10 @@ public class Human {
         this.gender = gender;
     }
 
-    public Relationship getRelationship() {
+    public Activities getRelationship() {
         return relationship;
     }
-    public void setRelationship(Relationship relationship) {
+    public void setRelationship(Activities relationship) {
         this.relationship = relationship;
     }
 
