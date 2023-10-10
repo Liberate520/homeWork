@@ -13,7 +13,7 @@ import static familyTree.writer.FileHandler.serialization;
 
 public class Main implements Serializable {
     public static void main(String[] args) throws IOException {
-        FamilyTree tree = testTree();
+        FamilyTree<Human> tree = testTree();
         System.out.println("Without sort: " + tree);
         tree.sortByName();
         System.out.println("Sort by name: " + tree);
@@ -22,8 +22,8 @@ public class Main implements Serializable {
 
     }
 
-    static FamilyTree testTree() throws IOException {
-        FamilyTree tree = new FamilyTree();
+    static FamilyTree<Human> testTree() throws IOException {
+        FamilyTree<Human> tree = new FamilyTree();
 
         Human dinara = new Human("Динара",
                 LocalDate.of(1998, 1, 31),

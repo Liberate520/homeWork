@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, Iterable<T> {
     private int humanId;
-    private List<Human> humanList;
+    private List<T> humanList;
 
 //    public FamilyTree() {
 //        this(new ArrayList<>());
@@ -23,7 +23,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
 
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<T> humanList) {
         this.humanList = humanList;
     }
 
@@ -36,7 +36,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this.humanId = humanId;
     }
 
-    public boolean add(Human human) {
+    public boolean add(T human) {
         if (human == null) {
             return false;
         }
@@ -51,11 +51,11 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    public Human getById(int id) {
+    public T getById(int id) {
         if (!checkId(id)) {
             return null;
         }
-        for (Human human : humanList) {
+        for (T human : humanList) {
             if (human.getId() == id) {
                 return human;
             }
@@ -63,20 +63,20 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return null;
     }
 
-    public List<Human> getSiblings(int id) {
-        Human human = getById(id);
+    public List<T> getSiblings(int id) {
+        T human = getById(id);
         if (human == null) {
             return null;
         }
-        List<Human> res = new ArrayList<>();
-        Human mother = human.getMother();
-        Human father = human.getFather();
-        for (Human child : mother.getChildren()) {
+        List<T> res = new ArrayList<>();
+        T mother = human.getMother();
+        T father = human.getFather();
+        for (T child : mother.getChildren()) {
             if (!child.equals(human)) {
                 res.add(child);
             }
         }
-        for (Human child : father.getChildren()) {
+        for (T child : father.getChildren()) {
             if (!child.equals(human) && !res.contains(child)) {
                 res.add(child);
             }
@@ -84,9 +84,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return res;
     }
 
-    public List<Human> getByName(String name) {
-        List<Human> res = new ArrayList<>();
-        for (Human human : humanList) {
+    public List<T> getByName(String name) {
+        List<T> res = new ArrayList<>();
+        for (T human : humanList) {
             if (human.getName().equals(name)) {
                 res.add(human);
             }
@@ -97,14 +97,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public boolean setWedding(int humanId1, int humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
+            T human1 = getById(humanId1);
+            T human2 = getById(humanId2);
             return setWedding(human1, human2);
         }
         return false;
     }
 
-    public boolean setWedding(Human human1, Human human2) {
+    public boolean setWedding(T human1, T human2) {
         if (human1.getSpouse() == null && human2.getSpouse() == null) {
             human1.setSpouse(human2);
             human2.setSpouse(human1);
@@ -116,14 +116,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public boolean setDevorce(int humanId1, int humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
+            T human1 = getById(humanId1);
+            T human2 = getById(humanId2);
             return setDevorce(human1, human2);
         }
         return false;
     }
 
-    public boolean setDevorce(Human human1, Human human2) {
+    public boolean setDevorce(T human1, T human2) {
         if (human1.getSpouse() != null && human2.getSpouse() != null) {
             human1.setSpouse(null);
             human2.setSpouse(null);
@@ -136,15 +136,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public boolean remove(int humanId) {
         if (checkId(humanId)) {
-            Human person = getById(humanId);
+            T person = getById(humanId);
             return humanList.remove(person);
         }
         return false;
     }
 
-    private void addToParents(Human human) {
-        Human mother = human.getMother();
-        Human father = human.getFather();
+    private void addToParents(T human) {
+        T mother = human.getMother();
+        T father = human.getFather();
         if (mother != null) {
             mother.addChild(human);
         }
@@ -153,8 +153,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    private void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
+    private void addToChildren(T human) {
+        for (T child : human.getChildren()) {
             child.addParent(human);
         }
     }
@@ -164,7 +164,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         if (id >= humanId || id < 0) {
             return false;
         }
-        for (Human human : humanList) {
+        for (T human : humanList) {
             if (human.getId() == id) {
                 return true;
             }
@@ -178,7 +178,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sb.append("In the tree ");
         sb.append(humanList.size());
         sb.append(" values: \n");
-        for (Human human : humanList) {
+        for (T human : humanList) {
             sb.append(human);
             sb.append("\n");
         }
@@ -189,7 +189,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return getInfo();
     }
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<T> iterator() {
         return new HumanIterator(humanList);
     }
 
