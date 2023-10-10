@@ -7,30 +7,37 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FamilyGroupItem<T> {
+
+    void setId(long id);
+
+    long getId();
+
+    T getMother();
+
+    T getFather();
+
     boolean addChild(T value);
 
     void addParent(T value);
 
-    long getId();
-
-    void setId(int id);
-
     String getName();
 
-    void setName(String name);
-    LocalDate getDateOfBirth();
-//    void setDateOfBirth(LocalDate dateOfBirth);
     LocalDate getDateOfDeath();
-    int getAge();
-    Gender getGender();
-    T getMother();
-    T getFather();
-    List<T> getChildren();
-    T getSpouse();
-    void setSpouse(T value);
-    void setDevorce(T value);
-//    String getMotherInfo();
 
-    void addToParents(T value);
-    void addToChilderen(T value);
+    LocalDate getDateOfBirth();
+
+    List<T> getChildren();
+
+    T getSpouse();
+
+    void setSpouse(T value);
+
+    int getAge();
+//    void setName(String name);
+//    Gender getGender();
+//    void setDevorce(T value);
+//    void addToParents(T value);
+//    void addToChilderen(T value);
+//    void setDateOfBirth(LocalDate dateOfBirth);
+
 }

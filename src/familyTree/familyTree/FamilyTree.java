@@ -1,7 +1,6 @@
 package familyTree.familyTree;
 
-import familyTree.familyTree.iterator.HumanIterator;
-import familyTree.human.Human;
+import familyTree.familyTree.iterator.FamilyTreeIterator;
 import familyTree.human.comparators.HumanComparatorByAge;
 import familyTree.human.comparators.HumanComparatorByName;
 
@@ -10,17 +9,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, Iterable<T> {
+public class FamilyTree<T extends FamilyGroupItem<T>>
+        implements Serializable, Iterable<T> {
     private int humanId;
     private List<T> humanList;
 
-//    public FamilyTree() {
-//        this(new ArrayList<>());
-//    }
-
     public FamilyTree() {
-        humanList = new ArrayList<>();
+        this(new ArrayList<>());
     }
+
+//    public FamilyTree() {
+//        humanList = new ArrayList<>();
+//    }
 
 
     public FamilyTree(List<T> humanList) {
@@ -28,56 +28,57 @@ public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, I
     }
 
 
-    public int getId() {
-        return humanId;
-    }
+//    public int getId() {
+//        return humanId;
+//    }
 
-    public void setId(int humanId) {
-        this.humanId = humanId;
-    }
+//    public void setId(int humanId) {
+//        this.humanId = humanId;
+//    }
 
-    public boolean add(T human) {
-        if (human == null) {
+    public boolean add(T el) {
+        if (el == null) {
             return false;
         }
-        if (!humanList.contains(human)) {
-            humanList.add(human);
-            human.setId(humanId++);
+        if (!humanList.contains(el)) {
+            humanList.add(el);
+            el.setId(humanId++);
 
-            addToParents(human);
-            addToChildren(human);
+            addToParents(el);
+            addToChildren(el);
             return true;
         }
         return false;
     }
 
-    public T getById(int id) {
+    public T getById(long id) {
         if (!checkId(id)) {
             return null;
         }
-        for (T human : humanList) {
-            if (human.getId() == id) {
-                return human;
+        for (T el : humanList) {
+            if (el.getId() == id) {
+                return el;
             }
         }
         return null;
     }
 
     public List<T> getSiblings(int id) {
-        T human = getById(id);
-        if (human == null) {
+        T el = getById(id);
+        if (el == null) {
             return null;
         }
         List<T> res = new ArrayList<>();
-        T mother = human.getMother();
-        T father = human.getFather();
+
+        T mother = el.getMother();
+        T father = el.getFather();
         for (T child : mother.getChildren()) {
-            if (!child.equals(human)) {
+            if (!child.equals(el)) {
                 res.add(child);
             }
         }
         for (T child : father.getChildren()) {
-            if (!child.equals(human) && !res.contains(child)) {
+            if (!child.equals(el) && !res.contains(child)) {
                 res.add(child);
             }
         }
@@ -86,28 +87,28 @@ public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, I
 
     public List<T> getByName(String name) {
         List<T> res = new ArrayList<>();
-        for (T human : humanList) {
-            if (human.getName().equals(name)) {
-                res.add(human);
+        for (T el : humanList) {
+            if (el.getName().equals(name)) {
+                res.add(el);
             }
         }
         return res;
     }
 
 
-    public boolean setWedding(int humanId1, int humanId2) {
+    public boolean setWedding(long humanId1, long humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
-            T human1 = getById(humanId1);
-            T human2 = getById(humanId2);
-            return setWedding(human1, human2);
+            T el1 = getById(humanId1);
+            T el2 = getById(humanId2);
+            return setWedding(el1, el2);
         }
         return false;
     }
 
-    public boolean setWedding(T human1, T human2) {
-        if (human1.getSpouse() == null && human2.getSpouse() == null) {
-            human1.setSpouse(human2);
-            human2.setSpouse(human1);
+    public boolean setWedding(T el1, T el2) {
+        if (el1.getSpouse() == null && el2.getSpouse() == null) {
+            el1.setSpouse(el2);
+            el2.setSpouse(el1);
             return true;
         } else {
             return false;
@@ -116,17 +117,17 @@ public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, I
 
     public boolean setDevorce(int humanId1, int humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
-            T human1 = getById(humanId1);
-            T human2 = getById(humanId2);
-            return setDevorce(human1, human2);
+            T el1 = getById(humanId1);
+            T el2 = getById(humanId2);
+            return setDevorce(el1, el2);
         }
         return false;
     }
 
-    public boolean setDevorce(T human1, T human2) {
-        if (human1.getSpouse() != null && human2.getSpouse() != null) {
-            human1.setSpouse(null);
-            human2.setSpouse(null);
+    public boolean setDevorce(T el1, T el2) {
+        if (el1.getSpouse() != null && el2.getSpouse() != null) {
+            el1.setSpouse(null);
+            el2.setSpouse(null);
             return true;
         } else {
             return false;
@@ -134,42 +135,43 @@ public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, I
     }
 
 
-    public boolean remove(int humanId) {
+    public boolean remove(long humanId) {
         if (checkId(humanId)) {
-            T person = getById(humanId);
-            return humanList.remove(person);
+            T el = getById(humanId);
+            return humanList.remove(el);
         }
         return false;
     }
 
-    private void addToParents(T human) {
-        T mother = human.getMother();
-        T father = human.getFather();
+    private void addToParents(T el) {
+        T mother = el.getMother();
+        T father = el.getFather();
         if (mother != null) {
-            mother.addChild(human);
+            mother.addChild(el);
         }
         if (father != null) {
-            father.addChild(human);
+            father.addChild(el);
         }
     }
 
-    private void addToChildren(T human) {
-        for (T child : human.getChildren()) {
-            child.addParent(human);
+    private void addToChildren(T el) {
+        for (T child : el.getChildren()) {
+            child.addParent(el);
         }
     }
 
     // TODO: 10/1/2023 method wrote by myself
-    private boolean checkId(int id) {
-        if (id >= humanId || id < 0) {
-            return false;
-        }
-        for (T human : humanList) {
-            if (human.getId() == id) {
-                return true;
-            }
-        }
-        return false;
+    private boolean checkId(long id) {
+//        if (id >= humanId || id < 0) {
+//            return false;
+//        }
+//        for (T el : humanList) {
+//            if (el.getId() == id) {
+//                return true;
+//            }
+//        }
+//        return false;
+        return id < humanId && id >= 0;
     }
 
 
@@ -178,26 +180,28 @@ public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, I
         sb.append("In the tree ");
         sb.append(humanList.size());
         sb.append(" values: \n");
-        for (T human : humanList) {
-            sb.append(human);
+        for (T el : humanList) {
+            sb.append(el);
             sb.append("\n");
         }
         return sb.toString();
     }
+
     @Override
     public String toString() {
         return getInfo();
     }
+
     @Override
     public Iterator<T> iterator() {
-        return new HumanIterator(humanList);
+        return new FamilyTreeIterator(humanList);
     }
 
-    public void sortByName(){
+    public void sortByName() {
         humanList.sort(new HumanComparatorByName());
     }
 
-    public void sortByAge(){
+    public void sortByAge() {
         humanList.sort(new HumanComparatorByAge());
     }
 

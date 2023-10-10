@@ -5,7 +5,7 @@ import familyTree.human.Human;
 
 import java.util.Comparator;
 
-public class HumanComparatorByName<T extends FamilyGroupItem>
+public class HumanComparatorByName<T extends FamilyGroupItem<T>>
         implements Comparator<T> {
 
     @Override

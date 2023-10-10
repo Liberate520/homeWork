@@ -7,7 +7,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements FamilyGroupItem<Human> {
+public class Human<T extends FamilyGroupItem> implements FamilyGroupItem<Human> {
     private long id;
     private String name;
     private Gender gender;
