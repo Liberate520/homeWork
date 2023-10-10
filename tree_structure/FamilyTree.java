@@ -1,7 +1,7 @@
 package tree_structure;
 
 
-import members.Human;
+//import members.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.*;
 
 import comparators.HumanComparatorByBirthdayDate;
 import comparators.HumanComparatorByName;
-//import comparators.HumanComparatorBySurname;
+import comparators.HumanComparatorBySurname;
 import iterators.HumanIterator;
 
 
@@ -20,17 +20,25 @@ import iterators.HumanIterator;
 public class FamilyTree <E extends Subject> implements Serializable, Iterable<E>{
     private int id;
     private int humanId;
+    private int dogId;
     private List<E> humanList;
+    private List<E> dogList;
 
 
     public FamilyTree(int id){
         this.id = id;
         humanList = new ArrayList<>();
+        dogList = new ArrayList<>();
     }
 
     public void addHuman(E human){
-        ((Human) human).setId(humanId++);
+        ((Subject) human).setId(humanId++);
         humanList.add(human);
+    }
+
+    public void addDog(E dog){
+        ((Subject) dog).setId(dogId++);
+        dogList.add(dog);
     }
 
     public String getHumanInfo(){
@@ -43,20 +51,31 @@ public class FamilyTree <E extends Subject> implements Serializable, Iterable<E>
         }
         return stringBuilder.toString();
     }
+    public String getDogInfo(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Members list:\n");
+        for (E dog: dogList){
+            stringBuilder.append(dog);
+            stringBuilder.append("\n");
+            
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public Iterator<E> iterator(){
-        return new HumanIterator(humanList);
+        return new HumanIterator<>(humanList);
     }
     public void sortbyName(){
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortbyBirthdate(){
-        humanList.sort(new HumanComparatorByBirthdayDate());
+        humanList.sort(new HumanComparatorByBirthdayDate<>());
     }
    
-    /*public void sortbySurname(){
-        humanList.sort(new HumanComparatorBySurname());
-    }/* */
+    public void sortbySurname(){
+        humanList.sort(new HumanComparatorBySurname<>());
+    }
 }
 

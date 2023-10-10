@@ -72,4 +72,16 @@ public class Human implements Serializable, Comparable<Human>, Subject{
         throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
     }
 
+    @Override
+    public Object Human() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Human'");
+    }
+
+    @Override
+    public Object Dog() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Dog'");
+    }
+
 }   
