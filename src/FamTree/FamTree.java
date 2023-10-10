@@ -155,7 +155,7 @@ public class FamTree<E extends TreeMembers<E>> implements Serializable, Iterable
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new HumanIterator<E>(humanList);
     }
 }
 
