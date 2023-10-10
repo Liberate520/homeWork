@@ -26,7 +26,7 @@ public class MainMenu {
             Command command = commandList.get(i);
             sb.append(i+1);
             sb.append(". ");
-            sb.append(commandList.getDescription());
+            sb.append(command.getDescription());
             //Не работает гет дискрипшн
             sb.append("\n");
         }
