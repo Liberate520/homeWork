@@ -1,6 +1,6 @@
-package ru.gb.family_tree.Family;
+package ru.gb.family_tree.Model.Family.Family;
 
-import ru.gb.family_tree.Tree.FamilyTreeItem;
+import ru.gb.family_tree.Model.Family.Tree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -62,6 +62,17 @@ public class Human implements Serializable, FamilyTreeItem {
     public Human getMother() {
         return mother;
     }
+
+    @Override
+    public boolean addChild(Object human) {
+        return false;
+    }
+
+    @Override
+    public boolean addParent(Object human) {
+        return false;
+    }
+
     public void setFather(Human father) {
         this.father = father;
     }
@@ -129,6 +140,12 @@ public class Human implements Serializable, FamilyTreeItem {
     public Human getSpouse() {
         return spouse;
     }
+
+    @Override
+    public void setSpouse(Object human) {
+
+    }
+
     public long getId() {
         return id;
     }
@@ -146,6 +163,11 @@ public class Human implements Serializable, FamilyTreeItem {
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    @Override
+    public List getParents() {
+        return null;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {

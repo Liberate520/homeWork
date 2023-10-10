@@ -1,7 +1,5 @@
 package ru.gb.family_tree.writer;
 
-import ru.gb.family_tree.Tree.FamilyTree;
-
 import java.io.*;
 
 public class FileHandler implements Saveble{

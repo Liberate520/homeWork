@@ -1,20 +1,17 @@
-package ru.gb.family_tree.Tree;
+package ru.gb.family_tree.Model.Family.Tree;
 
-import ru.gb.family_tree.Family.Human;
-import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByAge;
-import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByGender;
-import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByName;
-import ru.gb.family_tree.Family.ComparatotBy.HumanComparatorByDateOfBirth;
-import ru.gb.family_tree.HumanIterator;
+import ru.gb.family_tree.Model.Family.ComparatotBy.HumanComparatorByAge;
+import ru.gb.family_tree.Model.Family.ComparatotBy.HumanComparatorByGender;
+import ru.gb.family_tree.Model.Family.ComparatotBy.HumanComparatorByName;
+import ru.gb.family_tree.Model.Family.ComparatotBy.HumanComparatorByDateOfBirth;
+import ru.gb.family_tree.Model.Family.Family.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
-public class FamilyTree<E extends FamilyTreeItem> implements Iterable<E>,Serializable {
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Iterable<E>,Serializable {
     private long humanId;
     private List<E> humans;
 
@@ -33,8 +30,8 @@ public class FamilyTree<E extends FamilyTreeItem> implements Iterable<E>,Seriali
         if (!humans.contains(human)) {
             humans.add(human);
             human.setId(humanId++);
-            addToParents((Human) human);
-            addToChildren((Human) human);
+            addToParents(human);
+            addToChildren(human);
             return true;
         }
         return false;
@@ -49,9 +46,9 @@ public class FamilyTree<E extends FamilyTreeItem> implements Iterable<E>,Seriali
         return null;
     }
 
-    private void addToParents(Human human) {
-        Human mother = human.getMother();
-        Human father = human.getFather();
+    private void addToParents(E human) {
+        E mother = human.getMother();
+        E father = human.getFather();
         if (mother != null) {
             mother.addChild(human);
         }
@@ -60,27 +57,27 @@ public class FamilyTree<E extends FamilyTreeItem> implements Iterable<E>,Seriali
         }
     }
 
-    private void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
+    private void addToChildren(E human) {
+        for (E child : human.getChildren()) {
             child.addParent(human);
         }
     }
 
-    public List<Human> getSiblings(int id) {
-        Human human = (Human) getById(id);
+    public List<E> getSiblings(int id) {
+        E human = (E) getById(id);
         if (human == null) {
             return null;
         }
-        List<Human> siblings = new ArrayList<>();
-        Human mother = human.getMother();
-        Human father = human.getFather();
+        List<E> siblings = new ArrayList<>();
+        E mother = human.getMother();
+        E father = human.getFather();
 
-        for (Human child : mother.getChildren()) {
+        for (E child : mother.getChildren()) {
             if (!child.equals(human)) {
                 siblings.add(child);
             }
         }
-        for (Human child : father.getChildren()) {
+        for (E child : father.getChildren()) {
             if (!child.equals(human) && siblings.contains(child)) {
                 siblings.add(child);
             }
@@ -92,12 +89,12 @@ public class FamilyTree<E extends FamilyTreeItem> implements Iterable<E>,Seriali
         if (checkId(humanId1) && checkId(humanId2)) {
             E human1 = getById(humanId1);
             E human2 = getById(humanId2);
-            return setWedding((Human) human1, (Human) human2);
+            return setWedding( human1, human2);
         }
         return false;
     }
 
-    public boolean setWedding(Human human1, Human human2) {
+    public boolean setWedding(E human1, E human2) {
         if (human1.getSpouse() == null && human2.getSpouse() == null) {
             human1.setSpouse(human2);
             human2.setSpouse(human1);
