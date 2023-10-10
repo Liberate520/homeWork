@@ -27,7 +27,6 @@ public class MainMenu {
             sb.append(i+1);
             sb.append(". ");
             sb.append(command.getDescription());
-            //Не работает гет дискрипшн
             sb.append("\n");
         }
         return sb.toString();

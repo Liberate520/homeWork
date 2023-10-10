@@ -11,7 +11,7 @@ public class ConsoleUI implements View {
     private boolean work;
     @Override
     public void start() {
-        System.out.println("Hello");
+
         while (work) {
             System.out.println(mainMenu.menu());
             String line = scanner.nextLine();
@@ -19,10 +19,11 @@ public class ConsoleUI implements View {
                 int choise = Integer.parseInt(line);
                 if(choise <= mainMenu.size()) {
                     mainMenu.choice(choise);
+                }else{
+                    System.out.println("Нет такой функции меню");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Вводить нужно числа");
-                System.out.println(mainMenu.menu());
             }
         }
 
