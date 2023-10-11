@@ -1,12 +1,10 @@
 package FamilyTree;
 
 import FamilyTree.FamilyTree.FamilyTree;
-import FamilyTree.human.Gender;
-import FamilyTree.human.Human;
 import FamilyTree.writer.FileHandler;
+import FamilyTree.Service.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 
 public class Main {

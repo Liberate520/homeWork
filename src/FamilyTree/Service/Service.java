@@ -1,11 +1,11 @@
-package FamilyTree;
+package FamilyTree.Service;
 
 import FamilyTree.FamilyTree.FamilyTree;
 
 public class Service {
     private FamilyTree familyTree;
 
-//    public Service() {
+//    public FamilyTree.Service() {
 //        familyTree = new FamilyTree();
 //    }
 
