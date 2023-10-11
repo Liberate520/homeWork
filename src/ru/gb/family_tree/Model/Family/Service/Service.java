@@ -11,11 +11,11 @@ public class Service{
         familyTree = CreationTreeHuman.addTree();
         fileHandler = new FileHandler();
     }
-    public void saverTree(){
+    public void saverTree(){//Метод не доделан до конца
         FamilyTree ft = CreationTreeHuman.addTree();
         fileHandler.save(ft);
     }
-    public FamilyTree readFile(){
+    public FamilyTree readFile(){//Метод не доделан до конца
         FamilyTree tree = (FamilyTree) fileHandler.read();
         return tree;
     }
