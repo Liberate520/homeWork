@@ -21,7 +21,7 @@ public class ConsoleUI implements View {
 
     public void sortByName()
     {
-        presenter.sortByName();
+        //presenter.sortByName();
     }
 
     @Override
@@ -66,5 +66,9 @@ public class ConsoleUI implements View {
     private boolean checkTextCorrectForInt( String text )
     {
         return text.matches("[0-9]+");
+    }
+
+    public void getFamilyMembers() {
+        presenter.getFamilyMembers();
     }
 }

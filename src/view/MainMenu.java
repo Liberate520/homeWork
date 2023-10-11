@@ -1,6 +1,6 @@
 package view;
 
-import view.comands.AddChild;
+import view.comands.GetFamilyMembers;
 import view.comands.Comand;
 import view.comands.Finish;
 
@@ -12,7 +12,7 @@ public class MainMenu {
     public MainMenu( ConsoleUI consoleUI )
     {
         options = new ArrayList<>();
-        options.add( new AddChild( consoleUI ));
+        options.add( new GetFamilyMembers( consoleUI ));
         options.add( new Finish( consoleUI ));
     }
     public String menu()

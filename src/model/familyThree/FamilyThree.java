@@ -52,6 +52,10 @@ public class FamilyThree<E extends FamilyThreeElement<E>> implements Iterable<E>
         return human.getChildren();
     }
 
+    public ArrayList<E> getFamilyMembers() {
+        return familyMembers;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return null;
