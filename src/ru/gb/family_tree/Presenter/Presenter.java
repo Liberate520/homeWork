@@ -10,27 +10,32 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service<>();
+        service = new Service();
     }
 
     public void Info(){
-        service.printTree();
+        String info = service.getInfoTree();
+        view.printAnswer(info);
     }
 
 
     public void getByAge() {
         service.getByAge();
+        Info();
     }
 
     public void getByDateOfBirth() {
         service.getByDateOfBirth();
+        Info();
     }
 
     public void getByGender() {
         service.getByGender();
+        Info();
     }
 
     public void getByName() {
         service.getByName();
+        Info();
     }
 }

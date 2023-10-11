@@ -129,16 +129,7 @@ public class FamilyTree<E extends FamilyTreeItem<E>> implements Iterable<E>,Seri
         return getHumansNames();
     }
 
-    public String getHumanInfo() {
-        FamilyTree familyTree =new FamilyTree(humans);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("FamilyInfo:\n");
-        for (Object human : familyTree) {
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
+
 
     public void sortByName() {
         humans.sort(new HumanComparatorByName<>());
