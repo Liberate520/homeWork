@@ -19,6 +19,7 @@ public class Menu {
         commands.add(new SortHumanByBornDate(consoleUI));
         commands.add(new SortHumanByAge(consoleUI));
         commands.add(new SaveHumanTree(consoleUI));
+        commands.add(new DowbloadHumanTree(consoleUI));
         commands.add(new Finish(consoleUI));
     }
     public String menu() {

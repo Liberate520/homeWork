@@ -105,14 +105,18 @@ public class ConsoleUI implements View {
     public void sortByAge(){
         presenter.sortByAge();
     }
+
     public void saveTree() {
         presenter.saveTree();
+    }
+
+    public void readTree() {
+        presenter.readTree();
     }
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);
     }
-
 
 }
 

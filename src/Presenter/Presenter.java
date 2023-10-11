@@ -53,4 +53,8 @@ public class Presenter {
     public void saveTree() {
         service.saveTree();
     }
+
+    public void readTree() {
+        service.readTree();
+    }
 }

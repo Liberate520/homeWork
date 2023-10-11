@@ -14,6 +14,7 @@ public class Service {
     private FamilyTree<Human> tree;
 
 
+
     public Service() {
         builderHuman = new MyHumanBuilder();
         tree = new FamilyTree();
@@ -67,5 +68,10 @@ public class Service {
     public void saveTree() {
         FileHandler fh = new FileHandler();
         fh.save(tree,"tree.txt");
+    }
+
+    public void readTree() {
+        FileHandler fh = new FileHandler();
+        tree = (FamilyTree<Human>) fh.read("tree.txt");
     }
 }
