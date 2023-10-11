@@ -1,6 +1,6 @@
-package familyThree.comparators;
+package model.familyThree.comparators;
 
-import human.Human;
+import model.human.Human;
 
 import java.util.Comparator;
 

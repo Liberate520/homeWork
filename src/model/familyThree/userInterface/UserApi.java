@@ -1,4 +1,4 @@
-package familyThree.userInterface;
+package model.familyThree.userInterface;
 
 public class UserApi {
 

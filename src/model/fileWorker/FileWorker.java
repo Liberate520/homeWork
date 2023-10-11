@@ -1,6 +1,4 @@
-package fileWorker;
-
-import fileWorker.Writable;
+package model.fileWorker;
 
 import java.io.*;
 

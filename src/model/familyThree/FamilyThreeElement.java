@@ -1,8 +1,6 @@
-package familyThree;
+package model.familyThree;
 
-import human.Gender;
-import human.Human;
-import human.Marriage;
+import model.human.Gender;
 
 import java.util.Date;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package fileWorker;
+package model.fileWorker;
 
 import java.io.Serializable;
 

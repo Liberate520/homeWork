@@ -1,7 +1,6 @@
-package familyThree.iteration;
+package model.familyThree.iteration;
 
-import familyThree.FamilyThreeElement;
-import human.Human;
+import model.familyThree.FamilyThreeElement;
 
 import java.util.ArrayList;
 import java.util.Iterator;

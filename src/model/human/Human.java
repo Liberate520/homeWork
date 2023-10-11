@@ -1,6 +1,6 @@
-package human;
+package model.human;
 
-import familyThree.FamilyThreeElement;
+import model.familyThree.FamilyThreeElement;
 
 import java.util.Date;
 import java.util.HashSet;
