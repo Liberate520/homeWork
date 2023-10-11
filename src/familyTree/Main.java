@@ -4,6 +4,7 @@ package familyTree;
 import familyTree.familyTree.FamilyTree;
 import familyTree.human.Gender;
 import familyTree.human.Human;
+import familyTree.writer.FileHandler;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -13,12 +14,19 @@ import static familyTree.writer.FileHandler.serialization;
 
 public class Main implements Serializable {
     public static void main(String[] args) throws IOException {
+        String filePath = "src/familyTree/writer/testTree.txt";
+        FileHandler fileHandler = new FileHandler();
+
         FamilyTree<Human> tree = testTree();
+//        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
         System.out.println("Without sort: " + tree);
         tree.sortByName();
-        System.out.println("Sort by name: " + tree);
-        tree.sortByAge();
-        System.out.println("Sort by age (from lowest to highest): " + tree);
+
+        fileHandler.save(tree, filePath);
+
+//        System.out.println("Sort by name: " + tree);
+//        tree.sortByAge();
+//        System.out.println("Sort by age (from lowest to highest): " + tree);
 
     }
 
