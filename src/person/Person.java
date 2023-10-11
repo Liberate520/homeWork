@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person extends FileHandler implements Comparable<Person>, FamilyTreeItem {
+public class Person extends FileHandler implements Comparable<Person>, FamilyTreeItem<Person> {
     private int id;
     private String name;
     private LocalDate birthDate;
