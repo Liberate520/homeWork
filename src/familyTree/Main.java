@@ -23,7 +23,7 @@ public class Main{
     }
 
     static FamilyTree<Human> testTree() throws IOException {
-        FamilyTree<Human> tree = new FamilyTree();
+        FamilyTree<Human> tree = new FamilyTree<>();
 
         Human dinara = new Human("Динара",
                 LocalDate.of(1998, 1, 31),
