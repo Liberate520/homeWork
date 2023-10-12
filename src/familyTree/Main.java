@@ -7,27 +7,19 @@ import familyTree.human.Human;
 import familyTree.writer.FileHandler;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.time.LocalDate;
 
-import static familyTree.writer.FileHandler.serialization;
-
-public class Main implements Serializable {
+public class Main{
     public static void main(String[] args) throws IOException {
         String filePath = "src/familyTree/writer/testTree.txt";
         FileHandler fileHandler = new FileHandler();
 
         FamilyTree<Human> tree = testTree();
-//        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+//        FamilyTree<Human> tree = (FamilyTree) fileHandler.read(filePath);
         System.out.println("Without sort: " + tree);
         tree.sortByName();
 
         fileHandler.save(tree, filePath);
-
-//        System.out.println("Sort by name: " + tree);
-//        tree.sortByAge();
-//        System.out.println("Sort by age (from lowest to highest): " + tree);
-
     }
 
     static FamilyTree<Human> testTree() throws IOException {
@@ -57,7 +49,6 @@ public class Main implements Serializable {
         nadezda.addChild(dinara);
         tree.add(nadezda);
 
-        serialization();
         return tree;
     }
 

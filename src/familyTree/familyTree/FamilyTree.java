@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends FamilyGroupItem<T>>
-        implements Serializable, Iterable<T> {
+public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, Iterable<T> {
     private int humanId;
     private List<T> humanList;
 
@@ -18,23 +17,9 @@ public class FamilyTree<T extends FamilyGroupItem<T>>
         this(new ArrayList<>());
     }
 
-//    public FamilyTree() {
-//        humanList = new ArrayList<>();
-//    }
-
-
     public FamilyTree(List<T> humanList) {
         this.humanList = humanList;
     }
-
-
-//    public int getId() {
-//        return humanId;
-//    }
-
-//    public void setId(int humanId) {
-//        this.humanId = humanId;
-//    }
 
     public boolean add(T el) {
         if (el == null) {
@@ -160,17 +145,7 @@ public class FamilyTree<T extends FamilyGroupItem<T>>
         }
     }
 
-    // TODO: 10/1/2023 method wrote by myself
     private boolean checkId(long id) {
-//        if (id >= humanId || id < 0) {
-//            return false;
-//        }
-//        for (T el : humanList) {
-//            if (el.getId() == id) {
-//                return true;
-//            }
-//        }
-//        return false;
         return id < humanId && id >= 0;
     }
 
@@ -198,11 +173,11 @@ public class FamilyTree<T extends FamilyGroupItem<T>>
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge<>());
     }
 
 

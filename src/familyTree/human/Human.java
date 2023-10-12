@@ -2,12 +2,13 @@ package familyTree.human;
 
 import familyTree.familyTree.FamilyGroupItem;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human<T extends FamilyGroupItem> implements FamilyGroupItem<Human> {
+public class Human implements FamilyGroupItem<Human>, Serializable {
     private long id;
     private String name;
     private Gender gender;
@@ -62,7 +63,7 @@ public class Human<T extends FamilyGroupItem> implements FamilyGroupItem<Human> 
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
