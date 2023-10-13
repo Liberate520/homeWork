@@ -1,7 +1,7 @@
-package person;
+package model.person;
 
-import family_tree.FamilyTreeItem;
-import serialization.FileHandler;
+import model.family_tree.FamilyTreeItem;
+import model.serialization.FileHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -90,13 +90,30 @@ public class Person extends FileHandler implements Comparable<Person>, FamilyTre
 
     @Override
     public String toString() {
-        return  "\t" + name + " (" + gender + ")\n" +
-                "\t(" + birthDate.getYear() + " - " + deathDate.getYear() + ")\n";
+        return getPersonInfo();
     }
 
     @Override
     public int compareTo(Person o) {
         return name.compareTo(o.getName());
+    }
+    private String getPersonInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\t");
+        stringBuilder.append(name);
+        stringBuilder.append(" (");
+        stringBuilder.append(gender);
+        stringBuilder.append(")\n\t(");
+        stringBuilder.append(birthDate.getYear());
+        stringBuilder.append(" - ");
+        if (deathDate == null) {
+            stringBuilder.append("по н.в.");
+        } else {
+            stringBuilder.append(deathDate.getYear());
+        }
+        stringBuilder.append(")\n");
+
+        return stringBuilder.toString();
     }
 
 }

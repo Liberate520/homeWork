@@ -1,7 +1,7 @@
-package family_tree;
+package model.family_tree;
 
-import person.Gender;
-import person.Person;
+import model.person.Gender;
+import model.person.Person;
 
 import java.time.LocalDate;
 import java.time.Month;

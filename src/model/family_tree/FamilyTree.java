@@ -1,9 +1,8 @@
-package family_tree;
+package model.family_tree;
 
-import family_tree.comparators.PersonComparatorByBirthDate;
-import family_tree.comparators.PersonComparatorByName;
-import person.Person;
-import serialization.FileHandler;
+import model.family_tree.comparators.PersonComparatorByBirthDate;
+import model.family_tree.comparators.PersonComparatorByName;
+import model.serialization.FileHandler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -39,6 +38,9 @@ public class FamilyTree<E extends FamilyTreeItem<E>> extends FileHandler impleme
         }
         return stringBuilder.toString();
     }
+    public int size() {
+        return peopleList.size();
+    }
 
     public void isHusbands (E person1, E person2) {
 
@@ -65,6 +67,8 @@ public class FamilyTree<E extends FamilyTreeItem<E>> extends FileHandler impleme
         motherChild.add(children);
         mother.setChildren(motherChild);
     }
+
+
 
     public String getPersonInfo(E person) {
         StringBuilder stringBuilder = new StringBuilder();
