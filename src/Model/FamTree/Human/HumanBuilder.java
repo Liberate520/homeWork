@@ -1,6 +1,4 @@
-package Human;
-
-import Human.Human;
+package Model.FamTree.Human;
 
 public class HumanBuilder {
     int id;

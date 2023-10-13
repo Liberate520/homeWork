@@ -1,4 +1,4 @@
-package FileWork;
+package Model.FamTree.FileWork;
 
 import java.io.*;
 

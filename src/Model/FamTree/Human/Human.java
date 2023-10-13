@@ -1,6 +1,6 @@
-package Human;
+package Model.FamTree.Human;
 
-import FamTree.TreeMembers;
+import Model.FamTree.TreeMembers;
 
 import java.io.Serializable;
 import java.util.*;

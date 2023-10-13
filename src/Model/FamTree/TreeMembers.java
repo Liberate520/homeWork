@@ -1,7 +1,6 @@
-package FamTree;
+package Model.FamTree;
 
-import Human.Gender;
-import Human.Human;
+import Model.FamTree.Human.Gender;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
-package FamTree;
+package Model.FamTree;
 
-import Human.Human;
-import Human.ComparatorName;
-import Human.ComparatorAge;
+import Model.FamTree.Human.ComparatorName;
+import Model.FamTree.Human.ComparatorAge;
 import java.io.Serializable;
 import java.util.*;
 
@@ -87,8 +86,8 @@ public class FamTree<E extends TreeMembers<E>> implements Serializable, Iterable
 //        }
 //        return grandFathers;
 //    }
-//    public Human[] getGrandMothers(Human human) {
-//        Human[] grandMothers = new Human[2];
+//    public Model.FamTree.Human[] getGrandMothers(Model.FamTree.Human human) {
+//        Model.FamTree.Human[] grandMothers = new Model.FamTree.Human[2];
 //        if (human.getMother() != null) {
 //            grandMothers[0] = human.getMother().getMother();
 //        }
@@ -135,7 +134,7 @@ public class FamTree<E extends TreeMembers<E>> implements Serializable, Iterable
 
     public String getTreeInf(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Family Try ");
+        sb.append("Family tree ");
         sb.append('\n');
         for (E human: humanList) {
             sb.append(human.getInfo());
@@ -145,6 +144,7 @@ public class FamTree<E extends TreeMembers<E>> implements Serializable, Iterable
     }
 
        public void sortName(){
+
         humanList.sort(new ComparatorName());
 
     }
