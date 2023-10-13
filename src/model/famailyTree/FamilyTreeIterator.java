@@ -3,22 +3,21 @@ package model.famailyTree;
 import java.util.Iterator;
 import java.util.List;
 
-import model.human.Human;
-
-public class FamilyTreeIterator implements Iterator<Human> {
+public class FamilyTreeIterator <T extends TreeNode<T>> implements Iterator<T> {
     private int index;
-    private List<Human> humanList;
+    private List<T> list;
 
-    public FamilyTreeIterator(List<Human> humanList) {
-        this.humanList = humanList;
+    public FamilyTreeIterator(List<T> list) {
+        this.list = list;
+        index = 0;
     }
-
+    @Override
     public boolean hasNext() {
-        return humanList.size() > index;
+        return list.size() > index;
     }
 
     @Override
-    public Human next() {
-        return humanList.get(index++);
+    public T next() {
+        return list.get(index++);
     }
 }

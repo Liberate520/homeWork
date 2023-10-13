@@ -1,24 +1,32 @@
 package model.human;
 
 import java.io.Serializable;
+
 import java.time.LocalDate;
-import java.time.Period;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+import model.famailyTree.TreeNode;
+
+ 
+public class Human implements Serializable, TreeNode<Human> {
    private long id;
+   private String name;
    private String fistName;
    private String lastName;
    private Gender gender;
    private Human mother;
    private Human father;
+   private List<Human> parents;
    private List<Human> children;
    private LocalDate birthDate;
    private LocalDate deathDate;
+   private Human spouse;
 
-   public Human(String fistName, String lastName, LocalDate birthDate, LocalDate deathDate, Gender gender, Human mother, Human father) {
+   public Human(String name, String fistName, String lastName, LocalDate birthDate, LocalDate deathDate, Gender gender, Human mother, Human father) {
         id = -1;
+        this.name = name;
         this.fistName = fistName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -26,47 +34,71 @@ public class Human implements Serializable {
         this.gender = gender;
         this.mother = mother;
         this.father = father;
+        parents = new ArrayList<>();
+        if (father != null) {
+            parents.add(father);
+        }
+        if (mother != null){
+            parents.add(mother);
+        }
+
         children = new ArrayList<>();
     }
 
-    public Human(String fistName, String lastName, LocalDate birthDate, Gender gender, Human mother, Human father) {
-        this(fistName, lastName, birthDate, null, gender, mother, father);
+    public Human(String name, String fistName, String lastName, LocalDate birthDate, Gender gender, Human mother, Human father) {
+        this(name, fistName, lastName, birthDate, null, gender, mother, father);
     }
 
-    public Human(String fistName, String lastName, LocalDate birthDate, Gender gender) {
-        this(fistName, lastName, birthDate, null, gender, null, null);
+    public Human(String name, String fistName, String lastName, LocalDate birthDate, Gender gender) {
+        this(name, fistName, lastName, birthDate, null, gender, null, null);
     }
 
-    public Human(String fistName, String lastName, LocalDate birthDate, LocalDate deathDate, Gender gender) {
-        this(fistName, lastName, birthDate, deathDate, gender, null, null);
+    public Human(String name, String fistName, String lastName, LocalDate birthDate, LocalDate deathDate, Gender gender) {
+        this(name, fistName, lastName, birthDate, deathDate, gender, null, null);
     }
 
-    public void addChild(Human child) {
-        if (!children.contains(child)) {
+    public boolean addChild(Human child) {
+        if (!children.contains(child)){
             children.add(child);
+            return true;
         }
+        return false;
+    }
+    
+    
+    public boolean addParent(Human parent) {
+        if (!parents.contains(parent)){
+            parents.add(parent);
+            return true;
+        }
+        return false;
     }
 
-    public void addParent(Human parent) {
-        if (parent.getGender().equals(Gender.Male)) {
-            setFather(parent);
-        } else if (parent.getGender().equals(Gender.Female)) {
-            setMother(parent);
+    public Human getFather() {
+        for (Human parent: parents){
+            if (parent.getGender() == Gender.Male){
+                return parent;
+            }
         }
+        return null;
+    }   
+    
+    public Human getMother() {
+        for (Human parent: parents){
+            if (parent.getGender() == Gender.Female){
+                return parent;
+            }
+        }
+        return null;
     }
 
-    public int getAge() {
-        if (deathDate == null) {
-            return lifePeriod(birthDate, LocalDate.now());
-        } else {
-            return lifePeriod(birthDate, deathDate);
-        }
+    public String getName(){
+        return name;
     }
 
-    private int lifePeriod(LocalDate birthDate, LocalDate deathDate) {
-        Period difference = Period.between(birthDate, deathDate);
-        return difference.getYears();
-    }
+    
+
+    
 
     public String getMotherInfo() {
         String res = " Мама: ";
@@ -86,6 +118,15 @@ public class Human implements Serializable {
             res += "Нет";
         }
         return res;
+    }
+
+
+    public void setSpouse(Human spouse){
+        this.spouse = spouse;
+    }
+
+    public Human getSpouse(){
+        return spouse;
     }
 
 
@@ -152,18 +193,13 @@ public class Human implements Serializable {
     }
 
 
-    public Human getMother() {
-        return mother;
-    }
+    
 
     public void setMother(Human mother) {
         this.mother = mother;
     }
 
-    public Human getFather() {
-        return father;
-    }
-
+    
     public void setFather(Human father) {
         this.father = father;
     }
