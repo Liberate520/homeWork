@@ -15,8 +15,8 @@ public class Service {
 
     
 
-    public void addHuman(String name, String father, String mother, int age){
-        Human human = new Human(idHuman++, name, father, mother, age);
+    public void addHuman(String name, String gender, String father, String mother, int birthdate){
+        Human human = new Human(idHuman++, name, gender, father, mother, birthdate);
         family.addHuman(human);
     }
 
@@ -36,7 +36,7 @@ public class Service {
         family.sortByName();
     }
 
-    public void sortByAge(){
-        family.sortByAge();
+    public void SortByBirthdate(){
+        family.SortByBirthdate();
     }
 }

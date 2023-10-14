@@ -12,8 +12,8 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String name, String father, String mother, int age) {
-        service.addHuman(name, father, mother,age);
+    public void addHuman(String name, String gender, String father, String mother, int birthdate) {
+        service.addHuman(name, gender,father, mother,birthdate);
         getHumanListInfo();
     }
 
@@ -22,8 +22,8 @@ public class Presenter {
         view.printAnswer(info);
     }
 
-    public void sortByAge() {
-        service.sortByAge();
+    public void SortByBirthdate() {
+        service.SortByBirthdate();
         getHumanListInfo();
     }
 

@@ -29,7 +29,7 @@ public class Family<E extends Subject> implements Iterable<E> {
         humanList.sort(new HumanComparatorByName<>());
     }
 
-    public void sortByAge(){
+    public void SortByBirthdate(){
         humanList.sort(new HumanComparatorByAge<>());
     }
 }

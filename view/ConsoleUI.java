@@ -37,8 +37,8 @@ public class ConsoleUI implements View {
         work = false;
     }
 
-    public void sortByAge() {
-        presenter.sortByAge();
+    public void SortByBirthdate() {
+        presenter.SortByBirthdate();
     }
 
     public void sortByName() {
@@ -52,14 +52,16 @@ public class ConsoleUI implements View {
     public void addHuman() {
         System.out.println("Input name");
         String name = scanner.nextLine();
+        System.out.println("Input gender");
+        String gender = scanner.nextLine();
         System.out.println("Input father");
         String father = scanner.nextLine();
         System.out.println("Input mother");
         String mother = scanner.nextLine();
-        System.out.println("Input age");
+        System.out.println("Input birth date");
         String ageString = scanner.nextLine();
-        int age = Integer.parseInt(ageString);
-        presenter.addHuman(name, father, mother, age);
+        int birthdate = Integer.parseInt(ageString);
+        presenter.addHuman(name, gender,father, mother, birthdate);
     }
 
     private void hello(){

@@ -4,16 +4,18 @@ import model.family.Subject;
 public class Human implements Comparable<Human>, Subject {
     private int id;
     private String name;
+    private String gender;
     private String father;
     private String mother;
-    private int age;
+    private int birthdate;
 
-    public Human(int id, String name, String father, String mother, int age) {
+    public Human(int id, String name, String gender, String father, String mother, int birthdate) {
         this.id = id;
         this.name = name;
+        this.gender = gender;
         this.father = father;
         this.mother = mother;
-        this.age = age;
+        this.birthdate = birthdate;
     }
 
     @Override
@@ -23,13 +25,13 @@ public class Human implements Comparable<Human>, Subject {
                 ", name='" + name + '\'' +
                 ", father='" + father +'\'' +
                 ", mother='" + mother +'\'' +
-                ", age=" + age +
+                ", birth date=" + birthdate +
                 '}';
     }
 
     @Override
     public int getAge() {
-        return age;
+        return birthdate;
     }
 
     @Override

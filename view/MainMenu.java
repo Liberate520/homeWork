@@ -12,7 +12,7 @@ public class MainMenu {
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new GetHumanInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
-        commandList.add(new SortByAge(consoleUI));
+        commandList.add(new SortByBirthdate(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 
