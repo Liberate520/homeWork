@@ -5,13 +5,18 @@ import model.human.Human;
 public class Service {
     private int idHuman;
     private Family<Human> family;
+    
 
     public Service() {
         family = new Family<>();
+        
+
     }
 
-    public void addHuman(String name, int age){
-        Human human = new Human(idHuman++, name, age);
+    
+
+    public void addHuman(String name, String father, String mother, int age){
+        Human human = new Human(idHuman++, name, father, mother, age);
         family.addHuman(human);
     }
 

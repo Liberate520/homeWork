@@ -52,10 +52,14 @@ public class ConsoleUI implements View {
     public void addHuman() {
         System.out.println("Input name");
         String name = scanner.nextLine();
+        System.out.println("Input father");
+        String father = scanner.nextLine();
+        System.out.println("Input mother");
+        String mother = scanner.nextLine();
         System.out.println("Input age");
         String ageString = scanner.nextLine();
         int age = Integer.parseInt(ageString);
-        presenter.addHuman(name, age);
+        presenter.addHuman(name, father, mother, age);
     }
 
     private void hello(){

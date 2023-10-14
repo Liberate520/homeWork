@@ -12,8 +12,8 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String name, int age) {
-        service.addHuman(name, age);
+    public void addHuman(String name, String father, String mother, int age) {
+        service.addHuman(name, father, mother,age);
         getHumanListInfo();
     }
 

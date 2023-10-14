@@ -4,11 +4,15 @@ import model.family.Subject;
 public class Human implements Comparable<Human>, Subject {
     private int id;
     private String name;
+    private String father;
+    private String mother;
     private int age;
 
-    public Human(int id, String name, int age) {
+    public Human(int id, String name, String father, String mother, int age) {
         this.id = id;
         this.name = name;
+        this.father = father;
+        this.mother = mother;
         this.age = age;
     }
 
@@ -17,6 +21,8 @@ public class Human implements Comparable<Human>, Subject {
         return "Human{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", father='" + father +'\'' +
+                ", mother='" + mother +'\'' +
                 ", age=" + age +
                 '}';
     }
