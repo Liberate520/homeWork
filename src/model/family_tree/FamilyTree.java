@@ -1,10 +1,9 @@
 package model.family_tree;
 
-import model.family_tree.comparators.PersonComparatorByBirthDate;
-import model.family_tree.comparators.PersonComparatorByName;
-import model.serialization.FileHandler;
+import model.saving.serialization.FileHandler;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,6 @@ public class FamilyTree<E extends FamilyTreeItem<E>> extends FileHandler impleme
         mother.setChildren(motherChild);
     }
 
-
-
     public String getPersonInfo(E person) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
@@ -116,10 +113,15 @@ public class FamilyTree<E extends FamilyTreeItem<E>> extends FileHandler impleme
         return new TreeIterator<>(peopleList);
     }
 
-    public void sortByName() {
-        peopleList.sort(new PersonComparatorByName<>());
+    /*исправил принцип инверсии зависимости
+    * ранее класс зависел от классов компараторов*/
+    public void sort(Comparator<E> comparator) {
+        peopleList.sort(comparator);
     }
-    public void sortByBirthDate() {
-        peopleList.sort(new PersonComparatorByBirthDate<>());
-    }
+//    public void sortByName() {
+//        peopleList.sort(new PersonComparatorByName<>());
+//    }
+//    public void sortByBirthDate() {
+//        peopleList.sort(new PersonComparatorByBirthDate<>());
+//    }
 }

@@ -1,7 +1,7 @@
 package model.person;
 
 import model.family_tree.FamilyTreeItem;
-import model.serialization.FileHandler;
+import model.saving.serialization.FileHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

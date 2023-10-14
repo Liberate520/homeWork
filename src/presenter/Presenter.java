@@ -4,11 +4,10 @@ import model.family_tree.CustomFamilyTree;
 import model.family_tree.FamilyTree;
 import model.person.Gender;
 import model.person.Person;
-import model.serialization.SerializationService;
+import model.saving.Saving;
+import model.saving.SerializationSave;
 import view.View;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
 public class Presenter {
@@ -76,16 +75,16 @@ public class Presenter {
         System.out.println(info);
     }
     public void saveFamilyTree() {
-        SerializationService ser = new SerializationService();
-        ser.serializationFamilyTree(familyTree);
+        Saving saving = new SerializationSave();
+        saving.save(familyTree);
     }
     public void downloadFamilyTree(String name) {
-        SerializationService ser = new SerializationService();
+        Saving saving = new SerializationSave();
         try {
-            familyTree = ser.deserializationFamilyTree(name);
+            familyTree = saving.download(name);
             getFamilyInfo();
         } catch (Exception e) {
-            System.out.println("увы");
+            System.out.println("увы((");
         }
     }
     public int getTreeSize() {

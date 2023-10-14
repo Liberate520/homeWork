@@ -1,4 +1,4 @@
-package model.serialization;
+package model.saving.serialization;
 
 import java.io.*;
 
