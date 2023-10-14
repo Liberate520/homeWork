@@ -1,3 +1,4 @@
+//Нарушен принцип единственной ответственности: класс занимается как добавлением Human, так и сортировкой
 package model.family;
 import model.family.iterators.HumanIterator;
 import model.human.comparators.HumanComparatorByAge;
