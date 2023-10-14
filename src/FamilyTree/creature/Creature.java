@@ -1,4 +1,6 @@
-package FamilyTree.human;
+package FamilyTree.creature;
+
+import FamilyTree.FamilyTree.CreatureItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,18 +8,18 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Creature implements Serializable, Comparable<Creature>, CreatureItem<Creature> {
     private long id;
     private String Name;
     private Gender gender;
     private LocalDate dataBirth;
     private LocalDate dataDeath;
-    private Human mother;
-    private Human father;
-    private List<Human> children;
-    private Human spouse;
+    private Creature mother;
+    private Creature father;
+    private Creature spouse;
+    private List<Creature> children;
 
-    public Human(String name, Gender gender, LocalDate dataBirth, LocalDate dataDeath, Human mother, Human father) {
+    public Creature(String name, Gender gender, LocalDate dataBirth, LocalDate dataDeath, Human mother, Human father) {
         id = -1;
         Name = name;
         this.gender = gender;
@@ -28,15 +30,15 @@ public class Human implements Serializable, Comparable<Human> {
         children = new ArrayList<>();
     }
 
-    public Human(String name, Gender gender, LocalDate dataBirth) {
+    public Creature(String name, Gender gender, LocalDate dataBirth) {
         this(name, gender, dataBirth, null, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate dataBirth, Human father, Human mother) {
+    public Creature(String name, Gender gender, LocalDate dataBirth, Human father, Human mother) {
         this(name, gender, dataBirth, null, mother, father);
     }
 
-    public boolean addChildren(Human child) {
+    public boolean addChildren(Creature child) {
         if (!children.contains(child)) {
             children.add(child);
             return true;
@@ -44,7 +46,7 @@ public class Human implements Serializable, Comparable<Human> {
         return false;
     }
 
-    public void addParent(Human parent) {
+    public void addParent(Creature parent) {
         if (parent.getGender().equals(Gender.Male)) {
             setFather(parent);
         } else if (parent.getGender().equals(Gender.Female)) {
@@ -76,14 +78,19 @@ public class Human implements Serializable, Comparable<Human> {
         stringBuilder.append(", age: ");
         stringBuilder.append(getAge());
         stringBuilder.append(", ");
-        stringBuilder.append(getSpouseInfo());
         stringBuilder.append(", ");
+        stringBuilder.append(getSpouseInfo());
         stringBuilder.append(getFatherInfo());
         stringBuilder.append(", ");
         stringBuilder.append(getMotherInfo());
         stringBuilder.append(", ");
         stringBuilder.append(getChildrenInfo());
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getInfo();
     }
 
     public String getSpouseInfo() {
@@ -94,6 +101,14 @@ public class Human implements Serializable, Comparable<Human> {
             res += spouse.getName();
         }
         return res;
+    }
+
+    public Creature getSpouse() {
+        return spouse;
+    }
+
+    public void setSpouse(Creature spouse) {
+        this.spouse = spouse;
     }
 
     public String getMotherInfo() {
@@ -131,21 +146,15 @@ public class Human implements Serializable, Comparable<Human> {
         return res.toString();
     }
 
-    @Override
-    public String toString() {
-        return getInfo();
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Human)) {
+        if (!(obj instanceof Creature)) {
             return false;
         }
-        Human human = (Human) obj;
-        return human.getId() == getId();
+        Creature creature = (Creature) obj;
+        return creature.getId() == getId();
     }
 
     public long getId() {
@@ -188,43 +197,32 @@ public class Human implements Serializable, Comparable<Human> {
         this.dataDeath = dataDeath;
     }
 
-    public Human getMother() {
+    public Creature getMother() {
         return mother;
     }
 
-    public void setMother(Human mather) {
+    public void setMother(Creature mather) {
         this.mother = mather;
     }
 
-    public Human getFather() {
+    public Creature getFather() {
         return father;
     }
 
-    public void setFather(Human father) {
+    public void setFather(Creature father) {
         this.father = father;
     }
 
-    public List<Human> getChildren() {
+    public List<Creature> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Human> children) {
+    public void setChildren(List<Creature> children) {
         this.children = children;
     }
 
-    public Human getSpouse() {
-        return spouse;
-    }
-
-    public void setSpouse(Human spouse) {
-        this.spouse = spouse;
-    }
-
     @Override
-    public int compareTo(Human o) {
+    public int compareTo(Creature o) {
         return Name.compareTo(o.getName());
     }
 }
-
-
-

@@ -1,7 +1,6 @@
 package FamilyTree.writer;
 
 import FamilyTree.FamilyTree.FamilyTree;
-import FamilyTree.human.Human;
 
 import java.io.*;
 

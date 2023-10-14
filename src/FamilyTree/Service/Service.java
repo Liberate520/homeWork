@@ -20,4 +20,8 @@ public class Service {
     public void sortByName() {
         familyTree.sortByName();
     }
+
+    public void sortByBirthData() {
+        familyTree.sortByBirthDate();
+    }
 }

@@ -1,166 +1,171 @@
 package FamilyTree.FamilyTree;
 
-import FamilyTree.FamilyTree.iterators.HumenIterator;
-import FamilyTree.human.Comparators.HumanComparatorByAge;
-import FamilyTree.human.Comparators.HumanComparatorByName;
-import FamilyTree.human.Human;
+import FamilyTree.FamilyTree.iterators.CreatureIterator;
+import FamilyTree.FamilyTree.Comparators.CreatureComparatorByAge;
+import FamilyTree.FamilyTree.Comparators.CreatureComparatorByBirthDate;
+import FamilyTree.FamilyTree.Comparators.CreatureComparatorByName;
+import FamilyTree.creature.Creature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Iterable<Human>, Serializable {
-    private long humansId;
-    private List<Human> humanList;
+public class FamilyTree<E extends CreatureItem<E>> implements Iterable<E>, Serializable {
+    private long creatureId;
+    private List<E> creatureList;
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
+    public FamilyTree(List<E> creatureList) {
+        this.creatureList = creatureList;
     }
 
-    public boolean add(Human human) {
-        if (!humanList.contains(human)) {
-            humanList.add(human);
-            human.setId(humansId++);
+    public boolean add(E creature) {
+        if (!creatureList.contains(creature)) {
+            creatureList.add(creature);
+            creature.setId(creatureId++);
 
-            addToParents(human);
-            addToChildren(human);
+            addToParents(creature);
+            addToChildren(creature);
 
             return true;
         }
         return false;
     }
 
-    public Human getById(long id) {
+    public E getById(long id) {
         if (!checkId(id)) {
             return null;
         }
         ;
-        for (Human human : humanList) {
-            if (human.getId() == id) {
-                return human;
+        for (E creature : creatureList) {
+            if (creature.getId() == id) {
+                return creature;
             }
         }
         return null;
     }
 
-    public List<Human> getSiblings(int id) {
-        Human human = getById(id);
-        if (human == null) {
+    public List<E> getSiblings(int id) {
+        E creature = getById(id);
+        if (creature == null) {
             return null;
         }
-        List<Human> res = new ArrayList<>();
-        Human mother = human.getMother();
-        Human father = human.getFather();
-        for (Human child : mother.getChildren()) {
-            if (!child.equals(human)) {
+        List<E> res = new ArrayList<>();
+        E mother = creature.getMother();
+        E father = creature.getFather();
+        for (E child : mother.getChildren()) {
+            if (!child.equals(creature)) {
                 res.add(child);
             }
         }
-        for (Human child : mother.getChildren()) {
-            if (!child.equals(human) && !res.contains(child)) {
+        for (E child : mother.getChildren()) {
+            if (!child.equals(creature) && !res.contains(child)) {
                 res.add(child);
             }
         }
         return res;
     }
 
-    public List<Human> getByName(String name) {
-        List<Human> res = new ArrayList<>();
-        for (Human human : humanList) {
-            if (human.getName().equals(name)) {
-                res.add(human);
+    public List<E> getByName(String name) {
+        List<E> res = new ArrayList<>();
+        for (E creature : creatureList) {
+            if (creature.getName().equals(name)) {
+                res.add(creature);
             }
         }
         return res;
     }
 
-    public boolean setWedding(long humanId1, long humanId2) {
-        if (checkId(humanId1) && checkId(humanId2)) {
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
-            return setWedding(human1, human2);
+    public boolean setWedding(long creatureId1, long creatureId2) {
+        if (checkId(creatureId1) && checkId(creatureId2)) {
+            E creature1 = getById(creatureId1);
+            E creature2 = getById(creatureId2);
+            return setWedding(creature1, creature2);
         }
         return false;
     }
 
-    public boolean setWedding(Human human1, Human human2) {
-        if (human1.getSpouse() == null && human2.getSpouse() == null) {
-            human1.setSpouse(human2);
-            human2.setSpouse(human1);
+    public boolean setWedding(E creature1, E creature2) {
+        if (creature1.getSpouse() == null && creature2.getSpouse() == null) {
+            creature1.setSpouse(creature2);
+            creature2.setSpouse(creature1);
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean setDivorce(long humanId1, long humanId2) {
-        if (checkId(humanId1) && checkId(humanId2)) {
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
-            return setDivorce(human1, human2);
+    public boolean setDivorce(long creatureId1, long creatureId2) {
+        if (checkId(creatureId1) && checkId(creatureId2)) {
+            E creature1 = getById(creatureId1);
+            E creature2 = getById(creatureId2);
+            return setDivorce(creature1, creature2);
         }
         return false;
     }
 
-    public boolean setDivorce(Human human1, Human human2) {
-        if (human1.getSpouse() != null && human2.getSpouse() != null) {
-            human1.setSpouse(null);
-            human2.setSpouse(null);
+    public boolean setDivorce(E creature1, E creature2) {
+        if (creature1.getSpouse() != null && creature2.getSpouse() != null) {
+            creature1.setSpouse(null);
+            creature2.setSpouse(null);
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean remove(long humansId) {
-        if (checkId(humansId)) {
-            Human e = getById(humansId);
-            return humanList.remove(e);
+    public boolean remove(long creatureIdId) {
+        if (checkId(creatureId)) {
+            E e = getById(creatureId);
+            return creatureList.remove(e);
         }
         return false;
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumenIterator(humanList);
+    public Iterator<E> iterator() {
+        return new CreatureIterator(creatureList);
     }
 
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        creatureList.sort(new CreatureComparatorByName());
     }
 
     public void sortByAge() {
-        humanList.sort(new HumanComparatorByAge());
+        creatureList.sort(new CreatureComparatorByAge());
     }
 
-    private void addToParents(Human human) {
-        Human mother = human.getMother();
-        Human father = human.getFather();
+    public void sortByBirthDate() {
+        creatureList.sort(new CreatureComparatorByBirthDate());
+    }
+
+    private void addToParents(E creature) {
+        E mother = creature.getMother();
+        E father = creature.getFather();
         if (mother != null) {
-            mother.addChildren(human);
+            mother.addChildren(creature);
         }
         if (father != null) {
-            father.addChildren(human);
+            father.addChildren(creature);
         }
     }
 
-    private void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
-            child.addParent(human);
+    private void addToChildren(E creature) {
+        for (E child : creature.getChildren()) {
+            child.addParent(creature);
         }
     }
 
     private boolean checkId(long id) {
-        if (id >= humansId || id < 0) {
+        if (id >= creatureId || id < 0) {
             return false;
         }
-        for (Human human : humanList) {
-            if (human.getId() == id) {
+        for (E creature : creatureList) {
+            if (creature.getId() == id) {
                 return false;
             }
         }
@@ -170,10 +175,10 @@ public class FamilyTree implements Iterable<Human>, Serializable {
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("in tree ");
-        stringBuilder.append(humanList.size());
+        stringBuilder.append(creatureList.size());
         stringBuilder.append(" objects\n");
-        for (Human human : humanList) {
-            stringBuilder.append(human);
+        for (E creature : creatureList) {
+            stringBuilder.append(creature);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
@@ -183,6 +188,5 @@ public class FamilyTree implements Iterable<Human>, Serializable {
     public String toString() {
         return getInfo();
     }
-
 
 }

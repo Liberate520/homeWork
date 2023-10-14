@@ -1,20 +1,26 @@
 package FamilyTree;
 
+import FamilyTree.FamilyTree.CreatureItem;
 import FamilyTree.FamilyTree.FamilyTree;
+import FamilyTree.creature.Cat;
+import FamilyTree.creature.Creature;
+import FamilyTree.creature.Gender;
+import FamilyTree.creature.Human;
 import FamilyTree.writer.FileHandler;
 import FamilyTree.Service.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        String filePath = "E:\\GB\\2 четверть\\ООП\\Homework\\Project\\src\\FamilyTree\\writer\\Human.out";
+        String filePath = "E:\\GB\\2 четверть\\ООП\\Homework\\Project\\src\\FamilyTree\\writer\\Creature.out";
         FileHandler fileHandler = new FileHandler();
 
-//       FamilyTree tree = testTree();
-        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
+//        FamilyTree<Creature> tree = testTree();
+        FamilyTree<Creature> tree = (FamilyTree) fileHandler.read(filePath);
         Service service = new Service(tree);
 
         System.out.println(tree);
@@ -27,8 +33,8 @@ public class Main {
 //        fileHandler.write(tree, filePath);
     }
 
-//    static  FamilyTree testTree(){
-//        FamilyTree tree = new FamilyTree();
+//    static  FamilyTree<Creature> testTree(){
+//        FamilyTree<Creature> tree = new FamilyTree<>();
 //
 //        Human andrey = new Human("andrey", Gender.Male, LocalDate.of(1983,10,1));
 //        Human masha = new Human("masha", Gender.Female, LocalDate.of(1987,1,19));
