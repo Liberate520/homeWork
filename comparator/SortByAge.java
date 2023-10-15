@@ -1,4 +1,7 @@
-package homeWork3.ui;
+package homeWork3.comparator;
+
+import homeWork3.ui.Command;
+import homeWork3.ui.Console;
 
 public class SortByAge extends Command {
     public SortByAge(Console console) {

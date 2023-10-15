@@ -2,7 +2,7 @@ package homeWork3.ui;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-import homeWork3.Viewer;
+import homeWork3.viewer.Viewer;
 
 public class Console implements View {
     private Scanner scan;
@@ -18,7 +18,7 @@ public class Console implements View {
         while (go) {
             header();
             UImenu();
-            System.out.print("Выберите омер пункта из Меню выше: ");
+            System.out.print("Выберите номер пункта из Меню выше: ");
             String command = scan.nextLine();
             if (checkInput(command)) {
                 menu.execute(Integer.parseInt(command));
@@ -43,7 +43,7 @@ public class Console implements View {
         String sex = scan();
         System.out.print("Введите возраст: ");
         int age = Integer.parseInt(scan());
-        viewer.addNewHuman(name, sex, age);
+        viewer.newHumanAdded(name, sex, age);
     }
 
     public void printFamily() {

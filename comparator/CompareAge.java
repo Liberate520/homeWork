@@ -1,8 +1,8 @@
-package homeWork3.model;
+package homeWork3.comparator;
+
+import homeWork3.model.Human;
 
 import java.util.Comparator;
-
-import homeWork3.Human;
 
 public class CompareAge implements Comparator<Human> {
 

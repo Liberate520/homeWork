@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MainFamily implements Serializable, Comparable<MainFamily> {
+public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
     private String name;
     private String gender;
     private int age;
-    private MainFamily mother;
-    private MainFamily father;
-    private List<MainFamily> kids;
+    private PetFamily mother;
+    private PetFamily father;
+    private List<PetFamily> kids;
 
-    public MainFamily(String name, String gender, int age, MainFamily mother, MainFamily father) {
+    public PetFamily(String name, String gender, int age, PetFamily mother, PetFamily father) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -21,11 +21,11 @@ public abstract class MainFamily implements Serializable, Comparable<MainFamily>
         kids = new ArrayList<>();
     }
 
-    public MainFamily(String name, String gender, int age) {
+    public PetFamily(String name, String gender, int age) {
         this(name, gender, age, null, null);
     }
 
-    public void addKid(MainFamily kid) {
+    public void addKid(PetFamily kid) {
         if (!kids.contains(kid)) {
             this.kids.add(kid);
             if (this.gender == "мужской") {
@@ -68,11 +68,11 @@ public abstract class MainFamily implements Serializable, Comparable<MainFamily>
         return name;
     }
 
-    public MainFamily getFather() {
+    public PetFamily getFather() {
         return father;
     }
 
-    public MainFamily getMother() {
+    public PetFamily getMother() {
         return mother;
     }
 
@@ -85,7 +85,7 @@ public abstract class MainFamily implements Serializable, Comparable<MainFamily>
     }*/
 
     @Override
-    public int compareTo(MainFamily o) {
+    public int compareTo(PetFamily o) {
         return name.compareToIgnoreCase(o.name);
     }
 }

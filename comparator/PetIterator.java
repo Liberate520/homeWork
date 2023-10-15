@@ -1,12 +1,14 @@
-package homeWork3.model;
+package homeWork3.comparator;
+
+import homeWork3.model.PetFamily;
 
 import java.util.List;
 
-public class Iterator<T extends MainFamily> implements java.util.Iterator<T> {
+public class PetIterator<T extends PetFamily> implements java.util.Iterator<T> {
     private int index;
     private List<T> humans;
 
-    public Iterator(List<T> humans) {
+    public PetIterator(List<T> humans) {
         this.humans = humans;
     }
 

@@ -1,5 +1,8 @@
 package homeWork3.ui;
 
+import homeWork3.comparator.SortByAge;
+import homeWork3.comparator.SortByName;
+
 import java.util.ArrayList;
 import java.util.List;
 

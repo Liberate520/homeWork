@@ -1,14 +1,12 @@
-package homeWork3;
+package homeWork3.model;
 
-import homeWork3.model.MainFamily;
-import homeWork3.model.WorkWithFile;
-import homeWork3.model.Iterator;
+import homeWork3.comparator.PetIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree<T extends MainFamily> implements Iterable<T>, Serializable {
+public class FamilyTree<T extends PetFamily> implements Iterable<T>, Serializable {
     private List<T> familyTree;
 
     public FamilyTree() {
@@ -51,7 +49,7 @@ public class FamilyTree<T extends MainFamily> implements Iterable<T>, Serializab
 
     @Override
     public java.util.Iterator<T> iterator() {
-        return new Iterator<T>(familyTree);
+        return new PetIterator<T>(familyTree);
     }
 
     public void saveObject(WorkWithFile save) {
