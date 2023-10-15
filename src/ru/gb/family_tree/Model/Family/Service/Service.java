@@ -11,27 +11,26 @@ public class Service{
         familyTree = CreationTreeHuman.addTree();
         fileHandler = new FileHandler();
     }
-    public void saverTree(){//Метод не доделан до конца
-        FamilyTree ft = CreationTreeHuman.addTree();
-        fileHandler.save(ft);
+    public void saverTree(){
+        SaverReader.save(familyTree);
     }
-    public FamilyTree readFile(){//Метод не доделан до конца
-        FamilyTree tree = (FamilyTree) fileHandler.read();
-        return tree;
+    public FamilyTree readFile(){
+        familyTree = SaverReader.read();
+        return familyTree;
     }
-    public String getInfoTree(){
+    public String sortInfoTree(){
         return familyTree.toString();
     }
-    public void getByAge() {
+    public void sortByAge() {
         familyTree.sortByAge();
     }
-    public void getByDateOfBirth() {
+    public void sortByDateOfBirth() {
         familyTree.sortByDateOfBirth();
     }
-    public void getByGender() {
+    public void sortByGender() {
         familyTree.sortByGender();
     }
-    public void getByName() {
+    public void sortByName() {
         familyTree.sortByName();
     }
 

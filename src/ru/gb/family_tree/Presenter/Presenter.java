@@ -13,29 +13,29 @@ public class Presenter {
         service = new Service();
     }
 
-    public void Info(){
-        String info = service.getInfoTree();
+    public void info(){
+        String info = service.sortInfoTree();
         view.printAnswer(info);
     }
 
 
     public void getByAge() {
-        service.getByAge();
-        Info();
+        service.sortByAge();
+        info();
     }
 
     public void getByDateOfBirth() {
-        service.getByDateOfBirth();
-        Info();
+        service.sortByDateOfBirth();
+        info();
     }
 
     public void getByGender() {
-        service.getByGender();
-        Info();
+        service.sortByGender();
+        info();
     }
 
     public void getByName() {
-        service.getByName();
-        Info();
+        service.sortByName();
+        info();
     }
 }

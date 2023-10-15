@@ -35,7 +35,7 @@ public class ConsoleUI implements View {
     }
 
     public void info() {
-        presenter.Info();
+        presenter.info();
     }
 
     public void getByName() {
