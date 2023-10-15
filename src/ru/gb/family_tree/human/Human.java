@@ -4,13 +4,11 @@ import ru.gb.family_tree.tree.FamilyTree;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Human {
     private int id;
+    private FamilyTree family;
     private String lastname;
     private String name;
 
@@ -21,7 +19,7 @@ public class Human {
     private List<Human> children;
     private Human spouse;
 
-    public Human(String lastname, String name, Gender gender) {
+    public Human(FamilyTree family, String lastname, String name, Gender gender) {
         id++;
         this.lastname = lastname;
         this.name = name;
@@ -30,6 +28,8 @@ public class Human {
         this.parents = parents;
         List<Human> children = new ArrayList<>();
         this.children = children;
+        this.family = family;
+        family.addMember(this);
     }
 
     public String getAge() {
@@ -122,11 +122,32 @@ public class Human {
         spouse.spouse = this;
     }
 
+    public boolean theSame (Human human) {
+        return human.equals(this);
+    }
+
     @Override
     // Сюда можно было добавить еще параметров, но метод часто используется,
     // в консоли было бы неудобочитаемо
     public String toString() {
         return "Фамилия: " + lastname + ", имя: " + name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Human)){
+            return false;
+        }
+        Human human = (Human) obj;
+        return family == human.family && lastname.equals(human.getLastname()) && name.equals(human.getName()) && gender.equals(human.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return 3 * family.hashCode() + 7 * lastname.hashCode() + 13 * name.hashCode() + 24 * gender.hashCode();
     }
 }
 
