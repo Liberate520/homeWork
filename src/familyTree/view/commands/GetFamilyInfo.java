@@ -5,7 +5,7 @@ import familyTree.view.ConsoleUI;
 public class GetFamilyInfo extends Command{
     public GetFamilyInfo(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Full family tree";
+        description = "Get full family tree list";
     }
 
     public void execute() {

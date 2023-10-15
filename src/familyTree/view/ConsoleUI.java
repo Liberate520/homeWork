@@ -31,7 +31,7 @@ public class ConsoleUI implements View {
     }
 
     private void hello() {
-        System.out.printf("Welcome to menu");
+        System.out.printf("Welcome to menu\n");
     }
     public void finish() {
         System.out.printf("You're completed work");
@@ -40,7 +40,7 @@ public class ConsoleUI implements View {
     public void addToFamily(){
         System.out.println("Enter name of new family's member:\nAfter this step program will ask you about:\n- date of birth\n- gender");
         String name = scanner.nextLine();
-        System.out.println("Enter date of birth IN FORMAT: DD-MM-YYYY:\n");
+        System.out.println("Enter date of birth IN FORMAT: DD-MM-YYYY:");
         String dateStr = scanner.nextLine();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(dateStr, formatter);
