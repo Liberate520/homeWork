@@ -109,8 +109,10 @@ public class Human {
     }
 
     public void setChild(Human human) { // в main можно использовать только этот метод, т.к. он привязывает родителей автоматически
-        this.children.add(human);
-        human.setParent(this);
+        if(!children.contains(human)) {
+            this.children.add(human);
+            human.setParent(this);
+        }
     }
 
     public void setSpouse(Human spouse) {

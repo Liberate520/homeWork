@@ -46,6 +46,8 @@ public class Main {
 
         System.out.println(mila.getId()); // должно быть 4, т.к. Настя не считается
         System.out.println(dushik.getChildren()); // Людмила уже Васильева
+        nastya.setChild(mila); // пытаюсь добавить ребенка второй раз
+        System.out.println(nastya.getChildren()); // не выходит...
 
         // Настю не добавляю в семью, она потом ушла от Андрея и в общем списке ее нет
 
