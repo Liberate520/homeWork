@@ -20,7 +20,6 @@ public class Human {
     private Human spouse;
 
     public Human(FamilyTree family, String lastname, String name, Gender gender) {
-        id++;
         this.lastname = lastname;
         this.name = name;
         this.gender = gender;
@@ -120,10 +119,6 @@ public class Human {
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
         spouse.spouse = this;
-    }
-
-    public boolean theSame (Human human) {
-        return human.equals(this);
     }
 
     @Override

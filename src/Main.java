@@ -21,8 +21,8 @@ public class Main {
         System.out.println(vasya.getSpouse()); // Васе Сара тоже добавилась супругой
 
         Human dushik = new Human(katsman,"Кацман", "Андрей", Gender.Male);
-        dushik.setBirthday(LocalDate.of(1931, 11, 6));
-        dushik.setDeathday(LocalDate.of(2005, 5, 11));
+        dushik.setBirthday(LocalDate.of(1932, 11, 6));
+        dushik.setDeathday(LocalDate.of(2008, 5, 11));
         System.out.println(dushik.getAge());
 
         vasya.setChild(dushik);// Андрей - сын Сары и Васи

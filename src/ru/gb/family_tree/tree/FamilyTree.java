@@ -4,30 +4,31 @@ import ru.gb.family_tree.HumanExcistsException;
 import ru.gb.family_tree.human.Human;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class FamilyTree {
 
     private String family;
-    public Set<Human> familyMembers;
-    int memberId = 1; // хочу нумерацию людей с 1
+    private List<Human> familyMembers;
+    private int memberId = 1; // хочу нумерацию людей с 1
 
     public FamilyTree(String family) {
         this.family = family;
-        familyMembers = new HashSet<>();
+        familyMembers = new ArrayList<>();
     }
 
     public void tryAdd (Human human) throws HumanExcistsException {
-        if (!familyMembers.add(human)) {
-               throw new HumanExcistsException("Такой человек уже есть!");
+        if (familyMembers.contains(human)) {
+            throw new HumanExcistsException("Такой человек уже есть!");
         }
     }
     public void addMember (Human human) {
         human.setId(memberId++);
         try {
             tryAdd(human);
+            if (!familyMembers.contains(human)) {
+                familyMembers.add(human);
+            }
         } catch (HumanExcistsException e) {
             System.out.println(e.getMessage());
         }
