@@ -1,6 +1,6 @@
 package homeWork3;
 
-import homeWork3.viewer.Viewer;
+import homeWork3.viewer.ReView;
 import homeWork3.model.FamilyTree;
 import homeWork3.model.Human;
 import homeWork3.model.WorkWithFile;
@@ -20,7 +20,7 @@ public class Main {
         View view = new Console();
         WorkWithFile serialize = new WorkWithFile();
         CompareAge sortAge =  new CompareAge();
-        new Viewer(view, familyTree, serialize, sortAge);
+        new ReView(view, familyTree, serialize, sortAge);
         view.start();
     }
 }

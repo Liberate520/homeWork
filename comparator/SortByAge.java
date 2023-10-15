@@ -1,5 +1,7 @@
 package homeWork3.comparator;
 
+import homeWork3.model.FamilyTree;
+import homeWork3.model.Human;
 import homeWork3.ui.Command;
 import homeWork3.ui.Console;
 
@@ -18,4 +20,5 @@ public class SortByAge extends Command {
         getConsole().sortFamilyByAge();
 
     }
+
 }

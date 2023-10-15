@@ -2,11 +2,11 @@ package homeWork3.ui;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-import homeWork3.viewer.Viewer;
+import homeWork3.viewer.ReView;
 
 public class Console implements View {
     private Scanner scan;
-    private Viewer viewer;
+    private ReView viewer;
     private Menu menu;
     private boolean go;
 
@@ -78,7 +78,7 @@ public class Console implements View {
     }
 
     @Override
-    public void setViewer(Viewer viewer) {
+    public void setViewer(ReView viewer) {
         this.viewer = viewer;
     }
 

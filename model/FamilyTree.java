@@ -27,11 +27,11 @@ public class FamilyTree<T extends PetFamily> implements Iterable<T>, Serializabl
 
     @Override
     public String toString() {
-        String res = "В семье " + familyTree.size() + " человек:\n";
+        StringBuilder res = new StringBuilder("В семье " + familyTree.size() + " человек:\n");
         for (int i = 0; i < familyTree.size(); i++) {
-            res += (i + 1) + ") " + familyTree.get(i).toString() + "\n";
+            res.append((i + 1)).append(") ").append(familyTree.get(i).toString()).append("\n");
         }
-        return res;
+        return res.toString();
     }
 
     public T getByName(String humanName) {
@@ -49,7 +49,7 @@ public class FamilyTree<T extends PetFamily> implements Iterable<T>, Serializabl
 
     @Override
     public java.util.Iterator<T> iterator() {
-        return new PetIterator<T>(familyTree);
+        return new PetIterator<>(familyTree);
     }
 
     public void saveObject(WorkWithFile save) {

@@ -1,9 +1,9 @@
 package homeWork3.ui;
 
-import homeWork3.viewer.Viewer;
+import homeWork3.viewer.ReView;
 
 public interface View {
-    void setViewer(Viewer viewer);
+    void setViewer(ReView viewer);
 
     void start();
 

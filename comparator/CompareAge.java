@@ -11,5 +11,4 @@ public class CompareAge implements Comparator<Human> {
 
         return Integer.compare(o1.getAge(), o2.getAge());
     }
-
 }

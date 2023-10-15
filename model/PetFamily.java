@@ -3,6 +3,7 @@ package homeWork3.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
     private String name;
@@ -28,7 +29,7 @@ public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
     public void addKid(PetFamily kid) {
         if (!kids.contains(kid)) {
             this.kids.add(kid);
-            if (this.gender == "мужской") {
+            if (Objects.equals(this.gender, "мужской")) {
                 kid.father = this;
             } else
                 kid.mother = this;
@@ -36,14 +37,14 @@ public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
     }
 
     public String printKids() {
-        String res = " Дети: ";
+        StringBuilder res = new StringBuilder(" Дети: ");
         if (!this.kids.isEmpty()) {
-            for (int i = 0; i < kids.size(); i++) {
-                res += kids.get(i).name + ",";
+            for (PetFamily kid : kids) {
+                res.append(kid.name).append(",");
             }
         } else
-            res += " нет";
-        return res;
+            res.append(" нет");
+        return res.toString();
     }
 
     @Override
