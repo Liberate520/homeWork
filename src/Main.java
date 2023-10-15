@@ -13,6 +13,7 @@ public class Main {
         vasya.setDeathday(LocalDate.of(1986, 9, 14));
         System.out.println(vasya);
         katsman.addMember(vasya);
+        katsman.addMember(vasya); // 2 раза добавить того же самого не получится
         Human sara = new Human("Кацман", "Сара", Gender.Female);
         sara.setBirthday(LocalDate.of(1912, 6, 26));
         sara.setDeathday(LocalDate.of(1962, 12, 18));

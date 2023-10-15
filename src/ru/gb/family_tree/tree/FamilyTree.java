@@ -1,5 +1,6 @@
 package ru.gb.family_tree.tree;
 
+import ru.gb.family_tree.HumanExcistsException;
 import ru.gb.family_tree.human.Human;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 public class FamilyTree {
 
     private String family;
-    private List<Human> familyMembers;
+    public List<Human> familyMembers;
     int memberId = 1; // хочу нумерацию людей с 1
 
     public FamilyTree(String family) {
@@ -16,9 +17,19 @@ public class FamilyTree {
         familyMembers = new ArrayList<>();
     }
 
+    public void tryAdd (Human human) throws HumanExcistsException {
+        if (familyMembers.contains(human)) {
+            throw new HumanExcistsException("Такой человек уже есть!");
+        }
+        else familyMembers.add(human);
+    }
     public void addMember (Human human) {
         human.setId(memberId++);
-        familyMembers.add(human);
+        try {
+            tryAdd(human);
+        } catch (HumanExcistsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String allMembers () {

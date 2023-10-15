@@ -1,5 +1,7 @@
 package ru.gb.family_tree.human;
 
+import ru.gb.family_tree.tree.FamilyTree;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
