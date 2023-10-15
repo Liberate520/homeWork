@@ -1,6 +1,6 @@
-package familyTree.familyTree.iterator;
+package familyTree.model.familyTree.iterator;
 
-import familyTree.familyTree.FamilyGroupItem;
+import familyTree.model.familyTree.FamilyGroupItem;
 
 import java.io.FileFilter;
 import java.util.Iterator;

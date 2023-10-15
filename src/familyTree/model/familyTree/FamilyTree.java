@@ -1,8 +1,8 @@
-package familyTree.familyTree;
+package familyTree.model.familyTree;
 
-import familyTree.familyTree.iterator.FamilyTreeIterator;
-import familyTree.human.comparators.HumanComparatorByAge;
-import familyTree.human.comparators.HumanComparatorByName;
+import familyTree.model.familyTree.comparators.HumanComparatorByAge;
+import familyTree.model.familyTree.comparators.HumanComparatorByName;
+import familyTree.model.familyTree.iterator.FamilyTreeIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, I
         this.humanList = humanList;
     }
 
-    public boolean add(T el) {
+    public boolean addToFamily(T el) {
         if (el == null) {
             return false;
         }

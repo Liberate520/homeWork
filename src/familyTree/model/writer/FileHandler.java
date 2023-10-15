@@ -1,6 +1,4 @@
-package familyTree.writer;
-
-import familyTree.familyTree.FamilyTree;
+package familyTree.model.writer;
 
 import java.io.*;
 
