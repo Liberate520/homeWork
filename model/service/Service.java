@@ -1,32 +1,30 @@
 // нарушен принцип единственной ответственности, класс занимается как добавлением Human, так и сортировкой, так и сохранением в файл 
+// нарушен принцип инверсии зависимостей
 
 package model.service;
-//import java.util.logging.FileHandler;
-
-import model.service.FileHandler;
 import model.family.Family;
 import model.human.Human;
 
 public class Service {
     private int idHuman;
     private Family<Human> family;
-    
+    FileHandler fileHandler = new FileHandler();
 
     public Service() {
         family = new Family<>();
         
 
     }
-    
     String filepath = "Familytree.txt";
-    FileHandler fileHandler = new FileHandler();
-    FamilyTree tree = (FamilyTree) fileHandler.read(filepath);
-    //fileHandler.save(tree, filepath);
-
-    
-    //
-    public void addHuman(String name, String gender, String father, String mother, int birthdate){
-        Human human = new Human(idHuman++, name, gender, father, mother, birthdate);
+    public void read(){
+        family = (Family) fileHandler.read(filepath);
+    }
+    public void save(){
+    fileHandler.save(family, filepath);
+    }
+        
+    public void addHuman(String name, String gender, String father, String mother, int birthdate, String alive_status, String children){
+        Human human = new Human(idHuman++, name, gender, father, mother, birthdate, alive_status, children);
         family.addHuman(human);
     }
 

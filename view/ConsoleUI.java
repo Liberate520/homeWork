@@ -61,7 +61,11 @@ public class ConsoleUI implements View {
         System.out.println("Input birth date");
         String ageString = scanner.nextLine();
         int birthdate = Integer.parseInt(ageString);
-        presenter.addHuman(name, gender,father, mother, birthdate);
+        System.out.println("Input alive status");
+        String alive_status = scanner.nextLine();
+        System.out.println("Input children");
+        String children = scanner.nextLine();
+        presenter.addHuman(name, gender,father, mother, birthdate, alive_status, children);
     }
 
     private void hello(){

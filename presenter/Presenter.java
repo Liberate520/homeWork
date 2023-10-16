@@ -1,6 +1,6 @@
 package presenter;
 import model.service.Service;
-import view.ConsoleUI;
+//import view.ConsoleUI;
 import view.View;
 
 public class Presenter {
@@ -12,8 +12,8 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addHuman(String name, String gender, String father, String mother, int birthdate) {
-        service.addHuman(name, gender,father, mother,birthdate);
+    public void addHuman(String name, String gender, String father, String mother, int birthdate, String alive_status, String children) {
+        service.addHuman(name, gender,father, mother,birthdate, alive_status, children);
         getHumanListInfo();
     }
 

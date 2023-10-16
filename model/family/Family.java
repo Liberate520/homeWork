@@ -4,12 +4,12 @@ import model.family.iterators.HumanIterator;
 import model.human.comparators.HumanComparatorByAge;
 import model.human.comparators.HumanComparatorByName;
 
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Family<E extends Subject> implements Iterable<E> {
+public class Family<E extends Subject> implements Iterable<E>, Serializable {
     private List<E> humanList;
 
     public Family() {
