@@ -6,29 +6,35 @@ import familyTree.model.human.Gender;
 import familyTree.model.human.Human;
 import familyTree.model.writer.FileHandler;
 import familyTree.view.ConsoleUI;
+import familyTree.view.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        String filePath = "src/familyTree/writer/testTree.txt";
-//        FileHandler fileHandler = new FileHandler();
-//
-//        FamilyTree<Human> tree = testTree();
-////        FamilyTree<Human> tree = (FamilyTree) fileHandler.read(filePath);
-//        System.out.println("Without sort: " + tree);
-//        tree.sortByName();
-//
-//        fileHandler.save(tree, filePath);
 
-        ConsoleUI consoleUI = new ConsoleUI();
-        consoleUI.start();
+
+        String filePath = "src/familyTree/writer/testTree.txt";
+        FileHandler fileHandler = new FileHandler();
+
+
+        FamilyTree<Human> tree = testTree();
+////      FamilyTree<Human> tree = (FamilyTree) fileHandler.read(filePath);
+
+        fileHandler.save(tree, filePath);
     }
-}
-//    static FamilyTree<Human> testTree() throws IOException {
-//        FamilyTree<Human> tree = new FamilyTree<>();
-//
+
+    static FamilyTree<Human> testTree() throws IOException {
+//    static void testTree() throws IOException {
+// TODO: 10/17/2023 спросить уместно ли здесь вызывать через View или лучше через  ConsоleUI
+        View view = new ConsoleUI();
+        view.start();
+
+//        ConsoleUI consoleUI = new ConsoleUI();
+//        consoleUI.start();
+
+
 //        Human dinara = new Human("Динара",
 //                LocalDate.of(1998, 1, 31),
 //                Gender.Female);
@@ -54,7 +60,9 @@ public class Main {
 //        tree.addToFamily(nadezda);
 //
 //        return tree;
+//
 //    }
+        return new FamilyTree<>();
+    }
+}
 
-
-//}

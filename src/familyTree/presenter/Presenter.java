@@ -2,6 +2,7 @@ package familyTree.presenter;
 
 
 import familyTree.model.human.Gender;
+import familyTree.model.human.Human;
 import familyTree.model.service.*;
 import familyTree.view.View;
 
@@ -18,6 +19,10 @@ public class Presenter {
 
     public void addToFamily(String name, LocalDate dateBirth, Gender gender){
         service.addToFamily(name, dateBirth, gender);
+    }
+
+    public void addToFamily(String name, LocalDate dateBirth, Gender gender, Human mother, Human father){
+        service.addToFamily(name, dateBirth, gender, mother, father);
     }
 
     public void getFamilyInfo(){

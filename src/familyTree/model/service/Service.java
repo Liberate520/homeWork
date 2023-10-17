@@ -20,6 +20,12 @@ public class Service {
         family.addToFamily(human);
     }
 
+    public void addToFamily(String name, LocalDate dateBirth, Gender gender, Human mother, Human father) {
+        Human human = new Human(name, gender, dateBirth, mother, father);
+        idHuman++;
+        family.addToFamily(human);
+    }
+
     public String getFamilyInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Full info of FamilyTree:\n");

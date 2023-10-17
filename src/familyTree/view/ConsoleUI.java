@@ -1,18 +1,23 @@
 package familyTree.view;
 
+import familyTree.model.familyTree.FamilyTree;
 import familyTree.model.human.Gender;
+import familyTree.model.human.Human;
 import familyTree.presenter.Presenter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class ConsoleUI implements View {
+public class ConsoleUI implements View{
     private static final String INPUT_ERROR = "Wrong value";
     private boolean work;
     private Menu menu;
     private Scanner scanner;
     private Presenter presenter;
+    private Human mother;
+    private Human father;
 
     public ConsoleUI() {
         work = true;
@@ -21,23 +26,35 @@ public class ConsoleUI implements View {
         presenter = new Presenter(this);
     }
 
+//    String filePath = "src/familyTree/writer/testTree.txt";
+//    FileHandler fileHandler = new FileHandler();
+//
+//        FamilyTree<Human> tree = testTree();
+//        FamilyTree<Human> tree = (FamilyTree) fileHandler.read(filePath);
+////        System.out.println("Without sort: " + tree);
+////        tree.sortByName();
+//
+//        fileHandler.save(tree, filePath)
     @Override
-    public void start() {
+    public FamilyTree<Human> start() {
         hello();
         while (work) {
             printMenu();
             execute();
         }
+        return null;
     }
 
     private void hello() {
         System.out.printf("Welcome to menu\n");
     }
+
     public void finish() {
         System.out.printf("You're completed work");
         work = false;
     }
-    public void addToFamily(){
+
+    public void addToFamily() {
         System.out.println("Enter name of new family's member:\nAfter this step program will ask you about:\n- date of birth\n- gender");
         String name = scanner.nextLine();
         System.out.println("Enter date of birth IN FORMAT: DD-MM-YYYY:");
@@ -47,19 +64,23 @@ public class ConsoleUI implements View {
         System.out.println("Enter gender IN FORMAT: Male/Female");
         String genderStr = scanner.nextLine();
         Gender gender = Gender.valueOf(genderStr);
+
         presenter.addToFamily(name, date, gender);
+
     }
 
-    public void getFamilyInfo(){
+    public void getFamilyInfo() {
         presenter.getFamilyInfo();
     }
 
-    public void sortByName(){
+    public void sortByName() {
         presenter.sortByName();
     }
-    public void sortByAge(){
+
+    public void sortByAge() {
         presenter.sortByAge();
     }
+
     private boolean checkCommand(int numbCommand) {
         if (numbCommand <= menu.getSize()) {
             return true;
