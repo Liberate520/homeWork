@@ -10,5 +10,7 @@ public interface ConsoleCommands {
     void getPersonInfo();
     void saveFamilyTree();
     void downloadFamilyTree();
+    void sortByName();
+    void sortByBirthDate();
     void finish();
 }

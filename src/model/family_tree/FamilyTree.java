@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<E extends FamilyTreeItem<E>> extends FileHandler implements Iterable<E>{
+    /*понимаю, что наследование выполнено ошибочно, но по другому не получается( */
     private List<E> peopleList;
     private String familyName;
     private int count = 1;
@@ -113,15 +114,7 @@ public class FamilyTree<E extends FamilyTreeItem<E>> extends FileHandler impleme
         return new TreeIterator<>(peopleList);
     }
 
-    /*исправил принцип инверсии зависимости
-    * ранее класс зависел от классов компараторов*/
     public void sort(Comparator<E> comparator) {
         peopleList.sort(comparator);
     }
-//    public void sortByName() {
-//        peopleList.sort(new PersonComparatorByName<>());
-//    }
-//    public void sortByBirthDate() {
-//        peopleList.sort(new PersonComparatorByBirthDate<>());
-//    }
 }

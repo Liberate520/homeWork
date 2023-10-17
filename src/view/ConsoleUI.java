@@ -1,5 +1,6 @@
 package view;
 
+import model.person.Gender;
 import presenter.Presenter;
 
 import java.time.LocalDate;
@@ -72,8 +73,22 @@ public class ConsoleUI implements View, ConsoleCommands{
         }
 
         System.out.println("Введите пол (м/ж):");
-        String gender = scanner.nextLine();
-
+        String strGender = scanner.nextLine();
+        Gender gender; // если реализовать данный switch в View, то появится пересечение с model
+        switch (strGender) {
+            case "м": {
+                gender = Gender.Male;
+                break;
+            }
+            case "ж": {
+                gender = Gender.Female;
+                break;
+            }
+            default: {
+                gender = Gender.NonBinary;
+                break;
+            }
+        }
         if (checkYear(birthYear) && checkMonth(birthMonth) && checkDay(birthDay)) {
             presenter.addInFamily(name, birthDay, birthMonth, birthYear, gender);
         }
@@ -170,6 +185,16 @@ public class ConsoleUI implements View, ConsoleCommands{
         System.out.println("Введите фамилию:");
         String name = scanner.nextLine();
         presenter.downloadFamilyTree(name);
+    }
+
+    @Override
+    public void sortByName() {
+        presenter.sortByName();
+    }
+
+    @Override
+    public void sortByBirthDate() {
+        presenter.sortByBirthDate();
     }
 
     public void finish() {

@@ -18,6 +18,8 @@ public class MainMenu {
         commandList.add(new CreateCustomTree(consoleUI));
         commandList.add(new SaveFamilyTree(consoleUI));
         commandList.add(new DownloadFamilyTree(consoleUI));
+        commandList.add(new SortByBirthDate(consoleUI));
+        commandList.add(new SortByName(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
     public String menu() {

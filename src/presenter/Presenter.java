@@ -1,104 +1,69 @@
 package presenter;
 
-import model.family_tree.CustomFamilyTree;
-import model.family_tree.FamilyTree;
 import model.person.Gender;
-import model.person.Person;
-import model.saving.Saving;
-import model.saving.SerializationSave;
+import model.service.FamilyTreeService;
 import view.View;
 
 import java.time.LocalDate;
 
 public class Presenter {
     private View view;
-    private FamilyTree<Person> familyTree;
+    private FamilyTreeService service;
+
     public Presenter(View view) {
         this.view = view;
-        familyTree = new FamilyTree<>("");
+        service = new FamilyTreeService();
     }
     public void getFamilyInfo() {
-        String info = familyTree.getFamilyInfo();
+        String info = service.getFamilyInfo();
         view.printAnswer(info);
     }
     public void createFamilyTree(String familyName) {
-        familyTree = new FamilyTree<>(familyName);
-//        getFamilyInfo();
+        service.createNewFamilyTree(familyName);
     }
 
     public void createCustomTree() {
-        familyTree = new CustomFamilyTree().getCustomFamilyTree();
+        service.createCustomTree();
         getFamilyInfo();
     }
 
-    public void addInFamily(String name, int birthDay, int birthMonth, int birthYear, String strGender) {
+    public void addInFamily(String name, int birthDay, int birthMonth, int birthYear, Gender gender) {
         LocalDate birthDate = LocalDate.of(birthDay, birthMonth, birthYear);
-        Gender gender;
-        switch (strGender) {
-            case "м": {
-                gender = Gender.Male;
-                break;
-            }
-            case "ж": {
-                gender = Gender.Female;
-                break;
-            }
-            default: {
-                gender = Gender.NonBinary;
-                break;
-            }
-        }
-        Person person = new Person(name, birthDate, gender);
-        familyTree.addInFamily(person);
+        service.addInFamily(name, birthDate, gender);
         getFamilyInfo();
     }
 
     public void addDeathDate(int id, LocalDate deathDate) {
-        Person person = findByID(id);
-        person.setDeathDate(deathDate);
+        service.addDeathDate(id, deathDate);
         getFamilyInfo();
     }
     public void getMarried(int husbandID, int wifeID) {
-        Person husband = findByID(husbandID);
-        Person wife = findByID(wifeID);
-        familyTree.isHusbands(husband, wife);
+        service.getMarried(husbandID, wifeID);
     }
     public void getChild(int childID, int fatherID, int motherID) {
-        Person child = findByID(childID);
-        Person father = findByID(fatherID);
-        Person mother = findByID(motherID);
-        familyTree.isChildren(child, father, mother);
+        service.getChild(childID, fatherID, motherID);
     }
 
     public void getPersonInfo(int id) {
-        String info = familyTree.getPersonInfo(findByID(id));
+        String info = service.getPersonInfo(id);
         System.out.println(info);
     }
     public void saveFamilyTree() {
-        Saving saving = new SerializationSave();
-        saving.save(familyTree);
+        service.saveFamilyTree();
     }
     public void downloadFamilyTree(String name) {
-        Saving saving = new SerializationSave();
-        try {
-            familyTree = saving.download(name);
-            getFamilyInfo();
-        } catch (Exception e) {
-            System.out.println("увы((");
-        }
+        service.downloadFamilyTree(name);
+    }
+    public void sortByName() {
+        service.sortByName();
+        getFamilyInfo();
+    }
+    public void sortByBirthDate() {
+        service.sortByBirthDate();
+        getFamilyInfo();
     }
     public int getTreeSize() {
-        return familyTree.size();
+        return service.getTreeSize();
     }
-    private Person findByID(int id) {
-        Person findPerson = null;
-        for (Person person : familyTree) {
-            if (id == person.getId()) {
-                findPerson = person;
-            }
-        }
-        return findPerson;
-    }
-
 }
 
