@@ -60,8 +60,7 @@ public class FamilyTree <E extends TreeNode<E>> implements Serializable, Iterabl
     }
 
   
-
-     
+      
 
     public List<E> getList() {
         List<E> list = new ArrayList<>();
@@ -130,4 +129,5 @@ public class FamilyTree <E extends TreeNode<E>> implements Serializable, Iterabl
     public void sortByName(){
         humanList.sort(new FamilyTreeComparatorByName<>());
     }
+    
 }
