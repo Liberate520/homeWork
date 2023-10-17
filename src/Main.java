@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-
+//Константин, это черновик, второе занятие ещё не смотрела. Понимаю, что работы мне ещё очень много
 public class Main {
     public static void main(String[] args) {
         int id = 0;
