@@ -3,6 +3,7 @@ package familyTree.model.service;
 import familyTree.model.familyTree.FamilyTree;
 import familyTree.model.human.Gender;
 import familyTree.model.human.Human;
+import familyTree.model.writer.FileHandler;
 
 import java.time.LocalDate;
 
@@ -13,7 +14,6 @@ public class Service {
     public Service() {
         family = new FamilyTree<>();
     }
-
     public void addToFamily(String name, LocalDate dateBirth, Gender gender) {
         Human human = new Human(name, dateBirth, gender);
         idHuman++;
@@ -42,5 +42,13 @@ public class Service {
 
     public void sortByAge() {
         family.sortByAge();
+    }
+
+    public void serialization(){
+        String filePath = "src/familyTree/writer/testTree.txt";
+        FileHandler fileHandler = new FileHandler();
+        FamilyTree<Human> tree = family;
+        fileHandler.save(tree, filePath);
+//        fileHandler.read(filePath);
     }
 }

@@ -28,6 +28,7 @@ public class Presenter {
     public void getFamilyInfo(){
         String answer = service.getFamilyInfo();
         view.printAnswer(answer);
+        service.serialization();
     }
     public void sortByName(){
         service.sortByName();

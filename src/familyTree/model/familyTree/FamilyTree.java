@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<T extends FamilyGroupItem<T>> implements Serializable, Iterable<T> {
-    // TODO: 10/17/2023 поправить сериализацию 
     private int humanId;
     private List<T> humanList;
 
