@@ -124,7 +124,7 @@ public class Main {
         System.out.println(p11.toString());
 
         p12.setId(12);//1 ряд 2 место
-        p12.setGender(Gender.Female); p12.setFirstName("Евдокия"); p11.setSecondName("Лукьяновна");
+        p12.setGender(Gender.Female); p12.setFirstName("Евдокия"); p12.setSecondName("Лукьяновна");
         p12.setLastName("Стрешнева");
         System.out.println(p12.toString());
 
