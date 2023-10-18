@@ -116,6 +116,9 @@ public class Person {
                 getId(), getLastName(), getFirstName(), getSecondName(), start, stop, getGenderString());
     }
 
+    /**
+     * Переопределён метод equals, чтобы впоследствии можно было реализовать поиск по персоне.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj){
@@ -130,10 +133,10 @@ public class Person {
                 gender.equals(person.getGender());
     }
 
-    @Override
+    /*@Override
     public int hashCode() {
         return 3 * getFamily().hashCode() + 7 * getLastName().hashCode() + 13 * getFirstName().hashCode() +
                 17 * getSecondName().hashCode() + 24 * getStartDay().hashCode() + 32 * getStopDay().hashCode() +
                 48 * getGender().hashCode();
-    }
+    }*/
 }

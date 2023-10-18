@@ -39,6 +39,10 @@ public class Node {
         this.children = children;
     }
 
+    public void addChildren(Person child){
+        this.children.add(child);
+    }
+
     public int getId(){
         return id;
     }

@@ -9,7 +9,7 @@ public class NodeBuilder {
     private FamilyTree family;
     private Person parentOne;
     private Person parentTwo;
-    private HashSet<Person> children = null;
+    private HashSet<Person> children = new HashSet<>();
 
     public NodeBuilder setId(int id) {
         this.id = id;
