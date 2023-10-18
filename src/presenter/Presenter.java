@@ -1,10 +1,8 @@
 package presenter;
 
-import java.security.Provider.Service;
-
-import javax.swing.text.View;
 
 import model.service.FamilyTreeService;
+import view.View;
 
 public class Presenter {
    private View view;

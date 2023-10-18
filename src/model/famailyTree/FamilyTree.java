@@ -99,7 +99,7 @@ public class FamilyTree <E extends TreeNode<E>> implements Serializable, Iterabl
         return false;
     }
 
-    public String info() {
+    public String Info() {
         StringBuilder sb = new StringBuilder();
         sb.append("Семейное дерево: \n");
         sb.append(humanList.size()).append(" - Семейное дерево\n");
@@ -113,7 +113,7 @@ public class FamilyTree <E extends TreeNode<E>> implements Serializable, Iterabl
 
     @Override
     public String toString() {
-        return info();
+        return Info();
     }
 
     @Override

@@ -39,7 +39,7 @@ public class FamilyTreeService {
   }
 
   public String getHumanList() {
-    return familyTree.info();
+    return familyTree.Info();
   }
 
 }

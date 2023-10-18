@@ -27,22 +27,21 @@ public class MainMenu {
    
    public String menu(){
       StringBuilder stringBuilder = new StringBuilder();
-      stringBuilder.append("Меню\n");
+      
       for (int i = 0; i < commandList.size(); i++){
-         Command command = commandList.get(i);
          stringBuilder.append(i+1);
          stringBuilder.append(".");
-         stringBuilder.append(command.getDescription());
+         stringBuilder.append(commandList.get(i).getDescription());
          stringBuilder.append("\n");
       }
       return stringBuilder.toString();
    }
 
-   public void choice(int index){
-      Command command = commandList.get( index - 1);
+   public void execute(int choice){
+      Command command = commandList.get(choice - 1);
       command.execute();
    }
-   public int size(){
+   public int getSize(){
       return commandList.size();
    }
 }
