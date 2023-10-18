@@ -77,7 +77,7 @@ public class Node {
     }
     @Override
     public String toString() {
-        return String.format("Узел дерева %d (брак):\n %s\n и %s\n, их дети:\n %s.",
+        return String.format("Узел дерева %d (брак):\n %s и %s,\n их дети:\n %s\n",
                 getId(),getParentOne().toString(), getParentTwo().toString(), printSet(getChildren()));
     }
 }

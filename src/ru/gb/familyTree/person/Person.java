@@ -112,7 +112,7 @@ public class Person {
         } else {
             stop = "";
         }
-        return String.format("Персона %d: %s %s %s (%s - %s), %s.",
+        return String.format("Персона %d: %s %s %s (%s - %s), %s",
                 getId(), getLastName(), getFirstName(), getSecondName(), start, stop, getGenderString());
     }
 
