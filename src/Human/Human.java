@@ -1,21 +1,25 @@
 package Human;
 
 import java.io.Serializable;
+import java.security.PublicKey;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class Human implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate birthday;
+    private LocalDate deathday;
     private Human spouse;
     private Map<String, Human> parents;
     private List<Human> children;
 
 
-    public Human(String name, LocalDate birthday, Gender gender) {
+    public Human(String name, LocalDate birthday, LocalDate deathday, Gender gender) {
         this.name = name;
-        this.birthday = birthday; // просто дата рождения без даты смерти. Могу реализовать, но хочу спать :D
+        this.birthday = birthday;
+        this.deathday = deathday;
         this.gender = gender;
         this.children = new ArrayList<>();
         this.parents = new HashMap<>();
@@ -27,6 +31,9 @@ public class Human implements Serializable {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+    public void setDeathday(LocalDate deathday) {
+        this.deathday = deathday;
     }
 
     public void setGender(Gender gender) {
@@ -67,7 +74,22 @@ public class Human implements Serializable {
     public LocalDate getBirthday() {
         return birthday;
     }
+    public LocalDate getDeathday() {
+        return deathday;
+    }
+    public int getAge(){
+        if (deathday == null){
+            return getPeriod(birthday,LocalDate.now());
+        }
+        else {
+            return getPeriod(birthday, deathday);
+        }
+    }
 
+    private int getPeriod(LocalDate birthday, LocalDate deathday){
+        Period diff =  Period.between(birthday,deathday);
+        return diff.getYears();
+    }
     public String getSpouse() {
         StringBuilder stringBuilder = new StringBuilder("\nСупруг(а): ");
         stringBuilder.append(this.spouse);

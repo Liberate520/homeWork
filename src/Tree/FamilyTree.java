@@ -1,7 +1,6 @@
 package Tree;
 
 import Human.Human;
-import Read.Serialization;
 
 import java.io.Serializable;
 import java.util.ArrayList;
