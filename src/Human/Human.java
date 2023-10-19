@@ -1,28 +1,23 @@
 package Human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate birthday;
     private Human spouse;
     private Map<String, Human> parents;
     private List<Human> children;
-    private Human grandMother; //Не реализовано
-    private Human grandFather;//Не реализовано
-    private List<Human> brotherAndSister; //Не реализовано
-    private Human cousins;//Не реализовано
-    private Human uncle;//Не реализовано
-    private Human aunt; //Не реализовано
+
 
     public Human(String name, LocalDate birthday, Gender gender) {
         this.name = name;
         this.birthday = birthday; // просто дата рождения без даты смерти. Могу реализовать, но хочу спать :D
         this.gender = gender;
         this.children = new ArrayList<>();
-        this.brotherAndSister = new ArrayList<>();
         this.parents = new HashMap<>();
     }
 
@@ -64,29 +59,6 @@ public class Human {
             }
         }
     }
-    public void setGrandMother(Human grandMother) {
-        this.grandMother = grandMother;
-    } //Не реализовано
-
-    public void setGrandFather(Human grandFather) {
-        this.grandFather = grandFather;
-    } //Не реализовано
-
-    public void setBrotherAndSister(List<Human> brotherAndSister) { //Не реализовано
-        this.brotherAndSister = brotherAndSister;
-    }
-
-    public void setCousins(Human cousins) {
-        this.cousins = cousins;
-    } //Не реализовано
-
-    public void setUncle(Human uncle) {
-        this.uncle = uncle;
-    } //Не реализовано
-
-    public void setAunt(Human aunt) {
-        this.aunt = aunt;
-    } //Не реализовано
 
     public String getName() {
         return name;
@@ -116,34 +88,6 @@ public class Human {
         stringBuilder.append(this.parents);
         return stringBuilder.toString();
     }
-
-    public Human getGrandMother() {
-        return grandMother;
-    }
-
-    public Human getGrandFather() {
-        return grandFather;
-    }
-
-    public String getBrotherAndSister() {
-        StringBuilder stringBuilder = new StringBuilder("\nБратья и сёстры: ");
-        stringBuilder.append(brotherAndSister);
-        return stringBuilder.toString();
-    }
-
-    public Human getCousins() {
-        return cousins;
-    }
-
-    public Human getUncle() {
-        return uncle;
-    }
-
-    public Human getAunt() {
-        return aunt;
-    }
-
-
 
     @Override
     public String toString() {

@@ -1,13 +1,15 @@
 package Tree;
 
 import Human.Human;
+import Read.Serialization;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class familyTree {
+public class FamilyTree implements Serializable {
     private List<Human> HumanList;
-    public familyTree(){
+    public FamilyTree(){
         HumanList = new ArrayList<>();
     }
     public void addHuman(Human human) {
