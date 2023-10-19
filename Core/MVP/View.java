@@ -1,9 +1,7 @@
-package homeWork3.ui;
-
-import homeWork3.viewer.ReView;
+package homeWork3.Core.MVP;
 
 public interface View {
-    void setViewer(ReView viewer);
+    void setPresenter(Presenter presenter);
 
     void start();
 

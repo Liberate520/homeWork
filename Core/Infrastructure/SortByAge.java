@@ -1,9 +1,7 @@
-package homeWork3.comparator;
+package homeWork3.Core.Infrastructure;
 
-import homeWork3.model.FamilyTree;
-import homeWork3.model.Human;
-import homeWork3.ui.Command;
-import homeWork3.ui.Console;
+import homeWork3.UI.Command;
+import homeWork3.UI.Console;
 
 public class SortByAge extends Command {
     public SortByAge(Console console) {

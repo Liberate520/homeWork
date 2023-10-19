@@ -1,6 +1,6 @@
-package homeWork3.comparator;
+package homeWork3.Core.Infrastructure;
 
-import homeWork3.model.PetFamily;
+import homeWork3.Core.Models.PetFamily;
 
 import java.util.List;
 

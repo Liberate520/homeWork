@@ -1,23 +1,21 @@
-package homeWork3.viewer;
+package homeWork3.Core.MVP;
 
-import homeWork3.model.FamilyTree;
-import homeWork3.model.Human;
-import homeWork3.model.WorkWithFile;
-import homeWork3.comparator.CompareAge;
-import homeWork3.ui.View;
+import homeWork3.Core.Models.FamilyTree;
+import homeWork3.Core.Models.Human;
+import homeWork3.Core.Infrastructure.CompareAge;
 
-public class ReView {
+public class Presenter {
     private View view;
-    private WorkWithFile serialize;
+    private Model serialize;
     private FamilyTree<Human> familyConnect;
     private CompareAge sortAge;
 
-    public ReView(View view, FamilyTree<Human> familyConnect, WorkWithFile serialize, CompareAge sortAge) {
+    public Presenter(View view, FamilyTree<Human> familyConnect, Model serialize, CompareAge sortAge) {
         this.familyConnect = familyConnect;
         this.view = view;
         this.serialize = serialize;
         this.sortAge = sortAge;
-        view.setViewer(this);
+        view.setPresenter(this);
     }
 
     public void loadFamily() {

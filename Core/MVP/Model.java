@@ -1,4 +1,7 @@
-package homeWork3.model;
+package homeWork3.Core.MVP;
+
+import homeWork3.Core.Models.LoadFrom;
+import homeWork3.Core.Models.SaveAs;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class WorkWithFile implements LoadFrom, SaveAs {
+public class Model implements LoadFrom, SaveAs {
 
     // Загрузка данных из файла
     @Override

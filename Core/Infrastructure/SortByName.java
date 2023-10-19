@@ -1,7 +1,7 @@
-package homeWork3.comparator;
+package homeWork3.Core.Infrastructure;
 
-import homeWork3.ui.Command;
-import homeWork3.ui.Console;
+import homeWork3.UI.Command;
+import homeWork3.UI.Console;
 
 public class SortByName extends Command {
     public SortByName(Console console) {

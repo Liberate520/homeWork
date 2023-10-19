@@ -1,6 +1,7 @@
-package homeWork3.model;
+package homeWork3.Core.Models;
 
-import homeWork3.comparator.PetIterator;
+import homeWork3.Core.MVP.Model;
+import homeWork3.Core.Infrastructure.PetIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class FamilyTree<T extends PetFamily> implements Iterable<T>, Serializabl
         return new PetIterator<>(familyTree);
     }
 
-    public void saveObject(WorkWithFile save) {
+    public void saveObject(Model save) {
         save.save("FamilyTree.txt", this);
     }
 

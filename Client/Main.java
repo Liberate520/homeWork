@@ -1,12 +1,12 @@
 package homeWork3;
 
-import homeWork3.viewer.ReView;
-import homeWork3.model.FamilyTree;
-import homeWork3.model.Human;
-import homeWork3.model.WorkWithFile;
-import homeWork3.comparator.CompareAge;
-import homeWork3.ui.Console;
-import homeWork3.ui.View;
+import homeWork3.Core.MVP.Presenter;
+import homeWork3.Core.Models.FamilyTree;
+import homeWork3.Core.Models.Human;
+import homeWork3.Core.MVP.Model;
+import homeWork3.Core.Infrastructure.CompareAge;
+import homeWork3.UI.Console;
+import homeWork3.Core.MVP.View;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,9 +18,9 @@ public class Main {
         familyTree.addFamilyTree(new Human("Маша Медведева", "женский", 11));
 
         View view = new Console();
-        WorkWithFile serialize = new WorkWithFile();
+        Model serialize = new Model();
         CompareAge sortAge =  new CompareAge();
-        new ReView(view, familyTree, serialize, sortAge);
+        new Presenter(view, familyTree, serialize, sortAge);
         view.start();
     }
 }

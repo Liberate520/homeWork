@@ -1,12 +1,13 @@
-package homeWork3.ui;
+package homeWork3.UI;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-import homeWork3.viewer.ReView;
+import homeWork3.Core.MVP.Presenter;
+import homeWork3.Core.MVP.View;
 
 public class Console implements View {
     private Scanner scan;
-    private ReView viewer;
+    private Presenter presenter;
     private Menu menu;
     private boolean go;
 
@@ -43,33 +44,33 @@ public class Console implements View {
         String sex = scan();
         System.out.print("Введите возраст: ");
         int age = Integer.parseInt(scan());
-        viewer.newHumanAdded(name, sex, age);
+        presenter.newHumanAdded(name, sex, age);
     }
 
     public void printFamily() {
-        viewer.printFamily();
+        presenter.printFamily();
     }
 
     public void searchHuman() {
         System.out.print("Введите имя для поиска: ");
         String name = scan();
-        viewer.searchHuman(name);
+        presenter.searchHuman(name);
     }
 
     public void saveFamily() {
-        viewer.saveFamily();
+        presenter.saveFamily();
     }
 
     public void loadFamily() {
-        viewer.loadFamily();
+        presenter.loadFamily();
     }
 
     public void sortFamilyByName() {
-        viewer.sortFamilyByName();
+        presenter.sortFamilyByName();
     }
 
     public void sortFamilyByAge() {
-        viewer.sortFamilyByAge();
+        presenter.sortFamilyByAge();
     }
 
     public void end() {
@@ -78,8 +79,8 @@ public class Console implements View {
     }
 
     @Override
-    public void setViewer(ReView viewer) {
-        this.viewer = viewer;
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override

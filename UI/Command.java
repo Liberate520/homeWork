@@ -1,4 +1,4 @@
-package homeWork3.ui;
+package homeWork3.UI;
 
 public abstract class Command implements Options {
     private Console console;

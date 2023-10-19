@@ -1,4 +1,4 @@
-package homeWork3.ui;
+package homeWork3.UI;
 
 public class Exit extends Command {
     public Exit(Console console) {

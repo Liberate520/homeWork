@@ -1,6 +1,6 @@
-package homeWork3.comparator;
+package homeWork3.Core.Infrastructure;
 
-import homeWork3.model.Human;
+import homeWork3.Core.Models.Human;
 
 import java.util.Comparator;
 

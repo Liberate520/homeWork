@@ -1,4 +1,6 @@
-package homeWork3.model;
+package homeWork3.Core.Models;
+
+import homeWork3.Core.Models.PetFamily;
 
 import java.io.Serial;
 
