@@ -14,5 +14,10 @@ public class Service {
     {
         return familyThree.getFamilyMembers().toString();
     }
-
+    public void sortFamilyMembersByFirstName() {
+        familyThree.sortByFirstName();
+    }
+    public void sortFamilyMembersByBirthday() {
+        familyThree.sortByBirthday();
+    }
 }

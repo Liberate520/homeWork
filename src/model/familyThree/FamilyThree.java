@@ -1,5 +1,10 @@
 package model.familyThree;
 
+import model.familyThree.comparators.HumanCompotatorByBirtday;
+import model.familyThree.comparators.HumanCompotatorByName;
+import model.familyThree.iteration.FamilyThreeIterator;
+import model.human.Gender;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -15,17 +20,23 @@ public class FamilyThree<E extends FamilyThreeElement<E>> implements Iterable<E>
     {
         return familyMembers;
     }
-    public void setLinkParentsMother( E mother, E child )
+//    public void setLinkParentsMother( E mother, E child )
+//    {
+//        // Установить детско-родительскую связь (мать)
+//        mother.addChild( child );
+//        child.setMother( mother );
+//    }
+//    public void setLinkParentsFather( E father, E child )
+//    {
+//        // Установить детско-родительскую связь (мать)
+//        father.addChild( child );
+//        child.setFather( father );
+//    }
+    public void setLinkParent( E parent, E child )
     {
-        // Установить детско-родительскую связь (мать)
-        mother.addChild( child );
-        child.setMother( mother );
-    }
-    public void setLinkParentsFather( E father, E child )
-    {
-        // Установить детско-родительскую связь (мать)
-        father.addChild( child );
-        child.setFather( father );
+        parent.addChild( child );
+        if ( parent.getGender() == Gender.female ) child.setMother( parent );
+        else child.setFather( parent );
     }
 
 //    public void setInfoAboutNewMarriage(
@@ -58,6 +69,14 @@ public class FamilyThree<E extends FamilyThreeElement<E>> implements Iterable<E>
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new FamilyThreeIterator<>( familyMembers );
+    }
+    public void sortByFirstName()
+    {
+        familyMembers.sort( new HumanCompotatorByName());
+    }
+    public void sortByBirthday()
+    {
+        familyMembers.sort( new HumanCompotatorByBirtday<>());
     }
 }
