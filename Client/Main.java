@@ -1,4 +1,4 @@
-package homeWork3;
+package homeWork3.Client;
 
 import homeWork3.Core.MVP.Presenter;
 import homeWork3.Core.Models.FamilyTree;
