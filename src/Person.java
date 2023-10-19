@@ -6,6 +6,7 @@ import java.util.Objects;
 class Person {
     private final String name;
     private final String surname;
+    private Gender gender;
     private final LocalDate burnData;
     private LocalDate deadData;
     private Person mother;
@@ -14,15 +15,16 @@ class Person {
     private List<Person> children = new ArrayList<>();
 
 
-    public Person(String name, String surname, LocalDate burnData, Person mother,Person father) {
+    public Person(String name, String surname, Gender gender, LocalDate burnData, Person mother,Person father) {
         this.name = name;
         this.surname = surname;
+        this.gender = gender;
         this.burnData = burnData;
         this.mother = mother;
         this.father = father;
     }
-    public Person(String name, String surname, LocalDate burnData) {
-        this(name, surname, burnData, null, null);
+    public Person(String name, String surname, Gender gender, LocalDate burnData) {
+        this(name, surname, gender, burnData, null, null);
     }
 
     public String getName() { return name; }
@@ -63,4 +65,6 @@ class Person {
     public int hashCode() {
         return Objects.hash(name, surname, burnData);
     }
+
+    enum Gender {man, woman};
 }
