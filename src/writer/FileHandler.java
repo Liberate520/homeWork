@@ -28,13 +28,15 @@ public class FileHandler implements Writable, Serializable {
         }
 
     }
-    public void load(){
+    public FamilyTree load(){
+        FamilyTree familyTreeRestored;
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(String.format("%s.out", this.fileName)));
-            FamilyTree familyTreeRestored = (FamilyTree) objectInputStream.readObject();
+            familyTreeRestored = (FamilyTree) objectInputStream.readObject();
             objectInputStream.close();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return familyTreeRestored;
     }
 }

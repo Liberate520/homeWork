@@ -34,29 +34,31 @@ public class Main {
         System.out.println(familyTree.getFamilyTreeInfo());
         System.out.println();
 
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                    new FileOutputStream("familyTree.out"));
-            objectOutputStream.writeObject(familyTree);
-            objectOutputStream.close();
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+//        try {
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+//                    new FileOutputStream("familyTree.out"));
+//            objectOutputStream.writeObject(familyTree);
+//            objectOutputStream.close();
+//        } catch (IOException e){
+//            throw new RuntimeException(e);
+//        }
+//
+//        FamilyTree familyTreeRestored;
+//
+//        try {
+//            ObjectInputStream objectInputStream = new ObjectInputStream(
+//                    new FileInputStream("familyTree.out"));
+//            familyTreeRestored = (FamilyTree) objectInputStream.readObject();
+//            objectInputStream.close();
+//        } catch (IOException | ClassNotFoundException e){
+//            throw new RuntimeException(e);
+//        }
+//
+//        System.out.println(familyTreeRestored.getFamilyTreeInfo());
+        FileHandler fileHandler = new FileHandler("familyTree1");
+        fileHandler.save(familyTree); // save family tree
 
-        FamilyTree familyTreeRestored;
-
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(
-                    new FileInputStream("familyTree.out"));
-            familyTreeRestored = (FamilyTree) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (IOException | ClassNotFoundException e){
-            throw new RuntimeException(e);
-        }
-
-        System.out.println(familyTreeRestored.getFamilyTreeInfo());
-//        FileHandler fileHandler = new FileHandler("familyTree1");
-//        fileHandler.save(familyTree);
+        System.out.println(fileHandler.load().getFamilyTreeInfo()); // load and print family tree
 
 
     }
