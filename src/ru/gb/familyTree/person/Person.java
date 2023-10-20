@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Person {
     private int id;
-    FamilyTree family;
     private String firstName;//имя
     private String secondName;//отчество
     private String lastName;//фамилия
@@ -14,23 +13,26 @@ public class Person {
     private LocalDate stopDay;//конец правления
     private Gender gender;
 
-    public Person (FamilyTree family, int id, String firstName, String secondName, String lastName,
+    public Person (int id, String firstName, String secondName, String lastName,
                    LocalDate startDay, LocalDate stopDay, Gender gender){
-        this.setFamily(family);
         this.setId(id);
         this.setFirstName(firstName); //имя
         this.setSecondName(secondName);//отчество
         this.setLastName(lastName);//фамилия
         this.setStartDay(startDay);
         this.setStopDay(stopDay);
-
         this.setGender(gender);
     }
 
-    public void setFamily(FamilyTree family){
-        this.family = family;
+    public void clear (){
+        this.setId(0);
+        this.setFirstName(""); //имя
+        this.setSecondName("");//отчество
+        this.setLastName("");//фамилия
+        this.setStartDay(null);
+        this.setStopDay(null);
+        this.setGender(Gender.Male);
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -57,10 +59,6 @@ public class Person {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public FamilyTree getFamily() {
-        return family;
     }
 
     public int getId() {
@@ -127,7 +125,7 @@ public class Person {
         if (!(obj instanceof Person person)){
             return false;
         }
-        return family.equals(person.getFamily()) && lastName.equals(person.getLastName()) &&
+        return lastName.equals(person.getLastName()) &&
                 secondName.equals(person.getSecondName()) && firstName.equals(person.getFirstName()) &&
                 startDay.equals(person.getStartDay()) && stopDay.equals(person.getStopDay()) &&
                 gender.equals(person.getGender());

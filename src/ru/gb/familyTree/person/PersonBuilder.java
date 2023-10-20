@@ -5,7 +5,6 @@ import ru.gb.familyTree.tree.FamilyTree;
 import java.time.LocalDate;
 
 public class PersonBuilder {
-    private FamilyTree family;
     private int id;
     private String firstName;
     private String secondName = "";
@@ -13,11 +12,6 @@ public class PersonBuilder {
     private LocalDate startDay = null;
     private LocalDate stopDay = null;
     private Gender gender = Gender.Male;
-
-    public PersonBuilder setFamily(FamilyTree family) {
-        this.family = family;
-        return this;
-    }
 
     public PersonBuilder setId(int id) {
         this.id = id;
@@ -54,6 +48,6 @@ public class PersonBuilder {
     }
 
     public Person createPerson() {
-        return new Person(family, id, firstName, secondName, lastName, startDay, stopDay, gender);
+        return new Person(id, firstName, secondName, lastName, startDay, stopDay, gender);
     }
 }
