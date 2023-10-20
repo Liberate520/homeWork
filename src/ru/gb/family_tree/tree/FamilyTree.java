@@ -3,10 +3,11 @@ package ru.gb.family_tree.tree;
 import ru.gb.family_tree.HumanExcistsException;
 import ru.gb.family_tree.human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
     private String family;
     private List<Human> familyMembers;
@@ -41,6 +42,49 @@ public class FamilyTree {
             stringBuilder.append(member).append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public Human findInTree (int id) {
+        for (Human member : familyMembers) {
+            if (member.getId() == id) {
+                return member;
+            }
+        }
+        return null;
+    }
+
+
+    public String infoById (int id) {
+        StringBuilder sb = new StringBuilder("Id - ");
+        sb.append(id). append("\n").append("Семья: ").append(family).append("\n");
+        Human human = findInTree(id);
+        sb.append("Фамилия: ").append(human.getLastname() + "\n");
+        sb.append("Имя: ").append(human.getName() + "\n");
+        sb.append("Пол: ").append(human.getGender() + "\n");
+        if (human.getBirthday() != null) {
+            sb.append("Дата рождения: ").append(human.getBirthday() + "\n");
+            sb.append("Возраст: ").append(human.getAge() + "\n");
+        }
+        if (human.getSpouse() != null) {
+            sb.append(human.getSpouse() + "\n");
+        }
+        if (human.getParents() != null) {
+            sb.append(human.getParents() + "\n");
+        }
+        if (human.getChildren() != null) {
+            sb.append(human.getChildren() + "\n");
+        }
+        return sb.toString();
+    }
+
+    public String allInDetails () {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Генеалогическое древо ").append(family).append("\n");
+        int id = 1;
+        for (Human member : familyMembers) {
+            sb.append(infoById(id++)).append("\n");
+        }
+        return sb.toString();
     }
 }
 

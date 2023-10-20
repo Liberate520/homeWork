@@ -1,51 +1,79 @@
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 import ru.gb.family_tree.tree.FamilyTree;
+import ru.gb.family_tree.writer.FIleHandler;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
-        FamilyTree katsman = new FamilyTree("Katsman");
+    public static void main(String[] args) throws IOException {
 
-        Human vasya = new Human(katsman,"Кацман", "Василий", Gender.Male);
-        vasya.setBirthday(LocalDate.of(1901, 1, 12));
-        vasya.setDeathday(LocalDate.of(1986, 9, 14));
-        System.out.println(vasya);
-        Human vasya1 = new Human(katsman,"Кацман", "Василий", Gender.Male); // 2 раза добавить того же самого не получится
-        Human sara = new Human(katsman,"Кацман", "Сара", Gender.Female);
-        sara.setBirthday(LocalDate.of(1912, 6, 26));
-        sara.setDeathday(LocalDate.of(1962, 12, 18));
+        FamilyTree vishnyak = vishnyak();
+        System.out.println(vishnyak.allInDetails());
 
-        sara.setSpouse(vasya); // Добавляем супруга Саре
-        System.out.println(vasya.getSpouse()); // Васе Сара тоже добавилась супругой
 
-        Human dushik = new Human(katsman,"Кацман", "Андрей", Gender.Male);
-        dushik.setBirthday(LocalDate.of(1932, 11, 6));
-        dushik.setDeathday(LocalDate.of(2008, 5, 11));
-        System.out.println(dushik.getAge());
 
-        vasya.setChild(dushik);// Андрей - сын Сары и Васи
-        sara.setChild(dushik);
-        System.out.println(sara.getChildren());
-        System.out.println(dushik.getParents()); // Андрею добавились оба родителя
+        FIleHandler fh = new FIleHandler();
+        if (fh.write(vishnyak, "output.data")) System.out.println("Данные успешно записаны");
+        vishnyak = (FamilyTree) fh.read("output.data");
+        System.out.println(vishnyak.allInDetails());
+    }
 
-        Human nastya = new Human(katsman,"Петрова", "Анастасия", Gender.Female);
-        nastya.setSpouse(dushik);
+    public static FamilyTree vishnyak() {
+        FamilyTree vishnyak = new FamilyTree("Вишняк");
 
-        Human mila = new Human(katsman,"Кацман", "Людмила", Gender.Female);
-        mila.setBirthday(LocalDate.of(1986, 8, 9));
-        nastya.setChild(mila);
-        dushik.setChild(mila);
-        mila.setLastname("Васильева"); // вышла замуж
+        Human danya = new Human(vishnyak,"Вишняк", "Даниил", Gender.Male);
+        danya.setBirthday(LocalDate.of(2004, 1, 31));
+        Human kate = new Human(vishnyak,"Лозовая", "Екатерина", Gender.Female);
+        kate.setBirthday(LocalDate.of(2010, 10, 06));
+        Human vika = new Human(vishnyak,"Козаева", "Виктория", Gender.Female);
+        vika.setBirthday(LocalDate.of(2005, 9, 20));
+        Human alena = new Human(vishnyak,"Дерека", "Алена", Gender.Female);
+        alena.setBirthday(LocalDate.of(1994, 4, 06));
+        Human dasha = new Human(vishnyak,"Дерека", "Дарья", Gender.Female);
+        dasha.setBirthday(LocalDate.of(2000, 7, 28));
+        Human jane = new Human(vishnyak,"Вишняк", "Евгения", Gender.Female);
+        jane.setBirthday(LocalDate.of(1982, 10, 04));
+        jane.setChild(danya);
+        Human dima = new Human(vishnyak,"Вишняк", "Дмитрий", Gender.Male);
+        dima.setBirthday(LocalDate.of(1979, 1, 12));
+        dima.setChild(danya);
+        Human sveta = new Human(vishnyak,"Лозовая", "Светлана", Gender.Female);
+        sveta.setBirthday(LocalDate.of(1979, 10, 04));
+        sveta.setChild(kate);
+        sveta.setChild(vika);
+        Human andrey = new Human(vishnyak,"Лозовой", "Андрей", Gender.Male);
+        andrey.setBirthday(LocalDate.of(1979, 04, 13));
+        andrey.setSpouse(sveta);
+        andrey.setChild(kate);
+        Human oksana = new Human(vishnyak,"Дерека", "Оксана", Gender.Female);
+        oksana.setBirthday(LocalDate.of(1974, 7, 04));
+        oksana.setChild(alena);
+        oksana.setChild(dasha);
+        Human grigory = new Human(vishnyak,"Цыбулевский", "Григорий", Gender.Male);
+        Human valya = new Human(vishnyak,"Цыбулевская", "Валентина", Gender.Female);
+        valya.setBirthday(LocalDate.of(1949, 10, 23));
+        valya.setChild(jane);
+        valya.setChild(sveta);
+        Human ilya = new Human(vishnyak,"Цыбулевский", "Илья", Gender.Male);
+        ilya.setBirthday(LocalDate.of(1949, 10, 10));
+        ilya.setDeathday(LocalDate.of(2007, 5, 24));
+        ilya.setSpouse(valya);
+        ilya.setChild(jane);
+        ilya.setChild(sveta);
+        ilya.setChild(grigory);
+        Human nina = new Human(vishnyak,"Вишняк", "Нина", Gender.Female);
+        nina.setBirthday(LocalDate.of(1953, 11, 04));
+        nina.setDeathday(LocalDate.of(2006, 4, 12));
+        nina.setChild(dima);
+        nina.setChild(oksana);
+        Human grisha = new Human(vishnyak,"Вишняк", "Григорий", Gender.Male);
+        grisha.setBirthday(LocalDate.of(1950, 12, 04));
+        grisha.setDeathday(LocalDate.of(2022, 7, 22));
+        grisha.setChild(dima);
+        grisha.setChild(oksana);
 
-        System.out.println(mila.getParents()); // Родители Людмилы
-
-        System.out.println(mila.getId()); // должно быть 6
-        System.out.println(dushik.getChildren()); // Людмила уже Васильева
-        nastya.setChild(mila); // пытаюсь добавить ребенка второй раз
-        System.out.println(nastya.getChildren()); // не выходит...
-
-        System.out.println(katsman.allMembers());
+        return vishnyak;
     }
 }

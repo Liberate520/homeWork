@@ -2,11 +2,12 @@ package ru.gb.family_tree.human;
 
 import ru.gb.family_tree.tree.FamilyTree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
     private FamilyTree family;
     private String lastname;
@@ -44,10 +45,8 @@ public class Human {
         }
     }
 
-    public String getId() {
-        StringBuilder stringBuilder = new StringBuilder("Id ");
-        stringBuilder.append(this.name).append(" - ").append(this.id);
-        return stringBuilder.toString();
+    public int getId() {
+        return this.id;
     }
 
     public String getLastname() { return lastname; }
@@ -61,21 +60,30 @@ public class Human {
     public Gender getGender() { return gender; }
 
     public String getParents() {
-        StringBuilder stringBuilder = new StringBuilder("Родители: ");
-        stringBuilder.append(this.parents);
-        return stringBuilder.toString();
+        if (!(this.parents).isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder("Родители: ");
+            stringBuilder.append(this.parents);
+            return stringBuilder.toString();
+        }
+        return null;
     }
 
     public String getChildren() {
-        StringBuilder stringBuilder = new StringBuilder("Дети: ");
-        stringBuilder.append(this.children);
-        return stringBuilder.toString();
+        if (!(this.children).isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder("Дети: ");
+            stringBuilder.append(this.children);
+            return stringBuilder.toString();
+        }
+        return null;
     }
 
     public String getSpouse() {
-        StringBuilder stringBuilder = new StringBuilder("Супруг(а): ");
-        stringBuilder.append(this.spouse);
-        return stringBuilder.toString();
+        if (this.spouse != null) {
+            StringBuilder stringBuilder = new StringBuilder("Супруг(а): ");
+            stringBuilder.append(this.spouse);
+            return stringBuilder.toString();
+        }
+        return null;
     }
 
     public void setId(int id) {
@@ -102,6 +110,10 @@ public class Human {
         this.gender = gender;
     }
 
+    public FamilyTree getFamily() {
+        return family;
+    }
+
     private void setParent(Human human) {
         if (human.gender == Gender.Male) {
             this.parents.put("отец",human);
@@ -120,6 +132,7 @@ public class Human {
         this.spouse = spouse;
         spouse.spouse = this;
     }
+
 
     @Override
     // Сюда можно было добавить еще параметров, но метод часто используется,
