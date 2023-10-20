@@ -12,6 +12,9 @@ public class ConsoleMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new GetHumansInfo(consoleUI));
+        commandList.add(new SaveInFile(consoleUI));
+        commandList.add(new LoadFromFile(consoleUI));
+        commandList.add(new AddChildren(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new Finish(consoleUI));

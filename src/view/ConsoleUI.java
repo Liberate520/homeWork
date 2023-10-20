@@ -1,6 +1,7 @@
 package view;
 
-import Model.FamTree.Human.Gender;
+import Model.FamTreeModel.FileWork.FileWork;
+import Model.FamTreeModel.Human.Gender;
 import Presenter.Presenter;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class ConsoleUI implements View {
     private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;
     private Presenter presenter;
+
     private boolean work;
     private ConsoleMenu menu;
 
@@ -20,10 +22,19 @@ public class ConsoleUI implements View {
     }
 
     public void finish() {
-        System.out.println("Приятно было пообщаться");
+
         work = false;
     }
-
+    public void writeInFile(){
+        System.out.println("Введите путь к файлу/имя файла:");
+        String path = scanner.nextLine();
+        presenter.saveTree(path);
+    }
+    public void loadFromFile(){
+        System.out.println("Введите путь к файлу/имя файла:");
+        String path = scanner.nextLine();
+        presenter.loadTree(path);
+    }
     public void sortByAge() {
         presenter.sortByAge();
     }
@@ -58,6 +69,34 @@ public class ConsoleUI implements View {
 
             presenter.addHuman(fname, lname, sex, age);
         }
+    }
+    public void addChildren() {
+        System.out.println("Введите ID родителя:");
+        long id = Long.parseLong(scanner.nextLine());
+        System.out.println("Введите данные ребенка: ");
+        System.out.println("Введите имя:");
+        String fname = scanner.nextLine();
+        System.out.println("Введите фамилию:");
+        String lname = scanner.nextLine();
+        System.out.println("Введите пол:");
+        Gender sex = Gender.valueOf(scanner.nextLine());
+        boolean flag = false;
+        int age = 0;
+        while (!flag) {
+            System.out.println("Укажите возраст:");
+            String ageString = scanner.nextLine();
+            //сделать проверку ввода возраста
+            age = Integer.parseInt(ageString);
+            if ((age < 0) || (age > 150)) {
+
+                System.out.println("Не валидное значение! ");
+            } else {
+                flag = true;
+            }
+        }
+//
+        presenter.servise.addHuman(fname, lname, sex, age);
+        presenter.addHumanChildrenById(id, fname, lname, sex, age);
     }
     private void execute(){
         String line = scanner.nextLine();

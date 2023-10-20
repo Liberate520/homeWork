@@ -1,4 +1,4 @@
-package Model.FamTree.FileWork;
+package Model.FamTreeModel.FileWork;
 
 import java.io.Serializable;
 
