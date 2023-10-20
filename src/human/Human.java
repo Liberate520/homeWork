@@ -1,7 +1,10 @@
+package human;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     String firstName;
     String lastName;
     LocalDate born;
@@ -10,7 +13,7 @@ public class Human {
     Human father;
     List<Human> children;
 
-//    public Human(String firstName, String lastName, LocalDate born, LocalDate died, Human mother, Human father, List<Human> children) {
+//    public human.Human(String firstName, String lastName, LocalDate born, LocalDate died, human.Human mother, human.Human father, List<human.Human> children) {
 //        this.firstName = firstName;
 //        this.lastName = lastName;
 //        this.born = born;
