@@ -1,10 +1,12 @@
 package family_tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Human {
+public class Human implements Serializable{
+    private int id;
     private String name;
     private Gender gender;
     private LocalDate birthDay;
@@ -13,8 +15,9 @@ public class Human {
     private Human father;
     private List<Human> childrens;
 
-    Human(String name, LocalDate birthDay, LocalDate deadDay, Human mother, Human father, Gender gender)
+    public Human(String name, LocalDate birthDay, LocalDate deadDay, Human mother, Human father, Gender gender)
     {
+        id = -1;
         this.name = name;
         this.birthDay = birthDay;
         this.deadDay = deadDay;
@@ -23,20 +26,51 @@ public class Human {
         this.gender = gender;
         childrens = new ArrayList<>();   
     }
-
-    public String getName() {
+    
+    public int getID()
+    {
+        return id;
+    }
+    public int setID(int id)
+    {
+        return this.id = id;
+    }
+    public String getName() 
+    {
         return name;
     }
+    
+    public List<Human> getParents()
+    {
+        List<Human> parentsList = new ArrayList<>(2);
+        if(mother != null)
+        {
+            parentsList.add(mother);        
+        }
+        if(father != null)
+        {
+            parentsList.add(father);        
+        }
+        return parentsList;
+    }
 
-    public Human getMother() {
+    public Human getMother() 
+    {
         return mother;
     }
 
-    public Gender getGender() {
+    public Human getFather() 
+    {
+        return father;
+    }
+
+    public Gender getGender() 
+    {
         return gender;
     }
 
-    public LifeStatus getLifeStatus() {
+    public LifeStatus getLifeStatus() 
+    {
         if(deadDay != null)
         {
             return LifeStatus.Dead;
@@ -45,26 +79,17 @@ public class Human {
 
     }
 
-    public Human getFather() {
-        return father;
-    }
-
     public void addChild(Human child)
     {
-        childrens.add(child);
+        if(!childrens.contains(child))
+        {
+            childrens.add(child);
+        }
     }
 
-    public String getChildrensListInfo()
+    public List<Human> getChildrensListInfo()
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список детей "+ name +": \n");
-
-        for(Human child: childrens)
-        {
-            stringBuilder.append(child);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
+        return childrens;
     }
 
     public int getAge() {
@@ -83,7 +108,90 @@ public class Human {
 
     @Override
     public String toString() {
+        return getInfo();
+    }
+
+    public String getInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("name: ");
+        sb.append(getName());
+        sb.append(", age: ");
+        sb.append(getAge());
+        sb.append(", gender: ");
+        sb.append(getGender());
+        sb.append(", Life Status: ");
+        sb.append(getLifeStatus());
+        sb.append(", Mother: ");
+        sb.append(getMotherInfo());
+        sb.append(", Father: ");
+        sb.append(getFatherInfo());
+        sb.append(", Childs: ");
+        sb.append(getChildrensInfo());
+
+        return sb.toString();
+    }
+
+    public String getMotherInfo()
+    {
+        String res = "";
+        if(mother != null)
+        {
+            res += mother.getName();
+        }
+        else
+        {
+            res += "неизвестно";
+        }
+        return res;
+    }
+
+    public String getFatherInfo()
+    {
+        String res = "";
+        if(father != null)
+        {
+            res += father.getName();
+        }
+        else
+        {
+            res += "неизвестно";
+        }
+        return res;
+    }
+
+    public String getChildrensInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        if(childrens.size() != 0)
+        {
+            sb.append(childrens.get(0).getName());
+            for(int i = 1; i < childrens.size(); i++)
+            {
+                sb.append(", ");
+                sb.append(childrens.get(i).getName());
+            }
+        }
+        else
+        {
+            sb.append("нету");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         // TODO Auto-generated method stub
-        return "name: " + name + ", age: " + getAge() + ", gender: " + gender + ", Life Status: " + getLifeStatus();
+        if(this == obj)
+        {
+            return true;
+        }
+        if(!(obj instanceof Human))
+        {
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getID() == getID();
     }
 }
