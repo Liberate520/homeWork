@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class ConsoleUI implements View{
+public class ConsoleUI implements View {
     private static final String INPUT_ERROR = "Wrong value";
     private boolean work;
     private Menu menu;
@@ -26,7 +26,7 @@ public class ConsoleUI implements View{
         presenter = new Presenter(this);
     }
 
-//    String filePath = "src/familyTree/writer/testTree.txt";
+    //    String filePath = "src/familyTree/writer/testTree.txt";
 //    FileHandler fileHandler = new FileHandler();
 //
 //        FamilyTree<Human> tree = testTree();
@@ -66,7 +66,22 @@ public class ConsoleUI implements View{
         Gender gender = Gender.valueOf(genderStr);
 
         presenter.addToFamily(name, date, gender);
+    }
 
+    public void setParents(){
+        System.out.println("Enter id of child: \n");
+        String childStr = scanner.nextLine();
+        long idChild = Long.parseLong(childStr);
+
+        System.out.println("Enter id of mother: \n");
+        String motherStr = scanner.nextLine();
+        long idMother = Long.parseLong(motherStr);
+
+        System.out.println("Enter id of father: \n");
+        String fatherStr = scanner.nextLine();
+        long idFather = Long.parseLong(fatherStr);
+
+        presenter.setParents(idChild, idMother, idFather);
     }
 
     public void getFamilyInfo() {
@@ -122,13 +137,13 @@ public class ConsoleUI implements View{
         System.out.println(answer);
     }
 
-    public void writeFile(){
+    public void writeFile() {
         System.out.println("Enter name of file IN FORMAT 'nameFile.txt': \n");
         String filePath = scanner.nextLine();
         presenter.writeFile(filePath);
     }
 
-    public void readFile(){
+    public void readFile() {
         System.out.println("Enter name of file from where you want to read IN FORMAT 'nameFile.txt': \n");
         String filePath = scanner.nextLine();
         presenter.readFile(filePath);

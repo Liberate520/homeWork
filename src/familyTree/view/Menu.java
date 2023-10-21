@@ -11,6 +11,7 @@ public class Menu {
     public Menu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddToFamily(consoleUI));
+        commandList.add(new SetParents(consoleUI));
         commandList.add(new GetFamilyInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));

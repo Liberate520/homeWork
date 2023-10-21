@@ -14,33 +14,32 @@ public class Human implements FamilyGroupItem<Human>, Serializable {
     private Gender gender;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
+
+    private List<Human> children;
     private Human mother;
     private Human father;
-    private List<Human> children;
     private Human spouse;
 
-    public Human(String name, LocalDate dateOfBirth,
-                 Gender gender, LocalDate dateOfDeath,
+    public Human(String name, Gender gender, LocalDate dateOfBirth, LocalDate dateOfDeath,
                  Human mother, Human father) {
-        id = -1;
+        id = 1;
         this.name = name;
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
-        this.gender = gender;
-        this.mother = mother;
         this.father = father;
+        this.mother = mother;
         children = new ArrayList<>();
     }
 
-    public Human(String name, LocalDate dateOfBirth,
-                 Gender gender) {
-        this(name, dateOfBirth, gender, null, null, null);
+    public Human(String name, Gender gender, LocalDate dateOfBirth) {
+        this(name, gender, dateOfBirth, null, null, null);
     }
 
     public Human(String name, Gender gender,
                  LocalDate dateOfBirth, Human mother,
                  Human father) {
-        this(name, dateOfBirth, gender, null, mother, father);
+        this(name, gender, dateOfBirth, null, mother, father);
     }
 
     public boolean addChild(Human child) {
@@ -57,6 +56,13 @@ public class Human implements FamilyGroupItem<Human>, Serializable {
         } else if (parent.getGender().equals(Gender.Female)) {
             setMother(parent);
         }
+        // TODO: 10/20/2023 почистить
+//        if (!parents.contains(parent)) {
+//            parents.add(parent);
+//            return true;
+//
+//        }
+//        return false;
     }
 
     public long getId() {
@@ -172,16 +178,6 @@ public class Human implements FamilyGroupItem<Human>, Serializable {
         return sb.toString();
     }
 
-    public String getMotherInfo() {
-        String res = "mother: ";
-        if (mother == null) {
-            res += "none";
-        } else {
-            res += mother.getName();
-        }
-        return res;
-    }
-
     public String getSpouseInfo() {
         String res = "spouse: ";
         if (spouse == null) {
@@ -192,8 +188,20 @@ public class Human implements FamilyGroupItem<Human>, Serializable {
         return res;
     }
 
+    public String getMotherInfo() {
+        String res = "mother: ";
+        Human mother = getMother();
+        if (mother == null) {
+            res += "none";
+        } else {
+            res += mother.getName();
+        }
+        return res;
+    }
+
     public String getFatherInfo() {
         String res = "father: ";
+        Human father = getFather();
         if (father == null) {
             res += "none";
         } else {
