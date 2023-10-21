@@ -37,6 +37,10 @@ public class Service {
         return stringBuilder.toString();
     }
 
+    public FamilyTree getTree() {
+        return tree;
+    }
+
     public void sortByLastname() {
         tree.sortByLastname();
     }

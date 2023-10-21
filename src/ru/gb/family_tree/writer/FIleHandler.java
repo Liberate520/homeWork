@@ -14,8 +14,7 @@ public class FIleHandler implements Writable {
 
         File file = new File(filepath);
         ObjectOutputStream oos = null;
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
+        try (FileOutputStream fos = new FileOutputStream(file)){
             if (fos != null) {
                 oos = new ObjectOutputStream(fos);
                 oos.writeObject(serializable);
@@ -26,14 +25,6 @@ public class FIleHandler implements Writable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (oos != null) {
-                try {
-                    oos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return flag;
     }
@@ -42,8 +33,7 @@ public class FIleHandler implements Writable {
     public Object read(String filepath) throws IOException {
         File file = new File(filepath);
         ObjectInputStream ois = null;
-        try {
-            FileInputStream fis = new FileInputStream(file);
+        try (FileInputStream fis = new FileInputStream(file)){
             if (fis != null) {
                 ois = new ObjectInputStream(fis);
                 FamilyTree readFamily = (FamilyTree) ois.readObject();
@@ -55,11 +45,7 @@ public class FIleHandler implements Writable {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
-        } finally {
-            ois.close();
         }
         throw new InvalidObjectException("Что-то пошло не так...");
     }
-
-
 }
