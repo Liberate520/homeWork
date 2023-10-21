@@ -25,16 +25,6 @@ public class ConsoleUI implements View {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
     }
-
-    //    String filePath = "src/familyTree/writer/testTree.txt";
-//    FileHandler fileHandler = new FileHandler();
-//
-//        FamilyTree<Human> tree = testTree();
-//        FamilyTree<Human> tree = (FamilyTree) fileHandler.read(filePath);
-////        System.out.println("Without sort: " + tree);
-////        tree.sortByName();
-//
-//        fileHandler.save(tree, filePath)
     @Override
     public FamilyTree<Human> start() {
         hello();

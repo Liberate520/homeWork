@@ -17,26 +17,11 @@ public class Service {
         family = new FamilyTree<>();
         fileHandler = new FileHandler();
     }
-
-//    public void addToFamily(String name, Gender gender,LocalDate dateOfBirth, Human mother,Human father) {
-//        Human human = new Human(name, gender, dateOfBirth, mother, father);
-//        idHuman++;
-//        family.addToFamily(human);
-//    }
-
     public void addToFamily(String name, LocalDate dateBirth, Gender gender) {
         Human human = new Human(name, gender, dateBirth);
         idHuman++;
         family.addToFamily(human);
     }
-//    public void addToFamily(String name, LocalDate dateBirth, Gender gender, Human mother, Human father) {
-//        Human human = new Human(name, dateBirth, gender);
-//        if (mother != null || father != null) {
-//            human = new Human(name, gender, dateBirth, mother, father);
-//        }
-//        idHuman++;
-//        family.addToFamily(human);
-//    }
 
     public void setParents(long idChild, long idMother, long idFather){
         Human child = family.getById(idChild);

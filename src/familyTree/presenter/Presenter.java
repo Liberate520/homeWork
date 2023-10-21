@@ -17,9 +17,6 @@ public class Presenter {
         service = new Service();
     }
 
-    //    public void addToFamily(String name, LocalDate dateBirth, Gender gender, Human mother, Human father){
-//        service.addToFamily(name, dateBirth, gender, mother, father);
-//    }
     public void addToFamily(String name, LocalDate dateBirth, Gender gender) {
         service.addToFamily(name, dateBirth, gender);
     }

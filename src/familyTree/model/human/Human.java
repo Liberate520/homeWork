@@ -56,13 +56,6 @@ public class Human implements FamilyGroupItem<Human>, Serializable {
         } else if (parent.getGender().equals(Gender.Female)) {
             setMother(parent);
         }
-        // TODO: 10/20/2023 почистить
-//        if (!parents.contains(parent)) {
-//            parents.add(parent);
-//            return true;
-//
-//        }
-//        return false;
     }
 
     public long getId() {

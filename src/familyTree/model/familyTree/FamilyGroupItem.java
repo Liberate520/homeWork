@@ -30,11 +30,5 @@ public interface FamilyGroupItem<T> {
     void setSpouse(T value);
 
     int getAge();
-//    void setName(String name);
-//    Gender getGender();
-//    void setDevorce(T value);
-//    void addToParents(T value);
-//    void addToChilderen(T value);
-//    void setDateOfBirth(LocalDate dateOfBirth);
 
 }
