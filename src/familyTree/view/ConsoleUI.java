@@ -121,4 +121,17 @@ public class ConsoleUI implements View{
     public void printAnswer(String answer) {
         System.out.println(answer);
     }
+
+    public void writeFile(){
+        System.out.println("Enter name of file IN FORMAT 'nameFile.txt': \n");
+        String filePath = scanner.nextLine();
+        presenter.writeFile(filePath);
+    }
+
+    public void readFile(){
+        System.out.println("Enter name of file from where you want to read IN FORMAT 'nameFile.txt': \n");
+        String filePath = scanner.nextLine();
+        presenter.readFile(filePath);
+    }
+
 }

@@ -17,26 +17,35 @@ public class Presenter {
         service = new Service();
     }
 
-    public void addToFamily(String name, LocalDate dateBirth, Gender gender){
+    public void addToFamily(String name, LocalDate dateBirth, Gender gender) {
         service.addToFamily(name, dateBirth, gender);
     }
 
-    public void addToFamily(String name, LocalDate dateBirth, Gender gender, Human mother, Human father){
-        service.addToFamily(name, dateBirth, gender, mother, father);
-    }
+//    public void addToFamily(String name, LocalDate dateBirth, Gender gender, Human mother, Human father){
+//        service.addToFamily(name, dateBirth, gender, mother, father);
+//    }
 
-    public void getFamilyInfo(){
+    public void getFamilyInfo() {
         String answer = service.getFamilyInfo();
         view.printAnswer(answer);
-        service.serialization();
     }
-    public void sortByName(){
+
+    public void sortByName() {
         service.sortByName();
         getFamilyInfo();
     }
 
-    public void sortByAge(){
+    public void sortByAge() {
         service.sortByAge();
         getFamilyInfo();
+    }
+
+    public void writeFile(String filePath) {
+        service.writeSerialization(filePath);
+    }
+
+    public void readFile(String filePath) {
+        String dataRead = "Read files :\n" + service.readSerialization(filePath);
+        view.printAnswer(dataRead);
     }
 }

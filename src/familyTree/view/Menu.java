@@ -14,6 +14,8 @@ public class Menu {
         commandList.add(new GetFamilyInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
+        commandList.add(new WriteFile(consoleUI));
+        commandList.add(new ReadFile(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 
