@@ -1,5 +1,6 @@
 package ru.gb.familyTree.tree;
 
+import ru.gb.familyTree.person.Gender;
 import ru.gb.familyTree.person.Person;
 
 import java.util.HashSet;
@@ -18,6 +19,14 @@ public class Node {
         this.setParentOne(parentOne);
         this.setParentTwo(parentTwo);
         this.setChildren(children);
+    }
+
+    public void clear (){
+        this.setFamily(null);
+        this.setId(0);
+        this.setParentOne(null);
+        this.setParentTwo(null);
+        this.setChildren(new HashSet<Person>());
     }
 
     public void setId(int id){
@@ -62,6 +71,7 @@ public class Node {
     public HashSet<Person> getChildren(){
         return children;
     }
+
 
     /**
      * Выводит на экран содержимое HashSet
