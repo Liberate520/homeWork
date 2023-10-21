@@ -20,7 +20,7 @@ public class Human implements Serializable {
     private List<Human> children;
     private Human spouse;
 
-    public Human(FamilyTree family, String lastname, String name, Gender gender) {
+    public Human(String lastname, String name, Gender gender) {
         this.lastname = lastname;
         this.name = name;
         this.gender = gender;
@@ -28,8 +28,6 @@ public class Human implements Serializable {
         this.parents = parents;
         List<Human> children = new ArrayList<>();
         this.children = children;
-        this.family = family;
-        family.addMember(this);
     }
 
     public String getAge() {
@@ -42,6 +40,16 @@ public class Human implements Serializable {
             stringBuilder.append(Period.between(this.birthday, this.deathday).getYears());
             stringBuilder.append(" лет.");
             return stringBuilder.toString();
+        }
+    }
+
+    public int age() {
+        if (this.birthday == null) return 0;
+        if (this.deathday == null) {
+            return Period.between(this.birthday, LocalDate.now()).getYears();
+        }
+        else {
+            return Period.between(this.birthday, this.deathday).getYears();
         }
     }
 
@@ -138,7 +146,7 @@ public class Human implements Serializable {
     // Сюда можно было добавить еще параметров, но метод часто используется,
     // в консоли было бы неудобочитаемо
     public String toString() {
-        return "Фамилия: " + lastname + ", имя: " + name;
+        return "ID:" + id + " Фамилия: " + lastname + ", имя: " + name;
     }
 
     @Override

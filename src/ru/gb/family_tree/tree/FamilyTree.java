@@ -2,12 +2,17 @@ package ru.gb.family_tree.tree;
 
 import ru.gb.family_tree.HumanExcistsException;
 import ru.gb.family_tree.human.Human;
+import ru.gb.family_tree.human.comparators.HumanComparatorByAge;
+import ru.gb.family_tree.human.comparators.HumanComparatorById;
+import ru.gb.family_tree.human.comparators.HumanComparatorByLastname;
+import ru.gb.family_tree.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
     private String family;
     private List<Human> familyMembers;
@@ -85,6 +90,27 @@ public class FamilyTree implements Serializable {
             sb.append(infoById(id++)).append("\n");
         }
         return sb.toString();
+    }
+
+    public void sortByName(){
+        familyMembers.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge(){
+        familyMembers.sort(new HumanComparatorByAge());
+    }
+
+    public void sortById() {
+        familyMembers.sort(new HumanComparatorById());
+    }
+
+    public void sortByLastname() {
+        familyMembers.sort(new HumanComparatorByLastname());
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyMembers);
     }
 }
 
