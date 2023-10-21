@@ -1,10 +1,12 @@
 package ru.gb.familyTree.person;
 
 import ru.gb.familyTree.tree.FamilyTree;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Person {
+public class Person implements Serializable {
     private int id;
     private String firstName;//имя
     private String secondName;//отчество

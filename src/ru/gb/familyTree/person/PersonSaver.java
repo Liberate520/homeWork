@@ -2,11 +2,11 @@ package ru.gb.familyTree.person;
 
 import ru.gb.familyTree.tree.FamilyTree;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonSaver {
+import java.io.Serializable;
+public class PersonSaver implements Serializable{
     private FamilyTree family;
     private List<Person> personList = new ArrayList<>();
 

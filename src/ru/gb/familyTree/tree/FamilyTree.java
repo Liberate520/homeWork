@@ -2,13 +2,13 @@ package ru.gb.familyTree.tree;
 
 import ru.gb.familyTree.exceptions.TreeExceptions;
 import ru.gb.familyTree.person.Person;
-import ru.gb.familyTree.person.PersonBuilder;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-public class FamilyTree {
+import java.io.Serializable;
+
+public class FamilyTree implements Serializable{
     private String family;
     private Person root;
     private List<Node> nodeList = new ArrayList<>();

@@ -1,15 +1,13 @@
 package ru.gb.familyTree;
 
 import ru.gb.familyTree.person.*;
-import ru.gb.familyTree.tree.FamilyTreeBuilder;
-import ru.gb.familyTree.tree.FamilyTree;
-import ru.gb.familyTree.tree.Node;
-import ru.gb.familyTree.tree.NodeBuilder;
+import ru.gb.familyTree.tree.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-     public static void main(String[] args) {
+     public static void main(String[] args) throws IOException, ClassNotFoundException{
         /**
          * Создание дерева (фрагмент!):
          */
@@ -26,6 +24,29 @@ public class Main {
           * Добавление узлов в дерево Романовых:
           */
         addNodes(romanovTree, romanovPersons);
+
+         /**
+          * Сохранение объектов в файл. Сериализация.
+          */
+        SaveRestoreTree saver = new SaveRestoreTree();
+        saver.writeObject(romanovTree, "romanovTree.out");
+        saver.writeObject(romanovPersons, "romanovPersons.out");
+
+        /**
+          * Сохранение объектов из файла. Десериализация.
+          */
+        FamilyTree romanovTreeRestored = (FamilyTree) saver.restoreObject("romanovTree.out");
+        System.out.println("Проверка корректности объекта после восстановления:\n");
+        System.out.println(romanovTreeRestored.getObjectById(11) + "\n");
+        System.out.println(romanovTreeRestored.getObjectById(21) + "\n");
+        System.out.println(romanovTreeRestored.getObjectById(22) + "\n");
+
+        PersonSaver romanovPersonsRestored = (PersonSaver) saver.restoreObject("romanovPersons.out");
+         System.out.println("Проверка корректности объекта после восстановления:\n");
+         System.out.println(romanovPersonsRestored.getObjectById(37) + "\n");
+         System.out.println(romanovPersonsRestored.getObjectById(53) + "\n");
+         System.out.println(romanovPersonsRestored.getObjectById(55) + "\n");
+
     }
 
     /**
