@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,26 +8,49 @@ public class Human {
     private String name;
     private Gender gender;
     private LocalDate birthDay;
+    private LocalDate deathDay;
     private List<Human> children;
     private Human mother;
     private Human father;
 
 
-    public Human(int id, String name, Gender gender, LocalDate birthDay, Human mother, Human father){
-        this.id = id;
+    public Human(String name, Gender gender, LocalDate birthDay, LocalDate deathDay, Human mother, Human father){
+        id = -1;
         this.name = name;
         this.gender = gender;
         this.birthDay = birthDay;
+        this.deathDay = deathDay;
         this.mother = mother;
         this.father = father;
         children = new ArrayList<>();
 
     }
-    public Human(int id, String name, Gender gender, LocalDate birthDay){
-        this(id, name, gender, birthDay, null, null);
+    public Human(String name, Gender gender, LocalDate birthDay){
+        this(name, gender, birthDay, null, null, null);
 
     }
+    public Human(String name, Gender gender, LocalDate birthDay, Human mother, Human father){
+        this(name, gender, birthDay, null, mother, father);
+    }
+    public int getAge(){
+        if (deathDay == null){
+            return getPeriod(birthDay, LocalDate.now());
+        } else{
+            return getPeriod(birthDay, deathDay);
+        }
+    }
+    private int getPeriod(LocalDate birthDay, LocalDate deathDay){
+        Period diff = Period.between(birthDay, deathDay);
+        return  diff.getYears();
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -58,7 +82,6 @@ public class Human {
 
     public void setChildren(Human children) {
         this.children.add(children);
-//        System.out.println(children); //TODO пока вывод мне не нужен, но потом определиться
     }
 
     public Human getMother() {
@@ -76,20 +99,70 @@ public class Human {
     public void setFather(Human father) {
         this.father = father;
     }
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("id: ");
+        sb.append(id);
+        sb.append(", имя: ");
+        sb.append(name);
+        sb.append(", пол: ");
+        sb.append(gender);
+        sb.append(", возраст: ");
+        sb.append(getAge());
+        sb.append(", ");
+        sb.append(getMotherInfo());
+        sb.append(", ");
+        sb.append(getFatherInfo());
+        sb.append(", ");
+        sb.append(getChildrenInfo());
+        return sb.toString();
+
+    }
+    public String getMotherInfo(){
+        String res = "мать: ";
+        if (mother != null){
+            res+= mother.getName();
+        } else{
+            res += "неизвестна";
+        }
+        return res;
+    }
+    public String getFatherInfo(){
+        String res = "отец: ";
+        if (father != null){
+            res+= father.getName();
+        } else{
+            res += "неизвестен";
+        }
+        return res;
+    }
+    public String getChildrenInfo(){
+        StringBuilder res = new StringBuilder();
+        res.append("дети: ");
+        if (children.size() != 0){
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++) {
+                res.append(", ");
+                res.append(children.get(i).getName());
+            }
+        } else{
+            res.append("отсутствуют");
+        }
+        return res.toString();
+    }
 
     @Override
     public String toString() { //TODO Доработать! Сделать универсальным и настроить вывод только имён детей
-        if (mother != null || father !=null) {
-            return "id: "+ id +", имя: " + name + ", пол: "+ gender + ", день рождения: " + birthDay + ", мать: " + mother.getName() +", отец: " + father.getName() + ", дети: " + children;
+        return getInfo();
+    }
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
         }
-
-        else if (children!=null) {
-            return "id: "+ id +", имя: " + name + ", пол: "+ gender + ", день рождения: " + birthDay + ", мать: " +", отец: "+  ", дети: " + children;
+        if (!(obj instanceof Human)){
+            return false;
         }
-        else if (children!=null || mother == null) {
-            return "id: "+ id +", имя: " + name + ", пол: "+ gender + ", день рождения: " + birthDay + ", мать: нет" +", отец: нет" + ", дети: " + children;
-        }
-        else return "id: "+ id +", имя: " + name + ", пол: "+ gender + ", день рождения: " + birthDay + ", мать: нет" + ", отец: нет" + ", дети: нет";
-
+        Human human = (Human) obj;
+        return human.getId() ==getId();
     }
 }
