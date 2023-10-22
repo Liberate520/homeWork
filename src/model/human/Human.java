@@ -2,60 +2,47 @@ package model.human;
 
 import java.io.Serializable;
 
-import java.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.famailyTree.TreeNode;
+
 
  
-public class Human implements Serializable, TreeNode<Human> {
-   private long id;
-   private String name;
-   private String fistName;
-   private String lastName;
+public class Human implements Serializable, Comparable<Human> {
+   private int id;
+   private String fulName;
    private Gender gender;
    private Human mother;
    private Human father;
-   private List<Human> parents;
    private List<Human> children;
-   private LocalDate birthDate;
-   private LocalDate deathDate;
+   private int birthDate;
+   private int deathDate;
    private Human spouse;
 
-   public Human(String name, String fistName, String lastName, LocalDate birthDate, LocalDate deathDate, Gender gender, Human mother, Human father) {
-        id = -1;
-        this.name = name;
-        this.fistName = fistName;
-        this.lastName = lastName;
+   public Human(int id, String fulName, int birthDate, int deathDate, Gender gender, Human mother, Human father) {
+        this.id = id;
+        this.fulName = fulName;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.gender = gender;
         this.mother = mother;
         this.father = father;
-        parents = new ArrayList<>();
-        if (father != null) {
-            parents.add(father);
-        }
-        if (mother != null){
-            parents.add(mother);
-        }
-
-        children = new ArrayList<>();
+        
+        this.children = new ArrayList<>();
     }
 
-    public Human(String name, String fistName, String lastName, LocalDate birthDate, Gender gender, Human mother, Human father) {
-        this(name, fistName, lastName, birthDate, null, gender, mother, father);
+    public Human(int id, String fulName, int birthDate, Gender gender, Human mother, Human father) {
+       this.id = id;
+       this.fulName = fulName;
+       this.gender = gender;
+       this.father = null;
+       this.mother = null;
+       this.birthDate = birthDate;
+       this.children = new ArrayList<>();
     }
 
-    public Human(String name, String fistName, String lastName, LocalDate birthDate, Gender gender) {
-        this(name, fistName, lastName, birthDate, null, gender, null, null);
-    }
-
-    public Human(String name, String fistName, String lastName, LocalDate birthDate, LocalDate deathDate, Gender gender) {
-        this(name, fistName, lastName, birthDate, deathDate, gender, null, null);
-    }
+        
 
     public boolean addChild(Human child) {
         if (!children.contains(child)){
@@ -66,60 +53,24 @@ public class Human implements Serializable, TreeNode<Human> {
     }
     
     
-    public boolean addParent(Human parent) {
-        if (!parents.contains(parent)){
-            parents.add(parent);
-            return true;
-        }
-        return false;
-    }
-
+   
     public Human getFather() {
-        for (Human parent: parents){
-            if (parent.getGender() == Gender.Male){
-                return parent;
-            }
-        }
-        return null;
+       return father;       
     }   
     
     public Human getMother() {
-        for (Human parent: parents){
-            if (parent.getGender() == Gender.Female){
-                return parent;
-            }
-        }
-        return null;
+        return mother;
     }
 
-    public String getName(){
-        return name;
+    public String getFulName(){
+        return fulName;
     }
 
     
 
     
 
-    public String getMotherInfo() {
-        String res = " Мама: ";
-        if (mother != null) {
-            res += mother.getFistName() + " " + mother.getLastName();
-        } else {
-            res += "Нет";
-        }
-        return res;
-    }
-
-    public String getFatherInfo() {
-        String res = " Папа: ";
-        if (father != null) {
-            res += father.getFistName() + " " + father.getLastName();
-        } else {
-            res += "Нет";
-        }
-        return res;
-    }
-
+       
 
     public void setSpouse(Human spouse){
         this.spouse = spouse;
@@ -129,23 +80,12 @@ public class Human implements Serializable, TreeNode<Human> {
         return spouse;
     }
 
-
+    @Override
     public String toString() {
-        return info();
+        return String.format("id:%d; полное имя: %s; год рождения: %d; \n", this.id, this.fulName, this.birthDate );
     }
 
-    public String info() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("id: ").append(id);
-        sb.append(" Имя: ").append(fistName);
-        sb.append(" Фамилия: ").append(lastName);
-        sb.append(" Пол: ").append(gender);
-        sb.append(" День рожд: ").append(birthDate);
-        sb.append(" Дата смерти: ").append(deathDate);
-        sb.append(getMotherInfo()).append(" ");
-        sb.append(getFatherInfo()).append(" ");
-        return sb.toString();
-    }
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -160,30 +100,15 @@ public class Human implements Serializable, TreeNode<Human> {
     }
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFistName() {
-        return fistName;
-    }
-
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
+        
     public List<Human> getChildren() {
         return children;
     }
@@ -208,19 +133,19 @@ public class Human implements Serializable, TreeNode<Human> {
         return gender;
     }
 
-    public LocalDate getBirthDate() {
+    public int getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(int birthDate) {
         this.birthDate = birthDate;
     }
 
-    public LocalDate getDeathDate() {
+    public int getDeathDate() {
         return deathDate;
     }
 
-    public void setDeathDate(LocalDate deathDate) {
+    public void setDeathDate(int deathDate) {
         this.deathDate = deathDate;
     }
 
@@ -229,7 +154,7 @@ public class Human implements Serializable, TreeNode<Human> {
     }
 
     public int compareTo(Human o){
-        return fistName.compareTo(o.getFistName());
+        return fulName.compareTo(o.getFulName());
     }
 }
     

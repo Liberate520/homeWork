@@ -1,33 +1,68 @@
 package presenter;
 
 
-import model.service.FamilyTreeService;
+import java.io.IOException;
+
+import model.Service;
+import model.human.Human;
 import view.View;
 
 public class Presenter {
    private View view;
-   private FamilyTreeService service;
+   private Service service;
 
-   public Presenter (View view) {
+   public Presenter (View view, Service service) {
       this.view = view;
-      service = new FamilyTreeService();
+      this.service = service;
+      view.setPresenter(this);
    }
 
-    public void addHuman(String name, String firstName, String lastName, String genderString, String birthDate, long idFather, long idMother) {
-      String answer = service.addHuman(name, firstName, lastName, genderString, birthDate, idFather, idMother);
-      view.print(answer);
-  }
-
-   public void getHumanList() {
-   String answer = service.getHumanList();
-   view.print(answer);
-   }
-   
-   public void sortByName(){
-      service.sortByName();
+   public Human readNewHuman(){
+      return service.readNewHuman();
    }
 
-   public void sortBirthDay(){
-      service.sortBirthDay();
+   public void getHumanByName(){
+      service.getHumanByName();
+   }
+
+   public void print(){
+      service.print();
+   }
+
+   public String getFileName(){
+      return service.getFileName();
+   }
+
+   public String getFileType(){
+      return service.getFileType();
+   }
+
+   public void createInitialTree(){
+      service.createInitialTree();
+   }
+
+   public void printChildren(){
+      service.printChildren();
+   }
+
+   public void writeTreeInFile() throws IOException {
+      service.writeTreeInFile();
+   }
+
+   public void readFromFile() throws IOException,
+   ClassNotFoundException {
+      service.readFromFile();
+   }
+
+   public void sortByParameter(int sortNumber){
+      service.sortByParameter(sortNumber);
+   }
+
+   public void addHuman(Human human){
+      service.addHuman(human);
+      System.out.printf("Вы добавили нового родственника: \n %\n", human.toString());
    }
 }
+   
+   
+
