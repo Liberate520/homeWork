@@ -27,18 +27,16 @@ public class Human {
         return curYear - bornDate.getYear();
     }
 
-    private  String showChildren(){
+    public String showChildren(){
         StringBuilder stringBuilder = new StringBuilder();
         for (Human childern: childrenList) {
-            stringBuilder.append(childern.getName());
-            stringBuilder.append(" ");
-            stringBuilder.append(childern.ageHuman());
+            stringBuilder.append(showHuman(childern));
             stringBuilder.append(", ");
         }
         return stringBuilder.toString();
     }
 
-    public Human(String name, Gender gender, LocalDate bornDate, LocalDate diedDate, Human mother, Human father) {
+    private Human(String name, Gender gender, LocalDate bornDate, LocalDate diedDate, Human mother, Human father) {
         this.name = name;
         this.bornDate = bornDate;
         this.diedDate = diedDate;
@@ -48,6 +46,9 @@ public class Human {
         this.childrenList = new ArrayList<>();
     }
 
+    public Human(String name, Gender gender, LocalDate bornDate, LocalDate diedDate){
+        this(name, gender, bornDate, diedDate, null, null);
+    }
     public Human(String name, Gender gender, LocalDate bornDate){
         this(name, gender, bornDate, null, null, null);
     }
@@ -71,7 +72,7 @@ public class Human {
 
     private String showHuman(Human human){
         if(human != null){
-            return human.getName() + " ," + Integer.toString(human.ageHuman());
+            return human.getName() + ", возраст " + Integer.toString(human.ageHuman());
         }
         return "";
     }
@@ -100,12 +101,11 @@ public class Human {
         this.gender = gender;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
+    public void setParens(Human human) {
+        if (human.gender == Gender.Male)
+            {this.father = human;}
+        else
+            {this.mother = human;}
     }
 
     @Override
@@ -125,5 +125,10 @@ public class Human {
         stringBuilder.append("дети: ");
         stringBuilder.append(showChildren());
         return stringBuilder.toString();
+    }
+
+    public void addChildren(Human human){
+        human.setParens(this);
+        this.childrenList.add(human);
     }
 }

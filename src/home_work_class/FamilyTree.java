@@ -15,6 +15,7 @@ public class FamilyTree {
         for (Human human: humansList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
