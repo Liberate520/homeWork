@@ -24,4 +24,11 @@ public class FamilyTree {
     public void addHuman(Human human){
         humansList.add(human);
     }
+
+    public Human findHumanByName(String name){
+        for (Human human: humansList) {
+            if (human.getName().equals(name)){return human;}
+        }
+        return null;
+    }
 }
