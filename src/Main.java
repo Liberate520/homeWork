@@ -10,11 +10,16 @@ import java.util.Locale;
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree();
-        Human human1 = new Human("Первый мужской родитель древа", Gender.Male, null);
-        Human human2 = new Human("первый женский родитель древа", Gender.Female, null);
-        Human children1 = new Human("Первый ребёнок корневых родителей", Gender.Male, null);
-        Human children2 = new Human("Второй ребёнок корневых родителей", Gender.Female, null);
-        Human children3 = new Human("Третий ребёнок корневых родителей", Gender.Female, null);
+        Human human1 = new Human("Первый мужской родитель древа", Gender.Male, LocalDate.of(1950, 1, 1));
+        Human human2 = new Human("первый женский родитель древа", Gender.Female,
+                LocalDate.of(1955, 1, 1),
+                LocalDate.of(2020, 1,1));
+        Human children1 = new Human("Первый ребёнок корневых родителей", Gender.Male,
+                LocalDate.of(1970, 1, 1));
+        Human children2 = new Human("Второй ребёнок корневых родителей", Gender.Female,
+                LocalDate.of(1980, 1, 1));
+        Human children3 = new Human("Третий ребёнок корневых родителей", Gender.Female,
+                LocalDate.of(1990, 1, 1));
         List<Human> childrenList = new ArrayList<>();
         childrenList.add(children1);
         childrenList.add(children2);
@@ -24,17 +29,19 @@ public class Main {
         familyTree.addHuman(human2);
         familyTree.addHuman(children1);
         familyTree.addHuman(children2);
+        familyTree.addHuman(children3);
         System.out.println(familyTree.showHumansList());
 
-        System.out.println("Дети выбранного родителя: ");
+        System.out.println("Дети выбранного родителя (" + human1.getName() + "): ");
         System.out.println(human1.showChildren());
     }
 
     public static void addChildren(Human parens1, Human parens2, List<Human> childrenList){
-        for (Human children: childrenList) {
-            parens1.addChildren(children);
-            parens2.addChildren(children);
+        if (! parens1.getGender().equals(parens2.getGender())){
+            for (Human children: childrenList) {
+                parens1.addChildren(children);
+                parens2.addChildren(children);
+            }
         }
-
     }
 }
