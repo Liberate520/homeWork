@@ -4,11 +4,13 @@ import ru.gb.familyTree.exceptions.TreeExceptions;
 import ru.gb.familyTree.person.Person;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import java.io.Serializable;
 
-public class FamilyTree implements Serializable{
+public class FamilyTree implements Serializable, Iterator<Node> {
+    int index= 0;
     private String family;
     private Person root;
     private List<Node> nodeList = new ArrayList<>();
@@ -55,5 +57,15 @@ public class FamilyTree implements Serializable{
 
     public List<Node> getNode() {
         return nodeList;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return index < nodeList.size();
+    }
+
+    @Override
+    public Node next() {
+        return nodeList.get(index++);
     }
 }

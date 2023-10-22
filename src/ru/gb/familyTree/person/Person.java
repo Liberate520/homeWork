@@ -133,6 +133,10 @@ public class Person implements Serializable {
                 gender.equals(person.getGender());
     }
 
+    /**
+     * При перегрузке equals положено перегружать и hashCode, но в проекте это hashCode нигде не используется,
+     * поэтому закомментировано.
+     */
     /*@Override
     public int hashCode() {
         return 3 * getFamily().hashCode() + 7 * getLastName().hashCode() + 13 * getFirstName().hashCode() +

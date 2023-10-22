@@ -79,8 +79,6 @@ public class Node implements Serializable {
      */
     private String printSet(HashSet<Person> set) {
         StringBuilder str = new StringBuilder();
-        //Сreates Iterator object.
-        //Сheck element is present or not. If not loop will break.
         for (Person itm : set) {
             str.append(itm.toString()).append("\n");
         }
@@ -88,7 +86,7 @@ public class Node implements Serializable {
     }
     @Override
     public String toString() {
-        return String.format("Узел дерева %d (брак):\n %s и %s,\n их дети:\n %s\n",
+        return String.format("Узел дерева %d (брак):\n%s и %s,\nих дети:\n%s\n",
                 getId(),getParentOne().toString(), getParentTwo().toString(), printSet(getChildren()));
     }
 }
