@@ -1,12 +1,13 @@
 package my_family_tree.tree;
 
 import my_family_tree.human.Human;
+import my_family_tree.human.comparators.HumanComparatorByAge;
+import my_family_tree.human.comparators.HumanComparatorByYear;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class familyTree implements Serializable {
+public class familyTree implements Serializable, Iterable<Human> {
     private int humanId;
     private List<Human> humanList;
 
@@ -97,6 +98,18 @@ public class familyTree implements Serializable {
         }
     }
 
+    public void sortByName(){
+        Collections.sort(humanList);
+    }
+
+    public void sortByAge(){
+        Collections.sort(humanList, new  HumanComparatorByAge());
+    }
+
+    public void sortByYear(){
+        Collections.sort(humanList, new HumanComparatorByYear());
+    }
+
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("Кол-во объектов: ").append(humanList.size()).append("\n");
@@ -109,5 +122,10 @@ public class familyTree implements Serializable {
     @Override
     public String toString() {
         return getInfo();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
     }
 }

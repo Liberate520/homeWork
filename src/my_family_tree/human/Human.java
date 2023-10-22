@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private int id;
     private String name;
     private LocalDate birthDay;
@@ -94,16 +94,13 @@ public class Human implements Serializable {
         return parents;
     }
 
-    public String getAge(){
+    public int getAge(){
         if (deathDay == null){
-            return Integer.toString(Period.between(birthDay, LocalDate.now()).getYears());
+            return Period.between(birthDay, LocalDate.now()).getYears();
         }
         else {
-            StringBuilder stringBuilder = new StringBuilder(name);
-            stringBuilder.append(" ").append(" умер(ла) в возрасте ").
-                    append(Period.between(birthDay, deathDay).getYears()).append(" лет");
-            return stringBuilder.toString();
 
+            return Period.between(birthDay, deathDay).getYears();
         }
     }
 
@@ -187,5 +184,10 @@ public class Human implements Serializable {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }
