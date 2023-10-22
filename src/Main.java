@@ -8,8 +8,7 @@ import HomeWork.familyTree.homeWork22_10_23.src.tree.FamilyTree;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Main {
-    package HomeWork.familyTree.homeWork22_10_23.src;
+
 
 import HomeWork.familyTree.homeWork22_10_23.src.human.Children;
 import HomeWork.familyTree.homeWork22_10_23.src.human.Human;
