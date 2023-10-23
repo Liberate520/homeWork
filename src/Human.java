@@ -1,15 +1,16 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     int id;
-    String name;
-    Gender gender;
-    LocalDate birthday;
-    LocalDate deathday;
+    private String name;
+    private Gender gender;
+    private LocalDate birthday;
+    private LocalDate deathday;
     private Human dad, mom;
-    List<Human> children = new ArrayList<>();
+    private List<Human> children = new ArrayList<>();
 
     public Human(int id, String name, Gender gender, LocalDate birthday) {
         this.id = id;
@@ -19,17 +20,13 @@ public class Human {
         this.deathday = null;
     }
 
-    public void setParentDad(Human human_dad, Human human_children){
-        if(human_dad.gender == Gender.male){
-            dad = human_dad;
-            human_dad.children.add(human_children);
-        }
-    }
-
-    public void setParentMom(Human human_mom, Human human_children){
-        if(human_mom.gender == Gender.female){
-            mom = human_mom;
-            human_mom.children.add(human_children);
+    public void setParent(Human human_parent){
+        if(human_parent.gender == Gender.male){
+            this.dad = human_parent;
+            human_parent.children.add(this);
+        }else{
+            this.mom = human_parent;
+            human_parent.children.add(this);
         }
     }
 
@@ -53,7 +50,6 @@ public class Human {
         else{
             return id + "." + name + " " + birthday.getYear();
         }
-
     }
 
     public String allInfo() {
@@ -62,6 +58,5 @@ public class Human {
         }else{
             return id + "." + name + " " + birthday + "\n" + getParent() + "\n" + getChildren();
         }
-
     }
 }
