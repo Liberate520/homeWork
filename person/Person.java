@@ -1,12 +1,12 @@
 package person;
-
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
 import tree.FamilyTree;
 
-public class Person {
+public class Person implements Serializable{
     private int id;
     private FamilyTree family;
     private String lastname;
@@ -31,7 +31,10 @@ public class Person {
         family.addMember(this);
     }
 
-    public String getAge() {
+    public Person(String name, Gender gender, LocalDate birthDay) {
+    }
+
+    public String getAgeString() {
         if (this.deathday == null) {
             return Integer.toString(Period.between(this.birthday, LocalDate.now()).getYears());
         }
@@ -41,6 +44,17 @@ public class Person {
             stringBuilder.append(Period.between(this.birthday, this.deathday).getYears());
             stringBuilder.append(" лет.");
             return stringBuilder.toString();
+        }
+    }
+
+    public Integer getAgeInt() {
+        if (this.deathday == null) {
+            Integer result = Period.between(this.birthday, LocalDate.now()).getYears();
+            return result;
+        }
+        else {
+            Integer result = Period.between(this.birthday, this.deathday).getYears();
+            return result;
         }
     }
 
