@@ -1,16 +1,17 @@
-package homeWork3.Core.MVP;
+package homeWork3.core.mvp;
 
-import homeWork3.Core.Models.FamilyTree;
-import homeWork3.Core.Models.Human;
-import homeWork3.Core.Infrastructure.CompareAge;
+import homeWork3.core.models.FamilyTree;
+import homeWork3.core.models.Human;
+import homeWork3.core.infrastructure.CompareAge;
+import homeWork3.ui.FileStream;
 
 public class Presenter {
     private View view;
-    private Model serialize;
+    private FileStream serialize;
     private FamilyTree<Human> familyConnect;
     private CompareAge sortAge;
 
-    public Presenter(View view, FamilyTree<Human> familyConnect, Model serialize, CompareAge sortAge) {
+    public Presenter(View view, FamilyTree<Human> familyConnect, FileStream serialize, CompareAge sortAge) {
         this.familyConnect = familyConnect;
         this.view = view;
         this.serialize = serialize;

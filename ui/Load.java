@@ -1,4 +1,4 @@
-package homeWork3.UI;
+package homeWork3.ui;
 
 public class Load extends Command {
     public Load(Console console) {

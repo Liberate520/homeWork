@@ -1,10 +1,10 @@
-package homeWork3.Core.Models;
+package homeWork3.core.models;
 
-import homeWork3.Core.Models.PetFamily;
+import homeWork3.core.mvp.Model;
 
 import java.io.Serial;
 
-public class Human extends PetFamily {
+public class Human extends Model {
     @Serial
     private static final long serialVersionUID = 1L;
 

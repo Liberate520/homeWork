@@ -1,19 +1,19 @@
-package homeWork3.Core.Models;
+package homeWork3.core.mvp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
+public abstract class Model implements Serializable, Comparable<Model> {
     private String name;
     private String gender;
     private int age;
-    private PetFamily mother;
-    private PetFamily father;
-    private List<PetFamily> kids;
+    private Model mother;
+    private Model father;
+    private List<Model> kids;
 
-    public PetFamily(String name, String gender, int age, PetFamily mother, PetFamily father) {
+    public Model(String name, String gender, int age, Model mother, Model father) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -22,11 +22,11 @@ public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
         kids = new ArrayList<>();
     }
 
-    public PetFamily(String name, String gender, int age) {
+    public Model(String name, String gender, int age) {
         this(name, gender, age, null, null);
     }
 
-    public void addKid(PetFamily kid) {
+    public void addKid(Model kid) {
         if (!kids.contains(kid)) {
             this.kids.add(kid);
             if (Objects.equals(this.gender, "мужской")) {
@@ -39,7 +39,7 @@ public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
     public String printKids() {
         StringBuilder res = new StringBuilder(" Дети: ");
         if (!this.kids.isEmpty()) {
-            for (PetFamily kid : kids) {
+            for (Model kid : kids) {
                 res.append(kid.name).append(",");
             }
         } else
@@ -69,11 +69,11 @@ public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
         return name;
     }
 
-    public PetFamily getFather() {
+    public Model getFather() {
         return father;
     }
 
-    public PetFamily getMother() {
+    public Model getMother() {
         return mother;
     }
 
@@ -81,12 +81,8 @@ public abstract class PetFamily implements Serializable, Comparable<PetFamily> {
         return age;
     }
 
-    /*public void setAge(int age) {
-        this.age = age;
-    }*/
-
     @Override
-    public int compareTo(PetFamily o) {
+    public int compareTo(Model o) {
         return name.compareToIgnoreCase(o.name);
     }
 }

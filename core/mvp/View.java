@@ -1,4 +1,4 @@
-package homeWork3.Core.MVP;
+package homeWork3.core.mvp;
 
 public interface View {
     void setPresenter(Presenter presenter);

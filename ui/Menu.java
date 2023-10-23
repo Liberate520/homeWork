@@ -1,7 +1,7 @@
-package homeWork3.UI;
+package homeWork3.ui;
 
-import homeWork3.Core.Infrastructure.SortByAge;
-import homeWork3.Core.Infrastructure.SortByName;
+import homeWork3.core.infrastructure.SortByAge;
+import homeWork3.core.infrastructure.SortByName;
 
 import java.util.ArrayList;
 import java.util.List;

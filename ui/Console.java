@@ -1,9 +1,9 @@
-package homeWork3.UI;
+package homeWork3.ui;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-import homeWork3.Core.MVP.Presenter;
-import homeWork3.Core.MVP.View;
+import homeWork3.core.mvp.Presenter;
+import homeWork3.core.mvp.View;
 
 public class Console implements View {
     private Scanner scan;

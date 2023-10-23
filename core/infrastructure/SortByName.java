@@ -1,7 +1,7 @@
-package homeWork3.Core.Infrastructure;
+package homeWork3.core.infrastructure;
 
-import homeWork3.UI.Command;
-import homeWork3.UI.Console;
+import homeWork3.ui.Command;
+import homeWork3.ui.Console;
 
 public class SortByName extends Command {
     public SortByName(Console console) {

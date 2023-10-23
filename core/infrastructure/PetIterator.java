@@ -1,10 +1,10 @@
-package homeWork3.Core.Infrastructure;
+package homeWork3.core.infrastructure;
 
-import homeWork3.Core.Models.PetFamily;
+import homeWork3.core.mvp.Model;
 
 import java.util.List;
 
-public class PetIterator<T extends PetFamily> implements java.util.Iterator<T> {
+public class PetIterator<T extends Model> implements java.util.Iterator<T> {
     private int index;
     private List<T> humans;
 

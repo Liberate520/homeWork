@@ -1,4 +1,4 @@
-package homeWork3.Core.Models;
+package homeWork3.core.models;
 
 import java.io.Serializable;
 

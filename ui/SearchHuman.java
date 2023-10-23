@@ -1,4 +1,4 @@
-package homeWork3.UI;
+package homeWork3.ui;
 
 public class SearchHuman extends Command {
     public SearchHuman(Console console) {
