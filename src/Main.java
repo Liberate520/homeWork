@@ -1,14 +1,16 @@
 import home_work_class.FamilyTree;
+import home_work_class.FileWriter;
 import home_work_class.Gender;
 import home_work_class.Human;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree familyTree = new FamilyTree();
         Human human1 = new Human("Первый мужской родитель древа", Gender.Male, LocalDate.of(1950, 1, 1));
         Human human2 = new Human("первый женский родитель древа", Gender.Female,
@@ -34,6 +36,11 @@ public class Main {
 
         System.out.println("Дети выбранного родителя (" + human1.getName() + "): ");
         System.out.println(human1.showChildren());
+
+        FileWriter handler = new FileWriter();
+        handler.write(familyTree);
+        System.out.println("\nПроверка после записи и чтения\n");
+        System.out.println(handler.read().showHumansList());
     }
 
     public static void addChildren(Human parens1, Human parens2, List<Human> childrenList){

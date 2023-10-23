@@ -1,9 +1,10 @@
 package home_work_class;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> humansList;
 
     public FamilyTree() {
@@ -22,7 +23,8 @@ public class FamilyTree {
     }
 
     public void addHuman(Human human){
-        humansList.add(human);
+        if (! humansList.contains(human)){
+            humansList.add(human);}
     }
 
     public Human findHumanByName(String name){

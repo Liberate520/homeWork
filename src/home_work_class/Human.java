@@ -1,12 +1,14 @@
 package home_work_class;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
+    private int id;
     private String name;
     private LocalDate bornDate;
     private LocalDate diedDate;
@@ -37,6 +39,7 @@ public class Human {
     }
 
     private Human(String name, Gender gender, LocalDate bornDate, LocalDate diedDate, Human mother, Human father) {
+        this.id = hashCode();
         this.name = name;
         this.bornDate = bornDate;
         this.diedDate = diedDate;
@@ -129,6 +132,15 @@ public class Human {
 
     public void addChildren(Human human){
         human.setParens(this);
-        this.childrenList.add(human);
+        if (! childrenList.contains(human))
+            {this.childrenList.add(human);}
+    }
+
+    public List<Human> getParens(){
+        List<Human> parensList = new ArrayList<>();
+        if (this.father != null){parensList.add(this.father);}
+        if (this.mother != null) {parensList.add(this.mother);}
+
+        return parensList;
     }
 }
