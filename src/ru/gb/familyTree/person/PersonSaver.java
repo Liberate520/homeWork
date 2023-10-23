@@ -22,7 +22,12 @@ public class PersonSaver implements Serializable, Iterator<Person>{
         temp.setId(person.getId()); temp.setGender(person.getGender());temp.setFirstName(person.getFirstName());
         temp.setSecondName(person.getSecondName()); temp.setLastName(person.getLastName());
         temp.setStartDay(person.getStartDay()); temp.setStopDay(person.getStopDay());
-        personList.add(temp);
+        // Если персона не дублируется, добавляем её в список.
+        if (!(personList.contains(temp))) {
+            personList.add(temp);
+        } else {
+            System.out.println(String.format("Персона %s уже есть в списке персон!", temp));
+        }
     }
     public Person getObjectById (int id){
         for (Person itm: personList) {

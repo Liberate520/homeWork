@@ -128,19 +128,20 @@ public class Person implements Serializable {
             return false;
         }
         return lastName.equals(person.getLastName()) &&
-                secondName.equals(person.getSecondName()) && firstName.equals(person.getFirstName()) &&
-                startDay.equals(person.getStartDay()) && stopDay.equals(person.getStopDay()) &&
+                secondName.equals(person.getSecondName()) &&
+                firstName.equals(person.getFirstName()) &&
+                (startDay != null ? startDay.equals(person.getStartDay()): true) &&
+                (startDay != null ? stopDay.equals(person.getStopDay()): true) &&
                 gender.equals(person.getGender());
     }
 
     /**
-     * При перегрузке equals положено перегружать и hashCode, но в проекте это hashCode нигде не используется,
-     * поэтому закомментировано.
+     * При перегрузке equals положено перегружать и hashCode.
      */
-    /*@Override
+    @Override
     public int hashCode() {
-        return 3 * getFamily().hashCode() + 7 * getLastName().hashCode() + 13 * getFirstName().hashCode() +
-                17 * getSecondName().hashCode() + 24 * getStartDay().hashCode() + 32 * getStopDay().hashCode() +
-                48 * getGender().hashCode();
-    }*/
+        return 7 * getLastName().hashCode() + 13 * getFirstName().hashCode() +
+                17 * getSecondName().hashCode() + 24 * (getStartDay() != null ? getStartDay().hashCode() : 0) +
+                32 * (getStopDay() != null? getStopDay().hashCode() : 0) + 48 * getGender().hashCode();
+    }
 }

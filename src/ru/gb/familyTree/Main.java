@@ -186,6 +186,16 @@ public class Main {
         if(debug){System.out.println(personName.getObjectById(12));}
         tempPerson.clear();
 
+        /**
+         * Намеренно дублируем персону. В дерево персона попасть не должна.
+         */
+        tempPerson.setId(66);//намеренно дублирована
+        tempPerson.setGender(Gender.Female); tempPerson.setFirstName("Евдокия"); tempPerson.setSecondName("Лукьяновна");
+        tempPerson.setLastName("Стрешнева");
+        personName.addPerson(tempPerson);
+        if(debug){System.out.println(personName.getObjectById(66));}
+        tempPerson.clear();
+
         tempPerson.setId(21);
         tempPerson.setGender(Gender.Female); tempPerson.setFirstName("Мария"); tempPerson.setSecondName("Ильинична");
         tempPerson.setLastName("Милославская");

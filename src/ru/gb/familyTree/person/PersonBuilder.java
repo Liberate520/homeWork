@@ -1,7 +1,5 @@
 package ru.gb.familyTree.person;
 
-import ru.gb.familyTree.tree.FamilyTree;
-
 import java.time.LocalDate;
 
 public class PersonBuilder {

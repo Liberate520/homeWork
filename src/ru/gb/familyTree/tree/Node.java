@@ -89,4 +89,19 @@ public class Node implements Serializable {
         return String.format("Узел дерева %d (брак):\n%s и %s,\nих дети:\n%s\n",
                 getId(),getParentOne().toString(), getParentTwo().toString(), printSet(getChildren()));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Node node)){
+            return false;
+        }
+        return  family.equals(node.getFamily()) &&
+                ((parentOne != null ? parentOne.equals(node.getParentOne()): true) ||
+                        (parentOne != null ? parentOne.equals(node.getParentTwo()): true)) &&
+                ((parentTwo != null ? parentTwo.equals(node.getParentTwo()): true) ||
+                        (parentTwo != null ? parentTwo.equals(node.getParentOne()): true));
+    }
 }
