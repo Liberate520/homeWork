@@ -1,8 +1,11 @@
+package FamilyTree;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-class FamilyTree {
+class FamilyTree implements Serializable {
     private List<Person> tree = new ArrayList<>();      // Список всех людей в семье
 
     // 1 Добавление человека

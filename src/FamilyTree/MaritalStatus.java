@@ -1,6 +1,9 @@
+package FamilyTree;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class MaritalStatus {
+public class MaritalStatus implements Serializable {
     private Person spouse = null;
     private LocalDate marriageDate = null;
     private LocalDate divorceDate = null;

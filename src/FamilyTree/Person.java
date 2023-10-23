@@ -1,9 +1,12 @@
+package FamilyTree;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.io.Serializable;
 
-class Person {
+class Person implements Serializable {
     private final String name;
     private final String surname;
     private Gender gender;
@@ -29,10 +32,14 @@ class Person {
 
     public String getName() { return name; }
     public String getSurname() { return surname; }
+    public Gender getGender() { return gender; }
     public LocalDate getBurnData() { return burnData; }
     public  LocalDate getDeadData() { return deadData; }
     public Person getMother() { return mother;}
     public Person getFather() { return father;}
+    public MaritalStatus getMaritalStatus() {
+        return maritalStatus.getLast();
+    }
 
     // Метод для добавления ребенка
     public void addChild(Person child) { children.add(child); }
@@ -40,7 +47,7 @@ class Person {
     public void addFather(Person father) { this.father = father; }
     public void setDead(LocalDate deadData) { this.deadData = deadData; }
 
-    public void setMarriage(Person spouse, LocalDate marriageDate ){
+    public void setMarriage(Person spouse, LocalDate marriageDate ) {
         maritalStatus.add(new MaritalStatus(spouse, marriageDate));
     }
     public void setDivorce(Person spouse, LocalDate divorceDate){
@@ -64,6 +71,38 @@ class Person {
     @Override
     public int hashCode() {
         return Objects.hash(name, surname, burnData);
+    }
+
+    @Override
+    public String toString() {
+        // Поиск брака
+        String status = "не в браке";
+        if (!maritalStatus.isEmpty()){
+            for (MaritalStatus ps : maritalStatus) {
+                if (ps.getDivorceDate() == null){
+                    status = "в браке с " + ps.getSpouse().getName();
+                }
+            }
+        }
+        // Поиск детей
+        StringBuilder childrenStrList = new StringBuilder("детей нет");
+        if (!children.isEmpty()){
+            for (Person ch : children) {
+                childrenStrList.append(ch.getName()).append(", ");
+            }
+        }
+
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", gender=" + gender +
+                ", burnData=" + burnData +
+                ", deadData=" + deadData +
+                ", mother=" + ((mother == null)? "нет" : mother.getName()) +
+                ", father=" + ((father == null)?  "нет" : father.getName()) +
+                ", maritalStatus=" + status +
+                ", children=" + childrenStrList +
+                '}';
     }
 
     enum Gender {man, woman};
