@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
@@ -17,6 +18,15 @@ public class Main {
                     word[i] = word[i].trim();
                     lst = lst + word[i] + " ";
                     //System.out.println(i + "  " + word[i]);
+                    Human name = new Human();
+                    name.setId(Integer.parseInt(word[0]));
+                    name.setName(word[2]);
+                    name.setBirthday(LocalDate.parse(word[3]));
+                    name.setGender(Gender.valueOf(word[4]));
+                    name.setSecondParent(word[5]);
+                    for (Human el: name) {
+
+                    }
                 }
                 System.out.println(lst);
             }

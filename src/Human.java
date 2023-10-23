@@ -3,18 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
-    private  int id;
-    private int first_parent_id;
+    private int id;
     private String name;
     private LocalDate birthday;
     private Gender gender;
+    private String first_parent;
     private String second_parent;
     private int hash;
     private List<Human> children = new ArrayList<>();
 
-    public Human(int id, int first_parent_id, String name, LocalDate birthday, Gender gender, String second_parent, int hash) {
+    public Human(int id, String name, LocalDate birthday, Gender gender, String first_parent, String second_parent, int hash) {
         this.id = id;
-        this.first_parent_id = first_parent_id;
+        this.first_parent = first_parent;
         this.name = name;
         this.birthday = birthday;
         this.gender = gender;
@@ -35,16 +35,16 @@ public class Human {
         return hash;
     }
 
-    public void setHash() {
+    public void setHash(int hash) {
         this.hash = hash;
     }
 
-    public int getFirstParent() {
-        return first_parent_id;
+    public void setFirst_parent(String first_parent) {
+        this.first_parent = first_parent;
     }
 
-    public void setFirstParent(int first_parent_id) {
-        this.first_parent_id = first_parent_id;
+    public String getFirstParent() {
+        return first_parent;
     }
 
     public String getName() {
@@ -81,9 +81,10 @@ public class Human {
 
     public StringBuilder getChildren() {
         StringBuilder res = new StringBuilder();
-        if (children.size() != 0) {
-            for (int i = 0; i < children.size(); i++) {
-                res.append(children.get(i).getName());
+//        res.append(" ");
+        if (!children.isEmpty()) {
+            for (Human child : children) {
+                res.append(child.getName());
                 res.append(" ");
             }
             return res;
@@ -94,26 +95,15 @@ public class Human {
         return res;
     }
 
-//    public void setChildren(List<Human> children) {
-//        this.children = children;
-//    }
-
     public String getInfo() {
         return "ID человека: " + getId() +
                "\nID родителя: " + getFirstParent() +
                "\nИмя: " + getName() +
-//               "\nРодители: " + getFirstParent() + " " + getSecondParent() +
+               "\nРодители: " + getFirstParent() + " " + getSecondParent() +
                "\nРодители: " + getSecondParent() +
                "\nДата рождения: " + getBirthday() +
                "\nДети: " + getChildren();
     }
-//    public String getFirstParent(int first_parent_id) {
-//        Iterable<? extends Human> humanList = null;
-//        for (Human k: humanList) {
-//            if (k.getFirstParent() == first_parent_id) return k.name;
-//        }
-//        return null;
-//    }
 
     public boolean AddChild(Human child) {
         if (!children.contains(child)) {

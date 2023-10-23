@@ -8,7 +8,7 @@ public class FamilyTree {
         System.out.println("humanList");
     }
     public FamilyTree() {
-        this(new ArrayList<>());
+        this (new ArrayList<>());
         System.out.println("ArrayList");
     }
 
