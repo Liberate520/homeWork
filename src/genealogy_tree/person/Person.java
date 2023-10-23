@@ -1,12 +1,13 @@
-package ru.gb.family_tree.person;
+package genealogy_tree.person;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable{
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private String firstName;
     private String lastName;

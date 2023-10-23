@@ -1,8 +1,10 @@
 import java.util.GregorianCalendar;
 
-import ru.gb.family_tree.GenealogyTree;
-import ru.gb.family_tree.person.Gender;
-import ru.gb.family_tree.person.Person;
+import genealogy_tree.genealogy_tree.GenealogyTree;
+import genealogy_tree.person.Gender;
+import genealogy_tree.person.Person;
+import genealogy_tree.writer.FileHandler;
+import genealogy_tree.writer.Writable;
 
 public class Main {
     public static void main(String[] args) {
@@ -55,6 +57,18 @@ public class Main {
             System.out.println(child.toString());
         }
 
-        System.out.println("Родители Анны:\n" + anna.getParents().toString());        
+        System.out.println("Родители Анны:\n" + anna.getParents().toString()); 
+        
+        Writable fileHandler = new FileHandler("tree.out");
+        fileHandler.SaveTree(tree);
+        GenealogyTree treeFromFile = fileHandler.LoadTree();
+        if (treeFromFile != null){
+            System.out.println("\n\nПрочитано из файла:\n");
+            for (Person person : treeFromFile.getPeople()){
+                System.out.println();
+                System.out.println(person + "\n" + person.getParents().toString()); 
+                System.out.println();
+            }
+        }
     }
 }

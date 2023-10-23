@@ -1,7 +1,8 @@
-package ru.gb.family_tree.person;
+package genealogy_tree.person;
 
+import java.io.Serializable;
 
-public class Parents {
+public class Parents implements Serializable{
     private Person mother;
     private Person father;
 
@@ -24,8 +25,8 @@ public class Parents {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(mother != null ? "Мать: " + mother.toString() : "unknown");
-        sb.append(father != null ? "\nОтец: " + father.toString() : "unknown");
+        sb.append("Мать: " + (mother != null ?  mother.toString() : "unknown") + "\n");
+        sb.append("Отец: " + (father != null ? father.toString() : "unknown"));
         return sb.toString();
     }
 }

@@ -1,11 +1,12 @@
-package ru.gb.family_tree;
+package genealogy_tree.genealogy_tree;
 
-import ru.gb.family_tree.person.Person;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenealogyTree {
+import genealogy_tree.person.Person;
+
+public class GenealogyTree implements Serializable{
     private List<Person> people;
 
     public GenealogyTree() {
