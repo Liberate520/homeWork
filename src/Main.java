@@ -61,7 +61,7 @@ public class Main {
         tomJones.setChild(elvisJones);
         priscillaJones.setChild(elvisJones);
 
-        // Вывод информации о семье Jones
+        //  Вывод информации о семье Jones
         System.out.println("Информация о семье Jones:");
         List<Human> jonesFamilyMembers = jonesFamily.getFamilyMembers();
         for (Human member : jonesFamilyMembers) {
