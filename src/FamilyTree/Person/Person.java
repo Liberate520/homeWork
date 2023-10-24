@@ -1,4 +1,4 @@
-package FamilyTree;
+package FamilyTree.Person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.io.Serializable;
 
-class Person implements Serializable {
+public class Person implements Serializable {
     private final String name;
     private final String surname;
     private Gender gender;
@@ -85,12 +85,13 @@ class Person implements Serializable {
             }
         }
         // Поиск детей
-        StringBuilder childrenStrList = new StringBuilder("детей нет");
+        StringBuilder childrenStrList = new StringBuilder();
         if (!children.isEmpty()){
             for (Person ch : children) {
                 childrenStrList.append(ch.getName()).append(", ");
             }
         }
+        else {childrenStrList.append("детей нет.");}
 
         return "Person{" +
                 "name='" + name + '\'' +
@@ -104,6 +105,4 @@ class Person implements Serializable {
                 ", children=" + childrenStrList +
                 '}';
     }
-
-    enum Gender {man, woman};
 }

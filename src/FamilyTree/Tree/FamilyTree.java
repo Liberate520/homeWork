@@ -1,11 +1,16 @@
-package FamilyTree;
+package FamilyTree.Tree;
+
+import FamilyTree.Person.Person;
+import FamilyTree.Person.comparators.CompareByPersonAge;
+import FamilyTree.Person.comparators.CompareByPersonName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Person> {
     private List<Person> tree = new ArrayList<>();      // Список всех людей в семье
 
     // 1 Добавление человека
@@ -15,23 +20,18 @@ class FamilyTree implements Serializable {
 
     // 3 Добавление детей (ссылки на родителей уже внутри класса) (у родителей прописать так же детей)
     public void addChild(Person child){
-        if (!tree.contains(child)){
-            addPerson(child);
-            if (child.getMother() != null) { child.getMother().addChild(child); }
-            if (child.getFather() != null) { child.getFather().addChild(child); }
-        }
+        addPerson(child);
+        if (child.getMother() != null) { child.getMother().addChild(child); }
+        if (child.getFather() != null) { child.getFather().addChild(child); }
+
     }
     public void addChild(Person child, Person mother){
-        if (!tree.contains(child)){
-            child.addMother(mother);
-            addChild(child);
-        }
+        child.addMother(mother);
+        addChild(child);
     }
     public void addChild(Person child, Person mother, Person father){
-        if (!tree.contains(child)){
-            child.addFather(father);
-            addChild(child, mother);
-        }
+        child.addFather(father);
+        addChild(child, mother);
     }
     // 4 Свадьба
     public void setMarriage(Person spouse1, Person spouse2, LocalDate marriageDate ){
@@ -53,4 +53,19 @@ class FamilyTree implements Serializable {
     }
     // 7 Напечатать дерево
     // 8 Найти человека
+
+    // *9 Ссылка на дерево
+    public List<Person> getListFamilyTree() { return tree; }
+
+    public void sortByName(){
+        tree.sort(new CompareByPersonName());
+    }
+
+    public void sortByAge(){
+        tree.sort(new CompareByPersonAge());
+    }
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(tree);
+    }
 }
