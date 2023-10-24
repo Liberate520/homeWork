@@ -3,6 +3,7 @@ package ru.medved_sa.tree_family.human;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Human {
     private long id;
@@ -213,5 +214,18 @@ public class Human {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human human)) return false;
+        return Objects.equals(firstName, human.firstName)
+                && Objects.equals(birthDate, human.birthDate)
+                && Objects.equals(deathDate, human.deathDate)
+                && gender == human.gender
+                && Objects.equals(parents, human.parents)
+                && Objects.equals(children, human.children);
+    }
+
 }
 
