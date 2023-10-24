@@ -1,4 +1,4 @@
-package home_work_class;
+package home_work_class.Human;
 
 public enum Gender {
     Male, Female;

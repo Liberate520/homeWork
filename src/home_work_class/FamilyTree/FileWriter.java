@@ -1,9 +1,8 @@
-package home_work_class;
+package home_work_class.FamilyTree;
 
 import java.io.*;
-import java.util.List;
 
-public class FileWriter implements Writeable{
+public class FileWriter implements Writeable {
     private String path;
 
     public FileWriter(String path) {

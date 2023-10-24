@@ -1,13 +1,11 @@
-package home_work_class;
+package home_work_class.Human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     private int id;
     private String name;
     private LocalDate bornDate;
@@ -142,5 +140,10 @@ public class Human implements Serializable {
         if (this.mother != null) {parensList.add(this.mother);}
 
         return parensList;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }

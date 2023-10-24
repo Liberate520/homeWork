@@ -1,10 +1,13 @@
-package home_work_class;
+package home_work_class.FamilyTree;
+
+import home_work_class.Human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable {
     private List<Human> humansList;
 
     public FamilyTree() {
@@ -32,5 +35,17 @@ public class FamilyTree implements Serializable {
             if (human.getName().equals(name)){return human;}
         }
         return null;
+    }
+
+    public void sortByName(){
+        humansList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge(){
+        humansList.sort(new HumanComparatorByAge());
+    }
+    @Override
+    public Iterator<Human> iterator() {
+        return humansList.iterator();
     }
 }
