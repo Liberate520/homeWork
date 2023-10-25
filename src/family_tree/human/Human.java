@@ -1,8 +1,12 @@
-package family_tree;
+package family_tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
+import family_tree.human.types_enum.Gender;
+import family_tree.human.types_enum.LifeStatus;
+
 import java.util.ArrayList;
 
 public class Human implements Serializable{
