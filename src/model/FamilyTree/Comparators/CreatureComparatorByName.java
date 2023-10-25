@@ -1,6 +1,6 @@
 package model.FamilyTree.Comparators;
 
-import model.FamilyTree.CreatureItem;
+import model.FamilyTree.Interface.CreatureItem;
 
 import java.util.Comparator;
 

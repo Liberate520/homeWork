@@ -1,11 +1,14 @@
 package model.FamilyTree;
 
+import model.FamilyTree.Interface.CreatureItem;
 import model.FamilyTree.iterators.CreatureIterator;
 import model.FamilyTree.Comparators.CreatureComparatorByAge;
 import model.FamilyTree.Comparators.CreatureComparatorByBirthDate;
 import model.FamilyTree.Comparators.CreatureComparatorByName;
 import model.creature.Creature;
 import model.creature.Gender;
+import model.creature.Human;
+import model.creature.Interface.AgeInfo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends CreatureItem<E>> implements Iterable<E>, Serializable {
+public class FamilyTree<E extends CreatureItem<E> & AgeInfo> implements Iterable<E>, Serializable {
     private long creatureId;
     private List<E> creatureList;
 
@@ -26,8 +29,9 @@ public class FamilyTree<E extends CreatureItem<E>> implements Iterable<E>, Seria
     }
 
     public Creature createCreature(String name, Gender gender, LocalDate dataBirth){
-        return new Creature(name, gender, dataBirth);
+        return new Human(name, gender, dataBirth);
     }
+
     public boolean add(E creature) {
         if (!creatureList.contains(creature)) {
             creatureList.add(creature);
@@ -85,45 +89,45 @@ public class FamilyTree<E extends CreatureItem<E>> implements Iterable<E>, Seria
         return res;
     }
 
-    public boolean setWedding(long creatureId1, long creatureId2) {
-        if (checkId(creatureId1) && checkId(creatureId2)) {
-            E creature1 = getById(creatureId1);
-            E creature2 = getById(creatureId2);
-            return setWedding(creature1, creature2);
-        }
-        return false;
-    }
+//    public boolean setWedding(long humanId1, long humanId2) {
+//        if (checkId(humanId1) && checkId(humanId2)) {
+//            E human1 = getById(humanId1);
+//            E human2 = getById(humanId2);
+//            return setWedding(human1, human2);
+//        }
+//        return false;
+//    }
 
-    public boolean setWedding(E creature1, E creature2) {
-        if (creature1.getSpouse() == null && creature2.getSpouse() == null) {
-            creature1.setSpouse(creature2);
-            creature2.setSpouse(creature1);
+    public boolean setWedding(Human human1, Human human2) {
+        if (human1.getSpouse() == null && human2.getSpouse() == null) {
+            human1.setSpouse(human2);
+            human1.setSpouse(human2);
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean setDivorce(long creatureId1, long creatureId2) {
-        if (checkId(creatureId1) && checkId(creatureId2)) {
-            E creature1 = getById(creatureId1);
-            E creature2 = getById(creatureId2);
-            return setDivorce(creature1, creature2);
-        }
-        return false;
-    }
+//    public boolean setDivorce(long creatureId1, long creatureId2) {
+//        if (checkId(creatureId1) && checkId(creatureId2)) {
+//            E creature1 = getById(creatureId1);
+//            E creature2 = getById(creatureId2);
+//            return setDivorce(creature1, creature2);
+//        }
+//        return false;
+//    }
 
-    public boolean setDivorce(E creature1, E creature2) {
-        if (creature1.getSpouse() != null && creature2.getSpouse() != null) {
-            creature1.setSpouse(null);
-            creature2.setSpouse(null);
+    public boolean setDivorce(Human human1, Human human2) {
+        if (human1.getSpouse() != null && human2.getSpouse() != null) {
+            human1.setSpouse(null);
+            human2.setSpouse(null);
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean remove(long creatureIdId) {
+    public boolean remove(long creatureId) {
         if (checkId(creatureId)) {
             E e = getById(creatureId);
             return creatureList.remove(e);

@@ -1,6 +1,6 @@
 package model.FamilyTree.iterators;
 
-import model.FamilyTree.CreatureItem;
+import model.FamilyTree.Interface.CreatureItem;
 
 import java.util.Iterator;
 import java.util.List;
