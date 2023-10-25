@@ -5,13 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import genealogy_tree.person.Person;
-
-public class GenealogyTreeIterator implements Serializable, Iterator<Person> {
-    private List<Person> people;
+public class GenealogyTreeIterator<T> implements Serializable, Iterator<T> {
+    private List<T> people;
     private int currentIndex = 0;
 
-    public GenealogyTreeIterator(List<Person> people) {
+    public GenealogyTreeIterator(List<T> people) {
         this.people = people;
     }
 
@@ -21,7 +19,7 @@ public class GenealogyTreeIterator implements Serializable, Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public T next() {
         if (hasNext()) {
             return people.get(currentIndex++);
         } else {

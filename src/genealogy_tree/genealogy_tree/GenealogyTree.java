@@ -7,16 +7,14 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import genealogy_tree.person.Person;
-
-public class GenealogyTree implements Serializable, Iterable<Person> {
-    private List<Person> people;
+public class GenealogyTree<T> implements Serializable, Iterable<T> {
+    private List<T> people;
 
     public GenealogyTree() {
         people = new ArrayList<>();
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(T person) {
         if (!people.contains(person)) {
             people.add(person);
             System.out.println("В дерево добавлен: " + person);
@@ -25,22 +23,22 @@ public class GenealogyTree implements Serializable, Iterable<Person> {
         }
     }
 
-    public List<Person> getPeople() {
+    public List<T> getPeople() {
         return people;
     }
 
-    public List<Person> getPeopleSortedBy(Comparator<Person> comparator) {
-        List<Person> sortedPeople = new ArrayList<>(people);
+    public List<T> getPeopleSortedBy(Comparator<T> comparator) {
+        List<T> sortedPeople = new ArrayList<>(people);
         Collections.sort(sortedPeople, comparator);
         return sortedPeople;
     }
 
-    public void setPeople(List<Person> people) {
+    public void setPeople(List<T> people) {
         this.people = people;
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return new GenealogyTreeIterator(people);
+    public Iterator<T> iterator() {
+        return new GenealogyTreeIterator<T>(people);
     }    
 }

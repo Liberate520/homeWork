@@ -5,8 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import genealogy_tree.genealogy_tree.GenealogyTree;
+import java.io.Serializable;
 
 public class FileHandler implements Writable{
     private String fileName;
@@ -15,11 +14,11 @@ public class FileHandler implements Writable{
         this.fileName = fileName;
     }
 
-    public Boolean SaveTree(GenealogyTree tree){
+    public Boolean SaveObject(Serializable object){
         ObjectOutputStream objectOutputStream;
         try {
             objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
-            objectOutputStream.writeObject(tree);
+            objectOutputStream.writeObject(object);
             objectOutputStream.close();
             return true;
         } catch (IOException e) {
@@ -28,15 +27,15 @@ public class FileHandler implements Writable{
         }
     }
 
-    public GenealogyTree LoadTree(){
+    public Object LoadObject(){
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
-            GenealogyTree tree = (GenealogyTree) objectInputStream.readObject();
+            Serializable object = (Serializable) objectInputStream.readObject();
             objectInputStream.close();
-            return tree;
+            return object;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return new GenealogyTree();
+        return new Object();
     }
 }

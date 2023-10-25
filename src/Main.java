@@ -40,7 +40,7 @@ public class Main {
             Gender.Male,
             new GregorianCalendar(1999, 1, 17));
             
-        GenealogyTree tree = new GenealogyTree();
+        GenealogyTree<Person> tree = new GenealogyTree<>();
         tree.addPerson(ivan);
         tree.addPerson(maria);
         tree.addPerson(anna);
@@ -61,8 +61,9 @@ public class Main {
         System.out.println("Родители Анны:\n" + anna.getParents().toString()); 
         
         Writable fileHandler = new FileHandler("tree.out");
-        fileHandler.SaveTree(tree);
-        GenealogyTree treeFromFile = fileHandler.LoadTree();
+        fileHandler.SaveObject(tree);
+        @SuppressWarnings("unchecked")
+        GenealogyTree<Person> treeFromFile = (GenealogyTree<Person>) fileHandler.LoadObject();
         if (treeFromFile != null){
             System.out.println("\n\nПрочитано из файла:\n");
             for (Person person : treeFromFile){
