@@ -3,6 +3,7 @@ import java.util.GregorianCalendar;
 import genealogy_tree.genealogy_tree.GenealogyTree;
 import genealogy_tree.person.Gender;
 import genealogy_tree.person.Person;
+import genealogy_tree.person.PersonComparators;
 import genealogy_tree.writer.FileHandler;
 import genealogy_tree.writer.Writable;
 
@@ -64,11 +65,21 @@ public class Main {
         GenealogyTree treeFromFile = fileHandler.LoadTree();
         if (treeFromFile != null){
             System.out.println("\n\nПрочитано из файла:\n");
-            for (Person person : treeFromFile.getPeople()){
+            for (Person person : treeFromFile){
                 System.out.println();
                 System.out.println(person + "\n" + person.getParents().toString()); 
                 System.out.println();
             }
+
+            System.out.println("\n\nСортировка по возрасту:\n");
+            for (Person person : treeFromFile.getPeopleSortedBy(PersonComparators.byAge)){
+                System.out.println(person); 
+            }
+
+            System.out.println("\n\nАлфавитная сортировка:\n");
+            for (Person person : treeFromFile.getPeopleSortedBy(PersonComparators.byFullName)){
+                System.out.println(person); 
+            }            
         }
     }
 }

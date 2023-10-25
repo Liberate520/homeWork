@@ -18,7 +18,7 @@ public class Person implements Serializable{
     private Parents parents;
     private List<Person> children;
 
-    public Person(String firstName, String lastName, String surName, Gender gender, Calendar birthDate) {
+    public Person(String firstName, String surName, String lastName, Gender gender, Calendar birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.surName = surName;
@@ -28,7 +28,6 @@ public class Person implements Serializable{
         this.children = new ArrayList<>();
     }
 
-    // Геттеры и сеттеры для всех атрибутов
     public String getFirstName() {
         return firstName;
     }
