@@ -1,3 +1,8 @@
+import familyTree.FamilyTree;
+import human.Gender;
+import human.Human;
+
+import java.io.*;
 import java.time.LocalDate;
 //Константин, это черновик, второе занятие ещё не смотрела. Понимаю, что работы мне ещё очень много
 public class Main {
@@ -12,8 +17,8 @@ public class Main {
         Human human6 = new Human("Ваня", Gender.Male, LocalDate.of(2014, 1, 19), human5, human1);
         Human human7 = new Human("Нина Михайловна", Gender.Female, LocalDate.of(1955, 8, 31));
         Human human8 = new Human("Андрей", Gender.Male, LocalDate.of(1977, 8, 13), human2, human1);
-
-
+        human8.write();
+        // TODO: 25/10/2023 FileHandler fh = new FileHandler();
 
 
         familyTree.addHuman(human1);
@@ -27,7 +32,7 @@ public class Main {
 
         human8.setChildren(human4);
 
-        familyTree.addChild(human8, human4); //TODO настроить вывод только имён детей
+//        familyTree.addChild(human8, human4); //TODO настроить вывод только имён детей
         //TODO настроить
 
 
