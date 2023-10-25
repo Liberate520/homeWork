@@ -1,12 +1,13 @@
 package ru.medved_sa.tree_family.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human {
+public class Human implements Serializable {
     private long id;
     private String firstName;
     private LocalDate birthDate;
@@ -271,35 +272,6 @@ public class Human {
     }
 
 
-//    /**
-//     * Метод, геттер. Если внутри той сущности, к которой применяется этот метод, есть ссылка на сущность
-//     * у которой пол обозначен как Male, то вернется найденная сущность, иначе вернется null.
-//     *
-//     * @return Вернёт всю сущность отца, иначе null
-//     */
-//    public Human getFatherInfo() {
-//        for (Human parent : parents) {
-//            if (parent.getGender() == Gender.Male) {
-//                return parent;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    /**
-//     * Метод, геттер. Если, внутри той сущности, к которой применяется этот метод, есть ссылка на сущность
-//     * у которой пол обозначен как Female, то вернется найденная сущность, иначе вернется null.
-//     *
-//     * @return Вернёт всю сущность матери, иначе null
-//     */
-//    public Human getMotherInfo() {
-//        for (Human parent : parents) {
-//            if (parent.getGender() == Gender.Female) {
-//                return parent;
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      * Метод добавляющий информацию об отце в метод toString(), но может быть применен и отдельно. Метод формирует
