@@ -111,7 +111,7 @@ public class Human implements Serializable, Comparable<Human> {
     public void setParens(Human human) {
         if (human.gender == Gender.Male)
             {this.father = human;}
-        else
+        if (human.gender == Gender.Female)
             {this.mother = human;}
     }
 
@@ -132,10 +132,12 @@ public class Human implements Serializable, Comparable<Human> {
         return stringBuilder.toString();
     }
 
-    public void addChildren(Human human){
-        human.setParens(this);
-        if (! childrenList.contains(human))
-            {this.childrenList.add(human);}
+    public void addChildren(List<Human> childrens){
+        for (Human children: childrens) {
+            children.setParens(this);
+            if (! this.childrenList.contains(children))
+            {this.childrenList.add(children);}
+        }
     }
 
     public List<Human> getParens(){
@@ -148,6 +150,7 @@ public class Human implements Serializable, Comparable<Human> {
 
     @Override
     public int compareTo(Human o) {
-        return this.name.compareTo(o.name);
+        return Integer.compare(this.id, o.id);
+        //return this.name.compareTo(o.name);
     }
 }

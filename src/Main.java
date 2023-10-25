@@ -14,19 +14,16 @@ public class Main {
         Human human1 = new Human("Юрий", Gender.Male,
                 LocalDate.of(1950, 1, 1),
                 LocalDate.of(2020, 1,1));
-        Human human2 = new Human("Елена", Gender.Female,
-                LocalDate.of(1955, 1, 1));
-        Human children1 = new Human("Алексей", Gender.Male,
-                LocalDate.of(1980, 1, 1));
-        Human children2 = new Human("Михаил", Gender.Male,
-                LocalDate.of(1985, 1, 1));
-        Human children3 = new Human("Мария", Gender.Female,
-                LocalDate.of(1990, 1, 1));
+        Human human2 = new Human("Елена", Gender.Female, LocalDate.of(1955, 1, 1));
+        Human children1 = new Human("Алексей", Gender.Male, LocalDate.of(1980, 1, 1));
+        Human children2 = new Human("Михаил", Gender.Male, LocalDate.of(1985, 1, 1));
+        Human children3 = new Human("Мария", Gender.Female, LocalDate.of(1990, 1, 1));
         List<Human> childrenList = new ArrayList<>();
         childrenList.add(children1);
         childrenList.add(children2);
         childrenList.add(children3);
-        addChildren(human1, human2, childrenList);
+        human1.addChildren(childrenList);
+        human2.addChildren(childrenList);
         familyTree.addHuman(human1);
         familyTree.addHuman(human2);
         familyTree.addHuman(children1);
@@ -51,14 +48,5 @@ public class Main {
         familyTree.sortByAge();
         System.out.println(familyTree.showHumansList());
 
-    }
-
-    public static void addChildren(Human parens1, Human parens2, List<Human> childrenList){
-        if (! parens1.getGender().equals(parens2.getGender())){
-            for (Human children: childrenList) {
-                parens1.addChildren(children);
-                parens2.addChildren(children);
-            }
-        }
     }
 }
