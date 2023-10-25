@@ -5,7 +5,7 @@ import familyTree.FamilyTree;
 import java.io.*;
 import java.util.Formatter;
 
-public class FileHandler implements Writable, Serializable {
+public class FileHandler implements Writable{
     String fileName;
 
     public FileHandler(String fileName) {

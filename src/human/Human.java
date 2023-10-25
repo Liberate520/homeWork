@@ -4,14 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Human implements Serializable {
-    String firstName;
-    String lastName;
-    LocalDate born;
-    LocalDate died;
-    Human mother;
-    Human father;
-    List<Human> children;
+public class Human implements Serializable , Comparable<Human>{
+    private String firstName;
+    private String lastName;
+    private Gender gender;
+    private LocalDate born;
+    private LocalDate died;
+    private Human mother;
+    private Human father;
+    private List<Human> children;
+
 
 //    public human.Human(String firstName, String lastName, LocalDate born, LocalDate died, human.Human mother, human.Human father, List<human.Human> children) {
 //        this.firstName = firstName;
@@ -23,25 +25,29 @@ public class Human implements Serializable {
 //        this.children = children;
 //    }
 
-    public Human(String firstName, String lastName, LocalDate born, LocalDate died, List<Human> children) {
+
+    public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, Human mother, Human father, List<Human> children) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.born = born;
         this.died = died;
+        this.mother = mother;
+        this.father = father;
         this.children = children;
     }
 
-    public Human(String firstName, String lastName, LocalDate born) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.born = born;
+
+    public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, List<Human> children) {
+        this(firstName, lastName, gender, born , died, null, null, children);
     }
 
-    public Human(String firstName, String lastName, LocalDate born, LocalDate died) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.born = born;
-        this.died = died;
+    public Human(String firstName, String lastName, Gender gender, LocalDate born) {
+        this(firstName, lastName, gender, born, null, null);
+    }
+
+    public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died) {
+        this(firstName, lastName, gender, born, died, null);
     }
 
     //    @Override
@@ -51,7 +57,18 @@ public class Human implements Serializable {
 
     @Override
     public String toString() {
-        return "First name: " + firstName + ", Last name: " + lastName + ", Date of Birth: " + born + ", Date of death: " + died + ".";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Children:\n");
+        if (children != null) {
+            for (Human child : children) {
+//                stringBuilder.append("\n");
+                stringBuilder.append(child.firstName);
+                stringBuilder.append(", ");
+
+            }
+            return "First name: " + firstName + ", Last name: " + lastName + " Gender " + gender + ", Date of Birth: " + born + ", Date of death: " + died + ", " + stringBuilder.toString();
+        }
+        return "First name: " + firstName + ", Last name: " + lastName + " Gender " + gender + ", Date of Birth: " + born + ", Date of death: " + died + ".";
     }
 
     public String getFirstName() {
@@ -68,6 +85,14 @@ public class Human implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public LocalDate getBorn() {
@@ -102,12 +127,38 @@ public class Human implements Serializable {
         this.father = father;
     }
 
-    public List<Human> getChildren() {
-        return children;
+    public String getChildren() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Children:\n");
+        if (children != null) {
+            for (Human child : children) {
+//                stringBuilder.append("\n");
+                stringBuilder.append(child.firstName);
+                stringBuilder.append(", ");
+
+            }
+            return stringBuilder.toString();
+        } else {
+            return "not found";
+        }
     }
 
-    public void setChildren(List<Human> children) {
+
+    public void addChildren(List<Human> children) {
         this.children = children;
     }
 
+    public void addChild(Human child) {children.add(child); }
+
+    public int getAge(){
+//        LocalDate yearNow = LocalDate.now();
+//        LocalDate yearOfBorn = born;
+        long years = java.time.temporal.ChronoUnit.YEARS.between(born ,LocalDate.now());
+        return (int) years;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.firstName.compareTo(o.firstName);
+    }
 }
