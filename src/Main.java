@@ -34,7 +34,8 @@ public class Main {
         System.out.println("Дети выбранного родителя (" + human1.getName() + "): ");
         System.out.println(human1.showChildren());
 
-        //System.out.println(familyTree.findHumanByName("Алексей").toString());
+        System.out.println("\nПоиск в дереве по имени Алексей: ");
+        System.out.println(familyTree.findHumanByName("Алексей").toString());
 
         FileWriter handler = new FileWriter();
         handler.write(familyTree);
