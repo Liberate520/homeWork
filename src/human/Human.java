@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Writable {
+public class Human implements Serializable {
     private int id;
     private String name;
     private Gender gender;

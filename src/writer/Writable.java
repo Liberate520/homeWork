@@ -1,6 +1,9 @@
 package writer;
+
+import java.io.Serializable;
+
 //методы сохранения и загрузки
 public interface Writable {
-    void write();
-    void read();
+    boolean save(Serializable serializable, String filePath);
+    Object read(String filePath);
 }

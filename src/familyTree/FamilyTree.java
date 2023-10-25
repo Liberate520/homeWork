@@ -56,5 +56,9 @@ public class FamilyTree implements Serializable {
         }
         return humanStringBuilder.toString();
     }
-
+//Прикрутила и сюда toString, иначе не шло:
+    @Override
+    public String toString() {
+        return getFamilyTree().toString();
+    }
 }

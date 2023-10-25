@@ -5,24 +5,25 @@ import human.Human;
 import java.io.*;
 
 //описание методов сохранения и загрузки
-public class FileHandler implements Writable{
-
-
-//    FileHandler fh = new FileHandler();
-//    Human h = new Human();
-
-//Сериализация в файл с помощью класса ObjectOutputStream
-    public FileHandler(Human h) throws IOException, ClassNotFoundException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("family.out"));
-        objectOutputStream.writeObject(h);
-        objectOutputStream.close();
-
-        // Востановление из файла с помощью класса ObjectInputStream
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("family.out"));
-        Human hRestored = (Human) objectInputStream.readObject();
-        objectInputStream.close();
-
+public class FileHandler implements Writable {
+    //Сериализация в файл с помощью класса ObjectOutputStream:
+    public boolean save(Serializable serializable, String filePath) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            objectOutputStream.writeObject(serializable);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-
+    // Востановление из файла с помощью класса ObjectInputStream:
+    public Object read(String filePath) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
+            return objectInputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
