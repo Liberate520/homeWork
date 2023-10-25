@@ -1,1 +1,29 @@
-.idea
+.gitignore
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+
+.idea/
+.out
+.vs/
+.target/
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+.gitignore
+.src/test/java
+*.iws
+*.iml
+*.ipr
+pom.xml
+test.bin
+
+
+### VS Code ###
+
+.vscode/
