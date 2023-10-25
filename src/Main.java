@@ -11,14 +11,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree familyTree = new FamilyTree();
-        Human human1 = new Human("Юрий", Gender.Male, LocalDate.of(1950, 1, 1));
-        Human human2 = new Human("Елена", Gender.Female,
-                LocalDate.of(1955, 1, 1),
+        Human human1 = new Human("Юрий", Gender.Male,
+                LocalDate.of(1950, 1, 1),
                 LocalDate.of(2020, 1,1));
+        Human human2 = new Human("Елена", Gender.Female,
+                LocalDate.of(1955, 1, 1));
         Human children1 = new Human("Алексей", Gender.Male,
-                LocalDate.of(1970, 1, 1));
-        Human children2 = new Human("Михаил", Gender.Male,
                 LocalDate.of(1980, 1, 1));
+        Human children2 = new Human("Михаил", Gender.Male,
+                LocalDate.of(1985, 1, 1));
         Human children3 = new Human("Мария", Gender.Female,
                 LocalDate.of(1990, 1, 1));
         List<Human> childrenList = new ArrayList<>();
@@ -36,6 +37,8 @@ public class Main {
         System.out.println("Дети выбранного родителя (" + human1.getName() + "): ");
         System.out.println(human1.showChildren());
 
+        //System.out.println(familyTree.findHumanByName("Алексей").toString());
+
         FileWriter handler = new FileWriter();
         handler.write(familyTree);
         System.out.println("\nПроверка после записи и чтения\n");
@@ -47,6 +50,7 @@ public class Main {
         System.out.println("сортировка по возрасту \n");
         familyTree.sortByAge();
         System.out.println(familyTree.showHumansList());
+
     }
 
     public static void addChildren(Human parens1, Human parens2, List<Human> childrenList){

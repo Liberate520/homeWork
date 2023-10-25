@@ -28,6 +28,7 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     public String showChildren(){
+        if (childrenList.isEmpty()){ return "---"; }
         StringBuilder stringBuilder = new StringBuilder();
         for (Human childern: childrenList) {
             stringBuilder.append(showHuman(childern));
@@ -70,12 +71,17 @@ public class Human implements Serializable, Comparable<Human> {
         if (this.gender == Gender.Male) {return "муж.";}
         return "жен.";
     }
+    public int getId(){ return this.id; }
 
     private String showHuman(Human human){
+        StringBuilder stringBuilder = new StringBuilder();
         if(human != null){
-            return human.getName() + ", возраст " + Integer.toString(human.ageHuman());
+            stringBuilder.append(human.getName());
+            stringBuilder.append(", возраст ");
+            stringBuilder.append(Integer.toString(human.ageHuman()));
+            return stringBuilder.toString();
         }
-        return "";
+        return "---";
     }
 
     public String getMother() {
@@ -112,15 +118,13 @@ public class Human implements Serializable, Comparable<Human> {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName());
-        stringBuilder.append(" ");
+        stringBuilder.append(showHuman(this));
+        stringBuilder.append(", ");
         stringBuilder.append(getGender());
-        stringBuilder.append(", возраст ");
-        stringBuilder.append(Integer.toString(this.ageHuman()));
         stringBuilder.append("\n");
         stringBuilder.append("мать: ");
         stringBuilder.append(showHuman(this.mother));
-        stringBuilder.append(" отец: ");
+        stringBuilder.append(", отец: ");
         stringBuilder.append(showHuman(this.father));
         stringBuilder.append("\n");
         stringBuilder.append("дети: ");
