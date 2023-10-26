@@ -26,9 +26,10 @@ public class FamilyTree {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("*".repeat(30)).append("\n");
         if (!root.getParents().isEmpty()) {
             stringBuilder.append(getRoot().getName()).append("` parents: ").append("\n");
-            for (Person parent : root.getParents()) {
+            for (Person parent : getParentsOfPerson(this.root)) {
                 stringBuilder.append(parent).append("\n");
             }
             stringBuilder.append("\n");
@@ -41,6 +42,7 @@ public class FamilyTree {
                 stringBuilder.append(child).append("\n");
             }
         }
+        stringBuilder.append("*".repeat(30)).append("\n");
         return stringBuilder.toString();
     }
 }
