@@ -3,7 +3,7 @@ package homeWork3.client;
 import homeWork3.core.mvp.Presenter;
 import homeWork3.core.models.FamilyTree;
 import homeWork3.core.models.Human;
-import homeWork3.ui.FileStream;
+import homeWork3.core.models.FileStream;
 import homeWork3.core.infrastructure.CompareAge;
 import homeWork3.ui.Console;
 import homeWork3.core.mvp.View;

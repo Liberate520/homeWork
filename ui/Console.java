@@ -44,7 +44,7 @@ public class Console implements View {
         String sex = scan();
         System.out.print("Введите возраст: ");
         int age = Integer.parseInt(scan());
-        presenter.newHumanAdded(name, sex, age);
+        presenter.serialize.newHumanAdded(name, sex, age, presenter);
     }
 
     public void printFamily() {

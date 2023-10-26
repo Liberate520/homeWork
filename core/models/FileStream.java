@@ -1,7 +1,6 @@
-package homeWork3.ui;
+package homeWork3.core.models;
 
-import homeWork3.core.models.LoadFrom;
-import homeWork3.core.models.SaveAs;
+import homeWork3.core.mvp.Presenter;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,5 +36,10 @@ public class FileStream implements LoadFrom, SaveAs {
             e.getMessage();
             e.printStackTrace();
         }
+    }
+
+    public void newHumanAdded(String name, String gender, int age, Presenter presenter) {
+        presenter.familyConnect.addFamilyTree(new Human(name, gender, age));
+        presenter.view.print("Новый человек добавлен в семью");
     }
 }

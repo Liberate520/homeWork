@@ -3,12 +3,13 @@ package homeWork3.core.mvp;
 import homeWork3.core.models.FamilyTree;
 import homeWork3.core.models.Human;
 import homeWork3.core.infrastructure.CompareAge;
-import homeWork3.ui.FileStream;
+import homeWork3.core.models.FileStream;
+import homeWork3.core.models.DataActions;
 
-public class Presenter {
-    private View view;
-    private FileStream serialize;
-    private FamilyTree<Human> familyConnect;
+public class Presenter implements DataActions {
+    public View view;
+    public FileStream serialize;
+    public FamilyTree<Human> familyConnect;
     private CompareAge sortAge;
 
     public Presenter(View view, FamilyTree<Human> familyConnect, FileStream serialize, CompareAge sortAge) {
@@ -19,18 +20,10 @@ public class Presenter {
         view.setPresenter(this);
     }
 
-    public void loadFamily() {
-        serialize.load("TreeFamily.txt");
-    }
-
+    @Override
     public void printFamily() {
         String family = familyConnect.toString();
         view.print(family);
-    }
-
-    public void newHumanAdded(String name, String gender, int age) {
-        familyConnect.addFamilyTree(new Human(name, gender, age));
-        view.print("Новый человек добавлен в семью");
     }
 
     public void searchHuman(String name) {
@@ -44,6 +37,7 @@ public class Presenter {
         }
     }
 
+    @Override
     public void saveFamily() {
         familyConnect.saveObject(serialize);
         view.print("Семейное древо сохранено.");
@@ -57,5 +51,9 @@ public class Presenter {
     public void sortFamilyByAge() {
         familyConnect.getFamilyTree().sort(sortAge);
         view.print("Сортировка по возрасту завершена, выборка готова к печати.");
+    }
+
+    @Override
+    public void loadFamily() {
     }
 }

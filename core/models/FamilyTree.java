@@ -1,7 +1,6 @@
 package homeWork3.core.models;
 
 import homeWork3.core.mvp.Model;
-import homeWork3.ui.FileStream;
 import homeWork3.core.infrastructure.PetIterator;
 
 import java.io.Serializable;
@@ -29,7 +28,7 @@ public class FamilyTree<T extends Model> implements Iterable<T>, Serializable {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder("В семье " + familyTree.size() + " человек:\n");
+        StringBuilder res = new StringBuilder("В семье " + familyTree.size() + " человека:\n");
         for (int i = 0; i < familyTree.size(); i++) {
             res.append((i + 1)).append(") ").append(familyTree.get(i).toString()).append("\n");
         }
