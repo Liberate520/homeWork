@@ -1,18 +1,18 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Human {
     private int id;
     private String name;
-    private LocalDate birthday;
+    private Date birthday;
     private Gender gender;
     private String first_parent;
     private String second_parent;
     private int hash;
     private List<Human> children = new ArrayList<>();
 
-    public Human(int id, String name, LocalDate birthday, Gender gender, String first_parent, String second_parent, int hash) {
+    public Human(int id, String name, Date birthday, Gender gender, String first_parent, String second_parent, int hash) {
         this.id = id;
         this.first_parent = first_parent;
         this.name = name;
@@ -43,6 +43,10 @@ public class Human {
         this.first_parent = first_parent;
     }
 
+    public Human() {
+
+    }
+
     public String getFirstParent() {
         return first_parent;
     }
@@ -55,11 +59,11 @@ public class Human {
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -105,7 +109,7 @@ public class Human {
                "\nДети: " + getChildren();
     }
 
-    public boolean AddChild(Human child) {
+    public boolean addChild(Human child) {
         if (!children.contains(child)) {
             children.add(child);
             return true;

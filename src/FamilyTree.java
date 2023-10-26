@@ -3,21 +3,19 @@ import java.util.List;
 
 public class FamilyTree {
     private List<Human> humanList;
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
-        System.out.println("humanList");
-    }
+
     public FamilyTree() {
         this (new ArrayList<>());
-        System.out.println("ArrayList");
     }
 
-    public boolean addHuman(Human human) {
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
+    }
+
+    public void addHuman(Human human) {
         if (!humanList.contains(human)) {
             humanList.add(human);
-            return true;
         }
-        return false;
     }
 
     public String getInfo() {

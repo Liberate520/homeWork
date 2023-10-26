@@ -1,39 +1,36 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
+@SuppressWarnings("ALL")
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
         FamilyTree tree = new FamilyTree();
-        String file = "";
-        String[] word = new String[]{};
-        try {
-            Scanner sc = new Scanner(new File("./Family_Tree_In.txt"));
-            while (sc.hasNextLine()) {
-                file = sc.nextLine();
-                word = file.split(",");
-                String lst = "";
-                for (int i = 0; i < word.length; i++) {
-                    word[i] = word[i].trim();
-                    lst = lst + word[i] + " ";
-                    //System.out.println(i + "  " + word[i]);
-                    Human name = new Human();
-                    name.setId(Integer.parseInt(word[0]));
-                    name.setName(word[2]);
-                    name.setBirthday(LocalDate.parse(word[3]));
-                    name.setGender(Gender.valueOf(word[4]));
-                    name.setSecondParent(word[5]);
-                    for (Human el: name) {
-
-                    }
-                }
-                System.out.println(lst);
+        String file;
+        String[] word;
+        String filename = "Family_Tree_In.txt";
+        Scanner sc = new Scanner(new File(filename));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        while (sc.hasNextLine()) {
+            file = sc.nextLine();
+            word = file.split(",");
+            for (int i = 0; i < word.length; i++) {
+                word[i] = word[i].trim();
             }
-            sc.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Human name = new Human();
+            name.setId(Integer.parseInt(word[0]));
+            name.setName(word[2]);
+            Date dateD = format.parse(word[3]);
+            name.setBirthday(dateD);
+            name.setGender(Gender.valueOf(word[4]));
+            name.setSecondParent(word[5]);
+            name.setHash(word[0].hashCode() + 3 * word[2].hashCode() + 5 * word[3].hashCode());
+            //System.out.println(Arrays.toString(word));
+            tree.addHuman(name);
+            System.out.println(tree.toString());
         }
     }
 }
