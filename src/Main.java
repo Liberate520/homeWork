@@ -30,7 +30,8 @@ public class Main {
             name.setHash(word[0].hashCode() + 3 * word[2].hashCode() + 5 * word[3].hashCode());
             //System.out.println(Arrays.toString(word));
             tree.addHuman(name);
-            System.out.println(tree.toString());
+            //System.out.println(tree.toString());
         }
+        System.out.println(tree.getInfo());
     }
 }
