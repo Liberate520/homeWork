@@ -1,14 +1,12 @@
 package home_work_class.FamilyTree;
 
-import home_work_class.Human.Human;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humansList;
+public class FamilyTree<T extends InterfaceMethod> implements Serializable, Iterable<T> {
+    private List<T> humansList;
 
     public FamilyTree() {
         humansList = new ArrayList<>();
@@ -17,36 +15,36 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String showHumansList(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("-----Список корневого древа-----\n");
-        for (Human human: humansList) {
-            stringBuilder.append(human);
+        for (T o: humansList) {
+            stringBuilder.append(o);
             stringBuilder.append("\n");
             stringBuilder.append("----------------------------\n");
         }
         return stringBuilder.toString();
     }
 
-    public void addHuman(Human human){
-        if (! humansList.contains(human)){
-            humansList.add(human);}
+    public void addHuman(T o){
+        if (! humansList.contains(o)){
+            humansList.add(o);}
     }
 
-    public List<Human> findHumanByName(String name){
-        List<Human> findHuman = new ArrayList<>();
-        for (Human human: humansList) {
-            if (human.getName().equals(name)){findHuman.add(human);}
+    public List<T> findHumanByName(String name){
+        List<T> findHuman = new ArrayList<>();
+        for (T o: humansList) {
+            if (o.getName().equals(name)){findHuman.add(o);}
         }
         return findHuman;
     }
 
     public void sortByName(){
-        humansList.sort(new HumanComparatorByName());
+        humansList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge(){
-        humansList.sort(new HumanComparatorByAge());
+        humansList.sort(new HumanComparatorByAge<>());
     }
 
-    public void  sortById() { humansList.sort(new HumanComparatorById());}
+    public void  sortById() { humansList.sort(new HumanComparatorById<>());}
     @Override
-    public Iterator<Human> iterator() {return humansList.iterator(); }
+    public Iterator<T> iterator() {return humansList.iterator(); }
 }

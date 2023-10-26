@@ -1,11 +1,13 @@
 package home_work_class.Human;
 
+import home_work_class.FamilyTree.InterfaceMethod;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, InterfaceMethod {
     private int id;
     private String name;
     private LocalDate bornDate;

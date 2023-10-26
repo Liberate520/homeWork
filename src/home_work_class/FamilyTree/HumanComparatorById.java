@@ -1,13 +1,11 @@
 package home_work_class.FamilyTree;
 
-import home_work_class.Human.Human;
-
 import java.util.Comparator;
 
-public class HumanComparatorById implements Comparator<Human> {
+public class HumanComparatorById<T extends InterfaceMethod> implements Comparator<T> {
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return Integer.compare(o1.getId(), o2.getId());
     }
 
