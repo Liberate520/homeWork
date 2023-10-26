@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import person.Person;
 import person.Gender;
 import java.io.Serializable;
+import person.Comparators.*;
+import tree.PersonIterator;
 
 public class FamilyTree implements Serializable {
 
@@ -45,9 +47,11 @@ public class FamilyTree implements Serializable {
         return stringBuilder.toString();
     }
     public String allMembersMaxInfo() {
+        PersonIterator persIter = new PersonIterator(familyMembers);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семья "+family+": \n");
-        for (Person member: familyMembers) {
+        while(persIter.hasNext()){
+            Person member = persIter.next(); //цикл for делал тоже самое, но спорить с заданием я не буду)
             stringBuilder.append(member.getId()+member.getNameAndLastName());
             stringBuilder.append("Дата рождения: "+member.getBirthday()+"; "+"Возраст: "+member.getAgeString()+" лет; ");
             stringBuilder.append(member.getParents()+member.getSpouse()+member.getChildren()+"\n");
@@ -80,6 +84,18 @@ public class FamilyTree implements Serializable {
         FourPerson.setChild(SecondPerson);
         FourPerson.setDeathday(LocalDate.of(2021, 5, 15));
         return resultTree;
+    }
+    public void sortById(){
+        familyMembers.sort(new IDComporator());
+    }
+    public void sortByAge(){
+        familyMembers.sort(new AgeComparator());
+    }
+    public void sortByName(){
+        familyMembers.sort(new NameComporator());
+    }
+    public void sortByLastName(){
+        familyMembers.sort(new LastNameComporator());
     }
 }
 

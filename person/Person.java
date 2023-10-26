@@ -64,6 +64,8 @@ public class Person implements Serializable{
         return stringBuilder.toString();
     }
 
+    public Integer getIntId() {return id;}
+
     public String getLastname() { return lastname; }
 
     public String getName() { return name; }
