@@ -43,8 +43,8 @@ public class Print implements PrintInfo {
         stringBuilder.append(child.getChildrenInfo());
         return stringBuilder.toString();
     }
-    @Override
-    public String toString() {
-        return getInfo();
-    }
+//    @Override
+//    public String toString() {
+//        return getInfo();
+//    }
 }

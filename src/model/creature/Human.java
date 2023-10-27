@@ -4,11 +4,14 @@ import model.FamilyTree.Interface.CreatureItem;
 import model.creature.Interface.*;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 
-public class Human extends Creature implements CreatureItem<Creature>, Spouse {
+public class Human extends Creature implements CreatureItem<Human> {
     private Human spouse;
 
-    public Human(String name, Gender gender, LocalDate dataBirth, LocalDate dataDeath, Human mother, Human father, Human spouse) {
+    public Human(String name, Gender gender, LocalDate dataBirth, LocalDate dataDeath, Human mother,
+                 Human father, Human spouse) {
         super(name, gender, dataBirth, dataDeath, mother, father);
         this.spouse = spouse;
     }
@@ -42,13 +45,23 @@ public class Human extends Creature implements CreatureItem<Creature>, Spouse {
 
 
     @Override
-    public boolean addChildren(Creature child) {
+    public boolean addChildren(Human child) {
         return false;
     }
 
     @Override
+    public List<Human> getChildren() {
+        return null;
+    }
+
+    @Override
+    public void setChildren(List children) {
+
+    }
+
+    @Override
     public String getChildrenInfo() {
-        return getChildrenInfo();
+        return null;
     }
 
     @Override
@@ -62,9 +75,30 @@ public class Human extends Creature implements CreatureItem<Creature>, Spouse {
     }
 
     @Override
-    public void addParent(Creature parent) {
+    public LocalDate getDataBirth() {
+        return null;
+    }
+
+    @Override
+    public void setDataBirth(LocalDate dataBirth) {
 
     }
+
+    @Override
+    public LocalDate getDataDeath() {
+        return null;
+    }
+
+    @Override
+    public void setDataDeath(LocalDate dataDeath) {
+
+    }
+
+    @Override
+    public void addParent(Human parent) {
+
+    }
+
     @Override
     public String getMotherInfo() {
         return null;
@@ -72,6 +106,31 @@ public class Human extends Creature implements CreatureItem<Creature>, Spouse {
 
     @Override
     public String getFatherInfo() {
+        return null;
+    }
+
+    @Override
+    public Human getMother() {
+        return null;
+    }
+
+    @Override
+    public void setMother(Human mather) {
+
+    }
+
+    @Override
+    public Human getFather() {
+        return null;
+    }
+
+    @Override
+    public void setFather(Human father) {
+
+    }
+
+    @Override
+    public String getInfo() {
         return null;
     }
 }

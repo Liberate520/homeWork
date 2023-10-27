@@ -8,6 +8,7 @@ public class Parents implements ParentsInfo<Creature> {
     private Creature mother;
     private Creature father;
 
+
       @Override
     public void addParent(Creature parent) {
         if (parent.getGender().equals(Gender.MALE)) {

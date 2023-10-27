@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Creature implements Serializable, Comparable<Creature>, CreatureItem<Creature> {
+public abstract class Creature implements Serializable, Comparable<Creature>, CreatureItem {
     private long id;
     private String Name;
     private Gender gender;
@@ -48,30 +48,6 @@ public abstract class Creature implements Serializable, Comparable<Creature>, Cr
         Creature creature = (Creature) obj;
         return creature.getId() == getId();
     }
-    public String getInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("id: ");
-        stringBuilder.append(id);
-        stringBuilder.append(", name: ");
-        stringBuilder.append(Name);
-        stringBuilder.append(", gender: ");
-        stringBuilder.append(gender);
-        stringBuilder.append(", age: ");
-        stringBuilder.append(getAge());
-//        stringBuilder.append(", ");
-//        stringBuilder.append(getSpouseInfo());
-        stringBuilder.append(", ");
-        stringBuilder.append(getFatherInfo());
-        stringBuilder.append(", ");
-        stringBuilder.append(getMotherInfo());
-        stringBuilder.append(", ");
-        stringBuilder.append(getChildrenInfo());
-        return stringBuilder.toString();
-    }
-    @Override
-    public String toString() {
-        return getInfo();
-    }
 
     public long getId() {
         return id;
@@ -92,52 +68,6 @@ public abstract class Creature implements Serializable, Comparable<Creature>, Cr
     }
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public LocalDate getDataBirth() {
-        return dataBirth;
-    }
-
-    public void setDataBirth(LocalDate dataBirth) {
-        this.dataBirth = dataBirth;
-    }
-
-    public LocalDate getDataDeath() {
-        return dataDeath;
-    }
-
-    public void setDataDeath(LocalDate dataDeath) {
-        this.dataDeath = dataDeath;
-    }
-
-    @Override
-    public Creature getMother() {
-        return mother;
-    }
-
-    @Override
-    public void setMother(Creature mother) {
-        this.mother = mother;
-    }
-
-    @Override
-    public Creature getFather() {
-        return father;
-    }
-
-    @Override
-    public void setFather(Creature father) {
-        this.father = father;
-    }
-
-    @Override
-    public List<Creature> getChildren() {
-        return children;
-    }
-
-    @Override
-    public void setChildren(List<Creature> children) {
-        this.children = children;
     }
 
     @Override

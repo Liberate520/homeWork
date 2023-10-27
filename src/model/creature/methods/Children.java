@@ -13,7 +13,6 @@ public class Children implements AddChildren<Creature> {
         children = new ArrayList<>();
     }
 
-      @Override
     public boolean addChildren(Creature child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -44,7 +43,6 @@ public class Children implements AddChildren<Creature> {
     public void setChildren(List<Creature> children) {
         this.children = children;
     }
-
 
 }
 
