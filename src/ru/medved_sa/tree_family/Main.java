@@ -3,21 +3,37 @@ package ru.medved_sa.tree_family;
 import ru.medved_sa.tree_family.familyTree.FamilyTree;
 import ru.medved_sa.tree_family.human.Gender;
 import ru.medved_sa.tree_family.human.Human;
+import ru.medved_sa.tree_family.save.Writable;
+import ru.medved_sa.tree_family.save.ioUtils.IOUtils;
 
-import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
-        getFamilyTreeTest();
-        writeReadObject();
+        FamilyTree familyTreeList = getFamilyTreeTest();
+//        System.out.println(familyTreeList);
+
+        save(familyTreeList);
+
+        FamilyTree familyTreeRead = read();
+
+        System.out.println(familyTreeRead);
+
+    }
+
+    private static FamilyTree read(){
+        IOUtils ioUtils = new IOUtils();
+         return (FamilyTree) ioUtils.readFile(Writable.filePath);
+    }
+
+    private static void save(FamilyTree familyTreeForPreservation) {
+        IOUtils ioUtils = new IOUtils();
+        ioUtils.saveFile(familyTreeForPreservation, Writable.filePath);
     }
 
 
-
-
-    private static void getFamilyTreeTest() {
+    private static FamilyTree getFamilyTreeTest() {
 
         FamilyTree familyTree = new FamilyTree("Test");
 
@@ -52,7 +68,6 @@ public class Main {
 //        System.out.println(larisa);
         familyTree.addHuman(larisa);
 
-        System.out.println(familyTree);
 
 
 //        System.out.println(oleg.getFindInfoAboutChildren());
@@ -65,39 +80,9 @@ public class Main {
 //        System.out.println(familyTree.getSiblings(3));
 //        System.out.println(familyTree.getByFirstName(irina.getFirstName()));
 
+
+
+        return familyTree;
     }
 
-
-    private static void writeReadObject() throws IOException, ClassNotFoundException {
-
-        FamilyTree familyTree = new FamilyTree("Serializable");
-
-        Human oleg = new Human("Олег", Gender.Male,
-                LocalDate.of(1988, 3, 5));
-        Human irina = new Human("Ирина", Gender.Female,
-                LocalDate.of(1993, 12, 11));
-
-        familyTree.addHuman(oleg);
-        familyTree.addHuman(irina);
-
-        familyTree.setWedding(oleg, irina);
-
-
-
-
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("src/ru/medved_sa/tree_family/familyTree.out"));
-        objectOutputStream.writeObject(familyTree);
-        objectOutputStream.close();
-
-
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("src/ru/medved_sa/tree_family/familyTree.out"));
-        FamilyTree restoredFamilyTree = (FamilyTree) objectInputStream.readObject();
-        objectInputStream.close();
-
-
-        System.out.println(restoredFamilyTree);
-
-    }
 }
