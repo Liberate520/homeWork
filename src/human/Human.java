@@ -1,10 +1,12 @@
 package human;
 
+import familyTree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Human implements Serializable , Comparable<Human>{
+public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -13,17 +15,6 @@ public class Human implements Serializable , Comparable<Human>{
     private Human mother;
     private Human father;
     private List<Human> children;
-
-
-//    public human.Human(String firstName, String lastName, LocalDate born, LocalDate died, human.Human mother, human.Human father, List<human.Human> children) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.born = born;
-//        this.died = died;
-//        this.mother = mother;
-//        this.father = father;
-//        this.children = children;
-//    }
 
 
     public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, Human mother, Human father, List<Human> children) {
@@ -50,10 +41,6 @@ public class Human implements Serializable , Comparable<Human>{
         this(firstName, lastName, gender, born, died, null);
     }
 
-    //    @Override
-//    public String toString() {
-//        return "First name: " + firstName + ", Last name: " + lastName + ", Date of Birth: " + born + ", Date of death: " + died + ", Mother: " + mother.getFirstName() + " " + mother.getLastName() + ", Father" + father.getFirstName() + " " + father.getLastName();
-//    }
 
     @Override
     public String toString() {

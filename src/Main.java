@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree familyTree = new FamilyTree<>();
 
         Human human1 = new Human("Alina", "Salamandra", Gender.Female, LocalDate.of(1964, 1, 12));
         Human human2 = new Human("Vladimir", "Arapov", Gender.Male, LocalDate.of(1954, 3, 30), LocalDate.of(2019, 3, 5));
