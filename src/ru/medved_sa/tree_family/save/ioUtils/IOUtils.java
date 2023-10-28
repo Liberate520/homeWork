@@ -4,7 +4,7 @@ import ru.medved_sa.tree_family.save.Writable;
 
 import java.io.*;
 
-public class IOUtils implements Writable {
+public class IOUtils {
 
     public boolean saveFile(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(

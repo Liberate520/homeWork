@@ -3,6 +3,7 @@ package ru.medved_sa.tree_family;
 import ru.medved_sa.tree_family.familyTree.FamilyTree;
 import ru.medved_sa.tree_family.human.Gender;
 import ru.medved_sa.tree_family.human.Human;
+import ru.medved_sa.tree_family.save.FileHandlerService;
 import ru.medved_sa.tree_family.save.Writable;
 import ru.medved_sa.tree_family.save.ioUtils.IOUtils;
 
@@ -23,13 +24,13 @@ public class Main {
     }
 
     private static FamilyTree read(){
-        IOUtils ioUtils = new IOUtils();
-         return (FamilyTree) ioUtils.readFile(Writable.filePath);
+        FileHandlerService service = new FileHandlerService();
+         return (FamilyTree) service.readFile(service.getFilePath());
     }
 
     private static void save(FamilyTree familyTreeForPreservation) {
-        IOUtils ioUtils = new IOUtils();
-        ioUtils.saveFile(familyTreeForPreservation, Writable.filePath);
+        FileHandlerService service = new FileHandlerService();
+        service.saveFile(familyTreeForPreservation, service.getFilePath());
     }
 
 
