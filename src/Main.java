@@ -1,13 +1,35 @@
+package homeWork.src;
+
+import homeWork.src.tree.FamilyTree;
+import homeWork.src.writer.FileHandler;
 import member.FamilyMember;
 import member.Gender;
-import tree.FamilyTree;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree myTree = testTree();
+//        FamilyTree myTree = testTree();
+        FamilyTree myTree = load();
         System.out.println(myTree);
+
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/homeWork/src/writer/tree.txt";
+//        fileHandler.save(myTree, filePath);
+//        save(myTree);
+
+    }
+
+    private static FamilyTree load(){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/homeWork/src/writer/tree.txt";
+        return (FamilyTree) fileHandler.read(filePath);
+    }
+
+    private static void save(FamilyTree tree){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/homeWork/src/writer/tree.txt";
+        fileHandler.save(tree, filePath);
     }
 
     static FamilyTree testTree() {

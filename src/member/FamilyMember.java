@@ -1,11 +1,12 @@
 package member;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyMember {
+public class FamilyMember implements Serializable {
     private long id;
     private String name;
     private String surname;
