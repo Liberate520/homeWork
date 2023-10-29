@@ -2,8 +2,6 @@ package family_tree.file_system;
 
 import java.io.*;
 
-import family_tree.family_trees.FamilyTree;
-
 public class FS implements Writable{
 
     public void save(Serializable serializable, String file_path)

@@ -9,29 +9,38 @@ import family_tree.human.Human;
 import family_tree.human.types_enum.Gender;
 
 public class Service implements Serializable{
-    private FamilyTree ftree;
+    private FamilyTree<Human> ftree;
     private HumanBuilder builder;
 
     public Service() {
-        ftree = new FamilyTree();
+        ftree = new FamilyTree<>();
         builder = new HumanBuilder();
     }
 
     public Human addHuman(String name, LocalDate birthDay, LocalDate deadDay, Human mother, Human father, Gender gender){
         Human human = builder.build(name, birthDay, deadDay, mother, father, gender);
         ftree.addHuman(human);
+        addChildToParents(human);
 
         return human;
+    }
+    
+    private void addChildToParents (Human people)
+    {
+        for(Human parent : people.getParents())
+        {
+            parent.addChild(people);
+        }
     }
 
     public String getFamilyTreeHumansListInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список членов семьи:\n");
 
-//        Iterator<Student> iterator = group.iterator();
+//        Iterator<Human> iterator = ftree.iterator();
 //        while (iterator.hasNext()){
-//            Student student = iterator.next();
-//            stringBuilder.append(student);
+//            Human human = iterator.next();
+//            stringBuilder.append(human);
 //            stringBuilder.append("\n");
 //        }
 

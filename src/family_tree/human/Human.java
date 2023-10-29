@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import family_tree.family_trees.TreeItem;
 import family_tree.human.types_enum.Gender;
 import family_tree.human.types_enum.LifeStatus;
 
 import java.util.ArrayList;
 
-public class Human implements Serializable{
+public class Human implements Serializable, TreeItem{
     private int id;
     private String name;
     private Gender gender;
