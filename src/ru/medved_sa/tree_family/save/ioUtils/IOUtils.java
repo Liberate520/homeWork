@@ -1,6 +1,5 @@
 package ru.medved_sa.tree_family.save.ioUtils;
 
-import ru.medved_sa.tree_family.save.Writable;
 
 import java.io.*;
 

@@ -4,8 +4,6 @@ import ru.medved_sa.tree_family.familyTree.FamilyTree;
 import ru.medved_sa.tree_family.human.Gender;
 import ru.medved_sa.tree_family.human.Human;
 import ru.medved_sa.tree_family.save.FileHandlerService;
-import ru.medved_sa.tree_family.save.Writable;
-import ru.medved_sa.tree_family.save.ioUtils.IOUtils;
 
 import java.time.LocalDate;
 
@@ -25,12 +23,12 @@ public class Main {
 
     private static FamilyTree read(){
         FileHandlerService service = new FileHandlerService();
-         return (FamilyTree) service.readFile(service.getFilePath());
+         return (FamilyTree) service.readFile();
     }
 
     private static void save(FamilyTree familyTreeForPreservation) {
         FileHandlerService service = new FileHandlerService();
-        service.saveFile(familyTreeForPreservation, service.getFilePath());
+        service.saveFile(familyTreeForPreservation);
     }
 
 
