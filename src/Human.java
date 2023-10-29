@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable{
     private int id;
     private String name;
     private String surname;
@@ -10,14 +11,16 @@ public class Human {
     private LocalDate deathday;
     private Gender gender;
     private Human mother;
+    private Human father;
     private List<Human> children;
+    private Human spouse;
 
     public Human(String name, String surname, Gender gender) {
+        id = -1;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
-        List<Human> children = new ArrayList<>();
-        this.children = children;
+        children = new ArrayList<>();
     }
 
     public int getId() {
