@@ -1,13 +1,47 @@
 package family_tree;
 
+import family_tree.writer.FileHandler;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = familyTree();
-        System.out.println(tree);
+        String nameFile = "tree.txt";
+        String path = "src/family_tree/writer/";
+        String filePath = path + nameFile;
+
+        if (isFileExists(filePath)){
+            FamilyTree tree = load(filePath);
+            System.out.println(tree);
+        }
+        else {
+            System.out.println("File not exist");
+        };
+
+//        FamilyTree tree = familyTree();
+//        System.out.println(tree);
+//        save(tree, filePath);
     }
+
+    private static void save(FamilyTree tree, String filePath) {
+        FileHandler fileHandler = new FileHandler();
+        //String filePath = "src/family_tree/writer/tree.txt";
+        fileHandler.save(tree,filePath);
+    }
+
+    private static FamilyTree load(String filePath) {
+        FileHandler fileHandler = new FileHandler();
+        //String filePath = "src/family_tree/writer/tree.txt";
+        return (FamilyTree) fileHandler.read(filePath);
+    }
+
+    public static boolean isFileExists(String filePath) {
+        File file = new File(filePath);
+        return file.isFile();
+    }
+
     public class CLS {
         public static void main(String... arg) throws IOException, InterruptedException {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
