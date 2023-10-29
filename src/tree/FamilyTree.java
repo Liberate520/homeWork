@@ -1,6 +1,6 @@
 package homeWork.src.tree;
 
-import member.FamilyMember;
+import homeWork.src.member.FamilyMember;
 
 import java.io.Serializable;
 import java.util.ArrayList;

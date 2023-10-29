@@ -1,4 +1,4 @@
-package member;
+package homeWork.src.member;
 
 import java.io.Serializable;
 import java.time.LocalDate;
