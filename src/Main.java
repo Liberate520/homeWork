@@ -2,8 +2,8 @@ package homeWork.src;
 
 import homeWork.src.member.FamilyMember;
 import homeWork.src.tree.FamilyTree;
+import homeWork.src.tree.Gender;
 import homeWork.src.writer.FileHandler;
-import member.Gender;
 
 import java.time.LocalDate;
 

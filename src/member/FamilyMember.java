@@ -1,5 +1,7 @@
 package homeWork.src.member;
 
+import homeWork.src.tree.Gender;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -11,7 +13,7 @@ public class FamilyMember implements Serializable {
     private String name;
     private String surname;
     private String patronymicName;
-    private member.Gender gender;
+    private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private FamilyMember mother;
@@ -19,7 +21,7 @@ public class FamilyMember implements Serializable {
     private List<FamilyMember> children;
     private FamilyMember spouse;
 
-    public FamilyMember(String name, String surname, String patronymicName, member.Gender gender,
+    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, LocalDate deathDate,
                         FamilyMember father, FamilyMember mother) {
         id = -1;
@@ -37,17 +39,17 @@ public class FamilyMember implements Serializable {
 //        this.father = null;
     }
 
-    public FamilyMember(String name, String surname, String patronymicName, member.Gender gender,
+    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate){
         this(name, surname, patronymicName, gender, birthDate, null, null, null);
     }
 
-    public FamilyMember(String name, String surname, String patronymicName, member.Gender gender,
+    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, FamilyMember father, FamilyMember mother){
         this(name, surname, patronymicName, gender, birthDate, null, father, mother);
     }
 
-    public FamilyMember(String name, String surname, String patronymicName, member.Gender gender,
+    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, LocalDate deathDate) {
         this(name, surname, patronymicName, gender, birthDate, deathDate, null, null);
     }
@@ -61,9 +63,9 @@ public class FamilyMember implements Serializable {
     }
 
     public boolean addParent(FamilyMember parent){
-        if(parent.getGender().equals(member.Gender.Male)){
+        if(parent.getGender().equals(Gender.Male)){
             setFather(parent);
-        } else if (parent.getGender().equals(member.Gender.Female)){
+        } else if (parent.getGender().equals(Gender.Female)){
             setMother(parent);
         }
         return true;
@@ -128,7 +130,7 @@ public class FamilyMember implements Serializable {
 
     public void setDeathDate(LocalDate deathDate){this.deathDate = deathDate;}
 
-    public member.Gender getGender(){return gender;}
+    public Gender getGender(){return gender;}
 
     @Override
     public boolean equals(Object obj) {
