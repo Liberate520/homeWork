@@ -20,10 +20,11 @@ public class ConsoleUI implements View {
     public void start() {
         while (work){
             hello();
+            choice(scanner.nextLine());
         }
     }
 
-    private String hello () {
+    private void hello () {
         System.out.println("Добро пожаловать! Что Вы хотите сделать?");
         System.out.println("1 - просмотреть все генеалогическое древо");
         System.out.println("2 - добавить человека");
@@ -31,19 +32,53 @@ public class ConsoleUI implements View {
         System.out.println("4 - сортировка списка по ID");
         System.out.println("5 - сортировка списка по фамилии");
         System.out.println("6 - выход");
-        return scanner.nextLine();
     }
 
-    public void finish() {
+    private void choice (String value) {
+        if (checkInt(value)) {
+            int choice = Integer.parseInt(value);
+            switch (choice) {
+                case 1:
+                    viewAll();
+                    break;
+
+                case 2:
+                    addNewHuman();
+                    break;
+
+                case 3:
+                    infoById();
+                    break;
+
+                case 4:
+                    sortId();
+                    break;
+
+                case 5:
+                    sortLastname();
+                    break;
+
+                case 6:
+                    finish();
+                    break;
+
+                default:
+                    System.out.println("Неверное значение.");
+                    break;
+            }
+        }
+    }
+
+    private void finish() {
         System.out.println("Работа приложения завершена.");
         work = false;
     }
 
-    public void viewAll() {
+    private void viewAll() {
         presenter.allTree();
     }
 
-    public void addNewHuman() {
+    private void addNewHuman() {
         System.out.println("Введите фамилию: ");
         String lastname = scanner.nextLine();
         System.out.println("Введите имя: ");
@@ -53,22 +88,32 @@ public class ConsoleUI implements View {
         presenter.addBody(lastname, name, gender);
     }
 
-    public void infoById() {
+    private void infoById() {
         System.out.println("Введите ID: ");
         int id = Integer.parseInt(scanner.nextLine());
         presenter.getBodyInfoById(id);
     }
 
-    public void sortId() {
+    private void sortId() {
         presenter.sortById();
     }
 
-    public void sortLastname() {
+    private void sortLastname() {
         presenter.sortByLastname();
     }
     private String scan() {
         System.out.println("Введите значение");
         return scanner.nextLine();
+    }
+
+    private boolean checkInt (String text) {
+        if (text.contains("[1-6]")) {
+            return true;
+        }
+        else {
+            System.out.println("Вы ввели неверное значение!");
+            return false;
+        }
     }
 
     @Override
