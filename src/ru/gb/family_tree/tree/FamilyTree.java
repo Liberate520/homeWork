@@ -23,6 +23,10 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
         familyMembers = new ArrayList<>();
     }
 
+    public FamilyTree() {
+        familyMembers = new ArrayList<>();
+    }
+
     public void tryAdd (E human) throws HumanExcistsException {
         if (familyMembers.contains(human)) {
             throw new HumanExcistsException("Такая запись уже есть!");

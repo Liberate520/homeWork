@@ -13,7 +13,12 @@ public class Service {
 
     public Service(String family) {
         this.family = family;
-        tree = new FamilyTree(family);
+        tree = new FamilyTree<>(family);
+        builder = new HumanBuilder();
+    }
+
+    public Service() {
+        tree = new FamilyTree<>();
         builder = new HumanBuilder();
     }
 
