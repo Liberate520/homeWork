@@ -3,13 +3,28 @@ package family_tree;
 import family_tree.family_tree.FamilyTree;
 import family_tree.human.Human;
 import family_tree.human.Gender;
+import family_tree.writer.FileHandler;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args){
-        FamilyTree tree = testTree();
+    public static void main(String[] args) {
+        FamilyTree tree = testTree();           // !
+//        FamilyTree tree = load();
         System.out.println(tree);
+
+        save(tree);                             // !
+    }
+//    private static FamilyTree load(){
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/family_tree/writer/tree.txt";
+//        return (FamilyTree) fileHandler.read(filePath);
+//    }
+    private static void save(FamilyTree tree){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/family_tree/writer/tree.txt";
+        fileHandler.save(tree, filePath);
     }
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
