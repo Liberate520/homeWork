@@ -4,7 +4,7 @@ import HomeWork.familyTree.homeWork22_10_23.src.tree.FamilyTree;
 
 import java.io.*;
 
-public class Deseriliz {
+public class Deserialization{
     public static void main(String[] args) {
         FamilyTree familyTree;
         ObjectInputStream in = null;

@@ -14,7 +14,7 @@ import java.util.List;
 
 
 public class FamilyTree implements Serializable {
-
+    private long idHuman;
     private List<Human> humanList ;
 
 
@@ -28,6 +28,8 @@ public class FamilyTree implements Serializable {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список людей : \n");
         for(Human human:humanList){
+            stringBuilder.append(human.getId());
+            stringBuilder.append(" ");
             stringBuilder.append(human.getSurname());
             stringBuilder.append(human.getName());
             stringBuilder.append(human.getPatronymic());
@@ -38,8 +40,10 @@ public class FamilyTree implements Serializable {
     }
 
     public void addHuman(Human human){
-        humanList.add( human);
-
+       if(!humanList.contains(human)) {
+           humanList.add(human);
+           human.setId(idHuman++);
+       }
     }
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();

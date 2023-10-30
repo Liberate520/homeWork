@@ -36,7 +36,7 @@ public class Human implements Serializable {
         this.mother = mother;
         this.father = father;
         this.children = new ArrayList<>();
-        this.spouse = spouse;
+
     }
 
     public Human(String surname, String name, String patronymic, LocalDate birthDay, Gender gender) {
@@ -99,14 +99,6 @@ public class Human implements Serializable {
         this.father = father;
     }
 
-    public Human getSpouse() {
-        return spouse;
-    }
-
-    public void setSpouse(Human spouse) {
-        this.spouse = spouse;
-    }
-
     public long getId() {
         return id;
     }
@@ -165,6 +157,8 @@ public class Human implements Serializable {
     }
     public String getChildrenInfo(){
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.getId());
+        stringBuilder.append(" ");
         stringBuilder.append(this.getSurname());
         stringBuilder.append(this.getName());
         if(this.gender == Gender.man){
