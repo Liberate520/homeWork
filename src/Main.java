@@ -2,6 +2,7 @@ import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 import ru.gb.family_tree.service.Service;
 import ru.gb.family_tree.tree.FamilyTree;
+import ru.gb.family_tree.ui.ConsoleUI;
 import ru.gb.family_tree.writer.FIleHandler;
 
 import java.io.IOException;
@@ -65,22 +66,27 @@ public class Main {
 
         System.out.println(service);
 
-        service.sortById();
-        System.out.println(service);
-        service.sortByLastname();
-        System.out.println(service);
-        service.sortByName();
-        System.out.println(service);
-        service.sortByAge();
-        System.out.println(service);
+        System.out.println("***");
+
+        ConsoleUI test = new ConsoleUI();
+        test.start();
+
+//        service.sortById();
+//        System.out.println(service);
+//        service.sortByLastname();
+//        System.out.println(service);
+//        service.sortByName();
+//        System.out.println(service);
+//        service.sortByAge();
+//        System.out.println(service);
 
 
-        FamilyTree vishnyak = service.getTree();
+        //FamilyTree vishnyak = service.getTree();
         //System.out.println(vishnyak.allInDetails());
 
-        FIleHandler fh = new FIleHandler();
-        if (fh.write(vishnyak, "output.data")) System.out.println("Данные успешно записаны");
-        vishnyak = (FamilyTree) fh.read("output.data");
+//        FIleHandler fh = new FIleHandler();
+//        if (fh.write(vishnyak, "output.data")) System.out.println("Данные успешно записаны");
+//        vishnyak = (FamilyTree) fh.read("output.data");
         //System.out.println(vishnyak.allInDetails());
     }
 }

@@ -107,13 +107,15 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkInt (String text) {
-        if (text.contains("[1-6]")) {
-            return true;
+        try {
+            if (Integer.parseInt(text) > 0 && Integer.parseInt(text) < 7) {
+                return true;
+            }
         }
-        else {
-            System.out.println("Вы ввели неверное значение!");
-            return false;
+            catch (NumberFormatException e){
+                System.out.println("Вы ввели неверное значение!");
         }
+        return false;
     }
 
     @Override
