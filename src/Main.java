@@ -1,7 +1,8 @@
+import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         FamilyTree familyTree = new FamilyTree();
 
@@ -16,7 +17,12 @@ public class Main {
         familyTree.findByName("Mikhail").setChildren(familyTree.findByName("yuriy"));
         familyTree.findByName("Mikhail").setChildren(familyTree.findByName("evgeniy"));
 
-        System.out.println(familyTree.findByName("yuriy").humanInfo());
-        System.out.println(familyTree.findByName("Mikhail").humanInfo());
+        System.out.println(familyTree);
+
+        familyTree.write(familyTree, "src/Writed.txt");
+
+        FamilyTree ft2 = (FamilyTree) SerialaizableFT.read("src/Writed.txt");
+
+        System.out.println(ft2);
     }
 }

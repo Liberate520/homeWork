@@ -1,9 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree extends SerialaizableFT {
     private List<Human> tree;
-
 
     public FamilyTree() {
         tree = new ArrayList<>();
