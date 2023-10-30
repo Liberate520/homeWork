@@ -1,10 +1,11 @@
 package Tree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Human {
+public class Human implements Serializable {
     private String name;
     private LocalDate birthDate;
     private Human parent1, parent2;
@@ -19,6 +20,13 @@ public class Human {
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите дату в формате yyyy-mm-dd");
         this.birthDate = LocalDate.parse(sc.nextLine());
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setParent1(Human parent1){

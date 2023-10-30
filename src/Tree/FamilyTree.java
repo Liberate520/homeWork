@@ -1,17 +1,18 @@
 package Tree;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FamilyTree {
-    private HashMap<Integer, Human> HumanList;
-    private int HumanId = 0;
+public class FamilyTree implements Serializable {
+    private HashMap<Integer, Human> humanList;
+    private int humanId = 0;
     public FamilyTree() {
-        this.HumanList = new HashMap<Integer, Human>();
+        this.humanList = new HashMap<Integer, Human>();
     }
 
     public void addHuman(Human Human){
-        this.HumanList.put(HumanId++,Human);
+        this.humanList.put(humanId++,Human);
     }
 
     public void setParent1(Human Human, Human parent){
@@ -28,7 +29,7 @@ public class FamilyTree {
     }
 
     public void printTree(){
-        for (Map.Entry<Integer, Human> item : HumanList.entrySet()){
+        for (Map.Entry<Integer, Human> item : humanList.entrySet()){
             System.out.println(item.getValue().toString());
         }
     }

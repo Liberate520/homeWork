@@ -1,10 +1,11 @@
 import Tree.FamilyTree;
+import Tree.FileHandler;
 import Tree.Gender;
 import Tree.Human;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = new FamilyTree();
+        FamilyTree tree = load();
 
         Human human  = new Human("John", Gender.male);
         Human parent1 = new Human("Sara", Gender.female);
@@ -22,5 +23,20 @@ public class Main {
         tree.setParent1(parent1,grandma);
 
         tree.printTree();
+
+        write(tree);
+    }
+
+    private static void write(FamilyTree familyTree) {
+        String filepath = "homeWork\\src\\Text\\tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.write(familyTree, filepath);
+    }
+
+    private static FamilyTree load() {
+        String filepath = "homeWork\\src\\Text\\tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        FamilyTree familyTree = (FamilyTree) fileHandler.read(filepath);
+        return familyTree;
     }
 }
