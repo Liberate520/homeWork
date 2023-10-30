@@ -1,9 +1,10 @@
 package Tree;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private HashMap<Integer, Person> personList;
     private int personId = 0;
     public FamilyTree() {
@@ -27,10 +28,21 @@ public class FamilyTree {
         }
     }
 
-    public void printTree(){
+    @Override
+    public String toString() {
+        StringBuilder tmp = new StringBuilder("Family tree:\n");
         for (Map.Entry<Integer, Person> item : personList.entrySet()){
-            System.out.println(item.getValue().toString());
+            tmp.append(item.getValue().toString());
+            tmp.append("\n");
+            //System.out.println(item.getValue().toString());
         }
+        return tmp.toString();
     }
+
+//    public void printTree(){
+//        for (Map.Entry<Integer, Person> item : personList.entrySet()){
+//            System.out.println(item.getValue().toString());
+//        }
+//    }
 
 }

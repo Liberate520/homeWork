@@ -4,21 +4,28 @@ import Tree.FamilyTree;
 
 import java.io.*;
 
-public class StorageTree implements Serializable {
-    public void writeTree (FamilyTree tree, String fileName) throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(fileName));
+public class StorageTree implements Savable {
+    public boolean writeTree (Serializable serializable, String fileName){
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            objectOutputStream.writeObject(serializable);
+            objectOutputStream.close();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
 
-        objectOutputStream.writeObject(tree);
-        objectOutputStream.close();
     }
 
-    public FamilyTree restoreTree (String fileName) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(fileName));
-        FamilyTree tmp = (FamilyTree) objectInputStream.readObject();
-        objectInputStream.close();
-        return tmp;
+    public FamilyTree restoreTree (String fileName){
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName))){
+            FamilyTree tmp = (FamilyTree) objectInputStream.readObject();
+            objectInputStream.close();
+            return tmp;
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
