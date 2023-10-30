@@ -28,6 +28,10 @@ public class Service {
         return human;
     }
 
+    public String infoByID(int id) {
+        return tree.infoById(id);
+    }
+
     public String getInfoShort () {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семья " + family + ": \n");
