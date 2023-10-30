@@ -1,15 +1,16 @@
 package ru.gb.family_tree.human;
 
 import ru.gb.family_tree.tree.FamilyTree;
+import ru.gb.family_tree.tree.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeItem {
     private int id;
-    private FamilyTree family;
+    private FamilyTree<Human> family;
     private String lastname;
     private String name;
 

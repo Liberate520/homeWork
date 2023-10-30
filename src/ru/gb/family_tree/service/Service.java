@@ -4,9 +4,10 @@ import ru.gb.family_tree.builder.HumanBuilder;
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 import ru.gb.family_tree.tree.FamilyTree;
+import ru.gb.family_tree.tree.TreeItem;
 
 public class Service {
-    private FamilyTree tree;
+    private FamilyTree<Human> tree;
     private HumanBuilder builder;
     private String family;
 

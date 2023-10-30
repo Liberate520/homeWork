@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E> {
 
     private String family;
-    private List<Human> familyMembers;
+    private List<E> familyMembers;
     private int memberId = 1; // хочу нумерацию людей с 1
 
     public FamilyTree(String family) {
@@ -23,12 +23,12 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         familyMembers = new ArrayList<>();
     }
 
-    public void tryAdd (Human human) throws HumanExcistsException {
+    public void tryAdd (E human) throws HumanExcistsException {
         if (familyMembers.contains(human)) {
-            throw new HumanExcistsException("Такой человек уже есть!");
+            throw new HumanExcistsException("Такая запись уже есть!");
         }
     }
-    public void addMember (Human human) {
+    public void addMember (E human) {
         human.setId(memberId++);
         try {
             tryAdd(human);
@@ -43,14 +43,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String allMembers () {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семья " + family + ": \n");
-        for (Human member: familyMembers) {
+        for (E member: familyMembers) {
             stringBuilder.append(member).append("\n");
         }
         return stringBuilder.toString();
     }
 
-    public Human findInTree (int id) {
-        for (Human member : familyMembers) {
+    public E findInTree (int id) {
+        for (E member : familyMembers) {
             if (member.getId() == id) {
                 return member;
             }
@@ -62,7 +62,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String infoById (int id) {
         StringBuilder sb = new StringBuilder("Id - ");
         sb.append(id). append("\n").append("Семья: ").append(family).append("\n");
-        Human human = findInTree(id);
+        E human = findInTree(id);
         sb.append("Фамилия: ").append(human.getLastname() + "\n");
         sb.append("Имя: ").append(human.getName() + "\n");
         sb.append("Пол: ").append(human.getGender() + "\n");
@@ -86,7 +86,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         StringBuilder sb = new StringBuilder();
         sb.append("Генеалогическое древо ").append(family).append("\n");
         int id = 1;
-        for (Human member : familyMembers) {
+        for (E member : familyMembers) {
             sb.append(infoById(id++)).append("\n");
         }
         return sb.toString();
@@ -109,8 +109,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(familyMembers);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(familyMembers);
     }
 }
 
