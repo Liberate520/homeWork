@@ -3,14 +3,20 @@ package HomeWork.familyTree.homeWork22_10_23.src;
 import HomeWork.familyTree.homeWork22_10_23.src.human.Human;
 import HomeWork.familyTree.homeWork22_10_23.src.tree.FamilyTree;
 
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.List;
+//import java.io.Serializable;
 
 
     public class Main {
-        public static void main(String[] args) {
+        public static void main(String[] args) throws IOException, ClassNotFoundException {
 
             FamilyTree familyTree = new FamilyTree();
+
+
 
 
             Human lexa = new Human("Василенко"," Алексей"," Юрьевич ", LocalDate.parse("1980-10-06"),Gender.man);
@@ -25,7 +31,7 @@ import java.util.List;
             familyTree.addHuman(olya);
             familyTree.addHuman(valya);
             familyTree.addHuman(yara);
-
+//
             yara.setDayOfDeath(LocalDate.parse("2017-10-17"));
 
             oksana.addChildren(kolya);
@@ -40,6 +46,17 @@ import java.util.List;
 
             lexa.addChildren(kolya);
 
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Human.bin"));
+            out.writeObject(familyTree);
+            out.close();
+
+
+
+
+
+
+
+
             System.out.println("-----------");
             System.out.println(familyTree.getHumanListInfo());
             System.out.println("-----------");
@@ -51,8 +68,7 @@ import java.util.List;
             System.out.println("-----------");
             System.out.println(lexa.getParentInfo());
 
-  }
-
+        }
     }
 
 

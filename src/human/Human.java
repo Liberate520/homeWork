@@ -1,16 +1,18 @@
 package HomeWork.familyTree.homeWork22_10_23.src.human;
-
 import HomeWork.familyTree.homeWork22_10_23.src.Gender;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.Serializable;
 
 /**
  * Конструктор
  * */
-public class Human {
+public class Human implements Serializable {
     private  long id;
     private String surname;
    private String name;
@@ -220,6 +222,15 @@ public class Human {
 
         }
         return stringBuilder.toString();
+    }
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        System.out.println("Our writeObject");
+    }
+
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        System.out.println("Our readObject");
     }
 
     @Override

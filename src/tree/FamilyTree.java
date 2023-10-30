@@ -1,13 +1,19 @@
 package HomeWork.familyTree.homeWork22_10_23.src.tree;
 
+
 import HomeWork.familyTree.homeWork22_10_23.src.human.Human;
 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
 
     private List<Human> humanList ;
 
@@ -35,7 +41,15 @@ public class FamilyTree {
         humanList.add( human);
 
     }
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        System.out.println("Our writeObject");
+    }
 
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        System.out.println("Our readObject");
+    }
 
 
 }
