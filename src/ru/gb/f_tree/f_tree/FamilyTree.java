@@ -2,11 +2,12 @@ package ru.gb.f_tree.f_tree;
 
 import ru.gb.f_tree.human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private String familyName;
     private final List<Human> familyMembers;
 

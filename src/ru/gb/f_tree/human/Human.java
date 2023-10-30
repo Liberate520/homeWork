@@ -1,12 +1,13 @@
 package ru.gb.f_tree.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Human {
+public class Human implements Serializable {
     private final UUID id;
     private final String lastname;
     private final String name;

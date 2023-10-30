@@ -1,9 +1,12 @@
 import ru.gb.f_tree.f_tree.FamilyTree;
+import ru.gb.f_tree.writer.GenealogyFileHandler;
 import ru.gb.f_tree.human.Gender;
 import ru.gb.f_tree.human.Human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -86,6 +89,9 @@ public class Main {
             }
 
             System.out.println();
+
+
+
         }
     }
 }
