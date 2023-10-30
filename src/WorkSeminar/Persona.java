@@ -1,9 +1,12 @@
+package WorkSeminar;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona {
+public class Persona implements Serializable {
     private String name;
     private String lastName;
     private Gender gender;

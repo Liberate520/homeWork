@@ -1,7 +1,10 @@
+package WorkSeminar;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class Tree implements Serializable {
     private long personID;
     private List<Persona> personaList;
 

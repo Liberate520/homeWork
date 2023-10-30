@@ -1,16 +1,29 @@
+package WorkSeminar;
+
+import WorkSeminar.Consol.СontrolTree;
+
 import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args) {
-        Tree tree = newTree();
-        System.out.println(tree);
-        tree.printSisBroth(tree.getSisBroth(3));
+        СontrolTree.ControlMain();
 
-        System.out.println(tree.getNamePersona("Граф"));
+
+        //Tree tree = newTree();
+        //SaveLoadTree saveTree = new SaveLoadTree();
+        //saveTree.saveFile("src/WorkSeminar.SaveFile/saveTree.out", tree);
+        //SaveLoadTree loadTree = new SaveLoadTree();
+        //WorkSeminar.Tree tree = (WorkSeminar.Tree) loadTree.loadFile("src/WorkSeminar.SaveFile/saveTree.out");
+
+        //System.out.println(tree);
+
+
+        //tree.printSisBroth(tree.getSisBroth(3));
+        // System.out.println(tree.getNamePersona("Граф"));
 
     }
 
-    static Tree newTree(){
+    public static Tree newTree(){
         Tree tree = new Tree();
 
         Persona One = new Persona("Граф", "Грэй", Gender.Male, LocalDate.of(1988, 2, 22));
