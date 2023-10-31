@@ -1,3 +1,5 @@
+package fam_tree;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,10 +50,10 @@ public class FamilyTree {
         }
         if (!humanList.contains(human)) {
             humanList.add(human);
-            human.setId(humansId);
+            human.addChild(humansId);
 
             addToParents(human);
-            voidaddToChildren(human);
+            addToChildren(human);
 
             return true;
 

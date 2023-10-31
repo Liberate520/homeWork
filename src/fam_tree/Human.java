@@ -1,5 +1,7 @@
-package fam_tree.human;
+package fam_tree;
 
+
+import java.time.LocalDate;
 
 public class Human {
     private long id;
@@ -98,7 +100,7 @@ public class Human {
 
     public void setDeathDate(LocalDate deathDate) {this.deathDate = deathDate;}
 
-    public Gender getGender() {return gender;}
+    public Object getGender() {return gender;}
     public String toString() {return getInfo();}
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
