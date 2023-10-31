@@ -1,6 +1,11 @@
-import java.io.*;
+package Service;
 
-public class SerialaizableFT implements Serializable{
+import familyTree.FamilyTree;
+
+import java.io.*;
+import java.util.List;
+
+public class Saver implements Serializable{
     public boolean write (Object familyTree, String filePath) throws IOException, ClassNotFoundException {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             outputStream.writeObject(familyTree);
@@ -11,9 +16,10 @@ public class SerialaizableFT implements Serializable{
         }
     }
 
-    public static Object read (String filePath) throws IOException, ClassNotFoundException {
+    public static List read (String filePath) throws IOException, ClassNotFoundException {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
-            return objectInputStream.readObject();
+            FamilyTree familyTree = new FamilyTree();
+            return (List)(objectInputStream.readObject());
         } catch (Exception e) {
             e.printStackTrace();
             return null;

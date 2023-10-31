@@ -1,28 +1,30 @@
+import Human.*;
+import Service.*;
+import familyTree.*;
+
 import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        FamilyTree familyTree = new FamilyTree();
+        Service service = new Service();
 
-        familyTree.addHuman(new Human("Yuriy", LocalDate.of(1991, 03, 05), Gender.male));
-        familyTree.addHuman(new Human("Evgeniy", LocalDate.of(1987, 07, 23), Gender.male));
-        familyTree.addHuman(new Human("Mikhail", LocalDate.of(1960, 12, 15), Gender.male));
-        familyTree.addHuman(new Human("Natalya", LocalDate.of(1959, 04, 20), Gender.female));
+        service.addHuman("Misha", LocalDate.of(1960, 12,15), Gender.male);
+        service.addHuman("Natasha", LocalDate.of(1959, 4,20), Gender.female);
+        service.addHuman("Kate", LocalDate.of(1990, 5,3), Gender.female);
+        service.addHuman("Anna", LocalDate.of(1959, 2,20), Gender.female);
 
+        service.save();
 
-        familyTree.findByName("natalya").setChildren(familyTree.findByName("yuriy"));
-        familyTree.findByName("natalya").setChildren(familyTree.findByName("evgeniy"));
-        familyTree.findByName("Mikhail").setChildren(familyTree.findByName("yuriy"));
-        familyTree.findByName("Mikhail").setChildren(familyTree.findByName("evgeniy"));
+        service.read();
 
-        System.out.println(familyTree);
+        System.out.println(service);
 
-        familyTree.write(familyTree, "src/Writed.txt");
+        service.sortByName();
+        System.out.println(service);
 
-        FamilyTree ft2 = (FamilyTree) SerialaizableFT.read("src/Writed.txt");
-
-        System.out.println(ft2);
+        service.sortByAge();
+        System.out.println(service);
     }
 }

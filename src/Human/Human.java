@@ -1,10 +1,12 @@
-import java.io.IOException;
-import java.io.Serializable;
+package Human;
+
+import Service.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human extends SerialaizableFT{
+public class Human extends Saver {
+    private int id;
     private String name;
     private LocalDate bd;
     private Gender gender;
@@ -22,9 +24,19 @@ public class Human extends SerialaizableFT{
     }
 
     public Human(String name, LocalDate bd, Gender gender){
+
         this(name, bd, gender, null, null);
     }
+    public Human(int id, Human human) {
+        this(human.name, human.bd, human.gender);
+        this.id = id;
 
+    }
+
+    public Human(int id, String name, LocalDate bd, Gender gender) {
+        this(name, bd, gender);
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -81,9 +93,10 @@ public class Human extends SerialaizableFT{
 
     @Override
     public String toString() {
-        return this.name +
+        return this.id +
+                ", " + this.name +
                 ", " + this.bd +
-                " ";
+                ". ";
     }
 
     public String humanInfo() {
