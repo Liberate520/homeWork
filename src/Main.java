@@ -4,15 +4,28 @@ import human.Human;
 import writer.FileHandler;
 
 import java.time.LocalDate;
-/*Константин, я честно пробовала, но не слишком успешно, потому списала с лекции и докрутила FamilyTree до toString
-- иначе у меня не шло.
+/*Семинар не смотрела - делала по предыдущему. Ощущение, что чем дальше,
+тем гуще этот лес. На этой неделе досдаю домашки - на следующей -
+сажусь этот лес разгребать, покуда хватит моих скромных сил.
+Порекомендуете, с чего начать?
+
+P.S.Помимо прочего у меня от id в глазах рябит
+TODO разобраться со всеми id - что где задействовано и нужно ли
  */
 public class Main {
     public static void main(String[] args) {
-//        FamilyTree tree = testTree();
-        FamilyTree tree = load();
+        FamilyTree tree = testTree();
+//        FamilyTree tree = load();
         System.out.println(tree);
 //        save(tree);
+
+        //Блок сортировки проверила, без загрузки в файл работает. С загрузкой
+        //нужно понять, в каком виде пишем - оставлю пока неактивным, чтобы
+        //там не мусорить. Не каждую же сортировку в файл писать, наверное?
+        tree.sortByName();
+        System.out.println(tree);
+        tree.sortByAge();
+        System.out.println(tree);
     }
 
     private static FamilyTree load() {

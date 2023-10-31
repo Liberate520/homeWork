@@ -1,17 +1,29 @@
 package familyTree;
 
 import human.Human;
+import human.HumanComparatorByBirthday;
+import human.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private int id;
 
     public List<Human> humanList;
+
     public FamilyTree(){
         humanList = new ArrayList<>();
+    }
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge(){
+        humanList.sort(new HumanComparatorByBirthday());
     }
     public Human getHumanByName(String name){
         for (Human human: humanList){
@@ -56,9 +68,15 @@ public class FamilyTree implements Serializable {
         }
         return humanStringBuilder.toString();
     }
-//Прикрутила и сюда toString, иначе не шло:
+
     @Override
     public String toString() {
         return getFamilyTree().toString();
+    }
+
+
+    @Override//вроде так
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
     }
 }
