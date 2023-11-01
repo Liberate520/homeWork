@@ -1,13 +1,14 @@
 package ru.gb.f_tree.f_tree;
 
 import ru.gb.f_tree.human.Human;
+import ru.gb.f_tree.comparators.AgeComparator;
+import ru.gb.f_tree.comparators.IdComparator;
+import ru.gb.f_tree.comparators.FullNameComparator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private String familyName;
     private final List<Human> familyMembers;
 
@@ -52,5 +53,21 @@ public class FamilyTree implements Serializable {
         }
         return siblings;
     }
-}
 
+    public void sortFamilyMembersByAge() {
+        familyMembers.sort(new AgeComparator());
+    }
+
+    public void sortFamilyMembersById() {
+        familyMembers.sort(new IdComparator());
+    }
+
+    public void sortFamilyMembersByFullName() {
+        familyMembers.sort(new FullNameComparator());
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyMembers);
+    }
+}
