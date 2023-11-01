@@ -1,12 +1,16 @@
 package ru.medved_sa.tree_family.familyTree;
 
+import ru.medved_sa.tree_family.familyTree.iterator.HumanIterator;
 import ru.medved_sa.tree_family.human.Human;
+import ru.medved_sa.tree_family.human.comparator.HumanComparatorByAge;
+import ru.medved_sa.tree_family.human.comparator.HumanComparatorByFirstName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private int humanId;
     private String nameFamilyTree;
     private List<Human> humanList;
@@ -260,6 +264,21 @@ public class FamilyTree implements Serializable {
         }
         return false;
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void getByFirstName(){
+        humanList.sort(new HumanComparatorByFirstName());
+    }
+
+    public void getByAge(){
+        humanList.sort(new HumanComparatorByAge());
+    }
+
+
 
     /**
      * Переопределенный метод toString() для вывода в консоль всей информации о сущностях хранящихся в семейном дереве.
