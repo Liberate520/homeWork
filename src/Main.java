@@ -2,7 +2,7 @@ import java.io.*;
 import java.time.LocalDate;
 
 public class Main{
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args){
         int index = 1;
         Human human1 = new Human(index++, "Masha", Gender.female, LocalDate.of(1960, 10, 5));
         Human human2 = new Human(index++, "Sveta", Gender.female, LocalDate.of(1985, 5, 15));
@@ -21,6 +21,7 @@ public class Main{
         familyTree.addHuman(human2);
         familyTree.addHuman(human3);
         familyTree.addHuman(human4);
+        familyTree.addHuman(human5);
         familyTree.getAllHuman();
         familyTree.getHuman(1);
 
@@ -29,6 +30,16 @@ public class Main{
         FileHandler fileHandler = new FileHandler(familyTree);
         fileHandler.output();
         FamilyTree familyTreeRestored = fileHandler.input();
-        familyTreeRestored.getHuman(1);
+        familyTree.getAllHuman();
+
+        System.out.println("-----");
+
+        familyTree.sortByName();
+        familyTree.getAllHuman();
+
+        System.out.println("-----");
+
+        familyTree.sortByBirthDay();
+        familyTree.getAllHuman();
     }
 }

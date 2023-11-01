@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileHandler implements Writable{
     private FamilyTree familyTree;
@@ -9,16 +7,29 @@ public class FileHandler implements Writable{
         this.familyTree = familyTree;
     }
 
-    public void output() throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("family_tree.out"));
-        objectOutputStream.writeObject(familyTree);
-        objectOutputStream.close();
+    public boolean output(){
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            objectOutputStream = new ObjectOutputStream(new FileOutputStream("family_tree.out"));
+            objectOutputStream.writeObject(familyTree);
+            objectOutputStream.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
-    public FamilyTree input() throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("family_tree.out"));
-        FamilyTree familyTree = (FamilyTree) objectInputStream.readObject();
-        objectInputStream.close();
-        return familyTree;
+    public FamilyTree input(){
+        ObjectInputStream objectInputStream = null;
+        try {
+            objectInputStream = new ObjectInputStream(new FileInputStream("family_tree.out"));
+            familyTree = (FamilyTree) objectInputStream.readObject();
+            objectInputStream.close();
+            return familyTree;
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 }

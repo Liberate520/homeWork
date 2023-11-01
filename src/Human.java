@@ -30,6 +30,14 @@ public class Human implements Serializable {
         }
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public LocalDate getBirthday(){
+        return birthday;
+    }
+
     public void setDeathday(LocalDate localDate){
         deathday = localDate;
     }
