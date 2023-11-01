@@ -1,6 +1,7 @@
 package ru.gb.family_tree.tree;
 
 import ru.gb.family_tree.human.Gender;
+import ru.gb.family_tree.human.Human;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ public interface TreeItem {
 
     LocalDate getBirthday();
 
-    Object getSpouse();
+    String getSpouse();
 
     String getParents();
 

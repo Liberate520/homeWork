@@ -97,19 +97,19 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
     }
 
     public void sortByName(){
-        familyMembers.sort(new HumanComparatorByName());
+        familyMembers.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge(){
-        familyMembers.sort(new HumanComparatorByAge());
+        familyMembers.sort(new HumanComparatorByAge<>());
     }
 
     public void sortById() {
-        familyMembers.sort(new HumanComparatorById());
+        familyMembers.sort(new HumanComparatorById<>());
     }
 
     public void sortByLastname() {
-        familyMembers.sort(new HumanComparatorByLastname());
+        familyMembers.sort(new HumanComparatorByLastname<>());
     }
 
     @Override
