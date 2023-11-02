@@ -28,6 +28,7 @@ public class FamilyTree implements Serializable , Iterable<Human>{
             humanList.add (human);
             human. setId (humansId++);
 
+
             addToParents(human);
             addToChildren(human);
 
