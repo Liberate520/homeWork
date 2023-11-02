@@ -1,12 +1,14 @@
 package FamilyTree.family_tree;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import FamilyTree.human.Gender;
 import FamilyTree.human.Human;
     // Класс, представляющий генеалогическое древо
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable , Iterable<Human>{
     private long humansId;
     private List<Human> humanList;
 
@@ -162,7 +164,25 @@ public class FamilyTree implements Serializable {
         return human.getChildren();
     }
 
+
+    @Override
+    public Iterator<Human> iterator() {
+        List<Human> humanList = new ArrayList<>();
+        return new FamilyTreeIterator(humanList);
+    }
+
+    public void sortByName() {
+        humanList.sort(Comparator.comparing(Human::getName));
+    }
+
+    public void sortByBirthDate() {
+        humanList.sort(Comparator.comparing(Human::getBirthDate));
+    }
+    
+
 }
+
+
 
 
 

@@ -10,10 +10,17 @@ import FamilyTree.writer.FileHandler;
 
 public class Main {
     public static void main(String[] args) {
-        //FamilyTree tree = testTree();
-        FamilyTree tree = load();
-        System.out. println(tree);
+        FamilyTree tree = testTree();
+        // FamilyTree tree = load();
+        // System.out. println(tree);
         //save(tree);
+
+        // tree.sortByName(); // Сортировка по имени
+        // System.out.println(tree.getInfo());
+
+        tree.sortByBirthDate();
+        System.out.println(tree.getInfo());
+
     }
 
         private static FamilyTree load() {
