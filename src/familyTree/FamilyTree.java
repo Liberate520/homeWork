@@ -1,53 +1,53 @@
 package familyTree;
 
 import human.Human;
-import human.HumanComparatorByBirthday;
-import human.HumanComparatorByName;
+import human.ObjectComparatorByBirthday;
+import human.ObjectComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Iterable<T> {
     private int id;
 
-    public List<Human> humanList;
+    public List<T> objectList;
 
     public FamilyTree(){
-        humanList = new ArrayList<>();
+        objectList = new ArrayList<>();
     }
 
     public void sortByName(){
-        humanList.sort(new HumanComparatorByName());
+        objectList.sort(new ObjectComparatorByName<>());
     }
 
     public void sortByAge(){
-        humanList.sort(new HumanComparatorByBirthday());
+        objectList.sort(new ObjectComparatorByBirthday<>());
     }
-    public Human getHumanByName(String name){
-        for (Human human: humanList){
-            if (human.getName().equals(name)){
-                return human;
+    public T getByName(String name){
+        for (T object: objectList){
+            if (object.getName().equals(name)){
+                return object;
             }
         }
         return null;
     }
 
-    public void addHuman(Human human){
-        if (!humanList.contains(human)){
-            humanList.add(human);
-            human.setId(id++);
+    public void addObject(T object){
+        if (!objectList.contains(object)){
+            objectList.add(object);
+            object.setId(id++);
         }
     }
-    public void addMother(Human human){
+    public void addMother(T object){
 
     }
-    public void addFather(Human human){
+    public void addFather(T object){
 
     }
 //TODO убрать все проверки, позже - заменить на логирование
-    public void addChild(Human parent, Human child){
+    public void addChild(T parent, T child){
         if (!parent.getChildren().contains(child)){
 //            System.out.println("проверка два");
             parent.setChildren(child);
@@ -55,18 +55,18 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         else System.out.println("что-то не так");
         //TODO настроить ничегонеделание, если ребёнок уже добавлен
     }//TODO добавить автоматическое добавление родителя к ребёнку по полу.
-    public void getMarried(Human wife, Human husband ){
+    public void getMarried(T wife, T husband ){
 
 
     }
     public String getFamilyTree(){
-        StringBuilder humanStringBuilder = new StringBuilder();
-        humanStringBuilder.append("Семейное древо: \n");
-        for (Human human: humanList){
-            humanStringBuilder.append(human);
-            humanStringBuilder.append("\n");
+        StringBuilder objectStringBuilder = new StringBuilder();
+        objectStringBuilder.append("Семейное древо: \n");
+        for (T object: objectList){
+            objectStringBuilder.append(object);
+            objectStringBuilder.append("\n");
         }
-        return humanStringBuilder.toString();
+        return objectStringBuilder.toString();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
 
     @Override//вроде так
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<T> iterator() {
+        return new ObjectIterator<>(objectList);
     }
 }

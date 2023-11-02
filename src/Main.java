@@ -4,13 +4,26 @@ import human.Human;
 import writer.FileHandler;
 
 import java.time.LocalDate;
-/*Семинар не смотрела - делала по предыдущему. Ощущение, что чем дальше,
+/* На момент домашки №3: Семинар не смотрела - делала по предыдущему. Ощущение, что чем дальше,
 тем гуще этот лес. На этой неделе досдаю домашки - на следующей -
 сажусь этот лес разгребать, покуда хватит моих скромных сил.
 Порекомендуете, с чего начать?
 
 P.S.Помимо прочего у меня от id в глазах рябит
+
 TODO разобраться со всеми id - что где задействовано и нужно ли
+
+На момент домашки №4: Уф! Вроде базовое дз получилось, параметризировала
+(так это называется?).
+
+Непросто было с созданием setChildren в интерфейсе FamilyTreeItem.
+Пока до меня дошло, что нужно делать дефолтный, нужны фигурные скобки
+и нужно передать в интерфейс дженерик (так называется процедура? В общем,
+сделать, чтобы этот интерфейс работал с <T>) - прошло некоторое время.
+
+Но в целом, что удивительно, я начинаю ориентироваться в проекте -
+раньше казалось, что найти здесь что-то невозможно. Теперь кажется более-менее
+логичным.
  */
 public class Main {
     public static void main(String[] args) {
@@ -58,14 +71,14 @@ public class Main {
         Human human8 = new Human("Андрей", Gender.Male, LocalDate.of(1977, 8, 13), human2, human1);
 
 
-        familyTree.addHuman(human1);
-        familyTree.addHuman(human2);
-        familyTree.addHuman(human3);
-        familyTree.addHuman(human4);
-        familyTree.addHuman(human5);
-        familyTree.addHuman(human6);
-        familyTree.addHuman(human7);
-        familyTree.addHuman(human8);
+        familyTree.addObject(human1);
+        familyTree.addObject(human2);
+        familyTree.addObject(human3);
+        familyTree.addObject(human4);
+        familyTree.addObject(human5);
+        familyTree.addObject(human6);
+        familyTree.addObject(human7);
+        familyTree.addObject(human8);
 
         human8.setChildren(human4);
 
