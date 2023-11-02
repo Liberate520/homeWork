@@ -1,10 +1,16 @@
-package WorkSeminar;
+package WorkSeminar.Tree;
+
+import WorkSeminar.Persona.Comporators.ComporatorSortAge;
+import WorkSeminar.Persona.Comporators.ComporatorSortDEFAUT;
+import WorkSeminar.Persona.Comporators.ComporatorSortGender;
+import WorkSeminar.Persona.Comporators.ComporatorSortName;
+import WorkSeminar.Persona.IteratorPerson;
+import WorkSeminar.Persona.Persona;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable<Persona> {
     private long personID;
     private List<Persona> personaList;
 
@@ -142,6 +148,20 @@ public class Tree implements Serializable {
     @Override
     public String toString() {return  getInfo();}
 
-
-
+    public void sortTreeByName(){
+        Collections.sort(personaList, new ComporatorSortName());
+    }
+    public void sortDefaut(){
+        Collections.sort(personaList, new ComporatorSortDEFAUT());
+    }
+    public void sortTreeByAge(){
+        Collections.sort(personaList, new ComporatorSortAge());
+    }
+    public void sortTreeByGender(){
+        Collections.sort(personaList, new ComporatorSortGender());
+    }
+    @Override
+    public Iterator<Persona> iterator() {
+        return new IteratorPerson<>(personaList);
+    }
 }

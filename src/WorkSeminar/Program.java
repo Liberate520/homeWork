@@ -1,6 +1,9 @@
 package WorkSeminar;
 
 import WorkSeminar.Consol.СontrolTree;
+import WorkSeminar.Persona.Gender;
+import WorkSeminar.Persona.Persona;
+import WorkSeminar.Tree.Tree;
 
 import java.time.LocalDate;
 
@@ -13,7 +16,7 @@ public class Program {
         //SaveLoadTree saveTree = new SaveLoadTree();
         //saveTree.saveFile("src/WorkSeminar.SaveFile/saveTree.out", tree);
         //SaveLoadTree loadTree = new SaveLoadTree();
-        //WorkSeminar.Tree tree = (WorkSeminar.Tree) loadTree.loadFile("src/WorkSeminar.SaveFile/saveTree.out");
+        //WorkSeminar.Tree.Tree tree = (WorkSeminar.Tree.Tree) loadTree.loadFile("src/WorkSeminar.SaveFile/saveTree.out");
 
         //System.out.println(tree);
 
@@ -26,8 +29,8 @@ public class Program {
     public static Tree newTree(){
         Tree tree = new Tree();
 
-        Persona One = new Persona("Граф", "Грэй", Gender.Male, LocalDate.of(1988, 2, 22));
-        Persona Two = new Persona("Графиня", "Грэй", Gender.Female, LocalDate.of(1990, 6, 1));
+        Persona One = new Persona("Граф", "Грэй", Gender.Male, LocalDate.of(1990, 2, 22));
+        Persona Two = new Persona("Графиня", "Грэй", Gender.Female, LocalDate.of(1988, 6, 1));
         tree.addPersona(One);
         tree.addPersona(Two);
         tree.setWedding(One, Two);

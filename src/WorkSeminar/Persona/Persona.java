@@ -1,4 +1,4 @@
-package WorkSeminar;
+package WorkSeminar.Persona;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -217,5 +217,7 @@ public class Persona implements Serializable {
         Persona persona = (Persona) obj;
         return  persona.getId() == getId();
     }
+
+
 }
 
