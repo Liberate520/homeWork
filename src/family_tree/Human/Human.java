@@ -4,8 +4,9 @@ import family_tree.base.TreeHub;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Human<E> implements TreeHub<E> {
+public class Human<E> implements TreeHub<E>, Serializable {
     private final String lastName;
     private final String firstName;
     private final String gender;
