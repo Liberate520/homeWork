@@ -1,11 +1,12 @@
 package Family_Tree.Human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private long id;
     private String name;
     private LocalDate birthday;
@@ -17,7 +18,7 @@ public class Human {
     private Human spouse;
 
     public Human(String name, LocalDate birthday, LocalDate death, Gender gender, Human mom, Human dad) {
-        id = 0;
+        id = -1;
         this.name = name;
         this.birthday = birthday;
         this.death = death;
@@ -197,6 +198,6 @@ public class Human {
             return false;
         }
         Human human = (Human) obj;
-        return human.getParents() == getParents();
+        return human.getId() == getId();
     }
 }

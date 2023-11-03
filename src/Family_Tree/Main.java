@@ -3,12 +3,29 @@ package Family_Tree;
 import Family_Tree.Tree.FamilyTree;
 import Family_Tree.Human.Human;
 import Family_Tree.Human.Gender;
+import Family_Tree.Writer.FileHandler;
+
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         FamilyTree tree = wholeTree();
+//        FamilyTree tree=load();
         System.out.println(tree);
+
+        save(tree);
+    }
+
+    private static FamilyTree load(){
+        FileHandler fileHandler=new FileHandler();
+        String filePath = "src/Family_Tree/writer/tree.txt";
+        return (FamilyTree) fileHandler.read(filePath);
+    }
+
+    private static void save(FamilyTree tree){
+        FileHandler fileHandler=new FileHandler();
+        String filePath = "src/Family_Tree/Writer/tree.txt";
+        fileHandler.save(tree, filePath);
     }
 
 
