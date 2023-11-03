@@ -3,13 +3,12 @@ package ru.gb.familyTree.tree;
 import ru.gb.familyTree.person.Person;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class FamilyTreeBuilder {
     private String family;
     private Person root = null;
-    private List<Node> nodes = new ArrayList<>();
+    private List<Node<Integer, Person>> nodes = new ArrayList<>();
 
     public FamilyTreeBuilder setFamily(String family) {
         this.family = family;
@@ -21,7 +20,7 @@ public class FamilyTreeBuilder {
         return this;
     }
 
-    public FamilyTreeBuilder setNode(List<Node> nodes) {
+    public FamilyTreeBuilder setNode(List<Node<Integer, Person>> nodes) {
         this.nodes = nodes;
         return this;
     }

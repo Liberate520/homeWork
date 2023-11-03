@@ -1,20 +1,17 @@
 package ru.gb.familyTree.tree;
 
-import ru.gb.familyTree.person.Gender;
 import ru.gb.familyTree.person.Person;
-
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Iterator;
 
-public class Node implements Serializable {
-    private int id;
+public class Node<E1, E2> implements Serializable {
+    private E1 id;
     private FamilyTree family;
-    private Person parentOne;
-    private Person parentTwo;
-    private HashSet<Person> children;
+    private E2 parentOne;
+    private E2 parentTwo;
+    private HashSet<E2> children;
 
-    public Node(int id, FamilyTree family, Person parentOne, Person parentTwo, HashSet<Person> children){
+    public Node(E1 id, FamilyTree family, E2 parentOne, E2 parentTwo, HashSet<E2> children){
         this.setId(id);
         this.setFamily(family);
         this.setParentOne(parentOne);
@@ -24,52 +21,52 @@ public class Node implements Serializable {
 
     public void clear (){
         this.setFamily(null);
-        this.setId(0);
+        this.setId(null);
         this.setParentOne(null);
         this.setParentTwo(null);
-        this.setChildren(new HashSet<Person>());
+        this.setChildren(new HashSet<>());
     }
 
-    public void setId(int id){
+    public void setId(E1 id){
         this.id = id;
     }
     public void setFamily(FamilyTree family){
         this.family = family;
     }
 
-    public void setParentOne(Person parentOne){
+    public void setParentOne(E2 parentOne){
         this.parentOne = parentOne;
     }
 
-    public void setParentTwo(Person parentTwo){
+    public void setParentTwo(E2 parentTwo){
         this.parentTwo = parentTwo;
     }
 
-    public void setChildren(HashSet<Person> children){
+    public void setChildren(HashSet<E2> children){
         this.children = children;
     }
 
-    public void addChildren(Person child){
+    public void addChildren(E2 child){
         this.children.add(child);
     }
 
     public int getId(){
-        return id;
+        return (int) id;
     }
 
     public FamilyTree getFamily(){
         return family;
     }
 
-    public Person getParentOne(){
+    public E2 getParentOne(){
         return parentOne;
     }
 
-    public Person getParentTwo(){
+    public E2 getParentTwo(){
         return parentTwo;
     }
 
-    public HashSet<Person> getChildren(){
+    public HashSet<E2> getChildren(){
         return children;
     }
 
@@ -77,9 +74,9 @@ public class Node implements Serializable {
     /**
      * Выводит на экран содержимое HashSet
      */
-    private String printSet(HashSet<Person> set) {
+    private String printSet(HashSet<E2> set) {
         StringBuilder str = new StringBuilder();
-        for (Person itm : set) {
+        for (E2 itm : set) {
             str.append(itm.toString()).append("\n");
         }
         return str.toString();

@@ -29,7 +29,7 @@ public class Main {
         addNodes(romanovTree, romanovPersons);
 
         System.out.println("Проверка интерфейса итератора для дерева:\n");
-        while (((Iterator<Node>) romanovTree).hasNext()) {
+        while (((Iterator<Node<Integer, Person>>) romanovTree).hasNext()) {
              System.out.println(romanovTree.next());
         }
 
@@ -84,7 +84,7 @@ public class Main {
      * Заполнение дерева узлами (браками):
      */
     private static void addNodes(FamilyTree treeName, PersonSaver personName){
-        Node tempNode = new NodeBuilder().createNode();
+        Node<Integer, Person> tempNode = new NodeBuilder().createNode();
         tempNode.setFamily(treeName);tempNode.setId(11);//1 ряд 1 место
         tempNode.setParentOne(personName.getObjectById(11)); tempNode.setParentTwo(personName.getObjectById(12));
         tempNode.addChildren(personName.getObjectById(22));

@@ -36,7 +36,7 @@ public class NodeBuilder {
         return this;
     }
 
-    public Node createNode() {
-        return new Node(id, family, parentOne, parentTwo, children);
+    public Node<Integer, Person> createNode() {
+        return new Node<Integer, Person>(id, family, parentOne, parentTwo, children);
     }
 }
