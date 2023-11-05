@@ -36,6 +36,12 @@ public class Human implements Serializable {
                  Human father, Human mother){
         this(name, gender, birthDate, null, father, mother);
     }
+// конструктор HumanBuilder для new Human(maxId++, name, age)
+//    public Human(int Id, String name, int age) {
+//        this(Id, name, age);
+//    }
+
+
     public boolean addChild(Human child){
         if (!children.contains(child)){  // проверка наличия ребенка
             children.add(child);
@@ -167,4 +173,10 @@ public class Human implements Serializable {
         Human human = (Human) obj;
         return human.getId() == getId();
     }
+
+// ????
+//    @Override
+//    public int compareTo(Human o){
+//        return this.name.compareTo(o.name);
+//    }
 }
