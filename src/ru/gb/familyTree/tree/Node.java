@@ -50,8 +50,8 @@ public class Node<E1, E2> implements Serializable {
         this.children.add(child);
     }
 
-    public int getId(){
-        return (int) id;
+    public E1 getId(){
+        return id;
     }
 
     public FamilyTree getFamily(){
@@ -83,7 +83,7 @@ public class Node<E1, E2> implements Serializable {
     }
     @Override
     public String toString() {
-        return String.format("Узел дерева %d (брак):\n%s и %s,\nих дети:\n%s\n",
+        return String.format("Узел дерева %d :\n%s и %s,\nих дети:\n%s\n",
                 getId(),getParentOne().toString(), getParentTwo().toString(), printSet(getChildren()));
     }
 

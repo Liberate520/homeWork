@@ -1,5 +1,7 @@
 package ru.gb.familyTree.person;
 
+import ru.gb.familyTree.Gender;
+
 import java.time.LocalDate;
 
 public class PersonBuilder {
@@ -9,6 +11,8 @@ public class PersonBuilder {
     private String lastName = "";
     private LocalDate startDay = null;
     private LocalDate stopDay = null;
+    private LocalDate DayOfBirth = null;
+    private LocalDate DayOfDeath = null;
     private Gender gender = Gender.Male;
 
     public PersonBuilder setId(int id) {
@@ -46,6 +50,7 @@ public class PersonBuilder {
     }
 
     public Person createPerson() {
-        return new Person(id, firstName, secondName, lastName, startDay, stopDay, gender);
+        return new Person(id, firstName, secondName, lastName, startDay, stopDay,
+                DayOfBirth, DayOfDeath, gender);
     }
 }

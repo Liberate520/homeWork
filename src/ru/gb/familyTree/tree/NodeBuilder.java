@@ -4,39 +4,39 @@ import ru.gb.familyTree.person.Person;
 
 import java.util.HashSet;
 
-public class NodeBuilder {
-    private int id;
+public class NodeBuilder <E1, E2>{
+    private E1 id;
     private FamilyTree family;
-    private Person parentOne;
-    private Person parentTwo;
-    private HashSet<Person> children = new HashSet<>();
+    private E2 parentOne;
+    private E2 parentTwo;
+    private HashSet<E2> children = new HashSet<>();
 
-    public NodeBuilder setId(int id) {
+    public NodeBuilder<E1,E2> setId(E1 id) {
         this.id = id;
         return this;
     }
 
-    public NodeBuilder setFamily(FamilyTree family) {
+    public NodeBuilder<E1,E2> setFamily(FamilyTree family) {
         this.family = family;
         return this;
     }
 
-    public NodeBuilder setParentOne(Person parentOne) {
+    public NodeBuilder<E1,E2> setParentOne(E2 parentOne) {
         this.parentOne = parentOne;
         return this;
     }
 
-    public NodeBuilder setParentTwo(Person parentTwo) {
+    public NodeBuilder<E1,E2> setParentTwo(E2 parentTwo) {
         this.parentTwo = parentTwo;
         return this;
     }
 
-    public NodeBuilder setChildren(HashSet<Person> children) {
+    public NodeBuilder<E1,E2> setChildren(HashSet<E2> children) {
         this.children = children;
         return this;
     }
 
-    public Node<Integer, Person> createNode() {
-        return new Node<Integer, Person>(id, family, parentOne, parentTwo, children);
+    public Node<E1, E2> createNode() {
+        return new Node<E1, E2>(id, family, parentOne, parentTwo, children);
     }
 }

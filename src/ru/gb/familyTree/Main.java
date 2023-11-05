@@ -1,5 +1,7 @@
 package ru.gb.familyTree;
 
+import ru.gb.familyTree.dog.Dog;
+import ru.gb.familyTree.dog.DogBuilder;
 import ru.gb.familyTree.person.*;
 import ru.gb.familyTree.tree.*;
 
@@ -8,14 +10,17 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
-    private static final boolean debug = false;
+    private static final boolean debug = true;
     private static final List<Person> db = new ArrayList<>();
+    private static final Dog dog11 = new DogBuilder().createDog();
+    private static final Dog dog12 = new DogBuilder().createDog();
     public static void main(String[] args) throws IOException, ClassNotFoundException{
-         /**
+        /**
          * Создание дерева (фрагмент!):
          */
         FamilyTree romanovTree = new FamilyTreeBuilder().setFamily("Романовы").createFamilyTree();
-         /**
+        FamilyTree dogTree = new FamilyTreeBuilder().setFamily("Родословная двор-терьеров").createFamilyTree();
+        /**
           * Создание класса для хранения всех персон дерева Романовых:
           */
         PersonSaver romanovPersons = new PersonSaverBuilder().setFamily(romanovTree).createPersonSaver();
@@ -23,10 +28,15 @@ public class Main {
           * Добавление персон Романовых:
           */
         addPersons(romanovPersons);
-         /**
+        addDogs();
+
+        /**
           * Добавление узлов в дерево Романовых:
           */
-        addNodes(romanovTree, romanovPersons);
+        addPersonNodes(romanovTree, romanovPersons);
+        addDogNodes(dogTree);
+
+        if(debug){System.out.println(dogTree.getObjectById(11) + "\n");}
 
         System.out.println("Проверка интерфейса итератора для дерева:\n");
         while (((Iterator<Node<Integer, Person>>) romanovTree).hasNext()) {
@@ -56,7 +66,7 @@ public class Main {
             System.out.println(itm+"\n");
         }
 
-         /**
+        /**
           * Сохранение объектов в файл. Сериализация.
           */
         SaveRestoreTree saver = new SaveRestoreTree();
@@ -81,9 +91,16 @@ public class Main {
     }
 
     /**
-     * Заполнение дерева узлами (браками):
+     * Заполнение дерева узлами:
      */
-    private static void addNodes(FamilyTree treeName, PersonSaver personName){
+
+    private static void addDogNodes(FamilyTree treeName){
+        Node<Integer, Dog> tempNode = new NodeBuilder().createNode();
+        tempNode.setId(11); tempNode.setParentOne(dog11);tempNode.setParentTwo(dog12);
+        treeName.addNode(tempNode);
+        tempNode.clear();
+    }
+    private static void addPersonNodes(FamilyTree treeName, PersonSaver personName){
         Node<Integer, Person> tempNode = new NodeBuilder().createNode();
         tempNode.setFamily(treeName);tempNode.setId(11);//1 ряд 1 место
         tempNode.setParentOne(personName.getObjectById(11)); tempNode.setParentTwo(personName.getObjectById(12));
@@ -164,6 +181,18 @@ public class Main {
         treeName.addNode(tempNode);
         if(debug){System.out.println(treeName.getObjectById(52) + "\n");}
         tempNode.clear();
+    }
+
+    private static void addDogs(){
+        dog11.setId(11);
+        dog11.setGender(Gender.Male); dog11.setNameOfAnimal("Тузик"); dog11.setBreed("Двор-терьер");
+        dog11.setDayOfBirth(LocalDate.of(2000, 11, 4));
+        dog11.setDayOfDeath(LocalDate.of(2017, 5, 20));
+
+        dog12.setId(12);
+        dog12.setGender(Gender.Female); dog12.setNameOfAnimal("Белка"); dog12.setBreed("Двор-терьер");
+        dog12.setDayOfBirth(LocalDate.of(2001, 4, 11));
+        dog12.setDayOfDeath(LocalDate.of(2015, 5, 13));
     }
 
     /**

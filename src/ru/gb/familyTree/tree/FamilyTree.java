@@ -9,13 +9,13 @@ import java.util.List;
 
 import java.io.Serializable;
 
-public class FamilyTree implements Serializable, Iterator<Node<Integer, Person>>, Iterable<Node<Integer, Person>> {
+public class FamilyTree<E1, E2> implements Serializable, Iterator<Node<Integer, Person>>, Iterable<Node<Integer, Person>> {
     int index= 0;
     private String family;
     private Person root;
-    private List<Node<Integer, Person>> nodeList = new ArrayList<>();
+    private List<Node<E1, E2>> nodeList = new ArrayList<>();
 
-    public FamilyTree(String family, Person root, List<Node<Integer, Person>> nodes) {
+    public FamilyTree(String family, Person root, List<Node<E1, E2>> nodes) {
         this.setFamily(family);
         this.setRoot(root);
         this.setNode(nodes);
@@ -29,20 +29,20 @@ public class FamilyTree implements Serializable, Iterator<Node<Integer, Person>>
         this.root = root;
     }
 
-    public void setNode(List<Node<Integer, Person>> node) {
+    public void setNode(List<Node<E1, E2>> node) {
         this.nodeList = node;
     }
 
-    public boolean addNode(Node<Integer, Person> node){
-        Node<Integer, Person> temp = new NodeBuilder().createNode();
+    public void addNode(Node<E1, E2> node){
+        Node<E1, E2> temp = new NodeBuilder().createNode();
         temp.setFamily(node.getFamily()); temp.setId(node.getId());
         temp.setParentOne(node.getParentOne()); temp.setParentTwo(node.getParentTwo());
         temp.setChildren(node.getChildren());
-        return nodeList.add(temp);
+        nodeList.add(temp);
     }
-    public Node<Integer, Person> getObjectById (int id){
-        for (Node<Integer, Person> itm: nodeList) {
-            if (itm.getId() == id) return itm;
+    public Node<E1, E2> getObjectById (int id){
+        for (Node<E1, E2> itm: nodeList) {
+            if ((Integer) itm.getId() == id) return itm;
         }
         return null;
     }
@@ -55,7 +55,7 @@ public class FamilyTree implements Serializable, Iterator<Node<Integer, Person>>
         return root;
     }
 
-    public List<Node<Integer, Person>> getNode() {
+    public List<Node<E1, E2>> getNode() {
         return nodeList;
     }
 
@@ -65,7 +65,7 @@ public class FamilyTree implements Serializable, Iterator<Node<Integer, Person>>
     }
 
     @Override
-    public Node<Integer, Person> next() {
+    public Node next() {
         return nodeList.get(index++);
     }
 

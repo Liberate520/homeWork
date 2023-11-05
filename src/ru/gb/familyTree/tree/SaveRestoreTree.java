@@ -6,6 +6,9 @@ import ru.gb.familyTree.person.PersonSaver;
 import java.io.*;
 
 public class SaveRestoreTree implements WritableToFile{
+        public SaveRestoreTree(){
+            super();
+        }
         @Override
         public void writeObject(Object treeName, String filename) throws IOException {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));

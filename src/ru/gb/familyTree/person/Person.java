@@ -1,22 +1,24 @@
 package ru.gb.familyTree.person;
 
-import ru.gb.familyTree.tree.FamilyTree;
+import ru.gb.familyTree.Entity;
+import ru.gb.familyTree.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Person implements Serializable {
-    private int id;
+public class Person extends Entity implements Serializable {
     private String firstName;//имя
     private String secondName;//отчество
     private String lastName;//фамилия
     private LocalDate startDay;//начало правления
     private LocalDate stopDay;//конец правления
-    private Gender gender;
 
     public Person (int id, String firstName, String secondName, String lastName,
-                   LocalDate startDay, LocalDate stopDay, Gender gender){
+                   LocalDate startDay, LocalDate stopDay,
+                   LocalDate DayOfBrith, LocalDate DayOfDeath,
+                   Gender gender){
+        super(id, DayOfBrith, DayOfDeath, gender);
         this.setId(id);
         this.setFirstName(firstName); //имя
         this.setSecondName(secondName);//отчество
