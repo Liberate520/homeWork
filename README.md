@@ -62,7 +62,7 @@
 
 <br><br>
 
-![модель человека и дерева Family Tree](https://i.ibb.co/Lx2xZYj/Family-Tree-pic2.png)
+![модель человека и дерева Family Tree](https://i.ibb.co/NWxwrnC/Family-Tree-pic2min.png)
 
 <br>
 
