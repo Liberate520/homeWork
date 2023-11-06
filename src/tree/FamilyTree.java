@@ -1,12 +1,13 @@
 package homeWork.src.tree;
 
+import homeWork.src.member.FamilyMemberComparatorByAge;
 import homeWork.src.member.FamilyMember;
+import homeWork.src.member.FamilyMemberCompareByBirthDate;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<FamilyMember> {
     private long familyMemberId;
     private List<FamilyMember> familyMembers;
 
@@ -20,20 +21,24 @@ public class FamilyTree implements Serializable {
         familyMembers.add(member);
     }
 
-    public boolean add(FamilyMember member){
-        if(member == null){
-            return false;
-        }
-        if(!familyMembers.contains(member)){
-            familyMembers.add((member));
-            member.setId(familyMemberId++);
-
-            addToParents(member);
-            addToChildren(member);
-            return true;
-        }
-        return false;
+    public List<FamilyMember> getFamilyMembers(){
+        return familyMembers;
     }
+
+//    public boolean add(FamilyMember member){
+//        if(member == null){
+//            return false;
+//        }
+//        if(!familyMembers.contains(member)){
+//            familyMembers.add((member));
+//            member.setId(familyMemberId++);
+//
+//            addToParents(member);
+//            addToChildren(member);
+//            return true;
+//        }
+//        return false;
+//    }
 
     public FamilyMember getById(long id){
         if(!checkId(id)){
@@ -110,17 +115,17 @@ public class FamilyTree implements Serializable {
         return false;
     }
 
-    private void addToParents(FamilyMember member){
-        for(FamilyMember parent: member.getParents()){
-            parent.addChild(member);
-        }
-    }
+//    private void addToParents(FamilyMember member){
+//        for(FamilyMember parent: member.getParents()){
+//            parent.addChild(member);
+//        }
+//    }
 
-    private void addToChildren(FamilyMember member){
-        for(FamilyMember child: member.getChildren()){
-            child.addParent(member);
-        }
-    }
+//    private void addToChildren(FamilyMember member){
+//        for(FamilyMember child: member.getChildren()){
+//            child.addParent(member);
+//        }
+//    }
 
     private boolean checkId(long id){
         return id < familyMemberId && id >= 0;
@@ -142,4 +147,23 @@ public class FamilyTree implements Serializable {
     public String toString() {
         return getInfo();
     }
+
+    public void sortBySurname (){
+        Collections.sort(familyMembers);
+    }
+
+    public void sortByAge (){
+//        Collections.sort(familyMembers, new FamilyMemberComparatorByAge());
+        familyMembers.sort(new FamilyMemberComparatorByAge());
+    }
+
+    public void sortByBirthDate(){
+        familyMembers.sort(new FamilyMemberCompareByBirthDate());
+    }
+
+    @Override
+    public Iterator<FamilyMember> iterator() {
+        return new FamilyMemberIterator(familyMembers);
+    }
+
 }

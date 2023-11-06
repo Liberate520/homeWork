@@ -1,6 +1,7 @@
 package homeWork.src;
 
 import homeWork.src.member.FamilyMember;
+import homeWork.src.service.Service;
 import homeWork.src.tree.FamilyTree;
 import homeWork.src.tree.Gender;
 import homeWork.src.writer.FileHandler;
@@ -9,14 +10,22 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        FamilyTree myTree = testTree();
-        FamilyTree myTree = load();
-        System.out.println(myTree);
+        FamilyTree myTree = testTree();
+        Service myService = new Service();
+//        FamilyTree myTree = load();
+//        System.out.println(myTree);
+
+
+        System.out.println(myService.getFamilyTreeInfo(myTree));
+        myService.sortBySurname(myTree);
+        System.out.println(myService.getFamilyTreeInfo(myTree));
+        myService.sortByBirthDate(myTree);
+        System.out.println(myService.getFamilyTreeInfo(myTree));
 
 //        FileHandler fileHandler = new FileHandler();
 //        String filePath = "src/homeWork/src/writer/tree.txt";
 //        fileHandler.save(myTree, filePath);
-//        save(myTree);
+        save(myTree);
 
     }
 
@@ -33,56 +42,54 @@ public class Main {
     }
 
     static FamilyTree testTree() {
-        FamilyTree tree = new FamilyTree();
+//        FamilyMemberBuilder builder = new FamilyMemberBuilder();
+        Service service = new Service();
+//        FamilyTree tree = new FamilyTree();
 
-        FamilyMember member1 = new FamilyMember(
+
+        FamilyMember member1 = service.createFamilyMember(
                 "Nadezhda",
-                "Petrova",
-                "Alexandrovna",
+                "Khokhlova",
+                "Pavlovna",
                 Gender.Female,
-                LocalDate.of(1954, 2, 28));
+                LocalDate.of(1954, 2, 28), null, null, null);
 
-        FamilyMember member2 = new FamilyMember(
+        FamilyMember member2 = service.createFamilyMember(
                 "Alexandr",
-                "Petrov",
-                "Sergeevich",
+                "Khokhlov",
+                "Andreevich",
                 Gender.Male,
                 LocalDate.of(1956, 9, 1),
-                LocalDate.of(2015, 2, 14));
+                LocalDate.of(2015, 2, 14), null, null);
 
-        tree.add(member1);
-        tree.add(member2);
-        tree.setWedding(member1, member2);
+        service.setWedding(member1, member2);
 
-        FamilyMember member3 = new FamilyMember(
+        FamilyMember member3 = service.createFamilyMember(
                 "Andrey",
-                "Petrov",
-                "Sergeevich",
+                "Khokhlov",
+                "Alexandrovich",
                 Gender.Male,
-                LocalDate.of(1980, 3, 28),
+                LocalDate.of(1977, 3, 28),
+                null,
                 member2, member1);
 
-        FamilyMember member4 = new FamilyMember(
+        FamilyMember member4 = service.createFamilyMember(
                 "Olga",
-                "Petrova",
-                "Sergeevna",
+                "Shpakovskaya",
+                "Alexandrovna",
                 Gender.Female,
-                LocalDate.of(1989, 10, 16),
+                LocalDate.of(1989, 10, 16), null,
                 member2, member1);
 
-        tree.add(member3);
-        tree.add(member4);
-
-        FamilyMember member5 = new FamilyMember(
-                "Larisa",
-                "Vasilieva",
+        FamilyMember member5 = service.createFamilyMember(
+                "Ekaterina",
+                "Khokhlova",
                 "Petrovna",
                 Gender.Female,
-                LocalDate.of(1945, 9, 1));
+                LocalDate.of(1945, 9, 1), null, null, null);
 
-        member5.addChild(member3);
-        tree.add(member5);
+        service.addChild(member5, member3);
 
-        return tree;
+        return service.getFamilyTree();
     }
 }

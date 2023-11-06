@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyMember implements Serializable {
+public class FamilyMember implements Serializable, Comparable<FamilyMember> {
     private long id;
     private String name;
     private String surname;
@@ -21,10 +21,10 @@ public class FamilyMember implements Serializable {
     private List<FamilyMember> children;
     private FamilyMember spouse;
 
-    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
+    public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, LocalDate deathDate,
                         FamilyMember father, FamilyMember mother) {
-        id = -1;
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.patronymicName = patronymicName;
@@ -34,24 +34,21 @@ public class FamilyMember implements Serializable {
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
-//        this.birthDate = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-//        this.mother = null;
-//        this.father = null;
     }
 
-    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
+    public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate){
-        this(name, surname, patronymicName, gender, birthDate, null, null, null);
+        this(id, name, surname, patronymicName, gender, birthDate, null, null, null);
     }
 
-    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
+    public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, FamilyMember father, FamilyMember mother){
-        this(name, surname, patronymicName, gender, birthDate, null, father, mother);
+        this(id, name, surname, patronymicName, gender, birthDate, null, father, mother);
     }
 
-    public FamilyMember(String name, String surname, String patronymicName, Gender gender,
+    public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, LocalDate deathDate) {
-        this(name, surname, patronymicName, gender, birthDate, deathDate, null, null);
+        this(id, name, surname, patronymicName, gender, birthDate, deathDate, null, null);
     }
 
     public boolean addChild(FamilyMember child){
@@ -168,6 +165,8 @@ public class FamilyMember implements Serializable {
         } else {
             sb.append(" - ").append("current");
         }
+        sb.append(", ");
+        sb.append(getAge());
         sb.append(", ")
                 .append(getSposeInfo())
                 .append(", ")
@@ -213,13 +212,21 @@ public class FamilyMember implements Serializable {
         StringBuilder result = new StringBuilder();
         result.append("children: ");
         if(!children.isEmpty()) {
-            for (int i = 1; i < children.size(); i++) {
-                result.append(", ")
-                        .append(children.get(i).getName());
+            for (int i = 0; i < children.size(); i++) {
+                if (i < children.size()-1) {
+                    result.append(children.get(i).getName()).append(", ");
+                } else {
+                    result.append(children.get(i).getName());
+                }
             }
         } else {
             result.append("unknown");
         }
         return result.toString();
+    }
+
+    @Override
+    public int compareTo(FamilyMember o) {
+        return surname.compareTo(o.surname);
     }
 }
