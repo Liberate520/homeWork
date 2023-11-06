@@ -3,7 +3,20 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         FamilyTree tree = testTree();
+//        FamilyTree tree = load();
         System.out.println(tree);
+        save(tree);
+    }
+
+//    private static FamilyTree load () {
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/tree.txt";
+//        return (FamilyTree) fileHandler.read(filePath);
+//    }
+    private static  void save (FamilyTree tree) {
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/tree.txt";
+        fileHandler.save(tree, filePath);
     }
     static FamilyTree testTree () {
         FamilyTree tree = new FamilyTree();
