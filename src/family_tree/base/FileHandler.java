@@ -1,26 +1,31 @@
 package family_tree.base;
 
-import family_tree.human.Human;
+import family_tree.human.*;
 
 import java.io.*;
+import java.time.LocalDate;
 
 public class FileHandler {
-    public static <E> void main(String[] args) {
+    public static void main(String[] args) {
         // Создаем объект, который нужно сериализовать
-        Human<E> human1 = new Human<E>("Ивановский", "Иван Семенович", "Муж.", "Отец", "В браке", "Формальное",350000.0, 32, 0.1);
-        Human<E> human2 = new Human<E>("Семенова", "Марианна Петровна", "Жен.", "Мать", "В браке", "Формальное",350000.0, 30, 0.2);
-        Human<E> human3 = new Human<E>("Семенов", "Денис Петрович", "Муж.", "Ребенок", "Не в браке", "Специальное",950000.0, 27, 0.3);
-        Human<E> human4 = new Human<E>("Савельев", "Петр Сергеевич", "Муж.", "Отец", "Не в браке", "Специальное",50000.0, 43, 0.4);
-        Human<E> human5 = new Human<E>("Живнов", "Марат Клементьевич", "Муж.", "Отец", "В браке", "Специальное",600000.0, 50, 0.5);
-        Human<E> human6 = new Human<E>("Алябьева", "Маргарита Васильевна", "Жен.", "Мать", "Не в браке", "Специальное",135000.0, 39, 0.6);
-        Human<E> human7 = new Human<E>("Ивановский", "Михаил Иванович", "Муж.", "Ребенок", "Не в браке", "Формальное",5000.0, 14, 0.7);
-        Human<E> human8 = new Human<E>("Алябьев", "Петр Маратович", "Муж.", "Ребенок", "Не в браке", "Формальное",10000.0, 20, 0.8);
-        Human<E> human9 = new Human<E>("Малинович", "Анна Борисовна", "Жен.", "Ребенок", "Не в браке", "Формальное",5000.0, 10, 0.9);
+        Human human1 = new Human("Ивановский", "Иван Семенович", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Formal,350000.0, LocalDate.of(1991, 1, 10), 0.001);
+        Human human2 = new Human("Семенова", "Марианна Петровна", Gender.Female, Position.Mother, SocialPosition.Married, Fondation.Informal,350000.0, LocalDate.of(1993, 10, 10), 0.002);
+        Human human3 = new Human("Семенов", "Денис Петрович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Informal,950000.0, LocalDate.of(1998, 7, 7), 0.003);
+        Human human4 = new Human("Савельев", "Петр Сергеевич", Gender.Male, Position.Father, SocialPosition.Not_married, Fondation.Informal,50000.0, LocalDate.of(1980, 6, 5), 0.004);
+        Human human5 = new Human("Живнов", "Марат Клементьевич", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Informal,600000.0, LocalDate.of(1973, 12, 6), 0.005);
+        Human human6 = new Human("Алябьева", "Маргарита Васильевна", Gender.Female, Position.Mother, SocialPosition.Not_married, Fondation.Formal,135000.0, LocalDate.of(1984, 9, 27), 0.006);
+        Human human7 = new Human("Ивановский", "Михаил Иванович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Non_formal,5000.0, LocalDate.of(2009, 4, 21), 0.007);
+        Human human8 = new Human("Алябьев", "Петр Маратович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Informal,10000.0, LocalDate.of(2003, 11, 9), 0.008);
+        Human human9 = new Human("Малинович", "Анна Борисовна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal,5000.0, LocalDate.of(2013, 3, 5), 0.009);
+        Human human10 = new Human("Малинович", "Марианна Борисовна", Gender.Female, Position.Child, SocialPosition.Not_married, Fondation.Non_formal,1000.0, LocalDate.of(2020, 8, 12), 0.010);
+        Human human11 = new Human("Крылова", "Сабина Сергеевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal,12000.0, LocalDate.of(2010, 4, 24), 0.011);
+        Human human12 = new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Formal,12000.0, LocalDate.of(1975, 11, 29), 0.012);
 
 
         String filePath = "homeWork/src/family_tree.txt";
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream))
+        {
             // Сериализуем объект
             objectOutputStream.writeObject(human1);
             objectOutputStream.writeObject(human2);
@@ -31,13 +36,118 @@ public class FileHandler {
             objectOutputStream.writeObject(human7);
             objectOutputStream.writeObject(human8);
             objectOutputStream.writeObject(human9);
-
+            objectOutputStream.writeObject(human10);
+            objectOutputStream.writeObject(human11);
+            objectOutputStream.writeObject(human12);
 
         } catch (IOException e) {
             e.printStackTrace();
 
         }
     }
+
+    public static void FileHandlerForFamilyTree() throws IOException {
+        String filePath = "homeWork/src/family_tree.txt";
+        try(FileInputStream fileInputStream = new FileInputStream(filePath);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+
+            // Десериализуем
+            Human human1;
+            try {
+                human1 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human2;
+            try {
+                human2 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human3;
+            try {
+                human3 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human4;
+            try {
+                human4 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human5;
+            try {
+                human5 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human6;
+            try {
+                human6 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human7;
+            try {
+                human7 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human8;
+            try {
+                human8 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human9;
+            try {
+                human9 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human10;
+            try {
+                human10 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human11;
+            try {
+                human11 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Human human12;
+            try {
+                human12 = (Human) objectInputStream.readObject();
+            } catch (ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            // выводим на экран
+            System.out.println(human1);
+            System.out.println(human2);
+            System.out.println(human3);
+            System.out.println(human4);
+            System.out.println(human5);
+            System.out.println(human6);
+            System.out.println(human7);
+            System.out.println(human8);
+            System.out.println(human9);
+            System.out.println(human10);
+            System.out.println(human11);
+            System.out.println(human12);
+
+        }
+    }
+
+
+
+
+
+
 }
 
 
