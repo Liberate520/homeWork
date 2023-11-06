@@ -8,11 +8,11 @@ import my_family_tree.tree.familyTree;
 import java.time.LocalDate;
 
 public class Service {
-    private familyTree tree;
+    private familyTree <Human> tree;
     private HumanBuilder builder;
 
     public Service(){
-        tree = new familyTree();
+        tree = new familyTree<>();
         builder = new HumanBuilder();
     }
 
