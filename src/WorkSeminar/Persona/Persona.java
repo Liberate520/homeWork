@@ -1,12 +1,14 @@
 package WorkSeminar.Persona;
 
+import WorkSeminar.Tree.TreeEtem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements Serializable {
+public class Persona implements Serializable, TreeEtem {
     private String name;
     private String lastName;
     private Gender gender;
@@ -51,6 +53,7 @@ public class Persona implements Serializable {
     public Persona getPartner() {
         return partner;
     }
+
     public void setPartner(Persona partner) {
         this.partner = partner;
     }
@@ -75,6 +78,11 @@ public class Persona implements Serializable {
     public long getId() {
         return id;
     }
+
+
+
+
+
     public void setId(long id) {
         this.id = id;
     }
@@ -98,12 +106,10 @@ public class Persona implements Serializable {
         this(name, lastName, gender, birthday, null, mather, father);
     }
 
-    public  boolean addKid(Persona kid){
+    public void addKid(Persona kid){
         if (!kids.contains(kid)) {
             kids.add(kid);
-            return true;
         }
-        return false;
     }
 
 
@@ -121,7 +127,6 @@ public class Persona implements Serializable {
         addParent(parentM);
         return true;
     }
-
 
     public List<Persona> addParents(){
         List<Persona> parentsList = new ArrayList<>(2);

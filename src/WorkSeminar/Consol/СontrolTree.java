@@ -61,7 +61,7 @@ public class СontrolTree {
                     //TODO Вынести код в другой класс.
                     System.out.println("Показать древо: \n");
                     StringBuilder list = new StringBuilder();
-                    for (Persona persona: tree){
+                    for (Object persona: tree){
                         list.append(persona);
                         list.append("\n");
                     }
