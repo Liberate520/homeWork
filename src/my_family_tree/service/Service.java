@@ -3,16 +3,16 @@ package my_family_tree.service;
 import my_family_tree.builder.HumanBuilder;
 import my_family_tree.human.Gender;
 import my_family_tree.human.Human;
-import my_family_tree.tree.familyTree;
+import my_family_tree.tree.FamilyTree;
 
 import java.time.LocalDate;
 
 public class Service {
-    private familyTree <Human> tree;
+    private FamilyTree<Human> tree;
     private HumanBuilder builder;
 
     public Service(){
-        tree = new familyTree<>();
+        tree = new FamilyTree<>();
         builder = new HumanBuilder();
     }
 

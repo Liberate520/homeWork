@@ -1,7 +1,7 @@
 import my_family_tree.human.Gender;
 import my_family_tree.human.Human;
 import my_family_tree.service.Service;
-import my_family_tree.tree.familyTree;
+import my_family_tree.tree.FamilyTree;
 import my_family_tree.writer.FileHandler;
 
 import java.time.LocalDate;
@@ -42,16 +42,16 @@ public class Main {
 
     }
 
-    private static void save(familyTree tree){
+    private static void save(FamilyTree tree){
         String filePath = "src/my_family_tree/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(tree, filePath);
     }
 
-    private static familyTree load(){
+    private static FamilyTree load(){
         String filePath = "src/my_family_tree/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
-        familyTree tree = (familyTree) fileHandler.read(filePath);
+        FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
         return tree;
 
     }

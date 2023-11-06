@@ -6,15 +6,15 @@ import my_family_tree.human.comparators.HumanComparatorByYear;
 import java.io.Serializable;
 import java.util.*;
 
-public class familyTree <E extends TreeItem> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E> {
     private int humanId;
     private List<E> humanList;
 
-    public familyTree (){
+    public FamilyTree(){
         this(new ArrayList<>());
     }
 
-    public familyTree (List<E> humanList){
+    public FamilyTree(List<E> humanList){
         this.humanList = humanList;
     }
 
