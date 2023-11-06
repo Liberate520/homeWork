@@ -1,3 +1,4 @@
+package writer;
 import java.io.Serializable;
 
 public interface Writable {

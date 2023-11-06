@@ -1,9 +1,10 @@
+package human;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+public class Human implements Serializable, Comparable<Human>{
     private int id;
     private String name;
     private String surname;
@@ -82,5 +83,10 @@ public String getSurname() {
 
     public String toString() {
         return "id: " + id + ", name: " + name + ", surname: " + surname;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }

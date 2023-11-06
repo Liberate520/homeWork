@@ -1,17 +1,26 @@
+import human.Gender;
+import human.Human;
+import tree.FamilyTree;
+import writer.FileHandler;
+
 public class Main {
     public static void main(String[] args) {
-        // FamilyTree familyTree = new FamilyTree(1);
-        FamilyTree familyTree = load();
 
-        Human human1 = new Human("Виталий", "Иванов", Gender.Male);
-        Human human2 = new Human("Елена", "Иванова", Gender.Female);
+        Service service = new Service();
 
-        familyTree.addHuman(human1);
-        familyTree.addHuman(human2);
+        service.addHuman("Виталий", "Яванов", Gender.Male);
+        service.addHuman("Екатерина", "Иванова", Gender.Female);
+        service.addHuman("Анна", "Степанова", Gender.Female);
 
-        System.out.println(familyTree.getHumansInfo());
+        System.out.println(service);
+        service.sortByName();
+        System.out.println(service);
+        service.sortBySurname();
+        System.out.println(service);
 
-        write(familyTree);
+        write(service.getFamilyTree());
+
+        Service s2 = new Service(load());
     }
 
     private static void write(FamilyTree familyTree) {
