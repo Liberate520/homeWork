@@ -81,4 +81,4 @@ P.S. да, я знаю, что можно многими другими спос
 
 ```
 <br><br><br>
-![модель человека и дерева Family Tree](https://i.ibb.co/SRXhBsL/Family-Tree-pic-min.png)
+![модель человека и дерева Family Tree](https://i.ibb.co/0VsK7qT/Family-Tree-pic1.png)
