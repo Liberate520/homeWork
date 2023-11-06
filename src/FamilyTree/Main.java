@@ -1,29 +1,87 @@
 package FamilyTree;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
+import FamilyTree.KindOfAnimal.Gender;
+import FamilyTree.KindOfAnimal.Human;
 import FamilyTree.family_tree.FamilyTree;
-import FamilyTree.human.Gender;
-import FamilyTree.human.Human;
+import FamilyTree.family_tree.FamilyTreeItem;
 import FamilyTree.writer.FileHandler;
 
 
-public class Main {
+
+public class Main<T extends FamilyTreeItem> {
+
+    // public void startPrint(){
+    //         System.out.println("********************************MENU********************************");
+    //         System.out.println("*                                                                  *");
+    //         System.out.println("*                         Выберите действие                        *");
+    //         System.out.println("*                            Варианты:                             *");
+    //         System.out.println("*                 1 - Распечатать тестовое древо                   *");
+    //         System.out.println("*                 2 - Отсортировать древо по Имени                 *");
+    //         System.out.println("*                 3 - Отсортировать древо по дате рождения         *");
+    //         System.out.println("*                 4 -                                              *");
+    //         System.out.println("*                 5 -                                              *");
+    //         System.out.println("*                 6 -                                              *");
+    //         System.out.println("*                 0 - Выход                                        *");
+    //         System.out.println("********************************************************************");
+    // }
+    //     public void start() {
+    //     Scanner scanner = new Scanner(System.in);
+        
+    //     startPrint();
+    //     while (true) {
+    //         int command = scanner.nextInt();
+    //         if (command == 0) break;
+    //         else if (command == 1){
+    //             FamilyTree tree = testTree();
+    //             System.out. println(tree);
+                
+    //         }
+    //          else if (command == 2){
+    //             FamilyTree tree = testTree();
+    //             tree.sortByBirthDate();
+    //             System.out.println(tree.getInfo());
+    //         }
+    //         else if (command == 3){
+    //             FamilyTree tree = testTree();
+    //             tree.sortByBirthDate();
+    //             System.out.println(tree.getInfo());
+    //         }
+    //         else if (command == 4){
+
+    //         }
+    //         else if (command == 5){
+
+    //         }
+    //         else if (command == 6){
+                
+    //         }
+    //     }
+    // }
+
+    
+
     public static void main(String[] args) {
-        FamilyTree tree = testTree();
+        
+
+
+
+        //FamilyTree tree = testTree();
         // FamilyTree tree = load();
-        // System.out. println(tree);
+        //System.out. println(tree);
         //save(tree);
 
         // tree.sortByName(); // Сортировка по имени
         // System.out.println(tree.getInfo());
 
-        tree.sortByBirthDate();
-        System.out.println(tree.getInfo());
+        // tree.sortByBirthDate();
+        // System.out.println(tree.getInfo());
 
     }
 
-        private static FamilyTree load() {
+    private static FamilyTree load() {
         String filePath = "/Users/prosto/Desktop/OOP/oop_hw/src/FamilyTree/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
         FamilyTree tree = (FamilyTree) fileHandler.read(filePath);
@@ -71,8 +129,6 @@ public class Main {
         return tree;
 
     }
-
-
 }
 
 

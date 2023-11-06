@@ -3,13 +3,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import FamilyTree.human.Human;
-
-public class FamilyTreeIterator implements Iterator<Human> {
+public class FamilyTreeIterator<T> implements Iterator<T> {
     private int currentIndex;
-    private final List<Human> humanList;
+    private final List<T> humanList;
 
-    public FamilyTreeIterator(List<Human> humanList) {
+    public FamilyTreeIterator(List<T> humanList) {
         this.humanList = humanList;
         currentIndex = 0;
     }
@@ -20,7 +18,7 @@ public class FamilyTreeIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         if (hasNext()) {
             return humanList.get(currentIndex++);
         } else {

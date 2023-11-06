@@ -1,4 +1,4 @@
-package FamilyTree.human;
+package FamilyTree.KindOfAnimal;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,7 +6,8 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable{
+
+public class Human implements Serializable {
 
     private long id;
     private String name;
