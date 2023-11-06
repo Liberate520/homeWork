@@ -86,12 +86,12 @@ public class FamilyTree {
     }
     private void addToParents (Human human) {
         for (Human parent: human.getParents()) {
-            human.addChild(human);
+            parent.addChild(human);
         }
     }
     private void addToChildren (Human human) {
         for (Human child: human.getChildren()) {
-            human.addParent(human);
+            child.addParent(human);
         }
     }
     private boolean checkId (long id) {return id < humansId && id >= 0;}
