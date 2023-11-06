@@ -48,8 +48,20 @@
 ```
 [Публикация "Итераторы" интерфейс Iterable.](https://javarush.com/quests/lectures/questcollections.level07.lecture03)
 
-<br><br><br>
- #### ** Инструкция на то как сделать PR **
+<br><br>
+### Домашнее задание 3.
+
+```
+
+
+```
+
+<br><br>
+
+![модель человека и дерева Family Tree](https://i.ibb.co/8BWWyDj/Family-Tree-pic1min.png)
+
+<br>
+** Инструкция на то как сделать PR **
 
 ```
 Сделать fork проекта (делайте пожалуйста именно от этого проекта форк, 
@@ -80,5 +92,3 @@ P.S. да, я знаю, что можно многими другими спос
 
 
 ```
-<br><br><br>
-![модель человека и дерева Family Tree](https://i.ibb.co/8BWWyDj/Family-Tree-pic1min.png)
