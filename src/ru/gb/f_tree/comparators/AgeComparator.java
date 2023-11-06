@@ -1,11 +1,12 @@
 package ru.gb.f_tree.comparators;
 
-import java.util.Comparator;
-import ru.gb.f_tree.human.Human;
+import ru.gb.f_tree.human.Ageble;
 
-public class AgeComparator implements Comparator<Human> {
+import java.util.Comparator;
+
+public class AgeComparator<T extends Ageble> implements Comparator<T> {
     @Override
-    public int compare(Human human1, Human human2) {
-        return Integer.compare(human1.getAge(), human2.getAge());
+    public int compare(T obj1, T obj2) {
+        return Integer.valueOf(obj1.getAge()).compareTo(Integer.valueOf(obj2.getAge()));
     }
 }

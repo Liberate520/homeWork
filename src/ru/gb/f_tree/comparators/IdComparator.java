@@ -2,10 +2,13 @@ package ru.gb.f_tree.comparators;
 
 import java.util.Comparator;
 import ru.gb.f_tree.human.Human;
+import ru.gb.f_tree.human.Idable;
 
-public class IdComparator implements Comparator<Human> {
+import java.util.Comparator;
+
+public class IdComparator<T extends Idable> implements Comparator<T> {
     @Override
-    public int compare(Human human1, Human human2) {
-        return human1.getId().compareTo(human2.getId());
+    public int compare(T obj1, T obj2) {
+        return obj1.getId().compareTo(obj2.getId());
     }
 }

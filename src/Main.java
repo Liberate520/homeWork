@@ -15,21 +15,21 @@ public class Main {
 
 
         // Создаем некоторых людей
-        Human willSmith = familyTreeService.addNewToFamily("Smith", "Will", Gender.Male);
+        Human willSmith = (Human) familyTreeService.addNewToFamily("Smith", "Will", Gender.Male);
         willSmith.setBirthday(LocalDate.of(1968, 9, 25));
 
 
-        Human jadaPinkett = familyTreeService.addNewToFamily("Pinkett", "Jada", Gender.Female);
+        Human jadaPinkett = (Human) familyTreeService.addNewToFamily("Pinkett", "Jada", Gender.Female);
         jadaPinkett.setBirthday(LocalDate.of(1971, 9, 18));
 
 
         willSmith.setSpouse(jadaPinkett);
 
-        Human jadenSmith = familyTreeService.addNewToFamily("Smith", "Jaden", Gender.Male);
+        Human jadenSmith = (Human) familyTreeService.addNewToFamily("Smith", "Jaden", Gender.Male);
         jadenSmith.setBirthday(LocalDate.of(1998, 7, 8));
 
 
-        Human willowSmith = familyTreeService.addNewToFamily("Smith", "Willow", Gender.Female);
+        Human willowSmith = (Human) familyTreeService.addNewToFamily("Smith", "Willow", Gender.Female);
         willowSmith.setBirthday(LocalDate.of(2000, 10, 31));
 
 
@@ -40,28 +40,28 @@ public class Main {
 
         // Вывод информации о семье Smith
         System.out.println(familyTreeService);
-        familyTreeService.sortFamilyMembersById();
+        familyTreeService.sortFamilyMembers();
         System.out.println(familyTreeService);
-        familyTreeService.sortFamilyMembersByFullName();
+        familyTreeService.sortFamilyMembers();
         System.out.println(familyTreeService);
-        familyTreeService.sortFamilyMembersByAge();
+        familyTreeService.sortFamilyMembers();
         System.out.println(familyTreeService);
 
 
         // Создаем еще одну семью "Jones"
         FamilyTreeService familyTreeService1 = new FamilyTreeService("Jones");
 
-        Human tomJones = familyTreeService1.addNewToFamily("Jones", "Tom", Gender.Male);
+        Human tomJones = (Human) familyTreeService1.addNewToFamily("Jones", "Tom", Gender.Male);
         tomJones.setBirthday(LocalDate.of(1940, 6, 7));
 
 
-        Human priscillaJones = familyTreeService1.addNewToFamily("Jones", "Priscilla", Gender.Female);
+        Human priscillaJones = (Human) familyTreeService1.addNewToFamily("Jones", "Priscilla", Gender.Female);
         priscillaJones.setBirthday(LocalDate.of(1945, 5, 24));
 
 
         tomJones.setSpouse(priscillaJones);
 
-        Human elvisJones = familyTreeService1.addNewToFamily("Jones", "Elvis", Gender.Male);
+        Human elvisJones = (Human) familyTreeService1.addNewToFamily("Jones", "Elvis", Gender.Male);
         elvisJones.setBirthday(LocalDate.of(1971, 3, 15));
 
 
@@ -70,11 +70,11 @@ public class Main {
 
         //  Вывод информации о семье Jones
         System.out.println(familyTreeService1);
-        familyTreeService.sortFamilyMembersById();
+        familyTreeService.sortFamilyMembers();
         System.out.println(familyTreeService1);
-        familyTreeService.sortFamilyMembersByFullName();
+        familyTreeService.sortFamilyMembers();
         System.out.println(familyTreeService1);
-        familyTreeService.sortFamilyMembersByAge();
+        familyTreeService.sortFamilyMembers();
         System.out.println(familyTreeService);
 
         }

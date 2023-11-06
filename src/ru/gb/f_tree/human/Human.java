@@ -1,13 +1,19 @@
 package ru.gb.f_tree.human;
 
+import ru.gb.f_tree.f_mem.FamilyMember;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
-public class Human implements Serializable {
+import static java.time.Period.between;
+
+public class Human implements Serializable, FamilyMember, Nameble {
     private final UUID id;
     private final String lastname;
     private final String name;
@@ -27,24 +33,17 @@ public class Human implements Serializable {
         this.children = new ArrayList<>();
     }
 
-    public int getAge() {
-        if (this.deathday == null) {
-            return Period.between(this.birthday, LocalDate.now()).getYears();
-        } else {
-            return Period.between(this.birthday, this.deathday).getYears();
-        }
+
+    public String getAge() {
+        return String.valueOf(between(this.birthday, Objects.requireNonNullElseGet(this.deathday, LocalDate::now)).getYears());
+    }
+
+    private int toString(int years) {
+        return years;
     }
 
     public UUID getId() {
         return id;
-    }
-
-    public String getFullName() {
-        return this.lastname + " " + this.name;
-    }
-
-    public List<Human> getParents() {
-        return parents;
     }
 
     public List<Human> getChildren() {
@@ -78,5 +77,19 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         return "Фамилия: " + lastname + ", имя: " + name;
+    }
+    @Override
+    public String getName() {
+        return getFullName();
+    }
+
+    @Override
+    public String getFullName() {
+        return null;
+    }
+
+    @Override
+    public List<FamilyMember> getParents() {
+        return parents.stream().map(parent -> (FamilyMember) parent).collect(Collectors.toList());
     }
 }

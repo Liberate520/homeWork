@@ -1,11 +1,13 @@
 package ru.gb.f_tree.comparators;
 
         import java.util.Comparator;
-        import ru.gb.f_tree.human.Human;
+        import ru.gb.f_tree.human.Nameble;
 
-public class FullNameComparator implements Comparator<Human> {
+        import java.util.Comparator;
+
+public class FullNameComparator<T extends Nameble> implements Comparator<T> {
     @Override
-    public int compare(Human human1, Human human2) {
-        return human1.getFullName().compareTo(human2.getFullName());
+    public int compare(T obj1, T obj2) {
+        return obj1.getName().compareTo(obj2.getName());
     }
 }
