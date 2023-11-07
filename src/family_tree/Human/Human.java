@@ -67,12 +67,6 @@ public class Human implements Iterable, Serializable {
         return firstName;
     }
 
-    @Override
-    public void setId(double v) {
-
-    }
-
-
     public String getFondation() {
         if (fondation.equals(Fondation.Non_formal)){
             return "начальное";
@@ -107,7 +101,6 @@ public class Human implements Iterable, Serializable {
         };
         return null;
     }
-
 
     public String getSocialPosition() {
         if (socialPosition.equals(SocialPosition.Married)){
@@ -149,7 +142,14 @@ public class Human implements Iterable, Serializable {
     }
 
 
+    @Override
+    public void setId(double v) {
+    }
 
+    @Override
+    public double setId() {
+        return id;
+    }
 
 
 

@@ -2,14 +2,12 @@ package family_tree.family_tree;
 
 import family_tree.base.Iterable;
 import family_tree.human.Human;
-import family_tree.base.Iterable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Iterable {
     public String lastName;
     public String firstName;
-
     private double Id;
     private final List<Human> humanList;
 
@@ -56,6 +54,11 @@ public class FamilyTree implements Iterable {
     @Override
     public void setId(double id) {
 
+    }
+
+    @Override
+    public double setId() {
+        return 0;
     }
 
 

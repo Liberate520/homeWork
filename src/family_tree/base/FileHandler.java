@@ -19,7 +19,7 @@ public class FileHandler {
         Human human9 = new Human("Малинович", "Анна Борисовна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal,5000.0, LocalDate.of(2013, 3, 5), 0.009);
         Human human10 = new Human("Малинович", "Марианна Борисовна", Gender.Female, Position.Child, SocialPosition.Not_married, Fondation.Non_formal,1000.0, LocalDate.of(2020, 8, 12), 0.010);
         Human human11 = new Human("Крылова", "Сабина Сергеевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal,12000.0, LocalDate.of(2010, 4, 24), 0.011);
-        Human human12 = new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Formal,12000.0, LocalDate.of(1975, 11, 29), 0.012);
+        Human human12 = new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Married, Fondation.Formal,12000.0, LocalDate.of(1975, 11, 29), 0.012);
 
 
         String filePath = "homeWork/src/family_tree.txt";

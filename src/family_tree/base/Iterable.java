@@ -5,9 +5,10 @@ public interface Iterable {
 
     String getLastName();
 
-
     String getFirstName();
 
-    void setId(double v);
 
+    void setId(double id);
+
+    double setId();
 }
