@@ -5,6 +5,8 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = tree();
+//        FamilyTree tree = load();
+//        System.out.println(tree);
 
         System.out.println(familyTree.familyTreeInfo());
         save(familyTree);
