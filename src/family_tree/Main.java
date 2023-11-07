@@ -18,6 +18,8 @@ public class Main {
             System.out.println(tree);
             tree.sortByName();
             System.out.println(tree);
+            tree.sortByBirth();
+            System.out.println(tree);
         }
         else {
             System.out.println("File not exist");

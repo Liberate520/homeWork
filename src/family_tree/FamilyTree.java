@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree implements Serializable, Iterable<Human> {
-    static final long serialVersionUID = 1L;
     private long humanId;
 
     public List<Human> getHumanList() {
@@ -99,6 +98,10 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public void sortByName(){
         humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByBirth(){
+        humanList.sort(new HumanComparatorByBirth());
     }
 
     @Override
