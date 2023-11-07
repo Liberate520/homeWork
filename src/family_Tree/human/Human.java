@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
 
     private int id;
     private String name;
@@ -16,24 +16,18 @@ public class Human implements Serializable {
     private Human father, mother;
     private List<Human> children;
 
-    public Human(String name, LocalDate dateOfBirth, LocalDate dateOfDeath, Gender gender,
-                 Human father, Human mother) {
-        id = -1;
+    public Human(int id, String name, LocalDate dateOfBirth, Gender gender, Human mother, Human father) {
+        this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
         this.gender = gender;
         this.father = father;
         this.mother = mother;
         children = new ArrayList<>();
     }
 
-    public Human(String name, LocalDate dateOfBirth, Gender gender) {
-        this(name, dateOfBirth, null, gender, null, null);
-    }
-
-    public Human(String name, LocalDate dateOfBirth, Gender gender, Human father, Human mother) {
-        this(name, dateOfBirth, null, gender, father, mother);
+    public Human(int id, String name, LocalDate dateOfBirth, Gender gender) {
+        this(id, name, dateOfBirth, gender, null, null);
     }
 
     public void setId(int id) {
@@ -121,7 +115,7 @@ public class Human implements Serializable {
     }
 
     public String getChildrenInfo() {
-        StringBuilder res = new StringBuilder("дети: ");
+        StringBuilder res = new StringBuilder();
         res.append("дети: ");
         if (!children.isEmpty()) {
             res.append(children.get(0).getName());
@@ -152,7 +146,7 @@ public class Human implements Serializable {
         return true;
     }
 
-        public List<Human> getParents () {
+    public List<Human> getParents () {
         List<Human> list = new ArrayList<>(2);
         if(father != null){
             list.add(father);
@@ -168,9 +162,8 @@ public class Human implements Serializable {
             return Integer.toString(getPeriod(this.dateOfBirth, LocalDate.now()));
         }
         else {
-            StringBuilder stringBuilder = new StringBuilder(this.name);
-            stringBuilder.append(" ").append(this.name).append(" умер(ла) в ");
-            stringBuilder.append(getPeriod(this.dateOfBirth, this.dateOfDeath));
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("умер(ла) в ").append(getPeriod(this.dateOfBirth, this.dateOfDeath));
             return stringBuilder.toString();
         }
     }
@@ -216,5 +209,10 @@ public class Human implements Serializable {
     @Override
     public String toString(){
         return getInfo();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }

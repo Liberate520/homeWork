@@ -1,33 +1,30 @@
 package family_Tree.familyTree;
 
 import family_Tree.human.Human;
+import family_Tree.human.comparators.HumanComparatorByAge;
+import family_Tree.human.comparators.HumanComparatorById;
+import family_Tree.human.comparators.HumanComparatorByName;
+import family_Tree.writer.FileHandler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private List<Human> humanList;
-    private int humanId;
+public class FamilyTree implements Serializable, Iterable<Human> {
+    private static List<Human> humanList;
+//    private int humanId;
+
     public FamilyTree(){
-        this(new ArrayList<>());
+        humanList = new ArrayList<>();
     }
+
     public FamilyTree(List<Human> humanList){
         this.humanList = humanList;
     }
 
-
-    public boolean addHuman(Human human){
-        if(human == null){
-            return false;
-        }
-        if (!humanList.contains(human)){
-            humanList.add(human);
-            human.setId(humanId++);
-
-            return true;
-        }
-        return false;
+    public void addHuman(Human human){
+        humanList.add(human);
     }
 
     public Human getById (int id) {
@@ -65,7 +62,7 @@ public class FamilyTree implements Serializable {
         return res;
     }
 
-    public String getInfo() {
+    public static String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
         sb.append((humanList.size()));
@@ -80,6 +77,23 @@ public class FamilyTree implements Serializable {
     @Override
     public String toString(){
         return getInfo();
+    }
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge(){
+        humanList.sort(new HumanComparatorByAge());
+    }
+
+    public void sortById(){
+        humanList.sort(new HumanComparatorById());
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
     }
 
 }
