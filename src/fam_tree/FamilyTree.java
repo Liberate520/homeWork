@@ -1,69 +1,37 @@
 package fam_tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
+    private List<Human> humanList = new ArrayList<>();
+    private int humanId = 1;
 
-    private long humansId;
-
-    public List<Human> getHumanList() {
-        return humanList;
-    }
-
-    public void setHumanList(List<Human> humanList) {
-        this.humanList = humanList;
-    }
-
-    private List<Human> humanList;
-
-
-    public FamilyTree() {
-        this(new ArrayList<>());
-    }
-
-
-
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
-    }
-
-    public long getHumansId() {
-        return humansId;
-    }
-
-    public void setHumansId(long humansId) {
-        this.humansId = humansId;
-    }
-
-    @Override
-    public String toString() {
-        return "FamilyTree{" +
-                "humansId=" + humansId +
-                ", humanList=" + humanList +
-                '}';
-    }
-
-    public boolean add(Human human) {
-        if (human == null) {
-            return false;
-        }
+    public void addFamilyTree(Human human) {
         if (!humanList.contains(human)) {
+            human.setId(humanId++);
             humanList.add(human);
-            human.addChild(humansId);
-
-            addToParents(human);
+            addToParrents(human);
             addToChildren(human);
-
-            return true;
-
+        }}
+    public void addToParrents(Human human){
+        for (Human parent: human.getParrent()){
+            parent.addChildren(human);
         }
-        return false;
+    }
+    public void addToChildren(Human human){
+        for (Human child: human.getChildren()){
+            child.addParent(human);
+        }
     }
 
-    private void addToChildren(Human human) {
-    }
-
-    private void addToParents(Human human) {
+    public String familyTreeInfo () {
+        StringBuilder sb = new StringBuilder();
+        for (Human human : humanList) {
+            sb.append(human);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
