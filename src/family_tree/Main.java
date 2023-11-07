@@ -14,6 +14,9 @@ public class Main {
 
         if (isFileExists(filePath)){
             FamilyTree tree = load(filePath);
+
+            System.out.println(tree);
+            tree.sortByName();
             System.out.println(tree);
         }
         else {

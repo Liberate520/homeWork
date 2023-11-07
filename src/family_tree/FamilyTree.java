@@ -1,13 +1,16 @@
 package family_tree;
 
-import family_tree.writer.Writeable;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
+    static final long serialVersionUID = 1L;
     private long humanId;
+
+    public List<Human> getHumanList() {
+        return humanList;
+    }
+
     private List<Human> humanList;
 
     public FamilyTree(){
@@ -90,11 +93,21 @@ public class FamilyTree implements Serializable {
             info.append("\n");
         }
 
+
         return info.toString();
+    }
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
     }
 
     @Override
     public String toString(){
         return getData();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(humanList);
     }
 }
