@@ -100,8 +100,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         humanList.sort(new HumanComparatorByName());
     }
 
-    public void sortByBirth(){
-        humanList.sort(new HumanComparatorByBirth());
+    public void sortByAge(){
+        humanList.sort(new HumanComparatorByAge());
     }
 
     @Override

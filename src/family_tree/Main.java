@@ -14,20 +14,21 @@ public class Main {
 
         if (isFileExists(filePath)){
             FamilyTree tree = load(filePath);
-
+            System.out.println("\nOriginal tree:");
             System.out.println(tree);
+            System.out.println("\nSort by name:");
             tree.sortByName();
             System.out.println(tree);
-            tree.sortByBirth();
+            System.out.println("\nSort by age:");
+            tree.sortByAge();
             System.out.println(tree);
         }
         else {
             System.out.println("File not exist");
-        };
-
-//        FamilyTree tree = familyTree();
-//        System.out.println(tree);
-//        save(tree, filePath);
+//            FamilyTree tree = familyTree();
+//            System.out.println(tree);
+//            save(tree, filePath);
+        }
     }
 
     private static void save(FamilyTree tree, String filePath) {
