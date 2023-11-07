@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Human implements Serializable {
     private int id;
@@ -76,12 +77,7 @@ public class Human implements Serializable {
         return gender;
     }
     public int getAge(){
-        if(deathDay == null){
-            return getPeriod(birthDay, LocalDate.now());
-        }
-        else{
-            return getPeriod(birthDay,deathDay);
-        }
+        return getPeriod(birthDay, Objects.requireNonNullElseGet(deathDay, LocalDate::now));
     }
 
     private int getPeriod(LocalDate birthDay, LocalDate deathDay) {

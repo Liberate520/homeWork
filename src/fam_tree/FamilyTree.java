@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    private List<Human> humanList = new ArrayList<>();
+    private final List<Human> humanList = new ArrayList<>();
     private int humanId = 1;
 
     public void addFamilyTree(Human human) {

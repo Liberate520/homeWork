@@ -3,7 +3,7 @@ package fam_tree;
 import java.io.*;
 
 
-public class FileHandler {
+public class FileHandler implements Writable{
 
     public void save(Serializable serializable, String filePath){
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
