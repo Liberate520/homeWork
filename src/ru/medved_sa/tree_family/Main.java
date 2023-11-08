@@ -12,9 +12,10 @@ public class Main {
 
         FamilyTree familyTreeList = getFamilyTreeTest();
 
-        save(familyTreeList);
 
+        save(familyTreeList);
         FamilyTree familyTreeRead = read();
+
 
         System.out.println(getHumanListInfoIterator(familyTreeRead));
 
@@ -27,15 +28,6 @@ public class Main {
 
 
 
-
-    /**
-     * Я понимаю, что сущность familyTreeRead передаваемая в это метод сама является List и не требует реализации
-     * iterator. Предположим, что сущность familyTreeRead была создана от стороннего класса, как в примере из работы
-     * со Student, от класса Service. В этом случае была бы возможность пройти по списку методом foreach, т.к.
-     * класс FamilyTree подписан на интерфейс Iterable<Human>, реализован метод iterator() для реализации которого
-     * создан класс HumanIterator от интерфейса Iterator<Human>, в котором переопределены и реализованы методы
-     * hasNext и next.
-     */
     private static String getHumanListInfoIterator(FamilyTree familyList) {
         StringBuilder sb = new StringBuilder();
         sb.append("Список студентов через iterator:\n");
@@ -47,13 +39,13 @@ public class Main {
     }
 
     private static FamilyTree read(){
-        FileHandlerService service = new FileHandlerService();
-         return (FamilyTree) service.readFile();
+        FileHandlerService fileHandler = new FileHandlerService();
+         return (FamilyTree) fileHandler.readFile();
     }
 
     private static void save(FamilyTree familyTreeForPreservation) {
-        FileHandlerService service = new FileHandlerService();
-        service.saveFile(familyTreeForPreservation);
+        FileHandlerService fileHandler = new FileHandlerService();
+        fileHandler.saveFile(familyTreeForPreservation);
     }
 
 
