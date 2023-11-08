@@ -3,6 +3,8 @@ package family_tree.family_tree;
 import family_tree.base.Iterable;
 import family_tree.human.Human;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class FamilyTree implements Iterable {
@@ -10,29 +12,28 @@ public class FamilyTree implements Iterable {
     public String firstName;
     private double Id;
     private final List<Human> humanList;
+    double income;
 
 
     public FamilyTree(double id) {
         humanList = new ArrayList<>();
-
     }
 
     public void addHuman(Human human){
         human.setId(Id++);
         humanList.add(human);
-
     }
 
-    public String getRelativeInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список :\n");
-        for (Human human: humanList){
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-
-    }
+//    public String getRelativeInfo(){
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append("Список :\n");
+//        for (Human human: humanList){
+//            stringBuilder.append(human);
+//            stringBuilder.append("\n");
+//        }
+//        return stringBuilder.toString();
+//
+//    }
 
     public void sortByLastName(){
         FamilyTree familyTree = null;
@@ -42,7 +43,7 @@ public class FamilyTree implements Iterable {
 
     @Override
     public String getLastName() {
-        return null;
+        return lastName;
     }
 
 
@@ -59,6 +60,13 @@ public class FamilyTree implements Iterable {
     @Override
     public double setId() {
         return 0;
+    }
+
+
+
+    @Override
+    public double getIncome() {
+        return income;
     }
 
 

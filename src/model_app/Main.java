@@ -1,8 +1,8 @@
 package model_app;
 
-import java.io.*;
-import family_tree.base.FileHandler;
 
+
+import java.io.*;
 import static family_tree.base.FileHandler.FileHandlerForFamilyTree;
 
 
@@ -18,6 +18,8 @@ public class Main {
         FileHandlerForFamilyTree();
         System.out.println("                    FAMILY TREE");
         System.out.println("===============================");
+
+
     }
 
 

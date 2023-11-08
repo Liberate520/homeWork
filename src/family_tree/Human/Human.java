@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
-public class Human implements Iterable, Serializable {
+public class Human implements Comparable<Human>, Iterable, Serializable {
     private final String lastName;
     private final String firstName;
     private final Gender gender;
@@ -16,7 +16,6 @@ public class Human implements Iterable, Serializable {
     private final Position position;
     private final SocialPosition socialPosition;
     private final double income;
-
     private LocalDate birthDate;
     private LocalDate deathDate;
     private final double id;
@@ -68,12 +67,15 @@ public class Human implements Iterable, Serializable {
     }
 
     public String getFondation() {
+        Object o = null;
         if (fondation.equals(Fondation.Non_formal)){
             return "начальное";
         } else if (fondation.equals(Fondation.Formal)) {
             return "степень";
         } else if (fondation.equals(Fondation.Informal)) {
             return "профессиональное";
+        } else if (fondation.equals(Fondation.Null)) {
+            return "данные отсутствуют";
         };
         return null;
     }
@@ -89,6 +91,8 @@ public class Human implements Iterable, Serializable {
             return "дочь";
         } else if (position.equals(Position.Child)) {
             return "ребёнок";
+        } else if (position.equals(Position.Null)) {
+            return "данные отсутствуют";
         };
         return null;
     }
@@ -107,6 +111,8 @@ public class Human implements Iterable, Serializable {
             return "в браке";
         } else if (socialPosition.equals(SocialPosition.Not_married)) {
             return "не в браке";
+        } else if (socialPosition.equals(SocialPosition.Null)) {
+            return "данные отсутствуют";
         };
         return null;
     }
@@ -143,15 +149,27 @@ public class Human implements Iterable, Serializable {
 
 
     @Override
-    public void setId(double v) {
-    }
+    public void setId(double v) {  }
 
     @Override
     public double setId() {
         return id;
     }
 
+    @Override
+    public int compareTo(Human other) {
+        int result;
+        result = this.firstName.compareToIgnoreCase(other.firstName);
+        if(result == 0) {
+            result = this.lastName.compareToIgnoreCase(other.lastName);
+        }
+        return result;
+    }
 
+    @Override
+    public double getIncome() {
+        return income;
+    }
 
 }
 
