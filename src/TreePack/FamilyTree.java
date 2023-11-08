@@ -1,14 +1,13 @@
-package Tree;
+package TreePack;
 
-import Comporators.PersonComparatorByAge;
-import Comporators.PersonComparatorByChildren;
+import PersonPack.ComporatorsPack.PersonComparatorByAge;
+import PersonPack.ComporatorsPack.PersonComparatorByChildren;
+import PersonPack.Person;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class FamilyTree implements Serializable, Iterable<Person> {
     private HashMap<Integer, Person> personList;

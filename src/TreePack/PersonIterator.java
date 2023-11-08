@@ -1,9 +1,10 @@
-package Tree;
+package TreePack;
+
+import PersonPack.Person;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class PersonIterator implements Iterator<Person> {
     private HashMap<Integer, Person> personList;

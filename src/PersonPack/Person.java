@@ -1,9 +1,8 @@
-package Tree;
+package PersonPack;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Person implements Serializable {
     private String name;
@@ -29,7 +28,7 @@ public class Person implements Serializable {
         this.parent2 = parent2;
     }
 
-    void addChild(Person child){
+    public void addChild(Person child){
         this.children.add(child);
     }
 

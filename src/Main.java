@@ -1,12 +1,9 @@
-import Tree.FamilyTree;
-import Tree.Gender;
-import Tree.Person;
-import Utils.StorageTree;
+import TreePack.FamilyTree;
+import PersonPack.Gender;
+import PersonPack.Person;
+import UtilsPack.StorageTree;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -44,8 +41,8 @@ public class Main {
         //newTree.sortByAge();
 
         //Раскомментировать если надо проверить сортировку по количеству детей
-        //System.out.println("по детям:");
-        //newTree.sortByChildren();
+        System.out.println("по детям:");
+        newTree.sortByChildren();
 
 
 //Раскомментировать, если надо проверить итератор

@@ -1,8 +1,7 @@
-package Comporators;
+package PersonPack.ComporatorsPack;
 
-import Tree.Person;
+import PersonPack.Person;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Map;
 
