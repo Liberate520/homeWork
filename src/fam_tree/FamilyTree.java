@@ -8,6 +8,15 @@ public class FamilyTree implements Serializable {
     private final List<Human> humanList = new ArrayList<>();
     private int humanId = 1;
 
+    public static void sortByName() {
+    }
+
+    public static void sortByAge() {
+    }
+
+    public static void sortById() {
+    }
+
     public void addFamilyTree(Human human) {
         if (!humanList.contains(human)) {
             human.setId(humanId++);

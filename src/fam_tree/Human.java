@@ -166,4 +166,8 @@ public class Human implements Serializable {
         }
         return human.getId() == getId();
     }
+
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
+    }
 }

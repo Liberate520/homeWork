@@ -41,4 +41,16 @@ public class Main {
 
         return familyTree;
     }
+
+    public void sortByName(){
+        FamilyTree.sortByName();
+    }
+
+    public void sortByAge(){
+        FamilyTree.sortByAge();
+    }
+
+    public void sortById(){
+        FamilyTree.sortById();
+    }
 }
