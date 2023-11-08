@@ -17,11 +17,10 @@ public class Person implements Serializable {
         this.name = name;
         this.gender = gender;
         this.birthDate = LocalDate.parse(date);
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Введите дату в формате yyyy-mm-dd");
-//        this.birthDate = LocalDate.parse(sc.nextLine());
     }
-
+    public LocalDate getBirthDate(){
+        return this.birthDate;
+    }
     public void setParent1(Person parent1){
         this.parent1 = parent1;
     }

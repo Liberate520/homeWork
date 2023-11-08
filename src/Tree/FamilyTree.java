@@ -1,10 +1,16 @@
 package Tree;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import Comporators.PersonComparatorByAge;
+import Comporators.PersonComparatorByChildren;
 
-public class FamilyTree implements Serializable {
+import java.io.Serializable;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.function.Consumer;
+
+public class FamilyTree implements Serializable, Iterable<Person> {
     private HashMap<Integer, Person> personList;
     private int personId = 0;
     public FamilyTree() {
@@ -34,15 +40,27 @@ public class FamilyTree implements Serializable {
         for (Map.Entry<Integer, Person> item : personList.entrySet()){
             tmp.append(item.getValue().toString());
             tmp.append("\n");
-            //System.out.println(item.getValue().toString());
         }
+
         return tmp.toString();
     }
 
-//    public void printTree(){
-//        for (Map.Entry<Integer, Person> item : personList.entrySet()){
-//            System.out.println(item.getValue().toString());
-//        }
+//спросить что это такое!!!!!!!!
+//    @Override
+//    public void forEach(Consumer<? super Person> action) {
+//        Iterable.super.forEach(action);
 //    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonIterator(personList);
+    }
+    public void sortByAge(){
+        personList.entrySet().stream().sorted(new PersonComparatorByAge()).forEach(e -> System.out.println(e.getValue().toString()));
+    }
+
+    public void sortByChildren(){
+        personList.entrySet().stream().sorted(new PersonComparatorByChildren()).forEach(e -> System.out.println(e.getValue().toString()));
+    }
 
 }
