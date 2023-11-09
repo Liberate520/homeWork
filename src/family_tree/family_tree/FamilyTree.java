@@ -13,6 +13,7 @@ public class FamilyTree implements Iterable {
     private double Id;
     private final List<Human> humanList;
     double income;
+    private double id;
 
 
     public FamilyTree(double id) {
@@ -54,7 +55,7 @@ public class FamilyTree implements Iterable {
 
     @Override
     public void setId(double id) {
-
+        this.id = id;
     }
 
     @Override
@@ -68,6 +69,9 @@ public class FamilyTree implements Iterable {
     public double getIncome() {
         return income;
     }
+
+
+
 
 
 }
