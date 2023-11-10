@@ -3,11 +3,12 @@ package human.comparators;
 import java.util.Comparator;
 
 import human.Human;
+import tree.TreeItem;
 
-public class HumanComparatorBySurname implements Comparator<Human>{
+public class HumanComparatorBySurname<T extends TreeItem> implements Comparator<T>{
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getSurname().compareTo(o2.getSurname());
     }
 }

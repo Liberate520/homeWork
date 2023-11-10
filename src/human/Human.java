@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>{
+import tree.TreeItem;
+
+public class Human implements Serializable, Comparable<Human>, TreeItem{
     private int id;
     private String name;
     private String surname;
@@ -17,7 +19,7 @@ public class Human implements Serializable, Comparable<Human>{
     private Human spouse;
 
     public Human(String name, String surname, Gender gender) {
-        id = -1;
+        this.id = -1;
         this.name = name;
         this.surname = surname;
         this.gender = gender;

@@ -5,19 +5,19 @@ import tree.FamilyTree;
 
 public class Service {
     public final char[] getHumansListInfo = null;
-    private FamilyTree tree;
+    private FamilyTree <Human> tree;
     private HumanBuilder builder;
 
-    public FamilyTree getFamilyTree() {
+    public FamilyTree<Human> getFamilyTree() {
         return this.tree;
     }
 
     public Service() {
-        tree = new FamilyTree(0);
+        tree = new FamilyTree<>(0);
         builder = new HumanBuilder();
     }
 
-    public Service(FamilyTree tree) {
+    public Service(FamilyTree <Human> tree) {
         this.tree = tree;
         builder = new HumanBuilder();
     }
