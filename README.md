@@ -66,7 +66,7 @@
 
 <br><br>
 
-![модель Family Tree](https://i.ibb.co/FY9hmBn/fami-tree-grafics-min.jpg)
+![модель Family Tree](https://i.ibb.co/FY9hmBn/fami-tree-grafics-min.jpg "модель человек и дерево Family Tree")
 
 <br>
 
