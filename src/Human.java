@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
-    int id;
+public class Human implements Serializable, GroupItem {
+    private int id;
     private String name;
     private Gender gender;
     private LocalDate birthday;
@@ -30,6 +30,9 @@ public class Human implements Serializable {
         }
     }
 
+    public Integer getId(){
+        return id;
+    }
     public String getName(){
         return name;
     }

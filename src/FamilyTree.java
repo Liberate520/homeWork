@@ -3,37 +3,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human>{
-    private List<Human> familyTreeList = new ArrayList<>();
+public class FamilyTree<E extends GroupItem> implements Serializable, Iterable<E>{
+    private List<E> familyTreeList = new ArrayList<>();
 
-    public void addHuman(Human human){
+    public void addHuman(E human){
         familyTreeList.add(human);
     }
 
     public void getAllHuman(){
-        for (Human human: familyTreeList){
+        for (E human: familyTreeList){
             System.out.println(human.allInfo());
         }
     }
 
     public void getHuman(int id){
-        for (Human human: familyTreeList){
-            if(human.id == id){
+        for (E human: familyTreeList){
+            if(human.getId() == id){
                 System.out.println(human.allInfo());
             }
         }
     }
 
     public void sortByName(){
-        familyTreeList.sort(new TreeComparatorByName());
+        familyTreeList.sort(new TreeComparatorByName<>());
     }
 
     public void sortByBirthDay(){
-        familyTreeList.sort(new TreeComparatorByBirthDay());
+        familyTreeList.sort(new TreeComparatorByBirthDay<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(familyTreeList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(familyTreeList);
     }
 }
