@@ -39,7 +39,7 @@ public class FileHandler {
 
 //        String filePath = "homeWork/src/family_tree.txt";
         String filePath = "homeWork/src/model_app/family_tree.txt";
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath, true);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
         // Сериализуем объект
             for (Human human : humans) {
@@ -84,7 +84,7 @@ public class FileHandler {
         }
 
         System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
-        //  Сортировка списка по Возрасту
+        //  Сортировка списка по Доходам
         Collections.sort(humans, Comparator.comparing(Human::getIncome).reversed());
         for (Human human : humans) {
             System.out.println(human);
