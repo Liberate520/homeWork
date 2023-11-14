@@ -1,5 +1,6 @@
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 /**
  * Класс ГЕНЕОЛОГИЧЕССКОЕ ДЕРЕВО
  */
-public class FamalyTree {
+public class FamalyTree implements Serializable {
     private List<Human> listHuman = new ArrayList<>();
 
     /**
