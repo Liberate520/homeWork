@@ -1,4 +1,4 @@
-package my_family_tree.writer;
+package my_family_tree.model.writer;
 
 import java.io.*;
 

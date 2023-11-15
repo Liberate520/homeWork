@@ -1,9 +1,9 @@
-package my_family_tree.service;
+package my_family_tree.model.service;
 
-import my_family_tree.builder.HumanBuilder;
-import my_family_tree.human.Gender;
-import my_family_tree.human.Human;
-import my_family_tree.tree.FamilyTree;
+import my_family_tree.model.builder.HumanBuilder;
+import my_family_tree.model.human.Gender;
+import my_family_tree.model.human.Human;
+import my_family_tree.model.tree.FamilyTree;
 
 import java.time.LocalDate;
 

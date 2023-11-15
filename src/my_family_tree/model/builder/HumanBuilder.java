@@ -1,7 +1,7 @@
-package my_family_tree.builder;
+package my_family_tree.model.builder;
 
-import my_family_tree.human.Gender;
-import my_family_tree.human.Human;
+import my_family_tree.model.human.Gender;
+import my_family_tree.model.human.Human;
 
 import java.time.LocalDate;
 
