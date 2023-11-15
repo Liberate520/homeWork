@@ -1,3 +1,5 @@
+package family_tree.human;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +10,14 @@ public class Human {
     private String snils;
     private String fam;
     private String name;
+    private Gender gender;
     private LocalDate dr;
+    private LocalDate dead;
     private Human father;
     private Human mother;
     private List<Human> children = new ArrayList<>();
 
-    public Human(String snils, String fam, String name, LocalDate dr) {
+    public Human(String snils, String fam, String name, LocalDate dr, Gender gender) {
         //Делаем проверку, вдруг такой снилс уже есть
         for (String val:snilss
              ) {
@@ -24,7 +28,9 @@ public class Human {
         this.fam = fam;
         this.name = name;
         this.dr = dr;
+        this.gender = gender;
         snilss.add(snils);
+
 
     }
 
@@ -67,6 +73,7 @@ public class Human {
         return " СНИЛС -'" + snils + '\'' +
                 ", ФАМИЛИЯ -'" + fam + '\'' +
                 ", Имя - '" + name + '\'' +
-                ", Дата рождения - " + dr ;
+                ", Дата рождения - " + dr + '\'' +
+                ", пол - " + gender;
     }
 }

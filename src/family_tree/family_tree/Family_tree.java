@@ -1,7 +1,12 @@
+package family_tree.family_tree;
+
+import family_tree.human.Human;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Family_tree {
+public class Family_tree implements Serializable {
     private ArrayList<Human> family_tree;
 
     public Family_tree() {
