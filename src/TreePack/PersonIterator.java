@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class PersonIterator implements Iterator<Person> {
-    private HashMap<Integer, Person> personList;
+public class PersonIterator<E> implements Iterator<E> {
+    private HashMap<Integer, E> personList;
 
-    Iterator<Map.Entry<Integer, Person>> iterator;
-    public PersonIterator(HashMap<Integer, Person> personList) {
+    Iterator<Map.Entry<Integer, E>> iterator;
+    public PersonIterator(HashMap<Integer, E> personList) {
         this.personList = personList;
         this.iterator = personList.entrySet().iterator();
     }
@@ -21,7 +21,7 @@ public class PersonIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public E next() {
         return iterator.next().getValue();
     }
 }

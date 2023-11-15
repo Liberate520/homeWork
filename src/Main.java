@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FamilyTree tree = new FamilyTree();
+        FamilyTree<Person> tree = new FamilyTree<Person>();
         StorageTree storage = new StorageTree();
         String filepath = "tree.out";
 
@@ -29,20 +29,23 @@ public class Main {
         tree.setParent1(parent1_sibling,grandma);
 
 
-        System.out.println(tree.toString());
-        storage.writeTree(tree, filepath);
+        //System.out.println(tree.toString());
+        //storage.writeTree(tree, filepath);
 
-        FamilyTree newTree = storage.restoreTree(filepath);
+        //FamilyTree<Person> newTree = storage.restoreTree(filepath);
         //System.out.println(newTree.toString());
 
         //Уточнить, можно ли сохранить результат сортировки, чтобы потом его вывести как в примере с семинара
         //Раскомментировать если надо проверить сортировку по дате рождения
         //System.out.println("по дате:");
-        //newTree.sortByAge();
+        //System.out.println(tree.sortByAge());
+        for (String e : tree.sortByAge()) {
+            System.out.println(e);
+        }
 
         //Раскомментировать если надо проверить сортировку по количеству детей
-        System.out.println("по детям:");
-        newTree.sortByChildren();
+//        System.out.println("по детям:");
+//        tree.sortByChildren();
 
 
 //Раскомментировать, если надо проверить итератор

@@ -1,10 +1,12 @@
 package PersonPack;
 
+import TreePack.TreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Person implements Serializable {
+public class Person implements Serializable, TreeItem<Person> {
     private String name;
     private LocalDate birthDate;
     private Person parent1, parent2;
