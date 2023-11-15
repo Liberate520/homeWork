@@ -10,8 +10,9 @@ import java.time.LocalDate;
 
 public class Service {
 
-    public FamilyTree tree;
+    public FamilyTree<Human> tree;
     public TreeBuilder builder;
+
     public Service() {
         tree = new FamilyTree();
         builder = new TreeBuilder();
@@ -23,10 +24,10 @@ public class Service {
         fileHandler.save(tree, filePath);
     }
 
-    public static FamilyTree load(){
+    public void load(){
         FileHandler fileHandler = new FileHandler();
         String filePath = "src/family_Tree/writer/tree.txt";
-        return (FamilyTree) fileHandler.read(filePath);
+        tree = (FamilyTree) fileHandler.read(filePath);
     }
 
     public void sortByName(){
@@ -56,6 +57,6 @@ public class Service {
     }
 
     public void toPrint() {
-        System.out.println(FamilyTree.getInfo());
+        System.out.println(tree.getInfo());
     }
 }

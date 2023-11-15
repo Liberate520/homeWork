@@ -1,12 +1,14 @@
 package family_Tree.human;
 
+import family_Tree.familyTree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Human> {
 
     private int id;
     private String name;
@@ -168,7 +170,7 @@ public class Human implements Serializable, Comparable<Human> {
         }
     }
 
-    private int getPeriod(LocalDate start, LocalDate end){
+    public int getPeriod(LocalDate start, LocalDate end){
         Period difference = Period.between(start, end);
         return difference.getYears();
     }

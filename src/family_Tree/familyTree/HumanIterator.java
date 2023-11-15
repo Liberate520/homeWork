@@ -6,11 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<E extends FamilyTreeItem> implements Iterator<E> {
     public int index;
-    public List<Human> humanList;
+    public List<E> humanList;
 
-    public HumanIterator(List<Human> humanList) {
+    public HumanIterator(List<E> humanList) {
         this.humanList = humanList;
     }
 
@@ -20,7 +20,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return humanList.get(index);
     }
 
@@ -30,7 +30,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public void forEachRemaining(Consumer<? super Human> action) {
+    public void forEachRemaining(Consumer<? super E> action) {
         Iterator.super.forEachRemaining(action);
     }
 }
