@@ -8,7 +8,25 @@ public class FamilyTree implements Serializable {
     private final List<Human> humanList = new ArrayList<>();
     private int humanId = 1;
 
+    public FamilyTree(int humanId) {
+        this.humanId = humanId;
+    }
+
+    public FamilyTree() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "FamilyTree{" +
+                "humanList=" + humanList +
+                ", humanId=" + humanId +
+                '}';
+    }
+
     public static void sortByName() {
+        FamilyTree.sortByName();
+
     }
 
     public static void sortByAge() {

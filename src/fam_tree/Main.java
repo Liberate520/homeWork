@@ -38,9 +38,19 @@ public class Main {
         familyTree.addFamilyTree(inna);
         familyTree.addFamilyTree(valya);
         familyTree.addFamilyTree(leks);
+        familyTree.familyTreeInfo();
+        System.out.println(familyTree.familyTreeInfo());
+
+        System.out.println(familyTree);
+
+
+
+
 
         return familyTree;
     }
+
+
 
     public void sortByName(){
         FamilyTree.sortByName();
