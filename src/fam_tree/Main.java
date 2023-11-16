@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        Dogs dogs = new Dogs<>(tree());
+        dogs.getTree().toString();
         FamilyTree familyTree = tree();
 //        FamilyTree tree = load();
 //        System.out.println(tree);
