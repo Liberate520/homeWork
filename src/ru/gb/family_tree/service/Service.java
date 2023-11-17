@@ -5,6 +5,10 @@ import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 import ru.gb.family_tree.tree.FamilyTree;
 import ru.gb.family_tree.tree.TreeItem;
+import ru.gb.family_tree.writer.FIleHandler;
+
+import java.io.IOException;
+import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> tree;
@@ -30,6 +34,11 @@ public class Service {
 
     public String infoByID(int id) {
         return tree.infoById(id);
+    }
+
+    public void setBirthday(int id, int year, int month, int day) {
+        Human human = tree.findInTree(id);
+        human.setBirthday(LocalDate.of(year, month, day));
     }
 
     public String getInfoShort () {
@@ -70,5 +79,36 @@ public class Service {
     @Override
     public String toString() {
         return getInfoShort();
+    }
+
+    public void setDeathdate(int id, int year, int month, int day) {
+        Human human = tree.findInTree(id);
+        human.setDeathday(LocalDate.of(year, month, day));
+    }
+
+    public void addSpouse(int one, int two) {
+        Human first = tree.findInTree(one);
+        Human second = tree.findInTree(two);
+        first.setSpouse(second);
+    }
+
+    public void addChild(int parentId, int childId) {
+        Human parent = tree.findInTree(parentId);
+        Human child = tree.findInTree(childId);
+        parent.setChild(child);
+    }
+
+    public void load() {
+        FIleHandler fh = new FIleHandler();
+        try {
+            tree = (FamilyTree) fh.read("output.data");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void save() {
+        FIleHandler fh = new FIleHandler();
+        if (fh.write(tree, "output.data")) System.out.println("Данные успешно записаны");
     }
 }

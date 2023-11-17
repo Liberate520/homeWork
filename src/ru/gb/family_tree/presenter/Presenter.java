@@ -27,6 +27,11 @@ public class Presenter {
         view.printAnswer(service.infoByID(somebody.getId()));
     }
 
+    public void setBirthday(int id, int year, int month, int day) {
+        service.setBirthday(id, year, month, day);
+        view.printAnswer(service.infoByID(id));
+    }
+
     public void getBodyInfoById(int id) {
         view.printAnswer(service.infoByID(id));
     }
@@ -41,4 +46,31 @@ public class Presenter {
         view.printAnswer(service.getInfoShort());
     }
 
+    public void setDeathdate(int id, int year, int month, int day) {
+        service.setDeathdate(id, year, month, day);
+        view.printAnswer(service.infoByID(id));
+    }
+
+    public void addSpouse(int one, int two) {
+        service.addSpouse(one, two);
+        view.printAnswer(service.infoByID(one));
+    }
+
+    public void addChild(int parentId, int childId) {
+        service.addChild(parentId, childId);
+        view.printAnswer(service.infoByID(parentId));
+    }
+
+    public void sortByAge() {
+        service.sortByAge();
+        view.printAnswer(service.getInfoShort());
+    }
+
+    public void load() {
+        service.load();
+    }
+
+    public void save() {
+        service.save();
+    }
 }
