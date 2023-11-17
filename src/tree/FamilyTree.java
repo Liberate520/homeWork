@@ -1,14 +1,19 @@
 package tree;
+import human.Comparators.ComparatorByAge;
+import human.Comparators.ComparatorByLastname;
+import human.Comparators.ComparatorByName;
 import human.Human;
+import org.w3c.dom.ls.LSOutput;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree {
-    private final List< Human > FamilyList;
+public class FamilyTree implements Serializable, Iterable< Human > {
+    private List< Human > FamilyList;
     private int id = 1;
     public FamilyTree() {
         FamilyList = new ArrayList<>();
     }
-
     /**
      * Добавление человека в FamilyList с проверкой уникальности
      * @param human
@@ -22,7 +27,7 @@ public class FamilyTree {
      * Вывод в строках всех членов семьи с датами, родителями, детьми, возрастом, полом и ID, полученная при переборе элементов в FamilyList
      * @return Строка
      */
-    public String AllTree() {
+    public String allTree() {
         StringBuilder sb = new StringBuilder();
         sb.append("Вывод всех членов семьи\n").append("-".repeat(128)).append("\n");
         for (Human member: FamilyList) {
@@ -33,8 +38,11 @@ public class FamilyTree {
 
             if(member.getDayOfDeath()!=null) {
                 sb.append("Дата смерти: ");
-                sb.append(member.getAge());
+                sb.append(member.getDayOfDeath());
                 sb.append("; ");
+                sb.append("Возраст: ");
+                sb.append(member.getAge());
+                sb.append(" лет; ");
             }
             else {
                 sb.append("Возраст: ");
@@ -65,7 +73,13 @@ public class FamilyTree {
                 sb.append(member.getId());
                 sb.append(member.getFullName());
                 sb.append("; ");
+                sb.append(member.getDayOfBirth());
+                sb.append("; ");
+                sb.append(member.getAge());
+                sb.append("; ");
                 sb.append(member.getParents().replace("{", "").replace("}", ""));
+                sb.append("; ");
+                sb.append(member.getSpouse());
                 sb.append("; ");
                 sb.append(member.getChildren().replace("[", "").replace("]", ""));
                 sb.append("; ");
@@ -73,5 +87,30 @@ public class FamilyTree {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return allTree().replace("Вывод всех членов семьи", "Отсортированное древо: \n");
+    }
+
+    @Override
+    public Iterator< Human > iterator() {
+        return new HumanIterator(FamilyList);
+    }
+
+    public void sortByName(){
+        System.out.println("Сортировка по имени\n");
+        FamilyList.sort(new ComparatorByName());
+    }
+
+    public void sortByLastname(){
+        System.out.println("Сортировка по фамилии\n");
+        FamilyList.sort(new ComparatorByLastname());
+    }
+
+    public void sortByAge(){
+        System.out.println("Сортировка по возрасту\n");
+        FamilyList.sort(new ComparatorByAge());
     }
 }

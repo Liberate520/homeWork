@@ -1,34 +1,62 @@
 package human;
 import tree.FamilyTree;
+
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Human {
+public class Human implements Serializable {
     private int id;
-    private final String lastname;
-    private final String name;
+    private String lastname;
+    private String name;
     private LocalDate dayOfBirth;
     private LocalDate dayOfDeath;
-    private final Gender gender;
-    private final Map< String, String > parents;
-    private final List< Human > children;
+    private Gender gender;
+    private Map< String, Human > parents;
+    private List< Human > children;
     Human spouse;
 
-    public Human(FamilyTree family, String lastname, String name, LocalDate birthday, Gender gender) {
+    public Human(int id, String lastname, String name, LocalDate birthday, Gender gender) {
+        this.id = id;
         this.lastname = lastname;
         this.name = name;
         this.gender = gender;
-        this.parents = new HashMap<>();
+        this.parents = new HashMap< String, Human >();
         this.children = new ArrayList<>();
         setDayOfBirth(birthday);
-        family.addHuman(this);
     }
 
+    public Human(int id, String lastname, String name, Gender gender) {
+        this.id = id;
+        this.lastname = lastname;
+        this.name = name;
+        this.gender = gender;
+        this.parents = new HashMap< String, Human >();
+        this.children = new ArrayList< Human >();
+    }
+
+    public Human(int id, String lastname, String name, LocalDate birthday, LocalDate dayOfDeath, Gender gender, Human parent1, Human parent2) {
+        this.id = id;
+        this.lastname = lastname;
+        this.name = name;
+        this.gender = gender;
+        this.parents = new HashMap< String, Human >();
+        this.children = new ArrayList< Human >();
+        setDayOfBirth(birthday);
+        setDayOfDeath(dayOfDeath);
+        if (parent1 != null) {
+            setParent(parent1);
+        }
+        if (parent2 != null) {
+            setParent(parent2);
+        }
+    }
 
     //геттеры:
 
     /**
      * Получение значения ID
+     *
      * @return Строка вида 'ID.'
      */
     public String getId() {
@@ -37,6 +65,7 @@ public class Human {
 
     /**
      * Получение Имени
+     *
      * @return Строка Имя
      */
     public String getName() {
@@ -45,6 +74,7 @@ public class Human {
 
     /**
      * Получение фамилии
+     *
      * @return Строка Фамилия
      */
     public String getLastname() {
@@ -53,6 +83,7 @@ public class Human {
 
     /**
      * Получение "Имя Фамилия" из отдельных методов
+     *
      * @return Строка "Имя Фамилия"
      */
     public String getFullName() {
@@ -69,14 +100,11 @@ public class Human {
 
     /**
      * вычисление возраста для живущих, возврат даты смерти для умерших
+     *
      * @return число в строку - возраст или строка даты смерти
      */
-    public String getAge() {
-        if (this.dayOfDeath == null) {
-            return Integer.toString(Period.between(this.dayOfBirth, LocalDate.now()).getYears());
-        } else {
-            return String.valueOf(this.dayOfDeath);
-        }
+    public int getAge() {
+            return Period.between(this.dayOfBirth, LocalDate.now()).getYears();
     }
 
     public Gender getGender() {
@@ -85,25 +113,26 @@ public class Human {
 
     /**
      * Получение списка родителей в формате Мать=ААА, Отец=ВВВ
+     *
      * @return Стринг билдер в строку
      */
     public String getParents() {
         StringBuilder sb = new StringBuilder("Родители: ");
-        if (this.parents.isEmpty()){
+        if (this.parents.isEmpty()) {
             sb.append("Данных нет");
-        }
-        else{
+        } else {
             sb.append(this.parents);
         }
-        return sb.toString();
+        return sb.toString().replace("=", ": ");
     }
 
     /**
      * Получение списка детей в формате перечисления
+     *
      * @return Строка Дети: ААА, БББ, ВВВ
      */
     public String getChildren() {
-        if(this.children.isEmpty()){
+        if (this.children.isEmpty()) {
             return "Детей нет";
         }
         return "Дети: " + this.children;
@@ -111,10 +140,11 @@ public class Human {
 
     /**
      * Получение Имени и Фамилии супруга
+     *
      * @return Строка "Супруг: Фамилия Имя"
      */
     public String getSpouse() {
-        if(this.spouse == null){
+        if (this.spouse == null) {
             return "Не женат/замужем";
         }
         return "Супруг: " + this.spouse;
@@ -124,6 +154,7 @@ public class Human {
 
     /**
      * Установка ID
+     *
      * @param id
      */
     public void setId(int id) {
@@ -132,6 +163,7 @@ public class Human {
 
     /**
      * Установка супружества: супруг1.spouse(супруг2)
+     *
      * @param spouse
      */
     public void setSpouse(Human spouse) {
@@ -141,6 +173,7 @@ public class Human {
 
     /**
      * Установка дня рождения
+     *
      * @param dayOfBirth
      */
     public void setDayOfBirth(LocalDate dayOfBirth) {
@@ -149,6 +182,7 @@ public class Human {
 
     /**
      * Установка дня смерти
+     *
      * @param dayOfDeath
      */
     public void setDayOfDeath(LocalDate dayOfDeath) {
@@ -157,21 +191,26 @@ public class Human {
 
     /**
      * присвоение родителя человеку
+     *
      * @param human
      */
     private void setParent(Human human) {
         if (human.getGender() == Gender.Male) {
-            this.parents.put("Отец " , " " + human.getFullName());
+//            this.parents.put("Отец " , " " + human.getFullName());
+//            this.parents.put("Отец",  human);
+            this.parents.put("Отец", human);
         }
-        else this.parents.put("Мать " , " " + human.getFullName());
+//        else this.parents.put("Мать " , " " + human.getFullName());
+        else this.parents.put("Мать ", human);
     }
 
     /**
      * присвоение ребенка человеку
+     *
      * @param human
      */
     public void setChild(Human human) {
-        if(!children.contains(human)) {
+        if (!children.contains(human)) {
             this.children.add(human);
             human.setParent(this);
         }
@@ -179,10 +218,22 @@ public class Human {
 
     /**
      * Переопределенный toString
+     *
      * @return
      */
     @Override
     public String toString() {
-        return (lastname + " " + name);
+        return (lastname + " " + name + " " + dayOfBirth + " " + gender);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human human)) {
+            return false;
+        }
+        return Objects.equals(human.getId(), getId());
     }
 }
