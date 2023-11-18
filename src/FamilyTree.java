@@ -41,6 +41,7 @@ public class FamilyTree {
 
         return lifeSpanSum / this.familyTree.size();
     }
+    
     public double medianChildrenAmount() {
         double sumChildrenAmount = 0;
         for (Human person : this.familyTree) {
