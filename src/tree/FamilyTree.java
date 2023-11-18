@@ -2,6 +2,7 @@ package tree;
 import human.Comparators.ComparatorByAge;
 import human.Comparators.ComparatorByLastname;
 import human.Comparators.ComparatorByName;
+import human.Gender;
 import human.Human;
 import org.w3c.dom.ls.LSOutput;
 
@@ -89,6 +90,7 @@ public class FamilyTree<T extends FamilyTreeItem > implements Serializable, Iter
         }
         return sb.toString();
     }
+
 
     @Override
     public String toString() {

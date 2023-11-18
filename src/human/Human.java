@@ -195,7 +195,7 @@ public class Human implements Serializable, FamilyTreeItem {
      *
      * @param human
      */
-    private void setParent(Human human) {
+    public void setParent(Human human) {
         if (human.getGender() == Gender.Male) {
 //            this.parents.put("Отец " , " " + human.getFullName());
 //            this.parents.put("Отец",  human);
