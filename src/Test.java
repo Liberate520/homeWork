@@ -97,8 +97,8 @@ public class Test {
 
     }
 
-    private static FamilyTree<Human>load() {
-        FileHandler fileHandler = new FileHandler();
+    private static FamilyTree<Human> load() {
+        Writable fileHandler = new FileHandler();
         String filePath = "src/writer/tree.txt";
         return (FamilyTree) fileHandler.read(filePath);
     }

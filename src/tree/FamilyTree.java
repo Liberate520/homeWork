@@ -7,13 +7,16 @@ import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, Iterable< T > {
-    private List< T > familyList;
     private int id = 1;
-
+    private List< T > familyList;
     public FamilyTree() {
-
-        familyList = new ArrayList<>();
+//        familyList = new ArrayList<>();
+        this(new ArrayList<>());
     }
+    public FamilyTree(List< T> familyList) {
+        this.familyList=familyList;
+    }
+
     /**
      * Добавление человека в FamilyList с проверкой уникальности
      * @param human
