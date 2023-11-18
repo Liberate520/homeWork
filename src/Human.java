@@ -104,4 +104,28 @@ public class Human {
         LocalDate birthLocalDate = this.birthDate.toLocalDate();
         return Period.between(birthLocalDate, compareDate).getYears();  
     }
+
+    public List<String> getAllChildrensFullNames() {
+        List<String> childrenFullNames = new ArrayList<>();
+        for (Human child : this.children) {
+            childrenFullNames.add(child.getFirstName() + " " + child.getLastName());
+        }
+        return childrenFullNames;
+    }
+
+    public List<String> getAllChildrensFirstNames() {
+        List<String> childrenFirstNames = new ArrayList<>();
+        for (Human child : this.children) {
+            childrenFirstNames.add(child.getFirstName());
+        }
+        return childrenFirstNames;
+    }
+
+    public List<String> getAllChildrensLastNames() {
+        List<String> childrenLastNames = new ArrayList<>();
+        for (Human child : this.children) {
+            childrenLastNames.add(child.getLastName());
+        }
+        return childrenLastNames;
+    }
 }
