@@ -1,7 +1,7 @@
-import home_work_class.FamilyTree.FamilyTree;
-import home_work_class.FamilyTree.FileWriter;
-import home_work_class.Human.Gender;
-import home_work_class.Human.Human;
+import Model.home_work_class.FamilyTree.FamilyTree;
+import Model.home_work_class.FamilyTree.FileWriter;
+import Model.home_work_class.Human.Gender;
+import Model.home_work_class.Human.Human;
 
 import java.io.IOException;
 import java.time.LocalDate;
