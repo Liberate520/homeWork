@@ -1,11 +1,12 @@
 package human;
 import org.jetbrains.annotations.NotNull;
+import tree.FamilyTree;
 import tree.FamilyTreeItem;
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Human implements Serializable, FamilyTreeItem< Human > {
+public class Human implements Serializable, FamilyTreeItem< Human >, Comparable<Human> {
     private int id;
     private String lastname;
     private String name;
@@ -13,7 +14,7 @@ public class Human implements Serializable, FamilyTreeItem< Human > {
     private LocalDate dayOfDeath;
     private Gender gender;
     private Map< String, Human > parents;
-    private List< Human > children;
+    public List< Human > children;
     Human spouse;
 
     public Human(int id, String lastname, String name, LocalDate birthday, Gender gender) {
@@ -228,14 +229,7 @@ public class Human implements Serializable, FamilyTreeItem< Human > {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Human human)) {
-            return false;
-        }
-        return Objects.equals(human.getId(), getId());
+    public int compareTo(@NotNull Human o) {
+        return 0;
     }
-
 }
