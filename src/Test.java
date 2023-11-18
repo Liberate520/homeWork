@@ -14,7 +14,7 @@ public class Test {
          * загрузка из файла
          */
         FamilyTree< Human > myTree = new FamilyTree<>();
-//        FamilyTree<Human> myTree = load();
+//        myTree = load();
 
         Human human1 = new Human(1, "Кузнецов", "Владислав", LocalDate.of(1983, 5, 1), Gender.Male);
         Human human2 = new Human(2, "Березянская", "Ольга", LocalDate.of(1989, 2, 20), Gender.Female);

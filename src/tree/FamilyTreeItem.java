@@ -3,11 +3,12 @@ package tree;
 import human.Gender;
 import human.Human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 
-public interface FamilyTreeItem<T> extends Comparable<T> {
+public interface FamilyTreeItem<T> extends Serializable {
     public void setSpouse(T spouse);
     public void setId(int id);
     public void setDayOfBirth(LocalDate dayOfBirth);
