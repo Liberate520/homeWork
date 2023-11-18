@@ -8,11 +8,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class FamilyTree implements Iterable {
-    public String lastName;
-    public String firstName;
+    private String lastName;
+    private String firstName;
     private double Id;
     private final List<Human> humanList;
-    double income;
+    private double income;
     private double id;
 
 

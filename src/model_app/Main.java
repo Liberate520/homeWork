@@ -18,6 +18,7 @@ public class Main {
         FileHandlerForFamilyTree();
         System.out.println("                    FAMILY TREE");
         System.out.println("===============================");
+        System.out.println("===============================");
 
 
     }
@@ -54,4 +55,3 @@ public class Main {
 
 
 }
-

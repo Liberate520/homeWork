@@ -29,7 +29,6 @@ public class Human implements Comparable<Human>, Iterable, Serializable {
         this.socialPosition = socialPosition;
         this.fondation = fondation;
         this.income = income;
-//        this.age = age;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.id = id;
@@ -172,4 +171,3 @@ public class Human implements Comparable<Human>, Iterable, Serializable {
     }
 
 }
-

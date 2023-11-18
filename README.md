@@ -64,6 +64,15 @@
 
 ```
 
+<br>
+
+### Домашнее задание 5
+
+```
+Реализовать паттерн MVP в вашем проекте с семейным деревом
+
+```
+[MVP-паттерн на Java](https://qaa-engineer.ru/mvp-pattern-na-java/)
 <br><br>
 
 ![модель Family Tree](https://i.ibb.co/FY9hmBn/fami-tree-grafics-min.jpg "модель человек и дерево Family Tree")

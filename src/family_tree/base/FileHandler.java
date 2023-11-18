@@ -36,12 +36,14 @@ public class FileHandler {
         humans.add(new Human("Малинович", "Марианна Борисовна", Gender.Female, Position.Child, SocialPosition.Not_married, Fondation.Non_formal, 1000.0, LocalDate.of(2020, 8, 12), 0.010));
         humans.add(new Human("Крылова", "Сабина Сергеевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal, 12000.0, LocalDate.of(2010, 4, 24), 0.011));
         humans.add(new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Married, Fondation.Formal, 120000.0, LocalDate.of(1975, 11, 29), 0.012));
+        humans.add(new Human("Живнов", "Олег Андреевна", Gender.Male, Position.Son, SocialPosition.Married, Fondation.Formal, 160000.0, LocalDate.of(1975, 11, 29), 0.013));
+
 
 //        String filePath = "homeWork/src/family_tree.txt";
         String filePath = "homeWork/src/model_app/family_tree.txt";
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath, true);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
-        // Сериализуем объект
+            // Сериализуем объект
             for (Human human : humans) {
                 objectOutputStream.writeObject(human);
             }
@@ -71,21 +73,21 @@ public class FileHandler {
 
         //  Сортировка списка по Фамилии
         System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
-        Collections.sort(humans, Comparator.comparing(Human::getLastName));
+        humans.sort(Comparator.comparing(Human::getLastName));
         for (Human human : humans) {
             System.out.println(human);
         }
 
         System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
         //  Сортировка списка по Возрасту
-        Collections.sort(humans, Comparator.comparing(Human::getAge).reversed());
+        humans.sort(Comparator.comparing(Human::getAge).reversed());
         for (Human human : humans) {
             System.out.println(human);
         }
 
         System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
         //  Сортировка списка по Доходам
-        Collections.sort(humans, Comparator.comparing(Human::getIncome).reversed());
+        humans.sort(Comparator.comparing(Human::getIncome).reversed());
         for (Human human : humans) {
             System.out.println(human);
         }
@@ -102,7 +104,8 @@ public class FileHandler {
             // Десериализуем объекты
             while (true) {
                 try {
-                    Human human = (Human) objectInputStream.readObject();
+                    Human human;
+                    human = (Human) objectInputStream.readObject();
                     System.out.println(human);
                 } catch (EOFException e) {
                     break;
@@ -213,7 +216,3 @@ public class FileHandler {
 
 
 }
-
-
-
-
