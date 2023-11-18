@@ -2,20 +2,17 @@ package tree;
 import human.Comparators.ComparatorByAge;
 import human.Comparators.ComparatorByLastname;
 import human.Comparators.ComparatorByName;
-import human.Gender;
 
 import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, Iterable< T > {
-    private List< T > FamilyList;
+    private List< T > familyList;
     private int id = 1;
-    private Map<String,T> parents;
-    private List<T> children;
 
     public FamilyTree() {
 
-        FamilyList = new ArrayList<>();
+        familyList = new ArrayList<>();
     }
     /**
      * Добавление человека в FamilyList с проверкой уникальности
@@ -23,7 +20,7 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
      */
     public void addHuman(T human) {
         human.setId(id++);
-        if (!FamilyList.contains(human)) FamilyList.add(human);
+        if (!familyList.contains(human)) familyList.add(human);
     }
 
     /**
@@ -33,7 +30,7 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
     public String allTree() {
         StringBuilder sb = new StringBuilder();
         sb.append("Вывод всех членов семьи\n").append("-".repeat(128)).append("\n");
-        for (T member: FamilyList) {
+        for (T member: familyList) {
             sb.append(member.getId());
             sb.append(member.getFullName());
             sb.append("; ");
@@ -71,7 +68,7 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
     public String SearchByNameSurname (String name){
         StringBuilder sb = new StringBuilder();
         sb.append("Результат поиска: \n");
-        for (T member: FamilyList) {
+        for (T member: familyList) {
             if(member.getName().contains(name)|| member.getLastname().contains(name)){
                 sb.append(member.getId());
                 sb.append(member.getFullName());
@@ -100,21 +97,21 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
 
     @Override
     public Iterator< T > iterator() {
-        return new HumanIterator<>(FamilyList);
+        return new HumanIterator<>(familyList);
     }
 
     public void sortByName(){
         System.out.println("Сортировка по имени\n");
-        FamilyList.sort(new ComparatorByName<>());
+        familyList.sort(new ComparatorByName<>());
     }
 
     public void sortByLastname(){
         System.out.println("Сортировка по фамилии\n");
-        FamilyList.sort(new ComparatorByLastname<>());
+        familyList.sort(new ComparatorByLastname<>());
     }
 
     public void sortByAge(){
         System.out.println("Сортировка по возрасту\n");
-        FamilyList.sort(new ComparatorByAge<>());
+        familyList.sort(new ComparatorByAge<>());
     }
 }
