@@ -1,10 +1,12 @@
 package family_tree.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable, Comparable<Human> {
 
     static ArrayList<String> snilss = new ArrayList();
     private String snils;
@@ -34,6 +36,35 @@ public class Human {
 
     }
 
+    public String getSnils() {
+        return snils;
+    }
+
+    public String getFam() {
+        return fam;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public LocalDate getDr() {
+        return dr;
+    }
+
+    public LocalDate getDead() {
+        return dead;
+    }
+
+    public int getAge(){
+        LocalDate toDate = LocalDate.now();
+        Period period = Period.between(dr, toDate);
+        return period.getYears();
+    }
 
     public void AddMother(Human mother){
         this.mother = mother;
@@ -73,7 +104,11 @@ public class Human {
         return " СНИЛС -'" + snils + '\'' +
                 ", ФАМИЛИЯ -'" + fam + '\'' +
                 ", Имя - '" + name + '\'' +
-                ", Дата рождения - " + dr + '\'' +
+                ", возраст - " + this.getAge() + '\'' +
                 ", пол - " + gender;
+    }
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }
