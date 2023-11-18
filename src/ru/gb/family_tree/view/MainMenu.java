@@ -1,6 +1,6 @@
-package ru.gb.family_tree.ui;
+package ru.gb.family_tree.view;
 
-import ru.gb.family_tree.ui.commands.*;
+import ru.gb.family_tree.view.commands.*;
 import java.util.ArrayList;
 import java.util.List;
 

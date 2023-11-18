@@ -1,4 +1,4 @@
-package ru.gb.family_tree.writer;
+package ru.gb.family_tree.model.writer;
 
 import java.io.IOException;
 import java.io.Serializable;

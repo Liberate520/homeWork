@@ -1,6 +1,6 @@
 package ru.gb.family_tree.model.tree;
 
-import ru.gb.family_tree.exception.HumanExcistsException;
+import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.comparators.HumanComparatorByAge;
 import ru.gb.family_tree.model.human.comparators.HumanComparatorById;
 import ru.gb.family_tree.model.human.comparators.HumanComparatorByLastname;

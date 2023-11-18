@@ -1,4 +1,4 @@
-package ru.gb.family_tree.ui;
+package ru.gb.family_tree.view;
 
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.presenter.Presenter;

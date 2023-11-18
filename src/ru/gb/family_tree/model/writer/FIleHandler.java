@@ -1,4 +1,4 @@
-package ru.gb.family_tree.writer;
+package ru.gb.family_tree.model.writer;
 
 import ru.gb.family_tree.model.tree.FamilyTree;
 

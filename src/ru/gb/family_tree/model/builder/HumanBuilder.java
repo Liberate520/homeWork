@@ -1,4 +1,4 @@
-package ru.gb.family_tree.builder;
+package ru.gb.family_tree.model.builder;
 
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.human.Human;

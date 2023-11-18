@@ -1,10 +1,10 @@
 package ru.gb.family_tree.model.service;
 
-import ru.gb.family_tree.builder.HumanBuilder;
+import ru.gb.family_tree.model.builder.HumanBuilder;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.tree.FamilyTree;
-import ru.gb.family_tree.writer.FIleHandler;
+import ru.gb.family_tree.model.writer.FIleHandler;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;

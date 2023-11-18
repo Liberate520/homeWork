@@ -1,6 +1,6 @@
-package ru.gb.family_tree.ui.commands;
+package ru.gb.family_tree.view.commands;
 
-import ru.gb.family_tree.ui.ConsoleUI;
+import ru.gb.family_tree.view.ConsoleUI;
 
 public class SortByLastname extends Command {
 
