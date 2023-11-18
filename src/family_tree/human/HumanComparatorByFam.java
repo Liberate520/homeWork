@@ -2,11 +2,11 @@ package family_tree.human;
 
 import java.util.Comparator;
 
-public class HumanComparatorByFam implements Comparator<Human> {
+public class HumanComparatorByFam<T extends FamilyGroupItems> implements Comparator<T> {
 
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getFam().compareTo(o2.getFam());
     }
 }

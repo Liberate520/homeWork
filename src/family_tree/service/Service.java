@@ -22,7 +22,7 @@ public class Service {
     public String GetHumanListInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список членов семьи:\n");
-        for (Human human: familyTree){
+        for (Object human: familyTree){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }

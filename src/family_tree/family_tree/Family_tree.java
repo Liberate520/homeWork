@@ -10,21 +10,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Family_tree implements Serializable, Iterable<Human> {
-    private ArrayList<Human> family_tree;
+public class Family_tree<T> implements Serializable, Iterable<T> {
+    private ArrayList<T> family_tree;
 
     public Family_tree() {
         this.family_tree = new ArrayList<>();
     }
 
-    public  void AddHuman(Human human){
+    public  void AddHuman(T human){
         this.family_tree.add(human);
     }
 
     public String getHumanListInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Древо семьи:\n");
-        for (Human human: this.family_tree){
+        for (T human: this.family_tree){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
@@ -42,7 +42,7 @@ public class Family_tree implements Serializable, Iterable<Human> {
         family_tree.sort(new HumanComparatorByDate());
     }
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(family_tree);
+    public Iterator<T> iterator() {
+        return new HumanIterator<>(family_tree);
     }
 }

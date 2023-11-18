@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human implements Serializable, Comparable<Human>, FamilyGroupItems {
 
     static ArrayList<String> snilss = new ArrayList();
     private String snils;

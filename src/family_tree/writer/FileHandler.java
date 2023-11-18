@@ -8,7 +8,7 @@ import java.io.*;
 public class FileHandler implements Writable{
 
 
-    public void SaveFamily_tree(Family_tree familyTree)  throws IOException, ClassNotFoundException {
+    public void SaveFamily_tree(Object familyTree)  throws IOException, ClassNotFoundException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("familyTree.out"));
         objectOutputStream.writeObject(familyTree);
