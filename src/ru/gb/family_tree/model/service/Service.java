@@ -35,7 +35,7 @@ public class Service {
         }
     }
 
-    public LocalDate checkDate(int year, int month, int day) {
+    private LocalDate checkDate(int year, int month, int day) {
         LocalDate date = null;
         if (dateIsValid(year, month, day)) {
             date = LocalDate.of(year, month, day);
@@ -67,10 +67,6 @@ public class Service {
             }
         }
         return stringBuilder.toString();
-    }
-
-    public FamilyTree getTree() {
-        return tree;
     }
 
     public void sortByLastname() {
