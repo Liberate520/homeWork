@@ -1,12 +1,11 @@
 package human;
-import tree.FamilyTree;
+import org.jetbrains.annotations.NotNull;
 import tree.FamilyTreeItem;
-
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Human implements Serializable, FamilyTreeItem {
+public class Human implements Serializable, FamilyTreeItem< Human > {
     private int id;
     private String lastname;
     private String name;
@@ -195,11 +194,12 @@ public class Human implements Serializable, FamilyTreeItem {
      *
      * @param human
      */
+
     public void setParent(Human human) {
         if (human.getGender() == Gender.Male) {
 //            this.parents.put("Отец " , " " + human.getFullName());
 //            this.parents.put("Отец",  human);
-            this.parents.put("Отец", human);
+            this.parents.put("Отец",  human);
         }
 //        else this.parents.put("Мать " , " " + human.getFullName());
         else this.parents.put("Мать ", human);
@@ -237,4 +237,5 @@ public class Human implements Serializable, FamilyTreeItem {
         }
         return Objects.equals(human.getId(), getId());
     }
+
 }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Comparator;
 
-public class ComparatorByAge<T extends FamilyTreeItem > implements Comparator< T > {
+public class ComparatorByAge<T extends FamilyTreeItem<T> > implements Comparator< T > {
 
 
     @Override

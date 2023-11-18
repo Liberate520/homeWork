@@ -3,15 +3,14 @@ import human.Comparators.ComparatorByAge;
 import human.Comparators.ComparatorByLastname;
 import human.Comparators.ComparatorByName;
 import human.Gender;
-import human.Human;
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<T extends FamilyTreeItem > implements Serializable, Iterable< T > {
+public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, Iterable< T > {
     private List< T > FamilyList;
     private int id = 1;
+    private T children;
+
     public FamilyTree() {
 
         FamilyList = new ArrayList<>();
@@ -116,4 +115,26 @@ public class FamilyTree<T extends FamilyTreeItem > implements Serializable, Iter
         System.out.println("Сортировка по возрасту\n");
         FamilyList.sort(new ComparatorByAge<>());
     }
+
+//    public void setParent(T human) {
+//        if (human.getGender() == Gender.Male) {
+////            this.parents.put("Отец " , " " + human.getFullName());
+////            this.parents.put("Отец",  human);
+//            this.parents.put("Отец",  human);
+//        }
+////        else this.parents.put("Мать " , " " + human.getFullName());
+//        else this.parents.put("Мать ", human);
+//    }
+//
+//    /**
+//     * присвоение ребенка человеку
+//     *
+//     * @param human
+//     */
+//    public void setChild(T human) {
+//        if (!children.contains(human)) {
+//            this.children.add(human);
+//            human.setParent(this);
+//        }
+//    }
 }

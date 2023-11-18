@@ -1,8 +1,6 @@
-//import Service.Service;
 import human.Gender;
 import human.Human;
 import tree.FamilyTree;
-import tree.FamilyTreeItem;
 import writer.FileHandler;
 import writer.Writable;
 
@@ -11,34 +9,12 @@ import java.time.LocalDate;
 public class Test {
     public void Main(){
     }
-
     public static void main(String[] args) {
-
-//
-//        Service service = new Service();
-//        service.addHuman( "Кузнецов", "Владислав", LocalDate.of(1983, 5, 1),null,Gender.Male, null, null);
-//        service.addHuman( "Березянская", "Ольга", LocalDate.of(1989, 2, 20),null, Gender.Female, null,null);
-//        service.addHuman( "Кузнецов", "Юрий", LocalDate.of(1944, 7, 4),null,Gender.Male,null,null);
-//        service.addHuman("Афонченко", "Людмила", LocalDate.of(1948, 8, 23),null, Gender.Female,null,null);
-//        service.addHuman("Березянский", "Игорь", LocalDate.of(1960, 5, 26), Gender.Male);
-//        service.addHuman("Березянская", "Наталья", LocalDate.of(1964, 5, 28), Gender.Female);
-//        service.addHuman("Афонченко", "Федор", LocalDate.of(1921, 02, 23), Gender.Male);
-//        service.addHuman("Ильченко", "Талия", LocalDate.of(1924, 4, 1), LocalDate.of(2012, 5, 7), Gender.Female, null,null);
-//        service.addHuman("Афонченко", "Ирина", LocalDate.of(1959, 9, 2), Gender.Female);
-//        service.addHuman("Кузнецова", "Ирина", LocalDate.of(2014, 3, 26), Gender.Female);
-//        service.addHuman("Кушнарева", "Людмила", LocalDate.of(1933, 2, 15), Gender.Female);
-
-//        System.out.println(service);
-//        service.sortByName();
-//        System.out.println(service);
-
-
-
         /**
          * загрузка из файла
          */
-        FamilyTree<Human> myTree = new FamilyTree<>();
-//        myTree = load();
+        FamilyTree< Human > myTree = new FamilyTree<>();
+//        FamilyTree<Human> myTree = load();
 
         Human human1 = new Human(1, "Кузнецов", "Владислав", LocalDate.of(1983, 5, 1), Gender.Male);
         Human human2 = new Human(2, "Березянская", "Ольга", LocalDate.of(1989, 2, 20), Gender.Female);
@@ -47,7 +23,7 @@ public class Test {
         Human human5 = new Human(5, "Березянский", "Игорь", LocalDate.of(1960, 5, 26), Gender.Male);
         Human human6 = new Human(6, "Березянская", "Наталья", LocalDate.of(1964, 5, 28), Gender.Female);
         Human human7 = new Human(7, "Афонченко", "Федор", LocalDate.of(1921, 02, 23), Gender.Male);
-        Human human8 = new Human(8, "Ильченко", "Талия", LocalDate.of(1924, 4, 1), LocalDate.of(2012, 5, 7), Gender.Female, null, null);
+        Human human8 = new Human(8, "Ильченко", "Талия", LocalDate.of(1924, 4, 1), Gender.Female);
         Human human9 = new Human(9, "Афонченко", "Ирина", LocalDate.of(1959, 9, 2), Gender.Female);
         Human human10 = new Human(10, "Кузнецова", "Ирина", LocalDate.of(2014, 3, 26), Gender.Female);
         Human human11 = new Human(11, "Кушнарева", "Людмила", LocalDate.of(1933, 2, 15), Gender.Female);
@@ -83,12 +59,11 @@ public class Test {
         human4.setDayOfDeath(LocalDate.of(2019, 9, 24));
         human5.setDayOfDeath(LocalDate.of(2011, 2, 10));
         human7.setDayOfDeath(LocalDate.of(2005, 12, 25));
-                    human8.setDayOfDeath(LocalDate.of(2012, 5, 7));
+        human8.setDayOfDeath(LocalDate.of(2012, 5, 7));
         /**
          * сохранение в файл
          */
         save(myTree);
-
 
         /**
          * Вывод всех членов семьи
