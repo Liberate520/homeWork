@@ -1,25 +1,17 @@
-package ru.gb.family_tree.service;
+package ru.gb.family_tree.model.service;
 
 import ru.gb.family_tree.builder.HumanBuilder;
-import ru.gb.family_tree.human.Gender;
-import ru.gb.family_tree.human.Human;
-import ru.gb.family_tree.tree.FamilyTree;
-import ru.gb.family_tree.tree.TreeItem;
+import ru.gb.family_tree.model.human.Gender;
+import ru.gb.family_tree.model.human.Human;
+import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.writer.FIleHandler;
-
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> tree;
     private HumanBuilder builder;
-    private String family;
-
-    public Service(String family) {
-        this.family = family;
-        tree = new FamilyTree<>(family);
-        builder = new HumanBuilder();
-    }
 
     public Service() {
         tree = new FamilyTree<>();
@@ -38,18 +30,39 @@ public class Service {
 
     public void setBirthday(int id, int year, int month, int day) {
         Human human = tree.findInTree(id);
-        human.setBirthday(LocalDate.of(year, month, day));
+        if (human != null) {
+            human.setBirthday(checkDate(year, month, day));
+        }
     }
 
-    public String getInfoShort () {
+    public LocalDate checkDate(int year, int month, int day) {
+        LocalDate date = null;
+        if (dateIsValid(year, month, day)) {
+            date = LocalDate.of(year, month, day);
+        }
+        if (date == null) {
+            System.out.println("Данные не добавлены!");
+        }
+        return date;
+    }
+
+    private boolean dateIsValid(int year, int month, int day) {
+        try {
+            LocalDate date = LocalDate.of(year, month, day);
+            return true;
+        } catch (DateTimeException e) {
+            System.out.println("Дата указана неверно!");
+            return false;
+        }
+    }
+
+    public String getInfoShort() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Семья " + family + ": \n");
-        for (Human member: tree) {
+        for (Human member : tree) {
             stringBuilder.append(member);
             if (member.getBirthday() == null) {
                 stringBuilder.append(", возраст неизвестен\n");
-            }
-            else {
+            } else {
                 stringBuilder.append(", возраст: ").append(member.age()).append("\n");
             }
         }
@@ -64,11 +77,11 @@ public class Service {
         tree.sortByLastname();
     }
 
-    public void sortByName(){
+    public void sortByName() {
         tree.sortByName();
     }
 
-    public void sortByAge(){
+    public void sortByAge() {
         tree.sortByAge();
     }
 
@@ -83,7 +96,9 @@ public class Service {
 
     public void setDeathdate(int id, int year, int month, int day) {
         Human human = tree.findInTree(id);
-        human.setDeathday(LocalDate.of(year, month, day));
+        if (human != null) {
+            human.setDeathday(checkDate(year, month, day));
+        }
     }
 
     public void addSpouse(int one, int two) {
@@ -102,7 +117,7 @@ public class Service {
         FIleHandler fh = new FIleHandler();
         try {
             tree = (FamilyTree) fh.read("output.data");
-        } catch (IOException e) {
+        } catch (RuntimeException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -111,4 +126,13 @@ public class Service {
         FIleHandler fh = new FIleHandler();
         if (fh.write(tree, "output.data")) System.out.println("Данные успешно записаны");
     }
+
+    public boolean checkId(int id) {
+        Human human = tree.findInTree(id);
+        if (human != null) {
+            return true;
+        }
+        return false;
+    }
+
 }

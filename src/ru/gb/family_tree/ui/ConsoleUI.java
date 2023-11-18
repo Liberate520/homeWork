@@ -1,9 +1,7 @@
 package ru.gb.family_tree.ui;
 
-import ru.gb.family_tree.human.Gender;
+import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.presenter.Presenter;
-
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -34,7 +32,7 @@ public class ConsoleUI implements View {
 
     private void choice () {
         String value = scanner.nextLine();
-        if (checkInt(value)) {
+        if (checkMenu(value)) {
             int num = Integer.parseInt(value);
             menu.execute(num);
         }
@@ -42,6 +40,7 @@ public class ConsoleUI implements View {
 
     public void finish() {
         System.out.println("Работа приложения завершена.");
+        scanner.close();
         work = false;
     }
 
@@ -53,6 +52,7 @@ public class ConsoleUI implements View {
     public void load() {
         presenter.load();
     }
+
     public void viewAll() {
         presenter.allTree();
     }
@@ -63,55 +63,108 @@ public class ConsoleUI implements View {
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
         System.out.println("Введите пол (Male, Female): ");
-        Gender gender = Gender.valueOf(scanner.nextLine());
+        Gender gender = checkGender();
         presenter.addBody(lastname, name, gender);
+    }
+
+    private Gender checkGender() {
+        String answer = null;
+        boolean i = true;
+        while (i) {
+            answer = scanner.nextLine();
+            if (answer.equals("Male") || answer.equals("Female")) {
+                i = false;
+            }
+            else System.out.println("Неверное значение! Попробуйте еще раз.");
+        }
+        return Gender.valueOf(answer);
     }
 
     public void addBirthdate() {
         System.out.println("Введите Id");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = checkId();
         System.out.println("Введите год рождения");
-        int year = Integer.parseInt(scanner.nextLine());
+        int year = checkInt();
         System.out.println("Введите месяц рождения");
-        int month = Integer.parseInt(scanner.nextLine());
+        int month = checkInt();
         System.out.println("Введите день рождения");
-        int day = Integer.parseInt(scanner.nextLine());
+        int day = checkInt();
         presenter.setBirthday(id, year, month, day);
+    }
+
+    private int checkInt() {
+        int value = 0;
+        boolean i = true;
+        while (i) {
+            String text = scanner.nextLine();
+            if (text.matches("[0-9]+")){
+                value = Integer.parseInt(text);
+                i = false;
+            } else {
+                System.out.println("Неверное значение! Введите целое число.");
+            }
+        }
+        return value;
+    }
+
+    private int checkId() {
+        boolean i = true;
+        int id = 0;
+        while (i) {
+            id = checkInt();
+            if (presenter.checkId(id)) {
+                i = false;
+                return id;
+            }
+            else System.out.println("Введите другое значение.");
+        }
+        return id;
     }
 
     public void addDeathdate() {
         System.out.println("Введите Id");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = checkId();
         System.out.println("Введите год смерти");
-        int year = Integer.parseInt(scanner.nextLine());
+        int year = checkInt();
         System.out.println("Введите месяц смерти");
-        int month = Integer.parseInt(scanner.nextLine());
+        int month = checkInt();
         System.out.println("Введите день смерти");
-        int day = Integer.parseInt(scanner.nextLine());
+        int day = checkInt();
         presenter.setDeathdate(id, year, month, day);
     }
 
     public void infoById() {
         System.out.println("Введите ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = checkId();
         presenter.getBodyInfoById(id);
     }
 
     public void addSpouse() {
         System.out.println("Введите ID одного из супругов: ");
-        int one = Integer.parseInt(scanner.nextLine());
+        int one = checkId();
         System.out.println("Введите ID второго супруга: ");
-        int two = Integer.parseInt(scanner.nextLine());
-        presenter.addSpouse(one, two);
+        int two = checkId();
+        if (one == two) {
+            System.out.println("Id одинаковы. Данные не добавлены.");
+        }
+        else {
+            presenter.addSpouse(one, two);
+        }
     }
 
     public void addChild() {
         System.out.println("Введите ID родителя: ");
-        int parentId = Integer.parseInt(scanner.nextLine());
+        int parentId = checkId();
         System.out.println("Введите ID ребенка: ");
-        int childId = Integer.parseInt(scanner.nextLine());
-        presenter.addChild(parentId, childId);
+        int childId = checkId();
+        if (parentId == childId) {
+            System.out.println("Id одинаковы. Данные не добавлены.");
+        }
+        else {
+            presenter.addChild(parentId, childId);
+        }
     }
+
     public void sortId() {
         presenter.sortById();
     }
@@ -123,21 +176,22 @@ public class ConsoleUI implements View {
     public void sortAge() {
         presenter.sortByAge();
     }
-    public String scan() {
-        System.out.println("Введите значение");
-        return scanner.nextLine();
-    }
 
-    public boolean checkInt (String text) {
+    private boolean checkMenu (String text) {
         try {
             if (Integer.parseInt(text) > 0 && Integer.parseInt(text) <= menu.getSize()) {
                 return true;
             }
         }
             catch (NumberFormatException e){
-                System.out.println("Вы ввели неверное значение!");
+                System.out.println(e.getMessage());
         }
+        System.out.println("Вы ввели неверное значение!");
         return false;
+    }
+
+    public void save() {
+        presenter.save();
     }
 
     @Override
@@ -145,8 +199,4 @@ public class ConsoleUI implements View {
         System.out.println(answer);
     }
 
-
-    public void save() {
-        presenter.save();
-    }
 }

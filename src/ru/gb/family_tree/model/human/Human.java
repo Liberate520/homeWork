@@ -1,8 +1,6 @@
-package ru.gb.family_tree.human;
+package ru.gb.family_tree.model.human;
 
-import ru.gb.family_tree.tree.FamilyTree;
-import ru.gb.family_tree.tree.TreeItem;
-
+import ru.gb.family_tree.model.tree.TreeItem;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -10,10 +8,8 @@ import java.util.*;
 
 public class Human implements Serializable, TreeItem {
     private int id;
-    private FamilyTree<Human> family;
     private String lastname;
     private String name;
-
     private LocalDate birthday;
     private LocalDate deathday;
     private Gender gender;
@@ -119,10 +115,6 @@ public class Human implements Serializable, TreeItem {
         this.gender = gender;
     }
 
-    public FamilyTree getFamily() {
-        return family;
-    }
-
     private void setParent(Human human) {
         if (human.gender == Gender.Male) {
             this.parents.put("отец",human);
@@ -159,12 +151,12 @@ public class Human implements Serializable, TreeItem {
             return false;
         }
         Human human = (Human) obj;
-        return family == human.family && lastname.equals(human.getLastname()) && name.equals(human.getName()) && gender.equals(human.gender);
+        return lastname.equals(human.getLastname()) && name.equals(human.getName()) && gender.equals(human.gender);
     }
 
     @Override
     public int hashCode() {
-        return 3 * family.hashCode() + 7 * lastname.hashCode() + 13 * name.hashCode() + 24 * gender.hashCode();
+        return 7 * lastname.hashCode() + 13 * name.hashCode() + 24 * gender.hashCode();
     }
 }
 

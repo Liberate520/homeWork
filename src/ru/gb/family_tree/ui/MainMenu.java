@@ -1,7 +1,6 @@
 package ru.gb.family_tree.ui;
 
 import ru.gb.family_tree.ui.commands.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

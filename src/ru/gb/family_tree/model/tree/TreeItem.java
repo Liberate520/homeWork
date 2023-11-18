@@ -1,10 +1,8 @@
-package ru.gb.family_tree.tree;
+package ru.gb.family_tree.model.tree;
 
-import ru.gb.family_tree.human.Gender;
-import ru.gb.family_tree.human.Human;
-
+import ru.gb.family_tree.model.human.Gender;
 import java.time.LocalDate;
-import java.util.List;
+
 
 public interface TreeItem {
     String getName();    

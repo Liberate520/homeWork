@@ -1,10 +1,7 @@
 package ru.gb.family_tree.presenter;
 
-
-import ru.gb.family_tree.human.Gender;
-import ru.gb.family_tree.human.Human;
-import ru.gb.family_tree.service.Service;
-import ru.gb.family_tree.ui.ConsoleUI;
+import ru.gb.family_tree.model.human.Gender;
+import ru.gb.family_tree.model.service.Service;
 import ru.gb.family_tree.ui.View;
 
 public class Presenter {
@@ -23,8 +20,7 @@ public class Presenter {
     }
 
     public void addBody(String lastname, String name, Gender gender) {
-        Human somebody = service.addNewToFamily(lastname, name, gender);
-        view.printAnswer(service.infoByID(somebody.getId()));
+        view.printAnswer(service.addNewToFamily(lastname, name, gender).toString());
     }
 
     public void setBirthday(int id, int year, int month, int day) {
@@ -72,5 +68,9 @@ public class Presenter {
 
     public void save() {
         service.save();
+    }
+
+    public boolean checkId(int id) {
+        return service.checkId(id);
     }
 }

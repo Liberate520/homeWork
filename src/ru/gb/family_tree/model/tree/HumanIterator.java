@@ -1,6 +1,4 @@
-package ru.gb.family_tree.tree;
-
-import ru.gb.family_tree.human.Human;
+package ru.gb.family_tree.model.tree;
 
 import java.util.Iterator;
 import java.util.List;

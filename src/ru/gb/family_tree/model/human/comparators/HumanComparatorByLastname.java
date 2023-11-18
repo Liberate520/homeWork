@@ -1,8 +1,6 @@
-package ru.gb.family_tree.human.comparators;
+package ru.gb.family_tree.model.human.comparators;
 
-import ru.gb.family_tree.human.Human;
-import ru.gb.family_tree.tree.TreeItem;
-
+import ru.gb.family_tree.model.tree.TreeItem;
 import java.util.Comparator;
 
 public class HumanComparatorByLastname <E extends TreeItem> implements Comparator<E> {

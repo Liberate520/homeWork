@@ -1,7 +1,7 @@
 package ru.gb.family_tree.builder;
 
-import ru.gb.family_tree.human.Gender;
-import ru.gb.family_tree.human.Human;
+import ru.gb.family_tree.model.human.Gender;
+import ru.gb.family_tree.model.human.Human;
 
 public class HumanBuilder {
 
