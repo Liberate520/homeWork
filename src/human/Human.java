@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Human implements Serializable, FamilyTreeItem< Human >, Comparable<Human> {
+//public class Human implements Serializable, FamilyTreeItem< Human >, Comparable<Human> {
+public class Human implements Serializable, FamilyTreeItem< Human > {
     private int id;
     private String lastname;
     private String name;
@@ -230,6 +231,10 @@ public class Human implements Serializable, FamilyTreeItem< Human >, Comparable<
 
     @Override
     public int compareTo(@NotNull Human o) {
-        return 0;
+        if(this.getAge()>o.getAge())
+            return 1;
+        else if (getAge()<o.getAge())
+            return -1;
+        else return 0;
     }
 }
