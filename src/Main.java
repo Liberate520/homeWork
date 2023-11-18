@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree myTree = testTree();
-        Service myService = new Service();
+        FamilyTree<FamilyMember> myTree = testTree();
+        Service<FamilyMember> myService = new Service();
 //        FamilyTree myTree = load();
 //        System.out.println(myTree);
 
@@ -29,19 +29,20 @@ public class Main {
 
     }
 
-    private static FamilyTree load(){
+    private static FamilyTree<FamilyMember> load(){
         FileHandler fileHandler = new FileHandler();
         String filePath = "src/homeWork/src/writer/tree.txt";
-        return (FamilyTree) fileHandler.read(filePath);
+        FamilyTree<FamilyMember> read = (FamilyTree<FamilyMember>) fileHandler.read(filePath);
+        return read;
     }
 
-    private static void save(FamilyTree tree){
+    private static void save(FamilyTree<FamilyMember> tree){
         FileHandler fileHandler = new FileHandler();
         String filePath = "src/homeWork/src/writer/tree.txt";
         fileHandler.save(tree, filePath);
     }
 
-    static FamilyTree testTree() {
+    static FamilyTree<FamilyMember> testTree() {
 //        FamilyMemberBuilder builder = new FamilyMemberBuilder();
         Service service = new Service();
 //        FamilyTree tree = new FamilyTree();

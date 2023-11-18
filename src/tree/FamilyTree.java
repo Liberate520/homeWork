@@ -1,31 +1,29 @@
 package homeWork.src.tree;
 
 import homeWork.src.member.FamilyMemberComparatorByAge;
-import homeWork.src.member.FamilyMember;
 import homeWork.src.member.FamilyMemberCompareByBirthDate;
-
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<FamilyMember> {
+public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable<M> {
     private long familyMemberId;
-    private List<FamilyMember> familyMembers;
+    private List<M> familyMembers;
 
     public FamilyTree(){this(new ArrayList<>());}
 
-    public FamilyTree(List<FamilyMember> familyMembers){
+    public FamilyTree(List<M> familyMembers){
         this.familyMembers = familyMembers;
     }
 
-    public void addFamilyMember(FamilyMember member){
+    public void addFamilyMember(M member){
         familyMembers.add(member);
     }
 
-    public List<FamilyMember> getFamilyMembers(){
+    public List<M> getFamilyMembers(){
         return familyMembers;
     }
 
-//    public boolean add(FamilyMember member){
+//    public boolean add(T member){
 //        if(member == null){
 //            return false;
 //        }
@@ -40,11 +38,11 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
 //        return false;
 //    }
 
-    public FamilyMember getById(long id){
+    public M getById(long id){
         if(!checkId(id)){
             return null;
         }
-        for(FamilyMember member: familyMembers){
+        for(M member: familyMembers){
             if(member.getId() == id){
                 return member;
             }
@@ -52,14 +50,15 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
         return null;
     }
 
-    public List<FamilyMember> getSiblins(int id){
-        FamilyMember member = getById(id);
+    public List<M> getSiblins(int id){
+        M member = getById(id);
         if(member == null){
             return null;
         }
-        List<FamilyMember> result = new ArrayList<>();
-        for (FamilyMember parent: member.getParents()){
-            for (FamilyMember child: parent.getChildren()){
+
+        List<M> result = new ArrayList<>();
+        for (M parent: member.getParents()){
+            for (M child: parent.getChildren()){
                 if(!child.equals(member) && !result.contains(child)){
                     result.add(child);
                 }
@@ -68,9 +67,9 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
         return result;
     }
 
-    public List<FamilyMember> getByName (String name){
-        List<FamilyMember> result = new ArrayList<>();
-        for(FamilyMember member: familyMembers){
+    public List<M> getByName (String name){
+        List<M> result = new ArrayList<>();
+        for(M member: familyMembers){
             if(member.getName().contains(name)){
                 result.add(member);
             }
@@ -80,14 +79,14 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
 
     public boolean setWedding(long memberId1, long memberId2){
         if(checkId(memberId1) && checkId(memberId2)) {
-            FamilyMember member1 = getById(memberId1);
-            FamilyMember member2 = getById(memberId2);
+            M member1 = getById(memberId1);
+            M member2 = getById(memberId2);
             return setWedding(member1, member2);
         }
         return false;
     }
 
-    public boolean setWedding(FamilyMember member1, FamilyMember member2){
+    public boolean setWedding(M member1, M member2){
         if(member1.getSpouse() == null && member2.getSpouse() == null){
             member1.setSpouse(member2);
             member2.setSpouse(member1);
@@ -97,7 +96,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
         }
     }
 
-    public boolean setDivorce(FamilyMember e1, FamilyMember e2){
+    public boolean setDivorce(M e1, M e2){
         if(e1.getSpouse() != null && e2.getSpouse() != null){
             e1.setSpouse(null);
             e2.setSpouse(null);
@@ -109,20 +108,20 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
 
     public boolean remove(long eId){
         if(checkId(eId)){
-            FamilyMember member = getById(eId);
+            M member = getById(eId);
             return familyMembers.remove(member);
         }
         return false;
     }
 
-//    private void addToParents(FamilyMember member){
-//        for(FamilyMember parent: member.getParents()){
+//    private void addToParents(T member){
+//        for(T parent: member.getParents()){
 //            parent.addChild(member);
 //        }
 //    }
 
-//    private void addToChildren(FamilyMember member){
-//        for(FamilyMember child: member.getChildren()){
+//    private void addToChildren(T member){
+//        for(T child: member.getChildren()){
 //            child.addParent(member);
 //        }
 //    }
@@ -136,7 +135,7 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
         sb.append("In the tree ");
         sb.append(familyMembers.size());
         sb.append(" objects: \n");
-        for(FamilyMember member: familyMembers){
+        for(M member: familyMembers){
             sb.append(member);
             sb.append("\n");
         }
@@ -154,16 +153,16 @@ public class FamilyTree implements Serializable, Iterable<FamilyMember> {
 
     public void sortByAge (){
 //        Collections.sort(familyMembers, new FamilyMemberComparatorByAge());
-        familyMembers.sort(new FamilyMemberComparatorByAge());
+        familyMembers.sort(new FamilyMemberComparatorByAge<>());
     }
 
     public void sortByBirthDate(){
-        familyMembers.sort(new FamilyMemberCompareByBirthDate());
+        familyMembers.sort(new FamilyMemberCompareByBirthDate<>());
     }
 
     @Override
-    public Iterator<FamilyMember> iterator() {
-        return new FamilyMemberIterator(familyMembers);
+    public Iterator<M> iterator() {
+        return new FamilyMemberIterator<>(familyMembers);
     }
 
 }

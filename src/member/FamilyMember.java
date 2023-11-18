@@ -1,6 +1,7 @@
 package homeWork.src.member;
 
 import homeWork.src.tree.Gender;
+import homeWork.src.tree.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyMember implements Serializable, Comparable<FamilyMember> {
+public class FamilyMember implements Serializable, TreeItem<FamilyMember>, Comparable<FamilyMember> {
     private long id;
     private String name;
     private String surname;
@@ -229,4 +230,5 @@ public class FamilyMember implements Serializable, Comparable<FamilyMember> {
     public int compareTo(FamilyMember o) {
         return surname.compareTo(o.surname);
     }
+
 }

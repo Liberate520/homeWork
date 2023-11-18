@@ -1,11 +1,12 @@
 package homeWork.src.member;
 
-import java.time.LocalDate;
+import homeWork.src.tree.TreeItem;
+
 import java.util.Comparator;
 
-public class FamilyMemberCompareByBirthDate implements Comparator<FamilyMember> {
+public class FamilyMemberCompareByBirthDate<M extends TreeItem<M>> implements Comparator<M> {
     @Override
-    public int compare(FamilyMember o1, FamilyMember o2) {
+    public int compare(M o1, M o2) {
         return o1.getBirthDate().compareTo(o2.getBirthDate());
     }
 }

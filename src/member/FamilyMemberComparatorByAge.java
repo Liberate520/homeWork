@@ -1,12 +1,12 @@
 package homeWork.src.member;
 
-import homeWork.src.member.FamilyMember;
+import homeWork.src.tree.TreeItem;
 
 import java.util.Comparator;
 
-public class FamilyMemberComparatorByAge implements Comparator<FamilyMember> {
+public class FamilyMemberComparatorByAge<M extends TreeItem<M>> implements Comparator<M> {
     @Override
-    public int compare(FamilyMember o1, FamilyMember o2) {
+    public int compare(M o1, M o2) {
         return Integer.compare(o1.getAge(), o2.getAge());
     }
 }

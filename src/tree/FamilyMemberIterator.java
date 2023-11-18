@@ -5,11 +5,11 @@ import homeWork.src.member.FamilyMember;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyMemberIterator implements Iterator<FamilyMember> {
+public class FamilyMemberIterator<M extends TreeItem> implements Iterator<M> {
     private int index;
-    private List<FamilyMember> myFamiliMembers;
+    private List<M> myFamiliMembers;
 
-    public FamilyMemberIterator(List<FamilyMember> myFamiliMembers) {
+    public FamilyMemberIterator(List<M> myFamiliMembers) {
         this.myFamiliMembers = myFamiliMembers;
     }
 
@@ -19,7 +19,7 @@ public class FamilyMemberIterator implements Iterator<FamilyMember> {
     }
 
     @Override
-    public FamilyMember next() {
+    public M next() {
         return myFamiliMembers.get(index++);
     }
 }
