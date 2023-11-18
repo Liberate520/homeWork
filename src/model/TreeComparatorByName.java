@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Comparator;
 
 public class TreeComparatorByName<E extends GroupItem> implements Comparator<E>{
