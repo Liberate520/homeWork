@@ -16,7 +16,7 @@ public class Model {
     }
 
     public void addHuman(String name, Gender gender, LocalDate bornDate, LocalDate diedDate){
-        Human human = new Human(name, gender, bornDate);
+        Human human = new Human(name, gender, bornDate, diedDate);
         familyTree.addHuman(human);
     }
 
@@ -26,8 +26,10 @@ public class Model {
 
     public boolean fileWriter(){
         FileWriter handler = new FileWriter();
-        if (familyTree.sizeTree() > 0){handler.write(familyTree);
-        return true;}
+        if (familyTree.sizeTree() > 0){
+            handler.write(familyTree);
+            return true;
+        }
         return false;
     }
 
