@@ -11,7 +11,7 @@ public interface FamilyTreeItem<T>{
     public void setId(int id);
     public void setDayOfBirth(LocalDate dayOfBirth);
     public void setDayOfDeath(LocalDate dayOfDeath);
-//    public void setChild(T human);
+    public void setChild(T human);
     public String getSpouse();
     public String getChildren();
     public String getParents();
