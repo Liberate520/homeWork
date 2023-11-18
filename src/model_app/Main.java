@@ -1,7 +1,6 @@
 package model_app;
 
 
-
 import java.io.*;
 import static family_tree.base.FileHandler.FileHandlerForFamilyTree;
 

@@ -3,8 +3,6 @@ package family_tree.family_tree;
 import family_tree.base.Iterable;
 import family_tree.human.Human;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class FamilyTree implements Iterable {

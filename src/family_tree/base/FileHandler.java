@@ -5,7 +5,6 @@ import family_tree.human.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class FileHandler {
