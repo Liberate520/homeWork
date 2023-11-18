@@ -1,11 +1,12 @@
 package human;
 import tree.FamilyTree;
+import tree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem {
     private int id;
     private String lastname;
     private String name;

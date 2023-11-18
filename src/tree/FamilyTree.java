@@ -8,17 +8,18 @@ import org.w3c.dom.ls.LSOutput;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable< Human > {
-    private List< Human > FamilyList;
+public class FamilyTree<T extends FamilyTreeItem > implements Serializable, Iterable< T > {
+    private List< T > FamilyList;
     private int id = 1;
     public FamilyTree() {
+
         FamilyList = new ArrayList<>();
     }
     /**
      * Добавление человека в FamilyList с проверкой уникальности
      * @param human
      */
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
         human.setId(id++);
         if (!FamilyList.contains(human)) FamilyList.add(human);
     }
@@ -30,7 +31,7 @@ public class FamilyTree implements Serializable, Iterable< Human > {
     public String allTree() {
         StringBuilder sb = new StringBuilder();
         sb.append("Вывод всех членов семьи\n").append("-".repeat(128)).append("\n");
-        for (Human member: FamilyList) {
+        for (T member: FamilyList) {
             sb.append(member.getId());
             sb.append(member.getFullName());
             sb.append("; ");
@@ -68,7 +69,7 @@ public class FamilyTree implements Serializable, Iterable< Human > {
     public String SearchByNameSurname (String name){
         StringBuilder sb = new StringBuilder();
         sb.append("Результат поиска: \n");
-        for (Human member: FamilyList) {
+        for (T member: FamilyList) {
             if(member.getName().contains(name)|| member.getLastname().contains(name)){
                 sb.append(member.getId());
                 sb.append(member.getFullName());
@@ -95,22 +96,22 @@ public class FamilyTree implements Serializable, Iterable< Human > {
     }
 
     @Override
-    public Iterator< Human > iterator() {
-        return new HumanIterator(FamilyList);
+    public Iterator< T > iterator() {
+        return new HumanIterator<>(FamilyList);
     }
 
     public void sortByName(){
         System.out.println("Сортировка по имени\n");
-        FamilyList.sort(new ComparatorByName());
+        FamilyList.sort(new ComparatorByName<>());
     }
 
     public void sortByLastname(){
         System.out.println("Сортировка по фамилии\n");
-        FamilyList.sort(new ComparatorByLastname());
+        FamilyList.sort(new ComparatorByLastname<>());
     }
 
     public void sortByAge(){
         System.out.println("Сортировка по возрасту\n");
-        FamilyList.sort(new ComparatorByAge());
+        FamilyList.sort(new ComparatorByAge<>());
     }
 }
