@@ -15,7 +15,7 @@ public class Human implements FamilyTreeItem< Human > {
     private LocalDate dayOfDeath;
     private Gender gender;
     private Map< String, Human > parents;
-    public List< Human > children;
+    private List< Human > children;
     Human spouse;
 
     public Human(int id, String lastname, String name, LocalDate birthday, Gender gender) {
