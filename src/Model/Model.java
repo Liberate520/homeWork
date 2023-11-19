@@ -7,6 +7,7 @@ import Model.home_work_class.Human.Human;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
     private FamilyTree<Human> familyTree;
@@ -22,6 +23,13 @@ public class Model {
 
     public String getHumansListInfo(){
         return familyTree.showHumansList();
+    }
+
+
+    public Human findHumanByName(String name){
+        List<Human>humans = familyTree.findHumanByName(name);
+        if (!humans.isEmpty()) {return humans.get(0);}
+        return new Human("not found", Gender.Male, LocalDate.of(1,1,1));
     }
 
     public boolean fileWriter(String path){

@@ -28,16 +28,15 @@ public class FileWriter implements Writeable {
     }
 
     public FamilyTree read() {
-        FamilyTree tree = new FamilyTree<>();
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(this.path));
-            tree = (FamilyTree) objectInputStream.readObject();
+            FamilyTree tree = (FamilyTree) objectInputStream.readObject();
             objectInputStream.close();
             return tree;
         }
         catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
-            return tree;
+            return new FamilyTree<>();
         }
     }
 

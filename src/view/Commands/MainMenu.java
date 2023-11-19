@@ -13,6 +13,7 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         this.commandsList = new ArrayList<>();
         this.commandsList.add(new AddHuman(consoleUI));
+        this.commandsList.add(new AddChildren(consoleUI));
         this.commandsList.add(new ReadFile(consoleUI));
         this.commandsList.add(new WriteFile(consoleUI));
         this.commandsList.add(new SortByName(consoleUI));

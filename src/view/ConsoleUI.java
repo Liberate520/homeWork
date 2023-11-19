@@ -78,16 +78,7 @@ public class ConsoleUI implements View {
         }
     }
 
-    public void addHuman() {
-        dialogAddHuman();
-
-        System.out.println("Заполнить детей? 1. Да, Другое - нет");
-        String choiceChildren = scanner.nextLine();
-        List<Human> childrenList = new ArrayList<>();
-        if (! choiceChildren.equals("1")){
-            addChildren(childrenList);
-        }
-    }
+    public void addHuman() { dialogAddHuman();}
 
     private void dialogAddHuman(){
         System.out.println("Введите имя:");
@@ -118,8 +109,17 @@ public class ConsoleUI implements View {
         return LocalDate.of(year, month, day);
     }
 
-    private void addChildren(List<Human> childrens){
-
+    public void addChildren(){
+        System.out.println("Укажите родителя:");
+        String parent = scanner.nextLine();
+        System.out.println("Укажите имена детей: (пустая строка выход)");
+        List<String> children = new ArrayList<>();
+        while (true){
+            String name = scanner.nextLine();
+            if (name.isEmpty()){break;}
+            children.add(name);
+        }
+        presenter.addChildrenToParent(parent, children);
     }
 
     public void fileWriter(){
