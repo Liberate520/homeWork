@@ -1,6 +1,4 @@
-package homeWork.src.tree;
-
-import homeWork.src.member.FamilyMember;
+package homeWork.src.model.tree;
 
 import java.util.Iterator;
 import java.util.List;

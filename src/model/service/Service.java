@@ -1,10 +1,12 @@
-package homeWork.src.service;
+package homeWork.src.model.service;
 
-import homeWork.src.builder.FamilyMemberBuilder;
-import homeWork.src.member.FamilyMember;
-import homeWork.src.tree.FamilyTree;
-import homeWork.src.tree.Gender;
-import homeWork.src.tree.TreeItem;
+import homeWork.src.model.builder.FamilyMemberBuilder;
+import homeWork.src.model.member.FamilyMember;
+import homeWork.src.model.tree.FamilyTree;
+import homeWork.src.model.tree.Gender;
+import homeWork.src.model.tree.TreeItem;
+import homeWork.src.model.writer.FileHandler;
+
 import java.time.LocalDate;
 
 public class Service<M extends TreeItem<M>> {
@@ -48,7 +50,7 @@ public class Service<M extends TreeItem<M>> {
     }
 
     public FamilyMember createFamilyMember(String name, String surname, String patronymicName, Gender gender,
-                                   LocalDate birthDate, LocalDate deathDate,
+                                           LocalDate birthDate, LocalDate deathDate,
                                            M mother, M father) {
         FamilyMember member;
         if(deathDate == null && father == null && mother == null) {
@@ -102,4 +104,16 @@ public class Service<M extends TreeItem<M>> {
         return member.addChild(child);
     }
 
+    public FamilyTree<M> loadFamilyTree(){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/homeWork/src/model/writer/tree.txt";
+        FamilyTree<M> read = (FamilyTree<M>) fileHandler.read(filePath);
+        return read;
+    }
+
+    public void save(FamilyTree<M> tree){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/homeWork/src/model/writer/tree.txt";
+        fileHandler.save(tree, filePath);
+    }
 }

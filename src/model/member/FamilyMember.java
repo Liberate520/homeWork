@@ -1,7 +1,7 @@
-package homeWork.src.member;
+package homeWork.src.model.member;
 
-import homeWork.src.tree.Gender;
-import homeWork.src.tree.TreeItem;
+import homeWork.src.model.tree.Gender;
+import homeWork.src.model.tree.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;

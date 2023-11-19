@@ -1,6 +1,6 @@
-package homeWork.src.member;
+package homeWork.src.model.member;
 
-import homeWork.src.tree.TreeItem;
+import homeWork.src.model.tree.TreeItem;
 
 import java.util.Comparator;
 

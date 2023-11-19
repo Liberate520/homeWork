@@ -1,7 +1,7 @@
-package homeWork.src.tree;
+package homeWork.src.model.tree;
 
-import homeWork.src.member.FamilyMemberComparatorByAge;
-import homeWork.src.member.FamilyMemberCompareByBirthDate;
+import homeWork.src.model.member.FamilyMemberComparatorByAge;
+import homeWork.src.model.member.FamilyMemberCompareByBirthDate;
 import java.io.Serializable;
 import java.util.*;
 

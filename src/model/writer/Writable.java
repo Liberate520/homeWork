@@ -1,4 +1,4 @@
-package homeWork.src.writer;
+package homeWork.src.model.writer;
 
 import java.io.Serializable;
 
