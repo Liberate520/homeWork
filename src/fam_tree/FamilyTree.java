@@ -2,10 +2,11 @@ package fam_tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private final List<Human> humanList = new ArrayList<>();
+public class FamilyTree <T extends TreeLook<T>> implements Serializable, Iterable<T> {
+    private final List<T> humanList = new ArrayList<>();
     private int humanId = 1;
 
     public FamilyTree(int humanId) {
@@ -38,7 +39,7 @@ public class FamilyTree implements Serializable {
     public void addFamilyTree(Human human) {
         if (!humanList.contains(human)) {
             human.setId(humanId++);
-            humanList.add(human);
+            humanList.add((T) human);
             addToParrents(human);
             addToChildren(human);
         }}
@@ -55,10 +56,15 @@ public class FamilyTree implements Serializable {
 
     public String familyTreeInfo () {
         StringBuilder sb = new StringBuilder();
-        for (Human human : humanList) {
+        for (T human : humanList) {
             sb.append(human);
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
     }
 }

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Dogs dogs = new Dogs<>(tree());
-        dogs.getTree().toString();
+
+
         FamilyTree familyTree = tree();
 //        FamilyTree tree = load();
 //        System.out.println(tree);
@@ -41,9 +41,9 @@ public class Main {
         familyTree.addFamilyTree(valya);
         familyTree.addFamilyTree(leks);
         familyTree.familyTreeInfo();
-        System.out.println(familyTree.familyTreeInfo());
+//        System.out.println(familyTree.familyTreeInfo());
 
-        System.out.println(familyTree);
+//        System.out.println(familyTree);
 
 
 
