@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
         Human human1 = new Human("Юрий", Gender.Male,
                 LocalDate.of(1950, 1, 1),
                 LocalDate.of(2020, 1,1));

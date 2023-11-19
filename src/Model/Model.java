@@ -24,18 +24,22 @@ public class Model {
         return familyTree.showHumansList();
     }
 
-    public boolean fileWriter(){
+    public boolean fileWriter(String path){
         FileWriter handler = new FileWriter();
+        String filePath = handler.getDefaultPath();
+        if (!path.isEmpty()) {filePath = path;}
         if (familyTree.sizeTree() > 0){
-            handler.write(familyTree);
+            handler.write(familyTree, filePath);
             return true;
         }
         return false;
     }
 
-    public boolean fileReader(){
+    public boolean fileReader(String path){
         FileWriter handler = new FileWriter();
-        FamilyTree<Human> tree = handler.read("tree.out");
+        String filePath = handler.getDefaultPath();
+        if (!path.isEmpty()) {filePath = path;}
+        FamilyTree<Human> tree = handler.read(filePath);
         if (tree.sizeTree() > 0){
             familyTree = tree;
             return true;

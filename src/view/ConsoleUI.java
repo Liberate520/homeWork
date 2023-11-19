@@ -79,28 +79,34 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        System.out.println("Введите имя: (обязательно)");
-        String name = scanner.nextLine();
-        System.out.println("Введите пол: 1.Мужской, Другое - Женский: (обязательно)");
-        String choiceGender = scanner.nextLine();
-        Gender gender = Gender.Male;
-        if (! choiceGender.equals("1")) {
-            gender = Gender.Female;
-        }
-        System.out.println("Введите дату рождения: (обязятельно)");
-        LocalDate dataBorn = getDateToString();
-        System.out.println("Пропустить дату смерти? 1. Да, Другое - нет");
-        String choiceDiedDate = scanner.nextLine();
-        LocalDate diedDate = null;
-        if (! choiceDiedDate.equals("1")){ diedDate = getDateToString(); }
+        dialogAddHuman();
+
         System.out.println("Заполнить детей? 1. Да, Другое - нет");
         String choiceChildren = scanner.nextLine();
         List<Human> childrenList = new ArrayList<>();
         if (! choiceChildren.equals("1")){
             addChildren(childrenList);
         }
+    }
+
+    private void dialogAddHuman(){
+        System.out.println("Введите имя:");
+        String name = scanner.nextLine();
+        System.out.println("Введите пол: 1.Мужской, Другое - Женский:");
+        String choiceGender = scanner.nextLine();
+        Gender gender = Gender.Male;
+        if (! choiceGender.equals("1")) {
+            gender = Gender.Female;
+        }
+        System.out.println("Введите дату рождения:");
+        LocalDate dataBorn = getDateToString();
+        System.out.println("Пропустить дату смерти? 1. Да, Другое - нет");
+        String choiceDiedDate = scanner.nextLine();
+        LocalDate diedDate = null;
+        if (! choiceDiedDate.equals("1")){ diedDate = getDateToString(); }
         presenter.addHuman(name, gender, dataBorn, diedDate);
     }
+
     private LocalDate getDateToString(){
         System.out.println("день");
         int day = Integer.parseInt(scanner.nextLine());
@@ -117,11 +123,15 @@ public class ConsoleUI implements View {
     }
 
     public void fileWriter(){
-        presenter.fileWriter();
+        System.out.println("Введите путь к файлу: (по умолчанию - в директории проекта, можно пропусить)");
+        String path = scanner.nextLine();
+        presenter.fileWriter(path);
     }
 
     public void fileRead(){
-        presenter.fileReader();
+        System.out.println("Введите путь к файлу: (по умолчанию - в директории проекта, можно пропусить)");
+        String path = scanner.nextLine();
+        presenter.fileReader(path);
     }
 
     public void sortByName() {

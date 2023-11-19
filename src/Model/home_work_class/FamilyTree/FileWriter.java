@@ -9,7 +9,8 @@ public class FileWriter implements Writeable {
         this.path = path;
     }
     public FileWriter() {
-        this("tree.out");
+        this("");
+        this.path = getDefaultPath();
     }
     public void write(FamilyTree tree) {
         try {
@@ -27,15 +28,16 @@ public class FileWriter implements Writeable {
     }
 
     public FamilyTree read() {
+        FamilyTree tree = new FamilyTree<>();
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(this.path));
-            FamilyTree tree = (FamilyTree) objectInputStream.readObject();
+            tree = (FamilyTree) objectInputStream.readObject();
             objectInputStream.close();
             return tree;
         }
         catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
-            return null;
+            return tree;
         }
     }
 
@@ -43,4 +45,6 @@ public class FileWriter implements Writeable {
         this.path = path;
         return this.read();
     }
+
+    public String getDefaultPath(){return "tree.out";}
 }

@@ -25,15 +25,15 @@ public class Presenter {
         view.printAnswer(info);
     }
 
-    public void fileWriter(){
-        boolean res = this.model.fileWriter();
+    public void fileWriter(String path){
+        boolean res = this.model.fileWriter(path);
         if (res){
         this.view.printAnswer("Семейное дерево записано\n");}
         else {this.view.printAnswer("Семейное дерево не записано\n");}
     }
 
-    public void fileReader(){
-        boolean res = this.model.fileReader();
+    public void fileReader(String path){
+        boolean res = this.model.fileReader(path);
         if (res){
             getHumansListInfo();
             this.view.printAnswer("Семейное древо прочитано\n");
