@@ -100,7 +100,7 @@ public class Test {
     private static FamilyTree<Human> load() {
         Writable fileHandler = new FileHandler();
         String filePath = "src/writer/tree.txt";
-        return (FamilyTree) fileHandler.read(filePath);
+        return (FamilyTree<Human>) fileHandler.read(filePath);
     }
     private static void save(FamilyTree<Human> myTree){
         Writable fileHandler = new FileHandler();

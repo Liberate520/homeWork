@@ -7,7 +7,7 @@ import java.time.*;
 import java.util.*;
 
 //public class Human implements Serializable, FamilyTreeItem< Human >, Comparable<Human> {
-public class Human implements Serializable, FamilyTreeItem< Human > {
+public class Human implements FamilyTreeItem< Human > {
     private int id;
     private String lastname;
     private String name;
