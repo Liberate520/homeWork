@@ -6,22 +6,22 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class GenealogyTreeIterator<T> implements Serializable, Iterator<T> {
-    private List<T> people;
+    private List<T> tree;
     private int currentIndex = 0;
 
-    public GenealogyTreeIterator(List<T> people) {
-        this.people = people;
+    public GenealogyTreeIterator(List<T> tree) {
+        this.tree = tree;
     }
 
     @Override
     public boolean hasNext() {
-        return currentIndex < people.size();
+        return currentIndex < tree.size();
     }
 
     @Override
     public T next() {
         if (hasNext()) {
-            return people.get(currentIndex++);
+            return tree.get(currentIndex++);
         } else {
             throw new NoSuchElementException();
         }

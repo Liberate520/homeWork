@@ -8,37 +8,37 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GenealogyTree<T> implements Serializable, Iterable<T> {
-    private List<T> people;
+    private List<T> tree;
 
     public GenealogyTree() {
-        people = new ArrayList<>();
+        tree = new ArrayList<>();
     }
 
-    public void addPerson(T person) {
-        if (!people.contains(person)) {
-            people.add(person);
-            System.out.println("В дерево добавлен: " + person);
+    public void addElement(T element) {
+        if (!tree.contains(element)) {
+            tree.add(element);
+            System.out.println("В дерево добавлен: " + element);
         } else {
-            System.out.println("Не удалось добавить в дерево дубликат: " + person);
+            System.out.println("Не удалось добавить в дерево дубликат: " + element);
         }
     }
 
-    public List<T> getPeople() {
-        return people;
+    public List<T> getTree() {
+        return tree;
     }
 
-    public List<T> getPeopleSortedBy(Comparator<T> comparator) {
-        List<T> sortedPeople = new ArrayList<>(people);
-        Collections.sort(sortedPeople, comparator);
-        return sortedPeople;
+    public List<T> getTreeSortedBy(Comparator<T> comparator) {
+        List<T> result = new ArrayList<>(tree);
+        Collections.sort(result, comparator);
+        return result;
     }
 
-    public void setPeople(List<T> people) {
-        this.people = people;
+    public void setTree(List<T> tree) {
+        this.tree = tree;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new GenealogyTreeIterator<T>(people);
+        return new GenealogyTreeIterator<T>(tree);
     }    
 }

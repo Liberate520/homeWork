@@ -105,10 +105,5 @@ public class Person implements Serializable{
                Objects.equals(lastName, person.lastName) &&
                Objects.equals(surName, person.surName) &&
                Objects.equals(birthDate, person.birthDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, surName, birthDate);
-    }
+    }   
 }

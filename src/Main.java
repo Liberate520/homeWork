@@ -3,7 +3,8 @@ import java.util.GregorianCalendar;
 import genealogy_tree.genealogy_tree.GenealogyTree;
 import genealogy_tree.person.Gender;
 import genealogy_tree.person.Person;
-import genealogy_tree.person.PersonComparators;
+import genealogy_tree.person.comparators.PersonComparatorByAge;
+import genealogy_tree.person.comparators.PersonComparatorByFullName;
 import genealogy_tree.writer.FileHandler;
 import genealogy_tree.writer.Writable;
 
@@ -41,12 +42,12 @@ public class Main {
             new GregorianCalendar(1999, 1, 17));
             
         GenealogyTree<Person> tree = new GenealogyTree<>();
-        tree.addPerson(ivan);
-        tree.addPerson(maria);
-        tree.addPerson(anna);
-        tree.addPerson(andrey);
-        tree.addPerson(andrey);
-        tree.addPerson(andrey1);
+        tree.addElement(ivan);
+        tree.addElement(maria);
+        tree.addElement(anna);
+        tree.addElement(andrey);
+        tree.addElement(andrey);
+        tree.addElement(andrey1);
 
         ivan.addChild(anna);
         ivan.addChild(andrey);
@@ -73,12 +74,12 @@ public class Main {
             }
 
             System.out.println("\n\nСортировка по возрасту:\n");
-            for (Person person : treeFromFile.getPeopleSortedBy(PersonComparators.byAge)){
+            for (Person person : treeFromFile.getTreeSortedBy(new PersonComparatorByAge())){
                 System.out.println(person); 
             }
 
             System.out.println("\n\nАлфавитная сортировка:\n");
-            for (Person person : treeFromFile.getPeopleSortedBy(PersonComparators.byFullName)){
+            for (Person person : treeFromFile.getTreeSortedBy(new PersonComparatorByFullName())){
                 System.out.println(person); 
             }            
         }
