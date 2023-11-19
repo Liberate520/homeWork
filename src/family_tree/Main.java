@@ -6,7 +6,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.io.IOException;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         String nameFile = "tree.txt";
         String path = "src/family_tree/writer/";
@@ -25,9 +25,9 @@ public class Main {
         }
         else {
             System.out.println("File not exist");
-//            FamilyTree tree = familyTree();
-//            System.out.println(tree);
-//            save(tree, filePath);
+            FamilyTree tree = familyTree();
+            System.out.println(tree);
+            save(tree, filePath);
         }
     }
 

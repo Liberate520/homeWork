@@ -6,18 +6,18 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human> {
+public class Human<T extends HumanInterface<T>> implements Serializable, Comparable<T>, HumanInterface<T> {
     private long id;
     private String name;
     private Gender gender;
     private LocalDate birth;
     private LocalDate death;
-    private Human parentM;
-    private Human parentF;
-    private List<Human> children;
+    private T parentM;
+    private T parentF;
+    private List<T> children;
 
 
-    public Human(String name,Gender gender, LocalDate birth, LocalDate death, Human parentM, Human parentF) {
+    public Human(String name,Gender gender, LocalDate birth, LocalDate death, T parentM, T parentF) {
         id = -1;
         this.name = name;
         this.gender = gender;
@@ -30,7 +30,7 @@ public class Human implements Serializable, Comparable<Human> {
     public Human(String name,Gender gender, LocalDate birth) {
         this(name,gender,birth,null,null,null);
     }
-    public Human(String name,Gender gender, LocalDate birth, Human parentM, Human parentF) {
+    public Human(String name,Gender gender, LocalDate birth, T parentM, T parentF) {
         this(name,gender,birth,null,parentM,parentF);
     }
 
@@ -58,7 +58,7 @@ public class Human implements Serializable, Comparable<Human> {
         return death;
     }
 
-    public List<Human> getChildren() {
+    public List<T> getChildren() {
         return children;
     }
 
@@ -69,19 +69,19 @@ public class Human implements Serializable, Comparable<Human> {
     public long getId(){
         return id;
     }
-    public void setParentM(Human parentM){
+    public void setParentM(T parentM){
         this.parentM = parentM;
     }
 
-    public void setParentF(Human parentF){
+    public void setParentF(T parentF){
         this.parentF = parentF;
     }
 
-    public Human getParentF() {
+    public T getParentF() {
         return parentF;
     }
 
-    public Human getParentM() {
+    public T getParentM() {
         return parentM;
     }
 
@@ -89,13 +89,13 @@ public class Human implements Serializable, Comparable<Human> {
         return gender;
     }
 
-    public void addKid(Human kid){
+    public void addKid(T kid){
         if (!children.contains(kid)){
             children.add(kid);
         }
     }
 
-    public void addParent(Human parent){
+    public void addParent(T parent){
         if (parent.getGender().equals(Gender.male)){
             setParentM(parent);
         }
@@ -104,8 +104,8 @@ public class Human implements Serializable, Comparable<Human> {
         }
     }
 
-    public List<Human> getParent() {
-        List<Human> parents = new ArrayList<>(2);
+    public List<T> getParent() {
+        List<T> parents = new ArrayList<>(2);
         if (parentM != null){
             parents.add(parentM);
         }
@@ -153,20 +153,19 @@ public class Human implements Serializable, Comparable<Human> {
 
     public String getData(){
         StringBuilder info = new StringBuilder();
-        info.append("\n---------------");
-        info.append("\nid: ");
+        info.append("id: ");
         info.append(id);
-        info.append("\nname: ");
+        info.append(", name: ");
         info.append(name);
-        info.append("\ngender: ");
+        info.append(", gender: ");
         info.append(getGender());
-        info.append("\nage: ");
+        info.append(", age: ");
         info.append(getAge(birth,death));
-        info.append("\nfather: ");
+        info.append(", father: ");
         info.append(getParentMInfo());
-        info.append("\nmother: ");
+        info.append(", mother: ");
         info.append(getParentFInfo());
-        info.append("\nchildren: ");
+        info.append(", children: ");
         info.append(getChildrenInfo());
         return info.toString();
     }
@@ -194,12 +193,12 @@ public class Human implements Serializable, Comparable<Human> {
         if (!(obj instanceof Human)){
             return false;
         }
-        Human human = (Human) obj;
+        T human = (T) obj;
         return human.getId() == getId();
     }
 
     @Override
-    public int compareTo(Human o) {
+    public int compareTo(T o) {
         return name.compareTo(o.getName());
     }
 }
