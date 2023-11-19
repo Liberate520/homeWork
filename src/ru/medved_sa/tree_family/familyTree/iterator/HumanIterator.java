@@ -1,15 +1,15 @@
 package ru.medved_sa.tree_family.familyTree.iterator;
 
-import ru.medved_sa.tree_family.human.Human;
+import ru.medved_sa.tree_family.familyTree.EntityCreation;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class HumanIterator<T extends EntityCreation<T>> implements Iterator<T> {
     private int index;
-    private List<Human> studentList;
+    private List<T> studentList;
 
-    public HumanIterator(List<Human> studentList) {
+    public HumanIterator(List<T> studentList) {
         this.studentList = studentList;
     }
 
@@ -19,7 +19,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public T next() {
         return studentList.get(index++);
     }
 }

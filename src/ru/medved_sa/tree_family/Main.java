@@ -10,11 +10,11 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree familyTreeList = getFamilyTreeTest();
+//        FamilyTree<Human> familyTreeList = getFamilyTreeTest();
 
 
-        save(familyTreeList);
-        FamilyTree familyTreeRead = read();
+//        save(familyTreeList);
+        FamilyTree<Human> familyTreeRead = read();
 
 
         System.out.println(getHumanListInfoIterator(familyTreeRead));
@@ -27,8 +27,7 @@ public class Main {
     }
 
 
-
-    private static String getHumanListInfoIterator(FamilyTree familyList) {
+    private static String getHumanListInfoIterator(FamilyTree<Human> familyList) {
         StringBuilder sb = new StringBuilder();
         sb.append("Список студентов через iterator:\n");
         for (Human human : familyList) {
@@ -38,20 +37,20 @@ public class Main {
         return sb.toString();
     }
 
-    private static FamilyTree read(){
+    private static FamilyTree<Human> read() {
         FileHandlerService fileHandler = new FileHandlerService();
-         return (FamilyTree) fileHandler.readFile();
+        return (FamilyTree) fileHandler.readFile();
     }
 
-    private static void save(FamilyTree familyTreeForPreservation) {
+    private static void save(FamilyTree<Human> familyTreeForPreservation) {
         FileHandlerService fileHandler = new FileHandlerService();
         fileHandler.saveFile(familyTreeForPreservation);
     }
 
 
-    private static FamilyTree getFamilyTreeTest() {
+    private static FamilyTree<Human> getFamilyTreeTest() {
 
-        FamilyTree familyTree = new FamilyTree("Test");
+        FamilyTree<Human> familyTree = new FamilyTree<>("Test");
 
         Human oleg = new Human("Олег", Gender.Male,
                 LocalDate.of(1988, 3, 5));
@@ -85,7 +84,6 @@ public class Main {
         familyTree.addHuman(larisa);
 
 
-
 //        System.out.println(oleg.getFindInfoAboutChildren());
 //        System.out.println(oleg.getBirthDate());
 //        System.out.println(evgeniy.getFindMotherName());
@@ -95,7 +93,6 @@ public class Main {
 //        System.out.println(familyTree.getById(4));
 //        System.out.println(familyTree.getSiblings(3));
 //        System.out.println(familyTree.getByFirstName(irina.getFirstName()));
-
 
 
         return familyTree;

@@ -1,12 +1,12 @@
 package ru.medved_sa.tree_family.human.comparator;
 
-import ru.medved_sa.tree_family.human.Human;
+import ru.medved_sa.tree_family.familyTree.EntityCreation;
 
 import java.util.Comparator;
 
-public class HumanComparatorByFirstName implements Comparator<Human> {
+public class HumanComparatorByFirstName<T extends EntityCreation<T>> implements Comparator<T> {
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         return o1.getFirstName().compareTo(o2.getFirstName());
     }
 }
