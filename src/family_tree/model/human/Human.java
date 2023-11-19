@@ -1,16 +1,16 @@
-package family_tree.human;
+package family_tree.model.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import family_tree.family_trees.TreeItem;
-import family_tree.human.types_enum.Gender;
-import family_tree.human.types_enum.LifeStatus;
+import family_tree.model.family_trees.TreeItem;
+import family_tree.model.human.types_enum.Gender;
+import family_tree.model.human.types_enum.LifeStatus;
 
 import java.util.ArrayList;
 
-public class Human implements Serializable, TreeItem{
+public class Human implements Serializable, TreeItem<Human>{
     private int id;
     private String name;
     private Gender gender;
@@ -20,14 +20,14 @@ public class Human implements Serializable, TreeItem{
     private Human father;
     private List<Human> childrens;
 
-    public Human(String name, LocalDate birthDay, LocalDate deadDay, Human mother, Human father, Gender gender)
+    public Human(String name, LocalDate birthDay, LocalDate deadDay, Gender gender)
     {
         id = -1;
         this.name = name;
         this.birthDay = birthDay;
         this.deadDay = deadDay;
-        this.mother = mother;
-        this.father = father;
+        this.mother = null;
+        this.father = null;
         this.gender = gender;
         childrens = new ArrayList<>();   
     }
@@ -72,6 +72,16 @@ public class Human implements Serializable, TreeItem{
     public Gender getGender() 
     {
         return gender;
+    }
+
+    public void addFather(Human father) 
+    {
+        this.father = father;
+    }
+
+    public void addMother(Human mother) 
+    {
+        this.mother = mother;
     }
 
     public LifeStatus getLifeStatus() 

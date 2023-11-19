@@ -1,14 +1,15 @@
-package family_tree.family_trees;
+package family_tree.model.family_trees;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import family_tree.human.comparators.HumanComparatorByAge;
-import family_tree.human.comparators.HumanComparatorByName;
+import family_tree.model.family_trees.iterators.HumanIterator;
+import family_tree.model.human.comparators.HumanComparatorByAge;
+import family_tree.model.human.comparators.HumanComparatorByName;
 
-public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>{
+public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E>{
     private List<E> humanstList;
     private int humansID;
     public FamilyTree() 
@@ -35,27 +36,53 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
             humanstList.add(people);
             people.setID(humansID ++);
 
- //           addChildToParents(people);
+            addChildToParents(people);
         }
     }
 
-    // private void addChildToParents (E people)
-    // {
-    //     for(E parent : people.getParents())
-    //     {
-    //         parent.addChild(people);
-    //     }
-    // }
+    private void addChildToParents (E people)
+    {
+        for(E parent : people.getParents())
+        {
+            parent.addChild(people);
+        }
+    }
+
+    public void addMotherToChild(E mother, E child)
+    {
+        child.addMother(mother);
+        addChildToParents(child);
+    }
+
+    public void addFatherToChild(E father, E child)
+    {
+        child.addFather(father);
+        addChildToParents(child);
+    }
+
     public String getHumansListInfo()
     {
         StringBuilder stringBuilder = new StringBuilder();
+        int index = 1;
         stringBuilder.append("Список людей: \n");
         for(E people: humanstList)
         {
+            stringBuilder.append(index);
+            stringBuilder.append(" .");
             stringBuilder.append(people);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public E getHumanFromList(int index)
+    {
+        return humanstList.get(index);
+    }
+
+    public int getFamilyListSize()
+    {
+        return humanstList.size();
     }
 
     public void sortByName(){

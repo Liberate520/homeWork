@@ -1,7 +1,9 @@
-package family_tree.family_trees;
+package family_tree.model.family_trees.iterators;
 
 import java.util.Iterator;
 import java.util.List;
+
+import family_tree.model.family_trees.TreeItem;
 
 
 public class HumanIterator<E extends TreeItem> implements Iterator<E>{
