@@ -1,17 +1,18 @@
 package family_Tree.familyTree;
 
+import family_Tree.human.Human;
 import family_Tree.human.comparators.HumanComparatorByAge;
 import family_Tree.human.comparators.HumanComparatorById;
 import family_Tree.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyTreeItem<E>> implements Serializable, Iterable<E> {
     private List<E> humanList;
-//    private int humanId;
 
     public FamilyTree(){
         humanList = new ArrayList<>();
@@ -46,9 +47,9 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("В дереве ");
+        sb.append("Элементов в дереве => ");
         sb.append((humanList.size()));
-        sb.append(" элементов: \n");
+        sb.append(" \n");
         for (E human: humanList) {
             sb.append(human);
             sb.append("\n");
@@ -56,26 +57,73 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
         return sb.toString();
     }
 
+    public String getHumanInfo(int id) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getById(id));
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    public List<E> getBrotherSister(int id){
+        E human = getById(id);
+        if(human == null){
+            return null;
+        }
+        List<E> res = new ArrayList<>();
+
+        for(E parent: human.getParents()){
+            for(E child: parent.getChildren()){
+                if(!child.equals(human) && !res.contains(child)){
+                    res.add(child);
+                }
+            }
+        }
+        return res;
+    }
     @Override
     public String toString(){
         return getInfo();
     }
 
     public void sortByName(){
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge(){
-        humanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge<>());
     }
 
     public void sortById(){
-        humanList.sort(new HumanComparatorById());
+        humanList.sort(new HumanComparatorById<>());
+    }
+
+    public void addChild(int parentId, int childId){
+        E human = getById(parentId);
+        E child = getById(childId);
+        human.addChild(child);
+    }
+
+    public void addParent(int humanId, int parentId){
+        E human = getById(humanId);
+        E parent = getById(parentId);
+        human.addParent(parent);
+    }
+
+    public E findById(int id) {
+        for (E human : humanList) {
+            if (human.getId() == id) return human;
+        }
+        return null;
+    }
+
+    public void setDeathDate(int id, LocalDate date){
+        E human = findById(id);
+        human.setDateOfDeath(date);
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new HumanIterator(humanList);
+        return new HumanIterator<>(humanList);
     }
 
 }

@@ -170,7 +170,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
         }
     }
 
-    public int getPeriod(LocalDate start, LocalDate end){
+    private int getPeriod(LocalDate start, LocalDate end){
         Period difference = Period.between(start, end);
         return difference.getYears();
     }
@@ -195,16 +195,14 @@ public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Hu
         return info.toString();
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Human)) {
+        if (!(obj instanceof Human human)) {
             return false;
         }
-        Human human = (Human) obj;
         return human.getId() == getId();
     }
 

@@ -26,7 +26,7 @@ public class TreeBuilder {
         tree.addHuman(Elena);
         Human Oleg = new Human(1,"Олег", LocalDate.of(1968, 4, 9), Gender.Male);
         tree.addHuman(Oleg);
-        Human Dima = new Human(2,"Дмитрий", LocalDate.of(1985, 5, 29), Gender.Male, Oleg, Elena);
+        Human Dima = new Human(2,"Дмитрий", LocalDate.of(1985, 5, 29), Gender.Male, Elena, Oleg);
         tree.addHuman(Dima);
         Human Rita = new Human(3,"Маргарита", LocalDate.of(1985, 10, 13), Gender.Female);
         tree.addHuman(Rita);

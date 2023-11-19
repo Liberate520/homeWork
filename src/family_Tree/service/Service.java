@@ -14,7 +14,7 @@ public class Service {
     public TreeBuilder builder;
 
     public Service() {
-        tree = new FamilyTree();
+        tree = new FamilyTree<>();
         builder = new TreeBuilder();
     }
 
@@ -47,16 +47,31 @@ public class Service {
         tree.addHuman(human);
     }
 
-    public void addHumanWithParents(String name, LocalDate dateOfBirth, Gender gender, Human mother, Human father){
-        Human human = builder.buildHumanWithParents(name, dateOfBirth, gender, mother, father);
-        tree.addHuman(human);
-    }
-
     public void generateTree(){
         tree = builder.generateTree();
     }
 
-    public void toPrint() {
+    public void printFullInfo() {
         System.out.println(tree.getInfo());
+    }
+
+    public void printHumanInfo(int id) {
+        System.out.println(tree.getHumanInfo(id));
+    }
+
+    public void addChild(int parentId, int childId){
+        tree.addChild(parentId, childId);
+    }
+
+    public void addParent(int humanId, int parentId){
+        tree.addParent(humanId, parentId);
+    }
+
+    public Human findById(int id){
+        return tree.findById(id);
+    }
+
+    public void setDeathDate(int id, LocalDate date){
+        tree.setDeathDate(id, date);
     }
 }

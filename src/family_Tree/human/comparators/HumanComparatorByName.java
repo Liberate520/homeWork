@@ -1,7 +1,6 @@
 package family_Tree.human.comparators;
 
 import family_Tree.familyTree.FamilyTreeItem;
-import family_Tree.human.Human;
 
 import java.util.Comparator;
 
