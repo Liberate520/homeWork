@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<G extends GeneralTypeTree<G>> implements Serializable, Iterable<Human> {
     private long humansId; //генерация идентификаторов для присваивания человекам
     private List<Human> humanList;  //список людей
     public FamilyTree() {
