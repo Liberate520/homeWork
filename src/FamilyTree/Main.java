@@ -1,6 +1,7 @@
 package FamilyTree;
 import FamilyTree.Person.Gender;
 import FamilyTree.Person.Person;
+import FamilyTree.Person.PersonBuilder;
 import FamilyTree.Service.FileHandler;
 import FamilyTree.Service.Service;
 import FamilyTree.Tree.FamilyTree;
@@ -11,18 +12,21 @@ public class Main {
     public static void main(String[] args) {
         // Создание генеалогического дерева с корневым человеком person1
         Service myTree = new Service("Romanov");
-        //FamilyTree familyTree = new FamilyTree();
+
+        PersonBuilder builder = new PersonBuilder();
 
 
-        Person per1 = new Person("Sveta", "Romanova", Gender.woman, LocalDate.of(1989, 10, 2));
-        Person per2 = new Person("Petr", "Romanov", Gender.man, LocalDate.of(1988, 1, 15));
+
+
+        Person per1 = builder.build("Sveta", "Romanova", Gender.woman, LocalDate.of(1989, 10, 2));
+        Person per2 = builder.build("Petr", "Romanov", Gender.man, LocalDate.of(1988, 1, 15));
         per1.setMarriage(per2, LocalDate.of(2010, 11, 12));
         per2.setMarriage(per1, LocalDate.of(2010, 11, 12));
 
-        myTree.addMember(per1);
-        myTree.addMember(per2);
+        myTree.addPerson(per1);
+        myTree.addPerson(per2);
 
-        Person ch1 = new Person("Ivan", "Romanov", Gender.man, LocalDate.of(2020, 4, 11), per1, per2);
+        Person ch1 = builder.build("Ivan", "Romanov", Gender.man, LocalDate.of(2020, 4, 11), per1, per2);
         myTree.addChild(ch1);
 
 
@@ -33,7 +37,6 @@ public class Main {
 
         FileHandler fs = new FileHandler();
         fs.write(myTree, "test.bin");
-
 
 
         Service testTree = null;

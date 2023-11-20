@@ -1,14 +1,14 @@
 package FamilyTree.Person.comparators;
 
-import FamilyTree.Person.Person;
+import FamilyTree.Person.PersonElements;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 
-public class CompareByPersonAge implements Comparator<Person> {
+public class CompareByPersonAge<E extends PersonElements> implements Comparator<E> {
 
     @Override
-    public int compare(Person o1, Person o2) {
+    public int compare(E o1, E o2) {
         return Integer.compare(LocalDate.from(o1.getBurnData()).getYear(), LocalDate.from(o2.getBurnData()).getYear());
     }
 }

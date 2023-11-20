@@ -1,24 +1,27 @@
 package FamilyTree.Person;
 
+import FamilyTree.Tree.TreeElements;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.io.Serializable;
 
-public class Person implements Serializable {
-    private final String name;
-    private final String surname;
+public class Person implements Serializable, PersonElements, TreeElements<Person> {
+    private String name;
+    private String surname;
     private Gender gender;
-    private final LocalDate burnData;
+    private LocalDate burnData;
     private LocalDate deadData;
     private Person mother;
     private Person father;
     private List<MaritalStatus> maritalStatus = new ArrayList<>();
     private List<Person> children = new ArrayList<>();
 
+    private PersonBuilder builder;
 
-    public Person(String name, String surname, Gender gender, LocalDate burnData, Person mother,Person father) {
+    public Person (String name, String surname, Gender gender, LocalDate burnData, Person mother, Person father) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -26,15 +29,12 @@ public class Person implements Serializable {
         this.mother = mother;
         this.father = father;
     }
-    public Person(String name, String surname, Gender gender, LocalDate burnData) {
-        this(name, surname, gender, burnData, null, null);
-    }
 
     public String getName() { return name; }
     public String getSurname() { return surname; }
     public Gender getGender() { return gender; }
     public LocalDate getBurnData() { return burnData; }
-    public  LocalDate getDeadData() { return deadData; }
+    public LocalDate getDeadData() { return deadData; }
     public Person getMother() { return mother;}
     public Person getFather() { return father;}
     public MaritalStatus getMaritalStatus() {
