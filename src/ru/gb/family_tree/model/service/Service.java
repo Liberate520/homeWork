@@ -12,10 +12,12 @@ import java.time.LocalDate;
 public class Service {
     private FamilyTree<Human> tree;
     private HumanBuilder builder;
+    private FIleHandler fh;
 
     public Service() {
         tree = new FamilyTree<>();
         builder = new HumanBuilder();
+        fh = new FIleHandler();
     }
 
     public Human addNewToFamily(String lastname, String name, Gender gender) {
@@ -110,7 +112,6 @@ public class Service {
     }
 
     public void load() {
-        FIleHandler fh = new FIleHandler();
         try {
             tree = (FamilyTree) fh.read("output.data");
         } catch (RuntimeException | IOException e) {
