@@ -1,9 +1,8 @@
-package family_Tree.familyTree;
+package family_Tree.model.familyTree;
 
-import family_Tree.human.Human;
-import family_Tree.human.comparators.HumanComparatorByAge;
-import family_Tree.human.comparators.HumanComparatorById;
-import family_Tree.human.comparators.HumanComparatorByName;
+import family_Tree.model.human.comparators.HumanComparatorByAge;
+import family_Tree.model.human.comparators.HumanComparatorById;
+import family_Tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,8 +1,8 @@
-package family_Tree.builder;
+package family_Tree.model.builder;
 
-import family_Tree.familyTree.FamilyTree;
-import family_Tree.human.Gender;
-import family_Tree.human.Human;
+import family_Tree.model.familyTree.FamilyTree;
+import family_Tree.model.human.Gender;
+import family_Tree.model.human.Human;
 
 import java.time.LocalDate;
 

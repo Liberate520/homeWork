@@ -1,8 +1,8 @@
 package family_Tree.presenter;
 
-import family_Tree.human.Gender;
-import family_Tree.human.Human;
-import family_Tree.service.Service;
+import family_Tree.model.human.Gender;
+import family_Tree.model.human.Human;
+import family_Tree.model.service.Service;
 import family_Tree.view.View;
 
 import java.time.LocalDate;

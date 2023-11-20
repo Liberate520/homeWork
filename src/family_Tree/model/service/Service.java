@@ -1,10 +1,10 @@
-package family_Tree.service;
+package family_Tree.model.service;
 
-import family_Tree.familyTree.FamilyTree;
-import family_Tree.builder.TreeBuilder;
-import family_Tree.human.Gender;
-import family_Tree.human.Human;
-import family_Tree.writer.FileHandler;
+import family_Tree.model.familyTree.FamilyTree;
+import family_Tree.model.builder.TreeBuilder;
+import family_Tree.model.human.Gender;
+import family_Tree.model.human.Human;
+import family_Tree.model.writer.FileHandler;
 
 import java.time.LocalDate;
 

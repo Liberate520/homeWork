@@ -1,7 +1,7 @@
 package family_Tree.view;
 
-import family_Tree.human.Gender;
-import family_Tree.human.Human;
+import family_Tree.model.human.Gender;
+import family_Tree.model.human.Human;
 import family_Tree.presenter.Presenter;
 
 import java.time.LocalDate;
