@@ -1,15 +1,11 @@
-package TreePack;
-
-import PersonPack.Person;
+package Model.TreePack;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface TreeItem<T> {
 
-    void setParent1(T parent1);
-
-    void setParent2(T parent2);
+    void addParent(T parent);
 
     void addChild(T child);
 

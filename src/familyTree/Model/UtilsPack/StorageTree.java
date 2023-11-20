@@ -1,6 +1,6 @@
-package UtilsPack;
+package Model.UtilsPack;
 
-import TreePack.FamilyTree;
+import Model.TreePack.FamilyTree;
 
 import java.io.*;
 

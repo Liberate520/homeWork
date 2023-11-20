@@ -1,6 +1,6 @@
-package PersonPack;
+package Model.PersonPack;
 
-import TreePack.TreeItem;
+import Model.TreePack.TreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Person implements Serializable, TreeItem<Person> {
     private String name;
     private LocalDate birthDate;
-    private Person parent1, parent2;
+    private Person father, mother;
     private ArrayList<Person> children  = new ArrayList<Person>();
 
     private Gender gender;
@@ -22,14 +22,28 @@ public class Person implements Serializable, TreeItem<Person> {
     public LocalDate getBirthDate(){
         return this.birthDate;
     }
-    public void setParent1(Person parent1){
-        this.parent1 = parent1;
+
+    public void setFather(Person father){
+        this.father = father;
     }
 
-    public void setParent2(Person parent2){
-        this.parent2 = parent2;
+    public void setMother(Person mother){
+        this.mother = mother;
     }
 
+    public void addParent(Person parent){
+        if (parent.gender.equals(Gender.male)){
+            this.setFather(parent);
+            if (! parent.getChildren().contains(this)){
+                parent.addChild(this);
+            }
+        }else{
+            this.setMother(parent);
+            if (! parent.getChildren().contains(this)){
+                parent.addChild(this);
+            }
+        }
+    }
     public void addChild(Person child){
         this.children.add(child);
     }
@@ -44,14 +58,14 @@ public class Person implements Serializable, TreeItem<Person> {
                 "gender: " + gender + "\n"+
                 "date of birth: " + birthDate + "\n" + "parents: ";
 
-        if (this.parent1 != null){
-            tmp += parent1.name + ", ";
+        if (this.father != null){
+            tmp += father.name + ", ";
         }else{
             tmp += "--" + ", ";
         }
 
-        if (this.parent2 != null){
-            tmp += parent2.name + "\n";
+        if (this.mother != null){
+            tmp += mother.name + "\n";
         }else{
             tmp += "--" + "\n";
         }

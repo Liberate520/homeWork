@@ -1,4 +1,4 @@
-package PersonPack;
+package Model.PersonPack;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package UtilsPack;
+package Model.UtilsPack;
 
 import java.io.Serializable;
 

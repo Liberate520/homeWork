@@ -1,6 +1,4 @@
-package TreePack;
-
-import PersonPack.Person;
+package Model.TreePack;
 
 import java.util.HashMap;
 import java.util.Iterator;
