@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class FileHandler {
-    public static void main(String[] args) {
+    public static <E> void main(String[] args) {
         // Создаем объект, который нужно сериализовать
         ArrayList<Human> humans = new ArrayList<>();
 //        Human human1 = new Human("Ивановский", "Иван Семенович", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Null,350000.0, LocalDate.of(1991, 1, 10), 0.001);
@@ -40,7 +40,7 @@ public class FileHandler {
 
 //        String filePath = "homeWork/src/family_tree.txt";
         String filePath = "homeWork/src/model_app/family_tree.txt";
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath/*, true*/);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             // Сериализуем объект
             for (Human human : humans) {
@@ -85,7 +85,8 @@ public class FileHandler {
         }
 
         System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
-        //  Сортировка списка по Доходам
+//          Сортировка списка по Доходам
+//        humans.sort(Comparator.comparing(Human::getIncome).reversed());
         humans.sort(Comparator.comparing(Human::getIncome).reversed());
         for (Human human : humans) {
             System.out.println(human);
@@ -93,6 +94,7 @@ public class FileHandler {
 
 
     }
+
 
     public static void FileHandlerForFamilyTree() throws IOException {
 //        String filePath = "homeWork/src/family_tree.txt";
@@ -208,9 +210,6 @@ public class FileHandler {
 //
 //        }
     }
-
-
-
 
 
 

@@ -1,8 +1,8 @@
 package model_app;
 
+import static family_tree.base.FileHandler.FileHandlerForFamilyTree;
 
 import java.io.*;
-import static family_tree.base.FileHandler.FileHandlerForFamilyTree;
 
 
 public class Main {
@@ -21,7 +21,6 @@ public class Main {
 
 
     }
-
 
 
 //    private static extends TreeHub void party() {

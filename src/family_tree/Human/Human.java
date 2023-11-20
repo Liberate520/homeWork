@@ -1,6 +1,6 @@
 package family_tree.human;
 
-import family_tree.base.Iterable;
+import family_tree.base.TreeNode;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
-public class Human implements Comparable<Human>, Iterable, Serializable {
+public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
     private final String lastName;
     private final String firstName;
     private final Gender gender;
@@ -156,6 +156,12 @@ public class Human implements Comparable<Human>, Iterable, Serializable {
     }
 
     @Override
+    public double getIncome() { return income;  }
+
+    @Override
+    public Position getPosition(Human human) { return position; }
+
+    @Override
     public int compareTo(Human other) {
         int result;
         result = this.firstName.compareToIgnoreCase(other.firstName);
@@ -165,9 +171,6 @@ public class Human implements Comparable<Human>, Iterable, Serializable {
         return result;
     }
 
-    @Override
-    public double getIncome() {
-        return income;
-    }
+
 
 }

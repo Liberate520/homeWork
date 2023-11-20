@@ -1,17 +1,24 @@
 package family_tree.family_tree;
 
-import family_tree.base.Iterable;
+import family_tree.base.TreeNode;
 import family_tree.human.Human;
+
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Iterable {
+public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable<E>, FamilyTreeHub<Human> {
     private String lastName;
     private String firstName;
     private double Id;
     private final List<Human> humanList;
     private double income;
     private double id;
+    private String position;
+    private LocalDate birthDate;
+
 
 
     public FamilyTree(double id) {
@@ -34,17 +41,16 @@ public class FamilyTree implements Iterable {
 //
 //    }
 
-    public void sortByLastName(){
-        FamilyTree familyTree = null;
-        familyTree.sortByLastName();
-
-    }
+//    public void sortByLastName(){
+//        FamilyTree familyTree = null;
+//        familyTree.sortByLastName();
+//
+//    }
 
     @Override
     public String getLastName() {
         return lastName;
     }
-
 
     @Override
     public String getFirstName() {
@@ -61,15 +67,20 @@ public class FamilyTree implements Iterable {
         return 0;
     }
 
-
-
     @Override
     public double getIncome() {
         return income;
     }
 
+    @Override
+    public String getPosition() { return position; }
 
+    @Override
+    public int getAge() { return 0; }
 
+    @Override
+    public LocalDate getBirthDate() { return birthDate; }
 
-
+    @Override
+    public Iterator<E> iterator() { return (Iterator<E>) new TreeIterator<>(humanList); }
 }
