@@ -1,5 +1,6 @@
 package family_tree.base;
 
+import family_tree.family_tree.FamilyTree;
 import family_tree.human.*;
 
 import java.io.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class FileHandler {
-    public static <E> void main(String[] args) {
+    public static <E> void main(String[] args) throws IOException {
         // Создаем объект, который нужно сериализовать
         ArrayList<Human> humans = new ArrayList<>();
 //        Human human1 = new Human("Ивановский", "Иван Семенович", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Null,350000.0, LocalDate.of(1991, 1, 10), 0.001);
@@ -71,28 +72,31 @@ public class FileHandler {
 //        }
 
         //  Сортировка списка
+        FamilyTree.methodSortByLastName(humans);
+        FamilyTree.methodSortByAge(humans);
+        FamilyTree.methodSortByIncome(humans);
 
-        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
-        //  Сортировка списка по Фамилии
-        humans.sort(Comparator.comparing(Human::getLastName));
-        for (Human human : humans) {
-            System.out.println(human);
-        }
+//        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
+//        //  Сортировка списка по Фамилии
+//        humans.sort(Comparator.comparing(Human::getLastName));
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
 
-        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
-        //  Сортировка списка по Возрасту
-        humans.sort(Comparator.comparing(Human::getAge).reversed());
-        for (Human human : humans) {
-            System.out.println(human);
-        }
+//        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
+//        //  Сортировка списка по Возрасту
+//        humans.sort(Comparator.comparing(Human::getAge).reversed());
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
 
-        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
-//          Сортировка списка по Доходам
+//        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
+////          Сортировка списка по Доходам
+////        humans.sort(Comparator.comparing(Human::getIncome).reversed());
 //        humans.sort(Comparator.comparing(Human::getIncome).reversed());
-        humans.sort(Comparator.comparing(Human::getIncome).reversed());
-        for (Human human : humans) {
-            System.out.println(human);
-        }
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
 
 
     }
@@ -213,6 +217,33 @@ public class FileHandler {
 //        }
     }
 
+
+//    public static <E> void methodSortByLastName(ArrayList<Human> humans) {
+//        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
+//        //  Сортировка списка по Фамилии
+//        humans.sort(Comparator.comparing(Human::getLastName));
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
+//    }
+//
+//    public static void methodSortByAge(ArrayList<Human> humans) {
+//        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
+//        //  Сортировка списка по Возрасту
+//        humans.sort(Comparator.comparing(Human::getAge).reversed());
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
+//    }
+//
+//    public static void methodSortByIncome(ArrayList<Human> humans) {
+//        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
+////          Сортировка списка по Доходам
+//        humans.sort(Comparator.comparing(Human::getIncome).reversed());
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
+//    }
 
 
 }

@@ -6,6 +6,7 @@ import family_tree.human.Human;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,8 +19,6 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
     private double id;
     private String position;
     private LocalDate birthDate;
-
-
 
     public FamilyTree(double id) {
         humanList = new ArrayList<>();
@@ -38,13 +37,11 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
 //            stringBuilder.append("\n");
 //        }
 //        return stringBuilder.toString();
-//
 //    }
 
 //    public void sortByLastName(){
 //        FamilyTree familyTree = null;
 //        familyTree.sortByLastName();
-//
 //    }
 
     @Override
@@ -83,4 +80,34 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
 
     @Override
     public Iterator<E> iterator() { return (Iterator<E>) new TreeIterator<>(humanList); }
+
+
+    public static <E> void methodSortByLastName(ArrayList<Human> humans) {
+        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
+        //  Сортировка списка по Фамилии
+        humans.sort(Comparator.comparing(Human::getLastName));
+        for (Human human : humans) {
+            System.out.println(human);
+        }
+    }
+
+    public static void methodSortByAge(ArrayList<Human> humans) {
+        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
+        //  Сортировка списка по Возрасту
+        humans.sort(Comparator.comparing(Human::getAge).reversed());
+        for (Human human : humans) {
+            System.out.println(human);
+        }
+    }
+
+    public static void methodSortByIncome(ArrayList<Human> humans) {
+        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
+//          Сортировка списка по Доходам
+        humans.sort(Comparator.comparing(Human::getIncome).reversed());
+        for (Human human : humans) {
+            System.out.println(human);
+        }
+    }
+
+
 }
