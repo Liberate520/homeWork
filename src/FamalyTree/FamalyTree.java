@@ -1,15 +1,21 @@
+package FamalyTree;
 
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-//import Human_tree.Human;
 import java.util.Scanner;
 /**
  * Класс ГЕНЕОЛОГИЧЕССКОЕ ДЕРЕВО
  */
-public class FamalyTree implements Serializable {
+
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+import FamalyTree.HumanIterator;
+import Human.Gender;
+import Human.Human;
+public class FamalyTree implements Serializable, Iterable<Human> {
     private List<Human> listHuman = new ArrayList<>();
 
     /**
@@ -80,6 +86,11 @@ public class FamalyTree implements Serializable {
         for (Human human: listHuman){
             System.out.println(human);
         }
+    }
+
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(humanList);
     }
 
 }

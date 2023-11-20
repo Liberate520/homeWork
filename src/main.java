@@ -8,6 +8,8 @@
 
 //TTimport Human_tree.FamalyTree;
 
+import FamalyTree.FamalyTree;
+
 class Programma {
     public static void main (String[] args) {
         FamalyTree famalyTree = new FamalyTree();
