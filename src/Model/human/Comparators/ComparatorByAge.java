@@ -1,10 +1,7 @@
-package human.Comparators;
+package Model.human.Comparators;
 
-import human.Human;
-import tree.FamilyTreeItem;
+import Model.tree.FamilyTreeItem;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Comparator;
 
 public class ComparatorByAge<T extends FamilyTreeItem<T> > implements Comparator< T > {

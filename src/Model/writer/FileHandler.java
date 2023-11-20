@@ -1,7 +1,4 @@
-package writer;
-import human.Human;
-import tree.FamilyTree;
-import tree.FamilyTreeItem;
+package Model.writer;
 
 import java.io.*;
 

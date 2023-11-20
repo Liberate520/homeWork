@@ -1,7 +1,7 @@
-package tree;
-import human.Comparators.ComparatorByAge;
-import human.Comparators.ComparatorByLastname;
-import human.Comparators.ComparatorByName;
+package Model.tree;
+import Model.human.Comparators.ComparatorByAge;
+import Model.human.Comparators.ComparatorByLastname;
+import Model.human.Comparators.ComparatorByName;
 
 import java.io.Serializable;
 import java.util.*;
@@ -13,6 +13,7 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
 //        familyList = new ArrayList<>();
         this(new ArrayList<>());
     }
+
     public FamilyTree(List< T> familyList) {
         this.familyList=familyList;
     }
@@ -24,6 +25,7 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
     public void addHuman(T human) {
         human.setId(id++);
         if (!familyList.contains(human)) familyList.add(human);
+//        familyList.add(human);
     }
 
     /**
@@ -93,10 +95,10 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
     }
 
 
-    @Override
-    public String toString() {
-        return allTree().replace("Вывод всех членов семьи", "Отсортированное древо: \n");
-    }
+//    @Override
+//    public String toString() {
+//        return allTree().replace("Вывод всех членов семьи", "Отсортированное древо: \n");
+//    }
 
     @Override
     public Iterator< T > iterator() {

@@ -1,12 +1,9 @@
-//package Builder;
+//package Model.Builder;
 //
-//import human.Gender;
-//import human.Human;
-//import tree.FamilyTree;
+//import Model.human.Gender;
+//import Model.human.Human;
 //
 //import java.time.LocalDate;
-//import java.util.List;
-//import java.util.Map;
 //
 //public class HumanBuilder {
 //    private int curId;

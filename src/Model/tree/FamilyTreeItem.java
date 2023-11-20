@@ -1,12 +1,9 @@
-package tree;
+package Model.tree;
 
-import human.Gender;
-import human.Human;
+import Model.human.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.Objects;
 
 public interface FamilyTreeItem<T> extends Serializable {
     public void setSpouse(T spouse);

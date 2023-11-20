@@ -1,8 +1,6 @@
-package human;
-import org.jetbrains.annotations.NotNull;
-import tree.FamilyTree;
-import tree.FamilyTreeItem;
-import java.io.Serializable;
+package Model.human;
+import Model.tree.FamilyTreeItem;
+
 import java.time.*;
 import java.util.*;
 
@@ -53,6 +51,7 @@ public class Human implements FamilyTreeItem< Human > {
             setParent(parent2);
         }
     }
+
 
     //геттеры:
 
@@ -199,11 +198,11 @@ public class Human implements FamilyTreeItem< Human > {
 
     public void setParent(Human human) {
         if (human.getGender() == Gender.Male) {
-//            this.parents.put("Отец " , " " + human.getFullName());
-//            this.parents.put("Отец",  human);
+//            this.parents.put("Отец " , " " + Model.human.getFullName());
+//            this.parents.put("Отец",  Model.human);
             this.parents.put("Отец",  human);
         }
-//        else this.parents.put("Мать " , " " + human.getFullName());
+//        else this.parents.put("Мать " , " " + Model.human.getFullName());
         else this.parents.put("Мать ", human);
     }
 
