@@ -1,8 +1,6 @@
-package tree;
+package model.tree;
 import java.util.Iterator;
 import java.util.List;
-
-import human.Human;
 
 public class HumanIterator<T> implements Iterator<T>{
     private int index;

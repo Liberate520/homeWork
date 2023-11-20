@@ -1,12 +1,13 @@
-import human.Gender;
-import human.Human;
-import tree.FamilyTree;
-import writer.FileHandler;
+import model.Service;
+import model.human.Gender;
+import model.tree.FamilyTree;
+import model.writer.FileHandler;
+import view.ConsoleUI;
 
 public class Main {
     public static void main(String[] args) {
 
-        Service service = new Service();
+        /*Service service = new Service();
 
         service.addHuman("Виталий", "Яванов", Gender.Male);
         service.addHuman("Екатерина", "Иванова", Gender.Female);
@@ -16,23 +17,10 @@ public class Main {
         service.sortByName();
         System.out.println(service);
         service.sortBySurname();
-        System.out.println(service);
+        System.out.println(service);*/
 
-        write(service.getFamilyTree());
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.start();
 
-        Service s2 = new Service(load());
-    }
-
-    private static void write(FamilyTree familyTree) {
-        String filepath = "src/text/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.write(familyTree, filepath);
-    }
-
-    private static FamilyTree load() {
-        String filepath = "src/text/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        FamilyTree familyTree = (FamilyTree) fileHandler.read(filepath);
-        return familyTree;
     }
 }

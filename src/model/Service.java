@@ -1,7 +1,11 @@
-import builder.HumanBuilder;
-import human.Gender;
-import human.Human;
-import tree.FamilyTree;
+package model;
+import java.io.IOException;
+
+import model.builder.HumanBuilder;
+import model.human.Gender;
+import model.human.Human;
+import model.tree.FamilyTree;
+import model.writer.FileHandler;
 
 public class Service {
     public final char[] getHumansListInfo = null;
@@ -48,5 +52,19 @@ public class Service {
     @Override
     public String toString() {
         return getHumansListInfo();
+    }
+
+    public void load() {
+        FileHandler fileHandler = new FileHandler();
+        try {
+            tree = (FamilyTree) fileHandler.read("output.data");
+        } catch (RuntimeException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void write() {
+        FileHandler fileHandler = new FileHandler();
+        if (fileHandler.write(tree, "output.data")) System.out.println("Данные записаны");
     }
 }

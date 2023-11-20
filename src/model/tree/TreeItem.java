@@ -1,4 +1,4 @@
-package tree;
+package model.tree;
 
 public interface TreeItem {
     String getName();

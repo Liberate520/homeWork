@@ -1,9 +1,8 @@
-package human.comparators;
+package model.human.comparators;
 
 import java.util.Comparator;
 
-import human.Human;
-import tree.TreeItem;
+import model.tree.TreeItem;
 
 public class HumanComparatorByName<T extends TreeItem> implements Comparator<T>{
 
