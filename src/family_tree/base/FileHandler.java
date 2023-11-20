@@ -70,8 +70,10 @@ public class FileHandler {
 //            e.printStackTrace();
 //        }
 
-        //  Сортировка списка по Фамилии
+        //  Сортировка списка
+
         System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
+        //  Сортировка списка по Фамилии
         humans.sort(Comparator.comparing(Human::getLastName));
         for (Human human : humans) {
             System.out.println(human);
