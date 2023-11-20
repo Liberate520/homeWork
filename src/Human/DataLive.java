@@ -25,4 +25,8 @@ public class DataLive {
     public LocalDate getDayded(){
         return this.dayded;
     }
+
+    public int getYear(){
+        return this.birthday.getYear();
+    } 
 }

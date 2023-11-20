@@ -5,10 +5,8 @@
 // модель человека и дерева
 // Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
 
-
-//TTimport Human_tree.FamalyTree;
-
 import FamalyTree.FamalyTree;
+import Human.Human;
 
 class Programma {
     public static void main (String[] args) {
@@ -19,5 +17,10 @@ class Programma {
         //famalyTree.addHuman();
         //famalyTree.addHuman();
         //famalyTree.addHumanRelatives(famalyTree.addHuman(),famalyTree.addHuman());
+        
+        //Использование итерирования класса FamalyTree
+        for (Human human : famalyTree) {
+            System.out.println(human);
+        }
     }
 }

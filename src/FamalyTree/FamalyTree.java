@@ -1,20 +1,22 @@
 package FamalyTree;
 
+import Human.Gender;
+import Human.Human;
+import Human.Comparators.HumanCompByAge;
+import Human.Comparators.HumanCompByChildren;
+import Human.Comparators.HumanCompByGender;
+import Human.Comparators.HumanCompByName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Iterator;
+
 /**
  * Класс ГЕНЕОЛОГИЧЕССКОЕ ДЕРЕВО
  */
-
-import javax.swing.text.html.HTMLDocument.Iterator;
-
-import FamalyTree.HumanIterator;
-import Human.Gender;
-import Human.Human;
 public class FamalyTree implements Serializable, Iterable<Human> {
     private List<Human> listHuman = new ArrayList<>();
 
@@ -90,7 +92,22 @@ public class FamalyTree implements Serializable, Iterable<Human> {
 
     @Override
     public Iterator<Human> iterator(){
-        return new HumanIterator(humanList);
+        return new HumanIterator(listHuman);
     }
 
+    public void sortByName(){
+        listHuman.sort(new HumanCompByName());
+    }
+
+    public void sortByAge(){
+        listHuman.sort(new HumanCompByAge());
+    }
+
+    public void sortByGender(){
+        listHuman.sort(new HumanCompByGender());
+    }
+
+    public void sortByChildren(){
+        listHuman.sort(new HumanCompByChildren());
+    }
 }

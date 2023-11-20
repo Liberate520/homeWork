@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * Класс ЧЕЛОВЕК
  */
-public class Human {
+public class Human implements Comparable<Human>{
     private int ID;
     private String name;
-    private DataLive data = new DataLive();
+    private DataLive data;
     private Gender gender;
     private Human father, mather, spouse;
     private List<Human> childrenList = new ArrayList<>();
@@ -163,5 +163,10 @@ public class Human {
         StringBuilder sb = new StringBuilder();
         sb.append("Информация о " + this.name);
         return sb.toString();
+    }
+    
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }
