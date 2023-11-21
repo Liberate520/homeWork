@@ -1,9 +1,6 @@
 package model_app;
 
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.Human;
-
-import static family_tree.base.FileHandler.FileHandlerForFamilyTree;
+import static family_tree.model.base.FileHandler.FileHandlerForFamilyTree;
 
 import java.io.*;
 

@@ -1,8 +1,11 @@
-package family_tree.family_tree;
+package family_tree.model.base;
+
+import family_tree.model.human.Position;
 
 import java.time.LocalDate;
 
-public interface FamilyTreeHub<T> {
+public interface TreeNode<T> {
+
     String getLastName();
 
     String getFirstName();
@@ -13,9 +16,13 @@ public interface FamilyTreeHub<T> {
 
     double getIncome();
 
-    String getPosition();
+    Position getPosition(T human);
 
     int getAge();
 
     LocalDate getBirthDate();
+
+
+
+
 }

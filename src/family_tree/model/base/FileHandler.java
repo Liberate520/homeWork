@@ -1,12 +1,11 @@
-package family_tree.base;
+package family_tree.model.base;
 
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.*;
+import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.human.*;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class FileHandler {
     public static <E> void main(String[] args) throws IOException {
