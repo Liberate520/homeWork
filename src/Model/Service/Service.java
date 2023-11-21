@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class Service<T extends FamilyTreeItem<Human>>  {
     private FamilyTree<Human> familyTree;
     private FileHandler fileHandler;
+    private T human;
 
     public Service() {
 //        familyTree = new FamilyTree<>();

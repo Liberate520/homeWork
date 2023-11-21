@@ -10,7 +10,7 @@ import Model.Service.Service;
 
 import java.util.Scanner;
 
-public class Presenter<T extends FamilyTreeItem<T> > {
+public class Presenter<T extends FamilyTreeItem< T > > {
 
     private View view;
     private Service service;
@@ -20,9 +20,9 @@ public class Presenter<T extends FamilyTreeItem<T> > {
         this.view = view;
         service = new Service();
     }
-    public void addHuman(Human human){
+    public void addHuman(T human){
 
-        service.addHuman(human);
+        service.addHuman((Human) human);
     }
 
     public void getHumanListInfo(){
