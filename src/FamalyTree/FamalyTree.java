@@ -18,7 +18,11 @@ import java.util.Iterator;
  * Класс ГЕНЕОЛОГИЧЕССКОЕ ДЕРЕВО
  */
 public class FamalyTree implements Serializable, Iterable<Human> {
-    private List<Human> listHuman = new ArrayList<>();
+    private List<Human> listHuman;
+
+    public FamalyTree(){
+        listHuman = new ArrayList<>();
+    }
 
     /**
      * Метод добавления нового человека в генеологическое дерево.
