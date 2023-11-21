@@ -38,6 +38,7 @@ public class Human implements Serializable, GroupItem {
     public String getName(){
         return name;
     }
+    public Gender getGender(){return gender;}
 
     public LocalDate getBirthday(){
         return birthday;

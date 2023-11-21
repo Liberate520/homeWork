@@ -124,4 +124,15 @@ public class ConsoleUI implements View{
     private void inputError(){
         System.out.println(INPUT_ERROR);
     }
+
+    public void setParent() {
+        System.out.println("Укажите индентификатор ребенка");
+        String idStr = scanner.nextLine();
+        int idChild = Integer.parseInt(idStr);
+        System.out.println("Укажите индентификатор родителя");
+        String idStr2 = scanner.nextLine();
+        int idParent = Integer.parseInt(idStr2);
+
+        presenter.setParent(idChild, idParent);
+    }
 }

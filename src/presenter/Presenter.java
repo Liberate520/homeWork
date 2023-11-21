@@ -45,4 +45,9 @@ public class Presenter {
         service.save();
         return "Данные сохранены";
     }
+
+    public String setParent(int idChild, int idParent) {
+        service.setParent(idChild, idParent);
+        return "Данные сохранены";
+    }
 }

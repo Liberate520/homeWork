@@ -49,4 +49,16 @@ public class Service {
         FileHandler fileHandler = new FileHandler(familyTree);
         familyTree = fileHandler.input();
     }
+
+    public void setParent(int idChild, int idParent) {
+        for (Human humanChild: familyTree){
+            if (humanChild.getId() == idChild){
+                for (Human humanParent: familyTree){
+                    if (humanParent.getId() == idParent){
+                        humanChild.setParent(humanParent);
+                    }
+                }
+            }
+        }
+    }
 }
