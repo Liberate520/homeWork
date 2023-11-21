@@ -11,9 +11,11 @@ import java.time.LocalDate;
 
 public class Service<T extends FamilyTreeItem<Human>>  {
     private FamilyTree<Human> familyTree;
+    private FileHandler fileHandler;
 
     public Service() {
-        familyTree = new FamilyTree<>();
+//        familyTree = new FamilyTree<>();
+//        fileHandler = new FileHandler();
 //        Human human1 = new Human(1, "Кузнецов", "Владислав", LocalDate.of(1983, 5, 1), Gender.Male);
 //        Human human2 = new Human(2, "Березянская", "Ольга", LocalDate.of(1989, 2, 20), Gender.Female);
 //        Human human3 = new Human(3, "Кузнецов", "Юрий", LocalDate.of(1944, 7, 4), Gender.Male);
@@ -64,14 +66,14 @@ public class Service<T extends FamilyTreeItem<Human>>  {
     }
 
     public FamilyTree<Human> load() {
-        Writable fileHandler = new FileHandler();
+        fileHandler = new FileHandler();
         String filePath = "src/Model/writer/tree.txt";
         System.out.println("Загрузка файла: ");
         return (FamilyTree<Human>) fileHandler.read(filePath);
     }
 
     public void save(){
-        Writable fileHandler = new FileHandler();
+        fileHandler = new FileHandler();
         String filePath = "src/Model/writer/tree.txt";
         boolean saved = fileHandler.save(familyTree, filePath);
         System.out.println("Сохранение файла: " + saved);
@@ -86,13 +88,28 @@ public class Service<T extends FamilyTreeItem<Human>>  {
     public void sortByAge(){
         familyTree.sortByAge();
     }
+    public void sortById(){
+        familyTree.sortById();
+    }
 
     public String searchByNameSurname(String name){
         return familyTree.SearchByNameSurname(name);
     }
 
+    public void setChild(Human parent, Human child){
+        parent.setChild(child);
+    }
+
     @Override
     public String toString() {
         return getHumanListInfo();
+    }
+
+    public < T extends FamilyTreeItem<T> > void getId(T human) {
+
+    }
+
+    public < T extends FamilyTreeItem<T> > T searchById(int idHuman) {
+        return (T) familyTree.searchById(idHuman);
     }
 }

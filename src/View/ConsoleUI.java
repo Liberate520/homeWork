@@ -60,6 +60,12 @@ public class ConsoleUI implements View{
         presenter.getHumanListInfo();
     }
 
+    @Override
+    public void sortById() {
+        presenter.sortById();
+        presenter.getHumanListInfo();
+    }
+
     private void printMenu(){
         System.out.println(menu.print());
     }
@@ -111,6 +117,12 @@ public class ConsoleUI implements View{
         Human human = new Human(id, lastname, name, dayOfBirth, gender);
         presenter.addHuman(human);
         System.out.println("Чтобы внести человека, необходимо провести сохранение!");
+    }
+
+    @Override
+    public void setChild() {
+        presenter.setChild();
+        presenter.getHumanListInfo();
     }
 
     @Override

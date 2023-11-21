@@ -13,11 +13,13 @@ public class MainMenu {
         commandList.add(new GetInfo(view));
         commandList.add(new Load(view));
         commandList.add(new Save(view));
+        commandList.add(new SortById(view));
         commandList.add(new SortByAge(view));
         commandList.add(new SortBySurname(view));
         commandList.add(new SortByName(view));
         commandList.add(new FindByName(view));
         commandList.add(new AddHuman(view));
+        commandList.add(new SetChild(view));
         commandList.add(new Finish(view));
     }
     public String print(){

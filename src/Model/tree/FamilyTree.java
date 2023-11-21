@@ -1,7 +1,9 @@
 package Model.tree;
 import Model.human.Comparators.ComparatorByAge;
+import Model.human.Comparators.ComparatorById;
 import Model.human.Comparators.ComparatorByLastname;
 import Model.human.Comparators.ComparatorByName;
+import Model.human.Human;
 
 import java.io.Serializable;
 import java.util.*;
@@ -118,5 +120,22 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
     public void sortByAge(){
         System.out.println("Сортировка по возрасту\n");
         familyList.sort(new ComparatorByAge<>());
+    }
+
+    public T searchById(int id){
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sbId = new StringBuilder();
+        String idS = sbId.append(id).toString();
+        for (T member: familyList) {
+            if(member.getId().contains(idS)){
+                return member;
+            }
+        }
+        return null;
+    }
+
+    public void sortById() {
+        System.out.println("Сортировка по ID\n");
+        familyList.sort(new ComparatorById<>());
     }
 }

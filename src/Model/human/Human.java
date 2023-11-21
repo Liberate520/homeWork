@@ -211,10 +211,10 @@ public class Human implements FamilyTreeItem< Human > {
      *
      * @param human
      */
-    public void setChild(Human human) {
-        if (!children.contains(human)) {
-            this.children.add(human);
-            human.setParent(this);
+    public void setChild(Human child) {
+        if (!children.contains(child)) {
+            this.children.add(child);
+            child.setParent(this);
         }
     }
 
