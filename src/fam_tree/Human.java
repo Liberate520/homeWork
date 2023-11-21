@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
     private int id;
     private final String name;
     private final Gender gender;
@@ -28,6 +28,7 @@ public class Human implements Serializable {
         children = new ArrayList<>();
     }
 
+
     public Human(String name, Gender gender, LocalDate birthDay) {
         this(name,gender,birthDay,null,null,null);
     }
@@ -40,6 +41,11 @@ public class Human implements Serializable {
         if (!children.contains(human)) {
             children.add(human);
         }
+    }
+
+    @Override
+    public void setSpouse(Human human) {
+
     }
 
     public void addParent(Human human) {
@@ -73,6 +79,11 @@ public class Human implements Serializable {
         return children;
     }
 
+    @Override
+    public void addParents(Human human) {
+
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -89,8 +100,23 @@ public class Human implements Serializable {
         return id;
     }
 
+    @Override
+    public List<Human> getParents() {
+        return null;
+    }
+
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Human getSpouse() {
+        return null;
+    }
+
+    @Override
+    public LocalDate getBirthDay() {
+        return null;
     }
 
     public void setId(int id) {
