@@ -17,70 +17,68 @@ import java.util.Iterator;
 /**
  * Класс ГЕНЕОЛОГИЧЕССКОЕ ДЕРЕВО
  */
-public class FamalyTree implements Serializable, Iterable<Human> {
-    private List<Human> listHuman;
+public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
+    private List<T> listT;
 
     public FamalyTree(){
-        listHuman = new ArrayList<>();
+        listT = new ArrayList<>();
     }
 
     /**
      * Метод добавления нового человека в генеологическое дерево.
      */
-    public void addHuman (){
-        Human human = new Human();
+    public void addT (T t){
         Scanner in = new Scanner(System.in);
         //nextLine(): считывает всю введенную строку
         System.out.print("Введите имя: ");
-        human.setName(in.nextLine());
+        t.setName(in.nextLine());
         System.out.print("Введите дату рождения (ГГГГ.MM.ДД): ");
-        human.setBirthday(LocalDate.of(in.nextInt(),in.nextInt(),in.nextInt()));
+        t.setBirthday(LocalDate.of(in.nextInt(),in.nextInt(),in.nextInt()));
         System.out.print("Введите пол (м,ж): ");
-        human.setGender(in.nextLine());
-        human.setId(listHuman.size());
+        t.setGender(in.nextLine());
+        t.setId(listT.size());
         in.close();
-        listHuman.add(human);
-        //return human;
+        listT.add(t);
     }
 
     /**
      * Метод установления родственных связей
-     * @param human0 Человек 1
-     * @param human1 Человек 2
+     * @param t0 Существо 1
+     * @param t1 Существо 2
      */
-    public void addHumanRelatives(Human human0, Human human1){
+    public void addTRelatives(T t0, T t1){
         Scanner in = new Scanner(System.in);
         System.out.printf("Кем является %s для %s ? \n  1.Отец\n"
-        + "2.Мать\n  3.Супруг\n 4.Ребенок",human1.getName(),human0.getName());
+        + "2.Мать\n  3.Супруг\n 4.Ребенок",t1.getName(),t0.getName());
         int n = in.nextInt();
         switch (n) {
             case 1:
-                human0.setFather(human1);
-                human1.addChildren(human0);
-                human1.getSpouse()
-                      .addChildren(human0);
+                t0.setFather(t1);
+                t1.addChildren(t0);
+                t1.getSpouse()
+                      .addChildren(t0);
                 break;
             case 2:
-                human0.setMather(human1);
-                human1.addChildren(human0);
-                human1.getSpouse()
-                      .addChildren(human0);
+                t0.setMather(t1);
+                t1.addChildren(t0);
+                t1.getSpouse()
+                      .addChildren(t0);
                 break;
             case 3:
-                human0.setSpouse(human1);
-                human1.setSpouse(human1);
+                t0.setSpouse(t1);
+                t1.setSpouse(t1);
                 break;
             case 4:
-                human0.addChildren(human1);
-                human0.getSpouse()
-                      .addChildren(human1);
-                if (human0.getGender() == Gender.Male){
-                    human1.setFather(human0);
-                    human1.setMather(human0.getSpouse());
+                t0.addChildren(t1);
+                t0.getSpouse()
+                      .addChildren(t1);
+                if (t0.getGender() == Gender.Male){
+                    t1.setFather(t0);
+                    t1.setMather(t0.getSpouse());
                 }
                 else{
-                    human1.setMather(human0);
-                    human1.setFather(human0.getSpouse());
+                    t1.setMather(t0);
+                    t1.setFather(t0.getSpouse());
                 }
                 break;
         }
@@ -89,29 +87,29 @@ public class FamalyTree implements Serializable, Iterable<Human> {
 
     public void PrintTree() {
         System.out.println("Выводим дерево в консоль");
-        for (Human human: listHuman){
-            System.out.println(human);
+        for (T t: listT){
+            System.out.println(t);
         }
     }
 
     @Override
-    public Iterator<Human> iterator(){
-        return new HumanIterator(listHuman);
+    public Iterator<T> iterator(){
+        return new TIterator(listT);
     }
 
     public void sortByName(){
-        listHuman.sort(new HumanCompByName());
+        listT.sort(new TCompByName());
     }
 
     public void sortByAge(){
-        listHuman.sort(new HumanCompByAge());
+        listT.sort(new TCompByAge());
     }
 
     public void sortByGender(){
-        listHuman.sort(new HumanCompByGender());
+        listT.sort(new TCompByGender());
     }
 
     public void sortByChildren(){
-        listHuman.sort(new HumanCompByChildren());
+        listT.sort(new TCompByChildren());
     }
 }
