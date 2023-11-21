@@ -1,4 +1,4 @@
-package Model.TreePack;
+package familyTree.Model.TreePack;
 
 import java.util.HashMap;
 import java.util.Iterator;

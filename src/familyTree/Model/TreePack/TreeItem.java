@@ -1,4 +1,4 @@
-package Model.TreePack;
+package familyTree.Model.TreePack;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

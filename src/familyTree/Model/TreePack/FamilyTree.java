@@ -1,7 +1,7 @@
-package Model.TreePack;
+package familyTree.Model.TreePack;
 
-import Model.PersonPack.ComporatorsPack.PersonComparatorByAge;
-import Model.PersonPack.ComporatorsPack.PersonComparatorByChildren;
+import familyTree.Model.PersonPack.ComporatorsPack.PersonComparatorByAge;
+import familyTree.Model.PersonPack.ComporatorsPack.PersonComparatorByChildren;
 
 import java.io.Serializable;
 import java.util.*;
@@ -25,6 +25,9 @@ public class FamilyTree <E extends TreeItem<E>> implements Serializable, Iterabl
         return(personList.get(id));
     }
 
+    public boolean checkId(int id){
+        return personList.containsKey(id);
+    }
     @Override
     public String toString() {
         StringBuilder tmp = new StringBuilder("Family tree:\n");

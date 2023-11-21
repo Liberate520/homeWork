@@ -1,16 +1,35 @@
-package Model.Service;
+package familyTree.Model.Service;
 
-import Model.PersonPack.Gender;
-import Model.PersonPack.Person;
-import Model.TreePack.FamilyTree;
+import familyTree.Model.PersonPack.Gender;
+import familyTree.Model.PersonPack.Person;
+import familyTree.Model.TreePack.FamilyTree;
+import familyTree.Model.UtilsPack.StorageTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Service {
     private FamilyTree<Person> tree;
+    private StorageTree<Person> storage = new StorageTree();
 
     public Service() {
         tree = new FamilyTree<>();
+    }
+//    public Service(String filePath){
+//        tree = storage.restoreTree(filePath);
+//    }
+    public boolean restoreTree(String filePath){
+        FamilyTree<Person> tmpTree = new FamilyTree<Person>();
+        tmpTree = storage.restoreTree(filePath);
+        if (tmpTree.equals(null)){
+            return false;
+        }
+        tree = tmpTree;
+        return true;
+    }
+
+    public boolean saveTree(String fileName){
+        return storage.writeTree(tree, fileName);
     }
 
     public boolean addPerson(String name, Gender gender, String date){
@@ -19,20 +38,34 @@ public class Service {
         return true;
     }
 
-    public void setParent(Person person, int parent_id){
+    public void setParent(int person_id, int parent_id){
+        Person person = tree.getPersonById(person_id);
         person.addParent(tree.getPersonById(parent_id));
     }
 
+    public boolean checkId(int id){
+       return tree.checkId(id);
+    }
     public String getFamilyInfo() {
         return tree.toString();
     }
 
-    public ArrayList<String> listSortByAge(){
-        return tree.sortByAge();
+    public String listSortByAge(){
+        StringBuilder tmp=new StringBuilder();
+        for (String str : tree.sortByAge()) {
+            tmp.append(str);
+            tmp.append("\n");
+        }
+        return tmp.toString();
     }
 
-    public ArrayList<String> listSortByChildren(){
-        return tree.sortByChildren();
+    public String listSortByChildren(){
+        StringBuilder tmp=new StringBuilder();
+        for (String str : tree.sortByChildren()) {
+            tmp.append(str);
+            tmp.append("\n");
+        }
+        return tmp.toString();
     }
 
 

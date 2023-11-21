@@ -1,6 +1,6 @@
-package Model.PersonPack.ComporatorsPack;
+package familyTree.Model.PersonPack.ComporatorsPack;
 
-import Model.TreePack.TreeItem;
+import familyTree.Model.TreePack.TreeItem;
 
 import java.util.Comparator;
 import java.util.Map;

@@ -1,10 +1,11 @@
-package Model.UtilsPack;
+package familyTree.Model.UtilsPack;
 
-import Model.TreePack.FamilyTree;
+import familyTree.Model.TreePack.FamilyTree;
+import familyTree.Model.TreePack.TreeItem;
 
 import java.io.*;
 
-public class StorageTree implements Savable {
+public class StorageTree<E extends TreeItem<E>> implements Savable {
     public boolean writeTree (Serializable serializable, String fileName){
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             objectOutputStream.writeObject(serializable);
@@ -17,9 +18,9 @@ public class StorageTree implements Savable {
 
     }
 
-    public FamilyTree restoreTree (String fileName){
+    public FamilyTree<E> restoreTree (String fileName){
         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName))){
-            FamilyTree tmp = (FamilyTree) objectInputStream.readObject();
+            FamilyTree<E> tmp = (FamilyTree<E>) objectInputStream.readObject();
             objectInputStream.close();
             return tmp;
         }catch(Exception e) {

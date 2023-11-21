@@ -1,8 +1,6 @@
-package familyTree.View;
+package familyTree.View.Menus;
 import familyTree.View.Commands.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import familyTree.View.ConsoleUI;
 
 public class MainMenu extends Menu{
      public MainMenu(ConsoleUI consoleUI) {
@@ -10,6 +8,8 @@ public class MainMenu extends Menu{
         commandList.add(new AddPerson(consoleUI));
         commandList.add(new GetTreeInfo(consoleUI));
         commandList.add(new SetParent(consoleUI));
+        commandList.add(new Restore(consoleUI));
+        commandList.add(new SaveTreeToFile(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 }
