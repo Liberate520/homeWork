@@ -1,23 +1,25 @@
-import com.sun.source.tree.Tree;
-import writen.FileHandler;
+import familyTree.FamilyTree;
+import human.Gender;
+import human.Human;
+import writer.FileHandler;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        FamilyTree familyTree = tree();
-        FamilyTree familyTree = load();
+       FamilyTree familyTree = tree();
+        //familyTree.FamilyTree familyTree = load();
      System.out.println(familyTree.familyTreeInfo());
-//        save(familyTree);
+        save(familyTree);
     }
 
     private static void save(FamilyTree familyTree) {
-        String filePath = "src/writen/tree.txt";
+        String filePath = "homeWork/src/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(familyTree, filePath);
     }
     private static FamilyTree load(){
-        String filePath = "src/writen/tree.txt";
+        String filePath = "homeWork/src/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
         FamilyTree familyTree = (FamilyTree) fileHandler.read(filePath);
         return familyTree;
@@ -39,6 +41,8 @@ public class Main {
         familyTree.addFamilyTree(natali);
         familyTree.addFamilyTree(evgenyi);
 
+        familyTree.sortByName();
+//        familyTree.sortByAge();
         return familyTree;
     }
 }

@@ -1,4 +1,4 @@
-package writen;
+package writer;
 
 import java.io.Serializable;
 
