@@ -14,6 +14,8 @@ public class MainMenu {
         commandList.add(new GetAllHuman(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByBirthDay(consoleUI));
+        commandList.add(new Download(consoleUI));
+        commandList.add(new Save(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 

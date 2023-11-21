@@ -79,6 +79,13 @@ public class ConsoleUI implements View{
         presenter.addHuman(id, name, gender, birth);
     }
 
+    public void save() {
+        System.out.println(presenter.save());
+    }
+    public void download() {
+        presenter.download();
+    }
+
     private void hello(){
         System.out.println("Доброго времени суток!");
     }

@@ -39,4 +39,14 @@ public class Service {
     public void sortByBirthDay(){
         familyTree.sortByBirthDay();
     }
+
+    public void save() {
+        FileHandler fileHandler = new FileHandler(familyTree);
+        fileHandler.output();
+    }
+
+    public void download() {
+        FileHandler fileHandler = new FileHandler(familyTree);
+        familyTree = fileHandler.input();
+    }
 }

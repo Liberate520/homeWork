@@ -1,5 +1,6 @@
 package presenter;
 
+import model.FileHandler;
 import model.Gender;
 import model.Service;
 import view.View;
@@ -33,5 +34,15 @@ public class Presenter {
     public void sortByName() {
         service.sortByName();
         getAllHuman();
+    }
+
+    public void download() {
+        service.download();
+        getAllHuman();
+    }
+
+    public String  save() {
+        service.save();
+        return "Данные сохранены";
     }
 }

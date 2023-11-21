@@ -12,20 +12,6 @@ public class FamilyTree<E extends GroupItem> implements Serializable, Iterable<E
         familyTreeList.add(human);
     }
 
-    public void getAllHuman(){
-        for (E human: familyTreeList){
-            System.out.println(human.allInfo());
-        }
-    }
-
-    public void getHuman(int id){
-        for (E human: familyTreeList){
-            if(human.getId() == id){
-                System.out.println(human.allInfo());
-            }
-        }
-    }
-
     public void sortByName(){
         familyTreeList.sort(new TreeComparatorByName<>());
     }

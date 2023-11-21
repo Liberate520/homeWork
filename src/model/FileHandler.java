@@ -21,7 +21,7 @@ public class FileHandler implements Writable{
         }
     }
 
-    public FamilyTree input(){
+    public FamilyTree<Human> input(){
         ObjectInputStream objectInputStream = null;
         try {
             objectInputStream = new ObjectInputStream(new FileInputStream("family_tree.out"));
