@@ -101,148 +101,148 @@ public class FileHandler {
     }
 
 
-    public static void FileHandlerForFamilyTree() throws IOException {
-//        String filePath = "homeWork/src/family_tree.txt";
-        String filePath = "homeWork/src/model_app/family_tree.txt";
-        // выводим на экран
-        try (FileInputStream fileInputStream = new FileInputStream(filePath);
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-            // Десериализуем объекты
-            while (true) {
-                try {
-                    Human human;
-                    human = (Human) objectInputStream.readObject();
-                    System.out.println(human);
-                } catch (EOFException e) {
-                    break;
-                }
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-//        try(FileInputStream fileInputStream = new FileInputStream(filePath);
-//            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-//
-//            // Десериализуем
-//            Human human1;
-//            try {
-//                human1 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException | IOException ex) {
-//                throw new RuntimeException(ex);
+//    public static void FileHandlerForFamilyTree() throws IOException {
+////        String filePath = "homeWork/src/family_tree.txt";
+//        String filePath = "homeWork/src/model_app/family_tree.txt";
+//        // выводим на экран
+//        try (FileInputStream fileInputStream = new FileInputStream(filePath);
+//             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+//            // Десериализуем объекты
+//            while (true) {
+//                try {
+//                    Human human;
+//                    human = (Human) objectInputStream.readObject();
+//                    System.out.println(human);
+//                } catch (EOFException e) {
+//                    break;
+//                }
 //            }
-//            Human human2;
-//            try {
-//                human2 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException | IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human3;
-//            try {
-//                human3 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human4;
-//            try {
-//                human4 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human5;
-//            try {
-//                human5 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human6;
-//            try {
-//                human6 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human7;
-//            try {
-//                human7 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human8;
-//            try {
-//                human8 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human9;
-//            try {
-//                human9 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException | IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human10;
-//            try {
-//                human10 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException | IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human11;
-//            try {
-//                human11 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException | IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            Human human12;
-//            try {
-//                human12 = (Human) objectInputStream.readObject();
-//            } catch (ClassNotFoundException | IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//
-//
-//            // выводим на экран
-//            System.out.println(human1);
-//            System.out.println(human2);
-//            System.out.println(human3);
-//            System.out.println(human4);
-//            System.out.println(human5);
-//            System.out.println(human6);
-//            System.out.println(human7);
-//            System.out.println(human8);
-//            System.out.println(human9);
-//            System.out.println(human10);
-//            System.out.println(human11);
-//            System.out.println(human12);
-//
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
 //        }
-    }
-
-
-//    public static <E> void methodSortByLastName(ArrayList<Human> humans) {
-//        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
-//        //  Сортировка списка по Фамилии
-//        humans.sort(Comparator.comparing(Human::getLastName));
-//        for (Human human : humans) {
-//            System.out.println(human);
-//        }
+//
+////        try(FileInputStream fileInputStream = new FileInputStream(filePath);
+////            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+////
+////            // Десериализуем
+////            Human human1;
+////            try {
+////                human1 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException | IOException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human2;
+////            try {
+////                human2 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException | IOException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human3;
+////            try {
+////                human3 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human4;
+////            try {
+////                human4 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human5;
+////            try {
+////                human5 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human6;
+////            try {
+////                human6 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human7;
+////            try {
+////                human7 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human8;
+////            try {
+////                human8 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human9;
+////            try {
+////                human9 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException | IOException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human10;
+////            try {
+////                human10 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException | IOException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human11;
+////            try {
+////                human11 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException | IOException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////            Human human12;
+////            try {
+////                human12 = (Human) objectInputStream.readObject();
+////            } catch (ClassNotFoundException | IOException ex) {
+////                throw new RuntimeException(ex);
+////            }
+////
+////
+////            // выводим на экран
+////            System.out.println(human1);
+////            System.out.println(human2);
+////            System.out.println(human3);
+////            System.out.println(human4);
+////            System.out.println(human5);
+////            System.out.println(human6);
+////            System.out.println(human7);
+////            System.out.println(human8);
+////            System.out.println(human9);
+////            System.out.println(human10);
+////            System.out.println(human11);
+////            System.out.println(human12);
+////
+////        }
 //    }
 //
-//    public static void methodSortByAge(ArrayList<Human> humans) {
-//        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
-//        //  Сортировка списка по Возрасту
-//        humans.sort(Comparator.comparing(Human::getAge).reversed());
-//        for (Human human : humans) {
-//            System.out.println(human);
-//        }
-//    }
 //
-//    public static void methodSortByIncome(ArrayList<Human> humans) {
-//        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
-////          Сортировка списка по Доходам
-//        humans.sort(Comparator.comparing(Human::getIncome).reversed());
-//        for (Human human : humans) {
-//            System.out.println(human);
-//        }
-//    }
-
-
+////    public static <E> void methodSortByLastName(ArrayList<Human> humans) {
+////        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
+////        //  Сортировка списка по Фамилии
+////        humans.sort(Comparator.comparing(Human::getLastName));
+////        for (Human human : humans) {
+////            System.out.println(human);
+////        }
+////    }
+////
+////    public static void methodSortByAge(ArrayList<Human> humans) {
+////        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
+////        //  Сортировка списка по Возрасту
+////        humans.sort(Comparator.comparing(Human::getAge).reversed());
+////        for (Human human : humans) {
+////            System.out.println(human);
+////        }
+////    }
+////
+////    public static void methodSortByIncome(ArrayList<Human> humans) {
+////        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
+//////          Сортировка списка по Доходам
+////        humans.sort(Comparator.comparing(Human::getIncome).reversed());
+////        for (Human human : humans) {
+////            System.out.println(human);
+////        }
+////    }
+//
+//
 }

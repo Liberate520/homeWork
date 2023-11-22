@@ -1,8 +1,12 @@
 package model_app;
 
-import static family_tree.model.base.FileHandler.FileHandlerForFamilyTree;
+import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.human.*;
+//import static family_tree.model.base.FileHandler.FileHandlerForFamilyTree;
+import static family_tree.model.base.FileHandlerForTree.HandlerForTree;
 
 import java.io.*;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -12,12 +16,15 @@ public class Main {
 
         // выводим на экран
         System.out.println("===============================");
+//        System.out.println("Список : ");
+        System.out.println("Фамильное дерево : ".toUpperCase());
+//        FileHandlerForFamilyTree();
         System.out.println("Список : ");
-        System.out.println("Фамильное Дерево : ");
-        FileHandlerForFamilyTree();
+        HandlerForTree();
         System.out.println("                    FAMILY TREE");
         System.out.println("===============================");
         System.out.println("===============================");
+
 
 
 
