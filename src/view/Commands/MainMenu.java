@@ -19,6 +19,8 @@ public class MainMenu {
         this.commandsList.add(new Finish((consoleUI)));
     }
 
+    public void add(Commands command) {this.commandsList.add(command);}
+
     public String menu(){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commandsList.size(); i++) {

@@ -1,5 +1,7 @@
 package Model.home_work_class.FamilyTree;
 
+import Model.home_work_class.Human.Human;
+
 import java.io.*;
 
 public class FileWriter implements Writeable {

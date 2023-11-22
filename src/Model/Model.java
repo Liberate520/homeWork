@@ -9,11 +9,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model {
+public class Model{
     private FamilyTree<Human> familyTree;
+    private FileWriteRead file;
 
-    public Model(){
+    public Model(FileWriteRead file){
         this.familyTree = new FamilyTree<>();
+        this.file = file;
     }
 
     public void addHuman(String name, Gender gender, LocalDate bornDate, LocalDate diedDate){
@@ -25,34 +27,10 @@ public class Model {
         return familyTree.showHumansList();
     }
 
-
     public Human findHumanByName(String name){
         List<Human>humans = familyTree.findHumanByName(name);
         if (!humans.isEmpty()) {return humans.get(0);}
         return new Human("not found", Gender.Male, LocalDate.of(1,1,1));
-    }
-
-    public boolean fileWriter(String path){
-        FileWriter handler = new FileWriter();
-        String filePath = handler.getDefaultPath();
-        if (!path.isEmpty()) {filePath = path;}
-        if (familyTree.sizeTree() > 0){
-            handler.write(familyTree, filePath);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean fileReader(String path){
-        FileWriter handler = new FileWriter();
-        String filePath = handler.getDefaultPath();
-        if (!path.isEmpty()) {filePath = path;}
-        FamilyTree<Human> tree = handler.read(filePath);
-        if (tree.sizeTree() > 0){
-            familyTree = tree;
-            return true;
-        }
-        return false;
     }
 
     public void sortByName(){familyTree.sortByName();}
@@ -60,4 +38,11 @@ public class Model {
     public void sortByAge(){familyTree.sortByAge();}
 
     public void sortById(){familyTree.sortById();}
+
+    public boolean fileWriter(String path){return file.fileWriter(path, this.familyTree);}
+
+    public  boolean fileReader(String path){
+        this.familyTree = file.fileReader(path);
+        return this.familyTree.sizeTree() > 0;
+    }
 }
