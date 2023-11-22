@@ -1,12 +1,13 @@
 package family_tree.human;
 
-import java.io.Serializable;
+import family_tree.family_tree.GeneralTypeTree;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements GeneralTypeTree<Human> {
     private long id;
     private String name;
     private Gender gender;
@@ -36,6 +37,12 @@ public class Human implements Serializable {
                  Human father, Human mother){
         this(name, gender, birthDate, null, father, mother);
     }
+// конструктор HumanBuilder для new Human(maxId++, name, age)
+//    public Human(int Id, String name, int age) {
+//        this(Id, name, age);
+//    }
+
+
     public boolean addChild(Human child){
         if (!children.contains(child)){  // проверка наличия ребенка
             children.add(child);
@@ -81,6 +88,7 @@ public class Human implements Serializable {
     public void setSpouse(Human spouse) { this.spouse = spouse; }
     public Human getSpouse() { return spouse; }
     public String getName() { return name; }
+
     public long getId(){ return id; }
     public void setId(long id) {this.id = id; }
     public LocalDate getBirthDate() { return birthDate; }
@@ -167,4 +175,10 @@ public class Human implements Serializable {
         Human human = (Human) obj;
         return human.getId() == getId();
     }
+
+// ????
+//    @Override
+//    public int compareTo(Human o){
+//        return this.name.compareTo(o.name);
+//    }
 }

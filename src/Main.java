@@ -1,5 +1,6 @@
 package family_tree;
 
+import com.sun.source.tree.Tree;
 import family_tree.family_tree.FamilyTree;
 import family_tree.human.Human;
 import family_tree.human.Gender;
@@ -7,20 +8,48 @@ import family_tree.writer.FileHandler;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = testTree();
-
+        FamilyTree tree = testTree();           // !
+//        FamilyTree tree = load();
         System.out.println(tree);
 
-        save(tree);
+        tree.getByName();
+        System.out.println(tree);
+
+        tree.getByAge();
+        System.out.println(tree);
+
     }
-    private static void save(FamilyTree tree){
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "src/family_tree/writer/tree.txt";
-        fileHandler.save(tree, filePath);
-    }
+//***    если нужен был бы Iterator ***
+//    private static String getHumanListInfoIterator(FamilyTree familyList) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Список Human-ов через iterator:\n");
+//        for (Human human : familyList) {
+//            sb.append(human);
+//            sb.append("\n");
+//        }
+//        return sb.toString();
+//    }
+
+
+
+//        save(tree);                             // !
+//    }
+//    private static FamilyTree load(){
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/family_tree/writer/tree.txt";
+//        return (FamilyTree) fileHandler.read(filePath);
+//    }
+//    private static void save(FamilyTree tree){
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/family_tree/writer/tree.txt";
+//        fileHandler.save(tree, filePath);
+//    }
+
+
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
 
@@ -41,4 +70,5 @@ public class Main {
 
         return tree;
     }
+
 }
