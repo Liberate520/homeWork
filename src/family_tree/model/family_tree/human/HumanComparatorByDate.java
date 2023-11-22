@@ -1,6 +1,5 @@
-package family_tree.human;
+package family_tree.model.family_tree.human;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 
 public class HumanComparatorByDate<T extends FamilyGroupItems> implements Comparator<T> {

@@ -1,12 +1,10 @@
-import family_tree.family_tree.Family_tree;
-import family_tree.human.Gender;
-import family_tree.human.Human;
-import family_tree.service.Service;
-import family_tree.writer.FileHandler;
+import family_tree.model.family_tree.human.Gender;
+import family_tree.model.family_tree.service.Service;
+import family_tree.view.ConsoleUI;
+import family_tree.view.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -51,7 +49,7 @@ public class Main {
         //fh.SaveHuman(human2);
         myFamily.sortByName();
         System.out.println(myFamily.toString());*/
-        Service MyFamily = new Service();
+        /*Service MyFamily = new Service();
         MyFamily.AddHuman("123-563-128 22", "Кулиев", "Рафик", LocalDate.of(1980, 3, 11), Gender.Male);
         MyFamily.AddHuman("123-563-127 22", "Кулиев", "Анатолий", LocalDate.of(1999, 5, 11), Gender.Male);
         MyFamily.AddHuman("123-563-126 22", "Кулиев", "Ренат", LocalDate.of(2001, 1, 25), Gender.Male);
@@ -63,10 +61,11 @@ public class Main {
         MyFamily.sortByFam();
         System.out.println(MyFamily);
         MyFamily.sortByAge();
-        System.out.println(MyFamily);
+        System.out.println(MyFamily);*/
         /*FileHandler fh = new FileHandler();
         fh.SaveFamily_tree(MyFamily);*/
-
+        View view = new ConsoleUI();
+        view.start();
 
     }
 }

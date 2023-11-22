@@ -1,8 +1,8 @@
-package family_tree.service;
+package family_tree.model.family_tree.service;
 
-import family_tree.family_tree.Family_tree;
-import family_tree.human.Gender;
-import family_tree.human.Human;
+import family_tree.model.family_tree.Family_tree;
+import family_tree.model.family_tree.human.Gender;
+import family_tree.model.family_tree.human.Human;
 
 import java.time.LocalDate;
 
@@ -13,8 +13,8 @@ public class Service {
         familyTree = new Family_tree();
     }
 
-    public void AddHuman(String snils, String fam, String name, LocalDate dr, Gender gender){
-        Human human = new Human(snils, fam, name, dr, gender);
+    public void AddHuman(String snils, String fam, String name, LocalDate dr){
+        Human human = new Human(snils, fam, name, dr);
         familyTree.AddHuman(human);
 
     }

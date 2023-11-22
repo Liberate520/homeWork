@@ -1,4 +1,4 @@
-package family_tree.human;
+package family_tree.model.family_tree.human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyGroupItems 
     private Human mother;
     private List<Human> children = new ArrayList<>();
 
-    public Human(String snils, String fam, String name, LocalDate dr, Gender gender) {
+    public Human(String snils, String fam, String name, LocalDate dr) {
         //Делаем проверку, вдруг такой снилс уже есть
         for (String val:snilss
              ) {
@@ -30,7 +30,7 @@ public class Human implements Serializable, Comparable<Human>, FamilyGroupItems 
         this.fam = fam;
         this.name = name;
         this.dr = dr;
-        this.gender = gender;
+        //this.gender = gender;
         snilss.add(snils);
 
 

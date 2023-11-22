@@ -1,7 +1,7 @@
 package family_tree.writer;
 
-import family_tree.family_tree.Family_tree;
-import family_tree.human.Human;
+import family_tree.model.family_tree.Family_tree;
+import family_tree.model.family_tree.human.Human;
 
 import java.io.*;
 

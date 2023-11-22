@@ -1,14 +1,10 @@
-package family_tree.family_tree;
+package family_tree.model.family_tree;
 
-import family_tree.human.Human;
-import family_tree.human.HumanComparatorByDate;
-import family_tree.human.HumanComparatorByFam;
-import family_tree.human.HumanComparatorByName;
+import family_tree.model.family_tree.human.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Family_tree<T> implements Serializable, Iterable<T> {
     private ArrayList<T> family_tree;

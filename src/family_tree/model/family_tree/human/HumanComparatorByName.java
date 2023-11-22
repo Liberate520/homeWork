@@ -1,4 +1,4 @@
-package family_tree.human;
+package family_tree.model.family_tree.human;
 
 import java.util.Comparator;
 
