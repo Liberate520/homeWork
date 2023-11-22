@@ -1,4 +1,4 @@
-package family_tree.writer;
+package family_tree.family_tree.model;
 
 import java.io.ObjectInputStream;
 import java.io.Serializable;

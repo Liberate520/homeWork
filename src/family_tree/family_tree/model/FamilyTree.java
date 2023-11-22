@@ -1,8 +1,8 @@
-package family_tree.family_tree;
+package family_tree.family_tree.model;
 
-import family_tree.human.Human;
-import family_tree.human.comparators.ComparatorByName;
-import family_tree.human.comparators.ComporatorByAge;
+import family_tree.family_tree.model.human.Human;
+import family_tree.family_tree.model.human.comparators.ComparatorByName;
+import family_tree.family_tree.model.human.comparators.ComporatorByAge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -155,5 +155,14 @@ public class FamilyTree<G extends GeneralTypeTree<G>> implements Serializable, I
     }
     public void getByAge(){
         humanList.sort(new ComporatorByAge());
+    }
+
+    public void addHuman(Human human) {
+        if (!humanList.contains(human)){
+            human.setId(humansId++);
+            humanList.add(human);
+            addToParents(human);
+            addToChildren(human);
+        }
     }
 }

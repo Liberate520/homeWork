@@ -1,6 +1,6 @@
-package family_tree.human.comparators;
+package family_tree.family_tree.model.human.comparators;
 
-import family_tree.family_tree.GeneralTypeTree;
+import family_tree.family_tree.model.GeneralTypeTree;
 
 import java.util.Comparator;
 

@@ -1,17 +1,22 @@
-package family_tree;
+package family_tree.family_tree;
 
-import com.sun.source.tree.Tree;
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.Human;
-import family_tree.human.Gender;
-import family_tree.writer.FileHandler;
+import family_tree.family_tree.model.FamilyTree;
+import family_tree.family_tree.model.Gender;
+import family_tree.family_tree.model.human.Human;
+import family_tree.family_tree.view.ConsoleUI;
+import family_tree.family_tree.view.View;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Iterator;
+import java.util.Scanner;
 
 public class Main {
+//    Scanner scanner = new Scanner(System.in); // обратить внимание !! ??
+
     public static void main(String[] args) {
+
+        View view = new ConsoleUI();
+        view.start();
+
         FamilyTree tree = testTree();           // !
 //        FamilyTree tree = load();
         System.out.println(tree);

@@ -1,6 +1,7 @@
-package family_tree.human;
+package family_tree.family_tree.model.human;
 
-import family_tree.family_tree.GeneralTypeTree;
+import family_tree.family_tree.model.GeneralTypeTree;
+import family_tree.family_tree.model.Gender;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -31,12 +32,14 @@ public class Human implements GeneralTypeTree<Human> {
     }
 // создается перегрузка конструктора
     public Human(String name, Gender gender, LocalDate birthDate){
+
         this(name, gender, birthDate, null, null, null);
     }
     public Human(String name, Gender gender, LocalDate birthDate,
                  Human father, Human mother){
         this(name, gender, birthDate, null, father, mother);
     }
+
 // конструктор HumanBuilder для new Human(maxId++, name, age)
 //    public Human(int Id, String name, int age) {
 //        this(Id, name, age);
