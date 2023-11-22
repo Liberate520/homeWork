@@ -4,15 +4,20 @@ import Family_Tree.Human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human>{
     private long humanId;
     private List<Human> humanList;
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
+
+//    public FamilyTree() {
+//        humanList = new ArrayList<>();
+//    }
 
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;
@@ -31,6 +36,10 @@ public class FamilyTree implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public List<Human> getHumanList() {
+        return humanList;
     }
 
     public List<Human> getByName(String name) {
@@ -77,8 +86,21 @@ public class FamilyTree implements Serializable {
         return sb.toString();
     }
 
+    public void sortByName(){
+        humanList.sort(new FamilyTreeComparatorByName());
+    }
+
+    public void sortByBirthday(){
+        humanList.sort(new FamilyTreeComparatorByBirthday());
+    }
+
     @Override
     public String toString() {
         return getInfo();
+    }
+
+    @Override
+    public Iterator<Human> iterator(){
+        return new FamilyTreeIterator(humanList);
     }
 }

@@ -97,6 +97,8 @@ public class Human implements Serializable {
         return name;
     }
 
+    public LocalDate getBirthday() {return birthday;}
+
     public long getId() {
         return id;
     }
