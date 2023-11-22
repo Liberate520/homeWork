@@ -1,11 +1,13 @@
 package Human;
 
 import Service.*;
+import familyTree.ItemOfFamilyTree;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human extends Saver {
+public class Human extends Saver implements Comparable, ItemOfFamilyTree {
     private int id;
     private String name;
     private LocalDate bd;
@@ -13,7 +15,7 @@ public class Human extends Saver {
     private Human mother;
     private Human father;
     private List<Human> children;
-
+    
     public Human(String name, LocalDate bd, Gender gender, Human mother, Human father) {
         children = new ArrayList<>();
         this.name = name;
@@ -24,13 +26,11 @@ public class Human extends Saver {
     }
 
     public Human(String name, LocalDate bd, Gender gender){
-
         this(name, bd, gender, null, null);
     }
     public Human(int id, Human human) {
         this(human.name, human.bd, human.gender);
         this.id = id;
-
     }
 
     public Human(int id, String name, LocalDate bd, Gender gender) {
@@ -41,6 +41,7 @@ public class Human extends Saver {
     public String getName() {
         return name;
     }
+    public int getAge() {return LocalDate.now().getYear() - bd.getYear();};
 
     public LocalDate getBd() {
         return bd;
@@ -106,6 +107,11 @@ public class Human extends Saver {
                     ", Father: " + this.father +
                     ", children: " + this.getChildren() +
                     " ";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
 

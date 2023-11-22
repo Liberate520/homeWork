@@ -2,31 +2,32 @@ package familyTree;
 import Human.*;
 import Service.*;
 import Human.Comparators.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree extends Saver implements Iterable<Human>{
-    private List<Human> humanList;
+public class FamilyTree<E extends ItemOfFamilyTree> extends Saver implements Iterable<E> {
+    private List<E> elementsList;
 
     public FamilyTree() {
-        humanList = new ArrayList<Human>();
+        elementsList = new ArrayList<E>();
     }
-    public void addHuman(Human human) {
-        humanList.add(human);
-    }
-
-    public void setHumanList(List<Human> humanList) {
-        this.humanList = humanList;
-    }
-    public List<Human> getHumanList () {
-        return humanList;
+    public void addHuman(E element) {
+        elementsList.add(element);
     }
 
-    public Human findByName(String name) {
-        for (Human human: humanList) {
-            if (human.getName().equalsIgnoreCase(name)) {
-                return human;
+    public void setElementsList(List<E> elementsList) {
+        this.elementsList = elementsList;
+    }
+    public List<E> getElementList () {
+        return elementsList;
+    }
+
+    public E findByName(String name) {
+        for (E element: elementsList) {
+            if (element.getName().equalsIgnoreCase(name)) {
+                return element;
             }
         }
         return null;
@@ -35,21 +36,22 @@ public class FamilyTree extends Saver implements Iterable<Human>{
     @Override
     public String toString() {
         StringBuilder stringbuilder = new StringBuilder();
-        for (Human human: humanList) {
-            stringbuilder.append(human + "\n");
+        for (E element: elementsList) {
+            stringbuilder.append(element).append("\n");
         }
         return stringbuilder.toString();
     }
 
-    @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
-    }
     public void sortByName() {
-        humanList.sort(new HumanComparatorByName());
+        elementsList.sort(new ElementComparatorByName<>());
     }
 
     public void sortByAge(){
-        humanList.sort(new HumanComparatorByAge());
+        elementsList.sort(new ElementComparatorByAge<>());
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ElementIterator<>(elementsList);
     }
 }

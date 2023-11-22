@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Service {
-    private FamilyTree tree;
+    private FamilyTree<Human> tree;
     private HumanBuilder builder;
 
     public Service () {
@@ -34,12 +34,12 @@ public class Service {
 
     public void save () throws IOException, ClassNotFoundException {
         Saver saver = new Saver();
-        saver.write(tree.getHumanList(), "SaverFile.txt");
+        saver.write(tree.getElementList(), "SaverFile.txt");
     }
 
     public void read () throws IOException, ClassNotFoundException {
         StringBuilder stringbuilder = new StringBuilder();
-        stringbuilder.append("Humans list from file: \n");
+        stringbuilder.append("Elements list from file: \n");
         for (Human human: (List<Human>) Objects.requireNonNull(Saver.read("SaverFile.txt"))) {
             stringbuilder.append(human).append("\n");
         }
