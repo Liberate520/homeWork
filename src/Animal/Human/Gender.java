@@ -1,4 +1,4 @@
-package Human;
+package Animal.Human;
 
 /**
  * Пол человека

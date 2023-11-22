@@ -1,18 +1,20 @@
-package Human;
+package Animal.Human;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import Animal.Animal;
 /**
  * Класс ЧЕЛОВЕК
  */
-public class Human implements Comparable<Human>{
+public class Human implements Comparable<Human>,Animal{
     private int ID;
     private String name;
     private DataLive data;
     private Gender gender;
     private Human father, mather, spouse;
-    private List<Human> childrenList = new ArrayList<>();
+    private List<Human> childrenList;
 
     //----------------Конструкторы класса--------------------------------
     /**

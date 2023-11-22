@@ -1,14 +1,13 @@
-package Human.Comparators;
+package Animal;
 
 import java.util.Comparator;
 
-import Human.Gender;
-import Human.Human;
+import Animal.Human.Gender;
 
-public class HumanCompByGender implements Comparator<Human> {
+public class AnimalCompByGender<T extends Animal> implements Comparator<T> {
 
     @Override
-    public int compare(Human o1, Human o2) {
+    public int compare(T o1, T o2) {
         if (o1.getGender() == o2.getGender()){
             return 0;
         }

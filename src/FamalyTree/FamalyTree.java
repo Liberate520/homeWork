@@ -1,17 +1,19 @@
 package FamalyTree;
 
-import Human.Gender;
-import Human.Human;
-import Human.Comparators.HumanCompByAge;
-import Human.Comparators.HumanCompByChildren;
-import Human.Comparators.HumanCompByGender;
-import Human.Comparators.HumanCompByName;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Animal.Animal;
+import Animal.HumanCompByAge;
+import Animal.HumanCompByChildren;
+import Animal.HumanCompByGender;
+import Animal.HumanCompByName;
+import Animal.Human.Gender;
+import Animal.Human.Human;
+
 import java.util.Iterator;
 
 /**
@@ -94,22 +96,22 @@ public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
 
     @Override
     public Iterator<T> iterator(){
-        return new TIterator(listT);
+        return new TIterator<T>(listT);
     }
 
     public void sortByName(){
-        listT.sort(new TCompByName());
+        listT.sort(new AnimalCompByName());
     }
 
     public void sortByAge(){
-        listT.sort(new TCompByAge());
+        listT.sort(new AnimalCompByAge());
     }
 
     public void sortByGender(){
-        listT.sort(new TCompByGender());
+        listT.sort(new AnimalCompByGender());
     }
 
     public void sortByChildren(){
-        listT.sort(new TCompByChildren());
+        listT.sort(new AnimalCompByChildren());
     }
 }

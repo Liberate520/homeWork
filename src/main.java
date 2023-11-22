@@ -5,14 +5,14 @@
 // модель человека и дерева
 // Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
 
+import Animal.Human.Human;
 import FamalyTree.FamalyTree;
-import Human.Human;
 
 class Programma {
     public static void main (String[] args) {
-        FamalyTree famalyTree = new FamalyTree();
+        FamalyTree<Human> famalyTree = new FamalyTree<>();
 
-        famalyTree.addHuman();
+        famalyTree.addT();
         System.out.println("hierge");
         //famalyTree.addHuman();
         //famalyTree.addHuman();
