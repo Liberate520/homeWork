@@ -13,8 +13,8 @@ public class Human {
     private Human mother, father;
     private List<Human> children;
 
-    public Human(String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<Human> children, LocalDate deathDate) {
-        this.id = 0; 
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<Human> children, LocalDate deathDate) {
+        this.id = id; 
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -25,16 +25,20 @@ public class Human {
         this.deathDate = deathDate;
     }
     
-    public Human(String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<Human> children) {
-        this(firstName, lastName, birthDate, sex, mother, father, children, null);
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<Human> children) {
+        this(id, firstName, lastName, birthDate, sex, mother, father, children, null);
     }
 
-    public Human(String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father) {
-        this(firstName, lastName, birthDate, sex, mother, father, new ArrayList<Human>(), null);
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father) {
+        this(id, firstName, lastName, birthDate, sex, mother, father, new ArrayList<Human>(), null);
     }
 
-    public Human(String firstName, String lastName, LocalDate birthDate, Sex sex) {
-        this(firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), null);
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, LocalDate deathDate) {
+        this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), deathDate);
+    }
+
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex) {
+        this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), null);
     }
 
     public long getId() {
@@ -97,6 +101,14 @@ public class Human {
         this.lastName = lastName;
     }
 
+    public boolean setId(long id) {
+        if (this.id == 0) {
+            this.id = id;
+            return true;
+        }
+        return false;
+    }
+
     public boolean setMother(Human mother) {
         if (this.mother == null) {
             this.mother = mother;
@@ -132,7 +144,7 @@ public class Human {
         return fullName.toString();
     }
 
-    private String getChildrenNames() {
+    public String getChildrenNames() {
         StringBuilder childrenNames = new StringBuilder();
         for (Human child : this.children) {
             childrenNames.append(child.getFullName()).append("\n");
@@ -140,6 +152,21 @@ public class Human {
         return childrenNames.toString();
     }
     
+    private String getMotherInfo() {
+        if (this.mother != null) return this.mother.getFullName();
+        return "";
+    }
+
+    private String getFatherInfo() {
+        if (this.father != null) return this.father.getFullName();
+        return "";
+    }
+
+    private String getDeathDateInfo() {
+        if (this.deathDate != null) return this.deathDate.toString();
+        return "";
+    }
+
     private String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("id: ").append(this.id)
@@ -147,10 +174,10 @@ public class Human {
         .append("\nlast name: ").append(this.lastName)
         .append("\nsex: ").append(this.sex)
         .append("\nbirth date: ").append(this.birthDate.toString())
-        .append("\ndeath date: ").append(this.deathDate.toString())
-        .append("\nmother: ").append(this.mother.getFullName())
-        .append("\nfather: ").append(this.father.getFullName())
-        .append("\nchildren: ").append(this.getChildrenNames());
+        .append("\ndeath date: ").append(this.getDeathDateInfo())
+        .append("\nmother: ").append(this.getMotherInfo())
+        .append("\nfather: ").append(this.getFatherInfo())
+        .append("\nchildren: ").append(this.getChildrenNames()).append("\n");
         return info.toString();
     }
 

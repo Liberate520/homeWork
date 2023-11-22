@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    public List<Human> familyTree;
+    private List<Human> familyTree;
     
     public FamilyTree(List<Human> familyTree) {
         this.familyTree = familyTree;
@@ -24,13 +24,18 @@ public class FamilyTree {
             person.getMother().addChild(person);
         }
     }
+
+    public void addToParents(long personId) {
+        this.addToParents(this.getById(personId));
+    }
     
     public boolean addParent(Human parent, Human recipient) {
-        if (parent.getSex().toString() == "Female") {
-            return recipient.setMother(parent);
-        } else {
-            return recipient.setFather(parent);
-        }
+        if (parent.getSex().equals(Sex.Male)) return recipient.setFather(parent);
+        else return recipient.setMother(parent);
+    }
+
+    public void addParent(long parentId, long recipientId) {
+        this.addParent(this.getById(parentId), this.getById(recipientId));
     }
 
     public boolean addPerson(Human person) {
@@ -53,7 +58,7 @@ public class FamilyTree {
         return this.familyTree.remove(this.getById(id));
     }
 
-    private Human getById(long id) {
+    public Human getById(long id) {
         if (this.checkId(id)) {
             for (Human person : familyTree) {
                 if (person.getId() == id) return person;
@@ -63,7 +68,7 @@ public class FamilyTree {
     }
 
     private boolean checkId(long id) {
-        if ((id > 0) && (id < this.familyTree.size())) return true;
+        if (id > 0) return true;
         return false;
     }
 
@@ -82,22 +87,34 @@ public class FamilyTree {
         return siblings;
     }
 
+    public List<Human> getSiblings(long personId) {
+        return this.getSiblings(this.getById(personId));
+    }
+
     public double medianAge() {
         double ageSum = 0;
+        int count = 0;
         for (Human person : this.familyTree) {
-            if (person.getDeathDate() == null) ageSum += person.getAge();
+            if (person.getDeathDate() == null) {
+                ageSum += person.getAge();
+                count++;
+            }
         }
 
-        return ageSum / this.familyTree.size();
+        return ageSum / count;
     }
 
     public double medianLifeSpan() {
         double lifeSpanSum = 0;
+        int count = 0;
         for (Human person : this.familyTree) {
-            if (person.getDeathDate() != null) lifeSpanSum += person.getAge();
+            if (person.getDeathDate() != null) {
+                lifeSpanSum += person.getAge();
+                count++;
+            }
         }
 
-        return lifeSpanSum / this.familyTree.size();
+        return lifeSpanSum / count;
     }
 
     public double medianChildrenAmount() {
@@ -107,5 +124,14 @@ public class FamilyTree {
         }
 
         return sumChildrenAmount / this.familyTree.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder familyTreeBuilder = new StringBuilder();
+        for (Human person : this.familyTree) {
+            familyTreeBuilder.append(person.getFullName()).append("\n");
+        }
+        return familyTreeBuilder.toString();
     }
 }
