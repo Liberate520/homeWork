@@ -138,14 +138,14 @@ public class ConsoleUI implements View {
     }
 
     public void sortByName() {
-        presenter.SortByName();
+        presenter.sortByName();
     }
 
     public void sortByAge() {
-        presenter.SortByAge();
+        presenter.sortByAge();
     }
 
     public void sortById() {
-        presenter.SortById();
+        presenter.sortById();
     }
 }

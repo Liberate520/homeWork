@@ -12,9 +12,9 @@ public class Presenter {
     private View view;
     private Model model;
 
-    public Presenter(View view){
+    public Presenter(View view, Model model){
         this.view = view;
-        this.model = new Model();
+        this.model = model;
     }
 
     public void addHuman(String name, Gender gender, LocalDate bornDate, LocalDate diedDate){
@@ -62,19 +62,19 @@ public class Presenter {
         else {this.view.printAnswer("Семейное древо не прочитано\n");}
     }
 
-    public void SortByName() {
+    public void sortByName() {
         this.model.sortByName();
         getHumansListInfo();
         view.printAnswer("Дерево отсортировано по имени\n");
     }
 
-    public void SortByAge() {
+    public void sortByAge() {
         this.model.sortByAge();
         getHumansListInfo();
         view.printAnswer("Дерево отсортировано по возрасту\n");
     }
 
-    public void SortById() {
+    public void sortById() {
         this.model.sortById();
         getHumansListInfo();
         view.printAnswer("Дерево отсортировано по id\n");
