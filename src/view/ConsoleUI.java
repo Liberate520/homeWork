@@ -101,7 +101,7 @@ public class ConsoleUI implements View {
         Gender gen = Gender.valueOf(scanner.nextLine());
         System.out.println("Введите имя второго родителя");
         String second_parent = scanner.nextLine();
-        presenter.addHuman();
+        presenter.addHuman(human_id, parent_id, name, birthday, gen, second_parent);
     }
 
     private void execute(){

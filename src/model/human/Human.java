@@ -105,4 +105,9 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
         if (this.birthday == null) return 0;
         return Period.between(this.birthday, LocalDate.now()).getYears();
     }
+
+    @Override
+    public int getParentID() {
+        return 0;
+    }
 }

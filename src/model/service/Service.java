@@ -21,20 +21,18 @@ public class Service {
     public String getHumanInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список :\n");
-        for (Human k : tree){
+        for (Human k : tree) {
             stringBuilder.append(k);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
 
-    public void sortByName(){
+    public void sortByName() {
         tree.sortByName();
     }
 
-    public void sortByAge(){
+    public void sortByAge() {
         tree.sortByAge();
     }
-
-    public String
 }
