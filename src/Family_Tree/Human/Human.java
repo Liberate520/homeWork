@@ -1,13 +1,15 @@
 package Family_Tree.Human;
 
+import Family_Tree.Tree.TreeNode;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
-    private long id;
+public class Human implements Serializable, Comparable<Human>, TreeNode<Human> {
+    private int id;
     private String name;
     private LocalDate birthday;
     private LocalDate death;
@@ -28,21 +30,18 @@ public class Human implements Serializable {
         children = new ArrayList<>();
     }
 
-    public boolean addChildren(Human child) {
+    public void addChildren(Human child) {
         if (!children.contains(child)) {
             children.add(child);
-            return true;
         }
-        return false;
     }
 
-    public boolean addParent(Human parent) {
+    public void addParent(Human parent) {
         if (parent.getGender().equals(Gender.Female)) {
             setMom(parent);
         } else if (parent.getGender().equals(Gender.Male)) {
             setDad(parent);
         }
-        return true;
     }
 
     public void setMom(Human mom) {
@@ -99,11 +98,11 @@ public class Human implements Serializable {
 
     public LocalDate getBirthday() {return birthday;}
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -201,5 +200,10 @@ public class Human implements Serializable {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }
