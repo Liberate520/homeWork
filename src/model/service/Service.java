@@ -7,27 +7,20 @@ import model.group.FamilyTree;
 import java.time.LocalDate;
 
 public class Service {
-    private FamileTree<Human> tree;
+    private FamilyTree<Human> tree;
 
     public Service() {
         tree = new FamilyTree<>();
     }
 
-    public void addHuman(String name, int age) {
-        Human human = new Human(int human_Id, int parent_Id, String name, LocalDate birthday, Gender gender, String second_parent);
-        tree.addHuman();
+    public void addHuman(int human_Id, int parent_Id, String name, LocalDate birthday, Gender gender, String second_parent) {
+        Human human = new Human(human_Id, parent_Id, name, birthday, gender, second_parent);
+        tree.addHuman(human);
     }
 
     public String getHumanInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список :\n");
-
-//        Iterator<Student> iterator = group.iterator();
-//        while (iterator.hasNext()){
-//            Student student = iterator.next();
-//            stringBuilder.append(student);
-//            stringBuilder.append("\n");
-//        }
         for (Human k : tree){
             stringBuilder.append(k);
             stringBuilder.append("\n");
@@ -42,4 +35,6 @@ public class Service {
     public void sortByAge(){
         tree.sortByAge();
     }
+
+    public String
 }

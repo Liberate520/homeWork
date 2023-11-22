@@ -63,6 +63,14 @@ public class ConsoleUI implements View {
         presenter.save();
     }
 
+    public void load() {
+        presenter.load();
+    }
+
+    public void importTree() {
+        presenter.importTree();
+    }
+
     public void finish() {
         System.out.println("Приятно было пообщаться");
         work = false;

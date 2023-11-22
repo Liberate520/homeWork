@@ -12,7 +12,6 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddFirstParent(console));
         commandList.add(new AddHuman(console));
-        commandList.add(new Command(console);
         commandList.add(new Finish(console));
         commandList.add(new GetHumanInfo(console));
         commandList.add(new ImportTree(console));

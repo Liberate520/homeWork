@@ -1,3 +1,7 @@
+/*
+Проект "Семейное древо"
+*/
+
 import view.ConsoleUI;
 
 public class Main {
