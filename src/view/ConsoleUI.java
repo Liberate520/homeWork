@@ -18,10 +18,13 @@ public class ConsoleUI implements View {
 
     public ConsoleUI(){
         this.scanner = new Scanner(System.in);
-        this.presenter = new Presenter(this);
+        //this.presenter = new Presenter(this);
         this.menu = new MainMenu(this);
         this.work = true;
     }
+
+    public void setPresenter(Presenter presenter){this.presenter = presenter;}
+
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);

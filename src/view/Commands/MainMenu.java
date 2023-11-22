@@ -1,9 +1,6 @@
 package view.Commands;
 
-import view.Commands.AddHuman;
-import view.Commands.Commands;
 import view.ConsoleUI;
-
 import java.util.ArrayList;
 import java.util.List;
 

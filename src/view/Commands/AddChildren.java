@@ -9,7 +9,5 @@ public class AddChildren extends Commands{
     }
 
     @Override
-    public void execute() {
-        this.consoleUI.addChildren();
-    }
+    public void execute() { this.consoleUI.addChildren(); }
 }
