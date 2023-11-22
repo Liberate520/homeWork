@@ -1,7 +1,8 @@
 package ru.gb;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.LinkedList;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -40,6 +41,21 @@ public class Main {
 
 
         System.out.println(familyTree.getHumanListInfo());
+
+        FileHandler fileHandler = new FileHandler();
+
+        try {
+            // Сохранение объектов в файл
+            fileHandler.saveToFile("familyTree.dat", familyTree);
+
+            // Чтение объектов из файла
+            FamilyTree loadedFamilyTree = (FamilyTree) fileHandler.readFromFile("familyTree.dat");
+
+            // Вывод информации о членах семьи после чтения из файла
+            System.out.println(loadedFamilyTree.getHumanListInfo());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

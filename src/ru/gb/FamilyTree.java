@@ -1,13 +1,18 @@
 package ru.gb;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
+    private long humansId;
     private List<Human> humanList;
+    public FamilyTree(){
+        this(new ArrayList<>());
+    }
 
-    public FamilyTree() {
-        humanList = new ArrayList<>();
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
     }
 
     public Human getHumanByName(String humanName) {
@@ -23,9 +28,24 @@ public class FamilyTree {
 
 
     public void addHuman(Human human) {
-        humanList.add(human);
-    }
 
+        if (!humanList.contains(human)) {
+            humanList.add(human);
+            human.setId(humansId++);
+        }
+    }
+    public Human getById(long id){
+        if (!checkId(id)) {
+            return null;
+        }
+        for (Human human : humanList) {
+            if (human.getId() ==id){
+                return human;
+            }
+        }
+        return null;
+    }
+    private  boolean checkId(long id){return id<humansId&&id>=0;}
     public String getHumanListInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семейное древо:\n");
