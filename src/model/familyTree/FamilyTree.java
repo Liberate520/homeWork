@@ -46,9 +46,9 @@ public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Itera
         }
         else{
             objectChild.setMother(objectMother);
-            System.out.println("Теоретически мать должна быть добавлена");
+//            System.out.println("Теоретически мать должна быть добавлена");
             objectMother.setChildren(objectChild);
-            System.out.println("Теоретически ребёнок тоже должен быть добавлен");
+//            System.out.println("Теоретически ребёнок тоже должен быть добавлен");
             //TODO почему-то не работают сеттеры, нужно докрутить
         }
 
@@ -60,20 +60,18 @@ public class FamilyTree<T extends FamilyTreeItem> implements Serializable, Itera
 //TODO убрать все проверки, позже - заменить на логирование
     public void addChild(T parent, T child){
         if (!parent.getChildren().contains(child)){
-            System.out.println("проверка два");
             parent.setChildren(child);
             if (parent.getGender(parent).contains("Female")){
                 child.setMother(parent);
-                System.out.println("мама назначена");
+                System.out.println("малыша назвали " + child.getName() + ", мамой является " + parent.getName());
             }
             if (parent.getGender(parent).contains("Male")){
                 child.setFather(parent);
-                System.out.println("папа назначен");
+                System.out.println("малыша назвали " + child.getName() + ", папой является " + parent.getName());
             }
-
-                else{
-                    System.out.println("не сработало с родителями, сорян");
-            }
+//            else{
+//                System.out.println("не сработало с родителями, сорян");
+//            }
 
         }
         else System.out.println("что-то не так");
