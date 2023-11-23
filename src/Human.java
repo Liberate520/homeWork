@@ -8,14 +8,6 @@ import java.util.Map;
 public class Human {
     private int id;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     private String name;
     private String lastname;
     private LocalDate birthday;
@@ -23,6 +15,12 @@ public class Human {
     private Gender gender;
     private Map<String, Human> parents;
     private List<Human> children;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {this.id = id;}
 
     public Human(String name, String lastname, Gender gender) {
         id++;
