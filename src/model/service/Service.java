@@ -3,11 +3,15 @@ package model.service;
 import model.human.Gender;
 import model.human.Human;
 import model.group.FamilyTree;
+import model.writer.FileHandler;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> tree;
+    private FileHandler handler;
+    String filename = "./tree.txt";
 
     public Service() {
         tree = new FamilyTree<>();
@@ -34,5 +38,17 @@ public class Service {
 
     public void sortByAge() {
         tree.sortByAge();
+    }
+    public void load() {
+        try {
+            tree = (FamilyTree)handler.read(filename);
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void save() {
+        handler.save(tree, filename);
     }
 }

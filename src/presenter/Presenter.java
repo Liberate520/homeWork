@@ -43,8 +43,6 @@ public class Presenter {
         String info = service.getHumanInfo();
     }
 
-    public void save() {
-    }
 
     public void importTree() {
         FamilyTree tree = new FamilyTree();
@@ -78,5 +76,10 @@ public class Presenter {
     }
 
     public void load() {
+        service.load();
+    }
+
+    public void save() {
+        service.save();
     }
 }
