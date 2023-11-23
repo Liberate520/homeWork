@@ -1,7 +1,6 @@
 package model.group;
 
 import model.group.iterator.HumanIterator;
-import model.human.Human;
 import model.human.comparator.CompareByAge;
 import model.human.comparator.CompareByName;
 
