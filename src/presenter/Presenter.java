@@ -1,5 +1,6 @@
 package presenter;
 
+import model.FamilyTree;
 import model.FileHandler;
 import model.Gender;
 import model.Service;
@@ -13,7 +14,8 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        FamilyTree familyTree = new FamilyTree();
+        service = new Service(new FileHandler(familyTree));
     }
 
     public void addHuman(int id, String name, Gender gender, LocalDate birthday) {

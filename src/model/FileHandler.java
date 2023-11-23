@@ -2,7 +2,7 @@ package model;
 
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable, FileInOut{
     private FamilyTree familyTree;
 
     public FileHandler(FamilyTree familyTree){

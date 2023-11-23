@@ -4,9 +4,11 @@ import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> familyTree;
+    private FileInOut fileHandler;
 
-    public Service() {
+    public Service(FileInOut fileHandler) {
         this.familyTree = new FamilyTree<>();
+        this.fileHandler = new FileHandler(familyTree);
     }
 
     public void addHuman(int id, String name, Gender gender, LocalDate birthday){
@@ -41,24 +43,14 @@ public class Service {
     }
 
     public void save() {
-        FileHandler fileHandler = new FileHandler(familyTree);
         fileHandler.output();
     }
 
     public void download() {
-        FileHandler fileHandler = new FileHandler(familyTree);
         familyTree = fileHandler.input();
     }
 
     public void setParent(int idChild, int idParent) {
-        for (Human humanChild: familyTree){
-            if (humanChild.getId() == idChild){
-                for (Human humanParent: familyTree){
-                    if (humanParent.getId() == idParent){
-                        humanChild.setParent(humanParent);
-                    }
-                }
-            }
-        }
+        familyTree.setParent(idChild, idParent);
     }
 }

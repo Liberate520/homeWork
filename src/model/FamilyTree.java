@@ -12,6 +12,17 @@ public class FamilyTree<E extends GroupItem> implements Serializable, Iterable<E
         familyTreeList.add(human);
     }
 
+    public void setParent(int idChild, int idParent) {
+        for (E humanChild: familyTreeList){
+            if (humanChild.getId() == idChild){
+                for (E humanParent: familyTreeList){
+                    if (humanParent.getId() == idParent){
+                        humanChild.setParent((Human) humanParent);
+                    }
+                }
+            }
+        }
+    }
     public void sortByName(){
         familyTreeList.sort(new TreeComparatorByName<>());
     }

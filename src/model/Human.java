@@ -35,6 +35,7 @@ public class Human implements Serializable, GroupItem {
     public Integer getId(){
         return id;
     }
+
     public String getName(){
         return name;
     }
