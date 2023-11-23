@@ -28,8 +28,9 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
         this.second_parent = second_parent;
         children = new ArrayList<>();
     }
+
     public Human(int human_Id, int parent_Id, String name, LocalDate birthday, Gender gender) {
-        this (human_Id, parent_Id, name, birthday, gender,null);
+        this(human_Id, parent_Id, name, birthday, gender, null);
     }
 
     public void setFirstParent(String first_parent) {
@@ -51,7 +52,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
     }
 
     public String getInfo() {
-        StringBuilder sb =new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append(human_Id);
         sb.append(" Имя: ").append(name);
         if (gender == Gender.Male) sb.append(" пол: М ");
@@ -66,12 +67,11 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
         StringBuilder res = new StringBuilder();
         res.append(" ");
         if (!children.isEmpty()) {
-            for (Human child: children) {
+            for (Human child : children) {
                 res.append(child.getName());
                 res.append(", ");
             }
-        }
-        else {
+        } else {
             res.append("Нет");
         }
         return res;
@@ -79,6 +79,11 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
 
     public int getHuman_Id() {
         return human_Id;
+    }
+
+    @Override
+    public int getFirstParent() {
+        return 0;
     }
 
     public LocalDate getBirthday() {
@@ -104,10 +109,5 @@ public class Human implements Serializable, Comparable<Human>, TreeItem {
     public int getAge() {
         if (this.birthday == null) return 0;
         return Period.between(this.birthday, LocalDate.now()).getYears();
-    }
-
-    @Override
-    public int getParentID() {
-        return 0;
     }
 }
