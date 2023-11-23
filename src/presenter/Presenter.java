@@ -82,4 +82,8 @@ public class Presenter {
     public void save() {
         service.save();
     }
+
+    public void addFP(int humanId, int parentId) {
+        service.addFP(humanId, parentId);
+    }
 }

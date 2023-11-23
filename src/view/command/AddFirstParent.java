@@ -10,6 +10,6 @@ public class AddFirstParent extends Command {
     }
 
     public void execute(){
-        tree.addFirstParent();
+        console.addFirstParent();
     }
 }

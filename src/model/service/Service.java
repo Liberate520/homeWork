@@ -40,15 +40,17 @@ public class Service {
         tree.sortByAge();
     }
     public void load() {
-        try {
-            tree = (FamilyTree)handler.read(filename);
-        }
-        catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        tree = (FamilyTree)handler.read(filename);
     }
 
     public void save() {
         handler.save(tree, filename);
+    }
+
+    public void addFP(int humanId, int parentId) {
+        Human child = tree.getHumanById(humanId);
+        Human parent = tree.getHumanById(parentId);
+        child.setFirstParent(parent.getName());
+        parent.addChild(child);
     }
 }

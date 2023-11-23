@@ -139,4 +139,12 @@ public class ConsoleUI implements View {
     private void inputError(){
         System.out.println(INPUT_ERROR);
     }
+
+    public void addFirstParent() {
+        System.out.println("Введите ID человека");
+        int human_id = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID первого родителя");
+        int parent_id = Integer.parseInt(scanner.nextLine());
+        presenter.addFP(human_id, parent_id);
+    }
 }

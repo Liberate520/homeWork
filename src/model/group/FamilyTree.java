@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>, TreeItem<E> {
+public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E> {
     private List<E> humanList;
 
     public FamilyTree() {
@@ -41,7 +41,7 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
             for (E l: humanList) {
                 if (fp == l.getParent_Id()) {
                     l.setFirstParent(k.getName());
-                    k.addChildren(l);
+                    k.addChild(l);
                 }
             }
         }
@@ -63,33 +63,11 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
         humanList.sort(new CompareByAge<>());
     }
 
-    @Override
-    public String getName() {
+    public E getHumanById(int human_Id) {
+        for (E l : humanList) {
+            if (human_Id == l.getHuman_Id())
+                return l;
+        }
         return null;
-    }
-
-    @Override
-    public int getAge() {
-        return 0;
-    }
-
-    @Override
-    public int getParentID() {
-        return 0;
-    }
-
-    @Override
-    public int getHuman_Id() {
-        return 0;
-    }
-
-    @Override
-    public int getFirstParent() {
-        return 0;
-    }
-
-    @Override
-    public int getParent_Id() {
-        return 0;
     }
 }
