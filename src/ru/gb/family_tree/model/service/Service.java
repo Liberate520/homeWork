@@ -30,20 +30,18 @@ public class Service {
         return tree.infoById(id);
     }
 
-    public void setBirthday(int id, int year, int month, int day) {
+    public boolean setBirthday(int id, int year, int month, int day) {
         Human human = tree.findInTree(id);
         if (human != null) {
             human.setBirthday(checkDate(year, month, day));
         }
+        return human.getBirthday() != null;
     }
 
     private LocalDate checkDate(int year, int month, int day) {
         LocalDate date = null;
         if (dateIsValid(year, month, day)) {
             date = LocalDate.of(year, month, day);
-        }
-        if (date == null) {
-            System.out.println("Данные не добавлены!");
         }
         return date;
     }
@@ -53,7 +51,6 @@ public class Service {
             LocalDate date = LocalDate.of(year, month, day);
             return true;
         } catch (DateTimeException e) {
-            System.out.println("Дата указана неверно!");
             return false;
         }
     }
@@ -92,11 +89,12 @@ public class Service {
         return getInfoShort();
     }
 
-    public void setDeathdate(int id, int year, int month, int day) {
+    public boolean setDeathdate(int id, int year, int month, int day) {
         Human human = tree.findInTree(id);
         if (human != null) {
             human.setDeathday(checkDate(year, month, day));
         }
+        return human.getDeathday() != null;
     }
 
     public void addSpouse(int one, int two) {
@@ -111,25 +109,18 @@ public class Service {
         parent.setChild(child);
     }
 
-    public void load() {
-        try {
-            tree = (FamilyTree) fh.read("output.data");
-        } catch (RuntimeException | IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public void load() throws IOException {
+        tree = (FamilyTree) fh.read("output.data");
     }
 
-    public void save() {
+    public boolean save() {
         FIleHandler fh = new FIleHandler();
-        if (fh.write(tree, "output.data")) System.out.println("Данные успешно записаны");
+        return fh.write(tree, "output.data");
     }
 
     public boolean checkId(int id) {
         Human human = tree.findInTree(id);
-        if (human != null) {
-            return true;
-        }
-        return false;
+        return human != null;
     }
 
 }

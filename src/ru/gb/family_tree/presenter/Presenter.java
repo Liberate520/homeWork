@@ -4,6 +4,8 @@ import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.service.Service;
 import ru.gb.family_tree.view.View;
 
+import java.io.IOException;
+
 public class Presenter {
 
     private View view;
@@ -23,9 +25,12 @@ public class Presenter {
         view.printAnswer(service.addNewToFamily(lastname, name, gender).toString());
     }
 
-    public void setBirthday(int id, int year, int month, int day) {
-        service.setBirthday(id, year, month, day);
-        view.printAnswer(service.infoByID(id));
+    public boolean setBirthday(int id, int year, int month, int day) {
+        if (service.setBirthday(id, year, month, day)) {
+            view.printAnswer(service.infoByID(id));
+            return true;
+        }
+        return false;
     }
 
     public void getBodyInfoById(int id) {
@@ -42,9 +47,12 @@ public class Presenter {
         view.printAnswer(service.getInfoShort());
     }
 
-    public void setDeathdate(int id, int year, int month, int day) {
-        service.setDeathdate(id, year, month, day);
-        view.printAnswer(service.infoByID(id));
+    public boolean setDeathdate(int id, int year, int month, int day) {
+        if (service.setDeathdate(id, year, month, day)) {
+            view.printAnswer(service.infoByID(id));
+            return true;
+        }
+        return false;
     }
 
     public void addSpouse(int one, int two) {
@@ -62,12 +70,12 @@ public class Presenter {
         view.printAnswer(service.getInfoShort());
     }
 
-    public void load() {
+    public void load() throws IOException {
         service.load();
     }
 
-    public void save() {
-        service.save();
+    public boolean save() {
+        return service.save();
     }
 
     public boolean checkId(int id) {

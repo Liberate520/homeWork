@@ -43,7 +43,6 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
                 return member;
             }
         }
-        System.out.println("Человек с таким Id не найден.");
         return null;
     }
 

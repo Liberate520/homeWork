@@ -1,7 +1,10 @@
 package ru.gb.family_tree.view;
 
 import ru.gb.family_tree.model.human.Gender;
+import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.presenter.Presenter;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -50,7 +53,11 @@ public class ConsoleUI implements View {
     }
 
     public void load() {
-        presenter.load();
+        try {
+            presenter.load();
+        } catch (RuntimeException | IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void viewAll() {
@@ -89,7 +96,13 @@ public class ConsoleUI implements View {
         int month = checkInt();
         System.out.println("Введите день рождения");
         int day = checkInt();
-        presenter.setBirthday(id, year, month, day);
+        if (presenter.setBirthday(id, year, month, day)) {
+            success();
+        }
+        else {
+            System.out.println("Дата указана неверно!");
+            error();
+        }
     }
 
     private int checkInt() {
@@ -116,7 +129,7 @@ public class ConsoleUI implements View {
                 i = false;
                 return id;
             }
-            else System.out.println("Введите другое значение.");
+            else System.out.println("Человек с таким Id не найден. Введите другое значение.");
         }
         return id;
     }
@@ -130,7 +143,12 @@ public class ConsoleUI implements View {
         int month = checkInt();
         System.out.println("Введите день смерти");
         int day = checkInt();
-        presenter.setDeathdate(id, year, month, day);
+        if (presenter.setDeathdate(id, year, month, day)) {
+            success();
+        }
+        else {
+            error();
+        }
     }
 
     public void infoById() {
@@ -191,7 +209,20 @@ public class ConsoleUI implements View {
     }
 
     public void save() {
-        presenter.save();
+        if (presenter.save()) {
+            success();
+        }
+        else {
+            error();
+        }
+    }
+
+    private void success() {
+        System.out.println("Данные сохранены.");
+    }
+
+    private void error() {
+        System.out.println("Данные не записаны!");
     }
 
     @Override
