@@ -1,7 +1,8 @@
-package familyTree;
-import Human.*;
-import Service.*;
-import Human.Comparators.*;
+package model.fmilyTree;
+import model.service.Saver;
+import model.fmilyTree.comparators.ElementComparatorByAge;
+import model.fmilyTree.comparators.ElementComparatorByName;
+import model.fmilyTree.comparators.ElementIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,10 +12,11 @@ public class FamilyTree<E extends ItemOfFamilyTree> extends Saver implements Ite
     private List<E> elementsList;
 
     public FamilyTree() {
-        elementsList = new ArrayList<E>();
+        elementsList = new ArrayList<>();
     }
     public void addHuman(E element) {
         elementsList.add(element);
+        System.out.println(getElementList());
     }
 
     public void setElementsList(List<E> elementsList) {
@@ -44,10 +46,12 @@ public class FamilyTree<E extends ItemOfFamilyTree> extends Saver implements Ite
 
     public void sortByName() {
         elementsList.sort(new ElementComparatorByName<>());
+        System.out.println(getElementList());
     }
 
     public void sortByAge(){
         elementsList.sort(new ElementComparatorByAge<>());
+        System.out.println(getElementList());
     }
 
     @Override

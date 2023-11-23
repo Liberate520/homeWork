@@ -1,10 +1,11 @@
-package Human.Comparators;
-import Human.*;
+package model.fmilyTree.comparators;
+
+import model.fmilyTree.ItemOfFamilyTree;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class ElementIterator<E> implements Iterator<E> {
+public class ElementIterator<E extends ItemOfFamilyTree> implements Iterator<E> {
     private int index;
     private List<E> elementList;
 

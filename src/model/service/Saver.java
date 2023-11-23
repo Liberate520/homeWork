@@ -1,6 +1,6 @@
-package Service;
+package model.service;
 
-import familyTree.FamilyTree;
+import model.fmilyTree.FamilyTree;
 
 import java.io.*;
 import java.util.List;

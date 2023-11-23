@@ -1,6 +1,4 @@
-package Human;
-
-import Human.Human;
+package model.human;
 
 import java.time.LocalDate;
 

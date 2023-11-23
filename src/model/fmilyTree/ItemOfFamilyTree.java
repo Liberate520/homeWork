@@ -1,6 +1,4 @@
-package familyTree;
-
-import java.time.LocalDate;
+package model.fmilyTree;
 
 public interface ItemOfFamilyTree {
     String getName();
