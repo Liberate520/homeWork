@@ -1,6 +1,6 @@
 
-import View.View;
-import View.ConsoleUI;
+import view.View;
+import view.ConsoleUI;
 
 
 public class Test {
