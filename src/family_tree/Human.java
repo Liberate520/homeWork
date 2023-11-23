@@ -100,7 +100,7 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
             setParentM(parent);
         }
         else if (parent.getGender().equals(Gender.female)){
-            setParentF(parentF);
+            setParentF(parent);
         }
     }
 

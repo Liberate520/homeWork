@@ -84,9 +84,9 @@ public class FamilyTree<T extends HumanInterface<T>> implements Serializable, It
 
     public String getData(){
         StringBuilder info = new StringBuilder();
-        info.append("In tree ");
-        info.append(humanList.size());
-        info.append(" elements: \n");
+//        info.append("In tree ");
+//        info.append(humanList.size());
+//        info.append(" elements: \n");
         for (T human: humanList){
             info.append(human);
             info.append("\n");
