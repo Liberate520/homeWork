@@ -75,6 +75,8 @@ public class FileHandler {
         FamilyTree.methodSortByAge(humans);
         FamilyTree.methodSortByIncome(humans);
 
+
+
 //        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
 //        //  Сортировка списка по Фамилии
 //        humans.sort(Comparator.comparing(Human::getLastName));

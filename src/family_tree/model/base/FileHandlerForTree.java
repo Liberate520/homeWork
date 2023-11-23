@@ -1,16 +1,16 @@
 package family_tree.model.base;
 
-import family_tree.model.family_tree.FamilyTree;
+import family_tree.controller.Controller;
 import family_tree.model.human.Human;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 
 public class FileHandlerForTree {
-    public static void HandlerForTree(){
+    public static String HandlerForTree() {
+        Controller info;
         String filePath = "homeWork/src/model_app/family_tree.txt";
         // выводим на экран
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
@@ -29,11 +29,10 @@ public class FileHandlerForTree {
             e.printStackTrace();
         }
 
-
-
-
-
-
+        return filePath;
     }
+
+
+
 
 }

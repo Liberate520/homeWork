@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable<E>, FamilyTreeHub<Human> {
+
     private String lastName;
     private String firstName;
     private double Id;
@@ -19,8 +20,9 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
     private double id;
     private String position;
     private LocalDate birthDate;
+    public String info;
 
-    public FamilyTree(double id) {
+    public FamilyTree() {
         humanList = new ArrayList<>();
     }
 
@@ -90,6 +92,7 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
             System.out.println(human);
         }
     }
+
 
     public static void methodSortByAge(ArrayList<Human> humans) {
         System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");

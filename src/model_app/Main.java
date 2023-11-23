@@ -1,34 +1,41 @@
 package model_app;
 
+import family_tree.model.base.FileHandler;
+import family_tree.model.base.TreeNode;
 import family_tree.model.family_tree.FamilyTree;
 import family_tree.model.human.*;
 //import static family_tree.model.base.FileHandler.FileHandlerForFamilyTree;
 import static family_tree.model.base.FileHandlerForTree.HandlerForTree;
+import family_tree.view.ConsoleUI;
+import family_tree.view.View;
 
 import java.io.*;
 import java.util.ArrayList;
 
 
-public class Main {
+public class Main<E extends TreeNode<E>> {
     public static void main(String[] args) throws IOException  {
         // выводим на экран familyTree
 //        party();
-
         // выводим на экран
-        System.out.println("===============================");
+//        System.out.println("===============================");
 //        System.out.println("Список : ");
-        System.out.println("Фамильное дерево : ".toUpperCase());
+//        System.out.println("Фамильное дерево : ".toUpperCase());
 //        FileHandlerForFamilyTree();
-        System.out.println("Список : ");
-        HandlerForTree();
-        System.out.println("                    FAMILY TREE");
-        System.out.println("===============================");
-        System.out.println("===============================");
+//        System.out.println("Список : ");
+//        HandlerForTree();
+//        System.out.println("                    FAMILY TREE");
+//        System.out.println("===============================");
+//        System.out.println("===============================");
 
+        View view = new ConsoleUI();
+        view.start();
 
 
 
     }
+
+
 
 
 //    private static extends TreeHub void party() {
