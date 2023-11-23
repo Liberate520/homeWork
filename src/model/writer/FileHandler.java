@@ -1,6 +1,4 @@
-package writer;
-
-import human.Human;
+package model.writer;
 
 import java.io.*;
 

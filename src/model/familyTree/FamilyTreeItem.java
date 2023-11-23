@@ -1,4 +1,6 @@
-package familyTree;
+package model.familyTree;
+
+import model.human.gender.Gender;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,6 +8,7 @@ import java.util.List;
 public  interface FamilyTreeItem<T> {
     int getAge();
     String getName();
+    String getGender();
     LocalDate getBirthDay();
     void setId(int id);
 
@@ -14,11 +17,16 @@ public  interface FamilyTreeItem<T> {
 
     //Вопрос: а как в интерфейсе прописывать методы с параметрами, как ниже?
 
-//    public <T> getMother();
-//    public void setMother(T mother);
-//    public <T> getFather();
+    T getMother();
+    default void setMother(T mother){};
 
-//    public void setFather(T father);
+    //??? А как, собственно, прописывать методы, которые не void?
+    default String getGender(T human){
+        return getGender();
+    };
+//    public T getFather();
+//
+    default void setFather(T father){};
 
 
 }

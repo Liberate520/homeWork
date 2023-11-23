@@ -1,7 +1,7 @@
-package human;
+package model.human;
 
-import familyTree.FamilyTreeItem;
-import writer.Writable;
+import model.familyTree.FamilyTreeItem;
+import model.human.gender.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, FamilyTreeItem {
+public class Human implements Serializable, FamilyTreeItem<Human> {
     private int id;
     private String name;
     private Gender gender;
@@ -67,8 +67,8 @@ public class Human implements Serializable, FamilyTreeItem {
         this.name = name;
     }
 
-    public Gender getGender() {
-        return gender;
+    public String getGender() {
+        return gender.toString();
     }
 
     public void setGender(Gender gender) {
@@ -94,6 +94,11 @@ public class Human implements Serializable, FamilyTreeItem {
     public Human getMother() {
         return mother;
     }
+
+//    @Override
+//    public void setMother(Human mother) {this.mother = mother;
+//
+//    }
 
     public void setMother(Human mother) {
         this.mother = mother;
