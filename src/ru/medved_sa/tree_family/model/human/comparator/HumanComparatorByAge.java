@@ -1,6 +1,6 @@
-package ru.medved_sa.tree_family.human.comparator;
+package ru.medved_sa.tree_family.model.human.comparator;
 
-import ru.medved_sa.tree_family.familyTree.EntityCreation;
+import ru.medved_sa.tree_family.model.familyTree.EntityCreation;
 
 import java.util.Comparator;
 

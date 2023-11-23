@@ -1,12 +1,12 @@
-package ru.medved_sa.tree_family.save;
+package ru.medved_sa.tree_family.model.save;
 
 
-import ru.medved_sa.tree_family.save.ioUtils.IOUtils;
+import ru.medved_sa.tree_family.model.save.ioUtils.IOUtils;
 
 import java.io.Serializable;
 
 public class FileHandlerService extends IOUtils implements Writable {
-    private String filePath = "src/ru/medved_sa/tree_family/save/familyTree.out";
+    private String filePath = "src/ru/medved_sa/tree_family/model/save/familyTree.out";
 
     public FileHandlerService() {
         this.filePath = filePath;

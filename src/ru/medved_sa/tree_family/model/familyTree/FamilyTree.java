@@ -1,8 +1,8 @@
-package ru.medved_sa.tree_family.familyTree;
+package ru.medved_sa.tree_family.model.familyTree;
 
-import ru.medved_sa.tree_family.familyTree.iterator.HumanIterator;
-import ru.medved_sa.tree_family.human.comparator.HumanComparatorByAge;
-import ru.medved_sa.tree_family.human.comparator.HumanComparatorByFirstName;
+import ru.medved_sa.tree_family.model.familyTree.iterator.HumanIterator;
+import ru.medved_sa.tree_family.model.human.comparator.HumanComparatorByAge;
+import ru.medved_sa.tree_family.model.human.comparator.HumanComparatorByFirstName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -240,7 +240,7 @@ public class FamilyTree<T extends EntityCreation<T>> implements Serializable, It
      * @param firstName имя человека
      * @return информация о человеке
      */
-    public List<T> getByFirstName(String firstName) {
+    public List<T> sortByFirstName(String firstName) {
         List<T> result = new ArrayList<>();
         for (T human : humanList) {
             if (human.getFirstName().equals(firstName)) {
@@ -269,11 +269,11 @@ public class FamilyTree<T extends EntityCreation<T>> implements Serializable, It
         return new HumanIterator<>(humanList);
     }
 
-    public void getByFirstName() {
+    public void sortByFirstName() {
         humanList.sort(new HumanComparatorByFirstName<>());
     }
 
-    public void getByAge() {
+    public void sortByAge() {
         humanList.sort(new HumanComparatorByAge<>());
     }
 

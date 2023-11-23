@@ -1,4 +1,4 @@
-package ru.medved_sa.tree_family.familyTree;
+package ru.medved_sa.tree_family.model.familyTree;
 
 import java.io.Serializable;
 import java.util.List;

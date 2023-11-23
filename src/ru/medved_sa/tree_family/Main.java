@@ -1,35 +1,45 @@
 package ru.medved_sa.tree_family;
 
-import ru.medved_sa.tree_family.familyTree.FamilyTree;
-import ru.medved_sa.tree_family.human.Gender;
-import ru.medved_sa.tree_family.human.Human;
-import ru.medved_sa.tree_family.save.FileHandlerService;
+import ru.medved_sa.tree_family.model.familyTree.FamilyTree;
+import ru.medved_sa.tree_family.model.human.Gender;
+import ru.medved_sa.tree_family.model.human.Human;
+import ru.medved_sa.tree_family.model.save.FileHandlerService;
+import ru.medved_sa.tree_family.presenter.Presenter;
+import ru.medved_sa.tree_family.view.Console;
+import ru.medved_sa.tree_family.view.View;
+import ru.medved_sa.tree_family.view.comands.AddHuman;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
-//        FamilyTree<Human> familyTreeList = getFamilyTreeTest();
+        FamilyTree<Human> familyTreeList = getFamilyTreeTest();
 
 
-//        save(familyTreeList);
-        FamilyTree<Human> familyTreeRead = read();
+        save(familyTreeList);
+        System.out.println(familyTreeList);
+//        FamilyTree<Human> familyTreeRead = read();
+//
+//
+//        System.out.println(getHumanListInfoIterator(familyTreeRead));
+//
+//        familyTreeRead.sortByFirstName();
+//        System.out.println(familyTreeRead);
+//        familyTreeRead.sortByAge();
+//        System.out.println(familyTreeRead);
+
+        View view = new Console();
+        view.start();
 
 
-        System.out.println(getHumanListInfoIterator(familyTreeRead));
-
-        familyTreeRead.getByFirstName();
-        System.out.println(familyTreeRead);
-        familyTreeRead.getByAge();
-        System.out.println(familyTreeRead);
 
     }
 
 
     private static String getHumanListInfoIterator(FamilyTree<Human> familyList) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Список студентов через iterator:\n");
+        sb.append("Список семейного древа через iterator:\n");
         for (Human human : familyList) {
             sb.append(human);
             sb.append("\n");

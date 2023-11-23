@@ -1,6 +1,6 @@
-package ru.medved_sa.tree_family.familyTree.iterator;
+package ru.medved_sa.tree_family.model.familyTree.iterator;
 
-import ru.medved_sa.tree_family.familyTree.EntityCreation;
+import ru.medved_sa.tree_family.model.familyTree.EntityCreation;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,6 +1,6 @@
-package ru.medved_sa.tree_family.human;
+package ru.medved_sa.tree_family.model.human;
 
-import ru.medved_sa.tree_family.familyTree.EntityCreation;
+import ru.medved_sa.tree_family.model.familyTree.EntityCreation;
 
 import java.time.LocalDate;
 import java.time.Period;
