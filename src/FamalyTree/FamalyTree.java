@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import Animal.Animal;
-import Animal.HumanCompByAge;
-import Animal.HumanCompByChildren;
-import Animal.HumanCompByGender;
-import Animal.HumanCompByName;
+import Animal.AnimalCompByAge;
+import Animal.AnimalCompByChildren;
+import Animal.AnimalCompByGender;
+import Animal.AnimalCompByName;
 import Animal.Human.Gender;
-import Animal.Human.Human;
 
 import java.util.Iterator;
 
@@ -100,18 +99,18 @@ public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
     }
 
     public void sortByName(){
-        listT.sort(new AnimalCompByName());
+        listT.sort(new AnimalCompByName<>());
     }
 
     public void sortByAge(){
-        listT.sort(new AnimalCompByAge());
+        listT.sort(new AnimalCompByAge<>());
     }
 
     public void sortByGender(){
-        listT.sort(new AnimalCompByGender());
+        listT.sort(new AnimalCompByGender<>());
     }
 
     public void sortByChildren(){
-        listT.sort(new AnimalCompByChildren());
+        listT.sort(new AnimalCompByChildren<>());
     }
 }
