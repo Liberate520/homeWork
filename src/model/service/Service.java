@@ -5,7 +5,6 @@ import model.human.Human;
 import model.group.FamilyTree;
 import model.writer.FileHandler;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class Service {
