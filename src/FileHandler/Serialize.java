@@ -1,3 +1,5 @@
+package FileHandler;
+
 import java.io.Serializable;
 
 public interface Serialize {

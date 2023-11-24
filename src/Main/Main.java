@@ -1,17 +1,23 @@
+package Main;
+
 import java.time.LocalDate;
+import FamilyTree.FamilyTree;
+import FileHandler.FileHandler;
+import Human.Human;
+import Human.Sex;
 
 public class Main {
     public static long id = 0;
     public static FamilyTree familyTree;
     public static void main(String[] args) {
-        FileHandler f = new FileHandler("gg.ser");
-        familyTree = (FamilyTree) f.readFromFile();
-        // boolean testing = true;
-        // if (testing) initializeTestData();
-        // else familyTree = new FamilyTree();
+        // FileHandler f = new FileHandler("test.txt");
+        // familyTree = (FamilyTree) f.readFromFile();
+        boolean testing = true;
+        if (testing) initializeTestData();
+        else familyTree = new FamilyTree();
         System.out.println(familyTree.getSiblings(1));
-        // FileHandler f = new FileHandler("gg.ser");
-        // f.writeToFile(familyTree);
+        FileHandler f1 = new FileHandler("test.txt");
+        f1.writeToFile(familyTree);
     }
     
     private static long getId() {

@@ -1,6 +1,7 @@
+package FileHandler;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -19,7 +20,7 @@ public class FileHandler implements Serialize {
             ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(toWrite);
             out.close();
-        } catch (IOException e ) {
+        } catch (Exception e ) {
             System.out.println(e.getMessage());
         }
     }
@@ -32,9 +33,7 @@ public class FileHandler implements Serialize {
             ObjectInputStream in = new ObjectInputStream(file);
             recovered = (Serializable) in.readObject();
             in.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return recovered;
