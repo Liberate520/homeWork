@@ -4,17 +4,21 @@ public class Main {
     public static long id = 0;
     public static FamilyTree familyTree;
     public static void main(String[] args) {
-        boolean testing = true;
-        if (testing) initializeTestData();
-        else familyTree = new FamilyTree();
+        FileHandler f = new FileHandler("gg.ser");
+        familyTree = (FamilyTree) f.readFromFile();
+        // boolean testing = true;
+        // if (testing) initializeTestData();
+        // else familyTree = new FamilyTree();
         System.out.println(familyTree.getSiblings(1));
+        // FileHandler f = new FileHandler("gg.ser");
+        // f.writeToFile(familyTree);
     }
     
     private static long getId() {
         return ++id;
     }
 
-    public static void initializeTestData() {
+    private static void initializeTestData() {
         familyTree = new FamilyTree();
         LocalDate p1Date = LocalDate.of(1997, 3, 2);
         LocalDate p2Date = LocalDate.of(1986, 5, 12);
@@ -27,20 +31,16 @@ public class Main {
         Human p3 = new Human(getId(), "Mama", "Kek", p3Date, Sex.Female);
         Human p4 = new Human(getId(), "Grandma", "kek", p4BDate, Sex.Female, p4DDate);
         Human p5 = new Human(getId(), "Brat", "Kek", p5Date, Sex.Male);
-        
+        p2.addChild(p1);
+        p2.addChild(p5);
+        p3.addChild(p1);
+        p3.addChild(p5);
+        p4.addChild(p3);
 
         familyTree.addPerson(p1);
         familyTree.addPerson(p2);
         familyTree.addPerson(p3);
         familyTree.addPerson(p4);
         familyTree.addPerson(p5);
-        familyTree.addParent(2, 1);
-        familyTree.addParent(3, 1);
-        familyTree.addParent(2, 5);
-        familyTree.addParent(3, 5);
-        familyTree.addToParents(1);
-        familyTree.addToParents(5);
-        familyTree.addParent(4, 3);
-        familyTree.addToParents(3);
     }
 }
