@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Animal.Animal;
+
 /**
  * Класс ЧЕЛОВЕК
  */
-public class Human implements Comparable<Human>,Animal{
+public class Human implements Comparable<Human>, Animal<Human>{
+    private static int count;
     private int ID;
     private String name;
     private DataLive data;
@@ -30,19 +32,22 @@ public class Human implements Comparable<Human>,Animal{
      */
     public Human (String name, int year_bd, int m_bd, int day_bd, int year_dd,
                   int m_dd, int day_dd, Gender gender){
-        ID = -1;
+        this.ID = count++;
         this.name = name;
         this.data.setTimeLive(LocalDate.of(year_bd, m_bd, day_bd),LocalDate.of(year_dd, m_dd, day_dd));
         this.gender = gender;
     }
     public Human (String name, int year_bd, int m_bd, int day_bd, Gender gender){
-        ID = -1;
+        this.ID = count++;
         this.name = name;
-        this.data.setBirthday(LocalDate.of(year_bd, m_bd, day_bd));
+        this.data = new DataLive(year_bd,m_bd,day_bd);
         this.gender = gender;
     }
     public Human(){
         this("человек", 12, 12, 12, Gender.Male);
+    }
+    public Human(String name){
+        this(name, 12, 12, 12, Gender.Male);
     }
 
     //----------------Методы работы с личными данными--------------------
@@ -164,6 +169,7 @@ public class Human implements Comparable<Human>,Animal{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Информация о " + this.name);
+        sb.append(": ID:" + this.ID);
         return sb.toString();
     }
     

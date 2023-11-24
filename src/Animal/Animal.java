@@ -5,7 +5,7 @@ import java.util.List;
 
 import Animal.Human.Gender;
 
-public interface Animal{
+public interface Animal<T>{
     void setName(String str);
     void setBirthday(LocalDate date);
     LocalDate getBirthday();
@@ -14,12 +14,12 @@ public interface Animal{
     Gender getGender();
     void setId(int id);
     String getName();
-    void setFather(Animal animal);
-    void setMather(Animal animal);
-    void addChildren(Animal animal);
-    List<Animal> getChildren();
-    void setSpouse(Animal animal);
-    Animal getSpouse();
-    int compareTo(Animal o);
+    void setFather(T animal);
+    void setMather(T animal);
+    void addChildren(T animal);
+    List<T> getChildren();
+    void setSpouse(T animal);
+    T getSpouse();
+    int compareTo(T o);
     
 } 

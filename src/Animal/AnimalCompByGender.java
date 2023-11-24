@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import Animal.Human.Gender;
 
-public class AnimalCompByGender<T extends Animal> implements Comparator<T> {
+public class AnimalCompByGender<T extends Animal<T>> implements Comparator<T> {
 
     @Override
     public int compare(T o1, T o2) {

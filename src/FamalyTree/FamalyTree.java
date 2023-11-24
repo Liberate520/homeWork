@@ -1,10 +1,8 @@
 package FamalyTree;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import Animal.Animal;
 import Animal.AnimalCompByAge;
@@ -18,7 +16,7 @@ import java.util.Iterator;
 /**
  * Класс ГЕНЕОЛОГИЧЕССКОЕ ДЕРЕВО
  */
-public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
+public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T> {
     private List<T> listT;
 
     public FamalyTree(){
@@ -28,17 +26,7 @@ public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
     /**
      * Метод добавления нового человека в генеологическое дерево.
      */
-    public void addT (T t){
-        Scanner in = new Scanner(System.in);
-        //nextLine(): считывает всю введенную строку
-        System.out.print("Введите имя: ");
-        t.setName(in.nextLine());
-        System.out.print("Введите дату рождения (ГГГГ.MM.ДД): ");
-        t.setBirthday(LocalDate.of(in.nextInt(),in.nextInt(),in.nextInt()));
-        System.out.print("Введите пол (м,ж): ");
-        t.setGender(in.nextLine());
-        t.setId(listT.size());
-        in.close();
+    public void addT(T t){
         listT.add(t);
     }
 
@@ -47,12 +35,8 @@ public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
      * @param t0 Существо 1
      * @param t1 Существо 2
      */
-    public void addTRelatives(T t0, T t1){
-        Scanner in = new Scanner(System.in);
-        System.out.printf("Кем является %s для %s ? \n  1.Отец\n"
-        + "2.Мать\n  3.Супруг\n 4.Ребенок",t1.getName(),t0.getName());
-        int n = in.nextInt();
-        switch (n) {
+    public void addTRelatives(T t0, T t1, int index){
+        switch (index) {
             case 1:
                 t0.setFather(t1);
                 t1.addChildren(t0);
@@ -83,7 +67,6 @@ public class FamalyTree<T extends Animal> implements Serializable, Iterable<T> {
                 }
                 break;
         }
-        in.close();
     }
 
     public void PrintTree() {

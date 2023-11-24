@@ -12,15 +12,11 @@ class Programma {
     public static void main (String[] args) {
         FamalyTree<Human> famalyTree = new FamalyTree<>();
 
-        famalyTree.addT();
-        System.out.println("hierge");
-        //famalyTree.addHuman();
-        //famalyTree.addHuman();
-        //famalyTree.addHumanRelatives(famalyTree.addHuman(),famalyTree.addHuman());
-        
-        //Использование итерирования класса FamalyTree
-        for (Human human : famalyTree) {
-            System.out.println(human);
-        }
+        famalyTree.addT(new Human("Петя"));
+        famalyTree.addT(new Human("Маша"));
+        famalyTree.addT(new Human("Саша"));
+        famalyTree.PrintTree();
+        famalyTree.sortByName();
+        famalyTree.PrintTree();
     }
 }
