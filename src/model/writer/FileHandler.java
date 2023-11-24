@@ -1,9 +1,9 @@
-package writer;
+package model.writer;
 
-import familyTree.FamilyTree;
+import model.familyTree.FamilyTree;
+import model.human.Human;
 
 import java.io.*;
-import java.util.Formatter;
 
 public class FileHandler implements Writable{
     String fileName;
@@ -28,8 +28,8 @@ public class FileHandler implements Writable{
         }
 
     }
-    public FamilyTree load(){
-        FamilyTree familyTreeRestored;
+    public FamilyTree<Human> load(){
+        FamilyTree<Human> familyTreeRestored;
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(String.format("%s.out", this.fileName)));
             familyTreeRestored = (FamilyTree) objectInputStream.readObject();
@@ -38,5 +38,9 @@ public class FileHandler implements Writable{
             throw new RuntimeException(e);
         }
         return familyTreeRestored;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

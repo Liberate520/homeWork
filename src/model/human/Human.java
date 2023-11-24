@@ -1,12 +1,13 @@
-package human;
+package model.human;
 
-import familyTree.FamilyTreeItem;
+import model.familyTree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
+    private int id;
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -17,7 +18,8 @@ public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
     private List<Human> children;
 
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, Human mother, Human father, List<Human> children) {
+    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, Human mother, Human father, List<Human> children) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -29,18 +31,17 @@ public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
     }
 
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, List<Human> children) {
-        this(firstName, lastName, gender, born , died, null, null, children);
+    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, List<Human> children) {
+        this(id, firstName, lastName, gender, born , died, null, null, children);
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate born) {
-        this(firstName, lastName, gender, born, null, null);
+    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born) {
+        this(id, firstName, lastName, gender, born, null, null);
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate born, LocalDate died) {
-        this(firstName, lastName, gender, born, died, null);
+    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died) {
+        this(id, firstName, lastName, gender, born, died, null);
     }
-
 
     @Override
     public String toString() {
