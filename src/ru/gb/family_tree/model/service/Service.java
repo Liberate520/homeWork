@@ -1,6 +1,7 @@
 package ru.gb.family_tree.model.service;
 
 import ru.gb.family_tree.model.builder.HumanBuilder;
+import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.tree.FamilyTree;
@@ -20,7 +21,7 @@ public class Service {
         fh = new FIleHandler();
     }
 
-    public Human addNewToFamily(String lastname, String name, Gender gender) {
+    public Human addNewToFamily(String lastname, String name, Gender gender) throws HumanExcistsException {
         Human human = builder.build(lastname, name, gender);
         tree.addMember(human);
         return human;

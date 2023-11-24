@@ -1,5 +1,6 @@
 package ru.gb.family_tree.view;
 
+import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.presenter.Presenter;
@@ -71,7 +72,11 @@ public class ConsoleUI implements View {
         String name = scanner.nextLine();
         System.out.println("Введите пол (Male, Female): ");
         Gender gender = checkGender();
-        presenter.addBody(lastname, name, gender);
+        try {
+            presenter.addBody(lastname, name, gender);
+        } catch (HumanExcistsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private Gender checkGender() {

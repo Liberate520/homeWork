@@ -5,6 +5,7 @@ import ru.gb.family_tree.model.human.comparators.HumanComparatorByAge;
 import ru.gb.family_tree.model.human.comparators.HumanComparatorById;
 import ru.gb.family_tree.model.human.comparators.HumanComparatorByLastname;
 import ru.gb.family_tree.model.human.comparators.HumanComparatorByName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,15 +26,11 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
         }
     }
 
-    public void addMember(E human) {
+    public void addMember(E human) throws HumanExcistsException {
         human.setId(memberId++);
-        try {
-            tryAdd(human);
-            if (!familyMembers.contains(human)) {
-                familyMembers.add(human);
-            }
-        } catch (HumanExcistsException e) {
-            System.out.println(e.getMessage());
+        tryAdd(human);
+        if (!familyMembers.contains(human)) {
+            familyMembers.add(human);
         }
     }
 

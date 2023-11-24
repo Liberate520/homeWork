@@ -1,5 +1,6 @@
 package ru.gb.family_tree.presenter;
 
+import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.service.Service;
 import ru.gb.family_tree.view.View;
@@ -21,7 +22,7 @@ public class Presenter {
         view.printAnswer(tree);
     }
 
-    public void addBody(String lastname, String name, Gender gender) {
+    public void addBody(String lastname, String name, Gender gender) throws HumanExcistsException {
         view.printAnswer(service.addNewToFamily(lastname, name, gender).toString());
     }
 
