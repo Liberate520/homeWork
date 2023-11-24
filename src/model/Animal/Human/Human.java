@@ -176,12 +176,14 @@ public class Human implements Comparable<Human>, Animal<Human>, Serializable{
         if (this.gender == Gender.Male){
             sb.append("; Пол:Муж. ");
         } else  sb.append("; Пол:Жен. ");
+        
         sb.append(";"+ this.data);
         if (this.father != null) sb.append("; Отец: " + this.father.getName());
         if (this.mather != null) sb.append("; Мать: " + this.mather.getName());
         if (this.spouse != null) sb.append("; В браке");
         if (this.childrenList.size()>0) sb.append("; Детей: "+this.childrenList.size());
         sb.append(".");
+
         return sb.toString();
     }
     
