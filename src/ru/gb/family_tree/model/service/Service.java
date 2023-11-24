@@ -114,7 +114,6 @@ public class Service {
     }
 
     public boolean save() {
-        FIleHandler fh = new FIleHandler();
         return fh.write(tree, "output.data");
     }
 
