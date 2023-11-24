@@ -15,9 +15,9 @@ public class Main {
         boolean testing = true;
         if (testing) initializeTestData();
         else familyTree = new FamilyTree();
-        System.out.println(familyTree.getSiblings(1));
-        FileHandler f1 = new FileHandler("test.txt");
-        f1.writeToFile(familyTree);
+        System.out.println(familyTree);
+        familyTree.sortByBirthYear();
+        System.out.println(familyTree);
     }
     
     private static long getId() {
