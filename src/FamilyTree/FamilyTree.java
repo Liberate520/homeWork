@@ -2,12 +2,16 @@ package FamilyTree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
+import Human.ComparatorByBirthYear;
+import Human.ComparatorByFirstName;
+import Human.ComparatorById;
+import Human.ComparatorByLastName;
 import Human.Human;
 import Human.Sex;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyTree;
     
     public FamilyTree(List<Human> familyTree) {
@@ -93,6 +97,22 @@ public class FamilyTree implements Serializable {
         return this.getSiblings(this.getById(personId));
     }
 
+    public void sortByFirstName() {
+        this.familyTree.sort(new ComparatorByFirstName());
+    }
+
+    public void sortByLastName() {
+        this.familyTree.sort(new ComparatorByLastName());
+    }
+
+    public void sortByBirthYear() {
+        this.familyTree.sort(new ComparatorByBirthYear());
+    }
+
+    public void sortById() {
+        this.familyTree.sort(new ComparatorById());
+    }
+
     public double medianAge() {
         double ageSum = 0;
         int count = 0;
@@ -135,5 +155,10 @@ public class FamilyTree implements Serializable {
             familyTreeBuilder.append(person.getFullName()).append("\n");
         }
         return familyTreeBuilder.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return this.familyTree.iterator();
     }
 }
