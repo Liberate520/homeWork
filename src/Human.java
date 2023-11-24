@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
+public class Human implements Serializable {
     private long id;
     private String firstName;
     private String lastName;
@@ -37,8 +38,16 @@ public class Human {
         this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), deathDate);
     }
 
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, LocalDate deathDate, List<Human> children) {
+        this(id, firstName, lastName, birthDate, sex, null, null, children, deathDate);
+    }
+
     public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex) {
         this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), null);
+    }
+
+    public Human(String firstName, String lastName, LocalDate birthDate, Sex sex) {
+        this(0, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), null);
     }
 
     public long getId() {
@@ -78,7 +87,7 @@ public class Human {
     }
 
     public boolean addChild(Human child) {
-        if (!children.contains(child)) {
+        if (!this.children.contains(child)) {
             this.children.add(child);
             return true;
         }

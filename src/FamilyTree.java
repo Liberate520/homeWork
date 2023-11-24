@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> familyTree;
     
     public FamilyTree(List<Human> familyTree) {
@@ -16,7 +17,7 @@ public class FamilyTree {
         return this.familyTree;
     }
 
-    public void addToParents(Human person) {
+    private void addToParents(Human person) {
         if (person.getFather() != null) {
             person.getFather().addChild(person);
         }
@@ -25,22 +26,18 @@ public class FamilyTree {
         }
     }
 
-    public void addToParents(long personId) {
-        this.addToParents(this.getById(personId));
-    }
-    
-    public boolean addParent(Human parent, Human recipient) {
-        if (parent.getSex().equals(Sex.Male)) return recipient.setFather(parent);
-        else return recipient.setMother(parent);
-    }
-
-    public void addParent(long parentId, long recipientId) {
-        this.addParent(this.getById(parentId), this.getById(recipientId));
+    private void addParent(Human parent) {
+        for (Human child : parent.getChildren()) {
+            if (parent.getSex().equals(Sex.Male)) child.setFather(parent);
+            else child.setMother(parent);
+        }
     }
 
     public boolean addPerson(Human person) {
         if (!this.familyTree.contains(person)) {
             this.familyTree.add(person);
+            this.addToParents(person);
+            this.addParent(person);
             return true;
         }
         return false;
