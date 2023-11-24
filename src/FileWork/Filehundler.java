@@ -4,30 +4,33 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import FamalyTree.FamalyTree;
+import java.io.Serializable;
 
 public class Filehundler implements Writeble{
     /**
      * Метод сохранение дерева в файл
      */
-    public void SaveInFile(FamalyTree o){
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("tree.out"));
-        objectOutputStream.writeObject(o);
-        objectOutputStream.close();
+    public boolean SaveInFile(Serializable serializable, String fileName){
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream(fileName))){
+        objectOutputStream.writeObject(serializable);
+        return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
      * Метод загрузки дерева из файла
      */
-    public Object LoadInFile(){
-        ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream("tree.out"));
-        Person igorRestored = (Person) objectInputStream.readObject();
-        objectInputStream.close();
-
-        return Object;
-
+    public Object LoadInFile(String fileName){
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(fileName))){
+            return objectInputStream.readObject();
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

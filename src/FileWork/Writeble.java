@@ -1,6 +1,8 @@
 package FileWork;
 
+import java.io.Serializable;
+
 public interface Writeble {
-    public void SaveInFile();
-    public Object LoadInFile();     
+    public boolean SaveInFile(Serializable serializable, String nameFile);
+    public Object LoadInFile(String nameFile);     
 }
