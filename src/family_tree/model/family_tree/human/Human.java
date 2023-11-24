@@ -1,5 +1,7 @@
 package family_tree.model.family_tree.human;
 
+import family_tree.model.family_tree.Family_tree;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -98,6 +100,8 @@ public class Human implements Serializable, Comparable<Human>, FamilyGroupItems 
         }
         return str.toString();
     }
+
+
 
     @Override
     public String toString() {

@@ -3,6 +3,7 @@ package family_tree.presenter;
 import family_tree.model.family_tree.service.Service;
 import family_tree.view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Presenter {
@@ -34,5 +35,20 @@ public class Presenter {
     public void sortByAge() {
         service.sortByAge();
         GetHumanListInfo();
+    }
+
+    public void addMather() {
+        service.AddMather();
+    }
+
+    public void AddFather() {
+        service.AddFather();
+    }
+
+    public void SaveFamily() throws IOException, ClassNotFoundException {
+        service.SaveFamily();
+    }
+    public void LoadFamily() throws IOException, ClassNotFoundException {
+        service.LoadFamily();
     }
 }

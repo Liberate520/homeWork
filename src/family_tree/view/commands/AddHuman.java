@@ -5,7 +5,7 @@ import family_tree.view.View;
 public class AddHuman extends Commands{
 
     public AddHuman(View view) {
-        super("Добавить студента", view);
+        super("Добавить человека", view);
     }
 
     public void execute(){

@@ -2,6 +2,8 @@ package family_tree.view.commands;
 
 import family_tree.view.View;
 
+import java.io.IOException;
+
 public abstract class Commands {
     private String description;
     private View view;
@@ -19,7 +21,7 @@ public abstract class Commands {
         return view;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws IOException, ClassNotFoundException;
 
 
 }

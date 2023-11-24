@@ -2,6 +2,7 @@ package family_tree.view;
 
 import family_tree.presenter.Presenter;
 
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class ConsoleUI implements View{
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         System.out.println("Приветствую!");
         while (work) {
             printMenu();
@@ -29,7 +30,7 @@ public class ConsoleUI implements View{
         }
     }
 
-    private void scanMenu(){
+    private void scanMenu() throws IOException, ClassNotFoundException {
         if (scanner.hasNextInt()) {
             String choicestr = scanner.nextLine();
 
@@ -44,6 +45,13 @@ public class ConsoleUI implements View{
 
 
 
+    }
+
+    public void addMather(){
+        presenter.addMather();
+    }
+    public void addFather(){
+        presenter.AddFather();
     }
 
     public void error() {
@@ -84,7 +92,12 @@ public class ConsoleUI implements View{
     }
 
 
-
+    public void SaveFamily() throws IOException, ClassNotFoundException {
+        presenter.SaveFamily();
+    }
+    public void LoadFamily() throws IOException, ClassNotFoundException {
+        presenter.LoadFamily();
+    }
 
     public void printMenu() {
         System.out.println(menu.print());

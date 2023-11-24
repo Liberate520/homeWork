@@ -37,6 +37,17 @@ public class Family_tree<T> implements Serializable, Iterable<T> {
     public void sortByDr(){
         family_tree.sort(new HumanComparatorByDate());
     }
+
+    public Human SelectHuman(String snils){
+        for (T human: this.family_tree){
+            Human thishuman = (Human)human;
+            if (thishuman.getSnils().equals(snils)){
+                return thishuman;
+            }
+
+        }
+        return null;
+    }
     @Override
     public Iterator<T> iterator() {
         return new HumanIterator<>(family_tree);
