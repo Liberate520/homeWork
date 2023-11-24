@@ -13,6 +13,7 @@ public interface Animal<T>{
     void setGender(String gender);
     Gender getGender();
     void setId(int id);
+    int getId();
     String getName();
     void setFather(T animal);
     void setMather(T animal);

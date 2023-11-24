@@ -32,8 +32,12 @@ public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T
 
     /**
      * Метод установления родственных связей
-     * @param t0 Существо 1
-     * @param t1 Существо 2
+     * @param t0 кому является
+     * @param t1 кто являестя
+     * @param index кем является 1-отцом
+     *                           2-матерью
+     *                           3-половым партнером
+     *                           4-ребенком
      */
     public void addTRelatives(T t0, T t1, int index){
         switch (index) {
@@ -67,6 +71,17 @@ public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T
                 }
                 break;
         }
+    }
+
+    public void addTRelatives(int id0, int id1, int index){
+        addTRelatives(searchID(id0),searchID(id1),index);
+    }
+
+    public T searchID(int id){
+        for(T t: this.listT){
+            if (id == t.getId()) return t;
+        }
+        return null;
     }
 
     public void PrintTree() {

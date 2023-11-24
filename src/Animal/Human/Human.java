@@ -1,5 +1,6 @@
 package Animal.Human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import Animal.Animal;
 /**
  * Класс ЧЕЛОВЕК
  */
-public class Human implements Comparable<Human>, Animal<Human>{
+public class Human implements Comparable<Human>, Animal<Human>, Serializable{
     private static int count;
     private int ID;
     private String name;
@@ -36,12 +37,14 @@ public class Human implements Comparable<Human>, Animal<Human>{
         this.name = name;
         this.data.setTimeLive(LocalDate.of(year_bd, m_bd, day_bd),LocalDate.of(year_dd, m_dd, day_dd));
         this.gender = gender;
+        this.childrenList = new ArrayList<>();
     }
     public Human (String name, int year_bd, int m_bd, int day_bd, Gender gender){
         this.ID = count++;
         this.name = name;
         this.data = new DataLive(year_bd,m_bd,day_bd);
         this.gender = gender;
+        this.childrenList = new ArrayList<>();
     }
     public Human(){
         this("человек", 12, 12, 12, Gender.Male);
@@ -168,8 +171,17 @@ public class Human implements Comparable<Human>, Animal<Human>{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Информация о " + this.name);
-        sb.append(": ID:" + this.ID);
+        sb.append(this.ID+". Имя:"+ this.name);
+        
+        if (this.gender == Gender.Male){
+            sb.append("; Пол:Муж. ");
+        } else  sb.append("; Пол:Жен. ");
+        sb.append(";"+ this.data);
+        if (this.father != null) sb.append("; Отец: " + this.father.getName());
+        if (this.mather != null) sb.append("; Мать: " + this.mather.getName());
+        if (this.spouse != null) sb.append("; В браке");
+        if (this.childrenList.size()>0) sb.append("; Детей: "+this.childrenList.size());
+        sb.append(".");
         return sb.toString();
     }
     

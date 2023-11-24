@@ -1,12 +1,13 @@
 package Animal.Human;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Класс времени жизни человека.
  */
-public class DataLive {
+public class DataLive implements Serializable {
     private LocalDate birthday, dayded;
 
     public DataLive(int year_bd, int m_bd, int day_bd){
@@ -35,5 +36,13 @@ public class DataLive {
 
     public int getYear(){
         return this.birthday.getYear();
-    } 
+    }
+
+    @Override
+    public String toString (){
+        StringBuilder sb = new StringBuilder();
+        sb.append(" Дата рождения:"+ this.birthday.getDayOfMonth()+
+                  "."+this.birthday.getMonthValue()+"."+this.birthday.getYear());
+        return sb.toString();
+    }
 }
