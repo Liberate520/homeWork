@@ -17,7 +17,7 @@ public class Main {
         View view = new ConsoleUI();
         view.start();
 
-        FamilyTree tree = testTree();           // !
+        var tree = testTree();           // !
 //        FamilyTree tree = load();
         System.out.println(tree);
 
@@ -41,20 +41,6 @@ public class Main {
 
 
 
-//        save(tree);                             // !
-//    }
-//    private static FamilyTree load(){
-//        FileHandler fileHandler = new FileHandler();
-//        String filePath = "src/family_tree/writer/tree.txt";
-//        return (FamilyTree) fileHandler.read(filePath);
-//    }
-//    private static void save(FamilyTree tree){
-//        FileHandler fileHandler = new FileHandler();
-//        String filePath = "src/family_tree/writer/tree.txt";
-//        fileHandler.save(tree, filePath);
-//    }
-
-
     static FamilyTree testTree(){
         FamilyTree tree = new FamilyTree();
 
@@ -71,6 +57,7 @@ public class Main {
 
         Human larisa = new Human("Лариса", Gender.Female, LocalDate.of(1945, 9, 1));
         larisa.addChild(vasya);
+
         tree.add(larisa);
 
         return tree;

@@ -1,7 +1,6 @@
 package family_tree.family_tree.model.service;
 
-import family_tree.family_tree.model.FamilyTree;
-import family_tree.family_tree.model.Gender;
+import family_tree.family_tree.model.*;
 import family_tree.family_tree.model.human.Human;
 
 import java.time.LocalDate;
@@ -10,15 +9,21 @@ import java.util.List;
 public class Service {
     private int index;
     private FamilyTree familyTree;
-    private List<Human> humanList;
+    private Human[] humanList;
+//    private List<Human> humanList;  // по замечанию - лишнее
+//    public Service(){
+//        FamilyTree familyTree;
+//        List<Human> humanList;    }
 
-    public Service(){
-        FamilyTree familyTree;
-        List<Human> humanList;
+    public Service(int index, FamilyTree familyTree) {
+        this.index = index;
+        this.familyTree = familyTree;
     }
+
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семейное дерево:\n");
+
         for (Human human: humanList){
             stringBuilder.append(human.getInfo());
             stringBuilder.append("\n");
@@ -44,5 +49,17 @@ public class Service {
         Human human = new Human(name, gender, birthDate);
         familyTree.addHuman(human);
 
+    }
+    // метод сохранения      save(tree);
+    private static void save(FamilyTree tree){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/family_tree/writer/tree.txt";
+        fileHandler.save(tree, filePath);
+    }
+    // метод загрузки
+    private static FamilyTree load(){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/family_tree/writer/tree.txt";
+        return (FamilyTree) fileHandler.read(filePath);
     }
 }

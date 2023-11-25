@@ -97,6 +97,8 @@ public class ConsoleUI implements View{
 //        String deathDate = scanner.nextLine();
         System.out.println("Укажите пол (гендер)");
         String gender = scanner.nextLine();
+
+//        CharSequence deathDate = null;
 //        presenter.addHuman(name, LocalDate.parse(birthDate), LocalDate.parse(deathDate), Gender.valueOf(gender));
         presenter.addHuman(name, LocalDate.parse(birthDate), Gender.valueOf(gender));
     }
