@@ -1,6 +1,6 @@
-package Family_Tree.Human;
+package Family_Tree.model.Human;
 
-import Family_Tree.Tree.TreeNode;
+import Family_Tree.model.Tree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,14 +19,11 @@ public class Human implements Serializable, Comparable<Human>, TreeNode<Human> {
     private List<Human> children;
     private Human spouse;
 
-    public Human(String name, LocalDate birthday, LocalDate death, Gender gender, Human mom, Human dad) {
+    public Human(String name, LocalDate birthday, Gender gender) {
         id = -1;
         this.name = name;
         this.birthday = birthday;
-        this.death = death;
         this.gender = gender;
-        this.mom = mom;
-        this.dad = dad;
         children = new ArrayList<>();
     }
 
