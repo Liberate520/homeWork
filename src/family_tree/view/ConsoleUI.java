@@ -107,7 +107,7 @@ public class ConsoleUI implements View, Serializable{
             System.out.println("Ошибка ввода");
         }
 
-        presenter.addToTree(name, dateBirth, dateDead, gender);
+        presenter.addHumanToTree(name, dateBirth, dateDead, gender);
     }
 
     public void addParents()

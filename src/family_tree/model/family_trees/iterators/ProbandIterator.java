@@ -6,23 +6,23 @@ import java.util.List;
 import family_tree.model.family_trees.TreeItem;
 
 
-public class HumanIterator<E extends TreeItem> implements Iterator<E>{
+public class ProbandIterator<E extends TreeItem<E>> implements Iterator<E>{
     private int index;
-    private List<E> humanList;
+    private List<E> probandList;
 
-    public HumanIterator(List<E> humanList){
-        this.humanList = humanList;
+    public ProbandIterator(List<E> probandList){
+        this.probandList = probandList;
     }
     @Override
     public boolean hasNext() {
         // TODO Auto-generated method stub
-        return index < humanList.size();
+        return index < probandList.size();
     }
 
     @Override
     public E next() {
         // TODO Auto-generated method stub
-        return humanList.get(index++);
+        return probandList.get(index++);
     }
 
 

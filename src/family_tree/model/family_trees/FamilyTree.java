@@ -5,46 +5,46 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import family_tree.model.family_trees.iterators.HumanIterator;
-import family_tree.model.human.comparators.HumanComparatorByAge;
-import family_tree.model.human.comparators.HumanComparatorByName;
+import family_tree.model.comparators.ComparatorByAge;
+import family_tree.model.comparators.ComparatorByName;
+import family_tree.model.family_trees.iterators.ProbandIterator;
 
 public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E>{
-    private List<E> humanstList;
-    private int humansID;
+    private List<E> probandList;
+    private int probandID;
     public FamilyTree() 
     {
-        humanstList = new ArrayList<>();
+        probandList = new ArrayList<>();
     }
-    public List<E> getPeopleSByName(String name)
+    public List<E> getProbandByName(String name)
     {
         List<E> humansFaundList = new ArrayList<>();
-        for(E people: humanstList)
+        for(E proband: probandList)
         {
-            if(people.getName().equals(name))
+            if(proband.getName().equals(name))
             {
-                humansFaundList.add(people);
+                humansFaundList.add(proband);
             }
         }
         return humansFaundList;
     }
 
-    public void addHuman(E people)
+    public void addProband(E proband)
     {
-        if(!humanstList.contains(people))
+        if(!probandList.contains(proband))
         {
-            humanstList.add(people);
-            people.setID(humansID ++);
+            probandList.add(proband);
+            proband.setID(probandID ++);
 
-            addChildToParents(people);
+            addChildToParents(proband);
         }
     }
 
-    private void addChildToParents (E people)
+    private void addChildToParents (E child)
     {
-        for(E parent : people.getParents())
+        for(E parent : child.getParents())
         {
-            parent.addChild(people);
+            parent.addChild(child);
         }
     }
 
@@ -60,12 +60,11 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         addChildToParents(child);
     }
 
-    public String getHumansListInfo()
+    public String getProbandsListInfo()
     {
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
-        stringBuilder.append("Список людей: \n");
-        for(E people: humanstList)
+        for(E people: probandList)
         {
             stringBuilder.append(index);
             stringBuilder.append(" .");
@@ -75,26 +74,26 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         return stringBuilder.toString();
     }
 
-    public E getHumanFromList(int index)
+    public E getProbandFromList(int index)
     {
-        return humanstList.get(index);
+        return probandList.get(index);
     }
 
     public int getFamilyListSize()
     {
-        return humanstList.size();
+        return probandList.size();
     }
 
     public void sortByName(){
-        humanstList.sort(new HumanComparatorByName<>());
+        probandList.sort(new ComparatorByName<>());
     }
 
     public void sortByAge(){
-        humanstList.sort(new HumanComparatorByAge<>());
+        probandList.sort(new ComparatorByAge<>());
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new HumanIterator<>(humanstList);
+        return new ProbandIterator<>(probandList);
     }
 }

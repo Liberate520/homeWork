@@ -17,27 +17,24 @@ public class Service implements Serializable{
         builder = new HumanBuilder();
     }
 
-    public void addToTree(String name, LocalDate birthDay, LocalDate deadDay, Gender gender){
+    public void addHumanToTree(String name, LocalDate birthDay, LocalDate deadDay, Gender gender){
         Human human = builder.build(name, birthDay, deadDay, gender);
-        ftree.addHuman(human);
-        //addChildToParents(human);
-
-        //return human;
+        ftree.addProband(human);
     }
 
     public void addParentToChild(int mothers_index, int fathers_index, int child_index){
         if(mothers_index == -1)
         {
-            ftree.addMotherToChild(null, ftree.getHumanFromList(child_index));
+            ftree.addMotherToChild(null, ftree.getProbandFromList(child_index));
         }
         else if(fathers_index == -1)
         {
-            ftree.addFatherToChild(null, ftree.getHumanFromList(child_index));
+            ftree.addFatherToChild(null, ftree.getProbandFromList(child_index));
         }
         else
         {
-            ftree.addMotherToChild(ftree.getHumanFromList(mothers_index), ftree.getHumanFromList(child_index));
-            ftree.addFatherToChild(ftree.getHumanFromList(fathers_index), ftree.getHumanFromList(child_index));
+            ftree.addMotherToChild(ftree.getProbandFromList(mothers_index), ftree.getProbandFromList(child_index));
+            ftree.addFatherToChild(ftree.getProbandFromList(fathers_index), ftree.getProbandFromList(child_index));
         }
     }
 
@@ -45,13 +42,6 @@ public class Service implements Serializable{
         int index = 1;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список членов семьи:\n");
-
-//        Iterator<Human> iterator = ftree.iterator();
-//        while (iterator.hasNext()){
-//            Human human = iterator.next();
-//            stringBuilder.append(human);
-//            stringBuilder.append("\n");
-//        }
 
         for (Human human: ftree){
             

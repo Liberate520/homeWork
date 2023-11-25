@@ -17,9 +17,9 @@ public class Presenter implements Serializable{
         service = new Service();
     }
 
-    public void addToTree(String name, LocalDate birthday, LocalDate deadDay, Gender gender)
+    public void addHumanToTree(String name, LocalDate birthday, LocalDate deadDay, Gender gender)
     {
-        service.addToTree(name, birthday, deadDay, gender);
+        service.addHumanToTree(name, birthday, deadDay, gender);
     }
 
     public void getFamilyTreeHumansListInfo()
