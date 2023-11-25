@@ -15,10 +15,6 @@ public class Service {
         tree = new FamilyTree<>();
     }
 
-//    public void addHuman (String name, int age){
-//        Human human = builder.build(name, age);
-//        wholeTree.addHuman(human);
-//    }
     public boolean add(String name, LocalDate birthday, Gender gender) {
         Human human = new Human(name, birthday, gender);
         tree.add(human);
@@ -48,50 +44,4 @@ public class Service {
         return getHumanListInfo();
     }
 
-//    public boolean restoreTree(String filePath) {
-//        FamilyTree<Human> tmpTree = new FamilyTree<Human>();
-//        tmpTree = storage.restoreTree(filePath);
-//        if (tmpTree.equals(null)) {
-//            return false;
-//        }
-//        tree = tmpTree;
-//        return true;
-//    }
-//
-//    public boolean saveTree(String fileName) {
-//        return storage.writeTree(tree, fileName);
-//    }
-//
-//
-//    public void setParent(int person_id, int parent_id) {
-//        Human human = tree.getPersonById(person_id);
-//        human.addParent(tree.getPersonById(parent_id));
-//    }
-//
-//    public boolean checkId(int id) {
-//        return tree.checkId(id);
-//    }
-//
-//    public String getFamilyInfo() {
-//        return tree.toString();
-//    }
-//
-//    public String listSortByAge() {
-//        StringBuilder tmp = new StringBuilder();
-//        for (String str : tree.sortByAge()) {
-//            tmp.append(str);
-//            tmp.append("\n");
-//        }
-//        return tmp.toString();
-//    }
-//
-//    public String listSortByChildren() {
-//        StringBuilder tmp = new StringBuilder();
-//        for (String str : tree.sortByChildren()) {
-//            tmp.append(str);
-//            tmp.append("\n");
-//        }
-//        return tmp.toString();
-//
-//    }
 }

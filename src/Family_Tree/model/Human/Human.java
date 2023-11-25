@@ -183,9 +183,6 @@ public class Human implements Serializable, Comparable<Human>, TreeNode<Human> {
         return res.toString();
     }
 
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     @Override
     public boolean equals(Object obj) {

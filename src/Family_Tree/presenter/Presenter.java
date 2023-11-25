@@ -1,11 +1,8 @@
 package Family_Tree.presenter;
 
 import Family_Tree.model.Human.Gender;
-import Family_Tree.model.Human.Human;
 import Family_Tree.view.View;
 import Family_Tree.model.Service.Service;
-
-import java.security.Provider;
 import java.time.LocalDate;
 
 public class Presenter {
