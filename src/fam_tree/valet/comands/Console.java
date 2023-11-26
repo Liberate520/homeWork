@@ -1,4 +1,8 @@
-package fam_tree;
+package fam_tree.valet.comands;
+
+import fam_tree.human.Gender;
+import fam_tree.main.MainMenu;
+import fam_tree.valet.Look;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -8,7 +12,7 @@ public class Console extends Look {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
-    private MainMenu menu;
+    private final MainMenu menu;
 
     public Console() {
         scanner = new Scanner(System.in);

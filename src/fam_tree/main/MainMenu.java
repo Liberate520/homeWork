@@ -1,5 +1,12 @@
-package fam_tree;
+package fam_tree.main;
 
+
+import fam_tree.family_tree.GetTreeInfo;
+import fam_tree.human.AddHuman;
+import fam_tree.valet.Look;
+import fam_tree.valet.comands.Exit;
+import fam_tree.valet.comands.Instruction;
+import fam_tree.valet.comands.SortByAge;
 
 import java.util.ArrayList;
 import java.util.List;

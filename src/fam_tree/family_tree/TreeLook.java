@@ -1,4 +1,4 @@
-package fam_tree;
+package fam_tree.family_tree;
 
 
 

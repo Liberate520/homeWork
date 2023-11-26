@@ -1,9 +1,9 @@
-package fam_tree;
+package fam_tree.human;
 
 import java.util.Iterator;
 import java.util.List;
 
-class HumanIterator<T> implements Iterator<T> {
+public class HumanIterator<T> implements Iterator<T> {
     private int index;
     private final List<T> humanList;
 

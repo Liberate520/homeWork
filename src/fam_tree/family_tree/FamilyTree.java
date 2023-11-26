@@ -1,5 +1,8 @@
-package fam_tree;
+package fam_tree.family_tree;
 
+
+import fam_tree.human.HumanComparatorByAge;
+import fam_tree.human.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree <T extends TreeItem <T>> implements Serializable, Iterable<T> {
+public class FamilyTree <T extends TreeItem<T>> implements Serializable, Iterable<T> {
     private final List<T> humanList;
     private int humanId;
 

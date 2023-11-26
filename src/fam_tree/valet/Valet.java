@@ -1,4 +1,9 @@
-package fam_tree;
+package fam_tree.valet;
+
+import fam_tree.family_tree.FamilyTree;
+import fam_tree.human.Gender;
+import fam_tree.human.Human;
+import fam_tree.human.HumanBuilder;
 
 import java.time.LocalDate;
 
@@ -41,4 +46,7 @@ public class Valet {
     }
 
 
+    public void addHumanToTheFamily() {
+    }
 }
+

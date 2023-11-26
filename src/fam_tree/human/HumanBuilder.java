@@ -1,4 +1,4 @@
-package fam_tree;
+package fam_tree.human;
 
 import java.time.LocalDate;
 public class HumanBuilder {

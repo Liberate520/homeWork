@@ -1,11 +1,19 @@
-package fam_tree;
+package fam_tree.main;
 
-import java.time.LocalDate;
+import fam_tree.family_tree.FamilyTree;
+import fam_tree.file_handler.FileHandler;
+import fam_tree.valet.Look;
+import fam_tree.valet.Valet;
 
 public class Main {
     public static void main(String[] args) {
         Valet valet = new Valet();
-        Look look = new Look();
+        Look look = new Look() {
+            @Override
+            public void start() {
+
+            }
+        };
         look.start();
     }
 
