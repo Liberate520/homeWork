@@ -1,6 +1,5 @@
-package FamilyTree.Tree;
+package FamilyTree.model.Tree;
 
-import FamilyTree.Person.Person;
 import java.util.Iterator;
 import java.util.List;
 

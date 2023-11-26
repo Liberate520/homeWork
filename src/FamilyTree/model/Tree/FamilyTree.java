@@ -1,9 +1,7 @@
-package FamilyTree.Tree;
+package FamilyTree.model.Tree;
 
-import FamilyTree.Person.Person;
-import FamilyTree.Person.PersonElements;
-import FamilyTree.Person.comparators.CompareByPersonAge;
-import FamilyTree.Person.comparators.CompareByPersonName;
+import FamilyTree.model.Person.comparators.CompareByPersonAge;
+import FamilyTree.model.Person.comparators.CompareByPersonName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends TreeElements<E> & PersonElements> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends TreeElements<E>> implements Serializable, Iterable<E> {
 
     public FamilyTree(String str){
         this.family = str;
@@ -66,14 +64,24 @@ public class FamilyTree<E extends TreeElements<E> & PersonElements> implements S
     public List<E> getListFamilyTree() { return tree; }
 
     public void sortByName(){
-        tree.sort(new CompareByPersonName<>());
+        tree.sort(new CompareByPersonName());
     }
 
     public void sortByAge(){
-        tree.sort(new CompareByPersonAge<>());
+        tree.sort(new CompareByPersonAge());
     }
     @Override
     public Iterator<E> iterator() {
         return new PersonIterator<>(tree);
+    }
+
+    @Override
+    public String toString(){
+        String ret_str = "";
+        for (E el: tree) {
+            ret_str += el.toString();
+            ret_str += "\n";
+        }
+        return ret_str;
     }
 }

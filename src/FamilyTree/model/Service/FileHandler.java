@@ -1,4 +1,4 @@
-package FamilyTree.Service;
+package FamilyTree.model.Service;
 import java.io.*;
 public class FileHandler implements Writable {
     @Override

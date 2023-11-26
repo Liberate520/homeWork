@@ -1,6 +1,6 @@
-package FamilyTree.Person;
+package FamilyTree.model.Person;
 
-import FamilyTree.Tree.TreeElements;
+import FamilyTree.model.Tree.TreeElements;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,8 +18,6 @@ public class Person implements Serializable, PersonElements, TreeElements<Person
     private Person father;
     private List<MaritalStatus> maritalStatus = new ArrayList<>();
     private List<Person> children = new ArrayList<>();
-
-    private PersonBuilder builder;
 
     public Person (String name, String surname, Gender gender, LocalDate burnData, Person mother, Person father) {
         this.name = name;

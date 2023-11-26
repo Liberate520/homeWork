@@ -1,6 +1,5 @@
-package FamilyTree.Service;
+package FamilyTree.model.Service;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 public interface Writable {
