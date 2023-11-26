@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import view.commands.AddChild;
 import view.commands.AddHuman;
 import view.commands.Command;
 import view.commands.Finish;
@@ -18,6 +19,7 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
+        commandList.add(new AddChild(consoleUI));
         commandList.add(new GetHumansListInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortBySurname(consoleUI));
@@ -38,7 +40,6 @@ public class MainMenu {
     }
 
     public void execute(int choice){
-        //Command command = commandList.get(choice-1);
         Command command = commandList.get(choice-1);
         command.execute();
     }

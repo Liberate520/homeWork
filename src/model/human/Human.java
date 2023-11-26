@@ -2,7 +2,9 @@ package model.human;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.tree.TreeItem;
 
@@ -13,16 +15,19 @@ public class Human implements Serializable, Comparable<Human>, TreeItem{
     private LocalDate birthday;
     private LocalDate deathday;
     private Gender gender;
-    private Human mother;
-    private Human father;
+    //private Human mother;
+    //private Human father;
+    private Map <String, Human> parents;
     private List<Human> children;
-    private Human spouse;
+    //private Human spouse;
 
     public Human(String name, String surname, Gender gender) {
         this.id = -1;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
+        Map<String, Human> parents = new HashMap<>();
+        this.parents = parents;
         children = new ArrayList<>();
     }
 
@@ -81,6 +86,28 @@ public String getSurname() {
             return stringBuilder.toString();
         }
         return null;
+    }
+
+    public void setChild(Human human) {
+        if(!children.contains(human)) {
+            this.children.add(human);
+            human.setParent(this);
+        }
+    }
+        public String getParents() {
+            if (!(this.parents).isEmpty()) {
+                StringBuilder stringBuilder = new StringBuilder("Родители: ");
+                stringBuilder.append(this.parents);
+                return stringBuilder.toString();
+            }
+            return null;
+        }
+
+    private void setParent(Human human) {
+        if (human.gender == Gender.Male) {
+            this.parents.put("Отец", human);
+        }
+        else this.parents.put("Мать", human);
     }
 
     public String toString() {

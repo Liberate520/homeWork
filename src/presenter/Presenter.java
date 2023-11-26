@@ -1,5 +1,7 @@
 package presenter;
 
+import java.io.IOException;
+
 import model.Service;
 import model.human.Gender;
 import view.View;
@@ -14,7 +16,6 @@ public Presenter(View view) {
     }
 public void addHuman(String name, String surname, Gender gender) {
         service.addHuman(name, surname, gender);
-        //
         getHumansListInfo();
     }
 
@@ -33,7 +34,17 @@ public void addHuman(String name, String surname, Gender gender) {
         getHumansListInfo();
     }
 
-    public void load() {
+    public void addChild(int parentId, int childId) {
+        service.addChild(parentId, childId);
+        view.printAnswer(service.infoByID(parentId));
+    }
+
+    public boolean checkId(int id) {
+        return service.checkId(id);
+    }
+
+    // добавим исключение
+    public void load() throws IOException {
         service.load();
     }
 

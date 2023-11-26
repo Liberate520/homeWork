@@ -11,6 +11,7 @@ public class Service {
     public final char[] getHumansListInfo = null;
     private FamilyTree <Human> tree;
     private HumanBuilder builder;
+    private FileHandler fileHandler;
 
     public FamilyTree<Human> getFamilyTree() {
         return this.tree;
@@ -19,11 +20,16 @@ public class Service {
     public Service() {
         tree = new FamilyTree<>(0);
         builder = new HumanBuilder();
+        fileHandler = new FileHandler();
     }
 
     public Service(FamilyTree <Human> tree) {
         this.tree = tree;
         builder = new HumanBuilder();
+    }
+
+    public String infoByID(int id) {
+        return tree.infoById(id);
     }
 
     public void addHuman(String name, String surname, Gender gender) {
@@ -41,6 +47,17 @@ public class Service {
         return stringBuilder.toString();
     }
 
+    public void addChild(int parentId, int childId) {
+        Human parent = tree.findInTree(parentId);
+        Human child = tree.findInTree(childId);
+        parent.setChild(child);
+    }
+
+    public boolean checkId(int id) {
+        Human human = tree.findInTree(id);
+        return human != null;
+    }
+
     public void sortByName() {
         tree.sortByName();
     }
@@ -54,17 +71,25 @@ public class Service {
         return getHumansListInfo();
     }
 
-    public void load() {
+    /*public void load() {
         FileHandler fileHandler = new FileHandler();
         try {
             tree = (FamilyTree) fileHandler.read("output.data");
         } catch (RuntimeException | IOException e) {
             System.out.println(e.getMessage());
         }
+    }*/
+    public void load() throws IOException {
+        tree = (FamilyTree) fileHandler.read("output.data");
     }
 
-    public void write() {
+
+    /*public void write() {
         FileHandler fileHandler = new FileHandler();
         if (fileHandler.write(tree, "output.data")) System.out.println("Данные записаны");
+    }*/
+
+    public boolean write() {
+        return fileHandler.write(tree, "output.data");
     }
 }
