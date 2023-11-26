@@ -1,42 +1,79 @@
 package homeWork.src.model.tree;
 
+import homeWork.src.model.builder.FamilyMemberBuilder;
+import homeWork.src.model.member.FamilyMember;
 import homeWork.src.model.member.FamilyMemberComparatorByAge;
 import homeWork.src.model.member.FamilyMemberCompareByBirthDate;
+import homeWork.src.model.writer.FileHandler;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable<M> {
     private long familyMemberId;
     private List<M> familyMembers;
-
+    private FamilyMemberBuilder builder;
     public FamilyTree(){this(new ArrayList<>());}
 
     public FamilyTree(List<M> familyMembers){
         this.familyMembers = familyMembers;
-    }
-
-    public void addFamilyMember(M member){
-        familyMembers.add(member);
+        this.builder = new FamilyMemberBuilder();
     }
 
     public List<M> getFamilyMembers(){
         return familyMembers;
     }
 
-//    public boolean add(T member){
-//        if(member == null){
-//            return false;
-//        }
-//        if(!familyMembers.contains(member)){
-//            familyMembers.add((member));
-//            member.setId(familyMemberId++);
-//
-//            addToParents(member);
-//            addToChildren(member);
-//            return true;
-//        }
-//        return false;
-//    }
+    public boolean createFamilyMember(String name, String surname, String patronymicName, Gender gender,
+                                      LocalDate birthDate, LocalDate deathDate,
+                                      int motherID, int fatherID) {
+        M member;
+        M mother = getById(motherID);
+        M father = getById(fatherID);
+
+        // Explicitly cast mother and father to FamilyMember, the logic here is that FamilyMemberBuilder
+        // class is used only to create a family tree for humans if I build a tree for dogs then I will
+        // use a DogMemberBuilder
+
+        FamilyMember castedMother = (FamilyMember) mother;
+        FamilyMember castedFather = (FamilyMember) father;
+
+
+        member = (M) builder.build(name, surname, patronymicName, gender,
+                birthDate, deathDate, castedMother, castedFather);
+
+        if (member!= null) {
+            addFamilyMember(member);
+        }
+        return true;
+    }
+
+    public boolean addFamilyMember(M member) {
+        if(member == null){
+            return false;
+        }
+        if(!familyMembers.contains(member)){
+            familyMembers.add(member);
+
+            addToParents(member);
+            addToChildren(member);
+            return true;
+        }
+        return false;
+    }
+
+    private void addToParents(M member){
+        for(M parent: member.getParents()){
+            parent.addChild(member);
+        }
+    }
+
+    private void addToChildren(M member){
+        for(M child: member.getChildren()){
+            child.addParent(member);
+        }
+    }
 
     public M getById(long id){
         if(!checkId(id)){
@@ -114,18 +151,6 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
         return false;
     }
 
-//    private void addToParents(T member){
-//        for(T parent: member.getParents()){
-//            parent.addChild(member);
-//        }
-//    }
-
-//    private void addToChildren(T member){
-//        for(T child: member.getChildren()){
-//            child.addParent(member);
-//        }
-//    }
-
     private boolean checkId(long id){
         return id < familyMemberId && id >= 0;
     }
@@ -163,6 +188,23 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
     @Override
     public Iterator<M> iterator() {
         return new FamilyMemberIterator<>(familyMembers);
+    }
+
+    public void save() {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(familyMembers);
+    }
+
+    public void load() {
+        FileHandler fileHandler = new FileHandler();
+        List<M> loadedFamilyMembers = (List<M>) fileHandler.read();
+
+        if (loadedFamilyMembers != null){
+            familyMembers = loadedFamilyMembers;
+        }
+
+        builder.assignID(familyMembers);
+        System.out.println(builder.getId());
     }
 
 }

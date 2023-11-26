@@ -99,6 +99,20 @@ public class ConsoleUI implements View {
         Gender gender = Gender.valueOf(scanner.nextLine());
         System.out.println("Enter birthDate: ");
         LocalDate birthDate = LocalDate.parse(scanner.nextLine());
+        presenter.getFamilyTreeInfo();
+
+        System.out.println("Would you like to add parents? Y/N");
+
+        if (scanner.nextLine().equals("Y")){
+            System.out.println("Select id of mother: ");
+            int motherID = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("Select id of father: ");
+            int fatherID = Integer.parseInt(scanner.nextLine());
+
+            presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate, motherID, fatherID);
+        }
+
         presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate);
 
     }

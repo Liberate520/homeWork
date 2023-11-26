@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class Presenter {
     private View view;
-    private Service<FamilyMember> service;
+    private Service service;
 
     public Presenter(View view) {
         this.view = view;
@@ -18,13 +18,17 @@ public class Presenter {
     }
 
     public void addFamilyMember(String name, String surname, String patronymicName, Gender gender, LocalDate birthDate) {
-        service.createFamilyMember(name, surname, patronymicName, gender, birthDate, null, null, null);
+        service.createFamilyMember(name, surname, patronymicName, gender, birthDate, null, -1, -1);
+        getFamilyTreeInfo();
+    }
+
+    public void addFamilyMember(String name, String surname, String patronymicName, Gender gender, LocalDate birthDate, int motherID, int fatherID) {
+        service.createFamilyMember(name, surname, patronymicName, gender, birthDate, null, -1, -1);
         getFamilyTreeInfo();
     }
 
     public void getFamilyTreeInfo() {
-        FamilyTree<FamilyMember> tree = service.getFamilyTree();
-        String answer = service.getFamilyTreeInfo(tree);
+        String answer = service.getFamilyTreeInfo();
         view.answer(answer);
     }
 
@@ -41,13 +45,11 @@ public class Presenter {
     }
 
     public void save() {
-        FamilyTree<FamilyMember> tree = service.getFamilyTree();
-        service.save(tree);
+        service.save();
     }
 
     public void loadFamilyTree() {
-        FamilyTree<FamilyMember> tree = service.loadFamilyTree();
-        String answer = service.getFamilyTreeInfo(tree);
-        view.answer(answer);
+        service.loadTree();
+        getFamilyTreeInfo();
     }
 }
