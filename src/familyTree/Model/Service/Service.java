@@ -3,6 +3,7 @@ package familyTree.Model.Service;
 import familyTree.Model.PersonPack.Gender;
 import familyTree.Model.PersonPack.Person;
 import familyTree.Model.TreePack.FamilyTree;
+import familyTree.Model.UtilsPack.Savable;
 import familyTree.Model.UtilsPack.StorageTree;
 
 import java.io.Serializable;
@@ -10,9 +11,10 @@ import java.util.ArrayList;
 
 public class Service {
     private FamilyTree<Person> tree;
-    private StorageTree<Person> storage = new StorageTree();
+    private Savable<FamilyTree<Person>> storage;
 
-    public Service() {
+    public Service(Savable storage) {
+        this.storage = storage;
         tree = new FamilyTree<>();
     }
 //    public Service(String filePath){
@@ -50,22 +52,12 @@ public class Service {
         return tree.toString();
     }
 
-    public String listSortByAge(){
-        StringBuilder tmp=new StringBuilder();
-        for (String str : tree.sortByAge()) {
-            tmp.append(str);
-            tmp.append("\n");
-        }
-        return tmp.toString();
+    public ArrayList<String> listSortByAge(){
+        return tree.sortByAge();
     }
 
-    public String listSortByChildren(){
-        StringBuilder tmp=new StringBuilder();
-        for (String str : tree.sortByChildren()) {
-            tmp.append(str);
-            tmp.append("\n");
-        }
-        return tmp.toString();
+    public ArrayList<String> listSortByChildren(){
+        return tree.sortByChildren();
     }
 
 

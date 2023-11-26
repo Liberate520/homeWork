@@ -1,7 +1,11 @@
 package familyTree.Presenter;
 import familyTree.Model.PersonPack.Gender;
+import familyTree.Model.PersonPack.Person;
 import familyTree.Model.Service.Service;
+import familyTree.Model.UtilsPack.StorageTree;
 import familyTree.View.View;
+
+import java.util.ArrayList;
 
 public class Presenter {
     private View view;
@@ -9,7 +13,7 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service(new StorageTree<Person>());
     }
 
     public boolean addPerson(String name, Gender gender, String date){
@@ -29,12 +33,12 @@ public class Presenter {
         view.printAnswer(service.getFamilyInfo());
     }
 
-    public void treeSortedByAge(){
-        view.printAnswer(service.listSortByAge());
+    public ArrayList<String> treeSortedByAge(){
+        return service.listSortByAge();
     }
 
-    public void treeSortedByChildren(){
-        view.printAnswer(service.listSortByChildren());
+    public ArrayList<String> treeSortedByChildren(){
+        return service.listSortByChildren();
     }
 
     public boolean restoreTree(String filePath){

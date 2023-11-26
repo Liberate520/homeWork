@@ -6,6 +6,8 @@ import familyTree.View.Menus.MainMenu;
 import familyTree.View.Menus.Menu;
 import familyTree.View.Menus.SortMenu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -16,6 +18,8 @@ public class ConsoleUI implements View {
     private boolean work;
     private MainMenu main_menu;
     private SortMenu sort_menu;
+
+    private printListWithEOL<String> printList = new printListWithEOL<>();
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
@@ -53,12 +57,14 @@ public class ConsoleUI implements View {
     }
 
     public void getSortedByAge(){
-        presenter.treeSortedByAge();
+        printList.print(presenter.treeSortedByAge());
     }
 
     public void getSortedByChildren(){
-        presenter.treeSortedByChildren();
+        printList.print(presenter.treeSortedByChildren());
     }
+
+
     public void addPerson() {
         System.out.println("Введите имя");
         String name = scanner.nextLine();
@@ -136,6 +142,7 @@ public class ConsoleUI implements View {
     private void printMenu(Menu menu) {
         System.out.println(menu.menu());
     }
+
 
     private void inputError() {
         System.out.println(INPUT_ERROR);

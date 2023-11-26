@@ -2,7 +2,7 @@ package familyTree.Model.UtilsPack;
 
 import java.io.Serializable;
 
-public interface Savable {
+public interface Savable<E> {
     boolean writeTree(Serializable serializable, String fileName);
-    Object restoreTree(String fileName);
+    E restoreTree(String fileName);
 }
