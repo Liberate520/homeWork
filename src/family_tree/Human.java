@@ -1,11 +1,14 @@
 package family_tree;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Human {
     private String firstName;
     private String lastName;
+
     private Genders gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -25,22 +28,6 @@ public class Human {
         this.father = father;
         this.spouse = spouse;
         this.children = children;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public Human getSpouse() {
-        return spouse;
-    }
-
-    public List<Human> getChildren() {
-        return children;
     }
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate) {
@@ -67,16 +54,58 @@ public class Human {
         this.children = null;
     }
 
+    public void setMother(Human mother) {
+        if (this.mother != null) {
+            System.out.println("Мать уже задана");
+        } else {
+            this.mother = mother;
+        }
+
+    }
+
+    public void setFather(Human father) {
+        if (this.father!= null) {
+            System.out.println("Отец уже задан");
+        } else {
+            this.father = father;
+        }
+    }
+
+    public void setSpouse(Human spouse) {
+        if (this.spouse!= null) {
+            System.out.println("Супруг уже задан");
+        } else {
+            this.spouse = spouse;
+        }
+    }
+
+    public void setChildren(Human children) {
+        if (this.children != null) {
+            List<Human> addChildren = new ArrayList<Human>();
+            addChildren.add(children);
+            this.children = addChildren;
+        } else {
+            this.children.add(children);
+        }
+    }
+
     public LocalDate getDeathDate() {
         return deathDate;
     }
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public Human getSpouse() {
+        return spouse;
+    }
+
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int age;
-        ;
-        boolean flag;
         sb.append("Персональная карточка: \n");
         sb.append(String.format("Имя, Фамилия: %s %s%n", this.firstName, this.lastName));
         sb.append(String.format("Пол: %s%n", this.gender));
@@ -92,20 +121,34 @@ public class Human {
             sb.append(String.format("Возраст: %d%n", age));
         }
         if (this.mother != null) {
-            sb.append(String.format("Мать: %s%n", this.mother));
+            sb.append(String.format("Мать: %s%n", this.mother.getName()));
         }
         if (this.father != null) {
-            sb.append(String.format("Отец: %s%n", this.father));
+            sb.append(String.format("Отец: %s%n", this.father.getName()));
         }
         if (this.spouse != null) {
-            sb.append(String.format("Супруг(а): %s%n", this.spouse));
+            sb.append(String.format("Супруг(а): %s%n", this.spouse.getName()));
         }
         if (this.children != null) {
-            sb.append(String.format("Дети: %s%n", this.children));
+            for (Human child : this.children) {
+                sb.append(String.format("Дети: %s%n", child.getName()));
+            }
+
         }
 
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return Objects.equals(this.hashCode(), human.hashCode());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, gender, birthDate);
+    }
 }
