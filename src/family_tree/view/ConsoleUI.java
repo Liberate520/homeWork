@@ -1,6 +1,6 @@
 package family_tree.view;
 
-import family_tree.Gender;
+import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -11,7 +11,6 @@ public class ConsoleUI implements View{
     private Presenter presenter;
     private Menu menu;
     private boolean work;
-//    FamilyTree tree;
 
     public ConsoleUI(){
         scanner = new Scanner(System.in);
@@ -98,6 +97,4 @@ public class ConsoleUI implements View{
     public void answer(String answer) {
         System.out.println(answer);
     }
-
-
 }

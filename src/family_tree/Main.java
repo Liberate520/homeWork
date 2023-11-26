@@ -2,7 +2,6 @@ package family_tree;
 
 import family_tree.view.ConsoleUI;
 import family_tree.view.View;
-import java.time.LocalDate;
 import java.io.IOException;
 
 public class Main{

@@ -1,5 +1,7 @@
-package family_tree;
+package family_tree.model.tree;
 
+import family_tree.model.human.comparators.HumanComparatorByAge;
+import family_tree.model.human.comparators.HumanComparatorByName;
 import java.io.Serializable;
 import java.util.*;
 

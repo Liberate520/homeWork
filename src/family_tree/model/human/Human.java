@@ -1,5 +1,6 @@
-package family_tree;
+package family_tree.model.human;
 
+import family_tree.model.tree.HumanInterface;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;

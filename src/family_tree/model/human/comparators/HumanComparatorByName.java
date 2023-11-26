@@ -1,4 +1,6 @@
-package family_tree;
+package family_tree.model.human.comparators;
+
+import family_tree.model.tree.HumanInterface;
 
 import java.util.Comparator;
 
