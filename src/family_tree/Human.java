@@ -31,29 +31,17 @@ public class Human {
     }
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.deathDate = null;
-        this.mother = null;
-        this.father = null;
-        this.spouse = null;
-        this.children = null;
+        this(firstName, lastName, gender, birthDate, null, null,
+                null, null, null);
     }
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate, LocalDate deathDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.deathDate = deathDate;
-        this.mother = null;
-        this.father = null;
-        this.spouse = null;
-        this.children = null;
+        this(firstName, lastName, gender, birthDate, deathDate, null, null, null, null);
     }
 
+    public Human(String firstName, String lastName, Genders gender, Human mother, Human father) {
+        this(firstName, lastName, gender, null, null, mother, father, null, null);
+    }
     public void setMother(Human mother) {
         if (this.mother != null) {
             System.out.println("Мать уже задана");
@@ -80,7 +68,7 @@ public class Human {
     }
 
     public void setChildren(Human children) {
-        if (this.children != null) {
+        if (this.children == null) {
             List<Human> addChildren = new ArrayList<Human>();
             addChildren.add(children);
             this.children = addChildren;
@@ -101,6 +89,16 @@ public class Human {
         return spouse;
     }
 
+    public Human getMother() {
+        return mother;
+    }
+    public Human getFather() {
+        return father;
+    }
+
+    public List<Human> getChildren() {
+        return children;
+    }
 
     @Override
     public String toString() {
@@ -131,7 +129,7 @@ public class Human {
         }
         if (this.children != null) {
             for (Human child : this.children) {
-                sb.append(String.format("Дети: %s%n", child.getName()));
+                sb.append(String.format("Дети: %s ", child.getName()));
             }
 
         }
