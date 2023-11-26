@@ -4,12 +4,11 @@ import family_tree.family_tree.model.*;
 import family_tree.family_tree.model.human.Human;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Service {
     private int index;
     private FamilyTree familyTree;
-    private Human[] humanList;
+//    private Human[] humanList;
 //    private List<Human> humanList;  // по замечанию - лишнее
 //    public Service(){
 //        FamilyTree familyTree;
@@ -20,10 +19,19 @@ public class Service {
         this.familyTree = familyTree;
     }
 
+//    public <G extends GeneralTypeTree<G>> void FamilyTree() {
+//        FamilyTree<G> familyTree = new FamilyTree<>();
+//    }
+
+    public void FamilyTree () {
+        FamilyTree familyTree = new FamilyTree<>();
+    }
+
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Семейное дерево:\n");
 
+        Iterable<? extends Human> humanList = null;               // ???
         for (Human human: humanList){
             stringBuilder.append(human.getInfo());
             stringBuilder.append("\n");

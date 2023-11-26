@@ -14,8 +14,8 @@ public class Presenter {
 
         this.view = view;
         int index = 0;                                    // ???
-        FamilyTree familyTree = null;                     // ???
-        service = new Service(index, familyTree);         // ???
+//        FamilyTree familyTree = null;                     // ???
+//        service = new Service(index, familyTree);         // ???
     }
 
     // Уточнить метод, - переделать !!!
