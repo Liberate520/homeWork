@@ -15,11 +15,8 @@ public class Human implements Serializable, Comparable<Human>, TreeItem{
     private LocalDate birthday;
     private LocalDate deathday;
     private Gender gender;
-    //private Human mother;
-    //private Human father;
     private Map <String, Human> parents;
     private List<Human> children;
-    //private Human spouse;
 
     public Human(String name, String surname, Gender gender) {
         this.id = -1;

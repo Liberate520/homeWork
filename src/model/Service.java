@@ -71,23 +71,9 @@ public class Service {
         return getHumansListInfo();
     }
 
-    /*public void load() {
-        FileHandler fileHandler = new FileHandler();
-        try {
-            tree = (FamilyTree) fileHandler.read("output.data");
-        } catch (RuntimeException | IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
     public void load() throws IOException {
         tree = (FamilyTree) fileHandler.read("output.data");
     }
-
-
-    /*public void write() {
-        FileHandler fileHandler = new FileHandler();
-        if (fileHandler.write(tree, "output.data")) System.out.println("Данные записаны");
-    }*/
 
     public boolean write() {
         return fileHandler.write(tree, "output.data");

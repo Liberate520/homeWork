@@ -6,9 +6,6 @@ import model.tree.FamilyTree;
 
 public class FileHandler implements Writable{
 
-    //добавим строку:
-    //private String filepath;
-
     @Override
     public boolean write(Serializable serializable, String filepath) {
 

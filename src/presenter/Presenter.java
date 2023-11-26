@@ -43,7 +43,6 @@ public void addHuman(String name, String surname, Gender gender) {
         return service.checkId(id);
     }
 
-    // добавим исключение
     public void load() throws IOException {
         service.load();
     }
@@ -51,5 +50,4 @@ public void addHuman(String name, String surname, Gender gender) {
     public void write() {
         service.write();
     }
-
 }

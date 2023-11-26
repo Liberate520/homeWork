@@ -158,8 +158,6 @@ public class ConsoleUI implements View {
         System.out.println(INPUT_ERROR);
     }
 
-
-    //добавим исключения
     public void load() {
         try {
         presenter.load();
