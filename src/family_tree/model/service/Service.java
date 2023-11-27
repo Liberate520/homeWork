@@ -11,10 +11,15 @@ public class Service {
 //    private FamilyTree<Human> familyTree;
 
     public Service(){
-        familyTree = new FamilyTree();
+        FamilyTree familyTree = new FamilyTree() {
+            @Override
+            public void getAge() {
+                this.age = age;
+            }
+        };
     }
 
-    FamilyTree familyTree = new FamilyTree();
+//    FamilyTree familyTree = new FamilyTree();
 
 
     public void sortByLastName(){

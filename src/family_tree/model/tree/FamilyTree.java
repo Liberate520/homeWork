@@ -8,8 +8,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<T>, FamilyTreeHub<Human> {
+public abstract class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<T>, FamilyTreeHub<Human> {
 
+    protected int age;
     private String lastName;
 
 //    private String firstName;
@@ -70,8 +71,8 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
     @Override
     public String getPosition() { return position; }
 
-    @Override
-    public void getAge() {  }
+//    @Override
+//    public void getAge() {  }
 
     @Override
     public LocalDate getBirthDate() { return birthDate; }
@@ -88,39 +89,39 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
 //        sortByIncome();
 //    }
 
-    public void methodSortByLastName() {
-        ArrayList<Human> humans = new ArrayList<>();
-        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
-        //  Сортировка списка по Фамилии
-        humans.sort(Comparator.comparing(Human::getLastName));
-        for (Human human : humans) {
-            System.out.println(human);
-        }
-    }
+//    public void methodSortByLastName() {
+//        ArrayList<Human> humans = new ArrayList<>();
+//        System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) :");
+//        //  Сортировка списка по Фамилии
+//        humans.sort(Comparator.comparing(Human::getLastName));
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
+//    }
 
-    public void methodSortByAge() {
-        ArrayList<Human> humans = new ArrayList<>();
-        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
-        //  Сортировка списка по Возрасту
-        humans.sort(Comparator.comparing(Human::getAge).reversed());
-//        humans.sort(Comparator.comparingInt(TreeNode::getAge).reversed());
-        for (Human human : humans) {
-            System.out.println(human);
-//            humanList.add(human);
-        }
-//        return humanList;
+//    public void methodSortByAge() {
+//        ArrayList<Human> humans = new ArrayList<>();
+//        System.out.println("\n============= Сортировка списка по Возрасту (по убыванию) :");
+//        //  Сортировка списка по Возрасту
+//        humans.sort(Comparator.comparing(Human::getAge).reversed());
+////        humans.sort(Comparator.comparingInt(TreeNode::getAge).reversed());
+//        for (Human human : humans) {
+//            System.out.println(human);
+////            humanList.add(human);
+//        }
+////        return humanList;
+//
+//    }
 
-    }
-
-    public void sortByIncome() {
-        ArrayList<Human> humans = new ArrayList<>();
-        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
-//          Сортировка списка по Доходам
-        humans.sort(Comparator.comparing(Human::getIncome).reversed());
-        for (Human human : humans) {
-            System.out.println(human);
-        }
-    }
+//    public void sortByIncome() {
+//        ArrayList<Human> humans = new ArrayList<>();
+//        System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
+////          Сортировка списка по Доходам
+//        humans.sort(Comparator.comparing(Human::getIncome).reversed());
+//        for (Human human : humans) {
+//            System.out.println(human);
+//        }
+//    }
 
 
 //    public void sortByAge(ArrayList<Human> humans) {
@@ -138,7 +139,7 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         humanList.sort(new ComparatorByName());
     }
 
-     public void sortByAge(){
+    public void sortByAge(){
         humanList.sort(new ComparatorByBirthDate());
     }
 
