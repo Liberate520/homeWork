@@ -17,9 +17,9 @@ public class Presenter {
         this.view = view;
         service = new Service();
     }
-    public void addHuman(String info){
+    public void addHuman(List info){
 //        System.out.println(info);
-        String list = info;
+//        String list = info;
 //        System.out.println(list);
 //        int id = Integer.parseInt(list.get(0).toString());
 //        String lastname = (String) list.get(1);
@@ -30,7 +30,7 @@ public class Presenter {
 //        LocalDate death = service.setDate(dateDeath, 0,1,2);
 //        Gender gender = service.setGender(list);
 //        Human human = new Human(id, lastname, name, birth, death, gender);
-        service.addHuman(list);
+        service.addHuman(info);
     }
 
     public void getHumanListInfo(){

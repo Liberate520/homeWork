@@ -1,4 +1,6 @@
 package model.tree;
+import model.Builder.HumanBuilder;
+import model.human.Human;
 import model.human.comparators.ComparatorByAge;
 import model.human.comparators.ComparatorById;
 import model.human.comparators.ComparatorByLastname;
@@ -8,13 +10,12 @@ import java.io.Serializable;
 import java.util.*;
 
 public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, Iterable< T > {
-    private int id = 1;
+//    private int id = 1;
     private List< T > familyList;
     public FamilyTree() {
-//        familyList = new ArrayList<>();
-        this(new ArrayList<>());
+        familyList = new ArrayList<>();
+//        this(new ArrayList<>());
     }
-
     public FamilyTree(List< T> familyList) {
         this.familyList=familyList;
     }
@@ -23,11 +24,18 @@ public class FamilyTree<T extends FamilyTreeItem<T> > implements Serializable, I
      * Добавление человека в FamilyList с проверкой уникальности
      * @param human
      */
-    public void addHuman(T human) {
-        human.setId(id++);
-        if (!familyList.contains(human)) familyList.add(human);
-//        familyList.add(human);
-    }
+//    public void addHuman(T human) {
+//        human.setId(id++);
+//        if (!familyList.contains(human)) familyList.add(human);
+////        familyList.add(human);
+//    }
+//    public void addHuman(String name, int age){
+//        T human = builder.build(name, age);
+//        familyList.addHuman(human);
+//    }
+public void addHuman(T human) {
+    familyList.add(human);
+}
 
     /**
      * Вывод в строках всех членов семьи с датами, родителями, детьми, возрастом, полом и ID, полученная при переборе элементов в FamilyList
