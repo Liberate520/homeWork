@@ -118,7 +118,13 @@ public class Human {
         boolean flag = false;
         sb.append("Персональная карточка: \n");
         sb.append(String.format("Имя, Фамилия: %s %s%n", this.firstName, this.lastName));
-        sb.append(String.format("Пол: %s%n", this.gender));
+        if (this.gender.equals(Genders.Male)) {
+            sb.append(String.format("Пол: Мужской\n"));
+        } else {
+            sb.append(String.format("Пол: Женский\n"));
+        }
+
+
         if (this.deathDate != null) {
             age = this.deathDate.getYear() - this.birthDate.getYear();
             sb.append(String.format("Дата рождения: %s%n", this.birthDate));
