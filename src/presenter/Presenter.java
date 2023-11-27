@@ -17,7 +17,7 @@ public class Presenter {
 
     public void addHuman(String firstName, String lastName, Gender gender, LocalDate born) {
         service.addHuman(firstName, lastName, gender, born);
-        System.out.println("Person added into the family tree.");
+        view.printAnswer("Person added into the family tree.");
     }
 
     public void getHumanByFullName(String firstName, String lastName){
@@ -42,11 +42,11 @@ public class Presenter {
 
     public void saveFamilyTree(String fileName){
         service.saveFamilyTree(fileName);
-        System.out.println("The family tree is saved.");
+        view.printAnswer("The family tree is saved.");
     }
     public void loadFamilyTree(String fileName){
         service.loadFamilyTree(fileName);
-        System.out.println("The family tree is loaded.");
+        view.printAnswer("The family tree is loaded.");
     }
 
 }
