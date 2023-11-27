@@ -1,8 +1,14 @@
+package ru.home_work.cherevichenko_sergey.familyTree;
+
+import ru.home_work.cherevichenko_sergey.Gender;
+import ru.home_work.cherevichenko_sergey.human.Human;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     // Класс имеет одно поле с листом
     private ArrayList<Human> humans;
 
@@ -11,7 +17,7 @@ public class FamilyTree {
         humans = new ArrayList<>();
     }
 
-    // Метод для заполнения ArrayList экземплярами класса Human
+    // Метод для заполнения ArrayList экземплярами класса ru.home_work.cherevichenko_sergey.human.Human
     public void addHuman(Human human) {
         humans.add(human);
     }

@@ -1,10 +1,15 @@
+package ru.home_work.cherevichenko_sergey.human;
+
+import ru.home_work.cherevichenko_sergey.Gender;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human {
-    // Описываем класс Human
+public class Human implements Serializable {
+    // Описываем класс ru.home_work.cherevichenko_sergey.human.Human
     private String name;
     private String lastName;
     private Gender gender;
@@ -18,7 +23,7 @@ public class Human {
 
     // Конструктор с детьми(списком)
 
-    public Human(String name, String lastName, Gender gender, LocalDate birthDay,LocalDate dateDeath, List<Human> children) {
+    public Human(String name, String lastName, Gender gender, LocalDate birthDay, LocalDate dateDeath, List<Human> children) {
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -29,7 +34,7 @@ public class Human {
 
     }
     // Конструктор без детей по принципу DRY
-    public Human(String name, String lastName, Gender gender, LocalDate birthDay,LocalDate dateDeath) {
+    public Human(String name, String lastName, Gender gender, LocalDate birthDay, LocalDate dateDeath) {
         this(name,lastName,gender,birthDay,dateDeath ,new ArrayList<>(0));
 
     }
@@ -60,7 +65,7 @@ public class Human {
         return dateDeath;
     }
 
-    // Переопределяем метод toString класса Human
+    // Переопределяем метод toString класса ru.home_work.cherevichenko_sergey.human.Human
     @Override
     public  String toString() {
         StringBuilder br = new StringBuilder();
@@ -82,8 +87,7 @@ public class Human {
                     br.append(Period.between(birthDay,LocalDate.now()).getYears()).append(" лет ");
             else
                 br.append("умер в количестве : ").append(Period.between(birthDay,dateDeath)).append(" лет");
-                  br.append(",пол: ")
-                    .append(gender);
+            br.append(",пол: ").append(gender);
 
         if(children.isEmpty())
             br.append(",дети: ").append("нет детей.");
