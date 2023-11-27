@@ -1,7 +1,10 @@
 package my_family_tree.model.tree;
 
+import my_family_tree.model.human.Gender;
+import my_family_tree.model.human.Human;
 import my_family_tree.model.human.comparators.HumanComparatorByAge;
 import my_family_tree.model.human.comparators.HumanComparatorByYear;
+import my_family_tree.model.writer.FileHandler;
 
 import java.io.Serializable;
 import java.util.*;
@@ -23,16 +26,18 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
             humanList.add(human);
             human.setId(humanId++);
 
-            addToParents(human);
+//            addToParents(human);
             addToChildren(human);
         }
     }
 
-    private void addToParents (E human){
-        for (E parent : human.getParents()) {
-            parent.addChildren(human);
-        }
-    }
+
+
+//    public void addToParents (E human){
+//        for (E parent : human.getParents()) {
+//            parent.addChildren(human);
+//        }
+//    }
 
     private void addToChildren (E human){
         for (E child : human.getChildren()) {
@@ -82,7 +87,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         return names;
     }
 
-    public void weddind(E human1, E human2){
+    public void wedding(E human1, E human2){
         if (human1.getSpouse() == null && human2.getSpouse() == null){
             human1.setSpouse(human2);
             human2.setSpouse(human1);
@@ -93,7 +98,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         if (checkId(humanId1) && checkId(humanId2)){
             E human1 = findById(humanId1);
             E human2 = findById(humanId2);
-            weddind(human1, human2);
+            wedding(human1, human2);
         }
     }
 
@@ -127,4 +132,5 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     public Iterator<E> iterator() {
         return new HumanIterator<>(humanList);
     }
+
 }

@@ -1,6 +1,9 @@
 package my_family_tree.view;
 
 import my_family_tree.model.human.Gender;
+import my_family_tree.model.human.Human;
+import my_family_tree.model.tree.FamilyTree;
+import my_family_tree.model.tree.TreeItem;
 import my_family_tree.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -11,12 +14,14 @@ public class ConsoleUI implements View{
     private Presenter presenter;
     private boolean work;
     private MainMenu menu;
+    private FamilyTree<Human> tree;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
         menu = new MainMenu(this);
+        tree = new FamilyTree<>();
     }
 
     @Override
@@ -41,9 +46,23 @@ public class ConsoleUI implements View{
 
     public void finish() {
         work = false;
-
     }
 
+    public void setDeathDate(){
+        presenter.getTreeInfo();
+        System.out.println("Введите ID: ");
+        int iD = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите дату смерти: ");
+        LocalDate deathday = LocalDate.parse(scanner.nextLine());
+        presenter.setDeathDate(iD, deathday);
+    }
+    public void save(){
+        presenter.save();
+    }
+
+    public void load(){
+        presenter.load();
+    }
     public void sortByYear() {
         presenter.sortByYear();
     }
@@ -68,7 +87,25 @@ public class ConsoleUI implements View{
         System.out.println("Введите дату рождения: ");
         LocalDate birthday = LocalDate.parse(scanner.nextLine());
         presenter.addHumanToTheFamily(name, gender, birthday);
+    }
 
+
+    public void wedding() {
+        presenter.getTreeInfo();
+        System.out.println("Введите ID 1");
+        int sp1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID 2");
+        int sp2 = Integer.parseInt(scanner.nextLine());
+        presenter.wedding(sp1, sp2);
+    }
+
+    public void addParents() {
+        presenter.getTreeInfo();
+        System.out.println("Введите ID родителя");
+        int par = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID ребенка");
+        int chil = Integer.parseInt(scanner.nextLine());
+        presenter.addParents(par, chil);
 
     }
 

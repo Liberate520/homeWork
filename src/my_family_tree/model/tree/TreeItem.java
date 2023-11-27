@@ -16,4 +16,5 @@ public interface TreeItem<E> extends Comparable<E> {
     void addParents(E e);
     void addChildren(E e);
     void setSpouse(E e);
+    E getFather();
 }
