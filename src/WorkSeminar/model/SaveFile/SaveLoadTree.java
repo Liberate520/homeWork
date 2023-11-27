@@ -1,4 +1,4 @@
-package WorkSeminar.SaveFile;
+package WorkSeminar.model.SaveFile;
 
 import java.io.*;
 

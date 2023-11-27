@@ -1,16 +1,15 @@
-package WorkSeminar.Tree;
+package WorkSeminar.model.Tree;
 
-import WorkSeminar.Persona.Comporators.ComporatorSortAge;
-import WorkSeminar.Persona.Comporators.ComporatorSortDEFAUT;
-import WorkSeminar.Persona.Comporators.ComporatorSortGender;
-import WorkSeminar.Persona.Comporators.ComporatorSortName;
-import WorkSeminar.Persona.IteratorPerson;
-import WorkSeminar.Persona.Persona;
+import WorkSeminar.model.Persona.Comporators.ComporatorSortAge;
+import WorkSeminar.model.Persona.Comporators.ComporatorSortDEFAUT;
+import WorkSeminar.model.Persona.Comporators.ComporatorSortGender;
+import WorkSeminar.model.Persona.Comporators.ComporatorSortName;
+import WorkSeminar.model.Persona.IteratorPerson;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Tree<P extends TreeEtem> implements Serializable, Iterable<P> {
+public class Tree<P extends TreeEtem<P>> implements Serializable, Iterable<P> {
     private long personID;
     private List<P> personaList;
 
@@ -59,30 +58,6 @@ public class Tree<P extends TreeEtem> implements Serializable, Iterable<P> {
     private void addToParents(P persona){
         for (P par : persona.addParents()){
             par.addKid(persona);
-            /*
-            Вот здесь у меня основательный затык случился.
-            Суть в чём. Подписав Дерево(Tree) на интерфейс(TreeEtem), и изменив все объекты класса Persona,
-            на обобщёный параметр P, у меня ественным образом отвалились все методы из Persona.
-            Далее, я подписал Persona на созданный для этого инрефейс,
-            и принился прописывать в нём болванки требуемых методов, которые уже реализованы в Persona.
-            Такие просты методы как gеtName, встали без вопросов на ура.
-            Но, методы требуеющие условно Объекты в качестве аргумента, или возрощающие эти "объект", не работают.
-
-            Пример с addKid(persona) выше.
-            В качестве аругмента он получает условный обект.
-            Допустим, в TreeEtem я в качестве класса я указываю абстрактную P (void addKid(P person);)
-            Он начинает ругатся на эту P. Мол, непонятный символ. Ок.
-            Попытался записать что-то вроде того, что было на лекции (<P>void addKid(P person);)
-            Приводит к тому, но это что класс Persona начинает считать данным метод чем-то другим,
-            а не тем, что требует TreeEtem, и требует создать снова void addKid(P person);
-
-            Попытка пропсать просто нейтральный Object, приводит ровно к тому же. (void addKid(Object person);
-            Попытка в интерфесе напрямую прописать класс Persona, приводит к тому, что уже в дереве(Tree),
-            он ругается на несоотествие ожидаемного и принимаемого типа, мол он ожидает Persona а получает наш P.
-
-            И я вот всё никак не могу сообразить, как записать болванку метода в TreeEtem так,
-            что бы не было этого конфликта.
-             */
         }
     }
     private void addToKids(P persona) {

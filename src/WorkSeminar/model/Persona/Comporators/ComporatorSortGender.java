@@ -1,7 +1,6 @@
-package WorkSeminar.Persona.Comporators;
+package WorkSeminar.model.Persona.Comporators;
 
-import WorkSeminar.Persona.Persona;
-import WorkSeminar.Tree.TreeEtem;
+import WorkSeminar.model.Tree.TreeEtem;
 
 import java.util.Comparator;
 

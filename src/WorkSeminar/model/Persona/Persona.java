@@ -1,6 +1,6 @@
-package WorkSeminar.Persona;
+package WorkSeminar.model.Persona;
 
-import WorkSeminar.Tree.TreeEtem;
+import WorkSeminar.model.Tree.TreeEtem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements Serializable, TreeEtem {
+public class Persona implements Serializable, TreeEtem<Persona> {
     private String name;
     private String lastName;
     private Gender gender;
@@ -80,7 +80,7 @@ public class Persona implements Serializable, TreeEtem {
     }
 
 
-
+   
 
 
     public void setId(long id) {
@@ -104,6 +104,9 @@ public class Persona implements Serializable, TreeEtem {
     }
     public  Persona(String name, String lastName, Gender gender, LocalDate birthday, Persona mather, Persona father){
         this(name, lastName, gender, birthday, null, mather, father);
+    }
+    public  Persona() {
+        this(null, null, null, null, null, null, null);
     }
 
     public void addKid(Persona kid){

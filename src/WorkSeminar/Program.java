@@ -1,31 +1,19 @@
 package WorkSeminar;
 
-import WorkSeminar.Consol.СontrolTree;
-import WorkSeminar.Persona.Gender;
-import WorkSeminar.Persona.Persona;
-import WorkSeminar.Tree.Tree;
 
-import java.time.LocalDate;
+import WorkSeminar.View.ConsoleUI;
+import WorkSeminar.View.View;
 
 public class Program {
     public static void main(String[] args) {
-        СontrolTree.ControlMain();
-
-
-        //Tree tree = newTree();
-        //SaveLoadTree saveTree = new SaveLoadTree();
-        //saveTree.saveFile("src/WorkSeminar.SaveFile/saveTree.out", tree);
-        //SaveLoadTree loadTree = new SaveLoadTree();
-        //WorkSeminar.Tree.Tree tree = (WorkSeminar.Tree.Tree) loadTree.loadFile("src/WorkSeminar.SaveFile/saveTree.out");
-
-        //System.out.println(tree);
-
-
-        //tree.printSisBroth(tree.getSisBroth(3));
-        // System.out.println(tree.getNamePersona("Граф"));
+        View view = new ConsoleUI();
+        view.start();
 
     }
 
+
+    // Старый метод. Использовался до создания Service.
+    /*
     public static Tree newTree(){
         Tree tree = new Tree();
 
@@ -57,6 +45,8 @@ public class Program {
         return tree;
 
     }
+
+     */
 
 
 }

@@ -1,4 +1,4 @@
-package WorkSeminar.Persona;
+package WorkSeminar.model.Persona;
 
 public enum Gender {
     Male, Female;

@@ -1,4 +1,4 @@
-package WorkSeminar.Persona;
+package WorkSeminar.model.Persona;
 
 import java.util.Iterator;
 import java.util.List;
