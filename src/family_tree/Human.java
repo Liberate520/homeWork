@@ -8,16 +8,17 @@ import java.util.Objects;
 public class Human {
     private String firstName;
     private String lastName;
-    private Genders gender;
+    private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private Human mother;
     private Human father;
     private Human spouse;
     private List<Human> children;
-    //TODO: Добавить boolean переменную, фиксирующию статус нахождения в дереве
+    boolean inTree = false;
 
-    public Human(String firstName, String lastName, Genders gender, LocalDate birthDate,
+
+    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
                  LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,16 +33,16 @@ public class Human {
         //TODO: Добавить уникальный автоматический ID каждому человеку и завязать на него equals
     }
 
-    public Human(String firstName, String lastName, Genders gender, LocalDate birthDate) {
+    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate) {
         this(firstName, lastName, gender, birthDate, null, null,
                 null, null, null);
     }
 
-    public Human(String firstName, String lastName, Genders gender, LocalDate birthDate, LocalDate deathDate) {
+    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
         this(firstName, lastName, gender, birthDate, deathDate, null, null, null, null);
     }
 
-    public Human(String firstName, String lastName, Genders gender, Human mother, Human father) {
+    public Human(String firstName, String lastName, Gender gender, Human mother, Human father) {
         this(firstName, lastName, gender, null, null, mother, father, null, null);
     }
 
@@ -87,6 +88,10 @@ public class Human {
         }
     }
 
+    public void setInTree(boolean inTree) {
+        this.inTree = inTree;
+    }
+
     LocalDate getDeathDate() {
         return deathDate;
     }
@@ -111,6 +116,10 @@ public class Human {
         return children;
     }
 
+    public boolean isInTree() {
+        return inTree;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -118,7 +127,7 @@ public class Human {
         boolean flag = false;
         sb.append("Персональная карточка: \n");
         sb.append(String.format("Имя, Фамилия: %s %s%n", this.firstName, this.lastName));
-        if (this.gender.equals(Genders.Male)) {
+        if (this.gender.equals(Gender.Male)) {
             sb.append(String.format("Пол: Мужской\n"));
         } else {
             sb.append(String.format("Пол: Женский\n"));

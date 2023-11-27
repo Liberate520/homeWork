@@ -1,6 +1,5 @@
 package family_tree;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +15,13 @@ public class FamilyTree {
                     "проставьте корректные статусы");
             return false;
         }
-        if (!this.familyTree.contains(firstSpouce)) {
+        if (!firstSpouce.inTree) {
             familyTree.add(firstSpouce);
+            firstSpouce.inTree = true;
         }
-        if (!this.familyTree.contains(secondSpouce)) {
+        if (!secondSpouce.inTree) {
             familyTree.add(secondSpouce);
+            secondSpouce.inTree = true;
         }
         System.out.println("Вы указали, что: " + firstSpouce.getName() + " и " + secondSpouce.getName() + " женаты");
         return true;
@@ -40,11 +41,13 @@ public class FamilyTree {
 
     public boolean setMother(Human children, Human mother) {
         children.setMother(mother);
-        if (!familyTree.contains(children)) {
+        if (!children.inTree) {
             familyTree.add(children);
+            children.inTree = true;
         }
-        if (!familyTree.contains(mother)) {
+        if (!mother.inTree) {
             familyTree.add(mother);
+            mother.inTree = true;
         }
         if (mother.getChildren() != null && mother.getChildren().contains(children)) {
             System.out.println("Такой ребенок уже задан");
@@ -57,11 +60,13 @@ public class FamilyTree {
     }
 
     public boolean setChildren(Human parent, Human children) {
-        if (!familyTree.contains(children)) {
+        if (!children.inTree) {
             familyTree.add(children);
+            children.inTree = true;
         }
-        if (!familyTree.contains(parent)) {
+        if (!parent.inTree) {
             familyTree.add(parent);
+            parent.inTree = true;
         }
         if (parent.getChildren() != null && parent.getChildren().contains(children)) {
             System.out.println("Такой ребенок уже задан");
@@ -76,11 +81,13 @@ public class FamilyTree {
 
     public boolean setFather(Human children, Human father) {
         children.setFather(father);
-        if (!familyTree.contains(children)) {
+        if (!children.isInTree()) {
             familyTree.add(children);
+            children.inTree = true;
         }
-        if (!familyTree.contains(father)) {
+        if (!father.inTree)  {
             familyTree.add(father);
+            father.inTree = true;
         }
         if (father.getChildren() != null && father.getChildren().contains(children)) {
             System.out.println("Такой ребенок уже задан");

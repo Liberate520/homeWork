@@ -1,7 +1,7 @@
 package main;
 
 import family_tree.FamilyTree;
-import family_tree.Genders;
+import family_tree.Gender;
 import family_tree.Human;
 
 import java.time.LocalDate;
@@ -9,17 +9,17 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         //TODO: Уйти от использования объекта Human, задавать дерево напрямую через familyTree
-        Human sergei = new Human("Sergei", "Petrov", Genders.Male,
+        Human sergei = new Human("Sergei", "Petrov", Gender.Male,
                 LocalDate.of(1989, 1, 1), LocalDate.of(2015, 12, 31));
-        Human vaselisa = new Human("Vaselisa", "Petrova", Genders.Female,
+        Human vaselisa = new Human("Vaselisa", "Petrova", Gender.Female,
                 LocalDate.of(1990, 1, 1));
-        Human anna = new Human("Anna", "Petrova", Genders.Female,
+        Human anna = new Human("Anna", "Petrova", Gender.Female,
                 LocalDate.of(1965, 1, 1));
-        Human vasilii = new Human("Vasilii", "Petrov", Genders.Male,
+        Human vasilii = new Human("Vasilii", "Petrov", Gender.Male,
                 LocalDate.of(1987, 1, 1));
-        Human sofia = new Human("Sofia", "Legneva", Genders.Female,
+        Human sofia = new Human("Sofia", "Legneva", Gender.Female,
                 LocalDate.of(2008, 2, 3));
-        Human ivan = new Human("Ivan", "Petrov", Genders.Male,
+        Human ivan = new Human("Ivan", "Petrov", Gender.Male,
                 LocalDate.of(2013, 12, 3));
         FamilyTree familyPetrovi = new FamilyTree();
         familyPetrovi.setSpouse(sergei, vaselisa);
