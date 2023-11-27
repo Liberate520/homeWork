@@ -3,6 +3,7 @@ package main;
 import family_tree.FamilyTree;
 import family_tree.Gender;
 import family_tree.Human;
+import writer.FileHandler;
 
 import java.time.LocalDate;
 
@@ -28,11 +29,16 @@ public class Main {
         familyPetrovi.setMother(sofia, vaselisa);
         familyPetrovi.setFather(sofia, sergei);
 
-        System.out.println(familyPetrovi);
+/*        System.out.println(familyPetrovi);
         System.out.println(sergei);
         System.out.println("");
-        System.out.println(anna);
+        System.out.println(anna);*/
 
-
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.writeObject(familyPetrovi, "familyPetrovi");
+        FamilyTree recordTest = (FamilyTree) fileHandler.readObject("familyPetrovi");
+        System.out.println(recordTest);
     }
+
+
 }
